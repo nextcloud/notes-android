@@ -8,6 +8,7 @@ import com.google.gson.GsonBuilder;
 import com.nextcloud.android.sso.api.NextcloudAPI;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
+import it.niedermann.owncloud.notes.persistence.SSOClient;
 import retrofit2.NextcloudRetrofitApiBuilder;
 
 /**
@@ -19,8 +20,8 @@ public class ApiProvider {
 
     private final NotesAPI notesAPI;
 
-    public ApiProvider(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount, @NonNull final NextcloudAPI.ApiConnectedListener callback) {
-        final NextcloudAPI nextcloudAPI = new NextcloudAPI(context, ssoAccount, new GsonBuilder().create(), callback);
+    public ApiProvider(@NonNull Context appContext, @NonNull SingleSignOnAccount ssoAccount) {
+        final NextcloudAPI nextcloudAPI = SSOClient.getNextcloudAPI(appContext, ssoAccount);
         notesAPI = new NextcloudRetrofitApiBuilder(nextcloudAPI, API_ENDPOINT_NOTES).create(NotesAPI.class);
     }
 

@@ -1,7 +1,6 @@
 package it.niedermann.owncloud.notes.persistence.sync;
 
 
-import java.util.Calendar;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.persistence.entity.Note;
@@ -17,7 +16,7 @@ import retrofit2.http.Query;
 /**
  * @link <a href="https://deck.readthedocs.io/en/latest/API/">Deck REST API</a>
  */
-public interface NotesAPI {
+public interface NextcloudAPI {
 
     @GET("notes")
     Call<List<Note>> getNotes(@Query(value = "pruneBefore") long lastModified, @Query("If-None-Match") String lastETag);

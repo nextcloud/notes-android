@@ -6,7 +6,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.nextcloud.android.sso.AccountImporter;
-import com.nextcloud.android.sso.api.NextcloudAPI;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.TokenMismatchException;
@@ -79,31 +78,18 @@ abstract class NotesServerSyncTask extends Thread {
     @Override
     public void run() {
         onPreExecute();
-
-        notesClient = new ApiProvider(context, ssoAccount, new NextcloudAPI.ApiConnectedListener() {
-            @Override
-            public void onConnected() {
-                new Thread(() -> {
-                    Log.i(TAG, "STARTING SYNCHRONIZATION");
-                    final SyncResultStatus status = new SyncResultStatus();
-                    status.pushSuccessful = pushLocalChanges();
-                    if (!onlyLocalChanges) {
-                        status.pullSuccessful = pullRemoteChanges();
-                    }
-                    Log.i(TAG, "SYNCHRONIZATION FINISHED");
-
-                    onPostExecute(status);
-                }).start();
+        notesClient = new ApiProvider(context, ssoAccount);
+        new Thread(() -> {
+            Log.i(TAG, "STARTING SYNCHRONIZATION");
+            final SyncResultStatus status = new SyncResultStatus();
+            status.pushSuccessful = pushLocalChanges();
+            if (!onlyLocalChanges) {
+                status.pullSuccessful = pullRemoteChanges();
             }
+            Log.i(TAG, "SYNCHRONIZATION FINISHED");
 
-            @Override
-            public void onError(Exception ex) {
-                final SyncResultStatus status = new SyncResultStatus();
-                status.pullSuccessful = false;
-                status.pushSuccessful = false;
-                onPostExecute(status);
-            }
-        });
+            onPostExecute(status);
+        }).start();
     }
 
     abstract void onPreExecute();
@@ -211,7 +197,7 @@ abstract class NotesServerSyncTask extends Thread {
             localAccount.setModified(accountFromDatabase.getModified());
             localAccount.setETag(accountFromDatabase.getETag());
 
-            final Response<List<Note>> fetchResponse = notesClient.getNotesAPI().getNotes(localAccount.getModified(), localAccount.getETag()).execute();
+            final Response<List<Note>> fetchResponse = notesClient.getNotesAPI().getNotes(localAccount.getModified().getTimeInMillis() / 1_000, localAccount.getETag()).execute();
             if (fetchResponse.isSuccessful()) {
                 final List<Note> remoteNotes = fetchResponse.body();
                 final Set<Long> remoteIDs = new HashSet<>();
