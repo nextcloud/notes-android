@@ -1,10 +1,8 @@
 package it.niedermann.owncloud.notes.persistence.sync;
 
 
-import com.google.gson.annotations.Expose;
 import com.nextcloud.android.sso.api.ParsedResponse;
 
-import java.util.Calendar;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -27,46 +25,12 @@ public interface NotesAPI_0_2 {
     @GET("notes")
     Observable<ParsedResponse<List<Note>>> getNotes(@Query(value = "pruneBefore") long lastModified, @Header("If-None-Match") String lastETag);
 
-    default Call<Note> createNote(@Body Note note) {
-        return createNote(new Note_0_2(note));
-    }
-
     @POST("notes")
-    Call<Note> createNote(@Body Note_0_2 note);
+    Call<Note> createNote(@Body NotesAPI.Note_0_2 note);
 
     @PUT("notes/{remoteId}")
-    Call<Note> editNote(@Body Note note, @Path("remoteId") long remoteId);
+    Call<Note> editNote(@Body NotesAPI.Note_0_2 note, @Path("remoteId") long remoteId);
 
     @DELETE("notes/{remoteId}")
     Call<Void> deleteNote(@Path("remoteId") long noteId);
-
-    class Note_0_2 {
-        @Expose
-        public final long id;
-        @Expose
-        public final String title;
-        @Expose
-        public final String category;
-        @Expose
-        public final Calendar modified;
-        @Expose
-        public final String content;
-        @Expose
-        public final boolean favorite;
-        @Expose
-        public final String etag;
-
-        private Note_0_2(Note note) {
-            if (note == null) {
-                throw new IllegalArgumentException(Note.class.getSimpleName() + " can not be converted to " + Note_0_2.class.getSimpleName() + " because it is null.");
-            }
-            this.id = note.getRemoteId();
-            this.title = note.getTitle();
-            this.category = note.getCategory();
-            this.modified = note.getModified();
-            this.content = note.getContent();
-            this.favorite = note.getFavorite();
-            this.etag = note.getETag();
-        }
-    }
 }

@@ -6,9 +6,11 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.gson.annotations.Expose;
 import com.nextcloud.android.sso.api.NextcloudAPI;
 import com.nextcloud.android.sso.api.ParsedResponse;
 
+import java.util.Calendar;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -70,7 +72,7 @@ public class NotesAPI {
         if (ApiVersion.API_VERSION_1_0.equals(usedApiVersion)) {
             return notesAPI_1_0.createNote(note);
         } else if (ApiVersion.API_VERSION_0_2.equals(usedApiVersion)) {
-            return notesAPI_0_2.createNote(note);
+            return notesAPI_0_2.createNote(new Note_0_2(note));
         } else {
             throw new UnsupportedOperationException("Used API version " + usedApiVersion + " does not support createNote().");
         }
@@ -80,7 +82,7 @@ public class NotesAPI {
         if (ApiVersion.API_VERSION_1_0.equals(usedApiVersion)) {
             return notesAPI_1_0.editNote(note, remoteId);
         } else if (ApiVersion.API_VERSION_0_2.equals(usedApiVersion)) {
-            return notesAPI_0_2.editNote(note, remoteId);
+            return notesAPI_0_2.editNote(new Note_0_2(note), remoteId);
         } else {
             throw new UnsupportedOperationException("Used API version " + usedApiVersion + " does not support editNote().");
         }
@@ -93,6 +95,30 @@ public class NotesAPI {
             return notesAPI_0_2.deleteNote(noteId);
         } else {
             throw new UnsupportedOperationException("Used API version " + usedApiVersion + " does not support createNote().");
+        }
+    }
+
+    /**
+     * {@link ApiVersion#API_VERSION_0_2} didn't have a separate <code>title</code> property.
+     */
+    static class Note_0_2 {
+        @Expose
+        public final String category;
+        @Expose
+        public final Calendar modified;
+        @Expose
+        public final String content;
+        @Expose
+        public final boolean favorite;
+
+        private Note_0_2(Note note) {
+            if (note == null) {
+                throw new IllegalArgumentException(Note.class.getSimpleName() + " can not be converted to " + Note_0_2.class.getSimpleName() + " because it is null.");
+            }
+            this.category = note.getCategory();
+            this.modified = note.getModified();
+            this.content = note.getContent();
+            this.favorite = note.getFavorite();
         }
     }
 }
