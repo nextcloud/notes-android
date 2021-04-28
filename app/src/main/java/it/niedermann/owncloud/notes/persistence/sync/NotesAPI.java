@@ -58,11 +58,11 @@ public class NotesAPI {
         }
     }
 
-    public Observable<ParsedResponse<List<Note>>> getNotes(long lastModified, String lastETag) {
+    public Observable<ParsedResponse<List<Note>>> getNotes(@NonNull Calendar lastModified, String lastETag) {
         if (ApiVersion.API_VERSION_1_0.equals(usedApiVersion)) {
-            return notesAPI_1_0.getNotes(lastModified, lastETag);
+            return notesAPI_1_0.getNotes(lastModified.getTimeInMillis() / 1_000, lastETag);
         } else if (ApiVersion.API_VERSION_0_2.equals(usedApiVersion)) {
-            return notesAPI_0_2.getNotes(lastModified, lastETag);
+            return notesAPI_0_2.getNotes(lastModified.getTimeInMillis() / 1_000, lastETag);
         } else {
             throw new UnsupportedOperationException("Used API version " + usedApiVersion + " does not support getNotes().");
         }
@@ -78,11 +78,11 @@ public class NotesAPI {
         }
     }
 
-    public Call<Note> editNote(Note note, long remoteId) {
+    public Call<Note> editNote(@NonNull Note note) {
         if (ApiVersion.API_VERSION_1_0.equals(usedApiVersion)) {
-            return notesAPI_1_0.editNote(note, remoteId);
+            return notesAPI_1_0.editNote(note, note.getRemoteId());
         } else if (ApiVersion.API_VERSION_0_2.equals(usedApiVersion)) {
-            return notesAPI_0_2.editNote(new Note_0_2(note), remoteId);
+            return notesAPI_0_2.editNote(new Note_0_2(note), note.getRemoteId());
         } else {
             throw new UnsupportedOperationException("Used API version " + usedApiVersion + " does not support editNote().");
         }

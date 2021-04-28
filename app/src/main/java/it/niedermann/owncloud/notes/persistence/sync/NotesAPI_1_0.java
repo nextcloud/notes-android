@@ -23,7 +23,7 @@ import retrofit2.http.Query;
 public interface NotesAPI_1_0 {
 
     @GET("notes")
-    Observable<ParsedResponse<List<Note>>> getNotes(@Query(value = "pruneBefore") long lastModified, @Header("If-None-Match") String lastETag);
+    Observable<ParsedResponse<List<Note>>> getNotes(@Query("pruneBefore") long lastModified, @Header("If-None-Match") String lastETag);
 
     @POST("notes")
     Call<Note> createNote(@Body Note note);

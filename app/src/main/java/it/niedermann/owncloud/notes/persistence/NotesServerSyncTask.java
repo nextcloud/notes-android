@@ -119,7 +119,7 @@ abstract class NotesServerSyncTask extends Thread {
                         Log.v(TAG, "   ...create/edit");
                         if (note.getRemoteId() != null) {
                             Log.v(TAG, "   ...Note has remoteId → try to edit");
-                            final Response<Note> editResponse = notesAPI.editNote(note, note.getRemoteId()).execute();
+                            final Response<Note> editResponse = notesAPI.editNote(note).execute();
                             if (editResponse.isSuccessful()) {
                                 remoteNote = editResponse.body();
                             } else {
@@ -203,7 +203,7 @@ abstract class NotesServerSyncTask extends Thread {
             localAccount.setModified(accountFromDatabase.getModified());
             localAccount.setETag(accountFromDatabase.getETag());
 
-            final ParsedResponse<List<Note>> fetchResponse = notesAPI.getNotes(localAccount.getModified().getTimeInMillis() / 1_000, localAccount.getETag()).blockingSingle();
+            final ParsedResponse<List<Note>> fetchResponse = notesAPI.getNotes(localAccount.getModified(), localAccount.getETag()).blockingSingle();
             final List<Note> remoteNotes = fetchResponse.getResponse();
             final Set<Long> remoteIDs = new HashSet<>();
             // pull remote changes: update or create each remote note
