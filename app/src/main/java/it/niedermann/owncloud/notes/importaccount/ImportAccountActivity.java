@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.importaccount;
 
+import android.accounts.NetworkErrorException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,9 +15,12 @@ import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.AccountImportCancelledException;
 import com.nextcloud.android.sso.exceptions.AndroidGetAccountsPermissionNotGranted;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppNotInstalledException;
+import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.UnknownErrorException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.ui.UiExceptionManager;
+
+import java.net.HttpURLConnection;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
@@ -97,17 +101,23 @@ public class ImportAccountActivity extends AppCompatActivity {
                                 ExceptionDialogFragment.newInstance(new IllegalStateException("Created account is null.")).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
                             }
                         }));
-                    } catch (Throwable e) {
-                        e.printStackTrace();
+                    } catch (Throwable t) {
+                        t.printStackTrace();
                         SSOClient.invalidateAPICache(ssoAccount);
                         SingleAccountHelper.setCurrentAccount(this, null);
                         runOnUiThread(() -> {
                             restoreCleanState();
-                            if (e instanceof UnknownErrorException && e.getMessage().contains("No address associated with hostname")) {
+                            if (t instanceof NextcloudHttpRequestFailedException && ((NextcloudHttpRequestFailedException) t).getStatusCode() == HttpURLConnection.HTTP_UNAVAILABLE) {
+                                binding.status.setText(R.string.error_maintenance_mode);
+                                binding.status.setVisibility(View.VISIBLE);
+                            } else if (t instanceof NetworkErrorException) {
+                                binding.status.setText(getString(R.string.error_sync, getString(R.string.error_no_network)));
+                                binding.status.setVisibility(View.VISIBLE);
+                            } else if (t instanceof UnknownErrorException && t.getMessage().contains("No address associated with hostname")) {
                                 binding.status.setText(R.string.you_have_to_be_connected_to_the_internet_in_order_to_add_an_account);
                                 binding.status.setVisibility(View.VISIBLE);
                             } else {
-                                ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+                                ExceptionDialogFragment.newInstance(t).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
                             }
                         });
                     }

@@ -410,9 +410,6 @@ public class MainViewModel extends AndroidViewModel {
                         if (((NextcloudHttpRequestFailedException) e).getStatusCode() == HttpURLConnection.HTTP_NOT_MODIFIED) {
                             Log.i(TAG, "[synchronizeCapabilities] Capabilities not modified.");
                             callback.onSuccess(null);
-                        } else if (((NextcloudHttpRequestFailedException) e).getStatusCode() == HttpURLConnection.HTTP_NOT_MODIFIED) {
-                            Log.i(TAG, "[synchronizeCapabilities] Server is in maintenance mode.");
-                            callback.onSuccess(null);
                         } else {
                             callback.onError(e);
                         }

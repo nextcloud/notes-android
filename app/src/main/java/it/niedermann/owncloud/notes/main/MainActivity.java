@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.main;
 
+import android.accounts.NetworkErrorException;
 import android.animation.AnimatorInflater;
 import android.app.SearchManager;
 import android.content.Intent;
@@ -39,10 +40,12 @@ import com.google.android.material.snackbar.Snackbar;
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.AccountImportCancelledException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
+import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.exceptions.TokenMismatchException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 
+import java.net.HttpURLConnection;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -276,10 +279,15 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                 @Override
                 public void onError(@NonNull Throwable t) {
                     runOnUiThread(() -> {
-                        if (t.getClass() == IntendedOfflineException.class || t instanceof IntendedOfflineException) {
+                        if (t instanceof IntendedOfflineException) {
                             Log.i(TAG, "Capabilities and notes not updated because " + nextAccount.getAccountName() + " is offline by intention.");
-                        } else {
+                        } else if (t instanceof NetworkErrorException) {
                             BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
+                        } else {
+                            BrandedSnackbar.make(coordinatorLayout, R.string.error_synchronization, Snackbar.LENGTH_LONG)
+                                    .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(t)
+                                            .show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()))
+                                    .show();
                         }
                     });
                 }
@@ -438,10 +446,17 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                     public void onError(@NonNull Throwable t) {
                         runOnUiThread(() -> {
                             swipeRefreshLayout.setRefreshing(false);
-                            if (t.getClass() == IntendedOfflineException.class || t instanceof IntendedOfflineException) {
+                            if (t instanceof IntendedOfflineException) {
                                 Log.i(TAG, "Capabilities and notes not updated because " + currentAccount.getAccountName() + " is offline by intention.");
-                            } else {
+                            } else if (t instanceof NextcloudHttpRequestFailedException && ((NextcloudHttpRequestFailedException) t).getStatusCode() == HttpURLConnection.HTTP_UNAVAILABLE) {
+                                BrandedSnackbar.make(coordinatorLayout, R.string.error_maintenance_mode, Snackbar.LENGTH_LONG).show();
+                            } else if (t instanceof NetworkErrorException) {
                                 BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
+                            } else {
+                                BrandedSnackbar.make(coordinatorLayout, R.string.error_synchronization, Snackbar.LENGTH_LONG)
+                                        .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(t)
+                                                .show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()))
+                                        .show();
                             }
                         });
                     }
