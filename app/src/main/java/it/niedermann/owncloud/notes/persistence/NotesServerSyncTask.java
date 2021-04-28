@@ -35,6 +35,7 @@ import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_DELETED;
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.generateNoteExcerpt;
 import static java.net.HttpURLConnection.HTTP_NOT_FOUND;
 import static java.net.HttpURLConnection.HTTP_NOT_MODIFIED;
+import static java.net.HttpURLConnection.HTTP_UNAVAILABLE;
 
 
 /**
@@ -263,16 +264,16 @@ abstract class NotesServerSyncTask extends Thread {
                 exceptions.add(e);
             }
             return true;
-//        } catch (NextcloudHttpRequestFailedException e) {
-//            Log.d(TAG, "Server returned HTTP Status Code " + e.getStatusCode() + " - " + e.getMessage());
-//            if (e.getStatusCode() == HTTP_NOT_MODIFIED) {
-//                return true;
-//            } else {
-//                exceptions.add(e);
-//                return false;
-//            }
         } catch (Exception e) {
-            if (e instanceof TokenMismatchException) {
+            if (e.getClass() == RuntimeException.class && e.getCause() instanceof NextcloudHttpRequestFailedException) {
+                if (((NextcloudHttpRequestFailedException) e.getCause()).getStatusCode() == HTTP_NOT_MODIFIED) {
+                    Log.d(TAG, "Server returned HTTP Status Code " + ((NextcloudHttpRequestFailedException) e.getCause()).getStatusCode() + " - Notes not modified.");
+                    return true;
+                } else if (((NextcloudHttpRequestFailedException) e.getCause()).getStatusCode() == HTTP_UNAVAILABLE) {
+                    Log.d(TAG, "Server returned HTTP Status Code " + ((NextcloudHttpRequestFailedException) e.getCause()).getStatusCode() + " - Server is in maintenance mode.");
+                    return true;
+                }
+            } else if (e instanceof TokenMismatchException) {
                 SSOClient.invalidateAPICache(ssoAccount);
             }
             exceptions.add(e);

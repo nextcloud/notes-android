@@ -406,9 +406,16 @@ public class MainViewModel extends AndroidViewModel {
                     repo.deleteAccount(localAccount);
                     callback.onError(e);
                 } catch (Exception e) {
-                    if (e instanceof NextcloudHttpRequestFailedException && ((NextcloudHttpRequestFailedException) e).getStatusCode() == HttpURLConnection.HTTP_NOT_MODIFIED) {
-                        Log.i(TAG, "[synchronizeCapabilities] Capabilities not modified.");
-                        callback.onSuccess(null);
+                    if (e instanceof NextcloudHttpRequestFailedException) {
+                        if (((NextcloudHttpRequestFailedException) e).getStatusCode() == HttpURLConnection.HTTP_NOT_MODIFIED) {
+                            Log.i(TAG, "[synchronizeCapabilities] Capabilities not modified.");
+                            callback.onSuccess(null);
+                        } else if (((NextcloudHttpRequestFailedException) e).getStatusCode() == HttpURLConnection.HTTP_NOT_MODIFIED) {
+                            Log.i(TAG, "[synchronizeCapabilities] Server is in maintenance mode.");
+                            callback.onSuccess(null);
+                        } else {
+                            callback.onError(e);
+                        }
                     } else {
                         callback.onError(e);
                     }

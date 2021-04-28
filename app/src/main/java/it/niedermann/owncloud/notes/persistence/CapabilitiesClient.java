@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
-import com.google.gson.JsonParseException;
 import com.nextcloud.android.sso.api.NextcloudAPI;
 import com.nextcloud.android.sso.api.ParsedResponse;
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
@@ -19,9 +18,6 @@ import java.util.Map;
 import it.niedermann.owncloud.notes.persistence.sync.OcsAPI;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import retrofit2.NextcloudRetrofitApiBuilder;
-import retrofit2.Response;
-
-import static java.net.HttpURLConnection.HTTP_UNAVAILABLE;
 
 @WorkerThread
 public class CapabilitiesClient {
@@ -34,8 +30,8 @@ public class CapabilitiesClient {
     public static Capabilities getCapabilities(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount, @Nullable String lastETag) throws NextcloudHttpRequestFailedException, IOException {
         final NextcloudAPI nextcloudAPI = SSOClient.getNextcloudAPI(context.getApplicationContext(), ssoAccount);
         final OcsAPI ocsAPI = new NextcloudRetrofitApiBuilder(nextcloudAPI, API_ENDPOINT_OCS).create(OcsAPI.class);
-        final ParsedResponse<Capabilities> response = ocsAPI.getCapabilities(lastETag).blockingSingle();
         try {
+            final ParsedResponse<Capabilities> response = ocsAPI.getCapabilities(lastETag).blockingSingle();
             final Capabilities capabilities = response.getResponse();
             final Map<String, String> headers = response.getHeaders();
             if (headers != null) {
@@ -44,8 +40,8 @@ public class CapabilitiesClient {
                 Log.w(TAG, "Response headers of capabilities are null");
             }
             return capabilities;
-        } catch (JsonParseException e) {
-            if (e.getCause() instanceof NextcloudHttpRequestFailedException && ((NextcloudHttpRequestFailedException) e.getCause()).getStatusCode() == HTTP_UNAVAILABLE) {
+        } catch (RuntimeException e) {
+            if (e.getCause() instanceof NextcloudHttpRequestFailedException) {
                 throw (NextcloudHttpRequestFailedException) e.getCause();
             } else {
                 throw e;

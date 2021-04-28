@@ -13,6 +13,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -24,7 +25,7 @@ import retrofit2.http.Query;
 public interface NotesAPI_0_2 {
 
     @GET("notes")
-    Observable<ParsedResponse<List<Note>>> getNotes(@Query(value = "pruneBefore") long lastModified, @Query("If-None-Match") String lastETag);
+    Observable<ParsedResponse<List<Note>>> getNotes(@Query(value = "pruneBefore") long lastModified, @Header("If-None-Match") String lastETag);
 
     default Call<Note> createNote(@Body Note note) {
         return createNote(new Note_0_2(note));
@@ -53,7 +54,7 @@ public interface NotesAPI_0_2 {
         @Expose
         public final boolean favorite;
         @Expose
-        public final String eTag;
+        public final String etag;
 
         private Note_0_2(Note note) {
             if (note == null) {
@@ -65,7 +66,7 @@ public interface NotesAPI_0_2 {
             this.modified = note.getModified();
             this.content = note.getContent();
             this.favorite = note.getFavorite();
-            this.eTag = note.getETag();
+            this.etag = note.getETag();
         }
     }
 }

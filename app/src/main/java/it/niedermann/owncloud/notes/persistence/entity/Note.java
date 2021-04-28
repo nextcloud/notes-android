@@ -76,6 +76,7 @@ public class Note implements Serializable, Item {
 
     @Expose
     @Nullable
+    @SerializedName("etag")
     private String eTag;
 
     @NonNull

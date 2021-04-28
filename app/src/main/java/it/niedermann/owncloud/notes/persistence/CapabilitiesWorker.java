@@ -57,6 +57,9 @@ public class CapabilitiesWorker extends Worker {
                     if (((NextcloudHttpRequestFailedException) e).getStatusCode() == HttpURLConnection.HTTP_NOT_MODIFIED) {
                         Log.i(TAG, "Capabilities not modified.");
                         return Result.success();
+                    } else if(((NextcloudHttpRequestFailedException) e).getStatusCode() == HttpURLConnection.HTTP_UNAVAILABLE) {
+                        Log.i(TAG, "Server is in maintenance mode.");
+                        return Result.success();
                     }
                 }
                 e.printStackTrace();
