@@ -43,6 +43,7 @@ import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundExce
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.exceptions.TokenMismatchException;
+import com.nextcloud.android.sso.exceptions.UnknownErrorException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 
 import java.net.HttpURLConnection;
@@ -74,6 +75,7 @@ import it.niedermann.owncloud.notes.main.navigation.NavigationClickListener;
 import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesWorker;
+import it.niedermann.owncloud.notes.persistence.SSOClient;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
@@ -646,16 +648,23 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                             try {
                                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
                                 final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, null);
-                                LiveData<Account> createLiveData = mainViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities);
-                                runOnUiThread(() -> createLiveData.observe(this, (account) -> {
-                                    createLiveData.removeObservers(this);
-                                    new Thread(() -> {
-                                        Log.i(TAG, capabilities.toString());
-                                        final Account a = mainViewModel.getLocalAccountByAccountName(ssoAccount.name);
-                                        runOnUiThread(() -> mainViewModel.postCurrentAccount(a));
-                                    }).start();
-                                }));
+                                mainViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities, new IResponseCallback<Account>() {
+                                    @Override
+                                    public void onSuccess(Account result) {
+                                        new Thread(() -> {
+                                            Log.i(TAG, capabilities.toString());
+                                            final Account a = mainViewModel.getLocalAccountByAccountName(ssoAccount.name);
+                                            runOnUiThread(() -> mainViewModel.postCurrentAccount(a));
+                                        }).start();
+                                    }
+
+                                    @Override
+                                    public void onError(@NonNull Throwable t) {
+                                        runOnUiThread(() -> ExceptionDialogFragment.newInstance(t).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()));
+                                    }
+                                });
                             } catch (Exception e) {
+                                SSOClient.invalidateAPICache(ssoAccount);
                                 // Happens when importing an already existing account the second time
                                 if (e instanceof TokenMismatchException && mainViewModel.getLocalAccountByAccountName(ssoAccount.name) != null) {
                                     Log.w(TAG, "Received " + TokenMismatchException.class.getSimpleName() + " and the given ssoAccount.name (" + ssoAccount.name + ") does already exist in the database. Assume that this account has already been imported.");
@@ -664,6 +673,9 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                         // TODO there is already a sync in progress and results in displaying a TokenMissMatchException snackbar which conflicts with this one
                                         coordinatorLayout.post(() -> BrandedSnackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show());
                                     });
+                                } else if (e instanceof UnknownErrorException && e.getMessage().contains("No address associated with hostname")) {
+                                    // https://github.com/stefan-niedermann/nextcloud-notes/issues/1014
+                                    runOnUiThread(() -> Snackbar.make(coordinatorLayout, R.string.you_have_to_be_connected_to_the_internet_in_order_to_add_an_account, Snackbar.LENGTH_LONG).show());
                                 } else {
                                     e.printStackTrace();
                                     runOnUiThread(() -> {

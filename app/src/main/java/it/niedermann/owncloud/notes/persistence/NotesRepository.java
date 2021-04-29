@@ -57,6 +57,7 @@ import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType;
+import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 import it.niedermann.owncloud.notes.shared.model.SyncResultStatus;
@@ -160,8 +161,13 @@ public class NotesRepository {
     // Accounts
 
     @AnyThread
-    public LiveData<Account> addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities) {
-        return db.getAccountDao().getAccountById$(db.getAccountDao().insert(new Account(url, username, accountName, capabilities)));
+    public void addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities, @NonNull IResponseCallback<Account> callback) {
+        final Account createdAccount = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account(url, username, accountName, capabilities)));
+        if (createdAccount == null) {
+            callback.onError(new Exception("Could not read created account."));
+        } else {
+            callback.onSuccess(createdAccount);
+        }
     }
 
     @WorkerThread
@@ -772,7 +778,7 @@ public class NotesRepository {
      *
      * @param onlyLocalChanges Whether to only push local changes to the server or to also load the whole list of notes from the server.
      */
-    public void scheduleSync(Account account, boolean onlyLocalChanges) {
+    public synchronized void scheduleSync(Account account, boolean onlyLocalChanges) {
         if (account == null) {
             Log.i(TAG, SingleSignOnAccount.class.getSimpleName() + " is null. Is this a local account?");
         } else {
@@ -781,6 +787,7 @@ public class NotesRepository {
             }
             Log.d(TAG, "Sync requested (" + (onlyLocalChanges ? "onlyLocalChanges" : "full") + "; " + (Boolean.TRUE.equals(syncActive.get(account.getId())) ? "sync active" : "sync NOT active") + ") ...");
             if (isSyncPossible() && (!Boolean.TRUE.equals(syncActive.get(account.getId())) || onlyLocalChanges)) {
+                syncActive.put(account.getId(), true);
                 try {
                     Log.d(TAG, "... starting now");
                     final NotesServerSyncTask syncTask = new NotesServerSyncTask(context, this, account, onlyLocalChanges) {
@@ -793,7 +800,6 @@ public class NotesRepository {
                             if (!onlyLocalChanges && Boolean.TRUE.equals(syncScheduled.get(localAccount.getId()))) {
                                 syncScheduled.put(localAccount.getId(), false);
                             }
-                            syncActive.put(localAccount.getId(), true);
                         }
 
                         @Override

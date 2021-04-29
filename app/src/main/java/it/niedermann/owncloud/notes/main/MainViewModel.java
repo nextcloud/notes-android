@@ -530,8 +530,8 @@ public class MainViewModel extends AndroidViewModel {
         });
     }
 
-    public LiveData<Account> addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities) {
-        return repo.addAccount(url, username, accountName, capabilities);
+    public void addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities, @NonNull IResponseCallback<Account> callback) {
+        repo.addAccount(url, username, accountName, capabilities, callback);
     }
 
     public LiveData<Note> getFullNote$(long id) {
