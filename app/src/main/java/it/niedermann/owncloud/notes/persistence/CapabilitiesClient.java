@@ -27,7 +27,7 @@ public class CapabilitiesClient {
     private static final String API_ENDPOINT_OCS = "/ocs/v2.php/cloud/";
     private static final String HEADER_KEY_ETAG = "ETag";
 
-    public static Capabilities getCapabilities(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount, @Nullable String lastETag) throws NextcloudHttpRequestFailedException, IOException {
+    public static Capabilities getCapabilities(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount, @Nullable String lastETag) throws Throwable {
         final NextcloudAPI nextcloudAPI = SSOClient.getNextcloudAPI(context.getApplicationContext(), ssoAccount);
         final OcsAPI ocsAPI = new NextcloudRetrofitApiBuilder(nextcloudAPI, API_ENDPOINT_OCS).create(OcsAPI.class);
         try {
@@ -41,8 +41,9 @@ public class CapabilitiesClient {
             }
             return capabilities;
         } catch (RuntimeException e) {
-            if (e.getCause() instanceof NextcloudHttpRequestFailedException) {
-                throw (NextcloudHttpRequestFailedException) e.getCause();
+            final Throwable cause = e.getCause();
+            if(cause != null) {
+                throw cause;
             } else {
                 throw e;
             }

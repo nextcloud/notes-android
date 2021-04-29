@@ -672,7 +672,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                         runOnUiThread(() -> ExceptionDialogFragment.newInstance(t).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()));
                                     }
                                 });
-                            } catch (Exception e) {
+                            } catch (Throwable e) {
                                 SSOClient.invalidateAPICache(ssoAccount);
                                 // Happens when importing an already existing account the second time
                                 if (e instanceof TokenMismatchException && mainViewModel.getLocalAccountByAccountName(ssoAccount.name) != null) {

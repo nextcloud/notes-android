@@ -21,7 +21,6 @@ import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundExce
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 
-import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -59,6 +58,7 @@ import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.RECENT;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.UNCATEGORIZED;
 import static it.niedermann.owncloud.notes.shared.util.DisplayUtils.convertToCategoryNavigationItem;
+import static java.net.HttpURLConnection.HTTP_NOT_MODIFIED;
 
 public class MainViewModel extends AndroidViewModel {
 
@@ -405,17 +405,15 @@ public class MainViewModel extends AndroidViewModel {
                 } catch (NextcloudFilesAppAccountNotFoundException e) {
                     repo.deleteAccount(localAccount);
                     callback.onError(e);
-                } catch (Exception e) {
-                    if (e instanceof NextcloudHttpRequestFailedException) {
-                        if (((NextcloudHttpRequestFailedException) e).getStatusCode() == HttpURLConnection.HTTP_NOT_MODIFIED) {
-                            Log.i(TAG, "[synchronizeCapabilities] Capabilities not modified.");
+                } catch (Throwable t) {
+                    if (t.getClass() == NextcloudHttpRequestFailedException.class || t instanceof NextcloudHttpRequestFailedException) {
+                        if (((NextcloudHttpRequestFailedException) t).getStatusCode() == HTTP_NOT_MODIFIED) {
+                            Log.d(TAG, "Server returned HTTP Status Code " + ((NextcloudHttpRequestFailedException) t).getStatusCode() + " - Capabilities not modified.");
                             callback.onSuccess(null);
-                        } else {
-                            callback.onError(e);
+                            return;
                         }
-                    } else {
-                        callback.onError(e);
                     }
+                    callback.onError(t);
                 }
             } else {
                 if (repo.isNetworkConnected() && repo.isSyncOnlyOnWifi()) {

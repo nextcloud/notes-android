@@ -264,19 +264,21 @@ abstract class NotesServerSyncTask extends Thread {
                 exceptions.add(e);
             }
             return true;
-        } catch (Exception e) {
-            if (e.getClass() == RuntimeException.class && e.getCause() instanceof NextcloudHttpRequestFailedException) {
-                if (((NextcloudHttpRequestFailedException) e.getCause()).getStatusCode() == HTTP_NOT_MODIFIED) {
-                    Log.d(TAG, "Server returned HTTP Status Code " + ((NextcloudHttpRequestFailedException) e.getCause()).getStatusCode() + " - Notes not modified.");
-                    return true;
-                } else if (((NextcloudHttpRequestFailedException) e.getCause()).getStatusCode() == HTTP_UNAVAILABLE) {
-                    Log.d(TAG, "Server returned HTTP Status Code " + ((NextcloudHttpRequestFailedException) e.getCause()).getStatusCode() + " - Server is in maintenance mode.");
-                    return true;
+        } catch (Throwable t) {
+            final Throwable cause = t.getCause();
+            if (t.getClass() == RuntimeException.class && cause != null) {
+                if (cause.getClass() == NextcloudHttpRequestFailedException.class || cause instanceof NextcloudHttpRequestFailedException) {
+                    final NextcloudHttpRequestFailedException httpException = (NextcloudHttpRequestFailedException) cause;
+                    if (httpException.getStatusCode() == HTTP_NOT_MODIFIED) {
+                        Log.d(TAG, "Server returned HTTP Status Code " + httpException.getStatusCode() + " - Notes not modified.");
+                        return true;
+                    } else if (httpException.getStatusCode() == HTTP_UNAVAILABLE) {
+                        Log.d(TAG, "Server returned HTTP Status Code " + httpException.getStatusCode() + " - Server is in maintenance mode.");
+                        return true;
+                    }
                 }
-            } else if (e instanceof TokenMismatchException) {
-                SSOClient.invalidateAPICache(ssoAccount);
             }
-            exceptions.add(e);
+            exceptions.add(t);
             return false;
         }
     }
