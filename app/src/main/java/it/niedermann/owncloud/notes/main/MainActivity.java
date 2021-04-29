@@ -319,17 +319,26 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         final LiveData<Account> accountLiveData = mainViewModel.getCurrentAccount();
         accountLiveData.observe(this, (currentAccount) -> {
             accountLiveData.removeObservers(this);
-            mainViewModel.synchronizeNotes(currentAccount, new IResponseCallback<Void>() {
-                @Override
-                public void onSuccess(Void v) {
-                    Log.d(TAG, "Successfully synchronized notes for " + currentAccount.getAccountName());
-                }
+            try {
+                // It is possible that after the deletion of the last account, this onResponse gets called before the ImportAccountActivity gets started.
+                if (SingleAccountHelper.getCurrentSingleSignOnAccount(this) != null) {
+                    mainViewModel.synchronizeNotes(currentAccount, new IResponseCallback<Void>() {
+                        @Override
+                        public void onSuccess(Void v) {
+                            Log.d(TAG, "Successfully synchronized notes for " + currentAccount.getAccountName());
+                        }
 
-                @Override
-                public void onError(@NonNull Throwable t) {
-                    t.printStackTrace();
+                        @Override
+                        public void onError(@NonNull Throwable t) {
+                            t.printStackTrace();
+                        }
+                    });
                 }
-            });
+            } catch (NextcloudFilesAppAccountNotFoundException e) {
+                ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+            } catch (NoCurrentAccountSelectedException e) {
+                Log.i(TAG, "No current account is selected - maybe the last account has been deleted?");
+            }
         });
         super.onResume();
     }
