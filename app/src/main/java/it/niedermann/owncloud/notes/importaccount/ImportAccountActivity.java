@@ -27,7 +27,7 @@ import it.niedermann.owncloud.notes.databinding.ActivityImportAccountBinding;
 import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.exception.ExceptionHandler;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
-import it.niedermann.owncloud.notes.persistence.SSOClient;
+import it.niedermann.owncloud.notes.persistence.ApiProvider;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
@@ -110,7 +110,7 @@ public class ImportAccountActivity extends AppCompatActivity {
                         });
                     } catch (Throwable t) {
                         t.printStackTrace();
-                        SSOClient.invalidateAPICache(ssoAccount);
+                        ApiProvider.invalidateAPICache(ssoAccount);
                         SingleAccountHelper.setCurrentAccount(this, null);
                         runOnUiThread(() -> {
                             restoreCleanState();

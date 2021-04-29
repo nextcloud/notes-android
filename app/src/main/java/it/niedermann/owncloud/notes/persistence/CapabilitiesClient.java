@@ -7,29 +7,23 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
-import com.nextcloud.android.sso.api.NextcloudAPI;
 import com.nextcloud.android.sso.api.ParsedResponse;
-import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
-import java.io.IOException;
 import java.util.Map;
 
 import it.niedermann.owncloud.notes.persistence.sync.OcsAPI;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
-import retrofit2.NextcloudRetrofitApiBuilder;
 
 @WorkerThread
 public class CapabilitiesClient {
 
     private static final String TAG = CapabilitiesClient.class.getSimpleName();
 
-    private static final String API_ENDPOINT_OCS = "/ocs/v2.php/cloud/";
     private static final String HEADER_KEY_ETAG = "ETag";
 
     public static Capabilities getCapabilities(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount, @Nullable String lastETag) throws Throwable {
-        final NextcloudAPI nextcloudAPI = SSOClient.getNextcloudAPI(context.getApplicationContext(), ssoAccount);
-        final OcsAPI ocsAPI = new NextcloudRetrofitApiBuilder(nextcloudAPI, API_ENDPOINT_OCS).create(OcsAPI.class);
+        final OcsAPI ocsAPI = ApiProvider.getOcsAPI(context, ssoAccount);
         try {
             final ParsedResponse<Capabilities> response = ocsAPI.getCapabilities(lastETag).blockingSingle();
             final Capabilities capabilities = response.getResponse();

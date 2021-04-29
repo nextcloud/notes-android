@@ -75,7 +75,7 @@ import it.niedermann.owncloud.notes.main.navigation.NavigationClickListener;
 import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesWorker;
-import it.niedermann.owncloud.notes.persistence.SSOClient;
+import it.niedermann.owncloud.notes.persistence.ApiProvider;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
@@ -673,7 +673,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                     }
                                 });
                             } catch (Throwable e) {
-                                SSOClient.invalidateAPICache(ssoAccount);
+                                ApiProvider.invalidateAPICache(ssoAccount);
                                 // Happens when importing an already existing account the second time
                                 if (e instanceof TokenMismatchException && mainViewModel.getLocalAccountByAccountName(ssoAccount.name) != null) {
                                     Log.w(TAG, "Received " + TokenMismatchException.class.getSimpleName() + " and the given ssoAccount.name (" + ssoAccount.name + ") does already exist in the database. Assume that this account has already been imported.");

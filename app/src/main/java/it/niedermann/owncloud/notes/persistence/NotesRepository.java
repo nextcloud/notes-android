@@ -178,10 +178,10 @@ public class NotesRepository {
     @WorkerThread
     public void deleteAccount(@NonNull Account account) {
         try {
-            SSOClient.invalidateAPICache(AccountImporter.getSingleSignOnAccount(context, account.getAccountName()));
+            ApiProvider.invalidateAPICache(AccountImporter.getSingleSignOnAccount(context, account.getAccountName()));
         } catch (NextcloudFilesAppAccountNotFoundException e) {
             e.printStackTrace();
-            SSOClient.invalidateAPICache();
+            ApiProvider.invalidateAPICache();
         }
 
         db.getAccountDao().deleteAccount(account);
@@ -582,10 +582,13 @@ public class NotesRepository {
                 }
                 if (apiVersions.length() > 0) {
                     final int updatedRows = db.getAccountDao().updateApiVersion(accountId, apiVersion);
-                    if (updatedRows == 1) {
+                    if (updatedRows == 0) {
+                        Log.d(TAG, "ApiVersion not updated, because it did not change");
+                    } else if (updatedRows == 1) {
                         Log.i(TAG, "Updated apiVersion to \"" + apiVersion + "\" for accountId = " + accountId);
+                        ApiProvider.invalidateAPICache();
                     } else {
-                        Log.e(TAG, "Updated " + updatedRows + " but expected only 1 for accountId = " + accountId + " and apiVersion = \"" + apiVersion + "\"");
+                        Log.w(TAG, "Updated " + updatedRows + " but expected only 1 for accountId = " + accountId + " and apiVersion = \"" + apiVersion + "\"");
                     }
                     return true;
                 } else {
@@ -899,7 +902,7 @@ public class NotesRepository {
                 Log.d(TAG, "No network connection.");
             }
         } catch (NetworkErrorException e) {
-            e.printStackTrace();
+            Log.i(TAG, e.getMessage());
             networkConnected = false;
             isSyncPossible = false;
         }

@@ -6,7 +6,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.nextcloud.android.sso.AccountImporter;
-import com.nextcloud.android.sso.api.NextcloudAPI;
 import com.nextcloud.android.sso.api.ParsedResponse;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
@@ -49,10 +48,10 @@ abstract class NotesServerSyncTask extends Thread {
     private static final String HEADER_KEY_X_NOTES_API_VERSIONS = "X-Notes-API-Versions";
     private static final String HEADER_KEY_ETAG = "ETag";
     private static final String HEADER_KEY_LAST_MODIFIED = "Last-Modified";
+
+    private NotesAPI notesAPI;
     @NonNull
     private final Context context;
-    @NonNull
-    private NotesAPI notesAPI;
     @NonNull
     private final NotesRepository repo;
     @NonNull
@@ -82,8 +81,7 @@ abstract class NotesServerSyncTask extends Thread {
     public void run() {
         onPreExecute();
 
-        final NextcloudAPI nextcloudAPI = SSOClient.getNextcloudAPI(context.getApplicationContext(), ssoAccount);
-        notesAPI = new NotesAPI(nextcloudAPI, localAccount.getPreferredApiVersion());
+        notesAPI = ApiProvider.getNotesAPI(context, ssoAccount, localAccount.getPreferredApiVersion());
 
         Log.i(TAG, "STARTING SYNCHRONIZATION");
 
@@ -177,7 +175,7 @@ abstract class NotesServerSyncTask extends Thread {
                 }
             } catch (Exception e) {
                 if (e instanceof TokenMismatchException) {
-                    SSOClient.invalidateAPICache(ssoAccount);
+                    ApiProvider.invalidateAPICache(ssoAccount);
                 }
                 exceptions.add(e);
                 success = false;
