@@ -313,6 +313,7 @@ public class MarkdownUtil {
      *
      * @return the new cursor position
      */
+    // CS304 issue link: https://github.com/stefan-niedermann/nextcloud-notes/issues/1186
     public static int insertLink(@NonNull Editable editable, int selectionStart, int selectionEnd, @Nullable String clipboardUrl) {
         if (selectionStart == selectionEnd) {
             char start = editable.charAt(selectionStart-1);
