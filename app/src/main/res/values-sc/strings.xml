@@ -16,7 +16,7 @@
     <string name="simple_about">In contu de</string>
     <string name="simple_link">Ligòngiu</string>
     <string name="action_note_deleted">Cantzelladu %1$s</string>
-    <string name="action_note_restored">Recuperadu %1$s</string>
+    <string name="action_note_restored">Ripristinadu %1$s</string>
     <string name="action_undo">Annulla</string>
     <string name="action_uncategorized">Sena categoria</string>
     <string name="menu_delete">Cantzella</string>
@@ -240,4 +240,4 @@
     <string name="no_account_configured_yet">Perunu contu configuradu ancora</string>
     <string name="no_other_accounts">No as configuradu perunu contu ancora.</string>
     <string name="context_based_formatting">Bentana de formatatzione basada subra de su cuntestu</string>
-</resources>
+    </resources>

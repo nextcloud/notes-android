@@ -10,6 +10,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.LiveData;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -20,20 +21,19 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
 import it.niedermann.owncloud.notes.databinding.DialogAccountSwitcherBinding;
 import it.niedermann.owncloud.notes.manageaccounts.ManageAccountsActivity;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.shared.model.LocalAccount;
+import it.niedermann.owncloud.notes.persistence.NotesRepository;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
 
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.applyBrandToLayerDrawable;
-import static it.niedermann.owncloud.notes.main.MainActivity.manage_account;
 
 /**
- * Displays all available {@link LocalAccount} entries and provides basic operations for them, like adding or switching
+ * Displays all available {@link Account} entries and provides basic operations for them, like adding or switching
  */
 public class AccountSwitcherDialog extends BrandedDialogFragment {
 
     private static final String KEY_CURRENT_ACCOUNT_ID = "current_account_id";
 
-    private NotesDatabase db;
+    private NotesRepository repo;
     private DialogAccountSwitcherBinding binding;
     private AccountSwitcherListener accountSwitcherListener;
     private long currentAccountId;
@@ -55,7 +55,7 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
             this.currentAccountId = args.getLong(KEY_CURRENT_ACCOUNT_ID);
         }
 
-        db = NotesDatabase.getInstance(getActivity());
+        repo = NotesRepository.getInstance(requireContext());
     }
 
     @NonNull
@@ -63,29 +63,36 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         binding = DialogAccountSwitcherBinding.inflate(requireActivity().getLayoutInflater());
 
-        LocalAccount currentLocalAccount = db.getAccount(currentAccountId);
-        binding.accountName.setText(currentLocalAccount.getUserName());
-        binding.accountHost.setText(Uri.parse(currentLocalAccount.getUrl()).getHost());
-        Glide.with(requireContext())
-                .load(currentLocalAccount.getUrl() + "/index.php/avatar/" + Uri.encode(currentLocalAccount.getUserName()) + "/64")
-                .error(R.drawable.ic_account_circle_grey_24dp)
-                .apply(RequestOptions.circleCropTransform())
-                .into(binding.currentAccountItemAvatar);
-        binding.accountLayout.setOnClickListener((v) -> dismiss());
+        final LiveData<Account> account$ = repo.getAccountById$(currentAccountId);
+        account$.observe(requireActivity(), (currentLocalAccount) -> {
+            account$.removeObservers(requireActivity());
 
-        AccountSwitcherAdapter adapter = new AccountSwitcherAdapter((localAccount -> {
-            accountSwitcherListener.onAccountChosen(localAccount);
-            dismiss();
-        }));
-        binding.accountsList.setAdapter(adapter);
-        List<LocalAccount> localAccounts = db.getAccounts();
-        for (LocalAccount localAccount : localAccounts) {
-            if (localAccount.getId() == currentLocalAccount.getId()) {
-                localAccounts.remove(localAccount);
-                break;
-            }
-        }
-        adapter.setLocalAccounts(localAccounts);
+            binding.accountName.setText(currentLocalAccount.getUserName());
+            binding.accountHost.setText(Uri.parse(currentLocalAccount.getUrl()).getHost());
+            Glide.with(requireContext())
+                    .load(currentLocalAccount.getUrl() + "/index.php/avatar/" + Uri.encode(currentLocalAccount.getUserName()) + "/64")
+                    .error(R.drawable.ic_account_circle_grey_24dp)
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(binding.currentAccountItemAvatar);
+            binding.accountLayout.setOnClickListener((v) -> dismiss());
+
+            final AccountSwitcherAdapter adapter = new AccountSwitcherAdapter((localAccount -> {
+                accountSwitcherListener.onAccountChosen(localAccount);
+                dismiss();
+            }));
+            binding.accountsList.setAdapter(adapter);
+            final LiveData<List<Account>> localAccounts$ = repo.getAccounts$();
+            localAccounts$.observe(requireActivity(), (localAccounts) -> {
+                localAccounts$.removeObservers(requireActivity());
+                for (Account localAccount : localAccounts) {
+                    if (localAccount.getId() == currentLocalAccount.getId()) {
+                        localAccounts.remove(localAccount);
+                        break;
+                    }
+                }
+                adapter.setLocalAccounts(localAccounts);
+            });
+        });
 
         binding.addAccount.setOnClickListener((v) -> {
             accountSwitcherListener.addAccount();
@@ -93,7 +100,7 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
         });
 
         binding.manageAccounts.setOnClickListener((v) -> {
-            requireActivity().startActivityForResult(new Intent(requireContext(), ManageAccountsActivity.class), manage_account);
+            requireActivity().startActivity(new Intent(requireContext(), ManageAccountsActivity.class));
             dismiss();
         });
 

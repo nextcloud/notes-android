@@ -2,7 +2,6 @@ package it.niedermann.owncloud.notes.edit.category;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,9 +11,11 @@ import android.view.WindowManager;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.util.List;
 
@@ -23,8 +24,7 @@ import it.niedermann.owncloud.notes.branding.BrandedAlertDialogBuilder;
 import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.DialogChangeCategoryBinding;
-import it.niedermann.owncloud.notes.main.NavigationAdapter;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
 
 /**
  * This {@link DialogFragment} allows for the selection of a category.
@@ -35,12 +35,17 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
 
     private static final String TAG = CategoryDialogFragment.class.getSimpleName();
     private static final String STATE_CATEGORY = "category";
+
+    private CategoryViewModel viewModel;
     private DialogChangeCategoryBinding binding;
 
-    private NotesDatabase db;
     private CategoryDialogListener listener;
 
+    private CategoryAdapter adapter;
+
     private EditText editCategory;
+
+    private LiveData<List<NavigationItem.CategoryNavigationItem>> categoryLiveData;
 
     @Override
     public void applyBrand(int mainColor, int textColor) {
@@ -64,8 +69,6 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
 
     private long accountId;
 
-    private CategoryAdapter adapter;
-
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -82,7 +85,12 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
         } else {
             throw new IllegalArgumentException("Calling activity or target fragment must implement " + CategoryDialogListener.class.getSimpleName());
         }
-        db = NotesDatabase.getInstance(getActivity());
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.viewModel = new ViewModelProvider(requireActivity()).get(CategoryViewModel.class);
     }
 
     @NonNull
@@ -121,7 +129,10 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
         });
 
         binding.recyclerView.setAdapter(adapter);
-        new LoadCategoriesTask().execute("");
+
+        categoryLiveData = viewModel.getCategories(accountId);
+        categoryLiveData.observe(requireActivity(), categories -> adapter.setCategoryList(categories, binding.search.getText().toString()));
+
         editCategory.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -135,7 +146,7 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                new LoadCategoriesTask().execute(editCategory.getText().toString());
+                viewModel.postSearchTerm(editCategory.getText().toString());
             }
         });
 
@@ -167,6 +178,14 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (categoryLiveData != null) {
+            categoryLiveData.removeObservers(requireActivity());
+        }
+    }
+
     public static DialogFragment newInstance(long accountId, String category) {
         final DialogFragment categoryFragment = new CategoryDialogFragment();
         final Bundle arguments = new Bundle();
@@ -174,20 +193,5 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
         arguments.putLong(CategoryDialogFragment.PARAM_ACCOUNT_ID, accountId);
         categoryFragment.setArguments(arguments);
         return categoryFragment;
-    }
-
-    private class LoadCategoriesTask extends AsyncTask<String, Void, List<NavigationAdapter.CategoryNavigationItem>> {
-        String currentSearchString;
-
-        @Override
-        protected List<NavigationAdapter.CategoryNavigationItem> doInBackground(String... searchText) {
-            currentSearchString = searchText[0];
-            return db.searchCategories(accountId, currentSearchString);
-        }
-
-        @Override
-        protected void onPostExecute(List<NavigationAdapter.CategoryNavigationItem> categories) {
-            adapter.setCategoryList(categories, currentSearchString);
-        }
     }
 }

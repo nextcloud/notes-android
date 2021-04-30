@@ -10,9 +10,9 @@ import androidx.annotation.Nullable;
 import androidx.annotation.Px;
 
 import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemGridOnlyTitleBinding;
-import it.niedermann.owncloud.notes.shared.model.DBNote;
-import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 import it.niedermann.owncloud.notes.main.items.NoteViewHolder;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 
 public class NoteViewGridHolderOnlyTitle extends NoteViewHolder {
     @NonNull
@@ -32,11 +32,11 @@ public class NoteViewGridHolderOnlyTitle extends NoteViewHolder {
         throw new UnsupportedOperationException(NoteViewGridHolderOnlyTitle.class.getSimpleName() + " does not support swiping");
     }
 
-    public void bind(@NonNull DBNote note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
-        super.bind(note, showCategory, mainColor, textColor, searchQuery);
+    public void bind(boolean isSelected, @NonNull Note note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
+        super.bind(isSelected, note, showCategory, mainColor, textColor, searchQuery);
         @NonNull final Context context = itemView.getContext();
         bindStatus(binding.noteStatus, note.getStatus(), mainColor);
-        bindFavorite(binding.noteFavorite, note.isFavorite());
+        bindFavorite(binding.noteFavorite, note.getFavorite());
         bindSearchableContent(context, binding.noteTitle, searchQuery, note.getTitle(), mainColor);
     }
 

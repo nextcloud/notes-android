@@ -6,12 +6,14 @@
     <string name="label_all_notes">Ohar guztiak</string>
     <string name="label_favorites">Gogokoak</string>
     <string name="action_create">Ohar berria</string>
+    <string name="welcome_text">Ongi etorri %1$s(e)ra</string>
     <string name="action_settings">Ezarpenak</string>
     <string name="action_trashbin">Ezabatutako oharrak</string>
     <string name="action_search">Bilatu</string>
     <string name="action_sorting_method">Ordenatze metodoa</string>
     <string name="simple_cancel">Utzi</string>
     <string name="simple_edit">Editatu</string>
+    <string name="simple_remove">Kendu</string>
     <string name="action_edit_save">Gorde</string>
     <string name="simple_about">Honi buruz</string>
     <string name="simple_link">Esteka</string>
@@ -45,6 +47,8 @@
     <string name="settings_lock">Aplikazioen blokeoa (Beta)</string>
     <string name="settings_lock_summary">Gailuaren kredentzialak</string>
     <string name="settings_background_sync">Atzeko planoko sinkronizazioa</string>
+    <string name="settings_prevent_screen_capture">Saihestu pantaila argazkia</string>
+
     <string name="error_sync">Sinkronizazioak huts egin du: %1$s</string>
     <string name="error_synchronization">Sinkronizazioak huts egin du</string>
     <string name="error_no_network">Ez dago sare konexiorik</string>
@@ -136,6 +140,7 @@
     <string name="settings_branding">Marka</string>
     <string name="settings_gridview">Sareta ikuspegia</string>
     <string name="simple_security">Segurtasuna</string>
+    <string name="appearance_and_behavior">Itxura eta portaera</string>
     <string name="simple_synchronization">Sinkronizazioa</string>
     <string name="simple_behavior">Portaera</string>
     <string name="manage_accounts">Kudeatu kontuak</string>
@@ -242,5 +247,7 @@
     <string name="error_action_open_network">Sareko ezarpenak</string>
     <string name="no_account_configured_yet">Oraindik ez da konturik konfiguratu </string>
     <string name="no_other_accounts">Oraindik ez duzu konturik konfiguratu.</string>
+    <string name="choose_account">Aukeratu kontua</string>
     <string name="context_based_formatting">Testuinguruan oinarritutako formateatze leiho gainerakorra </string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Kontu bat gehitzeko internetera konektatuta egon behar zara.</string>
 </resources>

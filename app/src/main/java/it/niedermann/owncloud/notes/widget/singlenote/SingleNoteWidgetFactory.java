@@ -10,30 +10,28 @@ import android.widget.RemoteViewsService;
 
 import androidx.annotation.Nullable;
 
-import java.util.NoSuchElementException;
-
 import it.niedermann.android.markdown.MarkdownUtil;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.shared.model.DBNote;
+import it.niedermann.owncloud.notes.persistence.NotesRepository;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
 
 public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
 
     private final Context context;
     private final int appWidgetId;
 
-    private final NotesDatabase db;
+    private final NotesRepository repo;
     @Nullable
-    private DBNote note;
+    private Note note;
 
     private static final String TAG = SingleNoteWidget.class.getSimpleName();
 
     SingleNoteWidgetFactory(Context context, Intent intent) {
         this.context = context;
-        this.appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
-                AppWidgetManager.INVALID_APPWIDGET_ID);
-        this.db = NotesDatabase.getInstance(context);
+        this.appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
+        this.repo = NotesRepository.getInstance(context);
     }
 
     @Override
@@ -43,16 +41,16 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
 
     @Override
     public void onDataSetChanged() {
-        try {
-            final SingleNoteWidgetData data = db.getSingleNoteWidgetData(appWidgetId);
+        final SingleNoteWidgetData data = repo.getSingleNoteWidgetData(appWidgetId);
+        if (data != null) {
             final long noteId = data.getNoteId();
             Log.v(TAG, "Fetch note with id " + noteId);
-            note = db.getNote(data.getAccountId(), noteId);
+            note = repo.getNoteById(noteId);
 
             if (note == null) {
                 Log.e(TAG, "Error: note not found");
             }
-        } catch (NoSuchElementException e) {
+        } else {
             Log.w(TAG, "Widget with ID " + appWidgetId + " seems to be not configured yet.");
         }
     }

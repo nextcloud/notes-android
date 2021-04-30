@@ -1,29 +1,29 @@
 package it.niedermann.owncloud.notes.main.items.list;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
+import androidx.recyclerview.selection.SelectionTracker;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
-import it.niedermann.owncloud.notes.shared.model.DBNote;
-import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
+import it.niedermann.owncloud.notes.main.MainViewModel;
 import it.niedermann.owncloud.notes.main.items.ItemAdapter;
 import it.niedermann.owncloud.notes.main.items.NoteViewHolder;
 import it.niedermann.owncloud.notes.main.items.section.SectionViewHolder;
-import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 
 public class NotesListViewItemTouchHelper extends ItemTouchHelper {
 
@@ -31,14 +31,13 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
     private static final int UNDO_DURATION = 12_000;
 
     public NotesListViewItemTouchHelper(
-            @NonNull SingleSignOnAccount ssoAccount,
             @NonNull Context context,
-            @NonNull NotesDatabase db,
+            @NonNull MainViewModel mainViewModel,
+            @NonNull LifecycleOwner lifecycleOwner,
+            @NonNull SelectionTracker<Long> tracker,
             @NonNull ItemAdapter adapter,
-            @NonNull ISyncCallback syncCallBack,
-            @NonNull Runnable refreshLists,
-            @Nullable SwipeRefreshLayout swipeRefreshLayout,
-            @Nullable ViewProvider viewProvider,
+            @NonNull SwipeRefreshLayout swipeRefreshLayout,
+            @NonNull View view,
             boolean gridView) {
         super(new SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             private boolean swipeRefreshLayoutEnabled;
@@ -67,34 +66,35 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
              * @param viewHolder RecyclerView.ViewHoler
              * @param direction  int
              */
+            @SuppressLint("WrongConstant")
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 switch (direction) {
                     case ItemTouchHelper.LEFT:
-                        final DBNote dbNoteWithoutContent = (DBNote) adapter.getItem(viewHolder.getLayoutPosition());
-                        final DBNote dbNote = db.getNote(dbNoteWithoutContent.getAccountId(), dbNoteWithoutContent.getId());
-                        db.deleteNoteAndSync(ssoAccount, dbNote.getId());
-                        adapter.remove(dbNote);
-                        refreshLists.run();
-                        Log.v(TAG, "Item deleted through swipe ----------------------------------------------");
-                        if (viewProvider == null) {
-                            Toast.makeText(context, context.getString(R.string.action_note_deleted, dbNote.getTitle()), Toast.LENGTH_LONG).show();
-                        } else {
-                            BrandedSnackbar.make(viewProvider.getView(), context.getString(R.string.action_note_deleted, dbNote.getTitle()), UNDO_DURATION)
+                        viewHolder.setIsRecyclable(false);
+                        final Note dbNoteWithoutContent = (Note) adapter.getItem(viewHolder.getLayoutPosition());
+                        final LiveData<Note> dbNoteLiveData = mainViewModel.getFullNote$(dbNoteWithoutContent.getId());
+                        dbNoteLiveData.observe(lifecycleOwner, (dbNote) -> {
+                            dbNoteLiveData.removeObservers(lifecycleOwner);
+                            tracker.deselect(dbNote.getId());
+                            final LiveData<Void> deleteLiveData = mainViewModel.deleteNoteAndSync(dbNote.getId());
+                            deleteLiveData.observe(lifecycleOwner, (next) -> deleteLiveData.removeObservers(lifecycleOwner));
+                            Log.v(TAG, "Item deleted through swipe ----------------------------------------------");
+                            BrandedSnackbar.make(view, context.getString(R.string.action_note_deleted, dbNote.getTitle()), UNDO_DURATION)
                                     .setAction(R.string.action_undo, (View v) -> {
-                                        db.getNoteServerSyncHelper().addCallbackPush(ssoAccount, refreshLists::run);
-                                        db.addNoteAndSync(ssoAccount, dbNote.getAccountId(), dbNote);
-                                        refreshLists.run();
-                                        BrandedSnackbar.make(viewProvider.getView(), context.getString(R.string.action_note_restored, dbNote.getTitle()), Snackbar.LENGTH_SHORT)
+                                        final LiveData<Note> undoLiveData = mainViewModel.addNoteAndSync(dbNote);
+                                        undoLiveData.observe(lifecycleOwner, (o) -> undoLiveData.removeObservers(lifecycleOwner));
+                                        BrandedSnackbar.make(view, context.getString(R.string.action_note_restored, dbNote.getTitle()), Snackbar.LENGTH_SHORT)
                                                 .show();
                                     })
                                     .show();
-                        }
+                        });
                         break;
                     case ItemTouchHelper.RIGHT:
-                        final DBNote adapterNote = (DBNote) adapter.getItem(viewHolder.getLayoutPosition());
-                        db.toggleFavorite(ssoAccount, adapterNote, syncCallBack);
-                        refreshLists.run();
+                        viewHolder.setIsRecyclable(false);
+                        final Note adapterNote = (Note) adapter.getItem(viewHolder.getLayoutPosition());
+                        final LiveData<Void> toggleLiveData = mainViewModel.toggleFavoriteAndSync(adapterNote.getId());
+                        toggleLiveData.observe(lifecycleOwner, (next) -> toggleLiveData.removeObservers(lifecycleOwner));
                         break;
                     default:
                         //NoOp
@@ -103,7 +103,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
 
             @Override
             public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-                NoteViewHolder noteViewHolder = (NoteViewHolder) viewHolder;
+                final NoteViewHolder noteViewHolder = (NoteViewHolder) viewHolder;
                 // show swipe icon on the side
                 noteViewHolder.showSwipe(dX > 0);
                 // move only swipeable part of item (not leave-behind)
@@ -112,10 +112,13 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
 
             @Override
             public void onSelectedChanged(@Nullable RecyclerView.ViewHolder viewHolder, int actionState) {
-                if (actionState == ACTION_STATE_SWIPE && swipeRefreshLayout != null) {
+                if (actionState == ACTION_STATE_SWIPE) {
                     Log.i(TAG, "Start swiping, disable swipeRefreshLayout");
                     swipeRefreshLayoutEnabled = swipeRefreshLayout.isEnabled();
                     swipeRefreshLayout.setEnabled(false);
+                    if (viewHolder != null) {
+                        adapter.setSwipedPosition(viewHolder.getLayoutPosition());
+                    }
                 }
                 super.onSelectedChanged(viewHolder, actionState);
             }
@@ -123,10 +126,9 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
             @Override
             public void clearView(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
                 Log.i(TAG, "End swiping, resetting swipeRefreshLayout state");
-                if (swipeRefreshLayout != null) {
-                    swipeRefreshLayout.setEnabled(swipeRefreshLayoutEnabled);
-                }
+                swipeRefreshLayout.setEnabled(swipeRefreshLayoutEnabled);
                 getDefaultUIUtil().clearView(((NoteViewHolder) viewHolder).getNoteSwipeable());
+                adapter.setSwipedPosition(null);
             }
 
             @Override

@@ -11,16 +11,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.shared.model.LocalAccount;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
 
 public class AccountSwitcherAdapter extends RecyclerView.Adapter<AccountSwitcherViewHolder> {
 
     @NonNull
-    private final List<LocalAccount> localAccounts = new ArrayList<>();
+    private final List<Account> localAccounts = new ArrayList<>();
     @NonNull
-    private final Consumer<LocalAccount> onAccountClick;
+    private final Consumer<Account> onAccountClick;
 
-    public AccountSwitcherAdapter(@NonNull Consumer<LocalAccount> onAccountClick) {
+    public AccountSwitcherAdapter(@NonNull Consumer<Account> onAccountClick) {
         this.onAccountClick = onAccountClick;
         setHasStableIds(true);
     }
@@ -46,7 +46,7 @@ public class AccountSwitcherAdapter extends RecyclerView.Adapter<AccountSwitcher
         return localAccounts.size();
     }
 
-    public void setLocalAccounts(@NonNull List<LocalAccount> localAccounts) {
+    public void setLocalAccounts(@NonNull List<Account> localAccounts) {
         this.localAccounts.clear();
         this.localAccounts.addAll(localAccounts);
         notifyDataSetChanged();

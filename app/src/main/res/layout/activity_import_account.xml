@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/spacer_2x">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:layout_above="@+id/welcome_text"
+            android:layout_gravity="center"
+            android:layout_marginBottom="32dp"
+            android:contentDescription="@null"
+            android:tint="@color/fg_secondary"
+            app:srcCompat="@drawable/ic_launcher_foreground_full" />
+
+        <TextView
+            android:id="@+id/welcome_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="48dp"
+            android:gravity="center_horizontal"
+            android:textSize="24sp"
+            tools:text="Welcome to Nextcloud Notes" />
+
+        <Button
+            android:id="@+id/add_button"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/welcome_text"
+            android:layout_centerHorizontal="true"
+            android:paddingStart="32dp"
+            android:paddingTop="24dp"
+            android:paddingEnd="32dp"
+            android:paddingBottom="24dp"
+            android:text="@string/choose_account"
+            app:backgroundTint="@color/defaultBrand" />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/add_button"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="32dp"
+            android:gravity="center_horizontal"
+            android:textAlignment="center"
+            android:textColor="@color/fg_secondary"
+            android:textSize="18sp"
+            tools:text="@string/you_have_to_be_connected_to_the_internet_in_order_to_add_an_account" />
+
+        <ProgressBar
+            android:id="@+id/progress_circular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/add_button"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="32dp"
+            android:indeterminateTint="@color/defaultBrand"
+            android:visibility="gone" />
+    </RelativeLayout>
+</ScrollView>

@@ -48,6 +48,10 @@
         </activity>
 
         <activity
+            android:name=".importaccount.ImportAccountActivity"
+            android:label="@string/add_account" />
+
+        <activity
             android:name=".AppendToNoteActivity"
             android:label="@string/append_to_note">
 

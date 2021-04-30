@@ -6,12 +6,14 @@
     <string name="label_all_notes">All notes</string>
     <string name="label_favorites">Favorites</string>
     <string name="action_create">New note</string>
+    <string name="welcome_text">Welcome to %1$s</string>
     <string name="action_settings">Settings</string>
     <string name="action_trashbin">Deleted notes</string>
     <string name="action_search">Search</string>
     <string name="action_sorting_method">Sorting method</string>
     <string name="simple_cancel">Cancel</string>
     <string name="simple_edit">Edit</string>
+    <string name="simple_remove">Remove</string>
     <string name="action_edit_save">Save</string>
     <string name="simple_about">About</string>
     <string name="simple_link">Link</string>
@@ -295,5 +297,13 @@
     <string name="error_action_open_network">Network settings</string>
     <string name="no_account_configured_yet">No account configured yet</string>
     <string name="no_other_accounts">You don\'t have configured any other accounts yet.</string>
+    <string name="choose_account">Choose account</string>
     <string name="context_based_formatting">Context based formatting popover</string>
+    <plurals name="remove_account_message">
+        <item quantity="one">Removing the account %1$s will also delete irrecoverable one unsynchronized change.</item>
+        <item quantity="other">Removing the account %1$s will also delete irrecoverable %2$d unsynchronized changes.</item>
+    </plurals>
+    <string name="remove_account">Remove %1$s</string>
+
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">You have to be connected to the internet in order to add an account.</string>
 </resources>

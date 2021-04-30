@@ -1,5 +1,7 @@
 package it.niedermann.owncloud.notes.shared.model;
 
+import androidx.annotation.NonNull;
+
 /**
  * Helps to distinguish between different local change types for Server Synchronization.
  * Created by stefan on 19.09.15.
@@ -24,27 +26,15 @@ public enum DBStatus {
      */
     LOCAL_DELETED("LOCAL_DELETED");
 
+    @NonNull
     private final String title;
 
+    @NonNull
     public String getTitle() {
         return title;
     }
 
-    DBStatus(String title) {
+    DBStatus(@NonNull String title) {
         this.title = title;
-    }
-
-    /**
-     * Parse a String an get the appropriate DBStatus enum element.
-     *
-     * @param str The String containing the DBStatus identifier. Must not null.
-     * @return The DBStatus fitting to the String.
-     */
-    public static DBStatus parse(String str) {
-        if (str.isEmpty()) {
-            return DBStatus.VOID;
-        } else {
-            return DBStatus.valueOf(str);
-        }
     }
 }

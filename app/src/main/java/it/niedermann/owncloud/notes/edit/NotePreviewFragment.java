@@ -24,11 +24,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
-import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.FragmentNotePreviewBinding;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.util.SSOUtil;
 
 import static androidx.core.view.ViewCompat.isAttachedToWindow;
@@ -41,6 +41,8 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     private String changedText;
 
     protected FragmentNotePreviewBinding binding;
+
+    private boolean noteLoaded = false;
 
     @Nullable
     private Runnable setScrollY;
@@ -96,20 +98,24 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        registerInternalNoteLinkHandler();
-        binding.singleNoteContent.setMarkdownString(note.getContent(), setScrollY);
-        binding.singleNoteContent.setMovementMethod(LinkMovementMethod.getInstance());
-        changedText = note.getContent();
-
-        db = NotesDatabase.getInstance(requireContext());
         binding.swiperefreshlayout.setOnRefreshListener(this);
+        registerInternalNoteLinkHandler();
+        binding.singleNoteContent.setMovementMethod(LinkMovementMethod.getInstance());
 
         final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireActivity().getApplicationContext());
         binding.singleNoteContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(requireContext(), sp));
         if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
             binding.singleNoteContent.setTypeface(Typeface.MONOSPACE);
         }
+    }
 
+    @Override
+    protected void onNoteLoaded(Note note) {
+        super.onNoteLoaded(note);
+        noteLoaded = true;
+        registerInternalNoteLinkHandler();
+        changedText = note.getContent();
+        binding.singleNoteContent.setMarkdownString(note.getContent(), setScrollY);
         binding.singleNoteContent.getMarkdownString().observe(requireActivity(), (newContent) -> {
             changedText = newContent.toString();
             saveNote(null);
@@ -119,7 +125,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     protected void registerInternalNoteLinkHandler() {
         binding.singleNoteContent.registerOnLinkClickCallback((link) -> {
             try {
-                final long noteLocalId = db.getLocalIdByRemoteId(this.note.getAccountId(), Long.parseLong(link));
+                final long noteLocalId = repo.getLocalIdByRemoteId(this.note.getAccountId(), Long.parseLong(link));
                 Log.i(TAG, "Found note for remoteId \"" + link + "\" in account \"" + this.note.getAccountId() + "\" with localId + \"" + noteLocalId + "\". Attempt to open " + EditNoteActivity.class.getSimpleName() + " for this note.");
                 startActivity(new Intent(requireActivity().getApplicationContext(), EditNoteActivity.class).putExtra(EditNoteActivity.PARAM_NOTE_ID, noteLocalId));
                 return true;
@@ -147,20 +153,24 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
 
     @Override
     public void onRefresh() {
-        if (db.getNoteServerSyncHelper().isSyncPossible() && SSOUtil.isConfigured(getContext())) {
+        if (noteLoaded && repo.isSyncPossible() && SSOUtil.isConfigured(getContext())) {
             binding.swiperefreshlayout.setRefreshing(true);
-            try {
-                SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext());
-                db.getNoteServerSyncHelper().addCallbackPull(ssoAccount, () -> {
-                    note = db.getNote(note.getAccountId(), note.getId());
-                    changedText = note.getContent();
-                    binding.singleNoteContent.setMarkdownString(note.getContent());
-                    binding.swiperefreshlayout.setRefreshing(false);
-                });
-                db.getNoteServerSyncHelper().scheduleSync(ssoAccount, false);
-            } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-                e.printStackTrace();
-            }
+            new Thread(() -> {
+                try {
+                    final Account account = repo.getAccountByName(SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext()).name);
+                    repo.addCallbackPull(account, () -> new Thread(() -> {
+                        note = repo.getNoteById(note.getId());
+                        changedText = note.getContent();
+                        requireActivity().runOnUiThread(() -> {
+                            binding.singleNoteContent.setMarkdownString(note.getContent());
+                            binding.swiperefreshlayout.setRefreshing(false);
+                        });
+                    }).start());
+                    repo.scheduleSync(account, false);
+                } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+                    e.printStackTrace();
+                }
+            }).start();
         } else {
             binding.swiperefreshlayout.setRefreshing(false);
             Toast.makeText(requireContext(), getString(R.string.error_sync, getString(R.string.error_no_network)), Toast.LENGTH_LONG).show();

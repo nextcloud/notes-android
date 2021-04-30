@@ -34,7 +34,7 @@
                     android:id="@+id/header_view"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/drawer_header_height"
-                    android:background="@color/defaultBrand">
+                    tools:background="@color/defaultBrand">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/logo"

@@ -22,12 +22,14 @@ import io.noties.markwon.Markwon;
 import io.noties.markwon.MarkwonPlugin;
 import io.noties.markwon.SoftBreakAddsNewLinePlugin;
 import io.noties.markwon.ext.strikethrough.StrikethroughPlugin;
+import io.noties.markwon.ext.tables.TableAwareMovementMethod;
 import io.noties.markwon.ext.tables.TablePlugin;
 import io.noties.markwon.ext.tasklist.TaskListPlugin;
 import io.noties.markwon.image.DefaultDownScalingMediaDecoder;
 import io.noties.markwon.image.ImagesPlugin;
 import io.noties.markwon.inlineparser.MarkwonInlineParserPlugin;
 import io.noties.markwon.linkify.LinkifyPlugin;
+import io.noties.markwon.movement.MovementMethodPlugin;
 import io.noties.markwon.simple.ext.SimpleExtPlugin;
 import io.noties.markwon.syntax.Prism4jTheme;
 import io.noties.markwon.syntax.Prism4jThemeDarkula;
@@ -86,6 +88,7 @@ public class MarkwonMarkdownViewer extends AppCompatTextView implements Markdown
                 .usePlugin(TablePlugin.create(context))
                 .usePlugin(TaskListPlugin.create(context))
                 .usePlugin(LinkifyPlugin.create(true))
+                .usePlugin(MovementMethodPlugin.create(TableAwareMovementMethod.create()))
                 .usePlugin(LinkClickInterceptorPlugin.create())
                 .usePlugin(ImagesPlugin.create(plugin -> plugin.defaultMediaDecoder(DefaultDownScalingMediaDecoder.create(context.getResources().getDisplayMetrics().widthPixels, 0))))
                 .usePlugin(SoftBreakAddsNewLinePlugin.create())

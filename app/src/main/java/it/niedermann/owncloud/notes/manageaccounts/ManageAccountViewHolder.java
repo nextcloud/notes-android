@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.manageaccounts;
 
+import android.graphics.Color;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.view.View;
@@ -15,7 +16,7 @@ import com.bumptech.glide.request.RequestOptions;
 import it.niedermann.nextcloud.sso.glide.SingleSignOnUrl;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemAccountChooseBinding;
-import it.niedermann.owncloud.notes.shared.model.LocalAccount;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -23,14 +24,14 @@ import static it.niedermann.owncloud.notes.branding.BrandingUtil.applyBrandToLay
 
 public class ManageAccountViewHolder extends RecyclerView.ViewHolder {
 
-    private ItemAccountChooseBinding binding;
+    private final ItemAccountChooseBinding binding;
 
     public ManageAccountViewHolder(@NonNull View itemView) {
         super(itemView);
         binding = ItemAccountChooseBinding.bind(itemView);
     }
 
-    public void bind(@NonNull LocalAccount localAccount, @NonNull Consumer<LocalAccount> onAccountClick, @Nullable Consumer<LocalAccount> onAccountDelete, boolean isCurrentAccount) {
+    public void bind(@NonNull Account localAccount, @NonNull Consumer<Account> onAccountClick, @Nullable Consumer<Account> onAccountDelete, boolean isCurrentAccount) {
         binding.accountName.setText(localAccount.getUserName());
         binding.accountHost.setText(Uri.parse(localAccount.getUrl()).getHost());
         Glide.with(itemView.getContext())

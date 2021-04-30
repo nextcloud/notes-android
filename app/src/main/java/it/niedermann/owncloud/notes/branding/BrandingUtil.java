@@ -16,8 +16,12 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.core.util.Pair;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
 import androidx.preference.PreferenceManager;
 
+import it.niedermann.android.sharedpreferences.SharedPreferenceIntLiveData;
 import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 
@@ -31,6 +35,44 @@ public class BrandingUtil {
 
     private BrandingUtil() {
 
+    }
+
+    public static LiveData<Pair<Integer, Integer>> readBrandColors(@NonNull Context context) {
+        return new BrandingLiveData(context);
+    }
+
+    private static class BrandingLiveData extends MediatorLiveData<Pair<Integer, Integer>> {
+        @ColorInt
+        Integer lastMainColor = null;
+        @ColorInt
+        Integer lastTextColor = null;
+
+        public BrandingLiveData(@NonNull Context context) {
+            addSource(readBrandMainColorLiveData(context), (nextMainColor) -> {
+                lastMainColor = nextMainColor;
+                if (lastTextColor != null) {
+                    postValue(new Pair<>(lastMainColor, lastTextColor));
+                }
+            });
+            addSource(readBrandTextColorLiveData(context), (nextTextColor) -> {
+                lastTextColor = nextTextColor;
+                if (lastMainColor != null) {
+                    postValue(new Pair<>(lastMainColor, lastTextColor));
+                }
+            });
+        }
+    }
+
+    public static LiveData<Integer> readBrandMainColorLiveData(@NonNull Context context) {
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+        Log.v(TAG, "--- Read: shared_preference_theme_main");
+        return new SharedPreferenceIntLiveData(sharedPreferences, pref_key_branding_main, context.getApplicationContext().getResources().getColor(R.color.defaultBrand));
+    }
+
+    public static LiveData<Integer> readBrandTextColorLiveData(@NonNull Context context) {
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+        Log.v(TAG, "--- Read: shared_preference_theme_text");
+        return new SharedPreferenceIntLiveData(sharedPreferences, pref_key_branding_text, Color.WHITE);
     }
 
     @ColorInt

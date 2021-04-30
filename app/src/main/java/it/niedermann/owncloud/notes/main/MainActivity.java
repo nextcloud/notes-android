@@ -1,15 +1,11 @@
 package it.niedermann.owncloud.notes.main;
 
 import android.animation.AnimatorInflater;
-import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Intent;
-import android.database.sqlite.SQLiteException;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -19,6 +15,7 @@ import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.SearchView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -26,7 +23,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.GravityCompat;
-import androidx.core.view.ViewCompat;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.selection.SelectionTracker;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -39,263 +39,310 @@ import com.google.android.material.snackbar.Snackbar;
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.AccountImportCancelledException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
-import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.exceptions.TokenMismatchException;
+import com.nextcloud.android.sso.exceptions.UnknownErrorException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
-import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
-import java.net.HttpURLConnection;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.Collection;
+import java.util.LinkedList;
 
-import it.niedermann.owncloud.notes.FormattingHelpActivity;
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.about.AboutActivity;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerListener;
 import it.niedermann.owncloud.notes.accountswitcher.AccountSwitcherDialog;
 import it.niedermann.owncloud.notes.accountswitcher.AccountSwitcherListener;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
-import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ActivityNotesListViewBinding;
 import it.niedermann.owncloud.notes.databinding.DrawerLayoutBinding;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
+import it.niedermann.owncloud.notes.edit.category.CategoryViewModel;
 import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
-import it.niedermann.owncloud.notes.main.NavigationAdapter.CategoryNavigationItem;
-import it.niedermann.owncloud.notes.main.NavigationAdapter.NavigationItem;
+import it.niedermann.owncloud.notes.exception.IntendedOfflineException;
+import it.niedermann.owncloud.notes.importaccount.ImportAccountActivity;
 import it.niedermann.owncloud.notes.main.items.ItemAdapter;
 import it.niedermann.owncloud.notes.main.items.grid.GridItemDecoration;
 import it.niedermann.owncloud.notes.main.items.list.NotesListViewItemTouchHelper;
 import it.niedermann.owncloud.notes.main.items.section.SectionItemDecoration;
+import it.niedermann.owncloud.notes.main.items.selection.ItemSelectionTracker;
+import it.niedermann.owncloud.notes.main.menu.MenuAdapter;
+import it.niedermann.owncloud.notes.main.navigation.NavigationAdapter;
+import it.niedermann.owncloud.notes.main.navigation.NavigationClickListener;
+import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesWorker;
-import it.niedermann.owncloud.notes.persistence.LoadNotesListTask;
-import it.niedermann.owncloud.notes.persistence.LoadNotesListTask.NotesLoadedListener;
-import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
-import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.preferences.PreferencesActivity;
+import it.niedermann.owncloud.notes.persistence.SSOClient;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
-import it.niedermann.owncloud.notes.shared.model.Category;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
-import it.niedermann.owncloud.notes.shared.model.DBNote;
-import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
-import it.niedermann.owncloud.notes.shared.model.Item;
-import it.niedermann.owncloud.notes.shared.model.LocalAccount;
+import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
+import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
+import static android.os.Build.VERSION.SDK_INT;
+import static android.os.Build.VERSION_CODES.O;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static it.niedermann.owncloud.notes.NotesApplication.isDarkThemeActive;
 import static it.niedermann.owncloud.notes.NotesApplication.isGridViewEnabled;
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.getSecondaryForegroundColorDependingOnTheme;
+import static it.niedermann.owncloud.notes.main.menu.MenuAdapter.SERVER_SETTINGS;
+import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.DEFAULT_CATEGORY;
+import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
+import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.RECENT;
+import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.UNCATEGORIZED;
 import static it.niedermann.owncloud.notes.shared.util.NotesColorUtil.contrastRatioIsSufficient;
 import static it.niedermann.owncloud.notes.shared.util.SSOUtil.askForNewAccount;
-import static java.util.Arrays.asList;
 
-public class MainActivity extends LockedActivity implements NoteClickListener, ViewProvider, AccountPickerListener, AccountSwitcherListener, CategoryDialogFragment.CategoryDialogListener {
+public class MainActivity extends LockedActivity implements NoteClickListener, AccountPickerListener, AccountSwitcherListener, CategoryDialogFragment.CategoryDialogListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
+
+    protected MainViewModel mainViewModel;
+    private CategoryViewModel categoryViewModel;
 
     private boolean gridView = true;
 
     public static final String CREATED_NOTE = "it.niedermann.owncloud.notes.created_notes";
     public static final String ADAPTER_KEY_RECENT = "recent";
     public static final String ADAPTER_KEY_STARRED = "starred";
-    public static final String ACTION_FAVORITES = "it.niedermann.owncloud.notes.favorites";
-    public static final String ACTION_RECENT = "it.niedermann.owncloud.notes.recent";
-
-    private static final String SAVED_STATE_NAVIGATION_SELECTION = "navigationSelection";
-    private static final String SAVED_STATE_NAVIGATION_ADAPTER_SLECTION = "navigationAdapterSelection";
-    private static final String SAVED_STATE_NAVIGATION_OPEN = "navigationOpen";
+    public static final String ADAPTER_KEY_UNCATEGORIZED = "uncategorized";
 
     private final static int create_note_cmd = 0;
     private final static int show_single_note_cmd = 1;
-    private final static int server_settings = 2;
-    private final static int about = 3;
-    public final static int manage_account = 4;
 
-    /**
-     * Used to detect the onResume() call after the import dialog has been displayed.
-     * https://github.com/stefan-niedermann/nextcloud-notes/pull/599/commits/f40eab402d122f113020200751894fa39c8b9fcc#r334239634
-     */
-    private boolean notAuthorizedAccountHandled = false;
+    protected ItemAdapter adapter;
+    private NavigationAdapter adapterCategories;
+    private MenuAdapter menuAdapter;
 
-    protected SingleSignOnAccount ssoAccount;
-    protected LocalAccount localAccount;
+    private SelectionTracker<Long> tracker;
+    private NotesListViewItemTouchHelper itemTouchHelper;
 
     protected DrawerLayoutBinding binding;
     protected ActivityNotesListViewBinding activityBinding;
-
+    protected FloatingActionButton fabCreate;
     private CoordinatorLayout coordinatorLayout;
     private SwipeRefreshLayout swipeRefreshLayout;
-    protected FloatingActionButton fabCreate;
     private RecyclerView listView;
-
-    protected ItemAdapter adapter;
-
-    protected NotesDatabase db = null;
-    private NavigationAdapter adapterCategories;
-    private NavigationItem itemRecent;
-    private NavigationItem itemFavorites;
-    private NavigationItem itemUncategorized;
-    @NonNull
-    private Category navigationSelection = new Category(null, null);
-    private String navigationOpen = "";
-    boolean canMoveNoteToAnotherAccounts = false;
     private ActionMode mActionMode;
-    private final ISyncCallback syncCallBack = () -> {
-        adapter.clearSelection(listView);
-        if (mActionMode != null) {
-            mActionMode.finish();
-        }
-        refreshLists();
-        swipeRefreshLayout.setRefreshing(false);
-    };
+
+    boolean canMoveNoteToAnotherAccounts = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
         CapabilitiesWorker.update(this);
         binding = DrawerLayoutBinding.inflate(getLayoutInflater());
         activityBinding = ActivityNotesListViewBinding.bind(binding.activityNotesListView.getRoot());
 
         setContentView(binding.getRoot());
+
         this.coordinatorLayout = binding.activityNotesListView.activityNotesListView;
         this.swipeRefreshLayout = binding.activityNotesListView.swiperefreshlayout;
         this.fabCreate = binding.activityNotesListView.fabCreate;
         this.listView = binding.activityNotesListView.recyclerView;
 
-        String categoryAdapterSelectedItem = ADAPTER_KEY_RECENT;
-        if (savedInstanceState == null) {
-            if (ACTION_RECENT.equals(getIntent().getAction())) {
-                categoryAdapterSelectedItem = ADAPTER_KEY_RECENT;
-            } else if (ACTION_FAVORITES.equals(getIntent().getAction())) {
-                categoryAdapterSelectedItem = ADAPTER_KEY_STARRED;
-                navigationSelection = new Category(null, true);
-            }
-        } else {
-            Object savedCategory = savedInstanceState.getSerializable(SAVED_STATE_NAVIGATION_SELECTION);
-            if (savedCategory != null) {
-                navigationSelection = (Category) savedCategory;
-            }
-            navigationOpen = savedInstanceState.getString(SAVED_STATE_NAVIGATION_OPEN);
-            categoryAdapterSelectedItem = savedInstanceState.getString(SAVED_STATE_NAVIGATION_ADAPTER_SLECTION);
-        }
-
-        db = NotesDatabase.getInstance(this);
-
         gridView = isGridViewEnabled();
+
         if (!gridView || isDarkThemeActive(this)) {
             activityBinding.activityNotesListView.setBackgroundColor(ContextCompat.getColor(this, R.color.primary));
         }
 
         setupToolbars();
-        setupNavigationList(categoryAdapterSelectedItem);
-        setupNavigationMenu();
+        setupNavigationList();
         setupNotesList();
 
-        new Thread(() -> canMoveNoteToAnotherAccounts = db.getAccountsCount() > 1).start();
+        mainViewModel.getAccountsCount().observe(this, (count) -> {
+            if (count == 0) {
+                startActivityForResult(new Intent(this, ImportAccountActivity.class), ImportAccountActivity.REQUEST_CODE_IMPORT_ACCOUNT);
+            } else {
+                new Thread(() -> {
+                    try {
+                        final Account account = mainViewModel.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
+                        runOnUiThread(() -> mainViewModel.postCurrentAccount(account));
+                    } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+                        runOnUiThread(() -> ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()));
+                    }
+                }).start();
+            }
+        });
+
+        mainViewModel.hasMultipleAccountsConfigured().observe(this, (hasMultipleAccountsConfigured) -> canMoveNoteToAnotherAccounts = hasMultipleAccountsConfigured);
+        mainViewModel.getSyncStatus().observe(this, (syncStatus) -> swipeRefreshLayout.setRefreshing(syncStatus));
+        mainViewModel.getSyncErrors().observe(this, (exceptions) -> BrandedSnackbar.make(coordinatorLayout, R.string.error_synchronization, Snackbar.LENGTH_LONG)
+                .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(exceptions)
+                        .show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()))
+                .show());
+        mainViewModel.getSelectedCategory().observe(this, (selectedCategory) -> {
+            binding.activityNotesListView.emptyContentView.getRoot().setVisibility(GONE);
+            adapter.setShowCategory(selectedCategory.getType() == RECENT || selectedCategory.getType() == FAVORITES);
+            fabCreate.show();
+
+            switch (selectedCategory.getType()) {
+                case RECENT: {
+                    activityBinding.searchText.setText(getString(R.string.search_in_all));
+                    break;
+                }
+                case FAVORITES: {
+                    activityBinding.searchText.setText(getString(R.string.search_in_category, getString(R.string.label_favorites)));
+                    break;
+                }
+                case UNCATEGORIZED: {
+                    activityBinding.searchText.setText(getString(R.string.search_in_category, getString(R.string.action_uncategorized)));
+                    break;
+                }
+                case DEFAULT_CATEGORY:
+                default: {
+                    final String category = selectedCategory.getCategory();
+                    if (category == null) {
+                        throw new IllegalStateException(NavigationCategory.class.getSimpleName() + " type is " + DEFAULT_CATEGORY + ", but category is null.");
+                    }
+                    activityBinding.searchText.setText(getString(R.string.search_in_category, NoteUtil.extendCategory(category)));
+                    break;
+                }
+            }
+
+            fabCreate.setOnClickListener((View view) -> {
+                Intent createIntent = new Intent(getApplicationContext(), EditNoteActivity.class);
+                createIntent.putExtra(EditNoteActivity.PARAM_CATEGORY, selectedCategory);
+                if (activityBinding.searchView.getQuery().length() > 0) {
+                    createIntent.putExtra(EditNoteActivity.PARAM_CONTENT, activityBinding.searchView.getQuery().toString());
+                    invalidateOptionsMenu();
+                }
+                startActivityForResult(createIntent, create_note_cmd);
+            });
+        });
+        mainViewModel.getNotesListLiveData().observe(this, notes -> {
+            // https://stackoverflow.com/a/37342327
+            itemTouchHelper.attachToRecyclerView(null);
+            itemTouchHelper.attachToRecyclerView(listView);
+            adapter.setItemList(notes);
+            binding.activityNotesListView.progressCircular.setVisibility(GONE);
+            binding.activityNotesListView.emptyContentView.getRoot().setVisibility(notes.size() > 0 ? GONE : VISIBLE);
+            // Remove deleted notes from the selection
+            if (tracker.hasSelection()) {
+                final Collection<Long> deletedNotes = new LinkedList<>();
+                for (Long id : tracker.getSelection()) {
+                    if (notes
+                            .stream()
+                            .filter(item -> !item.isSection())
+                            .map(item -> (Note) item)
+                            .noneMatch(item -> item.getId() == id)) {
+                        deletedNotes.add(id);
+                    }
+                }
+                for (Long id : deletedNotes) {
+                    tracker.deselect(id);
+                }
+            }
+        });
+        mainViewModel.getSearchTerm().observe(this, adapter::setHighlightSearchQuery);
+        mainViewModel.getCategorySortingMethodOfSelectedCategory().observe(this, methodOfCategory -> {
+            updateSortMethodIcon(methodOfCategory.second);
+            activityBinding.sortingMethod.setOnClickListener((v) -> {
+                if (methodOfCategory.first != null) {
+                    CategorySortingMethod newMethod = methodOfCategory.second;
+                    if (newMethod == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
+                        newMethod = CategorySortingMethod.SORT_MODIFIED_DESC;
+                    } else {
+                        newMethod = CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC;
+                    }
+                    final LiveData<Void> modifyLiveData = mainViewModel.modifyCategoryOrder(methodOfCategory.first, newMethod);
+                    modifyLiveData.observe(this, (next) -> modifyLiveData.removeObservers(this));
+                }
+            });
+        });
+        mainViewModel.getNavigationCategories().observe(this, navigationItems -> this.adapterCategories.setItems(navigationItems));
+        mainViewModel.getCurrentAccount().observe(this, (nextAccount) -> {
+            fabCreate.hide();
+            Glide
+                    .with(this)
+                    .load(nextAccount.getUrl() + "/index.php/avatar/" + Uri.encode(nextAccount.getUserName()) + "/64")
+                    .placeholder(R.drawable.ic_account_circle_grey_24dp)
+                    .error(R.drawable.ic_account_circle_grey_24dp)
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(activityBinding.launchAccountSwitcher);
+
+            mainViewModel.synchronizeNotes(nextAccount, new IResponseCallback<Void>() {
+                @Override
+                public void onSuccess(Void v) {
+                    Log.d(TAG, "Successfully synchronized notes for " + nextAccount.getAccountName());
+                }
+
+                @Override
+                public void onError(@NonNull Throwable t) {
+                    runOnUiThread(() -> {
+                        if (t.getClass() == IntendedOfflineException.class || t instanceof IntendedOfflineException) {
+                            Log.i(TAG, "Capabilities and notes not updated because " + nextAccount.getAccountName() + " is offline by intention.");
+                        } else {
+                            BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
+                        }
+                    });
+                }
+            });
+            fabCreate.show();
+            activityBinding.launchAccountSwitcher.setOnClickListener((v) -> AccountSwitcherDialog.newInstance(nextAccount.getId()).show(getSupportFragmentManager(), AccountSwitcherDialog.class.getSimpleName()));
+
+            if (menuAdapter == null) {
+                menuAdapter = new MenuAdapter(getApplicationContext(), nextAccount, (menuItem) -> {
+                    @Nullable Integer resultCode = menuItem.getResultCode();
+                    if (resultCode == null) {
+                        startActivity(menuItem.getIntent());
+                    } else {
+                        startActivityForResult(menuItem.getIntent(), menuItem.getResultCode());
+                    }
+                });
+
+                binding.navigationMenu.setAdapter(menuAdapter);
+            } else {
+                menuAdapter.updateAccount(nextAccount);
+            }
+        });
     }
 
     @Override
     protected void onResume() {
-        try {
-            ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
-            if (localAccount == null || !localAccount.getAccountName().equals(ssoAccount.name)) {
-                selectAccount(ssoAccount.name);
-            }
-        } catch (NoCurrentAccountSelectedException | NextcloudFilesAppAccountNotFoundException e) {
-            if (localAccount == null) {
-                List<LocalAccount> localAccounts = db.getAccounts();
-                if (localAccounts.size() > 0) {
-                    localAccount = localAccounts.get(0);
+        final LiveData<Account> accountLiveData = mainViewModel.getCurrentAccount();
+        accountLiveData.observe(this, (currentAccount) -> {
+            accountLiveData.removeObservers(this);
+            mainViewModel.synchronizeNotes(currentAccount, new IResponseCallback<Void>() {
+                @Override
+                public void onSuccess(Void v) {
+                    Log.d(TAG, "Successfully synchronized notes for " + currentAccount.getAccountName());
                 }
-            }
-            if (!notAuthorizedAccountHandled) {
-                handleNotAuthorizedAccount();
-            }
-        }
 
-        // refresh and sync every time the activity gets
-        refreshLists();
-        if (localAccount != null) {
-            synchronize();
-            db.getNoteServerSyncHelper().addCallbackPull(ssoAccount, syncCallBack);
-        }
+                @Override
+                public void onError(@NonNull Throwable t) {
+                    t.printStackTrace();
+                }
+            });
+        });
         super.onResume();
     }
 
     @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (localAccount != null) {
-            outState.putSerializable(SAVED_STATE_NAVIGATION_SELECTION, navigationSelection);
-            outState.putString(SAVED_STATE_NAVIGATION_ADAPTER_SLECTION, adapterCategories.getSelectedItem());
-            outState.putString(SAVED_STATE_NAVIGATION_OPEN, navigationOpen);
-        }
-    }
-
-    private void selectAccount(String accountName) {
-        fabCreate.hide();
-        SingleAccountHelper.setCurrentAccount(getApplicationContext(), accountName);
-        localAccount = db.getLocalAccountByAccountName(accountName);
-        if (localAccount != null) {
-            try {
-                BrandingUtil.saveBrandColors(this, localAccount.getColor(), localAccount.getTextColor());
-                ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
-                new NotesListViewItemTouchHelper(ssoAccount, this, db, adapter, syncCallBack, this::refreshLists, swipeRefreshLayout, this, gridView)
-                        .attachToRecyclerView(listView);
-                synchronize();
-            } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-                Log.i(TAG, "Tried to select account, but got an " + e.getClass().getSimpleName() + ". Asking for importing an account...");
-                handleNotAuthorizedAccount();
-            }
-            refreshLists();
-            fabCreate.show();
-            activityBinding.launchAccountSwitcher.setOnClickListener((v) -> {
-                if (localAccount == null) {
-                    handleNotAuthorizedAccount();
-                } else {
-                    AccountSwitcherDialog.newInstance(localAccount.getId()).show(getSupportFragmentManager(), AccountSwitcherDialog.class.getSimpleName());
-                }
-            });
-            setupNavigationList(ADAPTER_KEY_RECENT);
-        } else {
-            if (!notAuthorizedAccountHandled) {
-                handleNotAuthorizedAccount();
-            }
-            binding.navigationList.setAdapter(null);
-        }
-        updateCurrentAccountAvatar();
-    }
-
-    private void handleNotAuthorizedAccount() {
-        fabCreate.hide();
-        swipeRefreshLayout.setRefreshing(false);
-        askForNewAccount(this);
-        notAuthorizedAccountHandled = true;
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mainViewModel.restoreInstanceState();
     }
 
     private void setupToolbars() {
         setSupportActionBar(binding.activityNotesListView.toolbar);
-        updateCurrentAccountAvatar();
         activityBinding.homeToolbar.setOnClickListener((v) -> {
             if (activityBinding.toolbar.getVisibility() == GONE) {
                 updateToolbars(false);
             }
         });
 
-        activityBinding.launchAccountSwitcher.setOnClickListener((v) -> askForNewAccount(this));
         activityBinding.menuButton.setOnClickListener((v) -> binding.drawerLayout.openDrawer(GravityCompat.START));
 
-        final LinearLayout searchEditFrame = activityBinding.searchView.findViewById(R.id
-                .search_edit_frame);
+        final LinearLayout searchEditFrame = activityBinding.searchView.findViewById(R.id.search_edit_frame);
 
         searchEditFrame.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             int oldVisibility = -1;
@@ -331,16 +378,39 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                refreshLists();
+                mainViewModel.postSearchTerm(newText);
                 return true;
             }
         });
     }
 
     private void setupNotesList() {
-        initRecyclerView();
+        adapter = new ItemAdapter(this, gridView);
+        listView.setAdapter(adapter);
+        listView.setItemAnimator(null);
+        if (gridView) {
+            int spanCount = getResources().getInteger(R.integer.grid_view_span_count);
+            StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL);
+            listView.setLayoutManager(gridLayoutManager);
+            listView.addItemDecoration(new GridItemDecoration(adapter, spanCount,
+                    getResources().getDimensionPixelSize(R.dimen.spacer_3x),
+                    getResources().getDimensionPixelSize(R.dimen.spacer_5x),
+                    getResources().getDimensionPixelSize(R.dimen.spacer_3x),
+                    getResources().getDimensionPixelSize(R.dimen.spacer_1x),
+                    getResources().getDimensionPixelSize(R.dimen.spacer_activity_sides) + getResources().getDimensionPixelSize(R.dimen.spacer_1x)
+            ));
+        } else {
+            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+            listView.setLayoutManager(layoutManager);
+            listView.addItemDecoration(new SectionItemDecoration(adapter,
+                    getResources().getDimensionPixelSize(R.dimen.spacer_activity_sides) + getResources().getDimensionPixelSize(R.dimen.spacer_1x) + getResources().getDimensionPixelSize(R.dimen.spacer_3x) + getResources().getDimensionPixelSize(R.dimen.spacer_2x),
+                    getResources().getDimensionPixelSize(R.dimen.spacer_5x),
+                    getResources().getDimensionPixelSize(R.dimen.spacer_1x),
+                    0
+            ));
+        }
 
-        ((RecyclerView) findViewById(R.id.recycler_view)).addOnScrollListener(new RecyclerView.OnScrollListener() {
+        listView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 if (dy > 0)
@@ -351,74 +421,65 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         });
 
         swipeRefreshLayout.setOnRefreshListener(() -> {
-            if (ssoAccount == null) {
-                swipeRefreshLayout.setRefreshing(false);
-                askForNewAccount(this);
-            } else {
-                Log.i(TAG, "Clearing Glide memory cache");
-                Glide.get(this).clearMemory();
-                new Thread(() -> {
-                    Log.i(TAG, "Clearing Glide disk cache");
-                    Glide.get(getApplicationContext()).clearDiskCache();
-                }).start();
-                new Thread(() -> {
-                    Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
-                    final Capabilities capabilities;
-                    try {
-                        capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, localAccount.getCapabilitiesETag());
-                        db.updateCapabilitiesETag(localAccount.getId(), capabilities.getETag());
-                        db.updateBrand(localAccount.getId(), capabilities);
-                        db.updateBrand(localAccount.getId(), capabilities);
-                        localAccount.setColor(Color.parseColor(capabilities.getColor()));
-                        localAccount.setTextColor(Color.parseColor(capabilities.getTextColor()));
-                        BrandingUtil.saveBrandColors(this, localAccount.getColor(), localAccount.getTextColor());
-                        db.updateApiVersion(localAccount.getId(), capabilities.getApiVersion());
-                        Log.i(TAG, capabilities.toString());
-                    } catch (Exception e) {
-                        if (e instanceof NextcloudHttpRequestFailedException && ((NextcloudHttpRequestFailedException) e).getStatusCode() == HttpURLConnection.HTTP_NOT_MODIFIED) {
-                            Log.i(TAG, "Capabilities not modified.");
-                        } else {
-                            e.printStackTrace();
-                        }
-                    } finally {
-                        // Even if the capabilities endpoint makes trouble, we can still try to synchronize the notes
-                        synchronize();
+            Log.i(TAG, "Clearing Glide memory cache");
+            Glide.get(this).clearMemory();
+            new Thread(() -> {
+                Log.i(TAG, "Clearing Glide disk cache");
+                Glide.get(getApplicationContext()).clearDiskCache();
+            }, "CLEAR_GLIDE_CACHE").start();
+            final LiveData<Account> syncLiveData = mainViewModel.getCurrentAccount();
+            final Observer<Account> syncObserver = currentAccount -> {
+                syncLiveData.removeObservers(this);
+                mainViewModel.synchronizeCapabilitiesAndNotes(currentAccount, new IResponseCallback<Void>() {
+                    @Override
+                    public void onSuccess(Void v) {
+                        Log.d(TAG, "Successfully synchronized capabilities and notes for " + currentAccount.getAccountName());
                     }
-                }).start();
-            }
+
+                    @Override
+                    public void onError(@NonNull Throwable t) {
+                        runOnUiThread(() -> {
+                            swipeRefreshLayout.setRefreshing(false);
+                            if (t.getClass() == IntendedOfflineException.class || t instanceof IntendedOfflineException) {
+                                Log.i(TAG, "Capabilities and notes not updated because " + currentAccount.getAccountName() + " is offline by intention.");
+                            } else {
+                                BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                });
+            };
+            syncLiveData.observe(this, syncObserver);
         });
 
-        // Floating Action Button
-        fabCreate.setOnClickListener((View view) -> {
-            Intent createIntent = new Intent(getApplicationContext(), EditNoteActivity.class);
-            createIntent.putExtra(EditNoteActivity.PARAM_CATEGORY, navigationSelection);
-            if (activityBinding.searchView.getQuery().length() > 0) {
-                createIntent.putExtra(EditNoteActivity.PARAM_CONTENT, activityBinding.searchView.getQuery().toString());
-                invalidateOptionsMenu();
-            }
-            startActivityForResult(createIntent, create_note_cmd);
-        });
+        tracker = ItemSelectionTracker.build(listView, adapter);
+        adapter.setTracker(tracker);
+        tracker.addObserver(new SelectionTracker.SelectionObserver<Long>() {
+                                @Override
+                                public void onSelectionChanged() {
+                                    super.onSelectionChanged();
+                                    if (tracker.hasSelection() && mActionMode == null) {
+                                        mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(MainActivity.this, coordinatorLayout, mainViewModel, MainActivity.this, canMoveNoteToAnotherAccounts, tracker, getSupportFragmentManager()));
+                                    }
+                                    if (mActionMode != null) {
+                                        if (tracker.hasSelection()) {
+                                            int selected = tracker.getSelection().size();
+                                            mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, selected, selected));
+                                        } else {
+                                            mActionMode.finish();
+                                            mActionMode = null;
+                                        }
+                                    }
+                                }
+                            }
+        );
 
-        activityBinding.sortingMethod.setOnClickListener((v) -> {
-            CategorySortingMethod method;
-
-            method = db.getCategoryOrder(localAccount.getId(), navigationSelection);
-
-            if (method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
-                method = CategorySortingMethod.SORT_MODIFIED_DESC;
-            } else {
-                method = CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC;
-            }
-            db.modifyCategoryOrder(localAccount.getId(), navigationSelection, method);
-            refreshLists();
-            updateSortMethodIcon(localAccount.getId());
-        });
+        itemTouchHelper = new NotesListViewItemTouchHelper(this, mainViewModel, this, tracker, adapter, swipeRefreshLayout, coordinatorLayout, gridView);
+        itemTouchHelper.attachToRecyclerView(listView);
     }
 
-    private void setupNavigationList(final String selectedItem) {
-        itemRecent = new NavigationItem(ADAPTER_KEY_RECENT, getString(R.string.label_all_notes), null, R.drawable.ic_access_time_grey600_24dp);
-        itemFavorites = new NavigationItem(ADAPTER_KEY_STARRED, getString(R.string.label_favorites), null, R.drawable.ic_star_yellow_24dp);
-        adapterCategories = new NavigationAdapter(this, new NavigationAdapter.ClickListener() {
+    private void setupNavigationList() {
+        adapterCategories = new NavigationAdapter(this, new NavigationClickListener() {
             @Override
             public void onItemClick(NavigationItem item) {
                 selectItem(item, true);
@@ -427,52 +488,56 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             private void selectItem(NavigationItem item, boolean closeNavigation) {
                 adapterCategories.setSelectedItem(item.id);
                 // update current selection
-                if (itemRecent.equals(item)) {
-                    navigationSelection = new Category(null, null);
-                } else if (itemFavorites.equals(item)) {
-                    navigationSelection = new Category(null, true);
-                } else if (itemUncategorized != null && itemUncategorized.equals(item)) {
-                    navigationSelection = new Category("", null);
-                } else {
-                    navigationSelection = new Category(item.label, null);
-                }
-
-                // auto-close sub-folder in Navigation if selection is outside of that folder
-                if (navigationOpen != null) {
-                    int slashIndex = navigationSelection.category == null ? -1 : navigationSelection.category.indexOf('/');
-                    String rootCategory = slashIndex < 0 ? navigationSelection.category : navigationSelection.category.substring(0, slashIndex);
-                    if (!navigationOpen.equals(rootCategory)) {
-                        navigationOpen = null;
+                if (item.type != null) {
+                    switch (item.type) {
+                        case RECENT: {
+                            mainViewModel.postSelectedCategory(new NavigationCategory(RECENT));
+                            break;
+                        }
+                        case FAVORITES: {
+                            mainViewModel.postSelectedCategory(new NavigationCategory(FAVORITES));
+                            break;
+                        }
+                        case UNCATEGORIZED: {
+                            mainViewModel.postSelectedCategory(new NavigationCategory(UNCATEGORIZED));
+                            break;
+                        }
+                        default: {
+                            if (item.getClass() == NavigationItem.CategoryNavigationItem.class) {
+                                mainViewModel.postSelectedCategory(new NavigationCategory(((NavigationItem.CategoryNavigationItem) item).accountId, ((NavigationItem.CategoryNavigationItem) item).category));
+                            } else {
+                                throw new IllegalStateException(NavigationItem.class.getSimpleName() + " type is " + DEFAULT_CATEGORY + ", but item is not of type " + NavigationItem.CategoryNavigationItem.class.getSimpleName() + ".");
+                            }
+                        }
                     }
+                } else {
+                    Log.e(TAG, "Unknown item navigation type. Fallback to show " + RECENT);
+                    mainViewModel.postSelectedCategory(new NavigationCategory(RECENT));
                 }
 
-                // update views
                 if (closeNavigation) {
                     binding.drawerLayout.closeDrawer(GravityCompat.START);
                 }
-                refreshLists(true);
             }
 
             @Override
             public void onIconClick(NavigationItem item) {
-                if (item.icon == NavigationAdapter.ICON_MULTIPLE && !item.label.equals(navigationOpen)) {
-                    navigationOpen = item.label;
-                    selectItem(item, false);
-                } else if (item.icon == NavigationAdapter.ICON_MULTIPLE || item.icon == NavigationAdapter.ICON_MULTIPLE_OPEN && item.label.equals(navigationOpen)) {
-                    navigationOpen = null;
-                    refreshLists();
-                } else {
-                    onItemClick(item);
-                }
+                final LiveData<String> expandedCategoryLiveData = mainViewModel.getExpandedCategory();
+                expandedCategoryLiveData.observe(MainActivity.this, expandedCategory -> {
+                    if (item.icon == NavigationAdapter.ICON_MULTIPLE && !item.label.equals(expandedCategory)) {
+                        mainViewModel.postExpandedCategory(item.label);
+                        selectItem(item, false);
+                    } else if (item.icon == NavigationAdapter.ICON_MULTIPLE || item.icon == NavigationAdapter.ICON_MULTIPLE_OPEN && item.label.equals(expandedCategory)) {
+                        mainViewModel.postExpandedCategory(null);
+                    } else {
+                        onItemClick(item);
+                    }
+                    expandedCategoryLiveData.removeObservers(MainActivity.this);
+                });
             }
         });
-        adapterCategories.setSelectedItem(selectedItem);
+        adapterCategories.setSelectedItem(ADAPTER_KEY_RECENT);
         binding.navigationList.setAdapter(adapterCategories);
-    }
-
-    @Override
-    public CoordinatorLayout getView() {
-        return this.coordinatorLayout;
     }
 
     @Override
@@ -504,217 +569,20 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         }
     }
 
-    private class LoadCategoryListTask extends AsyncTask<Void, Void, List<NavigationItem>> {
-        @Override
-        protected List<NavigationItem> doInBackground(Void... voids) {
-            if (localAccount == null) {
-                return new ArrayList<>();
-            }
-            List<CategoryNavigationItem> categories = db.getCategories(localAccount.getId());
-            if (!categories.isEmpty() && categories.get(0).label.isEmpty()) {
-                itemUncategorized = categories.get(0);
-                itemUncategorized.label = getString(R.string.action_uncategorized);
-                itemUncategorized.icon = NavigationAdapter.ICON_NOFOLDER;
-            } else {
-                itemUncategorized = null;
-            }
-
-            Map<String, Integer> favorites = db.getFavoritesCount(localAccount.getId());
-            //noinspection ConstantConditions
-            int numFavorites = favorites.containsKey("1") ? favorites.get("1") : 0;
-            //noinspection ConstantConditions
-            int numNonFavorites = favorites.containsKey("0") ? favorites.get("0") : 0;
-            itemFavorites.count = numFavorites;
-            itemRecent.count = numFavorites + numNonFavorites;
-
-            ArrayList<NavigationItem> items = new ArrayList<>();
-            items.add(itemRecent);
-            items.add(itemFavorites);
-            NavigationItem lastPrimaryCategory = null;
-            NavigationItem lastSecondaryCategory = null;
-            for (NavigationItem item : categories) {
-                int slashIndex = item.label.indexOf('/');
-                String currentPrimaryCategory = slashIndex < 0 ? item.label : item.label.substring(0, slashIndex);
-                String currentSecondaryCategory = null;
-                boolean isCategoryOpen = currentPrimaryCategory.equals(navigationOpen);
-
-                if (isCategoryOpen && !currentPrimaryCategory.equals(item.label)) {
-                    String currentCategorySuffix = item.label.substring(navigationOpen.length() + 1);
-                    int subSlashIndex = currentCategorySuffix.indexOf('/');
-                    currentSecondaryCategory = subSlashIndex < 0 ? currentCategorySuffix : currentCategorySuffix.substring(0, subSlashIndex);
-                }
-
-                boolean belongsToLastPrimaryCategory = lastPrimaryCategory != null && currentPrimaryCategory.equals(lastPrimaryCategory.label);
-                boolean belongsToLastSecondaryCategory = belongsToLastPrimaryCategory && lastSecondaryCategory != null && lastSecondaryCategory.label.equals(currentPrimaryCategory + "/" + currentSecondaryCategory);
-
-                if (isCategoryOpen && !belongsToLastPrimaryCategory && currentSecondaryCategory != null) {
-                    lastPrimaryCategory = new NavigationItem("category:" + currentPrimaryCategory, currentPrimaryCategory, 0, NavigationAdapter.ICON_MULTIPLE_OPEN);
-                    items.add(lastPrimaryCategory);
-                    belongsToLastPrimaryCategory = true;
-                }
-
-                if (belongsToLastPrimaryCategory && belongsToLastSecondaryCategory) {
-                    lastSecondaryCategory.count += item.count;
-                    lastSecondaryCategory.icon = NavigationAdapter.ICON_SUB_MULTIPLE;
-                } else if (belongsToLastPrimaryCategory) {
-                    if (isCategoryOpen) {
-                        item.label = currentPrimaryCategory + "/" + currentSecondaryCategory;
-                        item.id = "category:" + item.label;
-                        item.icon = NavigationAdapter.ICON_SUB_FOLDER;
-                        items.add(item);
-                        lastSecondaryCategory = item;
-                    } else {
-                        lastPrimaryCategory.count += item.count;
-                        lastPrimaryCategory.icon = NavigationAdapter.ICON_MULTIPLE;
-                        lastSecondaryCategory = null;
-                    }
-                } else {
-                    if (isCategoryOpen) {
-                        item.icon = NavigationAdapter.ICON_MULTIPLE_OPEN;
-                    } else {
-                        item.label = currentPrimaryCategory;
-                        item.id = "category:" + item.label;
-                    }
-                    items.add(item);
-                    lastPrimaryCategory = item;
-                    lastSecondaryCategory = null;
-                }
-            }
-            return items;
-        }
-
-        @Override
-        protected void onPostExecute(List<NavigationItem> items) {
-            adapterCategories.setItems(items);
-        }
-    }
-
-    private void setupNavigationMenu() {
-        final NavigationItem itemFormattingHelp = new NavigationItem("formattingHelp", getString(R.string.action_formatting_help), null, R.drawable.ic_baseline_help_outline_24);
-        final NavigationItem itemTrashbin = new NavigationItem("trashbin", getString(R.string.action_trashbin), null, R.drawable.ic_delete_grey600_24dp);
-        final NavigationItem itemSettings = new NavigationItem("settings", getString(R.string.action_settings), null, R.drawable.ic_settings_grey600_24dp);
-        final NavigationItem itemAbout = new NavigationItem("about", getString(R.string.simple_about), null, R.drawable.ic_info_outline_grey600_24dp);
-
-        NavigationAdapter adapterMenu = new NavigationAdapter(this, new NavigationAdapter.ClickListener() {
-            @Override
-            public void onItemClick(NavigationItem item) {
-                if (itemFormattingHelp.equals(item)) {
-                    Intent formattingHelpIntent = new Intent(getApplicationContext(), FormattingHelpActivity.class);
-                    startActivity(formattingHelpIntent);
-                } else if (itemSettings.equals(item)) {
-                    Intent settingsIntent = new Intent(getApplicationContext(), PreferencesActivity.class);
-                    startActivityForResult(settingsIntent, server_settings);
-                } else if (itemAbout.equals(item)) {
-                    Intent aboutIntent = new Intent(getApplicationContext(), AboutActivity.class);
-                    startActivityForResult(aboutIntent, about);
-                } else if (itemTrashbin.equals(item) && localAccount != null) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(localAccount.getUrl() + "/index.php/apps/files/?dir=/&view=trashbin")));
-                }
-            }
-
-            @Override
-            public void onIconClick(NavigationItem item) {
-                onItemClick(item);
-            }
-        });
-        adapterMenu.setItems(asList(itemFormattingHelp, itemTrashbin, itemSettings, itemAbout));
-        binding.navigationMenu.setAdapter(adapterMenu);
-    }
-
-    private void initRecyclerView() {
-        adapter = new ItemAdapter(this, gridView);
-        listView.setAdapter(adapter);
-
-        if (gridView) {
-            int spanCount = getResources().getInteger(R.integer.grid_view_span_count);
-            StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL);
-            listView.setLayoutManager(gridLayoutManager);
-            listView.addItemDecoration(new GridItemDecoration(adapter, spanCount,
-                    getResources().getDimensionPixelSize(R.dimen.spacer_3x),
-                    getResources().getDimensionPixelSize(R.dimen.spacer_5x),
-                    getResources().getDimensionPixelSize(R.dimen.spacer_3x),
-                    getResources().getDimensionPixelSize(R.dimen.spacer_1x),
-                    getResources().getDimensionPixelSize(R.dimen.spacer_activity_sides) + getResources().getDimensionPixelSize(R.dimen.spacer_1x)
-            ));
-        } else {
-            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-            listView.setLayoutManager(layoutManager);
-            listView.addItemDecoration(new SectionItemDecoration(adapter,
-                    getResources().getDimensionPixelSize(R.dimen.spacer_activity_sides) + getResources().getDimensionPixelSize(R.dimen.spacer_1x) + getResources().getDimensionPixelSize(R.dimen.spacer_3x) + getResources().getDimensionPixelSize(R.dimen.spacer_2x),
-                    getResources().getDimensionPixelSize(R.dimen.spacer_5x),
-                    getResources().getDimensionPixelSize(R.dimen.spacer_1x),
-                    0
-            ));
-        }
-    }
-
-    private void refreshLists() {
-        refreshLists(false);
-    }
-
-    private void refreshLists(final boolean scrollToTop) {
-        if (localAccount == null) {
-            fabCreate.hide();
-            adapter.removeAll();
-            return;
-        }
-        View emptyContentView = binding.activityNotesListView.emptyContentView.getRoot();
-        emptyContentView.setVisibility(GONE);
-        binding.activityNotesListView.progressCircular.setVisibility(VISIBLE);
-        fabCreate.show();
-        String subtitle;
-        if (navigationSelection.category != null) {
-            if (navigationSelection.category.isEmpty()) {
-                subtitle = getString(R.string.search_in_category, getString(R.string.action_uncategorized));
-            } else {
-                subtitle = getString(R.string.search_in_category, NoteUtil.extendCategory(navigationSelection.category));
-            }
-        } else if (navigationSelection.favorite != null && navigationSelection.favorite) {
-            subtitle = getString(R.string.search_in_category, getString(R.string.label_favorites));
-        } else {
-            subtitle = getString(R.string.search_in_all);
-        }
-        activityBinding.searchText.setText(subtitle);
-        CharSequence query = null;
-        if (activityBinding.searchView.getQuery().length() != 0) {
-            query = activityBinding.searchView.getQuery();
-        }
-
-        NotesLoadedListener callback = (List<Item> notes, boolean showCategory, CharSequence searchQuery) -> {
-            adapter.setShowCategory(showCategory);
-            adapter.setHighlightSearchQuery(searchQuery);
-            adapter.setItemList(notes);
-            binding.activityNotesListView.progressCircular.setVisibility(GONE);
-            if (notes.size() > 0) {
-                emptyContentView.setVisibility(GONE);
-            } else {
-                emptyContentView.setVisibility(VISIBLE);
-            }
-            if (scrollToTop) {
-                listView.scrollToPosition(0);
-            }
-        };
-        new LoadNotesListTask(localAccount.getId(), getApplicationContext(), callback, navigationSelection, query).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-        new LoadCategoryListTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-
-        updateSortMethodIcon(localAccount.getId());
-    }
-
     /**
      * Updates sorting method icon.
      */
-    private void updateSortMethodIcon(long localAccountId) {
-        CategorySortingMethod method = db.getCategoryOrder(localAccountId, navigationSelection);
+    private void updateSortMethodIcon(CategorySortingMethod method) {
         if (method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
             activityBinding.sortingMethod.setImageResource(R.drawable.alphabetical_asc);
             activityBinding.sortingMethod.setContentDescription(getString(R.string.sort_last_modified));
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (SDK_INT >= O) {
                 activityBinding.sortingMethod.setTooltipText(getString(R.string.sort_last_modified));
             }
         } else {
             activityBinding.sortingMethod.setImageResource(R.drawable.modification_desc);
             activityBinding.sortingMethod.setContentDescription(getString(R.string.sort_alphabetically));
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (SDK_INT >= O) {
                 activityBinding.sortingMethod.setTooltipText(getString(R.string.sort_alphabetically));
             }
         }
@@ -747,36 +615,13 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
 
         switch (requestCode) {
             case create_note_cmd: {
-                // Make sure the request was successful
-                if (resultCode == RESULT_OK) {
-                    //not need because of db.synchronisation in createActivity
-
-                    Bundle bundle = data.getExtras();
-                    if (bundle != null && bundle.containsKey(CREATED_NOTE)) {
-                        DBNote createdNote = (DBNote) bundle.getSerializable(CREATED_NOTE);
-                        if (createdNote != null) {
-                            adapter.add(createdNote);
-                        } else {
-                            Log.w(TAG, "createdNote must not be null");
-                        }
-                    } else {
-                        Log.w(TAG, "Provide at least " + CREATED_NOTE);
-                    }
-                }
                 listView.scrollToPosition(0);
                 break;
             }
-            case server_settings: {
+            case SERVER_SETTINGS: {
                 // Recreate activity completely, because theme switching makes problems when only invalidating the views.
                 // @see https://github.com/stefan-niedermann/nextcloud-notes/issues/529
                 ActivityCompat.recreate(this);
-                break;
-            }
-            case manage_account: {
-                if (resultCode == RESULT_FIRST_USER) {
-                    selectAccount(null);
-                }
-                new Thread(() -> canMoveNoteToAnotherAccounts = db.getAccountsCount() > 1).start();
                 break;
             }
             default: {
@@ -788,22 +633,34 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                             try {
                                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
                                 final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, null);
-                                db.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities);
-                                new Thread(() -> canMoveNoteToAnotherAccounts = db.getAccountsCount() > 1).start();
-                                Log.i(TAG, capabilities.toString());
-                                runOnUiThread(() -> selectAccount(ssoAccount.name));
-                            } catch (SQLiteException e) {
-                                // Happens when upgrading from version ≤ 1.0.1 and importing the account
-                                runOnUiThread(() -> selectAccount(ssoAccount.name));
+                                mainViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities, new IResponseCallback<Account>() {
+                                    @Override
+                                    public void onSuccess(Account result) {
+                                        new Thread(() -> {
+                                            Log.i(TAG, capabilities.toString());
+                                            final Account a = mainViewModel.getLocalAccountByAccountName(ssoAccount.name);
+                                            runOnUiThread(() -> mainViewModel.postCurrentAccount(a));
+                                        }).start();
+                                    }
+
+                                    @Override
+                                    public void onError(@NonNull Throwable t) {
+                                        runOnUiThread(() -> ExceptionDialogFragment.newInstance(t).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()));
+                                    }
+                                });
                             } catch (Exception e) {
+                                SSOClient.invalidateAPICache(ssoAccount);
                                 // Happens when importing an already existing account the second time
-                                if (e instanceof TokenMismatchException && db.getLocalAccountByAccountName(ssoAccount.name) != null) {
+                                if (e instanceof TokenMismatchException && mainViewModel.getLocalAccountByAccountName(ssoAccount.name) != null) {
                                     Log.w(TAG, "Received " + TokenMismatchException.class.getSimpleName() + " and the given ssoAccount.name (" + ssoAccount.name + ") does already exist in the database. Assume that this account has already been imported.");
                                     runOnUiThread(() -> {
-                                        selectAccount(ssoAccount.name);
+                                        mainViewModel.postCurrentAccount(mainViewModel.getLocalAccountByAccountName(ssoAccount.name));
                                         // TODO there is already a sync in progress and results in displaying a TokenMissMatchException snackbar which conflicts with this one
                                         coordinatorLayout.post(() -> BrandedSnackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show());
                                     });
+                                } else if (e instanceof UnknownErrorException && e.getMessage().contains("No address associated with hostname")) {
+                                    // https://github.com/stefan-niedermann/nextcloud-notes/issues/1014
+                                    runOnUiThread(() -> Snackbar.make(coordinatorLayout, R.string.you_have_to_be_connected_to_the_internet_in_order_to_add_an_account, Snackbar.LENGTH_LONG).show());
                                 } else {
                                     e.printStackTrace();
                                     runOnUiThread(() -> {
@@ -821,48 +678,11 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         }
     }
 
-    private void updateCurrentAccountAvatar() {
-        try {
-            String url = localAccount.getUrl();
-            if (url != null) {
-                Glide
-                        .with(this)
-                        .load(url + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64")
-                        .placeholder(R.drawable.ic_account_circle_grey_24dp)
-                        .error(R.drawable.ic_account_circle_grey_24dp)
-                        .apply(RequestOptions.circleCropTransform())
-                        .into(activityBinding.launchAccountSwitcher);
-            } else {
-                Log.w(TAG, "url is null");
-            }
-        } catch (NullPointerException e) { // No local account - show generic header
-            Glide
-                    .with(this)
-                    .load(R.drawable.ic_account_circle_grey_24dp)
-                    .apply(RequestOptions.circleCropTransform())
-                    .into(activityBinding.launchAccountSwitcher);
-            Log.w(TAG, "Tried to update username in drawer, but localAccount was null");
-        }
-    }
-
     @Override
     public void onNoteClick(int position, View v) {
-        boolean hasCheckedItems = adapter.getSelected().size() > 0;
-        if (hasCheckedItems) {
-            if (!adapter.select(position)) {
-                v.setSelected(false);
-                adapter.deselect(position);
-            } else {
-                v.setSelected(true);
-            }
-            int size = adapter.getSelected().size();
-            if (size > 0) {
-                mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, size, size));
-            } else {
-                mActionMode.finish();
-            }
-        } else {
-            DBNote note = (DBNote) adapter.getItem(position);
+        boolean hasCheckedItems = tracker.getSelection().size() > 0;
+        if (!hasCheckedItems) {
+            Note note = (Note) adapter.getItem(position);
             Intent intent = new Intent(getApplicationContext(), EditNoteActivity.class);
             intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
             startActivityForResult(intent, show_single_note_cmd);
@@ -871,25 +691,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
 
     @Override
     public void onNoteFavoriteClick(int position, View view) {
-        DBNote note = (DBNote) adapter.getItem(position);
-        NotesDatabase db = NotesDatabase.getInstance(view.getContext());
-        db.toggleFavorite(ssoAccount, note, syncCallBack);
-        adapter.notifyItemChanged(position);
-        refreshLists();
-    }
-
-    @Override
-    public boolean onNoteLongClick(int position, View v) {
-        boolean selected = adapter.select(position);
-        if (selected) {
-            v.setSelected(true);
-            mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(
-                    this, this, db, localAccount.getId(), canMoveNoteToAnotherAccounts, adapter, listView, this::refreshLists, getSupportFragmentManager(), activityBinding.searchView
-            ));
-            int checkedItemCount = adapter.getSelected().size();
-            mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, checkedItemCount, checkedItemCount));
-        }
-        return selected;
+        LiveData<Void> toggleLiveData = mainViewModel.toggleFavoriteAndSync(((Note) adapter.getItem(position)).getId());
+        toggleLiveData.observe(this, (next) -> toggleLiveData.removeObservers(this));
     }
 
     @Override
@@ -901,7 +704,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         }
     }
 
-    @SuppressLint("PrivateResource")
     private void updateToolbars(boolean disableSearch) {
         activityBinding.homeToolbar.setVisibility(disableSearch ? VISIBLE : GONE);
         activityBinding.toolbar.setVisibility(disableSearch ? GONE : VISIBLE);
@@ -909,27 +711,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                 disableSearch ? R.animator.appbar_elevation_off : R.animator.appbar_elevation_on));
         if (disableSearch) {
             activityBinding.searchView.setQuery(null, true);
-        }
-        activityBinding.searchView.setIconified(disableSearch);
-    }
-
-    private void synchronize() {
-        NoteServerSyncHelper syncHelper = db.getNoteServerSyncHelper();
-        if (!syncHelper.isSyncPossible()) {
-            syncHelper.updateNetworkStatus();
-        }
-        if (syncHelper.isSyncPossible()) {
-            runOnUiThread(() -> swipeRefreshLayout.setRefreshing(true));
-            syncHelper.addCallbackPull(ssoAccount, syncCallBack);
-            syncHelper.scheduleSync(ssoAccount, false);
-        } else { // Sync is not possible
-            runOnUiThread(() -> swipeRefreshLayout.setRefreshing(false));
-            if (syncHelper.isNetworkConnected() && syncHelper.isSyncOnlyOnWifi()) {
-                Log.d(TAG, "Network is connected, but sync is not possible");
-            } else {
-                Log.d(TAG, "Sync is not possible, because network is not connected");
-                BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
-            }
         }
     }
 
@@ -939,55 +720,26 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     }
 
     @Override
-    public void onAccountChosen(LocalAccount localAccount) {
+    public void onAccountChosen(@NonNull Account localAccount) {
         binding.drawerLayout.closeDrawer(GravityCompat.START);
-        selectAccount(localAccount.getAccountName());
+        mainViewModel.postCurrentAccount(localAccount);
     }
 
     @Override
-    public void onAccountDeleted(LocalAccount localAccount) {
-        db.deleteAccount(localAccount);
-        if (localAccount.getId() == this.localAccount.getId()) {
-            List<LocalAccount> remainingAccounts = db.getAccounts();
-            if (remainingAccounts.size() > 0) {
-                this.localAccount = remainingAccounts.get(0);
-                selectAccount(this.localAccount.getAccountName());
-            } else {
-                selectAccount(null);
-                askForNewAccount(this);
-            }
+    public void onAccountPicked(@NonNull Account account) {
+        for (Long noteId : tracker.getSelection()) {
+            final LiveData<Note> moveLiveData = mainViewModel.moveNoteToAnotherAccount(account, noteId);
+            moveLiveData.observe(this, (v) -> {
+                tracker.deselect(noteId);
+                moveLiveData.removeObservers(this);
+            });
         }
-    }
-
-    @Override
-    public void onAccountPicked(@NonNull LocalAccount account) {
-        List<Integer> selection = new ArrayList<>(adapter.getSelected());
-
-        adapter.deselect(0);
-        for (Integer i : selection) {
-            DBNote note = (DBNote) adapter.getItem(i);
-            db.moveNoteToAnotherAccount(ssoAccount, note.getAccountId(), db.getNote(note.getAccountId(), note.getId()), account.getId());
-            RecyclerView.ViewHolder viewHolder = listView.findViewHolderForAdapterPosition(i);
-            if (viewHolder != null) {
-                viewHolder.itemView.setSelected(false);
-            } else {
-                Log.w(TAG, "Could not found viewholder to remove selection");
-            }
-        }
-
-        mActionMode.finish();
-        refreshLists();
     }
 
     @Override
     public void onCategoryChosen(String category) {
-        for (Integer i : new ArrayList<>(adapter.getSelected())) {
-            DBNote note = (DBNote) adapter.getItem(i);
-            note.setCategory(category);
-            db.setCategory(ssoAccount, note, category, this::refreshLists);
-        }
-
-        mActionMode.finish();
-        refreshLists();
+        final LiveData<Void> categoryLiveData = mainViewModel.setCategory(tracker.getSelection(), category);
+        categoryLiveData.observe(this, (next) -> categoryLiveData.removeObservers(this));
+        tracker.clearSelection();
     }
 }

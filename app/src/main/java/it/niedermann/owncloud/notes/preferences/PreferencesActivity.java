@@ -4,8 +4,8 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
-import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.LockedActivity;
+import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ActivityPreferencesBinding;
 
 /**

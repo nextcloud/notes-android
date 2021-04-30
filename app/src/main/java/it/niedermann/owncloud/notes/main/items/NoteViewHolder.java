@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.recyclerview.selection.ItemDetailsLookup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.chip.Chip;
@@ -29,7 +30,7 @@ import it.niedermann.android.util.ColorUtil;
 import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
-import it.niedermann.owncloud.notes.shared.model.DBNote;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 
@@ -48,9 +49,9 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
     }
 
     @CallSuper
-    public void bind(@NonNull DBNote note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
+    public void bind(boolean isSelected, @NonNull Note note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
+        itemView.setSelected(isSelected);
         itemView.setOnClickListener((view) -> noteClickListener.onNoteClick(getLayoutPosition(), view));
-        itemView.setOnLongClickListener((view) -> noteClickListener.onNoteLongClick(getLayoutPosition(), view));
     }
 
     protected void bindStatus(AppCompatImageView noteStatus, DBStatus status, int mainColor) {
@@ -134,4 +135,18 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
 
     @Nullable
     public abstract View getNoteSwipeable();
+
+    public ItemDetailsLookup.ItemDetails<Long> getItemDetails() {
+        return new ItemDetailsLookup.ItemDetails<Long>() {
+            @Override
+            public int getPosition() {
+                return getAdapterPosition();
+            }
+
+            @Override
+            public Long getSelectionKey() {
+                return getItemId();
+            }
+        };
+    }
 }

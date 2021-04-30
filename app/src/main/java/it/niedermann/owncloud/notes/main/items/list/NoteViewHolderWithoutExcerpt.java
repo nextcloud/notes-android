@@ -8,10 +8,10 @@ import androidx.annotation.Nullable;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemWithoutExcerptBinding;
-import it.niedermann.owncloud.notes.shared.model.DBNote;
+import it.niedermann.owncloud.notes.main.items.NoteViewHolder;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
-import it.niedermann.owncloud.notes.main.items.NoteViewHolder;
 
 public class NoteViewHolderWithoutExcerpt extends NoteViewHolder {
     @NonNull
@@ -28,13 +28,13 @@ public class NoteViewHolderWithoutExcerpt extends NoteViewHolder {
         binding.noteSwipeFrame.setBackgroundResource(left ? R.color.bg_warning : R.color.bg_attention);
     }
 
-    public void bind(@NonNull DBNote note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
-        super.bind(note, showCategory, mainColor, textColor, searchQuery);
+    public void bind(boolean isSelected, @NonNull Note note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
+        super.bind(isSelected, note, showCategory, mainColor, textColor, searchQuery);
         @NonNull final Context context = itemView.getContext();
         binding.noteSwipeable.setAlpha(DBStatus.LOCAL_DELETED.equals(note.getStatus()) ? 0.5f : 1.0f);
         bindCategory(context, binding.noteCategory, showCategory, note.getCategory(), mainColor);
         bindStatus(binding.noteStatus, note.getStatus(), mainColor);
-        bindFavorite(binding.noteFavorite, note.isFavorite());
+        bindFavorite(binding.noteFavorite, note.getFavorite());
         bindSearchableContent(context, binding.noteTitle, searchQuery, note.getTitle(), mainColor);
     }
 

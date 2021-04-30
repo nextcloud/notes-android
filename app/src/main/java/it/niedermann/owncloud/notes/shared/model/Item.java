@@ -1,5 +1,7 @@
 package it.niedermann.owncloud.notes.shared.model;
 
 public interface Item {
-    boolean isSection();
+    default boolean isSection() {
+        return false;
+    }
 }

@@ -8,10 +8,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.persistence.NotesClient;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 
 /**
  * Provides entity classes for handling server responses with a single note ({@link NoteResponse}) or a list of notes ({@link NotesResponse}).
@@ -23,7 +23,7 @@ public class ServerResponse {
             super(response);
         }
 
-        public CloudNote getNote() throws JSONException {
+        public Note getNote() throws JSONException {
             return getNoteFromJSON(new JSONObject(getContent()));
         }
     }
@@ -33,8 +33,8 @@ public class ServerResponse {
             super(response);
         }
 
-        public List<CloudNote> getNotes() throws JSONException {
-            List<CloudNote> notesList = new ArrayList<>();
+        public List<Note> getNotes() throws JSONException {
+            List<Note> notesList = new ArrayList<>();
             JSONArray notes = new JSONArray(getContent());
             for (int i = 0; i < notes.length(); i++) {
                 JSONObject json = notes.getJSONObject(i);
@@ -59,7 +59,7 @@ public class ServerResponse {
         return response.getETag();
     }
 
-    public long getLastModified() {
+    public Calendar getLastModified() {
         return response.getLastModified();
     }
 
@@ -68,16 +68,16 @@ public class ServerResponse {
         return response.getSupportedApiVersions();
     }
 
-    CloudNote getNoteFromJSON(JSONObject json) throws JSONException {
-        long id = 0;
+    Note getNoteFromJSON(JSONObject json) throws JSONException {
+        long remoteId = 0;
         String title = "";
         String content = "";
         Calendar modified = null;
         boolean favorite = false;
-        String category = null;
+        String category = "";
         String etag = null;
         if (!json.isNull(NotesClient.JSON_ID)) {
-            id = json.getLong(NotesClient.JSON_ID);
+            remoteId = json.getLong(NotesClient.JSON_ID);
         }
         if (!json.isNull(NotesClient.JSON_TITLE)) {
             title = json.getString(NotesClient.JSON_TITLE);
@@ -86,8 +86,8 @@ public class ServerResponse {
             content = json.getString(NotesClient.JSON_CONTENT);
         }
         if (!json.isNull(NotesClient.JSON_MODIFIED)) {
-            modified = GregorianCalendar.getInstance();
-            modified.setTimeInMillis(json.getLong(NotesClient.JSON_MODIFIED) * 1000);
+            modified = Calendar.getInstance();
+            modified.setTimeInMillis(json.getLong(NotesClient.JSON_MODIFIED) * 1_000);
         }
         if (!json.isNull(NotesClient.JSON_FAVORITE)) {
             favorite = json.getBoolean(NotesClient.JSON_FAVORITE);
@@ -98,6 +98,6 @@ public class ServerResponse {
         if (!json.isNull(NotesClient.JSON_ETAG)) {
             etag = json.getString(NotesClient.JSON_ETAG);
         }
-        return new CloudNote(id, modified, title, content, favorite, category, etag);
+        return new Note(remoteId, modified, title, content, category, favorite, etag);
     }
 }

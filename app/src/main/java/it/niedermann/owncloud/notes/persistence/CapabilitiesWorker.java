@@ -20,8 +20,8 @@ import java.net.HttpURLConnection;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
+import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
-import it.niedermann.owncloud.notes.shared.model.LocalAccount;
 
 public class CapabilitiesWorker extends Worker {
 
@@ -42,15 +42,15 @@ public class CapabilitiesWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        final NotesDatabase db = NotesDatabase.getInstance(getApplicationContext());
-        for (LocalAccount account : db.getAccounts()) {
+        final NotesRepository repo = NotesRepository.getInstance(getApplicationContext());
+        for (Account account : repo.getAccounts()) {
             try {
                 final SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(getApplicationContext(), account.getAccountName());
                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
                 final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, account.getCapabilitiesETag());
-                db.updateCapabilitiesETag(account.getId(), capabilities.getETag());
-                db.updateBrand(account.getId(), capabilities);
-                db.updateApiVersion(account.getId(), capabilities.getApiVersion());
+                repo.updateCapabilitiesETag(account.getId(), capabilities.getETag());
+                repo.updateBrand(account.getId(), capabilities.getColor(), capabilities.getTextColor());
+                repo.updateApiVersion(account.getId(), capabilities.getApiVersion());
                 Log.i(TAG, capabilities.toString());
             } catch (Exception e) {
                 if (e instanceof NextcloudHttpRequestFailedException) {
