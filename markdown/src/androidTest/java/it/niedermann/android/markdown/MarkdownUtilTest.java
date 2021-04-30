@@ -300,19 +300,19 @@ public class MarkdownUtilTest extends TestCase {
         assertEquals("Lorem [](https://example.com) dolor sit amet.", builder.toString());
 
         // TODO Add link without clipboardUrl to empty selection before space character
-//        builder = new SpannableStringBuilder("Lorem ipsum dolor sit amet.");
-//        assertEquals(13, MarkdownUtil.insertLink(builder, 11, 11, null));
-//        assertEquals("Lorem ipsum []() dolor sit amet.", builder.toString());
+        builder = new SpannableStringBuilder("Lorem ipsum dolor sit amet.");
+        assertEquals(13, MarkdownUtil.insertLink(builder, 11, 11, null));
+        assertEquals("Lorem ipsum []() dolor sit amet.", builder.toString());
 
         // TODO Add link without clipboardUrl to empty selection after space character
-//        builder = new SpannableStringBuilder("Lorem ipsum dolor sit amet.");
-//        assertEquals(13, MarkdownUtil.insertLink(builder, 12, 12, null));
-//        assertEquals("Lorem ipsum []() dolor sit amet.", builder.toString());
+        builder = new SpannableStringBuilder("Lorem ipsum dolor sit amet.");
+        assertEquals(13, MarkdownUtil.insertLink(builder, 12, 12, null));
+        assertEquals("Lorem ipsum []() dolor sit amet.", builder.toString());
 
         // TODO Add link without clipboardUrl to empty selection in word
-//        builder = new SpannableStringBuilder("Lorem ipsum dolor sit amet.");
-//        assertEquals(20, MarkdownUtil.insertLink(builder, 14, 14, null));
-//        assertEquals("Lorem ipsum [dolor]() sit amet.", builder.toString());
+        builder = new SpannableStringBuilder("Lorem ipsum dolor sit amet.");
+        assertEquals(20, MarkdownUtil.insertLink(builder, 14, 14, null));
+        assertEquals("Lorem ipsum [dolor]() sit amet.", builder.toString());
 
         // Add link with clipboardUrl to normal text
         builder = new SpannableStringBuilder("Lorem ipsum dolor sit amet.");
@@ -325,19 +325,19 @@ public class MarkdownUtilTest extends TestCase {
         assertEquals("Lorem [https://example.com](https://example.de) dolor sit amet.", builder.toString());
 
         // TODO Add link with clipboardUrl to empty selection before space character
-//        builder = new SpannableStringBuilder("Lorem ipsum dolor sit amet.");
-//        assertEquals(13, MarkdownUtil.insertLink(builder, 11, 11, "https://example.de"));
-//        assertEquals("Lorem ipsum []("https://example.de") dolor sit amet.", builder.toString());
+        builder = new SpannableStringBuilder("Lorem ipsum dolor sit amet.");
+        assertEquals(13, MarkdownUtil.insertLink(builder, 11, 11, "https://example.de"));
+        assertEquals("Lorem ipsum [](https://example.de) dolor sit amet.", builder.toString());
 
         // TODO Add link with clipboardUrl to empty selection after space character
-//        builder = new SpannableStringBuilder("Lorem ipsum dolor sit amet.");
-//        assertEquals(13, MarkdownUtil.insertLink(builder, 12, 12, "https://example.de"));
-//        assertEquals("Lorem ipsum []("https://example.de") dolor sit amet.", builder.toString());
+        builder = new SpannableStringBuilder("Lorem ipsum dolor sit amet.");
+        assertEquals(13, MarkdownUtil.insertLink(builder, 12, 12, "https://example.de"));
+        assertEquals("Lorem ipsum [](https://example.de) dolor sit amet.", builder.toString());
 
         // TODO Add link with clipboardUrl to empty selection in word
-//        builder = new SpannableStringBuilder("Lorem ipsum dolor sit amet.");
-//        assertEquals(18, MarkdownUtil.insertLink(builder, 14, 14, "https://example.de"));
-//        assertEquals("Lorem ipsum [dolor]("https://example.de") sit amet.", builder.toString());
+        builder = new SpannableStringBuilder("Lorem ipsum dolor sit amet.");
+        assertEquals(38, MarkdownUtil.insertLink(builder, 14, 14, "https://example.de"));
+        assertEquals("Lorem ipsum [dolor](https://example.de) sit amet.", builder.toString());
     }
 
     @Test
