@@ -286,6 +286,7 @@ public class MarkdownUtilTest extends TestCase {
     }
 
     @Test
+    // CS304 issue link: https://github.com/stefan-niedermann/nextcloud-notes/issues/1186
     public void testInsertLink() {
         Editable builder;
 
