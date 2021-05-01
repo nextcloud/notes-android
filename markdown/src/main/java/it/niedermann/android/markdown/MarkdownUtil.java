@@ -316,38 +316,47 @@ public class MarkdownUtil {
     // CS304 issue link: https://github.com/stefan-niedermann/nextcloud-notes/issues/1186
     public static int insertLink(@NonNull Editable editable, int selectionStart, int selectionEnd, @Nullable String clipboardUrl) {
         if (selectionStart == selectionEnd) {
-            char start = editable.charAt(selectionStart-1);
-            char end = editable.charAt(selectionEnd);
-            if (start == ' '||end == ' ') {
-                if (start != ' ') {
-                    editable.insert(selectionStart, " ");
-                    selectionStart += 1;
+            if (selectionStart>0 && selectionEnd<editable.length()) {
+                char start = editable.charAt(selectionStart - 1);
+                char end = editable.charAt(selectionEnd);
+                if (start == ' ' || end == ' ') {
+                    if (start != ' ') {
+                        editable.insert(selectionStart, " ");
+                        selectionStart += 1;
+                    }
+                    if (end != ' ') {
+                        editable.insert(selectionEnd, " ");
+                    }
+                    editable.insert(selectionStart, "[](" + (clipboardUrl == null ? "" : clipboardUrl) + ")");
+                    if (clipboardUrl != null) {
+                        selectionEnd += clipboardUrl.length();
+                    }
+                    return selectionStart + 1;
+
+                } else {
+                    while (start != ' ') {
+                        selectionStart--;
+                        start = editable.charAt(selectionStart);
+                    }
+                    selectionStart++;
+                    while (end != ' ') {
+                        selectionEnd++;
+                        end = editable.charAt(selectionEnd);
+                    }
+                    selectionEnd++;
+                    editable.insert(selectionStart, "[");
+                    editable.insert(selectionEnd, "](" + (clipboardUrl == null ? "" : clipboardUrl) + ")");
+                    if (clipboardUrl != null) {
+                        selectionEnd += clipboardUrl.length();
+                    }
+                    return selectionEnd + 2;
                 }
-                if (end != ' ') {
-                    editable.insert(selectionEnd, " ");
-                }
+            }
+            else {
                 editable.insert(selectionStart, "[](" + (clipboardUrl == null ? "" : clipboardUrl) + ")");
                 return selectionStart + 1;
-
-            }else {
-                while (start != ' '){
-                    selectionStart--;
-                    start = editable.charAt(selectionStart);
-                }
-                selectionStart++;
-                while (end != ' '){
-                    selectionEnd++;
-                    end = editable.charAt(selectionEnd);
-                }
-                selectionEnd++;
-                editable.insert(selectionStart,"[");
-                editable.insert(selectionEnd,"](" + (clipboardUrl == null ? "" : clipboardUrl) + ")");
-                if (clipboardUrl!=null){
-                    selectionEnd += clipboardUrl.length();
-                }
-                return selectionEnd + 2;
-
             }
+
         } else {
             final boolean textToFormatIsLink = TextUtils.indexOf(editable.subSequence(selectionStart, selectionEnd), "http") == 0;
             if (textToFormatIsLink) {
