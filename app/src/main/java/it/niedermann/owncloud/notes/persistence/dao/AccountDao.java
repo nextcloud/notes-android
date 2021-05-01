@@ -53,6 +53,6 @@ public interface AccountDao {
     @Query("UPDATE Account SET MODIFIED = :modified WHERE id = :id")
     void updateModified(long id, long modified);
 
-    @Query("UPDATE Account SET APIVERSION = :apiVersion WHERE id = :id AND (APIVERSION IS NULL OR APIVERSION <> :apiVersion)")
+    @Query("UPDATE Account SET APIVERSION = :apiVersion WHERE id = :id AND ((APIVERSION IS NULL AND :apiVersion IS NOT NULL) OR (APIVERSION IS NOT NULL AND :apiVersion IS NULL) OR APIVERSION <> :apiVersion)")
     int updateApiVersion(Long id, String apiVersion);
 }
