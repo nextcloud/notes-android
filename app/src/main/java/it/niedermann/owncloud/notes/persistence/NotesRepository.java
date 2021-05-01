@@ -467,7 +467,7 @@ public class NotesRepository {
             if (newTitle != null) {
                 title = newTitle;
             } else {
-                if ((oldNote.getRemoteId() == null || localAccount.getPreferredApiVersion() == null || localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 0, 0)) < 0) &&
+                if ((oldNote.getRemoteId() == null || localAccount.getPreferredApiVersion() == null || localAccount.getPreferredApiVersion().compareTo(ApiVersion.API_VERSION_1_0) < 0) &&
                         (defaultNonEmptyTitle.equals(oldNote.getTitle()))) {
                     title = NoteUtil.generateNonEmptyNoteTitle(newContent, context);
                 } else {

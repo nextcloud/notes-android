@@ -82,7 +82,7 @@ public class Account implements Serializable {
             for (int i = 0; i < versionsArray.length(); i++) {
                 final ApiVersion parsedApiVersion = ApiVersion.of(versionsArray.getString(i));
                 for (ApiVersion temp : ApiVersion.SUPPORTED_API_VERSIONS) {
-                    if (temp.compareTo(parsedApiVersion) == 0) {
+                    if (temp.equals(parsedApiVersion)) {
                         supportedApiVersions.add(parsedApiVersion);
                         break;
                     }
