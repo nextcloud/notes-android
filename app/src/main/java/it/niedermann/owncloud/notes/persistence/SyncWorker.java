@@ -50,7 +50,7 @@ public class SyncWorker extends Worker {
      * @param backgroundSync the toggle result backgroundSync
      */
 
-    public static void update(@NonNull Context context, @NonNull Boolean backgroundSync) {
+    public static void update(@NonNull Context context, boolean backgroundSync) {
         deregister(context);
         if (backgroundSync) {
             PeriodicWorkRequest work = new PeriodicWorkRequest.Builder(SyncWorker.class, 15, TimeUnit.MINUTES)
