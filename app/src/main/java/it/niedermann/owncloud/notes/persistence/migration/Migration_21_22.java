@@ -32,8 +32,6 @@ public class Migration_21_22 extends Migration {
                 editor.remove("backgroundSync");
                 editor.putBoolean("backgroundSync", true);
             }
-        } else {
-            editor.putBoolean("backgroundSync", true);
         }
         editor.apply();
     }
