@@ -96,7 +96,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
         assert backgroundSyncPref != null;
         backgroundSyncPref.setOnPreferenceChangeListener((preference, newValue) -> {
             Log.i(TAG, "backgroundSync: " + newValue);
-            SyncWorker.update(requireContext());
+            SyncWorker.update(requireContext(), (Boolean) newValue);
             return true;
         });
     }
