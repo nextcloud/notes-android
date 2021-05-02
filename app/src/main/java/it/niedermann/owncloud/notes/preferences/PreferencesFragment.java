@@ -31,6 +31,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
     private BrandedSwitchPreference wifiOnlyPref;
     private BrandedSwitchPreference gridViewPref;
     private BrandedSwitchPreference preventScreenCapturePref;
+    private BrandedSwitchPreference backgroundSyncPref;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -91,11 +92,11 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
             return true;
         });
 
-        final ListPreference syncPref = findPreference(getString(R.string.pref_key_background_sync));
-        assert syncPref != null;
-        syncPref.setOnPreferenceChangeListener((preference, newValue) -> {
-            Log.i(TAG, "syncPref: " + preference + " - newValue: " + newValue);
-            SyncWorker.update(requireContext(), newValue.toString());
+        backgroundSyncPref = findPreference(getString(R.string.pref_key_background_sync));
+        assert backgroundSyncPref != null;
+        backgroundSyncPref.setOnPreferenceChangeListener((preference, newValue) -> {
+            Log.i(TAG, "backgroundSync: " + newValue);
+            SyncWorker.update(requireContext());
             return true;
         });
     }
