@@ -20,8 +20,6 @@ import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.persistence.SyncWorker;
 import it.niedermann.owncloud.notes.shared.util.DeviceCredentialUtil;
 
-import static it.niedermann.owncloud.notes.widget.notelist.NoteListWidget.updateNoteListWidgets;
-
 public class PreferencesFragment extends PreferenceFragmentCompat implements Branded {
 
     private static final String TAG = PreferencesFragment.class.getSimpleName();
@@ -37,6 +35,11 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
+    /**
+     * Turn background sync from from {@link String} values to {@link Boolean} values
+     * https://github.com/stefan-niedermann/nextcloud-notes/issues/1168
+     */
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -113,6 +116,13 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
         }
     }
 
+    /**
+     * Change color for backgroundSyncPref as well
+     * https://github.com/stefan-niedermann/nextcloud-deck/issues/531
+     * @param mainColor color of main brand
+     * @param textColor color of text
+     */
+
     @Override
     public void applyBrand(int mainColor, int textColor) {
         fontPref.applyBrand(mainColor, textColor);
@@ -120,5 +130,6 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
         wifiOnlyPref.applyBrand(mainColor, textColor);
         gridViewPref.applyBrand(mainColor, textColor);
         preventScreenCapturePref.applyBrand(mainColor, textColor);
+        backgroundSyncPref.applyBrand(mainColor, textColor);
     }
 }

@@ -15,7 +15,6 @@ import androidx.work.WorkerParameters;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 
 public class SyncWorker extends Worker {
@@ -44,7 +43,14 @@ public class SyncWorker extends Worker {
         return Result.success();
     }
 
-    public static void update(@NonNull Context context, Boolean backgroundSync) {
+    /**
+     * Set up sync work to enabled every 15 minutes or just disabled
+     * https://github.com/stefan-niedermann/nextcloud-notes/issues/1168
+     * @param context the application
+     * @param backgroundSync the toggle result backgroundSync
+     */
+
+    public static void update(@NonNull Context context, @NonNull Boolean backgroundSync) {
         deregister(context);
         if (backgroundSync) {
             PeriodicWorkRequest work = new PeriodicWorkRequest.Builder(SyncWorker.class, 15, TimeUnit.MINUTES)

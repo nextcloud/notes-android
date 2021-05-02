@@ -8,6 +8,11 @@ import androidx.preference.PreferenceManager;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+/**
+ * Enabling backgroundSync, set from {@link String} values to {@link Boolean} values
+ * https://github.com/stefan-niedermann/nextcloud-notes/issues/1168
+ */
+
 public class Migration_21_22 extends Migration {
     @NonNull
     private final Context context;
@@ -16,10 +21,7 @@ public class Migration_21_22 extends Migration {
         super(21, 22);
         this.context = context;
     }
-    /**
-     * Enabling backgroundSync, set from {@link String} values to {@link Boolean} value true
-     * https://github.com/stefan-niedermann/nextcloud-deck/issues/531
-     */
+
     @Override
     public void migrate(@NonNull SupportSQLiteDatabase database) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
