@@ -17,7 +17,7 @@
     <item
         android:id="@+id/delete"
         android:orderInCategory="30"
-        android:title="@string/remove_account"
+        android:title="@string/simple_remove"
         app:showAsAction="never" />
 
 </menu>
