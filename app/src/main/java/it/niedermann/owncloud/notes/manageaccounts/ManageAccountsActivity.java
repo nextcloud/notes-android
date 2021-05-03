@@ -127,8 +127,9 @@ public class ManageAccountsActivity extends LockedActivity {
                         putSettingsCall.enqueue(new Callback<NotesSettings>() {
                             @Override
                             public void onResponse(@NonNull Call<NotesSettings> call, @NonNull Response<NotesSettings> response) {
-                                if (response.isSuccessful()) {
-                                    Toast.makeText(ManageAccountsActivity.this, "New notes path: " + response.body().getNotesPath(), Toast.LENGTH_LONG).show();
+                                final NotesSettings body = response.body();
+                                if (response.isSuccessful() && body != null) {
+                                    Toast.makeText(ManageAccountsActivity.this, "New notes path: " + body.getNotesPath(), Toast.LENGTH_LONG).show();
                                 } else {
                                     Toast.makeText(ManageAccountsActivity.this, "HTTP status code: " + response.code(), Toast.LENGTH_LONG).show();
                                 }
@@ -145,25 +146,29 @@ public class ManageAccountsActivity extends LockedActivity {
                 }).start())
                 .show();
         try {
-            final Call<NotesSettings> oldSettingsCall = repository.getServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), localAccount.getPreferredApiVersion());
-            oldSettingsCall.enqueue(new Callback<NotesSettings>() {
-                @Override
-                public void onResponse(@NonNull Call<NotesSettings> call, @NonNull Response<NotesSettings> response) {
-                    runOnUiThread(() -> {
-                        if (response.isSuccessful()) {
-                            editText.setText(response.body().getNotesPath());
-                            editText.setEnabled(true);
-                        } else {
-                            ExceptionDialogFragment.newInstance(new NetworkErrorException("HTTP status code: " + response.code())).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+            repository.getServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), localAccount.getPreferredApiVersion())
+                    .enqueue(new Callback<NotesSettings>() {
+                        @Override
+                        public void onResponse(@NonNull Call<NotesSettings> call, @NonNull Response<NotesSettings> response) {
+                            runOnUiThread(() -> {
+                                final NotesSettings body = response.body();
+                                if (response.isSuccessful() && body != null) {
+                                    editText.setText(body.getNotesPath());
+                                    editText.setEnabled(true);
+                                } else {
+                                    ExceptionDialogFragment.newInstance(new NetworkErrorException("HTTP status code: " + response.code())).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onFailure(@NonNull Call<NotesSettings> call, @NonNull Throwable t) {
+                            runOnUiThread(() -> {
+                                dialog.dismiss();
+                                ExceptionDialogFragment.newInstance(t).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+                            });
                         }
                     });
-                }
-
-                @Override
-                public void onFailure(@NonNull Call<NotesSettings> call, @NonNull Throwable t) {
-                    ExceptionDialogFragment.newInstance(t).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
-                }
-            });
         } catch (NextcloudFilesAppAccountNotFoundException e) {
             dialog.dismiss();
             ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
@@ -189,8 +194,9 @@ public class ManageAccountsActivity extends LockedActivity {
                         putSettingsCall.enqueue(new Callback<NotesSettings>() {
                             @Override
                             public void onResponse(@NonNull Call<NotesSettings> call, @NonNull Response<NotesSettings> response) {
-                                if (response.isSuccessful()) {
-                                    Toast.makeText(ManageAccountsActivity.this, "New file suffix: " + response.body().getNotesPath(), Toast.LENGTH_LONG).show();
+                                final NotesSettings body = response.body();
+                                if (response.isSuccessful() && body != null) {
+                                    Toast.makeText(ManageAccountsActivity.this, "New file suffix: " + body.getNotesPath(), Toast.LENGTH_LONG).show();
                                 } else {
                                     Toast.makeText(ManageAccountsActivity.this, "HTTP status code: " + response.code(), Toast.LENGTH_LONG).show();
                                 }
@@ -202,36 +208,39 @@ public class ManageAccountsActivity extends LockedActivity {
                             }
                         });
                     } catch (NextcloudFilesAppAccountNotFoundException e) {
-                        ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+                        runOnUiThread(() -> ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()));
                     }
                 }).start())
                 .show();
         try {
-            final Call<NotesSettings> oldSettingsCall = repository.getServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), localAccount.getPreferredApiVersion());
-            oldSettingsCall.enqueue(new Callback<NotesSettings>() {
-                @Override
-                public void onResponse(@NonNull Call<NotesSettings> call, @NonNull Response<NotesSettings> response) {
-                    runOnUiThread(() -> {
-                        if (response.isSuccessful()) {
-                            for (int i = 0; i < adapter.getCount(); i++) {
-                                if (adapter.getItem(i).equals(response.body().getFileSuffix())) {
-                                    spinner.setSelection(i);
-                                    break;
+            repository.getServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), localAccount.getPreferredApiVersion())
+                    .enqueue(new Callback<NotesSettings>() {
+                        @Override
+                        public void onResponse(@NonNull Call<NotesSettings> call, @NonNull Response<NotesSettings> response) {
+                            final NotesSettings body = response.body();
+                            runOnUiThread(() -> {
+                                if (response.isSuccessful() && body != null) {
+                                    for (int i = 0; i < adapter.getCount(); i++) {
+                                        if (adapter.getItem(i).equals(body.getFileSuffix())) {
+                                            spinner.setSelection(i);
+                                            break;
+                                        }
+                                    }
+                                    spinner.setEnabled(true);
+                                } else {
+                                    ExceptionDialogFragment.newInstance(new Exception("HTTP status code: " + response.code())).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
                                 }
-                            }
-                            spinner.setEnabled(true);
-                        } else {
-                            ExceptionDialogFragment.newInstance(new Exception("HTTP status code: " + response.code())).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+                            });
+                        }
+
+                        @Override
+                        public void onFailure(@NonNull Call<NotesSettings> call, @NonNull Throwable t) {
+                            runOnUiThread(() -> {
+                                dialog.dismiss();
+                                ExceptionDialogFragment.newInstance(t).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+                            });
                         }
                     });
-                }
-
-                @Override
-                public void onFailure(@NonNull Call<NotesSettings> call, @NonNull Throwable t) {
-                    dialog.dismiss();
-                    ExceptionDialogFragment.newInstance(t).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
-                }
-            });
         } catch (NextcloudFilesAppAccountNotFoundException e) {
             dialog.dismiss();
             ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
