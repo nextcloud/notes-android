@@ -1,6 +1,5 @@
 package it.niedermann.owncloud.notes.persistence;
 
-import android.database.sqlite.SQLiteConstraintException;
 import android.os.Build;
 
 import androidx.annotation.NonNull;
@@ -18,22 +17,11 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-import java.util.Calendar;
-import java.util.List;
-
 import it.niedermann.owncloud.notes.persistence.entity.Account;
-import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
-import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 
-import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_DELETED;
-import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_EDITED;
-import static it.niedermann.owncloud.notes.shared.model.DBStatus.VOID;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(sdk = {Build.VERSION_CODES.P})
@@ -66,4 +54,25 @@ public class AccountDaoTest {
         assertEquals("彼得", createdAccount.getUserName());
         assertEquals("彼得@äöüß.example.com", createdAccount.getAccountName());
     }
+
+    @Test
+    public void updateApiVersionFromNull() throws NextcloudHttpRequestFailedException {
+        final Account account = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", new Capabilities("{ocs: {}}", null))));
+        assertNull(account.getApiVersion());
+
+        assertEquals(0, db.getAccountDao().updateApiVersion(account.getId(), null));
+        assertEquals(1, db.getAccountDao().updateApiVersion(account.getId(), "[0.2]"));
+        assertEquals(0, db.getAccountDao().updateApiVersion(account.getId(), "[0.2]"));
+    }
+
+    @Test
+    public void updateApiVersionFromExisting() throws NextcloudHttpRequestFailedException {
+        final Account account = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", new Capabilities("{ocs: {data: {capabilities: {notes: {api_version: '[0.2]'}}}}}", null))));
+        assertEquals("[0.2]", account.getApiVersion());
+
+        assertEquals(0, db.getAccountDao().updateApiVersion(account.getId(), "[0.2]"));
+        assertEquals(1, db.getAccountDao().updateApiVersion(account.getId(), "[0.2, 1.0]"));
+        assertEquals(1, db.getAccountDao().updateApiVersion(account.getId(), null));
+    }
+
 }

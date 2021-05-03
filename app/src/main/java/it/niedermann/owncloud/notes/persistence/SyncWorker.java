@@ -34,11 +34,11 @@ public class SyncWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        NotesDatabase db = NotesDatabase.getInstance(getApplicationContext());
-        for (Account account : db.getAccountDao().getAccounts()) {
+        NotesRepository repo = NotesRepository.getInstance(getApplicationContext());
+        for (Account account : repo.getAccounts()) {
             Log.v(TAG, "Starting background synchronization for " + account.getAccountName());
-            db.getNoteServerSyncHelper().addCallbackPull(account, () -> Log.v(TAG, "Finished background synchronization for " + account.getAccountName()));
-            db.getNoteServerSyncHelper().scheduleSync(account, false);
+            repo.addCallbackPull(account, () -> Log.v(TAG, "Finished background synchronization for " + account.getAccountName()));
+            repo.scheduleSync(account, false);
         }
         // TODO return result depending on callbackPull
         return Result.success();

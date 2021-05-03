@@ -57,16 +57,7 @@ public class ManageAccountAdapter extends RecyclerView.Adapter<ManageAccountView
         holder.bind(localAccount, (localAccountClicked) -> {
             setCurrentLocalAccount(localAccountClicked);
             onAccountClick.accept(localAccountClicked);
-        }, (localAccountToDelete -> {
-            for (int i = 0; i < localAccounts.size(); i++) {
-                if (localAccounts.get(i).getId() == localAccountToDelete.getId()) {
-                    localAccounts.remove(i);
-                    notifyItemRemoved(i);
-                    break;
-                }
-            }
-            onAccountDelete.accept(localAccountToDelete);
-        }), onChangeNotesPath, onChangeFileSuffix, currentLocalAccount != null && currentLocalAccount.getId() == localAccount.getId());
+        }, onAccountDelete, onChangeNotesPath, onChangeFileSuffix, currentLocalAccount != null && currentLocalAccount.getId() == localAccount.getId());
     }
 
     @Override

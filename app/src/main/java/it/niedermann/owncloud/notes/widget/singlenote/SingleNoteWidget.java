@@ -11,9 +11,9 @@ import android.util.Log;
 import android.widget.RemoteViews;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.edit.BaseNoteFragment;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.edit.EditNoteActivity;
+import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
 
 public class SingleNoteWidget extends AppWidgetProvider {
@@ -22,11 +22,11 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
     static void updateAppWidget(Context context, AppWidgetManager awm, int[] appWidgetIds) {
         final Intent templateIntent = new Intent(context, EditNoteActivity.class);
-        final NotesDatabase db = NotesDatabase.getInstance(context);
+        final NotesRepository repo = NotesRepository.getInstance(context);
 
         for (int appWidgetId : appWidgetIds) {
-            final SingleNoteWidgetData data = db.getWidgetSingleNoteDao().getSingleNoteWidgetData(appWidgetId);
-            if(data != null) {
+            final SingleNoteWidgetData data = repo.getSingleNoteWidgetData(appWidgetId);
+            if (data != null) {
                 templateIntent.putExtra(BaseNoteFragment.PARAM_ACCOUNT_ID, data.getAccountId());
 
                 final PendingIntent templatePendingIntent = PendingIntent.getActivity(context, appWidgetId, templateIntent,
@@ -66,10 +66,10 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
     @Override
     public void onDeleted(Context context, int[] appWidgetIds) {
-        final NotesDatabase db = NotesDatabase.getInstance(context);
+        final NotesRepository repo = NotesRepository.getInstance(context);
 
         for (int appWidgetId : appWidgetIds) {
-            new Thread(() -> db.getWidgetSingleNoteDao().removeSingleNoteWidget(appWidgetId)).start();
+            new Thread(() -> repo.removeSingleNoteWidget(appWidgetId)).start();
         }
         super.onDeleted(context, appWidgetIds);
     }

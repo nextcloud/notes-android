@@ -6,12 +6,14 @@
     <string name="label_all_notes">Všechny poznámky</string>
     <string name="label_favorites">Oblíbené</string>
     <string name="action_create">Nová poznámka</string>
+    <string name="welcome_text">Vítejte v %1$s</string>
     <string name="action_settings">Nastavení</string>
     <string name="action_trashbin">Smazané poznámky</string>
     <string name="action_search">Hledat</string>
     <string name="action_sorting_method">Způsob řazení</string>
     <string name="simple_cancel">Storno</string>
     <string name="simple_edit">Upravit</string>
+    <string name="simple_remove">Odebrat</string>
     <string name="action_edit_save">Uložit</string>
     <string name="simple_about">O aplikaci</string>
     <string name="simple_link">Odkaz</string>
@@ -253,5 +255,15 @@
     <string name="error_action_open_network">Nastavení sítě</string>
     <string name="no_account_configured_yet">Zatím není nastavený žádný účet</string>
     <string name="no_other_accounts">Zatím jste nenastavili žádné další účty.</string>
+    <string name="choose_account">Zvolte účet</string>
     <string name="context_based_formatting">Kontextové vyskakovací okno formátování</string>
+    <plurals name="remove_account_message">
+        <item quantity="one">Odebrání účtu %1$s také nenahraditelně odstraní jednu nesynchronizovanou změnu.</item>
+        <item quantity="few">Odebrání účtu %1$s také nenahraditelně odstraní %2$d nesynchronizovaných změn.</item>
+        <item quantity="many">Odebrání účtu %1$s také nenahraditelně odstraní %2$d nesynchronizovaných změn.</item>
+        <item quantity="other">Odebrání účtu %1$s také nenahraditelně odstraní %2$d nesynchronizované změny.</item>
+    </plurals>
+    <string name="remove_account">Odebrat %1$s</string>
+
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Abyste mohli přidat účet je třeba, abyste byli připojení k Internetu.</string>
 </resources>

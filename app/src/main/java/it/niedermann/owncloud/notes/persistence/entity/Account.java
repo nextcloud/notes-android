@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
@@ -21,7 +20,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.NoSuchElementException;
 
-import it.niedermann.owncloud.notes.persistence.NotesClient;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 
@@ -83,8 +81,8 @@ public class Account implements Serializable {
             final Collection<ApiVersion> supportedApiVersions = new HashSet<>(versionsArray.length());
             for (int i = 0; i < versionsArray.length(); i++) {
                 final ApiVersion parsedApiVersion = ApiVersion.of(versionsArray.getString(i));
-                for (ApiVersion temp : NotesClient.SUPPORTED_API_VERSIONS) {
-                    if (temp.compareTo(parsedApiVersion) == 0) {
+                for (ApiVersion temp : ApiVersion.SUPPORTED_API_VERSIONS) {
+                    if (temp.equals(parsedApiVersion)) {
                         supportedApiVersions.add(parsedApiVersion);
                         break;
                     }

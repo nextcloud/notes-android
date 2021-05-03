@@ -1,0 +1,1 @@
+- ⚙️ Migrate from SQLiteOpenHelper to Room database (#831)

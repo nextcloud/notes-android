@@ -3,6 +3,7 @@ package it.niedermann.owncloud.notes.shared.model;
 
 import androidx.annotation.NonNull;
 
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,6 +11,14 @@ import java.util.regex.Pattern;
 public class ApiVersion implements Comparable<ApiVersion> {
     private static final Pattern NUMBER_EXTRACTION_PATTERN = Pattern.compile("[0-9]+");
     private static final ApiVersion VERSION_1_2 = new ApiVersion("1.2", 1, 2);
+
+    public static final ApiVersion API_VERSION_0_2 = new ApiVersion(0, 2);
+    public static final ApiVersion API_VERSION_1_0 = new ApiVersion(1, 0);
+
+    public static final ApiVersion[] SUPPORTED_API_VERSIONS = new ApiVersion[]{
+            API_VERSION_1_0,
+            API_VERSION_0_2
+    };
 
     private String originalVersion = "?";
     private final int major;
@@ -66,7 +75,7 @@ public class ApiVersion implements Comparable<ApiVersion> {
      * 1 if the compared major version is <strong>lower</strong> than the current major version
      */
     @Override
-    public int compareTo(ApiVersion compare) {
+    public int compareTo(@NonNull ApiVersion compare) {
         if (compare.getMajor() > getMajor()) {
             return -1;
         } else if (compare.getMajor() < getMajor()) {
@@ -77,7 +86,21 @@ public class ApiVersion implements Comparable<ApiVersion> {
 
     public boolean supportsSettings() {
         // TODO
-        return true;//getMajor() >= VERSION_1_2.getMajor() && getMinor() >= VERSION_1_2.getMinor();
+        return true;
+//        return getMajor() >= 1 && getMinor() >= 2;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ApiVersion that = (ApiVersion) o;
+        return compareTo(that) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(major, minor);
     }
 
     @NonNull
