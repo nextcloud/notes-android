@@ -31,7 +31,6 @@ import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.exception.ExceptionHandler;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.ApiProvider;
-import it.niedermann.owncloud.notes.persistence.SSOClient;
 import it.niedermann.owncloud.notes.persistence.SyncWorker;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
