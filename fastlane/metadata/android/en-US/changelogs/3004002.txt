@@ -1,1 +1,2 @@
 - 🌐 Enhanced linkifying - by @Cui-Yusong
+- ⚙️ Use Retrofit for API calls (#1167)
