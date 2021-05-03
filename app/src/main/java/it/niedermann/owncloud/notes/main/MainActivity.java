@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.main;
 
+import android.accounts.NetworkErrorException;
 import android.animation.AnimatorInflater;
 import android.app.SearchManager;
 import android.content.Intent;
@@ -39,11 +40,13 @@ import com.google.android.material.snackbar.Snackbar;
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.AccountImportCancelledException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
+import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.exceptions.TokenMismatchException;
 import com.nextcloud.android.sso.exceptions.UnknownErrorException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 
+import java.net.HttpURLConnection;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -72,7 +75,7 @@ import it.niedermann.owncloud.notes.main.navigation.NavigationClickListener;
 import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesWorker;
-import it.niedermann.owncloud.notes.persistence.SSOClient;
+import it.niedermann.owncloud.notes.persistence.ApiProvider;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
@@ -278,10 +281,15 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                 @Override
                 public void onError(@NonNull Throwable t) {
                     runOnUiThread(() -> {
-                        if (t.getClass() == IntendedOfflineException.class || t instanceof IntendedOfflineException) {
+                        if (t instanceof IntendedOfflineException) {
                             Log.i(TAG, "Capabilities and notes not updated because " + nextAccount.getAccountName() + " is offline by intention.");
-                        } else {
+                        } else if (t instanceof NetworkErrorException) {
                             BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
+                        } else {
+                            BrandedSnackbar.make(coordinatorLayout, R.string.error_synchronization, Snackbar.LENGTH_LONG)
+                                    .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(t)
+                                            .show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()))
+                                    .show();
                         }
                     });
                 }
@@ -311,17 +319,26 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         final LiveData<Account> accountLiveData = mainViewModel.getCurrentAccount();
         accountLiveData.observe(this, (currentAccount) -> {
             accountLiveData.removeObservers(this);
-            mainViewModel.synchronizeNotes(currentAccount, new IResponseCallback<Void>() {
-                @Override
-                public void onSuccess(Void v) {
-                    Log.d(TAG, "Successfully synchronized notes for " + currentAccount.getAccountName());
-                }
+            try {
+                // It is possible that after the deletion of the last account, this onResponse gets called before the ImportAccountActivity gets started.
+                if (SingleAccountHelper.getCurrentSingleSignOnAccount(this) != null) {
+                    mainViewModel.synchronizeNotes(currentAccount, new IResponseCallback<Void>() {
+                        @Override
+                        public void onSuccess(Void v) {
+                            Log.d(TAG, "Successfully synchronized notes for " + currentAccount.getAccountName());
+                        }
 
-                @Override
-                public void onError(@NonNull Throwable t) {
-                    t.printStackTrace();
+                        @Override
+                        public void onError(@NonNull Throwable t) {
+                            t.printStackTrace();
+                        }
+                    });
                 }
-            });
+            } catch (NextcloudFilesAppAccountNotFoundException e) {
+                ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+            } catch (NoCurrentAccountSelectedException e) {
+                Log.i(TAG, "No current account is selected - maybe the last account has been deleted?");
+            }
         });
         super.onResume();
     }
@@ -440,10 +457,17 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                     public void onError(@NonNull Throwable t) {
                         runOnUiThread(() -> {
                             swipeRefreshLayout.setRefreshing(false);
-                            if (t.getClass() == IntendedOfflineException.class || t instanceof IntendedOfflineException) {
+                            if (t instanceof IntendedOfflineException) {
                                 Log.i(TAG, "Capabilities and notes not updated because " + currentAccount.getAccountName() + " is offline by intention.");
-                            } else {
+                            } else if (t instanceof NextcloudHttpRequestFailedException && ((NextcloudHttpRequestFailedException) t).getStatusCode() == HttpURLConnection.HTTP_UNAVAILABLE) {
+                                BrandedSnackbar.make(coordinatorLayout, R.string.error_maintenance_mode, Snackbar.LENGTH_LONG).show();
+                            } else if (t instanceof NetworkErrorException) {
                                 BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
+                            } else {
+                                BrandedSnackbar.make(coordinatorLayout, R.string.error_synchronization, Snackbar.LENGTH_LONG)
+                                        .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(t)
+                                                .show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()))
+                                        .show();
                             }
                         });
                     }
@@ -648,8 +672,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                         runOnUiThread(() -> ExceptionDialogFragment.newInstance(t).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()));
                                     }
                                 });
-                            } catch (Exception e) {
-                                SSOClient.invalidateAPICache(ssoAccount);
+                            } catch (Throwable e) {
+                                ApiProvider.invalidateAPICache(ssoAccount);
                                 // Happens when importing an already existing account the second time
                                 if (e instanceof TokenMismatchException && mainViewModel.getLocalAccountByAccountName(ssoAccount.name) != null) {
                                     Log.w(TAG, "Received " + TokenMismatchException.class.getSimpleName() + " and the given ssoAccount.name (" + ssoAccount.name + ") does already exist in the database. Assume that this account has already been imported.");

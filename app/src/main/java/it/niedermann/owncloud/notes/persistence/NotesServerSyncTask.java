@@ -1,31 +1,40 @@
 package it.niedermann.owncloud.notes.persistence;
 
+import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.nextcloud.android.sso.AccountImporter;
+import com.nextcloud.android.sso.api.ParsedResponse;
+import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.TokenMismatchException;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.persistence.sync.NotesAPI;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
-import it.niedermann.owncloud.notes.shared.model.ServerResponse;
 import it.niedermann.owncloud.notes.shared.model.SyncResultStatus;
+import retrofit2.Response;
 
 import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_DELETED;
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.generateNoteExcerpt;
 import static java.net.HttpURLConnection.HTTP_NOT_FOUND;
 import static java.net.HttpURLConnection.HTTP_NOT_MODIFIED;
+import static java.net.HttpURLConnection.HTTP_UNAVAILABLE;
 
 
 /**
@@ -36,8 +45,13 @@ abstract class NotesServerSyncTask extends Thread {
 
     private static final String TAG = NotesServerSyncTask.class.getSimpleName();
 
+    private static final String HEADER_KEY_X_NOTES_API_VERSIONS = "X-Notes-API-Versions";
+    private static final String HEADER_KEY_ETAG = "ETag";
+    private static final String HEADER_KEY_LAST_MODIFIED = "Last-Modified";
+
+    private NotesAPI notesAPI;
     @NonNull
-    private final NotesClient notesClient;
+    private final Context context;
     @NonNull
     private final NotesRepository repo;
     @NonNull
@@ -50,12 +64,12 @@ abstract class NotesServerSyncTask extends Thread {
     @NonNull
     protected final ArrayList<Throwable> exceptions = new ArrayList<>();
 
-    NotesServerSyncTask(@NonNull NotesClient notesClient, @NonNull NotesRepository repo, @NonNull Account localAccount, @NonNull SingleSignOnAccount ssoAccount, boolean onlyLocalChanges) {
+    NotesServerSyncTask(@NonNull Context context, @NonNull NotesRepository repo, @NonNull Account localAccount, boolean onlyLocalChanges) throws NextcloudFilesAppAccountNotFoundException {
         super(TAG);
-        this.notesClient = notesClient;
+        this.context = context;
         this.repo = repo;
         this.localAccount = localAccount;
-        this.ssoAccount = ssoAccount;
+        this.ssoAccount = AccountImporter.getSingleSignOnAccount(context, localAccount.getAccountName());
         this.onlyLocalChanges = onlyLocalChanges;
     }
 
@@ -67,12 +81,16 @@ abstract class NotesServerSyncTask extends Thread {
     public void run() {
         onPreExecute();
 
+        notesAPI = ApiProvider.getNotesAPI(context, ssoAccount, localAccount.getPreferredApiVersion());
+
         Log.i(TAG, "STARTING SYNCHRONIZATION");
+
         final SyncResultStatus status = new SyncResultStatus();
         status.pushSuccessful = pushLocalChanges();
         if (!onlyLocalChanges) {
             status.pullSuccessful = pullRemoteChanges();
         }
+
         Log.i(TAG, "SYNCHRONIZATION FINISHED");
 
         onPostExecute(status);
@@ -99,20 +117,31 @@ abstract class NotesServerSyncTask extends Thread {
                         Log.v(TAG, "   ...create/edit");
                         if (note.getRemoteId() != null) {
                             Log.v(TAG, "   ...Note has remoteId → try to edit");
-                            try {
-                                remoteNote = notesClient.editNote(ssoAccount, note).getNote();
-                            } catch (NextcloudHttpRequestFailedException e) {
-                                if (e.getStatusCode() == HTTP_NOT_FOUND) {
+                            final Response<Note> editResponse = notesAPI.editNote(note).execute();
+                            if (editResponse.isSuccessful()) {
+                                remoteNote = editResponse.body();
+                            } else {
+                                if (editResponse.code() == HTTP_NOT_FOUND) {
                                     Log.v(TAG, "   ...Note does no longer exist on server → recreate");
-                                    remoteNote = notesClient.createNote(ssoAccount, note).getNote();
+                                    final Response<Note> createResponse = notesAPI.createNote(note).execute();
+                                    if (createResponse.isSuccessful()) {
+                                        remoteNote = createResponse.body();
+                                    } else {
+                                        throw new Exception(createResponse.errorBody().string());
+                                    }
                                 } else {
-                                    throw e;
+                                    throw new Exception(editResponse.errorBody().string());
                                 }
                             }
                         } else {
                             Log.v(TAG, "   ...Note does not have a remoteId yet → create");
-                            remoteNote = notesClient.createNote(ssoAccount, note).getNote();
-                            repo.updateRemoteId(note.getId(), remoteNote.getRemoteId());
+                            final Response<Note> createResponse = notesAPI.createNote(note).execute();
+                            if (createResponse.isSuccessful()) {
+                                remoteNote = createResponse.body();
+                                repo.updateRemoteId(note.getId(), remoteNote.getRemoteId());
+                            } else {
+                                throw new Exception(createResponse.errorBody().string());
+                            }
                         }
                         // Please note, that db.updateNote() realized an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
                         repo.updateIfNotModifiedLocallyDuringSync(note.getId(), remoteNote.getModified().getTimeInMillis(), remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getETag(), remoteNote.getContent(), generateNoteExcerpt(remoteNote.getContent(), remoteNote.getTitle()), note.getContent(), note.getCategory(), note.getFavorite());
@@ -122,13 +151,12 @@ abstract class NotesServerSyncTask extends Thread {
                             Log.v(TAG, "   ...delete (only local, since it has never been synchronized)");
                         } else {
                             Log.v(TAG, "   ...delete (from server and local)");
-                            try {
-                                notesClient.deleteNote(ssoAccount, note.getRemoteId());
-                            } catch (NextcloudHttpRequestFailedException e) {
-                                if (e.getStatusCode() == HTTP_NOT_FOUND) {
+                            final Response<Void> deleteResponse = notesAPI.deleteNote(note.getRemoteId()).execute();
+                            if (!deleteResponse.isSuccessful()) {
+                                if (deleteResponse.code() == HTTP_NOT_FOUND) {
                                     Log.v(TAG, "   ...delete (note has already been deleted remotely)");
                                 } else {
-                                    throw e;
+                                    throw new Exception(deleteResponse.errorBody().string());
                                 }
                             }
                         }
@@ -147,7 +175,7 @@ abstract class NotesServerSyncTask extends Thread {
                 }
             } catch (Exception e) {
                 if (e instanceof TokenMismatchException) {
-                    SSOClient.invalidateAPICache(ssoAccount);
+                    ApiProvider.invalidateAPICache(ssoAccount);
                 }
                 exceptions.add(e);
                 success = false;
@@ -173,8 +201,8 @@ abstract class NotesServerSyncTask extends Thread {
             localAccount.setModified(accountFromDatabase.getModified());
             localAccount.setETag(accountFromDatabase.getETag());
 
-            final ServerResponse.NotesResponse response = notesClient.getNotes(ssoAccount, localAccount.getModified(), localAccount.getETag());
-            final List<Note> remoteNotes = response.getNotes();
+            final ParsedResponse<List<Note>> fetchResponse = notesAPI.getNotes(localAccount.getModified(), localAccount.getETag()).blockingSingle();
+            final List<Note> remoteNotes = fetchResponse.getResponse();
             final Set<Long> remoteIDs = new HashSet<>();
             // pull remote changes: update or create each remote note
             for (Note remoteNote : remoteNotes) {
@@ -206,31 +234,49 @@ abstract class NotesServerSyncTask extends Thread {
             }
 
             // update ETag and Last-Modified in order to reduce size of next response
-            localAccount.setETag(response.getETag());
-            localAccount.setModified(response.getLastModified());
+            localAccount.setETag(fetchResponse.getHeaders().get(HEADER_KEY_ETAG));
+
+            final Calendar lastModified = Calendar.getInstance();
+            lastModified.setTimeInMillis(0);
+            final String lastModifiedHeader = fetchResponse.getHeaders().get(HEADER_KEY_LAST_MODIFIED);
+            if (lastModifiedHeader != null)
+                lastModified.setTimeInMillis(Date.parse(lastModifiedHeader));
+            Log.d(TAG, "ETag: " + fetchResponse.getHeaders().get(HEADER_KEY_ETAG) + "; Last-Modified: " + lastModified + " (" + lastModified + ")");
+
+            localAccount.setModified(lastModified);
+
             repo.updateETag(localAccount.getId(), localAccount.getETag());
             repo.updateModified(localAccount.getId(), localAccount.getModified().getTimeInMillis());
+
+
+            String supportedApiVersions = null;
+            final String supportedApiVersionsHeader = fetchResponse.getHeaders().get(HEADER_KEY_X_NOTES_API_VERSIONS);
+            if (supportedApiVersionsHeader != null) {
+                supportedApiVersions = "[" + Objects.requireNonNull(supportedApiVersionsHeader) + "]";
+            }
             try {
-                if (repo.updateApiVersion(localAccount.getId(), response.getSupportedApiVersions())) {
-                    localAccount.setApiVersion(response.getSupportedApiVersions());
+                if (repo.updateApiVersion(localAccount.getId(), supportedApiVersions)) {
+                    localAccount.setApiVersion(supportedApiVersions);
                 }
             } catch (Exception e) {
                 exceptions.add(e);
             }
             return true;
-        } catch (NextcloudHttpRequestFailedException e) {
-            Log.d(TAG, "Server returned HTTP Status Code " + e.getStatusCode() + " - " + e.getMessage());
-            if (e.getStatusCode() == HTTP_NOT_MODIFIED) {
-                return true;
-            } else {
-                exceptions.add(e);
-                return false;
+        } catch (Throwable t) {
+            final Throwable cause = t.getCause();
+            if (t.getClass() == RuntimeException.class && cause != null) {
+                if (cause.getClass() == NextcloudHttpRequestFailedException.class || cause instanceof NextcloudHttpRequestFailedException) {
+                    final NextcloudHttpRequestFailedException httpException = (NextcloudHttpRequestFailedException) cause;
+                    if (httpException.getStatusCode() == HTTP_NOT_MODIFIED) {
+                        Log.d(TAG, "Server returned HTTP Status Code " + httpException.getStatusCode() + " - Notes not modified.");
+                        return true;
+                    } else if (httpException.getStatusCode() == HTTP_UNAVAILABLE) {
+                        Log.d(TAG, "Server returned HTTP Status Code " + httpException.getStatusCode() + " - Server is in maintenance mode.");
+                        return true;
+                    }
+                }
             }
-        } catch (Exception e) {
-            if (e instanceof TokenMismatchException) {
-                SSOClient.invalidateAPICache(ssoAccount);
-            }
-            exceptions.add(e);
+            exceptions.add(t);
             return false;
         }
     }

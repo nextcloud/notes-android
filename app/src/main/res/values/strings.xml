@@ -52,6 +52,7 @@
     <string name="error_sync">Synchronization failed: %1$s</string>
     <string name="error_synchronization">Synchronization failed</string>
     <string name="error_no_network">No network connection</string>
+    <string name="error_maintenance_mode">Server is in maintenance mode</string>
     <string name="error_unknown">An unknown error has occurred.</string>
 
     <string name="url_source" translatable="false">https://github.com/stefan-niedermann/nextcloud-notes</string>

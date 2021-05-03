@@ -98,6 +98,15 @@ dependencies {
     implementation "androidx.room:room-runtime:2.3.0"
     annotationProcessor "androidx.room:room-compiler:2.3.0"
 
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.6.4'
+
+    // Gson
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    // ReactiveX
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
+
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
     // Testing

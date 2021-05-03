@@ -178,10 +178,10 @@ public class NotesRepository {
     @WorkerThread
     public void deleteAccount(@NonNull Account account) {
         try {
-            SSOClient.invalidateAPICache(AccountImporter.getSingleSignOnAccount(context, account.getAccountName()));
+            ApiProvider.invalidateAPICache(AccountImporter.getSingleSignOnAccount(context, account.getAccountName()));
         } catch (NextcloudFilesAppAccountNotFoundException e) {
             e.printStackTrace();
-            SSOClient.invalidateAPICache();
+            ApiProvider.invalidateAPICache();
         }
 
         db.getAccountDao().deleteAccount(account);
@@ -318,6 +318,9 @@ public class NotesRepository {
         db.getNoteDao().deleteByNoteId(id, forceDBStatus);
     }
 
+    /**
+     * Please note, that db.updateNote() realized an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
+     */
     public int updateIfNotModifiedLocallyDuringSync(long noteId, Long targetModified, String targetTitle, boolean targetFavorite, String targetETag, String targetContent, String targetExcerpt, String contentBeforeSyncStart, String categoryBeforeSyncStart, boolean favoriteBeforeSyncStart) {
         return db.getNoteDao().updateIfNotModifiedLocallyDuringSync(noteId, targetModified, targetTitle, targetFavorite, targetETag, targetContent, targetExcerpt, contentBeforeSyncStart, categoryBeforeSyncStart, favoriteBeforeSyncStart);
     }
@@ -464,7 +467,7 @@ public class NotesRepository {
             if (newTitle != null) {
                 title = newTitle;
             } else {
-                if ((oldNote.getRemoteId() == null || localAccount.getPreferredApiVersion() == null || localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 0, 0)) < 0) &&
+                if ((oldNote.getRemoteId() == null || localAccount.getPreferredApiVersion() == null || localAccount.getPreferredApiVersion().compareTo(ApiVersion.API_VERSION_1_0) < 0) &&
                         (defaultNonEmptyTitle.equals(oldNote.getTitle()))) {
                     title = NoteUtil.generateNonEmptyNoteTitle(newContent, context);
                 } else {
@@ -579,10 +582,13 @@ public class NotesRepository {
                 }
                 if (apiVersions.length() > 0) {
                     final int updatedRows = db.getAccountDao().updateApiVersion(accountId, apiVersion);
-                    if (updatedRows == 1) {
+                    if (updatedRows == 0) {
+                        Log.d(TAG, "ApiVersion not updated, because it did not change");
+                    } else if (updatedRows == 1) {
                         Log.i(TAG, "Updated apiVersion to \"" + apiVersion + "\" for accountId = " + accountId);
+                        ApiProvider.invalidateAPICache();
                     } else {
-                        Log.e(TAG, "Updated " + updatedRows + " but expected only 1 for accountId = " + accountId + " and apiVersion = \"" + apiVersion + "\"");
+                        Log.w(TAG, "Updated " + updatedRows + " but expected only 1 for accountId = " + accountId + " and apiVersion = \"" + apiVersion + "\"");
                     }
                     return true;
                 } else {
@@ -786,10 +792,8 @@ public class NotesRepository {
             if (isSyncPossible() && (!Boolean.TRUE.equals(syncActive.get(account.getId())) || onlyLocalChanges)) {
                 syncActive.put(account.getId(), true);
                 try {
-                    SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(context, account.getAccountName());
                     Log.d(TAG, "... starting now");
-                    final NotesClient notesClient = NotesClient.newInstance(account.getPreferredApiVersion(), context);
-                    final NotesServerSyncTask syncTask = new NotesServerSyncTask(notesClient, this, account, ssoAccount, onlyLocalChanges) {
+                    final NotesServerSyncTask syncTask = new NotesServerSyncTask(context, this, account, onlyLocalChanges) {
                         @Override
                         void onPreExecute() {
                             syncStatus.postValue(true);
@@ -898,7 +902,7 @@ public class NotesRepository {
                 Log.d(TAG, "No network connection.");
             }
         } catch (NetworkErrorException e) {
-            e.printStackTrace();
+            Log.i(TAG, e.getMessage());
             networkConnected = false;
             isSyncPossible = false;
         }

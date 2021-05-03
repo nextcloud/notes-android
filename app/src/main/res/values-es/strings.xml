@@ -6,12 +6,14 @@
     <string name="label_all_notes">Todas las notas</string>
     <string name="label_favorites">Favoritos</string>
     <string name="action_create">Nueva nota</string>
+    <string name="welcome_text">Bienvenido a %1$s</string>
     <string name="action_settings">Ajustes</string>
     <string name="action_trashbin">Notas eliminadas</string>
     <string name="action_search">Buscar</string>
     <string name="action_sorting_method">Método de orden</string>
     <string name="simple_cancel">Cancelar</string>
     <string name="simple_edit">Editar</string>
+    <string name="simple_remove">Borrar</string>
     <string name="action_edit_save">Guardar</string>
     <string name="simple_about">Acerca de</string>
     <string name="simple_link">Enlace</string>
@@ -42,7 +44,11 @@
     <string name="settings_font_title">Tipo de letra monoespaciado</string>
     <string name="settings_font_size">Tamaño de fuente</string>
     <string name="settings_wifi_only">Sincronizar solo sobre Wi-Fi</string>
+    <string name="settings_lock">Bloqueo de App (Beta)</string>
+    <string name="settings_lock_summary">Credenciales del dispositivo</string>
     <string name="settings_background_sync">Sincronización en segundo plano</string>
+    <string name="settings_prevent_screen_capture">Evitar la captura de pantalla</string>
+
     <string name="error_sync">Fallo en la sincronización: %1$s</string>
     <string name="error_synchronization">Fallo en la sincronización</string>
     <string name="error_no_network">Sin conexión de red</string>
@@ -132,7 +138,9 @@
     <string name="change_note_title">Cambiar título de la nota</string>
     <string name="menu_edit_title">Editar título</string>
     <string name="settings_branding">Marca</string>
+    <string name="settings_gridview">Vista en cuadrícula</string>
     <string name="simple_security">Seguridad</string>
+    <string name="appearance_and_behavior">Apariencia y comportamiento</string>
     <string name="simple_synchronization">Sincronización</string>
     <string name="simple_behavior">Comportamiento</string>
     <string name="manage_accounts">Gestionar cuentas</string>
@@ -239,5 +247,13 @@
     <string name="error_action_open_network">Configuración de red</string>
     <string name="no_account_configured_yet">Todavía no hay una cuenta configurada</string>
     <string name="no_other_accounts">Aún no ha configurado ninguna otra cuenta.</string>
+    <string name="choose_account">Elija una cuenta</string>
     <string name="context_based_formatting">Ventana emergente para formato basado en el contexto</string>
-    </resources>
+    <plurals name="remove_account_message">
+        <item quantity="one">La eliminación de la cuenta %1$s también eliminará irremediablemente un cambio no sincronizado. </item>
+        <item quantity="other">La eliminación de la cuenta %1$s también eliminará irremediablemente %2$d cambios no sincronizados.</item>
+    </plurals>
+    <string name="remove_account">Eliminar %1$s</string>
+
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Tienes que estar conectado a internet para poder añadir una cuenta.</string>
+</resources>
