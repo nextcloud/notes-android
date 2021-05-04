@@ -104,7 +104,7 @@ public class ImportAccountActivity extends AppCompatActivity {
                             public void onSuccess(Account account) {
                                 Context context = getApplicationContext();
                                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-                                SyncWorker.update(context, !sharedPreferences.getString("backgroundSync", "on").equals("off"));
+                                SyncWorker.update(context, sharedPreferences.getBoolean(context.getString(R.string.pref_key_background_sync), true));
                                 runOnUiThread(() -> {
                                     Log.i(TAG, capabilities.toString());
                                     BrandingUtil.saveBrandColors(ImportAccountActivity.this, capabilities.getColor(), capabilities.getTextColor());

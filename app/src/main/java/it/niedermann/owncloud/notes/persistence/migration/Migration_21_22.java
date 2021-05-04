@@ -14,7 +14,6 @@ import it.niedermann.owncloud.notes.persistence.SyncWorker;
  * Enabling backgroundSync, set from {@link String} values to {@link Boolean} values
  * https://github.com/stefan-niedermann/nextcloud-notes/issues/1168
  */
-
 public class Migration_21_22 extends Migration {
     @NonNull
     private final Context context;
@@ -29,10 +28,9 @@ public class Migration_21_22 extends Migration {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         if (sharedPreferences.contains("backgroundSync")) {
-            if (sharedPreferences.getString("backgroundSync", "on").equals("off")) {
+            if (sharedPreferences.getString("backgroundSync", "").equals("off")) {
                 editor.remove("backgroundSync");
                 editor.putBoolean("backgroundSync", false);
-                SyncWorker.update(context, false);
             } else {
                 editor.remove("backgroundSync");
                 editor.putBoolean("backgroundSync", true);

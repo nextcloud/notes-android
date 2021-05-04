@@ -36,11 +36,6 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
         super.onCreate(savedInstanceState);
     }
 
-    /**
-     * Turn background sync from from {@link String} values to {@link Boolean} values
-     * https://github.com/stefan-niedermann/nextcloud-notes/issues/1168
-     */
-
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.preferences);
