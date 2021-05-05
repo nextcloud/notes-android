@@ -3,6 +3,5 @@
     <color name="search_color">#0082C9</color>
     <color name="bg_highlighted">#eee</color>
     <color name="bg_code">#0e000000</color>
-    <color name="bullet_point">#666</color>
     <color name="block_quote">#aaa</color>
 </resources>

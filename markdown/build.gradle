@@ -33,6 +33,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation "androidx.lifecycle:lifecycle-livedata:2.3.1"
 
+    implementation 'org.jsoup:jsoup:1.13.1'
+
     implementation "io.noties.markwon:core:$markwonVersion"
     implementation "io.noties.markwon:editor:$markwonVersion"
     implementation "io.noties.markwon:ext-strikethrough:$markwonVersion"

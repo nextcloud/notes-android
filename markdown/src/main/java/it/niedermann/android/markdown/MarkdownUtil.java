@@ -9,7 +9,6 @@ import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
-import android.text.style.BulletSpan;
 import android.text.style.QuoteSpan;
 import android.util.Log;
 import android.widget.RemoteViews.RemoteView;
@@ -68,11 +67,18 @@ public class MarkdownUtil {
      * Therefore we currently use {@link HtmlCompat} to filter supported spans from the output of {@link HtmlRenderer} as an intermediate step.
      */
     public static CharSequence renderForRemoteView(@NonNull Context context, @NonNull String content) {
+        // Create HTML string from Markup
         final String html = renderer.render(parser.parse(replaceCheckboxesWithEmojis(content)));
-        return enhanceRenderedResult(context, HtmlCompat.fromHtml(html, 0));
+
+        // Create Spanned from HTML, with special handling for ordered list items
+        final Spanned spanned = HtmlCompat.fromHtml(ListTagHandler.prepareTagHandling(html), 0, null, new ListTagHandler());
+
+        // Enhance colors and margins of the Spanned
+        return customizeQuoteSpanAppearance(context, spanned, 5, 30);
     }
 
-    private static Spanned enhanceRenderedResult(@NonNull Context context, @NonNull Spanned input) {
+    @SuppressWarnings("SameParameterValue")
+    private static Spanned customizeQuoteSpanAppearance(@NonNull Context context, @NonNull Spanned input, int stripeWidth, int gapWidth) {
         final SpannableStringBuilder ssb = new SpannableStringBuilder(input);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             final QuoteSpan[] originalQuoteSpans = ssb.getSpans(0, ssb.length(), QuoteSpan.class);
@@ -81,15 +87,7 @@ public class MarkdownUtil {
                 final int start = ssb.getSpanStart(originalQuoteSpan);
                 final int end = ssb.getSpanEnd(originalQuoteSpan);
                 ssb.removeSpan(originalQuoteSpan);
-                ssb.setSpan(new QuoteSpan(colorBlockQuote, 5, 30), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
-            final BulletSpan[] originalBulletSpans = ssb.getSpans(0, ssb.length(), BulletSpan.class);
-            @ColorInt final int colorBulletPoint = ContextCompat.getColor(context, R.color.bullet_point);
-            for (BulletSpan originalQuoteSpan : originalBulletSpans) {
-                final int start = ssb.getSpanStart(originalQuoteSpan);
-                final int end = ssb.getSpanEnd(originalQuoteSpan);
-                ssb.removeSpan(originalQuoteSpan);
-                ssb.setSpan(new BulletSpan(16, colorBulletPoint, 8), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                ssb.setSpan(new QuoteSpan(colorBlockQuote, stripeWidth, gapWidth), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         }
         return ssb;
@@ -316,7 +314,7 @@ public class MarkdownUtil {
     // CS304 issue link: https://github.com/stefan-niedermann/nextcloud-notes/issues/1186
     public static int insertLink(@NonNull Editable editable, int selectionStart, int selectionEnd, @Nullable String clipboardUrl) {
         if (selectionStart == selectionEnd) {
-            if (selectionStart>0 && selectionEnd<editable.length()) {
+            if (selectionStart > 0 && selectionEnd < editable.length()) {
                 char start = editable.charAt(selectionStart - 1);
                 char end = editable.charAt(selectionEnd);
                 if (start == ' ' || end == ' ') {
@@ -351,8 +349,7 @@ public class MarkdownUtil {
                     }
                     return selectionEnd + 2;
                 }
-            }
-            else {
+            } else {
                 editable.insert(selectionStart, "[](" + (clipboardUrl == null ? "" : clipboardUrl) + ")");
                 return selectionStart + 1;
             }
