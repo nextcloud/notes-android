@@ -42,20 +42,23 @@ public class CapabilitiesWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        final NotesDatabase db = NotesDatabase.getInstance(getApplicationContext());
-        for (Account account : db.getAccountDao().getAccounts()) {
+        final NotesRepository repo = NotesRepository.getInstance(getApplicationContext());
+        for (Account account : repo.getAccounts()) {
             try {
                 final SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(getApplicationContext(), account.getAccountName());
                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
                 final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, account.getCapabilitiesETag());
-                db.getAccountDao().updateCapabilitiesETag(account.getId(), capabilities.getETag());
-                db.getAccountDao().updateBrand(account.getId(), capabilities.getColor(), capabilities.getTextColor());
-                db.updateApiVersion(account.getId(), capabilities.getApiVersion());
+                repo.updateCapabilitiesETag(account.getId(), capabilities.getETag());
+                repo.updateBrand(account.getId(), capabilities.getColor(), capabilities.getTextColor());
+                repo.updateApiVersion(account.getId(), capabilities.getApiVersion());
                 Log.i(TAG, capabilities.toString());
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 if (e instanceof NextcloudHttpRequestFailedException) {
                     if (((NextcloudHttpRequestFailedException) e).getStatusCode() == HttpURLConnection.HTTP_NOT_MODIFIED) {
                         Log.i(TAG, "Capabilities not modified.");
+                        return Result.success();
+                    } else if(((NextcloudHttpRequestFailedException) e).getStatusCode() == HttpURLConnection.HTTP_UNAVAILABLE) {
+                        Log.i(TAG, "Server is in maintenance mode.");
                         return Result.success();
                     }
                 }

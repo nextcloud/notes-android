@@ -6,12 +6,14 @@
     <string name="label_all_notes">Totes les notes</string>
     <string name="label_favorites">Preferides</string>
     <string name="action_create">Nota nova</string>
+    <string name="welcome_text">Us donem la benvinguda a %1$s</string>
     <string name="action_settings">Paràmetres</string>
     <string name="action_trashbin">Notes suprimides</string>
     <string name="action_search">Cerca</string>
     <string name="action_sorting_method">Mètode d\'ordenació</string>
     <string name="simple_cancel">Cancel·la</string>
     <string name="simple_edit">Edita</string>
+    <string name="simple_remove">Suprimeix</string>
     <string name="action_edit_save">Desa</string>
     <string name="simple_about">Quant a</string>
     <string name="simple_link">Enllaç</string>
@@ -42,7 +44,11 @@
     <string name="settings_font_title">Tipus de lletra de mida fixa</string>
     <string name="settings_font_size">Mida de la lletra</string>
     <string name="settings_wifi_only">Sincronitza només per la connexió sense fil</string>
+    <string name="settings_lock">Blocatge de l\'aplicació (beta)</string>
+    <string name="settings_lock_summary">Credencials del dispositiu</string>
     <string name="settings_background_sync">Sincronització en segon pla</string>
+    <string name="settings_prevent_screen_capture">Impedeix la captura de la pantalla</string>
+
     <string name="error_sync">S\'ha produït un error en la sincronització: %1$s</string>
     <string name="error_synchronization">S\'ha produït un error en la sincronització</string>
     <string name="error_no_network">No hi ha connexió a la xarxa</string>
@@ -111,6 +117,7 @@
     <string name="error_dialog_title">Oh, no! I ara què? </string>
     <string name="error_dialog_tip_token_mismatch_retry">Proveu de forçar el tancament de l\'aplicació i reinicieu-la. Pot ser que hi hagi hagut una connexió incorrecta a l\'aplicació Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Si el problema persisteix, proveu d\'esborrar l\'emmagatzematge de totes dues aplicacions: Nextcloud i Notes del Nextcloud per tal de resoldre el problema.</string>
+    <string name="error_dialog_tip_clear_storage">Per a esborrar l\'emmagatzematge, obriu la informació de l\'aplicació i seleccioneu Emmagatzematge → Esborra l\'emmagatzematge. ⚠️ Avís: això també esborrarà les notes que encara no s\'hagin sincronitzat!</string>
     <string name="error_dialog_tip_files_outdated">Sembla que la vostra aplicació Nextcloud està obsoleta. Visiteu la Play Store o l\'F-Droid per obtenir la darrera versió.</string>
     <string name="error_dialog_tip_files_force_stop">Sembla que hi ha algun problema amb la vostra aplicació Nextcloud. Intenteu forçar l\'aturada tant de l\'aplicació Nextcloud com de l\'aplicació Notes del Nextcloud.</string>
     <string name="error_dialog_tip_files_delete_storage">Si forçar-ne l\'aturada no ajuda, podeu provar d\'esborrar l\'emmagatzematge de totes dues aplicacions.</string>
@@ -131,7 +138,9 @@
     <string name="change_note_title">Canvia el títol de la nota</string>
     <string name="menu_edit_title">Edita el títol</string>
     <string name="settings_branding">Marca</string>
+    <string name="settings_gridview">Visualització de quadrícula</string>
     <string name="simple_security">Seguretat</string>
+    <string name="appearance_and_behavior">Aparença i comportament</string>
     <string name="simple_synchronization">Sincronització</string>
     <string name="simple_behavior">Comportament</string>
     <string name="manage_accounts">Gestiona els comptes</string>
@@ -238,5 +247,13 @@
     <string name="error_action_open_network">Paràmetres de la xarxa</string>
     <string name="no_account_configured_yet">Encara no s\'ha configurat cap compte</string>
     <string name="no_other_accounts">Encara no heu configurat cap altre compte.</string>
+    <string name="choose_account">Trieu un compte</string>
     <string name="context_based_formatting">Element emergent de format basat en el context</string>
+    <plurals name="remove_account_message">
+        <item quantity="one">Si suprimiu el compte %1$s, també se suprimirà un canvi sense sincronitzar de manera irrecuperable.</item>
+        <item quantity="other">Si suprimiu el compte %1$s, també se suprimiran %2$d canvis sense sincronitzar de manera irrecuperable.</item>
+    </plurals>
+    <string name="remove_account">Suprimeix %1$s</string>
+
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Heu de tenir connexió a Internet per a afegir un compte.</string>
 </resources>

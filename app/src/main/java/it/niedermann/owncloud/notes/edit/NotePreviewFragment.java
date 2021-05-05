@@ -125,7 +125,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     protected void registerInternalNoteLinkHandler() {
         binding.singleNoteContent.registerOnLinkClickCallback((link) -> {
             try {
-                final long noteLocalId = db.getNoteDao().getLocalIdByRemoteId(this.note.getAccountId(), Long.parseLong(link));
+                final long noteLocalId = repo.getLocalIdByRemoteId(this.note.getAccountId(), Long.parseLong(link));
                 Log.i(TAG, "Found note for remoteId \"" + link + "\" in account \"" + this.note.getAccountId() + "\" with localId + \"" + noteLocalId + "\". Attempt to open " + EditNoteActivity.class.getSimpleName() + " for this note.");
                 startActivity(new Intent(requireActivity().getApplicationContext(), EditNoteActivity.class).putExtra(EditNoteActivity.PARAM_NOTE_ID, noteLocalId));
                 return true;
@@ -153,20 +153,20 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
 
     @Override
     public void onRefresh() {
-        if (noteLoaded && db.getNoteServerSyncHelper().isSyncPossible() && SSOUtil.isConfigured(getContext())) {
+        if (noteLoaded && repo.isSyncPossible() && SSOUtil.isConfigured(getContext())) {
             binding.swiperefreshlayout.setRefreshing(true);
             new Thread(() -> {
                 try {
-                    final Account account = db.getAccountDao().getAccountByName(SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext()).name);
-                    db.getNoteServerSyncHelper().addCallbackPull(account, () -> new Thread(() -> {
-                        note = db.getNoteDao().getNoteById(note.getId());
+                    final Account account = repo.getAccountByName(SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext()).name);
+                    repo.addCallbackPull(account, () -> new Thread(() -> {
+                        note = repo.getNoteById(note.getId());
                         changedText = note.getContent();
                         requireActivity().runOnUiThread(() -> {
                             binding.singleNoteContent.setMarkdownString(note.getContent());
                             binding.swiperefreshlayout.setRefreshing(false);
                         });
                     }).start());
-                    db.getNoteServerSyncHelper().scheduleSync(account, false);
+                    repo.scheduleSync(account, false);
                 } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
                     e.printStackTrace();
                 }

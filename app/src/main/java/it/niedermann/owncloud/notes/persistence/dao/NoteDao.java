@@ -10,7 +10,6 @@ import androidx.room.Update;
 import java.util.List;
 import java.util.Set;
 
-import it.niedermann.owncloud.notes.persistence.NotesServerSyncHelper;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
@@ -139,7 +138,11 @@ public interface NoteDao {
     @Query("SELECT DISTINCT remoteId FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED'")
     List<Long> getRemoteIds(long accountId);
 
-    @Query("SELECT id, remoteId, 0 as accountId, '' as title, 0 as favorite, '' as excerpt, 0 as modified, '' as eTag, 0 as status, '' as category, '' as content, 0 as scrollY  FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED'")
+    /**
+     * Gets a list of {@link Note} objects with filled {@link Note#id} and {@link Note#remoteId},
+     * where {@link Note#remoteId} is not <code>null</code>
+     */
+    @Query("SELECT id, remoteId, 0 as accountId, '' as title, 0 as favorite, '' as excerpt, 0 as modified, '' as eTag, 0 as status, '' as category, '' as content, 0 as scrollY  FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND remoteId IS NOT NULL")
     List<Note> getRemoteIdAndId(long accountId);
 
     /**
@@ -169,7 +172,7 @@ public interface NoteDao {
     void updateRemoteId(long id, Long remoteId);
 
     /**
-     * used by: {@link NotesServerSyncHelper.SyncTask#pushLocalChanges()} update only, if not modified locally during the synchronization
+     * used by: {@link it.niedermann.owncloud.notes.persistence.NotesServerSyncTask#pushLocalChanges()} update only, if not modified locally during the synchronization
      * (i.e. all (!) user changeable columns (content, favorite, category) must still have the same value), uses reference value gathered at start of synchronization
      */
     @Query("UPDATE NOTE SET title = :targetTitle, modified = :targetModified, favorite = :targetFavorite, etag = :targetETag, content = :targetContent, status = '', excerpt = :targetExcerpt " +
@@ -177,7 +180,7 @@ public interface NoteDao {
     int updateIfNotModifiedLocallyDuringSync(long noteId, Long targetModified, String targetTitle, boolean targetFavorite, String targetETag, String targetContent, String targetExcerpt, String contentBeforeSyncStart, String categoryBeforeSyncStart, boolean favoriteBeforeSyncStart);
 
     /**
-     * used by: {@link NotesServerSyncHelper.SyncTask#pullRemoteChanges()} update only, if not modified locally (i.e. STATUS="") and if modified remotely (i.e. any (!) column has changed)
+     * used by: {@link it.niedermann.owncloud.notes.persistence.NotesServerSyncTask#pullRemoteChanges()} update only, if not modified locally (i.e. STATUS="") and if modified remotely (i.e. any (!) column has changed)
      */
     @Query("UPDATE NOTE SET title = :title, modified = :modified, favorite = :favorite, etag = :eTag, content = :content, status = '', excerpt = :excerpt " +
             "WHERE id = :id AND status = '' AND (title != :title OR modified != :modified OR favorite != :favorite OR category != :category OR (eTag IS NULL OR eTag != :eTag) OR content != :content)")
@@ -194,4 +197,7 @@ public interface NoteDao {
 
     @Query("SELECT accountId, category, COUNT(*) as 'totalNotes' FROM NOTE WHERE STATUS != 'LOCAL_DELETED' AND accountId = :accountId AND category != '' AND category LIKE :searchTerm GROUP BY category")
     LiveData<List<CategoryWithNotesCount>> searchCategories$(Long accountId, String searchTerm);
+
+    @Query("SELECT COUNT(*) FROM NOTE WHERE STATUS != '' AND accountId = :accountId")
+    Long countUnsynchronizedNotes(long accountId);
 }

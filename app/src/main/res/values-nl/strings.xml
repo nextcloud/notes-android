@@ -6,12 +6,14 @@
     <string name="label_all_notes">Alle notities</string>
     <string name="label_favorites">Favorieten</string>
     <string name="action_create">Nieuwe notitie</string>
+    <string name="welcome_text">Welkom bij %1$s</string>
     <string name="action_settings">Instellingen</string>
     <string name="action_trashbin">Verwijder notities</string>
     <string name="action_search">Zoeken</string>
     <string name="action_sorting_method">Sorteer methode</string>
     <string name="simple_cancel">Annuleren</string>
     <string name="simple_edit">Bewerken</string>
+    <string name="simple_remove">Verwijderen</string>
     <string name="action_edit_save">Opslaan</string>
     <string name="simple_about">Over</string>
     <string name="simple_link">Link</string>
@@ -245,5 +247,13 @@
     <string name="error_action_open_network">Netwerk instellingen</string>
     <string name="no_account_configured_yet">Nog geen account geconfigureerd</string>
     <string name="no_other_accounts">U heeft nog geen andere accounts geconfigureerd.</string>
+    <string name="choose_account">Kies account</string>
     <string name="context_based_formatting">Context gebaseerde formatterings-popover</string>
+    <plurals name="remove_account_message">
+        <item quantity="one">Als je het %1$s account verwijdert, wordt ook één onherstelbare niet-gesynchroniseerde wijzigingen verwijderd.</item>
+        <item quantity="other">Als je het %1$s account verwijdert, worden ook %2$d onherstelbare  niet-gesynchroniseerde wijzigingen verwijderd.</item>
+    </plurals>
+    <string name="remove_account">Verwijder %1$s</string>
+
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Je moet verbonden zijn met het Internet om een account toe te voegen.</string>
 </resources>

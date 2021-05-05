@@ -2,71 +2,84 @@ package it.niedermann.owncloud.notes.manageaccounts;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.lifecycle.LiveData;
-
-import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
-import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
-import com.nextcloud.android.sso.helper.SingleAccountHelper;
-import com.nextcloud.android.sso.model.SingleSignOnAccount;
+import androidx.lifecycle.ViewModelProvider;
 
 import it.niedermann.owncloud.notes.LockedActivity;
+import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.BrandedDeleteAlertDialogBuilder;
 import it.niedermann.owncloud.notes.databinding.ActivityManageAccountsBinding;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
-
-import static androidx.lifecycle.Transformations.distinctUntilChanged;
+import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
 
 public class ManageAccountsActivity extends LockedActivity {
 
     private ActivityManageAccountsBinding binding;
+    private ManageAccountsViewModel viewModel;
     private ManageAccountAdapter adapter;
-    private NotesDatabase db = null;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = ActivityManageAccountsBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        viewModel = new ViewModelProvider(this).get(ManageAccountsViewModel.class);
 
+        setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
 
-        db = NotesDatabase.getInstance(this);
+        adapter = new ManageAccountAdapter(this::selectAccount, this::deleteAccount);
+        binding.accounts.setAdapter(adapter);
 
-        distinctUntilChanged(db.getAccountDao().getAccounts$()).observe(this, (localAccounts) -> {
-            adapter = new ManageAccountAdapter((localAccount) -> SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccount.getAccountName()), (localAccount) -> {
-                LiveData<Void> deleteLiveData = db.deleteAccount(localAccount);
-                deleteLiveData.observe(this, (v) -> {
-                    for (Account temp : localAccounts) {
-                        if (temp.getId() == localAccount.getId()) {
-                            localAccounts.remove(temp);
-                            break;
-                        }
-                    }
-                    if (localAccounts.size() > 0) {
-                        SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccounts.get(0).getAccountName());
-                        adapter.setCurrentLocalAccount(localAccounts.get(0));
-                    } else {
-                        SingleAccountHelper.setCurrentAccount(getApplicationContext(), null);
-                        finish();
-                    }
-                    deleteLiveData.removeObservers(this);
-                });
-            });
-            adapter.setLocalAccounts(localAccounts);
-            try {
-                final SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(this);
-                if (ssoAccount != null) {
-                    new Thread(() -> {
-                        final Account account = db.getAccountDao().getAccountByName(ssoAccount.name);
-                        runOnUiThread(() -> adapter.setCurrentLocalAccount(account));
-                    }).start();
-                }
-            } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-                e.printStackTrace();
+        viewModel.getAccounts$().observe(this, (accounts) -> {
+            if (accounts == null || accounts.size() < 1) {
+                finish();
+                return;
             }
-            binding.accounts.setAdapter(adapter);
+            this.adapter.setLocalAccounts(accounts);
+            viewModel.getCurrentAccount(this, new IResponseCallback<Account>() {
+                @Override
+                public void onSuccess(Account result) {
+                    runOnUiThread(() -> adapter.setCurrentLocalAccount(result));
+                }
+
+                @Override
+                public void onError(@NonNull Throwable t) {
+                    runOnUiThread(() -> adapter.setCurrentLocalAccount(null));
+                    t.printStackTrace();
+                }
+            });
+        });
+    }
+
+    private void selectAccount(@NonNull Account accountToSelect) {
+        viewModel.selectAccount(accountToSelect, this);
+    }
+
+    private void deleteAccount(@NonNull Account accountToDelete) {
+        viewModel.countUnsynchronizedNotes(accountToDelete.getId(), new IResponseCallback<Long>() {
+            @Override
+            public void onSuccess(Long unsynchronizedChangesCount) {
+                runOnUiThread(() -> {
+                    if (unsynchronizedChangesCount > 0) {
+                        new BrandedDeleteAlertDialogBuilder(ManageAccountsActivity.this)
+                                .setTitle(getString(R.string.remove_account, accountToDelete.getUserName()))
+                                .setMessage(getResources().getQuantityString(R.plurals.remove_account_message, (int) unsynchronizedChangesCount.longValue(), accountToDelete.getAccountName(), unsynchronizedChangesCount))
+                                .setNeutralButton(android.R.string.cancel, null)
+                                .setPositiveButton(R.string.simple_remove, (d, l) -> viewModel.deleteAccount(accountToDelete, ManageAccountsActivity.this))
+                                .show();
+                    } else {
+                        viewModel.deleteAccount(accountToDelete, ManageAccountsActivity.this);
+                    }
+                });
+            }
+
+            @Override
+            public void onError(@NonNull Throwable t) {
+                ExceptionDialogFragment.newInstance(t).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+            }
         });
     }
 

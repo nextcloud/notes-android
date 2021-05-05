@@ -22,10 +22,10 @@ public class ManageAccountAdapter extends RecyclerView.Adapter<ManageAccountView
     private final List<Account> localAccounts = new ArrayList<>();
     @NonNull
     private final Consumer<Account> onAccountClick;
-    @Nullable
+    @NonNull
     private final Consumer<Account> onAccountDelete;
 
-    public ManageAccountAdapter(@NonNull Consumer<Account> onAccountClick, @Nullable Consumer<Account> onAccountDelete) {
+    public ManageAccountAdapter(@NonNull Consumer<Account> onAccountClick, @NonNull Consumer<Account> onAccountDelete) {
         this.onAccountClick = onAccountClick;
         this.onAccountDelete = onAccountDelete;
         setHasStableIds(true);
@@ -48,18 +48,7 @@ public class ManageAccountAdapter extends RecyclerView.Adapter<ManageAccountView
         holder.bind(localAccount, (localAccountClicked) -> {
             setCurrentLocalAccount(localAccountClicked);
             onAccountClick.accept(localAccountClicked);
-        }, (localAccountToDelete -> {
-            if (onAccountDelete != null) {
-                for (int i = 0; i < localAccounts.size(); i++) {
-                    if (localAccounts.get(i).getId() == localAccountToDelete.getId()) {
-                        localAccounts.remove(i);
-                        notifyItemRemoved(i);
-                        break;
-                    }
-                }
-                onAccountDelete.accept(localAccountToDelete);
-            }
-        }), currentLocalAccount != null && currentLocalAccount.getId() == localAccount.getId());
+        }, onAccountDelete, currentLocalAccount != null && currentLocalAccount.getId() == localAccount.getId());
     }
 
     @Override

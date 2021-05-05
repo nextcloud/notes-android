@@ -6,12 +6,14 @@
     <string name="label_all_notes">所有笔记</string>
     <string name="label_favorites">收藏</string>
     <string name="action_create">新建笔记</string>
+    <string name="welcome_text">欢迎来到 %1$s</string>
     <string name="action_settings">设置</string>
     <string name="action_trashbin">已删除的笔记</string>
     <string name="action_search">搜索</string>
     <string name="action_sorting_method">排序方法</string>
     <string name="simple_cancel">取消</string>
     <string name="simple_edit">编辑</string>
+    <string name="simple_remove">移除</string>
     <string name="action_edit_save">保存</string>
     <string name="simple_about">关于</string>
     <string name="simple_link">链接</string>
@@ -241,5 +243,12 @@
     <string name="error_action_open_network">网络设置</string>
     <string name="no_account_configured_yet">尚未配置账户</string>
     <string name="no_other_accounts">您尚未配置任何其他帐户。</string>
+    <string name="choose_account">选择一个账户</string>
     <string name="context_based_formatting">基于上下文的格式弹出窗口 </string>
+    <plurals name="remove_account_message">
+        <item quantity="other">移除账户 %1$s 会同样不可恢复地删除 %2$d 未同步的更改</item>
+    </plurals>
+    <string name="remove_account">移除 %1$s</string>
+
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">要添加账号，你必须连接到互联网。</string>
 </resources>

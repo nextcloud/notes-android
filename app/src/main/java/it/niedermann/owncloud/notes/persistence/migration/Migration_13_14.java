@@ -1,7 +1,9 @@
 package it.niedermann.owncloud.notes.persistence.migration;
 
+import android.appwidget.AppWidgetManager;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
@@ -14,19 +16,18 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.Map;
 
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
+import it.niedermann.owncloud.notes.widget.notelist.NoteListWidget;
+import it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget;
 
 public class Migration_13_14 extends Migration {
 
     private static final String TAG = Migration_13_14.class.getSimpleName();
     @NonNull
     private final Context context;
-    @NonNull
-    private final Runnable notifyWidgets;
 
-    public Migration_13_14(@NonNull Context context, @NonNull Runnable notifyWidgets) {
+    public Migration_13_14(@NonNull Context context) {
         super(13, 14);
         this.context = context;
-        this.notifyWidgets = notifyWidgets;
     }
 
     /**
@@ -86,6 +87,7 @@ public class Migration_13_14 extends Migration {
             }
         }
         editor.apply();
-        notifyWidgets.run();
+        context.sendBroadcast(new Intent(context, SingleNoteWidget.class).setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE));
+        context.sendBroadcast(new Intent(context, NoteListWidget.class).setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE));
     }
 }

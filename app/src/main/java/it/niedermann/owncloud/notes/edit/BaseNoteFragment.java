@@ -41,7 +41,7 @@ import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
 import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment.CategoryDialogListener;
 import it.niedermann.owncloud.notes.edit.title.EditTitleDialogFragment;
 import it.niedermann.owncloud.notes.edit.title.EditTitleDialogFragment.EditTitleListener;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
@@ -76,7 +76,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     @Nullable
     private Note originalNote;
     private int originalScrollY;
-    protected NotesDatabase db;
+    protected NotesRepository repo;
     private NoteFragmentListener listener;
     private boolean titleModified = false;
 
@@ -90,7 +90,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         } catch (ClassCastException e) {
             throw new ClassCastException(context.getClass() + " must implement " + NoteFragmentListener.class);
         }
-        db = NotesDatabase.getInstance(context);
+        repo = NotesRepository.getInstance(context);
     }
 
     @Override
@@ -99,7 +99,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         new Thread(() -> {
             try {
                 SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext().getApplicationContext());
-                this.localAccount = db.getAccountDao().getAccountByName(ssoAccount.name);
+                this.localAccount = repo.getAccountByName(ssoAccount.name);
 
                 if (savedInstanceState == null) {
                     long id = requireArguments().getLong(PARAM_NOTE_ID);
@@ -107,11 +107,11 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                         long accountId = requireArguments().getLong(PARAM_ACCOUNT_ID);
                         if (accountId > 0) {
                             /* Switch account if account id has been provided */
-                            this.localAccount = db.getAccountDao().getAccountById(accountId);
+                            this.localAccount = repo.getAccountById(accountId);
                             SingleAccountHelper.setCurrentAccount(requireContext().getApplicationContext(), localAccount.getAccountName());
                         }
                         isNew = false;
-                        note = originalNote = db.getNoteDao().getNoteById(id);
+                        note = originalNote = repo.getNoteById(id);
                         requireActivity().runOnUiThread(() -> onNoteLoaded(note));
                         requireActivity().invalidateOptionsMenu();
                     } else {
@@ -126,7 +126,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                                 requireActivity().invalidateOptionsMenu();
                             }
                         } else {
-                            note = db.addNote(localAccount.getId(), cloudNote);
+                            note = repo.addNote(localAccount.getId(), cloudNote);
                             originalNote = null;
                             requireActivity().runOnUiThread(() -> onNoteLoaded(note));
                             requireActivity().invalidateOptionsMenu();
@@ -193,7 +193,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         if (note != null) {
             prepareFavoriteOption(menu.findItem(R.id.menu_favorite));
 
-            menu.findItem(R.id.menu_title).setVisible(localAccount.getPreferredApiVersion() != null && localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 1, 0)) >= 0);
+            menu.findItem(R.id.menu_title).setVisible(localAccount.getPreferredApiVersion() != null && localAccount.getPreferredApiVersion().compareTo(ApiVersion.API_VERSION_1_0) >= 0);
             menu.findItem(R.id.menu_delete).setVisible(!isNew);
         }
     }
@@ -213,19 +213,19 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         if (itemId == R.id.menu_cancel) {
             new Thread(() -> {
                 if (originalNote == null) {
-                    db.deleteNoteAndSync(localAccount, note.getId());
+                    repo.deleteNoteAndSync(localAccount, note.getId());
                 } else {
-                    db.updateNoteAndSync(localAccount, originalNote, null, null, null);
+                    repo.updateNoteAndSync(localAccount, originalNote, null, null, null);
                 }
             }).start();
             listener.close();
             return true;
         } else if (itemId == R.id.menu_delete) {
-            db.deleteNoteAndSync(localAccount, note.getId());
+            repo.deleteNoteAndSync(localAccount, note.getId());
             listener.close();
             return true;
         } else if (itemId == R.id.menu_favorite) {
-            db.toggleFavoriteAndSync(localAccount, note.getId());
+            repo.toggleFavoriteAndSync(localAccount, note.getId());
             listener.onNoteUpdated(note);
             prepareFavoriteOption(item);
             return true;
@@ -288,7 +288,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
 
     public void onCloseNote() {
         if (!titleModified && originalNote == null && getContent().isEmpty()) {
-            db.deleteNoteAndSync(localAccount, note.getId());
+            repo.deleteNoteAndSync(localAccount, note.getId());
         }
     }
 
@@ -304,13 +304,13 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
             if (note.getContent().equals(newContent)) {
                 if (note.getScrollY() != originalScrollY) {
                     Log.v(TAG, "... only saving new scroll state, since content did not change");
-                    db.getNoteDao().updateScrollY(note.getId(), note.getScrollY());
+                    repo.updateScrollY(note.getId(), note.getScrollY());
                 } else {
                     Log.v(TAG, "... not saving, since nothing has changed");
                 }
             } else {
                 // FIXME requires database queries on main thread!
-                note = db.updateNoteAndSync(localAccount, note, newContent, null, callback);
+                note = repo.updateNoteAndSync(localAccount, note, newContent, null, callback);
                 listener.onNoteUpdated(note);
                 requireActivity().invalidateOptionsMenu();
             }
@@ -354,7 +354,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
 
     @Override
     public void onCategoryChosen(String category) {
-        db.setCategory(localAccount, note.getId(), category);
+        repo.setCategory(localAccount, note.getId(), category);
         note.setCategory(category);
         listener.onNoteUpdated(note);
     }
@@ -364,13 +364,13 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         titleModified = true;
         note.setTitle(newTitle);
         new Thread(() -> {
-            note = db.updateNoteAndSync(localAccount, note, note.getContent(), newTitle, null);
+            note = repo.updateNoteAndSync(localAccount, note, note.getContent(), newTitle, null);
             requireActivity().runOnUiThread(() -> listener.onNoteUpdated(note));
         }).start();
     }
 
     public void moveNote(Account account) {
-        db.moveNoteToAnotherAccount(account, note);
+        repo.moveNoteToAnotherAccount(account, note);
         listener.close();
     }
 

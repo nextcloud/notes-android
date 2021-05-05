@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 
 import com.bumptech.glide.load.HttpException;
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
@@ -38,12 +39,17 @@ public class Capabilities {
     private String apiVersion = null;
 
     @ColorInt
-    private Integer color = -16743735;
+    private int color = -16743735;
     @ColorInt
-    private Integer textColor = -16777216;
+    private int textColor = -16777216;
     @Nullable
-    private final String eTag;
+    private String eTag;
 
+    public Capabilities() {
+
+    }
+
+    @VisibleForTesting
     public Capabilities(@NonNull String response, @Nullable String eTag) throws NextcloudHttpRequestFailedException {
         this.eTag = eTag;
         final JSONObject ocs;
@@ -92,6 +98,10 @@ public class Capabilities {
         }
     }
 
+    public void setApiVersion(String apiVersion) {
+        this.apiVersion = apiVersion;
+    }
+
     public String getApiVersion() {
         return apiVersion;
     }
@@ -101,12 +111,24 @@ public class Capabilities {
         return eTag;
     }
 
-    public Integer getColor() {
+    public void setETag(@Nullable String eTag) {
+        this.eTag = eTag;
+    }
+
+    public int getColor() {
         return color;
     }
 
-    public Integer getTextColor() {
+    public void setColor(@ColorInt int color) {
+        this.color = color;
+    }
+
+    public int getTextColor() {
         return textColor;
+    }
+
+    public void setTextColor(@ColorInt int textColor) {
+        this.textColor = textColor;
     }
 
     @NonNull

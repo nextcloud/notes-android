@@ -9,6 +9,9 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.Calendar;
 
@@ -34,31 +37,52 @@ import it.niedermann.owncloud.notes.shared.model.Item;
         }
 )
 public class Note implements Serializable, Item {
+    @SerializedName("localId")
     @PrimaryKey(autoGenerate = true)
     private long id;
+
     @Nullable
+    @Expose
+    @SerializedName("id")
     private Long remoteId;
+
     private long accountId;
+
     @NonNull
     private DBStatus status = DBStatus.VOID;
+
     @NonNull
     @ColumnInfo(defaultValue = "")
+    @Expose
     private String title = "";
+
     @NonNull
+    @Expose
     @ColumnInfo(defaultValue = "")
     private String category = "";
+
+    @Expose
     @Nullable
     private Calendar modified;
+
     @NonNull
     @ColumnInfo(defaultValue = "")
+    @Expose
     private String content = "";
+
+    @Expose
     @ColumnInfo(defaultValue = "0")
     private boolean favorite = false;
+
+    @Expose
     @Nullable
+    @SerializedName("etag")
     private String eTag;
+
     @NonNull
     @ColumnInfo(defaultValue = "")
     private String excerpt = "";
+
     @ColumnInfo(defaultValue = "0")
     private int scrollY = 0;
 
