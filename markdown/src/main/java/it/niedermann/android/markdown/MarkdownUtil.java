@@ -275,29 +275,132 @@ public class MarkdownUtil {
      *
      * @return the new cursor position
      */
-    public static int togglePunctuation(@NonNull Editable editable, int selectionStart, int selectionEnd, @NonNull String punctuation) {
+   public static int togglePunctuation(@NonNull Editable editable, int selectionStart, int selectionEnd, @NonNull String punctuation) {
         switch (punctuation) {
             case "**":
             case "__":
             case "*":
             case "_":
             case "~~": {
-                final boolean selectionIsSurroundedByPunctuation = selectionIsSurroundedByPunctuation(editable, selectionStart, selectionEnd, punctuation);
-                if (selectionIsSurroundedByPunctuation) {
-                    editable.delete(selectionEnd, selectionEnd + punctuation.length());
-                    editable.delete(selectionStart - punctuation.length(), selectionStart);
-                    return selectionEnd - punctuation.length();
-                } else {
-                    final int containedPunctuationCount = getContainedPunctuationCount(editable, selectionStart, selectionEnd, punctuation);
-                    if (containedPunctuationCount == 0) {
-                        editable.insert(selectionEnd, punctuation);
-                        editable.insert(selectionStart, punctuation);
-                        return selectionEnd + punctuation.length() * 2;
-                    } else if (containedPunctuationCount % 2 > 0) {
-                        return selectionEnd;
-                    } else {
-                        removeContainingPunctuation(editable, selectionStart, selectionEnd, punctuation);
-                        return selectionEnd - containedPunctuationCount * punctuation.length();
+                String temp=editable.toString();
+                String punctuationOnce=punctuation.substring(0,1);
+                String punctuationDouble=punctuationOnce+punctuationOnce;
+                String punctuationTriple=punctuationDouble+punctuationOnce;
+                String punctuationRegOnce="\\"+punctuation.substring(0,1);
+                String punctuationRegDouble=punctuationRegOnce+punctuationRegOnce;
+                String punctuationRegTriple=punctuationRegDouble+punctuationRegOnce;
+                if (!temp.contains("*")&&!temp.contains("_")&&!temp.contains("~")){
+                    editable.insert(selectionEnd, punctuation);
+                    editable.insert(selectionStart, punctuation);
+                    return selectionEnd + punctuation.length()*2;
+                }else {
+                    switch (punctuation.length()){
+                        case 1:
+                            switch (punctuation){
+                                case "*":
+                                case "_":
+                                    if (!temp.contains(punctuationDouble)){
+                                        final int containedPunctuationCount = getContainedPunctuationCount(editable, 0, temp.length(), punctuation);
+                                        if (containedPunctuationCount%2==1){
+                                            return selectionEnd;
+                                        }
+                                        String tmp[]=temp.split(punctuationRegOnce);
+                                        int newSelectionStart=0;
+                                        int newSelectionEnd=0;
+                                        for (int i=0;i<tmp.length-1;i+=2){
+                                            newSelectionStart=tmp[i].length()+newSelectionEnd;
+                                            newSelectionEnd=tmp[i+1].length()+newSelectionStart;
+                                            editable.delete(newSelectionStart, newSelectionStart+punctuation.length());
+                                            editable.delete(newSelectionEnd , newSelectionEnd+punctuation.length());
+                                        }
+                                        return newSelectionEnd ;
+                                    }
+                                    if (temp.contains(punctuationTriple)){
+                                        final int containedPunctuationCount = getContainedPunctuationCount(editable, 0, temp.length(), punctuation);
+                                        if (containedPunctuationCount%2==1){
+                                            return selectionEnd;
+                                        }
+                                        String tmp[]=temp.split(punctuationRegTriple);
+                                        int newSelectionStart=0;
+                                        int newSelectionEnd=0;
+                                        newSelectionStart=tmp[0].length()+newSelectionEnd+punctuation.length()*2;
+                                        for (int i=0;i<=tmp.length-3;i+=2){
+                                            newSelectionEnd=tmp[i+1].length()+newSelectionStart+punctuation.length()*2;
+                                            editable.delete(newSelectionStart, newSelectionStart+punctuation.length());
+                                            editable.delete(newSelectionEnd , newSelectionEnd+punctuation.length());
+                                            newSelectionStart=tmp[i+2].length()+newSelectionEnd+punctuation.length()*2;
+
+                                        }
+                                        return newSelectionEnd-punctuation.length()*2 ;
+                                    }else {
+
+                                        String tmp[]=temp.split(punctuationRegDouble);
+                                        int newSelectionStart=0;
+                                        int newSelectionEnd=0;
+                                        newSelectionStart=tmp[0].length()+newSelectionEnd+punctuation.length()*2;
+
+                                        for (int i=0;i<=tmp.length-3;i+=2){
+                                            newSelectionEnd=tmp[i+1].length()+newSelectionStart+punctuation.length()*2+(1);
+                                            editable.insert(newSelectionStart, punctuation);
+                                            editable.insert(newSelectionEnd , punctuation);
+                                            newSelectionStart=tmp[i+2].length()+newSelectionEnd+punctuation.length()*2+(1);
+
+
+                                        }
+                                        return newSelectionEnd+1 ;
+                                    }
+
+                            }
+                            break;
+                        case 2:
+                            switch (punctuation){
+                                case "**":
+                                case "__":
+                                case "~~":
+
+                                    if (temp.contains(punctuationTriple)){
+                                        String tmp[]=temp.split(punctuationRegTriple);
+                                        int newSelectionStart=0;
+                                        int newSelectionEnd=0;
+                                        newSelectionStart=tmp[0].length()+1;
+                                        for (int i=0;i<=tmp.length-3;i+=2){
+                                            newSelectionEnd=tmp[i+1].length()+newSelectionStart+1;
+                                            editable.delete(newSelectionStart, newSelectionStart+punctuation.length());
+                                            editable.delete(newSelectionEnd , newSelectionEnd+punctuation.length());
+                                            newSelectionStart=tmp[i+2].length()+newSelectionEnd+1;
+                                        }
+                                        return newSelectionEnd-punctuationOnce.length() ;
+                                    }else if (temp.contains(punctuationDouble)){
+                                        final int containedPunctuationCount = getContainedPunctuationCount(editable, 0, temp.length(), punctuation);
+                                        if (containedPunctuationCount%2==1){
+                                            return selectionEnd;
+                                        }
+                                        String tmp[]=temp.split(punctuationRegDouble);
+                                        int newSelectionStart=0;
+                                        int newSelectionEnd=0;
+                                        for (int i=0;i<tmp.length-1;i+=2){
+                                            newSelectionStart=tmp[i].length()+newSelectionEnd;
+                                            newSelectionEnd=tmp[i+1].length()+newSelectionStart;
+                                            editable.delete(newSelectionStart, newSelectionStart+punctuation.length());
+                                            editable.delete(newSelectionEnd , newSelectionEnd+punctuation.length());
+                                        }
+                                        return newSelectionEnd ;
+                                    }else {
+                                        String tmp[]=temp.split(punctuationRegOnce);
+                                        int newSelectionStart=0;
+                                        int newSelectionEnd=0;
+                                        newSelectionStart=tmp[0].length()+1;
+
+                                        for (int i=0;i<=tmp.length-3;i+=2){
+                                            newSelectionEnd=tmp[i+1].length()+newSelectionStart+punctuation.length()+(1);
+                                            editable.insert(newSelectionStart, punctuation);
+                                            editable.insert(newSelectionEnd , punctuation);
+                                            newSelectionStart=tmp[i+2].length()+newSelectionEnd+punctuation.length()+(1);
+                                        }
+                                        return newSelectionEnd+punctuation.length() ;
+                                    }
+                            }
+                            break;
                     }
                 }
             }
