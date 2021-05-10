@@ -102,15 +102,14 @@ public class ImportAccountActivity extends AppCompatActivity {
                              */
                             @Override
                             public void onSuccess(Account account) {
-                                Context context = getApplicationContext();
-                                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-                                SyncWorker.update(context, sharedPreferences.getBoolean(context.getString(R.string.pref_key_background_sync), true));
                                 runOnUiThread(() -> {
                                     Log.i(TAG, capabilities.toString());
                                     BrandingUtil.saveBrandColors(ImportAccountActivity.this, capabilities.getColor(), capabilities.getTextColor());
                                     setResult(RESULT_OK);
                                     finish();
                                 });
+                                SyncWorker.update(ImportAccountActivity.this, PreferenceManager.getDefaultSharedPreferences(ImportAccountActivity.this)
+                                        .getBoolean(getString(R.string.pref_key_background_sync), true));
                             }
 
                             @Override

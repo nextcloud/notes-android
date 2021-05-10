@@ -28,11 +28,10 @@ public class Migration_21_22 extends Migration {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         if (sharedPreferences.contains("backgroundSync")) {
+            editor.remove("backgroundSync");
             if (sharedPreferences.getString("backgroundSync", "").equals("off")) {
-                editor.remove("backgroundSync");
                 editor.putBoolean("backgroundSync", false);
             } else {
-                editor.remove("backgroundSync");
                 editor.putBoolean("backgroundSync", true);
                 SyncWorker.update(context, true);
             }

@@ -1,3 +1,4 @@
 - 🌐 Enhanced linkifying - by @Cui-Yusong
 - ⚙️ Use Retrofit for API calls (#1167)
 - ⚙ Switched based for markdown rendering in widgets
+- ⚙ Enable background synchronization by default (#1168) - by @MasterWanna
