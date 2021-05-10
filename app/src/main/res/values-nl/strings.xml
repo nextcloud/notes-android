@@ -52,6 +52,7 @@
     <string name="error_sync">Synchronisatie mislukt: %1$s</string>
     <string name="error_synchronization">Synchronisatie mislukt</string>
     <string name="error_no_network">Geen netwerkverbinding</string>
+    <string name="error_maintenance_mode">Server in onderhoudsmodus</string>
     <string name="error_unknown">Een onbekende fout trad op.</string>
 
     <string name="about_version_title">Versie</string>

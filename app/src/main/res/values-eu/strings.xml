@@ -52,6 +52,7 @@
     <string name="error_sync">Sinkronizazioak huts egin du: %1$s</string>
     <string name="error_synchronization">Sinkronizazioak huts egin du</string>
     <string name="error_no_network">Ez dago sare konexiorik</string>
+    <string name="error_maintenance_mode">Zerbitzaria mantentze moduan dago</string>
     <string name="error_unknown">Errore ezezagun bat gertatu da.</string>
 
     <string name="about_version_title">Bertsioa</string>

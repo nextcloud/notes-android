@@ -52,6 +52,7 @@
     <string name="error_sync">Eşitlenemedi: %1$s</string>
     <string name="error_synchronization">Eşitlenemedi</string>
     <string name="error_no_network">Ağ bağlantısı yok</string>
+    <string name="error_maintenance_mode">Sunucu bakım kipinde</string>
     <string name="error_unknown">Bilinmeyen bir sorun çıktı.</string>
 
     <string name="about_version_title">Sürüm</string>
