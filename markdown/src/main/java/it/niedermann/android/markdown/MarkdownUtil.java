@@ -277,7 +277,7 @@ public class MarkdownUtil {
      */
     public static int togglePunctuation(@NonNull Editable editable, int selectionStart, int selectionEnd, @NonNull String punctuation) {
         final String initialString = editable.toString();
-        if (selectionStart<0||selectionStart>initialString.length()||selectionEnd<0||selectionEnd>initialString.length()){
+        if (selectionStart < 0 || selectionStart > initialString.length() || selectionEnd < 0 || selectionEnd > initialString.length()) {
             return 0;
         }
         switch (punctuation) {
@@ -336,7 +336,7 @@ public class MarkdownUtil {
                             editable.insert(newSelectionEnd, punctuation);
                             newSelectionStart = tmp[i + 2].length() + newSelectionEnd + punctuation.length() * 2 + (1);
                         }
-                        return newSelectionEnd ;
+                        return newSelectionEnd;
                     }
                 }
             case "**":
@@ -345,7 +345,7 @@ public class MarkdownUtil {
                 if (!initialString.contains("*") && !initialString.contains("_") && !initialString.contains("~")) {
                     editable.insert(selectionEnd, punctuation);
                     editable.insert(selectionStart, punctuation);
-                    return selectionEnd + punctuation.length() ;
+                    return selectionEnd + punctuation.length();
                 } else {
                     final String punctuationDouble = punctuation.substring(0, 1) + punctuation.substring(0, 1);
                     final String punctuationTriple = punctuation.substring(0, 1) + punctuation.substring(0, 1) + punctuation.substring(0, 1);
@@ -397,7 +397,6 @@ public class MarkdownUtil {
                 throw new UnsupportedOperationException("This kind of punctuation is not yet supported: " + punctuation);
         }
     }
-
 
     /**
      * Inserts a link into the given {@param editable} from {@param selectionStart} to {@param selectionEnd} and uses the {@param clipboardUrl} if available.
