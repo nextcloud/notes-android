@@ -1,0 +1,1 @@
+- ⚙️ Enhancing toggling of existing punctuation in the editor (#1193) - by @Jimmy-7664
