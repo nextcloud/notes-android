@@ -279,7 +279,7 @@ public class MarkdownUtil {
         final String editableString = editable.toString();
         final String nonBlankPattern="\\S+";
         final Pattern pattern = Pattern.compile(nonBlankPattern);
-        Matcher blankMatcher = pattern.matcher(editableString);
+        final Matcher blankMatcher = pattern.matcher(editableString);
         if (!blankMatcher.find()){
             return selectionEnd;
         }
