@@ -51,6 +51,9 @@ public interface NoteDao {
     @Query(getNoteById)
     Note getNoteById(long id);
 
+    @Query("SELECT remoteId FROM NOTE WHERE id = :id")
+    Long getRemoteId(long id);
+
     @Query(count)
     LiveData<Integer> count$(long accountId);
 
