@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 
 import it.niedermann.owncloud.notes.R;
 
+import com.youbenzi.mdtool.tool.MDTool;
+
 import static it.niedermann.android.markdown.MarkdownUtil.removeMarkdown;
 import static it.niedermann.android.markdown.MarkdownUtil.replaceCheckboxesWithEmojis;
 
@@ -65,6 +67,10 @@ public class NoteUtil {
     @NonNull
     public static String generateNoteExcerpt(@NonNull String content, @Nullable String title) {
         content = removeMarkdown(replaceCheckboxesWithEmojis(content.trim()));
+        String html = MDTool.markdown2Html(title);
+        if (title != null) {
+            title = html.replaceAll("(<[^<]*?>)|(<[\\s]*?/[^<]*?>)|(<[^<]*?/[\\s]*?>)", "");
+        }
         if (TextUtils.isEmpty(content)) {
             return "";
         }
