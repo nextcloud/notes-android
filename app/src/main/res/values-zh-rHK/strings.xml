@@ -52,6 +52,7 @@
     <string name="error_sync">同步失敗：%1$s</string>
     <string name="error_synchronization">同步失敗</string>
     <string name="error_no_network">沒有網路連線</string>
+    <string name="error_maintenance_mode">伺服器正處於維護模式</string>
     <string name="error_unknown">發生未知錯誤。</string>
 
     <string name="about_version_title">版本</string>

@@ -52,6 +52,7 @@
     <string name="error_sync">Synchronizacja nie powiodła się: %1$s</string>
     <string name="error_synchronization">Synchronizacja nie powiodła się</string>
     <string name="error_no_network">Brak połączenia sieciowego</string>
+    <string name="error_maintenance_mode">Serwer jest w trybie konserwacji</string>
     <string name="error_unknown">Wystąpił nieznany błąd.</string>
 
     <string name="about_version_title">Wersja</string>
