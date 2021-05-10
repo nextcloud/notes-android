@@ -162,7 +162,6 @@ public class MarkdownUtilTest extends TestCase {
     }
 
     @Test
-    @Test
     public void testTogglePunctuation() {
         Editable builder;
 
@@ -313,7 +312,6 @@ public class MarkdownUtilTest extends TestCase {
         assertEquals(4, MarkdownUtil.togglePunctuation(builder, 1, 2, "**"));
         assertEquals(" ** ** ", builder.toString());
     }
-
 
     @Test
     public void testInsertLink() {
