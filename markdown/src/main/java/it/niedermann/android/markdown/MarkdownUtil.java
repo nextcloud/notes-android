@@ -276,30 +276,30 @@ public class MarkdownUtil {
      * @return the new cursor position
      */
     public static int togglePunctuation(@NonNull Editable editable, int selectionStart, int selectionEnd, @NonNull String punctuation) {
-        final String editableString = editable.toString();
+        final String initialString = editable.toString();
         final String nonBlankPattern="\\S+";
         final Pattern pattern = Pattern.compile(nonBlankPattern);
-        final Matcher blankMatcher = pattern.matcher(editableString);
+        final Matcher blankMatcher = pattern.matcher(initialString);
         if (!blankMatcher.find()){
             return selectionEnd;
         }
         switch (punctuation) {
             case "*":
             case "_":
-                if (!editableString.contains("*") && !editableString.contains("_") && !editableString.contains("~")) {
+                if (!initialString.contains("*") && !initialString.contains("_") && !initialString.contains("~")) {
                     editable.insert(selectionEnd, punctuation);
                     editable.insert(selectionStart, punctuation);
                     return selectionEnd + punctuation.length() * 2;
                 } else {
                     final String punctuationDouble = punctuation.substring(0, 1) + punctuation.substring(0, 1);
                     final String punctuationTriple = punctuation.substring(0, 1) + punctuation.substring(0, 1) + punctuation.substring(0, 1);
-                    if (!editableString.contains(punctuationDouble)) {
-                        final int containedPunctuationCount = getContainedPunctuationCount(editable, 0, editableString.length(), punctuation);
+                    if (!initialString.contains(punctuationDouble)) {
+                        final int containedPunctuationCount = getContainedPunctuationCount(editable, 0, initialString.length(), punctuation);
                         if (containedPunctuationCount % 2 == 1) {
                             return selectionEnd;
                         }
                         final String punctuationRegOnce = "\\" + punctuation.substring(0, 1);
-                        String tmp[] = editableString.split(punctuationRegOnce);
+                        String tmp[] = initialString.split(punctuationRegOnce);
                         int newSelectionStart = 0;
                         int newSelectionEnd = 0;
                         for (int i = 0; i < tmp.length - 1; i += 2) {
@@ -310,13 +310,13 @@ public class MarkdownUtil {
                         }
                         return newSelectionEnd;
                     }
-                    if (editableString.contains(punctuationTriple)) {
-                        final int containedPunctuationCount = getContainedPunctuationCount(editable, 0, editableString.length(), punctuation);
+                    if (initialString.contains(punctuationTriple)) {
+                        final int containedPunctuationCount = getContainedPunctuationCount(editable, 0, initialString.length(), punctuation);
                         if (containedPunctuationCount % 2 == 1) {
                             return selectionEnd;
                         }
                         final String punctuationRegTriple = "\\" + punctuation.substring(0, 1) + "\\" + punctuation.substring(0, 1) + "\\" + punctuation.substring(0, 1);
-                        String tmp[] = editableString.split(punctuationRegTriple);
+                        String tmp[] = initialString.split(punctuationRegTriple);
                         int newSelectionStart = 0;
                         int newSelectionEnd = 0;
                         newSelectionStart = tmp[0].length() + newSelectionEnd + punctuation.length() * 2;
@@ -329,7 +329,7 @@ public class MarkdownUtil {
                         return newSelectionEnd - punctuation.length() * 2;
                     } else {
                         final String punctuationRegDouble = "\\" + punctuation.substring(0, 1) + "\\" + punctuation.substring(0, 1);
-                        String tmp[] = editableString.split(punctuationRegDouble);
+                        String tmp[] = initialString.split(punctuationRegDouble);
                         int newSelectionStart = 0;
                         int newSelectionEnd = 0;
                         newSelectionStart = tmp[0].length() + newSelectionEnd + punctuation.length() * 2;
@@ -345,16 +345,16 @@ public class MarkdownUtil {
             case "**":
             case "__":
             case "~~":
-                if (!editableString.contains("*") && !editableString.contains("_") && !editableString.contains("~")) {
+                if (!initialString.contains("*") && !initialString.contains("_") && !initialString.contains("~")) {
                     editable.insert(selectionEnd, punctuation);
                     editable.insert(selectionStart, punctuation);
                     return selectionEnd + punctuation.length() * 2;
                 } else {
                     final String punctuationDouble = punctuation.substring(0, 1) + punctuation.substring(0, 1);
                     final String punctuationTriple = punctuation.substring(0, 1) + punctuation.substring(0, 1) + punctuation.substring(0, 1);
-                    if (editableString.contains(punctuationTriple)) {
+                    if (initialString.contains(punctuationTriple)) {
                         final String punctuationRegTriple = "\\" + punctuation.substring(0, 1) + "\\" + punctuation.substring(0, 1) + "\\" + punctuation.substring(0, 1);
-                        String tmp[] = editableString.split(punctuationRegTriple);
+                        String tmp[] = initialString.split(punctuationRegTriple);
                         int newSelectionStart = 0;
                         int newSelectionEnd = 0;
                         newSelectionStart = tmp[0].length() + 1;
@@ -365,13 +365,13 @@ public class MarkdownUtil {
                             newSelectionStart = tmp[i + 2].length() + newSelectionEnd + 1;
                         }
                         return newSelectionEnd - 1;
-                    } else if (editableString.contains(punctuationDouble)) {
-                        final int containedPunctuationCount = getContainedPunctuationCount(editable, 0, editableString.length(), punctuation);
+                    } else if (initialString.contains(punctuationDouble)) {
+                        final int containedPunctuationCount = getContainedPunctuationCount(editable, 0, initialString.length(), punctuation);
                         if (containedPunctuationCount % 2 == 1) {
                             return selectionEnd;
                         }
                         final String punctuationRegDouble = "\\" + punctuation.substring(0, 1) + "\\" + punctuation.substring(0, 1);
-                        String tmp[] = editableString.split(punctuationRegDouble);
+                        String tmp[] = initialString.split(punctuationRegDouble);
                         int newSelectionStart = 0;
                         int newSelectionEnd = 0;
                         for (int i = 0; i < tmp.length - 1; i += 2) {
@@ -383,7 +383,7 @@ public class MarkdownUtil {
                         return newSelectionEnd;
                     } else {
                         final String punctuationRegOnce = "\\" + punctuation.substring(0, 1);
-                        String tmp[] = editableString.split(punctuationRegOnce);
+                        String tmp[] = initialString.split(punctuationRegOnce);
                         int newSelectionStart = 0;
                         int newSelectionEnd = 0;
                         newSelectionStart = tmp[0].length() + 1;
