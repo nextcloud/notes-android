@@ -58,15 +58,18 @@ public class Account implements Serializable {
     private int textColor = Color.WHITE;
     @Nullable
     private String capabilitiesETag;
+    @Nullable
+    private String displayName;
 
     public Account() {
         // Default constructor
     }
 
-    public Account(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities) {
+    public Account(@NonNull String url, @NonNull String username, @NonNull String accountName, @Nullable String displayName, @NonNull Capabilities capabilities) {
         setUrl(url);
         setUserName(username);
         setAccountName(accountName);
+        setDisplayName(displayName);
         setCapabilities(capabilities);
     }
 
@@ -187,6 +190,15 @@ public class Account implements Serializable {
 
     public void setCapabilitiesETag(@Nullable String capabilitiesETag) {
         this.capabilitiesETag = capabilitiesETag;
+    }
+
+    @Nullable
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(@Nullable String displayName) {
+        this.displayName = displayName;
     }
 
     @Override

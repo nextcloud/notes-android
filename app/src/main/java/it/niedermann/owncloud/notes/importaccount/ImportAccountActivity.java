@@ -1,9 +1,7 @@
 package it.niedermann.owncloud.notes.importaccount;
 
-import android.content.Context;
 import android.accounts.NetworkErrorException;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -93,7 +91,8 @@ public class ImportAccountActivity extends AppCompatActivity {
                     try {
                         Log.i(TAG, "Loading capabilities for " + ssoAccount.name);
                         final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, null);
-                        importAccountViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities, new IResponseCallback<Account>() {
+                        final String displayName = CapabilitiesClient.getDisplayName(getApplicationContext(), ssoAccount);
+                        importAccountViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities, displayName, new IResponseCallback<Account>() {
 
                             /**
                              * Update syncing when adding account

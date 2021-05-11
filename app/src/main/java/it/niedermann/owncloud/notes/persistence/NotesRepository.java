@@ -161,8 +161,8 @@ public class NotesRepository {
     // Accounts
 
     @AnyThread
-    public void addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities, @NonNull IResponseCallback<Account> callback) {
-        final Account createdAccount = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account(url, username, accountName, capabilities)));
+    public void addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities, @Nullable String displayName, @NonNull IResponseCallback<Account> callback) {
+        final Account createdAccount = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account(url, username, accountName, displayName, capabilities)));
         if (createdAccount == null) {
             callback.onError(new Exception("Could not read created account."));
         } else {
@@ -920,5 +920,9 @@ public class NotesRepository {
     @NonNull
     public LiveData<ArrayList<Throwable>> getSyncErrors() {
         return this.syncErrors;
+    }
+
+    public void updateDisplayName(long id, @Nullable String displayName) {
+        db.getAccountDao().updateDisplayName(id, displayName);
     }
 }

@@ -52,6 +52,7 @@ public class CapabilitiesWorker extends Worker {
                 repo.updateBrand(account.getId(), capabilities.getColor(), capabilities.getTextColor());
                 repo.updateApiVersion(account.getId(), capabilities.getApiVersion());
                 Log.i(TAG, capabilities.toString());
+                repo.updateDisplayName(account.getId(), CapabilitiesClient.getDisplayName(getApplicationContext(), ssoAccount));
             } catch (Throwable e) {
                 if (e instanceof NextcloudHttpRequestFailedException) {
                     if (((NextcloudHttpRequestFailedException) e).getStatusCode() == HttpURLConnection.HTTP_NOT_MODIFIED) {
