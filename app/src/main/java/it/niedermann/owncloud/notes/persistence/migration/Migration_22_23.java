@@ -1,13 +1,9 @@
 package it.niedermann.owncloud.notes.persistence.migration;
 
-import android.content.SharedPreferences;
-
 import androidx.annotation.NonNull;
-import androidx.preference.PreferenceManager;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import it.niedermann.owncloud.notes.persistence.SyncWorker;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 
 /**
