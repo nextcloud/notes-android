@@ -2,14 +2,12 @@ package it.niedermann.owncloud.notes.shared.model;
 
 import com.google.gson.annotations.Expose;
 
-import java.io.Serializable;
-
 /**
  * <a href="https://www.open-collaboration-services.org/">OpenCollaborationServices</a>
  *
  * @param <T> defines the payload of this {@link OcsResponse}.
  */
-public class OcsResponse<T> implements Serializable {
+public class OcsResponse<T> {
 
     @Expose
     public OcsWrapper<T> ocs;

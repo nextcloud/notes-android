@@ -6,7 +6,7 @@ import com.nextcloud.android.sso.api.ParsedResponse;
 import io.reactivex.Observable;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.OcsResponse;
-import it.niedermann.owncloud.notes.shared.model.User;
+import it.niedermann.owncloud.notes.shared.model.OcsUser;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -18,8 +18,8 @@ import retrofit2.http.Path;
 public interface OcsAPI {
 
     @GET("capabilities?format=json")
-    Observable<ParsedResponse<Capabilities>> getCapabilities(@Header("If-None-Match") String eTag);
+    Observable<ParsedResponse<OcsResponse<Capabilities>>> getCapabilities(@Header("If-None-Match") String eTag);
 
     @GET("users/{userId}?format=json")
-    Call<OcsResponse<User>> getUser(@Path("userId") String userId);
+    Call<OcsResponse<OcsUser>> getUser(@Path("userId") String userId);
 }

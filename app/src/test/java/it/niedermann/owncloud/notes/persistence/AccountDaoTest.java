@@ -9,6 +9,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 
+import org.json.JSONException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -47,8 +48,8 @@ public class AccountDaoTest {
     }
 
     @Test
-    public void insertAccount() throws NextcloudHttpRequestFailedException {
-        final long createdId = db.getAccountDao().insert(new Account("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", new Capabilities("{ocs: {}}", null)));
+    public void insertAccount() {
+        final long createdId = db.getAccountDao().insert(new Account("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", null, new Capabilities()));
         final Account createdAccount = db.getAccountDao().getAccountById(createdId);
         assertEquals("https://äöüß.example.com", createdAccount.getUrl());
         assertEquals("彼得", createdAccount.getUserName());
@@ -56,8 +57,8 @@ public class AccountDaoTest {
     }
 
     @Test
-    public void updateApiVersionFromNull() throws NextcloudHttpRequestFailedException {
-        final Account account = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", new Capabilities("{ocs: {}}", null))));
+    public void updateApiVersionFromNull() {
+        final Account account = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", null, new Capabilities())));
         assertNull(account.getApiVersion());
 
         assertEquals(0, db.getAccountDao().updateApiVersion(account.getId(), null));
@@ -66,8 +67,10 @@ public class AccountDaoTest {
     }
 
     @Test
-    public void updateApiVersionFromExisting() throws NextcloudHttpRequestFailedException {
-        final Account account = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", new Capabilities("{ocs: {data: {capabilities: {notes: {api_version: '[0.2]'}}}}}", null))));
+    public void updateApiVersionFromExisting() {
+        final Capabilities capabilities = new Capabilities();
+        capabilities.setApiVersion("[0.2]");
+        final Account account = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", null, capabilities)));
         assertEquals("[0.2]", account.getApiVersion());
 
         assertEquals(0, db.getAccountDao().updateApiVersion(account.getId(), "[0.2]"));
