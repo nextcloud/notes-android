@@ -18,6 +18,7 @@ import java.util.Collection;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import it.niedermann.owncloud.notes.persistence.ApiProvider;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 
@@ -45,17 +46,18 @@ public class Migration_22_23 extends Migration {
     }
 
     private static void sanitizeAccounts(@NonNull SupportSQLiteDatabase db) {
-        final Cursor cursor = db.query("SELECT ID, APIVERSION FROM ACCOUNTS", null);
+        final Cursor cursor = db.query("SELECT id, apiVersion FROM ACCOUNT", null);
         final ContentValues values = new ContentValues(1);
 
-        final int COLUMN_POSITION_ID = cursor.getColumnIndex("ID");
-        final int COLUMN_POSITION_APIVERSION = cursor.getColumnIndex("APIVERSION");
+        final int COLUMN_POSITION_ID = cursor.getColumnIndex("id");
+        final int COLUMN_POSITION_API_VERSION = cursor.getColumnIndex("apiVersion");
 
         while (cursor.moveToNext()) {
-            values.put("APIVERSION", sanitizeApiVersion(cursor.getString(COLUMN_POSITION_APIVERSION)));
+            values.put("APIVERSION", sanitizeApiVersion(cursor.getString(COLUMN_POSITION_API_VERSION)));
             db.update("ACCOUNT", OnConflictStrategy.REPLACE, values, "ID = ?", new String[]{String.valueOf(cursor.getLong(COLUMN_POSITION_ID))});
         }
         cursor.close();
+        ApiProvider.invalidateAPICache();
     }
 
     @Nullable
