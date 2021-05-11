@@ -75,9 +75,12 @@ public class NoteUtil {
             return "";
         }
         if (!TextUtils.isEmpty(title)) {
-            final String trimmedTitle = removeMarkdown(replaceCheckboxesWithEmojis(title.trim()));
-            if (content.startsWith(trimmedTitle)) {
-                content = content.substring(trimmedTitle.length());
+            if (title != null) {
+                title = title.replaceFirst("^# ", "");
+                final String trimmedTitle = removeMarkdown(replaceCheckboxesWithEmojis(title.trim()));
+                if (content.startsWith(trimmedTitle)) {
+                    content = content.substring(trimmedTitle.length());
+                }
             }
         }
         return truncateString(content.trim(), 200).replace("\n", EXCERPT_LINE_SEPARATOR);
