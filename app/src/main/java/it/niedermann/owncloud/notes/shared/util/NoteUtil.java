@@ -70,7 +70,6 @@ public class NoteUtil {
         }
         if (!TextUtils.isEmpty(title)) {
             if (title != null) {
-                title = title.replaceFirst("^# ", "");
                 final String trimmedTitle = removeMarkdown(replaceCheckboxesWithEmojis(title.trim()));
                 if (content.startsWith(trimmedTitle)) {
                     content = content.substring(trimmedTitle.length());

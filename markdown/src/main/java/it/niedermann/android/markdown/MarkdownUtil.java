@@ -50,6 +50,7 @@ public class MarkdownUtil {
     private static final Pattern PATTERN_ORDERED_LIST_ITEM = Pattern.compile("^(\\d+).\\s.+$");
     private static final Pattern PATTERN_ORDERED_LIST_ITEM_EMPTY = Pattern.compile("^(\\d+).\\s$");
     private static final Pattern PATTERN_MARKDOWN_LINK = Pattern.compile("\\[(.+)?]\\(([^ ]+?)?( \"(.+)\")?\\)");
+    private static final Pattern PATTERN_MARKDOWN_TITLE = Pattern.compile("^# ");
 
     @Nullable
     private static final String checkboxCheckedEmoji = getCheckboxEmoji(true);
@@ -496,6 +497,7 @@ public class MarkdownUtil {
         s = PATTERN_EMPHASIS.matcher(s).replaceAll("$2");
         s = PATTERN_SPACE_1.matcher(s).replaceAll("");
         s = PATTERN_SPACE_2.matcher(s).replaceAll("");
+        s = PATTERN_MARKDOWN_TITLE.matcher(s).replaceAll("");
         return s;
     }
 }
