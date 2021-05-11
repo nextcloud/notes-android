@@ -657,7 +657,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                             try {
                                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
                                 final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, null);
-                                mainViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities, new IResponseCallback<Account>() {
+                                final String displayName = CapabilitiesClient.getDisplayName(getApplicationContext(), ssoAccount);
+                                mainViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities, displayName, new IResponseCallback<Account>() {
                                     @Override
                                     public void onSuccess(Account result) {
                                         new Thread(() -> {

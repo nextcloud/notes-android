@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.persistence.dao;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -18,10 +19,10 @@ public interface AccountDao {
     long insert(Account localAccount);
 
     @Delete
-    int deleteAccount(Account localAccount);
+    void deleteAccount(Account localAccount);
 
-    String getAccounts = "SELECT * FROM Account";
-    String getAccountById = "SELECT * FROM Account WHERE ID = :accountId";
+    String getAccounts = "SELECT id, url, userName, accountName, eTag, modified, apiVersion, color, textColor, capabilitiesEtag, COALESCE(displayName, userName) as displayName FROM Account";
+    String getAccountById = "SELECT id, url, userName, accountName, eTag, modified, apiVersion, color, textColor, capabilitiesEtag, COALESCE(displayName, userName) as displayName FROM Account WHERE ID = :accountId";
 
     @Query(getAccounts)
     LiveData<List<Account>> getAccounts$();
@@ -35,7 +36,7 @@ public interface AccountDao {
     @Query(getAccountById)
     Account getAccountById(long accountId);
 
-    @Query("SELECT * FROM Account WHERE ACCOUNTNAME = :accountName")
+    @Query("SELECT id, url, userName, accountName, eTag, modified, apiVersion, color, textColor, capabilitiesEtag, COALESCE(displayName, userName) as displayName FROM Account WHERE ACCOUNTNAME = :accountName")
     Account getAccountByName(String accountName);
 
     @Query("SELECT COUNT(*) FROM Account")
@@ -55,4 +56,7 @@ public interface AccountDao {
 
     @Query("UPDATE Account SET APIVERSION = :apiVersion WHERE id = :id AND ((APIVERSION IS NULL AND :apiVersion IS NOT NULL) OR (APIVERSION IS NOT NULL AND :apiVersion IS NULL) OR APIVERSION <> :apiVersion)")
     int updateApiVersion(Long id, String apiVersion);
+
+    @Query("UPDATE Account SET DISPLAYNAME = :displayName WHERE id = :id")
+    void updateDisplayName(long id, @Nullable String displayName);
 }
