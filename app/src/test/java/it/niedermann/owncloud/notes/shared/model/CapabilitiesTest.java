@@ -107,7 +107,7 @@ public class CapabilitiesTest {
                 "}";
         final Capabilities capabilities = new CapabilitiesDeserializer().deserialize(JsonParser.parseString(response), null, null);
         assertNull(capabilities.getETag());
-        assertNull(capabilities.getApiVersion());
+        assertEquals("\"1.0\"", capabilities.getApiVersion());
         assertEquals(Color.parseColor("#1E4164"), capabilities.getColor());
         assertEquals(Color.parseColor("#ffffff"), capabilities.getTextColor());
     }

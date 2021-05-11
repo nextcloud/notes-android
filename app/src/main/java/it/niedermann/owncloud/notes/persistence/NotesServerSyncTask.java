@@ -20,7 +20,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
 import it.niedermann.owncloud.notes.persistence.entity.Account;
@@ -29,6 +28,7 @@ import it.niedermann.owncloud.notes.persistence.sync.NotesAPI;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.model.SyncResultStatus;
+import it.niedermann.owncloud.notes.shared.util.ApiVersionUtil;
 import retrofit2.Response;
 
 import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_DELETED;
@@ -82,7 +82,7 @@ abstract class NotesServerSyncTask extends Thread {
     public void run() {
         onPreExecute();
 
-        notesAPI = ApiProvider.getNotesAPI(context, ssoAccount, localAccount.getPreferredApiVersion());
+        notesAPI = ApiProvider.getNotesAPI(context, ssoAccount, ApiVersionUtil.getPreferredApiVersion(localAccount.getApiVersion()));
 
         Log.i(TAG, "STARTING SYNCHRONIZATION");
 
@@ -249,19 +249,10 @@ abstract class NotesServerSyncTask extends Thread {
             repo.updateETag(localAccount.getId(), localAccount.getETag());
             repo.updateModified(localAccount.getId(), localAccount.getModified().getTimeInMillis());
 
-
-            String supportedApiVersions = null;
-            final String supportedApiVersionsHeader = fetchResponse.getHeaders().get(HEADER_KEY_X_NOTES_API_VERSIONS);
-            if (supportedApiVersionsHeader != null) {
-                supportedApiVersions = "[" + Objects.requireNonNull(supportedApiVersionsHeader) + "]";
-            }
-            try {
-                if (repo.updateApiVersion(localAccount.getId(), supportedApiVersions)) {
-                    localAccount.setApiVersion(supportedApiVersions);
-                }
-            } catch (Exception e) {
-                exceptions.add(e);
-            }
+            final String newApiVersion = ApiVersionUtil.sanitize(fetchResponse.getHeaders().get(HEADER_KEY_X_NOTES_API_VERSIONS));
+            localAccount.setApiVersion(newApiVersion);
+            repo.updateApiVersion(localAccount.getId(), newApiVersion);
+            Log.d(TAG, "ApiVersion: " + newApiVersion);
             return true;
         } catch (Throwable t) {
             final Throwable cause = t.getCause();

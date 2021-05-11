@@ -83,6 +83,9 @@ public class ApiVersion implements Comparable<ApiVersion> {
         return 0;
     }
 
+    /**
+     * Checks only the <strong>{@link #major}</strong> version.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

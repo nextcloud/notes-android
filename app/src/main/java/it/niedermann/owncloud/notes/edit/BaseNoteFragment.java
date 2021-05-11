@@ -47,6 +47,7 @@ import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
+import it.niedermann.owncloud.notes.shared.util.ApiVersionUtil;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 import it.niedermann.owncloud.notes.shared.util.NotesColorUtil;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
@@ -193,7 +194,8 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         if (note != null) {
             prepareFavoriteOption(menu.findItem(R.id.menu_favorite));
 
-            menu.findItem(R.id.menu_title).setVisible(localAccount.getPreferredApiVersion() != null && localAccount.getPreferredApiVersion().compareTo(ApiVersion.API_VERSION_1_0) >= 0);
+            final ApiVersion preferredApiVersion = ApiVersionUtil.getPreferredApiVersion(localAccount.getApiVersion());
+            menu.findItem(R.id.menu_title).setVisible(preferredApiVersion != null && preferredApiVersion.compareTo(ApiVersion.API_VERSION_1_0) >= 0);
             menu.findItem(R.id.menu_delete).setVisible(!isNew);
         }
     }
