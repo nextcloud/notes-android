@@ -8,8 +8,6 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.room.Room;
 import androidx.test.core.app.ApplicationProvider;
 
-import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -48,12 +46,12 @@ public class NotesDaoTest {
     private Account account;
 
     @Before
-    public void setupDB() throws NextcloudHttpRequestFailedException {
+    public void setupDB() {
         db = Room
                 .inMemoryDatabaseBuilder(ApplicationProvider.getApplicationContext(), NotesDatabase.class)
                 .allowMainThreadQueries()
                 .build();
-        db.getAccountDao().insert(new Account("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", new Capabilities("{ocs: {}}", null)));
+        db.getAccountDao().insert(new Account("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", null, new Capabilities()));
         account = db.getAccountDao().getAccountByName("彼得@äöüß.example.com");
     }
 
@@ -109,7 +107,7 @@ public class NotesDaoTest {
     }
 
     @Test
-    public void getRemoteIds() throws NextcloudHttpRequestFailedException {
+    public void getRemoteIds() {
         final Account secondAccount = setupSecondAccount();
 
         db.getNoteDao().addNote(new Note(1, 4711L, Calendar.getInstance(), "T", "C", "", false, "1", VOID, account.getId(), "", 0));
@@ -150,7 +148,7 @@ public class NotesDaoTest {
     }
 
     @Test
-    public void getFavoritesCount() throws NextcloudHttpRequestFailedException, InterruptedException {
+    public void getFavoritesCount() throws InterruptedException {
         final Account secondAccount = setupSecondAccountAndTestNotes();
 
         assertEquals(Integer.valueOf(1), db.getNoteDao().countFavorites(account.getId()));
@@ -161,7 +159,7 @@ public class NotesDaoTest {
     }
 
     @Test
-    public void count() throws NextcloudHttpRequestFailedException, InterruptedException {
+    public void count() throws InterruptedException {
         final Account secondAccount = setupSecondAccountAndTestNotes();
 
         assertEquals(Integer.valueOf(7), db.getNoteDao().count(account.getId()));
@@ -172,7 +170,7 @@ public class NotesDaoTest {
     }
 
     @Test
-    public void getLocalModifiedNotes() throws NextcloudHttpRequestFailedException {
+    public void getLocalModifiedNotes() {
         final Account secondAccount = setupSecondAccountAndTestNotes();
 
         final List<Note> accountNotes = db.getNoteDao().getLocalModifiedNotes(account.getId());
@@ -349,7 +347,7 @@ public class NotesDaoTest {
     }
 
     @Test
-    public void getCategoriesLiveData() throws InterruptedException, NextcloudHttpRequestFailedException {
+    public void getCategoriesLiveData() throws InterruptedException {
         final Account secondAccount = setupSecondAccountAndTestNotes();
 
         final List<CategoryWithNotesCount> accountCategories = NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().getCategories$(account.getId()));
@@ -375,7 +373,7 @@ public class NotesDaoTest {
     }
 
     @Test
-    public void searchCategories() throws InterruptedException, NextcloudHttpRequestFailedException {
+    public void searchCategories() throws InterruptedException {
         final Account secondAccount = setupSecondAccountAndTestNotes();
 
         assertEquals(2, NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().searchCategories$(account.getId(), "M%")).size());
@@ -389,7 +387,7 @@ public class NotesDaoTest {
     }
 
     @Test
-    public void searchRecentByModified() throws NextcloudHttpRequestFailedException {
+    public void searchRecentByModified() {
         final Account secondAccount = setupSecondAccountAndTestNotes();
         final List<Note> result = db.getNoteDao().searchRecentByModified(secondAccount.getId(), "T");
         assertEquals(5, result.size());
@@ -409,12 +407,12 @@ public class NotesDaoTest {
         return true;
     }
 
-    private Account setupSecondAccount() throws NextcloudHttpRequestFailedException {
-        db.getAccountDao().insert(new Account("https://example.org", "test", "test@example.org", new Capabilities("{ocs: {}}", null)));
+    private Account setupSecondAccount() {
+        db.getAccountDao().insert(new Account("https://example.org", "test", "test@example.org", null, new Capabilities()));
         return db.getAccountDao().getAccountByName("test@example.org");
     }
 
-    private Account setupSecondAccountAndTestNotes() throws NextcloudHttpRequestFailedException {
+    private Account setupSecondAccountAndTestNotes() {
         final Account secondAccount = setupSecondAccount();
 
         long uniqueId = 1;
