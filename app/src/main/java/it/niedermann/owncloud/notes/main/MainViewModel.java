@@ -414,8 +414,6 @@ public class MainViewModel extends AndroidViewModel {
                             }
                         }
                         callback.onError(t);
-                    } finally {
-                        repo.updateDisplayName(localAccount.getId(), CapabilitiesClient.getDisplayName(getApplication(), ssoAccount));
                     }
                 } catch (NextcloudFilesAppAccountNotFoundException e) {
                     repo.deleteAccount(localAccount);

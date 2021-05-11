@@ -8,9 +8,9 @@ public class Capabilities {
 
     private String apiVersion = null;
     @ColorInt
-    private int color = -16743735;
+    private int color = -16743735; // #0082C9
     @ColorInt
-    private int textColor = -16777216;
+    private int textColor = -16777216; // #000000
     @Nullable
     private String eTag;
 
