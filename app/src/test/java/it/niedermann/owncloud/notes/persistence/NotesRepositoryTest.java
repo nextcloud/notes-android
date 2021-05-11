@@ -156,23 +156,29 @@ public class NotesRepositoryTest {
 
     @Test
     public void updateApiVersion() {
-        assertThrows(IllegalArgumentException.class, () -> repo.updateApiVersion(account.getId(), ""));
-        assertThrows(IllegalArgumentException.class, () -> repo.updateApiVersion(account.getId(), "asdf"));
-        assertThrows(IllegalArgumentException.class, () -> repo.updateApiVersion(account.getId(), "{}"));
+        repo.updateApiVersion(account.getId(), "");
+        assertNull(repo.getAccountById(account.getId()).getApiVersion());
+
+        repo.updateApiVersion(account.getId(), "foo");
+        assertNull(repo.getAccountById(account.getId()).getApiVersion());
+
+        repo.updateApiVersion(account.getId(), "{}");
+        assertNull(repo.getAccountById(account.getId()).getApiVersion());
 
         repo.updateApiVersion(account.getId(), null);
         assertNull(repo.getAccountById(account.getId()).getApiVersion());
+
         repo.updateApiVersion(account.getId(), "[]");
         assertNull(repo.getAccountById(account.getId()).getApiVersion());
 
         repo.updateApiVersion(account.getId(), "[1.0]");
         assertEquals("[1.0]", repo.getAccountById(account.getId()).getApiVersion());
-        repo.updateApiVersion(account.getId(), "[0.2, 1.0]");
-        assertEquals("[0.2, 1.0]", repo.getAccountById(account.getId()).getApiVersion());
 
-        // TODO is this really indented?
-        repo.updateApiVersion(account.getId(), "[0.2, abc]");
-        assertEquals("[0.2, abc]", repo.getAccountById(account.getId()).getApiVersion());
+        repo.updateApiVersion(account.getId(), "[0.2, 1.0]");
+        assertEquals("[0.2,1.0]", repo.getAccountById(account.getId()).getApiVersion());
+
+        repo.updateApiVersion(account.getId(), "[0.2, foo]");
+        assertEquals("[0.2]", repo.getAccountById(account.getId()).getApiVersion());
     }
 
     @Test

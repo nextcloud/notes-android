@@ -30,11 +30,9 @@ import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -61,6 +59,7 @@ import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 import it.niedermann.owncloud.notes.shared.model.SyncResultStatus;
+import it.niedermann.owncloud.notes.shared.util.ApiVersionUtil;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 import it.niedermann.owncloud.notes.shared.util.SSOUtil;
 
@@ -462,8 +461,7 @@ public class NotesRepository {
         final Note newNote;
         // Re-read the up to date remoteId from the database because the UI might not have the state after synchronization yet
         // https://github.com/stefan-niedermann/nextcloud-notes/issues/1198
-        @Nullable
-        final Long remoteId = db.getNoteDao().getRemoteId(oldNote.getId());
+        @Nullable final Long remoteId = db.getNoteDao().getRemoteId(oldNote.getId());
         if (newContent == null) {
             newNote = new Note(oldNote.getId(), remoteId, oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.getCategory(), oldNote.getFavorite(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), oldNote.getExcerpt(), oldNote.getScrollY());
         } else {
@@ -471,7 +469,8 @@ public class NotesRepository {
             if (newTitle != null) {
                 title = newTitle;
             } else {
-                if ((remoteId == null || localAccount.getPreferredApiVersion() == null || localAccount.getPreferredApiVersion().compareTo(ApiVersion.API_VERSION_1_0) < 0) &&
+                final ApiVersion preferredApiVersion = ApiVersionUtil.getPreferredApiVersion(localAccount.getApiVersion());
+                if ((remoteId == null || preferredApiVersion == null || preferredApiVersion.compareTo(ApiVersion.API_VERSION_1_0) < 0) &&
                         (defaultNonEmptyTitle.equals(oldNote.getTitle()))) {
                     title = NoteUtil.generateNonEmptyNoteTitle(newContent, context);
                 } else {
@@ -573,40 +572,23 @@ public class NotesRepository {
     }
 
     /**
-     * @param apiVersion has to be a JSON array as a string <code>["0.2", "1.0", ...]</code>
-     * @return whether or not the given {@link ApiVersion} has been written to the database
-     * @throws IllegalArgumentException if the apiVersion does not match the expected format
+     * @param raw has to be a JSON array as a string <code>["0.2", "1.0", ...]</code>
      */
-    public boolean updateApiVersion(long accountId, @Nullable String apiVersion) throws IllegalArgumentException {
-        if (apiVersion != null) {
-            try {
-                JSONArray apiVersions = new JSONArray(apiVersion);
-                for (int i = 0; i < apiVersions.length(); i++) {
-                    ApiVersion.of(apiVersions.getString(i));
-                }
-                if (apiVersions.length() > 0) {
-                    final int updatedRows = db.getAccountDao().updateApiVersion(accountId, apiVersion);
-                    if (updatedRows == 0) {
-                        Log.d(TAG, "ApiVersion not updated, because it did not change");
-                    } else if (updatedRows == 1) {
-                        Log.i(TAG, "Updated apiVersion to \"" + apiVersion + "\" for accountId = " + accountId);
-                        ApiProvider.invalidateAPICache();
-                    } else {
-                        Log.w(TAG, "Updated " + updatedRows + " but expected only 1 for accountId = " + accountId + " and apiVersion = \"" + apiVersion + "\"");
-                    }
-                    return true;
-                } else {
-                    Log.i(TAG, "Given API version is a valid JSON array but does not contain any valid API versions. Do not update database.");
-                }
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("API version does contain a non-valid version: " + apiVersion);
-            } catch (JSONException e) {
-                throw new IllegalArgumentException("API version must contain be a JSON array: " + apiVersion);
+    public void updateApiVersion(long accountId, @Nullable String raw) {
+        final Collection<ApiVersion> apiVersions = ApiVersionUtil.parse(raw);
+        if (apiVersions.size() > 0) {
+            final int updatedRows = db.getAccountDao().updateApiVersion(accountId, ApiVersionUtil.serialize(apiVersions));
+            if (updatedRows == 0) {
+                Log.d(TAG, "ApiVersion not updated, because it did not change");
+            } else if (updatedRows == 1) {
+                Log.i(TAG, "Updated apiVersion to \"" + raw + "\" for accountId = " + accountId);
+                ApiProvider.invalidateAPICache();
+            } else {
+                Log.w(TAG, "Updated " + updatedRows + " but expected only 1 for accountId = " + accountId + " and apiVersion = \"" + raw + "\"");
             }
         } else {
-            Log.v(TAG, "Given API version is null. Do not update database");
+            Log.v(TAG, "Could not extract any version from the given String: " + raw);
         }
-        return false;
     }
 
     /**
@@ -785,7 +767,7 @@ public class NotesRepository {
      *
      * @param onlyLocalChanges Whether to only push local changes to the server or to also load the whole list of notes from the server.
      */
-    public synchronized void scheduleSync(Account account, boolean onlyLocalChanges) {
+    public synchronized void scheduleSync(@Nullable Account account, boolean onlyLocalChanges) {
         if (account == null) {
             Log.i(TAG, SingleSignOnAccount.class.getSimpleName() + " is null. Is this a local account?");
         } else {

@@ -41,8 +41,7 @@ public class CapabilitiesDeserializer implements JsonDeserializer<Capabilities> 
             if (capabilities.has(CAPABILITIES_NOTES)) {
                 final JsonObject notes = capabilities.getAsJsonObject(CAPABILITIES_NOTES);
                 if (notes.has(CAPABILITIES_NOTES_API_VERSION)) {
-                    final JsonElement apiVersion = notes.get(CAPABILITIES_NOTES_API_VERSION);
-                    response.setApiVersion(apiVersion.isJsonArray() ? apiVersion.toString() : null);
+                    response.setApiVersion(notes.get(CAPABILITIES_NOTES_API_VERSION).toString());
                 }
             }
             if (capabilities.has(CAPABILITIES_THEMING)) {
