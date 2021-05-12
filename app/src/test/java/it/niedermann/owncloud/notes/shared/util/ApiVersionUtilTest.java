@@ -21,16 +21,17 @@ import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 public class ApiVersionUtilTest extends TestCase {
 
     @Test
-    public void testSanitizeVersionString_invalid_one() {
+    public void testParse_invalid_one() {
         assertEquals(0, ApiVersionUtil.parse(null).size());
         assertEquals(0, ApiVersionUtil.parse("").size());
         assertEquals(0, ApiVersionUtil.parse(" ").size());
         assertEquals(0, ApiVersionUtil.parse("{}").size());
         assertEquals(0, ApiVersionUtil.parse("[]").size());
+        assertEquals(0, ApiVersionUtil.parse("[foo").size());
     }
 
     @Test
-    public void testSanitizeVersionString_valid_one() {
+    public void testParse_valid_one() {
         Collection<ApiVersion> result;
         ApiVersion current;
 
@@ -66,7 +67,7 @@ public class ApiVersionUtilTest extends TestCase {
     }
 
     @Test
-    public void testSanitizeVersionString_invalid_many() {
+    public void testParse_invalid_many() {
         Collection<ApiVersion> result;
         ApiVersion current;
         Iterator<ApiVersion> iterator;
@@ -103,7 +104,7 @@ public class ApiVersionUtilTest extends TestCase {
     }
 
     @Test
-    public void testSanitizeVersionString_valid_many() {
+    public void testParse_valid_many() {
         Collection<ApiVersion> result;
         ApiVersion current;
         Iterator<ApiVersion> iterator;
