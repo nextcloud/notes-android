@@ -736,6 +736,11 @@ public class MarkdownUtilTest extends TestCase {
     }
 
     @Test
+    public void testGetMarkdownLink() {
+        assertEquals("[Foo](https://bar)", MarkdownUtil.getMarkdownLink("Foo", "https://bar"));
+    }
+
+    @Test
     public void testRemoveMarkdown() {
         assertEquals("Test", MarkdownUtil.removeMarkdown("Test"));
         assertEquals("Foo\nBar", MarkdownUtil.removeMarkdown("Foo\nBar"));
