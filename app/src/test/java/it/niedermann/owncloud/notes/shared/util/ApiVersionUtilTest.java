@@ -187,6 +187,11 @@ public class ApiVersionUtilTest extends TestCase {
         assertEquals("[1.0,1.0]", ApiVersionUtil.serialize(Arrays.asList(ApiVersion.API_VERSION_1_0, ApiVersion.API_VERSION_1_0)));
     }
 
+    @Test
+    public void testSanitize() {
+        assertEquals("[1.1,1.1,1.2,0.2]", ApiVersionUtil.sanitize("[null, 1.1, 1.1,,1.2, 0.2]"));
+    }
+
     @SuppressWarnings("ConstantConditions")
     @Test
     public void testGetPreferredApiVersion() {
