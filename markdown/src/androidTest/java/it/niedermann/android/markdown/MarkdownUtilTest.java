@@ -92,6 +92,11 @@ public class MarkdownUtilTest extends TestCase {
     }
 
     @Test
+    public void testGetMarkdownLink() {
+        assertEquals("[Foo](https://bar)", MarkdownUtil.getMarkdownLink("Foo", "https://bar"));
+    }
+
+    @Test
     public void testLineStartsWithCheckbox() {
         final Map<String, Boolean> lines = new HashMap<>();
         lines.put("  - [ ] a", true);
@@ -447,62 +452,15 @@ public class MarkdownUtilTest extends TestCase {
         assertEquals(33, MarkdownUtil.insertLink(builder, 2, 7, "https://www.example.com"));
         assertEquals("  [Lorem](https://www.example.com)  ", builder.toString());
     }
-
+    
     @Test
-    public void testRemoveContainingPunctuation() {
-        try {
-            final Method m = MarkdownUtil.class.getDeclaredMethod("removeContainingPunctuation", Editable.class, int.class, int.class, String.class);
-            m.setAccessible(true);
-            Editable builder;
+    public void testEscape() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        final Method m = MarkdownUtil.class.getDeclaredMethod("escape", char.class);
+        m.setAccessible(true);
 
-            builder = new SpannableStringBuilder("Lorem *ipsum* dolor");
-            m.invoke(null, builder, 0, 19, "*");
-            assertEquals("Lorem ipsum dolor", builder.toString());
-
-            builder = new SpannableStringBuilder("*Lorem ipsum dolor*");
-            m.invoke(null, builder, 0, 19, "*");
-            assertEquals("Lorem ipsum dolor", builder.toString());
-
-            builder = new SpannableStringBuilder("**Lorem ipsum**");
-            m.invoke(null, builder, 0, 15, "**");
-            assertEquals("Lorem ipsum", builder.toString());
-
-            builder = new SpannableStringBuilder("*Lorem* *ipsum*");
-            m.invoke(null, builder, 0, 15, "*");
-            assertEquals("Lorem ipsum", builder.toString());
-
-            builder = new SpannableStringBuilder("Lorem* ipsum");
-            m.invoke(null, builder, 0, 12, "*");
-            assertEquals("Lorem ipsum", builder.toString());
-
-            builder = new SpannableStringBuilder("*Lorem* ipsum*");
-            m.invoke(null, builder, 0, 14, "*");
-            assertEquals("Lorem ipsum", builder.toString());
-
-            builder = new SpannableStringBuilder("**Lorem ipsum**");
-            m.invoke(null, builder, 0, 15, "*");
-            assertEquals("Lorem ipsum", builder.toString());
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    @SuppressWarnings("ConstantConditions")
-    public void testSelectionIsSurroundedByPunctuation() {
-        try {
-            final Method m = MarkdownUtil.class.getDeclaredMethod("selectionIsSurroundedByPunctuation", CharSequence.class, int.class, int.class, String.class);
-            m.setAccessible(true);
-            assertTrue((Boolean) m.invoke(null, "*Lorem ipsum*", 1, 12, "*"));
-            assertTrue((Boolean) m.invoke(null, "**Lorem ipsum**", 2, 13, "*"));
-            assertTrue((Boolean) m.invoke(null, "**Lorem ipsum**", 2, 13, "**"));
-
-            assertFalse((Boolean) m.invoke(null, "*Lorem ipsum*", 0, 12, "*"));
-            assertFalse((Boolean) m.invoke(null, "*Lorem ipsum*", 1, 13, "*"));
-            assertFalse((Boolean) m.invoke(null, "*Lorem ipsum*", 0, 13, "*"));
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
+        assertEquals("\\*", m.invoke(null, '*'));
+        assertEquals("\\_", m.invoke(null, '_'));
+        assertEquals("\\~", m.invoke(null, '~'));
     }
 
     @Test
@@ -733,11 +691,6 @@ public class MarkdownUtilTest extends TestCase {
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
-    }
-
-    @Test
-    public void testGetMarkdownLink() {
-        assertEquals("[Foo](https://bar)", MarkdownUtil.getMarkdownLink("Foo", "https://bar"));
     }
 
     @Test

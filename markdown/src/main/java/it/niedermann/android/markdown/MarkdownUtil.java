@@ -269,6 +269,14 @@ public class MarkdownUtil {
     }
 
     /**
+     * @param c Character to escape
+     * @return {@param c} escaped by a <code>\</code> character
+     */
+    private static String escape(char c) {
+        return "\\\\".substring(0, 1) + c;
+    }
+
+    /**
      * Modifies the {@param editable} and adds the given {@param punctuation} from
      * {@param selectionStart} to {@param selectionEnd} or removes the {@param punctuation} in case
      * it already is around the selected part.
@@ -296,7 +304,7 @@ public class MarkdownUtil {
                         if (containedPunctuationCount % 2 == 1) {
                             return selectionEnd;
                         }
-                        final String punctuationRegOnce = "\\" + punctuation.charAt(0);
+                        final String punctuationRegOnce = escape(punctuation.charAt(0));
                         final String[] tmp = initialString.split(punctuationRegOnce);
                         int newSelectionStart;
                         int newSelectionEnd = 0;
@@ -313,7 +321,7 @@ public class MarkdownUtil {
                         if (containedPunctuationCount % 2 == 1) {
                             return selectionEnd;
                         }
-                        final String punctuationRegTriple = "\\" + punctuation.charAt(0) + "\\" + punctuation.charAt(0) + "\\" + punctuation.charAt(0);
+                        final String punctuationRegTriple = escape(punctuation.charAt(0)) + escape(punctuation.charAt(0)) + escape(punctuation.charAt(0));
                         final String[] tmp = initialString.split(punctuationRegTriple);
                         int newSelectionStart;
                         int newSelectionEnd = 0;
@@ -326,7 +334,7 @@ public class MarkdownUtil {
                         }
                         return newSelectionEnd - punctuation.length() * 2;
                     } else {
-                        final String punctuationRegDouble = "\\" + punctuation.charAt(0) + "\\" + punctuation.charAt(0);
+                        final String punctuationRegDouble = escape(punctuation.charAt(0)) + escape(punctuation.charAt(0));
                         final String[] tmp = initialString.split(punctuationRegDouble);
                         int newSelectionStart;
                         int newSelectionEnd = 0;
@@ -352,7 +360,7 @@ public class MarkdownUtil {
                     final String punctuationDouble = punctuation;
                     final String punctuationTriple = punctuation + punctuation.charAt(0);
                     if (initialString.contains(punctuationTriple)) {
-                        final String punctuationRegTriple = "\\" + punctuation.charAt(0) + "\\" + punctuation.charAt(0) + "\\" + punctuation.charAt(0);
+                        final String punctuationRegTriple = escape(punctuation.charAt(0)) + escape(punctuation.charAt(0)) + escape(punctuation.charAt(0));
                         final String[] tmp = initialString.split(punctuationRegTriple);
                         int newSelectionStart;
                         int newSelectionEnd = 0;
@@ -369,7 +377,7 @@ public class MarkdownUtil {
                         if (containedPunctuationCount % 2 == 1) {
                             return selectionEnd;
                         }
-                        final String punctuationRegDouble = "\\" + punctuation.charAt(0) + "\\" + punctuation.charAt(0);
+                        final String punctuationRegDouble = escape(punctuation.charAt(0)) + escape(punctuation.charAt(0));
                         final String[] tmp = initialString.split(punctuationRegDouble);
                         int newSelectionStart;
                         int newSelectionEnd = 0;
@@ -381,7 +389,7 @@ public class MarkdownUtil {
                         }
                         return newSelectionEnd;
                     } else {
-                        final String punctuationRegOnce = "\\" + punctuation.charAt(0);
+                        final String punctuationRegOnce = escape(punctuation.charAt(0));
                         final String[] tmp = initialString.split(punctuationRegOnce);
                         int newSelectionStart;
                         int newSelectionEnd = 0;
