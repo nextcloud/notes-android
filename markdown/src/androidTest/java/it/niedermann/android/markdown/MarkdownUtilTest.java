@@ -167,7 +167,7 @@ public class MarkdownUtilTest extends TestCase {
 
         // Add italic
         builder = new SpannableStringBuilder("Lorem ipsum dolor sit amet.");
-        assertEquals(13, MarkdownUtil.togglePunctuation(builder, 6, 11, "*"));
+        assertEquals(12, MarkdownUtil.togglePunctuation(builder, 6, 11, "*"));
         assertEquals("Lorem *ipsum* dolor sit amet.", builder.toString());
 
         // Remove italic
@@ -177,7 +177,7 @@ public class MarkdownUtilTest extends TestCase {
 
         // Add bold
         builder = new SpannableStringBuilder("Lorem ipsum dolor sit amet.");
-        assertEquals(15, MarkdownUtil.togglePunctuation(builder, 6, 11, "**"));
+        assertEquals(13, MarkdownUtil.togglePunctuation(builder, 6, 11, "**"));
         assertEquals("Lorem **ipsum** dolor sit amet.", builder.toString());
 
         // Remove bold
@@ -187,7 +187,7 @@ public class MarkdownUtilTest extends TestCase {
 
         // Add strike
         builder = new SpannableStringBuilder("Lorem ipsum dolor sit amet.");
-        assertEquals(15, MarkdownUtil.togglePunctuation(builder, 6, 11, "~~"));
+        assertEquals(13, MarkdownUtil.togglePunctuation(builder, 6, 11, "~~"));
         assertEquals("Lorem ~~ipsum~~ dolor sit amet.", builder.toString());
 
         // Remove strike
@@ -197,7 +197,7 @@ public class MarkdownUtilTest extends TestCase {
 
         // Add italic at first position
         builder = new SpannableStringBuilder("Lorem ipsum dolor sit amet.");
-        assertEquals(7, MarkdownUtil.togglePunctuation(builder, 0, 5, "*"));
+        assertEquals(6, MarkdownUtil.togglePunctuation(builder, 0, 5, "*"));
         assertEquals("*Lorem* ipsum dolor sit amet.", builder.toString());
 
         // Remove italic from first position
@@ -207,7 +207,7 @@ public class MarkdownUtilTest extends TestCase {
 
         // Add italic at last position
         builder = new SpannableStringBuilder("Lorem ipsum dolor sit amet.");
-        assertEquals(29, MarkdownUtil.togglePunctuation(builder, 22, 27, "*"));
+        assertEquals(28, MarkdownUtil.togglePunctuation(builder, 22, 27, "*"));
         assertEquals("Lorem ipsum dolor sit *amet.*", builder.toString());
 
         // Remove italic from last position
@@ -234,55 +234,83 @@ public class MarkdownUtilTest extends TestCase {
 
         // Remove containing punctuation
         builder = new SpannableStringBuilder("Lorem *ipsum* dolor sit amet.");
-        assertEquals(27, MarkdownUtil.togglePunctuation(builder, 0, 29, "*"));
+        assertEquals(11, MarkdownUtil.togglePunctuation(builder, 0, 29, "*"));
         assertEquals("Lorem ipsum dolor sit amet.", builder.toString());
 
         // Remove multiple containing punctuations
         builder = new SpannableStringBuilder("Lorem *ipsum* dolor *sit* amet.");
-        assertEquals(27, MarkdownUtil.togglePunctuation(builder, 0, 31, "*"));
+        assertEquals(21, MarkdownUtil.togglePunctuation(builder, 0, 31, "*"));
         assertEquals("Lorem ipsum dolor sit amet.", builder.toString());
 
-        // Special use-case: toggle from italic to bold and back
+        // Toggle italic on bold text
+        builder = new SpannableStringBuilder("Lorem **ipsum** dolor sit amet.");
+        assertEquals(16, MarkdownUtil.togglePunctuation(builder, 8, 13, "*"));
+        assertEquals("Lorem ***ipsum*** dolor sit amet.", builder.toString());
 
-        // TODO Toggle italic on bold text
-//        builder = new SpannableStringBuilder("Lorem **ipsum** dolor sit amet.");
-//        assertEquals(17, MarkdownUtil.togglePunctuation(builder, 8, 13, "*"));
-//        assertEquals("Lorem ***ipsum*** dolor sit amet.", builder.toString());
+        // Toggle bold on italic text
+        builder = new SpannableStringBuilder("Lorem *ipsum* dolor sit amet.");
+        assertEquals(17, MarkdownUtil.togglePunctuation(builder, 7, 12, "**"));
+        assertEquals("Lorem ***ipsum*** dolor sit amet.", builder.toString());
 
-        // TODO Toggle bold on italic text
-//        builder = new SpannableStringBuilder("Lorem *ipsum* dolor sit amet.");
-//        assertEquals(17, MarkdownUtil.togglePunctuation(builder, 7, 12, "**"));
-//        assertEquals("Lorem ***ipsum*** dolor sit amet.", builder.toString());
+        // Toggle bold to italic
+        builder = new SpannableStringBuilder("Lorem **ipsum** dolor sit amet.");
+        assertEquals(16, MarkdownUtil.togglePunctuation(builder, 0, 31, "*"));
+        assertEquals("Lorem ***ipsum*** dolor sit amet.", builder.toString());
 
-        // TODO Toggle bold to italic
-//        builder = new SpannableStringBuilder("Lorem **ipsum** dolor sit amet.");
-//        assertEquals(33, MarkdownUtil.togglePunctuation(builder, 0, 31, "*"));
-//        assertEquals("Lorem ***ipsum*** dolor sit amet.", builder.toString());
+        // Toggle multiple bold parts to italic
+        builder = new SpannableStringBuilder("Lorem **ipsum** dolor **sit** amet.");
+        assertEquals(32, MarkdownUtil.togglePunctuation(builder, 0, 34, "*"));
+        assertEquals("Lorem ***ipsum*** dolor ***sit*** amet.", builder.toString());
 
-        // TODO Toggle multiple bold parts to italic
-//        builder = new SpannableStringBuilder("Lorem **ipsum** dolor **sit** amet.");
-//        assertEquals(38, MarkdownUtil.togglePunctuation(builder, 0, 34, "*"));
-//        assertEquals("Lorem ***ipsum*** dolor ***sit*** amet.", builder.toString());
+        // Toggle italic and bold to bold
+        builder = new SpannableStringBuilder("Lorem ***ipsum*** dolor sit amet.");
+        assertEquals(13, MarkdownUtil.togglePunctuation(builder, 0, 14, "*"));
+        assertEquals("Lorem **ipsum** dolor sit amet.", builder.toString());
 
-        // TODO Toggle italic and bold to bold
-//        builder = new SpannableStringBuilder("Lorem ***ipsum*** dolor sit amet.");
-//        assertEquals(13, MarkdownUtil.togglePunctuation(builder, 0, 14, "*"));
-//        assertEquals("Lorem **ipsum** dolor sit amet.", builder.toString());
+        // Toggle italic and bold to italic
+        builder = new SpannableStringBuilder("Lorem ***ipsum*** dolor sit amet.");
+        assertEquals(12, MarkdownUtil.togglePunctuation(builder, 9, 14, "**"));
+        assertEquals("Lorem *ipsum* dolor sit amet.", builder.toString());
 
-        // TODO Toggle italic and bold to italic
-//        builder = new SpannableStringBuilder("Lorem ***ipsum*** dolor sit amet.");
-//        assertEquals(12, MarkdownUtil.togglePunctuation(builder, 9, 14, "**"));
-//        assertEquals("Lorem *ipsum* dolor sit amet.", builder.toString());
+        // Toggle multiple italic and bold to bold
+        builder = new SpannableStringBuilder("Lorem ***ipsum*** dolor ***sit*** amet.");
+        assertEquals(27, MarkdownUtil.togglePunctuation(builder, 0, 38, "*"));
+        assertEquals("Lorem **ipsum** dolor **sit** amet.", builder.toString());
 
-        // TODO Toggle multiple italic and bold to bold
-//        builder = new SpannableStringBuilder("Lorem ***ipsum*** dolor ***sit*** amet.");
-//        assertEquals(34, MarkdownUtil.togglePunctuation(builder, 0, 38, "*"));
-//        assertEquals("Lorem **ipsum** dolor **sit** amet.", builder.toString());
+        // Toggle multiple italic and bold to italic
+        builder = new SpannableStringBuilder("Lorem ***ipsum*** dolor ***sit*** amet.");
+        assertEquals(24, MarkdownUtil.togglePunctuation(builder, 0, 38, "**"));
+        assertEquals("Lorem *ipsum* dolor *sit* amet.", builder.toString());
 
-        // TODO Toggle multiple italic and bold to italic
-//        builder = new SpannableStringBuilder("Lorem ***ipsum*** dolor ***sit*** amet.");
-//        assertEquals(30, MarkdownUtil.togglePunctuation(builder, 0, 38, "**"));
-//        assertEquals("Lorem *ipsum* dolor *sit* amet.", builder.toString());
+        // Toggle italic on an empty text
+        builder = new SpannableStringBuilder("");
+        assertEquals(1, MarkdownUtil.togglePunctuation(builder, 0, 0, "*"));
+        assertEquals("**", builder.toString());
+
+        // Toggle italic on a blank selection
+        builder = new SpannableStringBuilder(" ");
+        assertEquals(2, MarkdownUtil.togglePunctuation(builder, 0, 1, "*"));
+        assertEquals("* *", builder.toString());
+
+        // Toggle italic on a partial blank selection
+        builder = new SpannableStringBuilder("   ");
+        assertEquals(3, MarkdownUtil.togglePunctuation(builder, 1, 2, "*"));
+        assertEquals(" * * ", builder.toString());
+
+        // Toggle bold on an empty text
+        builder = new SpannableStringBuilder("");
+        assertEquals(2, MarkdownUtil.togglePunctuation(builder, 0, 0, "**"));
+        assertEquals("****", builder.toString());
+
+        // Toggle bold on a blank selection
+        builder = new SpannableStringBuilder(" ");
+        assertEquals(3, MarkdownUtil.togglePunctuation(builder, 0, 1, "**"));
+        assertEquals("** **", builder.toString());
+
+        // Toggle bold on a partial blank selection
+        builder = new SpannableStringBuilder("   ");
+        assertEquals(4, MarkdownUtil.togglePunctuation(builder, 1, 2, "**"));
+        assertEquals(" ** ** ", builder.toString());
     }
 
     @Test

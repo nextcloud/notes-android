@@ -1,7 +1,9 @@
 package it.niedermann.owncloud.notes.importaccount;
 
+import android.content.Context;
 import android.accounts.NetworkErrorException;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.preference.PreferenceManager;
 
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.AccountImportCancelledException;
@@ -28,6 +31,7 @@ import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.exception.ExceptionHandler;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.ApiProvider;
+import it.niedermann.owncloud.notes.persistence.SyncWorker;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
@@ -90,6 +94,12 @@ public class ImportAccountActivity extends AppCompatActivity {
                         Log.i(TAG, "Loading capabilities for " + ssoAccount.name);
                         final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, null);
                         importAccountViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities, new IResponseCallback<Account>() {
+
+                            /**
+                             * Update syncing when adding account
+                             * https://github.com/stefan-niedermann/nextcloud-deck/issues/531
+                             * @param account the account to add
+                             */
                             @Override
                             public void onSuccess(Account account) {
                                 runOnUiThread(() -> {
@@ -98,6 +108,8 @@ public class ImportAccountActivity extends AppCompatActivity {
                                     setResult(RESULT_OK);
                                     finish();
                                 });
+                                SyncWorker.update(ImportAccountActivity.this, PreferenceManager.getDefaultSharedPreferences(ImportAccountActivity.this)
+                                        .getBoolean(getString(R.string.pref_key_background_sync), true));
                             }
 
                             @Override
