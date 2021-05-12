@@ -1,1 +1,2 @@
 - ⚙️ Enhancing toggling of existing punctuation in the editor (#1193) - by @Jimmy-7664
+- 🐞 Also remove markdown from title when the note only has one line (#1205)

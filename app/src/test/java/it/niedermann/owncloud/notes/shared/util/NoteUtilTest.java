@@ -35,6 +35,9 @@ public class NoteUtilTest extends TestCase {
         assertEquals("Test", NoteUtil.getLineWithoutMarkdown("\nTest", 0));
         assertEquals("Foo", NoteUtil.getLineWithoutMarkdown("Foo\nBar", 0));
         assertEquals("Bar", NoteUtil.getLineWithoutMarkdown("Foo\nBar", 1));
+        assertEquals("Foo", NoteUtil.getLineWithoutMarkdown("* Foo\n* Bar", 0));
+        assertEquals("Bar", NoteUtil.getLineWithoutMarkdown("- Foo\nBar", 1));
+        assertEquals("Foo", NoteUtil.getLineWithoutMarkdown("# Foo", 0));
     }
 
     @Test

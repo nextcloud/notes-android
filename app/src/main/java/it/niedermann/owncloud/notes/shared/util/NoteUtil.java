@@ -117,7 +117,7 @@ public class NoteUtil {
                 line = removeMarkdown(lines[currentLine]);
             }
         } else {
-            line = content;
+            line = removeMarkdown(content);
         }
         return line;
     }
