@@ -6,8 +6,10 @@ import android.os.Build;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.QuoteSpan;
 import android.util.Log;
 import android.widget.RemoteViews.RemoteView;
 import android.widget.TextView;
@@ -15,11 +17,11 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.core.text.HtmlCompat;
 
-import com.yydcdut.markdown.MarkdownProcessor;
-import com.yydcdut.markdown.syntax.text.TextFactory;
-import com.yydcdut.rxmarkdown.RxMarkdown;
+import org.commonmark.parser.Parser;
+import org.commonmark.renderer.html.HtmlRenderer;
 
 import java.util.Arrays;
 import java.util.function.Function;
@@ -34,10 +36,8 @@ public class MarkdownUtil {
 
     private static final String TAG = MarkdownUtil.class.getSimpleName();
 
-    private static final String MD_IMAGE_WITH_EMPTY_DESCRIPTION = "![](";
-    private static final String MD_IMAGE_WITH_SPACE_DESCRIPTION = "![ ](";
-    private static final String[] MD_IMAGE_WITH_EMPTY_DESCRIPTION_ARRAY = new String[]{MD_IMAGE_WITH_EMPTY_DESCRIPTION};
-    private static final String[] MD_IMAGE_WITH_SPACE_DESCRIPTION_ARRAY = new String[]{MD_IMAGE_WITH_SPACE_DESCRIPTION};
+    private final static Parser parser = Parser.builder().build();
+    private final static HtmlRenderer renderer = HtmlRenderer.builder().softbreak("<br>").build();
 
     private static final Pattern PATTERN_LISTS = Pattern.compile("^\\s*[*+-]\\s+", Pattern.MULTILINE);
     private static final Pattern PATTERN_HEADINGS = Pattern.compile("^#+\\s+(.*?)\\s*#*$", Pattern.MULTILINE);
@@ -64,13 +64,33 @@ public class MarkdownUtil {
      * {@link RemoteView}s have a limited subset of supported classes to maintain compatibility with many different launchers.
      * <p>
      * Since {@link Markwon} makes heavy use of custom spans, this won't look nice e. g. at app widgets, because they simply won't be rendered.
-     * Therefore we currently fall back on {@link RxMarkdown} as the results will look better in this special case.
-     * We might change this in the future by utilizing {@link Markwon} and creating a {@link Spanned} from an {@link HtmlCompat} interemediate.
+     * Therefore we currently use {@link HtmlCompat} to filter supported spans from the output of {@link HtmlRenderer} as an intermediate step.
      */
     public static CharSequence renderForRemoteView(@NonNull Context context, @NonNull String content) {
-        final MarkdownProcessor markdownProcessor = new MarkdownProcessor(context);
-        markdownProcessor.factory(TextFactory.create());
-        return parseCompat(markdownProcessor, replaceCheckboxesWithEmojis(content));
+        // Create HTML string from Markup
+        final String html = renderer.render(parser.parse(replaceCheckboxesWithEmojis(content)));
+
+        // Create Spanned from HTML, with special handling for ordered list items
+        final Spanned spanned = HtmlCompat.fromHtml(ListTagHandler.prepareTagHandling(html), 0, null, new ListTagHandler());
+
+        // Enhance colors and margins of the Spanned
+        return customizeQuoteSpanAppearance(context, spanned, 5, 30);
+    }
+
+    @SuppressWarnings("SameParameterValue")
+    private static Spanned customizeQuoteSpanAppearance(@NonNull Context context, @NonNull Spanned input, int stripeWidth, int gapWidth) {
+        final SpannableStringBuilder ssb = new SpannableStringBuilder(input);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            final QuoteSpan[] originalQuoteSpans = ssb.getSpans(0, ssb.length(), QuoteSpan.class);
+            @ColorInt final int colorBlockQuote = ContextCompat.getColor(context, R.color.block_quote);
+            for (QuoteSpan originalQuoteSpan : originalQuoteSpans) {
+                final int start = ssb.getSpanStart(originalQuoteSpan);
+                final int end = ssb.getSpanEnd(originalQuoteSpan);
+                ssb.removeSpan(originalQuoteSpan);
+                ssb.setSpan(new QuoteSpan(colorBlockQuote, stripeWidth, gapWidth), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+        }
+        return ssb;
     }
 
     @NonNull
@@ -144,28 +164,6 @@ public class MarkdownUtil {
             }
         }
         return TextUtils.join("\n", lines);
-    }
-
-    /**
-     * This is a compatibility-method that provides workarounds for several bugs in RxMarkdown
-     * <p>
-     * https://github.com/stefan-niedermann/nextcloud-notes/issues/772
-     *
-     * @param markdownProcessor RxMarkdown MarkdownProcessor instance
-     * @param text              CharSequence that should be parsed
-     * @return the processed text but with several workarounds for Bugs in RxMarkdown
-     */
-    @NonNull
-    private static CharSequence parseCompat(@NonNull final MarkdownProcessor markdownProcessor, CharSequence text) {
-        if (TextUtils.isEmpty(text)) {
-            return "";
-        }
-
-        while (TextUtils.indexOf(text, MD_IMAGE_WITH_EMPTY_DESCRIPTION) >= 0) {
-            text = TextUtils.replace(text, MD_IMAGE_WITH_EMPTY_DESCRIPTION_ARRAY, MD_IMAGE_WITH_SPACE_DESCRIPTION_ARRAY);
-        }
-
-        return markdownProcessor.parse(text);
     }
 
     public static int getStartOfLine(@NonNull CharSequence s, int cursorPosition) {
@@ -278,31 +276,123 @@ public class MarkdownUtil {
      * @return the new cursor position
      */
     public static int togglePunctuation(@NonNull Editable editable, int selectionStart, int selectionEnd, @NonNull String punctuation) {
+        final String initialString = editable.toString();
+        if (selectionStart < 0 || selectionStart > initialString.length() || selectionEnd < 0 || selectionEnd > initialString.length()) {
+            return 0;
+        }
         switch (punctuation) {
-            case "**":
-            case "__":
             case "*":
             case "_":
-            case "~~": {
-                final boolean selectionIsSurroundedByPunctuation = selectionIsSurroundedByPunctuation(editable, selectionStart, selectionEnd, punctuation);
-                if (selectionIsSurroundedByPunctuation) {
-                    editable.delete(selectionEnd, selectionEnd + punctuation.length());
-                    editable.delete(selectionStart - punctuation.length(), selectionStart);
-                    return selectionEnd - punctuation.length();
+                if (!initialString.contains("*") && !initialString.contains("_") && !initialString.contains("~")) {
+                    editable.insert(selectionEnd, punctuation);
+                    editable.insert(selectionStart, punctuation);
+                    return selectionEnd + punctuation.length();
                 } else {
-                    final int containedPunctuationCount = getContainedPunctuationCount(editable, selectionStart, selectionEnd, punctuation);
-                    if (containedPunctuationCount == 0) {
-                        editable.insert(selectionEnd, punctuation);
-                        editable.insert(selectionStart, punctuation);
-                        return selectionEnd + punctuation.length() * 2;
-                    } else if (containedPunctuationCount % 2 > 0) {
-                        return selectionEnd;
+                    final String punctuationDouble = punctuation.substring(0, 1) + punctuation.substring(0, 1);
+                    final String punctuationTriple = punctuation.substring(0, 1) + punctuation.substring(0, 1) + punctuation.substring(0, 1);
+                    if (!initialString.contains(punctuationDouble)) {
+                        final int containedPunctuationCount = getContainedPunctuationCount(editable, 0, initialString.length(), punctuation);
+                        if (containedPunctuationCount % 2 == 1) {
+                            return selectionEnd;
+                        }
+                        final String punctuationRegOnce = "\\" + punctuation.substring(0, 1);
+                        String tmp[] = initialString.split(punctuationRegOnce);
+                        int newSelectionStart = 0;
+                        int newSelectionEnd = 0;
+                        for (int i = 0; i < tmp.length - 1; i += 2) {
+                            newSelectionStart = tmp[i].length() + newSelectionEnd;
+                            newSelectionEnd = tmp[i + 1].length() + newSelectionStart;
+                            editable.delete(newSelectionStart, newSelectionStart + punctuation.length());
+                            editable.delete(newSelectionEnd, newSelectionEnd + punctuation.length());
+                        }
+                        return newSelectionEnd;
+                    }
+                    if (initialString.contains(punctuationTriple)) {
+                        final int containedPunctuationCount = getContainedPunctuationCount(editable, 0, initialString.length(), punctuation);
+                        if (containedPunctuationCount % 2 == 1) {
+                            return selectionEnd;
+                        }
+                        final String punctuationRegTriple = "\\" + punctuation.substring(0, 1) + "\\" + punctuation.substring(0, 1) + "\\" + punctuation.substring(0, 1);
+                        String tmp[] = initialString.split(punctuationRegTriple);
+                        int newSelectionStart = 0;
+                        int newSelectionEnd = 0;
+                        newSelectionStart = tmp[0].length() + newSelectionEnd + punctuation.length() * 2;
+                        for (int i = 0; i <= tmp.length - 3; i += 2) {
+                            newSelectionEnd = tmp[i + 1].length() + newSelectionStart + punctuation.length() * 2;
+                            editable.delete(newSelectionStart, newSelectionStart + punctuation.length());
+                            editable.delete(newSelectionEnd, newSelectionEnd + punctuation.length());
+                            newSelectionStart = tmp[i + 2].length() + newSelectionEnd + punctuation.length() * 2;
+                        }
+                        return newSelectionEnd - punctuation.length() * 2;
                     } else {
-                        removeContainingPunctuation(editable, selectionStart, selectionEnd, punctuation);
-                        return selectionEnd - containedPunctuationCount * punctuation.length();
+                        final String punctuationRegDouble = "\\" + punctuation.substring(0, 1) + "\\" + punctuation.substring(0, 1);
+                        String tmp[] = initialString.split(punctuationRegDouble);
+                        int newSelectionStart = 0;
+                        int newSelectionEnd = 0;
+                        newSelectionStart = tmp[0].length() + newSelectionEnd + punctuation.length() * 2;
+                        for (int i = 0; i <= tmp.length - 3; i += 2) {
+                            newSelectionEnd = tmp[i + 1].length() + newSelectionStart + punctuation.length() * 2 + (1);
+                            editable.insert(newSelectionStart, punctuation);
+                            editable.insert(newSelectionEnd, punctuation);
+                            newSelectionStart = tmp[i + 2].length() + newSelectionEnd + punctuation.length() * 2 + (1);
+                        }
+                        return newSelectionEnd;
                     }
                 }
-            }
+            case "**":
+            case "__":
+            case "~~":
+                if (!initialString.contains("*") && !initialString.contains("_") && !initialString.contains("~")) {
+                    editable.insert(selectionEnd, punctuation);
+                    editable.insert(selectionStart, punctuation);
+                    return selectionEnd + punctuation.length();
+                } else {
+                    final String punctuationDouble = punctuation.substring(0, 1) + punctuation.substring(0, 1);
+                    final String punctuationTriple = punctuation.substring(0, 1) + punctuation.substring(0, 1) + punctuation.substring(0, 1);
+                    if (initialString.contains(punctuationTriple)) {
+                        final String punctuationRegTriple = "\\" + punctuation.substring(0, 1) + "\\" + punctuation.substring(0, 1) + "\\" + punctuation.substring(0, 1);
+                        String tmp[] = initialString.split(punctuationRegTriple);
+                        int newSelectionStart = 0;
+                        int newSelectionEnd = 0;
+                        newSelectionStart = tmp[0].length() + 1;
+                        for (int i = 0; i <= tmp.length - 3; i += 2) {
+                            newSelectionEnd = tmp[i + 1].length() + newSelectionStart + 1;
+                            editable.delete(newSelectionStart, newSelectionStart + punctuation.length());
+                            editable.delete(newSelectionEnd, newSelectionEnd + punctuation.length());
+                            newSelectionStart = tmp[i + 2].length() + newSelectionEnd + 1;
+                        }
+                        return newSelectionEnd - 1;
+                    } else if (initialString.contains(punctuationDouble)) {
+                        final int containedPunctuationCount = getContainedPunctuationCount(editable, 0, initialString.length(), punctuation);
+                        if (containedPunctuationCount % 2 == 1) {
+                            return selectionEnd;
+                        }
+                        final String punctuationRegDouble = "\\" + punctuation.substring(0, 1) + "\\" + punctuation.substring(0, 1);
+                        String tmp[] = initialString.split(punctuationRegDouble);
+                        int newSelectionStart = 0;
+                        int newSelectionEnd = 0;
+                        for (int i = 0; i < tmp.length - 1; i += 2) {
+                            newSelectionStart = tmp[i].length() + newSelectionEnd;
+                            newSelectionEnd = tmp[i + 1].length() + newSelectionStart;
+                            editable.delete(newSelectionStart, newSelectionStart + punctuation.length());
+                            editable.delete(newSelectionEnd, newSelectionEnd + punctuation.length());
+                        }
+                        return newSelectionEnd;
+                    } else {
+                        final String punctuationRegOnce = "\\" + punctuation.substring(0, 1);
+                        String tmp[] = initialString.split(punctuationRegOnce);
+                        int newSelectionStart = 0;
+                        int newSelectionEnd = 0;
+                        newSelectionStart = tmp[0].length() + 1;
+                        for (int i = 0; i <= tmp.length - 3; i += 2) {
+                            newSelectionEnd = tmp[i + 1].length() + newSelectionStart + punctuation.length() + (1);
+                            editable.insert(newSelectionStart, punctuation);
+                            editable.insert(newSelectionEnd, punctuation);
+                            newSelectionStart = tmp[i + 2].length() + newSelectionEnd + punctuation.length() + (1);
+                        }
+                        return newSelectionEnd + punctuation.length();
+                    }
+                }
             default:
                 throw new UnsupportedOperationException("This kind of punctuation is not yet supported: " + punctuation);
         }
@@ -313,10 +403,49 @@ public class MarkdownUtil {
      *
      * @return the new cursor position
      */
+    // CS304 issue link: https://github.com/stefan-niedermann/nextcloud-notes/issues/1186
     public static int insertLink(@NonNull Editable editable, int selectionStart, int selectionEnd, @Nullable String clipboardUrl) {
         if (selectionStart == selectionEnd) {
-            editable.insert(selectionStart, "[](" + (clipboardUrl == null ? "" : clipboardUrl) + ")");
-            return selectionStart + 1;
+            if (selectionStart > 0 && selectionEnd < editable.length()) {
+                char start = editable.charAt(selectionStart - 1);
+                char end = editable.charAt(selectionEnd);
+                if (start == ' ' || end == ' ') {
+                    if (start != ' ') {
+                        editable.insert(selectionStart, " ");
+                        selectionStart += 1;
+                    }
+                    if (end != ' ') {
+                        editable.insert(selectionEnd, " ");
+                    }
+                    editable.insert(selectionStart, "[](" + (clipboardUrl == null ? "" : clipboardUrl) + ")");
+                    if (clipboardUrl != null) {
+                        selectionEnd += clipboardUrl.length();
+                    }
+                    return selectionStart + 1;
+
+                } else {
+                    while (start != ' ') {
+                        selectionStart--;
+                        start = editable.charAt(selectionStart);
+                    }
+                    selectionStart++;
+                    while (end != ' ') {
+                        selectionEnd++;
+                        end = editable.charAt(selectionEnd);
+                    }
+                    selectionEnd++;
+                    editable.insert(selectionStart, "[");
+                    editable.insert(selectionEnd, "](" + (clipboardUrl == null ? "" : clipboardUrl) + ")");
+                    if (clipboardUrl != null) {
+                        selectionEnd += clipboardUrl.length();
+                    }
+                    return selectionEnd + 2;
+                }
+            } else {
+                editable.insert(selectionStart, "[](" + (clipboardUrl == null ? "" : clipboardUrl) + ")");
+                return selectionStart + 1;
+            }
+
         } else {
             final boolean textToFormatIsLink = TextUtils.indexOf(editable.subSequence(selectionStart, selectionEnd), "http") == 0;
             if (textToFormatIsLink) {

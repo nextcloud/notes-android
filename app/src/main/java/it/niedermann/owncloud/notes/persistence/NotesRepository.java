@@ -57,6 +57,7 @@ import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType;
+import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 import it.niedermann.owncloud.notes.shared.model.SyncResultStatus;
@@ -160,8 +161,13 @@ public class NotesRepository {
     // Accounts
 
     @AnyThread
-    public LiveData<Account> addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities) {
-        return db.getAccountDao().getAccountById$(db.getAccountDao().insert(new Account(url, username, accountName, capabilities)));
+    public void addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities, @NonNull IResponseCallback<Account> callback) {
+        final Account createdAccount = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account(url, username, accountName, capabilities)));
+        if (createdAccount == null) {
+            callback.onError(new Exception("Could not read created account."));
+        } else {
+            callback.onSuccess(createdAccount);
+        }
     }
 
     @WorkerThread
@@ -172,10 +178,10 @@ public class NotesRepository {
     @WorkerThread
     public void deleteAccount(@NonNull Account account) {
         try {
-            SSOClient.invalidateAPICache(AccountImporter.getSingleSignOnAccount(context, account.getAccountName()));
+            ApiProvider.invalidateAPICache(AccountImporter.getSingleSignOnAccount(context, account.getAccountName()));
         } catch (NextcloudFilesAppAccountNotFoundException e) {
             e.printStackTrace();
-            SSOClient.invalidateAPICache();
+            ApiProvider.invalidateAPICache();
         }
 
         db.getAccountDao().deleteAccount(account);
@@ -312,6 +318,9 @@ public class NotesRepository {
         db.getNoteDao().deleteByNoteId(id, forceDBStatus);
     }
 
+    /**
+     * Please note, that db.updateNote() realized an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
+     */
     public int updateIfNotModifiedLocallyDuringSync(long noteId, Long targetModified, String targetTitle, boolean targetFavorite, String targetETag, String targetContent, String targetExcerpt, String contentBeforeSyncStart, String categoryBeforeSyncStart, boolean favoriteBeforeSyncStart) {
         return db.getNoteDao().updateIfNotModifiedLocallyDuringSync(noteId, targetModified, targetTitle, targetFavorite, targetETag, targetContent, targetExcerpt, contentBeforeSyncStart, categoryBeforeSyncStart, favoriteBeforeSyncStart);
     }
@@ -449,23 +458,27 @@ public class NotesRepository {
      * @return changed {@link Note} if differs from database, otherwise the old {@link Note}.
      */
     @WorkerThread
-    public Note updateNoteAndSync(Account localAccount, @NonNull Note oldNote, @Nullable String newContent, @Nullable String newTitle, @Nullable ISyncCallback callback) {
+    public Note updateNoteAndSync(@NonNull Account localAccount, @NonNull Note oldNote, @Nullable String newContent, @Nullable String newTitle, @Nullable ISyncCallback callback) {
         final Note newNote;
+        // Re-read the up to date remoteId from the database because the UI might not have the state after synchronization yet
+        // https://github.com/stefan-niedermann/nextcloud-notes/issues/1198
+        @Nullable
+        final Long remoteId = db.getNoteDao().getRemoteId(oldNote.getId());
         if (newContent == null) {
-            newNote = new Note(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.getCategory(), oldNote.getFavorite(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), oldNote.getExcerpt(), oldNote.getScrollY());
+            newNote = new Note(oldNote.getId(), remoteId, oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.getCategory(), oldNote.getFavorite(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), oldNote.getExcerpt(), oldNote.getScrollY());
         } else {
             final String title;
             if (newTitle != null) {
                 title = newTitle;
             } else {
-                if ((oldNote.getRemoteId() == null || localAccount.getPreferredApiVersion() == null || localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 0, 0)) < 0) &&
+                if ((remoteId == null || localAccount.getPreferredApiVersion() == null || localAccount.getPreferredApiVersion().compareTo(ApiVersion.API_VERSION_1_0) < 0) &&
                         (defaultNonEmptyTitle.equals(oldNote.getTitle()))) {
                     title = NoteUtil.generateNonEmptyNoteTitle(newContent, context);
                 } else {
                     title = oldNote.getTitle();
                 }
             }
-            newNote = new Note(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), title, newContent, oldNote.getCategory(), oldNote.getFavorite(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), generateNoteExcerpt(newContent, title), oldNote.getScrollY());
+            newNote = new Note(oldNote.getId(), remoteId, Calendar.getInstance(), title, newContent, oldNote.getCategory(), oldNote.getFavorite(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), generateNoteExcerpt(newContent, title), oldNote.getScrollY());
         }
         int rows = db.getNoteDao().updateNote(newNote);
         // if data was changed, set new status and schedule sync (with callback); otherwise invoke callback directly.
@@ -573,10 +586,13 @@ public class NotesRepository {
                 }
                 if (apiVersions.length() > 0) {
                     final int updatedRows = db.getAccountDao().updateApiVersion(accountId, apiVersion);
-                    if (updatedRows == 1) {
+                    if (updatedRows == 0) {
+                        Log.d(TAG, "ApiVersion not updated, because it did not change");
+                    } else if (updatedRows == 1) {
                         Log.i(TAG, "Updated apiVersion to \"" + apiVersion + "\" for accountId = " + accountId);
+                        ApiProvider.invalidateAPICache();
                     } else {
-                        Log.e(TAG, "Updated " + updatedRows + " but expected only 1 for accountId = " + accountId + " and apiVersion = \"" + apiVersion + "\"");
+                        Log.w(TAG, "Updated " + updatedRows + " but expected only 1 for accountId = " + accountId + " and apiVersion = \"" + apiVersion + "\"");
                     }
                     return true;
                 } else {
@@ -769,7 +785,7 @@ public class NotesRepository {
      *
      * @param onlyLocalChanges Whether to only push local changes to the server or to also load the whole list of notes from the server.
      */
-    public void scheduleSync(Account account, boolean onlyLocalChanges) {
+    public synchronized void scheduleSync(Account account, boolean onlyLocalChanges) {
         if (account == null) {
             Log.i(TAG, SingleSignOnAccount.class.getSimpleName() + " is null. Is this a local account?");
         } else {
@@ -778,11 +794,10 @@ public class NotesRepository {
             }
             Log.d(TAG, "Sync requested (" + (onlyLocalChanges ? "onlyLocalChanges" : "full") + "; " + (Boolean.TRUE.equals(syncActive.get(account.getId())) ? "sync active" : "sync NOT active") + ") ...");
             if (isSyncPossible() && (!Boolean.TRUE.equals(syncActive.get(account.getId())) || onlyLocalChanges)) {
+                syncActive.put(account.getId(), true);
                 try {
-                    SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(context, account.getAccountName());
                     Log.d(TAG, "... starting now");
-                    final NotesClient notesClient = NotesClient.newInstance(account.getPreferredApiVersion(), context);
-                    final NotesServerSyncTask syncTask = new NotesServerSyncTask(notesClient, this, account, ssoAccount, onlyLocalChanges) {
+                    final NotesServerSyncTask syncTask = new NotesServerSyncTask(context, this, account, onlyLocalChanges) {
                         @Override
                         void onPreExecute() {
                             syncStatus.postValue(true);
@@ -792,7 +807,6 @@ public class NotesRepository {
                             if (!onlyLocalChanges && Boolean.TRUE.equals(syncScheduled.get(localAccount.getId()))) {
                                 syncScheduled.put(localAccount.getId(), false);
                             }
-                            syncActive.put(localAccount.getId(), true);
                         }
 
                         @Override
@@ -892,7 +906,7 @@ public class NotesRepository {
                 Log.d(TAG, "No network connection.");
             }
         } catch (NetworkErrorException e) {
-            e.printStackTrace();
+            Log.i(TAG, e.getMessage());
             networkConnected = false;
             isSyncPossible = false;
         }

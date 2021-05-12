@@ -1,22 +1,28 @@
 package it.niedermann.owncloud.notes.importaccount;
 
+import android.content.Context;
+import android.accounts.NetworkErrorException;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.preference.PreferenceManager;
 
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.AccountImportCancelledException;
 import com.nextcloud.android.sso.exceptions.AndroidGetAccountsPermissionNotGranted;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppNotInstalledException;
+import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.UnknownErrorException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.ui.UiExceptionManager;
+
+import java.net.HttpURLConnection;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
@@ -24,9 +30,11 @@ import it.niedermann.owncloud.notes.databinding.ActivityImportAccountBinding;
 import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.exception.ExceptionHandler;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
-import it.niedermann.owncloud.notes.persistence.SSOClient;
+import it.niedermann.owncloud.notes.persistence.ApiProvider;
+import it.niedermann.owncloud.notes.persistence.SyncWorker;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
+import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
 
 public class ImportAccountActivity extends AppCompatActivity {
 
@@ -85,29 +93,51 @@ public class ImportAccountActivity extends AppCompatActivity {
                     try {
                         Log.i(TAG, "Loading capabilities for " + ssoAccount.name);
                         final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, null);
-                        LiveData<Account> createLiveData = importAccountViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities);
-                        runOnUiThread(() -> createLiveData.observe(this, (account) -> {
-                            if (account != null) {
-                                Log.i(TAG, capabilities.toString());
-                                BrandingUtil.saveBrandColors(this, capabilities.getColor(), capabilities.getTextColor());
-                                setResult(RESULT_OK);
-                                finish();
-                            } else {
-                                binding.addButton.setEnabled(true);
-                                ExceptionDialogFragment.newInstance(new IllegalStateException("Created account is null.")).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+                        importAccountViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities, new IResponseCallback<Account>() {
+
+                            /**
+                             * Update syncing when adding account
+                             * https://github.com/stefan-niedermann/nextcloud-deck/issues/531
+                             * @param account the account to add
+                             */
+                            @Override
+                            public void onSuccess(Account account) {
+                                runOnUiThread(() -> {
+                                    Log.i(TAG, capabilities.toString());
+                                    BrandingUtil.saveBrandColors(ImportAccountActivity.this, capabilities.getColor(), capabilities.getTextColor());
+                                    setResult(RESULT_OK);
+                                    finish();
+                                });
+                                SyncWorker.update(ImportAccountActivity.this, PreferenceManager.getDefaultSharedPreferences(ImportAccountActivity.this)
+                                        .getBoolean(getString(R.string.pref_key_background_sync), true));
                             }
-                        }));
-                    } catch (Throwable e) {
-                        e.printStackTrace();
-                        SSOClient.invalidateAPICache(ssoAccount);
+
+                            @Override
+                            public void onError(@NonNull Throwable t) {
+                                runOnUiThread(() -> {
+                                    binding.addButton.setEnabled(true);
+                                    ExceptionDialogFragment.newInstance(t).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+                                });
+                            }
+                        });
+                    } catch (Throwable t) {
+                        t.printStackTrace();
+                        ApiProvider.invalidateAPICache(ssoAccount);
                         SingleAccountHelper.setCurrentAccount(this, null);
                         runOnUiThread(() -> {
                             restoreCleanState();
-                            if (e instanceof UnknownErrorException && e.getMessage().contains("No address associated with hostname")) {
+                            if (t instanceof NextcloudHttpRequestFailedException && ((NextcloudHttpRequestFailedException) t).getStatusCode() == HttpURLConnection.HTTP_UNAVAILABLE) {
+                                binding.status.setText(R.string.error_maintenance_mode);
+                                binding.status.setVisibility(View.VISIBLE);
+                            } else if (t instanceof NetworkErrorException) {
+                                binding.status.setText(getString(R.string.error_sync, getString(R.string.error_no_network)));
+                                binding.status.setVisibility(View.VISIBLE);
+                            } else if (t instanceof UnknownErrorException && t.getMessage().contains("No address associated with hostname")) {
+                                // https://github.com/stefan-niedermann/nextcloud-notes/issues/1014
                                 binding.status.setText(R.string.you_have_to_be_connected_to_the_internet_in_order_to_add_an_account);
                                 binding.status.setVisibility(View.VISIBLE);
                             } else {
-                                ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+                                ExceptionDialogFragment.newInstance(t).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
                             }
                         });
                     }

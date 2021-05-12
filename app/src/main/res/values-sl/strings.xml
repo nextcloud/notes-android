@@ -6,12 +6,14 @@
     <string name="label_all_notes">Vse zabeležke</string>
     <string name="label_favorites">Priljubljene</string>
     <string name="action_create">Nova zabeležka</string>
+    <string name="welcome_text">Dobrodošli v %1$s</string>
     <string name="action_settings">Nastavitve</string>
     <string name="action_trashbin">Izbrisane zabeležke</string>
     <string name="action_search">Poišči</string>
     <string name="action_sorting_method">Način razvrščanja</string>
     <string name="simple_cancel">Prekliči</string>
     <string name="simple_edit">Uredi</string>
+    <string name="simple_remove">Odstrani</string>
     <string name="action_edit_save">Shrani</string>
     <string name="simple_about">O programu</string>
     <string name="simple_link">Povezava</string>
@@ -50,6 +52,7 @@
     <string name="error_sync">Usklajevanje je spodletelo: %1$s</string>
     <string name="error_synchronization">Usklajevanje je spodletelo</string>
     <string name="error_no_network">Ni omrežne povezave</string>
+    <string name="error_maintenance_mode">Strežnik je v načinu vzdrževanja.</string>
     <string name="error_unknown">Prišlo je do neznane napake.</string>
 
     <string name="about_version_title">Različica</string>
@@ -138,7 +141,7 @@
     <string name="settings_branding">Prilagajanje oblikovanja</string>
     <string name="settings_gridview">Mrežni pogled</string>
     <string name="simple_security">Varnost</string>
-    <string name="appearance_and_behavior">Izgled in obnašanje</string>
+    <string name="appearance_and_behavior">Videz in obnašanje</string>
     <string name="simple_synchronization">Usklajevanje</string>
     <string name="simple_behavior">Obnašanje</string>
     <string name="manage_accounts">Upravljanje z računi</string>
@@ -253,5 +256,15 @@
     <string name="error_action_open_network">Nastavitve omrežja</string>
     <string name="no_account_configured_yet">Ni nastavljenega nobenega računa</string>
     <string name="no_other_accounts">Ni nastavljenega nobenega drugega računa</string>
+    <string name="choose_account">Izbor računa</string>
     <string name="context_based_formatting">Pojavno okno vsebinskega oblikovanja</string>
-    </resources>
+    <plurals name="remove_account_message">
+        <item quantity="one">Odstranjevanje računa %1$s trajno izbriše tudi neusklajeno spremembo.</item>
+        <item quantity="two">Odstranjevanje računa %1$s trajno izbriše tudi %2$d neusklajeni spremembi.</item>
+        <item quantity="few">Odstranjevanje računa %1$s trajno izbriše tudi %2$d neusklajene spremembe.</item>
+        <item quantity="other">Odstranjevanje računa %1$s trajno izbriše tudi %2$d neusklajenih sprememb.</item>
+    </plurals>
+    <string name="remove_account">Odstrani %1$s</string>
+
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Za dodajanje računa mora biti vzpostavljena povezava z omrežjem.</string>
+</resources>

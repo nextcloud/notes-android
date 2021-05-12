@@ -52,10 +52,13 @@ public class CapabilitiesWorker extends Worker {
                 repo.updateBrand(account.getId(), capabilities.getColor(), capabilities.getTextColor());
                 repo.updateApiVersion(account.getId(), capabilities.getApiVersion());
                 Log.i(TAG, capabilities.toString());
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 if (e instanceof NextcloudHttpRequestFailedException) {
                     if (((NextcloudHttpRequestFailedException) e).getStatusCode() == HttpURLConnection.HTTP_NOT_MODIFIED) {
                         Log.i(TAG, "Capabilities not modified.");
+                        return Result.success();
+                    } else if(((NextcloudHttpRequestFailedException) e).getStatusCode() == HttpURLConnection.HTTP_UNAVAILABLE) {
+                        Log.i(TAG, "Server is in maintenance mode.");
                         return Result.success();
                     }
                 }

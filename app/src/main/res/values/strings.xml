@@ -52,6 +52,7 @@
     <string name="error_sync">Synchronization failed: %1$s</string>
     <string name="error_synchronization">Synchronization failed</string>
     <string name="error_no_network">No network connection</string>
+    <string name="error_maintenance_mode">Server is in maintenance mode</string>
     <string name="error_unknown">An unknown error has occurred.</string>
 
     <string name="url_source" translatable="false">https://github.com/stefan-niedermann/nextcloud-notes</string>
@@ -115,10 +116,6 @@
     <string name="pref_value_font_size_small" translatable="false">small</string>
     <string name="pref_value_font_size_medium" translatable="false">medium</string>
     <string name="pref_value_font_size_large" translatable="false">large</string>
-    <string name="pref_value_sync_off" translatable="false">off</string>
-    <string name="pref_value_sync_15_minutes" translatable="false">15_minutes</string>
-    <string name="pref_value_sync_1_hour" translatable="false">1_hour</string>
-    <string name="pref_value_sync_6_hours" translatable="false">6_hours</string>
     <string name="pref_value_theme_light" translatable="false">LIGHT</string>
     <string name="pref_value_theme_dark" translatable="false">DARK</string>
     <string name="pref_value_theme_system_default" translatable="false">SYSTEM_DEFAULT</string>
