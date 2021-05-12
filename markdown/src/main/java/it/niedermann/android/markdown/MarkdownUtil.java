@@ -50,7 +50,7 @@ public class MarkdownUtil {
     private static final Pattern PATTERN_ORDERED_LIST_ITEM = Pattern.compile("^(\\d+).\\s.+$");
     private static final Pattern PATTERN_ORDERED_LIST_ITEM_EMPTY = Pattern.compile("^(\\d+).\\s$");
     private static final Pattern PATTERN_MARKDOWN_LINK = Pattern.compile("\\[(.+)?]\\(([^ ]+?)?( \"(.+)\")?\\)");
-    private static final Pattern PATTERN_MARKDOWN_TITLE = Pattern.compile("^# ");
+    private static final Pattern PATTERN_MARKDOWN_TITLE = Pattern.compile("^[#]{1,6} ");
 
     @Nullable
     private static final String checkboxCheckedEmoji = getCheckboxEmoji(true);
@@ -317,7 +317,7 @@ public class MarkdownUtil {
     // CS304 issue link: https://github.com/stefan-niedermann/nextcloud-notes/issues/1186
     public static int insertLink(@NonNull Editable editable, int selectionStart, int selectionEnd, @Nullable String clipboardUrl) {
         if (selectionStart == selectionEnd) {
-            if (selectionStart>0 && selectionEnd<editable.length()) {
+            if (selectionStart > 0 && selectionEnd < editable.length()) {
                 char start = editable.charAt(selectionStart - 1);
                 char end = editable.charAt(selectionEnd);
                 if (start == ' ' || end == ' ') {
@@ -352,8 +352,7 @@ public class MarkdownUtil {
                     }
                     return selectionEnd + 2;
                 }
-            }
-            else {
+            } else {
                 editable.insert(selectionStart, "[](" + (clipboardUrl == null ? "" : clipboardUrl) + ")");
                 return selectionStart + 1;
             }
