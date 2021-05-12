@@ -437,7 +437,6 @@ public class MarkdownUtil {
      * @param s Markdown string
      * @return Plain text string
      */
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @NonNull
     // CS304 issue link: https://github.com/stefan-niedermann/nextcloud-notes/issues/1212
     public static String removeMarkdown(@Nullable String s) {
