@@ -437,25 +437,20 @@ public class MarkdownUtil {
      * @param s Markdown string
      * @return Plain text string
      */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @NonNull
+    // CS304 issue link: https://github.com/stefan-niedermann/nextcloud-notes/issues/1212
     public static String removeMarkdown(@Nullable String s) {
         if (s == null)
             return "";
         // TODO maybe we can utilize the markwon renderer?
-
-        for (EListType listType : EListType.values()) {
-            for (String item : Arrays.asList(listType.checkboxChecked, listType.checkboxUnchecked, listType.listSymbolWithTrailingSpace)) {
-                if (s.startsWith(item)) {
-                    s = s.substring(item.length());
-                }
-            }
-        }
-        s = PATTERN_LISTS.matcher(s).replaceAll("");
-        s = PATTERN_HEADINGS.matcher(s).replaceAll("$1");
-        s = PATTERN_HEADING_LINE.matcher(s).replaceAll("");
-        s = PATTERN_EMPHASIS.matcher(s).replaceAll("$2");
-        s = PATTERN_SPACE_1.matcher(s).replaceAll("");
-        s = PATTERN_SPACE_2.matcher(s).replaceAll("");
-        return s;
+        // Create HTML string from Markup
+        String html = renderer.render(parser.parse(replaceCheckboxesWithEmojis(s)));
+        html = html.replaceAll("\n","");
+        // Create Spanned from HTML, with special handling for ordered list items
+        Spanned spanned = Html.fromHtml(html,Html.FROM_HTML_MODE_COMPACT);
+        String ans = spanned.toString();
+        ans = ans.substring(0,ans.length()-1);
+        return ans;
     }
 }
