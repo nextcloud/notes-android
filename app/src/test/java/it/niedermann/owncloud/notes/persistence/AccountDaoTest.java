@@ -78,4 +78,19 @@ public class AccountDaoTest {
         assertEquals(1, db.getAccountDao().updateApiVersion(account.getId(), null));
     }
 
+    @Test
+    public void updateDisplayName() {
+        final Account account = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", null, new Capabilities())));
+        assertEquals("Should read userName in favor of displayName if displayName is NULL", "彼得", account.getDisplayName());
+
+        db.getAccountDao().updateDisplayName(account.getId(), "");
+        assertEquals("Should properly update the displayName, even if it is blank", "", db.getAccountDao().getAccountById(account.getId()).getDisplayName());
+
+        db.getAccountDao().updateDisplayName(account.getId(), "Foo Bar");
+        assertEquals("Foo Bar", db.getAccountDao().getAccountById(account.getId()).getDisplayName());
+
+        db.getAccountDao().updateDisplayName(account.getId(), null);
+        assertEquals("Should read userName in favor of displayName if displayName is NULL", "彼得", db.getAccountDao().getAccountById(account.getId()).getDisplayName());
+    }
+
 }
