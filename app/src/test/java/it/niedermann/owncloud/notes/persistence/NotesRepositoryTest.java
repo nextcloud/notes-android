@@ -9,7 +9,6 @@ import androidx.room.Room;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.google.common.util.concurrent.MoreExecutors;
-import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 
 import org.json.JSONException;
 import org.junit.After;
@@ -26,7 +25,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Map;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 
 import it.niedermann.owncloud.notes.persistence.entity.Account;
@@ -39,8 +37,9 @@ import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_DELETED;
 import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_EDITED;
 import static it.niedermann.owncloud.notes.shared.model.DBStatus.VOID;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
 @RunWith(RobolectricTestRunner.class)
@@ -109,6 +108,13 @@ public class NotesRepositoryTest {
     @After
     public void closeDb() {
         db.close();
+    }
+
+    @Test
+    public void testGetInstance() {
+        final NotesRepository repo = NotesRepository.getInstance(ApplicationProvider.getApplicationContext());
+        assertNotNull("Result of NotesRepository.getInstance() must not be null", repo);
+        assertSame("Result of NotesRepository.getInstance() must always return the same instance", repo, NotesRepository.getInstance(ApplicationProvider.getApplicationContext()));
     }
 
     @Test

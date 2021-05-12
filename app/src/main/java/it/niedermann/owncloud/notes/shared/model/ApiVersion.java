@@ -41,10 +41,6 @@ public class ApiVersion implements Comparable<ApiVersion> {
         return minor;
     }
 
-    public String getOriginalVersion() {
-        return originalVersion;
-    }
-
     public static ApiVersion of(String versionString) {
         int major = 0, minor = 0;
         if (versionString != null) {
