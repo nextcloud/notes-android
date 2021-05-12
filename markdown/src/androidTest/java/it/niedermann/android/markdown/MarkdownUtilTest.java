@@ -630,7 +630,7 @@ public class MarkdownUtilTest extends TestCase {
     @Test
     public void testRemoveMarkdown() {
         assertEquals("Test", MarkdownUtil.removeMarkdown("Test"));
-        assertEquals("Foo\nBar", MarkdownUtil.removeMarkdown("Foo\nBar"));
+        assertEquals("Foo\nBar", MarkdownUtil.removeMarkdown("* Foo\nBar"));
         assertEquals("Foo\nBar", MarkdownUtil.removeMarkdown("Foo\n  Bar"));
         assertEquals("Foo\nBar", MarkdownUtil.removeMarkdown("Foo   \nBar"));
         assertEquals("Foo-Bar", MarkdownUtil.removeMarkdown("Foo-Bar"));
@@ -639,11 +639,11 @@ public class MarkdownUtilTest extends TestCase {
         assertEquals("FooTestBar", MarkdownUtil.removeMarkdown("Foo*Test*Bar"));
         assertEquals("FooTestBar", MarkdownUtil.removeMarkdown("Foo**Test**Bar"));
         assertEquals("FooTestBar", MarkdownUtil.removeMarkdown("Foo***Test***Bar"));
-        assertEquals("FooTest*Bar", MarkdownUtil.removeMarkdown("Foo*Test**Bar"));
+        assertEquals("Foo*Test**Bar", MarkdownUtil.removeMarkdown("Foo*Test**Bar"));
         assertEquals("Foo*TestBar", MarkdownUtil.removeMarkdown("Foo***Test**Bar"));
-        assertEquals("FooTestBar", MarkdownUtil.removeMarkdown("Foo_Test_Bar"));
-        assertEquals("FooTestBar", MarkdownUtil.removeMarkdown("Foo__Test__Bar"));
-        assertEquals("FooTestBar", MarkdownUtil.removeMarkdown("Foo___Test___Bar"));
+        assertEquals("Foo_Test_Bar", MarkdownUtil.removeMarkdown("Foo_Test_Bar"));
+        assertEquals("Foo__Test__Bar", MarkdownUtil.removeMarkdown("Foo__Test__Bar"));
+        assertEquals("Foo___Test___Bar", MarkdownUtil.removeMarkdown("Foo___Test___Bar"));
         assertEquals("Foo\nHeader\nBar", MarkdownUtil.removeMarkdown("Foo\n# Header\nBar"));
         assertEquals("Foo\nHeader\nBar", MarkdownUtil.removeMarkdown("Foo\n### Header\nBar"));
         assertEquals("Foo\nHeader\nBar", MarkdownUtil.removeMarkdown("Foo\n# Header #\nBar"));
@@ -655,11 +655,11 @@ public class MarkdownUtilTest extends TestCase {
         assertEquals("Foo\nAufzählung\nBar", MarkdownUtil.removeMarkdown("Foo\n* Aufzählung\nBar"));
         assertEquals("Foo\nAufzählung\nBar", MarkdownUtil.removeMarkdown("Foo\n+ Aufzählung\nBar"));
         assertEquals("Foo\nAufzählung\nBar", MarkdownUtil.removeMarkdown("Foo\n- Aufzählung\nBar"));
-        assertEquals("Foo\nAufzählung\nBar", MarkdownUtil.removeMarkdown("Foo\n    - Aufzählung\nBar"));
+        assertEquals("Foo\n- Aufzählung\nBar", MarkdownUtil.removeMarkdown("Foo\n    - Aufzählung\nBar"));
         assertEquals("Foo\nAufzählung *\nBar", MarkdownUtil.removeMarkdown("Foo\n* Aufzählung *\nBar"));
         assertEquals("Title", MarkdownUtil.removeMarkdown("# Title"));
         assertEquals("Aufzählung", MarkdownUtil.removeMarkdown("* Aufzählung"));
-        // assertEquals("Foo Link Bar", MarkdownUtil.removeMarkdown("Foo [Link](https://example.com) Bar"));
+//        assertEquals("Foo Link Bar", MarkdownUtil.removeMarkdown("Foo [Link](https://example.com) Bar"));
         assertFalse(MarkdownUtil.removeMarkdown("- [ ] Test").contains("- [ ]"));
         assertTrue(MarkdownUtil.removeMarkdown("- [ ] Test").endsWith("Test"));
 
