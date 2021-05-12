@@ -572,15 +572,12 @@ public class MarkdownUtil {
             return "";
         // Create HTML string from Markup
         String html = renderer.render(parser.parse(replaceCheckboxesWithEmojis(s)));
-        html = html.replaceAll("\n", "");
-        // Convert Spanned from HTML. Using HtmlCompat to convert has some problems, which is that sometimes the \n in the text would double.
-        Spanned spanned = HtmlCompat.fromHtml(html, 0);
-        //Maybe we could use Html to convert, it doesn't have such problems.
-        //Spanned spanned = Html.fromHtml(html,Html.FROM_HTML_MODE_COMPACT);
+        // Convert Spanned from HTML.
+        Spanned spanned = HtmlCompat.fromHtml(html, HtmlCompat.FROM_HTML_MODE_COMPACT);
         // Convert from spanned to string
         s = spanned.toString();
         // The default string has two additional \n in the end, the substring is used to delete this two \n.
-        s = s.substring(0, s.length() - 2);
+        s = s.substring(0, s.length() - 1);
         return s;
     }
 }
