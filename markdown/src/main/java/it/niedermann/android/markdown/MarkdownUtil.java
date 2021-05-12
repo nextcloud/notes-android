@@ -567,18 +567,20 @@ public class MarkdownUtil {
      * @return Plain text string
      */
     @NonNull
-    // CS304 issue link: https://github.com/stefan-niedermann/nextcloud-notes/issues/1212
     public static String removeMarkdown(@Nullable String s) {
         if (s == null)
             return "";
-        // TODO maybe we can utilize the markwon renderer?
         // Create HTML string from Markup
         String html = renderer.render(parser.parse(replaceCheckboxesWithEmojis(s)));
-        html = html.replaceAll("\n","");
-        // Create Spanned from HTML, with special handling for ordered list items
-        Spanned spanned = Html.fromHtml(html,Html.FROM_HTML_MODE_COMPACT);
-        String ans = spanned.toString();
-        ans = ans.substring(0,ans.length()-1);
-        return ans;
+        html = html.replaceAll("\n", "");
+        // Convert Spanned from HTML. Using HtmlCompat to convert has some problems, which is that sometimes the \n in the text would double.
+        Spanned spanned = HtmlCompat.fromHtml(html, 0);
+        //Maybe we could use Html to convert, it doesn't have such problems.
+        //Spanned spanned = Html.fromHtml(html,Html.FROM_HTML_MODE_COMPACT);
+        // Convert from spanned to string
+        s = spanned.toString();
+        // The default string has two additional \n in the end, the substring is used to delete this two \n.
+        s = s.substring(0, s.length() - 2);
+        return s;
     }
 }
