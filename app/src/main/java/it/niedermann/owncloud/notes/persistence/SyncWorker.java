@@ -15,7 +15,6 @@ import androidx.work.WorkerParameters;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 
 public class SyncWorker extends Worker {
@@ -44,22 +43,20 @@ public class SyncWorker extends Worker {
         return Result.success();
     }
 
-    public static void update(@NonNull Context context, @NonNull String preferenceValue) {
+    /**
+     * Set up sync work to enabled every 15 minutes or just disabled
+     * https://github.com/stefan-niedermann/nextcloud-notes/issues/1168
+     * @param context the application
+     * @param backgroundSync the toggle result backgroundSync
+     */
+
+    public static void update(@NonNull Context context, boolean backgroundSync) {
         deregister(context);
-        if (!context.getString(R.string.pref_value_sync_off).equals(preferenceValue)) {
-            int repeatInterval = 15;
-            TimeUnit unit = TimeUnit.MINUTES;
-            if (context.getString(R.string.pref_value_sync_1_hour).equals(preferenceValue)) {
-                repeatInterval = 1;
-                unit = TimeUnit.HOURS;
-            } else if (context.getString(R.string.pref_value_sync_6_hours).equals(preferenceValue)) {
-                repeatInterval = 6;
-                unit = TimeUnit.HOURS;
-            }
-            PeriodicWorkRequest work = new PeriodicWorkRequest.Builder(SyncWorker.class, repeatInterval, unit)
+        if (backgroundSync) {
+            PeriodicWorkRequest work = new PeriodicWorkRequest.Builder(SyncWorker.class, 15, TimeUnit.MINUTES)
                     .setConstraints(constraints).build();
             WorkManager.getInstance(context.getApplicationContext()).enqueueUniquePeriodicWork(WORKER_TAG, ExistingPeriodicWorkPolicy.REPLACE, work);
-            Log.i(TAG, "Registering worker running each " + repeatInterval + " " + unit);
+            Log.i(TAG, "Registering worker running each " + 15 + " " + TimeUnit.MINUTES);
         }
     }
 

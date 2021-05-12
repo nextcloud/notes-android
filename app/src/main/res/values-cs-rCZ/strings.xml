@@ -52,6 +52,7 @@
     <string name="error_sync">Synchronizace se nezdařila: %1$s</string>
     <string name="error_synchronization">Synchronizace se nezdařila</string>
     <string name="error_no_network">Žádné síťové spojení</string>
+    <string name="error_maintenance_mode">Na serveru probíhá údržba</string>
     <string name="error_unknown">Došlo k neznámé chybě.</string>
 
     <string name="about_version_title">Verze</string>

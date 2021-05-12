@@ -52,6 +52,7 @@
     <string name="error_sync">Usklajevanje je spodletelo: %1$s</string>
     <string name="error_synchronization">Usklajevanje je spodletelo</string>
     <string name="error_no_network">Ni omrežne povezave</string>
+    <string name="error_maintenance_mode">Strežnik je v načinu vzdrževanja.</string>
     <string name="error_unknown">Prišlo je do neznane napake.</string>
 
     <string name="about_version_title">Različica</string>

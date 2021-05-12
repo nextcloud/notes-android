@@ -52,6 +52,7 @@
     <string name="error_sync">Fallo en la sincronización: %1$s</string>
     <string name="error_synchronization">Fallo en la sincronización</string>
     <string name="error_no_network">Sin conexión de red</string>
+    <string name="error_maintenance_mode">El servidor está en modo mantenimiento</string>
     <string name="error_unknown">Ha ocurrido un error desconocido.</string>
 
     <string name="about_version_title">Versión</string>

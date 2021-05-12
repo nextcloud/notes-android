@@ -13,14 +13,11 @@
             android:layout="@layout/item_pref"
             android:title="@string/settings_wifi_only" />
 
-        <ListPreference
-            android:defaultValue="@string/pref_value_sync_off"
-            android:entries="@array/sync_entries"
-            android:entryValues="@array/sync_values"
+        <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
+            android:defaultValue="true"
             android:icon="@drawable/ic_sync_black_24dp"
             android:key="@string/pref_key_background_sync"
             android:layout="@layout/item_pref"
-            android:summary="%s"
             android:title="@string/settings_background_sync" />
     </it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory>
 
