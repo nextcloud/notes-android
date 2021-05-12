@@ -19,10 +19,8 @@ import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 
 public class ApiVersionUtil {
 
-    private static final String TAG = ApiVersionUtil.class.getSimpleName();
-
     private ApiVersionUtil() {
-
+        throw new UnsupportedOperationException("Do not instantiate this util class.");
     }
 
     /**

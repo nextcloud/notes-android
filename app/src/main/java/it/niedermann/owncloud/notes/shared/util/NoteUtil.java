@@ -22,7 +22,7 @@ public class NoteUtil {
     public static final String EXCERPT_LINE_SEPARATOR = "   ";
 
     private NoteUtil() {
-
+        throw new UnsupportedOperationException("Do not instantiate this util class.");
     }
 
     /**

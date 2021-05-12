@@ -30,7 +30,7 @@ import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 public class DisplayUtils {
 
     private DisplayUtils() {
-
+        throw new UnsupportedOperationException("Do not instantiate this util class.");
     }
 
     public static List<NavigationItem.CategoryNavigationItem> convertToCategoryNavigationItem(@NonNull Context context, @NonNull Collection<CategoryWithNotesCount> counter) {

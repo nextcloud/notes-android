@@ -14,6 +14,11 @@ import it.niedermann.android.markdown.MarkdownUtil;
 import static android.content.ClipDescription.MIMETYPE_TEXT_PLAIN;
 
 public class ShareUtil {
+
+    private ShareUtil() {
+        throw new UnsupportedOperationException("Do not instantiate this util class.");
+    }
+
     public static void openShareDialog(@NonNull Context context, @Nullable String subject, @Nullable String text) {
         context.startActivity(Intent.createChooser(new Intent()
                 .setAction(Intent.ACTION_SEND)
