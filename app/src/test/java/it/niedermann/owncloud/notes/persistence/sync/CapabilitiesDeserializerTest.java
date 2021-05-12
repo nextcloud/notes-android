@@ -1,4 +1,4 @@
-package it.niedermann.owncloud.notes.shared.model;
+package it.niedermann.owncloud.notes.persistence.sync;
 
 import android.graphics.Color;
 import android.os.Build;
@@ -11,13 +11,16 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import it.niedermann.owncloud.notes.persistence.sync.CapabilitiesDeserializer;
+import it.niedermann.owncloud.notes.shared.model.Capabilities;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(sdk = {Build.VERSION_CODES.P})
-public class CapabilitiesTest {
+public class CapabilitiesDeserializerTest {
+
+    private final CapabilitiesDeserializer deserializer = new CapabilitiesDeserializer();
 
     @Test
     public void testDefaultWithoutApiVersion() {
@@ -39,7 +42,7 @@ public class CapabilitiesTest {
                 "        }" +
                 "    }" +
                 "}";
-        final Capabilities capabilities = new CapabilitiesDeserializer().deserialize(JsonParser.parseString(response), null, null);
+        final Capabilities capabilities = deserializer.deserialize(JsonParser.parseString(response), null, null);
         assertNull(capabilities.getETag());
         assertNull(capabilities.getApiVersion());
         assertEquals(Color.parseColor("#1E4164"), capabilities.getColor());
@@ -72,7 +75,7 @@ public class CapabilitiesTest {
                 "        }" +
                 "    }" +
                 "}";
-        final Capabilities capabilities = new CapabilitiesDeserializer().deserialize(JsonParser.parseString(response), null, null);
+        final Capabilities capabilities = deserializer.deserialize(JsonParser.parseString(response), null, null);
         assertNull(capabilities.getETag());
         assertEquals("[\"0.2\",\"1.1\"]", capabilities.getApiVersion());
         assertEquals(Color.parseColor("#1E4164"), capabilities.getColor());
@@ -105,7 +108,7 @@ public class CapabilitiesTest {
                 "        }" +
                 "    }" +
                 "}";
-        final Capabilities capabilities = new CapabilitiesDeserializer().deserialize(JsonParser.parseString(response), null, null);
+        final Capabilities capabilities = deserializer.deserialize(JsonParser.parseString(response), null, null);
         assertNull(capabilities.getETag());
         assertEquals("\"1.0\"", capabilities.getApiVersion());
         assertEquals(Color.parseColor("#1E4164"), capabilities.getColor());
@@ -301,7 +304,7 @@ public class CapabilitiesTest {
                 "        }" +
                 "    }" +
                 "}";
-        final Capabilities capabilities = new CapabilitiesDeserializer().deserialize(JsonParser.parseString(response), null, null);
+        final Capabilities capabilities = deserializer.deserialize(JsonParser.parseString(response), null, null);
         assertNull(capabilities.getETag());
         assertEquals("[\"0.2\",\"1.1\"]", capabilities.getApiVersion());
         assertEquals(Color.parseColor("#44616B"), capabilities.getColor());
