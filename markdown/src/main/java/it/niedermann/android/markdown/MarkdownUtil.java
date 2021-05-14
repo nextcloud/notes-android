@@ -23,7 +23,6 @@ import androidx.core.text.HtmlCompat;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
 
-import java.util.Arrays;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -543,16 +542,12 @@ public class MarkdownUtil {
      */
     @NonNull
     public static String removeMarkdown(@Nullable String s) {
-        if (TextUtils.isEmpty(s))
+        if (TextUtils.isEmpty(s)) {
             return "";
-        // Create HTML string from Markup
-        String html = renderer.render(parser.parse(replaceCheckboxesWithEmojis(s)));
-        // Convert Spanned from HTML.
-        Spanned spanned = HtmlCompat.fromHtml(html, HtmlCompat.FROM_HTML_MODE_COMPACT);
-        // Convert from spanned to string
-        s = spanned.toString();
-        // The default string has two additional \n in the end, the trim is used to delete this two \n.
-        s = s.trim();
-        return s;
+        }
+        assert s != null;
+        final String html = renderer.render(parser.parse(replaceCheckboxesWithEmojis(s)));
+        final Spanned spanned = HtmlCompat.fromHtml(html, HtmlCompat.FROM_HTML_MODE_COMPACT);
+        return spanned.toString().trim();
     }
 }
