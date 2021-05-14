@@ -39,13 +39,6 @@ public class MarkdownUtil {
     private final static Parser parser = Parser.builder().build();
     private final static HtmlRenderer renderer = HtmlRenderer.builder().softbreak("<br>").build();
 
-    private static final Pattern PATTERN_LISTS = Pattern.compile("^\\s*[*+-]\\s+", Pattern.MULTILINE);
-    private static final Pattern PATTERN_HEADINGS = Pattern.compile("^#+\\s+(.*?)\\s*#*$", Pattern.MULTILINE);
-    private static final Pattern PATTERN_HEADING_LINE = Pattern.compile("^(?:=*|-*)$", Pattern.MULTILINE);
-    private static final Pattern PATTERN_EMPHASIS = Pattern.compile("(\\*+|_+)(.*?)\\1", Pattern.MULTILINE);
-    private static final Pattern PATTERN_SPACE_1 = Pattern.compile("^\\s+", Pattern.MULTILINE);
-    private static final Pattern PATTERN_SPACE_2 = Pattern.compile("\\s+$", Pattern.MULTILINE);
-
     private static final Pattern PATTERN_CODE_FENCE = Pattern.compile("^(`{3,})");
     private static final Pattern PATTERN_ORDERED_LIST_ITEM = Pattern.compile("^(\\d+).\\s.+$");
     private static final Pattern PATTERN_ORDERED_LIST_ITEM_EMPTY = Pattern.compile("^(\\d+).\\s$");
@@ -570,15 +563,14 @@ public class MarkdownUtil {
     public static String removeMarkdown(@Nullable String s) {
         if (TextUtils.isEmpty(s))
             return "";
-        s = s.trim();
         // Create HTML string from Markup
         String html = renderer.render(parser.parse(replaceCheckboxesWithEmojis(s)));
         // Convert Spanned from HTML.
         Spanned spanned = HtmlCompat.fromHtml(html, HtmlCompat.FROM_HTML_MODE_COMPACT);
         // Convert from spanned to string
         s = spanned.toString();
-        // The default string has two additional \n in the end, the substring is used to delete this two \n.
-        s = s.substring(0, s.length() - 1);
+        // The default string has two additional \n in the end, the trim is used to delete this two \n.
+        s = s.trim();
         return s;
     }
 }
