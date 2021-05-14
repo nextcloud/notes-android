@@ -1,9 +1,7 @@
 package it.niedermann.owncloud.notes.main.menu;
 
 import android.content.Context;
-import android.util.Log;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.core.util.Consumer;
