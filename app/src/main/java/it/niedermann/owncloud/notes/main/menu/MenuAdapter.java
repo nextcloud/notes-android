@@ -54,7 +54,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MenuViewHolder holder, int position) {
-        holder.bind(menuItems[position], onClick, ContextCompat.getColor(context, R.color.fg_default));
+        holder.bind(menuItems[position], onClick);
     }
 
     public void updateAccount(@NonNull Account account) {
