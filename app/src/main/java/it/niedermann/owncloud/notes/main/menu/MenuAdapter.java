@@ -2,6 +2,7 @@ package it.niedermann.owncloud.notes.main.menu;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.core.util.Consumer;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.nextcloud.android.sso.helper.VersionCheckHelper;
 
 import it.niedermann.owncloud.notes.FormattingHelpActivity;
 import it.niedermann.owncloud.notes.R;
@@ -29,7 +32,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
     public MenuAdapter(@NonNull Context context, @NonNull Account account, @NonNull Consumer<MenuItem> onClick) {
         this.menuItems = new MenuItem[]{
                 new MenuItem(new Intent(context, FormattingHelpActivity.class), R.string.action_formatting_help, R.drawable.ic_baseline_help_outline_24),
-                new MenuItem(generateTrashbinIntent(account), R.string.action_trashbin, R.drawable.ic_delete_grey600_24dp),
+                new MenuItem(generateTrashbinIntent(context, account), R.string.action_trashbin, R.drawable.ic_delete_grey600_24dp),
                 new MenuItem(new Intent(context, PreferencesActivity.class), SERVER_SETTINGS, R.string.action_settings, R.drawable.ic_settings_grey600_24dp),
                 new MenuItem(new Intent(context, AboutActivity.class), R.string.simple_about, R.drawable.ic_info_outline_grey600_24dp)
         };
@@ -53,8 +56,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
         holder.bind(menuItems[position], onClick);
     }
 
-    public void updateAccount(@NonNull Account account) {
-        menuItems[1].setIntent(new Intent(generateTrashbinIntent(account)));
+    public void updateAccount(@NonNull Context context, @NonNull Account account) {
+        menuItems[1].setIntent(new Intent(generateTrashbinIntent(context, account)));
     }
 
     @Override
@@ -63,7 +66,38 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
     }
 
     @NonNull
-    private static Intent generateTrashbinIntent(@NonNull Account account) {
+    private static Intent generateTrashbinIntent(@NonNull Context context, @NonNull Account account) {
+        // TODO Replace with correct minVersionCode once the PR in the files app has been merged: https://github.com/nextcloud/android/pull/8405
+        final int minVersionCode = 30160000;
+        try {
+            if (VersionCheckHelper.getNextcloudFilesVersionCode(context, true) > minVersionCode) {
+                return generateTrashbinAppIntent(context, account, true);
+            } else if (VersionCheckHelper.getNextcloudFilesVersionCode(context, false) > minVersionCode) {
+                return generateTrashbinAppIntent(context, account, false);
+            } else {
+                // Files app is too old to be able to switch the account when launching the TrashbinActivity
+                return generateTrashbinWebIntent(account);
+            }
+        } catch (PackageManager.NameNotFoundException | SecurityException e) {
+            e.printStackTrace();
+            return generateTrashbinWebIntent(account);
+        }
+    }
+
+    private static Intent generateTrashbinAppIntent(@NonNull Context context, @NonNull Account account, boolean prod) throws PackageManager.NameNotFoundException {
+        final PackageManager packageManager = context.getPackageManager();
+        final String packageName = prod ? "com.nextcloud.client" : "com.nextcloud.android.beta";
+        final Intent intent = new Intent();
+        intent.setClassName(packageName, "com.owncloud.android.ui.trashbin.TrashbinActivity");
+        if (packageManager.resolveActivity(intent, 0) != null) {
+            return intent
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    .putExtra("TARGET_ACCOUNT_NAME", account.getAccountName());
+        }
+        throw new PackageManager.NameNotFoundException("Could not resolve target activity.");
+    }
+
+    private static Intent generateTrashbinWebIntent(@NonNull Account account) {
         return new Intent(Intent.ACTION_VIEW, Uri.parse(account.getUrl() + "/index.php/apps/files/?dir=/&view=trashbin"));
     }
 }

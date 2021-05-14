@@ -309,7 +309,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
                 binding.navigationMenu.setAdapter(menuAdapter);
             } else {
-                menuAdapter.updateAccount(nextAccount);
+                menuAdapter.updateAccount(this, nextAccount);
             }
         });
     }
