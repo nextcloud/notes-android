@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.core.util.Consumer;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,11 +25,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
     private final MenuItem[] menuItems;
     @NonNull
     private final Consumer<MenuItem> onClick;
-    @NonNull
-    private final Context context;
 
     public MenuAdapter(@NonNull Context context, @NonNull Account account, @NonNull Consumer<MenuItem> onClick) {
-        this.context = context;
         this.menuItems = new MenuItem[]{
                 new MenuItem(new Intent(context, FormattingHelpActivity.class), R.string.action_formatting_help, R.drawable.ic_baseline_help_outline_24),
                 new MenuItem(generateTrashbinIntent(account), R.string.action_trashbin, R.drawable.ic_delete_grey600_24dp),
