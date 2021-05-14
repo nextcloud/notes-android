@@ -2,11 +2,13 @@ package it.niedermann.owncloud.notes.persistence;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.SpannedString;
 import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
+import androidx.core.text.HtmlCompat;
 
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.api.ParsedResponse;
@@ -18,6 +20,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
+import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
@@ -37,6 +40,7 @@ import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_EDITED;
 import static it.niedermann.owncloud.notes.shared.model.DBStatus.VOID;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.argThat;
@@ -47,7 +51,7 @@ import static org.powermock.api.mockito.PowerMockito.mockStatic;
 
 @SuppressWarnings("CallToThreadRun")
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ApiProvider.class, AccountImporter.class, TextUtils.class, Log.class, Color.class, ApiVersionUtil.class})
+@PrepareForTest({ApiProvider.class, AccountImporter.class, TextUtils.class, Log.class, Color.class, ApiVersionUtil.class, HtmlCompat.class})
 public class NotesServerSyncTaskTest {
 
     @Rule
@@ -65,6 +69,9 @@ public class NotesServerSyncTaskTest {
         mockStatic(AccountImporter.class, invocation -> mock(SingleSignOnAccount.class));
         mockStatic(Log.class);
         mockStatic(TextUtils.class);
+        PowerMockito.when(TextUtils.join(anyString(), any(Object[].class))).thenReturn("");
+        mockStatic(HtmlCompat.class);
+        PowerMockito.when(HtmlCompat.fromHtml(anyString(), anyInt())).thenReturn(mock(SpannedString.class));
         mockStatic(ApiVersionUtil.class);
         mockStatic(Color.class);
         this.task = new NotesServerSyncTask(mock(Context.class), repo, account, false) {
