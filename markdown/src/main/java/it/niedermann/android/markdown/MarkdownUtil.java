@@ -568,8 +568,9 @@ public class MarkdownUtil {
      */
     @NonNull
     public static String removeMarkdown(@Nullable String s) {
-        if (s == null)
+        if (TextUtils.isEmpty(s))
             return "";
+        s = s.trim();
         // Create HTML string from Markup
         String html = renderer.render(parser.parse(replaceCheckboxesWithEmojis(s)));
         // Convert Spanned from HTML.

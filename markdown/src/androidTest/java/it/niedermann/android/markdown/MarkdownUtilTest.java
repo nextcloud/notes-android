@@ -770,6 +770,8 @@ public class MarkdownUtilTest extends TestCase {
 //        assertEquals("Foo Link Bar", MarkdownUtil.removeMarkdown("Foo [Link](https://example.com) Bar"));
         assertFalse(MarkdownUtil.removeMarkdown("- [ ] Test").contains("- [ ]"));
         assertTrue(MarkdownUtil.removeMarkdown("- [ ] Test").endsWith("Test"));
+        assertEquals("", MarkdownUtil.removeMarkdown(null));
+        assertEquals("", MarkdownUtil.removeMarkdown(""));
 
         // https://github.com/stefan-niedermann/nextcloud-notes/issues/1104
         assertEquals("2021-03-24 - Example text", MarkdownUtil.removeMarkdown("2021-03-24 - Example text"));
