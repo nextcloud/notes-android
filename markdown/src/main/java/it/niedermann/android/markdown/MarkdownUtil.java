@@ -39,13 +39,6 @@ public class MarkdownUtil {
     private final static Parser parser = Parser.builder().build();
     private final static HtmlRenderer renderer = HtmlRenderer.builder().softbreak("<br>").build();
 
-    private static final Pattern PATTERN_LISTS = Pattern.compile("^\\s*[*+-]\\s+", Pattern.MULTILINE);
-    private static final Pattern PATTERN_HEADINGS = Pattern.compile("^#+\\s+(.*?)\\s*#*$", Pattern.MULTILINE);
-    private static final Pattern PATTERN_HEADING_LINE = Pattern.compile("^(?:=*|-*)$", Pattern.MULTILINE);
-    private static final Pattern PATTERN_EMPHASIS = Pattern.compile("(\\*+|_+)(.*?)\\1", Pattern.MULTILINE);
-    private static final Pattern PATTERN_SPACE_1 = Pattern.compile("^\\s+", Pattern.MULTILINE);
-    private static final Pattern PATTERN_SPACE_2 = Pattern.compile("\\s+$", Pattern.MULTILINE);
-
     private static final Pattern PATTERN_CODE_FENCE = Pattern.compile("^(`{3,})");
     private static final Pattern PATTERN_ORDERED_LIST_ITEM = Pattern.compile("^(\\d+).\\s.+$");
     private static final Pattern PATTERN_ORDERED_LIST_ITEM_EMPTY = Pattern.compile("^(\\d+).\\s$");
@@ -550,23 +543,16 @@ public class MarkdownUtil {
      */
     @NonNull
     public static String removeMarkdown(@Nullable String s) {
-        if (s == null)
+        if (TextUtils.isEmpty(s))
             return "";
-        // TODO maybe we can utilize the markwon renderer?
-
-        for (EListType listType : EListType.values()) {
-            for (String item : Arrays.asList(listType.checkboxChecked, listType.checkboxUnchecked, listType.listSymbolWithTrailingSpace)) {
-                if (s.startsWith(item)) {
-                    s = s.substring(item.length());
-                }
-            }
-        }
-        s = PATTERN_LISTS.matcher(s).replaceAll("");
-        s = PATTERN_HEADINGS.matcher(s).replaceAll("$1");
-        s = PATTERN_HEADING_LINE.matcher(s).replaceAll("");
-        s = PATTERN_EMPHASIS.matcher(s).replaceAll("$2");
-        s = PATTERN_SPACE_1.matcher(s).replaceAll("");
-        s = PATTERN_SPACE_2.matcher(s).replaceAll("");
+        // Create HTML string from Markup
+        String html = renderer.render(parser.parse(replaceCheckboxesWithEmojis(s)));
+        // Convert Spanned from HTML.
+        Spanned spanned = HtmlCompat.fromHtml(html, HtmlCompat.FROM_HTML_MODE_COMPACT);
+        // Convert from spanned to string
+        s = spanned.toString();
+        // The default string has two additional \n in the end, the trim is used to delete this two \n.
+        s = s.trim();
         return s;
     }
 }
