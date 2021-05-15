@@ -177,6 +177,8 @@ public class NotesRepository {
 
     @WorkerThread
     public void deleteAccount(@NonNull Account account) {
+//        final Context ctx = context.getApplicationContext();
+//        final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(ctx);
         try {
             ApiProvider.invalidateAPICache(AccountImporter.getSingleSignOnAccount(context, account.getAccountName()));
         } catch (NextcloudFilesAppAccountNotFoundException e) {
@@ -627,20 +629,19 @@ public class NotesRepository {
             int orderIndex = sortingMethod.getId();
             final String categoryType = selectedCategory.getType().toString();
             final String keyMetaCategory = categoryType.concat(String.valueOf(accountId));
-
             switch (selectedCategory.getType()) {
                 case FAVORITES: {
-                    sp.putInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_favorites), orderIndex);
+                    sp.putInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_favorites) + accountId, orderIndex);
                     sp.putString(keyMetaCategory, "modified");
                     break;
                 }
                 case UNCATEGORIZED: {
-                    sp.putInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.action_uncategorized), orderIndex);
+                    sp.putInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.action_uncategorized) + accountId, orderIndex);
                     sp.putString(keyMetaCategory, "lexicographically");
                     break;
                 }
                 case RECENT: {
-                    sp.putInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_all_notes), orderIndex);
+                    sp.putInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_all_notes) + accountId, orderIndex);
                     sp.putString(keyMetaCategory, "modified");
                     break;
                 }
@@ -683,19 +684,19 @@ public class NotesRepository {
     public LiveData<CategorySortingMethod> getCategoryOrder(@NonNull NavigationCategory selectedCategory) {
         final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         String prefKey;
-        final String categoryType = selectedCategory.getType().toString();
+        final String accountId = String.valueOf(selectedCategory.getAccountId());
         switch (selectedCategory.getType()) {
             // TODO make this account specific
             case RECENT: {
-                prefKey = context.getString(R.string.action_sorting_method) + ' ' + context.getString(R.string.label_all_notes + '_') + categoryType;
+                prefKey = context.getString(R.string.action_sorting_method) + ' ' + context.getString(R.string.label_all_notes) + accountId;
                 break;
             }
             case FAVORITES: {
-                prefKey = context.getString(R.string.action_sorting_method) + ' ' + context.getString(R.string.label_favorites + '_') + categoryType;
+                prefKey = context.getString(R.string.action_sorting_method) + ' ' + context.getString(R.string.label_favorites) + accountId;
                 break;
             }
             case UNCATEGORIZED: {
-                prefKey = context.getString(R.string.action_sorting_method) + ' ' + context.getString(R.string.action_uncategorized + '_') + categoryType;
+                prefKey = context.getString(R.string.action_sorting_method) + ' ' + context.getString(R.string.action_uncategorized) + accountId;
                 break;
             }
             case DEFAULT_CATEGORY:
