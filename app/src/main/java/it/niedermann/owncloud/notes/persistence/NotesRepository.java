@@ -177,10 +177,19 @@ public class NotesRepository {
 
     @WorkerThread
     public void deleteAccount(@NonNull Account account) {
-//        final Context ctx = context.getApplicationContext();
-//        final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(ctx);
         try {
             ApiProvider.invalidateAPICache(AccountImporter.getSingleSignOnAccount(context, account.getAccountName()));
+            executor.submit(() -> {
+                final Context ctx = context.getApplicationContext();
+                final SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(ctx).edit();
+                final String keyRecentCategory = ENavigationCategoryType.RECENT.toString().concat(String.valueOf(account.getId()));
+                final String keyUncategorizedCategory = ENavigationCategoryType.UNCATEGORIZED.toString().concat(String.valueOf(account.getId()));
+                final String keyFavoritesCategory = ENavigationCategoryType.FAVORITES.toString().concat(String.valueOf(account.getId()));
+                sp.remove(keyRecentCategory);
+                sp.remove(keyUncategorizedCategory);
+                sp.remove(keyFavoritesCategory);
+                sp.apply();
+            });
         } catch (NextcloudFilesAppAccountNotFoundException e) {
             e.printStackTrace();
             ApiProvider.invalidateAPICache();
