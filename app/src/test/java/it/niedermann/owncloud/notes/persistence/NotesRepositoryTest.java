@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.persistence;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 
 import androidx.annotation.NonNull;
@@ -9,6 +10,8 @@ import androidx.room.Room;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.google.common.util.concurrent.MoreExecutors;
+import com.nextcloud.android.sso.AccountImporter;
+import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import org.json.JSONException;
 import org.junit.After;
@@ -20,6 +23,7 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
@@ -32,7 +36,7 @@ import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
 
-import static it.niedermann.owncloud.notes.persistence.NotesDatabaseTestUtil.getOrAwaitValue;
+import static it.niedermann.owncloud.notes.persistence.NotesTestingUtil.getOrAwaitValue;
 import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_DELETED;
 import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_EDITED;
 import static it.niedermann.owncloud.notes.shared.model.DBStatus.VOID;
@@ -145,6 +149,17 @@ public class NotesRepositoryTest {
                 fail();
             }
         });
+    }
+
+    @Test
+    public void testDeleteAccount() throws IOException {
+        NotesTestingUtil.mockSingleSignOn(new SingleSignOnAccount(account.getAccountName(), account.getUserName(), "1337", account.getUrl(), ""));
+
+        assertNotNull(repo.getAccountById(account.getId()));
+
+        repo.deleteAccount(account);
+
+        assertNull(repo.getAccountById(account.getId()));
     }
 
     @Test
