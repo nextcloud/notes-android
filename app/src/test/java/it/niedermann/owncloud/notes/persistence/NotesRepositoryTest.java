@@ -1,8 +1,8 @@
 package it.niedermann.owncloud.notes.persistence;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.NetworkOnMainThreadException;
 
 import androidx.annotation.NonNull;
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
@@ -10,7 +10,6 @@ import androidx.room.Room;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.google.common.util.concurrent.MoreExecutors;
-import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import org.json.JSONException;
@@ -41,9 +40,12 @@ import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_DELETED;
 import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_EDITED;
 import static it.niedermann.owncloud.notes.shared.model.DBStatus.VOID;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 @RunWith(RobolectricTestRunner.class)
@@ -211,5 +213,48 @@ public class NotesRepositoryTest {
         assertEquals(4, repo.getLocalModifiedNotes(secondAccount.getId()).size());
         assertEquals(LOCAL_EDITED, movedNote.getStatus());
         // TODO assert deleteAndSync has been called
+    }
+
+    @Test
+    public void testSyncStatusLiveData() throws InterruptedException, IOException {
+        NotesTestingUtil.mockSingleSignOn(new SingleSignOnAccount(account.getAccountName(), account.getUserName(), "1337", account.getUrl(), ""));
+
+        assertFalse(NotesTestingUtil.getOrAwaitValue(repo.getSyncStatus()));
+        repo.addCallbackPull(account, () -> {
+            try {
+                assertTrue(NotesTestingUtil.getOrAwaitValue(repo.getSyncStatus()));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                fail(e.getMessage());
+            }
+        });
+        repo.scheduleSync(account, false);
+        assertFalse(NotesTestingUtil.getOrAwaitValue(repo.getSyncStatus()));
+    }
+
+    @Test
+    public void testSyncErrorsLiveData() throws InterruptedException, IOException {
+        NotesTestingUtil.mockSingleSignOn(new SingleSignOnAccount(account.getAccountName(), account.getUserName(), "1337", account.getUrl(), ""));
+
+        assertThrows("The very first time, this LiveData should never have been set", RuntimeException.class, () -> NotesTestingUtil.getOrAwaitValue(repo.getSyncErrors()));
+        repo.scheduleSync(account, false);
+        //noinspection ConstantConditions
+        assertTrue("In our scenario, we expect an exception of type " + NetworkOnMainThreadException.class.getSimpleName() + " to be handeled.", getOrAwaitValue(repo.getSyncErrors()).stream()
+                .anyMatch(e -> e.getMessage().contains(NetworkOnMainThreadException.class.getSimpleName())));
+    }
+
+    @Test
+    public void updateDisplayName() {
+        final Account account = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", null, new Capabilities())));
+        assertEquals("Should read userName in favor of displayName if displayName is NULL", "彼得", account.getDisplayName());
+
+        repo.updateDisplayName(account.getId(), "");
+        assertEquals("Should properly update the displayName, even if it is blank", "", db.getAccountDao().getAccountById(account.getId()).getDisplayName());
+
+        repo.updateDisplayName(account.getId(), "Foo Bar");
+        assertEquals("Foo Bar", db.getAccountDao().getAccountById(account.getId()).getDisplayName());
+
+        repo.updateDisplayName(account.getId(), null);
+        assertEquals("Should read userName in favor of displayName if displayName is NULL", "彼得", db.getAccountDao().getAccountById(account.getId()).getDisplayName());
     }
 }
