@@ -188,6 +188,9 @@ public class NotesRepository {
                 sp.remove(keyRecentCategory);
                 sp.remove(keyUncategorizedCategory);
                 sp.remove(keyFavoritesCategory);
+                sp.remove(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_favorites) + account.getId());
+                sp.remove(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.action_uncategorized) + account.getId());
+                sp.remove(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_all_notes) + account.getId());
                 sp.apply();
             });
         } catch (NextcloudFilesAppAccountNotFoundException e) {
