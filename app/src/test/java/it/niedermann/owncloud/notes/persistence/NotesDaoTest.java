@@ -65,12 +65,12 @@ public class NotesDaoTest {
         db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "T", "C", "", false, "1", LOCAL_DELETED, account.getId(), "", 0));
         db.getNoteDao().deleteByNoteId(1, LOCAL_DELETED);
         assertNull(db.getNoteDao().getNoteById(1));
-        assertNull(NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().getNoteById$(1)));
+        assertNull(NotesTestingUtil.getOrAwaitValue(db.getNoteDao().getNoteById$(1)));
 
         db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "T", "C", "", false, "1", LOCAL_DELETED, account.getId(), "", 0));
         db.getNoteDao().deleteByNoteId(1, VOID);
         assertEquals(1, db.getNoteDao().getNoteById(1).getId());
-        assertEquals(1, NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().getNoteById$(1)).getId());
+        assertEquals(1, NotesTestingUtil.getOrAwaitValue(db.getNoteDao().getNoteById$(1)).getId());
     }
 
     @Test
@@ -154,8 +154,8 @@ public class NotesDaoTest {
         assertEquals(Integer.valueOf(1), db.getNoteDao().countFavorites(account.getId()));
         assertEquals(Integer.valueOf(1), db.getNoteDao().countFavorites(secondAccount.getId()));
 
-        assertEquals(Integer.valueOf(1), NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().countFavorites$(account.getId())));
-        assertEquals(Integer.valueOf(1), NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().countFavorites$(secondAccount.getId())));
+        assertEquals(Integer.valueOf(1), NotesTestingUtil.getOrAwaitValue(db.getNoteDao().countFavorites$(account.getId())));
+        assertEquals(Integer.valueOf(1), NotesTestingUtil.getOrAwaitValue(db.getNoteDao().countFavorites$(secondAccount.getId())));
     }
 
     @Test
@@ -165,8 +165,8 @@ public class NotesDaoTest {
         assertEquals(Integer.valueOf(7), db.getNoteDao().count(account.getId()));
         assertEquals(Integer.valueOf(5), db.getNoteDao().count(secondAccount.getId()));
 
-        assertEquals(Integer.valueOf(7), NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().count$(account.getId())));
-        assertEquals(Integer.valueOf(5), NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().count$(secondAccount.getId())));
+        assertEquals(Integer.valueOf(7), NotesTestingUtil.getOrAwaitValue(db.getNoteDao().count$(account.getId())));
+        assertEquals(Integer.valueOf(5), NotesTestingUtil.getOrAwaitValue(db.getNoteDao().count$(secondAccount.getId())));
     }
 
     @Test
@@ -341,16 +341,16 @@ public class NotesDaoTest {
         final Note note = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", LOCAL_DELETED, account.getId(), "", 0);
         db.getNoteDao().addNote(note);
         assertEquals("My-Content", db.getNoteDao().getContent(note.getId()));
-        assertEquals("My-Content", NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().getContent$(note.getId())));
+        assertEquals("My-Content", NotesTestingUtil.getOrAwaitValue(db.getNoteDao().getContent$(note.getId())));
         assertNull(db.getNoteDao().getContent(note.getId() + 1));
-        assertNull(NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().getContent$(note.getId() + 1)));
+        assertNull(NotesTestingUtil.getOrAwaitValue(db.getNoteDao().getContent$(note.getId() + 1)));
     }
 
     @Test
     public void getCategoriesLiveData() throws InterruptedException {
         final Account secondAccount = setupSecondAccountAndTestNotes();
 
-        final List<CategoryWithNotesCount> accountCategories = NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().getCategories$(account.getId()));
+        final List<CategoryWithNotesCount> accountCategories = NotesTestingUtil.getOrAwaitValue(db.getNoteDao().getCategories$(account.getId()));
         assertEquals(4, accountCategories.size());
         for (CategoryWithNotesCount category : accountCategories) {
             assertEquals(account.getId(), category.getAccountId());
@@ -361,7 +361,7 @@ public class NotesDaoTest {
         assertTrue(accountCategories.stream().anyMatch(cat -> "ToDo".equals(cat.getCategory()) && Integer.valueOf(1).equals(cat.getTotalNotes())));
         assertTrue(accountCategories.stream().anyMatch(cat -> "日记".equals(cat.getCategory()) && Integer.valueOf(1).equals(cat.getTotalNotes())));
 
-        final List<CategoryWithNotesCount> secondAccountCategories = NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().getCategories$(secondAccount.getId()));
+        final List<CategoryWithNotesCount> secondAccountCategories = NotesTestingUtil.getOrAwaitValue(db.getNoteDao().getCategories$(secondAccount.getId()));
         assertEquals(2, secondAccountCategories.size());
         for (CategoryWithNotesCount category : secondAccountCategories) {
             assertEquals(secondAccount.getId(), category.getAccountId());
@@ -376,14 +376,14 @@ public class NotesDaoTest {
     public void searchCategories() throws InterruptedException {
         final Account secondAccount = setupSecondAccountAndTestNotes();
 
-        assertEquals(2, NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().searchCategories$(account.getId(), "M%")).size());
-        assertEquals(1, NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().searchCategories$(account.getId(), "Mo%")).size());
-        assertEquals(1, NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().searchCategories$(account.getId(), "MO%")).size());
-        assertEquals(1, NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().searchCategories$(account.getId(), "movie%")).size());
-        assertEquals(1, NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().searchCategories$(account.getId(), "T%")).size());
-        assertEquals(1, NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().searchCategories$(account.getId(), "日记")).size());
-        assertEquals(2, NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().searchCategories$(secondAccount.getId(), "M%")).size());
-        assertEquals(0, NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().searchCategories$(secondAccount.getId(), "T%")).size());
+        assertEquals(2, NotesTestingUtil.getOrAwaitValue(db.getNoteDao().searchCategories$(account.getId(), "M%")).size());
+        assertEquals(1, NotesTestingUtil.getOrAwaitValue(db.getNoteDao().searchCategories$(account.getId(), "Mo%")).size());
+        assertEquals(1, NotesTestingUtil.getOrAwaitValue(db.getNoteDao().searchCategories$(account.getId(), "MO%")).size());
+        assertEquals(1, NotesTestingUtil.getOrAwaitValue(db.getNoteDao().searchCategories$(account.getId(), "movie%")).size());
+        assertEquals(1, NotesTestingUtil.getOrAwaitValue(db.getNoteDao().searchCategories$(account.getId(), "T%")).size());
+        assertEquals(1, NotesTestingUtil.getOrAwaitValue(db.getNoteDao().searchCategories$(account.getId(), "日记")).size());
+        assertEquals(2, NotesTestingUtil.getOrAwaitValue(db.getNoteDao().searchCategories$(secondAccount.getId(), "M%")).size());
+        assertEquals(0, NotesTestingUtil.getOrAwaitValue(db.getNoteDao().searchCategories$(secondAccount.getId(), "T%")).size());
     }
 
     @Test

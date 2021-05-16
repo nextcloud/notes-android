@@ -1,18 +1,26 @@
 package it.niedermann.owncloud.notes.persistence;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
+import androidx.test.core.app.ApplicationProvider;
 
-import java.util.Random;
+import com.nextcloud.android.sso.AccountImporter;
+import com.nextcloud.android.sso.model.SingleSignOnAccount;
+
+import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-public class NotesDatabaseTestUtil {
+public class NotesTestingUtil {
 
     private static long currentLong = 1;
 
-    private NotesDatabaseTestUtil() {
+    private NotesTestingUtil() {
         // Util class
     }
 
@@ -39,18 +47,14 @@ public class NotesDatabaseTestUtil {
         return (T) data[0];
     }
 
-    public static String randomString(int length) {
-        final int leftLimit = 48; // numeral '0'
-        final int rightLimit = 122; // letter 'z'
-
-        return new Random().ints(leftLimit, rightLimit + 1)
-                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
-                .limit(length)
-                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-                .toString();
-    }
-
-    public static long uniqueLong() {
-        return currentLong++;
+    /**
+     * Pretends managing {@link SingleSignOnAccount}s by using own private {@link SharedPreferences}.
+     *
+     * @param ssoAccount this account will be added
+     */
+    public static void mockSingleSignOn(@NonNull SingleSignOnAccount ssoAccount) throws IOException {
+        final SharedPreferences sharedPrefs = ApplicationProvider.getApplicationContext().getSharedPreferences("TEMP_SHARED_PREFS_" + currentLong++, Context.MODE_PRIVATE);
+        sharedPrefs.edit().putString("PREF_ACCOUNT_STRING" + ssoAccount.name, SingleSignOnAccount.toString(ssoAccount)).commit();
+        AccountImporter.setSharedPreferences(sharedPrefs);
     }
 }
