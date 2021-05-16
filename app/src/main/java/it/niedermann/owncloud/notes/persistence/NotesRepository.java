@@ -613,8 +613,6 @@ public class NotesRepository {
             final Context ctx = context.getApplicationContext();
             final SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(ctx).edit();
             int orderIndex = sortingMethod.getId();
-            final String categoryType = selectedCategory.getType().toString();
-            final String keyMetaCategory = categoryType.concat(String.valueOf(accountId));
             switch (selectedCategory.getType()) {
                 case FAVORITES: {
                     sp.putInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_favorites) + accountId, orderIndex);
