@@ -178,20 +178,11 @@ public class NotesRepository {
     public void deleteAccount(@NonNull Account account) {
         try {
             ApiProvider.invalidateAPICache(AccountImporter.getSingleSignOnAccount(context, account.getAccountName()));
-            executor.submit(() -> {
-                final Context ctx = context.getApplicationContext();
-                final SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(ctx).edit();
-                final String keyRecentCategory = ENavigationCategoryType.RECENT.toString().concat(String.valueOf(account.getId()));
-                final String keyUncategorizedCategory = ENavigationCategoryType.UNCATEGORIZED.toString().concat(String.valueOf(account.getId()));
-                final String keyFavoritesCategory = ENavigationCategoryType.FAVORITES.toString().concat(String.valueOf(account.getId()));
-                sp.remove(keyRecentCategory);
-                sp.remove(keyUncategorizedCategory);
-                sp.remove(keyFavoritesCategory);
-                sp.remove(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_favorites) + account.getId());
-                sp.remove(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.action_uncategorized) + account.getId());
-                sp.remove(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_all_notes) + account.getId());
-                sp.apply();
-            });
+            final SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(this.context).edit();
+            sp.remove(this.context.getString(R.string.action_sorting_method) + ' ' + this.context.getString(R.string.label_favorites) + account.getId());
+            sp.remove(this.context.getString(R.string.action_sorting_method) + ' ' + this.context.getString(R.string.action_uncategorized) + account.getId());
+            sp.remove(this.context.getString(R.string.action_sorting_method) + ' ' + this.context.getString(R.string.label_all_notes) + account.getId());
+            sp.apply();
         } catch (NextcloudFilesAppAccountNotFoundException e) {
             e.printStackTrace();
             ApiProvider.invalidateAPICache();
@@ -627,17 +618,14 @@ public class NotesRepository {
             switch (selectedCategory.getType()) {
                 case FAVORITES: {
                     sp.putInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_favorites) + accountId, orderIndex);
-                    sp.putString(keyMetaCategory, "modified");
                     break;
                 }
                 case UNCATEGORIZED: {
                     sp.putInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.action_uncategorized) + accountId, orderIndex);
-                    sp.putString(keyMetaCategory, "lexicographically");
                     break;
                 }
                 case RECENT: {
                     sp.putInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_all_notes) + accountId, orderIndex);
-                    sp.putString(keyMetaCategory, "modified");
                     break;
                 }
                 case DEFAULT_CATEGORY:
