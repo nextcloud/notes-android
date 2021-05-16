@@ -14,6 +14,9 @@ import java.util.Map;
 
 import it.niedermann.owncloud.notes.persistence.sync.OcsAPI;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
+import it.niedermann.owncloud.notes.shared.model.OcsResponse;
+import it.niedermann.owncloud.notes.shared.model.OcsUser;
+import retrofit2.Response;
 
 @WorkerThread
 public class CapabilitiesClient {
@@ -22,11 +25,12 @@ public class CapabilitiesClient {
 
     private static final String HEADER_KEY_ETAG = "ETag";
 
+    @WorkerThread
     public static Capabilities getCapabilities(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount, @Nullable String lastETag) throws Throwable {
         final OcsAPI ocsAPI = ApiProvider.getOcsAPI(context, ssoAccount);
         try {
-            final ParsedResponse<Capabilities> response = ocsAPI.getCapabilities(lastETag).blockingSingle();
-            final Capabilities capabilities = response.getResponse();
+            final ParsedResponse<OcsResponse<Capabilities>> response = ocsAPI.getCapabilities(lastETag).blockingSingle();
+            final Capabilities capabilities = response.getResponse().ocs.data;
             final Map<String, String> headers = response.getHeaders();
             if (headers != null) {
                 capabilities.setETag(headers.get(HEADER_KEY_ETAG));
@@ -36,11 +40,33 @@ public class CapabilitiesClient {
             return capabilities;
         } catch (RuntimeException e) {
             final Throwable cause = e.getCause();
-            if(cause != null) {
+            if (cause != null) {
                 throw cause;
             } else {
                 throw e;
             }
         }
+    }
+
+    @WorkerThread
+    @Nullable
+    public static String getDisplayName(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount) {
+        final OcsAPI ocsAPI = ApiProvider.getOcsAPI(context, ssoAccount);
+        try {
+            final Response<OcsResponse<OcsUser>> userResponse = ocsAPI.getUser(ssoAccount.userId).execute();
+            if (userResponse.isSuccessful()) {
+                final OcsResponse<OcsUser> ocsResponse = userResponse.body();
+                if (ocsResponse != null) {
+                    return ocsResponse.ocs.data.displayName;
+                } else {
+                    Log.w(TAG, "ocsResponse is null");
+                }
+            } else {
+                Log.w(TAG, "Fetching user was not successful.");
+            }
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
+        return null;
     }
 }

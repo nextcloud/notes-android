@@ -12,7 +12,7 @@ public class DeviceCredentialUtil {
     private static final String TAG = DeviceCredentialUtil.class.getSimpleName();
 
     private DeviceCredentialUtil() {
-        // utility class -> private constructor
+        throw new UnsupportedOperationException("Do not instantiate this util class.");
     }
 
     public static boolean areCredentialsAvailable(Context context) {

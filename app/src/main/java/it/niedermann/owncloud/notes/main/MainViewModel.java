@@ -20,6 +20,7 @@ import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
+import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -394,26 +395,29 @@ public class MainViewModel extends AndroidViewModel {
             }
             if (repo.isSyncPossible()) {
                 try {
-                    final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplication(), AccountImporter.getSingleSignOnAccount(getApplication(), localAccount.getAccountName()), localAccount.getCapabilitiesETag());
-                    repo.updateCapabilitiesETag(localAccount.getId(), capabilities.getETag());
-                    repo.updateBrand(localAccount.getId(), capabilities.getColor(), capabilities.getTextColor());
-                    localAccount.setColor(capabilities.getColor());
-                    localAccount.setTextColor(capabilities.getTextColor());
-                    BrandingUtil.saveBrandColors(getApplication(), localAccount.getColor(), localAccount.getTextColor());
-                    repo.updateApiVersion(localAccount.getId(), capabilities.getApiVersion());
-                    callback.onSuccess(null);
+                    final SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(getApplication(), localAccount.getAccountName());
+                    try {
+                        final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplication(), ssoAccount, localAccount.getCapabilitiesETag());
+                        repo.updateCapabilitiesETag(localAccount.getId(), capabilities.getETag());
+                        repo.updateBrand(localAccount.getId(), capabilities.getColor(), capabilities.getTextColor());
+                        localAccount.setColor(capabilities.getColor());
+                        localAccount.setTextColor(capabilities.getTextColor());
+                        BrandingUtil.saveBrandColors(getApplication(), localAccount.getColor(), localAccount.getTextColor());
+                        repo.updateApiVersion(localAccount.getId(), capabilities.getApiVersion());
+                        callback.onSuccess(null);
+                    } catch (Throwable t) {
+                        if (t.getClass() == NextcloudHttpRequestFailedException.class || t instanceof NextcloudHttpRequestFailedException) {
+                            if (((NextcloudHttpRequestFailedException) t).getStatusCode() == HTTP_NOT_MODIFIED) {
+                                Log.d(TAG, "Server returned HTTP Status Code " + ((NextcloudHttpRequestFailedException) t).getStatusCode() + " - Capabilities not modified.");
+                                callback.onSuccess(null);
+                                return;
+                            }
+                        }
+                        callback.onError(t);
+                    }
                 } catch (NextcloudFilesAppAccountNotFoundException e) {
                     repo.deleteAccount(localAccount);
                     callback.onError(e);
-                } catch (Throwable t) {
-                    if (t.getClass() == NextcloudHttpRequestFailedException.class || t instanceof NextcloudHttpRequestFailedException) {
-                        if (((NextcloudHttpRequestFailedException) t).getStatusCode() == HTTP_NOT_MODIFIED) {
-                            Log.d(TAG, "Server returned HTTP Status Code " + ((NextcloudHttpRequestFailedException) t).getStatusCode() + " - Capabilities not modified.");
-                            callback.onSuccess(null);
-                            return;
-                        }
-                    }
-                    callback.onError(t);
                 }
             } else {
                 if (repo.isNetworkConnected() && repo.isSyncOnlyOnWifi()) {
@@ -528,8 +532,8 @@ public class MainViewModel extends AndroidViewModel {
         });
     }
 
-    public void addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities, @NonNull IResponseCallback<Account> callback) {
-        repo.addAccount(url, username, accountName, capabilities, callback);
+    public void addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities, @Nullable String displayName, @NonNull IResponseCallback<Account> callback) {
+        repo.addAccount(url, username, accountName, capabilities, displayName, callback);
     }
 
     public LiveData<Note> getFullNote$(long id) {

@@ -1,1 +1,4 @@
 - ⚙️ Enhancing toggling of existing punctuation in the editor (#1193) - by @Jimmy-7664
+- 🐞 Also remove markdown from title when the note only has one line (#1205)
+- 🌓 Fix menu text color in dark mode (#1215)
+- ⚙️ Enhanced removal of markdown (for generating title & excerpt) - by @Cui-Yusong

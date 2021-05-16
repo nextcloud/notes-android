@@ -13,7 +13,7 @@ import androidx.core.text.HtmlCompat;
 public class SupportUtil {
 
     private SupportUtil() {
-
+        throw new UnsupportedOperationException("Do not instantiate this util class.");
     }
 
     /**

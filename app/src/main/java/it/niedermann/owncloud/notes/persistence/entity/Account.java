@@ -58,41 +58,19 @@ public class Account implements Serializable {
     private int textColor = Color.WHITE;
     @Nullable
     private String capabilitiesETag;
+    @Nullable
+    private String displayName;
 
     public Account() {
         // Default constructor
     }
 
-    public Account(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities) {
+    public Account(@NonNull String url, @NonNull String username, @NonNull String accountName, @Nullable String displayName, @NonNull Capabilities capabilities) {
         setUrl(url);
         setUserName(username);
         setAccountName(accountName);
+        setDisplayName(displayName);
         setCapabilities(capabilities);
-    }
-
-    @Nullable
-    public ApiVersion getPreferredApiVersion() {
-        // TODO move this logic to NotesClient?
-        try {
-            if (apiVersion == null) {
-                return null;
-            }
-            final JSONArray versionsArray = new JSONArray(apiVersion);
-            final Collection<ApiVersion> supportedApiVersions = new HashSet<>(versionsArray.length());
-            for (int i = 0; i < versionsArray.length(); i++) {
-                final ApiVersion parsedApiVersion = ApiVersion.of(versionsArray.getString(i));
-                for (ApiVersion temp : ApiVersion.SUPPORTED_API_VERSIONS) {
-                    if (temp.equals(parsedApiVersion)) {
-                        supportedApiVersions.add(parsedApiVersion);
-                        break;
-                    }
-                }
-            }
-            return Collections.max(supportedApiVersions);
-        } catch (JSONException | NoSuchElementException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
     public void setCapabilities(@NonNull Capabilities capabilities) {
@@ -187,6 +165,15 @@ public class Account implements Serializable {
 
     public void setCapabilitiesETag(@Nullable String capabilitiesETag) {
         this.capabilitiesETag = capabilitiesETag;
+    }
+
+    @Nullable
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(@Nullable String displayName) {
+        this.displayName = displayName;
     }
 
     @Override

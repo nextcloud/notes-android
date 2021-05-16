@@ -67,7 +67,7 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
         account$.observe(requireActivity(), (currentLocalAccount) -> {
             account$.removeObservers(requireActivity());
 
-            binding.accountName.setText(currentLocalAccount.getUserName());
+            binding.accountName.setText(currentLocalAccount.getDisplayName());
             binding.accountHost.setText(Uri.parse(currentLocalAccount.getUrl()).getHost());
             Glide.with(requireContext())
                     .load(currentLocalAccount.getUrl() + "/index.php/avatar/" + Uri.encode(currentLocalAccount.getUserName()) + "/64")

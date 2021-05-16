@@ -31,7 +31,7 @@ public class AccountChooserViewHolder extends RecyclerView.ViewHolder {
                 .into(binding.accountItemAvatar);
 
         binding.accountLayout.setOnClickListener((v) -> targetAccountConsumer.accept(localAccount));
-        binding.accountName.setText(localAccount.getUserName());
+        binding.accountName.setText(localAccount.getDisplayName());
         binding.accountHost.setText(Uri.parse(localAccount.getUrl()).getHost());
     }
 }

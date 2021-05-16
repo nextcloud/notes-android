@@ -3,6 +3,7 @@ package it.niedermann.owncloud.notes.importaccount;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
@@ -23,7 +24,7 @@ public class ImportAccountViewModel extends AndroidViewModel {
         this.repo = NotesRepository.getInstance(application);
     }
 
-    public void addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities, @NonNull IResponseCallback<Account> callback) {
-        repo.addAccount(url, username, accountName, capabilities, callback);
+    public void addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities, @Nullable String displayName, @NonNull IResponseCallback<Account> callback) {
+        repo.addAccount(url, username, accountName, capabilities, displayName, callback);
     }
 }

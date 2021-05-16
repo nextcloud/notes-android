@@ -41,10 +41,6 @@ public class ApiVersion implements Comparable<ApiVersion> {
         return minor;
     }
 
-    public String getOriginalVersion() {
-        return originalVersion;
-    }
-
     public static ApiVersion of(String versionString) {
         int major = 0, minor = 0;
         if (versionString != null) {
@@ -83,6 +79,9 @@ public class ApiVersion implements Comparable<ApiVersion> {
         return 0;
     }
 
+    /**
+     * Checks only the <strong>{@link #major}</strong> version.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

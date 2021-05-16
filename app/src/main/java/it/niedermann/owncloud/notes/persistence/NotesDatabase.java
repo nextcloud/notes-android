@@ -33,6 +33,7 @@ import it.niedermann.owncloud.notes.persistence.migration.Migration_18_19;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_19_20;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_20_21;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_21_22;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_22_23;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_9_10;
 
 @Database(
@@ -42,7 +43,7 @@ import it.niedermann.owncloud.notes.persistence.migration.Migration_9_10;
                 CategoryOptions.class,
                 SingleNoteWidgetData.class,
                 NotesListWidgetData.class
-        }, version = 22
+        }, version = 23
 )
 @TypeConverters({Converters.class})
 public abstract class NotesDatabase extends RoomDatabase {
@@ -76,7 +77,8 @@ public abstract class NotesDatabase extends RoomDatabase {
                         new Migration_18_19(context),
                         new Migration_19_20(context),
                         new Migration_20_21(),
-                        new Migration_21_22(context)
+                        new Migration_21_22(context),
+                        new Migration_22_23()
                 )
                 .fallbackToDestructiveMigrationOnDowngrade()
                 .fallbackToDestructiveMigration()

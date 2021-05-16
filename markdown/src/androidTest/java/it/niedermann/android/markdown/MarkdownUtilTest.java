@@ -92,6 +92,11 @@ public class MarkdownUtilTest extends TestCase {
     }
 
     @Test
+    public void testGetMarkdownLink() {
+        assertEquals("[Foo](https://bar)", MarkdownUtil.getMarkdownLink("Foo", "https://bar"));
+    }
+
+    @Test
     public void testLineStartsWithCheckbox() {
         final Map<String, Boolean> lines = new HashMap<>();
         lines.put("  - [ ] a", true);
@@ -447,62 +452,15 @@ public class MarkdownUtilTest extends TestCase {
         assertEquals(33, MarkdownUtil.insertLink(builder, 2, 7, "https://www.example.com"));
         assertEquals("  [Lorem](https://www.example.com)  ", builder.toString());
     }
-
+    
     @Test
-    public void testRemoveContainingPunctuation() {
-        try {
-            final Method m = MarkdownUtil.class.getDeclaredMethod("removeContainingPunctuation", Editable.class, int.class, int.class, String.class);
-            m.setAccessible(true);
-            Editable builder;
+    public void testEscape() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        final Method m = MarkdownUtil.class.getDeclaredMethod("escape", char.class);
+        m.setAccessible(true);
 
-            builder = new SpannableStringBuilder("Lorem *ipsum* dolor");
-            m.invoke(null, builder, 0, 19, "*");
-            assertEquals("Lorem ipsum dolor", builder.toString());
-
-            builder = new SpannableStringBuilder("*Lorem ipsum dolor*");
-            m.invoke(null, builder, 0, 19, "*");
-            assertEquals("Lorem ipsum dolor", builder.toString());
-
-            builder = new SpannableStringBuilder("**Lorem ipsum**");
-            m.invoke(null, builder, 0, 15, "**");
-            assertEquals("Lorem ipsum", builder.toString());
-
-            builder = new SpannableStringBuilder("*Lorem* *ipsum*");
-            m.invoke(null, builder, 0, 15, "*");
-            assertEquals("Lorem ipsum", builder.toString());
-
-            builder = new SpannableStringBuilder("Lorem* ipsum");
-            m.invoke(null, builder, 0, 12, "*");
-            assertEquals("Lorem ipsum", builder.toString());
-
-            builder = new SpannableStringBuilder("*Lorem* ipsum*");
-            m.invoke(null, builder, 0, 14, "*");
-            assertEquals("Lorem ipsum", builder.toString());
-
-            builder = new SpannableStringBuilder("**Lorem ipsum**");
-            m.invoke(null, builder, 0, 15, "*");
-            assertEquals("Lorem ipsum", builder.toString());
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    @SuppressWarnings("ConstantConditions")
-    public void testSelectionIsSurroundedByPunctuation() {
-        try {
-            final Method m = MarkdownUtil.class.getDeclaredMethod("selectionIsSurroundedByPunctuation", CharSequence.class, int.class, int.class, String.class);
-            m.setAccessible(true);
-            assertTrue((Boolean) m.invoke(null, "*Lorem ipsum*", 1, 12, "*"));
-            assertTrue((Boolean) m.invoke(null, "**Lorem ipsum**", 2, 13, "*"));
-            assertTrue((Boolean) m.invoke(null, "**Lorem ipsum**", 2, 13, "**"));
-
-            assertFalse((Boolean) m.invoke(null, "*Lorem ipsum*", 0, 12, "*"));
-            assertFalse((Boolean) m.invoke(null, "*Lorem ipsum*", 1, 13, "*"));
-            assertFalse((Boolean) m.invoke(null, "*Lorem ipsum*", 0, 13, "*"));
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
+        assertEquals("\\*", m.invoke(null, '*'));
+        assertEquals("\\_", m.invoke(null, '_'));
+        assertEquals("\\~", m.invoke(null, '~'));
     }
 
     @Test
@@ -747,11 +705,11 @@ public class MarkdownUtilTest extends TestCase {
         assertEquals("FooTestBar", MarkdownUtil.removeMarkdown("Foo*Test*Bar"));
         assertEquals("FooTestBar", MarkdownUtil.removeMarkdown("Foo**Test**Bar"));
         assertEquals("FooTestBar", MarkdownUtil.removeMarkdown("Foo***Test***Bar"));
-        assertEquals("FooTest*Bar", MarkdownUtil.removeMarkdown("Foo*Test**Bar"));
+        assertEquals("Foo*Test**Bar", MarkdownUtil.removeMarkdown("Foo*Test**Bar"));
         assertEquals("Foo*TestBar", MarkdownUtil.removeMarkdown("Foo***Test**Bar"));
-        assertEquals("FooTestBar", MarkdownUtil.removeMarkdown("Foo_Test_Bar"));
-        assertEquals("FooTestBar", MarkdownUtil.removeMarkdown("Foo__Test__Bar"));
-        assertEquals("FooTestBar", MarkdownUtil.removeMarkdown("Foo___Test___Bar"));
+        assertEquals("Foo_Test_Bar", MarkdownUtil.removeMarkdown("Foo_Test_Bar"));
+        assertEquals("Foo__Test__Bar", MarkdownUtil.removeMarkdown("Foo__Test__Bar"));
+        assertEquals("Foo___Test___Bar", MarkdownUtil.removeMarkdown("Foo___Test___Bar"));
         assertEquals("Foo\nHeader\nBar", MarkdownUtil.removeMarkdown("Foo\n# Header\nBar"));
         assertEquals("Foo\nHeader\nBar", MarkdownUtil.removeMarkdown("Foo\n### Header\nBar"));
         assertEquals("Foo\nHeader\nBar", MarkdownUtil.removeMarkdown("Foo\n# Header #\nBar"));
@@ -763,13 +721,15 @@ public class MarkdownUtilTest extends TestCase {
         assertEquals("Foo\nAufzählung\nBar", MarkdownUtil.removeMarkdown("Foo\n* Aufzählung\nBar"));
         assertEquals("Foo\nAufzählung\nBar", MarkdownUtil.removeMarkdown("Foo\n+ Aufzählung\nBar"));
         assertEquals("Foo\nAufzählung\nBar", MarkdownUtil.removeMarkdown("Foo\n- Aufzählung\nBar"));
-        assertEquals("Foo\nAufzählung\nBar", MarkdownUtil.removeMarkdown("Foo\n    - Aufzählung\nBar"));
+        assertEquals("Foo\n- Aufzählung\nBar", MarkdownUtil.removeMarkdown("Foo\n    - Aufzählung\nBar"));
         assertEquals("Foo\nAufzählung *\nBar", MarkdownUtil.removeMarkdown("Foo\n* Aufzählung *\nBar"));
         assertEquals("Title", MarkdownUtil.removeMarkdown("# Title"));
         assertEquals("Aufzählung", MarkdownUtil.removeMarkdown("* Aufzählung"));
 //        assertEquals("Foo Link Bar", MarkdownUtil.removeMarkdown("Foo [Link](https://example.com) Bar"));
         assertFalse(MarkdownUtil.removeMarkdown("- [ ] Test").contains("- [ ]"));
         assertTrue(MarkdownUtil.removeMarkdown("- [ ] Test").endsWith("Test"));
+        assertEquals("", MarkdownUtil.removeMarkdown(null));
+        assertEquals("", MarkdownUtil.removeMarkdown(""));
 
         // https://github.com/stefan-niedermann/nextcloud-notes/issues/1104
         assertEquals("2021-03-24 - Example text", MarkdownUtil.removeMarkdown("2021-03-24 - Example text"));

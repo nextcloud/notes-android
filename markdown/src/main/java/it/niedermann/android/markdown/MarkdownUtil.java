@@ -23,7 +23,6 @@ import androidx.core.text.HtmlCompat;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
 
-import java.util.Arrays;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,13 +37,6 @@ public class MarkdownUtil {
 
     private final static Parser parser = Parser.builder().build();
     private final static HtmlRenderer renderer = HtmlRenderer.builder().softbreak("<br>").build();
-
-    private static final Pattern PATTERN_LISTS = Pattern.compile("^\\s*[*+-]\\s+", Pattern.MULTILINE);
-    private static final Pattern PATTERN_HEADINGS = Pattern.compile("^#+\\s+(.*?)\\s*#*$", Pattern.MULTILINE);
-    private static final Pattern PATTERN_HEADING_LINE = Pattern.compile("^(?:=*|-*)$", Pattern.MULTILINE);
-    private static final Pattern PATTERN_EMPHASIS = Pattern.compile("(\\*+|_+)(.*?)\\1", Pattern.MULTILINE);
-    private static final Pattern PATTERN_SPACE_1 = Pattern.compile("^\\s+", Pattern.MULTILINE);
-    private static final Pattern PATTERN_SPACE_2 = Pattern.compile("\\s+$", Pattern.MULTILINE);
 
     private static final Pattern PATTERN_CODE_FENCE = Pattern.compile("^(`{3,})");
     private static final Pattern PATTERN_ORDERED_LIST_ITEM = Pattern.compile("^(\\d+).\\s.+$");
@@ -269,6 +261,14 @@ public class MarkdownUtil {
     }
 
     /**
+     * @param c Character to escape
+     * @return {@param c} escaped by a <code>\</code> character
+     */
+    private static String escape(char c) {
+        return "\\\\".substring(0, 1) + c;
+    }
+
+    /**
      * Modifies the {@param editable} and adds the given {@param punctuation} from
      * {@param selectionStart} to {@param selectionEnd} or removes the {@param punctuation} in case
      * it already is around the selected part.
@@ -277,27 +277,28 @@ public class MarkdownUtil {
      */
     public static int togglePunctuation(@NonNull Editable editable, int selectionStart, int selectionEnd, @NonNull String punctuation) {
         final String initialString = editable.toString();
+        final boolean initialStringDoesNotContainPunctuation = !initialString.contains("*") && !initialString.contains("_") && !initialString.contains("~");
         if (selectionStart < 0 || selectionStart > initialString.length() || selectionEnd < 0 || selectionEnd > initialString.length()) {
             return 0;
         }
         switch (punctuation) {
             case "*":
             case "_":
-                if (!initialString.contains("*") && !initialString.contains("_") && !initialString.contains("~")) {
+                if (initialStringDoesNotContainPunctuation) {
                     editable.insert(selectionEnd, punctuation);
                     editable.insert(selectionStart, punctuation);
                     return selectionEnd + punctuation.length();
                 } else {
-                    final String punctuationDouble = punctuation.substring(0, 1) + punctuation.substring(0, 1);
-                    final String punctuationTriple = punctuation.substring(0, 1) + punctuation.substring(0, 1) + punctuation.substring(0, 1);
+                    final String punctuationDouble = "" + punctuation.charAt(0) + punctuation.charAt(0);
+                    final String punctuationTriple = "" + punctuation.charAt(0) + punctuation.charAt(0) + punctuation.charAt(0);
                     if (!initialString.contains(punctuationDouble)) {
                         final int containedPunctuationCount = getContainedPunctuationCount(editable, 0, initialString.length(), punctuation);
                         if (containedPunctuationCount % 2 == 1) {
                             return selectionEnd;
                         }
-                        final String punctuationRegOnce = "\\" + punctuation.substring(0, 1);
-                        String tmp[] = initialString.split(punctuationRegOnce);
-                        int newSelectionStart = 0;
+                        final String punctuationRegOnce = escape(punctuation.charAt(0));
+                        final String[] tmp = initialString.split(punctuationRegOnce);
+                        int newSelectionStart;
                         int newSelectionEnd = 0;
                         for (int i = 0; i < tmp.length - 1; i += 2) {
                             newSelectionStart = tmp[i].length() + newSelectionEnd;
@@ -312,9 +313,9 @@ public class MarkdownUtil {
                         if (containedPunctuationCount % 2 == 1) {
                             return selectionEnd;
                         }
-                        final String punctuationRegTriple = "\\" + punctuation.substring(0, 1) + "\\" + punctuation.substring(0, 1) + "\\" + punctuation.substring(0, 1);
-                        String tmp[] = initialString.split(punctuationRegTriple);
-                        int newSelectionStart = 0;
+                        final String punctuationRegTriple = escape(punctuation.charAt(0)) + escape(punctuation.charAt(0)) + escape(punctuation.charAt(0));
+                        final String[] tmp = initialString.split(punctuationRegTriple);
+                        int newSelectionStart;
                         int newSelectionEnd = 0;
                         newSelectionStart = tmp[0].length() + newSelectionEnd + punctuation.length() * 2;
                         for (int i = 0; i <= tmp.length - 3; i += 2) {
@@ -325,9 +326,9 @@ public class MarkdownUtil {
                         }
                         return newSelectionEnd - punctuation.length() * 2;
                     } else {
-                        final String punctuationRegDouble = "\\" + punctuation.substring(0, 1) + "\\" + punctuation.substring(0, 1);
-                        String tmp[] = initialString.split(punctuationRegDouble);
-                        int newSelectionStart = 0;
+                        final String punctuationRegDouble = escape(punctuation.charAt(0)) + escape(punctuation.charAt(0));
+                        final String[] tmp = initialString.split(punctuationRegDouble);
+                        int newSelectionStart;
                         int newSelectionEnd = 0;
                         newSelectionStart = tmp[0].length() + newSelectionEnd + punctuation.length() * 2;
                         for (int i = 0; i <= tmp.length - 3; i += 2) {
@@ -342,17 +343,18 @@ public class MarkdownUtil {
             case "**":
             case "__":
             case "~~":
-                if (!initialString.contains("*") && !initialString.contains("_") && !initialString.contains("~")) {
+                if (initialStringDoesNotContainPunctuation) {
                     editable.insert(selectionEnd, punctuation);
                     editable.insert(selectionStart, punctuation);
                     return selectionEnd + punctuation.length();
                 } else {
-                    final String punctuationDouble = punctuation.substring(0, 1) + punctuation.substring(0, 1);
-                    final String punctuationTriple = punctuation.substring(0, 1) + punctuation.substring(0, 1) + punctuation.substring(0, 1);
+                    //noinspection UnnecessaryLocalVariable
+                    final String punctuationDouble = punctuation;
+                    final String punctuationTriple = punctuation + punctuation.charAt(0);
                     if (initialString.contains(punctuationTriple)) {
-                        final String punctuationRegTriple = "\\" + punctuation.substring(0, 1) + "\\" + punctuation.substring(0, 1) + "\\" + punctuation.substring(0, 1);
-                        String tmp[] = initialString.split(punctuationRegTriple);
-                        int newSelectionStart = 0;
+                        final String punctuationRegTriple = escape(punctuation.charAt(0)) + escape(punctuation.charAt(0)) + escape(punctuation.charAt(0));
+                        final String[] tmp = initialString.split(punctuationRegTriple);
+                        int newSelectionStart;
                         int newSelectionEnd = 0;
                         newSelectionStart = tmp[0].length() + 1;
                         for (int i = 0; i <= tmp.length - 3; i += 2) {
@@ -367,9 +369,9 @@ public class MarkdownUtil {
                         if (containedPunctuationCount % 2 == 1) {
                             return selectionEnd;
                         }
-                        final String punctuationRegDouble = "\\" + punctuation.substring(0, 1) + "\\" + punctuation.substring(0, 1);
-                        String tmp[] = initialString.split(punctuationRegDouble);
-                        int newSelectionStart = 0;
+                        final String punctuationRegDouble = escape(punctuation.charAt(0)) + escape(punctuation.charAt(0));
+                        final String[] tmp = initialString.split(punctuationRegDouble);
+                        int newSelectionStart;
                         int newSelectionEnd = 0;
                         for (int i = 0; i < tmp.length - 1; i += 2) {
                             newSelectionStart = tmp[i].length() + newSelectionEnd;
@@ -379,9 +381,9 @@ public class MarkdownUtil {
                         }
                         return newSelectionEnd;
                     } else {
-                        final String punctuationRegOnce = "\\" + punctuation.substring(0, 1);
-                        String tmp[] = initialString.split(punctuationRegOnce);
-                        int newSelectionStart = 0;
+                        final String punctuationRegOnce = escape(punctuation.charAt(0));
+                        final String[] tmp = initialString.split(punctuationRegOnce);
+                        int newSelectionStart;
                         int newSelectionEnd = 0;
                         newSelectionStart = tmp[0].length() + 1;
                         for (int i = 0; i <= tmp.length - 3; i += 2) {
@@ -403,7 +405,6 @@ public class MarkdownUtil {
      *
      * @return the new cursor position
      */
-    // CS304 issue link: https://github.com/stefan-niedermann/nextcloud-notes/issues/1186
     public static int insertLink(@NonNull Editable editable, int selectionStart, int selectionEnd, @Nullable String clipboardUrl) {
         if (selectionStart == selectionEnd) {
             if (selectionStart > 0 && selectionEnd < editable.length()) {
@@ -418,9 +419,6 @@ public class MarkdownUtil {
                         editable.insert(selectionEnd, " ");
                     }
                     editable.insert(selectionStart, "[](" + (clipboardUrl == null ? "" : clipboardUrl) + ")");
-                    if (clipboardUrl != null) {
-                        selectionEnd += clipboardUrl.length();
-                    }
                     return selectionStart + 1;
 
                 } else {
@@ -472,37 +470,13 @@ public class MarkdownUtil {
         }
     }
 
-    /**
-     * @return whether or not the selection of {@param text} from {@param start} to {@param end} is
-     * surrounded or not by the given {@param punctuation}.
-     */
-    private static boolean selectionIsSurroundedByPunctuation(@NonNull CharSequence text, int start, int end, @NonNull String punctuation) {
-        if (text.length() < end + punctuation.length()) {
-            return false;
-        }
-        if (start - punctuation.length() < 0 || end + punctuation.length() > text.length()) {
-            return false;
-        }
-        return punctuation.contentEquals(text.subSequence(start - punctuation.length(), start))
-                && punctuation.contentEquals(text.subSequence(end, end + punctuation.length()));
-    }
-
-    private static int getContainedPunctuationCount(@NonNull CharSequence text, int start, int end, @NonNull String punctuation) {
+    private static int getContainedPunctuationCount(@NonNull CharSequence text, @SuppressWarnings("SameParameterValue") int start, int end, @NonNull String punctuation) {
         final Matcher matcher = Pattern.compile(Pattern.quote(punctuation)).matcher(text.subSequence(start, end));
         int counter = 0;
         while (matcher.find()) {
             counter++;
         }
         return counter;
-    }
-
-    private static void removeContainingPunctuation(@NonNull Editable editable, int start, int end, @NonNull String punctuation) {
-        final Matcher matcher = Pattern.compile(Pattern.quote(punctuation)).matcher(editable.subSequence(start, end));
-        int countDeletedPunctuations = 0;
-        while (matcher.find()) {
-            editable.delete(start + matcher.start() - countDeletedPunctuations * punctuation.length(), start + matcher.end() - countDeletedPunctuations * punctuation.length());
-            countDeletedPunctuations++;
-        }
     }
 
     public static boolean selectionIsInLink(@NonNull CharSequence text, int start, int end) {
@@ -568,23 +542,12 @@ public class MarkdownUtil {
      */
     @NonNull
     public static String removeMarkdown(@Nullable String s) {
-        if (s == null)
+        if (TextUtils.isEmpty(s)) {
             return "";
-        // TODO maybe we can utilize the markwon renderer?
-
-        for (EListType listType : EListType.values()) {
-            for (String item : Arrays.asList(listType.checkboxChecked, listType.checkboxUnchecked, listType.listSymbolWithTrailingSpace)) {
-                if (s.startsWith(item)) {
-                    s = s.substring(item.length());
-                }
-            }
         }
-        s = PATTERN_LISTS.matcher(s).replaceAll("");
-        s = PATTERN_HEADINGS.matcher(s).replaceAll("$1");
-        s = PATTERN_HEADING_LINE.matcher(s).replaceAll("");
-        s = PATTERN_EMPHASIS.matcher(s).replaceAll("$2");
-        s = PATTERN_SPACE_1.matcher(s).replaceAll("");
-        s = PATTERN_SPACE_2.matcher(s).replaceAll("");
-        return s;
+        assert s != null;
+        final String html = renderer.render(parser.parse(replaceCheckboxesWithEmojis(s)));
+        final Spanned spanned = HtmlCompat.fromHtml(html, HtmlCompat.FROM_HTML_MODE_COMPACT);
+        return spanned.toString().trim();
     }
 }

@@ -19,7 +19,7 @@ public class SSOUtil {
     private static final String TAG = SSOUtil.class.getSimpleName();
 
     private SSOUtil() {
-
+        throw new UnsupportedOperationException("Do not instantiate this util class.");
     }
 
     /**

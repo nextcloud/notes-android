@@ -12,9 +12,9 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import java.util.Hashtable;
 
-import it.niedermann.owncloud.notes.shared.util.DatabaseIndexUtil;
-
 public class Migration_14_15 extends Migration {
+
+    private static final String TAG = Migration_14_15.class.getSimpleName();
 
     public Migration_14_15() {
         super(14, 15);
@@ -43,14 +43,14 @@ public class Migration_14_15 extends Migration {
                 "EXCERPT TEXT NOT NULL DEFAULT '', " +
                 "FOREIGN KEY(CATEGORY) REFERENCES CATEGORIES(CATEGORY_ID), " +
                 "FOREIGN KEY(ACCOUNT_ID) REFERENCES ACCOUNTS(ID))");
-        DatabaseIndexUtil.createIndex(db, "NOTES", "REMOTEID", "ACCOUNT_ID", "STATUS", "FAVORITE", "CATEGORY", "MODIFIED");
+        createIndex(db, "NOTES", "REMOTEID", "ACCOUNT_ID", "STATUS", "FAVORITE", "CATEGORY", "MODIFIED");
         db.execSQL("CREATE TABLE CATEGORIES(" +
                 "CATEGORY_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "CATEGORY_ACCOUNT_ID INTEGER NOT NULL, " +
                 "CATEGORY_TITLE TEXT NOT NULL, " +
                 "UNIQUE( CATEGORY_ACCOUNT_ID , CATEGORY_TITLE), " +
                 "FOREIGN KEY(CATEGORY_ACCOUNT_ID) REFERENCES ACCOUNTS(ID))");
-        DatabaseIndexUtil.createIndex(db, "CATEGORIES", "CATEGORY_ID", "CATEGORY_ACCOUNT_ID", "CATEGORY_TITLE");
+        createIndex(db, "CATEGORIES", "CATEGORY_ID", "CATEGORY_ACCOUNT_ID", "CATEGORY_TITLE");
         // A hashtable storing categoryTitle - categoryId Mapping
         // This is used to prevent too many searches in database
         Hashtable<String, Integer> categoryTitleIdMap = new Hashtable<>();
@@ -90,5 +90,17 @@ public class Migration_14_15 extends Migration {
         }
         tmpNotesCursor.close();
         db.execSQL("DROP TABLE IF EXISTS " + tmpTableNotes);
+    }
+
+    private static void createIndex(@NonNull SupportSQLiteDatabase db, @NonNull String table, @NonNull String... columns) {
+        for (String column : columns) {
+            createIndex(db, table, column);
+        }
+    }
+
+    private static void createIndex(@NonNull SupportSQLiteDatabase db, @NonNull String table, @NonNull String column) {
+        String indexName = table + "_" + column + "_idx";
+        Log.v(TAG, "Creating database index: CREATE INDEX IF NOT EXISTS " + indexName + " ON " + table + "(" + column + ")");
+        db.execSQL("CREATE INDEX " + indexName + " ON " + table + "(" + column + ")");
     }
 }
