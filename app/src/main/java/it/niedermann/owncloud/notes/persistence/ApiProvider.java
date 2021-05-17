@@ -36,9 +36,9 @@ public class ApiProvider {
 
     private static ApiProvider instance;
 
-    private final static String TAG = ApiProvider.class.getSimpleName();
+    private static final String TAG = ApiProvider.class.getSimpleName();
 
-    private final static String API_ENDPOINT_OCS = "/ocs/v2.php/cloud/";
+    private static final String API_ENDPOINT_OCS = "/ocs/v2.php/cloud/";
 
     private final Map<String, NextcloudAPI> API_CACHE = new HashMap<>();
 
