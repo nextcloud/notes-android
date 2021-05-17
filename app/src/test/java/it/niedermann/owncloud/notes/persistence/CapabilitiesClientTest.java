@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.persistence;
 
+import android.accounts.NetworkErrorException;
 import android.os.Build;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
@@ -23,12 +24,12 @@ import it.niedermann.owncloud.notes.persistence.sync.OcsAPI;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.OcsResponse;
 import it.niedermann.owncloud.notes.shared.model.OcsUser;
-import okhttp3.Request;
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -67,6 +68,12 @@ public class CapabilitiesClientTest {
 
         assertEquals("[1.0]", capabilities.getApiVersion());
         assertEquals("ETag should be read correctly from response but wasn't.", "1234", capabilities.getETag());
+
+        when(ocsAPI.getCapabilities(any())).thenReturn(Observable.error(new RuntimeException()));
+        assertThrows(RuntimeException.class, () -> CapabilitiesClient.getCapabilities(ApplicationProvider.getApplicationContext(), ssoAccount, null, apiProvider));
+
+        when(ocsAPI.getCapabilities(any())).thenReturn(Observable.error(new RuntimeException(new NetworkErrorException())));
+        assertThrows("Should unwrap exception cause if possible", NetworkErrorException.class, () -> CapabilitiesClient.getCapabilities(ApplicationProvider.getApplicationContext(), ssoAccount, null, apiProvider));
     }
 
     @SuppressWarnings("unchecked")
@@ -76,14 +83,20 @@ public class CapabilitiesClientTest {
         mockOcs.ocs = new OcsResponse.OcsWrapper<>();
         mockOcs.ocs.data = new OcsUser();
         mockOcs.ocs.data.displayName = "Peter";
-
-        final Response<OcsResponse<OcsUser>> ocsUserResponseMock = Response.success(mockOcs);
+        final Response<OcsResponse<OcsUser>> responseMock = Response.success(mockOcs);
         final Call<OcsResponse<OcsUser>> callMock = mock(Call.class);
 
-        when(callMock.execute()).thenReturn(ocsUserResponseMock);
         when(ocsAPI.getUser(any())).thenReturn(callMock);
 
-        final String user = CapabilitiesClient.getDisplayName(ApplicationProvider.getApplicationContext(), ssoAccount, apiProvider);
-        assertEquals("Peter", user);
+        when(callMock.execute()).thenReturn(responseMock);
+        assertEquals("Peter", CapabilitiesClient.getDisplayName(ApplicationProvider.getApplicationContext(), ssoAccount, apiProvider));
+
+        when(callMock.execute()).thenThrow(new RuntimeException() {
+            @Override
+            public void printStackTrace() {
+                // Do not spam console, this will be printed.
+            }
+        });
+        assertNull(CapabilitiesClient.getDisplayName(ApplicationProvider.getApplicationContext(), ssoAccount, apiProvider));
     }
 }
