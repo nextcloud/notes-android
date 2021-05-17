@@ -1,16 +1,10 @@
 package it.niedermann.owncloud.notes.persistence;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.text.SpannedString;
-import android.text.TextUtils;
-import android.util.Log;
+import android.os.Build;
 
-import androidx.annotation.NonNull;
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
-import androidx.core.text.HtmlCompat;
 
-import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.api.ParsedResponse;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
@@ -19,14 +13,12 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentMatchers;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -34,24 +26,21 @@ import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.sync.NotesAPI;
 import it.niedermann.owncloud.notes.shared.model.SyncResultStatus;
-import it.niedermann.owncloud.notes.shared.util.ApiVersionUtil;
 
 import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_EDITED;
 import static it.niedermann.owncloud.notes.shared.model.DBStatus.VOID;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.powermock.api.mockito.PowerMockito.mockStatic;
 
 @SuppressWarnings("CallToThreadRun")
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({ApiProvider.class, AccountImporter.class, TextUtils.class, Log.class, Color.class, ApiVersionUtil.class, HtmlCompat.class})
+@RunWith(RobolectricTestRunner.class)
+@Config(sdk = {Build.VERSION_CODES.P})
 public class NotesServerSyncTaskTest {
 
     @Rule
@@ -62,19 +51,13 @@ public class NotesServerSyncTaskTest {
     private final Account account = mock(Account.class);
     private final NotesRepository repo = mock(NotesRepository.class);
     private final NotesAPI notesAPI = mock(NotesAPI.class);
+    private final ApiProvider apiProvider = mock(ApiProvider.class);
 
     @Before
-    public void setup() throws NextcloudFilesAppAccountNotFoundException {
-        mockStatic(ApiProvider.class, invocation -> notesAPI);
-        mockStatic(AccountImporter.class, invocation -> mock(SingleSignOnAccount.class));
-        mockStatic(Log.class);
-        mockStatic(TextUtils.class);
-        PowerMockito.when(TextUtils.join(anyString(), any(Object[].class))).thenReturn("");
-        mockStatic(HtmlCompat.class);
-        PowerMockito.when(HtmlCompat.fromHtml(anyString(), anyInt())).thenReturn(mock(SpannedString.class));
-        mockStatic(ApiVersionUtil.class);
-        mockStatic(Color.class);
-        this.task = new NotesServerSyncTask(mock(Context.class), repo, account, false) {
+    public void setup() throws NextcloudFilesAppAccountNotFoundException, IOException {
+        when(apiProvider.getNotesAPI(any(), any(), any())).thenReturn(notesAPI);
+        NotesTestingUtil.mockSingleSignOn(new SingleSignOnAccount(account.getAccountName(), account.getUserName(), "", account.getUrl(), ""));
+        this.task = new NotesServerSyncTask(mock(Context.class), repo, account, false, apiProvider) {
             @Override
             void onPreExecute() {
 
@@ -105,19 +88,14 @@ public class NotesServerSyncTaskTest {
         when(repo.getAccountById(anyLong())).thenReturn(account);
         when(repo.getIdMap(anyLong())).thenReturn(Map.of(1000L, 1L, 2000L, 2L));
         when(repo.updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(anyLong(), anyLong(), anyString(), anyBoolean(), anyString(), anyString(), anyString(), anyString())).thenReturn(1);
-        mockStatic(ApiProvider.class, invocation -> new NotesAPI(any(), any()) {
-            @Override
-            public Observable<ParsedResponse<List<Note>>> getNotes(@NonNull Calendar a, String b) {
-                return Observable.just(ParsedResponse.of(Arrays.asList(
-                        new Note(0, 1000L, Calendar.getInstance(), "RemoteId is in the idMap, therefore", "This note should be updated locally", "", false, "1", VOID, 0, "", 0),
-                        new Note(0, 3000L, Calendar.getInstance(), "Is a new RemoteId, therefore", "This note should be created locally", "", false, "1", VOID, 0, "", 0)
-                )));
-            }
-        });
+        when(notesAPI.getNotes(any(), any())).thenReturn(Observable.just(ParsedResponse.of(Arrays.asList(
+                new Note(0, 1000L, Calendar.getInstance(), "RemoteId is in the idMap, therefore", "This note should be updated locally", "", false, "1", VOID, 0, "", 0),
+                new Note(0, 3000L, Calendar.getInstance(), "Is a new RemoteId, therefore", "This note should be created locally", "", false, "1", VOID, 0, "", 0)
+        ))));
 
         this.task.run();
 
-        verify(repo).addNote(ArgumentMatchers.anyLong(), argThat(argument -> "This note should be created locally".equals(argument.getContent())));
+        verify(repo).addNote(anyLong(), argThat(argument -> "This note should be created locally".equals(argument.getContent())));
         verify(repo).updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(anyLong(), anyLong(), anyString(), anyBoolean(), anyString(), anyString(), argThat("This note should be updated locally"::equals), anyString());
     }
 }

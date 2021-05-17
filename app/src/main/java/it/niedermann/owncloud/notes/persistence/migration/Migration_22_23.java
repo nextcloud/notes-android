@@ -57,7 +57,7 @@ public class Migration_22_23 extends Migration {
             db.update("ACCOUNT", OnConflictStrategy.REPLACE, values, "ID = ?", new String[]{String.valueOf(cursor.getLong(COLUMN_POSITION_ID))});
         }
         cursor.close();
-        ApiProvider.invalidateAPICache();
+        ApiProvider.getInstance().invalidateAPICache();
     }
 
     @Nullable

@@ -674,7 +674,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                     }
                                 });
                             } catch (Throwable e) {
-                                ApiProvider.invalidateAPICache(ssoAccount);
+                                ApiProvider.getInstance().invalidateAPICache(ssoAccount);
                                 // Happens when importing an already existing account the second time
                                 if (e instanceof TokenMismatchException && mainViewModel.getLocalAccountByAccountName(ssoAccount.name) != null) {
                                     Log.w(TAG, "Received " + TokenMismatchException.class.getSimpleName() + " and the given ssoAccount.name (" + ssoAccount.name + ") does already exist in the database. Assume that this account has already been imported.");

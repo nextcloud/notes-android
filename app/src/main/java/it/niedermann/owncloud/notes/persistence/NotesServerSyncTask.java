@@ -52,6 +52,8 @@ abstract class NotesServerSyncTask extends Thread {
 
     private NotesAPI notesAPI;
     @NonNull
+    private final ApiProvider apiProvider;
+    @NonNull
     private final Context context;
     @NonNull
     private final NotesRepository repo;
@@ -65,13 +67,14 @@ abstract class NotesServerSyncTask extends Thread {
     @NonNull
     protected final ArrayList<Throwable> exceptions = new ArrayList<>();
 
-    NotesServerSyncTask(@NonNull Context context, @NonNull NotesRepository repo, @NonNull Account localAccount, boolean onlyLocalChanges) throws NextcloudFilesAppAccountNotFoundException {
+    NotesServerSyncTask(@NonNull Context context, @NonNull NotesRepository repo, @NonNull Account localAccount, boolean onlyLocalChanges, @NonNull ApiProvider apiProvider) throws NextcloudFilesAppAccountNotFoundException {
         super(TAG);
         this.context = context;
         this.repo = repo;
         this.localAccount = localAccount;
         this.ssoAccount = AccountImporter.getSingleSignOnAccount(context, localAccount.getAccountName());
         this.onlyLocalChanges = onlyLocalChanges;
+        this.apiProvider = apiProvider;
     }
 
     void addCallbacks(Account account, List<ISyncCallback> callbacks) {
@@ -82,7 +85,7 @@ abstract class NotesServerSyncTask extends Thread {
     public void run() {
         onPreExecute();
 
-        notesAPI = ApiProvider.getNotesAPI(context, ssoAccount, ApiVersionUtil.getPreferredApiVersion(localAccount.getApiVersion()));
+        notesAPI = apiProvider.getNotesAPI(context, ssoAccount, ApiVersionUtil.getPreferredApiVersion(localAccount.getApiVersion()));
 
         Log.i(TAG, "STARTING SYNCHRONIZATION");
 
@@ -176,7 +179,7 @@ abstract class NotesServerSyncTask extends Thread {
                 }
             } catch (Exception e) {
                 if (e instanceof TokenMismatchException) {
-                    ApiProvider.invalidateAPICache(ssoAccount);
+                    apiProvider.invalidateAPICache(ssoAccount);
                 }
                 exceptions.add(e);
                 success = false;
@@ -267,7 +270,7 @@ abstract class NotesServerSyncTask extends Thread {
                         return true;
                     }
                 } else if (cause.getClass() == NextcloudApiNotRespondingException.class || cause instanceof NextcloudApiNotRespondingException) {
-                    ApiProvider.invalidateAPICache(ssoAccount);
+                    apiProvider.invalidateAPICache(ssoAccount);
                 }
             }
             exceptions.add(t);
