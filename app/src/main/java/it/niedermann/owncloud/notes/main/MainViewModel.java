@@ -33,6 +33,7 @@ import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.exception.IntendedOfflineException;
 import it.niedermann.owncloud.notes.main.navigation.NavigationAdapter;
 import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
+import it.niedermann.owncloud.notes.persistence.ApiProvider;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
@@ -397,7 +398,7 @@ public class MainViewModel extends AndroidViewModel {
                 try {
                     final SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(getApplication(), localAccount.getAccountName());
                     try {
-                        final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplication(), ssoAccount, localAccount.getCapabilitiesETag());
+                        final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplication(), ssoAccount, localAccount.getCapabilitiesETag(), ApiProvider.getInstance());
                         repo.updateCapabilitiesETag(localAccount.getId(), capabilities.getETag());
                         repo.updateBrand(localAccount.getId(), capabilities.getColor(), capabilities.getTextColor());
                         localAccount.setColor(capabilities.getColor());
