@@ -121,7 +121,7 @@ public class ImportAccountActivity extends AppCompatActivity {
                         });
                     } catch (Throwable t) {
                         t.printStackTrace();
-                        ApiProvider.invalidateAPICache(ssoAccount);
+                        ApiProvider.getInstance().invalidateAPICache(ssoAccount);
                         SingleAccountHelper.setCurrentAccount(this, null);
                         runOnUiThread(() -> {
                             restoreCleanState();

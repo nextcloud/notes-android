@@ -68,9 +68,9 @@ public class NotesRepositoryTest {
                 .allowMainThreadQueries()
                 .build();
 
-        final Constructor<NotesRepository> constructor = NotesRepository.class.getDeclaredConstructor(Context.class, NotesDatabase.class, ExecutorService.class);
+        final Constructor<NotesRepository> constructor = NotesRepository.class.getDeclaredConstructor(Context.class, NotesDatabase.class, ExecutorService.class, ApiProvider.class);
         constructor.setAccessible(true);
-        repo = constructor.newInstance(context, db, MoreExecutors.newDirectExecutorService());
+        repo = constructor.newInstance(context, db, MoreExecutors.newDirectExecutorService(), ApiProvider.getInstance());
 
         repo.addAccount("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", new Capabilities(), null, new IResponseCallback<Account>() {
             @Override

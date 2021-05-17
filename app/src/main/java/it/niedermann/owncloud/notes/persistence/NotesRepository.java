@@ -81,6 +81,7 @@ public class NotesRepository {
 
     private static NotesRepository instance;
 
+    private final ApiProvider apiProvider;
     private final ExecutorService executor;
     private final Context context;
     private final NotesDatabase db;
@@ -134,15 +135,16 @@ public class NotesRepository {
 
     public static synchronized NotesRepository getInstance(@NonNull Context context) {
         if (instance == null) {
-            instance = new NotesRepository(context, NotesDatabase.getInstance(context.getApplicationContext()), Executors.newCachedThreadPool());
+            instance = new NotesRepository(context, NotesDatabase.getInstance(context.getApplicationContext()), Executors.newCachedThreadPool(), ApiProvider.getInstance());
         }
         return instance;
     }
 
-    private NotesRepository(@NonNull final Context context, @NonNull final NotesDatabase db, @NonNull final ExecutorService executor) {
+    private NotesRepository(@NonNull final Context context, @NonNull final NotesDatabase db, @NonNull final ExecutorService executor, @NonNull ApiProvider apiProvider) {
         this.context = context.getApplicationContext();
         this.db = db;
         this.executor = executor;
+        this.apiProvider = apiProvider;
         this.defaultNonEmptyTitle = NoteUtil.generateNonEmptyNoteTitle("", this.context);
         this.syncOnlyOnWifiKey = context.getApplicationContext().getResources().getString(R.string.pref_key_wifi_only);
 
@@ -177,10 +179,10 @@ public class NotesRepository {
     @WorkerThread
     public void deleteAccount(@NonNull Account account) {
         try {
-            ApiProvider.invalidateAPICache(AccountImporter.getSingleSignOnAccount(context, account.getAccountName()));
+            apiProvider.invalidateAPICache(AccountImporter.getSingleSignOnAccount(context, account.getAccountName()));
         } catch (NextcloudFilesAppAccountNotFoundException e) {
             e.printStackTrace();
-            ApiProvider.invalidateAPICache();
+            apiProvider.invalidateAPICache();
         }
 
         db.getAccountDao().deleteAccount(account);
@@ -582,7 +584,7 @@ public class NotesRepository {
                 Log.d(TAG, "ApiVersion not updated, because it did not change");
             } else if (updatedRows == 1) {
                 Log.i(TAG, "Updated apiVersion to \"" + raw + "\" for accountId = " + accountId);
-                ApiProvider.invalidateAPICache();
+                apiProvider.invalidateAPICache();
             } else {
                 Log.w(TAG, "Updated " + updatedRows + " but expected only 1 for accountId = " + accountId + " and apiVersion = \"" + raw + "\"");
             }
@@ -779,7 +781,7 @@ public class NotesRepository {
                 syncActive.put(account.getId(), true);
                 try {
                     Log.d(TAG, "... starting now");
-                    final NotesServerSyncTask syncTask = new NotesServerSyncTask(context, this, account, onlyLocalChanges) {
+                    final NotesServerSyncTask syncTask = new NotesServerSyncTask(context, this, account, onlyLocalChanges, apiProvider) {
                         @Override
                         void onPreExecute() {
                             syncStatus.postValue(true);
