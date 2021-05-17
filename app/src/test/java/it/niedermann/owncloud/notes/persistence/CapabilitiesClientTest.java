@@ -15,12 +15,18 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
+import java.io.IOException;
 import java.util.Map;
 
 import io.reactivex.Observable;
 import it.niedermann.owncloud.notes.persistence.sync.OcsAPI;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.OcsResponse;
+import it.niedermann.owncloud.notes.shared.model.OcsUser;
+import okhttp3.Request;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -61,5 +67,23 @@ public class CapabilitiesClientTest {
 
         assertEquals("[1.0]", capabilities.getApiVersion());
         assertEquals("ETag should be read correctly from response but wasn't.", "1234", capabilities.getETag());
+    }
+
+    @SuppressWarnings("unchecked")
+    @Test
+    public void testGetDisplayName() throws IOException {
+        final OcsResponse<OcsUser> mockOcs = new OcsResponse<>();
+        mockOcs.ocs = new OcsResponse.OcsWrapper<>();
+        mockOcs.ocs.data = new OcsUser();
+        mockOcs.ocs.data.displayName = "Peter";
+
+        final Response<OcsResponse<OcsUser>> ocsUserResponseMock = Response.success(mockOcs);
+        final Call<OcsResponse<OcsUser>> callMock = mock(Call.class);
+
+        when(callMock.execute()).thenReturn(ocsUserResponseMock);
+        when(ocsAPI.getUser(any())).thenReturn(callMock);
+
+        final String user = CapabilitiesClient.getDisplayName(ApplicationProvider.getApplicationContext(), ssoAccount, apiProvider);
+        assertEquals("Peter", user);
     }
 }
