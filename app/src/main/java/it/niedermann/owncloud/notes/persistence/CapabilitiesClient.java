@@ -26,8 +26,8 @@ public class CapabilitiesClient {
     private static final String HEADER_KEY_ETAG = "ETag";
 
     @WorkerThread
-    public static Capabilities getCapabilities(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount, @Nullable String lastETag) throws Throwable {
-        final OcsAPI ocsAPI = ApiProvider.getInstance().getOcsAPI(context, ssoAccount);
+    public static Capabilities getCapabilities(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount, @Nullable String lastETag, @NonNull ApiProvider apiProvider) throws Throwable {
+        final OcsAPI ocsAPI = apiProvider.getOcsAPI(context, ssoAccount);
         try {
             final ParsedResponse<OcsResponse<Capabilities>> response = ocsAPI.getCapabilities(lastETag).blockingSingle();
             final Capabilities capabilities = response.getResponse().ocs.data;
@@ -50,8 +50,8 @@ public class CapabilitiesClient {
 
     @WorkerThread
     @Nullable
-    public static String getDisplayName(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount) {
-        final OcsAPI ocsAPI = ApiProvider.getInstance().getOcsAPI(context, ssoAccount);
+    public static String getDisplayName(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount, @NonNull ApiProvider apiProvider) {
+        final OcsAPI ocsAPI = apiProvider.getOcsAPI(context, ssoAccount);
         try {
             final Response<OcsResponse<OcsUser>> userResponse = ocsAPI.getUser(ssoAccount.userId).execute();
             if (userResponse.isSuccessful()) {
