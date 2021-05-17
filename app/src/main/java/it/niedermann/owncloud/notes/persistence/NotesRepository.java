@@ -178,6 +178,11 @@ public class NotesRepository {
     public void deleteAccount(@NonNull Account account) {
         try {
             ApiProvider.invalidateAPICache(AccountImporter.getSingleSignOnAccount(context, account.getAccountName()));
+            final SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(this.context).edit();
+            sp.remove(this.context.getString(R.string.action_sorting_method) + ' ' + this.context.getString(R.string.label_favorites) + account.getId());
+            sp.remove(this.context.getString(R.string.action_sorting_method) + ' ' + this.context.getString(R.string.action_uncategorized) + account.getId());
+            sp.remove(this.context.getString(R.string.action_sorting_method) + ' ' + this.context.getString(R.string.label_all_notes) + account.getId());
+            sp.apply();
         } catch (NextcloudFilesAppAccountNotFoundException e) {
             e.printStackTrace();
             ApiProvider.invalidateAPICache();
@@ -608,18 +613,17 @@ public class NotesRepository {
             final Context ctx = context.getApplicationContext();
             final SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(ctx).edit();
             int orderIndex = sortingMethod.getId();
-
             switch (selectedCategory.getType()) {
                 case FAVORITES: {
-                    sp.putInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_favorites), orderIndex);
+                    sp.putInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_favorites) + accountId, orderIndex);
                     break;
                 }
                 case UNCATEGORIZED: {
-                    sp.putInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.action_uncategorized), orderIndex);
+                    sp.putInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.action_uncategorized) + accountId, orderIndex);
                     break;
                 }
                 case RECENT: {
-                    sp.putInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_all_notes), orderIndex);
+                    sp.putInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_all_notes) + accountId, orderIndex);
                     break;
                 }
                 case DEFAULT_CATEGORY:
@@ -661,19 +665,19 @@ public class NotesRepository {
     public LiveData<CategorySortingMethod> getCategoryOrder(@NonNull NavigationCategory selectedCategory) {
         final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         String prefKey;
-
+        final String accountId = String.valueOf(selectedCategory.getAccountId());
         switch (selectedCategory.getType()) {
             // TODO make this account specific
             case RECENT: {
-                prefKey = context.getString(R.string.action_sorting_method) + ' ' + context.getString(R.string.label_all_notes);
+                prefKey = context.getString(R.string.action_sorting_method) + ' ' + context.getString(R.string.label_all_notes) + accountId;
                 break;
             }
             case FAVORITES: {
-                prefKey = context.getString(R.string.action_sorting_method) + ' ' + context.getString(R.string.label_favorites);
+                prefKey = context.getString(R.string.action_sorting_method) + ' ' + context.getString(R.string.label_favorites) + accountId;
                 break;
             }
             case UNCATEGORIZED: {
-                prefKey = context.getString(R.string.action_sorting_method) + ' ' + context.getString(R.string.action_uncategorized);
+                prefKey = context.getString(R.string.action_sorting_method) + ' ' + context.getString(R.string.action_uncategorized) + accountId;
                 break;
             }
             case DEFAULT_CATEGORY:
