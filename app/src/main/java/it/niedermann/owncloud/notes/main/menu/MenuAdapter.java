@@ -90,7 +90,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
         if (packageManager.resolveActivity(intent, 0) != null) {
             return intent
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    .putExtra("TARGET_ACCOUNT_NAME", account.getAccountName());
+                    .putExtra(Intent.EXTRA_USER, account.getAccountName());
         }
         throw new PackageManager.NameNotFoundException("Could not resolve target activity.");
     }
