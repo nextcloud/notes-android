@@ -44,7 +44,7 @@ import it.niedermann.owncloud.notes.persistence.migration.Migration_9_10;
                 CategoryOptions.class,
                 SingleNoteWidgetData.class,
                 NotesListWidgetData.class
-        }, version = 23
+        }, version = 24
 )
 @TypeConverters({Converters.class})
 public abstract class NotesDatabase extends RoomDatabase {
