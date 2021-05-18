@@ -34,22 +34,19 @@ import retrofit2.Retrofit;
 @WorkerThread
 public class ApiProvider {
 
-    private static ApiProvider instance;
-
     private static final String TAG = ApiProvider.class.getSimpleName();
+
+    private static final ApiProvider INSTANCE = new ApiProvider();
 
     private static final String API_ENDPOINT_OCS = "/ocs/v2.php/cloud/";
 
-    private final Map<String, NextcloudAPI> API_CACHE = new HashMap<>();
+    private static final Map<String, NextcloudAPI> API_CACHE = new HashMap<>();
 
-    private final Map<String, OcsAPI> API_CACHE_OCS = new HashMap<>();
-    private final Map<String, NotesAPI> API_CACHE_NOTES = new HashMap<>();
+    private static final Map<String, OcsAPI> API_CACHE_OCS = new HashMap<>();
+    private static final Map<String, NotesAPI> API_CACHE_NOTES = new HashMap<>();
 
-    public static synchronized ApiProvider getInstance() {
-        if (instance == null) {
-            instance = new ApiProvider();
-        }
-        return instance;
+    public static ApiProvider getInstance() {
+        return INSTANCE;
     }
 
     private ApiProvider() {
