@@ -68,7 +68,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
     @NonNull
     private static Intent generateTrashbinIntent(@NonNull Context context, @NonNull Account account) {
         // TODO Replace with correct minVersionCode once the PR in the files app has been merged: https://github.com/nextcloud/android/pull/8405
-        final int minVersionCode = 30160000;
+        final int minVersionCode = 0;
         try {
             if (VersionCheckHelper.getNextcloudFilesVersionCode(context, true) > minVersionCode) {
                 return generateTrashbinAppIntent(context, account, true);
