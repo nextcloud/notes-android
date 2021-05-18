@@ -147,9 +147,9 @@ public class NotesRepository {
         this.syncOnlyOnWifiKey = context.getApplicationContext().getResources().getString(R.string.pref_key_wifi_only);
 
         // Registers BroadcastReceiver to track network connection changes.
-        context.getApplicationContext().registerReceiver(networkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+        this.context.registerReceiver(networkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
-        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.context.getApplicationContext());
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.context);
         prefs.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
         syncOnlyOnWifi = prefs.getBoolean(syncOnlyOnWifiKey, false);
 
@@ -546,20 +546,20 @@ public class NotesRepository {
     private void updateDynamicShortcuts(long accountId) {
         executor.submit(() -> {
             if (SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
-                ShortcutManager shortcutManager = context.getApplicationContext().getSystemService(ShortcutManager.class);
+                ShortcutManager shortcutManager = this.context.getSystemService(ShortcutManager.class);
                 if (shortcutManager != null) {
                     if (!shortcutManager.isRateLimitingActive()) {
                         List<ShortcutInfo> newShortcuts = new ArrayList<>();
 
                         for (Note note : db.getNoteDao().getRecentNotes(accountId)) {
                             if (!TextUtils.isEmpty(note.getTitle())) {
-                                Intent intent = new Intent(context.getApplicationContext(), EditNoteActivity.class);
+                                Intent intent = new Intent(this.context, EditNoteActivity.class);
                                 intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
                                 intent.setAction(ACTION_SHORTCUT);
 
-                                newShortcuts.add(new ShortcutInfo.Builder(context.getApplicationContext(), note.getId() + "")
+                                newShortcuts.add(new ShortcutInfo.Builder(this.context, note.getId() + "")
                                         .setShortLabel(note.getTitle() + "")
-                                        .setIcon(Icon.createWithResource(context.getApplicationContext(), note.getFavorite() ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp))
+                                        .setIcon(Icon.createWithResource(this.context, note.getFavorite() ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp))
                                         .setIntent(intent)
                                         .build());
                             } else {
@@ -697,7 +697,7 @@ public class NotesRepository {
 
     @Override
     protected void finalize() throws Throwable {
-        context.getApplicationContext().unregisterReceiver(networkReceiver);
+        this.context.unregisterReceiver(networkReceiver);
         super.finalize();
     }
 
@@ -861,7 +861,7 @@ public class NotesRepository {
 
     public void updateNetworkStatus() {
         try {
-            final ConnectivityManager connMgr = (ConnectivityManager) context.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            final ConnectivityManager connMgr = (ConnectivityManager) this.context.getSystemService(Context.CONNECTIVITY_SERVICE);
             if (connMgr == null) {
                 throw new NetworkErrorException("ConnectivityManager is null");
             }
