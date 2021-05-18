@@ -34,6 +34,7 @@ import it.niedermann.owncloud.notes.persistence.migration.Migration_19_20;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_20_21;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_21_22;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_22_23;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_23_24;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_9_10;
 
 @Database(
@@ -78,7 +79,8 @@ public abstract class NotesDatabase extends RoomDatabase {
                         new Migration_19_20(context),
                         new Migration_20_21(),
                         new Migration_21_22(context),
-                        new Migration_22_23()
+                        new Migration_22_23(),
+                        new Migration_23_24(context)
                 )
                 .fallbackToDestructiveMigrationOnDowngrade()
                 .fallbackToDestructiveMigration()
