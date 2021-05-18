@@ -16,8 +16,8 @@ import com.nextcloud.android.sso.api.NextcloudAPI;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import it.niedermann.owncloud.notes.persistence.sync.CapabilitiesDeserializer;
 import it.niedermann.owncloud.notes.persistence.sync.NotesAPI;
@@ -40,10 +40,10 @@ public class ApiProvider {
 
     private static final String API_ENDPOINT_OCS = "/ocs/v2.php/cloud/";
 
-    private static final Map<String, NextcloudAPI> API_CACHE = new HashMap<>();
+    private static final Map<String, NextcloudAPI> API_CACHE = new ConcurrentHashMap<>();
 
-    private static final Map<String, OcsAPI> API_CACHE_OCS = new HashMap<>();
-    private static final Map<String, NotesAPI> API_CACHE_NOTES = new HashMap<>();
+    private static final Map<String, OcsAPI> API_CACHE_OCS = new ConcurrentHashMap<>();
+    private static final Map<String, NotesAPI> API_CACHE_NOTES = new ConcurrentHashMap<>();
 
     public static ApiProvider getInstance() {
         return INSTANCE;
