@@ -124,27 +124,37 @@ abstract class NotesServerSyncTask extends Thread {
                             final Response<Note> editResponse = notesAPI.editNote(note).execute();
                             if (editResponse.isSuccessful()) {
                                 remoteNote = editResponse.body();
-                            } else {
-                                if (editResponse.code() == HTTP_NOT_FOUND) {
-                                    Log.v(TAG, "   ...Note does no longer exist on server → recreate");
-                                    final Response<Note> createResponse = notesAPI.createNote(note).execute();
-                                    if (createResponse.isSuccessful()) {
-                                        remoteNote = createResponse.body();
-                                    } else {
-                                        throw new Exception(createResponse.errorBody().string());
+                                if (remoteNote == null) {
+                                    Log.e(TAG, "   ...Tried to edit \"" + note.getTitle() + "\" (#" + note.getId() + ") but the server response was null.");
+                                    throw new Exception("Server returned null after editing \"" + note.getTitle() + "\" (#" + note.getId() + ")");
+                                }
+                            } else if (editResponse.code() == HTTP_NOT_FOUND) {
+                                Log.v(TAG, "   ...Note does no longer exist on server → recreate");
+                                final Response<Note> createResponse = notesAPI.createNote(note).execute();
+                                if (createResponse.isSuccessful()) {
+                                    remoteNote = createResponse.body();
+                                    if (remoteNote == null) {
+                                        Log.e(TAG, "   ...Tried to recreate \"" + note.getTitle() + "\" (#" + note.getId() + ") but the server response was null.");
+                                        throw new Exception("Server returned null after recreating \"" + note.getTitle() + "\" (#" + note.getId() + ")");
                                     }
                                 } else {
-                                    throw new Exception(editResponse.errorBody().string());
+                                    throw new Exception(createResponse.message());
                                 }
+                            } else {
+                                throw new Exception(editResponse.message());
                             }
                         } else {
                             Log.v(TAG, "   ...Note does not have a remoteId yet → create");
                             final Response<Note> createResponse = notesAPI.createNote(note).execute();
                             if (createResponse.isSuccessful()) {
                                 remoteNote = createResponse.body();
+                                if (remoteNote == null) {
+                                    Log.e(TAG, "   ...Tried to create \"" + note.getTitle() + "\" (#" + note.getId() + ") but the server response was null.");
+                                    throw new Exception("Server returned null after creating \"" + note.getTitle() + "\" (#" + note.getId() + ")");
+                                }
                                 repo.updateRemoteId(note.getId(), remoteNote.getRemoteId());
                             } else {
-                                throw new Exception(createResponse.errorBody().string());
+                                throw new Exception(createResponse.message());
                             }
                         }
                         // Please note, that db.updateNote() realized an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
@@ -160,7 +170,7 @@ abstract class NotesServerSyncTask extends Thread {
                                 if (deleteResponse.code() == HTTP_NOT_FOUND) {
                                     Log.v(TAG, "   ...delete (note has already been deleted remotely)");
                                 } else {
-                                    throw new Exception(deleteResponse.errorBody().string());
+                                    throw new Exception(deleteResponse.message());
                                 }
                             }
                         }
