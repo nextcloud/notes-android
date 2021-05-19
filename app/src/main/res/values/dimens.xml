@@ -32,19 +32,9 @@
 
     <!-- Widgets -->
     <dimen name="widget_outer_radius">@dimen/spacer_1x</dimen>
-    <dimen name="widget_inner_radius">@dimen/spacer_1hx</dimen>
-    <dimen name="widget_divider">1dp</dimen>
-
     <dimen name="widget_margin">@dimen/spacer_1x</dimen>
-
-    <dimen name="widget_note_list_hdr_padding">2dp</dimen>
-    <dimen name="widget_note_list_header_height">36dp</dimen>
-    <dimen name="widget_note_list_icon_width">30dp</dimen>
-
     <dimen name="widget_note_list_outer_padding">4dp</dimen>
     <dimen name="widget_note_list_inner_padding">4dp</dimen>
-
-    <dimen name="widget_note_list_entry_add_button">34dp</dimen>
     <dimen name="widget_note_list_fav_icon_width">26dp</dimen>
     <dimen name="widget_note_list_fav_icon_height">20dp</dimen>
 </resources>

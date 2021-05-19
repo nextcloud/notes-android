@@ -95,7 +95,6 @@
     <string name="simple_move">Move</string>
     <string name="category_readonly">Read only</string>
     <string name="simple_checkbox">Checkbox</string>
-    <string name="simple_beta">Beta</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

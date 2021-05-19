@@ -93,7 +93,6 @@
     <string name="widget_create_note">Create Note</string>
     <string name="widget_not_logged_in">Please login to Notes before using this widget</string>
     <string name="widget_entry_fav_contentDescription">Star icon is used to denote an item as a favourite</string>
-    <string name="widget_app_launcher_contentDescription">Launches app</string>
 
     <string name="activity_select_single_note">Select note</string>
 
@@ -167,12 +166,10 @@
     <string name="append_to_note">Append to note</string>
     <string name="change_note_title">Change note title</string>
     <string name="menu_edit_title">Edit title</string>
-    <string name="settings_branding">Branding</string>
     <string name="settings_gridview">Grid view</string>
     <string name="simple_security">Security</string>
     <string name="appearance_and_behavior">Appearance and behavior</string>
     <string name="simple_synchronization">Synchronization</string>
-    <string name="simple_behavior">Behavior</string>
     <string name="manage_accounts">Manage accounts</string>
     <string name="action_formatting_help">Formatting</string>
 
@@ -186,13 +183,6 @@
         <item>Small</item>
         <item>Medium</item>
         <item>Large</item>
-    </string-array>
-
-    <string-array name="sync_entries">
-        <item>Off</item>
-        <item>15 minutes</item>
-        <item>1 hour</item>
-        <item>6 hours</item>
     </string-array>
 
     <string-array name="darkmode_entries">

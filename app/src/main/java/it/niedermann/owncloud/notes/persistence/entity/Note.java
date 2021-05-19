@@ -255,6 +255,7 @@ public class Note implements Serializable, Item {
         return result;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Note{" +

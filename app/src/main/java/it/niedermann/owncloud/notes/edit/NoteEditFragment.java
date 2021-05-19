@@ -184,7 +184,8 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
      */
     @Override
     protected String getContent() {
-        return binding.editContent.getText().toString();
+        final Editable editable = binding.editContent.getText();
+        return editable == null ? "" : editable.toString();
     }
 
     @Override
