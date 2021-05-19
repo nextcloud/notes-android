@@ -19,18 +19,16 @@ import it.niedermann.owncloud.notes.preferences.PreferencesActivity;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
 
-    public static final int SERVER_SETTINGS = 2;
-
     @NonNull
     private final MenuItem[] menuItems;
     @NonNull
     private final Consumer<MenuItem> onClick;
 
-    public MenuAdapter(@NonNull Context context, @NonNull Account account, @NonNull Consumer<MenuItem> onClick) {
+    public MenuAdapter(@NonNull Context context, @NonNull Account account, int settingsRequestCode, @NonNull Consumer<MenuItem> onClick) {
         this.menuItems = new MenuItem[]{
                 new MenuItem(new Intent(context, FormattingHelpActivity.class), R.string.action_formatting_help, R.drawable.ic_baseline_help_outline_24),
                 new MenuItem(generateTrashbinIntent(account), R.string.action_trashbin, R.drawable.ic_delete_grey600_24dp),
-                new MenuItem(new Intent(context, PreferencesActivity.class), SERVER_SETTINGS, R.string.action_settings, R.drawable.ic_settings_grey600_24dp),
+                new MenuItem(new Intent(context, PreferencesActivity.class), settingsRequestCode, R.string.action_settings, R.drawable.ic_settings_grey600_24dp),
                 new MenuItem(new Intent(context, AboutActivity.class), R.string.simple_about, R.drawable.ic_info_outline_grey600_24dp)
         };
         this.onClick = onClick;

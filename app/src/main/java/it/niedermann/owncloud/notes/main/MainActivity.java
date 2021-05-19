@@ -73,9 +73,9 @@ import it.niedermann.owncloud.notes.main.menu.MenuAdapter;
 import it.niedermann.owncloud.notes.main.navigation.NavigationAdapter;
 import it.niedermann.owncloud.notes.main.navigation.NavigationClickListener;
 import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
+import it.niedermann.owncloud.notes.persistence.ApiProvider;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesWorker;
-import it.niedermann.owncloud.notes.persistence.ApiProvider;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
@@ -92,7 +92,6 @@ import static android.view.View.VISIBLE;
 import static it.niedermann.owncloud.notes.NotesApplication.isDarkThemeActive;
 import static it.niedermann.owncloud.notes.NotesApplication.isGridViewEnabled;
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.getSecondaryForegroundColorDependingOnTheme;
-import static it.niedermann.owncloud.notes.main.menu.MenuAdapter.SERVER_SETTINGS;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.DEFAULT_CATEGORY;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.RECENT;
@@ -109,13 +108,12 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     private boolean gridView = true;
 
-    public static final String CREATED_NOTE = "it.niedermann.owncloud.notes.created_notes";
     public static final String ADAPTER_KEY_RECENT = "recent";
     public static final String ADAPTER_KEY_STARRED = "starred";
     public static final String ADAPTER_KEY_UNCATEGORIZED = "uncategorized";
 
-    private final static int create_note_cmd = 0;
-    private final static int show_single_note_cmd = 1;
+    private static final int REQUEST_CODE_CREATE_NOTE = 0;
+    private static final int REQUEST_CODE_SERVER_SETTINGS = 1;
 
     protected ItemAdapter adapter;
     private NavigationAdapter adapterCategories;
@@ -212,13 +210,13 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             }
 
             fabCreate.setOnClickListener((View view) -> {
-                Intent createIntent = new Intent(getApplicationContext(), EditNoteActivity.class);
+                final Intent createIntent = new Intent(getApplicationContext(), EditNoteActivity.class);
                 createIntent.putExtra(EditNoteActivity.PARAM_CATEGORY, selectedCategory);
                 if (activityBinding.searchView.getQuery().length() > 0) {
                     createIntent.putExtra(EditNoteActivity.PARAM_CONTENT, activityBinding.searchView.getQuery().toString());
                     invalidateOptionsMenu();
                 }
-                startActivityForResult(createIntent, create_note_cmd);
+                startActivityForResult(createIntent, REQUEST_CODE_CREATE_NOTE);
             });
         });
         mainViewModel.getNotesListLiveData().observe(this, notes -> {
@@ -298,12 +296,12 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             activityBinding.launchAccountSwitcher.setOnClickListener((v) -> AccountSwitcherDialog.newInstance(nextAccount.getId()).show(getSupportFragmentManager(), AccountSwitcherDialog.class.getSimpleName()));
 
             if (menuAdapter == null) {
-                menuAdapter = new MenuAdapter(getApplicationContext(), nextAccount, (menuItem) -> {
+                menuAdapter = new MenuAdapter(getApplicationContext(), nextAccount, REQUEST_CODE_SERVER_SETTINGS, (menuItem) -> {
                     @Nullable Integer resultCode = menuItem.getResultCode();
                     if (resultCode == null) {
                         startActivity(menuItem.getIntent());
                     } else {
-                        startActivityForResult(menuItem.getIntent(), menuItem.getResultCode());
+                        startActivityForResult(menuItem.getIntent(), resultCode);
                     }
                 });
 
@@ -638,14 +636,17 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         super.onActivityResult(requestCode, resultCode, data);
 
         switch (requestCode) {
-            case create_note_cmd: {
+            case REQUEST_CODE_CREATE_NOTE: {
                 listView.scrollToPosition(0);
                 break;
             }
-            case SERVER_SETTINGS: {
+            case REQUEST_CODE_SERVER_SETTINGS: {
                 // Recreate activity completely, because theme switching makes problems when only invalidating the views.
                 // @see https://github.com/stefan-niedermann/nextcloud-notes/issues/529
-                ActivityCompat.recreate(this);
+                if (RESULT_OK == resultCode) {
+                    ActivityCompat.recreate(this);
+                    return;
+                }
                 break;
             }
             default: {
@@ -683,7 +684,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                         // TODO there is already a sync in progress and results in displaying a TokenMissMatchException snackbar which conflicts with this one
                                         coordinatorLayout.post(() -> BrandedSnackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show());
                                     });
-                                } else if (e instanceof UnknownErrorException && e.getMessage().contains("No address associated with hostname")) {
+                                } else if (e instanceof UnknownErrorException && e.getMessage() != null && e.getMessage().contains("No address associated with hostname")) {
                                     // https://github.com/stefan-niedermann/nextcloud-notes/issues/1014
                                     runOnUiThread(() -> Snackbar.make(coordinatorLayout, R.string.you_have_to_be_connected_to_the_internet_in_order_to_add_an_account, Snackbar.LENGTH_LONG).show());
                                 } else {
@@ -707,10 +708,9 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     public void onNoteClick(int position, View v) {
         boolean hasCheckedItems = tracker.getSelection().size() > 0;
         if (!hasCheckedItems) {
-            Note note = (Note) adapter.getItem(position);
-            Intent intent = new Intent(getApplicationContext(), EditNoteActivity.class);
-            intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
-            startActivityForResult(intent, show_single_note_cmd);
+            final Note note = (Note) adapter.getItem(position);
+            startActivity(new Intent(getApplicationContext(), EditNoteActivity.class)
+                    .putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId()));
         }
     }
 
