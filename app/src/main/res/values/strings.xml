@@ -27,6 +27,11 @@
     <string name="menu_preview">Preview</string>
     <string name="menu_share">Share</string>
 
+    <string name="category_sorting" translatable="false">Sorting method</string>
+    <string name="meta_category_uncategorized" translatable="false">Uncategorized</string>
+    <string name="meta_category_favorites" translatable="false">Favorites</string>
+    <string name="meta_category_all_notes" translatable="false">All notes</string>
+
     <string name="search_in_category">Search in %1$s</string>
     <string name="search_in_all">Search all notes</string>
 

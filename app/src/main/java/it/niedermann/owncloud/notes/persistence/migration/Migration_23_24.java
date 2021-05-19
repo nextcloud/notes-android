@@ -33,21 +33,23 @@ public class Migration_23_24 extends Migration {
 
         while (cursor.moveToNext()) {
             long accountId = cursor.getLong(COLUMN_POSITION_ID);
-            resetSharedPreferences(sharedPreferences, editor, "Uncategorized", accountId);
-            resetSharedPreferences(sharedPreferences, editor, "Favorites", accountId);
-            resetSharedPreferences(sharedPreferences, editor, "All notes", accountId);
+            resetSharedPreferences(sharedPreferences, editor, context.getString(R.string.meta_category_uncategorized), accountId);
+            resetSharedPreferences(sharedPreferences, editor, context.getString(R.string.meta_category_favorites), accountId);
+            resetSharedPreferences(sharedPreferences, editor, context.getString(R.string.meta_category_all_notes), accountId);
         }
 
-        editor.remove("Sorting method" + ' ' + "Uncategorized");
-        editor.remove("Sorting method" + ' ' + "Favorites");
-        editor.remove("Sorting method" + ' ' + "All notes");
+        final String categorySorting = context.getString(R.string.category_sorting);
+
+        editor.remove(categorySorting + ' ' + context.getString(R.string.meta_category_uncategorized));
+        editor.remove(categorySorting + ' ' + context.getString(R.string.meta_category_favorites));
+        editor.remove(categorySorting + ' ' + context.getString(R.string.meta_category_all_notes));
         editor.apply();
         cursor.close();
     }
 
-
     private void resetSharedPreferences(SharedPreferences sharedPreferences, SharedPreferences.Editor editor, String label, long accountId) {
-        final String key = "Sorting method" + ' ' + label;
+        final String categorySorting = context.getString(R.string.category_sorting);
+        final String key = categorySorting + ' ' + label;
         if (sharedPreferences.contains(key)) {
             int sortingMethod = sharedPreferences.getInt(key, 0);
             editor.putInt(key + accountId, sortingMethod);
