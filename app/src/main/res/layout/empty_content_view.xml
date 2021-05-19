@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/empty_content_view"
     android:layout_width="match_parent"
@@ -16,7 +17,7 @@
         android:scaleX="1.5"
         android:scaleY="1.5"
         android:src="@drawable/ic_launcher_foreground"
-        android:tint="@color/fg_default_high" />
+        app:tint="@color/fg_default_high" />
 
     <TextView
         android:id="@+id/empty_content_view_title"
