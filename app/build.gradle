@@ -85,7 +85,7 @@ dependencies {
     implementation project(path: ':markdown')
 
     // Android X
-    implementation "androidx.appcompat:appcompat:1.2.0"
+    implementation "androidx.appcompat:appcompat:1.3.0"
     implementation "androidx.fragment:fragment:1.3.3"
     implementation "androidx.preference:preference:1.1.1"
     implementation "androidx.recyclerview:recyclerview:1.2.0"
