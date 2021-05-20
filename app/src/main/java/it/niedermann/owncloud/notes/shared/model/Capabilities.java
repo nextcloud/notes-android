@@ -1,5 +1,7 @@
 package it.niedermann.owncloud.notes.shared.model;
 
+import android.graphics.Color;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,7 +12,7 @@ public class Capabilities {
     @ColorInt
     private int color = -16743735; // #0082C9
     @ColorInt
-    private int textColor = -16777216; // #000000
+    private int textColor = Color.WHITE;
     @Nullable
     private String eTag;
 

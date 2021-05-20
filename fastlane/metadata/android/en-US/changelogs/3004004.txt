@@ -1,0 +1,1 @@
+- 🎨 Fix theming issue when theming app is disabled on the server
