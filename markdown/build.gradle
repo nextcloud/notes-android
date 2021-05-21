@@ -53,7 +53,7 @@ dependencies {
         exclude group: 'org.jetbrains', module: 'annotations-java5'
     }
     annotationProcessor "io.noties:prism4j-bundler:2.0.0"
-    implementation 'org.jetbrains:annotations:20.1.0'
+    implementation 'org.jetbrains:annotations:21.0.0'
 
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
