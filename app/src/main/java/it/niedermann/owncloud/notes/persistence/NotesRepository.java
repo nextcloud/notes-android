@@ -402,10 +402,14 @@ public class NotesRepository {
 
     @MainThread
     public LiveData<Note> moveNoteToAnotherAccount(Account account, @NonNull Note note) {
-        return switchMap(db.getNoteDao().getContent$(note.getId()), (content) -> {
+        return switchMap(distinctUntilChanged(db.getNoteDao().getContent$(note.getId())), (content) -> {
             final Note fullNote = new Note(null, note.getModified(), note.getTitle(), content, note.getCategory(), note.getFavorite(), null);
             deleteNoteAndSync(account, note.getId());
-            return addNoteAndSync(account, fullNote);
+            return map(addNoteAndSync(account, fullNote), (createdNote) -> {
+                db.getNoteDao().updateStatus(createdNote.getId(), DBStatus.LOCAL_EDITED);
+                createdNote.setStatus(DBStatus.LOCAL_EDITED);
+                return createdNote;
+            });
         });
     }
 

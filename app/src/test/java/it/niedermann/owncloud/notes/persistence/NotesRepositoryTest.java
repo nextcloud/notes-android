@@ -47,6 +47,14 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(sdk = {Build.VERSION_CODES.P})
@@ -205,14 +213,23 @@ public class NotesRepositoryTest {
     }
 
     @Test
-    @Ignore("Need to find a way to stub deleteAndSync method")
     public void moveNoteToAnotherAccount() throws InterruptedException {
-        final Note noteToMove = repo.getNoteById(1);
-        assertEquals(3, repo.getLocalModifiedNotes(secondAccount.getId()).size());
-        final Note movedNote = getOrAwaitValue(repo.moveNoteToAnotherAccount(secondAccount, noteToMove));
-        assertEquals(4, repo.getLocalModifiedNotes(secondAccount.getId()).size());
+        final NotesRepository repoSpy = spy(repo);
+        final Note noteToMove = repoSpy.getNoteById(1);
+
+        assertEquals(VOID, noteToMove.getStatus());
+        assertEquals(3, repoSpy.getLocalModifiedNotes(secondAccount.getId()).size());
+
+        doNothing().when(repoSpy).deleteNoteAndSync(any(), anyLong());
+        doNothing().when(repoSpy).scheduleSync(any(), anyBoolean());
+
+        final Note movedNote = getOrAwaitValue(repoSpy.moveNoteToAnotherAccount(secondAccount, noteToMove));
+
+        assertEquals(4, repoSpy.getLocalModifiedNotes(secondAccount.getId()).size());
         assertEquals(LOCAL_EDITED, movedNote.getStatus());
-        // TODO assert deleteAndSync has been called
+
+        verify(repoSpy, times(1)).deleteNoteAndSync(any(), anyLong());
+        verify(repoSpy, times(1)).addNoteAndSync(any(), any());
     }
 
     @Test
