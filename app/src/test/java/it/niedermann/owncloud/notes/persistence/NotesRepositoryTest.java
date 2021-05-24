@@ -226,6 +226,9 @@ public class NotesRepositoryTest {
         final Note movedNote = getOrAwaitValue(repoSpy.moveNoteToAnotherAccount(secondAccount, noteToMove));
 
         assertEquals(4, repoSpy.getLocalModifiedNotes(secondAccount.getId()).size());
+        assertEquals("美好的一天", movedNote.getTitle());
+        assertEquals("C", movedNote.getContent());
+        assertEquals("Movies", movedNote.getCategory());
         assertEquals(LOCAL_EDITED, movedNote.getStatus());
 
         verify(repoSpy, times(1)).deleteNoteAndSync(any(), anyLong());

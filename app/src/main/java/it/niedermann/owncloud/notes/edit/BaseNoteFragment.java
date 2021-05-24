@@ -24,6 +24,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.LiveData;
 
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
@@ -240,7 +241,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         } else if (itemId == R.id.menu_move) {
             new Thread(() -> {
                 AccountPickerDialogFragment
-                        .newInstance(new ArrayList<>(), note.getAccountId())
+                        .newInstance(new ArrayList<>(repo.getAccounts()), note.getAccountId())
                         .show(requireActivity().getSupportFragmentManager(), BaseNoteFragment.class.getSimpleName());
             }).start();
             return true;
@@ -372,7 +373,8 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     }
 
     public void moveNote(Account account) {
-        repo.moveNoteToAnotherAccount(account, note);
+        final LiveData<Note> moveLiveData = repo.moveNoteToAnotherAccount(account, note);
+        moveLiveData.observe(this, (v) -> moveLiveData.removeObservers(this));
         listener.close();
     }
 

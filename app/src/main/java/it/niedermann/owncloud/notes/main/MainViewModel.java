@@ -488,7 +488,7 @@ public class MainViewModel extends AndroidViewModel {
         });
     }
 
-    public LiveData<Note> moveNoteToAnotherAccount(Account account, Long noteId) {
+    public LiveData<Note> moveNoteToAnotherAccount(Account account, long noteId) {
         return switchMap(repo.getNoteById$(noteId), (note) -> {
             Log.v(TAG, "[moveNoteToAnotherAccount] - note: " + note);
             return repo.moveNoteToAnotherAccount(account, note);

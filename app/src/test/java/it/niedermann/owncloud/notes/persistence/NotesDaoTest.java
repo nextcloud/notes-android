@@ -337,16 +337,6 @@ public class NotesDaoTest {
     }
 
     @Test
-    public void getContent() throws InterruptedException {
-        final Note note = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", LOCAL_DELETED, account.getId(), "", 0);
-        db.getNoteDao().addNote(note);
-        assertEquals("My-Content", db.getNoteDao().getContent(note.getId()));
-        assertEquals("My-Content", NotesTestingUtil.getOrAwaitValue(db.getNoteDao().getContent$(note.getId())));
-        assertNull(db.getNoteDao().getContent(note.getId() + 1));
-        assertNull(NotesTestingUtil.getOrAwaitValue(db.getNoteDao().getContent$(note.getId() + 1)));
-    }
-
-    @Test
     public void getCategoriesLiveData() throws InterruptedException {
         final Account secondAccount = setupSecondAccountAndTestNotes();
 
