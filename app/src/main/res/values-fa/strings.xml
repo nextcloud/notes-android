@@ -77,7 +77,6 @@
     <string name="widget_create_note">ساختن یادداشت</string>
     <string name="widget_not_logged_in">لطفاً قبل از استفاده از این ویجت، به یادداشت‌ها وارد شوید</string>
     <string name="widget_entry_fav_contentDescription">از آیکون ستاره برای مشخص کردن یک مورد به عنوان مورد علاقه استفاده می‌شود</string>
-    <string name="widget_app_launcher_contentDescription">برنامه راه اندازی می‌شود</string>
 
     <string name="activity_select_single_note">انتخاب یادداشت</string>
 
@@ -130,10 +129,8 @@
     <string name="append_to_note">به یادداشت اضافه کنید</string>
     <string name="change_note_title">عوض‌کردن عنوان یادداشت</string>
     <string name="menu_edit_title">ویرایش عنوان</string>
-    <string name="settings_branding">شخصی‌سازی</string>
     <string name="simple_security">امنیت</string>
     <string name="simple_synchronization">همگام‌سازی</string>
-    <string name="simple_behavior">رفتار</string>
     <string name="manage_accounts">مدیریت حساب‌ها</string>
     <string name="action_formatting_help">قالب‌بندی</string>
 
@@ -147,13 +144,6 @@
         <item>کوچک</item>
         <item>متوسط</item>
         <item>بزرگ</item>
-    </string-array>
-
-    <string-array name="sync_entries">
-        <item>خاموش</item>
-        <item>۱۵ دقیقه</item>
-        <item>۱ ساعت</item>
-        <item>۶ ساعت</item>
     </string-array>
 
     <string-array name="darkmode_entries">

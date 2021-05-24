@@ -77,7 +77,6 @@
     <string name="widget_create_note">Створити нотатку</string>
     <string name="widget_not_logged_in">Будь ласка, увійдіть до Нотаток перед використанням цього віджету</string>
     <string name="widget_entry_fav_contentDescription">Значок зірки використовується для позначення елемента як улюбленого</string>
-    <string name="widget_app_launcher_contentDescription">Запускає застосунок</string>
 
     <string name="activity_select_single_note">Оберіть нотатку</string>
 
@@ -130,10 +129,8 @@
     <string name="append_to_note">Додати до нотатки</string>
     <string name="change_note_title">Змінити заголовок нотатки</string>
     <string name="menu_edit_title">Редагувати нотатку</string>
-    <string name="settings_branding">Оформлення</string>
     <string name="simple_security">Безпека</string>
     <string name="simple_synchronization">Синхронізація</string>
-    <string name="simple_behavior">Поведінка</string>
     <string name="manage_accounts">Облікові записи</string>
     <string name="action_formatting_help">Форматування</string>
 
@@ -147,13 +144,6 @@
         <item>Малий</item>
         <item>Середній</item>
         <item>Великий</item>
-    </string-array>
-
-    <string-array name="sync_entries">
-        <item>Вимкнути</item>
-        <item>15 хвилин</item>
-        <item>1 година</item>
-        <item>6 годин</item>
     </string-array>
 
     <string-array name="darkmode_entries">

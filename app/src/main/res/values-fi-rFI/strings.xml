@@ -77,7 +77,6 @@
     <string name="widget_create_note">Luo muistiinpano</string>
     <string name="widget_not_logged_in">Kirjaudu Notes sovellukseen ennen kuin käytät pienoissovellusta</string>
     <string name="widget_entry_fav_contentDescription">Tähtikuvaketta käytetään suosikkikohteen ilmaisemiseen</string>
-    <string name="widget_app_launcher_contentDescription">Käynnistää sovelluksen</string>
 
     <string name="activity_select_single_note">Valitse muistiinpano</string>
 
@@ -129,10 +128,8 @@
     <string name="append_to_note">Lisää muistiinpanoon</string>
     <string name="change_note_title">Muuta muistinpanon otsikkoa</string>
     <string name="menu_edit_title">Muokkaa otsikkoa</string>
-    <string name="settings_branding">Brändäys</string>
     <string name="simple_security">Tietoturva</string>
     <string name="simple_synchronization">Synkronointi</string>
-    <string name="simple_behavior">Toiminta</string>
     <string name="manage_accounts">Tilien hallinta</string>
     <string name="action_formatting_help">Muotoilu</string>
 
@@ -146,13 +143,6 @@
         <item>Pieni</item>
         <item>Normaali</item>
         <item>Suuri</item>
-    </string-array>
-
-    <string-array name="sync_entries">
-        <item>Pois</item>
-        <item>15 minuuttia</item>
-        <item>1 tunti</item>
-        <item>6 tuntia</item>
     </string-array>
 
     <string-array name="darkmode_entries">

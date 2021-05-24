@@ -81,7 +81,6 @@
     <string name="widget_create_note">انشاء ملاحظة</string>
     <string name="widget_not_logged_in">الرجاء تسجيل الدخول قبل إستخدامك لهذه الأداة</string>
     <string name="widget_entry_fav_contentDescription">تُستخدم أيقونة النجمة للإشارة إلى عنصر كعنصر مفضل</string>
-    <string name="widget_app_launcher_contentDescription">يطلق التطبيق</string>
 
     <string name="activity_select_single_note">اختيار الملاحظة</string>
 
@@ -135,10 +134,8 @@
     <string name="append_to_note">إلحاق بالملاحظة</string>
     <string name="change_note_title">تغيير عنوان الملاحظة</string>
     <string name="menu_edit_title">تحرير العنوان</string>
-    <string name="settings_branding">وسم</string>
     <string name="simple_security">الأمان</string>
     <string name="simple_synchronization">المزامنة</string>
-    <string name="simple_behavior">السلوك</string>
     <string name="manage_accounts">إدارة الحسابات</string>
     <string name="action_formatting_help">التنسيق</string>
 
@@ -152,13 +149,6 @@
         <item>صغير</item>
         <item>متوسط</item>
         <item>كبير</item>
-    </string-array>
-
-    <string-array name="sync_entries">
-        <item>إيقاف</item>
-        <item>15 دقيقة</item>
-        <item>ساعة</item>
-        <item>6 ساعات</item>
     </string-array>
 
     <string-array name="darkmode_entries">

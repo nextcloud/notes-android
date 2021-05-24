@@ -84,7 +84,6 @@
     <string name="widget_create_note">Maak notitie</string>
     <string name="widget_not_logged_in">Login bij Notities voordat je deze widget gebruikt</string>
     <string name="widget_entry_fav_contentDescription">\'Ster\'pictogram gebruikt om object als favoriet te markeren</string>
-    <string name="widget_app_launcher_contentDescription">Start app</string>
 
     <string name="activity_select_single_note">Notitie selecteren</string>
 
@@ -138,12 +137,10 @@
     <string name="append_to_note">Achteraan aan notitie toevoegen</string>
     <string name="change_note_title">Notitie titel wijzigen</string>
     <string name="menu_edit_title">Titel bewerken</string>
-    <string name="settings_branding">Brandmerken</string>
     <string name="settings_gridview">Rasterweergave</string>
     <string name="simple_security">Beveiliging</string>
     <string name="appearance_and_behavior">Uiterlijk en gedrag</string>
     <string name="simple_synchronization">Synchronisatie</string>
-    <string name="simple_behavior">Gedrag</string>
     <string name="manage_accounts">Accounts beheren </string>
     <string name="action_formatting_help">Opmaak</string>
 
@@ -157,13 +154,6 @@
         <item>Klein</item>
         <item>Gemiddeld</item>
         <item>Groot</item>
-    </string-array>
-
-    <string-array name="sync_entries">
-        <item>Uit</item>
-        <item>15 minuten</item>
-        <item>1 uur</item>
-        <item>6 uur</item>
     </string-array>
 
     <string-array name="darkmode_entries">
@@ -257,4 +247,6 @@
     <string name="remove_account">Verwijder %1$s</string>
 
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Je moet verbonden zijn met het Internet om een account toe te voegen.</string>
+    <string name="simple_next">Volgende</string>
+    <string name="simple_prev">Vorige</string>
 </resources>

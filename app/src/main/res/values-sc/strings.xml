@@ -77,7 +77,6 @@
     <string name="widget_create_note">Crea Nota</string>
     <string name="widget_not_logged_in">Incarca su butone + pro creare una nota noa</string>
     <string name="widget_entry_fav_contentDescription">S\'icona de s\'isteddu s\'impreat pro marcare un\'elementu comente preferidu</string>
-    <string name="widget_app_launcher_contentDescription">Avia aplicatzione</string>
 
     <string name="activity_select_single_note">Seletziona nota</string>
 
@@ -131,10 +130,8 @@
     <string name="append_to_note">Agiunghe a sa nota</string>
     <string name="change_note_title">Càmbia su tìtulu de sa nota</string>
     <string name="menu_edit_title">Modìfica tìtulu</string>
-    <string name="settings_branding">Marca</string>
     <string name="simple_security">Seguresa</string>
     <string name="simple_synchronization">Sincronizatzione</string>
-    <string name="simple_behavior">Cumportamentu</string>
     <string name="manage_accounts">Gesti contos</string>
     <string name="action_formatting_help">Formatatzione</string>
 
@@ -148,13 +145,6 @@
         <item>Piticu</item>
         <item>Mesanu</item>
         <item>Mannu</item>
-    </string-array>
-
-    <string-array name="sync_entries">
-        <item>Istudadu</item>
-        <item>15 minùtos</item>
-        <item>1 ora</item>
-        <item>6 oras</item>
     </string-array>
 
     <string-array name="darkmode_entries">

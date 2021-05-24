@@ -77,7 +77,6 @@
     <string name="widget_create_note">새 메모</string>
     <string name="widget_not_logged_in">이 위젯을 사용하려면 먼저 로그인하십시오</string>
     <string name="widget_entry_fav_contentDescription">스타 아이콘은 항목을 즐겨찾기로 표시하는데 사용됩니다.</string>
-    <string name="widget_app_launcher_contentDescription">앱 실행</string>
 
     <string name="activity_select_single_note">메모 선택</string>
 
@@ -130,10 +129,8 @@
     <string name="append_to_note">메모에 추가</string>
     <string name="change_note_title">메모 제목 변경</string>
     <string name="menu_edit_title">제목 수정</string>
-    <string name="settings_branding">브랜딩</string>
     <string name="simple_security">보안</string>
     <string name="simple_synchronization">동기화</string>
-    <string name="simple_behavior">행동</string>
     <string name="manage_accounts">계정 관리</string>
     <string name="action_formatting_help">서식</string>
 
@@ -147,13 +144,6 @@
         <item>작게</item>
         <item>중간</item>
         <item>크게</item>
-    </string-array>
-
-    <string-array name="sync_entries">
-        <item>꺼짐</item>
-        <item>15분</item>
-        <item>1시간</item>
-        <item>6시간</item>
     </string-array>
 
     <string-array name="darkmode_entries">

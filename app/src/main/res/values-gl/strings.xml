@@ -81,7 +81,6 @@
     <string name="widget_create_note">Crear unha nota</string>
     <string name="widget_not_logged_in">Acceda a Notas antes de empregar este trebello</string>
     <string name="widget_entry_fav_contentDescription">A icona de estrela empregase para indicar que o elemento é un favorito</string>
-    <string name="widget_app_launcher_contentDescription">Inicia a apli</string>
 
     <string name="activity_select_single_note">Seleccionar unha nota</string>
 
@@ -135,12 +134,10 @@
     <string name="append_to_note">Anexo á nota</string>
     <string name="change_note_title">Cambiar o título da nota</string>
     <string name="menu_edit_title">Editar o título</string>
-    <string name="settings_branding">Xestión da marca</string>
     <string name="settings_gridview">Ver como grella</string>
     <string name="simple_security">Seguridade</string>
     <string name="appearance_and_behavior">Aparencia e comportamento</string>
     <string name="simple_synchronization">Sincronización</string>
-    <string name="simple_behavior">Comportamento</string>
     <string name="manage_accounts">Xestionar contas</string>
     <string name="action_formatting_help">Formatado</string>
 
@@ -154,13 +151,6 @@
         <item>Pequena</item>
         <item>Mediana</item>
         <item>Grande</item>
-    </string-array>
-
-    <string-array name="sync_entries">
-        <item>Apagado</item>
-        <item>15 minutos</item>
-        <item>1 hora</item>
-        <item>6 horas</item>
     </string-array>
 
     <string-array name="darkmode_entries">

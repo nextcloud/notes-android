@@ -77,7 +77,6 @@
     <string name="widget_create_note">יצירת פתק</string>
     <string name="widget_not_logged_in">נא להיכנס לפתקים לפני השימוש בחלונית הזאת</string>
     <string name="widget_entry_fav_contentDescription">סמל הכוכב משמש לציון פריט כמועדף</string>
-    <string name="widget_app_launcher_contentDescription">יישומון שיגור</string>
 
     <string name="activity_select_single_note">נא לבחור פתק</string>
 
@@ -118,10 +117,8 @@
     <string name="shared_text_empty">הטקסט ששותף היה ריק</string>
     <string name="append_to_note">הוספה לסוף הפתק</string>
     <string name="menu_edit_title">עריכת כותרת</string>
-    <string name="settings_branding">מיתוג</string>
     <string name="simple_security">אבטחה</string>
     <string name="simple_synchronization">סנכרון</string>
-    <string name="simple_behavior">התנהגות</string>
     <string name="manage_accounts">ניהול חשבונות</string>
     <string name="action_formatting_help">עיצוב</string>
 
@@ -135,13 +132,6 @@
         <item>קטן</item>
         <item>בינוני</item>
         <item>גדול</item>
-    </string-array>
-
-    <string-array name="sync_entries">
-        <item>כבוי</item>
-        <item>15 דקות</item>
-        <item>שעה</item>
-        <item>6 שעות</item>
     </string-array>
 
     <string-array name="darkmode_entries">
