@@ -83,6 +83,7 @@ import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
+import it.niedermann.owncloud.notes.shared.util.CustomAppGlideModule;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
 import static android.os.Build.VERSION.SDK_INT;
@@ -436,12 +437,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         });
 
         swipeRefreshLayout.setOnRefreshListener(() -> {
-            Log.i(TAG, "Clearing Glide memory cache");
-            Glide.get(this).clearMemory();
-            new Thread(() -> {
-                Log.i(TAG, "Clearing Glide disk cache");
-                Glide.get(getApplicationContext()).clearDiskCache();
-            }, "CLEAR_GLIDE_CACHE").start();
+            CustomAppGlideModule.clearCache(this);
             final LiveData<Account> syncLiveData = mainViewModel.getCurrentAccount();
             final Observer<Account> syncObserver = currentAccount -> {
                 syncLiveData.removeObservers(this);
