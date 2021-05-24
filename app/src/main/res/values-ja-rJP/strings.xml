@@ -82,7 +82,6 @@
     <string name="widget_create_note">ノートを作成</string>
     <string name="widget_not_logged_in">このウィジェットを使用する前に、ノートにログインしてください</string>
     <string name="widget_entry_fav_contentDescription">スターアイコンは、アイテムをお気に入りとして示すために使用されます</string>
-    <string name="widget_app_launcher_contentDescription">アプリを起動する</string>
 
     <string name="activity_select_single_note">ノートを選択</string>
 
@@ -135,10 +134,8 @@
     <string name="append_to_note">ノートに追記</string>
     <string name="change_note_title">ノートタイトルを変更</string>
     <string name="menu_edit_title">タイトルを編集</string>
-    <string name="settings_branding">ブランディング</string>
     <string name="simple_security">セキュリティ</string>
     <string name="simple_synchronization">同期</string>
-    <string name="simple_behavior">表示形式</string>
     <string name="manage_accounts">アカウント管理</string>
     <string name="action_formatting_help">フォーマット</string>
 
@@ -152,13 +149,6 @@
         <item>小</item>
         <item>中</item>
         <item>大</item>
-    </string-array>
-
-    <string-array name="sync_entries">
-        <item>オフ</item>
-        <item>15 分</item>
-        <item>1時間</item>
-        <item>6 時間</item>
     </string-array>
 
     <string-array name="darkmode_entries">

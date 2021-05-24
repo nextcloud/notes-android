@@ -84,7 +84,6 @@
     <string name="widget_create_note">Crea nota</string>
     <string name="widget_not_logged_in">Accedi a Notes prima di utilizzare questo widget</string>
     <string name="widget_entry_fav_contentDescription">L\'icona della stella è utilizzata per marcare un elemento come preferito</string>
-    <string name="widget_app_launcher_contentDescription">Avvia l\'applicazione</string>
 
     <string name="activity_select_single_note">Seleziona nota</string>
 
@@ -138,12 +137,10 @@
     <string name="append_to_note">Aggiungi a nota</string>
     <string name="change_note_title">Cambia titolo della nota</string>
     <string name="menu_edit_title">Modifica titolo</string>
-    <string name="settings_branding">Marchio</string>
     <string name="settings_gridview">Vista griglia</string>
     <string name="simple_security">Sicurezza</string>
     <string name="appearance_and_behavior">Aspetto e comportamento</string>
     <string name="simple_synchronization">Sincronizzazione</string>
-    <string name="simple_behavior">Comportamento</string>
     <string name="manage_accounts">Gestisci account</string>
     <string name="action_formatting_help">Formattazione</string>
 
@@ -157,13 +154,6 @@
         <item>Piccola</item>
         <item>Media</item>
         <item>Grande</item>
-    </string-array>
-
-    <string-array name="sync_entries">
-        <item>Spenta</item>
-        <item>15 minuti</item>
-        <item>1 ora</item>
-        <item>6 ore</item>
     </string-array>
 
     <string-array name="darkmode_entries">
@@ -257,4 +247,5 @@
     <string name="remove_account">Rimuovi %1$s</string>
 
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Devi essere connesso a Internet per aggiungere un account.</string>
+    <string name="simple_prev">Precedente</string>
 </resources>

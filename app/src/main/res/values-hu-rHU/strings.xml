@@ -81,7 +81,6 @@
     <string name="widget_create_note">Jegyzet létrehozása</string>
     <string name="widget_not_logged_in">Jelentkezzen be a Jegyzetekbe mielőtt ezt a modult használná</string>
     <string name="widget_entry_fav_contentDescription">A csillag ikon az elem kedvencként megjelölésére szolgál</string>
-    <string name="widget_app_launcher_contentDescription">Elindítja az alkalmazást</string>
 
     <string name="activity_select_single_note">Válasszon jegyzetet</string>
 
@@ -135,12 +134,10 @@
     <string name="append_to_note">Hozzáfűzés a jegyzethez</string>
     <string name="change_note_title">Jegyzet címének módosítása</string>
     <string name="menu_edit_title">Cím szerkesztése</string>
-    <string name="settings_branding">Márkázas</string>
     <string name="settings_gridview">Rács nézet</string>
     <string name="simple_security">Biztonság</string>
     <string name="appearance_and_behavior">Megjelenés és viselkedés</string>
     <string name="simple_synchronization">Szinkronizálás</string>
-    <string name="simple_behavior">Viselkedés</string>
     <string name="manage_accounts">Fiókok kezelése</string>
     <string name="action_formatting_help">Formázás</string>
 
@@ -154,13 +151,6 @@
         <item>Kicsi</item>
         <item>Közepes</item>
         <item>Nagy</item>
-    </string-array>
-
-    <string-array name="sync_entries">
-        <item>Ki</item>
-        <item>15 perc</item>
-        <item>1 óra</item>
-        <item>6 óra</item>
     </string-array>
 
     <string-array name="darkmode_entries">

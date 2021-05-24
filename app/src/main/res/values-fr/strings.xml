@@ -81,7 +81,6 @@
     <string name="widget_create_note">Créer une note</string>
     <string name="widget_not_logged_in">Veuillez vous connecter à Notes avant d\'utiliser ce widget</string>
     <string name="widget_entry_fav_contentDescription">L\'icône étoile est utilisée pour désigner un élément comme favori</string>
-    <string name="widget_app_launcher_contentDescription">Démarre l\'application</string>
 
     <string name="activity_select_single_note">Choisir une note</string>
 
@@ -135,12 +134,10 @@
     <string name="append_to_note">Ajouter à la note</string>
     <string name="change_note_title">Modifier le titre de la note</string>
     <string name="menu_edit_title">Modifier le titre</string>
-    <string name="settings_branding">marque</string>
     <string name="settings_gridview">Affichage grille</string>
     <string name="simple_security">Sécurité</string>
     <string name="appearance_and_behavior">Apparence et comportement</string>
     <string name="simple_synchronization">Synchronisation</string>
-    <string name="simple_behavior">Comportement</string>
     <string name="manage_accounts">Gérer les comptes</string>
     <string name="action_formatting_help">Formatage</string>
 
@@ -154,13 +151,6 @@
         <item>Petit</item>
         <item>Moyen</item>
         <item>Grand</item>
-    </string-array>
-
-    <string-array name="sync_entries">
-        <item>Éteint</item>
-        <item>15 minutes</item>
-        <item>1 heure</item>
-        <item>6 heures</item>
     </string-array>
 
     <string-array name="darkmode_entries">
@@ -248,4 +238,4 @@
     <string name="choose_account">Sélectionnez un compte</string>
     <string name="context_based_formatting">Suggestions de mise en forme contextuelle</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Vous devez être connecté à internet pour ajouter un compte.</string>
-</resources>
+    </resources>

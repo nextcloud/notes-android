@@ -83,7 +83,6 @@
     <string name="widget_create_note">Создать заметку</string>
     <string name="widget_not_logged_in">Для использования виджета необходимо выполнить вход в приложении «Заметки»</string>
     <string name="widget_entry_fav_contentDescription">Используйте звёздочку для исключения заметки из избранного</string>
-    <string name="widget_app_launcher_contentDescription">Запуск приложения</string>
 
     <string name="activity_select_single_note">Выберите заметку</string>
 
@@ -137,12 +136,10 @@
     <string name="append_to_note">Добавить в заметку</string>
     <string name="change_note_title">Изменить заголовок заметки</string>
     <string name="menu_edit_title">Редактировать заголовок</string>
-    <string name="settings_branding">Брендирование</string>
     <string name="settings_gridview">Вид сеткой</string>
     <string name="simple_security">Безопасность</string>
     <string name="appearance_and_behavior">Внешний вид и поведение</string>
     <string name="simple_synchronization">Синхронизация</string>
-    <string name="simple_behavior">Режим</string>
     <string name="manage_accounts">Управление аккаунтами</string>
     <string name="action_formatting_help">Форматирование</string>
 
@@ -156,13 +153,6 @@
         <item>Маленький</item>
         <item>Средний</item>
         <item>Большой</item>
-    </string-array>
-
-    <string-array name="sync_entries">
-        <item>Отключены</item>
-        <item>15 минут</item>
-        <item>1 час</item>
-        <item>6 часов</item>
     </string-array>
 
     <string-array name="darkmode_entries">

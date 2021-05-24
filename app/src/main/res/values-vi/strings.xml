@@ -84,7 +84,6 @@
     <string name="widget_create_note">Tạo ghi chú</string>
     <string name="widget_not_logged_in">Vui lòng đăng nhập vào Ghi chú trước khi sử dụng tiện ích này</string>
     <string name="widget_entry_fav_contentDescription">Biểu tượng sao được sử dụng để chỉ ra rằng một mục được yêu thích</string>
-    <string name="widget_app_launcher_contentDescription">Chạy ứng dụng</string>
 
     <string name="activity_select_single_note">Chọn ghi chú</string>
 
@@ -138,12 +137,10 @@
     <string name="append_to_note">Thêm vào ghi chú</string>
     <string name="change_note_title">Đổi tiêu đề ghi chú</string>
     <string name="menu_edit_title">Chỉnh sửa tiêu đề</string>
-    <string name="settings_branding">Nhãn hiệu</string>
     <string name="settings_gridview">Hiển thị dạng lưới</string>
     <string name="simple_security">Bảo mật</string>
     <string name="appearance_and_behavior">Ngoại hình và hành vi</string>
     <string name="simple_synchronization">Đồng bộ hoá</string>
-    <string name="simple_behavior">Hành vi</string>
     <string name="manage_accounts">Quản lý tài khoản</string>
     <string name="action_formatting_help">Định dạng</string>
 
@@ -157,13 +154,6 @@
         <item>Nhỏ</item>
         <item>Trung bình</item>
         <item>Lớn</item>
-    </string-array>
-
-    <string-array name="sync_entries">
-        <item>Tắt</item>
-        <item>15 phút</item>
-        <item>1 tiếng</item>
-        <item>6 tiếng</item>
     </string-array>
 
     <string-array name="darkmode_entries">

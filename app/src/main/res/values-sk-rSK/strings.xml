@@ -77,7 +77,6 @@
     <string name="widget_create_note">Vytvoriť poznámku</string>
     <string name="widget_not_logged_in">Prihláste sa prosím do Poznámok skôr než začnete používať tento widget</string>
     <string name="widget_entry_fav_contentDescription">Ikona hviezdičky označuje položku ako obľúbenú</string>
-    <string name="widget_app_launcher_contentDescription">Spustí aplikáciu</string>
 
     <string name="activity_select_single_note">Vybrať poznámku</string>
 
@@ -130,10 +129,8 @@
     <string name="append_to_note">Pripojiť k poznámke</string>
     <string name="change_note_title">Zmeniť názov poznámky</string>
     <string name="menu_edit_title">Upraviť názov</string>
-    <string name="settings_branding">Použitie vlastného loga</string>
     <string name="simple_security">Zabezpečenie</string>
     <string name="simple_synchronization">Synchronizácia</string>
-    <string name="simple_behavior">Chod</string>
     <string name="manage_accounts">Spravovať účty</string>
     <string name="action_formatting_help">Formátovanie</string>
 
@@ -147,13 +144,6 @@
         <item>Malá</item>
         <item>Stredná</item>
         <item>Veľká</item>
-    </string-array>
-
-    <string-array name="sync_entries">
-        <item>Vypnúť</item>
-        <item>15 minút</item>
-        <item>1 hodina</item>
-        <item>6 hodín</item>
     </string-array>
 
     <string-array name="darkmode_entries">

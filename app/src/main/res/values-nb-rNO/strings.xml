@@ -77,7 +77,6 @@
     <string name="widget_create_note">Opprett notat</string>
     <string name="widget_not_logged_in">Logg inn i Notater før du bruker dette miniprogrammet</string>
     <string name="widget_entry_fav_contentDescription">Stjerne ikon er brukt for å angi et element som en favoritt</string>
-    <string name="widget_app_launcher_contentDescription">Åpner appen</string>
 
     <string name="activity_select_single_note">Velg notat</string>
 
@@ -130,10 +129,8 @@
     <string name="append_to_note">Legg til i notat</string>
     <string name="change_note_title">Endre tittel på notat</string>
     <string name="menu_edit_title">Rediger tittel</string>
-    <string name="settings_branding">Branding</string>
     <string name="simple_security">Sikkerhet</string>
     <string name="simple_synchronization">Synkronisering</string>
-    <string name="simple_behavior">Atferd</string>
     <string name="manage_accounts">Håndter kontoer</string>
     <string name="action_formatting_help">Formatering</string>
 
@@ -147,13 +144,6 @@
         <item>Liten</item>
         <item>Medium</item>
         <item>Stor</item>
-    </string-array>
-
-    <string-array name="sync_entries">
-        <item>ett kvarter</item>
-        <item>15 minuter</item>
-        <item>1 time</item>
-        <item>6 timer</item>
     </string-array>
 
     <string-array name="darkmode_entries">

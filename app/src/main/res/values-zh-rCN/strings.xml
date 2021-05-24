@@ -84,7 +84,6 @@
     <string name="widget_create_note">创建笔记</string>
     <string name="widget_not_logged_in">请在使用此小部件之前登录 Notes</string>
     <string name="widget_entry_fav_contentDescription">标星项目为收藏</string>
-    <string name="widget_app_launcher_contentDescription">启动应用程序</string>
 
     <string name="activity_select_single_note">选择笔记</string>
 
@@ -138,12 +137,10 @@
     <string name="append_to_note">追加笔记</string>
     <string name="change_note_title">更改笔记标题</string>
     <string name="menu_edit_title">编辑标题</string>
-    <string name="settings_branding">创建标签</string>
     <string name="settings_gridview">网格视图</string>
     <string name="simple_security">安全</string>
     <string name="appearance_and_behavior">外观和行为</string>
     <string name="simple_synchronization">同步</string>
-    <string name="simple_behavior">行为</string>
     <string name="manage_accounts">管理账号</string>
     <string name="action_formatting_help">格式</string>
 
@@ -157,13 +154,6 @@
         <item>小</item>
         <item>中等</item>
         <item>大</item>
-    </string-array>
-
-    <string-array name="sync_entries">
-        <item>关闭</item>
-        <item>15 分钟</item>
-        <item>1 小时</item>
-        <item>6 小时</item>
     </string-array>
 
     <string-array name="darkmode_entries">
@@ -252,4 +242,6 @@
     <string name="remove_account">移除 %1$s</string>
 
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">要添加账号，你必须连接到互联网。</string>
+    <string name="simple_next">下一则 </string>
+    <string name="simple_prev">上一则</string>
 </resources>
