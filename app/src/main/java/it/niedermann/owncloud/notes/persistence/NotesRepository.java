@@ -67,7 +67,6 @@ import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.O;
 import static androidx.lifecycle.Transformations.distinctUntilChanged;
 import static androidx.lifecycle.Transformations.map;
-import static androidx.lifecycle.Transformations.switchMap;
 import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.generateNoteExcerpt;
 import static it.niedermann.owncloud.notes.widget.notelist.NoteListWidget.updateNoteListWidgets;
@@ -402,10 +401,12 @@ public class NotesRepository {
 
     @MainThread
     public LiveData<Note> moveNoteToAnotherAccount(Account account, @NonNull Note note) {
-        return switchMap(db.getNoteDao().getContent$(note.getId()), (content) -> {
-            final Note fullNote = new Note(null, note.getModified(), note.getTitle(), content, note.getCategory(), note.getFavorite(), null);
-            deleteNoteAndSync(account, note.getId());
-            return addNoteAndSync(account, fullNote);
+        final Note fullNote = new Note(null, note.getModified(), note.getTitle(), note.getContent(), note.getCategory(), note.getFavorite(), null);
+        deleteNoteAndSync(account, note.getId());
+        return map(addNoteAndSync(account, fullNote), (createdNote) -> {
+            db.getNoteDao().updateStatus(createdNote.getId(), DBStatus.LOCAL_EDITED);
+            createdNote.setStatus(DBStatus.LOCAL_EDITED);
+            return createdNote;
         });
     }
 
