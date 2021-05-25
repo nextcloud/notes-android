@@ -23,6 +23,7 @@ import androidx.core.text.HtmlCompat;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
 
+import java.util.Locale;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -106,7 +107,7 @@ public class MarkdownUtil {
         final String[] uncheckedEmojis;
         // Seriously what the fuck, Samsung?
         // https://emojipedia.org/ballot-box-with-x/
-        if (Build.MANUFACTURER != null && Build.MANUFACTURER.toLowerCase().contains("samsung")) {
+        if (Build.MANUFACTURER != null && Build.MANUFACTURER.toLowerCase(Locale.getDefault()).contains("samsung")) {
             checkedEmojis = new String[]{"✅", "☑️", "✔️"};
             uncheckedEmojis = new String[]{"❌", "\uD83D\uDD32️", "☐️"};
         } else {
