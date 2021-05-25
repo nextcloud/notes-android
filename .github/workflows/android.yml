@@ -12,6 +12,15 @@ jobs:
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v1
 
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Lint
+        run: bash ./gradlew lintDebug --stacktrace
+
   test:
     name: Unit tests
     runs-on: ubuntu-latest
