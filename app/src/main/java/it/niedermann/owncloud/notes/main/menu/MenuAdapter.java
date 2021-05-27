@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.core.util.Consumer;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.nextcloud.android.sso.Constants;
 import com.nextcloud.android.sso.helper.VersionCheckHelper;
 
 import it.niedermann.owncloud.notes.FormattingHelpActivity;
@@ -84,7 +85,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
 
     private static Intent generateTrashbinAppIntent(@NonNull Context context, @NonNull Account account, boolean prod) throws PackageManager.NameNotFoundException {
         final PackageManager packageManager = context.getPackageManager();
-        final String packageName = prod ? "com.nextcloud.client" : "com.nextcloud.android.beta";
+        final String packageName = prod ? Constants.PACKAGE_NAME_PROD : Constants.PACKAGE_NAME_DEV;
         final Intent intent = new Intent();
         intent.setClassName(packageName, "com.owncloud.android.ui.trashbin.TrashbinActivity");
         if (packageManager.resolveActivity(intent, 0) != null) {
