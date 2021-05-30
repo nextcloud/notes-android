@@ -1,20 +1,19 @@
 package it.niedermann.android.markdown;
 
-import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 
-import androidx.test.core.app.ApplicationProvider;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-
 import junit.framework.TestCase;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -24,13 +23,14 @@ import java.util.Map;
 import it.niedermann.android.markdown.model.EListType;
 import it.niedermann.android.markdown.model.SearchSpan;
 
-@RunWith(AndroidJUnit4.class)
+@RunWith(RobolectricTestRunner.class)
+@Config(sdk = {Build.VERSION_CODES.P})
 public class MarkdownUtilTest extends TestCase {
 
     @Test
     public void testGetStartOfLine() {
         //language=md
-        StringBuilder test = new StringBuilder(
+        final StringBuilder test = new StringBuilder(
                 "# Test-Note\n" + // line start 0
                         "\n" + // line start 12
                         "- [ ] this is a test note\n" + // line start 13
@@ -452,7 +452,7 @@ public class MarkdownUtilTest extends TestCase {
         assertEquals(33, MarkdownUtil.insertLink(builder, 2, 7, "https://www.example.com"));
         assertEquals("  [Lorem](https://www.example.com)  ", builder.toString());
     }
-    
+
     @Test
     public void testEscape() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         final Method m = MarkdownUtil.class.getDeclaredMethod("escape", char.class);
@@ -659,8 +659,6 @@ public class MarkdownUtilTest extends TestCase {
         try {
             final Method removeSpans = MarkdownUtil.class.getDeclaredMethod("removeSpans", Spannable.class, Class.class);
             removeSpans.setAccessible(true);
-
-            final Context context = ApplicationProvider.getApplicationContext();
 
             final Editable editable_1 = new SpannableStringBuilder("Lorem Ipsum dolor sit amet");
             editable_1.setSpan(new SearchSpan(Color.RED, Color.GRAY, false, false), 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
