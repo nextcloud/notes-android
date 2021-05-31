@@ -719,7 +719,7 @@ public class MarkdownUtilTest extends TestCase {
         assertEquals("Foo\n- Aufzählung\nBar", MarkdownUtil.removeMarkdown("Foo\n    - Aufzählung\nBar"));
         assertEquals("Foo\nAufzählung *\nBar", MarkdownUtil.removeMarkdown("Foo\n* Aufzählung *\nBar"));
         assertEquals("Title", MarkdownUtil.removeMarkdown("# Title"));
-        assertEquals("Aufzähdlung", MarkdownUtil.removeMarkdown("* Aufzählung"));
+        assertEquals("Aufzählung", MarkdownUtil.removeMarkdown("* Aufzählung"));
 //        assertEquals("Foo Link Bar", MarkdownUtil.removeMarkdown("Foo [Link](https://example.com) Bar"));
         assertFalse(MarkdownUtil.removeMarkdown("- [ ] Test").contains("- [ ]"));
         assertTrue(MarkdownUtil.removeMarkdown("- [ ] Test").endsWith("Test"));
