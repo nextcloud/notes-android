@@ -1,7 +1,6 @@
 package it.niedermann.android.markdown;
 
 import android.graphics.Color;
-import android.os.Build;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -13,7 +12,6 @@ import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -24,7 +22,6 @@ import it.niedermann.android.markdown.model.EListType;
 import it.niedermann.android.markdown.model.SearchSpan;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(sdk = {Build.VERSION_CODES.P})
 public class MarkdownUtilTest extends TestCase {
 
     @Test

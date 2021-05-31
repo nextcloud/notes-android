@@ -1,7 +1,6 @@
 package it.niedermann.owncloud.notes.persistence;
 
 import android.content.Context;
-import android.os.Build;
 import android.os.NetworkOnMainThreadException;
 
 import androidx.annotation.NonNull;
@@ -15,12 +14,10 @@ import com.nextcloud.android.sso.model.SingleSignOnAccount;
 import org.json.JSONException;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;
@@ -50,14 +47,12 @@ import static org.junit.Assert.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(sdk = {Build.VERSION_CODES.P})
 public class NotesRepositoryTest {
 
     @Rule

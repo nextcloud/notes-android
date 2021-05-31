@@ -1,23 +1,19 @@
 package it.niedermann.owncloud.notes.persistence.sync;
 
 import android.graphics.Color;
-import android.os.Build;
 
 import com.google.gson.JsonParser;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
-import it.niedermann.owncloud.notes.persistence.sync.CapabilitiesDeserializer;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(sdk = {Build.VERSION_CODES.P})
 public class CapabilitiesDeserializerTest {
 
     private final CapabilitiesDeserializer deserializer = new CapabilitiesDeserializer();
