@@ -26,7 +26,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(sdk = {Build.VERSION_CODES.P})
 public class GridItemDecorationTest {
 
     private final ItemAdapter itemAdapter = mock(ItemAdapter.class);

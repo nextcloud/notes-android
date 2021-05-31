@@ -40,7 +40,6 @@ import static org.mockito.Mockito.when;
 
 @SuppressWarnings("CallToThreadRun")
 @RunWith(RobolectricTestRunner.class)
-@Config(sdk = {Build.VERSION_CODES.P})
 public class NotesServerSyncTaskTest {
 
     @Rule
