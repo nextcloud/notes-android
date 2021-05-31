@@ -1,7 +1,6 @@
 package it.niedermann.owncloud.notes.main.items.grid;
 
 import android.graphics.Rect;
-import android.os.Build;
 import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,7 +9,6 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import java.util.Arrays;
 

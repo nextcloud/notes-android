@@ -1,7 +1,6 @@
 package it.niedermann.owncloud.notes.persistence;
 
 import android.database.sqlite.SQLiteConstraintException;
-import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
@@ -14,7 +13,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import java.util.Calendar;
 import java.util.List;

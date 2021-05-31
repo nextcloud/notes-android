@@ -1,16 +1,13 @@
 package it.niedermann.owncloud.notes.persistence.sync;
 
 import android.graphics.Color;
-import android.os.Build;
 
 import com.google.gson.JsonParser;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
-import it.niedermann.owncloud.notes.persistence.sync.CapabilitiesDeserializer;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 
 import static org.junit.Assert.assertEquals;

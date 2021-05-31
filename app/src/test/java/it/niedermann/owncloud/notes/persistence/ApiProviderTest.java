@@ -1,7 +1,5 @@
 package it.niedermann.owncloud.notes.persistence;
 
-import android.os.Build;
-
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.test.core.app.ApplicationProvider;
 
@@ -12,7 +10,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import it.niedermann.owncloud.notes.persistence.sync.NotesAPI;
 import it.niedermann.owncloud.notes.persistence.sync.OcsAPI;
