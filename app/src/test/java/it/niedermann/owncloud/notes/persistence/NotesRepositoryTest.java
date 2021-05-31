@@ -177,7 +177,7 @@ public class NotesRepositoryTest {
         localNote.setId(99);
         final Note createdNoteFromLocal = repo.addNote(account.getId(), localNote);
         assertEquals(LOCAL_EDITED, createdNoteFromLocal.getStatus());
-        assertEquals("MyContent", createdNoteFromLocal.getExcerpt());
+        assertEquals("MyCodntent", createdNoteFromLocal.getExcerpt());
 
         final Note createdNoteFromRemote = repo.addNote(account.getId(), new Note(null, Calendar.getInstance(), "Fancy Title", "MyContent", "Samples", false, "123"));
         assertEquals(VOID, createdNoteFromRemote.getStatus());
