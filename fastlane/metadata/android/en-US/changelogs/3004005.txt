@@ -1,0 +1,1 @@
+- 🔒 Remove content of notes and search terms from LogCat (#1243)
