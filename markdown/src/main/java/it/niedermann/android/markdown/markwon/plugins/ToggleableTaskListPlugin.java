@@ -71,10 +71,7 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
                     taskListSpan = null;
                 }
 
-                Log.i(TAG, visitor.builder().subSequence(length, visitor.builder().length()).toString());
-                int content = TaskListContextVisitor.contentLength(node);
-                Log.i(TAG, "content: " + content + ", '" + visitor.builder().subSequence(length, length + content) + "'");
-
+                final int content = TaskListContextVisitor.contentLength(node);
                 if (content > 0 && taskListSpan != null) {
                     // maybe additionally identify this task list (for persistence)
                     visitor.builder().setSpan(

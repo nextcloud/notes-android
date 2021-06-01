@@ -36,7 +36,6 @@ public class ToggleTaskListSpan extends ClickableSpan {
         if(enabled.get()) {
             span.setDone(!span.isDone());
             widget.invalidate();
-            Log.v(TAG, "task-list click, isDone: " + span.isDone() + ", content: '" + content + "'");
 
             // it must be a TextView
             final TextView textView = (TextView) widget;
