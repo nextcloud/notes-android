@@ -154,7 +154,7 @@
     <string-array name="darkmode_entries">
         <item>明るい</item>
         <item>暗い</item>
-        <item>既定</item>
+        <item>システムのデフォルト</item>
     </string-array>
 
     <plurals name="ab_selected">

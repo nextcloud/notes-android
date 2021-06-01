@@ -12,6 +12,7 @@
     <string name="action_sorting_method">Järjestämistapa</string>
     <string name="simple_cancel">Peruuta</string>
     <string name="simple_edit">Muokkaa</string>
+    <string name="simple_remove">Poista</string>
     <string name="action_edit_save">Tallenna</string>
     <string name="simple_about">Tietoja</string>
     <string name="simple_link">Linkki</string>
@@ -42,10 +43,15 @@
     <string name="settings_font_title">Tasalevyinen fontti</string>
     <string name="settings_font_size">Fontin koko</string>
     <string name="settings_wifi_only">Synkronoi vain wifi-yhteydellä</string>
+    <string name="settings_lock">Sovelluksen lukitus (Beta)</string>
+    <string name="settings_lock_summary">Laitteen valtuudet</string>
     <string name="settings_background_sync">Taustasynkronointi</string>
+    <string name="settings_prevent_screen_capture">Estä ruudunkaappaus</string>
+
     <string name="error_sync">Synkronointi epäonnistui: %1$s</string>
     <string name="error_synchronization">Synkronointi epäonnistui</string>
     <string name="error_no_network">Ei verkkoyhteyttä</string>
+    <string name="error_maintenance_mode">Palvelin on huoltotilassa</string>
     <string name="error_unknown">Tapahtui tuntematon virhe.</string>
 
     <string name="about_version_title">Versio</string>
@@ -103,12 +109,14 @@
     <string name="simple_more">Lisää</string>
     <string name="simple_move">Siirrä</string>
     <string name="category_readonly">Vain luku</string>
+    <string name="no_category">Ei luokkaa</string>
     <string name="add_category">Lisää %1$s</string>
     <string name="simple_checkbox">Valintaruutu</string>
     <string name="unlock_notes">Avaa muistiinpanojen lukitus</string>
     <string name="error_dialog_title">Voi ei - Mitä nyt? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Yritä pakottaa sovelluksen sulkeminen ja käynnistä se uudelleen. Nextcloud-sovellukseen on saattanut olla virheellinen yhteys.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Jos ongelma jatkuu, yritä tyhjentää sekä Nextcloud- että Nextcloud Notes-sovellusten tallennustilat ratkaistaksesi ongelman.</string>
+    <string name="error_dialog_tip_clear_storage">Voit tyhjentää tallennustilan avaamalla sovelluksen tiedot ja valitsemalla Tallennustila → Tyhjennä tallennustila. Tämä poistaa kaikki synkronoimattomat muistiinpanot!</string>
     <string name="error_dialog_tip_files_outdated">Nextcloud-sovelluksesi on vanhentunut. Lataa uusin version Play Storesta tai F-Droidista.</string>
     <string name="error_dialog_tip_files_force_stop">Nextcloud-sovelluksessasi vaikuttaa olevan jokin ongelma. Yritä pakottaa sekä Nextcloud- että Nextcloud Notes-sovelluksen lopetus.</string>
     <string name="error_dialog_tip_files_delete_storage">Jos pakotettu lopettaminen ei auta, voit yrittää tyhjentää sovelluksien tallennustilan.</string>
@@ -128,7 +136,9 @@
     <string name="append_to_note">Lisää muistiinpanoon</string>
     <string name="change_note_title">Muuta muistinpanon otsikkoa</string>
     <string name="menu_edit_title">Muokkaa otsikkoa</string>
+    <string name="settings_gridview">Ruudukkonäkymä</string>
     <string name="simple_security">Tietoturva</string>
+    <string name="appearance_and_behavior">Ulkoasu ja toiminta</string>
     <string name="simple_synchronization">Synkronointi</string>
     <string name="manage_accounts">Tilien hallinta</string>
     <string name="action_formatting_help">Muotoilu</string>
@@ -172,6 +182,7 @@
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
     <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Kontekstiin perustuva muotoilu</string>
     <string name="formatting_help_cbf_body_1">Muistiinpanosovelluksen päätavoitteena on tarjota häiriötön työkalu. Voit silti muotoilla tekstiä Markdown-syntaksilla. Moniin alla mainittuihin esimerkkeihin on pikanäppäimet, jotta voit kirjoittaa muistiinpanoja ilman muotoilumerkkien kirjoittamista.</string>
@@ -209,11 +220,29 @@
     <string name="formatting_help_code_body_2">Markdown tukee myös koodin aitaamista, jolla useamman rivin koodi näytetään sisentämättömänä:</string>
     <string name="formatting_help_code_body_3">Ja jos haluat käyttää syntaksin korostusta, sisällytä ohjelmointikieli:</string>
 
+    <string name="formatting_help_tables_title">Taulukot</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">Sarake %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Arvo %1d</string>
+
+    <string name="formatting_help_images_title">Kuvat</string>
     <string name="simple_other">Muu</string>
     <string name="sort_last_modified">Järjestä muokkauspäiväyksen mukaan</string>
     <string name="sort_alphabetically">Järjestä aakkosjärjestyksen mukaan</string>
     <string name="error_action_open_battery_settings">Akkuasetukset</string>
     <string name="error_action_open_deck_info">Avaa sovelluksen tiedot</string>
     <string name="error_action_open_network">Verkkoasetukset</string>
+    <string name="no_account_configured_yet">Tiliä ei ole vielä asetettu</string>
     <string name="no_other_accounts">Et ole vielä määrittänyt muita tilejä.</string>
-    </resources>
+    <string name="choose_account">Valitse tili</string>
+    <plurals name="remove_account_message">
+        <item quantity="one">Tilin %1$s poistamalla poistetaan myös yksi synkronoimaton muutos, jota ei voida jälkeenpäin palauttaa.</item>
+        <item quantity="other">Tilin %1$s poistamalla poistetaan myös %2$d synkronoimatonta muutosta, joita ei voida jälkeenpäin palauttaa.</item>
+    </plurals>
+    <string name="remove_account">Poista %1$s</string>
+
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Sinun tulee olla yhteydessä internetiin, jotta voit lisätä tilin.</string>
+    <string name="simple_next">Seuraava</string>
+    <string name="simple_prev">Edellinen</string>
+</resources>
