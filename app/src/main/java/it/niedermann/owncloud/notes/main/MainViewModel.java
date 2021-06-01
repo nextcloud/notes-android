@@ -28,6 +28,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import it.niedermann.owncloud.notes.BuildConfig;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.exception.IntendedOfflineException;
@@ -216,7 +217,7 @@ public class MainViewModel extends AndroidViewModel {
                     } else {
                         Log.v(TAG, "[getNotesListLiveData] - selectedCategory: " + selectedCategory);
                         return switchMap(getSearchTerm(), searchTerm -> {
-                            Log.v(TAG, "[getNotesListLiveData] - searchTerm: " + searchTerm);
+                            Log.v(TAG, "[getNotesListLiveData] - searchTerm: " + (BuildConfig.DEBUG ? "******" : searchTerm));
                             return switchMap(getCategorySortingMethodOfSelectedCategory(), sortingMethod -> {
                                 final long accountId = currentAccount.getId();
                                 final String searchQueryOrWildcard = searchTerm == null ? "%" : "%" + searchTerm.trim() + "%";
@@ -490,7 +491,7 @@ public class MainViewModel extends AndroidViewModel {
 
     public LiveData<Note> moveNoteToAnotherAccount(Account account, long noteId) {
         return switchMap(repo.getNoteById$(noteId), (note) -> {
-            Log.v(TAG, "[moveNoteToAnotherAccount] - note: " + note);
+            Log.v(TAG, "[moveNoteToAnotherAccount] - note: " + (BuildConfig.DEBUG ? note : note.getTitle()));
             return repo.moveNoteToAnotherAccount(account, note);
         });
     }

@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import it.niedermann.owncloud.notes.BuildConfig;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.sync.NotesAPI;
@@ -113,7 +114,7 @@ abstract class NotesServerSyncTask extends Thread {
         boolean success = true;
         final List<Note> notes = repo.getLocalModifiedNotes(localAccount.getId());
         for (Note note : notes) {
-            Log.d(TAG, "   Process Local Note: " + note);
+            Log.d(TAG, "   Process Local Note: " + (BuildConfig.DEBUG ? note : note.getTitle()));
             try {
                 Note remoteNote;
                 switch (note.getStatus()) {
@@ -220,7 +221,7 @@ abstract class NotesServerSyncTask extends Thread {
             final Set<Long> remoteIDs = new HashSet<>();
             // pull remote changes: update or create each remote note
             for (Note remoteNote : remoteNotes) {
-                Log.v(TAG, "   Process Remote Note: " + remoteNote);
+                Log.v(TAG, "   Process Remote Note: " + (BuildConfig.DEBUG ? remoteNote : remoteNote.getTitle()));
                 remoteIDs.add(remoteNote.getRemoteId());
                 if (remoteNote.getModified() == null) {
                     Log.v(TAG, "   ... unchanged");
@@ -231,7 +232,7 @@ abstract class NotesServerSyncTask extends Thread {
                         repo.updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
                                 localId, remoteNote.getModified().getTimeInMillis(), remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getCategory(), remoteNote.getETag(), remoteNote.getContent(), generateNoteExcerpt(remoteNote.getContent(), remoteNote.getTitle()));
                     } else {
-                        Log.e(TAG, "Tried to update note from server, but local id of note is null. " + remoteNote);
+                        Log.e(TAG, "Tried to update note from server, but local id of note is null. " + (BuildConfig.DEBUG ? remoteNote : remoteNote.getTitle()));
                     }
                 } else {
                     Log.v(TAG, "   ... create");

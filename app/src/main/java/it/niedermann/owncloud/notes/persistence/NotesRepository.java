@@ -42,6 +42,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import it.niedermann.android.sharedpreferences.SharedPreferenceIntLiveData;
+import it.niedermann.owncloud.notes.BuildConfig;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
@@ -562,7 +563,7 @@ public class NotesRepository {
                                         .build());
                             } else {
                                 // Prevent crash https://github.com/stefan-niedermann/nextcloud-notes/issues/613
-                                Log.e(TAG, "shortLabel cannot be empty " + note);
+                                Log.e(TAG, "shortLabel cannot be empty " + (BuildConfig.DEBUG ? note : note.getTitle()));
                             }
                         }
                         Log.d(TAG, "Update dynamic shortcuts");
