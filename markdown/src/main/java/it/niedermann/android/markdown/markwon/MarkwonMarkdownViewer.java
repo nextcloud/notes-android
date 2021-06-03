@@ -25,8 +25,7 @@ import io.noties.markwon.ext.strikethrough.StrikethroughPlugin;
 import io.noties.markwon.ext.tables.TableAwareMovementMethod;
 import io.noties.markwon.ext.tables.TablePlugin;
 import io.noties.markwon.ext.tasklist.TaskListPlugin;
-import io.noties.markwon.image.DefaultDownScalingMediaDecoder;
-import io.noties.markwon.image.ImagesPlugin;
+import io.noties.markwon.image.glide.GlideImagesPlugin;
 import io.noties.markwon.inlineparser.MarkwonInlineParserPlugin;
 import io.noties.markwon.linkify.LinkifyPlugin;
 import io.noties.markwon.movement.MovementMethodPlugin;
@@ -39,6 +38,7 @@ import io.noties.prism4j.Prism4j;
 import io.noties.prism4j.annotations.PrismBundle;
 import it.niedermann.android.markdown.MarkdownEditor;
 import it.niedermann.android.markdown.MarkdownUtil;
+import it.niedermann.android.markdown.markwon.plugins.CustomGlideStore;
 import it.niedermann.android.markdown.markwon.plugins.LinkClickInterceptorPlugin;
 import it.niedermann.android.markdown.markwon.plugins.NextcloudMentionsPlugin;
 import it.niedermann.android.markdown.markwon.plugins.SearchHighlightPlugin;
@@ -90,7 +90,7 @@ public class MarkwonMarkdownViewer extends AppCompatTextView implements Markdown
                 .usePlugin(LinkifyPlugin.create(true))
                 .usePlugin(MovementMethodPlugin.create(TableAwareMovementMethod.create()))
                 .usePlugin(LinkClickInterceptorPlugin.create())
-                .usePlugin(ImagesPlugin.create(plugin -> plugin.defaultMediaDecoder(DefaultDownScalingMediaDecoder.create(context.getResources().getDisplayMetrics().widthPixels, 0))))
+                .usePlugin(GlideImagesPlugin.create(new CustomGlideStore(context)))
                 .usePlugin(SoftBreakAddsNewLinePlugin.create())
                 .usePlugin(SyntaxHighlightPlugin.create(prism4j, prism4jTheme))
                 .usePlugin(new ToggleableTaskListPlugin((toggledCheckboxPosition, newCheckedState) -> {
