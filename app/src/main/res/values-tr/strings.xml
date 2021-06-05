@@ -2,9 +2,9 @@
 <resources>
 
     <string name="app_name">Notlar</string>
-    <string name="app_name_long">Nextcloud Notlar</string>
+    <string name="app_name_long">Nextcloud Notes</string>
     <string name="label_all_notes">Tum notlar</string>
-    <string name="label_favorites">Sık Kullanılanlar</string>
+    <string name="label_favorites">Sık kullanılanlar</string>
     <string name="action_create">Not ekle</string>
     <string name="welcome_text">%1$s uygulamasına hoş geldiniz</string>
     <string name="action_settings">Ayarlar</string>
@@ -23,7 +23,7 @@
     <string name="action_uncategorized">Kategorisiz</string>
     <string name="menu_delete">Sil</string>
     <string name="menu_change_category">Kategori</string>
-    <string name="menu_favorite">Sık Kullanılanlara Ekle</string>
+    <string name="menu_favorite">Sık kullanılanlara ekle</string>
     <string name="menu_preview">Ön izleme</string>
     <string name="menu_share">Paylaş</string>
 
@@ -41,7 +41,7 @@
 
     <string name="settings_note_mode">Notların görüntülenme kipi</string>
     <string name="settings_theme_title">Tema</string>
-    <string name="settings_font_title">Sabit aralıklı yazı tipi</string>
+    <string name="settings_font_title">Sabit aralıklı yazı türü</string>
     <string name="settings_font_size">Yazı boyutu</string>
     <string name="settings_wifi_only">Yalnız Wi-Fi ile eşitlensin</string>
     <string name="settings_lock">Uygulama kilidi (Beta)</string>
@@ -69,11 +69,11 @@
     <string name="about_translate_title">Çevirin</string>
     <string name="about_translate">Transifex üzerindeki Nextcloud çeviri takımına katılarak uygulamanın çevrilmesine yardımcı olabilirsiniz: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Uygulama lisansı</string>
-    <string name="about_app_license">Bu uygulama GNU GENEL KAMU LİSANSI v3+ koşulları altında dağıtılmaktadır.</string>
+    <string name="about_app_license">Bu uygulama GNU GENEL KAMU LİSANSI 3 sürüm ve üzeri koşulları altında dağıtılmaktadır.</string>
     <string name="about_app_license_button">Lisansa bakın</string>
     <string name="about_icons_disclaimer_title">Simgeler</string>
     <string name="about_icons_disclaimer">&lt;p>Özgün simgeyi yapan %1$s&lt;/p>&lt;p>Bu uygulamanın kullandığı tüm diğer simgeler Google Inc. tarafından yapılmış ve Creative Commons Lisansı koşulları altında dağıtılan &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> kitaplığından sağlanmıştır.&lt;/p></string>
-    <string name="about_credits_tab_title">Emeği Geçenler</string>
+    <string name="about_credits_tab_title">Emeği geçenler</string>
     <string name="about_contribution_tab_title">Katkı</string>
     <string name="about_license_tab_title">Lisans</string>
 
@@ -81,7 +81,7 @@
     <string name="widget_note_list_placeholder">Herhangi bir not yok</string>
     <string name="widget_single_note_title">Tek not</string>
     <string name="widget_single_note_placeholder_tv">Not bulunamadı</string>
-    <string name="widget_create_note">Not Ekle</string>
+    <string name="widget_create_note">Not ekle</string>
     <string name="widget_not_logged_in">Bu pano bileşenini kullanabilmek için lütfen Notlar üzerinde oturum açın</string>
     <string name="widget_entry_fav_contentDescription">Sık kullanılan ögeler için kullanılacak yıldız simgesi</string>
 
@@ -107,7 +107,7 @@
     <string name="account_already_imported">Hesap zaten içe aktarılmış</string>
     <string name="no_notes_yet">Henüz bir not yok</string>
     <string name="no_notes_yet_description">Yeni bir not eklemek için + tuşuna basın</string>
-    <string name="simple_more">Daha Fazla</string>
+    <string name="simple_more">Diğer</string>
     <string name="simple_move">Taşı</string>
     <string name="category_readonly">Salt okunur</string>
     <string name="no_category">Kategori yok</string>
@@ -159,7 +159,7 @@
     <string-array name="darkmode_entries">
         <item>Açık</item>
         <item>Koyu</item>
-        <item>Sistem Varsayılanı</item>
+        <item>Sistem varsayılanı</item>
     </string-array>
 
     <plurals name="ab_selected">
