@@ -183,7 +183,18 @@
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Định dạng dựa trên ngữ cảnh</string>
     <string name="formatting_help_cbf_body_1">Một mục đích thiết kế lớn của ứng dụng Ghi chú là để cung cấp một công cụ không có sự xao nhãng. Tuy nhiên, bạn sẽ có thể định dạng văn bản của bạn bằng Markdown. Đối với các ví dụ khác nhau được nhắc đến dưới đây, bạn có thể sử dụng các lối tắt để bạn có thể định dạng các ghi chú mà không đánh các mã ở dưới.</string>
+    <string name="formatting_help_cbf_body_2">Chỉ cần chọn một phạm vi văn bản hoặc chạmvào con trỏ tại bất kỳ vị trí nào và bạn sẽ thấy một menu popup chứa các mục %4$s hoặc %5$s bên cạnh các mục mặc định %1$s, %2$s, %3$s.</string>
+
     <string name="formatting_help_text_title">Văn bản</string>
+    <string name="formatting_help_text_body">Việc làm cho một số từ trở nên %1$sđậm%1$s và các từ khác %2$snghiêng%2$s bằng Markdown là rất dễ. Bạn có thể %3$sgạch bỏ%3$s một số từ và thậm chí là [liên kết đến Nextcloud](https://nextcloud.com).</string>
+
+    <string name="formatting_help_lists_title">Danh sách</string>
+    <string name="formatting_help_lists_body_1">Đôi khi bạn muốn các danh sách đánh số:</string>
+    <string name="formatting_help_lists_body_2">Một</string>
+    <string name="formatting_help_lists_body_3">Hai</string>
+    <string name="formatting_help_lists_body_4">Ba</string>
+    <string name="formatting_help_lists_body_5">Đôi khi bạn muốn gạch đầu dòng:</string>
+    <string name="formatting_help_lists_body_6">Bắt đầu một dòng bằng dấu gạch ngang</string>
     <string name="formatting_help_lists_body_8">Như thế này</string>
     <string name="formatting_help_lists_body_9">Và thế này</string>
 
@@ -196,6 +207,23 @@
     <string name="formatting_help_tables_value">Giá trị %1d</string>
 
     <string name="formatting_help_images_title">Hình ảnh</string>
+    <string name="formatting_help_images_alt">Hình ảnh đẹp</string>
+
     <string name="simple_other">Khác</string>
+    <string name="sort_last_modified">Sắp xếp theo ngày sửa đổi</string>
+    <string name="sort_alphabetically">Sắp xếp theo bảng chữ cái</string>
+    <string name="error_action_open_battery_settings">Cài đặt pin</string>
     <string name="error_action_open_deck_info">Mở Thông tin ứng dụng</string>
-    </resources>
+    <string name="error_action_open_network">Cài đặt mạng</string>
+    <string name="no_account_configured_yet">Chưa có tài khoản nào được thiết lập</string>
+    <string name="no_other_accounts">Bạn chưa thiết lập tài khoản nào khác.</string>
+    <string name="choose_account">Chọn tài khoản</string>
+    <plurals name="remove_account_message">
+        <item quantity="other">Việc xoá tài khoản %1$s cũng sẽ xoá %2$d thay đổi chưa được đồng bộ hoá và không thể phục hồi.</item>
+    </plurals>
+    <string name="remove_account">Xoá %1$s</string>
+
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Bạn phải có kết nối internet để thêm tài khoản.</string>
+    <string name="simple_next">Tiếp</string>
+    <string name="simple_prev">Trước</string>
+</resources>
