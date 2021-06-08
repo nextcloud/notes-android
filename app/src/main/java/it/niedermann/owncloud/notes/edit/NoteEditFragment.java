@@ -2,7 +2,9 @@ package it.niedermann.owncloud.notes.edit;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -18,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -59,6 +62,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
         }
     };
     private TextWatcher textWatcher;
+    private boolean keyboardShown = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -138,6 +142,10 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     public void onResume() {
         super.onResume();
         binding.editContent.addTextChangedListener(textWatcher);
+
+        if(keyboardShown){
+            Toast.makeText(requireContext(),"OPEN",Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -171,6 +179,15 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
         super.onPause();
         binding.editContent.removeTextChangedListener(textWatcher);
         cancelTimers();
+
+        final View parentView = ((ViewGroup) requireActivity().findViewById(android.R.id.content)).getChildAt(0);
+        final int defaultKeyboardHeightDP = 100;
+        final int EstimatedKeyboardDP = defaultKeyboardHeightDP + (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? 48 : 0);
+        final Rect rect = new Rect();
+        int estimatedKeyboardHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, EstimatedKeyboardDP, parentView.getResources().getDisplayMetrics());
+        parentView.getWindowVisibleDisplayFrame(rect);
+        int heightDiff = parentView.getRootView().getHeight() - (rect.bottom - rect.top);
+        keyboardShown = heightDiff >= estimatedKeyboardHeight;
     }
 
     private void cancelTimers() {
