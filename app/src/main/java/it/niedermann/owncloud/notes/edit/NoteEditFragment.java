@@ -32,6 +32,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.FragmentNoteEditBinding;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
+import it.niedermann.owncloud.notes.shared.util.DisplayUtils;
 
 import static androidx.core.view.ViewCompat.isAttachedToWindow;
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.getFontSizeFromPreferences;
@@ -186,13 +187,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
         cancelTimers();
 
         final View parentView = ((ViewGroup) requireActivity().findViewById(android.R.id.content)).getChildAt(0);
-        final int defaultKeyboardHeightDP = 100;
-        final int EstimatedKeyboardDP = defaultKeyboardHeightDP + (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? 48 : 0);
-        final Rect rect = new Rect();
-        int estimatedKeyboardHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, EstimatedKeyboardDP, parentView.getResources().getDisplayMetrics());
-        parentView.getWindowVisibleDisplayFrame(rect);
-        int heightDiff = parentView.getRootView().getHeight() - (rect.bottom - rect.top);
-        keyboardShown = heightDiff >= estimatedKeyboardHeight;
+        keyboardShown = DisplayUtils.isSoftKeyboardVisible(parentView);
     }
 
     private void cancelTimers() {

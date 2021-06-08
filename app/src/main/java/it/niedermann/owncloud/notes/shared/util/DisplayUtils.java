@@ -3,10 +3,14 @@ package it.niedermann.owncloud.notes.shared.util;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Rect;
+import android.os.Build;
 import android.text.Spannable;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.style.MetricAffectingSpan;
+import android.util.TypedValue;
+import android.view.View;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -51,5 +55,22 @@ public class DisplayUtils {
             icon = R.drawable.ic_work_grey600_24dp;
         }
         return new NavigationItem.CategoryNavigationItem("category:" + counter.getCategory(), counter.getCategory(), counter.getTotalNotes(), icon, counter.getAccountId(), counter.getCategory());
+    }
+
+    /**
+     *  Android does not provide a way to get keyboard visibility prior to API 30 so we use a workaround
+     * @param parentView View
+     * @return keyboardVisibility Boolean
+     */
+    public static boolean isSoftKeyboardVisible(View parentView){
+        //Arbitrary keyboard height
+        final int defaultKeyboardHeightDP = 100;
+        final int EstimatedKeyboardDP = defaultKeyboardHeightDP + (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? 48 : 0);
+        final Rect rect = new Rect();
+
+        int estimatedKeyboardHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, EstimatedKeyboardDP, parentView.getResources().getDisplayMetrics());
+        parentView.getWindowVisibleDisplayFrame(rect);
+        int heightDiff = parentView.getRootView().getHeight() - (rect.bottom - rect.top);
+        return heightDiff >= estimatedKeyboardHeight;
     }
 }
