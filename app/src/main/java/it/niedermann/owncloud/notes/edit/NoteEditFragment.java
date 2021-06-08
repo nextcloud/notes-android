@@ -141,7 +141,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
         super.onResume();
         binding.editContent.addTextChangedListener(textWatcher);
 
-        if(keyboardShown){
+        if (keyboardShown) {
             openSoftKeyboard();
         }
     }
@@ -163,7 +163,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
         }
     }
 
-    private void openSoftKeyboard(){
+    private void openSoftKeyboard() {
         binding.editContent.postDelayed(() -> {
             binding.editContent.requestFocus();
 
@@ -174,7 +174,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
                 Log.e(TAG, InputMethodManager.class.getSimpleName() + " is null.");
             }
             //Without a small delay the keyboard does not show reliably
-        },100);
+        }, 100);
     }
 
     @Override

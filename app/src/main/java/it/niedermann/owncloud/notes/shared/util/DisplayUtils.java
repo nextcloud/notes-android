@@ -58,11 +58,12 @@ public class DisplayUtils {
     }
 
     /**
-     *  Android does not provide a way to get keyboard visibility prior to API 30 so we use a workaround
+     * Android does not provide a way to get keyboard visibility prior to API 30 so we use a workaround
+     *
      * @param parentView View
      * @return keyboardVisibility Boolean
      */
-    public static boolean isSoftKeyboardVisible(View parentView){
+    public static boolean isSoftKeyboardVisible(View parentView) {
         //Arbitrary keyboard height
         final int defaultKeyboardHeightDP = 100;
         final int EstimatedKeyboardDP = defaultKeyboardHeightDP + (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? 48 : 0);
