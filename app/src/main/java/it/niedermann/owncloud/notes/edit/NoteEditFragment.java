@@ -144,15 +144,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
         binding.editContent.addTextChangedListener(textWatcher);
 
         if(keyboardShown){
-            Toast.makeText(requireContext(),"OPEN",Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    protected void onNoteLoaded(Note note) {
-        super.onNoteLoaded(note);
-        if (TextUtils.isEmpty(note.getContent())) {
-            binding.editContent.post(() -> {
+            binding.editContent.postDelayed(() -> {
                 binding.editContent.requestFocus();
 
                 final InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -161,7 +153,24 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
                 } else {
                     Log.e(TAG, InputMethodManager.class.getSimpleName() + " is null.");
                 }
-            });
+            },100);
+        }
+    }
+
+    @Override
+    protected void onNoteLoaded(Note note) {
+        super.onNoteLoaded(note);
+        if (TextUtils.isEmpty(note.getContent())) {
+            binding.editContent.postDelayed(() -> {
+               binding.editContent.requestFocus();
+
+                final InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.showSoftInput(binding.editContent, InputMethodManager.SHOW_IMPLICIT);
+                } else {
+                    Log.e(TAG, InputMethodManager.class.getSimpleName() + " is null.");
+                }
+            },100);
         }
 
         binding.editContent.setMarkdownString(note.getContent());
