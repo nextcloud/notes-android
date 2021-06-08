@@ -144,16 +144,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
         binding.editContent.addTextChangedListener(textWatcher);
 
         if(keyboardShown){
-            binding.editContent.postDelayed(() -> {
-                binding.editContent.requestFocus();
-
-                final InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                if (imm != null) {
-                    imm.showSoftInput(binding.editContent, InputMethodManager.SHOW_IMPLICIT);
-                } else {
-                    Log.e(TAG, InputMethodManager.class.getSimpleName() + " is null.");
-                }
-            },100);
+            openSoftKeyboard();
         }
     }
 
@@ -161,16 +152,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     protected void onNoteLoaded(Note note) {
         super.onNoteLoaded(note);
         if (TextUtils.isEmpty(note.getContent())) {
-            binding.editContent.postDelayed(() -> {
-               binding.editContent.requestFocus();
-
-                final InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                if (imm != null) {
-                    imm.showSoftInput(binding.editContent, InputMethodManager.SHOW_IMPLICIT);
-                } else {
-                    Log.e(TAG, InputMethodManager.class.getSimpleName() + " is null.");
-                }
-            },100);
+            openSoftKeyboard();
         }
 
         binding.editContent.setMarkdownString(note.getContent());
@@ -181,6 +163,20 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
         if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
             binding.editContent.setTypeface(Typeface.MONOSPACE);
         }
+    }
+
+    private void openSoftKeyboard(){
+        binding.editContent.postDelayed(() -> {
+            binding.editContent.requestFocus();
+
+            final InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.showSoftInput(binding.editContent, InputMethodManager.SHOW_IMPLICIT);
+            } else {
+                Log.e(TAG, InputMethodManager.class.getSimpleName() + " is null.");
+            }
+            //Without a small delay the keyboard does not show reliably
+        },100);
     }
 
     @Override
