@@ -11,11 +11,14 @@ import android.text.TextUtils;
 import android.text.style.MetricAffectingSpan;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.WindowInsets;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import java.util.Collection;
 import java.util.List;
@@ -58,12 +61,21 @@ public class DisplayUtils {
     }
 
     /**
-     * Android does not provide a way to get keyboard visibility prior to API 30 so we use a workaround
+     * Detect if the soft keyboard is open.
+     * On API prior to 30 we fall back to workaround which might be less reliable
      *
      * @param parentView View
      * @return keyboardVisibility Boolean
      */
-    public static boolean isSoftKeyboardVisible(View parentView) {
+    public static boolean isSoftKeyboardVisible(@NonNull View parentView) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            WindowInsetsCompat insets = ViewCompat.getRootWindowInsets(parentView);
+            if(insets != null){
+                return insets.isVisible(WindowInsets.Type.ime());
+            }
+        }
+        //Fall Back to workaround
+
         //Arbitrary keyboard height
         final int defaultKeyboardHeightDP = 100;
         final int EstimatedKeyboardDP = defaultKeyboardHeightDP + (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? 48 : 0);
