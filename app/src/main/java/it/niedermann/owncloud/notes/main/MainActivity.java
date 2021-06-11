@@ -49,6 +49,8 @@ import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import java.net.HttpURLConnection;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.R;
@@ -103,6 +105,8 @@ import static it.niedermann.owncloud.notes.shared.util.SSOUtil.askForNewAccount;
 public class MainActivity extends LockedActivity implements NoteClickListener, AccountPickerListener, AccountSwitcherListener, CategoryDialogFragment.CategoryDialogListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
+
+    protected final ExecutorService executor = Executors.newCachedThreadPool();
 
     protected MainViewModel mainViewModel;
     private CategoryViewModel categoryViewModel;
@@ -164,14 +168,14 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             if (count == 0) {
                 startActivityForResult(new Intent(this, ImportAccountActivity.class), ImportAccountActivity.REQUEST_CODE_IMPORT_ACCOUNT);
             } else {
-                new Thread(() -> {
+                executor.submit(() -> {
                     try {
                         final Account account = mainViewModel.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
                         runOnUiThread(() -> mainViewModel.postCurrentAccount(account));
                     } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
                         runOnUiThread(() -> ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()));
                     }
-                }).start();
+                });
             }
         });
 
@@ -649,7 +653,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                 try {
                     AccountImporter.onActivityResult(requestCode, resultCode, data, this, (ssoAccount) -> {
                         CapabilitiesWorker.update(this);
-                        new Thread(() -> {
+                        executor.submit(() -> {
                             Log.i(TAG, "Added account: " + "name:" + ssoAccount.name + ", " + ssoAccount.url + ", userId" + ssoAccount.userId);
                             try {
                                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
@@ -658,11 +662,11 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                 mainViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities, displayName, new IResponseCallback<Account>() {
                                     @Override
                                     public void onSuccess(Account result) {
-                                        new Thread(() -> {
+                                        executor.submit(() -> {
                                             Log.i(TAG, capabilities.toString());
                                             final Account a = mainViewModel.getLocalAccountByAccountName(ssoAccount.name);
                                             runOnUiThread(() -> mainViewModel.postCurrentAccount(a));
-                                        }).start();
+                                        });
                                     }
 
                                     @Override
@@ -691,7 +695,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                     });
                                 }
                             }
-                        }).start();
+                        });
                     });
                 } catch (AccountImportCancelledException e) {
                     Log.i(TAG, "AccountImport has been cancelled.");

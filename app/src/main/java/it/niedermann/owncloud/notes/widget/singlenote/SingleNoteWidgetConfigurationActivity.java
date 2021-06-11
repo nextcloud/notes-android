@@ -52,7 +52,7 @@ public class SingleNoteWidgetConfigurationActivity extends MainActivity {
 
         int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
 
-        new Thread(() -> {
+        executor.submit(() -> {
             try {
                 mainViewModel.createOrUpdateSingleNoteWidgetData(
                         new SingleNoteWidgetData(
@@ -71,6 +71,6 @@ public class SingleNoteWidgetConfigurationActivity extends MainActivity {
             } catch (SQLException e) {
                 Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }
-        }).start();
+        });
     }
 }

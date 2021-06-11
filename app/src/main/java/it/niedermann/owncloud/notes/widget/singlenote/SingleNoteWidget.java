@@ -10,6 +10,9 @@ import android.net.Uri;
 import android.util.Log;
 import android.widget.RemoteViews;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.BaseNoteFragment;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
@@ -19,6 +22,7 @@ import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
 public class SingleNoteWidget extends AppWidgetProvider {
 
     private static final String TAG = SingleNoteWidget.class.getSimpleName();
+    private final ExecutorService executor = Executors.newCachedThreadPool();
 
     static void updateAppWidget(Context context, AppWidgetManager awm, int[] appWidgetIds) {
         final Intent templateIntent = new Intent(context, EditNoteActivity.class);
@@ -69,7 +73,7 @@ public class SingleNoteWidget extends AppWidgetProvider {
         final NotesRepository repo = NotesRepository.getInstance(context);
 
         for (int appWidgetId : appWidgetIds) {
-            new Thread(() -> repo.removeSingleNoteWidget(appWidgetId)).start();
+            executor.submit(() -> repo.removeSingleNoteWidget(appWidgetId));
         }
         super.onDeleted(context, appWidgetIds);
     }

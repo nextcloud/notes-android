@@ -33,6 +33,8 @@ import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import it.niedermann.android.util.ColorUtil;
 import it.niedermann.owncloud.notes.R;
@@ -62,6 +64,7 @@ import static java.lang.Boolean.TRUE;
 public abstract class BaseNoteFragment extends BrandedFragment implements CategoryDialogListener, EditTitleListener {
 
     private static final String TAG = BaseNoteFragment.class.getSimpleName();
+    protected final ExecutorService executor = Executors.newCachedThreadPool();
 
     protected static final int MENU_ID_PIN = -1;
     public static final String PARAM_NOTE_ID = "noteId";
@@ -98,7 +101,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new Thread(() -> {
+        executor.submit(() -> {
             try {
                 SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext().getApplicationContext());
                 this.localAccount = repo.getAccountByName(ssoAccount.name);
@@ -143,7 +146,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
             } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
                 e.printStackTrace();
             }
-        }).start();
+        });
         setHasOptionsMenu(true);
     }
 
@@ -214,13 +217,13 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
         if (itemId == R.id.menu_cancel) {
-            new Thread(() -> {
+            executor.submit(() -> {
                 if (originalNote == null) {
                     repo.deleteNoteAndSync(localAccount, note.getId());
                 } else {
                     repo.updateNoteAndSync(localAccount, originalNote, null, null, null);
                 }
-            }).start();
+            });
             listener.close();
             return true;
         } else if (itemId == R.id.menu_delete) {
@@ -239,11 +242,9 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
             showEditTitleDialog();
             return true;
         } else if (itemId == R.id.menu_move) {
-            new Thread(() -> {
-                AccountPickerDialogFragment
-                        .newInstance(new ArrayList<>(repo.getAccounts()), note.getAccountId())
-                        .show(requireActivity().getSupportFragmentManager(), BaseNoteFragment.class.getSimpleName());
-            }).start();
+            executor.submit(() -> AccountPickerDialogFragment
+                    .newInstance(new ArrayList<>(repo.getAccounts()), note.getAccountId())
+                    .show(requireActivity().getSupportFragmentManager(), BaseNoteFragment.class.getSimpleName()));
             return true;
         } else if (itemId == R.id.menu_share) {
             ShareUtil.openShareDialog(requireContext(), note.getTitle(), note.getContent());
@@ -366,10 +367,10 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     public void onTitleEdited(String newTitle) {
         titleModified = true;
         note.setTitle(newTitle);
-        new Thread(() -> {
+        executor.submit(() -> {
             note = repo.updateNoteAndSync(localAccount, note, note.getContent(), newTitle, null);
             requireActivity().runOnUiThread(() -> listener.onNoteUpdated(note));
-        }).start();
+        });
     }
 
     public void moveNote(Account account) {

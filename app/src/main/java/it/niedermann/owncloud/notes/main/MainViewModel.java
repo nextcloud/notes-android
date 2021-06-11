@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 import it.niedermann.owncloud.notes.BuildConfig;
@@ -66,6 +68,8 @@ import static java.net.HttpURLConnection.HTTP_NOT_MODIFIED;
 public class MainViewModel extends AndroidViewModel {
 
     private static final String TAG = MainViewModel.class.getSimpleName();
+
+    private final ExecutorService executor = Executors.newCachedThreadPool();
 
     private final SavedStateHandle state;
 
@@ -391,7 +395,7 @@ public class MainViewModel extends AndroidViewModel {
      * Updates the network status if necessary and pulls the latest {@link Capabilities} of the given {@param localAccount}
      */
     public void synchronizeCapabilities(@NonNull Account localAccount, @NonNull IResponseCallback<Void> callback) {
-        new Thread(() -> {
+        executor.submit(() -> {
             if (!repo.isSyncPossible()) {
                 repo.updateNetworkStatus();
             }
@@ -428,14 +432,14 @@ public class MainViewModel extends AndroidViewModel {
                     callback.onError(new NetworkErrorException("Sync is not possible, because network is not connected."));
                 }
             }
-        }, "SYNC_CAPABILITIES").start();
+        }, "SYNC_CAPABILITIES");
     }
 
     /**
      * Updates the network status if necessary and pulls the latest notes of the given {@param localAccount}
      */
     public void synchronizeNotes(@NonNull Account currentAccount, @NonNull IResponseCallback<Void> callback) {
-        new Thread(() -> {
+        executor.submit(() -> {
             Log.v(TAG, "[synchronize] - currentAccount: " + currentAccount.getAccountName());
             if (!repo.isSyncPossible()) {
                 repo.updateNetworkStatus();
@@ -450,7 +454,7 @@ public class MainViewModel extends AndroidViewModel {
                     callback.onError(new NetworkErrorException("Sync is not possible, because network is not connected."));
                 }
             }
-        }, "SYNC_NOTES").start();
+        }, "SYNC_NOTES");
     }
 
     public LiveData<Boolean> getSyncStatus() {
@@ -554,12 +558,12 @@ public class MainViewModel extends AndroidViewModel {
             } else {
                 Log.v(TAG, "[getNote] - currentAccount: " + currentAccount.getAccountName());
                 final MutableLiveData<List<Note>> notes = new MutableLiveData<>();
-                new Thread(() -> notes.postValue(
+                executor.submit(() -> notes.postValue(
                         ids
                                 .stream()
                                 .map(repo::getNoteById)
                                 .collect(Collectors.toList())
-                )).start();
+                ));
                 return notes;
             }
         });

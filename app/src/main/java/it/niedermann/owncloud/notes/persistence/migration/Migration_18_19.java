@@ -9,9 +9,13 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.bumptech.glide.Glide;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class Migration_18_19 extends Migration {
 
     private static final String TAG = Migration_18_19.class.getSimpleName();
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
     @NonNull
     private final Context context;
 
@@ -27,9 +31,9 @@ public class Migration_18_19 extends Migration {
      */
     @Override
     public void migrate(@NonNull SupportSQLiteDatabase db) {
-        new Thread(() -> {
+        executor.submit(() -> {
             Log.i(TAG, "Clearing Glide disk cache");
             Glide.get(context.getApplicationContext()).clearDiskCache();
-        }).start();
+        });
     }
 }

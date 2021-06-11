@@ -7,6 +7,8 @@ import android.view.View;
 import androidx.annotation.NonNull;
 
 import java.util.Collection;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.function.Function;
 
 public class InterceptedURLSpan extends URLSpan {
@@ -14,6 +16,7 @@ public class InterceptedURLSpan extends URLSpan {
     private static final String TAG = InterceptedURLSpan.class.getSimpleName();
     @NonNull
     private final Collection<Function<String, Boolean>> onLinkClickCallbacks;
+    private final ExecutorService executor = Executors.newCachedThreadPool();
 
     public InterceptedURLSpan(@NonNull Collection<Function<String, Boolean>> onLinkClickCallbacks, String url) {
         super(url);
@@ -23,7 +26,7 @@ public class InterceptedURLSpan extends URLSpan {
     @Override
     public void onClick(View widget) {
         if (onLinkClickCallbacks.size() > 0) {
-            new Thread(() -> {
+            executor.submit(() -> {
                 for (Function<String, Boolean> callback : onLinkClickCallbacks) {
                     try {
                         if (callback.apply(getURL())) {
@@ -34,7 +37,7 @@ public class InterceptedURLSpan extends URLSpan {
                     }
                 }
                 super.onClick(widget);
-            }).start();
+            });
         } else {
             super.onClick(widget);
         }

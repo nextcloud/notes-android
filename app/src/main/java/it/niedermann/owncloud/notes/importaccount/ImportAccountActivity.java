@@ -21,6 +21,8 @@ import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.ui.UiExceptionManager;
 
 import java.net.HttpURLConnection;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
@@ -38,6 +40,8 @@ public class ImportAccountActivity extends AppCompatActivity {
 
     private static final String TAG = ImportAccountActivity.class.getSimpleName();
     public static final int REQUEST_CODE_IMPORT_ACCOUNT = 1;
+
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     private ImportAccountViewModel importAccountViewModel;
     private ActivityImportAccountBinding binding;
@@ -86,7 +90,7 @@ public class ImportAccountActivity extends AppCompatActivity {
                 runOnUiThread(() -> binding.progressCircular.setVisibility(View.VISIBLE));
 
                 SingleAccountHelper.setCurrentAccount(getApplicationContext(), ssoAccount.name);
-                new Thread(() -> {
+                executor.submit(() -> {
                     Log.i(TAG, "Added account: " + "name:" + ssoAccount.name + ", " + ssoAccount.url + ", userId" + ssoAccount.userId);
                     try {
                         Log.i(TAG, "Loading capabilities for " + ssoAccount.name);
@@ -140,7 +144,7 @@ public class ImportAccountActivity extends AppCompatActivity {
                             }
                         });
                     }
-                }).start();
+                });
             });
         } catch (AccountImportCancelledException e) {
             restoreCleanState();
