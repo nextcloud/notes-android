@@ -1,6 +1,7 @@
 v3.4.9
 
 - 🐞 Fix crash on rotating device (#1239)
+- 🐞 Add more verbose log output in case of a NextcloudFilesAppAccountNotFoundException (#1256)
 
 v3.4.6 - v3.4.8
 

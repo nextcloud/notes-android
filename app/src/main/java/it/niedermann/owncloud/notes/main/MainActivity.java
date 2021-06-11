@@ -4,6 +4,7 @@ import android.accounts.NetworkErrorException;
 import android.animation.AnimatorInflater;
 import android.app.SearchManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
@@ -49,8 +50,10 @@ import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import java.net.HttpURLConnection;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.R;
@@ -173,7 +176,24 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                         final Account account = mainViewModel.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
                         runOnUiThread(() -> mainViewModel.postCurrentAccount(account));
                     } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-                        runOnUiThread(() -> ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()));
+                        // Verbose log output for https://github.com/stefan-niedermann/nextcloud-notes/issues/1256
+                        final Throwable exception;
+                        if (e instanceof NextcloudFilesAppAccountNotFoundException) {
+                            final SharedPreferences ssoPreferences = AccountImporter.getSharedPreferences(getApplicationContext());
+                            final StringBuilder ssoPreferencesString = new StringBuilder()
+                                    .append("Current SSO account: ").append(ssoPreferences.getString("PREF_CURRENT_ACCOUNT_STRING", null)).append("\n")
+                                    .append("\n")
+                                    .append("SSO SharedPreferences: ").append("\n");
+                            for (Map.Entry<String, ?> entry : ssoPreferences.getAll().entrySet()) {
+                                ssoPreferencesString.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+                            }
+                            ssoPreferencesString.append("\n")
+                                    .append("Available accounts in DB: ").append(TextUtils.join(", ", mainViewModel.getAccounts().stream().map(Account::getAccountName).collect(Collectors.toList())));
+                            exception = new RuntimeException(((NextcloudFilesAppAccountNotFoundException) e).getMessage(), new RuntimeException(ssoPreferencesString.toString(), e));
+                        } else {
+                            exception = e;
+                        }
+                        runOnUiThread(() -> ExceptionDialogFragment.newInstance(exception).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()));
                     }
                 });
             }
