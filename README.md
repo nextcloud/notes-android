@@ -47,7 +47,6 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 
 ## :checkered_flag: Planned features
   * Local accounts ([#615](https://github.com/stefan-niedermann/nextcloud-notes/issues/615))
-  * Trashbin ([#238](https://github.com/stefan-niedermann/nextcloud-notes/issues/238))
 
 ## :family: Join the team
   * Test the app with different devices
