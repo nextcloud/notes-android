@@ -313,6 +313,25 @@ public class MarkdownUtilTest extends TestCase {
         builder = new SpannableStringBuilder("   ");
         assertEquals(4, MarkdownUtil.togglePunctuation(builder, 1, 2, "**"));
         assertEquals(" ** ** ", builder.toString());
+        
+
+        // Multiline
+
+        builder = new SpannableStringBuilder("**Bold**\nItalic");
+        assertEquals(16, MarkdownUtil.togglePunctuation(builder, 9, 15, "*"));
+        assertEquals("**Bold**\n*Italic*", builder.toString());
+
+        builder = new SpannableStringBuilder("Bold\n*Italic*");
+        assertEquals(6, MarkdownUtil.togglePunctuation(builder, 0, 4, "**"));
+        assertEquals("**Bold**\n*Italic*", builder.toString());
+
+        builder = new SpannableStringBuilder("*Italic*\nBold");
+        assertEquals(15, MarkdownUtil.togglePunctuation(builder, 9, 13, "**"));
+        assertEquals("*Italic*\n**Bold**", builder.toString());
+
+        builder = new SpannableStringBuilder("Italic\n**Bold**");
+        assertEquals(7, MarkdownUtil.togglePunctuation(builder, 0, 6, "*"));
+        assertEquals("*Italic*\n**Bold**", builder.toString());
     }
 
     @Test
