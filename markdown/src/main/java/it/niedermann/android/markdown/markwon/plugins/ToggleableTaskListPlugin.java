@@ -41,8 +41,6 @@ import it.niedermann.android.markdown.markwon.span.ToggleTaskListSpan;
  */
 public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
 
-    private static final String TAG = ToggleableTaskListPlugin.class.getSimpleName();
-
     @NonNull
     private final AtomicBoolean enabled = new AtomicBoolean(true);
     @NonNull
