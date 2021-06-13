@@ -6,7 +6,13 @@ import android.util.Range;
 
 import androidx.annotation.NonNull;
 
+import org.commonmark.node.AbstractVisitor;
+import org.commonmark.node.Block;
+import org.commonmark.node.HardLineBreak;
 import org.commonmark.node.Node;
+import org.commonmark.node.Paragraph;
+import org.commonmark.node.SoftLineBreak;
+import org.commonmark.node.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,6 +52,9 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
         this.enabled.set(enabled);
     }
 
+    /**
+     * Prepares {@link TaskListSpan}s and marks each one with a {@link ToggleMarkerSpan} in the first step.
+     */
     @Override
     public void configureVisitor(@NonNull MarkwonVisitor.Builder builder) {
         builder.on(TaskListItem.class, (visitor, node) -> {
@@ -57,6 +66,30 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
                     .get(TaskListItem.class);
             final Object spans = spanFactory == null ? null :
                     spanFactory.getSpans(visitor.configuration(), visitor.renderProps());
+            if (spans != null) {
+                final TaskListSpan taskListSpan;
+                if (spans instanceof TaskListSpan[]) {
+                    if (((TaskListSpan[]) spans).length > 0) {
+                        taskListSpan = ((TaskListSpan[]) spans)[0];
+                    } else {
+                        taskListSpan = null;
+                    }
+                } else if (spans instanceof TaskListSpan) {
+                    taskListSpan = (TaskListSpan) spans;
+                } else {
+                    taskListSpan = null;
+                }
+
+                final int content = TaskListContextVisitor.contentLength(node);
+                if (content > 0 && taskListSpan != null) {
+                    // maybe additionally identify this task list (for persistence)
+                    visitor.builder().setSpan(
+                            new ToggleMarkerSpan(taskListSpan),
+                            length,
+                            length + content
+                    );
+                }
+            }
             SpannableBuilder.setSpans(
                     visitor.builder(),
                     spans,
@@ -70,29 +103,31 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
         });
     }
 
+    /**
+     * Converts all {@link  ToggleMarkerSpan}s to actual {@link ToggleTaskListSpan}s respecting existing {@link ClickableSpan}s.
+     */
     @Override
     public void afterRender(@NonNull Node node, @NonNull MarkwonVisitor visitor) {
         super.afterRender(node, visitor);
         final Spannable spanned = visitor.builder().spannableStringBuilder();
-        final List<SpannableBuilder.Span> spans = visitor.builder().getSpans(0, visitor.builder().length());
-        final List<TaskListSpan> taskListSpans = spans.stream()
-                .filter(span -> span.what instanceof TaskListSpan)
-                .map(span -> ((TaskListSpan) span.what))
+        final List<ToggleMarkerSpan> markerSpans = visitor.builder().getSpans(0, visitor.builder().length())
+                .stream()
+                .filter(span -> span.what instanceof ToggleMarkerSpan)
+                .map(span -> ((ToggleMarkerSpan) span.what))
                 .sorted((o1, o2) -> spanned.getSpanStart(o1) - spanned.getSpanStart(o2))
                 .collect(Collectors.toList());
 
-        for (int position = 0; position < taskListSpans.size(); position++) {
-            final TaskListSpan taskListSpan = taskListSpans.get(position);
-            final int start = spanned.getSpanStart(taskListSpan);
-//            final int contentLength = TaskListContextVisitor.contentLength(node);
-//            final int end = start + contentLength;
-            final int end = spanned.getSpanEnd(taskListSpan);
+        for (int position = 0; position < markerSpans.size(); position++) {
+            final ToggleMarkerSpan markerSpan = markerSpans.get(position);
+            final int start = spanned.getSpanStart(markerSpan);
+            final int end = spanned.getSpanEnd(markerSpan);
             final List<Range<Integer>> freeRanges = findFreeRanges(spanned, start, end);
             for (Range<Integer> freeRange : freeRanges) {
                 visitor.builder().setSpan(
-                        new ToggleTaskListSpan(enabled, toggleListener, taskListSpan, position),
+                        new ToggleTaskListSpan(enabled, toggleListener, markerSpan.getTaskListSpan(), position),
                         freeRange.getLower(), freeRange.getUpper());
             }
+            spanned.removeSpan(markerSpan);
         }
     }
 
@@ -133,48 +168,66 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
                 .collect(Collectors.toList());
     }
 
-//    static class TaskListContextVisitor extends AbstractVisitor {
-//        private int contentLength = 0;
-//
-//        static int contentLength(Node node) {
-//            final TaskListContextVisitor visitor = new TaskListContextVisitor();
-//            visitor.visitChildren(node);
-//            return visitor.contentLength;
-//        }
-//
-//        @Override
-//        public void visit(Text text) {
-//            super.visit(text);
-//            contentLength += text.getLiteral().length();
-//        }
-//
-//        // NB! if count both soft and hard breaks as having length of 1
-//        @Override
-//        public void visit(SoftLineBreak softLineBreak) {
-//            super.visit(softLineBreak);
-//            contentLength += 1;
-//        }
-//
-//        // NB! if count both soft and hard breaks as having length of 1
-//        @Override
-//        public void visit(HardLineBreak hardLineBreak) {
-//            super.visit(hardLineBreak);
-//            contentLength += 1;
-//        }
-//
-//        @Override
-//        protected void visitChildren(Node parent) {
-//            Node node = parent.getFirstChild();
-//            while (node != null) {
-//                // A subclass of this visitor might modify the node, resulting in getNext returning a different node or no
-//                // node after visiting it. So get the next node before visiting.
-//                Node next = node.getNext();
-//                if (node instanceof Block && !(node instanceof Paragraph)) {
-//                    break;
-//                }
-//                node.accept(this);
-//                node = next;
-//            }
-//        }
-//    }
+    private static final class TaskListContextVisitor extends AbstractVisitor {
+        private int contentLength = 0;
+
+        static int contentLength(Node node) {
+            final TaskListContextVisitor visitor = new TaskListContextVisitor();
+            visitor.visitChildren(node);
+            return visitor.contentLength;
+        }
+
+        @Override
+        public void visit(Text text) {
+            super.visit(text);
+            contentLength += text.getLiteral().length();
+        }
+
+        // NB! if count both soft and hard breaks as having length of 1
+        @Override
+        public void visit(SoftLineBreak softLineBreak) {
+            super.visit(softLineBreak);
+            contentLength += 1;
+        }
+
+        // NB! if count both soft and hard breaks as having length of 1
+        @Override
+        public void visit(HardLineBreak hardLineBreak) {
+            super.visit(hardLineBreak);
+            contentLength += 1;
+        }
+
+        @Override
+        protected void visitChildren(Node parent) {
+            Node node = parent.getFirstChild();
+            while (node != null) {
+                // A subclass of this visitor might modify the node, resulting in getNext returning a different node or no
+                // node after visiting it. So get the next node before visiting.
+                Node next = node.getNext();
+                if (node instanceof Block && !(node instanceof Paragraph)) {
+                    break;
+                }
+                node.accept(this);
+                node = next;
+            }
+        }
+    }
+
+    /**
+     * Helper class which holds an {@link TaskListSpan} but does not include the range of child {@link TaskListSpan}s.
+     */
+    private static final class ToggleMarkerSpan {
+
+        @NonNull
+        private final TaskListSpan taskListSpan;
+
+        private ToggleMarkerSpan(@NonNull TaskListSpan taskListSpan) {
+            this.taskListSpan = taskListSpan;
+        }
+
+        @NonNull
+        private TaskListSpan getTaskListSpan() {
+            return taskListSpan;
+        }
+    }
 }
