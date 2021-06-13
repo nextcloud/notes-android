@@ -103,27 +103,27 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
         });
     }
 
-    /**
-     * Converts all {@link  ToggleMarkerSpan}s to actual {@link ToggleTaskListSpan}s respecting existing {@link ClickableSpan}s.
-     */
     @Override
     public void afterRender(@NonNull Node node, @NonNull MarkwonVisitor visitor) {
         super.afterRender(node, visitor);
-        final Spannable spanned = visitor.builder().spannableStringBuilder();
-        final List<ToggleMarkerSpan> markerSpans = visitor.builder().getSpans(0, visitor.builder().length())
-                .stream()
-                .filter(span -> span.what instanceof ToggleMarkerSpan)
-                .map(span -> ((ToggleMarkerSpan) span.what))
-                .sorted((o1, o2) -> spanned.getSpanStart(o1) - spanned.getSpanStart(o2))
-                .collect(Collectors.toList());
 
+        final Spannable spanned = visitor.builder().spannableStringBuilder();
+        final List<ToggleMarkerSpan> markerSpans = getSortedToggleMarkerSpans(spanned, visitor.builder());
+
+        replaceMarkerSpans(markerSpans, spanned, visitor.builder());
+    }
+
+    /**
+     * Converts all {@link  ToggleMarkerSpan}s to actual {@link ToggleTaskListSpan}s respecting existing {@link ClickableSpan}s.
+     */
+    private void replaceMarkerSpans(@NonNull List<ToggleMarkerSpan> markerSpans, @NonNull Spannable spanned, @NonNull SpannableBuilder builder) {
         for (int position = 0; position < markerSpans.size(); position++) {
             final ToggleMarkerSpan markerSpan = markerSpans.get(position);
             final int start = spanned.getSpanStart(markerSpan);
             final int end = spanned.getSpanEnd(markerSpan);
             final List<Range<Integer>> freeRanges = findFreeRanges(spanned, start, end);
             for (Range<Integer> freeRange : freeRanges) {
-                visitor.builder().setSpan(
+                builder.setSpan(
                         new ToggleTaskListSpan(enabled, toggleListener, markerSpan.getTaskListSpan(), position),
                         freeRange.getLower(), freeRange.getUpper());
             }
@@ -132,7 +132,20 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
     }
 
     /**
-     * @return a list of ranges in the given {@param spanned} from {@param start} to {@param end} which is <strong>not</strong> taken for a {@link ClickableSpan}.
+     * @return a {@link List} of {@link ToggleMarkerSpan}s, sorted ascending by the span start.
+     */
+    @NonNull
+    private static List<ToggleMarkerSpan> getSortedToggleMarkerSpans(@NonNull Spannable spanned, @NonNull SpannableBuilder builder) {
+        return builder.getSpans(0, builder.length())
+                .stream()
+                .filter(span -> span.what instanceof ToggleMarkerSpan)
+                .map(span -> ((ToggleMarkerSpan) span.what))
+                .sorted((o1, o2) -> spanned.getSpanStart(o1) - spanned.getSpanStart(o2))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * @return a {@link List} of {@link Range}s in the given {@param spanned} from {@param start} to {@param end} which is <strong>not</strong> taken for a {@link ClickableSpan}.
      */
     @NonNull
     private static List<Range<Integer>> findFreeRanges(@NonNull Spannable spanned, int start, int end) {
