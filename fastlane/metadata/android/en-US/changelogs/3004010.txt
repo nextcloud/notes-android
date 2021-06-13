@@ -1,3 +1,4 @@
 v3.4.10
 
 - Open trashbin of files app instead of Web UI (#238)
+- Make links in checkbox list items clickable
