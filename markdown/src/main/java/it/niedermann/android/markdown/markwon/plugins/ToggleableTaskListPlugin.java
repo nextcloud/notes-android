@@ -1,19 +1,20 @@
 package it.niedermann.android.markdown.markwon.plugins;
 
-import android.util.Log;
+import android.text.Spannable;
+import android.text.style.ClickableSpan;
+import android.util.Range;
 
 import androidx.annotation.NonNull;
 
-import org.commonmark.node.AbstractVisitor;
-import org.commonmark.node.Block;
-import org.commonmark.node.HardLineBreak;
 import org.commonmark.node.Node;
-import org.commonmark.node.Paragraph;
-import org.commonmark.node.SoftLineBreak;
-import org.commonmark.node.Text;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BiConsumer;
+import java.util.stream.Collectors;
 
 import io.noties.markwon.AbstractMarkwonPlugin;
 import io.noties.markwon.MarkwonVisitor;
@@ -56,32 +57,6 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
                     .get(TaskListItem.class);
             final Object spans = spanFactory == null ? null :
                     spanFactory.getSpans(visitor.configuration(), visitor.renderProps());
-
-            if (spans != null) {
-                final TaskListSpan taskListSpan;
-                if (spans instanceof TaskListSpan[]) {
-                    if (((TaskListSpan[]) spans).length > 0) {
-                        taskListSpan = ((TaskListSpan[]) spans)[0];
-                    } else {
-                        taskListSpan = null;
-                    }
-                } else if (spans instanceof TaskListSpan) {
-                    taskListSpan = (TaskListSpan) spans;
-                } else {
-                    taskListSpan = null;
-                }
-
-                final int content = TaskListContextVisitor.contentLength(node);
-                if (content > 0 && taskListSpan != null) {
-                    // maybe additionally identify this task list (for persistence)
-                    visitor.builder().setSpan(
-                            new ToggleTaskListSpan(enabled, toggleListener, taskListSpan, visitor.builder().subSequence(length, length + content).toString()),
-                            length,
-                            length + content
-                    );
-                }
-            }
-
             SpannableBuilder.setSpans(
                     visitor.builder(),
                     spans,
@@ -95,48 +70,111 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
         });
     }
 
-    static class TaskListContextVisitor extends AbstractVisitor {
-        private int contentLength = 0;
+    @Override
+    public void afterRender(@NonNull Node node, @NonNull MarkwonVisitor visitor) {
+        super.afterRender(node, visitor);
+        final Spannable spanned = visitor.builder().spannableStringBuilder();
+        final List<SpannableBuilder.Span> spans = visitor.builder().getSpans(0, visitor.builder().length());
+        final List<TaskListSpan> taskListSpans = spans.stream()
+                .filter(span -> span.what instanceof TaskListSpan)
+                .map(span -> ((TaskListSpan) span.what))
+                .sorted((o1, o2) -> spanned.getSpanStart(o1) - spanned.getSpanStart(o2))
+                .collect(Collectors.toList());
 
-        static int contentLength(Node node) {
-            final TaskListContextVisitor visitor = new TaskListContextVisitor();
-            visitor.visitChildren(node);
-            return visitor.contentLength;
-        }
-
-        @Override
-        public void visit(Text text) {
-            super.visit(text);
-            contentLength += text.getLiteral().length();
-        }
-
-        // NB! if count both soft and hard breaks as having length of 1
-        @Override
-        public void visit(SoftLineBreak softLineBreak) {
-            super.visit(softLineBreak);
-            contentLength += 1;
-        }
-
-        // NB! if count both soft and hard breaks as having length of 1
-        @Override
-        public void visit(HardLineBreak hardLineBreak) {
-            super.visit(hardLineBreak);
-            contentLength += 1;
-        }
-
-        @Override
-        protected void visitChildren(Node parent) {
-            Node node = parent.getFirstChild();
-            while (node != null) {
-                // A subclass of this visitor might modify the node, resulting in getNext returning a different node or no
-                // node after visiting it. So get the next node before visiting.
-                Node next = node.getNext();
-                if (node instanceof Block && !(node instanceof Paragraph)) {
-                    break;
-                }
-                node.accept(this);
-                node = next;
+        for (int position = 0; position < taskListSpans.size(); position++) {
+            final TaskListSpan taskListSpan = taskListSpans.get(position);
+            final int start = spanned.getSpanStart(taskListSpan);
+//            final int contentLength = TaskListContextVisitor.contentLength(node);
+//            final int end = start + contentLength;
+            final int end = spanned.getSpanEnd(taskListSpan);
+            final List<Range<Integer>> freeRanges = findFreeRanges(spanned, start, end);
+            for (Range<Integer> freeRange : freeRanges) {
+                visitor.builder().setSpan(
+                        new ToggleTaskListSpan(enabled, toggleListener, taskListSpan, position),
+                        freeRange.getLower(), freeRange.getUpper());
             }
         }
     }
+
+    /**
+     * @return a list of ranges in the given {@param spanned} from {@param start} to {@param end} which is <strong>not</strong> taken for a {@link ClickableSpan}.
+     */
+    @NonNull
+    private static List<Range<Integer>> findFreeRanges(@NonNull Spannable spanned, int start, int end) {
+        final List<Range<Integer>> freeRanges;
+        final List<ClickableSpan> clickableSpans = getClickableSpans(spanned, start, end);
+        if (clickableSpans.size() > 0) {
+            freeRanges = new ArrayList<>(clickableSpans.size());
+            int from = start;
+            for (ClickableSpan clickableSpan : clickableSpans) {
+                final int clickableStart = spanned.getSpanStart(clickableSpan);
+                final int clickableEnd = spanned.getSpanEnd(clickableSpan);
+                if (from != clickableStart) {
+                    freeRanges.add(new Range<>(from, clickableStart));
+                }
+                from = clickableEnd;
+            }
+            if (clickableSpans.size() > 0) {
+                final int lastUpperBlocker = spanned.getSpanEnd(clickableSpans.get(clickableSpans.size() - 1));
+                if (lastUpperBlocker < end) {
+                    freeRanges.add(new Range<>(lastUpperBlocker, end));
+                }
+            }
+        } else {
+            freeRanges = Collections.singletonList(new Range<>(start, end));
+        }
+        return freeRanges;
+    }
+
+    @NonNull
+    private static List<ClickableSpan> getClickableSpans(@NonNull Spannable spanned, int start, int end) {
+        return Arrays.stream(spanned.getSpans(start, end, ClickableSpan.class))
+                .sorted((o1, o2) -> spanned.getSpanStart(o1) - spanned.getSpanStart(o2))
+                .collect(Collectors.toList());
+    }
+
+//    static class TaskListContextVisitor extends AbstractVisitor {
+//        private int contentLength = 0;
+//
+//        static int contentLength(Node node) {
+//            final TaskListContextVisitor visitor = new TaskListContextVisitor();
+//            visitor.visitChildren(node);
+//            return visitor.contentLength;
+//        }
+//
+//        @Override
+//        public void visit(Text text) {
+//            super.visit(text);
+//            contentLength += text.getLiteral().length();
+//        }
+//
+//        // NB! if count both soft and hard breaks as having length of 1
+//        @Override
+//        public void visit(SoftLineBreak softLineBreak) {
+//            super.visit(softLineBreak);
+//            contentLength += 1;
+//        }
+//
+//        // NB! if count both soft and hard breaks as having length of 1
+//        @Override
+//        public void visit(HardLineBreak hardLineBreak) {
+//            super.visit(hardLineBreak);
+//            contentLength += 1;
+//        }
+//
+//        @Override
+//        protected void visitChildren(Node parent) {
+//            Node node = parent.getFirstChild();
+//            while (node != null) {
+//                // A subclass of this visitor might modify the node, resulting in getNext returning a different node or no
+//                // node after visiting it. So get the next node before visiting.
+//                Node next = node.getNext();
+//                if (node instanceof Block && !(node instanceof Paragraph)) {
+//                    break;
+//                }
+//                node.accept(this);
+//                node = next;
+//            }
+//        }
+//    }
 }
