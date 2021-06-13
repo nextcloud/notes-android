@@ -5,6 +5,7 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
 import android.text.style.URLSpan;
 import android.util.Range;
 import android.widget.TextView;
@@ -111,41 +112,44 @@ public class ToggleableTaskListPluginTest extends TestCase {
 
     @Test
     @SuppressWarnings({"unchecked", "ConstantConditions"})
-    public void testGetClickableSpans() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        final Method m = ToggleableTaskListPlugin.class.getDeclaredMethod("getClickableSpans", SpannableBuilder.class, int.class, int.class);
+    public void testGetSortedSpans() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        final Method m = ToggleableTaskListPlugin.class.getDeclaredMethod("getSortedSpans", SpannableBuilder.class, Class.class, int.class, int.class);
         m.setAccessible(true);
 
         final Object firstClickableSpan = new URLSpan("");
         final Object secondClickableSpan = new InterceptedURLSpan(Collections.emptyList(), "");
+        final Object unclickableSpan = new ForegroundColorSpan(android.R.color.white);
+
         final SpannableBuilder spannable = new SpannableBuilder("Lorem Ipsum Dolor \nSit Amet");
         spannable.setSpan(firstClickableSpan, 6, 11, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannable.setSpan(secondClickableSpan, 19, 22, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannable.setSpan(unclickableSpan, 3, 20, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         List<SpannableBuilder.Span> clickableSpans;
 
-        clickableSpans = (List<SpannableBuilder.Span>) m.invoke(null, spannable, 0, 0);
+        clickableSpans = (List<SpannableBuilder.Span>) m.invoke(null, spannable, ClickableSpan.class, 0, 0);
         assertEquals(0, clickableSpans.size());
 
-        clickableSpans = (List<SpannableBuilder.Span>) m.invoke(null, spannable, spannable.length() - 1, spannable.length() - 1);
+        clickableSpans = (List<SpannableBuilder.Span>) m.invoke(null, spannable, ClickableSpan.class, spannable.length() - 1, spannable.length() - 1);
         assertEquals(0, clickableSpans.size());
 
-        clickableSpans = (List<SpannableBuilder.Span>) m.invoke(null, spannable, 0, 5);
+        clickableSpans = (List<SpannableBuilder.Span>) m.invoke(null, spannable, ClickableSpan.class, 0, 5);
         assertEquals(0, clickableSpans.size());
 
-        clickableSpans = (List<SpannableBuilder.Span>) m.invoke(null, spannable, 0, spannable.length());
+        clickableSpans = (List<SpannableBuilder.Span>) m.invoke(null, spannable, ClickableSpan.class, 0, spannable.length());
         assertEquals(2, clickableSpans.size());
         assertEquals(firstClickableSpan, clickableSpans.get(0).what);
         assertEquals(secondClickableSpan, clickableSpans.get(1).what);
 
-        clickableSpans = (List<SpannableBuilder.Span>) m.invoke(null, spannable, 0, 17);
+        clickableSpans = (List<SpannableBuilder.Span>) m.invoke(null, spannable, ClickableSpan.class, 0, 17);
         assertEquals(1, clickableSpans.size());
         assertEquals(firstClickableSpan, clickableSpans.get(0).what);
 
-        clickableSpans = (List<SpannableBuilder.Span>) m.invoke(null, spannable, 12, 22);
+        clickableSpans = (List<SpannableBuilder.Span>) m.invoke(null, spannable, ClickableSpan.class, 12, 22);
         assertEquals(1, clickableSpans.size());
         assertEquals(secondClickableSpan, clickableSpans.get(0).what);
 
-        clickableSpans = (List<SpannableBuilder.Span>) m.invoke(null, spannable, 9, 20);
+        clickableSpans = (List<SpannableBuilder.Span>) m.invoke(null, spannable, ClickableSpan.class, 9, 20);
         assertEquals(2, clickableSpans.size());
         assertEquals(firstClickableSpan, clickableSpans.get(0).what);
         assertEquals(secondClickableSpan, clickableSpans.get(1).what);

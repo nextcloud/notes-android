@@ -16,8 +16,9 @@ import org.commonmark.node.Paragraph;
 import org.commonmark.node.SoftLineBreak;
 import org.commonmark.node.Text;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BiConsumer;
@@ -27,6 +28,7 @@ import io.noties.markwon.AbstractMarkwonPlugin;
 import io.noties.markwon.MarkwonVisitor;
 import io.noties.markwon.SpanFactory;
 import io.noties.markwon.SpannableBuilder;
+import io.noties.markwon.SpannableBuilder.Span;
 import io.noties.markwon.ext.tasklist.TaskListItem;
 import io.noties.markwon.ext.tasklist.TaskListProps;
 import io.noties.markwon.ext.tasklist.TaskListSpan;
@@ -56,6 +58,7 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
 
     /**
      * Prepares {@link TaskListSpan}s and marks each one with a {@link ToggleMarkerSpan} in the first step.
+     * The {@link ToggleMarkerSpan} are different from {@link TaskListSpan}s as they will stop on nested tasks instead of spanning the whole tasks including its subtasks.
      */
     @Override
     public void configureVisitor(@NonNull MarkwonVisitor.Builder builder) {
@@ -107,19 +110,19 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
 
 
     /**
-     * Adds for each {@link ToggleMarkerSpan} and actual {@link ToggleTaskListSpan}s respecting existing {@link ClickableSpan}s.
+     * Adds for each symbolic {@link ToggleMarkerSpan} an actual {@link ToggleTaskListSpan}s respecting existing {@link ClickableSpan}s.
      */
     @Override
     public void afterRender(@NonNull Node node, @NonNull MarkwonVisitor visitor) {
         super.afterRender(node, visitor);
 
-        final List<SpannableBuilder.Span> markerSpans = getSortedToggleMarkerSpans(visitor.builder());
+        final List<Span> markerSpans = getSortedSpans(visitor.builder(), ToggleMarkerSpan.class, 0, visitor.builder().length());
 
         for (int position = 0; position < markerSpans.size(); position++) {
-            final SpannableBuilder.Span markerSpan = markerSpans.get(position);
+            final Span markerSpan = markerSpans.get(position);
             final int start = markerSpan.start;
             final int end = markerSpan.end;
-            final List<Range<Integer>> freeRanges = findFreeRanges(visitor.builder(), start, end);
+            final Collection<Range<Integer>> freeRanges = findFreeRanges(visitor.builder(), start, end);
             for (Range<Integer> freeRange : freeRanges) {
                 visitor.builder().setSpan(
                         new ToggleTaskListSpan(enabled, toggleListener, ((ToggleMarkerSpan) markerSpan.what).getTaskListSpan(), position),
@@ -145,13 +148,13 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
      * @return a {@link List} of {@link Range}s in the given {@param spanned} from {@param start} to {@param end} which is <strong>not</strong> taken for a {@link ClickableSpan}.
      */
     @NonNull
-    private static List<Range<Integer>> findFreeRanges(@NonNull SpannableBuilder builder, int start, int end) {
+    private static Collection<Range<Integer>> findFreeRanges(@NonNull SpannableBuilder builder, int start, int end) {
         final List<Range<Integer>> freeRanges;
-        final List<SpannableBuilder.Span> clickableSpans = getClickableSpans(builder, start, end);
+        final List<Span> clickableSpans = getSortedSpans(builder, ClickableSpan.class, start, end);
         if (clickableSpans.size() > 0) {
-            freeRanges = new ArrayList<>(clickableSpans.size());
+            freeRanges = new LinkedList<>();
             int from = start;
-            for (SpannableBuilder.Span clickableSpan : clickableSpans) {
+            for (Span clickableSpan : clickableSpans) {
                 final int clickableStart = clickableSpan.start;
                 final int clickableEnd = clickableSpan.end;
                 if (from != clickableStart) {
@@ -174,22 +177,12 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
     }
 
     /**
-     * @return a {@link List} of {@link ToggleMarkerSpan}s, sorted ascending by the span start.
+     * @return a {@link List} of {@link Span}s holding {@param type}s, sorted ascending by the span start.
      */
-    @NonNull
-    private static List<SpannableBuilder.Span> getSortedToggleMarkerSpans(@NonNull SpannableBuilder builder) {
-        return builder.getSpans(0, builder.length())
-                .stream()
-                .filter(span -> span.what instanceof ToggleMarkerSpan)
-                .sorted((o1, o2) -> o1.start - o2.start)
-                .collect(Collectors.toList());
-    }
-
-    @NonNull
-    private static List<SpannableBuilder.Span> getClickableSpans(@NonNull SpannableBuilder builder, int start, int end) {
+    private static <T> List<Span> getSortedSpans(@NonNull SpannableBuilder builder, @NonNull Class<T> type, int start, int end) {
         return builder.getSpans(start, end)
                 .stream()
-                .filter(span -> span.what instanceof ClickableSpan)
+                .filter(span -> type.isInstance(span.what))
                 .sorted((o1, o2) -> o1.start - o2.start)
                 .collect(Collectors.toList());
     }
