@@ -3,8 +3,10 @@ package it.niedermann.android.markdown.markwon.plugins;
 import android.text.Spannable;
 import android.text.style.ClickableSpan;
 import android.util.Range;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 
 import org.commonmark.node.AbstractVisitor;
 import org.commonmark.node.Block;
@@ -15,7 +17,6 @@ import org.commonmark.node.SoftLineBreak;
 import org.commonmark.node.Text;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -29,6 +30,7 @@ import io.noties.markwon.SpannableBuilder;
 import io.noties.markwon.ext.tasklist.TaskListItem;
 import io.noties.markwon.ext.tasklist.TaskListProps;
 import io.noties.markwon.ext.tasklist.TaskListSpan;
+import it.niedermann.android.markdown.MarkdownUtil;
 import it.niedermann.android.markdown.markwon.span.ToggleTaskListSpan;
 
 /**
@@ -103,81 +105,92 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
         });
     }
 
+
+    /**
+     * Adds for each {@link ToggleMarkerSpan} and actual {@link ToggleTaskListSpan}s respecting existing {@link ClickableSpan}s.
+     */
     @Override
     public void afterRender(@NonNull Node node, @NonNull MarkwonVisitor visitor) {
         super.afterRender(node, visitor);
 
-        final Spannable spanned = visitor.builder().spannableStringBuilder();
-        final List<ToggleMarkerSpan> markerSpans = getSortedToggleMarkerSpans(spanned, visitor.builder());
+        final List<SpannableBuilder.Span> markerSpans = getSortedToggleMarkerSpans(visitor.builder());
 
-        replaceMarkerSpans(markerSpans, spanned, visitor.builder());
-    }
-
-    /**
-     * Converts all {@link  ToggleMarkerSpan}s to actual {@link ToggleTaskListSpan}s respecting existing {@link ClickableSpan}s.
-     */
-    private void replaceMarkerSpans(@NonNull List<ToggleMarkerSpan> markerSpans, @NonNull Spannable spanned, @NonNull SpannableBuilder builder) {
         for (int position = 0; position < markerSpans.size(); position++) {
-            final ToggleMarkerSpan markerSpan = markerSpans.get(position);
-            final int start = spanned.getSpanStart(markerSpan);
-            final int end = spanned.getSpanEnd(markerSpan);
-            final List<Range<Integer>> freeRanges = findFreeRanges(spanned, start, end);
+            final SpannableBuilder.Span markerSpan = markerSpans.get(position);
+            final int start = markerSpan.start;
+            final int end = markerSpan.end;
+            final List<Range<Integer>> freeRanges = findFreeRanges(visitor.builder(), start, end);
             for (Range<Integer> freeRange : freeRanges) {
-                builder.setSpan(
-                        new ToggleTaskListSpan(enabled, toggleListener, markerSpan.getTaskListSpan(), position),
+                visitor.builder().setSpan(
+                        new ToggleTaskListSpan(enabled, toggleListener, ((ToggleMarkerSpan) markerSpan.what).getTaskListSpan(), position),
                         freeRange.getLower(), freeRange.getUpper());
             }
-            spanned.removeSpan(markerSpan);
         }
     }
 
     /**
-     * @return a {@link List} of {@link ToggleMarkerSpan}s, sorted ascending by the span start.
+     * Removes {@link ToggleMarkerSpan}s from {@param textView}.
      */
-    @NonNull
-    private static List<ToggleMarkerSpan> getSortedToggleMarkerSpans(@NonNull Spannable spanned, @NonNull SpannableBuilder builder) {
-        return builder.getSpans(0, builder.length())
-                .stream()
-                .filter(span -> span.what instanceof ToggleMarkerSpan)
-                .map(span -> ((ToggleMarkerSpan) span.what))
-                .sorted((o1, o2) -> spanned.getSpanStart(o1) - spanned.getSpanStart(o2))
-                .collect(Collectors.toList());
+    @Override
+    public void afterSetText(@NonNull TextView textView) {
+        super.afterSetText(textView);
+        final Spannable spannable = MarkdownUtil.getContentAsSpannable(textView);
+        for (ToggleMarkerSpan span : spannable.getSpans(0, spannable.length(), ToggleMarkerSpan.class)) {
+            spannable.removeSpan(span);
+        }
+        textView.setText(spannable);
     }
 
     /**
      * @return a {@link List} of {@link Range}s in the given {@param spanned} from {@param start} to {@param end} which is <strong>not</strong> taken for a {@link ClickableSpan}.
      */
     @NonNull
-    private static List<Range<Integer>> findFreeRanges(@NonNull Spannable spanned, int start, int end) {
+    private static List<Range<Integer>> findFreeRanges(@NonNull SpannableBuilder builder, int start, int end) {
         final List<Range<Integer>> freeRanges;
-        final List<ClickableSpan> clickableSpans = getClickableSpans(spanned, start, end);
+        final List<SpannableBuilder.Span> clickableSpans = getClickableSpans(builder, start, end);
         if (clickableSpans.size() > 0) {
             freeRanges = new ArrayList<>(clickableSpans.size());
             int from = start;
-            for (ClickableSpan clickableSpan : clickableSpans) {
-                final int clickableStart = spanned.getSpanStart(clickableSpan);
-                final int clickableEnd = spanned.getSpanEnd(clickableSpan);
+            for (SpannableBuilder.Span clickableSpan : clickableSpans) {
+                final int clickableStart = clickableSpan.start;
+                final int clickableEnd = clickableSpan.end;
                 if (from != clickableStart) {
                     freeRanges.add(new Range<>(from, clickableStart));
                 }
                 from = clickableEnd;
             }
             if (clickableSpans.size() > 0) {
-                final int lastUpperBlocker = spanned.getSpanEnd(clickableSpans.get(clickableSpans.size() - 1));
+                final int lastUpperBlocker = clickableSpans.get(clickableSpans.size() - 1).end;
                 if (lastUpperBlocker < end) {
                     freeRanges.add(new Range<>(lastUpperBlocker, end));
                 }
             }
+        } else if (start == end) {
+            freeRanges = Collections.emptyList();
         } else {
             freeRanges = Collections.singletonList(new Range<>(start, end));
         }
         return freeRanges;
     }
 
+    /**
+     * @return a {@link List} of {@link ToggleMarkerSpan}s, sorted ascending by the span start.
+     */
     @NonNull
-    private static List<ClickableSpan> getClickableSpans(@NonNull Spannable spanned, int start, int end) {
-        return Arrays.stream(spanned.getSpans(start, end, ClickableSpan.class))
-                .sorted((o1, o2) -> spanned.getSpanStart(o1) - spanned.getSpanStart(o2))
+    private static List<SpannableBuilder.Span> getSortedToggleMarkerSpans(@NonNull SpannableBuilder builder) {
+        return builder.getSpans(0, builder.length())
+                .stream()
+                .filter(span -> span.what instanceof ToggleMarkerSpan)
+                .sorted((o1, o2) -> o1.start - o2.start)
+                .collect(Collectors.toList());
+    }
+
+    @NonNull
+    private static List<SpannableBuilder.Span> getClickableSpans(@NonNull SpannableBuilder builder, int start, int end) {
+        return builder.getSpans(start, end)
+                .stream()
+                .filter(span -> span.what instanceof ClickableSpan)
+                .sorted((o1, o2) -> o1.start - o2.start)
                 .collect(Collectors.toList());
     }
 
@@ -229,7 +242,8 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
     /**
      * Helper class which holds an {@link TaskListSpan} but does not include the range of child {@link TaskListSpan}s.
      */
-    private static final class ToggleMarkerSpan {
+    @VisibleForTesting
+    static final class ToggleMarkerSpan {
 
         @NonNull
         private final TaskListSpan taskListSpan;
