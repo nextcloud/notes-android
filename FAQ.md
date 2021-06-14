@@ -27,17 +27,45 @@ Sorry. There are so many different environments, that it is impossible for us to
 
 First of all make sure you have updated to and tried with the latest available versions of both, this app and the [Notes server app](https://apps.nextcloud.com/apps/notes).
 
-In case you receive a `NextcloudApiNotRespondingException`, try to disable the battery optimization for both apps.
-In all other cases please try to clear the storage of **both** apps, Nextcloud Android **and** Nextcloud Notes Android.
+### `NextcloudApiNotRespondingException`
+
+Try to disable the battery "optimization" for both apps. Some manufacturers prevent the app from communicating with the Nextcloud Android properly.
+This is a [known issue of the SingleSignOn mechanism](https://github.com/nextcloud/Android-SingleSignOn#troubleshooting) which we only can work around but not solve on our side.
+
+### `UnknownErrorException: Read timed out`
+
+This issue is caused by a connection time out. This can be the case if there are infrastructural or environmental problems (like a misconfigured server or a bad network connection).
+Probably you will experience it when importing an account, because at this moment, all your Notes will getting downloaded at once. Given you have a lots of notes, this might take longer than the connection is available.
+Further synchronizations are usually not causing this issue, because the Notes app tries to synchronize only *changed* notes after the first import.
+If your notes are not ten thousands of characters long, it is very unlikely that this causes a connection timeout.
+
+We plan to improve the import of an account and make it more reliable by [fetching notes step by step](https://github.com/stefan-niedermann/nextcloud-notes/issues/761#issuecomment-836989421) in a future release.
+Until then you can as a workaround for the first import try to
+1. move all your notes to a different folder on your Nextcloud instance
+2. import your account on your smartphone
+3. put your notes back to the original folder step by step and sync everytime you put some notes back 
+
+### `NextcloudFilesAppAccountNotFoundException`
+
+We are not yet sure what exactly causes this issue, but investigate it by [adding more debug logs to recent versions](https://github.com/stefan-niedermann/nextcloud-notes/issues/1256#issuecomment-859505153). In theory this might happen if an already imported account has been deleted in the Nextcloud app.
+As a workaround you can remove the account (or clear the storage of the app as described below if you can't access the account manager anymore) and import it again.
+
+### `TokenMismatchException` and all others
+
+In all other cases please try to clear the storage of **both** apps, Nextcloud Android **and** Nextcloud Notes Android. Not yet synchronized changes will be lost by performing this step.
 
 You can achieve this by navigating to
 
 ```
 Android settings
- ↳ Apps
-   ↳ Nextcloud / Notes
-     ↳ Storage
-       ↳ Clear storage
+       ↓
+     Apps
+       ↓
+Nextcloud / Notes
+       ↓
+    Storage
+       ↓
+ Clear storage
 ```
 
 Then set up your account in the Nextcloud Android app again and import the configured account in the Nextcloud Notes Android app.
