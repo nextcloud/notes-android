@@ -249,4 +249,7 @@
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Bir hesap ekleyebilmeniz için çalışan bir İnternet bağlantınız olmalı.</string>
     <string name="simple_next">Sonraki</string>
     <string name="simple_prev">Önceki</string>
+    <string name="simple_backup">Yedekle</string>
+    <string name="simple_repair">Onar</string>
+    <string name="backup_and_repair">Eşitlenmemiş tüm notları yedekledikten sonra kurulumu onarmayı denemeniz önerilir.</string>
 </resources>

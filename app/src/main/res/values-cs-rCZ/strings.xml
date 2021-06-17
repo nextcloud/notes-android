@@ -259,4 +259,7 @@
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Abyste mohli přidat účet je třeba, abyste byli připojení k Internetu.</string>
     <string name="simple_next">Další</string>
     <string name="simple_prev">Předchozí</string>
+    <string name="simple_backup">Zazálohovat</string>
+    <string name="simple_repair">Opravit</string>
+    <string name="backup_and_repair">Doporučujeme zazálohovat veškeré nesesynchronizované poznámky a pak se pokusit opravit nastavení.</string>
 </resources>

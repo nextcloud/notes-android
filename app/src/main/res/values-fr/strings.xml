@@ -12,6 +12,7 @@
     <string name="action_sorting_method">Méthode de tri</string>
     <string name="simple_cancel">Annuler</string>
     <string name="simple_edit">Modifier</string>
+    <string name="simple_remove">Supprimer</string>
     <string name="action_edit_save">Enregistrer</string>
     <string name="simple_about">À propos</string>
     <string name="simple_link">Lien</string>
