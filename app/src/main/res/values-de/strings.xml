@@ -249,4 +249,7 @@
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Sie müssen mit dem Internet verbunden sein, um ein Konto hinzufügen zu können.</string>
     <string name="simple_next">Weiter</string>
     <string name="simple_prev">Vorheriges</string>
+    <string name="simple_backup">Sicherung</string>
+    <string name="simple_repair">Reparieren</string>
+    <string name="backup_and_repair">Wir empfehlen, alle unsynchronisierten Notizen zu sichern und dann zu reparieren.</string>
 </resources>

@@ -6,12 +6,14 @@
     <string name="label_all_notes">Minden jegyzet</string>
     <string name="label_favorites">Kedvencek</string>
     <string name="action_create">Új jegyzet</string>
+    <string name="welcome_text">Üdvözli a %1$s</string>
     <string name="action_settings">Beállítások</string>
     <string name="action_trashbin">Törölt jegyzetek</string>
     <string name="action_search">Keresés</string>
     <string name="action_sorting_method">Rendezési mód</string>
     <string name="simple_cancel">Mégse</string>
     <string name="simple_edit">Szerkesztés</string>
+    <string name="simple_remove">Eltávolítás</string>
     <string name="action_edit_save">Mentés</string>
     <string name="simple_about">Névjegy</string>
     <string name="simple_link">Hivatkozás</string>
@@ -50,6 +52,7 @@
     <string name="error_sync">Szinkronizálás sikertelen: %1$s</string>
     <string name="error_synchronization">Szinkronizálás sikertelen</string>
     <string name="error_no_network">Nincs hálózati kapcsolat</string>
+    <string name="error_maintenance_mode">A kiszolgáló karbantartási módban van</string>
     <string name="error_unknown">Ismeretlen hiba történt.</string>
 
     <string name="about_version_title">Verzió</string>
@@ -184,7 +187,7 @@
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Környezetfüggő formázás</string>
     <string name="formatting_help_cbf_body_1">A Jegyzetek alkalmazás egyik célkitűzése, hogy egyszerű legyen, és ne vonja el a figyelmet. Viszont Markdownnal formázhatja a szövegeket. A lent említett példák némelyikénél rövidítéseket is használhat, így anélkül formázhatja meg a jegyzeteket, hogy beírná a lenti kódokat.</string>
-    <string name="formatting_help_cbf_body_2">Csak válasszon ki egy szövegtartományt, vagy érintse meg a kurzort bármely helyen, és megjelenik egy előugró menü, amely az alapértelmezett bejegyzések mellett %1$s, %2$s, %3$s tartalmaz olyan bejegyzéseket, mint %4$s vagy %5$s.</string>
+    <string name="formatting_help_cbf_body_2">Csak válasszon ki egy szövegtartományt, vagy érintse meg bárhol a kurzort, és megjelenik egy előugró menü, amely az alapértelmezett %1$s, %2$s, %3$s bejegyzések mellett ezeket is tartalmazza: %4$s, %5$s.</string>
 
     <string name="formatting_help_text_title">Szöveg</string>
     <string name="formatting_help_text_body">Nagyon egyszerűen írhat Markdownnal %1$sfélkövéren%1$s, valamint %2$sdőlten%2$s. Át is %3$shúzhat%3$s szavakat, valamint [hivatkozhat a Nextcloudra](https://nextcloud.com).</string>
@@ -235,5 +238,15 @@
     <string name="error_action_open_network">Hálózati beállítások</string>
     <string name="no_account_configured_yet">Nincs még fiók beállítva</string>
     <string name="no_other_accounts">Még egyetlen más fiókot sem állított be.</string>
+    <string name="choose_account">Válasszon fiókot</string>
     <string name="context_based_formatting">Környezetfüggő formázási felbukkanó menü</string>
+    <plurals name="remove_account_message">
+        <item quantity="one">A(z) %1$s fiók eltávolítása véglegesen töröl egy nem szinkronizált változtatást.</item>
+        <item quantity="other">A(z) %1$s fiók eltávolítása véglegesen töröl %2$d nem szinkronizált változtatást.</item>
+    </plurals>
+    <string name="remove_account">%1$s eltávolítása</string>
+
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Internetkapcsolatra van szükség, hogy fiókot adjon hozzá.</string>
+    <string name="simple_next">Következő</string>
+    <string name="simple_prev">Előző</string>
     </resources>
