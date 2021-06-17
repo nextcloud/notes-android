@@ -16,7 +16,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ScrollView;
 
@@ -184,10 +183,10 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
         binding.editContent.removeTextChangedListener(textWatcher);
         cancelTimers();
 
-        final ViewGroup parentView =  requireActivity().findViewById(android.R.id.content);
-        if(parentView != null && parentView.getChildCount() > 0){
+        final ViewGroup parentView = requireActivity().findViewById(android.R.id.content);
+        if (parentView != null && parentView.getChildCount() > 0) {
             keyboardShown = DisplayUtils.isSoftKeyboardVisible(parentView.getChildAt(0));
-        }else {
+        } else {
             keyboardShown = false;
         }
     }
