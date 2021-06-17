@@ -776,6 +776,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     public void onBackPressed() {
         if (activityBinding.toolbar.getVisibility() == VISIBLE) {
             updateToolbars(true);
+        } else if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
