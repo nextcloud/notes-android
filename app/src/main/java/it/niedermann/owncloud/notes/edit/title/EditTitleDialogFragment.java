@@ -2,11 +2,14 @@ package it.niedermann.owncloud.notes.edit.title;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -60,10 +63,23 @@ public class EditTitleDialogFragment extends BrandedDialogFragment {
         return new MaterialAlertDialogBuilder(requireContext())
                 .setTitle(R.string.change_note_title)
                 .setView(dialogView)
-                .setCancelable(true)
-                .setPositiveButton(R.string.action_edit_save, (dialog, which) -> listener.onTitleEdited(binding.title.getText().toString()))
-                .setNegativeButton(R.string.simple_cancel, null)
+                .setCancelable(false)
+                .setPositiveButton(R.string.action_edit_save, (dialog, which) -> {
+                    hideKeyboard(dialogView.findViewById(R.id.title).getWindowToken());
+                    listener.onTitleEdited(binding.title.getText().toString());
+                })
+                .setNegativeButton(R.string.simple_cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        hideKeyboard(dialogView.findViewById(R.id.title).getWindowToken());
+                    }
+                })
                 .create();
+    }
+
+    private void hideKeyboard(IBinder windowToken) {
+        InputMethodManager inputManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.hideSoftInputFromWindow(windowToken, InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
     @Override
