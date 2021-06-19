@@ -313,7 +313,11 @@ public class MarkdownUtilTest extends TestCase {
         builder = new SpannableStringBuilder("   ");
         assertEquals(4, MarkdownUtil.togglePunctuation(builder, 1, 2, "**"));
         assertEquals(" ** ** ", builder.toString());
-        
+
+        // Toggle italic right after bold
+        builder = new SpannableStringBuilder("**Bold**Italic");
+        assertEquals(15, MarkdownUtil.togglePunctuation(builder, 8, 14, "*"));
+        assertEquals("**Bold***Italic*", builder.toString());
 
         // Multiline
 
