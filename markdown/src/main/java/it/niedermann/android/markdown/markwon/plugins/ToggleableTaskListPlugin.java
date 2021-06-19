@@ -1,8 +1,12 @@
 package it.niedermann.android.markdown.markwon.plugins;
 
-import android.util.Log;
+import android.text.Spannable;
+import android.text.style.ClickableSpan;
+import android.util.Range;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 
 import org.commonmark.node.AbstractVisitor;
 import org.commonmark.node.Block;
@@ -12,16 +16,23 @@ import org.commonmark.node.Paragraph;
 import org.commonmark.node.SoftLineBreak;
 import org.commonmark.node.Text;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BiConsumer;
+import java.util.stream.Collectors;
 
 import io.noties.markwon.AbstractMarkwonPlugin;
 import io.noties.markwon.MarkwonVisitor;
 import io.noties.markwon.SpanFactory;
 import io.noties.markwon.SpannableBuilder;
+import io.noties.markwon.SpannableBuilder.Span;
 import io.noties.markwon.ext.tasklist.TaskListItem;
 import io.noties.markwon.ext.tasklist.TaskListProps;
 import io.noties.markwon.ext.tasklist.TaskListSpan;
+import it.niedermann.android.markdown.MarkdownUtil;
 import it.niedermann.android.markdown.markwon.span.ToggleTaskListSpan;
 
 /**
@@ -29,8 +40,6 @@ import it.niedermann.android.markdown.markwon.span.ToggleTaskListSpan;
  * @see <a href="https://github.com/noties/Markwon/blob/910bf311dac1bade400616a00ab0c9b7b7ade8cb/app-sample/src/main/java/io/noties/markwon/app/samples/tasklist/TaskListMutateNestedSample.kt">Original kotlin implementation</a>
  */
 public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
-
-    private static final String TAG = ToggleableTaskListPlugin.class.getSimpleName();
 
     @NonNull
     private final AtomicBoolean enabled = new AtomicBoolean(true);
@@ -45,6 +54,10 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
         this.enabled.set(enabled);
     }
 
+    /**
+     * Prepares {@link TaskListSpan}s and marks each one with a {@link ToggleMarkerSpan} in the first step.
+     * The {@link ToggleMarkerSpan} are different from {@link TaskListSpan}s as they will stop on nested tasks instead of spanning the whole tasks including its subtasks.
+     */
     @Override
     public void configureVisitor(@NonNull MarkwonVisitor.Builder builder) {
         builder.on(TaskListItem.class, (visitor, node) -> {
@@ -56,7 +69,6 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
                     .get(TaskListItem.class);
             final Object spans = spanFactory == null ? null :
                     spanFactory.getSpans(visitor.configuration(), visitor.renderProps());
-
             if (spans != null) {
                 final TaskListSpan taskListSpan;
                 if (spans instanceof TaskListSpan[]) {
@@ -75,13 +87,12 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
                 if (content > 0 && taskListSpan != null) {
                     // maybe additionally identify this task list (for persistence)
                     visitor.builder().setSpan(
-                            new ToggleTaskListSpan(enabled, toggleListener, taskListSpan, visitor.builder().subSequence(length, length + content).toString()),
+                            new ToggleMarkerSpan(taskListSpan),
                             length,
                             length + content
                     );
                 }
             }
-
             SpannableBuilder.setSpans(
                     visitor.builder(),
                     spans,
@@ -95,7 +106,86 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
         });
     }
 
-    static class TaskListContextVisitor extends AbstractVisitor {
+
+    /**
+     * Adds for each symbolic {@link ToggleMarkerSpan} an actual {@link ToggleTaskListSpan}s respecting existing {@link ClickableSpan}s.
+     */
+    @Override
+    public void afterRender(@NonNull Node node, @NonNull MarkwonVisitor visitor) {
+        super.afterRender(node, visitor);
+
+        final List<Span> markerSpans = getSortedSpans(visitor.builder(), ToggleMarkerSpan.class, 0, visitor.builder().length());
+
+        for (int position = 0; position < markerSpans.size(); position++) {
+            final Span markerSpan = markerSpans.get(position);
+            final int start = markerSpan.start;
+            final int end = markerSpan.end;
+            final Collection<Range<Integer>> freeRanges = findFreeRanges(visitor.builder(), start, end);
+            for (Range<Integer> freeRange : freeRanges) {
+                visitor.builder().setSpan(
+                        new ToggleTaskListSpan(enabled, toggleListener, ((ToggleMarkerSpan) markerSpan.what).getTaskListSpan(), position),
+                        freeRange.getLower(), freeRange.getUpper());
+            }
+        }
+    }
+
+    /**
+     * Removes {@link ToggleMarkerSpan}s from {@param textView}.
+     */
+    @Override
+    public void afterSetText(@NonNull TextView textView) {
+        super.afterSetText(textView);
+        final Spannable spannable = MarkdownUtil.getContentAsSpannable(textView);
+        for (ToggleMarkerSpan span : spannable.getSpans(0, spannable.length(), ToggleMarkerSpan.class)) {
+            spannable.removeSpan(span);
+        }
+        textView.setText(spannable);
+    }
+
+    /**
+     * @return a {@link List} of {@link Range}s in the given {@param spanned} from {@param start} to {@param end} which is <strong>not</strong> taken for a {@link ClickableSpan}.
+     */
+    @NonNull
+    private static Collection<Range<Integer>> findFreeRanges(@NonNull SpannableBuilder builder, int start, int end) {
+        final List<Range<Integer>> freeRanges;
+        final List<Span> clickableSpans = getSortedSpans(builder, ClickableSpan.class, start, end);
+        if (clickableSpans.size() > 0) {
+            freeRanges = new LinkedList<>();
+            int from = start;
+            for (Span clickableSpan : clickableSpans) {
+                final int clickableStart = clickableSpan.start;
+                final int clickableEnd = clickableSpan.end;
+                if (from != clickableStart) {
+                    freeRanges.add(new Range<>(from, clickableStart));
+                }
+                from = clickableEnd;
+            }
+            if (clickableSpans.size() > 0) {
+                final int lastUpperBlocker = clickableSpans.get(clickableSpans.size() - 1).end;
+                if (lastUpperBlocker < end) {
+                    freeRanges.add(new Range<>(lastUpperBlocker, end));
+                }
+            }
+        } else if (start == end) {
+            freeRanges = Collections.emptyList();
+        } else {
+            freeRanges = Collections.singletonList(new Range<>(start, end));
+        }
+        return freeRanges;
+    }
+
+    /**
+     * @return a {@link List} of {@link Span}s holding {@param type}s, sorted ascending by the span start.
+     */
+    private static <T> List<Span> getSortedSpans(@NonNull SpannableBuilder builder, @NonNull Class<T> type, int start, int end) {
+        return builder.getSpans(start, end)
+                .stream()
+                .filter(span -> type.isInstance(span.what))
+                .sorted((o1, o2) -> o1.start - o2.start)
+                .collect(Collectors.toList());
+    }
+
+    private static final class TaskListContextVisitor extends AbstractVisitor {
         private int contentLength = 0;
 
         static int contentLength(Node node) {
@@ -137,6 +227,25 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
                 node.accept(this);
                 node = next;
             }
+        }
+    }
+
+    /**
+     * Helper class which holds an {@link TaskListSpan} but does not include the range of child {@link TaskListSpan}s.
+     */
+    @VisibleForTesting
+    static final class ToggleMarkerSpan {
+
+        @NonNull
+        private final TaskListSpan taskListSpan;
+
+        private ToggleMarkerSpan(@NonNull TaskListSpan taskListSpan) {
+            this.taskListSpan = taskListSpan;
+        }
+
+        @NonNull
+        private TaskListSpan getTaskListSpan() {
+            return taskListSpan;
         }
     }
 }

@@ -244,4 +244,7 @@
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">要添加账号，你必须连接到互联网。</string>
     <string name="simple_next">下一则 </string>
     <string name="simple_prev">上一则</string>
+    <string name="simple_backup">备份</string>
+    <string name="simple_repair">修复</string>
+    <string name="backup_and_repair">我们建议备份所有未同步的笔记，然后尝试修复安装。</string>
 </resources>

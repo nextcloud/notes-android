@@ -295,4 +295,7 @@
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">You have to be connected to the internet in order to add an account.</string>
     <string name="simple_next">Next</string>
     <string name="simple_prev">Previous</string>
+    <string name="simple_backup">Backup</string>
+    <string name="simple_repair">Repair</string>
+    <string name="backup_and_repair">We recommend to backup all unsynchronized notes and then try to repair the setup.</string>
 </resources>

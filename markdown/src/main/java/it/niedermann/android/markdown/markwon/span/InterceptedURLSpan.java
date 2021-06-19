@@ -1,8 +1,10 @@
 package it.niedermann.android.markdown.markwon.span;
 
+import android.text.Spanned;
 import android.text.style.URLSpan;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
@@ -22,7 +24,6 @@ public class InterceptedURLSpan extends URLSpan {
         super(url);
         this.onLinkClickCallbacks = onLinkClickCallbacks;
     }
-
     @Override
     public void onClick(View widget) {
         if (onLinkClickCallbacks.size() > 0) {

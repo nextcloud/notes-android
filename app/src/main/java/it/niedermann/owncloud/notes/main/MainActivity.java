@@ -15,9 +15,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.SearchView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -50,9 +52,11 @@ import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import java.net.HttpURLConnection;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import it.niedermann.owncloud.notes.LockedActivity;
@@ -90,6 +94,7 @@ import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 import it.niedermann.owncloud.notes.shared.util.CustomAppGlideModule;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
+import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.O;
@@ -175,25 +180,52 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                     try {
                         final Account account = mainViewModel.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
                         runOnUiThread(() -> mainViewModel.postCurrentAccount(account));
-                    } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+                    } catch (NextcloudFilesAppAccountNotFoundException e) {
                         // Verbose log output for https://github.com/stefan-niedermann/nextcloud-notes/issues/1256
-                        final Throwable exception;
-                        if (e instanceof NextcloudFilesAppAccountNotFoundException) {
-                            final SharedPreferences ssoPreferences = AccountImporter.getSharedPreferences(getApplicationContext());
-                            final StringBuilder ssoPreferencesString = new StringBuilder()
-                                    .append("Current SSO account: ").append(ssoPreferences.getString("PREF_CURRENT_ACCOUNT_STRING", null)).append("\n")
-                                    .append("\n")
-                                    .append("SSO SharedPreferences: ").append("\n");
-                            for (Map.Entry<String, ?> entry : ssoPreferences.getAll().entrySet()) {
-                                ssoPreferencesString.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
-                            }
-                            ssoPreferencesString.append("\n")
-                                    .append("Available accounts in DB: ").append(TextUtils.join(", ", mainViewModel.getAccounts().stream().map(Account::getAccountName).collect(Collectors.toList())));
-                            exception = new RuntimeException(((NextcloudFilesAppAccountNotFoundException) e).getMessage(), new RuntimeException(ssoPreferencesString.toString(), e));
-                        } else {
-                            exception = e;
-                        }
-                        runOnUiThread(() -> ExceptionDialogFragment.newInstance(exception).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()));
+                        runOnUiThread(() -> new AlertDialog.Builder(this)
+                                .setTitle(NextcloudFilesAppAccountNotFoundException.class.getSimpleName())
+                                .setMessage(R.string.backup_and_repair)
+                                .setPositiveButton(R.string.simple_repair, (a, b) -> {
+                                    executor.submit(() -> {
+                                        for (Account account : mainViewModel.getAccounts()) {
+                                            SingleAccountHelper.setCurrentAccount(this, account.getAccountName());
+                                            runOnUiThread(this::recreate);
+                                            break;
+                                        }
+                                    });
+                                })
+                                .setNegativeButton(R.string.simple_backup, (a, b) -> {
+                                    executor.submit(() -> {
+                                        final List<Note> modifiedNotes = new LinkedList<>();
+                                        for (Account account : mainViewModel.getAccounts()) {
+                                            modifiedNotes.addAll(mainViewModel.getLocalModifiedNotes(account.getId()));
+                                        }
+                                        if (modifiedNotes.size() == 1) {
+                                            final Note note = modifiedNotes.get(0);
+                                            ShareUtil.openShareDialog(this, note.getTitle(), note.getContent());
+                                        } else {
+                                            ShareUtil.openShareDialog(this,
+                                                    getResources().getQuantityString(R.plurals.share_multiple, modifiedNotes.size(), modifiedNotes.size()),
+                                                    mainViewModel.collectNoteContents(modifiedNotes.stream().map(Note::getId).collect(Collectors.toList())));
+                                        }
+                                    });
+                                })
+                                .setNeutralButton(android.R.string.cancel, (a, b) -> {
+                                    final SharedPreferences ssoPreferences = AccountImporter.getSharedPreferences(getApplicationContext());
+                                    final StringBuilder ssoPreferencesString = new StringBuilder()
+                                            .append("Current SSO account: ").append(ssoPreferences.getString("PREF_CURRENT_ACCOUNT_STRING", null)).append("\n")
+                                            .append("\n")
+                                            .append("SSO SharedPreferences: ").append("\n");
+                                    for (Map.Entry<String, ?> entry : ssoPreferences.getAll().entrySet()) {
+                                        ssoPreferencesString.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+                                    }
+                                    ssoPreferencesString.append("\n")
+                                            .append("Available accounts in DB: ").append(TextUtils.join(", ", mainViewModel.getAccounts().stream().map(Account::getAccountName).collect(Collectors.toList())));
+                                    runOnUiThread(() -> ExceptionDialogFragment.newInstance(new RuntimeException(e.getMessage(), new RuntimeException(ssoPreferencesString.toString(), e))).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()));
+                                })
+                                .show());
+                    } catch (NoCurrentAccountSelectedException e) {
+                        runOnUiThread(() -> ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()));
                     }
                 });
             }
@@ -744,6 +776,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     public void onBackPressed() {
         if (activityBinding.toolbar.getVisibility() == VISIBLE) {
             updateToolbars(true);
+        } else if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }

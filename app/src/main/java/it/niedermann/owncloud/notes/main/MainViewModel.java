@@ -594,6 +594,10 @@ public class MainViewModel extends AndroidViewModel {
         repo.createOrUpdateSingleNoteWidgetData(data);
     }
 
+    public List<Note> getLocalModifiedNotes(long accountId) {
+        return repo.getLocalModifiedNotes(accountId);
+    }
+
     public LiveData<Integer> getAccountsCount() {
         return repo.countAccounts$();
     }
