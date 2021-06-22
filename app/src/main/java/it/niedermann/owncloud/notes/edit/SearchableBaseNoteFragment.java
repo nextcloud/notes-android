@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import androidx.annotation.CallSuper;
 import androidx.annotation.ColorInt;
@@ -21,13 +22,18 @@ import androidx.appcompat.widget.SearchView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedActivity;
+import it.niedermann.owncloud.notes.edit.outline.OutlineAdapter;
+import it.niedermann.owncloud.notes.edit.outline.OutlineItem;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 
-public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
+public abstract class SearchableBaseNoteFragment extends BaseNoteFragment implements OutlineAdapter.OutlineListener {
 
     private static final String TAG = SearchableBaseNoteFragment.class.getSimpleName();
     private static final String saved_instance_key_searchQuery = "searchQuery";
@@ -43,6 +49,8 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     private int mainColor;
     @ColorInt
     private int textColor;
+
+    public List<OutlineItem> outlinedata;
 
     @Override
     public void onStart() {
@@ -298,5 +306,61 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         this.textColor = textColor;
         BrandedActivity.applyBrandToFAB(mainColor, textColor, getSearchPrevButton());
         BrandedActivity.applyBrandToFAB(mainColor, textColor, getSearchNextButton());
+    }
+
+
+    //for outlineDialogFragment
+    @Override
+    public void onOutlineChosen(OutlineItem oi) {
+        Integer numberLine = oi.textOffset;
+
+        if (numberLine >= 0) {
+            ScrollView scrollView = getScrollView();
+            if (scrollView != null) {
+                Layout layout = getLayout();
+
+                int y =  layout.getLineForOffset(numberLine);
+
+                scrollView.post(() -> scrollView.smoothScrollTo(0,layout.getLineTop(y)));
+
+                Toast.makeText(getActivity(),oi.type, Toast.LENGTH_SHORT).show();
+
+            }
+        }
+
+    }
+
+    @CallSuper
+    protected void onNoteLoaded(Note note) {
+        super.onNoteLoaded(note);
+       generateOutlineData(note);
+    }
+
+    private  void generateOutlineData(Note note){
+
+        outlinedata = new ArrayList<>();
+        
+        String pattern = "^#+ \\S+$";
+        Pattern r = Pattern.compile(pattern,Pattern.MULTILINE);
+        Matcher m = r.matcher(note.getContent());
+
+
+        while (m.find()) {
+
+            String t =  m.group();
+
+            String[] split =t.split("#");
+            int level = split.length - 1;
+
+            StringBuilder sb = new StringBuilder();
+
+            for(int i = 1; i<level; i++){
+                sb.append("  ");
+            }
+            sb.append(t);
+
+            outlinedata.add(new OutlineItem("header" + Integer.valueOf(level).toString(),  sb.toString(),   m.start()));
+        }
+
     }
 }

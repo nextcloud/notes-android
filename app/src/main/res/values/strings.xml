@@ -298,4 +298,7 @@
     <string name="simple_backup">Backup</string>
     <string name="simple_repair">Repair</string>
     <string name="backup_and_repair">We recommend to backup all unsynchronized notes and then try to repair the setup.</string>
+    <string name="menu_outline">Outline</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

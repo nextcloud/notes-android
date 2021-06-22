@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 import android.graphics.Color;
+import android.graphics.Outline;
 import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -42,6 +44,9 @@ import it.niedermann.owncloud.notes.accountpicker.AccountPickerDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandedFragment;
 import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
 import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment.CategoryDialogListener;
+import it.niedermann.owncloud.notes.edit.outline.OutlineAdapter;
+import it.niedermann.owncloud.notes.edit.outline.OutlineDialogFragment;
+import it.niedermann.owncloud.notes.edit.outline.OutlineItem;
 import it.niedermann.owncloud.notes.edit.title.EditTitleDialogFragment;
 import it.niedermann.owncloud.notes.edit.title.EditTitleDialogFragment.EditTitleListener;
 import it.niedermann.owncloud.notes.persistence.NotesRepository;
@@ -270,6 +275,10 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
             }
 
             return true;
+        } else if (itemId == R.id.menu_outline) {
+            showOutlineDialog();
+            return true;
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -356,12 +365,33 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         editTitleFragment.show(manager, fragmentId);
     }
 
+
+    /**
+     * Opens a dialog in order to chose a header
+     */
+    public void showOutlineDialog() {
+        saveNote(null);
+        final String fragmentId = "fragment_outline";
+        FragmentManager manager = requireActivity().getSupportFragmentManager();
+        Fragment frag = manager.findFragmentByTag(fragmentId);
+        if (frag != null) {
+            manager.beginTransaction().remove(frag).commit();
+        }
+        DialogFragment outlineFragment = OutlineDialogFragment.newInstance("","");
+        outlineFragment.setTargetFragment(this, 0);
+        outlineFragment.show(manager, fragmentId);
+    }
+
+
     @Override
     public void onCategoryChosen(String category) {
         repo.setCategory(localAccount, note.getId(), category);
         note.setCategory(category);
         listener.onNoteUpdated(note);
     }
+
+
+
 
     @Override
     public void onTitleEdited(String newTitle) {

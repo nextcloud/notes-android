@@ -11,6 +11,12 @@
         app:showAsAction="ifRoom|collapseActionView" />
 
     <item
+        android:id="@+id/menu_outline"
+        android:orderInCategory="60"
+        android:title="@string/menu_outline"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/menu_favorite"
         android:orderInCategory="80"
         android:title="@string/menu_favorite"
