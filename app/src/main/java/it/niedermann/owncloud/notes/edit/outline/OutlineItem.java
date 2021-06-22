@@ -14,11 +14,11 @@ public class OutlineItem {
 
 
 
-    public OutlineItem(@NonNull String type, @NonNull String label, @Nullable Integer lineNumber) {
+    public OutlineItem(@NonNull String type, @NonNull String label, @Nullable Integer textOffset) {
         this.type = type;
         this.label = label;
         this.type = type;
-       this.textOffset = lineNumber;
+       this.textOffset = textOffset;
     }
 
 

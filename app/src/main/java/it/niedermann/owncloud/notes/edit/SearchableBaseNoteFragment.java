@@ -312,18 +312,18 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment implem
     //for outlineDialogFragment
     @Override
     public void onOutlineChosen(OutlineItem oi) {
-        Integer numberLine = oi.textOffset;
+        Integer offset = oi.textOffset;
 
-        if (numberLine >= 0) {
+        if (offset >= 0) {
             ScrollView scrollView = getScrollView();
             if (scrollView != null) {
                 Layout layout = getLayout();
 
-                int y =  layout.getLineForOffset(numberLine);
+                int lineNumber =  layout.getLineForOffset(offset);
 
-                scrollView.post(() -> scrollView.smoothScrollTo(0,layout.getLineTop(y)));
+                scrollView.post(() -> scrollView.smoothScrollTo(0,layout.getLineTop(lineNumber)));
 
-                Toast.makeText(getActivity(),oi.type, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(),oi.type, Toast.LENGTH_SHORT).show();
 
             }
         }

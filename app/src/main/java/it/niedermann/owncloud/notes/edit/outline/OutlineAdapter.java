@@ -103,10 +103,6 @@ public class OutlineAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
 
 
-        //private TextView getType() {
-        //    return binding.headerType;
-       // }
-
         private TextView getTitle() {
             return binding.headerTitle;
         }
