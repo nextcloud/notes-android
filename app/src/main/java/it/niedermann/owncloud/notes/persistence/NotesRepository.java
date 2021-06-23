@@ -426,10 +426,12 @@ public class NotesRepository {
 
     @AnyThread
     public void toggleFavoriteAndSync(Account account, long noteId) {
-        executor.submit(() -> {
-            db.getNoteDao().toggleFavorite(noteId);
-            scheduleSync(account, true);
-        });
+        toggleFavorite(noteId);
+        executor.submit(() -> scheduleSync(account, true));
+    }
+
+    public void toggleFavorite(long noteId) {
+        executor.submit(() -> db.getNoteDao().toggleFavorite(noteId));
     }
 
     /**

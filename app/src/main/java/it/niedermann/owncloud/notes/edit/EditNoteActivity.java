@@ -84,7 +84,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         }
 
         setSupportActionBar(binding.toolbar);
-        binding.toolbar.setOnClickListener((v) -> fragment.showEditTitleDialog());
+        binding.toolbar.setOnClickListener((v) -> fragment.showNoteDetailsDialog());
     }
 
     @Override

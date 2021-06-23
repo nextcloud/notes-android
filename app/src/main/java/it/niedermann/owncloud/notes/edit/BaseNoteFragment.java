@@ -1,12 +1,7 @@
 package it.niedermann.owncloud.notes.edit;
 
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.ShortcutInfo;
-import android.content.pm.ShortcutManager;
 import android.graphics.Color;
-import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,31 +37,25 @@ import it.niedermann.owncloud.notes.accountpicker.AccountPickerDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandedFragment;
 import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
 import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment.CategoryDialogListener;
+import it.niedermann.owncloud.notes.edit.details.NoteDetailsDialogFragment;
 import it.niedermann.owncloud.notes.edit.title.EditTitleDialogFragment;
 import it.niedermann.owncloud.notes.edit.title.EditTitleDialogFragment.EditTitleListener;
 import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
-import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
-import it.niedermann.owncloud.notes.shared.util.ApiVersionUtil;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 import it.niedermann.owncloud.notes.shared.util.NotesColorUtil;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
-import static androidx.core.content.pm.ShortcutManagerCompat.isRequestPinShortcutSupported;
 import static it.niedermann.owncloud.notes.NotesApplication.isDarkThemeActive;
-import static it.niedermann.owncloud.notes.branding.BrandingUtil.tintMenuIcon;
-import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
-import static java.lang.Boolean.TRUE;
 
 public abstract class BaseNoteFragment extends BrandedFragment implements CategoryDialogListener, EditTitleListener {
 
     private static final String TAG = BaseNoteFragment.class.getSimpleName();
     protected final ExecutorService executor = Executors.newCachedThreadPool();
 
-    protected static final int MENU_ID_PIN = -1;
     public static final String PARAM_NOTE_ID = "noteId";
     public static final String PARAM_ACCOUNT_ID = "accountId";
     public static final String PARAM_CONTENT = "content";
@@ -185,29 +174,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_note_fragment, menu);
 
-        if (isRequestPinShortcutSupported(requireActivity()) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            menu.add(Menu.NONE, MENU_ID_PIN, 110, R.string.pin_to_homescreen);
-        }
-
         super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public void onPrepareOptionsMenu(@NonNull Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-        if (note != null) {
-            prepareFavoriteOption(menu.findItem(R.id.menu_favorite));
-
-            final ApiVersion preferredApiVersion = ApiVersionUtil.getPreferredApiVersion(localAccount.getApiVersion());
-            menu.findItem(R.id.menu_title).setVisible(preferredApiVersion != null && preferredApiVersion.compareTo(ApiVersion.API_VERSION_1_0) >= 0);
-            menu.findItem(R.id.menu_delete).setVisible(!isNew);
-        }
-    }
-
-    private void prepareFavoriteOption(MenuItem item) {
-        item.setIcon(TRUE.equals(note.getFavorite()) ? R.drawable.ic_star_white_24dp : R.drawable.ic_star_border_white_24dp);
-        item.setChecked(note.getFavorite());
-        tintMenuIcon(item, colorAccent);
     }
 
     /**
@@ -230,45 +197,10 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
             repo.deleteNoteAndSync(localAccount, note.getId());
             listener.close();
             return true;
-        } else if (itemId == R.id.menu_favorite) {
-            repo.toggleFavoriteAndSync(localAccount, note.getId());
-            listener.onNoteUpdated(note);
-            prepareFavoriteOption(item);
-            return true;
-        } else if (itemId == R.id.menu_category) {
-            showCategorySelector();
-            return true;
-        } else if (itemId == R.id.menu_title) {
-            showEditTitleDialog();
-            return true;
         } else if (itemId == R.id.menu_move) {
             executor.submit(() -> AccountPickerDialogFragment
                     .newInstance(new ArrayList<>(repo.getAccounts()), note.getAccountId())
                     .show(requireActivity().getSupportFragmentManager(), BaseNoteFragment.class.getSimpleName()));
-            return true;
-        } else if (itemId == R.id.menu_share) {
-            ShareUtil.openShareDialog(requireContext(), note.getTitle(), note.getContent());
-            return false;
-        } else if (itemId == MENU_ID_PIN) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                final ShortcutManager shortcutManager = requireActivity().getSystemService(ShortcutManager.class);
-                if (shortcutManager != null) {
-                    if (shortcutManager.isRequestPinShortcutSupported()) {
-                        final ShortcutInfo pinShortcutInfo = new ShortcutInfo.Builder(getActivity(), note.getId() + "")
-                                .setShortLabel(note.getTitle())
-                                .setIcon(Icon.createWithResource(requireActivity().getApplicationContext(), TRUE.equals(note.getFavorite()) ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp))
-                                .setIntent(new Intent(getActivity(), EditNoteActivity.class).putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId()).setAction(ACTION_SHORTCUT))
-                                .build();
-
-                        shortcutManager.requestPinShortcut(pinShortcutInfo, PendingIntent.getBroadcast(getActivity(), 0, shortcutManager.createShortcutResultIntent(pinShortcutInfo), 0).getIntentSender());
-                    } else {
-                        Log.i(TAG, "RequestPinShortcut is not supported");
-                    }
-                } else {
-                    Log.e(TAG, ShortcutManager.class.getSimpleName() + " is null");
-                }
-            }
-
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -312,6 +244,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                 } else {
                     Log.v(TAG, "... not saving, since nothing has changed");
                 }
+                if (callback != null) callback.onScheduled();
             } else {
                 // FIXME requires database queries on main thread!
                 note = repo.updateNoteAndSync(localAccount, note, newContent, null, callback);
@@ -328,32 +261,26 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     /**
      * Opens a dialog in order to chose a category
      */
-    private void showCategorySelector() {
-        final String fragmentId = "fragment_category";
-        FragmentManager manager = requireActivity().getSupportFragmentManager();
-        Fragment frag = manager.findFragmentByTag(fragmentId);
-        if (frag != null) {
-            manager.beginTransaction().remove(frag).commit();
-        }
-        final DialogFragment categoryFragment = CategoryDialogFragment.newInstance(note.getAccountId(), note.getCategory());
-        categoryFragment.setTargetFragment(this, 0);
-        categoryFragment.show(manager, fragmentId);
-    }
+    public void showNoteDetailsDialog() {
+        saveNote(new ISyncCallback() {
+            @Override
+            public void onFinish() {
 
-    /**
-     * Opens a dialog in order to chose a category
-     */
-    public void showEditTitleDialog() {
-        saveNote(null);
-        final String fragmentId = "fragment_edit_title";
-        FragmentManager manager = requireActivity().getSupportFragmentManager();
-        Fragment frag = manager.findFragmentByTag(fragmentId);
-        if (frag != null) {
-            manager.beginTransaction().remove(frag).commit();
-        }
-        DialogFragment editTitleFragment = EditTitleDialogFragment.newInstance(note.getTitle());
-        editTitleFragment.setTargetFragment(this, 0);
-        editTitleFragment.show(manager, fragmentId);
+            }
+
+            @Override
+            public void onScheduled() {
+                final String fragmentId = "fragment_note_details";
+                final FragmentManager manager = requireActivity().getSupportFragmentManager();
+                Fragment frag = manager.findFragmentByTag(fragmentId);
+                if (frag != null) {
+                    manager.beginTransaction().remove(frag).commit();
+                }
+                DialogFragment noteDetailsFragment = NoteDetailsDialogFragment.newInstance(localAccount, note.getId());
+                noteDetailsFragment.setTargetFragment(BaseNoteFragment.this, 0);
+                noteDetailsFragment.show(manager, fragmentId);
+            }
+        });
     }
 
     @Override

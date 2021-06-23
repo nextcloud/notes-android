@@ -17,17 +17,11 @@ public class NoteReadonlyFragment extends NotePreviewFragment {
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.menu_favorite).setVisible(false);
         menu.findItem(R.id.menu_edit).setVisible(false);
         menu.findItem(R.id.menu_preview).setVisible(false);
         menu.findItem(R.id.menu_cancel).setVisible(false);
         menu.findItem(R.id.menu_delete).setVisible(false);
-        menu.findItem(R.id.menu_share).setVisible(false);
         menu.findItem(R.id.menu_move).setVisible(false);
-        menu.findItem(R.id.menu_category).setVisible(false);
-        menu.findItem(R.id.menu_title).setVisible(false);
-        if (menu.findItem(MENU_ID_PIN) != null)
-            menu.findItem(MENU_ID_PIN).setVisible(false);
     }
 
     @Nullable
@@ -41,11 +35,6 @@ public class NoteReadonlyFragment extends NotePreviewFragment {
 
     @Override
     protected void registerInternalNoteLinkHandler() {
-        // Do nothing
-    }
-
-    @Override
-    public void showEditTitleDialog() {
         // Do nothing
     }
 
