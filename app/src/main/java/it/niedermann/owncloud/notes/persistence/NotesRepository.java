@@ -30,6 +30,7 @@ import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -231,6 +232,22 @@ public class NotesRepository {
         return db.getNoteDao().getNoteById$(id);
     }
 
+    public LiveData<String> getTitle$(long noteId) {
+        return distinctUntilChanged(db.getNoteDao().getTitle$(noteId));
+    }
+
+    public LiveData<String> getCategory$(long noteId) {
+        return distinctUntilChanged(db.getNoteDao().getCategory$(noteId));
+    }
+
+    public LiveData<Boolean> isFavorite$(long noteId) {
+        return distinctUntilChanged(db.getNoteDao().isFavorite$(noteId));
+    }
+
+    public LiveData<Calendar> getModified$(long noteId) {
+        return distinctUntilChanged(db.getNoteDao().getModified$(noteId));
+    }
+
     public Note getNoteById(long id) {
         return db.getNoteDao().getNoteById(id);
     }
@@ -426,12 +443,10 @@ public class NotesRepository {
 
     @AnyThread
     public void toggleFavoriteAndSync(Account account, long noteId) {
-        toggleFavorite(noteId);
-        executor.submit(() -> scheduleSync(account, true));
-    }
-
-    public void toggleFavorite(long noteId) {
-        executor.submit(() -> db.getNoteDao().toggleFavorite(noteId));
+        executor.submit(() -> {
+            db.getNoteDao().toggleFavorite(noteId);
+            scheduleSync(account, true);
+        });
     }
 
     /**
@@ -449,6 +464,14 @@ public class NotesRepository {
             db.getNoteDao().updateStatus(noteId, DBStatus.LOCAL_EDITED);
             db.getNoteDao().updateCategory(noteId, category);
             scheduleSync(account, true);
+        });
+    }
+
+    @AnyThread
+    public void setTitle(@NonNull Account account, long noteId, @NonNull String title) {
+        executor.submit(() -> {
+            final Note note = getNoteById(noteId);
+            updateNoteAndSync(account, note, note.getContent(), title, null);
         });
     }
 

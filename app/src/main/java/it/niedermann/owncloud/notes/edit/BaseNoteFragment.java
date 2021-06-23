@@ -35,11 +35,7 @@ import it.niedermann.android.util.ColorUtil;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandedFragment;
-import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
-import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment.CategoryDialogListener;
 import it.niedermann.owncloud.notes.edit.details.NoteDetailsDialogFragment;
-import it.niedermann.owncloud.notes.edit.title.EditTitleDialogFragment;
-import it.niedermann.owncloud.notes.edit.title.EditTitleDialogFragment.EditTitleListener;
 import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
@@ -47,11 +43,10 @@ import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 import it.niedermann.owncloud.notes.shared.util.NotesColorUtil;
-import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
 import static it.niedermann.owncloud.notes.NotesApplication.isDarkThemeActive;
 
-public abstract class BaseNoteFragment extends BrandedFragment implements CategoryDialogListener, EditTitleListener {
+public abstract class BaseNoteFragment extends BrandedFragment implements NoteDetailsDialogFragment.NoteDetailsListener {
 
     private static final String TAG = BaseNoteFragment.class.getSimpleName();
     protected final ExecutorService executor = Executors.newCachedThreadPool();
@@ -284,20 +279,11 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     }
 
     @Override
-    public void onCategoryChosen(String category) {
-        repo.setCategory(localAccount, note.getId(), category);
+    public void onNoteDetailsEdited(String title, String category) {
+        titleModified = true;
+        note.setTitle(title);
         note.setCategory(category);
         listener.onNoteUpdated(note);
-    }
-
-    @Override
-    public void onTitleEdited(String newTitle) {
-        titleModified = true;
-        note.setTitle(newTitle);
-        executor.submit(() -> {
-            note = repo.updateNoteAndSync(localAccount, note, note.getContent(), newTitle, null);
-            requireActivity().runOnUiThread(() -> listener.onNoteUpdated(note));
-        });
     }
 
     public void moveNote(Account account) {
