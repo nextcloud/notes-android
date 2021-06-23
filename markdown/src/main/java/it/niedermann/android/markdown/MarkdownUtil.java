@@ -92,6 +92,7 @@ public class MarkdownUtil {
             for (EListType listType : EListType.values()) {
                 if (checkboxCheckedEmoji != null) {
                     line = line.replace(listType.checkboxChecked, checkboxCheckedEmoji);
+                    line = line.replace(listType.checkboxCheckedUpperCase, checkboxCheckedEmoji);
                 }
                 if (checkboxUncheckedEmoji != null) {
                     line = line.replace(listType.checkboxUnchecked, checkboxUncheckedEmoji);
@@ -240,7 +241,7 @@ public class MarkdownUtil {
 
     public static boolean lineStartsWithCheckbox(@NonNull String line, @NonNull EListType listType) {
         final String trimmedLine = line.trim();
-        return (trimmedLine.startsWith(listType.checkboxUnchecked) || trimmedLine.startsWith(listType.checkboxChecked));
+        return (trimmedLine.startsWith(listType.checkboxUnchecked) || trimmedLine.startsWith(listType.checkboxChecked) || trimmedLine.startsWith(listType.checkboxCheckedUpperCase));
     }
 
     /**

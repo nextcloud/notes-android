@@ -184,33 +184,22 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                         // Verbose log output for https://github.com/stefan-niedermann/nextcloud-notes/issues/1256
                         runOnUiThread(() -> new AlertDialog.Builder(this)
                                 .setTitle(NextcloudFilesAppAccountNotFoundException.class.getSimpleName())
-                                .setMessage(R.string.backup_and_repair)
-                                .setPositiveButton(R.string.simple_repair, (a, b) -> {
-                                    executor.submit(() -> {
-                                        for (Account account : mainViewModel.getAccounts()) {
-                                            SingleAccountHelper.setCurrentAccount(this, account.getAccountName());
-                                            runOnUiThread(this::recreate);
-                                            break;
-                                        }
-                                    });
-                                })
-                                .setNegativeButton(R.string.simple_backup, (a, b) -> {
-                                    executor.submit(() -> {
-                                        final List<Note> modifiedNotes = new LinkedList<>();
-                                        for (Account account : mainViewModel.getAccounts()) {
-                                            modifiedNotes.addAll(mainViewModel.getLocalModifiedNotes(account.getId()));
-                                        }
-                                        if (modifiedNotes.size() == 1) {
-                                            final Note note = modifiedNotes.get(0);
-                                            ShareUtil.openShareDialog(this, note.getTitle(), note.getContent());
-                                        } else {
-                                            ShareUtil.openShareDialog(this,
-                                                    getResources().getQuantityString(R.plurals.share_multiple, modifiedNotes.size(), modifiedNotes.size()),
-                                                    mainViewModel.collectNoteContents(modifiedNotes.stream().map(Note::getId).collect(Collectors.toList())));
-                                        }
-                                    });
-                                })
-                                .setNeutralButton(android.R.string.cancel, (a, b) -> {
+                                .setMessage(R.string.backup)
+                                .setPositiveButton(R.string.simple_backup, (a, b) -> executor.submit(() -> {
+                                    final List<Note> modifiedNotes = new LinkedList<>();
+                                    for (Account account : mainViewModel.getAccounts()) {
+                                        modifiedNotes.addAll(mainViewModel.getLocalModifiedNotes(account.getId()));
+                                    }
+                                    if (modifiedNotes.size() == 1) {
+                                        final Note note = modifiedNotes.get(0);
+                                        ShareUtil.openShareDialog(this, note.getTitle(), note.getContent());
+                                    } else {
+                                        ShareUtil.openShareDialog(this,
+                                                getResources().getQuantityString(R.plurals.share_multiple, modifiedNotes.size(), modifiedNotes.size()),
+                                                mainViewModel.collectNoteContents(modifiedNotes.stream().map(Note::getId).collect(Collectors.toList())));
+                                    }
+                                }))
+                                .setNegativeButton(R.string.simple_error, (a, b) -> {
                                     final SharedPreferences ssoPreferences = AccountImporter.getSharedPreferences(getApplicationContext());
                                     final StringBuilder ssoPreferencesString = new StringBuilder()
                                             .append("Current SSO account: ").append(ssoPreferences.getString("PREF_CURRENT_ACCOUNT_STRING", null)).append("\n")

@@ -648,6 +648,14 @@ public class MarkdownUtilTest extends TestCase {
                     listType.checkboxUnchecked + " \n" +
                     listType.checkboxChecked + " Item";
             assertEquals(expected_9, MarkdownUtil.setCheckboxStatus(origin_9, 1, true));
+
+            final String origin_10 = "" +
+                    listType.checkboxChecked + " Item\n" +
+                    listType.checkboxCheckedUpperCase + " Item";
+            final String expected_10 = "" +
+                    listType.checkboxChecked + " Item\n" +
+                    listType.checkboxUnchecked + " Item";
+            assertEquals(expected_10, MarkdownUtil.setCheckboxStatus(origin_10, 1, false));
         }
     }
 
