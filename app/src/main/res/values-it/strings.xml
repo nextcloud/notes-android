@@ -249,4 +249,6 @@
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Devi essere connesso a Internet per aggiungere un account.</string>
     <string name="simple_next">Successivo</string>
     <string name="simple_prev">Precedente</string>
+    <string name="simple_backup">Backup</string>
+    <string name="simple_repair">Ripara</string>
     </resources>

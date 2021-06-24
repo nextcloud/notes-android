@@ -261,5 +261,4 @@
     <string name="simple_prev">Poprzednia</string>
     <string name="simple_backup">Kopia zapasowa</string>
     <string name="simple_repair">Naprawa</string>
-    <string name="backup_and_repair">Zalecane wykonanie kopii zapasowej wszystkich niezsynchronizowanych notatek, a następnie próbę naprawy konfiguracji.</string>
-</resources>
+    </resources>

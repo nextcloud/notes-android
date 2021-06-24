@@ -246,5 +246,4 @@
     <string name="simple_prev">上一個</string>
     <string name="simple_backup">備份</string>
     <string name="simple_repair">修復</string>
-    <string name="backup_and_repair">我們建議備份所有未同步的筆記，然後嘗試修復設置。</string>
-</resources>
+    </resources>

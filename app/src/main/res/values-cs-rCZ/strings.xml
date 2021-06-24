@@ -211,7 +211,7 @@
     <string name="formatting_help_lists_body_8">Dát lajk</string>
     <string name="formatting_help_lists_body_9">A toto</string>
 
-    <string name="formatting_help_checkboxes_title">Zaškrtávací pole</string>
+    <string name="formatting_help_checkboxes_title">Zaškrtávací kolonky</string>
     <string name="formatting_help_checkboxes_body_1">Pro vytvoření zaškrtávací kolonky použijte seznam následovaný závorkami</string>
     <string name="formatting_help_checkboxes_body_2">Položka 1</string>
     <string name="formatting_help_checkboxes_body_3">Položka 2</string>
@@ -261,5 +261,4 @@
     <string name="simple_prev">Předchozí</string>
     <string name="simple_backup">Zazálohovat</string>
     <string name="simple_repair">Opravit</string>
-    <string name="backup_and_repair">Doporučujeme zazálohovat veškeré nesesynchronizované poznámky a pak se pokusit opravit nastavení.</string>
-</resources>
+    </resources>
