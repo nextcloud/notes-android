@@ -297,5 +297,5 @@
     <string name="simple_prev">Previous</string>
     <string name="simple_backup">Backup</string>
     <string name="simple_repair">Repair</string>
-    <string name="backup_and_repair">We recommend to backup all unsynchronized notes and then try to repair the setup.</string>
+    <string name="backup">We detected an irrecoverably state of the app. Please backup your unsynchronized changes and clear the storage of the Notes app.</string>
 </resources>

@@ -1,0 +1,1 @@
+- ✅ Checkboxes using an uppercase X can not be toggled (#1276)
