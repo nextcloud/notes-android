@@ -28,6 +28,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -266,14 +267,6 @@ public class MarkdownUtil {
     }
 
     /**
-     * @param c Character to escape
-     * @return {@param c} escaped by a <code>\</code> character
-     */
-    private static String escape(char c) {
-        return "\\\\".substring(0, 1) + c;
-    }
-
-    /**
      * Modifies the {@param editable} and adds the given {@param punctuation} from
      * {@param selectionStart} to {@param selectionEnd} or removes the {@param punctuation} in case
      * it already is around the selected part.
@@ -287,33 +280,33 @@ public class MarkdownUtil {
         }
 
         // handle special case: italic (that damn thing will match like ANYTHING (regarding bold / bold+italic)....)
-        boolean isItalic = punctuation.length() == 1 && punctuation.charAt(0) == '*';
+        final boolean isItalic = punctuation.length() == 1 && punctuation.charAt(0) == '*';
         if (isItalic) {
-            int result = handleItalicEdgeCase(editable, initialString, selectionStart, selectionEnd);
-            // if it wasn't an edge case, we get -1
-            if (result > -1) {
-                return result;
+            final Optional<Integer> result = handleItalicEdgeCase(editable, initialString, selectionStart, selectionEnd);
+            // The result is only present if this actually was an edge case
+            if (result.isPresent()) {
+                return result.get();
             }
         }
 
         // handle the simple cases
-        String wildcardRex = "([^"+punctuation.charAt(0)+"])+";
-        String punctuationRex = Pattern.quote(punctuation);
-        String pattern = isItalic ?
+        final String wildcardRex = "([^" + punctuation.charAt(0) + "])+";
+        final String punctuationRex = Pattern.quote(punctuation);
+        final String pattern = isItalic ?
                 // in this case let's make optional asterisks around it, so it wont match anything between two (bold+italic)s
-                "\\*?\\*?" + punctuationRex + wildcardRex + punctuationRex + "\\*?\\*?":
+                "\\*?\\*?" + punctuationRex + wildcardRex + punctuationRex + "\\*?\\*?" :
                 punctuationRex + wildcardRex + punctuationRex;
-        Pattern searchPattern = Pattern.compile(pattern);
-        int relevantStart = selectionStart - 2;
-        int relevantEnd = selectionEnd + 2;
-        Matcher matcher = searchPattern.matcher(initialString).region(Math.max(relevantStart, 0), Math.min(relevantEnd, initialString.length()));
+        final Pattern searchPattern = Pattern.compile(pattern);
+        final int relevantStart = selectionStart - 2;
+        final int relevantEnd = selectionEnd + 2;
+        final Matcher matcher = searchPattern.matcher(initialString).region(Math.max(relevantStart, 0), Math.min(relevantEnd, initialString.length()));
 
         // if the matcher matches, it's a remove
         if (matcher.find()) {
             matcher.reset();
+            final int punctuationLength = punctuation.length();
+            final List<Pair<Integer, Integer>> startEnd = new LinkedList<>();
             int removedCount = 0;
-            int punctuationLength = punctuation.length();
-            List<Pair<Integer, Integer>> startEnd = new LinkedList<>();
             while (matcher.find()) {
                 startEnd.add(new Pair<>(matcher.start(), matcher.end()));
                 removedCount += punctuationLength;
@@ -325,8 +318,8 @@ public class MarkdownUtil {
             }
             int offsetAtEnd = 0;
             // depending on if the user has selected the markdown chars, we might need to add an offset to the resulting cursor positon
-            if (initialString.substring(Math.max(selectionEnd-punctuationLength+1, 0), Math.min(selectionEnd+1, initialString.length())).equals(punctuation) ||
-                    initialString.substring(selectionEnd, Math.min(selectionEnd+punctuationLength, initialString.length())).equals(punctuation)){
+            if (initialString.substring(Math.max(selectionEnd - punctuationLength + 1, 0), Math.min(selectionEnd + 1, initialString.length())).equals(punctuation) ||
+                    initialString.substring(selectionEnd, Math.min(selectionEnd + punctuationLength, initialString.length())).equals(punctuation)) {
                 offsetAtEnd = punctuationLength;
             }
             return selectionEnd - removedCount * 2 + offsetAtEnd;
@@ -335,7 +328,7 @@ public class MarkdownUtil {
         }
 
         // do nothing when punctuation is contained only once
-        if (Pattern.compile(punctuationRex).matcher(initialString).region(selectionStart, selectionEnd).find()){
+        if (Pattern.compile(punctuationRex).matcher(initialString).region(selectionStart, selectionEnd).find()) {
             return selectionEnd;
         }
 
@@ -348,20 +341,24 @@ public class MarkdownUtil {
         editable.delete(start, start + punctuationLength);
     }
 
-    private static int handleItalicEdgeCase(Editable editable, String editableAsString, int selectionStart, int selectionEnd) {
+    /**
+     * @return an {@link Optional<Integer>} of the new cursor position.
+     * The return value is only {@link Optional#isPresent()}, if this is an italic edge case.
+     */
+    private static Optional<Integer> handleItalicEdgeCase(Editable editable, String editableAsString, int selectionStart, int selectionEnd) {
         // look if selection is bold, this is the only edge case afaik
         String punctuationRex = Pattern.quote("**");
-        Pattern searchPattern = Pattern.compile("[^*]" + punctuationRex + "([^*])*"+ punctuationRex + "[^*]");
+        Pattern searchPattern = Pattern.compile("[^*]" + punctuationRex + "([^*])*" + punctuationRex + "[^*]");
         // look the selection expansion by 1 is intended, so the NOT '*' has a chance to match. we don't want to match ***blah***
-        Matcher matcher = searchPattern.matcher(editableAsString).region(Math.max(selectionStart-1, 0), Math.min(selectionEnd+1, editableAsString.length()));
+        Matcher matcher = searchPattern.matcher(editableAsString).region(Math.max(selectionStart - 1, 0), Math.min(selectionEnd + 1, editableAsString.length()));
         if (matcher.find()) {
-            return insertPunctuation(editable, selectionStart, selectionEnd, "*");
+            return Optional.of(insertPunctuation(editable, selectionStart, selectionEnd, "*"));
         }
         // look around (3 chars) (NOT '*' + "**"). User might have selected the text only
-        if (matcher.region(Math.max(selectionStart-3, 0), Math.min(selectionEnd+3, editableAsString.length())).find()) {
-            return insertPunctuation(editable, selectionStart, selectionEnd, "*");
+        if (matcher.region(Math.max(selectionStart - 3, 0), Math.min(selectionEnd + 3, editableAsString.length())).find()) {
+            return Optional.of(insertPunctuation(editable, selectionStart, selectionEnd, "*"));
         }
-        return -1;
+        return Optional.empty();
     }
 
     private static int insertPunctuation(Editable editable, int firstPosition, int secondPosition, String punctuation) {

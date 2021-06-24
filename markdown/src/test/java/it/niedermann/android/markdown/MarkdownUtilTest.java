@@ -488,33 +488,6 @@ public class MarkdownUtilTest extends TestCase {
     }
 
     @Test
-    public void testEscape() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        final Method m = MarkdownUtil.class.getDeclaredMethod("escape", char.class);
-        m.setAccessible(true);
-
-        assertEquals("\\*", m.invoke(null, '*'));
-        assertEquals("\\_", m.invoke(null, '_'));
-        assertEquals("\\~", m.invoke(null, '~'));
-    }
-
-    @Test
-    @SuppressWarnings("ConstantConditions")
-    public void testGetContainedPunctuationCount() {
-        try {
-            final Method m = MarkdownUtil.class.getDeclaredMethod("getContainedPunctuationCount", CharSequence.class, int.class, int.class, String.class);
-            m.setAccessible(true);
-            assertEquals(0, (int) m.invoke(null, "*Lorem ipsum*", 1, 12, "*"));
-            assertEquals(1, (int) m.invoke(null, "*Lorem ipsum*", 1, 13, "*"));
-            assertEquals(2, (int) m.invoke(null, "*Lorem ipsum*", 0, 13, "*"));
-            assertEquals(0, (int) m.invoke(null, "*Lorem ipsum*", 0, 13, "**"));
-            assertEquals(0, (int) m.invoke(null, "*Lorem ipsum**", 0, 13, "**"));
-            assertEquals(1, (int) m.invoke(null, "*Lorem ipsum**", 0, 14, "**"));
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
     @SuppressWarnings("ConstantConditions")
     public void testSelectionIsInLink() {
         try {
