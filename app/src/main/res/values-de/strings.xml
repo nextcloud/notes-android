@@ -251,5 +251,4 @@
     <string name="simple_prev">Vorheriges</string>
     <string name="simple_backup">Sicherung</string>
     <string name="simple_repair">Reparieren</string>
-    <string name="backup_and_repair">Wir empfehlen, alle unsynchronisierten Notizen zu sichern und dann zu reparieren.</string>
-</resources>
+    </resources>
