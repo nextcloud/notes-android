@@ -293,10 +293,10 @@ public class MarkdownUtil {
         // handle the simple cases
         final String wildcardRex = "([^" + punctuation.charAt(0) + "])+";
         final String punctuationRex = Pattern.quote(punctuation);
-        final String pattern = isItalic ?
+        final String pattern = isItalic
                 // in this case let's make optional asterisks around it, so it wont match anything between two (bold+italic)s
-                "\\*?\\*?" + punctuationRex + wildcardRex + punctuationRex + "\\*?\\*?" :
-                punctuationRex + wildcardRex + punctuationRex;
+                ? "\\*?\\*?" + punctuationRex + wildcardRex + punctuationRex + "\\*?\\*?"
+                : punctuationRex + wildcardRex + punctuationRex;
         final Pattern searchPattern = Pattern.compile(pattern);
         final int relevantStart = selectionStart - 2;
         final int relevantEnd = selectionEnd + 2;
