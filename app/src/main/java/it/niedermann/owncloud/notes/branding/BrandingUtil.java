@@ -21,6 +21,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.preference.PreferenceManager;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import it.niedermann.android.sharedpreferences.SharedPreferenceIntLiveData;
 import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
@@ -160,5 +162,16 @@ public class BrandingUtil {
         } else {
             DrawableCompat.setTint(drawable, mainColor);
         }
+    }
+
+    public static void applyBrandToEditTextInputLayout(@ColorInt int color, @NonNull TextInputLayout til) {
+        final int colorPrimary = ContextCompat.getColor(til.getContext(), R.color.primary);
+        final int colorAccent = ContextCompat.getColor(til.getContext(), R.color.accent);
+        final ColorStateList colorDanger = ColorStateList.valueOf(ContextCompat.getColor(til.getContext(), R.color.design_default_color_error));
+        til.setBoxStrokeColor(contrastRatioIsSufficient(color, colorPrimary) ? color : colorAccent);
+        til.setHintTextColor(ColorStateList.valueOf(contrastRatioIsSufficient(color, colorPrimary) ? color : colorAccent));
+        til.setErrorTextColor(colorDanger);
+        til.setBoxStrokeErrorColor(colorDanger);
+        til.setErrorIconTintList(colorDanger);
     }
 }

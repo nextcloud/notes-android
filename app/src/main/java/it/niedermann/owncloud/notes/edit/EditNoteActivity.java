@@ -29,11 +29,9 @@ import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerListener;
 import it.niedermann.owncloud.notes.databinding.ActivityEditBinding;
-import it.niedermann.owncloud.notes.databinding.ActivityEditBinding;
-import it.niedermann.owncloud.notes.edit.category.CategoryViewModel;
+import it.niedermann.owncloud.notes.edit.details.CategoryViewModel;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
-import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
@@ -84,7 +82,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         }
 
         setSupportActionBar(binding.toolbar);
-        binding.toolbar.setOnClickListener((v) -> fragment.showEditTitleDialog());
+        binding.toolbar.setOnClickListener((v) -> fragment.showNoteDetailsDialog());
     }
 
     @Override

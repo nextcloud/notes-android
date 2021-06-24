@@ -298,4 +298,6 @@
     <string name="simple_backup">Backup</string>
     <string name="simple_repair">Repair</string>
     <string name="backup">We detected an irrecoverably state of the app. Please backup your unsynchronized changes and clear the storage of the Notes app.</string>
+    <string name="simple_details">Details</string>
+    <string name="simple_title">Title</string>
 </resources>

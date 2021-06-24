@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
@@ -53,6 +54,12 @@ public interface NoteDao {
     @Query(count)
     LiveData<Integer> count$(long accountId);
 
+    @Query("SELECT title FROM NOTE WHERE id = :noteId")
+    LiveData<String> getTitle$(long noteId);
+
+    @Query("SELECT modified FROM NOTE WHERE id = :noteId")
+    LiveData<Calendar> getModified$(long noteId);
+
     @Query(count)
     Integer count(long accountId);
 
@@ -61,6 +68,9 @@ public interface NoteDao {
 
     @Query(countFavorites)
     Integer countFavorites(long accountId);
+
+    @Query("SELECT favorite FROM NOTE WHERE id = :noteId")
+    LiveData<Boolean> isFavorite$(long noteId);
 
     @Query(searchRecentByModified)
     LiveData<List<Note>> searchRecentByModified$(long accountId, String query);
@@ -187,6 +197,9 @@ public interface NoteDao {
      */
     @Query("SELECT accountId, category, COUNT(*) as 'totalNotes' FROM NOTE WHERE STATUS != 'LOCAL_DELETED' AND accountId = :accountId GROUP BY category")
     LiveData<List<CategoryWithNotesCount>> getCategories$(Long accountId);
+
+    @Query("SELECT category FROM NOTE WHERE id = :noteId")
+    LiveData<String> getCategory$(long noteId);
 
     @Query("SELECT accountId, category, COUNT(*) as 'totalNotes' FROM NOTE WHERE STATUS != 'LOCAL_DELETED' AND accountId = :accountId AND category != '' AND category LIKE :searchTerm GROUP BY category")
     LiveData<List<CategoryWithNotesCount>> searchCategories$(Long accountId, String searchTerm);

@@ -24,6 +24,8 @@ import it.niedermann.owncloud.notes.branding.BrandedAlertDialogBuilder;
 import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.DialogChangeCategoryBinding;
+import it.niedermann.owncloud.notes.edit.details.CategoryAdapter;
+import it.niedermann.owncloud.notes.edit.details.CategoryViewModel;
 import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
 
 /**
