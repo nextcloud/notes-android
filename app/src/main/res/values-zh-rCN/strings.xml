@@ -246,5 +246,4 @@
     <string name="simple_prev">上一则</string>
     <string name="simple_backup">备份</string>
     <string name="simple_repair">修复</string>
-    <string name="backup_and_repair">我们建议备份所有未同步的笔记，然后尝试修复安装。</string>
-</resources>
+    </resources>

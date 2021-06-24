@@ -251,5 +251,4 @@
     <string name="simple_prev">Anterior</string>
     <string name="simple_backup">Backup</string>
     <string name="simple_repair">Reparar</string>
-    <string name="backup_and_repair">Recomendamos fazer backup de todas as notas não sincronizadas e, em seguida, tentar reparar a configuração. </string>
-</resources>
+    </resources>

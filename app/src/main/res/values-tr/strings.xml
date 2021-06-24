@@ -251,5 +251,4 @@
     <string name="simple_prev">Önceki</string>
     <string name="simple_backup">Yedekle</string>
     <string name="simple_repair">Onar</string>
-    <string name="backup_and_repair">Eşitlenmemiş tüm notları yedekledikten sonra kurulumu onarmayı denemeniz önerilir.</string>
-</resources>
+    </resources>
