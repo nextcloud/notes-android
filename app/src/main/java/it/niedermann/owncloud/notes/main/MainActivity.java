@@ -9,13 +9,9 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewTreeObserver;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -56,7 +52,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import it.niedermann.owncloud.notes.LockedActivity;
@@ -397,36 +392,14 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         setSupportActionBar(binding.activityNotesListView.toolbar);
         activityBinding.homeToolbar.setOnClickListener((v) -> {
             if (activityBinding.toolbar.getVisibility() == GONE) {
-                updateToolbars(false);
+                updateToolbars(true);
             }
         });
 
         activityBinding.menuButton.setOnClickListener((v) -> binding.drawerLayout.openDrawer(GravityCompat.START));
-
-        final LinearLayout searchEditFrame = activityBinding.searchView.findViewById(R.id.search_edit_frame);
-
-        searchEditFrame.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            int oldVisibility = -1;
-
-            @Override
-            public void onGlobalLayout() {
-                int currentVisibility = searchEditFrame.getVisibility();
-
-                if (currentVisibility != oldVisibility) {
-                    if (currentVisibility == VISIBLE) {
-                        fabCreate.hide();
-                    } else {
-                        new Handler().postDelayed(() -> fabCreate.show(), 150);
-                    }
-
-                    oldVisibility = currentVisibility;
-                }
-            }
-
-        });
         activityBinding.searchView.setOnCloseListener(() -> {
             if (activityBinding.toolbar.getVisibility() == VISIBLE && TextUtils.isEmpty(activityBinding.searchView.getQuery())) {
-                updateToolbars(true);
+                updateToolbars(false);
                 return true;
             }
             return false;
@@ -625,7 +598,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     @Override
     public boolean onSupportNavigateUp() {
         if (activityBinding.toolbar.getVisibility() == VISIBLE) {
-            updateToolbars(true);
+            updateToolbars(false);
             return true;
         } else {
             return super.onSupportNavigateUp();
@@ -764,7 +737,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     @Override
     public void onBackPressed() {
         if (activityBinding.toolbar.getVisibility() == VISIBLE) {
-            updateToolbars(true);
+            updateToolbars(false);
         } else if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             binding.drawerLayout.closeDrawer(GravityCompat.START);
         } else {
@@ -772,12 +745,16 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         }
     }
 
-    private void updateToolbars(boolean disableSearch) {
-        activityBinding.homeToolbar.setVisibility(disableSearch ? VISIBLE : GONE);
-        activityBinding.toolbar.setVisibility(disableSearch ? GONE : VISIBLE);
-        activityBinding.appBar.setStateListAnimator(AnimatorInflater.loadStateListAnimator(activityBinding.appBar.getContext(),
-                disableSearch ? R.animator.appbar_elevation_off : R.animator.appbar_elevation_on));
-        if (disableSearch) {
+    private void updateToolbars(boolean enableSearch) {
+        activityBinding.homeToolbar.setVisibility(enableSearch ? GONE : VISIBLE);
+        activityBinding.toolbar.setVisibility(enableSearch ? VISIBLE : GONE);
+        activityBinding.appBar.setStateListAnimator(AnimatorInflater.loadStateListAnimator(activityBinding.appBar.getContext(), enableSearch
+                        ? R.animator.appbar_elevation_on
+                        : R.animator.appbar_elevation_off));
+        if (enableSearch) {
+            activityBinding.searchView.setIconified(false);
+            fabCreate.show();
+        } else {
             activityBinding.searchView.setQuery(null, true);
         }
     }
