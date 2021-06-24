@@ -346,12 +346,13 @@ public class MarkdownUtil {
      * @return an {@link Optional<Integer>} of the new cursor position.
      * The return value is only {@link Optional#isPresent()}, if this is an italic edge case.
      */
+    @NonNull
     private static Optional<Integer> handleItalicEdgeCase(Editable editable, String editableAsString, int selectionStart, int selectionEnd) {
         // look if selection is bold, this is the only edge case afaik
-        String punctuationRex = Pattern.quote("**");
-        Pattern searchPattern = Pattern.compile("[^*]" + punctuationRex + "([^*])*" + punctuationRex + "[^*]");
+        final String punctuationRex = Pattern.quote("**");
+        final Pattern searchPattern = Pattern.compile("[^*]" + punctuationRex + "([^*])*" + punctuationRex + "[^*]");
         // look the selection expansion by 1 is intended, so the NOT '*' has a chance to match. we don't want to match ***blah***
-        Matcher matcher = searchPattern.matcher(editableAsString).region(Math.max(selectionStart - 1, 0), Math.min(selectionEnd + 1, editableAsString.length()));
+        final Matcher matcher = searchPattern.matcher(editableAsString).region(Math.max(selectionStart - 1, 0), Math.min(selectionEnd + 1, editableAsString.length()));
         if (matcher.find()) {
             return Optional.of(insertPunctuation(editable, selectionStart, selectionEnd, "*"));
         }
