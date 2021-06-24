@@ -1,2 +1,3 @@
 - ✅ Checkboxes using an uppercase X can not be toggled (#1276)
 - 🐞 Search field does not immediately focus (#1282)
+- 🐞 Change grid view option not always applied directly (#1254)

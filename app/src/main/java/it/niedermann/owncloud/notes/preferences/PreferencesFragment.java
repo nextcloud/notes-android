@@ -8,6 +8,7 @@ import android.util.Log;
 import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -24,6 +25,8 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
 
     private static final String TAG = PreferencesFragment.class.getSimpleName();
 
+    private PreferencesViewModel viewModel;
+
     private BrandedSwitchPreference fontPref;
     private BrandedSwitchPreference lockPref;
     private BrandedSwitchPreference wifiOnlyPref;
@@ -32,13 +35,10 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
     private BrandedSwitchPreference backgroundSyncPref;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.preferences);
+
+        viewModel = new ViewModelProvider(requireActivity()).get(PreferencesViewModel.class);
 
         fontPref = findPreference(getString(R.string.pref_key_font));
 
@@ -47,7 +47,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
             gridViewPref.setOnPreferenceChangeListener((Preference preference, Object newValue) -> {
                 final Boolean gridView = (Boolean) newValue;
                 Log.v(TAG, "gridView: " + gridView);
-                requireActivity().setResult(Activity.RESULT_OK);
+                viewModel.resultCode$.setValue(Activity.RESULT_OK);
                 NotesApplication.updateGridViewEnabled(gridView);
                 return true;
             });
@@ -78,7 +78,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
         assert themePref != null;
         themePref.setOnPreferenceChangeListener((preference, newValue) -> {
             NotesApplication.setAppTheme(DarkModeSetting.valueOf((String) newValue));
-            requireActivity().setResult(Activity.RESULT_OK);
+            viewModel.resultCode$.setValue(Activity.RESULT_OK);
             ActivityCompat.recreate(requireActivity());
             return true;
         });
@@ -114,6 +114,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
     /**
      * Change color for backgroundSyncPref as well
      * https://github.com/stefan-niedermann/nextcloud-deck/issues/531
+     *
      * @param mainColor color of main brand
      * @param textColor color of text
      */
