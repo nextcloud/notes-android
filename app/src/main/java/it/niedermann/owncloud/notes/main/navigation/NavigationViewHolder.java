@@ -62,7 +62,7 @@ class NavigationViewHolder extends RecyclerView.ViewHolder {
         view.setSelected(isSelected);
 
         ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
-        params.leftMargin = item.icon == NavigationAdapter.ICON_SUB_FOLDER ? 70 : 0;
+        params.leftMargin = item.icon == NavigationAdapter.ICON_SUB_FOLDER ? view.getResources().getDimensionPixelSize(R.dimen.margin_25) : 0;
         view.requestLayout();
     }
 }
