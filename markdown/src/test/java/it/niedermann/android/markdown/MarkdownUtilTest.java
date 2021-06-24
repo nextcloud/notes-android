@@ -264,13 +264,6 @@ public class MarkdownUtilTest extends TestCase {
         assertEquals(32, MarkdownUtil.togglePunctuation(builder, 0, 31, "*"));
         assertEquals("*Lorem **ipsum** dolor sit amet.*", builder.toString());
 
-        // ######### These one doesn't make any sense imho. The user selects the whole text and want everything to be italic.
-        // ######### Instead the algorithm decides, that only the bold parts should be italic? Are we Microsoft or something?
-        // Toggle multiple bold parts to italic
-//        builder = new SpannableStringBuilder("Lorem **ipsum** dolor **sit** amet.");
-//        assertEquals(32, MarkdownUtil.togglePunctuation(builder, 0, 34, "*"));
-//        assertEquals("Lorem ***ipsum*** dolor ***sit*** amet.", builder.toString());
-
         // Toggle italic and bold to bold
         builder = new SpannableStringBuilder("Lorem ***ipsum*** dolor sit amet.");
         assertEquals(13, MarkdownUtil.togglePunctuation(builder, 0, 14, "*"));
@@ -332,6 +325,11 @@ public class MarkdownUtilTest extends TestCase {
         builder = new SpannableStringBuilder("**Bold**Italic");
         assertEquals(15, MarkdownUtil.togglePunctuation(builder, 8, 14, "*"));
         assertEquals("**Bold***Italic*", builder.toString());
+
+        // Toggle italic for last of many bolds in one line
+        builder = new SpannableStringBuilder("Lorem **Ipsum** **Dolor**");
+        assertEquals(22, MarkdownUtil.togglePunctuation(builder, 18, 23, "*"));
+        assertEquals("Lorem **Ipsum** *Dolor*", builder.toString());
 
         // Multiline
 

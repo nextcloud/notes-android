@@ -318,7 +318,7 @@ public class MarkdownUtil {
                 deletePunctuation(editable, punctuationLength, item.first, item.second);
             }
             int offsetAtEnd = 0;
-            // depending on if the user has selected the markdown chars, we might need to add an offset to the resulting cursor positon
+            // depending on if the user has selected the markdown chars, we might need to add an offset to the resulting cursor position
             if (initialString.substring(Math.max(selectionEnd - punctuationLength + 1, 0), Math.min(selectionEnd + 1, initialString.length())).equals(punctuation) ||
                     initialString.substring(selectionEnd, Math.min(selectionEnd + punctuationLength, initialString.length())).equals(punctuation)) {
                 offsetAtEnd = punctuationLength;
