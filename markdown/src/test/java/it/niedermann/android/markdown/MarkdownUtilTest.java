@@ -98,53 +98,77 @@ public class MarkdownUtilTest extends TestCase {
         final Map<String, Boolean> lines = new HashMap<>();
         lines.put("  - [ ] a", true);
         lines.put("  - [x] a", true);
+        lines.put("  - [X] a", true);
         lines.put("  * [ ] a", true);
         lines.put("  * [x] a", true);
+        lines.put("  * [X] a", true);
         lines.put("  + [ ] a", true);
         lines.put("  + [x] a", true);
+        lines.put("  + [X] a", true);
         lines.put("- [ ] a", true);
         lines.put("- [x] a", true);
+        lines.put("- [X] a", true);
         lines.put("* [ ] a", true);
         lines.put("* [x] a", true);
+        lines.put("* [X] a", true);
         lines.put("+ [ ] a", true);
         lines.put("+ [x] a", true);
+        lines.put("+ [X] a", true);
         lines.put("  - [ ] ", true);
         lines.put("  - [x] ", true);
+        lines.put("  - [X] ", true);
         lines.put("  * [ ] ", true);
         lines.put("  * [x] ", true);
+        lines.put("  * [X] ", true);
         lines.put("  + [ ] ", true);
         lines.put("  + [x] ", true);
+        lines.put("  + [X] ", true);
         lines.put("  - [ ]", true);
         lines.put("  - [x]", true);
+        lines.put("  - [X]", true);
         lines.put("  * [ ]", true);
         lines.put("  * [x]", true);
+        lines.put("  * [X]", true);
         lines.put("  + [ ]", true);
         lines.put("  + [x]", true);
+        lines.put("  + [X]", true);
         lines.put("- [ ] ", true);
         lines.put("- [x] ", true);
+        lines.put("- [X] ", true);
         lines.put("* [ ] ", true);
         lines.put("* [x] ", true);
+        lines.put("* [X] ", true);
         lines.put("+ [ ] ", true);
         lines.put("+ [x] ", true);
+        lines.put("+ [X] ", true);
         lines.put("- [ ]", true);
         lines.put("- [x]", true);
+        lines.put("- [X]", true);
         lines.put("* [ ]", true);
         lines.put("* [x]", true);
+        lines.put("* [X]", true);
         lines.put("+ [ ]", true);
         lines.put("+ [x]", true);
+        lines.put("+ [X]", true);
 
         lines.put("-[ ] ", false);
         lines.put("-[x] ", false);
+        lines.put("-[X] ", false);
         lines.put("*[ ] ", false);
         lines.put("*[x] ", false);
+        lines.put("*[X] ", false);
         lines.put("+[ ] ", false);
         lines.put("+[x] ", false);
+        lines.put("+[X] ", false);
         lines.put("-[ ]", false);
         lines.put("-[x]", false);
+        lines.put("-[X]", false);
         lines.put("*[ ]", false);
         lines.put("*[x]", false);
+        lines.put("*[X]", false);
         lines.put("+[ ]", false);
         lines.put("+[x]", false);
+        lines.put("+[X]", false);
 
         lines.put("- [] ", false);
         lines.put("* [] ", false);
@@ -330,6 +354,11 @@ public class MarkdownUtilTest extends TestCase {
         builder = new SpannableStringBuilder("Lorem **Ipsum** **Dolor**");
         assertEquals(24, MarkdownUtil.togglePunctuation(builder, 18, 23, "*"));
         assertEquals("Lorem **Ipsum** ***Dolor***", builder.toString());
+
+        // Toggle italic for last bold + italic in a row of multiple marked elements
+        builder = new SpannableStringBuilder("Lorem **Ipsum** ***Dolor***");
+        assertEquals(23, MarkdownUtil.togglePunctuation(builder, 19, 24, "*"));
+        assertEquals("Lorem **Ipsum** **Dolor**", builder.toString());
 
         // Multiline
 
