@@ -298,13 +298,16 @@ public class MarkdownUtil {
                 ? "\\*?\\*?" + punctuationRex + wildcardRex + punctuationRex + "\\*?\\*?"
                 : punctuationRex + wildcardRex + punctuationRex;
         final Pattern searchPattern = Pattern.compile(pattern);
-        final int relevantStart = selectionStart - 2;
-        final int relevantEnd = selectionEnd + 2;
-        final Matcher matcher = searchPattern.matcher(initialString).region(Math.max(relevantStart, 0), Math.min(relevantEnd, initialString.length()));
+        int relevantStart = selectionStart - 2;
+        relevantStart = Math.max(relevantStart, 0);
+        int relevantEnd = selectionEnd + 2;
+        relevantEnd = Math.min(relevantEnd, initialString.length());
+        final Matcher matcher = searchPattern.matcher(initialString).region(relevantStart, relevantEnd);
 
         // if the matcher matches, it's a remove
         if (matcher.find()) {
-            matcher.reset();
+            // this resets the matcher, while keeping the required region
+            matcher.region(relevantStart, relevantEnd);
             final int punctuationLength = punctuation.length();
             final List<Pair<Integer, Integer>> startEnd = new LinkedList<>();
             int removedCount = 0;
