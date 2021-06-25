@@ -328,8 +328,8 @@ public class MarkdownUtilTest extends TestCase {
 
         // Toggle italic for last of many bolds in one line
         builder = new SpannableStringBuilder("Lorem **Ipsum** **Dolor**");
-        assertEquals(22, MarkdownUtil.togglePunctuation(builder, 18, 23, "*"));
-        assertEquals("Lorem **Ipsum** *Dolor*", builder.toString());
+        assertEquals(24, MarkdownUtil.togglePunctuation(builder, 18, 23, "*"));
+        assertEquals("Lorem **Ipsum** ***Dolor***", builder.toString());
 
         // Multiline
 
