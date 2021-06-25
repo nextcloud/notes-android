@@ -53,6 +53,7 @@ public class MarkdownUtil {
     private static final String checkboxCheckedEmoji = getCheckboxEmoji(true);
     @Nullable
     private static final String checkboxUncheckedEmoji = getCheckboxEmoji(false);
+    public static final String BOLD_PUNCTUATION_REX = Pattern.quote("**");
 
     private MarkdownUtil() {
         // Util class
@@ -352,10 +353,11 @@ public class MarkdownUtil {
     @NonNull
     private static Optional<Integer> handleItalicEdgeCase(Editable editable, String editableAsString, int selectionStart, int selectionEnd) {
         // look if selection is bold, this is the only edge case afaik
-        final String punctuationRex = Pattern.quote("**");
+        final String punctuationRex = BOLD_PUNCTUATION_REX;
         final Pattern searchPattern = Pattern.compile("(^|[^*])" + punctuationRex + "([^*])*" + punctuationRex + "([^*]|$)");
         // look the selection expansion by 1 is intended, so the NOT '*' has a chance to match. we don't want to match ***blah***
-        final Matcher matcher = searchPattern.matcher(editableAsString).region(Math.max(selectionStart - 1, 0), Math.min(selectionEnd + 1, editableAsString.length()));
+        final Matcher matcher = searchPattern.matcher(editableAsString)
+                .region(Math.max(selectionStart - 1, 0), Math.min(selectionEnd + 1, editableAsString.length()));
         if (matcher.find()) {
             return Optional.of(insertPunctuation(editable, selectionStart, selectionEnd, "*"));
         }
