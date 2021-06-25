@@ -37,23 +37,23 @@ import io.noties.markwon.Markwon;
 import it.niedermann.android.markdown.model.EListType;
 import it.niedermann.android.markdown.model.SearchSpan;
 
+@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 public class MarkdownUtil {
 
     private static final String TAG = MarkdownUtil.class.getSimpleName();
 
-    private final static Parser parser = Parser.builder().build();
-    private final static HtmlRenderer renderer = HtmlRenderer.builder().softbreak("<br>").build();
+    private static final Parser PARSER = Parser.builder().build();
+    private static final HtmlRenderer RENDERER = HtmlRenderer.builder().softbreak("<br>").build();
 
     private static final Pattern PATTERN_CODE_FENCE = Pattern.compile("^(`{3,})");
     private static final Pattern PATTERN_ORDERED_LIST_ITEM = Pattern.compile("^(\\d+).\\s.+$");
     private static final Pattern PATTERN_ORDERED_LIST_ITEM_EMPTY = Pattern.compile("^(\\d+).\\s$");
     private static final Pattern PATTERN_MARKDOWN_LINK = Pattern.compile("\\[(.+)?]\\(([^ ]+?)?( \"(.+)\")?\\)");
 
-    @Nullable
-    private static final String checkboxCheckedEmoji = getCheckboxEmoji(true);
-    @Nullable
-    private static final String checkboxUncheckedEmoji = getCheckboxEmoji(false);
-    public static final String BOLD_PUNCTUATION_REX = Pattern.quote("**");
+    private static final String PATTERN_QUOTE_BOLD_PUNCTUATION = Pattern.quote("**");
+
+    private static final Optional<String> CHECKBOX_CHECKED_EMOJI = getCheckboxEmoji(true);
+    private static final Optional<String> CHECKBOX_UNCHECKED_EMOJI = getCheckboxEmoji(false);
 
     private MarkdownUtil() {
         // Util class
@@ -67,7 +67,7 @@ public class MarkdownUtil {
      */
     public static CharSequence renderForRemoteView(@NonNull Context context, @NonNull String content) {
         // Create HTML string from Markup
-        final String html = renderer.render(parser.parse(replaceCheckboxesWithEmojis(content)));
+        final String html = RENDERER.render(PARSER.parse(replaceCheckboxesWithEmojis(content)));
 
         // Create Spanned from HTML, with special handling for ordered list items
         final Spanned spanned = HtmlCompat.fromHtml(ListTagHandler.prepareTagHandling(html), 0, null, new ListTagHandler());
@@ -78,16 +78,17 @@ public class MarkdownUtil {
 
     @SuppressWarnings("SameParameterValue")
     private static Spanned customizeQuoteSpanAppearance(@NonNull Context context, @NonNull Spanned input, int stripeWidth, int gapWidth) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
+            return input;
+        }
         final SpannableStringBuilder ssb = new SpannableStringBuilder(input);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            final QuoteSpan[] originalQuoteSpans = ssb.getSpans(0, ssb.length(), QuoteSpan.class);
-            @ColorInt final int colorBlockQuote = ContextCompat.getColor(context, R.color.block_quote);
-            for (QuoteSpan originalQuoteSpan : originalQuoteSpans) {
-                final int start = ssb.getSpanStart(originalQuoteSpan);
-                final int end = ssb.getSpanEnd(originalQuoteSpan);
-                ssb.removeSpan(originalQuoteSpan);
-                ssb.setSpan(new QuoteSpan(colorBlockQuote, stripeWidth, gapWidth), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
+        final QuoteSpan[] originalQuoteSpans = ssb.getSpans(0, ssb.length(), QuoteSpan.class);
+        @ColorInt final int colorBlockQuote = ContextCompat.getColor(context, R.color.block_quote);
+        for (QuoteSpan originalQuoteSpan : originalQuoteSpans) {
+            final int start = ssb.getSpanStart(originalQuoteSpan);
+            final int end = ssb.getSpanEnd(originalQuoteSpan);
+            ssb.removeSpan(originalQuoteSpan);
+            ssb.setSpan(new QuoteSpan(colorBlockQuote, stripeWidth, gapWidth), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
         return ssb;
     }
@@ -96,40 +97,41 @@ public class MarkdownUtil {
     public static String replaceCheckboxesWithEmojis(@NonNull String content) {
         return runForEachCheckbox(content, (line) -> {
             for (EListType listType : EListType.values()) {
-                if (checkboxCheckedEmoji != null) {
-                    line = line.replace(listType.checkboxChecked, checkboxCheckedEmoji);
-                    line = line.replace(listType.checkboxCheckedUpperCase, checkboxCheckedEmoji);
+                if (CHECKBOX_CHECKED_EMOJI.isPresent()) {
+                    line = line.replace(listType.checkboxChecked, CHECKBOX_CHECKED_EMOJI.get());
+                    line = line.replace(listType.checkboxCheckedUpperCase, CHECKBOX_CHECKED_EMOJI.get());
                 }
-                if (checkboxUncheckedEmoji != null) {
-                    line = line.replace(listType.checkboxUnchecked, checkboxUncheckedEmoji);
+                if (CHECKBOX_UNCHECKED_EMOJI.isPresent()) {
+                    line = line.replace(listType.checkboxUnchecked, CHECKBOX_UNCHECKED_EMOJI.get());
                 }
             }
             return line;
         });
     }
 
-    @Nullable
-    private static String getCheckboxEmoji(boolean checked) {
-        final String[] checkedEmojis;
-        final String[] uncheckedEmojis;
-        // Seriously what the fuck, Samsung?
-        // https://emojipedia.org/ballot-box-with-x/
-        if (Build.MANUFACTURER != null && Build.MANUFACTURER.toLowerCase(Locale.getDefault()).contains("samsung")) {
-            checkedEmojis = new String[]{"✅", "☑️", "✔️"};
-            uncheckedEmojis = new String[]{"❌", "\uD83D\uDD32️", "☐️"};
-        } else {
-            checkedEmojis = new String[]{"☒", "✅", "☑️", "✔️"};
-            uncheckedEmojis = new String[]{"☐", "❌", "\uD83D\uDD32️", "☐️"};
-        }
-        final Paint paint = new Paint();
+    @NonNull
+    private static Optional<String> getCheckboxEmoji(boolean checked) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            for (String emoji : checked ? checkedEmojis : uncheckedEmojis) {
+            final String[] emojis;
+            // Seriously what the fuck, Samsung?
+            // https://emojipedia.org/ballot-box-with-x/
+            if (Build.MANUFACTURER != null && Build.MANUFACTURER.toLowerCase(Locale.getDefault()).contains("samsung")) {
+                emojis = checked
+                        ? new String[]{"✅", "☑️", "✔️"}
+                        : new String[]{"❌", "\uD83D\uDD32️", "☐️"};
+            } else {
+                emojis = checked
+                        ? new String[]{"☒", "✅", "☑️", "✔️"}
+                        : new String[]{"☐", "❌", "\uD83D\uDD32️", "☐️"};
+            }
+            final Paint paint = new Paint();
+            for (String emoji : emojis) {
                 if (paint.hasGlyph(emoji)) {
-                    return emoji;
+                    return Optional.of(emoji);
                 }
             }
         }
-        return null;
+        return Optional.empty();
     }
 
     /**
@@ -353,8 +355,7 @@ public class MarkdownUtil {
     @NonNull
     private static Optional<Integer> handleItalicEdgeCase(Editable editable, String editableAsString, int selectionStart, int selectionEnd) {
         // look if selection is bold, this is the only edge case afaik
-        final String punctuationRex = BOLD_PUNCTUATION_REX;
-        final Pattern searchPattern = Pattern.compile("(^|[^*])" + punctuationRex + "([^*])*" + punctuationRex + "([^*]|$)");
+        final Pattern searchPattern = Pattern.compile("(^|[^*])" + PATTERN_QUOTE_BOLD_PUNCTUATION + "([^*])*" + PATTERN_QUOTE_BOLD_PUNCTUATION + "([^*]|$)");
         // look the selection expansion by 1 is intended, so the NOT '*' has a chance to match. we don't want to match ***blah***
         final Matcher matcher = searchPattern.matcher(editableAsString)
                 .region(Math.max(selectionStart - 1, 0), Math.min(selectionEnd + 1, editableAsString.length()));
@@ -512,7 +513,7 @@ public class MarkdownUtil {
             return "";
         }
         assert s != null;
-        final String html = renderer.render(parser.parse(replaceCheckboxesWithEmojis(s)));
+        final String html = RENDERER.render(PARSER.parse(replaceCheckboxesWithEmojis(s)));
         final Spanned spanned = HtmlCompat.fromHtml(html, HtmlCompat.FROM_HTML_MODE_COMPACT);
         return spanned.toString().trim();
     }
