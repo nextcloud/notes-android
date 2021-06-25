@@ -11,6 +11,7 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.QuoteSpan;
 import android.util.Log;
+import android.util.Pair;
 import android.widget.RemoteViews.RemoteView;
 import android.widget.TextView;
 
@@ -23,7 +24,11 @@ import androidx.core.text.HtmlCompat;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
 
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -32,22 +37,23 @@ import io.noties.markwon.Markwon;
 import it.niedermann.android.markdown.model.EListType;
 import it.niedermann.android.markdown.model.SearchSpan;
 
+@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 public class MarkdownUtil {
 
     private static final String TAG = MarkdownUtil.class.getSimpleName();
 
-    private final static Parser parser = Parser.builder().build();
-    private final static HtmlRenderer renderer = HtmlRenderer.builder().softbreak("<br>").build();
+    private static final Parser PARSER = Parser.builder().build();
+    private static final HtmlRenderer RENDERER = HtmlRenderer.builder().softbreak("<br>").build();
 
     private static final Pattern PATTERN_CODE_FENCE = Pattern.compile("^(`{3,})");
     private static final Pattern PATTERN_ORDERED_LIST_ITEM = Pattern.compile("^(\\d+).\\s.+$");
     private static final Pattern PATTERN_ORDERED_LIST_ITEM_EMPTY = Pattern.compile("^(\\d+).\\s$");
     private static final Pattern PATTERN_MARKDOWN_LINK = Pattern.compile("\\[(.+)?]\\(([^ ]+?)?( \"(.+)\")?\\)");
 
-    @Nullable
-    private static final String checkboxCheckedEmoji = getCheckboxEmoji(true);
-    @Nullable
-    private static final String checkboxUncheckedEmoji = getCheckboxEmoji(false);
+    private static final String PATTERN_QUOTE_BOLD_PUNCTUATION = Pattern.quote("**");
+
+    private static final Optional<String> CHECKBOX_CHECKED_EMOJI = getCheckboxEmoji(true);
+    private static final Optional<String> CHECKBOX_UNCHECKED_EMOJI = getCheckboxEmoji(false);
 
     private MarkdownUtil() {
         // Util class
@@ -61,7 +67,7 @@ public class MarkdownUtil {
      */
     public static CharSequence renderForRemoteView(@NonNull Context context, @NonNull String content) {
         // Create HTML string from Markup
-        final String html = renderer.render(parser.parse(replaceCheckboxesWithEmojis(content)));
+        final String html = RENDERER.render(PARSER.parse(replaceCheckboxesWithEmojis(content)));
 
         // Create Spanned from HTML, with special handling for ordered list items
         final Spanned spanned = HtmlCompat.fromHtml(ListTagHandler.prepareTagHandling(html), 0, null, new ListTagHandler());
@@ -72,16 +78,17 @@ public class MarkdownUtil {
 
     @SuppressWarnings("SameParameterValue")
     private static Spanned customizeQuoteSpanAppearance(@NonNull Context context, @NonNull Spanned input, int stripeWidth, int gapWidth) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
+            return input;
+        }
         final SpannableStringBuilder ssb = new SpannableStringBuilder(input);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            final QuoteSpan[] originalQuoteSpans = ssb.getSpans(0, ssb.length(), QuoteSpan.class);
-            @ColorInt final int colorBlockQuote = ContextCompat.getColor(context, R.color.block_quote);
-            for (QuoteSpan originalQuoteSpan : originalQuoteSpans) {
-                final int start = ssb.getSpanStart(originalQuoteSpan);
-                final int end = ssb.getSpanEnd(originalQuoteSpan);
-                ssb.removeSpan(originalQuoteSpan);
-                ssb.setSpan(new QuoteSpan(colorBlockQuote, stripeWidth, gapWidth), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
+        final QuoteSpan[] originalQuoteSpans = ssb.getSpans(0, ssb.length(), QuoteSpan.class);
+        @ColorInt final int colorBlockQuote = ContextCompat.getColor(context, R.color.block_quote);
+        for (QuoteSpan originalQuoteSpan : originalQuoteSpans) {
+            final int start = ssb.getSpanStart(originalQuoteSpan);
+            final int end = ssb.getSpanEnd(originalQuoteSpan);
+            ssb.removeSpan(originalQuoteSpan);
+            ssb.setSpan(new QuoteSpan(colorBlockQuote, stripeWidth, gapWidth), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
         return ssb;
     }
@@ -90,40 +97,41 @@ public class MarkdownUtil {
     public static String replaceCheckboxesWithEmojis(@NonNull String content) {
         return runForEachCheckbox(content, (line) -> {
             for (EListType listType : EListType.values()) {
-                if (checkboxCheckedEmoji != null) {
-                    line = line.replace(listType.checkboxChecked, checkboxCheckedEmoji);
-                    line = line.replace(listType.checkboxCheckedUpperCase, checkboxCheckedEmoji);
+                if (CHECKBOX_CHECKED_EMOJI.isPresent()) {
+                    line = line.replace(listType.checkboxChecked, CHECKBOX_CHECKED_EMOJI.get());
+                    line = line.replace(listType.checkboxCheckedUpperCase, CHECKBOX_CHECKED_EMOJI.get());
                 }
-                if (checkboxUncheckedEmoji != null) {
-                    line = line.replace(listType.checkboxUnchecked, checkboxUncheckedEmoji);
+                if (CHECKBOX_UNCHECKED_EMOJI.isPresent()) {
+                    line = line.replace(listType.checkboxUnchecked, CHECKBOX_UNCHECKED_EMOJI.get());
                 }
             }
             return line;
         });
     }
 
-    @Nullable
-    private static String getCheckboxEmoji(boolean checked) {
-        final String[] checkedEmojis;
-        final String[] uncheckedEmojis;
-        // Seriously what the fuck, Samsung?
-        // https://emojipedia.org/ballot-box-with-x/
-        if (Build.MANUFACTURER != null && Build.MANUFACTURER.toLowerCase(Locale.getDefault()).contains("samsung")) {
-            checkedEmojis = new String[]{"✅", "☑️", "✔️"};
-            uncheckedEmojis = new String[]{"❌", "\uD83D\uDD32️", "☐️"};
-        } else {
-            checkedEmojis = new String[]{"☒", "✅", "☑️", "✔️"};
-            uncheckedEmojis = new String[]{"☐", "❌", "\uD83D\uDD32️", "☐️"};
-        }
-        final Paint paint = new Paint();
+    @NonNull
+    private static Optional<String> getCheckboxEmoji(boolean checked) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            for (String emoji : checked ? checkedEmojis : uncheckedEmojis) {
+            final String[] emojis;
+            // Seriously what the fuck, Samsung?
+            // https://emojipedia.org/ballot-box-with-x/
+            if (Build.MANUFACTURER != null && Build.MANUFACTURER.toLowerCase(Locale.getDefault()).contains("samsung")) {
+                emojis = checked
+                        ? new String[]{"✅", "☑️", "✔️"}
+                        : new String[]{"❌", "\uD83D\uDD32️", "☐️"};
+            } else {
+                emojis = checked
+                        ? new String[]{"☒", "✅", "☑️", "✔️"}
+                        : new String[]{"☐", "❌", "\uD83D\uDD32️", "☐️"};
+            }
+            final Paint paint = new Paint();
+            for (String emoji : emojis) {
                 if (paint.hasGlyph(emoji)) {
-                    return emoji;
+                    return Optional.of(emoji);
                 }
             }
         }
-        return null;
+        return Optional.empty();
     }
 
     /**
@@ -263,14 +271,6 @@ public class MarkdownUtil {
     }
 
     /**
-     * @param c Character to escape
-     * @return {@param c} escaped by a <code>\</code> character
-     */
-    private static String escape(char c) {
-        return "\\\\".substring(0, 1) + c;
-    }
-
-    /**
      * Modifies the {@param editable} and adds the given {@param punctuation} from
      * {@param selectionStart} to {@param selectionEnd} or removes the {@param punctuation} in case
      * it already is around the selected part.
@@ -279,127 +279,100 @@ public class MarkdownUtil {
      */
     public static int togglePunctuation(@NonNull Editable editable, int selectionStart, int selectionEnd, @NonNull String punctuation) {
         final String initialString = editable.toString();
-        final boolean initialStringDoesNotContainPunctuation = !initialString.contains("*") && !initialString.contains("_") && !initialString.contains("~");
         if (selectionStart < 0 || selectionStart > initialString.length() || selectionEnd < 0 || selectionEnd > initialString.length()) {
             return 0;
         }
-        switch (punctuation) {
-            case "*":
-            case "_":
-                if (initialStringDoesNotContainPunctuation) {
-                    editable.insert(selectionEnd, punctuation);
-                    editable.insert(selectionStart, punctuation);
-                    return selectionEnd + punctuation.length();
-                } else {
-                    final String punctuationDouble = "" + punctuation.charAt(0) + punctuation.charAt(0);
-                    final String punctuationTriple = "" + punctuation.charAt(0) + punctuation.charAt(0) + punctuation.charAt(0);
-                    if (!initialString.contains(punctuationDouble)) {
-                        final int containedPunctuationCount = getContainedPunctuationCount(editable, 0, initialString.length(), punctuation);
-                        if (containedPunctuationCount % 2 == 1) {
-                            return selectionEnd;
-                        }
-                        final String punctuationRegOnce = escape(punctuation.charAt(0));
-                        final String[] tmp = initialString.split(punctuationRegOnce);
-                        int newSelectionStart;
-                        int newSelectionEnd = 0;
-                        for (int i = 0; i < tmp.length - 1; i += 2) {
-                            newSelectionStart = tmp[i].length() + newSelectionEnd;
-                            newSelectionEnd = tmp[i + 1].length() + newSelectionStart;
-                            editable.delete(newSelectionStart, newSelectionStart + punctuation.length());
-                            editable.delete(newSelectionEnd, newSelectionEnd + punctuation.length());
-                        }
-                        return newSelectionEnd;
-                    }
-                    if (initialString.contains(punctuationTriple)) {
-                        final int containedPunctuationCount = getContainedPunctuationCount(editable, 0, initialString.length(), punctuation);
-                        if (containedPunctuationCount % 2 == 1) {
-                            return selectionEnd;
-                        }
-                        final String punctuationRegTriple = escape(punctuation.charAt(0)) + escape(punctuation.charAt(0)) + escape(punctuation.charAt(0));
-                        final String[] tmp = initialString.split(punctuationRegTriple);
-                        int newSelectionStart;
-                        int newSelectionEnd = 0;
-                        newSelectionStart = tmp[0].length() + newSelectionEnd + punctuation.length() * 2;
-                        for (int i = 0; i <= tmp.length - 3; i += 2) {
-                            newSelectionEnd = tmp[i + 1].length() + newSelectionStart + punctuation.length() * 2;
-                            editable.delete(newSelectionStart, newSelectionStart + punctuation.length());
-                            editable.delete(newSelectionEnd, newSelectionEnd + punctuation.length());
-                            newSelectionStart = tmp[i + 2].length() + newSelectionEnd + punctuation.length() * 2;
-                        }
-                        return newSelectionEnd - punctuation.length() * 2;
-                    } else {
-                        final String punctuationRegDouble = escape(punctuation.charAt(0)) + escape(punctuation.charAt(0));
-                        final String[] tmp = initialString.split(punctuationRegDouble);
-                        int newSelectionStart;
-                        int newSelectionEnd = 0;
-                        newSelectionStart = tmp[0].length() + newSelectionEnd + punctuation.length() * 2;
-                        for (int i = 0; i <= tmp.length - 3; i += 2) {
-                            newSelectionEnd = tmp[i + 1].length() + newSelectionStart + punctuation.length() * 2 + (1);
-                            editable.insert(newSelectionStart, punctuation);
-                            editable.insert(newSelectionEnd, punctuation);
-                            newSelectionStart = tmp[i + 2].length() + newSelectionEnd + punctuation.length() * 2 + (1);
-                        }
-                        return newSelectionEnd;
-                    }
-                }
-            case "**":
-            case "__":
-            case "~~":
-                if (initialStringDoesNotContainPunctuation) {
-                    editable.insert(selectionEnd, punctuation);
-                    editable.insert(selectionStart, punctuation);
-                    return selectionEnd + punctuation.length();
-                } else {
-                    //noinspection UnnecessaryLocalVariable
-                    final String punctuationDouble = punctuation;
-                    final String punctuationTriple = punctuation + punctuation.charAt(0);
-                    if (initialString.contains(punctuationTriple)) {
-                        final String punctuationRegTriple = escape(punctuation.charAt(0)) + escape(punctuation.charAt(0)) + escape(punctuation.charAt(0));
-                        final String[] tmp = initialString.split(punctuationRegTriple);
-                        int newSelectionStart;
-                        int newSelectionEnd = 0;
-                        newSelectionStart = tmp[0].length() + 1;
-                        for (int i = 0; i <= tmp.length - 3; i += 2) {
-                            newSelectionEnd = tmp[i + 1].length() + newSelectionStart + 1;
-                            editable.delete(newSelectionStart, newSelectionStart + punctuation.length());
-                            editable.delete(newSelectionEnd, newSelectionEnd + punctuation.length());
-                            newSelectionStart = tmp[i + 2].length() + newSelectionEnd + 1;
-                        }
-                        return newSelectionEnd - 1;
-                    } else if (initialString.contains(punctuationDouble)) {
-                        final int containedPunctuationCount = getContainedPunctuationCount(editable, 0, initialString.length(), punctuation);
-                        if (containedPunctuationCount % 2 == 1) {
-                            return selectionEnd;
-                        }
-                        final String punctuationRegDouble = escape(punctuation.charAt(0)) + escape(punctuation.charAt(0));
-                        final String[] tmp = initialString.split(punctuationRegDouble);
-                        int newSelectionStart;
-                        int newSelectionEnd = 0;
-                        for (int i = 0; i < tmp.length - 1; i += 2) {
-                            newSelectionStart = tmp[i].length() + newSelectionEnd;
-                            newSelectionEnd = tmp[i + 1].length() + newSelectionStart;
-                            editable.delete(newSelectionStart, newSelectionStart + punctuation.length());
-                            editable.delete(newSelectionEnd, newSelectionEnd + punctuation.length());
-                        }
-                        return newSelectionEnd;
-                    } else {
-                        final String punctuationRegOnce = escape(punctuation.charAt(0));
-                        final String[] tmp = initialString.split(punctuationRegOnce);
-                        int newSelectionStart;
-                        int newSelectionEnd = 0;
-                        newSelectionStart = tmp[0].length() + 1;
-                        for (int i = 0; i <= tmp.length - 3; i += 2) {
-                            newSelectionEnd = tmp[i + 1].length() + newSelectionStart + punctuation.length() + (1);
-                            editable.insert(newSelectionStart, punctuation);
-                            editable.insert(newSelectionEnd, punctuation);
-                            newSelectionStart = tmp[i + 2].length() + newSelectionEnd + punctuation.length() + (1);
-                        }
-                        return newSelectionEnd + punctuation.length();
-                    }
-                }
-            default:
-                throw new UnsupportedOperationException("This kind of punctuation is not yet supported: " + punctuation);
+
+        // handle special case: italic (that damn thing will match like ANYTHING (regarding bold / bold+italic)....)
+        final boolean isItalic = punctuation.length() == 1 && punctuation.charAt(0) == '*';
+        if (isItalic) {
+            final Optional<Integer> result = handleItalicEdgeCase(editable, initialString, selectionStart, selectionEnd);
+            // The result is only present if this actually was an edge case
+            if (result.isPresent()) {
+                return result.get();
+            }
         }
+
+        // handle the simple cases
+        final String wildcardRex = "([^" + punctuation.charAt(0) + "])+";
+        final String punctuationRex = Pattern.quote(punctuation);
+        final String pattern = isItalic
+                // in this case let's make optional asterisks around it, so it wont match anything between two (bold+italic)s
+                ? "\\*?\\*?" + punctuationRex + wildcardRex + punctuationRex + "\\*?\\*?"
+                : punctuationRex + wildcardRex + punctuationRex;
+        final Pattern searchPattern = Pattern.compile(pattern);
+        int relevantStart = selectionStart - 2;
+        relevantStart = Math.max(relevantStart, 0);
+        int relevantEnd = selectionEnd + 2;
+        relevantEnd = Math.min(relevantEnd, initialString.length());
+        final Matcher matcher = searchPattern.matcher(initialString).region(relevantStart, relevantEnd);
+
+        // if the matcher matches, it's a remove
+        if (matcher.find()) {
+            // this resets the matcher, while keeping the required region
+            matcher.region(relevantStart, relevantEnd);
+            final int punctuationLength = punctuation.length();
+            final List<Pair<Integer, Integer>> startEnd = new LinkedList<>();
+            int removedCount = 0;
+            while (matcher.find()) {
+                startEnd.add(new Pair<>(matcher.start(), matcher.end()));
+                removedCount += punctuationLength;
+            }
+            // start from the end
+            Collections.reverse(startEnd);
+            for (Pair<Integer, Integer> item : startEnd) {
+                deletePunctuation(editable, punctuationLength, item.first, item.second);
+            }
+            int offsetAtEnd = 0;
+            // depending on if the user has selected the markdown chars, we might need to add an offset to the resulting cursor position
+            if (initialString.substring(Math.max(selectionEnd - punctuationLength + 1, 0), Math.min(selectionEnd + 1, initialString.length())).equals(punctuation) ||
+                    initialString.substring(selectionEnd, Math.min(selectionEnd + punctuationLength, initialString.length())).equals(punctuation)) {
+                offsetAtEnd = punctuationLength;
+            }
+            return selectionEnd - removedCount * 2 + offsetAtEnd;
+            //                                 ^
+            //         start+end, need to double
+        }
+
+        // do nothing when punctuation is contained only once
+        if (Pattern.compile(punctuationRex).matcher(initialString).region(selectionStart, selectionEnd).find()) {
+            return selectionEnd;
+        }
+
+        // nothing returned so far, so it has to be an insertion
+        return insertPunctuation(editable, selectionStart, selectionEnd, punctuation);
+    }
+
+    private static void deletePunctuation(Editable editable, int punctuationLength, int start, int end) {
+        editable.delete(end - punctuationLength, end);
+        editable.delete(start, start + punctuationLength);
+    }
+
+    /**
+     * @return an {@link Optional<Integer>} of the new cursor position.
+     * The return value is only {@link Optional#isPresent()}, if this is an italic edge case.
+     */
+    @NonNull
+    private static Optional<Integer> handleItalicEdgeCase(Editable editable, String editableAsString, int selectionStart, int selectionEnd) {
+        // look if selection is bold, this is the only edge case afaik
+        final Pattern searchPattern = Pattern.compile("(^|[^*])" + PATTERN_QUOTE_BOLD_PUNCTUATION + "([^*])*" + PATTERN_QUOTE_BOLD_PUNCTUATION + "([^*]|$)");
+        // look the selection expansion by 1 is intended, so the NOT '*' has a chance to match. we don't want to match ***blah***
+        final Matcher matcher = searchPattern.matcher(editableAsString)
+                .region(Math.max(selectionStart - 1, 0), Math.min(selectionEnd + 1, editableAsString.length()));
+        if (matcher.find()) {
+            return Optional.of(insertPunctuation(editable, selectionStart, selectionEnd, "*"));
+        }
+        // look around (3 chars) (NOT '*' + "**"). User might have selected the text only
+        if (matcher.region(Math.max(selectionStart - 3, 0), Math.min(selectionEnd + 3, editableAsString.length())).find()) {
+            return Optional.of(insertPunctuation(editable, selectionStart, selectionEnd, "*"));
+        }
+        return Optional.empty();
+    }
+
+    private static int insertPunctuation(Editable editable, int firstPosition, int secondPosition, String punctuation) {
+        editable.insert(secondPosition, punctuation);
+        editable.insert(firstPosition, punctuation);
+        return secondPosition + punctuation.length();
     }
 
     /**
@@ -472,14 +445,6 @@ public class MarkdownUtil {
         }
     }
 
-    private static int getContainedPunctuationCount(@NonNull CharSequence text, @SuppressWarnings("SameParameterValue") int start, int end, @NonNull String punctuation) {
-        final Matcher matcher = Pattern.compile(Pattern.quote(punctuation)).matcher(text.subSequence(start, end));
-        int counter = 0;
-        while (matcher.find()) {
-            counter++;
-        }
-        return counter;
-    }
 
     public static boolean selectionIsInLink(@NonNull CharSequence text, int start, int end) {
         final Matcher matcher = PATTERN_MARKDOWN_LINK.matcher(text);
@@ -548,7 +513,7 @@ public class MarkdownUtil {
             return "";
         }
         assert s != null;
-        final String html = renderer.render(parser.parse(replaceCheckboxesWithEmojis(s)));
+        final String html = RENDERER.render(PARSER.parse(replaceCheckboxesWithEmojis(s)));
         final Spanned spanned = HtmlCompat.fromHtml(html, HtmlCompat.FROM_HTML_MODE_COMPACT);
         return spanned.toString().trim();
     }
