@@ -183,7 +183,7 @@
         <service
             android:name=".quicksettings.NewNoteTileService"
             android:description="@string/action_create"
-            android:icon="@drawable/ic_quicksettings_new"
+            android:icon="@drawable/ic_launcher_foreground_full"
             android:label="@string/action_create"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
