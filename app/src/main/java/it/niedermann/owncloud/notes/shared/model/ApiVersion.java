@@ -81,9 +81,7 @@ public class ApiVersion implements Comparable<ApiVersion> {
     }
 
     public boolean supportsSettings() {
-        // TODO
-        return true;
-//        return getMajor() >= 1 && getMinor() >= 2;
+        return getMajor() >= 1 && getMinor() >= 2;
     }
 
     /**
