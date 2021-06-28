@@ -3,10 +3,11 @@ package it.niedermann.owncloud.notes.manageaccounts;
 import android.accounts.NetworkErrorException;
 import android.os.Bundle;
 import android.util.TypedValue;
-import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -115,11 +116,10 @@ public class ManageAccountsActivity extends LockedActivity {
     private void onChangeNotesPath(@NonNull Account localAccount) {
         final NotesRepository repository = NotesRepository.getInstance(getApplicationContext());
         final EditText editText = new EditText(this);
-        editText.setEnabled(false);
-        final View wrapper = createDialogViewWrapper(editText);
+        final ViewGroup wrapper = createDialogViewWrapper();
         final AlertDialog dialog = new BrandedAlertDialogBuilder(this)
                 .setTitle(R.string.settings_notes_path)
-                .setMessage("Folder to store your notes in your  Nextcloud")
+                .setMessage(R.string.settings_notes_path_description)
                 .setView(wrapper)
                 .setNeutralButton(android.R.string.cancel, null)
                 .setPositiveButton(R.string.action_edit_save, (v, d) -> new Thread(() -> {
@@ -130,9 +130,9 @@ public class ManageAccountsActivity extends LockedActivity {
                             public void onResponse(@NonNull Call<NotesSettings> call, @NonNull Response<NotesSettings> response) {
                                 final NotesSettings body = response.body();
                                 if (response.isSuccessful() && body != null) {
-                                    runOnUiThread(() -> Toast.makeText(ManageAccountsActivity.this, "New notes path: " + body.getNotesPath(), Toast.LENGTH_LONG).show());
+                                    runOnUiThread(() -> Toast.makeText(ManageAccountsActivity.this, getString(R.string.settings_notes_path_success, body.getNotesPath()), Toast.LENGTH_LONG).show());
                                 } else {
-                                    runOnUiThread(() -> Toast.makeText(ManageAccountsActivity.this, "HTTP status code: " + response.code(), Toast.LENGTH_LONG).show());
+                                    runOnUiThread(() -> Toast.makeText(ManageAccountsActivity.this, getString(R.string.http_status_code, response.code()), Toast.LENGTH_LONG).show());
                                 }
                             }
 
@@ -154,10 +154,12 @@ public class ManageAccountsActivity extends LockedActivity {
                             runOnUiThread(() -> {
                                 final NotesSettings body = response.body();
                                 if (response.isSuccessful() && body != null) {
+                                    wrapper.removeAllViews();
+                                    final EditText editText = new EditText(ManageAccountsActivity.this);
                                     editText.setText(body.getNotesPath());
-                                    editText.setEnabled(true);
+                                    wrapper.addView(editText);
                                 } else {
-                                    ExceptionDialogFragment.newInstance(new NetworkErrorException("HTTP status code: " + response.code())).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+                                    ExceptionDialogFragment.newInstance(new NetworkErrorException(getString(R.string.http_status_code, response.code()))).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
                                 }
                             });
                         }
@@ -179,17 +181,16 @@ public class ManageAccountsActivity extends LockedActivity {
     private void onChangeFileSuffix(@NonNull Account localAccount) {
         final NotesRepository repository = NotesRepository.getInstance(getApplicationContext());
         final Spinner spinner = new Spinner(this);
-        spinner.setEnabled(false);
-        final View wrapper = createDialogViewWrapper(spinner);
+        final ViewGroup wrapper = createDialogViewWrapper();
         final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.settings_file_suffixes, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         final AlertDialog dialog = new BrandedAlertDialogBuilder(this)
                 .setTitle(R.string.settings_file_suffix)
-                .setMessage("File extension for new notes in your Nextcloud")
+                .setMessage(R.string.settings_file_suffix_description)
                 .setView(wrapper)
                 .setNeutralButton(android.R.string.cancel, null)
-                .setPositiveButton("Save", (v, d) -> new Thread(() -> {
+                .setPositiveButton(R.string.action_edit_save, (v, d) -> new Thread(() -> {
                     try {
                         final Call<NotesSettings> putSettingsCall = repository.putServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), new NotesSettings(null, spinner.getSelectedItem().toString()), getPreferredApiVersion(localAccount.getApiVersion()));
                         putSettingsCall.enqueue(new Callback<NotesSettings>() {
@@ -197,9 +198,9 @@ public class ManageAccountsActivity extends LockedActivity {
                             public void onResponse(@NonNull Call<NotesSettings> call, @NonNull Response<NotesSettings> response) {
                                 final NotesSettings body = response.body();
                                 if (response.isSuccessful() && body != null) {
-                                    runOnUiThread(() -> Toast.makeText(ManageAccountsActivity.this, "New file suffix: " + body.getNotesPath(), Toast.LENGTH_LONG).show());
+                                    runOnUiThread(() -> Toast.makeText(ManageAccountsActivity.this, getString(R.string.settings_file_suffix_success, body.getNotesPath()), Toast.LENGTH_LONG).show());
                                 } else {
-                                    runOnUiThread(() -> Toast.makeText(ManageAccountsActivity.this, "HTTP status code: " + response.code(), Toast.LENGTH_LONG).show());
+                                    runOnUiThread(() -> Toast.makeText(ManageAccountsActivity.this, getString(R.string.http_status_code, response.code()), Toast.LENGTH_LONG).show());
                                 }
                             }
 
@@ -227,9 +228,10 @@ public class ManageAccountsActivity extends LockedActivity {
                                             break;
                                         }
                                     }
-                                    spinner.setEnabled(true);
+                                    wrapper.removeAllViews();
+                                    wrapper.addView(spinner);
                                 } else {
-                                    ExceptionDialogFragment.newInstance(new Exception("HTTP status code: " + response.code())).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+                                    ExceptionDialogFragment.newInstance(new Exception(getString(R.string.http_status_code, response.code()))).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
                                 }
                             });
                         }
@@ -249,14 +251,16 @@ public class ManageAccountsActivity extends LockedActivity {
     }
 
     @NonNull
-    private View createDialogViewWrapper(@NonNull View view) {
+    private ViewGroup createDialogViewWrapper() {
+        final ProgressBar progressBar = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
+        progressBar.setIndeterminate(true);
         final FrameLayout wrapper = new FrameLayout(this);
         final int paddingVertical = getResources().getDimensionPixelSize(R.dimen.spacer_1x);
         final int paddingHorizontal = SDK_INT >= LOLLIPOP_MR1
                 ? getDimensionFromAttribute(android.R.attr.dialogPreferredPadding)
                 : getResources().getDimensionPixelSize(R.dimen.spacer_2x);
         wrapper.setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical);
-        wrapper.addView(view);
+        wrapper.addView(progressBar);
         return wrapper;
     }
 

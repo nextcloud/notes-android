@@ -294,16 +294,20 @@
 
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">You have to be connected to the internet in order to add an account.</string>
     <string name="settings_notes_path">Set folder</string>
-    <string name="settings_file_suffix">File extension</string>
-
-    <string-array name="settings_file_suffixes">
-        <item>.txt</item>
-        <item>.md</item>
-    </string-array>
 
     <string name="simple_next">Next</string>
     <string name="simple_prev">Previous</string>
     <string name="simple_backup">Backup</string>
     <string name="simple_repair">Repair</string>
     <string name="backup">We detected an irrecoverably state of the app. Please backup your unsynchronized changes and clear the storage of the Notes app.</string>
+    <string name="settings_notes_path_description">Folder to store your notes in your  Nextcloud</string>
+    <string-array name="settings_file_suffixes">
+        <item>.txt</item>
+        <item>.md</item>
+    </string-array>
+    <string name="settings_notes_path_success">New notes folder: %1$s</string>
+    <string name="settings_file_suffix">File extension</string>
+    <string name="settings_file_suffix_description">File extension for new notes in your Nextcloud</string>
+    <string name="settings_file_suffix_success">New file suffix: %1$s</string>
+    <string name="http_status_code">HTTP status code: %1$d</string>
 </resources>
