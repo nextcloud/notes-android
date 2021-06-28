@@ -159,6 +159,7 @@ public class ManageAccountsActivity extends LockedActivity {
                                     editText.setText(body.getNotesPath());
                                     wrapper.addView(editText);
                                 } else {
+                                    dialog.dismiss();
                                     ExceptionDialogFragment.newInstance(new NetworkErrorException(getString(R.string.http_status_code, response.code()))).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
                                 }
                             });
@@ -231,6 +232,7 @@ public class ManageAccountsActivity extends LockedActivity {
                                     wrapper.removeAllViews();
                                     wrapper.addView(spinner);
                                 } else {
+                                    dialog.dismiss();
                                     ExceptionDialogFragment.newInstance(new Exception(getString(R.string.http_status_code, response.code()))).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
                                 }
                             });
