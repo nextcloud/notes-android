@@ -7,7 +7,7 @@ public enum CategorySortingMethod {
     private final int id;
     private final String title;  // sorting method OrderBy for SQL
 
-    /***
+    /**
      * Constructor
      * @param title given sorting method OrderBy
      */
@@ -16,7 +16,7 @@ public enum CategorySortingMethod {
         this.title = title;
     }
 
-    /***
+    /**
      * Retrieve the sorting method id represented in database
      * @return the sorting method id for the enum item
      */
@@ -24,7 +24,7 @@ public enum CategorySortingMethod {
         return this.id;
     }
 
-    /***
+    /**
      * Retrieve the sorting method order for SQL
      * @return the sorting method order for the enum item
      */
@@ -32,7 +32,7 @@ public enum CategorySortingMethod {
         return this.title;
     }
 
-    /***
+    /**
      * Retrieve the corresponding enum value with given the index (ordinal)
      * @param id the id of the corresponding enum value stored in DB
      * @return the corresponding enum item with the index (ordinal)

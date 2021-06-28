@@ -42,7 +42,7 @@ public class AppendToNoteActivity extends MainActivity {
                 fullNote$.removeObservers(this);
                 final String oldContent = fullNote.getContent();
                 String newContent;
-                if (oldContent != null && oldContent.length() > 0) {
+                if (!TextUtils.isEmpty(oldContent)) {
                     newContent = oldContent + "\n\n" + receivedText;
                 } else {
                     newContent = receivedText;

@@ -8,6 +8,7 @@ import android.util.Log;
 import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -20,26 +21,24 @@ import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.persistence.SyncWorker;
 import it.niedermann.owncloud.notes.shared.util.DeviceCredentialUtil;
 
-import static it.niedermann.owncloud.notes.widget.notelist.NoteListWidget.updateNoteListWidgets;
-
 public class PreferencesFragment extends PreferenceFragmentCompat implements Branded {
 
     private static final String TAG = PreferencesFragment.class.getSimpleName();
+
+    private PreferencesViewModel viewModel;
 
     private BrandedSwitchPreference fontPref;
     private BrandedSwitchPreference lockPref;
     private BrandedSwitchPreference wifiOnlyPref;
     private BrandedSwitchPreference gridViewPref;
     private BrandedSwitchPreference preventScreenCapturePref;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+    private BrandedSwitchPreference backgroundSyncPref;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.preferences);
+
+        viewModel = new ViewModelProvider(requireActivity()).get(PreferencesViewModel.class);
 
         fontPref = findPreference(getString(R.string.pref_key_font));
 
@@ -48,7 +47,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
             gridViewPref.setOnPreferenceChangeListener((Preference preference, Object newValue) -> {
                 final Boolean gridView = (Boolean) newValue;
                 Log.v(TAG, "gridView: " + gridView);
-                requireActivity().setResult(Activity.RESULT_OK);
+                viewModel.resultCode$.setValue(Activity.RESULT_OK);
                 NotesApplication.updateGridViewEnabled(gridView);
                 return true;
             });
@@ -79,7 +78,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
         assert themePref != null;
         themePref.setOnPreferenceChangeListener((preference, newValue) -> {
             NotesApplication.setAppTheme(DarkModeSetting.valueOf((String) newValue));
-            requireActivity().setResult(Activity.RESULT_OK);
+            viewModel.resultCode$.setValue(Activity.RESULT_OK);
             ActivityCompat.recreate(requireActivity());
             return true;
         });
@@ -91,11 +90,11 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
             return true;
         });
 
-        final ListPreference syncPref = findPreference(getString(R.string.pref_key_background_sync));
-        assert syncPref != null;
-        syncPref.setOnPreferenceChangeListener((preference, newValue) -> {
-            Log.i(TAG, "syncPref: " + preference + " - newValue: " + newValue);
-            SyncWorker.update(requireContext(), newValue.toString());
+        backgroundSyncPref = findPreference(getString(R.string.pref_key_background_sync));
+        assert backgroundSyncPref != null;
+        backgroundSyncPref.setOnPreferenceChangeListener((preference, newValue) -> {
+            Log.i(TAG, "backgroundSync: " + newValue);
+            SyncWorker.update(requireContext(), (Boolean) newValue);
             return true;
         });
     }
@@ -112,6 +111,14 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
         }
     }
 
+    /**
+     * Change color for backgroundSyncPref as well
+     * https://github.com/stefan-niedermann/nextcloud-deck/issues/531
+     *
+     * @param mainColor color of main brand
+     * @param textColor color of text
+     */
+
     @Override
     public void applyBrand(int mainColor, int textColor) {
         fontPref.applyBrand(mainColor, textColor);
@@ -119,5 +126,6 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
         wifiOnlyPref.applyBrand(mainColor, textColor);
         gridViewPref.applyBrand(mainColor, textColor);
         preventScreenCapturePref.applyBrand(mainColor, textColor);
+        backgroundSyncPref.applyBrand(mainColor, textColor);
     }
 }

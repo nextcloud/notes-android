@@ -1,0 +1,8 @@
+v3.4.6 - v3.4.7
+
+- 🖼 Support displaying images hosted at Nextcloud in preview mode (#1018)
+- 🌎 Updated translations
+
+v3.4.5
+
+- 🔒 Remove content of notes and search terms from LogCat (#1243)

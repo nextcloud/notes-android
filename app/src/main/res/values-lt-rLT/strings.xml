@@ -76,7 +76,6 @@
     <string name="widget_create_note">Sukurti užrašus</string>
     <string name="widget_not_logged_in">Prieš naudodami šį valdiklį, prisijunkite prie Užrašų</string>
     <string name="widget_entry_fav_contentDescription">Žvaigždės piktograma yra naudojama pažymėti elementą kaip mėgstamą</string>
-    <string name="widget_app_launcher_contentDescription">Paleidžia programėlę</string>
 
     <string name="activity_select_single_note">Pasirinkti užrašus</string>
 
@@ -129,10 +128,8 @@
     <string name="append_to_note">Pridėti prie užrašų</string>
     <string name="change_note_title">Pakeisti užrašo pavadinimą</string>
     <string name="menu_edit_title">Redaguoti pavadinimą</string>
-    <string name="settings_branding">Prekės ženklas</string>
     <string name="simple_security">Saugumas</string>
     <string name="simple_synchronization">Sinchronizacija</string>
-    <string name="simple_behavior">Funkcionavimas</string>
     <string name="manage_accounts">Tvarkyti paskyras</string>
     <string name="action_formatting_help">Formatavimas</string>
 
@@ -146,13 +143,6 @@
         <item>Mažas</item>
         <item>Vidutinis</item>
         <item>Didelis</item>
-    </string-array>
-
-    <string-array name="sync_entries">
-        <item>Išjungta</item>
-        <item>15 minučių</item>
-        <item>1 valanda</item>
-        <item>6 valandos</item>
     </string-array>
 
     <string-array name="darkmode_entries">

@@ -1,13 +1,10 @@
 package it.niedermann.owncloud.notes.shared.util;
 
-import android.os.Build;
-
 import junit.framework.TestCase;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import it.niedermann.android.markdown.MarkdownUtil;
 
@@ -16,7 +13,6 @@ import it.niedermann.android.markdown.MarkdownUtil;
  * Created by stefan on 06.10.15.
  */
 @RunWith(RobolectricTestRunner.class)
-@Config(sdk = {Build.VERSION_CODES.P})
 public class NoteUtilTest extends TestCase {
 
     @Test
@@ -35,6 +31,9 @@ public class NoteUtilTest extends TestCase {
         assertEquals("Test", NoteUtil.getLineWithoutMarkdown("\nTest", 0));
         assertEquals("Foo", NoteUtil.getLineWithoutMarkdown("Foo\nBar", 0));
         assertEquals("Bar", NoteUtil.getLineWithoutMarkdown("Foo\nBar", 1));
+        assertEquals("Foo", NoteUtil.getLineWithoutMarkdown("* Foo\n* Bar", 0));
+        assertEquals("Bar", NoteUtil.getLineWithoutMarkdown("- Foo\nBar", 1));
+        assertEquals("Foo", NoteUtil.getLineWithoutMarkdown("# Foo", 0));
     }
 
     @Test

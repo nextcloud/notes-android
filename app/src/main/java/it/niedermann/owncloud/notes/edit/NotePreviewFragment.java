@@ -155,22 +155,22 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     public void onRefresh() {
         if (noteLoaded && repo.isSyncPossible() && SSOUtil.isConfigured(getContext())) {
             binding.swiperefreshlayout.setRefreshing(true);
-            new Thread(() -> {
+            executor.submit(() -> {
                 try {
                     final Account account = repo.getAccountByName(SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext()).name);
-                    repo.addCallbackPull(account, () -> new Thread(() -> {
+                    repo.addCallbackPull(account, () -> executor.submit(() -> {
                         note = repo.getNoteById(note.getId());
                         changedText = note.getContent();
                         requireActivity().runOnUiThread(() -> {
                             binding.singleNoteContent.setMarkdownString(note.getContent());
                             binding.swiperefreshlayout.setRefreshing(false);
                         });
-                    }).start());
+                    }));
                     repo.scheduleSync(account, false);
                 } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
                     e.printStackTrace();
                 }
-            }).start();
+            });
         } else {
             binding.swiperefreshlayout.setRefreshing(false);
             Toast.makeText(requireContext(), getString(R.string.error_sync, getString(R.string.error_no_network)), Toast.LENGTH_LONG).show();

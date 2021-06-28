@@ -20,6 +20,9 @@ public class GridItemDecoration extends SectionItemDecoration {
 
     public GridItemDecoration(@NonNull ItemAdapter adapter, int spanCount, @Px int sectionLeft, @Px int sectionTop, @Px int sectionRight, @Px int sectionBottom, @Px int gutter) {
         super(adapter, sectionLeft, sectionTop, sectionRight, sectionBottom);
+        if(spanCount < 1) {
+            throw new IllegalArgumentException("Requires at least one span");
+        }
         this.spanCount = spanCount;
         this.adapter = adapter;
         this.gutter = gutter;

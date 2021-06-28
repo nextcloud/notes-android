@@ -29,11 +29,7 @@ public interface NoteDao {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     int updateNote(Note newNote);
 
-    @Query("DELETE FROM NOTE WHERE accountId = :accountId")
-    int deleteByAccountId(Long accountId);
-
     String getNoteById = "SELECT * FROM NOTE WHERE id = :id";
-    String getContent = "SELECT content FROM NOTE WHERE id = :id";
     String count = "SELECT COUNT(*) FROM NOTE WHERE status != 'LOCAL_DELETED' AND accountId = :accountId";
     String countFavorites = "SELECT COUNT(*) FROM NOTE WHERE status != 'LOCAL_DELETED' AND accountId = :accountId AND favorite = 1";
     String searchRecentByModified = "SELECT id, remoteId, accountId, title, favorite, excerpt, modified, category, status, '' as eTag, '' as content, 0 as scrollY FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE :query OR content LIKE :query) ORDER BY favorite DESC, modified DESC";
@@ -51,6 +47,9 @@ public interface NoteDao {
     @Query(getNoteById)
     Note getNoteById(long id);
 
+    @Query("SELECT remoteId FROM NOTE WHERE id = :id")
+    Long getRemoteId(long id);
+
     @Query(count)
     LiveData<Integer> count$(long accountId);
 
@@ -62,12 +61,6 @@ public interface NoteDao {
 
     @Query(countFavorites)
     Integer countFavorites(long accountId);
-
-    @Query(getContent)
-    LiveData<String> getContent$(Long id);
-
-    @Query(getContent)
-    String getContent(Long id);
 
     @Query(searchRecentByModified)
     LiveData<List<Note>> searchRecentByModified$(long accountId, String query);

@@ -6,12 +6,14 @@
     <string name="label_all_notes">Všetky poznámky</string>
     <string name="label_favorites">Obľúbené</string>
     <string name="action_create">Nová poznámka</string>
+    <string name="welcome_text">Vitajte v %1$s</string>
     <string name="action_settings">Settings</string>
     <string name="action_trashbin">Zmazané poznámky</string>
     <string name="action_search">Hľadať</string>
     <string name="action_sorting_method">Metóda triedenia</string>
     <string name="simple_cancel">Zrušiť</string>
     <string name="simple_edit">Upraviť</string>
+    <string name="simple_remove">Odobrať</string>
     <string name="action_edit_save">Uložiť</string>
     <string name="simple_about">O aplikácii</string>
     <string name="simple_link">Odkaz</string>
@@ -42,10 +44,15 @@
     <string name="settings_font_title">Písmo s pevnou šírkou</string>
     <string name="settings_font_size">Veľkosť písma</string>
     <string name="settings_wifi_only">Synchronizovať len na Wi-Fi</string>
+    <string name="settings_lock">Zámok aplikácie (Beta)</string>
+    <string name="settings_lock_summary">Prihlasovacie údaje zariadenia</string>
     <string name="settings_background_sync">Synchronizácia na pozadí</string>
+    <string name="settings_prevent_screen_capture">Zakázať snímanie obrazovky</string>
+
     <string name="error_sync">Synchronizácia zlyhala: %1$s</string>
     <string name="error_synchronization">Synchronizácia zlyhala</string>
     <string name="error_no_network">Bez sieťového pripojenia</string>
+    <string name="error_maintenance_mode">Server je v móde údržby</string>
     <string name="error_unknown">Vyskytla sa neznáma chyba</string>
 
     <string name="about_version_title">Verzia</string>
@@ -77,7 +84,6 @@
     <string name="widget_create_note">Vytvoriť poznámku</string>
     <string name="widget_not_logged_in">Prihláste sa prosím do Poznámok skôr než začnete používať tento widget</string>
     <string name="widget_entry_fav_contentDescription">Ikona hviezdičky označuje položku ako obľúbenú</string>
-    <string name="widget_app_launcher_contentDescription">Spustí aplikáciu</string>
 
     <string name="activity_select_single_note">Vybrať poznámku</string>
 
@@ -111,6 +117,7 @@
     <string name="error_dialog_title">Ale nie - Čo teraz? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Skúste vyinútiť zatvorenie aplikácie a znova ju reštartovať. Možno došlo k chybnému pripojeniu k aplikácii Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Ak problém pretrváva, skúste vyčistiť úložisko oboch aplikácií: Nextcloud a Nextcloud Poznámky.</string>
+    <string name="error_dialog_tip_clear_storage">Úložisko môžete vyčistiť otvorením informácii o aplikácii a výberom Úložisko → Vyčistiť úložisko. ⚠️ Varovanie: Toto vymaže poznámky ktore ešte neboli synchronizované!</string>
     <string name="error_dialog_tip_files_outdated">Váš Nextcloud vyzerá byť zastaralý. Navštívte Play Store alebo F-Droid pre získanie najnovšej verzie.</string>
     <string name="error_dialog_tip_files_force_stop">Niečo s vašim Nextcloudom nie je v poriadku. Skúste vynútiť ukončenie aplikácií Nextcloud a Nextcloud Poznámky.</string>
     <string name="error_dialog_tip_files_delete_storage">Ak ich ukončenie nepomôže, môžete skúsiť vyčistiť úložiská oboch aplikácií.</string>
@@ -130,10 +137,10 @@
     <string name="append_to_note">Pripojiť k poznámke</string>
     <string name="change_note_title">Zmeniť názov poznámky</string>
     <string name="menu_edit_title">Upraviť názov</string>
-    <string name="settings_branding">Použitie vlastného loga</string>
+    <string name="settings_gridview">Zobrazenie v mriežke</string>
     <string name="simple_security">Zabezpečenie</string>
+    <string name="appearance_and_behavior">Vzhľad a správanie</string>
     <string name="simple_synchronization">Synchronizácia</string>
-    <string name="simple_behavior">Chod</string>
     <string name="manage_accounts">Spravovať účty</string>
     <string name="action_formatting_help">Formátovanie</string>
 
@@ -147,13 +154,6 @@
         <item>Malá</item>
         <item>Stredná</item>
         <item>Veľká</item>
-    </string-array>
-
-    <string-array name="sync_entries">
-        <item>Vypnúť</item>
-        <item>15 minút</item>
-        <item>1 hodina</item>
-        <item>6 hodín</item>
     </string-array>
 
     <string-array name="darkmode_entries">
@@ -191,6 +191,7 @@
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
     <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Kontextové formátovanie</string>
     <string name="formatting_help_cbf_body_1">Hlavným cieľom aplikácie Notes je poskytnúť nástroj bez rozptyľovania. Svoje texty však budete môcť formátovať pomocou aplikácie Markdown. Pre rôzne príklady uvedené nižšie môžete použiť klávesové skratky, pomocou ktorých môžete svoje poznámky formátovať bez toho, aby ste museli zadávať kódy uvedené nižšie.</string>
@@ -228,11 +229,30 @@
     <string name="formatting_help_code_body_2">Markdown tiež podporuje niečo, čo sa nazýva oplotenie kódu, čo umožňuje použiť viac riadkov bez odsadenia:</string>
     <string name="formatting_help_code_body_3">Ak chcete použiť zvýraznenie syntaxe, uveďte jazyk:</string>
 
+    <string name="formatting_help_tables_title">Tabuľky</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">Stĺpec %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Hodnota %1d</string>
+
+    <string name="formatting_help_images_title">Obrázky</string>
+    <string name="formatting_help_images_alt">Efektný obrázok</string>
+
     <string name="simple_other">Iné</string>
     <string name="sort_last_modified">Zoradiť podľa upraveného dátumu</string>
     <string name="sort_alphabetically">Zoradiť podľa abecedy</string>
     <string name="error_action_open_battery_settings">Nastavenia batérie.</string>
     <string name="error_action_open_deck_info">Otvoriť informácie o aplikácii</string>
     <string name="error_action_open_network">Nastavenia siete</string>
+    <string name="no_account_configured_yet">Nie je ešte nastavený žiadny účet</string>
     <string name="no_other_accounts">Zatiaľ nemáte nastavené žiadne ďalšie účty.</string>
+    <string name="choose_account">Zvoliť účet</string>
+    <string name="context_based_formatting">Kontextové okno formátovania</string>
+    <string name="remove_account">Vzdialené: %1$s</string>
+
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Ak chcete pridať účet, musíte byť pripojení k internetu.</string>
+    <string name="simple_next">Ďalšie</string>
+    <string name="simple_prev">Predchádzajúce</string>
+    <string name="simple_backup">Záloha</string>
+    <string name="simple_repair">Obnova</string>
     </resources>

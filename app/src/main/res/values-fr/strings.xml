@@ -12,6 +12,7 @@
     <string name="action_sorting_method">Méthode de tri</string>
     <string name="simple_cancel">Annuler</string>
     <string name="simple_edit">Modifier</string>
+    <string name="simple_remove">Supprimer</string>
     <string name="action_edit_save">Enregistrer</string>
     <string name="simple_about">À propos</string>
     <string name="simple_link">Lien</string>
@@ -42,10 +43,15 @@
     <string name="settings_font_title">Texte monospace</string>
     <string name="settings_font_size">Taille des caractères</string>
     <string name="settings_wifi_only">Synchroniser uniquement en Wifi</string>
+    <string name="settings_lock">Verrouillage de l\'application (Bêta)</string>
+    <string name="settings_lock_summary">Informations d\'identiication du terminal</string>
     <string name="settings_background_sync">Synchronisation en tâche de fond</string>
+    <string name="settings_prevent_screen_capture">Empêcher la capture d\'écran</string>
+
     <string name="error_sync">Échec de synchronisation : %1$s</string>
     <string name="error_synchronization">Échec de synchronisation</string>
     <string name="error_no_network">Aucune connexion réseau</string>
+    <string name="error_maintenance_mode">Le serveur est en mode maintenance</string>
     <string name="error_unknown">Une erreur inconnue est survenue</string>
 
     <string name="about_version_title">Version</string>
@@ -77,7 +83,6 @@
     <string name="widget_create_note">Créer une note</string>
     <string name="widget_not_logged_in">Veuillez vous connecter à Notes avant d\'utiliser ce widget</string>
     <string name="widget_entry_fav_contentDescription">L\'icône étoile est utilisée pour désigner un élément comme favori</string>
-    <string name="widget_app_launcher_contentDescription">Démarre l\'application</string>
 
     <string name="activity_select_single_note">Choisir une note</string>
 
@@ -131,10 +136,10 @@
     <string name="append_to_note">Ajouter à la note</string>
     <string name="change_note_title">Modifier le titre de la note</string>
     <string name="menu_edit_title">Modifier le titre</string>
-    <string name="settings_branding">marque</string>
+    <string name="settings_gridview">Affichage grille</string>
     <string name="simple_security">Sécurité</string>
+    <string name="appearance_and_behavior">Apparence et comportement</string>
     <string name="simple_synchronization">Synchronisation</string>
-    <string name="simple_behavior">Comportement</string>
     <string name="manage_accounts">Gérer les comptes</string>
     <string name="action_formatting_help">Formatage</string>
 
@@ -148,13 +153,6 @@
         <item>Petit</item>
         <item>Moyen</item>
         <item>Grand</item>
-    </string-array>
-
-    <string-array name="sync_entries">
-        <item>Éteint</item>
-        <item>15 minutes</item>
-        <item>1 heure</item>
-        <item>6 heures</item>
     </string-array>
 
     <string-array name="darkmode_entries">
@@ -239,5 +237,7 @@
     <string name="error_action_open_network">Paramètres réseau</string>
     <string name="no_account_configured_yet">Aucun compte n\'est encore configuré</string>
     <string name="no_other_accounts">Vous n\'avez pas encore configuré d\'autres comptes.</string>
+    <string name="choose_account">Sélectionnez un compte</string>
     <string name="context_based_formatting">Suggestions de mise en forme contextuelle</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Vous devez être connecté à internet pour ajouter un compte.</string>
     </resources>

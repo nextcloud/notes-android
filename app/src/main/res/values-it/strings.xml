@@ -6,12 +6,14 @@
     <string name="label_all_notes">Tutte le note</string>
     <string name="label_favorites">Preferite</string>
     <string name="action_create">Nuova nota</string>
+    <string name="welcome_text">Benvenuti in %1$s</string>
     <string name="action_settings">Impostazioni</string>
     <string name="action_trashbin">Note eliminate</string>
     <string name="action_search">Cerca</string>
     <string name="action_sorting_method">Metodo di ordinamento</string>
     <string name="simple_cancel">Annulla</string>
     <string name="simple_edit">Modifica</string>
+    <string name="simple_remove">Rimuovi</string>
     <string name="action_edit_save">Salva</string>
     <string name="simple_about">Informazioni</string>
     <string name="simple_link">Collegamento</string>
@@ -50,6 +52,7 @@
     <string name="error_sync">Sincronizzazione non riuscita: %1$s</string>
     <string name="error_synchronization">Sincronizzazione non riuscita</string>
     <string name="error_no_network">Nessuna connessione di rete</string>
+    <string name="error_maintenance_mode">Il server è in modalità di manutenzione</string>
     <string name="error_unknown">Si è verificato un errore sconosciuto.</string>
 
     <string name="about_version_title">Versione</string>
@@ -81,7 +84,6 @@
     <string name="widget_create_note">Crea nota</string>
     <string name="widget_not_logged_in">Accedi a Notes prima di utilizzare questo widget</string>
     <string name="widget_entry_fav_contentDescription">L\'icona della stella è utilizzata per marcare un elemento come preferito</string>
-    <string name="widget_app_launcher_contentDescription">Avvia l\'applicazione</string>
 
     <string name="activity_select_single_note">Seleziona nota</string>
 
@@ -135,12 +137,10 @@
     <string name="append_to_note">Aggiungi a nota</string>
     <string name="change_note_title">Cambia titolo della nota</string>
     <string name="menu_edit_title">Modifica titolo</string>
-    <string name="settings_branding">Marchio</string>
     <string name="settings_gridview">Vista griglia</string>
     <string name="simple_security">Sicurezza</string>
     <string name="appearance_and_behavior">Aspetto e comportamento</string>
     <string name="simple_synchronization">Sincronizzazione</string>
-    <string name="simple_behavior">Comportamento</string>
     <string name="manage_accounts">Gestisci account</string>
     <string name="action_formatting_help">Formattazione</string>
 
@@ -154,13 +154,6 @@
         <item>Piccola</item>
         <item>Media</item>
         <item>Grande</item>
-    </string-array>
-
-    <string-array name="sync_entries">
-        <item>Spenta</item>
-        <item>15 minuti</item>
-        <item>1 ora</item>
-        <item>6 ore</item>
     </string-array>
 
     <string-array name="darkmode_entries">
@@ -245,5 +238,17 @@
     <string name="error_action_open_network">Impostazioni di rete</string>
     <string name="no_account_configured_yet">Ancora nessun account configurato</string>
     <string name="no_other_accounts">Non hai configurato ancora alcun account.</string>
+    <string name="choose_account">Scegli account</string>
     <string name="context_based_formatting">Finestra di formattazione basata sul contesto</string>
+    <plurals name="remove_account_message">
+        <item quantity="one">La rimozione dell\'account %1$s eliminerà irrevocabilmente anche una modifica non sincronizzata.</item>
+        <item quantity="other">La rimozione dell\'account %1$s eliminerà irrevocabilmente anche %2$d modifiche non sincronizzate.</item>
+    </plurals>
+    <string name="remove_account">Rimuovi %1$s</string>
+
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Devi essere connesso a Internet per aggiungere un account.</string>
+    <string name="simple_next">Successivo</string>
+    <string name="simple_prev">Precedente</string>
+    <string name="simple_backup">Backup</string>
+    <string name="simple_repair">Ripara</string>
     </resources>

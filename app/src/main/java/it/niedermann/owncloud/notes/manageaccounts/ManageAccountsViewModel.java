@@ -13,8 +13,9 @@ import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
@@ -23,7 +24,7 @@ import static androidx.lifecycle.Transformations.distinctUntilChanged;
 
 public class ManageAccountsViewModel extends AndroidViewModel {
 
-    private static final String TAG = ManageAccountsViewModel.class.getSimpleName();
+    private final ExecutorService executor = Executors.newCachedThreadPool();
 
     @NonNull
     private final NotesRepository repo;
@@ -46,7 +47,7 @@ public class ManageAccountsViewModel extends AndroidViewModel {
     }
 
     public void deleteAccount(@NonNull Account account, @NonNull Context context) {
-        new Thread(() -> {
+        executor.submit(() -> {
             final List<Account> accounts = repo.getAccounts();
             for (int i = 0; i < accounts.size(); i++) {
                 if (accounts.get(i).getId() == account.getId()) {
@@ -61,7 +62,7 @@ public class ManageAccountsViewModel extends AndroidViewModel {
                     break;
                 }
             }
-        }).start();
+        });
     }
 
     public void selectAccount(@Nullable Account account, @NonNull Context context) {
@@ -69,6 +70,6 @@ public class ManageAccountsViewModel extends AndroidViewModel {
     }
 
     public void countUnsynchronizedNotes(long accountId, @NonNull IResponseCallback<Long> callback) {
-        new Thread(() -> callback.onSuccess(repo.countUnsynchronizedNotes(accountId))).start();
+        executor.submit(() -> callback.onSuccess(repo.countUnsynchronizedNotes(accountId)));
     }
 }

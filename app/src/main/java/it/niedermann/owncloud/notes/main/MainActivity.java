@@ -4,19 +4,18 @@ import android.accounts.NetworkErrorException;
 import android.animation.AnimatorInflater;
 import android.app.SearchManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewTreeObserver;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.SearchView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -49,6 +48,11 @@ import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import java.net.HttpURLConnection;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.R;
@@ -73,9 +77,9 @@ import it.niedermann.owncloud.notes.main.menu.MenuAdapter;
 import it.niedermann.owncloud.notes.main.navigation.NavigationAdapter;
 import it.niedermann.owncloud.notes.main.navigation.NavigationClickListener;
 import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
+import it.niedermann.owncloud.notes.persistence.ApiProvider;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesWorker;
-import it.niedermann.owncloud.notes.persistence.ApiProvider;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
@@ -83,7 +87,9 @@ import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
+import it.niedermann.owncloud.notes.shared.util.CustomAppGlideModule;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
+import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.O;
@@ -92,7 +98,6 @@ import static android.view.View.VISIBLE;
 import static it.niedermann.owncloud.notes.NotesApplication.isDarkThemeActive;
 import static it.niedermann.owncloud.notes.NotesApplication.isGridViewEnabled;
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.getSecondaryForegroundColorDependingOnTheme;
-import static it.niedermann.owncloud.notes.main.menu.MenuAdapter.SERVER_SETTINGS;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.DEFAULT_CATEGORY;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.RECENT;
@@ -104,18 +109,19 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
+    protected final ExecutorService executor = Executors.newCachedThreadPool();
+
     protected MainViewModel mainViewModel;
     private CategoryViewModel categoryViewModel;
 
     private boolean gridView = true;
 
-    public static final String CREATED_NOTE = "it.niedermann.owncloud.notes.created_notes";
     public static final String ADAPTER_KEY_RECENT = "recent";
     public static final String ADAPTER_KEY_STARRED = "starred";
     public static final String ADAPTER_KEY_UNCATEGORIZED = "uncategorized";
 
-    private final static int create_note_cmd = 0;
-    private final static int show_single_note_cmd = 1;
+    private static final int REQUEST_CODE_CREATE_NOTE = 0;
+    private static final int REQUEST_CODE_SERVER_SETTINGS = 1;
 
     protected ItemAdapter adapter;
     private NavigationAdapter adapterCategories;
@@ -165,14 +171,47 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             if (count == 0) {
                 startActivityForResult(new Intent(this, ImportAccountActivity.class), ImportAccountActivity.REQUEST_CODE_IMPORT_ACCOUNT);
             } else {
-                new Thread(() -> {
+                executor.submit(() -> {
                     try {
                         final Account account = mainViewModel.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
                         runOnUiThread(() -> mainViewModel.postCurrentAccount(account));
-                    } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+                    } catch (NextcloudFilesAppAccountNotFoundException e) {
+                        // Verbose log output for https://github.com/stefan-niedermann/nextcloud-notes/issues/1256
+                        runOnUiThread(() -> new AlertDialog.Builder(this)
+                                .setTitle(NextcloudFilesAppAccountNotFoundException.class.getSimpleName())
+                                .setMessage(R.string.backup)
+                                .setPositiveButton(R.string.simple_backup, (a, b) -> executor.submit(() -> {
+                                    final List<Note> modifiedNotes = new LinkedList<>();
+                                    for (Account account : mainViewModel.getAccounts()) {
+                                        modifiedNotes.addAll(mainViewModel.getLocalModifiedNotes(account.getId()));
+                                    }
+                                    if (modifiedNotes.size() == 1) {
+                                        final Note note = modifiedNotes.get(0);
+                                        ShareUtil.openShareDialog(this, note.getTitle(), note.getContent());
+                                    } else {
+                                        ShareUtil.openShareDialog(this,
+                                                getResources().getQuantityString(R.plurals.share_multiple, modifiedNotes.size(), modifiedNotes.size()),
+                                                mainViewModel.collectNoteContents(modifiedNotes.stream().map(Note::getId).collect(Collectors.toList())));
+                                    }
+                                }))
+                                .setNegativeButton(R.string.simple_error, (a, b) -> {
+                                    final SharedPreferences ssoPreferences = AccountImporter.getSharedPreferences(getApplicationContext());
+                                    final StringBuilder ssoPreferencesString = new StringBuilder()
+                                            .append("Current SSO account: ").append(ssoPreferences.getString("PREF_CURRENT_ACCOUNT_STRING", null)).append("\n")
+                                            .append("\n")
+                                            .append("SSO SharedPreferences: ").append("\n");
+                                    for (Map.Entry<String, ?> entry : ssoPreferences.getAll().entrySet()) {
+                                        ssoPreferencesString.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+                                    }
+                                    ssoPreferencesString.append("\n")
+                                            .append("Available accounts in DB: ").append(TextUtils.join(", ", mainViewModel.getAccounts().stream().map(Account::getAccountName).collect(Collectors.toList())));
+                                    runOnUiThread(() -> ExceptionDialogFragment.newInstance(new RuntimeException(e.getMessage(), new RuntimeException(ssoPreferencesString.toString(), e))).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()));
+                                })
+                                .show());
+                    } catch (NoCurrentAccountSelectedException e) {
                         runOnUiThread(() -> ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()));
                     }
-                }).start();
+                });
             }
         });
 
@@ -212,13 +251,13 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             }
 
             fabCreate.setOnClickListener((View view) -> {
-                Intent createIntent = new Intent(getApplicationContext(), EditNoteActivity.class);
+                final Intent createIntent = new Intent(getApplicationContext(), EditNoteActivity.class);
                 createIntent.putExtra(EditNoteActivity.PARAM_CATEGORY, selectedCategory);
                 if (activityBinding.searchView.getQuery().length() > 0) {
                     createIntent.putExtra(EditNoteActivity.PARAM_CONTENT, activityBinding.searchView.getQuery().toString());
                     invalidateOptionsMenu();
                 }
-                startActivityForResult(createIntent, create_note_cmd);
+                startActivityForResult(createIntent, REQUEST_CODE_CREATE_NOTE);
             });
         });
         mainViewModel.getNotesListLiveData().observe(this, notes -> {
@@ -298,18 +337,18 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             activityBinding.launchAccountSwitcher.setOnClickListener((v) -> AccountSwitcherDialog.newInstance(nextAccount.getId()).show(getSupportFragmentManager(), AccountSwitcherDialog.class.getSimpleName()));
 
             if (menuAdapter == null) {
-                menuAdapter = new MenuAdapter(getApplicationContext(), nextAccount, (menuItem) -> {
+                menuAdapter = new MenuAdapter(getApplicationContext(), nextAccount, REQUEST_CODE_SERVER_SETTINGS, (menuItem) -> {
                     @Nullable Integer resultCode = menuItem.getResultCode();
                     if (resultCode == null) {
                         startActivity(menuItem.getIntent());
                     } else {
-                        startActivityForResult(menuItem.getIntent(), menuItem.getResultCode());
+                        startActivityForResult(menuItem.getIntent(), resultCode);
                     }
                 });
 
                 binding.navigationMenu.setAdapter(menuAdapter);
             } else {
-                menuAdapter.updateAccount(nextAccount);
+                menuAdapter.updateAccount(this, nextAccount);
             }
         });
     }
@@ -353,36 +392,14 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         setSupportActionBar(binding.activityNotesListView.toolbar);
         activityBinding.homeToolbar.setOnClickListener((v) -> {
             if (activityBinding.toolbar.getVisibility() == GONE) {
-                updateToolbars(false);
+                updateToolbars(true);
             }
         });
 
         activityBinding.menuButton.setOnClickListener((v) -> binding.drawerLayout.openDrawer(GravityCompat.START));
-
-        final LinearLayout searchEditFrame = activityBinding.searchView.findViewById(R.id.search_edit_frame);
-
-        searchEditFrame.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            int oldVisibility = -1;
-
-            @Override
-            public void onGlobalLayout() {
-                int currentVisibility = searchEditFrame.getVisibility();
-
-                if (currentVisibility != oldVisibility) {
-                    if (currentVisibility == VISIBLE) {
-                        fabCreate.hide();
-                    } else {
-                        new Handler().postDelayed(() -> fabCreate.show(), 150);
-                    }
-
-                    oldVisibility = currentVisibility;
-                }
-            }
-
-        });
         activityBinding.searchView.setOnCloseListener(() -> {
             if (activityBinding.toolbar.getVisibility() == VISIBLE && TextUtils.isEmpty(activityBinding.searchView.getQuery())) {
-                updateToolbars(true);
+                updateToolbars(false);
                 return true;
             }
             return false;
@@ -438,12 +455,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         });
 
         swipeRefreshLayout.setOnRefreshListener(() -> {
-            Log.i(TAG, "Clearing Glide memory cache");
-            Glide.get(this).clearMemory();
-            new Thread(() -> {
-                Log.i(TAG, "Clearing Glide disk cache");
-                Glide.get(getApplicationContext()).clearDiskCache();
-            }, "CLEAR_GLIDE_CACHE").start();
+            CustomAppGlideModule.clearCache(this);
             final LiveData<Account> syncLiveData = mainViewModel.getCurrentAccount();
             final Observer<Account> syncObserver = currentAccount -> {
                 syncLiveData.removeObservers(this);
@@ -586,7 +598,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     @Override
     public boolean onSupportNavigateUp() {
         if (activityBinding.toolbar.getVisibility() == VISIBLE) {
-            updateToolbars(true);
+            updateToolbars(false);
             return true;
         } else {
             return super.onSupportNavigateUp();
@@ -638,33 +650,37 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         super.onActivityResult(requestCode, resultCode, data);
 
         switch (requestCode) {
-            case create_note_cmd: {
+            case REQUEST_CODE_CREATE_NOTE: {
                 listView.scrollToPosition(0);
                 break;
             }
-            case SERVER_SETTINGS: {
+            case REQUEST_CODE_SERVER_SETTINGS: {
                 // Recreate activity completely, because theme switching makes problems when only invalidating the views.
                 // @see https://github.com/stefan-niedermann/nextcloud-notes/issues/529
-                ActivityCompat.recreate(this);
+                if (RESULT_OK == resultCode) {
+                    ActivityCompat.recreate(this);
+                    return;
+                }
                 break;
             }
             default: {
                 try {
                     AccountImporter.onActivityResult(requestCode, resultCode, data, this, (ssoAccount) -> {
                         CapabilitiesWorker.update(this);
-                        new Thread(() -> {
+                        executor.submit(() -> {
                             Log.i(TAG, "Added account: " + "name:" + ssoAccount.name + ", " + ssoAccount.url + ", userId" + ssoAccount.userId);
                             try {
                                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
-                                final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, null);
-                                mainViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities, new IResponseCallback<Account>() {
+                                final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, null, ApiProvider.getInstance());
+                                final String displayName = CapabilitiesClient.getDisplayName(getApplicationContext(), ssoAccount, ApiProvider.getInstance());
+                                mainViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities, displayName, new IResponseCallback<Account>() {
                                     @Override
                                     public void onSuccess(Account result) {
-                                        new Thread(() -> {
+                                        executor.submit(() -> {
                                             Log.i(TAG, capabilities.toString());
                                             final Account a = mainViewModel.getLocalAccountByAccountName(ssoAccount.name);
                                             runOnUiThread(() -> mainViewModel.postCurrentAccount(a));
-                                        }).start();
+                                        });
                                     }
 
                                     @Override
@@ -673,7 +689,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                     }
                                 });
                             } catch (Throwable e) {
-                                ApiProvider.invalidateAPICache(ssoAccount);
+                                ApiProvider.getInstance().invalidateAPICache(ssoAccount);
                                 // Happens when importing an already existing account the second time
                                 if (e instanceof TokenMismatchException && mainViewModel.getLocalAccountByAccountName(ssoAccount.name) != null) {
                                     Log.w(TAG, "Received " + TokenMismatchException.class.getSimpleName() + " and the given ssoAccount.name (" + ssoAccount.name + ") does already exist in the database. Assume that this account has already been imported.");
@@ -682,7 +698,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                         // TODO there is already a sync in progress and results in displaying a TokenMissMatchException snackbar which conflicts with this one
                                         coordinatorLayout.post(() -> BrandedSnackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show());
                                     });
-                                } else if (e instanceof UnknownErrorException && e.getMessage().contains("No address associated with hostname")) {
+                                } else if (e instanceof UnknownErrorException && e.getMessage() != null && e.getMessage().contains("No address associated with hostname")) {
                                     // https://github.com/stefan-niedermann/nextcloud-notes/issues/1014
                                     runOnUiThread(() -> Snackbar.make(coordinatorLayout, R.string.you_have_to_be_connected_to_the_internet_in_order_to_add_an_account, Snackbar.LENGTH_LONG).show());
                                 } else {
@@ -693,7 +709,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                     });
                                 }
                             }
-                        }).start();
+                        });
                     });
                 } catch (AccountImportCancelledException e) {
                     Log.i(TAG, "AccountImport has been cancelled.");
@@ -706,10 +722,9 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     public void onNoteClick(int position, View v) {
         boolean hasCheckedItems = tracker.getSelection().size() > 0;
         if (!hasCheckedItems) {
-            Note note = (Note) adapter.getItem(position);
-            Intent intent = new Intent(getApplicationContext(), EditNoteActivity.class);
-            intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
-            startActivityForResult(intent, show_single_note_cmd);
+            final Note note = (Note) adapter.getItem(position);
+            startActivity(new Intent(getApplicationContext(), EditNoteActivity.class)
+                    .putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId()));
         }
     }
 
@@ -722,18 +737,24 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     @Override
     public void onBackPressed() {
         if (activityBinding.toolbar.getVisibility() == VISIBLE) {
-            updateToolbars(true);
+            updateToolbars(false);
+        } else if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
     }
 
-    private void updateToolbars(boolean disableSearch) {
-        activityBinding.homeToolbar.setVisibility(disableSearch ? VISIBLE : GONE);
-        activityBinding.toolbar.setVisibility(disableSearch ? GONE : VISIBLE);
-        activityBinding.appBar.setStateListAnimator(AnimatorInflater.loadStateListAnimator(activityBinding.appBar.getContext(),
-                disableSearch ? R.animator.appbar_elevation_off : R.animator.appbar_elevation_on));
-        if (disableSearch) {
+    private void updateToolbars(boolean enableSearch) {
+        activityBinding.homeToolbar.setVisibility(enableSearch ? GONE : VISIBLE);
+        activityBinding.toolbar.setVisibility(enableSearch ? VISIBLE : GONE);
+        activityBinding.appBar.setStateListAnimator(AnimatorInflater.loadStateListAnimator(activityBinding.appBar.getContext(), enableSearch
+                        ? R.animator.appbar_elevation_on
+                        : R.animator.appbar_elevation_off));
+        if (enableSearch) {
+            activityBinding.searchView.setIconified(false);
+            fabCreate.show();
+        } else {
             activityBinding.searchView.setQuery(null, true);
         }
     }

@@ -9,6 +9,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.preference.PreferenceManager;
 
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.AccountImportCancelledException;
@@ -20,14 +21,17 @@ import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.ui.UiExceptionManager;
 
 import java.net.HttpURLConnection;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ActivityImportAccountBinding;
 import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.exception.ExceptionHandler;
-import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.ApiProvider;
+import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
+import it.niedermann.owncloud.notes.persistence.SyncWorker;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
@@ -36,6 +40,8 @@ public class ImportAccountActivity extends AppCompatActivity {
 
     private static final String TAG = ImportAccountActivity.class.getSimpleName();
     public static final int REQUEST_CODE_IMPORT_ACCOUNT = 1;
+
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     private ImportAccountViewModel importAccountViewModel;
     private ActivityImportAccountBinding binding;
@@ -84,12 +90,19 @@ public class ImportAccountActivity extends AppCompatActivity {
                 runOnUiThread(() -> binding.progressCircular.setVisibility(View.VISIBLE));
 
                 SingleAccountHelper.setCurrentAccount(getApplicationContext(), ssoAccount.name);
-                new Thread(() -> {
+                executor.submit(() -> {
                     Log.i(TAG, "Added account: " + "name:" + ssoAccount.name + ", " + ssoAccount.url + ", userId" + ssoAccount.userId);
                     try {
                         Log.i(TAG, "Loading capabilities for " + ssoAccount.name);
-                        final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, null);
-                        importAccountViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities, new IResponseCallback<Account>() {
+                        final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, null, ApiProvider.getInstance());
+                        final String displayName = CapabilitiesClient.getDisplayName(getApplicationContext(), ssoAccount, ApiProvider.getInstance());
+                        importAccountViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities, displayName, new IResponseCallback<Account>() {
+
+                            /**
+                             * Update syncing when adding account
+                             * https://github.com/stefan-niedermann/nextcloud-deck/issues/531
+                             * @param account the account to add
+                             */
                             @Override
                             public void onSuccess(Account account) {
                                 runOnUiThread(() -> {
@@ -98,6 +111,8 @@ public class ImportAccountActivity extends AppCompatActivity {
                                     setResult(RESULT_OK);
                                     finish();
                                 });
+                                SyncWorker.update(ImportAccountActivity.this, PreferenceManager.getDefaultSharedPreferences(ImportAccountActivity.this)
+                                        .getBoolean(getString(R.string.pref_key_background_sync), true));
                             }
 
                             @Override
@@ -110,7 +125,7 @@ public class ImportAccountActivity extends AppCompatActivity {
                         });
                     } catch (Throwable t) {
                         t.printStackTrace();
-                        ApiProvider.invalidateAPICache(ssoAccount);
+                        ApiProvider.getInstance().invalidateAPICache(ssoAccount);
                         SingleAccountHelper.setCurrentAccount(this, null);
                         runOnUiThread(() -> {
                             restoreCleanState();
@@ -120,7 +135,7 @@ public class ImportAccountActivity extends AppCompatActivity {
                             } else if (t instanceof NetworkErrorException) {
                                 binding.status.setText(getString(R.string.error_sync, getString(R.string.error_no_network)));
                                 binding.status.setVisibility(View.VISIBLE);
-                            } else if (t instanceof UnknownErrorException && t.getMessage().contains("No address associated with hostname")) {
+                            } else if (t instanceof UnknownErrorException && t.getMessage() != null && t.getMessage().contains("No address associated with hostname")) {
                                 // https://github.com/stefan-niedermann/nextcloud-notes/issues/1014
                                 binding.status.setText(R.string.you_have_to_be_connected_to_the_internet_in_order_to_add_an_account);
                                 binding.status.setVisibility(View.VISIBLE);
@@ -129,7 +144,7 @@ public class ImportAccountActivity extends AppCompatActivity {
                             }
                         });
                     }
-                }).start();
+                });
             });
         } catch (AccountImportCancelledException e) {
             restoreCleanState();

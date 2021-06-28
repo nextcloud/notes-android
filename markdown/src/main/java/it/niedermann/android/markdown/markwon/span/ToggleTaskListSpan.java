@@ -1,15 +1,12 @@
 package it.niedermann.android.markdown.markwon.span;
 
-import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BiConsumer;
 
@@ -19,43 +16,24 @@ public class ToggleTaskListSpan extends ClickableSpan {
 
     private static final String TAG = ToggleTaskListSpan.class.getSimpleName();
 
-    final AtomicBoolean enabled;
-    final BiConsumer<Integer, Boolean> toggleListener;
-    final TaskListSpan span;
-    final String content;
+    private final AtomicBoolean enabled;
+    private final BiConsumer<Integer, Boolean> toggleListener;
+    private final TaskListSpan span;
+    private final int position;
 
-    public ToggleTaskListSpan(@NonNull AtomicBoolean enabled, @NonNull BiConsumer<Integer, Boolean> toggleListener, @NonNull TaskListSpan span, String content) {
+    public ToggleTaskListSpan(@NonNull AtomicBoolean enabled, @NonNull BiConsumer<Integer, Boolean> toggleListener, @NonNull TaskListSpan span, int position) {
         this.enabled = enabled;
         this.toggleListener = toggleListener;
         this.span = span;
-        this.content = content;
+        this.position = position;
     }
 
     @Override
     public void onClick(@NonNull View widget) {
-        if(enabled.get()) {
+        if (enabled.get()) {
             span.setDone(!span.isDone());
             widget.invalidate();
-            Log.v(TAG, "task-list click, isDone: " + span.isDone() + ", content: '" + content + "'");
-
-            // it must be a TextView
-            final TextView textView = (TextView) widget;
-            // it must be spanned
-            // TODO what if textView is not a spanned?
-            final Spanned spanned = (Spanned) textView.getText();
-
-            final ClickableSpan[] toggles = spanned.getSpans(0, spanned.length(), getClass());
-            Arrays.sort(toggles, (o1, o2) -> spanned.getSpanStart(o1) - spanned.getSpanStart(o2));
-
-            int currentTogglePosition = -1;
-            for (int i = 0; i < toggles.length; i++) {
-                if (spanned.getSpanStart(toggles[i]) == spanned.getSpanStart(this) && spanned.getSpanEnd(toggles[i]) == spanned.getSpanEnd(this)) {
-                    currentTogglePosition = i;
-                    break;
-                }
-            }
-
-            toggleListener.accept(currentTogglePosition, span.isDone());
+            toggleListener.accept(position, span.isDone());
         } else {
             Log.w(TAG, "Prevented toggling checkbox because the view is disabled");
         }

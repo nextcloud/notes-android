@@ -14,6 +14,9 @@ import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundExce
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
@@ -33,6 +36,8 @@ import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.
 
 public class NoteListWidgetConfigurationActivity extends LockedActivity {
     private static final String TAG = Activity.class.getSimpleName();
+
+    private final ExecutorService executor = Executors.newCachedThreadPool();
 
     private int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
 
@@ -104,7 +109,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
                 data.setAccountId(localAccount.getId());
                 data.setThemeMode(NotesApplication.getAppTheme(getApplicationContext()).getModeId());
 
-                new Thread(() -> {
+                executor.submit(() -> {
                     repo.createOrUpdateNoteListWidgetData(data);
 
                     final Intent updateIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE, null, getApplicationContext(), NoteListWidget.class)
@@ -112,7 +117,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
                     setResult(RESULT_OK, updateIntent);
                     getApplicationContext().sendBroadcast(updateIntent);
                     finish();
-                }).start();
+                });
             }
 
             public void onIconClick(NavigationItem item) {
@@ -122,7 +127,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
 
         binding.recyclerView.setAdapter(adapterCategories);
 
-        new Thread(() -> {
+        executor.submit(() -> {
             try {
                 this.localAccount = repo.getAccountByName(SingleAccountHelper.getCurrentSingleSignOnAccount(this).name);
             } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
@@ -133,7 +138,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
                 finish();
             }
             runOnUiThread(() -> viewModel.getAdapterCategories(localAccount.getId()).observe(this, (navigationItems) -> adapterCategories.setItems(navigationItems)));
-        }).start();
+        });
     }
 
     @Override

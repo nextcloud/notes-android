@@ -79,7 +79,6 @@
     <string name="widget_create_note">Stvori bilješku</string>
     <string name="widget_not_logged_in">Prijavite se u aplikaciju Bilješke prije korištenja ovog widgeta</string>
     <string name="widget_entry_fav_contentDescription">Ikona zvjezdice upotrebljava se za označavanje stavke kao favorita</string>
-    <string name="widget_app_launcher_contentDescription">Pokreće aplikaciju</string>
 
     <string name="activity_select_single_note">Odaberi bilješku</string>
 
@@ -133,11 +132,9 @@
     <string name="append_to_note">Dodaj bilješci</string>
     <string name="change_note_title">Promijeni naslov bilješke</string>
     <string name="menu_edit_title">Uredi naslov</string>
-    <string name="settings_branding">Brendiranje</string>
     <string name="settings_gridview">Prikaz rešetke</string>
     <string name="simple_security">Sigurnost</string>
     <string name="simple_synchronization">Sinkronizacija</string>
-    <string name="simple_behavior">Ponašanje</string>
     <string name="manage_accounts">Upravljaj računima</string>
     <string name="action_formatting_help">Oblikovanje</string>
 
@@ -151,13 +148,6 @@
         <item>Mali</item>
         <item>Srednji</item>
         <item>Veliki</item>
-    </string-array>
-
-    <string-array name="sync_entries">
-        <item>Isključeno</item>
-        <item>15 minuta</item>
-        <item>1 sat</item>
-        <item>6 sati</item>
     </string-array>
 
     <string-array name="darkmode_entries">

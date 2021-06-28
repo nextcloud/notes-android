@@ -47,17 +47,18 @@ public class CapabilitiesWorker extends Worker {
             try {
                 final SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(getApplicationContext(), account.getAccountName());
                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
-                final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, account.getCapabilitiesETag());
+                final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, account.getCapabilitiesETag(), ApiProvider.getInstance());
                 repo.updateCapabilitiesETag(account.getId(), capabilities.getETag());
                 repo.updateBrand(account.getId(), capabilities.getColor(), capabilities.getTextColor());
                 repo.updateApiVersion(account.getId(), capabilities.getApiVersion());
                 Log.i(TAG, capabilities.toString());
+                repo.updateDisplayName(account.getId(), CapabilitiesClient.getDisplayName(getApplicationContext(), ssoAccount, ApiProvider.getInstance()));
             } catch (Throwable e) {
                 if (e instanceof NextcloudHttpRequestFailedException) {
                     if (((NextcloudHttpRequestFailedException) e).getStatusCode() == HttpURLConnection.HTTP_NOT_MODIFIED) {
                         Log.i(TAG, "Capabilities not modified.");
                         return Result.success();
-                    } else if(((NextcloudHttpRequestFailedException) e).getStatusCode() == HttpURLConnection.HTTP_UNAVAILABLE) {
+                    } else if (((NextcloudHttpRequestFailedException) e).getStatusCode() == HttpURLConnection.HTTP_UNAVAILABLE) {
                         Log.i(TAG, "Server is in maintenance mode.");
                         return Result.success();
                     }

@@ -102,7 +102,6 @@
     <string name="no_category">Enginn flokkur</string>
     <string name="add_category">Bæta við %1$s</string>
     <string name="simple_checkbox">Hakreitur</string>
-    <string name="simple_beta">BETA-prófunarútgáfa</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Opna í breytingaham</item>

@@ -20,18 +20,23 @@ import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
+import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
+import it.niedermann.owncloud.notes.BuildConfig;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.exception.IntendedOfflineException;
 import it.niedermann.owncloud.notes.main.navigation.NavigationAdapter;
 import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
+import it.niedermann.owncloud.notes.persistence.ApiProvider;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
@@ -63,6 +68,8 @@ import static java.net.HttpURLConnection.HTTP_NOT_MODIFIED;
 public class MainViewModel extends AndroidViewModel {
 
     private static final String TAG = MainViewModel.class.getSimpleName();
+
+    private final ExecutorService executor = Executors.newCachedThreadPool();
 
     private final SavedStateHandle state;
 
@@ -214,7 +221,7 @@ public class MainViewModel extends AndroidViewModel {
                     } else {
                         Log.v(TAG, "[getNotesListLiveData] - selectedCategory: " + selectedCategory);
                         return switchMap(getSearchTerm(), searchTerm -> {
-                            Log.v(TAG, "[getNotesListLiveData] - searchTerm: " + searchTerm);
+                            Log.v(TAG, "[getNotesListLiveData] - searchTerm: " + (BuildConfig.DEBUG ? "******" : searchTerm));
                             return switchMap(getCategorySortingMethodOfSelectedCategory(), sortingMethod -> {
                                 final long accountId = currentAccount.getId();
                                 final String searchQueryOrWildcard = searchTerm == null ? "%" : "%" + searchTerm.trim() + "%";
@@ -388,32 +395,35 @@ public class MainViewModel extends AndroidViewModel {
      * Updates the network status if necessary and pulls the latest {@link Capabilities} of the given {@param localAccount}
      */
     public void synchronizeCapabilities(@NonNull Account localAccount, @NonNull IResponseCallback<Void> callback) {
-        new Thread(() -> {
+        executor.submit(() -> {
             if (!repo.isSyncPossible()) {
                 repo.updateNetworkStatus();
             }
             if (repo.isSyncPossible()) {
                 try {
-                    final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplication(), AccountImporter.getSingleSignOnAccount(getApplication(), localAccount.getAccountName()), localAccount.getCapabilitiesETag());
-                    repo.updateCapabilitiesETag(localAccount.getId(), capabilities.getETag());
-                    repo.updateBrand(localAccount.getId(), capabilities.getColor(), capabilities.getTextColor());
-                    localAccount.setColor(capabilities.getColor());
-                    localAccount.setTextColor(capabilities.getTextColor());
-                    BrandingUtil.saveBrandColors(getApplication(), localAccount.getColor(), localAccount.getTextColor());
-                    repo.updateApiVersion(localAccount.getId(), capabilities.getApiVersion());
-                    callback.onSuccess(null);
+                    final SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(getApplication(), localAccount.getAccountName());
+                    try {
+                        final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplication(), ssoAccount, localAccount.getCapabilitiesETag(), ApiProvider.getInstance());
+                        repo.updateCapabilitiesETag(localAccount.getId(), capabilities.getETag());
+                        repo.updateBrand(localAccount.getId(), capabilities.getColor(), capabilities.getTextColor());
+                        localAccount.setColor(capabilities.getColor());
+                        localAccount.setTextColor(capabilities.getTextColor());
+                        BrandingUtil.saveBrandColors(getApplication(), localAccount.getColor(), localAccount.getTextColor());
+                        repo.updateApiVersion(localAccount.getId(), capabilities.getApiVersion());
+                        callback.onSuccess(null);
+                    } catch (Throwable t) {
+                        if (t.getClass() == NextcloudHttpRequestFailedException.class || t instanceof NextcloudHttpRequestFailedException) {
+                            if (((NextcloudHttpRequestFailedException) t).getStatusCode() == HTTP_NOT_MODIFIED) {
+                                Log.d(TAG, "Server returned HTTP Status Code " + ((NextcloudHttpRequestFailedException) t).getStatusCode() + " - Capabilities not modified.");
+                                callback.onSuccess(null);
+                                return;
+                            }
+                        }
+                        callback.onError(t);
+                    }
                 } catch (NextcloudFilesAppAccountNotFoundException e) {
                     repo.deleteAccount(localAccount);
                     callback.onError(e);
-                } catch (Throwable t) {
-                    if (t.getClass() == NextcloudHttpRequestFailedException.class || t instanceof NextcloudHttpRequestFailedException) {
-                        if (((NextcloudHttpRequestFailedException) t).getStatusCode() == HTTP_NOT_MODIFIED) {
-                            Log.d(TAG, "Server returned HTTP Status Code " + ((NextcloudHttpRequestFailedException) t).getStatusCode() + " - Capabilities not modified.");
-                            callback.onSuccess(null);
-                            return;
-                        }
-                    }
-                    callback.onError(t);
                 }
             } else {
                 if (repo.isNetworkConnected() && repo.isSyncOnlyOnWifi()) {
@@ -422,14 +432,14 @@ public class MainViewModel extends AndroidViewModel {
                     callback.onError(new NetworkErrorException("Sync is not possible, because network is not connected."));
                 }
             }
-        }, "SYNC_CAPABILITIES").start();
+        }, "SYNC_CAPABILITIES");
     }
 
     /**
      * Updates the network status if necessary and pulls the latest notes of the given {@param localAccount}
      */
     public void synchronizeNotes(@NonNull Account currentAccount, @NonNull IResponseCallback<Void> callback) {
-        new Thread(() -> {
+        executor.submit(() -> {
             Log.v(TAG, "[synchronize] - currentAccount: " + currentAccount.getAccountName());
             if (!repo.isSyncPossible()) {
                 repo.updateNetworkStatus();
@@ -444,7 +454,7 @@ public class MainViewModel extends AndroidViewModel {
                     callback.onError(new NetworkErrorException("Sync is not possible, because network is not connected."));
                 }
             }
-        }, "SYNC_NOTES").start();
+        }, "SYNC_NOTES");
     }
 
     public LiveData<Boolean> getSyncStatus() {
@@ -483,9 +493,9 @@ public class MainViewModel extends AndroidViewModel {
         });
     }
 
-    public LiveData<Note> moveNoteToAnotherAccount(Account account, Long noteId) {
+    public LiveData<Note> moveNoteToAnotherAccount(Account account, long noteId) {
         return switchMap(repo.getNoteById$(noteId), (note) -> {
-            Log.v(TAG, "[moveNoteToAnotherAccount] - note: " + note);
+            Log.v(TAG, "[moveNoteToAnotherAccount] - note: " + (BuildConfig.DEBUG ? note : note.getTitle()));
             return repo.moveNoteToAnotherAccount(account, note);
         });
     }
@@ -528,8 +538,8 @@ public class MainViewModel extends AndroidViewModel {
         });
     }
 
-    public void addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities, @NonNull IResponseCallback<Account> callback) {
-        repo.addAccount(url, username, accountName, capabilities, callback);
+    public void addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities, @Nullable String displayName, @NonNull IResponseCallback<Account> callback) {
+        repo.addAccount(url, username, accountName, capabilities, displayName, callback);
     }
 
     public LiveData<Note> getFullNote$(long id) {
@@ -548,12 +558,12 @@ public class MainViewModel extends AndroidViewModel {
             } else {
                 Log.v(TAG, "[getNote] - currentAccount: " + currentAccount.getAccountName());
                 final MutableLiveData<List<Note>> notes = new MutableLiveData<>();
-                new Thread(() -> notes.postValue(
+                executor.submit(() -> notes.postValue(
                         ids
                                 .stream()
                                 .map(repo::getNoteById)
                                 .collect(Collectors.toList())
-                )).start();
+                ));
                 return notes;
             }
         });
@@ -582,6 +592,10 @@ public class MainViewModel extends AndroidViewModel {
 
     public void createOrUpdateSingleNoteWidgetData(SingleNoteWidgetData data) {
         repo.createOrUpdateSingleNoteWidgetData(data);
+    }
+
+    public List<Note> getLocalModifiedNotes(long accountId) {
+        return repo.getLocalModifiedNotes(accountId);
     }
 
     public LiveData<Integer> getAccountsCount() {

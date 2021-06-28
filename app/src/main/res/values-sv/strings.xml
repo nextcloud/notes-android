@@ -77,7 +77,6 @@
     <string name="widget_create_note">Skapa anteckning</string>
     <string name="widget_not_logged_in">Vänligen logga in i Anteckningar innan denna används</string>
     <string name="widget_entry_fav_contentDescription">Stjärnan används för att beteckna ett objekt som favorit</string>
-    <string name="widget_app_launcher_contentDescription">Startar app</string>
 
     <string name="activity_select_single_note">Välj anteckning</string>
 
@@ -130,10 +129,8 @@
     <string name="append_to_note">Lägg till i anteckning</string>
     <string name="change_note_title">Ändra anteckningstitel</string>
     <string name="menu_edit_title">Redigera titel</string>
-    <string name="settings_branding">Varumärke</string>
     <string name="simple_security">Säkerhet</string>
     <string name="simple_synchronization">Synkronisering</string>
-    <string name="simple_behavior">Beteende</string>
     <string name="manage_accounts">Hantera konton</string>
     <string name="action_formatting_help">Formatering</string>
 
@@ -147,13 +144,6 @@
         <item>Liten</item>
         <item>Medium</item>
         <item>Stor</item>
-    </string-array>
-
-    <string-array name="sync_entries">
-        <item>Av</item>
-        <item>15 minuter</item>
-        <item>1 timme</item>
-        <item>6 timmar</item>
     </string-array>
 
     <string-array name="darkmode_entries">

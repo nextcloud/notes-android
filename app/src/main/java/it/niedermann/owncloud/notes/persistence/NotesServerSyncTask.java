@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.api.ParsedResponse;
+import com.nextcloud.android.sso.exceptions.NextcloudApiNotRespondingException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.TokenMismatchException;
@@ -19,15 +20,16 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
+import it.niedermann.owncloud.notes.BuildConfig;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.sync.NotesAPI;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.model.SyncResultStatus;
+import it.niedermann.owncloud.notes.shared.util.ApiVersionUtil;
 import retrofit2.Response;
 
 import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_DELETED;
@@ -51,6 +53,8 @@ abstract class NotesServerSyncTask extends Thread {
 
     private NotesAPI notesAPI;
     @NonNull
+    private final ApiProvider apiProvider;
+    @NonNull
     private final Context context;
     @NonNull
     private final NotesRepository repo;
@@ -64,13 +68,14 @@ abstract class NotesServerSyncTask extends Thread {
     @NonNull
     protected final ArrayList<Throwable> exceptions = new ArrayList<>();
 
-    NotesServerSyncTask(@NonNull Context context, @NonNull NotesRepository repo, @NonNull Account localAccount, boolean onlyLocalChanges) throws NextcloudFilesAppAccountNotFoundException {
+    NotesServerSyncTask(@NonNull Context context, @NonNull NotesRepository repo, @NonNull Account localAccount, boolean onlyLocalChanges, @NonNull ApiProvider apiProvider) throws NextcloudFilesAppAccountNotFoundException {
         super(TAG);
         this.context = context;
         this.repo = repo;
         this.localAccount = localAccount;
         this.ssoAccount = AccountImporter.getSingleSignOnAccount(context, localAccount.getAccountName());
         this.onlyLocalChanges = onlyLocalChanges;
+        this.apiProvider = apiProvider;
     }
 
     void addCallbacks(Account account, List<ISyncCallback> callbacks) {
@@ -81,7 +86,7 @@ abstract class NotesServerSyncTask extends Thread {
     public void run() {
         onPreExecute();
 
-        notesAPI = ApiProvider.getNotesAPI(context, ssoAccount, localAccount.getPreferredApiVersion());
+        notesAPI = apiProvider.getNotesAPI(context, ssoAccount, ApiVersionUtil.getPreferredApiVersion(localAccount.getApiVersion()));
 
         Log.i(TAG, "STARTING SYNCHRONIZATION");
 
@@ -109,7 +114,7 @@ abstract class NotesServerSyncTask extends Thread {
         boolean success = true;
         final List<Note> notes = repo.getLocalModifiedNotes(localAccount.getId());
         for (Note note : notes) {
-            Log.d(TAG, "   Process Local Note: " + note);
+            Log.d(TAG, "   Process Local Note: " + (BuildConfig.DEBUG ? note : note.getTitle()));
             try {
                 Note remoteNote;
                 switch (note.getStatus()) {
@@ -120,27 +125,37 @@ abstract class NotesServerSyncTask extends Thread {
                             final Response<Note> editResponse = notesAPI.editNote(note).execute();
                             if (editResponse.isSuccessful()) {
                                 remoteNote = editResponse.body();
-                            } else {
-                                if (editResponse.code() == HTTP_NOT_FOUND) {
-                                    Log.v(TAG, "   ...Note does no longer exist on server → recreate");
-                                    final Response<Note> createResponse = notesAPI.createNote(note).execute();
-                                    if (createResponse.isSuccessful()) {
-                                        remoteNote = createResponse.body();
-                                    } else {
-                                        throw new Exception(createResponse.errorBody().string());
+                                if (remoteNote == null) {
+                                    Log.e(TAG, "   ...Tried to edit \"" + note.getTitle() + "\" (#" + note.getId() + ") but the server response was null.");
+                                    throw new Exception("Server returned null after editing \"" + note.getTitle() + "\" (#" + note.getId() + ")");
+                                }
+                            } else if (editResponse.code() == HTTP_NOT_FOUND) {
+                                Log.v(TAG, "   ...Note does no longer exist on server → recreate");
+                                final Response<Note> createResponse = notesAPI.createNote(note).execute();
+                                if (createResponse.isSuccessful()) {
+                                    remoteNote = createResponse.body();
+                                    if (remoteNote == null) {
+                                        Log.e(TAG, "   ...Tried to recreate \"" + note.getTitle() + "\" (#" + note.getId() + ") but the server response was null.");
+                                        throw new Exception("Server returned null after recreating \"" + note.getTitle() + "\" (#" + note.getId() + ")");
                                     }
                                 } else {
-                                    throw new Exception(editResponse.errorBody().string());
+                                    throw new Exception(createResponse.message());
                                 }
+                            } else {
+                                throw new Exception(editResponse.message());
                             }
                         } else {
                             Log.v(TAG, "   ...Note does not have a remoteId yet → create");
                             final Response<Note> createResponse = notesAPI.createNote(note).execute();
                             if (createResponse.isSuccessful()) {
                                 remoteNote = createResponse.body();
+                                if (remoteNote == null) {
+                                    Log.e(TAG, "   ...Tried to create \"" + note.getTitle() + "\" (#" + note.getId() + ") but the server response was null.");
+                                    throw new Exception("Server returned null after creating \"" + note.getTitle() + "\" (#" + note.getId() + ")");
+                                }
                                 repo.updateRemoteId(note.getId(), remoteNote.getRemoteId());
                             } else {
-                                throw new Exception(createResponse.errorBody().string());
+                                throw new Exception(createResponse.message());
                             }
                         }
                         // Please note, that db.updateNote() realized an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
@@ -156,7 +171,7 @@ abstract class NotesServerSyncTask extends Thread {
                                 if (deleteResponse.code() == HTTP_NOT_FOUND) {
                                     Log.v(TAG, "   ...delete (note has already been deleted remotely)");
                                 } else {
-                                    throw new Exception(deleteResponse.errorBody().string());
+                                    throw new Exception(deleteResponse.message());
                                 }
                             }
                         }
@@ -175,7 +190,7 @@ abstract class NotesServerSyncTask extends Thread {
                 }
             } catch (Exception e) {
                 if (e instanceof TokenMismatchException) {
-                    ApiProvider.invalidateAPICache(ssoAccount);
+                    apiProvider.invalidateAPICache(ssoAccount);
                 }
                 exceptions.add(e);
                 success = false;
@@ -206,7 +221,7 @@ abstract class NotesServerSyncTask extends Thread {
             final Set<Long> remoteIDs = new HashSet<>();
             // pull remote changes: update or create each remote note
             for (Note remoteNote : remoteNotes) {
-                Log.v(TAG, "   Process Remote Note: " + remoteNote);
+                Log.v(TAG, "   Process Remote Note: " + (BuildConfig.DEBUG ? remoteNote : remoteNote.getTitle()));
                 remoteIDs.add(remoteNote.getRemoteId());
                 if (remoteNote.getModified() == null) {
                     Log.v(TAG, "   ... unchanged");
@@ -217,7 +232,7 @@ abstract class NotesServerSyncTask extends Thread {
                         repo.updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
                                 localId, remoteNote.getModified().getTimeInMillis(), remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getCategory(), remoteNote.getETag(), remoteNote.getContent(), generateNoteExcerpt(remoteNote.getContent(), remoteNote.getTitle()));
                     } else {
-                        Log.e(TAG, "Tried to update note from server, but local id of note is null. " + remoteNote);
+                        Log.e(TAG, "Tried to update note from server, but local id of note is null. " + (BuildConfig.DEBUG ? remoteNote : remoteNote.getTitle()));
                     }
                 } else {
                     Log.v(TAG, "   ... create");
@@ -248,19 +263,10 @@ abstract class NotesServerSyncTask extends Thread {
             repo.updateETag(localAccount.getId(), localAccount.getETag());
             repo.updateModified(localAccount.getId(), localAccount.getModified().getTimeInMillis());
 
-
-            String supportedApiVersions = null;
-            final String supportedApiVersionsHeader = fetchResponse.getHeaders().get(HEADER_KEY_X_NOTES_API_VERSIONS);
-            if (supportedApiVersionsHeader != null) {
-                supportedApiVersions = "[" + Objects.requireNonNull(supportedApiVersionsHeader) + "]";
-            }
-            try {
-                if (repo.updateApiVersion(localAccount.getId(), supportedApiVersions)) {
-                    localAccount.setApiVersion(supportedApiVersions);
-                }
-            } catch (Exception e) {
-                exceptions.add(e);
-            }
+            final String newApiVersion = ApiVersionUtil.sanitize(fetchResponse.getHeaders().get(HEADER_KEY_X_NOTES_API_VERSIONS));
+            localAccount.setApiVersion(newApiVersion);
+            repo.updateApiVersion(localAccount.getId(), newApiVersion);
+            Log.d(TAG, "ApiVersion: " + newApiVersion);
             return true;
         } catch (Throwable t) {
             final Throwable cause = t.getCause();
@@ -274,6 +280,8 @@ abstract class NotesServerSyncTask extends Thread {
                         Log.d(TAG, "Server returned HTTP Status Code " + httpException.getStatusCode() + " - Server is in maintenance mode.");
                         return true;
                     }
+                } else if (cause.getClass() == NextcloudApiNotRespondingException.class || cause instanceof NextcloudApiNotRespondingException) {
+                    apiProvider.invalidateAPICache(ssoAccount);
                 }
             }
             exceptions.add(t);

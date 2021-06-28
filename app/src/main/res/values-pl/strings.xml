@@ -52,6 +52,7 @@
     <string name="error_sync">Synchronizacja nie powiodła się: %1$s</string>
     <string name="error_synchronization">Synchronizacja nie powiodła się</string>
     <string name="error_no_network">Brak połączenia sieciowego</string>
+    <string name="error_maintenance_mode">Serwer jest w trybie konserwacji</string>
     <string name="error_unknown">Wystąpił nieznany błąd.</string>
 
     <string name="about_version_title">Wersja</string>
@@ -83,7 +84,6 @@
     <string name="widget_create_note">Utwórz notatkę</string>
     <string name="widget_not_logged_in">Zaloguj się do Notatek przed użyciem tego widżetu</string>
     <string name="widget_entry_fav_contentDescription">Ikona gwiazdki służy do oznaczenia pozycji jako ulubiona</string>
-    <string name="widget_app_launcher_contentDescription">Uruchamia aplikację</string>
 
     <string name="activity_select_single_note">Wybierz notatkę</string>
 
@@ -137,12 +137,10 @@
     <string name="append_to_note">Dołącz do notatki</string>
     <string name="change_note_title">Zmień tytuł notatki</string>
     <string name="menu_edit_title">Edytuj tytuł</string>
-    <string name="settings_branding">Motyw serwera</string>
     <string name="settings_gridview">Widok siatki</string>
     <string name="simple_security">Bezpieczeństwo</string>
     <string name="appearance_and_behavior">Wygląd i zachowanie</string>
     <string name="simple_synchronization">Synchronizacja</string>
-    <string name="simple_behavior">Zachowanie</string>
     <string name="manage_accounts">Zarządzaj kontami</string>
     <string name="action_formatting_help">Formatowanie</string>
 
@@ -156,13 +154,6 @@
         <item>Mała</item>
         <item>Średnia</item>
         <item>Duża</item>
-    </string-array>
-
-    <string-array name="sync_entries">
-        <item>Wyłączona</item>
-        <item>15 minut</item>
-        <item>1 godzina</item>
-        <item>6 godzin</item>
     </string-array>
 
     <string-array name="darkmode_entries">
@@ -266,4 +257,8 @@
     <string name="remove_account">Usuń %1$s</string>
 
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Aby dodać konto, musisz mieć połączenie z Internetem.</string>
-</resources>
+    <string name="simple_next">Następna</string>
+    <string name="simple_prev">Poprzednia</string>
+    <string name="simple_backup">Kopia zapasowa</string>
+    <string name="simple_repair">Naprawa</string>
+    </resources>

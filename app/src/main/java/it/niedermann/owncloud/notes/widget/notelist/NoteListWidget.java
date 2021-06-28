@@ -11,6 +11,8 @@ import android.util.Log;
 import android.widget.RemoteViews;
 
 import java.util.NoSuchElementException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.persistence.NotesRepository;
@@ -18,6 +20,7 @@ import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
 
 public class NoteListWidget extends AppWidgetProvider {
     private static final String TAG = NoteListWidget.class.getSimpleName();
+    private final ExecutorService executor = Executors.newCachedThreadPool();
 
     static void updateAppWidget(Context context, AppWidgetManager awm, int[] appWidgetIds) {
         final NotesRepository repo = NotesRepository.getInstance(context);
@@ -83,7 +86,7 @@ public class NoteListWidget extends AppWidgetProvider {
         final NotesRepository repo = NotesRepository.getInstance(context);
 
         for (int appWidgetId : appWidgetIds) {
-            new Thread(() -> repo.removeNoteListWidget(appWidgetId)).start();
+            executor.submit(() -> repo.removeNoteListWidget(appWidgetId));
         }
     }
 

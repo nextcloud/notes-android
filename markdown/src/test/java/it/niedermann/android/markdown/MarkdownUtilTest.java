@@ -1,6 +1,5 @@
 package it.niedermann.android.markdown;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.text.Editable;
 import android.text.Spannable;
@@ -8,13 +7,11 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 
-import androidx.test.core.app.ApplicationProvider;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-
 import junit.framework.TestCase;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -24,13 +21,13 @@ import java.util.Map;
 import it.niedermann.android.markdown.model.EListType;
 import it.niedermann.android.markdown.model.SearchSpan;
 
-@RunWith(AndroidJUnit4.class)
+@RunWith(RobolectricTestRunner.class)
 public class MarkdownUtilTest extends TestCase {
 
     @Test
     public void testGetStartOfLine() {
         //language=md
-        StringBuilder test = new StringBuilder(
+        final StringBuilder test = new StringBuilder(
                 "# Test-Note\n" + // line start 0
                         "\n" + // line start 12
                         "- [ ] this is a test note\n" + // line start 13
@@ -92,57 +89,86 @@ public class MarkdownUtilTest extends TestCase {
     }
 
     @Test
+    public void testGetMarkdownLink() {
+        assertEquals("[Foo](https://bar)", MarkdownUtil.getMarkdownLink("Foo", "https://bar"));
+    }
+
+    @Test
     public void testLineStartsWithCheckbox() {
         final Map<String, Boolean> lines = new HashMap<>();
         lines.put("  - [ ] a", true);
         lines.put("  - [x] a", true);
+        lines.put("  - [X] a", true);
         lines.put("  * [ ] a", true);
         lines.put("  * [x] a", true);
+        lines.put("  * [X] a", true);
         lines.put("  + [ ] a", true);
         lines.put("  + [x] a", true);
+        lines.put("  + [X] a", true);
         lines.put("- [ ] a", true);
         lines.put("- [x] a", true);
+        lines.put("- [X] a", true);
         lines.put("* [ ] a", true);
         lines.put("* [x] a", true);
+        lines.put("* [X] a", true);
         lines.put("+ [ ] a", true);
         lines.put("+ [x] a", true);
+        lines.put("+ [X] a", true);
         lines.put("  - [ ] ", true);
         lines.put("  - [x] ", true);
+        lines.put("  - [X] ", true);
         lines.put("  * [ ] ", true);
         lines.put("  * [x] ", true);
+        lines.put("  * [X] ", true);
         lines.put("  + [ ] ", true);
         lines.put("  + [x] ", true);
+        lines.put("  + [X] ", true);
         lines.put("  - [ ]", true);
         lines.put("  - [x]", true);
+        lines.put("  - [X]", true);
         lines.put("  * [ ]", true);
         lines.put("  * [x]", true);
+        lines.put("  * [X]", true);
         lines.put("  + [ ]", true);
         lines.put("  + [x]", true);
+        lines.put("  + [X]", true);
         lines.put("- [ ] ", true);
         lines.put("- [x] ", true);
+        lines.put("- [X] ", true);
         lines.put("* [ ] ", true);
         lines.put("* [x] ", true);
+        lines.put("* [X] ", true);
         lines.put("+ [ ] ", true);
         lines.put("+ [x] ", true);
+        lines.put("+ [X] ", true);
         lines.put("- [ ]", true);
         lines.put("- [x]", true);
+        lines.put("- [X]", true);
         lines.put("* [ ]", true);
         lines.put("* [x]", true);
+        lines.put("* [X]", true);
         lines.put("+ [ ]", true);
         lines.put("+ [x]", true);
+        lines.put("+ [X]", true);
 
         lines.put("-[ ] ", false);
         lines.put("-[x] ", false);
+        lines.put("-[X] ", false);
         lines.put("*[ ] ", false);
         lines.put("*[x] ", false);
+        lines.put("*[X] ", false);
         lines.put("+[ ] ", false);
         lines.put("+[x] ", false);
+        lines.put("+[X] ", false);
         lines.put("-[ ]", false);
         lines.put("-[x]", false);
+        lines.put("-[X]", false);
         lines.put("*[ ]", false);
         lines.put("*[x]", false);
+        lines.put("*[X]", false);
         lines.put("+[ ]", false);
         lines.put("+[x]", false);
+        lines.put("+[X]", false);
 
         lines.put("- [] ", false);
         lines.put("* [] ", false);
@@ -167,7 +193,7 @@ public class MarkdownUtilTest extends TestCase {
 
         // Add italic
         builder = new SpannableStringBuilder("Lorem ipsum dolor sit amet.");
-        assertEquals(13, MarkdownUtil.togglePunctuation(builder, 6, 11, "*"));
+        assertEquals(12, MarkdownUtil.togglePunctuation(builder, 6, 11, "*"));
         assertEquals("Lorem *ipsum* dolor sit amet.", builder.toString());
 
         // Remove italic
@@ -177,7 +203,7 @@ public class MarkdownUtilTest extends TestCase {
 
         // Add bold
         builder = new SpannableStringBuilder("Lorem ipsum dolor sit amet.");
-        assertEquals(15, MarkdownUtil.togglePunctuation(builder, 6, 11, "**"));
+        assertEquals(13, MarkdownUtil.togglePunctuation(builder, 6, 11, "**"));
         assertEquals("Lorem **ipsum** dolor sit amet.", builder.toString());
 
         // Remove bold
@@ -187,7 +213,7 @@ public class MarkdownUtilTest extends TestCase {
 
         // Add strike
         builder = new SpannableStringBuilder("Lorem ipsum dolor sit amet.");
-        assertEquals(15, MarkdownUtil.togglePunctuation(builder, 6, 11, "~~"));
+        assertEquals(13, MarkdownUtil.togglePunctuation(builder, 6, 11, "~~"));
         assertEquals("Lorem ~~ipsum~~ dolor sit amet.", builder.toString());
 
         // Remove strike
@@ -197,7 +223,7 @@ public class MarkdownUtilTest extends TestCase {
 
         // Add italic at first position
         builder = new SpannableStringBuilder("Lorem ipsum dolor sit amet.");
-        assertEquals(7, MarkdownUtil.togglePunctuation(builder, 0, 5, "*"));
+        assertEquals(6, MarkdownUtil.togglePunctuation(builder, 0, 5, "*"));
         assertEquals("*Lorem* ipsum dolor sit amet.", builder.toString());
 
         // Remove italic from first position
@@ -207,7 +233,7 @@ public class MarkdownUtilTest extends TestCase {
 
         // Add italic at last position
         builder = new SpannableStringBuilder("Lorem ipsum dolor sit amet.");
-        assertEquals(29, MarkdownUtil.togglePunctuation(builder, 22, 27, "*"));
+        assertEquals(28, MarkdownUtil.togglePunctuation(builder, 22, 27, "*"));
         assertEquals("Lorem ipsum dolor sit *amet.*", builder.toString());
 
         // Remove italic from last position
@@ -242,47 +268,145 @@ public class MarkdownUtilTest extends TestCase {
         assertEquals(27, MarkdownUtil.togglePunctuation(builder, 0, 31, "*"));
         assertEquals("Lorem ipsum dolor sit amet.", builder.toString());
 
-        // Special use-case: toggle from italic to bold and back
+        // Toggle italic on bold text
+        builder = new SpannableStringBuilder("Lorem **ipsum** dolor sit amet.");
+        assertEquals(14, MarkdownUtil.togglePunctuation(builder, 8, 13, "*"));
+        assertEquals("Lorem ***ipsum*** dolor sit amet.", builder.toString());
 
-        // TODO Toggle italic on bold text
-//        builder = new SpannableStringBuilder("Lorem **ipsum** dolor sit amet.");
-//        assertEquals(17, MarkdownUtil.togglePunctuation(builder, 8, 13, "*"));
-//        assertEquals("Lorem ***ipsum*** dolor sit amet.", builder.toString());
+        // Toggle italic on bold text
+        builder = new SpannableStringBuilder("Lorem **ipsum** dolor sit amet.");
+        assertEquals(16, MarkdownUtil.togglePunctuation(builder, 6, 15, "*"));
+        assertEquals("Lorem ***ipsum*** dolor sit amet.", builder.toString());
 
-        // TODO Toggle bold on italic text
-//        builder = new SpannableStringBuilder("Lorem *ipsum* dolor sit amet.");
-//        assertEquals(17, MarkdownUtil.togglePunctuation(builder, 7, 12, "**"));
-//        assertEquals("Lorem ***ipsum*** dolor sit amet.", builder.toString());
+        // Toggle bold on italic text
+        builder = new SpannableStringBuilder("Lorem *ipsum* dolor sit amet.");
+        assertEquals(14, MarkdownUtil.togglePunctuation(builder, 7, 12, "**"));
+        assertEquals("Lorem ***ipsum*** dolor sit amet.", builder.toString());
 
-        // TODO Toggle bold to italic
-//        builder = new SpannableStringBuilder("Lorem **ipsum** dolor sit amet.");
-//        assertEquals(33, MarkdownUtil.togglePunctuation(builder, 0, 31, "*"));
-//        assertEquals("Lorem ***ipsum*** dolor sit amet.", builder.toString());
+        // Toggle bold to italic
+        builder = new SpannableStringBuilder("Lorem **ipsum** dolor sit amet.");
+        assertEquals(32, MarkdownUtil.togglePunctuation(builder, 0, 31, "*"));
+        assertEquals("*Lorem **ipsum** dolor sit amet.*", builder.toString());
 
-        // TODO Toggle multiple bold parts to italic
-//        builder = new SpannableStringBuilder("Lorem **ipsum** dolor **sit** amet.");
-//        assertEquals(38, MarkdownUtil.togglePunctuation(builder, 0, 34, "*"));
-//        assertEquals("Lorem ***ipsum*** dolor ***sit*** amet.", builder.toString());
+        // Toggle italic and bold to bold
+        builder = new SpannableStringBuilder("Lorem ***ipsum*** dolor sit amet.");
+        assertEquals(13, MarkdownUtil.togglePunctuation(builder, 0, 14, "*"));
+        assertEquals("Lorem **ipsum** dolor sit amet.", builder.toString());
 
-        // TODO Toggle italic and bold to bold
-//        builder = new SpannableStringBuilder("Lorem ***ipsum*** dolor sit amet.");
-//        assertEquals(13, MarkdownUtil.togglePunctuation(builder, 0, 14, "*"));
-//        assertEquals("Lorem **ipsum** dolor sit amet.", builder.toString());
+        // toggle italic around multiple existing bolds
+        builder = new SpannableStringBuilder("Lorem **ipsum** dolor **sit** amet.");
+        assertEquals(35, MarkdownUtil.togglePunctuation(builder, 0, 34, "*"));
+        assertEquals("*Lorem **ipsum** dolor **sit** amet*.", builder.toString());
 
-        // TODO Toggle italic and bold to italic
-//        builder = new SpannableStringBuilder("Lorem ***ipsum*** dolor sit amet.");
-//        assertEquals(12, MarkdownUtil.togglePunctuation(builder, 9, 14, "**"));
-//        assertEquals("Lorem *ipsum* dolor sit amet.", builder.toString());
+        // Toggle italic and bold to italic
+        builder = new SpannableStringBuilder("Lorem ***ipsum*** dolor sit amet.");
+        assertEquals(12, MarkdownUtil.togglePunctuation(builder, 9, 14, "**"));
+        assertEquals("Lorem *ipsum* dolor sit amet.", builder.toString());
 
-        // TODO Toggle multiple italic and bold to bold
-//        builder = new SpannableStringBuilder("Lorem ***ipsum*** dolor ***sit*** amet.");
-//        assertEquals(34, MarkdownUtil.togglePunctuation(builder, 0, 38, "*"));
-//        assertEquals("Lorem **ipsum** dolor **sit** amet.", builder.toString());
+        // Toggle multiple italic and bold to bold
+        builder = new SpannableStringBuilder("Lorem ***ipsum*** dolor ***sit*** amet.");
+        assertEquals(34, MarkdownUtil.togglePunctuation(builder, 0, 38, "*"));
+        assertEquals("Lorem **ipsum** dolor **sit** amet.", builder.toString());
 
-        // TODO Toggle multiple italic and bold to italic
-//        builder = new SpannableStringBuilder("Lorem ***ipsum*** dolor ***sit*** amet.");
-//        assertEquals(30, MarkdownUtil.togglePunctuation(builder, 0, 38, "**"));
-//        assertEquals("Lorem *ipsum* dolor *sit* amet.", builder.toString());
+        // Toggle multiple italic and bold to italic
+        builder = new SpannableStringBuilder("Lorem ***ipsum*** dolor ***sit*** amet.");
+        assertEquals(30, MarkdownUtil.togglePunctuation(builder, 0, 38, "**"));
+        assertEquals("Lorem *ipsum* dolor *sit* amet.", builder.toString());
+
+        // Toggle italic on an empty text
+        builder = new SpannableStringBuilder("");
+        assertEquals(1, MarkdownUtil.togglePunctuation(builder, 0, 0, "*"));
+        assertEquals("**", builder.toString());
+
+        // Toggle italic on a blank selection
+        builder = new SpannableStringBuilder(" ");
+        assertEquals(2, MarkdownUtil.togglePunctuation(builder, 0, 1, "*"));
+        assertEquals("* *", builder.toString());
+
+        // Toggle italic on a partial blank selection
+        builder = new SpannableStringBuilder("   ");
+        assertEquals(3, MarkdownUtil.togglePunctuation(builder, 1, 2, "*"));
+        assertEquals(" * * ", builder.toString());
+
+        // Toggle bold on an empty text
+        builder = new SpannableStringBuilder("");
+        assertEquals(2, MarkdownUtil.togglePunctuation(builder, 0, 0, "**"));
+        assertEquals("****", builder.toString());
+
+        // Toggle bold on a blank selection
+        builder = new SpannableStringBuilder(" ");
+        assertEquals(3, MarkdownUtil.togglePunctuation(builder, 0, 1, "**"));
+        assertEquals("** **", builder.toString());
+
+        // Toggle bold on a partial blank selection
+        builder = new SpannableStringBuilder("   ");
+        assertEquals(4, MarkdownUtil.togglePunctuation(builder, 1, 2, "**"));
+        assertEquals(" ** ** ", builder.toString());
+
+        // Toggle italic right after bold
+        builder = new SpannableStringBuilder("**Bold**Italic");
+        assertEquals(15, MarkdownUtil.togglePunctuation(builder, 8, 14, "*"));
+        assertEquals("**Bold***Italic*", builder.toString());
+
+        // Toggle italic for last of many bolds in one line
+        builder = new SpannableStringBuilder("Lorem **Ipsum** **Dolor**");
+        assertEquals(24, MarkdownUtil.togglePunctuation(builder, 18, 23, "*"));
+        assertEquals("Lorem **Ipsum** ***Dolor***", builder.toString());
+
+        builder = new SpannableStringBuilder("Lorem **Ipsum** **Dolor**");
+        assertEquals(14, MarkdownUtil.togglePunctuation(builder, 8, 13, "*"));
+        assertEquals("Lorem ***Ipsum*** **Dolor**", builder.toString());
+
+        builder = new SpannableStringBuilder("Lorem **Ipsum** **Dolor**");
+        assertEquals(16, MarkdownUtil.togglePunctuation(builder, 6, 15, "*"));
+        assertEquals("Lorem ***Ipsum*** **Dolor**", builder.toString());
+
+        // Toggle italic for last bold + italic in a row of multiple marked elements
+        builder = new SpannableStringBuilder("Lorem **Ipsum** ***Dolor***");
+        assertEquals(23, MarkdownUtil.togglePunctuation(builder, 19, 24, "*"));
+        assertEquals("Lorem **Ipsum** **Dolor**", builder.toString());
+
+        builder = new SpannableStringBuilder("Lorem ***Ipsum*** **Dolor**");
+        assertEquals(13, MarkdownUtil.togglePunctuation(builder, 9, 14, "*"));
+        assertEquals("Lorem **Ipsum** **Dolor**", builder.toString());
+
+        builder = new SpannableStringBuilder("Lorem ***Ipsum*** **Dolor**");
+        assertEquals(15, MarkdownUtil.togglePunctuation(builder, 6, 17, "*"));
+        assertEquals("Lorem **Ipsum** **Dolor**", builder.toString());
+
+        builder = new SpannableStringBuilder("Lorem ***Ipsum*** **Dolor**");
+        assertEquals(15, MarkdownUtil.togglePunctuation(builder, 7, 16, "*"));
+        assertEquals("Lorem **Ipsum** **Dolor**", builder.toString());
+
+        builder = new SpannableStringBuilder("Lorem ***Ipsum*** **Dolor**");
+        assertEquals(15, MarkdownUtil.togglePunctuation(builder, 7, 17, "*"));
+        assertEquals("Lorem **Ipsum** **Dolor**", builder.toString());
+
+        builder = new SpannableStringBuilder("Lorem ***Ipsum*** **Dolor**");
+        assertEquals(15, MarkdownUtil.togglePunctuation(builder, 8, 16, "*"));
+        assertEquals("Lorem **Ipsum** **Dolor**", builder.toString());
+
+        // Multiline
+
+        builder = new SpannableStringBuilder("Lorem ***Ipsum***\n **Dolor**");
+        assertEquals(29, MarkdownUtil.togglePunctuation(builder, 0, 28, "*"));
+        assertEquals("*Lorem ***Ipsum***\n **Dolor***", builder.toString());
+
+        builder = new SpannableStringBuilder("**Bold**\nItalic");
+        assertEquals(16, MarkdownUtil.togglePunctuation(builder, 9, 15, "*"));
+        assertEquals("**Bold**\n*Italic*", builder.toString());
+
+        builder = new SpannableStringBuilder("Bold\n*Italic*");
+        assertEquals(6, MarkdownUtil.togglePunctuation(builder, 0, 4, "**"));
+        assertEquals("**Bold**\n*Italic*", builder.toString());
+
+        builder = new SpannableStringBuilder("*Italic*\nBold");
+        assertEquals(15, MarkdownUtil.togglePunctuation(builder, 9, 13, "**"));
+        assertEquals("*Italic*\n**Bold**", builder.toString());
+
+        builder = new SpannableStringBuilder("Italic\n**Bold**");
+        assertEquals(7, MarkdownUtil.togglePunctuation(builder, 0, 6, "*"));
+        assertEquals("*Italic*\n**Bold**", builder.toString());
     }
 
     @Test
@@ -418,80 +542,6 @@ public class MarkdownUtilTest extends TestCase {
         builder = new SpannableStringBuilder("  Lorem  ");
         assertEquals(33, MarkdownUtil.insertLink(builder, 2, 7, "https://www.example.com"));
         assertEquals("  [Lorem](https://www.example.com)  ", builder.toString());
-    }
-
-    @Test
-    public void testRemoveContainingPunctuation() {
-        try {
-            final Method m = MarkdownUtil.class.getDeclaredMethod("removeContainingPunctuation", Editable.class, int.class, int.class, String.class);
-            m.setAccessible(true);
-            Editable builder;
-
-            builder = new SpannableStringBuilder("Lorem *ipsum* dolor");
-            m.invoke(null, builder, 0, 19, "*");
-            assertEquals("Lorem ipsum dolor", builder.toString());
-
-            builder = new SpannableStringBuilder("*Lorem ipsum dolor*");
-            m.invoke(null, builder, 0, 19, "*");
-            assertEquals("Lorem ipsum dolor", builder.toString());
-
-            builder = new SpannableStringBuilder("**Lorem ipsum**");
-            m.invoke(null, builder, 0, 15, "**");
-            assertEquals("Lorem ipsum", builder.toString());
-
-            builder = new SpannableStringBuilder("*Lorem* *ipsum*");
-            m.invoke(null, builder, 0, 15, "*");
-            assertEquals("Lorem ipsum", builder.toString());
-
-            builder = new SpannableStringBuilder("Lorem* ipsum");
-            m.invoke(null, builder, 0, 12, "*");
-            assertEquals("Lorem ipsum", builder.toString());
-
-            builder = new SpannableStringBuilder("*Lorem* ipsum*");
-            m.invoke(null, builder, 0, 14, "*");
-            assertEquals("Lorem ipsum", builder.toString());
-
-            builder = new SpannableStringBuilder("**Lorem ipsum**");
-            m.invoke(null, builder, 0, 15, "*");
-            assertEquals("Lorem ipsum", builder.toString());
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    @SuppressWarnings("ConstantConditions")
-    public void testSelectionIsSurroundedByPunctuation() {
-        try {
-            final Method m = MarkdownUtil.class.getDeclaredMethod("selectionIsSurroundedByPunctuation", CharSequence.class, int.class, int.class, String.class);
-            m.setAccessible(true);
-            assertTrue((Boolean) m.invoke(null, "*Lorem ipsum*", 1, 12, "*"));
-            assertTrue((Boolean) m.invoke(null, "**Lorem ipsum**", 2, 13, "*"));
-            assertTrue((Boolean) m.invoke(null, "**Lorem ipsum**", 2, 13, "**"));
-
-            assertFalse((Boolean) m.invoke(null, "*Lorem ipsum*", 0, 12, "*"));
-            assertFalse((Boolean) m.invoke(null, "*Lorem ipsum*", 1, 13, "*"));
-            assertFalse((Boolean) m.invoke(null, "*Lorem ipsum*", 0, 13, "*"));
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    @SuppressWarnings("ConstantConditions")
-    public void testGetContainedPunctuationCount() {
-        try {
-            final Method m = MarkdownUtil.class.getDeclaredMethod("getContainedPunctuationCount", CharSequence.class, int.class, int.class, String.class);
-            m.setAccessible(true);
-            assertEquals(0, (int) m.invoke(null, "*Lorem ipsum*", 1, 12, "*"));
-            assertEquals(1, (int) m.invoke(null, "*Lorem ipsum*", 1, 13, "*"));
-            assertEquals(2, (int) m.invoke(null, "*Lorem ipsum*", 0, 13, "*"));
-            assertEquals(0, (int) m.invoke(null, "*Lorem ipsum*", 0, 13, "**"));
-            assertEquals(0, (int) m.invoke(null, "*Lorem ipsum**", 0, 13, "**"));
-            assertEquals(1, (int) m.invoke(null, "*Lorem ipsum**", 0, 14, "**"));
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
     }
 
     @Test
@@ -665,6 +715,14 @@ public class MarkdownUtilTest extends TestCase {
                     listType.checkboxUnchecked + " \n" +
                     listType.checkboxChecked + " Item";
             assertEquals(expected_9, MarkdownUtil.setCheckboxStatus(origin_9, 1, true));
+
+            final String origin_10 = "" +
+                    listType.checkboxChecked + " Item\n" +
+                    listType.checkboxCheckedUpperCase + " Item";
+            final String expected_10 = "" +
+                    listType.checkboxChecked + " Item\n" +
+                    listType.checkboxUnchecked + " Item";
+            assertEquals(expected_10, MarkdownUtil.setCheckboxStatus(origin_10, 1, false));
         }
     }
 
@@ -673,8 +731,6 @@ public class MarkdownUtilTest extends TestCase {
         try {
             final Method removeSpans = MarkdownUtil.class.getDeclaredMethod("removeSpans", Spannable.class, Class.class);
             removeSpans.setAccessible(true);
-
-            final Context context = ApplicationProvider.getApplicationContext();
 
             final Editable editable_1 = new SpannableStringBuilder("Lorem Ipsum dolor sit amet");
             editable_1.setSpan(new SearchSpan(Color.RED, Color.GRAY, false, false), 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -719,11 +775,11 @@ public class MarkdownUtilTest extends TestCase {
         assertEquals("FooTestBar", MarkdownUtil.removeMarkdown("Foo*Test*Bar"));
         assertEquals("FooTestBar", MarkdownUtil.removeMarkdown("Foo**Test**Bar"));
         assertEquals("FooTestBar", MarkdownUtil.removeMarkdown("Foo***Test***Bar"));
-        assertEquals("FooTest*Bar", MarkdownUtil.removeMarkdown("Foo*Test**Bar"));
+        assertEquals("Foo*Test**Bar", MarkdownUtil.removeMarkdown("Foo*Test**Bar"));
         assertEquals("Foo*TestBar", MarkdownUtil.removeMarkdown("Foo***Test**Bar"));
-        assertEquals("FooTestBar", MarkdownUtil.removeMarkdown("Foo_Test_Bar"));
-        assertEquals("FooTestBar", MarkdownUtil.removeMarkdown("Foo__Test__Bar"));
-        assertEquals("FooTestBar", MarkdownUtil.removeMarkdown("Foo___Test___Bar"));
+        assertEquals("Foo_Test_Bar", MarkdownUtil.removeMarkdown("Foo_Test_Bar"));
+        assertEquals("Foo__Test__Bar", MarkdownUtil.removeMarkdown("Foo__Test__Bar"));
+        assertEquals("Foo___Test___Bar", MarkdownUtil.removeMarkdown("Foo___Test___Bar"));
         assertEquals("Foo\nHeader\nBar", MarkdownUtil.removeMarkdown("Foo\n# Header\nBar"));
         assertEquals("Foo\nHeader\nBar", MarkdownUtil.removeMarkdown("Foo\n### Header\nBar"));
         assertEquals("Foo\nHeader\nBar", MarkdownUtil.removeMarkdown("Foo\n# Header #\nBar"));
@@ -735,13 +791,15 @@ public class MarkdownUtilTest extends TestCase {
         assertEquals("Foo\nAufzählung\nBar", MarkdownUtil.removeMarkdown("Foo\n* Aufzählung\nBar"));
         assertEquals("Foo\nAufzählung\nBar", MarkdownUtil.removeMarkdown("Foo\n+ Aufzählung\nBar"));
         assertEquals("Foo\nAufzählung\nBar", MarkdownUtil.removeMarkdown("Foo\n- Aufzählung\nBar"));
-        assertEquals("Foo\nAufzählung\nBar", MarkdownUtil.removeMarkdown("Foo\n    - Aufzählung\nBar"));
+        assertEquals("Foo\n- Aufzählung\nBar", MarkdownUtil.removeMarkdown("Foo\n    - Aufzählung\nBar"));
         assertEquals("Foo\nAufzählung *\nBar", MarkdownUtil.removeMarkdown("Foo\n* Aufzählung *\nBar"));
         assertEquals("Title", MarkdownUtil.removeMarkdown("# Title"));
         assertEquals("Aufzählung", MarkdownUtil.removeMarkdown("* Aufzählung"));
 //        assertEquals("Foo Link Bar", MarkdownUtil.removeMarkdown("Foo [Link](https://example.com) Bar"));
         assertFalse(MarkdownUtil.removeMarkdown("- [ ] Test").contains("- [ ]"));
         assertTrue(MarkdownUtil.removeMarkdown("- [ ] Test").endsWith("Test"));
+        assertEquals("", MarkdownUtil.removeMarkdown(null));
+        assertEquals("", MarkdownUtil.removeMarkdown(""));
 
         // https://github.com/stefan-niedermann/nextcloud-notes/issues/1104
         assertEquals("2021-03-24 - Example text", MarkdownUtil.removeMarkdown("2021-03-24 - Example text"));

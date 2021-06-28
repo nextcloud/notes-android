@@ -21,6 +21,8 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerDialogFragment;
@@ -32,6 +34,7 @@ import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
 public class MultiSelectedActionModeCallback implements Callback {
 
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
     @ColorInt
     private final int colorAccent;
     @NonNull
@@ -125,11 +128,9 @@ public class MultiSelectedActionModeCallback implements Callback {
             final LiveData<Account> currentAccount$ = mainViewModel.getCurrentAccount();
             currentAccount$.observe(lifecycleOwner, account -> {
                 currentAccount$.removeObservers(lifecycleOwner);
-                new Thread(() -> {
-                    AccountPickerDialogFragment
-                            .newInstance(new ArrayList<>(mainViewModel.getAccounts()), account.getId())
-                            .show(fragmentManager, AccountPickerDialogFragment.class.getSimpleName());
-                }).start();
+                executor.submit(() -> AccountPickerDialogFragment
+                        .newInstance(new ArrayList<>(mainViewModel.getAccounts()), account.getId())
+                        .show(fragmentManager, AccountPickerDialogFragment.class.getSimpleName()));
             });
             return true;
         } else if (itemId == R.id.menu_share) {
@@ -139,7 +140,7 @@ public class MultiSelectedActionModeCallback implements Callback {
             }
             tracker.clearSelection();
 
-            new Thread(() -> {
+            executor.submit(() -> {
                 if (selection.size() == 1) {
                     final Note note = mainViewModel.getFullNote(selection.get(0));
                     ShareUtil.openShareDialog(context, note.getTitle(), note.getContent());
@@ -148,7 +149,7 @@ public class MultiSelectedActionModeCallback implements Callback {
                             context.getResources().getQuantityString(R.plurals.share_multiple, selection.size(), selection.size()),
                             mainViewModel.collectNoteContents(selection));
                 }
-            }).start();
+            });
             return true;
         } else if (itemId == R.id.menu_category) {// TODO detect whether all selected notes do have the same category - in this case preselect it
             final LiveData<Account> accountLiveData = mainViewModel.getCurrentAccount();

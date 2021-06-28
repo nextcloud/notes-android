@@ -77,7 +77,6 @@
     <string name="widget_create_note">建立筆記</string>
     <string name="widget_not_logged_in">在使用此小工具之前，請先登入到 Notes</string>
     <string name="widget_entry_fav_contentDescription">星星圖示用來標示某則筆記在「我的最愛」中。</string>
-    <string name="widget_app_launcher_contentDescription">啟動 App</string>
 
     <string name="activity_select_single_note">選擇筆記</string>
 
@@ -131,7 +130,6 @@
     <string name="menu_edit_title">編輯標題</string>
     <string name="simple_security">安全性</string>
     <string name="simple_synchronization">同步</string>
-    <string name="simple_behavior">行為</string>
     <string name="manage_accounts">帳戶管理</string>
     <string name="action_formatting_help">正在格式化</string>
 
@@ -145,13 +143,6 @@
         <item>小</item>
         <item>中</item>
         <item>大</item>
-    </string-array>
-
-    <string-array name="sync_entries">
-        <item>關閉</item>
-        <item>15 分鐘</item>
-        <item>1 小時</item>
-        <item>6 小時</item>
     </string-array>
 
     <string-array name="darkmode_entries">

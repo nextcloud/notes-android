@@ -29,6 +29,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.FragmentNoteEditBinding;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
+import it.niedermann.owncloud.notes.shared.util.DisplayUtils;
 
 import static androidx.core.view.ViewCompat.isAttachedToWindow;
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.getFontSizeFromPreferences;
@@ -59,6 +60,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
         }
     };
     private TextWatcher textWatcher;
+    private boolean keyboardShown = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -138,22 +140,17 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     public void onResume() {
         super.onResume();
         binding.editContent.addTextChangedListener(textWatcher);
+
+        if (keyboardShown) {
+            openSoftKeyboard();
+        }
     }
 
     @Override
     protected void onNoteLoaded(Note note) {
         super.onNoteLoaded(note);
         if (TextUtils.isEmpty(note.getContent())) {
-            binding.editContent.post(() -> {
-                binding.editContent.requestFocus();
-
-                final InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                if (imm != null) {
-                    imm.showSoftInput(binding.editContent, InputMethodManager.SHOW_IMPLICIT);
-                } else {
-                    Log.e(TAG, InputMethodManager.class.getSimpleName() + " is null.");
-                }
-            });
+            openSoftKeyboard();
         }
 
         binding.editContent.setMarkdownString(note.getContent());
@@ -166,11 +163,32 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
         }
     }
 
+    private void openSoftKeyboard() {
+        binding.editContent.postDelayed(() -> {
+            binding.editContent.requestFocus();
+
+            final InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.showSoftInput(binding.editContent, InputMethodManager.SHOW_IMPLICIT);
+            } else {
+                Log.e(TAG, InputMethodManager.class.getSimpleName() + " is null.");
+            }
+            //Without a small delay the keyboard does not show reliably
+        }, 100);
+    }
+
     @Override
     public void onPause() {
         super.onPause();
         binding.editContent.removeTextChangedListener(textWatcher);
         cancelTimers();
+
+        final ViewGroup parentView = requireActivity().findViewById(android.R.id.content);
+        if (parentView != null && parentView.getChildCount() > 0) {
+            keyboardShown = DisplayUtils.isSoftKeyboardVisible(parentView.getChildAt(0));
+        } else {
+            keyboardShown = false;
+        }
     }
 
     private void cancelTimers() {
@@ -184,7 +202,8 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
      */
     @Override
     protected String getContent() {
-        return binding.editContent.getText().toString();
+        final Editable editable = binding.editContent.getText();
+        return editable == null ? "" : editable.toString();
     }
 
     @Override

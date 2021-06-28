@@ -27,7 +27,7 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 
 ## :eyes: Screenshots
 
-| List View | Edit Mode | Preview |
+| _ | _ | _ |
 | :--: | :--: | :--: |
 | ![Screenshot of list view](/fastlane/metadata/android/en-US/images/phoneScreenshots/2.png) | ![Screenshot of edit mode](/fastlane/metadata/android/en-US/images/phoneScreenshots/3.png) | ![Screenshot of preview](/fastlane/metadata/android/en-US/images/phoneScreenshots/4.png) |
 
@@ -47,7 +47,6 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 
 ## :checkered_flag: Planned features
   * Local accounts ([#615](https://github.com/stefan-niedermann/nextcloud-notes/issues/615))
-  * Trashbin ([#238](https://github.com/stefan-niedermann/nextcloud-notes/issues/238))
 
 ## :family: Join the team
   * Test the app with different devices

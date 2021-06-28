@@ -6,22 +6,29 @@ import android.os.Build;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.QuoteSpan;
 import android.util.Log;
+import android.util.Pair;
 import android.widget.RemoteViews.RemoteView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.core.text.HtmlCompat;
 
-import com.yydcdut.markdown.MarkdownProcessor;
-import com.yydcdut.markdown.syntax.text.TextFactory;
-import com.yydcdut.rxmarkdown.RxMarkdown;
+import org.commonmark.parser.Parser;
+import org.commonmark.renderer.html.HtmlRenderer;
 
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,31 +37,23 @@ import io.noties.markwon.Markwon;
 import it.niedermann.android.markdown.model.EListType;
 import it.niedermann.android.markdown.model.SearchSpan;
 
+@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 public class MarkdownUtil {
 
     private static final String TAG = MarkdownUtil.class.getSimpleName();
 
-    private static final String MD_IMAGE_WITH_EMPTY_DESCRIPTION = "![](";
-    private static final String MD_IMAGE_WITH_SPACE_DESCRIPTION = "![ ](";
-    private static final String[] MD_IMAGE_WITH_EMPTY_DESCRIPTION_ARRAY = new String[]{MD_IMAGE_WITH_EMPTY_DESCRIPTION};
-    private static final String[] MD_IMAGE_WITH_SPACE_DESCRIPTION_ARRAY = new String[]{MD_IMAGE_WITH_SPACE_DESCRIPTION};
-
-    private static final Pattern PATTERN_LISTS = Pattern.compile("^\\s*[*+-]\\s+", Pattern.MULTILINE);
-    private static final Pattern PATTERN_HEADINGS = Pattern.compile("^#+\\s+(.*?)\\s*#*$", Pattern.MULTILINE);
-    private static final Pattern PATTERN_HEADING_LINE = Pattern.compile("^(?:=*|-*)$", Pattern.MULTILINE);
-    private static final Pattern PATTERN_EMPHASIS = Pattern.compile("(\\*+|_+)(.*?)\\1", Pattern.MULTILINE);
-    private static final Pattern PATTERN_SPACE_1 = Pattern.compile("^\\s+", Pattern.MULTILINE);
-    private static final Pattern PATTERN_SPACE_2 = Pattern.compile("\\s+$", Pattern.MULTILINE);
+    private static final Parser PARSER = Parser.builder().build();
+    private static final HtmlRenderer RENDERER = HtmlRenderer.builder().softbreak("<br>").build();
 
     private static final Pattern PATTERN_CODE_FENCE = Pattern.compile("^(`{3,})");
     private static final Pattern PATTERN_ORDERED_LIST_ITEM = Pattern.compile("^(\\d+).\\s.+$");
     private static final Pattern PATTERN_ORDERED_LIST_ITEM_EMPTY = Pattern.compile("^(\\d+).\\s$");
     private static final Pattern PATTERN_MARKDOWN_LINK = Pattern.compile("\\[(.+)?]\\(([^ ]+?)?( \"(.+)\")?\\)");
 
-    @Nullable
-    private static final String checkboxCheckedEmoji = getCheckboxEmoji(true);
-    @Nullable
-    private static final String checkboxUncheckedEmoji = getCheckboxEmoji(false);
+    private static final String PATTERN_QUOTE_BOLD_PUNCTUATION = Pattern.quote("**");
+
+    private static final Optional<String> CHECKBOX_CHECKED_EMOJI = getCheckboxEmoji(true);
+    private static final Optional<String> CHECKBOX_UNCHECKED_EMOJI = getCheckboxEmoji(false);
 
     private MarkdownUtil() {
         // Util class
@@ -64,52 +63,75 @@ public class MarkdownUtil {
      * {@link RemoteView}s have a limited subset of supported classes to maintain compatibility with many different launchers.
      * <p>
      * Since {@link Markwon} makes heavy use of custom spans, this won't look nice e. g. at app widgets, because they simply won't be rendered.
-     * Therefore we currently fall back on {@link RxMarkdown} as the results will look better in this special case.
-     * We might change this in the future by utilizing {@link Markwon} and creating a {@link Spanned} from an {@link HtmlCompat} interemediate.
+     * Therefore we currently use {@link HtmlCompat} to filter supported spans from the output of {@link HtmlRenderer} as an intermediate step.
      */
     public static CharSequence renderForRemoteView(@NonNull Context context, @NonNull String content) {
-        final MarkdownProcessor markdownProcessor = new MarkdownProcessor(context);
-        markdownProcessor.factory(TextFactory.create());
-        return parseCompat(markdownProcessor, replaceCheckboxesWithEmojis(content));
+        // Create HTML string from Markup
+        final String html = RENDERER.render(PARSER.parse(replaceCheckboxesWithEmojis(content)));
+
+        // Create Spanned from HTML, with special handling for ordered list items
+        final Spanned spanned = HtmlCompat.fromHtml(ListTagHandler.prepareTagHandling(html), 0, null, new ListTagHandler());
+
+        // Enhance colors and margins of the Spanned
+        return customizeQuoteSpanAppearance(context, spanned, 5, 30);
+    }
+
+    @SuppressWarnings("SameParameterValue")
+    private static Spanned customizeQuoteSpanAppearance(@NonNull Context context, @NonNull Spanned input, int stripeWidth, int gapWidth) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
+            return input;
+        }
+        final SpannableStringBuilder ssb = new SpannableStringBuilder(input);
+        final QuoteSpan[] originalQuoteSpans = ssb.getSpans(0, ssb.length(), QuoteSpan.class);
+        @ColorInt final int colorBlockQuote = ContextCompat.getColor(context, R.color.block_quote);
+        for (QuoteSpan originalQuoteSpan : originalQuoteSpans) {
+            final int start = ssb.getSpanStart(originalQuoteSpan);
+            final int end = ssb.getSpanEnd(originalQuoteSpan);
+            ssb.removeSpan(originalQuoteSpan);
+            ssb.setSpan(new QuoteSpan(colorBlockQuote, stripeWidth, gapWidth), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+        return ssb;
     }
 
     @NonNull
     public static String replaceCheckboxesWithEmojis(@NonNull String content) {
         return runForEachCheckbox(content, (line) -> {
             for (EListType listType : EListType.values()) {
-                if (checkboxCheckedEmoji != null) {
-                    line = line.replace(listType.checkboxChecked, checkboxCheckedEmoji);
+                if (CHECKBOX_CHECKED_EMOJI.isPresent()) {
+                    line = line.replace(listType.checkboxChecked, CHECKBOX_CHECKED_EMOJI.get());
+                    line = line.replace(listType.checkboxCheckedUpperCase, CHECKBOX_CHECKED_EMOJI.get());
                 }
-                if (checkboxUncheckedEmoji != null) {
-                    line = line.replace(listType.checkboxUnchecked, checkboxUncheckedEmoji);
+                if (CHECKBOX_UNCHECKED_EMOJI.isPresent()) {
+                    line = line.replace(listType.checkboxUnchecked, CHECKBOX_UNCHECKED_EMOJI.get());
                 }
             }
             return line;
         });
     }
 
-    @Nullable
-    private static String getCheckboxEmoji(boolean checked) {
-        final String[] checkedEmojis;
-        final String[] uncheckedEmojis;
-        // Seriously what the fuck, Samsung?
-        // https://emojipedia.org/ballot-box-with-x/
-        if (Build.MANUFACTURER != null && Build.MANUFACTURER.toLowerCase().contains("samsung")) {
-            checkedEmojis = new String[]{"✅", "☑️", "✔️"};
-            uncheckedEmojis = new String[]{"❌", "\uD83D\uDD32️", "☐️"};
-        } else {
-            checkedEmojis = new String[]{"☒", "✅", "☑️", "✔️"};
-            uncheckedEmojis = new String[]{"☐", "❌", "\uD83D\uDD32️", "☐️"};
-        }
-        final Paint paint = new Paint();
+    @NonNull
+    private static Optional<String> getCheckboxEmoji(boolean checked) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            for (String emoji : checked ? checkedEmojis : uncheckedEmojis) {
+            final String[] emojis;
+            // Seriously what the fuck, Samsung?
+            // https://emojipedia.org/ballot-box-with-x/
+            if (Build.MANUFACTURER != null && Build.MANUFACTURER.toLowerCase(Locale.getDefault()).contains("samsung")) {
+                emojis = checked
+                        ? new String[]{"✅", "☑️", "✔️"}
+                        : new String[]{"❌", "\uD83D\uDD32️", "☐️"};
+            } else {
+                emojis = checked
+                        ? new String[]{"☒", "✅", "☑️", "✔️"}
+                        : new String[]{"☐", "❌", "\uD83D\uDD32️", "☐️"};
+            }
+            final Paint paint = new Paint();
+            for (String emoji : emojis) {
                 if (paint.hasGlyph(emoji)) {
-                    return emoji;
+                    return Optional.of(emoji);
                 }
             }
         }
-        return null;
+        return Optional.empty();
     }
 
     /**
@@ -144,28 +166,6 @@ public class MarkdownUtil {
             }
         }
         return TextUtils.join("\n", lines);
-    }
-
-    /**
-     * This is a compatibility-method that provides workarounds for several bugs in RxMarkdown
-     * <p>
-     * https://github.com/stefan-niedermann/nextcloud-notes/issues/772
-     *
-     * @param markdownProcessor RxMarkdown MarkdownProcessor instance
-     * @param text              CharSequence that should be parsed
-     * @return the processed text but with several workarounds for Bugs in RxMarkdown
-     */
-    @NonNull
-    private static CharSequence parseCompat(@NonNull final MarkdownProcessor markdownProcessor, CharSequence text) {
-        if (TextUtils.isEmpty(text)) {
-            return "";
-        }
-
-        while (TextUtils.indexOf(text, MD_IMAGE_WITH_EMPTY_DESCRIPTION) >= 0) {
-            text = TextUtils.replace(text, MD_IMAGE_WITH_EMPTY_DESCRIPTION_ARRAY, MD_IMAGE_WITH_SPACE_DESCRIPTION_ARRAY);
-        }
-
-        return markdownProcessor.parse(text);
     }
 
     public static int getStartOfLine(@NonNull CharSequence s, int cursorPosition) {
@@ -249,7 +249,7 @@ public class MarkdownUtil {
 
     public static boolean lineStartsWithCheckbox(@NonNull String line, @NonNull EListType listType) {
         final String trimmedLine = line.trim();
-        return (trimmedLine.startsWith(listType.checkboxUnchecked) || trimmedLine.startsWith(listType.checkboxChecked));
+        return (trimmedLine.startsWith(listType.checkboxUnchecked) || trimmedLine.startsWith(listType.checkboxChecked) || trimmedLine.startsWith(listType.checkboxCheckedUpperCase));
     }
 
     /**
@@ -278,34 +278,101 @@ public class MarkdownUtil {
      * @return the new cursor position
      */
     public static int togglePunctuation(@NonNull Editable editable, int selectionStart, int selectionEnd, @NonNull String punctuation) {
-        switch (punctuation) {
-            case "**":
-            case "__":
-            case "*":
-            case "_":
-            case "~~": {
-                final boolean selectionIsSurroundedByPunctuation = selectionIsSurroundedByPunctuation(editable, selectionStart, selectionEnd, punctuation);
-                if (selectionIsSurroundedByPunctuation) {
-                    editable.delete(selectionEnd, selectionEnd + punctuation.length());
-                    editable.delete(selectionStart - punctuation.length(), selectionStart);
-                    return selectionEnd - punctuation.length();
-                } else {
-                    final int containedPunctuationCount = getContainedPunctuationCount(editable, selectionStart, selectionEnd, punctuation);
-                    if (containedPunctuationCount == 0) {
-                        editable.insert(selectionEnd, punctuation);
-                        editable.insert(selectionStart, punctuation);
-                        return selectionEnd + punctuation.length() * 2;
-                    } else if (containedPunctuationCount % 2 > 0) {
-                        return selectionEnd;
-                    } else {
-                        removeContainingPunctuation(editable, selectionStart, selectionEnd, punctuation);
-                        return selectionEnd - containedPunctuationCount * punctuation.length();
-                    }
-                }
-            }
-            default:
-                throw new UnsupportedOperationException("This kind of punctuation is not yet supported: " + punctuation);
+        final String initialString = editable.toString();
+        if (selectionStart < 0 || selectionStart > initialString.length() || selectionEnd < 0 || selectionEnd > initialString.length()) {
+            return 0;
         }
+
+        // handle special case: italic (that damn thing will match like ANYTHING (regarding bold / bold+italic)....)
+        final boolean isItalic = punctuation.length() == 1 && punctuation.charAt(0) == '*';
+        if (isItalic) {
+            final Optional<Integer> result = handleItalicEdgeCase(editable, initialString, selectionStart, selectionEnd);
+            // The result is only present if this actually was an edge case
+            if (result.isPresent()) {
+                return result.get();
+            }
+        }
+
+        // handle the simple cases
+        final String wildcardRex = "([^" + punctuation.charAt(0) + "])+";
+        final String punctuationRex = Pattern.quote(punctuation);
+        final String pattern = isItalic
+                // in this case let's make optional asterisks around it, so it wont match anything between two (bold+italic)s
+                ? "\\*?\\*?" + punctuationRex + wildcardRex + punctuationRex + "\\*?\\*?"
+                : punctuationRex + wildcardRex + punctuationRex;
+        final Pattern searchPattern = Pattern.compile(pattern);
+        int relevantStart = selectionStart - 2;
+        relevantStart = Math.max(relevantStart, 0);
+        int relevantEnd = selectionEnd + 2;
+        relevantEnd = Math.min(relevantEnd, initialString.length());
+        final Matcher matcher = searchPattern.matcher(initialString).region(relevantStart, relevantEnd);
+
+        // if the matcher matches, it's a remove
+        if (matcher.find()) {
+            // this resets the matcher, while keeping the required region
+            matcher.region(relevantStart, relevantEnd);
+            final int punctuationLength = punctuation.length();
+            final List<Pair<Integer, Integer>> startEnd = new LinkedList<>();
+            int removedCount = 0;
+            while (matcher.find()) {
+                startEnd.add(new Pair<>(matcher.start(), matcher.end()));
+                removedCount += punctuationLength;
+            }
+            // start from the end
+            Collections.reverse(startEnd);
+            for (Pair<Integer, Integer> item : startEnd) {
+                deletePunctuation(editable, punctuationLength, item.first, item.second);
+            }
+            int offsetAtEnd = 0;
+            // depending on if the user has selected the markdown chars, we might need to add an offset to the resulting cursor position
+            if (initialString.substring(Math.max(selectionEnd - punctuationLength + 1, 0), Math.min(selectionEnd + 1, initialString.length())).equals(punctuation) ||
+                    initialString.substring(selectionEnd, Math.min(selectionEnd + punctuationLength, initialString.length())).equals(punctuation)) {
+                offsetAtEnd = punctuationLength;
+            }
+            return selectionEnd - removedCount * 2 + offsetAtEnd;
+            //                                 ^
+            //         start+end, need to double
+        }
+
+        // do nothing when punctuation is contained only once
+        if (Pattern.compile(punctuationRex).matcher(initialString).region(selectionStart, selectionEnd).find()) {
+            return selectionEnd;
+        }
+
+        // nothing returned so far, so it has to be an insertion
+        return insertPunctuation(editable, selectionStart, selectionEnd, punctuation);
+    }
+
+    private static void deletePunctuation(Editable editable, int punctuationLength, int start, int end) {
+        editable.delete(end - punctuationLength, end);
+        editable.delete(start, start + punctuationLength);
+    }
+
+    /**
+     * @return an {@link Optional<Integer>} of the new cursor position.
+     * The return value is only {@link Optional#isPresent()}, if this is an italic edge case.
+     */
+    @NonNull
+    private static Optional<Integer> handleItalicEdgeCase(Editable editable, String editableAsString, int selectionStart, int selectionEnd) {
+        // look if selection is bold, this is the only edge case afaik
+        final Pattern searchPattern = Pattern.compile("(^|[^*])" + PATTERN_QUOTE_BOLD_PUNCTUATION + "([^*])*" + PATTERN_QUOTE_BOLD_PUNCTUATION + "([^*]|$)");
+        // look the selection expansion by 1 is intended, so the NOT '*' has a chance to match. we don't want to match ***blah***
+        final Matcher matcher = searchPattern.matcher(editableAsString)
+                .region(Math.max(selectionStart - 1, 0), Math.min(selectionEnd + 1, editableAsString.length()));
+        if (matcher.find()) {
+            return Optional.of(insertPunctuation(editable, selectionStart, selectionEnd, "*"));
+        }
+        // look around (3 chars) (NOT '*' + "**"). User might have selected the text only
+        if (matcher.region(Math.max(selectionStart - 3, 0), Math.min(selectionEnd + 3, editableAsString.length())).find()) {
+            return Optional.of(insertPunctuation(editable, selectionStart, selectionEnd, "*"));
+        }
+        return Optional.empty();
+    }
+
+    private static int insertPunctuation(Editable editable, int firstPosition, int secondPosition, String punctuation) {
+        editable.insert(secondPosition, punctuation);
+        editable.insert(firstPosition, punctuation);
+        return secondPosition + punctuation.length();
     }
 
     /**
@@ -313,10 +380,9 @@ public class MarkdownUtil {
      *
      * @return the new cursor position
      */
-    // CS304 issue link: https://github.com/stefan-niedermann/nextcloud-notes/issues/1186
     public static int insertLink(@NonNull Editable editable, int selectionStart, int selectionEnd, @Nullable String clipboardUrl) {
         if (selectionStart == selectionEnd) {
-            if (selectionStart>0 && selectionEnd<editable.length()) {
+            if (selectionStart > 0 && selectionEnd < editable.length()) {
                 char start = editable.charAt(selectionStart - 1);
                 char end = editable.charAt(selectionEnd);
                 if (start == ' ' || end == ' ') {
@@ -328,9 +394,6 @@ public class MarkdownUtil {
                         editable.insert(selectionEnd, " ");
                     }
                     editable.insert(selectionStart, "[](" + (clipboardUrl == null ? "" : clipboardUrl) + ")");
-                    if (clipboardUrl != null) {
-                        selectionEnd += clipboardUrl.length();
-                    }
                     return selectionStart + 1;
 
                 } else {
@@ -351,8 +414,7 @@ public class MarkdownUtil {
                     }
                     return selectionEnd + 2;
                 }
-            }
-            else {
+            } else {
                 editable.insert(selectionStart, "[](" + (clipboardUrl == null ? "" : clipboardUrl) + ")");
                 return selectionStart + 1;
             }
@@ -383,38 +445,6 @@ public class MarkdownUtil {
         }
     }
 
-    /**
-     * @return whether or not the selection of {@param text} from {@param start} to {@param end} is
-     * surrounded or not by the given {@param punctuation}.
-     */
-    private static boolean selectionIsSurroundedByPunctuation(@NonNull CharSequence text, int start, int end, @NonNull String punctuation) {
-        if (text.length() < end + punctuation.length()) {
-            return false;
-        }
-        if (start - punctuation.length() < 0 || end + punctuation.length() > text.length()) {
-            return false;
-        }
-        return punctuation.contentEquals(text.subSequence(start - punctuation.length(), start))
-                && punctuation.contentEquals(text.subSequence(end, end + punctuation.length()));
-    }
-
-    private static int getContainedPunctuationCount(@NonNull CharSequence text, int start, int end, @NonNull String punctuation) {
-        final Matcher matcher = Pattern.compile(Pattern.quote(punctuation)).matcher(text.subSequence(start, end));
-        int counter = 0;
-        while (matcher.find()) {
-            counter++;
-        }
-        return counter;
-    }
-
-    private static void removeContainingPunctuation(@NonNull Editable editable, int start, int end, @NonNull String punctuation) {
-        final Matcher matcher = Pattern.compile(Pattern.quote(punctuation)).matcher(editable.subSequence(start, end));
-        int countDeletedPunctuations = 0;
-        while (matcher.find()) {
-            editable.delete(start + matcher.start() - countDeletedPunctuations * punctuation.length(), start + matcher.end() - countDeletedPunctuations * punctuation.length());
-            countDeletedPunctuations++;
-        }
-    }
 
     public static boolean selectionIsInLink(@NonNull CharSequence text, int start, int end) {
         final Matcher matcher = PATTERN_MARKDOWN_LINK.matcher(text);
@@ -479,23 +509,12 @@ public class MarkdownUtil {
      */
     @NonNull
     public static String removeMarkdown(@Nullable String s) {
-        if (s == null)
+        if (TextUtils.isEmpty(s)) {
             return "";
-        // TODO maybe we can utilize the markwon renderer?
-
-        for (EListType listType : EListType.values()) {
-            for (String item : Arrays.asList(listType.checkboxChecked, listType.checkboxUnchecked, listType.listSymbolWithTrailingSpace)) {
-                if (s.startsWith(item)) {
-                    s = s.substring(item.length());
-                }
-            }
         }
-        s = PATTERN_LISTS.matcher(s).replaceAll("");
-        s = PATTERN_HEADINGS.matcher(s).replaceAll("$1");
-        s = PATTERN_HEADING_LINE.matcher(s).replaceAll("");
-        s = PATTERN_EMPHASIS.matcher(s).replaceAll("$2");
-        s = PATTERN_SPACE_1.matcher(s).replaceAll("");
-        s = PATTERN_SPACE_2.matcher(s).replaceAll("");
-        return s;
+        assert s != null;
+        final String html = RENDERER.render(PARSER.parse(replaceCheckboxesWithEmojis(s)));
+        final Spanned spanned = HtmlCompat.fromHtml(html, HtmlCompat.FROM_HTML_MODE_COMPACT);
+        return spanned.toString().trim();
     }
 }

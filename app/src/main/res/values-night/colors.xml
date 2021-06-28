@@ -23,5 +23,4 @@
 
     <color name="widget_background">#dd000000</color>
     <color name="widget_foreground">#d8d8d8</color>
-    <color name="widget_foreground_strong">#f5f5f5</color>
 </resources>

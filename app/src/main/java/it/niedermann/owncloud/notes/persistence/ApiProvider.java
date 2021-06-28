@@ -16,8 +16,8 @@ import com.nextcloud.android.sso.api.NextcloudAPI;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import it.niedermann.owncloud.notes.persistence.sync.CapabilitiesDeserializer;
 import it.niedermann.owncloud.notes.persistence.sync.NotesAPI;
@@ -36,17 +36,27 @@ public class ApiProvider {
 
     private static final String TAG = ApiProvider.class.getSimpleName();
 
+    private static final ApiProvider INSTANCE = new ApiProvider();
+
     private static final String API_ENDPOINT_OCS = "/ocs/v2.php/cloud/";
 
-    private static final Map<String, NextcloudAPI> API_CACHE = new HashMap<>();
+    private static final Map<String, NextcloudAPI> API_CACHE = new ConcurrentHashMap<>();
 
-    private static final Map<String, OcsAPI> API_CACHE_OCS = new HashMap<>();
-    private static final Map<String, NotesAPI> API_CACHE_NOTES = new HashMap<>();
+    private static final Map<String, OcsAPI> API_CACHE_OCS = new ConcurrentHashMap<>();
+    private static final Map<String, NotesAPI> API_CACHE_NOTES = new ConcurrentHashMap<>();
+
+    public static ApiProvider getInstance() {
+        return INSTANCE;
+    }
+
+    private ApiProvider() {
+        // Singleton
+    }
 
     /**
      * An {@link OcsAPI} currently shares the {@link Gson} configuration with the {@link NotesAPI} and therefore divides all {@link Calendar} milliseconds by 1000 while serializing and multiplies values by 1000 during deserialization.
      */
-    public static synchronized OcsAPI getOcsAPI(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount) {
+    public synchronized OcsAPI getOcsAPI(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount) {
         if (API_CACHE_OCS.containsKey(ssoAccount.name)) {
             return API_CACHE_OCS.get(ssoAccount.name);
         }
@@ -58,7 +68,7 @@ public class ApiProvider {
     /**
      * In case the {@param preferredApiVersion} changes, call {@link #invalidateAPICache(SingleSignOnAccount)} or {@link #invalidateAPICache()} to make sure that this call returns a {@link NotesAPI} that uses the correct compatibility layer.
      */
-    public static synchronized NotesAPI getNotesAPI(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount, @Nullable ApiVersion preferredApiVersion) {
+    public synchronized NotesAPI getNotesAPI(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount, @Nullable ApiVersion preferredApiVersion) {
         if (API_CACHE_NOTES.containsKey(ssoAccount.name)) {
             return API_CACHE_NOTES.get(ssoAccount.name);
         }
@@ -67,7 +77,7 @@ public class ApiProvider {
         return notesAPI;
     }
 
-    private static synchronized NextcloudAPI getNextcloudAPI(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount) {
+    private synchronized NextcloudAPI getNextcloudAPI(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount) {
         if (API_CACHE.containsKey(ssoAccount.name)) {
             return API_CACHE.get(ssoAccount.name);
         } else {
@@ -104,7 +114,7 @@ public class ApiProvider {
      *
      * @param ssoAccount the ssoAccount for which the API cache should be cleared.
      */
-    public static synchronized void invalidateAPICache(@NonNull SingleSignOnAccount ssoAccount) {
+    public synchronized void invalidateAPICache(@NonNull SingleSignOnAccount ssoAccount) {
         Log.v(TAG, "Invalidating API cache for " + ssoAccount.name);
         if (API_CACHE.containsKey(ssoAccount.name)) {
             final NextcloudAPI nextcloudAPI = API_CACHE.get(ssoAccount.name);
@@ -120,7 +130,7 @@ public class ApiProvider {
     /**
      * Invalidates the whole API cache for all accounts
      */
-    public static synchronized void invalidateAPICache() {
+    public synchronized void invalidateAPICache() {
         for (String key : API_CACHE.keySet()) {
             Log.v(TAG, "Invalidating API cache for " + key);
             if (API_CACHE.containsKey(key)) {

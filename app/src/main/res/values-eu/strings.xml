@@ -52,6 +52,7 @@
     <string name="error_sync">Sinkronizazioak huts egin du: %1$s</string>
     <string name="error_synchronization">Sinkronizazioak huts egin du</string>
     <string name="error_no_network">Ez dago sare konexiorik</string>
+    <string name="error_maintenance_mode">Zerbitzaria mantentze moduan dago</string>
     <string name="error_unknown">Errore ezezagun bat gertatu da.</string>
 
     <string name="about_version_title">Bertsioa</string>
@@ -83,7 +84,6 @@
     <string name="widget_create_note">Sortu oharra</string>
     <string name="widget_not_logged_in">Hasi saioa oharrak aplikazioan trepeta hau erabili aurretik</string>
     <string name="widget_entry_fav_contentDescription">Izarraren ikonoa elementu bat gogoko gisa adierazteko erabiltzen da</string>
-    <string name="widget_app_launcher_contentDescription">Aplikazioa abiatzen du</string>
 
     <string name="activity_select_single_note">Hautatu oharra</string>
 
@@ -137,12 +137,10 @@
     <string name="append_to_note">Gehitu notara</string>
     <string name="change_note_title">Aldatu notaren titulua</string>
     <string name="menu_edit_title">Editatu izenburua</string>
-    <string name="settings_branding">Marka</string>
     <string name="settings_gridview">Sareta ikuspegia</string>
     <string name="simple_security">Segurtasuna</string>
     <string name="appearance_and_behavior">Itxura eta portaera</string>
     <string name="simple_synchronization">Sinkronizazioa</string>
-    <string name="simple_behavior">Portaera</string>
     <string name="manage_accounts">Kudeatu kontuak</string>
     <string name="action_formatting_help">Formatua</string>
 
@@ -156,13 +154,6 @@
         <item>Txikia</item>
         <item>Ertaina</item>
         <item>Handia</item>
-    </string-array>
-
-    <string-array name="sync_entries">
-        <item>Off</item>
-        <item>15 minutu</item>
-        <item>Ordu 1</item>
-        <item>6 ordu</item>
     </string-array>
 
     <string-array name="darkmode_entries">
@@ -256,4 +247,7 @@
     <string name="remove_account">%1$s kendu </string>
 
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Kontu bat gehitzeko internetera konektatuta egon behar zara.</string>
-</resources>
+    <string name="simple_next">Hurrengoa</string>
+    <string name="simple_prev">Aurrekoa</string>
+    <string name="simple_repair">Konpondu</string>
+    </resources>

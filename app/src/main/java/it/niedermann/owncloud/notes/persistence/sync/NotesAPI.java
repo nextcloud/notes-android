@@ -80,10 +80,14 @@ public class NotesAPI {
     }
 
     public Call<Note> editNote(@NonNull Note note) {
+        final Long remoteId = note.getRemoteId();
+        if (remoteId == null) {
+            throw new IllegalArgumentException("remoteId of a " + Note.class.getSimpleName() + " must not be null if this object is used for editing a remote note.");
+        }
         if (ApiVersion.API_VERSION_1_0.equals(usedApiVersion)) {
-            return notesAPI_1_0.editNote(note, note.getRemoteId());
+            return notesAPI_1_0.editNote(note, remoteId);
         } else if (ApiVersion.API_VERSION_0_2.equals(usedApiVersion)) {
-            return notesAPI_0_2.editNote(new Note_0_2(note), note.getRemoteId());
+            return notesAPI_0_2.editNote(new Note_0_2(note), remoteId);
         } else {
             throw new UnsupportedOperationException("Used API version " + usedApiVersion + " does not support editNote().");
         }

@@ -25,7 +25,7 @@ public class AccountSwitcherViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(@NonNull Account localAccount, @NonNull Consumer<Account> onAccountClick) {
-        binding.accountName.setText(localAccount.getUserName());
+        binding.accountName.setText(localAccount.getDisplayName());
         binding.accountHost.setText(Uri.parse(localAccount.getUrl()).getHost());
         Glide.with(itemView.getContext())
                 .load(new SingleSignOnUrl(localAccount.getAccountName(), localAccount.getUrl() + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64"))

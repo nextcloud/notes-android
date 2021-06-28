@@ -14,6 +14,7 @@ public final class NotesColorUtil {
     private static final Map<ColorPair, Boolean> CONTRAST_RATIO_SUFFICIENT_CACHE = new HashMap<>();
 
     private NotesColorUtil() {
+        throw new UnsupportedOperationException("Do not instantiate this util class.");
     }
 
     public static boolean contrastRatioIsSufficient(@ColorInt int colorOne, @ColorInt int colorTwo) {

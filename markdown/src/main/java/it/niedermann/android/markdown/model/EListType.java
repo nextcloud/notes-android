@@ -8,6 +8,7 @@ public enum EListType {
     public final String listSymbol;
     public final String listSymbolWithTrailingSpace;
     public final String checkboxChecked;
+    public final String checkboxCheckedUpperCase;
     public final String checkboxUnchecked;
     public final String checkboxUncheckedWithTrailingSpace;
 
@@ -15,6 +16,7 @@ public enum EListType {
         this.listSymbol = String.valueOf(listSymbol);
         this.listSymbolWithTrailingSpace = listSymbol + " ";
         this.checkboxChecked = listSymbolWithTrailingSpace + "[x]";
+        this.checkboxCheckedUpperCase = listSymbolWithTrailingSpace + "[X]";
         this.checkboxUnchecked = listSymbolWithTrailingSpace + "[ ]";
         this.checkboxUncheckedWithTrailingSpace = checkboxUnchecked + " ";
     }

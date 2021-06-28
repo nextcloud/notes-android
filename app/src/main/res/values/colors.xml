@@ -30,6 +30,4 @@
 
     <color name="widget_background">#ddffffff</color>
     <color name="widget_foreground">#222222</color>
-    <color name="widget_foreground_strong">#121212</color>
-    <color name="widget_divider">#32d1d1d1</color>
 </resources>
