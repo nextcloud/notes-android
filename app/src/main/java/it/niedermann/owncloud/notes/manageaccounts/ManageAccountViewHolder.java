@@ -1,15 +1,11 @@
 package it.niedermann.owncloud.notes.manageaccounts;
 
-import android.graphics.Color;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.util.Consumer;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,17 +13,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-import java.util.Arrays;
 import java.util.stream.Stream;
 
 import it.niedermann.nextcloud.sso.glide.SingleSignOnUrl;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemAccountChooseBinding;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
+import it.niedermann.owncloud.notes.shared.model.ApiVersion;
+import it.niedermann.owncloud.notes.shared.util.ApiVersionUtil;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.applyBrandToLayerDrawable;
+import static it.niedermann.owncloud.notes.shared.util.ApiVersionUtil.getPreferredApiVersion;
 
 public class ManageAccountViewHolder extends RecyclerView.ViewHolder {
 
@@ -58,7 +56,8 @@ public class ManageAccountViewHolder extends RecyclerView.ViewHolder {
         binding.accountContextMenu.setOnClickListener((v) -> {
             final PopupMenu popup = new PopupMenu(itemView.getContext(), v);
             popup.inflate(R.menu.menu_account);
-            if (!localAccount.getPreferredApiVersion().supportsSettings()) {
+            final ApiVersion preferredApiVersion = getPreferredApiVersion(localAccount.getApiVersion());
+            if (preferredApiVersion != null && !preferredApiVersion.supportsSettings()) {
                 final Menu menu = popup.getMenu();
                 Stream.of(
                         R.id.notes_path,

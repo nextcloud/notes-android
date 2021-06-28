@@ -911,11 +911,11 @@ public class NotesRepository {
     }
 
     public Call<NotesSettings> getServerSettings(@NonNull SingleSignOnAccount ssoAccount, @Nullable ApiVersion preferredApiVersion) {
-        return ApiProvider.getNotesAPI(context, ssoAccount, preferredApiVersion).getSettings();
+        return ApiProvider.getInstance().getNotesAPI(context, ssoAccount, preferredApiVersion).getSettings();
     }
 
     public Call<NotesSettings> putServerSettings(@NonNull SingleSignOnAccount ssoAccount, @NonNull NotesSettings settings, @Nullable ApiVersion preferredApiVersion) {
-        return ApiProvider.getNotesAPI(context, ssoAccount, preferredApiVersion).putSettings(settings);
+        return ApiProvider.getInstance().getNotesAPI(context, ssoAccount, preferredApiVersion).putSettings(settings);
     }
 
     public void updateDisplayName(long id, @Nullable String displayName) {

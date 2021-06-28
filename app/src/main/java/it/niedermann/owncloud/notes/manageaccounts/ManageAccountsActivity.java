@@ -36,6 +36,7 @@ import retrofit2.Response;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.LOLLIPOP_MR1;
+import static it.niedermann.owncloud.notes.shared.util.ApiVersionUtil.getPreferredApiVersion;
 
 public class ManageAccountsActivity extends LockedActivity {
 
@@ -123,7 +124,7 @@ public class ManageAccountsActivity extends LockedActivity {
                 .setNeutralButton(android.R.string.cancel, null)
                 .setPositiveButton(R.string.action_edit_save, (v, d) -> new Thread(() -> {
                     try {
-                        final Call<NotesSettings> putSettingsCall = repository.putServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), new NotesSettings(editText.getText().toString(), null), localAccount.getPreferredApiVersion());
+                        final Call<NotesSettings> putSettingsCall = repository.putServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), new NotesSettings(editText.getText().toString(), null), getPreferredApiVersion(localAccount.getApiVersion()));
                         putSettingsCall.enqueue(new Callback<NotesSettings>() {
                             @Override
                             public void onResponse(@NonNull Call<NotesSettings> call, @NonNull Response<NotesSettings> response) {
@@ -146,7 +147,7 @@ public class ManageAccountsActivity extends LockedActivity {
                 }).start())
                 .show();
         try {
-            repository.getServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), localAccount.getPreferredApiVersion())
+            repository.getServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), getPreferredApiVersion(localAccount.getApiVersion()))
                     .enqueue(new Callback<NotesSettings>() {
                         @Override
                         public void onResponse(@NonNull Call<NotesSettings> call, @NonNull Response<NotesSettings> response) {
@@ -190,7 +191,7 @@ public class ManageAccountsActivity extends LockedActivity {
                 .setNeutralButton(android.R.string.cancel, null)
                 .setPositiveButton("Save", (v, d) -> new Thread(() -> {
                     try {
-                        final Call<NotesSettings> putSettingsCall = repository.putServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), new NotesSettings(null, spinner.getSelectedItem().toString()), localAccount.getPreferredApiVersion());
+                        final Call<NotesSettings> putSettingsCall = repository.putServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), new NotesSettings(null, spinner.getSelectedItem().toString()), getPreferredApiVersion(localAccount.getApiVersion()));
                         putSettingsCall.enqueue(new Callback<NotesSettings>() {
                             @Override
                             public void onResponse(@NonNull Call<NotesSettings> call, @NonNull Response<NotesSettings> response) {
@@ -213,7 +214,7 @@ public class ManageAccountsActivity extends LockedActivity {
                 }).start())
                 .show();
         try {
-            repository.getServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), localAccount.getPreferredApiVersion())
+            repository.getServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), getPreferredApiVersion(localAccount.getApiVersion()))
                     .enqueue(new Callback<NotesSettings>() {
                         @Override
                         public void onResponse(@NonNull Call<NotesSettings> call, @NonNull Response<NotesSettings> response) {
