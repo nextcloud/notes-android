@@ -130,9 +130,9 @@ public class ManageAccountsActivity extends LockedActivity {
                             public void onResponse(@NonNull Call<NotesSettings> call, @NonNull Response<NotesSettings> response) {
                                 final NotesSettings body = response.body();
                                 if (response.isSuccessful() && body != null) {
-                                    Toast.makeText(ManageAccountsActivity.this, "New notes path: " + body.getNotesPath(), Toast.LENGTH_LONG).show();
+                                    runOnUiThread(() -> Toast.makeText(ManageAccountsActivity.this, "New notes path: " + body.getNotesPath(), Toast.LENGTH_LONG).show());
                                 } else {
-                                    Toast.makeText(ManageAccountsActivity.this, "HTTP status code: " + response.code(), Toast.LENGTH_LONG).show();
+                                    runOnUiThread(() -> Toast.makeText(ManageAccountsActivity.this, "HTTP status code: " + response.code(), Toast.LENGTH_LONG).show());
                                 }
                             }
 
@@ -197,9 +197,9 @@ public class ManageAccountsActivity extends LockedActivity {
                             public void onResponse(@NonNull Call<NotesSettings> call, @NonNull Response<NotesSettings> response) {
                                 final NotesSettings body = response.body();
                                 if (response.isSuccessful() && body != null) {
-                                    Toast.makeText(ManageAccountsActivity.this, "New file suffix: " + body.getNotesPath(), Toast.LENGTH_LONG).show();
+                                    runOnUiThread(() -> Toast.makeText(ManageAccountsActivity.this, "New file suffix: " + body.getNotesPath(), Toast.LENGTH_LONG).show());
                                 } else {
-                                    Toast.makeText(ManageAccountsActivity.this, "HTTP status code: " + response.code(), Toast.LENGTH_LONG).show();
+                                    runOnUiThread(() -> Toast.makeText(ManageAccountsActivity.this, "HTTP status code: " + response.code(), Toast.LENGTH_LONG).show());
                                 }
                             }
 

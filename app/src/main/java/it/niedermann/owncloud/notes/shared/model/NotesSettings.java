@@ -2,10 +2,14 @@ package it.niedermann.owncloud.notes.shared.model;
 
 import androidx.annotation.Nullable;
 
+import com.google.gson.annotations.Expose;
+
 public class NotesSettings {
 
+    @Expose
     @Nullable
     private String notesPath;
+    @Expose
     @Nullable
     private String fileSuffix;
 

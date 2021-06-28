@@ -20,7 +20,6 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemAccountChooseBinding;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
-import it.niedermann.owncloud.notes.shared.util.ApiVersionUtil;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
