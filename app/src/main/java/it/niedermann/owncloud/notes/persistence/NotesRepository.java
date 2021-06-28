@@ -38,6 +38,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -127,12 +128,12 @@ public class NotesRepository {
     };
 
     // current state of the synchronization
-    private final Map<Long, Boolean> syncActive = new HashMap<>();
-    private final Map<Long, Boolean> syncScheduled = new HashMap<>();
+    private final Map<Long, Boolean> syncActive = new ConcurrentHashMap<>();
+    private final Map<Long, Boolean> syncScheduled = new ConcurrentHashMap<>();
 
     // list of callbacks for both parts of synchronization
-    private final Map<Long, List<ISyncCallback>> callbacksPush = new HashMap<>();
-    private final Map<Long, List<ISyncCallback>> callbacksPull = new HashMap<>();
+    private final Map<Long, List<ISyncCallback>> callbacksPush = new ConcurrentHashMap<>();
+    private final Map<Long, List<ISyncCallback>> callbacksPull = new ConcurrentHashMap<>();
 
 
     public static synchronized NotesRepository getInstance(@NonNull Context context) {
