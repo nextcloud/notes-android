@@ -300,10 +300,10 @@
     <string name="simple_backup">Backup</string>
     <string name="simple_repair">Repair</string>
     <string name="backup">We detected an irrecoverably state of the app. Please backup your unsynchronized changes and clear the storage of the Notes app.</string>
-    <string name="settings_notes_path_description">Folder to store your notes in your  Nextcloud</string>
+    <string name="settings_notes_path_description">Folder to store your notes in your Nextcloud</string>
     <string-array name="settings_file_suffixes">
-        <item>.txt</item>
-        <item>.md</item>
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
     </string-array>
     <string name="settings_notes_path_success">New notes folder: %1$s</string>
     <string name="settings_file_suffix">File extension</string>
