@@ -34,7 +34,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -86,6 +85,7 @@ public class NotesRepository {
 
     private final ApiProvider apiProvider;
     private final ExecutorService executor;
+    private final ExecutorService syncExecutor;
     private final Context context;
     private final NotesDatabase db;
     private final String defaultNonEmptyTitle;
@@ -138,15 +138,16 @@ public class NotesRepository {
 
     public static synchronized NotesRepository getInstance(@NonNull Context context) {
         if (instance == null) {
-            instance = new NotesRepository(context, NotesDatabase.getInstance(context.getApplicationContext()), Executors.newCachedThreadPool(), ApiProvider.getInstance());
+            instance = new NotesRepository(context, NotesDatabase.getInstance(context.getApplicationContext()), Executors.newCachedThreadPool(), Executors.newSingleThreadExecutor(), ApiProvider.getInstance());
         }
         return instance;
     }
 
-    private NotesRepository(@NonNull final Context context, @NonNull final NotesDatabase db, @NonNull final ExecutorService executor, @NonNull ApiProvider apiProvider) {
+    private NotesRepository(@NonNull final Context context, @NonNull final NotesDatabase db, @NonNull final ExecutorService executor, @NonNull final ExecutorService syncExecutor, @NonNull ApiProvider apiProvider) {
         this.context = context.getApplicationContext();
         this.db = db;
         this.executor = executor;
+        this.syncExecutor = syncExecutor;
         this.apiProvider = apiProvider;
         this.defaultNonEmptyTitle = NoteUtil.generateNonEmptyNoteTitle("", this.context);
         this.syncOnlyOnWifiKey = context.getApplicationContext().getResources().getString(R.string.pref_key_wifi_only);
@@ -548,7 +549,7 @@ public class NotesRepository {
     private void updateDynamicShortcuts(long accountId) {
         executor.submit(() -> {
             if (SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
-                ShortcutManager shortcutManager = this.context.getSystemService(ShortcutManager.class);
+                final ShortcutManager shortcutManager = this.context.getSystemService(ShortcutManager.class);
                 if (shortcutManager != null) {
                     if (!shortcutManager.isRateLimitingActive()) {
                         List<ShortcutInfo> newShortcuts = new ArrayList<>();
@@ -828,7 +829,7 @@ public class NotesRepository {
                         syncTask.addCallbacks(account, callbacksPull.get(account.getId()));
                         callbacksPull.put(account.getId(), new ArrayList<>());
                     }
-                    executor.submit(syncTask);
+                    syncExecutor.submit(syncTask);
                 } catch (NextcloudFilesAppAccountNotFoundException e) {
                     Log.e(TAG, "... Could not find " + SingleSignOnAccount.class.getSimpleName() + " for account name " + account.getAccountName());
                     e.printStackTrace();
