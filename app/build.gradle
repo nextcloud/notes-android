@@ -59,6 +59,10 @@ android {
             dimension "version"
             applicationIdSuffix ".pfungstadt"
         }
+        mdm {
+            dimension "version"
+            applicationIdSuffix ".mdm"
+        }
     }
 
     testOptions {
