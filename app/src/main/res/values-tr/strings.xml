@@ -251,4 +251,5 @@
     <string name="simple_prev">Önceki</string>
     <string name="simple_backup">Yedekle</string>
     <string name="simple_repair">Onar</string>
+    <string name="backup">Uygulamada geri döndürülemeyecek bir durum algılandı. Lütfen eşitlenmemiş değişikliklerinizi yedekleyin ve Notes uygulamasının depolama alanını temizleyin.</string>
     </resources>

@@ -257,8 +257,21 @@
     <string name="remove_account">Usuń %1$s</string>
 
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Aby dodać konto, musisz mieć połączenie z Internetem.</string>
+    <string name="settings_notes_path">Ustaw katalog</string>
+
     <string name="simple_next">Następna</string>
     <string name="simple_prev">Poprzednia</string>
     <string name="simple_backup">Kopia zapasowa</string>
     <string name="simple_repair">Naprawa</string>
-    </resources>
+    <string name="backup">Wykryliśmy nieodwracalny stan aplikacji. Utwórz kopię zapasową niezsynchronizowanych zmian i wyczyść pamięć aplikacji Notatki.</string>
+    <string name="settings_notes_path_description">Katalog do przechowywania notatek w Nextcloud</string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
+    <string name="settings_notes_path_success">Nowy katalog notatek: %1$s</string>
+    <string name="settings_file_suffix">Rozszerzenie pliku</string>
+    <string name="settings_file_suffix_description">Rozszerzenie pliku dla nowych notatek w Nextcloud</string>
+    <string name="settings_file_suffix_success">Nowy przyrostek pliku: %1$s</string>
+    <string name="http_status_code">Kod statusu HTTP: %1$d</string>
+</resources>

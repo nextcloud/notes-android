@@ -242,8 +242,21 @@
     <string name="remove_account">移除 %1$s</string>
 
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">要添加账号，你必须连接到互联网。</string>
+    <string name="settings_notes_path">设置文件夹</string>
+
     <string name="simple_next">下一则 </string>
     <string name="simple_prev">上一则</string>
     <string name="simple_backup">备份</string>
     <string name="simple_repair">修复</string>
-    </resources>
+    <string name="backup">我们检测到应用程序一个不可恢复的状态。请备份您的未同步的更改并清除Notes应用程序的存储。</string>
+    <string name="settings_notes_path_description">在你的 Nextcloud 中储存你的笔记的文件夹 </string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt </item>
+        <item translatable="false">.md </item>
+    </string-array>
+    <string name="settings_notes_path_success">新笔记文件夹：%1$s</string>
+    <string name="settings_file_suffix">文件扩展名</string>
+    <string name="settings_file_suffix_description">你的 Nextcloud 中新笔记的文件扩展名</string>
+    <string name="settings_file_suffix_success">新文件后缀：%1$s</string>
+    <string name="http_status_code">HTTP 状态码：%1$d</string>
+</resources>
