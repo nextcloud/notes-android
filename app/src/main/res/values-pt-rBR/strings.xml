@@ -251,4 +251,5 @@
     <string name="simple_prev">Anterior</string>
     <string name="simple_backup">Backup</string>
     <string name="simple_repair">Reparar</string>
+    <string name="backup">Detectamos um estado irrecuperável do aplicativo. Faça backup de suas alterações não sincronizadas e limpe o armazenamento do aplicativo Notas.</string>
     </resources>
