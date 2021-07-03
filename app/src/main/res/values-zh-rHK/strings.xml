@@ -44,7 +44,7 @@
     <string name="settings_font_title">等寬字體</string>
     <string name="settings_font_size">字體大小</string>
     <string name="settings_wifi_only">只在有 Wi-Fi 時同步</string>
-    <string name="settings_lock">應用程式上鎖 (Beta)</string>
+    <string name="settings_lock">應用程式上鎖 （Beta）</string>
     <string name="settings_lock_summary">裝置身份驗證</string>
     <string name="settings_background_sync">背景同步</string>
     <string name="settings_prevent_screen_capture">防止屏幕截圖</string>
@@ -72,7 +72,7 @@
     <string name="about_app_license">此程式依照 GNU GENERAL PUBLIC LICENSE v3+ 方式授權使用</string>
     <string name="about_app_license_button">檢視授權條款</string>
     <string name="about_icons_disclaimer_title">圖示</string>
-    <string name="about_icons_disclaimer">&lt;p>原創圖示由 %1$s 製作&lt;/p>&lt;p>其他 App 使用的圖示均為 Google Inc。製作的 &lt;a href=\"https：//materialdesignicons。com/\">Material Design 圖示&lt;/a>，並依 Apache 2.0 條款授權。&lt;/p></string>
+    <string name="about_icons_disclaimer">&lt;p>原創圖示由 %1$s 製作&lt;/p>&lt;p>其他 App 使用的圖示均為 Google Inc。製作的 &lt;a href=\"https://materialdesignicons。com/\">Material Design 圖示&lt;/a>，並依 Apache 2.0 條款授權。&lt;/p></string>
     <string name="about_credits_tab_title">致謝</string>
     <string name="about_contribution_tab_title">貢獻</string>
     <string name="about_license_tab_title">授權條款</string>
@@ -118,19 +118,19 @@
     <string name="error_dialog_tip_token_mismatch_retry">請嘗試強行關閉應用程式並重新打開。可能是與Nextcloud應用程式的連接不正確有關。</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">如果問題持續，請嘗試清除兩個應用程序的存儲：Nextcloud 和 Nextcloud Notes 的以解決此問題。</string>
     <string name="error_dialog_tip_clear_storage">您可以通過打開應用程式信息並選擇 存儲→清除存儲 來清除存儲。⚠️警告：這將刪除尚未同步的筆記！</string>
-    <string name="error_dialog_tip_files_outdated">您的 Nextcloud 應用程式似乎已過時。請從 Play Store 或 F-Droid 下載最新版本。 </string>
-    <string name="error_dialog_tip_files_force_stop">您的Nextcloud應用程式似乎出了點問題。 請嘗試同時強行關閉 Nextcloud 應用程序和 Nextcloud Notes 應用程序。</string>
+    <string name="error_dialog_tip_files_outdated">您的 Nextcloud 應用程式似乎已過時。請從 Play Store 或 F-Droid 下載最新版本。</string>
+    <string name="error_dialog_tip_files_force_stop">您的Nextcloud應用程式似乎出了點問題。請嘗試同時強行關閉 Nextcloud 應用程序和 Nextcloud Notes 應用程序。</string>
     <string name="error_dialog_tip_files_delete_storage">如果強行關閉沒有幫助，則可以嘗試清除兩個應用程序的存儲。</string>
     <string name="error_dialog_timeout_instance">伺服器沒有在規定的時間回應。請確保您的伺服器實例在正常運行。</string>
-    <string name="error_dialog_timeout_toggle">檢查您的網絡連接。 有時候，切換流動數據或Wi-Fi可能會有所幫助。</string>
+    <string name="error_dialog_timeout_toggle">檢查您的網絡連接。有時候，切換流動數據或Wi-Fi可能會有所幫助。</string>
     <string name="error_dialog_check_server">您伺服器的回應不正確。請檢查您是否可以通過 web 界面存取筆記。</string>
     <string name="error_dialog_check_server_logs">您的 Nextcloud 設置存在問題。請查看伺服器記錄檔案。</string>
     <string name="error_dialog_check_maintenance">請檢查您的 Nextcloud 當前是否在維護模式。</string>
     <string name="error_dialog_insufficient_storage">您的 Nextcloud 沒有剩餘可用的存儲空間。請刪除一些檔案，以將近端更改同步到雲中。</string>
-    <string name="error_dialog_contact_us">如果問題仍然存在，請不要猶豫與我們聯繫。 您可以在側欄的“關於”部分中找到我們聯絡的信息。</string>
+    <string name="error_dialog_contact_us">如果問題仍然存在，請不要猶豫與我們聯繫。您可以在側欄的“關於”部分中找到我們聯絡的信息。</string>
     <string name="error_dialog_we_need_info">我們需要以下的技術資訊來幫助您：</string>
     <string name="error_dialog_server_app_enabled">請確保您已在伺服器上安裝並啟用 Notes 應用程式。</string>
-    <string name="error_dialog_redirect">您的伺服器確實以HTTP 302狀態代碼響應，這表示您尚未在伺服器上安裝 Notes 應用程式或配置錯誤。 這可能是由 。htaccess 檔案中的自定義替代引起的，也可能是由 Nextcloud 應用程式（如 OID 客戶端）引起的。</string>
+    <string name="error_dialog_redirect">您的伺服器確實以HTTP 302狀態代碼響應，這表示您尚未在伺服器上安裝 Notes 應用程式或配置錯誤。這可能是由 .htaccess 檔案中的自定義替代引起的，也可能是由 Nextcloud 應用程式（如 OID 客戶端）引起的。</string>
     <string name="error_dialog_tip_disable_battery_optimizations">請禁用 Nextcloud 和 Notes 應用程式的所有電池優化。</string>
     <string name="added_content">已加入「%1$s」</string>
     <string name="shared_text_empty">分享的文字是空的</string>
@@ -182,11 +182,11 @@
     <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">基於 context 的格式</string>
-    <string name="formatting_help_cbf_body_1">Notes 應用程式的主要設計目標是提供無干擾的工具，儘管您可以使用Markdown設置文本格式。 對於下面提到的各種示例，您可以使用快捷方式，以便無需輸入以下代碼即可格式化便箋。</string>
+    <string name="formatting_help_cbf_body_1">Notes 應用程式的主要設計目標是提供無干擾的工具，儘管您可以使用Markdown設置文本格式。對於下面提到的各種示例，您可以使用快捷方式，以便無需輸入以下代碼即可格式化便箋。</string>
     <string name="formatting_help_cbf_body_2">只需選擇一個文本範圍或在任意位置點擊光標，您將彈出一個選項單，該選項單包含默認條目 %1$s，%2$s，%3$s 條目如 %4$s 或 %5$s。</string>
 
     <string name="formatting_help_text_title">文字編輯器</string>
-    <string name="formatting_help_text_body">使用 Markdown 可以很容易地使某些單詞變為%1$s粗體%1$s，而其他單詞則變為%2$s斜體%2$s。您可以%3$s刪除%3$s一些單詞，甚至[鏈接到 Nextcloud ]（https：//nextcloud。com）。</string>
+    <string name="formatting_help_text_body">使用 Markdown 可以很容易地使某些單詞變為%1$s粗體%1$s，而其他單詞則變為%2$s斜體%2$s。您可以%3$s刪除%3$s一些單詞，甚至[鏈接到 Nextcloud ]（https://nextcloud.com）。</string>
 
     <string name="formatting_help_lists_title">清單</string>
     <string name="formatting_help_lists_body_1">有時您想顯示編號列表（numbered list）：</string>
@@ -213,7 +213,7 @@
     <string name="formatting_help_structured_documents_body_6">- 愛因斯坦</string>
 
     <string name="formatting_help_code_title">代碼</string>
-    <string name="formatting_help_code_body_1">使用 Markdown 設置代碼樣式的方法有多種。 如果您有內聯代碼塊，請將其包裝在反引號中：</string>
+    <string name="formatting_help_code_body_1">使用 Markdown 設置代碼樣式的方法有多種。如果您有內聯代碼塊，請將其包裝在反引號中：</string>
     <string name="formatting_help_code_body_2">Markdown還支持稱為代碼防護（code fencing）的功能，該功能允許多行不縮進：</string>
     <string name="formatting_help_code_body_3">如果您想使用語法突出顯示，請指定語言：</string>
 
@@ -233,7 +233,7 @@
     <string name="error_action_open_deck_info">開啟 App 資訊</string>
     <string name="error_action_open_network">網路設定</string>
     <string name="no_account_configured_yet">未有已設定的賬戶</string>
-    <string name="no_other_accounts">你尚未設定其它帳號。</string>
+    <string name="no_other_accounts">你尚未設定其它賬戶。</string>
     <string name="choose_account">選擇賬戶</string>
     <string name="context_based_formatting">基於 context 的格式彈出框</string>
     <plurals name="remove_account_message">
@@ -242,8 +242,17 @@
     <string name="remove_account">移除 %1$s</string>
 
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">您必須連線到互聯網才能新增賬戶。</string>
+    <string name="settings_notes_path">設置資料夾</string>
+
     <string name="simple_next">下一步</string>
     <string name="simple_prev">上一個</string>
     <string name="simple_backup">備份</string>
     <string name="simple_repair">修復</string>
-    </resources>
+    <string name="backup">我們檢測到該應用程式處於不可恢復的狀態。請備份您未同步的更改並清除 Notes 應用程式的存儲空間。</string>
+    <string name="settings_notes_path_description">用於在 Nextcloud 中存儲筆記的資料夾</string>
+    <string name="settings_notes_path_success">新 notes 資料夾：%1$s</string>
+    <string name="settings_file_suffix">檔案擴展名</string>
+    <string name="settings_file_suffix_description">Nextcloud 中新筆記的檔案擴展名</string>
+    <string name="settings_file_suffix_success">新檔案後綴：%1$s</string>
+    <string name="http_status_code">HTTP狀態碼：%1$d</string>
+</resources>

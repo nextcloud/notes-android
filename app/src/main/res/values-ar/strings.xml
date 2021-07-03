@@ -158,6 +158,7 @@
     </string-array>
 
     <plurals name="ab_selected">
+        <item quantity="zero">%d محدد</item>
         <item quantity="one">%d محدد</item>
         <item quantity="two">%d محددان</item>
         <item quantity="few">%d محددين</item>

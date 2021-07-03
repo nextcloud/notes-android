@@ -247,8 +247,21 @@
     <string name="remove_account">%1$s entfernen</string>
 
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Sie müssen mit dem Internet verbunden sein, um ein Konto hinzufügen zu können.</string>
+    <string name="settings_notes_path">Ordner festlegen</string>
+
     <string name="simple_next">Weiter</string>
     <string name="simple_prev">Vorheriges</string>
     <string name="simple_backup">Sicherung</string>
     <string name="simple_repair">Reparieren</string>
-    </resources>
+    <string name="backup">Es wurde ein nicht wiederherstellbarer Zustand der App festgestellt. Bitte sichern Sie Ihre nicht synchronisierten Änderungen und löschen Sie den Speicher der Notes-App.</string>
+    <string name="settings_notes_path_description">Ordner in dem Ihre Notizen in Ihrer Nextcloud gespeichert werden</string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
+    <string name="settings_notes_path_success">Neuer Notizen-Ordner: %1$s</string>
+    <string name="settings_file_suffix">Dateierweiterung</string>
+    <string name="settings_file_suffix_description">Dateiendung für neue Notizen in Ihrer Nextcloud</string>
+    <string name="settings_file_suffix_success">Neue Dateiendung: %1$s</string>
+    <string name="http_status_code">HTTP-Statuscode: %1$d</string>
+</resources>

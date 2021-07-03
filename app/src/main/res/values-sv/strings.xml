@@ -6,12 +6,14 @@
     <string name="label_all_notes">Alla anteckningar</string>
     <string name="label_favorites">Favoriter</string>
     <string name="action_create">Ny anteckning</string>
+    <string name="welcome_text">Välkommen till %1$s</string>
     <string name="action_settings">Inställningar</string>
     <string name="action_trashbin">Borttagna anteckningar</string>
     <string name="action_search">Sök</string>
     <string name="action_sorting_method">Sorteringsmetod</string>
     <string name="simple_cancel">Avbryt</string>
     <string name="simple_edit">Redigera</string>
+    <string name="simple_remove">Ta bort</string>
     <string name="action_edit_save">Spara</string>
     <string name="simple_about">Om</string>
     <string name="simple_link">Länk</string>

@@ -6,12 +6,14 @@
     <string name="label_all_notes">Totu is notas</string>
     <string name="label_favorites">Preferidos</string>
     <string name="action_create">Notas noas</string>
+    <string name="welcome_text">Ti donamus sa benebènnida in %1$s</string>
     <string name="action_settings">Cunfiguratziones</string>
     <string name="action_trashbin">Notas cantzelladas</string>
     <string name="action_search">Chirca</string>
     <string name="action_sorting_method">Mètodu de ordinamentu</string>
     <string name="simple_cancel">Cantzella</string>
     <string name="simple_edit">Modìfica</string>
+    <string name="simple_remove">Boga</string>
     <string name="action_edit_save">Sarva</string>
     <string name="simple_about">In contu de</string>
     <string name="simple_link">Ligòngiu</string>
@@ -42,10 +44,15 @@
     <string name="settings_font_title">Caràtere a ispatziadura fissa</string>
     <string name="settings_font_size">Dimensione caràtere</string>
     <string name="settings_wifi_only">Sincroniza isceti cun su Wi-Fi</string>
+    <string name="settings_lock">Blocu aplicatzione (Beta)</string>
+    <string name="settings_lock_summary">Credentziales de su dispositivu</string>
     <string name="settings_background_sync">Sincronizatzione isfundu</string>
+    <string name="settings_prevent_screen_capture">Impedi sa catura de ischermu</string>
+
     <string name="error_sync">Sincronizatzione faddida: %1$s</string>
     <string name="error_synchronization">Sincronizatzione faddida</string>
     <string name="error_no_network">Peruna connessione de rete</string>
+    <string name="error_maintenance_mode">Serbidore in modalidade de mantenidura</string>
     <string name="error_unknown">Ddoe at àpidu un\'errore disconnotu.</string>
 
     <string name="about_version_title">Versione</string>
@@ -130,7 +137,9 @@
     <string name="append_to_note">Agiunghe a sa nota</string>
     <string name="change_note_title">Càmbia su tìtulu de sa nota</string>
     <string name="menu_edit_title">Modìfica tìtulu</string>
+    <string name="settings_gridview">Bista grìllia</string>
     <string name="simple_security">Seguresa</string>
+    <string name="appearance_and_behavior">Aparèntzia e cumportamentu</string>
     <string name="simple_synchronization">Sincronizatzione</string>
     <string name="manage_accounts">Gesti contos</string>
     <string name="action_formatting_help">Formatatzione</string>
@@ -229,5 +238,18 @@
     <string name="error_action_open_network">Impostatziones de rete</string>
     <string name="no_account_configured_yet">Perunu contu configuradu ancora</string>
     <string name="no_other_accounts">No as configuradu perunu contu ancora.</string>
+    <string name="choose_account">Sèbera contu</string>
     <string name="context_based_formatting">Bentana de formatatzione basada subra de su cuntestu</string>
+    <plurals name="remove_account_message">
+        <item quantity="one">Boghende su contu %1$s s\'at a cantzellare puru sa modìfica non sincronizada.</item>
+        <item quantity="other">Boghende su contu %1$s s\'ant a cantzellare puru %2$dmodìficas non sincronizadas.</item>
+    </plurals>
+    <string name="remove_account">Boga•nche %1$s</string>
+
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Depes èssere connètidu a internet pro agiùnghere unu contu.</string>
+    <string name="simple_next">Imbeniente</string>
+    <string name="simple_prev">Pretzedente</string>
+    <string name="simple_backup">Còpia de seguresa</string>
+    <string name="simple_repair">Acontza</string>
+    <string name="backup">Amus rilevadu un\'istadu non recuperàbile de s\'aplicatzione. Faghe una còpia de is modìficas non sincronizadas e lìmpia s\'archiviatzione de s\'aplicatzione Notes.</string>
     </resources>
