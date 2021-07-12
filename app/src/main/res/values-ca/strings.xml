@@ -52,6 +52,7 @@
     <string name="error_sync">S\'ha produït un error en la sincronització: %1$s</string>
     <string name="error_synchronization">S\'ha produït un error en la sincronització</string>
     <string name="error_no_network">No hi ha connexió a la xarxa</string>
+    <string name="error_maintenance_mode">El servidor es troba en mode de manteniment</string>
     <string name="error_unknown">S\'ha produït un error desconegut</string>
 
     <string name="about_version_title">Versió</string>
