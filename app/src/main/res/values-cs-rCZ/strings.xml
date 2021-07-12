@@ -250,7 +250,7 @@
     <string name="context_based_formatting">Kontextové vyskakovací okno formátování</string>
     <plurals name="remove_account_message">
         <item quantity="one">Odebrání účtu %1$s také nenahraditelně odstraní jednu nesynchronizovanou změnu.</item>
-        <item quantity="few">Odebrání účtu %1$s také nenahraditelně odstraní %2$d nesynchronizovaných změn.</item>
+        <item quantity="few">Odebrání účtu %1$s také nenahraditelně odstraní %2$d nesynchronizované změny.</item>
         <item quantity="many">Odebrání účtu %1$s také nenahraditelně odstraní %2$d nesynchronizovaných změn.</item>
         <item quantity="other">Odebrání účtu %1$s také nenahraditelně odstraní %2$d nesynchronizované změny.</item>
     </plurals>

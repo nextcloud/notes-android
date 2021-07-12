@@ -247,8 +247,21 @@
     <string name="remove_account">Verwijder %1$s</string>
 
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Je moet verbonden zijn met het Internet om een account toe te voegen.</string>
+    <string name="settings_notes_path">Instellen map</string>
+
     <string name="simple_next">Volgende</string>
     <string name="simple_prev">Vorige</string>
     <string name="simple_backup">Back-up</string>
     <string name="simple_repair">Herstel</string>
-    </resources>
+    <string name="backup">We hebben een onherstelbare staat van de app gedetecteerd. Maak een back-up van je niet-gesynchroniseerde wijzigingen en wis de opslag van de Notes-app.</string>
+    <string name="settings_notes_path_description">Map om je notities in Nextcloud op te slaan</string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
+    <string name="settings_notes_path_success">Nieuw notitiesmap: %1$s</string>
+    <string name="settings_file_suffix">Bestandsextensie</string>
+    <string name="settings_file_suffix_description">Bestandsextensies voor nieuwe notities in je Nextcloud</string>
+    <string name="settings_file_suffix_success">Nieuwe bestandsachtervoegsel: %1$s</string>
+    <string name="http_status_code">HTTP status code: %1$d</string>
+</resources>
