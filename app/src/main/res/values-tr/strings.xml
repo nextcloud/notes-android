@@ -247,9 +247,21 @@
     <string name="remove_account">%1$s sil</string>
 
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Bir hesap ekleyebilmeniz için çalışan bir İnternet bağlantınız olmalı.</string>
+    <string name="settings_notes_path">Klasörü ayarla</string>
+
     <string name="simple_next">Sonraki</string>
     <string name="simple_prev">Önceki</string>
     <string name="simple_backup">Yedekle</string>
     <string name="simple_repair">Onar</string>
     <string name="backup">Uygulamada geri döndürülemeyecek bir durum algılandı. Lütfen eşitlenmemiş değişikliklerinizi yedekleyin ve Notes uygulamasının depolama alanını temizleyin.</string>
-    </resources>
+    <string name="settings_notes_path_description">Nextcloud üzerinde notlarınızın kaydedileceği klasör </string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
+    <string name="settings_notes_path_success">Yeni notlar klasörü: %1$s</string>
+    <string name="settings_file_suffix">Dosya uzantısı</string>
+    <string name="settings_file_suffix_description">Nextcloud üzerinde notlarınız için kullanılacak dosya uzantısı </string>
+    <string name="settings_file_suffix_success">Yeni dosya son eki: %1$s</string>
+    <string name="http_status_code">HTTP durum kodu: %1$d</string>
+</resources>
