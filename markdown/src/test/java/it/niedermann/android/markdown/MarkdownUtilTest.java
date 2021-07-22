@@ -86,6 +86,8 @@ public class MarkdownUtilTest extends TestCase {
                 assertEquals(79, endOfLine);
             }
         }
+
+        assertEquals(3, MarkdownUtil.getEndOfLine(" - ", 2));
     }
 
     @Test
