@@ -91,20 +91,26 @@ public class AutoContinuationTextWatcher extends InterceptorTextWatcher {
             isInsert = false;
             sequenceStart = startOfLine;
         } else {
+            // TODO use Java 11 String::repeat
+            final StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < line.indexOf(line.trim()); i++) {
+                builder.append(" ");
+            }
             for (EListType listType : EListType.values()) {
                 final boolean isCheckboxList = lineStartsWithCheckbox(line, listType);
                 final boolean isPlainList = !isCheckboxList && line.startsWith(listType.listSymbolWithTrailingSpace);
                 if (isPlainList || isCheckboxList) {
-                    customText = isPlainList ? listType.listSymbolWithTrailingSpace : listType.checkboxUncheckedWithTrailingSpace;
+                    builder.append(isPlainList ? listType.listSymbolWithTrailingSpace : listType.checkboxUncheckedWithTrailingSpace);
+                    customText = builder;
                     isInsert = true;
                     sequenceStart = start + count;
                     return;
                 }
             }
-            
+
             final Optional<Integer> orderedListNumber = getOrderedListNumber(line);
             if (orderedListNumber.isPresent()) {
-                customText = (orderedListNumber.get() + 1) + ". ";
+                customText = builder.append(orderedListNumber.get() + 1).append(". ");
                 isInsert = true;
                 sequenceStart = start + count;
             }
