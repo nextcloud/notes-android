@@ -181,7 +181,7 @@ public class MarkdownUtil {
         if (nextLinebreak > -1) {
             return nextLinebreak;
         }
-        return cursorPosition;
+        return s.length();
     }
 
     public static String getListItemIfIsEmpty(@NonNull String line) {
