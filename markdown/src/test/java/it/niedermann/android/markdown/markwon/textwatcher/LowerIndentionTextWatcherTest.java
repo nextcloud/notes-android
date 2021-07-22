@@ -18,7 +18,7 @@ import it.niedermann.android.markdown.markwon.MarkwonMarkdownEditor;
 import it.niedermann.android.markdown.model.EListType;
 
 @RunWith(RobolectricTestRunner.class)
-public class LowerIndentionKeyListenerTest extends TestCase {
+public class LowerIndentionTextWatcherTest extends TestCase {
 
     @Rule
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
@@ -76,6 +76,10 @@ public class LowerIndentionKeyListenerTest extends TestCase {
         this.editText.setText("");
         pressBackspace(0);
         assertText("", 0);
+
+        this.editText.setText("- [ ] ");
+        pressBackspace(6);
+        assertText("- [ ]", 5);
 
         this.editText.setText("- Foo");
         pressBackspace(5);

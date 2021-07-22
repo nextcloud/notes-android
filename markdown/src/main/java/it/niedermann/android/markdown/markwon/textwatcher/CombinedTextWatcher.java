@@ -21,7 +21,8 @@ public class CombinedTextWatcher extends HashMap<Class<?>, TextWatcher> implemen
     public CombinedTextWatcher(@NonNull MarkwonEditor editor, @NonNull MarkwonMarkdownEditor editText) {
         put(MarkwonEditorTextWatcher.class, MarkwonEditorTextWatcher.withPreRender(editor, Executors.newSingleThreadExecutor(), editText));
         put(AutoContinuationTextWatcher.class, new AutoContinuationTextWatcher(get(MarkwonEditorTextWatcher.class), editText));
-        put(SearchHighlightTextWatcher.class, new SearchHighlightTextWatcher(get(AutoContinuationTextWatcher.class), editText));
+        put(LowerIndentionTextWatcher.class, new LowerIndentionTextWatcher(get(AutoContinuationTextWatcher.class), editText));
+        put(SearchHighlightTextWatcher.class, new SearchHighlightTextWatcher(get(LowerIndentionTextWatcher.class), editText));
         watcher = get(SearchHighlightTextWatcher.class);
     }
 

@@ -5,7 +5,6 @@ import android.os.Build;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.widget.EditText;
 
 import androidx.annotation.ColorInt;
@@ -36,7 +35,6 @@ import it.niedermann.android.markdown.markwon.handler.StrikethroughEditHandler;
 import it.niedermann.android.markdown.markwon.plugins.SearchHighlightPlugin;
 import it.niedermann.android.markdown.markwon.plugins.ThemePlugin;
 import it.niedermann.android.markdown.markwon.textwatcher.CombinedTextWatcher;
-import it.niedermann.android.markdown.markwon.textwatcher.LowerIndentionKeyListener;
 import it.niedermann.android.markdown.markwon.textwatcher.SearchHighlightTextWatcher;
 
 public class MarkwonMarkdownEditor extends AppCompatEditText implements MarkdownEditor {
@@ -64,7 +62,6 @@ public class MarkwonMarkdownEditor extends AppCompatEditText implements Markdown
 
         combinedWatcher = new CombinedTextWatcher(editor, this);
         addTextChangedListener(combinedWatcher);
-        setOnKeyListener(new LowerIndentionKeyListener(this));
         setCustomSelectionActionModeCallback(new ContextBasedRangeFormattingCallback(this));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             setCustomInsertionActionModeCallback(new ContextBasedFormattingCallback(this));
