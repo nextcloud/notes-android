@@ -1,6 +1,5 @@
 package it.niedermann.android.markdown.markwon.textwatcher;
 
-import android.os.Looper;
 import android.view.KeyEvent;
 import android.widget.EditText;
 
@@ -9,7 +8,6 @@ import androidx.test.core.app.ApplicationProvider;
 
 import junit.framework.TestCase;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -18,8 +16,6 @@ import org.robolectric.RobolectricTestRunner;
 
 import it.niedermann.android.markdown.markwon.MarkwonMarkdownEditor;
 import it.niedermann.android.markdown.model.EListType;
-
-import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
 public class AutoContinuationTextWatcherTest extends TestCase {
@@ -86,10 +82,25 @@ public class AutoContinuationTextWatcherTest extends TestCase {
     }
 
     @Test
-    public void shouldContinueNestedLists() {
-        this.editText.setText("- [ ] Parent\n  - [x] Child");
+    public void shouldContinueNestedListsAtTheSameIndention() {
+        this.editText.setText("- [ ] Parent\n  - [x] Child\n    - [ ] Third");
         pressEnter(26);
-        assertText("- [ ] Parent\n  - [x] Child\n- [ ] ", 33);
+        assertText("- [ ] Parent\n  - [x] Child\n  - [ ] \n    - [ ] Third", 35);
+
+        this.editText.setText("- [ ] Parent\n  - [x] Child\n    - [ ] Third");
+        pressEnter(42);
+        assertText("- [ ] Parent\n  - [x] Child\n    - [ ] Third\n    - [ ] ", 53);
+    }
+
+    @Test
+    public void shouldRemoveAutoContinuedListItemWhenPressingEnterMultipleTimes() {
+        this.editText.setText("- Foo");
+        pressEnter(5);
+        assertText("- Foo\n- ", 8);
+        pressEnter(8);
+        assertText("- Foo\n\n", 7);
+        pressEnter(7);
+        assertText("- Foo\n\n\n", 8);
     }
 
     @Test
