@@ -598,23 +598,24 @@ public class MarkdownUtilTest extends TestCase {
         assertNull(MarkdownUtil.getListItemIfIsEmpty("1.  "));
     }
 
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
     public void testLineStartsWithOrderedList() {
-        assertEquals(1, MarkdownUtil.getOrderedListNumber("1. Test"));
-        assertEquals(2, MarkdownUtil.getOrderedListNumber("2. Test"));
-        assertEquals(3, MarkdownUtil.getOrderedListNumber("3. Test"));
-        assertEquals(10, MarkdownUtil.getOrderedListNumber("10. Test"));
-        assertEquals(11, MarkdownUtil.getOrderedListNumber("11. Test"));
-        assertEquals(12, MarkdownUtil.getOrderedListNumber("12. Test"));
-        assertEquals(1, MarkdownUtil.getOrderedListNumber("1. 1"));
-        assertEquals(1, MarkdownUtil.getOrderedListNumber("1. Test 1"));
+        assertEquals(1, MarkdownUtil.getOrderedListNumber("1. Test").get().intValue());
+        assertEquals(2, MarkdownUtil.getOrderedListNumber("2. Test").get().intValue());
+        assertEquals(3, MarkdownUtil.getOrderedListNumber("3. Test").get().intValue());
+        assertEquals(10, MarkdownUtil.getOrderedListNumber("10. Test").get().intValue());
+        assertEquals(11, MarkdownUtil.getOrderedListNumber("11. Test").get().intValue());
+        assertEquals(12, MarkdownUtil.getOrderedListNumber("12. Test").get().intValue());
+        assertEquals(1, MarkdownUtil.getOrderedListNumber("1. 1").get().intValue());
+        assertEquals(1, MarkdownUtil.getOrderedListNumber("1. Test 1").get().intValue());
 
-        assertEquals(-1, MarkdownUtil.getOrderedListNumber(""));
-        assertEquals(-1, MarkdownUtil.getOrderedListNumber("1."));
-        assertEquals(-1, MarkdownUtil.getOrderedListNumber("1. "));
-        assertEquals(-1, MarkdownUtil.getOrderedListNumber("11. "));
-        assertEquals(-1, MarkdownUtil.getOrderedListNumber("-1. Test"));
-        assertEquals(-1, MarkdownUtil.getOrderedListNumber(" 1. Test"));
+        assertFalse(MarkdownUtil.getOrderedListNumber("").isPresent());
+        assertFalse(MarkdownUtil.getOrderedListNumber("1.").isPresent());
+        assertFalse(MarkdownUtil.getOrderedListNumber("1. ").isPresent());
+        assertFalse(MarkdownUtil.getOrderedListNumber("11. ").isPresent());
+        assertFalse(MarkdownUtil.getOrderedListNumber("-1. Test").isPresent());
+        assertFalse(MarkdownUtil.getOrderedListNumber(" 1. Test").isPresent());
     }
 
     @Test

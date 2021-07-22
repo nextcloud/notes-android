@@ -255,19 +255,19 @@ public class MarkdownUtil {
     /**
      * @return the number of the ordered list item if the line is an ordered list, otherwise -1.
      */
-    public static int getOrderedListNumber(@NonNull String line) {
+    public static Optional<Integer> getOrderedListNumber(@NonNull String line) {
         final Matcher matcher = PATTERN_ORDERED_LIST_ITEM.matcher(line);
         if (matcher.find()) {
             final String groupNumber = matcher.group(1);
             if (groupNumber != null) {
                 try {
-                    return Integer.parseInt(groupNumber);
+                    return Optional.of(Integer.parseInt(groupNumber));
                 } catch (NumberFormatException e) {
-                    return -1;
+                    return Optional.empty();
                 }
             }
         }
-        return -1;
+        return Optional.empty();
     }
 
     /**

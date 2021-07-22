@@ -5,6 +5,8 @@ import android.text.TextWatcher;
 
 import androidx.annotation.NonNull;
 
+import java.util.Optional;
+
 import it.niedermann.android.markdown.markwon.MarkwonMarkdownEditor;
 import it.niedermann.android.markdown.model.EListType;
 
@@ -35,7 +37,7 @@ public class AutoContinuationTextWatcher extends InterceptorTextWatcher {
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
         if (count > 0) {
-            CharSequence inserted = getInsertedString(s, start, before, count);
+            final CharSequence inserted = getInsertedString(s, start, before, count);
             if (inserted.length() > 0 && inserted.charAt(inserted.length() - 1) == '\n') {
                 handleNewlineInserted(s, start, count);
             }
@@ -63,7 +65,7 @@ public class AutoContinuationTextWatcher extends InterceptorTextWatcher {
     private CharSequence getInsertedString(CharSequence newText, int start, int before, int count) {
         if (newText != null && newText.length() > (oldText == null ? 0 : oldText.length())) {
             // character added
-            int position = start + before;
+            final int position = start + before;
             return newText.subSequence(position, position + count - before);
         }
         return "";
@@ -99,9 +101,10 @@ public class AutoContinuationTextWatcher extends InterceptorTextWatcher {
                     return;
                 }
             }
-            final int orderedListNumber = getOrderedListNumber(line);
-            if (orderedListNumber >= 0) {
-                customText = (orderedListNumber + 1) + ". ";
+            
+            final Optional<Integer> orderedListNumber = getOrderedListNumber(line);
+            if (orderedListNumber.isPresent()) {
+                customText = (orderedListNumber.get() + 1) + ". ";
                 isInsert = true;
                 sequenceStart = start + count;
             }
