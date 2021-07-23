@@ -21,3 +21,9 @@ allprojects {
         maven { url "https://jitpack.io" }
     }
 }
+
+subprojects {
+    tasks.withType(Test) {
+        maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+    }
+}
