@@ -6,6 +6,8 @@ import android.text.TextWatcher;
 import androidx.annotation.NonNull;
 
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import it.niedermann.android.markdown.markwon.MarkwonMarkdownEditor;
 import it.niedermann.android.markdown.model.EListType;
@@ -28,6 +30,7 @@ public class AutoContinuationTextWatcher extends InterceptorTextWatcher {
     private CharSequence oldText = null;
     private boolean isInsert = true;
     private int sequenceStart = 0;
+    private Pattern REGEX_WHITESPACES = Pattern.compile("^\\s*");
 
     public AutoContinuationTextWatcher(@NonNull TextWatcher originalWatcher, @NonNull MarkwonMarkdownEditor editText) {
         super(originalWatcher);
@@ -91,10 +94,10 @@ public class AutoContinuationTextWatcher extends InterceptorTextWatcher {
             isInsert = false;
             sequenceStart = startOfLine;
         } else {
-            // TODO use Java 11 String::repeat
             final StringBuilder builder = new StringBuilder();
-            for (int i = 0; i < line.indexOf(line.trim()); i++) {
-                builder.append(" ");
+            final Matcher matcher = REGEX_WHITESPACES.matcher(line);
+            if (matcher.find()) {
+                builder.append(matcher.group());
             }
             final String trimmedLine = line.trim();
             for (EListType listType : EListType.values()) {
