@@ -24,6 +24,6 @@ allprojects {
 
 subprojects {
     tasks.withType(Test) {
-        maxParallelForks = Runtime.runtime.availableProcessors()
+        maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
     }
 }
