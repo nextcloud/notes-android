@@ -117,7 +117,7 @@ public class AutoContinuationTextWatcherTest extends TestCase {
 
     @Test
     public void shouldNotContinueIfNoList() {
-        this.editText.setText("Foo");
+        this.editText.setText("Fo o");
         pressEnter(3);
         assertText("Foo\n", 4);
 
