@@ -85,9 +85,9 @@ public class AutoContinuationTextWatcher extends InterceptorTextWatcher {
         final int startOfLine = getStartOfLine(s, start);
         final String line = s.subSequence(startOfLine, getEndOfLine(s, start)).toString();
 
-        final String emptyListString = getListItemIfIsEmpty(line);
-        if (emptyListString != null) {
-            customText = emptyListString;
+        final Optional<String> emptyListString = getListItemIfIsEmpty(line);
+        if (emptyListString.isPresent()) {
+            customText = emptyListString.get();
             isInsert = false;
             sequenceStart = startOfLine;
         } else {
@@ -96,9 +96,10 @@ public class AutoContinuationTextWatcher extends InterceptorTextWatcher {
             for (int i = 0; i < line.indexOf(line.trim()); i++) {
                 builder.append(" ");
             }
+            final String trimmedLine = line.trim();
             for (EListType listType : EListType.values()) {
-                final boolean isCheckboxList = lineStartsWithCheckbox(line, listType);
-                final boolean isPlainList = !isCheckboxList && line.startsWith(listType.listSymbolWithTrailingSpace);
+                final boolean isCheckboxList = lineStartsWithCheckbox(trimmedLine, listType);
+                final boolean isPlainList = !isCheckboxList && trimmedLine.startsWith(listType.listSymbolWithTrailingSpace);
                 if (isPlainList || isCheckboxList) {
                     builder.append(isPlainList ? listType.listSymbolWithTrailingSpace : listType.checkboxUncheckedWithTrailingSpace);
                     customText = builder;

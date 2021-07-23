@@ -72,6 +72,24 @@ public class LowerIndentionTextWatcherTest extends TestCase {
     }
 
     @Test
+    public void shouldNotLowerIndentionIfThereIsAnyContentAfterTheList() {
+        this.editText.setText("  -  ");
+        pressBackspace(4);
+        assertText("  - ", 3);
+
+        this.editText.setText("  -  ");
+        pressBackspace(5);
+        assertText("  - ", 4);
+    }
+
+    @Test
+    public void shouldNotLowerIndentionIfBackspaceWasPressedInTheNextLine() {
+        this.editText.setText("  - \nFoo");
+        pressBackspace(5);
+        assertText("  - Foo", 4);
+    }
+
+    @Test
     public void shouldDeleteLastCharacterWhenPressingBackspace() {
         this.editText.setText("");
         pressBackspace(0);

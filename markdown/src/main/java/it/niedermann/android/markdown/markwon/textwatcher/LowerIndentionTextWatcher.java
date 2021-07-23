@@ -12,7 +12,7 @@ import static it.niedermann.android.markdown.MarkdownUtil.getEndOfLine;
 import static it.niedermann.android.markdown.MarkdownUtil.getStartOfLine;
 
 /**
- * Automatically continues lists and checkbox lists when pressing enter
+ * Automatically lowers indention when pressing <kbd>Backspace</kbd> on lists and check lists
  */
 public class LowerIndentionTextWatcher extends InterceptorTextWatcher {
 
@@ -41,7 +41,7 @@ public class LowerIndentionTextWatcher extends InterceptorTextWatcher {
     @Override
     public void afterTextChanged(Editable editable) {
         if (backspacePressed) {
-            if(!handleBackspace(editable, cursor)) {
+            if (!handleBackspace(editable, cursor)) {
                 originalWatcher.afterTextChanged(editable);
             }
             backspacePressed = false;
@@ -54,11 +54,20 @@ public class LowerIndentionTextWatcher extends InterceptorTextWatcher {
     private boolean handleBackspace(@NonNull Editable editable, int cursor) {
         final int lineStart = getStartOfLine(editable, cursor);
         final int lineEnd = getEndOfLine(editable, cursor);
+
+        // The cursor must be at the end of the line to automatically continue
         if (cursor != lineEnd) {
             return false;
         }
+
         final String line = editable.subSequence(lineStart, lineEnd).toString();
         final String trimmedLine = line.trim();
+
+        // There must be no content in this list item to automatically continue
+        if ((line.indexOf(trimmedLine) + trimmedLine.length()) < line.length()) {
+            return false;
+        }
+
         for (EListType listType : EListType.values()) {
             if (listType.listSymbol.equals(trimmedLine)) {
                 if (trimmedLine.length() == EListType.DASH.listSymbol.length()) {
