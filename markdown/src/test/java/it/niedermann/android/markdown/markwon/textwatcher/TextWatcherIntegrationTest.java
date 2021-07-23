@@ -1,10 +1,21 @@
 package it.niedermann.android.markdown.markwon.textwatcher;
 
-import androidx.annotation.NonNull;
+import android.view.KeyEvent;
+import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
+import androidx.test.core.app.ApplicationProvider;
+
+import junit.framework.TestCase;
+
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+
+import it.niedermann.android.markdown.markwon.MarkwonMarkdownEditor;
 
 import static android.view.KeyEvent.KEYCODE_1;
 import static android.view.KeyEvent.KEYCODE_A;
@@ -28,7 +39,17 @@ import static android.view.KeyEvent.KEYCODE_X;
 import static android.view.KeyEvent.KEYCODE_Z;
 
 @RunWith(RobolectricTestRunner.class)
-public class TextWatcherIntegrationTest extends AbstractTextWatcherTest {
+public class TextWatcherIntegrationTest extends TestCase {
+
+    @Rule
+    public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
+
+    private EditText editText;
+
+    @Before
+    public void reset() {
+        this.editText = new MarkwonMarkdownEditor(ApplicationProvider.getApplicationContext());
+    }
 
     @Test
     public void shouldSuccessfullyHandleMultipleTextEdits() {
@@ -107,5 +128,32 @@ public class TextWatcherIntegrationTest extends AbstractTextWatcherTest {
 
     private void assertEquals(@NonNull CharSequence expected) {
         assertEquals(expected.toString(), editText.getText().toString());
+    }
+
+    private void pressBackspace(int atPosition) {
+        this.editText.setSelection(atPosition);
+        this.editText.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DEL));
+    }
+
+    private void pressEnter(int atPosition) {
+        this.editText.setSelection(atPosition);
+        this.editText.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
+    }
+
+    private void sendKey(int... keyCodes) {
+        int release = -1;
+        for (int k : keyCodes) {
+            if (release != -1) {
+                this.editText.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, release));
+                release = -1;
+            }
+            switch (k) {
+                case KeyEvent.KEYCODE_CTRL_LEFT:
+                case KeyEvent.KEYCODE_CTRL_RIGHT: {
+                    release = k;
+                }
+            }
+            this.editText.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, k));
+        }
     }
 }

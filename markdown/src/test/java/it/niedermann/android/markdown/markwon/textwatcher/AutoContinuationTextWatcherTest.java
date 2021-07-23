@@ -1,13 +1,34 @@
 package it.niedermann.android.markdown.markwon.textwatcher;
 
+import android.view.KeyEvent;
+import android.widget.EditText;
+
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
+import androidx.test.core.app.ApplicationProvider;
+
+import junit.framework.TestCase;
+
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
+import it.niedermann.android.markdown.markwon.MarkwonMarkdownEditor;
 import it.niedermann.android.markdown.model.EListType;
 
 @RunWith(RobolectricTestRunner.class)
-public class AutoContinuationTextWatcherTest extends AbstractTextWatcherTest {
+public class AutoContinuationTextWatcherTest extends TestCase {
+
+    @Rule
+    public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
+
+    private EditText editText;
+
+    @Before
+    public void reset() {
+        this.editText = new MarkwonMarkdownEditor(ApplicationProvider.getApplicationContext());
+    }
 
     @Test
     public void shouldContinueSimpleLists() {
@@ -110,5 +131,16 @@ public class AutoContinuationTextWatcherTest extends AbstractTextWatcherTest {
         this.editText.setText("");
         pressEnter(0);
         assertText("\n", 1);
+    }
+
+    private void assertText(String expected, int cursorPosition) {
+        assertEquals(expected, this.editText.getText().toString());
+        assertEquals(cursorPosition, this.editText.getSelectionStart());
+        assertEquals(cursorPosition, this.editText.getSelectionEnd());
+    }
+
+    private void pressEnter(int atPosition) {
+        this.editText.setSelection(atPosition);
+        this.editText.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
     }
 }
