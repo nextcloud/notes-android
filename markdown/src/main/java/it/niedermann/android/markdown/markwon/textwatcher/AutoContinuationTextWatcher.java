@@ -30,7 +30,7 @@ public class AutoContinuationTextWatcher extends InterceptorTextWatcher {
     private CharSequence oldText = null;
     private boolean isInsert = true;
     private int sequenceStart = 0;
-    private Pattern REGEX_WHITESPACES = Pattern.compile("^\\s*");
+    private static final Pattern REGEX_WHITESPACES = Pattern.compile("^\\s*");
 
     public AutoContinuationTextWatcher(@NonNull TextWatcher originalWatcher, @NonNull MarkwonMarkdownEditor editText) {
         super(originalWatcher);
