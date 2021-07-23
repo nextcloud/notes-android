@@ -184,19 +184,26 @@ public class MarkdownUtil {
         return s.length();
     }
 
-    public static String getListItemIfIsEmpty(@NonNull String line) {
+    public static Optional<String> getListItemIfIsEmpty(@NonNull String line) {
+        final String trimmedLine = line.trim();
+        // TODO use Java 11 String::repeat
+        final StringBuilder builder = new StringBuilder();
+        final int indention = line.indexOf(trimmedLine);
+        for (int i = 0; i < indention; i++) {
+            builder.append(" ");
+        }
         for (EListType listType : EListType.values()) {
-            if (line.equals(listType.checkboxUncheckedWithTrailingSpace)) {
-                return listType.checkboxUncheckedWithTrailingSpace;
-            } else if (line.equals(listType.listSymbolWithTrailingSpace)) {
-                return listType.listSymbolWithTrailingSpace;
+            if (trimmedLine.equals(listType.checkboxUnchecked)) {
+                return Optional.of(builder.append(listType.checkboxUncheckedWithTrailingSpace).toString());
+            } else if (trimmedLine.equals(listType.listSymbol)) {
+                return Optional.of(builder.append(listType.listSymbolWithTrailingSpace).toString());
             }
         }
-        final Matcher matcher = PATTERN_ORDERED_LIST_ITEM_EMPTY.matcher(line);
+        final Matcher matcher = PATTERN_ORDERED_LIST_ITEM_EMPTY.matcher(line.substring(indention));
         if (matcher.find()) {
-            return matcher.group();
+            return Optional.of(builder.append(matcher.group()).toString());
         }
-        return null;
+        return Optional.empty();
     }
 
     public static CharSequence setCheckboxStatus(@NonNull String markdownString, int targetCheckboxIndex, boolean newCheckedState) {

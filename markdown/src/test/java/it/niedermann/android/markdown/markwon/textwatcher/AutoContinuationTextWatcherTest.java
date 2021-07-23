@@ -101,6 +101,14 @@ public class AutoContinuationTextWatcherTest extends TestCase {
         assertText("- Foo\n\n", 7);
         pressEnter(7);
         assertText("- Foo\n\n\n", 8);
+
+        this.editText.setText("- Foo\n  - Bar");
+        pressEnter(13);
+        assertText("- Foo\n  - Bar\n  - ", 18);
+        pressEnter(18);
+        assertText("- Foo\n  - Bar\n\n", 15);
+        pressEnter(15);
+        assertText("- Foo\n  - Bar\n\n\n", 16);
     }
 
     @Test

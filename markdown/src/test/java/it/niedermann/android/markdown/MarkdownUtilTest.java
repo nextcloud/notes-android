@@ -586,18 +586,37 @@ public class MarkdownUtilTest extends TestCase {
         }
     }
 
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
     public void testGetListItemIfIsEmpty() {
-        assertEquals("- ", MarkdownUtil.getListItemIfIsEmpty("- "));
-        assertEquals("+ ", MarkdownUtil.getListItemIfIsEmpty("+ "));
-        assertEquals("* ", MarkdownUtil.getListItemIfIsEmpty("* "));
-        assertEquals("1. ", MarkdownUtil.getListItemIfIsEmpty("1. "));
+        assertEquals("- ", MarkdownUtil.getListItemIfIsEmpty("- ").get());
+        assertEquals("+ ", MarkdownUtil.getListItemIfIsEmpty("+ ").get());
+        assertEquals("* ", MarkdownUtil.getListItemIfIsEmpty("* ").get());
+        assertEquals("1. ", MarkdownUtil.getListItemIfIsEmpty("1. ").get());
+        assertEquals(" - ", MarkdownUtil.getListItemIfIsEmpty(" - ").get());
+        assertEquals(" + ", MarkdownUtil.getListItemIfIsEmpty(" + ").get());
+        assertEquals(" * ", MarkdownUtil.getListItemIfIsEmpty(" * ").get());
+        assertEquals(" 1. ", MarkdownUtil.getListItemIfIsEmpty(" 1. ").get());
+        assertEquals("  - ", MarkdownUtil.getListItemIfIsEmpty("  - ").get());
+        assertEquals("  + ", MarkdownUtil.getListItemIfIsEmpty("  + ").get());
+        assertEquals("  * ", MarkdownUtil.getListItemIfIsEmpty("  * ").get());
+        assertEquals("  1. ", MarkdownUtil.getListItemIfIsEmpty("  1. ").get());
 
-        assertNull(MarkdownUtil.getListItemIfIsEmpty("- Test"));
-        assertNull(MarkdownUtil.getListItemIfIsEmpty("+ Test"));
-        assertNull(MarkdownUtil.getListItemIfIsEmpty("* Test"));
-        assertNull(MarkdownUtil.getListItemIfIsEmpty("1. s"));
-        assertNull(MarkdownUtil.getListItemIfIsEmpty("1.  "));
+        assertFalse(MarkdownUtil.getListItemIfIsEmpty("- Test").isPresent());
+        assertFalse(MarkdownUtil.getListItemIfIsEmpty("+ Test").isPresent());
+        assertFalse(MarkdownUtil.getListItemIfIsEmpty("* Test").isPresent());
+        assertFalse(MarkdownUtil.getListItemIfIsEmpty("1. s").isPresent());
+        assertFalse(MarkdownUtil.getListItemIfIsEmpty("1.  ").isPresent());
+        assertFalse(MarkdownUtil.getListItemIfIsEmpty(" - Test").isPresent());
+        assertFalse(MarkdownUtil.getListItemIfIsEmpty(" + Test").isPresent());
+        assertFalse(MarkdownUtil.getListItemIfIsEmpty(" * Test").isPresent());
+        assertFalse(MarkdownUtil.getListItemIfIsEmpty(" 1. s").isPresent());
+        assertFalse(MarkdownUtil.getListItemIfIsEmpty(" 1.  ").isPresent());
+        assertFalse(MarkdownUtil.getListItemIfIsEmpty("  - Test").isPresent());
+        assertFalse(MarkdownUtil.getListItemIfIsEmpty("  + Test").isPresent());
+        assertFalse(MarkdownUtil.getListItemIfIsEmpty("  * Test").isPresent());
+        assertFalse(MarkdownUtil.getListItemIfIsEmpty("  1. s").isPresent());
+        assertFalse(MarkdownUtil.getListItemIfIsEmpty("  1.  ").isPresent());
     }
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
