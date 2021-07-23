@@ -109,7 +109,7 @@ public class AutoContinuationTextWatcher extends InterceptorTextWatcher {
                 }
             }
 
-            final Optional<Integer> orderedListNumber = getOrderedListNumber(line);
+            final Optional<Integer> orderedListNumber = getOrderedListNumber(trimmedLine);
             if (orderedListNumber.isPresent()) {
                 customText = builder.append(orderedListNumber.get() + 1).append(". ");
                 isInsert = true;

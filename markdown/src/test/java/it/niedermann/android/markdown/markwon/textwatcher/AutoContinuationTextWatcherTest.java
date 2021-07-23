@@ -90,10 +90,14 @@ public class AutoContinuationTextWatcherTest extends TestCase {
         this.editText.setText("- [ ] Parent\n  - [x] Child\n    - [ ] Third");
         pressEnter(42);
         assertText("- [ ] Parent\n  - [x] Child\n    - [ ] Third\n    - [ ] ", 53);
+
+        this.editText.setText("1. Parent\n  1. Child");
+        pressEnter(20);
+        assertText("1. Parent\n  1. Child\n  2. ", 26);
     }
 
     @Test
-    public void shouldRemoveAutoContinuedListItemWhenPressingEnterMultipleTimes() {
+    public void shouldRemoveContinuedListItemWhenPressingEnterMultipleTimes() {
         this.editText.setText("- Foo");
         pressEnter(5);
         assertText("- Foo\n- ", 8);
