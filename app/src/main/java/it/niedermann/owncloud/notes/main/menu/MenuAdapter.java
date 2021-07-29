@@ -84,9 +84,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
     }
 
     private static Intent generateTrashbinAppIntent(@NonNull Context context, @NonNull Account account, boolean prod) throws PackageManager.NameNotFoundException {
-        final var packageManager = context.getPackageManager();
+        final PackageManager packageManager = context.getPackageManager();
         final String packageName = prod ? Constants.PACKAGE_NAME_PROD : Constants.PACKAGE_NAME_DEV;
-        final var intent = new Intent();
+        final Intent intent = new Intent();
         intent.setClassName(packageName, "com.owncloud.android.ui.trashbin.TrashbinActivity");
         if (packageManager.resolveActivity(intent, 0) != null) {
             return intent

@@ -34,7 +34,7 @@ public abstract class BrandedActivity extends AppCompatActivity implements Brand
     protected void onStart() {
         super.onStart();
 
-        final var typedValue = new TypedValue();
+        final TypedValue typedValue = new TypedValue();
         getTheme().resolveAttribute(R.attr.colorAccent, typedValue, true);
         colorAccent = typedValue.data;
 
@@ -53,13 +53,13 @@ public abstract class BrandedActivity extends AppCompatActivity implements Brand
         // FIXME Workaround for https://github.com/stefan-niedermann/nextcloud-notes/issues/889
         appBarLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.primary));
 
-        final var overflowDrawable = toolbar.getOverflowIcon();
+        final Drawable overflowDrawable = toolbar.getOverflowIcon();
         if (overflowDrawable != null) {
             overflowDrawable.setColorFilter(colorAccent, PorterDuff.Mode.SRC_ATOP);
             toolbar.setOverflowIcon(overflowDrawable);
         }
 
-        final var navigationDrawable = toolbar.getNavigationIcon();
+        final Drawable navigationDrawable = toolbar.getNavigationIcon();
         if (navigationDrawable != null) {
             navigationDrawable.setColorFilter(colorAccent, PorterDuff.Mode.SRC_ATOP);
             toolbar.setNavigationIcon(navigationDrawable);

@@ -61,7 +61,7 @@ public class CapabilitiesClientTest {
         when(responseMock.getHeaders()).thenReturn(Map.of("ETag", "1234"));
         when(ocsAPI.getCapabilities(any())).thenReturn(Observable.just(responseMock));
 
-        final var capabilities = CapabilitiesClient.getCapabilities(ApplicationProvider.getApplicationContext(), ssoAccount, null, apiProvider);
+        final Capabilities capabilities = CapabilitiesClient.getCapabilities(ApplicationProvider.getApplicationContext(), ssoAccount, null, apiProvider);
 
         assertEquals("[1.0]", capabilities.getApiVersion());
         assertEquals("ETag should be read correctly from response but wasn't.", "1234", capabilities.getETag());
@@ -76,12 +76,12 @@ public class CapabilitiesClientTest {
     @SuppressWarnings("unchecked")
     @Test
     public void testGetDisplayName() throws IOException {
-        final var mockOcs = new OcsResponse<OcsUser>();
+        final OcsResponse<OcsUser> mockOcs = new OcsResponse<>();
         mockOcs.ocs = new OcsResponse.OcsWrapper<>();
         mockOcs.ocs.data = new OcsUser();
         mockOcs.ocs.data.displayName = "Peter";
-        final var responseMock = Response.success(mockOcs);
-        final var callMock = mock(Call.class);
+        final Response<OcsResponse<OcsUser>> responseMock = Response.success(mockOcs);
+        final Call<OcsResponse<OcsUser>> callMock = mock(Call.class);
 
         when(ocsAPI.getUser(any())).thenReturn(callMock);
 

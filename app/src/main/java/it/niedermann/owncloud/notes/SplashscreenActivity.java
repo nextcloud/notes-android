@@ -19,7 +19,7 @@ public class SplashscreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));
 
-        final var intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }

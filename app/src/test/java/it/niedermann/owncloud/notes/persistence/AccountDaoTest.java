@@ -43,7 +43,7 @@ public class AccountDaoTest {
     @Test
     public void insertAccount() {
         final long createdId = db.getAccountDao().insert(new Account("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", null, new Capabilities()));
-        final var createdAccount = db.getAccountDao().getAccountById(createdId);
+        final Account createdAccount = db.getAccountDao().getAccountById(createdId);
         assertEquals("https://äöüß.example.com", createdAccount.getUrl());
         assertEquals("彼得", createdAccount.getUserName());
         assertEquals("彼得@äöüß.example.com", createdAccount.getAccountName());
@@ -51,7 +51,7 @@ public class AccountDaoTest {
 
     @Test
     public void updateApiVersionFromNull() {
-        final var account = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", null, new Capabilities())));
+        final Account account = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", null, new Capabilities())));
         assertNull(account.getApiVersion());
 
         assertEquals(0, db.getAccountDao().updateApiVersion(account.getId(), null));
@@ -61,9 +61,9 @@ public class AccountDaoTest {
 
     @Test
     public void updateApiVersionFromExisting() {
-        final var capabilities = new Capabilities();
+        final Capabilities capabilities = new Capabilities();
         capabilities.setApiVersion("[0.2]");
-        final var account = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", null, capabilities)));
+        final Account account = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", null, capabilities)));
         assertEquals("[0.2]", account.getApiVersion());
 
         assertEquals(0, db.getAccountDao().updateApiVersion(account.getId(), "[0.2]"));
@@ -73,7 +73,7 @@ public class AccountDaoTest {
 
     @Test
     public void updateDisplayName() {
-        final var account = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", null, new Capabilities())));
+        final Account account = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", null, new Capabilities())));
         assertEquals("Should read userName in favor of displayName if displayName is NULL", "彼得", account.getDisplayName());
 
         db.getAccountDao().updateDisplayName(account.getId(), "");

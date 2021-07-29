@@ -22,8 +22,8 @@ public class SlotterUtil {
 
     @NonNull
     public static List<Item> fillListByCategory(@NonNull List<Note> noteList, @Nullable String currentCategory) {
-        final var itemList = new ArrayList<Item>();
-        for (final var note : noteList) {
+        List<Item> itemList = new ArrayList<>();
+        for (Note note : noteList) {
             if (currentCategory != null && !currentCategory.equals(note.getCategory())) {
                 itemList.add(new SectionItem(NoteUtil.extendCategory(note.getCategory())));
             }
@@ -36,11 +36,11 @@ public class SlotterUtil {
 
     @NonNull
     public static List<Item> fillListByTime(@NonNull Context context, @NonNull List<Note> noteList) {
-        final var itemList = new ArrayList<Item>();
-        final var timeslotter = new Timeslotter(context);
+        List<Item> itemList = new ArrayList<>();
+        Timeslotter timeslotter = new Timeslotter(context);
         String lastTimeslot = null;
         for (int i = 0; i < noteList.size(); i++) {
-            final var currentNote = noteList.get(i);
+            Note currentNote = noteList.get(i);
             String timeslot = timeslotter.getTimeslot(currentNote);
             if (i > 0 && !timeslot.equals(lastTimeslot)) {
                 itemList.add(new SectionItem(timeslot));
@@ -54,10 +54,10 @@ public class SlotterUtil {
 
     @NonNull
     public static List<Item> fillListByInitials(@NonNull Context context, @NonNull List<Note> noteList) {
-        final var itemList = new ArrayList<Item>();
+        List<Item> itemList = new ArrayList<>();
         String lastInitials = null;
         for (int i = 0; i < noteList.size(); i++) {
-            final var currentNote = noteList.get(i);
+            Note currentNote = noteList.get(i);
             String initials = currentNote.getTitle().substring(0, 1).toUpperCase();
             if (!initials.matches("[A-Z\\u00C0-\\u00DF]")) {
                 initials = initials.matches("[\\u0250-\\uFFFF]") ? context.getString(R.string.simple_other) : "#";

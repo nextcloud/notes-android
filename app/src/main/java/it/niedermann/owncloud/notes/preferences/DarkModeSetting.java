@@ -1,7 +1,6 @@
 package it.niedermann.owncloud.notes.preferences;
 
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.app.AppCompatDelegate.NightMode;
 
 import java.util.NoSuchElementException;
 
@@ -32,14 +31,12 @@ public enum DarkModeSetting {
      */
     SYSTEM_DEFAULT(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
 
-    @NightMode
     private final int modeId;
 
     DarkModeSetting(int modeId) {
         this.modeId = modeId;
     }
 
-    @NightMode
     public int getModeId() {
         return modeId;
     }
@@ -58,7 +55,7 @@ public enum DarkModeSetting {
      * @return An instance of {@link DarkModeSetting}
      */
     public static DarkModeSetting fromModeID(int id) {
-        for (final var value : DarkModeSetting.values()) {
+        for (DarkModeSetting value : DarkModeSetting.values()) {
             if (value.modeId == id) {
                 return value;
             }

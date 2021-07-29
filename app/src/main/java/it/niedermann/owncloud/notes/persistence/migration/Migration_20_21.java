@@ -90,8 +90,8 @@ public final class Migration_20_21 extends Migration {
     }
 
     private static void migrateAccounts(@NonNull SupportSQLiteDatabase db) {
-        final var cursor = db.query("SELECT * FROM ACCOUNTS", null);
-        final var values = new ContentValues(10);
+        final Cursor cursor = db.query("SELECT * FROM ACCOUNTS", null);
+        final ContentValues values = new ContentValues(10);
 
         final int COLUMN_POSITION_ID = cursor.getColumnIndex("ID");
         final int COLUMN_POSITION_URL = cursor.getColumnIndex("URL");
@@ -131,8 +131,8 @@ public final class Migration_20_21 extends Migration {
     }
 
     private static void migrateCategories(@NonNull SupportSQLiteDatabase db) {
-        final var cursor = db.query("SELECT * FROM CATEGORIES", null);
-        final var values = new ContentValues(3);
+        final Cursor cursor = db.query("SELECT * FROM CATEGORIES", null);
+        final ContentValues values = new ContentValues(3);
 
         final int COLUMN_POSITION_ACCOUNT_ID = cursor.getColumnIndex("CATEGORY_ACCOUNT_ID");
         final int COLUMN_POSITION_TITLE = cursor.getColumnIndex("CATEGORY_TITLE");
@@ -148,8 +148,8 @@ public final class Migration_20_21 extends Migration {
     }
 
     private static void migrateNotes(@NonNull SupportSQLiteDatabase db) {
-        final var cursor = db.query("SELECT NOTES.*, CATEGORIES.category_title as `CAT_TITLE` FROM NOTES LEFT JOIN CATEGORIES ON NOTES.category = CATEGORIES.category_id", null);
-        final var values = new ContentValues(12);
+        final Cursor cursor = db.query("SELECT NOTES.*, CATEGORIES.category_title as `CAT_TITLE` FROM NOTES LEFT JOIN CATEGORIES ON NOTES.category = CATEGORIES.category_id", null);
+        final ContentValues values = new ContentValues(12);
 
         final int COLUMN_POSITION_ID = cursor.getColumnIndex("ID");
         final int COLUMN_POSITION_REMOTEID = cursor.getColumnIndex("REMOTEID");
@@ -183,8 +183,8 @@ public final class Migration_20_21 extends Migration {
     }
 
     private static void migrateNotesListWidgets(@NonNull SupportSQLiteDatabase db) {
-        final var cursor = db.query("SELECT WIDGET_NOTE_LISTS.*, CATEGORIES.category_title as `CATEGORY` FROM WIDGET_NOTE_LISTS LEFT JOIN CATEGORIES ON WIDGET_NOTE_LISTS.CATEGORY_ID = CATEGORIES.category_id", null);
-        final var values = new ContentValues(5);
+        final Cursor cursor = db.query("SELECT WIDGET_NOTE_LISTS.*, CATEGORIES.category_title as `CATEGORY` FROM WIDGET_NOTE_LISTS LEFT JOIN CATEGORIES ON WIDGET_NOTE_LISTS.CATEGORY_ID = CATEGORIES.category_id", null);
+        final ContentValues values = new ContentValues(5);
 
         final int COLUMN_POSITION_ID = cursor.getColumnIndex("ID");
         final int COLUMN_POSITION_ACCOUNT_ID = cursor.getColumnIndex("ACCOUNT_ID");
@@ -204,8 +204,8 @@ public final class Migration_20_21 extends Migration {
     }
 
     private static void migrateSingleNotesWidgets(@NonNull SupportSQLiteDatabase db) {
-        final var cursor = db.query("SELECT * FROM WIDGET_SINGLE_NOTES", null);
-        final var values = new ContentValues(4);
+        final Cursor cursor = db.query("SELECT * FROM WIDGET_SINGLE_NOTES", null);
+        final ContentValues values = new ContentValues(4);
 
         final int COLUMN_POSITION_ID = cursor.getColumnIndex("ID");
         final int COLUMN_POSITION_ACCOUNT_ID = cursor.getColumnIndex("ACCOUNT_ID");

@@ -48,8 +48,8 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsViewHolder> {
     @NonNull
     @Override
     public TipsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        final var view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tip, parent, false);
-        return new TipsViewHolder(view);
+        final View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tip, parent, false);
+        return new TipsViewHolder(v);
     }
 
     @Override
@@ -63,17 +63,17 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsViewHolder> {
     }
 
     public void setThrowables(@NonNull List<Throwable> throwables) {
-        for (final var throwable : throwables) {
-            if (throwable instanceof TokenMismatchException) {
+        for (Throwable t : throwables) {
+            if (t instanceof TokenMismatchException) {
                 add(R.string.error_dialog_tip_token_mismatch_retry);
                 add(R.string.error_dialog_tip_token_mismatch_clear_storage);
-                final var intent = new Intent(ACTION_APPLICATION_DETAILS_SETTINGS)
+                Intent intent = new Intent(ACTION_APPLICATION_DETAILS_SETTINGS)
                         .setData(Uri.parse("package:" + BuildConfig.APPLICATION_ID))
                         .putExtra(INTENT_EXTRA_BUTTON_TEXT, R.string.error_action_open_deck_info);
                 add(R.string.error_dialog_tip_clear_storage, intent);
-            } else if (throwable instanceof NextcloudFilesAppNotSupportedException) {
+            } else if (t instanceof NextcloudFilesAppNotSupportedException) {
                 add(R.string.error_dialog_tip_files_outdated);
-            } else if (throwable instanceof NextcloudApiNotRespondingException) {
+            } else if (t instanceof NextcloudApiNotRespondingException) {
                 if (VERSION.SDK_INT >= VERSION_CODES.M) {
                     add(R.string.error_dialog_tip_disable_battery_optimizations, new Intent().setAction(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS).putExtra(INTENT_EXTRA_BUTTON_TEXT, R.string.error_action_open_battery_settings));
                 } else {
@@ -81,17 +81,17 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsViewHolder> {
                 }
                 add(R.string.error_dialog_tip_files_force_stop);
                 add(R.string.error_dialog_tip_files_delete_storage);
-                final var intent = new Intent(ACTION_APPLICATION_DETAILS_SETTINGS)
+                Intent intent = new Intent(ACTION_APPLICATION_DETAILS_SETTINGS)
                         .setData(Uri.parse("package:" + BuildConfig.APPLICATION_ID))
                         .putExtra(INTENT_EXTRA_BUTTON_TEXT, R.string.error_action_open_deck_info);
                 add(R.string.error_dialog_tip_clear_storage, intent);
-            } else if (throwable instanceof SocketTimeoutException || throwable instanceof ConnectException) {
+            } else if (t instanceof SocketTimeoutException || t instanceof ConnectException) {
                 add(R.string.error_dialog_timeout_instance);
                 add(R.string.error_dialog_timeout_toggle, new Intent(Settings.ACTION_WIFI_SETTINGS).putExtra(INTENT_EXTRA_BUTTON_TEXT, R.string.error_action_open_network));
-            } else if (throwable instanceof JSONException || throwable instanceof NullPointerException) {
+            } else if (t instanceof JSONException || t instanceof NullPointerException) {
                 add(R.string.error_dialog_check_server);
-            } else if (throwable instanceof NextcloudHttpRequestFailedException) {
-                final int statusCode = ((NextcloudHttpRequestFailedException) throwable).getStatusCode();
+            } else if (t instanceof NextcloudHttpRequestFailedException) {
+                int statusCode = ((NextcloudHttpRequestFailedException) t).getStatusCode();
                 switch (statusCode) {
                     case 302:
                         add(R.string.error_dialog_server_app_enabled);

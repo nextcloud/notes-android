@@ -20,11 +20,11 @@ import static org.junit.Assert.assertTrue;
 public class NotesColorUtilTest {
     @Test
     public void testContrastRatioIsSufficient() {
-        final var sufficientContrastColorPairs = new ArrayList<Pair<Integer, Integer>>();
+        final List<Pair<Integer, Integer>> sufficientContrastColorPairs = new ArrayList<>();
         sufficientContrastColorPairs.add(new Pair<>(Color.BLACK, Color.WHITE));
         sufficientContrastColorPairs.add(new Pair<>(Color.WHITE, Color.parseColor("#0082C9")));
 
-        for (final var colorPair : sufficientContrastColorPairs) {
+        for (Pair<Integer, Integer> colorPair : sufficientContrastColorPairs) {
             assert colorPair.first != null;
             assert colorPair.second != null;
             assertTrue(
@@ -33,11 +33,11 @@ public class NotesColorUtilTest {
             );
         }
 
-        final var insufficientContrastColorPairs = new ArrayList<Pair<Integer, Integer>>();
+        final List<Pair<Integer, Integer>> insufficientContrastColorPairs = new ArrayList<>();
         insufficientContrastColorPairs.add(new Pair<>(Color.WHITE, Color.WHITE));
         insufficientContrastColorPairs.add(new Pair<>(Color.BLACK, Color.BLACK));
 
-        for (final var colorPair : insufficientContrastColorPairs) {
+        for (Pair<Integer, Integer> colorPair : insufficientContrastColorPairs) {
             assert colorPair.first != null;
             assert colorPair.second != null;
             assertFalse(

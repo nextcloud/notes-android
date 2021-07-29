@@ -94,11 +94,11 @@ public class MarkwonMarkdownViewer extends AppCompatTextView implements Markdown
                 .usePlugin(SoftBreakAddsNewLinePlugin.create())
                 .usePlugin(SyntaxHighlightPlugin.create(prism4j, prism4jTheme))
                 .usePlugin(new ToggleableTaskListPlugin((toggledCheckboxPosition, newCheckedState) -> {
-                    final var oldUnrenderedText = unrenderedText$.getValue();
+                    final CharSequence oldUnrenderedText = unrenderedText$.getValue();
                     if (oldUnrenderedText == null) {
                         throw new IllegalStateException("Checkbox #" + toggledCheckboxPosition + ", but unrenderedText$ value is null.");
                     }
-                    final var newUnrenderedText = MarkdownUtil.setCheckboxStatus(oldUnrenderedText.toString(), toggledCheckboxPosition, newCheckedState);
+                    final CharSequence newUnrenderedText = MarkdownUtil.setCheckboxStatus(oldUnrenderedText.toString(), toggledCheckboxPosition, newCheckedState);
                     this.setMarkdownString(newUnrenderedText);
                 }));
     }
@@ -110,7 +110,7 @@ public class MarkwonMarkdownViewer extends AppCompatTextView implements Markdown
 
     @Override
     public void registerOnLinkClickCallback(@NonNull Function<String, Boolean> callback) {
-        final var plugin = this.markwon.getPlugin(LinkClickInterceptorPlugin.class);
+        final LinkClickInterceptorPlugin plugin = this.markwon.getPlugin(LinkClickInterceptorPlugin.class);
         if (plugin == null) {
             Log.w(TAG, "Tried to register callback, but " + LinkClickInterceptorPlugin.class.getSimpleName() + " is not a registered " + MarkwonPlugin.class.getSimpleName() + ".");
         } else {
@@ -120,7 +120,7 @@ public class MarkwonMarkdownViewer extends AppCompatTextView implements Markdown
 
     @Override
     public void setEnabled(boolean enabled) {
-        final var plugin = this.markwon.getPlugin(ToggleableTaskListPlugin.class);
+        final ToggleableTaskListPlugin plugin = this.markwon.getPlugin(ToggleableTaskListPlugin.class);
         if (plugin == null) {
             Log.w(TAG, "Tried to set enabled state for " + ToggleableTaskListPlugin.class.getSimpleName() + ", but " + ToggleableTaskListPlugin.class.getSimpleName() + " is not a registered " + MarkwonPlugin.class.getSimpleName() + ".");
         } else {
@@ -135,7 +135,7 @@ public class MarkwonMarkdownViewer extends AppCompatTextView implements Markdown
 
     @Override
     public void setMarkdownString(CharSequence text, Runnable afterRender) {
-        final var previousText = this.unrenderedText$.getValue();
+        final CharSequence previousText = this.unrenderedText$.getValue();
         this.unrenderedText$.setValue(text);
         if (listener != null) {
             listener.accept(text);
@@ -156,7 +156,7 @@ public class MarkwonMarkdownViewer extends AppCompatTextView implements Markdown
 
     @Override
     public void setSearchColor(@ColorInt int color) {
-        final var searchHighlightPlugin = this.markwon.getPlugin(SearchHighlightPlugin.class);
+        final SearchHighlightPlugin searchHighlightPlugin = this.markwon.getPlugin(SearchHighlightPlugin.class);
         if (searchHighlightPlugin == null) {
             Log.w(TAG, SearchHighlightPlugin.class.getSimpleName() + " is not a registered " + MarkwonPlugin.class.getSimpleName());
         } else {
@@ -166,7 +166,7 @@ public class MarkwonMarkdownViewer extends AppCompatTextView implements Markdown
 
     @Override
     public void setSearchText(@Nullable CharSequence searchText, @Nullable Integer current) {
-        final var searchHighlightPlugin = this.markwon.getPlugin(SearchHighlightPlugin.class);
+        final SearchHighlightPlugin searchHighlightPlugin = this.markwon.getPlugin(SearchHighlightPlugin.class);
         if (searchHighlightPlugin == null) {
             Log.w(TAG, SearchHighlightPlugin.class.getSimpleName() + " is not a registered " + MarkwonPlugin.class.getSimpleName());
         } else {

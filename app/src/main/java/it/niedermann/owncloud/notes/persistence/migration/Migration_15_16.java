@@ -51,10 +51,10 @@ public class Migration_15_16 extends Migration {
         final String SP_DARK_THEME_KEY = "NLW_darkTheme";
         final String SP_CATEGORY_KEY = "NLW_cat";
 
-        final var sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        final var editor = sharedPreferences.edit();
-        final var prefs = sharedPreferences.getAll();
-        for (final var pref : prefs.entrySet()) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Map<String, ?> prefs = sharedPreferences.getAll();
+        for (Map.Entry<String, ?> pref : prefs.entrySet()) {
             final String key = pref.getKey();
             Integer widgetId = null;
             Integer mode = null;
@@ -76,7 +76,7 @@ public class Migration_15_16 extends Migration {
 
                     if (mode == 2) {
                         final String categoryTitle = sharedPreferences.getString(SP_CATEGORY_KEY + widgetId, null);
-                        final var cursor = db.query("SELECT CATEGORY_ID FROM CATEGORIES WHERE CATEGORY_TITLE = ? AND CATEGORY_ACCOUNT_ID = ?", new String[]{categoryTitle, String.valueOf(accountId)});
+                        Cursor cursor = db.query("SELECT CATEGORY_ID FROM CATEGORIES WHERE CATEGORY_TITLE = ? AND CATEGORY_ACCOUNT_ID = ?", new String[]{categoryTitle, String.valueOf(accountId)});
                         if (cursor.moveToNext()) {
                             categoryId = cursor.getInt(0);
                         } else {
@@ -85,7 +85,7 @@ public class Migration_15_16 extends Migration {
                         cursor.close();
                     }
 
-                    final var migratedWidgetValues = new ContentValues();
+                    ContentValues migratedWidgetValues = new ContentValues();
                     migratedWidgetValues.put("ID", widgetId);
                     migratedWidgetValues.put("ACCOUNT_ID", accountId);
                     migratedWidgetValues.put("CATEGORY_ID", categoryId);

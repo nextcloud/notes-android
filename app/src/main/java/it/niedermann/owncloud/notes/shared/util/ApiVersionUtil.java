@@ -43,10 +43,10 @@ public class ApiVersionUtil {
             }
         }
 
-        final var result = new ArrayList<ApiVersion>();
+        final Collection<ApiVersion> result = new ArrayList<>();
         for (int i = 0; i < a.length(); i++) {
             try {
-                final var version = ApiVersion.of(a.getString(i));
+                final ApiVersion version = ApiVersion.of(a.getString(i));
                 if (version.getMajor() != 0 || version.getMinor() != 0) {
                     result.add(version);
                 }

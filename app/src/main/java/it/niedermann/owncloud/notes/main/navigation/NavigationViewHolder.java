@@ -32,7 +32,7 @@ class NavigationViewHolder extends RecyclerView.ViewHolder {
     NavigationViewHolder(@NonNull View itemView, @NonNull final NavigationClickListener navigationClickListener) {
         super(itemView);
         view = itemView;
-        final var binding = ItemNavigationBinding.bind(view);
+        ItemNavigationBinding binding = ItemNavigationBinding.bind(view);
         this.name = binding.navigationItemLabel;
         this.count = binding.navigationItemCount;
         this.icon = binding.navigationItemIcon;
@@ -42,7 +42,7 @@ class NavigationViewHolder extends RecyclerView.ViewHolder {
 
     public void bind(@NonNull NavigationItem item, @ColorInt int mainColor, String selectedItem) {
         currentItem = item;
-        final boolean isSelected = item.id.equals(selectedItem);
+        boolean isSelected = item.id.equals(selectedItem);
         name.setText(NoteUtil.extendCategory(item.label));
         count.setVisibility(item.count == null ? View.GONE : View.VISIBLE);
         count.setText(String.valueOf(item.count));
@@ -52,7 +52,7 @@ class NavigationViewHolder extends RecyclerView.ViewHolder {
         } else {
             icon.setVisibility(View.GONE);
         }
-        final int textColor = isSelected ? mainColor : view.getResources().getColor(R.color.fg_default);
+        int textColor = isSelected ? mainColor : view.getResources().getColor(R.color.fg_default);
 
         name.setTextColor(textColor);
         count.setTextColor(textColor);

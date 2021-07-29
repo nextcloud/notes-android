@@ -27,7 +27,7 @@ public class MarkdownUtilTest extends TestCase {
     @Test
     public void testGetStartOfLine() {
         //language=md
-        final var test = new StringBuilder(
+        final StringBuilder test = new StringBuilder(
                 "# Test-Note\n" + // line start 0
                         "\n" + // line start 12
                         "- [ ] this is a test note\n" + // line start 13
@@ -60,7 +60,7 @@ public class MarkdownUtilTest extends TestCase {
     @Test
     public void testGetEndOfLine() {
         //language=md
-        final var test = "# Test-Note\n" + // line 0 - 11
+        final CharSequence test = "# Test-Note\n" + // line 0 - 11
                 "\n" + // line 12 - 12
                 "- [ ] this is a test note\n" + // line 13 - 38
                 "- [x] test\n" + // line start 39 - 49
@@ -97,7 +97,7 @@ public class MarkdownUtilTest extends TestCase {
 
     @Test
     public void testLineStartsWithCheckbox() {
-        final var lines = new HashMap<String, Boolean>();
+        final Map<String, Boolean> lines = new HashMap<>();
         lines.put("  - [ ] a", true);
         lines.put("  - [x] a", true);
         lines.put("  - [X] a", true);
@@ -550,37 +550,37 @@ public class MarkdownUtilTest extends TestCase {
     @SuppressWarnings("ConstantConditions")
     public void testSelectionIsInLink() {
         try {
-            final var method = MarkdownUtil.class.getDeclaredMethod("selectionIsInLink", CharSequence.class, int.class, int.class);
-            method.setAccessible(true);
+            final Method m = MarkdownUtil.class.getDeclaredMethod("selectionIsInLink", CharSequence.class, int.class, int.class);
+            m.setAccessible(true);
 
-            assertTrue((Boolean) method.invoke(null, "Lorem [ipsum](https://example.com) dolor sit amet.", 7, 12));
-            assertTrue((Boolean) method.invoke(null, "Lorem [ipsum](https://example.com) dolor sit amet.", 6, 34));
-            assertTrue((Boolean) method.invoke(null, "Lorem [ipsum](https://example.com) dolor sit amet.", 14, 33));
-            assertTrue((Boolean) method.invoke(null, "Lorem [ipsum](https://example.com) dolor sit amet.", 12, 14));
-            assertTrue((Boolean) method.invoke(null, "Lorem [ipsum](https://example.com) dolor sit amet.", 0, 7));
-            assertTrue((Boolean) method.invoke(null, "Lorem [ipsum](https://example.com) dolor sit amet.", 33, 34));
+            assertTrue((Boolean) m.invoke(null, "Lorem [ipsum](https://example.com) dolor sit amet.", 7, 12));
+            assertTrue((Boolean) m.invoke(null, "Lorem [ipsum](https://example.com) dolor sit amet.", 6, 34));
+            assertTrue((Boolean) m.invoke(null, "Lorem [ipsum](https://example.com) dolor sit amet.", 14, 33));
+            assertTrue((Boolean) m.invoke(null, "Lorem [ipsum](https://example.com) dolor sit amet.", 12, 14));
+            assertTrue((Boolean) m.invoke(null, "Lorem [ipsum](https://example.com) dolor sit amet.", 0, 7));
+            assertTrue((Boolean) m.invoke(null, "Lorem [ipsum](https://example.com) dolor sit amet.", 33, 34));
 
-            assertTrue((Boolean) method.invoke(null, "Lorem [](https://example.com) dolor sit amet.", 6, 28));
-            assertTrue((Boolean) method.invoke(null, "Lorem [](https://example.com) dolor sit amet.", 7, 28));
-            assertTrue((Boolean) method.invoke(null, "Lorem [](https://example.com) dolor sit amet.", 8, 28));
-            assertTrue((Boolean) method.invoke(null, "Lorem [](https://example.com) dolor sit amet.", 9, 28));
-            assertTrue((Boolean) method.invoke(null, "Lorem [](https://example.com) dolor sit amet.", 6, 29));
-            assertTrue((Boolean) method.invoke(null, "Lorem [](https://example.com) dolor sit amet.", 7, 29));
-            assertTrue((Boolean) method.invoke(null, "Lorem [](https://example.com) dolor sit amet.", 8, 29));
-            assertTrue((Boolean) method.invoke(null, "Lorem [](https://example.com) dolor sit amet.", 9, 29));
+            assertTrue((Boolean) m.invoke(null, "Lorem [](https://example.com) dolor sit amet.", 6, 28));
+            assertTrue((Boolean) m.invoke(null, "Lorem [](https://example.com) dolor sit amet.", 7, 28));
+            assertTrue((Boolean) m.invoke(null, "Lorem [](https://example.com) dolor sit amet.", 8, 28));
+            assertTrue((Boolean) m.invoke(null, "Lorem [](https://example.com) dolor sit amet.", 9, 28));
+            assertTrue((Boolean) m.invoke(null, "Lorem [](https://example.com) dolor sit amet.", 6, 29));
+            assertTrue((Boolean) m.invoke(null, "Lorem [](https://example.com) dolor sit amet.", 7, 29));
+            assertTrue((Boolean) m.invoke(null, "Lorem [](https://example.com) dolor sit amet.", 8, 29));
+            assertTrue((Boolean) m.invoke(null, "Lorem [](https://example.com) dolor sit amet.", 9, 29));
 
-            assertTrue((Boolean) method.invoke(null, "Lorem [ipsum]() dolor sit amet.", 6, 12));
-            assertTrue((Boolean) method.invoke(null, "Lorem [ipsum]() dolor sit amet.", 6, 13));
-            assertTrue((Boolean) method.invoke(null, "Lorem [ipsum]() dolor sit amet.", 6, 14));
-            assertTrue((Boolean) method.invoke(null, "Lorem [ipsum]() dolor sit amet.", 6, 15));
-            assertTrue((Boolean) method.invoke(null, "Lorem [ipsum]() dolor sit amet.", 7, 12));
-            assertTrue((Boolean) method.invoke(null, "Lorem [ipsum]() dolor sit amet.", 7, 13));
-            assertTrue((Boolean) method.invoke(null, "Lorem [ipsum]() dolor sit amet.", 7, 14));
-            assertTrue((Boolean) method.invoke(null, "Lorem [ipsum]() dolor sit amet.", 7, 15));
+            assertTrue((Boolean) m.invoke(null, "Lorem [ipsum]() dolor sit amet.", 6, 12));
+            assertTrue((Boolean) m.invoke(null, "Lorem [ipsum]() dolor sit amet.", 6, 13));
+            assertTrue((Boolean) m.invoke(null, "Lorem [ipsum]() dolor sit amet.", 6, 14));
+            assertTrue((Boolean) m.invoke(null, "Lorem [ipsum]() dolor sit amet.", 6, 15));
+            assertTrue((Boolean) m.invoke(null, "Lorem [ipsum]() dolor sit amet.", 7, 12));
+            assertTrue((Boolean) m.invoke(null, "Lorem [ipsum]() dolor sit amet.", 7, 13));
+            assertTrue((Boolean) m.invoke(null, "Lorem [ipsum]() dolor sit amet.", 7, 14));
+            assertTrue((Boolean) m.invoke(null, "Lorem [ipsum]() dolor sit amet.", 7, 15));
 
-            assertFalse((Boolean) method.invoke(null, "Lorem [ipsum](https://example.com) dolor sit amet.", 0, 6));
-            assertFalse((Boolean) method.invoke(null, "Lorem [ipsum](https://example.com) dolor sit amet.", 34, 50));
-            assertFalse((Boolean) method.invoke(null, "Lorem [ipsum](https://example.com) dolor sit amet.", 41, 44));
+            assertFalse((Boolean) m.invoke(null, "Lorem [ipsum](https://example.com) dolor sit amet.", 0, 6));
+            assertFalse((Boolean) m.invoke(null, "Lorem [ipsum](https://example.com) dolor sit amet.", 34, 50));
+            assertFalse((Boolean) m.invoke(null, "Lorem [ipsum](https://example.com) dolor sit amet.", 41, 44));
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
@@ -641,7 +641,7 @@ public class MarkdownUtilTest extends TestCase {
 
     @Test
     public void testSetCheckboxStatus() {
-        for (final var listType : EListType.values()) {
+        for (EListType listType : EListType.values()) {
             final String origin_1 = listType.checkboxUnchecked + " Item";
             final String expected_1 = listType.checkboxChecked + " Item";
             assertEquals(expected_1, MarkdownUtil.setCheckboxStatus(origin_1, 0, true));
@@ -751,10 +751,10 @@ public class MarkdownUtilTest extends TestCase {
     @Test
     public void testRemoveSpans() {
         try {
-            final var removeSpans = MarkdownUtil.class.getDeclaredMethod("removeSpans", Spannable.class, Class.class);
+            final Method removeSpans = MarkdownUtil.class.getDeclaredMethod("removeSpans", Spannable.class, Class.class);
             removeSpans.setAccessible(true);
 
-            final var editable_1 = new SpannableStringBuilder("Lorem Ipsum dolor sit amet");
+            final Editable editable_1 = new SpannableStringBuilder("Lorem Ipsum dolor sit amet");
             editable_1.setSpan(new SearchSpan(Color.RED, Color.GRAY, false, false), 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             editable_1.setSpan(new ForegroundColorSpan(Color.BLUE), 6, 11, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             editable_1.setSpan(new SearchSpan(Color.BLUE, Color.GREEN, true, false), 12, 17, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -762,7 +762,7 @@ public class MarkdownUtilTest extends TestCase {
             assertEquals(0, editable_1.getSpans(0, editable_1.length(), SearchSpan.class).length);
             assertEquals(1, editable_1.getSpans(0, editable_1.length(), ForegroundColorSpan.class).length);
 
-            final var editable_2 = new SpannableStringBuilder("Lorem Ipsum dolor sit amet");
+            final Editable editable_2 = new SpannableStringBuilder("Lorem Ipsum dolor sit amet");
             editable_2.setSpan(new SearchSpan(Color.GRAY, Color.RED, false, true), 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             editable_2.setSpan(new ForegroundColorSpan(Color.BLUE), 2, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             editable_2.setSpan(new SearchSpan(Color.BLUE, Color.GREEN, true, false), 3, 9, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -772,7 +772,7 @@ public class MarkdownUtilTest extends TestCase {
             assertEquals(2, editable_2.getSpanStart(editable_2.getSpans(0, editable_2.length(), ForegroundColorSpan.class)[0]));
             assertEquals(7, editable_2.getSpanEnd(editable_2.getSpans(0, editable_2.length(), ForegroundColorSpan.class)[0]));
 
-            final var editable_3 = new SpannableStringBuilder("Lorem Ipsum dolor sit amet");
+            final Editable editable_3 = new SpannableStringBuilder("Lorem Ipsum dolor sit amet");
             editable_3.setSpan(new ForegroundColorSpan(Color.BLUE), 2, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             removeSpans.invoke(null, editable_3, SearchSpan.class);
             assertEquals(0, editable_3.getSpans(0, editable_3.length(), SearchSpan.class).length);

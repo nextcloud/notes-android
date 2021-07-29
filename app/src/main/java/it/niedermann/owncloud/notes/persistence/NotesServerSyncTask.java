@@ -90,7 +90,7 @@ abstract class NotesServerSyncTask extends Thread {
 
         Log.i(TAG, "STARTING SYNCHRONIZATION");
 
-        final var status = new SyncResultStatus();
+        final SyncResultStatus status = new SyncResultStatus();
         status.pushSuccessful = pushLocalChanges();
         if (!onlyLocalChanges) {
             status.pullSuccessful = pullRemoteChanges();
@@ -112,7 +112,7 @@ abstract class NotesServerSyncTask extends Thread {
         Log.d(TAG, "pushLocalChanges()");
 
         boolean success = true;
-        final var notes = repo.getLocalModifiedNotes(localAccount.getId());
+        final List<Note> notes = repo.getLocalModifiedNotes(localAccount.getId());
         for (Note note : notes) {
             Log.d(TAG, "   Process Local Note: " + (BuildConfig.DEBUG ? note : note.getTitle()));
             try {
@@ -122,7 +122,7 @@ abstract class NotesServerSyncTask extends Thread {
                         Log.v(TAG, "   ...create/edit");
                         if (note.getRemoteId() != null) {
                             Log.v(TAG, "   ...Note has remoteId → try to edit");
-                            final var editResponse = notesAPI.editNote(note).execute();
+                            final Response<Note> editResponse = notesAPI.editNote(note).execute();
                             if (editResponse.isSuccessful()) {
                                 remoteNote = editResponse.body();
                                 if (remoteNote == null) {
@@ -131,7 +131,7 @@ abstract class NotesServerSyncTask extends Thread {
                                 }
                             } else if (editResponse.code() == HTTP_NOT_FOUND) {
                                 Log.v(TAG, "   ...Note does no longer exist on server → recreate");
-                                final var createResponse = notesAPI.createNote(note).execute();
+                                final Response<Note> createResponse = notesAPI.createNote(note).execute();
                                 if (createResponse.isSuccessful()) {
                                     remoteNote = createResponse.body();
                                     if (remoteNote == null) {
@@ -146,7 +146,7 @@ abstract class NotesServerSyncTask extends Thread {
                             }
                         } else {
                             Log.v(TAG, "   ...Note does not have a remoteId yet → create");
-                            final var createResponse = notesAPI.createNote(note).execute();
+                            final Response<Note> createResponse = notesAPI.createNote(note).execute();
                             if (createResponse.isSuccessful()) {
                                 remoteNote = createResponse.body();
                                 if (remoteNote == null) {
@@ -166,7 +166,7 @@ abstract class NotesServerSyncTask extends Thread {
                             Log.v(TAG, "   ...delete (only local, since it has never been synchronized)");
                         } else {
                             Log.v(TAG, "   ...delete (from server and local)");
-                            final var deleteResponse = notesAPI.deleteNote(note.getRemoteId()).execute();
+                            final Response<Void> deleteResponse = notesAPI.deleteNote(note.getRemoteId()).execute();
                             if (!deleteResponse.isSuccessful()) {
                                 if (deleteResponse.code() == HTTP_NOT_FOUND) {
                                     Log.v(TAG, "   ...delete (note has already been deleted remotely)");
@@ -205,10 +205,10 @@ abstract class NotesServerSyncTask extends Thread {
     private boolean pullRemoteChanges() {
         Log.d(TAG, "pullRemoteChanges() for account " + localAccount.getAccountName());
         try {
-            final var idMap = repo.getIdMap(localAccount.getId());
+            final Map<Long, Long> idMap = repo.getIdMap(localAccount.getId());
 
             // FIXME re-reading the localAccount is only a workaround for a not-up-to-date eTag in localAccount.
-            final var accountFromDatabase = repo.getAccountById(localAccount.getId());
+            final Account accountFromDatabase = repo.getAccountById(localAccount.getId());
             if (accountFromDatabase == null) {
                 callbacks.remove(localAccount.getId());
                 return true;
@@ -216,18 +216,18 @@ abstract class NotesServerSyncTask extends Thread {
             localAccount.setModified(accountFromDatabase.getModified());
             localAccount.setETag(accountFromDatabase.getETag());
 
-            final var fetchResponse = notesAPI.getNotes(localAccount.getModified(), localAccount.getETag()).blockingSingle();
-            final var remoteNotes = fetchResponse.getResponse();
-            final var remoteIDs = new HashSet<Long>();
+            final ParsedResponse<List<Note>> fetchResponse = notesAPI.getNotes(localAccount.getModified(), localAccount.getETag()).blockingSingle();
+            final List<Note> remoteNotes = fetchResponse.getResponse();
+            final Set<Long> remoteIDs = new HashSet<>();
             // pull remote changes: update or create each remote note
-            for (final var remoteNote : remoteNotes) {
+            for (Note remoteNote : remoteNotes) {
                 Log.v(TAG, "   Process Remote Note: " + (BuildConfig.DEBUG ? remoteNote : remoteNote.getTitle()));
                 remoteIDs.add(remoteNote.getRemoteId());
                 if (remoteNote.getModified() == null) {
                     Log.v(TAG, "   ... unchanged");
                 } else if (idMap.containsKey(remoteNote.getRemoteId())) {
                     Log.v(TAG, "   ... found → Update");
-                    final Long localId = idMap.get(remoteNote.getRemoteId());
+                    Long localId = idMap.get(remoteNote.getRemoteId());
                     if (localId != null) {
                         repo.updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
                                 localId, remoteNote.getModified().getTimeInMillis(), remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getCategory(), remoteNote.getETag(), remoteNote.getContent(), generateNoteExcerpt(remoteNote.getContent(), remoteNote.getTitle()));
@@ -241,7 +241,7 @@ abstract class NotesServerSyncTask extends Thread {
             }
             Log.d(TAG, "   Remove remotely deleted Notes (only those without local changes)");
             // remove remotely deleted notes (only those without local changes)
-            for (final var entry : idMap.entrySet()) {
+            for (Map.Entry<Long, Long> entry : idMap.entrySet()) {
                 if (!remoteIDs.contains(entry.getKey())) {
                     Log.v(TAG, "   ... remove " + entry.getValue());
                     repo.deleteByNoteId(entry.getValue(), DBStatus.VOID);
@@ -251,7 +251,7 @@ abstract class NotesServerSyncTask extends Thread {
             // update ETag and Last-Modified in order to reduce size of next response
             localAccount.setETag(fetchResponse.getHeaders().get(HEADER_KEY_ETAG));
 
-            final var lastModified = Calendar.getInstance();
+            final Calendar lastModified = Calendar.getInstance();
             lastModified.setTimeInMillis(0);
             final String lastModifiedHeader = fetchResponse.getHeaders().get(HEADER_KEY_LAST_MODIFIED);
             if (lastModifiedHeader != null)

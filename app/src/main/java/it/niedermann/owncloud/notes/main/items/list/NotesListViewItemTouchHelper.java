@@ -72,17 +72,17 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                 switch (direction) {
                     case ItemTouchHelper.LEFT:
                         viewHolder.setIsRecyclable(false);
-                        final var dbNoteWithoutContent = (Note) adapter.getItem(viewHolder.getLayoutPosition());
-                        final var dbNoteLiveData = mainViewModel.getFullNote$(dbNoteWithoutContent.getId());
+                        final Note dbNoteWithoutContent = (Note) adapter.getItem(viewHolder.getLayoutPosition());
+                        final LiveData<Note> dbNoteLiveData = mainViewModel.getFullNote$(dbNoteWithoutContent.getId());
                         dbNoteLiveData.observe(lifecycleOwner, (dbNote) -> {
                             dbNoteLiveData.removeObservers(lifecycleOwner);
                             tracker.deselect(dbNote.getId());
-                            final var deleteLiveData = mainViewModel.deleteNoteAndSync(dbNote.getId());
+                            final LiveData<Void> deleteLiveData = mainViewModel.deleteNoteAndSync(dbNote.getId());
                             deleteLiveData.observe(lifecycleOwner, (next) -> deleteLiveData.removeObservers(lifecycleOwner));
                             Log.v(TAG, "Item deleted through swipe ----------------------------------------------");
                             BrandedSnackbar.make(view, context.getString(R.string.action_note_deleted, dbNote.getTitle()), UNDO_DURATION)
                                     .setAction(R.string.action_undo, (View v) -> {
-                                        final var undoLiveData = mainViewModel.addNoteAndSync(dbNote);
+                                        final LiveData<Note> undoLiveData = mainViewModel.addNoteAndSync(dbNote);
                                         undoLiveData.observe(lifecycleOwner, (o) -> undoLiveData.removeObservers(lifecycleOwner));
                                         BrandedSnackbar.make(view, context.getString(R.string.action_note_restored, dbNote.getTitle()), Snackbar.LENGTH_SHORT)
                                                 .show();
@@ -92,8 +92,8 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                         break;
                     case ItemTouchHelper.RIGHT:
                         viewHolder.setIsRecyclable(false);
-                        final var adapterNote = (Note) adapter.getItem(viewHolder.getLayoutPosition());
-                        final var toggleLiveData = mainViewModel.toggleFavoriteAndSync(adapterNote.getId());
+                        final Note adapterNote = (Note) adapter.getItem(viewHolder.getLayoutPosition());
+                        final LiveData<Void> toggleLiveData = mainViewModel.toggleFavoriteAndSync(adapterNote.getId());
                         toggleLiveData.observe(lifecycleOwner, (next) -> toggleLiveData.removeObservers(lifecycleOwner));
                         break;
                     default:
@@ -103,7 +103,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
 
             @Override
             public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-                final var noteViewHolder = (NoteViewHolder) viewHolder;
+                final NoteViewHolder noteViewHolder = (NoteViewHolder) viewHolder;
                 // show swipe icon on the side
                 noteViewHolder.showSwipe(dX > 0);
                 // move only swipeable part of item (not leave-behind)

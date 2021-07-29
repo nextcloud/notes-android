@@ -1,6 +1,5 @@
 package it.niedermann.owncloud.notes.branding;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -27,7 +26,6 @@ public class BrandedSwitchPreference extends SwitchPreference implements Branded
     @ColorInt
     private Integer textColor = null;
 
-    @SuppressLint("UseSwitchCompatOrMaterialCode")
     @Nullable
     private Switch switchView;
 
@@ -94,11 +92,11 @@ public class BrandedSwitchPreference extends SwitchPreference implements Branded
             return (Switch) view;
         }
         if (view instanceof ViewGroup) {
-            final var viewGroup = (ViewGroup) view;
+            ViewGroup viewGroup = (ViewGroup) view;
             for (int i = 0; i < viewGroup.getChildCount(); i++) {
-                final var child = viewGroup.getChildAt(i);
+                View child = viewGroup.getChildAt(i);
                 if (child instanceof ViewGroup) {
-                    @SuppressLint("UseSwitchCompatOrMaterialCode") final var result = findSwitchWidget(child);
+                    Switch result = findSwitchWidget(child);
                     if (result != null) return result;
                 }
                 if (child instanceof Switch) {

@@ -22,7 +22,7 @@ public class ItemLookup extends ItemDetailsLookup<Long> {
     @Nullable
     @Override
     public ItemDetails<Long> getItemDetails(@NonNull MotionEvent e) {
-        final var view = recyclerView.findChildViewUnder(e.getX(), e.getY());
+        final View view = recyclerView.findChildViewUnder(e.getX(), e.getY());
         if (view != null) {
             final RecyclerView.ViewHolder viewHolder = recyclerView.getChildViewHolder(view);
             if (viewHolder instanceof NoteViewHolder) {

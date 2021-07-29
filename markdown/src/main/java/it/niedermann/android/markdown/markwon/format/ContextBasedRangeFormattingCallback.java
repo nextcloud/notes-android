@@ -29,7 +29,7 @@ public class ContextBasedRangeFormattingCallback implements ActionMode.Callback 
     public boolean onCreateActionMode(ActionMode mode, Menu menu) {
         mode.getMenuInflater().inflate(R.menu.context_based_range_formatting, menu);
 
-        final var styleFormatMap = new SparseIntArray();
+        final SparseIntArray styleFormatMap = new SparseIntArray();
         styleFormatMap.append(R.id.bold, Typeface.BOLD);
         styleFormatMap.append(R.id.italic, Typeface.ITALIC);
 
@@ -50,7 +50,7 @@ public class ContextBasedRangeFormattingCallback implements ActionMode.Callback 
 
     @Override
     public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-        final var text = editText.getText();
+        final CharSequence text = editText.getText();
         if (text != null) {
             final int selectionStart = editText.getSelectionStart();
             final int selectionEnd = editText.getSelectionEnd();
@@ -68,7 +68,7 @@ public class ContextBasedRangeFormattingCallback implements ActionMode.Callback 
 
     @Override
     public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-        final var editable = editText.getText();
+        final Editable editable = editText.getText();
         if (editable != null) {
             final int itemId = item.getItemId();
             final int start = editText.getSelectionStart();

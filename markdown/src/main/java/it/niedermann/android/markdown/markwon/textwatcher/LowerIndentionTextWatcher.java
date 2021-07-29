@@ -68,7 +68,7 @@ public class LowerIndentionTextWatcher extends InterceptorTextWatcher {
             return false;
         }
 
-        for (final var listType : EListType.values()) {
+        for (EListType listType : EListType.values()) {
             if (listType.listSymbol.equals(trimmedLine)) {
                 if (trimmedLine.length() == EListType.DASH.listSymbol.length()) {
                     return lowerIndention(editable, line, lineStart, lineEnd);

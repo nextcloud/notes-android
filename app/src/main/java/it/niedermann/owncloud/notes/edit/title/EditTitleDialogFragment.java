@@ -28,7 +28,7 @@ public class EditTitleDialogFragment extends DialogFragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        final var args = getArguments();
+        final Bundle args = getArguments();
         if (args == null) {
             throw new IllegalArgumentException("Provide at least " + PARAM_OLD_TITLE);
         }
@@ -46,7 +46,7 @@ public class EditTitleDialogFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        final var dialogView = View.inflate(getContext(), R.layout.dialog_edit_title, null);
+        View dialogView = View.inflate(getContext(), R.layout.dialog_edit_title, null);
         binding = DialogEditTitleBinding.bind(dialogView);
 
         if (savedInstanceState == null) {
@@ -66,7 +66,7 @@ public class EditTitleDialogFragment extends DialogFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         binding.title.requestFocus();
-        final var window = requireDialog().getWindow();
+        Window window = requireDialog().getWindow();
         if (window != null) {
             window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         } else {
@@ -75,8 +75,8 @@ public class EditTitleDialogFragment extends DialogFragment {
     }
 
     public static DialogFragment newInstance(String title) {
-        final var fragment = new EditTitleDialogFragment();
-        final var args = new Bundle();
+        final DialogFragment fragment = new EditTitleDialogFragment();
+        final Bundle args = new Bundle();
         args.putString(PARAM_OLD_TITLE, title);
         fragment.setArguments(args);
         return fragment;

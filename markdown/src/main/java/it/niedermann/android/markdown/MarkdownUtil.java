@@ -81,10 +81,10 @@ public class MarkdownUtil {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
             return input;
         }
-        final var ssb = new SpannableStringBuilder(input);
-        final var originalQuoteSpans = ssb.getSpans(0, ssb.length(), QuoteSpan.class);
+        final SpannableStringBuilder ssb = new SpannableStringBuilder(input);
+        final QuoteSpan[] originalQuoteSpans = ssb.getSpans(0, ssb.length(), QuoteSpan.class);
         @ColorInt final int colorBlockQuote = ContextCompat.getColor(context, R.color.block_quote);
-        for (final var originalQuoteSpan : originalQuoteSpans) {
+        for (QuoteSpan originalQuoteSpan : originalQuoteSpans) {
             final int start = ssb.getSpanStart(originalQuoteSpan);
             final int end = ssb.getSpanEnd(originalQuoteSpan);
             ssb.removeSpan(originalQuoteSpan);
@@ -96,7 +96,7 @@ public class MarkdownUtil {
     @NonNull
     public static String replaceCheckboxesWithEmojis(@NonNull String content) {
         return runForEachCheckbox(content, (line) -> {
-            for (final var listType : EListType.values()) {
+            for (EListType listType : EListType.values()) {
                 if (CHECKBOX_CHECKED_EMOJI.isPresent()) {
                     line = line.replace(listType.checkboxChecked, CHECKBOX_CHECKED_EMOJI.get());
                     line = line.replace(listType.checkboxCheckedUpperCase, CHECKBOX_CHECKED_EMOJI.get());
@@ -124,7 +124,7 @@ public class MarkdownUtil {
                         ? new String[]{"☒", "✅", "☑️", "✔️"}
                         : new String[]{"☐", "❌", "\uD83D\uDD32️", "☐️"};
             }
-            final var paint = new Paint();
+            final Paint paint = new Paint();
             for (String emoji : emojis) {
                 if (paint.hasGlyph(emoji)) {
                     return Optional.of(emoji);
@@ -143,7 +143,7 @@ public class MarkdownUtil {
         boolean isInFencedCodeBlock = false;
         int fencedCodeBlockSigns = 0;
         for (int i = 0; i < lines.length; i++) {
-            final var matcher = PATTERN_CODE_FENCE.matcher(lines[i]);
+            final Matcher matcher = PATTERN_CODE_FENCE.matcher(lines[i]);
             if (matcher.find()) {
                 final String fence = matcher.group(1);
                 if (fence != null) {
@@ -187,19 +187,19 @@ public class MarkdownUtil {
     public static Optional<String> getListItemIfIsEmpty(@NonNull String line) {
         final String trimmedLine = line.trim();
         // TODO use Java 11 String::repeat
-        final var builder = new StringBuilder();
+        final StringBuilder builder = new StringBuilder();
         final int indention = line.indexOf(trimmedLine);
         for (int i = 0; i < indention; i++) {
             builder.append(" ");
         }
-        for (final var listType : EListType.values()) {
+        for (EListType listType : EListType.values()) {
             if (trimmedLine.equals(listType.checkboxUnchecked)) {
                 return Optional.of(builder.append(listType.checkboxUncheckedWithTrailingSpace).toString());
             } else if (trimmedLine.equals(listType.listSymbol)) {
                 return Optional.of(builder.append(listType.listSymbolWithTrailingSpace).toString());
             }
         }
-        final var matcher = PATTERN_ORDERED_LIST_ITEM_EMPTY.matcher(line.substring(indention));
+        final Matcher matcher = PATTERN_ORDERED_LIST_ITEM_EMPTY.matcher(line.substring(indention));
         if (matcher.find()) {
             return Optional.of(builder.append(matcher.group()).toString());
         }
@@ -212,7 +212,7 @@ public class MarkdownUtil {
         boolean isInFencedCodeBlock = false;
         int fencedCodeBlockSigns = 0;
         for (int i = 0; i < lines.length; i++) {
-            final var matcher = PATTERN_CODE_FENCE.matcher(lines[i]);
+            final Matcher matcher = PATTERN_CODE_FENCE.matcher(lines[i]);
             if (matcher.find()) {
                 final String fence = matcher.group(1);
                 if (fence != null) {
@@ -263,7 +263,7 @@ public class MarkdownUtil {
      * @return the number of the ordered list item if the line is an ordered list, otherwise -1.
      */
     public static Optional<Integer> getOrderedListNumber(@NonNull String line) {
-        final var matcher = PATTERN_ORDERED_LIST_ITEM.matcher(line);
+        final Matcher matcher = PATTERN_ORDERED_LIST_ITEM.matcher(line);
         if (matcher.find()) {
             final String groupNumber = matcher.group(1);
             if (groupNumber != null) {
@@ -293,7 +293,7 @@ public class MarkdownUtil {
         // handle special case: italic (that damn thing will match like ANYTHING (regarding bold / bold+italic)....)
         final boolean isItalic = punctuation.length() == 1 && punctuation.charAt(0) == '*';
         if (isItalic) {
-            final var result = handleItalicEdgeCase(editable, initialString, selectionStart, selectionEnd);
+            final Optional<Integer> result = handleItalicEdgeCase(editable, initialString, selectionStart, selectionEnd);
             // The result is only present if this actually was an edge case
             if (result.isPresent()) {
                 return result.get();
@@ -307,7 +307,7 @@ public class MarkdownUtil {
                 // in this case let's make optional asterisks around it, so it wont match anything between two (bold+italic)s
                 ? "\\*?\\*?" + punctuationRex + wildcardRex + punctuationRex + "\\*?\\*?"
                 : punctuationRex + wildcardRex + punctuationRex;
-        final var searchPattern = Pattern.compile(pattern);
+        final Pattern searchPattern = Pattern.compile(pattern);
         int relevantStart = selectionStart - 2;
         relevantStart = Math.max(relevantStart, 0);
         int relevantEnd = selectionEnd + 2;
@@ -319,7 +319,7 @@ public class MarkdownUtil {
             // this resets the matcher, while keeping the required region
             matcher.region(relevantStart, relevantEnd);
             final int punctuationLength = punctuation.length();
-            final var startEnd = new LinkedList<Pair<Integer, Integer>>();
+            final List<Pair<Integer, Integer>> startEnd = new LinkedList<>();
             int removedCount = 0;
             while (matcher.find()) {
                 startEnd.add(new Pair<>(matcher.start(), matcher.end()));
@@ -327,7 +327,7 @@ public class MarkdownUtil {
             }
             // start from the end
             Collections.reverse(startEnd);
-            for (final var item : startEnd) {
+            for (Pair<Integer, Integer> item : startEnd) {
                 deletePunctuation(editable, punctuationLength, item.first, item.second);
             }
             int offsetAtEnd = 0;
@@ -362,9 +362,9 @@ public class MarkdownUtil {
     @NonNull
     private static Optional<Integer> handleItalicEdgeCase(Editable editable, String editableAsString, int selectionStart, int selectionEnd) {
         // look if selection is bold, this is the only edge case afaik
-        final var searchPattern = Pattern.compile("(^|[^*])" + PATTERN_QUOTE_BOLD_PUNCTUATION + "([^*])*" + PATTERN_QUOTE_BOLD_PUNCTUATION + "([^*]|$)");
+        final Pattern searchPattern = Pattern.compile("(^|[^*])" + PATTERN_QUOTE_BOLD_PUNCTUATION + "([^*])*" + PATTERN_QUOTE_BOLD_PUNCTUATION + "([^*]|$)");
         // look the selection expansion by 1 is intended, so the NOT '*' has a chance to match. we don't want to match ***blah***
-        final var matcher = searchPattern.matcher(editableAsString)
+        final Matcher matcher = searchPattern.matcher(editableAsString)
                 .region(Math.max(selectionStart - 1, 0), Math.min(selectionEnd + 1, editableAsString.length()));
         if (matcher.find()) {
             return Optional.of(insertPunctuation(editable, selectionStart, selectionEnd, "*"));
@@ -454,7 +454,7 @@ public class MarkdownUtil {
 
 
     public static boolean selectionIsInLink(@NonNull CharSequence text, int start, int end) {
-        final var matcher = PATTERN_MARKDOWN_LINK.matcher(text);
+        final Matcher matcher = PATTERN_MARKDOWN_LINK.matcher(text);
         while (matcher.find()) {
             if ((start >= matcher.start() && start < matcher.end()) || (end > matcher.start() && end <= matcher.end())) {
                 return true;
@@ -465,7 +465,7 @@ public class MarkdownUtil {
 
     public static void searchAndColor(@NonNull Spannable editable, @Nullable CharSequence searchText, @Nullable Integer current, @ColorInt int mainColor, @ColorInt int highlightColor, boolean darkTheme) {
         if (searchText != null) {
-            final var m = Pattern
+            final Matcher m = Pattern
                     .compile(searchText.toString(), Pattern.CASE_INSENSITIVE | Pattern.LITERAL)
                     .matcher(editable);
 
@@ -483,7 +483,7 @@ public class MarkdownUtil {
      * Removes all spans of {@param spanType} from {@param spannable}.
      */
     public static <T> void removeSpans(@NonNull Spannable spannable, @SuppressWarnings("SameParameterValue") Class<T> spanType) {
-        for (final var span : spannable.getSpans(0, spannable.length(), spanType)) {
+        for (T span : spannable.getSpans(0, spannable.length(), spanType)) {
             spannable.removeSpan(span);
         }
     }
@@ -493,12 +493,12 @@ public class MarkdownUtil {
      * Otherwise it will create a new {@link SpannableString} from the content, set this as new content of the {@param textView} and return it.
      */
     public static Spannable getContentAsSpannable(@NonNull TextView textView) {
-        final var content = textView.getText();
+        final CharSequence content = textView.getText();
         if (content.getClass() == SpannableString.class || content instanceof Spannable) {
             return (Spannable) content;
         } else {
             Log.w(TAG, "Expected " + TextView.class.getSimpleName() + " content to be of type " + Spannable.class.getSimpleName() + ", but was of type " + content.getClass() + ". Search highlighting will be not performant.");
-            final var spannableContent = new SpannableString(content);
+            final Spannable spannableContent = new SpannableString(content);
             textView.setText(spannableContent, TextView.BufferType.SPANNABLE);
             return spannableContent;
         }

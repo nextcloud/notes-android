@@ -64,10 +64,10 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
             final int length = visitor.length();
             visitor.visitChildren(node);
             TaskListProps.DONE.set(visitor.renderProps(), node.isDone());
-            final var spanFactory = visitor.configuration()
+            final SpanFactory spanFactory = visitor.configuration()
                     .spansFactory()
                     .get(TaskListItem.class);
-            final var spans = spanFactory == null ? null :
+            final Object spans = spanFactory == null ? null :
                     spanFactory.getSpans(visitor.configuration(), visitor.renderProps());
             if (spans != null) {
                 final TaskListSpan taskListSpan;
@@ -114,13 +114,13 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
     public void afterRender(@NonNull Node node, @NonNull MarkwonVisitor visitor) {
         super.afterRender(node, visitor);
 
-        final var markerSpans = getSortedSpans(visitor.builder(), ToggleMarkerSpan.class, 0, visitor.builder().length());
+        final List<Span> markerSpans = getSortedSpans(visitor.builder(), ToggleMarkerSpan.class, 0, visitor.builder().length());
 
         for (int position = 0; position < markerSpans.size(); position++) {
-            final var markerSpan = markerSpans.get(position);
+            final Span markerSpan = markerSpans.get(position);
             final int start = markerSpan.start;
             final int end = markerSpan.end;
-            final var freeRanges = findFreeRanges(visitor.builder(), start, end);
+            final Collection<Range<Integer>> freeRanges = findFreeRanges(visitor.builder(), start, end);
             for (Range<Integer> freeRange : freeRanges) {
                 visitor.builder().setSpan(
                         new ToggleTaskListSpan(enabled, toggleListener, ((ToggleMarkerSpan) markerSpan.what).getTaskListSpan(), position),
@@ -135,8 +135,8 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
     @Override
     public void afterSetText(@NonNull TextView textView) {
         super.afterSetText(textView);
-        final var spannable = MarkdownUtil.getContentAsSpannable(textView);
-        for (final var span : spannable.getSpans(0, spannable.length(), ToggleMarkerSpan.class)) {
+        final Spannable spannable = MarkdownUtil.getContentAsSpannable(textView);
+        for (ToggleMarkerSpan span : spannable.getSpans(0, spannable.length(), ToggleMarkerSpan.class)) {
             spannable.removeSpan(span);
         }
         textView.setText(spannable);
@@ -148,11 +148,11 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
     @NonNull
     private static Collection<Range<Integer>> findFreeRanges(@NonNull SpannableBuilder builder, int start, int end) {
         final List<Range<Integer>> freeRanges;
-        final var clickableSpans = getSortedSpans(builder, ClickableSpan.class, start, end);
+        final List<Span> clickableSpans = getSortedSpans(builder, ClickableSpan.class, start, end);
         if (clickableSpans.size() > 0) {
             freeRanges = new LinkedList<>();
             int from = start;
-            for (final var clickableSpan : clickableSpans) {
+            for (Span clickableSpan : clickableSpans) {
                 final int clickableStart = clickableSpan.start;
                 final int clickableEnd = clickableSpan.end;
                 if (from != clickableStart) {
@@ -189,7 +189,7 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
         private int contentLength = 0;
 
         static int contentLength(Node node) {
-            final var visitor = new TaskListContextVisitor();
+            final TaskListContextVisitor visitor = new TaskListContextVisitor();
             visitor.visitChildren(node);
             return visitor.contentLength;
         }
@@ -216,11 +216,11 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
 
         @Override
         protected void visitChildren(Node parent) {
-            var node = parent.getFirstChild();
+            Node node = parent.getFirstChild();
             while (node != null) {
                 // A subclass of this visitor might modify the node, resulting in getNext returning a different node or no
                 // node after visiting it. So get the next node before visiting.
-                final var next = node.getNext();
+                Node next = node.getNext();
                 if (node instanceof Block && !(node instanceof Paragraph)) {
                     break;
                 }

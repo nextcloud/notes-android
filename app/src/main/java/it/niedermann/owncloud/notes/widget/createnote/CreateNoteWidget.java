@@ -19,10 +19,10 @@ public class CreateNoteWidget extends AppWidgetProvider {
                                         int appWidgetId) {
 
         // Construct the RemoteViews object
-        final var views = new RemoteViews(context.getPackageName(), R.layout.widget_create_note);
-        final var intent = new Intent(context, EditNoteActivity.class);
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_create_note);
+        Intent intent = new Intent(context, EditNoteActivity.class);
 
-        final var pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         views.setOnClickPendingIntent(R.id.widget_create_note, pendingIntent);
 
         // Instruct the widget manager to update the widget
@@ -33,7 +33,7 @@ public class CreateNoteWidget extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 
         // There may be multiple widgets active, so update all of them
-        for (final int appWidgetId : appWidgetIds) {
+        for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
     }

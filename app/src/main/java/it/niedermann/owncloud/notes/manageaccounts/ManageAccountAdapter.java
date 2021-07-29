@@ -53,7 +53,7 @@ public class ManageAccountAdapter extends RecyclerView.Adapter<ManageAccountView
 
     @Override
     public void onBindViewHolder(@NonNull ManageAccountViewHolder holder, int position) {
-        final var localAccount = localAccounts.get(position);
+        final Account localAccount = localAccounts.get(position);
         holder.bind(localAccount, (localAccountClicked) -> {
             setCurrentLocalAccount(localAccountClicked);
             onAccountClick.accept(localAccountClicked);

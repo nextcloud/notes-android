@@ -60,8 +60,8 @@ public class NoteReadonlyFragment extends NotePreviewFragment {
     }
 
     public static BaseNoteFragment newInstance(String content) {
-        final var fragment = new NoteReadonlyFragment();
-        final var args = new Bundle();
+        final BaseNoteFragment fragment = new NoteReadonlyFragment();
+        final Bundle args = new Bundle();
         args.putString(PARAM_CONTENT, content);
         fragment.setArguments(args);
         return fragment;

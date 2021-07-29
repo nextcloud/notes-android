@@ -72,7 +72,7 @@ public class MultiSelectedActionModeCallback implements Callback {
         mode.getMenuInflater().inflate(R.menu.menu_list_context_multiple, menu);
         menu.findItem(R.id.menu_move).setVisible(canMoveNoteToAnotherAccounts);
         for (int i = 0; i < menu.size(); i++) {
-            var drawable = menu.getItem(i).getIcon();
+            Drawable drawable = menu.getItem(i).getIcon();
             if (drawable != null) {
                 drawable = DrawableCompat.wrap(drawable);
                 DrawableCompat.setTint(drawable, colorAccent);
@@ -96,23 +96,23 @@ public class MultiSelectedActionModeCallback implements Callback {
     public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
         int itemId = item.getItemId();
         if (itemId == R.id.menu_delete) {
-            final var selection = new ArrayList<Long>(tracker.getSelection().size());
-            for (final var sel : tracker.getSelection()) {
+            final List<Long> selection = new ArrayList<>(tracker.getSelection().size());
+            for (Long sel : tracker.getSelection()) {
                 selection.add(sel);
             }
-            final var fullNotes$ = mainViewModel.getFullNotesWithCategory(selection);
+            final LiveData<List<Note>> fullNotes$ = mainViewModel.getFullNotesWithCategory(selection);
             fullNotes$.observe(lifecycleOwner, (fullNotes) -> {
                 fullNotes$.removeObservers(lifecycleOwner);
                 tracker.clearSelection();
-                final var deleteLiveData = mainViewModel.deleteNotesAndSync(selection);
+                final LiveData<Void> deleteLiveData = mainViewModel.deleteNotesAndSync(selection);
                 deleteLiveData.observe(lifecycleOwner, (next) -> deleteLiveData.removeObservers(lifecycleOwner));
-                final String deletedSnackbarTitle = fullNotes.size() == 1
+                String deletedSnackbarTitle = fullNotes.size() == 1
                         ? context.getString(R.string.action_note_deleted, fullNotes.get(0).getTitle())
                         : context.getResources().getQuantityString(R.plurals.bulk_notes_deleted, fullNotes.size(), fullNotes.size());
                 BrandedSnackbar.make(view, deletedSnackbarTitle, Snackbar.LENGTH_LONG)
                         .setAction(R.string.action_undo, (View v) -> {
-                            for (final var deletedNote : fullNotes) {
-                                final var undoLiveData = mainViewModel.addNoteAndSync(deletedNote);
+                            for (Note deletedNote : fullNotes) {
+                                final LiveData<Note> undoLiveData = mainViewModel.addNoteAndSync(deletedNote);
                                 undoLiveData.observe(lifecycleOwner, (o) -> undoLiveData.removeObservers(lifecycleOwner));
                             }
                             String restoreSnackbarTitle = fullNotes.size() == 1
@@ -125,7 +125,7 @@ public class MultiSelectedActionModeCallback implements Callback {
             });
             return true;
         } else if (itemId == R.id.menu_move) {
-            final var currentAccount$ = mainViewModel.getCurrentAccount();
+            final LiveData<Account> currentAccount$ = mainViewModel.getCurrentAccount();
             currentAccount$.observe(lifecycleOwner, account -> {
                 currentAccount$.removeObservers(lifecycleOwner);
                 executor.submit(() -> AccountPickerDialogFragment
@@ -134,15 +134,15 @@ public class MultiSelectedActionModeCallback implements Callback {
             });
             return true;
         } else if (itemId == R.id.menu_share) {
-            final var selection = new ArrayList<Long>(tracker.getSelection().size());
-            for (final var sel : tracker.getSelection()) {
+            final List<Long> selection = new ArrayList<>(tracker.getSelection().size());
+            for (Long sel : tracker.getSelection()) {
                 selection.add(sel);
             }
             tracker.clearSelection();
 
             executor.submit(() -> {
                 if (selection.size() == 1) {
-                    final var note = mainViewModel.getFullNote(selection.get(0));
+                    final Note note = mainViewModel.getFullNote(selection.get(0));
                     ShareUtil.openShareDialog(context, note.getTitle(), note.getContent());
                 } else {
                     ShareUtil.openShareDialog(context,
@@ -152,7 +152,7 @@ public class MultiSelectedActionModeCallback implements Callback {
             });
             return true;
         } else if (itemId == R.id.menu_category) {// TODO detect whether all selected notes do have the same category - in this case preselect it
-            final var accountLiveData = mainViewModel.getCurrentAccount();
+            final LiveData<Account> accountLiveData = mainViewModel.getCurrentAccount();
             accountLiveData.observe(lifecycleOwner, account -> {
                 accountLiveData.removeObservers(lifecycleOwner);
                 CategoryDialogFragment

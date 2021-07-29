@@ -30,11 +30,11 @@ public class ExceptionDialogFragment extends AppCompatDialogFragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        final var args = getArguments();
+        final Bundle args = getArguments();
         if (args != null) {
-            final var throwablesArgument = args.getSerializable(KEY_THROWABLES);
+            final Object throwablesArgument = args.getSerializable(KEY_THROWABLES);
             if (throwablesArgument instanceof Iterable<?>) {
-                for (final var arg : (Iterable<?>) throwablesArgument) {
+                for (Object arg : (Iterable<?>) throwablesArgument) {
                     if (arg instanceof Throwable) {
                         throwables.add((Throwable) arg);
                     } else {
@@ -50,10 +50,10 @@ public class ExceptionDialogFragment extends AppCompatDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final var view = View.inflate(getContext(), R.layout.dialog_exception, null);
-        final var binding = DialogExceptionBinding.bind(view);
+        final View view = View.inflate(getContext(), R.layout.dialog_exception, null);
+        final DialogExceptionBinding binding = DialogExceptionBinding.bind(view);
 
-        final var adapter = new TipsAdapter((actionIntent) -> requireActivity().startActivity(actionIntent));
+        final TipsAdapter adapter = new TipsAdapter((actionIntent) -> requireActivity().startActivity(actionIntent));
 
         final String debugInfos = ExceptionUtil.INSTANCE.getDebugInfos(requireContext(), throwables, BuildConfig.FLAVOR);
 
@@ -72,19 +72,19 @@ public class ExceptionDialogFragment extends AppCompatDialogFragment {
     }
 
     public static DialogFragment newInstance(ArrayList<Throwable> exceptions) {
-        final var args = new Bundle();
+        final Bundle args = new Bundle();
         args.putSerializable(KEY_THROWABLES, exceptions);
-        final var fragment = new ExceptionDialogFragment();
+        final DialogFragment fragment = new ExceptionDialogFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
     public static DialogFragment newInstance(Throwable exception) {
-        final var args = new Bundle();
-        final var list = new ArrayList<Throwable>(1);
+        final Bundle args = new Bundle();
+        final ArrayList<Throwable> list = new ArrayList<>(1);
         list.add(exception);
         args.putSerializable(KEY_THROWABLES, list);
-        final var fragment = new ExceptionDialogFragment();
+        final DialogFragment fragment = new ExceptionDialogFragment();
         fragment.setArguments(args);
         return fragment;
     }

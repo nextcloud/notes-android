@@ -40,13 +40,13 @@ public class ToggleableTaskListPluginTest extends TestCase {
 
     @Test
     public void testAfterRender() throws IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException {
-        final var node = mock(Node.class);
-        final var visitor = mock(MarkwonVisitor.class);
+        final Node node = mock(Node.class);
+        final MarkwonVisitor visitor = mock(MarkwonVisitor.class);
 
-        final var markerSpanConstructor = ToggleableTaskListPlugin.ToggleMarkerSpan.class.getDeclaredConstructor(TaskListSpan.class);
+        final Constructor<ToggleableTaskListPlugin.ToggleMarkerSpan> markerSpanConstructor = ToggleableTaskListPlugin.ToggleMarkerSpan.class.getDeclaredConstructor(TaskListSpan.class);
         markerSpanConstructor.setAccessible(true);
 
-        final var builder = new SpannableBuilder("Lorem Ipsum Dolor \nSit Amet");
+        final SpannableBuilder builder = new SpannableBuilder("Lorem Ipsum Dolor \nSit Amet");
         builder.setSpan(markerSpanConstructor.newInstance(mock(TaskListSpan.class)), 0, 6);
         builder.setSpan(new URLSpan(""), 6, 11);
         builder.setSpan(markerSpanConstructor.newInstance(mock(TaskListSpan.class)), 11, 19);
@@ -55,13 +55,13 @@ public class ToggleableTaskListPluginTest extends TestCase {
 
         when(visitor.builder()).thenReturn(builder);
 
-        final var plugin = new ToggleableTaskListPlugin((i, b) -> {
+        final ToggleableTaskListPlugin plugin = new ToggleableTaskListPlugin((i, b) -> {
             // Do nothing...
         });
         plugin.afterRender(node, visitor);
 
         // We ignore marker spans in this test. They will be removed in another step
-        final var spans = builder.getSpans(0, builder.length())
+        final List<SpannableBuilder.Span> spans = builder.getSpans(0, builder.length())
                 .stream()
                 .filter(span -> span.what.getClass() != ToggleableTaskListPlugin.ToggleMarkerSpan.class)
                 .sorted((o1, o2) -> o1.start - o2.start)
@@ -87,22 +87,22 @@ public class ToggleableTaskListPluginTest extends TestCase {
 
     @Test
     public void testAfterSetText() throws IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException {
-        final var markerSpanConstructor = ToggleableTaskListPlugin.ToggleMarkerSpan.class.getDeclaredConstructor(TaskListSpan.class);
+        final Constructor<ToggleableTaskListPlugin.ToggleMarkerSpan> markerSpanConstructor = ToggleableTaskListPlugin.ToggleMarkerSpan.class.getDeclaredConstructor(TaskListSpan.class);
         markerSpanConstructor.setAccessible(true);
 
-        final var editable = new SpannableStringBuilder("Lorem Ipsum Dolor \nSit Amet");
+        final Editable editable = new SpannableStringBuilder("Lorem Ipsum Dolor \nSit Amet");
         editable.setSpan(markerSpanConstructor.newInstance(mock(TaskListSpan.class)), 0, 6, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         editable.setSpan(new URLSpan(""), 6, 11, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         editable.setSpan(markerSpanConstructor.newInstance(mock(TaskListSpan.class)), 11, 19, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         editable.setSpan(new InterceptedURLSpan(Collections.emptyList(), ""), 19, 22, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         editable.setSpan(markerSpanConstructor.newInstance(mock(TaskListSpan.class)), 22, 27, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        final var textView = new TextView(ApplicationProvider.getApplicationContext());
+        final TextView textView = new TextView(ApplicationProvider.getApplicationContext());
         textView.setText(editable);
 
         assertEquals(3, ((Spanned) textView.getText()).getSpans(0, textView.getText().length(), ToggleableTaskListPlugin.ToggleMarkerSpan.class).length);
 
-        final var plugin = new ToggleableTaskListPlugin((i, b) -> {
+        final ToggleableTaskListPlugin plugin = new ToggleableTaskListPlugin((i, b) -> {
             // Do nothing...
         });
         plugin.afterSetText(textView);
@@ -113,43 +113,43 @@ public class ToggleableTaskListPluginTest extends TestCase {
     @Test
     @SuppressWarnings({"unchecked", "ConstantConditions"})
     public void testGetSortedSpans() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        final var method = ToggleableTaskListPlugin.class.getDeclaredMethod("getSortedSpans", SpannableBuilder.class, Class.class, int.class, int.class);
-        method.setAccessible(true);
+        final Method m = ToggleableTaskListPlugin.class.getDeclaredMethod("getSortedSpans", SpannableBuilder.class, Class.class, int.class, int.class);
+        m.setAccessible(true);
 
-        final var firstClickableSpan = new URLSpan("");
-        final var secondClickableSpan = new InterceptedURLSpan(Collections.emptyList(), "");
-        final var unclickableSpan = new ForegroundColorSpan(android.R.color.white);
+        final Object firstClickableSpan = new URLSpan("");
+        final Object secondClickableSpan = new InterceptedURLSpan(Collections.emptyList(), "");
+        final Object unclickableSpan = new ForegroundColorSpan(android.R.color.white);
 
-        final var spannable = new SpannableBuilder("Lorem Ipsum Dolor \nSit Amet");
+        final SpannableBuilder spannable = new SpannableBuilder("Lorem Ipsum Dolor \nSit Amet");
         spannable.setSpan(firstClickableSpan, 6, 11, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannable.setSpan(secondClickableSpan, 19, 22, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannable.setSpan(unclickableSpan, 3, 20, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         List<SpannableBuilder.Span> clickableSpans;
 
-        clickableSpans = (List<SpannableBuilder.Span>) method.invoke(null, spannable, ClickableSpan.class, 0, 0);
+        clickableSpans = (List<SpannableBuilder.Span>) m.invoke(null, spannable, ClickableSpan.class, 0, 0);
         assertEquals(0, clickableSpans.size());
 
-        clickableSpans = (List<SpannableBuilder.Span>) method.invoke(null, spannable, ClickableSpan.class, spannable.length() - 1, spannable.length() - 1);
+        clickableSpans = (List<SpannableBuilder.Span>) m.invoke(null, spannable, ClickableSpan.class, spannable.length() - 1, spannable.length() - 1);
         assertEquals(0, clickableSpans.size());
 
-        clickableSpans = (List<SpannableBuilder.Span>) method.invoke(null, spannable, ClickableSpan.class, 0, 5);
+        clickableSpans = (List<SpannableBuilder.Span>) m.invoke(null, spannable, ClickableSpan.class, 0, 5);
         assertEquals(0, clickableSpans.size());
 
-        clickableSpans = (List<SpannableBuilder.Span>) method.invoke(null, spannable, ClickableSpan.class, 0, spannable.length());
+        clickableSpans = (List<SpannableBuilder.Span>) m.invoke(null, spannable, ClickableSpan.class, 0, spannable.length());
         assertEquals(2, clickableSpans.size());
         assertEquals(firstClickableSpan, clickableSpans.get(0).what);
         assertEquals(secondClickableSpan, clickableSpans.get(1).what);
 
-        clickableSpans = (List<SpannableBuilder.Span>) method.invoke(null, spannable, ClickableSpan.class, 0, 17);
+        clickableSpans = (List<SpannableBuilder.Span>) m.invoke(null, spannable, ClickableSpan.class, 0, 17);
         assertEquals(1, clickableSpans.size());
         assertEquals(firstClickableSpan, clickableSpans.get(0).what);
 
-        clickableSpans = (List<SpannableBuilder.Span>) method.invoke(null, spannable, ClickableSpan.class, 12, 22);
+        clickableSpans = (List<SpannableBuilder.Span>) m.invoke(null, spannable, ClickableSpan.class, 12, 22);
         assertEquals(1, clickableSpans.size());
         assertEquals(secondClickableSpan, clickableSpans.get(0).what);
 
-        clickableSpans = (List<SpannableBuilder.Span>) method.invoke(null, spannable, ClickableSpan.class, 9, 20);
+        clickableSpans = (List<SpannableBuilder.Span>) m.invoke(null, spannable, ClickableSpan.class, 9, 20);
         assertEquals(2, clickableSpans.size());
         assertEquals(firstClickableSpan, clickableSpans.get(0).what);
         assertEquals(secondClickableSpan, clickableSpans.get(1).what);
@@ -158,41 +158,41 @@ public class ToggleableTaskListPluginTest extends TestCase {
     @Test
     @SuppressWarnings({"unchecked", "ConstantConditions"})
     public void testFindFreeRanges() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        final var method = ToggleableTaskListPlugin.class.getDeclaredMethod("findFreeRanges", SpannableBuilder.class, int.class, int.class);
-        method.setAccessible(true);
+        final Method m = ToggleableTaskListPlugin.class.getDeclaredMethod("findFreeRanges", SpannableBuilder.class, int.class, int.class);
+        m.setAccessible(true);
 
-        final var firstClickableSpan = new URLSpan("");
-        final var secondClickableSpan = new InterceptedURLSpan(Collections.emptyList(), "");
-        final var spannable = new SpannableBuilder("Lorem Ipsum Dolor \nSit Amet");
+        final Object firstClickableSpan = new URLSpan("");
+        final Object secondClickableSpan = new InterceptedURLSpan(Collections.emptyList(), "");
+        final SpannableBuilder spannable = new SpannableBuilder("Lorem Ipsum Dolor \nSit Amet");
         spannable.setSpan(firstClickableSpan, 6, 11, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannable.setSpan(secondClickableSpan, 19, 22, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         List<Range<Integer>> freeRanges;
 
-        freeRanges = (List<Range<Integer>>) method.invoke(null, spannable, 0, 0);
+        freeRanges = (List<Range<Integer>>) m.invoke(null, spannable, 0, 0);
         assertEquals(0, freeRanges.size());
 
-        freeRanges = (List<Range<Integer>>) method.invoke(null, spannable, spannable.length() - 1, spannable.length() - 1);
+        freeRanges = (List<Range<Integer>>) m.invoke(null, spannable, spannable.length() - 1, spannable.length() - 1);
         assertEquals(0, freeRanges.size());
 
-        freeRanges = (List<Range<Integer>>) method.invoke(null, spannable, 0, 6);
+        freeRanges = (List<Range<Integer>>) m.invoke(null, spannable, 0, 6);
         assertEquals(1, freeRanges.size());
         assertEquals(0, (int) freeRanges.get(0).getLower());
         assertEquals(6, (int) freeRanges.get(0).getUpper());
 
-        freeRanges = (List<Range<Integer>>) method.invoke(null, spannable, 0, 6);
+        freeRanges = (List<Range<Integer>>) m.invoke(null, spannable, 0, 6);
         assertEquals(1, freeRanges.size());
         assertEquals(0, (int) freeRanges.get(0).getLower());
         assertEquals(6, (int) freeRanges.get(0).getUpper());
 
-        freeRanges = (List<Range<Integer>>) method.invoke(null, spannable, 3, 15);
+        freeRanges = (List<Range<Integer>>) m.invoke(null, spannable, 3, 15);
         assertEquals(2, freeRanges.size());
         assertEquals(3, (int) freeRanges.get(0).getLower());
         assertEquals(6, (int) freeRanges.get(0).getUpper());
         assertEquals(11, (int) freeRanges.get(1).getLower());
         assertEquals(15, (int) freeRanges.get(1).getUpper());
 
-        freeRanges = (List<Range<Integer>>) method.invoke(null, spannable, 0, spannable.length());
+        freeRanges = (List<Range<Integer>>) m.invoke(null, spannable, 0, spannable.length());
         assertEquals(3, freeRanges.size());
         assertEquals(0, (int) freeRanges.get(0).getLower());
         assertEquals(6, (int) freeRanges.get(0).getUpper());

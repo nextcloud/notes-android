@@ -56,15 +56,16 @@ public class AccountPickerDialogFragment extends BrandedDialogFragment {
         } else {
             throw new ClassCastException("Caller must implement " + AccountPickerListener.class.getSimpleName());
         }
-        final var args = requireArguments();
+        final Bundle args = requireArguments();
+        final Collection<?> accounts;
         if (!args.containsKey(PARAM_TARGET_ACCOUNTS)) {
             throw new IllegalArgumentException(PARAM_TARGET_ACCOUNTS + " is required.");
         }
-        final var accounts = (Collection<?>) args.getSerializable(PARAM_TARGET_ACCOUNTS);
+        accounts = (Collection<?>) args.getSerializable(PARAM_TARGET_ACCOUNTS);
         if (accounts == null) {
             throw new IllegalArgumentException(PARAM_TARGET_ACCOUNTS + " is required.");
         }
-        final long currentAccountId = requireArguments().getLong(PARAM_CURRENT_ACCOUNT_ID, -1L);
+        long currentAccountId = requireArguments().getLong(PARAM_CURRENT_ACCOUNT_ID, -1L);
         targetAccounts = accounts
                 .stream()
                 .map(a -> (Account) a)
@@ -75,13 +76,13 @@ public class AccountPickerDialogFragment extends BrandedDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final var dialogBuilder = new BrandedAlertDialogBuilder(requireActivity())
+        final AlertDialog.Builder dialogBuilder = new BrandedAlertDialogBuilder(requireActivity())
                 .setTitle(R.string.simple_move)
                 .setNegativeButton(android.R.string.cancel, null);
 
         if (targetAccounts.size() > 0) {
-            final var binding = DialogChooseAccountBinding.inflate(LayoutInflater.from(requireContext()));
-            final var adapter = new AccountChooserAdapter(targetAccounts, (account -> {
+            final DialogChooseAccountBinding binding = DialogChooseAccountBinding.inflate(LayoutInflater.from(requireContext()));
+            RecyclerView.Adapter<AccountChooserViewHolder> adapter = new AccountChooserAdapter(targetAccounts, (account -> {
                 accountPickerListener.onAccountPicked(account);
                 dismiss();
             }));
@@ -102,8 +103,8 @@ public class AccountPickerDialogFragment extends BrandedDialogFragment {
     }
 
     public static DialogFragment newInstance(@NonNull ArrayList<Account> targetAccounts, long currentAccountId) {
-        final var fragment = new AccountPickerDialogFragment();
-        final var args = new Bundle();
+        final DialogFragment fragment = new AccountPickerDialogFragment();
+        final Bundle args = new Bundle();
         args.putSerializable(PARAM_TARGET_ACCOUNTS, targetAccounts);
         args.putLong(PARAM_CURRENT_ACCOUNT_ID, currentAccountId);
         fragment.setArguments(args);

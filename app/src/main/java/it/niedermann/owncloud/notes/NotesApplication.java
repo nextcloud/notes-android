@@ -27,7 +27,7 @@ public class NotesApplication extends Application {
     public void onCreate() {
         PREF_KEY_THEME = getString(R.string.pref_key_theme);
         setAppTheme(getAppTheme(getApplicationContext()));
-        final var prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         lockedPreference = prefs.getBoolean(getString(R.string.pref_key_lock), false);
         isGridViewEnabled = getDefaultSharedPreferences(this).getBoolean(getString(R.string.pref_key_gridview), false);
         super.onCreate();
@@ -46,12 +46,12 @@ public class NotesApplication extends Application {
     }
 
     public static DarkModeSetting getAppTheme(Context context) {
-        final var prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String mode;
         try {
             mode = prefs.getString(PREF_KEY_THEME, DarkModeSetting.SYSTEM_DEFAULT.name());
         } catch (ClassCastException e) {
-            final boolean darkModeEnabled = prefs.getBoolean(PREF_KEY_THEME, false);
+            boolean darkModeEnabled = prefs.getBoolean(PREF_KEY_THEME, false);
             mode = darkModeEnabled ? DarkModeSetting.DARK.name() : DarkModeSetting.LIGHT.name();
         }
         return DarkModeSetting.valueOf(mode);

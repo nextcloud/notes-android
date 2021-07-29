@@ -25,16 +25,18 @@ public abstract class BrandedFragment extends Fragment implements Branded {
     public void onStart() {
         super.onStart();
 
-        final var context = requireContext();
-        final var typedValue = new TypedValue();
-        context.getTheme().resolveAttribute(R.attr.colorAccent, typedValue, true);
+        final TypedValue typedValue = new TypedValue();
+        requireActivity().getTheme().resolveAttribute(R.attr.colorAccent, typedValue, true);
         colorAccent = typedValue.data;
-        context.getTheme().resolveAttribute(R.attr.colorPrimary, typedValue, true);
+        requireActivity().getTheme().resolveAttribute(R.attr.colorPrimary, typedValue, true);
         colorPrimary = typedValue.data;
 
-        @ColorInt final int mainColor = BrandingUtil.readBrandMainColor(context);
-        @ColorInt final int textColor = BrandingUtil.readBrandTextColor(context);
-        applyBrand(mainColor, textColor);
+        @Nullable Context context = getContext();
+        if (context != null) {
+            @ColorInt final int mainColor = BrandingUtil.readBrandMainColor(context);
+            @ColorInt final int textColor = BrandingUtil.readBrandTextColor(context);
+            applyBrand(mainColor, textColor);
+        }
     }
 
     @Override

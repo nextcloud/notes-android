@@ -60,7 +60,7 @@ public class SearchHighlightPlugin extends AbstractMarkwonPlugin {
     public void afterSetText(@NonNull TextView textView) {
         super.afterSetText(textView);
         if (this.searchText != null) {
-            final var spannable = getContentAsSpannable(textView);
+            final Spannable spannable = getContentAsSpannable(textView);
             MarkdownUtil.searchAndColor(spannable, searchText, current, color, highlightColor, darkTheme);
         }
     }

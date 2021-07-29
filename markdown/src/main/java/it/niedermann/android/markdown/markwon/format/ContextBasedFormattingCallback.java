@@ -34,7 +34,7 @@ public class ContextBasedFormattingCallback implements ActionMode.Callback {
 
     @Override
     public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-        final var text = editText.getText();
+        final CharSequence text = editText.getText();
         if (text != null) {
             final int cursorPosition = editText.getSelectionStart();
             if (cursorPosition >= 0 && cursorPosition <= text.length()) {
@@ -54,7 +54,7 @@ public class ContextBasedFormattingCallback implements ActionMode.Callback {
 
     @Override
     public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-        final var editable = editText.getText();
+        final Editable editable = editText.getText();
         if (editable != null) {
             final int itemId = item.getItemId();
             final int cursorPosition = editText.getSelectionStart();

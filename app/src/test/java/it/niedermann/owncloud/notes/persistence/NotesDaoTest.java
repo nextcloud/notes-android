@@ -105,7 +105,7 @@ public class NotesDaoTest {
 
     @Test
     public void getRemoteIds() {
-        final var secondAccount = setupSecondAccount();
+        final Account secondAccount = setupSecondAccount();
 
         db.getNoteDao().addNote(new Note(1, 4711L, Calendar.getInstance(), "T", "C", "", false, "1", VOID, account.getId(), "", 0));
         db.getNoteDao().addNote(new Note(2, 1234L, Calendar.getInstance(), "T", "C", "", false, "1", LOCAL_EDITED, account.getId(), "", 0));
@@ -125,7 +125,7 @@ public class NotesDaoTest {
         db.getNoteDao().addNote(new Note(666, 1234L, Calendar.getInstance(), "T", "C", "", false, "1", LOCAL_EDITED, account.getId(), "", 0));
         db.getNoteDao().addNote(new Note(987, 6969L, Calendar.getInstance(), "T", "C", "", false, "1", LOCAL_DELETED, account.getId(), "", 0));
 
-        final var pair = db.getNoteDao().getRemoteIdAndId(account.getId());
+        final List<Note> pair = db.getNoteDao().getRemoteIdAndId(account.getId());
         assertEquals(2, pair.size());
         assertTrue(pair.stream().anyMatch(note -> 815 == note.getId() && Long.valueOf(4711).equals(note.getRemoteId())));
         assertTrue(pair.stream().anyMatch(note -> 666 == note.getId() && Long.valueOf(1234).equals(note.getRemoteId())));
@@ -157,7 +157,7 @@ public class NotesDaoTest {
 
     @Test
     public void count() throws InterruptedException {
-        final var secondAccount = setupSecondAccountAndTestNotes();
+        final Account secondAccount = setupSecondAccountAndTestNotes();
 
         assertEquals(Integer.valueOf(7), db.getNoteDao().count(account.getId()));
         assertEquals(Integer.valueOf(5), db.getNoteDao().count(secondAccount.getId()));
@@ -168,15 +168,15 @@ public class NotesDaoTest {
 
     @Test
     public void getLocalModifiedNotes() {
-        final var secondAccount = setupSecondAccountAndTestNotes();
+        final Account secondAccount = setupSecondAccountAndTestNotes();
 
-        final var accountNotes = db.getNoteDao().getLocalModifiedNotes(account.getId());
+        final List<Note> accountNotes = db.getNoteDao().getLocalModifiedNotes(account.getId());
         assertEquals(6, accountNotes.size());
         for (Note note : accountNotes) {
             assertNotEquals(VOID, note.getStatus());
         }
 
-        final var secondAccountNotes = db.getNoteDao().getLocalModifiedNotes(secondAccount.getId());
+        final List<Note> secondAccountNotes = db.getNoteDao().getLocalModifiedNotes(secondAccount.getId());
         assertEquals(7, secondAccountNotes.size());
         for (Note note : secondAccountNotes) {
             assertNotEquals(VOID, note.getStatus());
@@ -185,7 +185,7 @@ public class NotesDaoTest {
 
     @Test
     public void toggleFavorite() {
-        final var note = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", LOCAL_DELETED, account.getId(), "", 0);
+        final Note note = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", LOCAL_DELETED, account.getId(), "", 0);
         db.getNoteDao().addNote(note);
         db.getNoteDao().toggleFavorite(note.getId());
         assertTrue(db.getNoteDao().getNoteById(note.getId()).getFavorite());
@@ -197,7 +197,7 @@ public class NotesDaoTest {
 
     @Test
     public void updateRemoteId() {
-        final var note = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", LOCAL_DELETED, account.getId(), "", 0);
+        final Note note = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", LOCAL_DELETED, account.getId(), "", 0);
         db.getNoteDao().addNote(note);
         db.getNoteDao().updateRemoteId(1, 5L);
         assertEquals(Long.valueOf(5), db.getNoteDao().getNoteById(1).getRemoteId());
@@ -205,8 +205,8 @@ public class NotesDaoTest {
 
     @Test
     public void updateIfNotModifiedLocallyDuringSync_NotModified() {
-        final var localNote = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, null, VOID, account.getId(), "", 0);
-        final var targetNote = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, null, VOID, account.getId(), "", 0);
+        final Note localNote = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, null, VOID, account.getId(), "", 0);
+        final Note targetNote = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, null, VOID, account.getId(), "", 0);
 
         db.getNoteDao().addNote(localNote);
 
@@ -215,8 +215,8 @@ public class NotesDaoTest {
 
     @Test
     public void updateIfNotModifiedLocallyDuringSync_ModifiedContent() {
-        final var localNote = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, null, VOID, account.getId(), "", 0);
-        final var targetNote = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, null, VOID, account.getId(), "", 0);
+        final Note localNote = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, null, VOID, account.getId(), "", 0);
+        final Note targetNote = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, null, VOID, account.getId(), "", 0);
 
         db.getNoteDao().addNote(localNote);
 
@@ -227,8 +227,8 @@ public class NotesDaoTest {
 
     @Test
     public void updateIfNotModifiedLocallyDuringSync_ModifiedFavorite() {
-        final var localNote = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, null, VOID, account.getId(), "", 0);
-        final var targetNote = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, null, VOID, account.getId(), "", 0);
+        final Note localNote = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, null, VOID, account.getId(), "", 0);
+        final Note targetNote = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, null, VOID, account.getId(), "", 0);
 
         db.getNoteDao().addNote(localNote);
 
@@ -239,8 +239,8 @@ public class NotesDaoTest {
 
     @Test
     public void updateIfNotModifiedLocallyDuringSync_ModifiedCategory() {
-        final var localNote = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, null, VOID, account.getId(), "", 0);
-        final var targetNote = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, null, VOID, account.getId(), "", 0);
+        final Note localNote = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, null, VOID, account.getId(), "", 0);
+        final Note targetNote = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, null, VOID, account.getId(), "", 0);
 
         db.getNoteDao().addNote(localNote);
 
@@ -251,95 +251,95 @@ public class NotesDaoTest {
 
     @Test
     public void updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged_Nothing() {
-        final var localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", VOID, account.getId(), "", 0)));
+        final Note localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", VOID, account.getId(), "", 0)));
         assertEquals(0, db.getNoteDao().updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
                 localNote.getId(), localNote.getModified().getTimeInMillis(), localNote.getTitle(), localNote.getFavorite(), localNote.getCategory(), localNote.getETag(), localNote.getContent(), localNote.getExcerpt()));
     }
 
     @Test
     public void updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged_Nothing_ETagWasAndIsNull() {
-        final var localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, null, VOID, account.getId(), "", 0)));
+        final Note localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, null, VOID, account.getId(), "", 0)));
         assertEquals(1, db.getNoteDao().updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
                 localNote.getId(), localNote.getModified().getTimeInMillis(), localNote.getTitle(), localNote.getFavorite(), localNote.getCategory(), null, localNote.getContent(), localNote.getExcerpt()));
     }
 
     @Test
     public void updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged_Nothing_ETagWasNullButChanged() {
-        final var localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, null, VOID, account.getId(), "", 0)));
+        final Note localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, null, VOID, account.getId(), "", 0)));
         assertEquals(1, db.getNoteDao().updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
                 localNote.getId(), localNote.getModified().getTimeInMillis(), localNote.getTitle(), localNote.getFavorite(), localNote.getCategory(), "1", localNote.getContent(), localNote.getExcerpt()));
     }
 
     @Test
     public void updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged_Modified() {
-        final var localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", VOID, account.getId(), "", 0)));
+        final Note localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", VOID, account.getId(), "", 0)));
         assertEquals(1, db.getNoteDao().updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
                 localNote.getId(), localNote.getModified().getTimeInMillis() + 1000, localNote.getTitle(), localNote.getFavorite(), localNote.getCategory(), localNote.getETag(), localNote.getContent(), localNote.getExcerpt()));
     }
 
     @Test
     public void updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged_Title() {
-        final var localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", VOID, account.getId(), "", 0)));
+        final Note localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", VOID, account.getId(), "", 0)));
         assertEquals(1, db.getNoteDao().updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
                 localNote.getId(), localNote.getModified().getTimeInMillis(), localNote.getTitle() + " ", localNote.getFavorite(), localNote.getCategory(), localNote.getETag(), localNote.getContent(), localNote.getExcerpt()));
     }
 
     @Test
     public void updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged_Favorite() {
-        final var localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", VOID, account.getId(), "", 0)));
+        final Note localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", VOID, account.getId(), "", 0)));
         assertEquals(1, db.getNoteDao().updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
                 localNote.getId(), localNote.getModified().getTimeInMillis(), localNote.getTitle(), !localNote.getFavorite(), localNote.getCategory(), localNote.getETag(), localNote.getContent(), localNote.getExcerpt()));
     }
 
     @Test
     public void updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged_Category() {
-        final var localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", VOID, account.getId(), "", 0)));
+        final Note localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", VOID, account.getId(), "", 0)));
         assertEquals(1, db.getNoteDao().updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
                 localNote.getId(), localNote.getModified().getTimeInMillis(), localNote.getTitle(), localNote.getFavorite(), localNote.getCategory() + " ", localNote.getETag(), localNote.getContent(), localNote.getExcerpt()));
     }
 
     @Test
     public void updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged_ETag() {
-        final var localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", VOID, account.getId(), "", 0)));
+        final Note localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", VOID, account.getId(), "", 0)));
         assertEquals(1, db.getNoteDao().updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
                 localNote.getId(), localNote.getModified().getTimeInMillis(), localNote.getTitle(), localNote.getFavorite(), localNote.getCategory(), localNote.getETag() + " ", localNote.getContent(), localNote.getExcerpt()));
     }
 
     @Test
     public void updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged_Content() {
-        final var localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", VOID, account.getId(), "", 0)));
+        final Note localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", VOID, account.getId(), "", 0)));
         assertEquals(1, db.getNoteDao().updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
                 localNote.getId(), localNote.getModified().getTimeInMillis(), localNote.getTitle(), localNote.getFavorite(), localNote.getCategory(), localNote.getETag(), localNote.getContent() + " ", localNote.getExcerpt()));
     }
 
     @Test
     public void updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged_Excerpt() {
-        final var localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", VOID, account.getId(), "", 0)));
+        final Note localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", VOID, account.getId(), "", 0)));
         assertEquals("Excerpt is a local property, and therefore should not prevent updating if different", 0, db.getNoteDao().updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
                 localNote.getId(), localNote.getModified().getTimeInMillis(), localNote.getTitle(), localNote.getFavorite(), localNote.getCategory(), localNote.getETag(), localNote.getContent(), localNote.getExcerpt() + " "));
     }
 
     @Test
     public void updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged_ContentChangedButWasLocalEdited() {
-        final var localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", LOCAL_EDITED, account.getId(), "", 0)));
+        final Note localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", LOCAL_EDITED, account.getId(), "", 0)));
         assertEquals(0, db.getNoteDao().updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
                 localNote.getId(), localNote.getModified().getTimeInMillis(), localNote.getTitle(), localNote.getFavorite(), localNote.getCategory(), localNote.getETag(), localNote.getContent() + " ", localNote.getExcerpt()));
     }
 
     @Test
     public void updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged_ContentChangedButWasLocalDeleted() {
-        final var localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", LOCAL_DELETED, account.getId(), "", 0)));
+        final Note localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", LOCAL_DELETED, account.getId(), "", 0)));
         assertEquals(0, db.getNoteDao().updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
                 localNote.getId(), localNote.getModified().getTimeInMillis(), localNote.getTitle(), localNote.getFavorite(), localNote.getCategory(), localNote.getETag(), localNote.getContent() + " ", localNote.getExcerpt()));
     }
 
     @Test
     public void getCategoriesLiveData() throws InterruptedException {
-        final var secondAccount = setupSecondAccountAndTestNotes();
+        final Account secondAccount = setupSecondAccountAndTestNotes();
 
-        final var accountCategories = NotesTestingUtil.getOrAwaitValue(db.getNoteDao().getCategories$(account.getId()));
+        final List<CategoryWithNotesCount> accountCategories = NotesTestingUtil.getOrAwaitValue(db.getNoteDao().getCategories$(account.getId()));
         assertEquals(4, accountCategories.size());
-        for (final var category : accountCategories) {
+        for (CategoryWithNotesCount category : accountCategories) {
             assertEquals(account.getId(), category.getAccountId());
         }
 
@@ -348,9 +348,9 @@ public class NotesDaoTest {
         assertTrue(accountCategories.stream().anyMatch(cat -> "ToDo".equals(cat.getCategory()) && Integer.valueOf(1).equals(cat.getTotalNotes())));
         assertTrue(accountCategories.stream().anyMatch(cat -> "日记".equals(cat.getCategory()) && Integer.valueOf(1).equals(cat.getTotalNotes())));
 
-        final var secondAccountCategories = NotesTestingUtil.getOrAwaitValue(db.getNoteDao().getCategories$(secondAccount.getId()));
+        final List<CategoryWithNotesCount> secondAccountCategories = NotesTestingUtil.getOrAwaitValue(db.getNoteDao().getCategories$(secondAccount.getId()));
         assertEquals(2, secondAccountCategories.size());
-        for (final var category : secondAccountCategories) {
+        for (CategoryWithNotesCount category : secondAccountCategories) {
             assertEquals(secondAccount.getId(), category.getAccountId());
         }
         assertTrue(secondAccountCategories.stream().anyMatch(cat -> "Movies".equals(cat.getCategory()) && Integer.valueOf(4).equals(cat.getTotalNotes())));
@@ -361,7 +361,7 @@ public class NotesDaoTest {
 
     @Test
     public void searchCategories() throws InterruptedException {
-        final var secondAccount = setupSecondAccountAndTestNotes();
+        final Account secondAccount = setupSecondAccountAndTestNotes();
 
         assertEquals(2, NotesTestingUtil.getOrAwaitValue(db.getNoteDao().searchCategories$(account.getId(), "M%")).size());
         assertEquals(1, NotesTestingUtil.getOrAwaitValue(db.getNoteDao().searchCategories$(account.getId(), "Mo%")).size());
@@ -375,10 +375,10 @@ public class NotesDaoTest {
 
     @Test
     public void searchRecentByModified() {
-        final var secondAccount = setupSecondAccountAndTestNotes();
-        final var result = db.getNoteDao().searchRecentByModified(secondAccount.getId(), "T");
+        final Account secondAccount = setupSecondAccountAndTestNotes();
+        final List<Note> result = db.getNoteDao().searchRecentByModified(secondAccount.getId(), "T");
         assertEquals(5, result.size());
-        for (final var note : result) {
+        for (Note note : result) {
             assertNotEquals(DBStatus.LOCAL_DELETED, note.getStatus());
             assertEquals(secondAccount.getId(), note.getAccountId());
             assertTrue(note.getTitle().toLowerCase().contains("t") || note.getTitle().toLowerCase().contains("t"));
@@ -400,10 +400,10 @@ public class NotesDaoTest {
     }
 
     private Account setupSecondAccountAndTestNotes() {
-        final var secondAccount = setupSecondAccount();
+        final Account secondAccount = setupSecondAccount();
 
         long uniqueId = 1;
-        final var notes = new Note[]{
+        final Note[] notes = new Note[]{
                 new Note(uniqueId++, uniqueId++, Calendar.getInstance(), "T", "C", "Movies", false, null, VOID, account.getId(), "", 0),
                 new Note(uniqueId++, uniqueId++, Calendar.getInstance(), "T", "C", "Movies", false, null, LOCAL_EDITED, account.getId(), "", 0),
                 new Note(uniqueId++, uniqueId++, Calendar.getInstance(), "T", "C", "Movies", false, null, LOCAL_EDITED, account.getId(), "", 0),
@@ -425,7 +425,7 @@ public class NotesDaoTest {
                 new Note(uniqueId++, uniqueId++, Calendar.getInstance(), "T", "C", "ToDo", true, null, LOCAL_DELETED, secondAccount.getId(), "", 0),
                 new Note(uniqueId++, uniqueId, Calendar.getInstance(), "T", "C", "ToDo", true, null, LOCAL_DELETED, secondAccount.getId(), "", 0)
         };
-        for (final var note : notes) {
+        for (Note note : notes) {
             db.getNoteDao().addNote(note);
         }
         return secondAccount;

@@ -65,15 +65,15 @@ public class NotesRepositoryTest {
 
     @Before
     public void setupDB() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException, JSONException {
-        final var context = ApplicationProvider.getApplicationContext();
+        final Context context = ApplicationProvider.getApplicationContext();
         db = Room
                 .inMemoryDatabaseBuilder(ApplicationProvider.getApplicationContext(), NotesDatabase.class)
                 .allowMainThreadQueries()
                 .build();
 
-        final var constructor = NotesRepository.class.getDeclaredConstructor(Context.class, NotesDatabase.class, ExecutorService.class, ExecutorService.class, ApiProvider.class);
+        final Constructor<NotesRepository> constructor = NotesRepository.class.getDeclaredConstructor(Context.class, NotesDatabase.class, ExecutorService.class, ExecutorService.class, ApiProvider.class);
         constructor.setAccessible(true);
-        final var executor = MoreExecutors.newDirectExecutorService();
+        final ExecutorService executor = MoreExecutors.newDirectExecutorService();
         repo = constructor.newInstance(context, db, executor, executor, ApiProvider.getInstance());
 
         repo.addAccount("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", new Capabilities(), null, new IResponseCallback<Account>() {
@@ -122,20 +122,20 @@ public class NotesRepositoryTest {
 
     @Test
     public void testGetInstance() {
-        final var repo = NotesRepository.getInstance(ApplicationProvider.getApplicationContext());
+        final NotesRepository repo = NotesRepository.getInstance(ApplicationProvider.getApplicationContext());
         assertNotNull("Result of NotesRepository.getInstance() must not be null", repo);
         assertSame("Result of NotesRepository.getInstance() must always return the same instance", repo, NotesRepository.getInstance(ApplicationProvider.getApplicationContext()));
     }
 
     @Test
     public void testGetIdMap() {
-        final var idMapOfFirstAccount = repo.getIdMap(account.getId());
+        final Map<Long, Long> idMapOfFirstAccount = repo.getIdMap(account.getId());
         assertEquals(3, idMapOfFirstAccount.size());
         assertEquals(Long.valueOf(1L), idMapOfFirstAccount.get(1001L));
         assertEquals(Long.valueOf(3L), idMapOfFirstAccount.get(1003L));
         assertEquals(Long.valueOf(5L), idMapOfFirstAccount.get(1005L));
 
-        final var idMapOfSecondAccount = repo.getIdMap(secondAccount.getId());
+        final Map<Long, Long> idMapOfSecondAccount = repo.getIdMap(secondAccount.getId());
         assertEquals(1, idMapOfSecondAccount.size());
         assertEquals(Long.valueOf(8L), idMapOfSecondAccount.get(1008L));
     }
@@ -170,13 +170,13 @@ public class NotesRepositoryTest {
 
     @Test
     public void testAddNote() {
-        final var localNote = new Note(null, Calendar.getInstance(), "Fancy Title", "MyContent", "Samples", false, "123");
+        final Note localNote = new Note(null, Calendar.getInstance(), "Fancy Title", "MyContent", "Samples", false, "123");
         localNote.setId(99);
-        final var createdNoteFromLocal = repo.addNote(account.getId(), localNote);
+        final Note createdNoteFromLocal = repo.addNote(account.getId(), localNote);
         assertEquals(LOCAL_EDITED, createdNoteFromLocal.getStatus());
         assertEquals("MyContent", createdNoteFromLocal.getExcerpt());
 
-        final var createdNoteFromRemote = repo.addNote(account.getId(), new Note(null, Calendar.getInstance(), "Fancy Title", "MyContent", "Samples", false, "123"));
+        final Note createdNoteFromRemote = repo.addNote(account.getId(), new Note(null, Calendar.getInstance(), "Fancy Title", "MyContent", "Samples", false, "123"));
         assertEquals(VOID, createdNoteFromRemote.getStatus());
         assertEquals("MyContent", createdNoteFromRemote.getExcerpt());
     }
@@ -210,8 +210,8 @@ public class NotesRepositoryTest {
 
     @Test
     public void moveNoteToAnotherAccount() throws InterruptedException {
-        final var repoSpy = spy(repo);
-        final var noteToMove = repoSpy.getNoteById(1);
+        final NotesRepository repoSpy = spy(repo);
+        final Note noteToMove = repoSpy.getNoteById(1);
 
         assertEquals(VOID, noteToMove.getStatus());
         assertEquals(3, repoSpy.getLocalModifiedNotes(secondAccount.getId()).size());
@@ -219,7 +219,7 @@ public class NotesRepositoryTest {
         doNothing().when(repoSpy).deleteNoteAndSync(any(), anyLong());
         doNothing().when(repoSpy).scheduleSync(any(), anyBoolean());
 
-        final var movedNote = getOrAwaitValue(repoSpy.moveNoteToAnotherAccount(secondAccount, noteToMove));
+        final Note movedNote = getOrAwaitValue(repoSpy.moveNoteToAnotherAccount(secondAccount, noteToMove));
 
         assertEquals(4, repoSpy.getLocalModifiedNotes(secondAccount.getId()).size());
         assertEquals("美好的一天", movedNote.getTitle());
@@ -261,7 +261,7 @@ public class NotesRepositoryTest {
 
     @Test
     public void updateDisplayName() {
-        final var account = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", null, new Capabilities())));
+        final Account account = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", null, new Capabilities())));
         assertEquals("Should read userName in favor of displayName if displayName is NULL", "彼得", account.getDisplayName());
 
         repo.updateDisplayName(account.getId(), "");

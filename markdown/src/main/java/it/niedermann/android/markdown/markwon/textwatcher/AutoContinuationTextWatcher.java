@@ -40,7 +40,7 @@ public class AutoContinuationTextWatcher extends InterceptorTextWatcher {
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
         if (count > 0) {
-            final var inserted = getInsertedString(s, start, before, count);
+            final CharSequence inserted = getInsertedString(s, start, before, count);
             if (inserted.length() > 0 && inserted.charAt(inserted.length() - 1) == '\n') {
                 handleNewlineInserted(s, start, count);
             }
@@ -52,7 +52,7 @@ public class AutoContinuationTextWatcher extends InterceptorTextWatcher {
     @Override
     public void afterTextChanged(Editable s) {
         if (customText != null) {
-            final var customText = this.customText;
+            final CharSequence customText = this.customText;
             this.customText = null;
             if (isInsert) {
                 insertCustomText(s, customText);
@@ -84,23 +84,23 @@ public class AutoContinuationTextWatcher extends InterceptorTextWatcher {
     }
 
     private void handleNewlineInserted(CharSequence originalSequence, int start, int count) {
-        final var s = originalSequence.subSequence(0, originalSequence.length());
+        final CharSequence s = originalSequence.subSequence(0, originalSequence.length());
         final int startOfLine = getStartOfLine(s, start);
         final String line = s.subSequence(startOfLine, getEndOfLine(s, start)).toString();
 
-        final var emptyListString = getListItemIfIsEmpty(line);
+        final Optional<String> emptyListString = getListItemIfIsEmpty(line);
         if (emptyListString.isPresent()) {
             customText = emptyListString.get();
             isInsert = false;
             sequenceStart = startOfLine;
         } else {
-            final var builder = new StringBuilder();
-            final var matcher = REGEX_WHITESPACES.matcher(line);
+            final StringBuilder builder = new StringBuilder();
+            final Matcher matcher = REGEX_WHITESPACES.matcher(line);
             if (matcher.find()) {
                 builder.append(matcher.group());
             }
             final String trimmedLine = line.trim();
-            for (final var listType : EListType.values()) {
+            for (EListType listType : EListType.values()) {
                 final boolean isCheckboxList = lineStartsWithCheckbox(trimmedLine, listType);
                 final boolean isPlainList = !isCheckboxList && trimmedLine.startsWith(listType.listSymbolWithTrailingSpace);
                 if (isPlainList || isCheckboxList) {
@@ -112,7 +112,7 @@ public class AutoContinuationTextWatcher extends InterceptorTextWatcher {
                 }
             }
 
-            final var orderedListNumber = getOrderedListNumber(trimmedLine);
+            final Optional<Integer> orderedListNumber = getOrderedListNumber(trimmedLine);
             if (orderedListNumber.isPresent()) {
                 customText = builder.append(orderedListNumber.get() + 1).append(". ");
                 isInsert = true;

@@ -16,15 +16,16 @@ public class NewNoteTileService extends TileService {
 
     @Override
     public void onStartListening() {
-        final var tile = getQsTile();
+        Tile tile = getQsTile();
         tile.setState(Tile.STATE_ACTIVE);
+
         tile.updateTile();
     }
 
     @Override
     public void onClick() {
         // create new note intent
-        final var newNoteIntent = new Intent(getApplicationContext(), EditNoteActivity.class);
+        final Intent newNoteIntent = new Intent(getApplicationContext(), EditNoteActivity.class);
         // ensure it won't open twice if already running
         newNoteIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         // ask to unlock the screen if locked, then start new note intent

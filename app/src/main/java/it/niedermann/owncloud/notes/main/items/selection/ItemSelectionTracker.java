@@ -22,7 +22,7 @@ public class ItemSelectionTracker {
                 new ItemLookup(recyclerView),
                 StorageStrategy.createLongStorage()
         ).withSelectionPredicate(
-                new SelectionTracker.SelectionPredicate<>() {
+                new SelectionTracker.SelectionPredicate<Long>() {
                     @Override
                     public boolean canSetStateForKey(@NonNull Long key, boolean nextState) {
                         return true;

@@ -47,7 +47,7 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
             throw new ClassCastException("Caller must implement " + AccountSwitcherListener.class.getSimpleName());
         }
 
-        final var args = getArguments();
+        final Bundle args = getArguments();
 
         if (args == null || !args.containsKey(KEY_CURRENT_ACCOUNT_ID)) {
             throw new IllegalArgumentException("Please provide at least " + KEY_CURRENT_ACCOUNT_ID);
@@ -63,7 +63,7 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         binding = DialogAccountSwitcherBinding.inflate(requireActivity().getLayoutInflater());
 
-        final var account$ = repo.getAccountById$(currentAccountId);
+        final LiveData<Account> account$ = repo.getAccountById$(currentAccountId);
         account$.observe(requireActivity(), (currentLocalAccount) -> {
             account$.removeObservers(requireActivity());
 
@@ -76,15 +76,15 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
                     .into(binding.currentAccountItemAvatar);
             binding.accountLayout.setOnClickListener((v) -> dismiss());
 
-            final var adapter = new AccountSwitcherAdapter((localAccount -> {
+            final AccountSwitcherAdapter adapter = new AccountSwitcherAdapter((localAccount -> {
                 accountSwitcherListener.onAccountChosen(localAccount);
                 dismiss();
             }));
             binding.accountsList.setAdapter(adapter);
-            final var localAccounts$ = repo.getAccounts$();
+            final LiveData<List<Account>> localAccounts$ = repo.getAccounts$();
             localAccounts$.observe(requireActivity(), (localAccounts) -> {
                 localAccounts$.removeObservers(requireActivity());
-                for (final var localAccount : localAccounts) {
+                for (Account localAccount : localAccounts) {
                     if (localAccount.getId() == currentLocalAccount.getId()) {
                         localAccounts.remove(localAccount);
                         break;
@@ -110,9 +110,9 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
     }
 
     public static DialogFragment newInstance(long currentAccountId) {
-        final var dialog = new AccountSwitcherDialog();
+        DialogFragment dialog = new AccountSwitcherDialog();
 
-        final var args = new Bundle();
+        Bundle args = new Bundle();
         args.putLong(KEY_CURRENT_ACCOUNT_ID, currentAccountId);
         dialog.setArguments(args);
 

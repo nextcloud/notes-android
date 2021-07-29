@@ -38,7 +38,7 @@ public class CapabilitiesDeserializerTest {
                 "        }" +
                 "    }" +
                 "}";
-        final var capabilities = deserializer.deserialize(JsonParser.parseString(response), null, null);
+        final Capabilities capabilities = deserializer.deserialize(JsonParser.parseString(response), null, null);
         assertNull(capabilities.getETag());
         assertNull(capabilities.getApiVersion());
         assertEquals(Color.parseColor("#1E4164"), capabilities.getColor());
@@ -71,7 +71,7 @@ public class CapabilitiesDeserializerTest {
                 "        }" +
                 "    }" +
                 "}";
-        final var capabilities = deserializer.deserialize(JsonParser.parseString(response), null, null);
+        final Capabilities capabilities = deserializer.deserialize(JsonParser.parseString(response), null, null);
         assertNull(capabilities.getETag());
         assertEquals("[\"0.2\",\"1.1\"]", capabilities.getApiVersion());
         assertEquals(Color.parseColor("#1E4164"), capabilities.getColor());
@@ -104,7 +104,7 @@ public class CapabilitiesDeserializerTest {
                 "        }" +
                 "    }" +
                 "}";
-        final var capabilities = deserializer.deserialize(JsonParser.parseString(response), null, null);
+        final Capabilities capabilities = deserializer.deserialize(JsonParser.parseString(response), null, null);
         assertNull(capabilities.getETag());
         assertEquals("\"1.0\"", capabilities.getApiVersion());
         assertEquals(Color.parseColor("#1E4164"), capabilities.getColor());
@@ -300,7 +300,7 @@ public class CapabilitiesDeserializerTest {
                 "        }" +
                 "    }" +
                 "}";
-        final var capabilities = deserializer.deserialize(JsonParser.parseString(response), null, null);
+        final Capabilities capabilities = deserializer.deserialize(JsonParser.parseString(response), null, null);
         assertNull(capabilities.getETag());
         assertEquals("[\"0.2\",\"1.1\"]", capabilities.getApiVersion());
         assertEquals(Color.parseColor("#44616B"), capabilities.getColor());

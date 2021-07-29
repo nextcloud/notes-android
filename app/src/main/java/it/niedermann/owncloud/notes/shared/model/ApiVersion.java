@@ -57,7 +57,7 @@ public class ApiVersion implements Comparable<ApiVersion> {
     }
 
     private static int extractNumber(String containsNumbers) {
-        final var matcher = NUMBER_EXTRACTION_PATTERN.matcher(containsNumbers);
+        final Matcher matcher = NUMBER_EXTRACTION_PATTERN.matcher(containsNumbers);
         if (matcher.find()) {
             return Integer.parseInt(matcher.group());
         }

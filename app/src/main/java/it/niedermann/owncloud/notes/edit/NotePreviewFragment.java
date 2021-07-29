@@ -102,7 +102,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         registerInternalNoteLinkHandler();
         binding.singleNoteContent.setMovementMethod(LinkMovementMethod.getInstance());
 
-        final var sp = PreferenceManager.getDefaultSharedPreferences(requireActivity().getApplicationContext());
+        final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireActivity().getApplicationContext());
         binding.singleNoteContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(requireContext(), sp));
         if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
             binding.singleNoteContent.setTypeface(Typeface.MONOSPACE);
@@ -157,7 +157,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
             binding.swiperefreshlayout.setRefreshing(true);
             executor.submit(() -> {
                 try {
-                    final var account = repo.getAccountByName(SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext()).name);
+                    final Account account = repo.getAccountByName(SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext()).name);
                     repo.addCallbackPull(account, () -> executor.submit(() -> {
                         note = repo.getNoteById(note.getId());
                         changedText = note.getContent();
@@ -185,8 +185,8 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     }
 
     public static BaseNoteFragment newInstance(long accountId, long noteId) {
-        final var fragment = new NotePreviewFragment();
-        final var args = new Bundle();
+        final BaseNoteFragment fragment = new NotePreviewFragment();
+        final Bundle args = new Bundle();
         args.putLong(PARAM_NOTE_ID, noteId);
         args.putLong(PARAM_ACCOUNT_ID, accountId);
         fragment.setArguments(args);

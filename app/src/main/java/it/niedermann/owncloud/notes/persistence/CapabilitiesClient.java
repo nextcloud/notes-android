@@ -27,11 +27,11 @@ public class CapabilitiesClient {
 
     @WorkerThread
     public static Capabilities getCapabilities(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount, @Nullable String lastETag, @NonNull ApiProvider apiProvider) throws Throwable {
-        final var ocsAPI = apiProvider.getOcsAPI(context, ssoAccount);
+        final OcsAPI ocsAPI = apiProvider.getOcsAPI(context, ssoAccount);
         try {
-            final var response = ocsAPI.getCapabilities(lastETag).blockingSingle();
-            final var capabilities = response.getResponse().ocs.data;
-            final var headers = response.getHeaders();
+            final ParsedResponse<OcsResponse<Capabilities>> response = ocsAPI.getCapabilities(lastETag).blockingSingle();
+            final Capabilities capabilities = response.getResponse().ocs.data;
+            final Map<String, String> headers = response.getHeaders();
             if (headers != null) {
                 capabilities.setETag(headers.get(HEADER_KEY_ETAG));
             } else {
@@ -39,7 +39,7 @@ public class CapabilitiesClient {
             }
             return capabilities;
         } catch (RuntimeException e) {
-            final var cause = e.getCause();
+            final Throwable cause = e.getCause();
             if (cause != null) {
                 throw cause;
             } else {
@@ -51,11 +51,11 @@ public class CapabilitiesClient {
     @WorkerThread
     @Nullable
     public static String getDisplayName(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount, @NonNull ApiProvider apiProvider) {
-        final var ocsAPI = apiProvider.getOcsAPI(context, ssoAccount);
+        final OcsAPI ocsAPI = apiProvider.getOcsAPI(context, ssoAccount);
         try {
-            final var userResponse = ocsAPI.getUser(ssoAccount.userId).execute();
+            final Response<OcsResponse<OcsUser>> userResponse = ocsAPI.getUser(ssoAccount.userId).execute();
             if (userResponse.isSuccessful()) {
-                final var ocsResponse = userResponse.body();
+                final OcsResponse<OcsUser> ocsResponse = userResponse.body();
                 if (ocsResponse != null) {
                     return ocsResponse.ocs.data.displayName;
                 } else {

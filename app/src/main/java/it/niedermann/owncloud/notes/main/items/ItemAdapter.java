@@ -70,7 +70,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         this.gridView = gridView;
         this.mainColor = ContextCompat.getColor(context, R.color.defaultBrand);
         this.textColor = Color.WHITE;
-        final var sp = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+        final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
         this.fontSize = getFontSizeFromPreferences(context, sp);
         this.monospace = sp.getBoolean(context.getString(R.string.pref_key_font), false);
         setHasStableIds(true);
@@ -140,7 +140,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
         boolean isSelected = false;
         if (tracker != null) {
-            final Long itemId = getItemId(position);
+            Long itemId = getItemId(position);
             if (tracker.isSelected(itemId)) {
                 tracker.select(itemId);
                 isSelected = true;
@@ -187,12 +187,12 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     @IntRange(from = 0, to = 3)
     @Override
     public int getItemViewType(int position) {
-        final var item = getItem(position);
+        Item item = getItem(position);
         if (item == null) {
             throw new IllegalArgumentException("Item at position " + position + " must not be null");
         }
         if (getItem(position).isSection()) return TYPE_SECTION;
-        final var note = (Note) getItem(position);
+        Note note = (Note) getItem(position);
         if (TextUtils.isEmpty(note.getExcerpt())) {
             if (TextUtils.isEmpty(note.getCategory())) {
                 return TYPE_NOTE_ONLY_TITLE;

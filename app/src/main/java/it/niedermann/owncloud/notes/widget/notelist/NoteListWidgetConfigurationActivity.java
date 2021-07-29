@@ -54,10 +54,10 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
         setResult(RESULT_CANCELED);
 
         repo = NotesRepository.getInstance(this);
-        final var args = getIntent().getExtras();
+        final Bundle extras = getIntent().getExtras();
 
-        if (args != null) {
-            appWidgetId = args.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID,
+        if (extras != null) {
+            appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID,
                     AppWidgetManager.INVALID_APPWIDGET_ID);
         }
 
@@ -73,7 +73,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
         adapterCategories = new NavigationAdapter(this, new NavigationClickListener() {
             @Override
             public void onItemClick(NavigationItem item) {
-                final var data = new NotesListWidgetData();
+                NotesListWidgetData data = new NotesListWidgetData();
 
                 data.setId(appWidgetId);
                 if (item.type != null) {
@@ -112,7 +112,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
                 executor.submit(() -> {
                     repo.createOrUpdateNoteListWidgetData(data);
 
-                    final var updateIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE, null, getApplicationContext(), NoteListWidget.class)
+                    final Intent updateIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE, null, getApplicationContext(), NoteListWidget.class)
                             .putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
                     setResult(RESULT_OK, updateIntent);
                     getApplicationContext().sendBroadcast(updateIntent);

@@ -34,7 +34,8 @@ public class CodeEditHandler implements EditHandler<CodeSpan> {
             @NonNull CodeSpan span,
             int spanStart,
             int spanTextLength) {
-        final var match = MarkwonEditorUtils.findDelimited(input, spanStart, "`");
+        final MarkwonEditorUtils.Match match =
+                MarkwonEditorUtils.findDelimited(input, spanStart, "`");
         if (match != null) {
             editable.setSpan(
                     persistedSpans.get(CodeSpan.class),

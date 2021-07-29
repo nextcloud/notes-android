@@ -131,15 +131,15 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
      * @param noteId ID of the existing note.
      */
     private void launchExistingNote(long accountId, long noteId) {
-        final var prefKeyNoteMode = getString(R.string.pref_key_note_mode);
-        final var prefKeyLastMode = getString(R.string.pref_key_last_note_mode);
-        final var prefValueEdit = getString(R.string.pref_value_mode_edit);
-        final var prefValuePreview = getString(R.string.pref_value_mode_preview);
-        final var prefValueLast = getString(R.string.pref_value_mode_last);
+        final String prefKeyNoteMode = getString(R.string.pref_key_note_mode);
+        final String prefKeyLastMode = getString(R.string.pref_key_last_note_mode);
+        final String prefValueEdit = getString(R.string.pref_value_mode_edit);
+        final String prefValuePreview = getString(R.string.pref_value_mode_preview);
+        final String prefValueLast = getString(R.string.pref_value_mode_last);
 
-        final var preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        final String mode = preferences.getString(prefKeyNoteMode, prefValueEdit);
-        final String lastMode = preferences.getString(prefKeyLastMode, prefValueEdit);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String mode = preferences.getString(prefKeyNoteMode, prefValueEdit);
+        String lastMode = preferences.getString(prefKeyLastMode, prefValueEdit);
         boolean editMode = true;
         if (prefValuePreview.equals(mode) || (prefValueLast.equals(mode) && prefValuePreview.equals(lastMode))) {
             editMode = false;
@@ -176,7 +176,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
      * Content ("share" functionality), category and favorite attribute can be preset.
      */
     private void launchNewNote() {
-        final var intent = getIntent();
+        Intent intent = getIntent();
 
         String categoryTitle = "";
         boolean favorite = false;
@@ -204,19 +204,19 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         if (content == null) {
             content = "";
         }
-        final var newNote = new Note(null, Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(content, this), content, categoryTitle, favorite, null);
+        Note newNote = new Note(null, Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(content, this), content, categoryTitle, favorite, null);
         fragment = NoteEditFragment.newInstanceWithNewNote(newNote);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment).commit();
     }
 
     private void launchReadonlyNote() {
-        final var intent = getIntent();
-        final var content = new StringBuilder();
+        Intent intent = getIntent();
+        StringBuilder content = new StringBuilder();
         try {
-            final var inputStream = getContentResolver().openInputStream(Objects.requireNonNull(intent.getData()));
-            final var bufferedReader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)));
+            InputStream inputStream = getContentResolver().openInputStream(Objects.requireNonNull(intent.getData()));
+            BufferedReader r = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)));
             String line;
-            while ((line = bufferedReader.readLine()) != null) {
+            while ((line = r.readLine()) != null) {
                 content.append(line).append('\n');
             }
         } catch (IOException e) {
@@ -241,7 +241,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        final int itemId = item.getItemId();
+        int itemId = item.getItemId();
         if (itemId == android.R.id.home) {
             close();
             return true;
@@ -263,7 +263,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         /* TODO enhancement: store last mode in note
          * for cross device functionality per note mode should be stored on the server.
          */
-        final var preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final String prefKeyLastMode = getString(R.string.pref_key_last_note_mode);
         if (fragment instanceof NoteEditFragment) {
             preferences.edit().putString(prefKeyLastMode, getString(R.string.pref_value_mode_edit)).apply();

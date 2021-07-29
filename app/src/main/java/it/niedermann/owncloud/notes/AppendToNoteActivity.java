@@ -37,7 +37,7 @@ public class AppendToNoteActivity extends MainActivity {
     @Override
     public void onNoteClick(int position, View v) {
         if (!TextUtils.isEmpty(receivedText)) {
-            final var fullNote$ = mainViewModel.getFullNote$(((Note) adapter.getItem(position)).getId());
+            final LiveData<Note> fullNote$ = mainViewModel.getFullNote$(((Note) adapter.getItem(position)).getId());
             fullNote$.observe(this, (fullNote) -> {
                 fullNote$.removeObservers(this);
                 final String oldContent = fullNote.getContent();
@@ -47,7 +47,7 @@ public class AppendToNoteActivity extends MainActivity {
                 } else {
                     newContent = receivedText;
                 }
-                final var updateLiveData = mainViewModel.updateNoteAndSync(fullNote, newContent, null);
+                LiveData<Void> updateLiveData = mainViewModel.updateNoteAndSync(fullNote, newContent, null);
                 updateLiveData.observe(this, (next) -> {
                     Toast.makeText(this, getString(R.string.added_content, receivedText), Toast.LENGTH_SHORT).show();
                     updateLiveData.removeObservers(this);

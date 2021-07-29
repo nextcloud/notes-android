@@ -121,7 +121,7 @@ public class MainViewModel extends AndroidViewModel {
         BrandingUtil.saveBrandColors(getApplication(), account.getColor(), account.getTextColor());
         SingleAccountHelper.setCurrentAccount(getApplication(), account.getAccountName());
 
-        final var currentAccount = this.currentAccount.getValue();
+        final Account currentAccount = this.currentAccount.getValue();
         // If only ETag or colors change, we must not reset the navigation
         // TODO in the long term we should store the last NavigationCategory for each Account
         if (currentAccount == null || currentAccount.getId() != account.getId()) {
@@ -161,14 +161,14 @@ public class MainViewModel extends AndroidViewModel {
             }
             case DEFAULT_CATEGORY:
             default: {
-                final String category = selectedCategory.getCategory();
+                String category = selectedCategory.getCategory();
                 if (category == null) {
                     postExpandedCategory(null);
                     Log.e(TAG, "navigation selection is a " + DEFAULT_CATEGORY + ", but the contained category is null.");
                 } else {
                     int slashIndex = category.indexOf('/');
-                    final String rootCategory = slashIndex < 0 ? category : category.substring(0, slashIndex);
-                    final String expandedCategory = getExpandedCategory().getValue();
+                    String rootCategory = slashIndex < 0 ? category : category.substring(0, slashIndex);
+                    String expandedCategory = getExpandedCategory().getValue();
                     if (expandedCategory != null && !expandedCategory.equals(rootCategory)) {
                         postExpandedCategory(null);
                     }
@@ -209,7 +209,7 @@ public class MainViewModel extends AndroidViewModel {
     @NonNull
     @MainThread
     public LiveData<List<Item>> getNotesListLiveData() {
-        final var insufficientInformation = new MutableLiveData<List<Item>>();
+        final MutableLiveData<List<Item>> insufficientInformation = new MutableLiveData<>();
         return distinctUntilChanged(switchMap(getCurrentAccount(), currentAccount -> {
             Log.v(TAG, "[getNotesListLiveData] - currentAccount: " + currentAccount);
             if (currentAccount == null) {
@@ -292,7 +292,7 @@ public class MainViewModel extends AndroidViewModel {
     @NonNull
     @MainThread
     public LiveData<List<NavigationItem>> getNavigationCategories() {
-        final var insufficientInformation = new MutableLiveData<List<NavigationItem>>();
+        final MutableLiveData<List<NavigationItem>> insufficientInformation = new MutableLiveData<>();
         return switchMap(getCurrentAccount(), currentAccount -> {
             if (currentAccount == null) {
                 return insufficientInformation;
@@ -315,29 +315,29 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     private static List<NavigationItem> fromCategoriesWithNotesCount(@NonNull Context context, @Nullable String expandedCategory, @NonNull List<CategoryWithNotesCount> fromDatabase, int count, int favoritesCount) {
-        final var categories = convertToCategoryNavigationItem(context, fromDatabase);
-        final var itemRecent = new NavigationItem(ADAPTER_KEY_RECENT, context.getString(R.string.label_all_notes), count, R.drawable.ic_access_time_grey600_24dp, RECENT);
-        final var itemFavorites = new NavigationItem(ADAPTER_KEY_STARRED, context.getString(R.string.label_favorites), favoritesCount, R.drawable.ic_star_yellow_24dp, FAVORITES);
+        final List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(context, fromDatabase);
+        final NavigationItem itemRecent = new NavigationItem(ADAPTER_KEY_RECENT, context.getString(R.string.label_all_notes), count, R.drawable.ic_access_time_grey600_24dp, RECENT);
+        final NavigationItem itemFavorites = new NavigationItem(ADAPTER_KEY_STARRED, context.getString(R.string.label_favorites), favoritesCount, R.drawable.ic_star_yellow_24dp, FAVORITES);
 
-        final var items = new ArrayList<NavigationItem>(fromDatabase.size() + 3);
+        final ArrayList<NavigationItem> items = new ArrayList<>(fromDatabase.size() + 3);
         items.add(itemRecent);
         items.add(itemFavorites);
         NavigationItem lastPrimaryCategory = null;
         NavigationItem lastSecondaryCategory = null;
-        for (final var item : categories) {
-            final int slashIndex = item.label.indexOf('/');
-            final String currentPrimaryCategory = slashIndex < 0 ? item.label : item.label.substring(0, slashIndex);
-            final boolean isCategoryOpen = currentPrimaryCategory.equals(expandedCategory);
+        for (NavigationItem item : categories) {
+            int slashIndex = item.label.indexOf('/');
+            String currentPrimaryCategory = slashIndex < 0 ? item.label : item.label.substring(0, slashIndex);
             String currentSecondaryCategory = null;
+            boolean isCategoryOpen = currentPrimaryCategory.equals(expandedCategory);
 
             if (isCategoryOpen && !currentPrimaryCategory.equals(item.label)) {
-                final String currentCategorySuffix = item.label.substring(expandedCategory.length() + 1);
-                final int subSlashIndex = currentCategorySuffix.indexOf('/');
+                String currentCategorySuffix = item.label.substring(expandedCategory.length() + 1);
+                int subSlashIndex = currentCategorySuffix.indexOf('/');
                 currentSecondaryCategory = subSlashIndex < 0 ? currentCategorySuffix : currentCategorySuffix.substring(0, subSlashIndex);
             }
 
             boolean belongsToLastPrimaryCategory = lastPrimaryCategory != null && currentPrimaryCategory.equals(lastPrimaryCategory.label);
-            final boolean belongsToLastSecondaryCategory = belongsToLastPrimaryCategory && lastSecondaryCategory != null && lastSecondaryCategory.label.equals(currentPrimaryCategory + "/" + currentSecondaryCategory);
+            boolean belongsToLastSecondaryCategory = belongsToLastPrimaryCategory && lastSecondaryCategory != null && lastSecondaryCategory.label.equals(currentPrimaryCategory + "/" + currentSecondaryCategory);
 
             if (isCategoryOpen && !belongsToLastPrimaryCategory && currentSecondaryCategory != null) {
                 lastPrimaryCategory = new NavigationItem("category:" + currentPrimaryCategory, currentPrimaryCategory, 0, NavigationAdapter.ICON_MULTIPLE_OPEN);
@@ -401,9 +401,9 @@ public class MainViewModel extends AndroidViewModel {
             }
             if (repo.isSyncPossible()) {
                 try {
-                    final var ssoAccount = AccountImporter.getSingleSignOnAccount(getApplication(), localAccount.getAccountName());
+                    final SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(getApplication(), localAccount.getAccountName());
                     try {
-                        final var capabilities = CapabilitiesClient.getCapabilities(getApplication(), ssoAccount, localAccount.getCapabilitiesETag(), ApiProvider.getInstance());
+                        final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplication(), ssoAccount, localAccount.getCapabilitiesETag(), ApiProvider.getInstance());
                         repo.updateCapabilitiesETag(localAccount.getId(), capabilities.getETag());
                         repo.updateBrand(localAccount.getId(), capabilities.getColor(), capabilities.getTextColor());
                         localAccount.setColor(capabilities.getColor());
@@ -530,7 +530,7 @@ public class MainViewModel extends AndroidViewModel {
                 return new MutableLiveData<>(null);
             } else {
                 Log.v(TAG, "[deleteNotesAndSync] - currentAccount: " + currentAccount.getAccountName());
-                for (final var id : ids) {
+                for (Long id : ids) {
                     repo.deleteNoteAndSync(currentAccount, id);
                 }
                 return new MutableLiveData<>(null);
@@ -557,7 +557,7 @@ public class MainViewModel extends AndroidViewModel {
                 return new MutableLiveData<>();
             } else {
                 Log.v(TAG, "[getNote] - currentAccount: " + currentAccount.getAccountName());
-                final var notes = new MutableLiveData<List<Note>>();
+                final MutableLiveData<List<Note>> notes = new MutableLiveData<>();
                 executor.submit(() -> notes.postValue(
                         ids
                                 .stream()
@@ -604,9 +604,9 @@ public class MainViewModel extends AndroidViewModel {
 
     @WorkerThread
     public String collectNoteContents(@NonNull List<Long> noteIds) {
-        final var noteContents = new StringBuilder();
-        for (final var noteId : noteIds) {
-            final var fullNote = repo.getNoteById(noteId);
+        final StringBuilder noteContents = new StringBuilder();
+        for (Long noteId : noteIds) {
+            final Note fullNote = repo.getNoteById(noteId);
             final String tempFullNote = fullNote.getContent();
             if (!TextUtils.isEmpty(tempFullNote)) {
                 if (noteContents.length() > 0) {

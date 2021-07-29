@@ -26,14 +26,14 @@ public class Migration_10_11 extends Migration {
      */
     @Override
     public void migrate(@NonNull SupportSQLiteDatabase database) {
-        final var sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        final var editor = sharedPreferences.edit();
-        final var prefs = sharedPreferences.getAll();
-        for (final var pref : prefs.entrySet()) {
-            final String key = pref.getKey();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Map<String, ?> prefs = sharedPreferences.getAll();
+        for (Map.Entry<String, ?> pref : prefs.entrySet()) {
+            String key = pref.getKey();
             final String DARK_THEME_KEY = "NLW_darkTheme";
             if ("darkTheme".equals(key) || key.startsWith(DARK_THEME_KEY) || key.startsWith("SNW_darkTheme")) {
-                final Boolean darkTheme = (Boolean) pref.getValue();
+                Boolean darkTheme = (Boolean) pref.getValue();
                 editor.putString(pref.getKey(), darkTheme ? DarkModeSetting.DARK.name() : DarkModeSetting.LIGHT.name());
             }
         }

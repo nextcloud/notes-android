@@ -34,18 +34,18 @@ public class CapabilitiesDeserializer implements JsonDeserializer<Capabilities> 
 
     @Override
     public Capabilities deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-        final var response = new Capabilities();
-        final var data = json.getAsJsonObject();
+        final Capabilities response = new Capabilities();
+        final JsonObject data = json.getAsJsonObject();
         if (data.has(CAPABILITIES)) {
-            final var capabilities = data.getAsJsonObject(CAPABILITIES);
+            final JsonObject capabilities = data.getAsJsonObject(CAPABILITIES);
             if (capabilities.has(CAPABILITIES_NOTES)) {
-                final var notes = capabilities.getAsJsonObject(CAPABILITIES_NOTES);
+                final JsonObject notes = capabilities.getAsJsonObject(CAPABILITIES_NOTES);
                 if (notes.has(CAPABILITIES_NOTES_API_VERSION)) {
                     response.setApiVersion(notes.get(CAPABILITIES_NOTES_API_VERSION).toString());
                 }
             }
             if (capabilities.has(CAPABILITIES_THEMING)) {
-                final var theming = capabilities.getAsJsonObject(CAPABILITIES_THEMING);
+                final JsonObject theming = capabilities.getAsJsonObject(CAPABILITIES_THEMING);
                 if (theming.has(CAPABILITIES_THEMING_COLOR)) {
                     try {
                         response.setColor(Color.parseColor(ColorUtil.INSTANCE.formatColorToParsableHexString(theming.get(CAPABILITIES_THEMING_COLOR).getAsString())));

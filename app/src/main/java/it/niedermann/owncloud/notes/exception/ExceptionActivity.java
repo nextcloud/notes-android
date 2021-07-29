@@ -26,18 +26,18 @@ public class ExceptionActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final var binding = ActivityExceptionBinding.inflate(getLayoutInflater());
+        final ActivityExceptionBinding binding = ActivityExceptionBinding.inflate(getLayoutInflater());
 
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
 
-        var throwable = ((Throwable) getIntent().getSerializableExtra(KEY_THROWABLE));
+        Throwable throwable = ((Throwable) getIntent().getSerializableExtra(KEY_THROWABLE));
 
         if (throwable == null) {
             throwable = new Exception("Could not get exception");
         }
 
-        final var adapter = new TipsAdapter(this::startActivity);
+        final TipsAdapter adapter = new TipsAdapter(this::startActivity);
         final String debugInfos = ExceptionUtil.INSTANCE.getDebugInfos(this, throwable, BuildConfig.FLAVOR);
 
         binding.tips.setAdapter(adapter);
@@ -53,7 +53,7 @@ public class ExceptionActivity extends AppCompatActivity {
 
     @NonNull
     public static Intent createIntent(@NonNull Context context, Throwable throwable) {
-        final var args = new Bundle();
+        final Bundle args = new Bundle();
         args.putSerializable(KEY_THROWABLE, throwable);
         return new Intent(context, ExceptionActivity.class)
                 .putExtras(args)

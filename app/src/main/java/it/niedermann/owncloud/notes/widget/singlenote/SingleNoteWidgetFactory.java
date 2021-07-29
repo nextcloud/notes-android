@@ -41,7 +41,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
 
     @Override
     public void onDataSetChanged() {
-        final var data = repo.getSingleNoteWidgetData(appWidgetId);
+        final SingleNoteWidgetData data = repo.getSingleNoteWidgetData(appWidgetId);
         if (data != null) {
             final long noteId = data.getNoteId();
             Log.v(TAG, "Fetch note with id " + noteId);
@@ -82,14 +82,14 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
             return null;
         }
 
-        final var fillInIntent = new Intent();
-        final var args = new Bundle();
+        final Intent fillInIntent = new Intent();
+        final Bundle extras = new Bundle();
 
-        args.putLong(EditNoteActivity.PARAM_NOTE_ID, note.getId());
-        args.putLong(EditNoteActivity.PARAM_ACCOUNT_ID, note.getAccountId());
-        fillInIntent.putExtras(args);
+        extras.putLong(EditNoteActivity.PARAM_NOTE_ID, note.getId());
+        extras.putLong(EditNoteActivity.PARAM_ACCOUNT_ID, note.getAccountId());
+        fillInIntent.putExtras(extras);
 
-        final var note_content = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_content);
+        final RemoteViews note_content = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_content);
         note_content.setOnClickFillInIntent(R.id.single_note_content_tv, fillInIntent);
         note_content.setTextViewText(R.id.single_note_content_tv, MarkdownUtil.renderForRemoteView(context, note.getContent()));
 

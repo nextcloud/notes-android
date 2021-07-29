@@ -41,7 +41,7 @@ public class GridItemDecorationTest {
 
         assertThrows("Requires at least one column", IllegalArgumentException.class, () -> new GridItemDecoration(itemAdapter, 0, 5, 5, 5, 5, 5));
 
-        final var oneColumn = new GridItemDecoration(itemAdapter, 1, 5, 5, 5, 5, 5);
+        final GridItemDecoration oneColumn = new GridItemDecoration(itemAdapter, 1, 5, 5, 5, 5, 5);
 
         testAssertion(oneColumn, 0, 0, true, 5, 5, 5, 5);
         testAssertion(oneColumn, 0, 1, false, 0, 5, 5, 5);
@@ -54,7 +54,7 @@ public class GridItemDecorationTest {
         testAssertion(oneColumn, 0, 8, false, 0, 5, 5, 5);
         testAssertion(oneColumn, 0, 9, true, 5, 5, 5, 5);
 
-        final var twoColumns = new GridItemDecoration(itemAdapter, 2, 5, 5, 5, 5, 5);
+        final GridItemDecoration twoColumns = new GridItemDecoration(itemAdapter, 2, 5, 5, 5, 5, 5);
 
         testAssertion(twoColumns, 0, 0, true, 5, 5, 5, 5);
         testAssertion(twoColumns, 0, 1, false, 0, 5, 5, 5);
@@ -67,7 +67,7 @@ public class GridItemDecorationTest {
         testAssertion(twoColumns, 0, 8, false, 0, 5, 5, 5);
         testAssertion(twoColumns, 0, 9, true, 5, 5, 5, 5);
 
-        final var threeColumns = new GridItemDecoration(itemAdapter, 3, 5, 5, 5, 5, 5);
+        final GridItemDecoration threeColumns = new GridItemDecoration(itemAdapter, 3, 5, 5, 5, 5, 5);
 
         testAssertion(threeColumns, 0, 0, true, 5, 5, 5, 5);
         testAssertion(threeColumns, 0, 1, false, 0, 5, 5, 5);
@@ -85,7 +85,7 @@ public class GridItemDecorationTest {
     private void testAssertion(GridItemDecoration gid, int spanIndex, int position, boolean fullSpan, int top, int left, int right, int bottom) {
         when(layoutParams.getSpanIndex()).thenReturn(spanIndex);
         when(recyclerView.getChildAdapterPosition(any())).thenReturn(position);
-        final var result = new Rect();
+        final Rect result = new Rect();
         gid.getItemOffsets(result, view, recyclerView, mock(RecyclerView.State.class));
 
         if (fullSpan) {

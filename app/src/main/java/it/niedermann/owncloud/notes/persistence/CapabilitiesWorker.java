@@ -42,12 +42,12 @@ public class CapabilitiesWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        final var repo = NotesRepository.getInstance(getApplicationContext());
-        for (final var account : repo.getAccounts()) {
+        final NotesRepository repo = NotesRepository.getInstance(getApplicationContext());
+        for (Account account : repo.getAccounts()) {
             try {
-                final var ssoAccount = AccountImporter.getSingleSignOnAccount(getApplicationContext(), account.getAccountName());
+                final SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(getApplicationContext(), account.getAccountName());
                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
-                final var capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, account.getCapabilitiesETag(), ApiProvider.getInstance());
+                final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, account.getCapabilitiesETag(), ApiProvider.getInstance());
                 repo.updateCapabilitiesETag(account.getId(), capabilities.getETag());
                 repo.updateBrand(account.getId(), capabilities.getColor(), capabilities.getTextColor());
                 repo.updateApiVersion(account.getId(), capabilities.getApiVersion());

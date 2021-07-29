@@ -48,7 +48,7 @@ public class ManageAccountsViewModel extends AndroidViewModel {
 
     public void deleteAccount(@NonNull Account account, @NonNull Context context) {
         executor.submit(() -> {
-            final var accounts = repo.getAccounts();
+            final List<Account> accounts = repo.getAccounts();
             for (int i = 0; i < accounts.size(); i++) {
                 if (accounts.get(i).getId() == account.getId()) {
                     if (i > 0) {

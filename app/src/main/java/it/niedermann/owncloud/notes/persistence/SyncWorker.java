@@ -33,8 +33,8 @@ public class SyncWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        final var repo = NotesRepository.getInstance(getApplicationContext());
-        for (final var account : repo.getAccounts()) {
+        NotesRepository repo = NotesRepository.getInstance(getApplicationContext());
+        for (Account account : repo.getAccounts()) {
             Log.v(TAG, "Starting background synchronization for " + account.getAccountName());
             repo.addCallbackPull(account, () -> Log.v(TAG, "Finished background synchronization for " + account.getAccountName()));
             repo.scheduleSync(account, false);
@@ -53,7 +53,7 @@ public class SyncWorker extends Worker {
     public static void update(@NonNull Context context, boolean backgroundSync) {
         deregister(context);
         if (backgroundSync) {
-            final var work = new PeriodicWorkRequest.Builder(SyncWorker.class, 15, TimeUnit.MINUTES)
+            PeriodicWorkRequest work = new PeriodicWorkRequest.Builder(SyncWorker.class, 15, TimeUnit.MINUTES)
                     .setConstraints(constraints).build();
             WorkManager.getInstance(context.getApplicationContext()).enqueueUniquePeriodicWork(WORKER_TAG, ExistingPeriodicWorkPolicy.REPLACE, work);
             Log.i(TAG, "Registering worker running each " + 15 + " " + TimeUnit.MINUTES);

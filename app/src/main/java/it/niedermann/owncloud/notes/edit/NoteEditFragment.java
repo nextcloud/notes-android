@@ -156,7 +156,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
         binding.editContent.setMarkdownString(note.getContent());
         binding.editContent.setEnabled(true);
 
-        final var sp = PreferenceManager.getDefaultSharedPreferences(requireContext().getApplicationContext());
+        final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireContext().getApplicationContext());
         binding.editContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(requireContext(), sp));
         if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
             binding.editContent.setTypeface(Typeface.MONOSPACE);
@@ -167,7 +167,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
         binding.editContent.postDelayed(() -> {
             binding.editContent.requestFocus();
 
-            final var imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            final InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             if (imm != null) {
                 imm.showSoftInput(binding.editContent, InputMethodManager.SHOW_IMPLICIT);
             } else {
@@ -202,7 +202,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
      */
     @Override
     protected String getContent() {
-        final var editable = binding.editContent.getText();
+        final Editable editable = binding.editContent.getText();
         return editable == null ? "" : editable.toString();
     }
 
@@ -257,8 +257,8 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     }
 
     public static BaseNoteFragment newInstance(long accountId, long noteId) {
-        final var fragment = new NoteEditFragment();
-        final var args = new Bundle();
+        final BaseNoteFragment fragment = new NoteEditFragment();
+        final Bundle args = new Bundle();
         args.putLong(PARAM_NOTE_ID, noteId);
         args.putLong(PARAM_ACCOUNT_ID, accountId);
         fragment.setArguments(args);
@@ -266,8 +266,8 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     }
 
     public static BaseNoteFragment newInstanceWithNewNote(Note newNote) {
-        final var fragment = new NoteEditFragment();
-        final var args = new Bundle();
+        final BaseNoteFragment fragment = new NoteEditFragment();
+        final Bundle args = new Bundle();
         args.putSerializable(PARAM_NEWNOTE, newNote);
         fragment.setArguments(args);
         return fragment;
