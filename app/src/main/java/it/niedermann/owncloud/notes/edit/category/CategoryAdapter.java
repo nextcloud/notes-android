@@ -27,7 +27,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private static final String clearItemId = "clear_item";
     private static final String addItemId = "add_item";
     @NonNull
-    private List<NavigationItem> categories = new ArrayList<>();
+    private final List<NavigationItem> categories = new ArrayList<>();
     @NonNull
     private final CategoryListener listener;
     private final Context context;
@@ -40,18 +40,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_category, parent, false);
-        return new CategoryViewHolder(v);
+        final var view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_category, parent, false);
+        return new CategoryViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        NavigationItem category = categories.get(position);
-        CategoryViewHolder categoryViewHolder = (CategoryViewHolder) holder;
+        final var category = categories.get(position);
+        final var categoryViewHolder = (CategoryViewHolder) holder;
 
         switch (category.id) {
             case addItemId:
-                Drawable wrapDrawable = DrawableCompat.wrap(ContextCompat.getDrawable(context, category.icon));
+                final var wrapDrawable = DrawableCompat.wrap(ContextCompat.getDrawable(context, category.icon));
                 DrawableCompat.setTint(wrapDrawable, ContextCompat.getColor(context, R.color.icon_color_default));
                 categoryViewHolder.getIcon().setImageDrawable(wrapDrawable);
                 categoryViewHolder.getCategoryWrapper().setOnClickListener((v) -> listener.onCategoryAdded());
@@ -110,14 +110,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.categories.add(0, clearItem);
         if (currentSearchString != null && currentSearchString.trim().length() > 0) {
             boolean currentSearchStringIsInCategories = false;
-            for (NavigationItem category : categories) {
+            for (final var category : categories) {
                 if (currentSearchString.equals(category.label)) {
                     currentSearchStringIsInCategories = true;
                     break;
                 }
             }
             if (!currentSearchStringIsInCategories) {
-                NavigationItem addItem = new NavigationItem(addItemId, context.getString(R.string.add_category, currentSearchString.trim()), 0, R.drawable.ic_add_blue_24dp);
+                final var addItem = new NavigationItem(addItemId, context.getString(R.string.add_category, currentSearchString.trim()), 0, R.drawable.ic_add_blue_24dp);
                 this.categories.add(addItem);
             }
         }

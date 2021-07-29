@@ -110,7 +110,7 @@ public class ListTagHandlerTest extends TestCase {
 
     @Test
     public void testHandleTag() {
-        final ListTagHandler handler = new ListTagHandler();
+        final var handler = new ListTagHandler();
 
         assertEquals("\n• Item ", HtmlCompat.fromHtml(ListTagHandler.prepareTagHandling("<ul><li>Item</li></ul>"), 0, null, handler).toString());
 

@@ -28,9 +28,9 @@ public class NotesTestingUtil {
      * @see <a href="https://gist.github.com/JoseAlcerreca/1e9ee05dcdd6a6a6fa1cbfc125559bba">Source</a>
      */
     public static <T> T getOrAwaitValue(final LiveData<T> liveData) throws InterruptedException {
-        final Object[] data = new Object[1];
-        final CountDownLatch latch = new CountDownLatch(1);
-        Observer<T> observer = new Observer<T>() {
+        final var data = new Object[1];
+        final var latch = new CountDownLatch(1);
+        var observer = new Observer<T>() {
             @Override
             public void onChanged(@Nullable T o) {
                 data[0] = o;
@@ -53,7 +53,7 @@ public class NotesTestingUtil {
      * @param ssoAccount this account will be added
      */
     public static void mockSingleSignOn(@NonNull SingleSignOnAccount ssoAccount) throws IOException {
-        final SharedPreferences sharedPrefs = ApplicationProvider.getApplicationContext().getSharedPreferences("TEMP_SHARED_PREFS_" + currentLong++, Context.MODE_PRIVATE);
+        final var sharedPrefs = ApplicationProvider.getApplicationContext().getSharedPreferences("TEMP_SHARED_PREFS_" + currentLong++, Context.MODE_PRIVATE);
         sharedPrefs.edit().putString("PREF_ACCOUNT_STRING" + ssoAccount.name, SingleSignOnAccount.toString(ssoAccount)).commit();
         AccountImporter.setSharedPreferences(sharedPrefs);
     }

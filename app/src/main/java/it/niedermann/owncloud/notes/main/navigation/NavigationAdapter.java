@@ -74,7 +74,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationViewHolder
     }
 
     public void setItems(@NonNull List<NavigationItem> items) {
-        for (NavigationItem item : items) {
+        for (final var item : items) {
             if (TextUtils.isEmpty(item.label)) {
                 item.id = MainActivity.ADAPTER_KEY_UNCATEGORIZED;
                 item.label = context.getString(R.string.action_uncategorized);

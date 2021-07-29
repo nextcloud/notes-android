@@ -18,7 +18,7 @@ public final class NotesColorUtil {
     }
 
     public static boolean contrastRatioIsSufficient(@ColorInt int colorOne, @ColorInt int colorTwo) {
-        ColorPair key = new ColorPair(colorOne, colorTwo);
+        final var key = new ColorPair(colorOne, colorTwo);
         Boolean ret = CONTRAST_RATIO_SUFFICIENT_CACHE.get(key);
         if (ret == null) {
             ret = ColorUtil.INSTANCE.getContrastRatio(colorOne, colorTwo) > 3d;
@@ -37,7 +37,7 @@ public final class NotesColorUtil {
         @SuppressWarnings({"EqualsWhichDoesntCheckParameterClass", "NumberEquality"})
         @Override
         public boolean equals(Object o) {
-            final ColorPair colorPair = (ColorPair) o;
+            final var colorPair = (ColorPair) o;
             if (first != colorPair.first) return false;
             return second == colorPair.second;
         }

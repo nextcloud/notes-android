@@ -47,10 +47,10 @@ public class Migration_13_14 extends Migration {
         final String SP_WIDGET_KEY = "single_note_widget";
         final String SP_ACCOUNT_ID_KEY = "SNW_accountId";
         final String SP_DARK_THEME_KEY = "SNW_darkTheme";
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Map<String, ?> prefs = sharedPreferences.getAll();
-        for (Map.Entry<String, ?> pref : prefs.entrySet()) {
+        final var sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        final var editor = sharedPreferences.edit();
+        final var prefs = sharedPreferences.getAll();
+        for (final var pref : prefs.entrySet()) {
             final String key = pref.getKey();
             Integer widgetId = null;
             Long noteId = null;
@@ -69,7 +69,7 @@ public class Migration_13_14 extends Migration {
                         themeMode = sharedPreferences.getBoolean(SP_DARK_THEME_KEY + widgetId, false) ? DarkModeSetting.DARK.getModeId() : DarkModeSetting.LIGHT.getModeId();
                     }
 
-                    ContentValues migratedWidgetValues = new ContentValues();
+                    final var migratedWidgetValues = new ContentValues();
                     migratedWidgetValues.put("ID", widgetId);
                     migratedWidgetValues.put("ACCOUNT_ID", accountId);
                     migratedWidgetValues.put("NOTE_ID", noteId);

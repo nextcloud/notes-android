@@ -28,7 +28,7 @@ public class InterceptedURLSpan extends URLSpan {
     public void onClick(View widget) {
         if (onLinkClickCallbacks.size() > 0) {
             executor.submit(() -> {
-                for (Function<String, Boolean> callback : onLinkClickCallbacks) {
+                for (final var callback : onLinkClickCallbacks) {
                     try {
                         if (callback.apply(getURL())) {
                             return;

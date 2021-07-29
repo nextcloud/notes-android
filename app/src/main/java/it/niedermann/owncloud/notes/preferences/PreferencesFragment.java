@@ -74,7 +74,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
             Log.e(TAG, "Could not find \"" + getString(R.string.pref_key_lock) + "\"-preference.");
         }
 
-        final ListPreference themePref = findPreference(getString(R.string.pref_key_theme));
+        final var themePref = findPreference(getString(R.string.pref_key_theme));
         assert themePref != null;
         themePref.setOnPreferenceChangeListener((preference, newValue) -> {
             NotesApplication.setAppTheme(DarkModeSetting.valueOf((String) newValue));
@@ -103,12 +103,10 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
     @Override
     public void onStart() {
         super.onStart();
-        @Nullable Context context = getContext();
-        if (context != null) {
-            @ColorInt final int mainColor = BrandingUtil.readBrandMainColor(context);
-            @ColorInt final int textColor = BrandingUtil.readBrandTextColor(context);
-            applyBrand(mainColor, textColor);
-        }
+        final var context = requireContext();
+        @ColorInt final int mainColor = BrandingUtil.readBrandMainColor(context);
+        @ColorInt final int textColor = BrandingUtil.readBrandTextColor(context);
+        applyBrand(mainColor, textColor);
     }
 
     /**

@@ -77,7 +77,7 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
         } else {
             throw new IllegalArgumentException("Provide at least \"" + PARAM_ACCOUNT_ID + "\"");
         }
-        Fragment target = getTargetFragment();
+        final var target = getTargetFragment();
         if (target instanceof CategoryDialogListener) {
             listener = (CategoryDialogListener) target;
         } else if (getActivity() instanceof CategoryDialogListener) {
@@ -96,7 +96,7 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        View dialogView = View.inflate(getContext(), R.layout.dialog_change_category, null);
+        final var dialogView = View.inflate(getContext(), R.layout.dialog_change_category, null);
         binding = DialogChangeCategoryBinding.bind(dialogView);
         this.editCategory = binding.search;
 
@@ -187,11 +187,11 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
     }
 
     public static DialogFragment newInstance(long accountId, String category) {
-        final DialogFragment categoryFragment = new CategoryDialogFragment();
-        final Bundle arguments = new Bundle();
-        arguments.putString(CategoryDialogFragment.PARAM_CATEGORY, category);
-        arguments.putLong(CategoryDialogFragment.PARAM_ACCOUNT_ID, accountId);
-        categoryFragment.setArguments(arguments);
+        final var categoryFragment = new CategoryDialogFragment();
+        final var args = new Bundle();
+        args.putString(CategoryDialogFragment.PARAM_CATEGORY, category);
+        args.putLong(CategoryDialogFragment.PARAM_ACCOUNT_ID, accountId);
+        categoryFragment.setArguments(args);
         return categoryFragment;
     }
 }

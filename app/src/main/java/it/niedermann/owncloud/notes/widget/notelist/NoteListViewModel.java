@@ -42,9 +42,9 @@ public class NoteListViewModel extends AndroidViewModel {
                     return switchMap(distinctUntilChanged(repo.countFavorites$(accountId)), (favoritesCount) -> {
                         Log.v(TAG, "[getAdapterCategories] getFavoritesCountLiveData: " + favoritesCount);
                         return map(distinctUntilChanged(repo.getCategories$(accountId)), fromDatabase -> {
-                            final List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(getApplication(), fromDatabase);
+                            final var categories = convertToCategoryNavigationItem(getApplication(), fromDatabase);
 
-                            final List<NavigationItem> items = new ArrayList<>(fromDatabase.size() + 3);
+                            final var items = new ArrayList<NavigationItem>(fromDatabase.size() + 3);
                             items.add(new NavigationItem(MainActivity.ADAPTER_KEY_RECENT, getApplication().getString(R.string.label_all_notes), count, R.drawable.ic_access_time_grey600_24dp, RECENT));
                             items.add(new NavigationItem(MainActivity.ADAPTER_KEY_STARRED, getApplication().getString(R.string.label_favorites), favoritesCount, R.drawable.ic_star_yellow_24dp, FAVORITES));
 
@@ -52,7 +52,7 @@ public class NoteListViewModel extends AndroidViewModel {
                                 items.add(new NavigationItem(MainActivity.ADAPTER_KEY_UNCATEGORIZED, "", null, NavigationAdapter.ICON_NOFOLDER));
                             }
 
-                            for (NavigationItem item : categories) {
+                            for (final var item : categories) {
                                 final int slashIndex = item.label.indexOf('/');
 
                                 item.label = slashIndex < 0 ? item.label : item.label.substring(0, slashIndex);

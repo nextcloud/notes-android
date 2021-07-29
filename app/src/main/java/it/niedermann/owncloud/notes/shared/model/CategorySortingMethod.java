@@ -38,7 +38,7 @@ public enum CategorySortingMethod {
      * @return the corresponding enum item with the index (ordinal)
      */
     public static CategorySortingMethod findById(int id) {
-        for (CategorySortingMethod csm : values()) {
+        for (final var csm : values()) {
             if (csm.getId() == id) {
                 return csm;
             }

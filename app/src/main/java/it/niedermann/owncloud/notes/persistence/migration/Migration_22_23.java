@@ -46,8 +46,8 @@ public class Migration_22_23 extends Migration {
     }
 
     private static void sanitizeAccounts(@NonNull SupportSQLiteDatabase db) {
-        final Cursor cursor = db.query("SELECT id, apiVersion FROM ACCOUNT", null);
-        final ContentValues values = new ContentValues(1);
+        final var cursor = db.query("SELECT id, apiVersion FROM ACCOUNT", null);
+        final var values = new ContentValues(1);
 
         final int COLUMN_POSITION_ID = cursor.getColumnIndex("id");
         final int COLUMN_POSITION_API_VERSION = cursor.getColumnIndex("apiVersion");
@@ -77,10 +77,10 @@ public class Migration_22_23 extends Migration {
             }
         }
 
-        final Collection<ApiVersion> result = new ArrayList<>();
+        final var result = new ArrayList<ApiVersion>();
         for (int i = 0; i < a.length(); i++) {
             try {
-                final ApiVersion version = ApiVersion.of(a.getString(i));
+                final var version = ApiVersion.of(a.getString(i));
                 if (version.getMajor() != 0 || version.getMinor() != 0) {
                     result.add(version);
                 }

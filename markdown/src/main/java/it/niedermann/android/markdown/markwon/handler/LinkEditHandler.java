@@ -37,7 +37,7 @@ public class LinkEditHandler extends AbstractEditHandler<LinkSpan> {
             int spanStart,
             int spanTextLength) {
 
-        final EditLinkSpan editLinkSpan = persistedSpans.get(EditLinkSpan.class);
+        final var editLinkSpan = persistedSpans.get(EditLinkSpan.class);
         editLinkSpan.link = span.getLink();
 
         final int s;

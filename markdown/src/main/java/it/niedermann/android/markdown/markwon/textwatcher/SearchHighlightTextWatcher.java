@@ -31,7 +31,7 @@ public class SearchHighlightTextWatcher extends InterceptorTextWatcher {
     public SearchHighlightTextWatcher(@NonNull TextWatcher originalWatcher, @NonNull MarkwonMarkdownEditor editText) {
         super(originalWatcher);
         this.editText = editText;
-        final Context context = editText.getContext();
+        final var context = editText.getContext();
         this.color = ContextCompat.getColor(context, R.color.search_color);
         this.highlightColor = ContextCompat.getColor(context, R.color.bg_highlighted);
         this.darkTheme = MarkwonMarkdownUtil.isDarkThemeActive(context);
@@ -41,7 +41,7 @@ public class SearchHighlightTextWatcher extends InterceptorTextWatcher {
         this.current = current;
         if (TextUtils.isEmpty(searchText)) {
             this.searchText = null;
-            final Editable text = editText.getText();
+            final var text = editText.getText();
             if (text != null) {
                 MarkdownUtil.removeSpans(text, SearchSpan.class);
             }

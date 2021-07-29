@@ -117,6 +117,7 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
             // The Pattern.quote method will add \Q to the very beginning of the string and \E to the end of the string
             // It implies that the string between \Q and \E is a literal string and thus the reserved keyword in such string will be ignored.
             // See https://stackoverflow.com/questions/15409296/what-is-the-use-of-pattern-quote-method
+            //noinspection ConstantConditions
             final Pattern pattern = Pattern.compile("(" + Pattern.quote(searchQuery.toString()) + ")", Pattern.CASE_INSENSITIVE);
             SpannableString spannableString = new SpannableString(content);
             Matcher matcher = pattern.matcher(spannableString);

@@ -27,7 +27,7 @@ public class CodeBlockEditHandler implements EditHandler<CodeBlockSpan> {
 
     @Override
     public void handleMarkdownSpan(@NonNull PersistedSpans persistedSpans, @NonNull Editable editable, @NonNull String input, @NonNull CodeBlockSpan span, int spanStart, int spanTextLength) {
-        MarkwonEditorUtils.Match delimited = MarkwonEditorUtils.findDelimited(input, spanStart, "```");
+        final var delimited = MarkwonEditorUtils.findDelimited(input, spanStart, "```");
         if (delimited != null) {
             editable.setSpan(
                     persistedSpans.get(markdownSpanType()),

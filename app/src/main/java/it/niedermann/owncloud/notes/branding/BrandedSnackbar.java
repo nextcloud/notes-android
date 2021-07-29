@@ -14,7 +14,7 @@ public class BrandedSnackbar {
 
     @NonNull
     public static Snackbar make(@NonNull View view, @NonNull CharSequence text, @Snackbar.Duration int duration) {
-        final Snackbar snackbar = Snackbar.make(view, text, duration);
+        final var snackbar = Snackbar.make(view, text, duration);
         final int color = BrandingUtil.readBrandMainColor(view.getContext());
         snackbar.setActionTextColor(ColorUtil.INSTANCE.isColorDark(color) ? Color.WHITE : color);
         return snackbar;

@@ -35,7 +35,7 @@ public class FormattingHelpActivity extends BrandedActivity {
         binding.content.setMovementMethod(LinkMovementMethod.getInstance());
         binding.content.setMarkdownString(buildFormattingHelp());
 
-        final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        final var sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         binding.content.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(this, sp));
         if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
             binding.content.setTypeface(Typeface.MONOSPACE);

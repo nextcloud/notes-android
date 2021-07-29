@@ -18,7 +18,7 @@ public class ItemIdKeyProvider extends ItemKeyProvider<Long> {
     @Nullable
     @Override
     public Long getKey(int position) {
-        final RecyclerView.Adapter<?> adapter = recyclerView.getAdapter();
+        final var adapter = recyclerView.getAdapter();
         if (adapter == null) {
             throw new IllegalStateException("RecyclerView adapter is not set!");
         }
@@ -27,7 +27,7 @@ public class ItemIdKeyProvider extends ItemKeyProvider<Long> {
 
     @Override
     public int getPosition(@NonNull Long key) {
-        final RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForItemId(key);
+        final var viewHolder = recyclerView.findViewHolderForItemId(key);
         return viewHolder == null ? NO_POSITION : viewHolder.getLayoutPosition();
     }
 }

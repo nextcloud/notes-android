@@ -99,11 +99,11 @@ public abstract class LockedActivity extends BrandedActivity {
 
     private void askToUnlock() {
         if (NotesApplication.isLocked()) {
-            KeyguardManager keyguardManager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
+            final var keyguardManager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
             if (keyguardManager != null) {
-                Intent i = keyguardManager.createConfirmDeviceCredentialIntent(getString(R.string.unlock_notes), null);
-                i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivityForResult(i, REQUEST_CODE_UNLOCK);
+                final var intent = keyguardManager.createConfirmDeviceCredentialIntent(getString(R.string.unlock_notes), null);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivityForResult(intent, REQUEST_CODE_UNLOCK);
             } else {
                 Log.e(TAG, "Keyguard manager is null");
             }

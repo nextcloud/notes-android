@@ -57,8 +57,8 @@ public class MarkwonMarkdownEditor extends AppCompatEditText implements Markdown
     public MarkwonMarkdownEditor(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        final Markwon markwon = createMarkwonBuilder(context).build();
-        final MarkwonEditor editor = createMarkwonEditorBuilder(markwon).build();
+        final var markwon = createMarkwonBuilder(context).build();
+        final var editor = createMarkwonEditorBuilder(markwon).build();
 
         combinedWatcher = new CombinedTextWatcher(editor, this);
         addTextChangedListener(combinedWatcher);
@@ -91,7 +91,7 @@ public class MarkwonMarkdownEditor extends AppCompatEditText implements Markdown
 
     @Override
     public void setSearchColor(@ColorInt int color) {
-        final SearchHighlightTextWatcher searchHighlightTextWatcher = combinedWatcher.get(SearchHighlightTextWatcher.class);
+        final var searchHighlightTextWatcher = combinedWatcher.get(SearchHighlightTextWatcher.class);
         if (searchHighlightTextWatcher == null) {
             Log.w(TAG, SearchHighlightTextWatcher.class.getSimpleName() + " is not a registered " + TextWatcher.class.getSimpleName());
         } else {
@@ -101,7 +101,7 @@ public class MarkwonMarkdownEditor extends AppCompatEditText implements Markdown
 
     @Override
     public void setSearchText(@Nullable CharSequence searchText, @Nullable Integer current) {
-        final SearchHighlightTextWatcher searchHighlightTextWatcher = combinedWatcher.get(SearchHighlightTextWatcher.class);
+        final var searchHighlightTextWatcher = combinedWatcher.get(SearchHighlightTextWatcher.class);
         if (searchHighlightTextWatcher == null) {
             Log.w(TAG, SearchHighlightTextWatcher.class.getSimpleName() + " is not a registered " + TextWatcher.class.getSimpleName());
         } else {
