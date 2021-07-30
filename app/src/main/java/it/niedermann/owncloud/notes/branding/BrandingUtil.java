@@ -64,27 +64,27 @@ public class BrandingUtil {
     }
 
     public static LiveData<Integer> readBrandMainColorLiveData(@NonNull Context context) {
-        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+        final var sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
         Log.v(TAG, "--- Read: shared_preference_theme_main");
         return new SharedPreferenceIntLiveData(sharedPreferences, pref_key_branding_main, context.getApplicationContext().getResources().getColor(R.color.defaultBrand));
     }
 
     public static LiveData<Integer> readBrandTextColorLiveData(@NonNull Context context) {
-        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+        final var sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
         Log.v(TAG, "--- Read: shared_preference_theme_text");
         return new SharedPreferenceIntLiveData(sharedPreferences, pref_key_branding_text, Color.WHITE);
     }
 
     @ColorInt
     public static int readBrandMainColor(@NonNull Context context) {
-        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+        final var sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
         Log.v(TAG, "--- Read: shared_preference_theme_main");
         return sharedPreferences.getInt(pref_key_branding_main, context.getApplicationContext().getResources().getColor(R.color.defaultBrand));
     }
 
     @ColorInt
     public static int readBrandTextColor(@NonNull Context context) {
-        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+        final var sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
         Log.v(TAG, "--- Read: shared_preference_theme_text");
         return sharedPreferences.getInt(pref_key_branding_text, Color.WHITE);
     }
@@ -92,7 +92,7 @@ public class BrandingUtil {
     public static void saveBrandColors(@NonNull Context context, @ColorInt int mainColor, @ColorInt int textColor) {
         final int previousMainColor = readBrandMainColor(context);
         final int previousTextColor = readBrandTextColor(context);
-        final SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
+        final var editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
         Log.v(TAG, "--- Write: shared_preference_theme_main" + " | " + mainColor);
         Log.v(TAG, "--- Write: shared_preference_theme_text" + " | " + textColor);
         editor.putInt(pref_key_branding_main, mainColor);
@@ -100,7 +100,7 @@ public class BrandingUtil {
         editor.apply();
         if (context instanceof BrandedActivity) {
             if (mainColor != previousMainColor || textColor != previousTextColor) {
-                final BrandedActivity activity = (BrandedActivity) context;
+                final var activity = (BrandedActivity) context;
                 activity.runOnUiThread(() -> ActivityCompat.recreate(activity));
             }
         }
@@ -145,7 +145,7 @@ public class BrandingUtil {
     }
 
     public static void tintMenuIcon(@NonNull MenuItem menuItem, @ColorInt int color) {
-        Drawable drawable = menuItem.getIcon();
+        var drawable = menuItem.getIcon();
         if (drawable != null) {
             drawable = DrawableCompat.wrap(drawable);
             DrawableCompat.setTint(drawable, color);
@@ -154,7 +154,7 @@ public class BrandingUtil {
     }
 
     public static void applyBrandToLayerDrawable(@NonNull LayerDrawable check, @IdRes int areaToColor, @ColorInt int mainColor) {
-        final Drawable drawable = check.findDrawableByLayerId(areaToColor);
+        final var drawable = check.findDrawableByLayerId(areaToColor);
         if (drawable == null) {
             Log.e(TAG, "Could not find areaToColor (" + areaToColor + "). Cannot apply brand.");
         } else {

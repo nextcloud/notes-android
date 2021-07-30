@@ -23,11 +23,11 @@ public class TipsViewHolder extends RecyclerView.ViewHolder {
 
     public void bind(TipsModel tip, Consumer<Intent> actionButtonClickedListener) {
         binding.tip.setText(tip.getText());
-        final Intent actionIntent = tip.getActionIntent();
-        if (actionIntent != null && actionIntent.hasExtra(INTENT_EXTRA_BUTTON_TEXT)) {
+        final var intent = tip.getActionIntent();
+        if (intent != null && intent.hasExtra(INTENT_EXTRA_BUTTON_TEXT)) {
             binding.actionButton.setVisibility(View.VISIBLE);
-            binding.actionButton.setText(actionIntent.getIntExtra(INTENT_EXTRA_BUTTON_TEXT, 0));
-            binding.actionButton.setOnClickListener((v) -> actionButtonClickedListener.accept(actionIntent));
+            binding.actionButton.setText(intent.getIntExtra(INTENT_EXTRA_BUTTON_TEXT, 0));
+            binding.actionButton.setOnClickListener((v) -> actionButtonClickedListener.accept(intent));
         } else {
             binding.actionButton.setVisibility(View.GONE);
         }

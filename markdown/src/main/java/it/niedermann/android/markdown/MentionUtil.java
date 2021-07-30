@@ -35,16 +35,16 @@ public class MentionUtil {
      * @param target   target {@link TextView}
      */
     public static void setupMentions(@NonNull SingleSignOnAccount account, @NonNull Map<String, String> mentions, @NonNull TextView target) {
-        final Context context = target.getContext();
+        final var context = target.getContext();
 
         // Step 1
         // Add avatar icons and display names
-        final SpannableStringBuilder messageBuilder = replaceAtMentionsWithImagePlaceholderAndDisplayName(context, mentions, target.getText());
+        final var messageBuilder = replaceAtMentionsWithImagePlaceholderAndDisplayName(context, mentions, target.getText());
 
         // Step 2
         // Replace avatar icons with real avatars
-        final MentionSpan[] list = messageBuilder.getSpans(0, messageBuilder.length(), MentionSpan.class);
-        for (MentionSpan span : list) {
+        final var list = messageBuilder.getSpans(0, messageBuilder.length(), MentionSpan.class);
+        for (final var span : list) {
             final int spanStart = messageBuilder.getSpanStart(span);
             final int spanEnd = messageBuilder.getSpanEnd(span);
             Glide.with(context)
@@ -69,7 +69,7 @@ public class MentionUtil {
     }
 
     private static SpannableStringBuilder replaceAtMentionsWithImagePlaceholderAndDisplayName(@NonNull Context context, @NonNull Map<String, String> mentions, @NonNull CharSequence text) {
-        final SpannableStringBuilder messageBuilder = new SpannableStringBuilder(text);
+        final var messageBuilder = new SpannableStringBuilder(text);
         for (String userId : mentions.keySet()) {
             final String mentionId = "@" + userId;
             final String mentionDisplayName = " " + mentions.get(userId);

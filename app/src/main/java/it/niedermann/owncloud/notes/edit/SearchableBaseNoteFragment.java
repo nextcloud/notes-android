@@ -65,7 +65,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
 
-        MenuItem searchMenuItem = menu.findItem(R.id.search);
+        final var searchMenuItem = menu.findItem(R.id.search);
         searchView = (SearchView) searchMenuItem.getActionView();
 
         if (!TextUtils.isEmpty(searchQuery) && isNew) {
@@ -77,7 +77,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         }
 
 
-        final LinearLayout searchEditFrame = searchView.findViewById(R.id
+        final var searchEditFrame = searchView.findViewById(R.id
                 .search_edit_frame);
 
         searchEditFrame.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -85,7 +85,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
             @Override
             public void onGlobalLayout() {
-                int currentVisibility = searchEditFrame.getVisibility();
+                final int currentVisibility = searchEditFrame.getVisibility();
 
                 if (currentVisibility != oldVisibility) {
                     if (currentVisibility != View.VISIBLE) {
@@ -105,8 +105,8 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
         });
 
-        FloatingActionButton next = getSearchNextButton();
-        FloatingActionButton prev = getSearchPrevButton();
+        final var next = getSearchNextButton();
+        final var prev = getSearchPrevButton();
 
         if (next != null) {
             next.setOnClickListener(v -> {
@@ -208,8 +208,8 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     protected abstract FloatingActionButton getSearchPrevButton();
 
     private void showSearchFabs() {
-        FloatingActionButton next = getSearchNextButton();
-        FloatingActionButton prev = getSearchPrevButton();
+        final var next = getSearchNextButton();
+        final var prev = getSearchPrevButton();
         if (prev != null) {
             prev.show();
         }
@@ -219,8 +219,8 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     }
 
     private void hideSearchFabs() {
-        FloatingActionButton next = getSearchNextButton();
-        FloatingActionButton prev = getSearchPrevButton();
+        final var next = getSearchNextButton();
+        final var prev = getSearchPrevButton();
         if (prev != null) {
             prev.hide();
         }
@@ -230,7 +230,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     }
 
     private void jumpToOccurrence() {
-        Layout layout = getLayout();
+        final var layout = getLayout();
         if (layout == null) {
             Log.w(TAG, "getLayout() is null");
         } else if (getContent() == null || getContent().isEmpty()) {
@@ -240,8 +240,8 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
             currentOccurrence = occurrenceCount;
             jumpToOccurrence();
         } else if (searchQuery != null && !searchQuery.isEmpty()) {
-            String currentContent = getContent().toLowerCase();
-            int indexOfNewText = indexOfNth(currentContent, searchQuery.toLowerCase(), 0, currentOccurrence);
+            final String currentContent = getContent().toLowerCase();
+            final int indexOfNewText = indexOfNth(currentContent, searchQuery.toLowerCase(), 0, currentOccurrence);
             if (indexOfNewText <= 0) {
                 // Search term is not n times in text
                 // Go back to first search result
@@ -251,11 +251,11 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
                 }
                 return;
             }
-            String textUntilFirstOccurrence = currentContent.substring(0, indexOfNewText);
-            int numberLine = layout.getLineForOffset(textUntilFirstOccurrence.length());
+            final String textUntilFirstOccurrence = currentContent.substring(0, indexOfNewText);
+            final int numberLine = layout.getLineForOffset(textUntilFirstOccurrence.length());
 
             if (numberLine >= 0) {
-                ScrollView scrollView = getScrollView();
+                final var scrollView = getScrollView();
                 if (scrollView != null) {
                     scrollView.post(() -> scrollView.smoothScrollTo(0, layout.getLineTop(numberLine)));
                 }
@@ -268,7 +268,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
             throw new IllegalArgumentException("Param 'nth' must be greater than 0!");
         if (nth == 1)
             return input.indexOf(value, startIndex);
-        int idx = input.indexOf(value, startIndex);
+        final int idx = input.indexOf(value, startIndex);
         if (idx == -1)
             return -1;
         return indexOfNth(input, value, idx + 1, nth - 1);
@@ -281,11 +281,11 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         // Use regrex which is faster before.
         // Such that the main thread will not stop for a long tilme
         // And so there will not an ANR problem
-        Matcher m = Pattern.compile(needle, Pattern.CASE_INSENSITIVE | Pattern.LITERAL)
+        final var matcher = Pattern.compile(needle, Pattern.CASE_INSENSITIVE | Pattern.LITERAL)
                 .matcher(haystack);
 
         int count = 0;
-        while (m.find()) {
+        while (matcher.find()) {
             count++;
         }
         return count;

@@ -27,7 +27,7 @@ public class Migration_14_15 extends Migration {
     @Override
     public void migrate(@NonNull SupportSQLiteDatabase db) {
         // Rename a tmp_NOTES table.
-        String tmpTableNotes = String.format("tmp_%s", "NOTES");
+        final String tmpTableNotes = String.format("tmp_%s", "NOTES");
         db.execSQL("ALTER TABLE NOTES RENAME TO " + tmpTableNotes);
         db.execSQL("CREATE TABLE NOTES ( " +
                 "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -53,14 +53,14 @@ public class Migration_14_15 extends Migration {
         createIndex(db, "CATEGORIES", "CATEGORY_ID", "CATEGORY_ACCOUNT_ID", "CATEGORY_TITLE");
         // A hashtable storing categoryTitle - categoryId Mapping
         // This is used to prevent too many searches in database
-        Hashtable<String, Integer> categoryTitleIdMap = new Hashtable<>();
+        final var categoryTitleIdMap = new Hashtable<String, Integer>();
         int id = 1;
-        Cursor tmpNotesCursor = db.query("SELECT * FROM " + tmpTableNotes, null);
+        final var tmpNotesCursor = db.query("SELECT * FROM " + tmpTableNotes, null);
         while (tmpNotesCursor.moveToNext()) {
-            String categoryTitle = tmpNotesCursor.getString(8);
-            int accountId = tmpNotesCursor.getInt(2);
+            final String categoryTitle = tmpNotesCursor.getString(8);
+            final int accountId = tmpNotesCursor.getInt(2);
             Log.e("###", accountId + "");
-            Integer categoryId;
+            final Integer categoryId;
             if (categoryTitleIdMap.containsKey(categoryTitle) && categoryTitleIdMap.get(categoryTitle) != null) {
                 categoryId = categoryTitleIdMap.get(categoryTitle);
             } else {
@@ -74,7 +74,7 @@ public class Migration_14_15 extends Migration {
                 categoryTitleIdMap.put(categoryTitle, categoryId);
             }
             // Move the data in tmp_NOTES to NOTES
-            ContentValues values = new ContentValues();
+            final ContentValues values = new ContentValues();
             values.put("ID", tmpNotesCursor.getInt(0));
             values.put("REMOTEID", tmpNotesCursor.getInt(1));
             values.put("ACCOUNT_ID", tmpNotesCursor.getInt(2));
@@ -99,7 +99,7 @@ public class Migration_14_15 extends Migration {
     }
 
     private static void createIndex(@NonNull SupportSQLiteDatabase db, @NonNull String table, @NonNull String column) {
-        String indexName = table + "_" + column + "_idx";
+        final String indexName = table + "_" + column + "_idx";
         Log.v(TAG, "Creating database index: CREATE INDEX IF NOT EXISTS " + indexName + " ON " + table + "(" + column + ")");
         db.execSQL("CREATE INDEX " + indexName + " ON " + table + "(" + column + ")");
     }

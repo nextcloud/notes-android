@@ -25,22 +25,22 @@ public class SingleNoteWidget extends AppWidgetProvider {
     private final ExecutorService executor = Executors.newCachedThreadPool();
 
     static void updateAppWidget(Context context, AppWidgetManager awm, int[] appWidgetIds) {
-        final Intent templateIntent = new Intent(context, EditNoteActivity.class);
-        final NotesRepository repo = NotesRepository.getInstance(context);
+        final var templateIntent = new Intent(context, EditNoteActivity.class);
+        final var repo = NotesRepository.getInstance(context);
 
         for (int appWidgetId : appWidgetIds) {
-            final SingleNoteWidgetData data = repo.getSingleNoteWidgetData(appWidgetId);
+            final var data = repo.getSingleNoteWidgetData(appWidgetId);
             if (data != null) {
                 templateIntent.putExtra(BaseNoteFragment.PARAM_ACCOUNT_ID, data.getAccountId());
 
-                final PendingIntent templatePendingIntent = PendingIntent.getActivity(context, appWidgetId, templateIntent,
+                final var templatePendingIntent = PendingIntent.getActivity(context, appWidgetId, templateIntent,
                         PendingIntent.FLAG_UPDATE_CURRENT);
 
-                final Intent serviceIntent = new Intent(context, SingleNoteWidgetService.class);
+                final var serviceIntent = new Intent(context, SingleNoteWidgetService.class);
                 serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
                 serviceIntent.setData(Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME)));
 
-                final RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_single_note);
+                final var views = new RemoteViews(context.getPackageName(), R.layout.widget_single_note);
                 views.setPendingIntentTemplate(R.id.single_note_widget_lv, templatePendingIntent);
                 views.setRemoteAdapter(R.id.single_note_widget_lv, serviceIntent);
                 views.setEmptyView(R.id.single_note_widget_lv, R.id.widget_single_note_placeholder_tv);
@@ -62,7 +62,7 @@ public class SingleNoteWidget extends AppWidgetProvider {
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
-        AppWidgetManager awm = AppWidgetManager.getInstance(context);
+        final var awm = AppWidgetManager.getInstance(context);
 
         updateAppWidget(context, AppWidgetManager.getInstance(context),
                 (awm.getAppWidgetIds(new ComponentName(context, SingleNoteWidget.class))));
@@ -70,7 +70,7 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
     @Override
     public void onDeleted(Context context, int[] appWidgetIds) {
-        final NotesRepository repo = NotesRepository.getInstance(context);
+        final var repo = NotesRepository.getInstance(context);
 
         for (int appWidgetId : appWidgetIds) {
             executor.submit(() -> repo.removeSingleNoteWidget(appWidgetId));

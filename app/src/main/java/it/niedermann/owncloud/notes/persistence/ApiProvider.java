@@ -60,7 +60,7 @@ public class ApiProvider {
         if (API_CACHE_OCS.containsKey(ssoAccount.name)) {
             return API_CACHE_OCS.get(ssoAccount.name);
         }
-        final OcsAPI ocsAPI = new NextcloudRetrofitApiBuilder(getNextcloudAPI(context, ssoAccount), API_ENDPOINT_OCS).create(OcsAPI.class);
+        final var ocsAPI = new NextcloudRetrofitApiBuilder(getNextcloudAPI(context, ssoAccount), API_ENDPOINT_OCS).create(OcsAPI.class);
         API_CACHE_OCS.put(ssoAccount.name, ocsAPI);
         return ocsAPI;
     }
@@ -72,7 +72,7 @@ public class ApiProvider {
         if (API_CACHE_NOTES.containsKey(ssoAccount.name)) {
             return API_CACHE_NOTES.get(ssoAccount.name);
         }
-        final NotesAPI notesAPI = new NotesAPI(getNextcloudAPI(context, ssoAccount), preferredApiVersion);
+        final var notesAPI = new NotesAPI(getNextcloudAPI(context, ssoAccount), preferredApiVersion);
         API_CACHE_NOTES.put(ssoAccount.name, notesAPI);
         return notesAPI;
     }
@@ -82,12 +82,12 @@ public class ApiProvider {
             return API_CACHE.get(ssoAccount.name);
         } else {
             Log.v(TAG, "NextcloudRequest account: " + ssoAccount.name);
-            final NextcloudAPI nextcloudAPI = new NextcloudAPI(context.getApplicationContext(), ssoAccount,
+            final var nextcloudAPI = new NextcloudAPI(context.getApplicationContext(), ssoAccount,
                     new GsonBuilder()
                             .excludeFieldsWithoutExposeAnnotation()
                             .registerTypeHierarchyAdapter(Calendar.class, (JsonSerializer<Calendar>) (src, typeOfSrc, ctx) -> new JsonPrimitive(src.getTimeInMillis() / 1_000))
                             .registerTypeHierarchyAdapter(Calendar.class, (JsonDeserializer<Calendar>) (src, typeOfSrc, ctx) -> {
-                                final Calendar calendar = Calendar.getInstance();
+                                final var calendar = Calendar.getInstance();
                                 calendar.setTimeInMillis(src.getAsLong() * 1_000);
                                 return calendar;
                             })
@@ -117,7 +117,7 @@ public class ApiProvider {
     public synchronized void invalidateAPICache(@NonNull SingleSignOnAccount ssoAccount) {
         Log.v(TAG, "Invalidating API cache for " + ssoAccount.name);
         if (API_CACHE.containsKey(ssoAccount.name)) {
-            final NextcloudAPI nextcloudAPI = API_CACHE.get(ssoAccount.name);
+            final var nextcloudAPI = API_CACHE.get(ssoAccount.name);
             if (nextcloudAPI != null) {
                 nextcloudAPI.stop();
             }
@@ -131,10 +131,10 @@ public class ApiProvider {
      * Invalidates the whole API cache for all accounts
      */
     public synchronized void invalidateAPICache() {
-        for (String key : API_CACHE.keySet()) {
+        for (final String key : API_CACHE.keySet()) {
             Log.v(TAG, "Invalidating API cache for " + key);
             if (API_CACHE.containsKey(key)) {
-                final NextcloudAPI nextcloudAPI = API_CACHE.get(key);
+                final var nextcloudAPI = API_CACHE.get(key);
                 if (nextcloudAPI != null) {
                     nextcloudAPI.stop();
                 }

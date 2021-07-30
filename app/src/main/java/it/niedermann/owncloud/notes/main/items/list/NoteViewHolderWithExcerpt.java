@@ -30,7 +30,7 @@ public class NoteViewHolderWithExcerpt extends NoteViewHolder {
 
     public void bind(boolean isSelected, @NonNull Note note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
         super.bind(isSelected, note, showCategory, mainColor, textColor, searchQuery);
-        @NonNull final Context context = itemView.getContext();
+        @NonNull final var context = itemView.getContext();
         binding.noteSwipeable.setAlpha(DBStatus.LOCAL_DELETED.equals(note.getStatus()) ? 0.5f : 1.0f);
         bindCategory(context, binding.noteCategory, showCategory, note.getCategory(), mainColor);
         bindStatus(binding.noteStatus, note.getStatus(), mainColor);

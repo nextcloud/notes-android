@@ -37,8 +37,8 @@ public class Timeslotter {
         if (note.getFavorite()) {
             return "";
         }
-        Calendar modified = note.getModified();
-        for (Timeslot timeslot : timeslots) {
+        final var modified = note.getModified();
+        for (final var timeslot : timeslots) {
             if (!modified.before(timeslot.getTime())) {
                 return timeslot.getLabel();
             }

@@ -33,7 +33,7 @@ public class GridItemDecoration extends SectionItemDecoration {
         super.getItemOffsets(outRect, view, parent, state);
         final int position = parent.getChildAdapterPosition(view);
         if (position >= 0) {
-            final StaggeredGridLayoutManager.LayoutParams lp = (StaggeredGridLayoutManager.LayoutParams) view.getLayoutParams();
+            final var lp = (StaggeredGridLayoutManager.LayoutParams) view.getLayoutParams();
 
             if (adapter.getItemViewType(position) == ItemAdapter.TYPE_SECTION) {
                 lp.setFullSpan(true);

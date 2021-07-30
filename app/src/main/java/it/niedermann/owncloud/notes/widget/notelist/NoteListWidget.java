@@ -23,19 +23,19 @@ public class NoteListWidget extends AppWidgetProvider {
     private final ExecutorService executor = Executors.newCachedThreadPool();
 
     static void updateAppWidget(Context context, AppWidgetManager awm, int[] appWidgetIds) {
-        final NotesRepository repo = NotesRepository.getInstance(context);
+        final var repo = NotesRepository.getInstance(context);
 
         RemoteViews views;
 
         for (int appWidgetId : appWidgetIds) {
             try {
-                final NotesListWidgetData data = repo.getNoteListWidgetData(appWidgetId);
+                final var data = repo.getNoteListWidgetData(appWidgetId);
 
-                final Intent serviceIntent = new Intent(context, NoteListWidgetService.class);
+                final var serviceIntent = new Intent(context, NoteListWidgetService.class);
                 serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
                 serviceIntent.setData(Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME)));
 
-                final PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT | Intent.FILL_IN_COMPONENT);
+                final var pendingIntent = PendingIntent.getActivity(context, 0, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT | Intent.FILL_IN_COMPONENT);
 
                 Log.v(TAG, "-- data - " + data);
 
@@ -61,7 +61,7 @@ public class NoteListWidget extends AppWidgetProvider {
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
-        AppWidgetManager awm = AppWidgetManager.getInstance(context);
+        final var awm = AppWidgetManager.getInstance(context);
 
         if (intent.getAction() != null) {
             if (intent.getAction().equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE)) {
@@ -83,9 +83,9 @@ public class NoteListWidget extends AppWidgetProvider {
     @Override
     public void onDeleted(Context context, int[] appWidgetIds) {
         super.onDeleted(context, appWidgetIds);
-        final NotesRepository repo = NotesRepository.getInstance(context);
+        final var repo = NotesRepository.getInstance(context);
 
-        for (int appWidgetId : appWidgetIds) {
+        for (final int appWidgetId : appWidgetIds) {
             executor.submit(() -> repo.removeNoteListWidget(appWidgetId));
         }
     }

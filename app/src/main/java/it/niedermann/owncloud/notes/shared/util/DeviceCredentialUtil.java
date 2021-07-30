@@ -16,7 +16,7 @@ public class DeviceCredentialUtil {
     }
 
     public static boolean areCredentialsAvailable(Context context) {
-        KeyguardManager keyguardManager = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
+        final var keyguardManager = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
 
         if (keyguardManager != null) {
             return keyguardManager.isKeyguardSecure();

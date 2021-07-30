@@ -28,8 +28,8 @@ public class SingleNoteWidgetConfigurationActivity extends MainActivity {
         setResult(Activity.RESULT_CANCELED);
 
         fabCreate.setVisibility(View.GONE);
-        Toolbar toolbar = binding.activityNotesListView.toolbar;
-        SwipeRefreshLayout swipeRefreshLayout = binding.activityNotesListView.swiperefreshlayout;
+        final var toolbar = binding.activityNotesListView.toolbar;
+        final var swipeRefreshLayout = binding.activityNotesListView.swiperefreshlayout;
         toolbar.setTitle(R.string.activity_select_single_note);
         swipeRefreshLayout.setEnabled(false);
         swipeRefreshLayout.setRefreshing(false);
@@ -42,15 +42,15 @@ public class SingleNoteWidgetConfigurationActivity extends MainActivity {
 
     @Override
     public void onNoteClick(int position, View v) {
-        final Note note = (Note) adapter.getItem(position);
-        final Bundle extras = getIntent().getExtras();
+        final var note = (Note) adapter.getItem(position);
+        final var args = getIntent().getExtras();
 
-        if (extras == null) {
+        if (args == null) {
             finish();
             return;
         }
 
-        int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
+        final int appWidgetId = args.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
 
         executor.submit(() -> {
             try {
@@ -62,7 +62,7 @@ public class SingleNoteWidgetConfigurationActivity extends MainActivity {
                                 NotesApplication.getAppTheme(this).getModeId()
                         )
                 );
-                final Intent updateIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE, null,
+                final var updateIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE, null,
                         getApplicationContext(), SingleNoteWidget.class)
                         .putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
                 setResult(RESULT_OK, updateIntent);

@@ -34,11 +34,11 @@ public class BrandedPreferenceCategory extends PreferenceCategory {
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 
-        final View v = holder.itemView.findViewById(android.R.id.title);
-        @Nullable final Context context = getContext();
-        if (context != null && v instanceof TextView) {
+        final var view = holder.itemView.findViewById(android.R.id.title);
+        @Nullable final var context = getContext();
+        if (context != null && view instanceof TextView) {
             @ColorInt final int mainColor = getSecondaryForegroundColorDependingOnTheme(context, BrandingUtil.readBrandMainColor(context));
-            ((TextView) v).setTextColor(mainColor);
+            ((TextView) view).setTextColor(mainColor);
         }
     }
 }

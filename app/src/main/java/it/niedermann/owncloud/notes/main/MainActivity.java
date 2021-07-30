@@ -173,7 +173,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             } else {
                 executor.submit(() -> {
                     try {
-                        final Account account = mainViewModel.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
+                        final var account = mainViewModel.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
                         runOnUiThread(() -> mainViewModel.postCurrentAccount(account));
                     } catch (NextcloudFilesAppAccountNotFoundException e) {
                         // Verbose log output for https://github.com/stefan-niedermann/nextcloud-notes/issues/1256
@@ -181,12 +181,12 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                 .setTitle(NextcloudFilesAppAccountNotFoundException.class.getSimpleName())
                                 .setMessage(R.string.backup)
                                 .setPositiveButton(R.string.simple_backup, (a, b) -> executor.submit(() -> {
-                                    final List<Note> modifiedNotes = new LinkedList<>();
-                                    for (Account account : mainViewModel.getAccounts()) {
+                                    final var modifiedNotes = new LinkedList<Note>();
+                                    for (final var account : mainViewModel.getAccounts()) {
                                         modifiedNotes.addAll(mainViewModel.getLocalModifiedNotes(account.getId()));
                                     }
                                     if (modifiedNotes.size() == 1) {
-                                        final Note note = modifiedNotes.get(0);
+                                        final var note = modifiedNotes.get(0);
                                         ShareUtil.openShareDialog(this, note.getTitle(), note.getContent());
                                     } else {
                                         ShareUtil.openShareDialog(this,
@@ -195,12 +195,12 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                     }
                                 }))
                                 .setNegativeButton(R.string.simple_error, (a, b) -> {
-                                    final SharedPreferences ssoPreferences = AccountImporter.getSharedPreferences(getApplicationContext());
-                                    final StringBuilder ssoPreferencesString = new StringBuilder()
+                                    final var ssoPreferences = AccountImporter.getSharedPreferences(getApplicationContext());
+                                    final var ssoPreferencesString = new StringBuilder()
                                             .append("Current SSO account: ").append(ssoPreferences.getString("PREF_CURRENT_ACCOUNT_STRING", null)).append("\n")
                                             .append("\n")
                                             .append("SSO SharedPreferences: ").append("\n");
-                                    for (Map.Entry<String, ?> entry : ssoPreferences.getAll().entrySet()) {
+                                    for (final var entry : ssoPreferences.getAll().entrySet()) {
                                         ssoPreferencesString.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
                                     }
                                     ssoPreferencesString.append("\n")
@@ -251,7 +251,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             }
 
             fabCreate.setOnClickListener((View view) -> {
-                final Intent createIntent = new Intent(getApplicationContext(), EditNoteActivity.class);
+                final var createIntent = new Intent(getApplicationContext(), EditNoteActivity.class);
                 createIntent.putExtra(EditNoteActivity.PARAM_CATEGORY, selectedCategory);
                 if (activityBinding.searchView.getQuery().length() > 0) {
                     createIntent.putExtra(EditNoteActivity.PARAM_CONTENT, activityBinding.searchView.getQuery().toString());
@@ -269,8 +269,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             binding.activityNotesListView.emptyContentView.getRoot().setVisibility(notes.size() > 0 ? GONE : VISIBLE);
             // Remove deleted notes from the selection
             if (tracker.hasSelection()) {
-                final Collection<Long> deletedNotes = new LinkedList<>();
-                for (Long id : tracker.getSelection()) {
+                final var deletedNotes = new LinkedList<Long>();
+                for (final var id : tracker.getSelection()) {
                     if (notes
                             .stream()
                             .filter(item -> !item.isSection())
@@ -279,7 +279,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                         deletedNotes.add(id);
                     }
                 }
-                for (Long id : deletedNotes) {
+                for (final var id : deletedNotes) {
                     tracker.deselect(id);
                 }
             }
@@ -289,13 +289,13 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             updateSortMethodIcon(methodOfCategory.second);
             activityBinding.sortingMethod.setOnClickListener((v) -> {
                 if (methodOfCategory.first != null) {
-                    CategorySortingMethod newMethod = methodOfCategory.second;
+                    var newMethod = methodOfCategory.second;
                     if (newMethod == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
                         newMethod = CategorySortingMethod.SORT_MODIFIED_DESC;
                     } else {
                         newMethod = CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC;
                     }
-                    final LiveData<Void> modifyLiveData = mainViewModel.modifyCategoryOrder(methodOfCategory.first, newMethod);
+                    final var modifyLiveData = mainViewModel.modifyCategoryOrder(methodOfCategory.first, newMethod);
                     modifyLiveData.observe(this, (next) -> modifyLiveData.removeObservers(this));
                 }
             });
@@ -355,7 +355,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     @Override
     protected void onResume() {
-        final LiveData<Account> accountLiveData = mainViewModel.getCurrentAccount();
+        final var accountLiveData = mainViewModel.getCurrentAccount();
         accountLiveData.observe(this, (currentAccount) -> {
             accountLiveData.removeObservers(this);
             try {
@@ -423,8 +423,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         listView.setAdapter(adapter);
         listView.setItemAnimator(null);
         if (gridView) {
-            int spanCount = getResources().getInteger(R.integer.grid_view_span_count);
-            StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL);
+            final int spanCount = getResources().getInteger(R.integer.grid_view_span_count);
+            final var gridLayoutManager = new StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL);
             listView.setLayoutManager(gridLayoutManager);
             listView.addItemDecoration(new GridItemDecoration(adapter, spanCount,
                     getResources().getDimensionPixelSize(R.dimen.spacer_3x),
@@ -434,7 +434,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                     getResources().getDimensionPixelSize(R.dimen.spacer_activity_sides) + getResources().getDimensionPixelSize(R.dimen.spacer_1x)
             ));
         } else {
-            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+            final var layoutManager = new LinearLayoutManager(this);
             listView.setLayoutManager(layoutManager);
             listView.addItemDecoration(new SectionItemDecoration(adapter,
                     getResources().getDimensionPixelSize(R.dimen.spacer_activity_sides) + getResources().getDimensionPixelSize(R.dimen.spacer_1x) + getResources().getDimensionPixelSize(R.dimen.spacer_3x) + getResources().getDimensionPixelSize(R.dimen.spacer_2x),
@@ -456,10 +456,10 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
         swipeRefreshLayout.setOnRefreshListener(() -> {
             CustomAppGlideModule.clearCache(this);
-            final LiveData<Account> syncLiveData = mainViewModel.getCurrentAccount();
+            final var syncLiveData = mainViewModel.getCurrentAccount();
             final Observer<Account> syncObserver = currentAccount -> {
                 syncLiveData.removeObservers(this);
-                mainViewModel.synchronizeCapabilitiesAndNotes(currentAccount, new IResponseCallback<Void>() {
+                mainViewModel.synchronizeCapabilitiesAndNotes(currentAccount, new IResponseCallback<>() {
                     @Override
                     public void onSuccess(Void v) {
                         Log.d(TAG, "Successfully synchronized capabilities and notes for " + currentAccount.getAccountName());
@@ -558,7 +558,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
             @Override
             public void onIconClick(NavigationItem item) {
-                final LiveData<String> expandedCategoryLiveData = mainViewModel.getExpandedCategory();
+                final var expandedCategoryLiveData = mainViewModel.getExpandedCategory();
                 expandedCategoryLiveData.observe(MainActivity.this, expandedCategory -> {
                     if (item.icon == NavigationAdapter.ICON_MULTIPLE && !item.label.equals(expandedCategory)) {
                         mainViewModel.postExpandedCategory(item.label);
@@ -671,14 +671,14 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                             Log.i(TAG, "Added account: " + "name:" + ssoAccount.name + ", " + ssoAccount.url + ", userId" + ssoAccount.userId);
                             try {
                                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
-                                final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, null, ApiProvider.getInstance());
+                                final var capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, null, ApiProvider.getInstance());
                                 final String displayName = CapabilitiesClient.getDisplayName(getApplicationContext(), ssoAccount, ApiProvider.getInstance());
                                 mainViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities, displayName, new IResponseCallback<Account>() {
                                     @Override
                                     public void onSuccess(Account result) {
                                         executor.submit(() -> {
                                             Log.i(TAG, capabilities.toString());
-                                            final Account a = mainViewModel.getLocalAccountByAccountName(ssoAccount.name);
+                                            final var a = mainViewModel.getLocalAccountByAccountName(ssoAccount.name);
                                             runOnUiThread(() -> mainViewModel.postCurrentAccount(a));
                                         });
                                     }
@@ -720,9 +720,9 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     @Override
     public void onNoteClick(int position, View v) {
-        boolean hasCheckedItems = tracker.getSelection().size() > 0;
+        final boolean hasCheckedItems = tracker.getSelection().size() > 0;
         if (!hasCheckedItems) {
-            final Note note = (Note) adapter.getItem(position);
+            final var note = (Note) adapter.getItem(position);
             startActivity(new Intent(getApplicationContext(), EditNoteActivity.class)
                     .putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId()));
         }
@@ -730,7 +730,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     @Override
     public void onNoteFavoriteClick(int position, View view) {
-        LiveData<Void> toggleLiveData = mainViewModel.toggleFavoriteAndSync(((Note) adapter.getItem(position)).getId());
+        final var toggleLiveData = mainViewModel.toggleFavoriteAndSync(((Note) adapter.getItem(position)).getId());
         toggleLiveData.observe(this, (next) -> toggleLiveData.removeObservers(this));
     }
 
@@ -772,8 +772,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     @Override
     public void onAccountPicked(@NonNull Account account) {
-        for (Long noteId : tracker.getSelection()) {
-            final LiveData<Note> moveLiveData = mainViewModel.moveNoteToAnotherAccount(account, noteId);
+        for (final var noteId : tracker.getSelection()) {
+            final var moveLiveData = mainViewModel.moveNoteToAnotherAccount(account, noteId);
             moveLiveData.observe(this, (v) -> {
                 tracker.deselect(noteId);
                 moveLiveData.removeObservers(this);
@@ -783,7 +783,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     @Override
     public void onCategoryChosen(String category) {
-        final LiveData<Void> categoryLiveData = mainViewModel.setCategory(tracker.getSelection(), category);
+        final var categoryLiveData = mainViewModel.setCategory(tracker.getSelection(), category);
         categoryLiveData.observe(this, (next) -> categoryLiveData.removeObservers(this));
         tracker.clearSelection();
     }

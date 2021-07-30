@@ -24,7 +24,7 @@ public class BrandedAlertDialogBuilder extends AlertDialog.Builder implements Br
     public AlertDialog create() {
         this.dialog = super.create();
 
-        @NonNull Context context = getContext();
+        @NonNull final var context = getContext();
         @ColorInt final int mainColor = BrandingUtil.readBrandMainColor(context);
         @ColorInt final int textColor = BrandingUtil.readBrandTextColor(context);
         applyBrand(mainColor, textColor);
@@ -35,11 +35,11 @@ public class BrandedAlertDialogBuilder extends AlertDialog.Builder implements Br
     @CallSuper
     @Override
     public void applyBrand(int mainColor, int textColor) {
-        final Button[] buttons = new Button[3];
+        final var buttons = new Button[3];
         buttons[0] = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
         buttons[1] = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
         buttons[2] = dialog.getButton(DialogInterface.BUTTON_NEUTRAL);
-        for (Button button : buttons) {
+        for (final var button : buttons) {
             if (button != null) {
                 button.setTextColor(getSecondaryForegroundColorDependingOnTheme(button.getContext(), mainColor));
             }

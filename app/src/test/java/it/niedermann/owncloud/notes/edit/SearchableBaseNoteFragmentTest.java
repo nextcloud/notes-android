@@ -11,7 +11,7 @@ public class SearchableBaseNoteFragmentTest {
     @SuppressWarnings("ConstantConditions")
     @Test
     public void testCountOccurrencesFixed() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        final Method method = SearchableBaseNoteFragment.class.getDeclaredMethod("countOccurrences", String.class, String.class);
+        final var method = SearchableBaseNoteFragment.class.getDeclaredMethod("countOccurrences", String.class, String.class);
         method.setAccessible(true);
 
         for (int count = 0; count <= 15; ++count) {
@@ -35,7 +35,7 @@ public class SearchableBaseNoteFragmentTest {
     @SuppressWarnings("ConstantConditions")
     @Test
     public void testNullOrEmptyInput() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        final Method method = SearchableBaseNoteFragment.class.getDeclaredMethod("countOccurrences", String.class, String.class);
+        final var method = SearchableBaseNoteFragment.class.getDeclaredMethod("countOccurrences", String.class, String.class);
         method.setAccessible(true);
 
         int num;

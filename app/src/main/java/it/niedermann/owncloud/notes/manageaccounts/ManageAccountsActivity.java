@@ -114,21 +114,21 @@ public class ManageAccountsActivity extends LockedActivity {
     }
 
     private void onChangeNotesPath(@NonNull Account localAccount) {
-        final NotesRepository repository = NotesRepository.getInstance(getApplicationContext());
-        final EditText editText = new EditText(this);
-        final ViewGroup wrapper = createDialogViewWrapper();
-        final AlertDialog dialog = new BrandedAlertDialogBuilder(this)
+        final var repository = NotesRepository.getInstance(getApplicationContext());
+        final var editText = new EditText(this);
+        final var wrapper = createDialogViewWrapper();
+        final var dialog = new BrandedAlertDialogBuilder(this)
                 .setTitle(R.string.settings_notes_path)
                 .setMessage(R.string.settings_notes_path_description)
                 .setView(wrapper)
                 .setNeutralButton(android.R.string.cancel, null)
                 .setPositiveButton(R.string.action_edit_save, (v, d) -> new Thread(() -> {
                     try {
-                        final Call<NotesSettings> putSettingsCall = repository.putServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), new NotesSettings(editText.getText().toString(), null), getPreferredApiVersion(localAccount.getApiVersion()));
-                        putSettingsCall.enqueue(new Callback<NotesSettings>() {
+                        final var putSettingsCall = repository.putServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), new NotesSettings(editText.getText().toString(), null), getPreferredApiVersion(localAccount.getApiVersion()));
+                        putSettingsCall.enqueue(new Callback<>() {
                             @Override
                             public void onResponse(@NonNull Call<NotesSettings> call, @NonNull Response<NotesSettings> response) {
-                                final NotesSettings body = response.body();
+                                final var body = response.body();
                                 if (response.isSuccessful() && body != null) {
                                     runOnUiThread(() -> Toast.makeText(ManageAccountsActivity.this, getString(R.string.settings_notes_path_success, body.getNotesPath()), Toast.LENGTH_LONG).show());
                                 } else {
@@ -148,14 +148,14 @@ public class ManageAccountsActivity extends LockedActivity {
                 .show();
         try {
             repository.getServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), getPreferredApiVersion(localAccount.getApiVersion()))
-                    .enqueue(new Callback<NotesSettings>() {
+                    .enqueue(new Callback<>() {
                         @Override
                         public void onResponse(@NonNull Call<NotesSettings> call, @NonNull Response<NotesSettings> response) {
                             runOnUiThread(() -> {
-                                final NotesSettings body = response.body();
+                                final var body = response.body();
                                 if (response.isSuccessful() && body != null) {
                                     wrapper.removeAllViews();
-                                    final EditText editText = new EditText(ManageAccountsActivity.this);
+                                    final var editText = new EditText(ManageAccountsActivity.this);
                                     editText.setText(body.getNotesPath());
                                     wrapper.addView(editText);
                                 } else {
@@ -180,13 +180,13 @@ public class ManageAccountsActivity extends LockedActivity {
     }
 
     private void onChangeFileSuffix(@NonNull Account localAccount) {
-        final NotesRepository repository = NotesRepository.getInstance(getApplicationContext());
-        final Spinner spinner = new Spinner(this);
-        final ViewGroup wrapper = createDialogViewWrapper();
-        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.settings_file_suffixes, android.R.layout.simple_spinner_item);
+        final var repository = NotesRepository.getInstance(getApplicationContext());
+        final var spinner = new Spinner(this);
+        final var wrapper = createDialogViewWrapper();
+        final var adapter = ArrayAdapter.createFromResource(this, R.array.settings_file_suffixes, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        final AlertDialog dialog = new BrandedAlertDialogBuilder(this)
+        final var dialog = new BrandedAlertDialogBuilder(this)
                 .setTitle(R.string.settings_file_suffix)
                 .setMessage(R.string.settings_file_suffix_description)
                 .setView(wrapper)
@@ -194,10 +194,10 @@ public class ManageAccountsActivity extends LockedActivity {
                 .setPositiveButton(R.string.action_edit_save, (v, d) -> new Thread(() -> {
                     try {
                         final Call<NotesSettings> putSettingsCall = repository.putServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), new NotesSettings(null, spinner.getSelectedItem().toString()), getPreferredApiVersion(localAccount.getApiVersion()));
-                        putSettingsCall.enqueue(new Callback<NotesSettings>() {
+                        putSettingsCall.enqueue(new Callback<>() {
                             @Override
                             public void onResponse(@NonNull Call<NotesSettings> call, @NonNull Response<NotesSettings> response) {
-                                final NotesSettings body = response.body();
+                                final var body = response.body();
                                 if (response.isSuccessful() && body != null) {
                                     runOnUiThread(() -> Toast.makeText(ManageAccountsActivity.this, getString(R.string.settings_file_suffix_success, body.getNotesPath()), Toast.LENGTH_LONG).show());
                                 } else {
@@ -217,7 +217,7 @@ public class ManageAccountsActivity extends LockedActivity {
                 .show();
         try {
             repository.getServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), getPreferredApiVersion(localAccount.getApiVersion()))
-                    .enqueue(new Callback<NotesSettings>() {
+                    .enqueue(new Callback<>() {
                         @Override
                         public void onResponse(@NonNull Call<NotesSettings> call, @NonNull Response<NotesSettings> response) {
                             final NotesSettings body = response.body();
@@ -254,9 +254,9 @@ public class ManageAccountsActivity extends LockedActivity {
 
     @NonNull
     private ViewGroup createDialogViewWrapper() {
-        final ProgressBar progressBar = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
+        final var progressBar = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
         progressBar.setIndeterminate(true);
-        final FrameLayout wrapper = new FrameLayout(this);
+        final var wrapper = new FrameLayout(this);
         final int paddingVertical = getResources().getDimensionPixelSize(R.dimen.spacer_1x);
         final int paddingHorizontal = SDK_INT >= LOLLIPOP_MR1
                 ? getDimensionFromAttribute(android.R.attr.dialogPreferredPadding)
@@ -268,7 +268,7 @@ public class ManageAccountsActivity extends LockedActivity {
 
     @Px
     private int getDimensionFromAttribute(@SuppressWarnings("SameParameterValue") @AttrRes int attr) {
-        final TypedValue typedValue = new TypedValue();
+        final var typedValue = new TypedValue();
         if (getTheme().resolveAttribute(attr, typedValue, true))
             return TypedValue.complexToDimensionPixelSize(typedValue.data, getResources().getDisplayMetrics());
         else {

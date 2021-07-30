@@ -53,11 +53,11 @@ public class ManageAccountViewHolder extends RecyclerView.ViewHolder {
         itemView.setOnClickListener((v) -> onAccountClick.accept(localAccount));
         binding.accountContextMenu.setVisibility(VISIBLE);
         binding.accountContextMenu.setOnClickListener((v) -> {
-            final PopupMenu popup = new PopupMenu(itemView.getContext(), v);
+            final var popup = new PopupMenu(itemView.getContext(), v);
             popup.inflate(R.menu.menu_account);
-            final ApiVersion preferredApiVersion = getPreferredApiVersion(localAccount.getApiVersion());
+            final var preferredApiVersion = getPreferredApiVersion(localAccount.getApiVersion());
             if (preferredApiVersion != null && !preferredApiVersion.supportsSettings()) {
-                final Menu menu = popup.getMenu();
+                final var menu = popup.getMenu();
                 Stream.of(
                         R.id.notes_path,
                         R.id.file_suffix

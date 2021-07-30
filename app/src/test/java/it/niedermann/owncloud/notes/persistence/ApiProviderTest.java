@@ -38,7 +38,7 @@ public class ApiProviderTest {
 
     @Test
     public void testGetOcsAPI() {
-        OcsAPI api = apiProvider.getOcsAPI(ApplicationProvider.getApplicationContext(), ssoAccount);
+        var api = apiProvider.getOcsAPI(ApplicationProvider.getApplicationContext(), ssoAccount);
 
         assertNotNull(api);
         assertSame(api, apiProvider.getOcsAPI(ApplicationProvider.getApplicationContext(), ssoAccount));
@@ -64,7 +64,7 @@ public class ApiProviderTest {
 
     @Test
     public void testGetNotesAPI() {
-        final NotesAPI notesAPI = apiProvider.getNotesAPI(ApplicationProvider.getApplicationContext(), ssoAccount, ApiVersion.API_VERSION_0_2);
+        final var notesAPI = apiProvider.getNotesAPI(ApplicationProvider.getApplicationContext(), ssoAccount, ApiVersion.API_VERSION_0_2);
 
         assertNotNull(notesAPI);
 
@@ -75,7 +75,7 @@ public class ApiProviderTest {
 
         apiProvider.invalidateAPICache();
 
-        final NotesAPI newNotesAPI = apiProvider.getNotesAPI(ApplicationProvider.getApplicationContext(), ssoAccount, ApiVersion.API_VERSION_1_0);
+        final var newNotesAPI = apiProvider.getNotesAPI(ApplicationProvider.getApplicationContext(), ssoAccount, ApiVersion.API_VERSION_1_0);
 
         assertNotSame("After a manual invalidation, the returned Notes API will be a new instance",
                 notesAPI, newNotesAPI);

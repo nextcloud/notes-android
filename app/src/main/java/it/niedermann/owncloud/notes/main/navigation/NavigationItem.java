@@ -75,7 +75,7 @@ public class NavigationItem {
         if (this == o) return true;
         if (!(o instanceof NavigationItem)) return false;
 
-        NavigationItem that = (NavigationItem) o;
+        final var that = (NavigationItem) o;
 
         if (icon != that.icon) return false;
         if (!id.equals(that.id)) return false;

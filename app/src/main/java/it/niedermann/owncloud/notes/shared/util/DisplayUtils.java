@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.shared.util;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Rect;
@@ -34,8 +35,8 @@ public class DisplayUtils {
     }
 
     public static NavigationItem.CategoryNavigationItem convertToCategoryNavigationItem(@NonNull Context context, @NonNull CategoryWithNotesCount counter) {
-        Resources res = context.getResources();
-        String category = counter.getCategory().toLowerCase();
+        final var res = context.getResources();
+        final String category = counter.getCategory().toLowerCase();
         int icon = NavigationAdapter.ICON_FOLDER;
         if (category.equals(res.getString(R.string.category_music).toLowerCase())) {
             icon = R.drawable.ic_library_music_grey600_24dp;
@@ -54,6 +55,7 @@ public class DisplayUtils {
      * @param parentView View
      * @return keyboardVisibility Boolean
      */
+    @SuppressLint("WrongConstant")
     public static boolean isSoftKeyboardVisible(@NonNull View parentView) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             final WindowInsetsCompat insets = ViewCompat.getRootWindowInsets(parentView);
@@ -64,8 +66,8 @@ public class DisplayUtils {
 
         //Arbitrary keyboard height
         final int defaultKeyboardHeightDP = 100;
-        final int EstimatedKeyboardDP = defaultKeyboardHeightDP + (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? 48 : 0);
-        final Rect rect = new Rect();
+        final int EstimatedKeyboardDP = defaultKeyboardHeightDP + 48;
+        final var rect = new Rect();
         final int estimatedKeyboardHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, EstimatedKeyboardDP, parentView.getResources().getDisplayMetrics());
         parentView.getWindowVisibleDisplayFrame(rect);
         final int heightDiff = parentView.getRootView().getHeight() - (rect.bottom - rect.top);

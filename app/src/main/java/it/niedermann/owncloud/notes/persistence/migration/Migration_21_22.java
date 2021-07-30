@@ -25,8 +25,8 @@ public class Migration_21_22 extends Migration {
 
     @Override
     public void migrate(@NonNull SupportSQLiteDatabase database) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+        final var sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        final var editor = sharedPreferences.edit();
         if (sharedPreferences.contains("backgroundSync")) {
             editor.remove("backgroundSync");
             if (sharedPreferences.getString("backgroundSync", "").equals("off")) {

@@ -155,7 +155,7 @@ public class NotesRepository {
         // Registers BroadcastReceiver to track network connection changes.
         this.context.registerReceiver(networkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
-        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.context);
+        final var prefs = PreferenceManager.getDefaultSharedPreferences(this.context);
         prefs.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
         syncOnlyOnWifi = prefs.getBoolean(syncOnlyOnWifiKey, false);
 
@@ -167,7 +167,7 @@ public class NotesRepository {
 
     @AnyThread
     public void addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities, @Nullable String displayName, @NonNull IResponseCallback<Account> callback) {
-        final Account createdAccount = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account(url, username, accountName, displayName, capabilities)));
+        final var createdAccount = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account(url, username, accountName, displayName, capabilities)));
         if (createdAccount == null) {
             callback.onError(new Exception("Could not read created account."));
         } else {
@@ -377,8 +377,8 @@ public class NotesRepository {
     @NonNull
     @MainThread
     public LiveData<Note> addNoteAndSync(Account account, Note note) {
-        final Note entity = new Note(0, null, note.getModified(), note.getTitle(), note.getContent(), note.getCategory(), note.getFavorite(), note.getETag(), DBStatus.LOCAL_EDITED, account.getId(), generateNoteExcerpt(note.getContent(), note.getTitle()), 0);
-        final MutableLiveData<Note> ret = new MutableLiveData<>();
+        final var entity = new Note(0, null, note.getModified(), note.getTitle(), note.getContent(), note.getCategory(), note.getFavorite(), note.getETag(), DBStatus.LOCAL_EDITED, account.getId(), generateNoteExcerpt(note.getContent(), note.getTitle()), 0);
+        final var ret = new MutableLiveData<Note>();
         executor.submit(() -> ret.postValue(addNote(account.getId(), entity)));
         return map(ret, newNote -> {
             notifyWidgets();
@@ -406,7 +406,7 @@ public class NotesRepository {
 
     @MainThread
     public LiveData<Note> moveNoteToAnotherAccount(Account account, @NonNull Note note) {
-        final Note fullNote = new Note(null, note.getModified(), note.getTitle(), note.getContent(), note.getCategory(), note.getFavorite(), null);
+        final var fullNote = new Note(null, note.getModified(), note.getTitle(), note.getContent(), note.getCategory(), note.getFavorite(), null);
         deleteNoteAndSync(account, note.getId());
         return map(addNoteAndSync(account, fullNote), (createdNote) -> {
             db.getNoteDao().updateStatus(createdNote.getId(), DBStatus.LOCAL_EDITED);
@@ -518,10 +518,10 @@ public class NotesRepository {
             scheduleSync(account, true);
 
             if (SDK_INT >= O) {
-                ShortcutManager shortcutManager = context.getSystemService(ShortcutManager.class);
+                final var shortcutManager = context.getSystemService(ShortcutManager.class);
                 if (shortcutManager != null) {
                     shortcutManager.getPinnedShortcuts().forEach((shortcut) -> {
-                        String shortcutId = id + "";
+                        final String shortcutId = String.valueOf(id);
                         if (shortcut.getId().equals(shortcutId)) {
                             Log.v(TAG, "Removing shortcut for " + shortcutId);
                             shortcutManager.disableShortcuts(Collections.singletonList(shortcutId), context.getResources().getString(R.string.note_has_been_deleted));
@@ -549,14 +549,14 @@ public class NotesRepository {
     private void updateDynamicShortcuts(long accountId) {
         executor.submit(() -> {
             if (SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
-                final ShortcutManager shortcutManager = this.context.getSystemService(ShortcutManager.class);
+                final var shortcutManager = this.context.getSystemService(ShortcutManager.class);
                 if (shortcutManager != null) {
                     if (!shortcutManager.isRateLimitingActive()) {
-                        List<ShortcutInfo> newShortcuts = new ArrayList<>();
+                        var newShortcuts = new ArrayList<ShortcutInfo>();
 
-                        for (Note note : db.getNoteDao().getRecentNotes(accountId)) {
+                        for (final var note : db.getNoteDao().getRecentNotes(accountId)) {
                             if (!TextUtils.isEmpty(note.getTitle())) {
-                                Intent intent = new Intent(this.context, EditNoteActivity.class);
+                                final var intent = new Intent(this.context, EditNoteActivity.class);
                                 intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
                                 intent.setAction(ACTION_SHORTCUT);
 
@@ -583,7 +583,7 @@ public class NotesRepository {
      * @param raw has to be a JSON array as a string <code>["0.2", "1.0", ...]</code>
      */
     public void updateApiVersion(long accountId, @Nullable String raw) {
-        final Collection<ApiVersion> apiVersions = ApiVersionUtil.parse(raw);
+        final var apiVersions = ApiVersionUtil.parse(raw);
         if (apiVersions.size() > 0) {
             final int updatedRows = db.getAccountDao().updateApiVersion(accountId, ApiVersionUtil.serialize(apiVersions));
             if (updatedRows == 0) {
@@ -613,8 +613,8 @@ public class NotesRepository {
     @AnyThread
     public void modifyCategoryOrder(long accountId, @NonNull NavigationCategory selectedCategory, @NonNull CategorySortingMethod sortingMethod) {
         executor.submit(() -> {
-            final Context ctx = context.getApplicationContext();
-            final SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(ctx).edit();
+            final var ctx = context.getApplicationContext();
+            final var sp = PreferenceManager.getDefaultSharedPreferences(ctx).edit();
             int orderIndex = sortingMethod.getId();
 
             switch (selectedCategory.getType()) {
@@ -636,7 +636,7 @@ public class NotesRepository {
                     if (category != null) {
                         if (db.getCategoryOptionsDao().modifyCategoryOrder(accountId, category, sortingMethod) == 0) {
                             // Nothing updated means we didn't have this yet
-                            final CategoryOptions categoryOptions = new CategoryOptions();
+                            final var categoryOptions = new CategoryOptions();
                             categoryOptions.setAccountId(accountId);
                             categoryOptions.setCategory(category);
                             categoryOptions.setSortingMethod(sortingMethod);
@@ -667,7 +667,7 @@ public class NotesRepository {
     @NonNull
     @MainThread
     public LiveData<CategorySortingMethod> getCategoryOrder(@NonNull NavigationCategory selectedCategory) {
-        final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        final var sp = PreferenceManager.getDefaultSharedPreferences(context);
         String prefKey;
 
         switch (selectedCategory.getType()) {
@@ -838,9 +838,9 @@ public class NotesRepository {
                 Log.d(TAG, "... scheduled");
                 syncScheduled.put(account.getId(), true);
                 if (callbacksPush.containsKey(account.getId()) && callbacksPush.get(account.getId()) != null) {
-                    final List<ISyncCallback> callbacks = callbacksPush.get(account.getId());
+                    final var callbacks = callbacksPush.get(account.getId());
                     if (callbacks != null) {
-                        for (ISyncCallback callback : callbacks) {
+                        for (final var callback : callbacks) {
                             callback.onScheduled();
                         }
                     } else {
@@ -850,9 +850,9 @@ public class NotesRepository {
             } else {
                 Log.d(TAG, "... do nothing");
                 if (callbacksPush.containsKey(account.getId()) && callbacksPush.get(account.getId()) != null) {
-                    final List<ISyncCallback> callbacks = callbacksPush.get(account.getId());
+                    final var callbacks = callbacksPush.get(account.getId());
                     if (callbacks != null) {
-                        for (ISyncCallback callback : callbacks) {
+                        for (final var callback : callbacks) {
                             callback.onScheduled();
                         }
                     } else {
@@ -865,12 +865,12 @@ public class NotesRepository {
 
     public void updateNetworkStatus() {
         try {
-            final ConnectivityManager connMgr = (ConnectivityManager) this.context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            final var connMgr = (ConnectivityManager) this.context.getSystemService(Context.CONNECTIVITY_SERVICE);
             if (connMgr == null) {
                 throw new NetworkErrorException("ConnectivityManager is null");
             }
 
-            final NetworkInfo activeInfo = connMgr.getActiveNetworkInfo();
+            final var activeInfo = connMgr.getActiveNetworkInfo();
             if (activeInfo == null) {
                 throw new NetworkErrorException("NetworkInfo is null");
             }
@@ -878,7 +878,7 @@ public class NotesRepository {
             if (activeInfo.isConnected()) {
                 networkConnected = true;
 
-                final NetworkInfo networkInfo = connMgr.getNetworkInfo((ConnectivityManager.TYPE_WIFI));
+                final var networkInfo = connMgr.getNetworkInfo((ConnectivityManager.TYPE_WIFI));
                 if (networkInfo == null) {
                     throw new NetworkErrorException("connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI) is null");
                 }

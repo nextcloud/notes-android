@@ -18,7 +18,7 @@ public class BrandedDeleteAlertDialogBuilder extends BrandedAlertDialogBuilder {
     @Override
     public void applyBrand(int mainColor, int textColor) {
         super.applyBrand(mainColor, textColor);
-        final Button positiveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        final var positiveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
         if (positiveButton != null) {
             positiveButton.setTextColor(getContext().getResources().getColor(R.color.bg_attention));
         }

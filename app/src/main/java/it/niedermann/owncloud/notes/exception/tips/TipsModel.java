@@ -8,10 +8,9 @@ import androidx.annotation.StringRes;
 @SuppressWarnings("WeakerAccess")
 public class TipsModel {
     @StringRes
-    private int text;
+    private final int text;
     @Nullable
-    private
-    Intent actionIntent;
+    private final Intent actionIntent;
 
     TipsModel(@StringRes int text, @Nullable Intent actionIntent) {
         this.text = text;

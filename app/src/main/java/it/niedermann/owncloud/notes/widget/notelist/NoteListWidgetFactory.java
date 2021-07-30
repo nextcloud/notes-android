@@ -177,8 +177,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
                 Log.e(TAG, "Could not find position \"" + position + "\" in dbNotes list.");
                 return -2;
             }
-            Note note = dbNotes.get(position);
-            return note.getId();
+            return dbNotes.get(position).getId();
         }
     }
 
