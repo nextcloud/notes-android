@@ -45,6 +45,10 @@ Until then you can as a workaround for the first import try to
 2. import your account on your smartphone
 3. put your notes back to the original folder step by step and sync everytime you put some notes back 
 
+### `IllegalStateException: Duplicate key`
+
+This is issue was caused by a bug which was present in the Notes Android app between `3.4.0` and `3.4.10`. It has been fixed in `3.4.11`, though it created a corrupt database state which is not recoverable automatically without data loss. It is therefore required to [clear the storage of the Notes Android app](#tokenmismatchexception-and-all-others) and import your account again from scratch. Make sure to backup unsynchronized changes before doing this.
+
 ### `NextcloudFilesAppAccountNotFoundException`
 
 We are not yet sure what exactly causes this issue, but investigate it by [adding more debug logs to recent versions](https://github.com/stefan-niedermann/nextcloud-notes/issues/1256#issuecomment-859505153). In theory this might happen if an already imported account has been deleted in the Nextcloud app.
