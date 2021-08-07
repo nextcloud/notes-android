@@ -247,8 +247,21 @@
     <string name="remove_account">Rimuovi %1$s</string>
 
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Devi essere connesso a Internet per aggiungere un account.</string>
+    <string name="settings_notes_path">Imposta cartella</string>
+
     <string name="simple_next">Successivo</string>
     <string name="simple_prev">Precedente</string>
     <string name="simple_backup">Backup</string>
     <string name="simple_repair">Ripara</string>
-    </resources>
+    <string name="backup">Abbiamo rilevato uno stato dell\'app non recuperabile. Fai il backup delle modifiche non sincronizzate e cancella i dati dell\'app Note. </string>
+    <string name="settings_notes_path_description">Cartella in cui salvare le note nel tuo Nextcloud</string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
+    <string name="settings_notes_path_success">Nuova cartella note: %1$s</string>
+    <string name="settings_file_suffix">Estensione dei file</string>
+    <string name="settings_file_suffix_description">Estensione del file per le nuove note nel tuo Nextcloud</string>
+    <string name="settings_file_suffix_success">Nuovo suffisso file: %1$s</string>
+    <string name="http_status_code">Codice di stato HTTP: %1$d</string>
+</resources>

@@ -159,7 +159,7 @@
     <string-array name="darkmode_entries">
         <item>亮色</item>
         <item>暗色</item>
-        <item>系統預設值</item>
+        <item>系統預設</item>
     </string-array>
 
     <plurals name="ab_selected">
