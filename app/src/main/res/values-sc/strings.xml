@@ -227,8 +227,8 @@
     <!-- Table cell value of a sample table -->
     <string name="formatting_help_tables_value">Balore %1d</string>
 
-    <string name="formatting_help_images_title">Immàgines</string>
-    <string name="formatting_help_images_alt">Immàgine de fantasia</string>
+    <string name="formatting_help_images_title">Imàgines</string>
+    <string name="formatting_help_images_alt">Imàgine de fantasia</string>
 
     <string name="simple_other">Àteru</string>
     <string name="sort_last_modified">Pone in òrdine de data de modìfica</string>
@@ -247,9 +247,21 @@
     <string name="remove_account">Boga•nche %1$s</string>
 
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Depes èssere connètidu a internet pro agiùnghere unu contu.</string>
+    <string name="settings_notes_path">Imposta cartella</string>
+
     <string name="simple_next">Imbeniente</string>
     <string name="simple_prev">Pretzedente</string>
     <string name="simple_backup">Còpia de seguresa</string>
     <string name="simple_repair">Acontza</string>
     <string name="backup">Amus rilevadu un\'istadu non recuperàbile de s\'aplicatzione. Faghe una còpia de is modìficas non sincronizadas e lìmpia s\'archiviatzione de s\'aplicatzione Notes.</string>
-    </resources>
+    <string name="settings_notes_path_description">Cartella pro archiviare is notas tuas in Nextcloud</string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
+    <string name="settings_notes_path_success">Cartella de notas noa: %1$s</string>
+    <string name="settings_file_suffix">Estensione de archìviu</string>
+    <string name="settings_file_suffix_description">Estensione de archìviu pro notas noas in su Nextcloud tuo</string>
+    <string name="settings_file_suffix_success">Sufissu de archìviu nou: %1$s</string>
+    <string name="http_status_code">Còdighe de istadu HTTP: %1$d</string>
+</resources>
