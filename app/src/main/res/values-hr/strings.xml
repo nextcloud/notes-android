@@ -6,12 +6,14 @@
     <string name="label_all_notes">Sve bilješke</string>
     <string name="label_favorites">Favoriti</string>
     <string name="action_create">Nova bilješka</string>
+    <string name="welcome_text">Dobrodošli u %1$s</string>
     <string name="action_settings">Postavke</string>
     <string name="action_trashbin">Izbrisane bilješke</string>
     <string name="action_search">Traži</string>
     <string name="action_sorting_method">Način razvrstavanja</string>
     <string name="simple_cancel">Odustani</string>
     <string name="simple_edit">Uredi</string>
+    <string name="simple_remove">Ukloni</string>
     <string name="action_edit_save">Spremi</string>
     <string name="simple_about">Informacije</string>
     <string name="simple_link">Poveznica</string>
@@ -45,9 +47,12 @@
     <string name="settings_lock">Zaključavanje aplikacije (beta)</string>
     <string name="settings_lock_summary">Vjerodajnice uređaja</string>
     <string name="settings_background_sync">Pozadinska sinkronizacija</string>
+    <string name="settings_prevent_screen_capture">Spriječi snimanje zaslona</string>
+
     <string name="error_sync">Sinkronizacija nije uspjela: %1$s</string>
     <string name="error_synchronization">Sinkronizacija nije uspjela</string>
     <string name="error_no_network">Nema veze s mrežom</string>
+    <string name="error_maintenance_mode">Poslužitelj je u načinu održavanja</string>
     <string name="error_unknown">Došlo je do nepoznate pogreške.</string>
 
     <string name="about_version_title">Inačica</string>
@@ -134,6 +139,7 @@
     <string name="menu_edit_title">Uredi naslov</string>
     <string name="settings_gridview">Prikaz rešetke</string>
     <string name="simple_security">Sigurnost</string>
+    <string name="appearance_and_behavior">Izgled and ponašanje</string>
     <string name="simple_synchronization">Sinkronizacija</string>
     <string name="manage_accounts">Upravljaj računima</string>
     <string name="action_formatting_help">Oblikovanje</string>
@@ -236,5 +242,31 @@
     <string name="error_action_open_network">Postavke mreže</string>
     <string name="no_account_configured_yet">Još uvijek nema konfiguriranih računa</string>
     <string name="no_other_accounts">Nemate konfiguriranih računa.</string>
+    <string name="choose_account">Odaberi račun</string>
     <string name="context_based_formatting">Skočni okvir za oblikovanje ovisno o kontekstu</string>
-    </resources>
+    <plurals name="remove_account_message">
+        <item quantity="one">Uklanjanjem računa %1$s nepovratno će se izbrisati jedna nesinkronizirana promjena.</item>
+        <item quantity="few">Uklanjanjem računa %1$s nepovratno će se izbrisati %2$d nesinkronizirane promjene.</item>
+        <item quantity="other">Uklanjanjem računa %1$s nepovratno će se izbrisati %2$d nesinkronizirane promjene.</item>
+    </plurals>
+    <string name="remove_account">Ukloni %1$s</string>
+
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Trebate uspostaviti internetsku vezu za dodavanje računa.</string>
+    <string name="settings_notes_path">Postavi mapu</string>
+
+    <string name="simple_next">Sljedeća</string>
+    <string name="simple_prev">Prethodna</string>
+    <string name="simple_backup">Sigurnosno kopiranje</string>
+    <string name="simple_repair">Ispravi pogrešku</string>
+    <string name="backup">Otkrili smo nepopravljivo stanje aplikacije. Izradite sigurnosnu kopiju nesinkroniziranih promjena i izbrišite pohranjene podatke aplikacije Notes.</string>
+    <string name="settings_notes_path_description">Mapa za spremanje bilješki u Nextcloudu</string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
+    <string name="settings_notes_path_success">Nova mapa za bilješke: %1$s</string>
+    <string name="settings_file_suffix">Ekstenzija datoteke</string>
+    <string name="settings_file_suffix_description">Ekstenzija datoteke za nove bilješke u Nextcloudu</string>
+    <string name="settings_file_suffix_success">Novi sufiks datoteke: %1$s</string>
+    <string name="http_status_code">Šifra statusa HTTP-a: %1$d</string>
+</resources>
