@@ -1,7 +1,8 @@
 package it.niedermann.android.markdown.markwon.plugins;
 
-import android.text.Editable;
-import android.text.Spannable;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ClickableSpan;
@@ -19,9 +20,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,9 +30,6 @@ import io.noties.markwon.SpannableBuilder;
 import io.noties.markwon.ext.tasklist.TaskListSpan;
 import it.niedermann.android.markdown.markwon.span.InterceptedURLSpan;
 import it.niedermann.android.markdown.markwon.span.ToggleTaskListSpan;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricTestRunner.class)
 public class ToggleableTaskListPluginTest extends TestCase {
@@ -163,7 +159,7 @@ public class ToggleableTaskListPluginTest extends TestCase {
 
         final var firstClickableSpan = new URLSpan("");
         final var secondClickableSpan = new InterceptedURLSpan(Collections.emptyList(), "");
-        final var spannable = new SpannableBuilder("Lorem Ipsum Dolor \nSit Amet");
+        var spannable = new SpannableBuilder("Lorem Ipsum Dolor \nSit Amet");
         spannable.setSpan(firstClickableSpan, 6, 11, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannable.setSpan(secondClickableSpan, 19, 22, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
@@ -200,5 +196,15 @@ public class ToggleableTaskListPluginTest extends TestCase {
         assertEquals(19, (int) freeRanges.get(1).getUpper());
         assertEquals(22, (int) freeRanges.get(2).getLower());
         assertEquals(27, (int) freeRanges.get(2).getUpper());
+
+
+        // https://github.com/stefan-niedermann/nextcloud-notes/issues/1326
+
+        spannable = new SpannableBuilder("Test Crash\n\nJust text with link https://github.com");
+        spannable.setSpan(firstClickableSpan, 32, 50, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannable.setSpan(secondClickableSpan, 32, 50, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        freeRanges = (List<Range<Integer>>) method.invoke(null, spannable, 12, 50);
+        assertEquals(1, freeRanges.size());
     }
 }
