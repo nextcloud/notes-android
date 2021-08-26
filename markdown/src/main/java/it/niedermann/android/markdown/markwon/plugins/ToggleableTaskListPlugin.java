@@ -155,7 +155,7 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
             for (final var clickableSpan : clickableSpans) {
                 final int clickableStart = clickableSpan.start;
                 final int clickableEnd = clickableSpan.end;
-                if (from != clickableStart && from <= clickableStart) {
+                if (from < clickableStart) {
                     freeRanges.add(new Range<>(from, clickableStart));
                 }
                 from = clickableEnd;
