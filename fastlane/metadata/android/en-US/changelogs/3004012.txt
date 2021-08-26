@@ -1,0 +1,1 @@
+- 🐞 Fix potential crash when rendering a note with a checkbox (#1326)
