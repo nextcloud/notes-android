@@ -247,6 +247,21 @@
     <string name="remove_account">%1$s eltávolítása</string>
 
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Internetkapcsolatra van szükség, hogy fiókot adjon hozzá.</string>
+    <string name="settings_notes_path">Mappa megadása</string>
+
     <string name="simple_next">Következő</string>
     <string name="simple_prev">Előző</string>
-    </resources>
+    <string name="simple_backup">Biztonsági mentés</string>
+    <string name="simple_repair">Javítás</string>
+    <string name="backup">Az alkalmazás olyan állapotot észlelt, amelyből nem tud helyreállni. Készítsen biztonsági mentést a még nem szinkronizált változtatásokról, és törölje a Jegyzetek alkalmazás tárolóját.</string>
+    <string name="settings_notes_path_description">A jegyzetek Nextcloudban történő tárolásához használt mappa</string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
+    <string name="settings_notes_path_success">Új jegyzetek mappa: %1$s</string>
+    <string name="settings_file_suffix">Fájlkiterjesztés</string>
+    <string name="settings_file_suffix_description">Az új jegyzetek fájlkiterjesztése a Nextcloudban</string>
+    <string name="settings_file_suffix_success">Új fájl utótagja: %1$s</string>
+    <string name="http_status_code">HTTP állapotkód: %1$d</string>
+</resources>

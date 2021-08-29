@@ -6,6 +6,7 @@
     <string name="label_all_notes">Toutes les notes</string>
     <string name="label_favorites">Favoris</string>
     <string name="action_create">Nouvelle note</string>
+    <string name="welcome_text">Bienvenue sur %1$s</string>
     <string name="action_settings">Paramètres</string>
     <string name="action_trashbin">Notes supprimées</string>
     <string name="action_search">Rechercher</string>
@@ -239,5 +240,28 @@
     <string name="no_other_accounts">Vous n\'avez pas encore configuré d\'autres comptes.</string>
     <string name="choose_account">Sélectionnez un compte</string>
     <string name="context_based_formatting">Suggestions de mise en forme contextuelle</string>
+    <plurals name="remove_account_message">
+        <item quantity="one">Supprimer le compte %1$s supprimera aussi définitivement un changement non-synchronisé.</item>
+        <item quantity="other">Supprimer le compte %1$s supprimera aussi définitivement  %2$d changements non-synchronisés.</item>
+    </plurals>
+    <string name="remove_account">Supprimer %1$s</string>
+
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Vous devez être connecté à internet pour ajouter un compte.</string>
-    </resources>
+    <string name="settings_notes_path">Paramétrer un dossier</string>
+
+    <string name="simple_next">Suivant</string>
+    <string name="simple_prev">Précédent</string>
+    <string name="simple_backup">Sauvegarde</string>
+    <string name="simple_repair">Réparer</string>
+    <string name="backup">Nous avons détecté un état irrécupérable de l\'application. Veuillez sauvegarder vos modifications non-synchronisées puis effacer le stockage de l\'application Notes.</string>
+    <string name="settings_notes_path_description">Dossier pour stocker vos notes dans Nextcloud</string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
+    <string name="settings_notes_path_success">Nouveau dossier pour vos notes : %1$s</string>
+    <string name="settings_file_suffix">Extension de fichier</string>
+    <string name="settings_file_suffix_description">Extension de fichier pour les nouvelles notes dans votre Nextcloud</string>
+    <string name="settings_file_suffix_success">Nouveau suffixe de fichier : %1$s</string>
+    <string name="http_status_code">État HTTP : %1$d</string>
+</resources>
