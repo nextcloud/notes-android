@@ -247,4 +247,21 @@
     <string name="remove_account">Suprimeix %1$s</string>
 
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Heu de tenir connexió a Internet per a afegir un compte.</string>
-    </resources>
+    <string name="settings_notes_path">Defineix la carpeta</string>
+
+    <string name="simple_next">Següent</string>
+    <string name="simple_prev">Anterior</string>
+    <string name="simple_backup">Fes una còpia de seguretat</string>
+    <string name="simple_repair">Repara</string>
+    <string name="backup">S\'ha detectat un estat irrecuperable de l\'aplicació. Feu una còpia de seguretat dels canvis sense sincronitzar i esborreu l\'emmagatzematge de l\'aplicació Notes.</string>
+    <string name="settings_notes_path_description">Carpeta on s\'emmagatzemaran les notes al Nextcloud</string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
+    <string name="settings_notes_path_success">Carpeta per a les notes noves: %1$s</string>
+    <string name="settings_file_suffix">Extensió dels fitxers</string>
+    <string name="settings_file_suffix_description">Extensió de fitxer per a les notes noves al Nextcloud</string>
+    <string name="settings_file_suffix_success">Sufix dels fitxers nous: %1$s</string>
+    <string name="http_status_code">Codi d\'estat HTTP: %1$d</string>
+</resources>
