@@ -69,7 +69,7 @@
     <string name="about_translate_title">Fordítás</string>
     <string name="about_translate">Csatlakozzon a Nextcloud csapathoz a Transifexen, és segítsen az alkalmazás lefordításában: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Alkalmazás licence</string>
-    <string name="about_app_license">Ez az alkalmazás a GNU GENERAL PUBLIC LICENSE v3+ verziója alatt kerül közreadásra.</string>
+    <string name="about_app_license">Ez az alkalmazás GNU GENERAL PUBLIC LICENSE v3+ alatt kerül közreadásra.</string>
     <string name="about_app_license_button">Licenc megtekintése</string>
     <string name="about_icons_disclaimer_title">Ikonok</string>
     <string name="about_icons_disclaimer">&lt;p>Az eredeti ikont %1$s készítette.&lt;/p>&lt;p>Az alkalmazás által használt összes többi ikon a Google által készített &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> része, és azok Apache 2.0 License alatt érhetők el.&lt;/p></string>
