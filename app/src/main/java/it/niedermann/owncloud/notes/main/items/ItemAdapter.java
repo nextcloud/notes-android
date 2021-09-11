@@ -170,6 +170,10 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         return itemList.get(notePosition);
     }
 
+    public boolean hasItemPosition(int notePosition) {
+        return notePosition >= 0 && notePosition < itemList.size();
+    }
+
     public void remove(@NonNull Item item) {
         itemList.remove(item);
         notifyDataSetChanged();

@@ -31,7 +31,10 @@ public class ItemSelectionTracker {
                     @Override
                     public boolean canSetStateAtPosition(int position, boolean nextState) {
                         @Nullable Integer swipedPosition = adapter.getSwipedPosition();
-                        return !adapter.getItem(position).isSection() && (swipedPosition == null || swipedPosition != position);
+                        if (!adapter.hasItemPosition(position)) {
+                            return false;
+                        }
+                        return (swipedPosition == null || swipedPosition != position) && !adapter.getItem(position).isSection();
                     }
 
                     @Override
