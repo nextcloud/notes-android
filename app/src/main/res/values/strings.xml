@@ -81,7 +81,7 @@
     <string name="about_app_license_button">View license</string>
     <string name="about_app_icon_author" translatable="false">&lt;a href="http://jancborchardt.net/">Jan C. Borchardt&lt;/a> (&lt;a href="https://github.com/nextcloud/notes/blob/76d15214f80f2bf7ea08427bff73ad145128f090/img/notes.svg">GitHub&lt;/a>)</string>
     <string name="about_icons_disclaimer_title">Icons</string>
-    <string name="about_icons_disclaimer">&lt;p>Original icon made by %1$s&lt;/p>&lt;p>All further icons used by this app are &lt;a href="https://materialdesignicons.com/">Material Design Icons&lt;/a> made by Google Inc. and licensed under the Apache 2.0 License.&lt;/p></string>
+    <string name="about_icons_disclaimer">&lt;p>Original icon made by %1$s.&lt;/p>&lt;p>All further icons used by this app are &lt;a href="https://materialdesignicons.com/">Material Design Icons&lt;/a> made by Google Inc. and licensed under the Apache 2.0 License.&lt;/p></string>
     <string name="about_credits_tab_title">Credits</string>
     <string name="about_contribution_tab_title">Contribution</string>
     <string name="about_license_tab_title">License</string>
