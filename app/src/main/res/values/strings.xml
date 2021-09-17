@@ -64,7 +64,7 @@
     <string name="url_about_icons_disclaimer_mdi" translatable="false">https://materialdesignicons.com/</string>
 
     <string name="about_version_title">Version</string>
-    <string name="about_version">You are currently using &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_version">You are currently using %1$s</string>
     <string name="about_maintainer_title">Maintainer</string>
     <string name="about_maintainer" translatable="false">Niedermann IT-Dienstleistungen</string>
     <string name="about_developers_title">Developers</string>
