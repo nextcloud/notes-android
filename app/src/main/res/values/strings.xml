@@ -59,29 +59,35 @@
     <string name="url_issues" translatable="false">https://github.com/stefan-niedermann/nextcloud-notes/issues/new/choose</string>
     <string name="url_license" translatable="false">https://github.com/stefan-niedermann/nextcloud-notes/blob/master/LICENSE</string>
     <string name="url_translations" translatable="false">https://www.transifex.com/nextcloud/nextcloud/</string>
+    <string name="url_maintainer" translatable="false">https://www.niedermann.it/</string>
+    <string name="url_about_icon_author" translatable="false">https://github.com/nextcloud/notes/blob/76d15214f80f2bf7ea08427bff73ad145128f090/img/notes.svg</string>
+    <string name="url_about_icons_disclaimer_mdi" translatable="false">https://materialdesignicons.com/</string>
 
     <string name="about_version_title">Version</string>
     <string name="about_version">You are currently using &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Maintainer</string>
-    <string name="about_maintainer" translatable="false">&lt;a href="https://www.niedermann.it/">Niedermann IT-Dienstleistungen&lt;/a></string>
+    <string name="about_maintainer" translatable="false">Niedermann IT-Dienstleistungen</string>
     <string name="about_developers_title">Developers</string>
     <string name="about_developers" translatable="false">Stefan Niedermann, Kristof Hamann, HeaDBanGer84, Felix Edelmann, Daniel Bailey</string>
     <string name="about_translators_title">Translators</string>
-    <string name="about_translators_transifex">Nextcloud community on &lt;a href="%1$s">Transifex&lt;/a></string>
+    <string name="about_translators_transifex">Nextcloud community on %1$s</string>
+    <string name="about_translators_transifex_label" translatable="false">Transifex</string>
     <string name="about_testers_title">Testers</string>
     <string name="about_testers" translatable="false">Jan C. Borchardt</string>
     <string name="about_source_title">Source code</string>
-    <string name="about_source">This project is hosted on GitHub: &lt;a href="%1$s">%1$s&lt;/a></string>
+    <string name="about_source">This project is hosted on GitHub: %1$s</string>
     <string name="about_issues_title">Issues</string>
-    <string name="about_issues">You can report bugs, enhancement proposals and feature requests at the GitHub issue tracker: &lt;a href="%1$s">%1$s&lt;/a></string>
+    <string name="about_issues">You can report bugs, enhancement proposals and feature requests at the GitHub issue tracker: %1$s</string>
     <string name="about_translate_title">Translate</string>
-    <string name="about_translate">Join the Nextcloud team on Transifex and help us to translate this app: &lt;a href="%1$s">%1$s&lt;/a></string>
+    <string name="about_translate">Join the Nextcloud team on Transifex and help us to translate this app: %1$s</string>
     <string name="about_app_license_title">App license</string>
     <string name="about_app_license">This application is licensed under the GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">View license</string>
-    <string name="about_app_icon_author" translatable="false">&lt;a href="http://jancborchardt.net/">Jan C. Borchardt&lt;/a> (&lt;a href="https://github.com/nextcloud/notes/blob/76d15214f80f2bf7ea08427bff73ad145128f090/img/notes.svg">GitHub&lt;/a>)</string>
+    <string name="about_app_icon_author_link_label" translatable="false">GitHub</string>
     <string name="about_icons_disclaimer_title">Icons</string>
-    <string name="about_icons_disclaimer">&lt;p>Original icon made by %1$s.&lt;/p>&lt;p>All further icons used by this app are &lt;a href="https://materialdesignicons.com/">Material Design Icons&lt;/a> made by Google Inc. and licensed under the Apache 2.0 License.&lt;/p></string>
+    <string name="about_icons_disclaimer_app_icon">For the original icon see %1$s.</string>
+    <string name="about_icons_disclaimer_mdi_icons">All further icons used by this app are %1$s made by Google Inc. and licensed under the Apache 2.0 License.</string>
+    <string name="about_icons_disclaimer_mdi">Material Design Icons</string>
     <string name="about_credits_tab_title">Credits</string>
     <string name="about_contribution_tab_title">Contribution</string>
     <string name="about_license_tab_title">License</string>
@@ -298,7 +304,6 @@
     <string name="simple_next">Next</string>
     <string name="simple_prev">Previous</string>
     <string name="simple_backup">Backup</string>
-    <string name="simple_repair">Repair</string>
     <string name="backup">We detected an irrecoverably state of the app. Please backup your unsynchronized changes and clear the storage of the Notes app.</string>
     <string name="settings_notes_path_description">Folder to store your notes in your Nextcloud</string>
     <string-array name="settings_file_suffixes">

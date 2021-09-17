@@ -39,11 +39,17 @@
             android:text="@string/about_icons_disclaimer_title" />
 
         <TextView
-            android:id="@+id/about_icons_disclaimer"
-            style="?android:attr/editTextPreferenceStyle"
+            android:id="@+id/about_icons_disclaimer_app_icon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="@string/about_icons_disclaimer" />
+            android:text="@string/about_icons_disclaimer_app_icon" />
+
+        <TextView
+            android:id="@+id/about_icons_disclaimer_mdi_icons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/about_icons_disclaimer_mdi_icons" />
     </LinearLayout>
 </ScrollView>

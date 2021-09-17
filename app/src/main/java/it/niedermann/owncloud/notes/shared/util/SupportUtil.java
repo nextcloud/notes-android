@@ -1,31 +1,42 @@
 package it.niedermann.owncloud.notes.shared.util;
 
+import android.content.res.Resources;
+import android.graphics.Typeface;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
+import android.text.style.StyleSpan;
+import android.text.style.URLSpan;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.text.HtmlCompat;
+import androidx.annotation.StringRes;
 
-/**
- * Some helper functionality in alike the Android support library.
- * Currently, it offers methods for working with HTML string resources.
- */
 public class SupportUtil {
 
     private SupportUtil() {
         throw new UnsupportedOperationException("Do not instantiate this util class.");
     }
 
-    /**
-     * Fills a {@link TextView} with HTML content and activates links in that {@link TextView}.
-     *
-     * @param view       The {@link TextView} which should be filled.
-     * @param stringId   The string resource containing HTML tags (escaped by <code>&lt;</code>)
-     * @param formatArgs Arguments for the string resource.
-     */
-    public static void setHtml(@NonNull TextView view, int stringId, Object... formatArgs) {
-        view.setText(HtmlCompat.fromHtml(
-                view.getResources().getString(stringId, formatArgs), HtmlCompat.FROM_HTML_MODE_LEGACY));
-        view.setMovementMethod(LinkMovementMethod.getInstance());
+    public static SpannableString strong(@NonNull CharSequence text) {
+        final var spannable = new SpannableString(text);
+        spannable.setSpan(new StyleSpan(Typeface.BOLD), 0, spannable.length(), 0);
+        return spannable;
+    }
+
+    public static SpannableString url(@NonNull CharSequence text, @NonNull String target) {
+        final var spannable = new SpannableString(text);
+        spannable.setSpan(new URLSpan(target), 0, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return spannable;
+    }
+
+    public static void setTextWithURL(@NonNull TextView textView, @NonNull Resources resources, @StringRes int containerTextId, @StringRes int linkLabelId, @StringRes int urlId) {
+        final String linkLabel = resources.getString(linkLabelId);
+        final String finalText = resources.getString(containerTextId, linkLabel);
+        final var spannable = new SpannableString(finalText);
+        spannable.setSpan(new URLSpan(resources.getString(urlId)), finalText.indexOf(linkLabel), finalText.indexOf(linkLabel) + linkLabel.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textView.setText(spannable);
+        textView.setMovementMethod(new LinkMovementMethod());
     }
 }
