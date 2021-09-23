@@ -49,23 +49,17 @@
     <string name="error_unknown">알 수 없는 에러가 발생했습니다.</string>
 
     <string name="about_version_title">버전</string>
-    <string name="about_version">&lt;strong>%1$s&lt;/strong> 사용 중</string>
     <string name="about_maintainer_title">관리자</string>
     <string name="about_developers_title">개발자</string>
     <string name="about_translators_title">번역자</string>
-    <string name="about_translators_transifex">&lt;a href="%1$s">Transifex&lt;/a>의 Nextcloud 커뮤니티</string>
     <string name="about_testers_title">테스터</string>
     <string name="about_source_title">소스 코드</string>
-    <string name="about_source">이 프로젝트는 GitHub에 있습니다: &lt;a href="%1$s">%1$s&lt;/a></string>
     <string name="about_issues_title">문제점 보고</string>
-    <string name="about_issues">GitHub 이슈 트래커에서 이 앱의 버그를 보고하거나 기능을 제안할 수 있습니다: &lt;a href="%1$s">%1$s&lt;/a></string>
     <string name="about_translate_title">번역</string>
-    <string name="about_translate">Transifex의 Nextcloud 커뮤니티에 등록해서 이 앱을 번역할 수 있습니다: &lt;a href="%1$s">%1$s&lt;/a></string>
     <string name="about_app_license_title">앱 라이선스</string>
     <string name="about_app_license">이 앱은 GNU General Public License v3+로 배포됩니다.</string>
     <string name="about_app_license_button">라이선스 보기</string>
     <string name="about_icons_disclaimer_title">아이콘</string>
-    <string name="about_icons_disclaimer">&lt;p>원래 아이콘 작성자: %1$s&lt;/p>&lt;p>이후 사용된 아이콘은 Google Inc.에서 제작한 &lt;a href="https://materialdesignicons.com/">Material Design Icons&lt;/a>를 사용하며 Apache 2.0 License로 배포됩니다.&lt;/p></string>
     <string name="about_credits_tab_title">만든 사람들</string>
     <string name="about_contribution_tab_title">기여자</string>
     <string name="about_license_tab_title">라이선스</string>

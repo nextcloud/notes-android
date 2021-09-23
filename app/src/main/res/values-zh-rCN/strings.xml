@@ -56,23 +56,25 @@
     <string name="error_unknown">出现未知错误。</string>
 
     <string name="about_version_title">版本</string>
-    <string name="about_version">您正在使用&lt;strong>%1$s&lt;/strong></string>
+    <string name="about_version">您正使用 %1$s</string>
     <string name="about_maintainer_title">维护者</string>
     <string name="about_developers_title">开发者</string>
     <string name="about_translators_title">翻译人员</string>
-    <string name="about_translators_transifex">Nextcloud 社区在 &lt;a href=\"%1$s\">Transifex&lt;/a></string>
+    <string name="about_translators_transifex">%1$s 上的 Nextcloud 社区</string>
     <string name="about_testers_title">测试人员</string>
     <string name="about_source_title">源代码</string>
-    <string name="about_source">此项目托管在 GitHub：&lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_source">此项目托管在 Github 上：%1$s</string>
     <string name="about_issues_title">问题</string>
-    <string name="about_issues">您可以在 GitHub issue tracker 上报告 bug，改进建议以及新的特性需求：&lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues">你可以通过 GitHub 问题跟踪器报告 bug、提议增强已有功能和请求新功能：%1$s</string>
     <string name="about_translate_title">翻译</string>
-    <string name="about_translate">在 Transifex 上加入 Nextcloud 团队并帮助我们翻译这个应用：&lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate">加入 Transifex 上的 Nextcloud 团队，帮助我们翻译这个应用程序：%1$s</string>
     <string name="about_app_license_title">应用授权</string>
     <string name="about_app_license">此程序通过 GNU 通用公共许可证 V3+ 授权。</string>
     <string name="about_app_license_button">查看授权</string>
     <string name="about_icons_disclaimer_title">图标</string>
-    <string name="about_icons_disclaimer">&lt;p>原创图标来自 %1$s&lt;/p>&lt;p>本应用中使用的其他图标来自 Google Inc. 基于创作共用协议提供的 &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a>.&lt;/p></string>
+    <string name="about_icons_disclaimer_app_icon">原始图标见 %1$s</string>
+    <string name="about_icons_disclaimer_mdi_icons">本应用所使用的所有其他图标为 %1$s，其由 Google Inc. 制作并在 Apache 2.0 许可证下授权</string>
+    <string name="about_icons_disclaimer_mdi">Material Design 图标</string>
     <string name="about_credits_tab_title">致谢</string>
     <string name="about_contribution_tab_title">贡献</string>
     <string name="about_license_tab_title">授权</string>
@@ -247,7 +249,6 @@
     <string name="simple_next">下一则 </string>
     <string name="simple_prev">上一则</string>
     <string name="simple_backup">备份</string>
-    <string name="simple_repair">修复</string>
     <string name="backup">我们检测到应用程序一个不可恢复的状态。请备份您的未同步的更改并清除Notes应用程序的存储。</string>
     <string name="settings_notes_path_description">在你的 Nextcloud 中储存你的笔记的文件夹 </string>
     <string-array name="settings_file_suffixes">

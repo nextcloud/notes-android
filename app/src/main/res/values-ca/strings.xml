@@ -56,23 +56,17 @@
     <string name="error_unknown">S\'ha produït un error desconegut</string>
 
     <string name="about_version_title">Versió</string>
-    <string name="about_version">Actualment esteu utilitzant la versió &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Manteniment</string>
     <string name="about_developers_title">Desenvolupament</string>
     <string name="about_translators_title">Traducció</string>
-    <string name="about_translators_transifex">Comunitat del Nextcloud a &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Verificació</string>
     <string name="about_source_title">Codi font</string>
-    <string name="about_source">Aquest projecte està allotjat a GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Errors</string>
-    <string name="about_issues">Podeu informar d\'errors, proposar millores i demanar noves funcionalitats al gestor d\'errors de GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Traducció</string>
-    <string name="about_translate">Uniu-vos a l\'equip del Nextcloud a Transifex i ajudeu-nos a traduir aquesta aplicació: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Llicència de l\'aplicació</string>
     <string name="about_app_license">Aquesta aplicació està publicada sota la Llicència Pública General de GNU v3+.</string>
     <string name="about_app_license_button">Mostra la llicència</string>
     <string name="about_icons_disclaimer_title">Icones</string>
-    <string name="about_icons_disclaimer">&lt;p>Icona original feta per %1$s&lt;/p>&lt;p>La resta d\'icones que utilitza aquesta aplicació són &lt;a href=\"https://materialdesignicons.com/\">icones de Material Design&lt;/a> creades per Google Inc. i publicades sota la Llicència Apache 2.0.&lt;/p></string>
     <string name="about_credits_tab_title">Crèdits</string>
     <string name="about_contribution_tab_title">Contribució</string>
     <string name="about_license_tab_title">Llicència</string>
@@ -252,7 +246,6 @@
     <string name="simple_next">Següent</string>
     <string name="simple_prev">Anterior</string>
     <string name="simple_backup">Fes una còpia de seguretat</string>
-    <string name="simple_repair">Repara</string>
     <string name="backup">S\'ha detectat un estat irrecuperable de l\'aplicació. Feu una còpia de seguretat dels canvis sense sincronitzar i esborreu l\'emmagatzematge de l\'aplicació Notes.</string>
     <string name="settings_notes_path_description">Carpeta on s\'emmagatzemaran les notes al Nextcloud</string>
     <string-array name="settings_file_suffixes">

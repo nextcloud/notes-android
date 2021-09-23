@@ -50,24 +50,17 @@
     <string name="error_unknown">حدث خطأ غير معروف.</string>
 
     <string name="about_version_title">الإصدار</string>
-    <string name="about_version">تستخدم حالياً &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">مشرف</string>
     <string name="about_developers_title"> المطورون</string>
     <string name="about_translators_title"> المترجِمون</string>
-    <string name="about_translators_transifex">مجتمع Nextcloud على &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title"> المجَرِّبون</string>
     <string name="about_source_title">الشفرة المصدرية</string>
-    <string name="about_source">هذا المشروع مستضاف على گت هاب: &lt;  a href=\"%1$s\">
-%1$s&lt;/a></string>
     <string name="about_issues_title">المشاكل</string>
-    <string name="about_issues">يمكنك الإبلاغ عن الأخطاء, ترشيح مزايا أوطلب تحسين على GitHub issue tracker: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">تَرجِم</string>
-    <string name="about_translate">إنضم إلى فريق Nextcloud على Transifex وساعد في ترجمة هذا التطبيق: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title"> رخصة التطبيق</string>
     <string name="about_app_license">التطبيق مسجل تحت شهادة جنو العامة الاصدار 3+</string>
     <string name="about_app_license_button">عرض الرخصة</string>
     <string name="about_icons_disclaimer_title"> الأيقونات</string>
-    <string name="about_icons_disclaimer">&lt; p> اصل الايقونة صنعت بواسطة %1$s&lt; /p> جميع الايقونات الاخرى استخدمت بواسطة هذا هذا التطبيق تكون &lt;</string>
     <string name="about_credits_tab_title">الشكر ل</string>
     <string name="about_contribution_tab_title">المساهمة</string>
     <string name="about_license_tab_title"> الرخصة</string>

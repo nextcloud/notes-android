@@ -55,23 +55,17 @@
     <string name="error_unknown">Произошла неизвестная ошибка.</string>
 
     <string name="about_version_title">Версия</string>
-    <string name="about_version">Вы используете &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Сопроводитель</string>
     <string name="about_developers_title">Разработчики</string>
     <string name="about_translators_title">Переводчики</string>
-    <string name="about_translators_transifex">Сообщество Nextcloud на &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Тестировщики</string>
     <string name="about_source_title">Исходный код</string>
-    <string name="about_source">Этот проект размещён на GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Тикеты</string>
-    <string name="about_issues">Вы можете сообщить об ошибках, внести предложения об улучшениях и пожеланиях в системе тикетов GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Перевести</string>
-    <string name="about_translate">Включайтесь в команду Nextcloud на сайте Transifex и помогайте переводить это приложение: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Лицензия приложения</string>
     <string name="about_app_license">Лицензия на программу предоставляется в соответствии с условиями Открытого лицензионного соглашения GNU (GNU GPL) версии 3+.</string>
     <string name="about_app_license_button">Посмотреть лицензию</string>
     <string name="about_icons_disclaimer_title">Значки</string>
-    <string name="about_icons_disclaimer">&lt;p>Исходные значки были созданы  %1$s&lt;/p>&lt;p>Все дальнейшие значки, которые используются в этой программе, являются &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> от Google Inc. и защищены лицензией использования Apache 2.0. &lt;/p></string>
     <string name="about_credits_tab_title">Сообщество</string>
     <string name="about_contribution_tab_title">Участие</string>
     <string name="about_license_tab_title">Лицензия</string>

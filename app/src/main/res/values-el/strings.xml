@@ -49,23 +49,17 @@
     <string name="error_unknown">Προέκυψε άγνωστο σφάλμα.</string>
 
     <string name="about_version_title">Έκδοση</string>
-    <string name="about_version">Προς το παρόν χρησιμοποιείτε &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Συντηρητής</string>
     <string name="about_developers_title">Προγραμματιστές</string>
     <string name="about_translators_title">Μεταφραστές</string>
-    <string name="about_translators_transifex">Nextcloud κοινότητα στο &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Δοκιμαστές</string>
     <string name="about_source_title">Πηγαίος κώδικας</string>
-    <string name="about_source">Το project φιλοξενείται στο Github: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Ζητήματα</string>
-    <string name="about_issues">Μπορείτε να αναφέρετε σφάλματα, να προτείνετε βελτιώσεις και να κάνετε αιτήματα χαρακτηριστικών στο Github &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Μετάφρασε</string>
-    <string name="about_translate">Λάβε μέρος στην ομάδα του Nextcloud στο Transifex και βοήθησε μας να μεταφράσουμε αυτή την εφαρμογή: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Άδεια χρήσης εφαρμογής</string>
     <string name="about_app_license">Αυτή η εφαρμογή υπόκεινται στην άδεια χρήσης GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Προβολή άδειας χρήσης</string>
     <string name="about_icons_disclaimer_title">Εικονίδια</string>
-    <string name="about_icons_disclaimer">&lt;p>Τα αυθεντικά εικονίδια δημιουργήθηκαν από %1$s&lt;/p>&lt; p> Όλα τα υπόλοιπα αυτής της εφαρμογής είναι &lt; href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> made by Google Inc. and licensed under the Apache 2.0 License.&lt;/p></string>
     <string name="about_credits_tab_title">Μνεία</string>
     <string name="about_contribution_tab_title">Συνεισφορά</string>
     <string name="about_license_tab_title">Άδεια χρήσης</string>

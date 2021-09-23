@@ -49,23 +49,17 @@
     <string name="error_unknown">یک خطای ناشناخته رخ داده است.</string>
 
     <string name="about_version_title">نسخه</string>
-    <string name="about_version">شما در حال استفاده هستیدstrong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">نگاه‌دارنده</string>
     <string name="about_developers_title">توسعه دهندگان</string>
     <string name="about_translators_title">مترجم</string>
-    <string name="about_translators_transifex">انجمن نکست کلود در &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">آزمایش کنندگان</string>
     <string name="about_source_title">کد منبع</string>
-    <string name="about_source">این پروژه در GitHub میزبانی شده است: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">مسائل</string>
-    <string name="about_issues">شما می توانید اشکالات ، پیشنهادات پیشرفت و درخواست ویژگی را در ردیاب شماره GitHub گزارش دهید: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">ترجمه</string>
-    <string name="about_translate">در Transferx به تیم Nextcloud بپیوندید و در ترجمه این برنامه به ما کمک کنید: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">مجوز برنامه</string>
     <string name="about_app_license">این برنامه تحت مجوز GNU GENERAL PUBLIC LICENSE v3 + مجاز است.</string>
     <string name="about_app_license_button">مشاهده مجوز</string>
     <string name="about_icons_disclaimer_title">آیکون‌ها</string>
-    <string name="about_icons_disclaimer">&lt;p>نماد اصلی ساخته شده توسط %1$s&lt;/p>&lt;p>تمام نمادهای دیگر مورد استفاده این برنامه هستند &lt;a href=\"https://materialdesignicons.com/\">شمایل طراحی مواد&lt;/a> ساخته شده توسط Google Inc. و تحت مجوز Apache 2.0 مجوز گرفته شده است.&lt;/p></string>
     <string name="about_credits_tab_title">اعتبارات</string>
     <string name="about_contribution_tab_title">مشارکت</string>
     <string name="about_license_tab_title">مجوز</string>

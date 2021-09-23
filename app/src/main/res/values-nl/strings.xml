@@ -56,23 +56,17 @@
     <string name="error_unknown">Een onbekende fout trad op.</string>
 
     <string name="about_version_title">Versie</string>
-    <string name="about_version">Je gebruikt nu &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Projectleider</string>
     <string name="about_developers_title">Ontwikkelaars</string>
     <string name="about_translators_title">Vertalers</string>
-    <string name="about_translators_transifex">Nextcloud-gemeenschap op &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Testers</string>
     <string name="about_source_title">Broncode</string>
-    <string name="about_source">Dit project wordt gehost op GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Problemen</string>
-    <string name="about_issues">Je kunt bugs rapporteren, verbeteringen voorstellen en functionele aanpassingen aanvragen via de issue-tracker op GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Vertalen</string>
-    <string name="about_translate">Doe mee met het Nextcloud-team op Transifex en help ons deze app te vertalen: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">App licentie</string>
     <string name="about_app_license">Deze applicatie valt onder de GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Licentie weergeven</string>
     <string name="about_icons_disclaimer_title">Pictogrammen</string>
-    <string name="about_icons_disclaimer">&lt;p>Originele pictogram gemaakt door %1$s&lt;/p>&lt;p>Alle volgende pictogrammen gebruikt door deze app zijn &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> gemaakt door Google Inc. en gelicenseerd onder de Apache 2.0 Licensie.&lt;/p></string>
     <string name="about_credits_tab_title">Verantwoording</string>
     <string name="about_contribution_tab_title">Bijdrage</string>
     <string name="about_license_tab_title">Licentie</string>
@@ -252,7 +246,6 @@
     <string name="simple_next">Volgende</string>
     <string name="simple_prev">Vorige</string>
     <string name="simple_backup">Back-up</string>
-    <string name="simple_repair">Herstel</string>
     <string name="backup">We hebben een onherstelbare staat van de app gedetecteerd. Maak een back-up van je niet-gesynchroniseerde wijzigingen en wis de opslag van de Notes-app.</string>
     <string name="settings_notes_path_description">Map om je notities in Nextcloud op te slaan</string>
     <string-array name="settings_file_suffixes">

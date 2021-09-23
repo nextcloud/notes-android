@@ -54,23 +54,17 @@
     <string name="error_unknown">不明なエラーが発生しました</string>
 
     <string name="about_version_title">バージョン</string>
-    <string name="about_version">現在 &lt;strong>%1$s&lt;/strong> を使用しています</string>
     <string name="about_maintainer_title">管理者</string>
     <string name="about_developers_title">開発者</string>
     <string name="about_translators_title">翻訳者</string>
-    <string name="about_translators_transifex">&lt;a href=\"%1$s\">Transifex&lt;/a> のNextcloud コミュニティ</string>
     <string name="about_testers_title">テスター</string>
     <string name="about_source_title">ソースコード</string>
-    <string name="about_source">このプロジェクトは GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a> にホストされています</string>
     <string name="about_issues_title">問題</string>
-    <string name="about_issues">GitHub の問題追跡ツールで、不具合、拡張の提案、機能のリクエストを報告できます: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">翻訳</string>
-    <string name="about_translate">Transifex の Nextcloud チームに参加して、このアプリの翻訳を手伝ってください: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">アプリ ライセンス</string>
     <string name="about_app_license">このアプリケーションは GNU GENERAL PUBLIC LICENSE v3+ でライセンスされています。</string>
     <string name="about_app_license_button">ライセンスを表示</string>
     <string name="about_icons_disclaimer_title">アイコン</string>
-    <string name="about_icons_disclaimer">&lt;p>オリジナルアイコンの作成者 %1$s&lt;/p>&lt;p>このアプリで使用されているすべてのアイコンは Google Inc. が作成した &lt;a href=\"https://materialdesignicons.com/\">マテリアルデザイン アイコン&lt;/a> で、Apache2.0ライセンスの下でライセンスされています。&lt;/p></string>
     <string name="about_credits_tab_title">クレジット</string>
     <string name="about_contribution_tab_title">貢献</string>
     <string name="about_license_tab_title">ライセンス</string>

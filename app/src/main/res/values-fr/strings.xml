@@ -56,23 +56,17 @@
     <string name="error_unknown">Une erreur inconnue est survenue</string>
 
     <string name="about_version_title">Version</string>
-    <string name="about_version">Vous utilisez actuellement la &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Responsable</string>
     <string name="about_developers_title">Développeurs</string>
     <string name="about_translators_title">Traducteurs</string>
-    <string name="about_translators_transifex">Communauté Nextcloud sur &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Testeurs</string>
     <string name="about_source_title">Code source</string>
-    <string name="about_source">Ce projet est hébergé sur GitHub : &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Bugs</string>
-    <string name="about_issues">Vous pouvez signaler les bugs ainsi que vos propositions ou demandes d\'amélioration dans le gestionnaire de bugs de GitHub : &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Traduire</string>
-    <string name="about_translate">Rejoignez l\'équipe Nextcloud sur Transifex et aidez-nous à traduire cette application : &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Licence de l\'application</string>
     <string name="about_app_license">Cette application est licenciée selon les termes de la GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Voir la licence</string>
     <string name="about_icons_disclaimer_title">Icônes</string>
-    <string name="about_icons_disclaimer">&lt;p>Les icônes originales sont crées par %1$s&lt;/p>&lt;p>Toutes les autres icônes utilisées par cette application sont des &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> créées par Google Inc. et licenciées selon les termes de la  License Apache 2.0.&lt;/p></string>
     <string name="about_credits_tab_title">Crédits</string>
     <string name="about_contribution_tab_title">Contributions</string>
     <string name="about_license_tab_title">Licence</string>
@@ -252,7 +246,6 @@
     <string name="simple_next">Suivant</string>
     <string name="simple_prev">Précédent</string>
     <string name="simple_backup">Sauvegarde</string>
-    <string name="simple_repair">Réparer</string>
     <string name="backup">Nous avons détecté un état irrécupérable de l\'application. Veuillez sauvegarder vos modifications non-synchronisées puis effacer le stockage de l\'application Notes.</string>
     <string name="settings_notes_path_description">Dossier pour stocker vos notes dans Nextcloud</string>
     <string-array name="settings_file_suffixes">

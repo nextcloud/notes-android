@@ -49,23 +49,17 @@
     <string name="error_unknown">Сталася невідома помилка.</string>
 
     <string name="about_version_title">Версія</string>
-    <string name="about_version">Ви зараз використовуєте &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Утримувач</string>
     <string name="about_developers_title">Розробники</string>
     <string name="about_translators_title">Перекладачі</string>
-    <string name="about_translators_transifex">Спільнота Nextcloud на &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Тестувальники</string>
     <string name="about_source_title">Вихідний код</string>
-    <string name="about_source">Цей проєкт розміщено на GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Помилики</string>
-    <string name="about_issues">Ви можете повідомляти про помилки, пропонувати удосконалення та надсилати запити на додаткові функції через систему відстеження вад GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Перекласти</string>
-    <string name="about_translate">Приєднуйтесь до команди Nextcloud на Transifex та допоможіть нам перекласти цей застосунок: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Ліцензія застосунку</string>
     <string name="about_app_license">Ця програма ліцензована під GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Переглянути ліцензію</string>
     <string name="about_icons_disclaimer_title">Значки</string>
-    <string name="about_icons_disclaimer">&lt;p>Оригінальний значок, зроблений %1$s&lt;/p>&lt;p>Усі додаткові значки, що використовуються у цьому додатку, є &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> зроблені Google Inc. і ліцензовані під ліцензією Apache 2.0.&lt;/p></string>
     <string name="about_credits_tab_title">Подяки</string>
     <string name="about_contribution_tab_title">Внесок</string>
     <string name="about_license_tab_title">Ліцензія</string>

@@ -49,18 +49,13 @@
     <string name="error_unknown">Įvyko nežinoma klaida.</string>
 
     <string name="about_version_title">Versija</string>
-    <string name="about_version">Jūs dabar naudojate &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Prižiūrėtojas</string>
     <string name="about_developers_title">Plėtotojai</string>
     <string name="about_translators_title">Vertėjai</string>
-    <string name="about_translators_transifex">Nextcloud bendruomenė, esanti &lt;a href=\"%1$s\">„Transifex“&lt;/a></string>
     <string name="about_testers_title">Testuotojai</string>
     <string name="about_source_title">Pradinis kodas</string>
-    <string name="about_source">Šis projektas talpinamas GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Problemos</string>
-    <string name="about_issues">Galite pranešti apie klaidas, pasiūlymus ar užklausti ypatybių mūsų GitHub puslapyje: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Versti</string>
-    <string name="about_translate">Prisijunkite prie Nextcloud komandos, esančios „Transifex“ ir padėkite mums išversti šią programėlę: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Programėlės licencija</string>
     <string name="about_app_license">Ši programėlė yra licencijuota pagal GNU BENDRĄJĄ VIEŠĄJĄ LICENCIJĄ v3+.</string>
     <string name="about_app_license_button">Rodyti licenciją</string>
