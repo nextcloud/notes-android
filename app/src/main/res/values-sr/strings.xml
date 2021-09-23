@@ -49,23 +49,17 @@
     <string name="error_unknown">Десила се непозната грешка.</string>
 
     <string name="about_version_title">Верзија</string>
-    <string name="about_version">Тренутно користите &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Одржаваоц</string>
     <string name="about_developers_title">Програмери</string>
     <string name="about_translators_title">Преводиоци</string>
-    <string name="about_translators_transifex">Некстклауд заједница на &lt;a href=\"%1$s\">Трансифексу&lt;/a></string>
     <string name="about_testers_title">Тестери</string>
     <string name="about_source_title">Изворни кôд</string>
-    <string name="about_source">Овај пројекат се одржава на Гитхабу: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Проблеми</string>
-    <string name="about_issues">Пријаве грешака, предлоге и захтеве можете да оставите на Гитхабовом пратиоцу проблема: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Преведи</string>
-    <string name="about_translate">Придружите се Некстклауд тиму на Трансифексу и помозите нам да преведемо ову апликацију: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Лиценца апликације</string>
     <string name="about_app_license">Ова апликација је лиценцирана под ГНУовом општом јавном лиценцом в3+.</string>
     <string name="about_app_license_button">Прикажи лиценцу</string>
     <string name="about_icons_disclaimer_title">Иконе</string>
-    <string name="about_icons_disclaimer">&lt;p>Оригиналне иконе направио %1$s&lt;/p>&lt;p>Све остале иконе коришћене у овој апликацији су &lt;a href=\"https://materialdesignicons.com/\">Иконе материјал дизајна&lt;/a> направљене од стране Гугла и лиценциране под Апач 2.0 лиценцом.&lt;/p></string>
     <string name="about_credits_tab_title">Заслуге</string>
     <string name="about_contribution_tab_title">Допринос</string>
     <string name="about_license_tab_title">Лиценца</string>

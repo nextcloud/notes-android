@@ -56,23 +56,25 @@
     <string name="error_unknown">Wystąpił nieznany błąd.</string>
 
     <string name="about_version_title">Wersja</string>
-    <string name="about_version">Aktualnie używasz &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_version">Aktualnie używasz %1$s</string>
     <string name="about_maintainer_title">Opiekun</string>
     <string name="about_developers_title">Deweloperzy</string>
     <string name="about_translators_title">Tłumacze</string>
-    <string name="about_translators_transifex">Społeczność Nextcloud na &lt;a href=\"%1$s\">Transifex&lt;/a></string>
+    <string name="about_translators_transifex">Społeczność Nextcloud na %1$s</string>
     <string name="about_testers_title">Testerzy</string>
     <string name="about_source_title">Kod źródłowy</string>
-    <string name="about_source">Projekt jest hostowany na GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_source">Projekt jest hostowany na GitHub: %1$s</string>
     <string name="about_issues_title">Problemy</string>
-    <string name="about_issues">Możesz zgłaszać błędy, propozycje ulepszeń i prośby o funkcje w liście problemów na GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues">Możesz zgłaszać błędy, propozycje ulepszeń i prośby o funkcje w liście problemów na GitHub: %1$s</string>
     <string name="about_translate_title">Tłumaczyć</string>
-    <string name="about_translate">Dołącz do zespołu Nextcloud na Transifex i pomóż nam przetłumaczyć tę aplikację: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate">Dołącz do zespołu Nextcloud na Transifex i pomóż nam przetłumaczyć aplikację: %1$s</string>
     <string name="about_app_license_title">Licencja aplikacji</string>
     <string name="about_app_license">Aplikacja jest na licencji GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Zobacz licencję</string>
     <string name="about_icons_disclaimer_title">Ikony</string>
-    <string name="about_icons_disclaimer">&lt;p>Oryginalna ikona wykonana przez %1$s&lt;/p>&lt;p>Wszystkie pozostałe ikony używane przez tę aplikację są &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> wykonane przez Google Inc. i licencjonowane na podstawie Apache 2.0 License.&lt;/p></string>
+    <string name="about_icons_disclaimer_app_icon">Oryginalna ikona znajduje się na %1$s.</string>
+    <string name="about_icons_disclaimer_mdi_icons">Wszystkie pozostałe ikony używane przez aplikację są %1$s wykonane przez Google Inc. i licencjonowane na podstawie Apache 2.0 License.</string>
+    <string name="about_icons_disclaimer_mdi">Material Design Icons</string>
     <string name="about_credits_tab_title">Autorzy</string>
     <string name="about_contribution_tab_title">Wkład</string>
     <string name="about_license_tab_title">Licencja</string>
@@ -262,7 +264,6 @@
     <string name="simple_next">Następna</string>
     <string name="simple_prev">Poprzednia</string>
     <string name="simple_backup">Kopia zapasowa</string>
-    <string name="simple_repair">Naprawa</string>
     <string name="backup">Wykryliśmy nieodwracalny stan aplikacji. Utwórz kopię zapasową niezsynchronizowanych zmian i wyczyść pamięć aplikacji Notatki.</string>
     <string name="settings_notes_path_description">Katalog do przechowywania notatek w Nextcloud</string>
     <string-array name="settings_file_suffixes">

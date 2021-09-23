@@ -56,23 +56,17 @@
     <string name="error_unknown">Ismeretlen hiba történt.</string>
 
     <string name="about_version_title">Verzió</string>
-    <string name="about_version">Jelenleg ezt használja: &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Karbantartó</string>
     <string name="about_developers_title">Fejlesztők</string>
     <string name="about_translators_title">Fordítók</string>
-    <string name="about_translators_transifex">Nextcloud közösség a &lt;a href=\"%1$s\">Transifex&lt;/a>-en</string>
     <string name="about_testers_title">Tesztelők</string>
     <string name="about_source_title">Forráskód</string>
-    <string name="about_source">A projekt a GitHubon található: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Hibajegyek</string>
-    <string name="about_issues">Hibákat jelenthet, fejlesztési javaslatokat adhat és funkciókat kérhet a GitHub hibakövetőjében: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Fordítás</string>
-    <string name="about_translate">Csatlakozzon a Nextcloud csapathoz a Transifexen, és segítsen az alkalmazás lefordításában: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Alkalmazás licence</string>
     <string name="about_app_license">Ez az alkalmazás GNU GENERAL PUBLIC LICENSE v3+ alatt kerül közreadásra.</string>
     <string name="about_app_license_button">Licenc megtekintése</string>
     <string name="about_icons_disclaimer_title">Ikonok</string>
-    <string name="about_icons_disclaimer">&lt;p>Az eredeti ikont %1$s készítette.&lt;/p>&lt;p>Az alkalmazás által használt összes többi ikon a Google által készített &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> része, és azok Apache 2.0 License alatt érhetők el.&lt;/p></string>
     <string name="about_credits_tab_title">Köszönet</string>
     <string name="about_contribution_tab_title">Közreműködés</string>
     <string name="about_license_tab_title">Licenc</string>
@@ -252,7 +246,6 @@
     <string name="simple_next">Következő</string>
     <string name="simple_prev">Előző</string>
     <string name="simple_backup">Biztonsági mentés</string>
-    <string name="simple_repair">Javítás</string>
     <string name="backup">Az alkalmazás olyan állapotot észlelt, amelyből nem tud helyreállni. Készítsen biztonsági mentést a még nem szinkronizált változtatásokról, és törölje a Jegyzetek alkalmazás tárolóját.</string>
     <string name="settings_notes_path_description">A jegyzetek Nextcloudban történő tárolásához használt mappa</string>
     <string-array name="settings_file_suffixes">

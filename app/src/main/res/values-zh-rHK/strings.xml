@@ -56,23 +56,25 @@
     <string name="error_unknown">發生未知錯誤。</string>
 
     <string name="about_version_title">版本</string>
-    <string name="about_version">您目前正在使用 &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_version">你目前使用 %1$s</string>
     <string name="about_maintainer_title">保養員</string>
     <string name="about_developers_title">開發員</string>
     <string name="about_translators_title">翻譯員</string>
-    <string name="about_translators_transifex">&lt;a href=\"%1$s\">Transifex&lt;/a> 上的 Nextcloud 社群</string>
+    <string name="about_translators_transifex">%1$s 上的 Nextcloud 社群</string>
     <string name="about_testers_title">測試員</string>
     <string name="about_source_title">原始碼</string>
-    <string name="about_source">此專案寄存在 GitHub 上：&lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_source">本項目寄存於 GitHub 上：%1$s</string>
     <string name="about_issues_title">問題</string>
-    <string name="about_issues">您可以在 GitHub 問題舉報系統舉報錯誤、改善建議及功能需求：&lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues">您可以在 GitHub 問題舉報系統舉報錯誤、改善建議及功能需求：%1$s</string>
     <string name="about_translate_title">翻譯</string>
-    <string name="about_translate">歡迎加入 Transifex 的 Nextcloud 團隊並協助翻譯此 App：&lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate">歡迎加入 Transifex 的 Nextcloud 團隊並協助翻譯此應用程式：%1$s</string>
     <string name="about_app_license_title">程式授權條款</string>
     <string name="about_app_license">此程式依照 GNU GENERAL PUBLIC LICENSE v3+ 方式授權使用</string>
     <string name="about_app_license_button">檢視授權條款</string>
     <string name="about_icons_disclaimer_title">圖示</string>
-    <string name="about_icons_disclaimer">&lt;p>原創圖示由 %1$s 製作&lt;/p>&lt;p>其他 App 使用的圖示均為 Google Inc。製作的 &lt;a href=\"https://materialdesignicons。com/\">Material Design 圖示&lt;/a>，並依 Apache 2.0 條款授權。&lt;/p></string>
+    <string name="about_icons_disclaimer_app_icon">原始圖示請見%1$s</string>
+    <string name="about_icons_disclaimer_mdi_icons">此應用程序使用的所有其他圖標 %1$s 均由Google Inc. 製造，並根據Apache 2.0許可獲得許可。</string>
+    <string name="about_icons_disclaimer_mdi">Material Design 圖示</string>
     <string name="about_credits_tab_title">致謝</string>
     <string name="about_contribution_tab_title">貢獻</string>
     <string name="about_license_tab_title">授權條款</string>
@@ -157,9 +159,9 @@
     </string-array>
 
     <string-array name="darkmode_entries">
-        <item>亮色</item>
-        <item>暗色</item>
-        <item>系統預設</item>
+        <item>淺色</item>
+        <item>深色</item>
+        <item>系統默認值</item>
     </string-array>
 
     <plurals name="ab_selected">
@@ -172,7 +174,7 @@
         <item quantity="other">已回復 %1$d 則記事</item>
     </plurals>
     <plurals name="share_multiple">
-        <item quantity="other">共享 %1$d 則記事內容</item>
+        <item quantity="other">分享 %1$d 則記事內容</item>
     </plurals>
 
     <string name="formatting_help_divider" translateable="false">---</string>
@@ -245,11 +247,14 @@
     <string name="settings_notes_path">設置資料夾</string>
 
     <string name="simple_next">下一步</string>
-    <string name="simple_prev">上一個</string>
+    <string name="simple_prev">上一步</string>
     <string name="simple_backup">備份</string>
-    <string name="simple_repair">修復</string>
     <string name="backup">我們檢測到該應用程式處於不可恢復的狀態。請備份您未同步的更改並清除 Notes 應用程式的存儲空間。</string>
     <string name="settings_notes_path_description">用於在 Nextcloud 中存儲筆記的資料夾</string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
     <string name="settings_notes_path_success">新 notes 資料夾：%1$s</string>
     <string name="settings_file_suffix">檔案擴展名</string>
     <string name="settings_file_suffix_description">Nextcloud 中新筆記的檔案擴展名</string>

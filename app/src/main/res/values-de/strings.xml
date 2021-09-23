@@ -56,23 +56,25 @@
     <string name="error_unknown">Unbekannter Fehler aufgetreten.</string>
 
     <string name="about_version_title">Version</string>
-    <string name="about_version">Sie benutzen gerade &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_version">Sie benutzen aktuell %1$s</string>
     <string name="about_maintainer_title">Maintainer</string>
     <string name="about_developers_title">Entwickler</string>
     <string name="about_translators_title">Übersetzer</string>
-    <string name="about_translators_transifex">Nextcloud-Gemeinschaft auf &lt;a href=\"%1$s\">Transifex&lt;/a></string>
+    <string name="about_translators_transifex">Nextcloud-Gemeinschaft auf %1$s</string>
     <string name="about_testers_title">Tester</string>
     <string name="about_source_title">Quellcode</string>
-    <string name="about_source">Dieses Projekt wird auf GitHub verwaltet: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_source">Dieses Projekt wird auf GitHub gehostet: %1$s</string>
     <string name="about_issues_title">Issues</string>
-    <string name="about_issues">Sie können Fehler, Verbesserungsvorschläge oder Wünsche für neue Funktionen als Issue auf GitHub erfassen: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues">Sie können Fehler, Verbesserungsvorschläge oder Wünsche für neue Funktionen als Issue auf GitHub erfassen: %1$s</string>
     <string name="about_translate_title">Übersetzen</string>
-    <string name="about_translate">Treten Sie dem Nextcloud-Team auf Transifex bei und helfen Sie uns, diese App zu übersetzen: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate">Treten Sie dem Nextcloud-Team bei Transifex bei und helfen Sie uns, diese App zu übersetzen: %1$s</string>
     <string name="about_app_license_title">App-Lizenz</string>
     <string name="about_app_license">Diese Applikation ist lizenziert unter der GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Lizenz ansehen</string>
     <string name="about_icons_disclaimer_title">Symbole</string>
-    <string name="about_icons_disclaimer">&lt;p>Das ursprüngliche Icon wurde erstellt von %1$s&lt;/p>&lt;p>Alle weiteren von dieser App benutzten Icons sind &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> erstellt von  Google Inc. und lizenziert unter einer Apache 2.0 Lizenz.&lt;/p></string>
+    <string name="about_icons_disclaimer_app_icon">Für das ursprüngliche Symbol siehe %1$s.</string>
+    <string name="about_icons_disclaimer_mdi_icons">Alle weiteren Symbole dieser App sind %1$s, erstellt von Google Inc. und unter der Apache 2.0-Lizenz lizenziert.</string>
+    <string name="about_icons_disclaimer_mdi">Material Design Icons</string>
     <string name="about_credits_tab_title">Danksagungen</string>
     <string name="about_contribution_tab_title">Mitmachen</string>
     <string name="about_license_tab_title">Lizenz</string>
@@ -252,7 +254,6 @@
     <string name="simple_next">Weiter</string>
     <string name="simple_prev">Vorheriges</string>
     <string name="simple_backup">Sicherung</string>
-    <string name="simple_repair">Reparieren</string>
     <string name="backup">Es wurde ein nicht wiederherstellbarer Zustand der App festgestellt. Bitte sichern Sie Ihre nicht synchronisierten Änderungen und löschen Sie den Speicher der Notes-App.</string>
     <string name="settings_notes_path_description">Ordner in dem Ihre Notizen in Ihrer Nextcloud gespeichert werden</string>
     <string-array name="settings_file_suffixes">

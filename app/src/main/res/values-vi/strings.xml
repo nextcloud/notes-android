@@ -56,23 +56,25 @@
     <string name="error_unknown">Đã xảy ra lỗi không xác định.</string>
 
     <string name="about_version_title">Phiên bản</string>
-    <string name="about_version">Hiện tại bạn đang sử dụng &lt;strong> %1$s&lt;/strong></string>
+    <string name="about_version">Hiện tại bạn đang sử dụng %1$s</string>
     <string name="about_maintainer_title">Người duy trì</string>
     <string name="about_developers_title">Nhà phát triển</string>
     <string name="about_translators_title">Người phiên dịch</string>
-    <string name="about_translators_transifex">Cộng đồng Nextcloud trên &lt;a href=\"%1$s\">Transifex&lt;/a></string>
+    <string name="about_translators_transifex">Cộng đồng Nextcloud trên %1$s</string>
     <string name="about_testers_title">Người thử nghiệm</string>
     <string name="about_source_title">Mã nguồn</string>
-    <string name="about_source">Dự án này được lưu trữ trên GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_source">Dự án này được lưu trữ trên GitHub: %1$s</string>
     <string name="about_issues_title">Vấn đề</string>
-    <string name="about_issues">Bạn có thể báo cáo lỗi, đề nghị cải thiện và yêu cầu tính năng tại trình theo dõi vấn đề của GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues">Bạn có thể báo cáo lỗi, đề nghị cải thiện và yêu cầu tính năng tại trình theo dõi vấn đề của GitHub: %1$s</string>
     <string name="about_translate_title">Dịch</string>
-    <string name="about_translate">Tham gia nhóm Nextcloud trên Transifex và giúp chúng tôi dịch ứng dụng này: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate">Tham gia nhóm Nextcloud trên Transifex và giúp chúng tôi dịch ứng dụng này: %1$s</string>
     <string name="about_app_license_title">Giấy phép ứng dụng</string>
     <string name="about_app_license">Ứng dụng này được cấp phép dưới GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Xem giấy phép</string>
     <string name="about_icons_disclaimer_title">Biểu tượng</string>
-    <string name="about_icons_disclaimer">&lt;p>Biểu tượng gốc được tạo bởi %1$s&lt;/p>&lt;p>Tất cả biểu tượng mới hơn được ứng dụng này sử dụng là &lt;a href=\"https://materialdesignicons.com/\">Biểu tượng thiết kế Material&lt;/a> được tạo bởi Google Inc. và được cấp phép dưới Apache 2.0 License.&lt;/p></string>
+    <string name="about_icons_disclaimer_app_icon">Để tìm biểu tượng ban đầu hãy xem %1$s.</string>
+    <string name="about_icons_disclaimer_mdi_icons">Tất cả biểu tượng mới hơn được ứng dụng này sử dụng được %1$s tạo bởi Google Inc. và được cấp phép dưới Apache 2.0 License.</string>
+    <string name="about_icons_disclaimer_mdi">Biểu tượng Thiết kế Material</string>
     <string name="about_credits_tab_title">Ghi nhận</string>
     <string name="about_contribution_tab_title">Đóng góp</string>
     <string name="about_license_tab_title">Giấy phép</string>
@@ -195,11 +197,25 @@
     <string name="formatting_help_lists_body_4">Ba</string>
     <string name="formatting_help_lists_body_5">Đôi khi bạn muốn gạch đầu dòng:</string>
     <string name="formatting_help_lists_body_6">Bắt đầu một dòng bằng dấu gạch ngang</string>
+    <string name="formatting_help_lists_body_7">Và nếu bạn có mục con, hãy đặt hai dấu cách trước dấu gạch ngang hoặc sao:</string>
     <string name="formatting_help_lists_body_8">Như thế này</string>
     <string name="formatting_help_lists_body_9">Và thế này</string>
 
     <string name="formatting_help_checkboxes_title">Hộp chọn</string>
+    <string name="formatting_help_checkboxes_body_1">Để tạo ô đánh dấu, hãy sử dụng danh sách có ngoặc theo sau</string>
+    <string name="formatting_help_checkboxes_body_2">Mục 1</string>
+    <string name="formatting_help_checkboxes_body_3">Mục 2</string>
+
+    <string name="formatting_help_structured_documents_title">Tài liệu có cấu trúc</string>
+    <string name="formatting_help_structured_documents_body_1">Đôi khi việc có tiêu đề có cấp khác nhau để cấu trúc hóa tài liệu của bạn là rất hữu dụng. Bắt đầu dòng bằng %1$s để tạo tiêu đề. Nhiều %2$s liên tục chỉ ra kích cỡ tiêu đề nhỏ hơn.</string>
+    <string name="formatting_help_structured_documents_body_2">Đây là tiêu đề cấp ba</string>
+    <string name="formatting_help_structured_documents_body_3">Bạn có thể sử dụng một %1$s cho đến tối đa %2$s sáu để tạo kích cỡ tiêu đề khác nhau.</string>
+    <string name="formatting_help_structured_documents_body_4">Nếu bạn muốn trích dẫn ai đó, hãy sử dụng kí tự %1$s trước dòng:</string>
     <string name="formatting_help_code_title">Mã</string>
+    <string name="formatting_help_code_body_1">Có nhiều cách tạo kiểu cho mã bằng Markdown. Nếu bạn có khối mã, hãy bọc chúng trong backtick:</string>
+    <string name="formatting_help_code_body_2">Markdown cũng hỗ trợ code fencing, nó cho phép tạo nhiều dòng mà không thụt vào:</string>
+    <string name="formatting_help_code_body_3">Và nếu bạn muốn đánh dấu cú pháp, hãy bao gồm ngôn ngữ:</string>
+
     <string name="formatting_help_tables_title">Bảng</string>
     <!-- Column header of a sample table -->
     <string name="formatting_help_tables_column">Cột %1d</string>
@@ -218,12 +234,27 @@
     <string name="no_account_configured_yet">Chưa có tài khoản nào được thiết lập</string>
     <string name="no_other_accounts">Bạn chưa thiết lập tài khoản nào khác.</string>
     <string name="choose_account">Chọn tài khoản</string>
+    <string name="context_based_formatting">Hiện lên định dạng dựa trên ngữ cảnh</string>
     <plurals name="remove_account_message">
         <item quantity="other">Việc xoá tài khoản %1$s cũng sẽ xoá %2$d thay đổi chưa được đồng bộ hoá và không thể phục hồi.</item>
     </plurals>
     <string name="remove_account">Xoá %1$s</string>
 
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Bạn phải có kết nối internet để thêm tài khoản.</string>
+    <string name="settings_notes_path">Đặt thư mục</string>
+
     <string name="simple_next">Tiếp</string>
     <string name="simple_prev">Trước</string>
-    </resources>
+    <string name="simple_backup">Sao lưu</string>
+    <string name="backup">Chúng tôi đã phát hiện trạng thái không thể phục hồi của ứng dụng. Vui lòng sao lưu các thay đổi chưa đồng bộ và xóa bộ nhớ của ứng dụng Ghi chú.</string>
+    <string name="settings_notes_path_description">Thư mục để lưu trữ các bản ghi chú trên Nextcloud của bạn</string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
+    <string name="settings_notes_path_success">Thư mục bản ghi chú mới: %1$s</string>
+    <string name="settings_file_suffix">Phần mở rộng tệp</string>
+    <string name="settings_file_suffix_description">Phần mở rộng tệp cho các bản ghi chú mới trên Nextcloud của bạn</string>
+    <string name="settings_file_suffix_success">Hậu tố tệp mới: %1$s</string>
+    <string name="http_status_code">Mã trạng thái HTTP: %1$d</string>
+</resources>

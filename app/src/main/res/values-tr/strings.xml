@@ -56,23 +56,25 @@
     <string name="error_unknown">Bilinmeyen bir sorun çıktı.</string>
 
     <string name="about_version_title">Sürüm</string>
-    <string name="about_version">Şu anda &lt;strong>%1$s&lt;/strong> kullanıyorsunuz</string>
+    <string name="about_version">Şu anda %1$s kullanıyorsunuz</string>
     <string name="about_maintainer_title">Sorumlu</string>
     <string name="about_developers_title">Geliştiriciler</string>
     <string name="about_translators_title">Çevirmenler</string>
-    <string name="about_translators_transifex">&lt;a href=\"%1$s\">Transifex&lt;/a> üzerindeki Nextcloud topluluğu</string>
+    <string name="about_translators_transifex">%1$s üzerindeki Nextcloud topluluğu</string>
     <string name="about_testers_title">Deneyenler</string>
     <string name="about_source_title">Kaynak kodu</string>
-    <string name="about_source">Bu proje GitHub üzerinde barındırılmaktadır: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_source">Bu proje GitHub üzerinde barındırılmaktadır: %1$s</string>
     <string name="about_issues_title">Sorunlar</string>
-    <string name="about_issues">Hata, öneri ve özellik isteklerinizi GitHub sorun izleyiciye yazabilirsiniz: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues">Sorun, istek ve önerilerinizi GitHub sorun izleyiciye yazabilirsiniz: %1$s</string>
     <string name="about_translate_title">Çevirin</string>
-    <string name="about_translate">Transifex üzerindeki Nextcloud çeviri takımına katılarak uygulamanın çevrilmesine yardımcı olabilirsiniz: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate">Transifex üzerindeki Nextcloud takımına katılarak uygulamayı çevirmemize yardımcı olabilirsiniz: %1$s</string>
     <string name="about_app_license_title">Uygulama lisansı</string>
     <string name="about_app_license">Bu uygulama GNU GENEL KAMU LİSANSI 3 sürüm ve üzeri koşulları altında dağıtılmaktadır.</string>
     <string name="about_app_license_button">Lisansa bakın</string>
     <string name="about_icons_disclaimer_title">Simgeler</string>
-    <string name="about_icons_disclaimer">&lt;p>Özgün simgeyi yapan %1$s&lt;/p>&lt;p>Bu uygulamanın kullandığı tüm diğer simgeler Google Inc. tarafından yapılmış ve Creative Commons Lisansı koşulları altında dağıtılan &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> kitaplığından sağlanmıştır.&lt;/p></string>
+    <string name="about_icons_disclaimer_app_icon">Özgün simge için %1$s üzerine bakın.</string>
+    <string name="about_icons_disclaimer_mdi_icons">Bu uygulama tarafından kullanılan tüm simgeler %1$s Google Inc. tarafından oluşturulmuştur ve Apache 2.0 Lisansı koşullarına göre lisanslanmıştır.</string>
+    <string name="about_icons_disclaimer_mdi">Material Design Icons</string>
     <string name="about_credits_tab_title">Emeği geçenler</string>
     <string name="about_contribution_tab_title">Katkı</string>
     <string name="about_license_tab_title">Lisans</string>
@@ -252,7 +254,6 @@
     <string name="simple_next">Sonraki</string>
     <string name="simple_prev">Önceki</string>
     <string name="simple_backup">Yedekle</string>
-    <string name="simple_repair">Onar</string>
     <string name="backup">Uygulamada geri döndürülemeyecek bir durum algılandı. Lütfen eşitlenmemiş değişikliklerinizi yedekleyin ve Notes uygulamasının depolama alanını temizleyin.</string>
     <string name="settings_notes_path_description">Nextcloud üzerinde notlarınızın kaydedileceği klasör </string>
     <string-array name="settings_file_suffixes">

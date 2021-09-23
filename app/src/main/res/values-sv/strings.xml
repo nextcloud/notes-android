@@ -51,23 +51,17 @@
     <string name="error_unknown">Ett okänt fel uppstod.</string>
 
     <string name="about_version_title">Version</string>
-    <string name="about_version">Du använder just nu &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Underhållare</string>
     <string name="about_developers_title">Utvecklare</string>
     <string name="about_translators_title">Översättare</string>
-    <string name="about_translators_transifex">Nextcloud-gemenskapen på &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Testare</string>
     <string name="about_source_title">Källkod</string>
-    <string name="about_source">Detta projekt finns på GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Problem</string>
-    <string name="about_issues">Du kan rapportera fel, förbättringsförslag och funktionsönskningar på GitHub-problemhanteraren: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Översätt</string>
-    <string name="about_translate">Gå med i Nextcloud-gruppen på Transifex och hjälp oss översätta denna app: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Applicens</string>
     <string name="about_app_license">Denna app är licensierad under GNU GENERAL PUBLIC LICENSE v3+</string>
     <string name="about_app_license_button">Visa licens</string>
     <string name="about_icons_disclaimer_title">Ikoner</string>
-    <string name="about_icons_disclaimer">&lt;p>Originalikon gjord av %1$s&lt;/p>&lt;p>Alla framtida ikoner använda av appen är &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> gjorda av Google Inc. och licensierade under en Apache 2.0 License.&lt;/p></string>
     <string name="about_credits_tab_title">Upphovsmän</string>
     <string name="about_contribution_tab_title">Medverkan</string>
     <string name="about_license_tab_title">Licens</string>

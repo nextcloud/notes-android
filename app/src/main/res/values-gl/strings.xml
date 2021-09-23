@@ -53,23 +53,17 @@
     <string name="error_unknown">Produciuse un erro descoñecido.</string>
 
     <string name="about_version_title">Versión</string>
-    <string name="about_version">Agora está a usando &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Mantedor</string>
     <string name="about_developers_title">Desenvolvedores</string>
     <string name="about_translators_title">Tradutores</string>
-    <string name="about_translators_transifex">A comunidade de Nextcloud en &lt;a href=\\"%1$s\\">Transifex&lt;/a></string>
     <string name="about_testers_title">Probadores</string>
     <string name="about_source_title">Código fonte</string>
-    <string name="about_source">Este proxecto está aloxado en GitHub: &lt;a href=\\"%1$s\\">%1$s&lt;/a></string>
     <string name="about_issues_title">Incidencias</string>
-    <string name="about_issues">Vostede pode informar de fallos, propoñer melloras e solicitar funcionalidades na ferramenta de seguimento de erros do GitHub: &lt;a href=\\"%1$s\\">%1$s&lt;/a></string>
     <string name="about_translate_title">Traducir</string>
-    <string name="about_translate">Únase ao equipo Nextcloud en Transifex e colabore connosco para traducir esta apli: &lt;a href=\\"%1$s\\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Licenza da apli</string>
     <string name="about_app_license">Esta apli está licenciada baixo a LICENZA XERAL PUBLICA GNU v3+.</string>
     <string name="about_app_license_button">Ver a licenza</string>
     <string name="about_icons_disclaimer_title">Iconas</string>
-    <string name="about_icons_disclaimer">&lt;p>Iconas orixinais feitas por %1$s&lt;/p>&lt;p>As outras iconas usadas por esta apli son &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> feitas por Google Inc. e licenciadas baixo unha licenza Apache 2.0.&lt;/p></string>
     <string name="about_credits_tab_title">Recoñecementos</string>
     <string name="about_contribution_tab_title">Colaboración</string>
     <string name="about_license_tab_title">Licenza</string>

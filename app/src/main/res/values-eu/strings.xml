@@ -56,23 +56,25 @@
     <string name="error_unknown">Errore ezezagun bat gertatu da.</string>
 
     <string name="about_version_title">Bertsioa</string>
-    <string name="about_version"> &lt;strong>%1$s&lt;/strong> erabiltzen ari zara</string>
+    <string name="about_version">%1$s erabiltzen ari zara</string>
     <string name="about_maintainer_title">Mantentzailea</string>
     <string name="about_developers_title">Garatzaileak</string>
     <string name="about_translators_title">Itzultzaileak</string>
-    <string name="about_translators_transifex">Nextcloud komunitatea &lt;a href=\"%1$s\">Transifex&lt;/a> zerbitzuan</string>
+    <string name="about_translators_transifex">%1$s Nextcloud komunitatea</string>
     <string name="about_testers_title">Probatzaileak</string>
     <string name="about_source_title">Iturburu-kodea</string>
-    <string name="about_source">Proiektu hau GitHub ostatatuta dago: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_source">Proiektu hau GitHuben ostatatuta dago: %1$s</string>
     <string name="about_issues_title">Arazoak</string>
-    <string name="about_issues">GitHub-en akatsen berri eman dezakezu, hobekuntzak proposatu ditzakezu, eta ezaugarri berriak eskatu ditzakezu hurrengo harian: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues">Akatsen berri eman, hobekuntzak proposatu eta ezaugarri berriak eskatu ditzakezu GitHub arazo kontrolatzailean: %1$s</string>
     <string name="about_translate_title">Itzuli</string>
-    <string name="about_translate">Elkartu Nexcloud taldera Transifex zerbitzuan eta lagundu aplikazio hau itzultzen: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate">Elkartu Nextcloud taldera Transifexen eta lagundu app hau itzultzen: %1$s</string>
     <string name="about_app_license_title">Aplikazio lizentzia</string>
     <string name="about_app_license">Aplikazio hau GNU GENERAL PUBLIC LICENSE v3+ lizentziapean dago.</string>
     <string name="about_app_license_button">Lizentzia ikusi</string>
     <string name="about_icons_disclaimer_title">Irudiak</string>
-    <string name="about_icons_disclaimer">&lt;p>Jatorriko ikonoaren egilea %1$s&lt;/p>&lt;p>Erabilitako beste ikono guztiak &lt;a href=\"https://materialdesignicons.com/\">Material Design Ikonoak dira&lt;/a> Google Inc. etxeak eginak eta  Apache 2.0 lizentziapean argitaratutakoak.&lt;/p></string>
+    <string name="about_icons_disclaimer_app_icon">Jatorrizko ikonora jotzeko ikusi %1$s. </string>
+    <string name="about_icons_disclaimer_mdi_icons">App honetan erabilitako gainontzeko ikonoen egilea %1$s Google Inc. da eta Apache 2.0 lizentzia daukate. </string>
+    <string name="about_icons_disclaimer_mdi">Material Design ikonoak</string>
     <string name="about_credits_tab_title">Kredituak</string>
     <string name="about_contribution_tab_title">Kontribuzio</string>
     <string name="about_license_tab_title">Lizentzia</string>
@@ -252,7 +254,6 @@
     <string name="simple_next">Hurrengoa</string>
     <string name="simple_prev">Aurrekoa</string>
     <string name="simple_backup">Babeskopia</string>
-    <string name="simple_repair">Konpondu</string>
     <string name="backup">Aplikazioaren egoera berreskuraezina antzeman dugu. Mesedez, babestu sinkronizatu gabeko aldaketak eta garbitu Notes aplikazioaren biltegiratzea.</string>
     <string name="settings_notes_path_description">Zure notak Nextclouden gordetzeko karpeta</string>
     <string-array name="settings_file_suffixes">

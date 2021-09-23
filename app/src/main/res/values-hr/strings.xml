@@ -56,23 +56,17 @@
     <string name="error_unknown">Došlo je do nepoznate pogreške.</string>
 
     <string name="about_version_title">Inačica</string>
-    <string name="about_version">Trenutno se koristite &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Održavatelj</string>
     <string name="about_developers_title">Razvojni programeri</string>
     <string name="about_translators_title">Prevoditelji</string>
-    <string name="about_translators_transifex">Zajednica Nextcloud na &lt;a href=\"%1$s“>Transifexu&lt;/a></string>
     <string name="about_testers_title">Ispitivači</string>
     <string name="about_source_title">Izvorni kod</string>
-    <string name="about_source">Ovaj je projekt smješten na platformi GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Poteškoće</string>
-    <string name="about_issues">Možete prijaviti pogreške, predložiti poboljšanja i zatražiti značajke putem GitHubovog alata za prijavu i praćenje poteškoća: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Prevedi</string>
-    <string name="about_translate">Pridružite se Nextcloudovom timu na Transifexu i pomozite nam da prevedemo ovu aplikaciju: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Licenca za aplikaciju</string>
     <string name="about_app_license">Ova je aplikacija licencirana pod OPĆOM JAVNOM LICENCOM ZA GNU v3+.</string>
     <string name="about_app_license_button">Pogledaj licencu</string>
     <string name="about_icons_disclaimer_title">Ikone</string>
-    <string name="about_icons_disclaimer">&lt;p>Izvornu ikonu izradio je %1$s&lt;/p>&lt;p>Sve daljnje ikone koje se koriste u ovoj aplikaciji su &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> koje je izradio Google Inc. i licencirane su pod licencom Apache 2.0.&lt;/p></string>
     <string name="about_credits_tab_title">Zasluge</string>
     <string name="about_contribution_tab_title">Doprinos</string>
     <string name="about_license_tab_title">Licenca</string>
@@ -257,7 +251,6 @@
     <string name="simple_next">Sljedeća</string>
     <string name="simple_prev">Prethodna</string>
     <string name="simple_backup">Sigurnosno kopiranje</string>
-    <string name="simple_repair">Ispravi pogrešku</string>
     <string name="backup">Otkrili smo nepopravljivo stanje aplikacije. Izradite sigurnosnu kopiju nesinkroniziranih promjena i izbrišite pohranjene podatke aplikacije Notes.</string>
     <string name="settings_notes_path_description">Mapa za spremanje bilješki u Nextcloudu</string>
     <string-array name="settings_file_suffixes">

@@ -56,23 +56,17 @@
     <string name="error_unknown">Prišlo je do neznane napake.</string>
 
     <string name="about_version_title">Različica</string>
-    <string name="about_version">Trenutno je v uporabi &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Vzdrževalec</string>
     <string name="about_developers_title">Razvijalci</string>
     <string name="about_translators_title">Prevajalci</string>
-    <string name="about_translators_transifex">Skupnost Nextcloud na &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Preizkuševalci</string>
     <string name="about_source_title">Izvorna koda</string>
-    <string name="about_source">Projekt uporablja okolje GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Odzivi</string>
-    <string name="about_issues">Poročila o hroščih, predloge za izboljšave in prošnje za nove programske zmožnosti je mogoče objaviti na sledilniku GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Prevodi</string>
-    <string name="about_translate">Za urejanje prevodov Projekta Nextcloud se uporablja spletno okolje Transifex: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Dovoljenje za uporabo</string>
     <string name="about_app_license">Program je objavljen pod pogoji Splošnega javnega dovoljenja (GNU GPL) različice 3 ali novejše.</string>
     <string name="about_app_license_button">Podrobno besedilo dovoljenja</string>
     <string name="about_icons_disclaimer_title">Ikone</string>
-    <string name="about_icons_disclaimer">&lt;p>Ikono programa je ustvaril %1$s&lt;/p>&lt;p>Vse ostale ikone, uporabljene v programu, so del zbirke  &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a>, ki jo je pod pogoji dovoljenja Apache 2.0 objavilo podjetje Google Inc.&lt;/p></string>
     <string name="about_credits_tab_title">Zasluge</string>
     <string name="about_contribution_tab_title">Skupnost</string>
     <string name="about_license_tab_title">Dovoljenje</string>

@@ -56,23 +56,25 @@
     <string name="error_unknown">Došlo k neznámé chybě.</string>
 
     <string name="about_version_title">Verze</string>
-    <string name="about_version">Nyní používáte &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_version">Nyní používáte %1$s</string>
     <string name="about_maintainer_title">Vývoj spravuje</string>
     <string name="about_developers_title">Vývojáři</string>
     <string name="about_translators_title">Překladatelé</string>
-    <string name="about_translators_transifex">Nextcloud komunita na portálu &lt;a href=\"%1$s\">Transifex&lt;/a></string>
+    <string name="about_translators_transifex">Nextcloud komunita na portálu %1$s</string>
     <string name="about_testers_title">Testeři</string>
     <string name="about_source_title">Zdrojové kódy</string>
-    <string name="about_source">Tento projekt je hostován na portálu GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_source">Tento projekt je hostován na portálu GitHub: %1$s</string>
     <string name="about_issues_title">Problémy</string>
-    <string name="about_issues">Chyby, návrhy na zlepšení a další funkce je možné posílat prostřednictvím systému správy hlášení na portálu GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues">Chyby, návrhy na zlepšení a další funkce je možné posílat prostřednictvím systému správy hlášení na portálu GitHub: %1$s</string>
     <string name="about_translate_title">Překládání</string>
-    <string name="about_translate">Připojte se k týmu Nextcloud na portálu Transifex a pomozte nám překládat (i) tuto aplikaci: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate">Připojte se k týmu Nexcloud na portálu Transifex a pomozte nám překládat (i) tuto aplikaci: %1$s</string>
     <string name="about_app_license_title">Licence aplikace</string>
     <string name="about_app_license">Tato aplikace je vydávána pod licencí GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Zobrazit licenci</string>
     <string name="about_icons_disclaimer_title">Ikony</string>
-    <string name="about_icons_disclaimer">&lt;p>Původní ikonu vytvořil %1$s&lt;/p>&lt;p>Všechny ostatní ikony používané touto aplikací jsou &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a>, vytvořené společností Google Inc. a vydávané pod licencí Apache 2.0.&lt;/p></string>
+    <string name="about_icons_disclaimer_app_icon">Původní ikona, viz %1$s.</string>
+    <string name="about_icons_disclaimer_mdi_icons">Všechny další ikony používané touto aplikací jsou %1$s, vytvořené společností Google Inc. a vydávané pod licencí Apache 2.0.</string>
+    <string name="about_icons_disclaimer_mdi">Ikony ve stylu Material Design</string>
     <string name="about_credits_tab_title">Zásluhy</string>
     <string name="about_contribution_tab_title">Zapojení se</string>
     <string name="about_license_tab_title">Licence</string>
@@ -262,7 +264,6 @@
     <string name="simple_next">Další</string>
     <string name="simple_prev">Předchozí</string>
     <string name="simple_backup">Zazálohovat</string>
-    <string name="simple_repair">Opravit</string>
     <string name="backup">Byl zjištěn stav aplikace, ze kterého se nelze zotavit. Prosíme proveďte zálohu svých nesesynchronizovaných změn a vyčistěte úložiště aplikace Poznámky.</string>
     <string name="settings_notes_path_description">Složka do které ukládat vaše poznámky na vámi využívané instanci Nextcloud</string>
     <string-array name="settings_file_suffixes">

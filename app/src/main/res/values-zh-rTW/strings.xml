@@ -56,23 +56,17 @@
     <string name="error_unknown">發生未知錯誤。</string>
 
     <string name="about_version_title">版本</string>
-    <string name="about_version">您目前正在使用 &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">維護者</string>
     <string name="about_developers_title">開發者</string>
     <string name="about_translators_title">翻譯者</string>
-    <string name="about_translators_transifex">&lt;a href=\"%1$s\">Transifex&lt;/a> 上的 Nextcloud 社群</string>
     <string name="about_testers_title">測試人員</string>
     <string name="about_source_title">原始碼</string>
-    <string name="about_source">此專案寄存在 GitHub 上：&lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">問題</string>
-    <string name="about_issues">您可以在 GitHub 問題回報系統回報臭蟲、改善建議及功能需求：&lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">翻譯</string>
-    <string name="about_translate">歡迎加入 Transifex 的 Nextcloud 團隊並協助翻譯此 App：&lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">程式授權條款</string>
     <string name="about_app_license">此程式依照 GNU GENERAL PUBLIC LICENSE v3+ 方式授權使用</string>
     <string name="about_app_license_button">檢視授權條款</string>
     <string name="about_icons_disclaimer_title">圖示</string>
-    <string name="about_icons_disclaimer">&lt;p>原創圖示由 %1$s 製作&lt;/p>&lt;p>其他 App 使用的圖示均為 Google Inc. 製作的 &lt;a href=\"https://materialdesignicons.com/\">Material Design 圖示&lt;/a>，並依 Apache 2.0 條款授權。&lt;/p></string>
     <string name="about_credits_tab_title">致謝</string>
     <string name="about_contribution_tab_title">貢獻</string>
     <string name="about_license_tab_title">授權條款</string>
@@ -247,7 +241,6 @@
     <string name="simple_next">下一個</string>
     <string name="simple_prev">上一個</string>
     <string name="simple_backup">備份</string>
-    <string name="simple_repair">修復</string>
     <string name="backup">我們偵測到應用程式處於不可回復的狀態，請備份所有未同步的修改，然後清除「筆記」應用程式的儲存空間</string>
     <string name="settings_notes_path_description">在 Nextcloud 中儲存筆記的資料夾</string>
     <string-array name="settings_file_suffixes">

@@ -11,7 +11,7 @@
     <string name="action_trashbin">Notas cantzelladas</string>
     <string name="action_search">Chirca</string>
     <string name="action_sorting_method">Mètodu de ordinamentu</string>
-    <string name="simple_cancel">Cantzella</string>
+    <string name="simple_cancel">Annulla</string>
     <string name="simple_edit">Modìfica</string>
     <string name="simple_remove">Boga</string>
     <string name="action_edit_save">Sarva</string>
@@ -56,23 +56,17 @@
     <string name="error_unknown">Ddoe at àpidu un\'errore disconnotu.</string>
 
     <string name="about_version_title">Versione</string>
-    <string name="about_version">Como ses impreende &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Responsàbile</string>
     <string name="about_developers_title">Isvilupadores</string>
     <string name="about_translators_title">Tradutores</string>
-    <string name="about_translators_transifex">Sa comunidade Nextcloud in &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Collaudadores</string>
     <string name="about_source_title">Còdighe fonte</string>
-    <string name="about_source">Custu progetu nch\'est allogadu in GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Problemas</string>
-    <string name="about_issues">Podes sinnalare unu problema, fàghere propostas de megioramentu e rechestas de funtzionalidades a su rilevadore de problemas de GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Borta</string>
-    <string name="about_translate">Intra a s\'iscuadra de Nextcloud in Transifex e agiuda·nos a bortare custa aplicatzione: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Lissèntzia</string>
     <string name="about_app_license">Custa aplicatzione est suta lissèntzia GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Càstia lissèntzia</string>
     <string name="about_icons_disclaimer_title">Iconas</string>
-    <string name="about_icons_disclaimer">&lt;p>Icona originale realizada cun %1$s&lt;/p>&lt;p>Totu is iconas in prus impreadas dae custa aplicatzione sunt &lt;a href=\"https://materialdesignicons.com/\">Iconas Material Design &lt;/a> creadas dae Google Inc. e suta lissèntzia Apache 2.0 License.&lt;/p></string>
     <string name="about_credits_tab_title">Crèditos</string>
     <string name="about_contribution_tab_title">Contributos</string>
     <string name="about_license_tab_title">Lissèntzia</string>
@@ -252,7 +246,6 @@
     <string name="simple_next">Imbeniente</string>
     <string name="simple_prev">Pretzedente</string>
     <string name="simple_backup">Còpia de seguresa</string>
-    <string name="simple_repair">Acontza</string>
     <string name="backup">Amus rilevadu un\'istadu non recuperàbile de s\'aplicatzione. Faghe una còpia de is modìficas non sincronizadas e lìmpia s\'archiviatzione de s\'aplicatzione Notes.</string>
     <string name="settings_notes_path_description">Cartella pro archiviare is notas tuas in Nextcloud</string>
     <string-array name="settings_file_suffixes">
