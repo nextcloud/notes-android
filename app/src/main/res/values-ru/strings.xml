@@ -52,20 +52,29 @@
     <string name="error_sync">Сбой синхронизации: %1$s</string>
     <string name="error_synchronization">Сбой синхронизации</string>
     <string name="error_no_network">Нет подключения к сети</string>
+    <string name="error_maintenance_mode">Сервер в режиме обслуживания</string>
     <string name="error_unknown">Произошла неизвестная ошибка.</string>
 
     <string name="about_version_title">Версия</string>
+    <string name="about_version">В данный момент вы используете %1$s</string>
     <string name="about_maintainer_title">Сопроводитель</string>
     <string name="about_developers_title">Разработчики</string>
     <string name="about_translators_title">Переводчики</string>
+    <string name="about_translators_transifex">Сообщество Nextcloud на сайте %1$s</string>
     <string name="about_testers_title">Тестировщики</string>
     <string name="about_source_title">Исходный код</string>
+    <string name="about_source">Расположение проекта на GitHub: %1$s</string>
     <string name="about_issues_title">Тикеты</string>
+    <string name="about_issues">Вы можете сообщить об ошибках, ваших пожеланиях, как можно улучшить продукт, в специальном разделе GitHub: %1$s</string>
     <string name="about_translate_title">Перевести</string>
+    <string name="about_translate">Присоединяйтесь к команде Nextcloud на Transifex и помогите нам перевести это приложение: %1$s</string>
     <string name="about_app_license_title">Лицензия приложения</string>
     <string name="about_app_license">Лицензия на программу предоставляется в соответствии с условиями Открытого лицензионного соглашения GNU (GNU GPL) версии 3+.</string>
     <string name="about_app_license_button">Посмотреть лицензию</string>
     <string name="about_icons_disclaimer_title">Значки</string>
+    <string name="about_icons_disclaimer_app_icon">Для просмотра оригинального значка: %1$s.</string>
+    <string name="about_icons_disclaimer_mdi_icons">Все дальнейшие значки, которые используются в этой программе, является частью набора %1$s созданного компанией Google Inc. и распространяемого в соответствии с лицензией Apache версии 2.0. </string>
+    <string name="about_icons_disclaimer_mdi">Иконки в стиле Material Design</string>
     <string name="about_credits_tab_title">Сообщество</string>
     <string name="about_contribution_tab_title">Участие</string>
     <string name="about_license_tab_title">Лицензия</string>
@@ -241,6 +250,29 @@
     <string name="no_other_accounts">Вы еще не настроили ни одного аккаунта</string>
     <string name="choose_account">Выбрать учётную запись</string>
     <string name="context_based_formatting">Всплывающее окно контекстного форматирования</string>
+    <plurals name="remove_account_message">
+        <item quantity="one">Удаление аккаунта %1$s также приведёт к удалению необратимого несинхронизированного изменения.</item>
+        <item quantity="few">Удаление аккаунта %1$s также приведёт к удалению текущих необратимых %2$d несинхронизированных изменений.</item>
+        <item quantity="many">Удаление аккаунта %1$s также приведёт к удалению текущих необратимых %2$d    несинхронизированных изменений.</item>
+        <item quantity="other">Удаление аккаунта %1$s также приведёт к удалению текущих необратимых %2$d несинхронизированных изменений.</item>
+    </plurals>
     <string name="remove_account">Удалить %1$s</string>
 
-    </resources>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Вы должны быть подключены к сети интернет для того, чтобы добавить аккаунт.</string>
+    <string name="settings_notes_path">Указать папку</string>
+
+    <string name="simple_next">Вперёд</string>
+    <string name="simple_prev">Назад</string>
+    <string name="simple_backup">Резервное копирование</string>
+    <string name="backup">Мы удалили невосстанавливаемую часть приложения. Пожалуйста, сделайте резервную копию изменений, которые не были синхронизированы, и очистите память приложения Файлы.</string>
+    <string name="settings_notes_path_description">Папка для хранения ваших записей вашей учётной записи Nextcloud</string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
+    <string name="settings_notes_path_success">Новая папка для заметок: %1$s</string>
+    <string name="settings_file_suffix">Расширение файла</string>
+    <string name="settings_file_suffix_description">Расширение файла для новых заметок в вашей учётной записи Nextcloud</string>
+    <string name="settings_file_suffix_success">Новый суффикс файла: %1$s</string>
+    <string name="http_status_code">Код состояния HTTP: %1$d</string>
+</resources>
