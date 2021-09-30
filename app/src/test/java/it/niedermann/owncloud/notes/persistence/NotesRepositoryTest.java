@@ -1,41 +1,5 @@
 package it.niedermann.owncloud.notes.persistence;
 
-import android.content.Context;
-import android.os.NetworkOnMainThreadException;
-
-import androidx.annotation.NonNull;
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
-import androidx.room.Room;
-import androidx.test.core.app.ApplicationProvider;
-
-import com.google.common.util.concurrent.MoreExecutors;
-import com.nextcloud.android.sso.model.SingleSignOnAccount;
-
-import org.json.JSONException;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
-
-import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Map;
-import java.util.concurrent.ExecutorService;
-
-import it.niedermann.owncloud.notes.persistence.entity.Account;
-import it.niedermann.owncloud.notes.persistence.entity.Note;
-import it.niedermann.owncloud.notes.shared.model.Capabilities;
-import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
-
-import static it.niedermann.owncloud.notes.persistence.NotesTestingUtil.getOrAwaitValue;
-import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_DELETED;
-import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_EDITED;
-import static it.niedermann.owncloud.notes.shared.model.DBStatus.VOID;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -48,9 +12,48 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static it.niedermann.owncloud.notes.persistence.NotesTestingUtil.getOrAwaitValue;
+import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_DELETED;
+import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_EDITED;
+import static it.niedermann.owncloud.notes.shared.model.DBStatus.VOID;
+
+import android.content.Context;
+
+import androidx.annotation.NonNull;
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
+import androidx.room.Room;
+import androidx.test.core.app.ApplicationProvider;
+
+import com.google.common.util.concurrent.MoreExecutors;
+import com.nextcloud.android.sso.api.ParsedResponse;
+import com.nextcloud.android.sso.model.SingleSignOnAccount;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.concurrent.ExecutorService;
+
+import io.reactivex.Observable;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.persistence.sync.NotesAPI;
+import it.niedermann.owncloud.notes.shared.model.Capabilities;
+import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
 
 @RunWith(RobolectricTestRunner.class)
 public class NotesRepositoryTest {
@@ -64,19 +67,26 @@ public class NotesRepositoryTest {
     private NotesDatabase db;
 
     @Before
-    public void setupDB() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException, JSONException {
+    public void setupDB() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException, IOException {
         final var context = ApplicationProvider.getApplicationContext();
         db = Room
                 .inMemoryDatabaseBuilder(ApplicationProvider.getApplicationContext(), NotesDatabase.class)
                 .allowMainThreadQueries()
                 .build();
 
-        final var constructor = NotesRepository.class.getDeclaredConstructor(Context.class, NotesDatabase.class, ExecutorService.class, ExecutorService.class, ApiProvider.class);
+        final var constructor = NotesRepository.class.getDeclaredConstructor(Context.class, NotesDatabase.class, ExecutorService.class, ExecutorService.class, ExecutorService.class, ApiProvider.class);
         constructor.setAccessible(true);
         final var executor = MoreExecutors.newDirectExecutorService();
-        repo = constructor.newInstance(context, db, executor, executor, ApiProvider.getInstance());
+        final var apiProviderSpy = mock(ApiProvider.class);
+        final var notesApiSpy = mock(NotesAPI.class);
+        repo = constructor.newInstance(context, db, executor, executor, executor, apiProviderSpy);
 
-        repo.addAccount("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", new Capabilities(), null, new IResponseCallback<Account>() {
+        doReturn(notesApiSpy).when(apiProviderSpy).getNotesAPI(any(), any(), any());
+        when(notesApiSpy.getNotesIDs()).thenReturn(Observable.just(Collections.emptyList()));
+        when(notesApiSpy.getNote(anyLong())).thenReturn(Observable.just(ParsedResponse.of(new Note())));
+
+        NotesTestingUtil.mockSingleSignOn(new SingleSignOnAccount("彼得@äöüß.example.com", "彼得", "1337", "https://äöüß.example.com", ""));
+        repo.addAccount("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", new Capabilities(), null, new IResponseCallback<>() {
             @Override
             public void onSuccess(Account result) {
 
@@ -84,12 +94,13 @@ public class NotesRepositoryTest {
 
             @Override
             public void onError(@NonNull Throwable t) {
-                fail();
+                fail(t.getMessage());
             }
         });
         account = repo.getAccountByName("彼得@äöüß.example.com");
 
-        repo.addAccount("https://example.org", "test", "test@example.org", new Capabilities(), "Herbert", new IResponseCallback<Account>() {
+        NotesTestingUtil.mockSingleSignOn(new SingleSignOnAccount("test@example.org", "test", "1337", "https://example.org", ""));
+        repo.addAccount("https://example.org", "test", "test@example.org", new Capabilities(), "Herbert", new IResponseCallback<>() {
             @Override
             public void onSuccess(Account result) {
 
@@ -97,7 +108,7 @@ public class NotesRepositoryTest {
 
             @Override
             public void onError(@NonNull Throwable t) {
-                fail();
+                fail(t.getMessage());
             }
         });
         secondAccount = repo.getAccountByName("test@example.org");
@@ -141,8 +152,9 @@ public class NotesRepositoryTest {
     }
 
     @Test
-    public void testAddAccount() {
-        repo.addAccount("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", new Capabilities(), "", new IResponseCallback<Account>() {
+    public void testAddAccount() throws IOException {
+        NotesTestingUtil.mockSingleSignOn(new SingleSignOnAccount("彼得@äöüß.example.com", "彼得", "1337", "https://äöüß.example.com", ""));
+        repo.addAccount("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", new Capabilities(), "", new IResponseCallback<>() {
             @Override
             public void onSuccess(Account createdAccount) {
                 assertEquals("https://äöüß.example.com", createdAccount.getUrl());
@@ -152,7 +164,7 @@ public class NotesRepositoryTest {
 
             @Override
             public void onError(@NonNull Throwable t) {
-                fail();
+                fail(t.getMessage());
             }
         });
     }
@@ -253,10 +265,8 @@ public class NotesRepositoryTest {
         NotesTestingUtil.mockSingleSignOn(new SingleSignOnAccount(account.getAccountName(), account.getUserName(), "1337", account.getUrl(), ""));
 
         assertThrows("The very first time, this LiveData should never have been set", RuntimeException.class, () -> NotesTestingUtil.getOrAwaitValue(repo.getSyncErrors()));
-        repo.scheduleSync(account, false);
-        //noinspection ConstantConditions
-        assertTrue("In our scenario, we expect an exception of type " + NetworkOnMainThreadException.class.getSimpleName() + " to be handeled.", getOrAwaitValue(repo.getSyncErrors()).stream()
-                .anyMatch(e -> e.getMessage().contains(NetworkOnMainThreadException.class.getSimpleName())));
+        repo.scheduleSync(account, true);
+        assertEquals("In our scenario, we expect 4 failed note syncs to be handled.", 4, getOrAwaitValue(repo.getSyncErrors()).size());
     }
 
     @Test

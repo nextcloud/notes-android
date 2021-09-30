@@ -177,7 +177,7 @@ public class NotesRepository {
             if (isSyncPossible()) {
                 syncActive.put(account.getId(), true);
                 try {
-                    Log.d(TAG, "... starting now");
+                    Log.d(TAG, "… starting now");
                     final NotesImportTask importTask = new NotesImportTask(context, this, account, importExecutor, apiProvider);
                     return importTask.importNotes(new IResponseCallback<>() {
                         @Override
@@ -191,7 +191,7 @@ public class NotesRepository {
                         }
                     });
                 } catch (NextcloudFilesAppAccountNotFoundException e) {
-                    Log.e(TAG, "... Could not find " + SingleSignOnAccount.class.getSimpleName() + " for account name " + account.getAccountName());
+                    Log.e(TAG, "… Could not find " + SingleSignOnAccount.class.getSimpleName() + " for account name " + account.getAccountName());
                     callback.onError(e);
                 }
             } else {
