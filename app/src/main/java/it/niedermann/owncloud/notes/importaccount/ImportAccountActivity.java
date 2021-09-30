@@ -96,7 +96,7 @@ public class ImportAccountActivity extends AppCompatActivity {
                         Log.i(TAG, "Loading capabilities for " + ssoAccount.name);
                         final var capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, null, ApiProvider.getInstance());
                         final String displayName = CapabilitiesClient.getDisplayName(getApplicationContext(), ssoAccount, ApiProvider.getInstance());
-                        importAccountViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities, displayName, new IResponseCallback<Account>() {
+                        final var status$ = importAccountViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities, displayName, new IResponseCallback<>() {
 
                             /**
                              * Update syncing when adding account
@@ -123,6 +123,16 @@ public class ImportAccountActivity extends AppCompatActivity {
                                 });
                             }
                         });
+                        runOnUiThread(() -> status$.observe(ImportAccountActivity.this, (status) -> {
+                            binding.progressText.setVisibility(View.VISIBLE);
+                            Log.v(TAG, "Status: " + status.count + " of " + status.total);
+                            if(status.count > 0) {
+                                binding.progressCircular.setIndeterminate(false);
+                            }
+                            binding.progressText.setText(getString(R.string.progress_import, status.count + 1, status.total));
+                            binding.progressCircular.setProgress(status.count);
+                            binding.progressCircular.setMax(status.total);
+                        }));
                     } catch (Throwable t) {
                         t.printStackTrace();
                         ApiProvider.getInstance().invalidateAPICache(ssoAccount);
@@ -162,6 +172,7 @@ public class ImportAccountActivity extends AppCompatActivity {
         runOnUiThread(() -> {
             binding.addButton.setEnabled(true);
             binding.progressCircular.setVisibility(View.GONE);
+            binding.progressText.setVisibility(View.GONE);
         });
     }
 }

@@ -668,27 +668,41 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                     AccountImporter.onActivityResult(requestCode, resultCode, data, this, (ssoAccount) -> {
                         CapabilitiesWorker.update(this);
                         executor.submit(() -> {
+                            final var importSnackbar = BrandedSnackbar.make(binding.drawerLayout, R.string.progress_import_indeterminate, Snackbar.LENGTH_INDEFINITE);
                             Log.i(TAG, "Added account: " + "name:" + ssoAccount.name + ", " + ssoAccount.url + ", userId" + ssoAccount.userId);
                             try {
                                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
                                 final var capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, null, ApiProvider.getInstance());
                                 final String displayName = CapabilitiesClient.getDisplayName(getApplicationContext(), ssoAccount, ApiProvider.getInstance());
-                                mainViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities, displayName, new IResponseCallback<Account>() {
+                                final var status$ = mainViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities, displayName, new IResponseCallback<Account>() {
                                     @Override
                                     public void onSuccess(Account result) {
                                         executor.submit(() -> {
+                                            runOnUiThread(() -> {
+                                                importSnackbar.setText(R.string.account_imported);
+                                                importSnackbar.setAction(R.string.simple_switch, (v) -> mainViewModel.postCurrentAccount(mainViewModel.getLocalAccountByAccountName(ssoAccount.name)));
+                                            });
                                             Log.i(TAG, capabilities.toString());
-                                            final var a = mainViewModel.getLocalAccountByAccountName(ssoAccount.name);
-                                            runOnUiThread(() -> mainViewModel.postCurrentAccount(a));
                                         });
                                     }
 
                                     @Override
                                     public void onError(@NonNull Throwable t) {
-                                        runOnUiThread(() -> ExceptionDialogFragment.newInstance(t).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()));
+                                        runOnUiThread(() -> {
+                                            importSnackbar.dismiss();
+                                            ExceptionDialogFragment.newInstance(t).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+                                        });
                                     }
                                 });
+                                runOnUiThread(() -> status$.observe(this, (status) -> {
+                                    importSnackbar.show();
+                                    Log.v(TAG, "Status: " + status.count + " of " + status.total);
+                                    if(status.count > 0) {
+                                        importSnackbar.setText(getString(R.string.progress_import, status.count + 1, status.total));
+                                    }
+                                }));
                             } catch (Throwable e) {
+                                importSnackbar.dismiss();
                                 ApiProvider.getInstance().invalidateAPICache(ssoAccount);
                                 // Happens when importing an already existing account the second time
                                 if (e instanceof TokenMismatchException && mainViewModel.getLocalAccountByAccountName(ssoAccount.name) != null) {

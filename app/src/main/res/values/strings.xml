@@ -12,6 +12,7 @@
     <string name="action_search">Search</string>
     <string name="action_sorting_method">Sorting method</string>
     <string name="simple_cancel">Cancel</string>
+    <string name="simple_switch">Switch</string>
     <string name="simple_edit">Edit</string>
     <string name="simple_remove">Remove</string>
     <string name="action_edit_save">Save</string>
@@ -315,4 +316,7 @@
     <string name="settings_file_suffix_description">File extension for new notes in your Nextcloud</string>
     <string name="settings_file_suffix_success">New file suffix: %1$s</string>
     <string name="http_status_code">HTTP status code: %1$d</string>
+    <string name="progress_import_indeterminate">Importing notes…</string>
+    <string name="progress_import">Importing note %1$d of %2$d…</string>
+    <string name="account_imported">Account imported.</string>
 </resources>

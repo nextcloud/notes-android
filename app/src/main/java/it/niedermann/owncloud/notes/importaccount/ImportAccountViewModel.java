@@ -11,10 +11,9 @@ import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
+import it.niedermann.owncloud.notes.shared.model.ImportStatus;
 
 public class ImportAccountViewModel extends AndroidViewModel {
-
-    private static final String TAG = ImportAccountViewModel.class.getSimpleName();
 
     @NonNull
     private final NotesRepository repo;
@@ -24,7 +23,7 @@ public class ImportAccountViewModel extends AndroidViewModel {
         this.repo = NotesRepository.getInstance(application);
     }
 
-    public void addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities, @Nullable String displayName, @NonNull IResponseCallback<Account> callback) {
-        repo.addAccount(url, username, accountName, capabilities, displayName, callback);
+    public LiveData<ImportStatus> addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities, @Nullable String displayName, @NonNull IResponseCallback<Account> callback) {
+        return repo.addAccount(url, username, accountName, capabilities, displayName, callback);
     }
 }

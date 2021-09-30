@@ -12,6 +12,7 @@ import com.nextcloud.android.sso.api.ParsedResponse;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import io.reactivex.Observable;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
@@ -66,6 +67,26 @@ public class NotesAPI {
             return notesAPI_0_2.getNotes(lastModified.getTimeInMillis() / 1_000, lastETag);
         } else {
             throw new UnsupportedOperationException("Used API version " + usedApiVersion + " does not support getNotes().");
+        }
+    }
+
+    public Observable<List<Long>> getNotesIDs() {
+        if (ApiVersion.API_VERSION_1_0.equals(usedApiVersion)) {
+            return notesAPI_1_0.getNotesIDs().map(response -> response.getResponse().stream().map(Note::getRemoteId).collect(Collectors.toList()));
+        } else if (ApiVersion.API_VERSION_0_2.equals(usedApiVersion)) {
+            return notesAPI_0_2.getNotesIDs().map(response -> response.getResponse().stream().map(Note::getRemoteId).collect(Collectors.toList()));
+        } else {
+            throw new UnsupportedOperationException("Used API version " + usedApiVersion + " does not support getNotesIDs().");
+        }
+    }
+
+    public Observable<ParsedResponse<Note>> getNote(long remoteId) {
+        if (ApiVersion.API_VERSION_1_0.equals(usedApiVersion)) {
+            return notesAPI_1_0.getNote(remoteId);
+        } else if (ApiVersion.API_VERSION_0_2.equals(usedApiVersion)) {
+            return notesAPI_0_2.getNote(remoteId);
+        } else {
+            throw new UnsupportedOperationException("Used API version " + usedApiVersion + " does not support getNote().");
         }
     }
 

@@ -25,8 +25,14 @@ public interface NotesAPI_0_2 {
     @GET("notes")
     Observable<ParsedResponse<List<Note>>> getNotes(@Query("pruneBefore") long lastModified, @Header("If-None-Match") String lastETag);
 
+    @GET("notes?exclude=etag,readonly,content,title,category,favorite,modified")
+    Observable<ParsedResponse<List<Note>>> getNotesIDs();
+
     @POST("notes")
     Call<Note> createNote(@Body NotesAPI.Note_0_2 note);
+
+    @GET("notes/{remoteId}")
+    Observable<ParsedResponse<Note>> getNote(@Path("remoteId") long remoteId);
 
     @PUT("notes/{remoteId}")
     Call<Note> editNote(@Body NotesAPI.Note_0_2 note, @Path("remoteId") long remoteId);

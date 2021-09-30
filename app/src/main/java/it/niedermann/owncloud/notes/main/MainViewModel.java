@@ -46,6 +46,7 @@ import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
+import it.niedermann.owncloud.notes.shared.model.ImportStatus;
 import it.niedermann.owncloud.notes.shared.model.Item;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 
@@ -538,8 +539,8 @@ public class MainViewModel extends AndroidViewModel {
         });
     }
 
-    public void addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities, @Nullable String displayName, @NonNull IResponseCallback<Account> callback) {
-        repo.addAccount(url, username, accountName, capabilities, displayName, callback);
+    public LiveData<ImportStatus> addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities, @Nullable String displayName, @NonNull IResponseCallback<Account> callback) {
+        return repo.addAccount(url, username, accountName, capabilities, displayName, callback);
     }
 
     public LiveData<Note> getFullNote$(long id) {

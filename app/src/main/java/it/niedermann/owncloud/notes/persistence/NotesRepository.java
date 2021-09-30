@@ -58,6 +58,7 @@ import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType;
 import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
+import it.niedermann.owncloud.notes.shared.model.ImportStatus;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 import it.niedermann.owncloud.notes.shared.model.NotesSettings;
 import it.niedermann.owncloud.notes.shared.model.SyncResultStatus;
@@ -86,6 +87,7 @@ public class NotesRepository {
     private final ApiProvider apiProvider;
     private final ExecutorService executor;
     private final ExecutorService syncExecutor;
+    private final ExecutorService importExecutor;
     private final Context context;
     private final NotesDatabase db;
     private final String defaultNonEmptyTitle;
@@ -138,16 +140,17 @@ public class NotesRepository {
 
     public static synchronized NotesRepository getInstance(@NonNull Context context) {
         if (instance == null) {
-            instance = new NotesRepository(context, NotesDatabase.getInstance(context.getApplicationContext()), Executors.newCachedThreadPool(), Executors.newSingleThreadExecutor(), ApiProvider.getInstance());
+            instance = new NotesRepository(context, NotesDatabase.getInstance(context.getApplicationContext()), Executors.newCachedThreadPool(), Executors.newSingleThreadExecutor(), Executors.newSingleThreadExecutor(), ApiProvider.getInstance());
         }
         return instance;
     }
 
-    private NotesRepository(@NonNull final Context context, @NonNull final NotesDatabase db, @NonNull final ExecutorService executor, @NonNull final ExecutorService syncExecutor, @NonNull ApiProvider apiProvider) {
+    private NotesRepository(@NonNull final Context context, @NonNull final NotesDatabase db, @NonNull final ExecutorService executor, @NonNull final ExecutorService syncExecutor, @NonNull final ExecutorService importExecutor, @NonNull ApiProvider apiProvider) {
         this.context = context.getApplicationContext();
         this.db = db;
         this.executor = executor;
         this.syncExecutor = syncExecutor;
+        this.importExecutor = importExecutor;
         this.apiProvider = apiProvider;
         this.defaultNonEmptyTitle = NoteUtil.generateNonEmptyNoteTitle("", this.context);
         this.syncOnlyOnWifiKey = context.getApplicationContext().getResources().getString(R.string.pref_key_wifi_only);
@@ -166,13 +169,36 @@ public class NotesRepository {
     // Accounts
 
     @AnyThread
-    public void addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities, @Nullable String displayName, @NonNull IResponseCallback<Account> callback) {
-        final var createdAccount = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account(url, username, accountName, displayName, capabilities)));
-        if (createdAccount == null) {
+    public LiveData<ImportStatus> addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities, @Nullable String displayName, @NonNull IResponseCallback<Account> callback) {
+        final var account = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account(url, username, accountName, displayName, capabilities)));
+        if (account == null) {
             callback.onError(new Exception("Could not read created account."));
         } else {
-            callback.onSuccess(createdAccount);
+            if (isSyncPossible()) {
+                syncActive.put(account.getId(), true);
+                try {
+                    Log.d(TAG, "... starting now");
+                    final NotesImportTask importTask = new NotesImportTask(context, this, account, importExecutor, apiProvider);
+                    return importTask.importNotes(new IResponseCallback<>() {
+                        @Override
+                        public void onSuccess(Void result) {
+                            callback.onSuccess(account);
+                        }
+
+                        @Override
+                        public void onError(@NonNull Throwable t) {
+                            callback.onError(t);
+                        }
+                    });
+                } catch (NextcloudFilesAppAccountNotFoundException e) {
+                    Log.e(TAG, "... Could not find " + SingleSignOnAccount.class.getSimpleName() + " for account name " + account.getAccountName());
+                    callback.onError(e);
+                }
+            } else {
+                callback.onError(new NetworkErrorException());
+            }
         }
+        return new MutableLiveData<>(new ImportStatus());
     }
 
     @WorkerThread
