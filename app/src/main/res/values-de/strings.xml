@@ -265,4 +265,4 @@
     <string name="settings_file_suffix_description">Dateiendung für neue Notizen in Ihrer Nextcloud</string>
     <string name="settings_file_suffix_success">Neue Dateiendung: %1$s</string>
     <string name="http_status_code">HTTP-Statuscode: %1$d</string>
-</resources>
+    </resources>

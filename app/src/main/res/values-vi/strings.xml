@@ -257,4 +257,4 @@
     <string name="settings_file_suffix_description">Phần mở rộng tệp cho các bản ghi chú mới trên Nextcloud của bạn</string>
     <string name="settings_file_suffix_success">Hậu tố tệp mới: %1$s</string>
     <string name="http_status_code">Mã trạng thái HTTP: %1$d</string>
-</resources>
+    </resources>

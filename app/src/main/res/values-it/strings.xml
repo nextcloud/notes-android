@@ -257,4 +257,4 @@
     <string name="settings_file_suffix_description">Estensione del file per le nuove note nel tuo Nextcloud</string>
     <string name="settings_file_suffix_success">Nuovo suffisso file: %1$s</string>
     <string name="http_status_code">Codice di stato HTTP: %1$d</string>
-</resources>
+    </resources>

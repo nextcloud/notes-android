@@ -260,4 +260,4 @@
     <string name="settings_file_suffix_description">你的 Nextcloud 中新笔记的文件扩展名</string>
     <string name="settings_file_suffix_success">新文件后缀：%1$s</string>
     <string name="http_status_code">HTTP 状态码：%1$d</string>
-</resources>
+    </resources>

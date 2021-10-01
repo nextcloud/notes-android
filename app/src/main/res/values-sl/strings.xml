@@ -56,13 +56,18 @@
     <string name="error_unknown">Prišlo je do neznane napake.</string>
 
     <string name="about_version_title">Različica</string>
+    <string name="about_version">Trenutno je v uporabi %1$s</string>
     <string name="about_maintainer_title">Vzdrževalec</string>
     <string name="about_developers_title">Razvijalci</string>
     <string name="about_translators_title">Prevajalci</string>
+    <string name="about_translators_transifex">Skupnost Nextcloud na %1$s</string>
     <string name="about_testers_title">Preizkuševalci</string>
     <string name="about_source_title">Izvorna koda</string>
+    <string name="about_source">Projekt gostuje na GitHub: %1$s</string>
     <string name="about_issues_title">Odzivi</string>
+    <string name="about_issues">Poročila o hroščih, predloge za izboljšave in prošnje za nove programske zmožnosti je mogoče objaviti na sledilniku GitHub: %1$s</string>
     <string name="about_translate_title">Prevodi</string>
+    <string name="about_translate">Pridružite se skupini Nextcloud na spletišču Transifex in pomagajte pri prevodu programa: %1$s</string>
     <string name="about_app_license_title">Dovoljenje za uporabo</string>
     <string name="about_app_license">Program je objavljen pod pogoji Splošnega javnega dovoljenja (GNU GPL) različice 3 ali novejše.</string>
     <string name="about_app_license_button">Podrobno besedilo dovoljenja</string>

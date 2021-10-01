@@ -265,4 +265,4 @@
     <string name="settings_file_suffix_description">Nextcloud üzerinde notlarınız için kullanılacak dosya uzantısı </string>
     <string name="settings_file_suffix_success">Yeni dosya son eki: %1$s</string>
     <string name="http_status_code">HTTP durum kodu: %1$d</string>
-</resources>
+    </resources>

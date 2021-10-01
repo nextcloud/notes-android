@@ -56,17 +56,25 @@
     <string name="error_unknown">Ismeretlen hiba történt.</string>
 
     <string name="about_version_title">Verzió</string>
+    <string name="about_version">Jelenleg ezt a verziót használja: %1$s</string>
     <string name="about_maintainer_title">Karbantartó</string>
     <string name="about_developers_title">Fejlesztők</string>
     <string name="about_translators_title">Fordítók</string>
+    <string name="about_translators_transifex">Nextcloud közösség a %1$s</string>
     <string name="about_testers_title">Tesztelők</string>
     <string name="about_source_title">Forráskód</string>
+    <string name="about_source">A projekt a GitHubon található: %1$s</string>
     <string name="about_issues_title">Hibajegyek</string>
+    <string name="about_issues">Hibákat jelenthet, fejlesztési javaslatokat adhat és funkciókat kérhet a GitHub hibakövetőjében: %1$s</string>
     <string name="about_translate_title">Fordítás</string>
+    <string name="about_translate">Csatlakozzon a Nextcloud csapathoz a Transifexen, és segítsen az alkalmazás lefordításában: %1$s</string>
     <string name="about_app_license_title">Alkalmazás licence</string>
     <string name="about_app_license">Ez az alkalmazás GNU GENERAL PUBLIC LICENSE v3+ alatt kerül közreadásra.</string>
     <string name="about_app_license_button">Licenc megtekintése</string>
     <string name="about_icons_disclaimer_title">Ikonok</string>
+    <string name="about_icons_disclaimer_app_icon">Az eredeti ikon itt található: %1$s.</string>
+    <string name="about_icons_disclaimer_mdi_icons">Az alkalmazás által használt összes többi ikon a Google által készített %1$s része, és azok Apache 2.0 License alatt érhetők el.</string>
+    <string name="about_icons_disclaimer_mdi">Material Design ikonok</string>
     <string name="about_credits_tab_title">Köszönet</string>
     <string name="about_contribution_tab_title">Közreműködés</string>
     <string name="about_license_tab_title">Licenc</string>
@@ -257,4 +265,4 @@
     <string name="settings_file_suffix_description">Az új jegyzetek fájlkiterjesztése a Nextcloudban</string>
     <string name="settings_file_suffix_success">Új fájl utótagja: %1$s</string>
     <string name="http_status_code">HTTP állapotkód: %1$d</string>
-</resources>
+    </resources>

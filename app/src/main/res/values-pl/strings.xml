@@ -275,4 +275,4 @@
     <string name="settings_file_suffix_description">Rozszerzenie pliku dla nowych notatek w Nextcloud</string>
     <string name="settings_file_suffix_success">Nowy przyrostek pliku: %1$s</string>
     <string name="http_status_code">Kod statusu HTTP: %1$d</string>
-</resources>
+    </resources>

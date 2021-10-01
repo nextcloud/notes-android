@@ -257,4 +257,4 @@
     <string name="settings_file_suffix_description">Estensione de archìviu pro notas noas in su Nextcloud tuo</string>
     <string name="settings_file_suffix_success">Sufissu de archìviu nou: %1$s</string>
     <string name="http_status_code">Còdighe de istadu HTTP: %1$d</string>
-</resources>
+    </resources>
