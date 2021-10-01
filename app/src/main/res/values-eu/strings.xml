@@ -265,4 +265,4 @@
     <string name="settings_file_suffix_description">Zure Nextcloudeko nota berrien fitxategi-luzapena</string>
     <string name="settings_file_suffix_success">Fitxategi berrien luzapena: %1$s</string>
     <string name="http_status_code">HTTP egoera kodea: %1$d</string>
-</resources>
+    </resources>

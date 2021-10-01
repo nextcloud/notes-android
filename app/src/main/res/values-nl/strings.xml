@@ -257,4 +257,4 @@
     <string name="settings_file_suffix_description">Bestandsextensies voor nieuwe notities in je Nextcloud</string>
     <string name="settings_file_suffix_success">Nieuwe bestandsachtervoegsel: %1$s</string>
     <string name="http_status_code">HTTP status code: %1$d</string>
-</resources>
+    </resources>

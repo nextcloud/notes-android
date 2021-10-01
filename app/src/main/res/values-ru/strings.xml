@@ -275,4 +275,4 @@
     <string name="settings_file_suffix_description">Расширение файла для новых заметок в вашей учётной записи Nextcloud</string>
     <string name="settings_file_suffix_success">Новый суффикс файла: %1$s</string>
     <string name="http_status_code">Код состояния HTTP: %1$d</string>
-</resources>
+    </resources>

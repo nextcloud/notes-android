@@ -257,4 +257,4 @@
     <string name="settings_file_suffix_description">Extensió de fitxer per a les notes noves al Nextcloud</string>
     <string name="settings_file_suffix_success">Sufix dels fitxers nous: %1$s</string>
     <string name="http_status_code">Codi d\'estat HTTP: %1$d</string>
-</resources>
+    </resources>

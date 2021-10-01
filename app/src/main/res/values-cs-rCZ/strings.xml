@@ -275,4 +275,4 @@
     <string name="settings_file_suffix_description">Přípona souboru pro nové poznámky ve vámi využívané instanci Nextcloud</string>
     <string name="settings_file_suffix_success">Přípona nového souboru: %1$s</string>
     <string name="http_status_code">HTTP stavový kód: %1$d</string>
-</resources>
+    </resources>

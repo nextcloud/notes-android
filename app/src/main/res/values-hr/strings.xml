@@ -262,4 +262,4 @@
     <string name="settings_file_suffix_description">Ekstenzija datoteke za nove bilješke u Nextcloudu</string>
     <string name="settings_file_suffix_success">Novi sufiks datoteke: %1$s</string>
     <string name="http_status_code">Šifra statusa HTTP-a: %1$d</string>
-</resources>
+    </resources>

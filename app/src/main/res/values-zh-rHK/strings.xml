@@ -260,4 +260,4 @@
     <string name="settings_file_suffix_description">Nextcloud 中新筆記的檔案擴展名</string>
     <string name="settings_file_suffix_success">新檔案後綴：%1$s</string>
     <string name="http_status_code">HTTP狀態碼：%1$d</string>
-</resources>
+    </resources>

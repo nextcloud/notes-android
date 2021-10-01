@@ -265,4 +265,4 @@
     <string name="settings_file_suffix_description">Extensión de archivo para nuevas notas en su Nextcloud</string>
     <string name="settings_file_suffix_success">Nuevo sufijo de archivo: %1$s</string>
     <string name="http_status_code">Código de estado HTTP: %1$d</string>
-</resources>
+    </resources>
