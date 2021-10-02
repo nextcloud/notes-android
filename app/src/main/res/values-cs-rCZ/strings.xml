@@ -12,6 +12,7 @@
     <string name="action_search">Hledat</string>
     <string name="action_sorting_method">Způsob řazení</string>
     <string name="simple_cancel">Storno</string>
+    <string name="simple_switch">Přepnout</string>
     <string name="simple_edit">Upravit</string>
     <string name="simple_remove">Odebrat</string>
     <string name="action_edit_save">Uložit</string>
@@ -275,4 +276,7 @@
     <string name="settings_file_suffix_description">Přípona souboru pro nové poznámky ve vámi využívané instanci Nextcloud</string>
     <string name="settings_file_suffix_success">Přípona nového souboru: %1$s</string>
     <string name="http_status_code">HTTP stavový kód: %1$d</string>
-    </resources>
+    <string name="progress_import_indeterminate">Importují se poznámky</string>
+    <string name="progress_import">Importuje se poznámka %1$d z %2$d…</string>
+    <string name="account_imported">Účet naimportován.</string>
+</resources>

@@ -12,6 +12,7 @@
     <string name="action_search">Arama</string>
     <string name="action_sorting_method">Sıralama yöntemi</string>
     <string name="simple_cancel">İptal</string>
+    <string name="simple_switch">Değiştir</string>
     <string name="simple_edit">Düzenle</string>
     <string name="simple_remove">Sil</string>
     <string name="action_edit_save">Kaydet</string>
@@ -265,4 +266,7 @@
     <string name="settings_file_suffix_description">Nextcloud üzerinde notlarınız için kullanılacak dosya uzantısı </string>
     <string name="settings_file_suffix_success">Yeni dosya son eki: %1$s</string>
     <string name="http_status_code">HTTP durum kodu: %1$d</string>
-    </resources>
+    <string name="progress_import_indeterminate">Notlar içe aktarılıyor…</string>
+    <string name="progress_import">Not %1$d / %2$d içe aktarılıyor…</string>
+    <string name="account_imported">Hesap içe aktarıldı.</string>
+</resources>
