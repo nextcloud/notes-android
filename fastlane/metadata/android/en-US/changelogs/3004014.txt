@@ -1,2 +1,0 @@
-- 🐞 Consistent timeouts when syncing (#761)
-- 🐞 Categories created in web UI are not shown in Android app (#1358)

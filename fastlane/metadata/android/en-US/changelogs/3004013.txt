@@ -1,2 +1,0 @@
-- 🐞 Fix potential crash when rendering a note with a checkbox (#1326) - by @pbek
-- 🐞 Fix crash when long pressing a note and swiping to the edge of the screen (#1308)
