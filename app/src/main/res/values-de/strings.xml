@@ -12,6 +12,7 @@
     <string name="action_search">Suche</string>
     <string name="action_sorting_method">Sortierverfahren</string>
     <string name="simple_cancel">Abbrechen</string>
+    <string name="simple_switch">Wechseln</string>
     <string name="simple_edit">Bearbeiten</string>
     <string name="simple_remove">Entfernen</string>
     <string name="action_edit_save">Speichern</string>
@@ -265,4 +266,7 @@
     <string name="settings_file_suffix_description">Dateiendung für neue Notizen in Ihrer Nextcloud</string>
     <string name="settings_file_suffix_success">Neue Dateiendung: %1$s</string>
     <string name="http_status_code">HTTP-Statuscode: %1$d</string>
-    </resources>
+    <string name="progress_import_indeterminate">Importiere Notizen…</string>
+    <string name="progress_import">Importiere Notiz %1$d von %2$d…</string>
+    <string name="account_imported">Konto importiert.</string>
+</resources>

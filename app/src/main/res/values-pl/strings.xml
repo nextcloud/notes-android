@@ -12,6 +12,7 @@
     <string name="action_search">Szukaj</string>
     <string name="action_sorting_method">Metoda sortowania</string>
     <string name="simple_cancel">Anuluj</string>
+    <string name="simple_switch">Przełącz</string>
     <string name="simple_edit">Edytuj</string>
     <string name="simple_remove">Usuń</string>
     <string name="action_edit_save">Zapisz</string>
@@ -275,4 +276,7 @@
     <string name="settings_file_suffix_description">Rozszerzenie pliku dla nowych notatek w Nextcloud</string>
     <string name="settings_file_suffix_success">Nowy przyrostek pliku: %1$s</string>
     <string name="http_status_code">Kod statusu HTTP: %1$d</string>
-    </resources>
+    <string name="progress_import_indeterminate">Importuję notatki…</string>
+    <string name="progress_import">Importuję notatkę %1$d z %2$d…</string>
+    <string name="account_imported">Konto zaimportowane.</string>
+</resources>
