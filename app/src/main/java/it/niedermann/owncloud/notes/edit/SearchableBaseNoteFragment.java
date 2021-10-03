@@ -72,10 +72,9 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
             searchMenuItem.expandActionView();
             searchView.setQuery(searchQuery, true);
             searchView.clearFocus();
-        } else {
-            searchMenuItem.collapseActionView();
         }
 
+        searchMenuItem.collapseActionView();
 
         final var searchEditFrame = searchView.findViewById(R.id
                 .search_edit_frame);
