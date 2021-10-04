@@ -1,0 +1,1 @@
+- 🐞 Overflow-menu contains "search" when searchview is open (#522) by @vhouriet
