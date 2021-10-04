@@ -12,6 +12,7 @@
     <string name="action_search">Bilatu</string>
     <string name="action_sorting_method">Ordenatze metodoa</string>
     <string name="simple_cancel">Utzi</string>
+    <string name="simple_switch">Aldatu</string>
     <string name="simple_edit">Editatu</string>
     <string name="simple_remove">Kendu</string>
     <string name="action_edit_save">Gorde</string>
@@ -265,4 +266,7 @@
     <string name="settings_file_suffix_description">Zure Nextcloudeko nota berrien fitxategi-luzapena</string>
     <string name="settings_file_suffix_success">Fitxategi berrien luzapena: %1$s</string>
     <string name="http_status_code">HTTP egoera kodea: %1$d</string>
-    </resources>
+    <string name="progress_import_indeterminate">Notak inportatzen...</string>
+    <string name="progress_import">%2$dtik %1$d nota inportatzen...</string>
+    <string name="account_imported">Kontua inportatuta.</string>
+</resources>

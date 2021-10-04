@@ -12,6 +12,7 @@
     <string name="action_search">搜索</string>
     <string name="action_sorting_method">排序方法</string>
     <string name="simple_cancel">取消</string>
+    <string name="simple_switch">切换</string>
     <string name="simple_edit">编辑</string>
     <string name="simple_remove">移除</string>
     <string name="action_edit_save">保存</string>
@@ -260,4 +261,7 @@
     <string name="settings_file_suffix_description">你的 Nextcloud 中新笔记的文件扩展名</string>
     <string name="settings_file_suffix_success">新文件后缀：%1$s</string>
     <string name="http_status_code">HTTP 状态码：%1$d</string>
-    </resources>
+    <string name="progress_import_indeterminate">导入笔记中…</string>
+    <string name="progress_import">正导入 %2$d 中的笔记 %1$d …</string>
+    <string name="account_imported">账号已导入</string>
+</resources>
