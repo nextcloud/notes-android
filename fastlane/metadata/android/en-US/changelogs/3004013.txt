@@ -1,1 +1,2 @@
 - 🐞 Overflow-menu contains "search" when searchview is open (#522) by @vhouriet
+- ✨ Enhance display of child/sub categories (#1154) by @ScottieKim
