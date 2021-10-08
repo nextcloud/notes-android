@@ -1,8 +1,10 @@
 package it.niedermann.owncloud.notes.shared.util;
 
+import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Build;
 import android.util.TypedValue;
@@ -15,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import it.niedermann.owncloud.notes.R;
@@ -23,6 +26,17 @@ import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
 import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 
 public class DisplayUtils {
+
+    private static final Map<Integer, Collection<Integer>> SPECIAL_CATEGORY_REPLACEMENTS = Map.of(
+            R.drawable.ic_library_music_grey600_24dp, singletonList(R.string.category_music),
+            R.drawable.ic_local_movies_grey600_24dp, asList(R.string.category_movies, R.string.category_movie),
+            R.drawable.ic_work_grey600_24dp, singletonList(R.string.category_work),
+            R.drawable.ic_baseline_checklist_24, asList(R.string.category_todo, R.string.category_todos, R.string.category_tasks, R.string.category_checklists),
+            R.drawable.ic_baseline_fastfood_24, asList(R.string.category_recipe, R.string.category_recipes, R.string.category_restaurant, R.string.category_restaurants, R.string.category_food, R.string.category_bake),
+            R.drawable.ic_baseline_vpn_key_24, asList(R.string.category_key, R.string.category_keys, R.string.category_password, R.string.category_passwords, R.string.category_credentials),
+            R.drawable.ic_baseline_games_24, asList(R.string.category_game, R.string.category_games, R.string.category_play),
+            R.drawable.ic_baseline_card_giftcard_24, asList(R.string.category_gift, R.string.category_gifts, R.string.category_present, R.string.category_presents)
+    );
 
     private DisplayUtils() {
         throw new UnsupportedOperationException("Do not instantiate this util class.");
@@ -36,14 +50,17 @@ public class DisplayUtils {
 
     public static NavigationItem.CategoryNavigationItem convertToCategoryNavigationItem(@NonNull Context context, @NonNull CategoryWithNotesCount counter) {
         final var res = context.getResources();
-        final String category = counter.getCategory().toLowerCase();
+        final String category = counter.getCategory().replaceAll("\\s+", "");
         int icon = NavigationAdapter.ICON_FOLDER;
-        if (category.equals(res.getString(R.string.category_music).toLowerCase())) {
-            icon = R.drawable.ic_library_music_grey600_24dp;
-        } else if (category.equals(res.getString(R.string.category_movies).toLowerCase()) || category.equals(res.getString(R.string.category_movie).toLowerCase())) {
-            icon = R.drawable.ic_local_movies_grey600_24dp;
-        } else if (category.equals(res.getString(R.string.category_work).toLowerCase())) {
-            icon = R.drawable.ic_work_grey600_24dp;
+
+        for (Map.Entry<Integer, Collection<Integer>> replacement : SPECIAL_CATEGORY_REPLACEMENTS.entrySet()) {
+            if (replacement.getValue().stream()
+                    .map(res::getString)
+                    .map(str -> str.replaceAll("\\s+", ""))
+                    .anyMatch(r -> r.equalsIgnoreCase(category))) {
+                icon = replacement.getKey();
+                break;
+            }
         }
         return new NavigationItem.CategoryNavigationItem("category:" + counter.getCategory(), counter.getCategory(), counter.getTotalNotes(), icon, counter.getAccountId(), counter.getCategory());
     }

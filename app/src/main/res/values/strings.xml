@@ -140,6 +140,32 @@
     <string name="category_movies">Movies</string>
     <string name="category_movie">Movie</string>
     <string name="category_work">Work</string>
+    <string name="category_todo">ToDo</string>
+    <string name="category_todos">ToDos</string>
+    <string name="category_checklists">Check lists</string>
+    <string name="category_tasks">Tasks</string>
+
+    <string name="category_recipe">Recipe</string>
+    <string name="category_recipes">Recipes</string>
+    <string name="category_restaurant">Restaurant</string>
+    <string name="category_restaurants">Restaurants</string>
+    <string name="category_food">Food</string>
+    <string name="category_bake">Bake</string>
+
+    <string name="category_key">Key</string>
+    <string name="category_keys">Keys</string>
+    <string name="category_password">Password</string>
+    <string name="category_passwords">Passwords</string>
+    <string name="category_credentials">Credential</string>
+
+    <string name="category_game">Game</string>
+    <string name="category_games">Games</string>
+    <string name="category_play">Play</string>
+    <string name="category_gift">Gift</string>
+    <string name="category_gifts">Gifts</string>
+    <string name="category_present">Present</string>
+    <string name="category_presents">Presents</string>
+
     <string name="account_already_imported">Account has already been imported</string>
     <string name="no_notes_yet">No notes yet</string>
     <string name="no_notes_yet_description">Press + button to create a new note</string>
