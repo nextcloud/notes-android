@@ -6,6 +6,16 @@ public class CategoryWithNotesCount {
     private String category;
     private Integer totalNotes;
 
+    public CategoryWithNotesCount() {
+        // Default constructor for Room
+    }
+
+    public CategoryWithNotesCount(long accountId, String category, Integer totalNotes) {
+        this.accountId = accountId;
+        this.category = category;
+        this.totalNotes = totalNotes;
+    }
+
     public Integer getTotalNotes() {
         return totalNotes;
     }
