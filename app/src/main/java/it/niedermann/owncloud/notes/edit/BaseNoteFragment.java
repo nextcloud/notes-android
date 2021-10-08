@@ -1,12 +1,14 @@
 package it.niedermann.owncloud.notes.edit;
 
+import static java.lang.Boolean.TRUE;
+import static it.niedermann.owncloud.notes.NotesApplication.isDarkThemeActive;
+import static it.niedermann.owncloud.notes.branding.BrandingUtil.tintMenuIcon;
+import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
+
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ShortcutInfo;
-import android.content.pm.ShortcutManager;
 import android.graphics.Color;
-import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,15 +23,13 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.LiveData;
+import androidx.core.content.pm.ShortcutInfoCompat;
+import androidx.core.content.pm.ShortcutManagerCompat;
+import androidx.core.graphics.drawable.IconCompat;
 
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
-import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -54,12 +54,6 @@ import it.niedermann.owncloud.notes.shared.util.ApiVersionUtil;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 import it.niedermann.owncloud.notes.shared.util.NotesColorUtil;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
-
-import static androidx.core.content.pm.ShortcutManagerCompat.isRequestPinShortcutSupported;
-import static it.niedermann.owncloud.notes.NotesApplication.isDarkThemeActive;
-import static it.niedermann.owncloud.notes.branding.BrandingUtil.tintMenuIcon;
-import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
-import static java.lang.Boolean.TRUE;
 
 public abstract class BaseNoteFragment extends BrandedFragment implements CategoryDialogListener, EditTitleListener {
 
@@ -185,7 +179,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_note_fragment, menu);
 
-        if (isRequestPinShortcutSupported(requireActivity()) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (ShortcutManagerCompat.isRequestPinShortcutSupported(requireContext()) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             menu.add(Menu.NONE, MENU_ID_PIN, 110, R.string.pin_to_homescreen);
         }
 
@@ -251,21 +245,17 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
             return false;
         } else if (itemId == MENU_ID_PIN) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                final var shortcutManager = requireActivity().getSystemService(ShortcutManager.class);
-                if (shortcutManager != null) {
-                    if (shortcutManager.isRequestPinShortcutSupported()) {
-                        final var pinShortcutInfo = new ShortcutInfo.Builder(getActivity(), note.getId() + "")
-                                .setShortLabel(note.getTitle())
-                                .setIcon(Icon.createWithResource(requireActivity().getApplicationContext(), TRUE.equals(note.getFavorite()) ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp))
-                                .setIntent(new Intent(getActivity(), EditNoteActivity.class).putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId()).setAction(ACTION_SHORTCUT))
-                                .build();
+                final var context = requireContext();
+                if (ShortcutManagerCompat.isRequestPinShortcutSupported(context)) {
+                    final var pinShortcutInfo = new ShortcutInfoCompat.Builder(context, String.valueOf(note.getId()))
+                            .setShortLabel(note.getTitle())
+                            .setIcon(IconCompat.createWithResource(context.getApplicationContext(), TRUE.equals(note.getFavorite()) ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp))
+                            .setIntent(new Intent(getActivity(), EditNoteActivity.class).putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId()).setAction(ACTION_SHORTCUT))
+                            .build();
 
-                        shortcutManager.requestPinShortcut(pinShortcutInfo, PendingIntent.getBroadcast(getActivity(), 0, shortcutManager.createShortcutResultIntent(pinShortcutInfo), 0).getIntentSender());
-                    } else {
-                        Log.i(TAG, "RequestPinShortcut is not supported");
-                    }
+                    ShortcutManagerCompat.requestPinShortcut(context, pinShortcutInfo, PendingIntent.getBroadcast(context, 0, ShortcutManagerCompat.createShortcutResultIntent(context, pinShortcutInfo), 0).getIntentSender());
                 } else {
-                    Log.e(TAG, ShortcutManager.class.getSimpleName() + " is null");
+                    Log.i(TAG, "RequestPinShortcut is not supported");
                 }
             }
 
