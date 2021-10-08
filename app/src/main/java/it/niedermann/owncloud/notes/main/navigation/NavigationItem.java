@@ -93,4 +93,15 @@ public class NavigationItem {
         result = 31 * result + (type != null ? type.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "NavigationItem{" +
+                "id='" + id + '\'' +
+                ", label='" + label + '\'' +
+                ", icon=" + icon +
+                ", count=" + count +
+                ", type=" + type +
+                '}';
+    }
 }

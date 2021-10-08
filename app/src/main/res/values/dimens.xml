@@ -38,6 +38,4 @@
     <dimen name="widget_note_list_fav_icon_width">26dp</dimen>
     <dimen name="widget_note_list_fav_icon_height">20dp</dimen>
 
-    <dimen name="margin_25">25dp</dimen>
-
 </resources>

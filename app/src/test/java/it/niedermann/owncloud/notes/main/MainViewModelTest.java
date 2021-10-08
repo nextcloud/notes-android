@@ -36,16 +36,6 @@ public class MainViewModelTest {
     private Context context;
 
     private Method fromCategoriesWithNotesCount;
-    private final List<CategoryWithNotesCount> categoriesWithNotesCount = List.of(
-            new CategoryWithNotesCount(1, "Foo", 13),
-            new CategoryWithNotesCount(1, "Bar", 30),
-            new CategoryWithNotesCount(1, "Bar/abc", 10),
-            new CategoryWithNotesCount(1, "Bar/abc/def", 5),
-            new CategoryWithNotesCount(1, "Bar/xyz/zyx", 10),
-            new CategoryWithNotesCount(1, "Bar/aaa/bbb", 8),
-            new CategoryWithNotesCount(1, "Bar/ddd", 2),
-            new CategoryWithNotesCount(1, "Baz", 13)
-    );
 
     @Before
     public void setup() throws NoSuchMethodException {
@@ -57,7 +47,7 @@ public class MainViewModelTest {
     @Test
     public void fromCategoriesWithNotesCount_nothing_expanded() throws InvocationTargetException, IllegalAccessException {
         //noinspection unchecked
-        final var navigationItems = (List<NavigationItem>) fromCategoriesWithNotesCount.invoke(null, context, "", categoriesWithNotesCount, 56, 0);
+        final var navigationItems = (List<NavigationItem>) fromCategoriesWithNotesCount.invoke(null, context, "", getSaneCategoriesWithNotesCount(), 56, 0);
 
         assertNotNull(navigationItems);
         assertEquals(5, navigationItems.size());
@@ -71,7 +61,7 @@ public class MainViewModelTest {
     @Test
     public void fromCategoriesWithNotesCount_Bar_expanded() throws InvocationTargetException, IllegalAccessException {
         //noinspection unchecked
-        final var navigationItems = (List<NavigationItem>) fromCategoriesWithNotesCount.invoke(null, context, "Bar", categoriesWithNotesCount, 56, 0);
+        final var navigationItems = (List<NavigationItem>) fromCategoriesWithNotesCount.invoke(null, context, "Bar", getSaneCategoriesWithNotesCount(), 56, 0);
 
         assertNotNull(navigationItems);
         assertEquals(9, navigationItems.size());
@@ -86,20 +76,61 @@ public class MainViewModelTest {
         assertEquals("Baz", navigationItems.get(8).label);
     }
 
+    @Test
+    public void fromCategoriesWithNotesCount_invalid_expanded() throws InvocationTargetException, IllegalAccessException {
+        //noinspection unchecked
+        final var navigationItems = (List<NavigationItem>) fromCategoriesWithNotesCount.invoke(null, context, "ThisCategoryDoesNotExist", getSaneCategoriesWithNotesCount(), 56, 0);
+
+        assertNotNull(navigationItems);
+        assertEquals(5, navigationItems.size());
+        assertEquals(ENavigationCategoryType.RECENT, navigationItems.get(0).type);
+        assertEquals(ENavigationCategoryType.FAVORITES, navigationItems.get(1).type);
+        assertEquals("Foo", navigationItems.get(2).label);
+        assertEquals("Bar", navigationItems.get(3).label);
+        assertEquals("Baz", navigationItems.get(4).label);
+    }
+
     /**
      * Expanded sub categories are not supported and should therefore be treated like an unknown category
      */
     @Test
     public void fromCategoriesWithNotesCount_subcategory_expanded() throws InvocationTargetException, IllegalAccessException {
         //noinspection unchecked
-        final var bar_abcExpanded = (List<NavigationItem>) fromCategoriesWithNotesCount.invoke(null, context, "Bar/abc", categoriesWithNotesCount, 56, 0);
+        final var navigationItems = (List<NavigationItem>) fromCategoriesWithNotesCount.invoke(null, context, "Bar/abc", getSaneCategoriesWithNotesCount(), 56, 0);
 
-        assertNotNull(bar_abcExpanded);
-        assertEquals(5, bar_abcExpanded.size());
-        assertEquals(ENavigationCategoryType.RECENT, bar_abcExpanded.get(0).type);
-        assertEquals(ENavigationCategoryType.FAVORITES, bar_abcExpanded.get(1).type);
-        assertEquals("Foo", bar_abcExpanded.get(2).label);
-        assertEquals("Bar", bar_abcExpanded.get(3).label);
-        assertEquals("Baz", bar_abcExpanded.get(4).label);
+        assertNotNull(navigationItems);
+        assertEquals(5, navigationItems.size());
+        assertEquals(ENavigationCategoryType.RECENT, navigationItems.get(0).type);
+        assertEquals(ENavigationCategoryType.FAVORITES, navigationItems.get(1).type);
+        assertEquals("Foo", navigationItems.get(2).label);
+        assertEquals("Bar", navigationItems.get(3).label);
+        assertEquals("Baz", navigationItems.get(4).label);
+    }
+
+    @Test
+    public void fromCategoriesWithNotesCount_only_deep_category_without_favorites() throws InvocationTargetException, IllegalAccessException {
+        //noinspection unchecked
+        final var navigationItems = (List<NavigationItem>) fromCategoriesWithNotesCount.invoke(null, context, "Bar/abc", List.of(
+                new CategoryWithNotesCount(1, "Bar/abc/def", 5)
+        ), 0, 0);
+
+        assertNotNull(navigationItems);
+        assertEquals(3, navigationItems.size());
+        assertEquals(ENavigationCategoryType.RECENT, navigationItems.get(0).type);
+        assertEquals(ENavigationCategoryType.FAVORITES, navigationItems.get(1).type);
+        assertEquals("Bar", navigationItems.get(2).label);
+    }
+
+    private static List<CategoryWithNotesCount> getSaneCategoriesWithNotesCount() {
+        return List.of(
+                new CategoryWithNotesCount(1, "Foo", 13),
+                new CategoryWithNotesCount(1, "Bar", 30),
+                new CategoryWithNotesCount(1, "Bar/abc", 10),
+                new CategoryWithNotesCount(1, "Bar/abc/def", 5),
+                new CategoryWithNotesCount(1, "Bar/xyz/zyx", 10),
+                new CategoryWithNotesCount(1, "Bar/aaa/bbb", 8),
+                new CategoryWithNotesCount(1, "Bar/ddd", 2),
+                new CategoryWithNotesCount(1, "Baz", 13)
+        );
     }
 }

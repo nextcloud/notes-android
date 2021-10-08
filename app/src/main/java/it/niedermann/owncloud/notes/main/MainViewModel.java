@@ -351,6 +351,9 @@ public class MainViewModel extends AndroidViewModel {
                 lastSecondaryCategory.icon = NavigationAdapter.ICON_SUB_MULTIPLE;
             } else if (belongsToLastPrimaryCategory) {
                 if (isCategoryOpen) {
+                    if(currentSecondaryCategory == null) {
+                        throw new IllegalStateException("Current secondary category is null. Last primary category: " + lastPrimaryCategory);
+                    }
                     item.label = currentSecondaryCategory;
                     item.id = "category:" + item.label;
                     item.icon = NavigationAdapter.ICON_SUB_FOLDER;

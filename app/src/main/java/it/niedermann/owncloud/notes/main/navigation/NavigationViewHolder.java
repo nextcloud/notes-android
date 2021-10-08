@@ -1,5 +1,7 @@
 package it.niedermann.owncloud.notes.main.navigation;
 
+import static java.util.Objects.requireNonNull;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -14,8 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemNavigationBinding;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
-
-import static java.util.Objects.requireNonNull;
 
 class NavigationViewHolder extends RecyclerView.ViewHolder {
     @NonNull
@@ -62,7 +62,9 @@ class NavigationViewHolder extends RecyclerView.ViewHolder {
         view.setSelected(isSelected);
 
         ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
-        params.leftMargin = item.icon == NavigationAdapter.ICON_SUB_FOLDER ? view.getResources().getDimensionPixelSize(R.dimen.margin_25) : 0;
+        params.leftMargin = item.icon == NavigationAdapter.ICON_SUB_FOLDER || item.icon == NavigationAdapter.ICON_SUB_MULTIPLE
+                ? view.getResources().getDimensionPixelSize(R.dimen.spacer_3x)
+                : 0;
         view.requestLayout();
     }
 }
