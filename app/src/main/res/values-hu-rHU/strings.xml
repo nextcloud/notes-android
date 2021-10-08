@@ -12,6 +12,7 @@
     <string name="action_search">Keresés</string>
     <string name="action_sorting_method">Rendezési mód</string>
     <string name="simple_cancel">Mégse</string>
+    <string name="simple_switch">Kapcsoló</string>
     <string name="simple_edit">Szerkesztés</string>
     <string name="simple_remove">Eltávolítás</string>
     <string name="action_edit_save">Mentés</string>
@@ -265,4 +266,7 @@
     <string name="settings_file_suffix_description">Az új jegyzetek fájlkiterjesztése a Nextcloudban</string>
     <string name="settings_file_suffix_success">Új fájl utótagja: %1$s</string>
     <string name="http_status_code">HTTP állapotkód: %1$d</string>
-    </resources>
+    <string name="progress_import_indeterminate">Jegyzetek importálása…</string>
+    <string name="progress_import">%1$d. / %2$d jegyzet importálása…</string>
+    <string name="account_imported">Fiók importálva.</string>
+</resources>
