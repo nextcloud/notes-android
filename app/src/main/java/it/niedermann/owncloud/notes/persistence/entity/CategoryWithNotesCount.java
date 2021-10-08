@@ -1,5 +1,7 @@
 package it.niedermann.owncloud.notes.persistence.entity;
 
+import androidx.room.Ignore;
+
 public class CategoryWithNotesCount {
 
     private long accountId;
@@ -10,6 +12,7 @@ public class CategoryWithNotesCount {
         // Default constructor for Room
     }
 
+    @Ignore
     public CategoryWithNotesCount(long accountId, String category, Integer totalNotes) {
         this.accountId = accountId;
         this.category = category;
