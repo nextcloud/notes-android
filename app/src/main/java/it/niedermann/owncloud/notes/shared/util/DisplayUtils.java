@@ -75,7 +75,7 @@ public class DisplayUtils {
     @SuppressLint("WrongConstant")
     public static boolean isSoftKeyboardVisible(@NonNull View parentView) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            final WindowInsetsCompat insets = ViewCompat.getRootWindowInsets(parentView);
+            final var insets = ViewCompat.getRootWindowInsets(parentView);
             if (insets != null) {
                 return insets.isVisible(WindowInsets.Type.ime());
             }
