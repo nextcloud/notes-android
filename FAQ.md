@@ -2,6 +2,7 @@
 
 - [Why aren't there any buttons to apply formatting?](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#why-arent-there-any-buttons-to-apply-formatting)
 - [I have experienced an error](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#i-have-experienced-an-error)
+- [Why don't you make an option for…?](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#why-dont-you-make-an-option-for)
 - [Why has my bug report been closed?](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#why-has-my-bug-report-been-closed)
 - [How can i activate the dark mode for widgets?](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#how-can-i-activate-the-dark-mode-for-widgets)
 
@@ -75,6 +76,17 @@ Nextcloud / Notes
 Then set up your account in the Nextcloud Android app again and import the configured account in the Nextcloud Notes Android app.
 
 If the issue persists, [open a bug report in our issue tracker](https://github.com/stefan-niedermann/nextcloud-notes/issues/new?assignees=&labels=bug&template=bug_report.md&title=).
+
+## Why don't you make an option for…?
+
+We prefer good defaults over providing an option for each edge case. Our resources are quite limited, so we have to consider introducing new options very carefully.
+
+1. A feature is implemented quickly, but who will maintain it for the next 5 years?
+2. Each option increases the test matrix exponentially and leads to huge efforts to test every combination
+3. Each option increases the possible constellations, making it hard to track down issues
+4. Each option increases the visual noise for people who will *not* use the options
+5. Each option increases the maintenance efforts, making it harder over the time to work on actual features
+6. Each option introduces new side effects, which might lead to undiscovered bugs or break existing features
 
 ## Why has my bug report been closed?
 
