@@ -114,9 +114,9 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                         requireActivity().runOnUiThread(() -> onNoteLoaded(note));
                         requireActivity().invalidateOptionsMenu();
                     } else {
-                        final var cloudNote = (Note) requireArguments().getSerializable(PARAM_NEWNOTE);
+                        final var paramNote = (Note) requireArguments().getSerializable(PARAM_NEWNOTE);
                         final var content = requireArguments().getString(PARAM_CONTENT);
-                        if (cloudNote == null) {
+                        if (paramNote == null) {
                             if (content == null) {
                                 throw new IllegalArgumentException(PARAM_NOTE_ID + " is not given, argument " + PARAM_NEWNOTE + " is missing and " + PARAM_CONTENT + " is missing.");
                             } else {
@@ -125,7 +125,8 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                                 requireActivity().invalidateOptionsMenu();
                             }
                         } else {
-                            note = repo.addNote(localAccount.getId(), cloudNote);
+                            paramNote.setStatus(DBStatus.LOCAL_EDITED);
+                            note = repo.addNote(localAccount.getId(), paramNote);
                             originalNote = null;
                             requireActivity().runOnUiThread(() -> onNoteLoaded(note));
                             requireActivity().invalidateOptionsMenu();

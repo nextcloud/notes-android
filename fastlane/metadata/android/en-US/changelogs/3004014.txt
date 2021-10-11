@@ -1,0 +1,15 @@
+3.4.14
+
+- 🐞 Notes created via Android's "Share Link" feature are not synced (#1272)
+
+3.4.13
+
+- 🐞 Overflow-menu contains "search" when searchview is open (#522) by @vhouriet
+- ✨ Enhance display of child/sub categories (#1154) by @ScottieKim
+
+3.4.12
+
+- 🐞 Fix potential crash when rendering a note with a checkbox (#1326) - by @pbek
+- 🐞 Fix crash when long pressing a note and swiping to the edge of the screen (#1308)
+- 🐞 Consistent timeouts when syncing (#761)
+- 🐞 Categories created in web UI are not shown in Android app (#1358)

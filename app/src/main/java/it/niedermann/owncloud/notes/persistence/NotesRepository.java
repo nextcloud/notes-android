@@ -423,7 +423,6 @@ public class NotesRepository {
     @NonNull
     @WorkerThread
     public Note addNote(long accountId, @NonNull Note note) {
-        note.setStatus(note.getId() > 0 ? DBStatus.LOCAL_EDITED : DBStatus.VOID);
         note.setAccountId(accountId);
         note.setExcerpt(generateNoteExcerpt(note.getContent(), note.getTitle()));
         return db.getNoteDao().getNoteById(db.getNoteDao().addNote(note));
@@ -432,12 +431,9 @@ public class NotesRepository {
     @MainThread
     public LiveData<Note> moveNoteToAnotherAccount(Account account, @NonNull Note note) {
         final var fullNote = new Note(null, note.getModified(), note.getTitle(), note.getContent(), note.getCategory(), note.getFavorite(), null);
+        fullNote.setStatus(DBStatus.LOCAL_EDITED);
         deleteNoteAndSync(account, note.getId());
-        return map(addNoteAndSync(account, fullNote), (createdNote) -> {
-            db.getNoteDao().updateStatus(createdNote.getId(), DBStatus.LOCAL_EDITED);
-            createdNote.setStatus(DBStatus.LOCAL_EDITED);
-            return createdNote;
-        });
+        return addNoteAndSync(account, fullNote);
     }
 
     /**
