@@ -34,7 +34,6 @@ public class CodeBlockEditHandler implements EditHandler<CodeBlockSpan> {
                     delimited.start(),
                     delimited.end(),
                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-
             );
         }
     }

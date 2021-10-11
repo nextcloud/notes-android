@@ -1,6 +1,7 @@
 package it.niedermann.android.markdown.markwon.plugins;
 
-import android.text.Spannable;
+import static java.util.Comparator.comparingInt;
+
 import android.text.style.ClickableSpan;
 import android.util.Range;
 import android.widget.TextView;
@@ -26,7 +27,6 @@ import java.util.stream.Collectors;
 
 import io.noties.markwon.AbstractMarkwonPlugin;
 import io.noties.markwon.MarkwonVisitor;
-import io.noties.markwon.SpanFactory;
 import io.noties.markwon.SpannableBuilder;
 import io.noties.markwon.SpannableBuilder.Span;
 import io.noties.markwon.ext.tasklist.TaskListItem;
@@ -181,7 +181,7 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
         return builder.getSpans(start, end)
                 .stream()
                 .filter(span -> type.isInstance(span.what))
-                .sorted((o1, o2) -> o1.start - o2.start)
+                .sorted(comparingInt(o -> o.start))
                 .collect(Collectors.toList());
     }
 
