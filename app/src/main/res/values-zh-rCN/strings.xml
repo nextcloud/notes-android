@@ -107,6 +107,31 @@
     <string name="category_movies">影片</string>
     <string name="category_movie">影片</string>
     <string name="category_work">工作</string>
+    <string name="category_todo">待办事项</string>
+    <string name="category_todos">待办事项</string>
+    <string name="category_tasks">任务</string>
+
+    <string name="category_recipe">菜谱</string>
+    <string name="category_recipes">菜谱</string>
+    <string name="category_restaurant">饭馆</string>
+    <string name="category_restaurants">饭馆</string>
+    <string name="category_food">食物</string>
+    <string name="category_bake">烘焙</string>
+
+    <string name="category_key">密钥</string>
+    <string name="category_keys">密钥</string>
+    <string name="category_password">密码</string>
+    <string name="category_passwords">密码</string>
+    <string name="category_credentials">凭据</string>
+
+    <string name="category_game">游戏</string>
+    <string name="category_games">游戏</string>
+    <string name="category_play">玩</string>
+    <string name="category_gift">礼物</string>
+    <string name="category_gifts">礼物</string>
+    <string name="category_present">礼物</string>
+    <string name="category_presents">礼物</string>
+
     <string name="account_already_imported">账号已被导入</string>
     <string name="no_notes_yet">还没有便签</string>
     <string name="no_notes_yet_description">按 + 按钮创建新笔记</string>
