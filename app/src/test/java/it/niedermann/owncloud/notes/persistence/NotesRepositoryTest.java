@@ -184,6 +184,7 @@ public class NotesRepositoryTest {
     public void testAddNote() {
         final var localNote = new Note(null, Calendar.getInstance(), "Fancy Title", "MyContent", "Samples", false, "123");
         localNote.setId(99);
+        localNote.setStatus(LOCAL_EDITED);
         final var createdNoteFromLocal = repo.addNote(account.getId(), localNote);
         assertEquals(LOCAL_EDITED, createdNoteFromLocal.getStatus());
         assertEquals("MyContent", createdNoteFromLocal.getExcerpt());
