@@ -107,6 +107,32 @@
     <string name="category_movies">Filmy</string>
     <string name="category_movie">Film</string>
     <string name="category_work">Praca</string>
+    <string name="category_todo">Do zrobienia</string>
+    <string name="category_todos">Zadania</string>
+    <string name="category_checklists">Lista wykonania</string>
+    <string name="category_tasks">Zadania</string>
+
+    <string name="category_recipe">Przepis</string>
+    <string name="category_recipes">Przepisy</string>
+    <string name="category_restaurant">Restauracja</string>
+    <string name="category_restaurants">Restauracje</string>
+    <string name="category_food">Jedzenie</string>
+    <string name="category_bake">Upiec</string>
+
+    <string name="category_key">Klucz</string>
+    <string name="category_keys">Klucze</string>
+    <string name="category_password">Hasło</string>
+    <string name="category_passwords">Hasła</string>
+    <string name="category_credentials">Poświadczenie</string>
+
+    <string name="category_game">Gra</string>
+    <string name="category_games">Gry</string>
+    <string name="category_play">Zabawa</string>
+    <string name="category_gift">Podarunek</string>
+    <string name="category_gifts">Podarunki</string>
+    <string name="category_present">Prezent</string>
+    <string name="category_presents">Prezenty</string>
+
     <string name="account_already_imported">Konto zostało już zaimportowane</string>
     <string name="no_notes_yet">Brak notatek</string>
     <string name="no_notes_yet_description">Naciśnij przycisk +, aby utworzyć nową notatkę</string>

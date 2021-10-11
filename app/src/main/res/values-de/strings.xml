@@ -107,6 +107,32 @@
     <string name="category_movies">Filme</string>
     <string name="category_movie">Film</string>
     <string name="category_work">Arbeit</string>
+    <string name="category_todo">Aufgabe</string>
+    <string name="category_todos">Aufgaben</string>
+    <string name="category_checklists">Checklisten</string>
+    <string name="category_tasks">Aufgaben</string>
+
+    <string name="category_recipe">Rezept</string>
+    <string name="category_recipes">Rezepte</string>
+    <string name="category_restaurant">Restaurant</string>
+    <string name="category_restaurants">Restaurants</string>
+    <string name="category_food">Essen</string>
+    <string name="category_bake">Backen </string>
+
+    <string name="category_key">Schlüssel</string>
+    <string name="category_keys">Schlüssel</string>
+    <string name="category_password">Passwort</string>
+    <string name="category_passwords">Passwörter</string>
+    <string name="category_credentials">Zugangsdaten</string>
+
+    <string name="category_game">Spiel</string>
+    <string name="category_games">Spiele</string>
+    <string name="category_play">Spielen</string>
+    <string name="category_gift">Geschenk</string>
+    <string name="category_gifts">Geschenke</string>
+    <string name="category_present">Geschenk</string>
+    <string name="category_presents">Geschenke</string>
+
     <string name="account_already_imported">Konto wurde bereits importiert</string>
     <string name="no_notes_yet">Noch keine Notizen vorhanden</string>
     <string name="no_notes_yet_description">Drücke den \"+\"-Knopf um eine neue Notiz zu erstellen</string>

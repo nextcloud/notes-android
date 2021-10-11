@@ -107,6 +107,31 @@
     <string name="category_movies">Filmler</string>
     <string name="category_movie">Film</string>
     <string name="category_work">İş</string>
+    <string name="category_todo">Yapılacak iş</string>
+    <string name="category_todos">Yapılacak işler</string>
+    <string name="category_tasks">Görevler</string>
+
+    <string name="category_recipe">Tarif</string>
+    <string name="category_recipes">Tarifler</string>
+    <string name="category_restaurant">Restoran</string>
+    <string name="category_restaurants">Restoranlar</string>
+    <string name="category_food">Yemek</string>
+    <string name="category_bake">Pişirme</string>
+
+    <string name="category_key">Anahtar</string>
+    <string name="category_keys">Anahtarlar</string>
+    <string name="category_password">Parola</string>
+    <string name="category_passwords">Parolalar</string>
+    <string name="category_credentials">Kimlik doğrulama bilgisi</string>
+
+    <string name="category_game">Oyun</string>
+    <string name="category_games">Oyunlar</string>
+    <string name="category_play">Oynat</string>
+    <string name="category_gift">Hediye</string>
+    <string name="category_gifts">Hediyeler</string>
+    <string name="category_present">Armağan</string>
+    <string name="category_presents">Armağanlar</string>
+
     <string name="account_already_imported">Hesap zaten içe aktarılmış</string>
     <string name="no_notes_yet">Henüz bir not yok</string>
     <string name="no_notes_yet_description">Yeni bir not eklemek için + tuşuna basın</string>
