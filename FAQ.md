@@ -36,12 +36,12 @@ This is a [known issue of the SingleSignOn mechanism](https://github.com/nextclo
 ### `UnknownErrorException: Read timed out`
 
 This issue is caused by a connection time out. This can be the case if there are infrastructural or environmental problems (like a misconfigured server or a bad network connection).
-Probably you will experience it when importing an account, because at this moment, all your Notes will getting downloaded at once. Given you have a lots of notes, this might take longer than the connection is available.
+Probably you will experience it when importing an account, because at this moment, all your Notes will getting downloaded. Given you have a lots of notes, this might take longer than the connection is available.
 Further synchronizations are usually not causing this issue, because the Notes app tries to synchronize only *changed* notes after the first import.
 If your notes are not ten thousands of characters long, it is very unlikely that this causes a connection timeout.
 
-We plan to improve the import of an account and make it more reliable by [fetching notes step by step](https://github.com/stefan-niedermann/nextcloud-notes/issues/761#issuecomment-836989421) in a future release.
-Until then you can as a workaround for the first import try to
+We improved the import of an account in version `3.4.12` to make it more reliable by [fetching notes step by step](https://github.com/stefan-niedermann/nextcloud-notes/issues/761#issuecomment-836989421).
+If you are using an older version, you can as a workaround for the first import try to
 1. move all your notes to a different folder on your Nextcloud instance
 2. import your account on your smartphone
 3. put your notes back to the original folder step by step and sync everytime you put some notes back 
