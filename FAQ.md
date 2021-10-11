@@ -87,7 +87,7 @@ We prefer good defaults over providing an option for each edge case. Our resourc
 4. Each option increases the visual noise for people who will *not* use the options
 5. Each option increases the maintenance efforts, making it harder over the time to work on actual features
 6. Each option introduces new side effects, which might lead to undiscovered bugs or break existing features
-7. The Android app aims to mirror the feature set of the corresponding server app
+7. The Android app aims to mirror feature parity with the corresponding server app
 
 ## Why has my bug report been closed?
 
