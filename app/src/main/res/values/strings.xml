@@ -136,6 +136,7 @@
     <string name="pin_to_homescreen">Pin to homescreen</string>
     <string name="note_has_been_deleted">This note has been deleted</string>
     <string name="add_account">Add account</string>
+
     <string name="category_music">Music</string>
     <string name="category_movies">Movies</string>
     <string name="category_movie">Movie</string>
@@ -144,26 +145,28 @@
     <string name="category_todos">ToDos</string>
     <string name="category_checklists">Checklists</string>
     <string name="category_tasks">Tasks</string>
-
     <string name="category_recipe">Recipe</string>
     <string name="category_recipes">Recipes</string>
     <string name="category_restaurant">Restaurant</string>
     <string name="category_restaurants">Restaurants</string>
     <string name="category_food">Food</string>
     <string name="category_bake">Bake</string>
-
+    <!-- This represents a category where one can place passwords and credentials -->
     <string name="category_key">Key</string>
+    <!-- This represents a category where one can place passwords and credentials -->
     <string name="category_keys">Keys</string>
     <string name="category_password">Password</string>
     <string name="category_passwords">Passwords</string>
     <string name="category_credentials">Credential</string>
-
     <string name="category_game">Game</string>
     <string name="category_games">Games</string>
+    <!-- This is a noun, analogue to "game" -->
     <string name="category_play">Play</string>
     <string name="category_gift">Gift</string>
     <string name="category_gifts">Gifts</string>
+    <!-- Like a gift -->
     <string name="category_present">Present</string>
+    <!-- Like a gift -->
     <string name="category_presents">Presents</string>
 
     <string name="account_already_imported">Account has already been imported</string>
