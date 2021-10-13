@@ -213,8 +213,11 @@ public class FormattingHelpActivity extends BrandedActivity {
                 lineBreak +
                 getString(R.string.formatting_help_title, getString(R.string.formatting_help_images_title)) + lineBreak +
                 lineBreak +
+                getString(R.string.formatting_help_images_body_1, getString(R.string.formatting_help_codefence_inline, getString(R.string.formatting_help_images_slash))) + lineBreak +
+                getString(R.string.formatting_help_images_body_2, getString(R.string.formatting_help_codefence_inline, getString(R.string.formatting_help_images_escaped_space))) + lineBreak +
+                lineBreak +
                 codefence + lineBreak +
-                getString(R.string.formatting_help_image, getString(R.string.formatting_help_images_alt)) + lineBreak +
+                getString(R.string.formatting_help_image, getString(R.string.formatting_help_images_alt), getString(R.string.formatting_help_images_escaped_space)) + lineBreak +
                 codefence + lineBreak;
     }
 

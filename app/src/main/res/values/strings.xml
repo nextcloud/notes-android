@@ -265,7 +265,7 @@
     <string name="formatting_help_strike_through" translatable="false">~~</string>
     <string name="formatting_help_bold" translatable="false">**</string>
     <string name="formatting_help_italic" translatable="false">*</string>
-    <string name="formatting_help_image" translatable="false">![%1$s](https://example.com/image.jpg)</string>
+    <string name="formatting_help_image" translatable="false">![%1$s](https://example.com/fancy%2$simage.jpg)</string>
 
     <string name="formatting_help_cbf_title">Context based formatting</string>
     <string name="formatting_help_cbf_body_1">A major design goal of the Notes app is to provide a distraction free tool. Though you will be able to format your texts with Markdown. For various of the below mentioned examples, you can use shortcuts so you can format your notes without typing in the codes below.</string>
@@ -309,6 +309,10 @@
     <!-- Table cell value of a sample table -->
     <string name="formatting_help_tables_value">Value %1d</string>
 
+    <string name="formatting_help_images_body_1">Links have to be either complete URLs starting with a protocol and domain or absolute paths starting with a %1$s character.</string>
+    <string name="formatting_help_images_body_2">Note that you have to escape the URL of images yourself because otherwise it is no valid markdown. This means for example, that you will have to replace spaces with %1$s in the URL.</string>
+    <string name="formatting_help_images_escaped_space" translatable="false" formatted="false">%20</string>
+    <string name="formatting_help_images_slash" translatable="false">/</string>
     <string name="formatting_help_images_title">Images</string>
     <string name="formatting_help_images_alt">Fancy image</string>
 
