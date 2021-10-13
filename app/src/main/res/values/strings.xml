@@ -160,7 +160,7 @@
     <string name="category_credentials">Credential</string>
     <string name="category_game">Game</string>
     <string name="category_games">Games</string>
-    <!-- This is a noun, analogue to "game" -->
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
     <string name="category_play">Play</string>
     <string name="category_gift">Gift</string>
     <string name="category_gifts">Gifts</string>
