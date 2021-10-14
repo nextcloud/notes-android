@@ -310,7 +310,7 @@
     <string name="formatting_help_tables_value">Value %1d</string>
 
     <string name="formatting_help_images_body_1">Links have to be either complete URLs starting with a protocol and domain or absolute paths starting with a %1$s character.</string>
-    <string name="formatting_help_images_body_2">Note that you have to escape the URL of images yourself because otherwise it is no valid markdown. This means for example, that you will have to replace spaces with %1$s in the URL.</string>
+    <string name="formatting_help_images_body_2">Note that you have to escape the URL of images yourself because otherwise it is invalid Markdown. This means for example, that you will have to replace spaces with %1$s in the URL.</string>
     <string name="formatting_help_images_escaped_space" translatable="false" formatted="false">%20</string>
     <string name="formatting_help_images_slash" translatable="false">/</string>
     <string name="formatting_help_images_title">Images</string>
