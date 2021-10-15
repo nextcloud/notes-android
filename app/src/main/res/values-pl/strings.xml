@@ -103,6 +103,7 @@
     <string name="pin_to_homescreen">Przypnij do ekranu głównego</string>
     <string name="note_has_been_deleted">Ta notatka została usunięta</string>
     <string name="add_account">Dodaj konto</string>
+
     <string name="category_music">Muzyka</string>
     <string name="category_movies">Filmy</string>
     <string name="category_movie">Film</string>
@@ -111,26 +112,28 @@
     <string name="category_todos">Zadania</string>
     <string name="category_checklists">Lista wykonania</string>
     <string name="category_tasks">Zadania</string>
-
     <string name="category_recipe">Przepis</string>
     <string name="category_recipes">Przepisy</string>
     <string name="category_restaurant">Restauracja</string>
     <string name="category_restaurants">Restauracje</string>
     <string name="category_food">Jedzenie</string>
     <string name="category_bake">Upiec</string>
-
+    <!-- This represents a category where one can place passwords and credentials -->
     <string name="category_key">Klucz</string>
+    <!-- This represents a category where one can place passwords and credentials -->
     <string name="category_keys">Klucze</string>
     <string name="category_password">Hasło</string>
     <string name="category_passwords">Hasła</string>
     <string name="category_credentials">Poświadczenie</string>
-
     <string name="category_game">Gra</string>
     <string name="category_games">Gry</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
     <string name="category_play">Zabawa</string>
     <string name="category_gift">Podarunek</string>
     <string name="category_gifts">Podarunki</string>
+    <!-- Like a gift -->
     <string name="category_present">Prezent</string>
+    <!-- Like a gift -->
     <string name="category_presents">Prezenty</string>
 
     <string name="account_already_imported">Konto zostało już zaimportowane</string>
@@ -264,6 +267,7 @@
     <!-- Table cell value of a sample table -->
     <string name="formatting_help_tables_value">Wartość %1d</string>
 
+    <string name="formatting_help_images_body_1">Linki muszą być albo pełnymi adresami URL zaczynającymi się od protokołu i domeny, albo ścieżkami bezwzględnymi zaczynającymi się od znaku %1$s.</string>
     <string name="formatting_help_images_title">Obrazy</string>
     <string name="formatting_help_images_alt">Fantazyjny obraz</string>
 

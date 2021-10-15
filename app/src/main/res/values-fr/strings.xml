@@ -94,6 +94,7 @@
     <string name="pin_to_homescreen">Épingler sur la page d’accueil</string>
     <string name="note_has_been_deleted">Cette note a été supprimée</string>
     <string name="add_account">Ajouter un compte</string>
+
     <string name="category_music">Musique</string>
     <string name="category_movies">Films</string>
     <string name="category_movie">Film</string>

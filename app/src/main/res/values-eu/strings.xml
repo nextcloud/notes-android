@@ -103,10 +103,37 @@
     <string name="pin_to_homescreen">Hasierako pantailara egokitu</string>
     <string name="note_has_been_deleted">Ohar hau ezabatu da</string>
     <string name="add_account">Gehitu kontua</string>
+
     <string name="category_music">Musika</string>
     <string name="category_movies">Filmak</string>
     <string name="category_movie">Filma</string>
     <string name="category_work">Lana</string>
+    <string name="category_todo">Egiteke</string>
+    <string name="category_todos">Egitekoak</string>
+    <string name="category_tasks">Zereginak</string>
+    <string name="category_recipe">Errezeta</string>
+    <string name="category_recipes">Errezetak</string>
+    <string name="category_restaurant">Jatetxea</string>
+    <string name="category_restaurants">Jatetxeak</string>
+    <string name="category_food">Janaria</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_key">Gakoa</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_keys">Gakoak</string>
+    <string name="category_password">Pasahitza</string>
+    <string name="category_passwords">Pasahitzak</string>
+    <string name="category_credentials">Kredentzial</string>
+    <string name="category_game">Jokoa</string>
+    <string name="category_games">Jokoak</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">Erreproduzitu</string>
+    <string name="category_gift">Oparia</string>
+    <string name="category_gifts">Opariak</string>
+    <!-- Like a gift -->
+    <string name="category_present">Aurkeztu</string>
+    <!-- Like a gift -->
+    <string name="category_presents">Opariak</string>
+
     <string name="account_already_imported">Kontua dagoeneko inportatu da</string>
     <string name="no_notes_yet">Ez dago oharrik</string>
     <string name="no_notes_yet_description">Sakatu + botoia ohar berria sortzeko</string>

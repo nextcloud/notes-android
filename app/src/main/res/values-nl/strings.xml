@@ -94,6 +94,7 @@
     <string name="pin_to_homescreen">Vastzetten op startscherm</string>
     <string name="note_has_been_deleted">Deze notitie is verwijderd</string>
     <string name="add_account">Account toevoegen</string>
+
     <string name="category_music">Muziek</string>
     <string name="category_movies">Films</string>
     <string name="category_movie">Film</string>

@@ -94,6 +94,7 @@
     <string name="pin_to_homescreen">Prikvačite na početni zaslon</string>
     <string name="note_has_been_deleted">Bilješka je izbrisana</string>
     <string name="add_account">Dodaj račun</string>
+
     <string name="category_music">Glazba</string>
     <string name="category_movies">Filmovi</string>
     <string name="category_movie">Film</string>

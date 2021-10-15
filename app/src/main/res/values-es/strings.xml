@@ -102,6 +102,7 @@
     <string name="pin_to_homescreen">Acoplar a la pantalla de inicio</string>
     <string name="note_has_been_deleted">Esta nota ha sido borrada</string>
     <string name="add_account">Agregar cuenta</string>
+
     <string name="category_music">Música</string>
     <string name="category_movies">Películas</string>
     <string name="category_movie">Película</string>

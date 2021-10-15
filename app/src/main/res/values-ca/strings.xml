@@ -94,6 +94,7 @@
     <string name="pin_to_homescreen">Fixa-ho a la pantalla d\'inici</string>
     <string name="note_has_been_deleted">S\'ha suprimit aquesta nota</string>
     <string name="add_account">Afegeix un compte</string>
+
     <string name="category_music">Música</string>
     <string name="category_movies">Pel·lícules</string>
     <string name="category_movie">Pel·lícula</string>
