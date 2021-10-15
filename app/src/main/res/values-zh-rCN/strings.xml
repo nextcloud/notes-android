@@ -103,33 +103,37 @@
     <string name="pin_to_homescreen">固定到主屏幕</string>
     <string name="note_has_been_deleted">此笔记已被删除</string>
     <string name="add_account">添加帐号</string>
+
     <string name="category_music">音乐</string>
     <string name="category_movies">影片</string>
     <string name="category_movie">影片</string>
     <string name="category_work">工作</string>
     <string name="category_todo">待办事项</string>
     <string name="category_todos">待办事项</string>
+    <string name="category_checklists">清单</string>
     <string name="category_tasks">任务</string>
-
     <string name="category_recipe">菜谱</string>
     <string name="category_recipes">菜谱</string>
     <string name="category_restaurant">饭馆</string>
     <string name="category_restaurants">饭馆</string>
     <string name="category_food">食物</string>
     <string name="category_bake">烘焙</string>
-
+    <!-- This represents a category where one can place passwords and credentials -->
     <string name="category_key">密钥</string>
+    <!-- This represents a category where one can place passwords and credentials -->
     <string name="category_keys">密钥</string>
     <string name="category_password">密码</string>
     <string name="category_passwords">密码</string>
     <string name="category_credentials">凭据</string>
-
     <string name="category_game">游戏</string>
     <string name="category_games">游戏</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
     <string name="category_play">玩</string>
     <string name="category_gift">礼物</string>
     <string name="category_gifts">礼物</string>
+    <!-- Like a gift -->
     <string name="category_present">礼物</string>
+    <!-- Like a gift -->
     <string name="category_presents">礼物</string>
 
     <string name="account_already_imported">账号已被导入</string>
@@ -251,6 +255,7 @@
     <!-- Table cell value of a sample table -->
     <string name="formatting_help_tables_value">值 %1d</string>
 
+    <string name="formatting_help_images_body_1">链接要么是以协议和域开头的完整 URL，要么是以 %1$s 字符开头的绝对路径。</string>
     <string name="formatting_help_images_title">图片</string>
     <string name="formatting_help_images_alt">精致图片</string>
 

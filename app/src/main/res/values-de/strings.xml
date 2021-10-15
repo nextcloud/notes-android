@@ -103,6 +103,7 @@
     <string name="pin_to_homescreen">An Startbildschirm anheften</string>
     <string name="note_has_been_deleted">Diese Notiz wurde gelöscht</string>
     <string name="add_account">Konto hinzufügen</string>
+
     <string name="category_music">Musik</string>
     <string name="category_movies">Filme</string>
     <string name="category_movie">Film</string>
@@ -111,26 +112,28 @@
     <string name="category_todos">Aufgaben</string>
     <string name="category_checklists">Checklisten</string>
     <string name="category_tasks">Aufgaben</string>
-
     <string name="category_recipe">Rezept</string>
     <string name="category_recipes">Rezepte</string>
     <string name="category_restaurant">Restaurant</string>
     <string name="category_restaurants">Restaurants</string>
     <string name="category_food">Essen</string>
     <string name="category_bake">Backen </string>
-
+    <!-- This represents a category where one can place passwords and credentials -->
     <string name="category_key">Schlüssel</string>
+    <!-- This represents a category where one can place passwords and credentials -->
     <string name="category_keys">Schlüssel</string>
     <string name="category_password">Passwort</string>
     <string name="category_passwords">Passwörter</string>
     <string name="category_credentials">Zugangsdaten</string>
-
     <string name="category_game">Spiel</string>
     <string name="category_games">Spiele</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
     <string name="category_play">Spielen</string>
     <string name="category_gift">Geschenk</string>
     <string name="category_gifts">Geschenke</string>
+    <!-- Like a gift -->
     <string name="category_present">Geschenk</string>
+    <!-- Like a gift -->
     <string name="category_presents">Geschenke</string>
 
     <string name="account_already_imported">Konto wurde bereits importiert</string>
@@ -256,6 +259,7 @@
     <!-- Table cell value of a sample table -->
     <string name="formatting_help_tables_value">Wert %1d</string>
 
+    <string name="formatting_help_images_body_1">Links müssen entweder vollständige URLs sein, die mit einem Protokoll und einer Domäne beginnen, oder absolute Pfade, die mit einem %1$s-Zeichen beginnen.</string>
     <string name="formatting_help_images_title">Bilder</string>
     <string name="formatting_help_images_alt">Ausgefallenes Bild</string>
 

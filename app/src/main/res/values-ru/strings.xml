@@ -102,6 +102,7 @@
     <string name="pin_to_homescreen">Введите PIN-код для домашнего экрана</string>
     <string name="note_has_been_deleted">Запись была удалена</string>
     <string name="add_account">Добавить аккаунт</string>
+
     <string name="category_music">Музыка</string>
     <string name="category_movies">Фильмы</string>
     <string name="category_movie">Фильм</string>

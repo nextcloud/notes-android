@@ -94,6 +94,7 @@
     <string name="pin_to_homescreen">Appunta alla schermata iniziale</string>
     <string name="note_has_been_deleted">Questa nota è stata eliminata</string>
     <string name="add_account">Aggiungi account</string>
+
     <string name="category_music">Musica</string>
     <string name="category_movies">Film</string>
     <string name="category_movie">Film</string>

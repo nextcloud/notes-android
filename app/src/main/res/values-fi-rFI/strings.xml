@@ -93,6 +93,7 @@
     <string name="pin_to_homescreen">Kiinnitä kotinäyttöön</string>
     <string name="note_has_been_deleted">Tämä muistiinpano on poistettu</string>
     <string name="add_account">Lisää tili</string>
+
     <string name="category_music">Musiikki</string>
     <string name="category_movies">Elokuvat</string>
     <string name="category_movie">Elokuva</string>

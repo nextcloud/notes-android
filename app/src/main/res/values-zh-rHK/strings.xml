@@ -103,6 +103,7 @@
     <string name="pin_to_homescreen">釘選至主畫面</string>
     <string name="note_has_been_deleted">此則筆記已被刪除</string>
     <string name="add_account">新增賬戶</string>
+
     <string name="category_music">音樂</string>
     <string name="category_movies">電影</string>
     <string name="category_movie">電影</string>
@@ -111,23 +112,30 @@
     <string name="category_todos">待辦事項</string>
     <string name="category_checklists">清單</string>
     <string name="category_tasks">任務</string>
-
     <string name="category_recipe">食譜</string>
     <string name="category_recipes">食譜</string>
     <string name="category_restaurant">餐廳</string>
     <string name="category_restaurants">餐廳</string>
     <string name="category_food">食物</string>
     <string name="category_bake">烤烘</string>
-
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_key">密鑰</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_keys">密鑰</string>
     <string name="category_password">密碼</string>
     <string name="category_passwords">密碼</string>
     <string name="category_credentials">身分驗證</string>
-
     <string name="category_game">遊戲</string>
     <string name="category_games">遊戲</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
     <string name="category_play">戲劇</string>
-    <string name="category_gift">禮物</string>
-    <string name="category_gifts">禮物</string>
+    <string name="category_gift">贈品</string>
+    <string name="category_gifts">贈品</string>
+    <!-- Like a gift -->
+    <string name="category_present">禮物</string>
+    <!-- Like a gift -->
+    <string name="category_presents">禮物</string>
+
     <string name="account_already_imported">已成功匯入賬戶</string>
     <string name="no_notes_yet">尚沒有筆記</string>
     <string name="no_notes_yet_description">請按 + 按鈕建立新筆記</string>
@@ -247,6 +255,7 @@
     <!-- Table cell value of a sample table -->
     <string name="formatting_help_tables_value">值 %1d</string>
 
+    <string name="formatting_help_images_body_1">連結必須是以協議和域開頭的完整 URL 或以 %1$s 字符開頭的絕對路徑。</string>
     <string name="formatting_help_images_title">圖像</string>
     <string name="formatting_help_images_alt">精美圖像</string>
 

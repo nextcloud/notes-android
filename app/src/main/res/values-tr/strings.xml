@@ -103,33 +103,37 @@
     <string name="pin_to_homescreen">Ana sayfaya sabitle</string>
     <string name="note_has_been_deleted">Bu not silinmiş</string>
     <string name="add_account">Hesap ekle</string>
+
     <string name="category_music">Müzik</string>
     <string name="category_movies">Filmler</string>
     <string name="category_movie">Film</string>
     <string name="category_work">İş</string>
     <string name="category_todo">Yapılacak iş</string>
     <string name="category_todos">Yapılacak işler</string>
+    <string name="category_checklists">Denetim listeleri</string>
     <string name="category_tasks">Görevler</string>
-
     <string name="category_recipe">Tarif</string>
     <string name="category_recipes">Tarifler</string>
     <string name="category_restaurant">Restoran</string>
     <string name="category_restaurants">Restoranlar</string>
     <string name="category_food">Yemek</string>
     <string name="category_bake">Pişirme</string>
-
+    <!-- This represents a category where one can place passwords and credentials -->
     <string name="category_key">Anahtar</string>
+    <!-- This represents a category where one can place passwords and credentials -->
     <string name="category_keys">Anahtarlar</string>
     <string name="category_password">Parola</string>
     <string name="category_passwords">Parolalar</string>
     <string name="category_credentials">Kimlik doğrulama bilgisi</string>
-
     <string name="category_game">Oyun</string>
     <string name="category_games">Oyunlar</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
     <string name="category_play">Oynat</string>
     <string name="category_gift">Hediye</string>
     <string name="category_gifts">Hediyeler</string>
+    <!-- Like a gift -->
     <string name="category_present">Armağan</string>
+    <!-- Like a gift -->
     <string name="category_presents">Armağanlar</string>
 
     <string name="account_already_imported">Hesap zaten içe aktarılmış</string>
@@ -255,6 +259,7 @@
     <!-- Table cell value of a sample table -->
     <string name="formatting_help_tables_value">Değer: %1d</string>
 
+    <string name="formatting_help_images_body_1">Bağlantılar, bir iletişim kuralı ve etki alanı ile başlayan tam adresler ya da %1$s karakteriyle başlayan mutlak yollar olmalıdır.</string>
     <string name="formatting_help_images_title">Görseller</string>
     <string name="formatting_help_images_alt">Süslü görsel</string>
 

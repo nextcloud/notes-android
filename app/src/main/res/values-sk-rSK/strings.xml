@@ -103,10 +103,39 @@
     <string name="pin_to_homescreen">Pripnúť na domovskú obrazovku</string>
     <string name="note_has_been_deleted">Táto poznámka bola vymazaná</string>
     <string name="add_account">Pridať účet</string>
+
     <string name="category_music">Hudba</string>
     <string name="category_movies">Videá</string>
     <string name="category_movie">Film</string>
     <string name="category_work">Práca</string>
+    <string name="category_todo">Úlohy</string>
+    <string name="category_todos">Úlohy</string>
+    <string name="category_checklists">Kontrolné zoznamy</string>
+    <string name="category_tasks">Úlohy</string>
+    <string name="category_recipe">Recept</string>
+    <string name="category_recipes">Recepty</string>
+    <string name="category_restaurant">Reštaurácia</string>
+    <string name="category_restaurants">Reštaurácie</string>
+    <string name="category_food">Jedlo</string>
+    <string name="category_bake">Pečenie</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_key">Kľúč</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_keys">Kľúče</string>
+    <string name="category_password">Heslo</string>
+    <string name="category_passwords">Heslá</string>
+    <string name="category_credentials">Prihlasovacie údaje</string>
+    <string name="category_game">Hra</string>
+    <string name="category_games">Hry</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">Hrať</string>
+    <string name="category_gift">Darček</string>
+    <string name="category_gifts">Darčeky</string>
+    <!-- Like a gift -->
+    <string name="category_present">Dar</string>
+    <!-- Like a gift -->
+    <string name="category_presents">Dary</string>
+
     <string name="account_already_imported">Účet už bol importovaný</string>
     <string name="no_notes_yet">Zatiaľ nie sú žiadne poznámky</string>
     <string name="no_notes_yet_description">Ťuknutím na tlačidlo + vytvoríte novú poznámku</string>
@@ -238,6 +267,7 @@
     <!-- Table cell value of a sample table -->
     <string name="formatting_help_tables_value">Hodnota %1d</string>
 
+    <string name="formatting_help_images_body_1">Odkazy musia byť buď úplné adresy URL začínajúce protokolom a doménou, alebo úplné cesty začínajúce znakom %1$s.</string>
     <string name="formatting_help_images_title">Obrázky</string>
     <string name="formatting_help_images_alt">Efektný obrázok</string>
 

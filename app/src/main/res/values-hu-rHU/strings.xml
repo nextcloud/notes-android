@@ -103,6 +103,7 @@
     <string name="pin_to_homescreen">Rögzítés a kezdőképernyőre</string>
     <string name="note_has_been_deleted">A jegyzet már törölve lett</string>
     <string name="add_account">Fiók hozzáadása</string>
+
     <string name="category_music">Zene</string>
     <string name="category_movies">Filmek</string>
     <string name="category_movie">Film</string>
