@@ -1,1 +1,7 @@
+3.4.15
+
+- 🌎 Updated translations
+
+3.4.14
+
 - 🐞 Notes created via Android's "Share Link" feature are not synced (#1272)
