@@ -260,6 +260,7 @@
     <string name="formatting_help_tables_value">Değer: %1d</string>
 
     <string name="formatting_help_images_body_1">Bağlantılar, bir iletişim kuralı ve etki alanı ile başlayan tam adresler ya da %1$s karakteriyle başlayan mutlak yollar olmalıdır.</string>
+    <string name="formatting_help_images_body_2">Markdown biçimine uymak için lütfen görsel adresinde kaçış karakterlerini kullanın. Örneğin görsel adresindeki boşlukları %1$s ile değiştirmelisiniz.</string>
     <string name="formatting_help_images_title">Görseller</string>
     <string name="formatting_help_images_alt">Süslü görsel</string>
 
