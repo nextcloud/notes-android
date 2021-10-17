@@ -268,6 +268,7 @@
     <string name="formatting_help_tables_value">Hodnota %1d</string>
 
     <string name="formatting_help_images_body_1">Je třeba, aby odkazy byly buď kompletní URL adresy, začínající na protokol a doménu, nebo úplné popisy umístění, začínající znakem %1$s.</string>
+    <string name="formatting_help_images_body_2">Aby odpovídalo formátu Markdown, použijte v URL adrese význam zbavujících znaků (escape). To například znamená, že v URL je třeba nahradit mezery za %1$s.</string>
     <string name="formatting_help_images_title">Obrázky</string>
     <string name="formatting_help_images_alt">Ozdobný obrázek</string>
 

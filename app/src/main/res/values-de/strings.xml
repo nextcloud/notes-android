@@ -260,6 +260,7 @@
     <string name="formatting_help_tables_value">Wert %1d</string>
 
     <string name="formatting_help_images_body_1">Links müssen entweder vollständige URLs sein, die mit einem Protokoll und einer Domäne beginnen, oder absolute Pfade, die mit einem %1$s-Zeichen beginnen.</string>
+    <string name="formatting_help_images_body_2">Um dem Markdown-Format zu entsprechen, verwenden Sie bitte Escape-Zeichen in der Bild-URL. Ersetzen Sie also z.B. Leerzeichen in der URL durch %1$s.</string>
     <string name="formatting_help_images_title">Bilder</string>
     <string name="formatting_help_images_alt">Ausgefallenes Bild</string>
 

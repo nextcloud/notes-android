@@ -256,6 +256,7 @@
     <string name="formatting_help_tables_value">值 %1d</string>
 
     <string name="formatting_help_images_body_1">链接要么是以协议和域开头的完整 URL，要么是以 %1$s 字符开头的绝对路径。</string>
+    <string name="formatting_help_images_body_2">为了符合 Markdown 格式，请在图像 URL 中使用转义字符。这意味着采取将 URL 中的空格替换为 %1$s 等操作</string>
     <string name="formatting_help_images_title">图片</string>
     <string name="formatting_help_images_alt">精致图片</string>
 

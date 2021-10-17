@@ -108,6 +108,34 @@
     <string name="category_movies">Filmek</string>
     <string name="category_movie">Film</string>
     <string name="category_work">Munkahelyi</string>
+    <string name="category_todo">Teendő</string>
+    <string name="category_todos">Teendők</string>
+    <string name="category_checklists">Ellenőrzőlisták</string>
+    <string name="category_tasks">Feladatok</string>
+    <string name="category_recipe">Recept</string>
+    <string name="category_recipes">Receptek</string>
+    <string name="category_restaurant">Étterem</string>
+    <string name="category_restaurants">Éttermek</string>
+    <string name="category_food">Étel</string>
+    <string name="category_bake">Sütés</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_key">Kulcs</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_keys">Kulcsok</string>
+    <string name="category_password">Jelszó</string>
+    <string name="category_passwords">Jelszavak</string>
+    <string name="category_credentials">Hitelesítő adat</string>
+    <string name="category_game">Játék</string>
+    <string name="category_games">Játékok</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">Színdarab</string>
+    <string name="category_gift">Ajándék</string>
+    <string name="category_gifts">Ajándékok</string>
+    <!-- Like a gift -->
+    <string name="category_present">Meglepetés</string>
+    <!-- Like a gift -->
+    <string name="category_presents">Meglepetések</string>
+
     <string name="account_already_imported">A fiók már importálásra került</string>
     <string name="no_notes_yet">Még nincsenek jegyzetek</string>
     <string name="no_notes_yet_description">Új jegyzet hozzáadásához kattintson a + gombra</string>
@@ -231,6 +259,8 @@
     <!-- Table cell value of a sample table -->
     <string name="formatting_help_tables_value">%1d. érték</string>
 
+    <string name="formatting_help_images_body_1">A hivatkozásoknak vagy teljes, protokollal és domainnal kezdődő URL-eknek, vagy %1$s karakterrel kezdődő abszolút útvonalaknak kell lenniük.</string>
+    <string name="formatting_help_images_body_2">Hogy megfeleljen a Markdown formátumnak, használjon feloldó karaktereket a kép URL-ben. Ez például azt jelenti, hogy cserélje erre a szóközöket az URL-ben: %1$s.</string>
     <string name="formatting_help_images_title">Képek</string>
     <string name="formatting_help_images_alt">Díszes kép</string>
 

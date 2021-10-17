@@ -12,6 +12,7 @@
     <string name="action_search">Cerca</string>
     <string name="action_sorting_method">Metodo di ordinamento</string>
     <string name="simple_cancel">Annulla</string>
+    <string name="simple_switch">Scambia</string>
     <string name="simple_edit">Modifica</string>
     <string name="simple_remove">Rimuovi</string>
     <string name="action_edit_save">Salva</string>
@@ -56,17 +57,25 @@
     <string name="error_unknown">Si è verificato un errore sconosciuto.</string>
 
     <string name="about_version_title">Versione</string>
+    <string name="about_version">Attualmente stai usando %1$s</string>
     <string name="about_maintainer_title">Responsabile</string>
     <string name="about_developers_title">Sviluppatori</string>
     <string name="about_translators_title">Traduttori</string>
+    <string name="about_translators_transifex">Comunità di Nextcloud attiva %1$s</string>
     <string name="about_testers_title">Tester</string>
     <string name="about_source_title">Codice sorgente</string>
+    <string name="about_source">Questo progetto è ospitato su GitHub: %1$s</string>
     <string name="about_issues_title">Problemi</string>
+    <string name="about_issues">Puoi segnalare bug, proporre miglioramenti e richiedere funzionalità tramite il sistema di tracciamento dei problemi di GitHub: %1$s</string>
     <string name="about_translate_title">Traduci</string>
+    <string name="about_translate">Unisciti al team di Nextcloud su Transifex e aiutaci a tradurre questa applicazione: %1$s</string>
     <string name="about_app_license_title">Licenza applicazione</string>
     <string name="about_app_license">Questa applicazione è rilasciata nei termini della licenza GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Visualizza licenza</string>
     <string name="about_icons_disclaimer_title">Icone</string>
+    <string name="about_icons_disclaimer_app_icon">Per l\'icona originale, vedi %1$s.</string>
+    <string name="about_icons_disclaimer_mdi_icons">Tutte le altre icone utilizzate da questa applicazione sono %1$s realizzate da Google Inc. e rilasciate nei termini della licenza Apache 2.0.</string>
+    <string name="about_icons_disclaimer_mdi">Icone in Material Design</string>
     <string name="about_credits_tab_title">Riconoscimenti</string>
     <string name="about_contribution_tab_title">Contributi</string>
     <string name="about_license_tab_title">Licenza</string>
@@ -99,6 +108,34 @@
     <string name="category_movies">Film</string>
     <string name="category_movie">Film</string>
     <string name="category_work">Lavoro</string>
+    <string name="category_todo">Da fare</string>
+    <string name="category_todos">Cose da fare</string>
+    <string name="category_checklists">Checklist</string>
+    <string name="category_tasks">Compiti</string>
+    <string name="category_recipe">Ricetta</string>
+    <string name="category_recipes">Ricette</string>
+    <string name="category_restaurant">Ristorante</string>
+    <string name="category_restaurants">Ristoranti</string>
+    <string name="category_food">Cibo</string>
+    <string name="category_bake">Cottura al forno</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_key">Chiave</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_keys">Chiavi</string>
+    <string name="category_password">Password</string>
+    <string name="category_passwords">Password</string>
+    <string name="category_credentials">Credenziali</string>
+    <string name="category_game">Gioco</string>
+    <string name="category_games">Giochi</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">Gioca</string>
+    <string name="category_gift">Regalo</string>
+    <string name="category_gifts">Regali</string>
+    <!-- Like a gift -->
+    <string name="category_present">Regalo</string>
+    <!-- Like a gift -->
+    <string name="category_presents">Regali</string>
+
     <string name="account_already_imported">L\'account è già stato importato</string>
     <string name="no_notes_yet">Ancora nessuna nota</string>
     <string name="no_notes_yet_description">Premi il pulsante + per creare una nuova nota</string>
@@ -222,6 +259,8 @@
     <!-- Table cell value of a sample table -->
     <string name="formatting_help_tables_value">Valore %1d</string>
 
+    <string name="formatting_help_images_body_1">I collegamenti devono essere URL completi che iniziano con un protocollo e un dominio di rete o percorsi assoluti che iniziano con un %1$s carattere.</string>
+    <string name="formatting_help_images_body_2">Per conformarsi al formato Markdown, utilizza i caratteri \"escape\" nell\'URL dell\'immagine. Ciò significa, ad esempio, sostituire gli spazi con %1$snell\'URL.</string>
     <string name="formatting_help_images_title">Immagini</string>
     <string name="formatting_help_images_alt">Immagine di fantasia</string>
 
@@ -258,4 +297,7 @@
     <string name="settings_file_suffix_description">Estensione del file per le nuove note nel tuo Nextcloud</string>
     <string name="settings_file_suffix_success">Nuovo suffisso file: %1$s</string>
     <string name="http_status_code">Codice di stato HTTP: %1$d</string>
-    </resources>
+    <string name="progress_import_indeterminate">Importazione note in corso...</string>
+    <string name="progress_import">Importazione nota %1$d di %2$d ...</string>
+    <string name="account_imported">Account importato</string>
+</resources>

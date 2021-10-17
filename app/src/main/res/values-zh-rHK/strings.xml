@@ -256,6 +256,7 @@
     <string name="formatting_help_tables_value">值 %1d</string>
 
     <string name="formatting_help_images_body_1">連結必須是以協議和域開頭的完整 URL 或以 %1$s 字符開頭的絕對路徑。</string>
+    <string name="formatting_help_images_body_2">為了符合 Markdown 格式，請在圖像URL中使用轉義字符。 例如，將空格替換為%1$s。</string>
     <string name="formatting_help_images_title">圖像</string>
     <string name="formatting_help_images_alt">精美圖像</string>
 
