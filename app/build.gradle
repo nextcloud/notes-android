@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion '30.0.3'
+    compileSdkVersion 31
+    buildToolsVersion '31.0.0'
 
     compileOptions {
         coreLibraryDesugaringEnabled true
@@ -13,7 +13,7 @@ android {
     defaultConfig {
         applicationId "it.niedermann.owncloud.notes"
         minSdkVersion 22
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 3004016
         versionName "3.4.16"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -97,7 +97,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.recyclerview:recyclerview-selection:1.1.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
-    implementation 'androidx.work:work-runtime:2.6.0'
+    implementation 'androidx.work:work-runtime:2.7.0'
     implementation 'com.google.android.material:material:1.4.0'
 
     // Database

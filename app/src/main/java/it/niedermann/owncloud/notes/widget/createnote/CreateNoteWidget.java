@@ -1,5 +1,7 @@
 package it.niedermann.owncloud.notes.widget.createnote;
 
+import static it.niedermann.owncloud.notes.shared.util.WidgetUtil.pendingIntentFlagCompat;
+
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -22,8 +24,7 @@ public class CreateNoteWidget extends AppWidgetProvider {
         final var views = new RemoteViews(context.getPackageName(), R.layout.widget_create_note);
         final var intent = new Intent(context, EditNoteActivity.class);
 
-        final var pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        views.setOnClickPendingIntent(R.id.widget_create_note, pendingIntent);
+        views.setOnClickPendingIntent(R.id.widget_create_note, PendingIntent.getActivity(context, 0, intent, pendingIntentFlagCompat(PendingIntent.FLAG_UPDATE_CURRENT)));
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);

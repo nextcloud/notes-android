@@ -9,7 +9,10 @@
         android:id="@+id/single_note_widget_lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/spacer_1x"
+        android:paddingStart="@dimen/widget_inner_padding_horizontal"
+        android:paddingTop="@dimen/widget_inner_padding_vertical"
+        android:paddingEnd="@dimen/widget_inner_padding_horizontal"
+        android:paddingBottom="@dimen/widget_inner_padding_vertical"
         tools:listitem="@layout/widget_single_note_content" />
 
     <TextView
