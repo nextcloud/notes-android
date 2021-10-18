@@ -75,15 +75,15 @@ android {
 }
 
 dependencies {
-    // Markdown
-    implementation project(path: ':markdown')
-
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
     // Nextcloud SSO
     implementation 'com.github.nextcloud:Android-SingleSignOn:0.5.6'
-    implementation 'com.github.stefan-niedermann.nextcloud-commons:sso-glide:1.4.0'
-    implementation 'com.github.stefan-niedermann.nextcloud-commons:exception:1.4.0'
+    implementation 'com.github.stefan-niedermann.nextcloud-commons:sso-glide:1.5.0'
+    implementation 'com.github.stefan-niedermann.nextcloud-commons:exception:1.5.0'
+    implementation('com.github.stefan-niedermann.nextcloud-commons:markdown:1.5.0') {
+        exclude group: 'org.jetbrains', module: 'annotations-java5'
+    }
     implementation 'com.github.stefan-niedermann:android-commons:0.2.0'
 
     // Glide
