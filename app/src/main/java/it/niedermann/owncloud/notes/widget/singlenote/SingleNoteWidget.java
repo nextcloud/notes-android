@@ -1,5 +1,7 @@
 package it.niedermann.owncloud.notes.widget.singlenote;
 
+import static it.niedermann.owncloud.notes.shared.util.WidgetUtil.pendingIntentFlagCompat;
+
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -33,15 +35,13 @@ public class SingleNoteWidget extends AppWidgetProvider {
             if (data != null) {
                 templateIntent.putExtra(BaseNoteFragment.PARAM_ACCOUNT_ID, data.getAccountId());
 
-                final var templatePendingIntent = PendingIntent.getActivity(context, appWidgetId, templateIntent,
-                        PendingIntent.FLAG_UPDATE_CURRENT);
-
                 final var serviceIntent = new Intent(context, SingleNoteWidgetService.class);
                 serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
                 serviceIntent.setData(Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME)));
 
                 final var views = new RemoteViews(context.getPackageName(), R.layout.widget_single_note);
-                views.setPendingIntentTemplate(R.id.single_note_widget_lv, templatePendingIntent);
+                views.setPendingIntentTemplate(R.id.single_note_widget_lv, PendingIntent.getActivity(context, appWidgetId, templateIntent,
+                        pendingIntentFlagCompat(PendingIntent.FLAG_UPDATE_CURRENT)));
                 views.setRemoteAdapter(R.id.single_note_widget_lv, serviceIntent);
                 views.setEmptyView(R.id.single_note_widget_lv, R.id.widget_single_note_placeholder_tv);
 

@@ -4,6 +4,7 @@ import static java.lang.Boolean.TRUE;
 import static it.niedermann.owncloud.notes.NotesApplication.isDarkThemeActive;
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.tintMenuIcon;
 import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
+import static it.niedermann.owncloud.notes.shared.util.WidgetUtil.pendingIntentFlagCompat;
 
 import android.app.PendingIntent;
 import android.content.Context;
@@ -254,7 +255,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                             .setIntent(new Intent(getActivity(), EditNoteActivity.class).putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId()).setAction(ACTION_SHORTCUT))
                             .build();
 
-                    ShortcutManagerCompat.requestPinShortcut(context, pinShortcutInfo, PendingIntent.getBroadcast(context, 0, ShortcutManagerCompat.createShortcutResultIntent(context, pinShortcutInfo), 0).getIntentSender());
+                    ShortcutManagerCompat.requestPinShortcut(context, pinShortcutInfo, PendingIntent.getBroadcast(context, 0, ShortcutManagerCompat.createShortcutResultIntent(context, pinShortcutInfo), pendingIntentFlagCompat(0)).getIntentSender());
                 } else {
                     Log.i(TAG, "RequestPinShortcut is not supported");
                 }

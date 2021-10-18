@@ -1,5 +1,7 @@
 package it.niedermann.owncloud.notes.widget.notelist;
 
+import static it.niedermann.owncloud.notes.shared.util.WidgetUtil.pendingIntentFlagCompat;
+
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -35,13 +37,11 @@ public class NoteListWidget extends AppWidgetProvider {
                 serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
                 serviceIntent.setData(Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME)));
 
-                final var pendingIntent = PendingIntent.getActivity(context, 0, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT | Intent.FILL_IN_COMPONENT);
-
                 Log.v(TAG, "-- data - " + data);
 
                 views = new RemoteViews(context.getPackageName(), R.layout.widget_note_list);
                 views.setRemoteAdapter(R.id.note_list_widget_lv, serviceIntent);
-                views.setPendingIntentTemplate(R.id.note_list_widget_lv, pendingIntent);
+                views.setPendingIntentTemplate(R.id.note_list_widget_lv, PendingIntent.getActivity(context, 0, new Intent(), pendingIntentFlagCompat(PendingIntent.FLAG_UPDATE_CURRENT | Intent.FILL_IN_COMPONENT)));
                 views.setEmptyView(R.id.note_list_widget_lv, R.id.widget_note_list_placeholder_tv);
 
                 awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.note_list_widget_lv);

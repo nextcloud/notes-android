@@ -26,7 +26,6 @@ import org.commonmark.renderer.html.HtmlRenderer;
 
 import java.util.Collections;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Function;
@@ -522,6 +521,9 @@ public class MarkdownUtil {
         assert s != null;
         final String html = RENDERER.render(PARSER.parse(replaceCheckboxesWithEmojis(s)));
         final Spanned spanned = HtmlCompat.fromHtml(html, HtmlCompat.FROM_HTML_MODE_COMPACT);
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
+            return spanned.toString().trim().replaceAll("\n\n", "\n");
+        }
         return spanned.toString().trim();
     }
 }

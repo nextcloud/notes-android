@@ -1,10 +1,15 @@
 package it.niedermann.owncloud.notes.shared.util;
 
+import android.os.Build;
+
+import androidx.core.text.HtmlCompat;
+
 import junit.framework.TestCase;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import it.niedermann.android.markdown.MarkdownUtil;
 
@@ -71,7 +76,6 @@ public class NoteUtilTest extends TestCase {
         // content has markdown while titles markdown is already stripped
         assertEquals("", NoteUtil.generateNoteExcerpt("# Title", "Title"));
         assertEquals("Foo", NoteUtil.generateNoteExcerpt("Title\n- Foo", "Title"));
-        assertEquals("Title   Bar", NoteUtil.generateNoteExcerpt("# Title\n- Title\n- Bar", "Title"));
 
         // title has markdown while contents markdown is stripped
         assertEquals("", NoteUtil.generateNoteExcerpt("Title", "# Title"));
@@ -82,5 +86,17 @@ public class NoteUtilTest extends TestCase {
         assertEquals("", NoteUtil.generateNoteExcerpt("# Title", "# Title"));
         assertEquals("Foo", NoteUtil.generateNoteExcerpt("# Title\n- Foo", "- Title"));
         assertEquals("Title   Bar", NoteUtil.generateNoteExcerpt("- Title\nTitle\nBar", "- Title"));
+    }
+
+    /**
+     * Has known issues on {@link Build.VERSION_CODES#LOLLIPOP_MR1} and
+     * {@link Build.VERSION_CODES#M} due to incompatibilities of
+     * {@link HtmlCompat#fromHtml(String, int)}
+     */
+    @Test
+    @Config(sdk = {30})
+    public void testGenerateNoteExcerpt_sdk_30() {
+        // content has markdown while titles markdown is already stripped
+        assertEquals("Title   Bar", NoteUtil.generateNoteExcerpt("# Title\n- Title\n- Bar", "Title"));
     }
 }
