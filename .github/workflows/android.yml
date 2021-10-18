@@ -19,7 +19,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Lint
-        run: bash ./gradlew lintDebug --stacktrace
+        run: bash ./gradlew lintDevDebug --stacktrace
 
   test:
     name: Unit tests
