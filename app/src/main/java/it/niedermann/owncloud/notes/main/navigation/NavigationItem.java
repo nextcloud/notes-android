@@ -95,6 +95,7 @@ public class NavigationItem {
     }
 
     @Override
+    @NonNull
     public String toString() {
         return "NavigationItem{" +
                 "id='" + id + '\'' +
