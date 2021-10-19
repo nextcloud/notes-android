@@ -12,6 +12,7 @@
     <string name="action_search">Poišči</string>
     <string name="action_sorting_method">Način razvrščanja</string>
     <string name="simple_cancel">Prekliči</string>
+    <string name="simple_switch">Preklopi</string>
     <string name="simple_edit">Uredi</string>
     <string name="simple_remove">Odstrani</string>
     <string name="action_edit_save">Shrani</string>
@@ -72,6 +73,9 @@
     <string name="about_app_license">Program je objavljen pod pogoji Splošnega javnega dovoljenja (GNU GPL) različice 3 ali novejše.</string>
     <string name="about_app_license_button">Podrobno besedilo dovoljenja</string>
     <string name="about_icons_disclaimer_title">Ikone</string>
+    <string name="about_icons_disclaimer_app_icon">Za izvorno ikono si oglejte %1$s.</string>
+    <string name="about_icons_disclaimer_mdi_icons">Vse ostale ikone, uporabljene v programu, so del zbirke %1$s, ki jo je pod pogoji dovoljenja Apache 2.0 objavilo podjetje Google Inc..</string>
+    <string name="about_icons_disclaimer_mdi">Ikone Material Design</string>
     <string name="about_credits_tab_title">Zasluge</string>
     <string name="about_contribution_tab_title">Skupnost</string>
     <string name="about_license_tab_title">Dovoljenje</string>
@@ -104,6 +108,34 @@
     <string name="category_movies">Video</string>
     <string name="category_movie">Video</string>
     <string name="category_work">Delo</string>
+    <string name="category_todo">Naloga</string>
+    <string name="category_todos">Naloge</string>
+    <string name="category_checklists">Zbirni seznam</string>
+    <string name="category_tasks">Naloge</string>
+    <string name="category_recipe">Recept</string>
+    <string name="category_recipes">Recepti</string>
+    <string name="category_restaurant">Restavracija</string>
+    <string name="category_restaurants">Restavracije</string>
+    <string name="category_food">Hrana</string>
+    <string name="category_bake">Peka</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_key">Ključ</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_keys">Ključi</string>
+    <string name="category_password">Geslo</string>
+    <string name="category_passwords">Gesla</string>
+    <string name="category_credentials">Poverila</string>
+    <string name="category_game">Igra</string>
+    <string name="category_games">Igre</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">Igrani nastop</string>
+    <string name="category_gift">Drobna pozornost</string>
+    <string name="category_gifts">Drobne pozornosti</string>
+    <!-- Like a gift -->
+    <string name="category_present">Darilo</string>
+    <!-- Like a gift -->
+    <string name="category_presents">Darila</string>
+
     <string name="account_already_imported">Račun je že bil uvožen</string>
     <string name="no_notes_yet">Ni še dodane nobene zabeležke</string>
     <string name="no_notes_yet_description">Pritisnite gumb + za novo zabeležko</string>
@@ -235,6 +267,8 @@
     <!-- Table cell value of a sample table -->
     <string name="formatting_help_tables_value">Vrednost %1d</string>
 
+    <string name="formatting_help_images_body_1">Povezave so lahko ali polni naslovi URL skupaj z navedbo protokola in domene ali pa absolutne poti, ki se začnejo z znakom %1$s.</string>
+    <string name="formatting_help_images_body_2">Za usklajenost z zapisom Markdown je priporočljivo uporabiti ubežne znake v naslovih URL slik. To pomeni na primer zamenjavo  presledka za znakom %1$s v naslovu URL.</string>
     <string name="formatting_help_images_title">Slike</string>
     <string name="formatting_help_images_alt">Posebna slika</string>
 
@@ -257,6 +291,23 @@
     <string name="remove_account">Odstrani %1$s</string>
 
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Za dodajanje računa mora biti vzpostavljena povezava z omrežjem.</string>
+    <string name="settings_notes_path">Nastavi mapo</string>
+
     <string name="simple_next">Naslednje</string>
     <string name="simple_prev">Predhodno</string>
-    </resources>
+    <string name="simple_backup">Varnostna kopija</string>
+    <string name="backup">Zaznano je neobnovljivo stanje delovanja programa. Ustvarite varnostno kopijo neusklajenih sprememb in počistite shrambo programa Beležka.</string>
+    <string name="settings_notes_path_description">Mapa za shranjevanje sporočilc v okolju Nextcloud</string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
+    <string name="settings_notes_path_success">Nova mapa sporočilc: %1$s</string>
+    <string name="settings_file_suffix">Pripona datotek</string>
+    <string name="settings_file_suffix_description">Privzeta pripona za nova sporočilca v okolju Nextcloud</string>
+    <string name="settings_file_suffix_success">Nova pripona datotek: %1$s</string>
+    <string name="http_status_code">Stanje kode HTTP: %1$d</string>
+    <string name="progress_import_indeterminate">Poteka uvažanje sporočilc ...</string>
+    <string name="progress_import">Poteka uvažanje sporočilca %1$d od %2$d…</string>
+    <string name="account_imported">Račun je uspešno uvožen.</string>
+</resources>
