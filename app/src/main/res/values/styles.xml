@@ -8,7 +8,6 @@
         <item name="colorControlNormal">?attr/colorAccent</item>
         <item name="windowActionModeOverlay">true</item>
         <item name="actionModeStyle">@style/actionModeStyle</item>
-        <item name="appBarLayoutStyle">@style/appBarLayoutStyle</item>
         <item name="toolbarStyle">@style/toolbarStyle</item>
     </style>
 
@@ -17,11 +16,6 @@
     <style name="textViewStyle">
         <item name="colorAccent">@color/cursorHandles</item>
         <item name="android:textColorHighlight">@color/defaultTextHighlightBackground</item>
-    </style>
-
-    <style name="appBarLayoutStyle" parent="@style/Widget.Design.AppBarLayout">
-        <item name="android:paddingStart">@dimen/spacer_activity_sides</item>
-        <item name="android:paddingEnd">@dimen/spacer_activity_sides</item>
     </style>
 
     <style name="toolbarStyle" parent="@style/Widget.AppCompat.Toolbar">

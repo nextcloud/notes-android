@@ -1,10 +1,23 @@
 package it.niedermann.owncloud.notes.main;
 
+import static android.os.Build.VERSION.SDK_INT;
+import static android.os.Build.VERSION_CODES.O;
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+import static it.niedermann.owncloud.notes.NotesApplication.isDarkThemeActive;
+import static it.niedermann.owncloud.notes.NotesApplication.isGridViewEnabled;
+import static it.niedermann.owncloud.notes.branding.BrandingUtil.getSecondaryForegroundColorDependingOnTheme;
+import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.DEFAULT_CATEGORY;
+import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
+import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.RECENT;
+import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.UNCATEGORIZED;
+import static it.niedermann.owncloud.notes.shared.util.NotesColorUtil.contrastRatioIsSufficient;
+import static it.niedermann.owncloud.notes.shared.util.SSOUtil.askForNewAccount;
+
 import android.accounts.NetworkErrorException;
 import android.animation.AnimatorInflater;
 import android.app.SearchManager;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
@@ -15,6 +28,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.SearchView;
@@ -23,7 +37,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.GravityCompat;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.selection.SelectionTracker;
@@ -46,10 +59,7 @@ import com.nextcloud.android.sso.exceptions.UnknownErrorException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 
 import java.net.HttpURLConnection;
-import java.util.Collection;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
@@ -82,7 +92,6 @@ import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesWorker;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
-import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
@@ -90,20 +99,6 @@ import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 import it.niedermann.owncloud.notes.shared.util.CustomAppGlideModule;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
-
-import static android.os.Build.VERSION.SDK_INT;
-import static android.os.Build.VERSION_CODES.O;
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
-import static it.niedermann.owncloud.notes.NotesApplication.isDarkThemeActive;
-import static it.niedermann.owncloud.notes.NotesApplication.isGridViewEnabled;
-import static it.niedermann.owncloud.notes.branding.BrandingUtil.getSecondaryForegroundColorDependingOnTheme;
-import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.DEFAULT_CATEGORY;
-import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
-import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.RECENT;
-import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.UNCATEGORIZED;
-import static it.niedermann.owncloud.notes.shared.util.NotesColorUtil.contrastRatioIsSufficient;
-import static it.niedermann.owncloud.notes.shared.util.SSOUtil.askForNewAccount;
 
 public class MainActivity extends LockedActivity implements NoteClickListener, AccountPickerListener, AccountSwitcherListener, CategoryDialogFragment.CategoryDialogListener {
 
@@ -389,16 +384,19 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     }
 
     private void setupToolbars() {
-        setSupportActionBar(binding.activityNotesListView.toolbar);
+        setSupportActionBar(binding.activityNotesListView.searchToolbar);
         activityBinding.homeToolbar.setOnClickListener((v) -> {
-            if (activityBinding.toolbar.getVisibility() == GONE) {
+            if (activityBinding.searchToolbar.getVisibility() == GONE) {
                 updateToolbars(true);
             }
         });
 
-        activityBinding.menuButton.setOnClickListener((v) -> binding.drawerLayout.openDrawer(GravityCompat.START));
+        final var toggle = new ActionBarDrawerToggle(this, binding.drawerLayout, activityBinding.homeToolbar, 0, 0);
+        binding.drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
         activityBinding.searchView.setOnCloseListener(() -> {
-            if (activityBinding.toolbar.getVisibility() == VISIBLE && TextUtils.isEmpty(activityBinding.searchView.getQuery())) {
+            if (activityBinding.searchToolbar.getVisibility() == VISIBLE && TextUtils.isEmpty(activityBinding.searchView.getQuery())) {
                 updateToolbars(false);
                 return true;
             }
@@ -578,7 +576,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     @Override
     public void applyBrand(int mainColor, int textColor) {
-        applyBrandToPrimaryToolbar(activityBinding.appBar, activityBinding.toolbar);
+        applyBrandToPrimaryToolbar(activityBinding.appBar, activityBinding.searchToolbar);
         applyBrandToFAB(mainColor, textColor, activityBinding.fabCreate);
 
         binding.headerView.setBackgroundColor(mainColor);
@@ -597,7 +595,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     @Override
     public boolean onSupportNavigateUp() {
-        if (activityBinding.toolbar.getVisibility() == VISIBLE) {
+        if (activityBinding.searchToolbar.getVisibility() == VISIBLE) {
             updateToolbars(false);
             return true;
         } else {
@@ -697,7 +695,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                 runOnUiThread(() -> status$.observe(this, (status) -> {
                                     importSnackbar.show();
                                     Log.v(TAG, "Status: " + status.count + " of " + status.total);
-                                    if(status.count > 0) {
+                                    if (status.count > 0) {
                                         importSnackbar.setText(getString(R.string.progress_import, status.count + 1, status.total));
                                     }
                                 }));
@@ -750,7 +748,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     @Override
     public void onBackPressed() {
-        if (activityBinding.toolbar.getVisibility() == VISIBLE) {
+        if (activityBinding.searchToolbar.getVisibility() == VISIBLE) {
             updateToolbars(false);
         } else if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             binding.drawerLayout.closeDrawer(GravityCompat.START);
@@ -761,10 +759,10 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     private void updateToolbars(boolean enableSearch) {
         activityBinding.homeToolbar.setVisibility(enableSearch ? GONE : VISIBLE);
-        activityBinding.toolbar.setVisibility(enableSearch ? VISIBLE : GONE);
+        activityBinding.searchToolbar.setVisibility(enableSearch ? VISIBLE : GONE);
         activityBinding.appBar.setStateListAnimator(AnimatorInflater.loadStateListAnimator(activityBinding.appBar.getContext(), enableSearch
-                        ? R.animator.appbar_elevation_on
-                        : R.animator.appbar_elevation_off));
+                ? R.animator.appbar_elevation_on
+                : R.animator.appbar_elevation_off));
         if (enableSearch) {
             activityBinding.searchView.setIconified(false);
             fabCreate.show();

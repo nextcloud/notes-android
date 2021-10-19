@@ -31,7 +31,7 @@ public class AppendToNoteActivity extends MainActivity {
         } else {
             Log.e(TAG, "SupportActionBar is null. Expected toolbar to be present to set a title.");
         }
-        binding.activityNotesListView.toolbar.setSubtitle(receivedText);
+        binding.activityNotesListView.searchToolbar.setSubtitle(receivedText);
     }
 
     @Override

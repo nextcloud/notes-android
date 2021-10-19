@@ -28,9 +28,9 @@ public class SingleNoteWidgetConfigurationActivity extends MainActivity {
         setResult(Activity.RESULT_CANCELED);
 
         fabCreate.setVisibility(View.GONE);
-        final var toolbar = binding.activityNotesListView.toolbar;
+        final var searchToolbar = binding.activityNotesListView.searchToolbar;
         final var swipeRefreshLayout = binding.activityNotesListView.swiperefreshlayout;
-        toolbar.setTitle(R.string.activity_select_single_note);
+        searchToolbar.setTitle(R.string.activity_select_single_note);
         swipeRefreshLayout.setEnabled(false);
         swipeRefreshLayout.setRefreshing(false);
     }
