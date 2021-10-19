@@ -97,9 +97,8 @@
     <string name="widget_note_list_placeholder">No notes</string>
     <string name="widget_single_note_title">Single note</string>
     <string name="widget_single_note_placeholder_tv">Note not found</string>
-    <string name="widget_create_note">Create Note</string>
     <string name="widget_not_logged_in">Please login to Notes before using this widget</string>
-    <string name="widget_entry_fav_contentDescription">Star icon is used to denote an item as a favourite</string>
+    <string name="widget_entry_fav_contentDescription">Star icon is used to denote an item as a favorite</string>
 
     <string name="activity_select_single_note">Select note</string>
 
