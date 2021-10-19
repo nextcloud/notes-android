@@ -5,6 +5,8 @@ import static java.util.Collections.singletonList;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Build;
 import android.util.TypedValue;
@@ -13,12 +15,13 @@ import android.view.WindowInsets;
 
 import androidx.annotation.NonNull;
 import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.main.navigation.NavigationAdapter;
@@ -50,19 +53,28 @@ public class DisplayUtils {
 
     public static NavigationItem.CategoryNavigationItem convertToCategoryNavigationItem(@NonNull Context context, @NonNull CategoryWithNotesCount counter) {
         final var res = context.getResources();
+        final var englishRes = getEnglishResources(context);
         final String category = counter.getCategory().replaceAll("\\s+", "");
         int icon = NavigationAdapter.ICON_FOLDER;
 
         for (Map.Entry<Integer, Collection<Integer>> replacement : SPECIAL_CATEGORY_REPLACEMENTS.entrySet()) {
-            if (replacement.getValue().stream()
-                    .map(res::getString)
-                    .map(str -> str.replaceAll("\\s+", ""))
+            if (Stream.concat(
+                    replacement.getValue().stream().map(res::getString),
+                    replacement.getValue().stream().map(englishRes::getString)
+            ).map(str -> str.replaceAll("\\s+", ""))
                     .anyMatch(r -> r.equalsIgnoreCase(category))) {
                 icon = replacement.getKey();
                 break;
             }
         }
         return new NavigationItem.CategoryNavigationItem("category:" + counter.getCategory(), counter.getCategory(), counter.getTotalNotes(), icon, counter.getAccountId(), counter.getCategory());
+    }
+
+    @NonNull
+    private static Resources getEnglishResources(@NonNull Context context) {
+        final var config = new Configuration(context.getResources().getConfiguration());
+        config.setLocale(new Locale("en"));
+        return context.createConfigurationContext(config).getResources();
     }
 
     /**
