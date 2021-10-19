@@ -140,20 +140,6 @@
         </activity>
 
         <receiver
-            android:name=".widget.createnote.CreateNoteWidget"
-            android:label="@string/widget_create_note"
-            android:exported="true">
-
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/create_note_widget_provider" />
-        </receiver>
-
-        <receiver
             android:name=".widget.singlenote.SingleNoteWidget"
             android:label="@string/widget_single_note_title"
             android:exported="true">

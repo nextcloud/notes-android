@@ -1,9 +1,0 @@
-<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/widget_create_note"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/widget_margin"
-    android:clickable="true"
-    android:contentDescription="@string/widget_create_note"
-    android:focusable="true"
-    android:src="@drawable/ic_widget_create" />

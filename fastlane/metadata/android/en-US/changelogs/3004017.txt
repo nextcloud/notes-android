@@ -1,0 +1,1 @@
+- 🚫 Removed "Create note widget" in favor of quick settings tile (in your notification area) and shortcuts (press long on the app icon)
