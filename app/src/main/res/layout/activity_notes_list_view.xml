@@ -42,7 +42,7 @@
                 android:layout_marginEnd="@dimen/spacer_1x"
                 android:layout_marginBottom="@dimen/spacer_1hx"
                 app:cardBackgroundColor="@color/appbar"
-                app:cardCornerRadius="@dimen/spacer_1x"
+                app:cardCornerRadius="@dimen/spacer_4x"
                 app:cardElevation="2dp"
                 app:strokeWidth="0dp">
 
