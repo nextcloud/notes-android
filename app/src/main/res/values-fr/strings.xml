@@ -75,10 +75,7 @@
     <string name="widget_note_list_placeholder">Aucune note</string>
     <string name="widget_single_note_title">Une seule note</string>
     <string name="widget_single_note_placeholder_tv">Note non trouvée</string>
-    <string name="widget_create_note">Créer une note</string>
     <string name="widget_not_logged_in">Veuillez vous connecter à Notes avant d\'utiliser ce widget</string>
-    <string name="widget_entry_fav_contentDescription">L\'icône étoile est utilisée pour désigner un élément comme favori</string>
-
     <string name="activity_select_single_note">Choisir une note</string>
 
     <string name="shortcut_create_long">Créer une nouvelle note</string>

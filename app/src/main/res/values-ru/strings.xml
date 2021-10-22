@@ -83,10 +83,7 @@
     <string name="widget_note_list_placeholder">Заметок нет</string>
     <string name="widget_single_note_title">Одна заметка</string>
     <string name="widget_single_note_placeholder_tv">Заметка не найдена</string>
-    <string name="widget_create_note">Создать заметку</string>
     <string name="widget_not_logged_in">Для использования виджета необходимо выполнить вход в приложении «Заметки»</string>
-    <string name="widget_entry_fav_contentDescription">Используйте звёздочку для исключения заметки из избранного</string>
-
     <string name="activity_select_single_note">Выберите заметку</string>
 
     <string name="shortcut_create_long">Создать новую заметку</string>

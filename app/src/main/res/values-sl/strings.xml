@@ -84,10 +84,7 @@
     <string name="widget_note_list_placeholder">Ni zabeležk</string>
     <string name="widget_single_note_title">Samostojna zabeležka</string>
     <string name="widget_single_note_placeholder_tv">Zabeležke ni mogoče najti</string>
-    <string name="widget_create_note">Ustvari zabeležko</string>
     <string name="widget_not_logged_in">Pred uporabo gradnika se je treba prijaviti v program Beležka Notes</string>
-    <string name="widget_entry_fav_contentDescription">Zvezdica označuje priljubljene predmete</string>
-
     <string name="activity_select_single_note">Izbor zabeležke</string>
 
     <string name="shortcut_create_long">Ustvari novo zabeležko</string>

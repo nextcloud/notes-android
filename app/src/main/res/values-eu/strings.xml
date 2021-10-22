@@ -84,10 +84,7 @@
     <string name="widget_note_list_placeholder">Oharrik ez</string>
     <string name="widget_single_note_title">Ohar bakarra</string>
     <string name="widget_single_note_placeholder_tv">Oharra ez da aurkitu</string>
-    <string name="widget_create_note">Sortu oharra</string>
     <string name="widget_not_logged_in">Hasi saioa oharrak aplikazioan trepeta hau erabili aurretik</string>
-    <string name="widget_entry_fav_contentDescription">Izarraren ikonoa elementu bat gogoko gisa adierazteko erabiltzen da</string>
-
     <string name="activity_select_single_note">Hautatu oharra</string>
 
     <string name="shortcut_create_long">Sortu ohar berria</string>

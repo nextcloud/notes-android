@@ -84,7 +84,6 @@
     <string name="widget_note_list_placeholder">Keine Notizen</string>
     <string name="widget_single_note_title">Eine Notiz</string>
     <string name="widget_single_note_placeholder_tv">Notiz nicht gefunden</string>
-    <string name="widget_create_note">Notiz erstellen</string>
     <string name="widget_not_logged_in">Bitte melden Sie sich bei Notes vor Nutzung des Widgets an</string>
     <string name="widget_entry_fav_contentDescription">Das Stern-Symbol markiert den Eintrag als Favorit</string>
 

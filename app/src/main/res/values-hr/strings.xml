@@ -75,10 +75,7 @@
     <string name="widget_note_list_placeholder">Nema bilješki</string>
     <string name="widget_single_note_title">Jedna bilješka</string>
     <string name="widget_single_note_placeholder_tv">Bilješka nije pronađena</string>
-    <string name="widget_create_note">Stvori bilješku</string>
     <string name="widget_not_logged_in">Prijavite se u aplikaciju Bilješke prije korištenja ovog widgeta</string>
-    <string name="widget_entry_fav_contentDescription">Ikona zvjezdice upotrebljava se za označavanje stavke kao favorita</string>
-
     <string name="activity_select_single_note">Odaberi bilješku</string>
 
     <string name="shortcut_create_long">Stvori novu bilješku</string>

@@ -84,10 +84,7 @@
     <string name="widget_note_list_placeholder">Sem anotações</string>
     <string name="widget_single_note_title">Anotação simples</string>
     <string name="widget_single_note_placeholder_tv">Anotação não encontrada</string>
-    <string name="widget_create_note">Criar anotação</string>
     <string name="widget_not_logged_in">Faça login no Notes antes de usar este widget</string>
-    <string name="widget_entry_fav_contentDescription">O ícone da estrela é usado para marcar um item como favorito</string>
-
     <string name="activity_select_single_note">Selecionar anotação</string>
 
     <string name="shortcut_create_long">Criar uma nova anotação</string>

@@ -84,7 +84,6 @@
     <string name="widget_note_list_placeholder">Žádné poznámky</string>
     <string name="widget_single_note_title">Jediná poznámka</string>
     <string name="widget_single_note_placeholder_tv">Poznámka nenalezena</string>
-    <string name="widget_create_note">Vytvořit poznámku</string>
     <string name="widget_not_logged_in">Abyste mohli využívat tuto miniaplikaci plochy, přihlaste se  do aplikace Poznámky</string>
     <string name="widget_entry_fav_contentDescription">Ikonka hvězdičky slouží pro označení položky jako oblíbené</string>
 
