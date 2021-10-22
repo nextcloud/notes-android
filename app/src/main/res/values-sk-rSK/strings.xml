@@ -84,7 +84,6 @@
     <string name="widget_note_list_placeholder">Nie sú žiadne poznámky</string>
     <string name="widget_single_note_title">Jedna poznámka</string>
     <string name="widget_single_note_placeholder_tv">Poznámky sa nenašli</string>
-    <string name="widget_create_note">Vytvoriť poznámku</string>
     <string name="widget_not_logged_in">Prihláste sa prosím do Poznámok skôr než začnete používať tento widget</string>
     <string name="widget_entry_fav_contentDescription">Ikona hviezdičky označuje položku ako obľúbenú</string>
 

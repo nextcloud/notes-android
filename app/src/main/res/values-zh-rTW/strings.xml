@@ -75,10 +75,7 @@
     <string name="widget_note_list_placeholder">沒有筆記</string>
     <string name="widget_single_note_title">單則筆記</string>
     <string name="widget_single_note_placeholder_tv">找不到筆記</string>
-    <string name="widget_create_note">建立筆記</string>
     <string name="widget_not_logged_in">在使用此小工具之前，請先登入到 Notes</string>
-    <string name="widget_entry_fav_contentDescription">星星圖示用來標示某則筆記在「我的最愛」中</string>
-
     <string name="activity_select_single_note">選擇筆記</string>
 
     <string name="shortcut_create_long">建立新筆記</string>

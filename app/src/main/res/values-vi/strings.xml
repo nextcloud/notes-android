@@ -83,10 +83,7 @@
     <string name="widget_note_list_placeholder">Không có ghi chú</string>
     <string name="widget_single_note_title">Ghi chú đơn</string>
     <string name="widget_single_note_placeholder_tv">Không tìm thấy ghi chú</string>
-    <string name="widget_create_note">Tạo ghi chú</string>
     <string name="widget_not_logged_in">Vui lòng đăng nhập vào Ghi chú trước khi sử dụng tiện ích này</string>
-    <string name="widget_entry_fav_contentDescription">Biểu tượng sao được sử dụng để chỉ ra rằng một mục được yêu thích</string>
-
     <string name="activity_select_single_note">Chọn ghi chú</string>
 
     <string name="shortcut_create_long">Tạo một ghi chú mới</string>

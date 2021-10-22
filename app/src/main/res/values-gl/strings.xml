@@ -72,10 +72,7 @@
     <string name="widget_note_list_placeholder">Non hai notas</string>
     <string name="widget_single_note_title">Nota única</string>
     <string name="widget_single_note_placeholder_tv">Non se atopou a nota</string>
-    <string name="widget_create_note">Crear unha nota</string>
     <string name="widget_not_logged_in">Acceda a Notas antes de empregar este trebello</string>
-    <string name="widget_entry_fav_contentDescription">A icona de estrela empregase para indicar que o elemento é un favorito</string>
-
     <string name="activity_select_single_note">Seleccionar unha nota</string>
 
     <string name="shortcut_create_long">Crear unha nota nova</string>

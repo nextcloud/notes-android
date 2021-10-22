@@ -74,10 +74,7 @@
     <string name="widget_note_list_placeholder">Ei muistiinpanoja</string>
     <string name="widget_single_note_title">Yksittäinen muistiinpano</string>
     <string name="widget_single_note_placeholder_tv">Muistiinpanoa ei löytynyt</string>
-    <string name="widget_create_note">Luo muistiinpano</string>
     <string name="widget_not_logged_in">Kirjaudu Notes sovellukseen ennen kuin käytät pienoissovellusta</string>
-    <string name="widget_entry_fav_contentDescription">Tähtikuvaketta käytetään suosikkikohteen ilmaisemiseen</string>
-
     <string name="activity_select_single_note">Valitse muistiinpano</string>
 
     <string name="shortcut_create_long">Luo uusi muistiinpano</string>

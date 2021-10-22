@@ -84,7 +84,6 @@
     <string name="widget_note_list_placeholder">Няма бележки</string>
     <string name="widget_single_note_title">Единична бележка</string>
     <string name="widget_single_note_placeholder_tv">Бележката не е открита</string>
-    <string name="widget_create_note">Създаване на бележка</string>
     <string name="widget_not_logged_in">Моля, влезте в Notes преди да използвате този изпълним модул</string>
     <string name="widget_entry_fav_contentDescription">Иконата със звезда се използва за обозначаване на елемент като любим</string>
 
@@ -108,8 +107,8 @@
     <string name="category_movies">Филми</string>
     <string name="category_movie">Филм</string>
     <string name="category_work">Служебен</string>
-    <string name="category_todo">Да направя</string>
-    <string name="category_todos">Да направя и</string>
+    <string name="category_todo">ToDo/задача/</string>
+    <string name="category_todos">ToDos/задачи/</string>
     <string name="category_checklists">Контролни списъци</string>
     <string name="category_tasks">Задачи</string>
     <string name="category_recipe">Рецепта</string>

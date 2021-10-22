@@ -12,6 +12,7 @@
     <string name="action_search">Buscar</string>
     <string name="action_sorting_method">Método de orden</string>
     <string name="simple_cancel">Cancelar</string>
+    <string name="simple_switch">Cambiar</string>
     <string name="simple_edit">Editar</string>
     <string name="simple_remove">Borrar</string>
     <string name="action_edit_save">Guardar</string>
@@ -83,7 +84,6 @@
     <string name="widget_note_list_placeholder">No hay notas</string>
     <string name="widget_single_note_title">Nota única</string>
     <string name="widget_single_note_placeholder_tv">Nota no encontrada</string>
-    <string name="widget_create_note">Crear nota</string>
     <string name="widget_not_logged_in">Por favor, inicia sesión en Notas antes de usar este widget</string>
     <string name="widget_entry_fav_contentDescription">El icono de estrella se usa para indicar que el elemento es un favorito</string>
 
@@ -107,6 +107,34 @@
     <string name="category_movies">Películas</string>
     <string name="category_movie">Película</string>
     <string name="category_work">Trabajo</string>
+    <string name="category_todo">Pendiente</string>
+    <string name="category_todos">Pendientes</string>
+    <string name="category_checklists">Listas de verificación</string>
+    <string name="category_tasks">Tareas</string>
+    <string name="category_recipe">Receta</string>
+    <string name="category_recipes">Recetas</string>
+    <string name="category_restaurant">Restaurante</string>
+    <string name="category_restaurants">Restaurantes</string>
+    <string name="category_food">Comida</string>
+    <string name="category_bake">Hornear</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_key">Llave</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_keys">Llaves</string>
+    <string name="category_password">Contraseña</string>
+    <string name="category_passwords">Contraseñas</string>
+    <string name="category_credentials">Credencial</string>
+    <string name="category_game">Juego</string>
+    <string name="category_games">Juegos</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">Reproducir</string>
+    <string name="category_gift">Regalo</string>
+    <string name="category_gifts">Regalos</string>
+    <!-- Like a gift -->
+    <string name="category_present">Presente</string>
+    <!-- Like a gift -->
+    <string name="category_presents">Presentes</string>
+
     <string name="account_already_imported">La cuenta ha sido importada</string>
     <string name="no_notes_yet">Aún no hay notas</string>
     <string name="no_notes_yet_description">Pulsa el botón + para crear una nota nueva</string>
@@ -230,6 +258,8 @@
     <!-- Table cell value of a sample table -->
     <string name="formatting_help_tables_value">Valor %1d</string>
 
+    <string name="formatting_help_images_body_1">Los enlaces deben ser URL completas que comiencen con un protocolo y dominio o rutas absolutas que comiencen con el caracter %1$s.</string>
+    <string name="formatting_help_images_body_2">Para cumplir con el formato Markdown, utilice caracteres de escape en la URL de la imagen. Esto significa, por ejemplo, reemplazar espacios con %1$s en la URL.</string>
     <string name="formatting_help_images_title">Imágenes</string>
     <string name="formatting_help_images_alt">Imagen elegante</string>
 
@@ -266,4 +296,7 @@
     <string name="settings_file_suffix_description">Extensión de archivo para nuevas notas en su Nextcloud</string>
     <string name="settings_file_suffix_success">Nuevo sufijo de archivo: %1$s</string>
     <string name="http_status_code">Código de estado HTTP: %1$d</string>
-    </resources>
+    <string name="progress_import_indeterminate">Importando notas…</string>
+    <string name="progress_import">Importando nota %1$d de %2$d…</string>
+    <string name="account_imported">Cuenta importada.</string>
+</resources>

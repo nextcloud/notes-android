@@ -75,10 +75,7 @@
     <string name="widget_note_list_placeholder">No hi ha notes</string>
     <string name="widget_single_note_title">Una nota</string>
     <string name="widget_single_note_placeholder_tv">No s\'ha trobat la nota</string>
-    <string name="widget_create_note">Crea una nota</string>
     <string name="widget_not_logged_in">Inicieu la sessió a l\'aplicació Notes abans d\'utilitzar aquest giny</string>
-    <string name="widget_entry_fav_contentDescription">La icona de l\'estrella serveix per a marcar un element com a preferit</string>
-
     <string name="activity_select_single_note">Seleccioneu una nota</string>
 
     <string name="shortcut_create_long">Crea una nota nova</string>

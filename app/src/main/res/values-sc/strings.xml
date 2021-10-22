@@ -75,10 +75,7 @@
     <string name="widget_note_list_placeholder">Peruna nota</string>
     <string name="widget_single_note_title">Nota sìngula</string>
     <string name="widget_single_note_placeholder_tv">Nota no agatada</string>
-    <string name="widget_create_note">Crea Nota</string>
     <string name="widget_not_logged_in">Incarca su butone + pro creare una nota noa</string>
-    <string name="widget_entry_fav_contentDescription">S\'icona de s\'isteddu s\'impreat pro marcare un\'elementu comente preferidu</string>
-
     <string name="activity_select_single_note">Seletziona nota</string>
 
     <string name="shortcut_create_long">Crea una nota noa</string>

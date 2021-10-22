@@ -84,10 +84,7 @@
     <string name="widget_note_list_placeholder">Nincsenek jegyzetek</string>
     <string name="widget_single_note_title">Egyszeri jegyzet</string>
     <string name="widget_single_note_placeholder_tv">Jegyzet nem található</string>
-    <string name="widget_create_note">Jegyzet létrehozása</string>
     <string name="widget_not_logged_in">Jelentkezzen be a Jegyzetekbe mielőtt ezt a modult használná</string>
-    <string name="widget_entry_fav_contentDescription">A csillag ikon az elem kedvencként megjelölésére szolgál</string>
-
     <string name="activity_select_single_note">Válasszon jegyzetet</string>
 
     <string name="shortcut_create_long">Új jegyzet létrehozása</string>
