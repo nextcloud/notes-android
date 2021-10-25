@@ -85,6 +85,8 @@
     <string name="widget_single_note_title">Ohar bakarra</string>
     <string name="widget_single_note_placeholder_tv">Oharra ez da aurkitu</string>
     <string name="widget_not_logged_in">Hasi saioa oharrak aplikazioan trepeta hau erabili aurretik</string>
+    <string name="widget_entry_fav_contentDescription">Izarraren ikonoa elementu bat gogoko gisa adierazteko erabiltzen da</string>
+
     <string name="activity_select_single_note">Hautatu oharra</string>
 
     <string name="shortcut_create_long">Sortu ohar berria</string>
@@ -107,12 +109,14 @@
     <string name="category_work">Lana</string>
     <string name="category_todo">Egiteke</string>
     <string name="category_todos">Egitekoak</string>
+    <string name="category_checklists">Kontrol-zerrendak</string>
     <string name="category_tasks">Zereginak</string>
     <string name="category_recipe">Errezeta</string>
     <string name="category_recipes">Errezetak</string>
     <string name="category_restaurant">Jatetxea</string>
     <string name="category_restaurants">Jatetxeak</string>
     <string name="category_food">Janaria</string>
+    <string name="category_bake">Egosi</string>
     <!-- This represents a category where one can place passwords and credentials -->
     <string name="category_key">Gakoa</string>
     <!-- This represents a category where one can place passwords and credentials -->
@@ -254,6 +258,7 @@
     <!-- Table cell value of a sample table -->
     <string name="formatting_help_tables_value">%1dbalioa</string>
 
+    <string name="formatting_help_images_body_2">Markdown formatua betetzeko, mesedez, erabili ihespen karaktereak irudiaren URLan. Hau da, ordeztu tarteak %1$s karakterearekin URLan.</string>
     <string name="formatting_help_images_title">Irudiak</string>
     <string name="formatting_help_images_alt">Irudi dotorea</string>
 
