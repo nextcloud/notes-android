@@ -1,5 +1,21 @@
 package it.niedermann.owncloud.notes.main;
 
+import static androidx.lifecycle.Transformations.distinctUntilChanged;
+import static androidx.lifecycle.Transformations.map;
+import static androidx.lifecycle.Transformations.switchMap;
+import static java.net.HttpURLConnection.HTTP_NOT_MODIFIED;
+import static it.niedermann.owncloud.notes.main.MainActivity.ADAPTER_KEY_RECENT;
+import static it.niedermann.owncloud.notes.main.MainActivity.ADAPTER_KEY_STARRED;
+import static it.niedermann.owncloud.notes.main.slots.SlotterUtil.fillListByCategory;
+import static it.niedermann.owncloud.notes.main.slots.SlotterUtil.fillListByInitials;
+import static it.niedermann.owncloud.notes.main.slots.SlotterUtil.fillListByTime;
+import static it.niedermann.owncloud.notes.shared.model.CategorySortingMethod.SORT_MODIFIED_DESC;
+import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.DEFAULT_CATEGORY;
+import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
+import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.RECENT;
+import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.UNCATEGORIZED;
+import static it.niedermann.owncloud.notes.shared.util.DisplayUtils.convertToCategoryNavigationItem;
+
 import android.accounts.NetworkErrorException;
 import android.app.Application;
 import android.content.Context;
@@ -19,13 +35,14 @@ import androidx.lifecycle.SavedStateHandle;
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
+import com.nextcloud.android.sso.exceptions.UnknownErrorException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
-import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
@@ -49,22 +66,6 @@ import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
 import it.niedermann.owncloud.notes.shared.model.ImportStatus;
 import it.niedermann.owncloud.notes.shared.model.Item;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
-
-import static androidx.lifecycle.Transformations.distinctUntilChanged;
-import static androidx.lifecycle.Transformations.map;
-import static androidx.lifecycle.Transformations.switchMap;
-import static it.niedermann.owncloud.notes.main.MainActivity.ADAPTER_KEY_RECENT;
-import static it.niedermann.owncloud.notes.main.MainActivity.ADAPTER_KEY_STARRED;
-import static it.niedermann.owncloud.notes.main.slots.SlotterUtil.fillListByCategory;
-import static it.niedermann.owncloud.notes.main.slots.SlotterUtil.fillListByInitials;
-import static it.niedermann.owncloud.notes.main.slots.SlotterUtil.fillListByTime;
-import static it.niedermann.owncloud.notes.shared.model.CategorySortingMethod.SORT_MODIFIED_DESC;
-import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.DEFAULT_CATEGORY;
-import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
-import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.RECENT;
-import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.UNCATEGORIZED;
-import static it.niedermann.owncloud.notes.shared.util.DisplayUtils.convertToCategoryNavigationItem;
-import static java.net.HttpURLConnection.HTTP_NOT_MODIFIED;
 
 public class MainViewModel extends AndroidViewModel {
 
@@ -351,7 +352,7 @@ public class MainViewModel extends AndroidViewModel {
                 lastSecondaryCategory.icon = NavigationAdapter.ICON_SUB_MULTIPLE;
             } else if (belongsToLastPrimaryCategory) {
                 if (isCategoryOpen) {
-                    if(currentSecondaryCategory == null) {
+                    if (currentSecondaryCategory == null) {
                         throw new IllegalStateException("Current secondary category is null. Last primary category: " + lastPrimaryCategory);
                     }
                     item.label = currentSecondaryCategory;
@@ -620,5 +621,46 @@ public class MainViewModel extends AndroidViewModel {
             }
         }
         return noteContents.toString();
+    }
+
+    /**
+     * @return <code>true</code> if {@param exceptions} contains at least one exception which is not caused by flaky infrastructure.
+     * @see <a href="https://github.com/stefan-niedermann/nextcloud-notes/issues/1303">Issue #1303</a>
+     */
+    public boolean containsNonInfrastructureRelatedItems(@Nullable Collection<Throwable> exceptions) {
+        if (exceptions == null || exceptions.isEmpty()) {
+            return false;
+        }
+
+        return exceptions.stream().anyMatch(e -> !exceptionIsInfrastructureRelated(e));
+    }
+
+    private boolean exceptionIsInfrastructureRelated(@Nullable Throwable e) {
+        if (e == null) {
+            return false;
+        }
+
+        if (e instanceof RuntimeException || e instanceof UnknownErrorException) {
+            if (isSoftwareCausedConnectionAbort(e.getMessage()) || isNetworkUnreachable(e.getMessage())) {
+                return true;
+            }
+        }
+
+        return exceptionIsInfrastructureRelated(e.getCause());
+    }
+
+    private boolean isSoftwareCausedConnectionAbort(@Nullable String input) {
+        if (input == null) {
+            return false;
+        }
+        return input.toLowerCase(Locale.ROOT).contains("software caused connection abort");
+    }
+
+    private boolean isNetworkUnreachable(@Nullable String input) {
+        if (input == null) {
+            return false;
+        }
+        final var lower = input.toLowerCase(Locale.ROOT);
+        return lower.contains("failed to connect") && lower.contains("network is unreachable");
     }
 }

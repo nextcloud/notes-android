@@ -212,10 +212,14 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
         mainViewModel.hasMultipleAccountsConfigured().observe(this, hasMultipleAccountsConfigured -> canMoveNoteToAnotherAccounts = hasMultipleAccountsConfigured);
         mainViewModel.getSyncStatus().observe(this, syncStatus -> swipeRefreshLayout.setRefreshing(syncStatus));
-        mainViewModel.getSyncErrors().observe(this, exceptions -> BrandedSnackbar.make(coordinatorLayout, R.string.error_synchronization, Snackbar.LENGTH_LONG)
-                .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(exceptions)
-                        .show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()))
-                .show());
+        mainViewModel.getSyncErrors().observe(this, exceptions -> {
+            if (mainViewModel.containsNonInfrastructureRelatedItems(exceptions)) {
+                BrandedSnackbar.make(coordinatorLayout, R.string.error_synchronization, Snackbar.LENGTH_LONG)
+                        .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(exceptions)
+                                .show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()))
+                        .show();
+            }
+        });
         mainViewModel.getSelectedCategory().observe(this, (selectedCategory) -> {
             binding.activityNotesListView.emptyContentView.getRoot().setVisibility(GONE);
             adapter.setShowCategory(selectedCategory.getType() == RECENT || selectedCategory.getType() == FAVORITES);
@@ -306,7 +310,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                     .apply(RequestOptions.circleCropTransform())
                     .into(activityBinding.launchAccountSwitcher);
 
-            mainViewModel.synchronizeNotes(nextAccount, new IResponseCallback<Void>() {
+            mainViewModel.synchronizeNotes(nextAccount, new IResponseCallback<>() {
                 @Override
                 public void onSuccess(Void v) {
                     Log.d(TAG, "Successfully synchronized notes for " + nextAccount.getAccountName());
