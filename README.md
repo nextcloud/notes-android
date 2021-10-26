@@ -9,7 +9,7 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 
 ## :arrow_forward: Access
 
-[![Latest Release](https://img.shields.io/github/v/tag/stefan-niedermann/nextcloud-notes?label=latest+release&sort=semver)](https://github.com/stefan-niedermann/nextcloud-notes/releases)
+[![Latest Release](https://img.shields.io/github/v/tag/stefan-niedermann/nextcloud-notes?label=latest+release&sort=semver)](https://github.com/stefan-niedermann/nextcloud-notes/tags)
 [![F-Droid Release](https://img.shields.io/f-droid/v/it.niedermann.owncloud.notes)](https://f-droid.org/de/packages/it.niedermann.owncloud.notes/)
 
 [<img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"
