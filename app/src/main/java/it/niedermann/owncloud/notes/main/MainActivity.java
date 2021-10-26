@@ -210,9 +210,9 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             }
         });
 
-        mainViewModel.hasMultipleAccountsConfigured().observe(this, (hasMultipleAccountsConfigured) -> canMoveNoteToAnotherAccounts = hasMultipleAccountsConfigured);
-        mainViewModel.getSyncStatus().observe(this, (syncStatus) -> swipeRefreshLayout.setRefreshing(syncStatus));
-        mainViewModel.getSyncErrors().observe(this, (exceptions) -> BrandedSnackbar.make(coordinatorLayout, R.string.error_synchronization, Snackbar.LENGTH_LONG)
+        mainViewModel.hasMultipleAccountsConfigured().observe(this, hasMultipleAccountsConfigured -> canMoveNoteToAnotherAccounts = hasMultipleAccountsConfigured);
+        mainViewModel.getSyncStatus().observe(this, syncStatus -> swipeRefreshLayout.setRefreshing(syncStatus));
+        mainViewModel.getSyncErrors().observe(this, exceptions -> BrandedSnackbar.make(coordinatorLayout, R.string.error_synchronization, Snackbar.LENGTH_LONG)
                 .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(exceptions)
                         .show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()))
                 .show());
@@ -666,7 +666,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                     AccountImporter.onActivityResult(requestCode, resultCode, data, this, (ssoAccount) -> {
                         CapabilitiesWorker.update(this);
                         executor.submit(() -> {
-                            final var importSnackbar = BrandedSnackbar.make(binding.drawerLayout, R.string.progress_import_indeterminate, Snackbar.LENGTH_INDEFINITE);
+                            final var importSnackbar = BrandedSnackbar.make(coordinatorLayout, R.string.progress_import_indeterminate, Snackbar.LENGTH_INDEFINITE);
                             Log.i(TAG, "Added account: " + "name:" + ssoAccount.name + ", " + ssoAccount.url + ", userId" + ssoAccount.userId);
                             try {
                                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);

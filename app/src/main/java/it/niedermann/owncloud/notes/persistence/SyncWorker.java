@@ -13,9 +13,8 @@ import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
 import java.util.Objects;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-
-import it.niedermann.owncloud.notes.persistence.entity.Account;
 
 public class SyncWorker extends Worker {
 
@@ -34,19 +33,31 @@ public class SyncWorker extends Worker {
     @Override
     public Result doWork() {
         final var repo = NotesRepository.getInstance(getApplicationContext());
-        for (final var account : repo.getAccounts()) {
+        final var accounts = repo.getAccounts();
+        final var latch = new CountDownLatch(accounts.size());
+
+        for (final var account : accounts) {
             Log.v(TAG, "Starting background synchronization for " + account.getAccountName());
-            repo.addCallbackPull(account, () -> Log.v(TAG, "Finished background synchronization for " + account.getAccountName()));
+            repo.addCallbackPull(account, () -> {
+                Log.v(TAG, "Finished background synchronization for " + account.getAccountName());
+                latch.countDown();
+            });
             repo.scheduleSync(account, false);
         }
-        // TODO return result depending on callbackPull
-        return Result.success();
+
+        try {
+            latch.await();
+            return Result.success();
+        } catch (InterruptedException e) {
+            return Result.failure();
+        }
     }
 
     /**
      * Set up sync work to enabled every 15 minutes or just disabled
      * https://github.com/stefan-niedermann/nextcloud-notes/issues/1168
-     * @param context the application
+     *
+     * @param context        the application
      * @param backgroundSync the toggle result backgroundSync
      */
 
