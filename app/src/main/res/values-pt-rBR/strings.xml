@@ -85,6 +85,8 @@
     <string name="widget_single_note_title">Anotação simples</string>
     <string name="widget_single_note_placeholder_tv">Anotação não encontrada</string>
     <string name="widget_not_logged_in">Faça login no Notes antes de usar este widget</string>
+    <string name="widget_entry_fav_contentDescription">O ícone de estrela é usado para denotar um item como favorito </string>
+
     <string name="activity_select_single_note">Selecionar anotação</string>
 
     <string name="shortcut_create_long">Criar uma nova anotação</string>
@@ -256,6 +258,8 @@
     <!-- Table cell value of a sample table -->
     <string name="formatting_help_tables_value">Valor %1d</string>
 
+    <string name="formatting_help_images_body_1">Os links devem ser URLs completos, começando com um protocolo e domínio, ou caminhos absolutos, começando com um caractere %1$s.</string>
+    <string name="formatting_help_images_body_2">Para estar em conformidade com o formato Markdown, use caracteres de escape no URL da imagem. Isso significa, por exemplo, substituir espaços por  %1$s no endereço URL.</string>
     <string name="formatting_help_images_title">Imagens</string>
     <string name="formatting_help_images_alt">Imagens bonita</string>
 
