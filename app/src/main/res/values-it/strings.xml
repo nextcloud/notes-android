@@ -85,6 +85,8 @@
     <string name="widget_single_note_title">Nota singola</string>
     <string name="widget_single_note_placeholder_tv">Nota non trovata</string>
     <string name="widget_not_logged_in">Accedi a Notes prima di utilizzare questo widget</string>
+    <string name="widget_entry_fav_contentDescription">L\'icona a stella è utilizzata per marcare un elemento come preferito</string>
+
     <string name="activity_select_single_note">Seleziona nota</string>
 
     <string name="shortcut_create_long">Crea una nuova nota</string>
