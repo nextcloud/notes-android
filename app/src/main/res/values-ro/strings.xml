@@ -2,61 +2,306 @@
 <resources>
 
     <string name="app_name">Notițe</string>
+    <string name="app_name_long">Notițe Nextcloud </string>
+    <string name="label_all_notes">Toate notițele</string>
+    <string name="label_favorites">Favorite</string>
     <string name="action_create">Notă nouă</string>
+    <string name="welcome_text">Bine ai venit la %1$s</string>
     <string name="action_settings">Setări</string>
+    <string name="action_trashbin">Notițe șterse</string>
+    <string name="action_search">Caută</string>
+    <string name="action_sorting_method">Metodă de sortare</string>
     <string name="simple_cancel">Anulează</string>
+    <string name="simple_switch">Schimbă </string>
     <string name="simple_edit">Editează</string>
+    <string name="simple_remove">Elimină</string>
     <string name="action_edit_save">Salvează</string>
     <string name="simple_about">Despre</string>
-    <string name="action_note_deleted">Nota este ștearsă</string>
-    <string name="action_note_restored">Nota este restaurată</string>
-    <string name="action_undo">Undo</string>
+    <string name="simple_link">Legătură</string>
+    <string name="action_note_deleted">Șters 1%1$s</string>
+    <string name="action_note_restored">Recuperat 1%1$s</string>
+    <string name="action_undo">Anulează ultima acțiune</string>
+    <string name="action_uncategorized">Fără categorie </string>
     <string name="menu_delete">Șterge</string>
+    <string name="menu_change_category">Categorie</string>
     <string name="menu_favorite">Favorit</string>
     <string name="menu_preview">Previzualizare</string>
     <string name="menu_share">Partajează</string>
 
+    <string name="search_in_category">Căutare în 1%1$s</string>
+    <string name="search_in_all">Caută în toate notițele </string>
+
+    <string name="change_category_title">Alege o categorie </string>
+
     <string name="listview_updated_today">Azi</string>
     <string name="listview_updated_yesterday">Ieri</string>
-    <string name="listview_updated_this_week">Săptămâna asta</string>
-    <string name="listview_updated_this_month">Luna asta</string>
+    <string name="listview_updated_this_week">Săptămâna aceasta</string>
+    <string name="listview_updated_last_week">Săptămâna trecută </string>
+    <string name="listview_updated_this_month">Luna aceasta </string>
+    <string name="listview_updated_last_month">Luna trecută </string>
 
-    <!-- Network -->
+    <string name="settings_note_mode">Mod afișare notițe </string>
+    <string name="settings_theme_title">Temă</string>
+    <string name="settings_font_title">Font cu un singur spațiu </string>
+    <string name="settings_font_size">Mărime font</string>
+    <string name="settings_wifi_only">Sincronizează doar prin Wi-Fi </string>
+    <string name="settings_lock">Blochează aplicația (Beta)</string>
+    <string name="settings_lock_summary">Credențialele dispozitivului</string>
+    <string name="settings_background_sync">Sincronizare în fundal</string>
+    <string name="settings_prevent_screen_capture">Oprește captura de ecran</string>
 
-    <!-- Error -->
     <string name="error_sync">Sincronizare eșuată: %1$s</string>
-    <string name="error_no_network">nu există conexiunea la rețea</string>
+    <string name="error_synchronization">Sincronizare eșuată </string>
+    <string name="error_no_network">Nu exista conexiune</string>
+    <string name="error_maintenance_mode">Serverul se află in modul de mentenanţă</string>
+    <string name="error_unknown">A apărut o eroare necunoscută </string>
 
-    <!-- Snackbar Actions -->
-
-    <!-- About -->
     <string name="about_version_title">Versiune</string>
-    <string name="about_version">Momentan utilizezi &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_version">În momentul de față folosești %1$s</string>
     <string name="about_maintainer_title">Maintainer</string>
     <string name="about_developers_title">Dezvoltatori</string>
     <string name="about_translators_title">Traducători</string>
-    <string name="about_translators_transifex">Comunitatea Nextcloud la &lt;a href=\"%1$s\">Transifex&lt;/a></string>
+    <string name="about_translators_transifex">Comunitatea Nextcloud pe %1$s</string>
     <string name="about_testers_title">Testeri</string>
     <string name="about_source_title">Cod sursă</string>
-    <string name="about_source">Acest proiect este găzduit pe GitHub &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_source">Acest proiect este găzduit pe GitHub: %1$s</string>
     <string name="about_issues_title">Probleme</string>
-    <string name="about_issues">Poți raporta bug-uri, propuneri de îmbunătățiri și cerințe de caracteristici pe tracker-ul de probleme de pe GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues">Puteți raporta erori, propuneri de îmbunătățiri și cereri de caracteristici noi în tracker-ul de probleme GitHub: %1$s</string>
     <string name="about_translate_title">Tradu</string>
-    <string name="about_translate">Alătură-te echipei Nextcloud pe Transifex și ajută-ne să traducem această aplicație: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate">Alăturați-vă echipei Nextcloud de pe Transifex și ajutați-ne să traducem această aplicație:%1$s</string>
     <string name="about_app_license_title">Licența aplicației</string>
     <string name="about_app_license">Această aplicație este licențiată sub GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Vezi licența</string>
     <string name="about_icons_disclaimer_title">Pictograme</string>
-    <string name="about_icons_disclaimer">&lt;p>Pictograma originală realizată de %1$s&lt;/p>&lt;p>Orice alte pictograme utilizate de această aplicație sunt &lt;a href=\"https://materialdesignicons.com/\">Pictograme Material Design &lt;/a> realizate de Google Inc. și licențiate sub o Licență Creative Commons.&lt;/p></string>
+    <string name="about_icons_disclaimer_app_icon">Pentru pictograma originală vezi %1$s</string>
+    <string name="about_icons_disclaimer_mdi_icons">Toate pictogramele utilizate de această aplicație sunt%1$s realizate de Google Inc. și licențiate sub licența Apache 2.0.</string>
+    <string name="about_icons_disclaimer_mdi">Pictograme Material Design</string>
     <string name="about_credits_tab_title">Realizatori</string>
     <string name="about_contribution_tab_title">Contribuții</string>
     <string name="about_license_tab_title">Licență</string>
 
+    <string name="widget_note_list_title">Listă notițe</string>
+    <string name="widget_note_list_placeholder">Nu există notițe </string>
     <string name="widget_single_note_title">O singură notiță</string>
-    <!-- Plurals -->
+    <string name="widget_single_note_placeholder_tv">Notiță nu a fost găsită </string>
+    <string name="widget_not_logged_in">Vă rugăm să vă autentificați în Notițe înainte de a folosi această componentă vizuală </string>
+    <string name="widget_entry_fav_contentDescription">Pictograma sub formă de stea adaugă la lista de favorite o notiţă</string>
+
+    <string name="activity_select_single_note">Selectează o notă</string>
+
+    <string name="shortcut_create_long">Creați o nouă notiţă</string>
+
+    <string name="pref_value_font_normal">Normal</string>
+    <string name="pref_value_wifi_and_mobile">Sincronizare folosind Wi-Fi și date mobile</string>
+    <string name="pref_value_lock">Password protection</string>
+
+    <string name="simple_error">Eroare</string>
+    <string name="simple_close">Închide</string>
+    <string name="simple_copy">Copiază</string>
+    <string name="simple_exception">Excepție </string>
+    <string name="pin_to_homescreen">Fixați pe ecranul de pornire</string>
+    <string name="note_has_been_deleted">Această notiță a fost ștearsă </string>
+    <string name="add_account">Adaugă cont</string>
+
+    <string name="category_music">Muzică</string>
+    <string name="category_movies">Filme</string>
+    <string name="category_movie">Film</string>
+    <string name="category_work">Serviciu</string>
+    <string name="category_todo">De făcut</string>
+    <string name="category_todos">De făcut</string>
+    <string name="category_checklists">Liste</string>
+    <string name="category_tasks">Sarcini</string>
+    <string name="category_recipe">Rețetă</string>
+    <string name="category_recipes">Rețete</string>
+    <string name="category_restaurant">Restaurant</string>
+    <string name="category_restaurants">Restaurante</string>
+    <string name="category_food">Mâncare</string>
+    <string name="category_bake">Coace</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_key">Cheie</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_keys">Chei</string>
+    <string name="category_password">Parolă</string>
+    <string name="category_passwords">Parole</string>
+    <string name="category_credentials">Acreditări</string>
+    <string name="category_game">Joc</string>
+    <string name="category_games">Jocuri</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">Start Joc</string>
+    <string name="category_gift">Cadou</string>
+    <string name="category_gifts">Cadouri</string>
+    <!-- Like a gift -->
+    <string name="category_present">Cadou</string>
+    <!-- Like a gift -->
+    <string name="category_presents">Cadouri</string>
+
+    <string name="account_already_imported">Acest cont a fost deja importat</string>
+    <string name="no_notes_yet">Nu există notițe încă </string>
+    <string name="no_notes_yet_description">Apasă butonul + pentru a crea o nouă notiță </string>
+    <string name="simple_more">Mai mult</string>
+    <string name="simple_move">Mută</string>
+    <string name="category_readonly">Doar citire</string>
+    <string name="no_category">Fără categorie </string>
+    <string name="add_category">Adaugă %1$s</string>
+    <string name="simple_checkbox">Căsuța de bifat</string>
+    <string name="unlock_notes">Deblochează notițe </string>
+    <string name="error_dialog_title">Ooo nu - Acum ce? 🙁</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Vă rugăm să închideţi forţat alicaţia şi să o reporniţi. Este posibil să existe o conexiune setată incorect către aplicaţia Nextcloud.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Dacă problema persistă, încercați să goliți memoria aplicației Nextcloud și a aplicației Nextcloud Notes, pentru a rezolva această problemă.</string>
+    <string name="error_dialog_tip_clear_storage">Puteți să ștergeți memoria prin deschiderea meniului de informații iar mai apoi selectarea Stocare →  Golește memoria. ⚠️  Ateție: Această metodă va șterge notițele ce nu sunt încă sincronizate!</string>
+    <string name="error_dialog_tip_files_outdated">Aplicația dumneavoastră Nextcloud pare a fi învechită. Vă rugăm să vizitați Magazinul Google Play sau F-Droid pentru a descărca cea mai nouă versiune.</string>
+    <string name="error_dialog_tip_files_force_stop">Ceva pare a fi în neregulă cu aplicația Nextcloud. Vă rugăm să forțați închiderea aplicației Nextcloud și aplicația de Notițe Nextcloud.</string>
+    <string name="error_dialog_tip_files_delete_storage">Dacă inchiderea forțată nu este de folos, atunci puteți încerca ștergerea stocării celor două aplicații.</string>
+    <string name="error_dialog_timeout_instance">Nu există un răsouns de la serverul dumneavoastră în timpul alocat. Vă rugăm să vă asigurați că serverul este funcțional și corect setat.</string>
+    <string name="error_dialog_timeout_toggle">Vă rugăm să verificați conexiunea la rețea. Uneori activarea și dezactivarea datelor mobile sau Wi-Fi poate rezolva problema.</string>
+    <string name="error_dialog_check_server">Răspunsul serverului dumneavoastră nu este corect. Vă rugăm să verificaţi dacă puteţi accesa Notiţe din browserul dumneavoastră web.</string>
+    <string name="error_dialog_check_server_logs">Există o problemă cu setările serverului Nexcloud. Vă rugăm să verificaţi fişierele log de pe server.</string>
+    <string name="error_dialog_check_maintenance">Vă rugăm să verificaţi dacă instanţa dumneavoastră nu se află în modul de mentenanţă.</string>
+    <string name="error_dialog_insufficient_storage">Instanţa dumneavoastră Nextcloud nu mai are spaţiu liber. Vă rugăm să ştergeţi nişte nişte fişiere pentru a începe sincronizarea.</string>
+    <string name="error_dialog_contact_us">Vă rugăm să nu ezitați să ne contactați dacă problemele persistă. Puteți găsi datele noastre de contact în secțiunea Despre, în bara din stânga.</string>
+    <string name="error_dialog_we_need_info">Avem nevoie de următoarele informații pentru a te putea ajuta:</string>
+    <string name="error_dialog_server_app_enabled">Te rugăm să te asiguri că ai instalat și activat aplicația \"Notes\" pe serverul tău.</string>
+    <string name="error_dialog_redirect">Serverul tău nu a răspuns cu codul HTTP 302, ceea ce sugerează că nu ai instalată aplicația Notes pe server ceva este configurat greșit. Acest lucru poate fi cauzat de un fișier customizat .htaccess-file sau de aplicația Nextcloud precum clientul OID.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Vă rugăm să dezactivați toate optimizările de baterie pentru aplicațiile Nextcloud și Notes.</string>
+    <string name="added_content">Adăugat \"%1$s\"</string>
+    <string name="shared_text_empty">Textul partajat a fost gol</string>
+    <string name="append_to_note">Atașează  la notiță </string>
+    <string name="change_note_title">Schimbă numele notiței</string>
+    <string name="menu_edit_title">Editează titlul</string>
+    <string name="settings_gridview">Vizualizare tip grilă</string>
+    <string name="simple_security">Securitate</string>
+    <string name="appearance_and_behavior">Aspect şi comportament</string>
+    <string name="simple_synchronization">Sincronizare</string>
+    <string name="manage_accounts">Administrare conturi</string>
+    <string name="action_formatting_help">Formatare</string>
+
+    <string-array name="noteMode_entries">
+        <item>Deschide în modul editare</item>
+        <item>Deschide în modul de previzualizare </item>
+        <item>Amintește-ți ultima mea selecție </item>
+    </string-array>
+
+    <string-array name="fontSize_entries">
+        <item>Mic</item>
+        <item>Mediu</item>
+        <item>Mare</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Deschis</item>
+        <item>Închis</item>
+        <item>Setare implicită a sistemului</item>
+    </string-array>
+
     <plurals name="ab_selected">
         <item quantity="one">%d selecționat</item>
         <item quantity="few">%d selecționate</item>
         <item quantity="other">%d selecționate</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">A fost ştersă o notiţă</item>
+        <item quantity="few">Au fost şterse %1$d notiţe</item>
+        <item quantity="other">Au fost şterse %1$d de notiţe</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="one">A fost restaurată o notiță</item>
+        <item quantity="few">Au fost restaurate %1$d notițe</item>
+        <item quantity="other">Au fost restaurate %1$d de notițe</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">Partajează conținutul a %1$d notițe</item>
+        <item quantity="few">Partajează conținutul a %1$d notițe</item>
+        <item quantity="other">Partajează conținutul a %1$d de notițe</item>
+    </plurals>
+
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">Formatare bazata pe context</string>
+    <string name="formatting_help_cbf_body_1">Un obiectiv de proiectare a aplicației Nextcloud este de a oferi o unealtă fără alte distracții, deși vei putea să formatezi textul cu libajul Markdown. Pentru unele dintre exemplele de mai jos poți folosi scurtături pentru a putea formata notițele tale fără să fie nevoie să introduci codurile de mai jos.</string>
+    <string name="formatting_help_cbf_body_2">Doar selectează un text sau atinge cursorul în orice poziție si vei vedea un meniu popup ce conține lângă  %1$s, %2$s, %3$s și alte opțiuni precum %4$s sau %5$s.</string>
+
+    <string name="formatting_help_text_title">Text</string>
+    <string name="formatting_help_text_body">Este foarte ușor să %1$s îngrojezi%1$s niște cuvinte și alte cuvinte să le faci %2$s curesive %2$s cu limbajul Markdown. Poți %3$stăia%3$s câteva cuvinte sau chiar introduce un [link către Nextcloud](https://nextcloud.com).</string>
+
+    <string name="formatting_help_lists_title">Liste</string>
+    <string name="formatting_help_lists_body_1">Uneori dorești liste numerotate</string>
+    <string name="formatting_help_lists_body_2">Unu</string>
+    <string name="formatting_help_lists_body_3">Doi</string>
+    <string name="formatting_help_lists_body_4">Trei</string>
+    <string name="formatting_help_lists_body_5">Uneori vrei buline:</string>
+    <string name="formatting_help_lists_body_6">Începe rândul cu linioară</string>
+    <string name="formatting_help_lists_body_7">Și dacă ai niște subpuncte , pune două spații înainte de liniuță sau steluță:</string>
+    <string name="formatting_help_lists_body_8">Așa </string>
+    <string name="formatting_help_lists_body_9">Și așa </string>
+
+    <string name="formatting_help_checkboxes_title">Casetă de bifat</string>
+    <string name="formatting_help_checkboxes_body_1">Pentru a creea o căsuță de bifat, folosește o listă urmată de paranteze</string>
+    <string name="formatting_help_checkboxes_body_2">Obiect 1</string>
+    <string name="formatting_help_checkboxes_body_3">Obiect 2</string>
+
+    <string name="formatting_help_structured_documents_title">Documente structurate</string>
+    <string name="formatting_help_structured_documents_body_1">Uneori este util să ai mărimi diferite de titluri pentru a-ți structura documentul. Începe liniile cu %1$s pentru a creea titluri. Mai multe %2$s într-un șir denotă un titlu din ce în ce mai mic.</string>
+    <string name="formatting_help_structured_documents_body_2">Acesta este un subtitlu de speță a treia</string>
+    <string name="formatting_help_structured_documents_body_3">Poți folosi unul %1$s până la %2$s șase diferite mărimi de titluri .</string>
+    <string name="formatting_help_structured_documents_body_4">Dacă dorești să citezi pe cineva, folosește caracterul %1$s înainte de linie:</string>
+    <string name="formatting_help_structured_documents_body_5">Imaginația este mult mai importantă decât cunoașterea. Cunoașterea este limitată. Imaginația înconjoară lumea.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+
+    <string name="formatting_help_code_title">Cod</string>
+    <string name="formatting_help_code_body_1">Există multe moduri de a formata cod sursă cu Markdown. Dacă ai blocuri de cod în linie, adaugă în jurul blocului ghilimele:</string>
+    <string name="formatting_help_code_body_2">Markdown suportă de asemenea o opțiune numită code fencing, opțiune ce permite pentru mai multe linii fără indentări:</string>
+    <string name="formatting_help_code_body_3">Și dacă dorești să folosești opțiunea de highlight a sintaxei, include limbajul:</string>
+
+    <string name="formatting_help_tables_title">Tabele</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">Coloana %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Valoare 1%1d</string>
+
+    <string name="formatting_help_images_body_1">Linkurile trebuie să fie adrese complete, ce încep cu un protocol urmată de un domeniu sau căi absolute ce pornesc cu caracterul %1$s.</string>
+    <string name="formatting_help_images_body_2">Pentru a vă conforma cu cerințele limbajului Markdown, vă rugăm să folosiți carcatere de exceptare în adresa imaginii. Asta înseamnă de exemplu să înlocuiți spațiile cu %1$s în adresa URL.</string>
+    <string name="formatting_help_images_title">Imagini</string>
+    <string name="formatting_help_images_alt">Imagine mișto </string>
+
+    <string name="simple_other">Altele</string>
+    <string name="sort_last_modified">Sortare după data ultimei modificări </string>
+    <string name="sort_alphabetically">Sortare în ordine alfabetică </string>
+    <string name="error_action_open_battery_settings">Setări baterie</string>
+    <string name="error_action_open_deck_info">Deschide info-ul aplicației </string>
+    <string name="error_action_open_network">Setări de rețea </string>
+    <string name="no_account_configured_yet">Nici un cont configurat încă </string>
+    <string name="no_other_accounts">Încă nu ai configurate alte conturi</string>
+    <string name="choose_account">Alege contul</string>
+    <string name="context_based_formatting">Meniu ce conține formatare bazată pe context</string>
+    <plurals name="remove_account_message">
+        <item quantity="one">Ștergerea contului %1$s va șterge toate schimbările nesincronizate.</item>
+        <item quantity="few">Ștergerea conturilor %1$s va șterge toate cele %2$d schimbări nesincronizate.</item>
+        <item quantity="other">Ștergerea conturilor %1$s va șterge toate cele %2$dde schimbări nesincronizate.</item>
+    </plurals>
+    <string name="remove_account">Îndepărtează %1$s</string>
+
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Trebuie să fii conectat la internet pentru a putea adăuga un cont.</string>
+    <string name="settings_notes_path">Setează dosarul</string>
+
+    <string name="simple_next">Următorul</string>
+    <string name="simple_prev">Precedentul</string>
+    <string name="simple_backup">Backup</string>
+    <string name="backup">Am detectat o stare de nerecuperat acestei aplicații. Vă rugăm să vă sincronizați toate schimbările și să goliți stocarea aplicației Notes.</string>
+    <string name="settings_notes_path_description">Dosarul pentru stocare a notițelor în Nextcloud</string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
+    <string name="settings_notes_path_success">Dosar nou pentru notițe: %1$s</string>
+    <string name="settings_file_suffix">Extensia fişierului</string>
+    <string name="settings_file_suffix_description">Extensia fişierului pentru notiţele noi pe serverul dumneavoastră Nextcloud</string>
+    <string name="settings_file_suffix_success">Sufix pentru fişierele noi: %1$s</string>
+    <string name="http_status_code">Codul de stare HTTP: %1$d</string>
+    <string name="progress_import_indeterminate">Se importă notiţe...</string>
+    <string name="progress_import">Se importă notiţele %1$d din %2$d ...</string>
+    <string name="account_imported">Cont importat.</string>
 </resources>
