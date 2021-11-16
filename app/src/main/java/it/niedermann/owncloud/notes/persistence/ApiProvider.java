@@ -92,17 +92,9 @@ public class ApiProvider {
                                 return calendar;
                             })
                             .registerTypeAdapter(Capabilities.class, new CapabilitiesDeserializer())
-                            .create(), new NextcloudAPI.ApiConnectedListener() {
-                @Override
-                public void onConnected() {
-                    Log.i(TAG, "SSO API connected for " + ssoAccount);
-                }
-
-                @Override
-                public void onError(Exception ex) {
-                    ex.printStackTrace();
-                    invalidateAPICache(ssoAccount);
-                }
+                            .create(), (e) -> {
+                invalidateAPICache(ssoAccount);
+                e.printStackTrace();
             });
             API_CACHE.put(ssoAccount.name, nextcloudAPI);
             return nextcloudAPI;
