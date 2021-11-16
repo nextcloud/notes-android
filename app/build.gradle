@@ -84,7 +84,7 @@ dependencies {
     implementation('com.github.stefan-niedermann.nextcloud-commons:markdown:1.5.1') {
         exclude group: 'org.jetbrains', module: 'annotations-java5'
     }
-    implementation 'com.github.stefan-niedermann:android-commons:0.2.4'
+    implementation 'com.github.stefan-niedermann:android-commons:0.2.5'
 
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'
