@@ -258,6 +258,7 @@
     <!-- Table cell value of a sample table -->
     <string name="formatting_help_tables_value">%1dbalioa</string>
 
+    <string name="formatting_help_images_body_1">Estekak protokolo eta domeinuarekin hasten diren URL oso edo %1$s karakterearekin hasten diren bide-izen absolutuak izan behar dira.</string>
     <string name="formatting_help_images_body_2">Markdown formatua betetzeko, mesedez, erabili ihespen karaktereak irudiaren URLan. Hau da, ordeztu tarteak %1$s karakterearekin URLan.</string>
     <string name="formatting_help_images_title">Irudiak</string>
     <string name="formatting_help_images_alt">Irudi dotorea</string>

@@ -6,6 +6,7 @@
     <string name="label_all_notes">Kaikki muistiinpanot</string>
     <string name="label_favorites">Suosikit</string>
     <string name="action_create">Uusi muistiinpano</string>
+    <string name="welcome_text">Tervetuloa, tämä on %1$s</string>
     <string name="action_settings">Asetukset</string>
     <string name="action_trashbin">Poistetut muistiinpanot</string>
     <string name="action_search">Etsi</string>
@@ -60,6 +61,7 @@
     <string name="about_translators_title">Kääntäjät</string>
     <string name="about_testers_title">Testaajat</string>
     <string name="about_source_title">Lähdekoodi</string>
+    <string name="about_source">Tämä projekti on GitHubissa: %1$s</string>
     <string name="about_issues_title">Ongelmat</string>
     <string name="about_translate_title">Käännä</string>
     <string name="about_app_license_title">Sovelluslisenssi</string>
@@ -95,6 +97,18 @@
     <string name="category_movies">Elokuvat</string>
     <string name="category_movie">Elokuva</string>
     <string name="category_work">Työ</string>
+    <string name="category_recipe">Resepti</string>
+    <string name="category_recipes">Reseptit</string>
+    <string name="category_restaurant">Ravintola</string>
+    <string name="category_restaurants">Ravintolat</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_key">Avain</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_keys">Avaimet</string>
+    <string name="category_password">Salasana</string>
+    <string name="category_passwords">Salasanat</string>
+    <string name="category_game">Peli</string>
+    <string name="category_games">Pelit</string>
     <string name="account_already_imported">Tili on jo tuotu</string>
     <string name="no_notes_yet">Ei muistiinpanoja</string>
     <string name="no_notes_yet_description">Paina + luodaksesi uuden muistiinpanon</string>
@@ -245,4 +259,6 @@
         <item translatable="false">.md</item>
     </string-array>
     <string name="settings_file_suffix">Tiedostopääte</string>
-    </resources>
+    <string name="http_status_code">HTTP-tilakoodi: %1$d</string>
+    <string name="account_imported">Tili tuotu.</string>
+</resources>
