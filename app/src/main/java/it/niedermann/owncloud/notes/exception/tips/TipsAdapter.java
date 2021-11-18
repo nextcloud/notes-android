@@ -1,13 +1,14 @@
 package it.niedermann.owncloud.notes.exception.tips;
 
+import static android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS;
+import static it.niedermann.owncloud.notes.exception.ExceptionDialogFragment.INTENT_EXTRA_BUTTON_TEXT;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ import com.nextcloud.android.sso.exceptions.NextcloudApiNotRespondingException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppNotSupportedException;
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.TokenMismatchException;
+import com.nextcloud.android.sso.exceptions.UnknownErrorException;
 
 import org.json.JSONException;
 
@@ -30,9 +32,6 @@ import java.util.List;
 
 import it.niedermann.owncloud.notes.BuildConfig;
 import it.niedermann.owncloud.notes.R;
-
-import static android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS;
-import static it.niedermann.owncloud.notes.exception.ExceptionDialogFragment.INTENT_EXTRA_BUTTON_TEXT;
 
 public class TipsAdapter extends RecyclerView.Adapter<TipsViewHolder> {
 
@@ -106,6 +105,11 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsViewHolder> {
                     case 507:
                         add(R.string.error_dialog_insufficient_storage);
                         break;
+                }
+            } else if (throwable instanceof UnknownErrorException) {
+                if ("com.nextcloud.android.sso.QueryParam".equals(throwable.getMessage())) {
+                    add(R.string.error_dialog_min_version, new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.nextcloud.client"))
+                            .putExtra(INTENT_EXTRA_BUTTON_TEXT, R.string.error_action_update_files_app));
                 }
             }
         }

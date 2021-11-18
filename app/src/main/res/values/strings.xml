@@ -196,6 +196,7 @@
     <string name="error_dialog_server_app_enabled">Please make sure you have installed and enabled the "Notes" app on your server.</string>
     <string name="error_dialog_redirect">Your server did respond with a HTTP 302 status code, which implies, that you do not have installed the Notes app on your server or something is misconfigured. This can be caused by custom overrides in a .htaccess-file or by Nextcloud apps like OID Client.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Please disable all battery optimizations for Nextcloud and the Notes app.</string>
+    <string name="error_dialog_min_version">The Notes Android app requires the Nextcloud Android app to be at least version 3.18.</string>
     <string name="added_content">Added "%1$s"</string>
     <string name="shared_text_empty">Shared text was empty</string>
     <string name="append_to_note">Append to note</string>
@@ -321,6 +322,7 @@
     <string name="error_action_open_battery_settings">Battery settings</string>
     <string name="error_action_open_deck_info">Open App info</string>
     <string name="error_action_open_network">Network settings</string>
+    <string name="error_action_update_files_app">Update</string>
     <string name="no_account_configured_yet">No account configured yet</string>
     <string name="no_other_accounts">You don\'t have configured any other accounts yet.</string>
     <string name="choose_account">Choose account</string>
