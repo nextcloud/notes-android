@@ -58,7 +58,6 @@ public class ExceptionDialogFragment extends AppCompatDialogFragment {
         final String debugInfos = ExceptionUtil.INSTANCE.getDebugInfos(requireContext(), throwables, BuildConfig.FLAVOR);
 
         binding.tips.setAdapter(adapter);
-        binding.statusMessage.setText(getString(R.string.error_sync, throwables.size() > 0 ? throwables.get(0).getLocalizedMessage() : getString(R.string.error_unknown)));
         binding.stacktrace.setText(debugInfos);
 
         adapter.setThrowables(throwables);

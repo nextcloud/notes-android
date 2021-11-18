@@ -12,13 +12,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/statusMessage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:maxLength="50"
-            tools:text="@tools:sample/lorem/random" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tips"
             android:layout_width="match_parent"
