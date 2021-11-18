@@ -12,6 +12,7 @@
     <string name="action_search">Поиск</string>
     <string name="action_sorting_method">Метод сортировки</string>
     <string name="simple_cancel">Отмена</string>
+    <string name="simple_switch">Выключатель</string>
     <string name="simple_edit">Править</string>
     <string name="simple_remove">Удалить</string>
     <string name="action_edit_save">Сохранить</string>
@@ -84,6 +85,8 @@
     <string name="widget_single_note_title">Одна заметка</string>
     <string name="widget_single_note_placeholder_tv">Заметка не найдена</string>
     <string name="widget_not_logged_in">Для использования виджета необходимо выполнить вход в приложении «Заметки»</string>
+    <string name="widget_entry_fav_contentDescription">Значок звездочки используется для обозначения элемента как избранного</string>
+
     <string name="activity_select_single_note">Выберите заметку</string>
 
     <string name="shortcut_create_long">Создать новую заметку</string>
@@ -104,6 +107,7 @@
     <string name="category_movies">Фильмы</string>
     <string name="category_movie">Фильм</string>
     <string name="category_work">Рабочий</string>
+    <string name="category_tasks">Задачи</string>
     <string name="account_already_imported">Учётная запись уже импортирована</string>
     <string name="no_notes_yet">Нет ни одной заметки</string>
     <string name="no_notes_yet_description">Для создания заметки нажмите +</string>

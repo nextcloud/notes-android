@@ -85,6 +85,8 @@
     <string name="widget_single_note_title">Une seule note</string>
     <string name="widget_single_note_placeholder_tv">Note non trouvée</string>
     <string name="widget_not_logged_in">Veuillez vous connecter à Notes avant d\'utiliser ce widget</string>
+    <string name="widget_entry_fav_contentDescription">L\'icône étoile sert à marquer un élément comme favori</string>
+
     <string name="activity_select_single_note">Choisir une note</string>
 
     <string name="shortcut_create_long">Créer une nouvelle note</string>
@@ -105,6 +107,8 @@
     <string name="category_movies">Films</string>
     <string name="category_movie">Film</string>
     <string name="category_work">Travail</string>
+    <string name="category_todo">Tâche</string>
+    <string name="category_todos">Tâches</string>
     <string name="category_tasks">Tâches</string>
     <string name="category_recipe">Recette</string>
     <string name="category_recipes">Recettes</string>
@@ -120,6 +124,8 @@
     <string name="category_credentials">Information d\'identification</string>
     <string name="category_game">Jeu</string>
     <string name="category_games">Jeux</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">Lire</string>
     <string name="category_gift">Don</string>
     <string name="category_gifts">Dons</string>
     <!-- Like a gift -->
