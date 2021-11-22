@@ -158,11 +158,11 @@
     <string name="error_dialog_check_server_logs">您的 Nextcloud 配置有一些问题。请查看服务器日志。</string>
     <string name="error_dialog_check_maintenance">请检查您的 Nextcloud 实例是否处于维护模式。</string>
     <string name="error_dialog_insufficient_storage">您的 Nextcloud 实例已经没有可用的存储空间了。请删除一些文件来允许本地的变更同步到云。</string>
-    <string name="error_dialog_contact_us">如果问题持续存在，请不要犹豫来联系我们。您可以在侧边栏的 “关于” 部分找到我们的联系信息。</string>
     <string name="error_dialog_we_need_info">我们需要以下技术信息来帮助您：</string>
     <string name="error_dialog_server_app_enabled">请确保您已经在您的服务器上安装并已启用了“笔记”应用。</string>
     <string name="error_dialog_redirect">您的服务器确实以 HTTP 302 状态代码响应，这意味着您的服务器上没有安装笔记应用，或者是配置错误。这可能是由 .htaccess 文件中或如OID客户端的 Nextcloud 应用程序的自定义重载造成的。</string>
     <string name="error_dialog_tip_disable_battery_optimizations">请为Nextcloud应用以及笔记应用禁用所有电池优化设置。</string>
+    <string name="error_dialog_min_version">Notes 安卓应用需要的 Nextcloud 安卓应用的最低版本为 3.18</string>
     <string name="added_content">添加%1$s</string>
     <string name="shared_text_empty">共享文本是空的</string>
     <string name="append_to_note">追加笔记</string>
@@ -265,6 +265,7 @@
     <string name="error_action_open_battery_settings">电池设置</string>
     <string name="error_action_open_deck_info">打开应用信息</string>
     <string name="error_action_open_network">网络设置</string>
+    <string name="error_action_update_files_app">更新</string>
     <string name="no_account_configured_yet">尚未配置账户</string>
     <string name="no_other_accounts">您尚未配置任何其他帐户。</string>
     <string name="choose_account">选择一个账户</string>

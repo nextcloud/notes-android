@@ -158,7 +158,6 @@
     <string name="error_dialog_check_server_logs">Există o problemă cu setările serverului Nexcloud. Vă rugăm să verificaţi fişierele log de pe server.</string>
     <string name="error_dialog_check_maintenance">Vă rugăm să verificaţi dacă instanţa dumneavoastră nu se află în modul de mentenanţă.</string>
     <string name="error_dialog_insufficient_storage">Instanţa dumneavoastră Nextcloud nu mai are spaţiu liber. Vă rugăm să ştergeţi nişte nişte fişiere pentru a începe sincronizarea.</string>
-    <string name="error_dialog_contact_us">Vă rugăm să nu ezitați să ne contactați dacă problemele persistă. Puteți găsi datele noastre de contact în secțiunea Despre, în bara din stânga.</string>
     <string name="error_dialog_we_need_info">Avem nevoie de următoarele informații pentru a te putea ajuta:</string>
     <string name="error_dialog_server_app_enabled">Te rugăm să te asiguri că ai instalat și activat aplicația \"Notes\" pe serverul tău.</string>
     <string name="error_dialog_redirect">Serverul tău nu a răspuns cu codul HTTP 302, ceea ce sugerează că nu ai instalată aplicația Notes pe server ceva este configurat greșit. Acest lucru poate fi cauzat de un fișier customizat .htaccess-file sau de aplicația Nextcloud precum clientul OID.</string>

@@ -158,7 +158,6 @@
     <string name="error_dialog_check_server_logs">Prišlo je do napake z namestitvijo Nextcloud. Preverite zapis dnevnika na strežniku.</string>
     <string name="error_dialog_check_maintenance">Preverite, ali je morda namestitev Nextcloud trenutno v vzdrževalnem načinu.</string>
     <string name="error_dialog_insufficient_storage">V shrambi ni več prostora. Za nadaljevanje usklajevanja z oblakom je treba Izbrisati nekaj krajevnih datotek.</string>
-    <string name="error_dialog_contact_us">V kolikor se napaka še naprej pojavlja, ne odlašajte in stopite v stik z nami. Podatke o možnostih stika so v bočnem oknu med opisi programa.</string>
     <string name="error_dialog_we_need_info">Z ustrezno pomoč potrebujemo nekaj tehničnih podrobnosti sistema:</string>
     <string name="error_dialog_server_app_enabled">Prepričajte se, da ste namestili in omogočili tudi program »Notes« na strežniku.</string>
     <string name="error_dialog_redirect">S strežnika je prejet odziv s kodo stanja HTTP 302, kar kaže na to, da program Notes ni nameščen, ali pa je napačno nastavljen. Napaka se pojavi tudi pri nekaterih določilih v datoteki .htaccess oziroma programih, kot je odjemalec OID.</string>

@@ -158,11 +158,11 @@
     <string name="error_dialog_check_server_logs">Има проблем с вашата настройка на Nextcloud. Моля, разгледайте /журналите/ файловете за вход на сървъра.</string>
     <string name="error_dialog_check_maintenance">Моля, проверете дали вашето приложение Nextcloud в момента не е в режим на поддръжка.</string>
     <string name="error_dialog_insufficient_storage">Вашето приложение Nextcloud няма свободно място в хранилището. Моля, изтрийте някои файлове, за да синхронизирате локалните си промени във вашия облак.</string>
-    <string name="error_dialog_contact_us">Моля, не се колебайте да се свържете с нас, ако проблемите продължават. Можете да намерите нашата информация за контакт в раздел \"за нас\" в страничната лента.</string>
     <string name="error_dialog_we_need_info">Имаме нужда от следната техническа информация, за да ви помогнем:</string>
     <string name="error_dialog_server_app_enabled">Моля, уверете се, че сте инсталирали и активирали приложението „Бележки“ на вашия сървър.</string>
     <string name="error_dialog_redirect">Сървърът ви отговори с код за състояние HTTP 302, което означава, че не сте инсталирали приложението Бележки на вашия сървър или нещо е конфигурирано неправилно. Това може да бъде причинено от персонализирани замени в .htaccess-файл или от приложения на Nextcloud, като OID Клиент.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Моля, деактивирайте всички оптимизации на батерията за Nextcloud и приложението Бележки.</string>
+    <string name="error_dialog_min_version">Приложението Notes за Android, изисква версията на приложението Android за Nextcloud да е поне 3.18.</string>
     <string name="added_content">Добавени %1$s</string>
     <string name="shared_text_empty">Споделеният текст беше празен</string>
     <string name="append_to_note">Добавяне към бележка</string>
@@ -269,6 +269,7 @@
     <string name="error_action_open_battery_settings">Настройки на батерията</string>
     <string name="error_action_open_deck_info">Отворяне на информация за приложението</string>
     <string name="error_action_open_network">Настройки на мрежата</string>
+    <string name="error_action_update_files_app">Обновяване</string>
     <string name="no_account_configured_yet">Все още няма конфигуриран профил</string>
     <string name="no_other_accounts">Все още не сте конфигурирали други профили.</string>
     <string name="choose_account">Избор на профил</string>

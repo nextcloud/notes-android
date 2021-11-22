@@ -127,7 +127,6 @@
     <string name="error_dialog_check_server_logs">Có vấn đề với thiết lập Nextcloud của bạn. Vui lòng xem các tệp nhật ký của máy chủ.</string>
     <string name="error_dialog_check_maintenance">Vui lòng kiểm tra xem bản sao Nextcloud của bạn hiện tại có đang không ở trong chế độ bảo trì không.</string>
     <string name="error_dialog_insufficient_storage">Bản sao Nextcloud của bạn không còn bộ nhớ trống. Vui lòng xoá một số tệp để đồng bộ các thay đổi cục bộ của bạn vào đám mây của bạn.</string>
-    <string name="error_dialog_contact_us">Xin đừng chần chừ trong việc liên hệ với chúng tôi nếu vấn đề vẫn tiếp diễn. Bạn có thể tìm thông tin liên hệ của chúng tôi trong khu vực giới thiệu trong ngăn bên.</string>
     <string name="error_dialog_we_need_info">Chúng tôi cần thông tin kỹ thuật sau đây để giúp bạn:</string>
     <string name="error_dialog_server_app_enabled">Vui lòng chắc chắn rằng bạn đã cài đặt và bật ứng dụng \"Ghi chú\" trên máy chủ của bạn.</string>
     <string name="error_dialog_redirect">Máy chủ của bạn đã phản hồi bằng mã trạng thái HTTP 302, nó có nghĩa là bạn chưa cài đặt ứng dụng Ghi chú trên máy chủ của bạn hoặc có gì đó bị thiết lập sai. Điều này có thể bị gây ra bởi những sự ghi đè tuỳ chỉnh trong tệp .htaccess hoặc bởi các ứng dụng Nextcloud như OID Client.</string>
