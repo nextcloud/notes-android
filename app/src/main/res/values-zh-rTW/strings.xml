@@ -119,7 +119,6 @@
     <string name="error_dialog_check_server_logs">您的 Nextcloud 設定有問題，請查看您的伺服器日誌檔。</string>
     <string name="error_dialog_check_maintenance">請確認您的 Nextcloud 現在不是處於維護模式。</string>
     <string name="error_dialog_insufficient_storage">您的 Nextcloud 已無可用空間，請刪除部份檔案以將您的本地修改同步至雲端。</string>
-    <string name="error_dialog_contact_us">如果問題持續請不要猶豫並聯絡我們。您可以在關於的選項中找到我們的聯絡資訊。</string>
     <string name="error_dialog_we_need_info">我們需要以下的技術資訊來幫助您：</string>
     <string name="error_dialog_server_app_enabled">請確保您已在您的伺服器安裝並啟用了「筆記」應用程式。</string>
     <string name="error_dialog_redirect">您的伺服器以 HTTP 302 狀態代碼回應，這表示您尚未在伺服器上安裝 Notes 應用程式或配置錯誤。這可能是由於 .htaccess 檔案中的自訂覆寫或 Nextcloud 應用程式（如OID客戶端）引起的。</string>

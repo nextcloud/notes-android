@@ -132,7 +132,6 @@
     <string name="error_dialog_check_server_logs">Nextcloud-asennuksessasi on ongelma. Katso lisätietoja palvelimen lokitiedostoista.</string>
     <string name="error_dialog_check_maintenance">Varmista, ettei Nextcloud-palvelin ole ylläpitotilassa.</string>
     <string name="error_dialog_insufficient_storage">Nextcloud-palvelimellasi ei ole vapaata tallennustilaa. Poista tiedostoja, jotta paikallisten muutosten synkronointi pilveen onnistuu.</string>
-    <string name="error_dialog_contact_us">Älä epäröi ottaa meihin yhteyttä, jos ongelma jatkuu. Löydät yhteystietomme Tietoja-osiosta sivupalkista.</string>
     <string name="error_dialog_we_need_info">Tarvitsemme seuraavat tekniset tiedot auttaaksemme sinua:</string>
     <string name="error_dialog_server_app_enabled">Varmista, että olet asentanut \"Notes\"-sovelluksen palvelimellasi.</string>
     <string name="error_dialog_redirect">Palvelimesi vastasi HTTP 302-tilakoodilla, joka viittaa siihen, että sinulla ei ole Notes-sovellusta asennettuna palvelimellesi tai jokin asetus on väärin. Tämä saattaa johtua mukautetusta .htaccess-tiedostosta tai Nextcloud-sovelluksista, kuten OID-Clientistä.</string>

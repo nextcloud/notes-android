@@ -158,11 +158,11 @@
     <string name="error_dialog_check_server_logs">Je problém s nastavením vámi využívané instance Nextcloud. Podívejte se do souborů se záznamem událostí na serveru.</string>
     <string name="error_dialog_check_maintenance">Zkontrolujte, zda vámi využívaná instance Nextcloud právě není v tuto chvíli v režimu údržby.</string>
     <string name="error_dialog_insufficient_storage">Na vámi využívané instanci Nexcloud nezbývá žádné volné místo na úložišti. Aby bylo možné synchronizovat vaše místní změny do vámi využívaného cloudu, je třeba nejprve smazat nějaké soubory.</string>
-    <string name="error_dialog_contact_us">Pokud problémy přetrvávají, neváhejte se na nás obrátit. Kontaktní údaje naleznete v sekci „O aplikaci“ v postranním panelu.</string>
     <string name="error_dialog_we_need_info">Abychom vám mohli pomoci, potřebujeme následující technické údaje:</string>
     <string name="error_dialog_server_app_enabled">Ověřte, že na vámi využívaném serveru je nainstalovaná a zapnutá aplikace „Poznámky“.</string>
     <string name="error_dialog_redirect">Vámi využívaný server odpověděl HTTP stavovým kódem 302, což ukazuje na to, že na serveru buď není nainstalovaná aplikace Poznámky, nebo je něco nesprávně nastavené. Toto může být způsobeno uživatelsky určenými přepsáními v souboru .htaccess nebo Nextcloud aplikacemi jako je OID klient.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">V nastavení systému prosím pro aplikace Nextcloud a Notes vypněte veškeré optimalizace spotřeby energie z akumulátoru.</string>
+    <string name="error_dialog_min_version">Android aplikace Poznámky vyžaduje, aby Android aplikace Nextcloud byla přinejmenším verze 3.18.</string>
     <string name="added_content">Přidáno „%1$s“</string>
     <string name="shared_text_empty">Sdílený text je prázdný</string>
     <string name="append_to_note">Připojit k poznámce</string>
@@ -277,6 +277,7 @@
     <string name="error_action_open_battery_settings">Nastavení správy napájení</string>
     <string name="error_action_open_deck_info">Otevřít informace o aplikaci</string>
     <string name="error_action_open_network">Nastavení sítě</string>
+    <string name="error_action_update_files_app">Aktualizovat</string>
     <string name="no_account_configured_yet">Zatím není nastavený žádný účet</string>
     <string name="no_other_accounts">Zatím jste nenastavili žádné další účty.</string>
     <string name="choose_account">Zvolte účet</string>

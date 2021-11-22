@@ -119,7 +119,6 @@
     <string name="error_dialog_check_server_logs">Ddoe at unu problema cun s\'installatzione tua de Nextcloud. Pro praghere càstia in is archìvios de registru de su serbidore.</string>
     <string name="error_dialog_check_maintenance">Controlla chi s\'istantza tua de Nextcloud non siat in fase de mantenimentu.</string>
     <string name="error_dialog_insufficient_storage">In su Nextcloud tuo non ddoe at prus logu lìberu. Pro praghere cantzella unos cantos archìvios pro sincronizare is modìficas locales tuas con sa nue virtuale.</string>
-    <string name="error_dialog_contact_us">Pro praghere no istentes a nos cuntatare si su problema sighit. Podes agatare is informatziones de cuntatu nostras in sa setzione Informatziones in sa barra laterale.</string>
     <string name="error_dialog_we_need_info">Nos bisòngiant is sighentes informatziones tècnicas pro t\'agiuare:</string>
     <string name="error_dialog_server_app_enabled">Segurati de àere installadu e abilitadu s\'aplicatzione \"Notes\" in su serbidore tuo.</string>
     <string name="error_dialog_redirect">Su serbidore tuo at rispostu cun unu còdighe de istadu HTTP 302, chi ìmplicat chi no as installadu s\'aplicatzione Note in su serbidore tuo o calicuna cosa no est cunfigurada in manera curreta. Custu podet èssere dèpidu a cunfiguratziones personalizadas in su documentu .htaccess o a aplicatziones de Nextcloud comente OID Client.</string>

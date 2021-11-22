@@ -143,7 +143,7 @@
     <string name="category_readonly">Alleen lezen</string>
     <string name="no_category">Geen categorie</string>
     <string name="add_category">Toevoegen %1$s</string>
-    <string name="simple_checkbox">Selectievakje</string>
+    <string name="simple_checkbox">Aanvinkvakje</string>
     <string name="unlock_notes">Ontgrendel notities</string>
     <string name="error_dialog_title">Oh nee - wat nu? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Probeer de app te sluiten en opnieuw te starten. Er was misschien een onjuiste verbinding met de Nextcloud-app.</string>
@@ -158,11 +158,11 @@
     <string name="error_dialog_check_server_logs">Er is iets mis met je Nextcloud instellingen. Controleer alstublieft de server log bestanden.</string>
     <string name="error_dialog_check_maintenance">Controleer alstublieft of je Nextcloud instantie momenteel niet in onderhouds-modus draait.</string>
     <string name="error_dialog_insufficient_storage">Je Nextcloud instantie heeft geen vrije ruimte meer. Verwijder enkele bestanden om je lokale gegevens te kunnen synchroniseren.</string>
-    <string name="error_dialog_contact_us">Schroom alstublieft niet om contact met ons op te nemen als het probleem blijft aanhouden. Onze contactgegevens zijn te vinden in de About sectie in de zijbalk.</string>
     <string name="error_dialog_we_need_info">We hebben de volgende technische informatie nodig om je te kunnen helpen: </string>
     <string name="error_dialog_server_app_enabled">Zorg er alstublieft voor dat je de \"Notes\" app hebt geïnstalleerd en aangezet op jouw server.</string>
     <string name="error_dialog_redirect">Je server heeft gereageerd met een HTTP 302-statuscode, wat inhoudt dat je de Notes-app niet op je server hebt geïnstalleerd of dat er iets verkeerd is geconfigureerd. Dit kan worden veroorzaakt door maatwerk aanpassingen in een .htaccess-bestand of door Nextcloud-apps zoals de OID Client.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Schakel de batterijoptimalisatie uit voor Nextcloud en de Notes app.</string>
+    <string name="error_dialog_min_version">De Notitie app voor Android vereist minstens Nextcloud Android app versie 3.18.</string>
     <string name="added_content">\"%1$s\" toegevoegd</string>
     <string name="shared_text_empty">Gedeelde tekst was leeg</string>
     <string name="append_to_note">Achteraan aan notitie toevoegen</string>
@@ -234,8 +234,8 @@
     <string name="formatting_help_lists_body_8">Vind dit leuk</string>
     <string name="formatting_help_lists_body_9">En dit</string>
 
-    <string name="formatting_help_checkboxes_title">Selectievakjes</string>
-    <string name="formatting_help_checkboxes_body_1">Gebruik een lijst gevolgd door haakjes om een selectievakje te maken</string>
+    <string name="formatting_help_checkboxes_title">Aanvinkvakjes</string>
+    <string name="formatting_help_checkboxes_body_1">Gebruik een lijst gevolgd door haakjes om een aanvinkvakje te maken</string>
     <string name="formatting_help_checkboxes_body_2">Object 1</string>
     <string name="formatting_help_checkboxes_body_3">Object 2</string>
 
@@ -269,6 +269,7 @@
     <string name="error_action_open_battery_settings">Batterij instellingen</string>
     <string name="error_action_open_deck_info">Open App informatie</string>
     <string name="error_action_open_network">Netwerk instellingen</string>
+    <string name="error_action_update_files_app">Update</string>
     <string name="no_account_configured_yet">Nog geen account geconfigureerd</string>
     <string name="no_other_accounts">U heeft nog geen andere accounts geconfigureerd.</string>
     <string name="choose_account">Kies account</string>

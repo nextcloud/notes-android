@@ -158,7 +158,6 @@
     <string name="error_dialog_check_server_logs">Arazo bat dago zure Nextcloud ezarpenekin. Eman begiratu bat zerbitzariko egunkari-fitxategiei.</string>
     <string name="error_dialog_check_maintenance">Egiazta ezazu zure Nextcloud instantzia ez dagoela mantentze moduan une honetan.</string>
     <string name="error_dialog_insufficient_storage">Zure Nextcloud instantziak ez du biltegiratze leku libre gehiagorik. Ezabatu fitxategi batzuk, aldaketa lokalak hodeiarekin sinkroniza daitezen.</string>
-    <string name="error_dialog_contact_us">Mesedez, arazoak jarraitzen baldin badu ez izan zalantzarik gurekin harremanetan jartzeko. Alboko barran aurki dezakezu gurekin kontaktatzeko informazioa.</string>
     <string name="error_dialog_we_need_info">Zuri laguntzeko hurrengo informazio teknikoa behar dugu:</string>
     <string name="error_dialog_server_app_enabled">Mesedez egiaztatu \"Notak\" aplikazioa instalatu eta gaitu duzula zure zerbitzarian.</string>
     <string name="error_dialog_redirect">Zure zerbitzariak HTTP 302 egoera kodearekin erantzun du, honek esan nahi du ez duzula Notak aplikazioa ez duzula zure zerbitzarian instalatu edo zerbait txarto konfiguratuta dagoela. Hau .htaccess fitxategi batean arau pertsonalizatuak daudelako edo OID Bezeroa izeneko aplikazioarengatik sortua izan daiteke. </string>
@@ -269,6 +268,7 @@
     <string name="error_action_open_battery_settings">Bateria ezarpenak</string>
     <string name="error_action_open_deck_info">Ireki aplikazioaren informazioa</string>
     <string name="error_action_open_network">Sareko ezarpenak</string>
+    <string name="error_action_update_files_app">Eguneratu</string>
     <string name="no_account_configured_yet">Oraindik ez da konturik konfiguratu </string>
     <string name="no_other_accounts">Oraindik ez duzu konturik konfiguratu.</string>
     <string name="choose_account">Aukeratu kontua</string>

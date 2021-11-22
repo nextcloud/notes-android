@@ -119,7 +119,6 @@
     <string name="error_dialog_check_server_logs">Hi ha un problema amb la vostra configuració del Nextcloud. Consulteu els fitxers de registre del servidor.</string>
     <string name="error_dialog_check_maintenance">Comproveu que la vostra instància del Nextcloud no estigui en mode de manteniment.</string>
     <string name="error_dialog_insufficient_storage">No queda espai d\'emmagatzematge lliure a la vostra instància del Nextcloud. Suprimiu alguns fitxers per a sincronitzar els canvis locals en el núvol.</string>
-    <string name="error_dialog_contact_us">No dubteu a contactar-nos si els problemes persisteixen. Podreu trobar la nostra informació de contacte a la secció «Quant a» a la barra lateral.</string>
     <string name="error_dialog_we_need_info">Necessitem la informació tècnica següent per a poder ajudar-vos:</string>
     <string name="error_dialog_server_app_enabled">Assegureu-vos que hàgiu instal·lat i activat l\'aplicació «Notes» al vostre servidor.</string>
     <string name="error_dialog_redirect">El vostre servidor ha respost amb un codi d\'estat HTTP 302, que vol dir que no teniu instal·lada l\'aplicació Notes al vostre servidor o que hi ha alguna cosa mal configurada. Això pot tenir la causa en una anul·lació personalitzada en un fitxer .htaccess o en aplicacions del Nextcloud com Client OID.</string>

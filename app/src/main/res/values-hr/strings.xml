@@ -119,7 +119,6 @@
     <string name="error_dialog_check_server_logs">Postoji određeni problem s vašim Nextcloudom. Provjerite datoteke zapisa poslužitelja.</string>
     <string name="error_dialog_check_maintenance">Provjerite je li vaša instanca Nextclouda trenutno u načinu održavanja.</string>
     <string name="error_dialog_insufficient_storage">Nema slobodnog prostora za pohranu u vašoj instanci Nextclouda. Izbrišite dio datoteka kako biste sinkronizirali lokalne promjene u oblak.</string>
-    <string name="error_dialog_contact_us">Obratite nam se bez odlaganja ako problemi i dalje postoje. Naše podatke za kontakt možete pronaći u odjeljku s informacijama na bočnoj traci.</string>
     <string name="error_dialog_we_need_info">Potrebne su nam sljedeće tehničke informacije kako bismo vam pomogli:</string>
     <string name="error_dialog_server_app_enabled">Provjerite jeste li instalirali i omogućili aplikaciju „Notes” na svom poslužitelju.</string>
     <string name="error_dialog_redirect">Vaš je poslužitelj vratio šifru statusa HTTP 302, što znači da aplikacija Notes nije instalirana na poslužitelju ili postoji pogreška u konfiguraciji. To mogu uzrokovati prilagođena prepisivanja u datoteci .htaccess ili određene aplikacije u Nextcloudu, kao što je OID Client.</string>

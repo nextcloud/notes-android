@@ -158,7 +158,6 @@
     <string name="error_dialog_check_server_logs">Hiba van a Nextcloudja beállításaiban. Nézzen bele a kiszolgáló naplófájljaiba.</string>
     <string name="error_dialog_check_maintenance">Ellenőrizze, hogy a Nextcloud példánya nincs-e karbantartási módban.</string>
     <string name="error_dialog_insufficient_storage">A Nextcloud példányán elfogyott a szabad hely. Töröljön pár fájlt, hogy szinkronizálhassa a helyi változtatásait a felhővel.</string>
-    <string name="error_dialog_contact_us">Nyugodtan lépjen velünk kapcsolatba, ha a probléma továbbra is fennáll. A kapcsolati információkat az oldalsáv névjegy részében találja.</string>
     <string name="error_dialog_we_need_info">A következő műszaki információkra van szükségünk, hogy segíthessünk:</string>
     <string name="error_dialog_server_app_enabled">Bizonyosodjon meg róla, hogy telepítette és bekapcsolta a „Jegyzetek” alkalmazást a szerverén.</string>
     <string name="error_dialog_redirect">A kiszolgálója 302-es HTTP állapotkóddal válaszolt, amely arra utal, hogy nincs telepítve a Jegyzetek alkalmazás a kiszolgálón, vagy valami hibásan van beállítva. Ezt egyéni felülírások is okozhatják, mint egy .htaccess-fájl vagy az OID klienshez hasonló Nextcloud alkalmazások.</string>

@@ -158,11 +158,11 @@
     <string name="error_dialog_check_server_logs">您的 Nextcloud 設置存在問題。請查看伺服器記錄檔案。</string>
     <string name="error_dialog_check_maintenance">請檢查您的 Nextcloud 當前是否在維護模式。</string>
     <string name="error_dialog_insufficient_storage">您的 Nextcloud 沒有剩餘可用的存儲空間。請刪除一些檔案，以將近端更改同步到雲中。</string>
-    <string name="error_dialog_contact_us">如果問題仍然存在，請不要猶豫與我們聯繫。您可以在側欄的“關於”部分中找到我們聯絡的信息。</string>
     <string name="error_dialog_we_need_info">我們需要以下的技術資訊來幫助您：</string>
     <string name="error_dialog_server_app_enabled">請確保您已在伺服器上安裝並啟用 Notes 應用程式。</string>
     <string name="error_dialog_redirect">您的伺服器確實以HTTP 302狀態代碼響應，這表示您尚未在伺服器上安裝 Notes 應用程式或配置錯誤。這可能是由 .htaccess 檔案中的自定義替代引起的，也可能是由 Nextcloud 應用程式（如 OID 客戶端）引起的。</string>
     <string name="error_dialog_tip_disable_battery_optimizations">請禁用 Nextcloud 和 Notes 應用程式的所有電池優化。</string>
+    <string name="error_dialog_min_version">Notes Android 應用程式要求 Nextcloud Android 應用程式最低版本為 3.18。</string>
     <string name="added_content">已加入「%1$s」</string>
     <string name="shared_text_empty">分享的文字是空的</string>
     <string name="append_to_note">附加到筆記</string>
@@ -265,6 +265,7 @@
     <string name="error_action_open_battery_settings">電池設定</string>
     <string name="error_action_open_deck_info">開啟 App 資訊</string>
     <string name="error_action_open_network">網路設定</string>
+    <string name="error_action_update_files_app">更新</string>
     <string name="no_account_configured_yet">未有已設定的賬戶</string>
     <string name="no_other_accounts">你尚未設定其它賬戶。</string>
     <string name="choose_account">選擇賬戶</string>

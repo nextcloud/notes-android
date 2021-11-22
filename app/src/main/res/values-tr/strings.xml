@@ -158,11 +158,11 @@
     <string name="error_dialog_check_server_logs">Nextcloud kurulumunuz ile ilgili bir sorun var. Lütfen sunucu günlük dosyalarını inceleyin.</string>
     <string name="error_dialog_check_maintenance">Nextcloud kopyanızın bakım kipinde olmadığından emin olun.</string>
     <string name="error_dialog_insufficient_storage">Nextcloud kopyanızda boş depolama alanı kalmamış. Lütfen yerel değişikliklerinizi bulut ile eşitlemek için bazı dosyaları silerek yer açın.</string>
-    <string name="error_dialog_contact_us">Sorun sürerse lütfen bize sormaktan çekinmeyin. İletişim bilgilerimizi yan çubuktaki hakkında bölümünde bulabilirsiniz.</string>
     <string name="error_dialog_we_need_info">Size yardımcı olabilmemiz için şu teknik bilgilere gerek duyacağız:</string>
     <string name="error_dialog_server_app_enabled">Lütfen sunucunuzda \"Notlar\" uygulamasının kurulu ve etkinleştirilmiş olduğundan emin olun.</string>
     <string name="error_dialog_redirect">Sunucunuz, üzerine Notlar uygulamasının kurulmadığı ya da bir şeyin yanlış yapılandırıldığı anlamına gelen HTTP 302 durum kodu ile yanıt verdi. Bu durum, bir .htaccess dosyasındaki özel kısıtlamalardan ya da OID İstemcisi gibi Nextcloud uygulamalarından kaynaklanabilir.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Lütfen Nextcloud ve Notlar uygulaması için tüm pil iyileştirmelerini devre dışı bırakın.</string>
+    <string name="error_dialog_min_version">Notlar Android uygulamasının çalışması için Nextcloud Android uygulamasının en az 3.18 sürümü gereklidir</string>
     <string name="added_content">\"%1$s\" eklendi</string>
     <string name="shared_text_empty">Paylaşılan metin boş</string>
     <string name="append_to_note">Nota ekle</string>
@@ -269,6 +269,7 @@
     <string name="error_action_open_battery_settings">Pil ayarları</string>
     <string name="error_action_open_deck_info">Uygulama bilgilerini aç</string>
     <string name="error_action_open_network">Ağ ayarları</string>
+    <string name="error_action_update_files_app">Güncelle</string>
     <string name="no_account_configured_yet">Henüz bir hesap yapılandırılmamış</string>
     <string name="no_other_accounts">Henüz başka bir hesap yapılandırmamışsınız.</string>
     <string name="choose_account">Hesap seçin</string>
