@@ -1,0 +1,3 @@
+- 🚫 Removed "Create note widget" in favor of quick settings tile (in your notification area) and shortcuts (press long on the app icon)
+- 🐞 Fix issue with empty titled notes while sorting alphabetically (#1435)
+- 🐞 Fix issue when hitting enter multiple times quickly in a list (#1416, #1411, #1421, #1433, #1434)
