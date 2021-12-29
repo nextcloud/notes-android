@@ -12,6 +12,7 @@
     <string name="action_search">Traži</string>
     <string name="action_sorting_method">Način razvrstavanja</string>
     <string name="simple_cancel">Odustani</string>
+    <string name="simple_switch">Promijeni</string>
     <string name="simple_edit">Uredi</string>
     <string name="simple_remove">Ukloni</string>
     <string name="action_edit_save">Spremi</string>
@@ -56,17 +57,25 @@
     <string name="error_unknown">Došlo je do nepoznate pogreške.</string>
 
     <string name="about_version_title">Inačica</string>
+    <string name="about_version">Trenutno se koristite %1$s</string>
     <string name="about_maintainer_title">Održavatelj</string>
     <string name="about_developers_title">Razvojni programeri</string>
     <string name="about_translators_title">Prevoditelji</string>
+    <string name="about_translators_transifex">Zajednica Nextcloud na %1$s</string>
     <string name="about_testers_title">Ispitivači</string>
     <string name="about_source_title">Izvorni kod</string>
+    <string name="about_source">Ovaj je projekt smješten na platformi GitHub: %1$s</string>
     <string name="about_issues_title">Poteškoće</string>
+    <string name="about_issues">Možete prijaviti pogreške, predložiti poboljšanja i zatražiti značajke putem GitHubovog alata za prijavu i praćenje poteškoća: %1$s</string>
     <string name="about_translate_title">Prevedi</string>
+    <string name="about_translate">Pridružite se Nextcloudovom timu na Transifexu i pomozite nam da prevedemo ovu aplikaciju: %1$s</string>
     <string name="about_app_license_title">Licenca za aplikaciju</string>
     <string name="about_app_license">Ova je aplikacija licencirana pod OPĆOM JAVNOM LICENCOM ZA GNU v3+.</string>
     <string name="about_app_license_button">Pogledaj licencu</string>
     <string name="about_icons_disclaimer_title">Ikone</string>
+    <string name="about_icons_disclaimer_app_icon">Za izvornu ikonu pogledajte %1$s.</string>
+    <string name="about_icons_disclaimer_mdi_icons">Ostale ikone koje se upotrebljavaju u ovoj aplikaciji su %1$s koje je izradio Google Inc. i licencirane su pod licencom Apache 2.0.</string>
+    <string name="about_icons_disclaimer_mdi">Ikone materijalnog dizajna</string>
     <string name="about_credits_tab_title">Zasluge</string>
     <string name="about_contribution_tab_title">Doprinos</string>
     <string name="about_license_tab_title">Licenca</string>
@@ -76,6 +85,8 @@
     <string name="widget_single_note_title">Jedna bilješka</string>
     <string name="widget_single_note_placeholder_tv">Bilješka nije pronađena</string>
     <string name="widget_not_logged_in">Prijavite se u aplikaciju Bilješke prije korištenja ovog widgeta</string>
+    <string name="widget_entry_fav_contentDescription">Ikona zvjezdice upotrebljava se za označavanje stavke kao favorita</string>
+
     <string name="activity_select_single_note">Odaberi bilješku</string>
 
     <string name="shortcut_create_long">Stvori novu bilješku</string>
@@ -96,6 +107,34 @@
     <string name="category_movies">Filmovi</string>
     <string name="category_movie">Film</string>
     <string name="category_work">Posao</string>
+    <string name="category_todo">Zadatak</string>
+    <string name="category_todos">Zadaci</string>
+    <string name="category_checklists">Kontrolni popisi</string>
+    <string name="category_tasks">Zadaci</string>
+    <string name="category_recipe">Recept</string>
+    <string name="category_recipes">Recepti</string>
+    <string name="category_restaurant">Restoran</string>
+    <string name="category_restaurants">Restorani</string>
+    <string name="category_food">Hrana</string>
+    <string name="category_bake">Peći</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_key">Ključ</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_keys">Ključevi</string>
+    <string name="category_password">Zaporka</string>
+    <string name="category_passwords">Zaporke</string>
+    <string name="category_credentials">Vjerodajnica</string>
+    <string name="category_game">Igra</string>
+    <string name="category_games">Igre</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">Zabava</string>
+    <string name="category_gift">Dar</string>
+    <string name="category_gifts">Darovi</string>
+    <!-- Like a gift -->
+    <string name="category_present">Prezentiraj</string>
+    <!-- Like a gift -->
+    <string name="category_presents">Prezentira</string>
+
     <string name="account_already_imported">Račun je već uvezen</string>
     <string name="no_notes_yet">Još nema bilješki</string>
     <string name="no_notes_yet_description">Stvori novu bilješku s pomoću gumba +</string>
@@ -222,6 +261,8 @@
     <!-- Table cell value of a sample table -->
     <string name="formatting_help_tables_value">Vrijednost %1d</string>
 
+    <string name="formatting_help_images_body_1">Poveznice moraju biti potpuni URL-ovi koji počinju s protokolom i domenom ili apsolutni putovi koji počinju sa znakom %1$s.</string>
+    <string name="formatting_help_images_body_2">Kako biste se pridržavali formata Markdown, upotrijebite znakove za izlaz u URL-u slike. Primjerice, zamijenite razmake s %1$s u URL-u.</string>
     <string name="formatting_help_images_title">Slike</string>
     <string name="formatting_help_images_alt">Vrhunska slika</string>
 
@@ -259,4 +300,7 @@
     <string name="settings_file_suffix_description">Ekstenzija datoteke za nove bilješke u Nextcloudu</string>
     <string name="settings_file_suffix_success">Novi sufiks datoteke: %1$s</string>
     <string name="http_status_code">Šifra statusa HTTP-a: %1$d</string>
-    </resources>
+    <string name="progress_import_indeterminate">Uvoz bilješki...</string>
+    <string name="progress_import">Uvoz bilješke %1$d od %2$d...</string>
+    <string name="account_imported">Račun je uvezen.</string>
+</resources>

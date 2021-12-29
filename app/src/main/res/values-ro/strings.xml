@@ -162,6 +162,7 @@
     <string name="error_dialog_server_app_enabled">Te rugăm să te asiguri că ai instalat și activat aplicația \"Notes\" pe serverul tău.</string>
     <string name="error_dialog_redirect">Serverul tău nu a răspuns cu codul HTTP 302, ceea ce sugerează că nu ai instalată aplicația Notes pe server ceva este configurat greșit. Acest lucru poate fi cauzat de un fișier customizat .htaccess-file sau de aplicația Nextcloud precum clientul OID.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Vă rugăm să dezactivați toate optimizările de baterie pentru aplicațiile Nextcloud și Notes.</string>
+    <string name="error_dialog_min_version">Aplicaţia Android Notes necesită ca versiunea aplicaţiei Android Nextcloud să fie cel puţin la versiunea 3.18.</string>
     <string name="added_content">Adăugat \"%1$s\"</string>
     <string name="shared_text_empty">Textul partajat a fost gol</string>
     <string name="append_to_note">Atașează  la notiță </string>
@@ -272,6 +273,7 @@
     <string name="error_action_open_battery_settings">Setări baterie</string>
     <string name="error_action_open_deck_info">Deschide info-ul aplicației </string>
     <string name="error_action_open_network">Setări de rețea </string>
+    <string name="error_action_update_files_app">Actualizare</string>
     <string name="no_account_configured_yet">Nici un cont configurat încă </string>
     <string name="no_other_accounts">Încă nu ai configurate alte conturi</string>
     <string name="choose_account">Alege contul</string>

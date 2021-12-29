@@ -107,7 +107,34 @@
     <string name="category_movies">Фильмы</string>
     <string name="category_movie">Фильм</string>
     <string name="category_work">Рабочий</string>
+    <string name="category_todo">Задача</string>
+    <string name="category_todos">Задачи</string>
+    <string name="category_checklists">Чек-лист</string>
     <string name="category_tasks">Задачи</string>
+    <string name="category_recipe">Рецепт</string>
+    <string name="category_recipes">Рецепты</string>
+    <string name="category_restaurant">Ресторан</string>
+    <string name="category_restaurants">Рестораны</string>
+    <string name="category_food">Еда</string>
+    <string name="category_bake">Мотоцикл</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_key">Ключ</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_keys">Ключи</string>
+    <string name="category_password">Пароль</string>
+    <string name="category_passwords">Пароли</string>
+    <string name="category_credentials">Учетные данные</string>
+    <string name="category_game">Игра</string>
+    <string name="category_games">Игры</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">Играть</string>
+    <string name="category_gift">Подарок</string>
+    <string name="category_gifts">Подарки</string>
+    <!-- Like a gift -->
+    <string name="category_present">Презентация</string>
+    <!-- Like a gift -->
+    <string name="category_presents">Презентации</string>
+
     <string name="account_already_imported">Учётная запись уже импортирована</string>
     <string name="no_notes_yet">Нет ни одной заметки</string>
     <string name="no_notes_yet_description">Для создания заметки нажмите +</string>
@@ -135,6 +162,7 @@
     <string name="error_dialog_server_app_enabled">Проверьте, установлено ли на сервере приложение Заметки.</string>
     <string name="error_dialog_redirect">На запрос сервер вернул код состояния HTTP 302, что означает, что  приложение Заметки либо не установлено, либо сервер настроен неверно. Такое поведение может являться следствием замены стандартного файла .htaccess администратором сервера или приложением Nextcloud, таким как OID Client.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Пожалуйста отключите все оптимизации аккумулятора для приложений Nextcloud и Notes.</string>
+    <string name="error_dialog_min_version">Для запуска приложение \"Заметки\" необходима версия Nextcloud не ниже 3.18.</string>
     <string name="added_content">Добавлена заметка «%1$s»</string>
     <string name="shared_text_empty">Публикуемый текст пустой</string>
     <string name="append_to_note">Добавить в заметку</string>
@@ -247,6 +275,7 @@
     <string name="error_action_open_battery_settings">Настройки баттареи</string>
     <string name="error_action_open_deck_info">Открыть информацию о приложении</string>
     <string name="error_action_open_network">Параметры сети</string>
+    <string name="error_action_update_files_app">Обновить</string>
     <string name="no_account_configured_yet">Учётная запись пока не настроена</string>
     <string name="no_other_accounts">Вы еще не настроили ни одного аккаунта</string>
     <string name="choose_account">Выбрать учётную запись</string>
@@ -276,4 +305,7 @@
     <string name="settings_file_suffix_description">Расширение файла для новых заметок в вашей учётной записи Nextcloud</string>
     <string name="settings_file_suffix_success">Новый суффикс файла: %1$s</string>
     <string name="http_status_code">Код состояния HTTP: %1$d</string>
-    </resources>
+    <string name="progress_import_indeterminate">Импорт заметок...</string>
+    <string name="progress_import">Импортировано заметок %1$d из %2$d...</string>
+    <string name="account_imported">Учетная запись импортирована.</string>
+</resources>

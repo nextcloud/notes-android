@@ -162,6 +162,7 @@
     <string name="error_dialog_server_app_enabled">Prepričajte se, da ste namestili in omogočili tudi program »Notes« na strežniku.</string>
     <string name="error_dialog_redirect">S strežnika je prejet odziv s kodo stanja HTTP 302, kar kaže na to, da program Notes ni nameščen, ali pa je napačno nastavljen. Napaka se pojavi tudi pri nekaterih določilih v datoteki .htaccess oziroma programih, kot je odjemalec OID.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Onemogočite vso optimizacijo porabe baterije za programa Nextcloud in Notes.</string>
+    <string name="error_dialog_min_version">Program Notes za okolje Android zahteva vsaj različico Nextcloud 3.18.</string>
     <string name="added_content">Dodano »%1$s«</string>
     <string name="shared_text_empty">Besedilo v souporabi je brez vsebine</string>
     <string name="append_to_note">Pripni k zabeležki</string>
@@ -276,6 +277,7 @@
     <string name="error_action_open_battery_settings">Nastavitve baterije</string>
     <string name="error_action_open_deck_info">Odpri podrobnosti programa</string>
     <string name="error_action_open_network">Nastavitve omrežja</string>
+    <string name="error_action_update_files_app">Posodobi</string>
     <string name="no_account_configured_yet">Ni nastavljenega nobenega računa</string>
     <string name="no_other_accounts">Ni nastavljenega nobenega drugega računa</string>
     <string name="choose_account">Izbor računa</string>

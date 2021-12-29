@@ -162,6 +162,7 @@
     <string name="error_dialog_server_app_enabled">Assicurati di aver installato e abilitato l\'applicazione \"Note\" sul tuo server.</string>
     <string name="error_dialog_redirect">Il tuo server ha risposto con un codice di stato HTTP 302, che implica che non hai installato l\'applicazione Note sul tuo server o qualcosa non è configurato correttamente. Questo può essere causato da configurazioni personalizzate nel file .htaccess o da applicazioni di Nextcloud come OID Client.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Disabilita tutte le ottimizzazioni della batteria per le applicazioni Nextcloud e Note.</string>
+    <string name="error_dialog_min_version">L\'app Note di Android richiede che l\'app Nextcloud di Android sia almeno alla versione 3.18.</string>
     <string name="added_content">Aggiunto \"%1$s\"</string>
     <string name="shared_text_empty">Il testo condiviso era vuoto</string>
     <string name="append_to_note">Aggiungi a nota</string>
@@ -268,6 +269,7 @@
     <string name="error_action_open_battery_settings">Impostazioni batteria</string>
     <string name="error_action_open_deck_info">Apri informazioni applicazione</string>
     <string name="error_action_open_network">Impostazioni di rete</string>
+    <string name="error_action_update_files_app">Aggiorna</string>
     <string name="no_account_configured_yet">Ancora nessun account configurato</string>
     <string name="no_other_accounts">Non hai configurato ancora alcun account.</string>
     <string name="choose_account">Scegli account</string>
