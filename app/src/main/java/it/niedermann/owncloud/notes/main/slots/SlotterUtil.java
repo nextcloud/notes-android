@@ -1,12 +1,14 @@
 package it.niedermann.owncloud.notes.main.slots;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.main.items.section.SectionItem;
@@ -58,9 +60,13 @@ public class SlotterUtil {
         String lastInitials = null;
         for (int i = 0; i < noteList.size(); i++) {
             final var currentNote = noteList.get(i);
-            String initials = currentNote.getTitle().substring(0, 1).toUpperCase();
-            if (!initials.matches("[A-Z\\u00C0-\\u00DF]")) {
-                initials = initials.matches("[\\u0250-\\uFFFF]") ? context.getString(R.string.simple_other) : "#";
+            final var title = currentNote.getTitle();
+            String initials = "";
+            if(!TextUtils.isEmpty(title)) {
+                initials = title.substring(0, 1).toUpperCase();
+                if (!initials.matches("[A-Z\\u00C0-\\u00DF]")) {
+                    initials = initials.matches("[\\u0250-\\uFFFF]") ? context.getString(R.string.simple_other) : "#";
+                }
             }
             if (i > 0 && !initials.equals(lastInitials)) {
                 itemList.add(new SectionItem(initials));
