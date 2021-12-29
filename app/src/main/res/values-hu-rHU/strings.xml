@@ -162,6 +162,7 @@
     <string name="error_dialog_server_app_enabled">Bizonyosodjon meg róla, hogy telepítette és bekapcsolta a „Jegyzetek” alkalmazást a szerverén.</string>
     <string name="error_dialog_redirect">A kiszolgálója 302-es HTTP állapotkóddal válaszolt, amely arra utal, hogy nincs telepítve a Jegyzetek alkalmazás a kiszolgálón, vagy valami hibásan van beállítva. Ezt egyéni felülírások is okozhatják, mint egy .htaccess-fájl vagy az OID klienshez hasonló Nextcloud alkalmazások.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Kapcsoljon ki minden energiatakarékossági beállítást a Nextcloud valamint a Jegyzetek alkalmazáshoz.</string>
+    <string name="error_dialog_min_version">A Jegyzetek androidos alkalmazáshoz a Nextcloud androidos alkalmazásnak legalább a 3.18-as verziója szükséges.</string>
     <string name="added_content">„%1$s” hozzáadva</string>
     <string name="shared_text_empty">A megosztott szöveg üres volt</string>
     <string name="append_to_note">Hozzáfűzés a jegyzethez</string>
@@ -268,6 +269,7 @@
     <string name="error_action_open_battery_settings">Akkumulátorbeállítások</string>
     <string name="error_action_open_deck_info">Alkalmazásinformációk megnyitása</string>
     <string name="error_action_open_network">Hálózati beállítások</string>
+    <string name="error_action_update_files_app">Frissítés</string>
     <string name="no_account_configured_yet">Nincs még fiók beállítva</string>
     <string name="no_other_accounts">Még egyetlen más fiókot sem állított be.</string>
     <string name="choose_account">Válasszon fiókot</string>

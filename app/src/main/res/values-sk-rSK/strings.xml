@@ -162,6 +162,7 @@
     <string name="error_dialog_server_app_enabled">Uistite sa, že ste na serveri nainštalovali a povolili aplikáciu Poznámky.</string>
     <string name="error_dialog_redirect">Váš server odpovedal stavovým kódom HTTP 302, čo znamená, že na svojom serveri nemáte nainštalovanú aplikáciu Notes alebo je niečo nesprávne nastavené. Môže to byť spôsobené vlastnými zmenami v súbore .htaccess alebo aplikáciami Nextcloud, ako je OID Client.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Vypnite všetky optimalizácie batérie pre aplikácie Nextcloud a Poznámky.</string>
+    <string name="error_dialog_min_version">Aplikácia Notes pre Android potrebuje aplikáciu Nextcloud pre android aspoň vo verzii 3.18.</string>
     <string name="added_content">Pridané \"%1$s\"</string>
     <string name="shared_text_empty">Zdieľaný text bol prázdny</string>
     <string name="append_to_note">Pripojiť k poznámke</string>
@@ -276,6 +277,7 @@
     <string name="error_action_open_battery_settings">Nastavenia batérie.</string>
     <string name="error_action_open_deck_info">Otvoriť informácie o aplikácii</string>
     <string name="error_action_open_network">Nastavenia siete</string>
+    <string name="error_action_update_files_app">Aktualizovať</string>
     <string name="no_account_configured_yet">Nie je ešte nastavený žiadny účet</string>
     <string name="no_other_accounts">Zatiaľ nemáte nastavené žiadne ďalšie účty.</string>
     <string name="choose_account">Zvoliť účet</string>
