@@ -2,7 +2,14 @@
 
 - [Why aren't there any buttons to apply formatting?](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#why-arent-there-any-buttons-to-apply-formatting)
 - [I have experienced an error](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#i-have-experienced-an-error)
+  - [`NextcloudApiNotRespondingException`](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#nextcloudapinotrespondingexception)
+  - [`UnknownErrorException: Read timed out`](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#unknownerrorexception-read-timed-out)
+  - [`IllegalStateException: Duplicate key`](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#illegalstateexception-duplicate-key)
+  - [`NextcloudFilesAppAccountNotFoundException`](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#nextcloudfilesappaccountnotfoundexception)
+  - [`TokenMismatchException`](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#tokenmismatchexception)
+  - [Workarounds](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#workarounds)
 - [Why don't you make an option for…?](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#why-dont-you-make-an-option-for)
+- [Why is there no support for pens?](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#why-is-there-no-support-for-pens)
 - [Why has my bug report been closed?](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#why-has-my-bug-report-been-closed)
 - [How can i activate the dark mode for widgets?](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#how-can-i-activate-the-dark-mode-for-widgets)
 
@@ -26,7 +33,7 @@ We plan to extend this system further in the future and might add toggles for he
 
 Sorry. There are so many different environments, that it is impossible for us to test each and every constellation.
 
-First of all make sure you have updated to and tried with the latest available versions of both, this app and the [Notes server app](https://apps.nextcloud.com/apps/notes).
+First of all make sure you have updated to and tried with the latest available versions of this app, the [Nextcloud Android](https://play.google.com/store/apps/details?id=com.nextcloud.client) app and the [Notes server app](https://apps.nextcloud.com/apps/notes).
 
 ### `NextcloudApiNotRespondingException`
 
@@ -48,16 +55,23 @@ If you are using an older version, you can as a workaround for the first import 
 
 ### `IllegalStateException: Duplicate key`
 
-This is issue was caused by a bug which was present in the Notes Android app between `3.4.0` and `3.4.10`. It has been fixed in `3.4.11`, though it created a corrupt database state which is not recoverable automatically without data loss. It is therefore required to [clear the storage of the Notes Android app](#tokenmismatchexception-and-all-others) and import your account again from scratch. Make sure to backup unsynchronized changes before doing this.
+This is issue was caused by a bug which was present in the Notes Android app between `3.4.0` and `3.4.10`. It has been fixed in `3.4.11`, though it created a corrupt database state which is not recoverable automatically without data loss. It is therefore required to [clear the storage of the Notes Android app](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#workarounds) and import your account again from scratch. Make sure to backup unsynchronized changes before doing this.
 
 ### `NextcloudFilesAppAccountNotFoundException`
 
 We are not yet sure what exactly causes this issue, but investigate it by [adding more debug logs to recent versions](https://github.com/stefan-niedermann/nextcloud-notes/issues/1256#issuecomment-859505153). In theory this might happen if an already imported account has been deleted in the Nextcloud app.
 As a workaround you can remove the account (or clear the storage of the app as described below if you can't access the account manager anymore) and import it again.
 
-### `TokenMismatchException` and all others
+### `TokenMismatchException`
 
-In all other cases please try to clear the storage of **both** apps, Nextcloud Android **and** Nextcloud Notes Android. Not yet synchronized changes will be lost by performing this step.
+The reason of this error is not yet clear. It often seems to be connected to changes of the authentication (for example enabling 2FA after some time). Please clear the storage of both, the Notes and the Nextcloud Android apps as described in the [workarounds](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#wrokarounds) section.
+
+### Workarounds
+
+In most cases, clearing the storage of **both** apps, Nextcloud Android **and** Nextcloud Notes Android will help to get a clean state.
+
+⚠️ Not yet synchronized changes will be lost by performing this step.  
+⚠️ Uninstalling an app is **not** the same as clearing the storage, since Android keeps some data left on your device when uninstalling an app.
 
 You can achieve this by navigating to
 
@@ -88,6 +102,23 @@ We prefer good defaults over providing an option for each edge case. Our resourc
 5. Each option increases the maintenance efforts, making it harder over the time to work on actual features
 6. Each option introduces new side effects, which might lead to undiscovered bugs or break existing features
 7. The Android app aims to mirror feature parity with the corresponding server app
+
+## Why is there no support for pens?
+
+This topic has been requested multiple times and we'd love to support pens. There are some obstacles, though:
+
+### Choice of approach
+
+Handwritten notes can be implemented in various ways - for example as attachments or just recognizing the characters and translate them to text. The first approach depends on attachments support for the Notes server app (currently [work in progress](https://github.com/nextcloud/notes/issues/74)).
+
+### Licensing issues
+
+The Notes Android app was, is and will always be free. Free not as in "free beer" but as in "freedom". I therefore will not accept any solution that requires to include proprietary libraries (also not for the Google Play Store flavor).
+I recommend you to ask your manufacturer to publish a development SDK under a free license and ask them why they sell stuff to you which you in fact do not own.
+
+### Hardware issues
+
+Given a [free SDK](#licensing-issues) can be found, there is another issue: I don't own a device with a pen. I welcome [Pull Requests](https://github.com/stefan-niedermann/nextcloud-notes/pulls) with contributions to this topic, but i can and will not buy a new device just for this aspect, sorry.
 
 ## Why has my bug report been closed?
 
