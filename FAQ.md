@@ -113,8 +113,8 @@ Handwritten notes can be implemented in various ways - for example as attachment
 
 ### Licensing issues
 
-The Notes Android app was, is and will always be free. Free not as in "free beer" but as in "freedom". I therefore will not accept any solution that requires to include proprietary libraries (also not for the Google Play Store flavor).
-I recommend you to ask your manufacturer to publish a development SDK under a free license and ask them why they sell stuff to you which you in fact do not own.
+The Notes Android app was, is and will always be free. [Free not as in "free beer" but as in "freedom"](https://www.gnu.org/philosophy/free-sw.en.html). I therefore will not accept any solution that requires to include proprietary libraries (also not for the Google Play Store flavor).
+Since i am not aware of any proper free SDK for pens, I recommend you to ask your manufacturer to publish a development SDK under a free license and ask them why they sell stuff to you which you in fact do not own.
 
 ### Hardware issues
 
