@@ -73,10 +73,7 @@
     <string name="widget_note_list_placeholder">ノートがありません</string>
     <string name="widget_single_note_title">一つのノート</string>
     <string name="widget_single_note_placeholder_tv">ノートが見つかりません</string>
-    <string name="widget_create_note">ノートを作成</string>
     <string name="widget_not_logged_in">このウィジェットを使用する前に、ノートにログインしてください</string>
-    <string name="widget_entry_fav_contentDescription">スターアイコンは、アイテムをお気に入りとして示すために使用されます</string>
-
     <string name="activity_select_single_note">ノートを選択</string>
 
     <string name="shortcut_create_long">新しいノートを作成</string>
@@ -92,10 +89,21 @@
     <string name="pin_to_homescreen">ホームスクリーンにピン留めする</string>
     <string name="note_has_been_deleted">ノートが削除されました</string>
     <string name="add_account">アカウントを追加</string>
+
     <string name="category_music">音楽</string>
     <string name="category_movies">動画</string>
     <string name="category_movie">ムービー</string>
     <string name="category_work">業種</string>
+    <string name="category_checklists">チェックリスト</string>
+    <string name="category_tasks">タスク</string>
+    <string name="category_recipe">レシピ</string>
+    <string name="category_food">食べ物</string>
+    <string name="category_password">パスワード</string>
+    <string name="category_passwords">パスワード</string>
+    <string name="category_game">ゲーム</string>
+    <string name="category_games">ゲーム</string>
+    <string name="category_gift">贈り物</string>
+    <string name="category_gifts">贈り物</string>
     <string name="account_already_imported">アカウントはすでにインポートされています</string>
     <string name="no_notes_yet">まだノートはありません</string>
     <string name="no_notes_yet_description">+ ボタンを押して新しいノートを作成</string>
@@ -118,7 +126,6 @@
     <string name="error_dialog_check_server_logs">Nextcloudのセットアップに問題があります。サーバーのログファイルを確認してください。</string>
     <string name="error_dialog_check_maintenance">Nextcloudサーバーがメンテナンスモード中かどうか確認してください。</string>
     <string name="error_dialog_insufficient_storage">Nextcloudサーバーのストレージに空き容量がありません。ローカルの変更をクラウドに同期するには一部のファイルを削除してください。</string>
-    <string name="error_dialog_contact_us">問題が継続する場合はお問い合わせください。我々の連絡先はサイドバーのaboutセクションにかかれています。</string>
     <string name="error_dialog_we_need_info">サポートには下記技術情報が必要です：</string>
     <string name="error_dialog_server_app_enabled">ご利用のサーバーに ”Notes” プラグインアプリがインストールされ、有効になっていることを確認してください。</string>
     <string name="error_dialog_redirect">サーバーがHTTPステータスコード 302を返しました。これはNotesアプリがインストールされていないか、構成が誤っていることを意味します。.htaccessファイルのカスタムオーバーライドやOIDクライアントのようなNextcloudアプリが原因の可能性があります。</string>
@@ -168,6 +175,7 @@
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
     <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">コンテキストに基づいた書式設定 </string>
     <string name="formatting_help_cbf_body_1">Notesアプリの重要な設計目標は、注意力を阻害しないツールを提供することです。その為にMarkdownを使ってテキストを修飾できるようにしました。以下は、コードを入力することなくショートカットを使ってメモを書式設定する例です。</string>
@@ -213,8 +221,17 @@
     <string name="error_action_open_battery_settings">バッテリー設定</string>
     <string name="error_action_open_deck_info">アプリ情報を開く</string>
     <string name="error_action_open_network">ネットワーク設定</string>
+    <string name="no_account_configured_yet">設定済みアカウントがまだありません</string>
     <string name="no_other_accounts">他のアカウントはまだ設定されていません。</string>
     <string name="choose_account">アカウントを選択</string>
     <string name="remove_account">%1$sを削除</string>
 
+    <string name="settings_notes_path">フォルダーを設定</string>
+
+    <string name="simple_backup">バックアップ</string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
+    <string name="settings_file_suffix">ファイル拡張子</string>
     </resources>

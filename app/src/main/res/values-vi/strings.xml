@@ -104,6 +104,10 @@
     <string name="category_movies">Phim</string>
     <string name="category_movie">Xem phim</string>
     <string name="category_work">Công việc</string>
+    <string name="category_food">Thức ăn</string>
+    <string name="category_password">Mật khẩu</string>
+    <string name="category_passwords">Mật khẩu</string>
+    <string name="category_game">Trò chơi</string>
     <string name="account_already_imported">Tài khoản đã được nhập sẵn</string>
     <string name="no_notes_yet">Chưa có ghi chú</string>
     <string name="no_notes_yet_description">Nhấn nút + để tạo ghi chú mới</string>
@@ -228,6 +232,7 @@
     <string name="error_action_open_battery_settings">Cài đặt pin</string>
     <string name="error_action_open_deck_info">Mở Thông tin ứng dụng</string>
     <string name="error_action_open_network">Cài đặt mạng</string>
+    <string name="error_action_update_files_app">Cập nhật</string>
     <string name="no_account_configured_yet">Chưa có tài khoản nào được thiết lập</string>
     <string name="no_other_accounts">Bạn chưa thiết lập tài khoản nào khác.</string>
     <string name="choose_account">Chọn tài khoản</string>
@@ -254,4 +259,7 @@
     <string name="settings_file_suffix_description">Phần mở rộng tệp cho các bản ghi chú mới trên Nextcloud của bạn</string>
     <string name="settings_file_suffix_success">Hậu tố tệp mới: %1$s</string>
     <string name="http_status_code">Mã trạng thái HTTP: %1$d</string>
-    </resources>
+    <string name="progress_import_indeterminate">Đang nhập các ghi chú...</string>
+    <string name="progress_import">Đang nhập ghi chú %1$d trong số %2$d...</string>
+    <string name="account_imported">Đã nhập tài khoản.</string>
+</resources>
