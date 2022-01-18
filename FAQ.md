@@ -68,10 +68,10 @@ The reason of this error is not yet clear. It often seems to be connected to cha
 
 ### Workarounds
 
-In most cases, clearing the storage of **both** apps, Nextcloud Android **and** Nextcloud Notes Android will help to get a clean state.
+In some cases, clearing the storage of the Notes Android app and restarting with a clean state will already be enough. Since we use the [Single Sign On mechanism](https://github.com/nextcloud/Android-SingleSignOn/) of Nextcloud, it might be necessary to clear the storage of **both** apps, Notes Android **and** Nextcloud Android. (the Nextcloud Android app manages some parts of the authentication and the network stack).
 
-⚠️ Not yet synchronized changes will be lost by performing this step.  
-⚠️ Uninstalling an app is **not** the same as clearing the storage, since Android keeps some data left on your device when uninstalling an app.
+- ⚠️ Not yet synchronized changes will be lost by performing this step.  
+- ⚠️ Uninstalling an app is **not** the same as clearing the storage, since Android keeps some data left on your device when uninstalling an app.
 
 You can achieve this by navigating to
 
@@ -87,7 +87,7 @@ Nextcloud / Notes
  Clear storage
 ```
 
-Then set up your account in the Nextcloud Android app again and import the configured account in the Nextcloud Notes Android app.
+Then set up your account in the Nextcloud Android app again and import the configured account in the Notes Android app.
 
 If the issue persists, [open a bug report in our issue tracker](https://github.com/stefan-niedermann/nextcloud-notes/issues/new?assignees=&labels=bug&template=bug_report.md&title=).
 
