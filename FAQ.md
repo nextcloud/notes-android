@@ -37,7 +37,7 @@ First of all make sure you have updated to and tried with the latest available v
 
 ### `NextcloudApiNotRespondingException`
 
-Try to disable the battery "optimization" for both apps. Some manufacturers prevent the app from communicating with the Nextcloud Android properly.
+Try to disable the battery "optimization" for Notes Android and Nextcloud Android. Some manufacturers prevent the Notes Android app from communicating with the Nextcloud Android app properly. It is recommended to clear the storage of both apps as [explained below](#workarounds).
 This is a [known issue of the SingleSignOn mechanism](https://github.com/nextcloud/Android-SingleSignOn#troubleshooting) which we only can work around but not solve on our side.
 
 ### `UnknownErrorException: Read timed out`
