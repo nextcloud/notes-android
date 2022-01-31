@@ -39,10 +39,6 @@ android {
         }
     }
 
-    lintOptions {
-        disable 'MissingTranslation'
-        abortOnError false
-    }
 
     flavorDimensions "version"
 
@@ -71,6 +67,10 @@ android {
         unitTests {
             includeAndroidResources true
         }
+    }
+    lint {
+        abortOnError false
+        disable 'MissingTranslation'
     }
 }
 
