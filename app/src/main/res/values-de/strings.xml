@@ -54,7 +54,7 @@
     <string name="error_synchronization">Synchronisierung fehlgeschlagen</string>
     <string name="error_no_network">Keine Netzwerkverbindung</string>
     <string name="error_maintenance_mode">Server befindet sich im Wartungsmodus</string>
-    <string name="error_unknown">Unbekannter Fehler aufgetreten.</string>
+    <string name="error_unknown">Es ist ein unbekannter Fehler aufgetreten.</string>
 
     <string name="about_version_title">Version</string>
     <string name="about_version">Sie benutzen aktuell %1$s</string>

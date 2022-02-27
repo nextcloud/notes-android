@@ -266,6 +266,8 @@
     <!-- Table cell value of a sample table -->
     <string name="formatting_help_tables_value">Значение %1d</string>
 
+    <string name="formatting_help_images_body_1">Ссылки должны быть либо полными URL, начинающимися с протокола и домена, либо абсолютными путями, начинающимися с %1$s символа.</string>
+    <string name="formatting_help_images_body_2">Чтобы соответствовать формату Markdown, пожалуйста, используйте в URL-адресе исключающие символы. Это означает, например, заменить пробелы на %1$s в URL.</string>
     <string name="formatting_help_images_title">Изображения</string>
     <string name="formatting_help_images_alt">Красивое изображение</string>
 
