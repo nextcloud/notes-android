@@ -109,6 +109,7 @@
     <string name="category_work">Travail</string>
     <string name="category_todo">Tâche</string>
     <string name="category_todos">Tâches</string>
+    <string name="category_checklists">Listes de contrôle</string>
     <string name="category_tasks">Tâches</string>
     <string name="category_recipe">Recette</string>
     <string name="category_recipes">Recettes</string>

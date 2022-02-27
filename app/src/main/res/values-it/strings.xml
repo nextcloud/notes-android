@@ -109,7 +109,7 @@
     <string name="category_work">Lavoro</string>
     <string name="category_todo">Da fare</string>
     <string name="category_todos">Cose da fare</string>
-    <string name="category_checklists">Checklist</string>
+    <string name="category_checklists">Lista di controllo</string>
     <string name="category_tasks">Compiti</string>
     <string name="category_recipe">Ricetta</string>
     <string name="category_recipes">Ricette</string>
@@ -258,8 +258,8 @@
     <!-- Table cell value of a sample table -->
     <string name="formatting_help_tables_value">Valore %1d</string>
 
-    <string name="formatting_help_images_body_1">I collegamenti devono essere URL completi che iniziano con un protocollo e un dominio di rete o percorsi assoluti che iniziano con un %1$s carattere.</string>
-    <string name="formatting_help_images_body_2">Per conformarsi al formato Markdown, utilizza i caratteri \"escape\" nell\'URL dell\'immagine. Ciò significa, ad esempio, sostituire gli spazi con %1$snell\'URL.</string>
+    <string name="formatting_help_images_body_1">I collegamenti devono essere URL completi che iniziano con un protocollo e un dominio di rete o percorsi assoluti che iniziano con un carattere %1$s.</string>
+    <string name="formatting_help_images_body_2">Per conformarsi al formato Markdown, utilizza i caratteri di escape nell\'URL dell\'immagine. Ciò significa, ad esempio, sostituire gli spazi con %1$snell\'URL.</string>
     <string name="formatting_help_images_title">Immagini</string>
     <string name="formatting_help_images_alt">Immagine di fantasia</string>
 
