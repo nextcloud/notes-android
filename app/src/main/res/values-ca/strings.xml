@@ -144,7 +144,7 @@
     <string name="no_category">Sense categoria</string>
     <string name="add_category">Afegeix %1$s</string>
     <string name="simple_checkbox">Casella de selecció</string>
-    <string name="unlock_notes">Desbloqueja les notes</string>
+    <string name="unlock_notes">Desbloca les notes</string>
     <string name="error_dialog_title">Oh, no! I ara què? </string>
     <string name="error_dialog_tip_token_mismatch_retry">Proveu de forçar el tancament de l\'aplicació i reinicieu-la. Pot ser que hi hagi hagut una connexió incorrecta a l\'aplicació Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Si el problema persisteix, proveu d\'esborrar l\'emmagatzematge de totes dues aplicacions: Nextcloud i Notes del Nextcloud per tal de resoldre el problema.</string>
