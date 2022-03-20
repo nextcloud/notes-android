@@ -4,6 +4,7 @@
 - [I have experienced an error](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#i-have-experienced-an-error)
   - [`NextcloudApiNotRespondingException`](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#nextcloudapinotrespondingexception)
   - [`UnknownErrorException: Read timed out`](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#unknownerrorexception-read-timed-out)
+  - [`NextcloudHttpRequestFailedException`](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#nextcloudhttprequestfailedexception)
   - [`IllegalStateException: Duplicate key`](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#illegalstateexception-duplicate-key)
   - [`NextcloudFilesAppAccountNotFoundException`](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#nextcloudfilesappaccountnotfoundexception)
   - [`TokenMismatchException`](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#tokenmismatchexception)
@@ -52,6 +53,21 @@ If you are using an older version, you can as a workaround for the first import 
 1. move all your notes to a different folder on your Nextcloud instance
 2. import your account on your smartphone
 3. put your notes back to the original folder step by step and sync everytime you put some notes back 
+
+### `NextcloudHttpRequestFailedException`
+
+#### `HTTP status-code: 301`
+
+This issue can happen in case of a complex inconsistent state between the Notes Android app, the Single Sign On library, the Nextcloud Android app and your Nextcloud instance. Please try to remove your account from *both*, Notes Android *and* Nextcloud Android and readd it again [as described in the `workarounds` section](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#workarounds). If the issue persists, please report especially any changes on your server side environment: Did you change your domain or IP address of your Nextcloud server? Did you change something about your user account or en- / disabled multi factor authentication (2FA / MFA)? Did you remove your account (only) from the Nextcloud Android app?
+
+#### `HTTP status-code: 302`
+
+As clearly described in the description of the app, [one of the requirements](https://github.com/stefan-niedermann/nextcloud-notes#link-requirements) is to have installed the [`Notes`](https://apps.nextcloud.com/apps/notes) app on your server. This means:
+- **not** [`Quick notes`](https://apps.nextcloud.com/apps/quicknotes)
+- **not** [`Carnet`](https://apps.nextcloud.com/apps/carnet)
+- **not** `SimpleNote`, `NextNotes`, `Joplin` nor any other app.
+
+Only the [`Notes`](https://apps.nextcloud.com/apps/notes) app is supported by the Notes Android app. Granted, detecting a missing installation of the `Notes` app should be more seamlessly - [we are aware of it](https://github.com/stefan-niedermann/nextcloud-notes/issues/1475) and will try to enhance the detection.
 
 ### `IllegalStateException: Duplicate key`
 
