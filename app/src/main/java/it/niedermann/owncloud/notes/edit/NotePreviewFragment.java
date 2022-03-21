@@ -126,6 +126,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         super.onNoteLoaded(note);
         noteLoaded = true;
         registerInternalNoteLinkHandler();
+        binding.singleNoteContent.setMarkdownImageUrlPrefix(repo.getAccountById(note.getAccountId()).getUrl()+"/index.php/apps/notes/notes/"+note.getRemoteId()+"/attachment?path=");
         changedText = note.getContent();
         binding.singleNoteContent.setMarkdownString(note.getContent(), setScrollY);
         binding.singleNoteContent.getMarkdownString().observe(requireActivity(), (newContent) -> {
