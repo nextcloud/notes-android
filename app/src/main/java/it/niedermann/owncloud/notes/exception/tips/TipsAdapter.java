@@ -110,6 +110,9 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsViewHolder> {
                 if ("com.nextcloud.android.sso.QueryParam".equals(throwable.getMessage())) {
                     add(R.string.error_dialog_min_version, new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.nextcloud.client"))
                             .putExtra(INTENT_EXTRA_BUTTON_TEXT, R.string.error_action_update_files_app));
+                } else if("Read timed out".equals(throwable.getMessage())) {
+                    add(R.string.error_dialog_timeout_instance);
+                    add(R.string.error_dialog_timeout_toggle, new Intent(Settings.ACTION_WIFI_SETTINGS).putExtra(INTENT_EXTRA_BUTTON_TEXT, R.string.error_action_open_network));
                 }
             }
         }
