@@ -118,7 +118,7 @@ public class ImportAccountActivity extends AppCompatActivity {
                             @Override
                             public void onError(@NonNull Throwable t) {
                                 runOnUiThread(() -> {
-                                    binding.addButton.setEnabled(true);
+                                    restoreCleanState();
                                     ExceptionDialogFragment.newInstance(t).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
                                 });
                             }

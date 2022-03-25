@@ -73,11 +73,7 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsViewHolder> {
             } else if (throwable instanceof NextcloudFilesAppNotSupportedException) {
                 add(R.string.error_dialog_tip_files_outdated);
             } else if (throwable instanceof NextcloudApiNotRespondingException) {
-                if (VERSION.SDK_INT >= VERSION_CODES.M) {
-                    add(R.string.error_dialog_tip_disable_battery_optimizations, new Intent().setAction(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS).putExtra(INTENT_EXTRA_BUTTON_TEXT, R.string.error_action_open_battery_settings));
-                } else {
-                    add(R.string.error_dialog_tip_disable_battery_optimizations);
-                }
+                add(R.string.error_dialog_tip_disable_battery_optimizations, new Intent().setAction(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS).putExtra(INTENT_EXTRA_BUTTON_TEXT, R.string.error_action_open_battery_settings));
                 add(R.string.error_dialog_tip_files_force_stop);
                 add(R.string.error_dialog_tip_files_delete_storage);
                 final var intent = new Intent(ACTION_APPLICATION_DETAILS_SETTINGS)
