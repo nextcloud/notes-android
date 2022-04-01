@@ -7,6 +7,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -58,6 +60,27 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
 
     private BaseNoteFragment fragment;
 
+    private static boolean ifKeepScreenOn = false;
+
+    public static boolean getIfKeepScreenOn() {
+        return ifKeepScreenOn;
+    }
+
+    public static void setIfKeepScreenOn(boolean ifKeepScreenOn) {
+        EditNoteActivity.ifKeepScreenOn = ifKeepScreenOn;
+    }
+
+    private static String keepScreenOnKey;
+
+    private void changeScreenOn(){
+        Window window = this.getWindow();
+        if(ifKeepScreenOn){
+            window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        } else {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
+    }
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +99,11 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         binding = ActivityEditBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
+
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+        keepScreenOnKey = getString(R.string.pref_key_keep_screen_on);
+        ifKeepScreenOn = prefs.getBoolean(keepScreenOnKey, false);
+        changeScreenOn();
 
         if (savedInstanceState == null) {
             launchNoteFragment();

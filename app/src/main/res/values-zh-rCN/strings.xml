@@ -49,6 +49,7 @@
     <string name="settings_lock_summary">设备凭据</string>
     <string name="settings_background_sync">后台同步</string>
     <string name="settings_prevent_screen_capture">防止截屏</string>
+    <string name="screen_always_on">屏幕常亮</string>
 
     <string name="error_sync">同步失败：%1$s</string>
     <string name="error_synchronization">同步失败</string>

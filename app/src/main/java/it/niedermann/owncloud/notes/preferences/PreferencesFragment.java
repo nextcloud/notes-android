@@ -18,6 +18,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.Branded;
 import it.niedermann.owncloud.notes.branding.BrandedSwitchPreference;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
+import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.persistence.SyncWorker;
 import it.niedermann.owncloud.notes.shared.util.DeviceCredentialUtil;
 
@@ -33,6 +34,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
     private BrandedSwitchPreference gridViewPref;
     private BrandedSwitchPreference preventScreenCapturePref;
     private BrandedSwitchPreference backgroundSyncPref;
+    private BrandedSwitchPreference screenAlwaysOnPref;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -97,6 +99,15 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
             SyncWorker.update(requireContext(), (Boolean) newValue);
             return true;
         });
+
+        screenAlwaysOnPref = findPreference(getString(R.string.pref_key_keep_screen_on));
+        assert screenAlwaysOnPref != null;
+        screenAlwaysOnPref.setOnPreferenceChangeListener(((preference, newValue) -> {
+            EditNoteActivity.setIfKeepScreenOn((boolean) newValue);
+            Log.i(TAG, preference.getKey());
+            Log.i(TAG, "keepScreenOn: " + newValue);
+            return true;
+        }));
     }
 
 
@@ -125,5 +136,6 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
         gridViewPref.applyBrand(mainColor, textColor);
         preventScreenCapturePref.applyBrand(mainColor, textColor);
         backgroundSyncPref.applyBrand(mainColor, textColor);
+        screenAlwaysOnPref.applyBrand(mainColor, textColor);
     }
 }

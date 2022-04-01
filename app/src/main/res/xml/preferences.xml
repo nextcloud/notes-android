@@ -48,6 +48,12 @@
             android:layout="@layout/item_pref"
             android:title="@string/settings_font_title" />
 
+        <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
+            android:icon="@drawable/ic_baseline_brightness_5"
+            android:key='@string/pref_key_keep_screen_on'
+            android:layout="@layout/item_pref"
+            android:title='@string/screen_always_on' />
+
         <ListPreference
             android:defaultValue="@string/pref_value_font_size_medium"
             android:entries="@array/fontSize_entries"

@@ -120,5 +120,12 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:4.4.0'
     testImplementation 'org.robolectric:robolectric:4.7.3'
 
+    // Fragment testing
+    debugImplementation "androidx.fragment:fragment-testing:1.4.1"
+    debugImplementation "androidx.fragment:fragment:1.4.1"
+    debugImplementation("androidx.fragment:fragment-ktx:1.5.0-alpha04")
+    testImplementation "androidx.fragment:fragment:1.4.1"
+    testImplementation("androidx.fragment:fragment-ktx:1.5.0-alpha04")
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
