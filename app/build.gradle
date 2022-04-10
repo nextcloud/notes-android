@@ -122,9 +122,10 @@ dependencies {
 
     // Fragment testing
     debugImplementation "androidx.fragment:fragment-testing:1.4.1"
-    debugImplementation "androidx.fragment:fragment:1.4.1"
-    debugImplementation("androidx.fragment:fragment-ktx:1.5.0-alpha04")
-    testImplementation "androidx.fragment:fragment:1.4.1"
+    // exclude is needed for reason: https://issuetracker.google.com/issues/128612536
+    implementation ("androidx.fragment:fragment-testing:1.4.1", {
+        exclude group: 'androidx.test', module: 'core'
+    })
     testImplementation("androidx.fragment:fragment-ktx:1.5.0-alpha04")
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])

@@ -62,10 +62,17 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
 
     private static boolean ifKeepScreenOn = false;
 
+    /**
+     * get the value of ifKeepScreenOn.
+     * @return the value of ifKeepScreenOn
+     **/
     public static boolean getIfKeepScreenOn() {
         return ifKeepScreenOn;
     }
-
+    /**
+     * set the value of ifKeepScreenOn.
+     * @param ifKeepScreenOn the value to set
+     **/
     public static void setIfKeepScreenOn(boolean ifKeepScreenOn) {
         EditNoteActivity.ifKeepScreenOn = ifKeepScreenOn;
     }
