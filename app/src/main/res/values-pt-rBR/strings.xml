@@ -261,7 +261,7 @@
     <string name="formatting_help_images_body_1">Os links devem ser URLs completos, começando com um protocolo e domínio, ou caminhos absolutos, começando com um caractere %1$s.</string>
     <string name="formatting_help_images_body_2">Para estar em conformidade com o formato Markdown, use caracteres de escape no URL da imagem. Isso significa, por exemplo, substituir espaços por  %1$s no endereço URL.</string>
     <string name="formatting_help_images_title">Imagens</string>
-    <string name="formatting_help_images_alt">Imagens bonita</string>
+    <string name="formatting_help_images_alt">Imagem bonita</string>
 
     <string name="simple_other">Outro</string>
     <string name="sort_last_modified">Ordenar por data de modificação</string>

@@ -68,6 +68,7 @@
     <string name="about_app_license">Tämä sovellus on GNU GENERAL PUBLIC LICENSE v3+ -lisensoitu.</string>
     <string name="about_app_license_button">Näytä lisenssi</string>
     <string name="about_icons_disclaimer_title">Kuvakkeet</string>
+    <string name="about_icons_disclaimer_mdi">Material Design-kuvakkeet</string>
     <string name="about_credits_tab_title">Tekijät</string>
     <string name="about_contribution_tab_title">Kontribuutio</string>
     <string name="about_license_tab_title">Lisenssi</string>
@@ -97,10 +98,16 @@
     <string name="category_movies">Elokuvat</string>
     <string name="category_movie">Elokuva</string>
     <string name="category_work">Työ</string>
+    <string name="category_todo">ToD</string>
+    <string name="category_todos">ToDo:t</string>
+    <string name="category_checklists">Tsekkilistat</string>
+    <string name="category_tasks">Tehtävät</string>
     <string name="category_recipe">Resepti</string>
     <string name="category_recipes">Reseptit</string>
     <string name="category_restaurant">Ravintola</string>
     <string name="category_restaurants">Ravintolat</string>
+    <string name="category_food">Ruoka</string>
+    <string name="category_bake">Leivonta</string>
     <!-- This represents a category where one can place passwords and credentials -->
     <string name="category_key">Avain</string>
     <!-- This represents a category where one can place passwords and credentials -->
@@ -109,6 +116,13 @@
     <string name="category_passwords">Salasanat</string>
     <string name="category_game">Peli</string>
     <string name="category_games">Pelit</string>
+    <string name="category_gift">Lahja</string>
+    <string name="category_gifts">Lahjat</string>
+    <!-- Like a gift -->
+    <string name="category_present">Lahja</string>
+    <!-- Like a gift -->
+    <string name="category_presents">Lahjat</string>
+
     <string name="account_already_imported">Tili on jo tuotu</string>
     <string name="no_notes_yet">Ei muistiinpanoja</string>
     <string name="no_notes_yet_description">Paina + luodaksesi uuden muistiinpanon</string>
@@ -238,9 +252,11 @@
     <string name="error_action_open_battery_settings">Akkuasetukset</string>
     <string name="error_action_open_deck_info">Avaa sovelluksen tiedot</string>
     <string name="error_action_open_network">Verkkoasetukset</string>
+    <string name="error_action_update_files_app">Päivitä</string>
     <string name="no_account_configured_yet">Tiliä ei ole vielä asetettu</string>
     <string name="no_other_accounts">Et ole vielä määrittänyt muita tilejä.</string>
     <string name="choose_account">Valitse tili</string>
+    <string name="context_based_formatting">Kontekstiin perustuva muotoilu - ponnahdusikkuna</string>
     <plurals name="remove_account_message">
         <item quantity="one">Tilin %1$s poistamalla poistetaan myös yksi synkronoimaton muutos, jota ei voida jälkeenpäin palauttaa.</item>
         <item quantity="other">Tilin %1$s poistamalla poistetaan myös %2$d synkronoimatonta muutosta, joita ei voida jälkeenpäin palauttaa.</item>
@@ -253,11 +269,18 @@
     <string name="simple_next">Seuraava</string>
     <string name="simple_prev">Edellinen</string>
     <string name="simple_backup">Varmuuskopioi</string>
+    <string name="backup">Havaitsimme virheellisen sovelluksen tilan, jota ei voida palauttaa. Varmuuskopioi synkronoimattomat muutokset ja tyhjennä muistiinpanosovelluksen tallennustila.</string>
+    <string name="settings_notes_path_description">Hakemisto, johon muistiinpanot tallennetaan Nextcloudissa</string>
     <string-array name="settings_file_suffixes">
         <item translatable="false">.txt</item>
         <item translatable="false">.md</item>
     </string-array>
+    <string name="settings_notes_path_success">Uusi muistiinpanojen hakemisto: %1$s</string>
     <string name="settings_file_suffix">Tiedostopääte</string>
+    <string name="settings_file_suffix_description">Tiedostopääte uusille Nextcloud-muistiinpanoille</string>
+    <string name="settings_file_suffix_success">Uuden tiedoston pääte: %1$s</string>
     <string name="http_status_code">HTTP-tilakoodi: %1$d</string>
+    <string name="progress_import_indeterminate">Tuodaan muistiinpanoja...</string>
+    <string name="progress_import">Tuodaan muistiinpanoa %1$d/%2$d…</string>
     <string name="account_imported">Tili tuotu.</string>
 </resources>
