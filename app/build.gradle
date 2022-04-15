@@ -80,7 +80,7 @@ dependencies {
     // Nextcloud SSO
     implementation 'com.github.nextcloud:Android-SingleSignOn:0.6.1'
     implementation 'com.github.stefan-niedermann:android-commons:0.2.6'
-    implementation 'com.github.stefan-niedermann.nextcloud-commons:sso-glide:1.6.2'
+    implementation 'com.github.stefan-niedermann.nextcloud-commons:sso-glide:1.6.3'
     implementation 'com.github.stefan-niedermann.nextcloud-commons:exception:1.6.3'
     implementation('com.github.stefan-niedermann.nextcloud-commons:markdown:1.6.3') {
         exclude group: 'org.jetbrains', module: 'annotations-java5'
