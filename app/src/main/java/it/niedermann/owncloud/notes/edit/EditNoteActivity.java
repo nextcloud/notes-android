@@ -1,12 +1,12 @@
 package it.niedermann.owncloud.notes.edit;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -72,6 +72,8 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
             return;
         }
 
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
         categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
         binding = ActivityEditBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -97,6 +99,12 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
             fragment = null;
         }
         launchNoteFragment();
+    }
+
+    @Override
+    protected void onStop() {
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        super.onStop();
     }
 
     private long getNoteId() {

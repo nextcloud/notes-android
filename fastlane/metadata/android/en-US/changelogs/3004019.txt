@@ -1,3 +1,4 @@
+- 🐞 Detect missing Notes app on server when importing an account (#1475)
 - ⚙️ Remove incomplete and outdated translations
 - ⚙️ Updated dependencies
 - ⚙️ Requires Android ≥ 6.0 (matching the Nextcloud Android app)
