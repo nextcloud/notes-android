@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 32
     buildToolsVersion '31.0.0'
 
     compileOptions {
@@ -13,7 +13,7 @@ android {
     defaultConfig {
         applicationId "it.niedermann.owncloud.notes"
         minSdkVersion 23
-        targetSdkVersion 31
+        targetSdkVersion 32
         versionCode 3004019
         versionName "3.4.19"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
