@@ -12,6 +12,7 @@
     <string name="action_search">Tìm</string>
     <string name="action_sorting_method">Phương pháp sắp xếp</string>
     <string name="simple_cancel">Hủy</string>
+    <string name="simple_switch">Chuyển</string>
     <string name="simple_edit">Chỉnh sửa</string>
     <string name="simple_remove">Xoá</string>
     <string name="action_edit_save">Lưu</string>
@@ -104,10 +105,16 @@
     <string name="category_movies">Phim</string>
     <string name="category_movie">Xem phim</string>
     <string name="category_work">Công việc</string>
+    <string name="category_tasks">Nhiệm vụ</string>
     <string name="category_food">Thức ăn</string>
     <string name="category_password">Mật khẩu</string>
     <string name="category_passwords">Mật khẩu</string>
     <string name="category_game">Trò chơi</string>
+    <string name="category_games">Trò chơi</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">Chơi</string>
+    <!-- Like a gift -->
+    <string name="category_present">Trình bày</string>
     <string name="account_already_imported">Tài khoản đã được nhập sẵn</string>
     <string name="no_notes_yet">Chưa có ghi chú</string>
     <string name="no_notes_yet_description">Nhấn nút + để tạo ghi chú mới</string>

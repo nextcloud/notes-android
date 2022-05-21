@@ -12,6 +12,7 @@
     <string name="action_search">検索</string>
     <string name="action_sorting_method">並べ替え方法</string>
     <string name="simple_cancel">キャンセル</string>
+    <string name="simple_switch">切り替え</string>
     <string name="simple_edit">編集</string>
     <string name="simple_remove">削除</string>
     <string name="action_edit_save">保存</string>
@@ -45,26 +46,36 @@
     <string name="settings_font_size">フォントサイズ</string>
     <string name="settings_wifi_only">Wi-Fi接続時のみ同期する</string>
     <string name="settings_lock">アプリロック（ベータ）</string>
+    <string name="settings_lock_summary">デバイスの資格情報</string>
     <string name="settings_background_sync">バックグラウンド同期</string>
     <string name="settings_prevent_screen_capture">スクリーンショットを防止</string>
 
     <string name="error_sync">同期に失敗しました: %1$s</string>
     <string name="error_synchronization">同期に失敗</string>
     <string name="error_no_network">ネットワークに接続されていません</string>
+    <string name="error_maintenance_mode">サーバーはメンテナンスモードです</string>
     <string name="error_unknown">不明なエラーが発生しました</string>
 
     <string name="about_version_title">バージョン</string>
+    <string name="about_version">現在%1$sを使用しています</string>
     <string name="about_maintainer_title">管理者</string>
     <string name="about_developers_title">開発者</string>
     <string name="about_translators_title">翻訳者</string>
+    <string name="about_translators_transifex">%1$sのNextcloud コミュニティー</string>
     <string name="about_testers_title">テスター</string>
     <string name="about_source_title">ソースコード</string>
+    <string name="about_source">このプロジェクトはGitHub:%1$sにホストされています。</string>
     <string name="about_issues_title">問題</string>
+    <string name="about_issues">GitHub の問題追跡ツールで、不具合、拡張の提案、機能のリクエストを報告できます: %1$s</string>
     <string name="about_translate_title">翻訳</string>
+    <string name="about_translate">Transifex の Nextcloud チームに参加して、このアプリの翻訳を手伝ってください: %1$s</string>
     <string name="about_app_license_title">アプリ ライセンス</string>
     <string name="about_app_license">このアプリケーションは GNU GENERAL PUBLIC LICENSE v3+ でライセンスされています。</string>
     <string name="about_app_license_button">ライセンスを表示</string>
     <string name="about_icons_disclaimer_title">アイコン</string>
+    <string name="about_icons_disclaimer_app_icon">オリジナルのアイコンは %1$sを参照。</string>
+    <string name="about_icons_disclaimer_mdi_icons">このアプリで使用しているすべてのアイコンは、%1$sGoogle Inc.によって作成されたもので、Apache 2.0ライセンスによってライセンスされています。</string>
+    <string name="about_icons_disclaimer_mdi">マテリアルデザインアイコン</string>
     <string name="about_credits_tab_title">クレジット</string>
     <string name="about_contribution_tab_title">貢献</string>
     <string name="about_license_tab_title">ライセンス</string>
@@ -97,13 +108,19 @@
     <string name="category_checklists">チェックリスト</string>
     <string name="category_tasks">タスク</string>
     <string name="category_recipe">レシピ</string>
+    <string name="category_recipes">レシピ</string>
+    <string name="category_restaurant">飲食店</string>
     <string name="category_food">食べ物</string>
     <string name="category_password">パスワード</string>
     <string name="category_passwords">パスワード</string>
     <string name="category_game">ゲーム</string>
     <string name="category_games">ゲーム</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">再生</string>
     <string name="category_gift">贈り物</string>
     <string name="category_gifts">贈り物</string>
+    <!-- Like a gift -->
+    <string name="category_present">プレゼン</string>
     <string name="account_already_imported">アカウントはすでにインポートされています</string>
     <string name="no_notes_yet">まだノートはありません</string>
     <string name="no_notes_yet_description">+ ボタンを押して新しいノートを作成</string>
@@ -135,6 +152,7 @@
     <string name="append_to_note">ノートに追記</string>
     <string name="change_note_title">ノートタイトルを変更</string>
     <string name="menu_edit_title">タイトルを編集</string>
+    <string name="settings_gridview">グリッド表示</string>
     <string name="simple_security">セキュリティ</string>
     <string name="simple_synchronization">同期</string>
     <string name="manage_accounts">アカウント管理</string>
@@ -221,13 +239,17 @@
     <string name="error_action_open_battery_settings">バッテリー設定</string>
     <string name="error_action_open_deck_info">アプリ情報を開く</string>
     <string name="error_action_open_network">ネットワーク設定</string>
+    <string name="error_action_update_files_app">更新</string>
     <string name="no_account_configured_yet">設定済みアカウントがまだありません</string>
     <string name="no_other_accounts">他のアカウントはまだ設定されていません。</string>
     <string name="choose_account">アカウントを選択</string>
     <string name="remove_account">%1$sを削除</string>
 
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">アカウントの追加にはインターネットへの接続が必要です</string>
     <string name="settings_notes_path">フォルダーを設定</string>
 
+    <string name="simple_next">次へ</string>
+    <string name="simple_prev">前へ</string>
     <string name="simple_backup">バックアップ</string>
     <string-array name="settings_file_suffixes">
         <item translatable="false">.txt</item>

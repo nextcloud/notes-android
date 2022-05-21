@@ -44,7 +44,7 @@
     <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title">Sabit aralıklı yazı türü</string>
     <string name="settings_font_size">Yazı boyutu</string>
-    <string name="settings_wifi_only">Yalnız Wi-Fi ile eşitlensin</string>
+    <string name="settings_wifi_only">Yalnızca Wi-Fi ile eşitlensin</string>
     <string name="settings_lock">Uygulama kilidi (Beta)</string>
     <string name="settings_lock_summary">Aygıt kimlik doğrulama bilgileri</string>
     <string name="settings_background_sync">Arka planda eşitleme</string>
@@ -218,7 +218,7 @@
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Bağlama göre biçimlendirme</string>
     <string name="formatting_help_cbf_body_1">Notlar uygulamasının önemli bir tasarım amacı, dikkat dağıtmayan bir araç sağlamaktır. Yine de metinlerinizi Markdown kullanarak biçimlendirebilirsiniz. Aşağıdaki örneklerden bazılarında kısayol tuşlarını kullanarak notlarınızı aşağıdaki kodları yazmadan biçimlendirebilirsiniz.</string>
-    <string name="formatting_help_cbf_body_2">Yalnız bir metin bölümü seçerek ya da herhangi bir konumda imlece dokunarak varsayılan kayıtların yanında açılan menüden %1$s, %2$s, %3$s, %4$s gibi kayıtlar ya da %5$s seçenekleri kullanabilirsiniz.</string>
+    <string name="formatting_help_cbf_body_2">Yalnızca bir metin bölümü seçerek ya da herhangi bir konumda imlece dokunarak varsayılan kayıtların yanında açılan menüden %1$s, %2$s, %3$s, %4$s gibi kayıtlar ya da %5$s seçenekleri kullanabilirsiniz.</string>
 
     <string name="formatting_help_text_title">Metin</string>
     <string name="formatting_help_text_body">Markdown ile bazı sözcükleri %1$skalın%1$s ya da %2$syatık%2$s yapmak çok kolaydır. Bazı sözcüklerin %3$süzerini çizebilir%3$s ve [Nextcloud bağlantısı](https://nextcloud.com) gibi bağlantı verebilirsiniz.</string>
