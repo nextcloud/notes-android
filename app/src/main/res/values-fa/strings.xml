@@ -6,12 +6,15 @@
     <string name="label_all_notes">همه یادداشت‌ها</string>
     <string name="label_favorites">مورد علاقه‌ها</string>
     <string name="action_create">یادداشت جدید</string>
+    <string name="welcome_text">به %1$s خوش آمدید</string>
     <string name="action_settings">تنظیمات</string>
     <string name="action_trashbin">یادداشت‌های حذف شده</string>
     <string name="action_search">جستجو</string>
     <string name="action_sorting_method">روش مرتب‌سازی</string>
     <string name="simple_cancel">لغو</string>
+    <string name="simple_switch">تعویض</string>
     <string name="simple_edit">ویرایش</string>
+    <string name="simple_remove">حذف</string>
     <string name="action_edit_save">ذخیره</string>
     <string name="simple_about">درباره</string>
     <string name="simple_link">پیوند</string>
@@ -42,24 +45,34 @@
     <string name="settings_font_title">قلم Monospace</string>
     <string name="settings_font_size">اندازهٔ قلم</string>
     <string name="settings_wifi_only">همگام‌سازی فقط در Wi-Fi</string>
+    <string name="settings_lock_summary">اعتبارنامه‌های دستگاه</string>
     <string name="settings_background_sync">همگام‌سازی پس زمینه</string>
     <string name="error_sync">همگام‌سازی انجام نشد:%1$s</string>
     <string name="error_synchronization">همگام‌سازی انجام نشد</string>
     <string name="error_no_network">هیچ ارتباطی با شبکه برقرار نیست</string>
+    <string name="error_maintenance_mode">کارساز در حال نگه‌داری است</string>
     <string name="error_unknown">یک خطای ناشناخته رخ داده است.</string>
 
     <string name="about_version_title">نسخه</string>
+    <string name="about_version"> شما در حال استفاده %1$s هستید</string>
     <string name="about_maintainer_title">نگاه‌دارنده</string>
     <string name="about_developers_title">توسعه دهندگان</string>
     <string name="about_translators_title">مترجم</string>
+    <string name="about_translators_transifex">انجمن نکست کلود در %1$s</string>
     <string name="about_testers_title">آزمایش کنندگان</string>
     <string name="about_source_title">کد منبع</string>
+    <string name="about_source">این پروژه در GitHub میزبانی شده است: %1$s</string>
     <string name="about_issues_title">مسائل</string>
+    <string name="about_issues">شما می توانید اشکالات ، پیشنهادات پیشرفت و درخواست ویژگی را در ردیاب شماره GitHub گزارش دهید: %1$s</string>
     <string name="about_translate_title">ترجمه</string>
+    <string name="about_translate">در Transifex به تیم Nextcloud بپیوندید و در ترجمه این برنامه به ما کمک کنید: %1$s</string>
     <string name="about_app_license_title">مجوز برنامه</string>
     <string name="about_app_license">این برنامه تحت مجوز GNU GENERAL PUBLIC LICENSE v3 + مجاز است.</string>
     <string name="about_app_license_button">مشاهده مجوز</string>
     <string name="about_icons_disclaimer_title">آیکون‌ها</string>
+    <string name="about_icons_disclaimer_app_icon">برای مشاره آیکون اصلی %1$s را ببینید.</string>
+    <string name="about_icons_disclaimer_mdi_icons">تمام نمادهای دیگری که توسط این برنامه استفاده می شود%1$s توسط Google Inc ساخته شده و تحت مجوز Apache 2.0 دارای مجوز هستند.</string>
+    <string name="about_icons_disclaimer_mdi">آیکن های طراحی متریال</string>
     <string name="about_credits_tab_title">اعتبارات</string>
     <string name="about_contribution_tab_title">مشارکت</string>
     <string name="about_license_tab_title">مجوز</string>
@@ -68,10 +81,7 @@
     <string name="widget_note_list_placeholder">بدون یادداشت</string>
     <string name="widget_single_note_title">یادداشت واحد</string>
     <string name="widget_single_note_placeholder_tv">یادداشت یافت نشد</string>
-    <string name="widget_create_note">ساختن یادداشت</string>
     <string name="widget_not_logged_in">لطفاً قبل از استفاده از این ویجت، به یادداشت‌ها وارد شوید</string>
-    <string name="widget_entry_fav_contentDescription">از آیکون ستاره برای مشخص کردن یک مورد به عنوان مورد علاقه استفاده می‌شود</string>
-
     <string name="activity_select_single_note">انتخاب یادداشت</string>
 
     <string name="shortcut_create_long">ساختن یادداشت جدید</string>
@@ -87,10 +97,21 @@
     <string name="pin_to_homescreen">اتصال به صفحه اصلی</string>
     <string name="note_has_been_deleted">این یادداشت حذف شده است</string>
     <string name="add_account">افزودن حساب کاربری</string>
+
     <string name="category_music">موسیقی</string>
     <string name="category_movies">فیلم‌ها</string>
     <string name="category_movie">فیلم</string>
     <string name="category_work">کار</string>
+    <string name="category_tasks">وظایف</string>
+    <string name="category_restaurant">رستوران</string>
+    <string name="category_password">کلمه عبور</string>
+    <string name="category_passwords">کلمات عبور</string>
+    <string name="category_game">بازی</string>
+    <string name="category_games">بازی ها</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">پخش کردن</string>
+    <!-- Like a gift -->
+    <string name="category_present">حاضر</string>
     <string name="account_already_imported">حساب قبلاً وارد شده است</string>
     <string name="no_notes_yet">هنوز هیچ یادداشتی وجود ندارد</string>
     <string name="no_notes_yet_description">دکمه + را فشار دهید تا یک یادداشت جدید ایجاد کنید</string>
@@ -113,7 +134,6 @@
     <string name="error_dialog_check_server_logs"> مشکلی در نصب ابر Nextcloud وجود دارد. لطفا لاگ‌های سرور را بررسی کنید.</string>
     <string name="error_dialog_check_maintenance">لطفا بررسی کنید که نسخه Nextcloud شما در حال حاضر در حالت تعمیر و نگهداری نباشد.</string>
     <string name="error_dialog_insufficient_storage">فضای برنامک نکست‌کلود شما پر شده است.لطفا یعضی از فایل‌های خود در را فضای ابری برای همگام‌سازی تغییرات محلی پاک کنید.  </string>
-    <string name="error_dialog_contact_us">لطفا بدون هیچ تردیدی در صورت استمرار مشکل با ما تماس بگیرید.</string>
     <string name="error_dialog_we_need_info">ما برای کمک به شما احتیاج به دنبال کردن اطلاعات فنی داریم:</string>
     <string name="error_dialog_server_app_enabled">لطفا از نصب و فعال بودن برنامک یادداشت بر روی سرور، اطمینان حاصل کنید.</string>
     <string name="error_dialog_redirect">پاسخ سرور شما کد حالت HTTP 302 است. که دلالت بر عدم نصب برنامک یادداشت بر روی سرور و یا پیکربندی نامناسب دارد. این مشکل می‌تواند به دلیل تغییرات نامناسب ایجاد شده در فایل .htaccess و یا به دلیل برنامه‌های مرتبط با Nextcloud مثل OID Client رخ دهد.</string>
@@ -123,6 +143,7 @@
     <string name="append_to_note">به یادداشت اضافه کنید</string>
     <string name="change_note_title">عوض‌کردن عنوان یادداشت</string>
     <string name="menu_edit_title">ویرایش عنوان</string>
+    <string name="settings_gridview">نمایش گرید</string>
     <string name="simple_security">امنیت</string>
     <string name="simple_synchronization">همگام‌سازی</string>
     <string name="manage_accounts">مدیریت حساب‌ها</string>
@@ -196,6 +217,12 @@
     <string name="error_action_open_battery_settings">تنظیمات باتری</string>
     <string name="error_action_open_deck_info">باز کردن اطلاعات برنامه</string>
     <string name="error_action_open_network">تنظیمات شبکه</string>
+    <string name="error_action_update_files_app">یه‌روزرسانی</string>
     <string name="no_other_accounts">شما تاکنون هیچ حساب کاربری دیگری را ایجاد نکرده‌اید.</string>
+    <string name="choose_account">حساب کاربری را انتخاب کنید</string>
     <string name="context_based_formatting">بازپخش قالب بندی مبتنی بر متن</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">برای اضافه کردن حساب باید به اینترنت متصل شوید.</string>
+    <string name="simple_next">بعدی</string>
+    <string name="simple_prev">قبلی</string>
+    <string name="simple_backup">پشتیبان‌گیری</string>
     </resources>

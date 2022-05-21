@@ -11,7 +11,9 @@
     <string name="action_search">Ieškoti</string>
     <string name="action_sorting_method">Išdėstymo būdas</string>
     <string name="simple_cancel">Atsisakyti</string>
+    <string name="simple_switch">Perjungti</string>
     <string name="simple_edit">Taisyti</string>
+    <string name="simple_remove">Šalinti</string>
     <string name="action_edit_save">Įrašyti</string>
     <string name="simple_about">Apie</string>
     <string name="simple_link">Nuoroda</string>
@@ -42,16 +44,20 @@
     <string name="settings_font_title">Lygiaplotis šriftas</string>
     <string name="settings_font_size">Šrifto dydis</string>
     <string name="settings_wifi_only">Sinchronizuoti tik naudojant belaidį (Wi-Fi)</string>
+    <string name="settings_lock_summary">Įrenginio prisijungimo duomenys</string>
     <string name="settings_background_sync">Foninis sinchronizavimas</string>
     <string name="error_sync">Sinchronizacija nepavyko: %1$s</string>
     <string name="error_synchronization">Sinchronizacija nepavyko</string>
     <string name="error_no_network">Nėra tinklo ryšio</string>
+    <string name="error_maintenance_mode">Serveris yra techninės priežiūros veiksenoje</string>
     <string name="error_unknown">Įvyko nežinoma klaida.</string>
 
     <string name="about_version_title">Versija</string>
+    <string name="about_version">Šiuo metu naudojate %1$s</string>
     <string name="about_maintainer_title">Prižiūrėtojas</string>
     <string name="about_developers_title">Plėtotojai</string>
     <string name="about_translators_title">Vertėjai</string>
+    <string name="about_translators_transifex">Nextcloud bendruomenė, esanti %1$s</string>
     <string name="about_testers_title">Testuotojai</string>
     <string name="about_source_title">Pradinis kodas</string>
     <string name="about_issues_title">Problemos</string>
@@ -68,10 +74,7 @@
     <string name="widget_note_list_placeholder">Užrašų nėra</string>
     <string name="widget_single_note_title">Vieni užrašai</string>
     <string name="widget_single_note_placeholder_tv">Užrašai nerasti</string>
-    <string name="widget_create_note">Sukurti užrašus</string>
     <string name="widget_not_logged_in">Prieš naudodami šį valdiklį, prisijunkite prie Užrašų</string>
-    <string name="widget_entry_fav_contentDescription">Žvaigždės piktograma yra naudojama pažymėti elementą kaip mėgstamą</string>
-
     <string name="activity_select_single_note">Pasirinkti užrašus</string>
 
     <string name="shortcut_create_long">Sukurti naujus užrašus</string>
@@ -87,10 +90,22 @@
     <string name="pin_to_homescreen">Prisegti prie pradžios ekrano</string>
     <string name="note_has_been_deleted">Šie užrašai ištrinti</string>
     <string name="add_account">Pridėti paskyrą</string>
+
     <string name="category_music">Muzika</string>
     <string name="category_movies">Filmai</string>
     <string name="category_movie">Filmas</string>
     <string name="category_work">Darbas</string>
+    <string name="category_tasks">Užduotys</string>
+    <string name="category_recipes">Receptai</string>
+    <string name="category_restaurant">Restoranas</string>
+    <string name="category_password">Slaptažodis</string>
+    <string name="category_passwords">Slaptažodžiai</string>
+    <string name="category_game">Žaidimas</string>
+    <string name="category_games">Žaidimai</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">Atkurti</string>
+    <!-- Like a gift -->
+    <string name="category_present">Pristatymas</string>
     <string name="account_already_imported">Paskyra jau buvo importuota</string>
     <string name="no_notes_yet">Nėra užrašų</string>
     <string name="no_notes_yet_description">Norėdami sukurti užrašus, paspauskite mygtuką +</string>
@@ -113,7 +128,6 @@
     <string name="error_dialog_check_server_logs">Kyla problemų dėl „Nextcloud“ programos nustatymų. Peržiūrėkite serverio sisteminio žurnalo įrašus.</string>
     <string name="error_dialog_check_maintenance">Patikrinkite, ar jūsų „Nextcloud“ programa šiuo metu aptarnavimo režime.</string>
     <string name="error_dialog_insufficient_storage">„Nextcloud“ programa nebeturi laisvos vietos saugykloje. Prašome, ištrinkite nereikalingus failus, kad lokalūs pakeitimai būtų sinchronizuoti su debesimi.</string>
-    <string name="error_dialog_contact_us">Jei problemos išlieka, susisiekite su mumis. Mūsų kontaktinę informaciją galite rasti šoninės juostos skyriuje Apie.</string>
     <string name="error_dialog_we_need_info">Norint jums padėti, mums reikia techninės informacijos:</string>
     <string name="error_dialog_server_app_enabled">Įsitikinkite, kad įdiegėte ir įjungėte programą „Užrašai“ savo serveryje.</string>
     <string name="error_dialog_redirect">Jūsų serverio atsakymas turi HTTP 302 klaidos kodą, tai reiškia, kad jūs neįdiegėte „Notes“ programos savo serveryje arba ji įdiegta netinkamai. Taip galėjo dėl nustatymų pakeitimų .htaccess faile arba „Nextcloud“ programos, tokios kaip OID klientas.</string>
@@ -123,6 +137,7 @@
     <string name="append_to_note">Pridėti prie užrašų</string>
     <string name="change_note_title">Pakeisti užrašo pavadinimą</string>
     <string name="menu_edit_title">Redaguoti pavadinimą</string>
+    <string name="settings_gridview">Tinklelio rodinys</string>
     <string name="simple_security">Saugumas</string>
     <string name="simple_synchronization">Sinchronizacija</string>
     <string name="manage_accounts">Tvarkyti paskyras</string>
@@ -193,11 +208,19 @@
     <string name="formatting_help_code_body_2">„Markdown“ taip pat palaiko vadinamąjį kodo aptvėrimą, kuris leidžia sudaryti kelias eilutes be įtraukų:</string>
     <string name="formatting_help_code_body_3">Jei norite naudoti sintaksės paryškinimą, įtraukite kalbą:</string>
 
+    <string name="formatting_help_tables_title">Lentelės</string>
+    <string name="formatting_help_images_title">Paveikslai</string>
     <string name="simple_other">Kita</string>
     <string name="sort_last_modified">Išrikiuokite pagal redagavimo datą</string>
     <string name="sort_alphabetically">Išrikiuokite pagal abecėlę</string>
     <string name="error_action_open_battery_settings">Akumuliatoriaus nustatymai</string>
     <string name="error_action_open_deck_info">Atidaryti programos informaciją</string>
     <string name="error_action_open_network">Tinklo nustatymai</string>
+    <string name="error_action_update_files_app">Atnaujinti</string>
+    <string name="no_account_configured_yet">Kol kas nėra sukonfiguruotų paskyrų</string>
     <string name="no_other_accounts">Dar nesukonfigūravote kitų paskyrų.</string>
+    <string name="choose_account">Parinkti paskyrą</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Norėdami pridėti paskyrą, turite būti prisijungę prie interneto.</string>
+    <string name="simple_next">Kitas</string>
+    <string name="simple_prev">Ankstesnis</string>
     </resources>

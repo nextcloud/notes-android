@@ -12,6 +12,7 @@
     <string name="action_search">Etsi</string>
     <string name="action_sorting_method">Järjestämistapa</string>
     <string name="simple_cancel">Peruuta</string>
+    <string name="simple_switch">Kytkin</string>
     <string name="simple_edit">Muokkaa</string>
     <string name="simple_remove">Poista</string>
     <string name="action_edit_save">Tallenna</string>
@@ -56,18 +57,24 @@
     <string name="error_unknown">Tapahtui tuntematon virhe.</string>
 
     <string name="about_version_title">Versio</string>
+    <string name="about_version">Käytössäsi on %1$s</string>
     <string name="about_maintainer_title">Ylläpitäjät</string>
     <string name="about_developers_title">Kehittäjät</string>
     <string name="about_translators_title">Kääntäjät</string>
+    <string name="about_translators_transifex">Nextcloud-yhteisö paikassa %1$s</string>
     <string name="about_testers_title">Testaajat</string>
     <string name="about_source_title">Lähdekoodi</string>
     <string name="about_source">Tämä projekti on GitHubissa: %1$s</string>
     <string name="about_issues_title">Ongelmat</string>
+    <string name="about_issues">Voit raportoida virheitä ja ehdottaa parannuksia ja uusia tomintoja GitHub:n ongelmien seuraaja toiminnolla: %1$s</string>
     <string name="about_translate_title">Käännä</string>
+    <string name="about_translate">Liity Nextcloud joukkoon Transflex:ssa ja auta meitä tämän sovelluksen käännöstyössä: %1$s</string>
     <string name="about_app_license_title">Sovelluslisenssi</string>
     <string name="about_app_license">Tämä sovellus on GNU GENERAL PUBLIC LICENSE v3+ -lisensoitu.</string>
     <string name="about_app_license_button">Näytä lisenssi</string>
     <string name="about_icons_disclaimer_title">Kuvakkeet</string>
+    <string name="about_icons_disclaimer_app_icon">Katso alkuperäinen kuvake %1$s.</string>
+    <string name="about_icons_disclaimer_mdi_icons">Kaikki muut tämän sovelluksen kuvakkeet on %1$s tehnyt Google Inc. ja ne on lisensoitu Apache 2.0 lisenssillä.</string>
     <string name="about_icons_disclaimer_mdi">Material Design-kuvakkeet</string>
     <string name="about_credits_tab_title">Tekijät</string>
     <string name="about_contribution_tab_title">Kontribuutio</string>
@@ -78,6 +85,8 @@
     <string name="widget_single_note_title">Yksittäinen muistiinpano</string>
     <string name="widget_single_note_placeholder_tv">Muistiinpanoa ei löytynyt</string>
     <string name="widget_not_logged_in">Kirjaudu Notes sovellukseen ennen kuin käytät pienoissovellusta</string>
+    <string name="widget_entry_fav_contentDescription">Tähtikuvaketta käytetään suosikin ilmaisemiseen</string>
+
     <string name="activity_select_single_note">Valitse muistiinpano</string>
 
     <string name="shortcut_create_long">Luo uusi muistiinpano</string>
@@ -116,6 +125,8 @@
     <string name="category_passwords">Salasanat</string>
     <string name="category_game">Peli</string>
     <string name="category_games">Pelit</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">Esitys</string>
     <string name="category_gift">Lahja</string>
     <string name="category_gifts">Lahjat</string>
     <!-- Like a gift -->
@@ -150,6 +161,7 @@
     <string name="error_dialog_server_app_enabled">Varmista, että olet asentanut \"Notes\"-sovelluksen palvelimellasi.</string>
     <string name="error_dialog_redirect">Palvelimesi vastasi HTTP 302-tilakoodilla, joka viittaa siihen, että sinulla ei ole Notes-sovellusta asennettuna palvelimellesi tai jokin asetus on väärin. Tämä saattaa johtua mukautetusta .htaccess-tiedostosta tai Nextcloud-sovelluksista, kuten OID-Clientistä.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Poista käytöstä akun optimointi Nextcloud- ja Muistiinpanot-sovelluksilta.</string>
+    <string name="error_dialog_min_version">Muistiinpanosovellus vaatii Nextcloud-sovelluksen version 3.18 tai uudemman.</string>
     <string name="added_content">Lisätty \"%1$s\"</string>
     <string name="shared_text_empty">Jaettu teksti oli tyhjä</string>
     <string name="append_to_note">Lisää muistiinpanoon</string>
@@ -245,6 +257,7 @@
     <!-- Table cell value of a sample table -->
     <string name="formatting_help_tables_value">Arvo %1d</string>
 
+    <string name="formatting_help_images_body_1">Linkkien tulee olla joko kokonaisia, protokollalla ja domainilla alkavia URL-osotteita tai absoluuttisia polkuja alkaen %1$s-merkillä.</string>
     <string name="formatting_help_images_title">Kuvat</string>
     <string name="simple_other">Muu</string>
     <string name="sort_last_modified">Järjestä muokkauspäiväyksen mukaan</string>
