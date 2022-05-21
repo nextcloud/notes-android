@@ -6,12 +6,15 @@
     <string name="label_all_notes">Све белешке</string>
     <string name="label_favorites">Омиљене</string>
     <string name="action_create">Нова белешка</string>
+    <string name="welcome_text">Добродошли у %1$s</string>
     <string name="action_settings">Поставке</string>
     <string name="action_trashbin">Обрисане белешке</string>
     <string name="action_search">Тражи</string>
     <string name="action_sorting_method">Метод сортирања</string>
     <string name="simple_cancel">Поништи</string>
+    <string name="simple_switch">Пребаци</string>
     <string name="simple_edit">Измени</string>
+    <string name="simple_remove">Уклони</string>
     <string name="action_edit_save">Сачувај</string>
     <string name="simple_about">О програму</string>
     <string name="simple_link">Веза</string>
@@ -42,6 +45,7 @@
     <string name="settings_font_title">Фонт фиксне ширине</string>
     <string name="settings_font_size">Величина фонта</string>
     <string name="settings_wifi_only">Синхронизуј само преко бежичне везе</string>
+    <string name="settings_lock_summary">Акредитиве уређаја</string>
     <string name="settings_background_sync">Позадинска синхронизација</string>
     <string name="error_sync">Синхронизација није успела%1$s</string>
     <string name="error_synchronization">Синхронизација није успела</string>
@@ -49,17 +53,25 @@
     <string name="error_unknown">Десила се непозната грешка.</string>
 
     <string name="about_version_title">Верзија</string>
+    <string name="about_version">Тренутно користите %1$s</string>
     <string name="about_maintainer_title">Одржаваоц</string>
     <string name="about_developers_title">Програмери</string>
     <string name="about_translators_title">Преводиоци</string>
+    <string name="about_translators_transifex">Некстклауд заједница на %1$s</string>
     <string name="about_testers_title">Тестери</string>
     <string name="about_source_title">Изворни кôд</string>
+    <string name="about_source">Овај пројекат се налази на Гитхабу: %1$s</string>
     <string name="about_issues_title">Проблеми</string>
+    <string name="about_issues">Можете пријавити грешке, предложити побољшања и нове функционалности на Гитхабовом пратиоцу грешака: %1$s</string>
     <string name="about_translate_title">Преведи</string>
+    <string name="about_translate">Придружите се Некстклауд тиму на Трансифексу и помозите нам да преведемо ову апликацију: %1$s</string>
     <string name="about_app_license_title">Лиценца апликације</string>
     <string name="about_app_license">Ова апликација је лиценцирана под ГНУовом општом јавном лиценцом в3+.</string>
     <string name="about_app_license_button">Прикажи лиценцу</string>
     <string name="about_icons_disclaimer_title">Иконе</string>
+    <string name="about_icons_disclaimer_app_icon">За оригиналну икону, погледајте %1$s.</string>
+    <string name="about_icons_disclaimer_mdi_icons">Све остале иконе коришћене у овој апликацији су %1$s које је направио Гугл и лиценциране су под Апач 2.0 лиценцом.</string>
+    <string name="about_icons_disclaimer_mdi">Иконе у Материјал дизајну</string>
     <string name="about_credits_tab_title">Заслуге</string>
     <string name="about_contribution_tab_title">Допринос</string>
     <string name="about_license_tab_title">Лиценца</string>
@@ -68,10 +80,7 @@
     <string name="widget_note_list_placeholder">Нема белешки</string>
     <string name="widget_single_note_title">Белешка</string>
     <string name="widget_single_note_placeholder_tv">Белешка није нађена</string>
-    <string name="widget_create_note">Направи белешку</string>
     <string name="widget_not_logged_in">Пријавите се на Белешке пре коришћења овог виџета</string>
-    <string name="widget_entry_fav_contentDescription">Икона звезде се користи да означи ставку као омиљену</string>
-
     <string name="activity_select_single_note">Одабери белешку</string>
 
     <string name="shortcut_create_long">Направи нову белешку</string>
@@ -87,10 +96,19 @@
     <string name="pin_to_homescreen">Закачи на почетни екран</string>
     <string name="note_has_been_deleted">Ова белешка је обрисана</string>
     <string name="add_account">Додај налог</string>
+
     <string name="category_music">Музика</string>
     <string name="category_movies">Филмови</string>
     <string name="category_movie">Филм</string>
     <string name="category_work">Посао</string>
+    <string name="category_tasks">Задаци</string>
+    <string name="category_recipes">Рецепти</string>
+    <string name="category_restaurant">Ресторан</string>
+    <string name="category_password">Лозинка</string>
+    <string name="category_passwords">Лозинке</string>
+    <string name="category_games">Игрице</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">Пусти</string>
     <string name="account_already_imported">Налог је већ увезен</string>
     <string name="no_notes_yet">Још нема белешки</string>
     <string name="no_notes_yet_description">Притисните + дугме да направите нову белешку</string>
@@ -113,7 +131,6 @@
     <string name="error_dialog_check_server_logs">Постоји проблема са поставкама Вашег Некстклауда. Погледаје дневник у фајловима са сервера.</string>
     <string name="error_dialog_check_maintenance">Проверите да ли Вам инстанца можда тренутно ради у режиму одржавања.</string>
     <string name="error_dialog_insufficient_storage">На Некстклауд инстанци више нема простора. Обришите неке фајлове да синхронизујете локалне измене на облак.</string>
-    <string name="error_dialog_contact_us">Не оклевајте да нас контактирате ако проблем не може да се отклони. Можете наћи детаље наших контаката у секцији о нама у бочној траци.</string>
     <string name="error_dialog_we_need_info">Потребне су нам следеће техничке информација да бисмо Вам помогли:</string>
     <string name="error_dialog_server_app_enabled">Проверите да ли сте инсталирали и укључили апликацију „Белешке” на Вашем серверу.</string>
     <string name="error_dialog_redirect">Сервер је одговорио са HTTP 302 кодом, што значи да немате инсталирану апликацију Белешке или да Вам сервер није правилно конфигурисан. Ово може да буде проузорковано произвољним додавањима у .htaccess фајлу или другим Некстклауд апликацијама као што је OID Client.</string>
@@ -123,6 +140,7 @@
     <string name="append_to_note">Додај на белешку</string>
     <string name="change_note_title">Промени назив белешке</string>
     <string name="menu_edit_title">Измени наслов</string>
+    <string name="settings_gridview">Приказ мреже</string>
     <string name="simple_security">Безбедност</string>
     <string name="simple_synchronization">Синхронизација</string>
     <string name="manage_accounts">Управљање налозима</string>
@@ -208,11 +226,18 @@
     <string name="formatting_help_code_body_2">Markdown синтакса такође подржава тзв. ограђени кôд, што дозвољава вишеструке линије без увлачења:</string>
     <string name="formatting_help_code_body_3">А ако желите бојење синтакте, додајте и језик:</string>
 
+    <string name="formatting_help_tables_title">Табеле</string>
+    <string name="formatting_help_images_title">Слике</string>
     <string name="simple_other">Остало</string>
     <string name="sort_last_modified">Сортирај по времену измене</string>
     <string name="sort_alphabetically">Сортирај абецедно</string>
     <string name="error_action_open_battery_settings">Подешавања батерије</string>
     <string name="error_action_open_deck_info">Отвори инфо о апликацији</string>
     <string name="error_action_open_network">Поставке мреже</string>
+    <string name="error_action_update_files_app">Ажурирај</string>
     <string name="no_other_accounts">Нисте подесили ниједан други налог.</string>
+    <string name="choose_account">Одаберите налог</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Морате бити повезани на интернет да бисте додали налог.</string>
+    <string name="simple_next">Следећа</string>
+    <string name="simple_prev">Претходно</string>
     </resources>

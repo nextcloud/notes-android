@@ -272,6 +272,7 @@
     <string name="error_action_open_battery_settings">Postavke baterije</string>
     <string name="error_action_open_deck_info">Otvori informacije o aplikaciji</string>
     <string name="error_action_open_network">Postavke mreže</string>
+    <string name="error_action_update_files_app">Ažuriraj</string>
     <string name="no_account_configured_yet">Još uvijek nema konfiguriranih računa</string>
     <string name="no_other_accounts">Nemate konfiguriranih računa.</string>
     <string name="choose_account">Odaberi račun</string>

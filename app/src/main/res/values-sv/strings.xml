@@ -110,6 +110,7 @@
     <string name="category_todo">Uppgifter</string>
     <string name="category_checklists">Checklistor</string>
     <string name="category_tasks">Uppgifter</string>
+    <string name="category_recipes">Recept</string>
     <string name="category_restaurant">Restaurang</string>
     <string name="category_restaurants">Restauranger</string>
     <string name="category_food">Mat</string>
@@ -164,6 +165,7 @@
     <string name="append_to_note">Lägg till i anteckning</string>
     <string name="change_note_title">Ändra anteckningstitel</string>
     <string name="menu_edit_title">Redigera titel</string>
+    <string name="settings_gridview">Rutnätsvy</string>
     <string name="simple_security">Säkerhet</string>
     <string name="simple_synchronization">Synkronisering</string>
     <string name="manage_accounts">Hantera konton</string>
@@ -241,11 +243,18 @@
     <string name="formatting_help_code_body_2">Markdown stödjer också något som kallas för kodavgränsning, vilket tillåter flera rader utan indentering:</string>
     <string name="formatting_help_code_body_3">Och om du vill använda syntaxmarkering kan du inkludera språket:</string>
 
+    <string name="formatting_help_tables_title">Tabeller</string>
+    <string name="formatting_help_images_title">Bilder</string>
     <string name="simple_other">Övrigt</string>
     <string name="sort_last_modified">Sortera efter ändrat datum</string>
     <string name="sort_alphabetically">Sortera alfabetiskt</string>
     <string name="error_action_open_battery_settings">Batteriinställningar</string>
     <string name="error_action_open_deck_info">Öppna appinformation</string>
     <string name="error_action_open_network">Nätverksinställningar</string>
+    <string name="error_action_update_files_app">Uppdatera</string>
     <string name="no_other_accounts">Du har inte konfigurerat några andra konton än.</string>
+    <string name="choose_account">Välj konto</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Du måste vara ansluten till internet för att lägga till ett konto.</string>
+    <string name="simple_next">Nästa</string>
+    <string name="simple_prev">Föregående</string>
     </resources>
