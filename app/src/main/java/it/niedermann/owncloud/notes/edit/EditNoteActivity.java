@@ -53,6 +53,8 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     public static final String PARAM_CONTENT = "content";
     public static final String PARAM_FAVORITE = "favorite";
 
+    public  Menu mMenu;
+
     private CategoryViewModel categoryViewModel;
     private ActivityEditBinding binding;
 
@@ -244,6 +246,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_note_activity, menu);
+        mMenu = menu;
         return super.onCreateOptionsMenu(menu);
     }
 
