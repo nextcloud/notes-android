@@ -1,7 +1,6 @@
 package it.niedermann.owncloud.notes.edit;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Layout;
@@ -10,6 +9,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
@@ -27,14 +27,13 @@ import com.nextcloud.android.sso.helper.SingleAccountHelper;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.FragmentNotePreviewBinding;
-import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.util.SSOUtil;
 
 import static androidx.core.view.ViewCompat.isAttachedToWindow;
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.getFontSizeFromPreferences;
 
-public class NotePreviewFragment extends SearchableBaseNoteFragment implements OnRefreshListener {
+public class NotePreviewFragment extends SearchableBaseNoteFragment implements OnRefreshListener{
 
     private static final String TAG = NotePreviewFragment.class.getSimpleName();
 
@@ -43,6 +42,10 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     protected FragmentNotePreviewBinding binding;
 
     private boolean noteLoaded = false;
+
+    private long doubleClickTimer = 0;
+
+    private final int doubleClickIntervalSettting = 500;
 
     @Nullable
     private Runnable setScrollY;
@@ -100,8 +103,8 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
 
         binding.swiperefreshlayout.setOnRefreshListener(this);
         registerInternalNoteLinkHandler();
+        registerDoubleClickHandler();
         binding.singleNoteContent.setMovementMethod(LinkMovementMethod.getInstance());
-
         final var sp = PreferenceManager.getDefaultSharedPreferences(requireActivity().getApplicationContext());
         binding.singleNoteContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(requireContext(), sp));
         if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
@@ -119,6 +122,21 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         binding.singleNoteContent.getMarkdownString().observe(requireActivity(), (newContent) -> {
             changedText = newContent.toString();
             saveNote(null);
+        });
+    }
+
+    protected void registerDoubleClickHandler() {
+        doubleClickTimer = System.currentTimeMillis();
+        binding.singleNoteContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (System.currentTimeMillis() - doubleClickTimer < doubleClickIntervalSettting) {
+                    EditNoteActivity ENAct = (EditNoteActivity) getActivity();
+                    ENAct.onOptionsItemSelected(ENAct.mMenu.findItem(R.id.menu_edit));
+                }else {
+                    doubleClickTimer = System.currentTimeMillis();
+                }
+            }
         });
     }
 
