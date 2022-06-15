@@ -140,8 +140,8 @@
     <string name="category_movies">Movies</string>
     <string name="category_movie">Movie</string>
     <string name="category_work">Work</string>
-    <string name="category_todo">ToDo</string>
-    <string name="category_todos">ToDos</string>
+    <string name="category_todo">To-Do</string>
+    <string name="category_todos">To-Dos</string>
     <string name="category_checklists">Checklists</string>
     <string name="category_tasks">Tasks</string>
     <string name="category_recipe">Recipe</string>
