@@ -87,6 +87,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
 
         args.putLong(EditNoteActivity.PARAM_NOTE_ID, note.getId());
         args.putLong(EditNoteActivity.PARAM_ACCOUNT_ID, note.getAccountId());
+        //args.putBoolean(EditNoteActivity.PARAM_WIDGET_CALLED, true);
         fillInIntent.putExtras(args);
 
         final var note_content = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_content);
