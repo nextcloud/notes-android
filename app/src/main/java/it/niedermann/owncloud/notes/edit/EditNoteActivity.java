@@ -1,5 +1,7 @@
 package it.niedermann.owncloud.notes.edit;
 
+import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -20,25 +22,21 @@ import com.nextcloud.android.sso.helper.SingleAccountHelper;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Calendar;
 import java.util.Objects;
 
+import it.niedermann.android.sharedpreferences.SharedPreferenceBooleanLiveData;
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerListener;
 import it.niedermann.owncloud.notes.databinding.ActivityEditBinding;
-import it.niedermann.owncloud.notes.databinding.ActivityEditBinding;
 import it.niedermann.owncloud.notes.edit.category.CategoryViewModel;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
-import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
-
-import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
 
 public class EditNoteActivity extends LockedActivity implements BaseNoteFragment.NoteFragmentListener, AccountPickerListener {
 
@@ -72,7 +70,14 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
             return;
         }
 
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        final var preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        new SharedPreferenceBooleanLiveData(preferences, getString(R.string.pref_key_keep_screen_on), true).observe(this, keepScreenOn -> {
+            if (keepScreenOn) {
+                Toast.makeText(getApplicationContext(), "ADD flag", Toast.LENGTH_SHORT).show();
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            }
+        });
+
 
         categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
         binding = ActivityEditBinding.inflate(getLayoutInflater());
@@ -103,6 +108,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
 
     @Override
     protected void onStop() {
+        Toast.makeText(getApplicationContext(), "REMOVE flag", Toast.LENGTH_SHORT).show();
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         super.onStop();
     }

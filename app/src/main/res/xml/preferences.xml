@@ -67,6 +67,14 @@
             android:layout="@layout/item_pref"
             android:summary="%s"
             android:title="@string/settings_note_mode" />
+
+        <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
+            android:defaultValue="true"
+            android:icon="@drawable/ic_baseline_smartphone_24"
+            android:key="@string/pref_key_keep_screen_on"
+            android:layout="@layout/item_pref"
+            android:summary="@string/settings_keep_screen_on_summary"
+            android:title="@string/settings_keep_screen_on" />
     </it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory>
 
     <it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory

@@ -49,6 +49,9 @@
     <string name="settings_lock_summary">Device credentials</string>
     <string name="settings_background_sync">Background synchronization</string>
     <string name="settings_prevent_screen_capture">Prevent screen capture</string>
+    <string name="settings_gridview">Grid view</string>
+    <string name="settings_keep_screen_on">Keep screen on</string>
+    <string name="settings_keep_screen_on_summary">When viewing or editing a note</string>
 
     <string name="error_sync">Synchronization failed: %1$s</string>
     <string name="error_synchronization">Synchronization failed</string>
@@ -108,6 +111,7 @@
     <string name="pref_key_theme" translatable="false">darkTheme</string>
     <string name="pref_key_font" translatable="false">font</string>
     <string name="pref_key_gridview" translatable="false">gridview</string>
+    <string name="pref_key_keep_screen_on" translatable="false">keepScreenOn</string>
     <string name="pref_key_font_size" translatable="false">fontSize</string>
     <string name="pref_key_wifi_only" translatable="false">wifiOnly</string>
     <string name="pref_key_lock" translatable="false">lock</string>
@@ -201,7 +205,6 @@
     <string name="append_to_note">Append to note</string>
     <string name="change_note_title">Change note title</string>
     <string name="menu_edit_title">Edit title</string>
-    <string name="settings_gridview">Grid view</string>
     <string name="simple_security">Security</string>
     <string name="appearance_and_behavior">Appearance and behavior</string>
     <string name="simple_synchronization">Synchronization</string>
