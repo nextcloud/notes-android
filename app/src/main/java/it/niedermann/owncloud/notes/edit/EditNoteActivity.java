@@ -73,7 +73,6 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         final var preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         new SharedPreferenceBooleanLiveData(preferences, getString(R.string.pref_key_keep_screen_on), true).observe(this, keepScreenOn -> {
             if (keepScreenOn) {
-                Toast.makeText(getApplicationContext(), "ADD flag", Toast.LENGTH_SHORT).show();
                 getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
             }
         });
@@ -108,7 +107,6 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
 
     @Override
     protected void onStop() {
-        Toast.makeText(getApplicationContext(), "REMOVE flag", Toast.LENGTH_SHORT).show();
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         super.onStop();
     }
