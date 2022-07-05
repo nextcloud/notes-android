@@ -4,7 +4,8 @@
     android:height="108dp"
     android:viewportWidth="66.666664"
     android:viewportHeight="66.666664">
-    <group android:translateX="17.333334"
+    <group
+        android:translateX="17.333334"
         android:translateY="17.333334">
         <path
             android:fillColor="#fff"
