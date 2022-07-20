@@ -49,7 +49,7 @@
     <string name="settings_lock_summary">Enhetsuppgifter</string>
     <string name="settings_background_sync">Bakgrundssynkronisering</string>
     <string name="settings_prevent_screen_capture">Hindra skärmklipp</string>
-
+    <string name="settings_gridview">Rutnätsvy</string>
     <string name="error_sync">Synkronisering misslyckades: %1$s</string>
     <string name="error_synchronization">Synkroniseringen misslyckades</string>
     <string name="error_no_network">Ingen nätverksanslutning</string>
@@ -165,7 +165,6 @@
     <string name="append_to_note">Lägg till i anteckning</string>
     <string name="change_note_title">Ändra anteckningstitel</string>
     <string name="menu_edit_title">Redigera titel</string>
-    <string name="settings_gridview">Rutnätsvy</string>
     <string name="simple_security">Säkerhet</string>
     <string name="simple_synchronization">Synkronisering</string>
     <string name="manage_accounts">Hantera konton</string>

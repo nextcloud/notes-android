@@ -48,6 +48,7 @@
     <string name="settings_wifi_only">المزامنة فقط على الوايفاي</string>
     <string name="settings_lock_summary">بيانات اعتماد الجهاز</string>
     <string name="settings_background_sync">مزامنة في خلفية النظام</string>
+    <string name="settings_gridview">عرض كمخطط</string>
     <string name="error_sync">المزامنة فشلت \'%1$s\'</string>
     <string name="error_synchronization">المزامنة فشلت</string>
     <string name="error_no_network">لا يتوفر اتصال</string>
@@ -147,7 +148,6 @@
     <string name="append_to_note">إلحاق بالملاحظة</string>
     <string name="change_note_title">تغيير عنوان الملاحظة</string>
     <string name="menu_edit_title">تحرير العنوان</string>
-    <string name="settings_gridview">عرض كمخطط</string>
     <string name="simple_security">الأمان</string>
     <string name="simple_synchronization">المزامنة</string>
     <string name="manage_accounts">إدارة الحسابات</string>

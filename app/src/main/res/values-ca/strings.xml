@@ -49,6 +49,9 @@
     <string name="settings_lock_summary">Credencials del dispositiu</string>
     <string name="settings_background_sync">Sincronització en segon pla</string>
     <string name="settings_prevent_screen_capture">Impedeix la captura de la pantalla</string>
+    <string name="settings_gridview">Visualització de quadrícula</string>
+    <string name="settings_keep_screen_on">Mantén la pantalla encesa</string>
+    <string name="settings_keep_screen_on_summary">Quan visualitzi o editi una nota</string>
 
     <string name="error_sync">S\'ha produït un error en la sincronització: %1$s</string>
     <string name="error_synchronization">S\'ha produït un error en la sincronització</string>
@@ -168,7 +171,6 @@
     <string name="append_to_note">Afegeix a la nota</string>
     <string name="change_note_title">Canvia el títol de la nota</string>
     <string name="menu_edit_title">Edita el títol</string>
-    <string name="settings_gridview">Visualització de quadrícula</string>
     <string name="simple_security">Seguretat</string>
     <string name="appearance_and_behavior">Aparença i comportament</string>
     <string name="simple_synchronization">Sincronització</string>

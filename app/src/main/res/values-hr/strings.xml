@@ -49,7 +49,7 @@
     <string name="settings_lock_summary">Vjerodajnice uređaja</string>
     <string name="settings_background_sync">Pozadinska sinkronizacija</string>
     <string name="settings_prevent_screen_capture">Spriječi snimanje zaslona</string>
-
+    <string name="settings_gridview">Prikaz rešetke</string>
     <string name="error_sync">Sinkronizacija nije uspjela: %1$s</string>
     <string name="error_synchronization">Sinkronizacija nije uspjela</string>
     <string name="error_no_network">Nema veze s mrežom</string>
@@ -167,7 +167,6 @@
     <string name="append_to_note">Dodaj bilješci</string>
     <string name="change_note_title">Promijeni naslov bilješke</string>
     <string name="menu_edit_title">Uredi naslov</string>
-    <string name="settings_gridview">Prikaz rešetke</string>
     <string name="simple_security">Sigurnost</string>
     <string name="appearance_and_behavior">Izgled and ponašanje</string>
     <string name="simple_synchronization">Sinkronizacija</string>

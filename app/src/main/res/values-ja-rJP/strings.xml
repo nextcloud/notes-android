@@ -49,7 +49,7 @@
     <string name="settings_lock_summary">デバイスの資格情報</string>
     <string name="settings_background_sync">バックグラウンド同期</string>
     <string name="settings_prevent_screen_capture">スクリーンショットを防止</string>
-
+    <string name="settings_gridview">グリッド表示</string>
     <string name="error_sync">同期に失敗しました: %1$s</string>
     <string name="error_synchronization">同期に失敗</string>
     <string name="error_no_network">ネットワークに接続されていません</string>
@@ -70,21 +70,23 @@
     <string name="about_translate_title">翻訳</string>
     <string name="about_translate">Transifex の Nextcloud チームに参加して、このアプリの翻訳を手伝ってください: %1$s</string>
     <string name="about_app_license_title">アプリ ライセンス</string>
-    <string name="about_app_license">このアプリケーションは GNU GENERAL PUBLIC LICENSE v3+ でライセンスされています。</string>
+    <string name="about_app_license">このアプリケーションは GNU GENERAL PUBLIC LICENSE v3+ で許諾されています。</string>
     <string name="about_app_license_button">ライセンスを表示</string>
     <string name="about_icons_disclaimer_title">アイコン</string>
     <string name="about_icons_disclaimer_app_icon">オリジナルのアイコンは %1$sを参照。</string>
-    <string name="about_icons_disclaimer_mdi_icons">このアプリで使用しているすべてのアイコンは、%1$sGoogle Inc.によって作成されたもので、Apache 2.0ライセンスによってライセンスされています。</string>
+    <string name="about_icons_disclaimer_mdi_icons">このアプリで使用しているすべてのアイコンは、%1$sGoogle Inc.によって作成されたもので、Apache 2.0利用許諾によって許諾されています。</string>
     <string name="about_icons_disclaimer_mdi">マテリアルデザインアイコン</string>
     <string name="about_credits_tab_title">クレジット</string>
     <string name="about_contribution_tab_title">貢献</string>
-    <string name="about_license_tab_title">ライセンス</string>
+    <string name="about_license_tab_title">利用許諾</string>
 
     <string name="widget_note_list_title">ノート一覧</string>
     <string name="widget_note_list_placeholder">ノートがありません</string>
     <string name="widget_single_note_title">一つのノート</string>
     <string name="widget_single_note_placeholder_tv">ノートが見つかりません</string>
     <string name="widget_not_logged_in">このウィジェットを使用する前に、ノートにログインしてください</string>
+    <string name="widget_entry_fav_contentDescription">星印は、アイテムをお気に入りとして示すために使用されます</string>
+
     <string name="activity_select_single_note">ノートを選択</string>
 
     <string name="shortcut_create_long">新しいノートを作成</string>
@@ -105,14 +107,23 @@
     <string name="category_movies">動画</string>
     <string name="category_movie">ムービー</string>
     <string name="category_work">業種</string>
+    <string name="category_todo">ToDo</string>
+    <string name="category_todos">ToDo</string>
     <string name="category_checklists">チェックリスト</string>
     <string name="category_tasks">タスク</string>
     <string name="category_recipe">レシピ</string>
     <string name="category_recipes">レシピ</string>
     <string name="category_restaurant">飲食店</string>
+    <string name="category_restaurants">レストラン</string>
     <string name="category_food">食べ物</string>
+    <string name="category_bake">焼く</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_key">キー</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_keys">キー</string>
     <string name="category_password">パスワード</string>
     <string name="category_passwords">パスワード</string>
+    <string name="category_credentials">資格情報</string>
     <string name="category_game">ゲーム</string>
     <string name="category_games">ゲーム</string>
     <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
@@ -120,7 +131,10 @@
     <string name="category_gift">贈り物</string>
     <string name="category_gifts">贈り物</string>
     <!-- Like a gift -->
-    <string name="category_present">プレゼン</string>
+    <string name="category_present">プレゼント</string>
+    <!-- Like a gift -->
+    <string name="category_presents">プレゼント</string>
+
     <string name="account_already_imported">アカウントはすでにインポートされています</string>
     <string name="no_notes_yet">まだノートはありません</string>
     <string name="no_notes_yet_description">+ ボタンを押して新しいノートを作成</string>
@@ -134,6 +148,7 @@
     <string name="error_dialog_title">おやまあ、どうしたことでしょう？🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">アプリの強制終了と再起動を試みてください。Nextcloudアプリへの接続が正しくない接続があったかも知れません。</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">この問題が続くようでしたら、下記両方のアプリでストレージをクリアして問題が解決できるか試してください：Nextcloud と Nextcloud Notes</string>
+    <string name="error_dialog_tip_clear_storage">アプリ情報を開き、次の手順を実施することでストレージを消去できます: ストレージ → ストレージを消去 ⚠️ 警告: この操作で、まだ同期されていないノートが消去されます！</string>
     <string name="error_dialog_tip_files_outdated">Nextcloudアプリが古いようです。プレイストアかF-Droidから最新版を入手してください。</string>
     <string name="error_dialog_tip_files_force_stop">Nextcloudアプリで何か不具合が発生しました。NextcloudアプリとNextcloud Notesアプリの両方を強制終了してください。</string>
     <string name="error_dialog_tip_files_delete_storage">強制終了で改善されない場合は、両方のアプリのストレージをクリアしてみてください。</string>
@@ -147,13 +162,14 @@
     <string name="error_dialog_server_app_enabled">ご利用のサーバーに ”Notes” プラグインアプリがインストールされ、有効になっていることを確認してください。</string>
     <string name="error_dialog_redirect">サーバーがHTTPステータスコード 302を返しました。これはNotesアプリがインストールされていないか、構成が誤っていることを意味します。.htaccessファイルのカスタムオーバーライドやOIDクライアントのようなNextcloudアプリが原因の可能性があります。</string>
     <string name="error_dialog_tip_disable_battery_optimizations">NextcloudとNotesアプリに対してバッテリー最適化をすべて無効にしてください。</string>
+    <string name="error_dialog_min_version">ノート Androidアプリは、Nextcloud Androidアプリのバージョン3.18以上が必要です。</string>
     <string name="added_content">\"%1$s\"に追加</string>
     <string name="shared_text_empty">共有テキストは空です</string>
     <string name="append_to_note">ノートに追記</string>
     <string name="change_note_title">ノートタイトルを変更</string>
     <string name="menu_edit_title">タイトルを編集</string>
-    <string name="settings_gridview">グリッド表示</string>
     <string name="simple_security">セキュリティ</string>
+    <string name="appearance_and_behavior">外観と挙動</string>
     <string name="simple_synchronization">同期</string>
     <string name="manage_accounts">アカウント管理</string>
     <string name="action_formatting_help">フォーマット</string>
@@ -232,7 +248,16 @@
     <string name="formatting_help_code_body_3">言語毎の構文の強調表示を使用する場合は、言語指定します:</string>
 
     <string name="formatting_help_tables_title">テーブル</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">カラム %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">値 %1d</string>
+
+    <string name="formatting_help_images_body_1">リンクは、プロトコルとドメインから始まる完全URLか%1$sから始まる絶対パスである必要があります。</string>
+    <string name="formatting_help_images_body_2">マークダウン形式に準拠するには、画像URL内にエスケープ文字を使用してください。これは例えば、URL内の%1$sをスペースで置き換えるなどが該当します。</string>
     <string name="formatting_help_images_title">画像</string>
+    <string name="formatting_help_images_alt">ファンシー画像</string>
+
     <string name="simple_other">その他</string>
     <string name="sort_last_modified">更新日付でソート</string>
     <string name="sort_alphabetically">アルファベット順にソート</string>
@@ -243,6 +268,10 @@
     <string name="no_account_configured_yet">設定済みアカウントがまだありません</string>
     <string name="no_other_accounts">他のアカウントはまだ設定されていません。</string>
     <string name="choose_account">アカウントを選択</string>
+    <string name="context_based_formatting">コンテキストに基づいた書式設定</string>
+    <plurals name="remove_account_message">
+        <item quantity="other">アカウント「%1$s」を削除すると、同期されていない%2$d件の変更も削除され、復元が出来なくなります。</item>
+    </plurals>
     <string name="remove_account">%1$sを削除</string>
 
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">アカウントの追加にはインターネットへの接続が必要です</string>
@@ -251,9 +280,18 @@
     <string name="simple_next">次へ</string>
     <string name="simple_prev">前へ</string>
     <string name="simple_backup">バックアップ</string>
+    <string name="backup">アプリの回復不可能な状態を検知しました。同期されていない変更をバックアップし、ノートアプリのストレージの消去を実施してください。</string>
+    <string name="settings_notes_path_description">ノートを保管するNextcloud内のフォルダー</string>
     <string-array name="settings_file_suffixes">
         <item translatable="false">.txt</item>
         <item translatable="false">.md</item>
     </string-array>
+    <string name="settings_notes_path_success">新規ノートフォルダー: %1$s</string>
     <string name="settings_file_suffix">ファイル拡張子</string>
-    </resources>
+    <string name="settings_file_suffix_description">Nextcloud内の新しいノートのファイル拡張子</string>
+    <string name="settings_file_suffix_success">新規ファイル接尾辞: %1$s</string>
+    <string name="http_status_code">HTTPステータスコード: %1$d</string>
+    <string name="progress_import_indeterminate">ノートを導入しています…</string>
+    <string name="progress_import">%2$d中%1$dのノートをインポート中...</string>
+    <string name="account_imported">アカウントを導入しました。</string>
+</resources>

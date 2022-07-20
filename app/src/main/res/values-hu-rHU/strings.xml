@@ -49,6 +49,9 @@
     <string name="settings_lock_summary">Eszközhitelesítő-adatok</string>
     <string name="settings_background_sync">Háttér-szinkronizálás</string>
     <string name="settings_prevent_screen_capture">A képernyő rögzítésének megakadályozása</string>
+    <string name="settings_gridview">Rács nézet</string>
+    <string name="settings_keep_screen_on">Képernyő bekapcsolva tartása</string>
+    <string name="settings_keep_screen_on_summary">Jegyzet megtekintése vagy szerkesztése során</string>
 
     <string name="error_sync">Szinkronizálás sikertelen: %1$s</string>
     <string name="error_synchronization">Szinkronizálás sikertelen</string>
@@ -168,7 +171,6 @@
     <string name="append_to_note">Hozzáfűzés a jegyzethez</string>
     <string name="change_note_title">Jegyzet címének módosítása</string>
     <string name="menu_edit_title">Cím szerkesztése</string>
-    <string name="settings_gridview">Rács nézet</string>
     <string name="simple_security">Biztonság</string>
     <string name="appearance_and_behavior">Megjelenés és viselkedés</string>
     <string name="simple_synchronization">Szinkronizálás</string>

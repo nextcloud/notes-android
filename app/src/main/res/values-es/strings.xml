@@ -49,6 +49,9 @@
     <string name="settings_lock_summary">Credenciales del dispositivo</string>
     <string name="settings_background_sync">Sincronización en segundo plano</string>
     <string name="settings_prevent_screen_capture">Evitar la captura de pantalla</string>
+    <string name="settings_gridview">Vista en cuadrícula</string>
+    <string name="settings_keep_screen_on">Mantener la pantalla encendida</string>
+    <string name="settings_keep_screen_on_summary">Al ver o editar una nota</string>
 
     <string name="error_sync">Fallo en la sincronización: %1$s</string>
     <string name="error_synchronization">Fallo en la sincronización</string>
@@ -168,7 +171,6 @@
     <string name="append_to_note">Añadir a la nota</string>
     <string name="change_note_title">Cambiar título de la nota</string>
     <string name="menu_edit_title">Editar título</string>
-    <string name="settings_gridview">Vista en cuadrícula</string>
     <string name="simple_security">Seguridad</string>
     <string name="appearance_and_behavior">Apariencia y comportamiento</string>
     <string name="simple_synchronization">Sincronización</string>
@@ -195,18 +197,22 @@
 
     <plurals name="ab_selected">
         <item quantity="one">%d selecionado</item>
+        <item quantity="many">%d seleccionados</item>
         <item quantity="other">%d seleccionados</item>
     </plurals>
     <plurals name="bulk_notes_deleted">
         <item quantity="one">Borrada una nota</item>
+        <item quantity="many">Borradas %1$d notas</item>
         <item quantity="other">Borradas %1$d notas</item>
     </plurals>
     <plurals name="bulk_notes_restored">
         <item quantity="one">Restaurada una nota</item>
+        <item quantity="many">Restauradas %1$d notas</item>
         <item quantity="other">Restauradas %1$d notas</item>
     </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Compartido contenido de %1$d nota</item>
+        <item quantity="many">Compartido contenido de %1$d notas</item>
         <item quantity="other">Compartido contenido de %1$d notas</item>
     </plurals>
 
@@ -276,6 +282,7 @@
     <string name="context_based_formatting">Ventana emergente para formato basado en el contexto</string>
     <plurals name="remove_account_message">
         <item quantity="one">La eliminación de la cuenta %1$s también eliminará irremediablemente un cambio no sincronizado. </item>
+        <item quantity="many">La eliminación de la cuenta %1$s también eliminará irremediablemente %2$d cambios no sincronizados.</item>
         <item quantity="other">La eliminación de la cuenta %1$s también eliminará irremediablemente %2$d cambios no sincronizados.</item>
     </plurals>
     <string name="remove_account">Eliminar %1$s</string>
