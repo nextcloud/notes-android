@@ -49,6 +49,9 @@
     <string name="settings_lock_summary">Gailuaren kredentzialak</string>
     <string name="settings_background_sync">Atzeko planoko sinkronizazioa</string>
     <string name="settings_prevent_screen_capture">Saihestu pantaila argazkia</string>
+    <string name="settings_gridview">Sareta ikuspegia</string>
+    <string name="settings_keep_screen_on">Mantendu pantaila piztuta</string>
+    <string name="settings_keep_screen_on_summary">Nota bat ikusi edo editatzean</string>
 
     <string name="error_sync">Sinkronizazioak huts egin du: %1$s</string>
     <string name="error_synchronization">Sinkronizazioak huts egin du</string>
@@ -168,7 +171,6 @@
     <string name="append_to_note">Gehitu notara</string>
     <string name="change_note_title">Aldatu notaren titulua</string>
     <string name="menu_edit_title">Editatu izenburua</string>
-    <string name="settings_gridview">Sareta ikuspegia</string>
     <string name="simple_security">Segurtasuna</string>
     <string name="appearance_and_behavior">Itxura eta portaera</string>
     <string name="simple_synchronization">Sinkronizazioa</string>

@@ -47,6 +47,7 @@
     <string name="settings_wifi_only">همگام‌سازی فقط در Wi-Fi</string>
     <string name="settings_lock_summary">اعتبارنامه‌های دستگاه</string>
     <string name="settings_background_sync">همگام‌سازی پس زمینه</string>
+    <string name="settings_gridview">نمایش گرید</string>
     <string name="error_sync">همگام‌سازی انجام نشد:%1$s</string>
     <string name="error_synchronization">همگام‌سازی انجام نشد</string>
     <string name="error_no_network">هیچ ارتباطی با شبکه برقرار نیست</string>
@@ -143,7 +144,6 @@
     <string name="append_to_note">به یادداشت اضافه کنید</string>
     <string name="change_note_title">عوض‌کردن عنوان یادداشت</string>
     <string name="menu_edit_title">ویرایش عنوان</string>
-    <string name="settings_gridview">نمایش گرید</string>
     <string name="simple_security">امنیت</string>
     <string name="simple_synchronization">همگام‌سازی</string>
     <string name="manage_accounts">مدیریت حساب‌ها</string>

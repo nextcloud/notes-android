@@ -47,6 +47,7 @@
     <string name="settings_wifi_only">Synkroniser kun med WiFi</string>
     <string name="settings_lock_summary">Enhetens legitimasjon</string>
     <string name="settings_background_sync">Synkronisering i bakgrunnen</string>
+    <string name="settings_gridview">Rutenett-visning</string>
     <string name="error_sync">Synkronisering mislyktes: %1$s</string>
     <string name="error_synchronization">Synkronisering mislyktes</string>
     <string name="error_no_network">Ingen nettverkstilkobling</string>
@@ -142,7 +143,6 @@
     <string name="append_to_note">Legg til i notat</string>
     <string name="change_note_title">Endre tittel på notat</string>
     <string name="menu_edit_title">Rediger tittel</string>
-    <string name="settings_gridview">Rutenett-visning</string>
     <string name="simple_security">Sikkerhet</string>
     <string name="simple_synchronization">Synkronisering</string>
     <string name="manage_accounts">Håndter kontoer</string>

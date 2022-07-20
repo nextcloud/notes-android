@@ -49,7 +49,7 @@
     <string name="settings_lock_summary">Credențialele dispozitivului</string>
     <string name="settings_background_sync">Sincronizare în fundal</string>
     <string name="settings_prevent_screen_capture">Oprește captura de ecran</string>
-
+    <string name="settings_gridview">Vizualizare tip grilă</string>
     <string name="error_sync">Sincronizare eșuată: %1$s</string>
     <string name="error_synchronization">Sincronizare eșuată </string>
     <string name="error_no_network">Nu exista conexiune</string>
@@ -168,7 +168,6 @@
     <string name="append_to_note">Atașează  la notiță </string>
     <string name="change_note_title">Schimbă numele notiței</string>
     <string name="menu_edit_title">Editează titlul</string>
-    <string name="settings_gridview">Vizualizare tip grilă</string>
     <string name="simple_security">Securitate</string>
     <string name="appearance_and_behavior">Aspect şi comportament</string>
     <string name="simple_synchronization">Sincronizare</string>

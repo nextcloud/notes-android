@@ -49,6 +49,9 @@
     <string name="settings_lock_summary">Geräte-Anmeldedaten</string>
     <string name="settings_background_sync">Hintergrundsynchronisierung</string>
     <string name="settings_prevent_screen_capture">Bildschirmaufnahme verhindern</string>
+    <string name="settings_gridview">Kachelansicht</string>
+    <string name="settings_keep_screen_on">Bildschirm anlassen</string>
+    <string name="settings_keep_screen_on_summary">Beim Betrachten oder Bearbeiten einer Notiz</string>
 
     <string name="error_sync">Synchronisierung fehlgeschlagen: %1$s</string>
     <string name="error_synchronization">Synchronisierung fehlgeschlagen</string>
@@ -168,7 +171,6 @@
     <string name="append_to_note">An Notiz anhängen</string>
     <string name="change_note_title">Notiz-Titel ändern</string>
     <string name="menu_edit_title">Titel ändern</string>
-    <string name="settings_gridview">Kachelansicht</string>
     <string name="simple_security">Sicherheit</string>
     <string name="appearance_and_behavior">Aussehen und Verhalten</string>
     <string name="simple_synchronization">Synchronisierung</string>

@@ -49,6 +49,9 @@
     <string name="settings_lock_summary">Aygıt kimlik doğrulama bilgileri</string>
     <string name="settings_background_sync">Arka planda eşitleme</string>
     <string name="settings_prevent_screen_capture">Ekran görüntüsü alınamasın</string>
+    <string name="settings_gridview">Tablo görünümü</string>
+    <string name="settings_keep_screen_on">Ekran açık kalsın</string>
+    <string name="settings_keep_screen_on_summary">Bir notu görüntüler ya da düzenlerken</string>
 
     <string name="error_sync">Eşitlenemedi: %1$s</string>
     <string name="error_synchronization">Eşitlenemedi</string>
@@ -168,7 +171,6 @@
     <string name="append_to_note">Nota ekle</string>
     <string name="change_note_title">Not başlığını değiştir</string>
     <string name="menu_edit_title">Başlığı düzenle</string>
-    <string name="settings_gridview">Tablo görünümü</string>
     <string name="simple_security">Güvenlik</string>
     <string name="appearance_and_behavior">Görünüm ve davranış</string>
     <string name="simple_synchronization">Eşitleme</string>

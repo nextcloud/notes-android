@@ -49,6 +49,9 @@
     <string name="settings_lock_summary">Informations d\'identiication du terminal</string>
     <string name="settings_background_sync">Synchronisation en tâche de fond</string>
     <string name="settings_prevent_screen_capture">Empêcher la capture d\'écran</string>
+    <string name="settings_gridview">Affichage grille</string>
+    <string name="settings_keep_screen_on">Laisser l\'écran allumé</string>
+    <string name="settings_keep_screen_on_summary">Lors de la visualisation ou l\'édition d\'une note</string>
 
     <string name="error_sync">Échec de synchronisation : %1$s</string>
     <string name="error_synchronization">Échec de synchronisation</string>
@@ -116,6 +119,7 @@
     <string name="category_restaurant">Restaurant</string>
     <string name="category_restaurants">Restaurant</string>
     <string name="category_food">Nourriture</string>
+    <string name="category_bake">Cuire</string>
     <!-- This represents a category where one can place passwords and credentials -->
     <string name="category_key">Clé</string>
     <!-- This represents a category where one can place passwords and credentials -->
@@ -167,7 +171,6 @@
     <string name="append_to_note">Ajouter à la note</string>
     <string name="change_note_title">Modifier le titre de la note</string>
     <string name="menu_edit_title">Modifier le titre</string>
-    <string name="settings_gridview">Affichage grille</string>
     <string name="simple_security">Sécurité</string>
     <string name="appearance_and_behavior">Apparence et comportement</string>
     <string name="simple_synchronization">Synchronisation</string>
@@ -194,18 +197,22 @@
 
     <plurals name="ab_selected">
         <item quantity="one">%d sélectionné</item>
+        <item quantity="many">%d sélectionné(s)</item>
         <item quantity="other">%d sélectionné(s)</item>
     </plurals>
     <plurals name="bulk_notes_deleted">
         <item quantity="one">Une note supprimée</item>
+        <item quantity="many">%1$d notes supprimées</item>
         <item quantity="other">%1$d notes supprimées</item>
     </plurals>
     <plurals name="bulk_notes_restored">
         <item quantity="one">Une note restaurée</item>
+        <item quantity="many">%1$d notes restaurées</item>
         <item quantity="other">%1$d notes restaurées</item>
     </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Partager le contenu de %1$d note</item>
+        <item quantity="many">Partager le contenu de %1$d notes</item>
         <item quantity="other">Partager le contenu de %1$d notes</item>
     </plurals>
 
@@ -275,6 +282,7 @@
     <string name="context_based_formatting">Suggestions de mise en forme contextuelle</string>
     <plurals name="remove_account_message">
         <item quantity="one">Supprimer le compte %1$s supprimera aussi définitivement un changement non-synchronisé.</item>
+        <item quantity="many">Supprimer le compte %1$s supprimera aussi définitivement  %2$d changements non-synchronisés.</item>
         <item quantity="other">Supprimer le compte %1$s supprimera aussi définitivement  %2$d changements non-synchronisés.</item>
     </plurals>
     <string name="remove_account">Supprimer %1$s</string>

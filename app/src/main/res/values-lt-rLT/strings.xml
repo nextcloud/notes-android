@@ -46,6 +46,7 @@
     <string name="settings_wifi_only">Sinchronizuoti tik naudojant belaidį (Wi-Fi)</string>
     <string name="settings_lock_summary">Įrenginio prisijungimo duomenys</string>
     <string name="settings_background_sync">Foninis sinchronizavimas</string>
+    <string name="settings_gridview">Tinklelio rodinys</string>
     <string name="error_sync">Sinchronizacija nepavyko: %1$s</string>
     <string name="error_synchronization">Sinchronizacija nepavyko</string>
     <string name="error_no_network">Nėra tinklo ryšio</string>
@@ -137,7 +138,6 @@
     <string name="append_to_note">Pridėti prie užrašų</string>
     <string name="change_note_title">Pakeisti užrašo pavadinimą</string>
     <string name="menu_edit_title">Redaguoti pavadinimą</string>
-    <string name="settings_gridview">Tinklelio rodinys</string>
     <string name="simple_security">Saugumas</string>
     <string name="simple_synchronization">Sinchronizacija</string>
     <string name="manage_accounts">Tvarkyti paskyras</string>

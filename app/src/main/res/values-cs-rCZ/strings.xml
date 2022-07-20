@@ -49,6 +49,9 @@
     <string name="settings_lock_summary">Přihlašovací údaje zařízení</string>
     <string name="settings_background_sync">Synchronizace na pozadí</string>
     <string name="settings_prevent_screen_capture">Bránit pořizování snímků obrazovky</string>
+    <string name="settings_gridview">Zobrazení v mřížce</string>
+    <string name="settings_keep_screen_on">Nezhasínat obrazovku</string>
+    <string name="settings_keep_screen_on_summary">Při zobrazování či upravování poznámky</string>
 
     <string name="error_sync">Synchronizace se nezdařila: %1$s</string>
     <string name="error_synchronization">Synchronizace se nezdařila</string>
@@ -168,7 +171,6 @@
     <string name="append_to_note">Připojit k poznámce</string>
     <string name="change_note_title">Změnit nadpis poznámky</string>
     <string name="menu_edit_title">Upravit nadpis</string>
-    <string name="settings_gridview">Zobrazení v mřížce</string>
     <string name="simple_security">Zabezpečení</string>
     <string name="appearance_and_behavior">Vzhled a chování</string>
     <string name="simple_synchronization">Synchronizace</string>
@@ -307,7 +309,7 @@
     <string name="settings_file_suffix_description">Přípona souboru pro nové poznámky ve vámi využívané instanci Nextcloud</string>
     <string name="settings_file_suffix_success">Přípona nového souboru: %1$s</string>
     <string name="http_status_code">HTTP stavový kód: %1$d</string>
-    <string name="progress_import_indeterminate">Importují se poznámky</string>
+    <string name="progress_import_indeterminate">Importují se poznámky…</string>
     <string name="progress_import">Importuje se poznámka %1$d z %2$d…</string>
     <string name="account_imported">Účet naimportován.</string>
 </resources>

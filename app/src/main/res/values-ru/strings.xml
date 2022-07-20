@@ -49,6 +49,9 @@
     <string name="settings_lock_summary">Данные устройства</string>
     <string name="settings_background_sync">Синхр. в фоновом режиме</string>
     <string name="settings_prevent_screen_capture">Запретить захват экрана</string>
+    <string name="settings_gridview">Вид сеткой</string>
+    <string name="settings_keep_screen_on">Держите экран включенным</string>
+    <string name="settings_keep_screen_on_summary">При просмотре или редактировании заметки</string>
 
     <string name="error_sync">Сбой синхронизации: %1$s</string>
     <string name="error_synchronization">Сбой синхронизации</string>
@@ -168,7 +171,6 @@
     <string name="append_to_note">Добавить в заметку</string>
     <string name="change_note_title">Изменить заголовок заметки</string>
     <string name="menu_edit_title">Редактировать заголовок</string>
-    <string name="settings_gridview">Вид сеткой</string>
     <string name="simple_security">Безопасность</string>
     <string name="appearance_and_behavior">Внешний вид и поведение</string>
     <string name="simple_synchronization">Синхронизация</string>

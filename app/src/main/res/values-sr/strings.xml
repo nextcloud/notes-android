@@ -47,9 +47,11 @@
     <string name="settings_wifi_only">Синхронизуј само преко бежичне везе</string>
     <string name="settings_lock_summary">Акредитиве уређаја</string>
     <string name="settings_background_sync">Позадинска синхронизација</string>
+    <string name="settings_gridview">Приказ мреже</string>
     <string name="error_sync">Синхронизација није успела%1$s</string>
     <string name="error_synchronization">Синхронизација није успела</string>
     <string name="error_no_network">Нема мрежне везе</string>
+    <string name="error_maintenance_mode">Server je u režimu za održavanje</string>
     <string name="error_unknown">Десила се непозната грешка.</string>
 
     <string name="about_version_title">Верзија</string>
@@ -81,6 +83,8 @@
     <string name="widget_single_note_title">Белешка</string>
     <string name="widget_single_note_placeholder_tv">Белешка није нађена</string>
     <string name="widget_not_logged_in">Пријавите се на Белешке пре коришћења овог виџета</string>
+    <string name="widget_entry_fav_contentDescription">Ikona zvezdice se koristi da označi stavku kao omiljenu</string>
+
     <string name="activity_select_single_note">Одабери белешку</string>
 
     <string name="shortcut_create_long">Направи нову белешку</string>
@@ -140,7 +144,6 @@
     <string name="append_to_note">Додај на белешку</string>
     <string name="change_note_title">Промени назив белешке</string>
     <string name="menu_edit_title">Измени наслов</string>
-    <string name="settings_gridview">Приказ мреже</string>
     <string name="simple_security">Безбедност</string>
     <string name="simple_synchronization">Синхронизација</string>
     <string name="manage_accounts">Управљање налозима</string>

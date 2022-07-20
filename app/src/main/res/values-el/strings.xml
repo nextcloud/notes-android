@@ -48,6 +48,7 @@
     <string name="settings_lock">Κλείδωμα εφαρμογής (Beta)</string>
     <string name="settings_lock_summary">Διαπιστευτήρια συσκευής</string>
     <string name="settings_background_sync">Συγχρονισμός στο παρασκήνιο</string>
+    <string name="settings_gridview">Προβολή πλέγματος</string>
     <string name="error_sync">Αποτυχία συγχρονισμού: %1$s</string>
     <string name="error_synchronization">Αποτυχία συγχρονισμού</string>
     <string name="error_no_network">Δεν υπάρχει σύνδεση στο δίκτυο</string>
@@ -148,7 +149,6 @@
     <string name="append_to_note">Προσάρτηση στη σημείωση</string>
     <string name="change_note_title">Αλλαγή τίτλου σημείωσης</string>
     <string name="menu_edit_title">Επεξεργασία τίτλου</string>
-    <string name="settings_gridview">Προβολή πλέγματος</string>
     <string name="simple_security">Ασφάλεια</string>
     <string name="simple_synchronization">Συγχρονισμός</string>
     <string name="manage_accounts">Διαχείριση λογαριασμών</string>

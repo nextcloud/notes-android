@@ -49,7 +49,7 @@
     <string name="settings_lock_summary">裝置憑證</string>
     <string name="settings_background_sync">背景同步</string>
     <string name="settings_prevent_screen_capture">防止螢幕截取</string>
-
+    <string name="settings_gridview">網格檢視</string>
     <string name="error_sync">同步失敗：%1$s</string>
     <string name="error_synchronization">同步失敗</string>
     <string name="error_no_network">沒有網路連線</string>
@@ -148,7 +148,6 @@
     <string name="append_to_note">附加到筆記</string>
     <string name="change_note_title">改變筆記標題</string>
     <string name="menu_edit_title">編輯標題</string>
-    <string name="settings_gridview">網格檢視</string>
     <string name="simple_security">安全性</string>
     <string name="appearance_and_behavior">外觀和行為</string>
     <string name="simple_synchronization">同步</string>

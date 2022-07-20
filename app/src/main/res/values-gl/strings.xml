@@ -49,7 +49,7 @@
     <string name="settings_lock_summary">Credenciais do dispositivo</string>
     <string name="settings_background_sync">Sincronización do traballo en segundo plano</string>
     <string name="settings_prevent_screen_capture">Evitar a captura da pantalla</string>
-
+    <string name="settings_gridview">Ver como grella</string>
     <string name="error_sync">Produciuse un fallo na sincronización: %1$s</string>
     <string name="error_synchronization">Produciuse un fallo na sincronización</string>
     <string name="error_no_network">Sen conexión de rede</string>
@@ -149,7 +149,6 @@
     <string name="append_to_note">Anexo á nota</string>
     <string name="change_note_title">Cambiar o título da nota</string>
     <string name="menu_edit_title">Editar o título</string>
-    <string name="settings_gridview">Ver como grella</string>
     <string name="simple_security">Seguridade</string>
     <string name="appearance_and_behavior">Aparencia e comportamento</string>
     <string name="simple_synchronization">Sincronización</string>
@@ -257,4 +256,7 @@
     <string name="simple_next">Seguinte</string>
     <string name="simple_prev">Anterior</string>
     <string name="simple_backup">Copia de seguridade</string>
-    </resources>
+    <string name="progress_import_indeterminate">A importar notas...</string>
+    <string name="progress_import">A importar a nota %1$d de %2$d...</string>
+    <string name="account_imported">Conta importada.</string>
+</resources>
