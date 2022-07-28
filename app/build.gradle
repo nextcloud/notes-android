@@ -102,7 +102,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.6.1'
 
     // Database
-    implementation 'androidx.room:room-runtime:2.4.2'
+    implementation 'androidx.room:room-runtime:2.4.3'
     annotationProcessor 'androidx.room:room-compiler:2.4.3'
 
     // Retrofit
