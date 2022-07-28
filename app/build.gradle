@@ -103,7 +103,7 @@ dependencies {
 
     // Database
     implementation 'androidx.room:room-runtime:2.4.2'
-    annotationProcessor 'androidx.room:room-compiler:2.4.2'
+    annotationProcessor 'androidx.room:room-compiler:2.4.3'
 
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
