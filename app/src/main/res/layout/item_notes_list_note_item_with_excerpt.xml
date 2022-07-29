@@ -36,7 +36,8 @@
 
         <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+		android:layout_height="match_parent"
+		android:visibility="gone">
 
             <ImageView
                 android:id="@+id/noteFavorite"
@@ -81,6 +82,7 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:textColor="?android:textColorPrimary"
+                    android:textStyle="bold"
                     android:textSize="@dimen/primary_font_size"
                     tools:text="@tools:sample/lorem/random" />
             </LinearLayout>
