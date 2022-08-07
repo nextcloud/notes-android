@@ -83,6 +83,8 @@
     <string name="widget_single_note_title">Enkeltnotat</string>
     <string name="widget_single_note_placeholder_tv">Notatet ble ikke funnet</string>
     <string name="widget_not_logged_in">Logg inn i Notater før du bruker dette miniprogrammet</string>
+    <string name="widget_entry_fav_contentDescription">Stjerneikon brukes til å betegne et element som en favoritt</string>
+
     <string name="activity_select_single_note">Velg notat</string>
 
     <string name="shortcut_create_long">Opprett et nytt notat</string>
