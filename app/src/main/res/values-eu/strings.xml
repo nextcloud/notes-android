@@ -192,7 +192,7 @@
     <string-array name="darkmode_entries">
         <item>Argia</item>
         <item>Iluna</item>
-        <item>Sistemaren defektuzko ezarpenak</item>
+        <item>Sistemaren ezarpen lehenetsiak</item>
     </string-array>
 
     <plurals name="ab_selected">
