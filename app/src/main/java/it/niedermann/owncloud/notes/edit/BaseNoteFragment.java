@@ -273,13 +273,11 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         scrollToY(originalScrollY);
         final var scrollView = getScrollView();
         if (scrollView != null) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                scrollView.setOnScrollChangeListener((View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) -> {
-                    if (scrollY > 0) {
-                        note.setScrollY(scrollY);
-                    }
-                });
-            }
+            scrollView.setOnScrollChangeListener((View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) -> {
+                if (scrollY > 0) {
+                    note.setScrollY(scrollY);
+                }
+            });
         }
     }
 
