@@ -12,6 +12,7 @@
     <string name="action_search">Etsi</string>
     <string name="action_sorting_method">Järjestämistapa</string>
     <string name="simple_cancel">Peruuta</string>
+    <string name="simple_switch">Kytkin</string>
     <string name="simple_edit">Muokkaa</string>
     <string name="simple_remove">Poista</string>
     <string name="action_edit_save">Tallenna</string>
@@ -48,7 +49,7 @@
     <string name="settings_lock_summary">Laitteen valtuudet</string>
     <string name="settings_background_sync">Taustasynkronointi</string>
     <string name="settings_prevent_screen_capture">Estä ruudunkaappaus</string>
-
+    <string name="settings_gridview">Ruudukkonäkymä</string>
     <string name="error_sync">Synkronointi epäonnistui: %1$s</string>
     <string name="error_synchronization">Synkronointi epäonnistui</string>
     <string name="error_no_network">Ei verkkoyhteyttä</string>
@@ -56,18 +57,25 @@
     <string name="error_unknown">Tapahtui tuntematon virhe.</string>
 
     <string name="about_version_title">Versio</string>
+    <string name="about_version">Käytössäsi on %1$s</string>
     <string name="about_maintainer_title">Ylläpitäjät</string>
     <string name="about_developers_title">Kehittäjät</string>
     <string name="about_translators_title">Kääntäjät</string>
+    <string name="about_translators_transifex">Nextcloud-yhteisö paikassa %1$s</string>
     <string name="about_testers_title">Testaajat</string>
     <string name="about_source_title">Lähdekoodi</string>
     <string name="about_source">Tämä projekti on GitHubissa: %1$s</string>
     <string name="about_issues_title">Ongelmat</string>
+    <string name="about_issues">Voit raportoida virheitä ja ehdottaa parannuksia ja uusia tomintoja GitHub:n ongelmien seuraaja toiminnolla: %1$s</string>
     <string name="about_translate_title">Käännä</string>
+    <string name="about_translate">Liity Nextcloud joukkoon Transflex:ssa ja auta meitä tämän sovelluksen käännöstyössä: %1$s</string>
     <string name="about_app_license_title">Sovelluslisenssi</string>
     <string name="about_app_license">Tämä sovellus on GNU GENERAL PUBLIC LICENSE v3+ -lisensoitu.</string>
     <string name="about_app_license_button">Näytä lisenssi</string>
     <string name="about_icons_disclaimer_title">Kuvakkeet</string>
+    <string name="about_icons_disclaimer_app_icon">Katso alkuperäinen kuvake %1$s.</string>
+    <string name="about_icons_disclaimer_mdi_icons">Kaikki muut tämän sovelluksen kuvakkeet on %1$s tehnyt Google Inc. ja ne on lisensoitu Apache 2.0 lisenssillä.</string>
+    <string name="about_icons_disclaimer_mdi">Material Design-kuvakkeet</string>
     <string name="about_credits_tab_title">Tekijät</string>
     <string name="about_contribution_tab_title">Kontribuutio</string>
     <string name="about_license_tab_title">Lisenssi</string>
@@ -77,6 +85,8 @@
     <string name="widget_single_note_title">Yksittäinen muistiinpano</string>
     <string name="widget_single_note_placeholder_tv">Muistiinpanoa ei löytynyt</string>
     <string name="widget_not_logged_in">Kirjaudu Notes sovellukseen ennen kuin käytät pienoissovellusta</string>
+    <string name="widget_entry_fav_contentDescription">Tähtikuvaketta käytetään suosikin ilmaisemiseen</string>
+
     <string name="activity_select_single_note">Valitse muistiinpano</string>
 
     <string name="shortcut_create_long">Luo uusi muistiinpano</string>
@@ -97,10 +107,16 @@
     <string name="category_movies">Elokuvat</string>
     <string name="category_movie">Elokuva</string>
     <string name="category_work">Työ</string>
+    <string name="category_todo">ToD</string>
+    <string name="category_todos">ToDo:t</string>
+    <string name="category_checklists">Tsekkilistat</string>
+    <string name="category_tasks">Tehtävät</string>
     <string name="category_recipe">Resepti</string>
     <string name="category_recipes">Reseptit</string>
     <string name="category_restaurant">Ravintola</string>
     <string name="category_restaurants">Ravintolat</string>
+    <string name="category_food">Ruoka</string>
+    <string name="category_bake">Leivonta</string>
     <!-- This represents a category where one can place passwords and credentials -->
     <string name="category_key">Avain</string>
     <!-- This represents a category where one can place passwords and credentials -->
@@ -109,6 +125,15 @@
     <string name="category_passwords">Salasanat</string>
     <string name="category_game">Peli</string>
     <string name="category_games">Pelit</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">Esitys</string>
+    <string name="category_gift">Lahja</string>
+    <string name="category_gifts">Lahjat</string>
+    <!-- Like a gift -->
+    <string name="category_present">Lahja</string>
+    <!-- Like a gift -->
+    <string name="category_presents">Lahjat</string>
+
     <string name="account_already_imported">Tili on jo tuotu</string>
     <string name="no_notes_yet">Ei muistiinpanoja</string>
     <string name="no_notes_yet_description">Paina + luodaksesi uuden muistiinpanon</string>
@@ -136,12 +161,12 @@
     <string name="error_dialog_server_app_enabled">Varmista, että olet asentanut \"Notes\"-sovelluksen palvelimellasi.</string>
     <string name="error_dialog_redirect">Palvelimesi vastasi HTTP 302-tilakoodilla, joka viittaa siihen, että sinulla ei ole Notes-sovellusta asennettuna palvelimellesi tai jokin asetus on väärin. Tämä saattaa johtua mukautetusta .htaccess-tiedostosta tai Nextcloud-sovelluksista, kuten OID-Clientistä.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Poista käytöstä akun optimointi Nextcloud- ja Muistiinpanot-sovelluksilta.</string>
+    <string name="error_dialog_min_version">Muistiinpanosovellus vaatii Nextcloud-sovelluksen version 3.18 tai uudemman.</string>
     <string name="added_content">Lisätty \"%1$s\"</string>
     <string name="shared_text_empty">Jaettu teksti oli tyhjä</string>
     <string name="append_to_note">Lisää muistiinpanoon</string>
     <string name="change_note_title">Muuta muistinpanon otsikkoa</string>
     <string name="menu_edit_title">Muokkaa otsikkoa</string>
-    <string name="settings_gridview">Ruudukkonäkymä</string>
     <string name="simple_security">Tietoturva</string>
     <string name="appearance_and_behavior">Ulkoasu ja toiminta</string>
     <string name="simple_synchronization">Synkronointi</string>
@@ -231,6 +256,7 @@
     <!-- Table cell value of a sample table -->
     <string name="formatting_help_tables_value">Arvo %1d</string>
 
+    <string name="formatting_help_images_body_1">Linkkien tulee olla joko kokonaisia, protokollalla ja domainilla alkavia URL-osotteita tai absoluuttisia polkuja alkaen %1$s-merkillä.</string>
     <string name="formatting_help_images_title">Kuvat</string>
     <string name="simple_other">Muu</string>
     <string name="sort_last_modified">Järjestä muokkauspäiväyksen mukaan</string>
@@ -238,9 +264,11 @@
     <string name="error_action_open_battery_settings">Akkuasetukset</string>
     <string name="error_action_open_deck_info">Avaa sovelluksen tiedot</string>
     <string name="error_action_open_network">Verkkoasetukset</string>
+    <string name="error_action_update_files_app">Päivitä</string>
     <string name="no_account_configured_yet">Tiliä ei ole vielä asetettu</string>
     <string name="no_other_accounts">Et ole vielä määrittänyt muita tilejä.</string>
     <string name="choose_account">Valitse tili</string>
+    <string name="context_based_formatting">Kontekstiin perustuva muotoilu - ponnahdusikkuna</string>
     <plurals name="remove_account_message">
         <item quantity="one">Tilin %1$s poistamalla poistetaan myös yksi synkronoimaton muutos, jota ei voida jälkeenpäin palauttaa.</item>
         <item quantity="other">Tilin %1$s poistamalla poistetaan myös %2$d synkronoimatonta muutosta, joita ei voida jälkeenpäin palauttaa.</item>
@@ -253,11 +281,18 @@
     <string name="simple_next">Seuraava</string>
     <string name="simple_prev">Edellinen</string>
     <string name="simple_backup">Varmuuskopioi</string>
+    <string name="backup">Havaitsimme virheellisen sovelluksen tilan, jota ei voida palauttaa. Varmuuskopioi synkronoimattomat muutokset ja tyhjennä muistiinpanosovelluksen tallennustila.</string>
+    <string name="settings_notes_path_description">Hakemisto, johon muistiinpanot tallennetaan Nextcloudissa</string>
     <string-array name="settings_file_suffixes">
         <item translatable="false">.txt</item>
         <item translatable="false">.md</item>
     </string-array>
+    <string name="settings_notes_path_success">Uusi muistiinpanojen hakemisto: %1$s</string>
     <string name="settings_file_suffix">Tiedostopääte</string>
+    <string name="settings_file_suffix_description">Tiedostopääte uusille Nextcloud-muistiinpanoille</string>
+    <string name="settings_file_suffix_success">Uuden tiedoston pääte: %1$s</string>
     <string name="http_status_code">HTTP-tilakoodi: %1$d</string>
+    <string name="progress_import_indeterminate">Tuodaan muistiinpanoja...</string>
+    <string name="progress_import">Tuodaan muistiinpanoa %1$d/%2$d…</string>
     <string name="account_imported">Tili tuotu.</string>
 </resources>

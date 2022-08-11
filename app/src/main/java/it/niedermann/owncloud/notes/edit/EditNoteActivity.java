@@ -1,12 +1,14 @@
 package it.niedermann.owncloud.notes.edit;
 
+import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
+
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,26 +22,22 @@ import com.nextcloud.android.sso.helper.SingleAccountHelper;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Calendar;
 import java.util.Objects;
 
+import it.niedermann.android.sharedpreferences.SharedPreferenceBooleanLiveData;
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerListener;
-import it.niedermann.owncloud.notes.databinding.ActivityEditBinding;
 import it.niedermann.owncloud.notes.databinding.ActivityEditBinding;
 import it.niedermann.owncloud.notes.edit.category.CategoryViewModel;
 import it.niedermann.owncloud.notes.main.MainActivity;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
-import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
-
-import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
 
 public class EditNoteActivity extends LockedActivity implements BaseNoteFragment.NoteFragmentListener, AccountPickerListener {
 
@@ -73,6 +71,14 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
             return;
         }
 
+        final var preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        new SharedPreferenceBooleanLiveData(preferences, getString(R.string.pref_key_keep_screen_on), true).observe(this, keepScreenOn -> {
+            if (keepScreenOn) {
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            }
+        });
+
+
         categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
         binding = ActivityEditBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -98,6 +104,12 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
             fragment = null;
         }
         launchNoteFragment();
+    }
+
+    @Override
+    protected void onStop() {
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        super.onStop();
     }
 
     private long getNoteId() {

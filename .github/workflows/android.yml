@@ -2,6 +2,9 @@ name: Android CI
 
 on: [push, pull_request]
 
+permissions:
+  contents: read
+
 jobs:
   validation:
     name: Validate Gradle Wrapper
@@ -29,21 +32,6 @@ jobs:
         uses: actions/checkout@v3
       - name: Unit tests
         run: bash ./gradlew test --stacktrace
-
-  codeql:
-    name: CodeQL security scan
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v1
-        with:
-          languages: java
-      - name: Build debug APK
-        run: bash ./gradlew assembleDev --stacktrace
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v1
 
   apk:
     name: Generate APK

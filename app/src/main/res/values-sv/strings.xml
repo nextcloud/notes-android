@@ -12,6 +12,7 @@
     <string name="action_search">Sök</string>
     <string name="action_sorting_method">Sorteringsmetod</string>
     <string name="simple_cancel">Avbryt</string>
+    <string name="simple_switch">Växla</string>
     <string name="simple_edit">Redigera</string>
     <string name="simple_remove">Ta bort</string>
     <string name="action_edit_save">Spara</string>
@@ -44,24 +45,37 @@
     <string name="settings_font_title">Monospace font</string>
     <string name="settings_font_size">Teckenstorlek</string>
     <string name="settings_wifi_only">Synkronisera endast med Wi-Fi</string>
+    <string name="settings_lock">Applåsning (Beta)</string>
+    <string name="settings_lock_summary">Enhetsuppgifter</string>
     <string name="settings_background_sync">Bakgrundssynkronisering</string>
+    <string name="settings_prevent_screen_capture">Hindra skärmklipp</string>
+    <string name="settings_gridview">Rutnätsvy</string>
     <string name="error_sync">Synkronisering misslyckades: %1$s</string>
     <string name="error_synchronization">Synkroniseringen misslyckades</string>
     <string name="error_no_network">Ingen nätverksanslutning</string>
+    <string name="error_maintenance_mode">Servern står i underhållsläge</string>
     <string name="error_unknown">Ett okänt fel uppstod.</string>
 
     <string name="about_version_title">Version</string>
+    <string name="about_version">Du använder %1$s för närvarande</string>
     <string name="about_maintainer_title">Underhållare</string>
     <string name="about_developers_title">Utvecklare</string>
     <string name="about_translators_title">Översättare</string>
+    <string name="about_translators_transifex">Nextcloud community på %1$s</string>
     <string name="about_testers_title">Testare</string>
     <string name="about_source_title">Källkod</string>
+    <string name="about_source">Detta projekt finns på GitHub: %1$s</string>
     <string name="about_issues_title">Problem</string>
+    <string name="about_issues">Du kan rapportera fel, förbättringsförslag och funktionsönskningar på GitHub- problemhanteraren: %1$s</string>
     <string name="about_translate_title">Översätt</string>
+    <string name="about_translate">Gå med i Nextcloud-gruppen på Transifex och hjälp oss översätta denna app: %1$s</string>
     <string name="about_app_license_title">Applicens</string>
     <string name="about_app_license">Denna app är licensierad under GNU GENERAL PUBLIC LICENSE v3+</string>
     <string name="about_app_license_button">Visa licens</string>
     <string name="about_icons_disclaimer_title">Ikoner</string>
+    <string name="about_icons_disclaimer_app_icon">Se %1$sför originalikonen</string>
+    <string name="about_icons_disclaimer_mdi_icons">Alla ytterligare ikoner som används i appen är %1$s från Google Inc. och licensierade under Apache 2.0-licensen.</string>
+    <string name="about_icons_disclaimer_mdi">Ikoner i Material Design</string>
     <string name="about_credits_tab_title">Upphovsmän</string>
     <string name="about_contribution_tab_title">Medverkan</string>
     <string name="about_license_tab_title">Licens</string>
@@ -70,9 +84,8 @@
     <string name="widget_note_list_placeholder">Inga anteckningar</string>
     <string name="widget_single_note_title">Enstaka anteckning</string>
     <string name="widget_single_note_placeholder_tv">Anteckning hittades inte</string>
-    <string name="widget_create_note">Skapa anteckning</string>
     <string name="widget_not_logged_in">Vänligen logga in i Anteckningar innan denna används</string>
-    <string name="widget_entry_fav_contentDescription">Stjärnan används för att beteckna ett objekt som favorit</string>
+    <string name="widget_entry_fav_contentDescription">Stjärnan används för att markera ett objekt som favorit</string>
 
     <string name="activity_select_single_note">Välj anteckning</string>
 
@@ -89,10 +102,37 @@
     <string name="pin_to_homescreen">Fäst på hemskärmen</string>
     <string name="note_has_been_deleted">Denna anteckning har raderats</string>
     <string name="add_account">Lägg till konto</string>
+
     <string name="category_music">Musik</string>
     <string name="category_movies">Filmer</string>
     <string name="category_movie">Film</string>
     <string name="category_work">Arbete</string>
+    <string name="category_todo">Uppgifter</string>
+    <string name="category_checklists">Checklistor</string>
+    <string name="category_tasks">Uppgifter</string>
+    <string name="category_recipes">Recept</string>
+    <string name="category_restaurant">Restaurang</string>
+    <string name="category_restaurants">Restauranger</string>
+    <string name="category_food">Mat</string>
+    <string name="category_bake">Bakat</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_key">Nyckel</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_keys">Nycklar</string>
+    <string name="category_password">Lösenord</string>
+    <string name="category_passwords">Lösenord</string>
+    <string name="category_credentials">Uppgifter</string>
+    <string name="category_game">Spel</string>
+    <string name="category_games">Spel</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">Spela</string>
+    <string name="category_gift">Gåva</string>
+    <string name="category_gifts">Gåvor</string>
+    <!-- Like a gift -->
+    <string name="category_present">Present</string>
+    <!-- Like a gift -->
+    <string name="category_presents">Presenter</string>
+
     <string name="account_already_imported">Kontot har redan importerats</string>
     <string name="no_notes_yet">Inga anteckningar än</string>
     <string name="no_notes_yet_description">Tryck på + knappen för att skapa en ny anteckning</string>
@@ -106,6 +146,7 @@
     <string name="error_dialog_title">Å nej - Vad händer nu?🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Försök med att Tvinga appen att stänga och återstarta. En felaktig anslutning till Nextcloud-appen kan ha förekommit.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Om problemet kvarstår, prova med att rensa lagringen på både appen Nextcloud och Nextcloud Notes.</string>
+    <string name="error_dialog_tip_clear_storage">Du kan tömma lagringsminnet genom att öppna appinfo och välja Lagring  → Tömma minne. ⚠️ Varning! Åtgärden tar bort anteckning som ännu inte synkroniserats.</string>
     <string name="error_dialog_tip_files_outdated">Din Nextcloud-app verkar utdaterad. Besök Play Butiken eller F-Droid för att hämta senaste versionen</string>
     <string name="error_dialog_tip_files_force_stop">Något verkar vara fel med din Nextcloud-app. Försök att tvångsavsluta både Nextcloud- och Nextcloud Notes-apparna.</string>
     <string name="error_dialog_tip_files_delete_storage">Om tvångsavslutning ej hjälper kan du försöka rensa datan på båda appar.</string>
@@ -115,7 +156,6 @@
     <string name="error_dialog_check_server_logs">Det finns problem med din Nextcloud-installation. Ta gärna en titt i serverns loggfiler. </string>
     <string name="error_dialog_check_maintenance">Kontrollera att underhållsläge inte är aktivt på Nextcloud-installation.</string>
     <string name="error_dialog_insufficient_storage">Din Nextcloud-installation har slut på diskutrymme. Ta bort några filer för att kunna synkronisera ändringar till ditt moln.</string>
-    <string name="error_dialog_contact_us">Tveka inte att kontakta oss om problemet fortsätter. Du kan hitta vår kontaktinformation i \"Om\"-delen i sidomenyn.</string>
     <string name="error_dialog_we_need_info">Vi behöver följande teknisk information för att kunna hjälpa dig:</string>
     <string name="error_dialog_server_app_enabled">Se till att du har installerat och aktiverat Notes-appen på din server.</string>
     <string name="error_dialog_redirect">Din server svarade med ett HTTP 302 statusmeddelande, vilket innebär att du inte har installerat Notes-appen på din server eller att något är felkonfigurerat. Detta kan orsakas av manuella ändringar i en .htaccess-fil eller av Nextcloud-appar som \"OID Client\".</string>
@@ -202,11 +242,18 @@
     <string name="formatting_help_code_body_2">Markdown stödjer också något som kallas för kodavgränsning, vilket tillåter flera rader utan indentering:</string>
     <string name="formatting_help_code_body_3">Och om du vill använda syntaxmarkering kan du inkludera språket:</string>
 
+    <string name="formatting_help_tables_title">Tabeller</string>
+    <string name="formatting_help_images_title">Bilder</string>
     <string name="simple_other">Övrigt</string>
     <string name="sort_last_modified">Sortera efter ändrat datum</string>
     <string name="sort_alphabetically">Sortera alfabetiskt</string>
     <string name="error_action_open_battery_settings">Batteriinställningar</string>
     <string name="error_action_open_deck_info">Öppna appinformation</string>
     <string name="error_action_open_network">Nätverksinställningar</string>
+    <string name="error_action_update_files_app">Uppdatera</string>
     <string name="no_other_accounts">Du har inte konfigurerat några andra konton än.</string>
+    <string name="choose_account">Välj konto</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Du måste vara ansluten till internet för att lägga till ett konto.</string>
+    <string name="simple_next">Nästa</string>
+    <string name="simple_prev">Föregående</string>
     </resources>

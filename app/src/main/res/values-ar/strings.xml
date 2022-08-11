@@ -7,12 +7,15 @@
 </string>
     <string name="label_favorites">المفضلات</string>
     <string name="action_create">ملاحظة جديدة </string>
+    <string name="welcome_text">مرحبًا بك في %1$s</string>
     <string name="action_settings">الإعدادات</string>
     <string name="action_trashbin">مسح الملاحظات</string>
     <string name="action_search">البحث</string>
     <string name="action_sorting_method">طريقة الترتيب</string>
     <string name="simple_cancel">إلغاء</string>
+    <string name="simple_switch">تبديل</string>
     <string name="simple_edit">تعديل</string>
+    <string name="simple_remove">حذف</string>
     <string name="action_edit_save">حفظ</string>
     <string name="simple_about">عن</string>
     <string name="simple_link">الرابط</string>
@@ -43,24 +46,35 @@
     <string name="settings_font_title">خط أحادي المسافة</string>
     <string name="settings_font_size">حجم الخط</string>
     <string name="settings_wifi_only">المزامنة فقط على الوايفاي</string>
+    <string name="settings_lock_summary">بيانات اعتماد الجهاز</string>
     <string name="settings_background_sync">مزامنة في خلفية النظام</string>
+    <string name="settings_gridview">عرض كمخطط</string>
     <string name="error_sync">المزامنة فشلت \'%1$s\'</string>
     <string name="error_synchronization">المزامنة فشلت</string>
     <string name="error_no_network">لا يتوفر اتصال</string>
+    <string name="error_maintenance_mode">الخادم في وضع الصيانة</string>
     <string name="error_unknown">حدث خطأ غير معروف.</string>
 
     <string name="about_version_title">الإصدار</string>
+    <string name="about_version">استهلكتَ حاليا %1$s</string>
     <string name="about_maintainer_title">مشرف</string>
     <string name="about_developers_title"> المطورون</string>
     <string name="about_translators_title"> المترجِمون</string>
+    <string name="about_translators_transifex">مجتمع نكست كلاود على %1$s</string>
     <string name="about_testers_title"> المجَرِّبون</string>
     <string name="about_source_title">الشفرة المصدرية</string>
+    <string name="about_source">هذا المشروع مستضاف على جيت هب: %1$s</string>
     <string name="about_issues_title">المشاكل</string>
+    <string name="about_issues">يمكنك الإبلاغ عن الأخطاء، ترشيح مزايا أو طلب تحسين على GitHub issue tracker:%1$s</string>
     <string name="about_translate_title">تَرجِم</string>
+    <string name="about_translate">إنضم إلى فريق نكست كلاود على Transifex وساعد في ترجمة هذا التطبيق: %1$s</string>
     <string name="about_app_license_title"> رخصة التطبيق</string>
     <string name="about_app_license">التطبيق مسجل تحت شهادة جنو العامة الاصدار 3+</string>
     <string name="about_app_license_button">عرض الرخصة</string>
     <string name="about_icons_disclaimer_title"> الأيقونات</string>
+    <string name="about_icons_disclaimer_app_icon">لرؤية الأيقونة الأصلية %1$s.</string>
+    <string name="about_icons_disclaimer_mdi_icons">جميع الأيقونات الأخرى التي يستخدمها هذا  التطبيق  %1$s من صنع  Google Inc. ومرخصة بموجب ترخيص Apache 2.0.</string>
+    <string name="about_icons_disclaimer_mdi">مادة تصميم الأيقونات </string>
     <string name="about_credits_tab_title">الشكر ل</string>
     <string name="about_contribution_tab_title">المساهمة</string>
     <string name="about_license_tab_title"> الرخصة</string>
@@ -71,10 +85,7 @@
 </string>
     <string name="widget_single_note_placeholder_tv">الملاحظة غير موجودة
 </string>
-    <string name="widget_create_note">انشاء ملاحظة</string>
     <string name="widget_not_logged_in">الرجاء تسجيل الدخول قبل إستخدامك لهذه الأداة</string>
-    <string name="widget_entry_fav_contentDescription">تُستخدم أيقونة النجمة للإشارة إلى عنصر كعنصر مفضل</string>
-
     <string name="activity_select_single_note">اختيار الملاحظة</string>
 
     <string name="shortcut_create_long">انشاء ملاحظة جديدة</string>
@@ -90,10 +101,21 @@
     <string name="pin_to_homescreen">تثبيت الى الشاشة الرئيسية</string>
     <string name="note_has_been_deleted">هذه الملاحظة مُسحت</string>
     <string name="add_account">أضف حسابا</string>
+
     <string name="category_music">الموسيقى</string>
     <string name="category_movies">الأفلام</string>
     <string name="category_movie">فلم</string>
     <string name="category_work">العمل</string>
+    <string name="category_tasks">المهام</string>
+    <string name="category_restaurant">مطعم</string>
+    <string name="category_password">كلمة السر</string>
+    <string name="category_passwords">الكلمات السرية</string>
+    <string name="category_game">لعبة</string>
+    <string name="category_games">الألعاب</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">تشغيل</string>
+    <!-- Like a gift -->
+    <string name="category_present">حاضر</string>
     <string name="account_already_imported">تم بالفعل استيراد الحساب</string>
     <string name="no_notes_yet">لا ملاحظات حاليا</string>
     <string name="no_notes_yet_description">اضغط  علامة +  لانشاء ملاحظة جديدة </string>
@@ -117,7 +139,6 @@
     <string name="error_dialog_check_server_logs">هناك مشكلة في إعداد Nextcloud الخاص بك. يرجى إلقاء نظرة على ملفات سجل الخادم.</string>
     <string name="error_dialog_check_maintenance">يرجى التحقق مما إذا كان خادم Nextcloud الخاص بك ليس في وضع الصيانة حاليًا.</string>
     <string name="error_dialog_insufficient_storage">خادم Nextcloud الخاص بك ليس لديه مساحة تخزين فارغة متبقية. يرجى حذف بعض الملفات لمزامنة التغييرات المحلية الخاصة بك في السحابة الخاصة بك.</string>
-    <string name="error_dialog_contact_us">من فضلك لا تتردد في الاتصال بنا إذا استمرت المشاكل. يمكنك العثور على معلومات الاتصال الخاصة بنا في قسم \"حول\" في الشريط الجانبي.</string>
     <string name="error_dialog_we_need_info">نحتاج إلى المعلومات الفنية التالية لمساعدتك:</string>
     <string name="error_dialog_server_app_enabled">يرجى التأكد من تثبيت وتمكين تطبيق \"Notes\" على خادمك.</string>
     <string name="error_dialog_redirect">استجاب خادمك برمز حالة HTTP 302 ، مما يعني أنك لم تقم بتثبيت تطبيق Notes على الخادم الخاص بك أو أنه تم تكوين شيء ما بشكل خاطئ. يمكن أن يحدث هذا بسبب التجاوزات المخصصة في ملف htaccess أو تطبيقات Nextcloud مثل عميل OID.</string>
@@ -199,11 +220,18 @@
     <string name="formatting_help_code_body_2">يدعم Markdown أيضًا شيئًا يسمى سياج الكود ، والذي يسمح بخطوط متعددة بدون مسافة بادئة:</string>
     <string name="formatting_help_code_body_3">وإذا كنت ترغب في استخدام تمييز بناء الجملة، فقم بتضمين اللغة البرمجية:</string>
 
+    <string name="formatting_help_tables_title">الجداول</string>
+    <string name="formatting_help_images_title">صور</string>
     <string name="simple_other">آخر</string>
     <string name="sort_last_modified">ترتيب حسب تاريخ التعديل</string>
     <string name="sort_alphabetically">الترتيب حسب الأبجدية</string>
     <string name="error_action_open_battery_settings">إعدادات البطارية</string>
     <string name="error_action_open_deck_info">افتح معلومات التطبيق</string>
     <string name="error_action_open_network">اعدادات الشبكة</string>
+    <string name="error_action_update_files_app">تحديث</string>
     <string name="no_other_accounts">لا يوجد لديك أي حسابات مكونة أخرى حتى الآن.</string>
+    <string name="choose_account">اختر حسابًا</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">يجب أن تكون متصلًا بالانترنت لإضافة حساب.</string>
+    <string name="simple_next">التالي</string>
+    <string name="simple_prev">السابق</string>
     </resources>

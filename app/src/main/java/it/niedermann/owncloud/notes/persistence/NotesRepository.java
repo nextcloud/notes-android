@@ -1,5 +1,15 @@
 package it.niedermann.owncloud.notes.persistence;
 
+import static android.os.Build.VERSION.SDK_INT;
+import static android.os.Build.VERSION_CODES.O;
+import static androidx.lifecycle.Transformations.distinctUntilChanged;
+import static androidx.lifecycle.Transformations.map;
+import static java.util.stream.Collectors.toMap;
+import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
+import static it.niedermann.owncloud.notes.shared.util.NoteUtil.generateNoteExcerpt;
+import static it.niedermann.owncloud.notes.widget.notelist.NoteListWidget.updateNoteListWidgets;
+import static it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget.updateSingleNoteWidgets;
+
 import android.accounts.NetworkErrorException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -31,7 +41,6 @@ import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -65,16 +74,6 @@ import it.niedermann.owncloud.notes.shared.util.ApiVersionUtil;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 import it.niedermann.owncloud.notes.shared.util.SSOUtil;
 import retrofit2.Call;
-
-import static android.os.Build.VERSION.SDK_INT;
-import static android.os.Build.VERSION_CODES.O;
-import static androidx.lifecycle.Transformations.distinctUntilChanged;
-import static androidx.lifecycle.Transformations.map;
-import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
-import static it.niedermann.owncloud.notes.shared.util.NoteUtil.generateNoteExcerpt;
-import static it.niedermann.owncloud.notes.widget.notelist.NoteListWidget.updateNoteListWidgets;
-import static it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget.updateSingleNoteWidgets;
-import static java.util.stream.Collectors.toMap;
 
 @SuppressWarnings("UnusedReturnValue")
 public class NotesRepository {
@@ -186,15 +185,27 @@ public class NotesRepository {
 
                         @Override
                         public void onError(@NonNull Throwable t) {
+                            Log.e(TAG, "… Error while importing " + account.getAccountName() + ": " + t.getMessage());
+                            deleteAccount(account);
+                            SingleAccountHelper.setCurrentAccount(context, null);
                             callback.onError(t);
                         }
                     });
                 } catch (NextcloudFilesAppAccountNotFoundException e) {
                     Log.e(TAG, "… Could not find " + SingleSignOnAccount.class.getSimpleName() + " for account name " + account.getAccountName());
-                    callback.onError(e);
+                    importExecutor.submit(() -> {
+                        deleteAccount(account);
+                        SingleAccountHelper.setCurrentAccount(context, null);
+                        callback.onError(e);
+                    });
                 }
             } else {
-                callback.onError(new NetworkErrorException());
+                Log.e(TAG, "… No network connection available to import " + account.getAccountName());
+                importExecutor.submit(() -> {
+                    deleteAccount(account);
+                    SingleAccountHelper.setCurrentAccount(context, null);
+                    callback.onError(new NetworkErrorException());
+                });
             }
         }
         return new MutableLiveData<>(new ImportStatus());

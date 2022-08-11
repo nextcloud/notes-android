@@ -49,6 +49,9 @@
     <string name="settings_lock_summary">Poświadczenia urządzenia</string>
     <string name="settings_background_sync">Synchronizacja w tle</string>
     <string name="settings_prevent_screen_capture">Uniemożliwiaj przechwytywanie ekranu</string>
+    <string name="settings_gridview">Widok siatki</string>
+    <string name="settings_keep_screen_on">Pozostaw włączony ekran</string>
+    <string name="settings_keep_screen_on_summary">Podczas przeglądania lub edytowania notatki</string>
 
     <string name="error_sync">Synchronizacja nie powiodła się: %1$s</string>
     <string name="error_synchronization">Synchronizacja nie powiodła się</string>
@@ -168,7 +171,6 @@
     <string name="append_to_note">Dołącz do notatki</string>
     <string name="change_note_title">Zmień tytuł notatki</string>
     <string name="menu_edit_title">Edytuj tytuł</string>
-    <string name="settings_gridview">Widok siatki</string>
     <string name="simple_security">Bezpieczeństwo</string>
     <string name="appearance_and_behavior">Wygląd i zachowanie</string>
     <string name="simple_synchronization">Synchronizacja</string>

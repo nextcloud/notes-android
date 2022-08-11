@@ -33,6 +33,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
     private BrandedSwitchPreference gridViewPref;
     private BrandedSwitchPreference preventScreenCapturePref;
     private BrandedSwitchPreference backgroundSyncPref;
+    private BrandedSwitchPreference keepScreenOnPref;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -49,6 +50,16 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
                 Log.v(TAG, "gridView: " + gridView);
                 viewModel.resultCode$.setValue(Activity.RESULT_OK);
                 NotesApplication.updateGridViewEnabled(gridView);
+                return true;
+            });
+        } else {
+            Log.e(TAG, "Could not find preference with key: \"" + getString(R.string.pref_key_gridview) + "\"");
+        }
+
+        keepScreenOnPref = findPreference(getString(R.string.pref_key_keep_screen_on));
+        if (keepScreenOnPref != null) {
+            keepScreenOnPref.setOnPreferenceChangeListener((Preference preference, Object newValue) -> {
+                Log.v(TAG, "keepScreenOnPref: " + keepScreenOnPref);
                 return true;
             });
         } else {
@@ -125,5 +136,6 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
         gridViewPref.applyBrand(mainColor, textColor);
         preventScreenCapturePref.applyBrand(mainColor, textColor);
         backgroundSyncPref.applyBrand(mainColor, textColor);
+        keepScreenOnPref.applyBrand(mainColor, textColor);
     }
 }

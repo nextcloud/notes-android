@@ -49,7 +49,7 @@
     <string name="settings_lock_summary">Prihlasovacie údaje zariadenia</string>
     <string name="settings_background_sync">Synchronizácia na pozadí</string>
     <string name="settings_prevent_screen_capture">Zakázať snímanie obrazovky</string>
-
+    <string name="settings_gridview">Zobrazenie v mriežke</string>
     <string name="error_sync">Synchronizácia zlyhala: %1$s</string>
     <string name="error_synchronization">Synchronizácia zlyhala</string>
     <string name="error_no_network">Bez sieťového pripojenia</string>
@@ -168,7 +168,6 @@
     <string name="append_to_note">Pripojiť k poznámke</string>
     <string name="change_note_title">Zmeniť názov poznámky</string>
     <string name="menu_edit_title">Upraviť názov</string>
-    <string name="settings_gridview">Zobrazenie v mriežke</string>
     <string name="simple_security">Zabezpečenie</string>
     <string name="appearance_and_behavior">Vzhľad a správanie</string>
     <string name="simple_synchronization">Synchronizácia</string>

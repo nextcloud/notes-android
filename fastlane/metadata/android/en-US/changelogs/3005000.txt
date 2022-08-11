@@ -1,0 +1,3 @@
+- 📱️ Keep the screen on  (#1461)
+- ↕️ Respect locale when sorting notes alphabetically (#1504)
+- 🌎 Updated translations

@@ -49,6 +49,9 @@
     <string name="settings_lock_summary">Credenciais de dispositivo</string>
     <string name="settings_background_sync">Sincronização em segundo plano</string>
     <string name="settings_prevent_screen_capture">Proibir captura de tela</string>
+    <string name="settings_gridview">Visualização em grade</string>
+    <string name="settings_keep_screen_on">Mantenha a tela ligada</string>
+    <string name="settings_keep_screen_on_summary">Ao visualizar ou editar uma nota</string>
 
     <string name="error_sync">A sincronização falhou: %1$s</string>
     <string name="error_synchronization">A sincronização falhou</string>
@@ -168,7 +171,6 @@
     <string name="append_to_note">Anexar à nota</string>
     <string name="change_note_title">Alterar o título da nota</string>
     <string name="menu_edit_title">Editar título</string>
-    <string name="settings_gridview">Visualização em grade</string>
     <string name="simple_security">Segurança</string>
     <string name="appearance_and_behavior">Aparência e comportamento</string>
     <string name="simple_synchronization">Sincronização</string>
@@ -195,18 +197,22 @@
 
     <plurals name="ab_selected">
         <item quantity="one">%d selecionado</item>
+        <item quantity="many">%d selecionados</item>
         <item quantity="other">%d selecionados</item>
     </plurals>
     <plurals name="bulk_notes_deleted">
         <item quantity="one">Uma nota excluída</item>
+        <item quantity="many">%1$d notas excluídas</item>
         <item quantity="other">%1$d notas excluídas</item>
     </plurals>
     <plurals name="bulk_notes_restored">
         <item quantity="one">Uma nota restaurada</item>
+        <item quantity="many">%1$d notas restauradas</item>
         <item quantity="other">%1$d notas restauradas</item>
     </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Compartilhar conteúdo de %1$d nota</item>
+        <item quantity="many">Compartilhar conteúdo de %1$d notas</item>
         <item quantity="other">Compartilhar conteúdo de %1$d notas</item>
     </plurals>
 
@@ -261,7 +267,7 @@
     <string name="formatting_help_images_body_1">Os links devem ser URLs completos, começando com um protocolo e domínio, ou caminhos absolutos, começando com um caractere %1$s.</string>
     <string name="formatting_help_images_body_2">Para estar em conformidade com o formato Markdown, use caracteres de escape no URL da imagem. Isso significa, por exemplo, substituir espaços por  %1$s no endereço URL.</string>
     <string name="formatting_help_images_title">Imagens</string>
-    <string name="formatting_help_images_alt">Imagens bonita</string>
+    <string name="formatting_help_images_alt">Imagem bonita</string>
 
     <string name="simple_other">Outro</string>
     <string name="sort_last_modified">Ordenar por data de modificação</string>
@@ -276,6 +282,7 @@
     <string name="context_based_formatting">Formatação baseada no contexto popover</string>
     <plurals name="remove_account_message">
         <item quantity="one">Removendo a conta %1$s também excluirá uma alteração irrecuperável não foi sincronizada. </item>
+        <item quantity="many">Removendo a conta  %1$s também irá deletar irrecuperávelmente %2$d mudanças não sincronizadas. </item>
         <item quantity="other">Removendo a conta  %1$s também irá deletar irrecuperávelmente %2$d mudanças não sincronizadas. </item>
     </plurals>
     <string name="remove_account">Remover %1$s</string>

@@ -45,8 +45,9 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
   * Context based formatting ([#363](https://github.com/stefan-niedermann/nextcloud-notes/issues/363))
   * Password protection ([#354](https://github.com/stefan-niedermann/nextcloud-notes/issues/354))
 
-## :checkered_flag: Planned features
-  * Local accounts ([#615](https://github.com/stefan-niedermann/nextcloud-notes/issues/615))
+## :checkered_flag: Roadmap
+  * We usually focus on [pinned issues](https://github.com/stefan-niedermann/nextcloud-notes/issues) in our issue tracker
+  * Since this is an Open Source freetime project, there is no guarantee when and if and how we implement new features
 
 ## :family: Join the team
   * Test the app with different devices

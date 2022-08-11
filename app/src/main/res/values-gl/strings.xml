@@ -6,12 +6,15 @@
     <string name="label_all_notes">Todas as notas</string>
     <string name="label_favorites">Favoritas</string>
     <string name="action_create">Nova nota</string>
+    <string name="welcome_text">Dámoslle a benvida a %1$s</string>
     <string name="action_settings">Axustes</string>
     <string name="action_trashbin">Notas eliminadas</string>
     <string name="action_search">Buscar</string>
     <string name="action_sorting_method">Método de ordenación</string>
     <string name="simple_cancel">Cancelar</string>
+    <string name="simple_switch">Cambiar</string>
     <string name="simple_edit">Editar</string>
+    <string name="simple_remove">Retirar</string>
     <string name="action_edit_save">Gardar</string>
     <string name="simple_about">Sobre</string>
     <string name="simple_link">Ligazón</string>
@@ -46,24 +49,33 @@
     <string name="settings_lock_summary">Credenciais do dispositivo</string>
     <string name="settings_background_sync">Sincronización do traballo en segundo plano</string>
     <string name="settings_prevent_screen_capture">Evitar a captura da pantalla</string>
-
+    <string name="settings_gridview">Ver como grella</string>
     <string name="error_sync">Produciuse un fallo na sincronización: %1$s</string>
     <string name="error_synchronization">Produciuse un fallo na sincronización</string>
     <string name="error_no_network">Sen conexión de rede</string>
+    <string name="error_maintenance_mode">Servidor en modo mantemento</string>
     <string name="error_unknown">Produciuse un erro descoñecido.</string>
 
     <string name="about_version_title">Versión</string>
+    <string name="about_version">Agora está a empregar %1$s</string>
     <string name="about_maintainer_title">Mantedor</string>
     <string name="about_developers_title">Desenvolvedores</string>
     <string name="about_translators_title">Tradutores</string>
+    <string name="about_translators_transifex">Comunidade Nextcloud en %1$s</string>
     <string name="about_testers_title">Probadores</string>
     <string name="about_source_title">Código fonte</string>
+    <string name="about_source">Este proxecto está aloxado en GitHub: %1$s</string>
     <string name="about_issues_title">Incidencias</string>
+    <string name="about_issues">Vostede pode informar de fallos, propoñer melloras e solicitar funcionalidades na ferramenta de seguimento de erros do GitHub: %1$s</string>
     <string name="about_translate_title">Traducir</string>
+    <string name="about_translate">Únase ao equipo Nextcloud en Transifex e axúdenos a traducir esta aplicación: %1$s</string>
     <string name="about_app_license_title">Licenza da apli</string>
     <string name="about_app_license">Esta apli está licenciada baixo a LICENZA XERAL PUBLICA GNU v3+.</string>
     <string name="about_app_license_button">Ver a licenza</string>
     <string name="about_icons_disclaimer_title">Iconas</string>
+    <string name="about_icons_disclaimer_app_icon">Para a icona orixinal, vexa %1$s.</string>
+    <string name="about_icons_disclaimer_mdi_icons">Todas as iconas usadas nesta aplicación son %1$s feitas por Google Inc. e licenciadas baixo unha Licenza Apache 2.0.</string>
+    <string name="about_icons_disclaimer_mdi">Iconas Material Desig</string>
     <string name="about_credits_tab_title">Recoñecementos</string>
     <string name="about_contribution_tab_title">Colaboración</string>
     <string name="about_license_tab_title">Licenza</string>
@@ -93,6 +105,18 @@
     <string name="category_movies">Filmes</string>
     <string name="category_movie">Filme</string>
     <string name="category_work">Traballo</string>
+    <string name="category_tasks">Tarefas</string>
+    <string name="category_recipe">Receita</string>
+    <string name="category_recipes">Receitas</string>
+    <string name="category_restaurant">Restaurante</string>
+    <string name="category_password">Contrasinal</string>
+    <string name="category_passwords">Contrasinais</string>
+    <string name="category_game">Xogo</string>
+    <string name="category_games">Xogos</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">Reproducir</string>
+    <!-- Like a gift -->
+    <string name="category_present">Presentar</string>
     <string name="account_already_imported">A conta xa foi importada</string>
     <string name="no_notes_yet">Aínda non hai notas</string>
     <string name="no_notes_yet_description">Prema o botón + para crear unha nota nova</string>
@@ -125,7 +149,6 @@
     <string name="append_to_note">Anexo á nota</string>
     <string name="change_note_title">Cambiar o título da nota</string>
     <string name="menu_edit_title">Editar o título</string>
-    <string name="settings_gridview">Ver como grella</string>
     <string name="simple_security">Seguridade</string>
     <string name="appearance_and_behavior">Aparencia e comportamento</string>
     <string name="simple_synchronization">Sincronización</string>
@@ -224,7 +247,16 @@
     <string name="error_action_open_battery_settings">Axustes da batería</string>
     <string name="error_action_open_deck_info">Abrir a info da apli</string>
     <string name="error_action_open_network">Axustes da rede</string>
+    <string name="error_action_update_files_app">Actualizar</string>
     <string name="no_account_configured_yet">Aínda non hai ningunha conta configurada</string>
     <string name="no_other_accounts">Aínda non ten configurada ningunha outra conta.</string>
+    <string name="choose_account">Escolla unha conta</string>
     <string name="context_based_formatting">Xanela emerxente de formato baseado no contexto</string>
-    </resources>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Para engadir unha conta tes que estar conectado a internet.</string>
+    <string name="simple_next">Seguinte</string>
+    <string name="simple_prev">Anterior</string>
+    <string name="simple_backup">Copia de seguridade</string>
+    <string name="progress_import_indeterminate">A importar notas...</string>
+    <string name="progress_import">A importar a nota %1$d de %2$d...</string>
+    <string name="account_imported">Conta importada.</string>
+</resources>

@@ -36,16 +36,20 @@ import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 
 import io.reactivex.Observable;
@@ -283,5 +287,23 @@ public class NotesRepositoryTest {
 
         repo.updateDisplayName(account.getId(), null);
         assertEquals("Should read userName in favor of displayName if displayName is NULL", "彼得", db.getAccountDao().getAccountById(account.getId()).getDisplayName());
+    }
+
+    @Config(qualifiers = "de")
+    @Test
+    @Ignore("Language is properly set to DE, but LOCALIZED SQL query does not work")
+    public void searchLexicographically() throws InterruptedException, IOException {
+        repo.searchRecentByModified(account.getId(), "").forEach(note -> repo.deleteByNoteId(note.getId(), note.getStatus()));
+        Arrays.stream(new Note[]{
+                new Note(10, 1001L, Calendar.getInstance(), "Baaa", "", "Špagety", false, null, VOID, account.getId(), "", 0),
+                new Note(11, null, Calendar.getInstance(), "Aaaa", "", "Svíčková", false, null, VOID, account.getId(), "", 0),
+                new Note(12, 1003L, Calendar.getInstance(), "Äaaa", "", "Zelí", false, null, VOID, account.getId(), "", 0),
+        }).forEach(note -> db.getNoteDao().addNote(note));
+
+        final var recent = NotesTestingUtil.getOrAwaitValue(repo.searchRecentLexicographically$(account.getId(), ""));
+        assertEquals(3, recent.size());
+        assertEquals(11, recent.get(0).getId());
+        assertEquals(12, recent.get(1).getId());
+        assertEquals(10, recent.get(2).getId());
     }
 }

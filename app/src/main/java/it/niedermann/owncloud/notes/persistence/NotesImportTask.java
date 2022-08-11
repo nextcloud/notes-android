@@ -53,30 +53,41 @@ public class NotesImportTask {
         executor.submit(() -> {
             Log.i(TAG, "… Fetching notes IDs");
             final var status = new ImportStatus();
-            final var remoteIds = notesAPI.getNotesIDs().blockingSingle();
-            status.total = remoteIds.size();
-            status$.postValue(status);
-            Log.i(TAG, "… Total count: " + remoteIds.size());
-            final var latch = new CountDownLatch(remoteIds.size());
-            for (long id : remoteIds) {
-                fetchExecutor.submit(() -> {
-                    try {
-                        repo.addNote(localAccount.getId(), notesAPI.getNote(id).blockingSingle().getResponse());
-                    } catch (Throwable t) {
-                        Log.w(TAG, "Could not import note with remoteId " + id + ": " + t.getMessage());
-                        status.warnings.add(t);
-                    }
-                    status.count++;
-                    status$.postValue(status);
-                    latch.countDown();
-                });
-            }
             try {
-                latch.await();
-                Log.i(TAG, "IMPORT FINISHED");
-                callback.onSuccess(null);
-            } catch (InterruptedException e) {
-                callback.onError(e);
+                final var remoteIds = notesAPI.getNotesIDs().blockingSingle();
+                status.total = remoteIds.size();
+                status$.postValue(status);
+                Log.i(TAG, "… Total count: " + remoteIds.size());
+                final var latch = new CountDownLatch(remoteIds.size());
+                for (long id : remoteIds) {
+                    fetchExecutor.submit(() -> {
+                        try {
+                            repo.addNote(localAccount.getId(), notesAPI.getNote(id).blockingSingle().getResponse());
+                        } catch (Throwable t) {
+                            Log.w(TAG, "Could not import note with remoteId " + id + ": " + t.getMessage());
+                            status.warnings.add(t);
+                        }
+                        status.count++;
+                        status$.postValue(status);
+                        latch.countDown();
+                    });
+                }
+                try {
+                    latch.await();
+                    Log.i(TAG, "IMPORT FINISHED");
+                    callback.onSuccess(null);
+                } catch (InterruptedException e) {
+                    callback.onError(e);
+                }
+            } catch (Throwable t) {
+                final Throwable cause = t.getCause();
+                if (t.getClass() == RuntimeException.class && cause != null) {
+                    Log.e(TAG, "Could not fetch list of note IDs: " + cause.getMessage());
+                    callback.onError(cause);
+                } else {
+                    Log.e(TAG, "Could not fetch list of note IDs: " + t.getMessage());
+                    callback.onError(t);
+                }
             }
         });
         return status$;

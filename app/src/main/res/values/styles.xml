@@ -9,6 +9,8 @@
         <item name="windowActionModeOverlay">true</item>
         <item name="actionModeStyle">@style/actionModeStyle</item>
         <item name="toolbarStyle">@style/toolbarStyle</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
+        <item name="android:windowLightStatusBar">@bool/isDayMode</item>
     </style>
 
     <style name="AppTheme" parent="BaseTheme" />
@@ -34,7 +36,9 @@
         <item name="android:layout_gravity">end|bottom</item>
     </style>
 
-    <style name="SplashTheme" parent="AppTheme">
-        <item name="android:windowBackground">@drawable/splashscreen</item>
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/defaultBrand</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="postSplashScreenTheme">@style/AppTheme</item>
     </style>
 </resources>

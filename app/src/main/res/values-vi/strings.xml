@@ -12,6 +12,7 @@
     <string name="action_search">Tìm</string>
     <string name="action_sorting_method">Phương pháp sắp xếp</string>
     <string name="simple_cancel">Hủy</string>
+    <string name="simple_switch">Chuyển</string>
     <string name="simple_edit">Chỉnh sửa</string>
     <string name="simple_remove">Xoá</string>
     <string name="action_edit_save">Lưu</string>
@@ -48,7 +49,7 @@
     <string name="settings_lock_summary">Thông tin thiết bị</string>
     <string name="settings_background_sync">Đồng bộ hoá trong nền</string>
     <string name="settings_prevent_screen_capture">Ngăn chặn chụp màn hình</string>
-
+    <string name="settings_gridview">Hiển thị dạng lưới</string>
     <string name="error_sync">Đồng bộ hoá thất bại: %1$s</string>
     <string name="error_synchronization">Đồng bộ hoá thất bại</string>
     <string name="error_no_network">Không có kết nối mạng</string>
@@ -104,10 +105,17 @@
     <string name="category_movies">Phim</string>
     <string name="category_movie">Xem phim</string>
     <string name="category_work">Công việc</string>
+    <string name="category_tasks">Nhiệm vụ</string>
+    <string name="category_recipes">Công thức nấu ăn</string>
     <string name="category_food">Thức ăn</string>
     <string name="category_password">Mật khẩu</string>
     <string name="category_passwords">Mật khẩu</string>
     <string name="category_game">Trò chơi</string>
+    <string name="category_games">Trò chơi</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">Chơi</string>
+    <!-- Like a gift -->
+    <string name="category_present">Trình bày</string>
     <string name="account_already_imported">Tài khoản đã được nhập sẵn</string>
     <string name="no_notes_yet">Chưa có ghi chú</string>
     <string name="no_notes_yet_description">Nhấn nút + để tạo ghi chú mới</string>
@@ -140,7 +148,6 @@
     <string name="append_to_note">Thêm vào ghi chú</string>
     <string name="change_note_title">Đổi tiêu đề ghi chú</string>
     <string name="menu_edit_title">Chỉnh sửa tiêu đề</string>
-    <string name="settings_gridview">Hiển thị dạng lưới</string>
     <string name="simple_security">Bảo mật</string>
     <string name="appearance_and_behavior">Ngoại hình và hành vi</string>
     <string name="simple_synchronization">Đồng bộ hoá</string>

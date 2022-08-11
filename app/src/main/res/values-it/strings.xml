@@ -49,7 +49,7 @@
     <string name="settings_lock_summary">Credenziali dispositivo</string>
     <string name="settings_background_sync">Sincronizzazione in background</string>
     <string name="settings_prevent_screen_capture">Impedisci cattura dello schermo</string>
-
+    <string name="settings_gridview">Vista griglia</string>
     <string name="error_sync">Sincronizzazione non riuscita: %1$s</string>
     <string name="error_synchronization">Sincronizzazione non riuscita</string>
     <string name="error_no_network">Nessuna connessione di rete</string>
@@ -168,7 +168,6 @@
     <string name="append_to_note">Aggiungi a nota</string>
     <string name="change_note_title">Cambia titolo della nota</string>
     <string name="menu_edit_title">Modifica titolo</string>
-    <string name="settings_gridview">Vista griglia</string>
     <string name="simple_security">Sicurezza</string>
     <string name="appearance_and_behavior">Aspetto e comportamento</string>
     <string name="simple_synchronization">Sincronizzazione</string>
@@ -195,18 +194,22 @@
 
     <plurals name="ab_selected">
         <item quantity="one">%d selezionato</item>
+        <item quantity="many">%d selezionati</item>
         <item quantity="other">%d selezionati</item>
     </plurals>
     <plurals name="bulk_notes_deleted">
         <item quantity="one">Eliminata una nota</item>
+        <item quantity="many">Eliminate %1$d note</item>
         <item quantity="other">Eliminate %1$d note</item>
     </plurals>
     <plurals name="bulk_notes_restored">
         <item quantity="one">Ripristinate una nota</item>
+        <item quantity="many">Ripristinate %1$d note</item>
         <item quantity="other">Ripristinate %1$d note</item>
     </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Condividi il contenuto di %1$d nota</item>
+        <item quantity="many">Condividi il contenuto di %1$d note</item>
         <item quantity="other">Condividi il contenuto di %1$d note</item>
     </plurals>
 
@@ -276,6 +279,7 @@
     <string name="context_based_formatting">Finestra di formattazione basata sul contesto</string>
     <plurals name="remove_account_message">
         <item quantity="one">La rimozione dell\'account %1$s eliminerà irrevocabilmente anche una modifica non sincronizzata.</item>
+        <item quantity="many">La rimozione dell\'account %1$s eliminerà irrevocabilmente anche %2$d modifiche non sincronizzate.</item>
         <item quantity="other">La rimozione dell\'account %1$s eliminerà irrevocabilmente anche %2$d modifiche non sincronizzate.</item>
     </plurals>
     <string name="remove_account">Rimuovi %1$s</string>

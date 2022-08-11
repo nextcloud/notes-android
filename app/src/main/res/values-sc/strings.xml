@@ -12,6 +12,7 @@
     <string name="action_search">Chirca</string>
     <string name="action_sorting_method">Mètodu de ordinamentu</string>
     <string name="simple_cancel">Annulla</string>
+    <string name="simple_switch">Càmbia</string>
     <string name="simple_edit">Modìfica</string>
     <string name="simple_remove">Boga</string>
     <string name="action_edit_save">Sarva</string>
@@ -48,7 +49,7 @@
     <string name="settings_lock_summary">Credentziales de su dispositivu</string>
     <string name="settings_background_sync">Sincronizatzione isfundu</string>
     <string name="settings_prevent_screen_capture">Impedi sa catura de ischermu</string>
-
+    <string name="settings_gridview">Bista grìllia</string>
     <string name="error_sync">Sincronizatzione faddida: %1$s</string>
     <string name="error_synchronization">Sincronizatzione faddida</string>
     <string name="error_no_network">Peruna connessione de rete</string>
@@ -56,17 +57,25 @@
     <string name="error_unknown">Ddoe at àpidu un\'errore disconnotu.</string>
 
     <string name="about_version_title">Versione</string>
+    <string name="about_version">Como ses impreende %1$s</string>
     <string name="about_maintainer_title">Responsàbile</string>
     <string name="about_developers_title">Isvilupadores</string>
     <string name="about_translators_title">Tradutores</string>
+    <string name="about_translators_transifex">Comunidade Nextcloud in su %1$s</string>
     <string name="about_testers_title">Collaudadores</string>
     <string name="about_source_title">Còdighe fonte</string>
+    <string name="about_source">Custu progetu nch\'est allogadu in GitHub: %1$s</string>
     <string name="about_issues_title">Problemas</string>
+    <string name="about_issues">Podes sinnalare unu problema, fàghere propostas de megioramentu e rechestas de funtzionalidades a su rilevadore de problemas de GitHub: %1$s</string>
     <string name="about_translate_title">Borta</string>
+    <string name="about_translate">Iscrie·ti a s\'iscuadra de Nextcloud in Transifex e agiuda·nos a bortare custa aplicatzione: %1$s</string>
     <string name="about_app_license_title">Lissèntzia</string>
     <string name="about_app_license">Custa aplicatzione est suta lissèntzia GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Càstia lissèntzia</string>
     <string name="about_icons_disclaimer_title">Iconas</string>
+    <string name="about_icons_disclaimer_app_icon">Pro s\'icona originale bide %1$s.</string>
+    <string name="about_icons_disclaimer_mdi_icons">Totu is iconas in prus impreadas dae custa aplicatzione sunt %1$s creadas dae Google Inc. e suta lissèntzia Apache 2.0 License.</string>
+    <string name="about_icons_disclaimer_mdi">Iconas de Gràfica Materiale</string>
     <string name="about_credits_tab_title">Crèditos</string>
     <string name="about_contribution_tab_title">Contributos</string>
     <string name="about_license_tab_title">Lissèntzia</string>
@@ -96,6 +105,14 @@
     <string name="category_movies">Film</string>
     <string name="category_movie">Film</string>
     <string name="category_work">Traballu</string>
+    <string name="category_tasks">Fainas</string>
+    <string name="category_recipes">Retzetas</string>
+    <string name="category_restaurant">Ristorante</string>
+    <string name="category_password">Crae</string>
+    <string name="category_passwords">Craes</string>
+    <string name="category_games">Giogos</string>
+    <!-- Like a gift -->
+    <string name="category_present">Presentare</string>
     <string name="account_already_imported">Su contu nch\'est giai importadu</string>
     <string name="no_notes_yet">Peruna nota ancora</string>
     <string name="no_notes_yet_description">Incarca su butone + pro creare una nota noa</string>
@@ -128,7 +145,6 @@
     <string name="append_to_note">Agiunghe a sa nota</string>
     <string name="change_note_title">Càmbia su tìtulu de sa nota</string>
     <string name="menu_edit_title">Modìfica tìtulu</string>
-    <string name="settings_gridview">Bista grìllia</string>
     <string name="simple_security">Seguresa</string>
     <string name="appearance_and_behavior">Aparèntzia e cumportamentu</string>
     <string name="simple_synchronization">Sincronizatzione</string>
@@ -227,6 +243,7 @@
     <string name="error_action_open_battery_settings">Impostatziones bateria</string>
     <string name="error_action_open_deck_info">Aberi informatziones aplicatzione</string>
     <string name="error_action_open_network">Impostatziones de rete</string>
+    <string name="error_action_update_files_app">Agiorna</string>
     <string name="no_account_configured_yet">Perunu contu configuradu ancora</string>
     <string name="no_other_accounts">No as configuradu perunu contu ancora.</string>
     <string name="choose_account">Sèbera contu</string>

@@ -6,12 +6,15 @@
     <string name="label_all_notes">Alle notater</string>
     <string name="label_favorites">Favoritter</string>
     <string name="action_create">Nytt notat</string>
+    <string name="welcome_text">Velkommen til %1$s</string>
     <string name="action_settings">Innstillinger</string>
     <string name="action_trashbin">Slettede notat</string>
     <string name="action_search">Søk</string>
     <string name="action_sorting_method">Sorteringsmetode</string>
     <string name="simple_cancel">Avbryt</string>
+    <string name="simple_switch">Endre</string>
     <string name="simple_edit">Rediger</string>
+    <string name="simple_remove">Fjern</string>
     <string name="action_edit_save">Lagre</string>
     <string name="simple_about">Om</string>
     <string name="simple_link">Lenke</string>
@@ -42,24 +45,35 @@
     <string name="settings_font_title">Monospace font</string>
     <string name="settings_font_size">Skriftstørrelse</string>
     <string name="settings_wifi_only">Synkroniser kun med WiFi</string>
+    <string name="settings_lock_summary">Enhetens legitimasjon</string>
     <string name="settings_background_sync">Synkronisering i bakgrunnen</string>
+    <string name="settings_gridview">Rutenett-visning</string>
     <string name="error_sync">Synkronisering mislyktes: %1$s</string>
     <string name="error_synchronization">Synkronisering mislyktes</string>
     <string name="error_no_network">Ingen nettverkstilkobling</string>
+    <string name="error_maintenance_mode">Server i vedlikeholdsmodus</string>
     <string name="error_unknown">En ukjent feil oppstod.</string>
 
     <string name="about_version_title">Versjon</string>
+    <string name="about_version">Du bruker forøyeblikket %1$s</string>
     <string name="about_maintainer_title">Vedlikeholder</string>
     <string name="about_developers_title">Utviklere</string>
     <string name="about_translators_title">Oversettere</string>
+    <string name="about_translators_transifex">Nextcloud-fellesskapet på %1$s</string>
     <string name="about_testers_title">Testere</string>
     <string name="about_source_title">Kildekode</string>
+    <string name="about_source">Dette prosjektet er på GitHub: %1$s</string>
     <string name="about_issues_title">Feil</string>
+    <string name="about_issues">Du kan rapportere inn feil, forbedringsforslag og funksjonsforespørsler på GitHub issue tracker: %1$s</string>
     <string name="about_translate_title">Oversett</string>
+    <string name="about_translate">Bli med og hjelp oss å oversette Nextcloud på vår Transifex side: %1$s </string>
     <string name="about_app_license_title">Lisens</string>
     <string name="about_app_license">Denne appen er lisensiert under GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Vis lisens</string>
     <string name="about_icons_disclaimer_title">Ikoner</string>
+    <string name="about_icons_disclaimer_app_icon">For original ikon se%1$s.</string>
+    <string name="about_icons_disclaimer_mdi_icons">Alle øvrige ikoner brukt i denne appen er %1$s laget av Google Inc. og lisensiert under Apache 2.0-lisens.</string>
+    <string name="about_icons_disclaimer_mdi">Materialdesignikoner</string>
     <string name="about_credits_tab_title">Bidragsytere</string>
     <string name="about_contribution_tab_title">Bidragsytere</string>
     <string name="about_license_tab_title">Lisens</string>
@@ -68,9 +82,8 @@
     <string name="widget_note_list_placeholder">Ingen notater</string>
     <string name="widget_single_note_title">Enkeltnotat</string>
     <string name="widget_single_note_placeholder_tv">Notatet ble ikke funnet</string>
-    <string name="widget_create_note">Opprett notat</string>
     <string name="widget_not_logged_in">Logg inn i Notater før du bruker dette miniprogrammet</string>
-    <string name="widget_entry_fav_contentDescription">Stjerne ikon er brukt for å angi et element som en favoritt</string>
+    <string name="widget_entry_fav_contentDescription">Stjerneikon brukes til å betegne et element som en favoritt</string>
 
     <string name="activity_select_single_note">Velg notat</string>
 
@@ -87,10 +100,20 @@
     <string name="pin_to_homescreen">Fest til hjemmeskjermen</string>
     <string name="note_has_been_deleted">Dette notatet har blitt slettet</string>
     <string name="add_account">Legg til en konto</string>
+
     <string name="category_music">Musikk</string>
     <string name="category_movies">Filmer</string>
     <string name="category_movie">Film</string>
     <string name="category_work">Arbeid</string>
+    <string name="category_tasks">Oppgaver</string>
+    <string name="category_restaurant">Restaurant</string>
+    <string name="category_password">PassordP</string>
+    <string name="category_passwords">Passord</string>
+    <string name="category_games">Spill</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">Spill</string>
+    <!-- Like a gift -->
+    <string name="category_present">Gave</string>
     <string name="account_already_imported">Kontoen har allerede blitt importert</string>
     <string name="no_notes_yet">Ingen notater enda</string>
     <string name="no_notes_yet_description">Trykk + knappen for å opprette et nytt notat</string>
@@ -113,7 +136,6 @@
     <string name="error_dialog_check_server_logs">Det er et problem med Nextcloud oppsettet ditt. Vennligst ta en titt i loggfilene til serveren.</string>
     <string name="error_dialog_check_maintenance">Vennligst sjekk at Nextcloud instansen ikke er i vedlikeholdsmodus for øyeblikket.</string>
     <string name="error_dialog_insufficient_storage">Nextcloud instansen har ikke mer ledig lagringsplass. Vennligst slett noen filer for å synkronisere de lokale endringen til skyen din.</string>
-    <string name="error_dialog_contact_us">Ikke nøl med å kontakte oss hvis problemene vedvarer. Du finner kontaktinformasjonen vår i om delen i sidefeltet.</string>
     <string name="error_dialog_we_need_info">Vi trenger følgende teknisk informasjon for å kunne hjelpe deg:</string>
     <string name="error_dialog_server_app_enabled">Vennligst påse at du har installert og aktivert \"Notes\" appen på serveren.</string>
     <string name="error_dialog_redirect">Serveren din svarte med en HTTP 302-statuskode, noe som antyder at du ikke har installert Notes-appen på serveren din, eller at noe er feilkonfigurert. Dette kan være forårsaket av tilpassede overstyringer i en .htaccess-fil eller av Nextcloud-apper som OID Client.</string>
@@ -204,5 +226,11 @@
     <string name="error_action_open_battery_settings">Batteri innstillinger</string>
     <string name="error_action_open_deck_info">Åpne App info</string>
     <string name="error_action_open_network">Nettverksinnstillinger</string>
+    <string name="error_action_update_files_app">Oppdater</string>
     <string name="no_other_accounts">Du har ikke konfigurert noen konto enda.</string>
+    <string name="choose_account">Velg konto</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Du må være koblet til internett for å kunne legge til en konto.</string>
+    <string name="simple_next">Neste</string>
+    <string name="simple_prev">Forrige</string>
+    <string name="simple_backup">Sikkerhetskopi</string>
     </resources>

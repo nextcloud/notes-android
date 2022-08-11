@@ -40,7 +40,7 @@
     <string name="listview_updated_this_month">Deze maand</string>
     <string name="listview_updated_last_month">Vorige maand</string>
 
-    <string name="settings_note_mode">Weergavemode voor notities</string>
+    <string name="settings_note_mode">Weergavemodus voor notities</string>
     <string name="settings_theme_title">Thema</string>
     <string name="settings_font_title">Monospace lettertype</string>
     <string name="settings_font_size">Fontgrootte</string>
@@ -49,7 +49,7 @@
     <string name="settings_lock_summary">Apparaatinloggegevens</string>
     <string name="settings_background_sync">Achtergrondsynchronisatie</string>
     <string name="settings_prevent_screen_capture">Voorkomen schermafdruk</string>
-
+    <string name="settings_gridview">Rasterweergave</string>
     <string name="error_sync">Synchronisatie mislukt: %1$s</string>
     <string name="error_synchronization">Synchronisatie mislukt</string>
     <string name="error_no_network">Geen netwerkverbinding</string>
@@ -168,7 +168,6 @@
     <string name="append_to_note">Achteraan aan notitie toevoegen</string>
     <string name="change_note_title">Notitie titel wijzigen</string>
     <string name="menu_edit_title">Titel bewerken</string>
-    <string name="settings_gridview">Rasterweergave</string>
     <string name="simple_security">Beveiliging</string>
     <string name="appearance_and_behavior">Uiterlijk en gedrag</string>
     <string name="simple_synchronization">Synchronisatie</string>
@@ -176,8 +175,8 @@
     <string name="action_formatting_help">Opmaak</string>
 
     <string-array name="noteMode_entries">
-        <item>Open in wbewerkmodus</item>
-        <item>Open in voorbeeldweergave modus</item>
+        <item>Open in bewerkingsmodus</item>
+        <item>Open in voorbeeldmodus</item>
         <item>Onthoud je laatste selectie</item>
     </string-array>
 
@@ -267,7 +266,7 @@
     <string name="sort_last_modified">Op wijzigingsdatum sorteren</string>
     <string name="sort_alphabetically">Op alfabet sorteren</string>
     <string name="error_action_open_battery_settings">Batterij instellingen</string>
-    <string name="error_action_open_deck_info">Open App informatie</string>
+    <string name="error_action_open_deck_info">Open app-informatie</string>
     <string name="error_action_open_network">Netwerk instellingen</string>
     <string name="error_action_update_files_app">Update</string>
     <string name="no_account_configured_yet">Nog geen account geconfigureerd</string>

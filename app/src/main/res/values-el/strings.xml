@@ -6,12 +6,15 @@
     <string name="label_all_notes">Όλες οι σημειώσεις</string>
     <string name="label_favorites">Αγαπημένα</string>
     <string name="action_create">Νέα σημείωση</string>
+    <string name="welcome_text">Καλώς ήρθατε στο %1$s</string>
     <string name="action_settings">Ρυθμίσεις</string>
     <string name="action_trashbin">Διεγραμμένες σημειώσεις</string>
     <string name="action_search">Ψάχνει</string>
     <string name="action_sorting_method">Μέθοδος ταξινόμησης</string>
     <string name="simple_cancel">Άκυρο</string>
+    <string name="simple_switch">Αλλαγή</string>
     <string name="simple_edit">Επεξεργασία</string>
+    <string name="simple_remove">Αφαίρεση</string>
     <string name="action_edit_save">Αποθήκευση</string>
     <string name="simple_about">Περί</string>
     <string name="simple_link">Σύνδεσμος</string>
@@ -43,10 +46,13 @@
     <string name="settings_font_size">Μέγεθος γραμματοσειράς</string>
     <string name="settings_wifi_only">Συγχρονισμός μόνο σε Wi-Fi</string>
     <string name="settings_lock">Κλείδωμα εφαρμογής (Beta)</string>
+    <string name="settings_lock_summary">Διαπιστευτήρια συσκευής</string>
     <string name="settings_background_sync">Συγχρονισμός στο παρασκήνιο</string>
+    <string name="settings_gridview">Προβολή πλέγματος</string>
     <string name="error_sync">Αποτυχία συγχρονισμού: %1$s</string>
     <string name="error_synchronization">Αποτυχία συγχρονισμού</string>
     <string name="error_no_network">Δεν υπάρχει σύνδεση στο δίκτυο</string>
+    <string name="error_maintenance_mode">Ο διακομιστής βρίσκεται σε λειτουργία συντήρησης</string>
     <string name="error_unknown">Προέκυψε άγνωστο σφάλμα.</string>
 
     <string name="about_version_title">Έκδοση</string>
@@ -66,6 +72,9 @@
     <string name="about_app_license">Αυτή η εφαρμογή υπόκεινται στην άδεια χρήσης GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Προβολή άδειας χρήσης</string>
     <string name="about_icons_disclaimer_title">Εικονίδια</string>
+    <string name="about_icons_disclaimer_app_icon">Για το αρχικό εικονίδιο δείτε %1$s.</string>
+    <string name="about_icons_disclaimer_mdi_icons">Όλα τα εικονίδια σε χρήση από την εφαρμογή είναι %1$sκαι δημιουργήθηκαν από την Google Inc. αδειοδοτημένα υπό την άδεια Apache 2.0 License.</string>
+    <string name="about_icons_disclaimer_mdi">Εικονίδια Material Design</string>
     <string name="about_credits_tab_title">Μνεία</string>
     <string name="about_contribution_tab_title">Συνεισφορά</string>
     <string name="about_license_tab_title">Άδεια χρήσης</string>
@@ -97,6 +106,17 @@
     <string name="category_movies">Ταινίες</string>
     <string name="category_movie">Ταινία</string>
     <string name="category_work">Εργασία</string>
+    <string name="category_tasks">Εργασίες</string>
+    <string name="category_recipes">Συνταγές</string>
+    <string name="category_restaurant">Εστιατόριο</string>
+    <string name="category_password">Συνθηματικό</string>
+    <string name="category_passwords">Συνθηματικά</string>
+    <string name="category_game">Παιχνίδι</string>
+    <string name="category_games">Παιχνίδια</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">Αναπαραγωγή</string>
+    <!-- Like a gift -->
+    <string name="category_present">Παρόν</string>
     <string name="account_already_imported">Ο λογαριασμός έχει εισαχθεί ήδη</string>
     <string name="no_notes_yet">Δεν υπάρχουν ακόμα σημειώσεις</string>
     <string name="no_notes_yet_description">Πιέστε το κουμπί + για νέα σημείωση</string>
@@ -129,7 +149,6 @@
     <string name="append_to_note">Προσάρτηση στη σημείωση</string>
     <string name="change_note_title">Αλλαγή τίτλου σημείωσης</string>
     <string name="menu_edit_title">Επεξεργασία τίτλου</string>
-    <string name="settings_gridview">Προβολή πλέγματος</string>
     <string name="simple_security">Ασφάλεια</string>
     <string name="simple_synchronization">Συγχρονισμός</string>
     <string name="manage_accounts">Διαχείριση λογαριασμών</string>
@@ -227,7 +246,13 @@
     <string name="error_action_open_battery_settings">Ρυθμίσεις μπαταρίας</string>
     <string name="error_action_open_deck_info">Πληροφορίες εφαρμογής</string>
     <string name="error_action_open_network">Ρυθμίσεις δικτύου</string>
+    <string name="error_action_update_files_app">Ενημέρωση</string>
     <string name="no_account_configured_yet">Δεν έχει ρυθμιστεί ακόμη κάποιος λογαριασμός</string>
     <string name="no_other_accounts">Δεν έχετε ρυθμίσει ακόμη άλλους λογαριασμούς.</string>
+    <string name="choose_account">Επιλογή λογαριασμού</string>
     <string name="context_based_formatting">Μορφοποίηση βάσει περιεχομένου popover</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Πρέπει να είστε συνδεμένοι στο ιντερνετ για να προσθέσετε λογαριασμό.</string>
+    <string name="simple_next">Επόμενο</string>
+    <string name="simple_prev">Προηγούμενο</string>
+    <string name="simple_backup">Αντίγραφο ασφαλείας</string>
     </resources>

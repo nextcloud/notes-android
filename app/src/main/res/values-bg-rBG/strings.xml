@@ -49,6 +49,9 @@
     <string name="settings_lock_summary">Удостоверяване/идентификационни данни/ на устройството</string>
     <string name="settings_background_sync">Фонова синхронизация</string>
     <string name="settings_prevent_screen_capture">Предотвратява заснемането на екрана</string>
+    <string name="settings_gridview">Решетъчен изглед</string>
+    <string name="settings_keep_screen_on">Дръжте екрана включен</string>
+    <string name="settings_keep_screen_on_summary">Когато преглеждате или редактирате бележка</string>
 
     <string name="error_sync">Синхронизацията е неуспешна: %1$s</string>
     <string name="error_synchronization">Синхронизацията е неуспешна</string>
@@ -168,7 +171,6 @@
     <string name="append_to_note">Добавяне към бележка</string>
     <string name="change_note_title">Промяна на заглавието на бележка</string>
     <string name="menu_edit_title">Редактиране на заглавието</string>
-    <string name="settings_gridview">Решетъчен изглед</string>
     <string name="simple_security">Сигурност</string>
     <string name="appearance_and_behavior">Изглед и поведение</string>
     <string name="simple_synchronization">Синхронизиране</string>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="it.niedermann.owncloud.notes">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -23,25 +22,13 @@
         tools:targetApi="n">
 
         <activity
-            android:name=".SplashscreenActivity"
+            android:name=".main.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/SplashTheme"
+            android:theme="@style/Theme.App.Starting"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            <meta-data
-                android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts" />
-        </activity>
-
-        <activity
-            android:name=".main.MainActivity"
-            android:label="@string/app_name"
-            android:exported="false">
-
-            <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
 
@@ -61,7 +48,6 @@
             android:name=".AppendToNoteActivity"
             android:label="@string/append_to_note"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />

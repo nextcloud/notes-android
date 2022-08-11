@@ -6,12 +6,15 @@
     <string name="label_all_notes">Усі нотатки</string>
     <string name="label_favorites">Улюблене</string>
     <string name="action_create">Новий запис</string>
+    <string name="welcome_text">Вітаємо у %1$s</string>
     <string name="action_settings">Налаштування</string>
     <string name="action_trashbin">Вилучені нотатки</string>
     <string name="action_search">Пошук</string>
     <string name="action_sorting_method">Метод сортування</string>
     <string name="simple_cancel">Скасувати</string>
+    <string name="simple_switch">Перемкнути</string>
     <string name="simple_edit">Редагувати</string>
+    <string name="simple_remove">Вилучити</string>
     <string name="action_edit_save">Зберегти</string>
     <string name="simple_about">Про програму</string>
     <string name="simple_link">Посилання</string>
@@ -42,24 +45,35 @@
     <string name="settings_font_title">Моноширинний шрифт</string>
     <string name="settings_font_size">Розмір шрифту</string>
     <string name="settings_wifi_only">Синхронізувати тільки по WI-Fi</string>
+    <string name="settings_lock_summary">Облікові дані пристрою</string>
     <string name="settings_background_sync">Фонова синхронізація</string>
+    <string name="settings_gridview">Упорядкування у формі сітки</string>
     <string name="error_sync">Синхронізація не вдалася: %1$s</string>
     <string name="error_synchronization">Синхронізація не вдалася</string>
     <string name="error_no_network">Відсутнє підключення до мережі</string>
+    <string name="error_maintenance_mode">Сервер у режимі обслуговування</string>
     <string name="error_unknown">Сталася невідома помилка.</string>
 
     <string name="about_version_title">Версія</string>
+    <string name="about_version">Ви використовуєте%1$s</string>
     <string name="about_maintainer_title">Утримувач</string>
     <string name="about_developers_title">Розробники</string>
     <string name="about_translators_title">Перекладачі</string>
+    <string name="about_translators_transifex">Спільнота Nextcloud на %1$s</string>
     <string name="about_testers_title">Тестувальники</string>
     <string name="about_source_title">Вихідний код</string>
+    <string name="about_source">Цей проєкт розміщено на GitHub:%1$s</string>
     <string name="about_issues_title">Помилики</string>
+    <string name="about_issues">Ви можете повідомляти про помилки, пропонувати удосконалення та надсилати запити на додаткові функції через систему відстеження вад GitHub:%1$s</string>
     <string name="about_translate_title">Перекласти</string>
+    <string name="about_translate">Приєднуйтесь до команди Nextcloud на Transifex та допоможіть нам перекласти цей застосунок:%1$s</string>
     <string name="about_app_license_title">Ліцензія застосунку</string>
     <string name="about_app_license">Ця програма ліцензована під GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Переглянути ліцензію</string>
     <string name="about_icons_disclaimer_title">Значки</string>
+    <string name="about_icons_disclaimer_app_icon">Для оригінального розміру піктограми див. %1$s.</string>
+    <string name="about_icons_disclaimer_mdi_icons">Усі значки, які було використано у цьому застосунку, є %1$s, розроблені Google Inc. та мають ліцензію Apache 2.0 License. </string>
+    <string name="about_icons_disclaimer_mdi">Material Design Icons</string>
     <string name="about_credits_tab_title">Подяки</string>
     <string name="about_contribution_tab_title">Внесок</string>
     <string name="about_license_tab_title">Ліцензія</string>
@@ -68,10 +82,7 @@
     <string name="widget_note_list_placeholder">Нотатки відсутні</string>
     <string name="widget_single_note_title">Одна нотатка</string>
     <string name="widget_single_note_placeholder_tv">Нотатку не знайдено</string>
-    <string name="widget_create_note">Створити нотатку</string>
     <string name="widget_not_logged_in">Будь ласка, увійдіть до Нотаток перед використанням цього віджету</string>
-    <string name="widget_entry_fav_contentDescription">Значок зірки використовується для позначення елемента як улюбленого</string>
-
     <string name="activity_select_single_note">Оберіть нотатку</string>
 
     <string name="shortcut_create_long">Створити нову нотатку</string>
@@ -87,10 +98,21 @@
     <string name="pin_to_homescreen">Закріпити на головному екрані</string>
     <string name="note_has_been_deleted">Цю нотатку було вилучено</string>
     <string name="add_account">Додати обліковий запис</string>
+
     <string name="category_music">Музика</string>
     <string name="category_movies">Відео</string>
     <string name="category_movie">Фільм</string>
     <string name="category_work">Робочий</string>
+    <string name="category_tasks">Завдання</string>
+    <string name="category_recipes">Рецепти</string>
+    <string name="category_password">Пароль</string>
+    <string name="category_passwords">Паролі</string>
+    <string name="category_game">Гра</string>
+    <string name="category_games">Ігри</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">Грати</string>
+    <!-- Like a gift -->
+    <string name="category_present">Презентувати</string>
     <string name="account_already_imported">Обліковий запис вже імпортовано</string>
     <string name="no_notes_yet">Нотатки поки відсутні</string>
     <string name="no_notes_yet_description">Натисніть кнопку +, щоб створити нову нотатку</string>
@@ -113,7 +135,6 @@
     <string name="error_dialog_check_server_logs">Виникла проблема з налаштуванням Nextcloud. Будь ласка, подивіться файли журналу сервера.</string>
     <string name="error_dialog_check_maintenance">Будь ласка, перевірте, чи ваш сервер Nextcloud наразі не перебуває в режимі обслуговування.</string>
     <string name="error_dialog_insufficient_storage">Ваш сервер Nextcloud не має вільного місця. Будь ласка видаліть деякі файлі, щоб синхронізувати ваші локальні зміни з вашим хмарним сховищем.</string>
-    <string name="error_dialog_contact_us">Будь ласка, не соромтеся звернутися до нас, якщо проблеми не зникнуть. Ви можете знайти нашу контактну інформацію в розділі \"Про програму\" на бічній панелі.</string>
     <string name="error_dialog_we_need_info">Нам потрібна наступна технічна інформація, щоб допомогти вам:</string>
     <string name="error_dialog_server_app_enabled">Переконайтесь, що ви встановили та увімкнули додаток \"Нотатки\" на своєму сервері.</string>
     <string name="error_dialog_redirect">Ваш сервер відповів кодом стану HTTP 302, що означає, що ви не встановили програму Нотатки на своєму сервері або щось налаштовано неправильно. Це може бути спричинено нестандартними перевизначеннями у файлі .htaccess або програмами Nextcloud, як-от OID-клієнт.</string>
@@ -192,11 +213,18 @@
     <string name="formatting_help_code_body_2">Markdown також підтримує те, що називається огородженням коду, що дозволяє використовувати кілька рядків без відступу:</string>
     <string name="formatting_help_code_body_3">А якщо ви хочете використовувати підсвічування синтаксису, додайте назву мови:</string>
 
+    <string name="formatting_help_tables_title">Таблиці</string>
+    <string name="formatting_help_images_title">Зображення</string>
     <string name="simple_other">Інший</string>
     <string name="sort_last_modified">Сортувати за датою зміни</string>
     <string name="sort_alphabetically">Сортувати за алфавітом</string>
     <string name="error_action_open_battery_settings">Налаштування батареї</string>
     <string name="error_action_open_deck_info">Відкрити інформацію про застосунок</string>
     <string name="error_action_open_network">Налаштування мережі</string>
+    <string name="error_action_update_files_app">Оновлення</string>
     <string name="no_other_accounts">Ви ще не налаштували жодного іншого облікового запису.</string>
+    <string name="choose_account">Оберіть обліковий запис</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Для додавання облікового запису потрібне з\'єднання з мережею.</string>
+    <string name="simple_next">Далі</string>
+    <string name="simple_prev">Назад</string>
     </resources>

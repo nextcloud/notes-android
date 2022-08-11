@@ -12,6 +12,7 @@
     <string name="action_search">搜尋</string>
     <string name="action_sorting_method">排序方法</string>
     <string name="simple_cancel">取消</string>
+    <string name="simple_switch">切換</string>
     <string name="simple_edit">修改</string>
     <string name="simple_remove">移除</string>
     <string name="action_edit_save">儲存</string>
@@ -48,7 +49,7 @@
     <string name="settings_lock_summary">裝置憑證</string>
     <string name="settings_background_sync">背景同步</string>
     <string name="settings_prevent_screen_capture">防止螢幕截取</string>
-
+    <string name="settings_gridview">網格檢視</string>
     <string name="error_sync">同步失敗：%1$s</string>
     <string name="error_synchronization">同步失敗</string>
     <string name="error_no_network">沒有網路連線</string>
@@ -56,17 +57,25 @@
     <string name="error_unknown">發生未知錯誤。</string>
 
     <string name="about_version_title">版本</string>
+    <string name="about_version">你目前使用 %1$s</string>
     <string name="about_maintainer_title">維護者</string>
     <string name="about_developers_title">開發者</string>
     <string name="about_translators_title">翻譯者</string>
+    <string name="about_translators_transifex">%1$s 上的 Nextcloud 社群</string>
     <string name="about_testers_title">測試人員</string>
     <string name="about_source_title">原始碼</string>
+    <string name="about_source">本專案寄存於 GitHub：%1$s</string>
     <string name="about_issues_title">問題</string>
+    <string name="about_issues">您可以在 GitHub 問題回報系統回報臭蟲、改善建議及功能需求：%1$s</string>
     <string name="about_translate_title">翻譯</string>
+    <string name="about_translate">歡迎加入 Transifex 的 Nextcloud 團隊並協助翻譯此 App：%1$s</string>
     <string name="about_app_license_title">程式授權條款</string>
     <string name="about_app_license">此程式依照 GNU GENERAL PUBLIC LICENSE v3+ 方式授權使用</string>
     <string name="about_app_license_button">檢視授權條款</string>
     <string name="about_icons_disclaimer_title">圖示</string>
+    <string name="about_icons_disclaimer_app_icon">原始圖示請見%1$s</string>
+    <string name="about_icons_disclaimer_mdi_icons">此應用程式使用的所有其他圖示 %1$s 均由 Google Inc. 製造，並根據 Apache 2.0 授權獲得許可。</string>
+    <string name="about_icons_disclaimer_mdi">Material Design 圖示</string>
     <string name="about_credits_tab_title">致謝</string>
     <string name="about_contribution_tab_title">貢獻</string>
     <string name="about_license_tab_title">授權條款</string>
@@ -96,6 +105,17 @@
     <string name="category_movies">電影</string>
     <string name="category_movie">電影</string>
     <string name="category_work">工作</string>
+    <string name="category_tasks">工作項目</string>
+    <string name="category_recipes">食譜</string>
+    <string name="category_restaurant">餐廳</string>
+    <string name="category_password">密碼</string>
+    <string name="category_passwords">密碼</string>
+    <string name="category_game">遊戲</string>
+    <string name="category_games">遊戲</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">播放</string>
+    <!-- Like a gift -->
+    <string name="category_present">簡報</string>
     <string name="account_already_imported">已成功匯入帳戶</string>
     <string name="no_notes_yet">尚沒有筆記</string>
     <string name="no_notes_yet_description">請按 + 按鈕建立新筆記</string>
@@ -128,7 +148,6 @@
     <string name="append_to_note">附加到筆記</string>
     <string name="change_note_title">改變筆記標題</string>
     <string name="menu_edit_title">編輯標題</string>
-    <string name="settings_gridview">網格檢視</string>
     <string name="simple_security">安全性</string>
     <string name="appearance_and_behavior">外觀和行為</string>
     <string name="simple_synchronization">同步</string>
@@ -223,6 +242,7 @@
     <string name="error_action_open_battery_settings">電池設定</string>
     <string name="error_action_open_deck_info">開啟應用程式資訊</string>
     <string name="error_action_open_network">網路設定</string>
+    <string name="error_action_update_files_app">更新</string>
     <string name="no_account_configured_yet">尚未設定任何帳號</string>
     <string name="no_other_accounts">你尚未設定其它帳號。</string>
     <string name="choose_account">選擇帳號</string>

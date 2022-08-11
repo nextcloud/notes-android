@@ -49,6 +49,9 @@
     <string name="settings_lock_summary">Gailuaren kredentzialak</string>
     <string name="settings_background_sync">Atzeko planoko sinkronizazioa</string>
     <string name="settings_prevent_screen_capture">Saihestu pantaila argazkia</string>
+    <string name="settings_gridview">Sareta ikuspegia</string>
+    <string name="settings_keep_screen_on">Mantendu pantaila piztuta</string>
+    <string name="settings_keep_screen_on_summary">Nota bat ikusi edo editatzean</string>
 
     <string name="error_sync">Sinkronizazioak huts egin du: %1$s</string>
     <string name="error_synchronization">Sinkronizazioak huts egin du</string>
@@ -162,12 +165,12 @@
     <string name="error_dialog_server_app_enabled">Mesedez egiaztatu \"Notak\" aplikazioa instalatu eta gaitu duzula zure zerbitzarian.</string>
     <string name="error_dialog_redirect">Zure zerbitzariak HTTP 302 egoera kodearekin erantzun du, honek esan nahi du ez duzula Notak aplikazioa ez duzula zure zerbitzarian instalatu edo zerbait txarto konfiguratuta dagoela. Hau .htaccess fitxategi batean arau pertsonalizatuak daudelako edo OID Bezeroa izeneko aplikazioarengatik sortua izan daiteke. </string>
     <string name="error_dialog_tip_disable_battery_optimizations">Desgaitu bateria optimizazio guztiak Nextcloudentzat eta Oharrak aplikazioarentzat.</string>
+    <string name="error_dialog_min_version">The Notes Android aplikazioak eskatzen du gutxienez Nextcloud Android aplikazioaren 3.18 bertsioa izatea.</string>
     <string name="added_content">\"%1$s\" gehituta</string>
     <string name="shared_text_empty">Partekatutako testua hutsik zegoen</string>
     <string name="append_to_note">Gehitu notara</string>
     <string name="change_note_title">Aldatu notaren titulua</string>
     <string name="menu_edit_title">Editatu izenburua</string>
-    <string name="settings_gridview">Sareta ikuspegia</string>
     <string name="simple_security">Segurtasuna</string>
     <string name="appearance_and_behavior">Itxura eta portaera</string>
     <string name="simple_synchronization">Sinkronizazioa</string>
@@ -189,7 +192,7 @@
     <string-array name="darkmode_entries">
         <item>Argia</item>
         <item>Iluna</item>
-        <item>Sistemaren defektuzko ezarpenak</item>
+        <item>Sistemaren ezarpen lehenetsiak</item>
     </string-array>
 
     <plurals name="ab_selected">
