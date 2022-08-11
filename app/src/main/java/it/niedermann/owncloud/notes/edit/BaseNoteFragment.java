@@ -201,7 +201,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     }
 
     private void prepareFavoriteOption(MenuItem item) {
-        item.setIcon(TRUE.equals(note.getFavorite()) ? R.drawable.ic_star_white_24dp : R.drawable.ic_star_border_white_24dp);
+        item.setIcon(note.getFavorite() ? R.drawable.ic_star_white_24dp : R.drawable.ic_star_border_white_24dp);
         item.setChecked(note.getFavorite());
         tintMenuIcon(item, colorAccent);
     }
@@ -227,6 +227,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
             listener.close();
             return true;
         } else if (itemId == R.id.menu_favorite) {
+            note.setFavorite(!note.getFavorite());
             repo.toggleFavoriteAndSync(localAccount, note.getId());
             listener.onNoteUpdated(note);
             prepareFavoriteOption(item);

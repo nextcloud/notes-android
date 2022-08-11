@@ -1,4 +1,5 @@
 - 📱️ Add option to not keep screen on (#1531)
+- 🐞 Favorite star in menu not clickable (#1541)
 - ⚙️ Add monochrome icon (#1544) - by @salixor
 - ⚙️ Use the new Android 12 SplashScreen API (#1546) - by @salixor
 - 🌎 Updated translations
