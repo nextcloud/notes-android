@@ -1,25 +1,27 @@
 package it.niedermann.owncloud.notes.manageaccounts;
 
+import static it.niedermann.owncloud.notes.shared.util.ApiVersionUtil.getPreferredApiVersion;
+
 import android.accounts.NetworkErrorException;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.Px;
-import androidx.appcompat.app.AlertDialog;
+import androidx.annotation.StringRes;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
+
+import java.util.function.Function;
 
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.R;
@@ -35,11 +37,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static android.os.Build.VERSION.SDK_INT;
-import static android.os.Build.VERSION_CODES.LOLLIPOP_MR1;
-import static it.niedermann.owncloud.notes.shared.util.ApiVersionUtil.getPreferredApiVersion;
-
-public class ManageAccountsActivity extends LockedActivity {
+public class ManageAccountsActivity extends LockedActivity implements IManageAccountsCallback {
 
     private ActivityManageAccountsBinding binding;
     private ManageAccountsViewModel viewModel;
@@ -55,12 +53,7 @@ public class ManageAccountsActivity extends LockedActivity {
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
 
-        adapter = new ManageAccountAdapter(
-                this::selectAccount,
-                this::deleteAccount,
-                this::onChangeNotesPath,
-                this::onChangeFileSuffix
-        );
+        adapter = new ManageAccountAdapter(this);
         binding.accounts.setAdapter(adapter);
 
         viewModel.getAccounts$().observe(this, (accounts) -> {
@@ -69,7 +62,7 @@ public class ManageAccountsActivity extends LockedActivity {
                 return;
             }
             this.adapter.setLocalAccounts(accounts);
-            viewModel.getCurrentAccount(this, new IResponseCallback<Account>() {
+            viewModel.getCurrentAccount(this, new IResponseCallback<>() {
                 @Override
                 public void onSuccess(Account result) {
                     runOnUiThread(() -> adapter.setCurrentLocalAccount(result));
@@ -84,12 +77,13 @@ public class ManageAccountsActivity extends LockedActivity {
         });
     }
 
-    private void selectAccount(@NonNull Account accountToSelect) {
+    public void onSelect(@NonNull Account accountToSelect) {
+        adapter.setCurrentLocalAccount(accountToSelect);
         viewModel.selectAccount(accountToSelect, this);
     }
 
-    private void deleteAccount(@NonNull Account accountToDelete) {
-        viewModel.countUnsynchronizedNotes(accountToDelete.getId(), new IResponseCallback<Long>() {
+    public void onDelete(@NonNull Account accountToDelete) {
+        viewModel.countUnsynchronizedNotes(accountToDelete.getId(), new IResponseCallback<>() {
             @Override
             public void onSuccess(Long unsynchronizedChangesCount) {
                 runOnUiThread(() -> {
@@ -113,38 +107,61 @@ public class ManageAccountsActivity extends LockedActivity {
         });
     }
 
-    private void onChangeNotesPath(@NonNull Account localAccount) {
+    public void onChangeNotesPath(@NonNull Account localAccount) {
+        changeAccountSetting(localAccount,
+                R.string.settings_notes_path,
+                R.string.settings_notes_path_description,
+                R.string.settings_notes_path_success,
+                NotesSettings::getNotesPath,
+                property -> new NotesSettings(property, null)
+        );
+    }
+
+    public void onChangeFileSuffix(@NonNull Account localAccount) {
+        changeAccountSetting(localAccount,
+                R.string.settings_file_suffix,
+                R.string.settings_file_suffix_description,
+                R.string.settings_file_suffix_success,
+                NotesSettings::getFileSuffix,
+                property -> new NotesSettings(null, property)
+        );
+    }
+
+    private void changeAccountSetting(@NonNull Account localAccount, @StringRes int title, @StringRes int message, @StringRes int successMessage, @NonNull Function<NotesSettings, String> propertyExtractor, @NonNull Function<String, NotesSettings> settingsFactory) {
         final var repository = NotesRepository.getInstance(getApplicationContext());
         final var editText = new EditText(this);
         final var wrapper = createDialogViewWrapper();
         final var dialog = new BrandedAlertDialogBuilder(this)
-                .setTitle(R.string.settings_notes_path)
-                .setMessage(R.string.settings_notes_path_description)
+                .setTitle(title)
+                .setMessage(message)
                 .setView(wrapper)
                 .setNeutralButton(android.R.string.cancel, null)
-                .setPositiveButton(R.string.action_edit_save, (v, d) -> new Thread(() -> {
-                    try {
-                        final var putSettingsCall = repository.putServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), new NotesSettings(editText.getText().toString(), null), getPreferredApiVersion(localAccount.getApiVersion()));
-                        putSettingsCall.enqueue(new Callback<>() {
-                            @Override
-                            public void onResponse(@NonNull Call<NotesSettings> call, @NonNull Response<NotesSettings> response) {
-                                final var body = response.body();
-                                if (response.isSuccessful() && body != null) {
-                                    runOnUiThread(() -> Toast.makeText(ManageAccountsActivity.this, getString(R.string.settings_notes_path_success, body.getNotesPath()), Toast.LENGTH_LONG).show());
-                                } else {
-                                    runOnUiThread(() -> Toast.makeText(ManageAccountsActivity.this, getString(R.string.http_status_code, response.code()), Toast.LENGTH_LONG).show());
+                .setPositiveButton(R.string.action_edit_save, (v, d) -> {
+                    final var property = editText.getText().toString();
+                    new Thread(() -> {
+                        try {
+                            final var putSettingsCall = repository.putServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), settingsFactory.apply(property), getPreferredApiVersion(localAccount.getApiVersion()));
+                            putSettingsCall.enqueue(new Callback<>() {
+                                @Override
+                                public void onResponse(@NonNull Call<NotesSettings> call, @NonNull Response<NotesSettings> response) {
+                                    final var body = response.body();
+                                    if (response.isSuccessful() && body != null) {
+                                        runOnUiThread(() -> Toast.makeText(ManageAccountsActivity.this, getString(successMessage, propertyExtractor.apply(body)), Toast.LENGTH_LONG).show());
+                                    } else {
+                                        runOnUiThread(() -> Toast.makeText(ManageAccountsActivity.this, getString(R.string.http_status_code, response.code()), Toast.LENGTH_LONG).show());
+                                    }
                                 }
-                            }
 
-                            @Override
-                            public void onFailure(@NonNull Call<NotesSettings> call, @NonNull Throwable t) {
-                                runOnUiThread(() -> ExceptionDialogFragment.newInstance(t).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()));
-                            }
-                        });
-                    } catch (NextcloudFilesAppAccountNotFoundException e) {
-                        ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
-                    }
-                }).start())
+                                @Override
+                                public void onFailure(@NonNull Call<NotesSettings> call, @NonNull Throwable t) {
+                                    runOnUiThread(() -> ExceptionDialogFragment.newInstance(t).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()));
+                                }
+                            });
+                        } catch (NextcloudFilesAppAccountNotFoundException e) {
+                            ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+                        }
+                    }).start();
+                })
                 .show();
         try {
             repository.getServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), getPreferredApiVersion(localAccount.getApiVersion()))
@@ -155,85 +172,11 @@ public class ManageAccountsActivity extends LockedActivity {
                                 final var body = response.body();
                                 if (response.isSuccessful() && body != null) {
                                     wrapper.removeAllViews();
-                                    final var editText = new EditText(ManageAccountsActivity.this);
-                                    editText.setText(body.getNotesPath());
+                                    editText.setText(propertyExtractor.apply(body));
                                     wrapper.addView(editText);
                                 } else {
                                     dialog.dismiss();
                                     ExceptionDialogFragment.newInstance(new NetworkErrorException(getString(R.string.http_status_code, response.code()))).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
-                                }
-                            });
-                        }
-
-                        @Override
-                        public void onFailure(@NonNull Call<NotesSettings> call, @NonNull Throwable t) {
-                            runOnUiThread(() -> {
-                                dialog.dismiss();
-                                ExceptionDialogFragment.newInstance(t).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
-                            });
-                        }
-                    });
-        } catch (NextcloudFilesAppAccountNotFoundException e) {
-            dialog.dismiss();
-            ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
-        }
-    }
-
-    private void onChangeFileSuffix(@NonNull Account localAccount) {
-        final var repository = NotesRepository.getInstance(getApplicationContext());
-        final var spinner = new Spinner(this);
-        final var wrapper = createDialogViewWrapper();
-        final var adapter = ArrayAdapter.createFromResource(this, R.array.settings_file_suffixes, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        final var dialog = new BrandedAlertDialogBuilder(this)
-                .setTitle(R.string.settings_file_suffix)
-                .setMessage(R.string.settings_file_suffix_description)
-                .setView(wrapper)
-                .setNeutralButton(android.R.string.cancel, null)
-                .setPositiveButton(R.string.action_edit_save, (v, d) -> new Thread(() -> {
-                    try {
-                        final Call<NotesSettings> putSettingsCall = repository.putServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), new NotesSettings(null, spinner.getSelectedItem().toString()), getPreferredApiVersion(localAccount.getApiVersion()));
-                        putSettingsCall.enqueue(new Callback<>() {
-                            @Override
-                            public void onResponse(@NonNull Call<NotesSettings> call, @NonNull Response<NotesSettings> response) {
-                                final var body = response.body();
-                                if (response.isSuccessful() && body != null) {
-                                    runOnUiThread(() -> Toast.makeText(ManageAccountsActivity.this, getString(R.string.settings_file_suffix_success, body.getNotesPath()), Toast.LENGTH_LONG).show());
-                                } else {
-                                    runOnUiThread(() -> Toast.makeText(ManageAccountsActivity.this, getString(R.string.http_status_code, response.code()), Toast.LENGTH_LONG).show());
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(@NonNull Call<NotesSettings> call, @NonNull Throwable t) {
-                                runOnUiThread(() -> ExceptionDialogFragment.newInstance(t).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()));
-                            }
-                        });
-                    } catch (NextcloudFilesAppAccountNotFoundException e) {
-                        runOnUiThread(() -> ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()));
-                    }
-                }).start())
-                .show();
-        try {
-            repository.getServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), getPreferredApiVersion(localAccount.getApiVersion()))
-                    .enqueue(new Callback<>() {
-                        @Override
-                        public void onResponse(@NonNull Call<NotesSettings> call, @NonNull Response<NotesSettings> response) {
-                            final NotesSettings body = response.body();
-                            runOnUiThread(() -> {
-                                if (response.isSuccessful() && body != null) {
-                                    for (int i = 0; i < adapter.getCount(); i++) {
-                                        if (adapter.getItem(i).equals(body.getFileSuffix())) {
-                                            spinner.setSelection(i);
-                                            break;
-                                        }
-                                    }
-                                    wrapper.removeAllViews();
-                                    wrapper.addView(spinner);
-                                } else {
-                                    dialog.dismiss();
-                                    ExceptionDialogFragment.newInstance(new Exception(getString(R.string.http_status_code, response.code()))).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
                                 }
                             });
                         }
@@ -258,9 +201,7 @@ public class ManageAccountsActivity extends LockedActivity {
         progressBar.setIndeterminate(true);
         final var wrapper = new FrameLayout(this);
         final int paddingVertical = getResources().getDimensionPixelSize(R.dimen.spacer_1x);
-        final int paddingHorizontal = SDK_INT >= LOLLIPOP_MR1
-                ? getDimensionFromAttribute(android.R.attr.dialogPreferredPadding)
-                : getResources().getDimensionPixelSize(R.dimen.spacer_2x);
+        final int paddingHorizontal = getDimensionFromAttribute(android.R.attr.dialogPreferredPadding);
         wrapper.setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical);
         wrapper.addView(progressBar);
         return wrapper;
