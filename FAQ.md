@@ -9,6 +9,7 @@
   - [`NextcloudFilesAppAccountNotFoundException`](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#nextcloudfilesappaccountnotfoundexception)
   - [`TokenMismatchException`](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#tokenmismatchexception)
   - [Workarounds](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#workarounds)
+- [How to share notes?](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#how-to-share-notes)
 - [Why don't you make an option for…?](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#why-dont-you-make-an-option-for)
 - [Why is there no support for pens?](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#why-is-there-no-support-for-pens)
 - [Why has my bug report been closed?](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#why-has-my-bug-report-been-closed)
@@ -106,6 +107,16 @@ Nextcloud / Notes
 Then set up your account in the Nextcloud Android app again and import the configured account in the Notes Android app.
 
 If the issue persists, [open a bug report in our issue tracker](https://github.com/stefan-niedermann/nextcloud-notes/issues/new?assignees=&labels=bug&template=bug_report.md&title=).
+
+## How to share notes?
+
+The Notes server app does [not yet provide support for sharing notes](https://github.com/nextcloud/notes/issues/38). However, there is a limited workaround until this has been implemented:
+1. Open the Nextcloud Files (*not* Notes!) app in the Web UI or the Nextcloud Android app
+2. Share your `Notes` folder (or any category) with the Nextcloud files app with the target user
+3. The target user needs to *move* the shared folder into his / her `Notes` folder
+
+⚠️ Both users will now be able to read and edit the notes. Keep in mind though, that there is currently no conflict resolution yet. This means: The last write wins which may cause data loss if both are editing a note in the same time. Minimize this risc by manually pull to refresh before editing a shared note.
+
 
 ## Why don't you make an option for…?
 
