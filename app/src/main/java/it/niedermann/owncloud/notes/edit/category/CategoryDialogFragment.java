@@ -13,14 +13,14 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.branding.BrandedAlertDialogBuilder;
 import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.DialogChangeCategoryBinding;
@@ -150,7 +150,7 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
             }
         });
 
-        return new BrandedAlertDialogBuilder(getActivity())
+        return new MaterialAlertDialogBuilder(requireContext())
                 .setTitle(R.string.change_category_title)
                 .setView(dialogView)
                 .setCancelable(true)

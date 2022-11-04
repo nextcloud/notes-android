@@ -4,13 +4,18 @@
     style="@style/textInputLayoutStyle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/spacer_2x">
+    android:hint="@string/change_note_title"
+    android:padding="?attr/dialogPreferredPadding">
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/change_note_title"
+        android:imeOptions="actionDone"
         android:importantForAutofill="no"
-        android:inputType="text" />
+        android:inputType="text">
+
+        <requestFocus />
+    </com.google.android.material.textfield.TextInputEditText>
+
 </com.google.android.material.textfield.TextInputLayout>

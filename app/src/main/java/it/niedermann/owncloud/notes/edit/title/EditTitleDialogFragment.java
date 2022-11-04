@@ -57,7 +57,7 @@ public class EditTitleDialogFragment extends BrandedDialogFragment {
             binding.title.setText(oldTitle);
         }
 
-        return new MaterialAlertDialogBuilder(requireActivity())
+        return new MaterialAlertDialogBuilder(requireContext())
                 .setTitle(R.string.change_note_title)
                 .setView(dialogView)
                 .setCancelable(true)

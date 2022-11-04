@@ -18,6 +18,7 @@ import androidx.annotation.Px;
 import androidx.annotation.StringRes;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 
@@ -27,8 +28,7 @@ import java.util.function.Function;
 
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.branding.BrandedAlertDialogBuilder;
-import it.niedermann.owncloud.notes.branding.BrandedDeleteAlertDialogBuilder;
+import it.niedermann.owncloud.notes.branding.DeleteAlertDialogBuilder;
 import it.niedermann.owncloud.notes.databinding.ActivityManageAccountsBinding;
 import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.persistence.NotesRepository;
@@ -91,7 +91,7 @@ public class ManageAccountsActivity extends LockedActivity implements IManageAcc
             public void onSuccess(Long unsynchronizedChangesCount) {
                 runOnUiThread(() -> {
                     if (unsynchronizedChangesCount > 0) {
-                        new BrandedDeleteAlertDialogBuilder(ManageAccountsActivity.this)
+                        new DeleteAlertDialogBuilder(ManageAccountsActivity.this)
                                 .setTitle(getString(R.string.remove_account, accountToDelete.getUserName()))
                                 .setMessage(getResources().getQuantityString(R.plurals.remove_account_message, (int) unsynchronizedChangesCount.longValue(), accountToDelete.getAccountName(), unsynchronizedChangesCount))
                                 .setNeutralButton(android.R.string.cancel, null)
@@ -134,7 +134,7 @@ public class ManageAccountsActivity extends LockedActivity implements IManageAcc
         final var repository = NotesRepository.getInstance(getApplicationContext());
         final var editText = new EditText(this);
         final var wrapper = createDialogViewWrapper();
-        final var dialog = new BrandedAlertDialogBuilder(this)
+        final var dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(title)
                 .setMessage(message)
                 .setView(wrapper)
