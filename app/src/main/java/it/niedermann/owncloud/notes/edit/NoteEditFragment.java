@@ -1,7 +1,10 @@
 package it.niedermann.owncloud.notes.edit;
 
+import static androidx.core.view.ViewCompat.isAttachedToWindow;
+import static it.niedermann.owncloud.notes.branding.BrandingUtil.getTextHighlightBackgroundColor;
+import static it.niedermann.owncloud.notes.shared.util.NoteUtil.getFontSizeFromPreferences;
+
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -30,10 +33,6 @@ import it.niedermann.owncloud.notes.databinding.FragmentNoteEditBinding;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.util.DisplayUtils;
-
-import static androidx.core.view.ViewCompat.isAttachedToWindow;
-import static it.niedermann.owncloud.notes.branding.BrandingUtil.getTextHighlightBackgroundColor;
-import static it.niedermann.owncloud.notes.shared.util.NoteUtil.getFontSizeFromPreferences;
 
 public class NoteEditFragment extends SearchableBaseNoteFragment {
 

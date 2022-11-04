@@ -1,7 +1,10 @@
 package it.niedermann.owncloud.notes.edit;
 
+import static androidx.core.view.ViewCompat.isAttachedToWindow;
+import static it.niedermann.owncloud.notes.branding.BrandingUtil.getTextHighlightBackgroundColor;
+import static it.niedermann.owncloud.notes.shared.util.NoteUtil.getFontSizeFromPreferences;
+
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Layout;
@@ -27,13 +30,8 @@ import com.nextcloud.android.sso.helper.SingleAccountHelper;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.FragmentNotePreviewBinding;
-import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.util.SSOUtil;
-
-import static androidx.core.view.ViewCompat.isAttachedToWindow;
-import static it.niedermann.owncloud.notes.branding.BrandingUtil.getTextHighlightBackgroundColor;
-import static it.niedermann.owncloud.notes.shared.util.NoteUtil.getFontSizeFromPreferences;
 
 public class NotePreviewFragment extends SearchableBaseNoteFragment implements OnRefreshListener {
 

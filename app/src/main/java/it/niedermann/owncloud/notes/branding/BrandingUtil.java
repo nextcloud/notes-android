@@ -159,10 +159,6 @@ public class BrandingUtil {
         til.setErrorTextColor(colorDanger);
         til.setBoxStrokeErrorColor(colorDanger);
         til.setErrorIconTintList(colorDanger);
-        final var editText = til.getEditText();
-        if (editText != null) {
-            editText.setHighlightColor(getTextHighlightBackgroundColor(editText.getContext(), color, colorPrimary, colorAccent));
-        }
     }
 
     public static void tintMenuIcon(@NonNull MenuItem menuItem, @ColorInt int color) {
