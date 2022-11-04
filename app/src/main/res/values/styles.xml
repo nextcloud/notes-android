@@ -18,15 +18,10 @@
         <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
 
         <item name="actionModeStyle">@style/actionModeStyle</item>
-        <item name="toolbarStyle">@style/toolbarStyle</item>
         <item name="tabStyle">@style/tabStyle</item>
     </style>
 
     <style name="AppTheme" parent="BaseTheme" />
-
-    <style name="toolbarStyle" parent="@style/Widget.Material3.Toolbar">
-        <item name="android:background">?attr/colorPrimary</item>
-    </style>
 
     <style name="actionModeStyle" parent="@style/Widget.Material3.ActionMode">
         <item name="android:paddingStart">@dimen/spacer_activity_sides</item>

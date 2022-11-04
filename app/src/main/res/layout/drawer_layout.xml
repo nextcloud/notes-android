@@ -63,8 +63,7 @@
                     android:id="@+id/navigationList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/spacer_1x"
-                    android:paddingBottom="@dimen/spacer_1x"
+                    android:paddingVertical="@dimen/spacer_1x"
                     app:layoutManager="LinearLayoutManager"
                     tools:itemCount="6"
                     tools:listitem="@layout/item_navigation" />
@@ -73,8 +72,7 @@
                     android:id="@+id/navigationMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/spacer_1x"
-                    android:paddingBottom="@dimen/spacer_1x"
+                    android:paddingVertical="@dimen/spacer_1x"
                     app:layoutManager="LinearLayoutManager"
                     tools:itemCount="3"
                     tools:listitem="@layout/item_navigation" />

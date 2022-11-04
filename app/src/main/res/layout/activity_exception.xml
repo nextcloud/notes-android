@@ -11,8 +11,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:layout_marginStart="@dimen/spacer_activity_sides"
-        android:layout_marginEnd="@dimen/spacer_activity_sides"
+        android:layout_marginHorizontal="@dimen/spacer_activity_sides"
         app:contentInsetStartWithNavigation="0dp"
         app:elevation="4dp"
         app:titleMarginStart="0dp"
@@ -56,8 +55,7 @@
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginStart="@dimen/spacer_2x"
-                android:layout_marginEnd="@dimen/spacer_2x"
+                android:layout_marginHorizontal="@dimen/spacer_2x"
                 android:layout_weight="1">
 
                 <TextView
@@ -95,8 +93,7 @@
             style="@style/Widget.Material3.Button"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginTop="6dp"
-            android:layout_marginBottom="6dp"
+            android:layout_marginVertical="6dp"
             android:layout_weight=".5"
             android:text="@string/simple_copy"
             app:backgroundTint="@color/defaultBrand"

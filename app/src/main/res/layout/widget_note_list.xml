@@ -5,10 +5,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/widget_background"
     android:orientation="vertical"
-    android:paddingStart="@dimen/widget_inner_padding_horizontal"
-    android:paddingTop="@dimen/widget_inner_padding_vertical"
-    android:paddingEnd="@dimen/widget_inner_padding_horizontal"
-    android:paddingBottom="@dimen/widget_inner_padding_vertical">
+    android:paddingVertical="@dimen/widget_inner_padding_vertical"
+    android:paddingHorizontal="@dimen/widget_inner_padding_horizontal">
 
     <ListView
         android:id="@+id/note_list_widget_lv"

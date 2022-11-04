@@ -43,10 +43,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/welcome_text"
             android:layout_centerHorizontal="true"
-            android:paddingStart="32dp"
-            android:paddingTop="24dp"
-            android:paddingEnd="32dp"
-            android:paddingBottom="24dp"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="@dimen/spacer_3x"
             android:text="@string/choose_account"
             app:backgroundTint="@color/defaultBrand" />
 

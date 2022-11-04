@@ -65,9 +65,8 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:paddingStart="0dp"
-            android:paddingTop="@dimen/spacer_2x"
-            android:paddingEnd="@dimen/spacer_2x"
-            android:paddingBottom="@dimen/spacer_2x">
+            android:paddingVertical="@dimen/spacer_2x"
+            android:paddingEnd="@dimen/spacer_2x">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -97,8 +96,7 @@
                     android:layout_weight="1"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:paddingTop="1dp"
-                    android:paddingBottom="1dp"
+                    android:paddingVertical="1dp"
                     android:textSize="@dimen/secondary_font_size"
                     tools:text="@tools:sample/lorem/random" />
 
@@ -109,10 +107,8 @@
                     android:layout_marginStart="@dimen/spacer_1x"
                     android:background="@drawable/border"
                     android:maxLines="1"
-                    android:paddingStart="@dimen/spacer_1x"
-                    android:paddingTop="1dp"
-                    android:paddingEnd="@dimen/spacer_1x"
-                    android:paddingBottom="1dp"
+                    android:paddingVertical="1dp"
+                    android:paddingHorizontal="@dimen/spacer_1x"
                     android:singleLine="true"
                     android:textColor="?android:textColorPrimary"
                     android:textSize="@dimen/secondary_font_size"

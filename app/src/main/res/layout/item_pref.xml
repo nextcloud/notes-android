@@ -4,8 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
-    android:paddingStart="@dimen/spacer_activity_sides"
-    android:paddingEnd="@dimen/spacer_activity_sides"
+    android:paddingHorizontal="@dimen/spacer_activity_sides"
     android:minHeight="?android:attr/listPreferredItemHeight">
 
     <ImageView

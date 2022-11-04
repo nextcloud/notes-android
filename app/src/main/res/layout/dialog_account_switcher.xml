@@ -14,8 +14,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="@dimen/spacer_2x"
-        android:paddingStart="@dimen/spacer_1x"
-        android:paddingEnd="@dimen/spacer_1x">
+        android:paddingHorizontal="@dimen/spacer_1x">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/currentAccountItemAvatar"
