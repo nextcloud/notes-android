@@ -38,6 +38,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
             @NonNull ItemAdapter adapter,
             @NonNull SwipeRefreshLayout swipeRefreshLayout,
             @NonNull View view,
+            @NonNull View anchorView,
             boolean gridView) {
         super(new SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             private boolean swipeRefreshLayoutEnabled;
@@ -81,10 +82,12 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                             deleteLiveData.observe(lifecycleOwner, (next) -> deleteLiveData.removeObservers(lifecycleOwner));
                             Log.v(TAG, "Item deleted through swipe ----------------------------------------------");
                             BrandedSnackbar.make(view, context.getString(R.string.action_note_deleted, dbNote.getTitle()), UNDO_DURATION)
+                                    .setAnchorView(anchorView)
                                     .setAction(R.string.action_undo, (View v) -> {
                                         final var undoLiveData = mainViewModel.addNoteAndSync(dbNote);
                                         undoLiveData.observe(lifecycleOwner, (o) -> undoLiveData.removeObservers(lifecycleOwner));
                                         BrandedSnackbar.make(view, context.getString(R.string.action_note_restored, dbNote.getTitle()), Snackbar.LENGTH_SHORT)
+                                                .setAnchorView(anchorView)
                                                 .show();
                                     })
                                     .show();

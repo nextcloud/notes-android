@@ -29,7 +29,6 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.SearchView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -48,6 +47,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.nextcloud.android.sso.AccountImporter;
@@ -175,7 +175,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                         runOnUiThread(() -> mainViewModel.postCurrentAccount(account));
                     } catch (NextcloudFilesAppAccountNotFoundException e) {
                         // Verbose log output for https://github.com/stefan-niedermann/nextcloud-notes/issues/1256
-                        runOnUiThread(() -> new AlertDialog.Builder(this)
+                        runOnUiThread(() -> new MaterialAlertDialogBuilder(this)
                                 .setTitle(NextcloudFilesAppAccountNotFoundException.class.getSimpleName())
                                 .setMessage(R.string.backup)
                                 .setPositiveButton(R.string.simple_backup, (a, b) -> executor.submit(() -> {
@@ -218,6 +218,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         mainViewModel.getSyncErrors().observe(this, exceptions -> {
             if (mainViewModel.containsNonInfrastructureRelatedItems(exceptions)) {
                 BrandedSnackbar.make(coordinatorLayout, R.string.error_synchronization, Snackbar.LENGTH_LONG)
+                        .setAnchorView(binding.activityNotesListView.fabCreate)
                         .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(exceptions)
                                 .show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()))
                         .show();
@@ -325,11 +326,14 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                         if (t instanceof IntendedOfflineException) {
                             Log.i(TAG, "Capabilities and notes not updated because " + nextAccount.getAccountName() + " is offline by intention.");
                         } else if (t instanceof NetworkErrorException) {
-                            BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
+                            BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG)
+                                    .setAnchorView(binding.activityNotesListView.fabCreate)
+                                    .show();
                         } else {
                             BrandedSnackbar.make(coordinatorLayout, R.string.error_synchronization, Snackbar.LENGTH_LONG)
                                     .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(t)
                                             .show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()))
+                                    .setAnchorView(binding.activityNotesListView.fabCreate)
                                     .show();
                         }
                     });
@@ -477,13 +481,18 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                             if (t instanceof IntendedOfflineException) {
                                 Log.i(TAG, "Capabilities and notes not updated because " + currentAccount.getAccountName() + " is offline by intention.");
                             } else if (t instanceof NextcloudHttpRequestFailedException && ((NextcloudHttpRequestFailedException) t).getStatusCode() == HttpURLConnection.HTTP_UNAVAILABLE) {
-                                BrandedSnackbar.make(coordinatorLayout, R.string.error_maintenance_mode, Snackbar.LENGTH_LONG).show();
+                                BrandedSnackbar.make(coordinatorLayout, R.string.error_maintenance_mode, Snackbar.LENGTH_LONG)
+                                        .setAnchorView(binding.activityNotesListView.fabCreate)
+                                        .show();
                             } else if (t instanceof NetworkErrorException) {
-                                BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
+                                BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG)
+                                        .setAnchorView(binding.activityNotesListView.fabCreate)
+                                        .show();
                             } else {
                                 BrandedSnackbar.make(coordinatorLayout, R.string.error_synchronization, Snackbar.LENGTH_LONG)
                                         .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(t)
                                                 .show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()))
+                                        .setAnchorView(binding.activityNotesListView.fabCreate)
                                         .show();
                             }
                         });
@@ -500,7 +509,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                 public void onSelectionChanged() {
                                     super.onSelectionChanged();
                                     if (tracker.hasSelection() && mActionMode == null) {
-                                        mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(MainActivity.this, coordinatorLayout, mainViewModel, MainActivity.this, canMoveNoteToAnotherAccounts, tracker, getSupportFragmentManager()));
+                                        mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(MainActivity.this, coordinatorLayout, binding.activityNotesListView.fabCreate, mainViewModel, MainActivity.this, canMoveNoteToAnotherAccounts, tracker, getSupportFragmentManager()));
                                     }
                                     if (mActionMode != null) {
                                         if (tracker.hasSelection()) {
@@ -515,7 +524,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                             }
         );
 
-        itemTouchHelper = new NotesListViewItemTouchHelper(this, mainViewModel, this, tracker, adapter, swipeRefreshLayout, coordinatorLayout, gridView);
+        itemTouchHelper = new NotesListViewItemTouchHelper(this, mainViewModel, this, tracker, adapter, swipeRefreshLayout, coordinatorLayout, binding.activityNotesListView.fabCreate, gridView);
         itemTouchHelper.attachToRecyclerView(listView);
     }
 
@@ -673,7 +682,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                     AccountImporter.onActivityResult(requestCode, resultCode, data, this, (ssoAccount) -> {
                         CapabilitiesWorker.update(this);
                         executor.submit(() -> {
-                            final var importSnackbar = BrandedSnackbar.make(coordinatorLayout, R.string.progress_import_indeterminate, Snackbar.LENGTH_INDEFINITE);
+                            final var importSnackbar = BrandedSnackbar.make(coordinatorLayout, R.string.progress_import_indeterminate, Snackbar.LENGTH_INDEFINITE)
+                                    .setAnchorView(binding.activityNotesListView.fabCreate);
                             Log.i(TAG, "Added account: " + "name:" + ssoAccount.name + ", " + ssoAccount.url + ", userId" + ssoAccount.userId);
                             try {
                                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
@@ -715,11 +725,15 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                     runOnUiThread(() -> {
                                         mainViewModel.postCurrentAccount(mainViewModel.getLocalAccountByAccountName(ssoAccount.name));
                                         // TODO there is already a sync in progress and results in displaying a TokenMissMatchException snackbar which conflicts with this one
-                                        coordinatorLayout.post(() -> BrandedSnackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show());
+                                        coordinatorLayout.post(() -> BrandedSnackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG)
+                                                .setAnchorView(binding.activityNotesListView.fabCreate)
+                                                .show());
                                     });
                                 } else if (e instanceof UnknownErrorException && e.getMessage() != null && e.getMessage().contains("No address associated with hostname")) {
                                     // https://github.com/stefan-niedermann/nextcloud-notes/issues/1014
-                                    runOnUiThread(() -> Snackbar.make(coordinatorLayout, R.string.you_have_to_be_connected_to_the_internet_in_order_to_add_an_account, Snackbar.LENGTH_LONG).show());
+                                    runOnUiThread(() -> Snackbar.make(coordinatorLayout, R.string.you_have_to_be_connected_to_the_internet_in_order_to_add_an_account, Snackbar.LENGTH_LONG)
+                                            .setAnchorView(binding.activityNotesListView.fabCreate)
+                                            .show());
                                 } else {
                                     e.printStackTrace();
                                     runOnUiThread(() -> {

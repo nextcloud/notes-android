@@ -139,7 +139,11 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_create"
-        style="@style/fab"
+        style="?attr/floatingActionButtonPrimaryStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="@dimen/spacer_2x"
         android:contentDescription="@string/action_create"
         android:title="@string/action_create"
         app:backgroundTint="@color/defaultBrand"

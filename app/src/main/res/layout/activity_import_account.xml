@@ -38,7 +38,7 @@
 
         <Button
             android:id="@+id/add_button"
-            style="@style/Widget.AppCompat.Button.Colored"
+            style="@style/Widget.Material3.Button.ElevatedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/welcome_text"

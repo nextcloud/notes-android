@@ -74,7 +74,6 @@
     </ScrollView>
 
     <LinearLayout
-        style="?android:buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacer_2x"
@@ -84,7 +83,7 @@
 
         <Button
             android:id="@+id/close"
-            style="?android:buttonBarButtonStyle"
+            style="@style/Widget.Material3.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight=".5"
@@ -93,16 +92,14 @@
 
         <Button
             android:id="@+id/copy"
-            style="?android:buttonBarButtonStyle"
+            style="@style/Widget.Material3.Button"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="6dp"
             android:layout_weight=".5"
-            android:background="@color/defaultBrand"
-            android:foreground="?attr/selectableItemBackground"
             android:text="@string/simple_copy"
-            android:textColor="@color/fg_contrast"
+            app:backgroundTint="@color/defaultBrand"
             tools:ignore="UnusedAttribute" />
 
     </LinearLayout>

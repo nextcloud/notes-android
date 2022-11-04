@@ -1,6 +1,5 @@
 package it.niedermann.owncloud.notes.edit.title;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -12,6 +11,8 @@ import android.view.WindowManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.DialogEditTitleBinding;
@@ -53,7 +54,7 @@ public class EditTitleDialogFragment extends DialogFragment {
             binding.title.setText(oldTitle);
         }
 
-        return new AlertDialog.Builder(getActivity())
+        return new MaterialAlertDialogBuilder(requireActivity())
                 .setTitle(R.string.change_note_title)
                 .setView(dialogView)
                 .setCancelable(true)

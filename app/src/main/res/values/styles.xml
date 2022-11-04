@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="BaseTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+    <style name="BaseTheme" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorAccent">@color/accent</item>
         <item name="android:actionModeBackground">?attr/colorPrimary</item>
@@ -11,6 +11,9 @@
         <item name="toolbarStyle">@style/toolbarStyle</item>
         <item name="android:statusBarColor">?attr/colorPrimary</item>
         <item name="android:windowLightStatusBar">@bool/isDayMode</item>
+        <item name="android:textColorLink">?android:colorAccent</item>
+        <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
+        <item name="tabStyle">@style/tabStyle</item>
     </style>
 
     <style name="AppTheme" parent="BaseTheme" />
@@ -20,20 +23,31 @@
         <item name="android:textColorHighlight">@color/defaultTextHighlightBackground</item>
     </style>
 
-    <style name="toolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
+    <style name="toolbarStyle" parent="@style/Widget.Material3.Toolbar">
         <item name="android:background">?attr/colorPrimary</item>
     </style>
 
-    <style name="actionModeStyle" parent="@style/Widget.AppCompat.ActionMode">
+    <style name="actionModeStyle" parent="@style/Widget.Material3.ActionMode">
         <item name="android:paddingStart">@dimen/spacer_activity_sides</item>
         <item name="android:paddingEnd">@dimen/spacer_activity_sides</item>
     </style>
 
-    <style name="fab">
-        <item name="android:layout_margin">16dp</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">end|bottom</item>
+    <style name="tabStyle" parent="Widget.Material3.TabLayout">
+        <item name="backgroundColor">@android:color/transparent</item>
+        <item name="itemBackground">@android:color/transparent</item>
+        <item name="tabIndicatorColor">@android:color/transparent</item>
+        <item name="tabTextColor">?attr/colorAccent</item>
+        <item name="tabIconTint">?attr/colorAccent</item>
+    </style>
+
+    <style name="MaterialAlertDialogTheme" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="buttonBarPositiveButtonStyle">@style/buttonStyle</item>
+        <item name="buttonBarNegativeButtonStyle">@style/buttonStyle</item>
+        <item name="buttonBarNeutralButtonStyle">@style/buttonStyle</item>
+    </style>
+
+    <style name="buttonStyle" parent="Widget.Material3.Button.TextButton.Dialog">
+        <item name="android:textColor">?attr/colorAccent</item>
     </style>
 
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">

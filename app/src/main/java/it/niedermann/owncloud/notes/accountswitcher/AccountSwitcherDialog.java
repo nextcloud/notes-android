@@ -1,5 +1,7 @@
 package it.niedermann.owncloud.notes.accountswitcher;
 
+import static it.niedermann.owncloud.notes.branding.BrandingUtil.applyBrandToLayerDrawable;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -8,14 +10,11 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
-import androidx.lifecycle.LiveData;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-
-import java.util.List;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
@@ -23,8 +22,6 @@ import it.niedermann.owncloud.notes.databinding.DialogAccountSwitcherBinding;
 import it.niedermann.owncloud.notes.manageaccounts.ManageAccountsActivity;
 import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
-
-import static it.niedermann.owncloud.notes.branding.BrandingUtil.applyBrandToLayerDrawable;
 
 /**
  * Displays all available {@link Account} entries and provides basic operations for them, like adding or switching
@@ -104,7 +101,7 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
             dismiss();
         });
 
-        return new AlertDialog.Builder(requireContext())
+        return new MaterialAlertDialogBuilder(requireContext())
                 .setView(binding.getRoot())
                 .create();
     }

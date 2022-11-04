@@ -7,9 +7,11 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
@@ -160,5 +162,12 @@ public class BrandingUtil {
         } else {
             DrawableCompat.setTint(drawable, mainColor);
         }
+    }
+
+    @ColorInt
+    public static int getAttribute(@NonNull Context context, @AttrRes int id) {
+        final var typedValue = new TypedValue();
+        context.getTheme().resolveAttribute(id, typedValue, true);
+        return typedValue.data;
     }
 }
