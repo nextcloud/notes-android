@@ -28,6 +28,9 @@ import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 
 import static it.niedermann.owncloud.notes.shared.util.NotesColorUtil.contrastRatioIsSufficient;
+import static it.niedermann.owncloud.notes.shared.util.NotesColorUtil.contrastRatioIsSufficientBigAreas;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 public class BrandingUtil {
 
@@ -144,6 +147,17 @@ public class BrandingUtil {
                         editText.getContext().getResources().getColor(R.color.fg_default_low)
                 }
         ));
+    }
+
+    public static void applyBrandToEditTextInputLayout(@ColorInt int color, @NonNull TextInputLayout til) {
+        final int colorPrimary = ContextCompat.getColor(til.getContext(), R.color.primary);
+        final int colorAccent = ContextCompat.getColor(til.getContext(), R.color.accent);
+        final var colorDanger = ColorStateList.valueOf(ContextCompat.getColor(til.getContext(), R.color.danger));
+        til.setBoxStrokeColor(contrastRatioIsSufficientBigAreas(color, colorPrimary) ? color : colorAccent);
+        til.setHintTextColor(ColorStateList.valueOf(contrastRatioIsSufficient(color, colorPrimary) ? color : colorAccent));
+        til.setErrorTextColor(colorDanger);
+        til.setBoxStrokeErrorColor(colorDanger);
+        til.setErrorIconTintList(colorDanger);
     }
 
     public static void tintMenuIcon(@NonNull MenuItem menuItem, @ColorInt int color) {

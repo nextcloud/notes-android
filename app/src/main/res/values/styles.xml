@@ -40,6 +40,11 @@
         <item name="tabIconTint">?attr/colorAccent</item>
     </style>
 
+    <style name="textInputLayoutStyle" parent="Widget.Material3.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">@color/text_input_layout_color</item>
+        <item name="hintTextColor">@color/text_input_layout_color</item>
+    </style>
+
     <style name="MaterialAlertDialogTheme" parent="ThemeOverlay.Material3.MaterialAlertDialog">
         <item name="buttonBarPositiveButtonStyle">@style/buttonStyle</item>
         <item name="buttonBarNegativeButtonStyle">@style/buttonStyle</item>
