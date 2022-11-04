@@ -46,7 +46,6 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/fg_default"
                 android:textIsSelectable="true"
-                android:theme="@style/textViewStyle"
                 tools:maxLength="200"
                 tools:text="@tools:sample/lorem/random" />
 
@@ -66,7 +65,6 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/fg_default"
                 android:textIsSelectable="true"
-                android:theme="@style/textViewStyle"
                 tools:maxLength="300"
                 tools:text="@tools:sample/lorem/random" />
 

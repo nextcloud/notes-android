@@ -38,7 +38,6 @@
             android:paddingStart="@dimen/spacer_2x"
             android:paddingEnd="@dimen/spacer_2x"
             android:textColor="@color/fg_default"
-            android:theme="@style/textViewStyle"
             tools:text="@tools:sample/lorem/random" />
     </ScrollView>
 

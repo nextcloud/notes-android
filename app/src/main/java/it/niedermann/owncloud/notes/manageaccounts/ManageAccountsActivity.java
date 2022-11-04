@@ -21,6 +21,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.function.Function;
 
 import it.niedermann.owncloud.notes.LockedActivity;
@@ -42,6 +44,7 @@ public class ManageAccountsActivity extends LockedActivity implements IManageAcc
     private ActivityManageAccountsBinding binding;
     private ManageAccountsViewModel viewModel;
     private ManageAccountAdapter adapter;
+    private final Executor executor = Executors.newSingleThreadExecutor();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -138,7 +141,7 @@ public class ManageAccountsActivity extends LockedActivity implements IManageAcc
                 .setNeutralButton(android.R.string.cancel, null)
                 .setPositiveButton(R.string.action_edit_save, (v, d) -> {
                     final var property = editText.getText().toString();
-                    new Thread(() -> {
+                    executor.execute(() -> {
                         try {
                             final var putSettingsCall = repository.putServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), settingsFactory.apply(property), getPreferredApiVersion(localAccount.getApiVersion()));
                             putSettingsCall.enqueue(new Callback<>() {
@@ -160,7 +163,7 @@ public class ManageAccountsActivity extends LockedActivity implements IManageAcc
                         } catch (NextcloudFilesAppAccountNotFoundException e) {
                             ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
                         }
-                    }).start();
+                    });
                 })
                 .show();
         try {
