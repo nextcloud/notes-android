@@ -370,39 +370,6 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         listener.close();
     }
 
-    @ColorInt
-    protected static int getTextHighlightBackgroundColor(@NonNull Context context, @ColorInt int mainColor, @ColorInt int colorPrimary, @ColorInt int colorAccent) {
-        if (isDarkThemeActive(context)) { // Dark background
-            if (ColorUtil.INSTANCE.isColorDark(mainColor)) { // Dark brand color
-                if (NotesColorUtil.contrastRatioIsSufficient(mainColor, colorPrimary)) { // But also dark text
-                    return mainColor;
-                } else {
-                    return ContextCompat.getColor(context, R.color.defaultTextHighlightBackground);
-                }
-            } else { // Light brand color
-                if (NotesColorUtil.contrastRatioIsSufficient(mainColor, colorAccent)) { // But also dark text
-                    return Color.argb(77, Color.red(mainColor), Color.green(mainColor), Color.blue(mainColor));
-                } else {
-                    return ContextCompat.getColor(context, R.color.defaultTextHighlightBackground);
-                }
-            }
-        } else { // Light background
-            if (ColorUtil.INSTANCE.isColorDark(mainColor)) { // Dark brand color
-                if (NotesColorUtil.contrastRatioIsSufficient(mainColor, colorAccent)) { // But also dark text
-                    return Color.argb(77, Color.red(mainColor), Color.green(mainColor), Color.blue(mainColor));
-                } else {
-                    return ContextCompat.getColor(context, R.color.defaultTextHighlightBackground);
-                }
-            } else { // Light brand color
-                if (NotesColorUtil.contrastRatioIsSufficient(mainColor, colorPrimary)) { // But also dark text
-                    return mainColor;
-                } else {
-                    return ContextCompat.getColor(context, R.color.defaultTextHighlightBackground);
-                }
-            }
-        }
-    }
-
     public interface NoteFragmentListener {
         void close();
 

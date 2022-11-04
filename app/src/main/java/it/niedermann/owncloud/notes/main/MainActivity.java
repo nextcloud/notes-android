@@ -7,6 +7,7 @@ import static android.view.View.VISIBLE;
 import static it.niedermann.owncloud.notes.NotesApplication.isDarkThemeActive;
 import static it.niedermann.owncloud.notes.NotesApplication.isGridViewEnabled;
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.getSecondaryForegroundColorDependingOnTheme;
+import static it.niedermann.owncloud.notes.branding.BrandingUtil.getTextHighlightBackgroundColor;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.DEFAULT_CATEGORY;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.RECENT;
@@ -607,6 +608,11 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         adapter.applyBrand(mainColor, textColor);
         adapterCategories.applyBrand(mainColor, textColor);
         invalidateOptionsMenu();
+
+        // FIXME doesn't work
+        final int colorPrimary = ContextCompat.getColor(this, R.color.primary);
+        final int colorAccent = ContextCompat.getColor(this, R.color.accent);
+        activityBinding.searchText.setHighlightColor(getTextHighlightBackgroundColor(this, mainColor, colorPrimary, colorAccent));
     }
 
     @Override

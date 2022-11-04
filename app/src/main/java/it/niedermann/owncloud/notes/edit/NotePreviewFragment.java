@@ -32,6 +32,7 @@ import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.util.SSOUtil;
 
 import static androidx.core.view.ViewCompat.isAttachedToWindow;
+import static it.niedermann.owncloud.notes.branding.BrandingUtil.getTextHighlightBackgroundColor;
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.getFontSizeFromPreferences;
 
 public class NotePreviewFragment extends SearchableBaseNoteFragment implements OnRefreshListener {

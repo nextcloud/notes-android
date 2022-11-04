@@ -1,14 +1,13 @@
 package it.niedermann.owncloud.notes.manageaccounts;
 
+import static it.niedermann.owncloud.notes.branding.BrandingUtil.applyBrandToEditTextInputLayout;
+import static it.niedermann.owncloud.notes.branding.BrandingUtil.readBrandMainColorLiveData;
 import static it.niedermann.owncloud.notes.shared.util.ApiVersionUtil.getPreferredApiVersion;
 
 import android.accounts.NetworkErrorException;
 import android.os.Bundle;
 import android.util.TypedValue;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.ProgressBar;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.AttrRes;
@@ -30,6 +29,7 @@ import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.DeleteAlertDialogBuilder;
 import it.niedermann.owncloud.notes.databinding.ActivityManageAccountsBinding;
+import it.niedermann.owncloud.notes.databinding.DialogEditSettingBinding;
 import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
@@ -132,15 +132,21 @@ public class ManageAccountsActivity extends LockedActivity implements IManageAcc
 
     private void changeAccountSetting(@NonNull Account localAccount, @StringRes int title, @StringRes int message, @StringRes int successMessage, @NonNull Function<NotesSettings, String> propertyExtractor, @NonNull Function<String, NotesSettings> settingsFactory) {
         final var repository = NotesRepository.getInstance(getApplicationContext());
-        final var editText = new EditText(this);
-        final var wrapper = createDialogViewWrapper();
+        final var binding = DialogEditSettingBinding.inflate(getLayoutInflater());
+        final var mainColor$ = readBrandMainColorLiveData(this);
+        mainColor$.observe(this, color -> {
+            mainColor$.removeObservers(this);
+            applyBrandToEditTextInputLayout(color, binding.inputWrapper);
+            binding.progress.setIndicatorColor(color);
+        });
+
         final var dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(title)
                 .setMessage(message)
-                .setView(wrapper)
+                .setView(binding.getRoot())
                 .setNeutralButton(android.R.string.cancel, null)
                 .setPositiveButton(R.string.action_edit_save, (v, d) -> {
-                    final var property = editText.getText().toString();
+                    final var property = binding.property.getText().toString();
                     executor.execute(() -> {
                         try {
                             final var putSettingsCall = repository.putServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), settingsFactory.apply(property), getPreferredApiVersion(localAccount.getApiVersion()));
@@ -174,9 +180,9 @@ public class ManageAccountsActivity extends LockedActivity implements IManageAcc
                             runOnUiThread(() -> {
                                 final var body = response.body();
                                 if (response.isSuccessful() && body != null) {
-                                    wrapper.removeAllViews();
-                                    editText.setText(propertyExtractor.apply(body));
-                                    wrapper.addView(editText);
+                                    binding.getRoot().removeView(binding.progress);
+                                    binding.property.setText(propertyExtractor.apply(body));
+                                    binding.inputWrapper.setVisibility(View.VISIBLE);
                                 } else {
                                     dialog.dismiss();
                                     ExceptionDialogFragment.newInstance(new NetworkErrorException(getString(R.string.http_status_code, response.code()))).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
@@ -196,18 +202,6 @@ public class ManageAccountsActivity extends LockedActivity implements IManageAcc
             dialog.dismiss();
             ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
         }
-    }
-
-    @NonNull
-    private ViewGroup createDialogViewWrapper() {
-        final var progressBar = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
-        progressBar.setIndeterminate(true);
-        final var wrapper = new FrameLayout(this);
-        final int paddingVertical = getResources().getDimensionPixelSize(R.dimen.spacer_1x);
-        final int paddingHorizontal = getDimensionFromAttribute(android.R.attr.dialogPreferredPadding);
-        wrapper.setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical);
-        wrapper.addView(progressBar);
-        return wrapper;
     }
 
     @Px

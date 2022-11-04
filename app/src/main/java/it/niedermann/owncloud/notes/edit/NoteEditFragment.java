@@ -32,6 +32,7 @@ import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.util.DisplayUtils;
 
 import static androidx.core.view.ViewCompat.isAttachedToWindow;
+import static it.niedermann.owncloud.notes.branding.BrandingUtil.getTextHighlightBackgroundColor;
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.getFontSizeFromPreferences;
 
 public class NoteEditFragment extends SearchableBaseNoteFragment {

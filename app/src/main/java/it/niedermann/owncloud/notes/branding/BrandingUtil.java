@@ -1,10 +1,12 @@
 package it.niedermann.owncloud.notes.branding;
 
+import static it.niedermann.owncloud.notes.NotesApplication.isDarkThemeActive;
+import static it.niedermann.owncloud.notes.shared.util.NotesColorUtil.contrastRatioIsSufficient;
+import static it.niedermann.owncloud.notes.shared.util.NotesColorUtil.contrastRatioIsSufficientBigAreas;
+
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.util.Log;
 import android.util.TypedValue;
@@ -23,14 +25,13 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.preference.PreferenceManager;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import it.niedermann.android.sharedpreferences.SharedPreferenceIntLiveData;
+import it.niedermann.android.util.ColorUtil;
 import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
-
-import static it.niedermann.owncloud.notes.shared.util.NotesColorUtil.contrastRatioIsSufficient;
-import static it.niedermann.owncloud.notes.shared.util.NotesColorUtil.contrastRatioIsSufficientBigAreas;
-
-import com.google.android.material.textfield.TextInputLayout;
+import it.niedermann.owncloud.notes.shared.util.NotesColorUtil;
 
 public class BrandingUtil {
 
@@ -158,6 +159,10 @@ public class BrandingUtil {
         til.setErrorTextColor(colorDanger);
         til.setBoxStrokeErrorColor(colorDanger);
         til.setErrorIconTintList(colorDanger);
+        final var editText = til.getEditText();
+        if (editText != null) {
+            editText.setHighlightColor(getTextHighlightBackgroundColor(editText.getContext(), color, colorPrimary, colorAccent));
+        }
     }
 
     public static void tintMenuIcon(@NonNull MenuItem menuItem, @ColorInt int color) {
@@ -183,5 +188,38 @@ public class BrandingUtil {
         final var typedValue = new TypedValue();
         context.getTheme().resolveAttribute(id, typedValue, true);
         return typedValue.data;
+    }
+
+    @ColorInt
+    public static int getTextHighlightBackgroundColor(@NonNull Context context, @ColorInt int mainColor, @ColorInt int colorPrimary, @ColorInt int colorAccent) {
+        if (isDarkThemeActive(context)) { // Dark background
+            if (ColorUtil.INSTANCE.isColorDark(mainColor)) { // Dark brand color
+                if (NotesColorUtil.contrastRatioIsSufficient(mainColor, colorPrimary)) { // But also dark text
+                    return mainColor;
+                } else {
+                    return ContextCompat.getColor(context, R.color.defaultTextHighlightBackground);
+                }
+            } else { // Light brand color
+                if (NotesColorUtil.contrastRatioIsSufficient(mainColor, colorAccent)) { // But also dark text
+                    return Color.argb(77, Color.red(mainColor), Color.green(mainColor), Color.blue(mainColor));
+                } else {
+                    return ContextCompat.getColor(context, R.color.defaultTextHighlightBackground);
+                }
+            }
+        } else { // Light background
+            if (ColorUtil.INSTANCE.isColorDark(mainColor)) { // Dark brand color
+                if (NotesColorUtil.contrastRatioIsSufficient(mainColor, colorAccent)) { // But also dark text
+                    return Color.argb(77, Color.red(mainColor), Color.green(mainColor), Color.blue(mainColor));
+                } else {
+                    return ContextCompat.getColor(context, R.color.defaultTextHighlightBackground);
+                }
+            } else { // Light brand color
+                if (NotesColorUtil.contrastRatioIsSufficient(mainColor, colorPrimary)) { // But also dark text
+                    return mainColor;
+                } else {
+                    return ContextCompat.getColor(context, R.color.defaultTextHighlightBackground);
+                }
+            }
+        }
     }
 }
