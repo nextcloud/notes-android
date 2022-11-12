@@ -57,14 +57,14 @@
 
                             <androidx.appcompat.widget.AppCompatImageView
                                 android:id="@+id/sorting_method"
-                                android:layout_width="?attr/actionBarSize"
-                                android:layout_height="?attr/actionBarSize"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical|end"
                                 android:background="?attr/selectableItemBackgroundBorderless"
                                 android:contentDescription="@string/action_sorting_method"
                                 android:padding="@dimen/spacer_2x"
                                 android:tint="?attr/colorAccent"
-                                android:translationX="@dimen/spacer_1x"
+                                android:translationX="@dimen/spacer_2x"
                                 app:srcCompat="@drawable/alphabetical_asc" />
 
                             <androidx.appcompat.widget.AppCompatImageView
@@ -73,7 +73,7 @@
                                 android:layout_height="?attr/actionBarSize"
                                 android:layout_gravity="center_vertical|end"
                                 android:background="?attr/selectableItemBackgroundBorderless"
-                                android:padding="12dp"
+                                android:paddingVertical="@dimen/spacer_2x"
                                 android:tooltipText="@string/manage_accounts"
                                 app:srcCompat="@drawable/ic_account_circle_grey_24dp"
                                 tools:targetApi="o" />
