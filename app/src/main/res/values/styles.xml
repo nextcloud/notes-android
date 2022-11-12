@@ -21,16 +21,19 @@
 
         <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
 
+        <item name="toolbarStyle">@style/toolbarStyle</item>
         <item name="actionModeStyle">@style/actionModeStyle</item>
         <item name="tabStyle">@style/tabStyle</item>
     </style>
 
     <style name="AppTheme" parent="BaseTheme" />
 
-    <style name="PopUpDarkMenu" parent="Theme.Material3.DayNight">
+    <style name="toolbarStyle" parent="Widget.Material3.Toolbar">
+        <item name="popupTheme">@style/PopupTheme</item>
+    </style>
+
+    <style name="PopupTheme" parent="Theme.Material3.DayNight">
         <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">?android:colorPrimary</item>
-        <item name="colorAccent">@color/accent</item>
         <item name="checkboxStyle">@style/checkboxStyle</item>
     </style>
 
@@ -39,12 +42,7 @@
     </style>
 
     <style name="materialThemeOverlay" parent="Widget.Material3.CompoundButton.CheckBox">
-        <!-- Container colors -->
         <item name="colorPrimary">@color/accent</item>
-        <item name="colorOnSurface">@color/accent</item>
-        <!-- Icon colors -->
-        <item name="colorSurface">@color/primary</item>
-        <item name="colorOnPrimary">@color/primary</item>
     </style>
 
     <style name="actionModeStyle" parent="@style/Widget.Material3.ActionMode">
