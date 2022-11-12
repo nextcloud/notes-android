@@ -204,16 +204,6 @@ public class ManageAccountsActivity extends LockedActivity implements IManageAcc
         }
     }
 
-    @Px
-    private int getDimensionFromAttribute(@SuppressWarnings("SameParameterValue") @AttrRes int attr) {
-        final var typedValue = new TypedValue();
-        if (getTheme().resolveAttribute(attr, typedValue, true))
-            return TypedValue.complexToDimensionPixelSize(typedValue.data, getResources().getDisplayMetrics());
-        else {
-            return 0;
-        }
-    }
-
     @Override
     public void applyBrand(int mainColor, int textColor) {
         applyBrandToPrimaryToolbar(binding.appBar, binding.toolbar);
