@@ -223,7 +223,7 @@
     <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Mise en forme contextuelle</string>
-    <string name="formatting_help_cbf_body_1">Un but majeur de l\'app Notes est de fournir une application de note sans distraction, bien que vous pussiez formater vos textes avec Markdown. Pour les divers exemples mentionnés ci-dessous, vous pouvez utiliser des raccourcis afin de pouvoir formater vos notes sans taper les codes ci-dessous. </string>
+    <string name="formatting_help_cbf_body_1">Un but majeur de l\'app Notes est de fournir une application de note sans distraction, bien que vous puissiez formater vos textes avec Markdown. Pour les divers exemples mentionnés ci-dessous, vous pouvez utiliser des raccourcis afin de pouvoir formater vos notes sans taper les codes ci-dessous. </string>
     <string name="formatting_help_cbf_body_2">Sélectionner simplement une partie du texte ou taper sur votre curseur à n\'importe quelle position et vous aurez un menu popup qui contient à coté des entrées par défaut %1$s, %2$s, %3$s des entrées comme %4$s ou %5$s.</string>
 
     <string name="formatting_help_text_title">Texte</string>

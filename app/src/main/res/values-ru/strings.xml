@@ -276,7 +276,7 @@
     <string name="simple_other">Другой</string>
     <string name="sort_last_modified">Сортировать по дате изменения</string>
     <string name="sort_alphabetically">Сортировать по алфавиту</string>
-    <string name="error_action_open_battery_settings">Настройки баттареи</string>
+    <string name="error_action_open_battery_settings">Настройки батареи</string>
     <string name="error_action_open_deck_info">Открыть информацию о приложении</string>
     <string name="error_action_open_network">Параметры сети</string>
     <string name="error_action_update_files_app">Обновить</string>
