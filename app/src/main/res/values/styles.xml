@@ -15,6 +15,10 @@
         <item name="windowActionModeOverlay">true</item>
         <item name="android:actionModeBackground">?attr/colorPrimary</item>
 
+        <!-- Workaround: Preferences Dialogs are using AlertDialogs instead of MaterialAlertDialogs. -->
+        <!-- https://stackoverflow.com/questions/70650073/adjust-androidx-preference-dialogs-to-follow-material-you -->
+        <item name="alertDialogTheme">@style/PreferencesAlertDialogTheme</item>
+
         <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
 
         <item name="actionModeStyle">@style/actionModeStyle</item>
@@ -45,6 +49,12 @@
         <item name="buttonBarPositiveButtonStyle">@style/buttonStyle</item>
         <item name="buttonBarNegativeButtonStyle">@style/buttonStyle</item>
         <item name="buttonBarNeutralButtonStyle">@style/buttonStyle</item>
+    </style>
+
+    <style name="PreferencesAlertDialogTheme" parent="MaterialAlertDialogTheme">
+        <!-- https://m3.material.io/components/dialogs/specs#6771d107-624e-47cc-b6d8-2b7b620ba2f1 -->
+        <item name="dialogCornerRadius">28dp</item>
+        <item name="android:background">?attr/colorSurface</item>
     </style>
 
     <style name="buttonStyle" parent="Widget.Material3.Button.TextButton.Dialog">
