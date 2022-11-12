@@ -234,4 +234,5 @@
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">يجب أن تكون متصلًا بالانترنت لإضافة حساب.</string>
     <string name="simple_next">التالي</string>
     <string name="simple_prev">السابق</string>
+    <string name="simple_backup">النسخ الاحتياطي</string>
     </resources>

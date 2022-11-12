@@ -50,6 +50,9 @@
     <string name="settings_background_sync">Achtergrondsynchronisatie</string>
     <string name="settings_prevent_screen_capture">Voorkomen schermafdruk</string>
     <string name="settings_gridview">Rasterweergave</string>
+    <string name="settings_keep_screen_on">Scherm aan laten</string>
+    <string name="settings_keep_screen_on_summary">Tijdens het bekijken of bewerken van een notitie</string>
+
     <string name="error_sync">Synchronisatie mislukt: %1$s</string>
     <string name="error_synchronization">Synchronisatie mislukt</string>
     <string name="error_no_network">Geen netwerkverbinding</string>

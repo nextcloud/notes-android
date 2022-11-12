@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Нотатки</string>
-    <string name="app_name_long">Нотатки Nextcloud</string>
+    <string name="app_name_long">Нотатки для Nextcloud</string>
     <string name="label_all_notes">Усі нотатки</string>
     <string name="label_favorites">Улюблене</string>
     <string name="action_create">Новий запис</string>
@@ -26,7 +26,7 @@
     <string name="menu_change_category">Категорія</string>
     <string name="menu_favorite">Улюблений</string>
     <string name="menu_preview">Перегляд</string>
-    <string name="menu_share">Поділитися</string>
+    <string name="menu_share">Спільний доступ</string>
 
     <string name="search_in_category">Шукати в %1$s</string>
     <string name="search_in_all">Шукати всі нотатки</string>
@@ -40,14 +40,19 @@
     <string name="listview_updated_this_month">Цього місяця</string>
     <string name="listview_updated_last_month">Минулого місяця</string>
 
-    <string name="settings_note_mode">Режим відображення для нотаток</string>
+    <string name="settings_note_mode">Показувати нотатки</string>
     <string name="settings_theme_title">Тема</string>
     <string name="settings_font_title">Моноширинний шрифт</string>
     <string name="settings_font_size">Розмір шрифту</string>
     <string name="settings_wifi_only">Синхронізувати тільки по WI-Fi</string>
-    <string name="settings_lock_summary">Облікові дані пристрою</string>
+    <string name="settings_lock">Блокування застосунку (бета)</string>
+    <string name="settings_lock_summary">Розблокування пристрою</string>
     <string name="settings_background_sync">Фонова синхронізація</string>
+    <string name="settings_prevent_screen_capture">Запобігати захопленню екрана</string>
     <string name="settings_gridview">Упорядкування у формі сітки</string>
+    <string name="settings_keep_screen_on">Тримати екран увімкненим</string>
+    <string name="settings_keep_screen_on_summary">Під час перегляду або редагування нотатки</string>
+
     <string name="error_sync">Синхронізація не вдалася: %1$s</string>
     <string name="error_synchronization">Синхронізація не вдалася</string>
     <string name="error_no_network">Відсутнє підключення до мережі</string>
@@ -55,18 +60,18 @@
     <string name="error_unknown">Сталася невідома помилка.</string>
 
     <string name="about_version_title">Версія</string>
-    <string name="about_version">Ви використовуєте%1$s</string>
+    <string name="about_version">Ви використовуєте %1$s</string>
     <string name="about_maintainer_title">Утримувач</string>
     <string name="about_developers_title">Розробники</string>
     <string name="about_translators_title">Перекладачі</string>
     <string name="about_translators_transifex">Спільнота Nextcloud на %1$s</string>
     <string name="about_testers_title">Тестувальники</string>
     <string name="about_source_title">Вихідний код</string>
-    <string name="about_source">Цей проєкт розміщено на GitHub:%1$s</string>
+    <string name="about_source">Цей проєкт розміщено на GitHub: %1$s</string>
     <string name="about_issues_title">Помилики</string>
-    <string name="about_issues">Ви можете повідомляти про помилки, пропонувати удосконалення та надсилати запити на додаткові функції через систему відстеження вад GitHub:%1$s</string>
+    <string name="about_issues">Ви можете повідомляти про помилки, пропонувати удосконалення та надсилати запити на додаткові функції через систему відстеження вад GitHub: %1$s</string>
     <string name="about_translate_title">Перекласти</string>
-    <string name="about_translate">Приєднуйтесь до команди Nextcloud на Transifex та допоможіть нам перекласти цей застосунок:%1$s</string>
+    <string name="about_translate">Приєднуйтесь до команди Nextcloud на Transifex та допоможіть нам перекласти цей застосунок: %1$s</string>
     <string name="about_app_license_title">Ліцензія застосунку</string>
     <string name="about_app_license">Ця програма ліцензована під GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Переглянути ліцензію</string>
@@ -78,11 +83,13 @@
     <string name="about_contribution_tab_title">Внесок</string>
     <string name="about_license_tab_title">Ліцензія</string>
 
-    <string name="widget_note_list_title">Список нотаток</string>
+    <string name="widget_note_list_title">Перелік нотаток</string>
     <string name="widget_note_list_placeholder">Нотатки відсутні</string>
     <string name="widget_single_note_title">Одна нотатка</string>
     <string name="widget_single_note_placeholder_tv">Нотатку не знайдено</string>
     <string name="widget_not_logged_in">Будь ласка, увійдіть до Нотаток перед використанням цього віджету</string>
+    <string name="widget_entry_fav_contentDescription">Значок зірки використовується для позначення елемента як улюбленого</string>
+
     <string name="activity_select_single_note">Оберіть нотатку</string>
 
     <string name="shortcut_create_long">Створити нову нотатку</string>
@@ -103,19 +110,37 @@
     <string name="category_movies">Відео</string>
     <string name="category_movie">Фільм</string>
     <string name="category_work">Робочий</string>
+    <string name="category_todo">До роботи</string>
+    <string name="category_todos">До роботи</string>
+    <string name="category_checklists">Контрольні списки</string>
     <string name="category_tasks">Завдання</string>
+    <string name="category_recipe">Рецепт</string>
     <string name="category_recipes">Рецепти</string>
+    <string name="category_restaurant">Ресторан</string>
+    <string name="category_restaurants">Ресторани</string>
+    <string name="category_food">Їжа</string>
+    <string name="category_bake">Випічка</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_key">Ключ</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_keys">Ключі</string>
     <string name="category_password">Пароль</string>
     <string name="category_passwords">Паролі</string>
+    <string name="category_credentials">Облікові дані</string>
     <string name="category_game">Гра</string>
     <string name="category_games">Ігри</string>
     <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
     <string name="category_play">Грати</string>
+    <string name="category_gift">Подарунок</string>
+    <string name="category_gifts">Подарунки</string>
     <!-- Like a gift -->
     <string name="category_present">Презентувати</string>
+    <!-- Like a gift -->
+    <string name="category_presents">Подарунки</string>
+
     <string name="account_already_imported">Обліковий запис вже імпортовано</string>
     <string name="no_notes_yet">Нотатки поки відсутні</string>
-    <string name="no_notes_yet_description">Натисніть кнопку +, щоб створити нову нотатку</string>
+    <string name="no_notes_yet_description">Натисніть кнопку \"+\", щоб створити нову нотатку</string>
     <string name="simple_more">Додатково</string>
     <string name="simple_move">Перемістити</string>
     <string name="category_readonly">Тільки читання</string>
@@ -126,7 +151,8 @@
     <string name="error_dialog_title">От халепа!</string>
     <string name="error_dialog_tip_token_mismatch_retry">Спробуйте примусово закрити застосунок та наново запустити. Можливо, встановлено неправильне з\'єднання із застосунком Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Якщо проблема не зникає, для її вирішення спробуйте очистити пам’ять обох програм: Nextcloud та Нотатки Nextcloud.</string>
-    <string name="error_dialog_tip_files_outdated">Ваш додаток Nextcloud здається застарілим. Будь ласка, відвідайте Play Маркет або F-Droid, щоб отримати останню версію.</string>
+    <string name="error_dialog_tip_clear_storage">Щоби очистити сховище, відкрийте вкладку інформації у застосунку та виберіть Пам\'ять → Очистити пам\'ять. ⚠️ Увага: це призведе до вилучення усіх нотаток, які ще не було синхронізовано!</string>
+    <string name="error_dialog_tip_files_outdated">Ваш застосунок Nextcloud може бути застарілим. Будь ласка, відвідайте Play Маркет або F-Droid, щоби оновити ваш застосунок до останньої версії.</string>
     <string name="error_dialog_tip_files_force_stop">Щось, здається, не так із вашим застосунком Nextcloud. Спробуйте примусово зупинити обидва застосунки: Nextcloud та Нотатки Nextcloud.</string>
     <string name="error_dialog_tip_files_delete_storage">Якщо примусове їх завершення не допомагає, спробуйте очистити сховище обох застосунків.</string>
     <string name="error_dialog_timeout_instance">За відведений час відповіді від вашого сервера не надійшло. Переконайтесь, що ваш сервер працює добре.</string>
@@ -134,17 +160,19 @@
     <string name="error_dialog_check_server">Відповідь вашого сервера була неправильною. Перевірте, чи можете ви отримати доступ до своїх нотаток через веб-інтерфейс.</string>
     <string name="error_dialog_check_server_logs">Виникла проблема з налаштуванням Nextcloud. Будь ласка, подивіться файли журналу сервера.</string>
     <string name="error_dialog_check_maintenance">Будь ласка, перевірте, чи ваш сервер Nextcloud наразі не перебуває в режимі обслуговування.</string>
-    <string name="error_dialog_insufficient_storage">Ваш сервер Nextcloud не має вільного місця. Будь ласка видаліть деякі файлі, щоб синхронізувати ваші локальні зміни з вашим хмарним сховищем.</string>
+    <string name="error_dialog_insufficient_storage">Ваш сервер Nextcloud не має вільного місця. Будь ласка, вилучіть непотрібні файлі, щоби можна було виконувати синхронізацію змін на пристрої з хмарою.</string>
     <string name="error_dialog_we_need_info">Нам потрібна наступна технічна інформація, щоб допомогти вам:</string>
-    <string name="error_dialog_server_app_enabled">Переконайтесь, що ви встановили та увімкнули додаток \"Нотатки\" на своєму сервері.</string>
+    <string name="error_dialog_server_app_enabled">Переконайтесь, що ви встановили та увімкнули застосунок \"Нотатки\" на своєму сервері.</string>
     <string name="error_dialog_redirect">Ваш сервер відповів кодом стану HTTP 302, що означає, що ви не встановили програму Нотатки на своєму сервері або щось налаштовано неправильно. Це може бути спричинено нестандартними перевизначеннями у файлі .htaccess або програмами Nextcloud, як-от OID-клієнт.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Вимкніть усі оптимізації батареї для застосунків Nextcloud та Нотатки Nextcloud.</string>
+    <string name="error_dialog_min_version">Застосунок \"Нотатки\" для Android вимагає версію не менше 3.18 застосунку Nextcloud для Android.</string>
     <string name="added_content">Додано \"%1$s\"</string>
     <string name="shared_text_empty">Поширений текст був порожнім</string>
-    <string name="append_to_note">Додати до нотатки</string>
+    <string name="append_to_note">Доповнити нотатку</string>
     <string name="change_note_title">Змінити заголовок нотатки</string>
     <string name="menu_edit_title">Редагувати нотатку</string>
     <string name="simple_security">Безпека</string>
+    <string name="appearance_and_behavior">Вигляд і поведінка</string>
     <string name="simple_synchronization">Синхронізація</string>
     <string name="manage_accounts">Облікові записи</string>
     <string name="action_formatting_help">Форматування</string>
@@ -164,7 +192,7 @@
     <string-array name="darkmode_entries">
         <item>Світла</item>
         <item>Темна</item>
-        <item>Згідно з системною</item>
+        <item>Системна</item>
     </string-array>
 
     <plurals name="ab_selected">
@@ -173,11 +201,32 @@
         <item quantity="many">%d обрано</item>
         <item quantity="other">%d обрано</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Вилучено одну нотатку</item>
+        <item quantity="few">Вилучено %1$d нотатки</item>
+        <item quantity="many">Вилучено %1$d нотаток</item>
+        <item quantity="other">Вилучено %1$d нотаток</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="one">Відновлена нотатка</item>
+        <item quantity="few">Відновлені %1$d нотатки</item>
+        <item quantity="many">Відновлені %1$d нотатки</item>
+        <item quantity="other">Відновлені %1$d нотатки</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">Поділитися вмістом %1$d нотатки</item>
+        <item quantity="few">Поділитися вмістом %1$d нотаток</item>
+        <item quantity="many">Поділитися вмістом %1$d нотаток</item>
+        <item quantity="other">Поділитися вмістом %1$d нотаток</item>
+    </plurals>
+
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
     <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">Контекстне форматування</string>
     <string name="formatting_help_cbf_body_1">Головною метою програми Нотатки є надання інструменту, що не відволікає увагу. Хоча ви зможете форматувати свої тексти за допомогою Markdown. Для різних із наведених нижче прикладів ви можете використовувати ярлики, щоб форматувати нотатки, не вводячи коди нижче.</string>
     <string name="formatting_help_cbf_body_2">Просто виберіть діапазон тексту або натисніть на курсор у будь-якій позиції, і ви отримаєте спливаюче меню, де поряд із типовими елементами %1$s, %2$s, %3$s містяться елементи на зразок %4$s або %5$s.</string>
 
@@ -214,17 +263,53 @@
     <string name="formatting_help_code_body_3">А якщо ви хочете використовувати підсвічування синтаксису, додайте назву мови:</string>
 
     <string name="formatting_help_tables_title">Таблиці</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">Колонка %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Значення %1d</string>
+
+    <string name="formatting_help_images_body_1">Посилання мають бути або повними URL-адресами, що починаються з протоколу та домену, або абсолютними шляхами, що починаються з символу %1$s.</string>
+    <string name="formatting_help_images_body_2">Щоб відповідати формату Markdown, будь ласка, використовуйте escape-символи в URL-адресі зображення. Це означає, наприклад, замінити пробіли на %1$s в URL-адресі.</string>
     <string name="formatting_help_images_title">Зображення</string>
+    <string name="formatting_help_images_alt">Чудове зображення</string>
+
     <string name="simple_other">Інший</string>
-    <string name="sort_last_modified">Сортувати за датою зміни</string>
-    <string name="sort_alphabetically">Сортувати за алфавітом</string>
+    <string name="sort_last_modified">Впорядкувати за датою зміни</string>
+    <string name="sort_alphabetically">Впорядкувати за абеткою</string>
     <string name="error_action_open_battery_settings">Налаштування батареї</string>
     <string name="error_action_open_deck_info">Відкрити інформацію про застосунок</string>
     <string name="error_action_open_network">Налаштування мережі</string>
     <string name="error_action_update_files_app">Оновлення</string>
+    <string name="no_account_configured_yet">Жодного облікового запису ще не налаштовано</string>
     <string name="no_other_accounts">Ви ще не налаштували жодного іншого облікового запису.</string>
     <string name="choose_account">Оберіть обліковий запис</string>
+    <string name="context_based_formatting">Контекстне форматування</string>
+    <plurals name="remove_account_message">
+        <item quantity="one">Видалення облікового запису %1$s також призведе до видалення невідновних несинхронізованих змін.</item>
+        <item quantity="few">Видалення облікового запису %1$s також призведе до видалення невідновних %2$d несинхронізованих змін.</item>
+        <item quantity="many">Видалення облікового запису %1$s також призведе до видалення невідновних %2$d несинхронізованих змін.</item>
+        <item quantity="other">Видалення облікового запису %1$s також призведе до видалення невідновних %2$d несинхронізованих змін.</item>
+    </plurals>
+    <string name="remove_account">Вилучити %1$s</string>
+
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Для додавання облікового запису потрібне з\'єднання з мережею.</string>
+    <string name="settings_notes_path">Встановити каталог</string>
+
     <string name="simple_next">Далі</string>
     <string name="simple_prev">Назад</string>
-    </resources>
+    <string name="simple_backup">Резервне копіювання</string>
+    <string name="backup">Ми виявили непоправний стан застосунку. Зробіть резервну копію ваших несинхронізованих змін і очистіть сховище застосунку Notes.</string>
+    <string name="settings_notes_path_description">Каталог для збереження нотаток у хмарі Nextcloud</string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
+    <string name="settings_notes_path_success">Новий каталог нотаток: %1$s</string>
+    <string name="settings_file_suffix">Розширення файлу</string>
+    <string name="settings_file_suffix_description">Розширення файлу для нових нотаток у хмарі Nextcloud</string>
+    <string name="settings_file_suffix_success">Суфікс нового файлу: %1$s</string>
+    <string name="http_status_code">Код стану HTTP: %1$d</string>
+    <string name="progress_import_indeterminate">Імпортування нотаток...</string>
+    <string name="progress_import">Імпортування нотатки %1$d з %2$d...</string>
+    <string name="account_imported">Обліковий запис імпортовано.</string>
+</resources>

@@ -80,7 +80,7 @@
     <string name="about_icons_disclaimer_mdi_icons">App honetan erabilitako gainontzeko ikonoen egilea %1$s Google Inc. da eta Apache 2.0 lizentzia daukate. </string>
     <string name="about_icons_disclaimer_mdi">Material Design ikonoak</string>
     <string name="about_credits_tab_title">Kredituak</string>
-    <string name="about_contribution_tab_title">Kontribuzio</string>
+    <string name="about_contribution_tab_title">Kontribuzioak</string>
     <string name="about_license_tab_title">Lizentzia</string>
 
     <string name="widget_note_list_title">Oharren zerrenda</string>
