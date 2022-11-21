@@ -46,7 +46,7 @@
     <string name="settings_font_size">Taille des caractères</string>
     <string name="settings_wifi_only">Synchroniser uniquement en Wifi</string>
     <string name="settings_lock">Verrouillage de l\'application (Bêta)</string>
-    <string name="settings_lock_summary">Informations d\'identiication du terminal</string>
+    <string name="settings_lock_summary">Informations d\'identification du terminal</string>
     <string name="settings_background_sync">Synchronisation en tâche de fond</string>
     <string name="settings_prevent_screen_capture">Empêcher la capture d\'écran</string>
     <string name="settings_gridview">Affichage grille</string>

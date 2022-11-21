@@ -50,6 +50,9 @@
     <string name="settings_background_sync">백그라운드 동기화</string>
     <string name="settings_prevent_screen_capture">화면 캡처 방지</string>
     <string name="settings_gridview">바둑판식 보기</string>
+    <string name="settings_keep_screen_on">화면을 계속 띄워놓기</string>
+    <string name="settings_keep_screen_on_summary">메모를 보거나 편집할 때</string>
+
     <string name="error_sync">동기화 실패: %1$s</string>
     <string name="error_synchronization">동기화에 실패했습니다.</string>
     <string name="error_no_network">네트워크에 연결할 수 없음</string>
@@ -113,7 +116,13 @@
     <string name="category_tasks">작업</string>
     <string name="category_recipe">조리법</string>
     <string name="category_recipes">조리법들</string>
+    <string name="category_restaurant">식당</string>
+    <string name="category_restaurants">식당</string>
     <string name="category_food">음식</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_key">열쇠</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_keys">열쇠</string>
     <string name="category_password">암호</string>
     <string name="category_passwords">암호</string>
     <string name="category_credentials">자격증명서</string>
@@ -123,6 +132,11 @@
     <string name="category_play">재생</string>
     <string name="category_gift">선물</string>
     <string name="category_gifts">선물들</string>
+    <!-- Like a gift -->
+    <string name="category_present">선물</string>
+    <!-- Like a gift -->
+    <string name="category_presents">선물</string>
+
     <string name="account_already_imported">계정을 이미 가져왔습니다.</string>
     <string name="no_notes_yet">아직 메모 없음</string>
     <string name="no_notes_yet_description">+ 버튼을 눌러 새 노트를 만들기</string>
@@ -157,6 +171,7 @@
     <string name="change_note_title">메모 제목 변경</string>
     <string name="menu_edit_title">제목 수정</string>
     <string name="simple_security">보안</string>
+    <string name="appearance_and_behavior">외형과 행동</string>
     <string name="simple_synchronization">동기화</string>
     <string name="manage_accounts">계정 관리</string>
     <string name="action_formatting_help">서식</string>
