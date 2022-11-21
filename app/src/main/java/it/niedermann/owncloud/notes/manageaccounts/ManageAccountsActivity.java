@@ -140,6 +140,8 @@ public class ManageAccountsActivity extends LockedActivity implements IManageAcc
             binding.progress.setIndicatorColor(color);
         });
 
+        binding.inputWrapper.setHint(title);
+
         final var dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(title)
                 .setMessage(message)

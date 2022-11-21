@@ -17,7 +17,6 @@
         style="@style/textInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/change_note_title"
         android:padding="?attr/dialogPreferredPadding"
         android:visibility="invisible"
         tools:visibility="visible">
