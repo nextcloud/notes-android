@@ -12,7 +12,7 @@ import it.niedermann.owncloud.notes.persistence.SyncWorker;
 
 /**
  * Enabling backgroundSync, set from {@link String} values to {@link Boolean} values
- * https://github.com/stefan-niedermann/nextcloud-notes/issues/1168
+ * https://github.com/nextcloud/notes-android/issues/1168
  */
 public class Migration_21_22 extends Migration {
     @NonNull

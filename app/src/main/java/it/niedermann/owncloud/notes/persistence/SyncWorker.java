@@ -55,7 +55,7 @@ public class SyncWorker extends Worker {
 
     /**
      * Set up sync work to enabled every 15 minutes or just disabled
-     * https://github.com/stefan-niedermann/nextcloud-notes/issues/1168
+     * https://github.com/nextcloud/notes-android/issues/1168
      *
      * @param context        the application
      * @param backgroundSync the toggle result backgroundSync

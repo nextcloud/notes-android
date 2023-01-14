@@ -22,7 +22,7 @@ public class Migration_14_15 extends Migration {
 
     /**
      * Normalize database (move category from string field to own table)
-     * https://github.com/stefan-niedermann/nextcloud-notes/issues/814
+     * https://github.com/nextcloud/notes-android/issues/814
      */
     @Override
     public void migrate(@NonNull SupportSQLiteDatabase db) {

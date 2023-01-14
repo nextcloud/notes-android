@@ -49,7 +49,7 @@ public class NoteUtilTest extends TestCase {
         assertEquals("Test", NoteUtil.generateNoteTitle("\nTest"));
         assertEquals("Test", NoteUtil.generateNoteTitle("\n\nTest"));
 
-        // https://github.com/stefan-niedermann/nextcloud-notes/issues/1104
+        // https://github.com/nextcloud/notes-android/issues/1104
         assertEquals("2021-03-24 - Example title", MarkdownUtil.removeMarkdown("2021-03-24 - Example title"));
     }
 

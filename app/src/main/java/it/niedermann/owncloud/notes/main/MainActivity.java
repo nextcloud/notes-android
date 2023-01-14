@@ -174,7 +174,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                         final var account = mainViewModel.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
                         runOnUiThread(() -> mainViewModel.postCurrentAccount(account));
                     } catch (NextcloudFilesAppAccountNotFoundException e) {
-                        // Verbose log output for https://github.com/stefan-niedermann/nextcloud-notes/issues/1256
+                        // Verbose log output for https://github.com/nextcloud/notes-android/issues/1256
                         runOnUiThread(() -> new MaterialAlertDialogBuilder(this)
                                 .setTitle(NextcloudFilesAppAccountNotFoundException.class.getSimpleName())
                                 .setMessage(R.string.backup)
@@ -670,7 +670,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             }
             case REQUEST_CODE_SERVER_SETTINGS: {
                 // Recreate activity completely, because theme switching makes problems when only invalidating the views.
-                // @see https://github.com/stefan-niedermann/nextcloud-notes/issues/529
+                // @see https://github.com/nextcloud/notes-android/issues/529
                 if (RESULT_OK == resultCode) {
                     ActivityCompat.recreate(this);
                     return;
@@ -730,7 +730,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                                 .show());
                                     });
                                 } else if (e instanceof UnknownErrorException && e.getMessage() != null && e.getMessage().contains("No address associated with hostname")) {
-                                    // https://github.com/stefan-niedermann/nextcloud-notes/issues/1014
+                                    // https://github.com/nextcloud/notes-android/issues/1014
                                     runOnUiThread(() -> Snackbar.make(coordinatorLayout, R.string.you_have_to_be_connected_to_the_internet_in_order_to_add_an_account, Snackbar.LENGTH_LONG)
                                             .setAnchorView(binding.activityNotesListView.fabCreate)
                                             .show());

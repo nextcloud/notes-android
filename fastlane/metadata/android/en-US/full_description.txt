@@ -25,4 +25,4 @@ Companion app to Nextcloud Notes.
 
 👨‍👩‍👦 Mitwirken
 
-  * https://github.com/stefan-niedermann/nextcloud-notes#family-join-the-team
+  * https://github.com/nextcloud/notes-android#family-join-the-team

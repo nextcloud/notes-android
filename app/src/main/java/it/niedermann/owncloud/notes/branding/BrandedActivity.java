@@ -50,7 +50,7 @@ public abstract class BrandedActivity extends AppCompatActivity implements Brand
     }
 
     public void applyBrandToPrimaryToolbar(@NonNull AppBarLayout appBarLayout, @NonNull Toolbar toolbar) {
-        // FIXME Workaround for https://github.com/stefan-niedermann/nextcloud-notes/issues/889
+        // FIXME Workaround for https://github.com/nextcloud/notes-android/issues/889
         appBarLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.primary));
 
         final var overflowDrawable = toolbar.getOverflowIcon();
