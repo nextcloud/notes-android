@@ -53,14 +53,6 @@ android {
         play {
             dimension "version"
         }
-        pfungstadt {
-            dimension "version"
-            applicationIdSuffix ".pfungstadt"
-        }
-        mdm {
-            dimension "version"
-            applicationIdSuffix ".mdm"
-        }
     }
 
     testOptions {
