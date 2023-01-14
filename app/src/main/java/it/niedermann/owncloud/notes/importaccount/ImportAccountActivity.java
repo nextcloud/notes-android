@@ -146,7 +146,7 @@ public class ImportAccountActivity extends AppCompatActivity {
                                 binding.status.setText(getString(R.string.error_sync, getString(R.string.error_no_network)));
                                 binding.status.setVisibility(View.VISIBLE);
                             } else if (t instanceof UnknownErrorException && t.getMessage() != null && t.getMessage().contains("No address associated with hostname")) {
-                                // https://github.com/stefan-niedermann/nextcloud-notes/issues/1014
+                                // https://github.com/nextcloud/notes-android/issues/1014
                                 binding.status.setText(R.string.you_have_to_be_connected_to_the_internet_in_order_to_add_an_account);
                                 binding.status.setVisibility(View.VISIBLE);
                             } else {

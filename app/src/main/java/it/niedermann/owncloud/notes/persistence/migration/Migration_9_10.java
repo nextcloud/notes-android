@@ -19,7 +19,7 @@ public class Migration_9_10 extends Migration {
 
     /**
      * Adds a column to store excerpt instead of regenerating it each time
-     * https://github.com/stefan-niedermann/nextcloud-notes/issues/528
+     * https://github.com/nextcloud/notes-android/issues/528
      */
     @Override
     public void migrate(@NonNull SupportSQLiteDatabase db) {

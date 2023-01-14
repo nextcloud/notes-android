@@ -33,7 +33,7 @@ public class Migration_15_16 extends Migration {
 
     /**
      * Moves note list widget preferences from {@link SharedPreferences} to database
-     * https://github.com/stefan-niedermann/nextcloud-notes/issues/832
+     * https://github.com/nextcloud/notes-android/issues/832
      */
     @Override
     public void migrate(@NonNull SupportSQLiteDatabase db) {

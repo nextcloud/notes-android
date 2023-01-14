@@ -500,7 +500,7 @@ public class NotesRepository {
     public Note updateNoteAndSync(@NonNull Account localAccount, @NonNull Note oldNote, @Nullable String newContent, @Nullable String newTitle, @Nullable ISyncCallback callback) {
         final Note newNote;
         // Re-read the up to date remoteId from the database because the UI might not have the state after synchronization yet
-        // https://github.com/stefan-niedermann/nextcloud-notes/issues/1198
+        // https://github.com/nextcloud/notes-android/issues/1198
         @Nullable final Long remoteId = db.getNoteDao().getRemoteId(oldNote.getId());
         if (newContent == null) {
             newNote = new Note(oldNote.getId(), remoteId, oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.getCategory(), oldNote.getFavorite(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), oldNote.getExcerpt(), oldNote.getScrollY());
@@ -598,7 +598,7 @@ public class NotesRepository {
                                         .setIntent(intent)
                                         .build());
                             } else {
-                                // Prevent crash https://github.com/stefan-niedermann/nextcloud-notes/issues/613
+                                // Prevent crash https://github.com/nextcloud/notes-android/issues/613
                                 Log.e(TAG, "shortLabel cannot be empty " + (BuildConfig.DEBUG ? note : note.getTitle()));
                             }
                         }
