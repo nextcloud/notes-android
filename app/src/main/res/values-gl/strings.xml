@@ -50,6 +50,9 @@
     <string name="settings_background_sync">Sincronización do traballo en segundo plano</string>
     <string name="settings_prevent_screen_capture">Evitar a captura da pantalla</string>
     <string name="settings_gridview">Ver como grella</string>
+    <string name="settings_keep_screen_on">Mantén a pantalla acesa</string>
+    <string name="settings_keep_screen_on_summary">Ao ver ou editar unha nota</string>
+
     <string name="error_sync">Produciuse un fallo na sincronización: %1$s</string>
     <string name="error_synchronization">Produciuse un fallo na sincronización</string>
     <string name="error_no_network">Sen conexión de rede</string>
@@ -85,6 +88,8 @@
     <string name="widget_single_note_title">Nota única</string>
     <string name="widget_single_note_placeholder_tv">Non se atopou a nota</string>
     <string name="widget_not_logged_in">Acceda a Notas antes de empregar este trebello</string>
+    <string name="widget_entry_fav_contentDescription">A icona de estrela úsase para indicar un elemento como favorito</string>
+
     <string name="activity_select_single_note">Seleccionar unha nota</string>
 
     <string name="shortcut_create_long">Crear unha nota nova</string>
@@ -105,18 +110,34 @@
     <string name="category_movies">Filmes</string>
     <string name="category_movie">Filme</string>
     <string name="category_work">Traballo</string>
+    <string name="category_todo">Tarefa</string>
+    <string name="category_todos">Tarefas</string>
+    <string name="category_checklists">Listas de verificación</string>
     <string name="category_tasks">Tarefas</string>
     <string name="category_recipe">Receita</string>
     <string name="category_recipes">Receitas</string>
     <string name="category_restaurant">Restaurante</string>
+    <string name="category_restaurants">Restaurantes</string>
+    <string name="category_food">Comida</string>
+    <string name="category_bake">Enfornar</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_key">Chave</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_keys">Chaves</string>
     <string name="category_password">Contrasinal</string>
     <string name="category_passwords">Contrasinais</string>
+    <string name="category_credentials">Credencial</string>
     <string name="category_game">Xogo</string>
     <string name="category_games">Xogos</string>
     <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
     <string name="category_play">Reproducir</string>
+    <string name="category_gift">Agasallo</string>
+    <string name="category_gifts">Agasallos</string>
     <!-- Like a gift -->
     <string name="category_present">Presentar</string>
+    <!-- Like a gift -->
+    <string name="category_presents">Agasallos</string>
+
     <string name="account_already_imported">A conta xa foi importada</string>
     <string name="no_notes_yet">Aínda non hai notas</string>
     <string name="no_notes_yet_description">Prema o botón + para crear unha nota nova</string>
@@ -144,6 +165,7 @@
     <string name="error_dialog_server_app_enabled">Asegúrese de ter instalada e activada a aplicación «Notas» no seu servidor.</string>
     <string name="error_dialog_redirect">O seu servidor respondeu cun código de estado HTTP 302, o que implica que non ten instalada a aplicación Notas no servidor ou que algo está mal configurado. Isto pode ser causado por substitucións personalizadas nun ficheiro .htaccess ou por aplicacións Nextcloud como Client OID.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Desactive todas as optimizacións de batería para Nextcloud e a apli Notas.</string>
+    <string name="error_dialog_min_version">A aplicación de Android Notes require que a aplicación de Android Nextcloud teña como mínimo a versión 3.18.</string>
     <string name="added_content">Engadido «%1$s»</string>
     <string name="shared_text_empty">O texto compartido estaba baleiro</string>
     <string name="append_to_note">Anexo á nota</string>
@@ -238,6 +260,8 @@
     <!-- Table cell value of a sample table -->
     <string name="formatting_help_tables_value">Valor %1d</string>
 
+    <string name="formatting_help_images_body_1">As ligazóns teñen que ser URL completos que comezan cun protocolo e dominio ou camiños absolutos que comezan cun carácter %1$s.</string>
+    <string name="formatting_help_images_body_2">Para axustarse ao formato Markdown, utiliza caracteres de escape no URL da imaxe. Isto significa, por exemplo, substituír espazos por %1$s no URL.</string>
     <string name="formatting_help_images_title">Imaxes</string>
     <string name="formatting_help_images_alt">Imaxe elegante</string>
 
@@ -252,10 +276,25 @@
     <string name="no_other_accounts">Aínda non ten configurada ningunha outra conta.</string>
     <string name="choose_account">Escolla unha conta</string>
     <string name="context_based_formatting">Xanela emerxente de formato baseado no contexto</string>
+    <string name="remove_account">Eliminar %1$s</string>
+
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Para engadir unha conta tes que estar conectado a internet.</string>
+    <string name="settings_notes_path">Establecer cartafol</string>
+
     <string name="simple_next">Seguinte</string>
     <string name="simple_prev">Anterior</string>
     <string name="simple_backup">Copia de seguridade</string>
+    <string name="backup">Detectamos un estado irrecuperable da aplicación. Fai unha copia de seguranza dos cambios non sincronizados e limpa o almacenamento da aplicación Notes.</string>
+    <string name="settings_notes_path_description">Cartafol para almacenar as túas notas no teu Nextcloud</string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
+    <string name="settings_notes_path_success">Novo cartafol de notas: %1$s</string>
+    <string name="settings_file_suffix">Extensión de ficheiro</string>
+    <string name="settings_file_suffix_description">Extensión de ficheiro para novas notas no teu Nextcloud</string>
+    <string name="settings_file_suffix_success">Novo sufixo de ficheiro: %1$s</string>
+    <string name="http_status_code">Código de estado HTTP: %1$d</string>
     <string name="progress_import_indeterminate">A importar notas...</string>
     <string name="progress_import">A importar a nota %1$d de %2$d...</string>
     <string name="account_imported">Conta importada.</string>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Noter</string>
+    <string name="app_name_long">Nextcloud noter</string>
+    <string name="label_all_notes">Alle noter</string>
+    <string name="label_favorites">Foretrukne</string>
+    <string name="action_create">Ny note</string>
+    <string name="welcome_text">Velkommen til %1$s</string>
+    <string name="action_settings">Indstillinger</string>
+    <string name="action_trashbin">Slettede noter</string>
+    <string name="action_search">Søg</string>
+    <string name="action_sorting_method">Sorteringsmetode</string>
+    <string name="simple_cancel">Annuller</string>
+    <string name="simple_switch">Byt rundt</string>
+    <string name="simple_edit">Rediger</string>
+    <string name="simple_remove">Fjern</string>
+    <string name="action_edit_save">Gem</string>
+    <string name="simple_about">Om</string>
+    <string name="simple_link">Link</string>
+    <string name="action_note_deleted">%1$s blev slettet</string>
+    <string name="action_note_restored">%1$s blev gendannet</string>
+    <string name="action_undo">Fortryd</string>
+    <string name="action_uncategorized">Ikke kategoriseret</string>
+    <string name="menu_delete">Slet</string>
+    <string name="menu_change_category">Kategori</string>
+    <string name="menu_favorite">Foretrukken</string>
+    <string name="menu_preview">Vis eksempel</string>
+    <string name="menu_share">Del</string>
+
+    <string name="search_in_category">Søg i %1$s</string>
+    <string name="search_in_all">Søg i alle noter</string>
+
+    <string name="change_category_title">Vælg en kategori</string>
+
+    <string name="listview_updated_today">I dag</string>
+    <string name="listview_updated_yesterday">I går</string>
+    <string name="listview_updated_this_week">Denne uge</string>
+    <string name="listview_updated_last_week">Seneste uge</string>
+    <string name="listview_updated_this_month">Denne måned</string>
+    <string name="listview_updated_last_month">Seneste måned</string>
+
+    <string name="settings_note_mode">Visningstilstand for noter</string>
+    <string name="settings_theme_title">Tema</string>
+    <string name="settings_font_title">Monospace font</string>
+    <string name="settings_font_size">Skriftstørrelse</string>
+    <string name="settings_wifi_only">Synk kun på Wi-Fi</string>
+    <string name="settings_lock_summary">Enheds legitimationsoplysninger</string>
+    <string name="settings_background_sync">Synkronisering i baggrunden</string>
+    <string name="settings_gridview">Grid visning</string>
+    <string name="error_sync">Synkronisering fejlede: %1$s</string>
+    <string name="error_synchronization">Synkroniseringen mislykkedes</string>
+    <string name="error_no_network">Ingen netværksforbindelse</string>
+    <string name="error_maintenance_mode">Serveren er i vedligeholdelsestilstand</string>
+    <string name="error_unknown">En ukendt fejl er opstået</string>
+
+    <string name="about_version_title">Version</string>
+    <string name="about_version">Du bruger lige nu %1$s</string>
+    <string name="about_maintainer_title">Maintainer</string>
+    <string name="about_developers_title">Udviklere</string>
+    <string name="about_translators_title">Oversættere</string>
+    <string name="about_translators_transifex">Nextcloud fællesskabet på %1$s</string>
+    <string name="about_testers_title">Testere</string>
+    <string name="about_source_title">Kildekode</string>
+    <string name="about_source">Dette projekt hostes på GitHub: %1$s</string>
+    <string name="about_issues_title">Problemer</string>
+    <string name="about_issues">Du kan rapportere fejl, foreslå forbedringer og ønske nye funktioner på Github: %1$s</string>
+    <string name="about_translate_title">Oversæt</string>
+    <string name="about_translate">Bliv en dal af Nextcloudholdet på Transifex, og hjælp os med at oversætte denne app: %1$s</string>
+    <string name="about_app_license_title">App licens</string>
+    <string name="about_app_license">Denne applikation er licenseret under GNU GENERAL PUBLIC LICENSE v3+.</string>
+    <string name="about_app_license_button">Vis licens</string>
+    <string name="about_icons_disclaimer_title">Ikoner</string>
+    <string name="about_icons_disclaimer_app_icon">For det oprindelige ikon, se %1$s.</string>
+    <string name="about_icons_disclaimer_mdi_icons">Alle andre ikoner som anvendes af app\'en er %1$s lavet med Google Inc. og licensieret under et Apache 2.0-licens.</string>
+    <string name="about_icons_disclaimer_mdi">Material Design ikoner</string>
+    <string name="about_credits_tab_title">Credits</string>
+    <string name="about_contribution_tab_title">Bidrag</string>
+    <string name="about_license_tab_title">Licens</string>
+
+    <string name="widget_note_list_title">Noteliste </string>
+    <string name="widget_note_list_placeholder">Ingen noter</string>
+    <string name="widget_single_note_title">Enkel note</string>
+    <string name="widget_single_note_placeholder_tv">Note ikke fundet</string>
+    <string name="widget_not_logged_in">Log venligst ind i Notes før du bruger denne widget</string>
+    <string name="activity_select_single_note">Vælg note</string>
+
+    <string name="shortcut_create_long">Opret en ny note</string>
+
+    <string name="pref_value_font_normal">Normal</string>
+    <string name="pref_value_wifi_and_mobile">Synk på Wi-Fi og mobil data</string>
+    <string name="pref_value_lock">Password protection</string>
+
+    <string name="simple_error">Fejl</string>
+    <string name="simple_close">Luk</string>
+    <string name="simple_copy">Kopier</string>
+    <string name="simple_exception">Undtagelse</string>
+    <string name="pin_to_homescreen">Fastgør til hjemmeskærm</string>
+    <string name="note_has_been_deleted">Denne note er blevet slettet</string>
+    <string name="add_account">Tilføj konto</string>
+
+    <string name="category_music">Musik</string>
+    <string name="category_movies">Film</string>
+    <string name="category_movie">Film</string>
+    <string name="category_work">Arbejde</string>
+    <string name="category_tasks">Opgaver</string>
+    <string name="category_recipes">Opskrifter</string>
+    <string name="category_password">Adgangskode</string>
+    <string name="category_passwords">Adgangskoder</string>
+    <string name="category_games">Spil</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">Afspil</string>
+    <string name="account_already_imported">Kontoen er allerede importeret</string>
+    <string name="no_notes_yet">Ingen noter endnu</string>
+    <string name="no_notes_yet_description">Tryk på + for at oprette en ny note</string>
+    <string name="simple_more">Mere</string>
+    <string name="simple_move">Flyt</string>
+    <string name="category_readonly">Skrivebeskyttet</string>
+    <string name="no_category">Ingen kategori</string>
+    <string name="add_category">Tilføj %1$s</string>
+    <string name="simple_checkbox">Afkrydsningsfeldt</string>
+    <string name="unlock_notes">Lås noter op</string>
+    <string name="error_dialog_title">Åh nej - hvad nu? 🙁</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Forsøg venligst at tvinge app\'en til at lukke og start den påny igen. Der kan have været en ukorrekt forbindelse til Nextcloud-app\'en.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Hvis problemet ikke løses, så forsøg at rydde lageret for begge apps: Nextcloud og Nextcloud Notes, for at løse problemet.</string>
+    <string name="error_dialog_tip_files_outdated">Din Nextcloud-app ser ud til at være forældet. Gå venligst til Play Butik eller F-Droid for at få seneste version.</string>
+    <string name="error_dialog_tip_files_force_stop">Det lader til at være noget galt med din Nextcloud-app. Forsøg venligst at gennemtvinge stop af både Nextcloud-app\'en og Nextcloud Notes-app\'en. </string>
+    <string name="error_dialog_tip_files_delete_storage">Hvis det ikke hjælper at stoppe begge, så kan du forsøge at rydde lagerpladsen for begge apps.</string>
+    <string name="error_dialog_timeout_instance">Der var intet svar fra din server på nuværende tidspunkt. Sørg venligst for at sikre, at din instans kører rigtigt. </string>
+    <string name="error_dialog_timeout_toggle">Tjek din netværksforbindelse. Undertiden kan det hjælpe at slukke og tænde for mobildata eller wifi.</string>
+    <string name="error_dialog_check_server">Svaret fra din server var ikke korrekt. Tjek venligst om du kan tilgå dine noter via webgrænsefladen.</string>
+    <string name="error_dialog_check_server_logs">Der er et problem med din opsætning af Nextcloud. Kig venligst i serverens logfiler. </string>
+    <string name="error_dialog_check_maintenance">Sørg venligst for at din Nextcloud-instans ikke er i vedligeholdelsestilstand. </string>
+    <string name="error_dialog_insufficient_storage">Din Nextcloud-instans har ikke mere ledig lagerplads. Slet venligst nogle filer for at synkronisere dine lokale ændringer ind i skyen.</string>
+    <string name="error_dialog_we_need_info">Vi har brug for følgende tekniske information for at hjælpe dig:</string>
+    <string name="error_dialog_server_app_enabled">Tjek venligst, om du har installeret og aktiveret appen \"Noter\" på din server.</string>
+    <string name="error_dialog_redirect">Din server svarede med en HTTP 302-statuskode, hvilket betyder, at du endnu ikke har installeret app\'en Noter på din server, eller at der er en forkert konfiguration. Dette kan skyldes brugerdefinerede tilsidesættelser i en .htaccess-fil eller af apps fra Nextcloud som OID Client.</string>
+    <string name="added_content">Tilføjet \"%1$s\"</string>
+    <string name="shared_text_empty">Den delte tekst var tom</string>
+    <string name="append_to_note">Tilføj til note</string>
+    <string name="change_note_title">Skift titel på note</string>
+    <string name="menu_edit_title">Rediger titel</string>
+    <string name="simple_security">Sikkerhed</string>
+    <string name="simple_synchronization">Synchronization</string>
+    <string name="manage_accounts">Administrer konti</string>
+    <string name="action_formatting_help">Formatering</string>
+
+    <string-array name="noteMode_entries">
+        <item>Åbn i redigeringstilstand</item>
+        <item>Åbn forhåndsvisning</item>
+        <item>Husk mine sidste selektion</item>
+    </string-array>
+
+    <string-array name="fontSize_entries">
+        <item>Lille</item>
+        <item>Mellem</item>
+        <item>Stor</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Lys</item>
+        <item>Mørk</item>
+        <item>System Standard</item>
+    </string-array>
+
+    <plurals name="ab_selected">
+        <item quantity="one">%d valgt</item>
+        <item quantity="other">%d valgt</item>
+    </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">En note slettet</item>
+        <item quantity="other">%1$d noter slettet</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="one">En note gendannet</item>
+        <item quantity="other">%1$d noter gendannet</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">Del indhold i %1$d note</item>
+        <item quantity="other">Del indhold i %1$d noter</item>
+    </plurals>
+
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_cbf_title">Kontekstbaseret formatering</string>
+    <string name="formatting_help_text_title">Tekst</string>
+    <string name="formatting_help_lists_title">Lister</string>
+    <string name="formatting_help_lists_body_2">En</string>
+    <string name="formatting_help_lists_body_3">To</string>
+    <string name="formatting_help_lists_body_4">Tre</string>
+    <string name="formatting_help_checkboxes_title">Afkrydsningsfelter</string>
+    <string name="formatting_help_code_title">Kode</string>
+    <string name="formatting_help_images_title">Billeder</string>
+    <string name="simple_other">Andet</string>
+    <string name="sort_last_modified">Sortér efter dato ændret</string>
+    <string name="sort_alphabetically">Sortér alfabetisk</string>
+    <string name="error_action_open_battery_settings">Batteriindstillinger</string>
+    <string name="error_action_open_deck_info">Åbn App info</string>
+    <string name="error_action_open_network">Netværksindstillinger</string>
+    <string name="error_action_update_files_app">Opdater</string>
+    <string name="choose_account">Vælg konto</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Du skal være koblet på en internetforbindelse for at tilføje en konto.</string>
+    <string name="simple_next">Næste</string>
+    <string name="simple_prev">Tidligere</string>
+    <string name="simple_backup">Backup</string>
+    </resources>

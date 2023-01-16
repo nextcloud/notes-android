@@ -56,7 +56,7 @@
     <string name="error_unknown">Προέκυψε άγνωστο σφάλμα.</string>
 
     <string name="about_version_title">Έκδοση</string>
-    <string name="about_version">Αυτήν την στιγμή χρησιμοποιείτε %1$s</string>
+    <string name="about_version">Αυτή τη στιγμή χρησιμοποιείτε %1$s</string>
     <string name="about_maintainer_title">Συντηρητής</string>
     <string name="about_developers_title">Προγραμματιστές</string>
     <string name="about_translators_title">Μεταφραστές</string>
@@ -107,14 +107,18 @@
     <string name="category_movie">Ταινία</string>
     <string name="category_work">Εργασία</string>
     <string name="category_tasks">Εργασίες</string>
+    <string name="category_recipe">Συνταγή</string>
     <string name="category_recipes">Συνταγές</string>
     <string name="category_restaurant">Εστιατόριο</string>
+    <string name="category_restaurants">Εστιατόρια</string>
+    <string name="category_food">Φαγητό</string>
     <string name="category_password">Συνθηματικό</string>
     <string name="category_passwords">Συνθηματικά</string>
     <string name="category_game">Παιχνίδι</string>
     <string name="category_games">Παιχνίδια</string>
     <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
     <string name="category_play">Αναπαραγωγή</string>
+    <string name="category_gift">Δώρο</string>
     <!-- Like a gift -->
     <string name="category_present">Παρόν</string>
     <string name="account_already_imported">Ο λογαριασμός έχει εισαχθεί ήδη</string>
