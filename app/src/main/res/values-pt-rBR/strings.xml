@@ -227,7 +227,7 @@
     <string name="formatting_help_cbf_body_2">Basta selecionar um intervalo de texto ou tocar no cursor em qualquer posição e você obterá um menu pop-up que contém ao lado das entradas padrão %1$s, %2$s, %3$s entradas como %4$s ou %5$s.</string>
 
     <string name="formatting_help_text_title">Texto</string>
-    <string name="formatting_help_text_body">É muito fácil fazer algumas palavras %1$snegritas%1$s e outras %2$sitálicas%2$s com Markdown. Você pode %3$sriscar%3$s algumas palavras e até [linkar para o Nextcloud](https://nextcloud.com).</string>
+    <string name="formatting_help_text_body">É muito fácil fazer algumas palavras %1$snegritas%1$s e outras %2$sitálicas%2$s com Markdown. Você pode %3$sriscar%3$s algumas palavras e até [apontar para o Nextcloud](https://nextcloud.com).</string>
 
     <string name="formatting_help_lists_title">Listas</string>
     <string name="formatting_help_lists_body_1">Às vezes você deseja listas numeradas:</string>

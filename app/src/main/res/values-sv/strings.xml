@@ -50,6 +50,9 @@
     <string name="settings_background_sync">Bakgrundssynkronisering</string>
     <string name="settings_prevent_screen_capture">Hindra skärmklipp</string>
     <string name="settings_gridview">Rutnätsvy</string>
+    <string name="settings_keep_screen_on">Håll skärmen igång</string>
+    <string name="settings_keep_screen_on_summary">När du visar eller redigerar en anteckning</string>
+
     <string name="error_sync">Synkronisering misslyckades: %1$s</string>
     <string name="error_synchronization">Synkroniseringen misslyckades</string>
     <string name="error_no_network">Ingen nätverksanslutning</string>
@@ -108,8 +111,10 @@
     <string name="category_movie">Film</string>
     <string name="category_work">Arbete</string>
     <string name="category_todo">Uppgifter</string>
+    <string name="category_todos">Uppgifter</string>
     <string name="category_checklists">Checklistor</string>
     <string name="category_tasks">Uppgifter</string>
+    <string name="category_recipe">Recept</string>
     <string name="category_recipes">Recept</string>
     <string name="category_restaurant">Restaurang</string>
     <string name="category_restaurants">Restauranger</string>
@@ -160,12 +165,14 @@
     <string name="error_dialog_server_app_enabled">Se till att du har installerat och aktiverat Notes-appen på din server.</string>
     <string name="error_dialog_redirect">Din server svarade med ett HTTP 302 statusmeddelande, vilket innebär att du inte har installerat Notes-appen på din server eller att något är felkonfigurerat. Detta kan orsakas av manuella ändringar i en .htaccess-fil eller av Nextcloud-appar som \"OID Client\".</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Stäng av alla batterioptimeringar för Nextcloud och Notes-appen.</string>
+    <string name="error_dialog_min_version">Anteckningar Android-appen kräver att Nextcloud Android-appen är minst version 3.18.</string>
     <string name="added_content">La till \"%1$s\"</string>
     <string name="shared_text_empty">Den delade texten var tom</string>
     <string name="append_to_note">Lägg till i anteckning</string>
     <string name="change_note_title">Ändra anteckningstitel</string>
     <string name="menu_edit_title">Redigera titel</string>
     <string name="simple_security">Säkerhet</string>
+    <string name="appearance_and_behavior">Utseende och beteende</string>
     <string name="simple_synchronization">Synkronisering</string>
     <string name="manage_accounts">Hantera konton</string>
     <string name="action_formatting_help">Formatering</string>
@@ -209,9 +216,12 @@
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
     <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Innehållsbaserad formatering</string>
     <string name="formatting_help_cbf_body_1">Ett stort deignmål med Notes-appen är att tillahandahålla ett distraktionsfritt verktyg. Fast du kan formatera dina texter med Markdown. För de olika nedan nämnda exemplena kan du använda genvägar så att du kan formatera dina anteckningar utan att skriva in koderna nedan.</string>
+    <string name="formatting_help_cbf_body_2">Markera bara ett stycke text eller tryck på din markör vid valfri position och du kommer få en popup-meny som utöver standardposterna såsom %1$s, %2$s, %3$s även innehåller poster som %4$s eller %5$s.</string>
+
     <string name="formatting_help_text_title">Text</string>
     <string name="formatting_help_lists_title">Listor</string>
     <string name="formatting_help_lists_body_1">Ibland vill du ha en numrerad lista:</string>
@@ -243,7 +253,14 @@
     <string name="formatting_help_code_body_3">Och om du vill använda syntaxmarkering kan du inkludera språket:</string>
 
     <string name="formatting_help_tables_title">Tabeller</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">Kolumn %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Värde %1d</string>
+
     <string name="formatting_help_images_title">Bilder</string>
+    <string name="formatting_help_images_alt">Snygg bild</string>
+
     <string name="simple_other">Övrigt</string>
     <string name="sort_last_modified">Sortera efter ändrat datum</string>
     <string name="sort_alphabetically">Sortera alfabetiskt</string>
@@ -251,9 +268,30 @@
     <string name="error_action_open_deck_info">Öppna appinformation</string>
     <string name="error_action_open_network">Nätverksinställningar</string>
     <string name="error_action_update_files_app">Uppdatera</string>
+    <string name="no_account_configured_yet">Inget konto konfigurerat än</string>
     <string name="no_other_accounts">Du har inte konfigurerat några andra konton än.</string>
     <string name="choose_account">Välj konto</string>
+    <string name="context_based_formatting">Kontextbaserad formaterings-popover</string>
+    <string name="remove_account">Ta bort %1$s</string>
+
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Du måste vara ansluten till internet för att lägga till ett konto.</string>
+    <string name="settings_notes_path">Sätt mapp</string>
+
     <string name="simple_next">Nästa</string>
     <string name="simple_prev">Föregående</string>
-    </resources>
+    <string name="simple_backup">Backup</string>
+    <string name="backup">Vi upptäckte ett oåterkalleligt tillstånd i appen. Säkerhetskopiera dina osynkroniserade ändringar och rensa lagringen av Antecknings-appen.</string>
+    <string name="settings_notes_path_description">Mapp för att lagra din anteckningar i ditt Nextcloud</string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
+    <string name="settings_notes_path_success">Ny anteckningsmapp: %1$s</string>
+    <string name="settings_file_suffix">Filändelse</string>
+    <string name="settings_file_suffix_description">Filändelse för nya anteckningar i ditt Nextcloud</string>
+    <string name="settings_file_suffix_success">Ny filändelse: %1$s</string>
+    <string name="http_status_code">HTTP statuskod: %1$d</string>
+    <string name="progress_import_indeterminate">Importerar anteckningar...</string>
+    <string name="progress_import">Importerar anteckning %1$d av %2$d... </string>
+    <string name="account_imported">Konto importerat.</string>
+</resources>

@@ -106,6 +106,7 @@
     <string name="category_movie">Film</string>
     <string name="category_work">Arbeid</string>
     <string name="category_tasks">Oppgaver</string>
+    <string name="category_recipes">Oppskrifter</string>
     <string name="category_restaurant">Restaurant</string>
     <string name="category_password">PassordP</string>
     <string name="category_passwords">Passord</string>
@@ -146,6 +147,7 @@
     <string name="change_note_title">Endre tittel på notat</string>
     <string name="menu_edit_title">Rediger tittel</string>
     <string name="simple_security">Sikkerhet</string>
+    <string name="appearance_and_behavior">Utseende og oppførsel</string>
     <string name="simple_synchronization">Synkronisering</string>
     <string name="manage_accounts">Håndter kontoer</string>
     <string name="action_formatting_help">Formatering</string>
@@ -227,6 +229,7 @@
     <string name="error_action_open_deck_info">Åpne App info</string>
     <string name="error_action_open_network">Nettverksinnstillinger</string>
     <string name="error_action_update_files_app">Oppdater</string>
+    <string name="no_account_configured_yet">Ingen konto er konfigurert</string>
     <string name="no_other_accounts">Du har ikke konfigurert noen konto enda.</string>
     <string name="choose_account">Velg konto</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Du må være koblet til internett for å kunne legge til en konto.</string>

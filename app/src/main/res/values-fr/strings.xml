@@ -102,7 +102,7 @@
     <string name="simple_close">Fermer</string>
     <string name="simple_copy">Copier</string>
     <string name="simple_exception">Exception</string>
-    <string name="pin_to_homescreen">Épingler sur la page d’accueil</string>
+    <string name="pin_to_homescreen">Épingler sur l\'écran d\'accueil</string>
     <string name="note_has_been_deleted">Cette note a été supprimée</string>
     <string name="add_account">Ajouter un compte</string>
 
