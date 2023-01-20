@@ -50,6 +50,9 @@
     <string name="settings_background_sync">Sincronizare în fundal</string>
     <string name="settings_prevent_screen_capture">Oprește captura de ecran</string>
     <string name="settings_gridview">Vizualizare tip grilă</string>
+    <string name="settings_keep_screen_on">Menține ecranul deschis</string>
+    <string name="settings_keep_screen_on_summary">Când vizionezi sau editezi o notiță</string>
+
     <string name="error_sync">Sincronizare eșuată: %1$s</string>
     <string name="error_synchronization">Sincronizare eșuată </string>
     <string name="error_no_network">Nu exista conexiune</string>
