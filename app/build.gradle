@@ -67,6 +67,10 @@ android {
     namespace 'it.niedermann.owncloud.notes'
 }
 
+ext {
+    roomVersion = "2.4.3"
+}
+
 dependencies {
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.6'
 
@@ -96,8 +100,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.7.0'
 
     // Database
-    implementation 'androidx.room:room-runtime:2.4.3'
-    annotationProcessor 'androidx.room:room-compiler:2.4.3'
+    implementation "androidx.room:room-runtime:${roomVersion}"
+    annotationProcessor "androidx.room:room-compiler:${roomVersion}"
 
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
