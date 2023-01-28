@@ -1,27 +1,49 @@
-name: CodeQL security scan
+# synced from @nextcloud/android-config
+name: "CodeQL"
 
 on:
+  push:
+    branches: [ "master", "main", "stable-*" ]
   pull_request:
+    branches: [ "master", "main" ]
   schedule:
-    - cron:  '0 12 * * *'
+    - cron: '24 18 * * 3'
 
 permissions:
   contents: read
-  security-events: write
-  pull-requests: read
 
 jobs:
-  codeql:
-    name: CodeQL security scan
+  analyze:
+    name: Analyze
     runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'java' ]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
+      - name: Checkout repository
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
+      - name: Set Swap Space
+        uses: pierotofy/set-swap-space@49819abfb41bd9b44fb781159c033dba90353a7c # v1.0
         with:
-          languages: java
-      - name: Build debug APK
-        run: bash ./gradlew assembleDev --stacktrace
+          swap-size-gb: 10
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@436dbd9100756e97f42f45da571adeebf8270723 # v2.2.0
+        with:
+          languages: ${{ matrix.language }}
+      - name: Set up JDK
+        uses: actions/setup-java@1df8dbefe2a8cbc99770194893dd902763bee34b # v3.9.0
+        with:
+          distribution: "temurin"
+          java-version: 11
+      - name: Assemble
+        run: |
+          mkdir -p "$HOME/.gradle"
+          echo "org.gradle.jvmargs=-Xmx2g -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutOfMemoryError" > "$HOME/.gradle/gradle.properties"
+          ./gradlew assembleDebug
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
+        uses: github/codeql-action/analyze@436dbd9100756e97f42f45da571adeebf8270723 # v2.2.0
