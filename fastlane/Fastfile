@@ -13,14 +13,11 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
+skip_docs
+
 default_platform(:android)
 
 platform :android do
-  desc "Runs all the tests"
-  lane :test do
-    gradle(task: "test")
-  end
-
   desc "Submit a new Beta Build to Crashlytics Beta"
   lane :beta do
     gradle(task: "clean assembleRelease")
