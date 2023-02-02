@@ -13,23 +13,109 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
+## config
+# add following to your shell rc:
+# export FASTLANE_NOTES_UPLOAD_STORE_FILE=""
+# export FASTLANE_NOTES_UPLOAD_STORE_PASSWORD=""
+# export FASTLANE_NOTES_UPLOAD_KEY_ALIAS=""
+# export FASTLANE_NOTES_UPLOAD_KEY_PASSWORD=""
+# export FASTLANE_NEXTCLOUD_GITHUB_API_TOKEN=""
+
+
 skip_docs
 
 default_platform(:android)
 
-platform :android do
-  desc "Submit a new Beta Build to Crashlytics Beta"
-  lane :beta do
-    gradle(task: "clean assembleRelease")
-    crashlytics
-  
-    # sh "your_script.sh"
-    # You can also use other beta testing services here
-  end
+BUNDLE_PATH = "app/build/outputs/bundle/playRelease/app-play-release.aab"
 
-  desc "Deploy a new version to the Google Play"
-  lane :deploy do
-    gradle(task: "clean assembleRelease")
-    upload_to_play_store
-  end
+platform :android do
+desc "Build app bundle"
+
+    lane :releasePhase1 do
+        test()
+        buildBundle()
+    end
+
+    lane :test do
+        gradle(task: "clean testPlayReleaseUnitTest testFdroidReleaseUnitTest")
+    end
+
+     lane :buildBundle do
+        gradle(
+            task: 'bundle',
+            flavor: 'play',
+            build_type: 'Release',
+            print_command: false,
+            properties: {
+                  "android.injected.signing.store.file" => ENV["FASTLANE_NOTES_UPLOAD_STORE_FILE"],
+                  "android.injected.signing.store.password" => ENV["FASTLANE_NOTES_UPLOAD_STORE_PASSWORD"],
+                  "android.injected.signing.key.alias" => ENV["FASTLANE_NOTES_UPLOAD_KEY_ALIAS"],
+                  "android.injected.signing.key.password" => ENV["FASTLANE_NOTES_UPLOAD_KEY_PASSWORD"],
+                }
+            )
+    end
+
+    lane :releasePhase2 do
+        versionInfo = getVersionInfo()
+        promptVersion(versionInfo)
+        checkArtifactsExist()
+        tag(versionInfo)
+        uploadToPlayStore()
+    end
+
+    desc "Read versions from gradle file"
+    private_lane :getVersionInfo do
+        File.open("../app/build.gradle","r") do |file|
+            text = file.read
+            versionName = text.match(/versionName "([0-9\.]*)"$/)[1]
+            versionCode = text.match(/versionCode ([0-9]*)$/)[1]
+
+            { "versionCode" => versionCode, "versionName" => versionName }
+        end
+    end
+
+    desc "Show versions and prompt for confirmation"
+    private_lane :promptVersion do |versionInfo|
+        currentBranch = git_branch()
+        print "Version code: #{versionInfo["versionCode"]}\n"
+        print "Version name: #{versionInfo["versionName"]}\n"
+        print "Current branch: #{currentBranch}\n"
+        print "Tag (to be created): #{versionInfo["versionName"]}\n"
+
+
+        answer = prompt(text: "is this okay?", boolean: true)
+
+        if !answer
+            exit
+        end
+    end
+
+    desc "Check if release artifacts exist"
+    private_lane :checkArtifactsExist do
+        if !File.exist?("../#{BUNDLE_PATH}")
+            print "Bundle not found at #{BUNDLE_PATH}\n"
+            exit
+        end
+    end
+
+
+    desc "Create release tag"
+    private_lane :tag do |versionInfo|
+        tagName = versionInfo["versionName"]
+        add_git_tag(
+          tag: tagName,
+          sign: true
+        )
+        push_git_tags(tag: tagName)
+    end
+
+    desc "Upload release artifacts to Google Play"
+    private_lane :uploadToPlayStore do
+        upload_to_play_store(
+            skip_upload_images: true,
+            skip_upload_apk: true,
+            aab: BUNDLE_PATH,
+        )
+    end
+
 end

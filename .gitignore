@@ -8,3 +8,4 @@
 /projectFilesBackup/
 # fastlane
 /vendor/bundle
+fastlane/report.xml
