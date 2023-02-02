@@ -74,7 +74,7 @@
     <string name="about_developers_title">Developers</string>
     <string name="about_developers" translatable="false">%1$s, Kristof Hamann, HeaDBanGer84, Felix Edelmann, Daniel Bailey</string>
     <string name="about_developers_stefan" translatable="false">Stefan Niedermann (%1$s)</string>
-    <string name="about_developers_founder">founder</string>
+    <string name="about_developers_original_author">original author</string>
     <string name="about_translators_title">Translators</string>
     <string name="about_translators_transifex">Nextcloud community on %1$s</string>
     <string name="about_translators_transifex_label" translatable="false">Transifex</string>
