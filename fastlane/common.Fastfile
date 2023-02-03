@@ -5,6 +5,10 @@ MAJOR_MULTIPLIER = 10000000
 MINOR_MULTIPLIER = 10000
 PATCH_MULTIPLIER = 100
 
+TYPE_ALPHA = "alpha"
+TYPE_RC = "rc"
+TYPE_FINAL = "final"
+
 platform :android do
     desc "Print version info"
     lane :printVersionInfo do
@@ -18,7 +22,7 @@ platform :android do
         print "Build: #{versionComponents["build"]}\n"
     end
 
-    # Usage: fastlane incrementVersion [type:major|minor|patch|rc|final]
+    # Usage: fastlane incrementVersion type:(major|minor|patch|rc|final)
     # For major, minor, and patch: will increment that version number by 1 and set the smaller ones to 0
     # For rc, final: will set build number to first rc/first final or increment it by 1
     desc "Increment version code and version name"
@@ -29,9 +33,9 @@ platform :android do
         versionNameGenerated = generateVersionName(newVersionComponents)
         versionCodeGenerated = generateVersionCode(newVersionComponents)
 
-        print "Version code: #{versionInfo["versionCode"]} -> #{versionCodeGenerated}\n"
-        print "Version name: #{versionInfo["versionName"]} -> #{versionNameGenerated}\n"
-        promptYesNo()
+        promptYesNo(text: "Version code: #{versionInfo["versionCode"]} -> #{versionCodeGenerated}\n" +
+                        "Version name: #{versionInfo["versionName"]} -> #{versionNameGenerated}"
+        )
         writeVersions(versionCode: versionCodeGenerated, versionName: versionNameGenerated)
     end
 
@@ -44,12 +48,30 @@ platform :android do
         minor = (versionCode / MINOR_MULTIPLIER) % 100
         major = (versionCode / MAJOR_MULTIPLIER) % 100
 
-        { "major" => major, "minor" => minor, "patch" => patch, "build" => build }
+        type = getVersionType(build: build)
+
+
+        { "major" => major, "minor" => minor, "patch" => patch, "build" => build, "type" => type }
     end
+
+    desc "Get version type from build number"
+    private_lane :getVersionType do |options|
+        build = options[:build]
+        if build < BUILD_NUMBER_RC_START
+            type = TYPE_ALPHA
+        elsif build < BUILD_NUMBER_FINAL_START
+            type = TYPE_RC
+        else
+            type = TYPE_FINAL
+        end
+        type
+    end
+
+
 
     desc "Generate versionCode from version components"
     private_lane :generateVersionCode do |versionComponents|
-        print "Generating version code from #{versionComponents}\n"
+        puts "Generating version code from #{versionComponents}"
         major = versionComponents["major"]
         minor = versionComponents["minor"]
         patch = versionComponents["patch"]
@@ -62,12 +84,13 @@ platform :android do
     private_lane :generateVersionName do |versionComponents|
         suffix = ""
         buildNumber = versionComponents["build"]
+        puts "Generating version name from #{versionComponents}\n"
         case
-          when buildNumber >= BUILD_NUMBER_RC_START && buildNumber < BUILD_NUMBER_FINAL_START
+          when versionComponents["type"] == TYPE_RC
             rcNumber = (buildNumber - BUILD_NUMBER_RC_START) + 1
-            suffix = " RC #{rcNumber}"
-          when buildNumber < BUILD_NUMBER_RC_START
-            suffix = " Alpha #{buildNumber + 1}"
+            suffix = " RC#{rcNumber}"
+          when versionComponents["type"] == TYPE_ALPHA
+            suffix = " Alpha#{buildNumber + 1}"
         end
         "#{versionComponents["major"]}.#{versionComponents["minor"]}.#{versionComponents["patch"]}#{suffix}"
     end
@@ -111,28 +134,62 @@ platform :android do
             versionComponents["patch"] = versionComponents["patch"] + 1
             versionComponents["build"] = 0
         when "rc"
-            if versionComponents["build"] < BUILD_NUMBER_RC_START || versionComponents["build"] >= BUILD_NUMBER_FINAL_START
+            if versionComponents["type"] != TYPE_RC
                 versionComponents["build"] = BUILD_NUMBER_RC_START
             else
                 versionComponents["build"] = versionComponents["build"] + 1
             end
         when "final"
-            if versionComponents["build"] < BUILD_NUMBER_FINAL_START
+            if versionComponents["type"] != TYPE_FINAL
                 versionComponents["build"] = BUILD_NUMBER_FINAL_START
             else
                 versionComponents["build"] = versionComponents["build"] + 1
             end
         else
-            print "Unknown or missing version type: #{options[:type]}\n"
-            exit
+            UI.user_error!("Unknown or missing version increment type #{options[:type]}. Usage: incrementVersion type:(major|minor|patch|rc|final)")
         end
+        versionComponents["type"] = getVersionType(build: versionComponents["build"])
         versionComponents
     end
 
-    private_lane :promptYesNo do
-        answer = prompt(text: "is this okay?", boolean: true)
-        if !answer
-            exit
+    desc "Get tag name from version components"
+    private_lane :getTagName do |versionComponents|
+        if versionComponents["type"] == TYPE_FINAL
+            tag = "#{versionComponents["major"]}.#{versionComponents["minor"]}.#{versionComponents["patch"]}"
+        elsif versionComponents["type"] == TYPE_RC
+            rcNumber = (versionComponents["build"] - BUILD_NUMBER_RC_START) + 1
+            rcNumberPadded = "%02d" % rcNumber
+            tag = "rc-#{versionComponents["major"]}.#{versionComponents["minor"]}.#{versionComponents["patch"]}-#{rcNumberPadded}"
+        else
+            UI.user_error!("Build number cannot be tagged: #{versionComponents["build"]}")
         end
+    end
+
+    desc "Check if version is releasable"
+    private_lane :checkReleasable do |versionComponents|
+        if versionComponents["type"] != TYPE_FINAL && versionComponents["type"] != TYPE_RC
+            UI.user_error!("Version is not releasable: #{versionComponents["type"]}")
+        end
+    end
+
+    desc "Get play store track from version type"
+    private_lane :getPlayStoreTrack do |versionComponents|
+        case versionComponents["type"]
+        when TYPE_RC
+            track = "beta"
+        when TYPE_FINAL
+            track = "production"
+        else
+            UI.user_error!("Version is not releasable: #{versionComponents["type"]}")
+        end
+    end
+
+end
+
+private_lane :promptYesNo do |options|
+    puts "\n" + options[:text]
+    answer = prompt(text: "is this okay?", boolean: true)
+    if !answer
+        UI.user_error!("Aborting")
     end
 end

@@ -28,21 +28,37 @@ default_platform(:android)
 
 BUNDLE_PATH = "app/build/outputs/bundle/playRelease/app-play-release.aab"
 
-import("./utils.Fastfile")
+import("./common.Fastfile")
 
 platform :android do
 desc "Build app bundle"
 
+    desc "Run tests and build app"
     lane :releasePhase1 do
         test()
         buildBundle()
     end
 
+    desc "Release previously built app to Google Play and create tag"
+    lane :releasePhase2 do
+        versionInfo = getVersionInfo()
+        versionComponents = parseVersionCode(versionInfo)
+        checkReleasable(versionComponents)
+        storeTrack = getPlayStoreTrack(versionComponents)
+        tagName = getTagName(versionComponents)
+        preReleaseChecks(versionInfo: versionInfo, tagName: tagName, type: versionComponents["type"], track: storeTrack)
+        checkArtifactsExist()
+        tag(tagName)
+        uploadToPlayStore()
+    end
+
+    desc "Run tests"
     lane :test do
         gradle(task: "clean testPlayReleaseUnitTest testFdroidReleaseUnitTest")
     end
 
-     lane :buildBundle do
+    desc "Build app bundle"
+    lane :buildBundle do
         gradle(
             task: 'bundle',
             flavor: 'play',
@@ -57,29 +73,24 @@ desc "Build app bundle"
             )
     end
 
-    lane :releasePhase2 do
-        versionInfo = getVersionInfo()
-        promptVersion(versionInfo)
-        checkArtifactsExist()
-        tag(versionInfo)
-        uploadToPlayStore()
-    end
-
     desc "Show versions and prompt for confirmation"
-    private_lane :promptVersion do |versionInfo|
+    private_lane :preReleaseChecks do |options|
+        versionInfo = options[:versionInfo]
+        tagName = options[:tagName]
         currentBranch = git_branch()
-        print "Version code: #{versionInfo["versionCode"]}\n"
-        print "Version name: #{versionInfo["versionName"]}\n"
-        print "Current branch: #{currentBranch}\n"
-        print "Tag (to be created): #{versionInfo["versionName"]}\n"
-        promptYesNo()
+        text = "Version code: #{versionInfo["versionCode"]}\n" +
+                "Version name: #{versionInfo["versionName"]}\n" +
+                "Current branch: #{currentBranch}\n" +
+                "Version type: #{options[:type]}\n" +
+                "Tag: #{tagName}\n" +
+                "Track: #{options[:track]}"
+        promptYesNo(text: text)
     end
 
     desc "Check if release artifacts exist"
     private_lane :checkArtifactsExist do
         if !File.exist?("../#{BUNDLE_PATH}")
-            print "Bundle not found at #{BUNDLE_PATH}\n"
-            exit
+            UI.user_error!("Bundle not found at #{BUNDLE_PATH}")
         end
     end
 
@@ -95,11 +106,12 @@ desc "Build app bundle"
     end
 
     desc "Upload release artifacts to Google Play"
-    private_lane :uploadToPlayStore do
+    private_lane :uploadToPlayStore do |options|
         upload_to_play_store(
             skip_upload_images: true,
             skip_upload_apk: true,
-            aab: BUNDLE_PATH,
+            track: options[:track],
+            aab: BUNDLE_PATH
         )
     end
 
