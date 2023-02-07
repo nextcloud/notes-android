@@ -1,19 +1,19 @@
 # Frequently asked questions
 
-- [Why aren't there any buttons to apply formatting?](https://github.com/nextcloud/notes-android/blob/master/FAQ.md#why-arent-there-any-buttons-to-apply-formatting)
-- [I have experienced an error](https://github.com/nextcloud/notes-android/blob/master/FAQ.md#i-have-experienced-an-error)
-  - [`NextcloudApiNotRespondingException`](https://github.com/nextcloud/notes-android/blob/master/FAQ.md#nextcloudapinotrespondingexception)
-  - [`UnknownErrorException: Read timed out`](https://github.com/nextcloud/notes-android/blob/master/FAQ.md#unknownerrorexception-read-timed-out)
-  - [`NextcloudHttpRequestFailedException`](https://github.com/nextcloud/notes-android/blob/master/FAQ.md#nextcloudhttprequestfailedexception)
-  - [`IllegalStateException: Duplicate key`](https://github.com/nextcloud/notes-android/blob/master/FAQ.md#illegalstateexception-duplicate-key)
-  - [`NextcloudFilesAppAccountNotFoundException`](https://github.com/nextcloud/notes-android/blob/master/FAQ.md#nextcloudfilesappaccountnotfoundexception)
-  - [`TokenMismatchException`](https://github.com/nextcloud/notes-android/blob/master/FAQ.md#tokenmismatchexception)
-  - [Workarounds](https://github.com/nextcloud/notes-android/blob/master/FAQ.md#workarounds)
-- [How to share notes?](https://github.com/nextcloud/notes-android/blob/master/FAQ.md#how-to-share-notes)
-- [Why don't you make an option for…?](https://github.com/nextcloud/notes-android/blob/master/FAQ.md#why-dont-you-make-an-option-for)
-- [Why is there no support for pens?](https://github.com/nextcloud/notes-android/blob/master/FAQ.md#why-is-there-no-support-for-pens)
-- [Why has my bug report been closed?](https://github.com/nextcloud/notes-android/blob/master/FAQ.md#why-has-my-bug-report-been-closed)
-- [How can i activate the dark mode for widgets?](https://github.com/nextcloud/notes-android/blob/master/FAQ.md#how-can-i-activate-the-dark-mode-for-widgets)
+- [Why aren't there any buttons to apply formatting?](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#why-arent-there-any-buttons-to-apply-formatting)
+- [I have experienced an error](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#i-have-experienced-an-error)
+  - [`NextcloudApiNotRespondingException`](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#nextcloudapinotrespondingexception)
+  - [`UnknownErrorException: Read timed out`](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#unknownerrorexception-read-timed-out)
+  - [`NextcloudHttpRequestFailedException`](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#nextcloudhttprequestfailedexception)
+  - [`IllegalStateException: Duplicate key`](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#illegalstateexception-duplicate-key)
+  - [`NextcloudFilesAppAccountNotFoundException`](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#nextcloudfilesappaccountnotfoundexception)
+  - [`TokenMismatchException`](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#tokenmismatchexception)
+  - [Workarounds](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#workarounds)
+- [How to share notes?](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#how-to-share-notes)
+- [Why don't you make an option for…?](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#why-dont-you-make-an-option-for)
+- [Why is there no support for pens?](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#why-is-there-no-support-for-pens)
+- [Why has my bug report been closed?](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#why-has-my-bug-report-been-closed)
+- [How can i activate the dark mode for widgets?](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#how-can-i-activate-the-dark-mode-for-widgets)
 
 ## Why aren't there any buttons to apply formatting
 
