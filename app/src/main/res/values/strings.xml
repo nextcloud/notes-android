@@ -61,7 +61,7 @@
 
     <string name="url_source" translatable="false">https://github.com/nextcloud/notes-android</string>
     <string name="url_issues" translatable="false">https://github.com/nextcloud/notes-android/issues/new/choose</string>
-    <string name="url_license" translatable="false">https://github.com/nextcloud/notes-android/blob/master/LICENSE</string>
+    <string name="url_license" translatable="false">https://github.com/nextcloud/notes-android/blob/main/LICENSE</string>
     <string name="url_translations" translatable="false">https://www.transifex.com/nextcloud/nextcloud/</string>
     <string name="url_niedermann_it" translatable="false">https://www.niedermann.it/</string>
     <string name="url_about_icon_author" translatable="false">https://github.com/nextcloud/notes/blob/76d15214f80f2bf7ea08427bff73ad145128f090/img/notes.svg</string>
