@@ -59,7 +59,7 @@ If you are using an older version, you can as a workaround for the first import 
 
 #### `HTTP status-code: 301`
 
-This issue can happen in case of a complex inconsistent state between the Notes Android app, the Single Sign On library, the Nextcloud Android app and your Nextcloud instance. Please try to remove your account from *both*, Notes Android *and* Nextcloud Android and readd it again [as described in the `workarounds` section](https://github.com/nextcloud/notes-android/blob/master/FAQ.md#workarounds). If the issue persists, please report especially any changes on your server side environment: Did you change your domain or IP address of your Nextcloud server? Did you change something about your user account or en- / disabled multi factor authentication (2FA / MFA)? Did you remove your account (only) from the Nextcloud Android app?
+This issue can happen in case of a complex inconsistent state between the Notes Android app, the Single Sign On library, the Nextcloud Android app and your Nextcloud instance. Please try to remove your account from *both*, Notes Android *and* Nextcloud Android and readd it again [as described in the `workarounds` section](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#workarounds). If the issue persists, please report especially any changes on your server side environment: Did you change your domain or IP address of your Nextcloud server? Did you change something about your user account or en- / disabled multi factor authentication (2FA / MFA)? Did you remove your account (only) from the Nextcloud Android app?
 
 #### `HTTP status-code: 302`
 
@@ -72,7 +72,7 @@ Only the [`Notes`](https://apps.nextcloud.com/apps/notes) app is supported by th
 
 ### `IllegalStateException: Duplicate key`
 
-This is issue was caused by a bug which was present in the Notes Android app between `3.4.0` and `3.4.10`. It has been fixed in `3.4.11`, though it created a corrupt database state which is not recoverable automatically without data loss. It is therefore required to [clear the storage of the Notes Android app](https://github.com/nextcloud/notes-android/blob/master/FAQ.md#workarounds) and import your account again from scratch. Make sure to backup unsynchronized changes before doing this.
+This is issue was caused by a bug which was present in the Notes Android app between `3.4.0` and `3.4.10`. It has been fixed in `3.4.11`, though it created a corrupt database state which is not recoverable automatically without data loss. It is therefore required to [clear the storage of the Notes Android app](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#workarounds) and import your account again from scratch. Make sure to backup unsynchronized changes before doing this.
 
 ### `NextcloudFilesAppAccountNotFoundException`
 
@@ -81,7 +81,7 @@ As a workaround you can remove the account (or clear the storage of the app as d
 
 ### `TokenMismatchException`
 
-The reason of this error is not yet clear. It often seems to be connected to changes of the authentication (for example enabling 2FA after some time). Please clear the storage of both, the Notes and the Nextcloud Android apps as described in the [workarounds](https://github.com/nextcloud/notes-android/blob/master/FAQ.md#wrokarounds) section.
+The reason of this error is not yet clear. It often seems to be connected to changes of the authentication (for example enabling 2FA after some time). Please clear the storage of both, the Notes and the Nextcloud Android apps as described in the [workarounds](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#wrokarounds) section.
 
 ### Workarounds
 

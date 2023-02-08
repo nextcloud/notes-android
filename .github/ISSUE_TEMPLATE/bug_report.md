@@ -8,7 +8,7 @@ labels: bug
 Guidelines for submitting issues:
 
 * Bug reports which do not fill the complete issue template will be closed.
-* Please have a look at our [FAQ](https://github.com/nextcloud/notes-android/blob/master/FAQ.md)
+* Please have a look at our [FAQ](https://github.com/nextcloud/notes-android/blob/main/FAQ.md)
 * Please search the existing issues first, it's likely that your issue was already reported or even fixed.
 * This repository is *only* for issues within the Nextcloud Notes Android app
 -->
