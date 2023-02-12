@@ -1,6 +1,6 @@
 package it.niedermann.owncloud.notes.branding;
 
-import static it.niedermann.owncloud.notes.branding.BrandingUtil.readBrandColors;
+import static it.niedermann.owncloud.notes.branding.BrandingUtil.readBrandMainColorLiveData;
 
 import android.util.TypedValue;
 import android.view.Menu;
@@ -23,7 +23,7 @@ public abstract class BrandedActivity extends AppCompatActivity implements Brand
         getTheme().resolveAttribute(R.attr.colorAccent, typedValue, true);
         colorAccent = typedValue.data;
 
-        readBrandColors(this).observe(this, (pair) -> applyBrand(pair.first, pair.second));
+        readBrandMainColorLiveData(this).observe(this, this::applyBrand);
     }
 
     @Override

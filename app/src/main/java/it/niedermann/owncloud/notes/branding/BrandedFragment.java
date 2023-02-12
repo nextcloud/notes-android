@@ -28,9 +28,8 @@ public abstract class BrandedFragment extends Fragment implements Branded {
         context.getTheme().resolveAttribute(R.attr.colorPrimary, typedValue, true);
         colorPrimary = typedValue.data;
 
-        @ColorInt final int mainColor = BrandingUtil.readBrandMainColor(context);
-        @ColorInt final int textColor = BrandingUtil.readBrandTextColor(context);
-        applyBrand(mainColor, textColor);
+        @ColorInt final int color = BrandingUtil.readBrandMainColor(context);
+        applyBrand(color);
     }
 
     @Override

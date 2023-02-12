@@ -33,7 +33,6 @@ import it.niedermann.owncloud.notes.persistence.ApiProvider;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.SyncWorker;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
-import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
 
 public class ImportAccountActivity extends AppCompatActivity {
@@ -107,7 +106,7 @@ public class ImportAccountActivity extends AppCompatActivity {
                             public void onSuccess(Account account) {
                                 runOnUiThread(() -> {
                                     Log.i(TAG, capabilities.toString());
-                                    BrandingUtil.saveBrandColors(ImportAccountActivity.this, capabilities.getColor(), capabilities.getTextColor());
+                                    BrandingUtil.saveBrandColor(ImportAccountActivity.this, capabilities.getColor());
                                     setResult(RESULT_OK);
                                     finish();
                                 });

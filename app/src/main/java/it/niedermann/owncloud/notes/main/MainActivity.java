@@ -24,6 +24,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -63,6 +64,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
+import it.niedermann.android.util.ColorUtil;
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerListener;
@@ -590,22 +592,22 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     }
 
     @Override
-    public void applyBrand(int mainColor, int textColor) {
-        final var util = BrandingUtil.of(mainColor, this);
+    public void applyBrand(int color) {
+        final var util = BrandingUtil.of(color, this);
         util.material.themeFAB(activityBinding.fabCreate);
         util.platform.colorCircularProgressBar(activityBinding.progressCircular);
         util.notes.applyBrandToPrimaryToolbar(activityBinding.appBar, activityBinding.searchToolbar, colorAccent);
 
-        binding.headerView.setBackgroundColor(mainColor);
-        binding.appName.setTextColor(textColor);
+        binding.headerView.setBackgroundColor(color);
+        @ColorInt final int headerTextColor = ColorUtil.INSTANCE.getForegroundColorForBackgroundColor(color);
+        binding.appName.setTextColor(headerTextColor);
+        DrawableCompat.setTint(binding.logo.getDrawable(), headerTextColor);
 
         // TODO We assume, that the background of the spinner is always white
-        activityBinding.swiperefreshlayout.setColorSchemeColors(contrastRatioIsSufficient(Color.WHITE, mainColor) ? mainColor : Color.BLACK);
-        binding.appName.setTextColor(textColor);
-        DrawableCompat.setTint(binding.logo.getDrawable(), textColor);
+        activityBinding.swiperefreshlayout.setColorSchemeColors(contrastRatioIsSufficient(Color.WHITE, color) ? color : Color.BLACK);
 
-        adapter.applyBrand(mainColor, textColor);
-        adapterCategories.applyBrand(mainColor, textColor);
+        adapter.applyBrand(color);
+        adapterCategories.applyBrand(color);
         invalidateOptionsMenu();
     }
 

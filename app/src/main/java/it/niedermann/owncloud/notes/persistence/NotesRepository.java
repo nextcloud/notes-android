@@ -248,8 +248,8 @@ public class NotesRepository {
         return db.getAccountDao().countAccounts$();
     }
 
-    public void updateBrand(long id, @ColorInt Integer color, @ColorInt Integer textColor) {
-        db.getAccountDao().updateBrand(id, color, textColor);
+    public void updateBrand(long id, @ColorInt Integer color) {
+        db.getAccountDao().updateBrand(id, color);
     }
 
     public void updateETag(long id, String eTag) {

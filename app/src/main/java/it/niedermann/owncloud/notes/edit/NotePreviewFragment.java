@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
@@ -138,7 +139,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     }
 
     @Override
-    protected void colorWithText(@NonNull String newText, @Nullable Integer current, int mainColor, int textColor) {
+    protected void colorWithText(@NonNull String newText, @Nullable Integer current, @ColorInt int color) {
         if (binding != null && isAttachedToWindow(binding.singleNoteContent)) {
             binding.singleNoteContent.clearFocus();
             binding.singleNoteContent.setSearchText(newText, current);
@@ -177,12 +178,12 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     }
 
     @Override
-    public void applyBrand(int mainColor, int textColor) {
-        super.applyBrand(mainColor, textColor);
+    public void applyBrand(int color) {
+        super.applyBrand(color);
 
-        final var util = BrandingUtil.of(mainColor, requireContext());
-        binding.singleNoteContent.setSearchColor(mainColor);
-        binding.singleNoteContent.setHighlightColor(util.notes.getTextHighlightBackgroundColor(requireContext(), mainColor, colorPrimary, colorAccent));
+        final var util = BrandingUtil.of(color, requireContext());
+        binding.singleNoteContent.setSearchColor(color);
+        binding.singleNoteContent.setHighlightColor(util.notes.getTextHighlightBackgroundColor(requireContext(), color, colorPrimary, colorAccent));
     }
 
     public static BaseNoteFragment newInstance(long accountId, long noteId) {

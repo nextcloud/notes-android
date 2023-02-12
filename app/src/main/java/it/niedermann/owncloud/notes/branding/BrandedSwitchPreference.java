@@ -17,9 +17,6 @@ public class BrandedSwitchPreference extends SwitchPreference implements Branded
     @ColorInt
     private Integer mainColor = null;
 
-    @ColorInt
-    private Integer textColor = null;
-
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     @Nullable
     private Switch switchView;
@@ -46,16 +43,15 @@ public class BrandedSwitchPreference extends SwitchPreference implements Branded
 
         if (holder.itemView instanceof ViewGroup) {
             switchView = findSwitchWidget(holder.itemView);
-            if (mainColor != null && textColor != null) {
+            if (mainColor != null) {
                 applyBrand();
             }
         }
     }
 
     @Override
-    public void applyBrand(@ColorInt int mainColor, @ColorInt int textColor) {
-        this.mainColor = mainColor;
-        this.textColor = textColor;
+    public void applyBrand(@ColorInt int color) {
+        this.mainColor = color;
         // onBindViewHolder is called after applyBrand, therefore we have to store the given values and apply them later.
         applyBrand();
     }

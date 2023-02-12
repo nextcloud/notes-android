@@ -24,7 +24,6 @@ public class MenuViewHolder extends RecyclerView.ViewHolder {
     public void bind(@NonNull MenuItem menuItem, @NonNull Consumer<MenuItem> onClick) {
         @NonNull Context context = itemView.getContext();
         binding.navigationItemLabel.setText(context.getString(menuItem.getLabelResource()));
-        binding.navigationItemLabel.setTextColor(binding.getRoot().getResources().getColor(R.color.fg_default));
         binding.navigationItemIcon.setImageDrawable(ContextCompat.getDrawable(context, menuItem.getDrawableResource()));
         binding.navigationItemCount.setVisibility(GONE);
         binding.getRoot().setOnClickListener((v) -> onClick.accept(menuItem));

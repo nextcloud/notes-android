@@ -242,7 +242,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     }
 
     @Override
-    protected void colorWithText(@NonNull String newText, @Nullable Integer current, int mainColor, int textColor) {
+    protected void colorWithText(@NonNull String newText, @Nullable Integer current, int color) {
         if (binding != null && isAttachedToWindow(binding.editContent)) {
             binding.editContent.clearFocus();
             binding.editContent.setSearchText(newText, current);
@@ -250,12 +250,12 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     }
 
     @Override
-    public void applyBrand(int mainColor, int textColor) {
-        super.applyBrand(mainColor, textColor);
+    public void applyBrand(int color) {
+        super.applyBrand(color);
 
-        final var util = BrandingUtil.of(mainColor, requireContext());
-        binding.editContent.setSearchColor(mainColor);
-        binding.editContent.setHighlightColor(util.notes.getTextHighlightBackgroundColor(requireContext(), mainColor, colorPrimary, colorAccent));
+        final var util = BrandingUtil.of(color, requireContext());
+        binding.editContent.setSearchColor(color);
+        binding.editContent.setHighlightColor(util.notes.getTextHighlightBackgroundColor(requireContext(), color, colorPrimary, colorAccent));
     }
 
     public static BaseNoteFragment newInstance(long accountId, long noteId) {

@@ -314,8 +314,8 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     }
 
     @Override
-    public void applyBrand(int mainColor, int textColor) {
-        final var util = BrandingUtil.of(mainColor, this);
+    public void applyBrand(int color) {
+        final var util = BrandingUtil.of(color, this);
         util.notes.applyBrandToPrimaryToolbar(binding.appBar, binding.toolbar, colorAccent);
     }
 }

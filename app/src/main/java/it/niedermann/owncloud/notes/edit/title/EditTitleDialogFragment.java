@@ -86,8 +86,8 @@ public class EditTitleDialogFragment extends BrandedDialogFragment {
     }
 
     @Override
-    public void applyBrand(int mainColor, int textColor) {
-        final var util = BrandingUtil.of(mainColor, requireContext());
+    public void applyBrand(int color) {
+        final var util = BrandingUtil.of(color, requireContext());
         util.material.colorTextInputLayout(binding.inputWrapper);
     }
 

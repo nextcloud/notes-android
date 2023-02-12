@@ -24,7 +24,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationViewHolder
     @NonNull
     private final Context context;
     @ColorInt
-    private int mainColor;
+    private int color;
     @DrawableRes
     public static final int ICON_FOLDER = R.drawable.ic_folder_grey600_24dp;
     @DrawableRes
@@ -38,9 +38,9 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationViewHolder
     @DrawableRes
     public static final int ICON_SUB_MULTIPLE = R.drawable.ic_create_new_folder_grey600_18dp;
 
-    public void applyBrand(int mainColor, int textColor) {
-        final var util = BrandingUtil.of(mainColor, context);
-        this.mainColor = util.notes.getOnPrimaryContainer(context);
+    public void applyBrand(int color) {
+        final var util = BrandingUtil.of(color, context);
+        this.color = util.notes.getOnPrimaryContainer(context);
         notifyDataSetChanged();
     }
 
@@ -53,7 +53,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationViewHolder
     public NavigationAdapter(@NonNull Context context, @NonNull NavigationClickListener navigationClickListener) {
         this.context = context;
         final var util = BrandingUtil.of(BrandingUtil.readBrandMainColor(context), context);
-        this.mainColor = util.notes.getOnPrimaryContainer(context);
+        this.color = util.notes.getOnPrimaryContainer(context);
         this.navigationClickListener = navigationClickListener;
     }
 
@@ -65,7 +65,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull NavigationViewHolder holder, int position) {
-        holder.bind(items.get(position), mainColor, selectedItem);
+        holder.bind(items.get(position), color, selectedItem);
     }
 
     @Override

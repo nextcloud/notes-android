@@ -77,7 +77,6 @@ public class Account implements Serializable {
         capabilitiesETag = capabilities.getETag();
         apiVersion = capabilities.getApiVersion();
         setColor(capabilities.getColor());
-        setTextColor(capabilities.getTextColor());
     }
 
     public long getId() {
