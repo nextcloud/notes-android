@@ -1,18 +1,14 @@
 package it.niedermann.owncloud.notes.branding;
 
-import android.content.Context;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import it.niedermann.owncloud.notes.R;
-
-import static it.niedermann.owncloud.notes.branding.BrandingUtil.tintMenuIcon;
 
 public abstract class BrandedFragment extends Fragment implements Branded {
 
@@ -40,8 +36,12 @@ public abstract class BrandedFragment extends Fragment implements Branded {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+        final var utils = BrandingUtil.of(colorAccent, requireContext());
+
         for (int i = 0; i < menu.size(); i++) {
-            tintMenuIcon(menu.getItem(i), colorAccent);
+            if (menu.getItem(i).getIcon() != null) {
+                utils.platform.colorToolbarMenuIcon(requireContext(), menu.getItem(i));
+            }
         }
     }
 }

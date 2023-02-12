@@ -1,7 +1,6 @@
 package it.niedermann.owncloud.notes.edit;
 
 import static androidx.core.view.ViewCompat.isAttachedToWindow;
-import static it.niedermann.owncloud.notes.branding.BrandingUtil.getTextHighlightBackgroundColor;
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.getFontSizeFromPreferences;
 
 import android.content.Context;
@@ -29,6 +28,7 @@ import androidx.preference.PreferenceManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.FragmentNoteEditBinding;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
@@ -252,8 +252,10 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     @Override
     public void applyBrand(int mainColor, int textColor) {
         super.applyBrand(mainColor, textColor);
+
+        final var util = BrandingUtil.of(mainColor, requireContext());
         binding.editContent.setSearchColor(mainColor);
-        binding.editContent.setHighlightColor(getTextHighlightBackgroundColor(requireContext(), mainColor, colorPrimary, colorAccent));
+        binding.editContent.setHighlightColor(util.notes.getTextHighlightBackgroundColor(requireContext(), mainColor, colorPrimary, colorAccent));
     }
 
     public static BaseNoteFragment newInstance(long accountId, long noteId) {

@@ -1,15 +1,12 @@
 package it.niedermann.owncloud.notes.edit;
 
 import static java.lang.Boolean.TRUE;
-import static it.niedermann.owncloud.notes.NotesApplication.isDarkThemeActive;
-import static it.niedermann.owncloud.notes.branding.BrandingUtil.tintMenuIcon;
 import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
 import static it.niedermann.owncloud.notes.shared.util.WidgetUtil.pendingIntentFlagCompat;
 
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,10 +17,8 @@ import android.view.View;
 import android.widget.ScrollView;
 
 import androidx.annotation.CallSuper;
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.core.content.pm.ShortcutInfoCompat;
 import androidx.core.content.pm.ShortcutManagerCompat;
 import androidx.core.graphics.drawable.IconCompat;
@@ -37,10 +32,10 @@ import java.util.Calendar;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import it.niedermann.android.util.ColorUtil;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandedFragment;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
 import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment.CategoryDialogListener;
 import it.niedermann.owncloud.notes.edit.title.EditTitleDialogFragment;
@@ -53,7 +48,6 @@ import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.util.ApiVersionUtil;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
-import it.niedermann.owncloud.notes.shared.util.NotesColorUtil;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
 public abstract class BaseNoteFragment extends BrandedFragment implements CategoryDialogListener, EditTitleListener {
@@ -203,7 +197,9 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     private void prepareFavoriteOption(MenuItem item) {
         item.setIcon(note.getFavorite() ? R.drawable.ic_star_white_24dp : R.drawable.ic_star_border_white_24dp);
         item.setChecked(note.getFavorite());
-        tintMenuIcon(item, colorAccent);
+
+        final var utils = BrandingUtil.of(colorAccent, requireContext());
+        utils.platform.colorToolbarMenuIcon(requireContext(), item);
     }
 
     /**

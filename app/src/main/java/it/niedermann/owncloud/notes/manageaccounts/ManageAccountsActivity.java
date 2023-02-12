@@ -1,6 +1,5 @@
 package it.niedermann.owncloud.notes.manageaccounts;
 
-import static it.niedermann.owncloud.notes.branding.BrandingUtil.applyBrandToEditTextInputLayout;
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.readBrandMainColorLiveData;
 import static it.niedermann.owncloud.notes.shared.util.ApiVersionUtil.getPreferredApiVersion;
 
@@ -27,6 +26,7 @@ import java.util.function.Function;
 
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.branding.DeleteAlertDialogBuilder;
 import it.niedermann.owncloud.notes.databinding.ActivityManageAccountsBinding;
 import it.niedermann.owncloud.notes.databinding.DialogEditSettingBinding;
@@ -136,8 +136,9 @@ public class ManageAccountsActivity extends LockedActivity implements IManageAcc
         final var mainColor$ = readBrandMainColorLiveData(this);
         mainColor$.observe(this, color -> {
             mainColor$.removeObservers(this);
-            applyBrandToEditTextInputLayout(color, binding.inputWrapper);
-            binding.progress.setIndicatorColor(color);
+            final var util = BrandingUtil.of(color, this);
+            util.material.colorTextInputLayout(binding.inputWrapper);
+            util.material.colorProgressBar(binding.progress);
         });
 
         binding.inputWrapper.setHint(title);
@@ -208,6 +209,7 @@ public class ManageAccountsActivity extends LockedActivity implements IManageAcc
 
     @Override
     public void applyBrand(int mainColor, int textColor) {
-        applyBrandToPrimaryToolbar(binding.appBar, binding.toolbar);
+        final var util = BrandingUtil.of(mainColor, this);
+        util.notes.applyBrandToPrimaryToolbar(binding.appBar, binding.toolbar, colorAccent);
     }
 }

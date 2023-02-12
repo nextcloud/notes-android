@@ -6,7 +6,6 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static it.niedermann.owncloud.notes.NotesApplication.isDarkThemeActive;
 import static it.niedermann.owncloud.notes.NotesApplication.isGridViewEnabled;
-import static it.niedermann.owncloud.notes.branding.BrandingUtil.getSecondaryForegroundColorDependingOnTheme;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.DEFAULT_CATEGORY;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.RECENT;
@@ -19,7 +18,6 @@ import android.animation.AnimatorInflater;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -71,6 +69,7 @@ import it.niedermann.owncloud.notes.accountpicker.AccountPickerListener;
 import it.niedermann.owncloud.notes.accountswitcher.AccountSwitcherDialog;
 import it.niedermann.owncloud.notes.accountswitcher.AccountSwitcherListener;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ActivityNotesListViewBinding;
 import it.niedermann.owncloud.notes.databinding.DrawerLayoutBinding;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
@@ -592,12 +591,13 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     @Override
     public void applyBrand(int mainColor, int textColor) {
-        applyBrandToPrimaryToolbar(activityBinding.appBar, activityBinding.searchToolbar);
-        applyBrandToFAB(mainColor, textColor, activityBinding.fabCreate);
+        final var util = BrandingUtil.of(mainColor, this);
+        util.material.themeFAB(activityBinding.fabCreate);
+        util.platform.colorCircularProgressBar(activityBinding.progressCircular);
+        util.notes.applyBrandToPrimaryToolbar(activityBinding.appBar, activityBinding.searchToolbar, colorAccent);
 
         binding.headerView.setBackgroundColor(mainColor);
         binding.appName.setTextColor(textColor);
-        activityBinding.progressCircular.getIndeterminateDrawable().setColorFilter(getSecondaryForegroundColorDependingOnTheme(this, mainColor), PorterDuff.Mode.SRC_IN);
 
         // TODO We assume, that the background of the spinner is always white
         activityBinding.swiperefreshlayout.setColorSchemeColors(contrastRatioIsSufficient(Color.WHITE, mainColor) ? mainColor : Color.BLACK);

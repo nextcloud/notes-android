@@ -1,7 +1,5 @@
 package it.niedermann.owncloud.notes.accountswitcher;
 
-import static it.niedermann.owncloud.notes.branding.BrandingUtil.applyBrandToLayerDrawable;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +16,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.DialogAccountSwitcherBinding;
 import it.niedermann.owncloud.notes.manageaccounts.ManageAccountsActivity;
 import it.niedermann.owncloud.notes.persistence.NotesRepository;
@@ -118,6 +117,7 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
 
     @Override
     public void applyBrand(int mainColor, int textColor) {
-        applyBrandToLayerDrawable((LayerDrawable) binding.check.getDrawable(), R.id.area, mainColor);
+        final var util = BrandingUtil.of(mainColor, requireContext());
+        util.notes.colorLayerDrawable((LayerDrawable) binding.check.getDrawable(), R.id.area, mainColor);
     }
 }

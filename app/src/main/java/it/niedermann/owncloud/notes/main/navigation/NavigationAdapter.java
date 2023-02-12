@@ -1,15 +1,15 @@
 package it.niedermann.owncloud.notes.main.navigation;
 
+import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.UNCATEGORIZED;
+
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -18,8 +18,6 @@ import java.util.List;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.main.MainActivity;
-
-import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.UNCATEGORIZED;
 
 public class NavigationAdapter extends RecyclerView.Adapter<NavigationViewHolder> {
 
@@ -41,7 +39,8 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationViewHolder
     public static final int ICON_SUB_MULTIPLE = R.drawable.ic_create_new_folder_grey600_18dp;
 
     public void applyBrand(int mainColor, int textColor) {
-        this.mainColor = BrandingUtil.getSecondaryForegroundColorDependingOnTheme(context, mainColor);
+        final var util = BrandingUtil.of(mainColor, context);
+        this.mainColor = util.notes.getOnPrimaryContainer(context);
         notifyDataSetChanged();
     }
 
@@ -53,7 +52,8 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationViewHolder
 
     public NavigationAdapter(@NonNull Context context, @NonNull NavigationClickListener navigationClickListener) {
         this.context = context;
-        this.mainColor = BrandingUtil.getSecondaryForegroundColorDependingOnTheme(context, BrandingUtil.readBrandMainColor(context));
+        final var util = BrandingUtil.of(BrandingUtil.readBrandMainColor(context), context);
+        this.mainColor = util.notes.getOnPrimaryContainer(context);
         this.navigationClickListener = navigationClickListener;
     }
 

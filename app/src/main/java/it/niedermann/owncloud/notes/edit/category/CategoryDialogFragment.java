@@ -49,7 +49,8 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
 
     @Override
     public void applyBrand(int mainColor, int textColor) {
-        BrandingUtil.applyBrandToEditTextInputLayout(mainColor, binding.inputWrapper);
+        final var util = BrandingUtil.of(mainColor, requireContext());
+        util.material.colorTextInputLayout(binding.inputWrapper);
     }
 
     /**

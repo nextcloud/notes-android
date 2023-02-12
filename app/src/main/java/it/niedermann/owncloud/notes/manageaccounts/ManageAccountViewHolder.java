@@ -2,7 +2,6 @@ package it.niedermann.owncloud.notes.manageaccounts;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-import static it.niedermann.owncloud.notes.branding.BrandingUtil.applyBrandToLayerDrawable;
 import static it.niedermann.owncloud.notes.shared.util.ApiVersionUtil.getPreferredApiVersion;
 
 import android.graphics.drawable.LayerDrawable;
@@ -18,6 +17,7 @@ import com.bumptech.glide.request.RequestOptions;
 
 import it.niedermann.nextcloud.sso.glide.SingleSignOnUrl;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ItemAccountChooseBinding;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 
@@ -75,7 +75,8 @@ public class ManageAccountViewHolder extends RecyclerView.ViewHolder {
         });
         if (isCurrentAccount) {
             binding.currentAccountIndicator.setVisibility(VISIBLE);
-            applyBrandToLayerDrawable((LayerDrawable) binding.currentAccountIndicator.getDrawable(), R.id.area, localAccount.getColor());
+            final var util = BrandingUtil.of(localAccount.getColor(), itemView.getContext());
+            util.notes.colorLayerDrawable((LayerDrawable) binding.currentAccountIndicator.getDrawable(), R.id.area, localAccount.getColor());
         } else {
             binding.currentAccountIndicator.setVisibility(GONE);
         }

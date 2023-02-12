@@ -1,5 +1,9 @@
 package it.niedermann.owncloud.notes.main.items;
 
+import static android.view.View.INVISIBLE;
+import static android.view.View.VISIBLE;
+import static it.niedermann.owncloud.notes.shared.util.NotesColorUtil.contrastRatioIsSufficient;
+
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -34,10 +38,6 @@ import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 
-import static android.view.View.INVISIBLE;
-import static android.view.View.VISIBLE;
-import static it.niedermann.owncloud.notes.shared.util.NotesColorUtil.contrastRatioIsSufficient;
-
 public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
     @NonNull
     private final NoteClickListener noteClickListener;
@@ -56,7 +56,8 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
 
     protected void bindStatus(AppCompatImageView noteStatus, DBStatus status, int mainColor) {
         noteStatus.setVisibility(DBStatus.VOID.equals(status) ? INVISIBLE : VISIBLE);
-        DrawableCompat.setTint(noteStatus.getDrawable(), BrandingUtil.getSecondaryForegroundColorDependingOnTheme(noteStatus.getContext(), mainColor));
+        final var context = noteStatus.getContext();
+        DrawableCompat.setTint(noteStatus.getDrawable(), BrandingUtil.of(mainColor, context).notes.getOnPrimaryContainer(context));
     }
 
     protected void bindCategory(@NonNull Context context, @NonNull TextView noteCategory, boolean showCategory, @NonNull String category, int mainColor) {
@@ -111,13 +112,13 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
     protected void bindSearchableContent(@NonNull Context context, @NonNull TextView textView, @Nullable CharSequence searchQuery, @NonNull String content, int mainColor) {
         CharSequence processedContent = content;
         if (!TextUtils.isEmpty(searchQuery)) {
+            final var util = BrandingUtil.of(mainColor, context);
+            @ColorInt final int searchForeground = util.notes.getOnPrimaryContainer(context);
             @ColorInt final int searchBackground = ContextCompat.getColor(context, R.color.bg_highlighted);
-            @ColorInt final int searchForeground = BrandingUtil.getSecondaryForegroundColorDependingOnTheme(context, mainColor);
 
             // The Pattern.quote method will add \Q to the very beginning of the string and \E to the end of the string
             // It implies that the string between \Q and \E is a literal string and thus the reserved keyword in such string will be ignored.
             // See https://stackoverflow.com/questions/15409296/what-is-the-use-of-pattern-quote-method
-            //noinspection ConstantConditions
             final Pattern pattern = Pattern.compile("(" + Pattern.quote(searchQuery.toString()) + ")", Pattern.CASE_INSENSITIVE);
             SpannableString spannableString = new SpannableString(content);
             Matcher matcher = pattern.matcher(spannableString);

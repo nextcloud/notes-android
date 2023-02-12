@@ -26,6 +26,7 @@ import java.util.regex.Pattern;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedActivity;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 
 public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
@@ -295,7 +296,9 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     public void applyBrand(int mainColor, int textColor) {
         this.mainColor = mainColor;
         this.textColor = textColor;
-        BrandedActivity.applyBrandToFAB(mainColor, textColor, getSearchPrevButton());
-        BrandedActivity.applyBrandToFAB(mainColor, textColor, getSearchNextButton());
+
+        final var util = BrandingUtil.of(mainColor, requireContext());
+        util.material.themeFAB(getSearchNextButton());
+        util.material.themeFAB(getSearchPrevButton());
     }
 }

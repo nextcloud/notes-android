@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ActivityPreferencesBinding;
 
 public class PreferencesActivity extends LockedActivity {
@@ -32,6 +33,7 @@ public class PreferencesActivity extends LockedActivity {
 
     @Override
     public void applyBrand(int mainColor, int textColor) {
-        applyBrandToPrimaryToolbar(binding.appBar, binding.toolbar);
+        final var util = BrandingUtil.of(mainColor, this);
+        util.notes.applyBrandToPrimaryToolbar(binding.appBar, binding.toolbar, colorAccent);
     }
 }

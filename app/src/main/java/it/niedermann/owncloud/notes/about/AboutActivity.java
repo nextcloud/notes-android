@@ -51,9 +51,9 @@ public class AboutActivity extends LockedActivity {
 
     @Override
     public void applyBrand(int mainColor, int textColor) {
-        applyBrandToPrimaryToolbar(binding.appBar, binding.toolbar);
-        @ColorInt int finalMainColor = BrandingUtil.getSecondaryForegroundColorDependingOnTheme(this, mainColor);
-        binding.tabs.setSelectedTabIndicatorColor(finalMainColor);
+        final var util = BrandingUtil.of(mainColor, this);
+        util.material.themeTabLayout(binding.tabs);
+        util.notes.applyBrandToPrimaryToolbar(binding.appBar, binding.toolbar, colorAccent);
     }
 
     private static class TabsStateAdapter extends FragmentStateAdapter {

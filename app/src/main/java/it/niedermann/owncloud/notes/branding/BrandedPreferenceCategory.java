@@ -2,15 +2,11 @@ package it.niedermann.owncloud.notes.branding;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceViewHolder;
-
-import static it.niedermann.owncloud.notes.branding.BrandingUtil.getSecondaryForegroundColorDependingOnTheme;
 
 public class BrandedPreferenceCategory extends PreferenceCategory {
 
@@ -36,9 +32,9 @@ public class BrandedPreferenceCategory extends PreferenceCategory {
 
         final var view = holder.itemView.findViewById(android.R.id.title);
         @Nullable final var context = getContext();
-        if (context != null && view instanceof TextView) {
-            @ColorInt final int mainColor = getSecondaryForegroundColorDependingOnTheme(context, BrandingUtil.readBrandMainColor(context));
-            ((TextView) view).setTextColor(mainColor);
+        if (view instanceof TextView) {
+            final var util = BrandingUtil.of(BrandingUtil.readBrandMainColor(context), context);;
+            ((TextView) view).setTextColor(util.notes.getOnPrimaryContainer(context));
         }
     }
 }

@@ -1,7 +1,5 @@
 package it.niedermann.owncloud.notes.edit.title;
 
-import static it.niedermann.owncloud.notes.branding.BrandingUtil.applyBrandToEditTextInputLayout;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -18,6 +16,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.DialogEditTitleBinding;
 
 public class EditTitleDialogFragment extends BrandedDialogFragment {
@@ -88,7 +87,8 @@ public class EditTitleDialogFragment extends BrandedDialogFragment {
 
     @Override
     public void applyBrand(int mainColor, int textColor) {
-        applyBrandToEditTextInputLayout(mainColor, binding.inputWrapper);
+        final var util = BrandingUtil.of(mainColor, requireContext());
+        util.material.colorTextInputLayout(binding.inputWrapper);
     }
 
     /**
