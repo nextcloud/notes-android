@@ -122,6 +122,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     protected ItemAdapter adapter;
     private NavigationAdapter adapterCategories;
+    @Nullable
     private MenuAdapter menuAdapter;
 
     private SelectionTracker<Long> tracker;
@@ -351,7 +352,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                     } else {
                         startActivityForResult(menuItem.getIntent(), resultCode);
                     }
-                });
+                }, nextAccount.getColor());
 
                 binding.navigationMenu.setAdapter(menuAdapter);
             } else {
@@ -596,6 +597,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         final var util = BrandingUtil.of(color, this);
         util.material.themeFAB(activityBinding.fabCreate);
         util.platform.colorCircularProgressBar(activityBinding.progressCircular);
+        util.platform.colorNavigationView(binding.navigationView);
         util.notes.applyBrandToPrimaryToolbar(activityBinding.appBar, activityBinding.searchToolbar, colorAccent);
 
         binding.headerView.setBackgroundColor(color);
@@ -608,6 +610,9 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
         adapter.applyBrand(color);
         adapterCategories.applyBrand(color);
+        if (menuAdapter != null) {
+            menuAdapter.applyBrand(color);
+        }
         invalidateOptionsMenu();
     }
 

@@ -38,12 +38,6 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationViewHolder
     @DrawableRes
     public static final int ICON_SUB_MULTIPLE = R.drawable.ic_create_new_folder_grey600_18dp;
 
-    public void applyBrand(int color) {
-        final var util = BrandingUtil.of(color, context);
-        this.color = util.notes.getOnPrimaryContainer(context);
-        notifyDataSetChanged();
-    }
-
     @NonNull
     private List<NavigationItem> items = new ArrayList<>();
     private String selectedItem = null;
@@ -52,9 +46,13 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationViewHolder
 
     public NavigationAdapter(@NonNull Context context, @NonNull NavigationClickListener navigationClickListener) {
         this.context = context;
-        final var util = BrandingUtil.of(BrandingUtil.readBrandMainColor(context), context);
-        this.color = util.notes.getOnPrimaryContainer(context);
+        this.color = BrandingUtil.readBrandMainColor(context);
         this.navigationClickListener = navigationClickListener;
+    }
+
+    public void applyBrand(int color) {
+        this.color = color;
+        notifyDataSetChanged();
     }
 
     @NonNull

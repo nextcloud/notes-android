@@ -2,12 +2,14 @@ package it.niedermann.owncloud.notes.main.menu;
 
 import android.content.Context;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.core.util.Consumer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ItemNavigationBinding;
 
 import static android.view.View.GONE;
@@ -21,11 +23,19 @@ public class MenuViewHolder extends RecyclerView.ViewHolder {
         this.binding = binding;
     }
 
-    public void bind(@NonNull MenuItem menuItem, @NonNull Consumer<MenuItem> onClick) {
+    public void bind(@NonNull MenuItem menuItem, @ColorInt int color, @NonNull Consumer<MenuItem> onClick) {
         @NonNull Context context = itemView.getContext();
-        binding.navigationItemLabel.setText(context.getString(menuItem.getLabelResource()));
+
         binding.navigationItemIcon.setImageDrawable(ContextCompat.getDrawable(context, menuItem.getDrawableResource()));
+        binding.navigationItemLabel.setText(context.getString(menuItem.getLabelResource()));
         binding.navigationItemCount.setVisibility(GONE);
         binding.getRoot().setOnClickListener((v) -> onClick.accept(menuItem));
+
+        final var util = BrandingUtil.of(color, binding.getRoot().getContext());
+
+        util.notes.colorNavigationViewItem(binding.getRoot());
+        util.notes.colorNavigationViewItemIcon(binding.navigationItemIcon);
+        util.notes.colorNavigationViewItemText(binding.navigationItemCount);
+        util.notes.colorNavigationViewItemText(binding.navigationItemLabel);
     }
 }

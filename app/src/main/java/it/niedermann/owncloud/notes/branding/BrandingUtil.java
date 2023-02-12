@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LiveData;
 import androidx.preference.PreferenceManager;
 
@@ -57,14 +58,14 @@ public class BrandingUtil extends ViewThemeUtilsBase {
     public static LiveData<Integer> readBrandMainColorLiveData(@NonNull Context context) {
         final var sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
         Log.v(TAG, "--- Read: shared_preference_theme_main");
-        return new SharedPreferenceIntLiveData(sharedPreferences, pref_key_branding_main, context.getApplicationContext().getResources().getColor(R.color.defaultBrand));
+        return new SharedPreferenceIntLiveData(sharedPreferences, pref_key_branding_main, ContextCompat.getColor(context, R.color.defaultBrand));
     }
 
     @ColorInt
     public static int readBrandMainColor(@NonNull Context context) {
         final var sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
         Log.v(TAG, "--- Read: shared_preference_theme_main");
-        return sharedPreferences.getInt(pref_key_branding_main, context.getApplicationContext().getResources().getColor(R.color.defaultBrand));
+        return sharedPreferences.getInt(pref_key_branding_main, ContextCompat.getColor(context, R.color.defaultBrand));
     }
 
     public static void saveBrandColor(@NonNull Context context, @ColorInt int color) {
