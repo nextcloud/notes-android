@@ -1,7 +1,7 @@
 package it.niedermann.owncloud.notes.branding;
 
 import static com.nextcloud.android.common.ui.util.ColorStateListUtilsKt.buildColorStateList;
-import static it.niedermann.owncloud.notes.NotesApplication.isDarkThemeActive;
+import static com.nextcloud.android.common.ui.util.PlatformThemeUtil.isDarkMode;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -21,7 +21,6 @@ import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.navigation.NavigationView;
 import com.nextcloud.android.common.ui.theme.MaterialSchemes;
 import com.nextcloud.android.common.ui.theme.ViewThemeUtilsBase;
 import com.nextcloud.android.common.ui.theme.utils.MaterialViewThemeUtils;
@@ -125,7 +124,7 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
 
     @ColorInt
     public int getTextHighlightBackgroundColor(@NonNull Context context, @ColorInt int mainColor, @ColorInt int colorPrimary, @ColorInt int colorAccent) {
-        if (isDarkThemeActive(context)) { // Dark background
+        if (isDarkMode(context)) { // Dark background
             if (ColorUtil.INSTANCE.isColorDark(mainColor)) { // Dark brand color
                 if (NotesColorUtil.contrastRatioIsSufficient(mainColor, colorPrimary)) { // But also dark text
                     return mainColor;

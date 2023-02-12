@@ -2,11 +2,10 @@ package it.niedermann.owncloud.notes.main.items;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
-import static it.niedermann.owncloud.notes.shared.util.NotesColorUtil.contrastRatioIsSufficient;
+
+import static com.nextcloud.android.common.ui.util.PlatformThemeUtil.isDarkMode;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.BackgroundColorSpan;
@@ -26,12 +25,12 @@ import androidx.recyclerview.selection.ItemDetailsLookup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.chip.Chip;
+import com.nextcloud.android.common.ui.theme.utils.ColorRole;
+import com.nextcloud.android.common.ui.util.PlatformThemeUtil;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import it.niedermann.android.util.ColorUtil;
-import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
@@ -60,47 +59,26 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
         DrawableCompat.setTint(noteStatus.getDrawable(), BrandingUtil.of(mainColor, context).notes.getOnPrimaryContainer(context));
     }
 
-    protected void bindCategory(@NonNull Context context, @NonNull TextView noteCategory, boolean showCategory, @NonNull String category, int mainColor) {
-        final boolean isDarkThemeActive = NotesApplication.isDarkThemeActive(context);
-        noteCategory.setVisibility(showCategory && !category.isEmpty() ? View.VISIBLE : View.GONE);
-        noteCategory.setText(category);
+    protected void bindCategory(@NonNull Context context, @NonNull TextView noteCategory, boolean showCategory, @NonNull String category, int color) {
+        if (!showCategory || category.isEmpty()) {
+            noteCategory.setVisibility(View.GONE);
+        } else {
+            noteCategory.setText(category);
 
-        @ColorInt final int categoryForeground;
-        @ColorInt final int categoryBackground;
+            final var util = BrandingUtil.of(color, context);
 
-        if (isDarkThemeActive) {
-            if (ColorUtil.INSTANCE.isColorDark(mainColor)) {
-                if (contrastRatioIsSufficient(mainColor, Color.BLACK)) {
-                    categoryBackground = mainColor;
-                    categoryForeground = Color.WHITE;
+            if (noteCategory instanceof Chip) {
+                util.material.colorChipBackground((Chip) noteCategory);
+            } else {
+                util.platform.tintDrawable(context, noteCategory.getBackground(), ColorRole.PRIMARY);
+                if (isDarkMode(context)) {
+                    util.platform.colorTextView(noteCategory, ColorRole.ON_PRIMARY);
                 } else {
-                    categoryBackground = Color.WHITE;
-                    categoryForeground = mainColor;
+                    util.platform.colorTextView(noteCategory, ColorRole.ON_SECONDARY_CONTAINER);
                 }
-            } else {
-                categoryBackground = mainColor;
-                categoryForeground = Color.BLACK;
             }
-        } else {
-            categoryForeground = Color.BLACK;
-            if (ColorUtil.INSTANCE.isColorDark(mainColor) || contrastRatioIsSufficient(mainColor, Color.WHITE)) {
-                categoryBackground = mainColor;
-            } else {
-                categoryBackground = Color.BLACK;
-            }
-        }
 
-        noteCategory.setTextColor(categoryForeground);
-        if (noteCategory instanceof Chip) {
-            final Chip chip = (Chip) noteCategory;
-            chip.setChipStrokeColor(ColorStateList.valueOf(categoryBackground));
-            if(isDarkThemeActive) {
-                chip.setChipBackgroundColor(ColorStateList.valueOf(categoryBackground));
-            } else {
-                chip.setChipBackgroundColorResource(R.color.grid_item_background_selector);
-            }
-        } else {
-            DrawableCompat.setTint(noteCategory.getBackground(), categoryBackground);
+            noteCategory.setVisibility(View.VISIBLE);
         }
     }
 
