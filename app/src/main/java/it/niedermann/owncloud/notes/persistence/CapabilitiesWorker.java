@@ -51,6 +51,7 @@ public class CapabilitiesWorker extends Worker {
                 repo.updateCapabilitiesETag(account.getId(), capabilities.getETag());
                 repo.updateBrand(account.getId(), capabilities.getColor());
                 repo.updateApiVersion(account.getId(), capabilities.getApiVersion());
+                repo.updateDirectEditingAvailable(account.getId(), capabilities.isDirectEditingAvailable());
                 Log.i(TAG, capabilities.toString());
                 repo.updateDisplayName(account.getId(), CapabilitiesClient.getDisplayName(getApplicationContext(), ssoAccount, ApiProvider.getInstance()));
             } catch (Throwable e) {

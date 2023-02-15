@@ -31,6 +31,9 @@ public class CapabilitiesDeserializer implements JsonDeserializer<Capabilities> 
     private static final String CAPABILITIES_THEMING = "theming";
     private static final String CAPABILITIES_THEMING_COLOR = "color";
     private static final String CAPABILITIES_THEMING_COLOR_TEXT = "color-text";
+    private static final String CAPABILITIES_FILES = "files";
+    private static final String CAPABILITIES_FILES_DIRECT_EDITING = "directEditing";
+    private static final String CAPABILITIES_FILES_DIRECT_EDITING_SUPPORTS_FILE_ID = "supportsFileId";
 
     @Override
     public Capabilities deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
@@ -61,7 +64,21 @@ public class CapabilitiesDeserializer implements JsonDeserializer<Capabilities> 
                     }
                 }
             }
+            response.setDirectEditingAvailable(hasDirectEditingCapability(capabilities));
         }
         return response;
+    }
+
+    private boolean hasDirectEditingCapability(final JsonObject capabilities) {
+        if (capabilities.has(CAPABILITIES_FILES)) {
+            final var files = capabilities.getAsJsonObject(CAPABILITIES_FILES);
+            if (files.has(CAPABILITIES_FILES_DIRECT_EDITING)) {
+                final var directEditing = files.getAsJsonObject(CAPABILITIES_FILES_DIRECT_EDITING);
+                if (directEditing.has(CAPABILITIES_FILES_DIRECT_EDITING_SUPPORTS_FILE_ID)) {
+                    return directEditing.get(CAPABILITIES_FILES_DIRECT_EDITING_SUPPORTS_FILE_ID).getAsBoolean();
+                }
+            }
+        }
+        return false;
     }
 }

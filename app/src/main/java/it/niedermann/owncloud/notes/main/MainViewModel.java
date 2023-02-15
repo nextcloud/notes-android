@@ -414,6 +414,7 @@ public class MainViewModel extends AndroidViewModel {
                         localAccount.setColor(capabilities.getColor());
                         BrandingUtil.saveBrandColor(getApplication(), localAccount.getColor());
                         repo.updateApiVersion(localAccount.getId(), capabilities.getApiVersion());
+                        repo.updateDirectEditingAvailable(localAccount.getId(), capabilities.isDirectEditingAvailable());
                         callback.onSuccess(null);
                     } catch (Throwable t) {
                         if (t.getClass() == NextcloudHttpRequestFailedException.class || t instanceof NextcloudHttpRequestFailedException) {

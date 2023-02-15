@@ -10,17 +10,9 @@ import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.NoSuchElementException;
 
-import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 
 @Entity(
@@ -60,6 +52,7 @@ public class Account implements Serializable {
     private String capabilitiesETag;
     @Nullable
     private String displayName;
+    private boolean directEditingAvailable;
 
     public Account() {
         // Default constructor
@@ -76,6 +69,7 @@ public class Account implements Serializable {
     public void setCapabilities(@NonNull Capabilities capabilities) {
         capabilitiesETag = capabilities.getETag();
         apiVersion = capabilities.getApiVersion();
+        directEditingAvailable = capabilities.isDirectEditingAvailable();
         setColor(capabilities.getColor());
     }
 
@@ -175,6 +169,14 @@ public class Account implements Serializable {
         this.displayName = displayName;
     }
 
+    public boolean isDirectEditingAvailable() {
+        return directEditingAvailable;
+    }
+
+    public void setDirectEditingAvailable(boolean directEditingAvailable) {
+        this.directEditingAvailable = directEditingAvailable;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -195,6 +197,7 @@ public class Account implements Serializable {
             return false;
         if (capabilitiesETag != null ? !capabilitiesETag.equals(account.capabilitiesETag) : account.capabilitiesETag != null)
             return false;
+        if (directEditingAvailable != account.directEditingAvailable) return false;
         return true;
     }
 
@@ -210,6 +213,7 @@ public class Account implements Serializable {
         result = 31 * result + color;
         result = 31 * result + textColor;
         result = 31 * result + (capabilitiesETag != null ? capabilitiesETag.hashCode() : 0);
+        result = 31 * result + (directEditingAvailable ? 1 : 0);
         return result;
     }
 
@@ -227,6 +231,7 @@ public class Account implements Serializable {
                 ", color=" + color +
                 ", textColor=" + textColor +
                 ", capabilitiesETag='" + capabilitiesETag + '\'' +
+                ", directEditingAvailable='" + directEditingAvailable + '\'' +
                 '}';
     }
 }
