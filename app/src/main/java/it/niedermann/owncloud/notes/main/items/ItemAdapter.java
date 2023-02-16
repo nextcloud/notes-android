@@ -1,8 +1,6 @@
 package it.niedermann.owncloud.notes.main.items;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -59,17 +57,14 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     private final float fontSize;
     private final boolean monospace;
     @ColorInt
-    private int mainColor;
-    @ColorInt
-    private int textColor;
+    private int color;
     @Nullable
     private Integer swipedPosition;
 
     public <T extends Context & NoteClickListener> ItemAdapter(@NonNull T context, boolean gridView) {
         this.noteClickListener = context;
         this.gridView = gridView;
-        this.mainColor = ContextCompat.getColor(context, R.color.defaultBrand);
-        this.textColor = Color.WHITE;
+        this.color = ContextCompat.getColor(context, R.color.defaultBrand);
         final var sp = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
         this.fontSize = getFontSizeFromPreferences(context, sp);
         this.monospace = sp.getBoolean(context.getString(R.string.pref_key_font), false);
@@ -156,7 +151,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             case TYPE_NOTE_WITH_EXCERPT:
             case TYPE_NOTE_WITHOUT_EXCERPT:
             case TYPE_NOTE_ONLY_TITLE: {
-                ((NoteViewHolder) holder).bind(isSelected, (Note) itemList.get(position), showCategory, mainColor, textColor, searchQuery);
+                ((NoteViewHolder) holder).bind(isSelected, (Note) itemList.get(position), showCategory, color, searchQuery);
                 break;
             }
         }
@@ -208,9 +203,8 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     }
 
     @Override
-    public void applyBrand(int mainColor, int textColor) {
-        this.mainColor = mainColor;
-        this.textColor = textColor;
+    public void applyBrand(int color) {
+        this.color = color;
         notifyDataSetChanged();
     }
 

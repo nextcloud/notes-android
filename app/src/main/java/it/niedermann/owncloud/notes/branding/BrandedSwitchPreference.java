@@ -2,8 +2,6 @@ package it.niedermann.owncloud.notes.branding;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,21 +9,13 @@ import android.widget.Switch;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreference;
-
-import it.niedermann.owncloud.notes.R;
-
-import static it.niedermann.owncloud.notes.branding.BrandingUtil.getSecondaryForegroundColorDependingOnTheme;
 
 public class BrandedSwitchPreference extends SwitchPreference implements Branded {
 
     @ColorInt
     private Integer mainColor = null;
-
-    @ColorInt
-    private Integer textColor = null;
 
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     @Nullable
@@ -53,32 +43,23 @@ public class BrandedSwitchPreference extends SwitchPreference implements Branded
 
         if (holder.itemView instanceof ViewGroup) {
             switchView = findSwitchWidget(holder.itemView);
-            if (mainColor != null && textColor != null) {
+            if (mainColor != null) {
                 applyBrand();
             }
         }
     }
 
     @Override
-    public void applyBrand(@ColorInt int mainColor, @ColorInt int textColor) {
-        this.mainColor = mainColor;
-        this.textColor = textColor;
+    public void applyBrand(@ColorInt int color) {
+        this.mainColor = color;
         // onBindViewHolder is called after applyBrand, therefore we have to store the given values and apply them later.
         applyBrand();
     }
 
     private void applyBrand() {
         if (switchView != null) {
-            final int finalMainColor = getSecondaryForegroundColorDependingOnTheme(getContext(), mainColor);
-            // int trackColor = Color.argb(77, Color.red(finalMainColor), Color.green(finalMainColor), Color.blue(finalMainColor));
-            DrawableCompat.setTintList(switchView.getThumbDrawable(), new ColorStateList(
-                    new int[][]{new int[]{android.R.attr.state_checked}, new int[]{}},
-                    new int[]{finalMainColor, getContext().getResources().getColor(R.color.fg_default_low)}
-            ));
-            DrawableCompat.setTintList(switchView.getTrackDrawable(), new ColorStateList(
-                    new int[][]{new int[]{android.R.attr.state_checked}, new int[]{}},
-                    new int[]{finalMainColor, getContext().getResources().getColor(R.color.fg_default_low)}
-            ));
+            final var util = BrandingUtil.of(mainColor, getContext());
+            util.platform.colorSwitch(switchView);
         }
     }
 

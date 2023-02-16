@@ -1,7 +1,6 @@
 package it.niedermann.owncloud.notes.edit;
 
 import static androidx.core.view.ViewCompat.isAttachedToWindow;
-import static it.niedermann.owncloud.notes.branding.BrandingUtil.getTextHighlightBackgroundColor;
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.getFontSizeFromPreferences;
 
 import android.content.Context;
@@ -29,6 +28,7 @@ import androidx.preference.PreferenceManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.FragmentNoteEditBinding;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
@@ -242,7 +242,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     }
 
     @Override
-    protected void colorWithText(@NonNull String newText, @Nullable Integer current, int mainColor, int textColor) {
+    protected void colorWithText(@NonNull String newText, @Nullable Integer current, int color) {
         if (binding != null && isAttachedToWindow(binding.editContent)) {
             binding.editContent.clearFocus();
             binding.editContent.setSearchText(newText, current);
@@ -250,10 +250,12 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     }
 
     @Override
-    public void applyBrand(int mainColor, int textColor) {
-        super.applyBrand(mainColor, textColor);
-        binding.editContent.setSearchColor(mainColor);
-        binding.editContent.setHighlightColor(getTextHighlightBackgroundColor(requireContext(), mainColor, colorPrimary, colorAccent));
+    public void applyBrand(int color) {
+        super.applyBrand(color);
+
+        final var util = BrandingUtil.of(color, requireContext());
+        binding.editContent.setSearchColor(color);
+        binding.editContent.setHighlightColor(util.notes.getTextHighlightBackgroundColor(requireContext(), color, colorPrimary, colorAccent));
     }
 
     public static BaseNoteFragment newInstance(long accountId, long noteId) {

@@ -1,17 +1,15 @@
 package it.niedermann.owncloud.notes;
 
+import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
+
 import android.app.Application;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.PreferenceManager;
 
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
-
-import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
 
 public class NotesApplication extends Application {
     private static final String TAG = NotesApplication.class.getSimpleName();
@@ -55,19 +53,6 @@ public class NotesApplication extends Application {
             mode = darkModeEnabled ? DarkModeSetting.DARK.name() : DarkModeSetting.LIGHT.name();
         }
         return DarkModeSetting.valueOf(mode);
-    }
-
-    public static boolean isDarkThemeActive(Context context, DarkModeSetting setting) {
-        if (setting == DarkModeSetting.SYSTEM_DEFAULT) {
-            return isDarkThemeActive(context);
-        } else {
-            return setting == DarkModeSetting.DARK;
-        }
-    }
-
-    public static boolean isDarkThemeActive(Context context) {
-        final int uiMode = context.getResources().getConfiguration().uiMode;
-        return (uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
     }
 
     public static void setLockedPreference(boolean lockedPreference) {

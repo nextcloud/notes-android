@@ -4,9 +4,8 @@ import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.O;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-import static it.niedermann.owncloud.notes.NotesApplication.isDarkThemeActive;
+import static com.nextcloud.android.common.ui.util.PlatformThemeUtil.isDarkMode;
 import static it.niedermann.owncloud.notes.NotesApplication.isGridViewEnabled;
-import static it.niedermann.owncloud.notes.branding.BrandingUtil.getSecondaryForegroundColorDependingOnTheme;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.DEFAULT_CATEGORY;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.RECENT;
@@ -19,13 +18,13 @@ import android.animation.AnimatorInflater;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -50,6 +49,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.nextcloud.android.common.ui.theme.utils.ColorRole;
+import com.nextcloud.android.common.ui.util.PlatformThemeUtil;
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.AccountImportCancelledException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
@@ -65,12 +66,14 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
+import it.niedermann.android.util.ColorUtil;
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerListener;
 import it.niedermann.owncloud.notes.accountswitcher.AccountSwitcherDialog;
 import it.niedermann.owncloud.notes.accountswitcher.AccountSwitcherListener;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ActivityNotesListViewBinding;
 import it.niedermann.owncloud.notes.databinding.DrawerLayoutBinding;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
@@ -121,6 +124,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     protected ItemAdapter adapter;
     private NavigationAdapter adapterCategories;
+    @Nullable
     private MenuAdapter menuAdapter;
 
     private SelectionTracker<Long> tracker;
@@ -157,7 +161,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
         gridView = isGridViewEnabled();
 
-        if (!gridView || isDarkThemeActive(this)) {
+        if (!gridView || isDarkMode(this)) {
             activityBinding.activityNotesListView.setBackgroundColor(ContextCompat.getColor(this, R.color.primary));
         }
 
@@ -350,7 +354,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                     } else {
                         startActivityForResult(menuItem.getIntent(), resultCode);
                     }
-                });
+                }, nextAccount.getColor());
 
                 binding.navigationMenu.setAdapter(menuAdapter);
             } else {
@@ -591,21 +595,24 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     }
 
     @Override
-    public void applyBrand(int mainColor, int textColor) {
-        applyBrandToPrimaryToolbar(activityBinding.appBar, activityBinding.searchToolbar);
-        applyBrandToFAB(mainColor, textColor, activityBinding.fabCreate);
+    public void applyBrand(int color) {
+        final var util = BrandingUtil.of(color, this);
+        util.material.themeFAB(activityBinding.fabCreate);
+        util.androidx.themeSwipeRefreshLayout(activityBinding.swiperefreshlayout);
+        util.platform.colorCircularProgressBar(activityBinding.progressCircular, ColorRole.PRIMARY);
+        util.platform.colorNavigationView(binding.navigationView);
+        util.notes.applyBrandToPrimaryToolbar(activityBinding.appBar, activityBinding.searchToolbar, colorAccent);
 
-        binding.headerView.setBackgroundColor(mainColor);
-        binding.appName.setTextColor(textColor);
-        activityBinding.progressCircular.getIndeterminateDrawable().setColorFilter(getSecondaryForegroundColorDependingOnTheme(this, mainColor), PorterDuff.Mode.SRC_IN);
+        binding.headerView.setBackgroundColor(color);
+        @ColorInt final int headerTextColor = ColorUtil.INSTANCE.getForegroundColorForBackgroundColor(color);
+        binding.appName.setTextColor(headerTextColor);
+        DrawableCompat.setTint(binding.logo.getDrawable(), headerTextColor);
 
-        // TODO We assume, that the background of the spinner is always white
-        activityBinding.swiperefreshlayout.setColorSchemeColors(contrastRatioIsSufficient(Color.WHITE, mainColor) ? mainColor : Color.BLACK);
-        binding.appName.setTextColor(textColor);
-        DrawableCompat.setTint(binding.logo.getDrawable(), textColor);
-
-        adapter.applyBrand(mainColor, textColor);
-        adapterCategories.applyBrand(mainColor, textColor);
+        adapter.applyBrand(color);
+        adapterCategories.applyBrand(color);
+        if (menuAdapter != null) {
+            menuAdapter.applyBrand(color);
+        }
         invalidateOptionsMenu();
     }
 

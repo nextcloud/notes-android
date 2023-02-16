@@ -48,8 +48,9 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
     private LiveData<List<NavigationItem.CategoryNavigationItem>> categoryLiveData;
 
     @Override
-    public void applyBrand(int mainColor, int textColor) {
-        BrandingUtil.applyBrandToEditTextInputLayout(mainColor, binding.inputWrapper);
+    public void applyBrand(int color) {
+        final var util = BrandingUtil.of(color, requireContext());
+        util.material.colorTextInputLayout(binding.inputWrapper);
     }
 
     /**

@@ -49,7 +49,7 @@ public class CapabilitiesWorker extends Worker {
                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
                 final var capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, account.getCapabilitiesETag(), ApiProvider.getInstance());
                 repo.updateCapabilitiesETag(account.getId(), capabilities.getETag());
-                repo.updateBrand(account.getId(), capabilities.getColor(), capabilities.getTextColor());
+                repo.updateBrand(account.getId(), capabilities.getColor());
                 repo.updateApiVersion(account.getId(), capabilities.getApiVersion());
                 Log.i(TAG, capabilities.toString());
                 repo.updateDisplayName(account.getId(), CapabilitiesClient.getDisplayName(getApplicationContext(), ssoAccount, ApiProvider.getInstance()));

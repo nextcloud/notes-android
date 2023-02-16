@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.core.util.Consumer;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +18,7 @@ import com.nextcloud.android.sso.helper.VersionCheckHelper;
 import it.niedermann.owncloud.notes.FormattingHelpActivity;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.about.AboutActivity;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ItemNavigationBinding;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.preferences.PreferencesActivity;
@@ -25,10 +27,12 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
 
     @NonNull
     private final MenuItem[] menuItems;
+    @ColorInt
+    private int color;
     @NonNull
     private final Consumer<MenuItem> onClick;
 
-    public MenuAdapter(@NonNull Context context, @NonNull Account account, int settingsRequestCode, @NonNull Consumer<MenuItem> onClick) {
+    public MenuAdapter(@NonNull Context context, @NonNull Account account, int settingsRequestCode, @NonNull Consumer<MenuItem> onClick, @ColorInt int color) {
         this.menuItems = new MenuItem[]{
                 new MenuItem(new Intent(context, FormattingHelpActivity.class), R.string.action_formatting_help, R.drawable.ic_baseline_help_outline_24),
                 new MenuItem(generateTrashbinIntent(context, account), R.string.action_trashbin, R.drawable.ic_delete_grey600_24dp),
@@ -36,7 +40,13 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
                 new MenuItem(new Intent(context, AboutActivity.class), R.string.simple_about, R.drawable.ic_info_outline_grey600_24dp)
         };
         this.onClick = onClick;
+        this.color = color;
         setHasStableIds(true);
+    }
+
+    public void applyBrand(int color) {
+        this.color = color;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -52,7 +62,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MenuViewHolder holder, int position) {
-        holder.bind(menuItems[position], onClick);
+        holder.bind(menuItems[position], color, onClick);
     }
 
     public void updateAccount(@NonNull Context context, @NonNull Account account) {

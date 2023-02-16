@@ -42,8 +42,8 @@ public interface AccountDao {
     @Query("SELECT COUNT(*) FROM Account")
     LiveData<Integer> countAccounts$();
 
-    @Query("UPDATE Account SET COLOR = :color, TEXTCOLOR = :textColor WHERE id = :id")
-    void updateBrand(long id, @ColorInt Integer color, @ColorInt Integer textColor);
+    @Query("UPDATE Account SET COLOR = :color WHERE id = :id")
+    void updateBrand(long id, @ColorInt Integer color);
 
     @Query("UPDATE Account SET ETAG = :eTag WHERE ID = :id")
     void updateETag(long id, String eTag);

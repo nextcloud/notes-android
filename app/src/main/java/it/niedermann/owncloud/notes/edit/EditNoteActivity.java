@@ -30,6 +30,7 @@ import it.niedermann.android.sharedpreferences.SharedPreferenceBooleanLiveData;
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerListener;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ActivityEditBinding;
 import it.niedermann.owncloud.notes.edit.category.CategoryViewModel;
 import it.niedermann.owncloud.notes.main.MainActivity;
@@ -313,7 +314,8 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     }
 
     @Override
-    public void applyBrand(int mainColor, int textColor) {
-        applyBrandToPrimaryToolbar(binding.appBar, binding.toolbar);
+    public void applyBrand(int color) {
+        final var util = BrandingUtil.of(color, this);
+        util.notes.applyBrandToPrimaryToolbar(binding.appBar, binding.toolbar, colorAccent);
     }
 }

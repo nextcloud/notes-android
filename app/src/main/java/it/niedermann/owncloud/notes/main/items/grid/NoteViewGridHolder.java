@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.View;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.Px;
@@ -39,14 +40,14 @@ public class NoteViewGridHolder extends NoteViewHolder {
         throw new UnsupportedOperationException(NoteViewGridHolder.class.getSimpleName() + " does not support swiping");
     }
 
-    public void bind(boolean isSelected, @NonNull Note note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
-        super.bind(isSelected, note, showCategory, mainColor, textColor, searchQuery);
+    public void bind(boolean isSelected, @NonNull Note note, boolean showCategory, @ColorInt int color, @Nullable CharSequence searchQuery) {
+        super.bind(isSelected, note, showCategory, color, searchQuery);
         @NonNull final Context context = itemView.getContext();
-        bindCategory(context, binding.noteCategory, showCategory, note.getCategory(), mainColor);
-        bindStatus(binding.noteStatus, note.getStatus(), mainColor);
+        bindCategory(context, binding.noteCategory, showCategory, note.getCategory(), color);
+        bindStatus(binding.noteStatus, note.getStatus(), color);
         bindFavorite(binding.noteFavorite, note.getFavorite());
-        bindSearchableContent(context, binding.noteTitle, searchQuery, note.getTitle(), mainColor);
-        bindSearchableContent(context, binding.noteExcerpt, searchQuery, note.getExcerpt().replace(EXCERPT_LINE_SEPARATOR, "\n"), mainColor);
+        bindSearchableContent(context, binding.noteTitle, searchQuery, note.getTitle(), color);
+        bindSearchableContent(context, binding.noteExcerpt, searchQuery, note.getExcerpt().replace(EXCERPT_LINE_SEPARATOR, "\n"), color);
         binding.noteExcerpt.setVisibility(TextUtils.isEmpty(note.getExcerpt()) ? GONE : VISIBLE);
     }
 
