@@ -49,6 +49,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.nextcloud.android.common.ui.theme.utils.ColorRole;
 import com.nextcloud.android.common.ui.util.PlatformThemeUtil;
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.AccountImportCancelledException;
@@ -597,7 +598,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     public void applyBrand(int color) {
         final var util = BrandingUtil.of(color, this);
         util.material.themeFAB(activityBinding.fabCreate);
-        util.platform.colorCircularProgressBar(activityBinding.progressCircular);
+        util.androidx.themeSwipeRefreshLayout(activityBinding.swiperefreshlayout);
+        util.platform.colorCircularProgressBar(activityBinding.progressCircular, ColorRole.PRIMARY);
         util.platform.colorNavigationView(binding.navigationView);
         util.notes.applyBrandToPrimaryToolbar(activityBinding.appBar, activityBinding.searchToolbar, colorAccent);
 
@@ -605,9 +607,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         @ColorInt final int headerTextColor = ColorUtil.INSTANCE.getForegroundColorForBackgroundColor(color);
         binding.appName.setTextColor(headerTextColor);
         DrawableCompat.setTint(binding.logo.getDrawable(), headerTextColor);
-
-        // TODO We assume, that the background of the spinner is always white
-        activityBinding.swiperefreshlayout.setColorSchemeColors(contrastRatioIsSufficient(Color.WHITE, color) ? color : Color.BLACK);
 
         adapter.applyBrand(color);
         adapterCategories.applyBrand(color);

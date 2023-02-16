@@ -8,6 +8,8 @@ import androidx.annotation.Nullable;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceViewHolder;
 
+import com.nextcloud.android.common.ui.theme.utils.ColorRole;
+
 public class BrandedPreferenceCategory extends PreferenceCategory {
 
     public BrandedPreferenceCategory(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -33,8 +35,9 @@ public class BrandedPreferenceCategory extends PreferenceCategory {
         final var view = holder.itemView.findViewById(android.R.id.title);
         @Nullable final var context = getContext();
         if (view instanceof TextView) {
-            final var util = BrandingUtil.of(BrandingUtil.readBrandMainColor(context), context);;
-            ((TextView) view).setTextColor(util.notes.getOnPrimaryContainer(context));
+            final var util = BrandingUtil.of(BrandingUtil.readBrandMainColor(context), context);
+
+            util.platform.colorTextView((TextView) view, ColorRole.ON_PRIMARY_CONTAINER);
         }
     }
 }

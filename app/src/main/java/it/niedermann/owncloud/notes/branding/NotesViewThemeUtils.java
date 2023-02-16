@@ -23,6 +23,7 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.nextcloud.android.common.ui.theme.MaterialSchemes;
 import com.nextcloud.android.common.ui.theme.ViewThemeUtilsBase;
+import com.nextcloud.android.common.ui.theme.utils.ColorRole;
 import com.nextcloud.android.common.ui.theme.utils.MaterialViewThemeUtils;
 
 import it.niedermann.android.util.ColorUtil;
@@ -35,13 +36,15 @@ import scheme.Scheme;
 public class NotesViewThemeUtils extends ViewThemeUtilsBase {
 
     private static final String TAG = NotesViewThemeUtils.class.getSimpleName();
-    private final MaterialSchemes schemes;
 
     public NotesViewThemeUtils(@NonNull MaterialSchemes schemes) {
         super(schemes);
-        this.schemes = schemes;
     }
 
+    /**
+     * Use {@link ColorRole#ON_PRIMARY_CONTAINER}
+     */
+    @Deprecated(forRemoval = true)
     @ColorInt
     public int getOnPrimaryContainer(@NonNull Context context) {
         return withScheme(context, Scheme::getOnPrimaryContainer);
