@@ -42,15 +42,6 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
     }
 
     /**
-     * Use {@link ColorRole#ON_PRIMARY_CONTAINER}
-     */
-    @Deprecated(forRemoval = true)
-    @ColorInt
-    public int getOnPrimaryContainer(@NonNull Context context) {
-        return withScheme(context, Scheme::getOnPrimaryContainer);
-    }
-
-    /**
      * The Notes app uses custom navigation view items because they have several features which are
      * not covered by {@link NavigationItem}.
      */

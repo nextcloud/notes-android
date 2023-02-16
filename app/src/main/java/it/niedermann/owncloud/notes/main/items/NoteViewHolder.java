@@ -89,28 +89,13 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
         noteFavorite.setOnClickListener(view -> noteClickListener.onNoteFavoriteClick(getLayoutPosition(), view));
     }
 
-    protected void bindSearchableContent(@NonNull Context context, @NonNull TextView textView, @Nullable CharSequence searchQuery, @NonNull String content, int mainColor) {
-        CharSequence processedContent = content;
+    protected void bindSearchableContent(@NonNull Context context, @NonNull TextView textView, @Nullable CharSequence searchQuery, @NonNull String content, int color) {
+        textView.setText(content);
+
         if (!TextUtils.isEmpty(searchQuery)) {
-            final var util = BrandingUtil.of(mainColor, context);
-            @ColorInt final int searchForeground = util.notes.getOnPrimaryContainer(context);
-            @ColorInt final int searchBackground = ContextCompat.getColor(context, R.color.bg_highlighted);
-
-            // The Pattern.quote method will add \Q to the very beginning of the string and \E to the end of the string
-            // It implies that the string between \Q and \E is a literal string and thus the reserved keyword in such string will be ignored.
-            // See https://stackoverflow.com/questions/15409296/what-is-the-use-of-pattern-quote-method
-            final Pattern pattern = Pattern.compile("(" + Pattern.quote(searchQuery.toString()) + ")", Pattern.CASE_INSENSITIVE);
-            SpannableString spannableString = new SpannableString(content);
-            Matcher matcher = pattern.matcher(spannableString);
-
-            while (matcher.find()) {
-                spannableString.setSpan(new ForegroundColorSpan(searchForeground), matcher.start(), matcher.end(), 0);
-                spannableString.setSpan(new BackgroundColorSpan(searchBackground), matcher.start(), matcher.end(), 0);
-            }
-
-            processedContent = spannableString;
+            final var util = BrandingUtil.of(color, context);
+            util.platform.highlightText(textView, content, searchQuery.toString());
         }
-        textView.setText(processedContent);
     }
 
     public abstract void showSwipe(boolean left);
