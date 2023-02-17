@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -175,14 +176,15 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         if (fragment != null) {
             savedState = getSupportFragmentManager().saveFragmentInstanceState(fragment);
         }
-        fragment = edit
-                ? NoteEditFragment.newInstance(accountId, noteId)
-                : NotePreviewFragment.newInstance(accountId, noteId);
+        // TODO switch between the three modes, don't hardcode direct edit
+        fragment = NoteDirectEditFragment.newInstance(accountId, noteId);
 
         if (savedState != null) {
             fragment.setInitialSavedState(savedState);
         }
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment).commit();
+        // TODO only hide toolbar in direct editing mode
+        binding.toolbar.setVisibility(View.GONE);
     }
 
     /**

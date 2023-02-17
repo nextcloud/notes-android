@@ -10,14 +10,12 @@ import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.RECENT;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.UNCATEGORIZED;
-import static it.niedermann.owncloud.notes.shared.util.NotesColorUtil.contrastRatioIsSufficient;
 import static it.niedermann.owncloud.notes.shared.util.SSOUtil.askForNewAccount;
 
 import android.accounts.NetworkErrorException;
 import android.animation.AnimatorInflater;
 import android.app.SearchManager;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -50,7 +48,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.nextcloud.android.common.ui.theme.utils.ColorRole;
-import com.nextcloud.android.common.ui.util.PlatformThemeUtil;
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.AccountImportCancelledException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
@@ -59,7 +56,6 @@ import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.exceptions.TokenMismatchException;
 import com.nextcloud.android.sso.exceptions.UnknownErrorException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
-import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import java.net.HttpURLConnection;
 import java.util.LinkedList;
@@ -95,7 +91,6 @@ import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
 import it.niedermann.owncloud.notes.persistence.ApiProvider;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesWorker;
-import it.niedermann.owncloud.notes.persistence.DirectEditingRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
@@ -762,23 +757,11 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     @Override
     public void onNoteClick(int position, View v) {
-        // TODO restore to previous behaviour, this is just for testing
         final boolean hasCheckedItems = tracker.getSelection().size() > 0;
         if (!hasCheckedItems) {
             final var note = (Note) adapter.getItem(position);
-//            startActivity(new Intent(getApplicationContext(), EditNoteActivity.class)
-//                    .putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId()));
-            try {
-                final SingleSignOnAccount account = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
-                final DirectEditingRepository repository = DirectEditingRepository.getInstance(getApplicationContext());
-                final var supported = repository.isDirectEditingSupportedByServer(account).blockingGet();
-                Log.d(TAG, "onNoteClick: direct editing is supported by server: " + supported);
-                final var directEditingUrl = repository.getDirectEditingUrl(account, note).blockingGet();
-                Log.d(TAG, "onNoteClick: direct editing url: " + directEditingUrl);
-            } catch (NoCurrentAccountSelectedException |
-                     NextcloudFilesAppAccountNotFoundException e) {
-                throw new RuntimeException(e);
-            }
+            startActivity(new Intent(getApplicationContext(), EditNoteActivity.class)
+                    .putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId()));
         }
     }
 

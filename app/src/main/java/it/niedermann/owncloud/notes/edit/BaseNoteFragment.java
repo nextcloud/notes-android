@@ -71,7 +71,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     private Note originalNote;
     private int originalScrollY;
     protected NotesRepository repo;
-    private NoteFragmentListener listener;
+    protected NoteFragmentListener listener;
     private boolean titleModified = false;
 
     protected boolean isNew = true;
