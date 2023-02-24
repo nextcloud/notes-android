@@ -60,11 +60,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         super.onScroll(scrollY, oldScrollY);
         if (getSearchNextButton() == null || getSearchNextButton().getVisibility() != View.VISIBLE) {
             final ExtendedFloatingActionButton directFab = getDirectEditingButton();
-            if (oldScrollY > 0 && scrollY > oldScrollY && directFab.isShown()) {
-                ExtendedFabUtil.setExtendedFabVisibility(getDirectEditingButton(), false);
-            } else if (scrollY < oldScrollY && !directFab.isShown()) {
-                ExtendedFabUtil.setExtendedFabVisibility(getDirectEditingButton(), true);
-            }
+            ExtendedFabUtil.toggleVisibilityOnScroll(directFab, scrollY, oldScrollY);
         }
     }
 
@@ -74,14 +70,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         // TODO don't show fab if direct editing not available
         final ExtendedFloatingActionButton directEditingButton = getDirectEditingButton();
         directEditingButton.setExtended(false);
-        directEditingButton.setOnLongClickListener(v -> {
-            if (directEditingButton.isExtended()) {
-                directEditingButton.shrink();
-            } else {
-                directEditingButton.extend();
-            }
-            return true;
-        });
+        ExtendedFabUtil.toggleExtendedOnLongClick(directEditingButton);
         directEditingButton.setOnClickListener(v -> {
             listener.changeMode(NoteFragmentListener.Mode.DIRECT_EDIT);
         });

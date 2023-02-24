@@ -19,12 +19,16 @@ import androidx.core.view.isVisible
 import com.nextcloud.android.sso.helper.SingleAccountHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import it.niedermann.owncloud.notes.BuildConfig
+import it.niedermann.owncloud.notes.branding.Branded
+import it.niedermann.owncloud.notes.branding.BrandingUtil
 import it.niedermann.owncloud.notes.databinding.FragmentNoteDirectEditBinding
 import it.niedermann.owncloud.notes.persistence.DirectEditingRepository
 import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback
+import it.niedermann.owncloud.notes.shared.util.ExtendedFabUtil
+import it.niedermann.owncloud.notes.shared.util.ExtendedFabUtil.toggleVisibilityOnScroll
 
-class NoteDirectEditFragment : BaseNoteFragment() {
+class NoteDirectEditFragment : BaseNoteFragment(), Branded {
     private var _binding: FragmentNoteDirectEditBinding? = null
     private val binding: FragmentNoteDirectEditBinding
         get() = _binding!!
@@ -44,6 +48,7 @@ class NoteDirectEditFragment : BaseNoteFragment() {
     ): View {
         Log.d(TAG, "onCreateView() called")
         _binding = FragmentNoteDirectEditBinding.inflate(inflater, container, false)
+        setupFab()
         // TODO prepare webview
         setupWebSettings(binding.noteWebview.settings)
         // TODO remove this
@@ -61,6 +66,18 @@ class NoteDirectEditFragment : BaseNoteFragment() {
             "DirectEditingMobileInterface",
         )
         return binding.root
+    }
+
+    private fun setupFab() {
+        binding.plainEditingFab.isExtended = false
+        ExtendedFabUtil.toggleExtendedOnLongClick(binding.plainEditingFab)
+        binding.noteWebview.setOnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
+            toggleVisibilityOnScroll(binding.plainEditingFab, scrollY, oldScrollY)
+        }
+        binding.plainEditingFab.setOnClickListener {
+            // TODO save note?
+            listener.changeMode(NoteFragmentListener.Mode.EDIT)
+        }
     }
 
     override fun onDestroyView() {
@@ -147,8 +164,8 @@ class NoteDirectEditFragment : BaseNoteFragment() {
     }
 
     override fun applyBrand(color: Int) {
-        // TODO check if any branding needed
-        // nothing for now
+        val util = BrandingUtil.of(color, requireContext())
+        util.material.themeExtendedFAB(binding.plainEditingFab)
     }
 
     companion object {
@@ -194,6 +211,7 @@ class NoteDirectEditFragment : BaseNoteFragment() {
         activity?.runOnUiThread {
             binding.progress.isVisible = false
             binding.noteWebview.isVisible = true
+            binding.plainEditingFab.isVisible = true
         }
     }
 }

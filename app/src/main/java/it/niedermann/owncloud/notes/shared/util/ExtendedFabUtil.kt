@@ -8,7 +8,7 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 
 object ExtendedFabUtil {
     @JvmStatic
-    public fun setExtendedFabVisibility(
+    fun setExtendedFabVisibility(
         extendedFab: ExtendedFloatingActionButton,
         visibility: Boolean,
     ) {
@@ -34,6 +34,32 @@ object ExtendedFabUtil {
                     extendedFab.startAnimation(animation)
                 }
             }
+        }
+    }
+
+    @JvmStatic
+    fun toggleExtendedOnLongClick(extendedFab: ExtendedFloatingActionButton) {
+        extendedFab.setOnLongClickListener { v: View? ->
+            if (extendedFab.isExtended) {
+                extendedFab.shrink()
+            } else {
+                extendedFab.extend()
+            }
+            true
+        }
+    }
+
+    @JvmStatic
+    fun toggleVisibilityOnScroll(
+        extendedFab: ExtendedFloatingActionButton,
+        scrollY: Int,
+        oldScrollY: Int,
+    ) {
+        @Suppress("ConvertTwoComparisonsToRangeCheck")
+        if (oldScrollY > 0 && scrollY > oldScrollY && extendedFab.isShown) {
+            setExtendedFabVisibility(extendedFab, false)
+        } else if (scrollY < oldScrollY && !extendedFab.isShown) {
+            setExtendedFabVisibility(extendedFab, true)
         }
     }
 }
