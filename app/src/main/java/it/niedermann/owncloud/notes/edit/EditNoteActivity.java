@@ -145,22 +145,11 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
      *
      * @param noteId ID of the existing note.
      */
+    // TODO this method is no longer needed
     private void launchExistingNote(long accountId, long noteId) {
-        final var prefKeyNoteMode = getString(R.string.pref_key_note_mode);
-        final var prefKeyLastMode = getString(R.string.pref_key_last_note_mode);
-        final var prefValueEdit = getString(R.string.pref_value_mode_edit);
-        final var prefValuePreview = getString(R.string.pref_value_mode_preview);
-        final var prefValueLast = getString(R.string.pref_value_mode_last);
-
-        final var preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        final String mode = preferences.getString(prefKeyNoteMode, prefValueEdit);
-        final String lastMode = preferences.getString(prefKeyLastMode, prefValueEdit);
-        boolean editMode = true;
-        if (prefValuePreview.equals(mode) || (prefValueLast.equals(mode) && prefValuePreview.equals(lastMode))) {
-            editMode = false;
-        }
-        launchExistingNote(accountId, noteId, editMode);
+        launchExistingNote(accountId, noteId, false);
     }
+
 
     /**
      * Starts a {@link NoteEditFragment} or {@link NotePreviewFragment} for an existing note.
@@ -170,21 +159,46 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
      *               <code>true</code> for {@link NoteEditFragment},
      *               <code>false</code> for {@link NotePreviewFragment}.
      */
+    // TODO remove edit param
     private void launchExistingNote(long accountId, long noteId, boolean edit) {
         // save state of the fragment in order to resume with the same note and originalNote
         Fragment.SavedState savedState = null;
         if (fragment != null) {
             savedState = getSupportFragmentManager().saveFragmentInstanceState(fragment);
         }
-        // TODO switch between the three modes, don't hardcode direct edit
-        fragment = NoteDirectEditFragment.newInstance(accountId, noteId);
+        fragment = getNoteFragment(accountId, noteId);
 
         if (savedState != null) {
             fragment.setInitialSavedState(savedState);
         }
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment).commit();
-        // TODO only hide toolbar in direct editing mode
-        binding.toolbar.setVisibility(View.GONE);
+    }
+
+    private BaseNoteFragment getNoteFragment(long accountId, long noteId) {
+        final var prefKeyNoteMode = getString(R.string.pref_key_note_mode);
+        final var prefKeyLastMode = getString(R.string.pref_key_last_note_mode);
+        final var prefValueEdit = getString(R.string.pref_value_mode_edit);
+        final var prefValueDirectEdit = getString(R.string.pref_value_mode_direct_edit);
+        final var prefValuePreview = getString(R.string.pref_value_mode_preview);
+        final var prefValueLast = getString(R.string.pref_value_mode_last);
+
+        final var preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        final String modePreference = preferences.getString(prefKeyNoteMode, prefValueDirectEdit);
+
+        String effectiveMode = modePreference;
+        if (modePreference.equals(prefValueLast)) {
+            effectiveMode = preferences.getString(prefKeyLastMode, prefValueDirectEdit);
+        }
+
+        if (effectiveMode.equals(prefValueEdit)) {
+            return NoteEditFragment.newInstance(accountId, noteId);
+        } else if (effectiveMode.equals(prefValueDirectEdit)) {
+            return NoteDirectEditFragment.newInstance(accountId, noteId);
+        } else if (effectiveMode.equals(prefValuePreview)) {
+            return NotePreviewFragment.newInstance(accountId, noteId);
+        } else {
+            throw new IllegalStateException("Unknown note mode: " + effectiveMode);
+        }
     }
 
     /**
@@ -220,6 +234,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         if (content == null) {
             content = "";
         }
+        // TODO handle with direct edit
         final var newNote = new Note(null, Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(content, this), content, categoryTitle, favorite, null);
         fragment = NoteEditFragment.newInstanceWithNewNote(newNote);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment).commit();
@@ -258,6 +273,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         final int itemId = item.getItemId();
+        // TODO handle this? how do we switch modes now?
         if (itemId == android.R.id.home) {
             close();
             return true;
@@ -283,8 +299,10 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         final String prefKeyLastMode = getString(R.string.pref_key_last_note_mode);
         if (fragment instanceof NoteEditFragment) {
             preferences.edit().putString(prefKeyLastMode, getString(R.string.pref_value_mode_edit)).apply();
-        } else {
+        } else if (fragment instanceof NotePreviewFragment) {
             preferences.edit().putString(prefKeyLastMode, getString(R.string.pref_value_mode_preview)).apply();
+        } else if (fragment instanceof NoteDirectEditFragment) {
+            preferences.edit().putString(prefKeyLastMode, getString(R.string.pref_value_mode_direct_edit)).apply();
         }
         fragment.onCloseNote();
 
@@ -308,6 +326,11 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
                 binding.toolbar.setSubtitle(NoteUtil.extendCategory(note.getCategory()));
             }
         }
+    }
+
+    @Override
+    public void setToolbarVisibility(boolean visible) {
+        binding.toolbar.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
     @Override

@@ -35,6 +35,16 @@
             android:summary="%s"
             android:title="@string/settings_theme_title" />
 
+        <ListPreference
+            android:defaultValue="@string/pref_value_mode_last"
+            android:entries="@array/noteMode_entries_new"
+            android:entryValues="@array/noteMode_values"
+            android:icon="@drawable/ic_remove_red_eye_grey_24dp"
+            android:key="@string/pref_key_note_mode"
+            android:layout="@layout/item_pref"
+            android:summary="%s"
+            android:title="@string/settings_note_mode_new" />
+
         <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
             android:icon="@drawable/ic_baseline_dashboard_24"
             android:key="@string/pref_key_gridview"
@@ -57,16 +67,6 @@
             android:layout="@layout/item_pref"
             android:summary="%s"
             android:title="@string/settings_font_size" />
-
-        <ListPreference
-            android:defaultValue="@string/pref_value_mode_edit"
-            android:entries="@array/noteMode_entries"
-            android:entryValues="@array/noteMode_values"
-            android:icon="@drawable/ic_remove_red_eye_grey_24dp"
-            android:key="@string/pref_key_note_mode"
-            android:layout="@layout/item_pref"
-            android:summary="%s"
-            android:title="@string/settings_note_mode" />
 
         <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
             android:defaultValue="true"

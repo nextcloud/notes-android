@@ -370,5 +370,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         void close();
 
         void onNoteUpdated(Note note);
+
+        void setToolbarVisibility(boolean visible);
     }
 }

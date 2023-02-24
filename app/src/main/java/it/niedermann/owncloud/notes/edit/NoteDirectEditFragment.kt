@@ -1,22 +1,24 @@
 package it.niedermann.owncloud.notes.edit
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.pm.ApplicationInfo
+import android.net.http.SslError
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.JavascriptInterface
+import android.webkit.SslErrorHandler
 import android.webkit.WebSettings
 import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.ScrollView
 import androidx.core.view.isVisible
 import com.nextcloud.android.sso.helper.SingleAccountHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import it.niedermann.owncloud.notes.BuildConfig
-import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.databinding.FragmentNoteDirectEditBinding
 import it.niedermann.owncloud.notes.persistence.DirectEditingRepository
 import it.niedermann.owncloud.notes.persistence.entity.Note
@@ -26,16 +28,6 @@ class NoteDirectEditFragment : BaseNoteFragment() {
     private var _binding: FragmentNoteDirectEditBinding? = null
     private val binding: FragmentNoteDirectEditBinding
         get() = _binding!!
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        super.onPrepareOptionsMenu(menu)
-        menu.findItem(R.id.menu_edit).isVisible = false
-        menu.findItem(R.id.menu_preview).isVisible = true
-    }
 
     public override fun getScrollView(): ScrollView? {
         return null
@@ -54,6 +46,16 @@ class NoteDirectEditFragment : BaseNoteFragment() {
         _binding = FragmentNoteDirectEditBinding.inflate(inflater, container, false)
         // TODO prepare webview
         setupWebSettings(binding.noteWebview.settings)
+        // TODO remove this
+        binding.noteWebview.webViewClient = object : WebViewClient() {
+            override fun onReceivedSslError(
+                view: WebView?,
+                handler: SslErrorHandler?,
+                error: SslError?,
+            ) {
+                handler?.proceed()
+            }
+        }
         binding.noteWebview.addJavascriptInterface(
             DirectEditingMobileInterface(this),
             "DirectEditingMobileInterface",
@@ -67,6 +69,11 @@ class NoteDirectEditFragment : BaseNoteFragment() {
         _binding = null
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        listener.setToolbarVisibility(false)
+    }
+
     override fun onNoteLoaded(note: Note) {
         super.onNoteLoaded(note)
         Log.d(TAG, "onNoteLoaded() called with: note = $note")
@@ -78,6 +85,7 @@ class NoteDirectEditFragment : BaseNoteFragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ url ->
                 if (BuildConfig.DEBUG) {
+                    // TODO don't print url (security risk)
                     Log.d(TAG, "onNoteLoaded: url = $url")
                 }
                 binding.noteWebview.loadUrl(url)
@@ -182,6 +190,7 @@ class NoteDirectEditFragment : BaseNoteFragment() {
     }
 
     private fun onLoaded() {
+        Log.d(TAG, "onLoaded: note loaded")
         activity?.runOnUiThread {
             binding.progress.isVisible = false
             binding.noteWebview.isVisible = true
