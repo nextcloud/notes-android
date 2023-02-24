@@ -215,17 +215,17 @@
     <string name="manage_accounts">Manage accounts</string>
     <string name="action_formatting_help">Formatting</string>
 
-    <string-array name="noteMode_entries">
-        <item>Open in edit mode</item>
-        <item>Open in preview mode</item>
-        <item>Remember my last selection</item>
-    </string-array>
 
-    <string-array name="noteMode_entries_new">
-        <item>Plain edit mode</item>
-        <item>Plain preview</item>
-        <item>Rich edit mode</item>
-        <item>Remember my last selection</item>
+    <string name="noteMode_plain_edit">Plain edit mode</string>
+    <string name="noteMode_plain_preview">Plain preview</string>
+    <string name="noteMode_rich_edit">Rich edit mode</string>
+    <string name="noteMode_remember_last">Remember my last selection</string>
+
+    <string-array name="noteMode_entries_new" translatable="false">
+        <item>@string/noteMode_plain_edit</item>
+        <item>@string/noteMode_plain_preview</item>
+        <item>@string/noteMode_rich_edit</item>
+        <item>@string/noteMode_remember_last</item>
     </string-array>
 
     <string-array name="fontSize_entries">

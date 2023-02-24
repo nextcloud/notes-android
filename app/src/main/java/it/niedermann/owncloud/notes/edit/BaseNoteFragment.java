@@ -143,6 +143,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     @Nullable
     protected abstract ScrollView getScrollView();
 
+
     protected abstract void scrollToY(int scrollY);
 
     @Override
@@ -273,8 +274,15 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                 if (scrollY > 0) {
                     note.setScrollY(scrollY);
                 }
+                onScroll(scrollY, oldScrollY);
             });
         }
+    }
+
+    /**
+     * Scroll callback, to be overridden by subclasses. Default implementation is empty
+     */
+    protected void onScroll(int scrollY, int oldScrollY) {
     }
 
     public void onCloseNote() {
@@ -367,10 +375,16 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     }
 
     public interface NoteFragmentListener {
+        enum Mode {
+            EDIT, PREVIEW, DIRECT_EDIT
+        }
+
         void close();
 
         void onNoteUpdated(Note note);
 
         void setToolbarVisibility(boolean visible);
+
+        void changeMode(@NonNull Mode mode);
     }
 }

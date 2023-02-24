@@ -61,4 +61,19 @@
         app:backgroundTint="@color/defaultBrand"
         app:srcCompat="@drawable/ic_keyboard_arrow_down_white_24dp"
         tools:visibility="visible" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/direct_editing"
+        style="?attr/floatingActionButtonPrimaryStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/spacer_2x"
+        android:contentDescription="@string/noteMode_rich_edit"
+        android:text="@string/noteMode_rich_edit"
+        android:visibility="visible"
+        app:backgroundTint="@color/defaultBrand"
+        app:layout_anchor="@id/scrollView"
+        app:layout_anchorGravity="bottom|end"
+        app:icon="@drawable/ic_rich_editing" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

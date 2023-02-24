@@ -25,6 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
 
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import it.niedermann.owncloud.notes.R;
@@ -101,6 +102,11 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     @Override
     protected FloatingActionButton getSearchPrevButton() {
         return binding.searchPrev;
+    }
+
+    @Override
+    protected @NonNull ExtendedFloatingActionButton getDirectEditingButton() {
+        return binding.directEditing;
     }
 
     @Nullable

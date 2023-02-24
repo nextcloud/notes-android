@@ -1,6 +1,5 @@
 package it.niedermann.owncloud.notes.edit;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Layout;
@@ -16,12 +15,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.regex.Pattern;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
+import it.niedermann.owncloud.notes.shared.util.ExtendedFabUtil;
 
 public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
@@ -52,6 +53,38 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
             searchQuery = savedInstanceState.getString(saved_instance_key_searchQuery, "");
             currentOccurrence = savedInstanceState.getInt(saved_instance_key_currentOccurrence, 1);
         }
+    }
+
+    @Override
+    protected void onScroll(int scrollY, int oldScrollY) {
+        super.onScroll(scrollY, oldScrollY);
+        if (getSearchNextButton() == null || getSearchNextButton().getVisibility() != View.VISIBLE) {
+            final ExtendedFloatingActionButton directFab = getDirectEditingButton();
+            if (oldScrollY > 0 && scrollY > oldScrollY && directFab.isShown()) {
+                ExtendedFabUtil.setExtendedFabVisibility(getDirectEditingButton(), false);
+            } else if (scrollY < oldScrollY && !directFab.isShown()) {
+                ExtendedFabUtil.setExtendedFabVisibility(getDirectEditingButton(), true);
+            }
+        }
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        // TODO don't show fab if direct editing not available
+        final ExtendedFloatingActionButton directEditingButton = getDirectEditingButton();
+        directEditingButton.setExtended(false);
+        directEditingButton.setOnLongClickListener(v -> {
+            if (directEditingButton.isExtended()) {
+                directEditingButton.shrink();
+            } else {
+                directEditingButton.extend();
+            }
+            return true;
+        });
+        directEditingButton.setOnClickListener(v -> {
+            listener.changeMode(NoteFragmentListener.Mode.DIRECT_EDIT);
+        });
     }
 
     @Override
@@ -199,7 +232,12 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
     protected abstract FloatingActionButton getSearchPrevButton();
 
+    @NonNull
+    protected abstract ExtendedFloatingActionButton getDirectEditingButton();
+
+
     private void showSearchFabs() {
+        ExtendedFabUtil.setExtendedFabVisibility(getDirectEditingButton(), false);
         final var next = getSearchNextButton();
         final var prev = getSearchPrevButton();
         if (prev != null) {
@@ -291,5 +329,6 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         final var util = BrandingUtil.of(color, requireContext());
         util.material.themeFAB(getSearchNextButton());
         util.material.themeFAB(getSearchPrevButton());
+        util.material.themeExtendedFAB(getDirectEditingButton());
     }
 }
