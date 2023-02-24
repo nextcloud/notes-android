@@ -183,11 +183,11 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         final var prefValueLast = getString(R.string.pref_value_mode_last);
 
         final var preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        final String modePreference = preferences.getString(prefKeyNoteMode, prefValueDirectEdit);
+        final String modePreference = preferences.getString(prefKeyNoteMode, prefValueEdit);
 
         String effectiveMode = modePreference;
         if (modePreference.equals(prefValueLast)) {
-            effectiveMode = preferences.getString(prefKeyLastMode, prefValueDirectEdit);
+            effectiveMode = preferences.getString(prefKeyLastMode, prefValueEdit);
         }
 
         if (effectiveMode.equals(prefValueEdit)) {
