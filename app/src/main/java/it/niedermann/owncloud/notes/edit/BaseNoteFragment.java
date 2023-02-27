@@ -285,6 +285,10 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     protected void onScroll(int scrollY, int oldScrollY) {
     }
 
+    protected boolean shouldShowToolbar() {
+        return true;
+    }
+
     public void onCloseNote() {
         if (!titleModified && originalNote == null && getContent().isEmpty()) {
             repo.deleteNoteAndSync(localAccount, note.getId());
@@ -382,8 +386,6 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         void close();
 
         void onNoteUpdated(Note note);
-
-        void setToolbarVisibility(boolean visible);
 
         void changeMode(@NonNull Mode mode);
     }

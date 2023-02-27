@@ -170,6 +170,11 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
             fragment.setInitialSavedState(savedState);
         }
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment).commit();
+        if(!fragment.shouldShowToolbar()){
+            binding.toolbar.setVisibility(View.GONE);
+        }else {
+            binding.toolbar.setVisibility(View.VISIBLE);
+        }
     }
 
     private String getPreferenceMode() {
@@ -332,11 +337,6 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
                 binding.toolbar.setSubtitle(NoteUtil.extendCategory(note.getCategory()));
             }
         }
-    }
-
-    @Override
-    public void setToolbarVisibility(boolean visible) {
-        binding.toolbar.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
     @Override

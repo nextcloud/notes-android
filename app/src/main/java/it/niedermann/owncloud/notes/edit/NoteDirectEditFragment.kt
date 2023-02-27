@@ -1,12 +1,12 @@
 package it.niedermann.owncloud.notes.edit
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.net.http.SslError
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.JavascriptInterface
@@ -26,12 +26,14 @@ import it.niedermann.owncloud.notes.persistence.DirectEditingRepository
 import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback
 import it.niedermann.owncloud.notes.shared.util.ExtendedFabUtil
-import it.niedermann.owncloud.notes.shared.util.ExtendedFabUtil.toggleVisibilityOnScroll
 
 class NoteDirectEditFragment : BaseNoteFragment(), Branded {
     private var _binding: FragmentNoteDirectEditBinding? = null
     private val binding: FragmentNoteDirectEditBinding
         get() = _binding!!
+
+    // for hiding / showing the fab
+    private var scrollStart: Int = 0
 
     public override fun getScrollView(): ScrollView? {
         return null
@@ -71,8 +73,21 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
     private fun setupFab() {
         binding.plainEditingFab.isExtended = false
         ExtendedFabUtil.toggleExtendedOnLongClick(binding.plainEditingFab)
-        binding.noteWebview.setOnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
-            toggleVisibilityOnScroll(binding.plainEditingFab, scrollY, oldScrollY)
+        binding.noteWebview.setOnTouchListener { _, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    scrollStart = event.y.toInt()
+                }
+                MotionEvent.ACTION_UP -> {
+                    val scrollEnd = event.y.toInt()
+                    ExtendedFabUtil.toggleVisibilityOnScroll(
+                        binding.plainEditingFab,
+                        scrollStart,
+                        scrollEnd,
+                    )
+                }
+            }
+            return@setOnTouchListener false
         }
         binding.plainEditingFab.setOnClickListener {
             // TODO save note?
@@ -84,11 +99,6 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
         super.onDestroyView()
         binding.noteWebview.destroy()
         _binding = null
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        listener.setToolbarVisibility(false)
     }
 
     override fun onNoteLoaded(note: Note) {
@@ -106,11 +116,14 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
                     Log.d(TAG, "onNoteLoaded: url = $url")
                 }
                 binding.noteWebview.loadUrl(url)
+                // TODO show warn/error if not loaded after 10 seconds
             }, { throwable ->
                 // TODO handle error
                 Log.e(TAG, "onNoteLoaded:", throwable)
             })
     }
+
+    override fun shouldShowToolbar(): Boolean = false
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun setupWebSettings(webSettings: WebSettings) {
