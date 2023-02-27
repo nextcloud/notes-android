@@ -69,6 +69,7 @@ android {
 }
 
 ext {
+    glideVersion = '4.15.0'
     roomVersion = "2.5.0"
 }
 
@@ -86,8 +87,8 @@ dependencies {
     }
 
     // Glide
-    implementation 'com.github.bumptech.glide:glide:4.15.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.15.0'
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
 
     // Android X
     implementation 'androidx.appcompat:appcompat:1.6.1'
