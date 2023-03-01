@@ -150,32 +150,39 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         launchExistingNote(accountId, noteId, null);
     }
 
+    private void launchExistingNote(long accountId, long noteId, @Nullable final String mode) {
+        launchExistingNote(accountId, noteId, mode, false);
+    }
 
     /**
      * Starts a {@link NoteEditFragment} or {@link NotePreviewFragment} for an existing note.
      *
-     * @param noteId ID of the existing note.
-     * @param mode   View-mode of the fragment (pref value or null). If null will be chosen based on
-     *               user preferences.
+     * @param noteId       ID of the existing note.
+     * @param mode         View-mode of the fragment (pref value or null). If null will be chosen based on
+     *                     user preferences.
+     * @param discardState If true, the state of the fragment will be discarded and a new fragment will be created
      */
-    private void launchExistingNote(long accountId, long noteId, @Nullable final String mode) {
+    private void launchExistingNote(long accountId, long noteId, @Nullable final String mode, final boolean discardState) {
         // save state of the fragment in order to resume with the same note and originalNote
-        Fragment.SavedState savedState = null;
-        if (fragment != null) {
-            savedState = getSupportFragmentManager().saveFragmentInstanceState(fragment);
-        }
-        fragment = getNoteFragment(accountId, noteId, mode);
+        runOnUiThread(() -> {
+            Fragment.SavedState savedState = null;
+            if (fragment != null && !discardState) {
+                savedState = getSupportFragmentManager().saveFragmentInstanceState(fragment);
+            }
+            fragment = getNoteFragment(accountId, noteId, mode);
 
-        if (savedState != null) {
-            fragment.setInitialSavedState(savedState);
-        }
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment).commit();
-        if(!fragment.shouldShowToolbar()){
-            binding.toolbar.setVisibility(View.GONE);
-        }else {
-            binding.toolbar.setVisibility(View.VISIBLE);
-        }
+            if (savedState != null) {
+                fragment.setInitialSavedState(savedState);
+            }
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment).commit();
+            if (!fragment.shouldShowToolbar()) {
+                binding.toolbar.setVisibility(View.GONE);
+            } else {
+                binding.toolbar.setVisibility(View.VISIBLE);
+            }
+        });
     }
+
 
     private String getPreferenceMode() {
         final var prefKeyNoteMode = getString(R.string.pref_key_note_mode);
@@ -289,10 +296,10 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
             close();
             return true;
         } else if (itemId == R.id.menu_preview) {
-            changeMode(Mode.PREVIEW);
+            changeMode(Mode.PREVIEW, false);
             return true;
         } else if (itemId == R.id.menu_edit) {
-            changeMode(Mode.EDIT);
+            changeMode(Mode.EDIT, false);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -340,18 +347,18 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     }
 
     @Override
-    public void changeMode(@NonNull Mode mode) {
+    public void changeMode(@NonNull Mode mode, boolean reloadNote) {
         switch (mode) {
             case EDIT:
-                launchExistingNote(getAccountId(), getNoteId(), getString(R.string.pref_value_mode_edit));
+                launchExistingNote(getAccountId(), getNoteId(), getString(R.string.pref_value_mode_edit), reloadNote);
                 break;
             case PREVIEW:
-                launchExistingNote(getAccountId(), getNoteId(), getString(R.string.pref_value_mode_preview));
+                launchExistingNote(getAccountId(), getNoteId(), getString(R.string.pref_value_mode_preview), reloadNote);
                 break;
             case DIRECT_EDIT:
                 // TODO deal with conflict when doing some edits and then changing to direct edit
                 // TODO deal with note not created yet on server
-                launchExistingNote(getAccountId(), getNoteId(), getString(R.string.pref_value_mode_direct_edit));
+                launchExistingNote(getAccountId(), getNoteId(), getString(R.string.pref_value_mode_direct_edit), reloadNote);
                 break;
             default:
                 throw new IllegalStateException("Unknown mode: " + mode);

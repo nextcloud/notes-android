@@ -45,7 +45,7 @@ class DirectEditingRepository private constructor(private val applicationContext
         return Single.fromCallable {
             val call = notesRepository.getServerSettings(account, ApiVersion.API_VERSION_1_0)
             val response = call.execute()
-            response.body()?.notesPath ?: ""
+            response.body()?.notesPath ?: throw RuntimeException("No notes path available")
         }.subscribeOn(Schedulers.io())
     }
 

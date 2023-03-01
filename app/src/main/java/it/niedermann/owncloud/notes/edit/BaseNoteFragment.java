@@ -71,6 +71,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     private Note originalNote;
     private int originalScrollY;
     protected NotesRepository repo;
+    @Nullable
     protected NoteFragmentListener listener;
     private boolean titleModified = false;
 
@@ -106,6 +107,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                         }
                         isNew = false;
                         note = originalNote = repo.getNoteById(id);
+                        Log.d(TAG, "TESTING: retrieved note: " + note);
                         requireActivity().runOnUiThread(() -> onNoteLoaded(note));
                         requireActivity().invalidateOptionsMenu();
                     } else {
@@ -241,7 +243,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                     .show(requireActivity().getSupportFragmentManager(), BaseNoteFragment.class.getSimpleName()));
             return true;
         } else if (itemId == R.id.menu_share) {
-            ShareUtil.openShareDialog(requireContext(), note.getTitle(), note.getContent());
+            shareNote();
             return false;
         } else if (itemId == MENU_ID_PIN) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -262,6 +264,10 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    protected void shareNote() {
+        ShareUtil.openShareDialog(requireContext(), note.getTitle(), note.getContent());
     }
 
     @CallSuper
@@ -387,6 +393,6 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
 
         void onNoteUpdated(Note note);
 
-        void changeMode(@NonNull Mode mode);
+        void changeMode(@NonNull Mode mode, boolean reloadNote);
     }
 }

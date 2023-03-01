@@ -366,4 +366,6 @@
     <string name="progress_import_indeterminate">Importing notes…</string>
     <string name="progress_import">Importing note %1$d of %2$d…</string>
     <string name="account_imported">Account imported.</string>
+    <string name="direct_editing_error">Error while loading rich editing</string>
+    <string name="switch_to_plain_editing">Switch to plain editing</string>
 </resources>

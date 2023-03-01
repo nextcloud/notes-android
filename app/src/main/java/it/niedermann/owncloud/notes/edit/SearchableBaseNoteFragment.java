@@ -72,7 +72,9 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         directEditingButton.setExtended(false);
         ExtendedFabUtil.toggleExtendedOnLongClick(directEditingButton);
         directEditingButton.setOnClickListener(v -> {
-            listener.changeMode(NoteFragmentListener.Mode.DIRECT_EDIT);
+            if (listener != null) {
+                listener.changeMode(NoteFragmentListener.Mode.DIRECT_EDIT, true);
+            }
         });
     }
 
