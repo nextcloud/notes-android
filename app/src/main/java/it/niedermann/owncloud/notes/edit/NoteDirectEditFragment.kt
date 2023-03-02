@@ -8,10 +8,15 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.JavascriptInterface
+import android.webkit.WebResourceError
+import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.ScrollView
 import androidx.core.view.isVisible
 import com.google.android.material.snackbar.Snackbar
+import com.nextcloud.android.common.ui.theme.utils.ColorRole
 import com.nextcloud.android.sso.helper.SingleAccountHelper
 import com.nextcloud.android.sso.model.SingleSignOnAccount
 import io.reactivex.Single
@@ -26,6 +31,7 @@ import it.niedermann.owncloud.notes.databinding.FragmentNoteDirectEditBinding
 import it.niedermann.owncloud.notes.persistence.ApiProvider
 import it.niedermann.owncloud.notes.persistence.DirectEditingRepository
 import it.niedermann.owncloud.notes.persistence.entity.Note
+import it.niedermann.owncloud.notes.persistence.sync.NotesAPI
 import it.niedermann.owncloud.notes.shared.model.ApiVersion
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback
 import it.niedermann.owncloud.notes.shared.util.ExtendedFabUtil
@@ -44,6 +50,10 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
         SingleAccountHelper.getCurrentSingleSignOnAccount(
             requireContext(),
         )
+    }
+
+    val notesApi: NotesAPI by lazy {
+        ApiProvider.getInstance().getNotesAPI(requireContext(), account, ApiVersion.API_VERSION_1_0)
     }
 
     // for hiding / showing the fab
@@ -126,22 +136,45 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
     }
 
     override fun onNoteLoaded(note: Note) {
-        Log.d(TAG, "onNoteLoaded() called with: note = $note")
         super.onNoteLoaded(note)
+        val newNoteParam = arguments?.getSerializable(PARAM_NEWNOTE) as Note?
+        if (newNoteParam != null) {
+            createAndLoadNote(note)
+        } else {
+            loadNoteInWebView(note)
+        }
+    }
+
+    private fun createAndLoadNote(newNote: Note) {
+        val noteCreateDisposable = Single
+            .fromCallable {
+                notesApi.createNote(newNote).execute().body()!!
+            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ createdNote ->
+                loadNoteInWebView(createdNote)
+            }, { throwable ->
+                note = null
+                handleLoadError()
+                Log.e(TAG, "createAndLoadNote:", throwable)
+            })
+        disposables.add(noteCreateDisposable)
+    }
+
+    private fun loadNoteInWebView(note: Note) {
         val directEditingRepository =
             DirectEditingRepository.getInstance(requireContext().applicationContext)
-        val urlDisposable =
-            directEditingRepository.getDirectEditingUrl(account, note)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ url ->
-                    if (BuildConfig.DEBUG) {
-                        Log.d(TAG, "onNoteLoaded: url = $url")
-                    }
-                    binding.noteWebview.loadUrl(url)
-                }, { throwable ->
-                    handleLoadError()
-                    Log.e(TAG, "onNoteLoaded:", throwable)
-                })
+        val urlDisposable = directEditingRepository.getDirectEditingUrl(account, note)
+            .observeOn(AndroidSchedulers.mainThread()).subscribe({ url ->
+                if (BuildConfig.DEBUG) {
+                    Log.d(TAG, "onNoteLoaded: url = $url")
+                }
+                binding.noteWebview.loadUrl(url)
+            }, { throwable ->
+                handleLoadError()
+                Log.e(TAG, "onNoteLoaded:", throwable)
+            })
         disposables.add(urlDisposable)
     }
 
@@ -202,6 +235,19 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
             DirectEditingMobileInterface(this),
             JS_INTERFACE_NAME,
         )
+
+        binding.noteWebview.webViewClient = object : WebViewClient() {
+            override fun onReceivedError(
+                view: WebView?,
+                request: WebResourceRequest?,
+                error: WebResourceError?,
+            ) {
+                super.onReceivedError(view, request, error)
+                if (request?.isForMainFrame == true) {
+                    handleLoadError()
+                }
+            }
+        }
     }
 
     /**
@@ -226,6 +272,7 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
     override fun applyBrand(color: Int) {
         val util = BrandingUtil.of(color, requireContext())
         util.material.themeExtendedFAB(binding.plainEditingFab)
+        util.platform.colorCircularProgressBar(binding.progress, ColorRole.PRIMARY)
     }
 
     private class DirectEditingMobileInterface(val noteDirectEditFragment: NoteDirectEditFragment) {
@@ -257,12 +304,10 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
 
     private fun changeToEditMode() {
         toggleLoadingUI(true)
-        val notesAPI = ApiProvider.getInstance()
-            .getNotesAPI(requireContext(), account, ApiVersion.API_VERSION_1_0)
         // TODO clean this up a bit
         val updateDisposable = Single.just(note.remoteId)
             .map { remoteId ->
-                val newNote = notesAPI.getNote(remoteId).singleOrError().blockingGet().response
+                val newNote = notesApi.getNote(remoteId).singleOrError().blockingGet().response
                 val localAccount = repo.getAccountByName(account.name)
                 repo.updateNoteAndSync(localAccount, note, newNote.content, newNote.title, null)
             }
@@ -319,6 +364,15 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
             val args = Bundle()
             args.putLong(PARAM_NOTE_ID, noteId)
             args.putLong(PARAM_ACCOUNT_ID, accountId)
+            fragment.arguments = args
+            return fragment
+        }
+
+        @JvmStatic
+        fun newInstanceWithNewNote(newNote: Note?): BaseNoteFragment {
+            val fragment = NoteDirectEditFragment()
+            val args = Bundle()
+            args.putSerializable(PARAM_NEWNOTE, newNote)
             fragment.arguments = args
             return fragment
         }

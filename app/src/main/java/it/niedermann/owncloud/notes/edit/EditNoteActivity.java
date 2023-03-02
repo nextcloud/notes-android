@@ -21,6 +21,7 @@ import androidx.preference.PreferenceManager;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
+import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -124,8 +125,19 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     }
 
     private long getAccountId() {
-        return getIntent().getLongExtra(PARAM_ACCOUNT_ID, 0);
+        final long idParam = getIntent().getLongExtra(PARAM_ACCOUNT_ID, 0);
+        if (idParam == 0) {
+            try {
+                final SingleSignOnAccount ssoAcc = SingleAccountHelper.getCurrentSingleSignOnAccount(this);
+                return repo.getAccountByName(ssoAcc.name).getId();
+            } catch (NextcloudFilesAppAccountNotFoundException |
+                     NoCurrentAccountSelectedException e) {
+                Log.w(TAG, "getAccountId: no current account", e);
+            }
+        }
+        return idParam;
     }
+
 
     /**
      * Starts the note fragment for an existing note or a new note.
@@ -174,23 +186,28 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
                 savedState = getSupportFragmentManager().saveFragmentInstanceState(fragment);
             }
             fragment = getNoteFragment(accountId, noteId, mode);
-
             if (savedState != null) {
                 fragment.setInitialSavedState(savedState);
             }
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment).commit();
-            if (!fragment.shouldShowToolbar()) {
-                binding.toolbar.setVisibility(View.GONE);
-            } else {
-                binding.toolbar.setVisibility(View.VISIBLE);
-            }
+            replaceFragment();
         });
     }
 
+    private void replaceFragment() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment).commit();
+        if (!fragment.shouldShowToolbar()) {
+            binding.toolbar.setVisibility(View.GONE);
+        } else {
+            binding.toolbar.setVisibility(View.VISIBLE);
+        }
+    }
 
+
+    /**
+     * Returns the preferred mode for the account. If the mode is "remember last" the last mode is returned.
+     * If the mode is "direct edit" and the account does not support direct edit, the default mode is returned.
+     */
     private String getPreferenceMode(long accountId) {
-        final Account accountById = repo.getAccountById(accountId);
-        final var directEditAvailable = accountById != null && accountById.isDirectEditingAvailable();
 
         final var prefKeyNoteMode = getString(R.string.pref_key_note_mode);
         final var prefKeyLastMode = getString(R.string.pref_key_last_note_mode);
@@ -207,8 +224,12 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
             effectiveMode = preferences.getString(prefKeyLastMode, defaultMode);
         }
 
-        if (effectiveMode.equals(prefValueDirectEdit) && !directEditAvailable) {
-            effectiveMode = defaultMode;
+        if (effectiveMode.equals(prefValueDirectEdit)) {
+            final Account accountById = repo.getAccountById(accountId);
+            final var directEditAvailable = accountById != null && accountById.isDirectEditingAvailable();
+            if (!directEditAvailable) {
+                effectiveMode = defaultMode;
+            }
         }
 
         return effectiveMode;
@@ -230,6 +251,20 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
             return NotePreviewFragment.newInstance(accountId, noteId);
         } else {
             throw new IllegalStateException("Unknown note modePref: " + modePref);
+        }
+    }
+
+
+    @NonNull
+    private BaseNoteFragment getNewNoteFragment(Note newNote) {
+        final var mode = getPreferenceMode(getAccountId());
+
+        final var prefValueDirectEdit = getString(R.string.pref_value_mode_direct_edit);
+
+        if (mode.equals(prefValueDirectEdit)) {
+            return NoteDirectEditFragment.newInstanceWithNewNote(newNote);
+        } else {
+            return NoteEditFragment.newInstanceWithNewNote(newNote);
         }
     }
 
@@ -266,11 +301,11 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         if (content == null) {
             content = "";
         }
-        // TODO handle with direct edit?
         final var newNote = new Note(null, Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(content, this), content, categoryTitle, favorite, null);
-        fragment = NoteEditFragment.newInstanceWithNewNote(newNote);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment).commit();
+        fragment = getNewNoteFragment(newNote);
+        replaceFragment();
     }
+
 
     private void launchReadonlyNote() {
         final var intent = getIntent();
@@ -287,7 +322,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         }
 
         fragment = NoteReadonlyFragment.newInstance(content.toString());
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment).commit();
+        replaceFragment();
     }
 
     @Override
@@ -369,7 +404,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
                 launchExistingNote(getAccountId(), getNoteId(), getString(R.string.pref_value_mode_preview), reloadNote);
                 break;
             case DIRECT_EDIT:
-                // TODO deal with note not created yet on server
+                // TODO deal with note not created yet on server (e.g. when creating a new note in edit mode and switching to direct edit)
                 launchExistingNote(getAccountId(), getNoteId(), getString(R.string.pref_value_mode_direct_edit), reloadNote);
                 break;
             default:

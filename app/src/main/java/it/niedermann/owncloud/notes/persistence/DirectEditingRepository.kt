@@ -7,10 +7,8 @@ import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.shared.model.ApiVersion
-import it.niedermann.owncloud.notes.shared.model.directediting.DirectEditingInfo
 import it.niedermann.owncloud.notes.shared.model.directediting.DirectEditingRequestBody
 
-// TODO better error handling
 class DirectEditingRepository private constructor(private val applicationContext: Context) {
 
     private val apiProvider: ApiProvider by lazy { ApiProvider.getInstance() }
@@ -18,27 +16,6 @@ class DirectEditingRepository private constructor(private val applicationContext
         NotesRepository.getInstance(
             applicationContext,
         )
-    }
-
-    // TODO check for internet connection, check for directEditing supporting fileId as argument
-    fun isDirectEditingSupportedByServer(account: SingleSignOnAccount): Single<Boolean> {
-        val pathSingle = getNotesPath(account)
-        val textAvailableSingle = getDirectEditingInfo(account)
-            .map { it.editors.containsKey(SUPPORTED_EDITOR_ID) }
-
-        return Single.zip(pathSingle, textAvailableSingle) { path, textAvailable ->
-            path.isNotEmpty() && textAvailable
-        }
-    }
-
-    private fun getDirectEditingInfo(account: SingleSignOnAccount): Single<DirectEditingInfo> {
-        val filesAPI = apiProvider.getFilesAPI(applicationContext, account)
-        return Single.fromCallable {
-            val call = filesAPI.getDirectEditingInfo()
-            val response = call.execute()
-            response.body()?.ocs?.data
-                ?: throw RuntimeException("No DirectEditingInfo available")
-        }.subscribeOn(Schedulers.io())
     }
 
     private fun getNotesPath(account: SingleSignOnAccount): Single<String> {
