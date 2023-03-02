@@ -25,6 +25,7 @@ import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.DialogChangeCategoryBinding;
 import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
+import it.niedermann.owncloud.notes.shared.util.KeyboardUtils;
 
 /**
  * This {@link DialogFragment} allows for the selection of a category.
@@ -170,12 +171,7 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (editCategory.getText() == null || editCategory.getText().length() == 0) {
-            editCategory.requestFocus();
-            if (getDialog() != null && getDialog().getWindow() != null) {
-                getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-            } else {
-                Log.w(TAG, "can not set SOFT_INPUT_STATE_ALWAYAS_VISIBLE because getWindow() == null");
-            }
+            KeyboardUtils.showKeyboardForEditText(editCategory);
         }
     }
 
