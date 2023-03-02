@@ -369,4 +369,5 @@
     <string name="direct_editing_error">Error while loading rich editing</string>
     <string name="switch_to_plain_editing">Switch to plain editing</string>
     <string name="action_back">Back</string>
+    <string name="user_agent" translatable="false">Mozilla/5.0 (Android) %1$s-android/%2$s</string>
 </resources>

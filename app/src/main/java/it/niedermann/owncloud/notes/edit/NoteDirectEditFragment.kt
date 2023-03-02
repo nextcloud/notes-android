@@ -178,8 +178,9 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
         webSettings.loadWithOverviewMode = true
 
         // user agent
-        // TODO change useragent?
-        webSettings.userAgentString = "Mozilla/5.0 (Android) Nextcloud-android/3.23.0"
+        val userAgent =
+            getString(R.string.user_agent, getString(R.string.app_name), BuildConfig.VERSION_NAME)
+        webSettings.userAgentString = userAgent
 
         // no private data storing
         webSettings.savePassword = false
