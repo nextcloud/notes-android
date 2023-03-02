@@ -36,6 +36,7 @@ import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ActivityEditBinding;
 import it.niedermann.owncloud.notes.edit.category.CategoryViewModel;
 import it.niedermann.owncloud.notes.main.MainActivity;
+import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
@@ -59,10 +60,13 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     private ActivityEditBinding binding;
 
     private BaseNoteFragment fragment;
+    private NotesRepository repo;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        repo = NotesRepository.getInstance(getApplicationContext());
 
         try {
             if (SingleAccountHelper.getCurrentSingleSignOnAccount(this) == null) {
@@ -184,11 +188,16 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     }
 
 
-    private String getPreferenceMode() {
+    private String getPreferenceMode(long accountId) {
+        final Account accountById = repo.getAccountById(accountId);
+        final var directEditAvailable = accountById != null && accountById.isDirectEditingAvailable();
+
         final var prefKeyNoteMode = getString(R.string.pref_key_note_mode);
         final var prefKeyLastMode = getString(R.string.pref_key_last_note_mode);
         final var defaultMode = getString(R.string.pref_value_mode_edit);
         final var prefValueLast = getString(R.string.pref_value_mode_last);
+        final var prefValueDirectEdit = getString(R.string.pref_value_mode_direct_edit);
+
 
         final var preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final String modePreference = preferences.getString(prefKeyNoteMode, defaultMode);
@@ -198,12 +207,16 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
             effectiveMode = preferences.getString(prefKeyLastMode, defaultMode);
         }
 
+        if (effectiveMode.equals(prefValueDirectEdit) && !directEditAvailable) {
+            effectiveMode = defaultMode;
+        }
+
         return effectiveMode;
     }
 
     private BaseNoteFragment getNoteFragment(long accountId, long noteId, final @Nullable String modePref) {
 
-        final var effectiveMode = modePref == null ? getPreferenceMode() : modePref;
+        final var effectiveMode = modePref == null ? getPreferenceMode(accountId) : modePref;
 
         final var prefValueEdit = getString(R.string.pref_value_mode_edit);
         final var prefValueDirectEdit = getString(R.string.pref_value_mode_direct_edit);
