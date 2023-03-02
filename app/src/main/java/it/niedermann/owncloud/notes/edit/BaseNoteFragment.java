@@ -107,7 +107,6 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                         }
                         isNew = false;
                         note = originalNote = repo.getNoteById(id);
-                        Log.d(TAG, "TESTING: retrieved note: " + note);
                         requireActivity().runOnUiThread(() -> onNoteLoaded(note));
                         requireActivity().invalidateOptionsMenu();
                     } else {

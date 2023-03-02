@@ -30,6 +30,7 @@ import it.niedermann.owncloud.notes.shared.model.ApiVersion
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback
 import it.niedermann.owncloud.notes.shared.util.ExtendedFabUtil
 import it.niedermann.owncloud.notes.shared.util.rx.DisposableSet
+import java.util.concurrent.TimeUnit
 
 class NoteDirectEditFragment : BaseNoteFragment(), Branded {
     private var _binding: FragmentNoteDirectEditBinding? = null
@@ -111,7 +112,21 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
         _binding = null
     }
 
+    override fun onResume() {
+        super.onResume()
+        val timeoutDisposable = Single.just(Unit)
+            .delay(LOAD_TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            .map {
+                if (!binding.noteWebview.isVisible) {
+                    Log.w(TAG, "Editor not loaded after $LOAD_TIMEOUT_SECONDS seconds")
+                    handleLoadError()
+                }
+            }.subscribe()
+        disposables.add(timeoutDisposable)
+    }
+
     override fun onNoteLoaded(note: Note) {
+        Log.d(TAG, "onNoteLoaded() called with: note = $note")
         super.onNoteLoaded(note)
         val directEditingRepository =
             DirectEditingRepository.getInstance(requireContext().applicationContext)
@@ -122,8 +137,6 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
                     if (BuildConfig.DEBUG) {
                         Log.d(TAG, "onNoteLoaded: url = $url")
                     }
-                    // TODO handle error
-                    // TODO show warn/error if not loaded after 10 seconds
                     binding.noteWebview.loadUrl(url)
                 }, { throwable ->
                     handleLoadError()
@@ -133,13 +146,21 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
     }
 
     private fun handleLoadError() {
-        BrandedSnackbar.make(
+        val snackbar = BrandedSnackbar.make(
             binding.plainEditingFab,
             getString(R.string.direct_editing_error),
             Snackbar.LENGTH_INDEFINITE,
-        ).setAction(R.string.switch_to_plain_editing) {
-            changeToEditMode()
-        }.show()
+        )
+        if (note != null) {
+            snackbar.setAction(R.string.switch_to_plain_editing) {
+                changeToEditMode()
+            }
+        } else {
+            snackbar.setAction(R.string.action_back) {
+                close()
+            }
+        }
+        snackbar.show()
     }
 
     override fun shouldShowToolbar(): Boolean = false
@@ -274,6 +295,7 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
 
     companion object {
         private const val TAG = "NoteDirectEditFragment"
+        private const val LOAD_TIMEOUT_SECONDS = 10L
         private const val JS_INTERFACE_NAME = "DirectEditingMobileInterface"
         private const val JS_RESULT_OK = "ok"
 

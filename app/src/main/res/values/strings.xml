@@ -368,4 +368,5 @@
     <string name="account_imported">Account imported.</string>
     <string name="direct_editing_error">Error while loading rich editing</string>
     <string name="switch_to_plain_editing">Switch to plain editing</string>
+    <string name="action_back">Back</string>
 </resources>
