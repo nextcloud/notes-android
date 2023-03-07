@@ -263,6 +263,9 @@ public class NotesRepository {
     public void updateModified(long id, long modified) {
         db.getAccountDao().updateModified(id, modified);
     }
+    public void updateDirectEditingAvailable(final long id, final boolean available) {
+        db.getAccountDao().updateDirectEditingAvailable(id, available);
+    }
 
 
     // Notes

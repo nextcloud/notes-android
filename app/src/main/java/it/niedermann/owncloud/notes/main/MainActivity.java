@@ -10,14 +10,12 @@ import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.RECENT;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.UNCATEGORIZED;
-import static it.niedermann.owncloud.notes.shared.util.NotesColorUtil.contrastRatioIsSufficient;
 import static it.niedermann.owncloud.notes.shared.util.SSOUtil.askForNewAccount;
 
 import android.accounts.NetworkErrorException;
 import android.animation.AnimatorInflater;
 import android.app.SearchManager;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -50,7 +48,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.nextcloud.android.common.ui.theme.utils.ColorRole;
-import com.nextcloud.android.common.ui.util.PlatformThemeUtil;
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.AccountImportCancelledException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;

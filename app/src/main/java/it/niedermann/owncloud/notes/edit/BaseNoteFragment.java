@@ -71,7 +71,8 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     private Note originalNote;
     private int originalScrollY;
     protected NotesRepository repo;
-    private NoteFragmentListener listener;
+    @Nullable
+    protected NoteFragmentListener listener;
     private boolean titleModified = false;
 
     protected boolean isNew = true;
@@ -142,6 +143,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
 
     @Nullable
     protected abstract ScrollView getScrollView();
+
 
     protected abstract void scrollToY(int scrollY);
 
@@ -240,7 +242,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                     .show(requireActivity().getSupportFragmentManager(), BaseNoteFragment.class.getSimpleName()));
             return true;
         } else if (itemId == R.id.menu_share) {
-            ShareUtil.openShareDialog(requireContext(), note.getTitle(), note.getContent());
+            shareNote();
             return false;
         } else if (itemId == MENU_ID_PIN) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -263,6 +265,10 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         return super.onOptionsItemSelected(item);
     }
 
+    protected void shareNote() {
+        ShareUtil.openShareDialog(requireContext(), note.getTitle(), note.getContent());
+    }
+
     @CallSuper
     protected void onNoteLoaded(Note note) {
         this.originalScrollY = note.getScrollY();
@@ -273,8 +279,19 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                 if (scrollY > 0) {
                     note.setScrollY(scrollY);
                 }
+                onScroll(scrollY, oldScrollY);
             });
         }
+    }
+
+    /**
+     * Scroll callback, to be overridden by subclasses. Default implementation is empty
+     */
+    protected void onScroll(int scrollY, int oldScrollY) {
+    }
+
+    protected boolean shouldShowToolbar() {
+        return true;
     }
 
     public void onCloseNote() {
@@ -367,8 +384,14 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     }
 
     public interface NoteFragmentListener {
+        enum Mode {
+            EDIT, PREVIEW, DIRECT_EDIT
+        }
+
         void close();
 
         void onNoteUpdated(Note note);
+
+        void changeMode(@NonNull Mode mode, boolean reloadNote);
     }
 }

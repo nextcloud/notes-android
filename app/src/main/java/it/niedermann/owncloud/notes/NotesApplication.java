@@ -5,6 +5,7 @@ import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
 import android.app.Application;
 import android.content.Context;
 import android.util.Log;
+import android.webkit.WebView;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.PreferenceManager;
@@ -29,6 +30,9 @@ public class NotesApplication extends Application {
         lockedPreference = prefs.getBoolean(getString(R.string.pref_key_lock), false);
         isGridViewEnabled = getDefaultSharedPreferences(this).getBoolean(getString(R.string.pref_key_gridview), false);
         super.onCreate();
+        if (BuildConfig.DEBUG) {
+            WebView.setWebContentsDebuggingEnabled(true);
+        }
     }
 
     public static void setAppTheme(DarkModeSetting setting) {

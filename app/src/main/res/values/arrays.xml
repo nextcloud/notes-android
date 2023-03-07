@@ -3,6 +3,7 @@
     <string-array name="noteMode_values">
         <item>@string/pref_value_mode_edit</item>
         <item>@string/pref_value_mode_preview</item>
+        <item>@string/pref_value_mode_direct_edit</item>
         <item>@string/pref_value_mode_last</item>
     </string-array>
     <string-array name="fontSize_values">
