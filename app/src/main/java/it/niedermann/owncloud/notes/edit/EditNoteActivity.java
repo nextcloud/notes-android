@@ -404,7 +404,6 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
                 launchExistingNote(getAccountId(), getNoteId(), getString(R.string.pref_value_mode_preview), reloadNote);
                 break;
             case DIRECT_EDIT:
-                // TODO deal with note not created yet on server (e.g. when creating a new note in edit mode and switching to direct edit)
                 launchExistingNote(getAccountId(), getNoteId(), getString(R.string.pref_value_mode_direct_edit), reloadNote);
                 break;
             default:
