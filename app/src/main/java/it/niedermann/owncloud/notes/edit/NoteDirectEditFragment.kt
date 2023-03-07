@@ -139,8 +139,9 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
 
     override fun onNoteLoaded(note: Note) {
         super.onNoteLoaded(note)
+        Log.d(TAG, "onNoteLoaded() called")
         val newNoteParam = arguments?.getSerializable(PARAM_NEWNOTE) as Note?
-        if (newNoteParam != null) {
+        if (newNoteParam != null || note.remoteId == null) {
             createAndLoadNote(note)
         } else {
             loadNoteInWebView(note)
@@ -148,9 +149,14 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
     }
 
     private fun createAndLoadNote(newNote: Note) {
+        Log.d(TAG, "createAndLoadNote() called")
         val noteCreateDisposable = Single
             .fromCallable {
                 notesApi.createNote(newNote).execute().body()!!
+            }
+            .map { createdNote ->
+                repo.updateRemoteId(newNote.id, createdNote.remoteId)
+                repo.getNoteById(newNote.id)
             }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -165,17 +171,18 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
     }
 
     private fun loadNoteInWebView(note: Note) {
+        Log.d(TAG, "loadNoteInWebView() called")
         val directEditingRepository =
             DirectEditingRepository.getInstance(requireContext().applicationContext)
         val urlDisposable = directEditingRepository.getDirectEditingUrl(account, note)
             .observeOn(AndroidSchedulers.mainThread()).subscribe({ url ->
                 if (BuildConfig.DEBUG) {
-                    Log.d(TAG, "onNoteLoaded: url = $url")
+                    Log.d(TAG, "loadNoteInWebView: url = $url")
                 }
                 binding.noteWebview.loadUrl(url)
             }, { throwable ->
                 handleLoadError()
-                Log.e(TAG, "onNoteLoaded:", throwable)
+                Log.e(TAG, "loadNoteInWebView:", throwable)
             })
         disposables.add(urlDisposable)
     }
