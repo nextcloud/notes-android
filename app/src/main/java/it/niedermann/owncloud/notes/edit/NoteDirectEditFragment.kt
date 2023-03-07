@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.edit
 
 import android.annotation.SuppressLint
+import android.net.http.SslError
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.JavascriptInterface
+import android.webkit.SslErrorHandler
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
@@ -247,6 +249,19 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
                     handleLoadError()
                 }
             }
+
+            @SuppressLint("WebViewClientOnReceivedSslError") // only for debug mode
+            override fun onReceivedSslError(
+                view: WebView?,
+                handler: SslErrorHandler?,
+                error: SslError?,
+            ) {
+                if (BuildConfig.DEBUG) {
+                    handler?.proceed()
+                } else {
+                    super.onReceivedSslError(view, handler, error)
+                }
+            }
         }
     }
 
@@ -304,7 +319,6 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
 
     private fun changeToEditMode() {
         toggleLoadingUI(true)
-        // TODO clean this up a bit
         val updateDisposable = Single.just(note.remoteId)
             .map { remoteId ->
                 val newNote = notesApi.getNote(remoteId).singleOrError().blockingGet().response
