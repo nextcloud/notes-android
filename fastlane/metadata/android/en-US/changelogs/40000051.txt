@@ -1,0 +1,5 @@
+## 4.0.0 RC1 (March 7th, 2023)
+
+- Design updates
+- Update Material3 theming (@stefan-niedermann)
+- Minor bug fixes
