@@ -48,8 +48,8 @@ desc "Build app bundle"
         tagName = getTagName(versionComponents)
         preReleaseChecks(versionInfo: versionInfo, tagName: tagName, type: versionComponents["type"], track: storeTrack)
         checkArtifactsExist()
-        tag(tagName)
-        uploadToPlayStore()
+        tag(name: tagName)
+        uploadToPlayStore(track: storeTrack)
     end
 
     desc "Run tests"
@@ -96,8 +96,8 @@ desc "Build app bundle"
 
 
     desc "Create release tag"
-    private_lane :tag do |versionInfo|
-        tagName = versionInfo["versionName"]
+    private_lane :tag do |options|
+        tagName = options[:name]
         add_git_tag(
           tag: tagName,
           sign: true
