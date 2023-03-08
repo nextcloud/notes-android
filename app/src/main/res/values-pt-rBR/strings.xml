@@ -63,6 +63,7 @@
     <string name="about_version">Você  está atualmente usando %1$s</string>
     <string name="about_maintainer_title">Mantenedor</string>
     <string name="about_developers_title">Desenvolvedores</string>
+    <string name="about_developers_original_author">autor original</string>
     <string name="about_translators_title">Tradutores </string>
     <string name="about_translators_transifex">Comunidade Nextcloud em %1$s</string>
     <string name="about_testers_title">Testadores</string>
@@ -177,11 +178,8 @@
     <string name="manage_accounts">Gerenciar contas</string>
     <string name="action_formatting_help">Formatação</string>
 
-    <string-array name="noteMode_entries">
-        <item>Abrir em modo de edição</item>
-        <item>Abrir em modo de visualização</item>
-        <item>Lembrar minha última escolha</item>
-    </string-array>
+
+    <string name="noteMode_remember_last">Lembrar minha última escolha</string>
 
     <string-array name="fontSize_entries">
         <item>Pequena</item>
@@ -307,4 +305,5 @@
     <string name="progress_import_indeterminate">Importando notas… </string>
     <string name="progress_import">Importando notas %1$d de %2$d…</string>
     <string name="account_imported">Conta importada.</string>
-</resources>
+    <string name="action_back">Voltar</string>
+    </resources>

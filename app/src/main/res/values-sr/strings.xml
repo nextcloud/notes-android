@@ -45,9 +45,14 @@
     <string name="settings_font_title">Фонт фиксне ширине</string>
     <string name="settings_font_size">Величина фонта</string>
     <string name="settings_wifi_only">Синхронизуј само преко бежичне везе</string>
+    <string name="settings_lock">Закључавање апликације (бета)</string>
     <string name="settings_lock_summary">Акредитиве уређаја</string>
     <string name="settings_background_sync">Позадинска синхронизација</string>
+    <string name="settings_prevent_screen_capture">Спречи снимак екрана</string>
     <string name="settings_gridview">Приказ мреже</string>
+    <string name="settings_keep_screen_on">Задржи укључен екран</string>
+    <string name="settings_keep_screen_on_summary">Када се прегледа или уређује белешка</string>
+
     <string name="error_sync">Синхронизација није успела%1$s</string>
     <string name="error_synchronization">Синхронизација није успела</string>
     <string name="error_no_network">Нема мрежне везе</string>
@@ -58,6 +63,7 @@
     <string name="about_version">Тренутно користите %1$s</string>
     <string name="about_maintainer_title">Одржаваоц</string>
     <string name="about_developers_title">Програмери</string>
+    <string name="about_developers_original_author">оригинални аутор</string>
     <string name="about_translators_title">Преводиоци</string>
     <string name="about_translators_transifex">Некстклауд заједница на %1$s</string>
     <string name="about_testers_title">Тестери</string>
@@ -105,14 +111,34 @@
     <string name="category_movies">Филмови</string>
     <string name="category_movie">Филм</string>
     <string name="category_work">Посао</string>
+    <string name="category_todo">Обавеза</string>
+    <string name="category_todos">Обавезе</string>
+    <string name="category_checklists">Листе за потврду</string>
     <string name="category_tasks">Задаци</string>
+    <string name="category_recipe">Рецепт</string>
     <string name="category_recipes">Рецепти</string>
     <string name="category_restaurant">Ресторан</string>
+    <string name="category_restaurants">Ресторани</string>
+    <string name="category_food">Храна</string>
+    <string name="category_bake">Пекара</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_key">Кључ</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_keys">Кључеви</string>
     <string name="category_password">Лозинка</string>
     <string name="category_passwords">Лозинке</string>
+    <string name="category_credentials">Креденцијал</string>
+    <string name="category_game">Игра</string>
     <string name="category_games">Игрице</string>
     <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
     <string name="category_play">Пусти</string>
+    <string name="category_gift">Поклон</string>
+    <string name="category_gifts">Поклони</string>
+    <!-- Like a gift -->
+    <string name="category_present">Дар</string>
+    <!-- Like a gift -->
+    <string name="category_presents">Дарови</string>
+
     <string name="account_already_imported">Налог је већ увезен</string>
     <string name="no_notes_yet">Још нема белешки</string>
     <string name="no_notes_yet_description">Притисните + дугме да направите нову белешку</string>
@@ -126,6 +152,7 @@
     <string name="error_dialog_title">О, не - шта сад? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Покушајте да форсирано затворите апликацију и стартујете је поново. Можда је била неисправна конекција ка Некстклауд апликацији.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Ако проблем настави да се дешава, пробајте да очистите податке од обе апликације: и Некстклауд и Некстклауд Белешки да бисте решили проблем.</string>
+    <string name="error_dialog_tip_clear_storage">Складиште можете да обришете тако што отворите информације о апликацији и изаберете Storage → Clear storage. ⚠️ Упозорење: Ово ће да обрише белешке које још увек нису синхронизоване!</string>
     <string name="error_dialog_tip_files_outdated">Изгледа да је верзија Некстклауд апликације стара. Посетите Play Store или Ф-дроид да скинете најновију верзију.</string>
     <string name="error_dialog_tip_files_force_stop">Нешто није у реду да Вашом Некстклауд апликацијом. Пробајте да форсирано зауставите обе, и Некстклауд апликацију и апликацију Некстклауд Белешки.</string>
     <string name="error_dialog_tip_files_delete_storage">Ако ово заустављање не помогне, очистите податке за обе апликације.</string>
@@ -139,21 +166,20 @@
     <string name="error_dialog_server_app_enabled">Проверите да ли сте инсталирали и укључили апликацију „Белешке” на Вашем серверу.</string>
     <string name="error_dialog_redirect">Сервер је одговорио са HTTP 302 кодом, што значи да немате инсталирану апликацију Белешке или да Вам сервер није правилно конфигурисан. Ово може да буде проузорковано произвољним додавањима у .htaccess фајлу или другим Некстклауд апликацијама као што је OID Client.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Искључите све оптимизације батерије за Некстаклауд и Белешке апликације.</string>
+    <string name="error_dialog_min_version">The Notes Андроид апликација захтева да је верзија Nextcloud Андроид апликације барем 3.18.</string>
     <string name="added_content">Додата „%1$s”</string>
     <string name="shared_text_empty">Дељени текст је празан</string>
     <string name="append_to_note">Додај на белешку</string>
     <string name="change_note_title">Промени назив белешке</string>
     <string name="menu_edit_title">Измени наслов</string>
     <string name="simple_security">Безбедност</string>
+    <string name="appearance_and_behavior">Изглед и понашање</string>
     <string name="simple_synchronization">Синхронизација</string>
     <string name="manage_accounts">Управљање налозима</string>
     <string name="action_formatting_help">Форматирање</string>
 
-    <string-array name="noteMode_entries">
-        <item>Отвори у режиму уређивања</item>
-        <item>Отвори у режиму прегледа</item>
-        <item>Запамти мој последњи избор</item>
-    </string-array>
+
+    <string name="noteMode_remember_last">Запамти мој последњи избор</string>
 
     <string-array name="fontSize_entries">
         <item>Мали</item>
@@ -192,6 +218,7 @@
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
     <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Форматирање у зависности од контекста</string>
     <string name="formatting_help_cbf_body_1">Главни циљ дизајна апликације Белешки је био да пружи алат који не стаје на пут. А моћи ћете и да форматирате текст Markdown синтактом. За разне од долепоменутих примера можете да користите и пречице, па можете форматирати белешке без куцања кодова испод.</string>
@@ -230,7 +257,16 @@
     <string name="formatting_help_code_body_3">А ако желите бојење синтакте, додајте и језик:</string>
 
     <string name="formatting_help_tables_title">Табеле</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">Колона %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Вредност %1d</string>
+
+    <string name="formatting_help_images_body_1">Линкови морају бити или комплетне URL адресе које почињу протоколом и доменом или апсолутне путање које почињу карактером %1$s.</string>
+    <string name="formatting_help_images_body_2">Да би сте били сагласни са Markdown форматом, молимо вас да користите означавајуће карактере у URL слика. Ово значи, на пример, да се размаци у URL замењују са %1$s.</string>
     <string name="formatting_help_images_title">Слике</string>
+    <string name="formatting_help_images_alt">Фенси слика</string>
+
     <string name="simple_other">Остало</string>
     <string name="sort_last_modified">Сортирај по времену измене</string>
     <string name="sort_alphabetically">Сортирај абецедно</string>
@@ -238,9 +274,36 @@
     <string name="error_action_open_deck_info">Отвори инфо о апликацији</string>
     <string name="error_action_open_network">Поставке мреже</string>
     <string name="error_action_update_files_app">Ажурирај</string>
+    <string name="no_account_configured_yet">Још увек није подешен ниједан налог</string>
     <string name="no_other_accounts">Нисте подесили ниједан други налог.</string>
     <string name="choose_account">Одаберите налог</string>
+    <string name="context_based_formatting">Искачући облачић форматирања у зависности од контекста</string>
+    <plurals name="remove_account_message">
+        <item quantity="one">Уклањање налога %1$s ће такође неповратно да обрише једну несинхронизовану измену.</item>
+        <item quantity="few">Уклањање налога %1$s ће такође неповратно да обрише %2$d несинхронизоване измене.</item>
+        <item quantity="other">Уклањање налога %1$s ће такође неповратно да обрише %2$d несинхронизованих измена.</item>
+    </plurals>
+    <string name="remove_account">Уклони %1$s</string>
+
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Морате бити повезани на интернет да бисте додали налог.</string>
+    <string name="settings_notes_path">Постави фолдер</string>
+
     <string name="simple_next">Следећа</string>
     <string name="simple_prev">Претходно</string>
+    <string name="simple_backup">Резервна копија</string>
+    <string name="backup">Открили смо стање апликације које не може да се опорави. Молимо вас да направите резервну копију ваших несихронизованих измена и очистите складиште Notes апликације.</string>
+    <string name="settings_notes_path_description">Фолдер у којем се на вашем Nextcloud серверу чувају белешке</string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
+    <string name="settings_notes_path_success">Нови фолдер за белешке: %1$s</string>
+    <string name="settings_file_suffix">Екстензија фајла</string>
+    <string name="settings_file_suffix_description">Екстензија фајла за нове белешке на вашем Nextcloud серверу</string>
+    <string name="settings_file_suffix_success">Суфикс новог фајла: %1$s</string>
+    <string name="http_status_code">HTTP статусни кôд: %1$d</string>
+    <string name="progress_import_indeterminate">Белешке се увозе...</string>
+    <string name="progress_import">Увози се белешка %1$d од укупно %2$d…</string>
+    <string name="account_imported">Налог је увезен.</string>
+    <string name="action_back">Назад</string>
     </resources>

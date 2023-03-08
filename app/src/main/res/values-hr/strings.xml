@@ -173,11 +173,8 @@
     <string name="manage_accounts">Upravljaj računima</string>
     <string name="action_formatting_help">Oblikovanje</string>
 
-    <string-array name="noteMode_entries">
-        <item>Otvori u načinu uređivanja</item>
-        <item>Otvori u načinu pregleda</item>
-        <item>Zapamti moj posljednji izbor</item>
-    </string-array>
+
+    <string name="noteMode_remember_last">Zapamti moj posljednji izbor</string>
 
     <string-array name="fontSize_entries">
         <item>Mali</item>
@@ -303,4 +300,5 @@
     <string name="progress_import_indeterminate">Uvoz bilješki...</string>
     <string name="progress_import">Uvoz bilješke %1$d od %2$d...</string>
     <string name="account_imported">Račun je uvezen.</string>
-</resources>
+    <string name="action_back">Natrag</string>
+    </resources>

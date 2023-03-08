@@ -63,6 +63,7 @@
     <string name="about_version">Jelenleg ezt a verziót használja: %1$s</string>
     <string name="about_maintainer_title">Karbantartó</string>
     <string name="about_developers_title">Fejlesztők</string>
+    <string name="about_developers_original_author">eredeti szerző</string>
     <string name="about_translators_title">Fordítók</string>
     <string name="about_translators_transifex">Nextcloud közösség a %1$s</string>
     <string name="about_testers_title">Tesztelők</string>
@@ -177,11 +178,8 @@
     <string name="manage_accounts">Fiókok kezelése</string>
     <string name="action_formatting_help">Formázás</string>
 
-    <string-array name="noteMode_entries">
-        <item>Megnyitás szerkesztésre</item>
-        <item>Megnyitás előnézetre</item>
-        <item>A legutóbbi döntés megjegyzése</item>
-    </string-array>
+
+    <string name="noteMode_remember_last">A legutóbbi döntés megjegyzése</string>
 
     <string-array name="fontSize_entries">
         <item>Kicsi</item>
@@ -302,4 +300,5 @@
     <string name="progress_import_indeterminate">Jegyzetek importálása…</string>
     <string name="progress_import">%1$d. / %2$d jegyzet importálása…</string>
     <string name="account_imported">Fiók importálva.</string>
-</resources>
+    <string name="action_back">Vissza</string>
+    </resources>

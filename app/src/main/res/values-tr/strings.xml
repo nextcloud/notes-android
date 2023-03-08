@@ -63,6 +63,7 @@
     <string name="about_version">Şu anda %1$s kullanıyorsunuz</string>
     <string name="about_maintainer_title">Sorumlu</string>
     <string name="about_developers_title">Geliştiriciler</string>
+    <string name="about_developers_original_author">özgün yazar</string>
     <string name="about_translators_title">Çevirmenler</string>
     <string name="about_translators_transifex">%1$s üzerindeki Nextcloud topluluğu</string>
     <string name="about_testers_title">Deneyenler</string>
@@ -177,11 +178,8 @@
     <string name="manage_accounts">Hesap yönetimi</string>
     <string name="action_formatting_help">Biçimlendirme</string>
 
-    <string-array name="noteMode_entries">
-        <item>Düzenleme kipinde aç</item>
-        <item>Ön izleme kipinde aç</item>
-        <item>Son seçimim hatırlansın</item>
-    </string-array>
+
+    <string name="noteMode_remember_last">Son seçimim hatırlansın</string>
 
     <string-array name="fontSize_entries">
         <item>Küçük</item>
@@ -302,4 +300,5 @@
     <string name="progress_import_indeterminate">Notlar içe aktarılıyor…</string>
     <string name="progress_import">Not %1$d / %2$d içe aktarılıyor…</string>
     <string name="account_imported">Hesap içe aktarıldı.</string>
-</resources>
+    <string name="action_back">Geri</string>
+    </resources>

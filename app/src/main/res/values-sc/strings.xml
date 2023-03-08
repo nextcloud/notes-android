@@ -151,11 +151,8 @@
     <string name="manage_accounts">Gesti contos</string>
     <string name="action_formatting_help">Formatatzione</string>
 
-    <string-array name="noteMode_entries">
-        <item>Aberi in modalidade modìfica</item>
-        <item>Aberi in modalidade anteprima</item>
-        <item>Regorda s\'ùrtimu sèberu</item>
-    </string-array>
+
+    <string name="noteMode_remember_last">Regorda s\'ùrtimu sèberu</string>
 
     <string-array name="fontSize_entries">
         <item>Piticu</item>
@@ -271,4 +268,5 @@
     <string name="settings_file_suffix_description">Estensione de archìviu pro notas noas in su Nextcloud tuo</string>
     <string name="settings_file_suffix_success">Sufissu de archìviu nou: %1$s</string>
     <string name="http_status_code">Còdighe de istadu HTTP: %1$d</string>
+    <string name="action_back">In segus</string>
     </resources>

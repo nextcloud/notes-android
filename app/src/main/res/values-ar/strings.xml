@@ -153,11 +153,6 @@
     <string name="manage_accounts">إدارة الحسابات</string>
     <string name="action_formatting_help">التنسيق</string>
 
-    <string-array name="noteMode_entries">
-        <item>فتح في وضع التحرير</item>
-        <item>فتح في وضع المعاينة</item>
-        <item>تذكر آخر ما أخترته</item>
-    </string-array>
 
     <string-array name="fontSize_entries">
         <item>صغير</item>

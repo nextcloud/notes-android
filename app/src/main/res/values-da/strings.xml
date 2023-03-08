@@ -145,11 +145,6 @@
     <string name="manage_accounts">Administrer konti</string>
     <string name="action_formatting_help">Formatering</string>
 
-    <string-array name="noteMode_entries">
-        <item>Åbn i redigeringstilstand</item>
-        <item>Åbn forhåndsvisning</item>
-        <item>Husk mine sidste selektion</item>
-    </string-array>
 
     <string-array name="fontSize_entries">
         <item>Lille</item>

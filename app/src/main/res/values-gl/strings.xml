@@ -177,11 +177,8 @@
     <string name="manage_accounts">Xestionar contas</string>
     <string name="action_formatting_help">Formatado</string>
 
-    <string-array name="noteMode_entries">
-        <item>Abrir en modo de edición</item>
-        <item>Abrir en modo de vista previa</item>
-        <item>Lembrar a miña última selección</item>
-    </string-array>
+
+    <string name="noteMode_remember_last">Lembrar a miña última selección</string>
 
     <string-array name="fontSize_entries">
         <item>Pequena</item>
@@ -298,4 +295,5 @@
     <string name="progress_import_indeterminate">A importar notas...</string>
     <string name="progress_import">A importar a nota %1$d de %2$d...</string>
     <string name="account_imported">Conta importada.</string>
-</resources>
+    <string name="action_back">Atrás</string>
+    </resources>

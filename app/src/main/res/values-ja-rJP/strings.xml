@@ -174,11 +174,8 @@
     <string name="manage_accounts">アカウント管理</string>
     <string name="action_formatting_help">フォーマット</string>
 
-    <string-array name="noteMode_entries">
-        <item>編集モードで開く</item>
-        <item>プレビューモードで開く</item>
-        <item>最後に使用したモードで開く</item>
-    </string-array>
+
+    <string name="noteMode_remember_last">最後に使用したモードで開く</string>
 
     <string-array name="fontSize_entries">
         <item>小</item>
@@ -294,4 +291,5 @@
     <string name="progress_import_indeterminate">ノートを導入しています…</string>
     <string name="progress_import">%2$d中%1$dのノートをインポート中...</string>
     <string name="account_imported">アカウントを導入しました。</string>
-</resources>
+    <string name="action_back">戻る</string>
+    </resources>

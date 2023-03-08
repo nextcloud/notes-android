@@ -173,11 +173,8 @@
     <string name="manage_accounts">Tilien hallinta</string>
     <string name="action_formatting_help">Muotoilu</string>
 
-    <string-array name="noteMode_entries">
-        <item>Avaa muokkaustilassa</item>
-        <item>Avaa esikatselutilassa</item>
-        <item>Muista viimeisin valintani</item>
-    </string-array>
+
+    <string name="noteMode_remember_last">Muista viimeisin valintani</string>
 
     <string-array name="fontSize_entries">
         <item>Pieni</item>
@@ -295,4 +292,5 @@
     <string name="progress_import_indeterminate">Tuodaan muistiinpanoja...</string>
     <string name="progress_import">Tuodaan muistiinpanoa %1$d/%2$d…</string>
     <string name="account_imported">Tili tuotu.</string>
-</resources>
+    <string name="action_back">Takaisin</string>
+    </resources>

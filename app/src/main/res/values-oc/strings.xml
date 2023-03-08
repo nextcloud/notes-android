@@ -151,4 +151,5 @@
     <string name="simple_next">Seguent</string>
     <string name="simple_prev">Precedent</string>
     <string name="simple_backup">Salvagarda</string>
+    <string name="action_back">Retorn</string>
     </resources>

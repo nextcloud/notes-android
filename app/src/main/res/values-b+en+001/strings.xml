@@ -63,6 +63,7 @@
     <string name="about_version">You are currently using %1$s</string>
     <string name="about_maintainer_title">Maintainer</string>
     <string name="about_developers_title">Developers</string>
+    <string name="about_developers_original_author">original author</string>
     <string name="about_translators_title">Translators</string>
     <string name="about_translators_transifex">Nextcloud community on %1$s</string>
     <string name="about_testers_title">Testers</string>
@@ -177,11 +178,6 @@
     <string name="manage_accounts">Manage accounts</string>
     <string name="action_formatting_help">Formatting</string>
 
-    <string-array name="noteMode_entries">
-        <item>Open in edit mode</item>
-        <item>Open in preview mode</item>
-        <item>Remember my last selection</item>
-    </string-array>
 
     <string-array name="fontSize_entries">
         <item>Small</item>
@@ -302,4 +298,4 @@
     <string name="progress_import_indeterminate">Importing notes…</string>
     <string name="progress_import">Importing note %1$d of %2$d…</string>
     <string name="account_imported">Account imported.</string>
-</resources>
+    </resources>

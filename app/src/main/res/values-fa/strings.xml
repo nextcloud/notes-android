@@ -149,11 +149,8 @@
     <string name="manage_accounts">مدیریت حساب‌ها</string>
     <string name="action_formatting_help">قالب‌بندی</string>
 
-    <string-array name="noteMode_entries">
-        <item> یادداشت را در حالت «ویرایش» باز کنید</item>
-        <item>یادداشت را در حالت پیش نمایش باز کنید</item>
-        <item>آخرین انتخاب من را به خاطر بسپار</item>
-    </string-array>
+
+    <string name="noteMode_remember_last">آخرین انتخاب من را به خاطر بسپار</string>
 
     <string-array name="fontSize_entries">
         <item>کوچک</item>
@@ -225,4 +222,5 @@
     <string name="simple_next">بعدی</string>
     <string name="simple_prev">قبلی</string>
     <string name="simple_backup">پشتیبان‌گیری</string>
+    <string name="action_back">بازگشت</string>
     </resources>

@@ -176,11 +176,8 @@
     <string name="manage_accounts">계정 관리</string>
     <string name="action_formatting_help">서식</string>
 
-    <string-array name="noteMode_entries">
-        <item>편집 모드로 열기</item>
-        <item>미리 보기 모드로 열기</item>
-        <item>마지막 선택 기억하기</item>
-    </string-array>
+
+    <string name="noteMode_remember_last">마지막 선택 기억하기</string>
 
     <string-array name="fontSize_entries">
         <item>작게</item>
@@ -291,4 +288,5 @@
     <string name="progress_import_indeterminate">노트 불러오는 중...</string>
     <string name="progress_import">%2$d의 노트 %1$d 불러오는 중...</string>
     <string name="account_imported">계정을 불러왔습니다.</string>
-</resources>
+    <string name="action_back">뒤로</string>
+    </resources>

@@ -177,11 +177,8 @@
     <string name="manage_accounts">Управление аккаунтами</string>
     <string name="action_formatting_help">Форматирование</string>
 
-    <string-array name="noteMode_entries">
-        <item>Открывать в режиме правки</item>
-        <item>Открывать в режиме просмотра</item>
-        <item>Запоминать выбранный режим</item>
-    </string-array>
+
+    <string name="noteMode_remember_last">Запоминать выбранный режим</string>
 
     <string-array name="fontSize_entries">
         <item>Маленький</item>
@@ -312,4 +309,5 @@
     <string name="progress_import_indeterminate">Импорт заметок...</string>
     <string name="progress_import">Импортировано заметок %1$d из %2$d...</string>
     <string name="account_imported">Учетная запись импортирована.</string>
-</resources>
+    <string name="action_back">Назад</string>
+    </resources>
