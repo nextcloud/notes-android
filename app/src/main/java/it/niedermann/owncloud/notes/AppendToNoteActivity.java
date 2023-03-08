@@ -65,4 +65,10 @@ public class AppendToNoteActivity extends MainActivity {
         }
         finish();
     }
+
+    @Override
+    public void onNoteActionsClick(int position, View v) {
+        // TODO
+        Toast.makeText(v.getContext(), "Not implemented yet", Toast.LENGTH_SHORT).show();
+    }
 }
