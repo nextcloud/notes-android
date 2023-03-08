@@ -108,5 +108,16 @@
                     tools:text="@tools:sample/lorem/random" />
             </FrameLayout>
         </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/noteActions"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:contentDescription="@string/note_actions"
+            app:icon="@drawable/ic_dots_vertical"
+            app:iconTint="?android:textColorPrimary"
+            app:rippleColor="@color/fg_secondary" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
