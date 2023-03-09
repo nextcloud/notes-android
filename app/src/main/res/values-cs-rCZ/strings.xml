@@ -179,6 +179,8 @@
     <string name="action_formatting_help">Formátování</string>
 
 
+    <string name="noteMode_remember_last">Zapamatovat si můj poslední výběr</string>
+
     <string-array name="fontSize_entries">
         <item>Malé</item>
         <item>Střední</item>
@@ -308,4 +310,5 @@
     <string name="progress_import_indeterminate">Importují se poznámky…</string>
     <string name="progress_import">Importuje se poznámka %1$d z %2$d…</string>
     <string name="account_imported">Účet naimportován.</string>
+    <string name="action_back">Zpět</string>
     </resources>

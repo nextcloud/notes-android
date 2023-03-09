@@ -178,6 +178,8 @@
     <string name="action_formatting_help">Format</string>
 
 
+    <string name="noteMode_remember_last">Recorda la darrera selecció</string>
+
     <string-array name="fontSize_entries">
         <item>Petita</item>
         <item>Mitjana</item>
@@ -297,4 +299,5 @@
     <string name="progress_import_indeterminate">S\'estan important les notes...</string>
     <string name="progress_import">S\'està important la nota %1$d/%2$d...</string>
     <string name="account_imported">S\'ha importat el compte.</string>
+    <string name="action_back">Torna</string>
     </resources>

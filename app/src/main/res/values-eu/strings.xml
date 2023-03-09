@@ -41,6 +41,7 @@
     <string name="listview_updated_last_month">Joan den hilabetean</string>
 
     <string name="settings_note_mode">Erakutsi oharren modua</string>
+    <string name="settings_note_mode_new">Oharrak irekitzeko portaera</string>
     <string name="settings_theme_title">Gaia</string>
     <string name="settings_font_title">Zabalera bakarreko letra mota</string>
     <string name="settings_font_size">Letra tamaina</string>
@@ -179,6 +180,9 @@
     <string name="action_formatting_help">Formatua</string>
 
 
+    <string name="noteMode_plain_edit">Edizio modu arrunta</string>
+    <string name="noteMode_plain_preview">Aurrebista arrunta</string>
+    <string name="noteMode_rich_edit">Edizio modu aberatsa</string>
     <string name="noteMode_remember_last">Gogoratu nire azken hautaketa</string>
 
     <string-array name="fontSize_entries">
@@ -300,5 +304,7 @@
     <string name="progress_import_indeterminate">Oharrak inportatzen...</string>
     <string name="progress_import">%2$dtik %1$doharra inportatzen...</string>
     <string name="account_imported">Kontua inportatuta.</string>
+    <string name="direct_editing_error">Errore bat gertatu da edizio aberatsa kargatzean</string>
+    <string name="switch_to_plain_editing">Aldatu edizio arruntera</string>
     <string name="action_back">Atzera</string>
     </resources>

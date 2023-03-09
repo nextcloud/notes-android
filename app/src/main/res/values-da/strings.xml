@@ -146,6 +146,8 @@
     <string name="action_formatting_help">Formatering</string>
 
 
+    <string name="noteMode_remember_last">Husk mine sidste selektion</string>
+
     <string-array name="fontSize_entries">
         <item>Lille</item>
         <item>Mellem</item>
@@ -198,4 +200,5 @@
     <string name="simple_next">Næste</string>
     <string name="simple_prev">Tidligere</string>
     <string name="simple_backup">Backup</string>
+    <string name="action_back">Tilbage</string>
     </resources>

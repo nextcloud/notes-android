@@ -154,6 +154,8 @@
     <string name="action_formatting_help">التنسيق</string>
 
 
+    <string name="noteMode_remember_last">تذكر آخر ما أخترته</string>
+
     <string-array name="fontSize_entries">
         <item>صغير</item>
         <item>متوسط</item>
@@ -230,4 +232,5 @@
     <string name="simple_next">التالي</string>
     <string name="simple_prev">السابق</string>
     <string name="simple_backup">النسخ الاحتياطي</string>
+    <string name="action_back">العودة</string>
     </resources>

@@ -41,6 +41,7 @@
     <string name="listview_updated_last_month">Прошлог месеца</string>
 
     <string name="settings_note_mode">Режим приказа белешки</string>
+    <string name="settings_note_mode_new">Понашање отварања белешке</string>
     <string name="settings_theme_title">Тема</string>
     <string name="settings_font_title">Фонт фиксне ширине</string>
     <string name="settings_font_size">Величина фонта</string>
@@ -179,6 +180,9 @@
     <string name="action_formatting_help">Форматирање</string>
 
 
+    <string name="noteMode_plain_edit">Режим простог уређивања</string>
+    <string name="noteMode_plain_preview">Прости преглед</string>
+    <string name="noteMode_rich_edit">Режим детаљног уређивања</string>
     <string name="noteMode_remember_last">Запамти мој последњи избор</string>
 
     <string-array name="fontSize_entries">
@@ -305,5 +309,7 @@
     <string name="progress_import_indeterminate">Белешке се увозе...</string>
     <string name="progress_import">Увози се белешка %1$d од укупно %2$d…</string>
     <string name="account_imported">Налог је увезен.</string>
+    <string name="direct_editing_error">Грешка приликом учитавања детаљног уређивања</string>
+    <string name="switch_to_plain_editing">Пређи на просто уређивање</string>
     <string name="action_back">Назад</string>
     </resources>

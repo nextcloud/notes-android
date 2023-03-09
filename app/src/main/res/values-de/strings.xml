@@ -41,6 +41,7 @@
     <string name="listview_updated_last_month">Letzten Monat</string>
 
     <string name="settings_note_mode">Anzeigemodus für Notizen</string>
+    <string name="settings_note_mode_new">Verhalten beim Öffnen von Notizen</string>
     <string name="settings_theme_title">Design</string>
     <string name="settings_font_title">Nichtproportionale Schriftart</string>
     <string name="settings_font_size">Schriftgröße</string>
@@ -179,6 +180,11 @@
     <string name="action_formatting_help">Formatierung</string>
 
 
+    <string name="noteMode_plain_edit">Einfacher Bearbeitungsmodus</string>
+    <string name="noteMode_plain_preview">Einfache Vorschau</string>
+    <string name="noteMode_rich_edit">Rich-Bearbeitungsmodus</string>
+    <string name="noteMode_remember_last">Letzte Auswahl merken</string>
+
     <string-array name="fontSize_entries">
         <item>Klein</item>
         <item>Mittel</item>
@@ -298,4 +304,7 @@
     <string name="progress_import_indeterminate">Importiere Notizen…</string>
     <string name="progress_import">Importiere Notiz %1$d von %2$d…</string>
     <string name="account_imported">Konto importiert.</string>
+    <string name="direct_editing_error">Fehler beim Laden des Rich-Bearbeitungsmodus</string>
+    <string name="switch_to_plain_editing">Zum einfachen Bearbeitungsmodus wechseln</string>
+    <string name="action_back">Zurück</string>
     </resources>

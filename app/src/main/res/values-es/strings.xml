@@ -41,6 +41,7 @@
     <string name="listview_updated_last_month">El mes pasado</string>
 
     <string name="settings_note_mode">Modo de visualización para notas</string>
+    <string name="settings_note_mode_new">Comportamiento de apertura de las notas</string>
     <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title">Tipo de letra monoespaciado</string>
     <string name="settings_font_size">Tamaño de fuente</string>
@@ -179,6 +180,11 @@
     <string name="action_formatting_help">Formato</string>
 
 
+    <string name="noteMode_plain_edit">Modo de edición plano</string>
+    <string name="noteMode_plain_preview">Vista previa en plano</string>
+    <string name="noteMode_rich_edit">Modo de edición enriquecido</string>
+    <string name="noteMode_remember_last">Recordar mi última selección</string>
+
     <string-array name="fontSize_entries">
         <item>Pequeña</item>
         <item>Media</item>
@@ -303,4 +309,7 @@
     <string name="progress_import_indeterminate">Importando notas…</string>
     <string name="progress_import">Importando nota %1$d de %2$d…</string>
     <string name="account_imported">Cuenta importada.</string>
+    <string name="direct_editing_error">Error al cargar el modo de edición enriquecido</string>
+    <string name="switch_to_plain_editing">Cambiar a edición plana</string>
+    <string name="action_back">Atrás</string>
     </resources>

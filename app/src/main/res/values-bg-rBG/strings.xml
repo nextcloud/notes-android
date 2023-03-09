@@ -179,6 +179,8 @@
     <string name="action_formatting_help">Форматиране</string>
 
 
+    <string name="noteMode_remember_last">Запаметяване на последният ми избор</string>
+
     <string-array name="fontSize_entries">
         <item>Малък</item>
         <item>Средно</item>
@@ -298,4 +300,5 @@
     <string name="progress_import_indeterminate">Импортиране на бележки...</string>
     <string name="progress_import">Импортиране на бележка%1$d от %2$d...</string>
     <string name="account_imported">Профилът е импортиран.</string>
+    <string name="action_back">Назад</string>
     </resources>

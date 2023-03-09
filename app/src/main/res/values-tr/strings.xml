@@ -41,6 +41,7 @@
     <string name="listview_updated_last_month">Geçen ay</string>
 
     <string name="settings_note_mode">Notların görüntülenme kipi</string>
+    <string name="settings_note_mode_new">Not açılma davranışı</string>
     <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title">Sabit aralıklı yazı türü</string>
     <string name="settings_font_size">Yazı boyutu</string>
@@ -179,6 +180,9 @@
     <string name="action_formatting_help">Biçimlendirme</string>
 
 
+    <string name="noteMode_plain_edit">Yalın düzenleme kipi</string>
+    <string name="noteMode_plain_preview">Yalın ön izleme</string>
+    <string name="noteMode_rich_edit">Zengin metin düzenleme kipi</string>
     <string name="noteMode_remember_last">Son seçimim hatırlansın</string>
 
     <string-array name="fontSize_entries">
@@ -300,5 +304,7 @@
     <string name="progress_import_indeterminate">Notlar içe aktarılıyor…</string>
     <string name="progress_import">Not %1$d / %2$d içe aktarılıyor…</string>
     <string name="account_imported">Hesap içe aktarıldı.</string>
+    <string name="direct_editing_error">Zengin düzenleme yüklenirken sorun çıktı</string>
+    <string name="switch_to_plain_editing">Yalın düzenlemeye geç</string>
     <string name="action_back">Geri</string>
     </resources>
