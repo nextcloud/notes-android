@@ -187,6 +187,7 @@
     <string name="formatting_help_lists_body_4">Tre</string>
     <string name="formatting_help_checkboxes_title">Afkrydsningsfelter</string>
     <string name="formatting_help_code_title">Kode</string>
+    <string name="formatting_help_tables_title">Tabeller</string>
     <string name="formatting_help_images_title">Billeder</string>
     <string name="simple_other">Andet</string>
     <string name="sort_last_modified">Sortér efter dato ændret</string>

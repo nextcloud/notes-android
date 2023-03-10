@@ -41,6 +41,7 @@
     <string name="listview_updated_last_month">Mois dernier</string>
 
     <string name="settings_note_mode">Mode d\'affichage des notes</string>
+    <string name="settings_note_mode_new">Comportement à l\'ouverture de Notes</string>
     <string name="settings_theme_title">Thème</string>
     <string name="settings_font_title">Texte monospace</string>
     <string name="settings_font_size">Taille des caractères</string>
@@ -179,6 +180,9 @@
     <string name="action_formatting_help">Formatage</string>
 
 
+    <string name="noteMode_plain_edit">Édition simple</string>
+    <string name="noteMode_plain_preview">Prévisualization simple</string>
+    <string name="noteMode_rich_edit">Édition texte enrichi</string>
     <string name="noteMode_remember_last">Mémoriser ma dernière sélection</string>
 
     <string-array name="fontSize_entries">
@@ -305,5 +309,7 @@
     <string name="progress_import_indeterminate">Importation des notes...</string>
     <string name="progress_import">Importation de la note %1$d sur %2$d...</string>
     <string name="account_imported">Compte importé.</string>
+    <string name="direct_editing_error">Erreur lors du chargement de l\'édition enrichie</string>
+    <string name="switch_to_plain_editing">Bascule vers l\'édition simple</string>
     <string name="action_back">Retour</string>
     </resources>
