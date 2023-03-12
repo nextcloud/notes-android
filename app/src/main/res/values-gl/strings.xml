@@ -41,6 +41,7 @@
     <string name="listview_updated_last_month">O mes pasado</string>
 
     <string name="settings_note_mode">Modo de vista das notas</string>
+    <string name="settings_note_mode_new">Comportamento de apertura das notas</string>
     <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title">Letra monoespazada</string>
     <string name="settings_font_size">Tamaño da letra</string>
@@ -63,6 +64,7 @@
     <string name="about_version">Agora está a empregar %1$s</string>
     <string name="about_maintainer_title">Mantedor</string>
     <string name="about_developers_title">Desenvolvedores</string>
+    <string name="about_developers_original_author">autor orixinal</string>
     <string name="about_translators_title">Tradutores</string>
     <string name="about_translators_transifex">Comunidade Nextcloud en %1$s</string>
     <string name="about_testers_title">Probadores</string>
@@ -178,6 +180,9 @@
     <string name="action_formatting_help">Formatado</string>
 
 
+    <string name="noteMode_plain_edit">Modo de edición simple</string>
+    <string name="noteMode_plain_preview">Vista previa simple</string>
+    <string name="noteMode_rich_edit">Modo de edición enriquecido</string>
     <string name="noteMode_remember_last">Lembrar a miña última selección</string>
 
     <string-array name="fontSize_entries">
@@ -273,6 +278,10 @@
     <string name="no_other_accounts">Aínda non ten configurada ningunha outra conta.</string>
     <string name="choose_account">Escolla unha conta</string>
     <string name="context_based_formatting">Xanela emerxente de formato baseado no contexto</string>
+    <plurals name="remove_account_message">
+        <item quantity="one">Eliminar a conta %1$s tamén eliminará un cambio irrecuperable non sincronizado.</item>
+        <item quantity="other">Eliminar a conta %1$s tamén eliminará os %2$d cambios irrecuperables non sincronizados.</item>
+    </plurals>
     <string name="remove_account">Eliminar %1$s</string>
 
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Para engadir unha conta tes que estar conectado a internet.</string>
@@ -295,5 +304,7 @@
     <string name="progress_import_indeterminate">A importar notas...</string>
     <string name="progress_import">A importar a nota %1$d de %2$d...</string>
     <string name="account_imported">Conta importada.</string>
+    <string name="direct_editing_error">Produciuse un erro ao cargar a edición enriquecida</string>
+    <string name="switch_to_plain_editing">Cambia á edición simple</string>
     <string name="action_back">Atrás</string>
     </resources>
