@@ -75,11 +75,11 @@
     <string name="about_translate_title">Traducir</string>
     <string name="about_translate">Únase ao equipo Nextcloud en Transifex e axúdenos a traducir esta aplicación: %1$s</string>
     <string name="about_app_license_title">Licenza da apli</string>
-    <string name="about_app_license">Esta apli está licenciada baixo a LICENZA XERAL PUBLICA GNU v3+.</string>
+    <string name="about_app_license">Esta aplicación está licenciada baixo a LICENZA XERAL PUBLICA GNU v3+.</string>
     <string name="about_app_license_button">Ver a licenza</string>
     <string name="about_icons_disclaimer_title">Iconas</string>
     <string name="about_icons_disclaimer_app_icon">Para a icona orixinal, vexa %1$s.</string>
-    <string name="about_icons_disclaimer_mdi_icons">Todas as iconas usadas nesta aplicación son %1$s feitas por Google Inc. e licenciadas baixo unha Licenza Apache 2.0.</string>
+    <string name="about_icons_disclaimer_mdi_icons">Todas as iconas usadas nesta aplicación %1$sforon feitas por Google Inc. e licenciadas baixo unha Licenza Apache 2.0.</string>
     <string name="about_icons_disclaimer_mdi">Iconas Material Desig</string>
     <string name="about_credits_tab_title">Recoñecementos</string>
     <string name="about_contribution_tab_title">Colaboración</string>
@@ -104,7 +104,7 @@
     <string name="simple_close">Pechar</string>
     <string name="simple_copy">Copiar</string>
     <string name="simple_exception">Excepción</string>
-    <string name="pin_to_homescreen">Ancorar na pantalla de inicio</string>
+    <string name="pin_to_homescreen">Fixar na pantalla de Inicio</string>
     <string name="note_has_been_deleted">Esta nota foi eliminada</string>
     <string name="add_account">Engadir unha conta</string>
 
@@ -112,8 +112,8 @@
     <string name="category_movies">Filmes</string>
     <string name="category_movie">Filme</string>
     <string name="category_work">Traballo</string>
-    <string name="category_todo">Tarefa</string>
-    <string name="category_todos">Tarefas</string>
+    <string name="category_todo">Tarefa pendente</string>
+    <string name="category_todos">Tarefas pendentes</string>
     <string name="category_checklists">Listas de verificación</string>
     <string name="category_tasks">Tarefas</string>
     <string name="category_recipe">Receita</string>
@@ -123,9 +123,9 @@
     <string name="category_food">Comida</string>
     <string name="category_bake">Enfornar</string>
     <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_key">Chave</string>
+    <string name="category_key">Clave</string>
     <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_keys">Chaves</string>
+    <string name="category_keys">Claves</string>
     <string name="category_password">Contrasinal</string>
     <string name="category_passwords">Contrasinais</string>
     <string name="category_credentials">Credencial</string>
@@ -136,9 +136,9 @@
     <string name="category_gift">Agasallo</string>
     <string name="category_gifts">Agasallos</string>
     <!-- Like a gift -->
-    <string name="category_present">Presentar</string>
+    <string name="category_present">Presente</string>
     <!-- Like a gift -->
-    <string name="category_presents">Agasallos</string>
+    <string name="category_presents">Presentes</string>
 
     <string name="account_already_imported">A conta xa foi importada</string>
     <string name="no_notes_yet">Aínda non hai notas</string>
@@ -167,7 +167,7 @@
     <string name="error_dialog_server_app_enabled">Asegúrese de ter instalada e activada a aplicación «Notas» no seu servidor.</string>
     <string name="error_dialog_redirect">O seu servidor respondeu cun código de estado HTTP 302, o que implica que non ten instalada a aplicación Notas no servidor ou que algo está mal configurado. Isto pode ser causado por substitucións personalizadas nun ficheiro .htaccess ou por aplicacións Nextcloud como Client OID.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Desactive todas as optimizacións de batería para Nextcloud e a apli Notas.</string>
-    <string name="error_dialog_min_version">A aplicación de Android Notes require que a aplicación de Android Nextcloud teña como mínimo a versión 3.18.</string>
+    <string name="error_dialog_min_version">A aplicación de Notas para Android require que a aplicación de Android Nextcloud teña como mínimo a versión 3.18.</string>
     <string name="added_content">Engadido «%1$s»</string>
     <string name="shared_text_empty">O texto compartido estaba baleiro</string>
     <string name="append_to_note">Anexo á nota</string>
@@ -279,32 +279,32 @@
     <string name="choose_account">Escolla unha conta</string>
     <string name="context_based_formatting">Xanela emerxente de formato baseado no contexto</string>
     <plurals name="remove_account_message">
-        <item quantity="one">Eliminar a conta %1$s tamén eliminará un cambio irrecuperable non sincronizado.</item>
-        <item quantity="other">Eliminar a conta %1$s tamén eliminará os %2$d cambios irrecuperables non sincronizados.</item>
+        <item quantity="one">Retirar a conta %1$s tamén eliminará de xeito irrecuperábel un cambio non sincronizado.</item>
+        <item quantity="other">Retirar a conta %1$s tamén eliminará de xeito irrecuperábel %2$d cambios non sincronizados.</item>
     </plurals>
-    <string name="remove_account">Eliminar %1$s</string>
+    <string name="remove_account">Retirar %1$s</string>
 
-    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Para engadir unha conta tes que estar conectado a internet.</string>
-    <string name="settings_notes_path">Establecer cartafol</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Para engadir unha conta ten que estar conectado a Internet.</string>
+    <string name="settings_notes_path">Estabelecer cartafol</string>
 
     <string name="simple_next">Seguinte</string>
     <string name="simple_prev">Anterior</string>
     <string name="simple_backup">Copia de seguridade</string>
-    <string name="backup">Detectamos un estado irrecuperable da aplicación. Fai unha copia de seguranza dos cambios non sincronizados e limpa o almacenamento da aplicación Notes.</string>
-    <string name="settings_notes_path_description">Cartafol para almacenar as túas notas no teu Nextcloud</string>
+    <string name="backup">Detectamos un estado irrecuperábel da aplicación. Faga unha copia de seguridade dos cambios non sincronizados e limpe o almacenamento da apli de Notas.</string>
+    <string name="settings_notes_path_description">Cartafol para almacenar as súas notas no seu Nextcloud</string>
     <string-array name="settings_file_suffixes">
         <item translatable="false">.txt</item>
         <item translatable="false">.md</item>
     </string-array>
     <string name="settings_notes_path_success">Novo cartafol de notas: %1$s</string>
     <string name="settings_file_suffix">Extensión de ficheiro</string>
-    <string name="settings_file_suffix_description">Extensión de ficheiro para novas notas no teu Nextcloud</string>
+    <string name="settings_file_suffix_description">Extensión de ficheiro para novas notas no seu Nextcloud</string>
     <string name="settings_file_suffix_success">Novo sufixo de ficheiro: %1$s</string>
     <string name="http_status_code">Código de estado HTTP: %1$d</string>
-    <string name="progress_import_indeterminate">A importar notas...</string>
-    <string name="progress_import">A importar a nota %1$d de %2$d...</string>
+    <string name="progress_import_indeterminate">Importando notas…</string>
+    <string name="progress_import">Importando a nota %1$d de %2$d…</string>
     <string name="account_imported">Conta importada.</string>
-    <string name="direct_editing_error">Produciuse un erro ao cargar a edición enriquecida</string>
-    <string name="switch_to_plain_editing">Cambia á edición simple</string>
+    <string name="direct_editing_error">Produciuse un erro ao cargar a edición mellorada</string>
+    <string name="switch_to_plain_editing">Cambiar á edición simple</string>
     <string name="action_back">Atrás</string>
     </resources>
