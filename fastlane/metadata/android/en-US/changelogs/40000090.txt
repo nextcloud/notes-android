@@ -1,0 +1,6 @@
+## 4.0.0 (March 21st, 2023)
+
+- Design updates
+- Update Material3 theming (@stefan-niedermann)
+- open notes in online text editor
+- Minor bug fixes
