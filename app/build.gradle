@@ -3,7 +3,6 @@ apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
     compileSdkVersion 33
-    buildToolsVersion '31.0.0'
 
     compileOptions {
         coreLibraryDesugaringEnabled true
