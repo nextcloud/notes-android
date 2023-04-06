@@ -35,7 +35,7 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
   * In-note search
   * Single note widget and note list widget
   * Render Markdown (using [Markwon](https://noties.io/Markwon))
-  * Translated in many languages on [Transifex](https://www.transifex.com/nextcloud/nextcloud/android-notes/)
+  * Translated in many languages on [Transifex](https://app.transifex.com/nextcloud/nextcloud/android-notes/)
   * Context based formatting ([#363](https://github.com/nextcloud/notes-android/issues/363))
   * Password protection ([#354](https://github.com/nextcloud/notes-android/issues/354))
 
@@ -48,7 +48,7 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
   * Report issues in the [issue tracker](https://github.com/nextcloud/notes-android/issues)
   * [Pick a good first issue](https://github.com/nextcloud/notes-android/labels/Good%20first%20issue) :notebook:
   * Create a [Pull Request](https://opensource.guide/how-to-contribute/#opening-a-pull-request)
-  * Help translating this app on [Transifex](https://www.transifex.com/nextcloud/nextcloud/android-notes/) 🌎
+  * Help translating this app on [Transifex](https://app.transifex.com/nextcloud/nextcloud/android-notes/) 🌎
   * Buy this app on [Google Play Store](https://play.google.com/store/apps/details?id=it.niedermann.owncloud.notes)
   * Send me a bottle of your favorite beer :beers: :wink:
 
