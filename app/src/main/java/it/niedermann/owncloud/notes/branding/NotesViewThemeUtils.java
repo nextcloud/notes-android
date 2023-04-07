@@ -16,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
@@ -169,6 +170,26 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
             toolbar.setNavigationIconTint(scheme.getOnSurface());
             toolbar.setTitleTextColor(scheme.getOnSurface());
             return toolbar;
+        });
+    }
+
+    /**
+     * @deprecated Should be replaced with {@link com.google.android.material.search.SearchView}
+     * @see com.nextcloud.android.common.ui.theme.utils.AndroidXViewThemeUtils#themeToolbarSearchView(SearchView)
+     */
+    @Deprecated
+    public void themeToolbarSearchView(@NonNull SearchView searchView) {
+        withScheme(searchView, scheme -> {
+            // hacky as no default way is provided
+            final var editText = (SearchView.SearchAutoComplete) searchView.findViewById(androidx.appcompat.R.id.search_src_text);
+            final var closeButton = (ImageView) searchView.findViewById(androidx.appcompat.R.id.search_close_btn);
+            final var searchButton = (ImageView) searchView.findViewById(androidx.appcompat.R.id.search_button);
+            editText.setHintTextColor(scheme.getOnSurfaceVariant());
+            editText.setHighlightColor(scheme.getInverseOnSurface());
+            editText.setTextColor(scheme.getOnSurface());
+            closeButton.setColorFilter(scheme.getOnSurface());
+            searchButton.setColorFilter(scheme.getOnSurface());
+            return searchView;
         });
     }
 }

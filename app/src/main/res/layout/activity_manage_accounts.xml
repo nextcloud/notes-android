@@ -11,8 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:navigationIcon="@drawable/ic_arrow_back_grey600_24dp"
-        app:title="@string/manage_accounts"
-        app:titleMarginStart="0dp" />
+        app:title="@string/manage_accounts" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/accounts"

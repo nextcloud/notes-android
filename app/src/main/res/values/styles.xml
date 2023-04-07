@@ -51,6 +51,11 @@
         <item name="android:paddingEnd">@dimen/spacer_activity_sides</item>
     </style>
 
+    <style name="searchToolbarStyle" parent="@style/Widget.Material3.Toolbar">
+        <item name="android:paddingStart">@dimen/spacer_activity_sides</item>
+        <item name="android:paddingEnd">@dimen/spacer_activity_sides</item>
+    </style>
+
     <style name="tabStyle" parent="Widget.Material3.TabLayout">
         <item name="backgroundColor">@android:color/transparent</item>
         <item name="itemBackground">@android:color/transparent</item>

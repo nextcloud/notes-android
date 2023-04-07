@@ -11,8 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:navigationIcon="@drawable/ic_arrow_back_grey600_24dp"
-        app:title="@string/action_formatting_help"
-        app:titleMarginStart="0dp" />
+        app:title="@string/action_formatting_help" />
 
     <ScrollView
         android:id="@+id/scrollView"

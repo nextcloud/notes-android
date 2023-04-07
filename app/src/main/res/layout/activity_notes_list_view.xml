@@ -38,8 +38,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        app:contentInsetStartWithNavigation="0dp"
-                        app:titleMarginStart="0dp">
+                        app:contentInsetStartWithNavigation="0dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -86,11 +85,11 @@
 
                 <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/search_toolbar"
+                    style="@style/searchToolbarStyle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:visibility="gone"
                     app:navigationIcon="@drawable/ic_arrow_back_grey600_24dp"
-                    app:titleMarginStart="0dp"
                     tools:title="@string/app_name">
 
                     <androidx.appcompat.widget.SearchView

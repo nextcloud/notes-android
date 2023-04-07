@@ -16,7 +16,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:navigationIcon="@drawable/ic_arrow_back_grey600_24dp"
-            app:titleMarginStart="0dp"
             tools:title="@string/simple_about" />
 
         <com.google.android.material.tabs.TabLayout
