@@ -72,11 +72,12 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
             if (noteCategory instanceof Chip) {
                 util.material.colorChipBackground((Chip) noteCategory);
             } else {
-                util.platform.tintDrawable(context, noteCategory.getBackground(), ColorRole.PRIMARY);
                 if (isDarkMode(context)) {
-                    util.platform.colorTextView(noteCategory, ColorRole.ON_PRIMARY);
-                } else {
+                    util.platform.tintDrawable(context, noteCategory.getBackground(), ColorRole.SECONDARY_CONTAINER);
                     util.platform.colorTextView(noteCategory, ColorRole.ON_SECONDARY_CONTAINER);
+                } else {
+                    util.platform.tintDrawable(context, noteCategory.getBackground(), ColorRole.PRIMARY);
+                    util.platform.colorTextView(noteCategory, ColorRole.ON_PRIMARY_CONTAINER);
                 }
             }
 
