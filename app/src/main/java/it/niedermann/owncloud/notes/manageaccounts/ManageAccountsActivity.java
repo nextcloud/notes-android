@@ -210,6 +210,7 @@ public class ManageAccountsActivity extends LockedActivity implements IManageAcc
     @Override
     public void applyBrand(int color) {
         final var util = BrandingUtil.of(color, this);
-        util.notes.applyBrandToPrimaryToolbar(binding.appBar, binding.toolbar, colorAccent);
+        util.platform.themeStatusBar(this);
+        util.material.themeToolbar(binding.toolbar);
     }
 }

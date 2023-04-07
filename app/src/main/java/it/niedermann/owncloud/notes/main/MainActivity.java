@@ -598,7 +598,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         util.androidx.themeSwipeRefreshLayout(activityBinding.swiperefreshlayout);
         util.platform.colorCircularProgressBar(activityBinding.progressCircular, ColorRole.PRIMARY);
         util.platform.colorNavigationView(binding.navigationView);
-        util.notes.applyBrandToPrimaryToolbar(activityBinding.appBar, activityBinding.searchToolbar, colorAccent);
+        util.notes.themeSearchCardView(binding.activityNotesListView.searchBarWrapper);
+        util.notes.themeSearchToolbar(binding.activityNotesListView.searchToolbar);
 
         binding.headerView.setBackgroundColor(color);
         @ColorInt final int headerTextColor = ColorUtil.INSTANCE.getForegroundColorForBackgroundColor(color);

@@ -52,8 +52,9 @@ public class AboutActivity extends LockedActivity {
     @Override
     public void applyBrand(int color) {
         final var util = BrandingUtil.of(color, this);
-        util.material.themeTabLayout(binding.tabs);
-        util.notes.applyBrandToPrimaryToolbar(binding.appBar, binding.toolbar, colorAccent);
+        util.platform.themeStatusBar(this);
+        util.material.themeToolbar(binding.toolbar);
+        util.material.themeTabLayoutOnSurface(binding.tabs);
     }
 
     private static class TabsStateAdapter extends FragmentStateAdapter {

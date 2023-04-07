@@ -13,6 +13,7 @@
         <item name="android:textColorLink">?android:colorAccent</item>
         <item name="android:textColorHighlight">@color/defaultTextHighlightBackground</item>
         <item name="windowActionModeOverlay">true</item>
+        <item name="android:windowBackground">@color/bg_default</item>
         <item name="android:actionModeBackground">?attr/colorPrimary</item>
 
         <!-- Workaround: Preferences Dialogs are using AlertDialogs instead of MaterialAlertDialogs. -->

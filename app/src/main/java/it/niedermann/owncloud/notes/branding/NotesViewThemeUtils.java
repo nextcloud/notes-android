@@ -4,6 +4,7 @@ import static com.nextcloud.android.common.ui.util.ColorStateListUtilsKt.buildCo
 import static com.nextcloud.android.common.ui.util.PlatformThemeUtil.isDarkMode;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
@@ -21,9 +22,9 @@ import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.card.MaterialCardView;
 import com.nextcloud.android.common.ui.theme.MaterialSchemes;
 import com.nextcloud.android.common.ui.theme.ViewThemeUtilsBase;
-import com.nextcloud.android.common.ui.theme.utils.ColorRole;
 import com.nextcloud.android.common.ui.theme.utils.MaterialViewThemeUtils;
 
 import it.niedermann.android.util.ColorUtil;
@@ -31,7 +32,6 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
 import it.niedermann.owncloud.notes.shared.util.NotesColorUtil;
 import kotlin.Pair;
-import scheme.Scheme;
 
 public class NotesViewThemeUtils extends ViewThemeUtilsBase {
 
@@ -147,5 +147,28 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
                 }
             }
         }
+    }
+
+    /**
+     * @deprecated Should be replaced with {@link com.google.android.material.search.SearchBar} component.
+     */
+    @Deprecated
+    public void themeSearchCardView(@NonNull MaterialCardView searchBarWrapper) {
+        withScheme(searchBarWrapper, scheme -> {
+            searchBarWrapper.setBackgroundTintList(ColorStateList.valueOf(scheme.getSurface()));
+            return searchBarWrapper;
+        });
+    }
+
+    /**
+     * @deprecated Should be replaced with {@link com.google.android.material.search.SearchBar} or {@link MaterialViewThemeUtils#themeToolbar(MaterialToolbar)}
+     */
+    @Deprecated
+    public void themeSearchToolbar(@NonNull MaterialToolbar toolbar) {
+        withScheme(toolbar, scheme -> {
+            toolbar.setNavigationIconTint(scheme.getOnSurface());
+            toolbar.setTitleTextColor(scheme.getOnSurface());
+            return toolbar;
+        });
     }
 }
