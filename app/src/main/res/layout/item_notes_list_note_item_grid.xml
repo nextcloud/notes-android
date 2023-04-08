@@ -93,7 +93,7 @@
                     app:chipEndPadding="@dimen/spacer_1x"
                     app:chipMinHeight="0dp"
                     app:chipStartPadding="@dimen/spacer_1x"
-                    app:chipStrokeColor="@color/defaultBrand"
+                    app:chipStrokeColor="@android:color/transparent"
                     app:chipStrokeWidth="1dp"
                     app:ensureMinTouchTargetSize="false"
                     app:textEndPadding="0dp"
