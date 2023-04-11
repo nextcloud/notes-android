@@ -594,11 +594,13 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     @Override
     public void applyBrand(int color) {
         final var util = BrandingUtil.of(color, this);
-        util.material.themeFAB(activityBinding.fabCreate);
         util.androidx.themeSwipeRefreshLayout(activityBinding.swiperefreshlayout);
         util.platform.colorCircularProgressBar(activityBinding.progressCircular, ColorRole.PRIMARY);
         util.platform.colorNavigationView(binding.navigationView);
-        util.notes.applyBrandToPrimaryToolbar(activityBinding.appBar, activityBinding.searchToolbar, colorAccent);
+        util.material.themeFAB(activityBinding.fabCreate);
+        util.notes.themeSearchCardView(binding.activityNotesListView.searchBarWrapper);
+        util.notes.themeSearchToolbar(binding.activityNotesListView.searchToolbar);
+        util.notes.themeToolbarSearchView(binding.activityNotesListView.searchView);
 
         binding.headerView.setBackgroundColor(color);
         @ColorInt final int headerTextColor = ColorUtil.INSTANCE.getForegroundColorForBackgroundColor(color);

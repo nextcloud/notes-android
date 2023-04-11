@@ -6,14 +6,15 @@
         <item name="colorPrimaryDark">?android:colorPrimary</item>
         <item name="colorAccent">@color/accent</item>
 
-        <item name="android:statusBarColor">?attr/colorPrimary</item>
+        <item name="android:statusBarColor">@color/bg_default</item>
         <item name="android:windowLightStatusBar">@bool/isDayMode</item>
         <item name="android:colorControlNormal">?attr/colorAccent</item>
         <item name="android:colorControlActivated">?attr/colorAccent</item>
         <item name="android:textColorLink">?android:colorAccent</item>
         <item name="android:textColorHighlight">@color/defaultTextHighlightBackground</item>
         <item name="windowActionModeOverlay">true</item>
-        <item name="android:actionModeBackground">?attr/colorPrimary</item>
+        <item name="android:windowBackground">@color/bg_default</item>
+        <item name="android:actionModeBackground">@color/bg_default</item>
 
         <!-- Workaround: Preferences Dialogs are using AlertDialogs instead of MaterialAlertDialogs. -->
         <!-- https://stackoverflow.com/questions/70650073/adjust-androidx-preference-dialogs-to-follow-material-you -->
@@ -46,6 +47,11 @@
     </style>
 
     <style name="actionModeStyle" parent="@style/Widget.Material3.ActionMode">
+        <item name="android:paddingStart">@dimen/spacer_activity_sides</item>
+        <item name="android:paddingEnd">@dimen/spacer_activity_sides</item>
+    </style>
+
+    <style name="searchToolbarStyle" parent="@style/Widget.Material3.Toolbar">
         <item name="android:paddingStart">@dimen/spacer_activity_sides</item>
         <item name="android:paddingEnd">@dimen/spacer_activity_sides</item>
     </style>

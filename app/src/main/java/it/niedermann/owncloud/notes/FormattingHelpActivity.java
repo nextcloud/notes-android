@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes;
 
-import android.content.SharedPreferences;
+import static it.niedermann.owncloud.notes.shared.util.NoteUtil.getFontSizeFromPreferences;
+
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
@@ -10,12 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
 
-import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedActivity;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ActivityFormattingHelpBinding;
-
-import static it.niedermann.owncloud.notes.shared.util.NoteUtil.getFontSizeFromPreferences;
 
 public class FormattingHelpActivity extends BrandedActivity {
 
@@ -225,6 +223,7 @@ public class FormattingHelpActivity extends BrandedActivity {
     @Override
     public void applyBrand(int color) {
         final var util = BrandingUtil.of(color, this);
-        util.notes.applyBrandToPrimaryToolbar(binding.appBar, binding.toolbar, colorAccent);
+        util.platform.themeStatusBar(this);
+        util.material.themeToolbar(binding.toolbar);
     }
 }

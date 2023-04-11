@@ -4,6 +4,7 @@ import static com.nextcloud.android.common.ui.util.ColorStateListUtilsKt.buildCo
 import static com.nextcloud.android.common.ui.util.PlatformThemeUtil.isDarkMode;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
@@ -15,15 +16,16 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.card.MaterialCardView;
 import com.nextcloud.android.common.ui.theme.MaterialSchemes;
 import com.nextcloud.android.common.ui.theme.ViewThemeUtilsBase;
-import com.nextcloud.android.common.ui.theme.utils.ColorRole;
 import com.nextcloud.android.common.ui.theme.utils.MaterialViewThemeUtils;
 
 import it.niedermann.android.util.ColorUtil;
@@ -31,7 +33,6 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
 import it.niedermann.owncloud.notes.shared.util.NotesColorUtil;
 import kotlin.Pair;
-import scheme.Scheme;
 
 public class NotesViewThemeUtils extends ViewThemeUtilsBase {
 
@@ -87,7 +88,9 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
      * @deprecated should be replaced by {@link MaterialViewThemeUtils#themeToolbar(MaterialToolbar)}.
      */
     @Deprecated(forRemoval = true)
-    public void applyBrandToPrimaryToolbar(@NonNull AppBarLayout appBarLayout, @NonNull Toolbar toolbar, @ColorInt int color) {
+    public void applyBrandToPrimaryToolbar(@NonNull AppBarLayout appBarLayout,
+                                           @NonNull Toolbar toolbar,
+                                           @ColorInt int color) {
         // FIXME Workaround for https://github.com/nextcloud/notes-android/issues/889
         appBarLayout.setBackgroundColor(ContextCompat.getColor(appBarLayout.getContext(), R.color.primary));
 
@@ -117,7 +120,10 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
     }
 
     @ColorInt
-    public int getTextHighlightBackgroundColor(@NonNull Context context, @ColorInt int mainColor, @ColorInt int colorPrimary, @ColorInt int colorAccent) {
+    public int getTextHighlightBackgroundColor(@NonNull Context context,
+                                               @ColorInt int mainColor,
+                                               @ColorInt int colorPrimary,
+                                               @ColorInt int colorAccent) {
         if (isDarkMode(context)) { // Dark background
             if (ColorUtil.INSTANCE.isColorDark(mainColor)) { // Dark brand color
                 if (NotesColorUtil.contrastRatioIsSufficient(mainColor, colorPrimary)) { // But also dark text
@@ -147,5 +153,50 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
                 }
             }
         }
+    }
+
+    /**
+     * @deprecated Should be replaced with {@link com.google.android.material.search.SearchBar} component.
+     */
+    @Deprecated
+    public void themeSearchCardView(@NonNull MaterialCardView searchBarWrapper) {
+        withScheme(searchBarWrapper, scheme -> {
+            searchBarWrapper.setBackgroundTintList(ColorStateList.valueOf(scheme.getSurface()));
+            return searchBarWrapper;
+        });
+    }
+
+    /**
+     * @deprecated Should be replaced with {@link com.google.android.material.search.SearchBar} or
+     * {@link MaterialViewThemeUtils#themeToolbar(MaterialToolbar)}
+     */
+    @Deprecated
+    public void themeSearchToolbar(@NonNull MaterialToolbar toolbar) {
+        withScheme(toolbar, scheme -> {
+            toolbar.setNavigationIconTint(scheme.getOnSurface());
+            toolbar.setTitleTextColor(scheme.getOnSurface());
+            return toolbar;
+        });
+    }
+
+    /**
+     * @deprecated Should be replaced with {@link com.google.android.material.search.SearchView}
+     * @see com.nextcloud.android.common.ui.theme.utils.AndroidXViewThemeUtils#themeToolbarSearchView(SearchView)
+     */
+    @Deprecated
+    public void themeToolbarSearchView(@NonNull SearchView searchView) {
+        withScheme(searchView, scheme -> {
+            // hacky as no default way is provided
+            final var editText = (SearchView.SearchAutoComplete) searchView
+                    .findViewById(androidx.appcompat.R.id.search_src_text);
+            final var closeButton = (ImageView) searchView.findViewById(androidx.appcompat.R.id.search_close_btn);
+            final var searchButton = (ImageView) searchView.findViewById(androidx.appcompat.R.id.search_button);
+            editText.setHintTextColor(scheme.getOnSurfaceVariant());
+            editText.setHighlightColor(scheme.getInverseOnSurface());
+            editText.setTextColor(scheme.getOnSurface());
+            closeButton.setColorFilter(scheme.getOnSurface());
+            searchButton.setColorFilter(scheme.getOnSurface());
+            return searchView;
+        });
     }
 }

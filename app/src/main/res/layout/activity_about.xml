@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorPrimary"
     android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -12,21 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_marginHorizontal="@dimen/spacer_activity_sides"
-            app:contentInsetStartWithNavigation="0dp"
+            android:layout_height="wrap_content"
             app:navigationIcon="@drawable/ic_arrow_back_grey600_24dp"
-            app:titleMarginStart="0dp"
             tools:title="@string/simple_about" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
             app:tabMode="fixed" />
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -34,7 +29,6 @@
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
         android:paddingHorizontal="@dimen/spacer_1x" />
 
 </LinearLayout>

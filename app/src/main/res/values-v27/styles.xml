@@ -2,7 +2,7 @@
 <resources>
 
     <style name="AppTheme" parent="BaseTheme">
-        <item name="android:navigationBarColor">?attr/colorPrimary</item>
+        <item name="android:navigationBarColor">@color/bg_default</item>
         <item name="android:windowLightNavigationBar">@bool/isDayMode</item>
     </style>
 </resources>
