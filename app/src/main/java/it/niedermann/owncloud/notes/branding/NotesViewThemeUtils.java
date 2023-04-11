@@ -88,7 +88,9 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
      * @deprecated should be replaced by {@link MaterialViewThemeUtils#themeToolbar(MaterialToolbar)}.
      */
     @Deprecated(forRemoval = true)
-    public void applyBrandToPrimaryToolbar(@NonNull AppBarLayout appBarLayout, @NonNull Toolbar toolbar, @ColorInt int color) {
+    public void applyBrandToPrimaryToolbar(@NonNull AppBarLayout appBarLayout,
+                                           @NonNull Toolbar toolbar,
+                                           @ColorInt int color) {
         // FIXME Workaround for https://github.com/nextcloud/notes-android/issues/889
         appBarLayout.setBackgroundColor(ContextCompat.getColor(appBarLayout.getContext(), R.color.primary));
 
@@ -118,7 +120,10 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
     }
 
     @ColorInt
-    public int getTextHighlightBackgroundColor(@NonNull Context context, @ColorInt int mainColor, @ColorInt int colorPrimary, @ColorInt int colorAccent) {
+    public int getTextHighlightBackgroundColor(@NonNull Context context,
+                                               @ColorInt int mainColor,
+                                               @ColorInt int colorPrimary,
+                                               @ColorInt int colorAccent) {
         if (isDarkMode(context)) { // Dark background
             if (ColorUtil.INSTANCE.isColorDark(mainColor)) { // Dark brand color
                 if (NotesColorUtil.contrastRatioIsSufficient(mainColor, colorPrimary)) { // But also dark text
@@ -162,7 +167,8 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
     }
 
     /**
-     * @deprecated Should be replaced with {@link com.google.android.material.search.SearchBar} or {@link MaterialViewThemeUtils#themeToolbar(MaterialToolbar)}
+     * @deprecated Should be replaced with {@link com.google.android.material.search.SearchBar} or
+     * {@link MaterialViewThemeUtils#themeToolbar(MaterialToolbar)}
      */
     @Deprecated
     public void themeSearchToolbar(@NonNull MaterialToolbar toolbar) {
@@ -181,7 +187,8 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
     public void themeToolbarSearchView(@NonNull SearchView searchView) {
         withScheme(searchView, scheme -> {
             // hacky as no default way is provided
-            final var editText = (SearchView.SearchAutoComplete) searchView.findViewById(androidx.appcompat.R.id.search_src_text);
+            final var editText = (SearchView.SearchAutoComplete) searchView
+                    .findViewById(androidx.appcompat.R.id.search_src_text);
             final var closeButton = (ImageView) searchView.findViewById(androidx.appcompat.R.id.search_close_btn);
             final var searchButton = (ImageView) searchView.findViewById(androidx.appcompat.R.id.search_button);
             editText.setHintTextColor(scheme.getOnSurfaceVariant());
