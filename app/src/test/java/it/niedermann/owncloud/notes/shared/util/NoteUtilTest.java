@@ -99,4 +99,40 @@ public class NoteUtilTest extends TestCase {
         // content has markdown while titles markdown is already stripped
         assertEquals("Title   Bar", NoteUtil.generateNoteExcerpt("# Title\n- Title\n- Bar", "Title"));
     }
+
+    @Test
+    public void testGetContentWithoutCheckedItems() {
+        String newLine = System.getProperty("line.separator");
+
+        String multilineWithCheckboxes = "- [ ] Line A"
+                .concat(newLine)
+                .concat("- [x] Line B")
+                .concat(newLine)
+                .concat("- [X] Line C")
+                .concat(newLine)
+                .concat(newLine)
+                .concat("* [x] Line D")
+                .concat(newLine)
+                .concat("* [ ] Line E")
+                .concat(newLine)
+                .concat("+ [x] Line F")
+                .concat(newLine)
+                .concat("+ [ ] Line G")
+                .concat(newLine)
+                .concat("    + [ ] G1")
+                .concat(newLine)
+                .concat("    + [x] G2");
+
+        String expected = "- [ ] Line A"
+                .concat(newLine)
+                .concat(newLine)
+                .concat("* [ ] Line E")
+                .concat(newLine)
+                .concat("+ [ ] Line G")
+                .concat(newLine)
+                .concat("    + [ ] G1")
+                .concat(newLine);
+
+        assertEquals(expected, NoteUtil.getContentWithoutCheckedItems(multilineWithCheckboxes));
+    }
 }

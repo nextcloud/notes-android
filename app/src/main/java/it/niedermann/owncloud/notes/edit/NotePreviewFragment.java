@@ -152,6 +152,16 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         }
     }
 
+    public String removeCheckedItems() {
+        String newContent = super.removeCheckedItems();
+
+        if (note != null) {
+            binding.singleNoteContent.setMarkdownString(newContent);
+        }
+
+        return newContent;
+    }
+
     @Override
     protected String getContent() {
         return changedText;

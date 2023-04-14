@@ -12,6 +12,9 @@ import it.niedermann.owncloud.notes.R;
 import static it.niedermann.android.markdown.MarkdownUtil.removeMarkdown;
 import static it.niedermann.android.markdown.MarkdownUtil.replaceCheckboxesWithEmojis;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Provides basic functionality for Note operations.
  * Created by stefan on 06.10.15.
@@ -121,6 +124,29 @@ public class NoteUtil {
             line = removeMarkdown(content);
         }
         return line;
+    }
+
+    /**
+     * Strips all lines beginning with a filled checkbox from the Markdown.
+     *
+     * @param content    String
+     * @return newContent String
+     */
+    @NonNull
+    public static String getContentWithoutCheckedItems(@NonNull String content) {
+        final Pattern pattern = Pattern.compile(
+                "^ *[-+*] \\[[xX]\\].*$",
+                Pattern.MULTILINE
+        );
+        final Matcher matcher = pattern.matcher(content);
+
+        // We can't just replace the matcher with an empty string as this would
+        // let a blank line. To be able to remove the blank line as well, we set
+        // a random-ish token that we will then match with the EOL as well and
+        // remove them all together.
+        return matcher
+                .replaceAll("RANDOM-ISH_TEXT_TO_REPLACE")
+                .replaceAll("RANDOM-ISH_TEXT_TO_REPLACE\n?", "");
     }
 
     @NonNull

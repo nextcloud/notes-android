@@ -173,6 +173,7 @@
     <string name="append_to_note">Ajouter à la note</string>
     <string name="change_note_title">Modifier le titre de la note</string>
     <string name="menu_edit_title">Modifier le titre</string>
+    <string name="menu_remove_checked_items">Supprimer éléments cochés</string>
     <string name="simple_security">Sécurité</string>
     <string name="appearance_and_behavior">Apparence et comportement</string>
     <string name="simple_synchronization">Synchronisation</string>

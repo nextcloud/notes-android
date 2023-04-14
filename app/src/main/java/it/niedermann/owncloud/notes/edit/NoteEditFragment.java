@@ -255,6 +255,16 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
         }
     }
 
+    public String removeCheckedItems() {
+        String newContent = super.removeCheckedItems();
+
+        if (note != null) {
+            binding.editContent.setMarkdownString(newContent);
+        }
+
+        return newContent;
+    }
+
     @Override
     public void applyBrand(int color) {
         super.applyBrand(color);
