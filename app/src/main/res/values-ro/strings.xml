@@ -177,11 +177,8 @@
     <string name="manage_accounts">Administrare conturi</string>
     <string name="action_formatting_help">Formatare</string>
 
-    <string-array name="noteMode_entries">
-        <item>Deschide în modul editare</item>
-        <item>Deschide în modul de previzualizare </item>
-        <item>Amintește-ți ultima mea selecție </item>
-    </string-array>
+
+    <string name="noteMode_remember_last">Amintește-ți ultima mea selecție </string>
 
     <string-array name="fontSize_entries">
         <item>Mic</item>
@@ -307,4 +304,5 @@
     <string name="progress_import_indeterminate">Se importă notiţe...</string>
     <string name="progress_import">Se importă notiţele %1$d din %2$d ...</string>
     <string name="account_imported">Cont importat.</string>
-</resources>
+    <string name="action_back">Înapoi</string>
+    </resources>

@@ -138,11 +138,8 @@
     <string name="manage_accounts">ניהול חשבונות</string>
     <string name="action_formatting_help">עיצוב</string>
 
-    <string-array name="noteMode_entries">
-        <item>פתיחה במצב עריכה</item>
-        <item>פתיחה במצב תצוגה מקדימה</item>
-        <item>שמירת הבחירה האחרונה שלי</item>
-    </string-array>
+
+    <string name="noteMode_remember_last">שמירת הבחירה האחרונה שלי</string>
 
     <string-array name="fontSize_entries">
         <item>קטן</item>
@@ -202,4 +199,5 @@
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">על המכשיר שלך להיות מחובר לאינטרנט כדי שיתאפשר לך להוסיף חשבון.</string>
     <string name="simple_next">הבא</string>
     <string name="simple_prev">הקודם</string>
+    <string name="action_back">חזרה</string>
     </resources>

@@ -41,6 +41,7 @@
     <string name="listview_updated_last_month">Förra månaden</string>
 
     <string name="settings_note_mode">Visningsläge för anteckningar</string>
+    <string name="settings_note_mode_new">Notes startfunktion</string>
     <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title">Monospace font</string>
     <string name="settings_font_size">Teckenstorlek</string>
@@ -63,6 +64,7 @@
     <string name="about_version">Du använder %1$s för närvarande</string>
     <string name="about_maintainer_title">Underhållare</string>
     <string name="about_developers_title">Utvecklare</string>
+    <string name="about_developers_original_author">Ursprungsskribent</string>
     <string name="about_translators_title">Översättare</string>
     <string name="about_translators_transifex">Nextcloud community på %1$s</string>
     <string name="about_testers_title">Testare</string>
@@ -177,11 +179,11 @@
     <string name="manage_accounts">Hantera konton</string>
     <string name="action_formatting_help">Formatering</string>
 
-    <string-array name="noteMode_entries">
-        <item>Öppna i redigera-läge</item>
-        <item>Öppna i förhandsvisningsläge</item>
-        <item>Kom ihåg mitt sista val</item>
-    </string-array>
+
+    <string name="noteMode_plain_edit">Enkel redigeringsfunktion</string>
+    <string name="noteMode_plain_preview">Enkel förhandsvisning</string>
+    <string name="noteMode_rich_edit">Rich redigeringsfunktion</string>
+    <string name="noteMode_remember_last">Kom ihåg mitt sista val</string>
 
     <string-array name="fontSize_entries">
         <item>Liten</item>
@@ -223,6 +225,8 @@
     <string name="formatting_help_cbf_body_2">Markera bara ett stycke text eller tryck på din markör vid valfri position och du kommer få en popup-meny som utöver standardposterna såsom %1$s, %2$s, %3$s även innehåller poster som %4$s eller %5$s.</string>
 
     <string name="formatting_help_text_title">Text</string>
+    <string name="formatting_help_text_body">Med Markdown är det enkelt att sätta en del ord i %1$sfetstil%1$s och andra %2$skursiva%2$s. Du kan %3$söverstyka%3$s ord och även [länka till Nextcloud](https://nextcloud.com).</string>
+
     <string name="formatting_help_lists_title">Listor</string>
     <string name="formatting_help_lists_body_1">Ibland vill du ha en numrerad lista:</string>
     <string name="formatting_help_lists_body_2">En</string>
@@ -294,4 +298,5 @@
     <string name="progress_import_indeterminate">Importerar anteckningar...</string>
     <string name="progress_import">Importerar anteckning %1$d av %2$d... </string>
     <string name="account_imported">Konto importerat.</string>
-</resources>
+    <string name="action_back">Tillbaka</string>
+    </resources>

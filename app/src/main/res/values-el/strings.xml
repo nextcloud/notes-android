@@ -159,11 +159,8 @@
     <string name="manage_accounts">Διαχείριση λογαριασμών</string>
     <string name="action_formatting_help">Διαμόρφωση σε εξέλιξη</string>
 
-    <string-array name="noteMode_entries">
-        <item>Άνοιγμα σε λειτουργία τροποποίησης</item>
-        <item>Άνοιγμα σε λειτουργία προεπισκόπισης</item>
-        <item>Να θυμάσαι την τελευταία μου επιλογή</item>
-    </string-array>
+
+    <string name="noteMode_remember_last">Να θυμάσαι την τελευταία μου επιλογή</string>
 
     <string-array name="fontSize_entries">
         <item>Μικρό</item>
@@ -260,4 +257,5 @@
     <string name="simple_next">Επόμενο</string>
     <string name="simple_prev">Προηγούμενο</string>
     <string name="simple_backup">Αντίγραφο ασφαλείας</string>
+    <string name="action_back">Πίσω</string>
     </resources>

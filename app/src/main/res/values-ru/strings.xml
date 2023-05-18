@@ -41,6 +41,7 @@
     <string name="listview_updated_last_month">За последний месяц</string>
 
     <string name="settings_note_mode">Режим показа заметок</string>
+    <string name="settings_note_mode_new">Поведение при открытии приложения Заметки</string>
     <string name="settings_theme_title">Тема</string>
     <string name="settings_font_title">Моноширинный шрифт</string>
     <string name="settings_font_size">Размер шрифта</string>
@@ -63,6 +64,7 @@
     <string name="about_version">В данный момент вы используете %1$s</string>
     <string name="about_maintainer_title">Сопроводитель</string>
     <string name="about_developers_title">Разработчики</string>
+    <string name="about_developers_original_author">первый автор</string>
     <string name="about_translators_title">Переводчики</string>
     <string name="about_translators_transifex">Сообщество Nextcloud на сайте %1$s</string>
     <string name="about_testers_title">Тестировщики</string>
@@ -177,11 +179,11 @@
     <string name="manage_accounts">Управление аккаунтами</string>
     <string name="action_formatting_help">Форматирование</string>
 
-    <string-array name="noteMode_entries">
-        <item>Открывать в режиме правки</item>
-        <item>Открывать в режиме просмотра</item>
-        <item>Запоминать выбранный режим</item>
-    </string-array>
+
+    <string name="noteMode_plain_edit">Режим простого редактирования</string>
+    <string name="noteMode_plain_preview">Режим простого просмотра</string>
+    <string name="noteMode_rich_edit">Режим форматированного редактирования</string>
+    <string name="noteMode_remember_last">Запоминать выбранный режим</string>
 
     <string-array name="fontSize_entries">
         <item>Маленький</item>
@@ -312,4 +314,7 @@
     <string name="progress_import_indeterminate">Импорт заметок...</string>
     <string name="progress_import">Импортировано заметок %1$d из %2$d...</string>
     <string name="account_imported">Учетная запись импортирована.</string>
-</resources>
+    <string name="direct_editing_error">Ошибка при загрузке форматированного редактирования</string>
+    <string name="switch_to_plain_editing">Переключиться на простое редактирование</string>
+    <string name="action_back">Назад</string>
+    </resources>

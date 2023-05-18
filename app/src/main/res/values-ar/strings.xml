@@ -153,11 +153,8 @@
     <string name="manage_accounts">إدارة الحسابات</string>
     <string name="action_formatting_help">التنسيق</string>
 
-    <string-array name="noteMode_entries">
-        <item>فتح في وضع التحرير</item>
-        <item>فتح في وضع المعاينة</item>
-        <item>تذكر آخر ما أخترته</item>
-    </string-array>
+
+    <string name="noteMode_remember_last">تذكر آخر ما أخترته</string>
 
     <string-array name="fontSize_entries">
         <item>صغير</item>
@@ -235,4 +232,5 @@
     <string name="simple_next">التالي</string>
     <string name="simple_prev">السابق</string>
     <string name="simple_backup">النسخ الاحتياطي</string>
+    <string name="action_back">العودة</string>
     </resources>

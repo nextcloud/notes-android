@@ -41,6 +41,7 @@
     <string name="listview_updated_last_month">Joan den hilabetean</string>
 
     <string name="settings_note_mode">Erakutsi oharren modua</string>
+    <string name="settings_note_mode_new">Oharrak irekitzeko portaera</string>
     <string name="settings_theme_title">Gaia</string>
     <string name="settings_font_title">Zabalera bakarreko letra mota</string>
     <string name="settings_font_size">Letra tamaina</string>
@@ -63,6 +64,7 @@
     <string name="about_version">%1$s erabiltzen ari zara</string>
     <string name="about_maintainer_title">Mantentzailea</string>
     <string name="about_developers_title">Garatzaileak</string>
+    <string name="about_developers_original_author">jatorrizko egilea</string>
     <string name="about_translators_title">Itzultzaileak</string>
     <string name="about_translators_transifex">%1$s Nextcloud komunitatea</string>
     <string name="about_testers_title">Probatzaileak</string>
@@ -177,11 +179,11 @@
     <string name="manage_accounts">Kudeatu kontuak</string>
     <string name="action_formatting_help">Formatua</string>
 
-    <string-array name="noteMode_entries">
-        <item>Ireki edizio moduan</item>
-        <item>Ireki aurrebista moduan</item>
-        <item>Gogoratu nire azken hautaketa</item>
-    </string-array>
+
+    <string name="noteMode_plain_edit">Edizio modu arrunta</string>
+    <string name="noteMode_plain_preview">Aurrebista arrunta</string>
+    <string name="noteMode_rich_edit">Edizio modu aberatsa</string>
+    <string name="noteMode_remember_last">Gogoratu nire azken hautaketa</string>
 
     <string-array name="fontSize_entries">
         <item>Txikia</item>
@@ -302,4 +304,7 @@
     <string name="progress_import_indeterminate">Oharrak inportatzen...</string>
     <string name="progress_import">%2$dtik %1$doharra inportatzen...</string>
     <string name="account_imported">Kontua inportatuta.</string>
-</resources>
+    <string name="direct_editing_error">Errore bat gertatu da edizio aberatsa kargatzean</string>
+    <string name="switch_to_plain_editing">Aldatu edizio arruntera</string>
+    <string name="action_back">Atzera</string>
+    </resources>

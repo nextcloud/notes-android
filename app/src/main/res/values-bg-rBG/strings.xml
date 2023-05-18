@@ -41,6 +41,7 @@
     <string name="listview_updated_last_month">Миналия месец</string>
 
     <string name="settings_note_mode">Режим на показване на бележки</string>
+    <string name="settings_note_mode_new">Поведение при отваряне на бележките</string>
     <string name="settings_theme_title">Тема</string>
     <string name="settings_font_title">Monospace/Монопространствен/ шрифт</string>
     <string name="settings_font_size">Размер на шрифта</string>
@@ -63,6 +64,7 @@
     <string name="about_version">В момента използвате%1$s</string>
     <string name="about_maintainer_title">Отговорник</string>
     <string name="about_developers_title">Разработчици</string>
+    <string name="about_developers_original_author">оригинален автор</string>
     <string name="about_translators_title">Преводачи</string>
     <string name="about_translators_transifex">Nextcloud общност на %1$s</string>
     <string name="about_testers_title">Тестери</string>
@@ -177,11 +179,11 @@
     <string name="manage_accounts">Управление на профилите</string>
     <string name="action_formatting_help">Форматиране</string>
 
-    <string-array name="noteMode_entries">
-        <item>Отваряне в режим за редактиране</item>
-        <item>Отваряне в режим на визуализация</item>
-        <item>Запаметяване на последният ми избор</item>
-    </string-array>
+
+    <string name="noteMode_plain_edit">Режим на обикновено редактиране</string>
+    <string name="noteMode_plain_preview">Обикновен преглед</string>
+    <string name="noteMode_rich_edit">Режим на богато редактиране</string>
+    <string name="noteMode_remember_last">Запаметяване на последният ми избор</string>
 
     <string-array name="fontSize_entries">
         <item>Малък</item>
@@ -302,4 +304,7 @@
     <string name="progress_import_indeterminate">Импортиране на бележки...</string>
     <string name="progress_import">Импортиране на бележка%1$d от %2$d...</string>
     <string name="account_imported">Профилът е импортиран.</string>
-</resources>
+    <string name="direct_editing_error">Грешка при зареждане на богато редактиране</string>
+    <string name="switch_to_plain_editing">Превключване към обикновено редактиране</string>
+    <string name="action_back">Назад</string>
+    </resources>

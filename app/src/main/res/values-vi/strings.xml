@@ -50,6 +50,9 @@
     <string name="settings_background_sync">Đồng bộ hoá trong nền</string>
     <string name="settings_prevent_screen_capture">Ngăn chặn chụp màn hình</string>
     <string name="settings_gridview">Hiển thị dạng lưới</string>
+    <string name="settings_keep_screen_on">Giữ màn hình luôn mở</string>
+    <string name="settings_keep_screen_on_summary">Khi đang xem hoặc sửa ghi chú</string>
+
     <string name="error_sync">Đồng bộ hoá thất bại: %1$s</string>
     <string name="error_synchronization">Đồng bộ hoá thất bại</string>
     <string name="error_no_network">Không có kết nối mạng</string>
@@ -85,6 +88,8 @@
     <string name="widget_single_note_title">Ghi chú đơn</string>
     <string name="widget_single_note_placeholder_tv">Không tìm thấy ghi chú</string>
     <string name="widget_not_logged_in">Vui lòng đăng nhập vào Ghi chú trước khi sử dụng tiện ích này</string>
+    <string name="widget_entry_fav_contentDescription">Biểu tượng ngôi sao thể hiện mục được yêu thích</string>
+
     <string name="activity_select_single_note">Chọn ghi chú</string>
 
     <string name="shortcut_create_long">Tạo một ghi chú mới</string>
@@ -154,11 +159,8 @@
     <string name="manage_accounts">Quản lý tài khoản</string>
     <string name="action_formatting_help">Định dạng</string>
 
-    <string-array name="noteMode_entries">
-        <item>Mở trong chế độ chỉnh sửa</item>
-        <item>Mở trong chế độ xem trước</item>
-        <item>Nhớ sự lựa chọn cuối của tôi</item>
-    </string-array>
+
+    <string name="noteMode_remember_last">Nhớ sự lựa chọn cuối của tôi</string>
 
     <string-array name="fontSize_entries">
         <item>Nhỏ</item>
@@ -269,4 +271,5 @@
     <string name="progress_import_indeterminate">Đang nhập các ghi chú...</string>
     <string name="progress_import">Đang nhập ghi chú %1$d trong số %2$d...</string>
     <string name="account_imported">Đã nhập tài khoản.</string>
-</resources>
+    <string name="action_back">Quay lại</string>
+    </resources>

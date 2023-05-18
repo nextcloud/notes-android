@@ -144,11 +144,8 @@
     <string name="manage_accounts">Tvarkyti paskyras</string>
     <string name="action_formatting_help">Formatavimas</string>
 
-    <string-array name="noteMode_entries">
-        <item>Atverti redagavimo veiksenoje</item>
-        <item>Atverti peržiūros veiksenoje</item>
-        <item>Prisiminti paskutinį pasirinkimą</item>
-    </string-array>
+
+    <string name="noteMode_remember_last">Prisiminti paskutinį pasirinkimą</string>
 
     <string-array name="fontSize_entries">
         <item>Mažas</item>
@@ -224,4 +221,5 @@
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Norėdami pridėti paskyrą, turite būti prisijungę prie interneto.</string>
     <string name="simple_next">Kitas</string>
     <string name="simple_prev">Ankstesnis</string>
+    <string name="action_back">Atgal</string>
     </resources>
