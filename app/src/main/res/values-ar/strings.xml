@@ -24,7 +24,7 @@
     <string name="action_undo">تراجع</string>
     <string name="action_uncategorized">غير مصنف</string>
     <string name="menu_delete">حذف </string>
-    <string name="menu_change_category">الفئة</string>
+    <string name="menu_change_category">التصنيف</string>
     <string name="menu_favorite">المفضلة </string>
     <string name="menu_preview">معاينة</string>
     <string name="menu_share">شارك</string>
@@ -46,7 +46,7 @@
     <string name="settings_font_title">خط أحادي المسافة</string>
     <string name="settings_font_size">حجم الخط</string>
     <string name="settings_wifi_only">المزامنة فقط على الوايفاي</string>
-    <string name="settings_lock_summary">بيانات اعتماد الجهاز</string>
+    <string name="settings_lock_summary">معلومات تسجيل الدخول إلى الجهاز</string>
     <string name="settings_background_sync">مزامنة في خلفية النظام</string>
     <string name="settings_gridview">عرض كمخطط</string>
     <string name="error_sync">المزامنة فشلت \'%1$s\'</string>

@@ -67,9 +67,9 @@
     <string name="about_translators_transifex">%1$s 上的 Nextcloud 社区</string>
     <string name="about_testers_title">测试人员</string>
     <string name="about_source_title">源代码</string>
-    <string name="about_source">此项目托管在 Github 上：%1$s</string>
+    <string name="about_source">此项目托管在GitHub上：%1$s</string>
     <string name="about_issues_title">问题</string>
-    <string name="about_issues">你可以通过 GitHub 问题跟踪器报告 bug、提议增强已有功能和请求新功能：%1$s</string>
+    <string name="about_issues">你可以通过GitHub议题跟踪器报告bug、提议增强已有功能和请求新功能：%1$s</string>
     <string name="about_translate_title">翻译</string>
     <string name="about_translate">加入 Transifex 上的 Nextcloud 团队，帮助我们翻译这个应用程序：%1$s</string>
     <string name="about_app_license_title">应用授权</string>
