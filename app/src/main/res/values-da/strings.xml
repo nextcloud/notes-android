@@ -112,11 +112,15 @@
     <string name="category_tasks">Opgaver</string>
     <string name="category_recipe">Opskrift</string>
     <string name="category_recipes">Opskrifter</string>
+    <string name="category_food">Mad</string>
     <string name="category_password">Adgangskode</string>
     <string name="category_passwords">Adgangskoder</string>
+    <string name="category_game">Spil</string>
     <string name="category_games">Spil</string>
     <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
     <string name="category_play">Afspil</string>
+    <string name="category_gift">Gave</string>
+    <string name="category_gifts">Gaver</string>
     <string name="account_already_imported">Kontoen er allerede importeret</string>
     <string name="no_notes_yet">Ingen noter endnu</string>
     <string name="no_notes_yet_description">Tryk på + for at oprette en ny note</string>
@@ -196,6 +200,11 @@
     <string name="formatting_help_checkboxes_title">Afkrydsningsfelter</string>
     <string name="formatting_help_code_title">Kode</string>
     <string name="formatting_help_tables_title">Tabeller</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">Kolonne %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Værdi %1d</string>
+
     <string name="formatting_help_images_title">Billeder</string>
     <string name="simple_other">Andet</string>
     <string name="sort_last_modified">Sortér efter dato ændret</string>
