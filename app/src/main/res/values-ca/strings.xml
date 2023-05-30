@@ -296,8 +296,8 @@
     <string name="settings_file_suffix_description">Extensió de fitxer per a les notes noves al Nextcloud</string>
     <string name="settings_file_suffix_success">Sufix dels fitxers nous: %1$s</string>
     <string name="http_status_code">Codi d\'estat HTTP: %1$d</string>
-    <string name="progress_import_indeterminate">S\'estan important les notes...</string>
-    <string name="progress_import">S\'està important la nota %1$d/%2$d...</string>
+    <string name="progress_import_indeterminate">S\'estan important les notes…</string>
+    <string name="progress_import">S\'està important la nota %1$d/%2$d…</string>
     <string name="account_imported">S\'ha importat el compte.</string>
     <string name="action_back">Torna</string>
     </resources>
