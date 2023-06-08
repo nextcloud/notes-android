@@ -133,7 +133,7 @@
     <string name="error_dialog_timeout_toggle">اتصال اینترنت خود را بررسی کنید. خاموش کردن اینترنت همراه و وای‌فای و روشن کردن مجدد آنها در برخی از مواقع می‌تواند کارساز باشد. </string>
     <string name="error_dialog_check_server">پاسخ درستی از سرور شما دریافت نشد. لطفا دسترسی به یادداشت‌های خود را از طریق وب بررسی کنید.</string>
     <string name="error_dialog_check_server_logs"> مشکلی در نصب ابر Nextcloud وجود دارد. لطفا لاگ‌های سرور را بررسی کنید.</string>
-    <string name="error_dialog_check_maintenance">لطفا بررسی کنید که نسخه Nextcloud شما در حال حاضر در حالت تعمیر و نگهداری نباشد.</string>
+    <string name="error_dialog_check_maintenance">لطفا بررسی کنید که نسخه نکست‌کلود شما در حال حاضر در حالت تعمیر و نگهداری نباشد.</string>
     <string name="error_dialog_insufficient_storage">فضای برنامک نکست‌کلود شما پر شده است.لطفا یعضی از فایل‌های خود در را فضای ابری برای همگام‌سازی تغییرات محلی پاک کنید.  </string>
     <string name="error_dialog_we_need_info">ما برای کمک به شما احتیاج به دنبال کردن اطلاعات فنی داریم:</string>
     <string name="error_dialog_server_app_enabled">لطفا از نصب و فعال بودن برنامک یادداشت بر روی سرور، اطمینان حاصل کنید.</string>
