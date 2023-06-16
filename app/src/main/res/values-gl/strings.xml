@@ -123,9 +123,9 @@
     <string name="category_food">Comida</string>
     <string name="category_bake">Enfornar</string>
     <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_key">Clave</string>
+    <string name="category_key">Chave</string>
     <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_keys">Claves</string>
+    <string name="category_keys">Chaves</string>
     <string name="category_password">Contrasinal</string>
     <string name="category_passwords">Contrasinais</string>
     <string name="category_credentials">Credencial</string>
