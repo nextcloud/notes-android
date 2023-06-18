@@ -71,7 +71,7 @@
     <string name="about_source_title">Código fonte</string>
     <string name="about_source">Este proxecto está aloxado en GitHub: %1$s</string>
     <string name="about_issues_title">Incidencias</string>
-    <string name="about_issues">Vostede pode informar de fallos, propoñer melloras e solicitar funcionalidades na ferramenta de seguimento de erros do GitHub: %1$s</string>
+    <string name="about_issues">Vostede pode informar de fallos, propoñer melloras e solicitar funcionalidades na ferramenta de seguimento de incidencias do GitHub: %1$s</string>
     <string name="about_translate_title">Traducir</string>
     <string name="about_translate">Únase ao equipo Nextcloud en Transifex e axúdenos a traducir esta aplicación: %1$s</string>
     <string name="about_app_license_title">Licenza da apli</string>
