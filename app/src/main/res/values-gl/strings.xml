@@ -173,7 +173,7 @@
     <string name="append_to_note">Anexo á nota</string>
     <string name="change_note_title">Cambiar o título da nota</string>
     <string name="menu_edit_title">Editar o título</string>
-    <string name="simple_security">Seguridade</string>
+    <string name="simple_security">Seguranza</string>
     <string name="appearance_and_behavior">Aparencia e comportamento</string>
     <string name="simple_synchronization">Sincronización</string>
     <string name="manage_accounts">Xestionar contas</string>
@@ -289,8 +289,8 @@
 
     <string name="simple_next">Seguinte</string>
     <string name="simple_prev">Anterior</string>
-    <string name="simple_backup">Copia de seguridade</string>
-    <string name="backup">Detectamos un estado irrecuperábel da aplicación. Faga unha copia de seguridade dos cambios non sincronizados e limpe o almacenamento da apli de Notas.</string>
+    <string name="simple_backup">Copia de seguranza</string>
+    <string name="backup">Detectamos un estado irrecuperábel da aplicación. Faga unha copia de seguranza dos cambios non sincronizados e limpe o almacenamento da apli de Notas.</string>
     <string name="settings_notes_path_description">Cartafol para almacenar as súas notas no seu Nextcloud</string>
     <string-array name="settings_file_suffixes">
         <item translatable="false">.txt</item>
