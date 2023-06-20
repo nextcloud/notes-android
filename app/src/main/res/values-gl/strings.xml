@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Notas</string>
-    <string name="app_name_long">Notas do Nextcloud</string>
+    <string name="app_name_long">Notas de Nextcloud</string>
     <string name="label_all_notes">Todas as notas</string>
     <string name="label_favorites">Favoritas</string>
     <string name="action_create">Nova nota</string>
@@ -160,7 +160,7 @@
     <string name="error_dialog_timeout_instance">Non houbo resposta do seu servidor no tempo dado. Asegúrese de que a súa instancia funciona correctamente.</string>
     <string name="error_dialog_timeout_toggle">Comprobe a súa conexión de rede. Ás veces apagar e volver acender os datos móbiles ou a wifi pode axudar.</string>
     <string name="error_dialog_check_server">A resposta do servidor non foi correcta. Comprobe se pode acceder a Notas a través de interface web.</string>
-    <string name="error_dialog_check_server_logs">Hai un problema coa configuración do Nextcloud. Bótelle un ollo aos ficheiros de rexistro do servidor.</string>
+    <string name="error_dialog_check_server_logs">Hai un problema coa configuración de Nextcloud. Bótelle un ollo aos ficheiros de rexistro do servidor.</string>
     <string name="error_dialog_check_maintenance">Comprobe que a súa instancia Nextcloud non se atope en modo de mantemento.</string>
     <string name="error_dialog_insufficient_storage">A súa instancia Nextcloud non dispón de espazo de almacenamento libre. Elimine algúns ficheiros para sincronizar os seus cambios locais na súa nube.</string>
     <string name="error_dialog_we_need_info">Necesitamos a seguinte información técnica para axudarlle:</string>
@@ -225,7 +225,7 @@
     <string name="formatting_help_cbf_body_2">Só ten que seleccionar un intervalo de texto ou tocar no cursor en calquera posición e obterá un menú emerxente que contén xunto ás entradas predeterminadas %1$s, %2$s, %3$s entradas como %4$s ou %5$s.</string>
 
     <string name="formatting_help_text_title">Texto</string>
-    <string name="formatting_help_text_body">É moi sinxelo facer algunhas palabras en %1$snegriña%1$s e outras palabras en %2$scursiva%2$s con Markdown. Pode %3$sriscar%3$s algunhas palabras e incluso [ligar ao Nextcloud](https://nextcloud.com).</string>
+    <string name="formatting_help_text_body">É moi sinxelo facer algunhas palabras en %1$snegriña%1$s e outras palabras en %2$scursiva%2$s con Markdown. Pode %3$sriscar%3$s algunhas palabras e incluso [ligar a Nextcloud](https://nextcloud.com).</string>
 
     <string name="formatting_help_lists_title">Listas</string>
     <string name="formatting_help_lists_body_1">Ás veces quere listas numeradas:</string>
