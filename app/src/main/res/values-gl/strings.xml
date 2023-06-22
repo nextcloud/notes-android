@@ -155,7 +155,7 @@
     <string name="error_dialog_tip_token_mismatch_clear_storage">Se o problema continúa, tente limpar o almacenamento de ambas as aplis: Nextcloud e Nextcloud Notas para resolver este problema.</string>
     <string name="error_dialog_tip_clear_storage">Pode limpar o almacenamento abrindo a información da apli e seleccionando Almacenamento → Limpar o almacenamento.⚠️ Advertencia: Isto eliminará as notas que aínda non estean sincronizadas.</string>
     <string name="error_dialog_tip_files_outdated">A súa apli Nextcloud semella estar desactualizada. Visite Play Store ou F-Droid para obter a última versión.</string>
-    <string name="error_dialog_tip_files_force_stop">Semella que algo está mal na súa apli Nextcloud. Tente forzar a parar ambas, a apli Nextcloud e a apli Nextcloud Notes.</string>
+    <string name="error_dialog_tip_files_force_stop">Semella que algo foi mal na súa apli Nextcloud. Tente forzar a parar ambas, a apli Nextcloud e a apli Nextcloud Notes.</string>
     <string name="error_dialog_tip_files_delete_storage">Se detelos pola forza non axuda, pode tentar limpar o almacenamento de ambas as aplicacións.</string>
     <string name="error_dialog_timeout_instance">Non houbo resposta do seu servidor no tempo dado. Asegúrese de que a súa instancia funciona correctamente.</string>
     <string name="error_dialog_timeout_toggle">Comprobe a súa conexión de rede. Ás veces apagar e volver acender os datos móbiles ou a wifi pode axudar.</string>
@@ -182,7 +182,7 @@
 
     <string name="noteMode_plain_edit">Modo de edición simple</string>
     <string name="noteMode_plain_preview">Vista previa simple</string>
-    <string name="noteMode_rich_edit">Modo de edición enriquecido</string>
+    <string name="noteMode_rich_edit">Modo de edición mellorada</string>
     <string name="noteMode_remember_last">Lembrar a miña última selección</string>
 
     <string-array name="fontSize_entries">
