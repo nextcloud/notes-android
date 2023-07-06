@@ -4,7 +4,7 @@
     <string name="app_name">Нотатки</string>
     <string name="app_name_long">Нотатки для Nextcloud</string>
     <string name="label_all_notes">Усі нотатки</string>
-    <string name="label_favorites">Улюблене</string>
+    <string name="label_favorites">Вподобане</string>
     <string name="action_create">Новий запис</string>
     <string name="welcome_text">Вітаємо у %1$s</string>
     <string name="action_settings">Налаштування</string>
@@ -240,7 +240,7 @@
     <string name="formatting_help_lists_body_2">Один</string>
     <string name="formatting_help_lists_body_3">Два</string>
     <string name="formatting_help_lists_body_4">Три</string>
-    <string name="formatting_help_lists_body_5">Іноді вам потрібні списки з позначками:</string>
+    <string name="formatting_help_lists_body_5">Іноді вам потрібні ненумеровані списки:</string>
     <string name="formatting_help_lists_body_6">Почніть рядок з риски</string>
     <string name="formatting_help_lists_body_7">А якщо у вас є підпункти, поставте два пробіли перед тире або зірочку:</string>
     <string name="formatting_help_lists_body_8">Ось так</string>
@@ -260,7 +260,7 @@
     <string name="formatting_help_structured_documents_body_6">- Альберт Ейнштейн</string>
 
     <string name="formatting_help_code_title">Код</string>
-    <string name="formatting_help_code_body_1">Існує багато різних способів стилізувати код за допомогою Markdown. Якщо у вас є вбудовані блоки коду, оберніть їх у зворотні позначки:</string>
+    <string name="formatting_help_code_body_1">Існує багато різних способів стилізувати код за допомогою Markdown. Якщо у вас є вбудовані блоки коду, оберніть їх символами зворотнього апострофу:</string>
     <string name="formatting_help_code_body_2">Markdown також підтримує те, що називається огородженням коду, що дозволяє використовувати кілька рядків без відступу:</string>
     <string name="formatting_help_code_body_3">А якщо ви хочете використовувати підсвічування синтаксису, додайте назву мови:</string>
 
