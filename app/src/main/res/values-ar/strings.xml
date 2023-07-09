@@ -207,6 +207,31 @@
         <item quantity="many">%d محددين</item>
         <item quantity="other">%d مُحدّد</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="zero">ملاحظات %1$d محذوفة</item>
+        <item quantity="one">ملاحظة واحدة محذوفة</item>
+        <item quantity="two">ملاحظات %1$d محذوفة</item>
+        <item quantity="few">ملاحظات %1$d محذوفة</item>
+        <item quantity="many">ملاحظات %1$d محذوفة</item>
+        <item quantity="other">ملاحظات %1$d محذوفة</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="zero">ملاحظات %1$d مستعادة</item>
+        <item quantity="one">ملاحظة واحدة مستعادة</item>
+        <item quantity="two">ملاحظات %1$d مستعادة</item>
+        <item quantity="few">ملاحظات %1$d مستعادة</item>
+        <item quantity="many">ملاحظات %1$d مستعادة</item>
+        <item quantity="other">ملاحظات %1$d  مستعادة</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="zero">مشاركة محتوي %1$d ملاحظات</item>
+        <item quantity="one">مشاركة محتوي %1$d ملاحظة</item>
+        <item quantity="two">مشاركة محتوي%1$dملاحظات</item>
+        <item quantity="few">مشاركة محتوي %1$d ملاحظات</item>
+        <item quantity="many">مشاركة محتوي %1$d ملاحظات</item>
+        <item quantity="other">مشاركة محتوي %1$d ملاحظات</item>
+    </plurals>
+
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
@@ -272,6 +297,14 @@
     <string name="no_other_accounts">أنت لم تقم بتهيئة أي حسابات أخرى بعدُ.</string>
     <string name="choose_account">إختر حسابًا</string>
     <string name="context_based_formatting">نافذة منبثقة للتنسيق القائم على السياق Context based formatting</string>
+    <plurals name="remove_account_message">
+        <item quantity="zero">سوف تؤدي إزالة الحساب%1$s أيضًا إلى حذف التغييرات غير المتزامنة الغير قابلة للاسترداد %2$d.</item>
+        <item quantity="one">سوف تؤدي إزالة الحساب%1$s أيضًا إلى حذف التغيير غير المتزامن الغير قابل للاسترداد.</item>
+        <item quantity="two">سوف تؤدي إزالة الحساب%1$s أيضًا إلى حذف التغييرات غير المتزامنة الغير قابلة للاسترداد %2$d.</item>
+        <item quantity="few">سوف تؤدي إزالة الحساب %1$s أيضًا إلى حذف التغييرات غير المتزامنة الغير قابلة للاسترداد %2$d.</item>
+        <item quantity="many">سوف تؤدي إزالة الحساب%1$s أيضًا إلى حذف التغييرات غير المتزامنة الغير قابلة للاسترداد %2$d.</item>
+        <item quantity="other">سوف تؤدي إزالة الحساب %1$s أيضًا إلى حذف التغييرات غير المتزامنة الغير قابلة للاسترداد %2$d.</item>
+    </plurals>
     <string name="remove_account">حذف %1$s</string>
 
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">يجب أن تكون متصلًا بالانترنت ليُمكنك إضاف حساب.</string>
