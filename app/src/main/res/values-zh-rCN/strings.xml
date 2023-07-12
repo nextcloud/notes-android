@@ -41,6 +41,7 @@
     <string name="listview_updated_last_month">上月</string>
 
     <string name="settings_note_mode">笔记的显示模式</string>
+    <string name="settings_note_mode_new">笔记打开行为</string>
     <string name="settings_theme_title">主题</string>
     <string name="settings_font_title">等宽字体</string>
     <string name="settings_font_size">字体大小</string>
@@ -63,6 +64,7 @@
     <string name="about_version">您正使用 %1$s</string>
     <string name="about_maintainer_title">维护者</string>
     <string name="about_developers_title">开发者</string>
+    <string name="about_developers_original_author">原作者</string>
     <string name="about_translators_title">翻译人员</string>
     <string name="about_translators_transifex">%1$s 上的 Nextcloud 社区</string>
     <string name="about_testers_title">测试人员</string>
@@ -178,6 +180,9 @@
     <string name="action_formatting_help">格式</string>
 
 
+    <string name="noteMode_plain_edit">普通编辑模式</string>
+    <string name="noteMode_plain_preview">普通预览模式</string>
+    <string name="noteMode_rich_edit">富文本编辑模式</string>
     <string name="noteMode_remember_last">记住我上一次的选择</string>
 
     <string-array name="fontSize_entries">
@@ -294,5 +299,7 @@
     <string name="progress_import_indeterminate">导入笔记中…</string>
     <string name="progress_import">正导入 %2$d 中的笔记 %1$d …</string>
     <string name="account_imported">账号已导入</string>
+    <string name="direct_editing_error">加载富文本编辑时出错</string>
+    <string name="switch_to_plain_editing">切换到普通编辑模式</string>
     <string name="action_back">返回</string>
     </resources>
