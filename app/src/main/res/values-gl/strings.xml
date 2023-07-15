@@ -155,11 +155,11 @@
     <string name="error_dialog_tip_token_mismatch_clear_storage">Se o problema continúa, tente limpar o almacenamento de ambalas dúas aplicacións: Nextcloud e Nextcloud Notas para resolver este problema.</string>
     <string name="error_dialog_tip_clear_storage">Pode limpar o almacenamento abrindo a información da aplicación e seleccionando Almacenamento → Limpar o almacenamento.⚠️ Advertencia: Isto eliminará as notas que aínda non estean sincronizadas.</string>
     <string name="error_dialog_tip_files_outdated">A súa aplicación Nextcloud semella estar desactualizada. Visite a Play Store ou F-Droid para obter a última versión.</string>
-    <string name="error_dialog_tip_files_force_stop">Semella que algo foi mal na súa aplicación Nextcloud. Tente forzar a parar ámbalas dúas aplicacións,  Nextcloud e Nextcloud Notes.</string>
+    <string name="error_dialog_tip_files_force_stop">Semella que algo foi mal na súa aplicación Nextcloud. Tente forzar a parar ámbalas dúas aplicacións,  Nextcloud e Nextcloud Notas.</string>
     <string name="error_dialog_tip_files_delete_storage">Se detelos pola forza non axuda, pode tentar limpar o almacenamento de ambas as aplicacións.</string>
     <string name="error_dialog_timeout_instance">Non houbo resposta do seu servidor no tempo dado. Asegúrese de que a súa instancia funciona correctamente.</string>
     <string name="error_dialog_timeout_toggle">Comprobe a súa conexión de rede. Ás veces apagar e volver acender os datos móbiles ou a wifi pode axudar.</string>
-    <string name="error_dialog_check_server">A resposta do servidor non foi correcta. Comprobe se pode acceder a Notas a través de interface web.</string>
+    <string name="error_dialog_check_server">A resposta do servidor non foi correcta. Comprobe se pode acceder a Notas a través da interface web.</string>
     <string name="error_dialog_check_server_logs">Hai un problema coa configuración de Nextcloud. Bótelle un ollo aos ficheiros de rexistro do servidor.</string>
     <string name="error_dialog_check_maintenance">Comprobe que a súa instancia Nextcloud non se atope en modo de mantemento.</string>
     <string name="error_dialog_insufficient_storage">A súa instancia Nextcloud non dispón de espazo de almacenamento libre. Elimine algúns ficheiros para sincronizar os seus cambios locais na súa nube.</string>
@@ -167,7 +167,7 @@
     <string name="error_dialog_server_app_enabled">Asegúrese de ter instalada e activada a aplicación «Notas» no seu servidor.</string>
     <string name="error_dialog_redirect">O seu servidor respondeu cun código de estado HTTP 302, o que implica que non ten instalada a aplicación Notas no servidor ou que algo está mal configurado. Isto pode ser causado por substitucións personalizadas nun ficheiro .htaccess ou por aplicacións Nextcloud como Client OID.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Desactive todas as optimizacións de batería para Nextcloud e a aplicación Notas.</string>
-    <string name="error_dialog_min_version">A aplicación de Notas para Android require que a aplicación de Android Nextcloud teña como mínimo a versión 3.18.</string>
+    <string name="error_dialog_min_version">A aplicación de Notas para Android necesita que a aplicación de Android Nextcloud teña como mínimo a versión 3.18.</string>
     <string name="added_content">Engadido «%1$s»</string>
     <string name="shared_text_empty">O texto compartido estaba baleiro</string>
     <string name="append_to_note">Anexo á nota</string>
