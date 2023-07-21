@@ -51,7 +51,6 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 ## :checkered_flag: Roadmap
 
   * We usually focus on [pinned issues](https://github.com/nextcloud/notes-android/issues) in our issue tracker
-  * Since this is an Open Source freetime project, there is no guarantee when and if and how we implement new features
 
 ## :family: Join the team
 
@@ -60,8 +59,6 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
   * [Pick a good first issue](https://github.com/nextcloud/notes-android/labels/Good%20first%20issue) :notebook:
   * Create a [Pull Request](https://opensource.guide/how-to-contribute/#opening-a-pull-request)
   * Help translating this app on [Transifex](https://app.transifex.com/nextcloud/nextcloud/android-notes/) 🌎
-  * Buy this app on [Google Play Store](https://play.google.com/store/apps/details?id=it.niedermann.owncloud.notes)
-  * Send me a bottle of your favorite beer :beers: :wink:
 
 ## :link: Requirements
 
