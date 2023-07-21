@@ -1,28 +1,29 @@
-Companion app to Nextcloud Notes.
+Android client for Nextcloud Notes.
 
-🚀 Funktionen
+🚀 Features
 
-  * Mehrere Konten 👥
-  * Erstellen, Bearbeiten, Teilen, Suchen und Löschen von Notizen 📝
-  * Texte und Links als neue Notizen in die App teilen 📩
-  * ToDos direkt in der Leseansicht abhaken ✅
-  * Notizen als Favoriten markieren⭐
-  * Massenhaftes Löschen 🗑️
-  * Notizen durchsuchen 🔍
-  * Markdown-Rendering ✨
-  * Kontext-basierte Formatierung 🧰
-  * Dark Mode 🌙
+  * Multiple accounts 👥
+  * List, create, edit, share, search and delete notes 📝
+  * Share text and links as new note into the app 📩
+  * Toggling checkboxes in view mode ✅
+  * Mark notes as favorite ⭐
+  * Bulk delete 🗑️
+  * In-note search 🔍
   * Single note widget and note list widget 📊
-  * Übersetzt in viele Sprachen 🌎
+  * Dark Mode 🌙
+  * Render Markdown ✨
+  * Translated in many languages 🌎
+  * Context based formatting 🧰
+  * App-lock 🔒
 
 
-🔗 Voraussetzungen
+🔗 Requirements
 
-  * Nextcloud (https://nextcloud.com/)
-  * Nextcloud Notes App (https://apps.nextcloud.com/apps/notes)
-  * Nextcloud Android Client (https://play.google.com/store/apps/details?id=com.nextcloud.client)
+  * Nextcloud Server (https://nextcloud.com/)
+  * Nextcloud Notes Server App (https://apps.nextcloud.com/apps/notes)
+  * Nextcloud Files Android App (https://play.google.com/store/apps/details?id=com.nextcloud.client)
 
 
-👨‍👩‍👦 Mitwirken
+👨‍👩‍👦 Join the team
 
   * https://github.com/nextcloud/notes-android#family-join-the-team
