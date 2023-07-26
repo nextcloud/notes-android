@@ -31,7 +31,7 @@
     <string name="search_in_category">Buscar en %1$s</string>
     <string name="search_in_all">Buscar todas as notas</string>
 
-    <string name="change_category_title">Escolla unha categoría</string>
+    <string name="change_category_title">Escoller unha categoría</string>
 
     <string name="listview_updated_today">Hoxe</string>
     <string name="listview_updated_yesterday">Onte</string>
@@ -276,7 +276,7 @@
     <string name="error_action_update_files_app">Actualizar</string>
     <string name="no_account_configured_yet">Aínda non hai ningunha conta configurada</string>
     <string name="no_other_accounts">Aínda non ten configurada ningunha outra conta.</string>
-    <string name="choose_account">Escolla unha conta</string>
+    <string name="choose_account">Escoller unha conta</string>
     <string name="context_based_formatting">Xanela emerxente de formato baseado no contexto</string>
     <plurals name="remove_account_message">
         <item quantity="one">Retirar a conta %1$s tamén eliminará de xeito irrecuperábel un cambio non sincronizado.</item>
