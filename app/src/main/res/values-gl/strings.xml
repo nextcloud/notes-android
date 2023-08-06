@@ -290,7 +290,7 @@
     <string name="simple_next">Seguinte</string>
     <string name="simple_prev">Anterior</string>
     <string name="simple_backup">Copia de seguranza</string>
-    <string name="backup">Detectamos un estado irrecuperábel da aplicación. Faga unha copia de seguranza dos cambios non sincronizados e limpe o almacenamento da apli de Notas.</string>
+    <string name="backup">Detectamos un estado irrecuperábel da aplicación. Faga unha copia de seguranza dos cambios non sincronizados e limpe o almacenamento da aplicación Notas.</string>
     <string name="settings_notes_path_description">Cartafol para almacenar as súas notas no seu Nextcloud</string>
     <string-array name="settings_file_suffixes">
         <item translatable="false">.txt</item>
