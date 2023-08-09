@@ -41,6 +41,7 @@
     <string name="listview_updated_last_month">Forrige måned</string>
 
     <string name="settings_note_mode">Visningsmodus for notater</string>
+    <string name="settings_note_mode_new">Åpningsoppførsel fra Notes</string>
     <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title">Monospace font</string>
     <string name="settings_font_size">Skriftstørrelse</string>
@@ -179,6 +180,9 @@
     <string name="action_formatting_help">Formatering</string>
 
 
+    <string name="noteMode_plain_edit">Ren endringsmodus</string>
+    <string name="noteMode_plain_preview">Ren forhåndsvisning</string>
+    <string name="noteMode_rich_edit">Rik endringsmodus</string>
     <string name="noteMode_remember_last">Husk mitt siste valg</string>
 
     <string-array name="fontSize_entries">
@@ -300,5 +304,7 @@
     <string name="progress_import_indeterminate">Importerer notater…</string>
     <string name="progress_import">Importerer notat %1$d av %2$d…</string>
     <string name="account_imported">Konto importert.</string>
+    <string name="direct_editing_error">Feil ved lasting av rik endringsmodus</string>
+    <string name="switch_to_plain_editing">Bytt til ren endringsmodus</string>
     <string name="action_back">Tilbake</string>
     </resources>
