@@ -10,7 +10,7 @@
     <string name="action_settings">Налаштування</string>
     <string name="action_trashbin">Вилучені нотатки</string>
     <string name="action_search">Пошук</string>
-    <string name="action_sorting_method">Метод сортування</string>
+    <string name="action_sorting_method">Спосіб впорядкування</string>
     <string name="simple_cancel">Скасувати</string>
     <string name="simple_switch">Перемкнути</string>
     <string name="simple_edit">Редагувати</string>
