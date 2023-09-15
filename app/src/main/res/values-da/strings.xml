@@ -63,6 +63,7 @@
     <string name="about_version">Du bruger lige nu %1$s</string>
     <string name="about_maintainer_title">Maintainer</string>
     <string name="about_developers_title">Udviklere</string>
+    <string name="about_developers_original_author">original forfatter</string>
     <string name="about_translators_title">Oversættere</string>
     <string name="about_translators_transifex">Nextcloud fællesskabet på %1$s</string>
     <string name="about_testers_title">Testere</string>
@@ -71,7 +72,7 @@
     <string name="about_issues_title">Problemer</string>
     <string name="about_issues">Du kan rapportere fejl, foreslå forbedringer og ønske nye funktioner på Github: %1$s</string>
     <string name="about_translate_title">Oversæt</string>
-    <string name="about_translate">Bliv en dal af Nextcloudholdet på Transifex, og hjælp os med at oversætte denne app: %1$s</string>
+    <string name="about_translate">Bliv en del af Nextcloudholdet på Transifex, og hjælp os med at oversætte denne app: %1$s</string>
     <string name="about_app_license_title">App licens</string>
     <string name="about_app_license">Denne applikation er licenseret under GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Vis licens</string>
@@ -191,6 +192,7 @@
 
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Kontekstbaseret formatering</string>
     <string name="formatting_help_text_title">Tekst</string>
     <string name="formatting_help_lists_title">Lister</string>
@@ -222,8 +224,14 @@
     <string name="simple_next">Næste</string>
     <string name="simple_prev">Tidligere</string>
     <string name="simple_backup">Backup</string>
+    <string name="settings_notes_path_description">Mappe for dine noter i Nextcloud</string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
     <string name="settings_notes_path_success">Mappe for nye noter: %1$s</string>
     <string name="settings_file_suffix">Fil-endelse</string>
     <string name="settings_file_suffix_description">Fil-endelse for nye noter i Nextcloud</string>
+    <string name="progress_import_indeterminate">Importerer noter...</string>
     <string name="action_back">Tilbage</string>
     </resources>
