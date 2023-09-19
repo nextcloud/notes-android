@@ -165,7 +165,7 @@
     <string name="error_dialog_insufficient_storage">Su instancia de Nextcloud no tiene espacio libre de almacenamiento. Por favor elimine algunos archivos para sincronizar sus cambios locales con su nube.</string>
     <string name="error_dialog_we_need_info">Necesitamos la siguiente información técnica para ayudarle:</string>
     <string name="error_dialog_server_app_enabled">Por favor, asegúrate de que has instalado y activado la app «Notas» en tu servidor.</string>
-    <string name="error_dialog_redirect">Tu servidor respondió con el código de estado HTTP 302, lo que implica que no está instalada la aplicación Notas en su servidor o que algo está mal configurado. Esto puede estar causado por anulaciones personalizadas en un archivo .htaccess o por aplicaciones de Nextcloud como OID Client. </string>
+    <string name="error_dialog_redirect">Su servidor respondió con el código de estado HTTP 302, lo que implica que no está instalada la aplicación Notas en su servidor o que algo está mal configurado. Esto puede estar causado por anulaciones personalizadas en un archivo .htaccess o por aplicaciones de Nextcloud como OID Client.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Por favor, desactiva todas las optimizaciones de la batería para Nextcloud y la app de Notas.</string>
     <string name="error_dialog_min_version">La aplicación de Notas de Android requiere que la la aplicación Nextcloud de Android sea al menos la versión 3.18.</string>
     <string name="added_content">Se ha añadido «%1$s»</string>
