@@ -27,6 +27,7 @@ skip_docs
 default_platform(:android)
 
 BUNDLE_PATH = "app/build/outputs/bundle/playRelease/app-play-release.aab"
+ENV['SUPPLY_UPLOAD_MAX_RETRIES']='10'
 
 import("./common.Fastfile")
 
