@@ -79,7 +79,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         checkDirectEditingAvailable();
-        if (directEditAvailable) {
+        if (directEditAvailable && isDirectEditEnabled()) {
             final ExtendedFloatingActionButton directEditingButton = getDirectEditingButton();
             directEditingButton.setExtended(false);
             ExtendedFabUtil.toggleExtendedOnLongClick(directEditingButton);
@@ -90,6 +90,15 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
             });
         } else {
             getDirectEditingButton().setVisibility(View.GONE);
+            ExtendedFloatingActionButton edit = getNormalEditButton();
+            if(edit!=null) {
+                edit.setVisibility(View.VISIBLE);
+                edit.setOnClickListener(v -> {
+                    if (listener != null) {
+                        listener.changeMode(NoteFragmentListener.Mode.EDIT, true);
+                    }
+                });
+            }
         }
     }
 
@@ -102,6 +111,14 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
             Log.w(TAG, "checkDirectEditingAvailable: ", e);
             directEditAvailable = false;
         }
+    }
+
+    protected boolean isDirectEditEnabled() {
+        if (!directEditAvailable) {
+            return false;
+        }
+        //todo: handle preference here
+        return false;
     }
 
     @Override
@@ -252,6 +269,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     @NonNull
     protected abstract ExtendedFloatingActionButton getDirectEditingButton();
 
+    protected abstract ExtendedFloatingActionButton getNormalEditButton();
 
     private void showSearchFabs() {
         ExtendedFabUtil.setExtendedFabVisibility(getDirectEditingButton(), false);
@@ -347,5 +365,9 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         util.material.themeFAB(getSearchNextButton());
         util.material.themeFAB(getSearchPrevButton());
         util.material.themeExtendedFAB(getDirectEditingButton());
+        var editFab = getNormalEditButton();
+        if(editFab != null) {
+            util.material.themeExtendedFAB(editFab);
+        }
     }
 }
