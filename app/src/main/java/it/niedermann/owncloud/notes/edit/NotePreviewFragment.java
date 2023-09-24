@@ -58,6 +58,10 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_edit).setVisible(true);
+        if(getNormalEditButton().getVisibility() == View.VISIBLE) {
+            menu.findItem(R.id.menu_edit).setVisible(false);
+        }
+
         menu.findItem(R.id.menu_preview).setVisible(false);
     }
 
@@ -90,6 +94,11 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     @Override
     protected @NonNull ExtendedFloatingActionButton getDirectEditingButton() {
         return binding.directEditing;
+    }
+
+    @Override
+    protected ExtendedFloatingActionButton getNormalEditButton() {
+        return binding.edit;
     }
 
     @Override
