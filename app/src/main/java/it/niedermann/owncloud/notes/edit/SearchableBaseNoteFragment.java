@@ -14,6 +14,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
+import androidx.preference.PreferenceManager;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -40,7 +41,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     private SearchView searchView;
     private String searchQuery = null;
     private static final int delay = 50; // If the search string does not change after $delay ms, then the search task starts.
-    private boolean directEditAvailable = false;
+    private boolean directEditRemotelyAvailable = false; // avoid using this directly, instead use: isDirectEditEnabled()
 
     @ColorInt
     private int color;
@@ -64,7 +65,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     @Override
     protected void onScroll(int scrollY, int oldScrollY) {
         super.onScroll(scrollY, oldScrollY);
-        if (directEditAvailable) {
+        if (isDirectEditEnabled()) {
             // only show FAB if search is not active
             if (getSearchNextButton() == null || getSearchNextButton().getVisibility() != View.VISIBLE) {
                 final ExtendedFloatingActionButton directFab = getDirectEditingButton();
@@ -77,7 +78,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         checkDirectEditingAvailable();
-        if (directEditAvailable && isDirectEditEnabled()) {
+        if (isDirectEditEnabled()) {
             final ExtendedFloatingActionButton directEditingButton = getDirectEditingButton();
             directEditingButton.setExtended(false);
             ExtendedFabUtil.toggleExtendedOnLongClick(directEditingButton);
@@ -104,19 +105,19 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         try {
             final SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext());
             final Account localAccount = repo.getAccountByName(ssoAccount.name);
-            directEditAvailable = localAccount != null && localAccount.isDirectEditingAvailable();
+            directEditRemotelyAvailable = localAccount != null && localAccount.isDirectEditingAvailable();
         } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
             Log.w(TAG, "checkDirectEditingAvailable: ", e);
-            directEditAvailable = false;
+            directEditRemotelyAvailable = false;
         }
     }
 
     protected boolean isDirectEditEnabled() {
-        if (!directEditAvailable) {
+        if (!directEditRemotelyAvailable) {
             return false;
         }
-        //todo: handle preference here
-        return false;
+        final var sp = PreferenceManager.getDefaultSharedPreferences(requireContext().getApplicationContext());
+        return sp.getBoolean(getString(R.string.pref_key_enable_direct_edit), true);
     }
 
     @Override
