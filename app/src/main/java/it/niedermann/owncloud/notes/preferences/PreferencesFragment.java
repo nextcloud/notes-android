@@ -40,6 +40,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
     private BrandedSwitchPreference preventScreenCapturePref;
     private BrandedSwitchPreference backgroundSyncPref;
     private BrandedSwitchPreference keepScreenOnPref;
+    private BrandedSwitchPreference enableDirectEditorPref;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -114,6 +115,8 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
             SyncWorker.update(requireContext(), (Boolean) newValue);
             return true;
         });
+
+        enableDirectEditorPref = findPreference(getString(R.string.pref_key_enable_direct_edit));
     }
 
 
@@ -141,5 +144,6 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
         preventScreenCapturePref.applyBrand(color);
         backgroundSyncPref.applyBrand(color);
         keepScreenOnPref.applyBrand(color);
+        enableDirectEditorPref.applyBrand(color);
     }
 }

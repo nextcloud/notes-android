@@ -53,6 +53,15 @@
             android:title="@string/settings_note_mode_new" />
 
         <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
+            android:defaultValue="true"
+            android:icon="@drawable/ic_rich_editing_grey600_24dp"
+            android:key="@string/pref_key_enable_direct_edit"
+            android:layout="@layout/item_pref"
+            android:title="@string/settings_enable_direct_edit"
+            android:summary="@string/settings_enable_direct_edit_summary" />
+
+
+        <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
             android:icon="@drawable/ic_baseline_dashboard_24"
             android:key="@string/pref_key_gridview"
             android:layout="@layout/item_pref"
