@@ -17,7 +17,7 @@ public abstract class LockedActivity extends BrandedActivity {
 
     private static final String TAG = LockedActivity.class.getSimpleName();
 
-    private static final int REQUEST_CODE_UNLOCK = 100;
+    protected static final int REQUEST_CODE_UNLOCK = 100;
 
 
     @Override

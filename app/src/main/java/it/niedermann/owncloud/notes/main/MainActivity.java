@@ -691,6 +691,12 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                 }
                 break;
             }
+            case REQUEST_CODE_UNLOCK: {
+                if (RESULT_OK == resultCode) {
+                    getNotesListLiveData();
+                }
+                break;
+            }
             default: {
                 try {
                     AccountImporter.onActivityResult(requestCode, resultCode, data, this, (ssoAccount) -> {
