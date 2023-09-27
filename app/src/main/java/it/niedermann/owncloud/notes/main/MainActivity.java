@@ -137,6 +137,33 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     boolean canMoveNoteToAnotherAccounts = false;
 
+    private void getNotesListLiveData() {
+        mainViewModel.getNotesListLiveData().observe(this, notes -> {
+            // https://stackoverflow.com/a/37342327
+            itemTouchHelper.attachToRecyclerView(null);
+            itemTouchHelper.attachToRecyclerView(listView);
+            adapter.setItemList(notes);
+            binding.activityNotesListView.progressCircular.setVisibility(GONE);
+            binding.activityNotesListView.emptyContentView.getRoot().setVisibility(notes.size() > 0 ? GONE : VISIBLE);
+            // Remove deleted notes from the selection
+            if (tracker.hasSelection()) {
+                final var deletedNotes = new LinkedList<Long>();
+                for (final var id : tracker.getSelection()) {
+                    if (notes
+                            .stream()
+                            .filter(item -> !item.isSection())
+                            .map(item -> (Note) item)
+                            .noneMatch(item -> item.getId() == id)) {
+                        deletedNotes.add(id);
+                    }
+                }
+                for (final var id : deletedNotes) {
+                    tracker.deselect(id);
+                }
+            }
+        });
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SplashScreen.installSplashScreen(this);
@@ -264,30 +291,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                 startActivityForResult(createIntent, REQUEST_CODE_CREATE_NOTE);
             });
         });
-        mainViewModel.getNotesListLiveData().observe(this, notes -> {
-            // https://stackoverflow.com/a/37342327
-            itemTouchHelper.attachToRecyclerView(null);
-            itemTouchHelper.attachToRecyclerView(listView);
-            adapter.setItemList(notes);
-            binding.activityNotesListView.progressCircular.setVisibility(GONE);
-            binding.activityNotesListView.emptyContentView.getRoot().setVisibility(notes.size() > 0 ? GONE : VISIBLE);
-            // Remove deleted notes from the selection
-            if (tracker.hasSelection()) {
-                final var deletedNotes = new LinkedList<Long>();
-                for (final var id : tracker.getSelection()) {
-                    if (notes
-                            .stream()
-                            .filter(item -> !item.isSection())
-                            .map(item -> (Note) item)
-                            .noneMatch(item -> item.getId() == id)) {
-                        deletedNotes.add(id);
-                    }
-                }
-                for (final var id : deletedNotes) {
-                    tracker.deselect(id);
-                }
-            }
-        });
+
+        getNotesListLiveData();
         mainViewModel.getSearchTerm().observe(this, adapter::setHighlightSearchQuery);
         mainViewModel.getCategorySortingMethodOfSelectedCategory().observe(this, methodOfCategory -> {
             updateSortMethodIcon(methodOfCategory.second);
