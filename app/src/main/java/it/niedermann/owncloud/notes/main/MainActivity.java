@@ -65,6 +65,7 @@ import java.util.stream.Collectors;
 
 import it.niedermann.android.util.ColorUtil;
 import it.niedermann.owncloud.notes.LockedActivity;
+import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerListener;
 import it.niedermann.owncloud.notes.accountswitcher.AccountSwitcherDialog;
@@ -292,7 +293,9 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             });
         });
 
-        getNotesListLiveData();
+        if (!NotesApplication.isLocked()) {
+            getNotesListLiveData();
+        }
         mainViewModel.getSearchTerm().observe(this, adapter::setHighlightSearchQuery);
         mainViewModel.getCategorySortingMethodOfSelectedCategory().observe(this, methodOfCategory -> {
             updateSortMethodIcon(methodOfCategory.second);
