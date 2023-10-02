@@ -11,6 +11,8 @@
         android:layout_height="match_parent"
         android:paddingVertical="@dimen/widget_inner_padding_vertical"
         android:paddingHorizontal="@dimen/widget_inner_padding_horizontal"
+        android:dividerHeight="0dp"
+        android:divider="@null"
         tools:listitem="@layout/widget_single_note_content" />
 
     <TextView

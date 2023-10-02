@@ -1,21 +1,33 @@
 package it.niedermann.owncloud.notes.widget.singlenote;
 
+import static it.niedermann.android.markdown.remoteviews.RemoteViewElement.TYPE_CHECKBOX_CHECKED;
+import static it.niedermann.android.markdown.remoteviews.RemoteViewElement.TYPE_CHECKBOX_UNCHECKED;
+import static it.niedermann.android.markdown.remoteviews.RemoteViewElement.TYPE_TEXT;
+
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 import it.niedermann.android.markdown.MarkdownUtil;
+import it.niedermann.android.markdown.remoteviews.RemoteViewElement;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
+import it.niedermann.owncloud.notes.reciever.WidgetCheckboxReciever;
 
 public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
 
@@ -25,6 +37,8 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
     private final NotesRepository repo;
     @Nullable
     private Note note;
+
+    private ArrayList<RemoteViewElement> noteElements = new ArrayList<>();
 
     private static final String TAG = SingleNoteWidget.class.getSimpleName();
 
@@ -53,6 +67,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         } else {
             Log.w(TAG, "Widget with ID " + appWidgetId + " seems to be not configured yet.");
         }
+        noteElements = MarkdownUtil.getRenderedElementsForRemoteView(context, note.getContent());
     }
 
     @Override
@@ -66,7 +81,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
      */
     @Override
     public int getCount() {
-        return (note != null) ? 1 : 0;
+        return (note != null) ? this.noteElements.size() : 0;
     }
 
     /**
@@ -89,9 +104,29 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         args.putLong(EditNoteActivity.PARAM_ACCOUNT_ID, note.getAccountId());
         fillInIntent.putExtras(args);
 
+        var item = noteElements.get(position);
+
         final var note_content = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_content);
-        note_content.setOnClickFillInIntent(R.id.single_note_content_tv, fillInIntent);
-        note_content.setTextViewText(R.id.single_note_content_tv, MarkdownUtil.renderForRemoteView(context, note.getContent()));
+        var content = item.getCurrentLineBlock();
+        int type = item.getType();
+
+
+        if (type == TYPE_TEXT || Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
+            note_content.setOnClickFillInIntent(R.id.single_note_content_tv, fillInIntent);
+            note_content.setTextViewText(R.id.single_note_content_tv, MarkdownUtil.renderForRemoteView(context, content).toString().trim());
+            note_content.setViewVisibility(R.id.single_note_content_tv, View.VISIBLE);
+        }
+
+        if (type == TYPE_CHECKBOX_CHECKED || type == TYPE_CHECKBOX_UNCHECKED ) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                note_content.setTextViewText(R.id.single_note_content_cb, content);
+                if(type == TYPE_CHECKBOX_CHECKED) {
+                    note_content.setCompoundButtonChecked(R.id.single_note_content_cb, true);
+                }
+                note_content.setViewVisibility(R.id.single_note_content_cb, View.VISIBLE);
+                note_content.setOnClickPendingIntent(R.id.single_note_content_cb, getPendingIntent());
+            }
+        }
 
         return note_content;
     }
@@ -117,4 +152,12 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
     public boolean hasStableIds() {
         return true;
     }
+
+    private PendingIntent getPendingIntent() {
+        Intent checkboxIntent = new Intent(context, WidgetCheckboxReciever.class);
+        checkboxIntent.setAction("toggle");
+        return PendingIntent.getBroadcast(context, 0, checkboxIntent, PendingIntent.FLAG_IMMUTABLE);
+
+    }
+
 }
