@@ -44,12 +44,15 @@
     <string name="settings_theme_title">Θέμα</string>
     <string name="settings_font_title">Γραμματοσειρά monospace</string>
     <string name="settings_font_size">Μέγεθος γραμματοσειράς</string>
-    <string name="settings_wifi_only">Συγχρονισμός μόνο σε Wi-Fi</string>
+    <string name="settings_wifi_only">Συγχρονισμός μόνο με Wi-Fi</string>
     <string name="settings_lock">Κλείδωμα εφαρμογής (Beta)</string>
     <string name="settings_lock_summary">Διαπιστευτήρια συσκευής</string>
     <string name="settings_background_sync">Συγχρονισμός στο παρασκήνιο</string>
+    <string name="settings_prevent_screen_capture">Απαγόρευση λήψης στιγμιότυπου οθόνης</string>
     <string name="settings_gridview">Προβολή πλέγματος</string>
     <string name="settings_keep_screen_on">Διατήρηση της οθόνης ενεργή</string>
+    <string name="settings_keep_screen_on_summary">Κατά την προβολή ή επεξεργασία σημείωσης</string>
+
     <string name="error_sync">Αποτυχία συγχρονισμού: %1$s</string>
     <string name="error_synchronization">Αποτυχία συγχρονισμού</string>
     <string name="error_no_network">Δεν υπάρχει σύνδεση στο δίκτυο</string>
@@ -108,6 +111,7 @@
     <string name="category_movies">Ταινίες</string>
     <string name="category_movie">Ταινία</string>
     <string name="category_work">Εργασία</string>
+    <string name="category_checklists">Λίστες ελέγχου</string>
     <string name="category_tasks">Εργασίες</string>
     <string name="category_recipe">Συνταγή</string>
     <string name="category_recipes">Συνταγές</string>
@@ -156,6 +160,7 @@
     <string name="error_dialog_server_app_enabled">Παρακαλούμε βεβαιωθείτε ότι εγκαταστήσατε και ενεργοποιήσατε την εφαρμογή \"Notes\" στον διακομιστή σας.</string>
     <string name="error_dialog_redirect">Ο διακομιστής απάντησε με κωδικό κατάστασης HTTP 302, που σημαίνει, πως δεν έχετε εγκατεστημένη την εφαρμογή Notes στον διακομιστή σας ή υπάρχει λάθος ρύθμιση. Αυτό μπορεί να προκλήθηκε από λάθος καταχώρηση στο αρχείο .htaccess-file ή σε εφαρμογές του Nextcloud όπως την OID Client.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Παρακαλούμε απενεργοποιήστε όλες τις βελτιστοποιήσεις μπαταρίας για το Nextcloud και την εφαρμογή Notes.</string>
+    <string name="error_dialog_min_version">Η εφαρμογή Notes Android απαιτεί την εγκατάσταση της εφαρμογής Nextcloud Android έκδοση 3.18.</string>
     <string name="added_content">Προστέθηκε \"%1$s\"</string>
     <string name="shared_text_empty">Το κοινόχρηστο κείμενο είναι κενό</string>
     <string name="append_to_note">Προσάρτηση στη σημείωση</string>
@@ -268,6 +273,8 @@
     <string name="remove_account">Αφαίρεση%1$s</string>
 
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Πρέπει να είστε συνδεμένοι στο ιντερνετ για να προσθέσετε λογαριασμό.</string>
+    <string name="settings_notes_path">Ορισμός φακέλου</string>
+
     <string name="simple_next">Επόμενο</string>
     <string name="simple_prev">Προηγούμενο</string>
     <string name="simple_backup">Αντίγραφο ασφαλείας</string>
