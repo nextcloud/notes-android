@@ -120,7 +120,7 @@ public class MainViewModel extends AndroidViewModel {
 
     public void postCurrentAccount(@NonNull Account account) {
         state.set(KEY_CURRENT_ACCOUNT, account);
-        BrandingUtil.saveBrandColors(getApplication(), account.getColor(), account.getTextColor());
+        BrandingUtil.saveBrandColor(getApplication(), account.getColor());
         SingleAccountHelper.setCurrentAccount(getApplication(), account.getAccountName());
 
         final var currentAccount = this.currentAccount.getValue();
@@ -410,11 +410,11 @@ public class MainViewModel extends AndroidViewModel {
                     try {
                         final var capabilities = CapabilitiesClient.getCapabilities(getApplication(), ssoAccount, localAccount.getCapabilitiesETag(), ApiProvider.getInstance());
                         repo.updateCapabilitiesETag(localAccount.getId(), capabilities.getETag());
-                        repo.updateBrand(localAccount.getId(), capabilities.getColor(), capabilities.getTextColor());
+                        repo.updateBrand(localAccount.getId(), capabilities.getColor());
                         localAccount.setColor(capabilities.getColor());
-                        localAccount.setTextColor(capabilities.getTextColor());
-                        BrandingUtil.saveBrandColors(getApplication(), localAccount.getColor(), localAccount.getTextColor());
+                        BrandingUtil.saveBrandColor(getApplication(), localAccount.getColor());
                         repo.updateApiVersion(localAccount.getId(), capabilities.getApiVersion());
+                        repo.updateDirectEditingAvailable(localAccount.getId(), capabilities.isDirectEditingAvailable());
                         callback.onSuccess(null);
                     } catch (Throwable t) {
                         if (t.getClass() == NextcloudHttpRequestFailedException.class || t instanceof NextcloudHttpRequestFailedException) {
@@ -625,7 +625,7 @@ public class MainViewModel extends AndroidViewModel {
 
     /**
      * @return <code>true</code> if {@param exceptions} contains at least one exception which is not caused by flaky infrastructure.
-     * @see <a href="https://github.com/stefan-niedermann/nextcloud-notes/issues/1303">Issue #1303</a>
+     * @see <a href="https://github.com/nextcloud/notes-android/issues/1303">Issue #1303</a>
      */
     public boolean containsNonInfrastructureRelatedItems(@Nullable Collection<Throwable> exceptions) {
         if (exceptions == null || exceptions.isEmpty()) {

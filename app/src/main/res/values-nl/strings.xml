@@ -50,6 +50,9 @@
     <string name="settings_background_sync">Achtergrondsynchronisatie</string>
     <string name="settings_prevent_screen_capture">Voorkomen schermafdruk</string>
     <string name="settings_gridview">Rasterweergave</string>
+    <string name="settings_keep_screen_on">Scherm aan laten</string>
+    <string name="settings_keep_screen_on_summary">Tijdens het bekijken of bewerken van een notitie</string>
+
     <string name="error_sync">Synchronisatie mislukt: %1$s</string>
     <string name="error_synchronization">Synchronisatie mislukt</string>
     <string name="error_no_network">Geen netwerkverbinding</string>
@@ -60,6 +63,7 @@
     <string name="about_version">Je gebruikt nu %1$s</string>
     <string name="about_maintainer_title">Projectleider</string>
     <string name="about_developers_title">Ontwikkelaars</string>
+    <string name="about_developers_original_author">oorspronkelijke ontwikkelaar</string>
     <string name="about_translators_title">Vertalers</string>
     <string name="about_translators_transifex">Nextcloud-gemeenschap op %1$s</string>
     <string name="about_testers_title">Testers</string>
@@ -174,11 +178,8 @@
     <string name="manage_accounts">Accounts beheren </string>
     <string name="action_formatting_help">Opmaak</string>
 
-    <string-array name="noteMode_entries">
-        <item>Open in bewerkingsmodus</item>
-        <item>Open in voorbeeldmodus</item>
-        <item>Onthoud je laatste selectie</item>
-    </string-array>
+
+    <string name="noteMode_remember_last">Onthoud je laatste selectie</string>
 
     <string-array name="fontSize_entries">
         <item>Klein</item>
@@ -297,6 +298,7 @@
     <string name="settings_file_suffix_success">Nieuwe bestandsachtervoegsel: %1$s</string>
     <string name="http_status_code">HTTP status code: %1$d</string>
     <string name="progress_import_indeterminate">Notities importeren...</string>
-    <string name="progress_import">Notitie %1$dvan %2$dimporteren</string>
+    <string name="progress_import">Notitie %1$d van %2$d importeren</string>
     <string name="account_imported">Account geïmporteerd</string>
-</resources>
+    <string name="action_back">Terug</string>
+    </resources>

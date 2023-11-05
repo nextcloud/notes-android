@@ -1,0 +1,3 @@
+- ✨ Material 3 Theme (#1330)
+- 🐞 Fix missing keyboard when changing account settings (#916)
+- 🌎 Updated translations

@@ -14,6 +14,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ItemNavigationBinding;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
@@ -41,7 +42,7 @@ class NavigationViewHolder extends RecyclerView.ViewHolder {
         itemView.setOnClickListener(view -> navigationClickListener.onItemClick(currentItem));
     }
 
-    public void bind(@NonNull NavigationItem item, @ColorInt int mainColor, String selectedItem) {
+    public void bind(@NonNull NavigationItem item, @ColorInt int color, String selectedItem) {
         currentItem = item;
         final boolean isSelected = item.id.equals(selectedItem);
         name.setText(NoteUtil.extendCategory(item.label));
@@ -53,15 +54,17 @@ class NavigationViewHolder extends RecyclerView.ViewHolder {
         } else {
             icon.setVisibility(View.GONE);
         }
-        final int textColor = isSelected ? mainColor : view.getResources().getColor(R.color.fg_default);
 
-        name.setTextColor(textColor);
-        count.setTextColor(textColor);
-        icon.setColorFilter(isSelected ? textColor : 0);
+        final var util = BrandingUtil.of(color, itemView.getContext());
+
+        util.notes.colorNavigationViewItem(view);
+        util.notes.colorNavigationViewItemIcon(icon);
+        util.notes.colorNavigationViewItemText(name);
+        util.notes.colorNavigationViewItemText(count);
 
         view.setSelected(isSelected);
 
-        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+        final var params = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
         params.leftMargin = item.icon == NavigationAdapter.ICON_SUB_FOLDER || item.icon == NavigationAdapter.ICON_SUB_MULTIPLE
                 ? view.getResources().getDimensionPixelSize(R.dimen.spacer_3x)
                 : 0;

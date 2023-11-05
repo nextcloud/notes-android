@@ -21,8 +21,8 @@ public interface AccountDao {
     @Delete
     void deleteAccount(Account localAccount);
 
-    String getAccounts = "SELECT id, url, userName, accountName, eTag, modified, apiVersion, color, textColor, capabilitiesEtag, COALESCE(displayName, userName) as displayName FROM Account";
-    String getAccountById = "SELECT id, url, userName, accountName, eTag, modified, apiVersion, color, textColor, capabilitiesEtag, COALESCE(displayName, userName) as displayName FROM Account WHERE ID = :accountId";
+    String getAccounts = "SELECT id, url, userName, accountName, eTag, modified, apiVersion, color, textColor, capabilitiesEtag, COALESCE(displayName, userName) as displayName, directEditingAvailable FROM Account";
+    String getAccountById = "SELECT id, url, userName, accountName, eTag, modified, apiVersion, color, textColor, capabilitiesEtag, COALESCE(displayName, userName) as displayName, directEditingAvailable FROM Account WHERE ID = :accountId";
 
     @Query(getAccounts)
     LiveData<List<Account>> getAccounts$();
@@ -36,14 +36,14 @@ public interface AccountDao {
     @Query(getAccountById)
     Account getAccountById(long accountId);
 
-    @Query("SELECT id, url, userName, accountName, eTag, modified, apiVersion, color, textColor, capabilitiesEtag, COALESCE(displayName, userName) as displayName FROM Account WHERE ACCOUNTNAME = :accountName")
+    @Query("SELECT id, url, userName, accountName, eTag, modified, apiVersion, color, textColor, capabilitiesEtag, COALESCE(displayName, userName) as displayName, directEditingAvailable FROM Account WHERE ACCOUNTNAME = :accountName")
     Account getAccountByName(String accountName);
 
     @Query("SELECT COUNT(*) FROM Account")
     LiveData<Integer> countAccounts$();
 
-    @Query("UPDATE Account SET COLOR = :color, TEXTCOLOR = :textColor WHERE id = :id")
-    void updateBrand(long id, @ColorInt Integer color, @ColorInt Integer textColor);
+    @Query("UPDATE Account SET COLOR = :color WHERE id = :id")
+    void updateBrand(long id, @ColorInt Integer color);
 
     @Query("UPDATE Account SET ETAG = :eTag WHERE ID = :id")
     void updateETag(long id, String eTag);
@@ -59,4 +59,7 @@ public interface AccountDao {
 
     @Query("UPDATE Account SET DISPLAYNAME = :displayName WHERE id = :id")
     void updateDisplayName(long id, @Nullable String displayName);
+
+    @Query("UPDATE Account SET directEditingAvailable = :available WHERE id = :id")
+    void updateDirectEditingAvailable(long id, boolean available);
 }

@@ -10,6 +10,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.DialogFragment;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
 import java.util.ArrayList;
 
 import it.niedermann.android.util.ClipboardUtil;
@@ -62,7 +64,7 @@ public class ExceptionDialogFragment extends AppCompatDialogFragment {
 
         adapter.setThrowables(throwables);
 
-        return new AlertDialog.Builder(requireActivity())
+        return new MaterialAlertDialogBuilder(requireActivity())
                 .setView(binding.getRoot())
                 .setTitle(R.string.error_dialog_title)
                 .setPositiveButton(android.R.string.copy, (a, b) -> ClipboardUtil.INSTANCE.copyToClipboard(requireContext(), getString(R.string.simple_exception), "```\n" + debugInfos + "\n```"))

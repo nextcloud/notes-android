@@ -4,16 +4,16 @@ package it.niedermann.owncloud.notes.shared.model;
 import androidx.annotation.NonNull;
 
 import java.util.Objects;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @SuppressWarnings("WeakerAccess")
 public class ApiVersion implements Comparable<ApiVersion> {
     private static final Pattern NUMBER_EXTRACTION_PATTERN = Pattern.compile("[0-9]+");
-    private static final ApiVersion VERSION_1_2 = new ApiVersion("1.2", 1, 2);
 
-    public static final ApiVersion API_VERSION_0_2 = new ApiVersion(0, 2);
-    public static final ApiVersion API_VERSION_1_0 = new ApiVersion(1, 0);
+    public static final ApiVersion API_VERSION_0_2 = new ApiVersion("0.2", 0, 2);
+    public static final ApiVersion API_VERSION_1_0 = new ApiVersion("1.0", 1, 0);
+    public static final ApiVersion API_VERSION_1_2 = new ApiVersion("1.2", 1, 2);
+    public static final ApiVersion API_VERSION_1_3 = new ApiVersion("1.3", 1, 3);
 
     public static final ApiVersion[] SUPPORTED_API_VERSIONS = new ApiVersion[]{
             API_VERSION_1_0,
@@ -45,7 +45,7 @@ public class ApiVersion implements Comparable<ApiVersion> {
     public static ApiVersion of(String versionString) {
         int major = 0, minor = 0;
         if (versionString != null) {
-            String[] split = versionString.split("\\.");
+            final String[] split = versionString.split("\\.");
             if (split.length > 0) {
                 major = extractNumber(split[0]);
                 if (split.length > 1) {
@@ -80,8 +80,19 @@ public class ApiVersion implements Comparable<ApiVersion> {
         return 0;
     }
 
-    public boolean supportsSettings() {
-        return getMajor() >= 1 && getMinor() >= 2;
+    /**
+     * While setting the file suffix to <code>.txt</code> or <code>.md</code> was possible starting
+     * with {@link #API_VERSION_1_2}, we will only support this feature with {@link #API_VERSION_1_3}
+     * because it allows us to set any value and skip client side validations.
+     *
+     * @see <a href="https://github.com/nextcloud/notes/blob/master/docs/api/v1.md#settings">Settings API</a>
+     */
+    public boolean supportsFileSuffixChange() {
+        return getMajor() >= API_VERSION_1_3.getMajor() && getMinor() >= API_VERSION_1_3.getMinor();
+    }
+
+    public boolean supportsNotesPathChange() {
+        return getMajor() >= API_VERSION_1_2.getMajor() && getMinor() >= API_VERSION_1_2.getMinor();
     }
 
     /**

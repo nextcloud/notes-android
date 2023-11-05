@@ -42,6 +42,8 @@ public class MultiSelectedActionModeCallback implements Callback {
     @NonNull
     private final View view;
     @NonNull
+    private final View anchorView;
+    @NonNull
     private final MainViewModel mainViewModel;
     @NonNull
     private final LifecycleOwner lifecycleOwner;
@@ -52,9 +54,17 @@ public class MultiSelectedActionModeCallback implements Callback {
     private final FragmentManager fragmentManager;
 
     public MultiSelectedActionModeCallback(
-            @NonNull Context context, @NonNull View view, @NonNull MainViewModel mainViewModel, @NonNull LifecycleOwner lifecycleOwner, boolean canMoveNoteToAnotherAccounts, @NonNull SelectionTracker<Long> tracker, @NonNull FragmentManager fragmentManager) {
+            @NonNull Context context,
+            @NonNull View view,
+            @NonNull View anchorView,
+            @NonNull MainViewModel mainViewModel,
+            @NonNull LifecycleOwner lifecycleOwner,
+            boolean canMoveNoteToAnotherAccounts,
+            @NonNull SelectionTracker<Long> tracker,
+            @NonNull FragmentManager fragmentManager) {
         this.context = context;
         this.view = view;
+        this.anchorView = anchorView;
         this.mainViewModel = mainViewModel;
         this.lifecycleOwner = lifecycleOwner;
         this.canMoveNoteToAnotherAccounts = canMoveNoteToAnotherAccounts;
@@ -110,6 +120,7 @@ public class MultiSelectedActionModeCallback implements Callback {
                         ? context.getString(R.string.action_note_deleted, fullNotes.get(0).getTitle())
                         : context.getResources().getQuantityString(R.plurals.bulk_notes_deleted, fullNotes.size(), fullNotes.size());
                 BrandedSnackbar.make(view, deletedSnackbarTitle, Snackbar.LENGTH_LONG)
+                        .setAnchorView(anchorView)
                         .setAction(R.string.action_undo, (View v) -> {
                             for (final var deletedNote : fullNotes) {
                                 final var undoLiveData = mainViewModel.addNoteAndSync(deletedNote);
@@ -119,6 +130,7 @@ public class MultiSelectedActionModeCallback implements Callback {
                                     ? context.getString(R.string.action_note_restored, fullNotes.get(0).getTitle())
                                     : context.getResources().getQuantityString(R.plurals.bulk_notes_restored, fullNotes.size(), fullNotes.size());
                             BrandedSnackbar.make(view, restoreSnackbarTitle, Snackbar.LENGTH_SHORT)
+                                    .setAnchorView(anchorView)
                                     .show();
                         })
                         .show();

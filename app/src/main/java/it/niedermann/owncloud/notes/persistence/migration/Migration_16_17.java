@@ -12,7 +12,7 @@ public class Migration_16_17 extends Migration {
 
     /**
      * Adds a column to store the current scroll position per note
-     * https://github.com/stefan-niedermann/nextcloud-notes/issues/227
+     * https://github.com/nextcloud/notes-android/issues/227
      */
     @Override
     public void migrate(@NonNull SupportSQLiteDatabase db) {

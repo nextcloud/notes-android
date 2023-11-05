@@ -13,8 +13,7 @@ public abstract class BrandedDialogFragment extends DialogFragment implements Br
         super.onStart();
 
         @Nullable final var context = requireContext();
-        @ColorInt final int mainColor = BrandingUtil.readBrandMainColor(context);
-        @ColorInt final int textColor = BrandingUtil.readBrandTextColor(context);
-        applyBrand(mainColor, textColor);
+        @ColorInt final int color = BrandingUtil.readBrandMainColor(context);
+        applyBrand(color);
     }
 }

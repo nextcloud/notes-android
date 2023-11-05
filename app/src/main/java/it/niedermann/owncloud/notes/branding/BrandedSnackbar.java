@@ -1,28 +1,31 @@
 package it.niedermann.owncloud.notes.branding;
 
-import android.graphics.Color;
+import static it.niedermann.owncloud.notes.branding.BrandingUtil.readBrandMainColor;
+
 import android.view.View;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
+import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
-
-import it.niedermann.android.util.ColorUtil;
 
 public class BrandedSnackbar {
 
     @NonNull
-    public static Snackbar make(@NonNull View view, @NonNull CharSequence text, @Snackbar.Duration int duration) {
+    public static Snackbar make(@NonNull View view, @NonNull CharSequence text, @BaseTransientBottomBar.Duration int duration) {
+        @ColorInt final int color = readBrandMainColor(view.getContext());
         final var snackbar = Snackbar.make(view, text, duration);
-        final int color = BrandingUtil.readBrandMainColor(view.getContext());
-        snackbar.setActionTextColor(ColorUtil.INSTANCE.isColorDark(color) ? Color.WHITE : color);
+        final var utils = BrandingUtil.of(color, view.getContext());
+
+        utils.material.themeSnackbar(snackbar);
+
         return snackbar;
     }
 
     @NonNull
-    public static Snackbar make(@NonNull View view, @StringRes int resId, @Snackbar.Duration int duration) {
+    public static Snackbar make(@NonNull View view, @StringRes int resId, @BaseTransientBottomBar.Duration int duration) {
         return make(view, view.getResources().getText(resId), duration);
     }
-
 }

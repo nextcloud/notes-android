@@ -1,0 +1,118 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+## config
+# add following to your shell rc:
+# export FASTLANE_NOTES_UPLOAD_STORE_FILE=""
+# export FASTLANE_NOTES_UPLOAD_STORE_PASSWORD=""
+# export FASTLANE_NOTES_UPLOAD_KEY_ALIAS=""
+# export FASTLANE_NOTES_UPLOAD_KEY_PASSWORD=""
+# export FASTLANE_NEXTCLOUD_GITHUB_API_TOKEN=""
+
+
+skip_docs
+
+default_platform(:android)
+
+BUNDLE_PATH = "app/build/outputs/bundle/playRelease/app-play-release.aab"
+
+import("./common.Fastfile")
+
+platform :android do
+desc "Build app bundle"
+
+    desc "Run tests and build app"
+    lane :releasePhase1 do
+        test()
+        buildBundle()
+    end
+
+    desc "Release previously built app to Google Play and create tag"
+    lane :releasePhase2 do
+        versionInfo = getVersionInfo()
+        versionComponents = parseVersionCode(versionInfo)
+        checkReleasable(versionComponents)
+        storeTrack = getPlayStoreTrack(versionComponents)
+        tagName = getTagName(versionComponents)
+        preReleaseChecks(versionInfo: versionInfo, tagName: tagName, type: versionComponents["type"], track: storeTrack)
+        checkArtifactsExist()
+        tag(name: tagName)
+        uploadToPlayStore(track: storeTrack)
+    end
+
+    desc "Run tests"
+    lane :test do
+        gradle(task: "clean testPlayReleaseUnitTest testFdroidReleaseUnitTest")
+    end
+
+    desc "Build app bundle"
+    lane :buildBundle do
+        gradle(
+            task: 'bundle',
+            flavor: 'play',
+            build_type: 'Release',
+            print_command: false,
+            properties: {
+                  "android.injected.signing.store.file" => ENV["FASTLANE_NOTES_UPLOAD_STORE_FILE"],
+                  "android.injected.signing.store.password" => ENV["FASTLANE_NOTES_UPLOAD_STORE_PASSWORD"],
+                  "android.injected.signing.key.alias" => ENV["FASTLANE_NOTES_UPLOAD_KEY_ALIAS"],
+                  "android.injected.signing.key.password" => ENV["FASTLANE_NOTES_UPLOAD_KEY_PASSWORD"],
+                }
+            )
+    end
+
+    desc "Show versions and prompt for confirmation"
+    private_lane :preReleaseChecks do |options|
+        versionInfo = options[:versionInfo]
+        tagName = options[:tagName]
+        currentBranch = git_branch()
+        text = "Version code: #{versionInfo["versionCode"]}\n" +
+                "Version name: #{versionInfo["versionName"]}\n" +
+                "Current branch: #{currentBranch}\n" +
+                "Version type: #{options[:type]}\n" +
+                "Tag: #{tagName}\n" +
+                "Track: #{options[:track]}"
+        promptYesNo(text: text)
+    end
+
+    desc "Check if release artifacts exist"
+    private_lane :checkArtifactsExist do
+        if !File.exist?("../#{BUNDLE_PATH}")
+            UI.user_error!("Bundle not found at #{BUNDLE_PATH}")
+        end
+    end
+
+
+    desc "Create release tag"
+    private_lane :tag do |options|
+        tagName = options[:name]
+        add_git_tag(
+          tag: tagName,
+          sign: true
+        )
+        push_git_tags(tag: tagName)
+    end
+
+    desc "Upload release artifacts to Google Play"
+    private_lane :uploadToPlayStore do |options|
+        upload_to_play_store(
+            skip_upload_images: true,
+            skip_upload_apk: true,
+            track: options[:track],
+            aab: BUNDLE_PATH
+        )
+    end
+
+end

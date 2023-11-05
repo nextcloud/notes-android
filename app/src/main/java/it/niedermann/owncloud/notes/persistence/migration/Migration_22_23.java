@@ -25,7 +25,7 @@ import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 /**
  * Add <code>displayName</code> property to {@link Account}.
  * <p>
- * See: <a href="https://github.com/stefan-niedermann/nextcloud-notes/issues/1079">#1079 Show DisplayName instead of uid attribute for LDAP users</a>
+ * See: <a href="https://github.com/nextcloud/notes-android/issues/1079">#1079 Show DisplayName instead of uid attribute for LDAP users</a>
  * <p>
  * Sanitizes the stored API versions in the database.
  */

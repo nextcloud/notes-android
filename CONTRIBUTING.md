@@ -2,7 +2,7 @@
 
 ## Submitting bug reports
 
-If you find a bug, feel free to [open an issue](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/new). But please provide these information in the comment:
+If you find a bug, feel free to [open an issue](https://github.com/nextcloud/notes-android/issues/new). But please provide these information in the comment:
 
 **Android version:** e. g. 6.0.1 Marshmallow
 

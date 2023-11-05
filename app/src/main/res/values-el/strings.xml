@@ -56,7 +56,7 @@
     <string name="error_unknown">Προέκυψε άγνωστο σφάλμα.</string>
 
     <string name="about_version_title">Έκδοση</string>
-    <string name="about_version">Αυτήν την στιγμή χρησιμοποιείτε %1$s</string>
+    <string name="about_version">Αυτή τη στιγμή χρησιμοποιείτε %1$s</string>
     <string name="about_maintainer_title">Συντηρητής</string>
     <string name="about_developers_title">Προγραμματιστές</string>
     <string name="about_translators_title">Μεταφραστές</string>
@@ -107,14 +107,18 @@
     <string name="category_movie">Ταινία</string>
     <string name="category_work">Εργασία</string>
     <string name="category_tasks">Εργασίες</string>
+    <string name="category_recipe">Συνταγή</string>
     <string name="category_recipes">Συνταγές</string>
     <string name="category_restaurant">Εστιατόριο</string>
+    <string name="category_restaurants">Εστιατόρια</string>
+    <string name="category_food">Φαγητό</string>
     <string name="category_password">Συνθηματικό</string>
     <string name="category_passwords">Συνθηματικά</string>
     <string name="category_game">Παιχνίδι</string>
     <string name="category_games">Παιχνίδια</string>
     <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
     <string name="category_play">Αναπαραγωγή</string>
+    <string name="category_gift">Δώρο</string>
     <!-- Like a gift -->
     <string name="category_present">Παρόν</string>
     <string name="account_already_imported">Ο λογαριασμός έχει εισαχθεί ήδη</string>
@@ -150,15 +154,13 @@
     <string name="change_note_title">Αλλαγή τίτλου σημείωσης</string>
     <string name="menu_edit_title">Επεξεργασία τίτλου</string>
     <string name="simple_security">Ασφάλεια</string>
+    <string name="appearance_and_behavior">Εμφάνιση και συμπεριφορά</string>
     <string name="simple_synchronization">Συγχρονισμός</string>
     <string name="manage_accounts">Διαχείριση λογαριασμών</string>
     <string name="action_formatting_help">Διαμόρφωση σε εξέλιξη</string>
 
-    <string-array name="noteMode_entries">
-        <item>Άνοιγμα σε λειτουργία τροποποίησης</item>
-        <item>Άνοιγμα σε λειτουργία προεπισκόπισης</item>
-        <item>Να θυμάσαι την τελευταία μου επιλογή</item>
-    </string-array>
+
+    <string name="noteMode_remember_last">Να θυμάσαι την τελευταία μου επιλογή</string>
 
     <string-array name="fontSize_entries">
         <item>Μικρό</item>
@@ -255,4 +257,5 @@
     <string name="simple_next">Επόμενο</string>
     <string name="simple_prev">Προηγούμενο</string>
     <string name="simple_backup">Αντίγραφο ασφαλείας</string>
+    <string name="action_back">Πίσω</string>
     </resources>

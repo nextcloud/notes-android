@@ -1,8 +1,11 @@
 package it.niedermann.owncloud.notes.main.items;
 
+import static android.view.View.INVISIBLE;
+import static android.view.View.VISIBLE;
+
+import static com.nextcloud.android.common.ui.util.PlatformThemeUtil.isDarkMode;
+
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.BackgroundColorSpan;
@@ -22,21 +25,17 @@ import androidx.recyclerview.selection.ItemDetailsLookup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.chip.Chip;
+import com.nextcloud.android.common.ui.theme.utils.ColorRole;
+import com.nextcloud.android.common.ui.util.PlatformThemeUtil;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import it.niedermann.android.util.ColorUtil;
-import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
-
-import static android.view.View.INVISIBLE;
-import static android.view.View.VISIBLE;
-import static it.niedermann.owncloud.notes.shared.util.NotesColorUtil.contrastRatioIsSufficient;
 
 public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
     @NonNull
@@ -49,57 +48,40 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
     }
 
     @CallSuper
-    public void bind(boolean isSelected, @NonNull Note note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
+    public void bind(boolean isSelected, @NonNull Note note, boolean showCategory, @ColorInt int color, @Nullable CharSequence searchQuery) {
         itemView.setSelected(isSelected);
         itemView.setOnClickListener((view) -> noteClickListener.onNoteClick(getLayoutPosition(), view));
     }
 
-    protected void bindStatus(AppCompatImageView noteStatus, DBStatus status, int mainColor) {
+    protected void bindStatus(AppCompatImageView noteStatus, DBStatus status, int color) {
         noteStatus.setVisibility(DBStatus.VOID.equals(status) ? INVISIBLE : VISIBLE);
-        DrawableCompat.setTint(noteStatus.getDrawable(), BrandingUtil.getSecondaryForegroundColorDependingOnTheme(noteStatus.getContext(), mainColor));
+
+        final var context = noteStatus.getContext();
+        final var util = BrandingUtil.of(color, context);
+        util.platform.tintDrawable(context, noteStatus.getDrawable(), ColorRole.ON_PRIMARY_CONTAINER);
     }
 
-    protected void bindCategory(@NonNull Context context, @NonNull TextView noteCategory, boolean showCategory, @NonNull String category, int mainColor) {
-        final boolean isDarkThemeActive = NotesApplication.isDarkThemeActive(context);
-        noteCategory.setVisibility(showCategory && !category.isEmpty() ? View.VISIBLE : View.GONE);
-        noteCategory.setText(category);
+    protected void bindCategory(@NonNull Context context, @NonNull TextView noteCategory, boolean showCategory, @NonNull String category, int color) {
+        if (!showCategory || category.isEmpty()) {
+            noteCategory.setVisibility(View.GONE);
+        } else {
+            noteCategory.setText(category);
 
-        @ColorInt final int categoryForeground;
-        @ColorInt final int categoryBackground;
+            final var util = BrandingUtil.of(color, context);
 
-        if (isDarkThemeActive) {
-            if (ColorUtil.INSTANCE.isColorDark(mainColor)) {
-                if (contrastRatioIsSufficient(mainColor, Color.BLACK)) {
-                    categoryBackground = mainColor;
-                    categoryForeground = Color.WHITE;
+            if (noteCategory instanceof Chip) {
+                util.material.colorChipBackground((Chip) noteCategory);
+            } else {
+                if (isDarkMode(context)) {
+                    util.platform.tintDrawable(context, noteCategory.getBackground(), ColorRole.SECONDARY_CONTAINER);
+                    util.platform.colorTextView(noteCategory, ColorRole.ON_SECONDARY_CONTAINER);
                 } else {
-                    categoryBackground = Color.WHITE;
-                    categoryForeground = mainColor;
+                    util.platform.tintDrawable(context, noteCategory.getBackground(), ColorRole.PRIMARY);
+                    util.platform.colorTextView(noteCategory, ColorRole.ON_PRIMARY_CONTAINER);
                 }
-            } else {
-                categoryBackground = mainColor;
-                categoryForeground = Color.BLACK;
             }
-        } else {
-            categoryForeground = Color.BLACK;
-            if (ColorUtil.INSTANCE.isColorDark(mainColor) || contrastRatioIsSufficient(mainColor, Color.WHITE)) {
-                categoryBackground = mainColor;
-            } else {
-                categoryBackground = Color.BLACK;
-            }
-        }
 
-        noteCategory.setTextColor(categoryForeground);
-        if (noteCategory instanceof Chip) {
-            final Chip chip = (Chip) noteCategory;
-            chip.setChipStrokeColor(ColorStateList.valueOf(categoryBackground));
-            if(isDarkThemeActive) {
-                chip.setChipBackgroundColor(ColorStateList.valueOf(categoryBackground));
-            } else {
-                chip.setChipBackgroundColorResource(R.color.grid_item_background_selector);
-            }
-        } else {
-            DrawableCompat.setTint(noteCategory.getBackground(), categoryBackground);
+            noteCategory.setVisibility(View.VISIBLE);
         }
     }
 
@@ -108,28 +90,13 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
         noteFavorite.setOnClickListener(view -> noteClickListener.onNoteFavoriteClick(getLayoutPosition(), view));
     }
 
-    protected void bindSearchableContent(@NonNull Context context, @NonNull TextView textView, @Nullable CharSequence searchQuery, @NonNull String content, int mainColor) {
-        CharSequence processedContent = content;
+    protected void bindSearchableContent(@NonNull Context context, @NonNull TextView textView, @Nullable CharSequence searchQuery, @NonNull String content, int color) {
+        textView.setText(content);
+
         if (!TextUtils.isEmpty(searchQuery)) {
-            @ColorInt final int searchBackground = ContextCompat.getColor(context, R.color.bg_highlighted);
-            @ColorInt final int searchForeground = BrandingUtil.getSecondaryForegroundColorDependingOnTheme(context, mainColor);
-
-            // The Pattern.quote method will add \Q to the very beginning of the string and \E to the end of the string
-            // It implies that the string between \Q and \E is a literal string and thus the reserved keyword in such string will be ignored.
-            // See https://stackoverflow.com/questions/15409296/what-is-the-use-of-pattern-quote-method
-            //noinspection ConstantConditions
-            final Pattern pattern = Pattern.compile("(" + Pattern.quote(searchQuery.toString()) + ")", Pattern.CASE_INSENSITIVE);
-            SpannableString spannableString = new SpannableString(content);
-            Matcher matcher = pattern.matcher(spannableString);
-
-            while (matcher.find()) {
-                spannableString.setSpan(new ForegroundColorSpan(searchForeground), matcher.start(), matcher.end(), 0);
-                spannableString.setSpan(new BackgroundColorSpan(searchBackground), matcher.start(), matcher.end(), 0);
-            }
-
-            processedContent = spannableString;
+            final var util = BrandingUtil.of(color, context);
+            util.platform.highlightText(textView, content, searchQuery.toString());
         }
-        textView.setText(processedContent);
     }
 
     public abstract void showSwipe(boolean left);

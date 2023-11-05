@@ -142,6 +142,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
     }
 
     @Override
-    public void applyBrand(int mainColor, int textColor) {
+    public void applyBrand(int color) {
+        // Nothing to do...
     }
 }

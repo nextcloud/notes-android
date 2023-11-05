@@ -1,17 +1,13 @@
 package it.niedermann.owncloud.notes.edit;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Layout;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 
 import androidx.annotation.CallSuper;
 import androidx.annotation.ColorInt;
@@ -19,13 +15,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
+import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
+import com.nextcloud.android.sso.helper.SingleAccountHelper;
+import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.branding.BrandedActivity;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
+import it.niedermann.owncloud.notes.shared.util.ExtendedFabUtil;
 
 public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
@@ -38,16 +40,14 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     private SearchView searchView;
     private String searchQuery = null;
     private static final int delay = 50; // If the search string does not change after $delay ms, then the search task starts.
+    private boolean directEditAvailable = false;
 
     @ColorInt
-    private int mainColor;
-    @ColorInt
-    private int textColor;
+    private int color;
 
     @Override
     public void onStart() {
-        this.mainColor = getResources().getColor(R.color.defaultBrand);
-        this.textColor = Color.WHITE;
+        this.color = getResources().getColor(R.color.defaultBrand);
         super.onStart();
     }
 
@@ -58,6 +58,47 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         if (savedInstanceState != null) {
             searchQuery = savedInstanceState.getString(saved_instance_key_searchQuery, "");
             currentOccurrence = savedInstanceState.getInt(saved_instance_key_currentOccurrence, 1);
+        }
+    }
+
+    @Override
+    protected void onScroll(int scrollY, int oldScrollY) {
+        super.onScroll(scrollY, oldScrollY);
+        if (directEditAvailable) {
+            // only show FAB if search is not active
+            if (getSearchNextButton() == null || getSearchNextButton().getVisibility() != View.VISIBLE) {
+                final ExtendedFloatingActionButton directFab = getDirectEditingButton();
+                ExtendedFabUtil.toggleVisibilityOnScroll(directFab, scrollY, oldScrollY);
+            }
+        }
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        checkDirectEditingAvailable();
+        if (directEditAvailable) {
+            final ExtendedFloatingActionButton directEditingButton = getDirectEditingButton();
+            directEditingButton.setExtended(false);
+            ExtendedFabUtil.toggleExtendedOnLongClick(directEditingButton);
+            directEditingButton.setOnClickListener(v -> {
+                if (listener != null) {
+                    listener.changeMode(NoteFragmentListener.Mode.DIRECT_EDIT, false);
+                }
+            });
+        } else {
+            getDirectEditingButton().setVisibility(View.GONE);
+        }
+    }
+
+    private void checkDirectEditingAvailable() {
+        try {
+            final SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext());
+            final Account localAccount = repo.getAccountByName(ssoAccount.name);
+            directEditAvailable = localAccount != null && localAccount.isDirectEditingAvailable();
+        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+            Log.w(TAG, "checkDirectEditingAvailable: ", e);
+            directEditAvailable = false;
         }
     }
 
@@ -88,12 +129,12 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
                 if (currentVisibility != oldVisibility) {
                     if (currentVisibility != View.VISIBLE) {
-                        colorWithText("", null, mainColor, textColor);
+                        colorWithText("", null, color);
                         searchQuery = "";
                         hideSearchFabs();
                     } else {
                         jumpToOccurrence();
-                        colorWithText(searchQuery, null, mainColor, textColor);
+                        colorWithText(searchQuery, null, color);
                         occurrenceCount = countOccurrences(getContent(), searchQuery);
                         showSearchFabs();
                     }
@@ -111,7 +152,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
             next.setOnClickListener(v -> {
                 currentOccurrence++;
                 jumpToOccurrence();
-                colorWithText(searchView.getQuery().toString(), currentOccurrence, mainColor, textColor);
+                colorWithText(searchView.getQuery().toString(), currentOccurrence, color);
             });
         }
 
@@ -120,7 +161,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
                 occurrenceCount = countOccurrences(getContent(), searchView.getQuery().toString());
                 currentOccurrence--;
                 jumpToOccurrence();
-                colorWithText(searchView.getQuery().toString(), currentOccurrence, mainColor, textColor);
+                colorWithText(searchView.getQuery().toString(), currentOccurrence, color);
             });
         }
 
@@ -132,7 +173,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
             public boolean onQueryTextSubmit(@NonNull String query) {
                 currentOccurrence++;
                 jumpToOccurrence();
-                colorWithText(query, currentOccurrence, mainColor, textColor);
+                colorWithText(query, currentOccurrence, color);
                 return true;
             }
 
@@ -152,7 +193,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
                 }
                 currentOccurrence = 1;
                 jumpToOccurrence();
-                colorWithText(searchQuery, currentOccurrence, mainColor, textColor);
+                colorWithText(searchQuery, currentOccurrence, color);
             }
 
             private void queryWithHandler(@NonNull String newText) {
@@ -198,7 +239,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         }
     }
 
-    protected abstract void colorWithText(@NonNull String newText, @Nullable Integer current, int mainColor, int textColor);
+    protected abstract void colorWithText(@NonNull String newText, @Nullable Integer current, @ColorInt int color);
 
     protected abstract Layout getLayout();
 
@@ -206,7 +247,12 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
     protected abstract FloatingActionButton getSearchPrevButton();
 
+    @NonNull
+    protected abstract ExtendedFloatingActionButton getDirectEditingButton();
+
+
     private void showSearchFabs() {
+        ExtendedFabUtil.setExtendedFabVisibility(getDirectEditingButton(), false);
         final var next = getSearchNextButton();
         final var prev = getSearchPrevButton();
         if (prev != null) {
@@ -292,10 +338,12 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
     @CallSuper
     @Override
-    public void applyBrand(int mainColor, int textColor) {
-        this.mainColor = mainColor;
-        this.textColor = textColor;
-        BrandedActivity.applyBrandToFAB(mainColor, textColor, getSearchPrevButton());
-        BrandedActivity.applyBrandToFAB(mainColor, textColor, getSearchNextButton());
+    public void applyBrand(int color) {
+        this.color = color;
+
+        final var util = BrandingUtil.of(color, requireContext());
+        util.material.themeFAB(getSearchNextButton());
+        util.material.themeFAB(getSearchPrevButton());
+        util.material.themeExtendedFAB(getDirectEditingButton());
     }
 }

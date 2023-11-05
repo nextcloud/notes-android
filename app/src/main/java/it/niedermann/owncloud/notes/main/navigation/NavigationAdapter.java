@@ -1,15 +1,15 @@
 package it.niedermann.owncloud.notes.main.navigation;
 
+import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.UNCATEGORIZED;
+
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -19,14 +19,12 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.main.MainActivity;
 
-import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.UNCATEGORIZED;
-
 public class NavigationAdapter extends RecyclerView.Adapter<NavigationViewHolder> {
 
     @NonNull
     private final Context context;
     @ColorInt
-    private int mainColor;
+    private int color;
     @DrawableRes
     public static final int ICON_FOLDER = R.drawable.ic_folder_grey600_24dp;
     @DrawableRes
@@ -40,11 +38,6 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationViewHolder
     @DrawableRes
     public static final int ICON_SUB_MULTIPLE = R.drawable.ic_create_new_folder_grey600_18dp;
 
-    public void applyBrand(int mainColor, int textColor) {
-        this.mainColor = BrandingUtil.getSecondaryForegroundColorDependingOnTheme(context, mainColor);
-        notifyDataSetChanged();
-    }
-
     @NonNull
     private List<NavigationItem> items = new ArrayList<>();
     private String selectedItem = null;
@@ -53,8 +46,13 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationViewHolder
 
     public NavigationAdapter(@NonNull Context context, @NonNull NavigationClickListener navigationClickListener) {
         this.context = context;
-        this.mainColor = BrandingUtil.getSecondaryForegroundColorDependingOnTheme(context, BrandingUtil.readBrandMainColor(context));
+        this.color = BrandingUtil.readBrandMainColor(context);
         this.navigationClickListener = navigationClickListener;
+    }
+
+    public void applyBrand(int color) {
+        this.color = color;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -65,7 +63,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull NavigationViewHolder holder, int position) {
-        holder.bind(items.get(position), mainColor, selectedItem);
+        holder.bind(items.get(position), color, selectedItem);
     }
 
     @Override

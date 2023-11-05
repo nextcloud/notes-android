@@ -1,15 +1,12 @@
 package it.niedermann.owncloud.notes.edit;
 
 import static java.lang.Boolean.TRUE;
-import static it.niedermann.owncloud.notes.NotesApplication.isDarkThemeActive;
-import static it.niedermann.owncloud.notes.branding.BrandingUtil.tintMenuIcon;
 import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
 import static it.niedermann.owncloud.notes.shared.util.WidgetUtil.pendingIntentFlagCompat;
 
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,10 +17,8 @@ import android.view.View;
 import android.widget.ScrollView;
 
 import androidx.annotation.CallSuper;
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.core.content.pm.ShortcutInfoCompat;
 import androidx.core.content.pm.ShortcutManagerCompat;
 import androidx.core.graphics.drawable.IconCompat;
@@ -37,10 +32,10 @@ import java.util.Calendar;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import it.niedermann.android.util.ColorUtil;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandedFragment;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
 import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment.CategoryDialogListener;
 import it.niedermann.owncloud.notes.edit.title.EditTitleDialogFragment;
@@ -53,7 +48,6 @@ import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.util.ApiVersionUtil;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
-import it.niedermann.owncloud.notes.shared.util.NotesColorUtil;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
 public abstract class BaseNoteFragment extends BrandedFragment implements CategoryDialogListener, EditTitleListener {
@@ -77,7 +71,8 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     private Note originalNote;
     private int originalScrollY;
     protected NotesRepository repo;
-    private NoteFragmentListener listener;
+    @Nullable
+    protected NoteFragmentListener listener;
     private boolean titleModified = false;
 
     protected boolean isNew = true;
@@ -149,6 +144,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     @Nullable
     protected abstract ScrollView getScrollView();
 
+
     protected abstract void scrollToY(int scrollY);
 
     @Override
@@ -201,9 +197,11 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     }
 
     private void prepareFavoriteOption(MenuItem item) {
-        item.setIcon(TRUE.equals(note.getFavorite()) ? R.drawable.ic_star_white_24dp : R.drawable.ic_star_border_white_24dp);
+        item.setIcon(note.getFavorite() ? R.drawable.ic_star_white_24dp : R.drawable.ic_star_border_white_24dp);
         item.setChecked(note.getFavorite());
-        tintMenuIcon(item, colorAccent);
+
+        final var utils = BrandingUtil.of(colorAccent, requireContext());
+        utils.platform.colorToolbarMenuIcon(requireContext(), item);
     }
 
     /**
@@ -227,6 +225,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
             listener.close();
             return true;
         } else if (itemId == R.id.menu_favorite) {
+            note.setFavorite(!note.getFavorite());
             repo.toggleFavoriteAndSync(localAccount, note.getId());
             listener.onNoteUpdated(note);
             prepareFavoriteOption(item);
@@ -243,7 +242,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                     .show(requireActivity().getSupportFragmentManager(), BaseNoteFragment.class.getSimpleName()));
             return true;
         } else if (itemId == R.id.menu_share) {
-            ShareUtil.openShareDialog(requireContext(), note.getTitle(), note.getContent());
+            shareNote();
             return false;
         } else if (itemId == MENU_ID_PIN) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -266,20 +265,33 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         return super.onOptionsItemSelected(item);
     }
 
+    protected void shareNote() {
+        ShareUtil.openShareDialog(requireContext(), note.getTitle(), note.getContent());
+    }
+
     @CallSuper
     protected void onNoteLoaded(Note note) {
         this.originalScrollY = note.getScrollY();
         scrollToY(originalScrollY);
         final var scrollView = getScrollView();
         if (scrollView != null) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                scrollView.setOnScrollChangeListener((View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) -> {
-                    if (scrollY > 0) {
-                        note.setScrollY(scrollY);
-                    }
-                });
-            }
+            scrollView.setOnScrollChangeListener((View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) -> {
+                if (scrollY > 0) {
+                    note.setScrollY(scrollY);
+                }
+                onScroll(scrollY, oldScrollY);
+            });
         }
+    }
+
+    /**
+     * Scroll callback, to be overridden by subclasses. Default implementation is empty
+     */
+    protected void onScroll(int scrollY, int oldScrollY) {
+    }
+
+    protected boolean shouldShowToolbar() {
+        return true;
     }
 
     public void onCloseNote() {
@@ -371,42 +383,15 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         listener.close();
     }
 
-    @ColorInt
-    protected static int getTextHighlightBackgroundColor(@NonNull Context context, @ColorInt int mainColor, @ColorInt int colorPrimary, @ColorInt int colorAccent) {
-        if (isDarkThemeActive(context)) { // Dark background
-            if (ColorUtil.INSTANCE.isColorDark(mainColor)) { // Dark brand color
-                if (NotesColorUtil.contrastRatioIsSufficient(mainColor, colorPrimary)) { // But also dark text
-                    return mainColor;
-                } else {
-                    return ContextCompat.getColor(context, R.color.defaultTextHighlightBackground);
-                }
-            } else { // Light brand color
-                if (NotesColorUtil.contrastRatioIsSufficient(mainColor, colorAccent)) { // But also dark text
-                    return Color.argb(77, Color.red(mainColor), Color.green(mainColor), Color.blue(mainColor));
-                } else {
-                    return ContextCompat.getColor(context, R.color.defaultTextHighlightBackground);
-                }
-            }
-        } else { // Light background
-            if (ColorUtil.INSTANCE.isColorDark(mainColor)) { // Dark brand color
-                if (NotesColorUtil.contrastRatioIsSufficient(mainColor, colorAccent)) { // But also dark text
-                    return Color.argb(77, Color.red(mainColor), Color.green(mainColor), Color.blue(mainColor));
-                } else {
-                    return ContextCompat.getColor(context, R.color.defaultTextHighlightBackground);
-                }
-            } else { // Light brand color
-                if (NotesColorUtil.contrastRatioIsSufficient(mainColor, colorPrimary)) { // But also dark text
-                    return mainColor;
-                } else {
-                    return ContextCompat.getColor(context, R.color.defaultTextHighlightBackground);
-                }
-            }
-        }
-    }
-
     public interface NoteFragmentListener {
+        enum Mode {
+            EDIT, PREVIEW, DIRECT_EDIT
+        }
+
         void close();
 
         void onNoteUpdated(Note note);
+
+        void changeMode(@NonNull Mode mode, boolean reloadNote);
     }
 }

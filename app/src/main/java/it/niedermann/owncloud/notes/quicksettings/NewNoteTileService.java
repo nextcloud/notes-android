@@ -1,8 +1,6 @@
 package it.niedermann.owncloud.notes.quicksettings;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.os.Build;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 
@@ -11,7 +9,6 @@ import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 /**
  * This {@link TileService} adds a quick settings tile that leads to the new note view.
  */
-@TargetApi(Build.VERSION_CODES.N)
 public class NewNoteTileService extends TileService {
 
     @Override

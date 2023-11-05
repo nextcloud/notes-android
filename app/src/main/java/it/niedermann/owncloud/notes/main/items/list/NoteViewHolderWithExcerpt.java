@@ -3,6 +3,7 @@ package it.niedermann.owncloud.notes.main.items.list;
 import android.content.Context;
 import android.view.View;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -28,16 +29,16 @@ public class NoteViewHolderWithExcerpt extends NoteViewHolder {
         binding.noteSwipeFrame.setBackgroundResource(left ? R.color.bg_warning : R.color.bg_attention);
     }
 
-    public void bind(boolean isSelected, @NonNull Note note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
-        super.bind(isSelected, note, showCategory, mainColor, textColor, searchQuery);
+    public void bind(boolean isSelected, @NonNull Note note, boolean showCategory, @ColorInt int color, @Nullable CharSequence searchQuery) {
+        super.bind(isSelected, note, showCategory, color, searchQuery);
         @NonNull final var context = itemView.getContext();
         binding.noteSwipeable.setAlpha(DBStatus.LOCAL_DELETED.equals(note.getStatus()) ? 0.5f : 1.0f);
-        bindCategory(context, binding.noteCategory, showCategory, note.getCategory(), mainColor);
-        bindStatus(binding.noteStatus, note.getStatus(), mainColor);
+        bindCategory(context, binding.noteCategory, showCategory, note.getCategory(), color);
+        bindStatus(binding.noteStatus, note.getStatus(), color);
         bindFavorite(binding.noteFavorite, note.getFavorite());
 
-        bindSearchableContent(context, binding.noteTitle, searchQuery, note.getTitle(), mainColor);
-        bindSearchableContent(context, binding.noteExcerpt, searchQuery, note.getExcerpt(), mainColor);
+        bindSearchableContent(context, binding.noteTitle, searchQuery, note.getTitle(), color);
+        bindSearchableContent(context, binding.noteExcerpt, searchQuery, note.getExcerpt(), color);
     }
 
     @NonNull

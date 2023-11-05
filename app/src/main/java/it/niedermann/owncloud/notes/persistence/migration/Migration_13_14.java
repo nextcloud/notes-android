@@ -32,7 +32,7 @@ public class Migration_13_14 extends Migration {
 
     /**
      * Move single note widget preferences to database
-     * https://github.com/stefan-niedermann/nextcloud-notes/issues/754
+     * https://github.com/nextcloud/notes-android/issues/754
      */
     @Override
     public void migrate(@NonNull SupportSQLiteDatabase db) {

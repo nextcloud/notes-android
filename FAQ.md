@@ -1,18 +1,19 @@
 # Frequently asked questions
 
-- [Why aren't there any buttons to apply formatting?](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#why-arent-there-any-buttons-to-apply-formatting)
-- [I have experienced an error](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#i-have-experienced-an-error)
-  - [`NextcloudApiNotRespondingException`](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#nextcloudapinotrespondingexception)
-  - [`UnknownErrorException: Read timed out`](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#unknownerrorexception-read-timed-out)
-  - [`NextcloudHttpRequestFailedException`](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#nextcloudhttprequestfailedexception)
-  - [`IllegalStateException: Duplicate key`](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#illegalstateexception-duplicate-key)
-  - [`NextcloudFilesAppAccountNotFoundException`](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#nextcloudfilesappaccountnotfoundexception)
-  - [`TokenMismatchException`](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#tokenmismatchexception)
-  - [Workarounds](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#workarounds)
-- [Why don't you make an option for…?](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#why-dont-you-make-an-option-for)
-- [Why is there no support for pens?](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#why-is-there-no-support-for-pens)
-- [Why has my bug report been closed?](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#why-has-my-bug-report-been-closed)
-- [How can i activate the dark mode for widgets?](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#how-can-i-activate-the-dark-mode-for-widgets)
+- [Why aren't there any buttons to apply formatting?](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#why-arent-there-any-buttons-to-apply-formatting)
+- [I have experienced an error](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#i-have-experienced-an-error)
+  - [`NextcloudApiNotRespondingException`](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#nextcloudapinotrespondingexception)
+  - [`UnknownErrorException: Read timed out`](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#unknownerrorexception-read-timed-out)
+  - [`NextcloudHttpRequestFailedException`](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#nextcloudhttprequestfailedexception)
+  - [`IllegalStateException: Duplicate key`](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#illegalstateexception-duplicate-key)
+  - [`NextcloudFilesAppAccountNotFoundException`](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#nextcloudfilesappaccountnotfoundexception)
+  - [`TokenMismatchException`](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#tokenmismatchexception)
+  - [Workarounds](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#workarounds)
+- [How to share notes?](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#how-to-share-notes)
+- [Why don't you make an option for…?](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#why-dont-you-make-an-option-for)
+- [Why is there no support for pens?](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#why-is-there-no-support-for-pens)
+- [Why has my bug report been closed?](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#why-has-my-bug-report-been-closed)
+- [How can i activate the dark mode for widgets?](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#how-can-i-activate-the-dark-mode-for-widgets)
 
 ## Why aren't there any buttons to apply formatting
 
@@ -48,7 +49,7 @@ Probably you will experience it when importing an account, because at this momen
 Further synchronizations are usually not causing this issue, because the Notes app tries to synchronize only *changed* notes after the first import.
 If your notes are not ten thousands of characters long, it is very unlikely that this causes a connection timeout.
 
-We improved the import of an account in version `3.4.12` to make it more reliable by [fetching notes step by step](https://github.com/stefan-niedermann/nextcloud-notes/issues/761#issuecomment-836989421).
+We improved the import of an account in version `3.4.12` to make it more reliable by [fetching notes step by step](https://github.com/nextcloud/notes-android/issues/761#issuecomment-836989421).
 If you are using an older version, you can as a workaround for the first import try to
 1. move all your notes to a different folder on your Nextcloud instance
 2. import your account on your smartphone
@@ -58,29 +59,29 @@ If you are using an older version, you can as a workaround for the first import 
 
 #### `HTTP status-code: 301`
 
-This issue can happen in case of a complex inconsistent state between the Notes Android app, the Single Sign On library, the Nextcloud Android app and your Nextcloud instance. Please try to remove your account from *both*, Notes Android *and* Nextcloud Android and readd it again [as described in the `workarounds` section](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#workarounds). If the issue persists, please report especially any changes on your server side environment: Did you change your domain or IP address of your Nextcloud server? Did you change something about your user account or en- / disabled multi factor authentication (2FA / MFA)? Did you remove your account (only) from the Nextcloud Android app?
+This issue can happen in case of a complex inconsistent state between the Notes Android app, the Single Sign On library, the Nextcloud Android app and your Nextcloud instance. Please try to remove your account from *both*, Notes Android *and* Nextcloud Android and readd it again [as described in the `workarounds` section](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#workarounds). If the issue persists, please report especially any changes on your server side environment: Did you change your domain or IP address of your Nextcloud server? Did you change something about your user account or en- / disabled multi factor authentication (2FA / MFA)? Did you remove your account (only) from the Nextcloud Android app?
 
 #### `HTTP status-code: 302`
 
-As clearly described in the description of the app, [one of the requirements](https://github.com/stefan-niedermann/nextcloud-notes#link-requirements) is to have installed the [`Notes`](https://apps.nextcloud.com/apps/notes) app on your server. This means:
+As clearly described in the description of the app, [one of the requirements](https://github.com/nextcloud/notes-android#link-requirements) is to have installed the [`Notes`](https://apps.nextcloud.com/apps/notes) app on your server. This means:
 - **not** [`Quick notes`](https://apps.nextcloud.com/apps/quicknotes)
 - **not** [`Carnet`](https://apps.nextcloud.com/apps/carnet)
 - **not** `SimpleNote`, `NextNotes`, `Joplin` nor any other app.
 
-Only the [`Notes`](https://apps.nextcloud.com/apps/notes) app is supported by the Notes Android app. Granted, detecting a missing installation of the `Notes` app should be more seamlessly - [we are aware of it](https://github.com/stefan-niedermann/nextcloud-notes/issues/1475) and will try to enhance the detection.
+Only the [`Notes`](https://apps.nextcloud.com/apps/notes) app is supported by the Notes Android app. Granted, detecting a missing installation of the `Notes` app should be more seamlessly - [we are aware of it](https://github.com/nextcloud/notes-android/issues/1475) and will try to enhance the detection.
 
 ### `IllegalStateException: Duplicate key`
 
-This is issue was caused by a bug which was present in the Notes Android app between `3.4.0` and `3.4.10`. It has been fixed in `3.4.11`, though it created a corrupt database state which is not recoverable automatically without data loss. It is therefore required to [clear the storage of the Notes Android app](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#workarounds) and import your account again from scratch. Make sure to backup unsynchronized changes before doing this.
+This is issue was caused by a bug which was present in the Notes Android app between `3.4.0` and `3.4.10`. It has been fixed in `3.4.11`, though it created a corrupt database state which is not recoverable automatically without data loss. It is therefore required to [clear the storage of the Notes Android app](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#workarounds) and import your account again from scratch. Make sure to backup unsynchronized changes before doing this.
 
 ### `NextcloudFilesAppAccountNotFoundException`
 
-We are not yet sure what exactly causes this issue, but investigate it by [adding more debug logs to recent versions](https://github.com/stefan-niedermann/nextcloud-notes/issues/1256#issuecomment-859505153). In theory this might happen if an already imported account has been deleted in the Nextcloud app.
+We are not yet sure what exactly causes this issue, but investigate it by [adding more debug logs to recent versions](https://github.com/nextcloud/notes-android/issues/1256#issuecomment-859505153). In theory this might happen if an already imported account has been deleted in the Nextcloud app.
 As a workaround you can remove the account (or clear the storage of the app as described below if you can't access the account manager anymore) and import it again.
 
 ### `TokenMismatchException`
 
-The reason of this error is not yet clear. It often seems to be connected to changes of the authentication (for example enabling 2FA after some time). Please clear the storage of both, the Notes and the Nextcloud Android apps as described in the [workarounds](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#wrokarounds) section.
+The reason of this error is not yet clear. It often seems to be connected to changes of the authentication (for example enabling 2FA after some time). Please clear the storage of both, the Notes and the Nextcloud Android apps as described in the [workarounds](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#wrokarounds) section.
 
 ### Workarounds
 
@@ -105,7 +106,17 @@ Nextcloud / Notes
 
 Then set up your account in the Nextcloud Android app again and import the configured account in the Notes Android app.
 
-If the issue persists, [open a bug report in our issue tracker](https://github.com/stefan-niedermann/nextcloud-notes/issues/new?assignees=&labels=bug&template=bug_report.md&title=).
+If the issue persists, [open a bug report in our issue tracker](https://github.com/nextcloud/notes-android/issues/new?assignees=&labels=bug&template=bug_report.md&title=).
+
+## How to share notes?
+
+The Notes server app does [not yet provide support for sharing notes](https://github.com/nextcloud/notes/issues/38). However, there is a limited workaround until this has been implemented:
+1. Open the Nextcloud Files (*not* Notes!) app in the Web UI or the Nextcloud Android app
+2. Share your `Notes` folder (or any category) with the Nextcloud files app with the target user
+3. The target user needs to *move* the shared folder into his / her `Notes` folder
+
+⚠️ Both users will now be able to read and edit the notes. Keep in mind though, that there is currently no conflict resolution yet. This means: The last write wins which may cause data loss if both are editing a note in the same time. Minimize this risc by manually pull to refresh before editing a shared note.
+
 
 ## Why don't you make an option for…?
 
@@ -134,7 +145,7 @@ Since i am not aware of any proper free SDK for pens, I recommend you to ask you
 
 ### Hardware issues
 
-Given a [free SDK](#licensing-issues) can be found, there is another issue: I don't own a device with a pen. I welcome [Pull Requests](https://github.com/stefan-niedermann/nextcloud-notes/pulls) with contributions to this topic, but i can and will not buy a new device just for this aspect, sorry.
+Given a [free SDK](#licensing-issues) can be found, there is another issue: I don't own a device with a pen. I welcome [Pull Requests](https://github.com/nextcloud/notes-android/pulls) with contributions to this topic, but i can and will not buy a new device just for this aspect, sorry.
 
 ## Why has my bug report been closed?
 

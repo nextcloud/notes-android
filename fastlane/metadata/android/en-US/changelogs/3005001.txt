@@ -1,1 +1,0 @@
-- 📱️ Add option to not keep screen on (#1531)

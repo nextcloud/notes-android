@@ -3,7 +3,6 @@ package it.niedermann.owncloud.notes.shared.model;
 import android.graphics.Color;
 
 import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public class Capabilities {
@@ -15,6 +14,8 @@ public class Capabilities {
     private int textColor = Color.WHITE;
     @Nullable
     private String eTag;
+
+    private boolean directEditingAvailable;
 
     public void setApiVersion(String apiVersion) {
         this.apiVersion = apiVersion;
@@ -49,7 +50,15 @@ public class Capabilities {
         this.textColor = textColor;
     }
 
-    @NonNull
+
+    public boolean isDirectEditingAvailable() {
+        return directEditingAvailable;
+    }
+
+    public void setDirectEditingAvailable(boolean directEditingAvailable) {
+        this.directEditingAvailable = directEditingAvailable;
+    }
+
     @Override
     public String toString() {
         return "Capabilities{" +
@@ -57,6 +66,7 @@ public class Capabilities {
                 ", color=" + color +
                 ", textColor=" + textColor +
                 ", eTag='" + eTag + '\'' +
+                ", hasDirectEditing=" + directEditingAvailable +
                 '}';
     }
 }

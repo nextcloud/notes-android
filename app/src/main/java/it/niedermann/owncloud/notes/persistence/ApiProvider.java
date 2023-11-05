@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import it.niedermann.owncloud.notes.persistence.sync.CapabilitiesDeserializer;
+import it.niedermann.owncloud.notes.persistence.sync.FilesAPI;
 import it.niedermann.owncloud.notes.persistence.sync.NotesAPI;
 import it.niedermann.owncloud.notes.persistence.sync.OcsAPI;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
@@ -39,11 +40,14 @@ public class ApiProvider {
     private static final ApiProvider INSTANCE = new ApiProvider();
 
     private static final String API_ENDPOINT_OCS = "/ocs/v2.php/cloud/";
+    private static final String API_ENDPOINT_FILES ="/ocs/v2.php/apps/files/api/v1/";
 
     private static final Map<String, NextcloudAPI> API_CACHE = new ConcurrentHashMap<>();
 
     private static final Map<String, OcsAPI> API_CACHE_OCS = new ConcurrentHashMap<>();
     private static final Map<String, NotesAPI> API_CACHE_NOTES = new ConcurrentHashMap<>();
+    private static final Map<String, FilesAPI> API_CACHE_FILES = new ConcurrentHashMap<>();
+
 
     public static ApiProvider getInstance() {
         return INSTANCE;
@@ -75,6 +79,15 @@ public class ApiProvider {
         final var notesAPI = new NotesAPI(getNextcloudAPI(context, ssoAccount), preferredApiVersion);
         API_CACHE_NOTES.put(ssoAccount.name, notesAPI);
         return notesAPI;
+    }
+
+    public synchronized FilesAPI getFilesAPI(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount) {
+        if (API_CACHE_FILES.containsKey(ssoAccount.name)) {
+            return API_CACHE_FILES.get(ssoAccount.name);
+        }
+        final var filesAPI = new NextcloudRetrofitApiBuilder(getNextcloudAPI(context, ssoAccount), API_ENDPOINT_FILES).create(FilesAPI.class);
+        API_CACHE_FILES.put(ssoAccount.name, filesAPI);
+        return filesAPI;
     }
 
     private synchronized NextcloudAPI getNextcloudAPI(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount) {

@@ -4,25 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary"
     android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBar"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_marginStart="@dimen/spacer_activity_sides"
-            android:layout_marginEnd="@dimen/spacer_activity_sides"
-            app:contentInsetStartWithNavigation="0dp"
-            app:navigationIcon="@drawable/ic_arrow_back_grey600_24dp"
-            app:title="@string/action_formatting_help"
-            app:titleMarginStart="0dp" />
-    </com.google.android.material.appbar.AppBarLayout>
+        android:layout_height="wrap_content"
+        app:navigationIcon="@drawable/ic_arrow_back_grey600_24dp"
+        app:title="@string/action_formatting_help" />
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -34,8 +23,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacer_activity_sides"
-            android:layout_marginEnd="@dimen/spacer_activity_sides"
+            android:layout_marginHorizontal="@dimen/spacer_activity_sides"
             android:orientation="vertical"
             android:padding="@dimen/spacer_2x">
 
@@ -46,7 +34,6 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/fg_default"
                 android:textIsSelectable="true"
-                android:theme="@style/textViewStyle"
                 tools:maxLength="200"
                 tools:text="@tools:sample/lorem/random" />
 
@@ -66,7 +53,6 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/fg_default"
                 android:textIsSelectable="true"
-                android:theme="@style/textViewStyle"
                 tools:maxLength="300"
                 tools:text="@tools:sample/lorem/random" />
 

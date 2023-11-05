@@ -8,13 +8,27 @@
     android:orientation="vertical"
     android:padding="?attr/dialogPreferredPadding">
 
-    <EditText
-        android:id="@+id/search"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputWrapper"
+        style="@style/textInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacer_1x"
         android:hint="@string/change_category_title"
-        android:importantForAutofill="no"
-        android:inputType="text" />
+        android:labelFor="@id/search">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
+            android:importantForAutofill="no"
+            android:inputType="text">
+
+            <requestFocus />
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"

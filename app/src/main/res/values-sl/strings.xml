@@ -41,6 +41,7 @@
     <string name="listview_updated_last_month">Zadnji mesec</string>
 
     <string name="settings_note_mode">Način odpiranja zabeležk</string>
+    <string name="settings_note_mode_new">Obnašanje odpiranja beležk</string>
     <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title">Pisava enotne širine</string>
     <string name="settings_font_size">Velikost pisave</string>
@@ -50,6 +51,9 @@
     <string name="settings_background_sync"> Usklajevanje v ozadju</string>
     <string name="settings_prevent_screen_capture">Prepreči zajem zaslona</string>
     <string name="settings_gridview">Mrežni pogled</string>
+    <string name="settings_keep_screen_on">Ohrani zaslon prižgan</string>
+    <string name="settings_keep_screen_on_summary">Med pregledovanjem in urejanjem zabeležk</string>
+
     <string name="error_sync">Usklajevanje je spodletelo: %1$s</string>
     <string name="error_synchronization">Usklajevanje je spodletelo</string>
     <string name="error_no_network">Ni omrežne povezave</string>
@@ -60,6 +64,7 @@
     <string name="about_version">Trenutno je v uporabi %1$s</string>
     <string name="about_maintainer_title">Vzdrževalec</string>
     <string name="about_developers_title">Razvijalci</string>
+    <string name="about_developers_original_author">izvorni avtor</string>
     <string name="about_translators_title">Prevajalci</string>
     <string name="about_translators_transifex">Skupnost Nextcloud na %1$s</string>
     <string name="about_testers_title">Preizkuševalci</string>
@@ -174,11 +179,11 @@
     <string name="manage_accounts">Upravljanje z računi</string>
     <string name="action_formatting_help">Oblikovanje</string>
 
-    <string-array name="noteMode_entries">
-        <item>Zabeležka se odpre v urejevalnem načinu</item>
-        <item>Zabeležka se odpre v predogledu</item>
-        <item>Zapomni si zadnjo izbiro</item>
-    </string-array>
+
+    <string name="noteMode_plain_edit">Besedilni urejevalni način</string>
+    <string name="noteMode_plain_preview">Predogled urejevalnega načina</string>
+    <string name="noteMode_rich_edit">Oblikovni urejevalni način</string>
+    <string name="noteMode_remember_last">Zapomni si zadnjo izbiro</string>
 
     <string-array name="fontSize_entries">
         <item>Majhna</item>
@@ -309,4 +314,7 @@
     <string name="progress_import_indeterminate">Poteka uvažanje sporočilc ...</string>
     <string name="progress_import">Poteka uvažanje sporočilca %1$d od %2$d…</string>
     <string name="account_imported">Račun je uspešno uvožen.</string>
-</resources>
+    <string name="direct_editing_error">Napaka nalaganja oblikovnega urejevalnika</string>
+    <string name="switch_to_plain_editing">Preklopi na besedilno urejanje</string>
+    <string name="action_back">Nazaj</string>
+    </resources>

@@ -50,6 +50,9 @@
     <string name="settings_background_sync">背景同步</string>
     <string name="settings_prevent_screen_capture">防止螢幕截取</string>
     <string name="settings_gridview">網格檢視</string>
+    <string name="settings_keep_screen_on">保持螢幕開啟</string>
+    <string name="settings_keep_screen_on_summary">檢視或編輯筆記時</string>
+
     <string name="error_sync">同步失敗：%1$s</string>
     <string name="error_synchronization">同步失敗</string>
     <string name="error_no_network">沒有網路連線</string>
@@ -85,6 +88,8 @@
     <string name="widget_single_note_title">單則筆記</string>
     <string name="widget_single_note_placeholder_tv">找不到筆記</string>
     <string name="widget_not_logged_in">在使用此小工具之前，請先登入到 Notes</string>
+    <string name="widget_entry_fav_contentDescription">星星圖示用於標示一個項目在「我的最愛」中</string>
+
     <string name="activity_select_single_note">選擇筆記</string>
 
     <string name="shortcut_create_long">建立新筆記</string>
@@ -105,17 +110,34 @@
     <string name="category_movies">電影</string>
     <string name="category_movie">電影</string>
     <string name="category_work">工作</string>
+    <string name="category_todo">待辦事項</string>
+    <string name="category_todos">待辦事項</string>
+    <string name="category_checklists">檢查清單</string>
     <string name="category_tasks">工作項目</string>
+    <string name="category_recipe">食譜</string>
     <string name="category_recipes">食譜</string>
     <string name="category_restaurant">餐廳</string>
+    <string name="category_restaurants">餐廳</string>
+    <string name="category_food">食物</string>
+    <string name="category_bake">烘焙</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_key">密鑰</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_keys">密鑰</string>
     <string name="category_password">密碼</string>
     <string name="category_passwords">密碼</string>
+    <string name="category_credentials">憑證</string>
     <string name="category_game">遊戲</string>
     <string name="category_games">遊戲</string>
     <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
     <string name="category_play">播放</string>
+    <string name="category_gift">禮物</string>
+    <string name="category_gifts">禮物</string>
     <!-- Like a gift -->
     <string name="category_present">簡報</string>
+    <!-- Like a gift -->
+    <string name="category_presents">簡報</string>
+
     <string name="account_already_imported">已成功匯入帳戶</string>
     <string name="no_notes_yet">尚沒有筆記</string>
     <string name="no_notes_yet_description">請按 + 按鈕建立新筆記</string>
@@ -143,6 +165,7 @@
     <string name="error_dialog_server_app_enabled">請確保您已在您的伺服器安裝並啟用了「筆記」應用程式。</string>
     <string name="error_dialog_redirect">您的伺服器以 HTTP 302 狀態代碼回應，這表示您尚未在伺服器上安裝 Notes 應用程式或配置錯誤。這可能是由於 .htaccess 檔案中的自訂覆寫或 Nextcloud 應用程式（如OID客戶端）引起的。</string>
     <string name="error_dialog_tip_disable_battery_optimizations">請停用 Nextcloud 和 Notes 應用程式的所有電池最佳化。</string>
+    <string name="error_dialog_min_version">Notes Android 功能要求 Nextcloud Android 應用程式最低版本為 3.18。</string>
     <string name="added_content">已加入「%1$s」</string>
     <string name="shared_text_empty">分享的文字是空的</string>
     <string name="append_to_note">附加到筆記</string>
@@ -154,11 +177,8 @@
     <string name="manage_accounts">帳戶管理</string>
     <string name="action_formatting_help">文字樣式</string>
 
-    <string-array name="noteMode_entries">
-        <item>以編輯模式開啟</item>
-        <item>以預覽模式開啟</item>
-        <item>記住上次選擇</item>
-    </string-array>
+
+    <string name="noteMode_remember_last">記住上次選擇</string>
 
     <string-array name="fontSize_entries">
         <item>小</item>
@@ -233,6 +253,8 @@
     <!-- Table cell value of a sample table -->
     <string name="formatting_help_tables_value">值 %1d</string>
 
+    <string name="formatting_help_images_body_1">連結必須是以協定和網域開頭的完整 URL 或以 %1$s 字元開頭的絕對位址。</string>
+    <string name="formatting_help_images_body_2">為符合 Markdown 格式，請在圖像 URL 中使用跳脫字元。 例如，將 URL 中空白替換為%1$s。</string>
     <string name="formatting_help_images_title">圖片</string>
     <string name="formatting_help_images_alt">漂亮的圖片</string>
 
@@ -269,4 +291,8 @@
     <string name="settings_file_suffix_description">Nextcloud 中新筆記的副檔名</string>
     <string name="settings_file_suffix_success">新檔案後綴：%1$s</string>
     <string name="http_status_code">HTTP 狀態碼：%1$d</string>
+    <string name="progress_import_indeterminate">匯入筆記中...</string>
+    <string name="progress_import">匯入筆記 %2$d 之 %1$d 中...</string>
+    <string name="account_imported">已匯入賬戶。</string>
+    <string name="action_back">返回</string>
     </resources>

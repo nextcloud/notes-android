@@ -4,38 +4,35 @@ import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.O;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-import static it.niedermann.owncloud.notes.NotesApplication.isDarkThemeActive;
+import static com.nextcloud.android.common.ui.util.PlatformThemeUtil.isDarkMode;
 import static it.niedermann.owncloud.notes.NotesApplication.isGridViewEnabled;
-import static it.niedermann.owncloud.notes.branding.BrandingUtil.getSecondaryForegroundColorDependingOnTheme;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.DEFAULT_CATEGORY;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.RECENT;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.UNCATEGORIZED;
-import static it.niedermann.owncloud.notes.shared.util.NotesColorUtil.contrastRatioIsSufficient;
 import static it.niedermann.owncloud.notes.shared.util.SSOUtil.askForNewAccount;
 
 import android.accounts.NetworkErrorException;
 import android.animation.AnimatorInflater;
 import android.app.SearchManager;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.SearchView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.core.splashscreen.SplashScreen;
 import androidx.core.view.GravityCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -47,8 +44,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.nextcloud.android.common.ui.theme.utils.ColorRole;
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.AccountImportCancelledException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
@@ -64,12 +63,14 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
+import it.niedermann.android.util.ColorUtil;
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerListener;
 import it.niedermann.owncloud.notes.accountswitcher.AccountSwitcherDialog;
 import it.niedermann.owncloud.notes.accountswitcher.AccountSwitcherListener;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ActivityNotesListViewBinding;
 import it.niedermann.owncloud.notes.databinding.DrawerLayoutBinding;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
@@ -120,6 +121,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     protected ItemAdapter adapter;
     private NavigationAdapter adapterCategories;
+    @Nullable
     private MenuAdapter menuAdapter;
 
     private SelectionTracker<Long> tracker;
@@ -137,6 +139,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SplashScreen.installSplashScreen(this);
+
         super.onCreate(savedInstanceState);
 
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
@@ -154,7 +158,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
         gridView = isGridViewEnabled();
 
-        if (!gridView || isDarkThemeActive(this)) {
+        if (!gridView || isDarkMode(this)) {
             activityBinding.activityNotesListView.setBackgroundColor(ContextCompat.getColor(this, R.color.primary));
         }
 
@@ -171,8 +175,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                         final var account = mainViewModel.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
                         runOnUiThread(() -> mainViewModel.postCurrentAccount(account));
                     } catch (NextcloudFilesAppAccountNotFoundException e) {
-                        // Verbose log output for https://github.com/stefan-niedermann/nextcloud-notes/issues/1256
-                        runOnUiThread(() -> new AlertDialog.Builder(this)
+                        // Verbose log output for https://github.com/nextcloud/notes-android/issues/1256
+                        runOnUiThread(() -> new MaterialAlertDialogBuilder(this)
                                 .setTitle(NextcloudFilesAppAccountNotFoundException.class.getSimpleName())
                                 .setMessage(R.string.backup)
                                 .setPositiveButton(R.string.simple_backup, (a, b) -> executor.submit(() -> {
@@ -215,6 +219,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         mainViewModel.getSyncErrors().observe(this, exceptions -> {
             if (mainViewModel.containsNonInfrastructureRelatedItems(exceptions)) {
                 BrandedSnackbar.make(coordinatorLayout, R.string.error_synchronization, Snackbar.LENGTH_LONG)
+                        .setAnchorView(binding.activityNotesListView.fabCreate)
                         .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(exceptions)
                                 .show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()))
                         .show();
@@ -322,11 +327,14 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                         if (t instanceof IntendedOfflineException) {
                             Log.i(TAG, "Capabilities and notes not updated because " + nextAccount.getAccountName() + " is offline by intention.");
                         } else if (t instanceof NetworkErrorException) {
-                            BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
+                            BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG)
+                                    .setAnchorView(binding.activityNotesListView.fabCreate)
+                                    .show();
                         } else {
                             BrandedSnackbar.make(coordinatorLayout, R.string.error_synchronization, Snackbar.LENGTH_LONG)
                                     .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(t)
                                             .show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()))
+                                    .setAnchorView(binding.activityNotesListView.fabCreate)
                                     .show();
                         }
                     });
@@ -343,7 +351,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                     } else {
                         startActivityForResult(menuItem.getIntent(), resultCode);
                     }
-                });
+                }, nextAccount.getColor());
 
                 binding.navigationMenu.setAdapter(menuAdapter);
             } else {
@@ -474,13 +482,18 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                             if (t instanceof IntendedOfflineException) {
                                 Log.i(TAG, "Capabilities and notes not updated because " + currentAccount.getAccountName() + " is offline by intention.");
                             } else if (t instanceof NextcloudHttpRequestFailedException && ((NextcloudHttpRequestFailedException) t).getStatusCode() == HttpURLConnection.HTTP_UNAVAILABLE) {
-                                BrandedSnackbar.make(coordinatorLayout, R.string.error_maintenance_mode, Snackbar.LENGTH_LONG).show();
+                                BrandedSnackbar.make(coordinatorLayout, R.string.error_maintenance_mode, Snackbar.LENGTH_LONG)
+                                        .setAnchorView(binding.activityNotesListView.fabCreate)
+                                        .show();
                             } else if (t instanceof NetworkErrorException) {
-                                BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
+                                BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG)
+                                        .setAnchorView(binding.activityNotesListView.fabCreate)
+                                        .show();
                             } else {
                                 BrandedSnackbar.make(coordinatorLayout, R.string.error_synchronization, Snackbar.LENGTH_LONG)
                                         .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(t)
                                                 .show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()))
+                                        .setAnchorView(binding.activityNotesListView.fabCreate)
                                         .show();
                             }
                         });
@@ -497,7 +510,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                 public void onSelectionChanged() {
                                     super.onSelectionChanged();
                                     if (tracker.hasSelection() && mActionMode == null) {
-                                        mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(MainActivity.this, coordinatorLayout, mainViewModel, MainActivity.this, canMoveNoteToAnotherAccounts, tracker, getSupportFragmentManager()));
+                                        mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(MainActivity.this, coordinatorLayout, binding.activityNotesListView.fabCreate, mainViewModel, MainActivity.this, canMoveNoteToAnotherAccounts, tracker, getSupportFragmentManager()));
                                     }
                                     if (mActionMode != null) {
                                         if (tracker.hasSelection()) {
@@ -512,7 +525,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                             }
         );
 
-        itemTouchHelper = new NotesListViewItemTouchHelper(this, mainViewModel, this, tracker, adapter, swipeRefreshLayout, coordinatorLayout, gridView);
+        itemTouchHelper = new NotesListViewItemTouchHelper(this, mainViewModel, this, tracker, adapter, swipeRefreshLayout, coordinatorLayout, binding.activityNotesListView.fabCreate, gridView);
         itemTouchHelper.attachToRecyclerView(listView);
     }
 
@@ -579,21 +592,26 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     }
 
     @Override
-    public void applyBrand(int mainColor, int textColor) {
-        applyBrandToPrimaryToolbar(activityBinding.appBar, activityBinding.searchToolbar);
-        applyBrandToFAB(mainColor, textColor, activityBinding.fabCreate);
+    public void applyBrand(int color) {
+        final var util = BrandingUtil.of(color, this);
+        util.androidx.themeSwipeRefreshLayout(activityBinding.swiperefreshlayout);
+        util.platform.colorCircularProgressBar(activityBinding.progressCircular, ColorRole.PRIMARY);
+        util.platform.colorNavigationView(binding.navigationView);
+        util.material.themeFAB(activityBinding.fabCreate);
+        util.notes.themeSearchCardView(binding.activityNotesListView.searchBarWrapper);
+        util.notes.themeSearchToolbar(binding.activityNotesListView.searchToolbar);
+        util.notes.themeToolbarSearchView(binding.activityNotesListView.searchView);
 
-        binding.headerView.setBackgroundColor(mainColor);
-        binding.appName.setTextColor(textColor);
-        activityBinding.progressCircular.getIndeterminateDrawable().setColorFilter(getSecondaryForegroundColorDependingOnTheme(this, mainColor), PorterDuff.Mode.SRC_IN);
+        binding.headerView.setBackgroundColor(color);
+        @ColorInt final int headerTextColor = ColorUtil.INSTANCE.getForegroundColorForBackgroundColor(color);
+        binding.appName.setTextColor(headerTextColor);
+        DrawableCompat.setTint(binding.logo.getDrawable(), headerTextColor);
 
-        // TODO We assume, that the background of the spinner is always white
-        activityBinding.swiperefreshlayout.setColorSchemeColors(contrastRatioIsSufficient(Color.WHITE, mainColor) ? mainColor : Color.BLACK);
-        binding.appName.setTextColor(textColor);
-        DrawableCompat.setTint(binding.logo.getDrawable(), textColor);
-
-        adapter.applyBrand(mainColor, textColor);
-        adapterCategories.applyBrand(mainColor, textColor);
+        adapter.applyBrand(color);
+        adapterCategories.applyBrand(color);
+        if (menuAdapter != null) {
+            menuAdapter.applyBrand(color);
+        }
         invalidateOptionsMenu();
     }
 
@@ -658,7 +676,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             }
             case REQUEST_CODE_SERVER_SETTINGS: {
                 // Recreate activity completely, because theme switching makes problems when only invalidating the views.
-                // @see https://github.com/stefan-niedermann/nextcloud-notes/issues/529
+                // @see https://github.com/nextcloud/notes-android/issues/529
                 if (RESULT_OK == resultCode) {
                     ActivityCompat.recreate(this);
                     return;
@@ -670,7 +688,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                     AccountImporter.onActivityResult(requestCode, resultCode, data, this, (ssoAccount) -> {
                         CapabilitiesWorker.update(this);
                         executor.submit(() -> {
-                            final var importSnackbar = BrandedSnackbar.make(coordinatorLayout, R.string.progress_import_indeterminate, Snackbar.LENGTH_INDEFINITE);
+                            final var importSnackbar = BrandedSnackbar.make(coordinatorLayout, R.string.progress_import_indeterminate, Snackbar.LENGTH_INDEFINITE)
+                                    .setAnchorView(binding.activityNotesListView.fabCreate);
                             Log.i(TAG, "Added account: " + "name:" + ssoAccount.name + ", " + ssoAccount.url + ", userId" + ssoAccount.userId);
                             try {
                                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
@@ -712,11 +731,15 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                     runOnUiThread(() -> {
                                         mainViewModel.postCurrentAccount(mainViewModel.getLocalAccountByAccountName(ssoAccount.name));
                                         // TODO there is already a sync in progress and results in displaying a TokenMissMatchException snackbar which conflicts with this one
-                                        coordinatorLayout.post(() -> BrandedSnackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show());
+                                        coordinatorLayout.post(() -> BrandedSnackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG)
+                                                .setAnchorView(binding.activityNotesListView.fabCreate)
+                                                .show());
                                     });
                                 } else if (e instanceof UnknownErrorException && e.getMessage() != null && e.getMessage().contains("No address associated with hostname")) {
-                                    // https://github.com/stefan-niedermann/nextcloud-notes/issues/1014
-                                    runOnUiThread(() -> Snackbar.make(coordinatorLayout, R.string.you_have_to_be_connected_to_the_internet_in_order_to_add_an_account, Snackbar.LENGTH_LONG).show());
+                                    // https://github.com/nextcloud/notes-android/issues/1014
+                                    runOnUiThread(() -> Snackbar.make(coordinatorLayout, R.string.you_have_to_be_connected_to_the_internet_in_order_to_add_an_account, Snackbar.LENGTH_LONG)
+                                            .setAnchorView(binding.activityNotesListView.fabCreate)
+                                            .show());
                                 } else {
                                     e.printStackTrace();
                                     runOnUiThread(() -> {

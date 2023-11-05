@@ -50,6 +50,9 @@
     <string name="settings_background_sync">Sincronizare în fundal</string>
     <string name="settings_prevent_screen_capture">Oprește captura de ecran</string>
     <string name="settings_gridview">Vizualizare tip grilă</string>
+    <string name="settings_keep_screen_on">Menține ecranul deschis</string>
+    <string name="settings_keep_screen_on_summary">Când vizionezi sau editezi o notiță</string>
+
     <string name="error_sync">Sincronizare eșuată: %1$s</string>
     <string name="error_synchronization">Sincronizare eșuată </string>
     <string name="error_no_network">Nu exista conexiune</string>
@@ -174,11 +177,8 @@
     <string name="manage_accounts">Administrare conturi</string>
     <string name="action_formatting_help">Formatare</string>
 
-    <string-array name="noteMode_entries">
-        <item>Deschide în modul editare</item>
-        <item>Deschide în modul de previzualizare </item>
-        <item>Amintește-ți ultima mea selecție </item>
-    </string-array>
+
+    <string name="noteMode_remember_last">Amintește-ți ultima mea selecție </string>
 
     <string-array name="fontSize_entries">
         <item>Mic</item>
@@ -304,4 +304,5 @@
     <string name="progress_import_indeterminate">Se importă notiţe...</string>
     <string name="progress_import">Se importă notiţele %1$d din %2$d ...</string>
     <string name="account_imported">Cont importat.</string>
-</resources>
+    <string name="action_back">Înapoi</string>
+    </resources>

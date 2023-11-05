@@ -1,5 +1,10 @@
 package it.niedermann.owncloud.notes.persistence.sync;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import android.graphics.Color;
 
 import com.google.gson.JsonParser;
@@ -7,11 +12,6 @@ import com.google.gson.JsonParser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-
-import it.niedermann.owncloud.notes.shared.model.Capabilities;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
 @RunWith(RobolectricTestRunner.class)
 public class CapabilitiesDeserializerTest {
@@ -305,5 +305,59 @@ public class CapabilitiesDeserializerTest {
         assertEquals("[\"0.2\",\"1.1\"]", capabilities.getApiVersion());
         assertEquals(Color.parseColor("#44616B"), capabilities.getColor());
         assertEquals(Color.parseColor("#ffffff"), capabilities.getTextColor());
+        assertFalse("Wrongly reporting that direct editing is supported", capabilities.isDirectEditingAvailable());
+    }
+
+
+    @Test
+    public void testDirectEditing() {
+        //language=json
+        final String responseOk = "" +
+                "{" +
+                "    \"version\":{" +
+                "        \"major\":18," +
+                "        \"minor\":0," +
+                "        \"micro\":4," +
+                "        \"string\":\"18.0.4\"," +
+                "        \"edition\":\"\"," +
+                "        \"extendedSupport\":false" +
+                "    }," +
+                "    \"capabilities\":{" +
+                "        \"files\": {" +
+                "            \"directEditing\": {" +
+                "                \"url\": \"https://nextcloud.example.com/ocs/v2.php/apps/files/api/v1/directEditing\"," +
+                "                \"etag\": \"6226ba873373f5e73a3ef504107523f7\"," +
+                "                \"supportsFileId\": true" +
+                "            }" +
+                "        }" +
+                "    }" +
+                "}";
+        final var capabilities = deserializer.deserialize(JsonParser.parseString(responseOk), null, null);
+        assertTrue("Direct editing should be considered supported", capabilities.isDirectEditingAvailable());
+
+        //language=json
+        final String responseNotOk = "" +
+                "{" +
+                "    \"version\":{" +
+                "        \"major\":18," +
+                "        \"minor\":0," +
+                "        \"micro\":4," +
+                "        \"string\":\"18.0.4\"," +
+                "        \"edition\":\"\"," +
+                "        \"extendedSupport\":false" +
+                "    }," +
+                "    \"capabilities\":{" +
+                "        \"files\": {" +
+                "            \"directEditing\": {" +
+                "                \"url\": \"https://nextcloud.example.com/ocs/v2.php/apps/files/api/v1/directEditing\"," +
+                "                \"etag\": \"6226ba873373f5e73a3ef504107523f7\"," +
+                "                \"supportsFileId\": false" +
+                "            }" +
+                "        }" +
+                "    }" +
+                "}";
+        final var capabilities1 = deserializer.deserialize(JsonParser.parseString(responseNotOk), null, null);
+        assertFalse("Wrongly reporting that direct editing is supported", capabilities1.isDirectEditingAvailable());
+
     }
 }

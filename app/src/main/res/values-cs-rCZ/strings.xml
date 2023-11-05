@@ -41,6 +41,7 @@
     <string name="listview_updated_last_month">Minulý měsíc</string>
 
     <string name="settings_note_mode">Režim zobrazení poznámek</string>
+    <string name="settings_note_mode_new">Chování Poznámek při otevírání</string>
     <string name="settings_theme_title">Motiv vzhledu</string>
     <string name="settings_font_title">Písmo se všemi znaky stejně širokými</string>
     <string name="settings_font_size">Velikost písmen</string>
@@ -63,6 +64,7 @@
     <string name="about_version">Nyní používáte %1$s</string>
     <string name="about_maintainer_title">Vývoj spravuje</string>
     <string name="about_developers_title">Vývojáři</string>
+    <string name="about_developers_original_author">původní autor</string>
     <string name="about_translators_title">Překladatelé</string>
     <string name="about_translators_transifex">Nextcloud komunita na portálu %1$s</string>
     <string name="about_testers_title">Testeři</string>
@@ -177,11 +179,11 @@
     <string name="manage_accounts">Spravovat účty</string>
     <string name="action_formatting_help">Formátování</string>
 
-    <string-array name="noteMode_entries">
-        <item>Otevřít v režimu úprav</item>
-        <item>Otevřít v náhledovém režimu</item>
-        <item>Zapamatovat si můj poslední výběr</item>
-    </string-array>
+
+    <string name="noteMode_plain_edit">Režim upravování neformátovaného textu</string>
+    <string name="noteMode_plain_preview">Náhled neformátovaného textu</string>
+    <string name="noteMode_rich_edit">Režim upravování formátovaného textu</string>
+    <string name="noteMode_remember_last">Zapamatovat si můj poslední výběr</string>
 
     <string-array name="fontSize_entries">
         <item>Malé</item>
@@ -312,4 +314,7 @@
     <string name="progress_import_indeterminate">Importují se poznámky…</string>
     <string name="progress_import">Importuje se poznámka %1$d z %2$d…</string>
     <string name="account_imported">Účet naimportován.</string>
-</resources>
+    <string name="direct_editing_error">Chyba při načítání upravování formátovaného textu</string>
+    <string name="switch_to_plain_editing">Přepnout do upravování neformátovaného textu</string>
+    <string name="action_back">Zpět</string>
+    </resources>

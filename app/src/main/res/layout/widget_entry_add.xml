@@ -31,8 +31,7 @@
         android:layout_gravity="center_vertical"
         android:contentDescription="@string/widget_entry_fav_contentDescription"
         android:foregroundGravity="center_vertical"
-        android:paddingStart="@dimen/spacer_1x"
-        android:paddingEnd="@dimen/spacer_1x"
+        android:paddingHorizontal="@dimen/spacer_1x"
         android:paddingBottom="@dimen/spacer_1x"
         app:srcCompat="@drawable/ic_add_blue_24dp" />
 </LinearLayout>

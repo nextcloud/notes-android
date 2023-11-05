@@ -50,6 +50,9 @@
     <string name="settings_background_sync">Synchronizácia na pozadí</string>
     <string name="settings_prevent_screen_capture">Zakázať snímanie obrazovky</string>
     <string name="settings_gridview">Zobrazenie v mriežke</string>
+    <string name="settings_keep_screen_on">Ponechať obrazovku zapnutú</string>
+    <string name="settings_keep_screen_on_summary">Pri prezeraní alebo úprave poznámky</string>
+
     <string name="error_sync">Synchronizácia zlyhala: %1$s</string>
     <string name="error_synchronization">Synchronizácia zlyhala</string>
     <string name="error_no_network">Bez sieťového pripojenia</string>
@@ -167,18 +170,15 @@
     <string name="shared_text_empty">Zdieľaný text bol prázdny</string>
     <string name="append_to_note">Pripojiť k poznámke</string>
     <string name="change_note_title">Zmeniť názov poznámky</string>
-    <string name="menu_edit_title">Upraviť názov</string>
+    <string name="menu_edit_title">Premenovať</string>
     <string name="simple_security">Zabezpečenie</string>
     <string name="appearance_and_behavior">Vzhľad a správanie</string>
     <string name="simple_synchronization">Synchronizácia</string>
     <string name="manage_accounts">Spravovať účty</string>
     <string name="action_formatting_help">Formátovanie</string>
 
-    <string-array name="noteMode_entries">
-        <item>Otvoriť v režime úprav</item>
-        <item>Otvoriť v režime ukážky</item>
-        <item>Zapamätať si môj posledný výber</item>
-    </string-array>
+
+    <string name="noteMode_remember_last">Zapamätať si môj posledný výber</string>
 
     <string-array name="fontSize_entries">
         <item>Malá</item>
@@ -309,4 +309,5 @@
     <string name="progress_import_indeterminate">Import poznámok…</string>
     <string name="progress_import">Importuje sa poznámka %1$d of %2$d…</string>
     <string name="account_imported">Účet bol importovaný.</string>
-</resources>
+    <string name="action_back">Späť</string>
+    </resources>

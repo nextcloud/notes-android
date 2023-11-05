@@ -41,12 +41,13 @@
     <string name="listview_updated_last_month">Mois dernier</string>
 
     <string name="settings_note_mode">Mode d\'affichage des notes</string>
+    <string name="settings_note_mode_new">Comportement à l\'ouverture de Notes</string>
     <string name="settings_theme_title">Thème</string>
     <string name="settings_font_title">Texte monospace</string>
     <string name="settings_font_size">Taille des caractères</string>
     <string name="settings_wifi_only">Synchroniser uniquement en Wifi</string>
     <string name="settings_lock">Verrouillage de l\'application (Bêta)</string>
-    <string name="settings_lock_summary">Informations d\'identiication du terminal</string>
+    <string name="settings_lock_summary">Informations d\'identification du terminal</string>
     <string name="settings_background_sync">Synchronisation en tâche de fond</string>
     <string name="settings_prevent_screen_capture">Empêcher la capture d\'écran</string>
     <string name="settings_gridview">Affichage grille</string>
@@ -63,6 +64,7 @@
     <string name="about_version">Vous utilisez actuellement %1$s</string>
     <string name="about_maintainer_title">Responsable</string>
     <string name="about_developers_title">Développeurs</string>
+    <string name="about_developers_original_author">auteur original</string>
     <string name="about_translators_title">Traducteurs</string>
     <string name="about_translators_transifex">Communauté Nextcloud sur %1$s</string>
     <string name="about_testers_title">Testeurs</string>
@@ -102,7 +104,7 @@
     <string name="simple_close">Fermer</string>
     <string name="simple_copy">Copier</string>
     <string name="simple_exception">Exception</string>
-    <string name="pin_to_homescreen">Épingler sur la page d’accueil</string>
+    <string name="pin_to_homescreen">Épingler sur l\'écran d\'accueil</string>
     <string name="note_has_been_deleted">Cette note a été supprimée</string>
     <string name="add_account">Ajouter un compte</string>
 
@@ -177,11 +179,11 @@
     <string name="manage_accounts">Gérer les comptes</string>
     <string name="action_formatting_help">Formatage</string>
 
-    <string-array name="noteMode_entries">
-        <item>Ouvrir en mode édition</item>
-        <item>Ouvrir en mode aperçu</item>
-        <item>Mémoriser ma dernière sélection</item>
-    </string-array>
+
+    <string name="noteMode_plain_edit">Édition simple</string>
+    <string name="noteMode_plain_preview">Prévisualization simple</string>
+    <string name="noteMode_rich_edit">Édition texte enrichi</string>
+    <string name="noteMode_remember_last">Mémoriser ma dernière sélection</string>
 
     <string-array name="fontSize_entries">
         <item>Petit</item>
@@ -223,7 +225,7 @@
     <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Mise en forme contextuelle</string>
-    <string name="formatting_help_cbf_body_1">Un but majeur de l\'app Notes est de fournir une application de note sans distraction, bien que vous pussiez formater vos textes avec Markdown. Pour les divers exemples mentionnés ci-dessous, vous pouvez utiliser des raccourcis afin de pouvoir formater vos notes sans taper les codes ci-dessous. </string>
+    <string name="formatting_help_cbf_body_1">Un but majeur de l\'app Notes est de fournir une application de note sans distraction, bien que vous puissiez formater vos textes avec Markdown. Pour les divers exemples mentionnés ci-dessous, vous pouvez utiliser des raccourcis afin de pouvoir formater vos notes sans taper les codes ci-dessous. </string>
     <string name="formatting_help_cbf_body_2">Sélectionner simplement une partie du texte ou taper sur votre curseur à n\'importe quelle position et vous aurez un menu popup qui contient à coté des entrées par défaut %1$s, %2$s, %3$s des entrées comme %4$s ou %5$s.</string>
 
     <string name="formatting_help_text_title">Texte</string>
@@ -305,6 +307,9 @@
     <string name="settings_file_suffix_success">Nouveau suffixe de fichier : %1$s</string>
     <string name="http_status_code">État HTTP : %1$d</string>
     <string name="progress_import_indeterminate">Importation des notes...</string>
-    <string name="progress_import">Importation de la note %1$dsur %2$d...</string>
+    <string name="progress_import">Importation de la note %1$d sur %2$d...</string>
     <string name="account_imported">Compte importé.</string>
-</resources>
+    <string name="direct_editing_error">Erreur lors du chargement de l\'édition enrichie</string>
+    <string name="switch_to_plain_editing">Bascule vers l\'édition simple</string>
+    <string name="action_back">Retour</string>
+    </resources>

@@ -7,12 +7,13 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.core.util.Consumer;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.nextcloud.android.sso.Constants;
 import com.nextcloud.android.sso.helper.VersionCheckHelper;
+import com.nextcloud.android.sso.model.FilesAppType;
 
 import it.niedermann.owncloud.notes.FormattingHelpActivity;
 import it.niedermann.owncloud.notes.R;
@@ -25,10 +26,12 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
 
     @NonNull
     private final MenuItem[] menuItems;
+    @ColorInt
+    private int color;
     @NonNull
     private final Consumer<MenuItem> onClick;
 
-    public MenuAdapter(@NonNull Context context, @NonNull Account account, int settingsRequestCode, @NonNull Consumer<MenuItem> onClick) {
+    public MenuAdapter(@NonNull Context context, @NonNull Account account, int settingsRequestCode, @NonNull Consumer<MenuItem> onClick, @ColorInt int color) {
         this.menuItems = new MenuItem[]{
                 new MenuItem(new Intent(context, FormattingHelpActivity.class), R.string.action_formatting_help, R.drawable.ic_baseline_help_outline_24),
                 new MenuItem(generateTrashbinIntent(context, account), R.string.action_trashbin, R.drawable.ic_delete_grey600_24dp),
@@ -36,7 +39,13 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
                 new MenuItem(new Intent(context, AboutActivity.class), R.string.simple_about, R.drawable.ic_info_outline_grey600_24dp)
         };
         this.onClick = onClick;
+        this.color = color;
         setHasStableIds(true);
+    }
+
+    public void applyBrand(int color) {
+        this.color = color;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -52,7 +61,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MenuViewHolder holder, int position) {
-        holder.bind(menuItems[position], onClick);
+        holder.bind(menuItems[position], color, onClick);
     }
 
     public void updateAccount(@NonNull Context context, @NonNull Account account) {
@@ -69,9 +78,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
         // https://github.com/nextcloud/android/pull/8405#issuecomment-852966877
         final int minVersionCode = 30170090;
         try {
-            if (VersionCheckHelper.getNextcloudFilesVersionCode(context, true) > minVersionCode) {
+            if (VersionCheckHelper.getNextcloudFilesVersionCode(context, FilesAppType.PROD) > minVersionCode) {
                 return generateTrashbinAppIntent(context, account, true);
-            } else if (VersionCheckHelper.getNextcloudFilesVersionCode(context, false) > minVersionCode) {
+            } else if (VersionCheckHelper.getNextcloudFilesVersionCode(context, FilesAppType.DEV) > minVersionCode) {
                 return generateTrashbinAppIntent(context, account, false);
             } else {
                 // Files app is too old to be able to switch the account when launching the TrashbinActivity
@@ -85,7 +94,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
 
     private static Intent generateTrashbinAppIntent(@NonNull Context context, @NonNull Account account, boolean prod) throws PackageManager.NameNotFoundException {
         final var packageManager = context.getPackageManager();
-        final String packageName = prod ? Constants.PACKAGE_NAME_PROD : Constants.PACKAGE_NAME_DEV;
+        final String packageName = prod ? FilesAppType.PROD.packageId : FilesAppType.DEV.packageId;
         final var intent = new Intent();
         intent.setClassName(packageName, "com.owncloud.android.ui.trashbin.TrashbinActivity");
         if (packageManager.resolveActivity(intent, 0) != null) {

@@ -41,6 +41,7 @@
     <string name="listview_updated_last_month">Geçen ay</string>
 
     <string name="settings_note_mode">Notların görüntülenme kipi</string>
+    <string name="settings_note_mode_new">Not açılma davranışı</string>
     <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title">Sabit aralıklı yazı türü</string>
     <string name="settings_font_size">Yazı boyutu</string>
@@ -63,6 +64,7 @@
     <string name="about_version">Şu anda %1$s kullanıyorsunuz</string>
     <string name="about_maintainer_title">Sorumlu</string>
     <string name="about_developers_title">Geliştiriciler</string>
+    <string name="about_developers_original_author">özgün yazar</string>
     <string name="about_translators_title">Çevirmenler</string>
     <string name="about_translators_transifex">%1$s üzerindeki Nextcloud topluluğu</string>
     <string name="about_testers_title">Deneyenler</string>
@@ -149,7 +151,7 @@
     <string name="simple_checkbox">İşaret kutusu</string>
     <string name="unlock_notes">Kilidi açma notları</string>
     <string name="error_dialog_title">Hayıır. Şimdi ne olacak? 🙁</string>
-    <string name="error_dialog_tip_token_mismatch_retry">Lütfen uygulamayı kapanmaya zorlayıp yeniden başlatın. Yanlış bir Nextcloud uygulaması bağlantısı olmalı.</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Lütfen uygulamayı zorla kapatıp yeniden başlatın. Yanlış bir Nextcloud uygulaması bağlantısı olmalı.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Sorun sürerse, çözmek için hem Nextcloud uygulamasının hem de Nextcloud Notlar uygulamasının depolamalarını temizlemeyi deneyin.</string>
     <string name="error_dialog_tip_clear_storage">Depolamayı temizlemek için uygulama bilgilerini açın ve Depolama (Hafıza) → Depolamayı temizle (Veriyi sil) seçin. ⚠️ Uyarı: Bu işlem henüz eşitlenmemiş notları silmeyecek!</string>
     <string name="error_dialog_tip_files_outdated">Nextcloud uygulamanız eski görünüyor. Lütfen son sürümü almak için Play Store ya da F-Droid mağazalarına gidin.</string>
@@ -157,7 +159,7 @@
     <string name="error_dialog_tip_files_delete_storage">Zorla durdurmak sorunu çözmediyse iki uygulamanın da depolamalarını temizlemeyi deneyebilirsiniz.</string>
     <string name="error_dialog_timeout_instance">Belirtilen sürede sunucunuzdan bir yanıt alınamadı. Lütfen kopyanızın düzgün çalıştığından emin olun.</string>
     <string name="error_dialog_timeout_toggle">Ağ bağlantınızı denetleyin. Mobil veriye geçmek ya da Wi-Fi bağlantısını kapatıp açmak yardımcı olabilir.</string>
-    <string name="error_dialog_check_server">Sunucunuz doğru şekilde yanıt vermedi. Lütfen notlarınıza web arayüzü üzerinden erişebiliyor musunuz diye bakın.</string>
+    <string name="error_dialog_check_server">Sunucunuz doğru şekilde yanıt vermedi. Lütfen notlarınıza site arayüzü üzerinden erişebiliyor musunuz diye bakın.</string>
     <string name="error_dialog_check_server_logs">Nextcloud kurulumunuz ile ilgili bir sorun var. Lütfen sunucu günlük dosyalarını inceleyin.</string>
     <string name="error_dialog_check_maintenance">Nextcloud kopyanızın bakım kipinde olmadığından emin olun.</string>
     <string name="error_dialog_insufficient_storage">Nextcloud kopyanızda boş depolama alanı kalmamış. Lütfen yerel değişikliklerinizi bulut ile eşitlemek için bazı dosyaları silerek yer açın.</string>
@@ -177,11 +179,11 @@
     <string name="manage_accounts">Hesap yönetimi</string>
     <string name="action_formatting_help">Biçimlendirme</string>
 
-    <string-array name="noteMode_entries">
-        <item>Düzenleme kipinde aç</item>
-        <item>Ön izleme kipinde aç</item>
-        <item>Son seçimim hatırlansın</item>
-    </string-array>
+
+    <string name="noteMode_plain_edit">Yalın düzenleme kipi</string>
+    <string name="noteMode_plain_preview">Yalın ön izleme</string>
+    <string name="noteMode_rich_edit">Zengin metin düzenleme kipi</string>
+    <string name="noteMode_remember_last">Son seçimim hatırlansın</string>
 
     <string-array name="fontSize_entries">
         <item>Küçük</item>
@@ -302,4 +304,7 @@
     <string name="progress_import_indeterminate">Notlar içe aktarılıyor…</string>
     <string name="progress_import">Not %1$d / %2$d içe aktarılıyor…</string>
     <string name="account_imported">Hesap içe aktarıldı.</string>
-</resources>
+    <string name="direct_editing_error">Zengin düzenleme yüklenirken sorun çıktı</string>
+    <string name="switch_to_plain_editing">Yalın düzenlemeye geç</string>
+    <string name="action_back">Geri</string>
+    </resources>

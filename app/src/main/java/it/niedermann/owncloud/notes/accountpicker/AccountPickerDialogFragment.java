@@ -10,9 +10,9 @@ import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,13 +21,11 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.branding.BrandedAlertDialogBuilder;
 import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
 import it.niedermann.owncloud.notes.databinding.DialogChooseAccountBinding;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.account.AccountChooserAdapter;
-import it.niedermann.owncloud.notes.shared.account.AccountChooserViewHolder;
 
 /**
  * A {@link DialogFragment} which provides an {@link Account} chooser that hides the current {@link Account}.
@@ -75,7 +73,7 @@ public class AccountPickerDialogFragment extends BrandedDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final var dialogBuilder = new BrandedAlertDialogBuilder(requireActivity())
+        final var dialogBuilder = new MaterialAlertDialogBuilder(requireActivity())
                 .setTitle(R.string.simple_move)
                 .setNegativeButton(android.R.string.cancel, null);
 
@@ -111,7 +109,7 @@ public class AccountPickerDialogFragment extends BrandedDialogFragment {
     }
 
     @Override
-    public void applyBrand(int mainColor, int textColor) {
+    public void applyBrand(int color) {
         // Nothing to do...
     }
 }

@@ -1,0 +1,22 @@
+# synced from @nextcloud/android-config
+name: "Validate Gradle Wrapper"
+on:
+    pull_request:
+        branches: [ master, stable-* ]
+    push:
+        branches: [ master, stable-* ]
+
+# Declare default permissions as read only.
+permissions: read-all
+
+concurrency: 
+  group: validate-gradle-wrapper-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+    validation:
+        name: "Validation"
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
+            - uses: gradle/wrapper-validation-action@8d49e559aae34d3e0eb16cde532684bc9702762b # v1.0.6

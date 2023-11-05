@@ -1,6 +1,5 @@
 package it.niedermann.owncloud.notes.edit.title;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -13,10 +12,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.databinding.DialogEditTitleBinding;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-public class EditTitleDialogFragment extends DialogFragment {
+import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
+import it.niedermann.owncloud.notes.databinding.DialogEditTitleBinding;
+import it.niedermann.owncloud.notes.shared.util.KeyboardUtils;
+
+public class EditTitleDialogFragment extends BrandedDialogFragment {
 
     private static final String TAG = EditTitleDialogFragment.class.getSimpleName();
     static final String PARAM_OLD_TITLE = "old_title";
@@ -53,7 +57,7 @@ public class EditTitleDialogFragment extends DialogFragment {
             binding.title.setText(oldTitle);
         }
 
-        return new AlertDialog.Builder(getActivity())
+        return new MaterialAlertDialogBuilder(requireContext())
                 .setTitle(R.string.change_note_title)
                 .setView(dialogView)
                 .setCancelable(true)
@@ -65,13 +69,7 @@ public class EditTitleDialogFragment extends DialogFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        binding.title.requestFocus();
-        final var window = requireDialog().getWindow();
-        if (window != null) {
-            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        } else {
-            Log.w(TAG, "can not enable soft keyboard because " + Window.class.getSimpleName() + " is null.");
-        }
+        KeyboardUtils.showKeyboardForEditText(binding.title);
     }
 
     public static DialogFragment newInstance(String title) {
@@ -80,6 +78,12 @@ public class EditTitleDialogFragment extends DialogFragment {
         args.putString(PARAM_OLD_TITLE, title);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void applyBrand(int color) {
+        final var util = BrandingUtil.of(color, requireContext());
+        util.material.colorTextInputLayout(binding.inputWrapper);
     }
 
     /**

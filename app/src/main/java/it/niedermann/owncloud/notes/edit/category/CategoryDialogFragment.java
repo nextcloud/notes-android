@@ -13,18 +13,19 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.branding.BrandedAlertDialogBuilder;
 import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.DialogChangeCategoryBinding;
 import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
+import it.niedermann.owncloud.notes.shared.util.KeyboardUtils;
 
 /**
  * This {@link DialogFragment} allows for the selection of a category.
@@ -48,8 +49,9 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
     private LiveData<List<NavigationItem.CategoryNavigationItem>> categoryLiveData;
 
     @Override
-    public void applyBrand(int mainColor, int textColor) {
-        BrandingUtil.applyBrandToEditText(mainColor, textColor, binding.search);
+    public void applyBrand(int color) {
+        final var util = BrandingUtil.of(color, requireContext());
+        util.material.colorTextInputLayout(binding.inputWrapper);
     }
 
     /**
@@ -150,7 +152,7 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
             }
         });
 
-        return new BrandedAlertDialogBuilder(getActivity())
+        return new MaterialAlertDialogBuilder(requireContext())
                 .setTitle(R.string.change_category_title)
                 .setView(dialogView)
                 .setCancelable(true)
@@ -169,12 +171,7 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (editCategory.getText() == null || editCategory.getText().length() == 0) {
-            editCategory.requestFocus();
-            if (getDialog() != null && getDialog().getWindow() != null) {
-                getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-            } else {
-                Log.w(TAG, "can not set SOFT_INPUT_STATE_ALWAYAS_VISIBLE because getWindow() == null");
-            }
+            KeyboardUtils.showKeyboardForEditText(editCategory);
         }
     }
 

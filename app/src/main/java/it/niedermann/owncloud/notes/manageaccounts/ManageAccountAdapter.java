@@ -21,22 +21,10 @@ public class ManageAccountAdapter extends RecyclerView.Adapter<ManageAccountView
     @NonNull
     private final List<Account> localAccounts = new ArrayList<>();
     @NonNull
-    private final Consumer<Account> onAccountClick;
-    @NonNull
-    private final Consumer<Account> onAccountDelete;
-    @NonNull
-    Consumer<Account> onChangeNotesPath;
-    @NonNull
-    Consumer<Account> onChangeFileSuffix;
+    private final IManageAccountsCallback callback;
 
-    public ManageAccountAdapter(@NonNull Consumer<Account> onAccountClick,
-                                @NonNull Consumer<Account> onAccountDelete,
-                                @NonNull Consumer<Account> onChangeNotesPath,
-                                @NonNull Consumer<Account> onChangeFileSuffix) {
-        this.onAccountClick = onAccountClick;
-        this.onAccountDelete = onAccountDelete;
-        this.onChangeNotesPath = onChangeNotesPath;
-        this.onChangeFileSuffix = onChangeFileSuffix;
+    public ManageAccountAdapter(@NonNull IManageAccountsCallback callback) {
+        this.callback = callback;
         setHasStableIds(true);
     }
 
@@ -54,10 +42,7 @@ public class ManageAccountAdapter extends RecyclerView.Adapter<ManageAccountView
     @Override
     public void onBindViewHolder(@NonNull ManageAccountViewHolder holder, int position) {
         final var localAccount = localAccounts.get(position);
-        holder.bind(localAccount, (localAccountClicked) -> {
-            setCurrentLocalAccount(localAccountClicked);
-            onAccountClick.accept(localAccountClicked);
-        }, onAccountDelete, onChangeNotesPath, onChangeFileSuffix, currentLocalAccount != null && currentLocalAccount.getId() == localAccount.getId());
+        holder.bind(localAccount, callback, currentLocalAccount != null && currentLocalAccount.getId() == localAccount.getId());
     }
 
     @Override

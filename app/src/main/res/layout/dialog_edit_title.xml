@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.textfield.TextInputLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/inputWrapper"
+    style="@style/textInputLayoutStyle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:hint="@string/change_note_title"
+    android:padding="?attr/dialogPreferredPadding">
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/change_note_title"
+        android:imeOptions="actionDone"
         android:importantForAutofill="no"
-        android:inputType="text" />
+        android:inputType="text">
+
+        <requestFocus />
+    </com.google.android.material.textfield.TextInputEditText>
+
 </com.google.android.material.textfield.TextInputLayout>

@@ -33,6 +33,10 @@ public class SupportUtil {
 
     public static void setTextWithURL(@NonNull TextView textView, @NonNull Resources resources, @StringRes int containerTextId, @StringRes int linkLabelId, @StringRes int urlId) {
         final String linkLabel = resources.getString(linkLabelId);
+        setTextWithURL(textView, resources, containerTextId, linkLabel, urlId);
+    }
+
+    public static void setTextWithURL(@NonNull TextView textView, @NonNull Resources resources, @StringRes int containerTextId,  final String linkLabel, @StringRes int urlId) {
         final String finalText = resources.getString(containerTextId, linkLabel);
         final var spannable = new SpannableString(finalText);
         spannable.setSpan(new URLSpan(resources.getString(urlId)), finalText.indexOf(linkLabel), finalText.indexOf(linkLabel) + linkLabel.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

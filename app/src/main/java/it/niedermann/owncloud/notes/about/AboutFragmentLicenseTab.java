@@ -34,9 +34,8 @@ public class AboutFragmentLicenseTab extends BrandedFragment {
     }
 
     @Override
-    public void applyBrand(int mainColor, int textColor) {
-        @ColorInt final int finalMainColor = BrandingUtil.getSecondaryForegroundColorDependingOnTheme(requireContext(), mainColor);
-        DrawableCompat.setTintList(binding.aboutAppLicenseButton.getBackground(), ColorStateList.valueOf(finalMainColor));
-        binding.aboutAppLicenseButton.setTextColor(ColorUtil.INSTANCE.getForegroundColorForBackgroundColor(finalMainColor));
+    public void applyBrand(int color) {
+        final var util = BrandingUtil.of(color, requireContext());
+        util.material.colorMaterialButtonPrimaryFilled(binding.aboutAppLicenseButton);
     }
 }

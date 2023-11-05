@@ -115,27 +115,25 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
     public void onStart() {
         super.onStart();
         final var context = requireContext();
-        @ColorInt final int mainColor = BrandingUtil.readBrandMainColor(context);
-        @ColorInt final int textColor = BrandingUtil.readBrandTextColor(context);
-        applyBrand(mainColor, textColor);
+        @ColorInt final int color = BrandingUtil.readBrandMainColor(context);
+        applyBrand(color);
     }
 
     /**
      * Change color for backgroundSyncPref as well
      * https://github.com/stefan-niedermann/nextcloud-deck/issues/531
      *
-     * @param mainColor color of main brand
-     * @param textColor color of text
+     * @param color color of main brand
      */
 
     @Override
-    public void applyBrand(int mainColor, int textColor) {
-        fontPref.applyBrand(mainColor, textColor);
-        lockPref.applyBrand(mainColor, textColor);
-        wifiOnlyPref.applyBrand(mainColor, textColor);
-        gridViewPref.applyBrand(mainColor, textColor);
-        preventScreenCapturePref.applyBrand(mainColor, textColor);
-        backgroundSyncPref.applyBrand(mainColor, textColor);
-        keepScreenOnPref.applyBrand(mainColor, textColor);
+    public void applyBrand(int color) {
+        fontPref.applyBrand(color);
+        lockPref.applyBrand(color);
+        wifiOnlyPref.applyBrand(color);
+        gridViewPref.applyBrand(color);
+        preventScreenCapturePref.applyBrand(color);
+        backgroundSyncPref.applyBrand(color);
+        keepScreenOnPref.applyBrand(color);
     }
 }

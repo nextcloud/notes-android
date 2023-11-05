@@ -1,7 +1,9 @@
 package it.niedermann.owncloud.notes.edit;
 
+import static androidx.core.view.ViewCompat.isAttachedToWindow;
+import static it.niedermann.owncloud.notes.shared.util.NoteUtil.getFontSizeFromPreferences;
+
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Layout;
@@ -15,24 +17,23 @@ import android.view.ViewGroup;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener;
 
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.FragmentNotePreviewBinding;
-import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.util.SSOUtil;
-
-import static androidx.core.view.ViewCompat.isAttachedToWindow;
-import static it.niedermann.owncloud.notes.shared.util.NoteUtil.getFontSizeFromPreferences;
 
 public class NotePreviewFragment extends SearchableBaseNoteFragment implements OnRefreshListener {
 
@@ -78,6 +79,11 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     @Override
     protected FloatingActionButton getSearchPrevButton() {
         return binding.searchPrev;
+    }
+
+    @Override
+    protected @NonNull ExtendedFloatingActionButton getDirectEditingButton() {
+        return binding.directEditing;
     }
 
     @Override
@@ -139,7 +145,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     }
 
     @Override
-    protected void colorWithText(@NonNull String newText, @Nullable Integer current, int mainColor, int textColor) {
+    protected void colorWithText(@NonNull String newText, @Nullable Integer current, @ColorInt int color) {
         if (binding != null && isAttachedToWindow(binding.singleNoteContent)) {
             binding.singleNoteContent.clearFocus();
             binding.singleNoteContent.setSearchText(newText, current);
@@ -178,10 +184,12 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     }
 
     @Override
-    public void applyBrand(int mainColor, int textColor) {
-        super.applyBrand(mainColor, textColor);
-        binding.singleNoteContent.setSearchColor(mainColor);
-        binding.singleNoteContent.setHighlightColor(getTextHighlightBackgroundColor(requireContext(), mainColor, colorPrimary, colorAccent));
+    public void applyBrand(int color) {
+        super.applyBrand(color);
+
+        final var util = BrandingUtil.of(color, requireContext());
+        binding.singleNoteContent.setSearchColor(color);
+        binding.singleNoteContent.setHighlightColor(util.notes.getTextHighlightBackgroundColor(requireContext(), color, colorPrimary, colorAccent));
     }
 
     public static BaseNoteFragment newInstance(long accountId, long noteId) {
