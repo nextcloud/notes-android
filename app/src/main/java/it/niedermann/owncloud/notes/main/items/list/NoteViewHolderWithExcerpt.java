@@ -1,11 +1,13 @@
 package it.niedermann.owncloud.notes.main.items.list;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.View;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceManager;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemWithExcerptBinding;
@@ -39,6 +41,14 @@ public class NoteViewHolderWithExcerpt extends NoteViewHolder {
 
         bindSearchableContent(context, binding.noteTitle, searchQuery, note.getTitle(), color);
         bindSearchableContent(context, binding.noteExcerpt, searchQuery, note.getExcerpt(), color);
+
+        final var     sp        = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+        final boolean monospace = sp.getBoolean(context.getString(R.string.pref_key_font), false);
+        if (monospace) {
+            binding.noteTitle.setTypeface(Typeface.MONOSPACE, Typeface.BOLD);
+            binding.noteExcerpt.setTypeface(Typeface.MONOSPACE);
+        }
+
     }
 
     @NonNull

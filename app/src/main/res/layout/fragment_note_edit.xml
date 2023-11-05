@@ -22,7 +22,7 @@
         android:orientation="vertical"
         tools:context="it.niedermann.owncloud.notes.edit.EditNoteActivity">
 
-        <it.niedermann.android.markdown.MarkdownEditorImpl
+        <it.niedermann.owncloud.notes.edit.PlainTextEditorImpl
             android:id="@+id/editContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

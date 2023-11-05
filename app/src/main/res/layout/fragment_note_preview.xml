@@ -19,7 +19,7 @@
             android:orientation="vertical"
             tools:context="it.niedermann.owncloud.notes.edit.EditNoteActivity">
 
-            <it.niedermann.android.markdown.MarkdownViewerImpl
+            <it.niedermann.owncloud.notes.edit.PlainTextViewerImpl
                 android:id="@+id/single_note_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
