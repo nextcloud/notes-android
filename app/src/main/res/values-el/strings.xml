@@ -44,11 +44,15 @@
     <string name="settings_theme_title">Θέμα</string>
     <string name="settings_font_title">Γραμματοσειρά monospace</string>
     <string name="settings_font_size">Μέγεθος γραμματοσειράς</string>
-    <string name="settings_wifi_only">Συγχρονισμός μόνο σε Wi-Fi</string>
+    <string name="settings_wifi_only">Συγχρονισμός μόνο με Wi-Fi</string>
     <string name="settings_lock">Κλείδωμα εφαρμογής (Beta)</string>
     <string name="settings_lock_summary">Διαπιστευτήρια συσκευής</string>
     <string name="settings_background_sync">Συγχρονισμός στο παρασκήνιο</string>
+    <string name="settings_prevent_screen_capture">Απαγόρευση λήψης στιγμιότυπου οθόνης</string>
     <string name="settings_gridview">Προβολή πλέγματος</string>
+    <string name="settings_keep_screen_on">Διατήρηση της οθόνης ενεργή</string>
+    <string name="settings_keep_screen_on_summary">Κατά την προβολή ή επεξεργασία σημείωσης</string>
+
     <string name="error_sync">Αποτυχία συγχρονισμού: %1$s</string>
     <string name="error_synchronization">Αποτυχία συγχρονισμού</string>
     <string name="error_no_network">Δεν υπάρχει σύνδεση στο δίκτυο</string>
@@ -59,6 +63,7 @@
     <string name="about_version">Αυτή τη στιγμή χρησιμοποιείτε %1$s</string>
     <string name="about_maintainer_title">Συντηρητής</string>
     <string name="about_developers_title">Προγραμματιστές</string>
+    <string name="about_developers_original_author">αρχικός συγγραφέας</string>
     <string name="about_translators_title">Μεταφραστές</string>
     <string name="about_translators_transifex">Η κοινότητα του Nextcloud στο %1$s</string>
     <string name="about_testers_title">Δοκιμαστές</string>
@@ -106,19 +111,26 @@
     <string name="category_movies">Ταινίες</string>
     <string name="category_movie">Ταινία</string>
     <string name="category_work">Εργασία</string>
+    <string name="category_checklists">Λίστες ελέγχου</string>
     <string name="category_tasks">Εργασίες</string>
     <string name="category_recipe">Συνταγή</string>
     <string name="category_recipes">Συνταγές</string>
     <string name="category_restaurant">Εστιατόριο</string>
     <string name="category_restaurants">Εστιατόρια</string>
     <string name="category_food">Φαγητό</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_key">Κλειδί</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_keys">Κλειδία</string>
     <string name="category_password">Συνθηματικό</string>
     <string name="category_passwords">Συνθηματικά</string>
+    <string name="category_credentials">Διαπιστευτήρια</string>
     <string name="category_game">Παιχνίδι</string>
     <string name="category_games">Παιχνίδια</string>
     <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
     <string name="category_play">Αναπαραγωγή</string>
     <string name="category_gift">Δώρο</string>
+    <string name="category_gifts">Δώρα</string>
     <!-- Like a gift -->
     <string name="category_present">Παρόν</string>
     <string name="account_already_imported">Ο λογαριασμός έχει εισαχθεί ήδη</string>
@@ -148,6 +160,7 @@
     <string name="error_dialog_server_app_enabled">Παρακαλούμε βεβαιωθείτε ότι εγκαταστήσατε και ενεργοποιήσατε την εφαρμογή \"Notes\" στον διακομιστή σας.</string>
     <string name="error_dialog_redirect">Ο διακομιστής απάντησε με κωδικό κατάστασης HTTP 302, που σημαίνει, πως δεν έχετε εγκατεστημένη την εφαρμογή Notes στον διακομιστή σας ή υπάρχει λάθος ρύθμιση. Αυτό μπορεί να προκλήθηκε από λάθος καταχώρηση στο αρχείο .htaccess-file ή σε εφαρμογές του Nextcloud όπως την OID Client.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Παρακαλούμε απενεργοποιήστε όλες τις βελτιστοποιήσεις μπαταρίας για το Nextcloud και την εφαρμογή Notes.</string>
+    <string name="error_dialog_min_version">Η εφαρμογή Notes Android απαιτεί την εγκατάσταση της εφαρμογής Nextcloud Android έκδοση 3.18.</string>
     <string name="added_content">Προστέθηκε \"%1$s\"</string>
     <string name="shared_text_empty">Το κοινόχρηστο κείμενο είναι κενό</string>
     <string name="append_to_note">Προσάρτηση στη σημείωση</string>
@@ -253,9 +266,29 @@
     <string name="no_other_accounts">Δεν έχετε ρυθμίσει ακόμη άλλους λογαριασμούς.</string>
     <string name="choose_account">Επιλογή λογαριασμού</string>
     <string name="context_based_formatting">Μορφοποίηση βάσει περιεχομένου popover</string>
+    <plurals name="remove_account_message">
+        <item quantity="one">Η αφαίρεση του λογαριασμού %1$sθα διαγράψει μόνιμα μια μη συγχρονισμένη αλλαγή.</item>
+        <item quantity="other">Η αφαίρεση του λογαριασμού %1$s θα διαγράψει μόνιμα %2$dμη συγχρονισμένες αλλαγές.</item>
+    </plurals>
+    <string name="remove_account">Αφαίρεση%1$s</string>
+
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Πρέπει να είστε συνδεμένοι στο ιντερνετ για να προσθέσετε λογαριασμό.</string>
+    <string name="settings_notes_path">Ορισμός φακέλου</string>
+
     <string name="simple_next">Επόμενο</string>
     <string name="simple_prev">Προηγούμενο</string>
     <string name="simple_backup">Αντίγραφο ασφαλείας</string>
+    <string name="settings_notes_path_description">Φάκελος για την αποθήκευση σημειώσεων στο Nextcloud</string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
+    <string name="settings_notes_path_success">Φάκελος νέων σημειώσεων: %1$s</string>
+    <string name="settings_file_suffix">Προέκταση αρχείου</string>
+    <string name="progress_import_indeterminate">Εισαγωγή σημειώσεων...</string>
+    <string name="progress_import">Γίνεται εισαγωγή της σημείωσης %1$d από %2$d...</string>
+    <string name="account_imported">Έγινε εισαγωγή του Λογαριασμού</string>
+    <string name="direct_editing_error">Σφάλμα κατά την φόρτωση της πλούσιας επεξεργασίας</string>
+    <string name="switch_to_plain_editing">Αλλαγή σε απλή επεξεργασία</string>
     <string name="action_back">Πίσω</string>
     </resources>

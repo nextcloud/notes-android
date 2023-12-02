@@ -41,13 +41,19 @@
     <string name="listview_updated_last_month">ماه گذشته</string>
 
     <string name="settings_note_mode">حالت نمایش یادداشت‌ها</string>
+    <string name="settings_note_mode_new">Notes opening behaviour</string>
     <string name="settings_theme_title">"تم "</string>
     <string name="settings_font_title">قلم Monospace</string>
     <string name="settings_font_size">اندازهٔ قلم</string>
     <string name="settings_wifi_only">همگام‌سازی فقط در Wi-Fi</string>
+    <string name="settings_lock">App lock (Beta)</string>
     <string name="settings_lock_summary">اعتبارنامه‌های دستگاه</string>
     <string name="settings_background_sync">همگام‌سازی پس زمینه</string>
+    <string name="settings_prevent_screen_capture">Prevent screen capture</string>
     <string name="settings_gridview">نمایش گرید</string>
+    <string name="settings_keep_screen_on">Keep screen on</string>
+    <string name="settings_keep_screen_on_summary">When viewing or editing a note</string>
+
     <string name="error_sync">همگام‌سازی انجام نشد:%1$s</string>
     <string name="error_synchronization">همگام‌سازی انجام نشد</string>
     <string name="error_no_network">هیچ ارتباطی با شبکه برقرار نیست</string>
@@ -58,6 +64,7 @@
     <string name="about_version"> شما در حال استفاده %1$s هستید</string>
     <string name="about_maintainer_title">نگاه‌دارنده</string>
     <string name="about_developers_title">توسعه دهندگان</string>
+    <string name="about_developers_original_author">original author</string>
     <string name="about_translators_title">مترجم</string>
     <string name="about_translators_transifex">انجمن نکست کلود در %1$s</string>
     <string name="about_testers_title">آزمایش کنندگان</string>
@@ -83,6 +90,8 @@
     <string name="widget_single_note_title">یادداشت واحد</string>
     <string name="widget_single_note_placeholder_tv">یادداشت یافت نشد</string>
     <string name="widget_not_logged_in">لطفاً قبل از استفاده از این ویجت، به یادداشت‌ها وارد شوید</string>
+    <string name="widget_entry_fav_contentDescription">Star icon is used to denote an item as a favorite</string>
+
     <string name="activity_select_single_note">انتخاب یادداشت</string>
 
     <string name="shortcut_create_long">ساختن یادداشت جدید</string>
@@ -103,16 +112,34 @@
     <string name="category_movies">فیلم‌ها</string>
     <string name="category_movie">فیلم</string>
     <string name="category_work">کار</string>
+    <string name="category_todo">ToDo</string>
+    <string name="category_todos">ToDos</string>
+    <string name="category_checklists">Checklists</string>
     <string name="category_tasks">وظایف</string>
+    <string name="category_recipe">Recipe</string>
+    <string name="category_recipes">Recipes</string>
     <string name="category_restaurant">رستوران</string>
+    <string name="category_restaurants">Restaurants</string>
+    <string name="category_food">Food</string>
+    <string name="category_bake">Bake</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_key">Key</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_keys">Keys</string>
     <string name="category_password">کلمه عبور</string>
     <string name="category_passwords">کلمات عبور</string>
+    <string name="category_credentials">Credential</string>
     <string name="category_game">بازی</string>
     <string name="category_games">بازی ها</string>
     <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
     <string name="category_play">پخش کردن</string>
+    <string name="category_gift">Gift</string>
+    <string name="category_gifts">Gifts</string>
     <!-- Like a gift -->
     <string name="category_present">حاضر</string>
+    <!-- Like a gift -->
+    <string name="category_presents">Presents</string>
+
     <string name="account_already_imported">حساب قبلاً وارد شده است</string>
     <string name="no_notes_yet">هنوز هیچ یادداشتی وجود ندارد</string>
     <string name="no_notes_yet_description">دکمه + را فشار دهید تا یک یادداشت جدید ایجاد کنید</string>
@@ -126,6 +153,7 @@
     <string name="error_dialog_title">وای نه - حالا چی کار کنیم؟</string>
     <string name="error_dialog_tip_token_mismatch_retry">لطفا از طریق توقف اجباری برنامه را بسته و دوباره اجرا کنید. ممکن است یک اتصال نادرست با نکست‌کلود ایجاد شده باشد.  </string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">اگر این مشکل استمرار داشت، سعی کنید با پاک کردن فضای ذخیره‌سازی هردو برنامک : Nextcloud و  Nextcloud Notes این مورد را برطرف کنید.</string>
+    <string name="error_dialog_tip_clear_storage">You can clear the storage by opening the app info and selecting Storage → Clear storage. ⚠️ Warning: This will delete not yet synchronized notes!</string>
     <string name="error_dialog_tip_files_outdated">ظاهرا برنامک یادداشت منسوخ شده است. لطفا آخرین نسخه را از Play Store  یا F-Droid دانلود کنید.</string>
     <string name="error_dialog_tip_files_force_stop">به نظر می‌رسد که مشکلی در برنامک نکست‌کلود ایجاد شده است. لطفا سعی کنید با توقف اجباری هر دو برنامک Nextcloud app  و Nextcloud Notes   را ببندید.  </string>
     <string name="error_dialog_tip_files_delete_storage">"اگر توقف اجباری برنامه‌ها کمکی نکرد، می‌توانید پاک‌کردن فضای ذخیره‌سازی هردو برنامه را پاک کنید. "</string>
@@ -139,17 +167,22 @@
     <string name="error_dialog_server_app_enabled">لطفا از نصب و فعال بودن برنامک یادداشت بر روی سرور، اطمینان حاصل کنید.</string>
     <string name="error_dialog_redirect">پاسخ سرور شما کد حالت HTTP 302 است. که دلالت بر عدم نصب برنامک یادداشت بر روی سرور و یا پیکربندی نامناسب دارد. این مشکل می‌تواند به دلیل تغییرات نامناسب ایجاد شده در فایل .htaccess و یا به دلیل برنامه‌های مرتبط با Nextcloud مثل OID Client رخ دهد.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">لطفا تمامی فرایند‌های بهینه‌سازی مصرف باتری برای Nextcloud و Notes app   را غیر فعال کنید.</string>
+    <string name="error_dialog_min_version">The Notes Android app requires the Nextcloud Android app to be at least version 3.18.</string>
     <string name="added_content">اضافه ‌شده %1$s</string>
     <string name="shared_text_empty">متن به اشتراک گذاشته‌شده خالی است</string>
     <string name="append_to_note">به یادداشت اضافه کنید</string>
     <string name="change_note_title">عوض‌کردن عنوان یادداشت</string>
     <string name="menu_edit_title">ویرایش عنوان</string>
     <string name="simple_security">امنیت</string>
+    <string name="appearance_and_behavior">Appearance and behavior</string>
     <string name="simple_synchronization">همگام‌سازی</string>
     <string name="manage_accounts">مدیریت حساب‌ها</string>
     <string name="action_formatting_help">قالب‌بندی</string>
 
 
+    <string name="noteMode_plain_edit">Plain edit mode</string>
+    <string name="noteMode_plain_preview">Plain preview</string>
+    <string name="noteMode_rich_edit">Rich edit mode</string>
     <string name="noteMode_remember_last">آخرین انتخاب من را به خاطر بسپار</string>
 
     <string-array name="fontSize_entries">
@@ -168,6 +201,25 @@
         <item quantity="one">%d انتخاب شد</item>
         <item quantity="other">%d انتخاب شد</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Deleted one note</item>
+        <item quantity="other">Deleted %1$d notes</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="one">Restored one note</item>
+        <item quantity="other">Restored %1$d notes</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">Share content of %1$d note</item>
+        <item quantity="other">Share content of %1$d notes</item>
+    </plurals>
+
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">قالب‌بندی مبتنی بر متن</string>
     <string name="formatting_help_cbf_body_1">هدف اصلی از طراحی برنامک یادداشت، ارائه دادن یک ابزار رایگان یادداشت کارها است. همچنین شما قادر خواهید بود متن‌ها را با Markdown قالب‌بندی کنید. برای انواع مختلفی از مثالهای ذکر شده در زیر ، می توانید از میانبرها استفاده کنید تا بتوانید یادداشت های خود را بدون تایپ کد، قالب بندی کنید.</string>
     <string name="formatting_help_cbf_body_2">فقط کافی است یک دامنه متن را انتخاب کنید یا روی مکان نما در هر موقعیتی ضربه بزنید و یک منوی بازشونده دریافت می کنید که در کنار ورودی‌های پیش‌فرض %1$s و %2$s و %3$s شامل ورودی‌‌هایی مانند %4$s و %5$s می‌باشد.</string>
@@ -205,6 +257,13 @@
     <string name="formatting_help_code_body_3">اگر شما نیاز به مشخص کردن syntax در یک زبان دارید:</string>
 
     <string name="formatting_help_tables_title">جدول‌ها</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">Column %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Value %1d</string>
+
+    <string name="formatting_help_images_body_1">Links have to be either complete URLs starting with a protocol and domain or absolute paths starting with a %1$s character.</string>
+    <string name="formatting_help_images_body_2">In order to conform to the Markdown format, please use escape characters in the image URL. This means for example, replace spaces with %1$s in the URL.</string>
     <string name="formatting_help_images_title">تصاویر</string>
     <string name="formatting_help_images_alt">تصویر فانتزی</string>
 
@@ -215,12 +274,37 @@
     <string name="error_action_open_deck_info">باز کردن اطلاعات برنامه</string>
     <string name="error_action_open_network">تنظیمات شبکه</string>
     <string name="error_action_update_files_app">یه‌روزرسانی</string>
+    <string name="no_account_configured_yet">No account configured yet</string>
     <string name="no_other_accounts">شما تاکنون هیچ حساب کاربری دیگری را ایجاد نکرده‌اید.</string>
     <string name="choose_account">حساب کاربری را انتخاب کنید</string>
     <string name="context_based_formatting">بازپخش قالب بندی مبتنی بر متن</string>
+    <plurals name="remove_account_message">
+        <item quantity="one">Removing the account %1$s will also delete irrecoverable one unsynchronized change.</item>
+        <item quantity="other">Removing the account %1$s will also delete irrecoverable %2$d unsynchronized changes.</item>
+    </plurals>
+    <string name="remove_account">Remove %1$s</string>
+
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">برای اضافه کردن حساب باید به اینترنت متصل شوید.</string>
+    <string name="settings_notes_path">Set folder</string>
+
     <string name="simple_next">بعدی</string>
     <string name="simple_prev">قبلی</string>
     <string name="simple_backup">پشتیبان‌گیری</string>
+    <string name="backup">We detected an irrecoverably state of the app. Please backup your unsynchronized changes and clear the storage of the Notes app.</string>
+    <string name="settings_notes_path_description">Folder to store your notes in your Nextcloud</string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
+    <string name="settings_notes_path_success">New notes folder: %1$s</string>
+    <string name="settings_file_suffix">File extension</string>
+    <string name="settings_file_suffix_description">File extension for new notes in your Nextcloud</string>
+    <string name="settings_file_suffix_success">New file suffix: %1$s</string>
+    <string name="http_status_code">HTTP status code: %1$d</string>
+    <string name="progress_import_indeterminate">Importing notes…</string>
+    <string name="progress_import">Importing note %1$d of %2$d…</string>
+    <string name="account_imported">Account imported.</string>
+    <string name="direct_editing_error">Error while loading rich editing</string>
+    <string name="switch_to_plain_editing">Switch to plain editing</string>
     <string name="action_back">بازگشت</string>
     </resources>

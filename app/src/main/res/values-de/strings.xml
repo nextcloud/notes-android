@@ -222,7 +222,7 @@
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Kontextbasierte Formatierung</string>
     <string name="formatting_help_cbf_body_1">Ein wichtiges Designziel der Notes-App ist die Bereitstellung eines ablenkungsfreien Werkzeugs. Sie können Ihre Texte mit Markdown formatieren. Für verschiedene der unten genannten Beispiele können Sie Verknüpfungen verwenden, um Ihre Notizen zu formatieren, ohne die folgenden Codes eingeben zu müssen.</string>
-    <string name="formatting_help_cbf_body_2">Wählen Sie einfach einen Textbereich aus oder tippen Sie an einer beliebigen Stelle auf den Cursor und Sie erhalten ein Popup-Menü, das neben den Standardeinträgen %1$s, %2$s, %3$s auch Einträge wie %4$s oder %5$s enthält.</string>
+    <string name="formatting_help_cbf_body_2">Wählen Sie einfach einen Textbereich aus oder tippen Sie an einer beliebigen Stelle auf den Cursor und Sie erhalten ein Pop-up-Menü, das neben den Standardeinträgen %1$s, %2$s, %3$s auch Einträge wie %4$s oder %5$s enthält.</string>
 
     <string name="formatting_help_text_title">Text</string>
     <string name="formatting_help_text_body">Es ist sehr einfach, einige Wörter %1$sfett%1$s und andere Wörter %2$skursiv%2$s mit Markdown zu versehen. Sie können einige Wörter %3$sdurchstreichen%3$s und sogar zu Nextcloud [verlinken](https://nextcloud.com).</string>
@@ -277,7 +277,7 @@
     <string name="no_account_configured_yet">Bislang kein Konto eingerichtet</string>
     <string name="no_other_accounts">Sie haben bislang keine weiteren Konten eingerichtet.</string>
     <string name="choose_account">Konto auswählen</string>
-    <string name="context_based_formatting">Popup für die kontextbasierte Formatierung</string>
+    <string name="context_based_formatting">Pop-up für die kontextbasierte Formatierung</string>
     <plurals name="remove_account_message">
         <item quantity="one">Beim Entfernen des Kontos %1$s wird auch eine unsynchronisierte Änderung unwiderruflich gelöscht werden.</item>
         <item quantity="other">Beim Entfernen des Kontos %1$s werden auch %2$d unsynchronisierte Änderungen unwiderruflich gelöscht werden.</item>

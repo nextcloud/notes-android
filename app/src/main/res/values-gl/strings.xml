@@ -50,7 +50,7 @@
     <string name="settings_lock_summary">Credenciais do dispositivo</string>
     <string name="settings_background_sync">Sincronización do traballo en segundo plano</string>
     <string name="settings_prevent_screen_capture">Evitar a captura da pantalla</string>
-    <string name="settings_gridview">Ver como grella</string>
+    <string name="settings_gridview">Ver como grade</string>
     <string name="settings_keep_screen_on">Mantér a pantalla acesa</string>
     <string name="settings_keep_screen_on_summary">Ao ver ou editar unha nota</string>
 
@@ -165,7 +165,7 @@
     <string name="error_dialog_insufficient_storage">A súa instancia Nextcloud non dispón de espazo de almacenamento libre. Elimine algúns ficheiros para sincronizar os seus cambios locais na súa nube.</string>
     <string name="error_dialog_we_need_info">Necesitamos a seguinte información técnica para axudarlle:</string>
     <string name="error_dialog_server_app_enabled">Asegúrese de ter instalada e activada a aplicación «Notas» no seu servidor.</string>
-    <string name="error_dialog_redirect">O seu servidor respondeu cun código de estado HTTP 302, o que implica que non ten instalada a aplicación Notas no servidor ou que algo está mal configurado. Isto pode ser causado por substitucións personalizadas nun ficheiro .htaccess ou por aplicacións Nextcloud como Client OID.</string>
+    <string name="error_dialog_redirect">O seu servidor respondeu cun código de estado HTTP 302, o que implica que non ten instalada a aplicación Notas no servidor ou que algo está mal configurado. Isto pode ser causado por substitucións personalizadas nun ficheiro .htaccess ou por aplicacións Nextcloud como Cliente OID.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Desactive todas as optimizacións de batería para Nextcloud e a aplicación Notas.</string>
     <string name="error_dialog_min_version">A aplicación de Notas para Android precisa que a aplicación de Android Nextcloud teña como mínimo a versión 3.18.</string>
     <string name="added_content">Engadido «%1$s»</string>
@@ -249,7 +249,7 @@
     <string name="formatting_help_structured_documents_body_3">Pode empregar un %1$s ata  %2$s seis para diferentes tamaños de cabeceira.</string>
     <string name="formatting_help_structured_documents_body_4">Se desexa citar a alguén, use o carácter %1$s antes da liña:</string>
     <string name="formatting_help_structured_documents_body_5">A imaxinación é máis importante que o coñecemento. O coñecemento é limitado. A imaxinación rodea o mundo.</string>
-    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+    <string name="formatting_help_structured_documents_body_6">– Albert Einstein</string>
 
     <string name="formatting_help_code_title">Código</string>
     <string name="formatting_help_code_body_1">Hai moitos xeitos diferentes de estilo de código con Markdown. Se ten bloques de código en liña, envólvaos en remates «```» (símbolos acento grave):</string>
@@ -290,7 +290,7 @@
     <string name="simple_next">Seguinte</string>
     <string name="simple_prev">Anterior</string>
     <string name="simple_backup">Copia de seguranza</string>
-    <string name="backup">Detectamos un estado irrecuperábel da aplicación. Faga unha copia de seguranza dos cambios non sincronizados e limpe o almacenamento da apli de Notas.</string>
+    <string name="backup">Detectamos un estado irrecuperábel da aplicación. Faga unha copia de seguranza dos cambios non sincronizados e limpe o almacenamento da aplicación Notas.</string>
     <string name="settings_notes_path_description">Cartafol para almacenar as súas notas no seu Nextcloud</string>
     <string-array name="settings_file_suffixes">
         <item translatable="false">.txt</item>
