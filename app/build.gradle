@@ -69,7 +69,7 @@ android {
 
 ext {
     glideVersion = '4.15.1'
-    roomVersion = "2.6.0"
+    roomVersion = "2.6.1"
 }
 
 dependencies {
