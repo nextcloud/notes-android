@@ -180,9 +180,9 @@
     <string name="action_formatting_help">Formatowanie</string>
 
 
-    <string name="noteMode_plain_edit">Prosta modyfikacja</string>
+    <string name="noteMode_plain_edit">Modyfikacja prosta</string>
     <string name="noteMode_plain_preview">Prosty podgląd</string>
-    <string name="noteMode_rich_edit">Bogata modyfikacja</string>
+    <string name="noteMode_rich_edit">Modyfikacja bogata</string>
     <string name="noteMode_remember_last">Zapamiętaj ostatni wybór</string>
 
     <string-array name="fontSize_entries">
