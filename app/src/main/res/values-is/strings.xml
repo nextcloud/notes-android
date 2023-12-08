@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Minnispunktar</string>
+    <string name="label_all_notes">Allir minnispunktar</string>
+    <string name="label_favorites">Eftirlæti</string>
+    <string name="action_create">Nýr minnispunktur</string>
+    <string name="welcome_text">Velkomin í %s</string>
+    <string name="action_settings">Stillingar</string>
+    <string name="action_trashbin">Eyddir minnispunktar</string>
+    <string name="action_search">Leita</string>
+    <string name="simple_cancel">Hætta við</string>
+    <string name="simple_switch">Skipta</string>
+    <string name="simple_edit">Breyta</string>
+    <string name="simple_remove">Fjarlægja</string>
+    <string name="action_edit_save">Vista</string>
+    <string name="simple_about">Um hugbúnaðinn</string>
+    <string name="simple_link">Tengill</string>
+    <string name="action_undo">Afturkalla</string>
+    <string name="action_uncategorized">Óflokkað</string>
+    <string name="menu_delete">Eyða</string>
+    <string name="menu_change_category">Flokkur</string>
+    <string name="menu_favorite">Eftirlæti</string>
+    <string name="menu_preview">Forskoðun</string>
+    <string name="menu_share">Deila</string>
+
+    <string name="search_in_category">Leita í %1$s</string>
+    <string name="change_category_title">Veldu flokk</string>
+
+    <string name="listview_updated_today">Í dag</string>
+    <string name="listview_updated_yesterday">Í gær</string>
+    <string name="listview_updated_this_week">Í þessari viku</string>
+    <string name="listview_updated_this_month">Í þessum mánuði</string>
+    <string name="settings_note_mode">Birtingarhamur minnispunkta</string>
+    <string name="settings_theme_title">Þema</string>
+    <string name="settings_font_title">Jafnbreitt letur</string>
+    <string name="settings_font_size">Leturstærð</string>
+    <string name="settings_wifi_only">Aðeins samstilla á WiFi-neti</string>
+    <string name="settings_lock_summary">Auðkenni tækis</string>
+    <string name="settings_background_sync">Samstilling í bakgrunni</string>
+    <string name="settings_gridview">Reitasýn</string>
+    <string name="error_sync">Samstilling mistókst: %1$s</string>
+    <string name="error_synchronization">Samstilling mistókst</string>
+    <string name="error_no_network">Engin nettenging</string>
+    <string name="error_maintenance_mode">Þjónninn er í viðhaldsham</string>
+    <string name="about_version_title">Útgáfa</string>
+    <string name="about_version">Þú ert núna að nota %1$s</string>
+    <string name="about_maintainer_title">Umsjónarmaður</string>
+    <string name="about_developers_title">Forritarar</string>
+    <string name="about_translators_title">Þýðendur</string>
+    <string name="about_translators_transifex">Nextcloud-samfélagið á %1$s</string>
+    <string name="about_testers_title">Prófarar</string>
+    <string name="about_source_title">Frumkóði</string>
+    <string name="about_source">Þetta verkefni er hýst á GitHub: %1$s</string>
+    <string name="about_issues_title">Villutilkynningar</string>
+    <string name="about_issues">Þú getur tilkynnt um villur, beðið um viðbótareiginleika og betrumbætur á GitHub villuskrásetjaranum: %1$s</string>
+    <string name="about_translate_title">Þýða</string>
+    <string name="about_translate">Gakktu í Nextcloud-teymið á Transifex og hjálpaðu okkur að þýða þetta forrit: %1$s</string>
+    <string name="about_app_license_title">Notkunarleyfi forritsins</string>
+    <string name="about_app_license">Þessu forriti er dreift með almenna GNU GENERAL PUBLIC notkunarleyfinu v3+.</string>
+    <string name="about_app_license_button">Skoða notkunarleyfi</string>
+    <string name="about_icons_disclaimer_title">Táknmyndir</string>
+    <string name="about_icons_disclaimer_app_icon">Vegna upprunalegrar táknmyndar ættirðu að skoða %1$s.</string>
+    <string name="about_icons_disclaimer_mdi_icons">Allar aðrar táknmyndir eru gerðar af Google Inc. %1$s og útgefnar samkvæmt Apache 2.0 hugbúnaðarleyfinu.</string>
+    <string name="about_icons_disclaimer_mdi">Material Design táknmyndir</string>
+    <string name="about_credits_tab_title">Þakkir til</string>
+    <string name="about_contribution_tab_title">Framlög</string>
+    <string name="about_license_tab_title">Notkunarleyfi</string>
+
+    <string name="widget_note_list_title">Listi yfir minnispunkta</string>
+    <string name="widget_note_list_placeholder">Engir minnispunktar</string>
+    <string name="widget_single_note_title">Stakur minnispunktur</string>
+    <string name="widget_single_note_placeholder_tv">Minnispunktur fannst ekki</string>
+    <string name="widget_not_logged_in">Skráðu þig inn í minnispunktaforritið áður en þú notar þennan viðmótshluta</string>
+    <string name="activity_select_single_note">Veldu minnispunkt</string>
+
+    <string name="shortcut_create_long">Búa til nýjan minnispunkt</string>
+
+    <string name="pref_value_font_normal">Venjulegt</string>
+    <string name="pref_value_wifi_and_mobile">Samstilla á WiFi-neti og farsímatengingu</string>
+    <string name="pref_value_lock">Verndun með lykilorði</string>
+
+    <string name="simple_error">Villa</string>
+    <string name="simple_close">Loka</string>
+    <string name="simple_copy">Afrita</string>
+    <string name="simple_exception">Undantekning</string>
+    <string name="pin_to_homescreen">Festa á heimaskjá</string>
+    <string name="note_has_been_deleted">Minnispunktinum hefur verið eytt</string>
+    <string name="add_account">Bæta við notandaaðgangi</string>
+
+    <string name="category_music">Tónlist</string>
+    <string name="category_movies">Kvikmyndir</string>
+    <string name="category_movie">Kvikmynd</string>
+    <string name="category_work">Vinna</string>
+    <string name="category_tasks">Verkefni</string>
+    <string name="category_restaurant">Veitingastaður</string>
+    <string name="category_password">Lykilorð</string>
+    <string name="category_passwords">Lykilorð</string>
+    <string name="category_game">Leikur</string>
+    <string name="category_games">Leikir</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">Spila</string>
+    <string name="no_notes_yet">Engir minnispunktar ennþá</string>
+    <string name="simple_more">Meira</string>
+    <string name="simple_move">Færa</string>
+    <string name="category_readonly">Skrifvarið</string>
+    <string name="no_category">Enginn flokkur</string>
+    <string name="add_category">Bæta við %1$s</string>
+    <string name="simple_checkbox">Hakreitur</string>
+    <string name="error_dialog_title">Ó-nei - Hvað nú? 🙁</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Prófaðu að þvinga lokun á forritinu og endurræsa það síðan. Mögulega hefur verið röng tenging við Nextcloud-forritið.</string>
+    <string name="error_dialog_tip_files_delete_storage">Ef þvinguð stöðvun leysir ekki vandamálið, skaltu reyna að hreinsa geymslurými beggja forritanna.</string>
+    <string name="error_dialog_check_server_logs">Það er vandamál með Nextcloud-uppsetninguna þína. Athugaðu atvikaskrár netþjónsins.</string>
+    <string name="error_dialog_check_maintenance">Athugaðu hvort Nextcloud-þjónninn þinn sé nokkuð núna í viðhaldsham.</string>
+    <string name="error_dialog_insufficient_storage">Nextcloud-netþjónninn þinn á ekkert laust geymslupláss eftir. Eyddu einhverjum skrám til að geta samstillt breytingar á tækinu yfir í skýið.</string>
+    <string name="error_dialog_we_need_info">Við þurfum eftirfarandi tæknilegar upplýsingar til að geta aðstoðað þig:</string>
+    <string name="menu_edit_title">Breyta titli</string>
+    <string name="simple_security">Öryggi</string>
+    <string name="simple_synchronization">Samstilling</string>
+    <string name="manage_accounts">Sýsla með notandaaðganga</string>
+    <string name="action_formatting_help">Sniðmótun</string>
+
+
+    <string name="noteMode_remember_last">Muna það sem ég valdi síðast</string>
+
+    <string-array name="fontSize_entries">
+        <item>Lítið</item>
+        <item>miðlungs</item>
+        <item>Stórt</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Ljóst</item>
+        <item>Dökkt</item>
+        <item>Sjálfgefið kerfi</item>
+    </string-array>
+
+    <plurals name="ab_selected">
+        <item quantity="one">%d valið</item>
+        <item quantity="other">%d valið</item>
+    </plurals>
+    <string name="formatting_help_text_title">Texti</string>
+    <string name="formatting_help_checkboxes_title">Gátreitir</string>
+    <string name="formatting_help_images_title">Myndir</string>
+    <string name="simple_other">Annað</string>
+    <string name="sort_last_modified">Sort by modified date</string>
+    <string name="error_action_open_battery_settings">Stillingar rafhlöðu</string>
+    <string name="error_action_open_deck_info">Opna upplýsingar um forrit</string>
+    <string name="error_action_open_network">Netkerfisstillingar</string>
+    <string name="error_action_update_files_app">Uppfæra</string>
+    <string name="choose_account">Veldu aðgang</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Þú þarft internettengingu til að geta bætt við aðgangi.</string>
+    <string name="simple_next">Næsta</string>
+    <string name="simple_prev">Fyrra</string>
+    <string name="simple_backup">Taka öryggisafrit</string>
+    <string name="action_back">Til baka</string>
+    </resources>
