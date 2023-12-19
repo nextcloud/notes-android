@@ -2,7 +2,7 @@
 An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/).
 
 [![Android CI](https://github.com/nextcloud/notes-android/workflows/Android%20CI/badge.svg)](https://github.com/nextcloud/notes-android/actions)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9f784826834042e8b512d531cab84711)](https://www.codacy.com/manual/info_147/nextcloud-notes?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nextcloud/notes-android&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/997fa10faefe4904b7bdf730734f151a)](https://app.codacy.com/gh/nextcloud/notes-android/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![GitHub issues](https://img.shields.io/github/issues/nextcloud/notes-android.svg)](https://github.com/nextcloud/notes-android/issues)
 [![GitHub stars](https://img.shields.io/github/stars/nextcloud/notes-android.svg)](https://github.com/nextcloud/notes-android/stargazers)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
