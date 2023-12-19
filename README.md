@@ -1,7 +1,7 @@
 # Nextcloud Notes for Android
 An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/).
 
-[![Android CI](https://github.com/nextcloud/notes-android/workflows/Android%20CI/badge.svg)](https://github.com/nextcloud/notes-android/actions)
+[![Android CI](https://github.com/nextcloud/notes-android/actions/workflows/android.yml/badge.svg)](https://github.com/nextcloud/notes-android/actions/workflows/android.yml)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/997fa10faefe4904b7bdf730734f151a)](https://app.codacy.com/gh/nextcloud/notes-android/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![GitHub issues](https://img.shields.io/github/issues/nextcloud/notes-android.svg)](https://github.com/nextcloud/notes-android/issues)
 [![GitHub stars](https://img.shields.io/github/stars/nextcloud/notes-android.svg)](https://github.com/nextcloud/notes-android/stargazers)
