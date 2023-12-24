@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ノート</string>
-    <string name="app_name_long">Nextcloud ノート</string>
+    <string name="app_name">Notes</string>
+    <string name="app_name_long">Nextcloud Notes</string>
     <string name="label_all_notes">すべてのノート</string>
     <string name="label_favorites">お気に入り</string>
     <string name="action_create">新しいノート</string>
