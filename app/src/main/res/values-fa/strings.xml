@@ -273,7 +273,7 @@
     <string name="error_action_open_battery_settings">تنظیمات باتری</string>
     <string name="error_action_open_deck_info">باز کردن اطلاعات برنامه</string>
     <string name="error_action_open_network">تنظیمات شبکه</string>
-    <string name="error_action_update_files_app">یه‌روزرسانی</string>
+    <string name="error_action_update_files_app">به‌روزرسانی</string>
     <string name="no_account_configured_yet">No account configured yet</string>
     <string name="no_other_accounts">شما تاکنون هیچ حساب کاربری دیگری را ایجاد نکرده‌اید.</string>
     <string name="choose_account">حساب کاربری را انتخاب کنید</string>
