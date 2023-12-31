@@ -40,7 +40,10 @@
     <string name="listview_updated_this_month">Bulan ini</string>
     <string name="listview_updated_last_month">Bulan lalu</string>
 
+    <string name="settings_note_mode">Mode tampilan untuk catatan</string>
+    <string name="settings_note_mode_new">Catatan perilaku pembukaan</string>
     <string name="settings_theme_title">Tema</string>
+    <string name="settings_font_title">font monospace</string>
     <string name="settings_font_size">Ukuran font</string>
     <string name="settings_wifi_only">Sinkronkan saja pada Wi-Fi</string>
     <string name="settings_lock">Kunci aplikasi (Beta)</string>
@@ -109,6 +112,7 @@
     <string name="category_movies">Film</string>
     <string name="category_movie">Film</string>
     <string name="category_work">Kantor</string>
+    <string name="category_checklists">Daftar periksa</string>
     <string name="category_tasks">Tugas</string>
     <string name="category_recipe">Resep</string>
     <string name="category_recipes">Resep</string>
@@ -127,6 +131,13 @@
     <string name="category_games">Permainan</string>
     <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
     <string name="category_play">Putar</string>
+    <string name="category_gift">Kado</string>
+    <string name="category_gifts">Kado</string>
+    <!-- Like a gift -->
+    <string name="category_present">Hadiah</string>
+    <!-- Like a gift -->
+    <string name="category_presents">Hadiah</string>
+
     <string name="account_already_imported">Akun telah diimpor</string>
     <string name="no_notes_yet">Belum ada catatan</string>
     <string name="no_notes_yet_description">Tekan tombol + untuk membuat catatan baru</string>
@@ -157,8 +168,17 @@
     <string name="simple_security">Keamanan</string>
     <string name="simple_synchronization">Sinkronisasi</string>
     <string name="manage_accounts">Kelola akun</string>
+    <string name="action_formatting_help">Pemformatan</string>
+
+
+    <string name="noteMode_plain_edit">Mode edit biasa</string>
+    <string name="noteMode_plain_preview">Pratinjau biasa</string>
+    <string name="noteMode_rich_edit">Mode edit kaya</string>
+    <string name="noteMode_remember_last">Ingat pilihan terakhir saya</string>
+
     <string-array name="fontSize_entries">
         <item>Kecil</item>
+        <item>Sedang</item>
         <item>Besar</item>
     </string-array>
 
@@ -171,6 +191,35 @@
     <plurals name="ab_selected">
         <item quantity="other">%d terpilih</item>
     </plurals>
+    <string name="formatting_help_cbf_title">Pemformatan berdasarkan konteks</string>
+    <string name="formatting_help_cbf_body_1">Tujuan desain utama dari aplikasi Catatan adalah menyediakan alat tanpa gangguan. Meskipun Anda akan dapat memformat teks Anda dengan Markdown. Untuk berbagai contoh yang disebutkan di bawah ini, Anda dapat menggunakan pintasan sehingga Anda dapat memformat catatan Anda tanpa mengetik kode di bawah ini.</string>
+    <string name="formatting_help_cbf_body_2">Cukup pilih rentang teks atau ketuk kursor Anda di posisi mana pun dan Anda akan mendapatkan menu sembul yang berisi di samping entri bawaan %1$s, %2$s, %3$s entri-entri seperti %4$s atau %5$s.</string>
+
+    <string name="formatting_help_text_title">Teks</string>
+    <string name="formatting_help_text_body">Sangat mudah untuk membuat sebagian kata menjadi %1$stebal%1$s dan sebagian lainnya menjadi %2$smiring%2$s dengan Markdown. Anda dapat %3$smencoret%3$s beberapa kata dan bahkan [menautkan ke Nextcloud](https://nextcloud.com).</string>
+
+    <string name="formatting_help_lists_title">Daftar</string>
+    <string name="formatting_help_lists_body_1">Kadang-kadang Anda ingin daftar yang diberi nomor:</string>
+    <string name="formatting_help_lists_body_2">Satu</string>
+    <string name="formatting_help_lists_body_3">Dua</string>
+    <string name="formatting_help_lists_body_4">Tiga</string>
+    <string name="formatting_help_lists_body_5">Kadang-kadang Anda ingin menggunakan poin-poin:</string>
+    <string name="formatting_help_lists_body_6">Mulai sebuah baris dengan tanda hubung</string>
+    <string name="formatting_help_lists_body_7">Dan jika Anda memiliki subpoin, beri dua spasi sebelum tanda hubung atau bintang.</string>
+    <string name="formatting_help_lists_body_8">Seperti ini</string>
+    <string name="formatting_help_lists_body_9">Dan ini</string>
+
+    <string name="formatting_help_checkboxes_title">Kotak centang</string>
+    <string name="formatting_help_checkboxes_body_1">Untuk membuat kotak centang, gunakan daftar diikuti dengan tanda kurung</string>
+    <string name="formatting_help_structured_documents_title">Dokumen terstruktur</string>
+    <string name="formatting_help_structured_documents_body_1">Kadang-kadang, memiliki tingkat judul berbeda berguna untuk menyusun dokumen Anda. Mulai baris dengan %1$s untuk membuat judul. Beberapa %2$s berturut-turut menunjukkan ukuran judul yang lebih kecil.</string>
+    <string name="formatting_help_structured_documents_body_2">Ini adalah judul tingkat ketiga</string>
+    <string name="formatting_help_structured_documents_body_3">Anda dapat menggunakan satu %1$s hingga %2$s enam untuk berbagai ukuran judul.</string>
+    <string name="formatting_help_structured_documents_body_4">Jika Anda ingin mengutip seseorang, gunakan karakter %1$s sebelum baris yang ditulis.</string>
+    <string name="formatting_help_structured_documents_body_5">Imajinasi lebih penting daripada pengetahuan. Pengetahuan terbatas. Imajinasi melingkari dunia.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+
+    <string name="formatting_help_code_title">Kode</string>
     <string name="formatting_help_images_title">Gambar</string>
     <string name="simple_other">Lainnya</string>
     <string name="error_action_open_battery_settings">Pengaturan baterai</string>
