@@ -165,7 +165,11 @@
     <string name="error_dialog_server_app_enabled">Pastikan Anda telah menginstal dan mengaktifkan aplikasi \"Catatan\" di server Anda.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Mohon nonaktifkan semua optimisasi baterai untuk Nextcloud dan aplikasi Catatan.</string>
     <string name="error_dialog_min_version">Aplikasi Android Catatan membutuhkan aplikasi Nextcloud Android setidaknya versi 3.18.</string>
+    <string name="append_to_note">Tambahkan ke catatan</string>
+    <string name="change_note_title">Ubah judul catatan</string>
+    <string name="menu_edit_title">Edit judul</string>
     <string name="simple_security">Keamanan</string>
+    <string name="appearance_and_behavior">Tampilan dan perilaku</string>
     <string name="simple_synchronization">Sinkronisasi</string>
     <string name="manage_accounts">Kelola akun</string>
     <string name="action_formatting_help">Pemformatan</string>
@@ -191,6 +195,16 @@
     <plurals name="ab_selected">
         <item quantity="other">%d terpilih</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="other">Berhasil menghapus %1$d catatan</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="other">Berhasil memulihkan %1$d catatan</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="other">Bagikan konten dari %1$d catatan</item>
+    </plurals>
+
     <string name="formatting_help_cbf_title">Pemformatan berdasarkan konteks</string>
     <string name="formatting_help_cbf_body_1">Tujuan desain utama dari aplikasi Catatan adalah menyediakan alat tanpa gangguan. Meskipun Anda akan dapat memformat teks Anda dengan Markdown. Untuk berbagai contoh yang disebutkan di bawah ini, Anda dapat menggunakan pintasan sehingga Anda dapat memformat catatan Anda tanpa mengetik kode di bawah ini.</string>
     <string name="formatting_help_cbf_body_2">Cukup pilih rentang teks atau ketuk kursor Anda di posisi mana pun dan Anda akan mendapatkan menu sembul yang berisi di samping entri bawaan %1$s, %2$s, %3$s entri-entri seperti %4$s atau %5$s.</string>
@@ -215,20 +229,50 @@
     <string name="formatting_help_structured_documents_body_1">Kadang-kadang, memiliki tingkat judul berbeda berguna untuk menyusun dokumen Anda. Mulai baris dengan %1$s untuk membuat judul. Beberapa %2$s berturut-turut menunjukkan ukuran judul yang lebih kecil.</string>
     <string name="formatting_help_structured_documents_body_2">Ini adalah judul tingkat ketiga</string>
     <string name="formatting_help_structured_documents_body_3">Anda dapat menggunakan satu %1$s hingga %2$s enam untuk berbagai ukuran judul.</string>
-    <string name="formatting_help_structured_documents_body_4">Jika Anda ingin mengutip seseorang, gunakan karakter %1$s sebelum baris yang ditulis.</string>
     <string name="formatting_help_structured_documents_body_5">Imajinasi lebih penting daripada pengetahuan. Pengetahuan terbatas. Imajinasi melingkari dunia.</string>
     <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
 
     <string name="formatting_help_code_title">Kode</string>
+    <string name="formatting_help_tables_title">Tabel</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">Kolom %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Nilai %1d</string>
+
+    <string name="formatting_help_images_body_1">Tautan harus berupa URL lengkap yang dimulai dengan protokol dan domain atau jalur mutlak yang dimulai dengan karakter %1$s.</string>
+    <string name="formatting_help_images_body_2">Agar sesuai dengan format Markdown, harap gunakan karakter escape dalam URL gambar. Ini berarti misalnya, ganti spasi dengan %1$s dalam URL.</string>
     <string name="formatting_help_images_title">Gambar</string>
     <string name="simple_other">Lainnya</string>
+    <string name="sort_last_modified">Urutkan berdasarkan tanggal diubah</string>
+    <string name="sort_alphabetically">Urutkan berdasarkan abjad</string>
     <string name="error_action_open_battery_settings">Pengaturan baterai</string>
     <string name="error_action_open_deck_info">Buka Info Aplikasi</string>
     <string name="error_action_open_network">Pengaturan jaringan</string>
     <string name="error_action_update_files_app">Perbarui</string>
+    <string name="no_account_configured_yet">Belum ada akun yang dikonfigurasi</string>
+    <string name="no_other_accounts">Anda belum mengonfigurasi akun lain.</string>
     <string name="choose_account">Pilih akun</string>
+    <plurals name="remove_account_message">
+        <item quantity="other">Menghapus akun %1$s juga akan menghapus %2$d perubahan yang tidak tersinkronisasi yang tidak dapat dipulihkan.</item>
+    </plurals>
+    <string name="remove_account">Hapus %1$s</string>
+
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Anda harus terhubung ke internet untuk menambahkan akun.</string>
+    <string name="settings_notes_path">Setel folder</string>
+
     <string name="simple_next">Berikutnya</string>
     <string name="simple_prev">Sebelumnya</string>
+    <string name="backup">Kami mendeteksi keadaan aplikasi yang tidak dapat dipulihkan. Harap cadangkan perubahan yang belum disinkronkan dan bersihkan penyimpanan aplikasi Catatan.</string>
+    <string name="settings_notes_path_description">Folder untuk menyimpan catatan Anda di Nextcloud Anda</string>
+    <string name="settings_notes_path_success">Folder catatan baru: %1$s</string>
+    <string name="settings_file_suffix">Ekstensi berkas</string>
+    <string name="settings_file_suffix_description">Ekstensi berkas untuk catatan baru di Nextcloud Anda</string>
+    <string name="settings_file_suffix_success">Akhiran berkas baru: %1$s</string>
+    <string name="http_status_code">Kode status HTTP: %1$d</string>
+    <string name="progress_import_indeterminate">Mengimpor catatan...</string>
+    <string name="progress_import">Impor catatan %1$d dari %2$d...</string>
+    <string name="account_imported">Akun diimpor.</string>
+    <string name="direct_editing_error">Kesalahan saat memuat pengeditan kaya</string>
+    <string name="switch_to_plain_editing">Beralih ke pengeditan biasa</string>
     <string name="action_back">Kembali</string>
     </resources>
