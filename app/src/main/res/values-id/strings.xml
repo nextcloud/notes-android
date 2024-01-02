@@ -165,6 +165,8 @@
     <string name="error_dialog_server_app_enabled">Pastikan Anda telah menginstal dan mengaktifkan aplikasi \"Catatan\" di server Anda.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Mohon nonaktifkan semua optimisasi baterai untuk Nextcloud dan aplikasi Catatan.</string>
     <string name="error_dialog_min_version">Aplikasi Android Catatan membutuhkan aplikasi Nextcloud Android setidaknya versi 3.18.</string>
+    <string name="added_content">Berhasil menambahkan \"%1$s\"</string>
+    <string name="shared_text_empty">Teks yang dibagikan kosong</string>
     <string name="append_to_note">Tambahkan ke catatan</string>
     <string name="change_note_title">Ubah judul catatan</string>
     <string name="menu_edit_title">Edit judul</string>
