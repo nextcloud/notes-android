@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Notes</string>
+    <string name="app_name_long">Nextcloud Notes</string>
+    <string name="label_all_notes">All notes</string>
+    <string name="label_favorites">Favorites</string>
+    <string name="action_create">New note</string>
+    <string name="welcome_text">Welcome to %1$s</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_trashbin">Deleted notes</string>
+    <string name="action_search">Search</string>
+    <string name="action_sorting_method">Sorting method</string>
+    <string name="simple_cancel">Cancel</string>
+    <string name="simple_switch">Switch</string>
+    <string name="simple_edit">Edit</string>
+    <string name="simple_remove">Remove</string>
+    <string name="action_edit_save">Save</string>
+    <string name="simple_about">About</string>
+    <string name="simple_link">Link</string>
+    <string name="action_note_deleted">Deleted %1$s</string>
+    <string name="action_note_restored">Restored %1$s</string>
+    <string name="action_undo">Undo</string>
+    <string name="action_uncategorized">Uncategorized</string>
+    <string name="menu_delete">Delete</string>
+    <string name="menu_change_category">Category</string>
+    <string name="menu_favorite">Favorite</string>
+    <string name="menu_preview">Preview</string>
+    <string name="menu_share">Share</string>
+
+    <string name="search_in_category">Search in %1$s</string>
+    <string name="search_in_all">Search all notes</string>
+
+    <string name="change_category_title">Choose a category</string>
+
+    <string name="listview_updated_today">Today</string>
+    <string name="listview_updated_yesterday">Yesterday</string>
+    <string name="listview_updated_this_week">This week</string>
+    <string name="listview_updated_last_week">Last week</string>
+    <string name="listview_updated_this_month">This month</string>
+    <string name="listview_updated_last_month">Last month</string>
+
+    <string name="settings_note_mode">Display mode for notes</string>
+    <string name="settings_note_mode_new">Notes opening behaviour</string>
+    <string name="settings_theme_title">Theme</string>
+    <string name="settings_font_title">Monospace font</string>
+    <string name="settings_font_size">Font size</string>
+    <string name="settings_wifi_only">Sync only on Wi-Fi</string>
+    <string name="settings_lock">App lock (Beta)</string>
+    <string name="settings_lock_summary">Device credentials</string>
+    <string name="settings_background_sync">Background synchronization</string>
+    <string name="settings_prevent_screen_capture">Prevent screen capture</string>
+    <string name="settings_gridview">Grid view</string>
+    <string name="settings_keep_screen_on">Keep screen on</string>
+    <string name="settings_keep_screen_on_summary">When viewing or editing a note</string>
+
+    <string name="error_sync">Synchronization failed: %1$s</string>
+    <string name="error_synchronization">Synchronization failed</string>
+    <string name="error_no_network">No network connection</string>
+    <string name="error_maintenance_mode">Server is in maintenance mode</string>
+    <string name="error_unknown">An unknown error has occurred.</string>
+
+    <string name="about_version_title">Version</string>
+    <string name="about_version">You are currently using %1$s</string>
+    <string name="about_maintainer_title">Maintainer</string>
+    <string name="about_developers_title">Developers</string>
+    <string name="about_developers_original_author">original author</string>
+    <string name="about_translators_title">Translators</string>
+    <string name="about_translators_transifex">Nextcloud community on %1$s</string>
+    <string name="about_testers_title">Testers</string>
+    <string name="about_source_title">Source code</string>
+    <string name="about_source">This project is hosted on GitHub: %1$s</string>
+    <string name="about_issues_title">Issues</string>
+    <string name="about_issues">You can report bugs, enhancement proposals and feature requests at the GitHub issue tracker: %1$s</string>
+    <string name="about_translate_title">Translate</string>
+    <string name="about_translate">Join the Nextcloud team on Transifex and help us to translate this app: %1$s</string>
+    <string name="about_app_license_title">App license</string>
+    <string name="about_app_license">This application is licensed under the GNU GENERAL PUBLIC LICENSE v3+.</string>
+    <string name="about_app_license_button">View license</string>
+    <string name="about_icons_disclaimer_title">Icons</string>
+    <string name="about_icons_disclaimer_app_icon">For the original icon see %1$s.</string>
+    <string name="about_icons_disclaimer_mdi_icons">All further icons used by this app are %1$s made by Google Inc. and licensed under the Apache 2.0 License.</string>
+    <string name="about_icons_disclaimer_mdi">Material Design Icons</string>
+    <string name="about_credits_tab_title">Credits</string>
+    <string name="about_contribution_tab_title">Contribution</string>
+    <string name="about_license_tab_title">License</string>
+
+    <string name="widget_note_list_title">Note list</string>
+    <string name="widget_note_list_placeholder">No notes</string>
+    <string name="widget_single_note_title">Single note</string>
+    <string name="widget_single_note_placeholder_tv">Note not found</string>
+    <string name="widget_not_logged_in">Please login to Notes before using this widget</string>
+    <string name="widget_entry_fav_contentDescription">Star icon is used to denote an item as a favorite</string>
+
+    <string name="activity_select_single_note">Select note</string>
+
+    <string name="shortcut_create_long">Create a new note</string>
+
+    <string name="pref_value_font_normal">Normal</string>
+    <string name="pref_value_wifi_and_mobile">Sync on Wi-Fi and mobile data</string>
+    <string name="pref_value_lock">Password protection</string>
+
+    <string name="simple_error">Error</string>
+    <string name="simple_close">Close</string>
+    <string name="simple_copy">Copy</string>
+    <string name="simple_exception">Exception</string>
+    <string name="pin_to_homescreen">Pin to homescreen</string>
+    <string name="note_has_been_deleted">This note has been deleted</string>
+    <string name="add_account">Add account</string>
+
+    <string name="category_music">Music</string>
+    <string name="category_movies">Movies</string>
+    <string name="category_movie">Movie</string>
+    <string name="category_work">Work</string>
+    <string name="category_todo">ToDo</string>
+    <string name="category_todos">ToDos</string>
+    <string name="category_checklists">Checklists</string>
+    <string name="category_tasks">Tasks</string>
+    <string name="category_recipe">Recipe</string>
+    <string name="category_recipes">Recipes</string>
+    <string name="category_restaurant">Restaurant</string>
+    <string name="category_restaurants">Restaurants</string>
+    <string name="category_food">Food</string>
+    <string name="category_bake">Bake</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_key">Key</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_keys">Keys</string>
+    <string name="category_password">პაროლი</string>
+    <string name="category_passwords">Passwords</string>
+    <string name="category_credentials">Credential</string>
+    <string name="category_game">Game</string>
+    <string name="category_games">Games</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">Play</string>
+    <string name="category_gift">Gift</string>
+    <string name="category_gifts">Gifts</string>
+    <!-- Like a gift -->
+    <string name="category_present">Present</string>
+    <!-- Like a gift -->
+    <string name="category_presents">Presents</string>
+
+    <string name="account_already_imported">Account has already been imported</string>
+    <string name="no_notes_yet">No notes yet</string>
+    <string name="no_notes_yet_description">Press + button to create a new note</string>
+    <string name="simple_more">More</string>
+    <string name="simple_move">Move</string>
+    <string name="category_readonly">Read only</string>
+    <string name="no_category">No category</string>
+    <string name="add_category">Add %1$s</string>
+    <string name="simple_checkbox">Checkbox</string>
+    <string name="unlock_notes">Unlock notes</string>
+    <string name="error_dialog_title">Oh no - What now? 🙁</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Please try to force close the app and restart it again. There might have been an incorrect connection to the Nextcloud app.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">If the issue persists, try to clear the storage of both apps: Nextcloud and Nextcloud Notes to solve this issue.</string>
+    <string name="error_dialog_tip_clear_storage">You can clear the storage by opening the app info and selecting Storage → Clear storage. ⚠️ Warning: This will delete not yet synchronized notes!</string>
+    <string name="error_dialog_tip_files_outdated">Your Nextcloud app seems to be outdated. Please visit the Play Store or F-Droid to get the latest version.</string>
+    <string name="error_dialog_tip_files_force_stop">Something seems to be wrong with your Nextcloud app. Please try to force stop both, the Nextcloud app and the Nextcloud Notes app.</string>
+    <string name="error_dialog_tip_files_delete_storage">If force stopping them does not help, you can try to clear the storage of both apps.</string>
+    <string name="error_dialog_timeout_instance">There wasn\'t a response from your server in the given time. Please make sure your instance is running well.</string>
+    <string name="error_dialog_timeout_toggle">Check your network connection. Sometime toggling the mobile data or Wi-Fi off and on again can help.</string>
+    <string name="error_dialog_check_server">The response of your server was not correct. Please check whether you can access your notes via web interface.</string>
+    <string name="error_dialog_check_server_logs">There is an issue with your Nextcloud setup. Please have a look into the server log files.</string>
+    <string name="error_dialog_check_maintenance">Please check whether your Nextcloud instance is not currently in maintenance mode.</string>
+    <string name="error_dialog_insufficient_storage">Your Nextcloud instance has no free storage left. Please delete some files to sync your local changes into your cloud.</string>
+    <string name="error_dialog_we_need_info">We need the following technical information to help you:</string>
+    <string name="error_dialog_server_app_enabled">Please make sure you have installed and enabled the "Notes" app on your server.</string>
+    <string name="error_dialog_redirect">Your server did respond with a HTTP 302 status code, which implies, that you do not have installed the Notes app on your server or something is misconfigured. This can be caused by custom overrides in a .htaccess-file or by Nextcloud apps like OID Client.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Please disable all battery optimizations for Nextcloud and the Notes app.</string>
+    <string name="error_dialog_min_version">The Notes Android app requires the Nextcloud Android app to be at least version 3.18.</string>
+    <string name="added_content">Added "%1$s"</string>
+    <string name="shared_text_empty">Shared text was empty</string>
+    <string name="append_to_note">Append to note</string>
+    <string name="change_note_title">Change note title</string>
+    <string name="menu_edit_title">Edit title</string>
+    <string name="simple_security">Security</string>
+    <string name="appearance_and_behavior">Appearance and behavior</string>
+    <string name="simple_synchronization">Synchronization</string>
+    <string name="manage_accounts">Manage accounts</string>
+    <string name="action_formatting_help">Formatting</string>
+
+
+    <string name="noteMode_plain_edit">Plain edit mode</string>
+    <string name="noteMode_plain_preview">Plain preview</string>
+    <string name="noteMode_rich_edit">Rich edit mode</string>
+    <string name="noteMode_remember_last">Remember my last selection</string>
+
+    <string-array name="fontSize_entries">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Light</item>
+        <item>Dark</item>
+        <item>System Default</item>
+    </string-array>
+
+    <plurals name="ab_selected">
+        <item quantity="one">%d selected</item>
+        <item quantity="other">%d selected</item>
+    </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Deleted one note</item>
+        <item quantity="other">Deleted %1$d notes</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="one">Restored one note</item>
+        <item quantity="other">Restored %1$d notes</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">Share content of %1$d note</item>
+        <item quantity="other">Share content of %1$d notes</item>
+    </plurals>
+
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">Context based formatting</string>
+    <string name="formatting_help_cbf_body_1">A major design goal of the Notes app is to provide a distraction free tool. Though you will be able to format your texts with Markdown. For various of the below mentioned examples, you can use shortcuts so you can format your notes without typing in the codes below.</string>
+    <string name="formatting_help_cbf_body_2">Just select a range of text or tap on your cursor at any position and you will get a popup menu which contains next to the default entries %1$s, %2$s, %3$s entries like %4$s or %5$s.</string>
+
+    <string name="formatting_help_text_title">Text</string>
+    <string name="formatting_help_text_body">It\'s very easy to make some words %1$sbold%1$s and other words %2$sitalic%2$s with Markdown. You can %3$sstrike%3$s some words through and even [link to Nextcloud](https://nextcloud.com).</string>
+
+    <string name="formatting_help_lists_title">Lists</string>
+    <string name="formatting_help_lists_body_1">Sometimes you want numbered lists:</string>
+    <string name="formatting_help_lists_body_2">One</string>
+    <string name="formatting_help_lists_body_3">Two</string>
+    <string name="formatting_help_lists_body_4">Three</string>
+    <string name="formatting_help_lists_body_5">Sometimes you want bullet points:</string>
+    <string name="formatting_help_lists_body_6">Start a line with a dash</string>
+    <string name="formatting_help_lists_body_7">And if you have sub points, put two spaces before the dash or star:</string>
+    <string name="formatting_help_lists_body_8">Like this</string>
+    <string name="formatting_help_lists_body_9">And this</string>
+
+    <string name="formatting_help_checkboxes_title">Checkboxes</string>
+    <string name="formatting_help_checkboxes_body_1">To create a checkbox, use a list followed by brackets</string>
+    <string name="formatting_help_checkboxes_body_2">Item 1</string>
+    <string name="formatting_help_checkboxes_body_3">Item 2</string>
+
+    <string name="formatting_help_structured_documents_title">Structured documents</string>
+    <string name="formatting_help_structured_documents_body_1">Sometimes it\'s useful to have different levels of headings to structure your documents. Start lines with a %1$s to create headings. Multiple %2$s in a row denote smaller heading sizes.</string>
+    <string name="formatting_help_structured_documents_body_2">This is a third-tier heading</string>
+    <string name="formatting_help_structured_documents_body_3">You can use one %1$s all the way up to %2$s six for different heading sizes.</string>
+    <string name="formatting_help_structured_documents_body_4">If you\'d like to quote someone, use the %1$s character before the line:</string>
+    <string name="formatting_help_structured_documents_body_5">Imagination is more important than knowledge. Knowledge is limited. Imagination encircles the world.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+
+    <string name="formatting_help_code_title">Code</string>
+    <string name="formatting_help_code_body_1">There are many different ways to style code with Markdown. If you have inline code blocks, wrap them in backticks:</string>
+    <string name="formatting_help_code_body_2">Markdown also supports something called code fencing, which allows for multiple lines without indentation:</string>
+    <string name="formatting_help_code_body_3">And if you\'d like to use syntax highlighting, include the language:</string>
+
+    <string name="formatting_help_tables_title">Tables</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">Column %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Value %1d</string>
+
+    <string name="formatting_help_images_body_1">Links have to be either complete URLs starting with a protocol and domain or absolute paths starting with a %1$s character.</string>
+    <string name="formatting_help_images_body_2">In order to conform to the Markdown format, please use escape characters in the image URL. This means for example, replace spaces with %1$s in the URL.</string>
+    <string name="formatting_help_images_title">Images</string>
+    <string name="formatting_help_images_alt">Fancy image</string>
+
+    <string name="simple_other">Other</string>
+    <string name="sort_last_modified">Sort by modified date</string>
+    <string name="sort_alphabetically">Sort by alphabet</string>
+    <string name="error_action_open_battery_settings">Battery settings</string>
+    <string name="error_action_open_deck_info">Open App info</string>
+    <string name="error_action_open_network">Network settings</string>
+    <string name="error_action_update_files_app">Update</string>
+    <string name="no_account_configured_yet">No account configured yet</string>
+    <string name="no_other_accounts">You don\'t have configured any other accounts yet.</string>
+    <string name="choose_account">Choose account</string>
+    <string name="context_based_formatting">Context based formatting popover</string>
+    <plurals name="remove_account_message">
+        <item quantity="one">Removing the account %1$s will also delete irrecoverable one unsynchronized change.</item>
+        <item quantity="other">Removing the account %1$s will also delete irrecoverable %2$d unsynchronized changes.</item>
+    </plurals>
+    <string name="remove_account">Remove %1$s</string>
+
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">You have to be connected to the internet in order to add an account.</string>
+    <string name="settings_notes_path">Set folder</string>
+
+    <string name="simple_next">Next</string>
+    <string name="simple_prev">Previous</string>
+    <string name="simple_backup">Backup</string>
+    <string name="backup">We detected an irrecoverably state of the app. Please backup your unsynchronized changes and clear the storage of the Notes app.</string>
+    <string name="settings_notes_path_description">Folder to store your notes in your Nextcloud</string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
+    <string name="settings_notes_path_success">New notes folder: %1$s</string>
+    <string name="settings_file_suffix">File extension</string>
+    <string name="settings_file_suffix_description">File extension for new notes in your Nextcloud</string>
+    <string name="settings_file_suffix_success">New file suffix: %1$s</string>
+    <string name="http_status_code">HTTP status code: %1$d</string>
+    <string name="progress_import_indeterminate">Importing notes…</string>
+    <string name="progress_import">Importing note %1$d of %2$d…</string>
+    <string name="account_imported">Account imported.</string>
+    <string name="direct_editing_error">Error while loading rich editing</string>
+    <string name="switch_to_plain_editing">Switch to plain editing</string>
+    <string name="action_back">Back</string>
+    </resources>
