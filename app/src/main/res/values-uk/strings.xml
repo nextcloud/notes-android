@@ -4,7 +4,7 @@
     <string name="app_name">Нотатки</string>
     <string name="app_name_long">Нотатки для Nextcloud</string>
     <string name="label_all_notes">Усі нотатки</string>
-    <string name="label_favorites">Вподобане</string>
+    <string name="label_favorites">Із зірочкою</string>
     <string name="action_create">Новий запис</string>
     <string name="welcome_text">Вітаємо у %1$s</string>
     <string name="action_settings">Налаштування</string>
@@ -90,7 +90,7 @@
     <string name="widget_single_note_title">Одна нотатка</string>
     <string name="widget_single_note_placeholder_tv">Нотатку не знайдено</string>
     <string name="widget_not_logged_in">Будь ласка, увійдіть до Нотаток перед використанням цього віджету</string>
-    <string name="widget_entry_fav_contentDescription">Значок зірки використовується для позначення елемента як улюбленого</string>
+    <string name="widget_entry_fav_contentDescription">Значок зірочки використовується для позначення вподобаного елемента</string>
 
     <string name="activity_select_single_note">Оберіть нотатку</string>
 
