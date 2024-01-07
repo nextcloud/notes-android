@@ -75,7 +75,7 @@
     <string name="about_translate_title">Traduire</string>
     <string name="about_translate">Rejoignez l\'équipe Nextcloud sur Transifex et aidez-nous à traduire cette application : %1$s</string>
     <string name="about_app_license_title">Licence de l\'application</string>
-    <string name="about_app_license">Cette application est licenciée selon les termes de la GNU GENERAL PUBLIC LICENSE v3+.</string>
+    <string name="about_app_license">Cette application est sous licence GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Voir la licence</string>
     <string name="about_icons_disclaimer_title">Icônes</string>
     <string name="about_icons_disclaimer_app_icon">Pour l’icône originale voir %1$s.</string>
