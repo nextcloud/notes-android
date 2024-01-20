@@ -187,7 +187,7 @@ public class NotesRepository {
                         public void onError(@NonNull Throwable t) {
                             Log.e(TAG, "… Error while importing " + account.getAccountName() + ": " + t.getMessage());
                             deleteAccount(account);
-                            SingleAccountHelper.setCurrentAccount(context, null);
+                            SingleAccountHelper.commitCurrentAccount(context, null);
                             callback.onError(t);
                         }
                     });
@@ -195,7 +195,7 @@ public class NotesRepository {
                     Log.e(TAG, "… Could not find " + SingleSignOnAccount.class.getSimpleName() + " for account name " + account.getAccountName());
                     importExecutor.submit(() -> {
                         deleteAccount(account);
-                        SingleAccountHelper.setCurrentAccount(context, null);
+                        SingleAccountHelper.commitCurrentAccount(context, null);
                         callback.onError(e);
                     });
                 }
@@ -203,7 +203,7 @@ public class NotesRepository {
                 Log.e(TAG, "… No network connection available to import " + account.getAccountName());
                 importExecutor.submit(() -> {
                     deleteAccount(account);
-                    SingleAccountHelper.setCurrentAccount(context, null);
+                    SingleAccountHelper.commitCurrentAccount(context, null);
                     callback.onError(new NetworkErrorException());
                 });
             }

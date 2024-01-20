@@ -121,7 +121,7 @@ public class MainViewModel extends AndroidViewModel {
     public void postCurrentAccount(@NonNull Account account) {
         state.set(KEY_CURRENT_ACCOUNT, account);
         BrandingUtil.saveBrandColor(getApplication(), account.getColor());
-        SingleAccountHelper.setCurrentAccount(getApplication(), account.getAccountName());
+        SingleAccountHelper.commitCurrentAccount(getApplication(), account.getAccountName());
 
         final var currentAccount = this.currentAccount.getValue();
         // If only ETag or colors change, we must not reset the navigation

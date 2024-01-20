@@ -71,7 +71,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
 
         try {
             if (SingleAccountHelper.getCurrentSingleSignOnAccount(this) == null) {
-                throw new NoCurrentAccountSelectedException();
+                throw new NoCurrentAccountSelectedException(this);
             }
         } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
             Toast.makeText(this, R.string.no_account_configured_yet, Toast.LENGTH_LONG).show();

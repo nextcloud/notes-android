@@ -1,16 +1,18 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
     ext {
-        kotlinVersion = '1.8.22'
-        commonsVersion = '1.8.2'
+        kotlinVersion = '1.9.22'
+        commonsVersion = '1.9.0'
     }
     repositories {
         mavenCentral()
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.2'
+        classpath 'com.android.tools.build:gradle:8.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -28,12 +30,7 @@ allprojects {
 }
 
 subprojects {
-    tasks.withType(Test) {
+    tasks.withType(Test).configureEach {
         maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
-    }
-    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile) {
-        kotlinOptions {
-            jvmTarget = "11"
-        }
     }
 }

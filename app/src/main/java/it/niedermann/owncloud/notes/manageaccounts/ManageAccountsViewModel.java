@@ -66,7 +66,7 @@ public class ManageAccountsViewModel extends AndroidViewModel {
     }
 
     public void selectAccount(@Nullable Account account, @NonNull Context context) {
-        SingleAccountHelper.setCurrentAccount(context, (account == null) ? null : account.getAccountName());
+        SingleAccountHelper.commitCurrentAccount(context, (account == null) ? null : account.getAccountName());
     }
 
     public void countUnsynchronizedNotes(long accountId, @NonNull IResponseCallback<Long> callback) {

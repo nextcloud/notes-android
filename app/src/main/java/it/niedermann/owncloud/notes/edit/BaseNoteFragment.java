@@ -103,7 +103,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                         if (accountId > 0) {
                             /* Switch account if account id has been provided */
                             this.localAccount = repo.getAccountById(accountId);
-                            SingleAccountHelper.setCurrentAccount(requireContext().getApplicationContext(), localAccount.getAccountName());
+                            SingleAccountHelper.commitCurrentAccount(requireContext().getApplicationContext(), localAccount.getAccountName());
                         }
                         isNew = false;
                         note = originalNote = repo.getNoteById(id);

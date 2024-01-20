@@ -117,8 +117,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
         searchMenuItem.collapseActionView();
 
-        final var searchEditFrame = searchView.findViewById(R.id
-                .search_edit_frame);
+        final var searchEditFrame = searchView.findViewById(androidx.appcompat.R.id.search_edit_frame);
 
         searchEditFrame.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             int oldVisibility = -1;

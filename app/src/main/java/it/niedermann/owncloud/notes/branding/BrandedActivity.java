@@ -20,7 +20,7 @@ public abstract class BrandedActivity extends AppCompatActivity implements Brand
         super.onStart();
 
         final var typedValue = new TypedValue();
-        getTheme().resolveAttribute(R.attr.colorAccent, typedValue, true);
+        getTheme().resolveAttribute(com.google.android.material.R.attr.colorAccent, typedValue, true);
         colorAccent = typedValue.data;
 
         readBrandMainColorLiveData(this).observe(this, this::applyBrand);
