@@ -35,9 +35,12 @@ public class AboutActivity extends LockedActivity {
         // generate title based on given position
         new TabLayoutMediator(binding.tabs, binding.pager, (tab, position) -> {
             switch (position) { // Fall-through to credits tab
-                default -> tab.setText(R.string.about_credits_tab_title);
-                case POS_CONTRIB -> tab.setText(R.string.about_contribution_tab_title);
-                case POS_LICENSE -> tab.setText(R.string.about_license_tab_title);
+                default ->
+                        tab.setText(R.string.about_credits_tab_title);
+                case POS_CONTRIB ->
+                        tab.setText(R.string.about_contribution_tab_title);
+                case POS_LICENSE ->
+                        tab.setText(R.string.about_license_tab_title);
             }
         }).attach();
     }

@@ -8,7 +8,7 @@ import android.view.Menu;
 import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 
-import it.niedermann.owncloud.notes.R;
+import com.google.android.material.R;
 
 public abstract class BrandedActivity extends AppCompatActivity implements Branded {
 
@@ -20,7 +20,7 @@ public abstract class BrandedActivity extends AppCompatActivity implements Brand
         super.onStart();
 
         final var typedValue = new TypedValue();
-        getTheme().resolveAttribute(com.google.android.material.R.attr.colorAccent, typedValue, true);
+        getTheme().resolveAttribute(R.attr.colorAccent, typedValue, true);
         colorAccent = typedValue.data;
 
         readBrandMainColorLiveData(this).observe(this, this::applyBrand);

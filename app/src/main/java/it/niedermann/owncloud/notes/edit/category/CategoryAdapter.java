@@ -52,7 +52,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         switch (category.id) {
             case addItemId -> {
-                final var wrapDrawable = DrawableCompat.wrap(Objects.requireNonNull(ContextCompat.getDrawable(context, category.icon)));
+                final var wrapDrawable = DrawableCompat.wrap(
+                        Objects.requireNonNull(ContextCompat.getDrawable(
+                                context, category.icon)));
                 DrawableCompat.setTint(wrapDrawable, ContextCompat.getColor(context, R.color.icon_color_default));
                 categoryViewHolder.getIcon().setImageDrawable(wrapDrawable);
                 categoryViewHolder.getCategoryWrapper().setOnClickListener((v) -> listener.onCategoryAdded());

@@ -142,10 +142,12 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
     @NonNull
     private static String getCategoryTitle(@NonNull Context context, int displayMode, String category) {
         return switch (displayMode) {
-            case MODE_DISPLAY_STARRED -> context.getString(R.string.label_favorites);
-            case MODE_DISPLAY_CATEGORY -> "".equals(category)
-                    ? context.getString(R.string.action_uncategorized)
-                    : category;
+            case MODE_DISPLAY_STARRED ->
+                    context.getString(R.string.label_favorites);
+            case MODE_DISPLAY_CATEGORY ->
+                    "".equals(category)
+                        ? context.getString(R.string.action_uncategorized)
+                        : category;
             default -> context.getString(R.string.app_name);
         };
     }

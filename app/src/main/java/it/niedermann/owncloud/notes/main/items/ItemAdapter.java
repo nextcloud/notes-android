@@ -144,7 +144,9 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         switch (getItemViewType(position)) {
             case TYPE_SECTION ->
                     ((SectionViewHolder) holder).bind((SectionItem) itemList.get(position));
-            case TYPE_NOTE_WITH_EXCERPT, TYPE_NOTE_WITHOUT_EXCERPT, TYPE_NOTE_ONLY_TITLE ->
+            case TYPE_NOTE_WITH_EXCERPT,
+                    TYPE_NOTE_WITHOUT_EXCERPT,
+                    TYPE_NOTE_ONLY_TITLE ->
                     ((NoteViewHolder) holder).bind(isSelected, (Note) itemList.get(position), showCategory, color, searchQuery);
         }
     }
