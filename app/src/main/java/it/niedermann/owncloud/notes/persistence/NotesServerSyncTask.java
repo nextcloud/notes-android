@@ -118,7 +118,7 @@ abstract class NotesServerSyncTask extends Thread {
             try {
                 Note remoteNote;
                 switch (note.getStatus()) {
-                    case LOCAL_EDITED:
+                    case LOCAL_EDITED -> {
                         Log.v(TAG, "   ...create/edit");
                         if (note.getRemoteId() != null) {
                             Log.v(TAG, "   ...Note has remoteId → try to edit");
@@ -160,8 +160,8 @@ abstract class NotesServerSyncTask extends Thread {
                         }
                         // Please note, that db.updateNote() realized an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
                         repo.updateIfNotModifiedLocallyDuringSync(note.getId(), remoteNote.getModified().getTimeInMillis(), remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getETag(), remoteNote.getContent(), generateNoteExcerpt(remoteNote.getContent(), remoteNote.getTitle()), note.getContent(), note.getCategory(), note.getFavorite());
-                        break;
-                    case LOCAL_DELETED:
+                    }
+                    case LOCAL_DELETED -> {
                         if (note.getRemoteId() == null) {
                             Log.v(TAG, "   ...delete (only local, since it has never been synchronized)");
                         } else {
@@ -177,9 +177,9 @@ abstract class NotesServerSyncTask extends Thread {
                         }
                         // Please note, that db.deleteNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
                         repo.deleteByNoteId(note.getId(), LOCAL_DELETED);
-                        break;
-                    default:
-                        throw new IllegalStateException("Unknown State of Note " + note + ": " + note.getStatus());
+                    }
+                    default ->
+                            throw new IllegalStateException("Unknown State of Note " + note + ": " + note.getStatus());
                 }
             } catch (NextcloudHttpRequestFailedException e) {
                 if (e.getStatusCode() == HTTP_NOT_MODIFIED) {

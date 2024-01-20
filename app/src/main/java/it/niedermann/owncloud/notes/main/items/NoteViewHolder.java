@@ -105,7 +105,7 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
     public abstract View getNoteSwipeable();
 
     public ItemDetailsLookup.ItemDetails<Long> getItemDetails() {
-        return new ItemDetailsLookup.ItemDetails<Long>() {
+        return new ItemDetailsLookup.ItemDetails<>() {
             @Override
             public int getPosition() {
                 return getAdapterPosition();

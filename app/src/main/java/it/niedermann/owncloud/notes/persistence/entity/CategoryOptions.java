@@ -74,9 +74,7 @@ public class CategoryOptions implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof CategoryOptions)) return false;
-
-        CategoryOptions that = (CategoryOptions) o;
+        if (!(o instanceof CategoryOptions that)) return false;
 
         if (accountId != that.accountId) return false;
         if (!category.equals(that.category)) return false;

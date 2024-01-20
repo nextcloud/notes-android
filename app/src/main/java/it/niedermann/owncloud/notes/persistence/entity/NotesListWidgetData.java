@@ -8,6 +8,8 @@ import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.Index;
 
+import java.util.Objects;
+
 import it.niedermann.owncloud.notes.widget.AbstractWidgetData;
 
 @Entity(
@@ -61,13 +63,11 @@ public class NotesListWidgetData extends AbstractWidgetData {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof NotesListWidgetData)) return false;
+        if (!(o instanceof NotesListWidgetData that)) return false;
         if (!super.equals(o)) return false;
 
-        NotesListWidgetData that = (NotesListWidgetData) o;
-
         if (mode != that.mode) return false;
-        return category != null ? category.equals(that.category) : that.category == null;
+        return Objects.equals(category, that.category);
     }
 
     @Override

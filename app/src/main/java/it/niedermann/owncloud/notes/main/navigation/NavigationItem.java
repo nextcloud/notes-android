@@ -10,6 +10,8 @@ import it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType;
 
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.UNCATEGORIZED;
 
+import java.util.Objects;
+
 public class NavigationItem {
     @NonNull
     public String id;
@@ -52,10 +54,8 @@ public class NavigationItem {
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
-            if (!(o instanceof CategoryNavigationItem)) return false;
+            if (!(o instanceof CategoryNavigationItem that)) return false;
             if (!super.equals(o)) return false;
-
-            CategoryNavigationItem that = (CategoryNavigationItem) o;
 
             if (accountId != that.accountId) return false;
             return category.equals(that.category);
@@ -73,14 +73,12 @@ public class NavigationItem {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof NavigationItem)) return false;
-
-        final var that = (NavigationItem) o;
+        if (!(o instanceof NavigationItem that)) return false;
 
         if (icon != that.icon) return false;
         if (!id.equals(that.id)) return false;
         if (!label.equals(that.label)) return false;
-        if (count != null ? !count.equals(that.count) : that.count != null) return false;
+        if (!Objects.equals(count, that.count)) return false;
         return type == that.type;
     }
 

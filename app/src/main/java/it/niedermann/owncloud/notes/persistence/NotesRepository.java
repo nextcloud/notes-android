@@ -653,20 +653,16 @@ public class NotesRepository {
             int orderIndex = sortingMethod.getId();
 
             switch (selectedCategory.getType()) {
-                case FAVORITES: {
+                case FAVORITES -> {
                     sp.putInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_favorites), orderIndex);
-                    break;
                 }
-                case UNCATEGORIZED: {
+                case UNCATEGORIZED -> {
                     sp.putInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.action_uncategorized), orderIndex);
-                    break;
                 }
-                case RECENT: {
+                case RECENT -> {
                     sp.putInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_all_notes), orderIndex);
-                    break;
                 }
-                case DEFAULT_CATEGORY:
-                default: {
+                default -> {
                     final String category = selectedCategory.getCategory();
                     if (category != null) {
                         if (db.getCategoryOptionsDao().modifyCategoryOrder(accountId, category, sortingMethod) == 0) {
@@ -680,7 +676,6 @@ public class NotesRepository {
                     } else {
                         throw new IllegalStateException("Tried to modify category order for " + ENavigationCategoryType.DEFAULT_CATEGORY + "but category is null.");
                     }
-                    break;
                 }
             }
             sp.apply();
@@ -707,20 +702,16 @@ public class NotesRepository {
 
         switch (selectedCategory.getType()) {
             // TODO make this account specific
-            case RECENT: {
+            case RECENT -> {
                 prefKey = context.getString(R.string.action_sorting_method) + ' ' + context.getString(R.string.label_all_notes);
-                break;
             }
-            case FAVORITES: {
+            case FAVORITES -> {
                 prefKey = context.getString(R.string.action_sorting_method) + ' ' + context.getString(R.string.label_favorites);
-                break;
             }
-            case UNCATEGORIZED: {
+            case UNCATEGORIZED -> {
                 prefKey = context.getString(R.string.action_sorting_method) + ' ' + context.getString(R.string.action_uncategorized);
-                break;
             }
-            case DEFAULT_CATEGORY:
-            default: {
+            default -> {
                 final String category = selectedCategory.getCategory();
                 if (category != null) {
                     return db.getCategoryOptionsDao().getCategoryOrder(selectedCategory.getAccountId(), category);
@@ -814,9 +805,7 @@ public class NotesRepository {
         if (account == null) {
             Log.i(TAG, SingleSignOnAccount.class.getSimpleName() + " is null. Is this a local account?");
         } else {
-            if (syncActive.get(account.getId()) == null) {
-                syncActive.put(account.getId(), false);
-            }
+            syncActive.putIfAbsent(account.getId(), false);
             Log.d(TAG, "Sync requested (" + (onlyLocalChanges ? "onlyLocalChanges" : "full") + "; " + (Boolean.TRUE.equals(syncActive.get(account.getId())) ? "sync active" : "sync NOT active") + ") ...");
             if (isSyncPossible() && (!Boolean.TRUE.equals(syncActive.get(account.getId())) || onlyLocalChanges)) {
                 syncActive.put(account.getId(), true);

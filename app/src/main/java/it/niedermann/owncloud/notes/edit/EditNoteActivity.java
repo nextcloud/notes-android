@@ -397,17 +397,10 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     @Override
     public void changeMode(@NonNull Mode mode, boolean reloadNote) {
         switch (mode) {
-            case EDIT:
-                launchExistingNote(getAccountId(), getNoteId(), getString(R.string.pref_value_mode_edit), reloadNote);
-                break;
-            case PREVIEW:
-                launchExistingNote(getAccountId(), getNoteId(), getString(R.string.pref_value_mode_preview), reloadNote);
-                break;
-            case DIRECT_EDIT:
-                launchExistingNote(getAccountId(), getNoteId(), getString(R.string.pref_value_mode_direct_edit), reloadNote);
-                break;
-            default:
-                throw new IllegalStateException("Unknown mode: " + mode);
+            case EDIT -> launchExistingNote(getAccountId(), getNoteId(), getString(R.string.pref_value_mode_edit), reloadNote);
+            case PREVIEW -> launchExistingNote(getAccountId(), getNoteId(), getString(R.string.pref_value_mode_preview), reloadNote);
+            case DIRECT_EDIT -> launchExistingNote(getAccountId(), getNoteId(), getString(R.string.pref_value_mode_direct_edit), reloadNote);
+            default -> throw new IllegalStateException("Unknown mode: " + mode);
         }
     }
 

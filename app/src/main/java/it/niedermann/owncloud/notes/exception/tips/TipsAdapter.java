@@ -88,19 +88,13 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsViewHolder> {
             } else if (throwable instanceof NextcloudHttpRequestFailedException) {
                 final int statusCode = ((NextcloudHttpRequestFailedException) throwable).getStatusCode();
                 switch (statusCode) {
-                    case 302:
+                    case 302 -> {
                         add(R.string.error_dialog_server_app_enabled);
                         add(R.string.error_dialog_redirect);
-                        break;
-                    case 500:
-                        add(R.string.error_dialog_check_server_logs);
-                        break;
-                    case 503:
-                        add(R.string.error_dialog_check_maintenance);
-                        break;
-                    case 507:
-                        add(R.string.error_dialog_insufficient_storage);
-                        break;
+                    }
+                    case 500 -> add(R.string.error_dialog_check_server_logs);
+                    case 503 -> add(R.string.error_dialog_check_maintenance);
+                    case 507 -> add(R.string.error_dialog_insufficient_storage);
                 }
             } else if (throwable instanceof UnknownErrorException) {
                 if ("com.nextcloud.android.sso.QueryParam".equals(throwable.getMessage())) {

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.DEFAULT_CATEGORY;
 
@@ -47,13 +48,11 @@ public class NavigationCategory implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof NavigationCategory)) return false;
-
-        NavigationCategory that = (NavigationCategory) o;
+        if (!(o instanceof NavigationCategory that)) return false;
 
         if (accountId != that.accountId) return false;
         if (type != that.type) return false;
-        return category != null ? category.equals(that.category) : that.category == null;
+        return Objects.equals(category, that.category);
     }
 
     @Override
