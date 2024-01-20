@@ -48,7 +48,8 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
     @Override
     public void onStart() {
-        this.color = ContextCompat.getColor(requireContext(), R.color.defaultBrand);
+        this.color = ContextCompat.getColor(
+                requireContext(), R.color.defaultBrand);
         super.onStart();
     }
 
