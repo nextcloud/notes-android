@@ -16,7 +16,7 @@
     <string name="simple_edit">Редагувати</string>
     <string name="simple_remove">Вилучити</string>
     <string name="action_edit_save">Зберегти</string>
-    <string name="simple_about">Про програму</string>
+    <string name="simple_about">Про застосунок</string>
     <string name="simple_link">Посилання</string>
     <string name="action_note_deleted">Вилучено %1$s</string>
     <string name="action_note_restored">Відновлено %1$s</string>
@@ -75,7 +75,7 @@
     <string name="about_translate_title">Перекласти</string>
     <string name="about_translate">Приєднуйтесь до команди Nextcloud на Transifex та допоможіть нам перекласти цей застосунок: %1$s</string>
     <string name="about_app_license_title">Ліцензія застосунку</string>
-    <string name="about_app_license">Ця програма ліцензована під GNU GENERAL PUBLIC LICENSE v3+.</string>
+    <string name="about_app_license">Цей застосунок ліцензовано ліцензією GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Переглянути ліцензію</string>
     <string name="about_icons_disclaimer_title">Значки</string>
     <string name="about_icons_disclaimer_app_icon">Для оригінального розміру піктограми див. %1$s.</string>
@@ -152,7 +152,7 @@
     <string name="unlock_notes">Розблокувати нотатки</string>
     <string name="error_dialog_title">От халепа!</string>
     <string name="error_dialog_tip_token_mismatch_retry">Спробуйте примусово закрити застосунок та наново запустити. Можливо, встановлено неправильне з\'єднання із застосунком Nextcloud.</string>
-    <string name="error_dialog_tip_token_mismatch_clear_storage">Якщо проблема не зникає, спробуйте очистити пам’ять обох програм: Nextcloud та Нотатки Nextcloud.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Якщо проблема не зникає, спробуйте очистити пам’ять обох застосунків: Nextcloud та Нотатки Nextcloud.</string>
     <string name="error_dialog_tip_clear_storage">Щоби очистити сховище, відкрийте вкладку інформації у застосунку та виберіть Пам\'ять → Очистити пам\'ять. ⚠️ Увага: це призведе до вилучення усіх нотаток, які ще не було синхронізовано!</string>
     <string name="error_dialog_tip_files_outdated">Ваш застосунок Nextcloud може бути застарілим. Будь ласка, відвідайте Play Маркет або F-Droid, щоби оновити ваш застосунок до останньої версії.</string>
     <string name="error_dialog_tip_files_force_stop">Щось, здається, не так із вашим застосунком Nextcloud. Спробуйте примусово зупинити обидва застосунки: Nextcloud та Нотатки Nextcloud.</string>
@@ -165,7 +165,7 @@
     <string name="error_dialog_insufficient_storage">Ваш сервер Nextcloud не має вільного місця. Будь ласка, вилучіть непотрібні файлі, щоби можна було виконувати синхронізацію змін на пристрої з хмарою.</string>
     <string name="error_dialog_we_need_info">Нам потрібна наступна технічна інформація, щоб допомогти вам:</string>
     <string name="error_dialog_server_app_enabled">Переконайтесь, що ви встановили та увімкнули застосунок \"Нотатки\" на своєму сервері.</string>
-    <string name="error_dialog_redirect">Ваш сервер відповів кодом стану HTTP 302, що означає, що ви не встановили програму Нотатки на своєму сервері або щось налаштовано неправильно. Це може бути спричинено нестандартними перевизначеннями у файлі .htaccess або програмами Nextcloud, як-от OID-клієнт.</string>
+    <string name="error_dialog_redirect">Ваш сервер відповів кодом стану HTTP 302, що означає, що ви не встановили застосунок \"Нотатки\" на своєму сервері або щось налаштовано неправильно. Це може бути спричинено нестандартними перевизначеннями у файлі .htaccess або програмами Nextcloud, як-от OID-клієнт.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Вимкніть усі оптимізації батареї для застосунків Nextcloud та Нотатки Nextcloud.</string>
     <string name="error_dialog_min_version">Застосунок \"Нотатки\" для Android вимагає версію не менше 3.18 застосунку Nextcloud для Android.</string>
     <string name="added_content">Додано \"%1$s\"</string>
@@ -229,7 +229,7 @@
     <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Контекстне форматування</string>
-    <string name="formatting_help_cbf_body_1">Головною метою програми Нотатки є надання інструменту, що не відволікає увагу. Хоча ви зможете форматувати свої тексти за допомогою Markdown. Для різних із наведених нижче прикладів ви можете використовувати ярлики, щоб форматувати нотатки, не вводячи коди нижче.</string>
+    <string name="formatting_help_cbf_body_1">Застосунок \"Нотатки\" надає можливість вести нотатки без відволікання уваги. Хоча ви зможете форматувати свої тексти за допомогою Markdown. Для різних із наведених нижче прикладів ви можете використовувати ярлики, щоб форматувати нотатки, не вводячи коди нижче.</string>
     <string name="formatting_help_cbf_body_2">Просто виберіть діапазон тексту або натисніть на курсор у будь-якій позиції, і ви отримаєте спливаюче меню, де поряд із типовими елементами %1$s, %2$s, %3$s містяться елементи на зразок %4$s або %5$s.</string>
 
     <string name="formatting_help_text_title">Текст</string>

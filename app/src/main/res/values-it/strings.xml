@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Note</string>
-    <string name="app_name_long">Nextcloud Notes</string>
+    <string name="app_name_long">Nextcloud Note</string>
     <string name="label_all_notes">Tutte le note</string>
     <string name="label_favorites">Preferite</string>
     <string name="action_create">Nuova nota</string>
@@ -84,7 +84,7 @@
     <string name="widget_note_list_placeholder">Nessuna nota</string>
     <string name="widget_single_note_title">Nota singola</string>
     <string name="widget_single_note_placeholder_tv">Nota non trovata</string>
-    <string name="widget_not_logged_in">Accedi a Notes prima di utilizzare questo widget</string>
+    <string name="widget_not_logged_in">Accedi a Note prima di utilizzare questo widget</string>
     <string name="widget_entry_fav_contentDescription">L\'icona a stella è utilizzata per marcare un elemento come preferito</string>
 
     <string name="activity_select_single_note">Seleziona nota</string>
@@ -147,10 +147,10 @@
     <string name="unlock_notes">Sblocca note</string>
     <string name="error_dialog_title">Oh no - Cosa succede adesso? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Prova a forzare la chiusura dell\'applicazione e riavviarla nuovamente. Potrebbe essersi verificato un problema di connessione all\'applicazione Nextcloud. </string>
-    <string name="error_dialog_tip_token_mismatch_clear_storage">Se il problema persiste, prova a cancellare l\'archiviazione di entrambe le applicazioni Nextcloud e Nextcloud Notes per risolver il problema.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Se il problema persiste, prova a cancellare l\'archiviazione di entrambe le applicazioni Nextcloud e Nextcloud Note per risolvere il problema.</string>
     <string name="error_dialog_tip_clear_storage">Puoi a cancellare l\'archiviazione aprendo le informazioni dell\'applicazione e selezionando Archiviazione → Cancella archiviazione. ⚠️ Avviso: questo eliminerà le note non ancora sincronizzate!</string>
     <string name="error_dialog_tip_files_outdated">La tua applicazioni di Nextcloud sembra essere datata. Visita il Play Store o F-Droid per ottenere l\'ultima versione.</string>
-    <string name="error_dialog_tip_files_force_stop">Sembra che ci sia un problema con la tua applicazione di Nextcloud. Prova a fermare entrambe le applicazioni Nextcloud e Nextcloud Notes.</string>
+    <string name="error_dialog_tip_files_force_stop">Sembra che ci sia un problema con la tua applicazione di Nextcloud. Prova a fermare entrambe le applicazioni Nextcloud e Nextcloud Note.</string>
     <string name="error_dialog_tip_files_delete_storage">Se fermarle non aiuta, puoi provare a cancellare l\'archiviazione di entrambe le applicazioni.</string>
     <string name="error_dialog_timeout_instance">Non è stata ricevuta una risposta dal server nel tempo stabilito. Assicurati che la tua istanza sia correttamente in esecuzione.</string>
     <string name="error_dialog_timeout_toggle">Controlla la tua connessione di rete. A volte disattivare e riattivare i dati mobili o Wi-Fi può aiutare.</string>
@@ -162,7 +162,7 @@
     <string name="error_dialog_server_app_enabled">Assicurati di aver installato e abilitato l\'applicazione \"Note\" sul tuo server.</string>
     <string name="error_dialog_redirect">Il tuo server ha risposto con un codice di stato HTTP 302, che implica che non hai installato l\'applicazione Note sul tuo server o qualcosa non è configurato correttamente. Questo può essere causato da configurazioni personalizzate nel file .htaccess o da applicazioni di Nextcloud come OID Client.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Disabilita tutte le ottimizzazioni della batteria per le applicazioni Nextcloud e Note.</string>
-    <string name="error_dialog_min_version">L\'app Note di Android richiede che l\'app Nextcloud di Android sia almeno alla versione 3.18.</string>
+    <string name="error_dialog_min_version">L\'applicazione Note di Android richiede che l\'applicazione Nextcloud di Android sia almeno alla versione 3.18.</string>
     <string name="added_content">Aggiunto \"%1$s\"</string>
     <string name="shared_text_empty">Il testo condiviso era vuoto</string>
     <string name="append_to_note">Aggiungi a nota</string>
@@ -287,7 +287,7 @@
     <string name="simple_next">Successivo</string>
     <string name="simple_prev">Precedente</string>
     <string name="simple_backup">Backup</string>
-    <string name="backup">Abbiamo rilevato uno stato dell\'app non recuperabile. Fai il backup delle modifiche non sincronizzate e cancella i dati dell\'app Note. </string>
+    <string name="backup">Abbiamo rilevato uno stato dell\'applicazione non recuperabile. Fai il backup delle modifiche non sincronizzate e cancella i dati dell\'applicazione Note. </string>
     <string name="settings_notes_path_description">Cartella in cui salvare le note nel tuo Nextcloud</string>
     <string-array name="settings_file_suffixes">
         <item translatable="false">.txt</item>
