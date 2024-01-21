@@ -595,7 +595,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         util.notes.themeToolbarSearchView(binding.activityNotesListView.searchView);
 
         binding.headerView.setBackgroundColor(color);
-        @ColorInt final int headerTextColor = ColorUtil.INSTANCE.getForegroundColorForBackgroundColor(color);
+        @ColorInt final int headerTextColor = ColorUtil.getForegroundColorForBackgroundColor(color);
         binding.appName.setTextColor(headerTextColor);
         DrawableCompat.setTint(binding.logo.getDrawable(), headerTextColor);
 

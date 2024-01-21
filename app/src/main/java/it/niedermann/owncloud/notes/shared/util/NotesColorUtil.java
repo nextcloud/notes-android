@@ -21,7 +21,7 @@ public final class NotesColorUtil {
         final var key = new ColorPair(colorOne, colorTwo);
         Boolean ret = CONTRAST_RATIO_SUFFICIENT_CACHE.get(key);
         if (ret == null) {
-            ret = ColorUtil.INSTANCE.getContrastRatio(colorOne, colorTwo) > 3d;
+            ret = ColorUtil.getContrastRatio(colorOne, colorTwo) > 3d;
             CONTRAST_RATIO_SUFFICIENT_CACHE.put(key, ret);
             return ret;
         }
@@ -32,7 +32,7 @@ public final class NotesColorUtil {
         final var key = new ColorPair(colorOne, colorTwo);
         var ret = CONTRAST_RATIO_SUFFICIENT_CACHE.get(key);
         if (ret == null) {
-            ret = ColorUtil.INSTANCE.getContrastRatio(colorOne, colorTwo) > 1.47d;
+            ret = ColorUtil.getContrastRatio(colorOne, colorTwo) > 1.47d;
             CONTRAST_RATIO_SUFFICIENT_CACHE.put(key, ret);
             return ret;
         }

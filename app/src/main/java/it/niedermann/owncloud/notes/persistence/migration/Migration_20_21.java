@@ -113,13 +113,13 @@ public final class Migration_20_21 extends Migration {
             values.put("MODIFIED", cursor.getLong(COLUMN_POSITION_MODIFIED) * 1_000);
             values.put("APIVERSION", cursor.getString(COLUMN_POSITION_API_VERSION));
             try {
-                values.put("COLOR", Color.parseColor(ColorUtil.INSTANCE.formatColorToParsableHexString(cursor.getString(COLUMN_POSITION_COLOR))));
+                values.put("COLOR", Color.parseColor(ColorUtil.formatColorToParsableHexString(cursor.getString(COLUMN_POSITION_COLOR))));
             } catch (Exception e) {
                 e.printStackTrace();
                 values.put("COLOR", -16743735);
             }
             try {
-                values.put("TEXTCOLOR", Color.parseColor(ColorUtil.INSTANCE.formatColorToParsableHexString(cursor.getString(COLUMN_POSITION_TEXT_COLOR))));
+                values.put("TEXTCOLOR", Color.parseColor(ColorUtil.formatColorToParsableHexString(cursor.getString(COLUMN_POSITION_TEXT_COLOR))));
             } catch (Exception e) {
                 e.printStackTrace();
                 values.put("TEXTCOLOR", -16777216);

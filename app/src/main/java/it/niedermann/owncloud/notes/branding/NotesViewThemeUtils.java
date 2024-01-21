@@ -125,7 +125,7 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
                                                @ColorInt int colorPrimary,
                                                @ColorInt int colorAccent) {
         if (isDarkMode(context)) { // Dark background
-            if (ColorUtil.INSTANCE.isColorDark(mainColor)) { // Dark brand color
+            if (ColorUtil.isColorDark(mainColor)) { // Dark brand color
                 if (NotesColorUtil.contrastRatioIsSufficient(mainColor, colorPrimary)) { // But also dark text
                     return mainColor;
                 } else {
@@ -139,7 +139,7 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
                 }
             }
         } else { // Light background
-            if (ColorUtil.INSTANCE.isColorDark(mainColor)) { // Dark brand color
+            if (ColorUtil.isColorDark(mainColor)) { // Dark brand color
                 if (NotesColorUtil.contrastRatioIsSufficient(mainColor, colorAccent)) { // But also dark text
                     return Color.argb(77, Color.red(mainColor), Color.green(mainColor), Color.blue(mainColor));
                 } else {

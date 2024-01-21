@@ -38,14 +38,14 @@ public class ExceptionActivity extends AppCompatActivity {
         }
 
         final var adapter = new TipsAdapter(this::startActivity);
-        final String debugInfos = ExceptionUtil.INSTANCE.getDebugInfos(this, throwable, BuildConfig.FLAVOR);
+        final String debugInfos = ExceptionUtil.getDebugInfos(this, throwable, BuildConfig.FLAVOR);
 
         binding.tips.setAdapter(adapter);
         binding.tips.setNestedScrollingEnabled(false);
         binding.toolbar.setTitle(getString(R.string.simple_error));
         binding.message.setText(throwable.getMessage());
         binding.stacktrace.setText(debugInfos);
-        binding.copy.setOnClickListener((v) -> ClipboardUtil.INSTANCE.copyToClipboard(this, getString(R.string.simple_exception), "```\n" + debugInfos + "\n```"));
+        binding.copy.setOnClickListener((v) -> ClipboardUtil.copyToClipboard(this, getString(R.string.simple_exception), "```\n" + debugInfos + "\n```"));
         binding.close.setOnClickListener((v) -> finish());
 
         adapter.setThrowables(Collections.singletonList(throwable));

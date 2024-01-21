@@ -51,14 +51,14 @@ public class CapabilitiesDeserializer implements JsonDeserializer<Capabilities> 
                 final var theming = capabilities.getAsJsonObject(CAPABILITIES_THEMING);
                 if (theming.has(CAPABILITIES_THEMING_COLOR)) {
                     try {
-                        response.setColor(Color.parseColor(ColorUtil.INSTANCE.formatColorToParsableHexString(theming.get(CAPABILITIES_THEMING_COLOR).getAsString())));
+                        response.setColor(Color.parseColor(ColorUtil.formatColorToParsableHexString(theming.get(CAPABILITIES_THEMING_COLOR).getAsString())));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
                 if (theming.has(CAPABILITIES_THEMING_COLOR_TEXT)) {
                     try {
-                        response.setTextColor(Color.parseColor(ColorUtil.INSTANCE.formatColorToParsableHexString(theming.get(CAPABILITIES_THEMING_COLOR_TEXT).getAsString())));
+                        response.setTextColor(Color.parseColor(ColorUtil.formatColorToParsableHexString(theming.get(CAPABILITIES_THEMING_COLOR_TEXT).getAsString())));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
