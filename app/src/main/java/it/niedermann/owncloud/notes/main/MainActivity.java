@@ -65,6 +65,7 @@ import java.util.stream.Collectors;
 
 import it.niedermann.android.util.ColorUtil;
 import it.niedermann.owncloud.notes.LockedActivity;
+import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerListener;
 import it.niedermann.owncloud.notes.accountswitcher.AccountSwitcherDialog;
@@ -136,6 +137,33 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     private ActionMode mActionMode;
 
     boolean canMoveNoteToAnotherAccounts = false;
+
+    private void getNotesListLiveData() {
+        mainViewModel.getNotesListLiveData().observe(this, notes -> {
+            // https://stackoverflow.com/a/37342327
+            itemTouchHelper.attachToRecyclerView(null);
+            itemTouchHelper.attachToRecyclerView(listView);
+            adapter.setItemList(notes);
+            binding.activityNotesListView.progressCircular.setVisibility(GONE);
+            binding.activityNotesListView.emptyContentView.getRoot().setVisibility(notes.size() > 0 ? GONE : VISIBLE);
+            // Remove deleted notes from the selection
+            if (tracker.hasSelection()) {
+                final var deletedNotes = new LinkedList<Long>();
+                for (final var id : tracker.getSelection()) {
+                    if (notes
+                            .stream()
+                            .filter(item -> !item.isSection())
+                            .map(item -> (Note) item)
+                            .noneMatch(item -> item.getId() == id)) {
+                        deletedNotes.add(id);
+                    }
+                }
+                for (final var id : deletedNotes) {
+                    tracker.deselect(id);
+                }
+            }
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -264,30 +292,10 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                 startActivityForResult(createIntent, REQUEST_CODE_CREATE_NOTE);
             });
         });
-        mainViewModel.getNotesListLiveData().observe(this, notes -> {
-            // https://stackoverflow.com/a/37342327
-            itemTouchHelper.attachToRecyclerView(null);
-            itemTouchHelper.attachToRecyclerView(listView);
-            adapter.setItemList(notes);
-            binding.activityNotesListView.progressCircular.setVisibility(GONE);
-            binding.activityNotesListView.emptyContentView.getRoot().setVisibility(notes.size() > 0 ? GONE : VISIBLE);
-            // Remove deleted notes from the selection
-            if (tracker.hasSelection()) {
-                final var deletedNotes = new LinkedList<Long>();
-                for (final var id : tracker.getSelection()) {
-                    if (notes
-                            .stream()
-                            .filter(item -> !item.isSection())
-                            .map(item -> (Note) item)
-                            .noneMatch(item -> item.getId() == id)) {
-                        deletedNotes.add(id);
-                    }
-                }
-                for (final var id : deletedNotes) {
-                    tracker.deselect(id);
-                }
-            }
-        });
+
+        if (!NotesApplication.isLocked()) {
+            getNotesListLiveData();
+        }
         mainViewModel.getSearchTerm().observe(this, adapter::setHighlightSearchQuery);
         mainViewModel.getCategorySortingMethodOfSelectedCategory().observe(this, methodOfCategory -> {
             updateSortMethodIcon(methodOfCategory.second);
@@ -680,6 +688,12 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                 if (RESULT_OK == resultCode) {
                     ActivityCompat.recreate(this);
                     return;
+                }
+                break;
+            }
+            case REQUEST_CODE_UNLOCK: {
+                if (RESULT_OK == resultCode) {
+                    getNotesListLiveData();
                 }
                 break;
             }
