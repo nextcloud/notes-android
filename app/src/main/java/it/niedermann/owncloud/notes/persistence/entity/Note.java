@@ -14,6 +14,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Objects;
 
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.Item;
@@ -218,23 +219,21 @@ public class Note implements Serializable, Item {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Note)) return false;
-
-        Note note = (Note) o;
+        if (!(o instanceof Note note)) return false;
 
         if (id != note.id) return false;
         if (accountId != note.accountId) return false;
         if (favorite != note.favorite) return false;
         if (scrollY != note.scrollY) return false;
-        if (remoteId != null ? !remoteId.equals(note.remoteId) : note.remoteId != null)
+        if (!Objects.equals(remoteId, note.remoteId))
             return false;
         if (status != note.status) return false;
         if (!title.equals(note.title)) return false;
         if (!category.equals(note.category)) return false;
-        if (modified != null ? !modified.equals(note.modified) : note.modified != null)
+        if (!Objects.equals(modified, note.modified))
             return false;
         if (!content.equals(note.content)) return false;
-        if (eTag != null ? !eTag.equals(note.eTag) : note.eTag != null) return false;
+        if (!Objects.equals(eTag, note.eTag)) return false;
         return excerpt.equals(note.excerpt);
     }
 

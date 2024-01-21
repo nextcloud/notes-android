@@ -51,9 +51,7 @@ public class SingleNoteWidgetData extends AbstractWidgetData {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof SingleNoteWidgetData)) return false;
-
-        SingleNoteWidgetData that = (SingleNoteWidgetData) o;
+        if (!(o instanceof SingleNoteWidgetData that)) return false;
 
         return noteId == that.noteId;
     }

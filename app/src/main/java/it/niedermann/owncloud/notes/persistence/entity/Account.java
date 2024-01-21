@@ -12,6 +12,7 @@ import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Objects;
 
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 
@@ -180,9 +181,7 @@ public class Account implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Account)) return false;
-
-        Account account = (Account) o;
+        if (!(o instanceof Account account)) return false;
 
         if (id != account.id) return false;
         if (color != account.color) return false;
@@ -190,15 +189,14 @@ public class Account implements Serializable {
         if (!url.equals(account.url)) return false;
         if (!userName.equals(account.userName)) return false;
         if (!accountName.equals(account.accountName)) return false;
-        if (eTag != null ? !eTag.equals(account.eTag) : account.eTag != null) return false;
-        if (modified != null ? !modified.equals(account.modified) : account.modified != null)
+        if (!Objects.equals(eTag, account.eTag)) return false;
+        if (!Objects.equals(modified, account.modified))
             return false;
-        if (apiVersion != null ? !apiVersion.equals(account.apiVersion) : account.apiVersion != null)
+        if (!Objects.equals(apiVersion, account.apiVersion))
             return false;
-        if (capabilitiesETag != null ? !capabilitiesETag.equals(account.capabilitiesETag) : account.capabilitiesETag != null)
+        if (!Objects.equals(capabilitiesETag, account.capabilitiesETag))
             return false;
-        if (directEditingAvailable != account.directEditingAvailable) return false;
-        return true;
+        return directEditingAvailable == account.directEditingAvailable;
     }
 
     @Override

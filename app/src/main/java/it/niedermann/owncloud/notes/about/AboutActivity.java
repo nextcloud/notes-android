@@ -34,17 +34,13 @@ public class AboutActivity extends LockedActivity {
         binding.pager.setAdapter(new TabsStateAdapter(this));
         // generate title based on given position
         new TabLayoutMediator(binding.tabs, binding.pager, (tab, position) -> {
-            switch (position) {
-                default: // Fall-through to credits tab
-                case POS_CREDITS:
-                    tab.setText(R.string.about_credits_tab_title);
-                    break;
-                case POS_CONTRIB:
-                    tab.setText(R.string.about_contribution_tab_title);
-                    break;
-                case POS_LICENSE:
-                    tab.setText(R.string.about_license_tab_title);
-                    break;
+            switch (position) { // Fall-through to credits tab
+                default ->
+                        tab.setText(R.string.about_credits_tab_title);
+                case POS_CONTRIB ->
+                        tab.setText(R.string.about_contribution_tab_title);
+                case POS_LICENSE ->
+                        tab.setText(R.string.about_license_tab_title);
             }
         }).attach();
     }
@@ -74,17 +70,11 @@ public class AboutActivity extends LockedActivity {
         @NonNull
         @Override
         public Fragment createFragment(int position) {
-            switch (position) {
-                default: // Fall-through to credits tab
-                case POS_CREDITS:
-                    return new AboutFragmentCreditsTab();
-
-                case POS_CONTRIB:
-                    return new AboutFragmentContributingTab();
-
-                case POS_LICENSE:
-                    return new AboutFragmentLicenseTab();
-            }
+            return switch (position) { // Fall-through to credits tab
+                default -> new AboutFragmentCreditsTab();
+                case POS_CONTRIB -> new AboutFragmentContributingTab();
+                case POS_LICENSE -> new AboutFragmentLicenseTab();
+            };
         }
     }
 

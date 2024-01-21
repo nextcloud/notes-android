@@ -49,9 +49,7 @@ public abstract class AbstractWidgetData {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof AbstractWidgetData)) return false;
-
-        AbstractWidgetData that = (AbstractWidgetData) o;
+        if (!(o instanceof AbstractWidgetData that)) return false;
 
         if (id != that.id) return false;
         if (accountId != that.accountId) return false;

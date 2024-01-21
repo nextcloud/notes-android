@@ -88,7 +88,7 @@ public class ImportAccountActivity extends AppCompatActivity {
             AccountImporter.onActivityResult(requestCode, resultCode, data, ImportAccountActivity.this, ssoAccount -> {
                 runOnUiThread(() -> binding.progressCircular.setVisibility(View.VISIBLE));
 
-                SingleAccountHelper.setCurrentAccount(getApplicationContext(), ssoAccount.name);
+                SingleAccountHelper.commitCurrentAccount(getApplicationContext(), ssoAccount.name);
                 executor.submit(() -> {
                     Log.i(TAG, "Added account: " + "name:" + ssoAccount.name + ", " + ssoAccount.url + ", userId" + ssoAccount.userId);
                     try {
@@ -135,7 +135,7 @@ public class ImportAccountActivity extends AppCompatActivity {
                     } catch (Throwable t) {
                         t.printStackTrace();
                         ApiProvider.getInstance().invalidateAPICache(ssoAccount);
-                        SingleAccountHelper.setCurrentAccount(this, null);
+                        SingleAccountHelper.commitCurrentAccount(this, null);
                         runOnUiThread(() -> {
                             restoreCleanState();
                             if (t instanceof NextcloudHttpRequestFailedException && ((NextcloudHttpRequestFailedException) t).getStatusCode() == HttpURLConnection.HTTP_UNAVAILABLE) {

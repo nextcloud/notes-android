@@ -2,6 +2,8 @@ package it.niedermann.owncloud.notes.persistence.entity;
 
 import androidx.room.Ignore;
 
+import java.util.Objects;
+
 public class CategoryWithNotesCount {
 
     private long accountId;
@@ -46,14 +48,12 @@ public class CategoryWithNotesCount {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof CategoryWithNotesCount)) return false;
-
-        CategoryWithNotesCount that = (CategoryWithNotesCount) o;
+        if (!(o instanceof CategoryWithNotesCount that)) return false;
 
         if (accountId != that.accountId) return false;
-        if (category != null ? !category.equals(that.category) : that.category != null)
+        if (!Objects.equals(category, that.category))
             return false;
-        return totalNotes != null ? totalNotes.equals(that.totalNotes) : that.totalNotes == null;
+        return Objects.equals(totalNotes, that.totalNotes);
     }
 
     @Override

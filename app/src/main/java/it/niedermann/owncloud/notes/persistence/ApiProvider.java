@@ -124,7 +124,7 @@ public class ApiProvider {
         if (API_CACHE.containsKey(ssoAccount.name)) {
             final var nextcloudAPI = API_CACHE.get(ssoAccount.name);
             if (nextcloudAPI != null) {
-                nextcloudAPI.stop();
+                nextcloudAPI.close();
             }
             API_CACHE.remove(ssoAccount.name);
         }
@@ -141,7 +141,7 @@ public class ApiProvider {
             if (API_CACHE.containsKey(key)) {
                 final var nextcloudAPI = API_CACHE.get(key);
                 if (nextcloudAPI != null) {
-                    nextcloudAPI.stop();
+                    nextcloudAPI.close();
                 }
                 API_CACHE.remove(key);
             }

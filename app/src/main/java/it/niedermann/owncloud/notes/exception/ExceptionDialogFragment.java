@@ -57,7 +57,7 @@ public class ExceptionDialogFragment extends AppCompatDialogFragment {
 
         final var adapter = new TipsAdapter((actionIntent) -> requireActivity().startActivity(actionIntent));
 
-        final String debugInfos = ExceptionUtil.INSTANCE.getDebugInfos(requireContext(), throwables, BuildConfig.FLAVOR);
+        final String debugInfos = ExceptionUtil.getDebugInfos(requireContext(), throwables, BuildConfig.FLAVOR);
 
         binding.tips.setAdapter(adapter);
         binding.stacktrace.setText(debugInfos);
@@ -67,7 +67,7 @@ public class ExceptionDialogFragment extends AppCompatDialogFragment {
         return new MaterialAlertDialogBuilder(requireActivity())
                 .setView(binding.getRoot())
                 .setTitle(R.string.error_dialog_title)
-                .setPositiveButton(android.R.string.copy, (a, b) -> ClipboardUtil.INSTANCE.copyToClipboard(requireContext(), getString(R.string.simple_exception), "```\n" + debugInfos + "\n```"))
+                .setPositiveButton(android.R.string.copy, (a, b) -> ClipboardUtil.copyToClipboard(requireContext(), getString(R.string.simple_exception), "```\n" + debugInfos + "\n```"))
                 .setNegativeButton(R.string.simple_close, null)
                 .create();
     }

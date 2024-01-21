@@ -231,26 +231,21 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             fabCreate.show();
 
             switch (selectedCategory.getType()) {
-                case RECENT: {
+                case RECENT -> {
                     activityBinding.searchText.setText(getString(R.string.search_in_all));
-                    break;
                 }
-                case FAVORITES: {
+                case FAVORITES -> {
                     activityBinding.searchText.setText(getString(R.string.search_in_category, getString(R.string.label_favorites)));
-                    break;
                 }
-                case UNCATEGORIZED: {
+                case UNCATEGORIZED -> {
                     activityBinding.searchText.setText(getString(R.string.search_in_category, getString(R.string.action_uncategorized)));
-                    break;
                 }
-                case DEFAULT_CATEGORY:
-                default: {
+                default -> {
                     final String category = selectedCategory.getCategory();
                     if (category == null) {
                         throw new IllegalStateException(NavigationCategory.class.getSimpleName() + " type is " + DEFAULT_CATEGORY + ", but category is null.");
                     }
                     activityBinding.searchText.setText(getString(R.string.search_in_category, NoteUtil.extendCategory(category)));
-                    break;
                 }
             }
 
@@ -368,7 +363,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             try {
                 // It is possible that after the deletion of the last account, this onResponse gets called before the ImportAccountActivity gets started.
                 if (SingleAccountHelper.getCurrentSingleSignOnAccount(this) != null) {
-                    mainViewModel.synchronizeNotes(currentAccount, new IResponseCallback<Void>() {
+                    mainViewModel.synchronizeNotes(currentAccount, new IResponseCallback<>() {
                         @Override
                         public void onSuccess(Void v) {
                             Log.d(TAG, "Successfully synchronized notes for " + currentAccount.getAccountName());
@@ -505,7 +500,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
         tracker = ItemSelectionTracker.build(listView, adapter);
         adapter.setTracker(tracker);
-        tracker.addObserver(new SelectionTracker.SelectionObserver<Long>() {
+        tracker.addObserver(new SelectionTracker.SelectionObserver<>() {
                                 @Override
                                 public void onSelectionChanged() {
                                     super.onSelectionChanged();
@@ -541,19 +536,16 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                 // update current selection
                 if (item.type != null) {
                     switch (item.type) {
-                        case RECENT: {
+                        case RECENT -> {
                             mainViewModel.postSelectedCategory(new NavigationCategory(RECENT));
-                            break;
                         }
-                        case FAVORITES: {
+                        case FAVORITES -> {
                             mainViewModel.postSelectedCategory(new NavigationCategory(FAVORITES));
-                            break;
                         }
-                        case UNCATEGORIZED: {
+                        case UNCATEGORIZED -> {
                             mainViewModel.postSelectedCategory(new NavigationCategory(UNCATEGORIZED));
-                            break;
                         }
-                        default: {
+                        default -> {
                             if (item.getClass() == NavigationItem.CategoryNavigationItem.class) {
                                 mainViewModel.postSelectedCategory(new NavigationCategory(((NavigationItem.CategoryNavigationItem) item).accountId, ((NavigationItem.CategoryNavigationItem) item).category));
                             } else {
@@ -603,7 +595,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         util.notes.themeToolbarSearchView(binding.activityNotesListView.searchView);
 
         binding.headerView.setBackgroundColor(color);
-        @ColorInt final int headerTextColor = ColorUtil.INSTANCE.getForegroundColorForBackgroundColor(color);
+        @ColorInt final int headerTextColor = ColorUtil.getForegroundColorForBackgroundColor(color);
         binding.appName.setTextColor(headerTextColor);
         DrawableCompat.setTint(binding.logo.getDrawable(), headerTextColor);
 
@@ -670,20 +662,18 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         super.onActivityResult(requestCode, resultCode, data);
 
         switch (requestCode) {
-            case REQUEST_CODE_CREATE_NOTE: {
+            case REQUEST_CODE_CREATE_NOTE -> {
                 listView.scrollToPosition(0);
-                break;
             }
-            case REQUEST_CODE_SERVER_SETTINGS: {
+            case REQUEST_CODE_SERVER_SETTINGS -> {
                 // Recreate activity completely, because theme switching makes problems when only invalidating the views.
                 // @see https://github.com/nextcloud/notes-android/issues/529
                 if (RESULT_OK == resultCode) {
                     ActivityCompat.recreate(this);
                     return;
                 }
-                break;
             }
-            default: {
+            default -> {
                 try {
                     AccountImporter.onActivityResult(requestCode, resultCode, data, this, (ssoAccount) -> {
                         CapabilitiesWorker.update(this);
@@ -695,7 +685,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
                                 final var capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, null, ApiProvider.getInstance());
                                 final String displayName = CapabilitiesClient.getDisplayName(getApplicationContext(), ssoAccount, ApiProvider.getInstance());
-                                final var status$ = mainViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities, displayName, new IResponseCallback<Account>() {
+                                final var status$ = mainViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities, displayName, new IResponseCallback<>() {
                                     @Override
                                     public void onSuccess(Account result) {
                                         executor.submit(() -> {

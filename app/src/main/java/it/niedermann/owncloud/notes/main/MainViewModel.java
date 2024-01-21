@@ -121,7 +121,7 @@ public class MainViewModel extends AndroidViewModel {
     public void postCurrentAccount(@NonNull Account account) {
         state.set(KEY_CURRENT_ACCOUNT, account);
         BrandingUtil.saveBrandColor(getApplication(), account.getColor());
-        SingleAccountHelper.setCurrentAccount(getApplication(), account.getAccountName());
+        SingleAccountHelper.commitCurrentAccount(getApplication(), account.getAccountName());
 
         final var currentAccount = this.currentAccount.getValue();
         // If only ETag or colors change, we must not reset the navigation
@@ -155,14 +155,10 @@ public class MainViewModel extends AndroidViewModel {
 
         // Close sub categories
         switch (selectedCategory.getType()) {
-            case RECENT:
-            case FAVORITES:
-            case UNCATEGORIZED: {
+            case RECENT, FAVORITES, UNCATEGORIZED -> {
                 postExpandedCategory(null);
-                break;
             }
-            case DEFAULT_CATEGORY:
-            default: {
+            default -> {
                 final String category = selectedCategory.getCategory();
                 if (category == null) {
                     postExpandedCategory(null);
@@ -175,7 +171,6 @@ public class MainViewModel extends AndroidViewModel {
                         postExpandedCategory(null);
                     }
                 }
-                break;
             }
         }
     }
@@ -230,29 +225,25 @@ public class MainViewModel extends AndroidViewModel {
                                 Log.v(TAG, "[getNotesListLiveData] - sortMethod: " + sortingMethod.second);
                                 final LiveData<List<Note>> fromDatabase;
                                 switch (selectedCategory.getType()) {
-                                    case RECENT: {
+                                    case RECENT -> {
                                         Log.v(TAG, "[getNotesListLiveData] - category: " + RECENT);
                                         fromDatabase = sortingMethod.second == SORT_MODIFIED_DESC
                                                 ? repo.searchRecentByModified$(accountId, searchQueryOrWildcard)
                                                 : repo.searchRecentLexicographically$(accountId, searchQueryOrWildcard);
-                                        break;
                                     }
-                                    case FAVORITES: {
+                                    case FAVORITES -> {
                                         Log.v(TAG, "[getNotesListLiveData] - category: " + FAVORITES);
                                         fromDatabase = sortingMethod.second == SORT_MODIFIED_DESC
                                                 ? repo.searchFavoritesByModified$(accountId, searchQueryOrWildcard)
                                                 : repo.searchFavoritesLexicographically$(accountId, searchQueryOrWildcard);
-                                        break;
                                     }
-                                    case UNCATEGORIZED: {
+                                    case UNCATEGORIZED -> {
                                         Log.v(TAG, "[getNotesListLiveData] - category: " + UNCATEGORIZED);
                                         fromDatabase = sortingMethod.second == SORT_MODIFIED_DESC
                                                 ? repo.searchUncategorizedByModified$(accountId, searchQueryOrWildcard)
                                                 : repo.searchUncategorizedLexicographically$(accountId, searchQueryOrWildcard);
-                                        break;
                                     }
-                                    case DEFAULT_CATEGORY:
-                                    default: {
+                                    default -> {
                                         final String category = selectedCategory.getCategory();
                                         if (category == null) {
                                             throw new IllegalStateException(NavigationCategory.class.getSimpleName() + " type is " + DEFAULT_CATEGORY + ", but category is null.");
@@ -261,7 +252,6 @@ public class MainViewModel extends AndroidViewModel {
                                         fromDatabase = sortingMethod.second == SORT_MODIFIED_DESC
                                                 ? repo.searchCategoryByModified$(accountId, searchQueryOrWildcard, category)
                                                 : repo.searchCategoryLexicographically$(accountId, searchQueryOrWildcard, category);
-                                        break;
                                     }
                                 }
 
@@ -382,7 +372,7 @@ public class MainViewModel extends AndroidViewModel {
 
     public void synchronizeCapabilitiesAndNotes(@NonNull Account localAccount, @NonNull IResponseCallback<Void> callback) {
         Log.i(TAG, "[synchronizeCapabilitiesAndNotes] Synchronize capabilities for " + localAccount.getAccountName());
-        synchronizeCapabilities(localAccount, new IResponseCallback<Void>() {
+        synchronizeCapabilities(localAccount, new IResponseCallback<>() {
             @Override
             public void onSuccess(Void v) {
                 Log.i(TAG, "[synchronizeCapabilitiesAndNotes] Synchronize notes for " + localAccount.getAccountName());

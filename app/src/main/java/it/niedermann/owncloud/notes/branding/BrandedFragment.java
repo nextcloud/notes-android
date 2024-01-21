@@ -23,9 +23,9 @@ public abstract class BrandedFragment extends Fragment implements Branded {
 
         final var context = requireContext();
         final var typedValue = new TypedValue();
-        context.getTheme().resolveAttribute(R.attr.colorAccent, typedValue, true);
+        context.getTheme().resolveAttribute(com.google.android.material.R.attr.colorAccent, typedValue, true);
         colorAccent = typedValue.data;
-        context.getTheme().resolveAttribute(R.attr.colorPrimary, typedValue, true);
+        context.getTheme().resolveAttribute(com.google.android.material.R.attr.colorPrimary, typedValue, true);
         colorPrimary = typedValue.data;
 
         @ColorInt final int color = BrandingUtil.readBrandMainColor(context);

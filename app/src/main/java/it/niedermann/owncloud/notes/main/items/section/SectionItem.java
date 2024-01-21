@@ -2,6 +2,8 @@ package it.niedermann.owncloud.notes.main.items.section;
 
 import androidx.annotation.NonNull;
 
+import java.util.Objects;
+
 import it.niedermann.owncloud.notes.shared.model.Item;
 
 public class SectionItem implements Item {
@@ -28,11 +30,9 @@ public class SectionItem implements Item {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof SectionItem)) return false;
+        if (!(o instanceof SectionItem that)) return false;
 
-        SectionItem that = (SectionItem) o;
-
-        return title != null ? title.equals(that.title) : that.title == null;
+        return Objects.equals(title, that.title);
     }
 
     @Override

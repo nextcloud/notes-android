@@ -71,7 +71,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 switch (direction) {
-                    case ItemTouchHelper.LEFT:
+                    case ItemTouchHelper.LEFT -> {
                         viewHolder.setIsRecyclable(false);
                         final var dbNoteWithoutContent = (Note) adapter.getItem(viewHolder.getLayoutPosition());
                         final var dbNoteLiveData = mainViewModel.getFullNote$(dbNoteWithoutContent.getId());
@@ -92,15 +92,16 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                                     })
                                     .show();
                         });
-                        break;
-                    case ItemTouchHelper.RIGHT:
+                    }
+                    case ItemTouchHelper.RIGHT -> {
                         viewHolder.setIsRecyclable(false);
                         final var adapterNote = (Note) adapter.getItem(viewHolder.getLayoutPosition());
                         final var toggleLiveData = mainViewModel.toggleFavoriteAndSync(adapterNote.getId());
                         toggleLiveData.observe(lifecycleOwner, (next) -> toggleLiveData.removeObservers(lifecycleOwner));
-                        break;
-                    default:
-                        //NoOp
+                    }
+                    default -> {
+                    }
+                    //NoOp
                 }
             }
 

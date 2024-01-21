@@ -8,7 +8,7 @@ import android.view.Menu;
 import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 
-import it.niedermann.owncloud.notes.R;
+import com.google.android.material.R;
 
 public abstract class BrandedActivity extends AppCompatActivity implements Branded {
 

@@ -74,8 +74,7 @@ public class BrandedSwitchPreference extends SwitchPreference implements Branded
         if (view instanceof Switch) {
             return (Switch) view;
         }
-        if (view instanceof ViewGroup) {
-            final var viewGroup = (ViewGroup) view;
+        if (view instanceof ViewGroup viewGroup) {
             for (int i = 0; i < viewGroup.getChildCount(); i++) {
                 final var child = viewGroup.getChildAt(i);
                 if (child instanceof ViewGroup) {

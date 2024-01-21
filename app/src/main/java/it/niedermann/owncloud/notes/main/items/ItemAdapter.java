@@ -98,33 +98,31 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         if (gridView) {
             switch (viewType) {
-                case TYPE_SECTION: {
+                case TYPE_SECTION -> {
                     return new SectionViewHolder(ItemNotesListSectionItemBinding.inflate(inflater));
                 }
-                case TYPE_NOTE_ONLY_TITLE: {
+                case TYPE_NOTE_ONLY_TITLE -> {
                     return new NoteViewGridHolderOnlyTitle(ItemNotesListNoteItemGridOnlyTitleBinding.inflate(inflater, parent, false), noteClickListener, monospace, fontSize);
                 }
-                case TYPE_NOTE_WITH_EXCERPT:
-                case TYPE_NOTE_WITHOUT_EXCERPT: {
+                case TYPE_NOTE_WITH_EXCERPT, TYPE_NOTE_WITHOUT_EXCERPT -> {
                     return new NoteViewGridHolder(ItemNotesListNoteItemGridBinding.inflate(inflater, parent, false), noteClickListener, monospace, fontSize);
                 }
-                default: {
+                default -> {
                     throw new IllegalArgumentException("Not supported viewType: " + viewType);
                 }
             }
         } else {
             switch (viewType) {
-                case TYPE_SECTION: {
+                case TYPE_SECTION -> {
                     return new SectionViewHolder(ItemNotesListSectionItemBinding.inflate(inflater));
                 }
-                case TYPE_NOTE_WITH_EXCERPT: {
+                case TYPE_NOTE_WITH_EXCERPT -> {
                     return new NoteViewHolderWithExcerpt(ItemNotesListNoteItemWithExcerptBinding.inflate(inflater, parent, false), noteClickListener);
                 }
-                case TYPE_NOTE_ONLY_TITLE:
-                case TYPE_NOTE_WITHOUT_EXCERPT: {
+                case TYPE_NOTE_ONLY_TITLE, TYPE_NOTE_WITHOUT_EXCERPT -> {
                     return new NoteViewHolderWithoutExcerpt(ItemNotesListNoteItemWithoutExcerptBinding.inflate(inflater, parent, false), noteClickListener);
                 }
-                default: {
+                default -> {
                     throw new IllegalArgumentException("Not supported viewType: " + viewType);
                 }
             }
@@ -144,16 +142,12 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             }
         }
         switch (getItemViewType(position)) {
-            case TYPE_SECTION: {
-                ((SectionViewHolder) holder).bind((SectionItem) itemList.get(position));
-                break;
-            }
-            case TYPE_NOTE_WITH_EXCERPT:
-            case TYPE_NOTE_WITHOUT_EXCERPT:
-            case TYPE_NOTE_ONLY_TITLE: {
-                ((NoteViewHolder) holder).bind(isSelected, (Note) itemList.get(position), showCategory, color, searchQuery);
-                break;
-            }
+            case TYPE_SECTION ->
+                    ((SectionViewHolder) holder).bind((SectionItem) itemList.get(position));
+            case TYPE_NOTE_WITH_EXCERPT,
+                    TYPE_NOTE_WITHOUT_EXCERPT,
+                    TYPE_NOTE_ONLY_TITLE ->
+                    ((NoteViewHolder) holder).bind(isSelected, (Note) itemList.get(position), showCategory, color, searchQuery);
         }
     }
 

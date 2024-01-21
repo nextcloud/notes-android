@@ -60,20 +60,17 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
             data = repo.getNoteListWidgetData(appWidgetId);
             Log.v(TAG, "--- data - " + data);
             switch (data.getMode()) {
-                case MODE_DISPLAY_ALL:
-                    dbNotes.addAll(repo.searchRecentByModified(data.getAccountId(), "%"));
-                    break;
-                case MODE_DISPLAY_STARRED:
-                    dbNotes.addAll(repo.searchFavoritesByModified(data.getAccountId(), "%"));
-                    break;
-                case MODE_DISPLAY_CATEGORY:
-                default:
+                case MODE_DISPLAY_ALL ->
+                        dbNotes.addAll(repo.searchRecentByModified(data.getAccountId(), "%"));
+                case MODE_DISPLAY_STARRED ->
+                        dbNotes.addAll(repo.searchFavoritesByModified(data.getAccountId(), "%"));
+                default -> {
                     if (data.getCategory() != null) {
                         dbNotes.addAll(repo.searchCategoryByModified(data.getAccountId(), "%", data.getCategory()));
                     } else {
                         dbNotes.addAll(repo.searchUncategorizedByModified(data.getAccountId(), "%"));
                     }
-                    break;
+                }
             }
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
@@ -144,17 +141,15 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
 
     @NonNull
     private static String getCategoryTitle(@NonNull Context context, int displayMode, String category) {
-        switch (displayMode) {
-            case MODE_DISPLAY_STARRED:
-                return context.getString(R.string.label_favorites);
-            case MODE_DISPLAY_CATEGORY:
-                return "".equals(category)
+        return switch (displayMode) {
+            case MODE_DISPLAY_STARRED ->
+                    context.getString(R.string.label_favorites);
+            case MODE_DISPLAY_CATEGORY ->
+                    "".equals(category)
                         ? context.getString(R.string.action_uncategorized)
                         : category;
-            case MODE_DISPLAY_ALL:
-            default:
-                return context.getString(R.string.app_name);
-        }
+            default -> context.getString(R.string.app_name);
+        };
     }
 
     @Override

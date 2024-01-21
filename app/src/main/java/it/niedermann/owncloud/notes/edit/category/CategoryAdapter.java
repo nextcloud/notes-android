@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemCategoryBinding;
@@ -50,20 +51,22 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         final var categoryViewHolder = (CategoryViewHolder) holder;
 
         switch (category.id) {
-            case addItemId:
-                final var wrapDrawable = DrawableCompat.wrap(ContextCompat.getDrawable(context, category.icon));
+            case addItemId -> {
+                final var wrapDrawable = DrawableCompat.wrap(
+                        Objects.requireNonNull(ContextCompat.getDrawable(
+                                context, category.icon)));
                 DrawableCompat.setTint(wrapDrawable, ContextCompat.getColor(context, R.color.icon_color_default));
                 categoryViewHolder.getIcon().setImageDrawable(wrapDrawable);
                 categoryViewHolder.getCategoryWrapper().setOnClickListener((v) -> listener.onCategoryAdded());
-                break;
-            case clearItemId:
+            }
+            case clearItemId -> {
                 categoryViewHolder.getIcon().setImageDrawable(ContextCompat.getDrawable(context, category.icon));
                 categoryViewHolder.getCategoryWrapper().setOnClickListener((v) -> listener.onCategoryCleared());
-                break;
-            default:
+            }
+            default -> {
                 categoryViewHolder.getIcon().setImageDrawable(ContextCompat.getDrawable(context, category.icon));
                 categoryViewHolder.getCategoryWrapper().setOnClickListener((v) -> listener.onCategoryChosen(category.label));
-                break;
+            }
         }
         categoryViewHolder.getCategory().setText(NoteUtil.extendCategory(category.label));
         if (category.count != null && category.count > 0) {
