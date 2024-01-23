@@ -17,7 +17,7 @@
         android:scaleX="1.5"
         android:scaleY="1.5"
         android:src="@drawable/ic_launcher_foreground"
-        app:tint="@color/fg_default_high" />
+        app:tint="@color/fg_default_low" />
 
     <TextView
         android:id="@+id/empty_content_view_title"
