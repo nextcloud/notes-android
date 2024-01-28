@@ -9,3 +9,4 @@
 # fastlane
 /vendor/bundle
 fastlane/report.xml
+/gradle/verification-keyring.gpg
