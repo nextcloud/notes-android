@@ -27,6 +27,7 @@ import androidx.annotation.WorkerThread;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.preference.PreferenceManager;
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
@@ -52,7 +53,6 @@ import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
 import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
-import it.niedermann.owncloud.notes.shared.extensions.ContextExtensionsKt;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
@@ -78,13 +78,12 @@ public class NotesRepository {
     private static NotesRepository instance;
 
     private final ApiProvider apiProvider;
-    private final ExecutorService executor;
+    private ExecutorService executor;
     private final ExecutorService syncExecutor;
     private final ExecutorService importExecutor;
-    private final Context context;
+    private Context context;
     private final NotesDatabase db;
     private final String defaultNonEmptyTitle;
-
     private final LiveData<ConnectionLiveData.ConnectionType> connectionLiveData;
     private boolean isSyncPossible = false;
     private boolean networkConnected = false;
@@ -131,27 +130,7 @@ public class NotesRepository {
         this.syncOnlyOnWifiKey = context.getApplicationContext().getResources().getString(R.string.pref_key_wifi_only);
         this.connectionLiveData = new ConnectionLiveData(context);
 
-        connectionLiveData.observeForever(connectionType -> {
-            if (connectionType == ConnectionLiveData.ConnectionType.Lost) {
-                networkConnected = false;
-                isSyncPossible = false;
-                Log.d(TAG, "No network connection.");
-            } else {
-                Log.d(TAG, "Network connection established with " + connectionType.name());
-                handleNetworkStatus();
-            }
-
-            if (isSyncPossible() && SSOUtil.isConfigured(context)) {
-                executor.submit(() -> {
-                    try {
-                        scheduleSync(getAccountByName(SingleAccountHelper.getCurrentSingleSignOnAccount(context).name), false);
-                    } catch (NextcloudFilesAppAccountNotFoundException |
-                             NoCurrentAccountSelectedException e) {
-                        Log.v(TAG, "Can not select current SingleSignOn account after network changed, do not sync.");
-                    }
-                });
-            }
-        });
+        connectionLiveData.observeForever(observer);
 
         final var prefs = PreferenceManager.getDefaultSharedPreferences(this.context);
         prefs.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
@@ -159,6 +138,32 @@ public class NotesRepository {
 
         updateNetworkStatus();
     }
+
+    private final Observer<? super ConnectionLiveData.ConnectionType> observer = (Observer<ConnectionLiveData.ConnectionType>) connectionType -> {
+        if (connectionType == ConnectionLiveData.ConnectionType.Lost) {
+            networkConnected = false;
+            isSyncPossible = false;
+            Log.d(TAG, "No network connection.");
+        } else {
+            Log.d(TAG, "Network connection established with " + connectionType.name());
+            handleNetworkStatus();
+        }
+
+        if (context == null || executor == null) {
+           return;
+        }
+
+        if (isSyncPossible() && SSOUtil.isConfigured(context)) {
+            executor.submit(() -> {
+                try {
+                    scheduleSync(getAccountByName(SingleAccountHelper.getCurrentSingleSignOnAccount(context).name), false);
+                } catch (NextcloudFilesAppAccountNotFoundException |
+                         NoCurrentAccountSelectedException e) {
+                    Log.v(TAG, "Can not select current SingleSignOn account after network changed, do not sync.");
+                }
+            });
+        }
+    };
 
 
     // Accounts
@@ -725,12 +730,7 @@ public class NotesRepository {
 
     @Override
     protected void finalize() throws Throwable {
-        LifecycleOwner lifecycleOwner = ContextExtensionsKt.lifecycleOwner(context);
-        if (lifecycleOwner != null) {
-            Log.d(TAG, "ConnectionLiveData Observer Removed");
-            connectionLiveData.removeObservers(lifecycleOwner);
-        }
-
+        connectionLiveData.removeObserver(observer);
         super.finalize();
     }
 
