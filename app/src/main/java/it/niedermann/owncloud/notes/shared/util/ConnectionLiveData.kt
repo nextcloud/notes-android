@@ -7,12 +7,21 @@ import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import androidx.lifecycle.LiveData
 
+/**
+ * LiveData subclass that provides network connection status updates.
+ * It observes changes in network connectivity and posts updates to its observers.
+ *
+ * @property context The application context used to access system services.
+ */
 class ConnectionLiveData(val context: Context) : LiveData<ConnectionLiveData.ConnectionType>() {
 
     private val connectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     private val networkRequest = NetworkRequest.Builder().build()
 
+    /**
+     * Enum representing different types of network connections.
+     */
     enum class ConnectionType {
         Lost, WiFi, Ethernet, MobileData, Other
     }

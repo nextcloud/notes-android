@@ -92,6 +92,27 @@ public class NotesRepository {
     private final MutableLiveData<Boolean> syncStatus = new MutableLiveData<>(false);
     private final MutableLiveData<ArrayList<Throwable>> syncErrors = new MutableLiveData<>();
 
+    private final Observer<? super ConnectionLiveData.ConnectionType> syncObserver = (Observer<ConnectionLiveData.ConnectionType>) connectionType -> {
+        observeNetworkStatus(connectionType);
+
+        if (context == null || executor == null) {
+            return;
+        }
+
+        if (isSyncPossible() && SSOUtil.isConfigured(context)) {
+            executor.submit(() -> {
+                try {
+                    scheduleSync(getAccountByName(SingleAccountHelper.getCurrentSingleSignOnAccount(context).name), false);
+                } catch (NextcloudFilesAppAccountNotFoundException |
+                         NoCurrentAccountSelectedException e) {
+                    Log.v(TAG, "Can not select current SingleSignOn account after network changed, do not sync.");
+                }
+            });
+        }
+    };
+
+    private final Observer<? super ConnectionLiveData.ConnectionType> networkStatusObserver = (Observer<ConnectionLiveData.ConnectionType>) this::observeNetworkStatus;
+
     /**
      * @see <a href="https://stackoverflow.com/a/3104265">Do not make this a local variable.</a>
      */
@@ -143,27 +164,6 @@ public class NotesRepository {
     public void updateNetworkStatus() {
         connectionLiveDataForNetworkStatus.observeForever(networkStatusObserver);
     }
-
-    private final Observer<? super ConnectionLiveData.ConnectionType> syncObserver = (Observer<ConnectionLiveData.ConnectionType>) connectionType -> {
-        observeNetworkStatus(connectionType);
-
-        if (context == null || executor == null) {
-           return;
-        }
-
-        if (isSyncPossible() && SSOUtil.isConfigured(context)) {
-            executor.submit(() -> {
-                try {
-                    scheduleSync(getAccountByName(SingleAccountHelper.getCurrentSingleSignOnAccount(context).name), false);
-                } catch (NextcloudFilesAppAccountNotFoundException |
-                         NoCurrentAccountSelectedException e) {
-                    Log.v(TAG, "Can not select current SingleSignOn account after network changed, do not sync.");
-                }
-            });
-        }
-    };
-
-    private final Observer<? super ConnectionLiveData.ConnectionType> networkStatusObserver = (Observer<ConnectionLiveData.ConnectionType>) this::observeNetworkStatus;
 
     private void observeNetworkStatus(ConnectionLiveData.ConnectionType connectionType) {
         if (connectionType == ConnectionLiveData.ConnectionType.Lost) {
