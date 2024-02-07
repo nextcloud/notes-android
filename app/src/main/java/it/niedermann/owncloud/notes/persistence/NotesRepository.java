@@ -16,6 +16,9 @@ import android.content.SharedPreferences;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 import android.graphics.drawable.Icon;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.text.TextUtils;
 import android.util.Log;
 import androidx.annotation.AnyThread;
@@ -83,8 +86,7 @@ public class NotesRepository {
     private Context context;
     private final NotesDatabase db;
     private final String defaultNonEmptyTitle;
-    private final LiveData<ConnectionLiveData.ConnectionType> connectionLiveDataForSync;
-    private final LiveData<ConnectionLiveData.ConnectionType> connectionLiveDataForNetworkStatus;
+    private final LiveData<ConnectionLiveData.ConnectionType> connectionLiveData;
     private boolean isSyncPossible = false;
     private boolean networkConnected = false;
     private String syncOnlyOnWifiKey;
@@ -110,8 +112,6 @@ public class NotesRepository {
             });
         }
     };
-
-    private final Observer<? super ConnectionLiveData.ConnectionType> networkStatusObserver = (Observer<ConnectionLiveData.ConnectionType>) this::observeNetworkStatus;
 
     /**
      * @see <a href="https://stackoverflow.com/a/3104265">Do not make this a local variable.</a>
@@ -149,10 +149,9 @@ public class NotesRepository {
         this.apiProvider = apiProvider;
         this.defaultNonEmptyTitle = NoteUtil.generateNonEmptyNoteTitle("", this.context);
         this.syncOnlyOnWifiKey = context.getApplicationContext().getResources().getString(R.string.pref_key_wifi_only);
-        this.connectionLiveDataForSync = new ConnectionLiveData(context);
-        this.connectionLiveDataForNetworkStatus = new ConnectionLiveData(context);
+        this.connectionLiveData = new ConnectionLiveData(context);
 
-        connectionLiveDataForSync.observeForever(syncObserver);
+        connectionLiveData.observeForever(syncObserver);
 
         final var prefs = PreferenceManager.getDefaultSharedPreferences(this.context);
         prefs.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
@@ -162,23 +161,46 @@ public class NotesRepository {
     }
 
     public void updateNetworkStatus() {
-        connectionLiveDataForNetworkStatus.observeForever(networkStatusObserver);
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (connectivityManager == null) {
+            handleFailedNetworkStatus("ConnectivityManager is null");
+            return;
+        }
+
+        Network network = connectivityManager.getActiveNetwork();
+        if (network == null) {
+            handleFailedNetworkStatus("No network connection");
+            return;
+        }
+
+        NetworkCapabilities networkCapabilities = connectivityManager.getNetworkCapabilities(network);
+        if (networkCapabilities == null) {
+            handleFailedNetworkStatus("NetworkCapabilities is null");
+            return;
+        }
+
+        handleNetworkStatus(networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI));
     }
 
     private void observeNetworkStatus(ConnectionLiveData.ConnectionType connectionType) {
         if (connectionType == ConnectionLiveData.ConnectionType.Lost) {
-            networkConnected = false;
-            isSyncPossible = false;
-            Log.d(TAG, "No network connection.");
+            handleFailedNetworkStatus("No network connection");
         } else {
             Log.d(TAG, "Network connection established with " + connectionType.name());
-            handleNetworkStatus();
+            handleNetworkStatus(connectionType == ConnectionLiveData.ConnectionType.WiFi);
         }
     }
 
-    private void handleNetworkStatus() {
+    private void handleFailedNetworkStatus(String message) {
+        Log.e(TAG, message);
+        networkConnected = false;
+        isSyncPossible = false;
+    }
+
+    private void handleNetworkStatus(boolean isWifiActive) {
         networkConnected = true;
-        isSyncPossible = !syncOnlyOnWifi;
+        isSyncPossible = !syncOnlyOnWifi || isWifiActive;
 
         if (isSyncPossible) {
             Log.d(TAG, "Network connection established.");
@@ -189,8 +211,7 @@ public class NotesRepository {
 
     @Override
     protected void finalize() throws Throwable {
-        connectionLiveDataForSync.removeObserver(syncObserver);
-        connectionLiveDataForNetworkStatus.removeObserver(networkStatusObserver);
+        connectionLiveData.removeObserver(syncObserver);
         super.finalize();
     }
 
