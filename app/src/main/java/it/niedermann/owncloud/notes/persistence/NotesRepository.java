@@ -24,7 +24,6 @@ import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
@@ -84,7 +83,8 @@ public class NotesRepository {
     private Context context;
     private final NotesDatabase db;
     private final String defaultNonEmptyTitle;
-    private final LiveData<ConnectionLiveData.ConnectionType> connectionLiveData;
+    private final LiveData<ConnectionLiveData.ConnectionType> connectionLiveDataForSync;
+    private final LiveData<ConnectionLiveData.ConnectionType> connectionLiveDataForNetworkStatus;
     private boolean isSyncPossible = false;
     private boolean networkConnected = false;
     private String syncOnlyOnWifiKey;
@@ -128,9 +128,10 @@ public class NotesRepository {
         this.apiProvider = apiProvider;
         this.defaultNonEmptyTitle = NoteUtil.generateNonEmptyNoteTitle("", this.context);
         this.syncOnlyOnWifiKey = context.getApplicationContext().getResources().getString(R.string.pref_key_wifi_only);
-        this.connectionLiveData = new ConnectionLiveData(context);
+        this.connectionLiveDataForSync = new ConnectionLiveData(context);
+        this.connectionLiveDataForNetworkStatus = new ConnectionLiveData(context);
 
-        connectionLiveData.observeForever(observer);
+        connectionLiveDataForSync.observeForever(syncObserver);
 
         final var prefs = PreferenceManager.getDefaultSharedPreferences(this.context);
         prefs.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
@@ -139,15 +140,12 @@ public class NotesRepository {
         updateNetworkStatus();
     }
 
-    private final Observer<? super ConnectionLiveData.ConnectionType> observer = (Observer<ConnectionLiveData.ConnectionType>) connectionType -> {
-        if (connectionType == ConnectionLiveData.ConnectionType.Lost) {
-            networkConnected = false;
-            isSyncPossible = false;
-            Log.d(TAG, "No network connection.");
-        } else {
-            Log.d(TAG, "Network connection established with " + connectionType.name());
-            handleNetworkStatus();
-        }
+    public void updateNetworkStatus() {
+        connectionLiveDataForNetworkStatus.observeForever(networkStatusObserver);
+    }
+
+    private final Observer<? super ConnectionLiveData.ConnectionType> syncObserver = (Observer<ConnectionLiveData.ConnectionType>) connectionType -> {
+        observeNetworkStatus(connectionType);
 
         if (context == null || executor == null) {
            return;
@@ -165,9 +163,38 @@ public class NotesRepository {
         }
     };
 
+    private final Observer<? super ConnectionLiveData.ConnectionType> networkStatusObserver = (Observer<ConnectionLiveData.ConnectionType>) this::observeNetworkStatus;
+
+    private void observeNetworkStatus(ConnectionLiveData.ConnectionType connectionType) {
+        if (connectionType == ConnectionLiveData.ConnectionType.Lost) {
+            networkConnected = false;
+            isSyncPossible = false;
+            Log.d(TAG, "No network connection.");
+        } else {
+            Log.d(TAG, "Network connection established with " + connectionType.name());
+            handleNetworkStatus();
+        }
+    }
+
+    private void handleNetworkStatus() {
+        networkConnected = true;
+        isSyncPossible = !syncOnlyOnWifi;
+
+        if (isSyncPossible) {
+            Log.d(TAG, "Network connection established.");
+        } else {
+            Log.d(TAG, "Network connected, but not used because only synced on wifi.");
+        }
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        connectionLiveDataForSync.removeObserver(syncObserver);
+        connectionLiveDataForNetworkStatus.removeObserver(networkStatusObserver);
+        super.finalize();
+    }
 
     // Accounts
-
     @AnyThread
     public LiveData<ImportStatus> addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities, @Nullable String displayName, @NonNull IResponseCallback<Account> callback) {
         final var account = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account(url, username, accountName, displayName, capabilities)));
@@ -728,12 +755,6 @@ public class NotesRepository {
         return map(new SharedPreferenceIntLiveData(sp, prefKey, CategorySortingMethod.SORT_MODIFIED_DESC.getId()), CategorySortingMethod::findById);
     }
 
-    @Override
-    protected void finalize() throws Throwable {
-        connectionLiveData.removeObserver(observer);
-        super.finalize();
-    }
-
     /**
      * Synchronization is only possible, if there is an active network connection.
      * <p>
@@ -887,30 +908,6 @@ public class NotesRepository {
                     }
                 }
             }
-        }
-    }
-
-    public void updateNetworkStatus() {
-        connectionLiveData.observeForever(connectionType -> {
-            if (connectionType == ConnectionLiveData.ConnectionType.Lost) {
-                networkConnected = false;
-                isSyncPossible = false;
-                Log.d(TAG, "No network connection.");
-            } else {
-                Log.d(TAG, "Network connection established with " + connectionType.name());
-                handleNetworkStatus();
-            }
-        });
-    }
-
-    private void handleNetworkStatus() {
-        networkConnected = true;
-        isSyncPossible = !syncOnlyOnWifi;
-
-        if (isSyncPossible) {
-            Log.d(TAG, "Network connection established.");
-        } else {
-            Log.d(TAG, "Network connected, but not used because only synced on wifi.");
         }
     }
 
