@@ -35,13 +35,13 @@
 
     <string name="listview_updated_today">Hoje</string>
     <string name="listview_updated_yesterday">Ontem</string>
-    <string name="listview_updated_this_week">Esta semanna</string>
+    <string name="listview_updated_this_week">Esta semana</string>
     <string name="listview_updated_last_week">Última semana</string>
     <string name="listview_updated_this_month">Este mês</string>
     <string name="listview_updated_last_month">Último mês</string>
 
     <string name="settings_note_mode">Modo de exibição de notas</string>
-    <string name="settings_note_mode_new">Notes opening behaviour</string>
+    <string name="settings_note_mode_new">Comportamento da abertura de notas</string>
     <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title"> Fonte monospaçada</string>
     <string name="settings_font_size">Tamanho da fonte</string>
@@ -61,7 +61,7 @@
     <string name="error_unknown">Ocorreu um erro desconhecido.</string>
 
     <string name="about_version_title">Versão</string>
-    <string name="about_version">Você  está atualmente usando %1$s</string>
+    <string name="about_version">Você está atualmente usando %1$s</string>
     <string name="about_maintainer_title">Mantenedor</string>
     <string name="about_developers_title">Desenvolvedores</string>
     <string name="about_developers_original_author">autor original</string>
@@ -146,7 +146,7 @@
     <string name="simple_more">Mais</string>
     <string name="simple_move">Mover</string>
     <string name="category_readonly">Somente leitura</string>
-    <string name="no_category">Sem categorias</string>
+    <string name="no_category">Sem categoria</string>
     <string name="add_category">Adicionar %1$s</string>
     <string name="simple_checkbox">Caixa de marcação</string>
     <string name="unlock_notes">Destravar anotações</string>
@@ -180,9 +180,9 @@
     <string name="action_formatting_help">Formatação</string>
 
 
-    <string name="noteMode_plain_edit">Plain edit mode</string>
-    <string name="noteMode_plain_preview">Plain preview</string>
-    <string name="noteMode_rich_edit">Rich edit mode</string>
+    <string name="noteMode_plain_edit">Modo de edição simples</string>
+    <string name="noteMode_plain_preview">Pré-visualização simples</string>
+    <string name="noteMode_rich_edit">Modo de edição avançado</string>
     <string name="noteMode_remember_last">Lembrar minha última escolha</string>
 
     <string-array name="fontSize_entries">
@@ -309,7 +309,7 @@
     <string name="progress_import_indeterminate">Importando notas… </string>
     <string name="progress_import">Importando notas %1$d de %2$d…</string>
     <string name="account_imported">Conta importada.</string>
-    <string name="direct_editing_error">Error while loading rich editing</string>
-    <string name="switch_to_plain_editing">Switch to plain editing</string>
+    <string name="direct_editing_error">Erro ao carregar edição avançada</string>
+    <string name="switch_to_plain_editing">Mudar para edição simples</string>
     <string name="action_back">Voltar</string>
     </resources>
