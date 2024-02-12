@@ -7,8 +7,7 @@
  ~ SPDX-FileCopyrightText: 2017 Daniel Bailey <dan0xii@users.noreply.github.com>
  ~ SPDX-License-Identifier: GPL-3.0-or-later
 -->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -27,7 +26,6 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:targetApi="n"
         android:taskAffinity="">
 
         <activity
@@ -121,14 +119,14 @@
             android:parentActivityName=".main.MainActivity" />
 
         <activity android:name=".widget.singlenote.SingleNoteWidgetConfigurationActivity"
-            android:exported="true">
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
 
         <activity android:name=".widget.notelist.NoteListWidgetConfigurationActivity"
-            android:exported="true">
+            android:exported="false">
 
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
@@ -138,7 +136,7 @@
         <receiver
             android:name=".widget.singlenote.SingleNoteWidget"
             android:label="@string/widget_single_note_title"
-            android:exported="true">
+            android:exported="false">
 
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -152,7 +150,7 @@
         <receiver
             android:name=".widget.notelist.NoteListWidget"
             android:label="@string/widget_note_list_title"
-            android:exported="true">
+            android:exported="false">
 
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
