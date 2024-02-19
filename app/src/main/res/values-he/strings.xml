@@ -156,7 +156,6 @@
     <plurals name="ab_selected">
         <item quantity="one">נבחר %d</item>
         <item quantity="two">נבחרו %d</item>
-        <item quantity="many">נבחרו %d</item>
         <item quantity="other">נבחרו %d</item>
     </plurals>
     <string name="formatting_help_divider" translateable="false">---</string>
