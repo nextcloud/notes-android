@@ -29,6 +29,12 @@
         android:title="@string/menu_change_category"
         app:showAsAction="ifRoom" />
     <item
+        android:id="@+id/menu_remove_checked_items"
+        android:icon="@drawable/ic_delete_grey600_24dp"
+        android:orderInCategory="100"
+        android:title="@string/menu_remove_checked_items"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/menu_share"
         android:icon="@drawable/ic_share_white_24dp"
         android:orderInCategory="100"

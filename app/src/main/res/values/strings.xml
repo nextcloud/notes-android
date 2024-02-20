@@ -209,6 +209,7 @@
     <string name="append_to_note">Append to note</string>
     <string name="change_note_title">Change note title</string>
     <string name="menu_edit_title">Edit title</string>
+    <string name="menu_remove_checked_items">Remove checked items</string>
     <string name="simple_security">Security</string>
     <string name="appearance_and_behavior">Appearance and behavior</string>
     <string name="simple_synchronization">Synchronization</string>

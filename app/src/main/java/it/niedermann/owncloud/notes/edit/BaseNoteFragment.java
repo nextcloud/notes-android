@@ -236,7 +236,10 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         } else if (itemId == R.id.menu_title) {
             showEditTitleDialog();
             return true;
-        } else if (itemId == R.id.menu_move) {
+        } else if (itemId == R.id.menu_remove_checked_items) {
+            removeCheckedItems();
+            return true;
+        }  else if (itemId == R.id.menu_move) {
             executor.submit(() -> AccountPickerDialogFragment
                     .newInstance(new ArrayList<>(repo.getAccounts()), note.getAccountId())
                     .show(requireActivity().getSupportFragmentManager(), BaseNoteFragment.class.getSimpleName()));
@@ -345,7 +348,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     }
 
     /**
-     * Opens a dialog in order to chose a category
+     * Opens a dialog in order to edit the title
      */
     public void showEditTitleDialog() {
         saveNote(null);
@@ -358,6 +361,28 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         final var editTitleFragment = EditTitleDialogFragment.newInstance(note.getTitle());
         editTitleFragment.setTargetFragment(this, 0);
         editTitleFragment.show(manager, fragmentId);
+    }
+
+    /**
+     * Removes all checked items from a note
+     *
+     * @return
+     */
+    public String removeCheckedItems() {
+        Log.d(TAG, "removeCheckedItems()");
+        if (note != null) {
+            final var oldContent = note.getContent();
+            final var newContent = NoteUtil.getContentWithoutCheckedItems(oldContent);
+            if (!oldContent.equals(newContent)) {
+                note.setContent(newContent);
+            }
+
+            return newContent;
+        } else {
+            Log.e(TAG, "note is null");
+        }
+
+        return "";
     }
 
     @Override
