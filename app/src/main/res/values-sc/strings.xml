@@ -231,15 +231,15 @@
     <!-- Table cell value of a sample table -->
     <string name="formatting_help_tables_value">Balore %1d</string>
 
-    <string name="formatting_help_images_title">Imàgines</string>
-    <string name="formatting_help_images_alt">Imàgine de fantasia</string>
+    <string name="formatting_help_images_title">Immàgines</string>
+    <string name="formatting_help_images_alt">Immàgine de fantasia</string>
 
     <string name="simple_other">Àteru</string>
     <string name="sort_last_modified">Pone in òrdine de data de modìfica</string>
     <string name="sort_alphabetically">Pone in òrdine alfabèticu</string>
-    <string name="error_action_open_battery_settings">Impostatziones bateria</string>
+    <string name="error_action_open_battery_settings">Cunfiguratzione de sa bateria</string>
     <string name="error_action_open_deck_info">Aberi informatziones aplicatzione</string>
-    <string name="error_action_open_network">Impostatziones de rete</string>
+    <string name="error_action_open_network">Cunfiguratzione de rete</string>
     <string name="error_action_update_files_app">Agiorna</string>
     <string name="no_account_configured_yet">Perunu contu configuradu ancora</string>
     <string name="no_other_accounts">No as configuradu perunu contu ancora.</string>
