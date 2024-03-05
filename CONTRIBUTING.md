@@ -1,3 +1,8 @@
+<!--
+ ~ SPDX-FileCopyrightText: 2016-2024 Nextcloud GmbH and Nextcloud contributors
+ ~ SPDX-FileCopyrightText: 2016-2024 Stefan Niedermann <info@niedermann.it>
+ ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
 # Contributing guide
 
 ## Submitting bug reports

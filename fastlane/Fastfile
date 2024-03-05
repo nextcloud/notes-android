@@ -10,6 +10,10 @@
 #     https://docs.fastlane.tools/plugins/available-plugins
 #
 
+# SPDX-FileCopyrightText: 2023-2024 Nextcloud GmbH and Nextcloud contributors
+# SPDX-FileCopyrightText: 2023 Álvaro Brey <alvaro@alvarobrey.com>
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 

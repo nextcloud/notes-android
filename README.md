@@ -1,3 +1,8 @@
+<!--
+ ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors
+ ~ SPDX-FileCopyrightText: 2015-2024 Stefan Niedermann <info@niedermann.it>
+ ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
 # Nextcloud Notes for Android
 An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/).
 
