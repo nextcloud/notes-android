@@ -1,12 +1,38 @@
-.gradle/
-/local.properties
-.DS_Store
-/build
-/captures
-/.idea/
+# SPDX-FileCopyrightText: 2014-2024 Nextcloud GmbH and Nextcloud contributors
+# SPDX-FileCopyrightText: 2024 Andy Scherzinger <info@andy-scherzinger.de>
+# SPDX-FileCopyrightText: 2018 Tobias Kaminsky <tobias@kaminsky.me>
+# SPDX-FileCopyrightText: 2014 David Luhmer <david-dev@live.de>
+# SPDX-License-Identifier: GPL-3.0-or-later
+# built application files
+*.apk
+*.ap_
+
+# files for the dex VM
+*.dex
+
+# Java class files
+*.class
+
+# generated files
+bin/
+build/
+gen/
+target/
 *.iml
-/projectFilesBackup/
+
+# Local configuration files (sdk path, etc)
+.idea/
+.gradle/
+local.properties
+sample_client/local.properties
+tests/local.properties
+tests/test_cases/local.properties
+
+# Mac .DS_Store files
+.DS_Store
+
 # fastlane
 /vendor/bundle
 fastlane/report.xml
+
 /gradle/verification-keyring.gpg

@@ -1,3 +1,8 @@
+<!--
+ ~ SPDX-FileCopyrightText: 2020-2024 Nextcloud GmbH and Nextcloud contributors
+ ~ SPDX-FileCopyrightText: 2020-2024 Stefan Niedermann <info@niedermann.it>
+ ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
 # Nextcloud Notes Android Privacy Policy
 
 The "Nextcloud Notes Android" Android-App (in the following referred to as "App") does not collect or send any data from you or your device to a server of the developers or the [Nextcloud GmbH](https://nextcloud.com/). The App sends all data exclusively to the server configured by you with the intention to synchronize the contents of the App with those of the server. This data can contain IP-addresses, timestamps and further information as meta data.

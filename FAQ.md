@@ -1,3 +1,8 @@
+<!--
+ ~ SPDX-FileCopyrightText: 2020-2024 Nextcloud GmbH and Nextcloud contributors
+ ~ SPDX-FileCopyrightText: 2020-2024 Stefan Niedermann <info@niedermann.it>
+ ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
 # Frequently asked questions
 
 - [Why aren't there any buttons to apply formatting?](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#why-arent-there-any-buttons-to-apply-formatting)

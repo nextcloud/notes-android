@@ -1,0 +1,16 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: Nextcloud Notes - Android Client
+Upstream-Contact: Nextcloud Android team <android@nextcloud.com>
+Source: https://github.com/nextcloud/notes-android
+
+Files: gradlew gradlew.bat gradle/wrapper/gradle-wrapper.jar
+Copyright: 2015-2021 the original authors
+License: Apache-2.0
+
+Files: gradle/verification-keyring.keys gradle/verification-metadata.xml
+Copyright: none
+License: GPL-3.0-or-later
+
+Files: renovate.json5 */.gitignore .idea/* scripts/analysis/findbugs-results.txt scripts/analysis/lint-results.txt app/src/test/resources/robolectric.properties app/src/test/resources/mockito-extensions/org.mockito.plugins.MockMaker fastlane/metadata/* app/src/main/res/values-*/strings.xml
+Copyright: 2016-2024 Nextcloud GmbH and Nextcloud contributors
+License: GPL-3.0-or-later
