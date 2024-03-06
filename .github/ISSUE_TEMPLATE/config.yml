@@ -1,5 +1,4 @@
+# SPDX-FileCopyrightText: 2020-2024 Nextcloud GmbH and Nextcloud contributors
+# SPDX-FileCopyrightText: 2020 Stefan Niedermann <info@niedermann.it>
+# SPDX-License-Identifier: GPL-3.0-or-later
 blank_issues_enabled: false
-contact_links:
-  - name: 💼 Volume licenses
-    url: https://www.niedermann.it/kontakt.html
-    about: If you are a company, a club, a university or another organization, please contact us directly for volume licenses.
