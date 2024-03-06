@@ -41,6 +41,7 @@
     <string name="listview_updated_last_month">Minulý mesiac</string>
 
     <string name="settings_note_mode">Režim zobrazovania poznámok</string>
+    <string name="settings_note_mode_new">Spravanie sa pri otvorení Poznámok</string>
     <string name="settings_theme_title">Motív vzhľadu</string>
     <string name="settings_font_title">Písmo s pevnou šírkou</string>
     <string name="settings_font_size">Veľkosť písma</string>
@@ -63,6 +64,7 @@
     <string name="about_version">Momentálne používate %1$s</string>
     <string name="about_maintainer_title">Udržovateľ</string>
     <string name="about_developers_title">Vývojári</string>
+    <string name="about_developers_original_author">pôvodný autor</string>
     <string name="about_translators_title">Prekladatelia</string>
     <string name="about_translators_transifex">Nextcloud komunita na %1$s</string>
     <string name="about_testers_title">Testeri</string>
@@ -178,6 +180,9 @@
     <string name="action_formatting_help">Formátovanie</string>
 
 
+    <string name="noteMode_plain_edit">Jednoduchý režim úprav</string>
+    <string name="noteMode_plain_preview">Jednoduchý náhľad</string>
+    <string name="noteMode_rich_edit">Rich editovací režim</string>
     <string name="noteMode_remember_last">Zapamätať si môj posledný výber</string>
 
     <string-array name="fontSize_entries">
@@ -309,5 +314,7 @@
     <string name="progress_import_indeterminate">Import poznámok…</string>
     <string name="progress_import">Importuje sa poznámka %1$d of %2$d…</string>
     <string name="account_imported">Účet bol importovaný.</string>
+    <string name="direct_editing_error">Chyba pri načítaní rich editora</string>
+    <string name="switch_to_plain_editing">Prepnúť na jednoduchú úpravu</string>
     <string name="action_back">Späť</string>
     </resources>
