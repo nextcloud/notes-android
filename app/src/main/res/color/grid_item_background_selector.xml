@@ -1,4 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?><!-- Same as grid_item_background_selector in res/drawable, but can be applied as BackgroundColorResource -->
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Nextcloud Notes - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2021-2024 Nextcloud GmbH and Nextcloud contributors
+  ~ SPDX-FileCopyrightText: 2021 Stefan Niedermann <info@niedermann.it>
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
+<!-- Same as grid_item_background_selector in res/drawable, but can be applied as BackgroundColorResource -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:color="@color/bg_highlighted" android:state_selected="true" />
     <item android:color="@android:color/transparent" />

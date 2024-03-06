@@ -1,3 +1,10 @@
+<!--
+  ~ Nextcloud Notes - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2017-2024 Nextcloud GmbH and Nextcloud contributors
+  ~ SPDX-FileCopyrightText: 2017-2020 Stefan Niedermann <info@niedermann.it>
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
     <solid android:color="@android:color/transparent" />

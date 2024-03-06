@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Nextcloud Notes - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2017-2024 Nextcloud GmbH and Nextcloud contributors
+  ~ SPDX-FileCopyrightText: 2020 Stefan Niedermann <info@niedermann.it>
+  ~ SPDX-FileCopyrightText: 2020 Christoph Loy <loy.christoph@gmail.com>
+  ~ SPDX-FileCopyrightText: 2019 Kamil K <kamil@ryuu.eu>
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
 <resources>
     <string-array name="noteMode_values">
         <item>@string/pref_value_mode_edit</item>

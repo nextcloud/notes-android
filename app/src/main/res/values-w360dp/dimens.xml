@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Nextcloud Notes - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2020-2024 Nextcloud GmbH and Nextcloud contributors
+  ~ SPDX-FileCopyrightText: 2020 Stefan Niedermann <info@niedermann.it>
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
 <resources>
     <dimen name="spacer_activity_sides">@dimen/spacer_1x</dimen>
 </resources>

@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Nextcloud Notes - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2020-2024 Nextcloud GmbH and Nextcloud contributors
+  ~ SPDX-FileCopyrightText: 2021 Stefan Niedermann <info@niedermann.it>
+  ~ SPDX-FileCopyrightText: 2020 Thore Goebel <goebel.thore@gmail.com>
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="?colorControlHighlight">
 
