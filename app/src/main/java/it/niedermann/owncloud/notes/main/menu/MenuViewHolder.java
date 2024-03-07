@@ -1,4 +1,12 @@
+/*
+ * Nextcloud Notes - Android Client
+ *
+ * SPDX-FileCopyrightText: 2020-2024 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 package it.niedermann.owncloud.notes.main.menu;
+
+import static android.view.View.GONE;
 
 import android.content.Context;
 
@@ -8,11 +16,8 @@ import androidx.core.content.ContextCompat;
 import androidx.core.util.Consumer;
 import androidx.recyclerview.widget.RecyclerView;
 
-import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ItemNavigationBinding;
-
-import static android.view.View.GONE;
 
 public class MenuViewHolder extends RecyclerView.ViewHolder {
 

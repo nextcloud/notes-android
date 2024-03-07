@@ -1,4 +1,12 @@
+/*
+ * Nextcloud Notes - Android Client
+ *
+ * SPDX-FileCopyrightText: 2020-2024 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 package it.niedermann.owncloud.notes.main.navigation;
+
+import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.UNCATEGORIZED;
 
 import android.text.TextUtils;
 
@@ -6,11 +14,9 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType;
-
-import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.UNCATEGORIZED;
-
 import java.util.Objects;
+
+import it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType;
 
 public class NavigationItem {
     @NonNull

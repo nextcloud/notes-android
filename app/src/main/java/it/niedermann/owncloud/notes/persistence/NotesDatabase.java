@@ -1,3 +1,9 @@
+/*
+ * Nextcloud Notes - Android Client
+ *
+ * SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 package it.niedermann.owncloud.notes.persistence;
 
 import android.content.Context;
@@ -21,7 +27,23 @@ import it.niedermann.owncloud.notes.persistence.entity.Converters;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
 import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
-import it.niedermann.owncloud.notes.persistence.migration.*;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_10_11;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_11_12;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_12_13;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_13_14;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_14_15;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_15_16;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_16_17;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_17_18;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_18_19;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_19_20;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_20_21;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_21_22;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_22_23;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_23_24;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_24_25;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_9_10;
+
 @Database(
         entities = {
                 Account.class,

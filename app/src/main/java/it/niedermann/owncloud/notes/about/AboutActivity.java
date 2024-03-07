@@ -1,3 +1,11 @@
+/*
+ * Nextcloud Notes - Android Client
+ *
+ * SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-FileCopyrightText: 2015-2021 Stefan Niedermann <info@niedermann.it>
+ * SPDX-FileCopyrightText: 2021 TacoTheDank <skytkrsfan3895@gmail.com>
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 package it.niedermann.owncloud.notes.about;
 
 import android.os.Bundle;

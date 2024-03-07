@@ -1,3 +1,9 @@
+/*
+ * Nextcloud Notes - Android Client
+ *
+ * SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 package it.niedermann.owncloud.notes.shared.util;
 
 import android.content.Context;
@@ -14,7 +20,6 @@ import static it.niedermann.android.markdown.MarkdownUtil.replaceCheckboxesWithE
 
 /**
  * Provides basic functionality for Note operations.
- * Created by stefan on 06.10.15.
  */
 @SuppressWarnings("WeakerAccess")
 public class NoteUtil {

@@ -1,3 +1,9 @@
+/*
+ * Nextcloud Notes - Android Client
+ *
+ * SPDX-FileCopyrightText: 2020-2024 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 package it.niedermann.owncloud.notes.manageaccounts;
 
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.readBrandMainColorLiveData;
@@ -5,14 +11,11 @@ import static it.niedermann.owncloud.notes.shared.util.ApiVersionUtil.getPreferr
 
 import android.accounts.NetworkErrorException;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.Px;
 import androidx.annotation.StringRes;
 import androidx.lifecycle.ViewModelProvider;
 

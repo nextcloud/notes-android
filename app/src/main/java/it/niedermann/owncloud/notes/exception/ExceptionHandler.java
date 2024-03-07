@@ -1,10 +1,15 @@
+/*
+ * Nextcloud Notes - Android Client
+ *
+ * SPDX-FileCopyrightText: 2020-2024 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 package it.niedermann.owncloud.notes.exception;
 
 import android.app.Activity;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-
 
 public class ExceptionHandler implements Thread.UncaughtExceptionHandler {
 
