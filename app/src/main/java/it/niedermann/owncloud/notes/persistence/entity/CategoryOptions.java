@@ -1,10 +1,15 @@
+/*
+ * Nextcloud Notes - Android Client
+ *
+ * SPDX-FileCopyrightText: 2020-2024 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 package it.niedermann.owncloud.notes.persistence.entity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
-import androidx.room.Ignore;
 import androidx.room.Index;
 
 import java.io.Serializable;

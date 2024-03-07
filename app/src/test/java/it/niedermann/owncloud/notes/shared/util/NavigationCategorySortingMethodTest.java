@@ -1,10 +1,16 @@
+/*
+ * Nextcloud Notes - Android Client
+ *
+ * SPDX-FileCopyrightText: 2020-2024 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 package it.niedermann.owncloud.notes.shared.util;
+
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
-
-import static org.junit.Assert.assertEquals;
 
 public class NavigationCategorySortingMethodTest {
 

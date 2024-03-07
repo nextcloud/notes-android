@@ -1,16 +1,19 @@
+/*
+ * Nextcloud Notes - Android Client
+ *
+ * SPDX-FileCopyrightText: 2021-2024 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 package it.niedermann.owncloud.notes.main;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
-import androidx.lifecycle.SavedStateHandle;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.nextcloud.android.sso.exceptions.UnknownErrorException;
@@ -25,7 +28,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
 import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;

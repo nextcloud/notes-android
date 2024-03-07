@@ -1,3 +1,9 @@
+/*
+ * Nextcloud Notes - Android Client
+ *
+ * SPDX-FileCopyrightText: 2020-2024 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 package it.niedermann.owncloud.notes.branding;
 
 import android.util.TypedValue;
@@ -7,8 +13,6 @@ import android.view.MenuInflater;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
-import it.niedermann.owncloud.notes.R;
 
 public abstract class BrandedFragment extends Fragment implements Branded {
 

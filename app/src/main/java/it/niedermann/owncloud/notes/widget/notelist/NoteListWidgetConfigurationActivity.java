@@ -1,3 +1,9 @@
+/*
+ * Nextcloud Notes - Android Client
+ *
+ * SPDX-FileCopyrightText: 2017-2024 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 package it.niedermann.owncloud.notes.widget.notelist;
 
 import android.app.Activity;
@@ -32,7 +38,6 @@ import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetDat
 import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_CATEGORY;
 import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_STARRED;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.RECENT;
-
 
 public class NoteListWidgetConfigurationActivity extends LockedActivity {
     private static final String TAG = Activity.class.getSimpleName();

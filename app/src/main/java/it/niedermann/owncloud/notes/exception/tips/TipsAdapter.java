@@ -1,3 +1,9 @@
+/*
+ * Nextcloud Notes - Android Client
+ *
+ * SPDX-FileCopyrightText: 2020-2024 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 package it.niedermann.owncloud.notes.exception.tips;
 
 import static android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS;
@@ -5,8 +11,6 @@ import static it.niedermann.owncloud.notes.exception.ExceptionDialogFragment.INT
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;

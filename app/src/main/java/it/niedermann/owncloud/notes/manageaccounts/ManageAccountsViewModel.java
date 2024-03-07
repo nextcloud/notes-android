@@ -1,4 +1,12 @@
+/*
+ * Nextcloud Notes - Android Client
+ *
+ * SPDX-FileCopyrightText: 2021-2024 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 package it.niedermann.owncloud.notes.manageaccounts;
+
+import static androidx.lifecycle.Transformations.distinctUntilChanged;
 
 import android.app.Application;
 import android.content.Context;
@@ -19,8 +27,6 @@ import java.util.concurrent.Executors;
 import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
-
-import static androidx.lifecycle.Transformations.distinctUntilChanged;
 
 public class ManageAccountsViewModel extends AndroidViewModel {
 

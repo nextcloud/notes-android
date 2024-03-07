@@ -1,3 +1,11 @@
+/*
+ * Nextcloud Notes - Android Client
+ *
+ * SPDX-FileCopyrightText: 2020-2024 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-FileCopyrightText: 2020-2021 Stefan Niedermann <info@niedermann.it>
+ * SPDX-FileCopyrightText: 2020 Christoph Loy <loy.christoph@gmail.com>
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 package it.niedermann.owncloud.notes;
 
 import android.app.KeyguardManager;

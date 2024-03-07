@@ -1,15 +1,17 @@
+/*
+ * Nextcloud Notes - Android Client
+ *
+ * SPDX-FileCopyrightText: 2020-2024 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 package it.niedermann.owncloud.notes.main.items;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
-
 import static com.nextcloud.android.common.ui.util.PlatformThemeUtil.isDarkMode;
 
 import android.content.Context;
-import android.text.SpannableString;
 import android.text.TextUtils;
-import android.text.style.BackgroundColorSpan;
-import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,17 +21,11 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.selection.ItemDetailsLookup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.chip.Chip;
 import com.nextcloud.android.common.ui.theme.utils.ColorRole;
-import com.nextcloud.android.common.ui.util.PlatformThemeUtil;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;

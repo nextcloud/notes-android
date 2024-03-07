@@ -1,7 +1,12 @@
+/*
+ * Nextcloud Notes - Android Client
+ *
+ * SPDX-FileCopyrightText: 2021-2024 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 package it.niedermann.owncloud.notes.persistence.migration;
 
 import android.content.ContentValues;
-import android.database.Cursor;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
@@ -14,7 +19,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Objects;
 import java.util.stream.Collectors;
 

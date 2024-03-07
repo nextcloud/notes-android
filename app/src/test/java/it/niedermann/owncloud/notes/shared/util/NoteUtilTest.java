@@ -1,3 +1,9 @@
+/*
+ * Nextcloud Notes - Android Client
+ *
+ * SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 package it.niedermann.owncloud.notes.shared.util;
 
 import android.os.Build;
@@ -14,8 +20,7 @@ import org.robolectric.annotation.Config;
 import it.niedermann.android.markdown.MarkdownUtil;
 
 /**
- * Tests the NoteUtil
- * Created by stefan on 06.10.15.
+ * Tests the NoteUtil.
  */
 @RunWith(RobolectricTestRunner.class)
 public class NoteUtilTest extends TestCase {

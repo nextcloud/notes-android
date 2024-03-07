@@ -1,7 +1,12 @@
+/*
+ * Nextcloud Notes - Android Client
+ *
+ * SPDX-FileCopyrightText: 2020-2024 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 package it.niedermann.owncloud.notes.main;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,13 +19,11 @@ import androidx.appcompat.view.ActionMode.Callback;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.LiveData;
 import androidx.recyclerview.selection.SelectionTracker;
 
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -28,8 +31,6 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
-import it.niedermann.owncloud.notes.persistence.entity.Account;
-import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
 public class MultiSelectedActionModeCallback implements Callback {

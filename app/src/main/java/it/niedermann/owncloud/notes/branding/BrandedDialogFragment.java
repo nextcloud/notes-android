@@ -1,6 +1,10 @@
+/*
+ * Nextcloud Notes - Android Client
+ *
+ * SPDX-FileCopyrightText: 2020-2024 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 package it.niedermann.owncloud.notes.branding;
-
-import android.content.Context;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
