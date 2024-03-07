@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Nextcloud Notes - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors
+  ~ SPDX-FileCopyrightText: 2015-2022 Stefan Niedermann <info@niedermann.it>
+  ~ SPDX-FileCopyrightText: 2020 Thore Goebel <goebel.thore@gmail.com>
+  ~ SPDX-FileCopyrightText: 2017 Daniel Bailey <dan0xii@users.noreply.github.com>
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
 <resources>
     <!-- Colors -->
 

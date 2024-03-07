@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Nextcloud Notes - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2021-2024 Nextcloud GmbH and Nextcloud contributors
+  ~ SPDX-FileCopyrightText: 2021 Stefan Niedermann <info@niedermann.it>
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
 <resources>
-
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="spacer_1qx">2dp</dimen>
     <dimen name="spacer_1hx">4dp</dimen>
@@ -39,5 +45,4 @@
     <dimen name="widget_note_list_inner_padding">4dp</dimen>
     <dimen name="widget_note_list_fav_icon_width">26dp</dimen>
     <dimen name="widget_note_list_fav_icon_height">20dp</dimen>
-
 </resources>

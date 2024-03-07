@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Nextcloud Notes - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors
+  ~ SPDX-FileCopyrightText: 2015-2023 Stefan Niedermann <info@niedermann.it>
+  ~ SPDX-FileCopyrightText: 2022 Kévin Cocchi <kevin.cocchi@gmail.com>
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="BaseTheme" parent="Theme.Material3.DayNight.NoActionBar">
