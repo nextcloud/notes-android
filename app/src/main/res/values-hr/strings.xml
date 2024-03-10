@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Nextcloud Notes - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors
+  ~ SPDX-FileCopyrightText: 2015-2023 Stefan Niedermann <info@niedermann.it>
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
 <resources>
-
     <string name="app_name">Bilješke</string>
     <string name="app_name_long">Nextcloud Notes</string>
     <string name="label_all_notes">Sve bilješke</string>
