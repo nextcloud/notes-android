@@ -22,6 +22,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
@@ -34,6 +35,7 @@ import com.nextcloud.android.common.ui.theme.MaterialSchemes;
 import com.nextcloud.android.common.ui.theme.ViewThemeUtilsBase;
 import com.nextcloud.android.common.ui.theme.utils.MaterialViewThemeUtils;
 
+import dynamiccolor.MaterialDynamicColors;
 import it.niedermann.android.util.ColorUtil;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
@@ -43,6 +45,8 @@ import kotlin.Pair;
 public class NotesViewThemeUtils extends ViewThemeUtilsBase {
 
     private static final String TAG = NotesViewThemeUtils.class.getSimpleName();
+
+    private final MaterialDynamicColors dynamicColor = new MaterialDynamicColors();
 
     public NotesViewThemeUtils(@NonNull MaterialSchemes schemes) {
         super(schemes);
@@ -55,7 +59,7 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
     public void colorNavigationViewItem(@NonNull View view) {
         withScheme(view, scheme -> {
             view.setBackgroundTintList(buildColorStateList(
-                    new Pair<>(android.R.attr.state_selected, scheme.getSecondaryContainer()),
+                    new Pair<>(android.R.attr.state_selected, dynamicColor.secondaryContainer().getArgb(scheme)),
                     new Pair<>(-android.R.attr.state_selected, Color.TRANSPARENT)
             ));
             return view;
@@ -69,8 +73,8 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
     public void colorNavigationViewItemIcon(@NonNull ImageView view) {
         withScheme(view, scheme -> {
             view.setImageTintList(buildColorStateList(
-                    new Pair<>(android.R.attr.state_selected, scheme.getOnSecondaryContainer()),
-                    new Pair<>(-android.R.attr.state_selected, scheme.getOnSurfaceVariant())
+                    new Pair<>(android.R.attr.state_selected, dynamicColor.onSecondaryContainer().getArgb(scheme)),
+                    new Pair<>(-android.R.attr.state_selected, dynamicColor.onSurfaceVariant().getArgb(scheme))
             ));
             return view;
         });
@@ -83,8 +87,8 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
     public void colorNavigationViewItemText(@NonNull TextView view) {
         withScheme(view, scheme -> {
             view.setTextColor(buildColorStateList(
-                    new Pair<>(android.R.attr.state_selected, scheme.getOnSecondaryContainer()),
-                    new Pair<>(-android.R.attr.state_selected, scheme.getOnSurfaceVariant())
+                    new Pair<>(android.R.attr.state_selected, dynamicColor.onSecondaryContainer().getArgb(scheme)),
+                    new Pair<>(-android.R.attr.state_selected, dynamicColor.onSurfaceVariant().getArgb(scheme))
             ));
             return view;
         });
@@ -167,7 +171,7 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
     @Deprecated
     public void themeSearchCardView(@NonNull MaterialCardView searchBarWrapper) {
         withScheme(searchBarWrapper, scheme -> {
-            searchBarWrapper.setBackgroundTintList(ColorStateList.valueOf(scheme.getSurface()));
+            searchBarWrapper.setBackgroundTintList(ColorStateList.valueOf(dynamicColor.surface().getArgb(scheme)));
             return searchBarWrapper;
         });
     }
@@ -179,8 +183,8 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
     @Deprecated
     public void themeSearchToolbar(@NonNull MaterialToolbar toolbar) {
         withScheme(toolbar, scheme -> {
-            toolbar.setNavigationIconTint(scheme.getOnSurface());
-            toolbar.setTitleTextColor(scheme.getOnSurface());
+            toolbar.setNavigationIconTint(dynamicColor.onSurface().getArgb(scheme));
+            toolbar.setTitleTextColor(dynamicColor.onSurface().getArgb(scheme));
             return toolbar;
         });
     }
@@ -193,15 +197,15 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
     public void themeToolbarSearchView(@NonNull SearchView searchView) {
         withScheme(searchView, scheme -> {
             // hacky as no default way is provided
-            final var editText = (SearchView.SearchAutoComplete) searchView
+            final var editText = (AppCompatAutoCompleteTextView) searchView
                     .findViewById(androidx.appcompat.R.id.search_src_text);
             final var closeButton = (ImageView) searchView.findViewById(androidx.appcompat.R.id.search_close_btn);
             final var searchButton = (ImageView) searchView.findViewById(androidx.appcompat.R.id.search_button);
-            editText.setHintTextColor(scheme.getOnSurfaceVariant());
-            editText.setHighlightColor(scheme.getInverseOnSurface());
-            editText.setTextColor(scheme.getOnSurface());
-            closeButton.setColorFilter(scheme.getOnSurface());
-            searchButton.setColorFilter(scheme.getOnSurface());
+            editText.setHintTextColor(dynamicColor.onSurfaceVariant().getArgb(scheme));
+            editText.setHighlightColor(dynamicColor.inverseOnSurface().getArgb(scheme));
+            editText.setTextColor(dynamicColor.onSurface().getArgb(scheme));
+            closeButton.setColorFilter(dynamicColor.onSurface().getArgb(scheme));
+            searchButton.setColorFilter(dynamicColor.onSurface().getArgb(scheme));
             return searchView;
         });
     }
