@@ -8,7 +8,7 @@
 # SPDX-FileCopyrightText: 2023 Joas Schilling <213943+nickvergessen@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2023 Daniel Kesselberg <mail@danielkesselberg.de>
 # SPDX-FileCopyrightText: 2023 Florian Steffens <florian.steffens@nextcloud.com>
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-License-Identifier: MIT
 
 name: 'Ask for feedback on PRs'
 on:
