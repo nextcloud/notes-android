@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Nextcloud Notes - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
 <resources>
-
     <string name="app_name">Notas</string>
     <string name="app_name_long">Notas de Nextcloud</string>
     <string name="label_all_notes">Todas as notas</string>
