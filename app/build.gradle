@@ -9,8 +9,8 @@ android {
         applicationId "it.niedermann.owncloud.notes"
         minSdk 24
         targetSdk 34
-        versionCode 40020051
-        versionName "4.2.0 RC1"
+        versionCode 40020090
+        versionName "4.2.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
