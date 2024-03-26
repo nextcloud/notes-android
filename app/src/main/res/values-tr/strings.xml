@@ -78,7 +78,7 @@
     <string name="about_issues_title">Sorunlar</string>
     <string name="about_issues">Sorun, istek ve önerilerinizi GitHub sorun izleyiciye yazabilirsiniz: %1$s</string>
     <string name="about_translate_title">Çevirin</string>
-    <string name="about_translate">Transifex üzerindeki Nextcloud takımına katılarak uygulamayı çevirmemize yardımcı olabilirsiniz: %1$s</string>
+    <string name="about_translate">Transifex üzerindeki Nextcloud takımına katılarak uygulamanın çevirisini yapmamıza yardımcı olabilirsiniz: %1$s</string>
     <string name="about_app_license_title">Uygulama lisansı</string>
     <string name="about_app_license">Bu uygulama GNU GENEL KAMU LİSANSI 3 sürüm ve üzeri koşulları altında dağıtılmaktadır.</string>
     <string name="about_app_license_button">Lisansa bakın</string>
