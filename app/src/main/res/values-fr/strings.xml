@@ -2,8 +2,7 @@
 <!--
   ~ Nextcloud Notes - Android Client
   ~
-  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors
-  ~ SPDX-FileCopyrightText: 2015-2023 Stefan Niedermann <info@niedermann.it>
+  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
   ~ SPDX-License-Identifier: GPL-3.0-or-later
 -->
 <resources>
@@ -39,7 +38,7 @@
 
     <string name="change_category_title">Sélectionnez une catégorie</string>
 
-    <string name="listview_updated_today">Aujourd\'hui</string>
+    <string name="listview_updated_today">Aujourd’hui</string>
     <string name="listview_updated_yesterday">Hier</string>
     <string name="listview_updated_this_week">Cette semaine</string>
     <string name="listview_updated_last_week">Semaine dernière</string>
