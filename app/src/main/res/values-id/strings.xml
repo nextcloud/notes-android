@@ -168,6 +168,7 @@
     <string name="error_dialog_insufficient_storage">Instansi Nextcloud Anda tidak memiliki penyimpanan gratis yang tersisa. Silakan hapus beberapa berkas untuk menyinkronkan perubahan lokal Anda ke cloud Anda.</string>
     <string name="error_dialog_we_need_info">Kami membutuhkan informasi teknis berikut untuk membantu Anda.</string>
     <string name="error_dialog_server_app_enabled">Pastikan Anda telah menginstal dan mengaktifkan aplikasi \"Catatan\" di server Anda.</string>
+    <string name="error_dialog_redirect">Server Anda merespon dengan kode status HTTP 302, yang menandakan bahwa aplikasi Catatan tidak terpasang di server Anda atau ada yang salah konfigurasi. Hal ini bisa disebabkan oleh penimpaan khusus di .htaccess-file atau aplikasi Nextcloud seperti Klien OID.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Mohon nonaktifkan semua optimisasi baterai untuk Nextcloud dan aplikasi Catatan.</string>
     <string name="error_dialog_min_version">Aplikasi Android Catatan membutuhkan aplikasi Nextcloud Android setidaknya versi 3.18.</string>
     <string name="added_content">Berhasil menambahkan \"%1$s\"</string>
@@ -269,6 +270,7 @@
 
     <string name="simple_next">Berikutnya</string>
     <string name="simple_prev">Sebelumnya</string>
+    <string name="simple_backup">Cadangan</string>
     <string name="backup">Kami mendeteksi keadaan aplikasi yang tidak dapat dipulihkan. Harap cadangkan perubahan yang belum disinkronkan dan bersihkan penyimpanan aplikasi Catatan.</string>
     <string name="settings_notes_path_description">Folder untuk menyimpan catatan Anda di Nextcloud Anda</string>
     <string name="settings_notes_path_success">Folder catatan baru: %1$s</string>
