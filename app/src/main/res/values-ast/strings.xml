@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Nextcloud Notes - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
+<resources>
+    <string name="app_name">Notes</string>
+    <string name="app_name_long">Nextcloud Notes</string>
+    <string name="label_all_notes">Toles notes</string>
+    <string name="label_favorites">Favoritos</string>
+    <string name="action_create">Nota nueva</string>
+    <string name="welcome_text">Afáyate en %1$s</string>
+    <string name="action_settings">Configuración</string>
+    <string name="action_trashbin">Notes desaniciaes</string>
+    <string name="action_search">Buscar</string>
+    <string name="action_sorting_method">Métodu de clasificación</string>
+    <string name="simple_cancel">Encaboxar</string>
+    <string name="simple_switch">Cambiar</string>
+    <string name="simple_edit">Editar</string>
+    <string name="simple_remove">Quitar</string>
+    <string name="action_edit_save">Guardar</string>
+    <string name="simple_about">Tocante a</string>
+    <string name="action_undo">Desfacer</string>
+    <string name="action_uncategorized">Ensin categoría</string>
+    <string name="menu_delete">Desaniciar</string>
+    <string name="menu_change_category">Categoría</string>
+    <string name="menu_favorite">Meter en Favoritos</string>
+    <string name="menu_preview">Previsualizar</string>
+    <string name="menu_share">Compartir</string>
+
+    <string name="listview_updated_today">Güei</string>
+    <string name="listview_updated_yesterday">Ayeri</string>
+    <string name="listview_updated_this_week">Esta selmana</string>
+    <string name="listview_updated_last_week">La selmana anterior</string>
+    <string name="listview_updated_this_month">Esti mes</string>
+    <string name="listview_updated_last_month">El mes anterior</string>
+
+    <string name="settings_note_mode_new">Comportamientu de l\'apertura de Notes</string>
+    <string name="settings_theme_title">Estilu</string>
+    <string name="settings_background_sync">Sincronización en segundu planu</string>
+    <string name="error_synchronization">La sincronización falló</string>
+    <string name="error_unknown">Prodúxose un error desconocíu</string>
+
+    <string name="about_version_title">Versión</string>
+    <string name="about_version">Tas usando %1$s</string>
+    <string name="about_developers_title">Desendolcadores</string>
+    <string name="about_translators_title">Traductores</string>
+    <string name="about_testers_title">Probadores</string>
+    <string name="about_source_title">Códigu fonte</string>
+    <string name="about_source">Esti proyeutu ta agospiáu en GitHub: %1$s</string>
+    <string name="about_issues_title">Problemes</string>
+    <string name="about_translate_title">Traducir</string>
+    <string name="about_translate">Xúnite al equipu de Nextcloud en Transifex y ayúdanos a traducir esta aplicación: %1$s</string>
+    <string name="about_app_license_title">Llicencia de l\'aplicación</string>
+    <string name="about_app_license">Esta aplicación ta llicenciada baxo la GNU GENERAL PUBLIC LICENSE v3+.</string>
+    <string name="about_app_license_button">Ver la llicencia</string>
+    <string name="about_icons_disclaimer_title">Iconos</string>
+    <string name="about_icons_disclaimer_mdi">Iconos de Material Design</string>
+    <string name="about_credits_tab_title">Creitos</string>
+    <string name="about_contribution_tab_title">Collaboración</string>
+    <string name="about_license_tab_title">Llicencia</string>
+
+    <string name="widget_note_list_title">Llista de notes</string>
+    <string name="widget_note_list_placeholder">Nun hai nenguna nota</string>
+    <string name="widget_single_note_title">Nota única</string>
+    <string name="widget_single_note_placeholder_tv">Nun s\'atopó nenguna nota</string>
+    <string name="widget_not_logged_in">Anicia la sesión en Notes enantes d\'usar esti widget</string>
+    <string name="shortcut_create_long">Crear una nota</string>
+
+    <string name="pref_value_font_normal">Normal</string>
+    <string name="pref_value_lock">Proteición con contraseña</string>
+
+    <string name="simple_error">Error</string>
+    <string name="simple_close">Zarrar</string>
+    <string name="simple_copy">Copiar</string>
+    <string name="simple_exception">Exceición</string>
+    <string name="pin_to_homescreen">Fixar na pantalla d\'aniciu</string>
+    <string name="note_has_been_deleted">Desanicióse esta nota</string>
+    <string name="add_account">Amestar una cuenta</string>
+
+    <string name="category_music">Música</string>
+    <string name="category_movies">Filmes</string>
+    <string name="category_movie">Filme</string>
+    <string name="category_work">Trabayu</string>
+    <string name="category_todo">Xera pendiente</string>
+    <string name="category_todos">Xeres pendientes</string>
+    <string name="category_tasks">Xeres</string>
+    <string name="category_recipe">Receta</string>
+    <string name="category_recipes">Recetes</string>
+    <string name="category_restaurant">Restorán</string>
+    <string name="category_restaurants">Restoranes</string>
+    <string name="category_food">Comida</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_key">Clave</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_keys">Claves</string>
+    <string name="category_password">Contraseña</string>
+    <string name="category_passwords">Contraseñes</string>
+    <string name="category_game">Xuegu</string>
+    <string name="category_games">Xuegos</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">Reproducir</string>
+    <string name="simple_more">Más</string>
+    <string name="simple_move">Mover</string>
+    <string name="no_category">Nun hai nenguna categoría</string>
+    <string name="add_category">Amestar «%1$s»</string>
+    <string name="simple_checkbox">Caxellu</string>
+    <string name="unlock_notes">Desbloquiar les notes</string>
+    <string name="error_dialog_title">Oh non - ¿Y agora qué?</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Tenta de forciar el zarru de l\'aplicación y volvi aniciala. Quiciabes heba una conexón incorreuta cola aplicación de Nextcloud.</string>
+    <string name="simple_security">Seguranza</string>
+    <string name="appearance_and_behavior">Aspeutu y comportamientu</string>
+    <string name="simple_synchronization">Sincronización</string>
+    <string name="manage_accounts">Xestionar les cuentes</string>
+    <string name="action_formatting_help">Formatu</string>
+
+
+    <string name="noteMode_plain_edit">Mou d\'edición ensin formatu</string>
+    <string name="noteMode_rich_edit">Mou d\'edición arriquecida</string>
+    <string-array name="darkmode_entries">
+        <item>Claridá</item>
+        <item>Escuridá</item>
+    </string-array>
+
+    <plurals name="ab_selected">
+        <item quantity="one">%d na seleición</item>
+        <item quantity="other">%d na seleición</item>
+    </plurals>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_text_title">Testu</string>
+    <string name="formatting_help_lists_body_2">One</string>
+    <string name="formatting_help_lists_body_3">Dos</string>
+    <string name="formatting_help_lists_body_4">Trés</string>
+    <string name="formatting_help_checkboxes_body_2">Elementu 1</string>
+    <string name="formatting_help_checkboxes_body_3">Elementu 2</string>
+
+    <string name="formatting_help_structured_documents_title">Documentos estructuraos</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+
+    <string name="formatting_help_tables_title">Tables</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">Columna %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Valor %1d</string>
+
+    <string name="formatting_help_images_title">Imáxenes</string>
+    <string name="error_action_open_battery_settings">Configuración de la batería</string>
+    <string name="error_action_open_deck_info">Abrir la información de l\'aplicación</string>
+    <string name="error_action_update_files_app">Anovar</string>
+    <string name="simple_next">Siguiente</string>
+    <string name="simple_prev">Anterior</string>
+    <string name="simple_backup">Copia de seguranza</string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
+    <string name="direct_editing_error">Hebo un error mentanto se cargaba la edición arriquecida</string>
+    <string name="action_back">Atrás</string>
+    </resources>
