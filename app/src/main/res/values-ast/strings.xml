@@ -141,6 +141,7 @@
     <string name="formatting_help_structured_documents_title">Documentos estructuraos</string>
     <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
 
+    <string name="formatting_help_code_title">Códigu</string>
     <string name="formatting_help_tables_title">Tables</string>
     <!-- Column header of a sample table -->
     <string name="formatting_help_tables_column">Columna %1d</string>
