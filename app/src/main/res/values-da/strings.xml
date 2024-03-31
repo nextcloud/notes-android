@@ -100,7 +100,7 @@
 
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Synkronisér på Wi-Fi og mobil data</string>
-    <string name="pref_value_lock">Password protection</string>
+    <string name="pref_value_lock">Password beskyttelse</string>
 
     <string name="simple_error">Fejl</string>
     <string name="simple_close">Luk</string>
@@ -114,13 +114,22 @@
     <string name="category_movies">Film</string>
     <string name="category_movie">Film</string>
     <string name="category_work">Arbejde</string>
+    <string name="category_todo">ToDo</string>
+    <string name="category_todos">ToDos</string>
     <string name="category_checklists">Tjeklister</string>
     <string name="category_tasks">Opgaver</string>
     <string name="category_recipe">Opskrift</string>
     <string name="category_recipes">Opskrifter</string>
+    <string name="category_restaurant">Restaurant</string>
+    <string name="category_restaurants">Restaurants</string>
     <string name="category_food">Mad</string>
-    <string name="category_password">Adgangskode</string>
-    <string name="category_passwords">Adgangskoder</string>
+    <string name="category_bake">Bage</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_key">Nøgle</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_keys">Nøgler</string>
+    <string name="category_password">Password</string>
+    <string name="category_passwords">Passwords</string>
     <string name="category_game">Spil</string>
     <string name="category_games">Spil</string>
     <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
@@ -219,7 +228,7 @@
     <string name="error_action_open_battery_settings">Batteriindstillinger</string>
     <string name="error_action_open_deck_info">Åbn App info</string>
     <string name="error_action_open_network">Netværksindstillinger</string>
-    <string name="error_action_update_files_app">Opdatér</string>
+    <string name="error_action_update_files_app">Opdater</string>
     <string name="choose_account">Vælg konto</string>
     <string name="remove_account">Fjern %1$s</string>
 
