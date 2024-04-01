@@ -5,6 +5,7 @@
       <verify-signatures>true</verify-signatures>
       <trusted-artifacts>
          <trust group="com.android.tools.build" name="aapt2" version="8.3.1-10880808" reason="ships OS specific artifacts (win/linux) - temp global trust"/>
+         <trust file=".*-sources[.]jar" regex="true" reason="Android Studio downloads source jars but doesn't add checksums - fixes building in AS"/>
       </trusted-artifacts>
       <ignored-keys>
          <ignored-key id="C730DCAEF653215C" reason="Key couldn't be downloaded from any key server"/>
