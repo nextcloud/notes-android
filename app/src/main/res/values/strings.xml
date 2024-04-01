@@ -52,7 +52,7 @@
     <string name="settings_prevent_screen_capture">Prevent screen capture</string>
     <string name="settings_gridview">Grid view</string>
     <string name="settings_enable_direct_edit">Direct Edit</string>
-    <string name="settings_enable_direct_edit_summary">When disabled, we will not show the advanced editor.</string>
+    <string name="settings_enable_direct_edit_summary">When disabled, the advanced editor will be hidden.</string>
     <string name="settings_keep_screen_on">Keep screen on</string>
     <string name="settings_keep_screen_on_summary">When viewing or editing a note</string>
 
