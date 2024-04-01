@@ -21,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.content.ContextCompat;
+import androidx.preference.PreferenceManager;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -47,7 +48,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     private SearchView searchView;
     private String searchQuery = null;
     private static final int delay = 50; // If the search string does not change after $delay ms, then the search task starts.
-    private boolean directEditAvailable = false;
+    private boolean directEditRemotelyAvailable = false; // avoid using this directly, instead use: isDirectEditEnabled()
 
     @ColorInt
     private int color;
@@ -72,7 +73,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     @Override
     protected void onScroll(int scrollY, int oldScrollY) {
         super.onScroll(scrollY, oldScrollY);
-        if (directEditAvailable) {
+        if (isDirectEditEnabled()) {
             // only show FAB if search is not active
             if (getSearchNextButton() == null || getSearchNextButton().getVisibility() != View.VISIBLE) {
                 final ExtendedFloatingActionButton directFab = getDirectEditingButton();
@@ -85,7 +86,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         checkDirectEditingAvailable();
-        if (directEditAvailable) {
+        if (isDirectEditEnabled()) {
             final ExtendedFloatingActionButton directEditingButton = getDirectEditingButton();
             directEditingButton.setExtended(false);
             ExtendedFabUtil.toggleExtendedOnLongClick(directEditingButton);
@@ -96,6 +97,15 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
             });
         } else {
             getDirectEditingButton().setVisibility(View.GONE);
+            ExtendedFloatingActionButton edit = getNormalEditButton();
+            if(edit!=null) {
+                edit.setVisibility(View.VISIBLE);
+                edit.setOnClickListener(v -> {
+                    if (listener != null) {
+                        listener.changeMode(NoteFragmentListener.Mode.EDIT, true);
+                    }
+                });
+            }
         }
     }
 
@@ -103,11 +113,19 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         try {
             final SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext());
             final Account localAccount = repo.getAccountByName(ssoAccount.name);
-            directEditAvailable = localAccount != null && localAccount.isDirectEditingAvailable();
+            directEditRemotelyAvailable = localAccount != null && localAccount.isDirectEditingAvailable();
         } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
             Log.w(TAG, "checkDirectEditingAvailable: ", e);
-            directEditAvailable = false;
+            directEditRemotelyAvailable = false;
         }
+    }
+
+    protected boolean isDirectEditEnabled() {
+        if (!directEditRemotelyAvailable) {
+            return false;
+        }
+        final var sp = PreferenceManager.getDefaultSharedPreferences(requireContext().getApplicationContext());
+        return sp.getBoolean(getString(R.string.pref_key_enable_direct_edit), true);
     }
 
     @Override
@@ -258,6 +276,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     @NonNull
     protected abstract ExtendedFloatingActionButton getDirectEditingButton();
 
+    protected abstract ExtendedFloatingActionButton getNormalEditButton();
 
     private void showSearchFabs() {
         ExtendedFabUtil.setExtendedFabVisibility(getDirectEditingButton(), false);
@@ -353,5 +372,9 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         util.material.themeFAB(getSearchNextButton());
         util.material.themeFAB(getSearchPrevButton());
         util.material.themeExtendedFAB(getDirectEditingButton());
+        var editFab = getNormalEditButton();
+        if(editFab != null) {
+            util.material.themeExtendedFAB(editFab);
+        }
     }
 }

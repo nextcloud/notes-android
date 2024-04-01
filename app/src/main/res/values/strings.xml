@@ -56,6 +56,8 @@
     <string name="settings_background_sync">Background synchronization</string>
     <string name="settings_prevent_screen_capture">Prevent screen capture</string>
     <string name="settings_gridview">Grid view</string>
+    <string name="settings_enable_direct_edit">Direct Edit</string>
+    <string name="settings_enable_direct_edit_summary">When disabled, the advanced editor will be hidden.</string>
     <string name="settings_keep_screen_on">Keep screen on</string>
     <string name="settings_keep_screen_on_summary">When viewing or editing a note</string>
 
@@ -127,6 +129,7 @@
     <string name="pref_category_security" translatable="false">security</string>
     <string name="pref_key_last_note_mode" translatable="false">lastNoteMode</string>
     <string name="pref_key_background_sync" translatable="false">backgroundSync</string>
+    <string name="pref_key_enable_direct_edit" translatable="false">directEditPreference</string>
     <string name="pref_value_mode_edit" translatable="false">edit</string>
     <string name="pref_value_mode_direct_edit" translatable="false">directEdit</string>
     <string name="pref_value_mode_preview" translatable="false">preview</string>
