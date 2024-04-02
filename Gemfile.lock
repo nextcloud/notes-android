@@ -163,7 +163,7 @@ GEM
     os (1.1.4)
     plist (3.7.1)
     public_suffix (5.0.4)
-    rake (13.1.0)
+    rake (13.2.0)
     representable (3.2.0)
       declarative (< 0.1.0)
       trailblazer-option (>= 0.1.1, < 0.2.0)
