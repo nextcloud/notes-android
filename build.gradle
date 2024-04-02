@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 buildscript {
     ext {
         kotlinVersion = '1.9.23'
-        commonsVersion = '2.1.0'
+        commonsVersion = '2.2.0'
     }
     repositories {
         mavenCentral()
