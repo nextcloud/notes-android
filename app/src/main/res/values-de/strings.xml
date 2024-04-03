@@ -56,6 +56,8 @@
     <string name="settings_background_sync">Hintergrundsynchronisierung</string>
     <string name="settings_prevent_screen_capture">Bildschirmaufnahme verhindern</string>
     <string name="settings_gridview">Kachelansicht</string>
+    <string name="settings_enable_direct_edit">Direkt bearbeiten</string>
+    <string name="settings_enable_direct_edit_summary">Wenn er deaktiviert ist, wird der erweiterte Editor ausgeblendet.</string>
     <string name="settings_keep_screen_on">Bildschirm anlassen</string>
     <string name="settings_keep_screen_on_summary">Beim Betrachten oder Bearbeiten einer Notiz</string>
 

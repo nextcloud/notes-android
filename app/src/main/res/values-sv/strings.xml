@@ -56,6 +56,8 @@
     <string name="settings_background_sync">Bakgrundssynkronisering</string>
     <string name="settings_prevent_screen_capture">Hindra skärmklipp</string>
     <string name="settings_gridview">Rutnätsvy</string>
+    <string name="settings_enable_direct_edit">Direktredigering</string>
+    <string name="settings_enable_direct_edit_summary">När inaktiverad döljs den avancerade redigeraren.</string>
     <string name="settings_keep_screen_on">Håll skärmen igång</string>
     <string name="settings_keep_screen_on_summary">När du visar eller redigerar en anteckning</string>
 
@@ -267,6 +269,8 @@
     <!-- Table cell value of a sample table -->
     <string name="formatting_help_tables_value">Värde %1d</string>
 
+    <string name="formatting_help_images_body_1">Länkar måste antingen vara kompletta webbadresser som börjar med ett protokoll och en domän eller absoluta sökvägar som börjar med ett %1$s tecken.</string>
+    <string name="formatting_help_images_body_2">För att överensstämma med Markdown-formatet, använd escape-tecken i bildens URL. Detta innebär till exempel att ersätta mellanslag med %1$s i URL:en..</string>
     <string name="formatting_help_images_title">Bilder</string>
     <string name="formatting_help_images_alt">Snygg bild</string>
 
@@ -281,6 +285,10 @@
     <string name="no_other_accounts">Du har inte konfigurerat några andra konton än.</string>
     <string name="choose_account">Välj konto</string>
     <string name="context_based_formatting">Kontextbaserad formaterings-popover</string>
+    <plurals name="remove_account_message">
+        <item quantity="one">Om du tar bort kontot %1$s kommer det också att ta bort en osynkroniserad ändring som inte kan återställas.</item>
+        <item quantity="other">Om du tar bort kontot %1$s raderas också oåterställbara %2$d osynkroniserade ändringar.</item>
+    </plurals>
     <string name="remove_account">Ta bort %1$s</string>
 
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Du måste vara ansluten till internet för att lägga till ett konto.</string>
@@ -303,5 +311,7 @@
     <string name="progress_import_indeterminate">Importerar anteckningar...</string>
     <string name="progress_import">Importerar anteckning %1$d av %2$d... </string>
     <string name="account_imported">Konto importerat.</string>
+    <string name="direct_editing_error">Fel vid inläsning av utökad redigering</string>
+    <string name="switch_to_plain_editing">Byt till enkel redigering</string>
     <string name="action_back">Tillbaka</string>
     </resources>

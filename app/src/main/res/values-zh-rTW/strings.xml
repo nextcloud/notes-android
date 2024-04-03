@@ -46,6 +46,7 @@
     <string name="listview_updated_last_month">上個月</string>
 
     <string name="settings_note_mode">筆記顯示模式</string>
+    <string name="settings_note_mode_new">筆記開啟行為</string>
     <string name="settings_theme_title">佈景主題</string>
     <string name="settings_font_title">等寬</string>
     <string name="settings_font_size">字體大小</string>
@@ -55,6 +56,8 @@
     <string name="settings_background_sync">背景同步</string>
     <string name="settings_prevent_screen_capture">防止螢幕截取</string>
     <string name="settings_gridview">網格檢視</string>
+    <string name="settings_enable_direct_edit">直接編輯</string>
+    <string name="settings_enable_direct_edit_summary">停用後，進階編輯器將會被隱藏。</string>
     <string name="settings_keep_screen_on">保持螢幕開啟</string>
     <string name="settings_keep_screen_on_summary">檢視或編輯筆記時</string>
 
@@ -68,6 +71,7 @@
     <string name="about_version">你目前使用 %1$s</string>
     <string name="about_maintainer_title">維護者</string>
     <string name="about_developers_title">開發者</string>
+    <string name="about_developers_original_author">原始作者</string>
     <string name="about_translators_title">翻譯者</string>
     <string name="about_translators_transifex">%1$s 上的 Nextcloud 社群</string>
     <string name="about_testers_title">測試人員</string>
@@ -183,6 +187,9 @@
     <string name="action_formatting_help">文字樣式</string>
 
 
+    <string name="noteMode_plain_edit">純文字編輯模式</string>
+    <string name="noteMode_plain_preview">純文字預覽</string>
+    <string name="noteMode_rich_edit">格式化文字編輯模式</string>
     <string name="noteMode_remember_last">記住上次選擇</string>
 
     <string-array name="fontSize_entries">
@@ -299,5 +306,7 @@
     <string name="progress_import_indeterminate">匯入筆記中...</string>
     <string name="progress_import">匯入筆記 %2$d 之 %1$d 中...</string>
     <string name="account_imported">已匯入賬戶。</string>
+    <string name="direct_editing_error">載入格式化編輯時發生錯誤</string>
+    <string name="switch_to_plain_editing">切換至純文字編輯</string>
     <string name="action_back">返回</string>
     </resources>

@@ -56,6 +56,8 @@
     <string name="settings_background_sync">Synkronisering i bakgrunnen</string>
     <string name="settings_prevent_screen_capture">Forhindre skjermopptak</string>
     <string name="settings_gridview">Rutenett-visning</string>
+    <string name="settings_enable_direct_edit">Direkte redigering</string>
+    <string name="settings_enable_direct_edit_summary">Når den er deaktivert, blir den avanserte redigereren skjult.</string>
     <string name="settings_keep_screen_on">Hold skjermen på</string>
     <string name="settings_keep_screen_on_summary">Når du viser eller redigerer et notat</string>
 
