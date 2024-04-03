@@ -56,6 +56,8 @@
     <string name="settings_background_sync">Arka planda eşitleme</string>
     <string name="settings_prevent_screen_capture">Ekran görüntüsü alınamasın</string>
     <string name="settings_gridview">Tablo görünümü</string>
+    <string name="settings_enable_direct_edit">Doğrudan düzenleme</string>
+    <string name="settings_enable_direct_edit_summary">Kapatıldığındai gelişmiş düzenleyici gizlenir.</string>
     <string name="settings_keep_screen_on">Ekran açık kalsın</string>
     <string name="settings_keep_screen_on_summary">Bir notu görüntüler ya da düzenlerken</string>
 

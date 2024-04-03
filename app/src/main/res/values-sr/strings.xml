@@ -56,6 +56,8 @@
     <string name="settings_background_sync">Позадинска синхронизација</string>
     <string name="settings_prevent_screen_capture">Спречи снимак екрана</string>
     <string name="settings_gridview">Приказ мреже</string>
+    <string name="settings_enable_direct_edit">Директно уређивање</string>
+    <string name="settings_enable_direct_edit_summary">Када је искључено, сакриће се напредни едитор.</string>
     <string name="settings_keep_screen_on">Задржи укључен екран</string>
     <string name="settings_keep_screen_on_summary">Када се прегледа или уређује белешка</string>
 
