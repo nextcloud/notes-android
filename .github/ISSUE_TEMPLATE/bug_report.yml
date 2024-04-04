@@ -1,53 +1,107 @@
-<!--
- ~ SPDX-FileCopyrightText: 2020-2024 Nextcloud GmbH and Nextcloud contributors
- ~ SPDX-FileCopyrightText: 2020-2024 Stefan Niedermann <info@niedermann.it>
- ~ SPDX-License-Identifier: GPL-3.0-or-later
--->
----
-name: 🐞 Bug report
-about: Help us improving by reporting a bug
-labels: bug
----
+#  SPDX-FileCopyrightText: 2020-2024 Nextcloud GmbH and Nextcloud contributors
+#  SPDX-FileCopyrightText: 2020-2024 Stefan Niedermann <info@niedermann.it>
+#  SPDX-License-Identifier: GPL-3.0-or-later
+name: "🐞 Bug report"
+description: "Help us improving by reporting a bug"
+labels: [ "bug" ]
+body:
+  - type: markdown
+    attributes:
+      value: Please note this is a free and open-source project. All people take on their own time to help you, so please, be patient.
 
-<!--
-Guidelines for submitting issues:
+  - type: checkboxes
+    id: before-posting
+    attributes:
+      label: "This issue respects the following points:"
+      description: All conditions are **required**. Your issue can be closed if these are checked incorrectly.
+      options:
+        - label: I have read the [FAQ](https://github.com/nextcloud/notes-android/blob/master/FAQ.md)
+          required: true
+        - label: I have searched for existing issues
+          required: true
+        - label: The issue affects the Notes Android app, neither the [Notes server app](https://github.com/nextcloud/notes/issues/) nor the [Nextcloud Android app](https://github.com/nextcloud/android/issues).
+          required: true
 
-* Bug reports which do not fill the complete issue template will be closed.
-* Please have a look at our [FAQ](https://github.com/nextcloud/notes-android/blob/main/FAQ.md)
-* Please search the existing issues first, it's likely that your issue was already reported or even fixed.
-* This repository is *only* for issues within the Nextcloud Notes Android app
--->
-Please use **[GitHub reactions](https://blog.github.com/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/)** 👍 to show that you are affected by the same issue. Please don't comment if you have no relevant information to add!
+  - type: textarea
+    id: problem-description
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is. Please add clear steps to reliably reproduce the issue.
+      placeholder: |
+        1. Go to '…'
+        2. Click on '…'
+        3. Scroll down to '…'
+        4. See error
+    validations:
+      required: true
 
-**Describe the bug**
-<!-- A clear and concise description of what the bug is. -->
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of what you expected to happen. If applicable, add screenshots to help explain your problem.
 
+  - type: input
+    id: version-nextcloud-android-notes
+    attributes:
+      label: Notes Android version
+      placeholder: Version of this app
+    validations:
+      required: true
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '…'
-2. Click on '…'
-3. Scroll down to '…'
-4. See error
+  - type: input
+    id: version-nextcloud-notes
+    attributes:
+      label: Notes server version
+      placeholder: Notes Server app version
+    validations:
+      required: true
 
+  - type: input
+    id: version-nextcloud-android
+    attributes:
+      label: Nextcloud Android version
+      placeholder: Nextcloud Android app
+    validations:
+      required: true
 
-**Expected behavior**
-<!-- A clear and concise description of what you expected to happen. -->
+  - type: input
+    id: version-nextcloud
+    attributes:
+      label: Nextcloud version
+      placeholder: Your Nextcloud instance
+    validations:
+      required: true
 
+  - type: input
+    id: device
+    attributes:
+      label: Device
+      description: Manufacturer and model
+      placeholder: Samsung Galaxy S24
+    validations:
+      required: true
 
-**Screenshots**
-<!-- If applicable, add screenshots to help explain your problem. -->
+  - type: input
+    id: android-version
+    attributes:
+      label: Android Version
+      description: Neither MIUI nor One UI or other proprietary manufacturer OS versions
+      placeholder: "14"
+    validations:
+      required: true
 
+  - type: checkboxes
+    id: versions
+    attributes:
+      label: App Store
+      options:
+        - label: Google Play Store
+        - label: F-Droid
+        - label: Huawei App Gallery
 
-**Smartphone (please complete the following information):**
- - Nextcloud Notes-Version (android app): 
- - F-Droid or Play Store: 
- - Android-Version: 
- - Device: 
-
-
-**Server**
- - Nextcloud version: 
- - Nextcloud Notes version (server app): 
-
-**Stacktrace**
+  - type: textarea
+    id: stacktrace
+    attributes:
+      label: Stacktrace
+      description: Copy the error message using the <kbd>Copy</kbd> button. Please do not post a screenshot of the error message.

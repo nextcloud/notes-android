@@ -1,30 +1,45 @@
-<!--
- ~ SPDX-FileCopyrightText: 2020-2024 Nextcloud GmbH and Nextcloud contributors
- ~ SPDX-FileCopyrightText: 2020-2024 Stefan Niedermann <info@niedermann.it>
- ~ SPDX-License-Identifier: GPL-3.0-or-later
--->
----
-name: 🚀 Feature request
-about: Suggest an idea for this project
-labels: Enhancement
----
+name: "🚀 Feature request"
+description: "Propose an idea for Notes Android"
+labels: [ "enhancement" ]
+body:
 
-<!--
-Guidelines for submitting issues:
+  - type: markdown
+    attributes:
+      value: |
+        **Guidelines for submitting issues:**
 
-* Please search the existing issues first, it's likely that your issue was already reported or even fixed.
-* This repository is *only* for issues within the Nextcloud Notes Android app
--->
-Please use **[GitHub reactions](https://blog.github.com/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/)** 👍 to show that you are affected by the same issue. Please don't comment if you have no relevant information to add!
+        * Please search the existing issues first, it's likely that your issue was already reported or even fixed.
+        * This repository is *only* for issues within the Notes Android app, **not** for the [Notes server app](https://github.com/nextcloud/notes/issues/) and **not** for the [Nextcloud Android app](https://github.com/nextcloud/android/issues).
 
-**Is your feature request related to a problem? Please describe.**
-<!-- A clear and concise description of what the problem is. Ex. I'm always frustrated when […] -->
+  - type: textarea
+    id: problem-description
+    attributes:
+      label: Is your feature request related to a problem? Please describe.
+      description: |
+        A clear and concise description of what the problem is.
+      placeholder: I'm always frustrated when…
+    validations:
+      required: true
 
-**Describe the solution you'd like**
-<!-- A clear and concise description of what you want to happen. -->
+  - type: textarea
+    id: preferred-solution
+    attributes:
+      label: Describe the solution you'd like
+      description: |
+        A clear and concise description of what you want to happen.
+    validations:
+      required: true
 
-**Describe alternatives you've considered**
-<!-- A clear and concise description of any alternative solutions or features you've considered. -->
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Describe alternatives you've considered
+      description: |
+        A clear and concise description of any alternative solutions or features you've considered.
 
-**Additional context**
-<!-- Add any other context or screenshots about the feature request here. -->
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: |
+        Add any other context or screenshots about the feature request here.
