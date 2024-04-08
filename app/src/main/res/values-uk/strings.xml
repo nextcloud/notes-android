@@ -56,6 +56,8 @@
     <string name="settings_background_sync">Фонова синхронізація</string>
     <string name="settings_prevent_screen_capture">Запобігати захопленню екрана</string>
     <string name="settings_gridview">Упорядкування у формі сітки</string>
+    <string name="settings_enable_direct_edit">Пряме редагування</string>
+    <string name="settings_enable_direct_edit_summary">Якщо вимкнено, розширений редактор буде приховано.</string>
     <string name="settings_keep_screen_on">Тримати екран увімкненим</string>
     <string name="settings_keep_screen_on_summary">Під час перегляду або редагування нотатки</string>
 
