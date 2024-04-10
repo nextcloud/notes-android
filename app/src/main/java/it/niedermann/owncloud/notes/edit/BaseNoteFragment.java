@@ -82,6 +82,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     private boolean titleModified = false;
 
     protected boolean isNew = true;
+    protected boolean contentLoaded = false;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -314,7 +315,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     protected void saveNote(@Nullable ISyncCallback callback) {
         Log.d(TAG, "saveData()");
         if (note != null) {
-            final var newContent = getContent();
+            final var newContent = contentLoaded ? getContent() : note.getContent();
             if (note.getContent().equals(newContent)) {
                 if (note.getScrollY() != originalScrollY) {
                     Log.v(TAG, "... only saving new scroll state, since content did not change");
