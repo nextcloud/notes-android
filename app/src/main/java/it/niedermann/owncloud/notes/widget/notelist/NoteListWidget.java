@@ -47,7 +47,11 @@ public class NoteListWidget extends AppWidgetProvider {
 
                 views = new RemoteViews(context.getPackageName(), R.layout.widget_note_list);
                 views.setRemoteAdapter(R.id.note_list_widget_lv, serviceIntent);
-                views.setPendingIntentTemplate(R.id.note_list_widget_lv, PendingIntent.getActivity(context, 0, new Intent(), pendingIntentFlagCompat(PendingIntent.FLAG_UPDATE_CURRENT | Intent.FILL_IN_COMPONENT)));
+                // This makes the intent explicit. see https://developer.android.com/about/versions/14/behavior-changes-14#java
+                Intent explicitIntent = new Intent()
+                explicitIntent.setPackage(context.getPackageName());
+
+                views.setPendingIntentTemplate(R.id.note_list_widget_lv, PendingIntent.getActivity(context, 0, explicitIntent, pendingIntentFlagCompat(PendingIntent.FLAG_UPDATE_CURRENT | Intent.FILL_IN_COMPONENT)));
                 views.setEmptyView(R.id.note_list_widget_lv, R.id.widget_note_list_placeholder_tv);
 
                 awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.note_list_widget_lv);
