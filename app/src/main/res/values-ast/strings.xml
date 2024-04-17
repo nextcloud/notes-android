@@ -104,6 +104,7 @@
     <string name="category_play">Reproducir</string>
     <string name="simple_more">Más</string>
     <string name="simple_move">Mover</string>
+    <string name="category_readonly">Namás llectura</string>
     <string name="no_category">Nun hai nenguna categoría</string>
     <string name="add_category">Amestar «%1$s»</string>
     <string name="simple_checkbox">Caxellu</string>
