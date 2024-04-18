@@ -109,11 +109,6 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
         return binding.directEditing;
     }
 
-    protected ExtendedFloatingActionButton getNormalEditButton() {
-        // the edit fragment does not have a button
-        return null;
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
