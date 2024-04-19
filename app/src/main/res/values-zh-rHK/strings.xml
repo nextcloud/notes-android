@@ -113,7 +113,7 @@
     <string name="simple_exception">例外</string>
     <string name="pin_to_homescreen">釘選至主畫面</string>
     <string name="note_has_been_deleted">此則筆記已被刪除</string>
-    <string name="add_account">新增賬戶</string>
+    <string name="add_account">新增帳戶</string>
 
     <string name="category_music">音樂</string>
     <string name="category_movies">電影</string>
@@ -147,7 +147,7 @@
     <!-- Like a gift -->
     <string name="category_presents">禮物</string>
 
-    <string name="account_already_imported">已成功匯入賬戶</string>
+    <string name="account_already_imported">已成功匯入帳戶</string>
     <string name="no_notes_yet">尚沒有筆記</string>
     <string name="no_notes_yet_description">請按 + 按鈕建立新筆記</string>
     <string name="simple_more">更多</string>
@@ -183,7 +183,7 @@
     <string name="simple_security">安全性</string>
     <string name="appearance_and_behavior">外觀與行為</string>
     <string name="simple_synchronization">同步</string>
-    <string name="manage_accounts">賬戶管理</string>
+    <string name="manage_accounts">帳戶管理</string>
     <string name="action_formatting_help">正在格式化</string>
 
 
@@ -277,16 +277,16 @@
     <string name="error_action_open_deck_info">開啟 App 資訊</string>
     <string name="error_action_open_network">網路設定</string>
     <string name="error_action_update_files_app">更新</string>
-    <string name="no_account_configured_yet">未有已設定的賬戶</string>
-    <string name="no_other_accounts">你尚未設定其它賬戶。</string>
-    <string name="choose_account">選擇賬戶</string>
+    <string name="no_account_configured_yet">未有已設定的帳戶</string>
+    <string name="no_other_accounts">你尚未設定其它帳戶。</string>
+    <string name="choose_account">選擇帳戶</string>
     <string name="context_based_formatting">基於 context 的格式彈出框</string>
     <plurals name="remove_account_message">
-        <item quantity="other">刪除賬戶 %1$s 還將刪除 %2$d 個無法恢復的非同步更改。</item>
+        <item quantity="other">刪除帳戶 %1$s 還將刪除 %2$d 個無法恢復的非同步更改。</item>
     </plurals>
     <string name="remove_account">移除 %1$s</string>
 
-    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">您必須連線到互聯網才能新增賬戶。</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">您必須連線到互聯網才能新增帳戶。</string>
     <string name="settings_notes_path">設置資料夾</string>
 
     <string name="simple_next">下一步</string>
@@ -305,7 +305,7 @@
     <string name="http_status_code">HTTP狀態碼：%1$d</string>
     <string name="progress_import_indeterminate">正在導入筆記...</string>
     <string name="progress_import">正導入筆記 %2$d 之 %1$d ...</string>
-    <string name="account_imported">已導入賬戶。</string>
+    <string name="account_imported">已導入帳戶。</string>
     <string name="direct_editing_error">載入增強編輯模式時發生錯誤</string>
     <string name="switch_to_plain_editing">切換到普通編輯模式</string>
     <string name="action_back">返回</string>
