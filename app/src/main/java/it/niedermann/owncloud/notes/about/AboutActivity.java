@@ -26,7 +26,6 @@ import it.niedermann.owncloud.notes.databinding.ActivityAboutBinding;
 public class AboutActivity extends LockedActivity {
 
     private ActivityAboutBinding binding;
-    private final static int POS_CREDITS = 0;
     private final static int POS_CONTRIB = 1;
     private final static int POS_LICENSE = 2;
     private final static int TOTAL_COUNT = 3;

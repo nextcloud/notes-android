@@ -25,7 +25,6 @@ import it.niedermann.owncloud.notes.shared.util.KeyboardUtils;
 
 public class EditTitleDialogFragment extends BrandedDialogFragment {
 
-    private static final String TAG = EditTitleDialogFragment.class.getSimpleName();
     static final String PARAM_OLD_TITLE = "old_title";
     private DialogEditTitleBinding binding;
 
