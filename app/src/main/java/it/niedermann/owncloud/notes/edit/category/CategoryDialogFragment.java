@@ -38,7 +38,6 @@ import it.niedermann.owncloud.notes.shared.util.KeyboardUtils;
  */
 public class CategoryDialogFragment extends BrandedDialogFragment {
 
-    private static final String TAG = CategoryDialogFragment.class.getSimpleName();
     private static final String STATE_CATEGORY = "category";
 
     private CategoryViewModel viewModel;

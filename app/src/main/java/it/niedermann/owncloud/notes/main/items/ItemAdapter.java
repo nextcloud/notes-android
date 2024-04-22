@@ -45,7 +45,6 @@ import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 
 public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Branded {
 
-    private static final String TAG = ItemAdapter.class.getSimpleName();
 
     public static final int TYPE_SECTION = 0;
     public static final int TYPE_NOTE_WITH_EXCERPT = 1;
