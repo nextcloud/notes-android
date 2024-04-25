@@ -41,7 +41,9 @@
     <string name="settings_note_mode_new">Comportamientu de l\'apertura de Notes</string>
     <string name="settings_theme_title">Estilu</string>
     <string name="settings_background_sync">Sincronización en segundu planu</string>
+    <string name="settings_enable_direct_edit">Edición direuta</string>
     <string name="error_synchronization">La sincronización falló</string>
+    <string name="error_no_network">Nun hai conexón a la rede</string>
     <string name="error_unknown">Prodúxose un error desconocíu</string>
 
     <string name="about_version_title">Versión</string>
@@ -103,6 +105,9 @@
     <string name="category_games">Xuegos</string>
     <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
     <string name="category_play">Reproducir</string>
+    <string name="account_already_imported">Yá s\'importó la cuenta</string>
+    <string name="no_notes_yet">Nun hai nenguna nota</string>
+    <string name="no_notes_yet_description">Primi\'l botón «+» pa crear una nota</string>
     <string name="simple_more">Más</string>
     <string name="simple_move">Mover</string>
     <string name="category_readonly">Namás llectura</string>
@@ -112,6 +117,7 @@
     <string name="unlock_notes">Desbloquiar les notes</string>
     <string name="error_dialog_title">Oh non - ¿Y agora qué?</string>
     <string name="error_dialog_tip_token_mismatch_retry">Tenta de forciar el zarru de l\'aplicación y volvi aniciala. Quiciabes heba una conexón incorreuta cola aplicación de Nextcloud.</string>
+    <string name="menu_edit_title">Editar el títulu</string>
     <string name="simple_security">Seguranza</string>
     <string name="appearance_and_behavior">Aspeutu y comportamientu</string>
     <string name="simple_synchronization">Sincronización</string>
@@ -134,6 +140,7 @@
     <string name="formatting_help_codefence" translateable="false">```</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_text_title">Testu</string>
+    <string name="formatting_help_lists_title">Llistes</string>
     <string name="formatting_help_lists_body_2">One</string>
     <string name="formatting_help_lists_body_3">Dos</string>
     <string name="formatting_help_lists_body_4">Trés</string>
@@ -155,6 +162,10 @@
     <string name="error_action_open_battery_settings">Configuración de la batería</string>
     <string name="error_action_open_deck_info">Abrir la información de l\'aplicación</string>
     <string name="error_action_update_files_app">Anovar</string>
+    <string name="no_account_configured_yet">Nun se configuró nenguna cuenta</string>
+    <string name="remove_account">Quitar «%1$s»</string>
+
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Tienes de tar conectáu a internet p\'amestar una cuenta.</string>
     <string name="simple_next">Siguiente</string>
     <string name="simple_prev">Anterior</string>
     <string name="simple_backup">Copia de seguranza</string>
@@ -162,6 +173,10 @@
         <item translatable="false">.txt</item>
         <item translatable="false">.md</item>
     </string-array>
+    <string name="progress_import_indeterminate">Importando les notes…</string>
+    <string name="progress_import">Importando la nota %1$d de %2$d…</string>
+    <string name="account_imported">Importóse la cuenta.</string>
     <string name="direct_editing_error">Hebo un error mentanto se cargaba la edición arriquecida</string>
+    <string name="switch_to_plain_editing">Cambiar a la edición ensin formatu</string>
     <string name="action_back">Atrás</string>
     </resources>
