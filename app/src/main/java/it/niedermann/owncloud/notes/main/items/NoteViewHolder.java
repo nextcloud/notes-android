@@ -24,6 +24,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.selection.ItemDetailsLookup;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
 import com.nextcloud.android.common.ui.theme.utils.ColorRole;
 
@@ -93,6 +94,13 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
             final var util = BrandingUtil.of(color, context);
             util.platform.highlightText(textView, content, searchQuery.toString());
         }
+    }
+
+    protected void bindActions(@NonNull MaterialButton actionsButton, int color) {
+        final BrandingUtil util = BrandingUtil.of(color, actionsButton.getContext());
+        util.material.colorMaterialButtonText(actionsButton);
+        util.material.colorMaterialTextButton(actionsButton);
+        actionsButton.setOnClickListener(view -> noteClickListener.onNoteActionsClick(getLayoutPosition(), view));
     }
 
     public abstract void showSwipe(boolean left);
