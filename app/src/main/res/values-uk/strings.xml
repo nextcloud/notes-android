@@ -29,7 +29,7 @@
     <string name="action_uncategorized">Некатегоризоване</string>
     <string name="menu_delete">Вилучити</string>
     <string name="menu_change_category">Категорія</string>
-    <string name="menu_favorite">Улюблений</string>
+    <string name="menu_favorite">Із зірочкою</string>
     <string name="menu_preview">Перегляд</string>
     <string name="menu_share">Спільний доступ</string>
 
