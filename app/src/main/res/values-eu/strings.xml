@@ -56,6 +56,8 @@
     <string name="settings_background_sync">Atzeko planoko sinkronizazioa</string>
     <string name="settings_prevent_screen_capture">Eragotzi pantaila argazkia</string>
     <string name="settings_gridview">Sareta ikuspegia</string>
+    <string name="settings_enable_direct_edit">Zuzeneko edizioa</string>
+    <string name="settings_enable_direct_edit_summary">Desgaituta dagoenean, editore aurreratua ezkutatu egingo da.</string>
     <string name="settings_keep_screen_on">Mantendu pantaila piztuta</string>
     <string name="settings_keep_screen_on_summary">Nota bat ikusi edo editatzean</string>
 
