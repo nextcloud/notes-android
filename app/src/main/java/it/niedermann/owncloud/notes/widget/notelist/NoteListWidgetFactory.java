@@ -93,11 +93,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
         return dbNotes.size() + 1;
     }
 
-    private Intent getCreateNoteIntent(Account localAccount ) {
-        final Bundle bundle = new Bundle();
-        bundle.putSerializable(PARAM_CATEGORY, data.getMode() == MODE_DISPLAY_STARRED ? new NavigationCategory(ENavigationCategoryType.FAVORITES) : new NavigationCategory(localAccount.getId(), data.getCategory()));
-        bundle.putLong(EditNoteActivity.PARAM_ACCOUNT_ID, data.getAccountId());
-
+    private Intent getEditNoteIntent(Bundle bundle) {
         final Intent intent = new Intent(context, EditNoteActivity.class);
         intent.setPackage(context.getPackageName());
         intent.putExtras(bundle);
@@ -106,16 +102,20 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
         return intent;
     }
 
+    private Intent getCreateNoteIntent(Account localAccount ) {
+        final Bundle bundle = new Bundle();
+        bundle.putSerializable(PARAM_CATEGORY, data.getMode() == MODE_DISPLAY_STARRED ? new NavigationCategory(ENavigationCategoryType.FAVORITES) : new NavigationCategory(localAccount.getId(), data.getCategory()));
+        bundle.putLong(EditNoteActivity.PARAM_ACCOUNT_ID, data.getAccountId());
+
+        return getEditNoteIntent(bundle);
+    }
+
     private Intent getOpenNoteIntent(Note note) {
         final Bundle bundle = new Bundle();
         bundle.putLong(EditNoteActivity.PARAM_NOTE_ID, note.getId());
         bundle.putLong(EditNoteActivity.PARAM_ACCOUNT_ID, note.getAccountId());
 
-        final Intent intent = new Intent(context, EditNoteActivity.class);
-        intent.putExtras(bundle);
-        intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
-
-        return intent;
+        return getEditNoteIntent(bundle);
     }
 
     @Override
