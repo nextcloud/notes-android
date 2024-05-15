@@ -6,7 +6,6 @@
  */
 package it.niedermann.owncloud.notes.widget.notelist;
 
-import static it.niedermann.owncloud.notes.edit.EditNoteActivity.PARAM_NOTE_ID;
 import static it.niedermann.owncloud.notes.shared.util.WidgetUtil.pendingIntentFlagCompat;
 
 import android.app.PendingIntent;
@@ -46,20 +45,15 @@ public class NoteListWidget extends AppWidgetProvider {
 
                 Log.v(TAG, "-- data - " + data);
 
-                Intent createNewNoteIntent = new Intent(context, EditNoteActivity.class);
-                createNewNoteIntent.setAction("android.intent.action.SEND");
-                createNewNoteIntent.setPackage(context.getPackageName());
-
-                // TODO distinguish between add and view
-                // TODO add note it
-                createNewNoteIntent.putExtra(PARAM_NOTE_ID, -1L);
+                Intent editNoteIntent = new Intent(context, EditNoteActivity.class);
+                editNoteIntent.setPackage(context.getPackageName());
 
                 int pendingIntentFlags = pendingIntentFlagCompat(PendingIntent.FLAG_UPDATE_CURRENT | Intent.FILL_IN_COMPONENT);
-                PendingIntent createNewNotePendingIntent = PendingIntent.getActivity(context, 0, createNewNoteIntent, pendingIntentFlags);
+                PendingIntent editNotePendingIntent = PendingIntent.getActivity(context, 0, editNoteIntent, pendingIntentFlags);
 
                 views = new RemoteViews(context.getPackageName(), R.layout.widget_note_list);
                 views.setRemoteAdapter(R.id.note_list_widget_lv, serviceIntent);
-                views.setPendingIntentTemplate(R.id.note_list_widget_lv, createNewNotePendingIntent);
+                views.setPendingIntentTemplate(R.id.note_list_widget_lv, editNotePendingIntent);
                 views.setEmptyView(R.id.note_list_widget_lv, R.id.widget_note_list_placeholder_tv);
 
                 awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.note_list_widget_lv);
@@ -81,21 +75,28 @@ public class NoteListWidget extends AppWidgetProvider {
         super.onReceive(context, intent);
         final var awm = AppWidgetManager.getInstance(context);
 
-        if (intent.getAction() != null) {
-            if (intent.getAction().equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE)) {
-                if (intent.hasExtra(AppWidgetManager.EXTRA_APPWIDGET_ID)) {
-                    if (intent.getExtras() != null) {
-                        updateAppWidget(context, awm, new int[]{intent.getExtras().getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1)});
-                    } else {
-                        Log.w(TAG, "intent.getExtras() is null");
-                    }
-                } else {
-                    updateAppWidget(context, awm, awm.getAppWidgetIds(new ComponentName(context, NoteListWidget.class)));
-                }
-            }
-        } else {
-            Log.w(TAG, "intent.getAction() is null");
+        if (intent.getAction() == null) {
+            Log.w(TAG, "Intent action is null");
+            return;
         }
+
+        if (!intent.getAction().equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE)) {
+            Log.w(TAG, "Intent action is not ACTION_APPWIDGET_UPDATE");
+            return;
+        }
+
+        if (!intent.hasExtra(AppWidgetManager.EXTRA_APPWIDGET_ID)) {
+            Log.w(TAG,"Update widget via default appWidgetIds");
+            updateAppWidget(context, awm, awm.getAppWidgetIds(new ComponentName(context, NoteListWidget.class)));
+        }
+
+        if (intent.getExtras() == null) {
+            Log.w(TAG, "Intent doesn't have bundle");
+            return;
+        }
+
+        Log.w(TAG,"Update widget via given appWidgetIds");
+        updateAppWidget(context, awm, new int[]{intent.getExtras().getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1)});
     }
 
     @Override
