@@ -6,6 +6,7 @@
  */
 package it.niedermann.owncloud.notes.widget.notelist;
 
+import static it.niedermann.owncloud.notes.edit.EditNoteActivity.PARAM_NOTE_ID;
 import static it.niedermann.owncloud.notes.shared.util.WidgetUtil.pendingIntentFlagCompat;
 
 import android.app.PendingIntent;
@@ -25,7 +26,6 @@ import java.util.concurrent.Executors;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.persistence.NotesRepository;
-import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
 
 public class NoteListWidget extends AppWidgetProvider {
     private static final String TAG = NoteListWidget.class.getSimpleName();
@@ -50,9 +50,16 @@ public class NoteListWidget extends AppWidgetProvider {
                 createNewNoteIntent.setAction("android.intent.action.SEND");
                 createNewNoteIntent.setPackage(context.getPackageName());
 
+                // TODO distinguish between add and view
+                // TODO add note it
+                createNewNoteIntent.putExtra(PARAM_NOTE_ID, -1L);
+
+                int pendingIntentFlags = pendingIntentFlagCompat(PendingIntent.FLAG_UPDATE_CURRENT | Intent.FILL_IN_COMPONENT);
+                PendingIntent createNewNotePendingIntent = PendingIntent.getActivity(context, 0, createNewNoteIntent, pendingIntentFlags);
+
                 views = new RemoteViews(context.getPackageName(), R.layout.widget_note_list);
                 views.setRemoteAdapter(R.id.note_list_widget_lv, serviceIntent);
-                views.setPendingIntentTemplate(R.id.note_list_widget_lv, PendingIntent.getActivity(context, 0, createNewNoteIntent, pendingIntentFlagCompat(PendingIntent.FLAG_UPDATE_CURRENT | Intent.FILL_IN_COMPONENT)));
+                views.setPendingIntentTemplate(R.id.note_list_widget_lv, createNewNotePendingIntent);
                 views.setEmptyView(R.id.note_list_widget_lv, R.id.widget_note_list_placeholder_tv);
 
                 awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.note_list_widget_lv);
