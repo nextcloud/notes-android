@@ -28,9 +28,7 @@ public class WidgetUtil {
      * @return {@param flags} | {@link PendingIntent#FLAG_MUTABLE}
      */
     public static int pendingIntentFlagCompat(int flags) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-            return flags | PendingIntent.FLAG_IMMUTABLE;
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             return flags | PendingIntent.FLAG_MUTABLE;
         }
         return flags;

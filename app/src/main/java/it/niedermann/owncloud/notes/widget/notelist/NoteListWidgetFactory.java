@@ -6,6 +6,11 @@
  */
 package it.niedermann.owncloud.notes.widget.notelist;
 
+import static it.niedermann.owncloud.notes.edit.EditNoteActivity.PARAM_CATEGORY;
+import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_ALL;
+import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_CATEGORY;
+import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_STARRED;
+
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -32,11 +37,6 @@ import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
 import it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 import it.niedermann.owncloud.notes.shared.util.NotesColorUtil;
-
-import static it.niedermann.owncloud.notes.edit.EditNoteActivity.PARAM_CATEGORY;
-import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_ALL;
-import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_CATEGORY;
-import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_STARRED;
 
 public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
     private static final String TAG = NoteListWidgetFactory.class.getSimpleName();
@@ -79,7 +79,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
                 }
             }
         } catch (IllegalArgumentException e) {
-            e.printStackTrace();
+            Log.w(TAG, "Error caught at onDataSetChanged: " + e);
         }
     }
 
@@ -93,25 +93,44 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
         return dbNotes.size() + 1;
     }
 
+    private Intent getEditNoteIntent(Bundle bundle) {
+        final Intent intent = new Intent(context, EditNoteActivity.class);
+        intent.setPackage(context.getPackageName());
+        intent.putExtras(bundle);
+        intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
+
+        return intent;
+    }
+
+    private Intent getCreateNoteIntent(Account localAccount ) {
+        final Bundle bundle = new Bundle();
+        bundle.putSerializable(PARAM_CATEGORY, data.getMode() == MODE_DISPLAY_STARRED ? new NavigationCategory(ENavigationCategoryType.FAVORITES) : new NavigationCategory(localAccount.getId(), data.getCategory()));
+        bundle.putLong(EditNoteActivity.PARAM_ACCOUNT_ID, data.getAccountId());
+
+        return getEditNoteIntent(bundle);
+    }
+
+    private Intent getOpenNoteIntent(Note note) {
+        final Bundle bundle = new Bundle();
+        bundle.putLong(EditNoteActivity.PARAM_NOTE_ID, note.getId());
+        bundle.putLong(EditNoteActivity.PARAM_ACCOUNT_ID, note.getAccountId());
+
+        return getEditNoteIntent(bundle);
+    }
+
     @Override
     public RemoteViews getViewAt(int position) {
         final RemoteViews note_content;
 
         if (position == 0) {
             final Account localAccount = repo.getAccountById(data.getAccountId());
+
+            final Intent createNoteIntent = getCreateNoteIntent(localAccount);
             final Intent openIntent = new Intent(Intent.ACTION_MAIN).setComponent(new ComponentName(context.getPackageName(), MainActivity.class.getName()));
-            final Intent createIntent = new Intent(context, EditNoteActivity.class);
-            final Bundle extras = new Bundle();
-
-            extras.putSerializable(PARAM_CATEGORY, data.getMode() == MODE_DISPLAY_STARRED ? new NavigationCategory(ENavigationCategoryType.FAVORITES) : new NavigationCategory(localAccount.getId(), data.getCategory()));
-            extras.putLong(EditNoteActivity.PARAM_ACCOUNT_ID, data.getAccountId());
-
-            createIntent.putExtras(extras);
-            createIntent.setData(Uri.parse(createIntent.toUri(Intent.URI_INTENT_SCHEME)));
 
             note_content = new RemoteViews(context.getPackageName(), R.layout.widget_entry_add);
             note_content.setOnClickFillInIntent(R.id.widget_entry_content_tv, openIntent);
-            note_content.setOnClickFillInIntent(R.id.widget_entry_fav_icon, createIntent);
+            note_content.setOnClickFillInIntent(R.id.widget_entry_fav_icon, createNoteIntent);
             note_content.setTextViewText(R.id.widget_entry_content_tv, getCategoryTitle(context, data.getMode(), data.getCategory()));
             note_content.setImageViewResource(R.id.widget_entry_fav_icon, R.drawable.ic_add_blue_24dp);
             note_content.setInt(R.id.widget_entry_fav_icon, "setColorFilter", NotesColorUtil.contrastRatioIsSufficient(ContextCompat.getColor(context, R.color.widget_background), localAccount.getColor())
@@ -125,16 +144,10 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
             }
 
             final Note note = dbNotes.get(position);
-            final Intent fillInIntent = new Intent(context, EditNoteActivity.class);
-            final Bundle extras = new Bundle();
-            extras.putLong(EditNoteActivity.PARAM_NOTE_ID, note.getId());
-            extras.putLong(EditNoteActivity.PARAM_ACCOUNT_ID, note.getAccountId());
-
-            fillInIntent.putExtras(extras);
-            fillInIntent.setData(Uri.parse(fillInIntent.toUri(Intent.URI_INTENT_SCHEME)));
+            final Intent openNoteIntent = getOpenNoteIntent(note);
 
             note_content = new RemoteViews(context.getPackageName(), R.layout.widget_entry);
-            note_content.setOnClickFillInIntent(R.id.widget_note_list_entry, fillInIntent);
+            note_content.setOnClickFillInIntent(R.id.widget_note_list_entry, openNoteIntent);
             note_content.setTextViewText(R.id.widget_entry_content_tv, note.getTitle());
             note_content.setImageViewResource(R.id.widget_entry_fav_icon, note.getFavorite()
                     ? R.drawable.ic_star_yellow_24dp
