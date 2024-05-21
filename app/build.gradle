@@ -92,7 +92,7 @@ dependencies {
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4'
 
     // Nextcloud SSO
-    implementation 'com.github.nextcloud.android-common:ui:0.20.0'
+    implementation 'com.github.nextcloud.android-common:ui:0.21.0'
     implementation 'com.github.nextcloud:Android-SingleSignOn:1.1.0'
     implementation 'com.github.stefan-niedermann:android-commons:1.0.0'
     implementation "com.github.stefan-niedermann.nextcloud-commons:sso-glide:$commonsVersion"
@@ -126,7 +126,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.11.0'
 
     // Gson
-    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'com.google.code.gson:gson:2.11.0'
 
     // ReactiveX
     implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
@@ -137,5 +137,5 @@ dependencies {
     testImplementation 'androidx.arch.core:core-testing:2.2.0'
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.mockito:mockito-core:5.12.0'
-    testImplementation 'org.robolectric:robolectric:4.12.1'
+    testImplementation 'org.robolectric:robolectric:4.12.2'
 }
