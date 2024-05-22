@@ -6,6 +6,7 @@
  */
 package it.niedermann.owncloud.notes.persistence.sync;
 
+import com.nextcloud.android.sso.api.EmptyResponse;
 import com.nextcloud.android.sso.api.ParsedResponse;
 
 import java.util.List;
@@ -44,7 +45,7 @@ public interface NotesAPI_1_0 {
     Call<Note> editNote(@Body Note note, @Path("remoteId") long remoteId);
 
     @DELETE("notes/{remoteId}")
-    Call<Void> deleteNote(@Path("remoteId") long noteId);
+    Call<EmptyResponse> deleteNote(@Path("remoteId") long noteId);
 
     @GET("settings")
     Call<NotesSettings> getSettings();
