@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.Expose;
+import com.nextcloud.android.sso.api.EmptyResponse;
 import com.nextcloud.android.sso.api.NextcloudAPI;
 import com.nextcloud.android.sso.api.ParsedResponse;
 
@@ -119,7 +120,7 @@ public class NotesAPI {
         }
     }
 
-    public Call<Void> deleteNote(long noteId) {
+    public Call<EmptyResponse> deleteNote(long noteId) {
         if (ApiVersion.API_VERSION_1_0.equals(usedApiVersion)) {
             return notesAPI_1_0.deleteNote(noteId);
         } else if (ApiVersion.API_VERSION_0_2.equals(usedApiVersion)) {
