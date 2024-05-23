@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +27,8 @@ import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.BlendModeColorFilterCompat;
+import androidx.core.graphics.BlendModeCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.google.android.material.appbar.AppBarLayout;
@@ -35,7 +38,11 @@ import com.nextcloud.android.common.ui.theme.MaterialSchemes;
 import com.nextcloud.android.common.ui.theme.ViewThemeUtilsBase;
 import com.nextcloud.android.common.ui.theme.utils.MaterialViewThemeUtils;
 
+import java.util.Optional;
+
+import dynamiccolor.DynamicScheme;
 import dynamiccolor.MaterialDynamicColors;
+import it.niedermann.android.markdown.controller.MarkdownToolbarController;
 import it.niedermann.android.util.ColorUtil;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
@@ -190,8 +197,8 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
     }
 
     /**
-     * @deprecated Should be replaced with {@link com.google.android.material.search.SearchView}
      * @see com.nextcloud.android.common.ui.theme.utils.AndroidXViewThemeUtils#themeToolbarSearchView(SearchView)
+     * @deprecated Should be replaced with {@link com.google.android.material.search.SearchView}
      */
     @Deprecated
     public void themeToolbarSearchView(@NonNull SearchView searchView) {
@@ -208,5 +215,25 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
             searchButton.setColorFilter(dynamicColor.onSurface().getArgb(scheme));
             return searchView;
         });
+    }
+
+    public void themeToolbar(@NonNull Toolbar toolbar) {
+        withScheme(toolbar, scheme -> {
+            toolbar.setBackgroundColor(dynamicColor.surface().getArgb(scheme));
+//            toolbar.setNavigationIconTint(dynamicColor.onSurface().getArgb(scheme));
+            toolbar.setTitleTextColor(dynamicColor.onSurface().getArgb(scheme));
+            final var overflowIcon = Optional.ofNullable(toolbar.getOverflowIcon());
+            overflowIcon.ifPresent(drawable -> colorTrailingIcon(scheme, drawable));
+            return toolbar;
+        });
+    }
+
+    private void colorTrailingIcon(@NonNull DynamicScheme scheme,
+                                   @NonNull Drawable icon) {
+        icon.setColorFilter(
+                BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+                        dynamicColor.surfaceVariant().getArgb(scheme),
+                        BlendModeCompat.SRC_ATOP
+                ));
     }
 }
