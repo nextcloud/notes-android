@@ -263,7 +263,7 @@
     <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
 
     <string name="formatting_help_code_title">Código</string>
-    <string name="formatting_help_code_body_1">Hay muchas formas diferentes de dar estilo al código con Markdown. Si tienes bloques de código en un párrafo, rodéalos con acentos inversos:</string>
+    <string name="formatting_help_code_body_1">Hay muchas formas diferentes de dar estilo al código con Markdown. Si tiene bloques de código en un párrafo, colóquelos entre acentos inversos:</string>
     <string name="formatting_help_code_body_2">Markdown también soporta el llamado vallado de código, que permite líneas múltiples sin indentación:</string>
     <string name="formatting_help_code_body_3">Y si quieres usar subrayado de sintaxis, incluye el lenguaje:</string>
 
