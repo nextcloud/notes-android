@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
  ~ Nextcloud Notes - Android Client
  ~
  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors
@@ -20,68 +19,94 @@
         android:focusableInTouchMode="true"
         android:orientation="horizontal" />
 
-    <ScrollView
-        android:id="@+id/scrollView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:orientation="vertical"
-        tools:context="it.niedermann.owncloud.notes.edit.EditNoteActivity">
+        android:orientation="vertical">
 
-        <it.niedermann.android.markdown.MarkdownEditorImpl
-            android:id="@+id/editContent"
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/controller"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:context="it.niedermann.owncloud.notes.edit.EditNoteActivity">
+
+            <it.niedermann.android.markdown.MarkdownEditorImpl
+                android:id="@+id/editContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacer_activity_sides"
+                android:background="@android:color/transparent"
+                android:ems="10"
+                android:gravity="top"
+                android:inputType="textMultiLine|textCapSentences"
+                android:lineSpacingMultiplier="@dimen/note_line_spacing"
+                android:padding="@dimen/spacer_2x"
+                android:textColor="@color/fg_default"
+                tools:text="@tools:sample/lorem/random" />
+        </ScrollView>
+
+        <it.niedermann.android.markdown.controller.MarkdownToolbarController
+            android:id="@+id/controller"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacer_activity_sides"
-            android:background="@android:color/transparent"
-            android:ems="10"
-            android:gravity="top"
-            android:inputType="textMultiLine|textCapSentences"
-            android:lineSpacingMultiplier="@dimen/note_line_spacing"
-            android:padding="@dimen/spacer_2x"
-            android:textColor="@color/fg_default"
-            tools:text="@tools:sample/lorem/random" />
-    </ScrollView>
+            android:gravity="bottom"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/toolbar" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/searchPrev"
-        style="?attr/floatingActionButtonSmallSecondaryStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/spacer_2x"
-        android:contentDescription="@string/simple_prev"
-        android:translationY="-56dp"
-        android:visibility="gone"
-        app:backgroundTint="@color/defaultBrand"
-        app:srcCompat="@drawable/ic_keyboard_arrow_up_white_24dp"
-        tools:visibility="visible" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/searchPrev"
+            style="?attr/floatingActionButtonSmallSecondaryStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/spacer_2x"
+            android:contentDescription="@string/simple_prev"
+            android:translationY="-56dp"
+            android:visibility="gone"
+            app:backgroundTint="@color/defaultBrand"
+            app:layout_constraintBottom_toTopOf="@id/controller"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_keyboard_arrow_up_white_24dp"
+            tools:visibility="visible" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/searchNext"
-        style="?attr/floatingActionButtonSmallSecondaryStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/spacer_2x"
-        android:contentDescription="@string/simple_next"
-        android:visibility="gone"
-        app:backgroundTint="@color/defaultBrand"
-        app:srcCompat="@drawable/ic_keyboard_arrow_down_white_24dp"
-        tools:visibility="visible" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/searchNext"
+            style="?attr/floatingActionButtonSmallSecondaryStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/spacer_2x"
+            android:contentDescription="@string/simple_next"
+            android:visibility="gone"
+            app:backgroundTint="@color/defaultBrand"
+            app:layout_constraintBottom_toTopOf="@id/controller"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_keyboard_arrow_down_white_24dp"
+            tools:visibility="visible" />
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/direct_editing"
-        style="?attr/floatingActionButtonPrimaryStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/spacer_2x"
-        android:contentDescription="@string/noteMode_rich_edit"
-        android:text="@string/noteMode_rich_edit"
-        android:visibility="visible"
-        app:backgroundTint="@color/defaultBrand"
-        app:layout_anchor="@id/scrollView"
-        app:layout_anchorGravity="bottom|end"
-        app:icon="@drawable/ic_rich_editing" />
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/direct_editing"
+            style="?attr/floatingActionButtonPrimaryStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/spacer_2x"
+            android:contentDescription="@string/noteMode_rich_edit"
+            android:text="@string/noteMode_rich_edit"
+            android:visibility="visible"
+            app:backgroundTint="@color/defaultBrand"
+            app:icon="@drawable/ic_rich_editing"
+            app:layout_anchor="@id/scrollView"
+            app:layout_anchorGravity="bottom|end"
+            app:layout_constraintBottom_toTopOf="@id/controller"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
