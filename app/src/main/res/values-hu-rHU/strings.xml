@@ -56,6 +56,8 @@
     <string name="settings_background_sync">Háttér-szinkronizálás</string>
     <string name="settings_prevent_screen_capture">A képernyő rögzítésének megakadályozása</string>
     <string name="settings_gridview">Rács nézet</string>
+    <string name="settings_enable_direct_edit">Közvetlen szerkesztés</string>
+    <string name="settings_enable_direct_edit_summary">Ha ki van kapcsolva, akkor a fejlett szerkesztő el lesz rejtve.</string>
     <string name="settings_keep_screen_on">Képernyő bekapcsolva tartása</string>
     <string name="settings_keep_screen_on_summary">Jegyzet megtekintése vagy szerkesztése során</string>
 
