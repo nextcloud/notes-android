@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Nextcloud Notes - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
+<resources>
+    <string name="app_name">Nótaí</string>
+    <string name="app_name_long">Nótaí Nextcloud</string>
+    <string name="label_all_notes">All notes</string>
+    <string name="label_favorites">Ceanáin</string>
+    <string name="action_create">Nóta nua</string>
+    <string name="welcome_text">Fáilte go %1$s</string>
+    <string name="action_settings">Socruithe</string>
+    <string name="action_trashbin">Nótaí scriosta</string>
+    <string name="action_search">Cuardach</string>
+    <string name="action_sorting_method">Modh sórtála</string>
+    <string name="simple_cancel">Cealaigh</string>
+    <string name="simple_switch">Athraigh</string>
+    <string name="simple_edit">Cuir in eagar</string>
+    <string name="simple_remove">Bain</string>
+    <string name="action_edit_save">Sábháil</string>
+    <string name="simple_about">Faoi</string>
+    <string name="simple_link">Nasc</string>
+    <string name="action_note_deleted">Scriosadh %1$s</string>
+    <string name="action_note_restored">Aischuireadh %1$s</string>
+    <string name="action_undo">Cealaigh</string>
+    <string name="action_uncategorized">Gan catagóir</string>
+    <string name="menu_delete">Scrios</string>
+    <string name="menu_change_category">Catagóir</string>
+    <string name="menu_favorite">is fearr leat</string>
+    <string name="menu_preview">Réamhamharc</string>
+    <string name="menu_share">Comhroinn</string>
+
+    <string name="search_in_category">Cuardaigh i %1$s</string>
+    <string name="search_in_all">Cuardaigh gach nótaí</string>
+
+    <string name="change_category_title">Roghnaigh catagóir</string>
+
+    <string name="listview_updated_today">Inniu</string>
+    <string name="listview_updated_yesterday">Inné</string>
+    <string name="listview_updated_this_week">An tseachtain seo</string>
+    <string name="listview_updated_last_week">An tseachtain seo caite</string>
+    <string name="listview_updated_this_month">An mhí seo</string>
+    <string name="listview_updated_last_month">An mhí seo caite</string>
+
+    <string name="settings_note_mode">Mód taispeána le haghaidh nótaí</string>
+    <string name="settings_note_mode_new">Nótaí iompar oscailte</string>
+    <string name="settings_theme_title">Téama</string>
+    <string name="settings_font_title">Cló monospace</string>
+    <string name="settings_font_size">Méid cló</string>
+    <string name="settings_wifi_only">Sioncronaigh ar Wi-Fi amháin</string>
+    <string name="settings_lock">Glasáil aip (Beta)</string>
+    <string name="settings_lock_summary">Dintiúir gléas</string>
+    <string name="settings_background_sync">Sioncronú cúlra</string>
+    <string name="settings_prevent_screen_capture">Cosc a chur ar ghabháil scáileáin</string>
+    <string name="settings_gridview">Radharc greille</string>
+    <string name="settings_enable_direct_edit">Eagar Díreach</string>
+    <string name="settings_enable_direct_edit_summary">Nuair a bheidh sé díchumasaithe, cuirfear an t-ardeagarthóir i bhfolach.</string>
+    <string name="settings_keep_screen_on">Coinnigh an scáileán ar</string>
+    <string name="settings_keep_screen_on_summary">Agus nóta á bhreathnú nó á chur in eagar</string>
+
+    <string name="error_sync">Theip ar an sioncronú: %1$s</string>
+    <string name="error_synchronization">Theip ar an sioncronú</string>
+    <string name="error_no_network">Gan nasc líonra</string>
+    <string name="error_maintenance_mode">Tá an freastalaí i mód cothabhála</string>
+    <string name="error_unknown">Tharla earráid anaithnid.</string>
+
+    <string name="about_version_title">Leagan</string>
+    <string name="about_version">Tá tú ag úsáid faoi láthair %1$s</string>
+    <string name="about_maintainer_title">Cothaitheoir</string>
+    <string name="about_developers_title">Forbróirí</string>
+    <string name="about_developers_original_author">údar bunaidh</string>
+    <string name="about_translators_title">Aistritheoirí</string>
+    <string name="about_translators_transifex">Pobal Nextcloud ar %1$s</string>
+    <string name="about_testers_title">Tástálaithe</string>
+    <string name="about_source_title">Cód foinse</string>
+    <string name="about_source">Tá an tionscadal seo á óstáil ar GitHub: %1$s</string>
+    <string name="about_issues_title">Saincheisteanna</string>
+    <string name="about_issues">Is féidir leat fabhtanna, moltaí feabhsúcháin agus iarratais ar ghnéithe a thuairisciú ag an rianaire eisiúna GitHub: %1$s</string>
+    <string name="about_translate_title">Aistrigh</string>
+    <string name="about_translate">Bí ar fhoireann Nextcloud ar Transifex agus cuidigh linn an aip seo a aistriú: %1$s</string>
+    <string name="about_app_license_title">Ceadúnas app</string>
+    <string name="about_app_license">Tá an feidhmchlár seo ceadúnaithe faoin GNU GENERAL PUBLIC LICENCE v3+.</string>
+    <string name="about_app_license_button">Féach ar cheadúnas</string>
+    <string name="about_icons_disclaimer_title">Deilbhíní</string>
+    <string name="about_icons_disclaimer_app_icon">Le haghaidh an deilbhín bunaidh féach%1$s.</string>
+    <string name="about_icons_disclaimer_mdi_icons">Gach deilbhín eile a úsáideann an aip seo %1$s déanta ag Google Inc. agus ceadúnaithe faoi Cheadúnas Apache 2.0.</string>
+    <string name="about_icons_disclaimer_mdi">Deilbhíní Dearaidh Ábhar</string>
+    <string name="about_credits_tab_title">Creidmheasanna</string>
+    <string name="about_contribution_tab_title">Ranníocaíocht</string>
+    <string name="about_license_tab_title">Ceadúnas</string>
+
+    <string name="widget_note_list_title">Liosta nótaí</string>
+    <string name="widget_note_list_placeholder">Gan nótaí</string>
+    <string name="widget_single_note_title">Nóta amháin</string>
+    <string name="widget_single_note_placeholder_tv">Nóta gan aimsiú</string>
+    <string name="widget_not_logged_in">Logáil isteach ar Nótaí sula n-úsáideann tú an ghiuirléid seo le do thoil</string>
+    <string name="widget_entry_fav_contentDescription">Úsáidtear deilbhín réalta chun mír a chur in iúl mar an rogha is fearr leat</string>
+
+    <string name="activity_select_single_note">Roghnaigh nóta</string>
+
+    <string name="shortcut_create_long">Cruthaigh nóta nua</string>
+
+    <string name="pref_value_font_normal">Gnáth</string>
+    <string name="pref_value_wifi_and_mobile">Sioncronaigh ar Wi-Fi agus sonraí soghluaiste</string>
+    <string name="pref_value_lock">Cosaint pasfhocal</string>
+
+    <string name="simple_error">Earráid</string>
+    <string name="simple_close">Dún</string>
+    <string name="simple_copy">Cóipeáil</string>
+    <string name="simple_exception">Eisceacht</string>
+    <string name="pin_to_homescreen">Pinn chuig an scáileán baile</string>
+    <string name="note_has_been_deleted">Scriosadh an nóta seo</string>
+    <string name="add_account">Cuir cuntas leis</string>
+
+    <string name="category_music">Ceol</string>
+    <string name="category_movies">Scannáin</string>
+    <string name="category_movie">Scannán</string>
+    <string name="category_work">Obair</string>
+    <string name="category_todo">A dhéanamh</string>
+    <string name="category_todos">Rudaí le déanamh</string>
+    <string name="category_checklists">Seicliostaí</string>
+    <string name="category_tasks">Tascanna</string>
+    <string name="category_recipe">Oideas</string>
+    <string name="category_recipes">Oidis</string>
+    <string name="category_restaurant">Bialann</string>
+    <string name="category_restaurants">Bialanna</string>
+    <string name="category_food">Bia</string>
+    <string name="category_bake">Bácáil</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_key">Eochair</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_keys">Eochracha</string>
+    <string name="category_password">Pasfhocal</string>
+    <string name="category_passwords">Pasfhocail</string>
+    <string name="category_credentials">Dintiúir</string>
+    <string name="category_game">Cluiche</string>
+    <string name="category_games">Cluichí</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">Imirt</string>
+    <string name="category_gift">Bronntanas</string>
+    <string name="category_gifts">Bronntanais</string>
+    <!-- Like a gift -->
+    <string name="category_present">Bronntanas</string>
+    <!-- Like a gift -->
+    <string name="category_presents">Bronntanais</string>
+
+    <string name="account_already_imported">Iompórtáladh an cuntas cheana</string>
+    <string name="no_notes_yet">Níl aon nótaí fós</string>
+    <string name="no_notes_yet_description">Brúigh + cnaipe chun nóta nua a chruthú</string>
+    <string name="simple_more">Tuilleadh</string>
+    <string name="simple_move">Bog</string>
+    <string name="category_readonly">Léamh amháin</string>
+    <string name="no_category">Gan catagóir</string>
+    <string name="add_category">Cuir %1$s</string>
+    <string name="simple_checkbox">ticbhosca</string>
+    <string name="unlock_notes">Díghlasáil nótaí</string>
+    <string name="error_dialog_title">Ó ní hea - Cad anois? 🙁</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Déan iarracht iallach a chur ar an aip a dhúnadh agus í a atosú arís le do thoil. Seans go raibh nasc mícheart leis an aip Nextcloud.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Má leanann an cheist, déan iarracht stóráil an dá apps a ghlanadh: Nextcloud agus Nextcloud Notes chun an cheist seo a réiteach.</string>
+    <string name="error_dialog_tip_clear_storage">Is féidir leat an stóráil a ghlanadh tríd an eolas app a oscailt agus Stóráil → Stóráil Glan a roghnú. ⚠️ Rabhadh: Scriosfaidh sé seo nótaí nach bhfuil sioncronaithe fós!</string>
+    <string name="error_dialog_tip_files_outdated">Is cosúil go bhfuil d\'aip Nextcloud as dáta. Tabhair cuairt ar an Store Súgartha nó F-Droid chun an leagan is déanaí a fháil le do thoil.</string>
+    <string name="error_dialog_tip_files_force_stop">Is cosúil go bhfuil rud éigin cearr le d’aip Nextcloud. Déan iarracht le do thoil stop a chur leis an dá, an aip Nextcloud agus an aip Nextcloud Notes.</string>
+    <string name="error_dialog_tip_files_delete_storage">Más rud é nach bhfeidhm chun stop a chur leo cabhrú, is féidir leat triail a ghlanadh a stóráil an dá apps.</string>
+    <string name="error_dialog_timeout_instance">Ní raibh freagra ó do fhreastalaí san am tugtha. Cinntigh le do thoil go bhfuil do chás ag feidhmiú go maith.</string>
+    <string name="error_dialog_timeout_toggle">Seiceáil do cheangal líonra. Uaireanta is féidir cabhrú le scoránaigh na sonraí soghluaiste nó Wi-Fi as agus ar aghaidh.</string>
+    <string name="error_dialog_check_server">Ní raibh freagra do fhreastalaí ceart. Seiceáil le do thoil an féidir leat rochtain a fháil ar do nótaí trí chomhéadan gréasáin.</string>
+    <string name="error_dialog_check_server_logs">Tá fadhb ann le do shocrú Nextcloud. Breathnaigh le do thoil ar chomhaid logála an fhreastalaí.</string>
+    <string name="error_dialog_check_maintenance">Seiceáil le do thoil an bhfuil do shampla Nextcloud i mód cothabhála faoi láthair.</string>
+    <string name="error_dialog_insufficient_storage">Níl aon stóras saor in aisce fágtha ag do shampla Nextcloud. Scrios roinnt comhad chun d\'athruithe áitiúla a shioncronú isteach i do néal.</string>
+    <string name="error_dialog_we_need_info">Tá an fhaisnéis theicniúil seo a leanas ag teastáil uainn chun cabhrú leat:</string>
+    <string name="error_dialog_server_app_enabled">Cinntigh le do thoil go bhfuil an aip \"Nótaí\" suiteáilte agus cumasaithe agat ar do fhreastalaí.</string>
+    <string name="error_dialog_redirect">D\'fhreagair do fhreastalaí le cód stádais HTTP 302, rud a thugann le tuiscint, nach bhfuil an aip Nótaí suiteáilte agat ar do fhreastalaí nó go bhfuil rud éigin míchumraithe. Is féidir é seo a bheith mar chúis le sáruithe saincheaptha i gcomhad .htaccess nó trí apps Nextcloud cosúil le Cliant OID.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Díchumasaigh gach leas iomlán a bhaint ceallraí le haghaidh Nextcloud agus an aip Nótaí le do thoil.</string>
+    <string name="error_dialog_min_version">Éilíonn an aip Nótaí Android go bhfuil an aip Android Nextcloud ar a laghad leagan 3.18.</string>
+    <string name="added_content">Cuireadh \"%1$s\" leis</string>
+    <string name="shared_text_empty">Bhí an téacs roinnte folamh</string>
+    <string name="append_to_note">Cuir leis an nóta</string>
+    <string name="change_note_title">Athraigh teideal an nóta</string>
+    <string name="menu_edit_title">Cuir teideal in eagar</string>
+    <string name="simple_security">Slándáil</string>
+    <string name="appearance_and_behavior">Cuma agus iompar</string>
+    <string name="simple_synchronization">Sioncrónú</string>
+    <string name="manage_accounts">Bainistigh cuntais</string>
+    <string name="action_formatting_help">Formáidiú</string>
+
+
+    <string name="noteMode_plain_edit">Modh simplí eagarthóireachta</string>
+    <string name="noteMode_plain_preview">Réamhamharc simplí</string>
+    <string name="noteMode_rich_edit">Modh saibhir eagarthóireachta</string>
+    <string name="noteMode_remember_last">Cuimhnigh ar mo rogha dheireanach</string>
+
+    <string-array name="fontSize_entries">
+        <item>Beaga</item>
+        <item>Mheán</item>
+        <item>Mór</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Solas</item>
+        <item>Dorcha</item>
+        <item>Réamhshocrú Córais</item>
+    </string-array>
+
+    <plurals name="ab_selected">
+        <item quantity="one">%d roghnaithe</item>
+        <item quantity="two">%d roghnaithe</item>
+        <item quantity="few">%d roghnaithe</item>
+        <item quantity="many">%d roghnaithe</item>
+        <item quantity="other">%d roghnaithe</item>
+    </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Scriosadh nóta amháin</item>
+        <item quantity="two">Scriosadh %1$d nótaí</item>
+        <item quantity="few">Scriosadh %1$d nótaí</item>
+        <item quantity="many">Scriosadh %1$d nótaí</item>
+        <item quantity="other">Scriosadh %1$d nótaí</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="one">Athchóiríodh nóta amháin</item>
+        <item quantity="two">Aischuireadh %1$d nótaí</item>
+        <item quantity="few">Aischuireadh %1$d nótaí</item>
+        <item quantity="many">Aischuireadh %1$d nótaí</item>
+        <item quantity="other">Aischuireadh %1$d nótaí</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">Roinn inneachar %1$d nóta</item>
+        <item quantity="two">Roinn inneachar %1$d nótaí</item>
+        <item quantity="few">Roinn inneachar %1$d nótaí</item>
+        <item quantity="many">Roinn inneachar %1$d nótaí</item>
+        <item quantity="other">Roinn inneachar %1$d nótaí</item>
+    </plurals>
+
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">Formáidiú bunaithe ar chomhthéacs</string>
+    <string name="formatting_help_cbf_body_1">Príomhsprioc dearaidh den aip Nótaí is ea uirlis saor ó aon seachrán a sholáthar. Cé go mbeidh tú in ann do théacsanna a fhormáidiú le Markdown. I gcás roinnt de na samplaí thíos, is féidir leat aicearraí a úsáid ionas gur féidir leat do nótaí a fhormáidiú gan na cóid thíos a chlóscríobh.</string>
+    <string name="formatting_help_cbf_body_2">Roghnaigh raon téacs nó tapáil ar do chúrsóir in aon áit agus gheobhaidh tú preab-roghchlár a bheidh in aice leis na hiontrálacha réamhshocraithe %1$s, %2$s, %3$s mar %4$s nó %5$s.</string>
+
+    <string name="formatting_help_text_title">Téacs</string>
+    <string name="formatting_help_text_body">Tá sé an-éasca roinnt focal %1$sbold%1$s agus focail eile %2$sitalic%2$s a dhéanamh le Markdown. Is féidir leat %3$s %3$s roinnt focal a bhualadh tríd agus fiú [nasc le Nextcloud] (https://nextcloud.com).</string>
+
+    <string name="formatting_help_lists_title">Liostaí</string>
+    <string name="formatting_help_lists_body_1">Uaireanta is mian leat liostaí uimhrithe:</string>
+    <string name="formatting_help_lists_body_2">A haon</string>
+    <string name="formatting_help_lists_body_3">A dó</string>
+    <string name="formatting_help_lists_body_4">A trí</string>
+    <string name="formatting_help_lists_body_5">Uaireanta bíonn pointí urchair uait:</string>
+    <string name="formatting_help_lists_body_6">Tosaigh líne le dash</string>
+    <string name="formatting_help_lists_body_7">Agus má tá fophointí agat, cuir dhá spás roimh an dash nó an réalta:</string>
+    <string name="formatting_help_lists_body_8">Mar seo</string>
+    <string name="formatting_help_lists_body_9">Agus seo</string>
+
+    <string name="formatting_help_checkboxes_title">Boscaí seiceála</string>
+    <string name="formatting_help_checkboxes_body_1">Chun ticbhosca a chruthú, bain úsáid as liosta agus lúibíní ina dhiaidh</string>
+    <string name="formatting_help_checkboxes_body_2">Mír 1</string>
+    <string name="formatting_help_checkboxes_body_3">Mír 2</string>
+
+    <string name="formatting_help_structured_documents_title">Doiciméid struchtúrtha</string>
+    <string name="formatting_help_structured_documents_body_1">Uaireanta bíonn sé úsáideach leibhéil éagsúla ceannteidil a bheith agat chun do dhoiciméid a struchtúrú. Tosaigh línte le %1$s chun ceannteidil a chruthú. Léiríonn iolraí %2$s as a chéile méideanna ceannteidil níos lú.</string>
+    <string name="formatting_help_structured_documents_body_2">Is ceannteideal tríú sraith é seo</string>
+    <string name="formatting_help_structured_documents_body_3">Is féidir leat %1$s amháin a úsáid an bealach ar fad suas go dtí %2$s sé do cheannteidil éagsúla.</string>
+    <string name="formatting_help_structured_documents_body_4">Más mian leat duine éigin a lua, úsáid an carachtar %1$s roimh an líne:</string>
+    <string name="formatting_help_structured_documents_body_5">Tá samhlaíocht níos tábhachtaí ná eolas. Tá eolas teoranta. Timpeallaíonn an samhlaíocht an domhan.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+
+    <string name="formatting_help_code_title">Cód</string>
+    <string name="formatting_help_code_body_1">Tá go leor bealaí éagsúla ann chun cód a stíl le Markdown. Má tá bloic chóid inlíne agat, fillte iad i gcúlbhloic:</string>
+    <string name="formatting_help_code_body_2">Tacaíonn Markdown freisin le rud ar a dtugtar fálú cód, a cheadaíonn línte iolracha gan eangú:</string>
+    <string name="formatting_help_code_body_3">Agus más mian leat aibhsiú comhréire a úsáid, cuir an teanga san áireamh:</string>
+
+    <string name="formatting_help_tables_title">Táblaí</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">Colún %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Luach %1d</string>
+
+    <string name="formatting_help_images_body_1">Caithfidh naisc a bheith ina URLanna iomlána ag tosú le prótacal agus fearann ​​nó cosáin iomlána ag tosú le carachtar %1$s.</string>
+    <string name="formatting_help_images_body_2">Chun cloí leis an bhformáid Markdown, bain úsáid as carachtair éalaithe i URL na híomhá. Ciallaíonn sé seo, mar shampla, spásanna a chur in ionad %1$s san URL.</string>
+    <string name="formatting_help_images_title">Íomhánna</string>
+    <string name="formatting_help_images_alt">Íomhá mhaisiúil</string>
+
+    <string name="simple_other">Eile</string>
+    <string name="sort_last_modified">Sórtáil de réir dáta modhnaithe</string>
+    <string name="sort_alphabetically">Sórtáil de réir aibítre</string>
+    <string name="error_action_open_battery_settings">Socruithe ceallraí</string>
+    <string name="error_action_open_deck_info">Oscail eolas Aip</string>
+    <string name="error_action_open_network">Socruithe líonra</string>
+    <string name="error_action_update_files_app">Nuashonrú</string>
+    <string name="no_account_configured_yet">Níl aon chuntas cumraithe fós</string>
+    <string name="no_other_accounts">Níl aon chuntais eile cumraithe agat fós.</string>
+    <string name="choose_account">Roghnaigh cuntas</string>
+    <string name="context_based_formatting">An popover formáidithe bunaithe ar chomhthéacs</string>
+    <plurals name="remove_account_message">
+        <item quantity="one">Má bhaintear an cuntas %1$s scriosfar athrú neamhshioncronaithe amháin nach féidir a aisghabháil.</item>
+        <item quantity="two">Má bhaintear an cuntas %1$s scriosfar %2$d athruithe neamhshioncronaithe freisin.</item>
+        <item quantity="few">Má bhaintear an cuntas %1$s scriosfar %2$d athruithe neamhshioncronaithe freisin.</item>
+        <item quantity="many">Má bhaintear an cuntas %1$s scriosfar %2$d athruithe neamhshioncronaithe freisin.</item>
+        <item quantity="other">Má bhaintear an cuntas %1$s scriosfar %2$d athruithe neamhshioncronaithe freisin.</item>
+    </plurals>
+    <string name="remove_account">Bain %1$s</string>
+
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Ní mór duit a bheith nasctha leis an idirlíon chun cuntas a chur leis.</string>
+    <string name="settings_notes_path">Socraigh fillteán</string>
+
+    <string name="simple_next">Ar aghaidh</string>
+    <string name="simple_prev">Roimhe Seo</string>
+    <string name="simple_backup">Cúltaca</string>
+    <string name="backup">Thugamar faoi deara staid do-aisghabhála na haipe. Déan cúltaca de do chuid athruithe neamhshioncronaithe le do thoil agus glan stóráil na haipe Nótaí.</string>
+    <string name="settings_notes_path_description">Fillteán chun do nótaí a stóráil i do Nextcloud</string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
+    <string name="settings_notes_path_success">Fillteán nótaí nua: %1$s</string>
+    <string name="settings_file_suffix">Síneadh comhad</string>
+    <string name="settings_file_suffix_description">Síneadh comhaid le haghaidh nótaí nua i do Nextcloud</string>
+    <string name="settings_file_suffix_success">Iarmhír comhaid nua: %1$s</string>
+    <string name="http_status_code">Cód stádais HTTP: %1$d</string>
+    <string name="progress_import_indeterminate">Nótaí á n-iompórtáil…</string>
+    <string name="progress_import">Nóta %1$d de %2$d á iompórtáil…</string>
+    <string name="account_imported">Cuntas allmhairithe.</string>
+    <string name="direct_editing_error">Earráid agus eagarthóireacht shaibhir á lódáil</string>
+    <string name="switch_to_plain_editing">Téigh go gnátheagarthóireacht</string>
+    <string name="action_back">Ar ais</string>
+    </resources>
