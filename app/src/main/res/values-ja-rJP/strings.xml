@@ -46,6 +46,7 @@
     <string name="listview_updated_last_month">先月</string>
 
     <string name="settings_note_mode">ノートの表示モード</string>
+    <string name="settings_note_mode_new">ノート開封時の動作</string>
     <string name="settings_theme_title">テーマ</string>
     <string name="settings_font_title">モノスペースフォント</string>
     <string name="settings_font_size">フォントサイズ</string>
@@ -55,6 +56,8 @@
     <string name="settings_background_sync">バックグラウンド同期</string>
     <string name="settings_prevent_screen_capture">スクリーンショットを防止</string>
     <string name="settings_gridview">グリッド表示</string>
+    <string name="settings_enable_direct_edit">直接編集する</string>
+    <string name="settings_keep_screen_on">画面を表示したままにする</string>
     <string name="error_sync">同期に失敗しました: %1$s</string>
     <string name="error_synchronization">同期に失敗</string>
     <string name="error_no_network">ネットワークに接続されていません</string>
@@ -65,6 +68,7 @@
     <string name="about_version">現在%1$sを使用しています</string>
     <string name="about_maintainer_title">管理者</string>
     <string name="about_developers_title">開発者</string>
+    <string name="about_developers_original_author">原作者</string>
     <string name="about_translators_title">翻訳者</string>
     <string name="about_translators_transifex">%1$sのNextcloud コミュニティー</string>
     <string name="about_testers_title">テスター</string>
@@ -180,6 +184,8 @@
     <string name="action_formatting_help">フォーマット</string>
 
 
+    <string name="noteMode_plain_edit">プレーン編集モード</string>
+    <string name="noteMode_plain_preview">プレビュー</string>
     <string name="noteMode_remember_last">最後に使用したモードで開く</string>
 
     <string-array name="fontSize_entries">
