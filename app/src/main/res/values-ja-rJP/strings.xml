@@ -57,7 +57,10 @@
     <string name="settings_prevent_screen_capture">スクリーンショットを防止</string>
     <string name="settings_gridview">グリッド表示</string>
     <string name="settings_enable_direct_edit">直接編集する</string>
+    <string name="settings_enable_direct_edit_summary">無効にすると、詳細エディターは非表示になります。</string>
     <string name="settings_keep_screen_on">画面を表示したままにする</string>
+    <string name="settings_keep_screen_on_summary">ノートを表示または編集する場合</string>
+
     <string name="error_sync">同期に失敗しました: %1$s</string>
     <string name="error_synchronization">同期に失敗</string>
     <string name="error_no_network">ネットワークに接続されていません</string>
@@ -186,6 +189,7 @@
 
     <string name="noteMode_plain_edit">プレーン編集モード</string>
     <string name="noteMode_plain_preview">プレビュー</string>
+    <string name="noteMode_rich_edit">リッチ編集モード</string>
     <string name="noteMode_remember_last">最後に使用したモードで開く</string>
 
     <string-array name="fontSize_entries">
@@ -302,5 +306,7 @@
     <string name="progress_import_indeterminate">ノートを導入しています…</string>
     <string name="progress_import">%2$d中%1$dのノートをインポート中...</string>
     <string name="account_imported">アカウントを導入しました。</string>
+    <string name="direct_editing_error">リッチ編集の読み込み中にエラーが発生</string>
+    <string name="switch_to_plain_editing">プレーン編集モードに切り替える</string>
     <string name="action_back">戻る</string>
     </resources>
