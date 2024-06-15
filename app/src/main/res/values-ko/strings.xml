@@ -62,7 +62,7 @@
     <string name="error_synchronization">동기화에 실패했습니다.</string>
     <string name="error_no_network">네트워크에 연결할 수 없음</string>
     <string name="error_maintenance_mode">서버가 유지 보수 모드임</string>
-    <string name="error_unknown">알 수 없는 에러가 발생했습니다.</string>
+    <string name="error_unknown">알 수 없는 오류가 발생했습니다.</string>
 
     <string name="about_version_title">버전</string>
     <string name="about_version"> 현재 %1$s사용 중</string>
