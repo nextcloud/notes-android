@@ -56,6 +56,8 @@
     <string name="settings_background_sync">Sincronización do traballo en segundo plano</string>
     <string name="settings_prevent_screen_capture">Evitar a captura da pantalla</string>
     <string name="settings_gridview">Ver como grade</string>
+    <string name="settings_enable_direct_edit">Edición directa</string>
+    <string name="settings_enable_direct_edit_summary">Cando estea desactivado, o editor avanzado agocharase.</string>
     <string name="settings_keep_screen_on">Mantér a pantalla acesa</string>
     <string name="settings_keep_screen_on_summary">Ao ver ou editar unha nota</string>
 
