@@ -81,6 +81,10 @@ android {
         abortOnError false
         disable 'MissingTranslation'
     }
+
+    androidResources {
+            generateLocaleConfig true
+    }
 }
 
 ext {
