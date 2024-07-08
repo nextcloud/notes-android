@@ -124,6 +124,7 @@
             <trusting group="androidx.fragment"/>
             <trusting group="androidx.lifecycle"/>
             <trusting group="androidx.test"/>
+            <trusting group="androidx.test.espresso" name="espresso-idling-resource" version="3.6.1"/>
             <trusting group="androidx.transition" name="transition" version="1.5.0"/>
             <trusting group="androidx.webkit" name="webkit" version="1.11.0"/>
             <trusting group="^androidx[.]compose($|([.].*))" regex="true"/>
@@ -145,7 +146,10 @@
             <trusting group="io.perfmark" name="perfmark-api" version="0.26.0"/>
          </trusted-key>
          <trusted-key id="C7BE5BCC9FEC15518CFDA882B0F3710FA64900E7" group="^com[.]google($|([.].*))" regex="true"/>
-         <trusted-key id="CB3190CA7842439E57F3712E44CE7BF2825EA2CD" group="com.ibm.icu" name="icu4j" version="73.2"/>
+         <trusted-key id="CB3190CA7842439E57F3712E44CE7BF2825EA2CD">
+            <trusting group="com.ibm.icu"/>
+            <trusting group="com.ibm.icu" name="icu4j" version="73.2"/>
+         </trusted-key>
          <trusted-key id="CE8075A251547BEE249BC151A2115AE15F6B8B72" group="org.apache.commons"/>
          <trusted-key id="D6F1BC78607808EC8E9F69437A8860944FAD5F62" group="org.apache.commons" name="commons-parent"/>
          <trusted-key id="DB0597E3144342256BC81E3EC727D053C4481CF5" group="org.tensorflow" name="tensorflow-lite-metadata" version="0.1.0-rc2"/>
