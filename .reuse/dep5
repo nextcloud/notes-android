@@ -1,8 +1,0 @@
-Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: Nextcloud Notes - Android Client
-Upstream-Contact: Nextcloud Android team <android@nextcloud.com>
-Source: https://github.com/nextcloud/notes-android
-
-Files: app/src/main/res/values-*/strings.xml renovate.json5 */.gitignore .idea/* scripts/analysis/findbugs-results.txt scripts/analysis/lint-results.txt app/src/test/resources/robolectric.properties app/src/test/resources/mockito-extensions/org.mockito.plugins.MockMaker fastlane/metadata/* app/src/main/res/mipmap-*dpi/ic_launcher.png app/src/main/ic_launcher-web.png .bundle/config  app/src/main/res/drawable-*dpi/ic_widget_create.png app/src/main/res/drawable-mdpi/context_based_formatting.png app/src/main/res/drawable/note_list_widget_preview.webp app/src/main/res/drawable/single_note_widget.webp
-Copyright: 2016-2024 Nextcloud GmbH and Nextcloud contributors
-License: GPL-3.0-or-later
