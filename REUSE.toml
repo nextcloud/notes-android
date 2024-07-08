@@ -1,0 +1,12 @@
+# SPDX-FileCopyrightText: 2024 Nextcloud GmbH and Nextcloud contributors
+# SPDX-License-Identifier: GPL-3.0-or-later
+version = 1
+SPDX-PackageName = "Nextcloud Notes - Android Client"
+SPDX-PackageSupplier = "Nextcloud Android team <android@nextcloud.com>"
+SPDX-PackageDownloadLocation = "https://github.com/nextcloud/notes-android"
+
+[[annotations]]
+path = ["app/src/main/res/values-**/strings.xml", "renovate.json5", "**/.gitignore", ".idea/**", "scripts/analysis/findbugs-results.txt", "scripts/analysis/lint-results.txt", "app/src/test/resources/robolectric.properties", "app/src/test/resources/mockito-extensions/org.mockito.plugins.MockMaker", "fastlane/metadata/**", "app/src/main/res/mipmap-**dpi/ic_launcher.png", "app/src/main/ic_launcher-web.png", ".bundle/config", "app/src/main/res/drawable-**dpi/ic_widget_create.png", "app/src/main/res/drawable-mdpi/context_based_formatting.png", "app/src/main/res/drawable/note_list_widget_preview.webp", "app/src/main/res/drawable/single_note_widget.webp"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2016-2024 Nextcloud GmbH and Nextcloud contributors"
+SPDX-License-Identifier = "GPL-3.0-or-later"
