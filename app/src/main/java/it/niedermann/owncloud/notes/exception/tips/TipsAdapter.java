@@ -96,6 +96,10 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsViewHolder> {
                         add(R.string.error_dialog_server_app_enabled);
                         add(R.string.error_dialog_redirect);
                     }
+                    case 404 -> {
+                        add(R.string.error_dialog_server_app_enabled);
+                        add(R.string.error_dialog_check_server);
+                    }
                     case 500 -> add(R.string.error_dialog_check_server_logs);
                     case 503 -> add(R.string.error_dialog_check_maintenance);
                     case 507 -> add(R.string.error_dialog_insufficient_storage);
