@@ -226,7 +226,7 @@
     <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">قالب‌بندی مبتنی بر متن</string>
-    <string name="formatting_help_cbf_body_1">هدف اصلی از طراحی برنامک یادداشت، ارائه دادن یک ابزار رایگان یادداشت کارها است. همچنین شما قادر خواهید بود متن‌ها را با Markdown قالب‌بندی کنید. برای انواع مختلفی از مثالهای ذکر شده در زیر ، می توانید از میانبرها استفاده کنید تا بتوانید یادداشت های خود را بدون تایپ کد، قالب بندی کنید.</string>
+    <string name="formatting_help_cbf_body_1">هدف اصلی از طراحی برنامک یادداشت، ارائه دادن یک ابزار بی‌حواس‌پرتی برای یادداشت‌برداری است. می‌توانید متن‌ها را در قالب Markdown بنویسید. برای انواع مختلفی از مثال‌های ذکر شده در زیر، می‌توانید از میانبرها جهت قالب‌دهی یادداشت‌های خود بدون وارد کردن کد استفاده کنید.</string>
     <string name="formatting_help_cbf_body_2">فقط کافی است یک دامنه متن را انتخاب کنید یا روی مکان نما در هر موقعیتی ضربه بزنید و یک منوی بازشونده دریافت می کنید که در کنار ورودی‌های پیش‌فرض %1$s و %2$s و %3$s شامل ورودی‌‌هایی مانند %4$s و %5$s می‌باشد.</string>
 
     <string name="formatting_help_text_title">متن</string>
