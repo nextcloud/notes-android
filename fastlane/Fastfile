@@ -42,6 +42,8 @@ desc "Build app bundle"
     lane :releasePhase1 do
         test()
         buildBundle()
+        versionInfo = getVersionInfo()
+        buildSignedAPK(versionCode: versionInfo["versionCode"])
     end
 
     desc "Release previously built app to Google Play and create tag"
@@ -54,6 +56,7 @@ desc "Build app bundle"
         preReleaseChecks(versionInfo: versionInfo, tagName: tagName, type: versionComponents["type"], track: storeTrack)
         checkArtifactsExist()
         tag(name: tagName)
+        createGithubRelease_RC(name: versionInfo["versionName"], tag: tagName, versionCode: versionInfo["versionCode"])
         uploadToPlayStore(track: storeTrack)
     end
 
@@ -77,6 +80,23 @@ desc "Build app bundle"
                 }
             )
     end
+
+	desc "Build APK"
+	lane :buildSignedAPK do |options|
+		gradle(
+			task: 'assemble',
+			flavor: 'play',
+			build_type: 'Release',
+			print_command: false,
+			properties: {
+				  "android.injected.signing.store.file" => ENV["FASTLANE_NOTES_UPLOAD_STORE_FILE"],
+				  "android.injected.signing.store.password" => ENV["FASTLANE_NOTES_UPLOAD_STORE_PASSWORD"],
+				  "android.injected.signing.key.alias" => ENV["FASTLANE_NOTES_UPLOAD_KEY_ALIAS"],
+				  "android.injected.signing.key.password" => ENV["FASTLANE_NOTES_UPLOAD_KEY_PASSWORD"],
+				}
+			)
+		sh("mv ../app/build/outputs/apk/play/release/app-play-release.apk ../release/nextcloud-notes-#{options[:versionCode]}.apk")
+	end
 
     desc "Show versions and prompt for confirmation"
     private_lane :preReleaseChecks do |options|
@@ -119,5 +139,16 @@ desc "Build app bundle"
             aab: BUNDLE_PATH
         )
     end
+
+	private_lane :createGithubRelease do |options|
+		set_github_release(
+			repository_name: "nextcloud/notes-android",
+			api_token: ENV["FASTLANE_NEXTCLOUD_GITHUB_API_TOKEN"],
+			name: options[:name],
+			tag_name: options[:tag],
+			description: (File.read("metadata/android/en-US/changelogs/" + options[:versionCode] + ".txt") rescue "No changelog provided"),
+			upload_assets: [ "release/nextcloud-notes-" + options[:versionCode] + ".apk" ]
+		)
+	end
 
 end
