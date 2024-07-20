@@ -164,14 +164,14 @@
     <string name="error_dialog_tip_files_delete_storage">Если принудительная остановка не поможет, попробуйте очистить хранилище обоих приложений.</string>
     <string name="error_dialog_timeout_instance">Ответ сервера не был получен в отведённое на это время. Проверьте работоспособность сервера.</string>
     <string name="error_dialog_timeout_toggle">Проверьте ваше сетевое соединение. В некоторых случаях может помочь отключение Wi-Fi и включение его вновь.</string>
-    <string name="error_dialog_check_server">Ответ вашего сервера неверный. Проверьте работает ли вход через веб-интерфейс.</string>
+    <string name="error_dialog_check_server">Ответ вашего сервера неверный. Проверьте, работает ли вход через веб-интерфейс.</string>
     <string name="error_dialog_check_server_logs">В конфигурации сервера обнаружены ошибки, проверьте файлы журналов сервера.</string>
     <string name="error_dialog_check_maintenance">Убедитесь что ваш экземпляр Nextcloud не находится в режиме обслуживания.</string>
     <string name="error_dialog_insufficient_storage">На вашем экземпляре Nextcloud нет свободного места. Удалите ненужные файлы для синхронизации изменений в облако.</string>
     <string name="error_dialog_we_need_info">Требуется следующая техническая информация от вас:</string>
     <string name="error_dialog_server_app_enabled">Проверьте, установлено ли на сервере приложение Заметки.</string>
     <string name="error_dialog_redirect">На запрос сервер вернул код состояния HTTP 302, что означает, что  приложение Заметки либо не установлено, либо сервер настроен неверно. Такое поведение может являться следствием замены стандартного файла .htaccess администратором сервера или приложением Nextcloud, таким как OID Client.</string>
-    <string name="error_dialog_tip_disable_battery_optimizations">Пожалуйста отключите все оптимизации аккумулятора для приложений Nextcloud и Notes.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Пожалуйста, отключите все оптимизации аккумулятора для приложений Nextcloud и Notes.</string>
     <string name="error_dialog_min_version">Для запуска приложение \"Заметки\" необходима версия Nextcloud не ниже 3.18.</string>
     <string name="added_content">Добавлена заметка «%1$s»</string>
     <string name="shared_text_empty">Публикуемый текст пустой</string>
@@ -305,7 +305,7 @@
     <string name="simple_next">Вперёд</string>
     <string name="simple_prev">Назад</string>
     <string name="simple_backup">Резервное копирование</string>
-    <string name="backup">Мы удалили невосстанавливаемую часть приложения. Пожалуйста, сделайте резервную копию изменений, которые не были синхронизированы, и очистите память приложения Файлы.</string>
+    <string name="backup">Обнаружено невосстановимое состояние приложения. Пожалуйста, сделайте резервную копию изменений, которые не были синхронизированы, и очистите память приложения Notes.</string>
     <string name="settings_notes_path_description">Папка для хранения ваших записей вашей учётной записи Nextcloud</string>
     <string-array name="settings_file_suffixes">
         <item translatable="false">.txt</item>

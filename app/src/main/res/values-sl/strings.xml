@@ -57,6 +57,7 @@
     <string name="settings_prevent_screen_capture">Prepreči zajem zaslona</string>
     <string name="settings_gridview">Mrežni pogled</string>
     <string name="settings_enable_direct_edit">Neposredno urejanje</string>
+    <string name="settings_enable_direct_edit_summary">Onemogočena možnost skrije prikaz naprednih možnosti urejevalnika.</string>
     <string name="settings_keep_screen_on">Ohrani zaslon prižgan</string>
     <string name="settings_keep_screen_on_summary">Med pregledovanjem in urejanjem zabeležk</string>
 
