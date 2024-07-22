@@ -41,4 +41,6 @@
 
     <color name="widget_background">#ddffffff</color>
     <color name="widget_foreground">#222222</color>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
 </resources>
