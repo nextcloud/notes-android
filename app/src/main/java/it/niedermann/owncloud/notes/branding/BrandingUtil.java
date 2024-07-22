@@ -54,6 +54,14 @@ public class BrandingUtil extends ViewThemeUtilsBase {
         this.notes = new NotesViewThemeUtils(schemes);
     }
 
+    public static BrandingUtil getInstance(@NonNull Context context) {
+        int color = BrandingUtil.readBrandMainColor(context);
+        return new BrandingUtil(
+                MaterialSchemes.Companion.fromColor(color),
+                new com.nextcloud.android.common.ui.color.ColorUtil(context)
+        );
+    }
+
     public static BrandingUtil of(@ColorInt int color, @NonNull Context context) {
         return CACHE.computeIfAbsent(color, c -> new BrandingUtil(
                 MaterialSchemes.Companion.fromColor(c),

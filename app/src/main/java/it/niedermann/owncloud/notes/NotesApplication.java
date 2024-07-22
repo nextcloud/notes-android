@@ -20,6 +20,7 @@ import android.webkit.WebView;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
 
 public class NotesApplication extends Application {
@@ -31,6 +32,7 @@ public class NotesApplication extends Application {
     private static long lastInteraction = 0;
     private static String PREF_KEY_THEME;
     private static boolean isGridViewEnabled = false;
+    private static BrandingUtil brandingUtil;
 
     @Override
     public void onCreate() {
@@ -40,9 +42,14 @@ public class NotesApplication extends Application {
         lockedPreference = prefs.getBoolean(getString(R.string.pref_key_lock), false);
         isGridViewEnabled = getDefaultSharedPreferences(this).getBoolean(getString(R.string.pref_key_gridview), false);
         super.onCreate();
+        brandingUtil = BrandingUtil.getInstance(this);
         if (BuildConfig.DEBUG) {
             WebView.setWebContentsDebuggingEnabled(true);
         }
+    }
+
+    public static BrandingUtil brandingUtil() {
+        return brandingUtil;
     }
 
     public static void setAppTheme(DarkModeSetting setting) {
