@@ -7,7 +7,7 @@
   ~ SPDX-FileCopyrightText: 2022 Kévin Cocchi <kevin.cocchi@gmail.com>
   ~ SPDX-License-Identifier: GPL-3.0-or-later
 -->
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
 
     <style name="BaseTheme" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
@@ -98,5 +98,10 @@
         <item name="windowSplashScreenBackground">@color/defaultBrand</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
         <item name="postSplashScreenTheme">@style/AppTheme</item>
+    </style>
+
+    <style name="Preference.SwitchPreferenceCompat" parent="@style/Preference.SwitchPreferenceCompat.Material"
+        tools:ignore="ResourceCycle">
+        <item name="widgetLayout">@layout/preference_switch</item>
     </style>
 </resources>
