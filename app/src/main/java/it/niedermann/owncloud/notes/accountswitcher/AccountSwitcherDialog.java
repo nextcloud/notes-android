@@ -7,6 +7,7 @@
  */
 package it.niedermann.owncloud.notes.accountswitcher;
 
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +22,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
@@ -107,9 +109,12 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
             dismiss();
         });
 
-        return new MaterialAlertDialogBuilder(requireContext())
-                .setView(binding.getRoot())
-                .create();
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContext())
+                .setView(binding.getRoot());
+
+        NotesApplication.brandingUtil().dialog.colorMaterialAlertDialogBackground(requireContext(), builder);
+
+        return builder.create();
     }
 
     public static DialogFragment newInstance(long currentAccountId) {
