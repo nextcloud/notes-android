@@ -109,7 +109,7 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
             dismiss();
         });
 
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContext())
+        final MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContext())
                 .setView(binding.getRoot());
 
         NotesApplication.brandingUtil().dialog.colorMaterialAlertDialogBackground(requireContext(), builder);

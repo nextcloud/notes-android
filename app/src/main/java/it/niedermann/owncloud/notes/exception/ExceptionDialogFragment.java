@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import it.niedermann.android.util.ClipboardUtil;
 import it.niedermann.nextcloud.exception.ExceptionUtil;
 import it.niedermann.owncloud.notes.BuildConfig;
+import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.DialogExceptionBinding;
 import it.niedermann.owncloud.notes.exception.tips.TipsAdapter;
@@ -69,12 +70,15 @@ public class ExceptionDialogFragment extends AppCompatDialogFragment {
 
         adapter.setThrowables(throwables);
 
-        return new MaterialAlertDialogBuilder(requireActivity())
+        final MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(requireActivity())
                 .setView(binding.getRoot())
                 .setTitle(R.string.error_dialog_title)
                 .setPositiveButton(android.R.string.copy, (a, b) -> ClipboardUtil.copyToClipboard(requireContext(), getString(R.string.simple_exception), "```\n" + debugInfos + "\n```"))
-                .setNegativeButton(R.string.simple_close, null)
-                .create();
+                .setNegativeButton(R.string.simple_close, null);
+
+        NotesApplication.brandingUtil().dialog.colorMaterialAlertDialogBackground(requireContext(), alertDialogBuilder);
+
+        return alertDialogBuilder.create();
     }
 
     public static DialogFragment newInstance(ArrayList<Throwable> exceptions) {
