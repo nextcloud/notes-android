@@ -147,7 +147,7 @@ public class ManageAccountsActivity extends LockedActivity implements IManageAcc
 
         binding.inputWrapper.setHint(title);
 
-        MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(this)
+        final MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(this)
                 .setTitle(title)
                 .setMessage(message)
                 .setView(binding.getRoot())
