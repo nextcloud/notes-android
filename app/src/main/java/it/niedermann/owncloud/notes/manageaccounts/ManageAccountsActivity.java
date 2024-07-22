@@ -28,6 +28,7 @@ import java.util.concurrent.Executors;
 import java.util.function.Function;
 
 import it.niedermann.owncloud.notes.LockedActivity;
+import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.branding.DeleteAlertDialogBuilder;
@@ -146,7 +147,7 @@ public class ManageAccountsActivity extends LockedActivity implements IManageAcc
 
         binding.inputWrapper.setHint(title);
 
-        final var dialog = new MaterialAlertDialogBuilder(this)
+        MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(this)
                 .setTitle(title)
                 .setMessage(message)
                 .setView(binding.getRoot())
@@ -176,8 +177,13 @@ public class ManageAccountsActivity extends LockedActivity implements IManageAcc
                             ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
                         }
                     });
-                })
-                .show();
+                });
+
+        NotesApplication.brandingUtil().dialog.colorMaterialAlertDialogBackground(this, alertDialogBuilder);
+
+        var dialog = alertDialogBuilder.create();
+        alertDialogBuilder.show();
+
         try {
             repository.getServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), getPreferredApiVersion(localAccount.getApiVersion()))
                     .enqueue(new Callback<>() {
