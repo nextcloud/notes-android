@@ -68,6 +68,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     };
     private TextWatcher textWatcher;
     private boolean keyboardShown = false;
+    private int lastSelection = -1;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -151,6 +152,19 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
                 }
             }
         };
+
+        if (savedInstanceState != null) {
+            lastSelection = savedInstanceState.getInt("lastSelection", -1);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        if (binding.editContent != null && binding.editContent.hasFocus()) {
+            outState.putInt("lastSelection", binding.editContent.getSelectionStart());
+        }
     }
 
     @Override
@@ -177,6 +191,10 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
         binding.editContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(requireContext(), sp));
         if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
             binding.editContent.setTypeface(Typeface.MONOSPACE);
+        }
+
+        if (lastSelection > 0 && binding.editContent.length() >= lastSelection) {
+            binding.editContent.setSelection(lastSelection);
         }
     }
 
