@@ -101,7 +101,7 @@
             android:contentDescription="@null"
             android:focusable="false"
             android:scaleType="center"
-            app:tint="@color/black"
+            app:tint="@color/fg_default"
             app:srcCompat="@drawable/ic_person_add_grey600_24dp" />
 
         <TextView
@@ -132,7 +132,7 @@
             android:contentDescription="@null"
             android:focusable="false"
             android:scaleType="center"
-            app:tint="@color/black"
+            app:tint="@color/fg_default"
             app:srcCompat="@drawable/ic_settings_grey600_24dp" />
 
         <TextView
