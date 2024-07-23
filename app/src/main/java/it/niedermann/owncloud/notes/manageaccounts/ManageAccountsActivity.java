@@ -95,7 +95,7 @@ public class ManageAccountsActivity extends LockedActivity implements IManageAcc
             public void onSuccess(Long unsynchronizedChangesCount) {
                 runOnUiThread(() -> {
                     if (unsynchronizedChangesCount > 0) {
-                        showDeleteAlertDialog(accountToDelete, unsynchronizedChangesCount);
+                        showRemoveAccountAlertDialog(accountToDelete, unsynchronizedChangesCount);
                     } else {
                         viewModel.deleteAccount(accountToDelete, ManageAccountsActivity.this);
                     }
@@ -109,7 +109,7 @@ public class ManageAccountsActivity extends LockedActivity implements IManageAcc
         });
     }
 
-    private void showDeleteAlertDialog(@NonNull Account accountToDelete, Long unsynchronizedChangesCount) {
+    private void showRemoveAccountAlertDialog(@NonNull Account accountToDelete, Long unsynchronizedChangesCount) {
         final MaterialAlertDialogBuilder alertDialogBuilder = new DeleteAlertDialogBuilder(ManageAccountsActivity.this)
                 .setTitle(getString(R.string.remove_account, accountToDelete.getUserName()))
                 .setMessage(getResources().getQuantityString(R.plurals.remove_account_message, (int) unsynchronizedChangesCount.longValue(), accountToDelete.getAccountName(), unsynchronizedChangesCount))
