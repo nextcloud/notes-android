@@ -95,12 +95,7 @@ public class ManageAccountsActivity extends LockedActivity implements IManageAcc
             public void onSuccess(Long unsynchronizedChangesCount) {
                 runOnUiThread(() -> {
                     if (unsynchronizedChangesCount > 0) {
-                        new DeleteAlertDialogBuilder(ManageAccountsActivity.this)
-                                .setTitle(getString(R.string.remove_account, accountToDelete.getUserName()))
-                                .setMessage(getResources().getQuantityString(R.plurals.remove_account_message, (int) unsynchronizedChangesCount.longValue(), accountToDelete.getAccountName(), unsynchronizedChangesCount))
-                                .setNeutralButton(android.R.string.cancel, null)
-                                .setPositiveButton(R.string.simple_remove, (d, l) -> viewModel.deleteAccount(accountToDelete, ManageAccountsActivity.this))
-                                .show();
+                        showDeleteAlertDialog(accountToDelete, unsynchronizedChangesCount);
                     } else {
                         viewModel.deleteAccount(accountToDelete, ManageAccountsActivity.this);
                     }
@@ -112,6 +107,18 @@ public class ManageAccountsActivity extends LockedActivity implements IManageAcc
                 ExceptionDialogFragment.newInstance(t).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
             }
         });
+    }
+
+    private void showDeleteAlertDialog(@NonNull Account accountToDelete, Long unsynchronizedChangesCount) {
+        final MaterialAlertDialogBuilder alertDialogBuilder = new DeleteAlertDialogBuilder(ManageAccountsActivity.this)
+                .setTitle(getString(R.string.remove_account, accountToDelete.getUserName()))
+                .setMessage(getResources().getQuantityString(R.plurals.remove_account_message, (int) unsynchronizedChangesCount.longValue(), accountToDelete.getAccountName(), unsynchronizedChangesCount))
+                .setNegativeButton(android.R.string.cancel, null)
+                .setPositiveButton(R.string.simple_remove, (d, l) -> viewModel.deleteAccount(accountToDelete, ManageAccountsActivity.this));
+
+        NotesApplication.brandingUtil().dialog.colorMaterialAlertDialogBackground(this, alertDialogBuilder);
+
+        alertDialogBuilder.show();
     }
 
     public void onChangeNotesPath(@NonNull Account localAccount) {
