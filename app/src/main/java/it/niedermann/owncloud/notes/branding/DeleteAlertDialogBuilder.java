@@ -7,15 +7,14 @@
 package it.niedermann.owncloud.notes.branding;
 
 import android.content.Context;
-import android.content.DialogInterface;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.ContextCompat;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.NotesApplication;
 
 public class DeleteAlertDialogBuilder extends MaterialAlertDialogBuilder {
 
@@ -35,9 +34,12 @@ public class DeleteAlertDialogBuilder extends MaterialAlertDialogBuilder {
     }
 
     public void applyBrand() {
-        final var positiveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        if (positiveButton != null) {
-            positiveButton.setTextColor(ContextCompat.getColor(getContext(), R.color.danger));
+        if (dialog.getButton(AlertDialog.BUTTON_POSITIVE) instanceof MaterialButton positiveButton) {
+            NotesApplication.brandingUtil().material.colorMaterialButtonPrimaryTonal(positiveButton);
+        }
+
+        if (dialog.getButton(AlertDialog.BUTTON_NEGATIVE) instanceof MaterialButton negativeButton) {
+            NotesApplication.brandingUtil().material.colorMaterialButtonPrimaryBorderless(negativeButton);
         }
     }
 }
