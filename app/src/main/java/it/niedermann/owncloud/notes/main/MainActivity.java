@@ -180,7 +180,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                         runOnUiThread(() -> mainViewModel.postCurrentAccount(account));
                     } catch (NextcloudFilesAppAccountNotFoundException e) {
                         // Verbose log output for https://github.com/nextcloud/notes-android/issues/1256
-                        runOnUiThread(() -> showExceptionAlertDialog(e));
+                        runOnUiThread(() -> showAppAccountNotFoundAlertDialog(e));
                     } catch (NoCurrentAccountSelectedException e) {
                         runOnUiThread(() -> ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()));
                     }
@@ -329,7 +329,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         });
     }
 
-    private void showExceptionAlertDialog(NextcloudFilesAppAccountNotFoundException e) {
+    private void showAppAccountNotFoundAlertDialog(NextcloudFilesAppAccountNotFoundException e) {
         final MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(this)
                 .setTitle(NextcloudFilesAppAccountNotFoundException.class.getSimpleName())
                 .setMessage(R.string.backup)
