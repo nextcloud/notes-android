@@ -56,6 +56,8 @@
     <string name="settings_background_sync">Синхр. в фоновом режиме</string>
     <string name="settings_prevent_screen_capture">Запретить захват экрана</string>
     <string name="settings_gridview">Вид сеткой</string>
+    <string name="settings_enable_direct_edit">Прямое редактирование</string>
+    <string name="settings_enable_direct_edit_summary">При отключении расширенный редактор будет скрыт</string>
     <string name="settings_keep_screen_on">Держите экран включенным</string>
     <string name="settings_keep_screen_on_summary">При просмотре или редактировании заметки</string>
 
