@@ -54,7 +54,7 @@
     <string name="settings_lock_summary">기기 인증 정보</string>
     <string name="settings_background_sync">백그라운드 동기화</string>
     <string name="settings_prevent_screen_capture">화면 캡처 방지</string>
-    <string name="settings_gridview">바둑판식 보기</string>
+    <string name="settings_gridview">그리드뷰</string>
     <string name="settings_keep_screen_on">화면을 계속 띄워놓기</string>
     <string name="settings_keep_screen_on_summary">메모를 보거나 편집할 때</string>
 
