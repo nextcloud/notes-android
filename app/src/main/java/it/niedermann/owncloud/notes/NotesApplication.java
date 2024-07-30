@@ -19,7 +19,6 @@ import android.util.Log;
 import android.webkit.WebView;
 
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.preference.PreferenceManager;
 
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
 
