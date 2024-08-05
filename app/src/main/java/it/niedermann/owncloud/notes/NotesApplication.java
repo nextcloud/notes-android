@@ -15,10 +15,14 @@ import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
 
 import android.app.Application;
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 import android.webkit.WebView;
 
 import androidx.appcompat.app.AppCompatDelegate;
+
+import com.nextcloud.android.sso.FilesAppTypeRegistry;
+import com.nextcloud.android.sso.model.FilesAppType;
 
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
@@ -46,6 +50,18 @@ public class NotesApplication extends Application {
         if (BuildConfig.DEBUG) {
             WebView.setWebContentsDebuggingEnabled(true);
         }
+        registerFilesAppType();
+    }
+
+    private void registerFilesAppType() {
+        String packageId = getResources().getString(R.string.package_id);
+        String accountType = getResources().getString(R.string.account_type);
+
+        if (TextUtils.isEmpty(packageId) || TextUtils.isEmpty(accountType)) {
+            return;
+        }
+
+        FilesAppTypeRegistry.getInstance().init(new FilesAppType(packageId, accountType, FilesAppType.Type.PROD));
     }
 
     public static BrandingUtil brandingUtil() {
