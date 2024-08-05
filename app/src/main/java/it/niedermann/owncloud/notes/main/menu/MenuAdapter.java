@@ -18,8 +18,11 @@ import androidx.annotation.NonNull;
 import androidx.core.util.Consumer;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.nextcloud.android.sso.FilesAppTypeRegistry;
 import com.nextcloud.android.sso.helper.VersionCheckHelper;
 import com.nextcloud.android.sso.model.FilesAppType;
+
+import java.util.Optional;
 
 import it.niedermann.owncloud.notes.FormattingHelpActivity;
 import it.niedermann.owncloud.notes.R;
@@ -84,10 +87,12 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
         // https://github.com/nextcloud/android/pull/8405#issuecomment-852966877
         final int minVersionCode = 30170090;
         try {
-            if (VersionCheckHelper.getNextcloudFilesVersionCode(context, FilesAppType.PROD) > minVersionCode) {
-                return generateTrashbinAppIntent(context, account, true);
-            } else if (VersionCheckHelper.getNextcloudFilesVersionCode(context, FilesAppType.DEV) > minVersionCode) {
-                return generateTrashbinAppIntent(context, account, false);
+            Optional<FilesAppType> prod = FilesAppTypeRegistry.getInstance().getTypes().stream().filter(t -> t.type == FilesAppType.Type.PROD).findFirst();
+            Optional<FilesAppType> dev = FilesAppTypeRegistry.getInstance().getTypes().stream().filter(t -> t.type == FilesAppType.Type.DEV).findFirst();
+            if (prod.isPresent() && VersionCheckHelper.getNextcloudFilesVersionCode(context, prod.get()) > minVersionCode) {
+                return generateTrashbinAppIntent(context, account, prod.get());
+            } else if (dev.isPresent() && VersionCheckHelper.getNextcloudFilesVersionCode(context, dev.get()) > minVersionCode) {
+                return generateTrashbinAppIntent(context, account, dev.get());
             } else {
                 // Files app is too old to be able to switch the account when launching the TrashbinActivity
                 return generateTrashbinWebIntent(account);
@@ -98,9 +103,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
         }
     }
 
-    private static Intent generateTrashbinAppIntent(@NonNull Context context, @NonNull Account account, boolean prod) throws PackageManager.NameNotFoundException {
+    private static Intent generateTrashbinAppIntent(@NonNull Context context, @NonNull Account account, FilesAppType type) throws PackageManager.NameNotFoundException {
         final var packageManager = context.getPackageManager();
-        final String packageName = prod ? FilesAppType.PROD.packageId : FilesAppType.DEV.packageId;
+        final String packageName = type.packageId;
         final var intent = new Intent();
         intent.setClassName(packageName, "com.owncloud.android.ui.trashbin.TrashbinActivity");
         if (packageManager.resolveActivity(intent, 0) != null) {
