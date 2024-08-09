@@ -17,6 +17,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
@@ -59,13 +60,16 @@ public class EditTitleDialogFragment extends BrandedDialogFragment {
             binding.title.setText(oldTitle);
         }
 
-        return new MaterialAlertDialogBuilder(requireContext())
+        final MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(requireContext())
                 .setTitle(R.string.change_note_title)
                 .setView(dialogView)
                 .setCancelable(true)
                 .setPositiveButton(R.string.action_edit_save, (dialog, which) -> listener.onTitleEdited(binding.title.getText().toString()))
-                .setNegativeButton(R.string.simple_cancel, null)
-                .create();
+                .setNegativeButton(R.string.simple_cancel, null);
+
+        NotesApplication.brandingUtil().dialog.colorMaterialAlertDialogBackground(requireContext(), alertDialogBuilder);
+
+        return alertDialogBuilder.create();
     }
 
     @Override
