@@ -46,6 +46,7 @@
     <string name="listview_updated_last_month">Vorige maand</string>
 
     <string name="settings_note_mode">Weergavemodus voor notities</string>
+    <string name="settings_note_mode_new">Notities gedrag bij openen</string>
     <string name="settings_theme_title">Thema</string>
     <string name="settings_font_title">Monospace lettertype</string>
     <string name="settings_font_size">Fontgrootte</string>
@@ -55,6 +56,8 @@
     <string name="settings_background_sync">Achtergrondsynchronisatie</string>
     <string name="settings_prevent_screen_capture">Voorkomen schermafdruk</string>
     <string name="settings_gridview">Rasterweergave</string>
+    <string name="settings_enable_direct_edit">Direct bewerken</string>
+    <string name="settings_enable_direct_edit_summary">Indien uitgeschakeld, wordt de geavanceerde editor verborgen.</string>
     <string name="settings_keep_screen_on">Scherm aan laten</string>
     <string name="settings_keep_screen_on_summary">Tijdens het bekijken of bewerken van een notitie</string>
 
@@ -184,6 +187,9 @@
     <string name="action_formatting_help">Opmaak</string>
 
 
+    <string name="noteMode_plain_edit">Normale bewerkmodus</string>
+    <string name="noteMode_plain_preview">Normaal voorbeeld</string>
+    <string name="noteMode_rich_edit">Uitgebreide bewerkmodus</string>
     <string name="noteMode_remember_last">Onthoud je laatste selectie</string>
 
     <string-array name="fontSize_entries">
@@ -305,5 +311,7 @@
     <string name="progress_import_indeterminate">Notities importeren...</string>
     <string name="progress_import">Notitie %1$d van %2$d importeren</string>
     <string name="account_imported">Account geïmporteerd</string>
+    <string name="direct_editing_error">Fout bij laden uitgebreid bewerken</string>
+    <string name="switch_to_plain_editing">Ga naar normaal bewerken</string>
     <string name="action_back">Terug</string>
     </resources>
