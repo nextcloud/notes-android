@@ -228,8 +228,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
                     handler.removeCallbacksAndMessages(null);
                 }
                 delayQueryTask = new DelayQueryRunnable(newText);
-                // If there is only one char in the search pattern, we should start the search immediately.
-                handler.postDelayed(delayQueryTask, newText.length() > 1 ? delay : 0);
+                handler.postDelayed(delayQueryTask, delay);
             }
 
             class DelayQueryRunnable implements Runnable {
