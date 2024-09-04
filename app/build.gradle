@@ -93,7 +93,7 @@ ext {
 }
 
 dependencies {
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.2'
 
     // Nextcloud SSO
     implementation 'com.github.nextcloud.android-common:ui:0.23.0'
