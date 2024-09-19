@@ -87,8 +87,11 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         super.onViewCreated(view, savedInstanceState);
         checkDirectEditingAvailable();
         if (isDirectEditEnabled()) {
+            ExtendedFloatingActionButton edit = getNormalEditButton();
+            if (edit != null) edit.setVisibility(View.GONE);
             final ExtendedFloatingActionButton directEditingButton = getDirectEditingButton();
             directEditingButton.setExtended(false);
+            directEditingButton.setVisibility(View.VISIBLE);
             ExtendedFabUtil.toggleExtendedOnLongClick(directEditingButton);
             directEditingButton.setOnClickListener(v -> {
                 if (listener != null) {
