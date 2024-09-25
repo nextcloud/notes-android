@@ -48,6 +48,8 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     private SearchView searchView;
     private String searchQuery = null;
     private static final int delay = 50; // If the search string does not change after $delay ms, then the search task starts.
+    private static final int shortStringDelay = 200; // A longer delay for short search strings.
+    private static final int shortStringSize = 3; // The maximum length of a short search string.
     private boolean directEditRemotelyAvailable = false; // avoid using this directly, instead use: isDirectEditEnabled()
 
     @ColorInt
@@ -231,8 +233,8 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
                     handler.removeCallbacksAndMessages(null);
                 }
                 delayQueryTask = new DelayQueryRunnable(newText);
-                // If there is only one char in the search pattern, we should start the search immediately.
-                handler.postDelayed(delayQueryTask, newText.length() > 1 ? delay : 0);
+                // If there are few chars in the search pattern, we should start the search later.
+                handler.postDelayed(delayQueryTask, newText.length() > shortStringSize ? delay : shortStringDelay);
             }
 
             class DelayQueryRunnable implements Runnable {
