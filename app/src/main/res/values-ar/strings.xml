@@ -47,7 +47,7 @@
 
     <string name="settings_note_mode">وضع العرض للملاحظات</string>
     <string name="settings_note_mode_new">السلوك عند فتح الملاحظات</string>
-    <string name="settings_theme_title">الثيمة</string>
+    <string name="settings_theme_title">السمة</string>
     <string name="settings_font_title">خط font أحادي المسافة</string>
     <string name="settings_font_size">حجم الخط</string>
     <string name="settings_wifi_only">المزامنة فقط على الواي فاي</string>
@@ -183,7 +183,7 @@
     <string name="change_note_title">تغيير عنوان ملاحظة</string>
     <string name="menu_edit_title">تحرير عنوان</string>
     <string name="simple_security">الأمان</string>
-    <string name="appearance_and_behavior">المظهر و التّصرُّف</string>
+    <string name="appearance_and_behavior">المظهر و سلوك واجهة الويب</string>
     <string name="simple_synchronization">المزامنة</string>
     <string name="manage_accounts">إدارة الحسابات</string>
     <string name="action_formatting_help">التنسيق</string>
