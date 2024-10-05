@@ -4,6 +4,7 @@
  ~ SPDX-License-Identifier: GPL-3.0-or-later
 -->
 # Nextcloud Notes for Android
+
 An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/).
 
 [![Android CI](https://github.com/nextcloud/notes-android/actions/workflows/android.yml/badge.svg)](https://github.com/nextcloud/notes-android/actions/workflows/android.yml)
@@ -32,6 +33,7 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 | ![Screenshot of list view](/fastlane/metadata/android/en-US/images/phoneScreenshots/2.png) | ![Screenshot of edit mode](/fastlane/metadata/android/en-US/images/phoneScreenshots/3.png) | ![Screenshot of preview](/fastlane/metadata/android/en-US/images/phoneScreenshots/4.png) |
 
 ## :rocket: Features
+
   * Multiple accounts
   * List, create, edit, share, search and delete notes
   * Share text and links as new note into the app
@@ -40,28 +42,30 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
   * Bulk delete
   * In-note search
   * Single note widget and note list widget
+  * Dark Mode
   * Render Markdown (using [Markwon](https://noties.io/Markwon))
   * Translated in many languages on [Transifex](https://app.transifex.com/nextcloud/nextcloud/android-notes/)
   * Context based formatting ([#363](https://github.com/nextcloud/notes-android/issues/363))
-  * Password protection ([#354](https://github.com/nextcloud/notes-android/issues/354))
+  * App-lock ([#354](https://github.com/nextcloud/notes-android/issues/354))
 
 ## :checkered_flag: Roadmap
+
   * We usually focus on [pinned issues](https://github.com/nextcloud/notes-android/issues) in our issue tracker
-  * Since this is an Open Source freetime project, there is no guarantee when and if and how we implement new features
 
 ## :family: Join the team
+
   * Test the app with different devices
   * Report issues in the [issue tracker](https://github.com/nextcloud/notes-android/issues)
   * [Pick a good first issue](https://github.com/nextcloud/notes-android/labels/Good%20first%20issue) :notebook:
   * Create a [Pull Request](https://opensource.guide/how-to-contribute/#opening-a-pull-request)
   * Help translating this app on [Transifex](https://app.transifex.com/nextcloud/nextcloud/android-notes/) 🌎
-  * Buy this app on [Google Play Store](https://play.google.com/store/apps/details?id=it.niedermann.owncloud.notes)
-  * Send me a bottle of your favorite beer :beers: :wink:
 
 ## :link: Requirements
-  * [Nextcloud](https://nextcloud.com/) instance running
-  * [Nextcloud Android](https://github.com/nextcloud/android) app installed (≥ 3.9.0)
-  * [Nextcloud Notes](https://github.com/nextcloud/notes) app enabled
+
+  * [Nextcloud Server](https://nextcloud.com/)
+  * [Nextcloud Notes Server App](https://github.com/nextcloud/notes)
+  * [Nextcloud Files Android App](https://github.com/nextcloud/android)
 
 ## :notebook: License
+
 This project is licensed under the [GNU GENERAL PUBLIC LICENSE](/LICENSE).
