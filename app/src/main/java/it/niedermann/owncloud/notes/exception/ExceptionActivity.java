@@ -19,6 +19,7 @@ import java.util.Collections;
 import it.niedermann.android.util.ClipboardUtil;
 import it.niedermann.nextcloud.exception.ExceptionUtil;
 import it.niedermann.owncloud.notes.BuildConfig;
+import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ActivityExceptionBinding;
 import it.niedermann.owncloud.notes.exception.tips.TipsAdapter;
@@ -52,6 +53,11 @@ public class ExceptionActivity extends AppCompatActivity {
         binding.stacktrace.setText(debugInfos);
         binding.copy.setOnClickListener((v) -> ClipboardUtil.copyToClipboard(this, getString(R.string.simple_exception), "```\n" + debugInfos + "\n```"));
         binding.close.setOnClickListener((v) -> finish());
+
+        NotesApplication.brandingUtil().platform.themeStatusBar(this);
+        NotesApplication.brandingUtil().material.themeToolbar(binding.toolbar);
+        NotesApplication.brandingUtil().material.colorMaterialButtonPrimaryBorderless(binding.close);
+        NotesApplication.brandingUtil().material.colorMaterialButtonPrimaryFilled(binding.copy);
 
         adapter.setThrowables(Collections.singletonList(throwable));
     }

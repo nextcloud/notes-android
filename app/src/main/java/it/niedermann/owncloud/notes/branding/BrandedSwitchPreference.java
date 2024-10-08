@@ -6,45 +6,51 @@
  */
 package it.niedermann.owncloud.notes.branding;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Switch;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceViewHolder;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
-public class BrandedSwitchPreference extends SwitchPreference implements Branded {
+import com.google.android.material.materialswitch.MaterialSwitch;
+
+import it.niedermann.owncloud.notes.R;
+
+public class BrandedSwitchPreference extends SwitchPreferenceCompat implements Branded {
 
     @ColorInt
     private Integer mainColor = null;
 
-    @SuppressLint("UseSwitchCompatOrMaterialCode")
     @Nullable
-    private Switch switchView;
+    private MaterialSwitch switchView;
 
     public BrandedSwitchPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        setWidgetLayoutResource(R.layout.preference_switch);
     }
 
     public BrandedSwitchPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        setWidgetLayoutResource(R.layout.preference_switch);
     }
 
     public BrandedSwitchPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+        setWidgetLayoutResource(R.layout.preference_switch);
     }
 
     public BrandedSwitchPreference(Context context) {
         super(context);
+        setWidgetLayoutResource(R.layout.preference_switch);
     }
 
     @Override
-    public void onBindViewHolder(PreferenceViewHolder holder) {
+    public void onBindViewHolder(@NonNull PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 
         if (holder.itemView instanceof ViewGroup) {
@@ -65,7 +71,7 @@ public class BrandedSwitchPreference extends SwitchPreference implements Branded
     private void applyBrand() {
         if (switchView != null) {
             final var util = BrandingUtil.of(mainColor, getContext());
-            util.platform.colorSwitch(switchView);
+            util.material.colorMaterialSwitch(switchView);
         }
     }
 
@@ -76,19 +82,19 @@ public class BrandedSwitchPreference extends SwitchPreference implements Branded
      * @return A Switch class or null
      * @see <a href="https://gist.github.com/marchold/45e22839eb94aa14dfb5">Source</a>
      */
-    private Switch findSwitchWidget(View view) {
-        if (view instanceof Switch) {
-            return (Switch) view;
+    private MaterialSwitch findSwitchWidget(View view) {
+        if (view instanceof MaterialSwitch) {
+            return (MaterialSwitch) view;
         }
         if (view instanceof ViewGroup viewGroup) {
             for (int i = 0; i < viewGroup.getChildCount(); i++) {
                 final var child = viewGroup.getChildAt(i);
                 if (child instanceof ViewGroup) {
-                    @SuppressLint("UseSwitchCompatOrMaterialCode") final var result = findSwitchWidget(child);
+                    final var result = findSwitchWidget(child);
                     if (result != null) return result;
                 }
-                if (child instanceof Switch) {
-                    return (Switch) child;
+                if (child instanceof MaterialSwitch) {
+                    return (MaterialSwitch) child;
                 }
             }
         }
