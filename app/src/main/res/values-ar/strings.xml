@@ -57,12 +57,12 @@
     <string name="settings_prevent_screen_capture">منع التقاط صورة للشاشة</string>
     <string name="settings_gridview">عرض كمخطط</string>
     <string name="settings_enable_direct_edit">التحرير المباشر</string>
-    <string name="settings_enable_direct_edit_summary">عند تعطيله، سيتم إخفاء المُحرِّر المتقدم </string>
+    <string name="settings_enable_direct_edit_summary">عند تعطيله، سيتم إخفاء المحرّر المتقدم </string>
     <string name="settings_keep_screen_on">حافظ على الشاشة قيد العمل</string>
     <string name="settings_keep_screen_on_summary">عند عرض أو تحرير ملاحظة</string>
 
-    <string name="error_sync">إخفاق في المزامنة: \'%1$s\'</string>
-    <string name="error_synchronization">إخفاق في المزامنة</string>
+    <string name="error_sync">فشل في المزامنة: \'%1$s\'</string>
+    <string name="error_synchronization">فشل في المزامنة</string>
     <string name="error_no_network">لا يتوفر اتصال</string>
     <string name="error_maintenance_mode">الخادوم في وضع الصيانة</string>
     <string name="error_unknown">حدث خطأ غير مُحدّدٍ</string>
