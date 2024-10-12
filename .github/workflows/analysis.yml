@@ -55,7 +55,7 @@ jobs:
                     java-version: 17
             -   name: Install dependencies
                 run: |
-                    python3 -m pip install defusedxml
+                    sudo apt install python3-defusedxml
             -   name: Run analysis wrapper
                 env:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
