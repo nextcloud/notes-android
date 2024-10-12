@@ -64,7 +64,7 @@
     <string name="error_sync">فشل في المزامنة: \'%1$s\'</string>
     <string name="error_synchronization">فشل في المزامنة</string>
     <string name="error_no_network">لا يتوفر اتصال</string>
-    <string name="error_maintenance_mode">الخادوم في وضع الصيانة</string>
+    <string name="error_maintenance_mode">الخادم في وضع الصيانة</string>
     <string name="error_unknown">حدث خطأ غير مُحدّدٍ</string>
 
     <string name="about_version_title">الإصدار</string>
@@ -166,11 +166,11 @@
     <string name="error_dialog_tip_files_outdated">تطبيقك نيكست كلاود يبدو انه لم يتم تحديثه منذ وقت طويل. رجاءً، قم بزيارةمتجر تطبيقات \"إف-درويد\" f-droid للحصول على آخر إصدار منه.</string>
     <string name="error_dialog_tip_files_force_stop">يبدو أن هناك خطأ ما في تطبيقك نكست كلاود. يرجى محاولة فرض إيقاف كلا التطبيقين: Nextcloud و Nextcloud Notes.</string>
     <string name="error_dialog_tip_files_delete_storage">إذا لم يساعد إيقافهم بالقوة ، فيمكنك محاولة مسح تخزين كلا التطبيقين.</string>
-    <string name="error_dialog_timeout_instance">لم يكن هناك استجابة من خادومك في الوقت المحدد. يرجى التأكد من أنه يعمل بشكل جيد.</string>
+    <string name="error_dialog_timeout_instance">لم تكن هناك استجابة من الخادم في الوقت المحدد. يرجى التأكد من أنه يعمل بشكل جيد.</string>
     <string name="error_dialog_timeout_toggle">تحقق من اتصالك بالشبكة. أحياناُ، يمكن لإيقاف ثم إعادة تشغيل بيانات الهاتف المحمول أو الواي فاي Wi-Fi أن يحل المشكل.</string>
-    <string name="error_dialog_check_server">لم تكن استجابة خادومك صحيحة. يرجى التحقق مما إذا كان يمكنك الوصول إلى ملاحظاتك عبر واجهة الويب.</string>
+    <string name="error_dialog_check_server">لم تكن استجابة الخادم صحيحة. يرجى التحقق مما إذا كان يمكنك الوصول إلى ملاحظاتك عبر واجهة الويب.</string>
     <string name="error_dialog_check_server_logs">هناك مشكلة في إعداد خادومك. يرجى مراجعة سجل حركات الخادوم log.</string>
-    <string name="error_dialog_check_maintenance">يرجى التحقق من أن خادومك ليس في وضع الصيانة حاليًا.</string>
+    <string name="error_dialog_check_maintenance">يرجى التحقق من أن الخادم ليس في وضع الصيانة حاليًا.</string>
     <string name="error_dialog_insufficient_storage">خادومك ليس لديه مساحة تخزين فارغة متبقية. يرجى حذف بعض الملفات لمزامنة تغييراتك المحلية في سحابتك.</string>
     <string name="error_dialog_we_need_info">نحتاج إلى المعلومات الفنية التالية لمساعدتك:</string>
     <string name="error_dialog_server_app_enabled">يرجى التأكد من تنصيب و تفعيل تطبيق \"Notes\" على خادومك.</string>
@@ -328,7 +328,7 @@
     </string-array>
     <string name="settings_notes_path_success">مُجلّد ملاحظات جديدة: %1$s</string>
     <string name="settings_file_suffix">إمتداد الملف</string>
-    <string name="settings_file_suffix_description">إمتداد الملف لملاحظاتك الجديدة في خادوم نكست كلاود</string>
+    <string name="settings_file_suffix_description">إمتداد الملف لملاحظاتك الجديدة في خادم نكست كلاود</string>
     <string name="settings_file_suffix_success">لاحقة الملف الجديدة suffix: %1$s</string>
     <string name="http_status_code">رمز حالة HTTP status code: %1$d</string>
     <string name="progress_import_indeterminate">إستيراد ملاحظات ...</string>
