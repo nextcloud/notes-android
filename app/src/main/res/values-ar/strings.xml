@@ -192,7 +192,7 @@
     <string name="noteMode_plain_edit">وضعية التحرير العادي plain</string>
     <string name="noteMode_plain_preview">معاينة عادية</string>
     <string name="noteMode_rich_edit">وضعية التحرير الغني rich</string>
-    <string name="noteMode_remember_last">تذكر آخر ما اخترْتُهُ</string>
+    <string name="noteMode_remember_last">تذكر آخر اختيار</string>
 
     <string-array name="fontSize_entries">
         <item>صغير</item>
