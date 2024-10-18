@@ -169,7 +169,7 @@
     <string name="error_dialog_timeout_instance">لم تكن هناك استجابة من الخادم في الوقت المحدد. يرجى التأكد من أنه يعمل بشكل جيد.</string>
     <string name="error_dialog_timeout_toggle">تحقق من اتصالك بالشبكة. أحياناُ، يمكن لإيقاف ثم إعادة تشغيل بيانات الهاتف المحمول أو الواي فاي Wi-Fi أن يحل المشكل.</string>
     <string name="error_dialog_check_server">لم تكن استجابة الخادم صحيحة. يرجى التحقق مما إذا كان يمكنك الوصول إلى ملاحظاتك عبر واجهة الويب.</string>
-    <string name="error_dialog_check_server_logs">هناك مشكلة في إعداد خادومك. يرجى مراجعة سجل حركات الخادوم log.</string>
+    <string name="error_dialog_check_server_logs">هناك مشكلة في إعداد الخادم الخاص بك. يرجى مراجعة سجل أنشطة الخادم.</string>
     <string name="error_dialog_check_maintenance">يرجى التحقق من أن الخادم ليس في وضع الصيانة حاليًا.</string>
     <string name="error_dialog_insufficient_storage">خادومك ليس لديه مساحة تخزين فارغة متبقية. يرجى حذف بعض الملفات لمزامنة تغييراتك المحلية في سحابتك.</string>
     <string name="error_dialog_we_need_info">نحتاج إلى المعلومات الفنية التالية لمساعدتك:</string>
@@ -321,7 +321,7 @@
     <string name="simple_prev">السابق</string>
     <string name="simple_backup">النسخ الاحتياطي</string>
     <string name="backup">اكتشفنا حالة غير قابلة للاسترداد للتطبيق. يرجى الاحتفاظ بنسخة احتياطية من التغييرات غير المتزامنة ومسح تخزين تطبيق Notes.</string>
-    <string name="settings_notes_path_description">مُجلّد لتخزين ملاحظاتك في خادوم نكست كلاود</string>
+    <string name="settings_notes_path_description">مجلد لتخزين ملاحظاتك في خادم نكست كلاود</string>
     <string-array name="settings_file_suffixes">
         <item translatable="false">.txt</item>
         <item translatable="false">.md</item>
