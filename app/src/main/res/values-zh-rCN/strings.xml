@@ -111,7 +111,7 @@
     <string name="simple_exception">异常</string>
     <string name="pin_to_homescreen">固定到主屏幕</string>
     <string name="note_has_been_deleted">此笔记已被删除</string>
-    <string name="add_account">添加帐号</string>
+    <string name="add_account">添加账号</string>
 
     <string name="category_music">音乐</string>
     <string name="category_movies">影片</string>
@@ -275,12 +275,12 @@
     <string name="error_action_open_deck_info">打开应用信息</string>
     <string name="error_action_open_network">网络设置</string>
     <string name="error_action_update_files_app">更新</string>
-    <string name="no_account_configured_yet">尚未配置账户</string>
+    <string name="no_account_configured_yet">尚未配置账号</string>
     <string name="no_other_accounts">您尚未配置任何其他帐户。</string>
-    <string name="choose_account">选择一个账户</string>
+    <string name="choose_account">选择账号</string>
     <string name="context_based_formatting">基于上下文的格式弹出窗口 </string>
     <plurals name="remove_account_message">
-        <item quantity="other">移除账户 %1$s 会同样不可恢复地删除 %2$d 未同步的更改</item>
+        <item quantity="other">移除账号 %1$s 也将不可恢复地删除 %2$d 未同步的更改</item>
     </plurals>
     <string name="remove_account">移除 %1$s</string>
 
