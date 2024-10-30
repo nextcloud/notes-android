@@ -149,7 +149,7 @@ GEM
       domain_name (~> 0.5)
     httpclient (2.8.3)
     jmespath (1.6.2)
-    json (2.7.4)
+    json (2.7.5)
     jwt (2.9.3)
       base64
     mini_magick (4.13.2)
