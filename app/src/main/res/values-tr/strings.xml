@@ -171,9 +171,9 @@
     <string name="error_dialog_check_maintenance">Nextcloud kopyanızın bakım kipinde olmadığından emin olun.</string>
     <string name="error_dialog_insufficient_storage">Nextcloud kopyanızda boş depolama alanı kalmamış. Lütfen yerel değişikliklerinizi bulut ile eşitlemek için bazı dosyaları silerek yer açın.</string>
     <string name="error_dialog_we_need_info">Size yardımcı olabilmemiz için şu teknik bilgilere gerek duyacağız:</string>
-    <string name="error_dialog_server_app_enabled">Lütfen sunucunuzda \"Notlar\" uygulamasının kurulu ve etkinleştirilmiş olduğundan emin olun.</string>
+    <string name="error_dialog_server_app_enabled">Lütfen sunucunuzda \"Notlar\" uygulamasının kurulu ve kullanıma alınmış olduğundan emin olun.</string>
     <string name="error_dialog_redirect">Sunucunuz, üzerine Notlar uygulamasının kurulmadığı ya da bir şeyin yanlış yapılandırıldığı anlamına gelen HTTP 302 durum kodu ile yanıt verdi. Bu durum, bir .htaccess dosyasındaki özel kısıtlamalardan ya da OID İstemcisi gibi Nextcloud uygulamalarından kaynaklanabilir.</string>
-    <string name="error_dialog_tip_disable_battery_optimizations">Lütfen Nextcloud ve Notlar uygulaması için tüm pil iyileştirmelerini devre dışı bırakın.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Lütfen Nextcloud ve Notlar uygulaması için tüm pil iyileştirmelerini kapatın.</string>
     <string name="error_dialog_min_version">Notlar Android uygulamasının çalışması için Nextcloud Android uygulamasının en az 3.18 sürümü gereklidir</string>
     <string name="added_content">\"%1$s\" eklendi</string>
     <string name="shared_text_empty">Paylaşılan metin boş</string>

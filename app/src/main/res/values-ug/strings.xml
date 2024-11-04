@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Nextcloud Notes - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
+<resources>
+    <string name="app_name">ئىزاھات</string>
+    <string name="app_name_long">Nextcloud Notes</string>
+    <string name="label_all_notes">بارلىق خاتىرىلەر</string>
+    <string name="label_favorites">ياقتۇرىدىغانلار</string>
+    <string name="action_create">يېڭى خاتىرە</string>
+    <string name="welcome_text">% 1 $ s نى قارشى ئالىمىز</string>
+    <string name="action_settings">تەڭشەك</string>
+    <string name="action_trashbin">ئۆچۈرۈلگەن خاتىرىلەر</string>
+    <string name="action_search">ئىزدەش</string>
+    <string name="action_sorting_method">تەرتىپلەش ئۇسۇلى</string>
+    <string name="simple_cancel">بىكار قىلىش</string>
+    <string name="simple_switch">Switch</string>
+    <string name="simple_edit">تەھرىر</string>
+    <string name="simple_remove">ئۆچۈرۈڭ</string>
+    <string name="action_edit_save">ساقلاش</string>
+    <string name="simple_about">ھەققىدە</string>
+    <string name="simple_link">ئۇلىنىش</string>
+    <string name="action_note_deleted">% 1 $ s ئۆچۈرۈلدى</string>
+    <string name="action_note_restored">% 1 $ s ئەسلىگە كەلتۈرۈلدى</string>
+    <string name="action_undo">ئەمەلدىن قالدۇرۇش</string>
+    <string name="action_uncategorized">تۈرگە ئايرىلمىغان</string>
+    <string name="menu_delete">ئۆچۈرۈش</string>
+    <string name="menu_change_category">سەھىپە</string>
+    <string name="menu_favorite">ئامراق</string>
+    <string name="menu_preview">ئالدىن كۆرۈش</string>
+    <string name="menu_share">ھەمبەھىرلەش</string>
+
+    <string name="search_in_category">% 1 $ s دىن ئىزدەڭ</string>
+    <string name="search_in_all">بارلىق خاتىرىلەرنى ئىزدەڭ</string>
+
+    <string name="change_category_title">بىر تۈرنى تاللاڭ</string>
+
+    <string name="listview_updated_today">بۈگۈن</string>
+    <string name="listview_updated_yesterday">تۈنۈگۈن</string>
+    <string name="listview_updated_this_week">بۇ ھەپتە</string>
+    <string name="listview_updated_last_week">ئالدىنقى ھەپتە</string>
+    <string name="listview_updated_this_month">بۇ ئاي</string>
+    <string name="listview_updated_last_month">ئالدىنقى ئاي</string>
+
+    <string name="settings_note_mode">خاتىرە ئۈچۈن كۆرسىتىش ھالىتى</string>
+    <string name="settings_note_mode_new">ئېچىش ھەرىكىتىنى خاتىرىلەيدۇ</string>
+    <string name="settings_theme_title">باشتېما</string>
+    <string name="settings_font_title">Monospace font</string>
+    <string name="settings_font_size">خەت چوڭلۇقى</string>
+    <string name="settings_wifi_only">پەقەت Wi-Fi دا ماسقەدەملەڭ</string>
+    <string name="settings_lock">ئەپ قۇلۇپى (Beta)</string>
+    <string name="settings_lock_summary">ئۈسكۈنە كىنىشكىسى</string>
+    <string name="settings_background_sync">تەگلىك ماس قەدەمدە</string>
+    <string name="settings_prevent_screen_capture">ئېكراننىڭ تارتىۋېلىشىنىڭ ئالدىنى ئالىدۇ</string>
+    <string name="settings_gridview">كاتەكچە كۆرۈنۈش</string>
+    <string name="settings_enable_direct_edit">بىۋاسىتە تەھرىرلەش</string>
+    <string name="settings_enable_direct_edit_summary">چەكلەنگەندە ، ئىلغار تەھرىرلىگۈچ يوشۇرۇن بولىدۇ.</string>
+    <string name="settings_keep_screen_on">ئېكراننى ساقلاپ تۇرۇڭ</string>
+    <string name="settings_keep_screen_on_summary">ئىزاھاتنى كۆرگەندە ياكى تەھرىرلىگەندە</string>
+
+    <string name="error_sync">ماس قەدەملەش مەغلۇب بولدى:% 1 $ s</string>
+    <string name="error_synchronization">ماس قەدەملەش مەغلۇب بولدى</string>
+    <string name="error_no_network">تور ئۇلىنىشى يوق</string>
+    <string name="error_maintenance_mode">مۇلازىمېتىر ئاسراش ھالىتىدە</string>
+    <string name="error_unknown">نامەلۇم خاتالىق كۆرۈلدى.</string>
+
+    <string name="about_version_title">نەشرى</string>
+    <string name="about_version">ھازىر% 1 $ s ئىشلىتىۋاتىسىز</string>
+    <string name="about_maintainer_title">Maintainer</string>
+    <string name="about_developers_title">Developers</string>
+    <string name="about_developers_original_author">ئەسلى ئاپتور</string>
+    <string name="about_translators_title">تەرجىمانلار</string>
+    <string name="about_translators_transifex">Nextcloud مەھەللىسى% 1 $ s</string>
+    <string name="about_testers_title">سىناق قىلغۇچىلار</string>
+    <string name="about_source_title">مەنبە كودى</string>
+    <string name="about_source">بۇ تۈر GitHub دا:% 1 $ s</string>
+    <string name="about_issues_title">مەسىلىلەر</string>
+    <string name="about_issues">سىز كەمتۈك ، كۈچەيتىش تەكلىپلىرى ۋە ئىقتىدار تەلەپلىرىنى GitHub مەسىلە ئىز قوغلىغۇچتا دوكلات قىلالايسىز:% 1 $ s</string>
+    <string name="about_translate_title">تەرجىمە</string>
+    <string name="about_translate">Transifex دىكى Nextcloud ئەترىتىگە قوشۇلۇڭ ۋە بىزنىڭ بۇ ئەپنى تەرجىمە قىلىشىمىزغا ياردەملىشىڭ:% 1 $ s</string>
+    <string name="about_app_license_title">ئەپ ئىجازەتنامىسى</string>
+    <string name="about_app_license">بۇ پروگرامما GNU GENERAL PUBLIC LICENSE v3 + ئىجازەتنامىسىگە ئېرىشكەن.</string>
+    <string name="about_app_license_button">ئىجازەتنامىنى كۆرۈش</string>
+    <string name="about_icons_disclaimer_title">سىنبەلگە</string>
+    <string name="about_icons_disclaimer_app_icon">ئەسلى سىنبەلگە% 1 $ s نى كۆرۈڭ.</string>
+    <string name="about_icons_disclaimer_mdi_icons">بۇ دېتالدا ئىشلىتىلگەن بارلىق سىنبەلگىلەرنىڭ ھەممىسى گۇگۇل شىركىتى تەرىپىدىن ياسالغان ۋە Apache 2.0 ئىجازەتنامىسىدە ئىجازەت بېرىلگەن% 1 $ s.</string>
+    <string name="about_icons_disclaimer_mdi">ماتېرىيال لايىھىلەش سىنبەلگىسى</string>
+    <string name="about_credits_tab_title">Credits</string>
+    <string name="about_contribution_tab_title">تۆھپە</string>
+    <string name="about_license_tab_title">ئىجازەتنامە</string>
+
+    <string name="widget_note_list_title">ئەسكەرتىش تىزىملىكى</string>
+    <string name="widget_note_list_placeholder">خاتىرە يوق</string>
+    <string name="widget_single_note_title">يەككە خاتىرە</string>
+    <string name="widget_single_note_placeholder_tv">دىققەت تېپىلمىدى</string>
+    <string name="widget_not_logged_in">بۇ كىچىك قورالنى ئىشلىتىشتىن بۇرۇن خاتىرىلەرگە كىرىڭ</string>
+    <string name="widget_entry_fav_contentDescription">چولپان سىنبەلگىسى بىر تۈرنى ياخشى كۆرىدىغان قىلىپ كۆرسىتىشكە ئىشلىتىلىدۇ</string>
+
+    <string name="activity_select_single_note">ئىزاھاتنى تاللاڭ</string>
+
+    <string name="shortcut_create_long">يېڭى خاتىرە قۇر</string>
+
+    <string name="pref_value_font_normal">نورمال</string>
+    <string name="pref_value_wifi_and_mobile">Wi-Fi ۋە كۆچمە سانلىق مەلۇماتلاردا ماسقەدەملەش</string>
+    <string name="pref_value_lock">پارولنى قوغداش</string>
+
+    <string name="simple_error">خاتالىق</string>
+    <string name="simple_close">تاقاش</string>
+    <string name="simple_copy">كۆچۈرۈڭ</string>
+    <string name="simple_exception">مۇستەسنا</string>
+    <string name="pin_to_homescreen">ئائىلە ئېكرانىغا چاپلاڭ</string>
+    <string name="note_has_been_deleted">بۇ ئىزاھات ئۆچۈرۈلدى</string>
+    <string name="add_account">ھېسابات قوشۇڭ</string>
+
+    <string name="category_music">مۇزىكا</string>
+    <string name="category_movies">كىنولار</string>
+    <string name="category_movie">Movie</string>
+    <string name="category_work">خىزمەت</string>
+    <string name="category_todo">ToDo</string>
+    <string name="category_todos">ToDos</string>
+    <string name="category_checklists">تەكشۈرۈش تىزىملىكى</string>
+    <string name="category_tasks">ۋەزىپە</string>
+    <string name="category_recipe">رېتسېپ</string>
+    <string name="category_recipes">رېتسىپلار</string>
+    <string name="category_restaurant">رېستوران</string>
+    <string name="category_restaurants">ئاشخانىلار</string>
+    <string name="category_food">يېمەكلىك</string>
+    <string name="category_bake">بولكا</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_key">ئاچقۇچ</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_keys">ئاچقۇچ</string>
+    <string name="category_password">پارول</string>
+    <string name="category_passwords">پارول</string>
+    <string name="category_credentials">كىنىشكا</string>
+    <string name="category_game">ئويۇن</string>
+    <string name="category_games">ئويۇنلار</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">ئويناش</string>
+    <string name="category_gift">سوۋغات</string>
+    <string name="category_gifts">سوۋغاتلار</string>
+    <!-- Like a gift -->
+    <string name="category_present">Present</string>
+    <!-- Like a gift -->
+    <string name="category_presents">Presents</string>
+
+    <string name="account_already_imported">ھېسابات ئاللىبۇرۇن ئىمپورت قىلىنغان</string>
+    <string name="no_notes_yet">تېخى خاتىرە يوق</string>
+    <string name="no_notes_yet_description">يېڭى كۇنۇپكا قۇرۇش ئۈچۈن + كۇنۇپكىسىنى بېسىڭ</string>
+    <string name="simple_more">تېخىمۇ كۆپ</string>
+    <string name="simple_move">يۆتكەڭ</string>
+    <string name="category_readonly">پەقەت ئوقۇڭ</string>
+    <string name="no_category">سەھىپە يوق</string>
+    <string name="add_category">% 1 $ s نى قوشۇڭ</string>
+    <string name="simple_checkbox">تەكشۈرۈش رامكىسى</string>
+    <string name="unlock_notes">خاتىرىلەرنى ئېچىڭ</string>
+    <string name="error_dialog_title">ھە ياق - ھازىرچۇ؟ 🙁</string>
+    <string name="error_dialog_tip_token_mismatch_retry">ئەپنى تاقاپ قايتا قوزغىتىڭ. Nextcloud دېتالىغا خاتا ئۇلىنىش بولۇشى مۇمكىن.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">ئەگەر مەسىلە يەنە داۋاملاشسا ، بۇ مەسىلىنى ھەل قىلىش ئۈچۈن Nextcloud ۋە Nextcloud ئىزاھاتىنىڭ ھەر ئىككى ئەپنىڭ ساقلىنىشىنى تازىلاپ بېقىڭ.</string>
+    <string name="error_dialog_tip_clear_storage">ئەپ ئۇچۇرىنى ئېچىش ۋە ساقلاش → ساقلاشنى تاللاش ئارقىلىق ساقلاشنى تازىلىيالايسىز. ئاگاھلاندۇرۇش: بۇ تېخى ماس قەدەملىك خاتىرىلەرنى ئۆچۈرمەيدۇ!</string>
+    <string name="error_dialog_tip_files_outdated">Nextcloud دېتالىڭىزنىڭ ۋاقتى ئۆتكەندەك قىلىدۇ. ئەڭ يېڭى نەشرىگە ئېرىشىش ئۈچۈن Play Store ياكى F-Droid نى زىيارەت قىلىڭ.</string>
+    <string name="error_dialog_tip_files_force_stop">Nextcloud دېتالىڭىزدا خاتالىق باردەك قىلىدۇ. Nextcloud دېتالى ۋە Nextcloud ئىزاھلىرى دېتالىنى ھەر ئىككىسىنى توختىتىشقا مەجبۇرلاڭ.</string>
+    <string name="error_dialog_tip_files_delete_storage">ئەگەر ئۇلارنى توسۇشنىڭ پايدىسى بولمىسا ، ھەر ئىككى ئەپنىڭ ساقلاش بوشلۇقىنى تازىلىسىڭىز بولىدۇ.</string>
+    <string name="error_dialog_timeout_instance">بېرىلگەن ۋاقىتتا مۇلازىمېتىرىڭىزدىن ھېچقانداق جاۋاب كەلمىدى. مىسالىڭىزنىڭ ياخشى يۈرۈشىگە كاپالەتلىك قىلىڭ.</string>
+    <string name="error_dialog_timeout_toggle">تور ئۇلىنىشىڭىزنى تەكشۈرۈڭ. بەزى ۋاقىتلاردا كۆچمە سانلىق مەلۇمات ياكى Wi-Fi نى قايتا قوزغىتىپ قايتا قوزغىتىشقا پايدىسى بار.</string>
+    <string name="error_dialog_check_server">مۇلازىمېتىرىڭىزنىڭ ئىنكاسى توغرا ئەمەس. خاتىرىلىرىڭىزنى تور كۆرۈنمە يۈزى ئارقىلىق زىيارەت قىلالايدىغان ياكى قىلالمايدىغانلىقىنى تەكشۈرۈپ بېقىڭ.</string>
+    <string name="error_dialog_check_server_logs">Nextcloud تەڭشىكىڭىزدە مەسىلە بار. مۇلازىمېتىر خاتىرى ھۆججىتىنى كۆرۈپ بېقىڭ.</string>
+    <string name="error_dialog_check_maintenance">Nextcloud مىسالىڭىزنىڭ ھازىر ئاسراش ھالىتىدە ئەمەسلىكىنى تەكشۈرۈڭ.</string>
+    <string name="error_dialog_insufficient_storage">Nextcloud مىسالىڭىزدا ھەقسىز ساقلاش بوشلۇقى قالمىدى. يەرلىك ھۆججەتلىرىڭىزنى بۇلۇتقا ماسقەدەملەش ئۈچۈن بەزى ھۆججەتلەرنى ئۆچۈرۈڭ.</string>
+    <string name="error_dialog_we_need_info">سىزگە ياردەم قىلىش ئۈچۈن تۆۋەندىكى تېخنىكىلىق ئۇچۇرلار لازىم:</string>
+    <string name="error_dialog_server_app_enabled">مۇلازىمېتىرىڭىزغا «ئىزاھات» دېتالىنى ئورناتقانلىقىڭىزنى جەزملەشتۈرۈڭ.</string>
+    <string name="error_dialog_redirect">مۇلازىمېتىرىڭىز HTTP 302 ھالەت كودى بىلەن جاۋاب قايتۇردى ، بۇ سىزنىڭ ئىزاھات دېتالىنى مۇلازىمېتىرىڭىزغا قاچىلىمىغانلىقىڭىزنى ياكى بىرەر ئىشنىڭ خاتا ئۆزگەرتىلگەنلىكىنى كۆرسىتىدۇ. بۇنى .htaccess ھۆججىتىدىكى ئىختىيارى قاپلاش ياكى OID Client غا ئوخشاش Nextcloud ئەپلىرى كەلتۈرۈپ چىقىرىدۇ.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Nextcloud ۋە ئىزاھات دېتالىنىڭ بارلىق باتارېيە ئەلالاشتۇرۇشىنى چەكلەڭ.</string>
+    <string name="error_dialog_min_version">Notes ئاندىرويىد دېتالى Nextcloud ئاندىرويىد دېتالىنىڭ كەم دېگەندە 3.18 نەشرى بولۇشىنى تەلەپ قىلىدۇ.</string>
+    <string name="added_content">"% 1 $ s" قوشۇلدى</string>
+    <string name="shared_text_empty">ھەمبەھىر تېكىست قۇرۇق ئىدى</string>
+    <string name="append_to_note">دىققەت قىلىڭ</string>
+    <string name="change_note_title">خاتىرە نامىنى ئۆزگەرتىڭ</string>
+    <string name="menu_edit_title">ماۋزۇنى تەھرىرلەش</string>
+    <string name="simple_security">بىخەتەرلىك</string>
+    <string name="appearance_and_behavior">كۆرۈنۈش ۋە ھەرىكەت</string>
+    <string name="simple_synchronization">ماس قەدەملەش</string>
+    <string name="manage_accounts">ھېساباتنى باشقۇرۇش</string>
+    <string name="action_formatting_help">فورماتلاش</string>
+
+
+    <string name="noteMode_plain_edit">تۈز تەھرىرلەش ھالىتى</string>
+    <string name="noteMode_plain_preview">تۈزلەڭلىك ئالدىن كۆرۈش</string>
+    <string name="noteMode_rich_edit">مول تەھرىرلەش ھالىتى</string>
+    <string name="noteMode_remember_last">ئاخىرقى تاللىشىمنى ئېسىڭىزدە تۇتۇڭ</string>
+
+    <string-array name="fontSize_entries">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Light</item>
+        <item>Dark</item>
+        <item>System Default</item>
+    </string-array>
+
+    <plurals name="ab_selected">
+        <item quantity="one">%d selected</item>
+        <item quantity="other">%d selected</item>
+    </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Deleted one note</item>
+        <item quantity="other">Deleted %1$d notes</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="one">Restored one note</item>
+        <item quantity="other">Restored %1$d notes</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">Share content of %1$d note</item>
+        <item quantity="other">Share content of %1$d notes</item>
+    </plurals>
+
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`% 1 $ s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\ `% 1 $ s \\`</string>
+    <string name="formatting_help_codefence" translateable="false">`` `</string>
+    <string name="formatting_help_codefence_outer" translateable="false">`` `</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">`` javascript</string>
+    <string name="formatting_help_cbf_title">مەزمۇننى ئاساس قىلغان فورماتلاش</string>
+    <string name="formatting_help_cbf_body_1">ئىزاھات دېتالىنىڭ ئاساسلىق لايىھىلەش نىشانى دىققىتى چېچىلىدىغان ھەقسىز قورال بىلەن تەمىنلەش. تېكىستلىرىڭىزنى Markdown بىلەن فورماتلىيالايسىز. تۆۋەندە تىلغا ئېلىنغان ھەر خىل مىساللار ئۈچۈن تېزلەتمىلەرنى ئىشلىتەلەيسىز ، شۇڭا تۆۋەندىكى كودلارنى يازماي تۇرۇپ خاتىرىڭىزنى فورماتلىيالايسىز.</string>
+    <string name="formatting_help_cbf_body_2">ھەر قانداق ئورۇندىكى نۇر بەلگىسىنى تاللاڭ ياكى نۇر بەلگىسىنى چېكىڭ ، سۈكۈتتىكى تۈرلەرنىڭ يېنىدا% 1 $ s ،% 2 $ s ،% 3 $ s ياكى% 4 $ s ياكى% 3 لىك مەزمۇنلار بار. 5 $ s.</string>
+
+    <string name="formatting_help_text_title">تېكىست</string>
+    <string name="formatting_help_text_body">بەزى سۆزلەرنى Markdown بىلەن% 1 $ sbold% 1 $ s ۋە باشقا سۆزلەرنى% 2 $ sitalic% 2 $ s قىلىش ناھايىتى ئاسان. سىز% 3 $ sstrike% 3 $ s بەزى سۆزلەرنى ھەتتا [Nextcloud غا ئۇلىنىش] (https://nextcloud.com) ئارقىلىق قىلالايسىز.</string>
+
+    <string name="formatting_help_lists_title">تىزىملىك</string>
+    <string name="formatting_help_lists_body_1">بەزىدە سىز تىزىملىكتىكى تىزىملىكلەرنى تەلەپ قىلىسىز:</string>
+    <string name="formatting_help_lists_body_2">بىرى</string>
+    <string name="formatting_help_lists_body_3">ئىككى</string>
+    <string name="formatting_help_lists_body_4">ئۈچ</string>
+    <string name="formatting_help_lists_body_5">بەزىدە ئوق نۇقتىلىرىغا ئېھتىياجلىق بولىسىز:</string>
+    <string name="formatting_help_lists_body_6">سىزىق بىلەن بىر قۇرنى باشلاڭ</string>
+    <string name="formatting_help_lists_body_7">ئەگەر تارماق نۇقتىلىرىڭىز بولسا ، باش ياكى يۇلتۇزنىڭ ئالدىدا ئىككى بوشلۇق قويۇڭ:</string>
+    <string name="formatting_help_lists_body_8">مۇشۇنىڭغا ئوخشاش</string>
+    <string name="formatting_help_lists_body_9">ھەمدە بۇ</string>
+
+    <string name="formatting_help_checkboxes_title">تەكشۈرۈش رامكىسى</string>
+    <string name="formatting_help_checkboxes_body_1">تەكشۈرۈش رامكىسى قۇرۇش ئۈچۈن تىرناقنىڭ كەينىدىكى تىزىملىكنى ئىشلىتىڭ</string>
+    <string name="formatting_help_checkboxes_body_2">1-تۈر</string>
+    <string name="formatting_help_checkboxes_body_3">2-تۈر</string>
+
+    <string name="formatting_help_structured_documents_title">قۇرۇلمىلىق ھۆججەتلەر</string>
+    <string name="formatting_help_structured_documents_body_1">بەزىدە ھۆججەتلىرىڭىزنى تۈزۈش ئۈچۈن ئوخشىمىغان دەرىجىدىكى ماۋزۇلارنىڭ بولۇشى پايدىلىق. ماۋزۇ قۇرۇش ئۈچۈن% 1 $ s بىلەن قۇرلارنى باشلاڭ. ئۇدا% 2 $ s بولسا كىچىك ماۋزۇنىڭ چوڭ-كىچىكلىكىنى كۆرسىتىدۇ.</string>
+    <string name="formatting_help_structured_documents_body_2">بۇ ئۈچىنچى دەرىجىلىك ماۋزۇ</string>
+    <string name="formatting_help_structured_documents_body_3">ئوخشىمىغان ماۋزۇ چوڭلۇقى ئۈچۈن% 1 $ s نى% 2 $ s ئالتە گىچە ئىشلىتەلەيسىز.</string>
+    <string name="formatting_help_structured_documents_body_4">ئەگەر بىرەرسىنى نەقىل كەلتۈرمەكچى بولسىڭىز ، قۇردىن بۇرۇن% 1 $ s ھەرپنى ئىشلىتىڭ:</string>
+    <string name="formatting_help_structured_documents_body_5">تەسەۋۋۇر بىلىمدىن مۇھىم. بىلىم چەكلىك. تەسەۋۋۇر دۇنيانى قورشىۋالىدۇ.</string>
+    <string name="formatting_help_structured_documents_body_6">- ئالبېرت ئېينىشتىيىن</string>
+
+    <string name="formatting_help_code_title">كود</string>
+    <string name="formatting_help_code_body_1">Markdown بىلەن كود ئۇسلۇبىنىڭ ئوخشىمىغان ئۇسۇللىرى بار. ئەگەر سىزدە كود بۆلەكلىرى بولسا ، ئۇلارنى كەينىگە چاپلاڭ:</string>
+    <string name="formatting_help_code_body_2">Markdown يەنە كود رىشاتكىسى دەپ ئاتىلىدىغان نەرسىنى قوللايدۇ ، ئۇ بىر نەچچە قۇر بەلگە قويمايدۇ.</string>
+    <string name="formatting_help_code_body_3">ئەگەر گرامماتىكىلىق يورۇتۇشنى ئىشلىتىشنى ياقتۇرسىڭىز ، تىلنى ئۆز ئىچىگە ئالىدۇ:</string>
+
+    <string name="formatting_help_tables_title">جەدۋەل</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">ستون% 1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">قىممىتى% 1d</string>
+
+    <string name="formatting_help_images_body_1">ئۇلىنىشلار چوقۇم كېلىشىم ۋە دائىرە بىلەن باشلانغان تولۇق URL ياكى% 1 $ s ھەرپتىن باشلىنىدىغان مۇتلەق يول بولۇشى كېرەك.</string>
+    <string name="formatting_help_images_body_2">Markdown فورماتىغا ماسلىشىش ئۈچۈن ، رەسىم URL دىكى قېچىش ھەرپلىرىنى ئىشلىتىڭ. بۇ دېگەنلىك ، URL دىكى بوشلۇقلارنى% 1 $ s بىلەن ئالماشتۇرۇڭ.</string>
+    <string name="formatting_help_images_title">سۈرەتلەر</string>
+    <string name="formatting_help_images_alt">ئېسىل سۈرەت</string>
+
+    <string name="simple_other">باشقىلىرى</string>
+    <string name="sort_last_modified">ئۆزگەرتىلگەن ۋاقىت بويىچە تەرتىپلەش</string>
+    <string name="sort_alphabetically">ئېلىپبە بويىچە تەرتىپلەش</string>
+    <string name="error_action_open_battery_settings">باتارېيە تەڭشىكى</string>
+    <string name="error_action_open_deck_info">ئەپ ئۇچۇرىنى ئېچىڭ</string>
+    <string name="error_action_open_network">تور تەڭشىكى</string>
+    <string name="error_action_update_files_app">يېڭىلاش</string>
+    <string name="no_account_configured_yet">تېخى ھېسابات قۇرۇلمىدى</string>
+    <string name="no_other_accounts">باشقا ھېساباتلارنى تېخى تەڭشىمىدىڭىز.</string>
+    <string name="choose_account">ھېسابات تاللاڭ</string>
+    <string name="context_based_formatting">مەزمۇننى ئاساس قىلغان فورماتلاش ئېغىزى</string>
+    <plurals name="remove_account_message">
+        <item quantity="one">Removing the account %1$s will also delete irrecoverable one unsynchronized change.</item>
+        <item quantity="other">Removing the account %1$s will also delete irrecoverable %2$d unsynchronized changes.</item>
+    </plurals>
+    <string name="remove_account">% 1 $ s نى چىقىرىۋېتىڭ</string>
+
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">ھېسابات قوشۇش ئۈچۈن تورغا ئۇلىنىشىڭىز كېرەك.</string>
+    <string name="settings_notes_path">ھۆججەت قىسقۇچ بەلگىلەڭ</string>
+
+    <string name="simple_next">كېيىنكى</string>
+    <string name="simple_prev">ئالدىنقى</string>
+    <string name="simple_backup">زاپاسلاش</string>
+    <string name="backup">بىز بۇ دېتالنىڭ ئەسلىگە كەلتۈرگىلى بولمايدىغان ھالىتىنى بايقىدۇق. ماس قەدەمسىز ئۆزگەرتىشلىرىڭىزنى زاپاسلاپ ، خاتىرە دېتالىنىڭ ساقلىنىشىنى تازىلاڭ.</string>
+    <string name="settings_notes_path_description">خاتىرىلىرىڭىزنى Nextcloud دا ساقلايدىغان ھۆججەت قىسقۇچ</string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
+    <string name="settings_notes_path_success">يېڭى خاتىرە ھۆججەت قىسقۇچى:% 1 $ s</string>
+    <string name="settings_file_suffix">ھۆججەت كېڭەيتىلمىسى</string>
+    <string name="settings_file_suffix_description">Nextcloud دىكى يېڭى خاتىرىلەرنىڭ ھۆججەت كېڭەيتىلمىسى</string>
+    <string name="settings_file_suffix_success">يېڭى ھۆججەت قوشۇمچىسى:% 1 $ s</string>
+    <string name="http_status_code">HTTP ھالەت كودى:% 1 $ d</string>
+    <string name="progress_import_indeterminate">خاتىرە ئەكىرىش…</string>
+    <string name="progress_import">ئىزاھات% 2 $ d نىڭ% 1 $ d…</string>
+    <string name="account_imported">ھېسابات ئىمپورت قىلىندى.</string>
+    <string name="direct_editing_error">مول تەھرىرلەشنى يۈكلەۋاتقاندا خاتالىق</string>
+    <string name="switch_to_plain_editing">ئاددىي تەھرىرلەشكە ئالماشتۇرۇڭ</string>
+    <string name="action_back">قايتىش</string>
+    </resources>
