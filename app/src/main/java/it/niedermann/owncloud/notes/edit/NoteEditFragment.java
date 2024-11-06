@@ -162,7 +162,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        if (binding.editContent != null && binding.editContent.hasFocus()) {
+        if (binding != null && binding.editContent.hasFocus()) {
             outState.putInt("lastSelection", binding.editContent.getSelectionStart());
         }
     }
