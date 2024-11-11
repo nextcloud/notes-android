@@ -6,8 +6,8 @@
   ~ SPDX-License-Identifier: GPL-3.0-or-later
 -->
 <resources>
-    <string name="app_name">الملاحظات Notes</string>
-    <string name="app_name_long">ملاحظات Notes نيكست كلاود</string>
+    <string name="app_name">الملاحظات</string>
+    <string name="app_name_long">ملاحظات نيكست كلاود</string>
     <string name="label_all_notes">جميع الملاحظات</string>
     <string name="label_favorites">المُفضّلة</string>
     <string name="action_create">ملاحظة Note جديدة </string>
@@ -148,7 +148,7 @@
     <string name="category_presents">جوائز</string>
 
     <string name="account_already_imported">سبق استيراد الحساب</string>
-    <string name="no_notes_yet">لا ملاحظات بعدُ</string>
+    <string name="no_notes_yet">لا توجد ملاحظات حتى الآن</string>
     <string name="no_notes_yet_description">اضغط  +  لانشاء ملاحظة جديدة </string>
     <string name="simple_more">المزيد</string>
     <string name="simple_move">نقل</string>
@@ -162,7 +162,7 @@
     <string name="error_dialog_tip_token_mismatch_clear_storage">اذا تكررت المشكلة، حاول تنظيف مساحة التخزين في التطبيقين كلاهما: 
 نيكست كلاود nextcloud، نيكست كلاود ملاحظات nextcloud notes لحل هذه المشكلة.</string>
     <string name="error_dialog_tip_clear_storage">يمكنك تنظيف ذاكرة التطبيق بفتح \"معلومات التطبيق\" app info ثم اختيار \"التخزين\" ثم \"محو التخزين\" Storage → Clear storage.
-⚠️ تحذير: هذا سيؤدي إلى حذف الملاحظات التي لم تتم مزامنتها بعدُ.</string>
+⚠️ تحذير: هذا سيؤدي إلى حذف الملاحظات التي لم تتم مزامنتها حتى الآن.</string>
     <string name="error_dialog_tip_files_outdated">تطبيقك نيكست كلاود يبدو انه لم يتم تحديثه منذ وقت طويل. رجاءً، قم بزيارةمتجر تطبيقات \"إف-درويد\" f-droid للحصول على آخر إصدار منه.</string>
     <string name="error_dialog_tip_files_force_stop">يبدو أن هناك خطأ ما في تطبيقك نكست كلاود. يرجى محاولة فرض إيقاف كلا التطبيقين: Nextcloud و Nextcloud Notes.</string>
     <string name="error_dialog_tip_files_delete_storage">إذا لم يساعد إيقافهم بالقوة ، فيمكنك محاولة مسح تخزين كلا التطبيقين.</string>
@@ -297,11 +297,11 @@
     <string name="sort_last_modified">ترتيب حسب تاريخ آخر تعديل</string>
     <string name="sort_alphabetically">الترتيب حسب الأبجدية</string>
     <string name="error_action_open_battery_settings">إعدادات البطارية</string>
-    <string name="error_action_open_deck_info">إفتح معلومات التطبيق</string>
+    <string name="error_action_open_deck_info">فتح معلومات التطبيق</string>
     <string name="error_action_open_network">إعدادات الشبكة</string>
     <string name="error_action_update_files_app">تحديث</string>
-    <string name="no_account_configured_yet">لم تتم تهيئة الحساب بعدُ</string>
-    <string name="no_other_accounts">أنت لم تقم بتهيئة أي حسابات أخرى بعدُ.</string>
+    <string name="no_account_configured_yet">لم تتم تهيئة الحساب حتى الآن</string>
+    <string name="no_other_accounts">أنت لم تقم بتهيئة أي حسابات أخرى حتى الآن.</string>
     <string name="choose_account">إختر حسابًا</string>
     <string name="context_based_formatting">نافذة منبثقة للتنسيق القائم على السياق Context based formatting</string>
     <plurals name="remove_account_message">
