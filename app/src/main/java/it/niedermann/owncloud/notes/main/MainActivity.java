@@ -622,18 +622,29 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
      * Updates sorting method icon.
      */
     private void updateSortMethodIcon(CategorySortingMethod method) {
-        if (method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
-            activityBinding.sortingMethod.setImageResource(R.drawable.alphabetical_asc);
-            activityBinding.sortingMethod.setContentDescription(getString(R.string.sort_last_modified));
-            if (SDK_INT >= O) {
-                activityBinding.sortingMethod.setTooltipText(getString(R.string.sort_last_modified));
-            }
-        } else {
-            activityBinding.sortingMethod.setImageResource(R.drawable.modification_desc);
-            activityBinding.sortingMethod.setContentDescription(getString(R.string.sort_alphabetically));
-            if (SDK_INT >= O) {
-                activityBinding.sortingMethod.setTooltipText(getString(R.string.sort_alphabetically));
-            }
+        switch (method){
+            case SORT_MODIFIED_DESC :
+                activityBinding.sortingMethod.setImageResource(R.drawable.modification_desc);
+                activityBinding.sortingMethod.setContentDescription(getString(R.string.sort_alphabetically));
+                if (SDK_INT >= O) {
+                    activityBinding.sortingMethod.setTooltipText(getString(R.string.sort_alphabetically));
+                }
+                break;
+            case SORT_LEXICOGRAPHICAL_ASC:
+                activityBinding.sortingMethod.setImageResource(R.drawable.alphabetical_asc);
+                activityBinding.sortingMethod.setContentDescription(getString(R.string.sort_alphabetically));
+                if (SDK_INT >= O) {
+                    activityBinding.sortingMethod.setTooltipText(getString(R.string.sort_alphabetically));
+                }
+                break;
+            case SORT_LEXICOGRAPHICAL_DESC:
+                activityBinding.sortingMethod.setImageResource(R.drawable.alphabetical_desc);
+                activityBinding.sortingMethod.setContentDescription(getString(R.string.sort_last_modified));
+                if (SDK_INT >= O) {
+                    activityBinding.sortingMethod.setTooltipText(getString(R.string.sort_last_modified));
+                }
+                break;
+            default: throw new IllegalStateException("Unknown method: " + method.name());
         }
     }
 

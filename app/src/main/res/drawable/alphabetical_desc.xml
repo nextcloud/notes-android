@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Nextcloud Notes - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2018-2024 Google LLC
+  ~ SPDX-FileCopyrightText: 2018-2024 Andy Scherzinger
+  ~ SPDX-License-Identifier: Apache-2.0
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="26dp"
+    android:height="26dp"
+    android:viewportWidth="26"
+    android:viewportHeight="26">
+
+    <path
+        android:fillColor="#757575"
+        android:pathData="M 20.401 13.623 L 18.877 13.621 L 18.868 20.218 L 17.228 18.57 L 16.145 19.651 L 19.627 23.145 L 23.12 19.663 L 22.039 18.58 L 20.392 20.219 Z M 15.034 1.85 L 15.034 3.104 L 10.691 9.337 L 10.691 9.412 L 15.1 9.412 L 15.1 11.209 L 7.847 11.209 L 7.847 10.03 L 12.292 3.695 L 12.292 3.638 L 8.268 3.638 L 8.268 1.85 Z M 13.051 12.122 L 15.981 21.48 L 13.678 21.48 L 12.949 18.952 L 10.244 18.952 L 9.571 21.48 L 7.352 21.48 L 10.244 12.122 Z M 12.64 17.437 L 12.05 15.454 L 11.807 14.545 L 11.573 13.646 L 11.545 13.646 L 11.339 14.555 L 11.114 15.472 L 10.553 17.437 Z" />
+</vector>
