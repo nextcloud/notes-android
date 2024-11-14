@@ -622,6 +622,9 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
      * Updates sorting method icon.
      */
     private void updateSortMethodIcon(CategorySortingMethod method) {
+        if (method == null)
+            method = CategorySortingMethod.SORT_MODIFIED_DESC;
+
         switch (method){
             case SORT_MODIFIED_DESC :
                 activityBinding.sortingMethod.setImageResource(R.drawable.modification_desc);
