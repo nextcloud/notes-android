@@ -45,14 +45,10 @@ public enum CategorySortingMethod {
      * @return the corresponding enum item with the index (ordinal)
      */
     public static CategorySortingMethod findById(int id) {
-        if (id < 0)
-            id += values().length;
-
-        if (id >= values().length)
-            id = id % values().length;
+        var newId = id % values().length;
 
         for (final var csm : values()) {
-            if (csm.getId() == id) {
+            if (csm.getId() == newId) {
                 return csm;
             }
         }
