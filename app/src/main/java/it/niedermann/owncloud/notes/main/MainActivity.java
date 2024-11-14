@@ -292,11 +292,9 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             activityBinding.sortingMethod.setOnClickListener((v) -> {
                 if (methodOfCategory.first != null) {
                     var newMethod = methodOfCategory.second;
-                    if (newMethod == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
-                        newMethod = CategorySortingMethod.SORT_MODIFIED_DESC;
-                    } else {
-                        newMethod = CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC;
-                    }
+                    //Rotate for next method
+                    newMethod = CategorySortingMethod.findById(newMethod.getId() + 1);
+
                     final var modifyLiveData = mainViewModel.modifyCategoryOrder(methodOfCategory.first, newMethod);
                     modifyLiveData.observe(this, (next) -> modifyLiveData.removeObservers(this));
                 }

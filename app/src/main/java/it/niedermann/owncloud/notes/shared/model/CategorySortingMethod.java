@@ -8,7 +8,8 @@ package it.niedermann.owncloud.notes.shared.model;
 
 public enum CategorySortingMethod {
     SORT_MODIFIED_DESC(0, "MODIFIED DESC"),
-    SORT_LEXICOGRAPHICAL_ASC(1, "TITLE COLLATE NOCASE ASC");
+    SORT_LEXICOGRAPHICAL_ASC(1, "TITLE COLLATE NOCASE ASC"),
+    SORT_LEXICOGRAPHICAL_DESC(2, "TITLE COLLATE NOCASE DESC");
 
     private final int id;
     private final String title;  // sorting method OrderBy for SQL
@@ -44,6 +45,12 @@ public enum CategorySortingMethod {
      * @return the corresponding enum item with the index (ordinal)
      */
     public static CategorySortingMethod findById(int id) {
+        if (id < 0)
+            id += values().length;
+
+        if (id >= values().length)
+            id = id % values().length;
+
         for (final var csm : values()) {
             if (csm.getId() == id) {
                 return csm;
