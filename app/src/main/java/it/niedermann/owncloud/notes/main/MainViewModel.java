@@ -284,11 +284,10 @@ public class MainViewModel extends AndroidViewModel {
         if (sortingMethod == SORT_MODIFIED_DESC) {
             return fillListByTime(getApplication(), noteList);
         }
-        List<Item> itemList = fillListByInitials(getApplication(), noteList);
         if(sortingMethod != SORT_LEXICOGRAPHICAL_ASC){
-            Collections.reverse(itemList);
+            Collections.reverse(noteList);
         }
-        return itemList;
+        return fillListByInitials(getApplication(), noteList);
     }
 
     @NonNull
