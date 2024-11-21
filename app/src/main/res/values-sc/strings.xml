@@ -62,7 +62,7 @@
     <string name="error_unknown">Ddoe at àpidu un\'errore disconnotu.</string>
 
     <string name="about_version_title">Versione</string>
-    <string name="about_version">Como ses impreende %1$s</string>
+    <string name="about_version">Immoe ses impreende %1$s</string>
     <string name="about_maintainer_title">Responsàbile</string>
     <string name="about_developers_title">Isvilupadores</string>
     <string name="about_translators_title">Tradutores</string>
@@ -102,7 +102,7 @@
     <string name="simple_close">Serra</string>
     <string name="simple_copy">Còpia</string>
     <string name="simple_exception">Etzetzione</string>
-    <string name="pin_to_homescreen">Apìtziga a s\'ischermada initziale</string>
+    <string name="pin_to_homescreen">Apica a s\'ischermu printzipale</string>
     <string name="note_has_been_deleted">Custa nota est istada cantzellada</string>
     <string name="add_account">Agiunghe contu</string>
 
@@ -199,7 +199,7 @@
     <string name="formatting_help_cbf_body_2">Ti bastat de seletzionare un\'intervallu de testu o tocare su cursore in cale si siat positzione e at a apàrrere unu menu cun accanta is boghes predefinidas %1$s, %2$s, %3$s elementos comente%4$s o %5$s.</string>
 
     <string name="formatting_help_text_title">Testu</string>
-    <string name="formatting_help_text_body">Est fàtzile meda a pònnere faeddos in %1$sgrassetu%1$s e àteros faeddos in %2$scursivu%2$s cun Markdown. Como podes %3$sbarrare%3$s calicunos faeddos e puru [link to Nextcloud](https://nextcloud.com).</string>
+    <string name="formatting_help_text_body">Est fàtzile meda a pònnere faeddos in %1$sgrassetu%1$s e àteros faeddos in %2$scursivu%2$s cun Markdown. Immoe podes %3$sbarrare%3$s faeddos e puru creare [ligòngios a Nextcloud](https://nextcloud.com).</string>
 
     <string name="formatting_help_lists_title">Listas</string>
     <string name="formatting_help_lists_body_1">A bortas ti serbint listas numeradas:</string>
