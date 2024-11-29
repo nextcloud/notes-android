@@ -291,12 +291,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             updateSortMethodIcon(methodOfCategory.second);
             activityBinding.sortingMethod.setOnClickListener((v) -> {
                 if (methodOfCategory.first != null) {
-                    var newMethod = methodOfCategory.second;
-                    if (newMethod == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
-                        newMethod = CategorySortingMethod.SORT_MODIFIED_DESC;
-                    } else {
-                        newMethod = CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC;
-                    }
+                    //Rotate for next sorting method
+                    var newMethod = CategorySortingMethod.findById(methodOfCategory.second.getId() + 1);
                     final var modifyLiveData = mainViewModel.modifyCategoryOrder(methodOfCategory.first, newMethod);
                     modifyLiveData.observe(this, (next) -> modifyLiveData.removeObservers(this));
                 }
@@ -624,18 +620,30 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
      * Updates sorting method icon.
      */
     private void updateSortMethodIcon(CategorySortingMethod method) {
-        if (method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
-            activityBinding.sortingMethod.setImageResource(R.drawable.alphabetical_asc);
-            activityBinding.sortingMethod.setContentDescription(getString(R.string.sort_last_modified));
-            if (SDK_INT >= O) {
-                activityBinding.sortingMethod.setTooltipText(getString(R.string.sort_last_modified));
-            }
-        } else {
-            activityBinding.sortingMethod.setImageResource(R.drawable.modification_desc);
-            activityBinding.sortingMethod.setContentDescription(getString(R.string.sort_alphabetically));
-            if (SDK_INT >= O) {
-                activityBinding.sortingMethod.setTooltipText(getString(R.string.sort_alphabetically));
-            }
+        CategorySortingMethod newMethod = (method != null) ? method: CategorySortingMethod.SORT_MODIFIED_DESC;
+        switch (newMethod){
+            case SORT_MODIFIED_DESC :
+                activityBinding.sortingMethod.setImageResource(R.drawable.modification_desc);
+                activityBinding.sortingMethod.setContentDescription(getString(R.string.sort_alphabetically));
+                if (SDK_INT >= O) {
+                    activityBinding.sortingMethod.setTooltipText(getString(R.string.sort_alphabetically));
+                }
+                break;
+            case SORT_LEXICOGRAPHICAL_ASC:
+                activityBinding.sortingMethod.setImageResource(R.drawable.alphabetical_asc);
+                activityBinding.sortingMethod.setContentDescription(getString(R.string.sort_alphabetically));
+                if (SDK_INT >= O) {
+                    activityBinding.sortingMethod.setTooltipText(getString(R.string.sort_alphabetically));
+                }
+                break;
+            case SORT_LEXICOGRAPHICAL_DESC:
+                activityBinding.sortingMethod.setImageResource(R.drawable.alphabetical_desc);
+                activityBinding.sortingMethod.setContentDescription(getString(R.string.sort_last_modified));
+                if (SDK_INT >= O) {
+                    activityBinding.sortingMethod.setTooltipText(getString(R.string.sort_last_modified));
+                }
+                break;
+            default: throw new IllegalStateException("Unknown method: " + method.name());
         }
     }
 

@@ -16,6 +16,7 @@ import static it.niedermann.owncloud.notes.main.slots.SlotterUtil.fillListByCate
 import static it.niedermann.owncloud.notes.main.slots.SlotterUtil.fillListByInitials;
 import static it.niedermann.owncloud.notes.main.slots.SlotterUtil.fillListByTime;
 import static it.niedermann.owncloud.notes.shared.model.CategorySortingMethod.SORT_MODIFIED_DESC;
+import static it.niedermann.owncloud.notes.shared.model.CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.DEFAULT_CATEGORY;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.RECENT;
@@ -282,9 +283,11 @@ public class MainViewModel extends AndroidViewModel {
         }
         if (sortingMethod == SORT_MODIFIED_DESC) {
             return fillListByTime(getApplication(), noteList);
-        } else {
-            return fillListByInitials(getApplication(), noteList);
         }
+        if(sortingMethod != SORT_LEXICOGRAPHICAL_ASC){
+            Collections.reverse(noteList);
+        }
+        return fillListByInitials(getApplication(), noteList);
     }
 
     @NonNull
