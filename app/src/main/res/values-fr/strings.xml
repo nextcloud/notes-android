@@ -55,7 +55,7 @@
     <string name="settings_lock_summary">Informations d\'identification du terminal</string>
     <string name="settings_background_sync">Synchronisation en tâche de fond</string>
     <string name="settings_prevent_screen_capture">Empêcher la capture d\'écran</string>
-    <string name="settings_gridview">Affichage grille</string>
+    <string name="settings_gridview">Vue en grille</string>
     <string name="settings_enable_direct_edit">Édition directe</string>
     <string name="settings_enable_direct_edit_summary">Une fois désactivé, l’éditeur avancé sera masqué.</string>
     <string name="settings_keep_screen_on">Laisser l\'écran allumé</string>
