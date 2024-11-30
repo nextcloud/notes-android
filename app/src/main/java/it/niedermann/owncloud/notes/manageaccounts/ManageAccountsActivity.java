@@ -28,6 +28,7 @@ import java.util.concurrent.Executors;
 import java.util.function.Function;
 
 import it.niedermann.owncloud.notes.LockedActivity;
+import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.branding.DeleteAlertDialogBuilder;
@@ -94,12 +95,7 @@ public class ManageAccountsActivity extends LockedActivity implements IManageAcc
             public void onSuccess(Long unsynchronizedChangesCount) {
                 runOnUiThread(() -> {
                     if (unsynchronizedChangesCount > 0) {
-                        new DeleteAlertDialogBuilder(ManageAccountsActivity.this)
-                                .setTitle(getString(R.string.remove_account, accountToDelete.getUserName()))
-                                .setMessage(getResources().getQuantityString(R.plurals.remove_account_message, (int) unsynchronizedChangesCount.longValue(), accountToDelete.getAccountName(), unsynchronizedChangesCount))
-                                .setNeutralButton(android.R.string.cancel, null)
-                                .setPositiveButton(R.string.simple_remove, (d, l) -> viewModel.deleteAccount(accountToDelete, ManageAccountsActivity.this))
-                                .show();
+                        showRemoveAccountAlertDialog(accountToDelete, unsynchronizedChangesCount);
                     } else {
                         viewModel.deleteAccount(accountToDelete, ManageAccountsActivity.this);
                     }
@@ -111,6 +107,18 @@ public class ManageAccountsActivity extends LockedActivity implements IManageAcc
                 ExceptionDialogFragment.newInstance(t).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
             }
         });
+    }
+
+    private void showRemoveAccountAlertDialog(@NonNull Account accountToDelete, Long unsynchronizedChangesCount) {
+        final MaterialAlertDialogBuilder alertDialogBuilder = new DeleteAlertDialogBuilder(ManageAccountsActivity.this)
+                .setTitle(getString(R.string.remove_account, accountToDelete.getUserName()))
+                .setMessage(getResources().getQuantityString(R.plurals.remove_account_message, (int) unsynchronizedChangesCount.longValue(), accountToDelete.getAccountName(), unsynchronizedChangesCount))
+                .setNegativeButton(android.R.string.cancel, null)
+                .setPositiveButton(R.string.simple_remove, (d, l) -> viewModel.deleteAccount(accountToDelete, ManageAccountsActivity.this));
+
+        NotesApplication.brandingUtil().dialog.colorMaterialAlertDialogBackground(this, alertDialogBuilder);
+
+        alertDialogBuilder.show();
     }
 
     public void onChangeNotesPath(@NonNull Account localAccount) {
@@ -146,7 +154,7 @@ public class ManageAccountsActivity extends LockedActivity implements IManageAcc
 
         binding.inputWrapper.setHint(title);
 
-        final var dialog = new MaterialAlertDialogBuilder(this)
+        final MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(this)
                 .setTitle(title)
                 .setMessage(message)
                 .setView(binding.getRoot())
@@ -176,8 +184,13 @@ public class ManageAccountsActivity extends LockedActivity implements IManageAcc
                             ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
                         }
                     });
-                })
-                .show();
+                });
+
+        NotesApplication.brandingUtil().dialog.colorMaterialAlertDialogBackground(this, alertDialogBuilder);
+
+        var dialog = alertDialogBuilder.create();
+        alertDialogBuilder.show();
+
         try {
             repository.getServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), getPreferredApiVersion(localAccount.getApiVersion()))
                     .enqueue(new Callback<>() {

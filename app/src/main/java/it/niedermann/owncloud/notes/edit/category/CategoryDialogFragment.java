@@ -24,6 +24,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.List;
 
+import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
@@ -155,13 +156,16 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
             }
         });
 
-        return new MaterialAlertDialogBuilder(requireContext())
+        final MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(requireContext())
                 .setTitle(R.string.change_category_title)
                 .setView(dialogView)
                 .setCancelable(true)
                 .setPositiveButton(R.string.action_edit_save, (dialog, which) -> listener.onCategoryChosen(editCategory.getText().toString()))
-                .setNegativeButton(R.string.simple_cancel, null)
-                .create();
+                .setNegativeButton(R.string.simple_cancel, null);
+
+        NotesApplication.brandingUtil().dialog.colorMaterialAlertDialogBackground(requireContext(), alertDialogBuilder);
+
+        return alertDialogBuilder.create();
     }
 
     @Override
