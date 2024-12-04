@@ -17,7 +17,7 @@
     <string name="action_search">Поиск</string>
     <string name="action_sorting_method">Метод сортировки</string>
     <string name="simple_cancel">Отмена</string>
-    <string name="simple_switch">Выключатель</string>
+    <string name="simple_switch">Переключить</string>
     <string name="simple_edit">Править</string>
     <string name="simple_remove">Удалить</string>
     <string name="action_edit_save">Сохранить</string>
@@ -57,7 +57,7 @@
     <string name="settings_prevent_screen_capture">Запретить захват экрана</string>
     <string name="settings_gridview">Вид сеткой</string>
     <string name="settings_enable_direct_edit">Прямое редактирование</string>
-    <string name="settings_enable_direct_edit_summary">При отключении расширенный редактор будет скрыт</string>
+    <string name="settings_enable_direct_edit_summary">При отключении будет скрыт расширенный редактор</string>
     <string name="settings_keep_screen_on">Держите экран включенным</string>
     <string name="settings_keep_screen_on_summary">При просмотре или редактировании заметки</string>
 
@@ -86,8 +86,8 @@
     <string name="about_app_license_button">Посмотреть лицензию</string>
     <string name="about_icons_disclaimer_title">Значки</string>
     <string name="about_icons_disclaimer_app_icon">Для просмотра оригинального значка: %1$s.</string>
-    <string name="about_icons_disclaimer_mdi_icons">Все дальнейшие значки, которые используются в этой программе, является частью набора %1$s созданного компанией Google Inc. и распространяемого в соответствии с лицензией Apache версии 2.0. </string>
-    <string name="about_icons_disclaimer_mdi">Иконки в стиле Material Design</string>
+    <string name="about_icons_disclaimer_mdi_icons">Все дальнейшие значки, используемые в этой программе, являются частью набора  %1$s, созданного компанией Google Inc., и распространяются в соответствии с лицензией Apache версии 2.0.</string>
+    <string name="about_icons_disclaimer_mdi">Иконки Material Design</string>
     <string name="about_credits_tab_title">Сообщество</string>
     <string name="about_contribution_tab_title">Участие</string>
     <string name="about_license_tab_title">Лицензия</string>
@@ -128,7 +128,7 @@
     <string name="category_restaurant">Ресторан</string>
     <string name="category_restaurants">Рестораны</string>
     <string name="category_food">Еда</string>
-    <string name="category_bake">Мотоцикл</string>
+    <string name="category_bake">Выпечка</string>
     <!-- This represents a category where one can place passwords and credentials -->
     <string name="category_key">Ключ</string>
     <!-- This represents a category where one can place passwords and credentials -->
@@ -143,19 +143,19 @@
     <string name="category_gift">Подарок</string>
     <string name="category_gifts">Подарки</string>
     <!-- Like a gift -->
-    <string name="category_present">Презентация</string>
+    <string name="category_present">Подарок</string>
     <!-- Like a gift -->
     <string name="category_presents">Презентации</string>
 
     <string name="account_already_imported">Учётная запись уже импортирована</string>
     <string name="no_notes_yet">Нет ни одной заметки</string>
     <string name="no_notes_yet_description">Для создания заметки нажмите +</string>
-    <string name="simple_more">Больше</string>
+    <string name="simple_more">Ещё</string>
     <string name="simple_move">Переместить</string>
     <string name="category_readonly">Только для чтения</string>
     <string name="no_category">Без категории</string>
     <string name="add_category">Добавить %1$s </string>
-    <string name="simple_checkbox">Флажок</string>
+    <string name="simple_checkbox">Чекбокс</string>
     <string name="unlock_notes">Разблокировать заметки</string>
     <string name="error_dialog_title">О нет, что теперь? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Попробуйте принудительно закрыть приложение и запустить его снова. Это может быть связано с некорректным подключением к приложению Nextcloud.</string>
@@ -173,7 +173,7 @@
     <string name="error_dialog_we_need_info">Требуется следующая техническая информация от вас:</string>
     <string name="error_dialog_server_app_enabled">Проверьте, установлено ли на сервере приложение Заметки.</string>
     <string name="error_dialog_redirect">На запрос сервер вернул код состояния HTTP 302, что означает, что  приложение Заметки либо не установлено, либо сервер настроен неверно. Такое поведение может являться следствием замены стандартного файла .htaccess администратором сервера или приложением Nextcloud, таким как OID Client.</string>
-    <string name="error_dialog_tip_disable_battery_optimizations">Пожалуйста, отключите все оптимизации аккумулятора для приложений Nextcloud и Notes.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Пожалуйста, отключите оптимизацию энергопотребления для Nextcloud и Notes.</string>
     <string name="error_dialog_min_version">Для запуска приложение \"Заметки\" необходима версия Nextcloud не ниже 3.18.</string>
     <string name="added_content">Добавлена заметка «%1$s»</string>
     <string name="shared_text_empty">Публикуемый текст пустой</string>
@@ -223,8 +223,8 @@
         <item quantity="other">Восстановлено %1$d заметок</item>
     </plurals>
     <plurals name="share_multiple">
-        <item quantity="one">Поделиться содержимым %1$d земетки</item>
-        <item quantity="few"> Поделиться содержимым%1$d земеток</item>
+        <item quantity="one">Поделиться содержимым %1$d заметки</item>
+        <item quantity="few"> Поделиться содержимым%1$d заметок</item>
         <item quantity="many">Поделиться содержимым %1$d заметок</item>
         <item quantity="other">Поделиться содержимым %1$d заметок</item>
     </plurals>
@@ -236,7 +236,7 @@
     <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Контекстное форматирование</string>
-    <string name="formatting_help_cbf_body_1">Главная цель разработки приложения Notes - получить инструмент для быстрого создания заметок по текущим делам. Вы можете отформатировать текст, применяя синтаксис Markdown. Для приведенных ниже примеров удобно использовать клавиши быстрого доступа, что позволит выполнять форматирование ваших заметки без ввода самих символов форматирования.</string>
+    <string name="formatting_help_cbf_body_1">Главная цель разработки приложения Notes - получить инструмент для быстрого создания заметок по текущим делам. Вы можете отформатировать текст, применяя синтаксис Markdown. Для приведенных ниже примеров удобно использовать клавиши быстрого доступа, что позволит выполнять форматирование ваших заметок без ввода самих символов форматирования.</string>
     <string name="formatting_help_cbf_body_2">Выберите блок текста или нажмите на курсор в любом месте, и появится всплывающее меню, содержащее рядом с записями по умолчанию 1 %1$s, 2 %2$s, 3 %3$s такие записи, как 4 %4$s или 5 %5$s.</string>
 
     <string name="formatting_help_text_title">Текст</string>
@@ -249,7 +249,7 @@
     <string name="formatting_help_lists_body_4">Три</string>
     <string name="formatting_help_lists_body_5">Иногда вам требуются ненумерованные списки:</string>
     <string name="formatting_help_lists_body_6">Начать строку с тире</string>
-    <string name="formatting_help_lists_body_7">А если Вы создаёте подпункты, поставьте два пробела перед тире или звездочкой:</string>
+    <string name="formatting_help_lists_body_7">А если вы создаёте подпункты, поставьте два пробела перед тире или звездочкой:</string>
     <string name="formatting_help_lists_body_8">Нравится это</string>
     <string name="formatting_help_lists_body_9">И это</string>
 
@@ -262,7 +262,7 @@
     <string name="formatting_help_structured_documents_body_1">Иногда при разбиении документа на разделы удобно применять заголовки разных уровней. Для создания заголовка начните строку с символа %1$s. Каждое последующее добавление символа %2$s понижает уровень заголовка.</string>
     <string name="formatting_help_structured_documents_body_2">Это заголовок третьего уровня</string>
     <string name="formatting_help_structured_documents_body_3">Вы можете использовать от одного %1$s до шести %2$s уровней заголовков с разными размерами шрифта.</string>
-    <string name="formatting_help_structured_documents_body_4">Если Вы хотите вставить цитату, начните строку с символа %1$s:</string>
+    <string name="formatting_help_structured_documents_body_4">Если вы хотите вставить цитату, начните строку с символа %1$s:</string>
     <string name="formatting_help_structured_documents_body_5">Воображение важнее знаний. Знания ограничены. Воображение охватывает весь мир.</string>
     <string name="formatting_help_structured_documents_body_6">- Альберт Эйнштейн</string>
 
@@ -277,7 +277,7 @@
     <!-- Table cell value of a sample table -->
     <string name="formatting_help_tables_value">Значение %1d</string>
 
-    <string name="formatting_help_images_body_1">Ссылки должны быть либо полными URL, начинающимися с протокола и домена, либо абсолютными путями, начинающимися с %1$s символа.</string>
+    <string name="formatting_help_images_body_1">Ссылки должны быть либо полными URL, начинающимися с протокола и домена, либо абсолютными путями, начинающимися с символа %1$s.</string>
     <string name="formatting_help_images_body_2">Чтобы соответствовать формату Markdown, пожалуйста, используйте в URL-адресе исключающие символы. Это означает, например, заменить пробелы на %1$s в URL.</string>
     <string name="formatting_help_images_title">Изображения</string>
     <string name="formatting_help_images_alt">Красивое изображение</string>
