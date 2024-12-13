@@ -81,7 +81,7 @@
         android:orientation="horizontal"
         android:weightSum="1.0">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/close"
             style="@style/Widget.Material3.Button.TextButton"
             android:layout_width="wrap_content"
@@ -90,7 +90,7 @@
             android:text="@string/simple_close"
             android:textColor="@color/defaultBrand" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/copy"
             style="@style/Widget.Material3.Button"
             android:layout_width="wrap_content"

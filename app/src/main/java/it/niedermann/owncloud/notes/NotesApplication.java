@@ -15,11 +15,16 @@ import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
 
 import android.app.Application;
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 import android.webkit.WebView;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.nextcloud.android.sso.FilesAppTypeRegistry;
+import com.nextcloud.android.sso.model.FilesAppType;
+
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
 
 public class NotesApplication extends Application {
@@ -31,6 +36,7 @@ public class NotesApplication extends Application {
     private static long lastInteraction = 0;
     private static String PREF_KEY_THEME;
     private static boolean isGridViewEnabled = false;
+    private static BrandingUtil brandingUtil;
 
     @Override
     public void onCreate() {
@@ -40,9 +46,26 @@ public class NotesApplication extends Application {
         lockedPreference = prefs.getBoolean(getString(R.string.pref_key_lock), false);
         isGridViewEnabled = getDefaultSharedPreferences(this).getBoolean(getString(R.string.pref_key_gridview), false);
         super.onCreate();
+        brandingUtil = BrandingUtil.getInstance(this);
         if (BuildConfig.DEBUG) {
             WebView.setWebContentsDebuggingEnabled(true);
         }
+        registerFilesAppType();
+    }
+
+    private void registerFilesAppType() {
+        String packageId = getResources().getString(R.string.package_id);
+        String accountType = getResources().getString(R.string.account_type);
+
+        if (TextUtils.isEmpty(packageId) || TextUtils.isEmpty(accountType)) {
+            return;
+        }
+
+        FilesAppTypeRegistry.getInstance().init(new FilesAppType(packageId, accountType, FilesAppType.Type.PROD));
+    }
+
+    public static BrandingUtil brandingUtil() {
+        return brandingUtil;
     }
 
     public static void setAppTheme(DarkModeSetting setting) {

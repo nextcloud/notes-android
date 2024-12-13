@@ -18,14 +18,13 @@ import it.niedermann.owncloud.notes.databinding.ActivityPreferencesBinding;
 
 public class PreferencesActivity extends LockedActivity {
 
-    private PreferencesViewModel viewModel;
     private ActivityPreferencesBinding binding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        viewModel = new ViewModelProvider(this).get(PreferencesViewModel.class);
+        PreferencesViewModel viewModel = new ViewModelProvider(this).get(PreferencesViewModel.class);
         viewModel.resultCode$.observe(this, this::setResult);
 
         binding = ActivityPreferencesBinding.inflate(getLayoutInflater());
