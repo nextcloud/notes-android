@@ -168,7 +168,7 @@
     <string name="error_dialog_timeout_toggle">檢查您的網絡連接。有時候，切換流動數據或Wi-Fi可能會有所幫助。</string>
     <string name="error_dialog_check_server">您伺服器的回應不正確。請檢查您是否可以通過 web 界面存取筆記。</string>
     <string name="error_dialog_check_server_logs">您的 Nextcloud 設置存在問題。請查看伺服器記錄檔案。</string>
-    <string name="error_dialog_check_maintenance">請檢查您的 Nextcloud 當前是否在維護模式。</string>
+    <string name="error_dialog_check_maintenance">請檢查您的 Nextcloud 目前是否在維護模式。</string>
     <string name="error_dialog_insufficient_storage">您的 Nextcloud 沒有剩餘可用的存儲空間。請刪除一些檔案，以將近端更改同步到雲中。</string>
     <string name="error_dialog_we_need_info">我們需要以下的技術資訊來幫助您：</string>
     <string name="error_dialog_server_app_enabled">請確保您已在伺服器上安裝並啟用 Notes 應用程式。</string>
