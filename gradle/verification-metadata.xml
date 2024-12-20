@@ -48,6 +48,7 @@
             <trusting group="xml-apis"/>
          </trusted-key>
          <trusted-key id="2E3A1AFFE42B5F53AF19F780BCF4173966770193" group="org.jetbrains" name="annotations" version="13.0"/>
+         <trusted-key id="2EE890070AE9318C3AD3520CE08F28E25BD93E9F" group="com.google.testparameterinjector"/>
          <trusted-key id="3051D45031E13516A6E8FAFF280D66A55F5316C5">
             <trusting group="org.bitbucket.b_c" name="jose4j" version="0.7.0"/>
             <trusting group="org.bitbucket.b_c" name="jose4j" version="0.9.5"/>
