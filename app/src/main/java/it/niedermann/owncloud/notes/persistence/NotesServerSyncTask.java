@@ -54,8 +54,8 @@ abstract class NotesServerSyncTask extends Thread {
     private static final String TAG = NotesServerSyncTask.class.getSimpleName();
 
     private static final String HEADER_KEY_X_NOTES_API_VERSIONS = "X-Notes-API-Versions";
-    private static final String HEADER_KEY_ETAG = "ETag";
-    private static final String HEADER_KEY_LAST_MODIFIED = "Last-Modified";
+    private static final String HEADER_KEY_ETAG = "etag";
+    private static final String HEADER_KEY_LAST_MODIFIED = "last-modified";
 
     private NotesAPI notesAPI;
     @NonNull
