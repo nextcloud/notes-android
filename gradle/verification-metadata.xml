@@ -33,6 +33,7 @@
             <trusting group="org.mockito" name="mockito-core" version="5.14.0"/>
             <trusting group="org.mockito" name="mockito-core" version="5.14.1"/>
             <trusting group="org.mockito" name="mockito-core" version="5.14.2"/>
+            <trusting group="org.mockito" name="mockito-core" version="5.15.2"/>
          </trusted-key>
          <trusted-key id="1597AB231B7ADD7E14B1D9C43F00DB67AE236E2E" group="org.conscrypt" name="conscrypt-openjdk-uber" version="2.5.2"/>
          <trusted-key id="190D5A957FF22273E601F7A7C92C5FEC70161C62" group="org.apache" name="apache" version="18"/>
@@ -49,6 +50,7 @@
          </trusted-key>
          <trusted-key id="2E3A1AFFE42B5F53AF19F780BCF4173966770193" group="org.jetbrains" name="annotations" version="13.0"/>
          <trusted-key id="2EE890070AE9318C3AD3520CE08F28E25BD93E9F" group="com.google.testparameterinjector"/>
+         <trusted-key id="2FC53E6B1F681184F4CCD637F5C81DE10A0B8ECC" group="org.yaml" name="snakeyaml" version="2.3"/>
          <trusted-key id="3051D45031E13516A6E8FAFF280D66A55F5316C5">
             <trusting group="org.bitbucket.b_c" name="jose4j" version="0.7.0"/>
             <trusting group="org.bitbucket.b_c" name="jose4j" version="0.9.5"/>
