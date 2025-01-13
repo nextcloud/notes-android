@@ -186,6 +186,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
 
         binding.editContent.setMarkdownString(note.getContent());
         binding.editContent.setEnabled(true);
+        contentLoaded = true;
 
         final var sp = PreferenceManager.getDefaultSharedPreferences(requireContext().getApplicationContext());
         binding.editContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(requireContext(), sp));
