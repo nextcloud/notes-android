@@ -56,6 +56,8 @@
     <string name="settings_background_sync">Samstilling í bakgrunni</string>
     <string name="settings_prevent_screen_capture">Koma í veg fyrir upptöku af skjá</string>
     <string name="settings_gridview">Reitasýn</string>
+    <string name="settings_enable_direct_edit">Breyta beint</string>
+    <string name="settings_enable_direct_edit_summary">Þegar þetta er óvirkt verður ítarlegi ritillinn falinn.</string>
     <string name="settings_keep_screen_on">Halda skjá í gangi</string>
     <string name="settings_keep_screen_on_summary">Þegar minnispunktur er skoðaður eða honum breytt</string>
 
