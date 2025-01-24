@@ -1,7 +1,6 @@
 pub    80C08B1C29100955
 sub    CF771F914C2A4A73
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQGiBE2fCWARBAC3v9wYo5kmynmVP+43ccamidflSLQjjpsXpSDLPFokGxeuw0OC
 QJy46m8b5ACoCqRlfwnRRcEHxiSlaBATJA6hi7NRO41R39C62JXsIxNJR16JNQ5k
@@ -32,7 +31,6 @@ pub    84E913A8E3A748C0
 uid    The Legion of the Bouncy Castle Inc. (Maven Repository Artifact Signer) <bcmavensync@bouncycastle.org>
 
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQGNBGR/8HUBDADJ+V5VgTXFG4xVI/1r07a/pTXoAQhHyJMkVdFScGARsps07VXI
 IsYgPsifOFU55E7uRMZPTLAx5F1uxoZAWGtXIz0d4ISKhobFquH8jZe7TnsJBJNV
@@ -53,7 +51,6 @@ uid    J. Daniel Kulp <dan@kulp.com>
 
 sub    594E23256A36A392
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBEqQOcwBEACdPSfBAkHm1b2GdOjB3gGerx/JDn3zYNnNpcQrM8Do0bxDwlfT
 qwLA0P9ju4mzTfHU5kEvm2lrXz8QCZPLe9eY6GxzzSbeXtt+4fP84/YGmsK6DQTy
@@ -98,7 +95,6 @@ uid    Marc Philipp <marc@junit.org>
 
 sub    8B2A34A7D4A9B8B3
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBFrKW9IBEACkqUvM7hU1WqOOeb1gZ7pUsRliHuoUvYIrd+hdp+qhPmJ0NG0W
 YhZK5UtJBmqvtHKRkbwYxUuya9zlBmCfQFf0GpFKJ65JSrPSkZADI3aZ4aUkxIUw
@@ -143,7 +139,6 @@ uid    Jesse Wilson <jesse@swank.ca>
 
 sub    51F5B36C761AA122
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBFoQh54BEADOuivAfgGKc4/zDwx+AwJdctjTT0znL9knRTYG6ediv2Eq+CXm
 gBM9m5twl+qhUB1NtrdHb4BH49VY9/gHr3JDyo5ewu96qkbeQl4pxW0zmHg/yJx7
@@ -188,7 +183,6 @@ uid    Gary David Gregory (Code signing key) <ggregory@apache.org>
 
 sub    59BA7BFEAD3D7F94
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBE2kzuwBCACYV+G9yxNkSjAKSji0B5ipMGM74JAL1Ogtcu+993pLHHYsdXri
 WWXi37x9PLjeHxw63mN26SFyrbMJ4A8erLB03PDjw0DEzAwiu9P2vSvL/RFxGBbk
@@ -217,7 +211,6 @@ uid    Olivier Lamy <olamy@apache.org>
 
 sub    1AFEC329B615D06C
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQGiBEdddbQRBADRgstdUZq7ceq3NYcR5kpoU2tN2Zvg1vptE9FxpDbL73gdLWnI
 C7IAx+NNjdG7Ncdg+u10UZv6OSmhWAd8ubWcD9JxKtS4UXkNPHxhHFHqVPHuCwsQ
@@ -248,7 +241,6 @@ iYEAn18D875QwNruE4Qkt/W0Rhy/QRIZ
 pub    928B20E9AD5298CC
 sub    0AA3E5C3D232E79B
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBF04lUwBEAC0RF88RYNbBpBPj/tVG7R+jfMeuVm0Q7hpFtMH3XWpg8um9lPa
 yLkyIk4LJ3feiCc2QJ15Gu82YXBnbHf+Kn7S5hc/sIqnF+Xz3rcfHkOIYRQGxiq6
@@ -302,7 +294,6 @@ yOYoDoAxroErhnWqc250vsYhlgtz6LPeFWKjK2GA/bORObNMHA==
 pub    94B291AEF984A085
 sub    9D149DAC4AC24632
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBFPzzfABCADK/wEIRhUCUTj00TcBOxGTPs5ad8jn5D01P7P5ILpLOgmnUp1I
 E3EYy54PQYjDIeOFvEmEywvwMRV8yCVhhYGpOPqbegKwcebXoiMGhJjuRf2nPbdZ
@@ -330,7 +321,6 @@ uid    Antoine Mottier <antoine.mottier@ow2.org>
 
 sub    C327DD2B96A50E1C
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBF6WyHgBEADOrbvGGDYVckFcUofqKiYrBneClFJH1ANheF+KIekmnFV2SH1Z
 RS2rw12IbpCjwqjhFTMWH2UTLF6pAsSGIufTrSVUAF2WxHw84Y60KmwuYayJCVd3
@@ -375,7 +365,6 @@ uid    Liam Miller-Cushon <cushon@google.com>
 
 sub    D66472CF54179CC4
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBFKD+PgBEAC8IkWujQlmU0/7+QPZFsc/z/rXgg7BQyo330QK4HeMzeCK6WHa
 SWzVDM9h6nFDs6Xln6YexbZUjLsxS/a/Ox2i26Qg8B+NghgiratbdJsByRrU/3la
@@ -420,7 +409,6 @@ uid    Benson Margulies <bimargulies@apache.org>
 
 sub    32E3DF6FC5E91334
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBEzDDl0BEADHvJW2uff8vfxbfy0IvNOK4aytU+HVEvKEmuSqYEzC8i3BF6RT
 LOxTeRFlu92rYz5ypD0mdNCzQaH0xbkcjialP6FpPCByrM9fFv6hmxZFSY71rvqz
@@ -465,7 +453,6 @@ uid    Slawomir Jaranowski <s.jaranowski@gmail.com>
 
 sub    E3F6790A5A167F5A
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBGHDIagBEADpzdCwVjVlHuo8qpu9HtmqNpEW4TB7y6+NX7Q39mj8w+iVskE1
 sL0+BOCdP6ZMiQziWbOQ2FxCd3mD0ixZ7v1i7+0jowySPacJbVNaPPECP38gDte4
@@ -508,7 +495,6 @@ mMc1ojZ9QHu9WXM+cEND6KY3m407KYw2ItiMcY3Y5fNTRdEMvu7S
 pub    A2115AE15F6B8B72
 sub    6366592024774157
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQGiBDsSIk4RBADSCj6rUjV64tYCGT1DYKYR7GthyWpNdGHSYLbETBcDatAe1dzQ
 5NsCgfrlybfyeY+y1lxr3T9bqf6zJWDw/718wff96qmmv1qzexSYtmIrj+h53V82
@@ -535,7 +521,6 @@ uid    Robolectric Developers <robolectric@googlegroups.com>
 
 sub    6A2038967E03726F
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBFRdA40BCAC0zSALsOjfjr+gO8q+HV4qPWuIRB8S4z//jCEpKypyCRR9sA0W
 IDHG6OqG5fO1bP6VsHvSx32E8YUf0bi8eGgpKj5gJ9jmausRvRHtUHJ0pvZRBw51
@@ -564,7 +549,6 @@ uid    Thomas Neidhart <thomas.neidhart@gmail.com>
 
 sub    8183E80D264EE073
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBE8YNGIBEADEgcfvs8TL3X2Ql62HJ6SrXWAOoHw5CquJxUQkvBGesIT1Hk24
 exiPwrlNE1qUjbVlef1Cwk9ZfwMOpJdfP2MQQbx0nxxqv+JtsoeXUy9bTSvZYBUL
@@ -609,7 +593,6 @@ uid    Tom Denley (scarytom) <t.denley@cantab.net>
 
 sub    9C4C23E6FFE405BD
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBE+xZxIBCACzKctn4ez8xOC0pGThhAwjYWGkzcwK4HNaC1usHThBFz3/t8JN
 OqUXRixLyi5wELN6GHlsGVUQS3IfB4JtuhScsieSB8PTree68/knMq6JI08mJqZr
@@ -636,7 +619,6 @@ ZlI/ojefaZkRseFrtl3X
 pub    B0F3710FA64900E7
 sub    7892707E9657EBD4
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBFdbSfIBCACrFI0ai/abnV2U2Wa9QQZwGk3Fegc8laiuTKc0GoYdyptd83/H
 hD5S61ppdkOugBjVTHdgda3xJ7zBZdnwjZvV/TyayQltbh6hU+BMlEolzXLgyvY7
@@ -664,7 +646,6 @@ uid    Checker Framework (Official Release) <checker-framework-dev@googlegroups.
 
 sub    32784D4F004B405B
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBFM1v9ABCADD0KoXq2ZKlUHeIVovQy3gFmW9oFAaraV48ouv8cYvqdf+s91H
 NyqeyNPT/ihFeNqZJUAMyPdwN5xrWD6gxMrOCR7BFhA5kLmAKz4HfFCQ05ViyQdI
@@ -692,7 +673,6 @@ PA==
 pub    B341DDB020FCB6AB
 sub    315693699F8D102F
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQGiBEowbDsRBAD2jx/Q2jNuCkgiS3fzIj6EzDP+2kipIKH2LEnpnTiBlds2PFYM
 xYibVab/grgQODxTdDnAKifbJA/4h1/T7ba+OV+xIUoSI5MbgaF3USidiDHPX0pY
@@ -724,7 +704,6 @@ uid    IntelliJ IDEA Sign Key <intellij-idea-sign-key-noreply@jetbrains.com>
 
 sub    C9F04E6E2DC4F7F8
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBFKneXIBCACtnX3ZQmPujf6ocvdnhsBheze71DSl34TfebyW2Qt+g9NhMxo4
 DaJy+iFNnsaMwLZRr6k/qf+ISE3A4opWAQlbk+Wb5s6DPPA2cHH6W4GdkxtuJzqt
@@ -753,7 +732,6 @@ uid    Egor Andreevici <egor@squareup.com>
 
 sub    84761D363E7B0FC4
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBF7rgogBCADU9OwoEFdIgN5U0JU5pI7s3T1T1LeDMzAQ8l2Hq4jFrhnrjcEA
 ieDSut1YIv5NTBoZv4CrklaKvvQNUXPvKrFImA4OKhBodKV3wsq2efCATDGa1JAw
@@ -780,7 +758,6 @@ eQh3BspmZac4oUdxAqzyU5N/Um+w90sQluFqwoVd5FX5i4L3
 pub    C4C8CB73B1435348
 sub    EA2A558279B36E6B
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBFSwGboBEADoHgtdw+OVEAIF1SiRju8QDuhePZbpSgRLrt25AmowHJhOQUI1
 EP7+RWoCWW9gWAGas5mGDBxhPw8NgFv1nMUWFAsj0rkViuRD4qpJbChvlqw7YkOq
@@ -822,7 +799,6 @@ Pn5Vct+ePgERiEjouAIKInn7+YOf9AFRs29KT63Ajy/6mpYI1t0YGD7INcqEZ97B
 pub    C51E6CBC7FF46F0B
 sub    4006CBA6D352F1FC
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBFbgSbABCADGGENSy3oWLjW7zfYMSsR0pm3l3eMA7ptyU5C0U/MoIYjbXwyX
 XtlGwKnNgngATh1SMpX4WDbD8tn6vdeP4uHQsDb40t0XN7/HISFcLhV5pCgz2wNR
@@ -850,7 +826,6 @@ uid    TFLite Support <tflite-support-github-robot@google.com>
 
 sub    29E792953D515FC5
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQGNBF8pVB0BDADcwRGpJUDe8eVSlJ0yPQl/CyeYc0RWq2f1seUMQO0xFW1xPIeL
 IE68D9VdgarA88qDLYesfBqzn57/r/ztj2aLEKt8IRunJzd0w0G2rrgSCZQ8RmzL
@@ -888,7 +863,6 @@ uid    Yoshito Umaoka <yoshito_umaoka@us.ibm.com>
 
 sub    96123FA2B8E17FF9
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQGNBGU//oQBDADDJ42aKLuJyYL2ZfG0ob/XxdYRZhP7/OO64Jf4WJtX7vgoVUif
 iSytAikRT707EshXRMtw8tx3H/jM2O7o/gJl592IQ2gYppMh4boNO7lc7dd9F6gv
@@ -925,7 +899,6 @@ uid    Herve Boutemy <hboutemy@apache.org>
 
 sub    64863FF4D1BF1809
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQGiBEdUhrIRBADCU9cuKc92CWQlZxwtRuSIV/36Qmj264YD+Lix+r1Qe1PqRr1I
 /MObOo83ulorWigSkx1k81Mnr56NwmIeo2bMhjmgRgf7EG6XEbKdRKfJcJRR1lDV
@@ -956,7 +929,6 @@ dfV4cuo=
 pub    CB43338E060CF9FA
 sub    C59D5D06CF8D0E01
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBE0NT+kBEAD1hzO+dXStXYJj8M6FBn9fxw+grddjM9rqaEgJ2omSdpZZOPBs
 DRor7v0Rm23Ec17y/7Dd6oR1CvyAeQwhJvNBaAW4LQmUcvvqep4hfkWDhlRvh/QS
@@ -1000,7 +972,6 @@ uid    Eclipse Implementation of JAXB Project <jaxb-impl-dev@eclipse.org>
 
 sub    7ECBD740FF06AEB5
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBFuX5CkBEADkTgn4nzuq0lWR+7kFGYLKvmPLjes4j2nmygIafUjVbNmD70gY
 DPpbSP02HxgicM6xSSqzZuBVxpbcffqjMPXf8LkVX4iWKZtyzLpf34yaojigU3qF
@@ -1080,7 +1051,6 @@ uid    Deanna <deannagarcia@google.com>
 
 sub    5199F3DAE89C332D
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQGNBGCtdhoBDADdopjDt4eUNEqLJSw1ZICSR0oq09SOVtJSaSYdF8UiXjBfL1Ds
 fhTDqSv5pT2a2gLj0OU3tFhWHvINLaKKCjQnHVcFXi2LTxt+XBOjRYkFjHVisbaZ
@@ -1117,7 +1087,6 @@ uid    Viktor Klang <viktor.klang@gmail.com>
 
 sub    326BA6BD408BFA94
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBGKFXcwBEACSech69oRvhkVobrVShZGpJzl6DA/DxMNdWME3wI5XUFHmZKp5
 pD8VDhyOdYhXiF5MosdHsJtsHCz0dr+ss6FCHk3m6LEm8HHeTMFA20rbQKDcLj2P
@@ -1162,7 +1131,6 @@ uid    Liam Miller-Cushon (Error Prone releases) <cushon@google.com>
 
 sub    3F606403DCA455C8
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBGH0NlsBEACnLJ3vl/aV+4ytkJ6QSfDFHrwzSo1eEXyuFZ85mLijvgGuaKRr
 c9/lKed0MuyhLJ7YD752kcFCEIyPbjeqEFsBcgU/RWa1AEfaay4eMLBzLSOwCvhD
@@ -1206,7 +1174,6 @@ xquhnpl2HvE=
 pub    D9C565AA72BA2FDD
 sub    9121AD263441EEDD
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQGNBFrjUQUBDADTMQL/4d9EyVhsO4XBH9wbGWxcEJvsu/HvppN5fY8hpMV0+Cr9
 wjAeJ7d9zdFJVB8vPLN7bb5dm6SNyK3KiOugqVgZrQ+ZPTvCCgFbFyEXuZwDiOa1
@@ -1237,12 +1204,47 @@ zU7kkPUpKBx6hHg/zJnwTVAY/g4+Iw6CHwBhw+2/KoMpjQ63VqjwQZ6+VIwdsSCh
 =Uwqi
 -----END PGP PUBLIC KEY BLOCK-----
 
+pub    E08F28E25BD93E9F
+uid    Jens Nyman <jnyman@google.com>
+
+sub    D7B501D37A3AE550
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQGNBGQdnjEBDADm35hD/kMiNXVocImrrdOkA4xvNQ8OLirzETb5DSSocIW+OBLZ
+V3k5OiKTqYxlZIa9JT8XLLVc8pi9Is/x/xjoodEYSsj0LL0BODMeyt6ECmfi0brN
+CqKv1J46cuWun0iSog3KaGrMx1tcNAVvYHdDuBlZ8X1BbaFwSqdNv1Hq9LkfOUwB
+kafs8vXc+5THSkB2XAq9v4B+P9Rl4fwMPsjgkS0X/3JNMq0dqlUXuxNTj9h/dNAv
+l7sYEBF5gY1wqmVbesHWurl8Bqbq6wvDualZ0ccGyisaaz2FxIKuQHBK63ffxXVF
+/AABfDBsS1nx83qK3T7LFemSwQ+hMdKjck4Vng7RbB/FlUNZlbTiyrwZP9492YG7
+k5EcbB1K9tIPJDccYN3zkmYbaEAHL8j7PnTq7XyRPrNYFLKWBBa3sYz21+d8Ym2+
+ExuFgqvtnyToeKVfGX+mNbftrVK4j2OL6fZMmkDL/6niG34UJvHdsKvqVddTMPXM
+1jlZYh35WbM1eIEAEQEAAbQeSmVucyBOeW1hbiA8am55bWFuQGdvb2dsZS5jb20+
+uQGNBGQdnjEBDADQUQl5FP5g6/KTI0aAe05jJk8rkLK7nMQK7ayHdij5RmuRPJO6
+snlEPmSpd80BL9sCuCq8Fo87Al6NcD8Fd39IZl/n7ZbKZHfcSQNkyKlGoNMprAtA
+nh4rFdhG8Fn8Z+HRP5VcwG9BUIzvScyCLF4f4gGaaOAMd57I4q1+PsgvUZbGee74
+wqfLBspnkut0CEblr//nYf+Vkoo6EfSwi9QbJLYacy/3IrfByUIyUyrwEGFWMpul
+RXFzTRExpnX2j9g+XZO12LHMxJQ2ptOI70m4JDGd8MnPnvMofLsy65DBz/5qZKtV
+8haE73KKSWjJi9d81kwAzZR9WjltDDhyYOYYpDFcK4x0Py/XB5Unj1jf49PrgF16
+NVlfRh7vS6VeqUoNHYAR5qagftBiDZQ317GpRpm3LUidqyiFexlLhYHGdUk/vpAO
+SCK6azGBmW+dXx/BCC9fX6wVVRv0LNeAWgnyf13SG0d0jFJjzxqRzXclsffo/oEd
+JV7MQqo+ZHcdI8sAEQEAAYkBvAQYAQoAJhYhBC7okAcK6TGMOtNSDOCPKOJb2T6f
+BQJkHZ4xAhsMBQkDwmcAAAoJEOCPKOJb2T6fNkoMAIVtequTvVXw9Ax92uPbmCDg
+iNB2aiF4U23e5ZTPvSMWZlMx8hgI2vMCgRGcNOcEQcIyvFy1dZ5qxqzd/QjFvaY5
+2JutEUbeXvNfKmzjn2VzDiW/SHAc8KnWlAmJfqY+SPSIJNJ72Qc0EkxuGbjbWW+y
+eazFuDOafej5Cw/nRTMvAVm5hElNKtdRztQVJOOBPEFefbb9YG9gcVVo0Jxs2WY4
+1rh+GjK8rB/PnK4NicQcbh1hk21enla6j2jYKNhCJkifw0HXsa185cnISSv6fVsG
+H8tCCDoaZ8mXhU0W49n+NyWhRdHM9Gr9USkYVsHzJTZgTk429CI+ThEMjsxeIpJH
+Qu/m64DNlDu0rrzHpgjyUedNB05QEwEtxv3nMKryLcYifLhbrk4ktLIMtYLdDgJe
+ddn3I+ytL779X+SOCm292NQdg9+M6hkvgITfIoPe/seHjc0hP5COIbrfDeIdciyJ
+1c3wN0nS/z6/50wBTdmj11Kx3Phb0uKtekcn3BVXug==
+=36gl
+-----END PGP PUBLIC KEY BLOCK-----
+
 pub    E16AB52D79FD224F
 uid    Google Api Client Libraries (Releases) <google-api-client-libraries@google.com>
 
 sub    5A34A5E06B936F93
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBFF/4bYBCADTeOLZiVGNbjlPrwG7UcMl+yXmEqpf9dB1A9cuicH3PWXj0WOb
 LSzHjzoRvRekEqSUmgoveey1lPuA2qjOUkXY6Kiyx+oLiG0/ObJHUQW2O+tjSQ0R
@@ -1274,7 +1276,6 @@ sub    9351716690874F25
 sub    3D5839A2262CBBFB
 sub    60EB70DDAAC2EC21
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQGNBF/RX/MBDADSqelDQKobURExWUKALq86yTPMxMasxmDlccKFpk5xjWrryL7z
 qg4Fnb7IK5fKDtcnTANtOv2hlIli1h131+SmjJdD3qhfly7QoszOpr5izDS+FOCj
@@ -1392,7 +1393,6 @@ pub    E93671C7272B7B3F
 uid    Rolf Lear (JDOM) (Used to sign JDOM Packages) <jdom@tuis.net>
 
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBFCPD00BCAC4tY8wMQTsCKyII/mMkUDAkXA2cLM47fY1Wn+iohtgtalUdA0v
 AhGvTdFU6/St35rOKNoyLC7Sy30FBYpAEfMB/x9j/CaQtdtGhaQU0hCvtWGhhS3J
@@ -1407,7 +1407,6 @@ TSkgKFVzZWQgdG8gc2lnbiBKRE9NIFBhY2thZ2VzKSA8amRvbUB0dWlzLm5ldD4=
 pub    E96EF7AE7D967845
 sub    24219A5BAF207160
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBFYUO6UBEADL4uFy2EQM2JiXtHPGBjrJpPaXiYpQkDXLvBR4kbUak/xXCpc4
 zdewia48wZZ3jH1JOB+p1FBojz4dZFM7EowBS4FGO9jM8xpwxSz3g+gBGlIXYuFz
@@ -1449,7 +1448,6 @@ KA5wq0o3zEjmQcn+KFPXaF5sQ/4TNk+c
 pub    EB380DC13C39F675
 sub    BB09D73166EEF1AD
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBFEqVnEBEADZhnnAV62dwYvq5CxvEO9N7m7vrYMosc8PCEafxJqrDMbWWfv2
 tD3EaHAERt/UFVEo2U5FV1hELUvFISPhh/DpOWYuc7pwA75do7ul6dhwgi5FcyjR
@@ -1504,7 +1502,6 @@ uid    Thomas Ball <tball@google.com>
 
 sub    E68665C8F91BDE69
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBGO91akBCADDDpIrW/IohUSJNDu9VOUlnfEOm5VS49uqM0uucLi0BeAhy1Fo
 P6Yg1cJkcK66DtnUoTM/JJLyDzJRlKnniLrYCkw8ScvtPdA5cQKJTY5ecn+9ouR2
@@ -1533,7 +1530,6 @@ uid    Eddie Aftandilian <eaftan@google.com>
 
 sub    3B7272A25F20140F
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBE/oyDcBCACgYsHtmWmtUzqyr/JN+orfJaTl2363qiS+NJ1lt2CNxUWOqldc
 VcIGyjmzokxTRpGdCFmT1Lh/hzZhcDPLjrtxf+f6njIibt80OiEbX39gjwZRIikd
@@ -1562,7 +1558,6 @@ uid    Netty Project Bot <netty-project-bot@users.noreply.github.com>
 
 sub    1C9F436B883DCCF6
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBGAhOxEBEADdB5Jy2sSOndOMCTyk8IFIJYPogjXtN7CnyIlqr4jEB5G87TJf
 m7OxB95aIVS1vSA5ghCm88N1mKtW6jyYjgLFQbbyD9/X3ShVZjh8B2R4atL93SSK
@@ -1608,7 +1603,6 @@ uid    Jonathan Hedley <jonathan@hedley.net>
 
 sub    6064B04A9DC688E0
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQGiBEtsF2oRBACcai1CJgjBfgteTh61OuTg4dxFwvLSxXy8uM1ouJw5sMx+OKR9
 Uq6pAZ1+NAUckUrha9J6qhQ+WQtaO5PI1Cz2f9rY+FBRx3O+jeTaCgGxM8mGUM5e
@@ -1636,12 +1630,29 @@ EPQuh/lmUBXJfs8An3O2/IQ/ThzLrM/2Ue3Spd2u5wN+AKCHU4hSTSkXM1gG3c9e
 =zu7E
 -----END PGP PUBLIC KEY BLOCK-----
 
+pub    F5C81DE10A0B8ECC
+uid    Andrey Somov (SnakeYAML) <public.somov@gmail.com>
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQGNBGY/odABDADzlZ1BXT0zN3rL+z4HP8r/2xM6zN950fwRimBTOiT6uE8aQSxq
+283R/gIgM+yQBGjStLP3k/TsFJ2FCz7sug+7s1RP70ymkshalTRg+9QHBr2MU1Cx
+Xoh3fiH8BLOb3FIxH1wdAtOOoNxbz64Ftcptu3L0I1y2qEwOGNOyvqbntdCuwNbX
+/zwZUyb3tOVVrrZ5bp+6jMoBKEEWS7effqhGqXLlO4yTMBXR4pwzhch2IGCe+4M3
+a5C2SIJbR70PMk6aJ2+no2LycYRYJx/t2umAbxuCtwT6t/xh8v5ekbXAu5G3h5y+
+T2bF8rjMhVe6DBgJ08uFge3Oom5a5uZx8sQASdLCng8nKjGO4Q8jWmsEj+OiHnnX
+g0oKkirnWbAVrWysgNKAXfwGfDBG95K1F67kVhNjXTx0MDcxpsT9TPxz/nDuzRpQ
+ey5M11+Bl/fEM5UuzRpPgPd//bU+L3FgEUguB4kzsiYlhsUQRyCq1x868AchLWey
+vaVIq2DY101GIP0AEQEAAbQxQW5kcmV5IFNvbW92IChTbmFrZVlBTUwpIDxwdWJs
+aWMuc29tb3ZAZ21haWwuY29tPg==
+=9D46
+-----END PGP PUBLIC KEY BLOCK-----
+
 pub    F6D4A1D411E9D1AE
 uid    Christopher Povirk <cpovirk@google.com>
 
 sub    B5CB27F94F97173B
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBE89LqsBCAC/C7QToaRF8eZgGOxcvp9aG+mFFCMjaRAb4Mh59OYdmUb6ZjfO
 9388HPebGbPNR8SHYs0dBIuWY4ZJ7oUTYPswasL8vB0iPFdyHhvkCca+yk0b8ZBM
@@ -1670,7 +1681,6 @@ uid    Baptiste Mathus <baptiste@codehaus.org>
 
 sub    5F68B9B2F1725F16
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBFFCLwoBCADxtcGi0nfolr1kGWe3jQ7n18roJFwBs4Q52nx0h4+a8ZGr7/1E
 1brakrz3t/cTSZIrhfru8kirP8cJtXBxpd/nCeRrB/4ZtXPUJiGwKx6sVGr0ix6U
@@ -1699,7 +1709,6 @@ uid    Herve Boutemy <hboutemy@apache.org>
 
 sub    CB6D56B72FDDF8AA
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBFgnlA8BCACVtx3oLXcanfvwtMRwal6pLQ8IVMG9+fr4xGdbSHXCRNbosDa5
 agU7WeQMPhusSxJGaA3w7NOdjAwD/LeHADhDPeI6llJg1Fb3EyqH0NZaODKU/Or/
@@ -1726,7 +1735,6 @@ zFdp+62yJA==
 pub    0374CF2E8DD1BDFD
 sub    F2E4DE8FA750E060
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQGiBEmoKU8RBADEN0Q6AuEWEeddjARAzNXcjEx1WfTbLxW5abiiy7zLEht63mhF
 kBlbyxEIRnHCSrPLUqY5ROWdyey8MJw+bsQn005RZmSvq2rniXz3MpcyAcYPVPWx
@@ -1758,7 +1766,6 @@ uid    Norman Maurer <norman@apache.org>
 
 sub    DECB4AA7ECD68C0E
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQGiBEoo3BYRBACXE2oGRA58Ml6s+kvfk6n/AJ+5OFeRT/Xelco/cpdxOVF5LkRk
 yd+vR2+F9ldBlH7CSTCmrdZIN3M3zrcWndrk/OQkCxNWVnE/a1li7L3G9nYr011k
@@ -1787,7 +1794,6 @@ sub    3FF44D37464BBB7E
 sub    6A0975F8B1127B83
 sub    6005789E24E5AD1E
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQGNBFzy4ngBDAC4mz6ELMWjfJ8GZtolq3E96T7qjfp4J9FxGVxdbJxkEDnn6MTg
 V8zhD7yeSZcUSvwzPiDlB/b4RYnh+5LjzKHTsrtr9ja0SupuCkVGkMGWeHhpIGV9
@@ -1980,7 +1986,6 @@ uid    Eclipse Project for JAXB <jaxb-dev@eclipse.org>
 
 sub    8118B3BCDB1A5000
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBFu1EwUBEADAXapH49L1Lwt28iK737X/+4bRDE+lkMxehnUZ7QJs5zkFz5Sh
 9K2rQO0PpvoMSdadGplFyhKdDP/iEUpzxTTbqMs5UjbJr0MoFfE957Vz59mNf9WY
@@ -2059,7 +2064,6 @@ mfMjMgP4QIPQl4W7IExkjfLxmiDnDUJ7XCfM
 pub    0DA8A5EC02D11EAD
 sub    71499A87DC1FF84B
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQGiBE3LMfMRBAD90h69D8yyPWaSoAyh2mOOOZ/XH0isuBpDZCWptemlMHgImqdQ
 2sXLXYT1bJKmSaMw+yKjp8J/NYk69EbmSK1C2nypLQtWhUmXXd3XVYw6hrG/dGvi
@@ -2091,7 +2095,6 @@ uid    Brad Corso <bcorso@google.com>
 
 sub    BF6D15D3F1BF7BCF
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQGNBGGNmd8BDADSpbdIfqzkUNAeYlP0nUw/HFU/v+/aydtjUioAi/KxYt2FOMi6
 gk1LOJzHBubv8bF79mlN6sXrnq2lV/MuqvN9DrTAQ4u4Dh0pgbLK6jbxDWPGrYIo
@@ -2137,7 +2140,6 @@ uid    Matthias Bl?sing <mblaesing@doppel-helix.eu>
 
 sub    891E4C2D471515FE
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBFcyNOoBEACj0zTN3GkRNAY3jihHZdGvi70i4R8mUfcQUwWGRsGGlzSwyJfe
 20qNOHqwHaxVCAIp4e5paNf9cEKepOv5IqMkmaRdiC2W+BHDxcJgBot/IrC81ube
@@ -2183,7 +2185,6 @@ uid    Rafael Winterhalter <rafael.wth@gmail.com>
 sub    7999BEFBA1039E8B
 sub    A7E989B0634097AC
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBF3Ep5QBEADZfs6o1IpZbZ1qlBkoJ7oWL0vFCcdPUgF/PRFXWKlsuFHVVV/N
 oZF9SDiCJxfvsVXmI+IHTVMR2SszU2xDF2SlScRfZQwrLhBsDP9nv9N1eGIoA5Ny
@@ -2264,7 +2265,6 @@ sub    CFF46EE3C17E53E9
 sub    C2148900BCD3C2AF
 sub    7D1BE4480B61E2A7
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQGNBGBP58sBDADYRZmxLOkqrz0QZ/yESRpv7IeHGLqDE1a8QfFtFb14MJCLSAAS
 3nMD6Szi9mEjEqYdJURRcMjbUBhePgbhzGa3FYkjAB8lj6IKbu+ogCwVm1S8+caZ
@@ -2383,7 +2383,6 @@ uid    Brian E Fox (CODE SIGNING KEY) <brianf@apache.org>
 
 sub    AD9CEBA0521B1945
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBEry8yoBEADnhvT3m/zzzuiUKyAeIfnN9CeN0ilQx4P0kFMhyZchRR4Ekb41
 iKw7tDL9q+g7xSo3yUT9dKjDWJ3yhDpdAhp6d4y8GAuWqlOu8CQdEHJOKK0yxTzX
@@ -2428,7 +2427,6 @@ uid    Build Engineering <build-team@atlassian.com>
 
 sub    2D4537C5AFEEBF9B
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBFFCZsIBCADQOqjBEfLoBf7L+CCIqlJRZEMi81HgFJA1Gy3/4fXe9E3OtMAJ
 dSkiQYPIzDqbNagYCpsMBSSduJ7EnXNPJoWHIAEn1q+FJcFMvTo4nIC5eKFu7eF9
@@ -2457,7 +2455,6 @@ uid    Alex Herbert (CODE SIGNING KEY) <aherbert@apache.org>
 
 sub    A98BD25BE464EA45
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBFxmwqABEADNTTxqFiBcLLQwARbc0bmPUlxFl0A0Di9dTycUEjn0wTGS2xgF
 dFxWomZd8R4b/lVb9jHf0r+AEul7U7sBoKinjwk0EuPDAZK5PEy3P8ILcAulwQqW
@@ -2499,7 +2496,6 @@ NblrOf6LII4Pqx0ip7s95q54JSpekQZ65g==
 
 pub    280D66A55F5316C5
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBFOOGVgBCACiDwUZOc6943aBGUrxikkfUnsyZfHtF9jihYmA1pSgfsye+JxR
 oG9QWW9+3qx4L/d4ZEqBftTWpsjyrY7NyMaeXtJEjE0vhiWNehgXB1z4XTJ66zCX
@@ -2515,7 +2511,6 @@ uid    Tom Ball <tball724@gmail.com>
 
 sub    9DF7F2349731D55B
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBFYFiMABCADYpblWssqGxbjTwsyroPh48BwdSKl59zbFKoEHDw87NeWq7fik
 h95RkbdeWsQSvduXWgQZsUDq9cLOkuS/ChAMkAAd3MPp1NMdFmAqS7BX5wU5s5I7
@@ -2542,7 +2537,6 @@ Dw==
 pub    296CD27F60EED12C
 sub    D95ECEC170500D9F
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQGNBFsHC7gBDADlkoJglNVbX9MShcAm6jvS5atCZwWT63gSasObXFxswsJQd1NK
 qryHNcj9tKBfLbSpMOoHeyyIKDdwdxN+6+N9Hi4hf0j1Ub6deJyI8ace8VERWaxF
@@ -2578,7 +2572,6 @@ uid    Ceki Gulcu <ceki@qos.ch>
 
 sub    10DA72CD7FBFA159
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBE+ZO+EBCAC3fZOOuYKthr0GcUge0PH2bh18sbM9XUmPKQz/W15l1NA/2ARS
 2gUXM0R+SunMlun9KsqjnojJ2ObVPvbm1Hg/66JSRgR3JWfIpSlJxLicpfu8rCfN
@@ -2606,7 +2599,6 @@ uid    Brad Corso <bcorso@google.com>
 
 sub    5CE9BCD2ED28F793
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQGNBF0vfHYBDADEDPY9ub98c7jQe4yMbPke3A/sxNHnn0WuA9JN880DPs3L7lrv
 9VHTOlFXslDNBPYSbgFXH5YlMGg8ZY8bhngjc+Z3dtrCX1cAjUXOnibi7fBFomLB
@@ -2641,7 +2633,6 @@ K0rLXbIe/0Q1MkLjnJ9MqcnGGPSNV5d2f/Q9Y8U9EA==
 pub    379CE192D401AB61
 sub    0CFE993CDBE1D0A2
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBFTi8JIBEACcN1ucQ1uCOZ1owTELQV/6i4q7NbYdJ5wf7yPYfEugSo3yfbo3
 Pw/XEvlnpDZmT155sGNOkteZtZMdcm5XhFbdtquLlrkjAcUGatq5rAt3eLAlvU7u
@@ -2683,7 +2674,6 @@ leFIia4wM7+46n0klLF0/EH+B/oQvJU30gWxTX8T9eE/hCREmtkjUX8=
 pub    3A1959EEF8726006
 sub    D908A43FB7EC07AC
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBFu07rsBEADYizNlY0FYNZ6q2wx7AmWLw6PHje55uFhYM8Saqtwg/rm1tl78
 j28E/coP2zMFf/ec+zqKsfYi4DMmLZ9ESIngMUOIE7mY0Pp4WN7oYFRtvU0ARWyp
@@ -2739,7 +2729,6 @@ uid    Carl Mastrangelo <carl@carlmastrangelo.com>
 
 sub    9B2A1B698A113AAD
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBFzwo60BEACg1rgL5jUtKkFE5DiwqJwxzJyJDH00TBSN6ZT+nXh1UxgC9q2h
 olF9V+2+LV1Jcmnc946xzIMiWLG33QB0NKVCdU5jNuLahOcViQQjNfGXwNzYoNCR
@@ -2784,7 +2773,6 @@ uid    Pete Bentley <prb@google.com>
 
 sub    6B7EF7B18190F4A9
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBF2KLsIBEADgVw/j0Loslv+pBDEfYemeObeKCWBhEdAiGznT23XFb4eOa4oL
 Yk8FTL5SYV+Ylm5Pv4zUGV1JUggzb4mS5+/k0kl2OHzZpJTLz45E9Qe4KI5vk6jT
@@ -2827,7 +2815,6 @@ X9ZbaT6KeacHcl6EA6cnpcLwOV3jS7q6DmPt4/sZrpODEydler5toKjiWOFIR7eT
 pub    3FAAD2CD5ECBB314
 sub    3260CB2DEF74135B
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBFhqdSMBEACmveOOsQrTky8b5M+Cq6lbhqRB4+INnfigxr7+EMpswo4AxYuA
 Op/YG+G7NU5h6EK6Tj2dVfXga90GYFkehtFRZgOUJUGKPU/53upsbnsWS8qjJD8g
@@ -2869,7 +2856,6 @@ bCSvsEa2cBXwSbD+0JRfuRvpa8CC4KDFkbU3Nb26dEvWPz+jpC3BnVI=
 pub    40A3C4432BD7308C
 sub    C0B9C2CC3DD97C16
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBE5zrtcBCADFfU0ugIGUCM44fqPJKrsB3TaDu5EpauvFfYqUfyookzMHSKtB
 4YqBSKzBEiZ1rFB/KCn7XJTh5epoCau4DsG4U0XZjsx+esDR4ZtL42LEzeMTuluV
@@ -2897,7 +2883,6 @@ uid    Viktor Klang <viktor.klang@gmail.com>
 
 sub    1364C5E2DF3E99C5
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBF1Vn08BEADgfOupXhJxyb3t1kzDNa595spJptjF5ViyXuEJtlMQlmobPP9L
 2gZH83gNe7Ro1TsLesgWTtin3hGANSKITdi/wVH4ET6lPInv1k/8hXe0zlF11Zmi
@@ -2942,7 +2927,6 @@ uid    ICU Project @IBM (International Components for Unicode Development at IBM
 
 sub    E01173141D06B1BF
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBEzQQMUBCACbwbw7tuTWgwPsDAdQTWGO355jP75oBLHwGgEwV+OCKtxkNXNw
 wrJqXst83vmD1dEJyHflQww+d+Olj90IefQGfR+K7O005C2nky7eNGIomxaP52Y/
@@ -2972,7 +2956,6 @@ uid    Adam Cozzette <acozzette@google.com>
 
 sub    726F4E5C34CFD750
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQGNBF8QwXwBDADKNLAHhjWUqnLYiO+ws3Hy1du6tMvkR3nfsnIDqpCvSjb+3/rI
 OHSyq8TbaGLLuHOM4K/KvrKgjhTbXQxvx1WR5IpoylcINzI959yAbaywBj6gVQB3
@@ -3009,7 +2992,6 @@ uid    David Karnok (RxJava signing key) <akarnokd+rxjava@gmail.com>
 
 sub    BEC5312E05D1A468
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQGNBGB5K4oBDADE0G7Ayuo7Me8Y3M1VnB7sz9xjVvyDwo7EZ05Emtmor32n7D4E
 qsQ7OsknSN9qtdG/MeFSgtT4qtd9t7iopSf4BhE2ru/+2D9t1s0fKWcw1E05KZB3
@@ -3047,7 +3029,6 @@ uid    Sam Judd <sam.a.judd@gmail.com>
 
 sub    04155300547530C4
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mDMEZOLxKBYJKwYBBAHaRw8BAQdAxs2w5zrEoMuboI/b+hJv8zlrWNbcg6coKPu9
 bJ5Ktfq0H1NhbSBKdWRkIDxzYW0uYS5qdWRkQGdtYWlsLmNvbT64OARk4vEoEgor
@@ -3062,7 +3043,6 @@ pub    571A5291E827E1C7
 uid    Central Repository sync with maven.java.net (Used for signing artifacts that support syncing maven.java.net with the Central Repository) <central@sonatype.com>
 
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQGiBE9iFawRBACJb4OMk3zqMDNvSJKYZ8fGYrPq7yCcf/ykKDkGb2dtPnAZGkSp
 3mmNlTsU6s9ARn7BtkhIuM5TdbLs+z+okX62h3F0WW3h+CpfIXyKSgl7uWbhZ5G8
@@ -3085,7 +3065,6 @@ uid    Eclipse EE4J Project <ee4j-dev@eclipse.org>
 
 sub    153E7A3C2B4E5118
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBFri3Q8BEAC90D8TTu6C05m/eq6HbU8gOHFc+2VJriVmnoyODTlEk/LAsT6h
 BRok7nzY0LpNUzUREjJy/w80YTOjLs25IFhnqA6mq8BGLjFwjhBPA4piCyhW/Elh
@@ -3165,7 +3144,6 @@ uid    Joel Orlina (Sonatype, Inc.) <jorlina@sonatype.com>
 
 sub    2E74CACB6918A897
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQGiBE1VSkkRBACkCgvt26sMi+0X+EOJDMqdK0Sziy06k47LJf1jOg4tTZ2T9QtP
 OZ8fD+va/O5+q8Kna993jzcO5n0Nv+R/K3+MvUqSmdITshCIjBt3cC0n6FWndGyl
@@ -3196,7 +3174,6 @@ oLIHbQ4IMkRivPgSpuxw53Hofe7A
 pub    59A252FB1199D873
 sub    92BD2D0B5B21ABA2
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBFUBG7QBCADRWXf0Fw05qRhM4cRnGKlOW1ecue1DCxHAtFwoqmAXyTCO+tI0
 MEW5SyXUkX6FsWLl6A2y+KgOs669ogzfQ0rnZMEt4HisRp8wpgk3GWR1/9aKYz/c
@@ -3224,7 +3201,6 @@ uid    Taro L. Saito (For GitHub Actions) <leo@xerial.org>
 
 sub    8857595B73BFD468
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mDMEYuRVGhYJKwYBBAHaRw8BAQdA2Dp4m1Yhtb1g94pQzzL24FuP6b9KXF8lP9Dh
 hZnynhe0M1Rhcm8gTC4gU2FpdG8gKEZvciBHaXRIdWIgQWN0aW9ucykgPGxlb0B4
@@ -3240,7 +3216,6 @@ uid    David P. Baker <dpb@google.com>
 
 sub    A7CC6488427379A4
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBFgRFtYBCADud9fmvTI8Dbs+9GcZUIVzxkL84QYHSDxI9fF+sxfAviq1U+YJ
 a+ZLIW7HsXx8vpn3hqIqAbDxHjrb6MEJ3OWD5Ks7O9Lq7HOhtqAT/mpV3fZmf6pF
@@ -3269,7 +3244,6 @@ uid    Igor Sereda <sereda@gmail.com>
 
 sub    31ADCD8BFCB760B4
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQGiBExyNhsRBAC/W5cMapoP7NUn8S22iWG5bPw0bconApJHP4kQdT17gT2JgNJz
 BmuGWV59ZOGQkc6woeFKc1s6twlsgIL51jMeVOtgLJRGTS4So2hthNqDcgO4j8Lm
@@ -3301,7 +3275,6 @@ uid    Eric Bruneton <ebruneton@free.fr>
 
 sub    0440006D577EAE4B
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBE7JURcBCADO+9Dc4/JnB+wX+fq+Fr2zUGSPOT6/qjE5kXL4FEbJKsqDSAKG
 VnbtRrsIUdmNIFQmz71bBDFhRBbrSrkz927k8eUPhYtxE2NmmWSuKgrjF4qviPQv
@@ -3328,7 +3301,6 @@ v813ZcA=
 pub    5F7786DF73E61F56
 sub    73F7734B17EC71F4
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBGEVsM0BEADiZwFLiyjeOLeGS0jAso0pOwUigT9PpwQq7JFAuJP2i9C4Eunc
 J2HWRdMhnAY12C2MVetSwhI/4QID+rIreB7ooC4xv8sz1PIC30t2oSYtXF4w5DYh
@@ -3370,7 +3342,6 @@ vQ5j2DaSBLOabwMUVXQkTEI4NogqRRrRW90IoOM1IZxilQLrtw66+kc=
 pub    6425559C47CC79C4
 sub    D547B4A01F74AC1E
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBE3XFIUBCADcj1zw8m1evCgEMqxgOfl6L8y1tsYWsX7tVPvHEkYlXHrdcpkB
 fGuWPrauvhBmB9sBkFfxzU98Ilz3Xk9pfISYiaMUk9Mk1ZxsCoYPVhxvOSvk5LgS
@@ -3395,7 +3366,6 @@ unkajH4ViHheqLZ/7wRm6eOF
 
 pub    66B50994442D2D40
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBGDoYisBEACqUDZnT4h6ma6XIzdC6KR++uDbR2VKdhCuv0Og/sHEKkm6ZbG0
 OFB8tAaQx/WlsoQyf3DlLfUEOGDai875Aqor3fbM+E1hrZbQNfsOySKEE52k7PYe
@@ -3416,7 +3386,6 @@ uid    Szczepan Faber <szczepiq@gmail.com>
 
 sub    C0058C509A81C102
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQGNBGAofm8BDADhvXfCdHebhi2I1nd+n+1cTk0Kfv8bq4BQ1T2O85XlFpp1jaIR
 70GAm2MOt8+eEXt/TuPkVBWnJovDpBbkUfYWxSIpPxJzcxWV+4WJi/25fBOq2EuP
@@ -3452,7 +3421,6 @@ pub    6A65176A0FB1CD0B
 sub    EA8543C570FAF804
 sub    CA890A5FA09CFD80
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBFgMcBMBEAC/xcIVVOOh+F7S0OTzBlFH34s5fDbi6Zto469tZyW1peyWtXAZ
 m+2jzFfeTCHaUQO3YjoTy2fPygS4tVD+ew4EAzMG5Uti4kwWZw0PYKz2JO/gl1JY
@@ -3520,7 +3488,6 @@ uid    Colin Decker <cgdecker@google.com>
 
 sub    ABE9F3126BB741C1
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBFIXyRQBCADe285y3Pu7KzoKyP6wqeNXtvvuwMatAmPm5x/i+S8MlryqzsYa
 x6twUmXV1yKjjtGrO+9fHvTOWBfSSP+fP9KTaTQYSasoJq2Mw4cQDy1i0zrxNZUw
@@ -3555,7 +3522,6 @@ uid    Dimitry Ivanov <noties.app@gmail.com>
 
 sub    9BBDD59B9EC621AF
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBFSf+Z8BCAClJRKO/dDl1k55cP9BKpobsJEI6SInE7RDmR3NDsF4G2Hefo3z
 UZl90EYkT1aYw5tE5c/SLsUE5LO3EmrGK91HFpYDdAajg+WEyS8UDPA/npFPvoRY
@@ -3588,7 +3554,6 @@ sub    1397BC53640DB551
 sub    6494C6D6997C215E
 sub    78BD65473CB3BD13
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBFcMjNMBEAC6Wr5QuLIFgz1V1EFPlg8ty2TsjQEl4VWftUAqWlMevJFWvYEx
 BOsOZ6kNFfBfjAxgJNWTkxZrHzDl74R7KW/nUx6X57bpFjUyRaB8F3/NpWKSeIGS
@@ -3943,7 +3908,6 @@ uid    Rob Manning <robert.m.manning@gmail.com>
 
 sub    AC9F6F1991913E30
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQGiBEqXMWkRBACnsxVroe9ojc2AnRn/85KJi/Ntsbku5iJ5z72B6I+VGn/b1Xln
 kuvRJ41RLG13lKVmHtSTq2pajjmAr9jY5gS8nJ3JUES9bG3yKNN1IDswXExfAUJp
@@ -3986,7 +3950,6 @@ uid    Inderjeet Singh <inder@alumni.stanford.edu>
 
 sub    C3E640F38D845FA2
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBFZUsiQBCADGmoidvh3VvXWGdwbAtHPtDPKEebE/MfFVO+QTRbjJxphzKwAt
 mxHruikafaSTnC9FWizj99e/Yc45YZHcnt5Htmy0a7DSOQXL37rrnieZxg86tYmC
@@ -4013,7 +3976,6 @@ domz6nBt2DF400YubAZR
 pub    7A8860944FAD5F62
 sub    C189C86B813330C4
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQINBEvxja8BEADAzZOup1X0B12zJsNsDvXVIwmM6bB+uhEsUHoFTvmsEVwRoZtn
 i7Q0WSFoY+LDxbvC4Bg1+urCrUrstRJYRyF/pMqPYq/HokRlPjtrli/i3mUSd0zN
@@ -4057,7 +4019,6 @@ uid    Oleg Kalnichevski <oleg@ural.ru>
 
 sub    926DFB2EDB329089
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQGiBEPonucRBACtbhYckAoyz1tuSXYX4XiqGa5390gIMcxe2hJ+Ncx9o3zX09Im
 f8PW27BnMrz7EIydgB2wphhjfK4vkNNtm5ZDWH/zJStsk1Fe7lNuuxs8XorX1+8D
@@ -4088,7 +4049,6 @@ uid    Henri Tremblay <henri.tremblay@gmail.com>
 
 sub    9842FE565AA0601E
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQGiBEvsZw4RBADH20nX+H1xvMBYmXRj1Aae4dRr6Y6qI7QRWHO6Z7/dxr9bk/NN
 Yjq5KsVOQxZzloVdtqx75rznT7fZq98g7Nq9IeEtB6k4tnh6XQLhljJMk0a3mzdt
@@ -4121,7 +4081,6 @@ uid    Wouter van Oortmerssen <aardappel@gmail.com>
 
 sub    AE6B5325E74ED034
 -----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: BCPG v@RELEASE_NAME@
 
 mQENBFnyVlkBCACe8zGkIlDV0dUKmk9PWe2Hw8qM9DdPbtpUOpmUOidGY5svQDL3
 eqvHk85TbxqFEe3Qbjjt+R+iApFuXy5kmueXTvwCm7nAU+k/pZtPuzHyhDs3iFFH
