@@ -119,6 +119,6 @@
         android:layout_height="match_parent"
         android:divider="@drawable/divider"
         android:dividerHeight="1dp"
-        tools:listitem="@layout/fragment_note_share_item" />
+        tools:listitem="@layout/item_note_share" />
 
 </LinearLayout>

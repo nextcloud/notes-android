@@ -32,4 +32,7 @@
 
     <color name="widget_background">#dd000000</color>
     <color name="widget_foreground">#d8d8d8</color>
+
+    <color name="nc_grey">#222222</color>
+    <color name="icon_on_nc_grey">#ffffff</color>
 </resources>

@@ -1,4 +1,4 @@
-package it.niedermann.owncloud.notes.share;
+package it.niedermann.owncloud.notes.share.operations;
 
 
 import android.content.Context;
