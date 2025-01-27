@@ -46,6 +46,15 @@
     <string name="note_share_fragment_shared_with_you">Shared with you by %1$s</string>
     <string name="note_share_fragment_search_text">Name, Federated Cloud ID or email address…</string>
     <string name="note_share_fragment_share_link">Share link</string>
+    <string name="note_share_fragment_resharing_not_allowed">Policy or permissions prevent resharing</string>
+    <string name="note_share_fragment_could_not_retrieve_url">Could not retrieve URL</string>
+    <string name="note_share_fragment_subject_shared_with_you">\"%1$s\" has been shared with you</string>
+
+    <string name="copy_link">Copy link</string>
+    <string name="clipboard_text_copied">Link copied</string>
+    <string name="clipboard_no_text_to_copy">Received no text to copy to clipboard</string>
+    <string name="clipboard_unexpected_error">Unexpected error while copying to clipboard</string>
+    <string name="clipboard_label">Text copied from %1$s</string>
 
     <string name="listview_updated_today">Today</string>
     <string name="listview_updated_yesterday">Yesterday</string>
