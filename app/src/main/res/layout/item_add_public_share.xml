@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Nextcloud - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2020 Andy Scherzinger <info@andy-scherzinger.de>
+  ~ SPDX-FileCopyrightText: 2020 Tobias Kaminsky <tobias@kaminsky.me>
+  ~ SPDX-FileCopyrightText: 2020 Nextcloud GmbH
+  ~ SPDX-License-Identifier: AGPL-3.0-or-later OR GPL-2.0-only
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/add_public_share"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/sharee_list_item_size"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="@dimen/default_icon_size"
+        android:layout_height="@dimen/default_icon_size"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/spacer_2x"
+        android:layout_marginEnd="@dimen/spacer_2x"
+        android:background="@drawable/round_bgnd"
+        android:contentDescription="@string/note_share_fragment_share_icon_content_description"
+        android:padding="@dimen/spacer_1x"
+        android:src="@drawable/shared_via_link" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:text="@string/share_via_link_section_title"
+        android:textSize="@dimen/note_font_size_small" />
+
+    <ImageView
+        android:id="@+id/add_new_public_share_link"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:contentDescription="@string/add_new_public_share"
+        android:paddingStart="@dimen/spacer_2x"
+        android:paddingEnd="@dimen/spacer_2x"
+        android:src="@drawable/ic_plus" />
+</LinearLayout>

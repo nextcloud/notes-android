@@ -29,6 +29,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.snackbar.Snackbar;
+import com.owncloud.android.lib.common.utils.Log_OC;
+import com.owncloud.android.lib.resources.shares.OCShare;
+import com.owncloud.android.lib.resources.shares.ShareType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,13 +42,13 @@ import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.databinding.FragmentNoteShareBinding;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.share.adapter.ShareeListAdapter;
+import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
 import it.niedermann.owncloud.notes.shared.user.User;
 import it.niedermann.owncloud.notes.shared.util.ClipboardUtil;
 import it.niedermann.owncloud.notes.shared.util.extensions.BundleExtensionsKt;
 
-public class NoteShareFragment extends Fragment implements ShareeListAdapterListener,
-        DisplayUtils.AvatarGenerationListener,
-        Injectable, FileDetailsSharingMenuBottomSheetActions, QuickSharingPermissionsBottomSheetDialog.QuickPermissionSharingBottomSheetActions {
+public class NoteShareFragment extends Fragment implements ShareeListAdapterListener {
 
     private static final String TAG = "NoteShareFragment";
     private static final String ARG_NOTE = "NOTE";
@@ -107,11 +110,11 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentNoteShareBinding.inflate(inflater, container, false);
 
-        binding.sharesList.setAdapter(new ShareeListAdapter(fileActivity,
+        binding.sharesList.setAdapter(new ShareeListAdapter(requireActivity(),
                 new ArrayList<>(),
                 this,
                 user,
-                note));
+                account));
 
         binding.sharesList.setLayoutManager(new LinearLayoutManager(requireContext()));
 
@@ -223,7 +226,7 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
         }
     }
 
-    private void copyInternalLink() {
+    public void copyInternalLink() {
         if (account == null) {
             BrandedSnackbar.make(requireView(), getString(R.string.note_share_fragment_could_not_retrieve_url), Snackbar.LENGTH_LONG)
                     .setAnchorView(binding.sharesList)
@@ -438,7 +441,8 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
         ShareeListAdapter adapter = (ShareeListAdapter) binding.sharesList.getAdapter();
 
         if (adapter == null) {
-            DisplayUtils.showSnackMessage(getView(), getString(R.string.could_not_retrieve_shares));
+            BrandedSnackbar.make(requireView(), getString(R.string.could_not_retrieve_shares), Snackbar.LENGTH_LONG)
+                    .show();
             return;
         }
         adapter.getShares().clear();
@@ -484,7 +488,8 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
         if (intent.resolveActivity(requireContext().getPackageManager()) != null) {
             onContactSelectionResultLauncher.launch(intent);
         } else {
-            DisplayUtils.showSnackMessage(requireActivity(), getString(R.string.file_detail_sharing_fragment_no_contact_app_message));
+            BrandedSnackbar.make(requireView(), getString(R.string.file_detail_sharing_fragment_no_contact_app_message), Snackbar.LENGTH_LONG)
+                    .show();
         }
     }
 
@@ -507,16 +512,19 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
                         binding.searchView.requestFocus();
                     });
                 } else {
-                    DisplayUtils.showSnackMessage(binding.getRoot(), R.string.email_pick_failed);
+                    BrandedSnackbar.make(requireView(), getString(R.string.email_pick_failed), Snackbar.LENGTH_LONG)
+                            .show();
                     Log_OC.e(NoteShareFragment.class.getSimpleName(), "Failed to pick email address.");
                 }
             } else {
-                DisplayUtils.showSnackMessage(binding.getRoot(), R.string.email_pick_failed);
+                BrandedSnackbar.make(requireView(), getString(R.string.email_pick_failed), Snackbar.LENGTH_LONG)
+                        .show();
                 Log_OC.e(NoteShareFragment.class.getSimpleName(), "Failed to pick email address as no Email found.");
             }
             cursor.close();
         } else {
-            DisplayUtils.showSnackMessage(binding.getRoot(), R.string.email_pick_failed);
+            BrandedSnackbar.make(requireView(), getString(R.string.email_pick_failed), Snackbar.LENGTH_LONG)
+                    .show();
             Log_OC.e(NoteShareFragment.class.getSimpleName(), "Failed to pick email address as Cursor is null.");
         }
     }
@@ -534,8 +542,8 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        FileExtensionsKt.logFileSize(file, TAG);
-        outState.putParcelable(ARG_NOTE, file);
+        outState.putSerializable(ARG_NOTE, note);
+        outState.putSerializable(ARG_ACCOUNT, account);
         outState.putParcelable(ARG_USER, user);
     }
 
@@ -576,7 +584,8 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
         unshareWith(share);
         ShareeListAdapter adapter = (ShareeListAdapter) binding.sharesList.getAdapter();
         if (adapter == null) {
-            DisplayUtils.showSnackMessage(getView(), getString(R.string.failed_update_ui));
+            BrandedSnackbar.make(requireView(), getString(R.string.email_pick_failed), Snackbar.LENGTH_LONG)
+                    .show();
             return;
         }
         adapter.remove(share);
@@ -612,7 +621,8 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
                 if (isGranted) {
                     pickContactEmail();
                 } else {
-                    DisplayUtils.showSnackMessage(binding.getRoot(), R.string.contact_no_permission);
+                    BrandedSnackbar.make(binding.getRoot(), getString(R.string.contact_no_permission), Snackbar.LENGTH_LONG)
+                            .show();
                 }
             });
 
@@ -623,13 +633,15 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
                         if (result.getResultCode() == Activity.RESULT_OK) {
                             Intent intent = result.getData();
                             if (intent == null) {
-                                DisplayUtils.showSnackMessage(binding.getRoot(), R.string.email_pick_failed);
+                                BrandedSnackbar.make(binding.getRoot(), getString(R.string.email_pick_failed), Snackbar.LENGTH_LONG)
+                                        .show();
                                 return;
                             }
 
                             Uri contactUri = intent.getData();
                             if (contactUri == null) {
-                                DisplayUtils.showSnackMessage(binding.getRoot(), R.string.email_pick_failed);
+                                BrandedSnackbar.make(binding.getRoot(), getString(R.string.email_pick_failed), Snackbar.LENGTH_LONG)
+                                        .show();
                                 return;
                             }
 
