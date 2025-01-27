@@ -55,7 +55,9 @@
     <string name="email_pick_failed">Failed to pick email address.</string>
     <string name="failed_update_ui">Failed to update UI</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">No app available to select contacts</string>
+    <string name="activity_chooser_title">Send link to…</string>
 
+    <string name="activity_chooser_send_file_title">Send</string>
     <string name="share_internal_link_to_folder_text">Internal share link only works for users with access to this folder</string>
     <string name="share_internal_link_to_file_text">Internal share link only works for users with access to this file</string>
     <string name="share_internal_link">Share internal link</string>

@@ -22,6 +22,10 @@
 
     <dimen name="avatar_size">36dp</dimen>
 
+    <dimen name="activity_row_layout_min_width_independent">196dip</dimen>
+    <dimen name="activity_row_layout_height">48dp</dimen>
+
+
     <dimen name="spacer_activity_sides">0dp</dimen>
 
     <dimen name="default_icon_size">40dp</dimen>
