@@ -53,7 +53,9 @@ import it.niedermann.owncloud.notes.share.dialog.SharePasswordDialogFragment;
 import it.niedermann.owncloud.notes.share.listener.FileDetailsSharingMenuBottomSheetActions;
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
 import it.niedermann.owncloud.notes.share.model.UsersAndGroupsSearchConfig;
+import it.niedermann.owncloud.notes.share.operations.RetrieveHoverCardAsyncTask;
 import it.niedermann.owncloud.notes.shared.user.User;
+import it.niedermann.owncloud.notes.shared.util.DisplayUtils;
 import it.niedermann.owncloud.notes.shared.util.clipboard.ClipboardUtil;
 import it.niedermann.owncloud.notes.shared.util.extensions.BundleExtensionsKt;
 
@@ -449,10 +451,10 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
     public void showProfileBottomSheet(User user, String shareWith) {
         if (user.getServer().getVersion().isNewerOrEqual(NextcloudVersion.nextcloud_23)) {
             new RetrieveHoverCardAsyncTask(user,
+                    account,
                     shareWith,
-                    fileActivity,
-                    clientFactory,
-                    viewThemeUtils).execute();
+                    getActivity(),
+                    clientFactory).execute();
         }
     }
 
