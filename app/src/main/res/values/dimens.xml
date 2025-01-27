@@ -24,7 +24,10 @@
 
     <dimen name="activity_row_layout_min_width_independent">196dip</dimen>
     <dimen name="activity_row_layout_height">48dp</dimen>
-
+    <dimen name="bottom_sheet_text_start_margin">40dp</dimen>
+    <dimen name="bottom_sheet_text_size">16sp</dimen>
+    <dimen name="bottom_sheet_item_height">56dp</dimen>
+    <dimen name="dialog_padding">24dp</dimen>
 
     <dimen name="spacer_activity_sides">0dp</dimen>
 

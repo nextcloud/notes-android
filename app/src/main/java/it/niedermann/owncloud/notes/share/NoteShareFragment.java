@@ -45,14 +45,16 @@ import it.niedermann.owncloud.notes.databinding.FragmentNoteShareBinding;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.share.adapter.ShareeListAdapter;
+import it.niedermann.owncloud.notes.share.dialog.FileDetailSharingMenuBottomSheetDialog;
 import it.niedermann.owncloud.notes.share.dialog.ShareLinkToDialog;
+import it.niedermann.owncloud.notes.share.listener.FileDetailsSharingMenuBottomSheetActions;
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
 import it.niedermann.owncloud.notes.share.model.UsersAndGroupsSearchConfig;
 import it.niedermann.owncloud.notes.shared.user.User;
 import it.niedermann.owncloud.notes.shared.util.clipboard.ClipboardUtil;
 import it.niedermann.owncloud.notes.shared.util.extensions.BundleExtensionsKt;
 
-public class NoteShareFragment extends Fragment implements ShareeListAdapterListener {
+public class NoteShareFragment extends Fragment implements ShareeListAdapterListener, FileDetailsSharingMenuBottomSheetActions {
 
     private static final String TAG = "NoteShareFragment";
     private static final String ARG_NOTE = "NOTE";
@@ -321,7 +323,7 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
         }
     }
 
-    private void createSecureFileDrop() {
+    public void createSecureFileDrop() {
         fileOperationsHelper.shareFolderViaSecureFileDrop(file);
     }
 
@@ -367,24 +369,13 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
         }
     }
 
-    /**
-     * show share action bottom sheet
-     *
-     * @param share
-     */
     @Override
-    @VisibleForTesting
     public void showSharingMenuActionSheet(OCShare share) {
-        if (fileActivity != null && !fileActivity.isFinishing()) {
-            new FileDetailSharingMenuBottomSheetDialog(fileActivity, this, share, viewThemeUtils).show();
+        if (getActivity() != null && !getActivity().isFinishing()) {
+            new FileDetailSharingMenuBottomSheetDialog(getActivity(), this, share).show();
         }
     }
 
-    /**
-     * show quick sharing permission dialog
-     *
-     * @param share
-     */
     @Override
     public void showPermissionsDialog(OCShare share) {
         new QuickSharingPermissionsBottomSheetDialog(fileActivity, this, share, viewThemeUtils).show();
