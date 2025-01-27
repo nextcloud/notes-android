@@ -14,6 +14,7 @@
     <color name="primary">#ffffff</color>
     <color name="accent">#121212</color>
     <color name="danger">#d40000</color>
+    <color name="text_color">#333333</color>
 
     <color name="defaultBrand">#0082C9</color>
 
