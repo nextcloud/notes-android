@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Nextcloud - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2021 Tobias Kaminsky <tobias@kaminsky.me>
+  ~ SPDX-License-Identifier: AGPL-3.0-or-later OR GPL-2.0-only
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/bottom_sheet_item_height"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/default_icon_size"
+            android:layout_height="@dimen/default_icon_size"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="@dimen/spacer_1x"
+            android:layout_marginEnd="@dimen/spacer_2x"
+            android:layout_marginLeft="@dimen/spacer_2x"
+            android:layout_marginRight="@dimen/spacer_2x"
+            android:layout_marginStart="@dimen/spacer_2x"
+            android:layout_marginTop="@dimen/spacer_1x"
+            android:contentDescription="@string/note_share_fragment_user_icon_content_description"
+            android:src="@drawable/ic_account_circle_grey_24dp" />
+
+        <TextView
+            android:id="@+id/displayName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingTop="@dimen/spacer_2x"
+            android:paddingBottom="@dimen/spacer_2x"
+            tools:text="Christine Scott"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/bottom_sheet_text_size" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/action_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:id="@+id/creators"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"></LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

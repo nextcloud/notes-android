@@ -70,6 +70,10 @@
     <string name="share_link_password_title">Enter a password</string>
     <string name="common_ok">OK</string>
     <string name="common_delete">Delete</string>
+    <string name="write_email">Send email</string>
+    <string name="no_browser_available">No app available to handle links</string>
+    <string name="no_email_app_available">No App available to handle mail address</string>
+    <string name="no_actions">No actions for this user</string>
 
     <string name="email_pick_failed">Failed to pick email address.</string>
     <string name="failed_update_ui">Failed to update UI</string>
