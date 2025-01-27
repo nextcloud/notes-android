@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later OR GPL-2.0-only
  */
 
-package it.niedermann.owncloud.notes.shared.util
+package it.niedermann.owncloud.notes.shared.util.clipboard
 
 import android.app.Activity
 import android.content.ClipData

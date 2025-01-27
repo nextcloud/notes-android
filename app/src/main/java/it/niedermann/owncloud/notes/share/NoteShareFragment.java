@@ -3,6 +3,7 @@ package it.niedermann.owncloud.notes.share;
 import android.Manifest;
 import android.app.Activity;
 import android.app.SearchManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -15,6 +16,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -43,10 +45,11 @@ import it.niedermann.owncloud.notes.databinding.FragmentNoteShareBinding;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.share.adapter.ShareeListAdapter;
+import it.niedermann.owncloud.notes.share.dialog.ShareLinkToDialog;
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
 import it.niedermann.owncloud.notes.share.model.UsersAndGroupsSearchConfig;
 import it.niedermann.owncloud.notes.shared.user.User;
-import it.niedermann.owncloud.notes.shared.util.ClipboardUtil;
+import it.niedermann.owncloud.notes.shared.util.clipboard.ClipboardUtil;
 import it.niedermann.owncloud.notes.shared.util.extensions.BundleExtensionsKt;
 
 public class NoteShareFragment extends Fragment implements ShareeListAdapterListener {
@@ -55,6 +58,7 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
     private static final String ARG_NOTE = "NOTE";
     private static final String ARG_ACCOUNT = "ACCOUNT";
     private static final String ARG_USER = "USER";
+    public static final String FTAG_CHOOSER_DIALOG = "CHOOSER_DIALOG";
 
     private FragmentNoteShareBinding binding;
     private Note note;
@@ -157,14 +161,17 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
     private void setupView() {
         setShareWithYou();
 
-        OCFile parentFile = fileDataStorageManager.getFileById(file.getParentId());
+        // OCFile parentFile = fileDataStorageManager.getFileById(file.getParentId());
 
-        FileDetailSharingFragmentHelper.setupSearchView(
-                (SearchManager) fileActivity.getSystemService(Context.SEARCH_SERVICE),
-                binding.searchView,
-                fileActivity.getComponentName());
-        viewThemeUtils.androidx.themeToolbarSearchView(binding.searchView);
+        setupSearchView((SearchManager) requireContext().getSystemService(Context.SEARCH_SERVICE), binding.searchView, requireActivity().getComponentName());
+        // viewThemeUtils.androidx.themeToolbarSearchView(binding.searchView);
 
+        binding.searchView.setQueryHint(getResources().getString(R.string.note_share_fragment_resharing_not_allowed));
+        binding.searchView.setInputType(InputType.TYPE_NULL);
+        binding.pickContactEmailBtn.setVisibility(View.GONE);
+        disableSearchView(binding.searchView);
+
+        /*
         if (file.canReshare()) {
             binding.searchView.setQueryHint(getResources().getString(R.string.note_share_fragment_search_text));
         } else {
@@ -173,6 +180,39 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
             binding.pickContactEmailBtn.setVisibility(View.GONE);
             disableSearchView(binding.searchView);
         }
+         */
+
+    }
+
+    private void setupSearchView(@Nullable SearchManager searchManager, SearchView searchView,
+                                       ComponentName componentName) {
+        if (searchManager == null) {
+            searchView.setVisibility(View.GONE);
+            return;
+        }
+
+        // assumes parent activity is the searchable activity
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName));
+
+        // do not iconify the widget; expand it by default
+        searchView.setIconifiedByDefault(false);
+
+        // avoid fullscreen with softkeyboard
+        searchView.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // return true to prevent the query from being processed;
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // leave it for the parent listener in the hierarchy / default behaviour
+                return false;
+            }
+        });
     }
 
     private void disableSearchView(View view) {
@@ -249,7 +289,7 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
 
         String[] packagesToExclude = new String[] { requireContext().getPackageName() };
         DialogFragment chooserDialog = ShareLinkToDialog.newInstance(intentToShareLink, packagesToExclude);
-        chooserDialog.show(getParentFragmentManager(), FileDisplayActivity.FTAG_CHOOSER_DIALOG);
+        chooserDialog.show(getParentFragmentManager(), FTAG_CHOOSER_DIALOG);
     }
 
     // TODO: Check account.getUrl returning base url?
