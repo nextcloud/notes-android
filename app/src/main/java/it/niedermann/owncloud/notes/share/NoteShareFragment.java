@@ -46,6 +46,7 @@ import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.share.adapter.ShareeListAdapter;
 import it.niedermann.owncloud.notes.share.dialog.FileDetailSharingMenuBottomSheetDialog;
+import it.niedermann.owncloud.notes.share.dialog.QuickSharingPermissionsBottomSheetDialog;
 import it.niedermann.owncloud.notes.share.dialog.ShareLinkToDialog;
 import it.niedermann.owncloud.notes.share.listener.FileDetailsSharingMenuBottomSheetActions;
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
@@ -54,7 +55,7 @@ import it.niedermann.owncloud.notes.shared.user.User;
 import it.niedermann.owncloud.notes.shared.util.clipboard.ClipboardUtil;
 import it.niedermann.owncloud.notes.shared.util.extensions.BundleExtensionsKt;
 
-public class NoteShareFragment extends Fragment implements ShareeListAdapterListener, FileDetailsSharingMenuBottomSheetActions {
+public class NoteShareFragment extends Fragment implements ShareeListAdapterListener, FileDetailsSharingMenuBottomSheetActions, QuickSharingPermissionsBottomSheetDialog.QuickPermissionSharingBottomSheetActions {
 
     private static final String TAG = "NoteShareFragment";
     private static final String ARG_NOTE = "NOTE";
@@ -378,7 +379,7 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
 
     @Override
     public void showPermissionsDialog(OCShare share) {
-        new QuickSharingPermissionsBottomSheetDialog(fileActivity, this, share, viewThemeUtils).show();
+        new QuickSharingPermissionsBottomSheetDialog(getActivity(), this, share).show();
     }
 
     /**
