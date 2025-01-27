@@ -44,6 +44,7 @@ import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.share.adapter.ShareeListAdapter;
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
+import it.niedermann.owncloud.notes.share.model.UsersAndGroupsSearchConfig;
 import it.niedermann.owncloud.notes.shared.user.User;
 import it.niedermann.owncloud.notes.shared.util.ClipboardUtil;
 import it.niedermann.owncloud.notes.shared.util.extensions.BundleExtensionsKt;
@@ -144,13 +145,13 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
     @Override
     public void onStart() {
         super.onStart();
-        searchConfig.setSearchOnlyUsers(file.isEncrypted());
+        UsersAndGroupsSearchConfig.INSTANCE.setSearchOnlyUsers(true);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        searchConfig.reset();
+        UsersAndGroupsSearchConfig.INSTANCE.reset();
     }
 
     private void setupView() {
