@@ -34,6 +34,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.owncloud.android.lib.common.utils.Log_OC;
 import com.owncloud.android.lib.resources.shares.OCShare;
 import com.owncloud.android.lib.resources.shares.ShareType;
+import com.owncloud.android.lib.resources.status.NextcloudVersion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +49,7 @@ import it.niedermann.owncloud.notes.share.adapter.ShareeListAdapter;
 import it.niedermann.owncloud.notes.share.dialog.FileDetailSharingMenuBottomSheetDialog;
 import it.niedermann.owncloud.notes.share.dialog.QuickSharingPermissionsBottomSheetDialog;
 import it.niedermann.owncloud.notes.share.dialog.ShareLinkToDialog;
+import it.niedermann.owncloud.notes.share.dialog.SharePasswordDialogFragment;
 import it.niedermann.owncloud.notes.share.listener.FileDetailsSharingMenuBottomSheetActions;
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
 import it.niedermann.owncloud.notes.share.model.UsersAndGroupsSearchConfig;
@@ -431,7 +433,7 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
      * @param askForPassword if true, password is optional
      */
     public void requestPasswordForShareViaLink(boolean createShare, boolean askForPassword) {
-        SharePasswordDialogFragment dialog = SharePasswordDialogFragment.newInstance(file,
+        SharePasswordDialogFragment dialog = SharePasswordDialogFragment.newInstance(note,
                 createShare,
                 askForPassword);
         dialog.show(getChildFragmentManager(), SharePasswordDialogFragment.PASSWORD_FRAGMENT);

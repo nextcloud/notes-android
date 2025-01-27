@@ -61,6 +61,16 @@
     <string name="note_share_fragment_could_not_retrieve_url">Could not retrieve URL</string>
     <string name="note_share_fragment_subject_shared_with_you">\"%1$s\" has been shared with you</string>
     <string name="contact_no_permission">Contact permission is required.</string>
+    <string name="share_link_empty_password">You must enter a password</string>
+    <string name="hint_password">Password</string>
+    <string name="share_link_optional_password_title">Enter an optional password</string>
+    <string name="common_skip">Skip</string>
+    <string name="common_cancel">Cancel</string>
+    <string name="empty" translatable="false" />
+    <string name="share_link_password_title">Enter a password</string>
+    <string name="common_ok">OK</string>
+    <string name="common_delete">Delete</string>
+
     <string name="email_pick_failed">Failed to pick email address.</string>
     <string name="failed_update_ui">Failed to update UI</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">No app available to select contacts</string>
