@@ -38,6 +38,15 @@
 
     <string name="change_category_title">Choose a category</string>
 
+    <string name="note_share_fragment_copy_icon_content_description">note share copy icon</string>
+    <string name="note_share_fragment_more_icon_content_description">note share more icon</string>
+    <string name="note_share_fragment_icon_content_description">note share icon</string>
+    <string name="note_share_fragment_user_icon_content_description">note share user icon</string>
+    <string name="note_share_fragment_contact_icon_content_description">note share contact icon</string>
+    <string name="note_share_fragment_shared_with_you">Shared with you by %1$s</string>
+    <string name="note_share_fragment_search_text">Name, Federated Cloud ID or email address…</string>
+    <string name="note_share_fragment_share_link">Share link</string>
+
     <string name="listview_updated_today">Today</string>
     <string name="listview_updated_yesterday">Yesterday</string>
     <string name="listview_updated_this_week">This week</string>

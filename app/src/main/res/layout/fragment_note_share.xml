@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Nextcloud - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2021 TSI-mc
+  ~ SPDX-FileCopyrightText: 2018 Andy Scherzinger <info@andy-scherzinger.de>
+  ~ SPDX-License-Identifier: AGPL-3.0-or-later OR GPL-2.0-only
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/shareContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/spacer_1hx">
+
+    <LinearLayout
+        android:id="@+id/search_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/spacer_2x"
+        android:paddingEnd="@dimen/zero">
+
+        <ImageView
+            android:id="@+id/searchViewIcon"
+            android:layout_width="@dimen/default_icon_size"
+            android:layout_height="@dimen/default_icon_size"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="@string/note_share_fragment_user_icon_content_description"
+            android:padding="@dimen/spacer_1x"
+            android:src="@drawable/ic_search_grey600_24dp" />
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            style="@style/nextcloud.SearchView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacer_1hx"
+            android:layout_weight="1"
+            android:hint="@string/note_share_fragment_search_text"
+            app:searchIcon="@null" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/pick_contact_email_btn"
+            android:layout_width="@dimen/minimum_size_for_touchable_area"
+            android:layout_height="@dimen/minimum_size_for_touchable_area"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/spacer_1hx"
+            android:contentDescription="@string/note_share_fragment_contact_icon_content_description"
+            android:padding="12dp"
+            android:src="@drawable/ic_contact_book" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/shared_with_you_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacer_1x"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/spacer_2x"
+        android:paddingTop="@dimen/spacer_2x"
+        android:paddingRight="@dimen/spacer_2x">
+
+        <ImageView
+            android:id="@+id/shared_with_you_avatar"
+            android:layout_width="@dimen/default_icon_size"
+            android:layout_height="@dimen/default_icon_size"
+            android:contentDescription="@string/note_share_fragment_user_icon_content_description"
+            android:src="@drawable/ic_account_circle_grey_24dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/spacer_1x"
+            android:paddingTop="@dimen/spacer_1x"
+            android:paddingEnd="@dimen/spacer_2x">
+
+            <TextView
+                android:id="@+id/shared_with_you_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/note_share_fragment_shared_with_you"
+                android:textSize="@dimen/note_font_size_small" />
+
+            <LinearLayout
+                android:id="@+id/shared_with_you_note_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/spacer_1x"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:contentDescription="@string/note_share_fragment_icon_content_description"
+                    android:src="@drawable/ic_notes" />
+
+                <TextView
+                    android:id="@+id/shared_with_you_note"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingStart="@dimen/spacer_1x"
+                    android:paddingEnd="@dimen/spacer_1x"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/sharesList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@drawable/divider"
+        android:dividerHeight="1dp"
+        tools:listitem="@layout/fragment_note_share_item" />
+
+</LinearLayout>

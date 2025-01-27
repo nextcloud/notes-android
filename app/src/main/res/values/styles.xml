@@ -64,6 +64,11 @@
         <item name="android:paddingEnd">@dimen/spacer_activity_sides</item>
     </style>
 
+    <style name="nextcloud.SearchView" parent="Widget.AppCompat.SearchView">
+        <item name="closeIcon">@drawable/ic_clear_grey_24dp</item>
+        <item name="searchIcon">@drawable/ic_search_grey600_24dp</item>
+    </style>
+
     <style name="tabStyle" parent="Widget.Material3.TabLayout">
         <item name="backgroundColor">@android:color/transparent</item>
         <item name="itemBackground">@android:color/transparent</item>
