@@ -23,7 +23,7 @@
         android:layout_height="@dimen/default_icon_size"
         android:layout_gravity="center_vertical"
         android:layout_marginEnd="@dimen/spacer_2x"
-        android:contentDescription="@string/activity_icon" />
+        android:contentDescription="@string/note_share_fragment_activity_icon_content_description" />
 
     <TextView
         android:id="@+id/title"

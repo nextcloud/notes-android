@@ -47,6 +47,7 @@
         <item>@string/link_share_view_only</item>
         <item>@string/link_share_editing</item>
     </string-array>
+    <string name="note_share_fragment_activity_icon_content_description">note activity icon</string>
     <string name="note_share_fragment_share_icon_content_description">note share icon</string>
     <string name="note_share_fragment_external_icon_content_description">note share external icon</string>
     <string name="note_share_fragment_copy_icon_content_description">note share copy icon</string>
