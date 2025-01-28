@@ -7,6 +7,8 @@
 package it.niedermann.owncloud.notes.main;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,7 +20,6 @@ import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.view.ActionMode.Callback;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.selection.SelectionTracker;
 
@@ -32,7 +33,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
-import it.niedermann.owncloud.notes.share.NoteShareFragment;
+import it.niedermann.owncloud.notes.share.NoteShareActivity;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
 public class MultiSelectedActionModeCallback implements Callback {
@@ -55,8 +56,11 @@ public class MultiSelectedActionModeCallback implements Callback {
     private final SelectionTracker<Long> tracker;
     @NonNull
     private final FragmentManager fragmentManager;
+    @NonNull
+    private final MainActivity mainActivity;
 
     public MultiSelectedActionModeCallback(
+            @NonNull MainActivity mainActivity,
             @NonNull Context context,
             @NonNull View view,
             @NonNull View anchorView,
@@ -65,6 +69,7 @@ public class MultiSelectedActionModeCallback implements Callback {
             boolean canMoveNoteToAnotherAccounts,
             @NonNull SelectionTracker<Long> tracker,
             @NonNull FragmentManager fragmentManager) {
+        this.mainActivity = mainActivity;
         this.context = context;
         this.view = view;
         this.anchorView = anchorView;
@@ -161,11 +166,12 @@ public class MultiSelectedActionModeCallback implements Callback {
                     currentAccount$.removeObservers(lifecycleOwner);
                     executor.submit(() -> {{
                         final var note = mainViewModel.getFullNote(selection.get(0));
-                        final var noteShareFragment = NoteShareFragment.newInstance(note, account);
-                        fragmentManager.findFragmentById(R.id.fragment_container_view);
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(android.R.id.content, noteShareFragment);
-                        fragmentTransaction.commit();
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable(NoteShareActivity.ARG_NOTE, note);
+                        bundle.putSerializable(NoteShareActivity.ARG_ACCOUNT, account);
+                        Intent intent = new Intent(mainActivity, NoteShareActivity.class);
+                        intent.putExtras(bundle);
+                        mainActivity.startActivity(intent);
                     }});
                 });
             } else {
