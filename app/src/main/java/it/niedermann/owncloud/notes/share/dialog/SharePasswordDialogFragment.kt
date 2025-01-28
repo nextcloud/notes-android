@@ -138,17 +138,23 @@ class SharePasswordDialogFragment : DialogFragment() {
     }
 
     private fun setPassword(createShare: Boolean, note: Note?, password: String?) {
+        /*
         val fileOperationsHelper = (requireActivity() as FileActivity).fileOperationsHelper ?: return
         if (createShare) {
             fileOperationsHelper.shareFileViaPublicShare(note, password)
         } else {
             fileOperationsHelper.setPasswordToShare(share, password)
         }
+         */
+
     }
 
     private fun setPassword(share: OCShare, password: String?) {
-        val fileOperationsHelper = (requireActivity() as FileActivity).fileOperationsHelper ?: return
+        /*
+         val fileOperationsHelper = (requireActivity() as FileActivity).fileOperationsHelper ?: return
         fileOperationsHelper.setPasswordToShare(share, password)
+         */
+
     }
 
     override fun onDestroyView() {

@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.nextcloud.android.lib.resources.files.FileDownloadLimit;
 import com.owncloud.android.lib.resources.shares.OCShare;
 import com.owncloud.android.lib.resources.shares.ShareType;
 
@@ -59,16 +58,7 @@ public class LinkShareViewHolder extends RecyclerView.ViewHolder {
             // viewThemeUtils.platform.colorImageViewBackgroundAndIcon(binding.icon);
         }
 
-        FileDownloadLimit downloadLimit = publicShare.getFileDownloadLimit();
-        if (downloadLimit != null && downloadLimit.getLimit() > 0) {
-            int remaining = downloadLimit.getLimit() - downloadLimit.getCount();
-            String text = context.getResources().getQuantityString(R.plurals.share_download_limit_description, remaining, remaining);
-
-            binding.subline.setText(text);
-            binding.subline.setVisibility(View.VISIBLE);
-        } else {
-            binding.subline.setVisibility(View.GONE);
-        }
+        binding.subline.setVisibility(View.GONE);
 
         String permissionName = SharingMenuHelper.getPermissionName(context, publicShare);
         setPermissionName(publicShare, permissionName);
