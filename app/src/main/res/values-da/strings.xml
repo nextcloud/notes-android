@@ -247,8 +247,8 @@
     <string name="settings_notes_path_success">Mappe for nye noter: %1$s</string>
     <string name="settings_file_suffix">Fil-endelse</string>
     <string name="settings_file_suffix_description">Fil-endelse for nye noter i Nextcloud</string>
-    <string name="settings_file_suffix_success">Ny fil suffiks: %1$s</string>
-    <string name="http_status_code">HTTP status kode: %1$d</string>
+    <string name="settings_file_suffix_success">Ny filsuffiks: %1$s</string>
+    <string name="http_status_code">HTTP statuskode: %1$d</string>
     <string name="progress_import_indeterminate">Importerer noter...</string>
     <string name="progress_import">Importerer note %1$d af %2$d...</string>
     <string name="action_back">Tilbage</string>
