@@ -46,6 +46,7 @@ import it.niedermann.owncloud.notes.branding.BrandedActivity;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ActivityNoteShareBinding;
+import it.niedermann.owncloud.notes.persistence.ShareRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.share.adapter.ShareeListAdapter;
@@ -56,6 +57,7 @@ import it.niedermann.owncloud.notes.share.dialog.SharePasswordDialogFragment;
 import it.niedermann.owncloud.notes.share.helper.UsersAndGroupsSearchProvider;
 import it.niedermann.owncloud.notes.share.listener.FileDetailsSharingMenuBottomSheetActions;
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
+import it.niedermann.owncloud.notes.share.model.ShareesData;
 import it.niedermann.owncloud.notes.share.model.UsersAndGroupsSearchConfig;
 import it.niedermann.owncloud.notes.share.operations.ClientFactoryImpl;
 import it.niedermann.owncloud.notes.share.operations.RetrieveHoverCardAsyncTask;
@@ -146,8 +148,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
     }
 
-    private void setupSearchView(@Nullable SearchManager searchManager,
-                                       ComponentName componentName) {
+    private void setupSearchView(@Nullable SearchManager searchManager, ComponentName componentName) {
         if (searchManager == null) {
             binding.searchView.setVisibility(View.GONE);
             return;
@@ -162,8 +163,8 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         // avoid fullscreen with softkeyboard
         binding.searchView.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
 
-        UsersAndGroupsSearchProvider provider = new UsersAndGroupsSearchProvider(account, clientFactory.create());
-
+        ShareRepository repository = ShareRepository.getInstance(getApplicationContext());
+        UsersAndGroupsSearchProvider provider = new UsersAndGroupsSearchProvider(this, account, repository);
         binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -174,9 +175,10 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                Log_OC.e(NoteShareActivity.class.getSimpleName(), "Failed to pick email address as Cursor is null." + newText);
-
-                // leave it for the parent listener in the hierarchy / default behaviour
+                new Thread(() -> {{
+                    ShareesData data = provider.searchForUsersOrGroups(newText);
+                    Log_OC.e(NoteShareActivity.class.getSimpleName(), "Fetched" + newText);
+                }}).start();
                 return false;
             }
         });
