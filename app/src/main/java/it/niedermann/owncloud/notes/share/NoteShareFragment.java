@@ -3,8 +3,10 @@ package it.niedermann.owncloud.notes.share;
 import android.Manifest;
 import android.app.Activity;
 import android.app.SearchManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -15,6 +17,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -22,6 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,6 +33,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.snackbar.Snackbar;
+import com.owncloud.android.lib.common.operations.RemoteOperationResult;
+import com.owncloud.android.lib.common.utils.Log_OC;
+import com.owncloud.android.lib.resources.shares.OCShare;
+import com.owncloud.android.lib.resources.shares.ShareType;
+import com.owncloud.android.lib.resources.status.NextcloudVersion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,18 +48,26 @@ import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.databinding.FragmentNoteShareBinding;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.share.adapter.ShareeListAdapter;
+import it.niedermann.owncloud.notes.share.dialog.FileDetailSharingMenuBottomSheetDialog;
+import it.niedermann.owncloud.notes.share.dialog.QuickSharingPermissionsBottomSheetDialog;
+import it.niedermann.owncloud.notes.share.dialog.ShareLinkToDialog;
+import it.niedermann.owncloud.notes.share.dialog.SharePasswordDialogFragment;
+import it.niedermann.owncloud.notes.share.listener.FileDetailsSharingMenuBottomSheetActions;
+import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
+import it.niedermann.owncloud.notes.share.model.UsersAndGroupsSearchConfig;
+import it.niedermann.owncloud.notes.share.operations.ClientFactoryImpl;
+import it.niedermann.owncloud.notes.share.operations.RetrieveHoverCardAsyncTask;
 import it.niedermann.owncloud.notes.shared.user.User;
-import it.niedermann.owncloud.notes.shared.util.ClipboardUtil;
 import it.niedermann.owncloud.notes.shared.util.extensions.BundleExtensionsKt;
 
-public class NoteShareFragment extends Fragment implements ShareeListAdapterListener,
-        DisplayUtils.AvatarGenerationListener,
-        Injectable, FileDetailsSharingMenuBottomSheetActions, QuickSharingPermissionsBottomSheetDialog.QuickPermissionSharingBottomSheetActions {
+public class NoteShareFragment extends Fragment implements ShareeListAdapterListener, FileDetailsSharingMenuBottomSheetActions, QuickSharingPermissionsBottomSheetDialog.QuickPermissionSharingBottomSheetActions {
 
     private static final String TAG = "NoteShareFragment";
     private static final String ARG_NOTE = "NOTE";
     private static final String ARG_ACCOUNT = "ACCOUNT";
     private static final String ARG_USER = "USER";
+    public static final String FTAG_CHOOSER_DIALOG = "CHOOSER_DIALOG";
 
     private FragmentNoteShareBinding binding;
     private Note note;
@@ -58,6 +75,7 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
     private Account account;
 
     private OnEditShareListener onEditShareListener;
+    private ClientFactoryImpl clientFactory;
 
     public static NoteShareFragment newInstance(Note note, User user, Account account) {
         NoteShareFragment fragment = new NoteShareFragment();
@@ -72,6 +90,8 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        clientFactory = new ClientFactoryImpl(requireContext());
 
         if (savedInstanceState != null) {
             note = BundleExtensionsKt.getSerializableArgument(savedInstanceState, ARG_NOTE, Note.class);
@@ -107,11 +127,11 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentNoteShareBinding.inflate(inflater, container, false);
 
-        binding.sharesList.setAdapter(new ShareeListAdapter(fileActivity,
+        binding.sharesList.setAdapter(new ShareeListAdapter(requireActivity(),
                 new ArrayList<>(),
                 this,
                 user,
-                note));
+                account));
 
         binding.sharesList.setLayoutManager(new LinearLayoutManager(requireContext()));
 
@@ -141,26 +161,29 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
     @Override
     public void onStart() {
         super.onStart();
-        searchConfig.setSearchOnlyUsers(file.isEncrypted());
+        UsersAndGroupsSearchConfig.INSTANCE.setSearchOnlyUsers(true);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        searchConfig.reset();
+        UsersAndGroupsSearchConfig.INSTANCE.reset();
     }
 
     private void setupView() {
         setShareWithYou();
 
-        OCFile parentFile = fileDataStorageManager.getFileById(file.getParentId());
+        // OCFile parentFile = fileDataStorageManager.getFileById(file.getParentId());
 
-        FileDetailSharingFragmentHelper.setupSearchView(
-                (SearchManager) fileActivity.getSystemService(Context.SEARCH_SERVICE),
-                binding.searchView,
-                fileActivity.getComponentName());
-        viewThemeUtils.androidx.themeToolbarSearchView(binding.searchView);
+        setupSearchView((SearchManager) requireContext().getSystemService(Context.SEARCH_SERVICE), binding.searchView, requireActivity().getComponentName());
+        // viewThemeUtils.androidx.themeToolbarSearchView(binding.searchView);
 
+        binding.searchView.setQueryHint(getResources().getString(R.string.note_share_fragment_resharing_not_allowed));
+        binding.searchView.setInputType(InputType.TYPE_NULL);
+        binding.pickContactEmailBtn.setVisibility(View.GONE);
+        disableSearchView(binding.searchView);
+
+        /*
         if (file.canReshare()) {
             binding.searchView.setQueryHint(getResources().getString(R.string.note_share_fragment_search_text));
         } else {
@@ -169,6 +192,39 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
             binding.pickContactEmailBtn.setVisibility(View.GONE);
             disableSearchView(binding.searchView);
         }
+         */
+
+    }
+
+    private void setupSearchView(@Nullable SearchManager searchManager, SearchView searchView,
+                                       ComponentName componentName) {
+        if (searchManager == null) {
+            searchView.setVisibility(View.GONE);
+            return;
+        }
+
+        // assumes parent activity is the searchable activity
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName));
+
+        // do not iconify the widget; expand it by default
+        searchView.setIconifiedByDefault(false);
+
+        // avoid fullscreen with softkeyboard
+        searchView.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // return true to prevent the query from being processed;
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // leave it for the parent listener in the hierarchy / default behaviour
+                return false;
+            }
+        });
     }
 
     private void disableSearchView(View view) {
@@ -223,7 +279,7 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
         }
     }
 
-    private void copyInternalLink() {
+    public void copyInternalLink() {
         if (account == null) {
             BrandedSnackbar.make(requireView(), getString(R.string.note_share_fragment_could_not_retrieve_url), Snackbar.LENGTH_LONG)
                     .setAnchorView(binding.sharesList)
@@ -245,7 +301,7 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
 
         String[] packagesToExclude = new String[] { requireContext().getPackageName() };
         DialogFragment chooserDialog = ShareLinkToDialog.newInstance(intentToShareLink, packagesToExclude);
-        chooserDialog.show(getParentFragmentManager(), FileDisplayActivity.FTAG_CHOOSER_DIALOG);
+        chooserDialog.show(getParentFragmentManager(), FTAG_CHOOSER_DIALOG);
     }
 
     // TODO: Check account.getUrl returning base url?
@@ -256,6 +312,7 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
 
     // TODO: Capabilities in notes app doesn't have following functions...
     public void createPublicShareLink() {
+        /*
         if (capabilities != null && (capabilities.getFilesSharingPublicPasswordEnforced().isTrue() ||
                 capabilities.getFilesSharingPublicAskForOptionalPassword().isTrue())) {
             // password enforced by server, request to the user before trying to create
@@ -275,10 +332,12 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
             service.putExtra(OperationsService.EXTRA_REMOTE_PATH, file.getRemotePath());
             mWaitingForOpId = fileActivity.getOperationsServiceBinder().queueNewOperation(service);
         }
+         */
+
     }
 
-    private void createSecureFileDrop() {
-        fileOperationsHelper.shareFolderViaSecureFileDrop(file);
+    public void createSecureFileDrop() {
+        // fileOperationsHelper.shareFolderViaSecureFileDrop(file);
     }
 
     /*
@@ -303,6 +362,7 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
     }
      */
     private void showSendLinkTo(OCShare publicShare) {
+        /*
         if (file.isSharedViaLink()) {
             if (TextUtils.isEmpty(publicShare.getShareLink())) {
                 fileOperationsHelper.getFileWithLink(file, viewThemeUtils);
@@ -311,9 +371,12 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
                 showShareLinkDialog();
             }
         }
+         */
+
     }
 
     public void copyLink(OCShare share) {
+        /*
         if (file.isSharedViaLink()) {
             if (TextUtils.isEmpty(share.getShareLink())) {
                 fileOperationsHelper.getFileWithLink(file, viewThemeUtils);
@@ -321,51 +384,22 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
                 ClipboardUtil.copyToClipboard(requireActivity(), share.getShareLink());
             }
         }
+         */
+
     }
 
-    /**
-     * show share action bottom sheet
-     *
-     * @param share
-     */
     @Override
-    @VisibleForTesting
     public void showSharingMenuActionSheet(OCShare share) {
-        if (fileActivity != null && !fileActivity.isFinishing()) {
-            new FileDetailSharingMenuBottomSheetDialog(fileActivity, this, share, viewThemeUtils).show();
+        if (getActivity() != null && !getActivity().isFinishing()) {
+            new FileDetailSharingMenuBottomSheetDialog(getActivity(), this, share).show();
         }
     }
 
-    /**
-     * show quick sharing permission dialog
-     *
-     * @param share
-     */
     @Override
     public void showPermissionsDialog(OCShare share) {
-        new QuickSharingPermissionsBottomSheetDialog(fileActivity, this, share, viewThemeUtils).show();
+        new QuickSharingPermissionsBottomSheetDialog(getActivity(), this, share).show();
     }
 
-    /**
-     * Updates the UI after the result of an update operation on the edited {@link OCFile}.
-     *
-     * @param result {@link RemoteOperationResult} of an update on the edited {@link OCFile} sharing information.
-     * @param file   the edited {@link OCFile}
-     * @see #onUpdateShareInformation(RemoteOperationResult)
-     */
-    public void onUpdateShareInformation(RemoteOperationResult result, OCFile file) {
-        this.file = file;
-
-        onUpdateShareInformation(result);
-    }
-
-    /**
-     * Updates the UI after the result of an update operation on the edited {@link OCFile}. Keeps the current {@link
-     * OCFile held by this fragment}.
-     *
-     * @param result {@link RemoteOperationResult} of an update on the edited {@link OCFile} sharing information.
-     * @see #onUpdateShareInformation(RemoteOperationResult, OCFile)
-     */
     public void onUpdateShareInformation(RemoteOperationResult result) {
         if (result.isSuccess()) {
             refreshUiFromDB();
@@ -384,7 +418,7 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
     }
 
     private void unshareWith(OCShare share) {
-        fileOperationsHelper.unshareShare(file, share);
+        // fileOperationsHelper.unshareShare(file, share);
     }
 
     /**
@@ -395,7 +429,7 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
      * @param askForPassword if true, password is optional
      */
     public void requestPasswordForShareViaLink(boolean createShare, boolean askForPassword) {
-        SharePasswordDialogFragment dialog = SharePasswordDialogFragment.newInstance(file,
+        SharePasswordDialogFragment dialog = SharePasswordDialogFragment.newInstance(note,
                 createShare,
                 askForPassword);
         dialog.show(getChildFragmentManager(), SharePasswordDialogFragment.PASSWORD_FRAGMENT);
@@ -411,10 +445,10 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
     public void showProfileBottomSheet(User user, String shareWith) {
         if (user.getServer().getVersion().isNewerOrEqual(NextcloudVersion.nextcloud_23)) {
             new RetrieveHoverCardAsyncTask(user,
+                    account,
                     shareWith,
-                    fileActivity,
-                    clientFactory,
-                    viewThemeUtils).execute();
+                    getActivity(),
+                    clientFactory).execute();
         }
     }
 
@@ -422,7 +456,7 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
      * Get known server capabilities from DB
      */
     public void refreshCapabilitiesFromDB() {
-        capabilities = fileDataStorageManager.getCapability(user.getAccountName());
+        // capabilities = fileDataStorageManager.getCapability(user.getAccountName());
     }
 
     /**
@@ -430,6 +464,7 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
      * before reading database.
      */
     public void refreshSharesFromDB() {
+        /*
         OCFile newFile = fileDataStorageManager.getFileById(file.getFileId());
         if (newFile != null) {
             file = newFile;
@@ -438,7 +473,8 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
         ShareeListAdapter adapter = (ShareeListAdapter) binding.sharesList.getAdapter();
 
         if (adapter == null) {
-            DisplayUtils.showSnackMessage(getView(), getString(R.string.could_not_retrieve_shares));
+            BrandedSnackbar.make(requireView(), getString(R.string.could_not_retrieve_shares), Snackbar.LENGTH_LONG)
+                    .show();
             return;
         }
         adapter.getShares().clear();
@@ -458,8 +494,7 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
                 ShareType.PUBLIC_LINK,
                 "");
 
-        if (publicShares.isEmpty() && containsNoNewPublicShare(adapter.getShares()) &&
-                (!file.isEncrypted() || capabilities.getEndToEndEncryption().isTrue())) {
+        if (publicShares.isEmpty() && containsNoNewPublicShare(adapter.getShares())) {
             final OCShare ocShare = new OCShare();
             ocShare.setShareType(ShareType.NEW_PUBLIC_LINK);
             publicShares.add(ocShare);
@@ -468,10 +503,12 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
         }
 
         adapter.addShares(publicShares);
+         */
+
     }
 
     private void checkContactPermission() {
-        if (PermissionUtil.checkSelfPermission(requireActivity(), Manifest.permission.READ_CONTACTS)) {
+        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
             pickContactEmail();
         } else {
             requestContactPermissionLauncher.launch(Manifest.permission.READ_CONTACTS);
@@ -484,7 +521,8 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
         if (intent.resolveActivity(requireContext().getPackageManager()) != null) {
             onContactSelectionResultLauncher.launch(intent);
         } else {
-            DisplayUtils.showSnackMessage(requireActivity(), getString(R.string.file_detail_sharing_fragment_no_contact_app_message));
+            BrandedSnackbar.make(requireView(), getString(R.string.file_detail_sharing_fragment_no_contact_app_message), Snackbar.LENGTH_LONG)
+                    .show();
         }
     }
 
@@ -492,7 +530,7 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
         // Define the projection to get all email addresses.
         String[] projection = {ContactsContract.CommonDataKinds.Email.ADDRESS};
 
-        Cursor cursor = fileActivity.getContentResolver().query(contactUri, projection, null, null, null);
+        Cursor cursor = requireActivity().getContentResolver().query(contactUri, projection, null, null, null);
 
         if (cursor != null) {
             if (cursor.moveToFirst()) {
@@ -507,16 +545,19 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
                         binding.searchView.requestFocus();
                     });
                 } else {
-                    DisplayUtils.showSnackMessage(binding.getRoot(), R.string.email_pick_failed);
+                    BrandedSnackbar.make(requireView(), getString(R.string.email_pick_failed), Snackbar.LENGTH_LONG)
+                            .show();
                     Log_OC.e(NoteShareFragment.class.getSimpleName(), "Failed to pick email address.");
                 }
             } else {
-                DisplayUtils.showSnackMessage(binding.getRoot(), R.string.email_pick_failed);
+                BrandedSnackbar.make(requireView(), getString(R.string.email_pick_failed), Snackbar.LENGTH_LONG)
+                        .show();
                 Log_OC.e(NoteShareFragment.class.getSimpleName(), "Failed to pick email address as no Email found.");
             }
             cursor.close();
         } else {
-            DisplayUtils.showSnackMessage(binding.getRoot(), R.string.email_pick_failed);
+            BrandedSnackbar.make(requireView(), getString(R.string.email_pick_failed), Snackbar.LENGTH_LONG)
+                    .show();
             Log_OC.e(NoteShareFragment.class.getSimpleName(), "Failed to pick email address as Cursor is null.");
         }
     }
@@ -534,24 +575,22 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        FileExtensionsKt.logFileSize(file, TAG);
-        outState.putParcelable(ARG_NOTE, file);
+        outState.putSerializable(ARG_NOTE, note);
+        outState.putSerializable(ARG_ACCOUNT, account);
         outState.putParcelable(ARG_USER, user);
     }
 
-    @Override
     public void avatarGenerated(Drawable avatarDrawable, Object callContext) {
         binding.sharedWithYouAvatar.setImageDrawable(avatarDrawable);
     }
 
-    @Override
     public boolean shouldCallGeneratedCallback(String tag, Object callContext) {
         return false;
     }
 
     private boolean isReshareForbidden(OCShare share) {
-        return ShareType.FEDERATED == share.getShareType() ||
-                capabilities != null && capabilities.getFilesSharingResharing().isFalse();
+        return false;
+        // return ShareType.FEDERATED == share.getShareType() || capabilities != null && capabilities.getFilesSharingResharing().isFalse();
     }
 
     @VisibleForTesting
@@ -562,13 +601,13 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
 
     @Override
     public void advancedPermissions(OCShare share) {
-        modifyExistingShare(share, FileDetailsSharingProcessFragment.SCREEN_TYPE_PERMISSION);
+        // modifyExistingShare(share, FileDetailsSharingProcessFragment.SCREEN_TYPE_PERMISSION);
     }
 
 
     @Override
     public void sendNewEmail(OCShare share) {
-        modifyExistingShare(share, FileDetailsSharingProcessFragment.SCREEN_TYPE_NOTE);
+        // modifyExistingShare(share, FileDetailsSharingProcessFragment.SCREEN_TYPE_NOTE);
     }
 
     @Override
@@ -576,7 +615,8 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
         unshareWith(share);
         ShareeListAdapter adapter = (ShareeListAdapter) binding.sharesList.getAdapter();
         if (adapter == null) {
-            DisplayUtils.showSnackMessage(getView(), getString(R.string.failed_update_ui));
+            BrandedSnackbar.make(requireView(), getString(R.string.email_pick_failed), Snackbar.LENGTH_LONG)
+                    .show();
             return;
         }
         adapter.remove(share);
@@ -584,11 +624,14 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
 
     @Override
     public void sendLink(OCShare share) {
+        /*
         if (file.isSharedViaLink() && !TextUtils.isEmpty(share.getShareLink())) {
             FileDisplayActivity.showShareLinkDialog(fileActivity, file, share.getShareLink());
         } else {
             showSendLinkTo(share);
         }
+         */
+
     }
 
     @Override
@@ -597,13 +640,12 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
     }
 
     private void modifyExistingShare(OCShare share, int screenTypePermission) {
-        onEditShareListener.editExistingShare(share, screenTypePermission, !isReshareForbidden(share),
-                capabilities.getVersion().isNewerOrEqual(OwnCloudVersion.nextcloud_18));
+        // onEditShareListener.editExistingShare(share, screenTypePermission, !isReshareForbidden(share), capabilities.getVersion().isNewerOrEqual(OwnCloudVersion.nextcloud_18));
     }
 
     @Override
     public void onQuickPermissionChanged(OCShare share, int permission) {
-        fileOperationsHelper.setPermissionsToShare(share, permission);
+       // fileOperationsHelper.setPermissionsToShare(share, permission);
     }
 
     //launcher for contact permission
@@ -612,7 +654,8 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
                 if (isGranted) {
                     pickContactEmail();
                 } else {
-                    DisplayUtils.showSnackMessage(binding.getRoot(), R.string.contact_no_permission);
+                    BrandedSnackbar.make(binding.getRoot(), getString(R.string.contact_no_permission), Snackbar.LENGTH_LONG)
+                            .show();
                 }
             });
 
@@ -623,13 +666,15 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
                         if (result.getResultCode() == Activity.RESULT_OK) {
                             Intent intent = result.getData();
                             if (intent == null) {
-                                DisplayUtils.showSnackMessage(binding.getRoot(), R.string.email_pick_failed);
+                                BrandedSnackbar.make(binding.getRoot(), getString(R.string.email_pick_failed), Snackbar.LENGTH_LONG)
+                                        .show();
                                 return;
                             }
 
                             Uri contactUri = intent.getData();
                             if (contactUri == null) {
-                                DisplayUtils.showSnackMessage(binding.getRoot(), R.string.email_pick_failed);
+                                BrandedSnackbar.make(binding.getRoot(), getString(R.string.email_pick_failed), Snackbar.LENGTH_LONG)
+                                        .show();
                                 return;
                             }
 
