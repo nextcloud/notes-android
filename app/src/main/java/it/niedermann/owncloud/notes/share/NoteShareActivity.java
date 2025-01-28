@@ -43,7 +43,9 @@ import java.util.List;
 
 import it.niedermann.nextcloud.sso.glide.SingleSignOnUrl;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.BrandedActivity;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ActivityNoteShareBinding;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
@@ -61,7 +63,7 @@ import it.niedermann.owncloud.notes.shared.user.User;
 import it.niedermann.owncloud.notes.shared.util.DisplayUtils;
 import it.niedermann.owncloud.notes.shared.util.extensions.BundleExtensionsKt;
 
-public class NoteShareActivity extends AppCompatActivity implements ShareeListAdapterListener, FileDetailsSharingMenuBottomSheetActions, QuickSharingPermissionsBottomSheetDialog.QuickPermissionSharingBottomSheetActions {
+public class NoteShareActivity extends BrandedActivity implements ShareeListAdapterListener, FileDetailsSharingMenuBottomSheetActions, QuickSharingPermissionsBottomSheetDialog.QuickPermissionSharingBottomSheetActions {
 
     public static final String ARG_NOTE = "NOTE";
     public static final String ARG_ACCOUNT = "ACCOUNT";
@@ -70,7 +72,6 @@ public class NoteShareActivity extends AppCompatActivity implements ShareeListAd
     private ActivityNoteShareBinding binding;
     private Note note;
     private Account account;
-
     private ClientFactoryImpl clientFactory;
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,33 +80,31 @@ public class NoteShareActivity extends AppCompatActivity implements ShareeListAd
         binding = ActivityNoteShareBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        Bundle bundler = getIntent().getExtras();
-        note = BundleExtensionsKt.getSerializableArgument(bundler, ARG_NOTE, Note.class);
-        account = BundleExtensionsKt.getSerializableArgument(bundler, ARG_ACCOUNT, Account.class);
+        initializeArguments();
 
         binding.sharesList.setAdapter(new ShareeListAdapter(this,
                 new ArrayList<>(),
                 this,
                 account));
-
         binding.sharesList.setLayoutManager(new LinearLayoutManager(this));
-
         binding.pickContactEmailBtn.setOnClickListener(v -> checkContactPermission());
 
         setupView();
+        refreshCapabilitiesFromDB();
+        refreshSharesFromDB();
+    }
 
+    private void initializeArguments() {
+        Bundle bundler = getIntent().getExtras();
+        note = BundleExtensionsKt.getSerializableArgument(bundler, ARG_NOTE, Note.class);
+        account = BundleExtensionsKt.getSerializableArgument(bundler, ARG_ACCOUNT, Account.class);
         clientFactory = new ClientFactoryImpl(this);
-
         if (note == null) {
             throw new IllegalArgumentException("Note cannot be null");
         }
-
         if (account == null) {
             throw new IllegalArgumentException("Account cannot be null");
         }
-
-        refreshCapabilitiesFromDB();
-        refreshSharesFromDB();
     }
 
     @Override
@@ -126,7 +125,6 @@ public class NoteShareActivity extends AppCompatActivity implements ShareeListAd
         // OCFile parentFile = fileDataStorageManager.getFileById(file.getParentId());
 
         setupSearchView((SearchManager) getSystemService(Context.SEARCH_SERVICE), binding.searchView, getComponentName());
-        // viewThemeUtils.androidx.themeToolbarSearchView(binding.searchView);
 
         binding.searchView.setQueryHint(getResources().getString(R.string.note_share_fragment_resharing_not_allowed));
         binding.searchView.setInputType(InputType.TYPE_NULL);
@@ -633,6 +631,13 @@ public class NoteShareActivity extends AppCompatActivity implements ShareeListAd
     // TODO: IMPLEMENT
     public void onShareProcessClosed() {
 
+    }
+
+    @Override
+    public void applyBrand(int color) {
+        final var util = BrandingUtil.of(color, this);
+        util.platform.themeStatusBar(this);
+        util.androidx.themeToolbarSearchView(binding.searchView);
     }
 
     public interface OnEditShareListener {
