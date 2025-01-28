@@ -38,6 +38,11 @@
 
     <string name="change_category_title">Choose a category</string>
 
+    <string name="users_and_groups_search_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
+    <string name="users_and_groups_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
+    <string name="document_provider_authority">org.nextcloud.documents</string>
+    <string name="file_provider_authority">org.nextcloud.files</string>
+    <string name="image_cache_provider_authority">org.nextcloud.imageCache.provider</string>
     <string-array name="folder_share_permission_dialog_values" translatable="false">
         <item>@string/link_share_view_only</item>
         <item>@string/link_share_allow_upload_and_editing</item>
@@ -124,6 +129,7 @@
     <string name="share_remote_clarification">%1$s (remote)</string>
     <string name="share_room_clarification">%1$s (conversation)</string>
     <string name="share_known_remote_on_clarification">on %1$s</string>
+    <string name="remote">(remote)</string>
 
     <string name="copy_link">Copy link</string>
     <string name="clipboard_text_copied">Link copied</string>
