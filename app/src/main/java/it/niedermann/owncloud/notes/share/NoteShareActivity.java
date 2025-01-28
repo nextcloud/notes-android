@@ -23,7 +23,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
@@ -54,6 +53,7 @@ import it.niedermann.owncloud.notes.share.dialog.FileDetailSharingMenuBottomShee
 import it.niedermann.owncloud.notes.share.dialog.QuickSharingPermissionsBottomSheetDialog;
 import it.niedermann.owncloud.notes.share.dialog.ShareLinkToDialog;
 import it.niedermann.owncloud.notes.share.dialog.SharePasswordDialogFragment;
+import it.niedermann.owncloud.notes.share.helper.UsersAndGroupsSearchProvider;
 import it.niedermann.owncloud.notes.share.listener.FileDetailsSharingMenuBottomSheetActions;
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
 import it.niedermann.owncloud.notes.share.model.UsersAndGroupsSearchConfig;
@@ -124,12 +124,14 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
         // OCFile parentFile = fileDataStorageManager.getFileById(file.getParentId());
 
-        setupSearchView((SearchManager) getSystemService(Context.SEARCH_SERVICE), binding.searchView, getComponentName());
+        setupSearchView((SearchManager) getSystemService(Context.SEARCH_SERVICE), getComponentName());
 
         binding.searchView.setQueryHint(getResources().getString(R.string.note_share_fragment_resharing_not_allowed));
         binding.searchView.setInputType(InputType.TYPE_NULL);
-        binding.pickContactEmailBtn.setVisibility(View.GONE);
-        disableSearchView(binding.searchView);
+
+        // TODO: When to disable?
+        // binding.pickContactEmailBtn.setVisibility(View.GONE);
+        // disableSearchView(binding.searchView);
 
         /*
         if (file.canReshare()) {
@@ -144,31 +146,36 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
     }
 
-    private void setupSearchView(@Nullable SearchManager searchManager, SearchView searchView,
+    private void setupSearchView(@Nullable SearchManager searchManager,
                                        ComponentName componentName) {
         if (searchManager == null) {
-            searchView.setVisibility(View.GONE);
+            binding.searchView.setVisibility(View.GONE);
             return;
         }
 
         // assumes parent activity is the searchable activity
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName));
+        binding.searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName));
 
         // do not iconify the widget; expand it by default
-        searchView.setIconifiedByDefault(false);
+        binding.searchView.setIconifiedByDefault(false);
 
         // avoid fullscreen with softkeyboard
-        searchView.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
+        binding.searchView.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        UsersAndGroupsSearchProvider provider = new UsersAndGroupsSearchProvider(account, clientFactory.create());
+
+        binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+
                 // return true to prevent the query from being processed;
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                Log_OC.e(NoteShareActivity.class.getSimpleName(), "Failed to pick email address as Cursor is null." + newText);
+
                 // leave it for the parent listener in the hierarchy / default behaviour
                 return false;
             }

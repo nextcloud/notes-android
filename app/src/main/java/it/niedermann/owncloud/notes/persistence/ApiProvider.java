@@ -29,6 +29,7 @@ import it.niedermann.owncloud.notes.persistence.sync.CapabilitiesDeserializer;
 import it.niedermann.owncloud.notes.persistence.sync.FilesAPI;
 import it.niedermann.owncloud.notes.persistence.sync.NotesAPI;
 import it.niedermann.owncloud.notes.persistence.sync.OcsAPI;
+import it.niedermann.owncloud.notes.persistence.sync.ShareAPI;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import retrofit2.NextcloudRetrofitApiBuilder;
@@ -47,12 +48,14 @@ public class ApiProvider {
 
     private static final String API_ENDPOINT_OCS = "/ocs/v2.php/cloud/";
     private static final String API_ENDPOINT_FILES ="/ocs/v2.php/apps/files/api/v1/";
+    private static final String API_ENDPOINT_FILES_SHARING ="/ocs/v2.php/apps/files_sharing/api/v1/";
 
     private static final Map<String, NextcloudAPI> API_CACHE = new ConcurrentHashMap<>();
 
     private static final Map<String, OcsAPI> API_CACHE_OCS = new ConcurrentHashMap<>();
     private static final Map<String, NotesAPI> API_CACHE_NOTES = new ConcurrentHashMap<>();
     private static final Map<String, FilesAPI> API_CACHE_FILES = new ConcurrentHashMap<>();
+    private static final Map<String, ShareAPI> API_CACHE_FILES_SHARING = new ConcurrentHashMap<>();
 
 
     public static ApiProvider getInstance() {
@@ -94,6 +97,15 @@ public class ApiProvider {
         final var filesAPI = new NextcloudRetrofitApiBuilder(getNextcloudAPI(context, ssoAccount), API_ENDPOINT_FILES).create(FilesAPI.class);
         API_CACHE_FILES.put(ssoAccount.name, filesAPI);
         return filesAPI;
+    }
+
+    public synchronized ShareAPI getShareAPI(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount) {
+        if (API_CACHE_FILES_SHARING.containsKey(ssoAccount.name)) {
+            return API_CACHE_FILES_SHARING.get(ssoAccount.name);
+        }
+        final var shareAPI = new NextcloudRetrofitApiBuilder(getNextcloudAPI(context, ssoAccount), API_ENDPOINT_FILES_SHARING).create(ShareAPI.class);
+        API_CACHE_FILES_SHARING.put(ssoAccount.name, shareAPI);
+        return shareAPI;
     }
 
     private synchronized NextcloudAPI getNextcloudAPI(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount) {
