@@ -2,6 +2,7 @@ package it.niedermann.owncloud.notes.persistence
 
 import android.app.Application
 import android.content.Context
+import android.util.Log
 import com.nextcloud.android.sso.api.EmptyResponse
 import com.nextcloud.android.sso.model.SingleSignOnAccount
 import com.owncloud.android.lib.resources.shares.OCShare
@@ -9,7 +10,10 @@ import com.owncloud.android.lib.resources.shares.ShareType
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import it.niedermann.owncloud.notes.persistence.entity.Note
+import it.niedermann.owncloud.notes.share.model.ShareesData
 import it.niedermann.owncloud.notes.shared.model.ApiVersion
+import org.json.JSONObject
+import java.util.ArrayList
 
 class ShareRepository private constructor(private val applicationContext: Context) {
 
@@ -25,6 +29,23 @@ class ShareRepository private constructor(private val applicationContext: Contex
             val call = notesRepository.getServerSettings(account, ApiVersion.API_VERSION_1_0)
             val response = call.execute()
             response.body()?.notesPath ?: throw RuntimeException("No notes path available")
+        }.subscribeOn(Schedulers.io())
+    }
+
+    fun getSharees(
+        account: SingleSignOnAccount,
+        searchString: String,
+        page: Int,
+        perPage: Int
+    ): Single<ShareesData> {
+        return Single.fromCallable {
+            val shareAPI = apiProvider.getShareAPI(applicationContext, account)
+            val call2 = shareAPI.getSharees2(search = searchString, page = page, perPage = perPage)
+            val response2 = call2.execute()
+
+            val call = shareAPI.getSharees(search = searchString, page = page, perPage = perPage)
+            val response = call.execute()
+            response.body()?.ocs?.data ?: throw RuntimeException("No shares available")
         }.subscribeOn(Schedulers.io())
     }
 
