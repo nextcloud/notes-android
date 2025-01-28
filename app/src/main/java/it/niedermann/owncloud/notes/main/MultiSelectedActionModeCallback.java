@@ -18,6 +18,7 @@ import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.view.ActionMode.Callback;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.selection.SelectionTracker;
 
@@ -31,6 +32,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
+import it.niedermann.owncloud.notes.share.NoteShareFragment;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
 public class MultiSelectedActionModeCallback implements Callback {
@@ -153,6 +155,32 @@ public class MultiSelectedActionModeCallback implements Callback {
             }
             tracker.clearSelection();
 
+            if (selection.size() == 1) {
+                final var currentAccount$ = mainViewModel.getCurrentAccount();
+                currentAccount$.observe(lifecycleOwner, account -> {
+                    currentAccount$.removeObservers(lifecycleOwner);
+                    executor.submit(() -> {{
+                        final var note = mainViewModel.getFullNote(selection.get(0));
+                        final var noteShareFragment = NoteShareFragment.newInstance(note, account);
+                        fragmentManager.findFragmentById(R.id.fragment_container_view);
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(android.R.id.content, noteShareFragment);
+                        fragmentTransaction.commit();
+                    }});
+                });
+            } else {
+                ShareUtil.openShareDialog(context,
+                        context.getResources().getQuantityString(R.plurals.share_multiple, selection.size(), selection.size()),
+                        mainViewModel.collectNoteContents(selection));
+            }
+
+            /*
+             final var selection = new ArrayList<Long>(tracker.getSelection().size());
+            for (final var sel : tracker.getSelection()) {
+                selection.add(sel);
+            }
+            tracker.clearSelection();
+
             executor.submit(() -> {
                 if (selection.size() == 1) {
                     final var note = mainViewModel.getFullNote(selection.get(0));
@@ -163,6 +191,8 @@ public class MultiSelectedActionModeCallback implements Callback {
                             mainViewModel.collectNoteContents(selection));
                 }
             });
+             */
+
             return true;
         } else if (itemId == R.id.menu_category) {// TODO detect whether all selected notes do have the same category - in this case preselect it
             final var accountLiveData = mainViewModel.getCurrentAccount();
