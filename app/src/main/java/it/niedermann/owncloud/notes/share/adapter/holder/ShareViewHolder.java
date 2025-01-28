@@ -25,7 +25,6 @@ import it.niedermann.owncloud.notes.shared.user.User;
 
 public class ShareViewHolder extends RecyclerView.ViewHolder {
     private ItemShareShareBinding binding;
-    private User user;
     private Account account;
     private Context context;
 
@@ -35,11 +34,9 @@ public class ShareViewHolder extends RecyclerView.ViewHolder {
 
     public ShareViewHolder(ItemShareShareBinding binding,
                            Account account,
-                           User user,
                            Context context) {
         this(binding.getRoot());
         this.binding = binding;
-        this.user = user;
         this.account = account;
         this.context = context;
     }
@@ -76,7 +73,7 @@ public class ShareViewHolder extends RecyclerView.ViewHolder {
                         .apply(RequestOptions.circleCropTransform())
                         .into(binding.icon);
 
-                binding.icon.setOnClickListener(v -> listener.showProfileBottomSheet(user, share.getShareWith()));
+                // binding.icon.setOnClickListener(v -> listener.showProfileBottomSheet(user, share.getShareWith()));
             default:
                 setImage(binding.icon, name, R.drawable.ic_account_circle_grey_24dp);
                 break;

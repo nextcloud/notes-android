@@ -71,18 +71,15 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
 
     private FragmentNoteShareBinding binding;
     private Note note;
-    private User user;
     private Account account;
 
-    private OnEditShareListener onEditShareListener;
     private ClientFactoryImpl clientFactory;
 
-    public static NoteShareFragment newInstance(Note note, User user, Account account) {
+    public static NoteShareFragment newInstance(Note note, Account account) {
         NoteShareFragment fragment = new NoteShareFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_NOTE, note);
         args.putSerializable(ARG_ACCOUNT, account);
-        args.putParcelable(ARG_USER, user);
         fragment.setArguments(args);
         return fragment;
     }
@@ -96,13 +93,11 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
         if (savedInstanceState != null) {
             note = BundleExtensionsKt.getSerializableArgument(savedInstanceState, ARG_NOTE, Note.class);
             account = BundleExtensionsKt.getSerializableArgument(savedInstanceState, ARG_ACCOUNT, Account.class);
-            user = BundleExtensionsKt.getParcelableArgument(savedInstanceState, ARG_USER, User.class);
         } else {
             Bundle arguments = getArguments();
             if (arguments != null) {
                 note = BundleExtensionsKt.getSerializableArgument(arguments, ARG_NOTE, Note.class);
                 account = BundleExtensionsKt.getSerializableArgument(arguments, ARG_ACCOUNT, Account.class);
-                user = BundleExtensionsKt.getParcelableArgument(arguments, ARG_USER, User.class);
             }
         }
 
@@ -110,7 +105,7 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
             throw new IllegalArgumentException("Note cannot be null");
         }
 
-        if (user == null) {
+        if (account == null) {
             throw new IllegalArgumentException("Account cannot be null");
         }
     }
@@ -130,7 +125,6 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
         binding.sharesList.setAdapter(new ShareeListAdapter(requireActivity(),
                 new ArrayList<>(),
                 this,
-                user,
                 account));
 
         binding.sharesList.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -146,16 +140,6 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-    }
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        try {
-            onEditShareListener = (OnEditShareListener) context;
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Calling activity must implement the interface", e);
-        }
     }
 
     @Override
@@ -577,7 +561,6 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
         super.onSaveInstanceState(outState);
         outState.putSerializable(ARG_NOTE, note);
         outState.putSerializable(ARG_ACCOUNT, account);
-        outState.putParcelable(ARG_USER, user);
     }
 
     public void avatarGenerated(Drawable avatarDrawable, Object callContext) {
@@ -640,7 +623,7 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
     }
 
     private void modifyExistingShare(OCShare share, int screenTypePermission) {
-        // onEditShareListener.editExistingShare(share, screenTypePermission, !isReshareForbidden(share), capabilities.getVersion().isNewerOrEqual(OwnCloudVersion.nextcloud_18));
+        // editExistingShare(share, screenTypePermission, !isReshareForbidden(share), capabilities.getVersion().isNewerOrEqual(OwnCloudVersion.nextcloud_18));
     }
 
     @Override
@@ -682,6 +665,16 @@ public class NoteShareFragment extends Fragment implements ShareeListAdapterList
 
                         }
                     });
+
+    // TODO: IMPLEMENT
+    public void editExistingShare(OCShare share, int screenTypePermission, boolean isReshareShown, boolean isExpiryDateShown) {
+
+    }
+
+    // TODO: IMPLEMENT
+    public void onShareProcessClosed() {
+
+    }
 
     public interface OnEditShareListener {
         void editExistingShare(OCShare share, int screenTypePermission, boolean isReshareShown,

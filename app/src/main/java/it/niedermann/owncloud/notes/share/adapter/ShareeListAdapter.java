@@ -27,7 +27,6 @@ import it.niedermann.owncloud.notes.share.adapter.holder.LinkShareViewHolder;
 import it.niedermann.owncloud.notes.share.adapter.holder.NewLinkShareViewHolder;
 import it.niedermann.owncloud.notes.share.adapter.holder.ShareViewHolder;
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
-import it.niedermann.owncloud.notes.shared.user.User;
 
 /**
  * Adapter to show a user/group/email/remote in Sharing list in file details view.
@@ -38,20 +37,15 @@ public class ShareeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private final ShareeListAdapterListener listener;
     private final Activity activity;
     private List<OCShare> shares;
-    private final float avatarRadiusDimension;
-    private final User user;
 
     public ShareeListAdapter(Activity activity,
                              List<OCShare> shares,
                              ShareeListAdapterListener listener,
-                             User user,
                              Account account) {
         this.activity = activity;
         this.shares = shares;
         this.listener = listener;
-        this.user = user;
         this.account = account;
-        avatarRadiusDimension = activity.getResources().getDimension(R.dimen.default_icon_size);
 
         sortShares();
     }
@@ -89,7 +83,6 @@ public class ShareeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                         parent,
                         false),
                         account,
-                        user,
                         activity);
             }
         }
