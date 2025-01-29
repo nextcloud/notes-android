@@ -56,6 +56,12 @@
             android:label="@string/add_account" />
 
         <activity
+            android:name=".shared.util.clipboard.CopyToClipboardActivity"
+            android:exported="false"
+            android:icon="@drawable/shared_via_link"
+            android:label="@string/copy_link" />
+
+        <activity
             android:name=".AppendToNoteActivity"
             android:label="@string/append_to_note"
             android:exported="true">

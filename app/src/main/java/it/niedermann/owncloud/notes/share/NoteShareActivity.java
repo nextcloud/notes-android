@@ -82,13 +82,9 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
         binding = ActivityNoteShareBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         initializeArguments();
 
-        binding.sharesList.setAdapter(new ShareeListAdapter(this,
-                new ArrayList<>(),
-                this,
-                account));
+        binding.sharesList.setAdapter(new ShareeListAdapter(this, new ArrayList<>(), this, account));
         binding.sharesList.setLayoutManager(new LinearLayoutManager(this));
         binding.pickContactEmailBtn.setOnClickListener(v -> checkContactPermission());
 
@@ -124,13 +120,9 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
     private void setupView() {
         setShareWithYou();
-
-        // OCFile parentFile = fileDataStorageManager.getFileById(file.getParentId());
-
         setupSearchView((SearchManager) getSystemService(Context.SEARCH_SERVICE), getComponentName());
 
-        binding.searchView.setQueryHint(getResources().getString(R.string.note_share_fragment_resharing_not_allowed));
-        binding.searchView.setInputType(InputType.TYPE_NULL);
+        // OCFile parentFile = fileDataStorageManager.getFileById(file.getParentId());
 
         // TODO: When to disable?
         // binding.pickContactEmailBtn.setVisibility(View.GONE);
@@ -146,7 +138,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             disableSearchView(binding.searchView);
         }
          */
-
     }
 
     private void setupSearchView(@Nullable SearchManager searchManager, ComponentName componentName) {
@@ -211,6 +202,9 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                 return true;
             }
         });
+
+        binding.searchView.setQueryHint(getResources().getString(R.string.note_share_fragment_search_text));
+        binding.searchView.setInputType(InputType.TYPE_NULL);
     }
 
     private void disableSearchView(View view) {
@@ -242,14 +236,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
              */
 
 
-            Glide.with(this)
-                    .load(new SingleSignOnUrl(account.getAccountName(), account.getUrl() + "/index.php/avatar/" + Uri.encode(account.getUserName()) + "/64"))
-                    .placeholder(R.drawable.ic_account_circle_grey_24dp)
-                    .error(R.drawable.ic_account_circle_grey_24dp)
-                    .apply(RequestOptions.circleCropTransform())
-                    .into(binding.sharedWithYouAvatar);
-
-            binding.sharedWithYouAvatar.setVisibility(View.VISIBLE);
+            loadAvatar();
 
             /*
             // TODO: Note's note?
@@ -263,6 +250,17 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             }
              */
         }
+    }
+
+    private void loadAvatar() {
+        Glide.with(this)
+                .load(new SingleSignOnUrl(account.getAccountName(), account.getUrl() + "/index.php/avatar/" + Uri.encode(account.getUserName()) + "/64"))
+                .placeholder(R.drawable.ic_account_circle_grey_24dp)
+                .error(R.drawable.ic_account_circle_grey_24dp)
+                .apply(RequestOptions.circleCropTransform())
+                .into(binding.sharedWithYouAvatar);
+
+        binding.sharedWithYouAvatar.setVisibility(View.VISIBLE);
     }
 
     public void copyInternalLink() {
@@ -288,10 +286,9 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         chooserDialog.show(getSupportFragmentManager(), FTAG_CHOOSER_DIALOG);
     }
 
-    // TODO: Check account.getUrl returning base url?
     private String createInternalLink() {
         Uri baseUri = Uri.parse(account.getUrl());
-        return baseUri + "/index.php/f/" +  note.getId();
+        return baseUri + "/index.php/f/" +  note.getRemoteId();
     }
 
     // TODO: Capabilities in notes app doesn't have following functions...
@@ -356,7 +353,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             }
         }
          */
-
     }
 
     public void copyLink(OCShare share) {
@@ -369,7 +365,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             }
         }
          */
-
     }
 
     @Override
