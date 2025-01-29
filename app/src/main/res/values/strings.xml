@@ -61,6 +61,7 @@
     <string name="note_share_fragment_user_icon_content_description">note share user icon</string>
     <string name="note_share_fragment_contact_icon_content_description">note share contact icon</string>
     <string name="note_share_fragment_shared_with_you">Shared with you by %1$s</string>
+    <string name="note_share_fragment_share_note">Share note</string>
     <string name="note_share_fragment_search_text">Name, Federated Cloud ID or email address…</string>
     <string name="note_share_fragment_share_link">Share link</string>
     <string name="note_share_fragment_resharing_not_allowed">Policy or permissions prevent resharing</string>

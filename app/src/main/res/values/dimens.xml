@@ -28,6 +28,7 @@
     <dimen name="bottom_sheet_text_size">16sp</dimen>
     <dimen name="bottom_sheet_item_height">56dp</dimen>
     <dimen name="dialog_padding">24dp</dimen>
+    <dimen name="share_button_padding">28dp</dimen>
 
     <dimen name="spacer_activity_sides">0dp</dimen>
 
