@@ -16,7 +16,7 @@ interface ShareAPI {
     @GET("sharees")
     fun getSharees2(
         @Query("format") format: String = "json",
-        @Query("itemType") itemType: String = "note",
+        @Query("itemType") itemType: String = "file",
         @Query("search") search: String,
         @Query("page") page: Int,
         @Query("perPage") perPage: Int,
@@ -26,7 +26,7 @@ interface ShareAPI {
     @GET("sharees")
     fun getSharees(
         @Query("format") format: String = "json",
-        @Query("itemType") itemType: String = "note",
+        @Query("itemType") itemType: String = "file",
         @Query("search") search: String,
         @Query("page") page: Int,
         @Query("perPage") perPage: Int,

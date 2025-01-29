@@ -2,18 +2,18 @@ package it.niedermann.owncloud.notes.persistence
 
 import android.app.Application
 import android.content.Context
-import android.util.Log
 import com.nextcloud.android.sso.api.EmptyResponse
 import com.nextcloud.android.sso.model.SingleSignOnAccount
+import com.owncloud.android.lib.common.utils.Log_OC
+import com.owncloud.android.lib.resources.shares.GetShareesRemoteOperation
 import com.owncloud.android.lib.resources.shares.OCShare
 import com.owncloud.android.lib.resources.shares.ShareType
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import it.niedermann.owncloud.notes.persistence.entity.Note
-import it.niedermann.owncloud.notes.share.model.ShareesData
 import it.niedermann.owncloud.notes.shared.model.ApiVersion
+import org.json.JSONArray
 import org.json.JSONObject
-import java.util.ArrayList
 
 class ShareRepository private constructor(private val applicationContext: Context) {
 
@@ -37,15 +37,71 @@ class ShareRepository private constructor(private val applicationContext: Contex
         searchString: String,
         page: Int,
         perPage: Int
-    ): Single<ShareesData> {
+    ): Single<ArrayList<JSONObject>> {
         return Single.fromCallable {
             val shareAPI = apiProvider.getShareAPI(applicationContext, account)
             val call2 = shareAPI.getSharees2(search = searchString, page = page, perPage = perPage)
             val response2 = call2.execute()
 
-            val call = shareAPI.getSharees(search = searchString, page = page, perPage = perPage)
-            val response = call.execute()
-            response.body()?.ocs?.data ?: throw RuntimeException("No shares available")
+            val respJSON = JSONObject(response2.body().toString())
+            val respOCS = respJSON.getJSONObject("ocs")
+            val respData = respOCS.getJSONObject("data")
+            val respExact = respData.getJSONObject("exact")
+            val respExactUsers = respExact.getJSONArray("users")
+            val respExactGroups = respExact.getJSONArray("groups")
+            val respExactRemotes = respExact.getJSONArray("remotes")
+            val respExactCircles = if (respExact.has("circles")) {
+                respExact.getJSONArray("circles")
+            } else {
+                JSONArray()
+            }
+            val respExactRooms = if (respExact.has("rooms")) {
+                respExact.getJSONArray("rooms")
+            } else {
+                JSONArray()
+            }
+
+            val respExactEmails = respExact.getJSONArray("emails")
+            val respPartialUsers = respData.getJSONArray("users")
+            val respPartialGroups = respData.getJSONArray("groups")
+            val respPartialRemotes = respData.getJSONArray("remotes")
+            val respPartialCircles = if (respData.has("circles")) {
+                respData.getJSONArray("circles")
+            } else {
+                JSONArray()
+            }
+            val respPartialRooms = if (respData.has("rooms")) {
+                respData.getJSONArray("rooms")
+            } else {
+                JSONArray()
+            }
+
+            val jsonResults = arrayOf(
+                respExactUsers,
+                respExactGroups,
+                respExactRemotes,
+                respExactRooms,
+                respExactEmails,
+                respExactCircles,
+                respPartialUsers,
+                respPartialGroups,
+                respPartialRemotes,
+                respPartialRooms,
+                respPartialCircles
+            )
+            val data: ArrayList<JSONObject> = ArrayList()
+            val var25 = jsonResults
+            val var26 = jsonResults.size
+
+            for (var27 in 0 until var26) {
+                val jsonResult = var25[var27]
+
+                for (j in 0 until jsonResult.length()) {
+                    val jsonObject = jsonResult.getJSONObject(j)
+                    data.add(jsonObject)
+                }
+            }
+            data
         }.subscribeOn(Schedulers.io())
     }
 
