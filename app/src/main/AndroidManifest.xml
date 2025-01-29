@@ -52,6 +52,9 @@
             android:name=".share.NoteShareActivity" />
 
         <activity
+            android:name=".share.NoteShareDetailActivity" />
+
+        <activity
             android:name=".importaccount.ImportAccountActivity"
             android:label="@string/add_account" />
 

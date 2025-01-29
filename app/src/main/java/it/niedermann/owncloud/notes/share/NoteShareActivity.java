@@ -180,6 +180,8 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                         }
 
                         runOnUiThread(() -> suggestionAdapter.changeCursor(cursor));
+                    } catch (Exception e) {
+                        Log_OC.d(TAG,"Exception setupSearchView.onQueryTextChange: " + e);
                     }
                 }}).start();
                 return false;
@@ -199,7 +201,9 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                     String suggestion = cursor.getString(cursor.getColumnIndexOrThrow(SearchManager.SUGGEST_COLUMN_TEXT_1));
                     binding.searchView.setQuery(suggestion, false);
 
-                    // TODO: Navigate to details
+                    String shareWith = cursor.getString(cursor.getColumnIndexOrThrow(UsersAndGroupsSearchProvider.SHARE_WITH));
+                    int shareType = cursor.getInt(cursor.getColumnIndexOrThrow(UsersAndGroupsSearchProvider.SHARE_TYPE));
+                    navigateNoteShareDetail(shareWith, shareType);
                 }
                 return true;
             }
@@ -207,6 +211,18 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
         binding.searchView.setQueryHint(getResources().getString(R.string.note_share_fragment_search_text));
         binding.searchView.setInputType(InputType.TYPE_NULL);
+    }
+
+    private void navigateNoteShareDetail(String shareWith, int shareType) {
+        Bundle bundle = new Bundle();
+
+        bundle.putSerializable(NoteShareDetailActivity.ARG_NOTE, note);
+        bundle.putString(NoteShareDetailActivity.ARG_SHAREE_NAME, shareWith);
+        bundle.putInt(NoteShareDetailActivity.ARG_SHARE_TYPE, shareType);
+
+        Intent intent = new Intent(this, NoteShareDetailActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     private void disableSearchView(View view) {
