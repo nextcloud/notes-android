@@ -54,12 +54,17 @@ public class UsersAndGroupsSearchProvider  {
 
     private static final String TAG = UsersAndGroupsSearchProvider.class.getSimpleName();
 
+    public static final String SHARE_TYPE = "SHARE_TYPE";
+    public static final String SHARE_WITH = "SHARE_WITH";
+
     private static final String[] COLUMNS = {
             BaseColumns._ID,
             SearchManager.SUGGEST_COLUMN_TEXT_1,
             SearchManager.SUGGEST_COLUMN_TEXT_2,
             SearchManager.SUGGEST_COLUMN_ICON_1,
-            SearchManager.SUGGEST_COLUMN_INTENT_DATA
+            SearchManager.SUGGEST_COLUMN_INTENT_DATA,
+            SHARE_WITH,
+            SHARE_TYPE
     };
 
     private static final int SEARCH = 1;
@@ -245,7 +250,9 @@ public class UsersAndGroupsSearchProvider  {
                                 .add(displayName)         // SearchManager.SUGGEST_COLUMN_TEXT_1
                                 .add(subline)             // SearchManager.SUGGEST_COLUMN_TEXT_2
                                 .add(icon)                // SearchManager.SUGGEST_COLUMN_ICON_1
-                                .add(dataUri);
+                                .add(dataUri)
+                                .add(SHARE_WITH, shareWith)
+                                .add(SHARE_TYPE, type.getValue());
                     }
 
                 }

@@ -62,6 +62,20 @@
     <string name="note_share_fragment_contact_icon_content_description">note share contact icon</string>
     <string name="note_share_fragment_shared_with_you">Shared with you by %1$s</string>
     <string name="note_share_fragment_share_note">Share note</string>
+    <string name="advanced_settings">Advanced Settings</string>
+    <string name="share_via_link_hide_download">Hide download</string>
+    <string name="share_send_note">Note to recipient</string>
+    <string name="hint_note">Note</string>
+    <string name="common_next">Next</string>
+    <string name="share_copy_link">Share and Copy Link</string>
+    <string name="common_confirm">Confirm</string>
+    <string name="set_note">Set Note</string>
+    <string name="send_share">Send Share</string>
+
+    <string name="hint_name">Name</string>
+
+    <string name="link_name">Link Name</string>
+
     <string name="note_share_fragment_search_text">Name, Federated Cloud ID or email address…</string>
     <string name="note_share_fragment_share_link">Share link</string>
     <string name="note_share_fragment_resharing_not_allowed">Policy or permissions prevent resharing</string>
@@ -70,6 +84,9 @@
     <string name="contact_no_permission">Contact permission is required.</string>
     <string name="share_link_empty_password">You must enter a password</string>
     <string name="hint_password">Password</string>
+    <string name="no_share_permission_selected">Please select at least one permission to share.</string>
+    <string name="label_empty">Label cannot be empty</string>
+
     <string name="share_link_optional_password_title">Enter an optional password</string>
     <string name="common_skip">Skip</string>
     <string name="common_cancel">Cancel</string>

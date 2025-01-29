@@ -15,8 +15,11 @@
     <color name="accent">#121212</color>
     <color name="danger">#d40000</color>
     <color name="text_color">#333333</color>
+    <color name="bg_fallback_highlight">#616161</color>
+    <color name="fg_inverse">#FFFFFF</color>
 
     <color name="defaultBrand">#0082C9</color>
+    <color name="secondary_text_color">#666666</color>
 
     <color name="cursorHandles">#555566</color>
     <color name="defaultTextHighlightBackground">#2233334a</color>
