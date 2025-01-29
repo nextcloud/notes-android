@@ -161,7 +161,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         binding.searchView.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
 
         ShareRepository repository = ShareRepository.getInstance(getApplicationContext());
-        UsersAndGroupsSearchProvider provider = new UsersAndGroupsSearchProvider(this, account, repository);
+        UsersAndGroupsSearchProvider provider = new UsersAndGroupsSearchProvider(this, repository);
         binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -209,7 +209,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             }
         });
 
-        binding.searchView.setQueryHint(getResources().getString(R.string.note_share_fragment_search_text));
+        binding.searchView.setQueryHint(getResources().getString(R.string.note_share_activity_search_text));
         binding.searchView.setInputType(InputType.TYPE_NULL);
     }
 
@@ -283,7 +283,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
     public void copyInternalLink() {
         if (account == null) {
-            DisplayUtils.showSnackMessage(this, getString(R.string.note_share_fragment_could_not_retrieve_url));
+            DisplayUtils.showSnackMessage(this, getString(R.string.note_share_activity_could_not_retrieve_url));
             return;
         }
 
@@ -297,7 +297,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
         intentToShareLink.putExtra(Intent.EXTRA_TEXT, link);
         intentToShareLink.setType("text/plain");
-        intentToShareLink.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.note_share_fragment_subject_shared_with_you, note.getTitle()));
+        intentToShareLink.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.note_share_activity_subject_shared_with_you, note.getTitle()));
 
         String[] packagesToExclude = new String[] { this.getPackageName() };
         DialogFragment chooserDialog = ShareLinkToDialog.newInstance(intentToShareLink, packagesToExclude);
@@ -644,7 +644,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                 if (isGranted) {
                     pickContactEmail();
                 } else {
-                    BrandedSnackbar.make(binding.getRoot(), getString(R.string.contact_no_permission), Snackbar.LENGTH_LONG)
+                    BrandedSnackbar.make(binding.getRoot(), getString(R.string.note_share_activity_contact_no_permission), Snackbar.LENGTH_LONG)
                             .show();
                 }
             });

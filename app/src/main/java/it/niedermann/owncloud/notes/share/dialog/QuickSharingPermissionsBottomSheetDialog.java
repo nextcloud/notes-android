@@ -116,10 +116,10 @@ public class QuickSharingPermissionsBottomSheetDialog extends BottomSheetDialog 
         String[] permissionArray;
         if (ocShare.isFolder()) {
             permissionArray =
-                    activity.getResources().getStringArray(R.array.folder_share_permission_dialog_values);
+                    activity.getResources().getStringArray(R.array.quick_sharing_permission_bottom_sheet_dialog_folder_share_values);
         } else {
             permissionArray =
-                    activity.getResources().getStringArray(R.array.file_share_permission_dialog_values);
+                    activity.getResources().getStringArray(R.array.quick_sharing_permission_bottom_sheet_dialog_note_share_values);
         }
         //get the checked item position
         int checkedItem = SharingMenuHelper.getPermissionCheckedItem(activity, ocShare, permissionArray);

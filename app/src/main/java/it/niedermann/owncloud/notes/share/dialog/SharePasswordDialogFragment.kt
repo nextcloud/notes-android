@@ -27,7 +27,7 @@ import it.niedermann.owncloud.notes.shared.util.extensions.getSerializableArgume
  */
 class SharePasswordDialogFragment : DialogFragment() {
 
-    var keyboardUtils: KeyboardUtils? = null
+    private var keyboardUtils: KeyboardUtils? = null
 
     private var binding: PasswordDialogBinding? = null
     private var note: Note? = null
@@ -52,7 +52,7 @@ class SharePasswordDialogFragment : DialogFragment() {
                         if (!askForPassword && TextUtils.isEmpty(password)) {
                             BrandedSnackbar.make(
                                 binding!!.root,
-                                getString(R.string.share_link_empty_password),
+                                getString(R.string.note_share_detail_activity_share_link_empty_password),
                                 Snackbar.LENGTH_LONG
                             )
                                 .show()
@@ -105,11 +105,11 @@ class SharePasswordDialogFragment : DialogFragment() {
         val neutralButtonTextId: Int
         val title: Int
         if (askForPassword) {
-            title = R.string.share_link_optional_password_title
-            neutralButtonTextId = R.string.common_skip
+            title = R.string.share_password_dialog_fragment_share_link_optional_password_title
+            neutralButtonTextId = R.string.share_password_dialog_fragment_skip
         } else {
             title = R.string.share_link_password_title
-            neutralButtonTextId = R.string.common_cancel
+            neutralButtonTextId = R.string.note_share_detail_activity_cancel
         }
 
         // Build the dialog

@@ -222,9 +222,9 @@ class NoteShareDetailActivity : BrandedActivity(), ExpirationDatePickerDialogFra
         // because we have link to share in Public Link
         binding.shareProcessBtnNext.text = getString(
             if (shareType == ShareType.PUBLIC_LINK) {
-                R.string.share_copy_link
+                R.string.note_share_detail_activity_share_copy_link
             } else {
-                R.string.common_confirm
+                R.string.note_share_detail_activity_common_confirm
             }
         )
 
@@ -236,7 +236,7 @@ class NoteShareDetailActivity : BrandedActivity(), ExpirationDatePickerDialogFra
     }
 
     private fun setupUpdateUI() {
-        binding.shareProcessBtnNext.text = getString(R.string.common_next)
+        binding.shareProcessBtnNext.text = getString(R.string.note_share_detail_activity_common_next)
         file.let {
             updateViewForFile()
             updateViewForShareType()
@@ -353,10 +353,10 @@ class NoteShareDetailActivity : BrandedActivity(), ExpirationDatePickerDialogFra
         binding.shareProcessEditShareLink.visibility = View.GONE
         binding.shareProcessGroupTwo.visibility = View.VISIBLE
         if (share != null) {
-            binding.shareProcessBtnNext.text = getString(R.string.set_note)
+            binding.shareProcessBtnNext.text = getString(R.string.note_share_detail_activity_set_note)
             binding.noteText.setText(share?.note)
         } else {
-            binding.shareProcessBtnNext.text = getString(R.string.send_share)
+            binding.shareProcessBtnNext.text = getString(R.string.note_share_detail_activity_send_share)
             binding.noteText.setText(R.string.empty)
         }
         shareProcessStep = SCREEN_TYPE_NOTE
@@ -452,14 +452,14 @@ class NoteShareDetailActivity : BrandedActivity(), ExpirationDatePickerDialogFra
     private fun validateShareProcessFirst() {
         permission = getSelectedPermission()
         if (permission == OCShare.NO_PERMISSION) {
-            DisplayUtils.showSnackMessage(binding.root, R.string.no_share_permission_selected)
+            DisplayUtils.showSnackMessage(binding.root, R.string.note_share_detail_activity_no_share_permission_selected)
             return
         }
 
         if (binding.shareProcessSetPasswordSwitch.isChecked &&
             binding.shareProcessEnterPassword.text?.trim().isNullOrEmpty()
         ) {
-            DisplayUtils.showSnackMessage(binding.root, R.string.share_link_empty_password)
+            DisplayUtils.showSnackMessage(binding.root, R.string.note_share_detail_activity_share_link_empty_password)
             return
         }
 
@@ -473,7 +473,7 @@ class NoteShareDetailActivity : BrandedActivity(), ExpirationDatePickerDialogFra
         if (binding.shareProcessChangeNameSwitch.isChecked &&
             binding.shareProcessChangeName.text?.trim().isNullOrEmpty()
         ) {
-            DisplayUtils.showSnackMessage(binding.root, R.string.label_empty)
+            DisplayUtils.showSnackMessage(binding.root, R.string.note_share_detail_activity_label_empty)
             return
         }
 
