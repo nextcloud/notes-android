@@ -180,25 +180,6 @@ public class MultiSelectedActionModeCallback implements Callback {
                         mainViewModel.collectNoteContents(selection));
             }
 
-            /*
-             final var selection = new ArrayList<Long>(tracker.getSelection().size());
-            for (final var sel : tracker.getSelection()) {
-                selection.add(sel);
-            }
-            tracker.clearSelection();
-
-            executor.submit(() -> {
-                if (selection.size() == 1) {
-                    final var note = mainViewModel.getFullNote(selection.get(0));
-                    ShareUtil.openShareDialog(context, note.getTitle(), note.getContent());
-                } else {
-                    ShareUtil.openShareDialog(context,
-                            context.getResources().getQuantityString(R.plurals.share_multiple, selection.size(), selection.size()),
-                            mainViewModel.collectNoteContents(selection));
-                }
-            });
-             */
-
             return true;
         } else if (itemId == R.id.menu_category) {// TODO detect whether all selected notes do have the same category - in this case preselect it
             final var accountLiveData = mainViewModel.getCurrentAccount();

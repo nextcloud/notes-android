@@ -63,6 +63,7 @@ import it.niedermann.owncloud.notes.share.operations.ClientFactoryImpl;
 import it.niedermann.owncloud.notes.share.operations.RetrieveHoverCardAsyncTask;
 import it.niedermann.owncloud.notes.shared.user.User;
 import it.niedermann.owncloud.notes.shared.util.DisplayUtils;
+import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 import it.niedermann.owncloud.notes.shared.util.extensions.BundleExtensionsKt;
 
 public class NoteShareActivity extends BrandedActivity implements ShareeListAdapterListener, FileDetailsSharingMenuBottomSheetActions, QuickSharingPermissionsBottomSheetDialog.QuickPermissionSharingBottomSheetActions {
@@ -87,6 +88,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         binding.sharesList.setAdapter(new ShareeListAdapter(this, new ArrayList<>(), this, account));
         binding.sharesList.setLayoutManager(new LinearLayoutManager(this));
         binding.pickContactEmailBtn.setOnClickListener(v -> checkContactPermission());
+        binding.btnShareButton.setOnClickListener(v -> ShareUtil.openShareDialog(this, note.getTitle(), note.getContent()));
 
         setupView();
         refreshCapabilitiesFromDB();
