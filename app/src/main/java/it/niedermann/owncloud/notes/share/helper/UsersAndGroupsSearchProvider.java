@@ -29,7 +29,6 @@ import com.owncloud.android.lib.resources.shares.ShareType;
 import com.owncloud.android.lib.resources.users.Status;
 import com.owncloud.android.lib.resources.users.StatusType;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
@@ -38,19 +37,14 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
-import io.reactivex.Scheduler;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import it.niedermann.nextcloud.sso.glide.SingleSignOnUrl;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.persistence.ShareRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
-import it.niedermann.owncloud.notes.share.model.ShareesData;
 import it.niedermann.owncloud.notes.share.model.UsersAndGroupsSearchConfig;
 
 /**
@@ -77,19 +71,19 @@ public class UsersAndGroupsSearchProvider  {
 
     public static final String CONTENT = "content";
 
-    private String AUTHORITY;
-    private String DATA_USER;
-    private String DATA_GROUP;
-    private String DATA_ROOM;
-    private String DATA_REMOTE;
-    private String DATA_EMAIL;
-    private String DATA_CIRCLE;
+    private final String AUTHORITY;
+    private final String DATA_USER;
+    private final String DATA_GROUP;
+    private final String DATA_ROOM;
+    private final String DATA_REMOTE;
+    private final String DATA_EMAIL;
+    private final String DATA_CIRCLE;
 
-    private UriMatcher mUriMatcher;
+    private final UriMatcher mUriMatcher;
 
-    private ShareRepository repository;
-    private Account account;
-    private Context context;
+    private final ShareRepository repository;
+    private final Account account;
+    private final Context context;
 
     public UsersAndGroupsSearchProvider(Context context, Account account, ShareRepository repository) {
         this.context = context;
@@ -126,14 +120,14 @@ public class UsersAndGroupsSearchProvider  {
         ACTION_SHARE_WITH = context.getString(R.string.users_and_groups_share_with);
     }
 
-    public ShareesData searchForUsersOrGroups(String userQuery) {
+    public Cursor searchForUsersOrGroups(String userQuery) {
         final SingleSignOnAccount ssoAcc;
         try {
             ssoAcc = SingleAccountHelper.getCurrentSingleSignOnAccount(context);
             final var names = repository.getSharees(ssoAcc, userQuery, REQUESTED_PAGE, RESULTS_PER_PAGE).blockingGet();
-            ShareesData data = new ShareesData(null,null,null );
+            MatrixCursor response = null;
             if (!names.isEmpty()) {
-                MatrixCursor response = new MatrixCursor(COLUMNS);
+                response = new MatrixCursor(COLUMNS);
 
                 Uri userBaseUri = new Uri.Builder().scheme(CONTENT).authority(DATA_USER).build();
                 Uri groupBaseUri = new Uri.Builder().scheme(CONTENT).authority(DATA_GROUP).build();
@@ -254,13 +248,10 @@ public class UsersAndGroupsSearchProvider  {
                                 .add(dataUri);
                     }
 
-                    data.setDisplayName(displayName);
-                    data.setDataUri(dataUri);
-                    data.setIcon(icon);
                 }
             }
 
-            return data;
+            return response;
         } catch (Exception e) {
             Log_OC.e(TAG, "Exception while searching", e);
         }

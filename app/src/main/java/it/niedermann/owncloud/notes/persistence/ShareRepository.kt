@@ -40,7 +40,7 @@ class ShareRepository private constructor(private val applicationContext: Contex
     ): Single<ArrayList<JSONObject>> {
         return Single.fromCallable {
             val shareAPI = apiProvider.getShareAPI(applicationContext, account)
-            val call2 = shareAPI.getSharees2(search = searchString, page = page, perPage = perPage)
+            val call2 = shareAPI.getSharees(search = searchString, page = page, perPage = perPage)
             val response2 = call2.execute()
 
             val respJSON = JSONObject(response2.body().toString())
