@@ -314,7 +314,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             mWaitingForOpId = fileActivity.getOperationsServiceBinder().queueNewOperation(service);
         }
          */
-
     }
 
     public void createSecureFileDrop() {
