@@ -25,7 +25,7 @@
         android:layout_marginStart="@dimen/spacer_2x"
         android:layout_marginEnd="@dimen/spacer_2x"
         android:background="@drawable/round_bgnd"
-        android:contentDescription="@string/note_share_fragment_share_icon_content_description"
+        android:contentDescription="@string/note_share_activity_share_icon_content_description"
         android:padding="@dimen/spacer_1x"
         android:src="@drawable/shared_via_link" />
 
@@ -92,7 +92,7 @@
         android:id="@+id/overflow_menu"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:contentDescription="@string/note_share_fragment_more_icon_content_description"
+        android:contentDescription="@string/note_share_activity_more_icon_content_description"
         android:paddingStart="@dimen/spacer_2x"
         android:paddingEnd="@dimen/spacer_2x"
         android:src="@drawable/ic_dots_vertical" />

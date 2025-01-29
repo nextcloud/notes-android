@@ -22,7 +22,7 @@
         style="@style/Widget.MaterialComponents.Button.Icon"
         android:paddingStart="@dimen/spacer_3x"
         android:paddingEnd="@dimen/zero"
-        android:text="@string/note_share_fragment_share_note"
+        android:text="@string/note_share_activity_share_note"
         android:textAlignment="textStart"
         android:textColor="@color/text_color"
         app:iconPadding="@dimen/share_button_padding"
@@ -43,7 +43,7 @@
             android:layout_width="@dimen/default_icon_size"
             android:layout_height="@dimen/default_icon_size"
             android:layout_gravity="center_vertical"
-            android:contentDescription="@string/note_share_fragment_user_icon_content_description"
+            android:contentDescription="@string/note_share_activity_user_icon_content_description"
             android:padding="@dimen/spacer_1x"
             android:src="@drawable/ic_search_grey600_24dp" />
 
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/spacer_1hx"
             android:layout_weight="1"
-            android:hint="@string/note_share_fragment_search_text"
+            android:hint="@string/note_share_activity_search_text"
             app:searchIcon="@null" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -63,7 +63,7 @@
             android:layout_height="@dimen/minimum_size_for_touchable_area"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="@dimen/spacer_1hx"
-            android:contentDescription="@string/note_share_fragment_contact_icon_content_description"
+            android:contentDescription="@string/note_share_activity_contact_icon_content_description"
             android:padding="12dp"
             android:src="@drawable/ic_contact_book" />
 
@@ -85,7 +85,7 @@
             android:id="@+id/shared_with_you_avatar"
             android:layout_width="@dimen/default_icon_size"
             android:layout_height="@dimen/default_icon_size"
-            android:contentDescription="@string/note_share_fragment_user_icon_content_description"
+            android:contentDescription="@string/note_share_activity_user_icon_content_description"
             android:src="@drawable/ic_account_circle_grey_24dp" />
 
         <LinearLayout
@@ -100,7 +100,7 @@
                 android:id="@+id/shared_with_you_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/note_share_fragment_shared_with_you"
+                android:text="@string/note_share_activity_shared_with_you"
                 android:textSize="@dimen/note_font_size_small" />
 
             <LinearLayout
@@ -114,7 +114,7 @@
                 <ImageView
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:contentDescription="@string/note_share_fragment_icon_content_description"
+                    android:contentDescription="@string/note_share_activity_icon_content_description"
                     android:src="@drawable/ic_notes" />
 
                 <TextView

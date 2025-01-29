@@ -28,7 +28,7 @@
             android:layout_marginRight="@dimen/spacer_2x"
             android:layout_marginStart="@dimen/spacer_2x"
             android:layout_marginTop="@dimen/spacer_1x"
-            android:contentDescription="@string/note_share_fragment_user_icon_content_description"
+            android:contentDescription="@string/note_share_activity_user_icon_content_description"
             android:src="@drawable/ic_account_circle_grey_24dp" />
 
         <TextView

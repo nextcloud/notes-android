@@ -11,16 +11,12 @@ import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.MatrixCursor;
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.ParcelFileDescriptor;
 import android.provider.BaseColumns;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 import com.owncloud.android.lib.common.utils.Log_OC;
@@ -31,20 +27,13 @@ import com.owncloud.android.lib.resources.users.StatusType;
 
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
-import it.niedermann.nextcloud.sso.glide.SingleSignOnUrl;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.persistence.ShareRepository;
-import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.share.model.UsersAndGroupsSearchConfig;
 
 /**
@@ -84,18 +73,14 @@ public class UsersAndGroupsSearchProvider  {
     private final String DATA_EMAIL;
     private final String DATA_CIRCLE;
 
-    private final UriMatcher mUriMatcher;
-
     private final ShareRepository repository;
-    private final Account account;
     private final Context context;
 
-    public UsersAndGroupsSearchProvider(Context context, Account account, ShareRepository repository) {
+    public UsersAndGroupsSearchProvider(Context context, ShareRepository repository) {
         this.context = context;
-        this.account = account;
         this.repository = repository;
 
-        AUTHORITY = context.getString(R.string.users_and_groups_search_authority);
+        AUTHORITY = context.getString(R.string.users_and_groups_search_provider_authority);
         setActionShareWith(context);
         DATA_USER = AUTHORITY + ".data.user";
         DATA_GROUP = AUTHORITY + ".data.group";
@@ -111,18 +96,14 @@ public class UsersAndGroupsSearchProvider  {
         sShareTypes.put(DATA_EMAIL, ShareType.EMAIL);
         sShareTypes.put(DATA_CIRCLE, ShareType.CIRCLE);
 
-        mUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+        UriMatcher mUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         mUriMatcher.addURI(AUTHORITY, SearchManager.SUGGEST_URI_PATH_QUERY + "/*", SEARCH);
     }
 
     private static final Map<String, ShareType> sShareTypes = new HashMap<>();
 
-    public static ShareType getShareType(String authority) {
-        return sShareTypes.get(authority);
-    }
-
     private static void setActionShareWith(@NonNull Context context) {
-        ACTION_SHARE_WITH = context.getString(R.string.users_and_groups_share_with);
+        ACTION_SHARE_WITH = context.getString(R.string.users_and_groups_search_provider_share_with);
     }
 
     public Cursor searchForUsersOrGroups(String userQuery) {
@@ -246,10 +227,10 @@ public class UsersAndGroupsSearchProvider  {
 
                     if (displayName != null && dataUri != null) {
                         response.newRow()
-                                .add(count++)             // BaseColumns._ID
-                                .add(displayName)         // SearchManager.SUGGEST_COLUMN_TEXT_1
-                                .add(subline)             // SearchManager.SUGGEST_COLUMN_TEXT_2
-                                .add(icon)                // SearchManager.SUGGEST_COLUMN_ICON_1
+                                .add(count++)
+                                .add(displayName)
+                                .add(subline)
+                                .add(icon)
                                 .add(dataUri)
                                 .add(SHARE_WITH, shareWith)
                                 .add(SHARE_TYPE, type.getValue());
@@ -264,53 +245,5 @@ public class UsersAndGroupsSearchProvider  {
         }
 
         return null;
-    }
-
-    public ParcelFileDescriptor openFile(@NonNull Uri uri, @NonNull String mode) throws FileNotFoundException {
-        try {
-            Bitmap avatar = Glide.with(context)
-                    .asBitmap()
-                    .load(new SingleSignOnUrl(account.getAccountName(), account.getUrl() + "/index.php/avatar/" + Uri.encode(account.getUserName()) + "/64"))
-                    .placeholder(R.drawable.ic_account_circle_grey_24dp)
-                    .error(R.drawable.ic_account_circle_grey_24dp)
-                    .apply(RequestOptions.circleCropTransform())
-                    .submit()
-                    .get();
-
-            // create a file to write bitmap data
-            File f = new File(context.getCacheDir(), "test");
-            try {
-                if (f.exists()) {
-                    if (!f.delete()) {
-                        throw new IllegalStateException("Existing file could not be deleted!");
-                    }
-                }
-                if (!f.createNewFile()) {
-                    throw new IllegalStateException("File could not be created!");
-                }
-
-                //Convert bitmap to byte array
-                ByteArrayOutputStream bos = new ByteArrayOutputStream();
-
-                avatar.compress(Bitmap.CompressFormat.PNG, 90, bos);
-                byte[] bitmapData = bos.toByteArray();
-
-                //write the bytes in file
-                try (FileOutputStream fos = new FileOutputStream(f)) {
-                    fos.write(bitmapData);
-                } catch (FileNotFoundException e) {
-                    Log_OC.e(TAG, "File not found: " + e.getMessage());
-                }
-
-            } catch (Exception e) {
-                Log_OC.e(TAG, "Error opening file: " + e.getMessage());
-            }
-
-            return ParcelFileDescriptor.open(f, ParcelFileDescriptor.MODE_READ_ONLY);
-        } catch (ExecutionException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
