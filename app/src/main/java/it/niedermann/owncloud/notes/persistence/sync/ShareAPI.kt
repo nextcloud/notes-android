@@ -6,6 +6,8 @@ import com.owncloud.android.lib.resources.shares.ShareType
 import it.niedermann.owncloud.notes.shared.model.OcsResponse
 import retrofit2.Call
 import retrofit2.http.DELETE
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.PATCH
 import retrofit2.http.POST
@@ -38,15 +40,16 @@ interface ShareAPI {
     @PATCH("shares")
     fun updateShare(remoteShareId: Long): Call<OcsResponse<List<OCShare>>>
 
+    @FormUrlEncoded
     @POST("shares")
     fun addShare(
-        remoteFilePath: String,
-        shareType: ShareType,
-        shareWith: String,
-        publicUpload: Boolean,
-        password: String,
-        permissions: Int,
-        getShareDetails: Boolean,
-        note: String
+        @Field("remoteFilePath") remoteFilePath: String,
+        @Field("shareType") shareType: ShareType,
+        @Field("shareWith") shareWith: String,
+        @Field("publicUpload") publicUpload: Boolean,
+        @Field("password") password: String,
+        @Field("permissions") permissions: Int,
+        @Field("getShareDetails") getShareDetails: Boolean,
+        @Field("note") note: String
     ): Call<OcsResponse<List<OCShare>>>
 }
