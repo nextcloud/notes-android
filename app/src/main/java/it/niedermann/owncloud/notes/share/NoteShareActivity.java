@@ -67,6 +67,7 @@ import it.niedermann.owncloud.notes.shared.util.extensions.BundleExtensionsKt;
 
 public class NoteShareActivity extends BrandedActivity implements ShareeListAdapterListener, FileDetailsSharingMenuBottomSheetActions, QuickSharingPermissionsBottomSheetDialog.QuickPermissionSharingBottomSheetActions {
 
+    private static final String TAG = "NoteShareActivity";
     public static final String ARG_NOTE = "NOTE";
     public static final String ARG_ACCOUNT = "ACCOUNT";
     public static final String FTAG_CHOOSER_DIALOG = "CHOOSER_DIALOG";
@@ -180,6 +181,11 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             public boolean onQueryTextChange(String newText) {
                 new Thread(() -> {{
                     try (Cursor cursor = provider.searchForUsersOrGroups(newText)) {
+                        if (cursor == null) {
+                            Log_OC.d(TAG,"searchForUsersOrGroups returned null");
+                            return;
+                        }
+
                         runOnUiThread(() -> suggestionAdapter.changeCursor(cursor));
                     }
                 }}).start();
