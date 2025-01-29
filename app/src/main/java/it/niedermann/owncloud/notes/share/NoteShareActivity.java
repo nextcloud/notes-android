@@ -202,9 +202,11 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             @Override
             public boolean onSuggestionClick(int position) {
                 Cursor cursor = suggestionAdapter.getCursor();
-                if (cursor.moveToPosition(position)) {
+                if (cursor != null && cursor.moveToPosition(position)) {
                     String suggestion = cursor.getString(cursor.getColumnIndexOrThrow(SearchManager.SUGGEST_COLUMN_TEXT_1));
                     binding.searchView.setQuery(suggestion, false);
+
+                    // TODO: Navigate to details
                 }
                 return true;
             }
