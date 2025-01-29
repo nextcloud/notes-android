@@ -50,6 +50,7 @@ import it.niedermann.owncloud.notes.persistence.ShareRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.share.adapter.ShareeListAdapter;
+import it.niedermann.owncloud.notes.share.adapter.SuggestionAdapter;
 import it.niedermann.owncloud.notes.share.dialog.FileDetailSharingMenuBottomSheetDialog;
 import it.niedermann.owncloud.notes.share.dialog.QuickSharingPermissionsBottomSheetDialog;
 import it.niedermann.owncloud.notes.share.dialog.ShareLinkToDialog;
@@ -57,7 +58,6 @@ import it.niedermann.owncloud.notes.share.dialog.SharePasswordDialogFragment;
 import it.niedermann.owncloud.notes.share.helper.UsersAndGroupsSearchProvider;
 import it.niedermann.owncloud.notes.share.listener.FileDetailsSharingMenuBottomSheetActions;
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
-import it.niedermann.owncloud.notes.share.model.ShareesData;
 import it.niedermann.owncloud.notes.share.model.UsersAndGroupsSearchConfig;
 import it.niedermann.owncloud.notes.share.operations.ClientFactoryImpl;
 import it.niedermann.owncloud.notes.share.operations.RetrieveHoverCardAsyncTask;
@@ -154,6 +154,9 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             return;
         }
 
+        SuggestionAdapter suggestionAdapter = new SuggestionAdapter(this, null);
+        binding.searchView.setSuggestionsAdapter(suggestionAdapter);
+
         // assumes parent activity is the searchable activity
         binding.searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName));
 
@@ -176,10 +179,28 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             @Override
             public boolean onQueryTextChange(String newText) {
                 new Thread(() -> {{
-                    ShareesData data = provider.searchForUsersOrGroups(newText);
-                    Log_OC.e(NoteShareActivity.class.getSimpleName(), "Fetched" + newText);
+                    try (Cursor cursor = provider.searchForUsersOrGroups(newText)) {
+                        runOnUiThread(() -> suggestionAdapter.changeCursor(cursor));
+                    }
                 }}).start();
                 return false;
+            }
+        });
+
+        binding.searchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
+            @Override
+            public boolean onSuggestionSelect(int position) {
+                return false;
+            }
+
+            @Override
+            public boolean onSuggestionClick(int position) {
+                Cursor cursor = suggestionAdapter.getCursor();
+                if (cursor.moveToPosition(position)) {
+                    String suggestion = cursor.getString(cursor.getColumnIndexOrThrow(SearchManager.SUGGEST_COLUMN_TEXT_1));
+                    binding.searchView.setQuery(suggestion, false);
+                }
+                return true;
             }
         });
     }
