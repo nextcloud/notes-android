@@ -211,7 +211,7 @@ public class UsersAndGroupsSearchProvider  {
                                 builder.appendQueryParameter("icon", status.getIcon());
                             }
 
-                            icon = builder.build();
+                            icon = builder.build().toString();
 
                             dataUri = Uri.withAppendedPath(userBaseUri, shareWith);
                             break;
