@@ -163,7 +163,6 @@ class ShareRepository(private val applicationContext: Context) {
         }.subscribeOn(Schedulers.io())
     }
 
-    // TODO: Try with AT_BODY
     fun addShare(
         account: SingleSignOnAccount,
         note: Note,
