@@ -4,6 +4,9 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
+import androidx.lifecycle.lifecycleScope
+import com.nextcloud.android.sso.helper.SingleAccountHelper
+import com.owncloud.android.lib.common.utils.Log_OC
 import com.owncloud.android.lib.resources.shares.OCShare
 import com.owncloud.android.lib.resources.shares.SharePermissionsBuilder
 import com.owncloud.android.lib.resources.shares.ShareType
@@ -14,9 +17,12 @@ import it.niedermann.owncloud.notes.databinding.ActivityNoteShareDetailBinding
 import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.share.dialog.ExpirationDatePickerDialogFragment
 import it.niedermann.owncloud.notes.share.helper.SharingMenuHelper
+import it.niedermann.owncloud.notes.share.repository.ShareRepository
 import it.niedermann.owncloud.notes.shared.util.DisplayUtils
 import it.niedermann.owncloud.notes.shared.util.extensions.getParcelableArgument
 import it.niedermann.owncloud.notes.shared.util.extensions.getSerializableArgument
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -91,7 +97,7 @@ class NoteShareDetailActivity : BrandedActivity(), ExpirationDatePickerDialogFra
     }
 
     private lateinit var binding: ActivityNoteShareDetailBinding
-    private var file: Note? = null // file to be share
+    private var note: Note? = null // note to be share
     private var shareeName: String? = null
     private lateinit var shareType: ShareType
     private var shareProcessStep = SCREEN_TYPE_PERMISSION // default screen type
@@ -104,7 +110,7 @@ class NoteShareDetailActivity : BrandedActivity(), ExpirationDatePickerDialogFra
     private var isSecureShare: Boolean = false
 
     private var expirationDatePickerFragment: ExpirationDatePickerDialogFragment? = null
-
+    private lateinit var repository: ShareRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -114,7 +120,7 @@ class NoteShareDetailActivity : BrandedActivity(), ExpirationDatePickerDialogFra
         val arguments = intent.extras
 
         arguments?.let {
-            file = it.getSerializableArgument(ARG_NOTE, Note::class.java)
+            note = it.getSerializableArgument(ARG_NOTE, Note::class.java)
             shareeName = it.getString(ARG_SHAREE_NAME)
             share = it.getParcelableArgument(ARG_OCSHARE, OCShare::class.java)
 
@@ -132,6 +138,7 @@ class NoteShareDetailActivity : BrandedActivity(), ExpirationDatePickerDialogFra
 
         // capabilities = CapabilityUtils.getCapability(context)
 
+        repository = ShareRepository(this)
         if (shareProcessStep == SCREEN_TYPE_PERMISSION) {
             showShareProcessFirst()
         } else {
@@ -237,7 +244,7 @@ class NoteShareDetailActivity : BrandedActivity(), ExpirationDatePickerDialogFra
 
     private fun setupUpdateUI() {
         binding.shareProcessBtnNext.text = getString(R.string.note_share_detail_activity_common_next)
-        file.let {
+        note.let {
             updateViewForFile()
             updateViewForShareType()
         }
@@ -544,6 +551,33 @@ class NoteShareDetailActivity : BrandedActivity(), ExpirationDatePickerDialogFra
         onShareProcessClosed()
          */
 
+        val noteText = binding.noteText.text.toString().trim()
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            val ssoAcc = SingleAccountHelper.getCurrentSingleSignOnAccount(this@NoteShareDetailActivity)
+
+            // if modifying existing share then directly update the note and send email
+            if (share != null && share?.note != noteText) {
+                // repository.updateShare(ssoAcc,share, noteText)
+            } else {
+                if (note == null || shareeName == null) {
+                    Log_OC.d(TAG, "validateShareProcessSecond cancelled")
+                    return@launch
+                }
+
+                // else create new share
+                repository.addShare(
+                    ssoAcc,
+                    note!!,
+                    shareType,
+                    shareeName!!,
+                    "false", // TODO: Check how to determine it
+                    binding.shareProcessEnterPassword.text.toString().trim(),
+                    permission,
+                    noteText
+                )
+            }
+        }
     }
 
     override fun onDateSet(year: Int, monthOfYear: Int, dayOfMonth: Int, chosenDateInMillis: Long) {

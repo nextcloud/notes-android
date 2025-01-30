@@ -33,7 +33,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.persistence.ShareRepository;
+import it.niedermann.owncloud.notes.share.repository.ShareRepository;
 import it.niedermann.owncloud.notes.share.model.UsersAndGroupsSearchConfig;
 
 /**
