@@ -39,6 +39,10 @@ import com.owncloud.android.lib.resources.status.NextcloudVersion;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import it.niedermann.nextcloud.sso.glide.SingleSignOnUrl;
 import it.niedermann.owncloud.notes.R;
@@ -46,7 +50,6 @@ import it.niedermann.owncloud.notes.branding.BrandedActivity;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ActivityNoteShareBinding;
-import it.niedermann.owncloud.notes.share.repository.ShareRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.share.adapter.ShareeListAdapter;
@@ -61,6 +64,7 @@ import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
 import it.niedermann.owncloud.notes.share.model.UsersAndGroupsSearchConfig;
 import it.niedermann.owncloud.notes.share.operations.ClientFactoryImpl;
 import it.niedermann.owncloud.notes.share.operations.RetrieveHoverCardAsyncTask;
+import it.niedermann.owncloud.notes.share.repository.ShareRepository;
 import it.niedermann.owncloud.notes.shared.user.User;
 import it.niedermann.owncloud.notes.shared.util.DisplayUtils;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
@@ -72,6 +76,10 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     public static final String ARG_NOTE = "NOTE";
     public static final String ARG_ACCOUNT = "ACCOUNT";
     public static final String FTAG_CHOOSER_DIALOG = "CHOOSER_DIALOG";
+
+    private final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+    private Future<?> future;
+    private static final long SEARCH_DELAY_MS = 500;
 
     private ActivityNoteShareBinding binding;
     private Note note;
@@ -149,38 +157,52 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         }
 
         SuggestionAdapter suggestionAdapter = new SuggestionAdapter(this, null);
-        binding.searchView.setSuggestionsAdapter(suggestionAdapter);
-
-        // assumes parent activity is the searchable activity
-        binding.searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName));
-
-        // do not iconify the widget; expand it by default
-        binding.searchView.setIconifiedByDefault(false);
-
-        // avoid fullscreen with softkeyboard
-        binding.searchView.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
-
         ShareRepository repository = new ShareRepository(this);
         UsersAndGroupsSearchProvider provider = new UsersAndGroupsSearchProvider(this, repository);
+
+        binding.searchView.setSuggestionsAdapter(suggestionAdapter);
+        binding.searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName));
+        binding.searchView.setIconifiedByDefault(false);
+        binding.searchView.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
+        binding.searchView.setQueryHint(getResources().getString(R.string.note_share_activity_search_text));
+        binding.searchView.setInputType(InputType.TYPE_NULL);
         binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-
                 // return true to prevent the query from being processed;
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                new Thread(() -> {{
+                binding.progressBar.setVisibility(View.VISIBLE);
+
+                // Cancel the previous task if it's still running
+                if (future != null && !future.isDone()) {
+                    future.cancel(true);
+                }
+
+                // Schedule a new task with a delay
+                future = executorService.schedule(() -> {
                     try (Cursor cursor = provider.searchForUsersOrGroups(newText)) {
-                        if (cursor != null) {
-                            runOnUiThread(() -> suggestionAdapter.changeCursor(cursor));
-                        }
+                        runOnUiThread(() -> {{
+                            if (cursor == null || cursor.getCount() == 0) {
+                                suggestionAdapter.changeCursor(null);
+                                return;
+                            }
+
+                            if (binding.searchView.getVisibility() == View.VISIBLE) {
+                                suggestionAdapter.swapCursor(cursor);
+                            }
+
+                            binding.progressBar.setVisibility(View.GONE);
+                        }});
                     } catch (Exception e) {
-                        Log_OC.d(TAG,"Exception setupSearchView.onQueryTextChange: " + e);
+                        Log_OC.d(TAG, "Exception setupSearchView.onQueryTextChange: " + e);
+                        runOnUiThread(() -> binding.progressBar.setVisibility(View.GONE));
                     }
-                }}).start();
+                }, SEARCH_DELAY_MS, TimeUnit.MILLISECONDS);
+
                 return false;
             }
         });
@@ -205,9 +227,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                 return true;
             }
         });
-
-        binding.searchView.setQueryHint(getResources().getString(R.string.note_share_activity_search_text));
-        binding.searchView.setInputType(InputType.TYPE_NULL);
     }
 
     private void navigateNoteShareDetail(String shareWith, int shareType) {
@@ -685,6 +704,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         final var util = BrandingUtil.of(color, this);
         util.platform.themeStatusBar(this);
         util.androidx.themeToolbarSearchView(binding.searchView);
+        util.platform.themeHorizontalProgressBar(binding.progressBar);
     }
 
     public interface OnEditShareListener {
