@@ -1,21 +1,22 @@
-package it.niedermann.owncloud.notes.persistence
+package it.niedermann.owncloud.notes.share.repository
 
-import android.app.Application
 import android.content.Context
+import android.util.Log
 import com.nextcloud.android.sso.api.EmptyResponse
 import com.nextcloud.android.sso.model.SingleSignOnAccount
-import com.owncloud.android.lib.common.utils.Log_OC
-import com.owncloud.android.lib.resources.shares.GetShareesRemoteOperation
 import com.owncloud.android.lib.resources.shares.OCShare
 import com.owncloud.android.lib.resources.shares.ShareType
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
+import it.niedermann.owncloud.notes.persistence.ApiProvider
+import it.niedermann.owncloud.notes.persistence.NotesRepository
 import it.niedermann.owncloud.notes.persistence.entity.Note
+import it.niedermann.owncloud.notes.share.model.CreateShareRequest
 import it.niedermann.owncloud.notes.shared.model.ApiVersion
 import org.json.JSONArray
 import org.json.JSONObject
 
-class ShareRepository private constructor(private val applicationContext: Context) {
+class ShareRepository(private val applicationContext: Context) {
 
     private val apiProvider: ApiProvider by lazy { ApiProvider.getInstance() }
     private val notesRepository: NotesRepository by lazy {
@@ -40,10 +41,10 @@ class ShareRepository private constructor(private val applicationContext: Contex
     ): Single<ArrayList<JSONObject>> {
         return Single.fromCallable {
             val shareAPI = apiProvider.getShareAPI(applicationContext, account)
-            val call2 = shareAPI.getSharees(search = searchString, page = page, perPage = perPage)
-            val response2 = call2.execute()
+            val call = shareAPI.getSharees(search = searchString, page = page, perPage = perPage)
+            val response = call.execute()
 
-            val respJSON = JSONObject(response2.body().toString())
+            val respJSON = JSONObject(response.body().toString())
             val respOCS = respJSON.getJSONObject("ocs")
             val respData = respOCS.getJSONObject("data")
             val respExact = respData.getJSONObject("exact")
@@ -162,47 +163,42 @@ class ShareRepository private constructor(private val applicationContext: Contex
         }.subscribeOn(Schedulers.io())
     }
 
+    // TODO: Try with AT_BODY
     fun addShare(
         account: SingleSignOnAccount,
         note: Note,
         shareType: ShareType,
         shareWith: String,
-        publicUpload: Boolean = false,
+        publicUpload: String = "false",
         password: String = "",
         permissions: Int = 0,
-        getShareDetails: Boolean = true,
         shareNote: String = ""
-    ): Single<List<OCShare>> {
-        return getNotesPath(account)
-            .flatMap { notesPath ->
-                Single.fromCallable {
-                    val shareAPI = apiProvider.getShareAPI(applicationContext, account)
-                    val call = shareAPI.addShare(
-                        remoteFilePath = notesPath + "/" + note.remoteId,
-                        shareType = shareType,
-                        shareWith = shareWith,
-                        publicUpload = publicUpload,
-                        password = password,
-                        permissions = permissions,
-                        getShareDetails = getShareDetails,
-                        note = shareNote
-                    )
-                    val response = call.execute()
-                    response.body()?.ocs?.data ?: throw RuntimeException("Share creation failed")
-                }.subscribeOn(Schedulers.io())
-            }
-    }
+    ) {
+        val notesPathCall = notesRepository.getServerSettings(account, ApiVersion.API_VERSION_1_0)
+        val notesPathResponse = notesPathCall.execute()
+        val notesPathResponseResult = notesPathResponse.body() ?: return
+        val notesPath = notesPathResponseResult.notesPath
+        val notesSuffix = notesPathResponseResult.fileSuffix
 
-    companion object {
-        private var instance: ShareRepository? = null
+        val requestBody = CreateShareRequest(
+            path = "/" + notesPath + "/" + note.title + notesSuffix,
+            shareType = shareType.value,
+            shareWith = shareWith,
+            publicUpload = publicUpload,
+            password = password,
+            permissions = permissions,
+            note = shareNote
+        )
 
-        @JvmStatic
-        fun getInstance(applicationContext: Context): ShareRepository {
-            require(applicationContext is Application)
-            if (instance == null) {
-                instance = ShareRepository(applicationContext)
-            }
-            return instance!!
+        val shareAPI = apiProvider.getShareAPI(applicationContext, account)
+        val call = shareAPI.addShare(request = requestBody)
+        val response = call.execute()
+        if (response.isSuccessful) {
+            val createShareResponse = response.body()
+            Log.d("", "Response successfull: $createShareResponse")
+        } else {
+            val errorBody = response.errorBody()?.string()
+            Log.d("", "Response failed:$errorBody")
         }
     }
 }

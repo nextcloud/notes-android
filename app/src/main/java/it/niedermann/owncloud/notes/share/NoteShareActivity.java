@@ -46,7 +46,7 @@ import it.niedermann.owncloud.notes.branding.BrandedActivity;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ActivityNoteShareBinding;
-import it.niedermann.owncloud.notes.persistence.ShareRepository;
+import it.niedermann.owncloud.notes.share.repository.ShareRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.share.adapter.ShareeListAdapter;
@@ -160,7 +160,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         // avoid fullscreen with softkeyboard
         binding.searchView.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
 
-        ShareRepository repository = ShareRepository.getInstance(getApplicationContext());
+        ShareRepository repository = new ShareRepository(this);
         UsersAndGroupsSearchProvider provider = new UsersAndGroupsSearchProvider(this, repository);
         binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -174,12 +174,9 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             public boolean onQueryTextChange(String newText) {
                 new Thread(() -> {{
                     try (Cursor cursor = provider.searchForUsersOrGroups(newText)) {
-                        if (cursor == null) {
-                            Log_OC.d(TAG,"searchForUsersOrGroups returned null");
-                            return;
+                        if (cursor != null) {
+                            runOnUiThread(() -> suggestionAdapter.changeCursor(cursor));
                         }
-
-                        runOnUiThread(() -> suggestionAdapter.changeCursor(cursor));
                     } catch (Exception e) {
                         Log_OC.d(TAG,"Exception setupSearchView.onQueryTextChange: " + e);
                     }
