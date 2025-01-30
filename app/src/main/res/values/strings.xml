@@ -88,6 +88,7 @@
     <string name="note_share_detail_activity_no_share_permission_selected">Please select at least one permission to share.</string>
     <string name="note_share_detail_activity_label_empty">Label cannot be empty</string>
     <string name="note_share_detail_activity_cancel">Cancel</string>
+    <string name="note_share_detail_activity_create_share_error">Failed to create a share</string>
 
     <!-- SharePasswordDialogFragment -->
     <string name="share_password_dialog_fragment_share_link_optional_password_title">Enter an optional password</string>

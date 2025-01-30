@@ -23,6 +23,7 @@ import it.niedermann.owncloud.notes.shared.util.extensions.getParcelableArgument
 import it.niedermann.owncloud.notes.shared.util.extensions.getSerializableArgument
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -35,7 +36,8 @@ import java.util.Date
  * 2. This will handle both Advanced Permissions and Send New Email functionality for existing shares to modify them.
  */
 @Suppress("TooManyFunctions")
-class NoteShareDetailActivity : BrandedActivity(), ExpirationDatePickerDialogFragment.OnExpiryDateListener {
+class NoteShareDetailActivity : BrandedActivity(),
+    ExpirationDatePickerDialogFragment.OnExpiryDateListener {
 
     companion object {
         const val TAG = "NoteShareDetailActivity"
@@ -243,7 +245,8 @@ class NoteShareDetailActivity : BrandedActivity(), ExpirationDatePickerDialogFra
     }
 
     private fun setupUpdateUI() {
-        binding.shareProcessBtnNext.text = getString(R.string.note_share_detail_activity_common_next)
+        binding.shareProcessBtnNext.text =
+            getString(R.string.note_share_detail_activity_common_next)
         note.let {
             updateViewForFile()
             updateViewForShareType()
@@ -299,7 +302,8 @@ class NoteShareDetailActivity : BrandedActivity(), ExpirationDatePickerDialogFra
             if (!isReShareShown) {
                 binding.shareProcessAllowResharingCheckbox.visibility = View.GONE
             }
-            binding.shareProcessAllowResharingCheckbox.isChecked = SharingMenuHelper.canReshare(share)
+            binding.shareProcessAllowResharingCheckbox.isChecked =
+                SharingMenuHelper.canReshare(share)
         }
     }
 
@@ -316,7 +320,8 @@ class NoteShareDetailActivity : BrandedActivity(), ExpirationDatePickerDialogFra
                 binding.shareProcessHideDownloadCheckbox.visibility = View.GONE
             } else {
                 binding.shareProcessHideDownloadCheckbox.visibility = View.VISIBLE
-                binding.shareProcessHideDownloadCheckbox.isChecked = share?.isHideFileDownload == true
+                binding.shareProcessHideDownloadCheckbox.isChecked =
+                    share?.isHideFileDownload == true
             }
         }
     }
@@ -343,7 +348,8 @@ class NoteShareDetailActivity : BrandedActivity(), ExpirationDatePickerDialogFra
     }
 
     private fun updateViewForFolder() {
-        binding.shareProcessPermissionUploadEditing.text = getString(R.string.link_share_allow_upload_and_editing)
+        binding.shareProcessPermissionUploadEditing.text =
+            getString(R.string.link_share_allow_upload_and_editing)
         binding.shareProcessPermissionFileDrop.visibility = View.VISIBLE
         if (isSecureShare) {
             binding.shareProcessPermissionFileDrop.visibility = View.GONE
@@ -360,10 +366,12 @@ class NoteShareDetailActivity : BrandedActivity(), ExpirationDatePickerDialogFra
         binding.shareProcessEditShareLink.visibility = View.GONE
         binding.shareProcessGroupTwo.visibility = View.VISIBLE
         if (share != null) {
-            binding.shareProcessBtnNext.text = getString(R.string.note_share_detail_activity_set_note)
+            binding.shareProcessBtnNext.text =
+                getString(R.string.note_share_detail_activity_set_note)
             binding.noteText.setText(share?.note)
         } else {
-            binding.shareProcessBtnNext.text = getString(R.string.note_share_detail_activity_send_share)
+            binding.shareProcessBtnNext.text =
+                getString(R.string.note_share_detail_activity_send_share)
             binding.noteText.setText(R.string.empty)
         }
         shareProcessStep = SCREEN_TYPE_NOTE
@@ -377,7 +385,7 @@ class NoteShareDetailActivity : BrandedActivity(), ExpirationDatePickerDialogFra
             if (shareProcessStep == SCREEN_TYPE_PERMISSION) {
                 validateShareProcessFirst()
             } else {
-                validateShareProcessSecond()
+                createOrUpdateShare()
             }
         }
         binding.shareProcessSetPasswordSwitch.setOnCheckedChangeListener { _, isChecked ->
@@ -402,7 +410,8 @@ class NoteShareDetailActivity : BrandedActivity(), ExpirationDatePickerDialogFra
     }
 
     private fun showChangeNameInput(isChecked: Boolean) {
-        binding.shareProcessChangeNameContainer.visibility = if (isChecked) View.VISIBLE else View.GONE
+        binding.shareProcessChangeNameContainer.visibility =
+            if (isChecked) View.VISIBLE else View.GONE
         if (!isChecked) {
             binding.shareProcessChangeName.setText(R.string.empty)
         }
@@ -437,7 +446,8 @@ class NoteShareDetailActivity : BrandedActivity(), ExpirationDatePickerDialogFra
     }
 
     private fun showPasswordInput(isChecked: Boolean) {
-        binding.shareProcessEnterPasswordContainer.visibility = if (isChecked) View.VISIBLE else View.GONE
+        binding.shareProcessEnterPasswordContainer.visibility =
+            if (isChecked) View.VISIBLE else View.GONE
 
         // reset the password if switch is unchecked
         if (!isChecked) {
@@ -459,14 +469,20 @@ class NoteShareDetailActivity : BrandedActivity(), ExpirationDatePickerDialogFra
     private fun validateShareProcessFirst() {
         permission = getSelectedPermission()
         if (permission == OCShare.NO_PERMISSION) {
-            DisplayUtils.showSnackMessage(binding.root, R.string.note_share_detail_activity_no_share_permission_selected)
+            DisplayUtils.showSnackMessage(
+                binding.root,
+                R.string.note_share_detail_activity_no_share_permission_selected
+            )
             return
         }
 
         if (binding.shareProcessSetPasswordSwitch.isChecked &&
             binding.shareProcessEnterPassword.text?.trim().isNullOrEmpty()
         ) {
-            DisplayUtils.showSnackMessage(binding.root, R.string.note_share_detail_activity_share_link_empty_password)
+            DisplayUtils.showSnackMessage(
+                binding.root,
+                R.string.note_share_detail_activity_share_link_empty_password
+            )
             return
         }
 
@@ -480,7 +496,10 @@ class NoteShareDetailActivity : BrandedActivity(), ExpirationDatePickerDialogFra
         if (binding.shareProcessChangeNameSwitch.isChecked &&
             binding.shareProcessChangeName.text?.trim().isNullOrEmpty()
         ) {
-            DisplayUtils.showSnackMessage(binding.root, R.string.note_share_detail_activity_label_empty)
+            DisplayUtils.showSnackMessage(
+                binding.root,
+                R.string.note_share_detail_activity_label_empty
+            )
             return
         }
 
@@ -520,53 +539,28 @@ class NoteShareDetailActivity : BrandedActivity(), ExpirationDatePickerDialogFra
             ClipboardUtil.copyToClipboard(this, share?.shareLink)
         }
          */
-
     }
 
     /**
      * method to validate step 2 (note screen) information
      */
-    private fun validateShareProcessSecond() {
-        /*
-        val noteText = binding.noteText.text.toString().trim()
-        // if modifying existing share then directly update the note and send email
-        if (share != null && share?.note != noteText) {
-            fileOperationsHelper?.updateNoteToShare(share, noteText)
-        } else {
-            // else create new share
-            fileOperationsHelper?.shareFileWithSharee(
-                file,
-                shareeName,
-                shareType,
-                permission,
-                binding
-                    .shareProcessHideDownloadCheckbox.isChecked,
-                binding.shareProcessEnterPassword.text.toString().trim(),
-                chosenExpDateInMills,
-                noteText,
-                binding.shareProcessChangeName.text.toString().trim(),
-                true
-            )
-        }
-        onShareProcessClosed()
-         */
-
+    private fun createOrUpdateShare() {
         val noteText = binding.noteText.text.toString().trim()
 
         lifecycleScope.launch(Dispatchers.IO) {
-            val ssoAcc = SingleAccountHelper.getCurrentSingleSignOnAccount(this@NoteShareDetailActivity)
+            val ssoAcc =
+                SingleAccountHelper.getCurrentSingleSignOnAccount(this@NoteShareDetailActivity)
 
             // if modifying existing share then directly update the note and send email
             if (share != null && share?.note != noteText) {
-                // repository.updateShare(ssoAcc,share, noteText)
+                // repository.updateShare(ssoAcc, share, noteText)
             } else {
                 if (note == null || shareeName == null) {
                     Log_OC.d(TAG, "validateShareProcessSecond cancelled")
                     return@launch
                 }
 
-                // else create new share
-                repository.addShare(
+                val result = repository.addShare(
                     ssoAcc,
                     note!!,
                     shareType,
@@ -576,6 +570,17 @@ class NoteShareDetailActivity : BrandedActivity(), ExpirationDatePickerDialogFra
                     permission,
                     noteText
                 )
+
+                withContext(Dispatchers.Main) {
+                    if (result) {
+                        finish()
+                    } else {
+                        DisplayUtils.showSnackMessage(
+                            this@NoteShareDetailActivity,
+                            getString(R.string.note_share_detail_activity_create_share_error)
+                        )
+                    }
+                }
             }
         }
     }
