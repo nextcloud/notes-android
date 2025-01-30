@@ -184,19 +184,21 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
                 // Schedule a new task with a delay
                 future = executorService.schedule(() -> {
-                    try (Cursor cursor = provider.searchForUsersOrGroups(newText)) {
-                        runOnUiThread(() -> {{
-                            if (cursor == null || cursor.getCount() == 0) {
-                                suggestionAdapter.changeCursor(null);
-                                return;
-                            }
+                    try {
+                        provider.searchForUsersOrGroups(newText, cursor -> {
+                            runOnUiThread(() -> {{
+                                if (cursor == null || cursor.getCount() == 0) {
+                                    suggestionAdapter.changeCursor(null);
+                                    return;
+                                }
 
-                            if (binding.searchView.getVisibility() == View.VISIBLE) {
-                                suggestionAdapter.swapCursor(cursor);
-                            }
+                                if (binding.searchView.getVisibility() == View.VISIBLE) {
+                                    suggestionAdapter.swapCursor(cursor);
+                                }
 
-                            binding.progressBar.setVisibility(View.GONE);
-                        }});
+                                binding.progressBar.setVisibility(View.GONE);
+                            }});
+                        });
                     } catch (Exception e) {
                         Log_OC.d(TAG, "Exception setupSearchView.onQueryTextChange: " + e);
                         runOnUiThread(() -> binding.progressBar.setVisibility(View.GONE));
@@ -223,6 +225,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                     String shareWith = cursor.getString(cursor.getColumnIndexOrThrow(UsersAndGroupsSearchProvider.SHARE_WITH));
                     int shareType = cursor.getInt(cursor.getColumnIndexOrThrow(UsersAndGroupsSearchProvider.SHARE_TYPE));
                     navigateNoteShareDetail(shareWith, shareType);
+                    provider.dispose();
                 }
                 return true;
             }
