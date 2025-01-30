@@ -172,10 +172,10 @@ class ShareRepository(private val applicationContext: Context) {
         password: String = "",
         permissions: Int = 0,
         shareNote: String = ""
-    ) {
+    ): Boolean {
         val notesPathCall = notesRepository.getServerSettings(account, ApiVersion.API_VERSION_1_0)
         val notesPathResponse = notesPathCall.execute()
-        val notesPathResponseResult = notesPathResponse.body() ?: return
+        val notesPathResponseResult = notesPathResponse.body() ?: return false
         val notesPath = notesPathResponseResult.notesPath
         val notesSuffix = notesPathResponseResult.fileSuffix
 
@@ -199,5 +199,7 @@ class ShareRepository(private val applicationContext: Context) {
             val errorBody = response.errorBody()?.string()
             Log.d("", "Response failed:$errorBody")
         }
+
+        return response.isSuccessful
     }
 }
