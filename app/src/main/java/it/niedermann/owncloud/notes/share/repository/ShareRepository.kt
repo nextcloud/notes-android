@@ -45,71 +45,84 @@ class ShareRepository(private val applicationContext: Context, private val accou
         page: Int,
         perPage: Int
     ): Single<ArrayList<JSONObject>> {
-        return Single.fromCallable {
-            val shareAPI = apiProvider.getShareAPI(applicationContext, account)
-            val call = shareAPI.getSharees(search = searchString, page = page, perPage = perPage)
-            val response = call.execute()
+        return try {
+            Single.fromCallable {
+                val shareAPI = apiProvider.getShareAPI(applicationContext, account)
+                val call = shareAPI.getSharees(search = searchString, page = page, perPage = perPage)
+                val response = call.execute()
 
-            val respJSON = JSONObject(response.body().toString())
-            val respOCS = respJSON.getJSONObject("ocs")
-            val respData = respOCS.getJSONObject("data")
-            val respExact = respData.getJSONObject("exact")
-            val respExactUsers = respExact.getJSONArray("users")
-            val respExactGroups = respExact.getJSONArray("groups")
-            val respExactRemotes = respExact.getJSONArray("remotes")
-            val respExactCircles = if (respExact.has("circles")) {
-                respExact.getJSONArray("circles")
-            } else {
-                JSONArray()
-            }
-            val respExactRooms = if (respExact.has("rooms")) {
-                respExact.getJSONArray("rooms")
-            } else {
-                JSONArray()
-            }
+                if (response.isSuccessful) {
+                    val respJSON = JSONObject(response.body().toString())
+                    val respOCS = respJSON.getJSONObject("ocs")
+                    val respData = respOCS.getJSONObject("data")
+                    val respExact = respData.getJSONObject("exact")
+                    val respExactUsers = respExact.getJSONArray("users")
+                    val respExactGroups = respExact.getJSONArray("groups")
+                    val respExactRemotes = respExact.getJSONArray("remotes")
+                    val respExactCircles = if (respExact.has("circles")) {
+                        respExact.getJSONArray("circles")
+                    } else {
+                        JSONArray()
+                    }
+                    val respExactRooms = if (respExact.has("rooms")) {
+                        respExact.getJSONArray("rooms")
+                    } else {
+                        JSONArray()
+                    }
 
-            val respExactEmails = respExact.getJSONArray("emails")
-            val respPartialUsers = respData.getJSONArray("users")
-            val respPartialGroups = respData.getJSONArray("groups")
-            val respPartialRemotes = respData.getJSONArray("remotes")
-            val respPartialCircles = if (respData.has("circles")) {
-                respData.getJSONArray("circles")
-            } else {
-                JSONArray()
-            }
-            val respPartialRooms = if (respData.has("rooms")) {
-                respData.getJSONArray("rooms")
-            } else {
-                JSONArray()
-            }
+                    val respExactEmails = respExact.getJSONArray("emails")
+                    val respPartialUsers = respData.getJSONArray("users")
+                    val respPartialGroups = respData.getJSONArray("groups")
+                    val respPartialRemotes = respData.getJSONArray("remotes")
+                    val respPartialCircles = if (respData.has("circles")) {
+                        respData.getJSONArray("circles")
+                    } else {
+                        JSONArray()
+                    }
+                    val respPartialRooms = if (respData.has("rooms")) {
+                        respData.getJSONArray("rooms")
+                    } else {
+                        JSONArray()
+                    }
 
-            val jsonResults = arrayOf(
-                respExactUsers,
-                respExactGroups,
-                respExactRemotes,
-                respExactRooms,
-                respExactEmails,
-                respExactCircles,
-                respPartialUsers,
-                respPartialGroups,
-                respPartialRemotes,
-                respPartialRooms,
-                respPartialCircles
-            )
-            val data: ArrayList<JSONObject> = ArrayList()
-            val var25 = jsonResults
-            val var26 = jsonResults.size
+                    val jsonResults = arrayOf(
+                        respExactUsers,
+                        respExactGroups,
+                        respExactRemotes,
+                        respExactRooms,
+                        respExactEmails,
+                        respExactCircles,
+                        respPartialUsers,
+                        respPartialGroups,
+                        respPartialRemotes,
+                        respPartialRooms,
+                        respPartialCircles
+                    )
+                    val data: ArrayList<JSONObject> = ArrayList()
+                    val var25 = jsonResults
+                    val var26 = jsonResults.size
 
-            for (var27 in 0 until var26) {
-                val jsonResult = var25[var27]
+                    for (var27 in 0 until var26) {
+                        val jsonResult = var25[var27]
 
-                for (j in 0 until jsonResult.length()) {
-                    val jsonObject = jsonResult.getJSONObject(j)
-                    data.add(jsonObject)
+                        for (j in 0 until jsonResult.length()) {
+                            val jsonObject = jsonResult.getJSONObject(j)
+                            data.add(jsonObject)
+                        }
+                    }
+                    data
+                } else {
+                    Log_OC.d(tag, "Failed to update share: ${response.errorBody()?.string()}")
+                    ArrayList()
                 }
+            }.subscribeOn(Schedulers.io())
+        } catch (e: Exception) {
+            Log_OC.d(tag, "Exception while get sharees", e)
+
+            Single.fromCallable {
+                ArrayList()
             }
-            data
-        }.subscribeOn(Schedulers.io())
+        }
     }
 
     fun getShares(
@@ -152,13 +165,13 @@ class ShareRepository(private val applicationContext: Context, private val accou
             val call = shareAPI.removeShare(shareId)
             val response = call.execute()
             if (response.isSuccessful) {
-                Log.d("RemoveShare", "Share removed successfully.")
+                Log_OC.d(tag, "Share removed successfully.")
             } else {
-                Log.e("RemoveShare", "Failed to remove share: ${response.errorBody()?.string()}")
+                Log_OC.d(tag, "Failed to remove share: ${response.errorBody()?.string()}")
             }
             response.isSuccessful
         } catch (e: Exception) {
-            Log.e("RemoveShare", "Exception while removing share", e)
+            Log_OC.d(tag, "Exception while removing share", e)
             false
         }
     }
@@ -173,10 +186,10 @@ class ShareRepository(private val applicationContext: Context, private val accou
         val response = call.execute()
         if (response.isSuccessful) {
             val updateShareResponse = response.body()
-            Log.d("", "Response successful: $updateShareResponse")
+            Log_OC.d(tag, "Response successful: $updateShareResponse")
         } else {
             val errorBody = response.errorBody()?.string()
-            Log.d("", "Response failed:$errorBody")
+            Log_OC.d(tag, "Response failed:$errorBody")
         }
 
         return response.isSuccessful
@@ -212,10 +225,10 @@ class ShareRepository(private val applicationContext: Context, private val accou
         val response = call.execute()
         if (response.isSuccessful) {
             val createShareResponse = response.body()
-            Log.d("", "Response successful: $createShareResponse")
+            Log_OC.d(tag, "Response successful: $createShareResponse")
         } else {
             val errorBody = response.errorBody()?.string()
-            Log.d("", "Response failed:$errorBody")
+            Log_OC.d(tag, "Response failed:$errorBody")
         }
 
         return response.isSuccessful
@@ -255,13 +268,13 @@ class ShareRepository(private val applicationContext: Context, private val accou
             val call = shareAPI.updateShareInfo(shareId, requestBody)
             val response = call.execute()
             if (response.isSuccessful) {
-                Log.d("UpdateShare", "Share updated successfully: ${response.body()}")
+                Log_OC.d(tag, "Share updated successfully: ${response.body()}")
             } else {
-                Log.e("UpdateShare", "Failed to update share: ${response.errorBody()?.string()}")
+                Log_OC.d(tag, "Failed to update share: ${response.errorBody()?.string()}")
             }
             response.isSuccessful
         } catch (e: Exception) {
-            Log.e("UpdateShare", "Exception while updating share", e)
+            Log_OC.d(tag, "Exception while updating share", e)
             false
         }
     }
@@ -277,13 +290,13 @@ class ShareRepository(private val applicationContext: Context, private val accou
             val call = shareAPI.updateSharePermission(shareId, requestBody)
             val response = call.execute()
             if (response.isSuccessful) {
-                Log.d("UpdateShare", "Share updated successfully: ${response.body()}")
+                Log_OC.d(tag, "Share updated successfully: ${response.body()}")
             } else {
-                Log.e("UpdateShare", "Failed to update share: ${response.errorBody()?.string()}")
+                Log_OC.d(tag, "Failed to update share: ${response.errorBody()?.string()}")
             }
             response.isSuccessful
         } catch (e: Exception) {
-            Log.e("UpdateShare", "Exception while updating share", e)
+            Log_OC.d(tag, "Exception while updating share", e)
             false
         }
     }

@@ -99,6 +99,13 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         Bundle bundler = getIntent().getExtras();
         note = BundleExtensionsKt.getSerializableArgument(bundler, ARG_NOTE, Note.class);
         account = BundleExtensionsKt.getSerializableArgument(bundler, ARG_ACCOUNT, Account.class);
+        if (note == null) {
+            throw new IllegalArgumentException("Note cannot be null");
+        }
+        if (account == null) {
+            throw new IllegalArgumentException("Account cannot be null");
+        }
+
         clientFactory = new ClientFactoryImpl(this);
 
         new Thread(() -> {{
@@ -120,13 +127,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                 throw new RuntimeException(e);
             }
         }}).start();
-
-        if (note == null) {
-            throw new IllegalArgumentException("Note cannot be null");
-        }
-        if (account == null) {
-            throw new IllegalArgumentException("Account cannot be null");
-        }
     }
 
     @Override
@@ -178,6 +178,13 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         binding.searchView.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
         binding.searchView.setQueryHint(getResources().getString(R.string.note_share_activity_search_text));
         binding.searchView.setInputType(InputType.TYPE_NULL);
+
+        View closeButton = binding.searchView.findViewById(androidx.appcompat.R.id.search_close_btn);
+        closeButton.setOnClickListener(v -> {
+            binding.progressBar.setVisibility(View.GONE);
+            binding.searchView.setQuery("", false);
+        });
+
         binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
