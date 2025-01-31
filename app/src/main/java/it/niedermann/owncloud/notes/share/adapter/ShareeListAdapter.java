@@ -7,16 +7,15 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.owncloud.android.lib.resources.shares.OCShare;
 import com.owncloud.android.lib.resources.shares.ShareType;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
-import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemAddPublicShareBinding;
 import it.niedermann.owncloud.notes.databinding.ItemInternalShareLinkBinding;
 import it.niedermann.owncloud.notes.databinding.ItemShareLinkShareBinding;

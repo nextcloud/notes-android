@@ -98,13 +98,19 @@ class NoteShareDetailActivity : BrandedActivity(),
 
         // capabilities = CapabilityUtils.getCapability(context)
 
-        repository = ShareRepository(this)
-        if (shareProcessStep == SCREEN_TYPE_PERMISSION) {
-            showShareProcessFirst()
-        } else {
-            showShareProcessSecond()
+        lifecycleScope.launch(Dispatchers.IO) {
+            val ssoAcc = SingleAccountHelper.getCurrentSingleSignOnAccount(this@NoteShareDetailActivity)
+            repository = ShareRepository(this@NoteShareDetailActivity, ssoAcc)
+
+            withContext(Dispatchers.Main) {
+                if (shareProcessStep == SCREEN_TYPE_PERMISSION) {
+                    showShareProcessFirst()
+                } else {
+                    showShareProcessSecond()
+                }
+                implementClickEvents()
+            }
         }
-        implementClickEvents()
     }
 
 
@@ -492,7 +498,6 @@ class NoteShareDetailActivity : BrandedActivity(),
             }
 
             repository.updateShareInformation(
-                ssoAcc,
                 share!!.id,
                 binding.shareProcessEnterPassword.text.toString().trim(),
                 chosenExpDateInMills,
@@ -517,12 +522,9 @@ class NoteShareDetailActivity : BrandedActivity(),
         val noteText = binding.noteText.text.toString().trim()
 
         lifecycleScope.launch(Dispatchers.IO) {
-            val ssoAcc =
-                SingleAccountHelper.getCurrentSingleSignOnAccount(this@NoteShareDetailActivity)
-
             // if modifying existing share then directly update the note and send email
             val result = if (share != null && share?.note != noteText) {
-                repository.updateShare(ssoAcc, share!!.id, noteText)
+                repository.updateShare(share!!.id, noteText)
             } else {
                 if (note == null || shareeName == null) {
                     Log_OC.d(TAG, "validateShareProcessSecond cancelled")
@@ -530,7 +532,6 @@ class NoteShareDetailActivity : BrandedActivity(),
                 }
 
                 repository.addShare(
-                    ssoAcc,
                     note!!,
                     shareType,
                     shareeName!!,

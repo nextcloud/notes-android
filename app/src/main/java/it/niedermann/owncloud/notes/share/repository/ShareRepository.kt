@@ -3,8 +3,8 @@ package it.niedermann.owncloud.notes.share.repository
 import android.content.Context
 import android.icu.text.SimpleDateFormat
 import android.util.Log
-import com.nextcloud.android.sso.api.EmptyResponse
 import com.nextcloud.android.sso.model.SingleSignOnAccount
+import com.owncloud.android.lib.common.utils.Log_OC
 import com.owncloud.android.lib.resources.shares.OCShare
 import com.owncloud.android.lib.resources.shares.ShareType
 import io.reactivex.Single
@@ -14,6 +14,7 @@ import it.niedermann.owncloud.notes.persistence.NotesRepository
 import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.share.model.CreateShareRequest
 import it.niedermann.owncloud.notes.share.model.UpdateShareInformationRequest
+import it.niedermann.owncloud.notes.share.model.UpdateSharePermissionRequest
 import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
 import it.niedermann.owncloud.notes.shared.model.ApiVersion
 import org.json.JSONArray
@@ -21,8 +22,9 @@ import org.json.JSONObject
 import java.util.Date
 import java.util.Locale
 
-class ShareRepository(private val applicationContext: Context) {
+class ShareRepository(private val applicationContext: Context, private val account: SingleSignOnAccount) {
 
+    private val tag = "ShareRepository"
     private val apiProvider: ApiProvider by lazy { ApiProvider.getInstance() }
     private val notesRepository: NotesRepository by lazy {
         NotesRepository.getInstance(
@@ -30,7 +32,7 @@ class ShareRepository(private val applicationContext: Context) {
         )
     }
 
-    private fun getNotesPath(account: SingleSignOnAccount): Single<String> {
+    private fun getNotesPath(): Single<String> {
         return Single.fromCallable {
             val call = notesRepository.getServerSettings(account, ApiVersion.API_VERSION_1_0)
             val response = call.execute()
@@ -39,7 +41,6 @@ class ShareRepository(private val applicationContext: Context) {
     }
 
     fun getSharees(
-        account: SingleSignOnAccount,
         searchString: String,
         page: Int,
         perPage: Int
@@ -112,7 +113,6 @@ class ShareRepository(private val applicationContext: Context) {
     }
 
     fun getShares(
-        account: SingleSignOnAccount,
         remoteId: Long
     ): Single<List<OCShare>> {
         return Single.fromCallable {
@@ -124,12 +124,11 @@ class ShareRepository(private val applicationContext: Context) {
     }
 
     fun getSharesForFile(
-        account: SingleSignOnAccount,
         note: Note,
         reshares: Boolean = false,
         subfiles: Boolean = false
     ): Single<List<OCShare>> {
-        return getNotesPath(account)
+        return getNotesPath()
             .flatMap { notesPath ->
                 Single.fromCallable {
                     val shareAPI = apiProvider.getShareAPI(applicationContext, account)
@@ -144,20 +143,27 @@ class ShareRepository(private val applicationContext: Context) {
             }
     }
 
-    fun deleteShare(
-        account: SingleSignOnAccount,
-        remoteShareId: Long
-    ): Single<EmptyResponse> {
-        return Single.fromCallable {
-            val shareAPI = apiProvider.getShareAPI(applicationContext, account)
-            val call = shareAPI.deleteShare(remoteShareId)
+    fun removeShare(
+        shareId: Long
+    ): Boolean {
+        val shareAPI = apiProvider.getShareAPI(applicationContext, account)
+
+        return try {
+            val call = shareAPI.removeShare(shareId)
             val response = call.execute()
-            response.body() ?: throw RuntimeException("No shares available")
-        }.subscribeOn(Schedulers.io())
+            if (response.isSuccessful) {
+                Log.d("RemoveShare", "Share removed successfully.")
+            } else {
+                Log.e("RemoveShare", "Failed to remove share: ${response.errorBody()?.string()}")
+            }
+            response.isSuccessful
+        } catch (e: Exception) {
+            Log.e("RemoveShare", "Exception while removing share", e)
+            false
+        }
     }
 
     fun updateShare(
-        account: SingleSignOnAccount,
         shareId: Long,
         noteText: String
     ): Boolean {
@@ -177,7 +183,6 @@ class ShareRepository(private val applicationContext: Context) {
     }
 
     fun addShare(
-        account: SingleSignOnAccount,
         note: Note,
         shareType: ShareType,
         shareWith: String,
@@ -217,7 +222,6 @@ class ShareRepository(private val applicationContext: Context) {
     }
 
     fun updateShareInformation(
-        account: SingleSignOnAccount,
         shareId: Long,
         password: String? = null,
         expirationDateMillis: Long? = null,
@@ -226,6 +230,11 @@ class ShareRepository(private val applicationContext: Context) {
         note: String? = null,
         label: String? = null
     ): Boolean {
+        if (shareId <= 0) {
+            Log_OC.d(tag, "share id is not valid, updateShareInformation cancelled")
+            return false
+        }
+
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
 
         val expirationDate = expirationDateMillis?.let {
@@ -257,4 +266,25 @@ class ShareRepository(private val applicationContext: Context) {
         }
     }
 
+    fun updateSharePermission(
+        shareId: Long,
+        permissions: Int? = null,
+    ): Boolean {
+        val shareAPI = apiProvider.getShareAPI(applicationContext, account)
+        val requestBody = UpdateSharePermissionRequest(permissions = permissions,)
+
+        return try {
+            val call = shareAPI.updateSharePermission(shareId, requestBody)
+            val response = call.execute()
+            if (response.isSuccessful) {
+                Log.d("UpdateShare", "Share updated successfully: ${response.body()}")
+            } else {
+                Log.e("UpdateShare", "Failed to update share: ${response.errorBody()?.string()}")
+            }
+            response.isSuccessful
+        } catch (e: Exception) {
+            Log.e("UpdateShare", "Exception while updating share", e)
+            false
+        }
+    }
 }

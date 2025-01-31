@@ -17,8 +17,6 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
-import com.nextcloud.android.sso.helper.SingleAccountHelper;
-import com.nextcloud.android.sso.model.SingleSignOnAccount;
 import com.owncloud.android.lib.common.utils.Log_OC;
 import com.owncloud.android.lib.resources.shares.GetShareesRemoteOperation;
 import com.owncloud.android.lib.resources.shares.ShareType;
@@ -111,154 +109,147 @@ public class UsersAndGroupsSearchProvider {
     }
 
     public void searchForUsersOrGroups(String userQuery, Consumer<Cursor> callback) {
-        final SingleSignOnAccount ssoAcc;
-        try {
-            ssoAcc = SingleAccountHelper.getCurrentSingleSignOnAccount(context);
-            disposable = repository.getSharees(ssoAcc, userQuery, REQUESTED_PAGE, RESULTS_PER_PAGE)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(Schedulers.io())
-                    .doOnError(throwable -> {
-                        Log_OC.e(TAG, "Exception while searching", throwable);
-                        callback.accept(null);
-                    })
-                    .subscribe(names -> {
-                        MatrixCursor response = null;
-                        if (!names.isEmpty()) {
-                            response = new MatrixCursor(COLUMNS);
+        disposable = repository.getSharees(userQuery, REQUESTED_PAGE, RESULTS_PER_PAGE)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .doOnError(throwable -> {
+                    Log_OC.e(TAG, "Exception while searching", throwable);
+                    callback.accept(null);
+                })
+                .subscribe(names -> {
+                    MatrixCursor response = null;
+                    if (!names.isEmpty()) {
+                        response = new MatrixCursor(COLUMNS);
 
-                            Uri userBaseUri = new Uri.Builder().scheme(CONTENT).authority(DATA_USER).build();
-                            Uri groupBaseUri = new Uri.Builder().scheme(CONTENT).authority(DATA_GROUP).build();
-                            Uri roomBaseUri = new Uri.Builder().scheme(CONTENT).authority(DATA_ROOM).build();
-                            Uri remoteBaseUri = new Uri.Builder().scheme(CONTENT).authority(DATA_REMOTE).build();
-                            Uri emailBaseUri = new Uri.Builder().scheme(CONTENT).authority(DATA_EMAIL).build();
-                            Uri circleBaseUri = new Uri.Builder().scheme(CONTENT).authority(DATA_CIRCLE).build();
+                        Uri userBaseUri = new Uri.Builder().scheme(CONTENT).authority(DATA_USER).build();
+                        Uri groupBaseUri = new Uri.Builder().scheme(CONTENT).authority(DATA_GROUP).build();
+                        Uri roomBaseUri = new Uri.Builder().scheme(CONTENT).authority(DATA_ROOM).build();
+                        Uri remoteBaseUri = new Uri.Builder().scheme(CONTENT).authority(DATA_REMOTE).build();
+                        Uri emailBaseUri = new Uri.Builder().scheme(CONTENT).authority(DATA_EMAIL).build();
+                        Uri circleBaseUri = new Uri.Builder().scheme(CONTENT).authority(DATA_CIRCLE).build();
 
-                            Iterator<JSONObject> namesIt = names.iterator();
-                            JSONObject item;
-                            String displayName;
-                            String subline = null;
-                            Object icon = 0;
-                            Uri dataUri;
-                            int count = 0;
-                            while (namesIt.hasNext()) {
-                                item = namesIt.next();
-                                dataUri = null;
-                                displayName = null;
-                                String userName = item.getString(GetShareesRemoteOperation.PROPERTY_LABEL);
-                                String name = item.isNull("name") ? "" : item.getString("name");
-                                JSONObject value = item.getJSONObject(GetShareesRemoteOperation.NODE_VALUE);
-                                ShareType type = ShareType.fromValue(value.getInt(GetShareesRemoteOperation.PROPERTY_SHARE_TYPE));
-                                String shareWith = value.getString(GetShareesRemoteOperation.PROPERTY_SHARE_WITH);
+                        Iterator<JSONObject> namesIt = names.iterator();
+                        JSONObject item;
+                        String displayName;
+                        String subline = null;
+                        Object icon = 0;
+                        Uri dataUri;
+                        int count = 0;
+                        while (namesIt.hasNext()) {
+                            item = namesIt.next();
+                            dataUri = null;
+                            displayName = null;
+                            String userName = item.getString(GetShareesRemoteOperation.PROPERTY_LABEL);
+                            String name = item.isNull("name") ? "" : item.getString("name");
+                            JSONObject value = item.getJSONObject(GetShareesRemoteOperation.NODE_VALUE);
+                            ShareType type = ShareType.fromValue(value.getInt(GetShareesRemoteOperation.PROPERTY_SHARE_TYPE));
+                            String shareWith = value.getString(GetShareesRemoteOperation.PROPERTY_SHARE_WITH);
 
-                                Status status;
-                                JSONObject statusObject = item.optJSONObject(PROPERTY_STATUS);
+                            Status status;
+                            JSONObject statusObject = item.optJSONObject(PROPERTY_STATUS);
 
-                                if (statusObject != null) {
-                                    status = new Status(
-                                            StatusType.valueOf(statusObject.getString(PROPERTY_STATUS).toUpperCase(Locale.US)),
-                                            statusObject.isNull(PROPERTY_MESSAGE) ? "" : statusObject.getString(PROPERTY_MESSAGE),
-                                            statusObject.isNull(PROPERTY_ICON) ? "" : statusObject.getString(PROPERTY_ICON),
-                                            statusObject.isNull(PROPERTY_CLEAR_AT) ? -1 : statusObject.getLong(PROPERTY_CLEAR_AT));
-                                } else {
-                                    status = new Status(StatusType.OFFLINE, "", "", -1);
-                                }
-
-                                if (UsersAndGroupsSearchConfig.INSTANCE.getSearchOnlyUsers() && type != ShareType.USER) {
-                                    // skip all types but users, as E2E secure share is only allowed to users on same server
-                                    // TODO: CHECK SKIP LOGIC
-                                    //  continue;
-                                }
-
-                                switch (type) {
-                                    case GROUP:
-                                        displayName = userName;
-                                        icon = R.drawable.ic_group;
-                                        dataUri = Uri.withAppendedPath(groupBaseUri, shareWith);
-                                        break;
-
-                                    case FEDERATED:
-                                        // TODO: federatedShareAllowed
-                                        if (true) {
-                                            icon = R.drawable.ic_account_circle_grey_24dp;
-                                            dataUri = Uri.withAppendedPath(remoteBaseUri, shareWith);
-
-                                            if (userName.equals(shareWith)) {
-                                                displayName = name;
-                                                subline = context.getString(R.string.remote);
-                                            } else {
-                                                String[] uriSplitted = shareWith.split("@");
-                                                displayName = name;
-                                                subline = context.getString(R.string.share_known_remote_on_clarification,
-                                                        uriSplitted[uriSplitted.length - 1]);
-                                            }
-                                        }
-                                        break;
-
-                                    case USER:
-                                        displayName = userName;
-                                        subline = (status.getMessage() == null || status.getMessage().isEmpty()) ? null :
-                                                status.getMessage();
-                                        Uri.Builder builder = Uri.parse("content://" + AUTHORITY + "/icon").buildUpon();
-
-                                        builder.appendQueryParameter("shareWith", shareWith);
-                                        builder.appendQueryParameter("displayName", displayName);
-                                        builder.appendQueryParameter("status", status.getStatus().toString());
-
-                                        if (!TextUtils.isEmpty(status.getIcon()) && !"null".equals(status.getIcon())) {
-                                            builder.appendQueryParameter("icon", status.getIcon());
-                                        }
-
-                                        icon = builder.build().toString();
-
-                                        dataUri = Uri.withAppendedPath(userBaseUri, shareWith);
-                                        break;
-
-                                    case EMAIL:
-                                        icon = R.drawable.ic_email;
-                                        displayName = name;
-                                        subline = shareWith;
-                                        dataUri = Uri.withAppendedPath(emailBaseUri, shareWith);
-                                        break;
-
-                                    case ROOM:
-                                        icon = R.drawable.ic_talk;
-                                        displayName = userName;
-                                        dataUri = Uri.withAppendedPath(roomBaseUri, shareWith);
-                                        break;
-
-                                    case CIRCLE:
-                                        icon = R.drawable.ic_circles;
-                                        displayName = userName;
-                                        dataUri = Uri.withAppendedPath(circleBaseUri, shareWith);
-                                        break;
-
-                                    default:
-                                        break;
-                                }
-
-                                if (displayName != null && dataUri != null) {
-                                    response.newRow()
-                                            .add(count++)
-                                            .add(displayName)
-                                            .add(subline)
-                                            .add(icon)
-                                            .add(dataUri)
-                                            .add(SHARE_WITH, shareWith)
-                                            .add(SHARE_TYPE, type.getValue());
-                                }
-
+                            if (statusObject != null) {
+                                status = new Status(
+                                        StatusType.valueOf(statusObject.getString(PROPERTY_STATUS).toUpperCase(Locale.US)),
+                                        statusObject.isNull(PROPERTY_MESSAGE) ? "" : statusObject.getString(PROPERTY_MESSAGE),
+                                        statusObject.isNull(PROPERTY_ICON) ? "" : statusObject.getString(PROPERTY_ICON),
+                                        statusObject.isNull(PROPERTY_CLEAR_AT) ? -1 : statusObject.getLong(PROPERTY_CLEAR_AT));
+                            } else {
+                                status = new Status(StatusType.OFFLINE, "", "", -1);
                             }
-                        }
 
-                        callback.accept(response);
-                    }, error -> {
-                        Log_OC.e(TAG, "Exception while searching", error);
-                        callback.accept(null);
-                    });
-        } catch (Exception e) {
-            Log_OC.e(TAG, "Exception while searching", e);
-            callback.accept(null);
-        }
+                            if (UsersAndGroupsSearchConfig.INSTANCE.getSearchOnlyUsers() && type != ShareType.USER) {
+                                // skip all types but users, as E2E secure share is only allowed to users on same server
+                                // TODO: CHECK SKIP LOGIC
+                                //  continue;
+                            }
+
+                            switch (type) {
+                                case GROUP:
+                                    displayName = userName;
+                                    icon = R.drawable.ic_group;
+                                    dataUri = Uri.withAppendedPath(groupBaseUri, shareWith);
+                                    break;
+
+                                case FEDERATED:
+                                    // TODO: federatedShareAllowed
+                                    if (true) {
+                                        icon = R.drawable.ic_account_circle_grey_24dp;
+                                        dataUri = Uri.withAppendedPath(remoteBaseUri, shareWith);
+
+                                        if (userName.equals(shareWith)) {
+                                            displayName = name;
+                                            subline = context.getString(R.string.remote);
+                                        } else {
+                                            String[] uriSplitted = shareWith.split("@");
+                                            displayName = name;
+                                            subline = context.getString(R.string.share_known_remote_on_clarification,
+                                                    uriSplitted[uriSplitted.length - 1]);
+                                        }
+                                    }
+                                    break;
+
+                                case USER:
+                                    displayName = userName;
+                                    subline = (status.getMessage() == null || status.getMessage().isEmpty()) ? null :
+                                            status.getMessage();
+                                    Uri.Builder builder = Uri.parse("content://" + AUTHORITY + "/icon").buildUpon();
+
+                                    builder.appendQueryParameter("shareWith", shareWith);
+                                    builder.appendQueryParameter("displayName", displayName);
+                                    builder.appendQueryParameter("status", status.getStatus().toString());
+
+                                    if (!TextUtils.isEmpty(status.getIcon()) && !"null".equals(status.getIcon())) {
+                                        builder.appendQueryParameter("icon", status.getIcon());
+                                    }
+
+                                    icon = builder.build().toString();
+
+                                    dataUri = Uri.withAppendedPath(userBaseUri, shareWith);
+                                    break;
+
+                                case EMAIL:
+                                    icon = R.drawable.ic_email;
+                                    displayName = name;
+                                    subline = shareWith;
+                                    dataUri = Uri.withAppendedPath(emailBaseUri, shareWith);
+                                    break;
+
+                                case ROOM:
+                                    icon = R.drawable.ic_talk;
+                                    displayName = userName;
+                                    dataUri = Uri.withAppendedPath(roomBaseUri, shareWith);
+                                    break;
+
+                                case CIRCLE:
+                                    icon = R.drawable.ic_circles;
+                                    displayName = userName;
+                                    dataUri = Uri.withAppendedPath(circleBaseUri, shareWith);
+                                    break;
+
+                                default:
+                                    break;
+                            }
+
+                            if (displayName != null && dataUri != null) {
+                                response.newRow()
+                                        .add(count++)
+                                        .add(displayName)
+                                        .add(subline)
+                                        .add(icon)
+                                        .add(dataUri)
+                                        .add(SHARE_WITH, shareWith)
+                                        .add(SHARE_TYPE, type.getValue());
+                            }
+
+                        }
+                    }
+
+                    callback.accept(response);
+                }, error -> {
+                    Log_OC.e(TAG, "Exception while searching", error);
+                    callback.accept(null);
+                });
     }
 
     public void dispose() {

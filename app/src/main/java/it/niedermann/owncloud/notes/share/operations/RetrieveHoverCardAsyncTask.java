@@ -3,15 +3,15 @@ package it.niedermann.owncloud.notes.share.operations;
 
 import android.os.AsyncTask;
 
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.Lifecycle;
+
 import com.nextcloud.android.lib.resources.profile.GetHoverCardRemoteOperation;
 import com.nextcloud.android.lib.resources.profile.HoverCard;
 import com.nextcloud.common.NextcloudClient;
 import com.owncloud.android.lib.common.operations.RemoteOperationResult;
 
 import java.lang.ref.WeakReference;
-
-import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.Lifecycle;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.persistence.entity.Account;

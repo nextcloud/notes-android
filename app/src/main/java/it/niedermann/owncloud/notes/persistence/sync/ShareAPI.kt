@@ -5,6 +5,7 @@ import com.owncloud.android.lib.resources.shares.OCShare
 import it.niedermann.owncloud.notes.share.model.CreateShareRequest
 import it.niedermann.owncloud.notes.share.model.CreateShareResponse
 import it.niedermann.owncloud.notes.share.model.UpdateShareInformationRequest
+import it.niedermann.owncloud.notes.share.model.UpdateSharePermissionRequest
 import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
 import it.niedermann.owncloud.notes.shared.model.OcsResponse
 import retrofit2.Call
@@ -37,8 +38,8 @@ interface ShareAPI {
         subfiles: Boolean
     ): Call<OcsResponse<MutableList<OCShare>>>
 
-    @DELETE("shares")
-    fun deleteShare(remoteShareId: Long): Call<EmptyResponse>
+    @DELETE("shares/{shareId}")
+    fun removeShare(@Path("shareId") shareId: Long): Call<EmptyResponse>
 
     @PATCH("shares")
     fun updateShare(@Body request: UpdateShareRequest): Call<OcsResponse<CreateShareResponse>>
@@ -50,5 +51,11 @@ interface ShareAPI {
     fun updateShareInfo(
         @Path("shareId") shareId: Long,
         @Body request: UpdateShareInformationRequest
+    ): Call<OcsResponse<CreateShareResponse>>
+
+    @PATCH("shares/{shareId}")
+    fun updateSharePermission(
+        @Path("shareId") shareId: Long,
+        @Body request: UpdateSharePermissionRequest
     ): Call<OcsResponse<CreateShareResponse>>
 }

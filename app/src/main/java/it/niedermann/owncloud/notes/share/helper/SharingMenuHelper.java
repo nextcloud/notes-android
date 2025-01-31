@@ -1,6 +1,13 @@
 package it.niedermann.owncloud.notes.share.helper;
 
 
+import static com.owncloud.android.lib.resources.shares.OCShare.CREATE_PERMISSION_FLAG;
+import static com.owncloud.android.lib.resources.shares.OCShare.MAXIMUM_PERMISSIONS_FOR_FILE;
+import static com.owncloud.android.lib.resources.shares.OCShare.MAXIMUM_PERMISSIONS_FOR_FOLDER;
+import static com.owncloud.android.lib.resources.shares.OCShare.NO_PERMISSION;
+import static com.owncloud.android.lib.resources.shares.OCShare.READ_PERMISSION_FLAG;
+import static com.owncloud.android.lib.resources.shares.OCShare.SHARE_PERMISSION_FLAG;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.MenuItem;
@@ -9,13 +16,6 @@ import com.owncloud.android.lib.resources.shares.OCShare;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import static com.owncloud.android.lib.resources.shares.OCShare.CREATE_PERMISSION_FLAG;
-import static com.owncloud.android.lib.resources.shares.OCShare.MAXIMUM_PERMISSIONS_FOR_FILE;
-import static com.owncloud.android.lib.resources.shares.OCShare.MAXIMUM_PERMISSIONS_FOR_FOLDER;
-import static com.owncloud.android.lib.resources.shares.OCShare.NO_PERMISSION;
-import static com.owncloud.android.lib.resources.shares.OCShare.READ_PERMISSION_FLAG;
-import static com.owncloud.android.lib.resources.shares.OCShare.SHARE_PERMISSION_FLAG;
 
 import it.niedermann.owncloud.notes.R;
 

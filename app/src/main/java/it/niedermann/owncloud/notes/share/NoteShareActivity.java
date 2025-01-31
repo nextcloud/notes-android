@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -31,6 +30,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.snackbar.Snackbar;
+import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.owncloud.android.lib.common.operations.RemoteOperationResult;
 import com.owncloud.android.lib.common.utils.Log_OC;
 import com.owncloud.android.lib.resources.shares.OCShare;
@@ -85,6 +85,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     private Note note;
     private Account account;
     private ClientFactoryImpl clientFactory;
+    private ShareRepository repository;
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,15 +93,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         binding = ActivityNoteShareBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         initializeArguments();
-
-        binding.sharesList.setAdapter(new ShareeListAdapter(this, new ArrayList<>(), this, account));
-        binding.sharesList.setLayoutManager(new LinearLayoutManager(this));
-        binding.pickContactEmailBtn.setOnClickListener(v -> checkContactPermission());
-        binding.btnShareButton.setOnClickListener(v -> ShareUtil.openShareDialog(this, note.getTitle(), note.getContent()));
-
-        setupView();
-        refreshCapabilitiesFromDB();
-        refreshSharesFromDB();
     }
 
     private void initializeArguments() {
@@ -108,6 +100,27 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         note = BundleExtensionsKt.getSerializableArgument(bundler, ARG_NOTE, Note.class);
         account = BundleExtensionsKt.getSerializableArgument(bundler, ARG_ACCOUNT, Account.class);
         clientFactory = new ClientFactoryImpl(this);
+
+        new Thread(() -> {{
+            try {
+                final var ssoAcc = SingleAccountHelper.getCurrentSingleSignOnAccount(NoteShareActivity.this);
+                repository = new ShareRepository(NoteShareActivity.this, ssoAcc);
+
+                runOnUiThread(() -> {
+                    binding.sharesList.setAdapter(new ShareeListAdapter(this, new ArrayList<>(), this, account));
+                    binding.sharesList.setLayoutManager(new LinearLayoutManager(this));
+                    binding.pickContactEmailBtn.setOnClickListener(v -> checkContactPermission());
+                    binding.btnShareButton.setOnClickListener(v -> ShareUtil.openShareDialog(this, note.getTitle(), note.getContent()));
+
+                    setupView();
+                    refreshCapabilitiesFromDB();
+                    refreshSharesFromDB();
+                });
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }}).start();
+
         if (note == null) {
             throw new IllegalArgumentException("Note cannot be null");
         }
@@ -157,7 +170,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         }
 
         SuggestionAdapter suggestionAdapter = new SuggestionAdapter(this, null);
-        ShareRepository repository = new ShareRepository(this);
         UsersAndGroupsSearchProvider provider = new UsersAndGroupsSearchProvider(this, repository);
 
         binding.searchView.setSuggestionsAdapter(suggestionAdapter);
@@ -433,7 +445,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     }
 
     private void unshareWith(OCShare share) {
-        // fileOperationsHelper.unshareShare(file, share);
+        repository.removeShare(share.getId());
     }
 
     /**
@@ -590,14 +602,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         outState.putSerializable(ARG_ACCOUNT, account);
     }
 
-    public void avatarGenerated(Drawable avatarDrawable, Object callContext) {
-        binding.sharedWithYouAvatar.setImageDrawable(avatarDrawable);
-    }
-
-    public boolean shouldCallGeneratedCallback(String tag, Object callContext) {
-        return false;
-    }
-
     private boolean isReshareForbidden(OCShare share) {
         return false;
         // return ShareType.FEDERATED == share.getShareType() || capabilities != null && capabilities.getFilesSharingResharing().isFalse();
@@ -640,7 +644,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             showSendLinkTo(share);
         }
          */
-
     }
 
     @Override
@@ -663,7 +666,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
     @Override
     public void onQuickPermissionChanged(OCShare share, int permission) {
-       // fileOperationsHelper.setPermissionsToShare(share, permission);
+       repository.updateSharePermission(share.getId(), permission);
     }
 
     //launcher for contact permission
@@ -701,28 +704,11 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                         }
                     });
 
-    // TODO: IMPLEMENT
-    public void editExistingShare(OCShare share, int screenTypePermission, boolean isReshareShown, boolean isExpiryDateShown) {
-
-    }
-
-    // TODO: IMPLEMENT
-    public void onShareProcessClosed() {
-
-    }
-
     @Override
     public void applyBrand(int color) {
         final var util = BrandingUtil.of(color, this);
         util.platform.themeStatusBar(this);
         util.androidx.themeToolbarSearchView(binding.searchView);
         util.platform.themeHorizontalProgressBar(binding.progressBar);
-    }
-
-    public interface OnEditShareListener {
-        void editExistingShare(OCShare share, int screenTypePermission, boolean isReshareShown,
-                               boolean isExpiryDateShown);
-
-        void onShareProcessClosed();
     }
 }

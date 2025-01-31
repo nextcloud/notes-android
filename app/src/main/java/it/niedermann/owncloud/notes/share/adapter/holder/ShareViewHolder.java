@@ -21,7 +21,6 @@ import it.niedermann.owncloud.notes.databinding.ItemShareShareBinding;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.share.helper.SharingMenuHelper;
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
-import it.niedermann.owncloud.notes.shared.user.User;
 
 public class ShareViewHolder extends RecyclerView.ViewHolder {
     private ItemShareShareBinding binding;
