@@ -7,8 +7,6 @@ import static com.owncloud.android.lib.resources.shares.GetShareesRemoteOperatio
 import static com.owncloud.android.lib.resources.shares.GetShareesRemoteOperation.PROPERTY_STATUS;
 
 import android.app.SearchManager;
-import android.content.ContentProvider;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
@@ -18,8 +16,9 @@ import android.provider.BaseColumns;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
+import com.nextcloud.android.sso.helper.SingleAccountHelper;
+import com.nextcloud.android.sso.model.SingleSignOnAccount;
 import com.owncloud.android.lib.common.utils.Log_OC;
 import com.owncloud.android.lib.resources.shares.GetShareesRemoteOperation;
 import com.owncloud.android.lib.resources.shares.ShareType;
@@ -33,7 +32,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
+import java.util.function.Consumer;
 
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.share.model.UsersAndGroupsSearchConfig;
 import it.niedermann.owncloud.notes.share.repository.ShareRepository;
@@ -41,7 +43,7 @@ import it.niedermann.owncloud.notes.share.repository.ShareRepository;
 /**
  * Content provider for search suggestions, to search for users and groups existing in an ownCloud server.
  */
-public class UsersAndGroupsSearchProvider extends ContentProvider {
+public class UsersAndGroupsSearchProvider {
 
     private static final String TAG = UsersAndGroupsSearchProvider.class.getSimpleName();
 
@@ -67,18 +69,41 @@ public class UsersAndGroupsSearchProvider extends ContentProvider {
 
     public static final String CONTENT = "content";
 
-    private String AUTHORITY;
-    private String DATA_USER;
-    private String DATA_GROUP;
-    private String DATA_ROOM;
-    private String DATA_REMOTE;
-    private String DATA_EMAIL;
-    private String DATA_CIRCLE;
+    private final String AUTHORITY;
+    private final String DATA_USER;
+    private final String DATA_GROUP;
+    private final String DATA_ROOM;
+    private final String DATA_REMOTE;
+    private final String DATA_EMAIL;
+    private final String DATA_CIRCLE;
 
-    private ShareRepository repository;
-    private Context context;
-    private UriMatcher mUriMatcher;
+    private final ShareRepository repository;
+    private final Context context;
+    private Disposable disposable;
 
+    public UsersAndGroupsSearchProvider(Context context, ShareRepository repository) {
+        this.context = context;
+        this.repository = repository;
+
+        AUTHORITY = context.getString(R.string.users_and_groups_search_provider_authority);
+        setActionShareWith(context);
+        DATA_USER = AUTHORITY + ".data.user";
+        DATA_GROUP = AUTHORITY + ".data.group";
+        DATA_ROOM = AUTHORITY + ".data.room";
+        DATA_REMOTE = AUTHORITY + ".data.remote";
+        DATA_EMAIL = AUTHORITY + ".data.email";
+        DATA_CIRCLE = AUTHORITY + ".data.circle";
+
+        sShareTypes.put(DATA_USER, ShareType.USER);
+        sShareTypes.put(DATA_GROUP, ShareType.GROUP);
+        sShareTypes.put(DATA_ROOM, ShareType.ROOM);
+        sShareTypes.put(DATA_REMOTE, ShareType.FEDERATED);
+        sShareTypes.put(DATA_EMAIL, ShareType.EMAIL);
+        sShareTypes.put(DATA_CIRCLE, ShareType.CIRCLE);
+
+        UriMatcher mUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+        mUriMatcher.addURI(AUTHORITY, SearchManager.SUGGEST_URI_PATH_QUERY + "/*", SEARCH);
+    }
 
     private static final Map<String, ShareType> sShareTypes = new HashMap<>();
 
@@ -86,12 +111,7 @@ public class UsersAndGroupsSearchProvider extends ContentProvider {
         ACTION_SHARE_WITH = context.getString(R.string.users_and_groups_search_provider_share_with);
     }
 
-    public Cursor searchForUsersOrGroups(Uri uri) throws JSONException {
-        String lastPathSegment = uri.getLastPathSegment();
-        if (lastPathSegment == null) {
-            throw new IllegalArgumentException("Wrong URI passed!");
-        }
-        String userQuery = lastPathSegment.toLowerCase(Locale.ROOT);
+    public void searchForUsersOrGroups(String userQuery, Consumer<Cursor> callback) throws JSONException {
         final var names = repository.getSharees(userQuery, REQUESTED_PAGE, RESULTS_PER_PAGE);
         MatrixCursor response = null;
         if (!names.isEmpty()) {
@@ -137,7 +157,7 @@ public class UsersAndGroupsSearchProvider extends ContentProvider {
                 if (UsersAndGroupsSearchConfig.INSTANCE.getSearchOnlyUsers() && type != ShareType.USER) {
                     // skip all types but users, as E2E secure share is only allowed to users on same server
                     // TODO: CHECK SKIP LOGIC
-                    continue;
+                    //  continue;
                 }
 
                 switch (type) {
@@ -217,78 +237,10 @@ public class UsersAndGroupsSearchProvider extends ContentProvider {
                             .add(SHARE_WITH, shareWith)
                             .add(SHARE_TYPE, type.getValue());
                 }
-            }
 
-            return response;
-        }
-
-        return null;
-    }
-
-    @Override
-    public boolean onCreate() {
-        if (getContext() == null) {
-            return false;
-        }
-
-        AUTHORITY = context.getString(R.string.users_and_groups_search_authority);
-        setActionShareWith(context);
-        DATA_USER = AUTHORITY + ".data.user";
-        DATA_GROUP = AUTHORITY + ".data.group";
-        DATA_ROOM = AUTHORITY + ".data.room";
-        DATA_REMOTE = AUTHORITY + ".data.remote";
-        DATA_EMAIL = AUTHORITY + ".data.email";
-        DATA_CIRCLE = AUTHORITY + ".data.circle";
-
-        sShareTypes.put(DATA_USER, ShareType.USER);
-        sShareTypes.put(DATA_GROUP, ShareType.GROUP);
-        sShareTypes.put(DATA_ROOM, ShareType.ROOM);
-        sShareTypes.put(DATA_REMOTE, ShareType.FEDERATED);
-        sShareTypes.put(DATA_EMAIL, ShareType.EMAIL);
-        sShareTypes.put(DATA_CIRCLE, ShareType.CIRCLE);
-
-        mUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-        mUriMatcher.addURI(AUTHORITY, SearchManager.SUGGEST_URI_PATH_QUERY + "/*", SEARCH);
-
-        return true;
-    }
-
-    @Nullable
-    @Override
-    public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
-        Log_OC.d(TAG, "query received in thread " + Thread.currentThread().getName());
-
-        int match = mUriMatcher.match(uri);
-        if (match == SEARCH) {
-            try {
-                return searchForUsersOrGroups(uri);
-            } catch (JSONException e) {
-                return null;
             }
         }
 
-        return null;
-    }
-
-    @Nullable
-    @Override
-    public String getType(@NonNull Uri uri) {
-        return null;
-    }
-
-    @Nullable
-    @Override
-    public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
-        return null;
-    }
-
-    @Override
-    public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
-    }
-
-    @Override
-    public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
+        callback.accept(response);
     }
 }
