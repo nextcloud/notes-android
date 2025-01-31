@@ -19,6 +19,7 @@ import it.niedermann.owncloud.notes.share.dialog.ExpirationDatePickerDialogFragm
 import it.niedermann.owncloud.notes.share.helper.SharingMenuHelper
 import it.niedermann.owncloud.notes.share.repository.ShareRepository
 import it.niedermann.owncloud.notes.shared.util.DisplayUtils
+import it.niedermann.owncloud.notes.shared.util.clipboard.ClipboardUtil
 import it.niedermann.owncloud.notes.shared.util.extensions.getParcelableArgument
 import it.niedermann.owncloud.notes.shared.util.extensions.getSerializableArgument
 import kotlinx.coroutines.Dispatchers
@@ -524,21 +525,32 @@ class NoteShareDetailActivity : BrandedActivity(),
     }
 
     private fun updateShare() {
-        /*
-        fileOperationsHelper?.updateShareInformation(
-            share,
-            permission,
-            binding.shareProcessHideDownloadCheckbox.isChecked,
-            binding.shareProcessEnterPassword.text.toString().trim(),
-            chosenExpDateInMills,
-            binding.shareProcessChangeName.text.toString().trim()
-        )
+        lifecycleScope.launch(Dispatchers.IO) {
+            val ssoAcc =
+                SingleAccountHelper.getCurrentSingleSignOnAccount(this@NoteShareDetailActivity)
 
-        // copy the share link if available
-        if (!TextUtils.isEmpty(share?.shareLink)) {
-            ClipboardUtil.copyToClipboard(this, share?.shareLink)
+            if (share == null) {
+                Log_OC.d(TAG, "Share is null cannot updateShare")
+                return@launch
+            }
+
+            repository.updateShareInformation(
+                ssoAcc,
+                share!!.id,
+                binding.shareProcessEnterPassword.text.toString().trim(),
+                chosenExpDateInMills,
+                permission,
+                binding.shareProcessHideDownloadCheckbox.isChecked,
+                "", // TODO: Check note?
+                binding.shareProcessChangeName.text.toString().trim()
+            )
+
+            withContext(Dispatchers.Main) {
+                if (!TextUtils.isEmpty(share?.shareLink)) {
+                    ClipboardUtil.copyToClipboard(this@NoteShareDetailActivity, share?.shareLink)
+                }
+            }
         }
-         */
     }
 
     /**

@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.share.repository
 
 import android.content.Context
+import android.icu.text.SimpleDateFormat
 import android.util.Log
 import com.nextcloud.android.sso.api.EmptyResponse
 import com.nextcloud.android.sso.model.SingleSignOnAccount
@@ -12,10 +13,13 @@ import it.niedermann.owncloud.notes.persistence.ApiProvider
 import it.niedermann.owncloud.notes.persistence.NotesRepository
 import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.share.model.CreateShareRequest
+import it.niedermann.owncloud.notes.share.model.UpdateShareInformationRequest
 import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
 import it.niedermann.owncloud.notes.shared.model.ApiVersion
 import org.json.JSONArray
 import org.json.JSONObject
+import java.util.Date
+import java.util.Locale
 
 class ShareRepository(private val applicationContext: Context) {
 
@@ -211,4 +215,46 @@ class ShareRepository(private val applicationContext: Context) {
 
         return response.isSuccessful
     }
+
+    fun updateShareInformation(
+        account: SingleSignOnAccount,
+        shareId: Long,
+        password: String? = null,
+        expirationDateMillis: Long? = null,
+        permissions: Int? = null,
+        hideFileDownload: Boolean? = null,
+        note: String? = null,
+        label: String? = null
+    ): Boolean {
+        val shareAPI = apiProvider.getShareAPI(applicationContext, account)
+
+        val expirationDate = expirationDateMillis?.let {
+            SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date(it))
+        }
+
+        val requestBody = UpdateShareInformationRequest(
+            shareId = shareId.toString(),
+            password = password,
+            expireDate = expirationDate,
+            permissions = permissions,
+            hideDownload = hideFileDownload,
+            note = note,
+            label = label
+        )
+
+        return try {
+            val call = shareAPI.updateShareInfo(shareId, requestBody)
+            val response = call.execute()
+            if (response.isSuccessful) {
+                Log.d("UpdateShare", "Share updated successfully: ${response.body()}")
+            } else {
+                Log.e("UpdateShare", "Failed to update share: ${response.errorBody()?.string()}")
+            }
+            response.isSuccessful
+        } catch (e: Exception) {
+            Log.e("UpdateShare", "Exception while updating share", e)
+            false
+        }
+    }
+
 }
