@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.persistence.sync
 
+import com.google.gson.internal.LinkedTreeMap
 import com.nextcloud.android.sso.api.EmptyResponse
 import com.owncloud.android.lib.resources.shares.OCShare
 import it.niedermann.owncloud.notes.share.model.CreateShareRequest
@@ -8,7 +9,6 @@ import it.niedermann.owncloud.notes.share.model.UpdateShareInformationRequest
 import it.niedermann.owncloud.notes.share.model.UpdateSharePermissionRequest
 import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
 import it.niedermann.owncloud.notes.shared.model.OcsResponse
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
@@ -28,7 +28,7 @@ interface ShareAPI {
         @Query("page") page: String,
         @Query("perPage") perPage: String,
         @Query("lookup") lookup: String = "false",
-    ): Response<ResponseBody>
+    ): LinkedTreeMap<String, Any?>?
 
     @GET("shares")
     fun getShares(remoteId: Long): Call<OcsResponse<List<OCShare>>>
