@@ -2,7 +2,6 @@ package it.niedermann.owncloud.notes.share.repository
 
 import android.content.Context
 import android.icu.text.SimpleDateFormat
-import android.util.Log
 import com.nextcloud.android.sso.model.SingleSignOnAccount
 import com.owncloud.android.lib.common.utils.Log_OC
 import com.owncloud.android.lib.resources.shares.OCShare
@@ -17,6 +16,10 @@ import it.niedermann.owncloud.notes.share.model.UpdateShareInformationRequest
 import it.niedermann.owncloud.notes.share.model.UpdateSharePermissionRequest
 import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
 import it.niedermann.owncloud.notes.shared.model.ApiVersion
+import okhttp3.Credentials
+import okhttp3.HttpUrl
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import org.json.JSONArray
 import org.json.JSONObject
 import java.util.Date
@@ -44,84 +47,99 @@ class ShareRepository(private val applicationContext: Context, private val accou
         searchString: String,
         page: Int,
         perPage: Int
-    ): Single<ArrayList<JSONObject>> {
-        return try {
-            Single.fromCallable {
-                val shareAPI = apiProvider.getShareAPI(applicationContext, account)
-                val call = shareAPI.getSharees(search = searchString, page = page, perPage = perPage)
-                val response = call.execute()
+    ): ArrayList<JSONObject> {
+        val url = HttpUrl.Builder()
+            .scheme("http")
+            .host("10.0.2.2")
+            .port(55001)
+            .addPathSegments("ocs/v2.php/apps/files_sharing/api/v1/sharees")
+            .addQueryParameter("format", "json")
+            .addQueryParameter("itemType", "file")
+            .addQueryParameter("search", searchString)
+            .addQueryParameter("page", page.toString())
+            .addQueryParameter("perPage", perPage.toString())
+            .addQueryParameter("lookup", "false")
+            .build()
 
-                if (response.isSuccessful) {
-                    val respJSON = JSONObject(response.body().toString())
-                    val respOCS = respJSON.getJSONObject("ocs")
-                    val respData = respOCS.getJSONObject("data")
-                    val respExact = respData.getJSONObject("exact")
-                    val respExactUsers = respExact.getJSONArray("users")
-                    val respExactGroups = respExact.getJSONArray("groups")
-                    val respExactRemotes = respExact.getJSONArray("remotes")
-                    val respExactCircles = if (respExact.has("circles")) {
-                        respExact.getJSONArray("circles")
-                    } else {
-                        JSONArray()
-                    }
-                    val respExactRooms = if (respExact.has("rooms")) {
-                        respExact.getJSONArray("rooms")
-                    } else {
-                        JSONArray()
-                    }
+        val credentials = Credentials.basic("admin", "admin")
 
-                    val respExactEmails = respExact.getJSONArray("emails")
-                    val respPartialUsers = respData.getJSONArray("users")
-                    val respPartialGroups = respData.getJSONArray("groups")
-                    val respPartialRemotes = respData.getJSONArray("remotes")
-                    val respPartialCircles = if (respData.has("circles")) {
-                        respData.getJSONArray("circles")
-                    } else {
-                        JSONArray()
-                    }
-                    val respPartialRooms = if (respData.has("rooms")) {
-                        respData.getJSONArray("rooms")
-                    } else {
-                        JSONArray()
-                    }
+        val request = Request.Builder()
+            .url(url)
+            .header("OCS-APIRequest", "true")
+            .header("Accept", "application/json")
+            .header("Authorization", credentials)
+            .get()
+            .build()
 
-                    val jsonResults = arrayOf(
-                        respExactUsers,
-                        respExactGroups,
-                        respExactRemotes,
-                        respExactRooms,
-                        respExactEmails,
-                        respExactCircles,
-                        respPartialUsers,
-                        respPartialGroups,
-                        respPartialRemotes,
-                        respPartialRooms,
-                        respPartialCircles
-                    )
-                    val data: ArrayList<JSONObject> = ArrayList()
-                    val var25 = jsonResults
-                    val var26 = jsonResults.size
+        val client = OkHttpClient()
+        val call = client.newCall(request).execute()
 
-                    for (var27 in 0 until var26) {
-                        val jsonResult = var25[var27]
 
-                        for (j in 0 until jsonResult.length()) {
-                            val jsonObject = jsonResult.getJSONObject(j)
-                            data.add(jsonObject)
-                        }
-                    }
-                    data
-                } else {
-                    Log_OC.d(tag, "Failed to update share: ${response.errorBody()?.string()}")
-                    ArrayList()
-                }
-            }.subscribeOn(Schedulers.io())
-        } catch (e: Exception) {
-            Log_OC.d(tag, "Exception while get sharees", e)
-
-            Single.fromCallable {
-                ArrayList()
+        //val shareAPI = apiProvider.getShareAPI(applicationContext, account)
+        //val call = shareAPI.getSharees(search = searchString, page = page.toString(), perPage = perPage.toString())
+        if (call.isSuccessful) {
+            val response = call.body.string()
+            val respJSON = JSONObject(response)
+            val respOCS = respJSON.getJSONObject("ocs")
+            val respData = respOCS.getJSONObject("data")
+            val respExact = respData.getJSONObject("exact")
+            val respExactUsers = respExact.getJSONArray("users")
+            val respExactGroups = respExact.getJSONArray("groups")
+            val respExactRemotes = respExact.getJSONArray("remotes")
+            val respExactCircles = if (respExact.has("circles")) {
+                respExact.getJSONArray("circles")
+            } else {
+                JSONArray()
             }
+            val respExactRooms = if (respExact.has("rooms")) {
+                respExact.getJSONArray("rooms")
+            } else {
+                JSONArray()
+            }
+
+            val respExactEmails = respExact.getJSONArray("emails")
+            val respPartialUsers = respData.getJSONArray("users")
+            val respPartialGroups = respData.getJSONArray("groups")
+            val respPartialRemotes = respData.getJSONArray("remotes")
+            val respPartialCircles = if (respData.has("circles")) {
+                respData.getJSONArray("circles")
+            } else {
+                JSONArray()
+            }
+            val respPartialRooms = if (respData.has("rooms")) {
+                respData.getJSONArray("rooms")
+            } else {
+                JSONArray()
+            }
+
+            val jsonResults = arrayOf(
+                respExactUsers,
+                respExactGroups,
+                respExactRemotes,
+                respExactRooms,
+                respExactEmails,
+                respExactCircles,
+                respPartialUsers,
+                respPartialGroups,
+                respPartialRemotes,
+                respPartialRooms,
+                respPartialCircles
+            )
+            val data: ArrayList<JSONObject> = ArrayList()
+            val var25 = jsonResults
+            val var26 = jsonResults.size
+
+            for (var27 in 0 until var26) {
+                val jsonResult = var25[var27]
+
+                for (j in 0 until jsonResult.length()) {
+                    val jsonObject = jsonResult.getJSONObject(j)
+                    data.add(jsonObject)
+                }
+            }
+            return data
+        } else {
+            return ArrayList()
         }
     }
 
@@ -284,7 +302,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
         permissions: Int? = null,
     ): Boolean {
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
-        val requestBody = UpdateSharePermissionRequest(permissions = permissions,)
+        val requestBody = UpdateSharePermissionRequest(permissions = permissions)
 
         return try {
             val call = shareAPI.updateSharePermission(shareId, requestBody)

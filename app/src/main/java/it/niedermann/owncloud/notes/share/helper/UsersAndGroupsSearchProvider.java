@@ -7,6 +7,8 @@ import static com.owncloud.android.lib.resources.shares.GetShareesRemoteOperatio
 import static com.owncloud.android.lib.resources.shares.GetShareesRemoteOperation.PROPERTY_STATUS;
 
 import android.app.SearchManager;
+import android.content.ContentProvider;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
@@ -16,6 +18,7 @@ import android.provider.BaseColumns;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.owncloud.android.lib.common.utils.Log_OC;
 import com.owncloud.android.lib.resources.shares.GetShareesRemoteOperation;
@@ -23,16 +26,14 @@ import com.owncloud.android.lib.resources.shares.ShareType;
 import com.owncloud.android.lib.resources.users.Status;
 import com.owncloud.android.lib.resources.users.StatusType;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
-import java.util.function.Consumer;
 
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.share.model.UsersAndGroupsSearchConfig;
 import it.niedermann.owncloud.notes.share.repository.ShareRepository;
@@ -40,7 +41,7 @@ import it.niedermann.owncloud.notes.share.repository.ShareRepository;
 /**
  * Content provider for search suggestions, to search for users and groups existing in an ownCloud server.
  */
-public class UsersAndGroupsSearchProvider {
+public class UsersAndGroupsSearchProvider extends ContentProvider {
 
     private static final String TAG = UsersAndGroupsSearchProvider.class.getSimpleName();
 
@@ -66,23 +67,171 @@ public class UsersAndGroupsSearchProvider {
 
     public static final String CONTENT = "content";
 
-    private final String AUTHORITY;
-    private final String DATA_USER;
-    private final String DATA_GROUP;
-    private final String DATA_ROOM;
-    private final String DATA_REMOTE;
-    private final String DATA_EMAIL;
-    private final String DATA_CIRCLE;
+    private String AUTHORITY;
+    private String DATA_USER;
+    private String DATA_GROUP;
+    private String DATA_ROOM;
+    private String DATA_REMOTE;
+    private String DATA_EMAIL;
+    private String DATA_CIRCLE;
 
-    private final ShareRepository repository;
-    private final Context context;
-    private Disposable disposable;
+    private ShareRepository repository;
+    private Context context;
+    private UriMatcher mUriMatcher;
 
-    public UsersAndGroupsSearchProvider(Context context, ShareRepository repository) {
-        this.context = context;
-        this.repository = repository;
 
-        AUTHORITY = context.getString(R.string.users_and_groups_search_provider_authority);
+    private static final Map<String, ShareType> sShareTypes = new HashMap<>();
+
+    private static void setActionShareWith(@NonNull Context context) {
+        ACTION_SHARE_WITH = context.getString(R.string.users_and_groups_search_provider_share_with);
+    }
+
+    public Cursor searchForUsersOrGroups(Uri uri) throws JSONException {
+        String lastPathSegment = uri.getLastPathSegment();
+        if (lastPathSegment == null) {
+            throw new IllegalArgumentException("Wrong URI passed!");
+        }
+        String userQuery = lastPathSegment.toLowerCase(Locale.ROOT);
+        final var names = repository.getSharees(userQuery, REQUESTED_PAGE, RESULTS_PER_PAGE);
+        MatrixCursor response = null;
+        if (!names.isEmpty()) {
+            response = new MatrixCursor(COLUMNS);
+
+            Uri userBaseUri = new Uri.Builder().scheme(CONTENT).authority(DATA_USER).build();
+            Uri groupBaseUri = new Uri.Builder().scheme(CONTENT).authority(DATA_GROUP).build();
+            Uri roomBaseUri = new Uri.Builder().scheme(CONTENT).authority(DATA_ROOM).build();
+            Uri remoteBaseUri = new Uri.Builder().scheme(CONTENT).authority(DATA_REMOTE).build();
+            Uri emailBaseUri = new Uri.Builder().scheme(CONTENT).authority(DATA_EMAIL).build();
+            Uri circleBaseUri = new Uri.Builder().scheme(CONTENT).authority(DATA_CIRCLE).build();
+
+            Iterator<JSONObject> namesIt = names.iterator();
+            JSONObject item;
+            String displayName;
+            String subline = null;
+            Object icon = 0;
+            Uri dataUri;
+            int count = 0;
+            while (namesIt.hasNext()) {
+                item = namesIt.next();
+                dataUri = null;
+                displayName = null;
+                String userName = item.getString(GetShareesRemoteOperation.PROPERTY_LABEL);
+                String name = item.isNull("name") ? "" : item.getString("name");
+                JSONObject value = item.getJSONObject(GetShareesRemoteOperation.NODE_VALUE);
+                ShareType type = ShareType.fromValue(value.getInt(GetShareesRemoteOperation.PROPERTY_SHARE_TYPE));
+                String shareWith = value.getString(GetShareesRemoteOperation.PROPERTY_SHARE_WITH);
+
+                Status status;
+                JSONObject statusObject = item.optJSONObject(PROPERTY_STATUS);
+
+                if (statusObject != null) {
+                    status = new Status(
+                            StatusType.valueOf(statusObject.getString(PROPERTY_STATUS).toUpperCase(Locale.US)),
+                            statusObject.isNull(PROPERTY_MESSAGE) ? "" : statusObject.getString(PROPERTY_MESSAGE),
+                            statusObject.isNull(PROPERTY_ICON) ? "" : statusObject.getString(PROPERTY_ICON),
+                            statusObject.isNull(PROPERTY_CLEAR_AT) ? -1 : statusObject.getLong(PROPERTY_CLEAR_AT));
+                } else {
+                    status = new Status(StatusType.OFFLINE, "", "", -1);
+                }
+
+                if (UsersAndGroupsSearchConfig.INSTANCE.getSearchOnlyUsers() && type != ShareType.USER) {
+                    // skip all types but users, as E2E secure share is only allowed to users on same server
+                    // TODO: CHECK SKIP LOGIC
+                    continue;
+                }
+
+                switch (type) {
+                    case GROUP:
+                        displayName = userName;
+                        icon = R.drawable.ic_group;
+                        dataUri = Uri.withAppendedPath(groupBaseUri, shareWith);
+                        break;
+
+                    case FEDERATED:
+                        // TODO: federatedShareAllowed
+                        if (true) {
+                            icon = R.drawable.ic_account_circle_grey_24dp;
+                            dataUri = Uri.withAppendedPath(remoteBaseUri, shareWith);
+
+                            if (userName.equals(shareWith)) {
+                                displayName = name;
+                                subline = context.getString(R.string.remote);
+                            } else {
+                                String[] uriSplitted = shareWith.split("@");
+                                displayName = name;
+                                subline = context.getString(R.string.share_known_remote_on_clarification,
+                                        uriSplitted[uriSplitted.length - 1]);
+                            }
+                        }
+                        break;
+
+                    case USER:
+                        displayName = userName;
+                        subline = (status.getMessage() == null || status.getMessage().isEmpty()) ? null :
+                                status.getMessage();
+                        Uri.Builder builder = Uri.parse("content://" + AUTHORITY + "/icon").buildUpon();
+
+                        builder.appendQueryParameter("shareWith", shareWith);
+                        builder.appendQueryParameter("displayName", displayName);
+                        builder.appendQueryParameter("status", status.getStatus().toString());
+
+                        if (!TextUtils.isEmpty(status.getIcon()) && !"null".equals(status.getIcon())) {
+                            builder.appendQueryParameter("icon", status.getIcon());
+                        }
+
+                        icon = builder.build().toString();
+
+                        dataUri = Uri.withAppendedPath(userBaseUri, shareWith);
+                        break;
+
+                    case EMAIL:
+                        icon = R.drawable.ic_email;
+                        displayName = name;
+                        subline = shareWith;
+                        dataUri = Uri.withAppendedPath(emailBaseUri, shareWith);
+                        break;
+
+                    case ROOM:
+                        icon = R.drawable.ic_talk;
+                        displayName = userName;
+                        dataUri = Uri.withAppendedPath(roomBaseUri, shareWith);
+                        break;
+
+                    case CIRCLE:
+                        icon = R.drawable.ic_circles;
+                        displayName = userName;
+                        dataUri = Uri.withAppendedPath(circleBaseUri, shareWith);
+                        break;
+
+                    default:
+                        break;
+                }
+
+                if (displayName != null && dataUri != null) {
+                    response.newRow()
+                            .add(count++)
+                            .add(displayName)
+                            .add(subline)
+                            .add(icon)
+                            .add(dataUri)
+                            .add(SHARE_WITH, shareWith)
+                            .add(SHARE_TYPE, type.getValue());
+                }
+            }
+
+            return response;
+        }
+
+        return null;
+    }
+
+    @Override
+    public boolean onCreate() {
+        if (getContext() == null) {
+            return false;
+        }
+
+        AUTHORITY = context.getString(R.string.users_and_groups_search_authority);
         setActionShareWith(context);
         DATA_USER = AUTHORITY + ".data.user";
         DATA_GROUP = AUTHORITY + ".data.group";
@@ -98,161 +247,48 @@ public class UsersAndGroupsSearchProvider {
         sShareTypes.put(DATA_EMAIL, ShareType.EMAIL);
         sShareTypes.put(DATA_CIRCLE, ShareType.CIRCLE);
 
-        UriMatcher mUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+        mUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         mUriMatcher.addURI(AUTHORITY, SearchManager.SUGGEST_URI_PATH_QUERY + "/*", SEARCH);
+
+        return true;
     }
 
-    private static final Map<String, ShareType> sShareTypes = new HashMap<>();
+    @Nullable
+    @Override
+    public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
+        Log_OC.d(TAG, "query received in thread " + Thread.currentThread().getName());
 
-    private static void setActionShareWith(@NonNull Context context) {
-        ACTION_SHARE_WITH = context.getString(R.string.users_and_groups_search_provider_share_with);
+        int match = mUriMatcher.match(uri);
+        if (match == SEARCH) {
+            try {
+                return searchForUsersOrGroups(uri);
+            } catch (JSONException e) {
+                return null;
+            }
+        }
+
+        return null;
     }
 
-    public void searchForUsersOrGroups(String userQuery, Consumer<Cursor> callback) {
-        disposable = repository.getSharees(userQuery, REQUESTED_PAGE, RESULTS_PER_PAGE)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .doOnError(throwable -> {
-                    Log_OC.e(TAG, "Exception while searching", throwable);
-                    callback.accept(null);
-                })
-                .subscribe(names -> {
-                    MatrixCursor response = null;
-                    if (!names.isEmpty()) {
-                        response = new MatrixCursor(COLUMNS);
-
-                        Uri userBaseUri = new Uri.Builder().scheme(CONTENT).authority(DATA_USER).build();
-                        Uri groupBaseUri = new Uri.Builder().scheme(CONTENT).authority(DATA_GROUP).build();
-                        Uri roomBaseUri = new Uri.Builder().scheme(CONTENT).authority(DATA_ROOM).build();
-                        Uri remoteBaseUri = new Uri.Builder().scheme(CONTENT).authority(DATA_REMOTE).build();
-                        Uri emailBaseUri = new Uri.Builder().scheme(CONTENT).authority(DATA_EMAIL).build();
-                        Uri circleBaseUri = new Uri.Builder().scheme(CONTENT).authority(DATA_CIRCLE).build();
-
-                        Iterator<JSONObject> namesIt = names.iterator();
-                        JSONObject item;
-                        String displayName;
-                        String subline = null;
-                        Object icon = 0;
-                        Uri dataUri;
-                        int count = 0;
-                        while (namesIt.hasNext()) {
-                            item = namesIt.next();
-                            dataUri = null;
-                            displayName = null;
-                            String userName = item.getString(GetShareesRemoteOperation.PROPERTY_LABEL);
-                            String name = item.isNull("name") ? "" : item.getString("name");
-                            JSONObject value = item.getJSONObject(GetShareesRemoteOperation.NODE_VALUE);
-                            ShareType type = ShareType.fromValue(value.getInt(GetShareesRemoteOperation.PROPERTY_SHARE_TYPE));
-                            String shareWith = value.getString(GetShareesRemoteOperation.PROPERTY_SHARE_WITH);
-
-                            Status status;
-                            JSONObject statusObject = item.optJSONObject(PROPERTY_STATUS);
-
-                            if (statusObject != null) {
-                                status = new Status(
-                                        StatusType.valueOf(statusObject.getString(PROPERTY_STATUS).toUpperCase(Locale.US)),
-                                        statusObject.isNull(PROPERTY_MESSAGE) ? "" : statusObject.getString(PROPERTY_MESSAGE),
-                                        statusObject.isNull(PROPERTY_ICON) ? "" : statusObject.getString(PROPERTY_ICON),
-                                        statusObject.isNull(PROPERTY_CLEAR_AT) ? -1 : statusObject.getLong(PROPERTY_CLEAR_AT));
-                            } else {
-                                status = new Status(StatusType.OFFLINE, "", "", -1);
-                            }
-
-                            if (UsersAndGroupsSearchConfig.INSTANCE.getSearchOnlyUsers() && type != ShareType.USER) {
-                                // skip all types but users, as E2E secure share is only allowed to users on same server
-                                // TODO: CHECK SKIP LOGIC
-                                //  continue;
-                            }
-
-                            switch (type) {
-                                case GROUP:
-                                    displayName = userName;
-                                    icon = R.drawable.ic_group;
-                                    dataUri = Uri.withAppendedPath(groupBaseUri, shareWith);
-                                    break;
-
-                                case FEDERATED:
-                                    // TODO: federatedShareAllowed
-                                    if (true) {
-                                        icon = R.drawable.ic_account_circle_grey_24dp;
-                                        dataUri = Uri.withAppendedPath(remoteBaseUri, shareWith);
-
-                                        if (userName.equals(shareWith)) {
-                                            displayName = name;
-                                            subline = context.getString(R.string.remote);
-                                        } else {
-                                            String[] uriSplitted = shareWith.split("@");
-                                            displayName = name;
-                                            subline = context.getString(R.string.share_known_remote_on_clarification,
-                                                    uriSplitted[uriSplitted.length - 1]);
-                                        }
-                                    }
-                                    break;
-
-                                case USER:
-                                    displayName = userName;
-                                    subline = (status.getMessage() == null || status.getMessage().isEmpty()) ? null :
-                                            status.getMessage();
-                                    Uri.Builder builder = Uri.parse("content://" + AUTHORITY + "/icon").buildUpon();
-
-                                    builder.appendQueryParameter("shareWith", shareWith);
-                                    builder.appendQueryParameter("displayName", displayName);
-                                    builder.appendQueryParameter("status", status.getStatus().toString());
-
-                                    if (!TextUtils.isEmpty(status.getIcon()) && !"null".equals(status.getIcon())) {
-                                        builder.appendQueryParameter("icon", status.getIcon());
-                                    }
-
-                                    icon = builder.build().toString();
-
-                                    dataUri = Uri.withAppendedPath(userBaseUri, shareWith);
-                                    break;
-
-                                case EMAIL:
-                                    icon = R.drawable.ic_email;
-                                    displayName = name;
-                                    subline = shareWith;
-                                    dataUri = Uri.withAppendedPath(emailBaseUri, shareWith);
-                                    break;
-
-                                case ROOM:
-                                    icon = R.drawable.ic_talk;
-                                    displayName = userName;
-                                    dataUri = Uri.withAppendedPath(roomBaseUri, shareWith);
-                                    break;
-
-                                case CIRCLE:
-                                    icon = R.drawable.ic_circles;
-                                    displayName = userName;
-                                    dataUri = Uri.withAppendedPath(circleBaseUri, shareWith);
-                                    break;
-
-                                default:
-                                    break;
-                            }
-
-                            if (displayName != null && dataUri != null) {
-                                response.newRow()
-                                        .add(count++)
-                                        .add(displayName)
-                                        .add(subline)
-                                        .add(icon)
-                                        .add(dataUri)
-                                        .add(SHARE_WITH, shareWith)
-                                        .add(SHARE_TYPE, type.getValue());
-                            }
-
-                        }
-                    }
-
-                    callback.accept(response);
-                }, error -> {
-                    Log_OC.e(TAG, "Exception while searching", error);
-                    callback.accept(null);
-                });
+    @Nullable
+    @Override
+    public String getType(@NonNull Uri uri) {
+        return null;
     }
 
-    public void dispose() {
-        disposable.dispose();
+    @Nullable
+    @Override
+    public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
+        return null;
+    }
+
+    @Override
+    public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
+        return 0;
+    }
+
+    @Override
+    public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
+        return 0;
     }
 }

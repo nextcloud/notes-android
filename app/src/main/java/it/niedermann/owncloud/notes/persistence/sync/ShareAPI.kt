@@ -8,7 +8,9 @@ import it.niedermann.owncloud.notes.share.model.UpdateShareInformationRequest
 import it.niedermann.owncloud.notes.share.model.UpdateSharePermissionRequest
 import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
 import it.niedermann.owncloud.notes.shared.model.OcsResponse
+import okhttp3.ResponseBody
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -23,10 +25,10 @@ interface ShareAPI {
         @Query("format") format: String = "json",
         @Query("itemType") itemType: String = "file",
         @Query("search") search: String,
-        @Query("page") page: Int,
-        @Query("perPage") perPage: Int,
-        @Query("lookup") lookup: Boolean = true,
-    ): Call<Any>
+        @Query("page") page: String,
+        @Query("perPage") perPage: String,
+        @Query("lookup") lookup: String = "false",
+    ): Response<ResponseBody>
 
     @GET("shares")
     fun getShares(remoteId: Long): Call<OcsResponse<List<OCShare>>>

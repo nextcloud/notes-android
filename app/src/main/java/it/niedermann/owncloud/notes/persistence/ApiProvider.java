@@ -33,6 +33,7 @@ import it.niedermann.owncloud.notes.persistence.sync.OcsAPI;
 import it.niedermann.owncloud.notes.persistence.sync.ShareAPI;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
+import okhttp3.ResponseBody;
 import retrofit2.NextcloudRetrofitApiBuilder;
 import retrofit2.Retrofit;
 
@@ -118,6 +119,7 @@ public class ApiProvider {
                     new GsonBuilder()
                             .setStrictness(Strictness.LENIENT)
                             .excludeFieldsWithoutExposeAnnotation()
+                            .registerTypeAdapter(ResponseBody.class, new ResponseBodyTypeAdapter())
                             .registerTypeHierarchyAdapter(Calendar.class, (JsonSerializer<Calendar>) (src, typeOfSrc, ctx) -> new JsonPrimitive(src.getTimeInMillis() / 1_000))
                             .registerTypeHierarchyAdapter(Calendar.class, (JsonDeserializer<Calendar>) (src, typeOfSrc, ctx) -> {
                                 final var calendar = Calendar.getInstance();
