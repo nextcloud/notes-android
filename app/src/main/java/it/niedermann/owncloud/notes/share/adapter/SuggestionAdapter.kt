@@ -3,7 +3,6 @@ package it.niedermann.owncloud.notes.share.adapter
 import android.app.SearchManager
 import android.content.Context
 import android.database.Cursor
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +19,8 @@ class SuggestionAdapter(context: Context, cursor: Cursor?) : CursorAdapter(conte
     }
 
     override fun bindView(view: View, context: Context, cursor: Cursor) {
-        val suggestion = cursor.getString(cursor.getColumnIndexOrThrow(SearchManager.SUGGEST_COLUMN_TEXT_1))
+        val suggestion =
+            cursor.getString(cursor.getColumnIndexOrThrow(SearchManager.SUGGEST_COLUMN_TEXT_1))
         view.findViewById<TextView>(R.id.suggestion_text).text = suggestion
 
 
@@ -31,12 +31,13 @@ class SuggestionAdapter(context: Context, cursor: Cursor?) : CursorAdapter(conte
             try {
                 val iconId = cursor.getInt(iconColumn)
                 icon.setImageDrawable(ContextCompat.getDrawable(context, iconId))
-            } catch (e: NumberFormatException) {
-                val iconURIAsString = cursor.getString(iconColumn)
-                if (!iconURIAsString.isNullOrEmpty()) {
-                    val iconURI = Uri.parse(iconURIAsString)
-                    icon.setImageURI(iconURI)
-                }
+            } catch (e: Exception) {
+                icon.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        context,
+                        R.drawable.ic_account_circle_grey_24dp
+                    )
+                )
             }
         }
     }

@@ -170,7 +170,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         }
 
         SuggestionAdapter suggestionAdapter = new SuggestionAdapter(this, null);
-        // UsersAndGroupsSearchProvider provider = new UsersAndGroupsSearchProvider(this, repository);
+        UsersAndGroupsSearchProvider provider = new UsersAndGroupsSearchProvider(this, repository);
 
         binding.searchView.setSuggestionsAdapter(suggestionAdapter);
         binding.searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName));
@@ -185,8 +185,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             binding.searchView.setQuery("", false);
         });
 
-        /*
-          binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 // return true to prevent the query from being processed;
@@ -228,8 +227,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                 return false;
             }
         });
-         */
-
 
         binding.searchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
             @Override
@@ -247,7 +244,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                     String shareWith = cursor.getString(cursor.getColumnIndexOrThrow(UsersAndGroupsSearchProvider.SHARE_WITH));
                     int shareType = cursor.getInt(cursor.getColumnIndexOrThrow(UsersAndGroupsSearchProvider.SHARE_TYPE));
                     navigateNoteShareDetail(shareWith, shareType);
-                    // provider.dispose();
                 }
                 return true;
             }

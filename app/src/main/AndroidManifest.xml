@@ -192,12 +192,5 @@
             </intent-filter>
         </service>
 
-        <provider
-            android:name=".share.helper.UsersAndGroupsSearchProvider"
-            android:authorities="@string/users_and_groups_search_authority"
-            android:enabled="true"
-            android:exported="false"
-            android:label="@string/note_share_activity_search_text" />
-
     </application>
 </manifest>
