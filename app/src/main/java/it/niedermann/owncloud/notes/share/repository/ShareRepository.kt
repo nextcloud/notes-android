@@ -12,6 +12,7 @@ import it.niedermann.owncloud.notes.persistence.ApiProvider
 import it.niedermann.owncloud.notes.persistence.NotesRepository
 import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.share.model.CreateShareRequest
+import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
 import it.niedermann.owncloud.notes.shared.model.ApiVersion
 import org.json.JSONArray
 import org.json.JSONObject
@@ -153,14 +154,22 @@ class ShareRepository(private val applicationContext: Context) {
 
     fun updateShare(
         account: SingleSignOnAccount,
-        remoteShareId: Long
-    ): Single<List<OCShare>> {
-        return Single.fromCallable {
-            val shareAPI = apiProvider.getShareAPI(applicationContext, account)
-            val call = shareAPI.updateShare(remoteShareId)
-            val response = call.execute()
-            response.body()?.ocs?.data ?: throw RuntimeException("Share update failed")
-        }.subscribeOn(Schedulers.io())
+        shareId: Long,
+        noteText: String
+    ): Boolean {
+        val shareAPI = apiProvider.getShareAPI(applicationContext, account)
+        val requestBody = UpdateShareRequest(shareId.toString(), noteText)
+        val call = shareAPI.updateShare(requestBody)
+        val response = call.execute()
+        if (response.isSuccessful) {
+            val updateShareResponse = response.body()
+            Log.d("", "Response successful: $updateShareResponse")
+        } else {
+            val errorBody = response.errorBody()?.string()
+            Log.d("", "Response failed:$errorBody")
+        }
+
+        return response.isSuccessful
     }
 
     fun addShare(
@@ -194,7 +203,7 @@ class ShareRepository(private val applicationContext: Context) {
         val response = call.execute()
         if (response.isSuccessful) {
             val createShareResponse = response.body()
-            Log.d("", "Response successfull: $createShareResponse")
+            Log.d("", "Response successful: $createShareResponse")
         } else {
             val errorBody = response.errorBody()?.string()
             Log.d("", "Response failed:$errorBody")
