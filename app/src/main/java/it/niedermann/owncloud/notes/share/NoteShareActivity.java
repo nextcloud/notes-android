@@ -611,13 +611,13 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
     @Override
     public void advancedPermissions(OCShare share) {
-        // modifyExistingShare(share, FileDetailsSharingProcessFragment.SCREEN_TYPE_PERMISSION);
+        modifyExistingShare(share, NoteShareDetailActivity.SCREEN_TYPE_PERMISSION);
     }
 
 
     @Override
     public void sendNewEmail(OCShare share) {
-        // modifyExistingShare(share, FileDetailsSharingProcessFragment.SCREEN_TYPE_NOTE);
+        modifyExistingShare(share, NoteShareDetailActivity.SCREEN_TYPE_NOTE);
     }
 
     @Override
@@ -649,7 +649,16 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     }
 
     private void modifyExistingShare(OCShare share, int screenTypePermission) {
-        // editExistingShare(share, screenTypePermission, !isReshareForbidden(share), capabilities.getVersion().isNewerOrEqual(OwnCloudVersion.nextcloud_18));
+        Bundle bundle = new Bundle();
+
+        bundle.putSerializable(NoteShareDetailActivity.ARG_OCSHARE, share);
+        bundle.putInt(NoteShareDetailActivity.ARG_SCREEN_TYPE, screenTypePermission);
+        bundle.putBoolean(NoteShareDetailActivity.ARG_RESHARE_SHOWN, !isReshareForbidden(share));
+        bundle.putBoolean(NoteShareDetailActivity.ARG_EXP_DATE_SHOWN, true); // TODO: capabilities.getVersion().isNewerOrEqual(OwnCloudVersion.nextcloud_18)
+
+        Intent intent = new Intent(this, NoteShareDetailActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     @Override

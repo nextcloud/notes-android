@@ -54,49 +54,6 @@ class NoteShareDetailActivity : BrandedActivity(),
         // types of screens to be displayed
         const val SCREEN_TYPE_PERMISSION = 1 // permissions screen
         const val SCREEN_TYPE_NOTE = 2 // note screen
-
-        /*
-         /**
-         * fragment instance to be called while creating new share for internal and external share
-         */
-        @JvmStatic
-        fun newInstance(
-            file: OCFile,
-            shareeName: String,
-            shareType: ShareType,
-            secureShare: Boolean
-        ): FileDetailsSharingProcessFragment {
-            val args = Bundle()
-            args.putParcelable(ARG_OCFILE, file)
-            args.putSerializable(ARG_SHARE_TYPE, shareType)
-            args.putString(ARG_SHAREE_NAME, shareeName)
-            args.putBoolean(ARG_SECURE_SHARE, secureShare)
-            val fragment = FileDetailsSharingProcessFragment()
-            fragment.arguments = args
-            return fragment
-        }
-
-        /**
-         * fragment instance to be called while modifying existing share information
-         */
-        @JvmStatic
-        fun newInstance(
-            share: OCShare,
-            screenType: Int,
-            isReshareShown: Boolean,
-            isExpirationDateShown: Boolean
-        ): FileDetailsSharingProcessFragment {
-            val args = Bundle()
-            args.putParcelable(ARG_OCSHARE, share)
-            args.putInt(ARG_SCREEN_TYPE, screenType)
-            args.putBoolean(ARG_RESHARE_SHOWN, isReshareShown)
-            args.putBoolean(ARG_EXP_DATE_SHOWN, isExpirationDateShown)
-            val fragment = FileDetailsSharingProcessFragment()
-            fragment.arguments = args
-            return fragment
-        }
-         */
-
     }
 
     private lateinit var binding: ActivityNoteShareDetailBinding
