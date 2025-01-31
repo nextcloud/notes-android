@@ -552,15 +552,15 @@ class NoteShareDetailActivity : BrandedActivity(),
                 SingleAccountHelper.getCurrentSingleSignOnAccount(this@NoteShareDetailActivity)
 
             // if modifying existing share then directly update the note and send email
-            if (share != null && share?.note != noteText) {
-                // repository.updateShare(ssoAcc, share, noteText)
+            val result = if (share != null && share?.note != noteText) {
+                repository.updateShare(ssoAcc, share!!.id, noteText)
             } else {
                 if (note == null || shareeName == null) {
                     Log_OC.d(TAG, "validateShareProcessSecond cancelled")
                     return@launch
                 }
 
-                val result = repository.addShare(
+                repository.addShare(
                     ssoAcc,
                     note!!,
                     shareType,
@@ -570,16 +570,16 @@ class NoteShareDetailActivity : BrandedActivity(),
                     permission,
                     noteText
                 )
+            }
 
-                withContext(Dispatchers.Main) {
-                    if (result) {
-                        finish()
-                    } else {
-                        DisplayUtils.showSnackMessage(
-                            this@NoteShareDetailActivity,
-                            getString(R.string.note_share_detail_activity_create_share_error)
-                        )
-                    }
+            withContext(Dispatchers.Main) {
+                if (result) {
+                    finish()
+                } else {
+                    DisplayUtils.showSnackMessage(
+                        this@NoteShareDetailActivity,
+                        getString(R.string.note_share_detail_activity_create_share_error)
+                    )
                 }
             }
         }

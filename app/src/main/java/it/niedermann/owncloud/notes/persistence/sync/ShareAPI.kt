@@ -4,6 +4,7 @@ import com.nextcloud.android.sso.api.EmptyResponse
 import com.owncloud.android.lib.resources.shares.OCShare
 import it.niedermann.owncloud.notes.share.model.CreateShareRequest
 import it.niedermann.owncloud.notes.share.model.CreateShareResponse
+import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
 import it.niedermann.owncloud.notes.shared.model.OcsResponse
 import retrofit2.Call
 import retrofit2.http.Body
@@ -38,7 +39,7 @@ interface ShareAPI {
     fun deleteShare(remoteShareId: Long): Call<EmptyResponse>
 
     @PATCH("shares")
-    fun updateShare(remoteShareId: Long): Call<OcsResponse<List<OCShare>>>
+    fun updateShare(@Body request: UpdateShareRequest): Call<OcsResponse<CreateShareResponse>>
 
     @POST("shares")
     fun addShare(@Body request: CreateShareRequest): Call<OcsResponse<CreateShareResponse>>
