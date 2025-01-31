@@ -5,11 +5,11 @@ import android.content.Context;
 import android.graphics.PorterDuff;
 import android.view.View;
 
-import com.owncloud.android.lib.resources.shares.OCShare;
-
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.owncloud.android.lib.resources.shares.OCShare;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemInternalShareLinkBinding;
