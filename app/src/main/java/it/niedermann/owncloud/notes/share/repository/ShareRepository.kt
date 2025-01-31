@@ -2,6 +2,8 @@ package it.niedermann.owncloud.notes.share.repository
 
 import android.content.Context
 import android.icu.text.SimpleDateFormat
+import com.google.gson.Gson
+import com.google.gson.internal.LinkedTreeMap
 import com.nextcloud.android.sso.model.SingleSignOnAccount
 import com.owncloud.android.lib.common.utils.Log_OC
 import com.owncloud.android.lib.resources.shares.OCShare
@@ -16,11 +18,6 @@ import it.niedermann.owncloud.notes.share.model.UpdateShareInformationRequest
 import it.niedermann.owncloud.notes.share.model.UpdateSharePermissionRequest
 import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
 import it.niedermann.owncloud.notes.shared.model.ApiVersion
-import okhttp3.Credentials
-import okhttp3.HttpUrl
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import org.json.JSONArray
 import org.json.JSONObject
 import java.util.Date
 import java.util.Locale
@@ -48,71 +45,29 @@ class ShareRepository(private val applicationContext: Context, private val accou
         page: Int,
         perPage: Int
     ): ArrayList<JSONObject> {
-        val url = HttpUrl.Builder()
-            .scheme("http")
-            .host("10.0.2.2")
-            .port(55001)
-            .addPathSegments("ocs/v2.php/apps/files_sharing/api/v1/sharees")
-            .addQueryParameter("format", "json")
-            .addQueryParameter("itemType", "file")
-            .addQueryParameter("search", searchString)
-            .addQueryParameter("page", page.toString())
-            .addQueryParameter("perPage", perPage.toString())
-            .addQueryParameter("lookup", "false")
-            .build()
+        val shareAPI = apiProvider.getShareAPI(applicationContext, account)
+        val call = shareAPI.getSharees(search = searchString, page = page.toString(), perPage = perPage.toString())
+        return if (call != null) {
+            val respOCS = call["ocs"] as? LinkedTreeMap<*, *>
+            val respData = respOCS?.get("data") as? LinkedTreeMap<*, *>
+            val respExact = respData?.get("exact") as? LinkedTreeMap<*, *>
 
-        val credentials = Credentials.basic("admin", "admin")
+            fun LinkedTreeMap<*, *>.getList(key: String): ArrayList<*>? = this[key] as? ArrayList<*>
 
-        val request = Request.Builder()
-            .url(url)
-            .header("OCS-APIRequest", "true")
-            .header("Accept", "application/json")
-            .header("Authorization", credentials)
-            .get()
-            .build()
+            val respExactUsers = respExact?.getList("users")
+            val respExactGroups = respExact?.getList("groups")
+            val respExactRemotes = respExact?.getList("remotes")
+            val respExactEmails = respExact?.getList("emails")
+            val respExactCircles = respExact?.takeIf { it.containsKey("circles") }?.getList("circles")
+            val respExactRooms = respExact?.takeIf { it.containsKey("rooms") }?.getList("rooms")
 
-        val client = OkHttpClient()
-        val call = client.newCall(request).execute()
+            val respPartialUsers = respData?.getList("users")
+            val respPartialGroups = respData?.getList("groups")
+            val respPartialRemotes = respData?.getList("remotes")
+            val respPartialCircles = respData?.takeIf { it.containsKey("circles") }?.getList("circles")
+            val respPartialRooms = respData?.takeIf { it.containsKey("rooms") }?.getList("rooms")
 
-
-        //val shareAPI = apiProvider.getShareAPI(applicationContext, account)
-        //val call = shareAPI.getSharees(search = searchString, page = page.toString(), perPage = perPage.toString())
-        if (call.isSuccessful) {
-            val response = call.body.string()
-            val respJSON = JSONObject(response)
-            val respOCS = respJSON.getJSONObject("ocs")
-            val respData = respOCS.getJSONObject("data")
-            val respExact = respData.getJSONObject("exact")
-            val respExactUsers = respExact.getJSONArray("users")
-            val respExactGroups = respExact.getJSONArray("groups")
-            val respExactRemotes = respExact.getJSONArray("remotes")
-            val respExactCircles = if (respExact.has("circles")) {
-                respExact.getJSONArray("circles")
-            } else {
-                JSONArray()
-            }
-            val respExactRooms = if (respExact.has("rooms")) {
-                respExact.getJSONArray("rooms")
-            } else {
-                JSONArray()
-            }
-
-            val respExactEmails = respExact.getJSONArray("emails")
-            val respPartialUsers = respData.getJSONArray("users")
-            val respPartialGroups = respData.getJSONArray("groups")
-            val respPartialRemotes = respData.getJSONArray("remotes")
-            val respPartialCircles = if (respData.has("circles")) {
-                respData.getJSONArray("circles")
-            } else {
-                JSONArray()
-            }
-            val respPartialRooms = if (respData.has("rooms")) {
-                respData.getJSONArray("rooms")
-            } else {
-                JSONArray()
-            }
-
-            val jsonResults = arrayOf(
+            val jsonResults = listOfNotNull(
                 respExactUsers,
                 respExactGroups,
                 respExactRemotes,
@@ -125,21 +80,15 @@ class ShareRepository(private val applicationContext: Context, private val accou
                 respPartialRooms,
                 respPartialCircles
             )
-            val data: ArrayList<JSONObject> = ArrayList()
-            val var25 = jsonResults
-            val var26 = jsonResults.size
 
-            for (var27 in 0 until var26) {
-                val jsonResult = var25[var27]
-
-                for (j in 0 until jsonResult.length()) {
-                    val jsonObject = jsonResult.getJSONObject(j)
-                    data.add(jsonObject)
+            val gson = Gson()
+            return jsonResults.flatMap { jsonResult ->
+                jsonResult.map { linkedTreeMap ->
+                    JSONObject(gson.toJson(linkedTreeMap))
                 }
-            }
-            return data
+            }.toCollection(ArrayList())
         } else {
-            return ArrayList()
+            ArrayList()
         }
     }
 
