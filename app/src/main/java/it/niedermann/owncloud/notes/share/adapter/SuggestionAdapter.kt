@@ -10,8 +10,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.core.database.getIntOrNull
-import androidx.core.database.getStringOrNull
 import androidx.cursoradapter.widget.CursorAdapter
 import it.niedermann.owncloud.notes.R
 
@@ -25,15 +23,21 @@ class SuggestionAdapter(context: Context, cursor: Cursor?) : CursorAdapter(conte
         val suggestion = cursor.getString(cursor.getColumnIndexOrThrow(SearchManager.SUGGEST_COLUMN_TEXT_1))
         view.findViewById<TextView>(R.id.suggestion_text).text = suggestion
 
-        val icon = view.findViewById<ImageView>(R.id.suggestion_icon)
 
-        val iconId = cursor.getIntOrNull(cursor.getColumnIndex(SearchManager.SUGGEST_COLUMN_ICON_1))
-        if (iconId != null) {
-            icon.setImageDrawable(ContextCompat.getDrawable(context, iconId))
-        } else {
-            val iconURIAsString = cursor.getStringOrNull(cursor.getColumnIndex(SearchManager.SUGGEST_COLUMN_ICON_1)) ?: return
-            val iconURI = Uri.parse(iconURIAsString)
-            icon.setImageURI(iconURI)
+        val icon = view.findViewById<ImageView>(R.id.suggestion_icon)
+        val iconColumn = cursor.getColumnIndex(SearchManager.SUGGEST_COLUMN_ICON_1)
+
+        if (iconColumn != -1) {
+            try {
+                val iconId = cursor.getInt(iconColumn)
+                icon.setImageDrawable(ContextCompat.getDrawable(context, iconId))
+            } catch (e: NumberFormatException) {
+                val iconURIAsString = cursor.getString(iconColumn)
+                if (!iconURIAsString.isNullOrEmpty()) {
+                    val iconURI = Uri.parse(iconURIAsString)
+                    icon.setImageURI(iconURI)
+                }
+            }
         }
     }
 }
