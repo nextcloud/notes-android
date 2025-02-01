@@ -171,11 +171,11 @@
     <string name="error_dialog_check_maintenance">Bitte prüfen Sie ob sich Ihr Nextcloud-Server derzeit  im Wartungsmodus befindet.</string>
     <string name="error_dialog_insufficient_storage">Ihre Nextcloud-Installation hat keinen freien Speicherplatz mehr. Bitte löschen Sie einige Dateien, um Ihre lokalen Änderungen mit Ihrer Cloud synchronisieren zu können.</string>
     <string name="error_dialog_we_need_info">Wir benötigen die folgenden technischen Informationen, um Ihnen helfen zu können:</string>
-    <string name="error_dialog_server_app_enabled">Bitte stellen Sie sicher, dass die „Notes“-App auf Ihrem Server installiert und aktiviert ist.</string>
+    <string name="error_dialog_server_app_enabled">Bitte stellen Sie sicher, dass die \"Notes\"-App auf Ihrem Server installiert und aktiviert ist.</string>
     <string name="error_dialog_redirect">Ihr Server antwortet mit HTTP Status-Code 302. Dies bedeutet, dass entweder die Notes App nicht auf Ihrem Server installiert ist, oder eine Fehlkonfiguration vorliegt. Die Ursache kann im Überschreiben von Variablen in der .htaccess-Datei liegen, oder an Nextcloud Apps wie OID Client.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Bitte alle Batterieoptimierungen für Nextcloud und die Notes-App deaktivieren.</string>
     <string name="error_dialog_min_version">Die Notes-App für Android setzt voraus, dass die Nextcloud-Android-App mindestens Version 3.18 ist.</string>
-    <string name="added_content">„%1$s“ hinzugefügt</string>
+    <string name="added_content">\"%1$s\" hinzugefügt</string>
     <string name="shared_text_empty">Der geteilte Text war ohne Inhalt</string>
     <string name="append_to_note">An Notiz anhängen</string>
     <string name="change_note_title">Notiz-Titel ändern</string>
