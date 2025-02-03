@@ -30,6 +30,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.snackbar.Snackbar;
+import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
+import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.owncloud.android.lib.common.operations.RemoteOperationResult;
 import com.owncloud.android.lib.common.utils.Log_OC;
@@ -115,21 +117,8 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                 final var ssoAcc = SingleAccountHelper.getCurrentSingleSignOnAccount(NoteShareActivity.this);
                 repository = new ShareRepository(NoteShareActivity.this, ssoAcc);
 
-                // TODO: Used saved ids
-                final var shares = new ArrayList<OCShare>();
-
-                if (note != null && note.getRemoteId() != null) {
-                    final var shareEntities = repository.getShareEntities(note.getRemoteId(), ssoAcc.name);
-                    shareEntities.forEach(entity -> {
-                        final var share = repository.getShares(entity.getNoteRemoteId());
-                        if (share != null) {
-                            shares.addAll(share);
-                        }
-                    });
-                }
-
                 runOnUiThread(() -> {
-                    binding.sharesList.setAdapter(new ShareeListAdapter(this, shares, this, account));
+                    binding.sharesList.setAdapter(new ShareeListAdapter(this, new ArrayList<>(), this, account));
                     binding.sharesList.setLayoutManager(new LinearLayoutManager(this));
                     binding.pickContactEmailBtn.setOnClickListener(v -> checkContactPermission());
                     binding.btnShareButton.setOnClickListener(v -> ShareUtil.openShareDialog(this, note.getTitle(), note.getContent()));
@@ -512,46 +501,53 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
      * before reading database.
      */
     public void refreshSharesFromDB() {
-        /*
-        OCFile newFile = fileDataStorageManager.getFileById(file.getFileId());
-        if (newFile != null) {
-            file = newFile;
-        }
+        new Thread(() -> {
+            try {
+                final var ssoAcc = SingleAccountHelper.getCurrentSingleSignOnAccount(NoteShareActivity.this);
+                ShareeListAdapter adapter = (ShareeListAdapter) binding.sharesList.getAdapter();
 
-        ShareeListAdapter adapter = (ShareeListAdapter) binding.sharesList.getAdapter();
+                if (adapter == null) {
+                    runOnUiThread(() -> DisplayUtils.showSnackMessage(NoteShareActivity.this, getString(R.string.could_not_retrieve_shares)));
+                    return;
+                }
 
-        if (adapter == null) {
-            BrandedSnackbar.make(requireView(), getString(R.string.could_not_retrieve_shares), Snackbar.LENGTH_LONG)
-                    .show();
-            return;
-        }
-        adapter.getShares().clear();
+                adapter.getShares().clear();
 
-        // to show share with users/groups info
-        List<OCShare> shares = fileDataStorageManager.getSharesWithForAFile(file.getRemotePath(),
-                user.getAccountName());
+                // to show share with users/groups info
+                List<OCShare> shares = new ArrayList<>();
 
-        adapter.addShares(shares);
+                if (note != null && note.getRemoteId() != null) {
+                    final var shareEntities = repository.getShareEntities(note.getRemoteId(), ssoAcc.name);
+                    shareEntities.forEach(entity -> {
+                        if (entity.getId() != null) {
+                            final var share = repository.getShares(entity.getId());
+                            if (share != null) {
+                                shares.addAll(share);
+                            }
+                        }
+                    });
+                }
 
-        if (FileDetailSharingFragmentHelper.isPublicShareDisabled(capabilities) || !file.canReshare()) {
-            return;
-        }
+                runOnUiThread(() -> {
+                    adapter.addShares(shares);
 
-        // Get public share
-        List<OCShare> publicShares = fileDataStorageManager.getSharesByPathAndType(file.getRemotePath(),
-                ShareType.PUBLIC_LINK,
-                "");
+                    // TODO: Will be added later on...
+                    List<OCShare> publicShares = new ArrayList<>();
 
-        if (publicShares.isEmpty() && containsNoNewPublicShare(adapter.getShares())) {
-            final OCShare ocShare = new OCShare();
-            ocShare.setShareType(ShareType.NEW_PUBLIC_LINK);
-            publicShares.add(ocShare);
-        } else {
-            adapter.removeNewPublicShare();
-        }
+                    if (containsNoNewPublicShare(adapter.getShares())) {
+                        final OCShare ocShare = new OCShare();
+                        ocShare.setShareType(ShareType.NEW_PUBLIC_LINK);
+                        publicShares.add(ocShare);
+                    } else {
+                        adapter.removeNewPublicShare();
+                    }
 
-        adapter.addShares(publicShares);
-         */
+                    adapter.addShares(publicShares);
+                });
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
 
     }
 
