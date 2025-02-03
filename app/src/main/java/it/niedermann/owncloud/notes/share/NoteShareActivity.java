@@ -454,9 +454,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         setupView();
     }
 
-    private void unshareWith(OCShare share) {
-        repository.removeShare(share.getId());
-    }
 
     /**
      * Starts a dialog that requests a password to the user to protect a share link.
@@ -545,7 +542,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                     adapter.addShares(publicShares);
                 });
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                Log_OC.d(TAG, "Exception while refreshSharesFromDB: " + e);
             }
         }).start();
 
@@ -619,6 +616,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         outState.putSerializable(ARG_ACCOUNT, account);
     }
 
+    // TODO: capabilities needed
     private boolean isReshareForbidden(OCShare share) {
         return false;
         // return ShareType.FEDERATED == share.getShareType() || capabilities != null && capabilities.getFilesSharingResharing().isFalse();
@@ -643,13 +641,23 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
     @Override
     public void unShare(OCShare share) {
-        unshareWith(share);
-        ShareeListAdapter adapter = (ShareeListAdapter) binding.sharesList.getAdapter();
-        if (adapter == null) {
-            DisplayUtils.showSnackMessage(this, getString(R.string.email_pick_failed));
-            return;
-        }
-        adapter.remove(share);
+        new Thread(() -> {{
+            // TODO: FIXME
+            final var result = repository.removeShare(share.getId());
+
+            runOnUiThread(() -> {
+                if (result) {
+                    ShareeListAdapter adapter = (ShareeListAdapter) binding.sharesList.getAdapter();
+                    if (adapter == null) {
+                        DisplayUtils.showSnackMessage(NoteShareActivity.this, getString(R.string.email_pick_failed));
+                        return;
+                    }
+                    adapter.remove(share);
+                } else {
+                    DisplayUtils.showSnackMessage(NoteShareActivity.this, getString(R.string.failed_the_remove_share));
+                }
+            });
+        }}).start();
     }
 
     @Override

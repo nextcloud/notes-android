@@ -42,7 +42,7 @@ public class ShareViewHolder extends RecyclerView.ViewHolder {
 
     public void bind(OCShare share,
                      ShareeListAdapterListener listener) {
-        String userId = String.valueOf(account.getId());
+        String accountName = account.getDisplayName();
         String name = share.getSharedWithDisplayName();
         binding.icon.setTag(null);
 
@@ -66,7 +66,7 @@ public class ShareViewHolder extends RecyclerView.ViewHolder {
                 binding.icon.setTag(share.getShareWith());
 
                 Glide.with(context)
-                        .load(new SingleSignOnUrl(account.getAccountName(), account.getUrl() + "/index.php/avatar/" + Uri.encode(account.getUserName()) + "/64"))
+                        .load(new SingleSignOnUrl(account.getAccountName(), account.getUrl() + "/index.php/avatar/" + Uri.encode(share.getSharedWithDisplayName()) + "/64"))
                         .placeholder(R.drawable.ic_account_circle_grey_24dp)
                         .error(R.drawable.ic_account_circle_grey_24dp)
                         .apply(RequestOptions.circleCropTransform())
@@ -80,7 +80,7 @@ public class ShareViewHolder extends RecyclerView.ViewHolder {
 
         binding.name.setText(name);
 
-        if (share.getShareWith().equalsIgnoreCase(userId) || share.getUserId().equalsIgnoreCase(userId)) {
+        if (accountName.equalsIgnoreCase(share.getShareWith()) || accountName.equalsIgnoreCase(share.getUserId())) {
             binding.overflowMenu.setVisibility(View.VISIBLE);
 
             String permissionName = SharingMenuHelper.getPermissionName(context, share);
