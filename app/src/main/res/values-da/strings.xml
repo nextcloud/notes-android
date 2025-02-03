@@ -51,10 +51,13 @@
     <string name="settings_font_title">Monospace font</string>
     <string name="settings_font_size">Skriftstørrelse</string>
     <string name="settings_wifi_only">Synkronisér kun på Wi-Fi</string>
+    <string name="settings_lock">App lås (beta)</string>
     <string name="settings_lock_summary">Enheds legitimationsoplysninger</string>
     <string name="settings_background_sync">Synkronisering i baggrunden</string>
     <string name="settings_prevent_screen_capture">Forhindr skærmoptagelse</string>
     <string name="settings_gridview">Grid visning</string>
+    <string name="settings_enable_direct_edit">Direkte redigering</string>
+    <string name="settings_enable_direct_edit_summary">Når den er deaktiveret, vil den avancerede editor blive skjult.</string>
     <string name="settings_keep_screen_on">Hold skærmen tændt</string>
     <string name="settings_keep_screen_on_summary">Mens du læser eller redigerer en note</string>
 
@@ -94,6 +97,8 @@
     <string name="widget_single_note_title">Enkel note</string>
     <string name="widget_single_note_placeholder_tv">Note ikke fundet</string>
     <string name="widget_not_logged_in">Log venligst ind i Notes før du bruger denne widget</string>
+    <string name="widget_entry_fav_contentDescription">Stjerneikon bruges til at angive et element som en favorit</string>
+
     <string name="activity_select_single_note">Vælg note</string>
 
     <string name="shortcut_create_long">Opret en ny note</string>
@@ -130,12 +135,18 @@
     <string name="category_keys">Nøgler</string>
     <string name="category_password">Password</string>
     <string name="category_passwords">Passwords</string>
+    <string name="category_credentials">Legitimationsoplysninger</string>
     <string name="category_game">Spil</string>
     <string name="category_games">Spil</string>
     <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
     <string name="category_play">Afspil</string>
     <string name="category_gift">Gave</string>
     <string name="category_gifts">Gaver</string>
+    <!-- Like a gift -->
+    <string name="category_present">Gave</string>
+    <!-- Like a gift -->
+    <string name="category_presents">Gaver</string>
+
     <string name="account_already_imported">Kontoen er allerede importeret</string>
     <string name="no_notes_yet">Ingen noter endnu</string>
     <string name="no_notes_yet_description">Tryk på + for at oprette en ny note</string>
@@ -149,6 +160,7 @@
     <string name="error_dialog_title">Åh nej - hvad nu? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Forsøg venligst at tvinge app\'en til at lukke og start den påny igen. Der kan have været en ukorrekt forbindelse til Nextcloud-app\'en.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Hvis problemet ikke løses, så forsøg at rydde lageret for begge apps: Nextcloud og Nextcloud Notes, for at løse problemet.</string>
+    <string name="error_dialog_tip_clear_storage">Du kan rydde lageret ved at åbne appoplysningerne og vælge Lager → Ryd lager. ⚠️ Advarsel: Dette vil slette endnu ikke synkroniserede noter!</string>
     <string name="error_dialog_tip_files_outdated">Din Nextcloud-app ser ud til at være forældet. Gå venligst til Play Butik eller F-Droid for at få seneste version.</string>
     <string name="error_dialog_tip_files_force_stop">Det lader til at være noget galt med din Nextcloud-app. Forsøg venligst at gennemtvinge stop af både Nextcloud-app\'en og Nextcloud Notes-app\'en. </string>
     <string name="error_dialog_tip_files_delete_storage">Hvis det ikke hjælper at stoppe begge, så kan du forsøge at rydde lagerpladsen for begge apps.</string>
@@ -161,6 +173,8 @@
     <string name="error_dialog_we_need_info">Vi har brug for følgende tekniske information for at hjælpe dig:</string>
     <string name="error_dialog_server_app_enabled">Tjek venligst, om du har installeret og aktiveret appen \"Noter\" på din server.</string>
     <string name="error_dialog_redirect">Din server svarede med en HTTP 302-statuskode, hvilket betyder, at du endnu ikke har installeret app\'en Noter på din server, eller at der er en forkert konfiguration. Dette kan skyldes brugerdefinerede tilsidesættelser i en .htaccess-fil eller af apps fra Nextcloud som OID Client.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Deaktiver venligst alle batterioptimeringer for Nextcloud og Notes-appen.</string>
+    <string name="error_dialog_min_version">Notes Android-appen kræver, at Nextcloud Android-appen er mindst version 3.18.</string>
     <string name="added_content">Tilføjet \"%1$s\"</string>
     <string name="shared_text_empty">Den delte tekst var tom</string>
     <string name="append_to_note">Tilføj til note</string>
@@ -173,6 +187,9 @@
     <string name="action_formatting_help">Formatering</string>
 
 
+    <string name="noteMode_plain_edit">Almindelig redigeringstilstand</string>
+    <string name="noteMode_plain_preview">Almindelig forhåndsvisning</string>
+    <string name="noteMode_rich_edit">Udvidet redigeringstilstand</string>
     <string name="noteMode_remember_last">Husk mit sidste valg</string>
 
     <string-array name="fontSize_entries">
@@ -206,15 +223,44 @@
 
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Kontekstbaseret formatering</string>
+    <string name="formatting_help_cbf_body_1">Et vigtigt designmål med Notes-appen er at give et distraktionsfrit værktøj. Selvom du vil være i stand til at formatere dine tekster med Markdown. Til forskellige af de nedenfor nævnte eksempler kan du bruge genveje, så du kan formatere dine noter uden at indtaste koderne nedenfor.</string>
+    <string name="formatting_help_cbf_body_2">Du skal blot vælge en række tekst eller trykke på din markør på en hvilken som helst position, og du vil få en pop op-menu, som indeholder ud for standardindgangene %1$s, %2$s, %3$s poster som %4$s or %5$s.</string>
+
     <string name="formatting_help_text_title">Tekst</string>
+    <string name="formatting_help_text_body">Det er meget nemt at lave nogle ord %1$sbold%1$s og andre ord %2$sitalic%2$s med Markdown. Du kan %3$sstrike%3$s snogle ord gennem og endda [link til Nextcloud](https://nextcloud.com).</string>
+
     <string name="formatting_help_lists_title">Lister</string>
+    <string name="formatting_help_lists_body_1">Nogle gange vil du have nummererede lister:</string>
     <string name="formatting_help_lists_body_2">En</string>
     <string name="formatting_help_lists_body_3">To</string>
     <string name="formatting_help_lists_body_4">Tre</string>
+    <string name="formatting_help_lists_body_5">Nogle gange vil du have punkttegn:</string>
+    <string name="formatting_help_lists_body_6">Start en linje med en bindestreg</string>
+    <string name="formatting_help_lists_body_7">Og hvis du har underpoint, skal du sætte to mellemrum før bindestreg eller stjerne:</string>
+    <string name="formatting_help_lists_body_8">Som her</string>
+    <string name="formatting_help_lists_body_9">Og her</string>
+
     <string name="formatting_help_checkboxes_title">Afkrydsningsfelter</string>
+    <string name="formatting_help_checkboxes_body_1">For at oprette et afkrydsningsfelt skal du bruge en liste efterfulgt af parenteser</string>
+    <string name="formatting_help_checkboxes_body_2">Punkt 1</string>
+    <string name="formatting_help_checkboxes_body_3">Punkt 2</string>
+
+    <string name="formatting_help_structured_documents_title">Strukturerede dokumenter</string>
+    <string name="formatting_help_structured_documents_body_1">SNogle gange er det nyttigt at have forskellige niveauer af overskrifter til at strukturere dine dokumenter. Start linjer med en %1$s for at oprette overskrifter. Flere %2$s i træk angiver mindre overskriftsstørrelser.</string>
+    <string name="formatting_help_structured_documents_body_2">Dette er en overskrift på tredje niveau</string>
+    <string name="formatting_help_structured_documents_body_5">Fantasi er vigtigere end viden. Viden er begrænset. Fantasi omkranser verden.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+
     <string name="formatting_help_code_title">Kode</string>
+    <string name="formatting_help_code_body_1">Der er mange forskellige måder at style kode med Markdown. Hvis du har inline kodeblokke, skal du pakke dem ind i backticks:</string>
+    <string name="formatting_help_code_body_2">Markdown understøtter også noget, der kaldes kodehegn, som giver mulighed for flere linjer uden indrykning:</string>
+    <string name="formatting_help_code_body_3">Og hvis du gerne vil bruge syntaksfremhævning, skal du inkludere sproget:</string>
+
     <string name="formatting_help_tables_title">Tabeller</string>
     <!-- Column header of a sample table -->
     <string name="formatting_help_tables_column">Kolonne %1d</string>
@@ -222,6 +268,8 @@
     <string name="formatting_help_tables_value">Værdi %1d</string>
 
     <string name="formatting_help_images_title">Billeder</string>
+    <string name="formatting_help_images_alt">Fancy billede</string>
+
     <string name="simple_other">Andet</string>
     <string name="sort_last_modified">Sortér efter dato ændret</string>
     <string name="sort_alphabetically">Sortér alfabetisk</string>
@@ -230,7 +278,9 @@
     <string name="error_action_open_network">Netværksindstillinger</string>
     <string name="error_action_update_files_app">Opdater</string>
     <string name="no_account_configured_yet">Ingen konto konfigureret endnu</string>
+    <string name="no_other_accounts">Du har ikke konfigureret andre konti endnu.</string>
     <string name="choose_account">Vælg konto</string>
+    <string name="context_based_formatting">Kontekstbaseret formatering popover</string>
     <string name="remove_account">Fjern %1$s</string>
 
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Du skal være koblet på en internetforbindelse for at tilføje en konto.</string>
@@ -239,6 +289,7 @@
     <string name="simple_next">Næste</string>
     <string name="simple_prev">Tidligere</string>
     <string name="simple_backup">Backup</string>
+    <string name="backup">Vi har registreret en uoprettelig tilstand af appen. Sikkerhedskopier dine usynkroniserede ændringer og ryd lagringen af ​​Notes-appen.</string>
     <string name="settings_notes_path_description">Mappe for dine noter i Nextcloud</string>
     <string-array name="settings_file_suffixes">
         <item translatable="false">.txt</item>
@@ -251,5 +302,8 @@
     <string name="http_status_code">HTTP statuskode: %1$d</string>
     <string name="progress_import_indeterminate">Importerer noter...</string>
     <string name="progress_import">Importerer note %1$d af %2$d...</string>
+    <string name="account_imported">Konto importeret.</string>
+    <string name="direct_editing_error">Fejl under indlæsning af udvidet redigering</string>
+    <string name="switch_to_plain_editing">Skift til almindelig redigering</string>
     <string name="action_back">Tilbage</string>
     </resources>
