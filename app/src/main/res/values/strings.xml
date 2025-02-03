@@ -102,6 +102,7 @@
     <string name="no_email_app_available">No App available to handle mail address</string>
     <string name="no_actions">No actions for this user</string>
 
+    <string name="failed_the_remove_share">Failed to remove share</string>
     <string name="email_pick_failed">Failed to pick email address.</string>
     <string name="failed_update_ui">Failed to update UI</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">No app available to select contacts</string>

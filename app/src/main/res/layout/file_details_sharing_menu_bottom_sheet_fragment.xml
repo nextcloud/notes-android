@@ -36,7 +36,7 @@
             android:layout_gravity="center_vertical"
             android:contentDescription="@null"
             android:src="@drawable/ic_edit"
-            app:tint="@color/primary" />
+            app:tint="@color/defaultBrand" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -68,7 +68,7 @@
             android:layout_gravity="center_vertical"
             android:contentDescription="@null"
             android:src="@drawable/ic_email"
-            app:tint="@color/primary" />
+            app:tint="@color/defaultBrand" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -102,7 +102,7 @@
             android:layout_gravity="center_vertical"
             android:contentDescription="@null"
             android:src="@drawable/ic_link"
-            app:tint="@color/primary" />
+            app:tint="@color/defaultBrand" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -134,7 +134,7 @@
             android:layout_gravity="center_vertical"
             android:contentDescription="@null"
             android:src="@drawable/ic_delete"
-            app:tint="@color/primary" />
+            app:tint="@color/defaultBrand" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -168,7 +168,7 @@
             android:layout_gravity="center_vertical"
             android:contentDescription="@null"
             android:src="@drawable/ic_plus"
-            app:tint="@color/primary" />
+            app:tint="@color/defaultBrand" />
 
         <TextView
             android:layout_width="wrap_content"
