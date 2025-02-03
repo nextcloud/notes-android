@@ -46,7 +46,7 @@ interface ShareAPI {
     @PATCH("shares")
     fun updateShare(@Body request: UpdateShareRequest): Call<OcsResponse<CreateShareResponse>>
 
-    @POST("shares")
+    @POST("shares?format=json")
     fun addShare(@Body request: CreateShareRequest): Call<OcsResponse<CreateShareResponse>>
 
     @PATCH("shares/{shareId}")
