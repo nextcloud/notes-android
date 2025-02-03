@@ -2,21 +2,26 @@ package it.niedermann.owncloud.notes.share.repository
 
 import android.content.Context
 import android.icu.text.SimpleDateFormat
+import android.net.Uri
 import com.google.gson.Gson
 import com.google.gson.internal.LinkedTreeMap
 import com.nextcloud.android.sso.model.SingleSignOnAccount
 import com.owncloud.android.lib.common.utils.Log_OC
 import com.owncloud.android.lib.resources.shares.OCShare
+import com.owncloud.android.lib.resources.shares.ShareToRemoteOperationResultParser
 import com.owncloud.android.lib.resources.shares.ShareType
+import com.owncloud.android.lib.resources.shares.ShareXMLParser
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import it.niedermann.owncloud.notes.persistence.ApiProvider
 import it.niedermann.owncloud.notes.persistence.NotesRepository
 import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.share.model.CreateShareRequest
+import it.niedermann.owncloud.notes.share.model.CreateShareResponse
 import it.niedermann.owncloud.notes.share.model.UpdateShareInformationRequest
 import it.niedermann.owncloud.notes.share.model.UpdateSharePermissionRequest
 import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
+import it.niedermann.owncloud.notes.share.model.toOCShare
 import it.niedermann.owncloud.notes.shared.model.ApiVersion
 import org.json.JSONObject
 import java.util.Date
@@ -93,14 +98,40 @@ class ShareRepository(private val applicationContext: Context, private val accou
     }
 
     fun getShares(
-        remoteId: Long
-    ): Single<List<OCShare>> {
-        return Single.fromCallable {
-            val shareAPI = apiProvider.getShareAPI(applicationContext, account)
-            val call = shareAPI.getShares(remoteId)
-            val response = call.execute()
-            response.body()?.ocs?.data ?: throw RuntimeException("No shares available")
-        }.subscribeOn(Schedulers.io())
+        note: Note
+    ): List<OCShare>? {
+        /*
+         val notesPathCall = notesRepository.getServerSettings(account, ApiVersion.API_VERSION_1_0)
+        val notesPathResponse = notesPathCall.execute()
+        val notesPathResponseResult = notesPathResponse.body() ?: return null
+        val notesPath = notesPathResponseResult.notesPath
+        val notesSuffix = notesPathResponseResult.fileSuffix
+        val remotePath =  "/" + notesPath + "/" + note.title + notesSuffix
+
+        val shareAPI = apiProvider.getShareAPI(applicationContext, account)
+        val call = shareAPI.getSharesForNote(remotePath, true, true)
+
+
+
+        return  null
+
+         */
+        val shareAPI = apiProvider.getShareAPI(applicationContext, account)
+        val call = shareAPI.getShares(12)
+        val response = call.execute()
+
+        return try {
+            if (response.isSuccessful) {
+                val result = response.body()?.ocs?.data ?: throw RuntimeException("No shares available")
+                result.toOCShare()
+            } else {
+                Log_OC.d(tag, "Failed to getShares: ${response.errorBody()?.string()}")
+                null
+            }
+        } catch (e: Exception) {
+            Log_OC.d(tag, "Exception while getShares: $e")
+            null
+        }
     }
 
     fun getSharesForFile(

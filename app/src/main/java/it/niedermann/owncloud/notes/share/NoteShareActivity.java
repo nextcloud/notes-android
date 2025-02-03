@@ -113,8 +113,11 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                 final var ssoAcc = SingleAccountHelper.getCurrentSingleSignOnAccount(NoteShareActivity.this);
                 repository = new ShareRepository(NoteShareActivity.this, ssoAcc);
 
+                // TODO: Used saved ids
+                final var shares = repository.getShares(note);
+
                 runOnUiThread(() -> {
-                    binding.sharesList.setAdapter(new ShareeListAdapter(this, new ArrayList<>(), this, account));
+                    binding.sharesList.setAdapter(new ShareeListAdapter(this, shares, this, account));
                     binding.sharesList.setLayoutManager(new LinearLayoutManager(this));
                     binding.pickContactEmailBtn.setOnClickListener(v -> checkContactPermission());
                     binding.btnShareButton.setOnClickListener(v -> ShareUtil.openShareDialog(this, note.getTitle(), note.getContent()));

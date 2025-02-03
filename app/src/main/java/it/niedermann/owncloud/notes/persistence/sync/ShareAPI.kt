@@ -2,6 +2,7 @@ package it.niedermann.owncloud.notes.persistence.sync
 
 import com.google.gson.internal.LinkedTreeMap
 import com.nextcloud.android.sso.api.EmptyResponse
+import com.owncloud.android.lib.common.operations.RemoteOperation
 import com.owncloud.android.lib.resources.shares.OCShare
 import it.niedermann.owncloud.notes.share.model.CreateShareRequest
 import it.niedermann.owncloud.notes.share.model.CreateShareResponse
@@ -10,7 +11,6 @@ import it.niedermann.owncloud.notes.share.model.UpdateSharePermissionRequest
 import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
 import it.niedermann.owncloud.notes.shared.model.OcsResponse
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -30,8 +30,18 @@ interface ShareAPI {
         @Query("lookup") lookup: String = "false",
     ): LinkedTreeMap<String, Any?>?
 
-    @GET("shares")
-    fun getShares(remoteId: Long): Call<OcsResponse<List<OCShare>>>
+    @GET("shares/{remoteId}?format=json")
+    fun getShares(
+        @Path("remoteId") remoteId: Long,
+        @Query("include_tags") includeTags: Boolean = true,
+    ): Call<OcsResponse<List<CreateShareResponse>>>
+
+    @GET("shares?format=json")
+    fun getSharesForNote(
+        @Query("path") path: String,
+        @Query("reshares") reshares: Boolean,
+        @Query("subfiles") subfiles: Boolean,
+    ): RemoteOperation<List<OCShare>>
 
     @GET("shares")
     fun getSharesForFile(
