@@ -19,6 +19,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import it.niedermann.owncloud.notes.persistence.dao.AccountDao;
 import it.niedermann.owncloud.notes.persistence.dao.CategoryOptionsDao;
 import it.niedermann.owncloud.notes.persistence.dao.NoteDao;
+import it.niedermann.owncloud.notes.persistence.dao.ShareDao;
 import it.niedermann.owncloud.notes.persistence.dao.WidgetNotesListDao;
 import it.niedermann.owncloud.notes.persistence.dao.WidgetSingleNoteDao;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
@@ -26,6 +27,7 @@ import it.niedermann.owncloud.notes.persistence.entity.CategoryOptions;
 import it.niedermann.owncloud.notes.persistence.entity.Converters;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
+import it.niedermann.owncloud.notes.persistence.entity.ShareEntity;
 import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_10_11;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_11_12;
@@ -50,8 +52,9 @@ import it.niedermann.owncloud.notes.persistence.migration.Migration_9_10;
                 Note.class,
                 CategoryOptions.class,
                 SingleNoteWidgetData.class,
-                NotesListWidgetData.class
-        }, version = 25
+                NotesListWidgetData.class,
+                ShareEntity.class
+        }, version = 26
 )
 @TypeConverters({Converters.class})
 public abstract class NotesDatabase extends RoomDatabase {
@@ -115,4 +118,6 @@ public abstract class NotesDatabase extends RoomDatabase {
     public abstract WidgetSingleNoteDao getWidgetSingleNoteDao();
 
     public abstract WidgetNotesListDao getWidgetNotesListDao();
+
+    public abstract ShareDao getShareDao();
 }

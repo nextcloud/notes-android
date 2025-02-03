@@ -43,6 +43,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 
 import it.niedermann.nextcloud.sso.glide.SingleSignOnUrl;
 import it.niedermann.owncloud.notes.R;
@@ -52,6 +53,7 @@ import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ActivityNoteShareBinding;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.persistence.entity.ShareEntity;
 import it.niedermann.owncloud.notes.share.adapter.ShareeListAdapter;
 import it.niedermann.owncloud.notes.share.adapter.SuggestionAdapter;
 import it.niedermann.owncloud.notes.share.dialog.FileDetailSharingMenuBottomSheetDialog;
@@ -114,7 +116,17 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                 repository = new ShareRepository(NoteShareActivity.this, ssoAcc);
 
                 // TODO: Used saved ids
-                final var shares = repository.getShares(note);
+                final var shares = new ArrayList<OCShare>();
+
+                if (note != null && note.getRemoteId() != null) {
+                    final var shareEntities = repository.getShareEntities(note.getRemoteId(), ssoAcc.name);
+                    shareEntities.forEach(entity -> {
+                        final var share = repository.getShares(entity.getNoteRemoteId());
+                        if (share != null) {
+                            shares.addAll(share);
+                        }
+                    });
+                }
 
                 runOnUiThread(() -> {
                     binding.sharesList.setAdapter(new ShareeListAdapter(this, shares, this, account));

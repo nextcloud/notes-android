@@ -16,6 +16,7 @@ import io.reactivex.schedulers.Schedulers
 import it.niedermann.owncloud.notes.persistence.ApiProvider
 import it.niedermann.owncloud.notes.persistence.NotesRepository
 import it.niedermann.owncloud.notes.persistence.entity.Note
+import it.niedermann.owncloud.notes.persistence.entity.ShareEntity
 import it.niedermann.owncloud.notes.share.model.CreateShareRequest
 import it.niedermann.owncloud.notes.share.model.CreateShareResponse
 import it.niedermann.owncloud.notes.share.model.UpdateShareInformationRequest
@@ -23,6 +24,8 @@ import it.niedermann.owncloud.notes.share.model.UpdateSharePermissionRequest
 import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
 import it.niedermann.owncloud.notes.share.model.toOCShare
 import it.niedermann.owncloud.notes.shared.model.ApiVersion
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.util.Date
 import java.util.Locale
@@ -35,6 +38,14 @@ class ShareRepository(private val applicationContext: Context, private val accou
         NotesRepository.getInstance(
             applicationContext,
         )
+    }
+
+    suspend fun addShareEntity(entity: ShareEntity) = withContext(Dispatchers.IO) {
+        notesRepository.addShareEntity(entity)
+    }
+
+    fun getShareEntities(noteRemoteId: Long, userName: String): List<ShareEntity> {
+        return notesRepository.getShareEntities(noteRemoteId, userName)
     }
 
     private fun getNotesPath(): Single<String> {
@@ -97,9 +108,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
         }
     }
 
-    fun getShares(
-        note: Note
-    ): List<OCShare>? {
+    fun getShares(remoteId: Long): List<OCShare>? {
         /*
          val notesPathCall = notesRepository.getServerSettings(account, ApiVersion.API_VERSION_1_0)
         val notesPathResponse = notesPathCall.execute()
@@ -117,7 +126,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
 
          */
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
-        val call = shareAPI.getShares(12)
+        val call = shareAPI.getShares(remoteId)
         val response = call.execute()
 
         return try {
@@ -201,10 +210,10 @@ class ShareRepository(private val applicationContext: Context, private val accou
         password: String = "",
         permissions: Int = 0,
         shareNote: String = ""
-    ): Boolean {
+    ): CreateShareResponse? {
         val notesPathCall = notesRepository.getServerSettings(account, ApiVersion.API_VERSION_1_0)
         val notesPathResponse = notesPathCall.execute()
-        val notesPathResponseResult = notesPathResponse.body() ?: return false
+        val notesPathResponseResult = notesPathResponse.body() ?: return null
         val notesPath = notesPathResponseResult.notesPath
         val notesSuffix = notesPathResponseResult.fileSuffix
 
@@ -221,15 +230,15 @@ class ShareRepository(private val applicationContext: Context, private val accou
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
         val call = shareAPI.addShare(request = requestBody)
         val response = call.execute()
-        if (response.isSuccessful) {
+        return if (response.isSuccessful) {
             val createShareResponse = response.body()
             Log_OC.d(tag, "Response successful: $createShareResponse")
+            createShareResponse?.ocs?.data
         } else {
             val errorBody = response.errorBody()?.string()
             Log_OC.d(tag, "Response failed:$errorBody")
+            null
         }
-
-        return response.isSuccessful
     }
 
     fun updateShareInformation(

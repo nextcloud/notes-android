@@ -60,6 +60,7 @@ import it.niedermann.owncloud.notes.persistence.entity.CategoryOptions;
 import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
+import it.niedermann.owncloud.notes.persistence.entity.ShareEntity;
 import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
@@ -958,5 +959,13 @@ public class NotesRepository {
 
     public void updateDisplayName(long id, @Nullable String displayName) {
         db.getAccountDao().updateDisplayName(id, displayName);
+    }
+
+    public void addShareEntity(ShareEntity entity) {
+        db.getShareDao().addShareEntity(entity);
+    }
+
+    public List<ShareEntity> getShareEntities(long noteRemoteId, String userName) {
+        return db.getShareDao().getShareEntities(noteRemoteId, userName);
     }
 }
