@@ -119,4 +119,7 @@ data class CreateShareResponse(
     @Expose
     @SerializedName("hide_download")
     val hideDownload: Long,
+
+    @Expose
+    val attributes: Any?,
 )
