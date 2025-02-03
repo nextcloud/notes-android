@@ -15,6 +15,7 @@ import it.niedermann.owncloud.notes.branding.BrandedActivity
 import it.niedermann.owncloud.notes.branding.BrandingUtil
 import it.niedermann.owncloud.notes.databinding.ActivityNoteShareDetailBinding
 import it.niedermann.owncloud.notes.persistence.entity.Note
+import it.niedermann.owncloud.notes.persistence.entity.ShareEntity
 import it.niedermann.owncloud.notes.share.dialog.ExpirationDatePickerDialogFragment
 import it.niedermann.owncloud.notes.share.helper.SharingMenuHelper
 import it.niedermann.owncloud.notes.share.repository.ShareRepository
@@ -523,15 +524,16 @@ class NoteShareDetailActivity : BrandedActivity(),
 
         lifecycleScope.launch(Dispatchers.IO) {
             // if modifying existing share then directly update the note and send email
-            val result = if (share != null && share?.note != noteText) {
-                repository.updateShare(share!!.id, noteText)
+            if (share != null && share?.note != noteText) {
+                val result = repository.updateShare(share!!.id, noteText)
+                handleResult(result)
             } else {
                 if (note == null || shareeName == null) {
                     Log_OC.d(TAG, "validateShareProcessSecond cancelled")
                     return@launch
                 }
 
-                repository.addShare(
+                val result = repository.addShare(
                     note!!,
                     shareType,
                     shareeName!!,
@@ -540,17 +542,28 @@ class NoteShareDetailActivity : BrandedActivity(),
                     permission,
                     noteText
                 )
-            }
 
-            withContext(Dispatchers.Main) {
-                if (result) {
-                    finish()
-                } else {
-                    DisplayUtils.showSnackMessage(
-                        this@NoteShareDetailActivity,
-                        getString(R.string.note_share_detail_activity_create_share_error)
-                    )
+                if (result != null) {
+                    val ssoAcc = SingleAccountHelper.getCurrentSingleSignOnAccount(this@NoteShareDetailActivity)
+                    val entity = ShareEntity(result.id.toInt(), note?.remoteId!!, ssoAcc.name)
+                    repository.addShareEntity(entity)
                 }
+
+                handleResult(result != null)
+            }
+        }
+    }
+
+    private suspend fun handleResult(success: Boolean) {
+        withContext(Dispatchers.Main) {
+            if (success) {
+                finish()
+            } else {
+
+                DisplayUtils.showSnackMessage(
+                    this@NoteShareDetailActivity,
+                    getString(R.string.note_share_detail_activity_create_share_error)
+                )
             }
         }
     }
