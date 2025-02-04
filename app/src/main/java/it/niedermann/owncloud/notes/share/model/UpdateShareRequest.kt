@@ -7,14 +7,32 @@ data class UpdateShareRequest(
     val share_id: Int,
 
     @Expose
-    val note: String,
+    val permissions: Int,
 
     @Expose
     val password: String,
 
     @Expose
+    val publicUpload: String,
+
+    @Expose
     val expireDate: String?,
 
     @Expose
+    val note: String,
+
+    /**
+     * Array of ShareAttributes data class in JSON format
+     */
+    @Expose
+    val attributes: String?,
+
+    @Expose
     val sendMail: String
+)
+
+data class ShareAttributes(
+    var scope: String,
+    var key: String,
+    var value: Boolean
 )
