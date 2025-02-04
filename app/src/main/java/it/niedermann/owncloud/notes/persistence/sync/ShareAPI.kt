@@ -36,20 +36,6 @@ interface ShareAPI {
         @Query("include_tags") includeTags: Boolean = true,
     ): Call<OcsResponse<List<CreateShareResponse>>>
 
-    @GET("shares?format=json")
-    fun getSharesForNote(
-        @Query("path") path: String,
-        @Query("reshares") reshares: Boolean,
-        @Query("subfiles") subfiles: Boolean,
-    ): RemoteOperation<List<OCShare>>
-
-    @GET("shares")
-    fun getSharesForFile(
-        remoteFilePath: String,
-        reshares: Boolean,
-        subfiles: Boolean
-    ): Call<OcsResponse<MutableList<OCShare>>>
-
     @DELETE("shares/{shareId}?format=json")
     fun removeShare(@Path("shareId") shareId: Long): Call<Any>
 

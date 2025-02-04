@@ -1,7 +1,6 @@
 package it.niedermann.owncloud.notes.share.dialog
 
 
-import android.content.ActivityNotFoundException
 import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
@@ -21,7 +20,6 @@ import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.databinding.ProfileBottomSheetActionBinding
 import it.niedermann.owncloud.notes.databinding.ProfileBottomSheetFragmentBinding
 import it.niedermann.owncloud.notes.persistence.entity.Account
-import it.niedermann.owncloud.notes.shared.user.User
 import it.niedermann.owncloud.notes.shared.util.DisplayUtils
 
 /**
@@ -29,7 +27,6 @@ import it.niedermann.owncloud.notes.shared.util.DisplayUtils
  */
 class ProfileBottomSheetDialog(
     private val fileActivity: FragmentActivity,
-    private val user: User,
     private val account: Account,
     private val hoverCard: HoverCard,
 ) : BottomSheetDialog(fileActivity) {
@@ -134,6 +131,8 @@ class ProfileBottomSheetDialog(
     }
 
     private fun openTalk(userId: String, hyperlink: String) {
+        // TODO:
+        /*
         try {
             val sharingIntent = Intent(Intent.ACTION_VIEW)
             sharingIntent.setClassName(
@@ -146,6 +145,8 @@ class ProfileBottomSheetDialog(
         } catch (e: ActivityNotFoundException) {
             openWebsite(hyperlink)
         }
+         */
+
     }
 
     override fun onStop() {

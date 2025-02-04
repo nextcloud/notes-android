@@ -2,7 +2,7 @@ package it.niedermann.owncloud.notes.share.listener;
 
 import com.owncloud.android.lib.resources.shares.OCShare;
 
-import it.niedermann.owncloud.notes.shared.user.User;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
 
 public interface ShareeListAdapterListener {
     void copyLink(OCShare share);
@@ -19,5 +19,5 @@ public interface ShareeListAdapterListener {
 
     void showPermissionsDialog(OCShare share);
 
-    void showProfileBottomSheet(User user, String shareWith);
+    void showProfileBottomSheet(Account account, String shareWith);
 }

@@ -17,9 +17,6 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
-import com.nextcloud.android.sso.helper.SingleAccountHelper;
-import com.nextcloud.android.sso.model.SingleSignOnAccount;
-import com.owncloud.android.lib.common.utils.Log_OC;
 import com.owncloud.android.lib.resources.shares.GetShareesRemoteOperation;
 import com.owncloud.android.lib.resources.shares.ShareType;
 import com.owncloud.android.lib.resources.users.Status;
@@ -35,7 +32,6 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.share.model.UsersAndGroupsSearchConfig;
 import it.niedermann.owncloud.notes.share.repository.ShareRepository;

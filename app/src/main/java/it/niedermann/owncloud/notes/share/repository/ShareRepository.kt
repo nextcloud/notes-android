@@ -2,17 +2,12 @@ package it.niedermann.owncloud.notes.share.repository
 
 import android.content.Context
 import android.icu.text.SimpleDateFormat
-import android.net.Uri
 import com.google.gson.Gson
 import com.google.gson.internal.LinkedTreeMap
 import com.nextcloud.android.sso.model.SingleSignOnAccount
 import com.owncloud.android.lib.common.utils.Log_OC
 import com.owncloud.android.lib.resources.shares.OCShare
-import com.owncloud.android.lib.resources.shares.ShareToRemoteOperationResultParser
 import com.owncloud.android.lib.resources.shares.ShareType
-import com.owncloud.android.lib.resources.shares.ShareXMLParser
-import io.reactivex.Single
-import io.reactivex.schedulers.Schedulers
 import it.niedermann.owncloud.notes.persistence.ApiProvider
 import it.niedermann.owncloud.notes.persistence.NotesRepository
 import it.niedermann.owncloud.notes.persistence.entity.Note
@@ -46,14 +41,6 @@ class ShareRepository(private val applicationContext: Context, private val accou
 
     fun getShareEntities(noteRemoteId: Long, userName: String): List<ShareEntity> {
         return notesRepository.getShareEntities(noteRemoteId, userName)
-    }
-
-    private fun getNotesPath(): Single<String> {
-        return Single.fromCallable {
-            val call = notesRepository.getServerSettings(account, ApiVersion.API_VERSION_1_0)
-            val response = call.execute()
-            response.body()?.notesPath ?: throw RuntimeException("No notes path available")
-        }.subscribeOn(Schedulers.io())
     }
 
     fun getSharees(
@@ -109,22 +96,6 @@ class ShareRepository(private val applicationContext: Context, private val accou
     }
 
     fun getShares(remoteId: Long): List<OCShare>? {
-        /*
-         val notesPathCall = notesRepository.getServerSettings(account, ApiVersion.API_VERSION_1_0)
-        val notesPathResponse = notesPathCall.execute()
-        val notesPathResponseResult = notesPathResponse.body() ?: return null
-        val notesPath = notesPathResponseResult.notesPath
-        val notesSuffix = notesPathResponseResult.fileSuffix
-        val remotePath =  "/" + notesPath + "/" + note.title + notesSuffix
-
-        val shareAPI = apiProvider.getShareAPI(applicationContext, account)
-        val call = shareAPI.getSharesForNote(remotePath, true, true)
-
-
-
-        return  null
-
-         */
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
         val call = shareAPI.getShares(remoteId)
         val response = call.execute()
@@ -141,26 +112,6 @@ class ShareRepository(private val applicationContext: Context, private val accou
             Log_OC.d(tag, "Exception while getShares: $e")
             null
         }
-    }
-
-    fun getSharesForFile(
-        note: Note,
-        reshares: Boolean = false,
-        subfiles: Boolean = false
-    ): Single<List<OCShare>> {
-        return getNotesPath()
-            .flatMap { notesPath ->
-                Single.fromCallable {
-                    val shareAPI = apiProvider.getShareAPI(applicationContext, account)
-                    val call = shareAPI.getSharesForFile(
-                        remoteFilePath = notesPath + "/" + note.remoteId,
-                        reshares = reshares,
-                        subfiles = subfiles
-                    )
-                    val response = call.execute()
-                    response.body()?.ocs?.data ?: throw RuntimeException("No shares available")
-                }.subscribeOn(Schedulers.io())
-            }
     }
 
     fun removeShare(
