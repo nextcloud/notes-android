@@ -72,7 +72,7 @@ public class Capabilities {
         this.nextcloudMicroVersion = nextcloudMicroVersion;
     }
 
-    public boolean getFederationShare() {
+    public boolean isFederationShareAllowed() {
         return federationShare;
     }
 

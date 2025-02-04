@@ -196,7 +196,8 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
                 // Schedule a new task with a delay
                 future = executorService.schedule(() -> {
-                    try(var cursor = provider.searchForUsersOrGroups(newText)) {
+
+                    try(var cursor = provider.searchForUsersOrGroups(newText, true)) {
                         runOnUiThread(() -> {
                             {
                                 if (cursor == null || cursor.getCount() == 0) {
