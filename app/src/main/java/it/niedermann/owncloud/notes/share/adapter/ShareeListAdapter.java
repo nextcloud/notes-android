@@ -63,13 +63,16 @@ public class ShareeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                                 false),
                         activity);
             }
-            case NEW_PUBLIC_LINK -> {
+            /*
+             case NEW_PUBLIC_LINK -> {
                 return new NewLinkShareViewHolder(
                         ItemAddPublicShareBinding.inflate(LayoutInflater.from(activity),
                                 parent,
                                 false)
                 );
             }
+             */
+
             case INTERNAL -> {
                 return new InternalShareViewHolder(
                         ItemInternalShareLinkBinding.inflate(LayoutInflater.from(activity), parent, false),
