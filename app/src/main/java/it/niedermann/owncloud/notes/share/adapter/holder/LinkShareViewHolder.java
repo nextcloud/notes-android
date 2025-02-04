@@ -7,28 +7,31 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.owncloud.android.lib.resources.shares.OCShare;
 import com.owncloud.android.lib.resources.shares.ShareType;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.BrandedViewHolder;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ItemShareLinkShareBinding;
 import it.niedermann.owncloud.notes.share.helper.SharingMenuHelper;
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
 
-public class LinkShareViewHolder extends RecyclerView.ViewHolder {
+public class LinkShareViewHolder extends BrandedViewHolder {
     private ItemShareLinkShareBinding binding;
     private Context context;
 
     public LinkShareViewHolder(@NonNull View itemView) {
         super(itemView);
+        bindBranding();
     }
 
     public LinkShareViewHolder(ItemShareLinkShareBinding binding, Context context) {
         this(binding.getRoot());
         this.binding = binding;
         this.context = context;
+        bindBranding();
     }
 
     public void bind(OCShare publicShare, ShareeListAdapterListener listener) {
@@ -54,8 +57,6 @@ public class LinkShareViewHolder extends RecyclerView.ViewHolder {
                     binding.name.setText(R.string.share_link);
                 }
             }
-
-            // viewThemeUtils.platform.colorImageViewBackgroundAndIcon(binding.icon);
         }
 
         binding.subline.setVisibility(View.GONE);
@@ -75,9 +76,15 @@ public class LinkShareViewHolder extends RecyclerView.ViewHolder {
         if (!TextUtils.isEmpty(permissionName) && !SharingMenuHelper.isSecureFileDrop(publicShare)) {
             binding.permissionName.setText(permissionName);
             binding.permissionName.setVisibility(View.VISIBLE);
-            // viewThemeUtils.androidx.colorPrimaryTextViewElement(binding.permissionName);
         } else {
             binding.permissionName.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void applyBrand(int color) {
+        final var util = BrandingUtil.of(color, context);
+        util.androidx.colorPrimaryTextViewElement(binding.permissionName);
+        util.platform.colorImageViewBackgroundAndIcon(binding.icon);
     }
 }
