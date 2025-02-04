@@ -99,7 +99,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             throw new IllegalArgumentException("Account cannot be null");
         }
 
-        new Thread(() -> {{
+        executorService.schedule(() -> {
             try {
                 final var ssoAcc = SingleAccountHelper.getCurrentSingleSignOnAccount(NoteShareActivity.this);
                 repository = new ShareRepository(NoteShareActivity.this, ssoAcc);
@@ -117,7 +117,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-        }}).start();
+        }, 0, TimeUnit.MICROSECONDS);
     }
 
     @Override
@@ -482,7 +482,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
      * before reading database.
      */
     public void refreshSharesFromDB() {
-        new Thread(() -> {
+        executorService.schedule(() -> {
             try {
                 final var ssoAcc = SingleAccountHelper.getCurrentSingleSignOnAccount(NoteShareActivity.this);
                 ShareeListAdapter adapter = (ShareeListAdapter) binding.sharesList.getAdapter();
@@ -528,8 +528,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             } catch (Exception e) {
                 Log_OC.d(TAG, "Exception while refreshSharesFromDB: " + e);
             }
-        }).start();
-
+        }, 0, TimeUnit.MICROSECONDS);
     }
 
     private void checkContactPermission() {
@@ -625,7 +624,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
     @Override
     public void unShare(OCShare share) {
-        new Thread(() -> {{
+        executorService.schedule(() -> {
             final var result = repository.removeShare(share.getId());
 
             runOnUiThread(() -> {
@@ -640,7 +639,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                     DisplayUtils.showSnackMessage(NoteShareActivity.this, getString(R.string.failed_the_remove_share));
                 }
             });
-        }}).start();
+        }, 0, TimeUnit.MICROSECONDS);
     }
 
     @Override
