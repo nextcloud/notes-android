@@ -50,7 +50,6 @@ public class FileDetailSharingMenuBottomSheetDialog extends BottomSheetDialog {
         viewThemeUtils.platform.colorImageView(binding.menuIconSendNewEmail);
          */
 
-
         updateUI();
 
         setupClickListener();
