@@ -45,7 +45,7 @@ interface ShareAPI {
     @PUT("shares/{shareId}?format=json")
     fun updateShare(@Path("shareId") shareId: Long, @Body request: UpdateShareRequest): Call<OcsResponse<CreateShareResponse>>
 
-    @PUT("shares/{shareId}")
+    @PUT("shares/{shareId}?format=json")
     fun updateSharePermission(
         @Path("shareId") shareId: Long,
         @Body request: UpdateSharePermissionRequest
