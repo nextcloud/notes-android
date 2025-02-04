@@ -43,8 +43,6 @@ public class CapabilitiesDeserializer implements JsonDeserializer<Capabilities> 
     private static final String CAPABILITIES_FILES_SHARING = "files_sharing";
     private static final String VERSION = "version";
 
-
-
     @Override
     public Capabilities deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         final var response = new Capabilities();

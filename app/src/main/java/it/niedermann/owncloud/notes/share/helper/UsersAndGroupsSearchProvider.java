@@ -15,7 +15,6 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 import android.text.TextUtils;
 
-import androidx.annotation.NonNull;
 
 import com.owncloud.android.lib.resources.shares.GetShareesRemoteOperation;
 import com.owncloud.android.lib.resources.shares.ShareType;
@@ -25,18 +24,14 @@ import com.owncloud.android.lib.resources.users.StatusType;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
-import java.util.Map;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.share.model.UsersAndGroupsSearchConfig;
 import it.niedermann.owncloud.notes.share.repository.ShareRepository;
+import it.niedermann.owncloud.notes.shared.model.Capabilities;
 
-/**
- * Content provider for search suggestions, to search for users and groups existing in an ownCloud server.
- */
 public class UsersAndGroupsSearchProvider {
 
     public static final String SHARE_TYPE = "SHARE_TYPE";
@@ -57,8 +52,6 @@ public class UsersAndGroupsSearchProvider {
     private static final int RESULTS_PER_PAGE = 50;
     private static final int REQUESTED_PAGE = 1;
 
-    public static String ACTION_SHARE_WITH;
-
     public static final String CONTENT = "content";
 
     private final String AUTHORITY;
@@ -77,7 +70,6 @@ public class UsersAndGroupsSearchProvider {
         this.repository = repository;
 
         AUTHORITY = context.getString(R.string.users_and_groups_search_provider_authority);
-        setActionShareWith(context);
         DATA_USER = AUTHORITY + ".data.user";
         DATA_GROUP = AUTHORITY + ".data.group";
         DATA_ROOM = AUTHORITY + ".data.room";
@@ -85,24 +77,11 @@ public class UsersAndGroupsSearchProvider {
         DATA_EMAIL = AUTHORITY + ".data.email";
         DATA_CIRCLE = AUTHORITY + ".data.circle";
 
-        sShareTypes.put(DATA_USER, ShareType.USER);
-        sShareTypes.put(DATA_GROUP, ShareType.GROUP);
-        sShareTypes.put(DATA_ROOM, ShareType.ROOM);
-        sShareTypes.put(DATA_REMOTE, ShareType.FEDERATED);
-        sShareTypes.put(DATA_EMAIL, ShareType.EMAIL);
-        sShareTypes.put(DATA_CIRCLE, ShareType.CIRCLE);
-
         UriMatcher mUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         mUriMatcher.addURI(AUTHORITY, SearchManager.SUGGEST_URI_PATH_QUERY + "/*", SEARCH);
     }
 
-    private static final Map<String, ShareType> sShareTypes = new HashMap<>();
-
-    private static void setActionShareWith(@NonNull Context context) {
-        ACTION_SHARE_WITH = context.getString(R.string.users_and_groups_search_provider_share_with);
-    }
-
-    public Cursor searchForUsersOrGroups(String userQuery) throws JSONException {
+    public Cursor searchForUsersOrGroups(String userQuery, boolean isFederationShareAllowed) throws JSONException {
         final var names = repository.getSharees(userQuery, REQUESTED_PAGE, RESULTS_PER_PAGE);
         MatrixCursor response = null;
         if (!names.isEmpty()) {
@@ -159,8 +138,7 @@ public class UsersAndGroupsSearchProvider {
                         break;
 
                     case FEDERATED:
-                        // TODO: federatedShareAllowed
-                        if (true) {
+                        if (isFederationShareAllowed) {
                             icon = R.drawable.ic_account_circle_grey_24dp;
                             dataUri = Uri.withAppendedPath(remoteBaseUri, shareWith);
 
