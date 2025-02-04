@@ -529,7 +529,7 @@ class NoteShareDetailActivity : BrandedActivity(),
 
     private suspend fun updateShare(noteText: String, password: String, sendEmail: Boolean) {
         val capabilities = repository.capabilities()
-        val shouldUseShareAttributesV2 = (capabilities.nextcloudMajorVersion?.toInt() ?: 0) > 30
+        val shouldUseShareAttributesV2 = (capabilities.nextcloudMajorVersion?.toInt() ?: 0) >= 30
 
         val shareAttributes = arrayOf(
             if (shouldUseShareAttributesV2) {
