@@ -3,7 +3,7 @@ package it.niedermann.owncloud.notes.share.listener;
 import com.owncloud.android.lib.resources.shares.OCShare;
 import com.owncloud.android.lib.resources.shares.ShareType;
 
-public interface FileDetailsSharingMenuBottomSheetActions {
+public interface NoteShareItemAction {
 
     /**
      * open advanced permission for selected share
