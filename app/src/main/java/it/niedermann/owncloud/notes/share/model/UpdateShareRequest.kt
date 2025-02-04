@@ -31,8 +31,14 @@ data class UpdateShareRequest(
     val sendMail: String
 )
 
-data class ShareAttributes(
+data class ShareAttributesV2(
     var scope: String,
     var key: String,
     var value: Boolean
+)
+
+data class ShareAttributesV1(
+    var scope: String,
+    var key: String,
+    var enabled: Boolean
 )

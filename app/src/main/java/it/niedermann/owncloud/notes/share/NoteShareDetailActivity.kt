@@ -21,7 +21,8 @@ import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.persistence.entity.ShareEntity
 import it.niedermann.owncloud.notes.share.dialog.ExpirationDatePickerDialogFragment
 import it.niedermann.owncloud.notes.share.helper.SharingMenuHelper
-import it.niedermann.owncloud.notes.share.model.ShareAttributes
+import it.niedermann.owncloud.notes.share.model.ShareAttributesV1
+import it.niedermann.owncloud.notes.share.model.ShareAttributesV2
 import it.niedermann.owncloud.notes.share.model.SharePasswordRequest
 import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
 import it.niedermann.owncloud.notes.share.repository.ShareRepository
@@ -527,12 +528,23 @@ class NoteShareDetailActivity : BrandedActivity(),
     }
 
     private suspend fun updateShare(noteText: String, password: String, sendEmail: Boolean) {
+        val capabilities = repository.capabilities()
+        val shouldUseShareAttributesV2 = (capabilities.nextcloudMajorVersion?.toInt() ?: 0) > 30
+
         val shareAttributes = arrayOf(
-            ShareAttributes(
-                scope = "permissions",
-                key = "download",
-                value = binding.shareProcessHideDownloadCheckbox.isChecked
-            )
+            if (shouldUseShareAttributesV2) {
+                ShareAttributesV2(
+                    scope = "permissions",
+                    key = "download",
+                    value = binding.shareProcessHideDownloadCheckbox.isChecked
+                )
+            } else {
+                ShareAttributesV1(
+                    scope = "permissions",
+                    key = "download",
+                    enabled = binding.shareProcessHideDownloadCheckbox.isChecked
+                )
+            }
         )
 
         val attributes = gson.toJson(shareAttributes)
