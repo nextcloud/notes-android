@@ -7,24 +7,23 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.nextcloud.android.common.ui.theme.utils.ColorRole;
 import com.owncloud.android.lib.resources.shares.OCShare;
 import com.owncloud.android.lib.resources.shares.ShareType;
 
-import it.niedermann.owncloud.notes.databinding.FileDetailsSharingMenuBottomSheetFragmentBinding;
+import it.niedermann.owncloud.notes.branding.BrandedBottomSheetDialog;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
+import it.niedermann.owncloud.notes.databinding.ItemNoteShareActionBinding;
 import it.niedermann.owncloud.notes.share.helper.SharingMenuHelper;
-import it.niedermann.owncloud.notes.share.listener.FileDetailsSharingMenuBottomSheetActions;
+import it.niedermann.owncloud.notes.share.listener.NoteShareItemAction;
 
-/**
- * File Details Sharing option menus {@link android.app.Dialog} styled as a bottom sheet for main actions.
- */
-public class FileDetailSharingMenuBottomSheetDialog extends BottomSheetDialog {
-    private FileDetailsSharingMenuBottomSheetFragmentBinding binding;
-    private final FileDetailsSharingMenuBottomSheetActions actions;
+public class NoteShareActivityShareItemActionBottomSheetDialog extends BrandedBottomSheetDialog {
+    private ItemNoteShareActionBinding binding;
+    private final NoteShareItemAction actions;
     private final OCShare ocShare;
-    public FileDetailSharingMenuBottomSheetDialog(Activity activity,
-                                                  FileDetailsSharingMenuBottomSheetActions actions,
-                                                  OCShare ocShare) {
+    public NoteShareActivityShareItemActionBottomSheetDialog(Activity activity,
+                                                             NoteShareItemAction actions,
+                                                             OCShare ocShare) {
         super(activity);
         this.actions = actions;
         this.ocShare = ocShare;
@@ -33,22 +32,12 @@ public class FileDetailSharingMenuBottomSheetDialog extends BottomSheetDialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = FileDetailsSharingMenuBottomSheetFragmentBinding.inflate(getLayoutInflater());
+        binding = ItemNoteShareActionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         if (getWindow() != null) {
             getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         }
-
-        /*
-         viewThemeUtils.platform.themeDialog(binding.getRoot());
-
-        viewThemeUtils.platform.colorImageView(binding.menuIconAddAnotherLink);
-        viewThemeUtils.platform.colorImageView(binding.menuIconAdvancedPermissions);
-        viewThemeUtils.platform.colorImageView(binding.menuIconSendLink);
-        viewThemeUtils.platform.colorImageView(binding.menuIconUnshare);
-        viewThemeUtils.platform.colorImageView(binding.menuIconSendNewEmail);
-         */
 
         updateUI();
 
@@ -106,5 +95,17 @@ public class FileDetailSharingMenuBottomSheetDialog extends BottomSheetDialog {
     protected void onStop() {
         super.onStop();
         binding = null;
+    }
+
+    @Override
+    public void applyBrand(int color) {
+        final var util = BrandingUtil.of(color, getContext());
+        util.platform.themeDialog(binding.getRoot());
+
+        util.platform.colorImageView(binding.menuIconAddAnotherLink, ColorRole.PRIMARY);
+        util.platform.colorImageView(binding.menuIconAdvancedPermissions, ColorRole.PRIMARY);
+        util.platform.colorImageView(binding.menuIconSendLink, ColorRole.PRIMARY);
+        util.platform.colorImageView(binding.menuIconUnshare, ColorRole.PRIMARY);
+        util.platform.colorImageView(binding.menuIconSendNewEmail, ColorRole.PRIMARY);
     }
 }

@@ -48,12 +48,12 @@ import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.share.adapter.ShareeListAdapter;
 import it.niedermann.owncloud.notes.share.adapter.SuggestionAdapter;
-import it.niedermann.owncloud.notes.share.dialog.FileDetailSharingMenuBottomSheetDialog;
+import it.niedermann.owncloud.notes.share.dialog.NoteShareActivityShareItemActionBottomSheetDialog;
 import it.niedermann.owncloud.notes.share.dialog.QuickSharingPermissionsBottomSheetDialog;
 import it.niedermann.owncloud.notes.share.dialog.ShareLinkToDialog;
 import it.niedermann.owncloud.notes.share.dialog.SharePasswordDialogFragment;
 import it.niedermann.owncloud.notes.share.helper.UsersAndGroupsSearchProvider;
-import it.niedermann.owncloud.notes.share.listener.FileDetailsSharingMenuBottomSheetActions;
+import it.niedermann.owncloud.notes.share.listener.NoteShareItemAction;
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
 import it.niedermann.owncloud.notes.share.model.UsersAndGroupsSearchConfig;
 import it.niedermann.owncloud.notes.share.repository.ShareRepository;
@@ -61,7 +61,7 @@ import it.niedermann.owncloud.notes.shared.util.DisplayUtils;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 import it.niedermann.owncloud.notes.shared.util.extensions.BundleExtensionsKt;
 
-public class NoteShareActivity extends BrandedActivity implements ShareeListAdapterListener, FileDetailsSharingMenuBottomSheetActions, QuickSharingPermissionsBottomSheetDialog.QuickPermissionSharingBottomSheetActions {
+public class NoteShareActivity extends BrandedActivity implements ShareeListAdapterListener, NoteShareItemAction, QuickSharingPermissionsBottomSheetDialog.QuickPermissionSharingBottomSheetActions {
 
     private static final String TAG = "NoteShareActivity";
     public static final String ARG_NOTE = "NOTE";
@@ -291,7 +291,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     @Override
     public void showSharingMenuActionSheet(OCShare share) {
         if (!this.isFinishing()) {
-            new FileDetailSharingMenuBottomSheetDialog(this, this, share).show();
+            new NoteShareActivityShareItemActionBottomSheetDialog(this, this, share).show();
         }
     }
 
