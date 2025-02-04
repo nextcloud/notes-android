@@ -101,6 +101,9 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                 final var ssoAcc = SingleAccountHelper.getCurrentSingleSignOnAccount(NoteShareActivity.this);
                 repository = new ShareRepository(NoteShareActivity.this, ssoAcc);
 
+                // FIXME:
+                repository.getSharesForSpecificNote(note);
+
                 runOnUiThread(() -> {
                     binding.sharesList.setAdapter(new ShareeListAdapter(this, new ArrayList<>(), this, account));
                     binding.sharesList.setLayoutManager(new LinearLayoutManager(this));
@@ -487,11 +490,27 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         bundle.putSerializable(NoteShareDetailActivity.ARG_OCSHARE, share);
         bundle.putInt(NoteShareDetailActivity.ARG_SCREEN_TYPE, screenTypePermission);
         bundle.putBoolean(NoteShareDetailActivity.ARG_RESHARE_SHOWN, !isReshareForbidden(share));
-        bundle.putBoolean(NoteShareDetailActivity.ARG_EXP_DATE_SHOWN, true); // TODO: capabilities.getVersion().isNewerOrEqual(OwnCloudVersion.nextcloud_18)
+        bundle.putBoolean(NoteShareDetailActivity.ARG_EXP_DATE_SHOWN, getExpDateShown());
 
         Intent intent = new Intent(this, NoteShareDetailActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
+    }
+
+    private boolean getExpDateShown() {
+        try {
+            final var capabilities = repository.capabilities();
+            final var majorVersionAsString = capabilities.getNextcloudMajorVersion();
+            if (majorVersionAsString != null) {
+                final var majorVersion = Integer.parseInt(majorVersionAsString);
+                return majorVersion >= 18;
+            }
+
+            return false;
+        } catch (NumberFormatException e) {
+            Log_OC.d(TAG, "Exception while getting expDateShown");
+            return false;
+        }
     }
 
     @Override

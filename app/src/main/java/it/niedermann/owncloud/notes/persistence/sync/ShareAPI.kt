@@ -33,6 +33,13 @@ interface ShareAPI {
         @Query("include_tags") includeTags: Boolean = true,
     ): Call<OcsResponse<List<CreateShareResponse>>>
 
+    @GET("shares/?format=json")
+    fun getSharesForSpecificNote(
+        @Query("path") path: String,
+        @Query("reshares") reshares: Boolean = true,
+        @Query("subfiles") subfiles: Boolean = true
+    ): Call<Any>
+
     @DELETE("shares/{shareId}?format=json")
     fun removeShare(@Path("shareId") shareId: Long): Call<Any>
 

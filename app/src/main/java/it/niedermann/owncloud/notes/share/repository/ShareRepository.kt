@@ -41,6 +41,33 @@ class ShareRepository(private val applicationContext: Context, private val accou
         return notesRepository.getShareEntities(noteRemoteId, userName)
     }
 
+    // TODO: Needed for ShareeListAdapter. If ShareEntity is empty this method is needed to fetch shares
+    //  "statuscode":400,"message":"Not a directory"},"data":[]} e.g. remotePath = /Notes/NETOSSSss.md
+    fun getSharesForSpecificNote(note: Note): Boolean {
+        val notesPathCall = notesRepository.getServerSettings(account, ApiVersion.API_VERSION_1_0)
+        val notesPathResponse = notesPathCall.execute()
+        val notesPathResponseResult = notesPathResponse.body() ?: return false
+        val notesPath = notesPathResponseResult.notesPath
+        val notesSuffix = notesPathResponseResult.fileSuffix
+        val remotePath =  "/" + notesPath + "/" + note.title + notesSuffix
+
+        val shareAPI = apiProvider.getShareAPI(applicationContext, account)
+        val call = shareAPI.getSharesForSpecificNote(remotePath)
+        val response = call.execute()
+
+        return try {
+            if (response.isSuccessful) {
+                true
+            } else {
+                Log_OC.d(tag, "Failed to getSharesForSpecificNote: ${response.errorBody()?.string()}")
+                false
+            }
+        } catch (e: Exception) {
+            Log_OC.d(tag, "Exception while getSharesForSpecificNote: $e")
+            false
+        }
+    }
+
     fun getSharees(
         searchString: String,
         page: Int,
@@ -198,13 +225,18 @@ class ShareRepository(private val applicationContext: Context, private val accou
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
         val call = shareAPI.addShare(request = requestBody)
         val response = call.execute()
-        return if (response.isSuccessful) {
-            val createShareResponse = response.body()
-            Log_OC.d(tag, "Response successful: $createShareResponse")
-            createShareResponse?.ocs?.data
-        } else {
-            val errorBody = response.errorBody()?.string()
-            Log_OC.d(tag, "Response failed:$errorBody")
+        return try {
+            if (response.isSuccessful) {
+                val createShareResponse = response.body()
+                Log_OC.d(tag, "Response successful: $createShareResponse")
+                createShareResponse?.ocs?.data
+            } else {
+                val errorBody = response.errorBody()?.string()
+                Log_OC.d(tag, "Response failed: $errorBody")
+                null
+            }
+        } catch (e: Exception) {
+            Log_OC.d(tag, "Exception while creating share", e)
             null
         }
     }
