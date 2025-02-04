@@ -30,14 +30,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.snackbar.Snackbar;
-import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
-import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.owncloud.android.lib.common.operations.RemoteOperationResult;
 import com.owncloud.android.lib.common.utils.Log_OC;
 import com.owncloud.android.lib.resources.shares.OCShare;
 import com.owncloud.android.lib.resources.shares.ShareType;
-import com.owncloud.android.lib.resources.status.NextcloudVersion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +42,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Consumer;
 
 import it.niedermann.nextcloud.sso.glide.SingleSignOnUrl;
 import it.niedermann.owncloud.notes.R;
@@ -55,7 +51,6 @@ import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ActivityNoteShareBinding;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
-import it.niedermann.owncloud.notes.persistence.entity.ShareEntity;
 import it.niedermann.owncloud.notes.share.adapter.ShareeListAdapter;
 import it.niedermann.owncloud.notes.share.adapter.SuggestionAdapter;
 import it.niedermann.owncloud.notes.share.dialog.FileDetailSharingMenuBottomSheetDialog;
@@ -66,10 +61,7 @@ import it.niedermann.owncloud.notes.share.helper.UsersAndGroupsSearchProvider;
 import it.niedermann.owncloud.notes.share.listener.FileDetailsSharingMenuBottomSheetActions;
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
 import it.niedermann.owncloud.notes.share.model.UsersAndGroupsSearchConfig;
-import it.niedermann.owncloud.notes.share.operations.ClientFactoryImpl;
-import it.niedermann.owncloud.notes.share.operations.RetrieveHoverCardAsyncTask;
 import it.niedermann.owncloud.notes.share.repository.ShareRepository;
-import it.niedermann.owncloud.notes.shared.user.User;
 import it.niedermann.owncloud.notes.shared.util.DisplayUtils;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 import it.niedermann.owncloud.notes.shared.util.extensions.BundleExtensionsKt;
@@ -88,7 +80,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     private ActivityNoteShareBinding binding;
     private Note note;
     private Account account;
-    private ClientFactoryImpl clientFactory;
     private ShareRepository repository;
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -109,8 +100,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         if (account == null) {
             throw new IllegalArgumentException("Account cannot be null");
         }
-
-        clientFactory = new ClientFactoryImpl(this);
 
         new Thread(() -> {{
             try {
@@ -476,7 +465,9 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     }
 
     @Override
-    public void showProfileBottomSheet(User user, String shareWith) {
+    public void showProfileBottomSheet(Account account, String shareWith) {
+        // TODO:
+        /*
         if (user.getServer().getVersion().isNewerOrEqual(NextcloudVersion.nextcloud_23)) {
             new RetrieveHoverCardAsyncTask(user,
                     account,
@@ -484,6 +475,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                     this,
                     clientFactory).execute();
         }
+         */
     }
 
     /**
