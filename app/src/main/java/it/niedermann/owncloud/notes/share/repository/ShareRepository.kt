@@ -19,6 +19,7 @@ import it.niedermann.owncloud.notes.share.model.UpdateSharePermissionRequest
 import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
 import it.niedermann.owncloud.notes.share.model.toOCShare
 import it.niedermann.owncloud.notes.shared.model.ApiVersion
+import it.niedermann.owncloud.notes.shared.model.Capabilities
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
@@ -94,6 +95,8 @@ class ShareRepository(private val applicationContext: Context, private val accou
             ArrayList()
         }
     }
+
+    fun capabilities(): Capabilities = notesRepository.capabilities
 
     fun getShares(remoteId: Long): List<OCShare>? {
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)

@@ -10,8 +10,15 @@ import android.graphics.Color;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-public class Capabilities {
+import java.io.Serializable;
+
+@Entity(tableName = "capabilities")
+public class Capabilities implements Serializable {
+    @PrimaryKey
+    public int id = 1;
 
     /**
      * 30(Major) .0(Minor). 5(Micro)
@@ -72,7 +79,7 @@ public class Capabilities {
         this.nextcloudMicroVersion = nextcloudMicroVersion;
     }
 
-    public boolean isFederationShareAllowed() {
+    public boolean getFederationShare() {
         return federationShare;
     }
 

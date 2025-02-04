@@ -225,6 +225,8 @@ public class NotesRepository {
     // Accounts
     @AnyThread
     public LiveData<ImportStatus> addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities, @Nullable String displayName, @NonNull IResponseCallback<Account> callback) {
+        db.getCapabilitiesDao().insert(capabilities);
+
         final var account = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account(url, username, accountName, displayName, capabilities)));
         if (account == null) {
             callback.onError(new Exception("Could not read created account."));
@@ -283,6 +285,10 @@ public class NotesRepository {
         }
 
         db.getAccountDao().deleteAccount(account);
+    }
+
+    public Capabilities getCapabilities() {
+        return db.getCapabilitiesDao().getCapabilities();
     }
 
     public Account getAccountByName(String accountName) {
