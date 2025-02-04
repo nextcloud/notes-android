@@ -14,6 +14,7 @@ import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.persistence.entity.ShareEntity
 import it.niedermann.owncloud.notes.share.model.CreateShareRequest
 import it.niedermann.owncloud.notes.share.model.CreateShareResponse
+import it.niedermann.owncloud.notes.share.model.SharePasswordRequest
 import it.niedermann.owncloud.notes.share.model.UpdateShareInformationRequest
 import it.niedermann.owncloud.notes.share.model.UpdateSharePermissionRequest
 import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
@@ -117,6 +118,24 @@ class ShareRepository(private val applicationContext: Context, private val accou
         }
     }
 
+    fun sendEmail(shareId: Long, requestBody: SharePasswordRequest): Boolean {
+        val shareAPI = apiProvider.getShareAPI(applicationContext, account)
+        val call = shareAPI.sendEmail(shareId , requestBody)
+        val response = call.execute()
+
+        return try {
+            if (response.isSuccessful) {
+                true
+            } else {
+                Log_OC.d(tag, "Failed to send-email: ${response.errorBody()?.string()}")
+                false
+            }
+        } catch (e: Exception) {
+            Log_OC.d(tag, "Exception while send-email: $e")
+            false
+        }
+    }
+
     fun removeShare(
         shareId: Long
     ): Boolean {
@@ -137,23 +156,22 @@ class ShareRepository(private val applicationContext: Context, private val accou
         }
     }
 
-    fun updateShare(
-        shareId: Long,
-        noteText: String
-    ): Boolean {
+    fun updateShare(shareId: Long, requestBody: UpdateShareRequest): Boolean {
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
-        val requestBody = UpdateShareRequest(shareId.toString(), noteText)
-        val call = shareAPI.updateShare(requestBody)
+        val call = shareAPI.updateShare(shareId, requestBody)
         val response = call.execute()
-        if (response.isSuccessful) {
-            val updateShareResponse = response.body()
-            Log_OC.d(tag, "Response successful: $updateShareResponse")
-        } else {
-            val errorBody = response.errorBody()?.string()
-            Log_OC.d(tag, "Response failed:$errorBody")
-        }
+        return try {
+            if (response.isSuccessful) {
+                Log_OC.d(tag, "Share updated successfully: ${response.body()}")
+            } else {
+                Log_OC.d(tag, "Failed to update share: ${response.errorBody()?.string()}")
+            }
 
-        return response.isSuccessful
+            response.isSuccessful
+        } catch (e: Exception) {
+            Log_OC.d(tag, "Exception while updating share", e)
+           false
+        }
     }
 
     fun addShare(

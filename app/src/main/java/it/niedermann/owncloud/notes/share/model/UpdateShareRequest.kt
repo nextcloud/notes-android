@@ -4,8 +4,17 @@ import com.google.gson.annotations.Expose
 
 data class UpdateShareRequest(
     @Expose
-    val shareId: String,
+    val share_id: Int,
 
     @Expose
-    val noteText: String
+    val note: String,
+
+    @Expose
+    val password: String,
+
+    @Expose
+    val expireDate: String?,
+
+    @Expose
+    val sendMail: String
 )

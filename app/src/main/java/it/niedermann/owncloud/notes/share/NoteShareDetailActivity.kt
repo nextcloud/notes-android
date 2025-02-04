@@ -20,6 +20,8 @@ import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.persistence.entity.ShareEntity
 import it.niedermann.owncloud.notes.share.dialog.ExpirationDatePickerDialogFragment
 import it.niedermann.owncloud.notes.share.helper.SharingMenuHelper
+import it.niedermann.owncloud.notes.share.model.SharePasswordRequest
+import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
 import it.niedermann.owncloud.notes.share.repository.ShareRepository
 import it.niedermann.owncloud.notes.shared.util.DisplayUtils
 import it.niedermann.owncloud.notes.shared.util.clipboard.ClipboardUtil
@@ -30,6 +32,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
 /**
  * Activity class to show share permission options, set expiration date, change label, set password, send note
@@ -491,9 +494,6 @@ class NoteShareDetailActivity : BrandedActivity(),
 
     private fun updateShare() {
         lifecycleScope.launch(Dispatchers.IO) {
-            val ssoAcc =
-                SingleAccountHelper.getCurrentSingleSignOnAccount(this@NoteShareDetailActivity)
-
             if (share == null) {
                 Log_OC.d(TAG, "Share is null cannot updateShare")
                 return@launch
@@ -522,12 +522,25 @@ class NoteShareDetailActivity : BrandedActivity(),
      */
     private fun createOrUpdateShare() {
         val noteText = binding.noteText.text.toString().trim()
+        val password = binding.shareProcessEnterPassword.text.toString().trim()
 
         lifecycleScope.launch(Dispatchers.IO) {
-            // if modifying existing share then directly update the note and send email
             if (share != null && share?.note != noteText) {
-                val result = repository.updateShare(share!!.id, noteText)
-                handleResult(result)
+                val expirationDate = if (chosenExpDateInMills != -1L) {
+                    SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date(chosenExpDateInMills))
+                } else {
+                    null
+                }
+
+                val requestBody = UpdateShareRequest(share!!.id.toInt(), noteText, password, expirationDate, "true")
+                val updateShareResult = repository.updateShare(share!!.id, requestBody)
+
+                if (updateShareResult) {
+                    val sendEmailResult = repository.sendEmail(share!!.id, SharePasswordRequest(password))
+                    handleResult(sendEmailResult)
+                } else {
+                    handleResult(false)
+                }
             } else {
                 if (note == null || shareeName == null) {
                     Log_OC.d(TAG, "validateShareProcessSecond cancelled")
@@ -539,7 +552,7 @@ class NoteShareDetailActivity : BrandedActivity(),
                     shareType,
                     shareeName!!,
                     "false", // TODO: Check how to determine it
-                    binding.shareProcessEnterPassword.text.toString().trim(),
+                    password,
                     permission,
                     noteText
                 )
