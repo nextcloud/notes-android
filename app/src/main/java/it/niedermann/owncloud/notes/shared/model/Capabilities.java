@@ -13,6 +13,15 @@ import androidx.annotation.Nullable;
 
 public class Capabilities {
 
+    /**
+     * 30(Major) .0(Minor). 5(Micro)
+     */
+    private String nextcloudMajorVersion = null;
+    private String nextcloudMinorVersion = null;
+    private String nextcloudMicroVersion = null;
+
+    private boolean federationShare = false;
+
     private String apiVersion = null;
     @ColorInt
     private int color = -16743735; // #0082C9
@@ -34,6 +43,41 @@ public class Capabilities {
     @Nullable
     public String getETag() {
         return eTag;
+    }
+
+    @Nullable
+    public String getNextcloudMajorVersion() {
+        return nextcloudMajorVersion;
+    }
+
+    @Nullable
+    public String getNextcloudMinorVersion() {
+        return nextcloudMinorVersion;
+    }
+
+    @Nullable
+    public String getNextcloudMicroVersion() {
+        return nextcloudMicroVersion;
+    }
+
+    public void setNextcloudMajorVersion(@Nullable String nextcloudMajorVersion) {
+        this.nextcloudMajorVersion = nextcloudMajorVersion;
+    }
+
+    public void setNextcloudMinorVersion(@Nullable String nextcloudMinorVersion) {
+        this.nextcloudMinorVersion = nextcloudMinorVersion;
+    }
+
+    public void setNextcloudMicroVersion(@Nullable String nextcloudMicroVersion) {
+        this.nextcloudMicroVersion = nextcloudMicroVersion;
+    }
+
+    public boolean getFederationShare() {
+        return federationShare;
+    }
+
+    public void setFederationShare(boolean value) {
+        this.federationShare = value;
     }
 
     public void setETag(@Nullable String eTag) {
@@ -69,6 +113,10 @@ public class Capabilities {
     public String toString() {
         return "Capabilities{" +
                 "apiVersion='" + apiVersion + '\'' +
+                ", nextcloudMajorVersion='" + nextcloudMajorVersion + '\'' +
+                ", nextcloudMinorVersion='" + nextcloudMinorVersion + '\'' +
+                ", nextcloudMicroVersion='" + nextcloudMicroVersion + '\'' +
+                ", federationShare=" + federationShare +
                 ", color=" + color +
                 ", textColor=" + textColor +
                 ", eTag='" + eTag + '\'' +

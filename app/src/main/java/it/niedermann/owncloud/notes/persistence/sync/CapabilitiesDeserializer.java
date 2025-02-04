@@ -40,13 +40,39 @@ public class CapabilitiesDeserializer implements JsonDeserializer<Capabilities> 
     private static final String CAPABILITIES_FILES = "files";
     private static final String CAPABILITIES_FILES_DIRECT_EDITING = "directEditing";
     private static final String CAPABILITIES_FILES_DIRECT_EDITING_SUPPORTS_FILE_ID = "supportsFileId";
+    private static final String CAPABILITIES_FILES_SHARING = "files_sharing";
+    private static final String VERSION = "version";
+
+
 
     @Override
     public Capabilities deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         final var response = new Capabilities();
         final var data = json.getAsJsonObject();
+        if (data.has(VERSION)) {
+            final var version = data.getAsJsonObject(VERSION);
+            final var nextcloudMajorVersion = version.get("major");
+            response.setNextcloudMajorVersion(String.valueOf(nextcloudMajorVersion));
+
+            final var nextcloudMinorVersion = version.get("minor");
+            response.setNextcloudMinorVersion(String.valueOf(nextcloudMinorVersion));
+
+
+            final var nextcloudMicroVersion = version.get("micro");
+            response.setNextcloudMicroVersion(String.valueOf(nextcloudMicroVersion));
+        }
+
         if (data.has(CAPABILITIES)) {
             final var capabilities = data.getAsJsonObject(CAPABILITIES);
+
+            if (capabilities.has(CAPABILITIES_FILES_SHARING)) {
+                final var filesSharing = capabilities.getAsJsonObject(CAPABILITIES_FILES_SHARING);
+                final var federation = filesSharing.getAsJsonObject("federation");
+                final var outgoing = federation.get("outgoing");
+
+                response.setFederationShare(outgoing.getAsBoolean());
+            }
+
             if (capabilities.has(CAPABILITIES_NOTES)) {
                 final var notes = capabilities.getAsJsonObject(CAPABILITIES_NOTES);
                 if (notes.has(CAPABILITIES_NOTES_API_VERSION)) {
