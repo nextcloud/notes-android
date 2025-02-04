@@ -179,6 +179,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
         }
     }
 
+    // TODO: {"ocs":{"meta":{"status":"failure","statuscode":404,"message":"Cannot increase permissions of /Notes/NETOSSSss.md"},"data":[]}}
     fun updateShare(shareId: Long, requestBody: UpdateShareRequest): Boolean {
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
         val call = shareAPI.updateShare(shareId, requestBody)
