@@ -530,19 +530,20 @@ class NoteShareDetailActivity : BrandedActivity(),
     private suspend fun updateShare(noteText: String, password: String, sendEmail: Boolean) {
         val capabilities = repository.capabilities()
         val shouldUseShareAttributesV2 = (capabilities.nextcloudMajorVersion?.toInt() ?: 0) >= 30
+        val downloadPermission = !binding.shareProcessHideDownloadCheckbox.isChecked
 
         val shareAttributes = arrayOf(
             if (shouldUseShareAttributesV2) {
                 ShareAttributesV2(
                     scope = "permissions",
                     key = "download",
-                    value = binding.shareProcessHideDownloadCheckbox.isChecked
+                    value = downloadPermission
                 )
             } else {
                 ShareAttributesV1(
                     scope = "permissions",
                     key = "download",
-                    enabled = binding.shareProcessHideDownloadCheckbox.isChecked
+                    enabled = downloadPermission
                 )
             }
         )

@@ -2,7 +2,6 @@ package it.niedermann.owncloud.notes.share.adapter.holder;
 
 
 import android.content.Context;
-import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,14 +10,12 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.owncloud.android.lib.resources.shares.OCShare;
 
-import it.niedermann.nextcloud.sso.glide.SingleSignOnUrl;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemShareShareBinding;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
+import it.niedermann.owncloud.notes.share.helper.AvatarLoader;
 import it.niedermann.owncloud.notes.share.helper.SharingMenuHelper;
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
 
@@ -65,12 +62,9 @@ public class ShareViewHolder extends RecyclerView.ViewHolder {
             case USER:
                 binding.icon.setTag(share.getShareWith());
 
-                Glide.with(context)
-                        .load(new SingleSignOnUrl(account.getAccountName(), account.getUrl() + "/index.php/avatar/" + Uri.encode(share.getSharedWithDisplayName()) + "/64"))
-                        .placeholder(R.drawable.ic_account_circle_grey_24dp)
-                        .error(R.drawable.ic_account_circle_grey_24dp)
-                        .apply(RequestOptions.circleCropTransform())
-                        .into(binding.icon);
+                if (share.getSharedWithDisplayName() != null) {
+                    AvatarLoader.INSTANCE.load(context, binding.icon, account, share.getSharedWithDisplayName());
+                }
 
                 // binding.icon.setOnClickListener(v -> listener.showProfileBottomSheet(user, share.getShareWith()));
             default:

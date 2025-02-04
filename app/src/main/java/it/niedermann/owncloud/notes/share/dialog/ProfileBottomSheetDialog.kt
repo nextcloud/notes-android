@@ -9,17 +9,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.FragmentActivity
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nextcloud.android.lib.resources.profile.Action
 import com.nextcloud.android.lib.resources.profile.HoverCard
-import it.niedermann.nextcloud.sso.glide.SingleSignOnUrl
 import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.databinding.ProfileBottomSheetActionBinding
 import it.niedermann.owncloud.notes.databinding.ProfileBottomSheetFragmentBinding
 import it.niedermann.owncloud.notes.persistence.entity.Account
+import it.niedermann.owncloud.notes.share.helper.AvatarLoader
 import it.niedermann.owncloud.notes.shared.util.DisplayUtils
 
 /**
@@ -54,17 +52,7 @@ class ProfileBottomSheetDialog(
              binding.sharedWithYouUsername.setText(
                     String.format(getString(R.string.note_share_fragment_shared_with_you), file.getOwnerDisplayName()));
              */
-        Glide.with(fileActivity)
-            .load(
-                SingleSignOnUrl(
-                    account.accountName,
-                    account.url + "/index.php/avatar/" + Uri.encode(account.userName) + "/64"
-                )
-            )
-            .placeholder(R.drawable.ic_account_circle_grey_24dp)
-            .error(R.drawable.ic_account_circle_grey_24dp)
-            .apply(RequestOptions.circleCropTransform())
-            .into(binding.icon)
+        AvatarLoader.load(fileActivity, binding.icon, account)
 
         binding.displayName.text = hoverCard.displayName
 
