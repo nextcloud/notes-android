@@ -196,9 +196,9 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
                 // Schedule a new task with a delay
                 future = executorService.schedule(() -> {
-                    try {
-                        provider.searchForUsersOrGroups(newText, cursor -> {
-                            runOnUiThread(() -> {{
+                    try(var cursor = provider.searchForUsersOrGroups(newText)) {
+                        runOnUiThread(() -> {
+                            {
                                 if (cursor == null || cursor.getCount() == 0) {
                                     suggestionAdapter.changeCursor(null);
                                     return;
@@ -209,7 +209,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                                 }
 
                                 binding.progressBar.setVisibility(View.GONE);
-                            }});
+                            }
                         });
                     } catch (Exception e) {
                         Log_OC.d(TAG, "Exception setupSearchView.onQueryTextChange: " + e);

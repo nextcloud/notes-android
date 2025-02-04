@@ -119,7 +119,6 @@ public class ApiProvider {
                     new GsonBuilder()
                             .setStrictness(Strictness.LENIENT)
                             .excludeFieldsWithoutExposeAnnotation()
-                            .registerTypeAdapter(ResponseBody.class, new ResponseBodyTypeAdapter())
                             .registerTypeHierarchyAdapter(Calendar.class, (JsonSerializer<Calendar>) (src, typeOfSrc, ctx) -> new JsonPrimitive(src.getTimeInMillis() / 1_000))
                             .registerTypeHierarchyAdapter(Calendar.class, (JsonDeserializer<Calendar>) (src, typeOfSrc, ctx) -> {
                                 final var calendar = Calendar.getInstance();
