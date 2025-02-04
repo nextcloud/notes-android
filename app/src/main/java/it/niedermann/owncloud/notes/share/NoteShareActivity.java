@@ -14,7 +14,6 @@ import android.provider.ContactsContract;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -29,7 +28,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
-import com.owncloud.android.lib.common.operations.RemoteOperationResult;
 import com.owncloud.android.lib.common.utils.Log_OC;
 import com.owncloud.android.lib.resources.shares.OCShare;
 import com.owncloud.android.lib.resources.shares.ShareType;
@@ -54,7 +52,6 @@ import it.niedermann.owncloud.notes.share.dialog.FileDetailSharingMenuBottomShee
 import it.niedermann.owncloud.notes.share.dialog.QuickSharingPermissionsBottomSheetDialog;
 import it.niedermann.owncloud.notes.share.dialog.ShareLinkToDialog;
 import it.niedermann.owncloud.notes.share.dialog.SharePasswordDialogFragment;
-import it.niedermann.owncloud.notes.share.helper.AvatarLoader;
 import it.niedermann.owncloud.notes.share.helper.UsersAndGroupsSearchProvider;
 import it.niedermann.owncloud.notes.share.listener.FileDetailsSharingMenuBottomSheetActions;
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
@@ -135,23 +132,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     private void setupView() {
         setShareWithYou();
         setupSearchView((SearchManager) getSystemService(Context.SEARCH_SERVICE), getComponentName());
-
-        // OCFile parentFile = fileDataStorageManager.getFileById(file.getParentId());
-
-        // TODO: When to disable?
-        // binding.pickContactEmailBtn.setVisibility(View.GONE);
-        // disableSearchView(binding.searchView);
-
-        /*
-        if (file.canReshare()) {
-            binding.searchView.setQueryHint(getResources().getString(R.string.note_share_fragment_search_text));
-        } else {
-            binding.searchView.setQueryHint(getResources().getString(R.string.note_share_fragment_resharing_not_allowed));
-            binding.searchView.setInputType(InputType.TYPE_NULL);
-            binding.pickContactEmailBtn.setVisibility(View.GONE);
-            disableSearchView(binding.searchView);
-        }
-         */
     }
 
     private void setupSearchView(@Nullable SearchManager searchManager, ComponentName componentName) {
@@ -253,16 +233,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         startActivity(intent);
     }
 
-    private void disableSearchView(View view) {
-        view.setEnabled(false);
-
-        if (view instanceof ViewGroup viewGroup) {
-            for (int i = 0; i < viewGroup.getChildCount(); i++) {
-                disableSearchView(viewGroup.getChildAt(i));
-            }
-        }
-    }
-
     // TODO: Check if note.getAccountId() return note's owner's id
     private boolean accountOwnsFile() {
         String noteId = String.valueOf(note.getAccountId());
@@ -272,35 +242,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     private void setShareWithYou() {
         if (accountOwnsFile()) {
             binding.sharedWithYouContainer.setVisibility(View.GONE);
-        } else {
-
-            /*
-            // TODO: How to get owner display name from note?
-
-             binding.sharedWithYouUsername.setText(
-                    String.format(getString(R.string.note_share_fragment_shared_with_you), file.getOwnerDisplayName()));
-             */
-
-
-            loadAvatar();
-
-            /*
-            // TODO: Note's note?
-            String note = file.getNote();
-
-            if (!TextUtils.isEmpty(note)) {
-                binding.sharedWithYouNote.setText(file.getNote());
-                binding.sharedWithYouNoteContainer.setVisibility(View.VISIBLE);
-            } else {
-                binding.sharedWithYouNoteContainer.setVisibility(View.GONE);
-            }
-             */
         }
-    }
-
-    private void loadAvatar() {
-        AvatarLoader.INSTANCE.load(this, binding.sharedWithYouAvatar, account);
-        binding.sharedWithYouAvatar.setVisibility(View.VISIBLE);
     }
 
     public void copyInternalLink() {
@@ -310,6 +252,16 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         }
 
         showShareLinkDialog();
+    }
+
+    @Override
+    public void createPublicShareLink() {
+
+    }
+
+    @Override
+    public void createSecureFileDrop() {
+
     }
 
     private void showShareLinkDialog() {
@@ -331,79 +283,9 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         return baseUri + "/index.php/f/" +  note.getRemoteId();
     }
 
-    // TODO: Capabilities in notes app doesn't have following functions...
-    public void createPublicShareLink() {
-        /*
-        if (capabilities != null && (capabilities.getFilesSharingPublicPasswordEnforced().isTrue() ||
-                capabilities.getFilesSharingPublicAskForOptionalPassword().isTrue())) {
-            // password enforced by server, request to the user before trying to create
-            requestPasswordForShareViaLink(true,
-                    capabilities.getFilesSharingPublicAskForOptionalPassword().isTrue());
-
-        } else {
-            // TODO: Share files logic not suitable with notes app. How can I get remote path from remote id of the note
-            // Is CreateShareViaLink operation compatible?
-
-            Intent service = new Intent(fileActivity, OperationsService.class);
-            service.setAction(OperationsService.ACTION_CREATE_SHARE_VIA_LINK);
-            service.putExtra(OperationsService.EXTRA_ACCOUNT, fileActivity.getAccount());
-            if (!TextUtils.isEmpty(password)) {
-                service.putExtra(OperationsService.EXTRA_SHARE_PASSWORD, password);
-            }
-            service.putExtra(OperationsService.EXTRA_REMOTE_PATH, file.getRemotePath());
-            mWaitingForOpId = fileActivity.getOperationsServiceBinder().queueNewOperation(service);
-        }
-         */
-    }
-
-    public void createSecureFileDrop() {
-        // fileOperationsHelper.shareFolderViaSecureFileDrop(file);
-    }
-
-    /*
-    // TODO: Cant call getFileWithLink
-
-     public void getFileWithLink(@NonNull OCFile file, final ViewThemeUtils viewThemeUtils) {
-        List<OCShare> shares = fileActivity.getStorageManager().getSharesByPathAndType(file.getRemotePath(),
-                                                                                       ShareType.PUBLIC_LINK,
-                                                                                       "");
-
-        if (shares.size() == SINGLE_LINK_SIZE) {
-            FileActivity.copyAndShareFileLink(fileActivity, file, shares.get(0).getShareLink(), viewThemeUtils);
-        } else {
-            if (fileActivity instanceof FileDisplayActivity) {
-                ((FileDisplayActivity) fileActivity).showDetails(file, 1);
-            } else {
-                showShareFile(file);
-            }
-        }
-
-        fileActivity.refreshList();
-    }
-     */
-    private void showSendLinkTo(OCShare publicShare) {
-        /*
-        if (file.isSharedViaLink()) {
-            if (TextUtils.isEmpty(publicShare.getShareLink())) {
-                fileOperationsHelper.getFileWithLink(file, viewThemeUtils);
-            } else {
-                // TODO: get link from public share and pass to the function
-                showShareLinkDialog();
-            }
-        }
-         */
-    }
-
+    @Override
     public void copyLink(OCShare share) {
-        /*
-        if (file.isSharedViaLink()) {
-            if (TextUtils.isEmpty(share.getShareLink())) {
-                fileOperationsHelper.getFileWithLink(file, viewThemeUtils);
-            } else {
-                ClipboardUtil.copyToClipboard(requireActivity(), share.getShareLink());
-            }
-        }
-         */
+
     }
 
     @Override
@@ -418,38 +300,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         new QuickSharingPermissionsBottomSheetDialog(this, this, share).show();
     }
 
-    public void onUpdateShareInformation(RemoteOperationResult result) {
-        if (result.isSuccess()) {
-            refreshUiFromDB();
-        } else {
-            setupView();
-        }
-    }
-
-    /**
-     * Get {@link OCShare} instance from DB and updates the UI.
-     */
-    private void refreshUiFromDB() {
-        refreshSharesFromDB();
-        // Updates UI with new state
-        setupView();
-    }
-
-
-    /**
-     * Starts a dialog that requests a password to the user to protect a share link.
-     *
-     * @param createShare    When 'true', the request for password will be followed by the creation of a new public
-     *                       link; when 'false', a public share is assumed to exist, and the password is bound to it.
-     * @param askForPassword if true, password is optional
-     */
-    public void requestPasswordForShareViaLink(boolean createShare, boolean askForPassword) {
-        SharePasswordDialogFragment dialog = SharePasswordDialogFragment.newInstance(note,
-                createShare,
-                askForPassword);
-        dialog.show(getSupportFragmentManager(), SharePasswordDialogFragment.PASSWORD_FRAGMENT);
-    }
-
     @Override
     public void requestPasswordForShare(OCShare share, boolean askForPassword) {
         SharePasswordDialogFragment dialog = SharePasswordDialogFragment.newInstance(share, askForPassword);
@@ -458,29 +308,11 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
     @Override
     public void showProfileBottomSheet(Account account, String shareWith) {
-        // TODO:
-        /*
-        if (user.getServer().getVersion().isNewerOrEqual(NextcloudVersion.nextcloud_23)) {
-            new RetrieveHoverCardAsyncTask(user,
-                    account,
-                    shareWith,
-                    this,
-                    clientFactory).execute();
-        }
-         */
     }
 
-    /**
-     * Get known server capabilities from DB
-     */
     public void refreshCapabilitiesFromDB() {
-        // capabilities = fileDataStorageManager.getCapability(user.getAccountName());
     }
 
-    /**
-     * Get public link from the DB to fill in the "Share link" section in the UI. Takes into account server capabilities
-     * before reading database.
-     */
     public void refreshSharesFromDB() {
         executorService.schedule(() -> {
             try {
@@ -599,10 +431,8 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         outState.putSerializable(ARG_ACCOUNT, account);
     }
 
-    // TODO: capabilities needed
     private boolean isReshareForbidden(OCShare share) {
         return false;
-        // return ShareType.FEDERATED == share.getShareType() || capabilities != null && capabilities.getFilesSharingResharing().isFalse();
     }
 
     @VisibleForTesting
@@ -644,13 +474,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
     @Override
     public void sendLink(OCShare share) {
-        /*
-        if (file.isSharedViaLink() && !TextUtils.isEmpty(share.getShareLink())) {
-            FileDisplayActivity.showShareLinkDialog(fileActivity, file, share.getShareLink());
-        } else {
-            showSendLinkTo(share);
-        }
-         */
     }
 
     @Override
@@ -676,7 +499,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
        repository.updateSharePermission(share.getId(), permission);
     }
 
-    //launcher for contact permission
     private final ActivityResultLauncher<String> requestContactPermissionLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
                 if (isGranted) {
@@ -687,7 +509,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                 }
             });
 
-    //launcher to handle contact selection
     private final ActivityResultLauncher<Intent> onContactSelectionResultLauncher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                     result -> {

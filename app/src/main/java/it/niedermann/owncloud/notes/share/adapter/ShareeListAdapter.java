@@ -2,10 +2,8 @@ package it.niedermann.owncloud.notes.share.adapter;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -122,20 +120,6 @@ public class ShareeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         shares.addAll(sharesToAdd);
         sortShares();
         notifyDataSetChanged();
-    }
-
-    public void avatarGenerated(Drawable avatarDrawable, Object callContext) {
-        if (callContext instanceof ImageView iv) {
-            iv.setImageDrawable(avatarDrawable);
-        }
-    }
-
-    public boolean shouldCallGeneratedCallback(String tag, Object callContext) {
-        if (callContext instanceof ImageView iv) {
-            // needs to be changed once federated users have avatars
-            return String.valueOf(iv.getTag()).equals(tag.split("@")[0]);
-        }
-        return false;
     }
 
     @SuppressLint("NotifyDataSetChanged")

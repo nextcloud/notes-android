@@ -9,13 +9,8 @@ import static com.owncloud.android.lib.resources.shares.OCShare.READ_PERMISSION_
 import static com.owncloud.android.lib.resources.shares.OCShare.SHARE_PERMISSION_FLAG;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.view.MenuItem;
 
 import com.owncloud.android.lib.resources.shares.OCShare;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import it.niedermann.owncloud.notes.R;
 
@@ -26,54 +21,6 @@ public final class SharingMenuHelper {
 
     private SharingMenuHelper() {
         // utility class -> private constructor
-    }
-
-    /**
-     * Sets checked/visibility state on the given {@link MenuItem} based on the given criteria.
-     *
-     * @param menuItem the {@link MenuItem} to be setup
-     */
-    public static void setupHideFileDownload(MenuItem menuItem,
-                                             boolean hideFileDownload,
-                                             boolean isFileDrop) {
-        if (isFileDrop) {
-            menuItem.setVisible(false);
-        } else {
-            menuItem.setVisible(true);
-            menuItem.setChecked(hideFileDownload);
-        }
-    }
-
-    /**
-     * sets up the password {@link MenuItem}'s title based on the fact if a password is present.
-     *
-     * @param password            the password {@link MenuItem}
-     * @param isPasswordProtected flag is a password is present
-     */
-    public static void setupPasswordMenuItem(MenuItem password, boolean isPasswordProtected) {
-        if (isPasswordProtected) {
-            password.setTitle(R.string.share_password_title);
-        } else {
-            password.setTitle(R.string.share_no_password_title);
-        }
-    }
-
-    /**
-     * sets up the expiration date {@link MenuItem}'s title based on the fact if an expiration date is present.
-     *
-     * @param expirationDate      the expiration date {@link MenuItem}
-     * @param expirationDateValue the expiration date
-     * @param res                 Resources to load the corresponding strings.
-     */
-    public static void setupExpirationDateMenuItem(MenuItem expirationDate, long expirationDateValue, Resources res) {
-        if (expirationDateValue > 0) {
-            expirationDate.setTitle(res.getString(
-                    R.string.share_expiration_date_label,
-                    SimpleDateFormat.getDateInstance().format(new Date(expirationDateValue))
-            ));
-        } else {
-            expirationDate.setTitle(R.string.share_no_expiration_date_label);
-        }
     }
 
     public static boolean isUploadAndEditingAllowed(OCShare share) {
