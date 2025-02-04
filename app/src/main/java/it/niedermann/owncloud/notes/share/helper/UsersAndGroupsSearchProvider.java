@@ -29,9 +29,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
-import java.util.function.Consumer;
 
-import io.reactivex.disposables.Disposable;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.share.model.UsersAndGroupsSearchConfig;
 import it.niedermann.owncloud.notes.share.repository.ShareRepository;
@@ -40,8 +38,6 @@ import it.niedermann.owncloud.notes.share.repository.ShareRepository;
  * Content provider for search suggestions, to search for users and groups existing in an ownCloud server.
  */
 public class UsersAndGroupsSearchProvider {
-
-    private static final String TAG = UsersAndGroupsSearchProvider.class.getSimpleName();
 
     public static final String SHARE_TYPE = "SHARE_TYPE";
     public static final String SHARE_WITH = "SHARE_WITH";
@@ -75,7 +71,6 @@ public class UsersAndGroupsSearchProvider {
 
     private final ShareRepository repository;
     private final Context context;
-    private Disposable disposable;
 
     public UsersAndGroupsSearchProvider(Context context, ShareRepository repository) {
         this.context = context;
@@ -107,7 +102,7 @@ public class UsersAndGroupsSearchProvider {
         ACTION_SHARE_WITH = context.getString(R.string.users_and_groups_search_provider_share_with);
     }
 
-    public void searchForUsersOrGroups(String userQuery, Consumer<Cursor> callback) throws JSONException {
+    public Cursor searchForUsersOrGroups(String userQuery) throws JSONException {
         final var names = repository.getSharees(userQuery, REQUESTED_PAGE, RESULTS_PER_PAGE);
         MatrixCursor response = null;
         if (!names.isEmpty()) {
@@ -151,9 +146,9 @@ public class UsersAndGroupsSearchProvider {
                 }
 
                 if (UsersAndGroupsSearchConfig.INSTANCE.getSearchOnlyUsers() && type != ShareType.USER) {
+                    // TODO: Why we need this check?
                     // skip all types but users, as E2E secure share is only allowed to users on same server
-                    // TODO: CHECK SKIP LOGIC
-                    //  continue;
+                    // continue;
                 }
 
                 switch (type) {
@@ -233,10 +228,9 @@ public class UsersAndGroupsSearchProvider {
                             .add(SHARE_WITH, shareWith)
                             .add(SHARE_TYPE, type.getValue());
                 }
-
             }
         }
 
-        callback.accept(response);
+        return response;
     }
 }
