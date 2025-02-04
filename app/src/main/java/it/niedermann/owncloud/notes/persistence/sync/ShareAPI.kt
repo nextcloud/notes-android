@@ -50,8 +50,8 @@ interface ShareAPI {
         subfiles: Boolean
     ): Call<OcsResponse<MutableList<OCShare>>>
 
-    @DELETE("shares/{shareId}")
-    fun removeShare(@Path("shareId") shareId: Long): Call<EmptyResponse>
+    @DELETE("shares/{shareId}?format=json")
+    fun removeShare(@Path("shareId") shareId: Long): Call<Any>
 
     @PATCH("shares")
     fun updateShare(@Body request: UpdateShareRequest): Call<OcsResponse<CreateShareResponse>>

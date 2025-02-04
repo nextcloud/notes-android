@@ -642,7 +642,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     @Override
     public void unShare(OCShare share) {
         new Thread(() -> {{
-            // TODO: FIXME
             final var result = repository.removeShare(share.getId());
 
             runOnUiThread(() -> {
