@@ -216,7 +216,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
     fun updateShareInformation(
         shareId: Long,
         password: String? = null,
-        expirationDateMillis: Long? = null,
+        expirationDate: String? = null,
         permissions: Int? = null,
         hideFileDownload: Boolean? = null,
         note: String? = null,
@@ -228,10 +228,6 @@ class ShareRepository(private val applicationContext: Context, private val accou
         }
 
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
-
-        val expirationDate = expirationDateMillis?.let {
-            SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date(it))
-        }
 
         val requestBody = UpdateShareInformationRequest(
             shareId = shareId.toString(),

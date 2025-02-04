@@ -474,7 +474,7 @@ class NoteShareDetailActivity : BrandedActivity(),
 
         // if modifying existing share information then execute the process
         if (share != null) {
-            updateShare()
+            updateShareInformation()
         } else {
             // else show step 2 (note screen)
             showShareProcessSecond()
@@ -492,7 +492,7 @@ class NoteShareDetailActivity : BrandedActivity(),
         else -> permission
     }
 
-    private fun updateShare() {
+    private fun updateShareInformation() {
         lifecycleScope.launch(Dispatchers.IO) {
             if (share == null) {
                 Log_OC.d(TAG, "Share is null cannot updateShare")
@@ -502,7 +502,7 @@ class NoteShareDetailActivity : BrandedActivity(),
             repository.updateShareInformation(
                 share!!.id,
                 binding.shareProcessEnterPassword.text.toString().trim(),
-                chosenExpDateInMills,
+                getExpirationDate(),
                 permission,
                 binding.shareProcessHideDownloadCheckbox.isChecked,
                 "", // TODO: Check note?
@@ -517,6 +517,16 @@ class NoteShareDetailActivity : BrandedActivity(),
         }
     }
 
+    private fun getExpirationDate(): String? {
+        if (chosenExpDateInMills == -1L) {
+            return null
+        }
+
+        val date = Date(chosenExpDateInMills)
+
+        return SimpleDateFormat("yyyy-MM-dd", Locale.US).format(date)
+    }
+
     /**
      * method to validate step 2 (note screen) information
      */
@@ -526,46 +536,48 @@ class NoteShareDetailActivity : BrandedActivity(),
 
         lifecycleScope.launch(Dispatchers.IO) {
             if (share != null && share?.note != noteText) {
-                val expirationDate = if (chosenExpDateInMills != -1L) {
-                    SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date(chosenExpDateInMills))
-                } else {
-                    null
-                }
-
-                val requestBody = UpdateShareRequest(share!!.id.toInt(), noteText, password, expirationDate, "true")
-                val updateShareResult = repository.updateShare(share!!.id, requestBody)
-
-                if (updateShareResult) {
-                    val sendEmailResult = repository.sendEmail(share!!.id, SharePasswordRequest(password))
-                    handleResult(sendEmailResult)
-                } else {
-                    handleResult(false)
-                }
+                updateShare(noteText, password)
             } else {
-                if (note == null || shareeName == null) {
-                    Log_OC.d(TAG, "validateShareProcessSecond cancelled")
-                    return@launch
-                }
-
-                val result = repository.addShare(
-                    note!!,
-                    shareType,
-                    shareeName!!,
-                    "false", // TODO: Check how to determine it
-                    password,
-                    permission,
-                    noteText
-                )
-
-                if (result != null) {
-                    val ssoAcc = SingleAccountHelper.getCurrentSingleSignOnAccount(this@NoteShareDetailActivity)
-                    val entity = ShareEntity(result.id.toInt(), note?.remoteId!!, ssoAcc.name)
-                    repository.addShareEntity(entity)
-                }
-
-                handleResult(result != null)
+                createShare(noteText, password)
             }
         }
+    }
+
+    private suspend fun updateShare(noteText: String, password: String) {
+        val requestBody = UpdateShareRequest(share!!.id.toInt(), noteText, password, getExpirationDate(), "true")
+        val updateShareResult = repository.updateShare(share!!.id, requestBody)
+
+        if (updateShareResult) {
+            val sendEmailResult = repository.sendEmail(share!!.id, SharePasswordRequest(password))
+            handleResult(sendEmailResult)
+        } else {
+            handleResult(false)
+        }
+    }
+
+    private suspend fun createShare(noteText: String, password: String) {
+        if (note == null || shareeName == null) {
+            Log_OC.d(TAG, "validateShareProcessSecond cancelled")
+            return
+        }
+
+        val result = repository.addShare(
+            note!!,
+            shareType,
+            shareeName!!,
+            "false", // TODO: Check how to determine it
+            password,
+            permission,
+            noteText
+        )
+
+        if (result != null) {
+            val ssoAcc = SingleAccountHelper.getCurrentSingleSignOnAccount(this@NoteShareDetailActivity)
+            val entity = ShareEntity(result.id.toInt(), note?.remoteId!!, ssoAcc.name)
+            repository.addShareEntity(entity)
+        }
+
+        handleResult(result != null)
     }
 
     private suspend fun handleResult(success: Boolean) {
