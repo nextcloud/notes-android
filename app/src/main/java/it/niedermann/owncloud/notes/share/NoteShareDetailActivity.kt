@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import androidx.lifecycle.lifecycleScope
+import com.google.gson.Gson
 import com.nextcloud.android.sso.helper.SingleAccountHelper
 import com.owncloud.android.lib.common.utils.Log_OC
 import com.owncloud.android.lib.resources.shares.OCShare
@@ -20,6 +21,7 @@ import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.persistence.entity.ShareEntity
 import it.niedermann.owncloud.notes.share.dialog.ExpirationDatePickerDialogFragment
 import it.niedermann.owncloud.notes.share.helper.SharingMenuHelper
+import it.niedermann.owncloud.notes.share.model.ShareAttributes
 import it.niedermann.owncloud.notes.share.model.SharePasswordRequest
 import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
 import it.niedermann.owncloud.notes.share.repository.ShareRepository
@@ -77,6 +79,7 @@ class NoteShareDetailActivity : BrandedActivity(),
 
     private var expirationDatePickerFragment: ExpirationDatePickerDialogFragment? = null
     private lateinit var repository: ShareRepository
+    private val gson = Gson()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -474,7 +477,12 @@ class NoteShareDetailActivity : BrandedActivity(),
 
         // if modifying existing share information then execute the process
         if (share != null) {
-            updateShareInformation()
+            lifecycleScope.launch(Dispatchers.IO) {
+                val noteText = binding.noteText.text.toString().trim()
+                val password = binding.shareProcessEnterPassword.text.toString().trim()
+
+                updateShare(noteText, password, false)
+            }
         } else {
             // else show step 2 (note screen)
             showShareProcessSecond()
@@ -490,31 +498,6 @@ class NoteShareDetailActivity : BrandedActivity(),
         binding.shareProcessPermissionUploadEditing.isChecked -> OCShare.MAXIMUM_PERMISSIONS_FOR_FILE
         binding.shareProcessPermissionFileDrop.isChecked -> OCShare.CREATE_PERMISSION_FLAG
         else -> permission
-    }
-
-    private fun updateShareInformation() {
-        lifecycleScope.launch(Dispatchers.IO) {
-            if (share == null) {
-                Log_OC.d(TAG, "Share is null cannot updateShare")
-                return@launch
-            }
-
-            repository.updateShareInformation(
-                share!!.id,
-                binding.shareProcessEnterPassword.text.toString().trim(),
-                getExpirationDate(),
-                permission,
-                binding.shareProcessHideDownloadCheckbox.isChecked,
-                "", // TODO: Check note?
-                binding.shareProcessChangeName.text.toString().trim()
-            )
-
-            withContext(Dispatchers.Main) {
-                if (!TextUtils.isEmpty(share?.shareLink)) {
-                    ClipboardUtil.copyToClipboard(this@NoteShareDetailActivity, share?.shareLink)
-                }
-            }
-        }
     }
 
     private fun getExpirationDate(): String? {
@@ -536,22 +519,50 @@ class NoteShareDetailActivity : BrandedActivity(),
 
         lifecycleScope.launch(Dispatchers.IO) {
             if (share != null && share?.note != noteText) {
-                updateShare(noteText, password)
+                updateShare(noteText, password, true)
             } else {
                 createShare(noteText, password)
             }
         }
     }
 
-    private suspend fun updateShare(noteText: String, password: String) {
-        val requestBody = UpdateShareRequest(share!!.id.toInt(), noteText, password, getExpirationDate(), "true")
+    private suspend fun updateShare(noteText: String, password: String, sendEmail: Boolean) {
+        val shareAttributes = arrayOf(
+            ShareAttributes(
+                scope = "permissions",
+                key = "download",
+                value = binding.shareProcessHideDownloadCheckbox.isChecked
+            )
+        )
+
+        val attributes = gson.toJson(shareAttributes)
+
+        val requestBody = UpdateShareRequest(
+            share_id = share!!.id.toInt(),
+            permissions = permission,
+            password = password,
+            publicUpload = "false",
+            expireDate = getExpirationDate(),
+            note = noteText,
+            attributes = attributes,
+            sendMail = sendEmail.toString()
+        )
+
         val updateShareResult = repository.updateShare(share!!.id, requestBody)
 
-        if (updateShareResult) {
+        if (updateShareResult && sendEmail) {
             val sendEmailResult = repository.sendEmail(share!!.id, SharePasswordRequest(password))
             handleResult(sendEmailResult)
         } else {
-            handleResult(false)
+            handleResult(updateShareResult)
+        }
+
+        if (!sendEmail) {
+            withContext(Dispatchers.Main) {
+                if (!TextUtils.isEmpty(share?.shareLink)) {
+                    ClipboardUtil.copyToClipboard(this@NoteShareDetailActivity, share?.shareLink)
+                }
+            }
         }
     }
 

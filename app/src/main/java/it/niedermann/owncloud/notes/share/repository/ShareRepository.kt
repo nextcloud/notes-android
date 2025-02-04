@@ -1,7 +1,6 @@
 package it.niedermann.owncloud.notes.share.repository
 
 import android.content.Context
-import android.icu.text.SimpleDateFormat
 import com.google.gson.Gson
 import com.google.gson.internal.LinkedTreeMap
 import com.nextcloud.android.sso.model.SingleSignOnAccount
@@ -15,7 +14,6 @@ import it.niedermann.owncloud.notes.persistence.entity.ShareEntity
 import it.niedermann.owncloud.notes.share.model.CreateShareRequest
 import it.niedermann.owncloud.notes.share.model.CreateShareResponse
 import it.niedermann.owncloud.notes.share.model.SharePasswordRequest
-import it.niedermann.owncloud.notes.share.model.UpdateShareInformationRequest
 import it.niedermann.owncloud.notes.share.model.UpdateSharePermissionRequest
 import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
 import it.niedermann.owncloud.notes.share.model.toOCShare
@@ -24,8 +22,6 @@ import it.niedermann.owncloud.notes.shared.model.Capabilities
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
-import java.util.Date
-import java.util.Locale
 
 class ShareRepository(private val applicationContext: Context, private val account: SingleSignOnAccount) {
 
@@ -210,47 +206,6 @@ class ShareRepository(private val applicationContext: Context, private val accou
             val errorBody = response.errorBody()?.string()
             Log_OC.d(tag, "Response failed:$errorBody")
             null
-        }
-    }
-
-    fun updateShareInformation(
-        shareId: Long,
-        password: String? = null,
-        expirationDate: String? = null,
-        permissions: Int? = null,
-        hideFileDownload: Boolean? = null,
-        note: String? = null,
-        label: String? = null
-    ): Boolean {
-        if (shareId <= 0) {
-            Log_OC.d(tag, "share id is not valid, updateShareInformation cancelled")
-            return false
-        }
-
-        val shareAPI = apiProvider.getShareAPI(applicationContext, account)
-
-        val requestBody = UpdateShareInformationRequest(
-            shareId = shareId.toString(),
-            password = password,
-            expireDate = expirationDate,
-            permissions = permissions,
-            hideDownload = hideFileDownload,
-            note = note,
-            label = label
-        )
-
-        return try {
-            val call = shareAPI.updateShareInfo(shareId, requestBody)
-            val response = call.execute()
-            if (response.isSuccessful) {
-                Log_OC.d(tag, "Share updated successfully: ${response.body()}")
-            } else {
-                Log_OC.d(tag, "Failed to update share: ${response.errorBody()?.string()}")
-            }
-            response.isSuccessful
-        } catch (e: Exception) {
-            Log_OC.d(tag, "Exception while updating share", e)
-            false
         }
     }
 

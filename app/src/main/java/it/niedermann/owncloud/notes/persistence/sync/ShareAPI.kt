@@ -1,13 +1,9 @@
 package it.niedermann.owncloud.notes.persistence.sync
 
 import com.google.gson.internal.LinkedTreeMap
-import com.nextcloud.android.sso.api.EmptyResponse
-import com.owncloud.android.lib.common.operations.RemoteOperation
-import com.owncloud.android.lib.resources.shares.OCShare
 import it.niedermann.owncloud.notes.share.model.CreateShareRequest
 import it.niedermann.owncloud.notes.share.model.CreateShareResponse
 import it.niedermann.owncloud.notes.share.model.SharePasswordRequest
-import it.niedermann.owncloud.notes.share.model.UpdateShareInformationRequest
 import it.niedermann.owncloud.notes.share.model.UpdateSharePermissionRequest
 import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
 import it.niedermann.owncloud.notes.shared.model.OcsResponse
@@ -15,7 +11,6 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
-import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
@@ -41,22 +36,16 @@ interface ShareAPI {
     @DELETE("shares/{shareId}?format=json")
     fun removeShare(@Path("shareId") shareId: Long): Call<Any>
 
-    @PUT("shares/{shareId}?format=json")
-    fun updateShare(@Path("shareId") shareId: Long, @Body request: UpdateShareRequest): Call<OcsResponse<CreateShareResponse>>
-
     @POST("shares?format=json")
     fun addShare(@Body request: CreateShareRequest): Call<OcsResponse<CreateShareResponse>>
 
     @POST("shares/{shareId}/send-email?format=json")
     fun sendEmail(@Path("shareId") shareId: Long, @Body password: SharePasswordRequest?): Call<Any>
 
-    @PATCH("shares/{shareId}")
-    fun updateShareInfo(
-        @Path("shareId") shareId: Long,
-        @Body request: UpdateShareInformationRequest
-    ): Call<OcsResponse<CreateShareResponse>>
+    @PUT("shares/{shareId}?format=json")
+    fun updateShare(@Path("shareId") shareId: Long, @Body request: UpdateShareRequest): Call<OcsResponse<CreateShareResponse>>
 
-    @PATCH("shares/{shareId}")
+    @PUT("shares/{shareId}")
     fun updateSharePermission(
         @Path("shareId") shareId: Long,
         @Body request: UpdateSharePermissionRequest
