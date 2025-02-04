@@ -55,11 +55,11 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:singleLine="true"
-            android:textColor="@color/primary"
+            android:textColor="@color/defaultBrand"
             android:textSize="@dimen/note_font_size_minimum"
             app:drawableEndCompat="@drawable/ic_baseline_arrow_drop_down_24"
             app:drawableRightCompat="@drawable/ic_baseline_arrow_drop_down_24"
-            app:drawableTint="@color/primary"
+            app:drawableTint="@color/defaultBrand"
             tools:text="View only" />
     </LinearLayout>
 

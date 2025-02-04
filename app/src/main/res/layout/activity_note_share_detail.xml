@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/share_permissions"
-                android:textColor="@color/primary"
+                android:textColor="@color/defaultBrand"
                 android:textStyle="bold" />
 
             <RadioGroup
@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacer_2x"
                 android:text="@string/note_share_detail_activity_advanced_settings"
-                android:textColor="@color/primary"
+                android:textColor="@color/defaultBrand"
                 android:textStyle="bold"/>
 
             <com.google.android.material.checkbox.MaterialCheckBox
