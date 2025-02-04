@@ -9,10 +9,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.database.getIntOrNull
+import androidx.core.database.getStringOrNull
 import androidx.cursoradapter.widget.CursorAdapter
 import it.niedermann.owncloud.notes.R
+import it.niedermann.owncloud.notes.persistence.entity.Account
+import it.niedermann.owncloud.notes.share.helper.AvatarLoader
 
-class SuggestionAdapter(context: Context, cursor: Cursor?) : CursorAdapter(context, cursor, false) {
+class SuggestionAdapter(context: Context, cursor: Cursor?, private val account: Account) : CursorAdapter(context, cursor, false) {
     override fun newView(context: Context, cursor: Cursor, parent: ViewGroup): View {
         val inflater = LayoutInflater.from(context)
         return inflater.inflate(R.layout.item_suggestion_adapter, parent, false)
@@ -29,15 +33,19 @@ class SuggestionAdapter(context: Context, cursor: Cursor?) : CursorAdapter(conte
 
         if (iconColumn != -1) {
             try {
-                val iconId = cursor.getInt(iconColumn)
-                icon.setImageDrawable(ContextCompat.getDrawable(context, iconId))
+                val iconId = cursor.getIntOrNull(iconColumn)
+                if (iconId != null) {
+                    icon.setImageDrawable(ContextCompat.getDrawable(context, iconId))
+                }
             } catch (e: Exception) {
-                icon.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        context,
-                        R.drawable.ic_account_circle_grey_24dp
-                    )
-                )
+                try {
+                    val username = cursor.getStringOrNull(iconColumn)
+                    if (username != null) {
+                        AvatarLoader.load(context, icon, account, username)
+                    }
+                } catch (e: Exception) {
+                    icon.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_account_circle_grey_24dp))
+                }
             }
         }
     }

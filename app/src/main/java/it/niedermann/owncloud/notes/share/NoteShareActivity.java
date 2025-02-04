@@ -27,8 +27,6 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.snackbar.Snackbar;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.owncloud.android.lib.common.operations.RemoteOperationResult;
@@ -43,7 +41,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import it.niedermann.nextcloud.sso.glide.SingleSignOnUrl;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedActivity;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
@@ -57,6 +54,7 @@ import it.niedermann.owncloud.notes.share.dialog.FileDetailSharingMenuBottomShee
 import it.niedermann.owncloud.notes.share.dialog.QuickSharingPermissionsBottomSheetDialog;
 import it.niedermann.owncloud.notes.share.dialog.ShareLinkToDialog;
 import it.niedermann.owncloud.notes.share.dialog.SharePasswordDialogFragment;
+import it.niedermann.owncloud.notes.share.helper.AvatarLoader;
 import it.niedermann.owncloud.notes.share.helper.UsersAndGroupsSearchProvider;
 import it.niedermann.owncloud.notes.share.listener.FileDetailsSharingMenuBottomSheetActions;
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
@@ -162,7 +160,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             return;
         }
 
-        SuggestionAdapter suggestionAdapter = new SuggestionAdapter(this, null);
+        SuggestionAdapter suggestionAdapter = new SuggestionAdapter(this, null, account);
         UsersAndGroupsSearchProvider provider = new UsersAndGroupsSearchProvider(this, repository);
 
         binding.searchView.setSuggestionsAdapter(suggestionAdapter);
@@ -301,13 +299,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     }
 
     private void loadAvatar() {
-        Glide.with(this)
-                .load(new SingleSignOnUrl(account.getAccountName(), account.getUrl() + "/index.php/avatar/" + Uri.encode(account.getUserName()) + "/64"))
-                .placeholder(R.drawable.ic_account_circle_grey_24dp)
-                .error(R.drawable.ic_account_circle_grey_24dp)
-                .apply(RequestOptions.circleCropTransform())
-                .into(binding.sharedWithYouAvatar);
-
+        AvatarLoader.INSTANCE.load(this, binding.sharedWithYouAvatar, account);
         binding.sharedWithYouAvatar.setVisibility(View.VISIBLE);
     }
 

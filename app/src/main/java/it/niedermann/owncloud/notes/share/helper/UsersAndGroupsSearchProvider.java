@@ -13,7 +13,6 @@ import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
-import android.text.TextUtils;
 
 import com.owncloud.android.lib.resources.shares.GetShareesRemoteOperation;
 import com.owncloud.android.lib.resources.shares.ShareType;
@@ -156,18 +155,7 @@ public class UsersAndGroupsSearchProvider {
                         displayName = userName;
                         subline = (status.getMessage() == null || status.getMessage().isEmpty()) ? null :
                                 status.getMessage();
-                        Uri.Builder builder = Uri.parse("content://" + AUTHORITY + "/icon").buildUpon();
-
-                        builder.appendQueryParameter("shareWith", shareWith);
-                        builder.appendQueryParameter("displayName", displayName);
-                        builder.appendQueryParameter("status", status.getStatus().toString());
-
-                        if (!TextUtils.isEmpty(status.getIcon()) && !"null".equals(status.getIcon())) {
-                            builder.appendQueryParameter("icon", status.getIcon());
-                        }
-
-                        icon = builder.build().toString();
-
+                        icon = displayName;
                         dataUri = Uri.withAppendedPath(userBaseUri, shareWith);
                         break;
 

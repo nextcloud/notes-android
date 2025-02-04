@@ -18,8 +18,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import it.niedermann.owncloud.notes.NotesApplication;
@@ -30,6 +28,7 @@ import it.niedermann.owncloud.notes.databinding.DialogAccountSwitcherBinding;
 import it.niedermann.owncloud.notes.manageaccounts.ManageAccountsActivity;
 import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
+import it.niedermann.owncloud.notes.share.helper.AvatarLoader;
 
 /**
  * Displays all available {@link Account} entries and provides basic operations for them, like adding or switching
@@ -74,11 +73,7 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
 
             binding.accountName.setText(currentLocalAccount.getDisplayName());
             binding.accountHost.setText(Uri.parse(currentLocalAccount.getUrl()).getHost());
-            Glide.with(requireContext())
-                    .load(currentLocalAccount.getUrl() + "/index.php/avatar/" + Uri.encode(currentLocalAccount.getUserName()) + "/64")
-                    .error(R.drawable.ic_account_circle_grey_24dp)
-                    .apply(RequestOptions.circleCropTransform())
-                    .into(binding.currentAccountItemAvatar);
+            AvatarLoader.INSTANCE.load(requireContext(), binding.currentAccountItemAvatar, currentLocalAccount);
             binding.accountLayout.setOnClickListener((v) -> dismiss());
 
             final var adapter = new AccountSwitcherAdapter((localAccount -> {
