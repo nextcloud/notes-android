@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.share
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.text.TextUtils
@@ -14,6 +15,7 @@ import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.branding.BrandedActivity
 import it.niedermann.owncloud.notes.branding.BrandingUtil
 import it.niedermann.owncloud.notes.databinding.ActivityNoteShareDetailBinding
+import it.niedermann.owncloud.notes.main.MainActivity
 import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.persistence.entity.ShareEntity
 import it.niedermann.owncloud.notes.share.dialog.ExpirationDatePickerDialogFragment
@@ -96,8 +98,6 @@ class NoteShareDetailActivity : BrandedActivity(),
             isExpDateShown = it.getBoolean(ARG_EXP_DATE_SHOWN, true)
             isSecureShare = it.getBoolean(ARG_SECURE_SHARE, false)
         }
-
-        // capabilities = CapabilityUtils.getCapability(context)
 
         lifecycleScope.launch(Dispatchers.IO) {
             val ssoAcc = SingleAccountHelper.getCurrentSingleSignOnAccount(this@NoteShareDetailActivity)
@@ -340,6 +340,7 @@ class NoteShareDetailActivity : BrandedActivity(),
             binding.noteText.setText(R.string.empty)
         }
         shareProcessStep = SCREEN_TYPE_NOTE
+        binding.shareProcessBtnNext.performClick()
     }
 
     private fun implementClickEvents() {
@@ -557,9 +558,12 @@ class NoteShareDetailActivity : BrandedActivity(),
     private suspend fun handleResult(success: Boolean) {
         withContext(Dispatchers.Main) {
             if (success) {
-                finish()
+                Intent(this@NoteShareDetailActivity, MainActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                }.also {
+                    startActivity(it)
+                }
             } else {
-
                 DisplayUtils.showSnackMessage(
                     this@NoteShareDetailActivity,
                     getString(R.string.note_share_detail_activity_create_share_error)
