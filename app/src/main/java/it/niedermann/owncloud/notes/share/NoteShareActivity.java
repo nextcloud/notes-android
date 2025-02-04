@@ -201,7 +201,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                         runOnUiThread(() -> {
                             {
                                 if (cursor == null || cursor.getCount() == 0) {
-                                    suggestionAdapter.changeCursor(null);
                                     return;
                                 }
 
