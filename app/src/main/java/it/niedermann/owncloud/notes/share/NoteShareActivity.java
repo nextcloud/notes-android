@@ -718,4 +718,10 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         util.androidx.themeToolbarSearchView(binding.searchView);
         util.platform.themeHorizontalProgressBar(binding.progressBar);
     }
+
+    @Override
+    protected void onDestroy() {
+        executorService.shutdown();
+        super.onDestroy();
+    }
 }
