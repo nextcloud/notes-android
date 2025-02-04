@@ -6,6 +6,7 @@ import com.owncloud.android.lib.common.operations.RemoteOperation
 import com.owncloud.android.lib.resources.shares.OCShare
 import it.niedermann.owncloud.notes.share.model.CreateShareRequest
 import it.niedermann.owncloud.notes.share.model.CreateShareResponse
+import it.niedermann.owncloud.notes.share.model.SharePasswordRequest
 import it.niedermann.owncloud.notes.share.model.UpdateShareInformationRequest
 import it.niedermann.owncloud.notes.share.model.UpdateSharePermissionRequest
 import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
@@ -16,6 +17,7 @@ import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.PATCH
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -39,11 +41,14 @@ interface ShareAPI {
     @DELETE("shares/{shareId}?format=json")
     fun removeShare(@Path("shareId") shareId: Long): Call<Any>
 
-    @PATCH("shares")
-    fun updateShare(@Body request: UpdateShareRequest): Call<OcsResponse<CreateShareResponse>>
+    @PUT("shares/{shareId}?format=json")
+    fun updateShare(@Path("shareId") shareId: Long, @Body request: UpdateShareRequest): Call<OcsResponse<CreateShareResponse>>
 
     @POST("shares?format=json")
     fun addShare(@Body request: CreateShareRequest): Call<OcsResponse<CreateShareResponse>>
+
+    @POST("shares/{shareId}/send-email?format=json")
+    fun sendEmail(@Path("shareId") shareId: Long, @Body password: SharePasswordRequest?): Call<Any>
 
     @PATCH("shares/{shareId}")
     fun updateShareInfo(

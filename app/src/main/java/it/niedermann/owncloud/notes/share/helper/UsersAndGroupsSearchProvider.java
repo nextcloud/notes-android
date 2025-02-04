@@ -15,7 +15,6 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 import android.text.TextUtils;
 
-
 import com.owncloud.android.lib.resources.shares.GetShareesRemoteOperation;
 import com.owncloud.android.lib.resources.shares.ShareType;
 import com.owncloud.android.lib.resources.users.Status;
@@ -30,7 +29,6 @@ import java.util.Locale;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.share.model.UsersAndGroupsSearchConfig;
 import it.niedermann.owncloud.notes.share.repository.ShareRepository;
-import it.niedermann.owncloud.notes.shared.model.Capabilities;
 
 public class UsersAndGroupsSearchProvider {
 
