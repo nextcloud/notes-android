@@ -552,7 +552,7 @@ class NoteShareDetailActivity : BrandedActivity(),
 
         val requestBody = UpdateShareRequest(
             share_id = share!!.id.toInt(),
-            permissions = permission,
+            permissions = if (permission == -1) null else permission,
             password = password,
             publicUpload = "false",
             expireDate = getExpirationDate(),
