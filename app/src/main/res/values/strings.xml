@@ -126,6 +126,7 @@
     <string name="share_known_remote_on_clarification">on %1$s</string>
 
     <string name="copy_link">Copy link</string>
+    <string name="share">Share</string>
     <string name="clipboard_text_copied">Link copied</string>
     <string name="clipboard_no_text_to_copy">Received no text to copy to clipboard</string>
     <string name="clipboard_unexpected_error">Unexpected error while copying to clipboard</string>

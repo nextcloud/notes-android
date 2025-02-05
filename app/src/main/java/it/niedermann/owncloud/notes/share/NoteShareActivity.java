@@ -323,7 +323,19 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         }
          */
 
-        ClipboardUtil.copyToClipboard(this, share.getShareLink());
+        if (TextUtils.isEmpty(share.getShareLink())) {
+            copyAndShareFileLink(share.getShareLink());
+        } else {
+            ClipboardUtil.copyToClipboard(this, share.getShareLink());
+        }
+    }
+
+    private void copyAndShareFileLink(String link) {
+        ClipboardUtil.copyToClipboard(this, link, false);
+        Snackbar snackbar = Snackbar
+                .make(this.findViewById(android.R.id.content), R.string.clipboard_text_copied, Snackbar.LENGTH_LONG)
+                .setAction(R.string.share, v -> showShareLinkDialog());
+        snackbar.show();
     }
 
     @Override
