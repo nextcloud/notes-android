@@ -9,6 +9,13 @@ data class ShareEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     val id: Int? = null,
-    val noteRemoteId: Long,
-    val userName: String
+    val note: String? = null,
+    val path: String? = null,
+    val file_target: String? = null,
+    val share_with: String? = null,
+    val share_with_displayname: String? = null,
+    val uid_file_owner: String? = null,
+    val displayname_file_owner: String? = null,
+    val uid_owner: String? = null,
+    val displayname_owner: String? = null,
 )

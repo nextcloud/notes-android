@@ -19,8 +19,6 @@ import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
 import it.niedermann.owncloud.notes.share.model.toOCShare
 import it.niedermann.owncloud.notes.shared.model.ApiVersion
 import it.niedermann.owncloud.notes.shared.model.Capabilities
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import org.json.JSONObject
 
 class ShareRepository(private val applicationContext: Context, private val account: SingleSignOnAccount) {
@@ -33,33 +31,70 @@ class ShareRepository(private val applicationContext: Context, private val accou
         )
     }
 
-    suspend fun addShareEntity(entity: ShareEntity) = withContext(Dispatchers.IO) {
-        notesRepository.addShareEntity(entity)
+    private fun getNotePath(note: Note): String? {
+        val notesPathCall = notesRepository.getServerSettings(account, ApiVersion.API_VERSION_1_0)
+        val notesPathResponse = notesPathCall.execute()
+        val notesPathResponseResult = notesPathResponse.body() ?: return null
+        val notesPath = notesPathResponseResult.notesPath
+        val notesSuffix = notesPathResponseResult.fileSuffix
+        return  "/" + notesPath + "/" + note.title + notesSuffix
     }
 
-    fun getShareEntities(noteRemoteId: Long, userName: String): List<ShareEntity> {
-        return notesRepository.getShareEntities(noteRemoteId, userName)
+    fun getShareEntities(note: Note): List<ShareEntity> {
+        val path = getNotePath(note)
+        return notesRepository.getShareEntities(path)
     }
 
-    // TODO: Needed for ShareeListAdapter. If ShareEntity is empty this method is needed to fetch shares
-    //  "statuscode":400,"message":"Not a directory"},"data":[]} e.g. remotePath = /Notes/NETOSSSss.md
-    fun getSharesForSpecificNote(note: Note): Boolean {
+    fun getSharesForNotesAndSaveShareEntities(): Boolean {
         val notesPathCall = notesRepository.getServerSettings(account, ApiVersion.API_VERSION_1_0)
         val notesPathResponse = notesPathCall.execute()
         val notesPathResponseResult = notesPathResponse.body() ?: return false
         val notesPath = notesPathResponseResult.notesPath
-        val notesSuffix = notesPathResponseResult.fileSuffix
-        val remotePath =  "/" + notesPath + "/" + note.title + notesSuffix
+        val remotePath = "/$notesPath"
 
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
         val call = shareAPI.getSharesForSpecificNote(remotePath)
-        val response = call.execute()
+        val entities = arrayListOf<ShareEntity>()
 
         return try {
-            if (response.isSuccessful) {
+            if (call != null) {
+                val respOCS = call["ocs"] as? LinkedTreeMap<*, *>
+                val respData = respOCS?.getList("data")
+                respData?.forEach { data  ->
+                    val map = data as? LinkedTreeMap<*, *>
+                    val id = map?.get("id") as? String
+                    val note = map?.get("note") as? String
+                    val path = map?.get("path") as? String
+                    val fileTarget = map?.get("file_target") as? String
+                    val shareWith = map?.get("share_with") as? String
+                    val shareWithDisplayName = map?.get("share_with_displayname") as? String
+                    val uidFileOwner = map?.get("uid_file_owner") as? String
+                    val displayNameFileOwner = map?.get("displayname_file_owner") as? String
+                    val uidOwner = map?.get("uid_owner") as? String
+                    val displayNameOwner = map?.get("displayname_owner") as? String
+
+                    id?.toInt()?.let {
+                        val entity = ShareEntity(
+                            id = it,
+                            note = note,
+                            path = path,
+                            file_target = fileTarget,
+                            share_with = shareWith,
+                            share_with_displayname = shareWithDisplayName,
+                            uid_file_owner = uidFileOwner,
+                            displayname_file_owner = displayNameFileOwner,
+                            uid_owner = uidOwner,
+                            displayname_owner = displayNameOwner
+                        )
+
+                        entities.add(entity)
+                    }
+                }
+
+                notesRepository.addShareEntities(entities)
+
                 true
             } else {
-                Log_OC.d(tag, "Failed to getSharesForSpecificNote: ${response.errorBody()?.string()}")
                 false
             }
         } catch (e: Exception) {
@@ -67,6 +102,8 @@ class ShareRepository(private val applicationContext: Context, private val accou
             false
         }
     }
+
+    private fun LinkedTreeMap<*, *>.getList(key: String): ArrayList<*>? = this[key] as? ArrayList<*>
 
     fun getSharees(
         searchString: String,
@@ -79,8 +116,6 @@ class ShareRepository(private val applicationContext: Context, private val accou
             val respOCS = call["ocs"] as? LinkedTreeMap<*, *>
             val respData = respOCS?.get("data") as? LinkedTreeMap<*, *>
             val respExact = respData?.get("exact") as? LinkedTreeMap<*, *>
-
-            fun LinkedTreeMap<*, *>.getList(key: String): ArrayList<*>? = this[key] as? ArrayList<*>
 
             val respExactUsers = respExact?.getList("users")
             val respExactGroups = respExact?.getList("groups")

@@ -596,9 +596,7 @@ class NoteShareDetailActivity : BrandedActivity(),
         )
 
         if (result != null) {
-            val ssoAcc = SingleAccountHelper.getCurrentSingleSignOnAccount(this@NoteShareDetailActivity)
-            val entity = ShareEntity(result.id.toInt(), note?.remoteId!!, ssoAcc.name)
-            repository.addShareEntity(entity)
+            repository.getSharesForNotesAndSaveShareEntities()
         }
 
         handleResult(result != null)

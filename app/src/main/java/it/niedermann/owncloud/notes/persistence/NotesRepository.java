@@ -967,11 +967,11 @@ public class NotesRepository {
         db.getAccountDao().updateDisplayName(id, displayName);
     }
 
-    public void addShareEntity(ShareEntity entity) {
-        db.getShareDao().addShareEntity(entity);
+    public void addShareEntities(List<ShareEntity> entities) {
+        db.getShareDao().addShareEntities(entities);
     }
 
-    public List<ShareEntity> getShareEntities(long noteRemoteId, String userName) {
-        return db.getShareDao().getShareEntities(noteRemoteId, userName);
+    public List<ShareEntity> getShareEntities(String path) {
+        return db.getShareDao().getShareEntities(path);
     }
 }
