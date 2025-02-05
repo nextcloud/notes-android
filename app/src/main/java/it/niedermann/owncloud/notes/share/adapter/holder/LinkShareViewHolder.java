@@ -84,7 +84,9 @@ public class LinkShareViewHolder extends BrandedViewHolder {
     @Override
     public void applyBrand(int color) {
         final var util = BrandingUtil.of(color, context);
-        util.androidx.colorPrimaryTextViewElement(binding.permissionName);
-        util.platform.colorImageViewBackgroundAndIcon(binding.icon);
+        if (binding != null) {
+            util.androidx.colorPrimaryTextViewElement(binding.permissionName);
+            util.platform.colorImageViewBackgroundAndIcon(binding.icon);
+        }
     }
 }

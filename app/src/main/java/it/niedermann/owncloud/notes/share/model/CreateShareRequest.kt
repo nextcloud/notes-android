@@ -17,11 +17,11 @@ data class CreateShareRequest(
     val publicUpload: String,
 
     @Expose
-    val password: String,
+    val password: String?,
 
     @Expose
-    val permissions: Int,
+    val permissions: Int?,
 
     @Expose
-    val note: String
+    val note: String?
 )

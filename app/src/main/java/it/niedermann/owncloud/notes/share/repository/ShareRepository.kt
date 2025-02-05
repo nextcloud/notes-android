@@ -38,7 +38,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
         return notesPathResponse.body()
     }
 
-    private fun getNotePath(note: Note): String? {
+    fun getNotePath(note: Note): String? {
         val notesPathResponseResult = getNotesPathResponseResult() ?: return null
         val notesPath = notesPathResponseResult.notesPath
         val notesSuffix = notesPathResponseResult.fileSuffix
