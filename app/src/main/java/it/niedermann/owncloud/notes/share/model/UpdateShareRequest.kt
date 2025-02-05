@@ -7,7 +7,7 @@ data class UpdateShareRequest(
     val share_id: Int,
 
     @Expose
-    val permissions: Int,
+    val permissions: Int?,
 
     @Expose
     val password: String,
