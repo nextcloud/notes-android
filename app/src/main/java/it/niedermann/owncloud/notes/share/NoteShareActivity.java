@@ -277,7 +277,10 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             requestPasswordForShareViaLink(true, capabilities.getAskForOptionalPassword());
         } else {
             executorService.schedule(() -> {
-                repository.addShare(note, ShareType.PUBLIC_LINK, "", "false", "", 0, "");
+                final var result = repository.addShare(note, ShareType.PUBLIC_LINK, "", "false", "", 0, "");
+                if (result != null) {
+                    runOnUiThread(this::recreate);
+                }
             }, 0, TimeUnit.MICROSECONDS);
         }
     }
