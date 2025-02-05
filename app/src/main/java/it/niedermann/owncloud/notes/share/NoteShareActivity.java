@@ -260,7 +260,8 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             return;
         }
 
-        showShareLinkDialog();
+        final var link = createInternalLink();
+        showShareLinkDialog(link);
     }
 
     @Override
@@ -293,9 +294,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
     }
 
-    private void showShareLinkDialog() {
-        String link = createInternalLink();
-
+    private void showShareLinkDialog(String link) {
         Intent intentToShareLink = new Intent(Intent.ACTION_SEND);
 
         intentToShareLink.putExtra(Intent.EXTRA_TEXT, link);
@@ -324,6 +323,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         }
          */
 
+        // FIXME: getShareLink is empty
         if (TextUtils.isEmpty(share.getShareLink())) {
             copyAndShareFileLink(share.getShareLink());
         } else {
@@ -335,7 +335,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         ClipboardUtil.copyToClipboard(this, link, false);
         Snackbar snackbar = Snackbar
                 .make(this.findViewById(android.R.id.content), R.string.clipboard_text_copied, Snackbar.LENGTH_LONG)
-                .setAction(R.string.share, v -> showShareLinkDialog());
+                .setAction(R.string.share, v -> showShareLinkDialog(link));
         snackbar.show();
     }
 
