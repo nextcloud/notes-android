@@ -29,6 +29,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.google.android.material.snackbar.Snackbar;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.owncloud.android.lib.common.utils.Log_OC;
+import com.owncloud.android.lib.resources.shares.CreateShareRemoteOperation;
 import com.owncloud.android.lib.resources.shares.OCShare;
 import com.owncloud.android.lib.resources.shares.ShareType;
 
@@ -55,10 +56,13 @@ import it.niedermann.owncloud.notes.share.dialog.SharePasswordDialogFragment;
 import it.niedermann.owncloud.notes.share.helper.UsersAndGroupsSearchProvider;
 import it.niedermann.owncloud.notes.share.listener.NoteShareItemAction;
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
+import it.niedermann.owncloud.notes.share.model.CreateShareRequest;
 import it.niedermann.owncloud.notes.share.model.UsersAndGroupsSearchConfig;
 import it.niedermann.owncloud.notes.share.repository.ShareRepository;
+import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.util.DisplayUtils;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
+import it.niedermann.owncloud.notes.shared.util.clipboard.ClipboardUtil;
 import it.niedermann.owncloud.notes.shared.util.extensions.BundleExtensionsKt;
 
 public class NoteShareActivity extends BrandedActivity implements ShareeListAdapterListener, NoteShareItemAction, QuickSharingPermissionsBottomSheetDialog.QuickPermissionSharingBottomSheetActions {
@@ -76,6 +80,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     private Note note;
     private Account account;
     private ShareRepository repository;
+    private Capabilities capabilities;
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +105,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             try {
                 final var ssoAcc = SingleAccountHelper.getCurrentSingleSignOnAccount(NoteShareActivity.this);
                 repository = new ShareRepository(NoteShareActivity.this, ssoAcc);
+                capabilities = repository.capabilities();
                 repository.getSharesForNotesAndSaveShareEntities();
 
                 runOnUiThread(() -> {
@@ -175,7 +181,12 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
                 // Schedule a new task with a delay
                 future = executorService.schedule(() -> {
-                    final var isFederationShareAllowed = repository.capabilities().getFederationShare();
+                    if (capabilities == null) {
+                        Log_OC.d(TAG, "Capabilities cannot be null");
+                        return;
+                    }
+
+                    final var isFederationShareAllowed = capabilities.getFederationShare();
                     try(var cursor = provider.searchForUsersOrGroups(newText, isFederationShareAllowed)) {
                         runOnUiThread(() -> {
                             {
@@ -256,7 +267,24 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
     @Override
     public void createPublicShareLink() {
+        if (capabilities == null) {
+            Log_OC.d(TAG, "Capabilities cannot be null");
+            return;
+        }
 
+        if (capabilities.getPublicPasswordEnforced() || capabilities.getAskForOptionalPassword()) {
+            // password enforced by server, request to the user before trying to create
+            requestPasswordForShareViaLink(true, capabilities.getAskForOptionalPassword());
+        } else {
+            executorService.schedule(() -> {
+                repository.addShare(note, ShareType.PUBLIC_LINK, "", "false", "", 0, "");
+            }, 0, TimeUnit.MICROSECONDS);
+        }
+    }
+
+    public void requestPasswordForShareViaLink(boolean createShare, boolean askForPassword) {
+        SharePasswordDialogFragment dialog = SharePasswordDialogFragment.newInstance(note, createShare, askForPassword);
+        dialog.show(getSupportFragmentManager(), SharePasswordDialogFragment.PASSWORD_FRAGMENT);
     }
 
     @Override
@@ -285,7 +313,17 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
     @Override
     public void copyLink(OCShare share) {
+        /*
+        if (file.isSharedViaLink()) {
+            if (TextUtils.isEmpty(share.getShareLink())) {
+                fileOperationsHelper.getFileWithLink(file, viewThemeUtils);
+            } else {
+                ClipboardUtil.copyToClipboard(this, share.getShareLink());
+            }
+        }
+         */
 
+        ClipboardUtil.copyToClipboard(this, share.getShareLink());
     }
 
     @Override
@@ -342,26 +380,26 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
                 runOnUiThread(() -> {
                     adapter.addShares(shares);
-
-                    // TODO: Will be added later on...
-                    /*
-                         List<OCShare> publicShares = new ArrayList<>();
-
-                        if (containsNoNewPublicShare(adapter.getShares())) {
-                            final OCShare ocShare = new OCShare();
-                            ocShare.setShareType(ShareType.NEW_PUBLIC_LINK);
-                            publicShares.add(ocShare);
-                        } else {
-                            adapter.removeNewPublicShare();
-                        }
-
-                        adapter.addShares(publicShares);
-                     */
+                    addPublicShares(adapter);
                 });
             } catch (Exception e) {
                 Log_OC.d(TAG, "Exception while refreshSharesFromDB: " + e);
             }
         }, 0, TimeUnit.MICROSECONDS);
+    }
+
+    private void addPublicShares(ShareeListAdapter adapter) {
+        List<OCShare> publicShares = new ArrayList<>();
+
+        if (containsNoNewPublicShare(adapter.getShares())) {
+            final OCShare ocShare = new OCShare();
+            ocShare.setShareType(ShareType.NEW_PUBLIC_LINK);
+            publicShares.add(ocShare);
+        } else {
+            adapter.removeNewPublicShare();
+        }
+
+        adapter.addShares(publicShares);
     }
 
     private void checkContactPermission() {
@@ -497,7 +535,11 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
     private boolean getExpDateShown() {
         try {
-            final var capabilities = repository.capabilities();
+            if (capabilities == null) {
+                Log_OC.d(TAG, "Capabilities cannot be null");
+                return false;
+            }
+
             final var majorVersionAsString = capabilities.getNextcloudMajorVersion();
             if (majorVersionAsString != null) {
                 final var majorVersion = Integer.parseInt(majorVersionAsString);

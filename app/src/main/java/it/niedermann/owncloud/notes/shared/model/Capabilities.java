@@ -39,6 +39,25 @@ public class Capabilities implements Serializable {
 
     private boolean directEditingAvailable;
 
+    private boolean publicPasswordEnforced;
+    private boolean askForOptionalPassword;
+
+    public boolean getPublicPasswordEnforced() {
+        return publicPasswordEnforced;
+    }
+
+    public void setPublicPasswordEnforced(boolean value) {
+        this.publicPasswordEnforced = value;
+    }
+
+    public boolean getAskForOptionalPassword() {
+        return askForOptionalPassword;
+    }
+
+    public void setAskForOptionalPassword(boolean value) {
+        this.askForOptionalPassword = value;
+    }
+
     public void setApiVersion(String apiVersion) {
         this.apiVersion = apiVersion;
     }
@@ -124,6 +143,8 @@ public class Capabilities implements Serializable {
                 ", nextcloudMinorVersion='" + nextcloudMinorVersion + '\'' +
                 ", nextcloudMicroVersion='" + nextcloudMicroVersion + '\'' +
                 ", federationShare=" + federationShare +
+                ", publicPasswordEnforced=" + publicPasswordEnforced +
+                ", askForOptionalPassword=" + askForOptionalPassword +
                 ", color=" + color +
                 ", textColor=" + textColor +
                 ", eTag='" + eTag + '\'' +
