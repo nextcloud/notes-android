@@ -122,9 +122,8 @@ public class UsersAndGroupsSearchProvider {
                 }
 
                 if (UsersAndGroupsSearchConfig.INSTANCE.getSearchOnlyUsers() && type != ShareType.USER) {
-                    // TODO: Why we need this check?
                     // skip all types but users, as E2E secure share is only allowed to users on same server
-                    // continue;
+                    continue;
                 }
 
                 switch (type) {
