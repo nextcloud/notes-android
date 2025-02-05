@@ -19,6 +19,7 @@ import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
 import it.niedermann.owncloud.notes.share.model.toOCShare
 import it.niedermann.owncloud.notes.shared.model.ApiVersion
 import it.niedermann.owncloud.notes.shared.model.Capabilities
+import it.niedermann.owncloud.notes.shared.model.NotesSettings
 import org.json.JSONObject
 
 class ShareRepository(private val applicationContext: Context, private val account: SingleSignOnAccount) {
@@ -31,24 +32,26 @@ class ShareRepository(private val applicationContext: Context, private val accou
         )
     }
 
-    private fun getNotePath(note: Note): String? {
+    private fun getNotesPathResponseResult(): NotesSettings? {
         val notesPathCall = notesRepository.getServerSettings(account, ApiVersion.API_VERSION_1_0)
         val notesPathResponse = notesPathCall.execute()
-        val notesPathResponseResult = notesPathResponse.body() ?: return null
+        return notesPathResponse.body()
+    }
+
+    private fun getNotePath(note: Note): String? {
+        val notesPathResponseResult = getNotesPathResponseResult() ?: return null
         val notesPath = notesPathResponseResult.notesPath
         val notesSuffix = notesPathResponseResult.fileSuffix
         return  "/" + notesPath + "/" + note.title + notesSuffix
     }
 
-    fun getShareEntities(note: Note): List<ShareEntity> {
+    fun getShareEntitiesForSpecificNote(note: Note): List<ShareEntity> {
         val path = getNotePath(note)
         return notesRepository.getShareEntities(path)
     }
 
-    fun getSharesForNotesAndSaveShareEntities(): Boolean {
-        val notesPathCall = notesRepository.getServerSettings(account, ApiVersion.API_VERSION_1_0)
-        val notesPathResponse = notesPathCall.execute()
-        val notesPathResponseResult = notesPathResponse.body() ?: return false
+    fun getSharesForNotesAndSaveShareEntities() {
+        val notesPathResponseResult = getNotesPathResponseResult() ?: return
         val notesPath = notesPathResponseResult.notesPath
         val remotePath = "/$notesPath"
 
@@ -56,7 +59,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
         val call = shareAPI.getSharesForSpecificNote(remotePath)
         val entities = arrayListOf<ShareEntity>()
 
-        return try {
+        try {
             if (call != null) {
                 val respOCS = call["ocs"] as? LinkedTreeMap<*, *>
                 val respData = respOCS?.getList("data")
@@ -92,14 +95,9 @@ class ShareRepository(private val applicationContext: Context, private val accou
                 }
 
                 notesRepository.addShareEntities(entities)
-
-                true
-            } else {
-                false
             }
         } catch (e: Exception) {
             Log_OC.d(tag, "Exception while getSharesForSpecificNote: $e")
-            false
         }
     }
 
