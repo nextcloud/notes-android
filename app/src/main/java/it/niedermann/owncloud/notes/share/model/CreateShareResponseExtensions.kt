@@ -6,7 +6,7 @@ import com.owncloud.android.lib.resources.shares.ShareType
 fun List<CreateShareResponse>.toOCShare(): List<OCShare> {
     return map { response ->
         OCShare().apply {
-            id = response.id.toLongOrNull() ?: 0
+            id = response.id.toLongOrNull() ?: -1L
             fileSource = response.fileSource
             itemSource = response.itemSource
             shareType = when (response.shareType) {
@@ -32,5 +32,5 @@ fun List<CreateShareResponse>.toOCShare(): List<OCShare> {
             mimetype = response.mimetype
             ownerDisplayName = response.displaynameOwner
         }
-    }
+    }.filter { it.id != -1L }
 }

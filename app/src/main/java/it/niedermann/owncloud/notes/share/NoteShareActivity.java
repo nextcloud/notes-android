@@ -345,17 +345,19 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                     adapter.addShares(shares);
 
                     // TODO: Will be added later on...
-                    List<OCShare> publicShares = new ArrayList<>();
+                    /*
+                         List<OCShare> publicShares = new ArrayList<>();
 
-                    if (containsNoNewPublicShare(adapter.getShares())) {
-                        final OCShare ocShare = new OCShare();
-                        ocShare.setShareType(ShareType.NEW_PUBLIC_LINK);
-                        publicShares.add(ocShare);
-                    } else {
-                        adapter.removeNewPublicShare();
-                    }
+                        if (containsNoNewPublicShare(adapter.getShares())) {
+                            final OCShare ocShare = new OCShare();
+                            ocShare.setShareType(ShareType.NEW_PUBLIC_LINK);
+                            publicShares.add(ocShare);
+                        } else {
+                            adapter.removeNewPublicShare();
+                        }
 
-                    adapter.addShares(publicShares);
+                        adapter.addShares(publicShares);
+                     */
                 });
             } catch (Exception e) {
                 Log_OC.d(TAG, "Exception while refreshSharesFromDB: " + e);
