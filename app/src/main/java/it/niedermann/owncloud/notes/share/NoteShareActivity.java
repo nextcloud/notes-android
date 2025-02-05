@@ -234,10 +234,9 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         startActivity(intent);
     }
 
-    // TODO: Check if note.getAccountId() return note's owner's id
     private boolean accountOwnsFile() {
-        String noteId = String.valueOf(note.getAccountId());
-        return TextUtils.isEmpty(noteId) || account.getAccountName().split("@")[0].equalsIgnoreCase(noteId);
+        String displayName = account.getDisplayName();
+        return TextUtils.isEmpty(displayName) || account.getAccountName().split("@")[0].equalsIgnoreCase(displayName);
     }
 
     private void setShareWithYou() {
