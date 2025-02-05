@@ -19,12 +19,12 @@ fun List<CreateShareResponse>.toOCShare(): List<OCShare> {
             path = response.path
             permissions = response.permissions.toInt()
             sharedDate = response.stime
-            token = null
+            token = response.token
             sharedWithDisplayName = response.shareWithDisplayname
             isFolder = response.itemType == "folder"
             userId = response.uidOwner
-            shareLink = null
-            isPasswordProtected = false
+            shareLink =  response.url
+            isPasswordProtected = !response.password.isNullOrEmpty()
             note = response.note
             isHideFileDownload = response.hideDownload > 0
             label = response.label

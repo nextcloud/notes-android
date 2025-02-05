@@ -323,7 +323,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         }
          */
 
-        // FIXME: getShareLink is empty
         if (TextUtils.isEmpty(share.getShareLink())) {
             copyAndShareFileLink(share.getShareLink());
         } else {

@@ -75,6 +75,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
                     val displayNameFileOwner = map?.get("displayname_file_owner") as? String
                     val uidOwner = map?.get("uid_owner") as? String
                     val displayNameOwner = map?.get("displayname_owner") as? String
+                    val url = map?.get("url") as? String
 
                     id?.toInt()?.let {
                         val entity = ShareEntity(
@@ -87,7 +88,8 @@ class ShareRepository(private val applicationContext: Context, private val accou
                             uid_file_owner = uidFileOwner,
                             displayname_file_owner = displayNameFileOwner,
                             uid_owner = uidOwner,
-                            displayname_owner = displayNameOwner
+                            displayname_owner = displayNameOwner,
+                            url = url
                         )
 
                         entities.add(entity)
