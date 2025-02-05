@@ -317,7 +317,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     public void refreshSharesFromDB() {
         executorService.schedule(() -> {
             try {
-                final var ssoAcc = SingleAccountHelper.getCurrentSingleSignOnAccount(NoteShareActivity.this);
                 ShareeListAdapter adapter = (ShareeListAdapter) binding.sharesList.getAdapter();
 
                 if (adapter == null) {
@@ -331,7 +330,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                 List<OCShare> shares = new ArrayList<>();
 
                 if (note != null) {
-                    final var shareEntities = repository.getShareEntities(note);
+                    final var shareEntities = repository.getShareEntitiesForSpecificNote(note);
                     shareEntities.forEach(entity -> {
                         if (entity.getId() != null) {
                             final var share = repository.getShares(entity.getId());
