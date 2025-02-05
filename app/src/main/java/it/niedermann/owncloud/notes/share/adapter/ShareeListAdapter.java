@@ -14,7 +14,6 @@ import com.owncloud.android.lib.resources.shares.ShareType;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.niedermann.owncloud.notes.databinding.ItemAddPublicShareBinding;
 import it.niedermann.owncloud.notes.databinding.ItemInternalShareLinkBinding;
 import it.niedermann.owncloud.notes.databinding.ItemShareLinkShareBinding;
 import it.niedermann.owncloud.notes.databinding.ItemShareShareBinding;

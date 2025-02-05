@@ -18,7 +18,6 @@ import it.niedermann.owncloud.notes.branding.BrandingUtil
 import it.niedermann.owncloud.notes.databinding.ActivityNoteShareDetailBinding
 import it.niedermann.owncloud.notes.main.MainActivity
 import it.niedermann.owncloud.notes.persistence.entity.Note
-import it.niedermann.owncloud.notes.persistence.entity.ShareEntity
 import it.niedermann.owncloud.notes.share.dialog.ExpirationDatePickerDialogFragment
 import it.niedermann.owncloud.notes.share.helper.SharingMenuHelper
 import it.niedermann.owncloud.notes.share.model.ShareAttributesV1
