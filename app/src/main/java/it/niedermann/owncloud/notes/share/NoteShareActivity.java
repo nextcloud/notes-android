@@ -100,9 +100,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             try {
                 final var ssoAcc = SingleAccountHelper.getCurrentSingleSignOnAccount(NoteShareActivity.this);
                 repository = new ShareRepository(NoteShareActivity.this, ssoAcc);
-
-                // FIXME:
-                repository.getSharesForSpecificNote(note);
+                repository.getSharesForNotesAndSaveShareEntities();
 
                 runOnUiThread(() -> {
                     binding.sharesList.setAdapter(new ShareeListAdapter(this, new ArrayList<>(), this, account));
@@ -332,8 +330,8 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                 // to show share with users/groups info
                 List<OCShare> shares = new ArrayList<>();
 
-                if (note != null && note.getRemoteId() != null) {
-                    final var shareEntities = repository.getShareEntities(note.getRemoteId(), ssoAcc.name);
+                if (note != null) {
+                    final var shareEntities = repository.getShareEntities(note);
                     shareEntities.forEach(entity -> {
                         if (entity.getId() != null) {
                             final var share = repository.getShares(entity.getId());

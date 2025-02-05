@@ -38,7 +38,7 @@ interface ShareAPI {
         @Query("path") path: String,
         @Query("reshares") reshares: Boolean = true,
         @Query("subfiles") subfiles: Boolean = true
-    ): Call<Any>
+    ): LinkedTreeMap<String, Any?>?
 
     @DELETE("shares/{shareId}?format=json")
     fun removeShare(@Path("shareId") shareId: Long): Call<Any>
