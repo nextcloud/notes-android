@@ -203,7 +203,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
             if (response.isSuccessful) {
 
                 if (share.shareType == ShareType.PUBLIC_LINK) {
-                    note.setIsSharedViaLink(false)
+                    note.setIsShared(false)
                     updateNote(note)
                 }
 
