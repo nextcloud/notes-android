@@ -38,6 +38,7 @@ import it.niedermann.owncloud.notes.shared.model.Item;
                 @Index(name = "IDX_NOTE_ACCOUNTID", value = "accountId"),
                 @Index(name = "IDX_NOTE_CATEGORY", value = "category"),
                 @Index(name = "IDX_NOTE_FAVORITE", value = "favorite"),
+                @Index(name = "IDX_NOTE_IS_SHARED_VIA_LINK", value = "share_by_link"),
                 @Index(name = "IDX_NOTE_MODIFIED", value = "modified"),
                 @Index(name = "IDX_NOTE_REMOTEID", value = "remoteId"),
                 @Index(name = "IDX_NOTE_STATUS", value = "status")
@@ -82,6 +83,11 @@ public class Note implements Serializable, Item {
     private boolean favorite = false;
 
     @Expose
+    @ColumnInfo(defaultValue = "0", name = "share_by_link")
+    @SerializedName("share_by_link")
+    private boolean isSharedViaLink = false;
+
+    @Expose
     @Nullable
     @SerializedName("etag")
     private String eTag;
@@ -98,7 +104,7 @@ public class Note implements Serializable, Item {
     }
 
     @Ignore
-    public Note(@Nullable Long remoteId, @Nullable Calendar modified, @NonNull String title, @NonNull String content, @NonNull String category, boolean favorite, @Nullable String eTag) {
+    public Note(@Nullable Long remoteId, @Nullable Calendar modified, @NonNull String title, @NonNull String content, @NonNull String category, boolean favorite, @Nullable String eTag, boolean isSharedViaLink) {
         this.remoteId = remoteId;
         this.title = title;
         this.modified = modified;
@@ -106,11 +112,12 @@ public class Note implements Serializable, Item {
         this.favorite = favorite;
         this.category = category;
         this.eTag = eTag;
+        this.isSharedViaLink = isSharedViaLink;
     }
 
     @Ignore
-    public Note(long id, @Nullable Long remoteId, @Nullable Calendar modified, @NonNull String title, @NonNull String content, @NonNull String category, boolean favorite, @Nullable String etag, @NonNull DBStatus status, long accountId, @NonNull String excerpt, int scrollY) {
-        this(remoteId, modified, title, content, category, favorite, etag);
+    public Note(long id, @Nullable Long remoteId, @Nullable Calendar modified, @NonNull String title, @NonNull String content, @NonNull String category, boolean favorite, @Nullable String etag, @NonNull DBStatus status, long accountId, @NonNull String excerpt, int scrollY, boolean isSharedViaLink) {
+        this(remoteId, modified, title, content, category, favorite, etag, isSharedViaLink);
         this.id = id;
         this.status = status;
         this.accountId = accountId;
@@ -124,6 +131,14 @@ public class Note implements Serializable, Item {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public boolean isSharedViaLink() {
+        return isSharedViaLink;
+    }
+
+    public void setIsSharedViaLink(boolean value) {
+        this.isSharedViaLink = value;
     }
 
     @NonNull
@@ -230,6 +245,7 @@ public class Note implements Serializable, Item {
         if (id != note.id) return false;
         if (accountId != note.accountId) return false;
         if (favorite != note.favorite) return false;
+        if (isSharedViaLink != note.isSharedViaLink) return false;
         if (scrollY != note.scrollY) return false;
         if (!Objects.equals(remoteId, note.remoteId))
             return false;
@@ -254,6 +270,7 @@ public class Note implements Serializable, Item {
         result = 31 * result + (modified != null ? modified.hashCode() : 0);
         result = 31 * result + content.hashCode();
         result = 31 * result + (favorite ? 1 : 0);
+        result = 31 * result + (isSharedViaLink ? 1 : 0);
         result = 31 * result + (eTag != null ? eTag.hashCode() : 0);
         result = 31 * result + excerpt.hashCode();
         result = 31 * result + scrollY;
@@ -273,6 +290,7 @@ public class Note implements Serializable, Item {
                 ", modified=" + modified +
                 ", content='" + content + '\'' +
                 ", favorite=" + favorite +
+                ", share_by_link=" + isSharedViaLink +
                 ", eTag='" + eTag + '\'' +
                 ", excerpt='" + excerpt + '\'' +
                 ", scrollY=" + scrollY +

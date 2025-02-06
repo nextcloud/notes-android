@@ -278,6 +278,8 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             executorService.schedule(() -> {
                 final var result = repository.addShare(note, ShareType.PUBLIC_LINK, "", "false", "", 0, "");
                 if (result != null) {
+                    note.setIsSharedViaLink(true);
+                    repository.updateNote(note);
                     runOnUiThread(this::recreate);
                 }
             }, 0, TimeUnit.MICROSECONDS);
@@ -313,15 +315,9 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
     @Override
     public void copyLink(OCShare share) {
-        /*
-        if (file.isSharedViaLink()) {
-            if (TextUtils.isEmpty(share.getShareLink())) {
-                fileOperationsHelper.getFileWithLink(file, viewThemeUtils);
-            } else {
-                ClipboardUtil.copyToClipboard(this, share.getShareLink());
-            }
+        if (!note.isSharedViaLink()) {
+            return;
         }
-         */
 
         if (TextUtils.isEmpty(share.getShareLink())) {
             copyAndShareFileLink(share.getShareLink());
@@ -506,7 +502,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     @Override
     public void unShare(OCShare share) {
         executorService.schedule(() -> {
-            final var result = repository.removeShare(share.getId());
+            final var result = repository.removeShare(share, note);
 
             runOnUiThread(() -> {
                 if (result) {

@@ -194,15 +194,19 @@ class ShareRepository(private val applicationContext: Context, private val accou
         }
     }
 
-    fun removeShare(
-        shareId: Long
-    ): Boolean {
+    fun removeShare(share: OCShare, note: Note): Boolean {
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
 
         return try {
-            val call = shareAPI.removeShare(shareId)
+            val call = shareAPI.removeShare(share.id)
             val response = call.execute()
             if (response.isSuccessful) {
+
+                if (share.shareType == ShareType.PUBLIC_LINK) {
+                    note.setIsSharedViaLink(false)
+                    updateNote(note)
+                }
+
                 Log_OC.d(tag, "Share removed successfully.")
             } else {
                 Log_OC.d(tag, "Failed to remove share: ${response.errorBody()?.string()}")
@@ -231,6 +235,8 @@ class ShareRepository(private val applicationContext: Context, private val accou
            false
         }
     }
+
+    fun updateNote(note: Note) = notesRepository.updateNote(note)
 
     fun addShare(
         note: Note,
