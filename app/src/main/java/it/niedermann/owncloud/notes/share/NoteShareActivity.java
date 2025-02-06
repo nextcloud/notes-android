@@ -278,7 +278,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             executorService.schedule(() -> {
                 final var result = repository.addShare(note, ShareType.PUBLIC_LINK, "", "false", "", 0, "");
                 if (result != null) {
-                    note.setIsSharedViaLink(true);
+                    note.setIsShared(true);
                     repository.updateNote(note);
                     runOnUiThread(this::recreate);
                 }
@@ -315,7 +315,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
     @Override
     public void copyLink(OCShare share) {
-        if (!note.isSharedViaLink()) {
+        if (!note.isShared()) {
             return;
         }
 
