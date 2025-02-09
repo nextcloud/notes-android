@@ -52,7 +52,7 @@
     <string name="settings_font_size">Skriftstørrelse</string>
     <string name="settings_wifi_only">Synkronisér kun på Wi-Fi</string>
     <string name="settings_lock">App lås (beta)</string>
-    <string name="settings_lock_summary">Enheds legitimationsoplysninger</string>
+    <string name="settings_lock_summary">Enhedslegitimationsoplysninger</string>
     <string name="settings_background_sync">Synkronisering i baggrunden</string>
     <string name="settings_prevent_screen_capture">Forhindr skærmoptagelse</string>
     <string name="settings_gridview">Grid visning</string>
