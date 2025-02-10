@@ -53,6 +53,7 @@ import it.niedermann.owncloud.notes.share.dialog.NoteShareActivityShareItemActio
 import it.niedermann.owncloud.notes.share.dialog.QuickSharingPermissionsBottomSheetDialog;
 import it.niedermann.owncloud.notes.share.dialog.ShareLinkToDialog;
 import it.niedermann.owncloud.notes.share.dialog.SharePasswordDialogFragment;
+import it.niedermann.owncloud.notes.share.helper.AvatarLoader;
 import it.niedermann.owncloud.notes.share.helper.UsersAndGroupsSearchProvider;
 import it.niedermann.owncloud.notes.share.listener.NoteShareItemAction;
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
@@ -253,6 +254,22 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     private void setShareWithYou() {
         if (accountOwnsFile()) {
             binding.sharedWithYouContainer.setVisibility(View.GONE);
+        } else {
+            // TODO: ADD
+            binding.sharedWithYouUsername.setText(
+                    String.format(getString(R.string.note_share_activity_shared_with_you), "file.getOwnerDisplayName()"));
+            AvatarLoader.INSTANCE.load(this,binding.sharedWithYouAvatar,account);
+            binding.sharedWithYouAvatar.setVisibility(View.VISIBLE);
+
+            // TODO: ADD
+            String note = "file.getNote()";
+
+            if (!TextUtils.isEmpty(note)) {
+                binding.sharedWithYouNote.setText(note);
+                binding.sharedWithYouNoteContainer.setVisibility(View.VISIBLE);
+            } else {
+                binding.sharedWithYouNoteContainer.setVisibility(View.GONE);
+            }
         }
     }
 
