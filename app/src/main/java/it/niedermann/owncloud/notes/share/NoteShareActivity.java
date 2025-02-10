@@ -29,7 +29,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.google.android.material.snackbar.Snackbar;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.owncloud.android.lib.common.utils.Log_OC;
-import com.owncloud.android.lib.resources.shares.CreateShareRemoteOperation;
 import com.owncloud.android.lib.resources.shares.OCShare;
 import com.owncloud.android.lib.resources.shares.ShareType;
 
@@ -57,7 +56,6 @@ import it.niedermann.owncloud.notes.share.helper.AvatarLoader;
 import it.niedermann.owncloud.notes.share.helper.UsersAndGroupsSearchProvider;
 import it.niedermann.owncloud.notes.share.listener.NoteShareItemAction;
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
-import it.niedermann.owncloud.notes.share.model.CreateShareRequest;
 import it.niedermann.owncloud.notes.share.model.UsersAndGroupsSearchConfig;
 import it.niedermann.owncloud.notes.share.repository.ShareRepository;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
@@ -103,7 +101,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             throw new IllegalArgumentException("Account cannot be null");
         }
 
-        executorService.schedule(() -> {
+        executorService.submit(() -> {
             try {
                 final var ssoAcc = SingleAccountHelper.getCurrentSingleSignOnAccount(NoteShareActivity.this);
                 repository = new ShareRepository(NoteShareActivity.this, ssoAcc);
@@ -123,7 +121,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-        }, 0, TimeUnit.MICROSECONDS);
+        });
     }
 
     @Override
@@ -280,7 +278,8 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             return;
         }
 
-        showShareLinkDialog();
+        final var link = createInternalLink();
+        showShareLinkDialog(link);
     }
 
     @Override
@@ -294,9 +293,14 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             // password enforced by server, request to the user before trying to create
             requestPasswordForShareViaLink(true, capabilities.getAskForOptionalPassword());
         } else {
-            executorService.schedule(() -> {
-                repository.addShare(note, ShareType.PUBLIC_LINK, "", "false", "", 0, "");
-            }, 0, TimeUnit.MICROSECONDS);
+            executorService.submit(() -> {
+                final var result = repository.addShare(note, ShareType.PUBLIC_LINK, "", "false", "", 0, "");
+                if (result != null) {
+                    note.setIsShared(true);
+                    repository.updateNote(note);
+                    runOnUiThread(this::recreate);
+                }
+            });
         }
     }
 
@@ -310,9 +314,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
     }
 
-    private void showShareLinkDialog() {
-        String link = createInternalLink();
-
+    private void showShareLinkDialog(String link) {
         Intent intentToShareLink = new Intent(Intent.ACTION_SEND);
 
         intentToShareLink.putExtra(Intent.EXTRA_TEXT, link);
@@ -331,15 +333,9 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
     @Override
     public void copyLink(OCShare share) {
-        /*
-        if (file.isSharedViaLink()) {
-            if (TextUtils.isEmpty(share.getShareLink())) {
-                fileOperationsHelper.getFileWithLink(file, viewThemeUtils);
-            } else {
-                ClipboardUtil.copyToClipboard(this, share.getShareLink());
-            }
+        if (!note.isShared()) {
+            return;
         }
-         */
 
         if (TextUtils.isEmpty(share.getShareLink())) {
             copyAndShareFileLink(share.getShareLink());
@@ -352,7 +348,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         ClipboardUtil.copyToClipboard(this, link, false);
         Snackbar snackbar = Snackbar
                 .make(this.findViewById(android.R.id.content), R.string.clipboard_text_copied, Snackbar.LENGTH_LONG)
-                .setAction(R.string.share, v -> showShareLinkDialog());
+                .setAction(R.string.share, v -> showShareLinkDialog(link));
         snackbar.show();
     }
 
@@ -382,7 +378,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     }
 
     public void refreshSharesFromDB() {
-        executorService.schedule(() -> {
+        executorService.submit(() -> {
             try {
                 ShareeListAdapter adapter = (ShareeListAdapter) binding.sharesList.getAdapter();
 
@@ -414,7 +410,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             } catch (Exception e) {
                 Log_OC.d(TAG, "Exception while refreshSharesFromDB: " + e);
             }
-        }, 0, TimeUnit.MICROSECONDS);
+        });
     }
 
     private void addPublicShares(ShareeListAdapter adapter) {
@@ -522,8 +518,8 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
     @Override
     public void unShare(OCShare share) {
-        executorService.schedule(() -> {
-            final var result = repository.removeShare(share.getId());
+        executorService.submit(() -> {
+            final var result = repository.removeShare(share, note);
 
             runOnUiThread(() -> {
                 if (result) {
@@ -537,7 +533,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                     DisplayUtils.showSnackMessage(NoteShareActivity.this, getString(R.string.failed_the_remove_share));
                 }
             });
-        }, 0, TimeUnit.MICROSECONDS);
+        });
     }
 
     @Override
