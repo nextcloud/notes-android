@@ -77,7 +77,6 @@
         app:icon="@drawable/ic_share_white_24dp"
         app:iconGravity="start" />
 
-    <!-- // TODO: Implement later ... -->
     <LinearLayout
         android:id="@+id/shared_with_you_container"
         android:layout_width="match_parent"
