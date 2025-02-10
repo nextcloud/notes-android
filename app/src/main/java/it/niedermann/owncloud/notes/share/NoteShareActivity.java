@@ -241,20 +241,24 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     }
 
     private boolean accountOwnsFile() {
-        String displayName = account.getDisplayName();
-        return TextUtils.isEmpty(displayName) || account.getAccountName().split("@")[0].equalsIgnoreCase(displayName);
+        if (shares.isEmpty()) {
+            return true;
+        }
+
+        final var share = shares.get(0);
+        String ownerDisplayName = share.getOwnerDisplayName();
+        return TextUtils.isEmpty(ownerDisplayName) || account.getAccountName().split("@")[0].equalsIgnoreCase(ownerDisplayName);
     }
 
     private void setShareWithYou() {
         if (accountOwnsFile()) {
             binding.sharedWithYouContainer.setVisibility(View.GONE);
         } else {
-            final var remoteId = note.getRemoteId();
-            if (remoteId == null) {
+            if (shares.isEmpty()) {
                 return;
             }
 
-            final var share = shares.get(remoteId.intValue());
+            final var share = shares.get(0);
 
             binding.sharedWithYouUsername.setText(
                     String.format(getString(R.string.note_share_activity_shared_with_you), share.getOwnerDisplayName()));
