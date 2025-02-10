@@ -82,6 +82,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     private Account account;
     private ShareRepository repository;
     private Capabilities capabilities;
+    private final List<OCShare> shares = new ArrayList<>();
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,7 +116,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                     binding.pickContactEmailBtn.setOnClickListener(v -> checkContactPermission());
                     binding.btnShareButton.setOnClickListener(v -> ShareUtil.openShareDialog(this, note.getTitle(), note.getContent()));
 
-                    setupView();
+                    setupSearchView((SearchManager) getSystemService(Context.SEARCH_SERVICE), getComponentName());
                     refreshCapabilitiesFromDB();
                     refreshSharesFromDB();
                 });
@@ -135,11 +136,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     public void onStop() {
         super.onStop();
         UsersAndGroupsSearchConfig.INSTANCE.reset();
-    }
-
-    private void setupView() {
-        setShareWithYou();
-        setupSearchView((SearchManager) getSystemService(Context.SEARCH_SERVICE), getComponentName());
     }
 
     private void setupSearchView(@Nullable SearchManager searchManager, ComponentName componentName) {
@@ -255,17 +251,22 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         if (accountOwnsFile()) {
             binding.sharedWithYouContainer.setVisibility(View.GONE);
         } else {
-            // TODO: ADD
+            final var remoteId = note.getRemoteId();
+            if (remoteId == null) {
+                return;
+            }
+
+            final var share = shares.get(remoteId.intValue());
+
             binding.sharedWithYouUsername.setText(
-                    String.format(getString(R.string.note_share_activity_shared_with_you), "file.getOwnerDisplayName()"));
-            AvatarLoader.INSTANCE.load(this,binding.sharedWithYouAvatar,account);
+                    String.format(getString(R.string.note_share_activity_shared_with_you), share.getOwnerDisplayName()));
+            AvatarLoader.INSTANCE.load(this, binding.sharedWithYouAvatar, account);
             binding.sharedWithYouAvatar.setVisibility(View.VISIBLE);
 
-            // TODO: ADD
-            String note = "file.getNote()";
+            String description = share.getNote();
 
-            if (!TextUtils.isEmpty(note)) {
-                binding.sharedWithYouNote.setText(note);
+            if (!TextUtils.isEmpty(description)) {
+                binding.sharedWithYouNote.setText(description);
                 binding.sharedWithYouNoteContainer.setVisibility(View.VISIBLE);
             } else {
                 binding.sharedWithYouNoteContainer.setVisibility(View.GONE);
@@ -393,8 +394,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                 adapter.getShares().clear();
 
                 // to show share with users/groups info
-                List<OCShare> shares = new ArrayList<>();
-
                 if (note != null) {
                     final var shareEntities = repository.getShareEntitiesForSpecificNote(note);
                     shareEntities.forEach(entity -> {
@@ -410,6 +409,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                 runOnUiThread(() -> {
                     adapter.addShares(shares);
                     addPublicShares(adapter);
+                    setShareWithYou();
                 });
             } catch (Exception e) {
                 Log_OC.d(TAG, "Exception while refreshSharesFromDB: " + e);
