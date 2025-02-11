@@ -8,18 +8,28 @@ package it.niedermann.owncloud.notes.branding;
 
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.readBrandMainColorLiveData;
 
+import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Menu;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.R;
+
+import it.niedermann.owncloud.notes.shared.util.extensions.AppCompatActivityExtensionsKt;
 
 public abstract class BrandedActivity extends AppCompatActivity implements Branded {
 
     @ColorInt
     protected int colorAccent;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        AppCompatActivityExtensionsKt.adjustUIForAPILevel35(this);
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     protected void onStart() {
