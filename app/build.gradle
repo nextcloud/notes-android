@@ -11,13 +11,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
-    compileSdk 34
+    compileSdk 35
     namespace 'it.niedermann.owncloud.notes'
 
     defaultConfig {
         applicationId "it.niedermann.owncloud.notes"
         minSdk 24
-        targetSdk 34
+        targetSdk 35
         versionCode 40040000
         versionName "4.4.0 Alpha1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
