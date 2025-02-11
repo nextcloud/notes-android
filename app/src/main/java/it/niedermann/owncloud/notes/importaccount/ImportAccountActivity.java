@@ -40,6 +40,7 @@ import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.SyncWorker;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
+import it.niedermann.owncloud.notes.shared.util.extensions.AppCompatActivityExtensionsKt;
 
 public class ImportAccountActivity extends AppCompatActivity {
 
@@ -53,6 +54,7 @@ public class ImportAccountActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AppCompatActivityExtensionsKt.adjustUIForAPILevel35(this);
         super.onCreate(savedInstanceState);
 
         Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));

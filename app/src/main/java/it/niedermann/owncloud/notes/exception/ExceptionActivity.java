@@ -23,6 +23,7 @@ import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ActivityExceptionBinding;
 import it.niedermann.owncloud.notes.exception.tips.TipsAdapter;
+import it.niedermann.owncloud.notes.shared.util.extensions.AppCompatActivityExtensionsKt;
 
 public class ExceptionActivity extends AppCompatActivity {
 
@@ -30,6 +31,7 @@ public class ExceptionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        AppCompatActivityExtensionsKt.adjustUIForAPILevel35(this);
         super.onCreate(savedInstanceState);
 
         final var binding = ActivityExceptionBinding.inflate(getLayoutInflater());
