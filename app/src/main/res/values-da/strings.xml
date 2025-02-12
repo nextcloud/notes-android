@@ -253,6 +253,8 @@
     <string name="formatting_help_structured_documents_title">Strukturerede dokumenter</string>
     <string name="formatting_help_structured_documents_body_1">SNogle gange er det nyttigt at have forskellige niveauer af overskrifter til at strukturere dine dokumenter. Start linjer med en %1$s for at oprette overskrifter. Flere %2$s i træk angiver mindre overskriftsstørrelser.</string>
     <string name="formatting_help_structured_documents_body_2">Dette er en overskrift på tredje niveau</string>
+    <string name="formatting_help_structured_documents_body_3">Du kan anvende en %1$s hele vejen op til %2$s seks for forskellige overskriftsstørrelser.</string>
+    <string name="formatting_help_structured_documents_body_4">Hvis du ønsker at citere nogen, så anvende %1$s karakteren før linjen:</string>
     <string name="formatting_help_structured_documents_body_5">Fantasi er vigtigere end viden. Viden er begrænset. Fantasi omkranser verden.</string>
     <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
 
@@ -267,6 +269,8 @@
     <!-- Table cell value of a sample table -->
     <string name="formatting_help_tables_value">Værdi %1d</string>
 
+    <string name="formatting_help_images_body_1">Links skal være enten fuldstændige URLer startende med en protokol og domæne eller absolutte stier, startende med en %1$s karakter.</string>
+    <string name="formatting_help_images_body_2">For at bekræfte Markdown formatet, så anvend venligst escape karakterer i billede URL\'en. Det betyder for eksempel, erstat mellemrum med %1$s i URL\'en.</string>
     <string name="formatting_help_images_title">Billeder</string>
     <string name="formatting_help_images_alt">Fancy billede</string>
 
@@ -281,6 +285,10 @@
     <string name="no_other_accounts">Du har ikke konfigureret andre konti endnu.</string>
     <string name="choose_account">Vælg konto</string>
     <string name="context_based_formatting">Kontekstbaseret formatering popover</string>
+    <plurals name="remove_account_message">
+        <item quantity="one">Fjernelse af kontoen %1$s vil også slette ikke fortrydelige ikke  synkroniseret ændring.</item>
+        <item quantity="other">Fjernelse af kontoen %1$s vil også slette ikke fortrydelige %2$d ikke synkroniserede ændringer.</item>
+    </plurals>
     <string name="remove_account">Fjern %1$s</string>
 
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Du skal være koblet på en internetforbindelse for at tilføje en konto.</string>
