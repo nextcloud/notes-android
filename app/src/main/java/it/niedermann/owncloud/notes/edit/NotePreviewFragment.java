@@ -141,6 +141,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
             changedText = newContent.toString();
             saveNote(null);
         });
+        contentLoaded = true;
     }
 
     protected void registerInternalNoteLinkHandler() {
