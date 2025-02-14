@@ -38,7 +38,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
         return notesPathResponse.body()
     }
 
-    private fun getNotePath(note: Note): String? {
+    fun getNotePath(note: Note): String? {
         val notesPathResponseResult = getNotesPathResponseResult() ?: return null
         val notesPath = notesPathResponseResult.notesPath
         val notesSuffix = notesPathResponseResult.fileSuffix
@@ -75,6 +75,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
                     val displayNameFileOwner = map?.get("displayname_file_owner") as? String
                     val uidOwner = map?.get("uid_owner") as? String
                     val displayNameOwner = map?.get("displayname_owner") as? String
+                    val url = map?.get("url") as? String
 
                     id?.toInt()?.let {
                         val entity = ShareEntity(
@@ -87,7 +88,8 @@ class ShareRepository(private val applicationContext: Context, private val accou
                             uid_file_owner = uidFileOwner,
                             displayname_file_owner = displayNameFileOwner,
                             uid_owner = uidOwner,
-                            displayname_owner = displayNameOwner
+                            displayname_owner = displayNameOwner,
+                            url = url
                         )
 
                         entities.add(entity)
@@ -192,15 +194,19 @@ class ShareRepository(private val applicationContext: Context, private val accou
         }
     }
 
-    fun removeShare(
-        shareId: Long
-    ): Boolean {
+    fun removeShare(share: OCShare, note: Note): Boolean {
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
 
         return try {
-            val call = shareAPI.removeShare(shareId)
+            val call = shareAPI.removeShare(share.id)
             val response = call.execute()
             if (response.isSuccessful) {
+
+                if (share.shareType == ShareType.PUBLIC_LINK) {
+                    note.setIsShared(false)
+                    updateNote(note)
+                }
+
                 Log_OC.d(tag, "Share removed successfully.")
             } else {
                 Log_OC.d(tag, "Failed to remove share: ${response.errorBody()?.string()}")
@@ -229,6 +235,8 @@ class ShareRepository(private val applicationContext: Context, private val accou
            false
         }
     }
+
+    fun updateNote(note: Note) = notesRepository.updateNote(note)
 
     fun addShare(
         note: Note,
