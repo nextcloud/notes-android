@@ -52,6 +52,7 @@ public class CapabilitiesWorker extends Worker {
         for (final var account : repo.getAccounts()) {
             try {
                 final var ssoAccount = AccountImporter.getSingleSignOnAccount(getApplicationContext(), account.getAccountName());
+
                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
                 final var capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, account.getCapabilitiesETag(), ApiProvider.getInstance());
                 repo.updateCapabilitiesETag(account.getId(), capabilities.getETag());

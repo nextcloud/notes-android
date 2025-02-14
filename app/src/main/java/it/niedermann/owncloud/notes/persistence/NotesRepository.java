@@ -60,6 +60,7 @@ import it.niedermann.owncloud.notes.persistence.entity.CategoryOptions;
 import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
+import it.niedermann.owncloud.notes.persistence.entity.ShareEntity;
 import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
@@ -224,6 +225,8 @@ public class NotesRepository {
     // Accounts
     @AnyThread
     public LiveData<ImportStatus> addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities, @Nullable String displayName, @NonNull IResponseCallback<Account> callback) {
+        db.getCapabilitiesDao().insert(capabilities);
+
         final var account = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account(url, username, accountName, displayName, capabilities)));
         if (account == null) {
             callback.onError(new Exception("Could not read created account."));
@@ -282,6 +285,10 @@ public class NotesRepository {
         }
 
         db.getAccountDao().deleteAccount(account);
+    }
+
+    public Capabilities getCapabilities() {
+        return db.getCapabilitiesDao().getCapabilities();
     }
 
     public Account getAccountByName(String accountName) {
@@ -958,5 +965,13 @@ public class NotesRepository {
 
     public void updateDisplayName(long id, @Nullable String displayName) {
         db.getAccountDao().updateDisplayName(id, displayName);
+    }
+
+    public void addShareEntities(List<ShareEntity> entities) {
+        db.getShareDao().addShareEntities(entities);
+    }
+
+    public List<ShareEntity> getShareEntities(String path) {
+        return db.getShareDao().getShareEntities(path);
     }
 }
