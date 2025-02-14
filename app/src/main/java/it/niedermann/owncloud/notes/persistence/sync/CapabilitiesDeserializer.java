@@ -43,20 +43,6 @@ public class CapabilitiesDeserializer implements JsonDeserializer<Capabilities> 
     private static final String CAPABILITIES_FILES_SHARING = "files_sharing";
     private static final String VERSION = "version";
 
-    /*
-    if (capabilities != null && (capabilities.getFilesSharingPublicPasswordEnforced().isTrue() ||
-            capabilities.getFilesSharingPublicAskForOptionalPassword().isTrue())) {
-            // password enforced by server, request to the user before trying to create
-            requestPasswordForShareViaLink(true,
-                                           capabilities.getFilesSharingPublicAskForOptionalPassword().isTrue());
-
-        } else {
-            // create without password if not enforced by server or we don't know if enforced;
-            fileOperationsHelper.shareFileViaPublicShare(file, null);
-        }
-
-        password -> {JsonObject@32644} "{"enforced":false,"askForOptionalPassword":false}"
-     */
     @Override
     public Capabilities deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         final var response = new Capabilities();
