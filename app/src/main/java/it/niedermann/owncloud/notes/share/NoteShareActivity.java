@@ -14,6 +14,7 @@ import android.provider.ContactsContract;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -114,7 +115,12 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                     binding.pickContactEmailBtn.setOnClickListener(v -> checkContactPermission());
                     binding.btnShareButton.setOnClickListener(v -> ShareUtil.openShareDialog(this, note.getTitle(), note.getContent()));
 
-                    setupSearchView((SearchManager) getSystemService(Context.SEARCH_SERVICE), getComponentName());
+                    if (note.getReadonly()) {
+                        setupReadOnlySearchView();
+                    } else {
+                        setupSearchView((SearchManager) getSystemService(Context.SEARCH_SERVICE), getComponentName());
+                    }
+
                     refreshCapabilitiesFromDB();
                     refreshSharesFromDB();
                 });
@@ -134,6 +140,24 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     public void onStop() {
         super.onStop();
         UsersAndGroupsSearchConfig.INSTANCE.reset();
+    }
+
+    private void disableSearchView(View view) {
+        view.setEnabled(false);
+
+        if (view instanceof ViewGroup viewGroup) {
+            for (int i = 0; i < viewGroup.getChildCount(); i++) {
+                disableSearchView(viewGroup.getChildAt(i));
+            }
+        }
+    }
+
+    private void setupReadOnlySearchView() {
+        binding.searchView.setIconifiedByDefault(false);
+        binding.searchView.setQueryHint(getResources().getString(R.string.note_share_activity_resharing_not_allowed));
+        binding.searchView.setInputType(InputType.TYPE_NULL);
+        binding.pickContactEmailBtn.setVisibility(View.GONE);
+        disableSearchView(binding.searchView);
     }
 
     private void setupSearchView(@Nullable SearchManager searchManager, ComponentName componentName) {
@@ -182,24 +206,26 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                     }
 
                     final var isFederationShareAllowed = capabilities.getFederationShare();
-                    try(var cursor = provider.searchForUsersOrGroups(newText, isFederationShareAllowed)) {
+                    try {
+                        var cursor = provider.searchForUsersOrGroups(newText, isFederationShareAllowed);
+
+                        if (cursor == null || cursor.getCount() == 0) {
+                            return;
+                        }
+
                         runOnUiThread(() -> {
-                            {
-                                if (cursor == null || cursor.getCount() == 0) {
-                                    return;
-                                }
-
-                                if (binding.searchView.getVisibility() == View.VISIBLE) {
-                                    suggestionAdapter.swapCursor(cursor);
-                                }
-
-                                binding.progressBar.setVisibility(View.GONE);
+                            if (binding.searchView.getVisibility() == View.VISIBLE) {
+                                suggestionAdapter.swapCursor(cursor);
                             }
+
+                            binding.progressBar.setVisibility(View.GONE);
                         });
+
                     } catch (Exception e) {
                         Log_OC.d(TAG, "Exception setupSearchView.onQueryTextChange: " + e);
                         runOnUiThread(() -> binding.progressBar.setVisibility(View.GONE));
                     }
+
                 }, SEARCH_DELAY_MS, TimeUnit.MILLISECONDS);
 
                 return false;
@@ -500,7 +526,8 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     }
 
     private boolean isReshareForbidden(OCShare share) {
-        return false;
+        return ShareType.FEDERATED == share.getShareType() ||
+                capabilities != null && !capabilities.isReSharingAllowed();
     }
 
     @VisibleForTesting
