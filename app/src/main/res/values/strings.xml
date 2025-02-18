@@ -70,6 +70,7 @@
     <string name="note_share_activity_could_not_retrieve_url">Could not retrieve URL</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" has been shared with you</string>
     <string name="note_share_activity_contact_no_permission">Contact permission is required.</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">You are not allowed to create a public share.</string>
 
     <!-- NoteShareDetailActivity -->
     <string name="note_share_detail_activity_advanced_settings">Advanced Settings</string>
