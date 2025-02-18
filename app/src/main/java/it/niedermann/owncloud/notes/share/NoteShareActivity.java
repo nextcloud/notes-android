@@ -499,32 +499,35 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         String[] projection = {ContactsContract.CommonDataKinds.Email.ADDRESS};
 
         Cursor cursor = getContentResolver().query(contactUri, projection, null, null, null);
-
-        if (cursor != null) {
-            if (cursor.moveToFirst()) {
-                // The contact has only one email address, use it.
-                int columnIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Email.ADDRESS);
-                if (columnIndex != -1) {
-                    // Use the email address as needed.
-                    // email variable contains the selected contact's email address.
-                    String email = cursor.getString(columnIndex);
-                    binding.searchView.post(() -> {
-                        binding.searchView.setQuery(email, false);
-                        binding.searchView.requestFocus();
-                    });
-                } else {
-                    DisplayUtils.showSnackMessage(this, getString(R.string.email_pick_failed));
-                    Log_OC.e(NoteShareActivity.class.getSimpleName(), "Failed to pick email address.");
-                }
-            } else {
-                DisplayUtils.showSnackMessage(this, getString(R.string.email_pick_failed));
-                Log_OC.e(NoteShareActivity.class.getSimpleName(), "Failed to pick email address as no Email found.");
-            }
-            cursor.close();
-        } else {
+        if (cursor == null) {
             DisplayUtils.showSnackMessage(this, getString(R.string.email_pick_failed));
-            Log_OC.e(NoteShareActivity.class.getSimpleName(), "Failed to pick email address as Cursor is null.");
+            Log_OC.e(TAG, "Failed to pick email address as Cursor is null.");
+            return;
         }
+
+        if (!cursor.moveToFirst()) {
+            DisplayUtils.showSnackMessage(this, getString(R.string.email_pick_failed));
+            Log_OC.e(TAG, "Failed to pick email address as no Email found.");
+            return;
+        }
+
+        // The contact has only one email address, use it.
+        int columnIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Email.ADDRESS);
+        if (columnIndex == -1) {
+            DisplayUtils.showSnackMessage(this, getString(R.string.email_pick_failed));
+            Log_OC.e(TAG, "Failed to pick email address.");
+            return;
+        }
+
+        // Use the email address as needed.
+        // email variable contains the selected contact's email address.
+        String email = cursor.getString(columnIndex);
+        binding.searchView.post(() -> {
+            binding.searchView.setQuery(email, false);
+            binding.searchView.requestFocus();
+        });
+
+        cursor.close();
     }
 
     private boolean containsNoNewPublicShare(List<OCShare> shares) {
