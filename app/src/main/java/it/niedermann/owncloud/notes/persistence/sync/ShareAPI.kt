@@ -57,4 +57,10 @@ interface ShareAPI {
         @Path("shareId") shareId: Long,
         @Body request: UpdateSharePermissionRequest
     ): Call<OcsResponse<CreateShareResponse>>
+
+    @GET("shares/?format=json")
+    fun getShareFromNote(
+        @Query("path") path: String,
+        @Query("shared_with_me") sharedWithMe: Boolean = true
+    ): Call<OcsResponse<List<CreateShareResponse>>>
 }

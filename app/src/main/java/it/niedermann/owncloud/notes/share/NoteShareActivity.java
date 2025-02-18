@@ -421,15 +421,20 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
                 // to show share with users/groups info
                 if (note != null) {
+
+                    // get shares from local DB
                     final var shareEntities = repository.getShareEntitiesForSpecificNote(note);
                     shareEntities.forEach(entity -> {
                         if (entity.getId() != null) {
-                            final var share = repository.getShares(entity.getId());
-                            if (share != null) {
-                                shares.addAll(share);
-                            }
+                            addShares(entity.getId());
                         }
                     });
+
+                    // get shares from remote
+                    final var shares = repository.getShareFromNote(note);
+                    if (shares != null) {
+                        shares.forEach(entity -> addShares(entity.getId()));
+                    }
                 }
 
                 runOnUiThread(() -> {
@@ -441,6 +446,17 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                 Log_OC.d(TAG, "Exception while refreshSharesFromDB: " + e);
             }
         });
+    }
+
+    private void addShares(long id) {
+        final var result = repository.getShares(id);
+        if (result != null) {
+            result.forEach(ocShare -> {
+                if (!shares.contains(ocShare)) {
+                    shares.add(ocShare);
+                }
+            });
+        }
     }
 
     private void addPublicShares(ShareeListAdapter adapter) {

@@ -38,7 +38,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
         return notesPathResponse.body()
     }
 
-    fun getNotePath(note: Note): String? {
+    private fun getNotePath(note: Note): String? {
         val notesPathResponseResult = getNotesPathResponseResult() ?: return null
         val notesPath = notesPathResponseResult.notesPath
         val notesSuffix = notesPathResponseResult.fileSuffix
@@ -191,6 +191,28 @@ class ShareRepository(private val applicationContext: Context, private val accou
         } catch (e: Exception) {
             Log_OC.d(tag, "Exception while send-email: $e")
             false
+        }
+    }
+
+    fun getShareFromNote(note: Note): List<OCShare>? {
+        val shareAPI = apiProvider.getShareAPI(applicationContext, account)
+        val path = getNotePath(note) ?: return null
+        val call = shareAPI.getShareFromNote(path)
+        val response = call.execute()
+
+        return try {
+            if (response.isSuccessful) {
+                val body = response.body()
+                Log_OC.d(tag, "Response successful: $body")
+                body?.ocs?.data?.toOCShare()
+            } else {
+                val errorBody = response.errorBody()?.string()
+                Log_OC.d(tag, "Response failed: $errorBody")
+                null
+            }
+        } catch (e: Exception) {
+            Log_OC.d(tag, "Exception while getting share from note: ", e)
+            null
         }
     }
 
