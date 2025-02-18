@@ -18,4 +18,5 @@ data class ShareEntity(
     val displayname_file_owner: String? = null,
     val uid_owner: String? = null,
     val displayname_owner: String? = null,
+    val url: String? = null
 )

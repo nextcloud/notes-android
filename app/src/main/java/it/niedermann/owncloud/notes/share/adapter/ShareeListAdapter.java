@@ -14,6 +14,7 @@ import com.owncloud.android.lib.resources.shares.ShareType;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.niedermann.owncloud.notes.databinding.ItemAddPublicShareBinding;
 import it.niedermann.owncloud.notes.databinding.ItemInternalShareLinkBinding;
 import it.niedermann.owncloud.notes.databinding.ItemShareLinkShareBinding;
 import it.niedermann.owncloud.notes.databinding.ItemShareShareBinding;
@@ -62,7 +63,6 @@ public class ShareeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                                 false),
                         activity);
             }
-            /*
              case NEW_PUBLIC_LINK -> {
                 return new NewLinkShareViewHolder(
                         ItemAddPublicShareBinding.inflate(LayoutInflater.from(activity),
@@ -70,8 +70,6 @@ public class ShareeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                                 false)
                 );
             }
-             */
-
             case INTERNAL -> {
                 return new InternalShareViewHolder(
                         ItemInternalShareLinkBinding.inflate(LayoutInflater.from(activity), parent, false),

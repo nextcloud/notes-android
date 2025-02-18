@@ -69,6 +69,16 @@ public class CapabilitiesDeserializer implements JsonDeserializer<Capabilities> 
                 final var outgoing = federation.get("outgoing");
 
                 response.setFederationShare(outgoing.getAsBoolean());
+
+                final var publicObject = filesSharing.getAsJsonObject("public");
+                final var password = publicObject.getAsJsonObject("password");
+                final var enforced = password.getAsJsonPrimitive("enforced");
+                final var askForOptionalPassword = password.getAsJsonPrimitive("askForOptionalPassword");
+                final var isReSharingAllowed = filesSharing.getAsJsonPrimitive("resharing");
+
+                response.setPublicPasswordEnforced(enforced.getAsBoolean());
+                response.setAskForOptionalPassword(askForOptionalPassword.getAsBoolean());
+                response.setReSharingAllowed(isReSharingAllowed.getAsBoolean());
             }
 
             if (capabilities.has(CAPABILITIES_NOTES)) {

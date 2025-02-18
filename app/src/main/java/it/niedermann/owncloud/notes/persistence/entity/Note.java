@@ -38,6 +38,8 @@ import it.niedermann.owncloud.notes.shared.model.Item;
                 @Index(name = "IDX_NOTE_ACCOUNTID", value = "accountId"),
                 @Index(name = "IDX_NOTE_CATEGORY", value = "category"),
                 @Index(name = "IDX_NOTE_FAVORITE", value = "favorite"),
+                @Index(name = "IDX_NOTE_IS_SHARED", value = "isShared"),
+                @Index(name = "IDX_READONLY", value = "readonly"),
                 @Index(name = "IDX_NOTE_MODIFIED", value = "modified"),
                 @Index(name = "IDX_NOTE_REMOTEID", value = "remoteId"),
                 @Index(name = "IDX_NOTE_STATUS", value = "status")
@@ -82,6 +84,14 @@ public class Note implements Serializable, Item {
     private boolean favorite = false;
 
     @Expose
+    @ColumnInfo(defaultValue = "0")
+    private boolean isShared = false;
+
+    @Expose
+    @ColumnInfo(defaultValue = "0")
+    private boolean readonly = false;
+
+    @Expose
     @Nullable
     @SerializedName("etag")
     private String eTag;
@@ -98,7 +108,7 @@ public class Note implements Serializable, Item {
     }
 
     @Ignore
-    public Note(@Nullable Long remoteId, @Nullable Calendar modified, @NonNull String title, @NonNull String content, @NonNull String category, boolean favorite, @Nullable String eTag) {
+    public Note(@Nullable Long remoteId, @Nullable Calendar modified, @NonNull String title, @NonNull String content, @NonNull String category, boolean favorite, @Nullable String eTag, boolean isShared, boolean readonly) {
         this.remoteId = remoteId;
         this.title = title;
         this.modified = modified;
@@ -106,11 +116,12 @@ public class Note implements Serializable, Item {
         this.favorite = favorite;
         this.category = category;
         this.eTag = eTag;
+        this.isShared = isShared;
     }
 
     @Ignore
-    public Note(long id, @Nullable Long remoteId, @Nullable Calendar modified, @NonNull String title, @NonNull String content, @NonNull String category, boolean favorite, @Nullable String etag, @NonNull DBStatus status, long accountId, @NonNull String excerpt, int scrollY) {
-        this(remoteId, modified, title, content, category, favorite, etag);
+    public Note(long id, @Nullable Long remoteId, @Nullable Calendar modified, @NonNull String title, @NonNull String content, @NonNull String category, boolean favorite, @Nullable String etag, @NonNull DBStatus status, long accountId, @NonNull String excerpt, int scrollY, boolean isShared, boolean readonly) {
+        this(remoteId, modified, title, content, category, favorite, etag, isShared, readonly);
         this.id = id;
         this.status = status;
         this.accountId = accountId;
@@ -124,6 +135,14 @@ public class Note implements Serializable, Item {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public boolean isShared() {
+        return isShared;
+    }
+
+    public void setIsShared(boolean value) {
+        this.isShared = value;
     }
 
     @NonNull
@@ -188,6 +207,14 @@ public class Note implements Serializable, Item {
         this.content = content;
     }
 
+    public boolean getReadonly() {
+        return readonly;
+    }
+
+    public void setReadonly(boolean value) {
+       readonly = value;
+    }
+
     public boolean getFavorite() {
         return favorite;
     }
@@ -230,6 +257,7 @@ public class Note implements Serializable, Item {
         if (id != note.id) return false;
         if (accountId != note.accountId) return false;
         if (favorite != note.favorite) return false;
+        if (isShared != note.isShared) return false;
         if (scrollY != note.scrollY) return false;
         if (!Objects.equals(remoteId, note.remoteId))
             return false;
@@ -254,6 +282,7 @@ public class Note implements Serializable, Item {
         result = 31 * result + (modified != null ? modified.hashCode() : 0);
         result = 31 * result + content.hashCode();
         result = 31 * result + (favorite ? 1 : 0);
+        result = 31 * result + (isShared ? 1 : 0);
         result = 31 * result + (eTag != null ? eTag.hashCode() : 0);
         result = 31 * result + excerpt.hashCode();
         result = 31 * result + scrollY;
@@ -273,6 +302,7 @@ public class Note implements Serializable, Item {
                 ", modified=" + modified +
                 ", content='" + content + '\'' +
                 ", favorite=" + favorite +
+                ", isShared=" + isShared +
                 ", eTag='" + eTag + '\'' +
                 ", excerpt='" + excerpt + '\'' +
                 ", scrollY=" + scrollY +

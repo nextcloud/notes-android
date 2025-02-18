@@ -122,4 +122,16 @@ data class CreateShareResponse(
 
     @Expose
     val attributes: Any?,
+
+    @Expose
+    @SerializedName("url")
+    val url: String?,
+
+    @Expose
+    @SerializedName("token")
+    val token: String?,
+
+    @Expose
+    @SerializedName("password")
+    val password: String?
 )
