@@ -60,6 +60,7 @@ import it.niedermann.owncloud.notes.persistence.entity.CategoryOptions;
 import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
+import it.niedermann.owncloud.notes.persistence.entity.ShareEntity;
 import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
@@ -224,6 +225,8 @@ public class NotesRepository {
     // Accounts
     @AnyThread
     public LiveData<ImportStatus> addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities, @Nullable String displayName, @NonNull IResponseCallback<Account> callback) {
+        db.getCapabilitiesDao().insert(capabilities);
+
         final var account = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account(url, username, accountName, displayName, capabilities)));
         if (account == null) {
             callback.onError(new Exception("Could not read created account."));
@@ -282,6 +285,10 @@ public class NotesRepository {
         }
 
         db.getAccountDao().deleteAccount(account);
+    }
+
+    public Capabilities getCapabilities() {
+        return db.getCapabilitiesDao().getCapabilities();
     }
 
     public Account getAccountByName(String accountName) {
@@ -473,7 +480,7 @@ public class NotesRepository {
     @NonNull
     @MainThread
     public LiveData<Note> addNoteAndSync(Account account, Note note) {
-        final var entity = new Note(0, null, note.getModified(), note.getTitle(), note.getContent(), note.getCategory(), note.getFavorite(), note.getETag(), DBStatus.LOCAL_EDITED, account.getId(), generateNoteExcerpt(note.getContent(), note.getTitle()), 0);
+        final var entity = new Note(0, null, note.getModified(), note.getTitle(), note.getContent(), note.getCategory(), note.getFavorite(), note.getETag(), DBStatus.LOCAL_EDITED, account.getId(), generateNoteExcerpt(note.getContent(), note.getTitle()), 0, note.isShared(), note.getReadonly());
         final var ret = new MutableLiveData<Note>();
         executor.submit(() -> ret.postValue(addNote(account.getId(), entity)));
         return map(ret, newNote -> {
@@ -501,7 +508,7 @@ public class NotesRepository {
 
     @MainThread
     public LiveData<Note> moveNoteToAnotherAccount(Account account, @NonNull Note note) {
-        final var fullNote = new Note(null, note.getModified(), note.getTitle(), note.getContent(), note.getCategory(), note.getFavorite(), null);
+        final var fullNote = new Note(null, note.getModified(), note.getTitle(), note.getContent(), note.getCategory(), note.getFavorite(), null, note.isShared(), note.getReadonly());
         fullNote.setStatus(DBStatus.LOCAL_EDITED);
         deleteNoteAndSync(account, note.getId());
         return addNoteAndSync(account, fullNote);
@@ -563,7 +570,7 @@ public class NotesRepository {
         // https://github.com/nextcloud/notes-android/issues/1198
         @Nullable final Long remoteId = db.getNoteDao().getRemoteId(oldNote.getId());
         if (newContent == null) {
-            newNote = new Note(oldNote.getId(), remoteId, oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.getCategory(), oldNote.getFavorite(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), oldNote.getExcerpt(), oldNote.getScrollY());
+            newNote = new Note(oldNote.getId(), remoteId, oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.getCategory(), oldNote.getFavorite(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), oldNote.getExcerpt(), oldNote.getScrollY(), oldNote.isShared(), oldNote.getReadonly());
         } else {
             final String title;
             if (newTitle != null) {
@@ -577,7 +584,7 @@ public class NotesRepository {
                     title = oldNote.getTitle();
                 }
             }
-            newNote = new Note(oldNote.getId(), remoteId, Calendar.getInstance(), title, newContent, oldNote.getCategory(), oldNote.getFavorite(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), generateNoteExcerpt(newContent, title), oldNote.getScrollY());
+            newNote = new Note(oldNote.getId(), remoteId, Calendar.getInstance(), title, newContent, oldNote.getCategory(), oldNote.getFavorite(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), generateNoteExcerpt(newContent, title), oldNote.getScrollY(), oldNote.isShared(), oldNote.getReadonly());
         }
         int rows = db.getNoteDao().updateNote(newNote);
         // if data was changed, set new status and schedule sync (with callback); otherwise invoke callback directly.
@@ -958,5 +965,17 @@ public class NotesRepository {
 
     public void updateDisplayName(long id, @Nullable String displayName) {
         db.getAccountDao().updateDisplayName(id, displayName);
+    }
+
+    public void addShareEntities(List<ShareEntity> entities) {
+        db.getShareDao().addShareEntities(entities);
+    }
+
+    public List<ShareEntity> getShareEntities(String path) {
+        return db.getShareDao().getShareEntities(path);
+    }
+
+    public void updateNote(Note note) {
+        db.getNoteDao().updateNote(note);
     }
 }

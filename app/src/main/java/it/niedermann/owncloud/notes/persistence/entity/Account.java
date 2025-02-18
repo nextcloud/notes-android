@@ -7,6 +7,7 @@
 package it.niedermann.owncloud.notes.persistence.entity;
 
 import android.graphics.Color;
+import android.net.Uri;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -91,6 +92,10 @@ public class Account implements Serializable {
     @NonNull
     public String getUrl() {
         return url;
+    }
+
+    public String getAvatarUrl() {
+        return url + "/index.php/avatar/" + Uri.encode(userName) + "/64";
     }
 
     public void setUrl(@NonNull String url) {
