@@ -487,6 +487,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     private void pickContactEmail() {
         Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Email.CONTENT_URI);
 
+        // FIXME:
         if (intent.resolveActivity(getPackageManager()) != null) {
             onContactSelectionResultLauncher.launch(intent);
         } else {
