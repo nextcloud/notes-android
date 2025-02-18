@@ -39,6 +39,7 @@ import it.niedermann.owncloud.notes.shared.model.Item;
                 @Index(name = "IDX_NOTE_CATEGORY", value = "category"),
                 @Index(name = "IDX_NOTE_FAVORITE", value = "favorite"),
                 @Index(name = "IDX_NOTE_IS_SHARED", value = "isShared"),
+                @Index(name = "IDX_READONLY", value = "readonly"),
                 @Index(name = "IDX_NOTE_MODIFIED", value = "modified"),
                 @Index(name = "IDX_NOTE_REMOTEID", value = "remoteId"),
                 @Index(name = "IDX_NOTE_STATUS", value = "status")
@@ -87,6 +88,10 @@ public class Note implements Serializable, Item {
     private boolean isShared = false;
 
     @Expose
+    @ColumnInfo(defaultValue = "0")
+    private boolean readonly = false;
+
+    @Expose
     @Nullable
     @SerializedName("etag")
     private String eTag;
@@ -103,7 +108,7 @@ public class Note implements Serializable, Item {
     }
 
     @Ignore
-    public Note(@Nullable Long remoteId, @Nullable Calendar modified, @NonNull String title, @NonNull String content, @NonNull String category, boolean favorite, @Nullable String eTag, boolean isShared) {
+    public Note(@Nullable Long remoteId, @Nullable Calendar modified, @NonNull String title, @NonNull String content, @NonNull String category, boolean favorite, @Nullable String eTag, boolean isShared, boolean readonly) {
         this.remoteId = remoteId;
         this.title = title;
         this.modified = modified;
@@ -115,8 +120,8 @@ public class Note implements Serializable, Item {
     }
 
     @Ignore
-    public Note(long id, @Nullable Long remoteId, @Nullable Calendar modified, @NonNull String title, @NonNull String content, @NonNull String category, boolean favorite, @Nullable String etag, @NonNull DBStatus status, long accountId, @NonNull String excerpt, int scrollY, boolean isShared) {
-        this(remoteId, modified, title, content, category, favorite, etag, isShared);
+    public Note(long id, @Nullable Long remoteId, @Nullable Calendar modified, @NonNull String title, @NonNull String content, @NonNull String category, boolean favorite, @Nullable String etag, @NonNull DBStatus status, long accountId, @NonNull String excerpt, int scrollY, boolean isShared, boolean readonly) {
+        this(remoteId, modified, title, content, category, favorite, etag, isShared, readonly);
         this.id = id;
         this.status = status;
         this.accountId = accountId;
@@ -200,6 +205,14 @@ public class Note implements Serializable, Item {
 
     public void setContent(@NonNull String content) {
         this.content = content;
+    }
+
+    public boolean getReadonly() {
+        return readonly;
+    }
+
+    public void setReadonly(boolean value) {
+       readonly = value;
     }
 
     public boolean getFavorite() {

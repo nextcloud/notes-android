@@ -122,7 +122,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                             if (content == null) {
                                 throw new IllegalArgumentException(PARAM_NOTE_ID + " is not given, argument " + PARAM_NEWNOTE + " is missing and " + PARAM_CONTENT + " is missing.");
                             } else {
-                                note = new Note(-1, null, Calendar.getInstance(), NoteUtil.generateNoteTitle(content), content, getString(R.string.category_readonly), false, null, DBStatus.VOID, -1, "", 0, false);
+                                note = new Note(-1, null, Calendar.getInstance(), NoteUtil.generateNoteTitle(content), content, getString(R.string.category_readonly), false, null, DBStatus.VOID, -1, "", 0, false, false);
                                 requireActivity().runOnUiThread(() -> onNoteLoaded(note));
                                 requireActivity().invalidateOptionsMenu();
                             }

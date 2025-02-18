@@ -41,6 +41,15 @@ public class Capabilities implements Serializable {
 
     private boolean publicPasswordEnforced;
     private boolean askForOptionalPassword;
+    private boolean isReSharingAllowed;
+
+    public boolean isReSharingAllowed() {
+        return isReSharingAllowed;
+    }
+
+    public void setReSharingAllowed(boolean value) {
+        this.isReSharingAllowed = value;
+    }
 
     public boolean getPublicPasswordEnforced() {
         return publicPasswordEnforced;
