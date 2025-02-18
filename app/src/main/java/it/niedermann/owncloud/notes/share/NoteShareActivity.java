@@ -121,7 +121,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                         setupSearchView((SearchManager) getSystemService(Context.SEARCH_SERVICE), getComponentName());
                     }
 
-                    refreshCapabilitiesFromDB();
                     refreshSharesFromDB();
                 });
             } catch (Exception e) {
@@ -344,6 +343,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         dialog.show(getSupportFragmentManager(), SharePasswordDialogFragment.PASSWORD_FRAGMENT);
     }
 
+    // TODO:
     @Override
     public void createSecureFileDrop() {
 
@@ -405,11 +405,9 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         dialog.show(getSupportFragmentManager(), SharePasswordDialogFragment.PASSWORD_FRAGMENT);
     }
 
+    // TODO:
     @Override
     public void showProfileBottomSheet(Account account, String shareWith) {
-    }
-
-    public void refreshCapabilitiesFromDB() {
     }
 
     public void refreshSharesFromDB() {
@@ -588,6 +586,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         });
     }
 
+    // TODO:
     @Override
     public void sendLink(OCShare share) {
     }
