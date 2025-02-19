@@ -46,6 +46,7 @@
     <string name="listview_updated_last_month">El mes passat</string>
 
     <string name="settings_note_mode">Mode de visualització per a les notes</string>
+    <string name="settings_note_mode_new">Comportament de l\'obertura de notes</string>
     <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title">Tipus de lletra de mida fixa</string>
     <string name="settings_font_size">Mida de la lletra</string>
@@ -55,6 +56,8 @@
     <string name="settings_background_sync">Sincronització en segon pla</string>
     <string name="settings_prevent_screen_capture">Impedeix la captura de la pantalla</string>
     <string name="settings_gridview">Visualització de quadrícula</string>
+    <string name="settings_enable_direct_edit">Edició directa</string>
+    <string name="settings_enable_direct_edit_summary">Si es desactiva, l\'editor avançat quedarà amagat.</string>
     <string name="settings_keep_screen_on">Mantén la pantalla encesa</string>
     <string name="settings_keep_screen_on_summary">Quan visualitzi o editi una nota</string>
 
@@ -68,6 +71,7 @@
     <string name="about_version">Actualment, teniu la versió %1$s</string>
     <string name="about_maintainer_title">Manteniment</string>
     <string name="about_developers_title">Desenvolupament</string>
+    <string name="about_developers_original_author">autor original</string>
     <string name="about_translators_title">Traducció</string>
     <string name="about_translators_transifex">Comunitat del Nextcloud a %1$s</string>
     <string name="about_testers_title">Verificació</string>
@@ -183,6 +187,9 @@
     <string name="action_formatting_help">Format</string>
 
 
+    <string name="noteMode_plain_edit">Mode d\'edició sense format</string>
+    <string name="noteMode_plain_preview">Previsualització sense format</string>
+    <string name="noteMode_rich_edit">Mode d\'edició enriquit</string>
     <string name="noteMode_remember_last">Recorda la darrera selecció</string>
 
     <string-array name="fontSize_entries">
@@ -304,5 +311,7 @@
     <string name="progress_import_indeterminate">S\'estan important les notes…</string>
     <string name="progress_import">S\'està important la nota %1$d/%2$d…</string>
     <string name="account_imported">S\'ha importat el compte.</string>
+    <string name="direct_editing_error">S\'ha produït un error en carregar l\'edició enriquida</string>
+    <string name="switch_to_plain_editing">Canvia a edició sense format</string>
     <string name="action_back">Torna</string>
     </resources>
