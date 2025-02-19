@@ -35,7 +35,7 @@ public class LinkShareViewHolder extends BrandedViewHolder {
     }
 
     public void bind(OCShare publicShare, ShareeListAdapterListener listener) {
-        if (ShareType.EMAIL == publicShare.getShareType()) {
+        if (publicShare.getShareType() != null && ShareType.EMAIL == publicShare.getShareType()) {
             binding.name.setText(publicShare.getSharedWithDisplayName());
             binding.icon.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(),
                     R.drawable.ic_email,

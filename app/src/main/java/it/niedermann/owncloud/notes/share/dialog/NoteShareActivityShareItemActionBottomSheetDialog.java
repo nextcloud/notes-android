@@ -50,7 +50,7 @@ public class NoteShareActivityShareItemActionBottomSheetDialog extends BrandedBo
     }
 
     private void updateUI() {
-        if (ocShare.getShareType() == ShareType.PUBLIC_LINK) {
+        if (ocShare.getShareType() != null && ocShare.getShareType() == ShareType.PUBLIC_LINK) {
             binding.menuShareAddAnotherLink.setVisibility(View.VISIBLE);
             binding.menuShareSendLink.setVisibility(View.VISIBLE);
         } else {

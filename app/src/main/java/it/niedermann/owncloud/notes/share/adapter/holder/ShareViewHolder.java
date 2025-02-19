@@ -42,8 +42,12 @@ public class ShareViewHolder extends RecyclerView.ViewHolder {
         String accountName = account.getDisplayName();
         String name = share.getSharedWithDisplayName();
         binding.icon.setTag(null);
+        final var shareType = share.getShareType();
+        if (shareType == null) {
+            return;
+        }
 
-        switch (share.getShareType()) {
+        switch (shareType) {
             case GROUP:
                 name = context.getString(R.string.share_group_clarification, name);
                 // viewThemeUtils.files.createAvatar(share.getShareType(), binding.icon, context);
@@ -74,6 +78,11 @@ public class ShareViewHolder extends RecyclerView.ViewHolder {
 
         binding.name.setText(name);
 
+        if (accountName == null) {
+            binding.overflowMenu.setVisibility(View.GONE);
+            return;
+        }
+
         if (accountName.equalsIgnoreCase(share.getShareWith()) || accountName.equalsIgnoreCase(share.getUserId())) {
             binding.overflowMenu.setVisibility(View.VISIBLE);
 
@@ -99,7 +108,7 @@ public class ShareViewHolder extends RecyclerView.ViewHolder {
 
     private void setImage(ImageView avatar, String name, @DrawableRes int fallback) {
         try {
-            // avatar.setImageDrawable(TextDrawable.createNamedAvatar(name, avatarRadiusDimension));
+            AvatarLoader.INSTANCE.load(context, avatar, account);
         } catch (StringIndexOutOfBoundsException e) {
             avatar.setImageResource(fallback);
         }

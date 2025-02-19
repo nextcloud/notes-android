@@ -534,7 +534,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
     private boolean containsNoNewPublicShare(List<OCShare> shares) {
         for (OCShare share : shares) {
-            if (share.getShareType() == ShareType.NEW_PUBLIC_LINK) {
+            if (share.getShareType() != null && share.getShareType() == ShareType.NEW_PUBLIC_LINK) {
                 return false;
             }
         }
@@ -550,7 +550,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     }
 
     private boolean isReshareForbidden(OCShare share) {
-        return ShareType.FEDERATED == share.getShareType() ||
+        return (share.getShareType() != null && ShareType.FEDERATED == share.getShareType()) ||
                 capabilities != null && !capabilities.isReSharingAllowed();
     }
 

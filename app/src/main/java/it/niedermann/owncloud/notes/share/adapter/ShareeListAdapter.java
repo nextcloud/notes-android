@@ -150,10 +150,12 @@ public class ShareeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         List<OCShare> users = new ArrayList<>();
 
         for (OCShare share : shares) {
-            if (ShareType.PUBLIC_LINK == share.getShareType() || ShareType.EMAIL == share.getShareType()) {
-                links.add(share);
-            } else if (share.getShareType() != ShareType.INTERNAL) {
-                users.add(share);
+            if (share.getShareType()  != null) {
+                if (ShareType.PUBLIC_LINK == share.getShareType() || ShareType.EMAIL == share.getShareType()) {
+                    links.add(share);
+                } else if (share.getShareType() != ShareType.INTERNAL) {
+                    users.add(share);
+                }
             }
         }
 
