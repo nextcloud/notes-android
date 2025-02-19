@@ -72,7 +72,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     public static final String ARG_ACCOUNT = "ACCOUNT";
     public static final String FTAG_CHOOSER_DIALOG = "CHOOSER_DIALOG";
 
-    private final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+    private ScheduledExecutorService executorService;
     private Future<?> future;
     private static final long SEARCH_DELAY_MS = 500;
 
@@ -86,6 +86,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        executorService = Executors.newSingleThreadScheduledExecutor();
         binding = ActivityNoteShareBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         initializeArguments();
