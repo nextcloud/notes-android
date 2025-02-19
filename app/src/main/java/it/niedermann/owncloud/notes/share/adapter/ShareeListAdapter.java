@@ -30,7 +30,7 @@ import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
  */
 public class ShareeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private Account account;
+    private final Account account;
     private final ShareeListAdapterListener listener;
     private final Activity activity;
     private List<OCShare> shares;
@@ -49,6 +49,10 @@ public class ShareeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public int getItemViewType(int position) {
+        if (shares == null) {
+            return 0;
+        }
+
         if (position < 0 || position >= shares.size()) {
             return 0;
         }
