@@ -32,6 +32,8 @@
     <string name="menu_favorite">Favorite</string>
     <string name="menu_preview">Preview</string>
     <string name="menu_share">Share</string>
+    <string name="common_loading">Loading…</string>
+
 
     <string name="search_in_category">Search in %1$s</string>
     <string name="search_in_all">Search all notes</string>

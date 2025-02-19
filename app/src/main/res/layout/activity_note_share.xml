@@ -16,7 +16,35 @@
     android:paddingTop="@dimen/spacer_1hx">
 
     <LinearLayout
+        android:id="@+id/loadingLayout"
+        tools:visibility="gone"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/spacer_1x"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/spacer_1x"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="@string/common_loading"
+            android:textSize="@dimen/note_font_size_large" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/search_container"
+        tools:visibility="visible"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -81,6 +109,8 @@
         android:id="@+id/shared_with_you_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        tools:visibility="visible"
+        android:visibility="gone"
         android:layout_marginBottom="@dimen/spacer_1x"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/spacer_2x"
@@ -138,6 +168,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/sharesList"
+        tools:visibility="visible"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@drawable/divider"

@@ -111,6 +111,8 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                 repository.getSharesForNotesAndSaveShareEntities();
 
                 runOnUiThread(() -> {
+                    binding.searchContainer.setVisibility(View.VISIBLE);
+                    binding.sharesList.setVisibility(View.VISIBLE);
                     binding.sharesList.setAdapter(new ShareeListAdapter(this, new ArrayList<>(), this, account));
                     binding.sharesList.setLayoutManager(new LinearLayoutManager(this));
                     binding.pickContactEmailBtn.setOnClickListener(v -> checkContactPermission());
@@ -123,6 +125,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                     }
 
                     refreshSharesFromDB();
+                    binding.loadingLayout.setVisibility(View.GONE);
                 });
             } catch (Exception e) {
                 throw new RuntimeException(e);
