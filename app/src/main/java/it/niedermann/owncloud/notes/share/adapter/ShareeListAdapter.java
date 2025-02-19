@@ -49,7 +49,21 @@ public class ShareeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public int getItemViewType(int position) {
-        return shares.get(position).getShareType().getValue();
+        if (position < 0 || position >= shares.size()) {
+            return 0;
+        }
+
+        final var share = shares.get(position);
+        if (share == null) {
+            return 0;
+        }
+
+        final var shareType = share.getShareType();
+        if (shareType == null) {
+            return 0;
+        }
+
+        return shareType.getValue();
     }
 
     @NonNull

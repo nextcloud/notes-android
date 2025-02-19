@@ -15,6 +15,7 @@ import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.generateNoteExcerpt;
 import static it.niedermann.owncloud.notes.widget.notelist.NoteListWidget.updateNoteListWidgets;
 import static it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget.updateSingleNoteWidgets;
+
 import android.accounts.NetworkErrorException;
 import android.content.Context;
 import android.content.Intent;
@@ -25,8 +26,11 @@ import android.graphics.drawable.Icon;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
+
 import androidx.annotation.AnyThread;
 import androidx.annotation.ColorInt;
 import androidx.annotation.MainThread;
@@ -37,11 +41,13 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.preference.PreferenceManager;
+
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -51,6 +57,7 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
 import it.niedermann.android.sharedpreferences.SharedPreferenceIntLiveData;
 import it.niedermann.owncloud.notes.BuildConfig;
 import it.niedermann.owncloud.notes.R;
@@ -100,6 +107,7 @@ public class NotesRepository {
     private boolean syncOnlyOnWifi;
     private final MutableLiveData<Boolean> syncStatus = new MutableLiveData<>(false);
     private final MutableLiveData<ArrayList<Throwable>> syncErrors = new MutableLiveData<>();
+    private final Handler mainHandler = new Handler(Looper.getMainLooper());
 
     private final Observer<? super ConnectionLiveData.ConnectionType> syncObserver = (Observer<ConnectionLiveData.ConnectionType>) connectionType -> {
         observeNetworkStatus(connectionType);
@@ -158,7 +166,7 @@ public class NotesRepository {
         this.syncOnlyOnWifiKey = context.getApplicationContext().getResources().getString(R.string.pref_key_wifi_only);
         this.connectionLiveData = new ConnectionLiveData(context);
 
-        connectionLiveData.observeForever(syncObserver);
+        mainHandler.post(() -> connectionLiveData.observeForever(syncObserver));
 
         final var prefs = PreferenceManager.getDefaultSharedPreferences(this.context);
         prefs.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
@@ -218,7 +226,7 @@ public class NotesRepository {
 
     @Override
     protected void finalize() throws Throwable {
-        connectionLiveData.removeObserver(syncObserver);
+        mainHandler.post(() -> connectionLiveData.removeObserver(syncObserver));
         super.finalize();
     }
 
