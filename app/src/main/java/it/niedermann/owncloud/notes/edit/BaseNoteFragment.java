@@ -156,6 +156,17 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     @Override
     public void onResume() {
         super.onResume();
+
+        if (note == null) {
+            Log.e(TAG, "note is null, onResume");
+            return;
+        }
+
+        if (listener == null) {
+            Log.e(TAG, "listener is null, onResume");
+            return;
+        }
+
         listener.onNoteUpdated(note);
     }
 
@@ -203,6 +214,11 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     }
 
     private void prepareFavoriteOption(MenuItem item) {
+        if (note == null) {
+            Log.e(TAG, "note is null, prepareFavoriteOption");
+            return;
+        }
+
         item.setIcon(note.getFavorite() ? R.drawable.ic_star_white_24dp : R.drawable.ic_star_border_white_24dp);
         item.setChecked(note.getFavorite());
 
@@ -301,6 +317,11 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     }
 
     public void onCloseNote() {
+        if (note == null) {
+            Log.e(TAG, "note is null, onCloseNote");
+            return;
+        }
+
         if (!titleModified && originalNote == null && getContent().isEmpty()) {
             repo.deleteNoteAndSync(localAccount, note.getId());
         }
@@ -313,23 +334,29 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
      */
     protected void saveNote(@Nullable ISyncCallback callback) {
         Log.d(TAG, "saveData()");
-        if (note != null) {
-            final var newContent = getContent();
-            if (note.getContent().equals(newContent)) {
-                if (note.getScrollY() != originalScrollY) {
-                    Log.v(TAG, "... only saving new scroll state, since content did not change");
-                    repo.updateScrollY(note.getId(), note.getScrollY());
-                } else {
-                    Log.v(TAG, "... not saving, since nothing has changed");
-                }
+        if (note == null) {
+            Log.e(TAG, "note is null, saveNote");
+            return;
+        }
+
+        if (listener == null) {
+            Log.e(TAG, "listener is null, saveNote");
+            return;
+        }
+
+        final var newContent = getContent();
+        if (note.getContent().equals(newContent)) {
+            if (note.getScrollY() != originalScrollY) {
+                Log.v(TAG, "... only saving new scroll state, since content did not change");
+                repo.updateScrollY(note.getId(), note.getScrollY());
             } else {
-                // FIXME requires database queries on main thread!
-                note = repo.updateNoteAndSync(localAccount, note, newContent, null, callback);
-                listener.onNoteUpdated(note);
-                requireActivity().invalidateOptionsMenu();
+                Log.v(TAG, "... not saving, since nothing has changed");
             }
         } else {
-            Log.e(TAG, "note is null");
+            // FIXME requires database queries on main thread!
+            note = repo.updateNoteAndSync(localAccount, note, newContent, null, callback);
+            listener.onNoteUpdated(note);
+            requireActivity().invalidateOptionsMenu();
         }
     }
 
@@ -368,6 +395,16 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
 
     @Override
     public void onCategoryChosen(String category) {
+        if (note == null) {
+            Log.e(TAG, "note is null, onCategoryChosen");
+            return;
+        }
+
+        if (listener == null) {
+            Log.e(TAG, "listener is null, onCategoryChosen");
+            return;
+        }
+
         repo.setCategory(localAccount, note.getId(), category);
         note.setCategory(category);
         listener.onNoteUpdated(note);
@@ -375,6 +412,16 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
 
     @Override
     public void onTitleEdited(String newTitle) {
+        if (note == null) {
+            Log.e(TAG, "note is null, onTitleEdited");
+            return;
+        }
+
+        if (listener == null) {
+            Log.e(TAG, "listener is null, onTitleEdited");
+            return;
+        }
+
         titleModified = true;
         note.setTitle(newTitle);
         executor.submit(() -> {
@@ -384,6 +431,16 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     }
 
     public void moveNote(Account account) {
+        if (note == null) {
+            Log.e(TAG, "note is null, moveNote");
+            return;
+        }
+
+        if (listener == null) {
+            Log.e(TAG, "listener is null, moveNote");
+            return;
+        }
+
         final var moveLiveData = repo.moveNoteToAnotherAccount(account, note);
         moveLiveData.observe(this, (v) -> moveLiveData.removeObservers(this));
         listener.close();
