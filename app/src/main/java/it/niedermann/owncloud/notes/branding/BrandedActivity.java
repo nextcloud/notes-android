@@ -17,8 +17,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.R;
+import com.nextcloud.android.common.ui.util.extensions.AppCompatActivityExtensionsKt;
 
-import it.niedermann.owncloud.notes.shared.util.extensions.AppCompatActivityExtensionsKt;
 
 public abstract class BrandedActivity extends AppCompatActivity implements Branded {
 
