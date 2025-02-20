@@ -13,9 +13,12 @@
 
     <color name="primary">#121212</color>
     <color name="accent">#f5f5f5</color>
+    <color name="text_color">#E3E3E3</color>
 
     <color name="cursorHandles">#eee5e5ee</color>
     <color name="defaultTextHighlightBackground">#55eeeeff</color>
+    <color name="secondary_text_color">#A5A5A5</color>
+    <color name="bg_fallback_highlight">#737373</color>
 
     <color name="bg_highlighted">#2a2a2a</color>
     <color name="bg_normal">@color/primary</color>
@@ -32,4 +35,7 @@
 
     <color name="widget_background">#dd000000</color>
     <color name="widget_foreground">#d8d8d8</color>
+
+    <color name="nc_grey">#222222</color>
+    <color name="icon_on_nc_grey">#ffffff</color>
 </resources>

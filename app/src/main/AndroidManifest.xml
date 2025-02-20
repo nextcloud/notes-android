@@ -11,7 +11,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="com.owncloud.android.providers.PERMISSION" />
     <queries>
         <package android:name="com.nextcloud.client" />
         <package android:name="com.nextcloud.android.beta" />
@@ -48,8 +49,20 @@
         </activity>
 
         <activity
+            android:name=".share.NoteShareActivity" />
+
+        <activity
+            android:name=".share.NoteShareDetailActivity" />
+
+        <activity
             android:name=".importaccount.ImportAccountActivity"
             android:label="@string/add_account" />
+
+        <activity
+            android:name=".shared.util.clipboard.CopyToClipboardActivity"
+            android:exported="false"
+            android:icon="@drawable/shared_via_link"
+            android:label="@string/copy_link" />
 
         <activity
             android:name=".AppendToNoteActivity"
