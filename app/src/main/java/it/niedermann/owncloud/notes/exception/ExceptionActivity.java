@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.nextcloud.android.common.ui.util.extensions.AppCompatActivityExtensionsKt;
+
 import java.util.Collections;
 
 import it.niedermann.android.util.ClipboardUtil;
@@ -23,7 +25,6 @@ import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ActivityExceptionBinding;
 import it.niedermann.owncloud.notes.exception.tips.TipsAdapter;
-import it.niedermann.owncloud.notes.shared.util.extensions.AppCompatActivityExtensionsKt;
 
 public class ExceptionActivity extends AppCompatActivity {
 
