@@ -18,6 +18,7 @@ import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.share.helper.AvatarLoader;
 import it.niedermann.owncloud.notes.share.helper.SharingMenuHelper;
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
+import it.niedermann.owncloud.notes.shared.util.FilesSpecificViewThemeUtils;
 
 public class ShareViewHolder extends RecyclerView.ViewHolder {
     private ItemShareShareBinding binding;
@@ -37,8 +38,7 @@ public class ShareViewHolder extends RecyclerView.ViewHolder {
         this.context = context;
     }
 
-    public void bind(OCShare share,
-                     ShareeListAdapterListener listener) {
+    public void bind(OCShare share, ShareeListAdapterListener listener) {
         String accountName = account.getDisplayName();
         String name = share.getSharedWithDisplayName();
         binding.icon.setTag(null);
@@ -47,17 +47,19 @@ public class ShareViewHolder extends RecyclerView.ViewHolder {
             return;
         }
 
+        final var viewThemeUtils = FilesSpecificViewThemeUtils.INSTANCE;
+
         switch (shareType) {
             case GROUP:
                 name = context.getString(R.string.share_group_clarification, name);
-                // viewThemeUtils.files.createAvatar(share.getShareType(), binding.icon, context);
+                viewThemeUtils.createAvatar(share.getShareType(), binding.icon, context);
                 break;
             case ROOM:
                 name = context.getString(R.string.share_room_clarification, name);
-                // viewThemeUtils.files.createAvatar(share.getShareType(), binding.icon, context);
+                viewThemeUtils.createAvatar(share.getShareType(), binding.icon, context);
                 break;
             case CIRCLE:
-                // viewThemeUtils.files.createAvatar(share.getShareType(), binding.icon, context);
+                viewThemeUtils.createAvatar(share.getShareType(), binding.icon, context);
                 break;
             case FEDERATED:
                 name = context.getString(R.string.share_remote_clarification, name);

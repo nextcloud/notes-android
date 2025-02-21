@@ -111,6 +111,7 @@ public class ShareeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         final OCShare share = shares.get(position);
 
+
         if (holder instanceof LinkShareViewHolder publicShareViewHolder) {
             publicShareViewHolder.bind(share, listener);
         } else if (holder instanceof InternalShareViewHolder internalShareViewHolder) {
