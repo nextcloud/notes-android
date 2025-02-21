@@ -21,7 +21,7 @@ fun List<CreateShareResponse>.toOCShare(): List<OCShare> {
             shareLink =  response.url
             isPasswordProtected = !response.password.isNullOrEmpty()
             note = response.note
-            isHideFileDownload = response.hideDownload > 0
+            isHideFileDownload = (response.hideDownload == 1L)
             label = response.label
             isHasPreview = response.hasPreview
             mimetype = response.mimetype
