@@ -9,12 +9,7 @@ fun List<CreateShareResponse>.toOCShare(): List<OCShare> {
             id = response.id.toLongOrNull() ?: -1L
             fileSource = response.fileSource
             itemSource = response.itemSource
-            shareType = when (response.shareType) {
-                0L -> ShareType.USER
-                1L -> ShareType.GROUP
-                3L -> ShareType.PUBLIC_LINK
-                else -> null
-            }
+            shareType = ShareType.fromValue(response.shareType.toInt())
             shareWith = response.shareWith
             path = response.path
             permissions = response.permissions.toInt()
