@@ -16,7 +16,7 @@
     <string name="action_trashbin">Slettede noter</string>
     <string name="action_search">Søg</string>
     <string name="action_sorting_method">Sorteringsmetode</string>
-    <string name="simple_cancel">Annullér</string>
+    <string name="simple_cancel">Annuller</string>
     <string name="simple_switch">Byt rundt</string>
     <string name="simple_edit">Rediger</string>
     <string name="simple_remove">Fjern</string>
@@ -50,7 +50,7 @@
     <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title">Monospace font</string>
     <string name="settings_font_size">Skriftstørrelse</string>
-    <string name="settings_wifi_only">Synkronisér kun på Wi-Fi</string>
+    <string name="settings_wifi_only">Synkroniser kun på Wi-Fi</string>
     <string name="settings_lock">App lås (beta)</string>
     <string name="settings_lock_summary">Enhedslegitimationsoplysninger</string>
     <string name="settings_background_sync">Synkronisering i baggrunden</string>
@@ -104,12 +104,12 @@
     <string name="shortcut_create_long">Opret en ny note</string>
 
     <string name="pref_value_font_normal">Normal</string>
-    <string name="pref_value_wifi_and_mobile">Synkronisér på Wi-Fi og mobil data</string>
-    <string name="pref_value_lock">Password beskyttelse</string>
+    <string name="pref_value_wifi_and_mobile">Synkroniser på Wi-Fi og mobil data</string>
+    <string name="pref_value_lock">Adgangskodebeskyttelse</string>
 
     <string name="simple_error">Fejl</string>
     <string name="simple_close">Luk</string>
-    <string name="simple_copy">Kopiér</string>
+    <string name="simple_copy">Kopier</string>
     <string name="simple_exception">Undtagelse</string>
     <string name="pin_to_homescreen">Fastgør til hjemmeskærm</string>
     <string name="note_has_been_deleted">Denne note er blevet slettet</string>
@@ -133,8 +133,8 @@
     <string name="category_key">Nøgle</string>
     <!-- This represents a category where one can place passwords and credentials -->
     <string name="category_keys">Nøgler</string>
-    <string name="category_password">Password</string>
-    <string name="category_passwords">Passwords</string>
+    <string name="category_password">Adgangskode</string>
+    <string name="category_passwords">Adgangskoder</string>
     <string name="category_credentials">Legitimationsoplysninger</string>
     <string name="category_game">Spil</string>
     <string name="category_games">Spil</string>
@@ -179,11 +179,11 @@
     <string name="shared_text_empty">Den delte tekst var tom</string>
     <string name="append_to_note">Tilføj til note</string>
     <string name="change_note_title">Skift titel på note</string>
-    <string name="menu_edit_title">Redigér titel</string>
+    <string name="menu_edit_title">Rediger titel</string>
     <string name="simple_security">Sikkerhed</string>
     <string name="appearance_and_behavior">Udseende og adfærd</string>
     <string name="simple_synchronization">Synkronisering</string>
-    <string name="manage_accounts">Administrér konti</string>
+    <string name="manage_accounts">Administrer konti</string>
     <string name="action_formatting_help">Formatering</string>
 
 
@@ -275,8 +275,8 @@
     <string name="formatting_help_images_alt">Fancy billede</string>
 
     <string name="simple_other">Andet</string>
-    <string name="sort_last_modified">Sortér efter dato ændret</string>
-    <string name="sort_alphabetically">Sortér alfabetisk</string>
+    <string name="sort_last_modified">Sorter efter dato ændret</string>
+    <string name="sort_alphabetically">Sorter alfabetisk</string>
     <string name="error_action_open_battery_settings">Batteriindstillinger</string>
     <string name="error_action_open_deck_info">Åbn App info</string>
     <string name="error_action_open_network">Netværksindstillinger</string>
@@ -305,8 +305,8 @@
     </string-array>
     <string name="settings_notes_path_success">Mappe for nye noter: %1$s</string>
     <string name="settings_file_suffix">Fil-endelse</string>
-    <string name="settings_file_suffix_description">Fil-endelse for nye noter i Nextcloud</string>
-    <string name="settings_file_suffix_success">Ny filsuffiks: %1$s</string>
+    <string name="settings_file_suffix_description">Filendelse for nye noter i Nextcloud</string>
+    <string name="settings_file_suffix_success">Nyt filsuffiks: %1$s</string>
     <string name="http_status_code">HTTP statuskode: %1$d</string>
     <string name="progress_import_indeterminate">Importerer noter...</string>
     <string name="progress_import">Importerer note %1$d af %2$d...</string>
