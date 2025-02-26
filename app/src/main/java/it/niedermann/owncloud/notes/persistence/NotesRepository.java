@@ -15,6 +15,7 @@ import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.generateNoteExcerpt;
 import static it.niedermann.owncloud.notes.widget.notelist.NoteListWidget.updateNoteListWidgets;
 import static it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget.updateSingleNoteWidgets;
+
 import android.accounts.NetworkErrorException;
 import android.content.Context;
 import android.content.Intent;
@@ -25,8 +26,11 @@ import android.graphics.drawable.Icon;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
+
 import androidx.annotation.AnyThread;
 import androidx.annotation.ColorInt;
 import androidx.annotation.MainThread;
@@ -37,11 +41,13 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.preference.PreferenceManager;
+
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -51,6 +57,7 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
 import it.niedermann.android.sharedpreferences.SharedPreferenceIntLiveData;
 import it.niedermann.owncloud.notes.BuildConfig;
 import it.niedermann.owncloud.notes.R;
@@ -60,6 +67,7 @@ import it.niedermann.owncloud.notes.persistence.entity.CategoryOptions;
 import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
+import it.niedermann.owncloud.notes.persistence.entity.ShareEntity;
 import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
@@ -99,6 +107,7 @@ public class NotesRepository {
     private boolean syncOnlyOnWifi;
     private final MutableLiveData<Boolean> syncStatus = new MutableLiveData<>(false);
     private final MutableLiveData<ArrayList<Throwable>> syncErrors = new MutableLiveData<>();
+    private final Handler mainHandler = new Handler(Looper.getMainLooper());
 
     private final Observer<? super ConnectionLiveData.ConnectionType> syncObserver = (Observer<ConnectionLiveData.ConnectionType>) connectionType -> {
         observeNetworkStatus(connectionType);
@@ -157,7 +166,7 @@ public class NotesRepository {
         this.syncOnlyOnWifiKey = context.getApplicationContext().getResources().getString(R.string.pref_key_wifi_only);
         this.connectionLiveData = new ConnectionLiveData(context);
 
-        connectionLiveData.observeForever(syncObserver);
+        mainHandler.post(() -> connectionLiveData.observeForever(syncObserver));
 
         final var prefs = PreferenceManager.getDefaultSharedPreferences(this.context);
         prefs.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
@@ -217,13 +226,15 @@ public class NotesRepository {
 
     @Override
     protected void finalize() throws Throwable {
-        connectionLiveData.removeObserver(syncObserver);
+        mainHandler.post(() -> connectionLiveData.removeObserver(syncObserver));
         super.finalize();
     }
 
     // Accounts
     @AnyThread
     public LiveData<ImportStatus> addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities, @Nullable String displayName, @NonNull IResponseCallback<Account> callback) {
+        db.getCapabilitiesDao().insert(capabilities);
+
         final var account = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account(url, username, accountName, displayName, capabilities)));
         if (account == null) {
             callback.onError(new Exception("Could not read created account."));
@@ -282,6 +293,10 @@ public class NotesRepository {
         }
 
         db.getAccountDao().deleteAccount(account);
+    }
+
+    public Capabilities getCapabilities() {
+        return db.getCapabilitiesDao().getCapabilities();
     }
 
     public Account getAccountByName(String accountName) {
@@ -473,7 +488,7 @@ public class NotesRepository {
     @NonNull
     @MainThread
     public LiveData<Note> addNoteAndSync(Account account, Note note) {
-        final var entity = new Note(0, null, note.getModified(), note.getTitle(), note.getContent(), note.getCategory(), note.getFavorite(), note.getETag(), DBStatus.LOCAL_EDITED, account.getId(), generateNoteExcerpt(note.getContent(), note.getTitle()), 0);
+        final var entity = new Note(0, null, note.getModified(), note.getTitle(), note.getContent(), note.getCategory(), note.getFavorite(), note.getETag(), DBStatus.LOCAL_EDITED, account.getId(), generateNoteExcerpt(note.getContent(), note.getTitle()), 0, note.isShared(), note.getReadonly());
         final var ret = new MutableLiveData<Note>();
         executor.submit(() -> ret.postValue(addNote(account.getId(), entity)));
         return map(ret, newNote -> {
@@ -501,7 +516,7 @@ public class NotesRepository {
 
     @MainThread
     public LiveData<Note> moveNoteToAnotherAccount(Account account, @NonNull Note note) {
-        final var fullNote = new Note(null, note.getModified(), note.getTitle(), note.getContent(), note.getCategory(), note.getFavorite(), null);
+        final var fullNote = new Note(null, note.getModified(), note.getTitle(), note.getContent(), note.getCategory(), note.getFavorite(), null, note.isShared(), note.getReadonly());
         fullNote.setStatus(DBStatus.LOCAL_EDITED);
         deleteNoteAndSync(account, note.getId());
         return addNoteAndSync(account, fullNote);
@@ -563,7 +578,7 @@ public class NotesRepository {
         // https://github.com/nextcloud/notes-android/issues/1198
         @Nullable final Long remoteId = db.getNoteDao().getRemoteId(oldNote.getId());
         if (newContent == null) {
-            newNote = new Note(oldNote.getId(), remoteId, oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.getCategory(), oldNote.getFavorite(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), oldNote.getExcerpt(), oldNote.getScrollY());
+            newNote = new Note(oldNote.getId(), remoteId, oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.getCategory(), oldNote.getFavorite(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), oldNote.getExcerpt(), oldNote.getScrollY(), oldNote.isShared(), oldNote.getReadonly());
         } else {
             final String title;
             if (newTitle != null) {
@@ -577,7 +592,7 @@ public class NotesRepository {
                     title = oldNote.getTitle();
                 }
             }
-            newNote = new Note(oldNote.getId(), remoteId, Calendar.getInstance(), title, newContent, oldNote.getCategory(), oldNote.getFavorite(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), generateNoteExcerpt(newContent, title), oldNote.getScrollY());
+            newNote = new Note(oldNote.getId(), remoteId, Calendar.getInstance(), title, newContent, oldNote.getCategory(), oldNote.getFavorite(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), generateNoteExcerpt(newContent, title), oldNote.getScrollY(), oldNote.isShared(), oldNote.getReadonly());
         }
         int rows = db.getNoteDao().updateNote(newNote);
         // if data was changed, set new status and schedule sync (with callback); otherwise invoke callback directly.
@@ -958,5 +973,17 @@ public class NotesRepository {
 
     public void updateDisplayName(long id, @Nullable String displayName) {
         db.getAccountDao().updateDisplayName(id, displayName);
+    }
+
+    public void addShareEntities(List<ShareEntity> entities) {
+        db.getShareDao().addShareEntities(entities);
+    }
+
+    public List<ShareEntity> getShareEntities(String path) {
+        return db.getShareDao().getShareEntities(path);
+    }
+
+    public void updateNote(Note note) {
+        db.getNoteDao().updateNote(note);
     }
 }
