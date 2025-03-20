@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Nextcloud Notes - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
+<resources>
+    <string name="app_name">Märkmed</string>
+    <string name="app_name_long">Nextcloudi märkmed</string>
+    <string name="label_all_notes">Kõik märkmed</string>
+    <string name="label_favorites">Lemmikud</string>
+    <string name="action_create">Uus märge</string>
+    <string name="welcome_text">Tere tulemast rakendusse %1$s</string>
+    <string name="action_settings">Sätted</string>
+    <string name="action_trashbin">Kustutatud märkmed</string>
+    <string name="action_search">Otsi</string>
+    <string name="action_sorting_method">Sortimismeetod</string>
+    <string name="simple_cancel">Loobu</string>
+    <string name="simple_switch">Vaheta</string>
+    <string name="simple_edit">Redigeeri</string>
+    <string name="simple_remove">Eemalda</string>
+    <string name="action_edit_save">Salvesta</string>
+    <string name="simple_about">Info</string>
+    <string name="simple_link">Link</string>
+    <string name="action_note_deleted">Kustutatud %1$s</string>
+    <string name="action_note_restored">Taastatud %1$s</string>
+    <string name="action_undo">Tühista</string>
+    <string name="action_uncategorized">Määratlemata</string>
+    <string name="menu_delete">Kustuta</string>
+    <string name="menu_change_category">Kategooria</string>
+    <string name="menu_favorite">Lemmik</string>
+    <string name="menu_preview">Eelvaade</string>
+    <string name="menu_share">Jaga</string>
+
+    <string name="search_in_category">Otsi siin: %1$s</string>
+    <string name="search_in_all">Otsi kõiki märkmeid</string>
+
+    <string name="change_category_title">Vali kategooria</string>
+
+    <string name="listview_updated_today">Täna</string>
+    <string name="listview_updated_yesterday">Eile</string>
+    <string name="listview_updated_this_week">Käesolev nädal</string>
+    <string name="listview_updated_last_week">Eelmine nädal</string>
+    <string name="listview_updated_this_month">Käesolev kuu</string>
+    <string name="listview_updated_last_month">Eelmine kuu</string>
+
+    <string name="settings_note_mode">Märkuste kuvamise režiim</string>
+    <string name="settings_note_mode_new">Käitumine märgete avamisel</string>
+    <string name="settings_theme_title">Teema</string>
+    <string name="settings_font_title">Monospace kirjastiil</string>
+    <string name="settings_font_size">Kirjasuurus</string>
+    <string name="settings_wifi_only">Sünkroonimine ainult Wi-Fi kaudu</string>
+    <string name="settings_lock">Rakenduse lukustus (Beta)</string>
+    <string name="settings_lock_summary">Seadme mandaadid</string>
+    <string name="settings_background_sync">Taustsünkroniseerimine</string>
+    <string name="settings_prevent_screen_capture">Vältida ekraani jäädvustamist</string>
+    <string name="settings_gridview">Ruudustikvaade</string>
+    <string name="settings_keep_screen_on">Hoia ekraani sisse lülitatud</string>
+    <string name="settings_keep_screen_on_summary">Märke vaaramisel ja muutmisel</string>
+
+    <string name="error_no_network">Võrguühendust pole</string>
+    <string name="error_maintenance_mode">Server on hooldusrežiimis</string>
+    <string name="error_unknown">Tekkinud on tundmatu viga.</string>
+
+    <string name="about_version_title">Versioon</string>
+    <string name="about_version">Sul on hetkel kasutusel: %1$s</string>
+    <string name="about_maintainer_title">Haldaja</string>
+    <string name="about_developers_title">Arendajad</string>
+    <string name="about_developers_original_author">algne autor</string>
+    <string name="about_translators_title">Tõlkijad</string>
+    <string name="about_translators_transifex">Nextcloudi kogukond: %1$s</string>
+    <string name="about_testers_title">Testijad</string>
+    <string name="about_source_title">Lähtekood</string>
+    <string name="about_source">Selle projekti lähtekood on GitHubis: %1$s</string>
+    <string name="about_issues_title">Veahaldus</string>
+    <string name="about_translate_title">Tõlgi</string>
+    <string name="about_app_license_title">Rakenduse litsents</string>
+    <string name="about_app_license_button">Vaata litsentsi</string>
+    <string name="about_icons_disclaimer_title">Ikoonid</string>
+    <string name="about_credits_tab_title">Tänuavaldused</string>
+    <string name="about_contribution_tab_title">Kaastöö</string>
+    <string name="about_license_tab_title">Litsents</string>
+
+    <string name="widget_note_list_title">Märkmete loend</string>
+    <string name="widget_note_list_placeholder">Märkmeid ei leidu</string>
+    <string name="widget_single_note_title">Üksik märge</string>
+    <string name="widget_single_note_placeholder_tv">Märget ei leidu</string>
+    <string name="widget_not_logged_in">Enne selle vidin kasutamist palun logi sisse rakendusse Märkmed</string>
+    <string name="widget_entry_fav_contentDescription">Tähekese ikooniga saad märget tähistada kui lemmikut</string>
+
+    <string name="activity_select_single_note">Vali märge</string>
+
+    <string name="shortcut_create_long">Koosta uus märge</string>
+
+    <string name="pref_value_lock">Kaitstud salasõnaga</string>
+
+    <string name="simple_error">Viga</string>
+    <string name="simple_close">Sulge</string>
+    <string name="simple_copy">Kopeeri</string>
+    <string name="simple_exception">Erand</string>
+    <string name="pin_to_homescreen">Kinnita avalehele</string>
+    <string name="note_has_been_deleted">See märge on kustutatud</string>
+    <string name="add_account">Lisa konto</string>
+
+    <string name="category_music">Muusika</string>
+    <string name="category_movies">Filmid</string>
+    <string name="category_movie">Film</string>
+    <string name="category_work">Töö</string>
+    <string name="category_todo">Tegemine</string>
+    <string name="category_todos">Tegemised</string>
+    <string name="category_tasks">Ülesanded</string>
+    <string name="category_recipe">Retsept</string>
+    <string name="category_recipes">Retseptid</string>
+    <string name="category_restaurant">Restoran</string>
+    <string name="category_restaurants">Restoranid</string>
+    <string name="category_food">Toit</string>
+    <string name="category_bake">Küpsetamine</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_key">Võti</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_keys">Võtmed</string>
+    <string name="category_password">Parool</string>
+    <string name="category_passwords">Paroolid</string>
+    <string name="category_game">Mäng</string>
+    <string name="category_games">Mängud</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">Esita</string>
+    <string name="category_gift">Kink</string>
+    <string name="category_gifts">Kingid</string>
+    <string name="no_notes_yet">Märkmeid veel pole</string>
+    <string name="no_notes_yet_description">Uue märkme lisamiseks vajuta + nuppu</string>
+    <string name="simple_more">Rohkem</string>
+    <string name="simple_move">Liiguta</string>
+    <string name="category_readonly">kirjutuskaitstud</string>
+    <string name="no_category">Kategooriat pole</string>
+    <string name="add_category">Lisa %1$s</string>
+    <string name="simple_checkbox">Märkeruut</string>
+    <string name="unlock_notes">Eemalda märkmete lukustus</string>
+    <string name="error_dialog_min_version">Märkmete rakendus Androidile eeldab, et Nextcloudi versioon Androidile on vähemalt 3.18.</string>
+    <string name="append_to_note">Lisa märkmele</string>
+    <string name="simple_security">Turvalisus</string>
+    <string name="appearance_and_behavior">Välimus ja käitumine</string>
+    <string name="simple_synchronization">Sünkroniseerimine</string>
+    <string name="manage_accounts">Halda kontosid</string>
+    <string name="action_formatting_help">Vorming</string>
+
+
+    <string name="noteMode_remember_last">Jäta minu viimane valik meelde</string>
+
+    <string-array name="darkmode_entries">
+        <item>Tume</item>
+        <item>Hele</item>
+    </string-array>
+
+    <plurals name="ab_selected">
+        <item quantity="one">%d valitud</item>
+        <item quantity="other">%d valitud</item>
+    </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Üks märge on kustutatud</item>
+        <item quantity="other">%1$d märget on kustutatud</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="one">Üks märge on taastatud</item>
+        <item quantity="other">%1$d märget on taastatud</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">Jaga %1$d märkme sisu</item>
+        <item quantity="other">Jaga %1$d märkme sisu</item>
+    </plurals>
+
+    <string name="formatting_help_text_title">Tekst</string>
+    <string name="formatting_help_lists_title">Loendid</string>
+    <string name="formatting_help_images_title">Pildid</string>
+    <string name="simple_other">Muu</string>
+    <string name="sort_last_modified">Järjesta muutmise kuupäeva järgi</string>
+    <string name="sort_alphabetically">Järjesta tähestikuliselt</string>
+    <string name="error_action_open_battery_settings">Akuseaded</string>
+    <string name="error_action_open_deck_info">Näita rakenduse teavet</string>
+    <string name="error_action_open_network">Võrgu seadistused</string>
+    <string name="error_action_update_files_app">Uuenda</string>
+    <string name="choose_account">Vali konto</string>
+    <string name="simple_next">Järgmine</string>
+    <string name="simple_prev">Eelmine</string>
+    <string name="settings_notes_path_description">Kaust sinu märkmete salvestamiseks Nextcloudis</string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
+    <string name="settings_notes_path_success">Uute märkmete kaust: %1$s</string>
+    <string name="settings_file_suffix">Faililaiend</string>
+    <string name="settings_file_suffix_description">Sinu märkmete faililaiend Nextcloudis</string>
+    <string name="settings_file_suffix_success">Uue faili järelliide: %1$s</string>
+    <string name="http_status_code">HTTP olekukood: %1$d</string>
+    <string name="progress_import_indeterminate">Impordin märkmeid…</string>
+    <string name="progress_import">Märkmed on importimisel: %1$d/%2$d…</string>
+    <string name="account_imported">Kasutajakonto on imporditud.</string>
+    <string name="action_back">Tagasi</string>
+    </resources>
