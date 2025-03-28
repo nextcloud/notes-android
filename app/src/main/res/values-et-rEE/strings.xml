@@ -78,6 +78,7 @@
     <string name="about_app_license_title">Rakenduse litsents</string>
     <string name="about_app_license_button">Vaata litsentsi</string>
     <string name="about_icons_disclaimer_title">Ikoonid</string>
+    <string name="about_icons_disclaimer_app_icon">Algse ikooni leiad siit: %1$s.</string>
     <string name="about_credits_tab_title">Tänuavaldused</string>
     <string name="about_contribution_tab_title">Kaastöö</string>
     <string name="about_license_tab_title">Litsents</string>
@@ -181,6 +182,8 @@
     <string name="error_action_open_network">Võrgu seadistused</string>
     <string name="error_action_update_files_app">Uuenda</string>
     <string name="choose_account">Vali konto</string>
+    <string name="remove_account">Eemalda fail: „%1$s“</string>
+
     <string name="simple_next">Järgmine</string>
     <string name="simple_prev">Eelmine</string>
     <string name="settings_notes_path_description">Kaust sinu märkmete salvestamiseks Nextcloudis</string>
