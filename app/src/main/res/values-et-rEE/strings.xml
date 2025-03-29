@@ -94,6 +94,7 @@
 
     <string name="shortcut_create_long">Koosta uus märge</string>
 
+    <string name="pref_value_wifi_and_mobile">Sünkroonimine Wi-Fi ja mobiilse andmeside kaudu</string>
     <string name="pref_value_lock">Kaitstud salasõnaga</string>
 
     <string name="simple_error">Viga</string>
