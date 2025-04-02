@@ -56,6 +56,8 @@
     <string name="settings_background_sync">后台同步</string>
     <string name="settings_prevent_screen_capture">防止截屏</string>
     <string name="settings_gridview">网格视图</string>
+    <string name="settings_enable_direct_edit">直接编辑</string>
+    <string name="settings_enable_direct_edit_summary">禁用后，高级编辑器将隐藏。</string>
     <string name="settings_keep_screen_on">保持屏幕常亮</string>
     <string name="settings_keep_screen_on_summary">查看或编辑笔记时</string>
 

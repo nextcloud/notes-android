@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.PreferenceManager;
 
+import com.nextcloud.android.common.ui.util.extensions.AppCompatActivityExtensionsKt;
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.AccountImportCancelledException;
 import com.nextcloud.android.sso.exceptions.AndroidGetAccountsPermissionNotGranted;
@@ -53,6 +54,7 @@ public class ImportAccountActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AppCompatActivityExtensionsKt.adjustUIForAPILevel35(this);
         super.onCreate(savedInstanceState);
 
         Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));

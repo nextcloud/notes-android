@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.nextcloud.android.common.ui.util.extensions.AppCompatActivityExtensionsKt;
+
 import java.util.Collections;
 
 import it.niedermann.android.util.ClipboardUtil;
@@ -30,6 +32,7 @@ public class ExceptionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        AppCompatActivityExtensionsKt.adjustUIForAPILevel35(this);
         super.onCreate(savedInstanceState);
 
         final var binding = ActivityExceptionBinding.inflate(getLayoutInflater());
