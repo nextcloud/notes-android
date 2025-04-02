@@ -16,16 +16,16 @@ public class WidgetUtil {
     }
 
     /**
-     * Android S requires either {@link PendingIntent#FLAG_MUTABLE} or
-     * {@link PendingIntent#FLAG_IMMUTABLE} to be set on a {@link PendingIntent}.
-     * This is enforced by Android and will lead to an app crash if neither of those flags is
-     * present.
-     * To keep the app working, this compatibility method can be used to add the
-     * {@link PendingIntent#FLAG_MUTABLE} flag on Android S and higher to restore the behavior of
-     * older SDK versions.
+     * Android 14 (API 34) and above require FLAG_IMMUTABLE
      *
-     * @param flags wanted flags for {@link PendingIntent}
-     * @return {@param flags} | {@link PendingIntent#FLAG_MUTABLE}
+     * <p>
+     * Android 12 (API 31) and above allow FLAG_MUTABLE
+     *
+     * <p>
+     * Ensures compatibility with different Android API levels by setting appropriate flags for a PendingIntent.
+     *
+     * @param flags The original flags to be used for the PendingIntent.
+     * @return The modified flags with compatibility adjustments based on the Android API level.
      */
     public static int pendingIntentFlagCompat(int flags) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
