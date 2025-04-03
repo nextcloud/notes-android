@@ -106,7 +106,8 @@ class NoteShareDetailActivity : BrandedActivity(),
         }
 
         lifecycleScope.launch(Dispatchers.IO) {
-            val ssoAcc = SingleAccountHelper.getCurrentSingleSignOnAccount(this@NoteShareDetailActivity)
+            val ssoAcc =
+                SingleAccountHelper.getCurrentSingleSignOnAccount(this@NoteShareDetailActivity)
             repository = ShareRepository(this@NoteShareDetailActivity, ssoAcc)
 
             withContext(Dispatchers.Main) {
@@ -124,27 +125,34 @@ class NoteShareDetailActivity : BrandedActivity(),
     override fun applyBrand(color: Int) {
         val util = BrandingUtil.of(color, this)
 
-        util.platform.themeRadioButton(binding.shareProcessPermissionReadOnly)
-        util.platform.themeRadioButton(binding.shareProcessPermissionUploadEditing)
-        util.platform.themeRadioButton(binding.shareProcessPermissionFileDrop)
+        binding.run {
+            util.platform.run {
+                themeRadioButton(shareProcessPermissionReadOnly)
+                themeRadioButton(shareProcessPermissionUploadEditing)
+                themeRadioButton(shareProcessPermissionFileDrop)
 
-        util.platform.colorTextView(binding.shareProcessEditShareLink)
-        util.platform.colorTextView(binding.shareProcessAdvancePermissionTitle)
+                colorTextView(shareProcessEditShareLink)
+                colorTextView(shareProcessAdvancePermissionTitle)
 
-        util.platform.themeCheckbox(binding.shareProcessAllowResharingCheckbox)
+                themeCheckbox(shareProcessAllowResharingCheckbox)
+            }
 
+            util.androidx.run {
+                colorSwitchCompat(shareProcessSetPasswordSwitch)
+                colorSwitchCompat(shareProcessSetExpDateSwitch)
+                colorSwitchCompat(shareProcessHideDownloadCheckbox)
+                colorSwitchCompat(shareProcessChangeNameSwitch)
+            }
 
-        util.androidx.colorSwitchCompat(binding.shareProcessSetPasswordSwitch)
-        util.androidx.colorSwitchCompat(binding.shareProcessSetExpDateSwitch)
-        util.androidx.colorSwitchCompat(binding.shareProcessHideDownloadCheckbox)
-        util.androidx.colorSwitchCompat(binding.shareProcessChangeNameSwitch)
+            util.material.run {
+                colorTextInputLayout(shareProcessEnterPasswordContainer)
+                colorTextInputLayout(shareProcessChangeNameContainer)
+                colorTextInputLayout(noteContainer)
 
-        util.material.colorTextInputLayout(binding.shareProcessEnterPasswordContainer)
-        util.material.colorTextInputLayout(binding.shareProcessChangeNameContainer)
-        util.material.colorTextInputLayout(binding.noteContainer)
-
-        util.material.colorMaterialButtonPrimaryFilled(binding.shareProcessBtnNext)
-        util.material.colorMaterialButtonPrimaryOutlined(binding.shareProcessBtnCancel)
+                colorMaterialButtonPrimaryFilled(shareProcessBtnNext)
+                colorMaterialButtonPrimaryOutlined(shareProcessBtnCancel)
+            }
+        }
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -259,22 +267,24 @@ class NoteShareDetailActivity : BrandedActivity(),
     }
 
     private fun updateViewForInternalShare() {
-        binding.shareProcessChangeNameSwitch.visibility = View.GONE
-        binding.shareProcessChangeNameContainer.visibility = View.GONE
-        binding.shareProcessHideDownloadCheckbox.visibility = View.GONE
-        if (isSecureShare) {
-            binding.shareProcessAllowResharingCheckbox.visibility = View.GONE
-        } else {
-            binding.shareProcessAllowResharingCheckbox.visibility = View.VISIBLE
-        }
-        binding.shareProcessSetPasswordSwitch.visibility = View.GONE
-
-        if (share != null) {
-            if (!isReShareShown) {
-                binding.shareProcessAllowResharingCheckbox.visibility = View.GONE
+        binding.run {
+            shareProcessChangeNameSwitch.visibility = View.GONE
+            shareProcessChangeNameContainer.visibility = View.GONE
+            shareProcessHideDownloadCheckbox.visibility = View.GONE
+            if (isSecureShare) {
+                shareProcessAllowResharingCheckbox.visibility = View.GONE
+            } else {
+                shareProcessAllowResharingCheckbox.visibility = View.VISIBLE
             }
-            binding.shareProcessAllowResharingCheckbox.isChecked =
-                SharingMenuHelper.canReshare(share)
+            shareProcessSetPasswordSwitch.visibility = View.GONE
+
+            if (share != null) {
+                if (!isReShareShown) {
+                    shareProcessAllowResharingCheckbox.visibility = View.GONE
+                }
+                shareProcessAllowResharingCheckbox.isChecked =
+                    SharingMenuHelper.canReshare(share)
+            }
         }
     }
 
@@ -282,17 +292,19 @@ class NoteShareDetailActivity : BrandedActivity(),
      * update views where share type external or link share
      */
     private fun updateViewForExternalAndLinkShare() {
-        binding.shareProcessHideDownloadCheckbox.visibility = View.VISIBLE
-        binding.shareProcessAllowResharingCheckbox.visibility = View.GONE
-        binding.shareProcessSetPasswordSwitch.visibility = View.VISIBLE
+        binding.run {
+            shareProcessHideDownloadCheckbox.visibility = View.VISIBLE
+            shareProcessAllowResharingCheckbox.visibility = View.GONE
+            shareProcessSetPasswordSwitch.visibility = View.VISIBLE
 
-        if (share != null) {
-            if (SharingMenuHelper.isFileDrop(share)) {
-                binding.shareProcessHideDownloadCheckbox.visibility = View.GONE
-            } else {
-                binding.shareProcessHideDownloadCheckbox.visibility = View.VISIBLE
-                binding.shareProcessHideDownloadCheckbox.isChecked =
-                    share?.isHideFileDownload == true
+            if (share != null) {
+                if (SharingMenuHelper.isFileDrop(share)) {
+                    shareProcessHideDownloadCheckbox.visibility = View.GONE
+                } else {
+                    shareProcessHideDownloadCheckbox.visibility = View.VISIBLE
+                    shareProcessHideDownloadCheckbox.isChecked =
+                        share?.isHideFileDownload == true
+                }
             }
         }
     }
@@ -319,13 +331,15 @@ class NoteShareDetailActivity : BrandedActivity(),
     }
 
     private fun updateViewForFolder() {
-        binding.shareProcessPermissionUploadEditing.text =
-            getString(R.string.link_share_allow_upload_and_editing)
-        binding.shareProcessPermissionFileDrop.visibility = View.VISIBLE
-        if (isSecureShare) {
-            binding.shareProcessPermissionFileDrop.visibility = View.GONE
-            binding.shareProcessAllowResharingCheckbox.visibility = View.GONE
-            binding.shareProcessSetExpDateSwitch.visibility = View.GONE
+        binding.run {
+            shareProcessPermissionUploadEditing.text =
+                getString(R.string.link_share_allow_upload_and_editing)
+            shareProcessPermissionFileDrop.visibility = View.VISIBLE
+            if (isSecureShare) {
+                shareProcessPermissionFileDrop.visibility = View.GONE
+                shareProcessAllowResharingCheckbox.visibility = View.GONE
+                shareProcessSetExpDateSwitch.visibility = View.GONE
+            }
         }
     }
 
@@ -333,44 +347,48 @@ class NoteShareDetailActivity : BrandedActivity(),
      * update views for screen type Note
      */
     private fun showShareProcessSecond() {
-        binding.shareProcessGroupOne.visibility = View.GONE
-        binding.shareProcessEditShareLink.visibility = View.GONE
-        binding.shareProcessGroupTwo.visibility = View.VISIBLE
-        if (share != null) {
-            binding.shareProcessBtnNext.text =
-                getString(R.string.note_share_detail_activity_set_note)
-            binding.noteText.setText(share?.note)
-        } else {
-            binding.shareProcessBtnNext.text =
-                getString(R.string.note_share_detail_activity_send_share)
-            binding.noteText.setText(R.string.empty)
+        binding.run {
+            shareProcessGroupOne.visibility = View.GONE
+            shareProcessEditShareLink.visibility = View.GONE
+            shareProcessGroupTwo.visibility = View.VISIBLE
+            if (share != null) {
+                shareProcessBtnNext.text =
+                    getString(R.string.note_share_detail_activity_set_note)
+                noteText.setText(share?.note)
+            } else {
+                shareProcessBtnNext.text =
+                    getString(R.string.note_share_detail_activity_send_share)
+                noteText.setText(R.string.empty)
+            }
+            shareProcessStep = SCREEN_TYPE_NOTE
+            shareProcessBtnNext.performClick()
         }
-        shareProcessStep = SCREEN_TYPE_NOTE
-        binding.shareProcessBtnNext.performClick()
     }
 
     private fun implementClickEvents() {
-        binding.shareProcessBtnCancel.setOnClickListener {
-            onCancelClick()
-        }
-        binding.shareProcessBtnNext.setOnClickListener {
-            if (shareProcessStep == SCREEN_TYPE_PERMISSION) {
-                validateShareProcessFirst()
-            } else {
-                createOrUpdateShare()
+        binding.run {
+            shareProcessBtnCancel.setOnClickListener {
+                onCancelClick()
             }
-        }
-        binding.shareProcessSetPasswordSwitch.setOnCheckedChangeListener { _, isChecked ->
-            showPasswordInput(isChecked)
-        }
-        binding.shareProcessSetExpDateSwitch.setOnCheckedChangeListener { _, isChecked ->
-            showExpirationDateInput(isChecked)
-        }
-        binding.shareProcessChangeNameSwitch.setOnCheckedChangeListener { _, isChecked ->
-            showChangeNameInput(isChecked)
-        }
-        binding.shareProcessSelectExpDate.setOnClickListener {
-            showExpirationDateDialog()
+            shareProcessBtnNext.setOnClickListener {
+                if (shareProcessStep == SCREEN_TYPE_PERMISSION) {
+                    validateShareProcessFirst()
+                } else {
+                    createOrUpdateShare()
+                }
+            }
+            shareProcessSetPasswordSwitch.setOnCheckedChangeListener { _, isChecked ->
+                showPasswordInput(isChecked)
+            }
+            shareProcessSetExpDateSwitch.setOnCheckedChangeListener { _, isChecked ->
+                showExpirationDateInput(isChecked)
+            }
+            shareProcessChangeNameSwitch.setOnCheckedChangeListener { _, isChecked ->
+                showChangeNameInput(isChecked)
+            }
+            shareProcessSelectExpDate.setOnClickListener {
+                showExpirationDateDialog()
+            }
         }
     }
 
@@ -429,9 +447,9 @@ class NoteShareDetailActivity : BrandedActivity(),
 
 
     private fun getReSharePermission(): Int {
-        val spb = SharePermissionsBuilder()
-        spb.setSharePermission(true)
-        return spb.build()
+        return SharePermissionsBuilder().apply {
+            setSharePermission(true)
+        }.build()
     }
 
     /**
