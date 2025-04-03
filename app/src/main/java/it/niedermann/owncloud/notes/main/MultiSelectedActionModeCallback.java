@@ -7,6 +7,8 @@
 package it.niedermann.owncloud.notes.main;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,6 +33,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
+import it.niedermann.owncloud.notes.share.NoteShareActivity;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
 public class MultiSelectedActionModeCallback implements Callback {
@@ -53,8 +56,11 @@ public class MultiSelectedActionModeCallback implements Callback {
     private final SelectionTracker<Long> tracker;
     @NonNull
     private final FragmentManager fragmentManager;
+    @NonNull
+    private final MainActivity mainActivity;
 
     public MultiSelectedActionModeCallback(
+            @NonNull MainActivity mainActivity,
             @NonNull Context context,
             @NonNull View view,
             @NonNull View anchorView,
@@ -63,6 +69,7 @@ public class MultiSelectedActionModeCallback implements Callback {
             boolean canMoveNoteToAnotherAccounts,
             @NonNull SelectionTracker<Long> tracker,
             @NonNull FragmentManager fragmentManager) {
+        this.mainActivity = mainActivity;
         this.context = context;
         this.view = view;
         this.anchorView = anchorView;
@@ -153,16 +160,26 @@ public class MultiSelectedActionModeCallback implements Callback {
             }
             tracker.clearSelection();
 
-            executor.submit(() -> {
-                if (selection.size() == 1) {
-                    final var note = mainViewModel.getFullNote(selection.get(0));
-                    ShareUtil.openShareDialog(context, note.getTitle(), note.getContent());
-                } else {
-                    ShareUtil.openShareDialog(context,
-                            context.getResources().getQuantityString(R.plurals.share_multiple, selection.size(), selection.size()),
-                            mainViewModel.collectNoteContents(selection));
-                }
-            });
+            if (selection.size() == 1) {
+                final var currentAccount$ = mainViewModel.getCurrentAccount();
+                currentAccount$.observe(lifecycleOwner, account -> {
+                    currentAccount$.removeObservers(lifecycleOwner);
+                    executor.submit(() -> {{
+                        final var note = mainViewModel.getFullNote(selection.get(0));
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable(NoteShareActivity.ARG_NOTE, note);
+                        bundle.putSerializable(NoteShareActivity.ARG_ACCOUNT, account);
+                        Intent intent = new Intent(mainActivity, NoteShareActivity.class);
+                        intent.putExtras(bundle);
+                        mainActivity.startActivity(intent);
+                    }});
+                });
+            } else {
+                ShareUtil.openShareDialog(context,
+                        context.getResources().getQuantityString(R.plurals.share_multiple, selection.size(), selection.size()),
+                        mainViewModel.collectNoteContents(selection));
+            }
+
             return true;
         } else if (itemId == R.id.menu_category) {// TODO detect whether all selected notes do have the same category - in this case preselect it
             final var accountLiveData = mainViewModel.getCurrentAccount();
