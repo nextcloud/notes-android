@@ -110,7 +110,7 @@ public class ShareViewHolder extends RecyclerView.ViewHolder {
 
     private void setImage(ImageView avatar, String name, @DrawableRes int fallback) {
         try {
-            AvatarLoader.INSTANCE.load(context, avatar, account);
+            AvatarLoader.INSTANCE.load(context, avatar, account, name);
         } catch (StringIndexOutOfBoundsException e) {
             avatar.setImageResource(fallback);
         }

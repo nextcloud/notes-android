@@ -12,7 +12,9 @@ import com.owncloud.android.lib.resources.shares.OCShare;
 import com.owncloud.android.lib.resources.shares.ShareType;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import it.niedermann.owncloud.notes.databinding.ItemAddPublicShareBinding;
 import it.niedermann.owncloud.notes.databinding.ItemInternalShareLinkBinding;
@@ -136,7 +138,14 @@ public class ShareeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @SuppressLint("NotifyDataSetChanged")
     public void addShares(List<OCShare> sharesToAdd) {
-        shares.addAll(sharesToAdd);
+        Set<OCShare> uniqueShares = new LinkedHashSet<>(shares);
+
+        // Automatically removes duplicates
+        uniqueShares.addAll(sharesToAdd);
+
+        shares.clear();
+        shares.addAll(uniqueShares);
+
         sortShares();
         notifyDataSetChanged();
     }
