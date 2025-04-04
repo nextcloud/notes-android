@@ -16,7 +16,7 @@ import static it.niedermann.owncloud.notes.main.slots.SlotterUtil.fillListByCate
 import static it.niedermann.owncloud.notes.main.slots.SlotterUtil.fillListByInitials;
 import static it.niedermann.owncloud.notes.main.slots.SlotterUtil.fillListByTime;
 import static it.niedermann.owncloud.notes.shared.model.CategorySortingMethod.SORT_MODIFIED_DESC;
-import static it.niedermann.owncloud.notes.shared.model.CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC;
+import static it.niedermann.owncloud.notes.shared.model.CategorySortingMethod.SORT_LEXICOGRAPHICAL_DESC;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.DEFAULT_CATEGORY;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.RECENT;
@@ -273,6 +273,9 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     private List<Item> fromNotes(List<Note> noteList, @NonNull NavigationCategory selectedCategory, @Nullable CategorySortingMethod sortingMethod) {
+        if(sortingMethod == SORT_LEXICOGRAPHICAL_DESC){
+            Collections.reverse(noteList);
+        }
         if (selectedCategory.getType() == DEFAULT_CATEGORY) {
             final String category = selectedCategory.getCategory();
             if (category != null) {
@@ -283,9 +286,6 @@ public class MainViewModel extends AndroidViewModel {
         }
         if (sortingMethod == SORT_MODIFIED_DESC) {
             return fillListByTime(getApplication(), noteList);
-        }
-        if(sortingMethod != SORT_LEXICOGRAPHICAL_ASC){
-            Collections.reverse(noteList);
         }
         return fillListByInitials(getApplication(), noteList);
     }
