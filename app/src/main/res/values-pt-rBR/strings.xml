@@ -7,7 +7,7 @@
 -->
 <resources>
     <string name="app_name">Notas</string>
-    <string name="app_name_long">Notas Nextcloud</string>
+    <string name="app_name_long">Nextcloud Notas</string>
     <string name="label_all_notes">Todas as notas</string>
     <string name="label_favorites">Favoritos</string>
     <string name="action_create">Nova nota</string>
@@ -170,8 +170,8 @@
     <string name="error_dialog_check_server_logs">Há um problema com sua configuração do Nextcloud. Por favor, dê uma olhada nos arquivos de log do servidor.</string>
     <string name="error_dialog_check_maintenance">Verifique se sua instância do Nextcloud não está no modo de manutenção.</string>
     <string name="error_dialog_insufficient_storage">Sua instância do Nextcloud não possui mais espaço livre. Exclua alguns arquivos para sincronizar suas alterações locais com a nuvem.</string>
-    <string name="error_dialog_we_need_info">Precisamos das seguintes informações técnicas para ajudá-lo:</string>
-    <string name="error_dialog_server_app_enabled">Verifique se você instalou e ativou o aplicativo \"Notes\" no seu servidor.</string>
+    <string name="error_dialog_we_need_info">Precisamos das seguintes informações técnicas para ajudar você:</string>
+    <string name="error_dialog_server_app_enabled">Verifique se você instalou e ativou o aplicativo \"Notes\" (\"Notas\") no seu servidor.</string>
     <string name="error_dialog_redirect">Seu servidor respondeu com um código de status HTTP 302, o que implica que você não instalou o aplicativo Notes no servidor ou que algo está configurado incorretamente. Isso pode ser causado por alterações no arquivo .htaccess ou por aplicativos como o Client OID.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Desative todas as otimizações de bateria do Nextcloud e do aplicativo Notes.</string>
     <string name="error_dialog_min_version">O aplicativo Notes Android requer que o aplicativo Nextcloud Android tenha pelo menos a versão 3.18.</string>
@@ -287,7 +287,7 @@
     <string name="error_action_update_files_app">Atualizar</string>
     <string name="no_account_configured_yet">Nenhuma conta foi configurada</string>
     <string name="no_other_accounts">Você ainda não configurou nenhuma outra conta.</string>
-    <string name="choose_account">Escolha a conta </string>
+    <string name="choose_account">Escolha uma conta</string>
     <string name="context_based_formatting">Formatação baseada no contexto popover</string>
     <plurals name="remove_account_message">
         <item quantity="one">Removendo a conta %1$s também excluirá uma alteração irrecuperável não foi sincronizada. </item>
