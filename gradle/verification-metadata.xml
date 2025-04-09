@@ -25,6 +25,8 @@
             <trusting group="androidx.core"/>
             <trusting group="androidx.databinding"/>
             <trusting group="androidx.fragment"/>
+            <trusting group="androidx.room"/>
+            <trusting group="androidx.sqlite"/>
             <trusting group="^androidx[.]compose($|([.].*))" regex="true"/>
             <trusting group="^com[.]android($|([.].*))" regex="true"/>
          </trusted-key>
@@ -49,7 +51,10 @@
          <trusted-key id="1A55F091AD28C07F831FA44D7905DE25C78AD456" group="com.google.protobuf"/>
          <trusted-key id="1D0A8B5E77C678A7C724445ABF984B4145EA13F7" group="com.squareup" name="javapoet" version="1.13.0"/>
          <trusted-key id="1D9AA7F9E1E2824728B8CD1794B291AEF984A085" group="io.reactivex.rxjava2"/>
-         <trusted-key id="24D04176586361FDA94EE0315F7786DF73E61F56" group="com.google.devtools.ksp" name="symbol-processing-api" version="1.9.0-1.0.13"/>
+         <trusted-key id="24D04176586361FDA94EE0315F7786DF73E61F56">
+            <trusting group="com.google.devtools.ksp" name="symbol-processing-api" version="1.9.0-1.0.13"/>
+            <trusting group="com.google.devtools.ksp" name="symbol-processing-api" version="2.0.10-1.0.24"/>
+         </trusted-key>
          <trusted-key id="2BAB4466B44F54F8F99BBBDD5ED22F661BBF0ACC" group="com.almworks.sqlite4java" name="sqlite4java" version="1.0.392"/>
          <trusted-key id="2DB4F1EF0FA761ECC4EA935C86FDC7E2A11262CB">
             <trusting group="commons-codec"/>
