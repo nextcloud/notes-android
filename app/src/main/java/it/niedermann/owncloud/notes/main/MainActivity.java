@@ -263,8 +263,13 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             updateSortMethodIcon(methodOfCategory.second);
             activityBinding.sortingMethod.setOnClickListener((v) -> {
                 if (methodOfCategory.first != null) {
+                    int newId = 0;
+                    if (methodOfCategory.second != null)
+                    {
+                        newId = methodOfCategory.second.getId();
+                    }
                     //Rotate for next sorting method
-                    var newMethod = CategorySortingMethod.findById(methodOfCategory.second.getId() + 1);
+                    var newMethod = CategorySortingMethod.findById(newId + 1);
                     final var modifyLiveData = mainViewModel.modifyCategoryOrder(methodOfCategory.first, newMethod);
                     modifyLiveData.observe(this, (next) -> modifyLiveData.removeObservers(this));
                 }

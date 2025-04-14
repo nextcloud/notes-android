@@ -59,6 +59,8 @@
     <string name="settings_keep_screen_on">Hoia ekraani sisse lülitatud</string>
     <string name="settings_keep_screen_on_summary">Märke vaaramisel ja muutmisel</string>
 
+    <string name="error_sync">Sünkroniseerimine ei õnnestunud: %1$s</string>
+    <string name="error_synchronization">Sünkroniseerimine ei õnnestunud</string>
     <string name="error_no_network">Võrguühendust pole</string>
     <string name="error_maintenance_mode">Server on hooldusrežiimis</string>
     <string name="error_unknown">Tekkinud on tundmatu viga.</string>
@@ -94,7 +96,8 @@
 
     <string name="shortcut_create_long">Koosta uus märge</string>
 
-    <string name="pref_value_wifi_and_mobile">Sünkroonimine Wi-Fi ja mobiilse andmeside kaudu</string>
+    <string name="pref_value_font_normal">Tavaline</string>
+    <string name="pref_value_wifi_and_mobile">Sünkrooni WiFi ja mobiilse andmeside kaudu</string>
     <string name="pref_value_lock">Kaitstud salasõnaga</string>
 
     <string name="simple_error">Viga</string>
@@ -140,7 +143,11 @@
     <string name="simple_checkbox">Märkeruut</string>
     <string name="unlock_notes">Eemalda märkmete lukustus</string>
     <string name="error_dialog_min_version">Märkmete rakendus Androidile eeldab, et Nextcloudi versioon Androidile on vähemalt 3.18.</string>
+    <string name="added_content">Lisasin „%1$s“</string>
+    <string name="shared_text_empty">Jagatud tekst oli tühi</string>
     <string name="append_to_note">Lisa märkmele</string>
+    <string name="change_note_title">Muuda märkme pealkirja</string>
+    <string name="menu_edit_title">Muuda pealkirja</string>
     <string name="simple_security">Turvalisus</string>
     <string name="appearance_and_behavior">Välimus ja käitumine</string>
     <string name="simple_synchronization">Sünkroniseerimine</string>
@@ -150,9 +157,16 @@
 
     <string name="noteMode_remember_last">Jäta minu viimane valik meelde</string>
 
+    <string-array name="fontSize_entries">
+        <item>Väike</item>
+        <item>Keskmine</item>
+        <item>Suur</item>
+    </string-array>
+
     <string-array name="darkmode_entries">
-        <item>Tume</item>
-        <item>Hele</item>
+        <item>Tume kujundus</item>
+        <item>Hele kujundus</item>
+        <item>Süsteemi kujundus</item>
     </string-array>
 
     <plurals name="ab_selected">
@@ -172,8 +186,14 @@
         <item quantity="other">Jaga %1$d märkme sisu</item>
     </plurals>
 
+    <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_text_title">Tekst</string>
     <string name="formatting_help_lists_title">Loendid</string>
+    <string name="formatting_help_lists_body_1">Vahetevahel soovid kasutada nummerdatud loendeid:</string>
+    <string name="formatting_help_lists_body_2">Esimene</string>
+    <string name="formatting_help_lists_body_3">Teine</string>
+    <string name="formatting_help_lists_body_4">olmas</string>
+    <string name="formatting_help_lists_body_5">Vahetevahel soovid kasutada jutupunkte:</string>
     <string name="formatting_help_images_title">Pildid</string>
     <string name="simple_other">Muu</string>
     <string name="sort_last_modified">Järjesta muutmise kuupäeva järgi</string>
@@ -182,11 +202,14 @@
     <string name="error_action_open_deck_info">Näita rakenduse teavet</string>
     <string name="error_action_open_network">Võrgu seadistused</string>
     <string name="error_action_update_files_app">Uuenda</string>
+    <string name="no_account_configured_yet">Ühtegi kontot pole veel seadistatud</string>
+    <string name="no_other_accounts">Sa pole veel seadistanud ühtegi teist kasutajakontot.</string>
     <string name="choose_account">Vali konto</string>
     <string name="remove_account">Eemalda fail: „%1$s“</string>
 
     <string name="simple_next">Järgmine</string>
     <string name="simple_prev">Eelmine</string>
+    <string name="simple_backup">Varundus</string>
     <string name="settings_notes_path_description">Kaust sinu märkmete salvestamiseks Nextcloudis</string>
     <string-array name="settings_file_suffixes">
         <item translatable="false">.txt</item>
