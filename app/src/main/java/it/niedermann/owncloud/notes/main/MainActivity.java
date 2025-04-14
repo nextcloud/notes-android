@@ -27,6 +27,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -785,6 +786,12 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     public void onNoteFavoriteClick(int position, View view) {
         final var toggleLiveData = mainViewModel.toggleFavoriteAndSync(((Note) adapter.getItem(position)).getId());
         toggleLiveData.observe(this, (next) -> toggleLiveData.removeObservers(this));
+    }
+
+    @Override
+    public void onNoteActionsClick(int position, View v) {
+        // TODO
+        Toast.makeText(v.getContext(), "Not implemented yet", Toast.LENGTH_SHORT).show();
     }
 
     @Override
