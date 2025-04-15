@@ -290,9 +290,9 @@
     <string name="choose_account">Escolha uma conta</string>
     <string name="context_based_formatting">Formatação baseada no contexto popover</string>
     <plurals name="remove_account_message">
-        <item quantity="one">Removendo a conta %1$s também excluirá uma alteração irrecuperável não foi sincronizada. </item>
-        <item quantity="many">Removendo a conta  %1$s também irá deletar irrecuperávelmente %2$d mudanças não sincronizadas. </item>
-        <item quantity="other">Removendo a conta  %1$s também irá deletar irrecuperávelmente %2$d mudanças não sincronizadas. </item>
+        <item quantity="one">A remoção da conta %1$s também excluirá irrecuperavelmente uma alteração não sincronizada.</item>
+        <item quantity="many">A remoção da conta %1$s também excluirá irrecuperavelmente %2$d alterações não sincronizadas.</item>
+        <item quantity="other">A remoção da conta %1$s também excluirá irrecuperavelmente %2$d alterações não sincronizadas.</item>
     </plurals>
     <string name="remove_account">Remover %1$s</string>
 
