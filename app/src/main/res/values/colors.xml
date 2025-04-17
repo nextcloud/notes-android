@@ -14,8 +14,13 @@
     <color name="primary">#ffffff</color>
     <color name="accent">#121212</color>
     <color name="danger">#d40000</color>
+    <color name="text_color">#333333</color>
+    <color name="bg_fallback_highlight">#616161</color>
+    <color name="fg_inverse">#FFFFFF</color>
+    <color name="highlight_textColor_Warning">#e53935</color>
 
     <color name="defaultBrand">#0082C9</color>
+    <color name="secondary_text_color">#666666</color>
 
     <color name="cursorHandles">#555566</color>
     <color name="defaultTextHighlightBackground">#2233334a</color>
@@ -30,7 +35,8 @@
     <color name="fg_default_high">#cccccc</color>
     <color name="fg_secondary">#999999</color>
     <color name="fg_contrast">#ffffff</color>
-
+    <color name="nc_grey">#ededed</color>
+    <color name="icon_on_nc_grey">#000000</color>
     <color name="grey600">#757575</color>
     <color name="icon_color_default">@color/grey600</color>
 

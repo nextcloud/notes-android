@@ -35,6 +35,21 @@
         <item name="tabStyle">@style/tabStyle</item>
     </style>
 
+    <style name="FallbackDatePickerDialogTheme" parent="Theme.Material3.DayNight.Dialog">
+        <item name="colorPrimary">@color/bg_default</item>
+        <item name="colorAccent">@color/bg_fallback_highlight</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:windowBackground">@color/bg_default</item>
+        <item name="android:textColor">@color/fg_inverse</item>
+        <item name="android:datePickerStyle">@style/DatePickerStyle</item>
+    </style>
+
+    <style name="DatePickerStyle">
+        <item name="android:headerBackground">@color/bg_fallback_highlight</item>
+        <item name="android:datePickerMode">calendar</item>
+    </style>
+
+
     <style name="AppTheme" parent="BaseTheme" />
 
     <style name="toolbarStyle" parent="Widget.Material3.Toolbar">
@@ -62,6 +77,11 @@
     <style name="searchToolbarStyle" parent="@style/Widget.Material3.Toolbar">
         <item name="android:paddingStart">@dimen/spacer_activity_sides</item>
         <item name="android:paddingEnd">@dimen/spacer_activity_sides</item>
+    </style>
+
+    <style name="nextcloud.SearchView" parent="Widget.AppCompat.SearchView">
+        <item name="closeIcon">@drawable/ic_clear_grey_24dp</item>
+        <item name="searchIcon">@drawable/ic_search_grey600_24dp</item>
     </style>
 
     <style name="tabStyle" parent="Widget.Material3.TabLayout">

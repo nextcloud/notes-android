@@ -99,6 +99,7 @@ import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesWorker;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.share.helper.AvatarLoader;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
@@ -517,7 +518,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                 public void onSelectionChanged() {
                                     super.onSelectionChanged();
                                     if (tracker.hasSelection() && mActionMode == null) {
-                                        mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(MainActivity.this, coordinatorLayout, binding.activityNotesListView.fabCreate, mainViewModel, MainActivity.this, canMoveNoteToAnotherAccounts, tracker, getSupportFragmentManager()));
+                                        mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(MainActivity.this,MainActivity.this, coordinatorLayout, binding.activityNotesListView.fabCreate, mainViewModel, MainActivity.this, canMoveNoteToAnotherAccounts, tracker, getSupportFragmentManager()));
                                     }
                                     if (mActionMode != null) {
                                         if (tracker.hasSelection()) {
