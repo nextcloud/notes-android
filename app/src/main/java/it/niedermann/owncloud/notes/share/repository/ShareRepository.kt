@@ -13,6 +13,8 @@ import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.persistence.entity.ShareEntity
 import it.niedermann.owncloud.notes.share.model.CreateShareRequest
 import it.niedermann.owncloud.notes.share.model.CreateShareResponse
+import it.niedermann.owncloud.notes.share.model.ShareAttributesV1
+import it.niedermann.owncloud.notes.share.model.ShareAttributesV2
 import it.niedermann.owncloud.notes.share.model.SharePasswordRequest
 import it.niedermann.owncloud.notes.share.model.UpdateSharePermissionRequest
 import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
@@ -21,10 +23,14 @@ import it.niedermann.owncloud.notes.shared.model.ApiVersion
 import it.niedermann.owncloud.notes.shared.model.Capabilities
 import it.niedermann.owncloud.notes.shared.model.NotesSettings
 import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class ShareRepository(private val applicationContext: Context, private val account: SingleSignOnAccount) {
 
     private val tag = "ShareRepository"
+    private val gson = Gson()
     private val apiProvider: ApiProvider by lazy { ApiProvider.getInstance() }
     private val notesRepository: NotesRepository by lazy {
         NotesRepository.getInstance(
@@ -144,7 +150,6 @@ class ShareRepository(private val applicationContext: Context, private val accou
                 respPartialCircles
             )
 
-            val gson = Gson()
             return jsonResults.flatMap { jsonResult ->
                 jsonResult.map { linkedTreeMap ->
                     JSONObject(gson.toJson(linkedTreeMap))
@@ -153,6 +158,58 @@ class ShareRepository(private val applicationContext: Context, private val accou
         } else {
             ArrayList()
         }
+    }
+
+    fun getUpdateShareRequest(
+        downloadPermission: Boolean,
+        share: OCShare?,
+        noteText: String,
+        password: String,
+        sendEmail: Boolean,
+        chosenExpDateInMills: Long,
+        permission: Int
+    ): UpdateShareRequest {
+        val capabilities = capabilities()
+        val shouldUseShareAttributesV2 = (capabilities.nextcloudMajorVersion?.toInt() ?: 0) >= 30
+
+        val shareAttributes = arrayOf(
+            if (shouldUseShareAttributesV2) {
+                ShareAttributesV2(
+                    scope = "permissions",
+                    key = "download",
+                    value = downloadPermission
+                )
+            } else {
+                ShareAttributesV1(
+                    scope = "permissions",
+                    key = "download",
+                    enabled = downloadPermission
+                )
+            }
+        )
+
+        val attributes = gson.toJson(shareAttributes)
+
+        return UpdateShareRequest(
+            share_id = share!!.id.toInt(),
+            permissions = if (permission == -1) null else permission,
+            password = password,
+            publicUpload = "false",
+            expireDate = getExpirationDate(chosenExpDateInMills),
+            note = noteText,
+            attributes = attributes,
+            sendMail = sendEmail.toString()
+        )
+    }
+
+    private fun getExpirationDate(chosenExpDateInMills: Long): String? {
+        if (chosenExpDateInMills == -1L) {
+            return null
+        }
+
+        val date = Date(chosenExpDateInMills)
+
+        return SimpleDateFormat("yyyy-MM-dd", Locale.US).format(date)
     }
 
     fun capabilities(): Capabilities = notesRepository.capabilities

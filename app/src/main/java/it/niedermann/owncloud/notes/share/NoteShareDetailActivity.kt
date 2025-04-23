@@ -20,10 +20,7 @@ import it.niedermann.owncloud.notes.main.MainActivity
 import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.share.dialog.ExpirationDatePickerDialogFragment
 import it.niedermann.owncloud.notes.share.helper.SharingMenuHelper
-import it.niedermann.owncloud.notes.share.model.ShareAttributesV1
-import it.niedermann.owncloud.notes.share.model.ShareAttributesV2
 import it.niedermann.owncloud.notes.share.model.SharePasswordRequest
-import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
 import it.niedermann.owncloud.notes.share.repository.ShareRepository
 import it.niedermann.owncloud.notes.shared.util.DisplayUtils
 import it.niedermann.owncloud.notes.shared.util.clipboard.ClipboardUtil
@@ -34,7 +31,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Date
-import java.util.Locale
 
 /**
  * Activity class to show share permission options, set expiration date, change label, set password, send note
@@ -518,16 +514,6 @@ class NoteShareDetailActivity : BrandedActivity(),
         else -> permission
     }
 
-    private fun getExpirationDate(): String? {
-        if (chosenExpDateInMills == -1L) {
-            return null
-        }
-
-        val date = Date(chosenExpDateInMills)
-
-        return SimpleDateFormat("yyyy-MM-dd", Locale.US).format(date)
-    }
-
     /**
      * method to validate step 2 (note screen) information
      */
@@ -545,37 +531,15 @@ class NoteShareDetailActivity : BrandedActivity(),
     }
 
     private suspend fun updateShare(noteText: String, password: String, sendEmail: Boolean) {
-        val capabilities = repository.capabilities()
-        val shouldUseShareAttributesV2 = (capabilities.nextcloudMajorVersion?.toInt() ?: 0) >= 30
         val downloadPermission = !binding.shareProcessHideDownloadCheckbox.isChecked
-
-        val shareAttributes = arrayOf(
-            if (shouldUseShareAttributesV2) {
-                ShareAttributesV2(
-                    scope = "permissions",
-                    key = "download",
-                    value = downloadPermission
-                )
-            } else {
-                ShareAttributesV1(
-                    scope = "permissions",
-                    key = "download",
-                    enabled = downloadPermission
-                )
-            }
-        )
-
-        val attributes = gson.toJson(shareAttributes)
-
-        val requestBody = UpdateShareRequest(
-            share_id = share!!.id.toInt(),
-            permissions = if (permission == -1) null else permission,
-            password = password,
-            publicUpload = "false",
-            expireDate = getExpirationDate(),
-            note = noteText,
-            attributes = attributes,
-            sendMail = sendEmail.toString()
+        val requestBody = repository.getUpdateShareRequest(
+            downloadPermission,
+            share,
+            noteText,
+            password,
+            sendEmail,
+            chosenExpDateInMills,
+            permission
         )
 
         val updateShareResult = repository.updateShare(share!!.id, requestBody)

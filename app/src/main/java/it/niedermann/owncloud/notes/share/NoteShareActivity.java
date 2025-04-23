@@ -33,6 +33,8 @@ import com.owncloud.android.lib.common.utils.Log_OC;
 import com.owncloud.android.lib.resources.shares.OCShare;
 import com.owncloud.android.lib.resources.shares.ShareType;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -45,6 +47,7 @@ import it.niedermann.owncloud.notes.branding.BrandedActivity;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ActivityNoteShareBinding;
+import it.niedermann.owncloud.notes.main.MainActivity;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.share.adapter.ShareeListAdapter;
@@ -57,6 +60,7 @@ import it.niedermann.owncloud.notes.share.helper.AvatarLoader;
 import it.niedermann.owncloud.notes.share.helper.UsersAndGroupsSearchProvider;
 import it.niedermann.owncloud.notes.share.listener.NoteShareItemAction;
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
+import it.niedermann.owncloud.notes.share.model.UpdateShareRequest;
 import it.niedermann.owncloud.notes.share.model.UsersAndGroupsSearchConfig;
 import it.niedermann.owncloud.notes.share.repository.ShareRepository;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
@@ -65,7 +69,7 @@ import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 import it.niedermann.owncloud.notes.shared.util.clipboard.ClipboardUtil;
 import it.niedermann.owncloud.notes.shared.util.extensions.BundleExtensionsKt;
 
-public class NoteShareActivity extends BrandedActivity implements ShareeListAdapterListener, NoteShareItemAction, QuickSharingPermissionsBottomSheetDialog.QuickPermissionSharingBottomSheetActions {
+public class NoteShareActivity extends BrandedActivity implements ShareeListAdapterListener, NoteShareItemAction, QuickSharingPermissionsBottomSheetDialog.QuickPermissionSharingBottomSheetActions, SharePasswordDialogFragment.SharePasswordDialogListener {
 
     private static final String TAG = "NoteShareActivity";
     public static final String ARG_NOTE = "NOTE";
@@ -343,7 +347,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     }
 
     public void requestPasswordForShareViaLink(boolean createShare, boolean askForPassword) {
-        SharePasswordDialogFragment dialog = SharePasswordDialogFragment.newInstance(note, createShare, askForPassword);
+        SharePasswordDialogFragment dialog = SharePasswordDialogFragment.newInstance(note, createShare, askForPassword, this);
         dialog.show(getSupportFragmentManager(), SharePasswordDialogFragment.PASSWORD_FRAGMENT);
     }
 
@@ -405,7 +409,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
     @Override
     public void requestPasswordForShare(OCShare share, boolean askForPassword) {
-        SharePasswordDialogFragment dialog = SharePasswordDialogFragment.newInstance(share, askForPassword);
+        SharePasswordDialogFragment dialog = SharePasswordDialogFragment.newInstance(share, askForPassword, this);
         dialog.show(getSupportFragmentManager(), SharePasswordDialogFragment.PASSWORD_FRAGMENT);
     }
 
@@ -687,5 +691,48 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     protected void onDestroy() {
         executorService.shutdown();
         super.onDestroy();
+    }
+
+    @Override
+    public void shareFileViaPublicShare(@Nullable Note note, @Nullable String password) {
+        if (note == null || password == null) {
+            Log_OC.d(TAG, "note or password is null, cannot create a public share");
+            return;
+        }
+
+        executorService.submit(() -> {
+            final var result = repository.addShare(note, ShareType.PUBLIC_LINK, "", "false", password, 0, "");
+            runOnUiThread(() -> {
+                if (result != null) {
+                    NoteShareActivity.this.recreate();
+                } else {
+                    final var message = getString(R.string.note_share_activity_you_are_not_allowed_to_share);
+                    DisplayUtils.showSnackMessage(NoteShareActivity.this, message);
+                }
+            });
+        });
+    }
+
+    @Override
+    public void setPasswordToShare(@NotNull OCShare share, @Nullable String password) {
+        if (password == null) {
+            Log_OC.d(TAG, "password is null, cannot update a public share");
+            return;
+        }
+
+        executorService.submit(() -> {{
+            final var requestBody = repository.getUpdateShareRequest(false, share,"", password,false,-1,0);
+            final var success = repository.updateShare(share.getId(), requestBody);
+
+            runOnUiThread(() -> {
+                if (success) {
+                    final var intent = new Intent(NoteShareActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    NoteShareActivity.this.startActivity(intent);
+                } else {
+                    DisplayUtils.showSnackMessage(NoteShareActivity.this, getString(R.string.note_share_detail_activity_create_share_error));
+                }
+            });
+        }});
     }
 }
