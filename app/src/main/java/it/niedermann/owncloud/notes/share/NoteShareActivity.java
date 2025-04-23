@@ -701,7 +701,16 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         }
 
         executorService.submit(() -> {
-            final var result = repository.addShare(note, ShareType.PUBLIC_LINK, "", "false", password, 0, "");
+            final var result = repository.addShare(
+                    note,
+                    ShareType.PUBLIC_LINK,
+                    "",
+                    "false",
+                    password,
+                    repository.capabilities().getDefaultPermission(),
+                    ""
+            );
+
             runOnUiThread(() -> {
                 if (result != null) {
                     NoteShareActivity.this.recreate();
@@ -721,7 +730,14 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         }
 
         executorService.submit(() -> {{
-            final var requestBody = repository.getUpdateShareRequest(false, share,"", password,false,-1,0);
+            final var requestBody = repository.getUpdateShareRequest(false,
+                    share,
+                    "",
+                    password,
+                    false,
+                    -1,
+                    repository.capabilities().getDefaultPermission()
+            );
             final var success = repository.updateShare(share.getId(), requestBody);
 
             runOnUiThread(() -> {

@@ -42,6 +42,7 @@ public class Capabilities implements Serializable {
     private boolean publicPasswordEnforced;
     private boolean askForOptionalPassword;
     private boolean isReSharingAllowed;
+    private int defaultPermission;
 
     public boolean isReSharingAllowed() {
         return isReSharingAllowed;
@@ -57,6 +58,14 @@ public class Capabilities implements Serializable {
 
     public void setPublicPasswordEnforced(boolean value) {
         this.publicPasswordEnforced = value;
+    }
+
+    public int getDefaultPermission() {
+        return defaultPermission;
+    }
+
+    public void setDefaultPermission(int value) {
+        this.defaultPermission = value;
     }
 
     public boolean getAskForOptionalPassword() {

@@ -75,7 +75,9 @@ public class CapabilitiesDeserializer implements JsonDeserializer<Capabilities> 
                 final var enforced = password.getAsJsonPrimitive("enforced");
                 final var askForOptionalPassword = password.getAsJsonPrimitive("askForOptionalPassword");
                 final var isReSharingAllowed = filesSharing.getAsJsonPrimitive("resharing");
+                final var defaultPermission = filesSharing.getAsJsonPrimitive("default_permissions");
 
+                response.setDefaultPermission(defaultPermission.getAsInt());
                 response.setPublicPasswordEnforced(enforced.getAsBoolean());
                 response.setAskForOptionalPassword(askForOptionalPassword.getAsBoolean());
                 response.setReSharingAllowed(isReSharingAllowed.getAsBoolean());
