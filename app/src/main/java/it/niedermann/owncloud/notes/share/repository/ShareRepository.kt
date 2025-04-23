@@ -7,6 +7,7 @@ import com.nextcloud.android.sso.model.SingleSignOnAccount
 import com.owncloud.android.lib.common.utils.Log_OC
 import com.owncloud.android.lib.resources.shares.OCShare
 import com.owncloud.android.lib.resources.shares.ShareType
+import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.persistence.ApiProvider
 import it.niedermann.owncloud.notes.persistence.NotesRepository
 import it.niedermann.owncloud.notes.persistence.entity.Note
@@ -325,7 +326,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
         password: String = "",
         permissions: Int = 0,
         shareNote: String = ""
-    ): CreateShareResponse? {
+    ): Pair<Boolean, String>? {
         val notesPathCall = notesRepository.getServerSettings(account, ApiVersion.API_VERSION_1_0)
         val notesPathResponse = notesPathCall.execute()
         val notesPathResponseResult = notesPathResponse.body() ?: return null
@@ -345,20 +346,32 @@ class ShareRepository(private val applicationContext: Context, private val accou
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
         val call = shareAPI.addShare(request = requestBody)
         val response = call.execute()
+        val defaultErrorMessage = applicationContext.getString(R.string.note_share_activity_cannot_created)
+
         return try {
             if (response.isSuccessful) {
                 val createShareResponse = response.body()
                 Log_OC.d(tag, "Response successful: $createShareResponse")
-                createShareResponse?.ocs?.data
+                true to applicationContext.getString(R.string.note_share_created)
             } else {
                 val errorBody = response.errorBody()?.string()
+                if (errorBody == null) {
+                    return false to defaultErrorMessage
+                }
                 Log_OC.d(tag, "Response failed: $errorBody")
-                null
+                false to (extractErrorMessage(errorBody) ?: defaultErrorMessage)
             }
         } catch (e: Exception) {
             Log_OC.d(tag, "Exception while creating share", e)
-            null
+            false to defaultErrorMessage
         }
+    }
+
+    private fun extractErrorMessage(json: String): String {
+        val jsonObject = JSONObject(json)
+        return jsonObject.getJSONObject("ocs")
+            .getJSONObject("meta")
+            .getString("message")
     }
 
     fun updateSharePermission(

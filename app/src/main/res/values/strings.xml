@@ -74,6 +74,10 @@
     <string name="note_share_activity_contact_no_permission">Contact permission is required.</string>
     <string name="note_share_activity_you_are_not_allowed_to_share">You are not allowed to create a public share.</string>
 
+    <string name="note_share_created">Share created</string>
+    <string name="note_share_activity_cannot_created">You are not allowed to create a share.</string>
+
+
     <!-- NoteShareDetailActivity -->
     <string name="note_share_detail_activity_advanced_settings">Advanced Settings</string>
     <string name="note_share_detail_activity_share_via_link_hide_download">Hide download</string>

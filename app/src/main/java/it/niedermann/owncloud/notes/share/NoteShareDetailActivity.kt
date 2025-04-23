@@ -576,11 +576,11 @@ class NoteShareDetailActivity : BrandedActivity(),
             noteText
         )
 
-        if (result != null) {
+        if (result != null && result.first) {
             repository.getSharesForNotesAndSaveShareEntities()
         }
 
-        handleResult(result != null)
+        handleResult(result != null && result.first)
     }
 
     private suspend fun handleResult(success: Boolean) {

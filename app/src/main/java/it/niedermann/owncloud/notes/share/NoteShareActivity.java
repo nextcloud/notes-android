@@ -333,14 +333,14 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             executorService.submit(() -> {
                 final var result = repository.addShare(note, ShareType.PUBLIC_LINK, "", "false", "", 0, "");
                 if (result != null) {
-                    note.setIsShared(true);
-                    repository.updateNote(note);
-                    runOnUiThread(this::recreate);
-                } else {
-                    runOnUiThread(() -> {
-                        final var message = getString(R.string.note_share_activity_you_are_not_allowed_to_share);
-                        DisplayUtils.showSnackMessage(NoteShareActivity.this, message);
-                    });
+                    final var message = result.getSecond();
+                    DisplayUtils.showSnackMessage(NoteShareActivity.this, message);
+
+                    if (result.getFirst()) {
+                        note.setIsShared(true);
+                        repository.updateNote(note);
+                        runOnUiThread(this::recreate);
+                    }
                 }
             });
         }
@@ -713,10 +713,12 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
             runOnUiThread(() -> {
                 if (result != null) {
-                    NoteShareActivity.this.recreate();
-                } else {
-                    final var message = getString(R.string.note_share_activity_you_are_not_allowed_to_share);
+                    final var message = result.getSecond();
                     DisplayUtils.showSnackMessage(NoteShareActivity.this, message);
+
+                    if (result.getFirst()) {
+                        NoteShareActivity.this.recreate();
+                    }
                 }
             });
         });
