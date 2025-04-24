@@ -13,7 +13,6 @@ import it.niedermann.owncloud.notes.persistence.NotesRepository
 import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.persistence.entity.ShareEntity
 import it.niedermann.owncloud.notes.share.model.CreateShareRequest
-import it.niedermann.owncloud.notes.share.model.CreateShareResponse
 import it.niedermann.owncloud.notes.share.model.ShareAttributesV1
 import it.niedermann.owncloud.notes.share.model.ShareAttributesV2
 import it.niedermann.owncloud.notes.share.model.SharePasswordRequest
@@ -24,10 +23,9 @@ import it.niedermann.owncloud.notes.shared.model.ApiVersion
 import it.niedermann.owncloud.notes.shared.model.Capabilities
 import it.niedermann.owncloud.notes.shared.model.NotesSettings
 import it.niedermann.owncloud.notes.shared.util.extensions.getErrorMessage
+import it.niedermann.owncloud.notes.shared.util.extensions.toExpirationDateString
 import org.json.JSONObject
-import java.text.SimpleDateFormat
 import java.util.Date
-import java.util.Locale
 
 class ShareRepository(private val applicationContext: Context, private val account: SingleSignOnAccount) {
 
@@ -171,7 +169,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
         chosenExpDateInMills: Long,
         permission: Int
     ): UpdateShareRequest {
-        val capabilities = capabilities()
+        val capabilities = getCapabilities()
         val shouldUseShareAttributesV2 = (capabilities.nextcloudMajorVersion?.toInt() ?: 0) >= 30
 
         val shareAttributes = arrayOf(
@@ -209,12 +207,10 @@ class ShareRepository(private val applicationContext: Context, private val accou
             return null
         }
 
-        val date = Date(chosenExpDateInMills)
-
-        return SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(date)
+        return Date(chosenExpDateInMills).toExpirationDateString()
     }
 
-    fun capabilities(): Capabilities = notesRepository.capabilities
+    fun getCapabilities(): Capabilities = notesRepository.capabilities
 
     fun getShares(remoteId: Long): List<OCShare>? {
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)

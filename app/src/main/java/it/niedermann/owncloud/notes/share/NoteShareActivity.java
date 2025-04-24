@@ -60,7 +60,6 @@ import it.niedermann.owncloud.notes.share.helper.AvatarLoader;
 import it.niedermann.owncloud.notes.share.helper.UsersAndGroupsSearchProvider;
 import it.niedermann.owncloud.notes.share.listener.NoteShareItemAction;
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
-import it.niedermann.owncloud.notes.share.model.UpdateShareRequest;
 import it.niedermann.owncloud.notes.share.model.UsersAndGroupsSearchConfig;
 import it.niedermann.owncloud.notes.share.repository.ShareRepository;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
@@ -111,7 +110,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             try {
                 final var ssoAcc = SingleAccountHelper.getCurrentSingleSignOnAccount(NoteShareActivity.this);
                 repository = new ShareRepository(NoteShareActivity.this, ssoAcc);
-                capabilities = repository.capabilities();
+                capabilities = repository.getCapabilities();
                 repository.getSharesForNotesAndSaveShareEntities();
 
                 runOnUiThread(() -> {
@@ -707,7 +706,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                     "",
                     "false",
                     password,
-                    repository.capabilities().getDefaultPermission(),
+                    repository.getCapabilities().getDefaultPermission(),
                     ""
             );
 
@@ -738,7 +737,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                     password,
                     false,
                     -1,
-                    repository.capabilities().getDefaultPermission()
+                    repository.getCapabilities().getDefaultPermission()
             );
             final var success = repository.updateShare(share.getId(), requestBody);
 
