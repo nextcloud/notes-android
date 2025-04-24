@@ -749,7 +749,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                         password,
                         false,
                         -1,
-                        repository.getCapabilities().getDefaultPermission()
+                        share.getPermissions()
                 );
                 final var result = repository.updateShare(share.getId(), requestBody);
 
