@@ -743,7 +743,8 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
         executorService.submit(() -> {
             {
-                final var requestBody = repository.getUpdateShareRequest(false,
+                final var requestBody = repository.getUpdateShareRequest(
+                        false,
                         share,
                         "",
                         password,

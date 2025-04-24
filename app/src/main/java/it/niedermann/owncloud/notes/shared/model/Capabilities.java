@@ -13,6 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.owncloud.android.lib.resources.shares.OCShare;
+
 import java.io.Serializable;
 
 @Entity(tableName = "capabilities")
@@ -42,7 +44,7 @@ public class Capabilities implements Serializable {
     private boolean publicPasswordEnforced;
     private boolean askForOptionalPassword;
     private boolean isReSharingAllowed;
-    private int defaultPermission;
+    private int defaultPermission = OCShare.NO_PERMISSION;
 
     public boolean isReSharingAllowed() {
         return isReSharingAllowed;

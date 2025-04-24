@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import androidx.lifecycle.lifecycleScope
-import com.google.gson.Gson
 import com.nextcloud.android.sso.helper.SingleAccountHelper
 import com.owncloud.android.lib.common.utils.Log_OC
 import com.owncloud.android.lib.resources.shares.OCShare
@@ -76,7 +75,6 @@ class NoteShareDetailActivity : BrandedActivity(),
 
     private var expirationDatePickerFragment: ExpirationDatePickerDialogFragment? = null
     private lateinit var repository: ShareRepository
-    private val gson = Gson()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -116,6 +114,8 @@ class NoteShareDetailActivity : BrandedActivity(),
                 implementClickEvents()
             }
         }
+
+        permission = repository.getCapabilities().defaultPermission
     }
 
 
