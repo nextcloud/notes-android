@@ -23,6 +23,7 @@ import it.niedermann.owncloud.notes.share.model.toOCShare
 import it.niedermann.owncloud.notes.shared.model.ApiVersion
 import it.niedermann.owncloud.notes.shared.model.Capabilities
 import it.niedermann.owncloud.notes.shared.model.NotesSettings
+import it.niedermann.owncloud.notes.shared.util.extensions.getErrorMessage
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -210,7 +211,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
 
         val date = Date(chosenExpDateInMills)
 
-        return SimpleDateFormat("yyyy-MM-dd", Locale.US).format(date)
+        return SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(date)
     }
 
     fun capabilities(): Capabilities = notesRepository.capabilities
@@ -354,24 +355,17 @@ class ShareRepository(private val applicationContext: Context, private val accou
                 Log_OC.d(tag, "Response successful: $createShareResponse")
                 true to applicationContext.getString(R.string.note_share_created)
             } else {
-                val errorBody = response.errorBody()?.string()
-                if (errorBody == null) {
+                val errorMessage = response.getErrorMessage()
+                if (errorMessage == null) {
                     return false to defaultErrorMessage
                 }
-                Log_OC.d(tag, "Response failed: $errorBody")
-                false to (extractErrorMessage(errorBody) ?: defaultErrorMessage)
+                Log_OC.d(tag, "Response failed: $errorMessage")
+                false to errorMessage
             }
         } catch (e: Exception) {
             Log_OC.d(tag, "Exception while creating share", e)
             false to defaultErrorMessage
         }
-    }
-
-    private fun extractErrorMessage(json: String): String {
-        val jsonObject = JSONObject(json)
-        return jsonObject.getJSONObject("ocs")
-            .getJSONObject("meta")
-            .getString("message")
     }
 
     fun updateSharePermission(
