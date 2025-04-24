@@ -48,6 +48,8 @@ import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ActivityNoteShareBinding;
 import it.niedermann.owncloud.notes.main.MainActivity;
+import it.niedermann.owncloud.notes.persistence.ApiResult;
+import it.niedermann.owncloud.notes.persistence.ApiResultKt;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.share.adapter.ShareeListAdapter;
@@ -60,9 +62,11 @@ import it.niedermann.owncloud.notes.share.helper.AvatarLoader;
 import it.niedermann.owncloud.notes.share.helper.UsersAndGroupsSearchProvider;
 import it.niedermann.owncloud.notes.share.listener.NoteShareItemAction;
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
+import it.niedermann.owncloud.notes.share.model.CreateShareResponse;
 import it.niedermann.owncloud.notes.share.model.UsersAndGroupsSearchConfig;
 import it.niedermann.owncloud.notes.share.repository.ShareRepository;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
+import it.niedermann.owncloud.notes.shared.model.OcsResponse;
 import it.niedermann.owncloud.notes.shared.util.DisplayUtils;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 import it.niedermann.owncloud.notes.shared.util.clipboard.ClipboardUtil;
@@ -331,16 +335,17 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         } else {
             executorService.submit(() -> {
                 final var result = repository.addShare(note, ShareType.PUBLIC_LINK, "", "false", "", 0, "");
-                if (result != null) {
-                    final var message = result.getSecond();
-                    DisplayUtils.showSnackMessage(NoteShareActivity.this, message);
+                runOnUiThread(() -> {
+                    if (result instanceof ApiResult.Success<OcsResponse<CreateShareResponse>> successResponse) {
+                        DisplayUtils.showSnackMessage(NoteShareActivity.this, successResponse.getMessage());
 
-                    if (result.getFirst()) {
                         note.setIsShared(true);
                         repository.updateNote(note);
-                        runOnUiThread(this::recreate);
+                        runOnUiThread(NoteShareActivity.this::recreate);
+                    } else if (result instanceof ApiResult.Error errorResponse) {
+                        DisplayUtils.showSnackMessage(NoteShareActivity.this, errorResponse.getMessage());
                     }
-                }
+                });
             });
         }
     }
@@ -363,14 +368,14 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         intentToShareLink.setType("text/plain");
         intentToShareLink.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.note_share_activity_subject_shared_with_you, note.getTitle()));
 
-        String[] packagesToExclude = new String[] { this.getPackageName() };
+        String[] packagesToExclude = new String[]{this.getPackageName()};
         DialogFragment chooserDialog = ShareLinkToDialog.newInstance(intentToShareLink, packagesToExclude);
         chooserDialog.show(getSupportFragmentManager(), FTAG_CHOOSER_DIALOG);
     }
 
     private String createInternalLink() {
         Uri baseUri = Uri.parse(account.getUrl());
-        return baseUri + "/index.php/f/" +  note.getRemoteId();
+        return baseUri + "/index.php/f/" + note.getRemoteId();
     }
 
     @Override
@@ -642,7 +647,15 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
     @Override
     public void onQuickPermissionChanged(OCShare share, int permission) {
-       repository.updateSharePermission(share.getId(), permission);
+        executorService.submit(() -> {
+            final var result = repository.updateSharePermission(share.getId(), permission);
+
+            runOnUiThread(() -> {
+                if (result instanceof ApiResult.Error error) {
+                    DisplayUtils.showSnackMessage(NoteShareActivity.this, error.getMessage());
+                }
+            });
+        });
     }
 
     private final ActivityResultLauncher<String> requestContactPermissionLauncher =
@@ -711,13 +724,11 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             );
 
             runOnUiThread(() -> {
-                if (result != null) {
-                    final var message = result.getSecond();
-                    DisplayUtils.showSnackMessage(NoteShareActivity.this, message);
-
-                    if (result.getFirst()) {
-                        NoteShareActivity.this.recreate();
-                    }
+                if (ApiResultKt.isSuccess(result)) {
+                    NoteShareActivity.this.recreate();
+                } else if (ApiResultKt.isError(result)) {
+                    ApiResult.Error error = (ApiResult.Error) result;
+                    DisplayUtils.showSnackMessage(NoteShareActivity.this, error.getMessage());
                 }
             });
         });
@@ -730,26 +741,29 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             return;
         }
 
-        executorService.submit(() -> {{
-            final var requestBody = repository.getUpdateShareRequest(false,
-                    share,
-                    "",
-                    password,
-                    false,
-                    -1,
-                    repository.getCapabilities().getDefaultPermission()
-            );
-            final var success = repository.updateShare(share.getId(), requestBody);
+        executorService.submit(() -> {
+            {
+                final var requestBody = repository.getUpdateShareRequest(false,
+                        share,
+                        "",
+                        password,
+                        false,
+                        -1,
+                        repository.getCapabilities().getDefaultPermission()
+                );
+                final var result = repository.updateShare(share.getId(), requestBody);
 
-            runOnUiThread(() -> {
-                if (success) {
-                    final var intent = new Intent(NoteShareActivity.this, MainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    NoteShareActivity.this.startActivity(intent);
-                } else {
-                    DisplayUtils.showSnackMessage(NoteShareActivity.this, getString(R.string.note_share_detail_activity_create_share_error));
-                }
-            });
-        }});
+                runOnUiThread(() -> {
+                    if (ApiResultKt.isSuccess(result)) {
+                        final var intent = new Intent(NoteShareActivity.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        NoteShareActivity.this.startActivity(intent);
+                    } else if (ApiResultKt.isError(result)) {
+                        ApiResult.Error error = (ApiResult.Error) result;
+                        DisplayUtils.showSnackMessage(NoteShareActivity.this, error.getMessage());
+                    }
+                });
+            }
+        });
     }
 }

@@ -9,10 +9,12 @@ import com.owncloud.android.lib.resources.shares.OCShare
 import com.owncloud.android.lib.resources.shares.ShareType
 import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.persistence.ApiProvider
+import it.niedermann.owncloud.notes.persistence.ApiResult
 import it.niedermann.owncloud.notes.persistence.NotesRepository
 import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.persistence.entity.ShareEntity
 import it.niedermann.owncloud.notes.share.model.CreateShareRequest
+import it.niedermann.owncloud.notes.share.model.CreateShareResponse
 import it.niedermann.owncloud.notes.share.model.ShareAttributesV1
 import it.niedermann.owncloud.notes.share.model.ShareAttributesV2
 import it.niedermann.owncloud.notes.share.model.SharePasswordRequest
@@ -22,6 +24,7 @@ import it.niedermann.owncloud.notes.share.model.toOCShare
 import it.niedermann.owncloud.notes.shared.model.ApiVersion
 import it.niedermann.owncloud.notes.shared.model.Capabilities
 import it.niedermann.owncloud.notes.shared.model.NotesSettings
+import it.niedermann.owncloud.notes.shared.model.OcsResponse
 import it.niedermann.owncloud.notes.shared.util.StringConstants
 import it.niedermann.owncloud.notes.shared.util.extensions.getErrorMessage
 import it.niedermann.owncloud.notes.shared.util.extensions.toExpirationDateString
@@ -307,21 +310,27 @@ class ShareRepository(
         }
     }
 
-    fun updateShare(shareId: Long, requestBody: UpdateShareRequest): Boolean {
+    fun updateShare(
+        shareId: Long,
+        requestBody: UpdateShareRequest
+    ): ApiResult<OcsResponse<CreateShareResponse>?> {
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
         val call = shareAPI.updateShare(shareId, requestBody)
         val response = call.execute()
         return try {
             if (response.isSuccessful) {
                 Log_OC.d(tag, "Share updated successfully: ${response.body().toString()}")
+                ApiResult.Success(
+                    data = response.body(),
+                    message = applicationContext.getString(R.string.note_share_created)
+                )
             } else {
                 Log_OC.d(tag, "Failed to update share: ${response.errorBody()?.string()}")
+                ApiResult.Error(message = response.getErrorMessage() ?: "")
             }
-
-            response.isSuccessful
         } catch (e: Exception) {
             Log_OC.d(tag, "Exception while updating share", e)
-            false
+            ApiResult.Error(message = e.message ?: "")
         }
     }
 
@@ -335,10 +344,13 @@ class ShareRepository(
         password: String = "",
         permissions: Int = 0,
         shareNote: String = ""
-    ): Pair<Boolean, String>? {
+    ): ApiResult<OcsResponse<CreateShareResponse>?> {
+        val defaultErrorMessage =
+            applicationContext.getString(R.string.note_share_activity_cannot_created)
         val notesPathCall = notesRepository.getServerSettings(account, ApiVersion.API_VERSION_1_0)
         val notesPathResponse = notesPathCall.execute()
-        val notesPathResponseResult = notesPathResponse.body() ?: return null
+        val notesPathResponseResult =
+            notesPathResponse.body() ?: return ApiResult.Error(message = defaultErrorMessage)
         val notesPath = notesPathResponseResult.notesPath
         val notesSuffix = notesPathResponseResult.fileSuffix
 
@@ -355,32 +367,33 @@ class ShareRepository(
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
         val call = shareAPI.addShare(request = requestBody)
         val response = call.execute()
-        val defaultErrorMessage =
-            applicationContext.getString(R.string.note_share_activity_cannot_created)
 
         return try {
             if (response.isSuccessful) {
                 val createShareResponse = response.body()
                 Log_OC.d(tag, "Response successful: $createShareResponse")
-                true to applicationContext.getString(R.string.note_share_created)
+                ApiResult.Success(
+                    data = createShareResponse,
+                    message = applicationContext.getString(R.string.note_share_created)
+                )
             } else {
                 val errorMessage = response.getErrorMessage()
                 if (errorMessage == null) {
-                    return false to defaultErrorMessage
+                    return ApiResult.Error(message = defaultErrorMessage)
                 }
                 Log_OC.d(tag, "Response failed: $errorMessage")
-                false to errorMessage
+                ApiResult.Error(message = errorMessage)
             }
         } catch (e: Exception) {
             Log_OC.d(tag, "Exception while creating share", e)
-            false to defaultErrorMessage
+            ApiResult.Error(message = defaultErrorMessage)
         }
     }
 
     fun updateSharePermission(
         shareId: Long,
         permissions: Int? = null,
-    ): Boolean {
+    ): ApiResult<OcsResponse<CreateShareResponse>?> {
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
         val requestBody = UpdateSharePermissionRequest(permissions = permissions)
 
@@ -389,13 +402,14 @@ class ShareRepository(
             val response = call.execute()
             if (response.isSuccessful) {
                 Log_OC.d(tag, "Share updated successfully: ${response.body()}")
+                ApiResult.Success(response.body())
             } else {
                 Log_OC.d(tag, "Failed to update share: ${response.errorBody()?.string()}")
+                ApiResult.Error(message = response.getErrorMessage() ?: "", code = null)
             }
-            response.isSuccessful
         } catch (e: Exception) {
             Log_OC.d(tag, "Exception while updating share", e)
-            false
+            ApiResult.Error(message = e.message ?: "", code = null)
         }
     }
     // endregion

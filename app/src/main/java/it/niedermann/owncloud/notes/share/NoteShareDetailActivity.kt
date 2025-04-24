@@ -18,6 +18,7 @@ import it.niedermann.owncloud.notes.branding.BrandingUtil
 import it.niedermann.owncloud.notes.databinding.ActivityNoteShareDetailBinding
 import it.niedermann.owncloud.notes.main.MainActivity
 import it.niedermann.owncloud.notes.persistence.entity.Note
+import it.niedermann.owncloud.notes.persistence.isSuccess
 import it.niedermann.owncloud.notes.share.dialog.ExpirationDatePickerDialogFragment
 import it.niedermann.owncloud.notes.share.helper.SharingMenuHelper
 import it.niedermann.owncloud.notes.share.model.SharePasswordRequest
@@ -544,11 +545,11 @@ class NoteShareDetailActivity : BrandedActivity(),
 
         val updateShareResult = repository.updateShare(share!!.id, requestBody)
 
-        if (updateShareResult && sendEmail) {
+        if (updateShareResult.isSuccess() && sendEmail) {
             val sendEmailResult = repository.sendEmail(share!!.id, SharePasswordRequest(password))
             handleResult(sendEmailResult)
         } else {
-            handleResult(updateShareResult)
+            handleResult(updateShareResult.isSuccess())
         }
 
         if (!sendEmail) {
@@ -576,11 +577,11 @@ class NoteShareDetailActivity : BrandedActivity(),
             noteText
         )
 
-        if (result != null && result.first) {
+        if (result.isSuccess()) {
             repository.getSharesForNotesAndSaveShareEntities()
         }
 
-        handleResult(result != null && result.first)
+        handleResult(result.isSuccess())
     }
 
     private suspend fun handleResult(success: Boolean) {
