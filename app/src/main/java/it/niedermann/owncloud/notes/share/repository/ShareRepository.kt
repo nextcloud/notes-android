@@ -22,12 +22,16 @@ import it.niedermann.owncloud.notes.share.model.toOCShare
 import it.niedermann.owncloud.notes.shared.model.ApiVersion
 import it.niedermann.owncloud.notes.shared.model.Capabilities
 import it.niedermann.owncloud.notes.shared.model.NotesSettings
+import it.niedermann.owncloud.notes.shared.util.StringConstants
 import it.niedermann.owncloud.notes.shared.util.extensions.getErrorMessage
 import it.niedermann.owncloud.notes.shared.util.extensions.toExpirationDateString
 import org.json.JSONObject
 import java.util.Date
 
-class ShareRepository(private val applicationContext: Context, private val account: SingleSignOnAccount) {
+class ShareRepository(
+    private val applicationContext: Context,
+    private val account: SingleSignOnAccount
+) {
 
     private val tag = "ShareRepository"
     private val gson = Gson()
@@ -48,7 +52,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
         val notesPathResponseResult = getNotesPathResponseResult() ?: return null
         val notesPath = notesPathResponseResult.notesPath
         val notesSuffix = notesPathResponseResult.fileSuffix
-        return  "/" + notesPath + "/" + note.title + notesSuffix
+        return StringConstants.PATH + notesPath + StringConstants.PATH + note.title + notesSuffix
     }
 
     fun getShareEntitiesForSpecificNote(note: Note): List<ShareEntity> {
@@ -56,6 +60,17 @@ class ShareRepository(private val applicationContext: Context, private val accou
         return notesRepository.getShareEntities(path)
     }
 
+    private fun getExpirationDate(chosenExpDateInMills: Long): String? {
+        if (chosenExpDateInMills == -1L) {
+            return null
+        }
+
+        return Date(chosenExpDateInMills).toExpirationDateString()
+    }
+
+    fun getCapabilities(): Capabilities = notesRepository.capabilities
+
+    // region API calls
     fun getSharesForNotesAndSaveShareEntities() {
         val notesPathResponseResult = getNotesPathResponseResult() ?: return
         val notesPath = notesPathResponseResult.notesPath
@@ -69,7 +84,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
             if (call != null) {
                 val respOCS = call["ocs"] as? LinkedTreeMap<*, *>
                 val respData = respOCS?.getList("data")
-                respData?.forEach { data  ->
+                respData?.forEach { data ->
                     val map = data as? LinkedTreeMap<*, *>
                     val id = map?.get("id") as? String
                     val note = map?.get("note") as? String
@@ -117,7 +132,11 @@ class ShareRepository(private val applicationContext: Context, private val accou
         perPage: Int
     ): ArrayList<JSONObject> {
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
-        val call = shareAPI.getSharees(search = searchString, page = page.toString(), perPage = perPage.toString())
+        val call = shareAPI.getSharees(
+            search = searchString,
+            page = page.toString(),
+            perPage = perPage.toString()
+        )
         return if (call != null) {
             val respOCS = call["ocs"] as? LinkedTreeMap<*, *>
             val respData = respOCS?.get("data") as? LinkedTreeMap<*, *>
@@ -127,13 +146,15 @@ class ShareRepository(private val applicationContext: Context, private val accou
             val respExactGroups = respExact?.getList("groups")
             val respExactRemotes = respExact?.getList("remotes")
             val respExactEmails = respExact?.getList("emails")
-            val respExactCircles = respExact?.takeIf { it.containsKey("circles") }?.getList("circles")
+            val respExactCircles =
+                respExact?.takeIf { it.containsKey("circles") }?.getList("circles")
             val respExactRooms = respExact?.takeIf { it.containsKey("rooms") }?.getList("rooms")
 
             val respPartialUsers = respData?.getList("users")
             val respPartialGroups = respData?.getList("groups")
             val respPartialRemotes = respData?.getList("remotes")
-            val respPartialCircles = respData?.takeIf { it.containsKey("circles") }?.getList("circles")
+            val respPartialCircles =
+                respData?.takeIf { it.containsKey("circles") }?.getList("circles")
             val respPartialRooms = respData?.takeIf { it.containsKey("rooms") }?.getList("rooms")
 
             val jsonResults = listOfNotNull(
@@ -202,16 +223,6 @@ class ShareRepository(private val applicationContext: Context, private val accou
         )
     }
 
-    private fun getExpirationDate(chosenExpDateInMills: Long): String? {
-        if (chosenExpDateInMills == -1L) {
-            return null
-        }
-
-        return Date(chosenExpDateInMills).toExpirationDateString()
-    }
-
-    fun getCapabilities(): Capabilities = notesRepository.capabilities
-
     fun getShares(remoteId: Long): List<OCShare>? {
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
         val call = shareAPI.getShares(remoteId)
@@ -219,7 +230,8 @@ class ShareRepository(private val applicationContext: Context, private val accou
 
         return try {
             if (response.isSuccessful) {
-                val result = response.body()?.ocs?.data ?: throw RuntimeException("No shares available")
+                val result =
+                    response.body()?.ocs?.data ?: throw RuntimeException("No shares available")
                 result.toOCShare()
             } else {
                 Log_OC.d(tag, "Failed to getShares: ${response.errorBody()?.string()}")
@@ -233,7 +245,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
 
     fun sendEmail(shareId: Long, requestBody: SharePasswordRequest): Boolean {
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
-        val call = shareAPI.sendEmail(shareId , requestBody)
+        val call = shareAPI.sendEmail(shareId, requestBody)
         val response = call.execute()
 
         return try {
@@ -309,7 +321,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
             response.isSuccessful
         } catch (e: Exception) {
             Log_OC.d(tag, "Exception while updating share", e)
-           false
+            false
         }
     }
 
@@ -331,7 +343,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
         val notesSuffix = notesPathResponseResult.fileSuffix
 
         val requestBody = CreateShareRequest(
-            path = "/" + notesPath + "/" + note.title + notesSuffix,
+            path = StringConstants.PATH + notesPath + StringConstants.PATH + note.title + notesSuffix,
             shareType = shareType.value,
             shareWith = shareWith,
             publicUpload = publicUpload,
@@ -343,7 +355,8 @@ class ShareRepository(private val applicationContext: Context, private val accou
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
         val call = shareAPI.addShare(request = requestBody)
         val response = call.execute()
-        val defaultErrorMessage = applicationContext.getString(R.string.note_share_activity_cannot_created)
+        val defaultErrorMessage =
+            applicationContext.getString(R.string.note_share_activity_cannot_created)
 
         return try {
             if (response.isSuccessful) {
@@ -385,4 +398,5 @@ class ShareRepository(private val applicationContext: Context, private val accou
             false
         }
     }
+    // endregion
 }
