@@ -27,6 +27,7 @@
             <trusting group="androidx.fragment"/>
             <trusting group="androidx.room"/>
             <trusting group="androidx.sqlite"/>
+            <trusting group="androidx.work" name="work-runtime" version="2.10.1"/>
             <trusting group="^androidx[.]compose($|([.].*))" regex="true"/>
             <trusting group="^com[.]android($|([.].*))" regex="true"/>
          </trusted-key>
