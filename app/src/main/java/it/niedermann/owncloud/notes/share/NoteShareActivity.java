@@ -337,12 +337,11 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             executorService.submit(() -> {
                 final var result = repository.addShare(note, ShareType.PUBLIC_LINK, "", "false", "", 0, "");
                 runOnUiThread(() -> {
-                    if (result instanceof ApiResult.Success<OcsResponse<CreateShareResponse>> successResponse) {
+                    if (result instanceof ApiResult.Success<OcsResponse<CreateShareResponse>> successResponse && binding.sharesList.getAdapter() instanceof ShareeListAdapter adapter) {
                         DisplayUtils.showSnackMessage(NoteShareActivity.this, successResponse.getMessage());
-
                         note.setIsShared(true);
                         repository.updateNote(note);
-                        runOnUiThread(NoteShareActivity.this::recreate);
+                        adapter.addShare(CreateShareResponseExtensionsKt.toOCShare(successResponse.getData().ocs.data));
                     } else if (result instanceof ApiResult.Error errorResponse) {
                         DisplayUtils.showSnackMessage(NoteShareActivity.this, errorResponse.getMessage());
                     }
@@ -758,8 +757,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                 if (result instanceof ApiResult.Success<OcsResponse<CreateShareResponse>> successResponse &&
                         binding.sharesList.getAdapter() instanceof ShareeListAdapter adapter) {
                     adapter.addShare(CreateShareResponseExtensionsKt.toOCShare(successResponse.getData().ocs.data));
-                } else if (ApiResultKt.isError(result)) {
-                    ApiResult.Error error = (ApiResult.Error) result;
+                } else if (result instanceof ApiResult.Error error) {
                     DisplayUtils.showSnackMessage(NoteShareActivity.this, error.getMessage());
                 }
             });
