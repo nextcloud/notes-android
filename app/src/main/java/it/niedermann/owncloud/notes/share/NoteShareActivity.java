@@ -131,7 +131,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                         setupSearchView((SearchManager) getSystemService(Context.SEARCH_SERVICE), getComponentName());
                     }
 
-                    refreshSharesFromDB();
+                    updateShareeListAdapter();
                     binding.loadingLayout.setVisibility(View.GONE);
                 });
             } catch (Exception e) {
@@ -422,7 +422,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     public void showProfileBottomSheet(Account account, String shareWith) {
     }
 
-    public void refreshSharesFromDB() {
+    public void updateShareeListAdapter() {
         executorService.submit(() -> {
             try {
                 ShareeListAdapter adapter = (ShareeListAdapter) binding.sharesList.getAdapter();
@@ -459,7 +459,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                     setShareWithYou();
                 });
             } catch (Exception e) {
-                Log_OC.d(TAG, "Exception while refreshSharesFromDB: " + e);
+                Log_OC.d(TAG, "Exception while updateShareeListAdapter: " + e);
             }
         });
     }
@@ -652,11 +652,39 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             final var result = repository.updateSharePermission(share.getId(), permission);
             runOnUiThread(() -> {
                 if (ApiResultKt.isSuccess(result)) {
-                    NoteShareActivity.this.recreate();
+                    updateShare(share);
                 } else if (result instanceof ApiResult.Error error) {
                     DisplayUtils.showSnackMessage(NoteShareActivity.this, error.getMessage());
                 }
             });
+        });
+    }
+
+    private void updateShare(OCShare share) {
+        executorService.submit(() -> {
+            try {
+                final var updatedShares = repository.getShares(share.getId());
+
+                runOnUiThread(() -> {
+                    if (updatedShares != null && binding.sharesList.getAdapter() instanceof ShareeListAdapter adapter) {
+                        OCShare updatedShare = null;
+                        for (int i=0;i<updatedShares.size();i++) {
+                            if (updatedShares.get(i).getId() == share.getId()) {
+                                updatedShare = updatedShares.get(i);
+                                break;
+                            }
+                        }
+
+                        if (updatedShare == null) {
+                           return;
+                        }
+
+                        adapter.updateShare(updatedShare);
+                    }
+                });
+            } catch (Exception e) {
+                Log_OC.d(TAG, "Exception while refreshing share info: " + e);
+            }
         });
     }
 
