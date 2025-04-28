@@ -104,6 +104,7 @@ class NoteShareDetailActivity : BrandedActivity(),
             val ssoAcc =
                 SingleAccountHelper.getCurrentSingleSignOnAccount(this@NoteShareDetailActivity)
             repository = ShareRepository(this@NoteShareDetailActivity, ssoAcc)
+            permission = repository.getCapabilities().defaultPermission
 
             withContext(Dispatchers.Main) {
                 if (shareProcessStep == SCREEN_TYPE_PERMISSION) {
@@ -114,8 +115,6 @@ class NoteShareDetailActivity : BrandedActivity(),
                 implementClickEvents()
             }
         }
-
-        permission = repository.getCapabilities().defaultPermission
     }
 
 
