@@ -47,6 +47,7 @@ public class ShareeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         this.account = account;
 
         sortShares();
+        setHasStableIds(true);
     }
 
     @Override
@@ -128,6 +129,10 @@ public class ShareeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public long getItemId(int position) {
+        if (position < 0 || position >= shares.size()) {
+            return 0;
+        }
+
         return shares.get(position).getId();
     }
 
@@ -153,6 +158,12 @@ public class ShareeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @SuppressLint("NotifyDataSetChanged")
     public void remove(OCShare share) {
         shares.remove(share);
+        notifyDataSetChanged();
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void removeAll() {
+        shares.clear();
         notifyDataSetChanged();
     }
 

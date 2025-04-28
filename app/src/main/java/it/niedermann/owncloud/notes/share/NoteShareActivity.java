@@ -432,11 +432,12 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                     return;
                 }
 
-                adapter.getShares().clear();
+                // clear adapter
+                adapter.removeAll();
+                shares.clear();
 
                 // to show share with users/groups info
                 if (note != null) {
-
                     // get shares from local DB
                     final var shareEntities = repository.getShareEntitiesForSpecificNote(note);
                     shareEntities.forEach(entity -> {
@@ -649,9 +650,10 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     public void onQuickPermissionChanged(OCShare share, int permission) {
         executorService.submit(() -> {
             final var result = repository.updateSharePermission(share.getId(), permission);
-
             runOnUiThread(() -> {
-                if (result instanceof ApiResult.Error error) {
+                if (ApiResultKt.isSuccess(result)) {
+                    NoteShareActivity.this.recreate();
+                } else if (result instanceof ApiResult.Error error) {
                     DisplayUtils.showSnackMessage(NoteShareActivity.this, error.getMessage());
                 }
             });
