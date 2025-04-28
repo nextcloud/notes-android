@@ -20,7 +20,7 @@ import it.niedermann.owncloud.notes.share.model.ShareAttributesV2
 import it.niedermann.owncloud.notes.share.model.SharePasswordRequest
 import it.niedermann.owncloud.notes.share.model.UpdateSharePermissionRequest
 import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
-import it.niedermann.owncloud.notes.share.model.toOCShare
+import it.niedermann.owncloud.notes.share.model.toOCShareList
 import it.niedermann.owncloud.notes.shared.model.ApiVersion
 import it.niedermann.owncloud.notes.shared.model.Capabilities
 import it.niedermann.owncloud.notes.shared.model.NotesSettings
@@ -235,7 +235,7 @@ class ShareRepository(
             if (response.isSuccessful) {
                 val result =
                     response.body()?.ocs?.data ?: throw RuntimeException("No shares available")
-                result.toOCShare()
+                result.toOCShareList()
             } else {
                 Log_OC.d(tag, "Failed to getShares: ${response.errorBody()?.string()}")
                 null
@@ -274,7 +274,7 @@ class ShareRepository(
             if (response.isSuccessful) {
                 val body = response.body()
                 Log_OC.d(tag, "Response successful: $body")
-                body?.ocs?.data?.toOCShare()
+                body?.ocs?.data?.toOCShareList()
             } else {
                 val errorBody = response.errorBody()?.string()
                 Log_OC.d(tag, "Response failed: $errorBody")

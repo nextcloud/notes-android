@@ -167,11 +167,12 @@ public class ShareeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         notifyDataSetChanged();
     }
 
-    public void updateShare(OCShare updatedShare) {
-        if (updatedShare == null) {
-            return;
-        }
+    public void addShare(@NonNull OCShare newShare) {
+        shares.add(0, newShare);
+        notifyItemInserted(0);
+    }
 
+    public void updateShare(@NonNull OCShare updatedShare) {
         int indexToUpdate = -1;
         for (int i = 0; i < getItemCount(); i++) {
             final var share = shares.get(i);

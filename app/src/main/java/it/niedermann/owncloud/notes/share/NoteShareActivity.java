@@ -63,6 +63,7 @@ import it.niedermann.owncloud.notes.share.helper.UsersAndGroupsSearchProvider;
 import it.niedermann.owncloud.notes.share.listener.NoteShareItemAction;
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
 import it.niedermann.owncloud.notes.share.model.CreateShareResponse;
+import it.niedermann.owncloud.notes.share.model.CreateShareResponseExtensionsKt;
 import it.niedermann.owncloud.notes.share.model.UsersAndGroupsSearchConfig;
 import it.niedermann.owncloud.notes.share.repository.ShareRepository;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
@@ -754,8 +755,9 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             );
 
             runOnUiThread(() -> {
-                if (ApiResultKt.isSuccess(result)) {
-                    NoteShareActivity.this.recreate();
+                if (result instanceof ApiResult.Success<OcsResponse<CreateShareResponse>> successResponse &&
+                        binding.sharesList.getAdapter() instanceof ShareeListAdapter adapter) {
+                    adapter.addShare(CreateShareResponseExtensionsKt.toOCShare(successResponse.getData().ocs.data));
                 } else if (ApiResultKt.isError(result)) {
                     ApiResult.Error error = (ApiResult.Error) result;
                     DisplayUtils.showSnackMessage(NoteShareActivity.this, error.getMessage());
