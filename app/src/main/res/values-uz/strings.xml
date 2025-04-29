@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Nextcloud Notes - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
+<resources>
+    <string name="app_name">Eslatmalar</string>
+    <string name="app_name_long">Nextcloud qaydlari</string>
+    <string name="label_all_notes">Barcha qaydlar</string>
+    <string name="label_favorites">Sevimlilar</string>
+    <string name="action_create">Yangi eslatma</string>
+    <string name="welcome_text"> %1$sga xush kelibsiz</string>
+    <string name="action_settings">Sozlamalar</string>
+    <string name="action_trashbin">O\'chirilgan qaydlar</string>
+    <string name="action_search">Qidiruv</string>
+    <string name="action_sorting_method">Saralash usuli</string>
+    <string name="simple_cancel">Bekor qilish</string>
+    <string name="simple_switch">Oʻzgartirish</string>
+    <string name="simple_edit">Tahrirlash</string>
+    <string name="simple_remove">O\'chirish</string>
+    <string name="action_edit_save">Saqlash</string>
+    <string name="simple_about">Haqida</string>
+    <string name="simple_link">Havola</string>
+    <string name="action_note_deleted"> %1$sni o\'chirish</string>
+    <string name="action_note_restored"> %1$sqayta tiklandi</string>
+    <string name="action_undo">Bekor qilish</string>
+    <string name="action_uncategorized">Kategoriyasiz</string>
+    <string name="menu_delete">O\'chirish</string>
+    <string name="menu_change_category">Kategoriya</string>
+    <string name="menu_favorite">Sevimli</string>
+    <string name="menu_preview">Ko‘rib chiqish</string>
+    <string name="menu_share">Ulashish</string>
+
+    <string name="search_in_category"> %1$sni qidirish</string>
+    <string name="search_in_all">Barcha qaydlarni qidiring</string>
+
+    <string name="change_category_title">Kategoriyani tanlang</string>
+
+    <string name="listview_updated_today">Bugun</string>
+    <string name="listview_updated_yesterday">Kecha</string>
+    <string name="listview_updated_this_week">Shu hafta</string>
+    <string name="listview_updated_last_week">O`tgan yil</string>
+    <string name="listview_updated_this_month">Shu oy</string>
+    <string name="listview_updated_last_month">Oxirgi oy</string>
+
+    <string name="settings_note_mode">Eslatmalar uchun ekran rejimi</string>
+    <string name="settings_note_mode_new">Eslatmalarni ochish harakati</string>
+    <string name="settings_theme_title">Mavzu</string>
+    <string name="settings_font_title">Monospace shrifti</string>
+    <string name="settings_font_size">Shrift hajmi</string>
+    <string name="settings_wifi_only">Faqat Wi-Fi orqali sinxronlash</string>
+    <string name="settings_lock">Ilova berk (Beta)</string>
+    <string name="settings_lock_summary">Qurilma hisob ma\'lumotlari</string>
+    <string name="settings_background_sync">Fon sinxronizatsiyasi</string>
+    <string name="settings_prevent_screen_capture">Ekran tasvirini olishni oldini olish</string>
+    <string name="settings_gridview">To‘r ko‘rinishi</string>
+    <string name="settings_enable_direct_edit">To\'g\'ridan-to\'g\'ri tahrirlash</string>
+    <string name="settings_enable_direct_edit_summary">O\'chirilganda, kengaytirilgan muharrir yashirin bo\'ladi.</string>
+    <string name="settings_keep_screen_on">Ekranni yoniq tuting</string>
+    <string name="settings_keep_screen_on_summary">Eslatmani ko\'rish yoki tahrirlashda</string>
+
+    <string name="error_sync">Sinxronizatsiya amalga oshmadi: %1$s</string>
+    <string name="error_synchronization">Sinxronizatsiya amalga oshmadi</string>
+    <string name="error_no_network">Tarmoqqa ulanish yo‘q</string>
+    <string name="error_maintenance_mode">Server parvarishlash rejimida</string>
+    <string name="error_unknown">Noma\'lum xatolik yuz berdi.</string>
+
+    <string name="about_version_title">Versiya</string>
+    <string name="about_version">Siz hozirda %1$s dan foydalanyapsiz</string>
+    <string name="about_maintainer_title">Ta\'minotchi</string>
+    <string name="about_developers_title">Dasturchilar</string>
+    <string name="about_developers_original_author">asl muallif</string>
+    <string name="about_translators_title">Tarjimonlar</string>
+    <string name="about_translators_transifex"> %1$s da NextCloud hamjamiyati</string>
+    <string name="about_testers_title">Sinovchilar</string>
+    <string name="about_source_title">Manba kodi</string>
+    <string name="about_source">Bu loyiha GitHub’da joylashgan: %1$s</string>
+    <string name="about_issues_title">Muammolar</string>
+    <string name="about_issues">Xatolar, takomillashtirish takliflari va funksiya soʻrovlari haqida GitHub muammo kuzatuvchisida xabar berishingiz mumkin: %1$s</string>
+    <string name="about_translate_title">Tarjima</string>
+    <string name="about_translate">Transifex’dagi Nextcloud jamoasiga qo‘shiling va bizga ushbu ilovani tarjima qilishda yordam bering: %1$s</string>
+    <string name="about_app_license_title">Ilova litsenziyasi</string>
+    <string name="about_app_license">Bu ilova GNU GENERAL PUBLIC LICENSE v3+ ostida litsenziyalangan.</string>
+    <string name="about_app_license_button">Litsenziyani ko\'rish</string>
+    <string name="about_icons_disclaimer_title">Belgilar</string>
+    <string name="about_icons_disclaimer_app_icon">Asl ikonka uchun %1$sga qarang.</string>
+    <string name="about_icons_disclaimer_mdi_icons">Ushbu ilova tomonidan ishlatiladigan barcha boshqa piktogrammalar Google Inc. tomonidan ishlab chiqarilgan %1$s boʻlib, Apache 2.0 litsenziyasi ostida litsenziyalangan.</string>
+    <string name="about_icons_disclaimer_mdi">Materiallar dizayni piktogrammalari</string>
+    <string name="about_credits_tab_title">Kreditlar</string>
+    <string name="about_contribution_tab_title">Hissa</string>
+    <string name="about_license_tab_title">Litsenziya</string>
+
+    <string name="widget_note_list_title">Eslatmalar ro\'yxati</string>
+    <string name="widget_note_list_placeholder">Qayd yo\'q</string>
+    <string name="widget_single_note_title">Yagona eslatma</string>
+    <string name="widget_single_note_placeholder_tv">Eslatma topilmadi</string>
+    <string name="widget_not_logged_in">Iltimos, ushbu vidjetdan foydalanishdan oldin Eslatmalar tizimiga kiring</string>
+    <string name="widget_entry_fav_contentDescription">Iltimos, ushbu vidjetdan foydalanishdan oldin Eslatmalar tizimiga kiring</string>
+
+    <string name="activity_select_single_note">Eslatmani tanlang</string>
+
+    <string name="shortcut_create_long">Yangi qayd yarating</string>
+
+    <string name="pref_value_font_normal">Oddiy</string>
+    <string name="pref_value_wifi_and_mobile">Wi-Fi va mobil ma\'lumotlarda sinxronlash</string>
+    <string name="pref_value_lock">Parol himoyasi</string>
+
+    <string name="simple_error">Xatolik</string>
+    <string name="simple_close">Yopish</string>
+    <string name="simple_copy">Nusxalash</string>
+    <string name="simple_exception">Istisno</string>
+    <string name="pin_to_homescreen">Bosh ekranga mahkamlang</string>
+    <string name="note_has_been_deleted">Bu qayd oʻchirildi</string>
+    <string name="add_account">Akkaunt qo\'shish</string>
+
+    <string name="category_music">Musiqa</string>
+    <string name="category_movies">Filmlar</string>
+    <string name="category_movie">Kino</string>
+    <string name="category_work">Ish</string>
+    <string name="category_todo">Qilish</string>
+    <string name="category_todos">Topshiriqlar</string>
+    <string name="category_checklists">Tekshirish ro\'yxatlari</string>
+    <string name="category_tasks">Tasks</string>
+    <string name="category_recipe">Retsept</string>
+    <string name="category_recipes">Retseptlar</string>
+    <string name="category_restaurant">Restoran</string>
+    <string name="category_restaurants">Restoranlar</string>
+    <string name="category_food">Oziq-ovqat</string>
+    <string name="category_bake">Pishiriq</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_key">Kalit</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_keys">Kalitlar</string>
+    <string name="category_password">Parol</string>
+    <string name="category_passwords">Parollar</string>
+    <string name="category_credentials">Hisob ma\'lumotlari</string>
+    <string name="category_game">O\'yin</string>
+    <string name="category_games">O\'yinlar</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">O\'ynang</string>
+    <string name="category_gift">Sovg\'a</string>
+    <string name="category_gifts">Sovg\'alar</string>
+    <!-- Like a gift -->
+    <string name="category_present">Hozirgi</string>
+    <!-- Like a gift -->
+    <string name="category_presents">Taqdim etadi</string>
+
+    <string name="account_already_imported">Akkaunt allaqachon import qilingan</string>
+    <string name="no_notes_yet">Hozircha qaydlar yoʻq</string>
+    <string name="no_notes_yet_description">Yangi eslatma yaratish uchun + tugmasini bosing</string>
+    <string name="simple_more">Ko\'proq</string>
+    <string name="simple_move">Ko\'chirish</string>
+    <string name="category_readonly">Faqat o\'qing</string>
+    <string name="no_category">Kategoriyasiz</string>
+    <string name="add_category"> %1$s ni qo\'shish</string>
+    <string name="simple_checkbox">Belgilash katagi</string>
+    <string name="unlock_notes">Eslatmalarni yoqish</string>
+    <string name="error_dialog_title">Yo\'q - Endi nima? 🙁</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Iltimos, ilovani majburan yopishga urinib koʻring va uni qayta ishga tushiring. Nextcloud ilovasiga notoʻgʻri ulanish boʻlishi mumkin.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Muammo davom etsa, ushbu muammoni hal qilish uchun ikkala ilovaning xotirasini tozalashga harakat qiling: Nextcloud va Nextcloud Notes.</string>
+    <string name="error_dialog_tip_clear_storage">Ilova maʼlumotlarini ochib, Xotira → Xotirani tozalash ni tanlash orqali xotirani tozalashingiz mumkin. ⚠️ Ogohlantirish: Bu hali sinxronlanmagan qaydlarni oʻchirib tashlaydi!</string>
+    <string name="error_dialog_tip_files_outdated">Nextcloud ilovangiz eskirganga o‘xshaydi. Eng soʻnggi versiyani olish uchun Play Store yoki F-Droid saytiga tashrif buyuring.</string>
+    <string name="error_dialog_tip_files_force_stop">Nextcloud ilovangizda nimadir noto‘g‘ri ko‘rinadi. Iltimos, ikkalasini ham, Nextcloud ilovasini va Nextcloud Notes ilovasini majburan to‘xtatishga harakat qiling.</string>
+    <string name="error_dialog_tip_files_delete_storage">Agar ularni majburan to\'xtatish yordam bermasa, ikkala ilovaning xotirasini tozalashga urinib ko\'rishingiz mumkin.</string>
+    <string name="error_dialog_timeout_instance">Berilgan vaqt ichida serveringizdan javob bo‘lmadi. Iltimos, namunangiz yaxshi ishlayotganiga ishonch hosil qiling.</string>
+    <string name="error_dialog_timeout_toggle">Tarmoq ulanishingizni tekshiring. Ba\'zida mobil ma\'lumot yoki Wi-Fi-ni o\'chirish va qayta yoqish yordam berishi mumkin.</string>
+    <string name="error_dialog_check_server">Serveringizning javobi noto\'g\'ri. Iltimos, veb-interfeys orqali qaydlaringizga kirishingiz mumkinligini tekshiring.</string>
+    <string name="error_dialog_check_server_logs">Nextcloud sozlamalarida muammo bor. Iltimos, server jurnali fayllarini ko\'rib chiqing.</string>
+    <string name="error_dialog_check_maintenance">Iltimos, Nextcloud namunangiz hozirda texnik rejimda emasligini tekshiring.</string>
+    <string name="error_dialog_insufficient_storage">Nextcloud nusxangizda bepul xotira qolmaydi. Mahalliy oʻzgarishlarni bulutga sinxronlashtirish uchun baʼzi fayllarni oʻchirib tashlang.</string>
+    <string name="error_dialog_we_need_info">Sizga yordam berish uchun bizga quyidagi texnik ma\'lumotlar kerak:</string>
+    <string name="error_dialog_server_app_enabled">Iltimos, serveringizda \"Eslatmalar\" ilovasini o\'rnatganingizga va yoqilganligiga ishonch hosil qiling.</string>
+    <string name="error_dialog_redirect">Serveringiz HTTP 302 holat kodi bilan javob berdi, bu sizning serveringizda Notes ilovasini oʻrnatmaganingizni yoki biror narsa notoʻgʻri sozlanganligini bildiradi. Bunga .htaccess faylidagi maxsus bekor qilinganlar yoki OID Client kabi Nextcloud ilovalari sabab bo\'lishi mumkin.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Nextcloud va Notes ilovasi uchun batareya quvvatini optimallashtirishni o‘chirib qo‘ying.</string>
+    <string name="error_dialog_min_version">Eslatmalar Android ilovasi Nextcloud Android ilovasining kamida 3.18 versiyasi boʻlishini talab qiladi.</string>
+    <string name="added_content"> \"%1$s\" qo`shildi</string>
+    <string name="shared_text_empty">Umumiy matn boʻsh edi</string>
+    <string name="append_to_note">Eslatmaga qo\'shing</string>
+    <string name="change_note_title">Eslatma sarlavhasini o\'zgartiring</string>
+    <string name="menu_edit_title">Sarlavhani tahrirlash</string>
+    <string name="simple_security">Xavfsizlik</string>
+    <string name="appearance_and_behavior">Tashqi ko\'rinish va xatti-harakatlar</string>
+    <string name="simple_synchronization">Sinxronizatsiya</string>
+    <string name="manage_accounts">Hisoblarni boshqarish</string>
+    <string name="action_formatting_help">Formatlash</string>
+
+
+    <string name="noteMode_plain_edit">Oddiy tahrirlash rejimi</string>
+    <string name="noteMode_plain_preview">Oddiy ko\'rish</string>
+    <string name="noteMode_rich_edit">Boy tahrirlash rejimi</string>
+    <string name="noteMode_remember_last">Mening oxirgi tanlovimni eslang</string>
+
+    <string-array name="fontSize_entries">
+        <item>Kichik</item>
+        <item>O\'rta</item>
+        <item>Katta</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Nur</item>
+        <item>Qorong\'i</item>
+        <item>Tizim standarti</item>
+    </string-array>
+
+    <plurals name="ab_selected">
+        <item quantity="other">%d tanlangan</item>
+    </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="other"> %1$d ta qayd oʻchirildi</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="other"> %1$d ta qayd tiklandi</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="other"> %1$d ta qayd mazmunini ulashing</item>
+    </plurals>
+
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">Kontekstga asoslangan formatlash</string>
+    <string name="formatting_help_cbf_body_1">Eslatmalar ilovasining asosiy dizayn maqsadi chalg\'itmaydigan vositani taqdim etishdir. Belgilash qalami yordamida matnlaringizni formatlashingiz mumkin. Quyida keltirilgan turli misollar uchun yorliqlardan foydalanishingiz mumkin, shunda siz quyidagi kodlarni kiritmasdan qaydlaringizni formatlashingiz mumkin.</string>
+    <string name="formatting_help_cbf_body_2">Shunchaki matn diapazonini tanlang yoki kursorni istalgan joyda bosing va siz %1$s, %2$s, %3$skabi standart yozuvlar yonida joylashgan qalqib chiquvchi menyuni olasiz, masalankabi standart yozuvlar yonida joylashgan qalqib chiquvchi menyuni olasiz, masalan %4$s yoki %5$s.</string>
+
+    <string name="formatting_help_text_title">Matn</string>
+    <string name="formatting_help_text_body">Belgilash qalami yordamida ba\'zi so\'zlarni %1$s qalin %1$s va boshqa soʻzlarni %2$sitalic%2$s qilish juda oson. Siz %3$sga%3$s soʻzlarni oʻtkazib yuborishingiz mumkin va hatto [Nextcloud havolasi](https://nextcloud.com).</string>
+
+    <string name="formatting_help_lists_title">Ro\'yxatlar</string>
+    <string name="formatting_help_lists_body_1">Ba\'zan siz raqamlangan ro\'yxatlarni xohlaysiz:</string>
+    <string name="formatting_help_lists_body_2">Bir</string>
+    <string name="formatting_help_lists_body_3">Ikki</string>
+    <string name="formatting_help_lists_body_4">Uch</string>
+    <string name="formatting_help_lists_body_5">Ba\'zan siz o\'q nuqtalarini xohlaysiz:</string>
+    <string name="formatting_help_lists_body_6">Chiziqni chizishni boshlang</string>
+    <string name="formatting_help_lists_body_7">Va agar sizda pastki nuqtalar bo\'lsa, chiziqcha yoki yulduzdan oldin ikkita bo\'sh joy qo\'ying:</string>
+    <string name="formatting_help_lists_body_8">Shunga o\'xshash</string>
+    <string name="formatting_help_lists_body_9">Va bu</string>
+
+    <string name="formatting_help_checkboxes_title">Belgilash katakchalari</string>
+    <string name="formatting_help_checkboxes_body_1">Belgilash katakchasini yaratish uchun qavslardan keyin ro\'yxatni ishlating</string>
+    <string name="formatting_help_checkboxes_body_2">1-modda</string>
+    <string name="formatting_help_checkboxes_body_3">2-modda</string>
+
+    <string name="formatting_help_structured_documents_title">Strukturlangan hujjatlar</string>
+    <string name="formatting_help_structured_documents_body_1">Ba\'zan hujjatlarni tuzish uchun turli darajadagi sarlavhalarga ega bo\'lish foydalidir. Sarlavhalar yaratish uchun satrlarni %1$s bilan boshlang. Ketma-ket bir nechta %2$s kichikroq sarlavha o‘lchamlarini bildiradi.</string>
+    <string name="formatting_help_structured_documents_body_2">Bu uchinchi darajali sarlavha</string>
+    <string name="formatting_help_structured_documents_body_3">Turli sarlavha oʻlchamlari uchun bitta %1$s dan %2$s oltigacha foydalanishingiz mumkin.</string>
+    <string name="formatting_help_structured_documents_body_4">Agar kimdandir iqtibos keltirmoqchi boʻlsangiz, satr oldidan %1$s belgisidan foydalaning:</string>
+    <string name="formatting_help_structured_documents_body_5">Tasavvur bilimdan muhimroqdir. Bilim cheklangan. Tasavvur dunyoni o\'rab oladi.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+
+    <string name="formatting_help_code_title">Code</string>
+    <string name="formatting_help_code_body_1">Belgilash qalami yordamida kodni uslublashning turli usullari mavjud. Agar sizda inline kod bloklari bo\'lsa, ularni orqa belgilarga o\'rang:</string>
+    <string name="formatting_help_code_body_2">Belgilash qalami, shuningdek, chekinishsiz bir nechta satrlarga ruxsat beruvchi kodli to\'siq deb ataladigan narsani qo\'llab-quvvatlaydi:</string>
+    <string name="formatting_help_code_body_3">Va agar siz sintaksisni ta\'kidlashdan foydalanmoqchi bo\'lsangiz, tilni qo\'shing:</string>
+
+    <string name="formatting_help_tables_title">Jadvallar</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column"> %1d ustuni</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value"> %1dqiymati</string>
+
+    <string name="formatting_help_images_body_1">Havolalar protokol va domendan boshlanadigan toʻliq URL manzillar yoki %1$sbelgisi bilan boshlanadigan mutlaq yoʻllar boʻlishi kerak.</string>
+    <string name="formatting_help_images_body_2">Belgilash qalami formatiga mos kelish uchun rasmning URL manzilida qochish belgilaridan foydalaning. Bu, masalan, URL manzilidagi boʻshliqlarni %1$s bilan almashtiring.</string>
+    <string name="formatting_help_images_title">Tasvirlar</string>
+    <string name="formatting_help_images_alt">Qiziqarli tasvir</string>
+
+    <string name="simple_other">Boshqa</string>
+    <string name="sort_last_modified">O\'zgartirilgan sana bo\'yicha saralash</string>
+    <string name="sort_alphabetically">Alifbo bo\'yicha saralash</string>
+    <string name="error_action_open_battery_settings">Batareya sozlamalari</string>
+    <string name="error_action_open_deck_info">Ilova ma\'lumotlarini oching</string>
+    <string name="error_action_open_network">Tarmoq sozlamalari</string>
+    <string name="error_action_update_files_app">Yangilash</string>
+    <string name="no_account_configured_yet">Hech qanday hisob hali sozlanmagan</string>
+    <string name="no_other_accounts">Siz hali boshqa hisoblarni sozlamagansiz.</string>
+    <string name="choose_account">Akkauntni tanlang</string>
+    <string name="context_based_formatting">Kontekstga asoslangan formatlash ochiladi</string>
+    <plurals name="remove_account_message">
+        <item quantity="other"> %1$s akkauntni oʻchirish qayta tiklanmaydigan %2$d sinxronlashtirilmagan oʻzgarishlarni ham oʻchirib tashlaydi.</item>
+    </plurals>
+    <string name="remove_account"> %1$s ni o\'chirish</string>
+
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Akkaunt qaydnomasini qo\'shish uchun siz internetga ulangan bo\'lishingiz kerak.</string>
+    <string name="settings_notes_path">Jildni o\'rnatish</string>
+
+    <string name="simple_next">Keyingisi</string>
+    <string name="simple_prev">Oldingi</string>
+    <string name="simple_backup">Zaxira</string>
+    <string name="backup">Biz ilovaning tiklanmaydigan holatini aniqladik. Iltimos, sinxronlashtirilmagan o\'zgarishlarni zaxiralang va Eslatmalar ilovasi xotirasini tozalang.</string>
+    <string name="settings_notes_path_description">Qaydlaringizni Nextcloud-da saqlash uchun jild</string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
+    <string name="settings_notes_path_success">Yangi qaydlar jildi: %1$s</string>
+    <string name="settings_file_suffix">Fayl kengaytmasi</string>
+    <string name="settings_file_suffix_description">Nextcloud-dagi yangi qaydlar uchun fayl kengaytmasi</string>
+    <string name="settings_file_suffix_success">Yangi fayl qoʻshimchasi: %1$s</string>
+    <string name="http_status_code">HTTP holat kodi: %1$d</string>
+    <string name="progress_import_indeterminate">Qaydlar import qilinmoqda…</string>
+    <string name="progress_import">Qayd import qilinmoqda %1$d dan %2$d…</string>
+    <string name="account_imported">Hisob import qilindi.</string>
+    <string name="direct_editing_error">Keng tahrirni yuklashda xatolik yuz berdi</string>
+    <string name="switch_to_plain_editing">Oddiy tahrirlashga o\'tish</string>
+    <string name="action_back">Orqaga</string>
+    </resources>
