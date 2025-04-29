@@ -144,7 +144,9 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     @Override
     public void onStart() {
         super.onStart();
-        UsersAndGroupsSearchConfig.INSTANCE.setSearchOnlyUsers(true);
+
+        // note cannot be encrypted - logic ported from files app
+        UsersAndGroupsSearchConfig.INSTANCE.setSearchOnlyUsers(false);
     }
 
     @Override
@@ -202,43 +204,47 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                binding.progressBar.setVisibility(View.VISIBLE);
+                if (!newText.isEmpty()) {
+                    binding.progressBar.setVisibility(View.VISIBLE);
 
-                // Cancel the previous task if it's still running
-                if (future != null && !future.isDone()) {
-                    future.cancel(true);
-                }
-
-                // Schedule a new task with a delay
-                future = executorService.schedule(() -> {
-                    if (capabilities == null) {
-                        Log_OC.d(TAG, "Capabilities cannot be null");
-                        return;
+                    // Cancel the previous task if it's still running
+                    if (future != null && !future.isDone()) {
+                        future.cancel(true);
                     }
 
-                    final var isFederationShareAllowed = capabilities.getFederationShare();
-                    try {
-                        var cursor = provider.searchForUsersOrGroups(newText, isFederationShareAllowed);
-
-                        if (cursor == null || cursor.getCount() == 0) {
+                    // Schedule a new task with a delay
+                    future = executorService.schedule(() -> {
+                        if (capabilities == null) {
+                            Log_OC.d(TAG, "Capabilities cannot be null");
                             return;
                         }
 
-                        runOnUiThread(() -> {
-                            if (binding.searchView.getVisibility() == View.VISIBLE) {
-                                suggestionAdapter.swapCursor(cursor);
+                        final var isFederationShareAllowed = capabilities.getFederationShare();
+                        try {
+                            var cursor = provider.searchForUsersOrGroups(newText, isFederationShareAllowed);
+
+                            if (cursor == null || cursor.getCount() == 0) {
+                                return;
                             }
 
-                            binding.progressBar.setVisibility(View.GONE);
-                        });
+                            runOnUiThread(() -> {
+                                if (binding.searchView.getVisibility() == View.VISIBLE) {
+                                    suggestionAdapter.swapCursor(cursor);
+                                }
 
-                    } catch (Exception e) {
-                        Log_OC.d(TAG, "Exception setupSearchView.onQueryTextChange: " + e);
-                        runOnUiThread(() -> binding.progressBar.setVisibility(View.GONE));
-                    }
+                                binding.progressBar.setVisibility(View.GONE);
+                            });
 
-                }, SEARCH_DELAY_MS, TimeUnit.MILLISECONDS);
+                        } catch (Exception e) {
+                            Log_OC.d(TAG, "Exception setupSearchView.onQueryTextChange: " + e);
+                            runOnUiThread(() -> binding.progressBar.setVisibility(View.GONE));
+                        }
 
+                    }, SEARCH_DELAY_MS, TimeUnit.MILLISECONDS);
+                } else {
+                    binding.progressBar.setVisibility(View.GONE);
+                    suggestionAdapter.swapCursor(null);
+                }
                 return false;
             }
         });
