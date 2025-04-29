@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -36,6 +37,7 @@ import com.owncloud.android.lib.resources.shares.ShareType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -89,7 +91,8 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     private Account account;
     private ShareRepository repository;
     private Capabilities capabilities;
-    private final List<OCShare> shares = new ArrayList<>();
+    private ActivityResultLauncher<Intent> resultLauncher;
+    private final List<OCShare> shares = Collections.synchronizedList(new ArrayList<>());
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,16 +100,42 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         executorService = Executors.newSingleThreadScheduledExecutor();
         binding = ActivityNoteShareBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        registerResultLauncher();
         initializeArguments();
+        initializeOnBackPressedDispatcher();
+    }
+
+    private void registerResultLauncher() {
+        resultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        recreate();
+                    }
+                });
+    }
+
+    private void initializeOnBackPressedDispatcher() {
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Intent intent = new Intent(NoteShareActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void initializeArguments() {
         Bundle bundler = getIntent().getExtras();
         note = BundleExtensionsKt.getSerializableArgument(bundler, ARG_NOTE, Note.class);
         account = BundleExtensionsKt.getSerializableArgument(bundler, ARG_ACCOUNT, Account.class);
+
         if (note == null) {
             throw new IllegalArgumentException("Note cannot be null");
         }
+
         if (account == null) {
             throw new IllegalArgumentException("Account cannot be null");
         }
@@ -280,7 +309,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
         Intent intent = new Intent(this, NoteShareDetailActivity.class);
         intent.putExtras(bundle);
-        startActivity(intent);
+        resultLauncher.launch(intent);
     }
 
     private boolean accountOwnsFile() {
@@ -428,41 +457,44 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     public void showProfileBottomSheet(Account account, String shareWith) {
     }
 
+    private boolean isInitializingShares = false;
+
     public void updateShareeListAdapter() {
+        if (isInitializingShares) {
+            Log_OC.d(TAG, "Shares initialization already in progress");
+            return;
+        }
+
+        isInitializingShares = true;
+
         executorService.submit(() -> {
             try {
                 ShareeListAdapter adapter = (ShareeListAdapter) binding.sharesList.getAdapter();
 
                 if (adapter == null) {
                     runOnUiThread(() -> DisplayUtils.showSnackMessage(NoteShareActivity.this, getString(R.string.could_not_retrieve_shares)));
+                    isInitializingShares = false;
                     return;
                 }
 
-                // clear adapter
-                adapter.removeAll();
-                shares.clear();
+                List<OCShare> tempShares = new ArrayList<>();
 
                 // to show share with users/groups info
                 if (note != null) {
                     // get shares from local DB
-                    final var shareEntities = repository.getShareEntitiesForSpecificNote(note);
-                    shareEntities.forEach(entity -> {
-                        if (entity.getId() != null) {
-                            addShares(entity.getId());
-                        }
-                    });
-
-                    // get shares from remote
-                    final var shares = repository.getShareFromNote(note);
-                    if (shares != null) {
-                        shares.forEach(entity -> addShares(entity.getId()));
-                    }
+                    populateSharesList(tempShares);
                 }
 
                 runOnUiThread(() -> {
+                    shares.clear();
+                    shares.addAll(tempShares);
+
+                    adapter.removeAll();
                     adapter.addShares(shares);
                     addPublicShares(adapter);
                     setShareWithYou();
+
+                    isInitializingShares = false;
                 });
             } catch (Exception e) {
                 Log_OC.d(TAG, "Exception while updateShareeListAdapter: " + e);
@@ -470,14 +502,32 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         });
     }
 
-    private void addShares(long id) {
+    private void populateSharesList(List<OCShare> targetList) {
+        // Get shares from local DB
+        final var shareEntities = repository.getShareEntitiesForSpecificNote(note);
+        for (var entity : shareEntities) {
+            if (entity.getId() != null) {
+                addSharesToList(entity.getId(), targetList);
+            }
+        }
+
+        // Get shares from remote
+        final var remoteShares = repository.getShareFromNote(note);
+        if (remoteShares != null) {
+            for (var entity : remoteShares) {
+                addSharesToList(entity.getId(), targetList);
+            }
+        }
+    }
+
+    private void addSharesToList(long id, List<OCShare> targetList) {
         final var result = repository.getShares(id);
         if (result != null) {
-            result.forEach(ocShare -> {
-                if (!shares.contains(ocShare)) {
-                    shares.add(ocShare);
+            for (OCShare ocShare : result) {
+                if (!targetList.contains(ocShare)) {
+                    targetList.add(ocShare);
                 }
-            });
+            }
         }
     }
 
@@ -629,7 +679,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
         Intent intent = new Intent(this, NoteShareDetailActivity.class);
         intent.putExtras(bundle);
-        startActivity(intent);
+        resultLauncher.launch(intent);
     }
 
     private boolean getExpDateShown() {

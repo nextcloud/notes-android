@@ -15,7 +15,6 @@ import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.branding.BrandedActivity
 import it.niedermann.owncloud.notes.branding.BrandingUtil
 import it.niedermann.owncloud.notes.databinding.ActivityNoteShareDetailBinding
-import it.niedermann.owncloud.notes.main.MainActivity
 import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.persistence.isSuccess
 import it.niedermann.owncloud.notes.share.dialog.ExpirationDatePickerDialogFragment
@@ -586,11 +585,9 @@ class NoteShareDetailActivity : BrandedActivity(),
     private suspend fun handleResult(success: Boolean) {
         withContext(Dispatchers.Main) {
             if (success) {
-                Intent(this@NoteShareDetailActivity, MainActivity::class.java).apply {
-                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                }.also {
-                    startActivity(it)
-                }
+                val resultIntent = Intent()
+                setResult(RESULT_OK, resultIntent)
+                finish()
             } else {
                 DisplayUtils.showSnackMessage(
                     this@NoteShareDetailActivity,
