@@ -12,7 +12,7 @@
     <string name="label_favorites">Lemmikud</string>
     <string name="action_create">Uus märge</string>
     <string name="welcome_text">Tere tulemast rakendusse %1$s</string>
-    <string name="action_settings">Sätted</string>
+    <string name="action_settings">Seadistused</string>
     <string name="action_trashbin">Kustutatud märkmed</string>
     <string name="action_search">Otsi</string>
     <string name="action_sorting_method">Sortimismeetod</string>
@@ -47,7 +47,7 @@
 
     <string name="settings_note_mode">Märkuste kuvamise režiim</string>
     <string name="settings_note_mode_new">Käitumine märgete avamisel</string>
-    <string name="settings_theme_title">Teema</string>
+    <string name="settings_theme_title">Kujundus</string>
     <string name="settings_font_title">Monospace kirjastiil</string>
     <string name="settings_font_size">Kirjasuurus</string>
     <string name="settings_wifi_only">Sünkroonimine ainult Wi-Fi kaudu</string>
@@ -56,6 +56,8 @@
     <string name="settings_background_sync">Taustsünkroniseerimine</string>
     <string name="settings_prevent_screen_capture">Vältida ekraani jäädvustamist</string>
     <string name="settings_gridview">Ruudustikvaade</string>
+    <string name="settings_enable_direct_edit">Otsemuutmine</string>
+    <string name="settings_enable_direct_edit_summary">Kui see valik pole kasutusel, siis lisavõimalustega tekstitoimeti pole kasutusel.</string>
     <string name="settings_keep_screen_on">Hoia ekraani sisse lülitatud</string>
     <string name="settings_keep_screen_on_summary">Märke vaaramisel ja muutmisel</string>
 
@@ -76,11 +78,16 @@
     <string name="about_source_title">Lähtekood</string>
     <string name="about_source">Selle projekti lähtekood on GitHubis: %1$s</string>
     <string name="about_issues_title">Veahaldus</string>
+    <string name="about_issues">Palun teata vigadest, parandusettepanekutest või uute arenduste ideedest meie GitHubi veahalduses: %1$s</string>
     <string name="about_translate_title">Tõlgi</string>
+    <string name="about_translate">Liitu Nextcloudi tiimiga Transifexis ja aita meil seda rakendust tõlkida: %1$s</string>
     <string name="about_app_license_title">Rakenduse litsents</string>
+    <string name="about_app_license">See rakendus on litsentseeritud GNU Üldise Avaliku Litsentsi versioon 3 või hilisema alusel.</string>
     <string name="about_app_license_button">Vaata litsentsi</string>
     <string name="about_icons_disclaimer_title">Ikoonid</string>
     <string name="about_icons_disclaimer_app_icon">Algse ikooni leiad siit: %1$s.</string>
+    <string name="about_icons_disclaimer_mdi_icons">Kõik muud siin rakenduses kasutatavad ikoonid on „%1$s“ ja tehtud Google Inc. poolt ning valdatud Apache 2.0 litsentsi alusel.</string>
+    <string name="about_icons_disclaimer_mdi">Material Designi ikoonid</string>
     <string name="about_credits_tab_title">Tänuavaldused</string>
     <string name="about_contribution_tab_title">Kaastöö</string>
     <string name="about_license_tab_title">Litsents</string>
@@ -114,6 +121,7 @@
     <string name="category_work">Töö</string>
     <string name="category_todo">Tegemine</string>
     <string name="category_todos">Tegemised</string>
+    <string name="category_checklists">Kontrollkaardid</string>
     <string name="category_tasks">Ülesanded</string>
     <string name="category_recipe">Retsept</string>
     <string name="category_recipes">Retseptid</string>
@@ -126,13 +134,20 @@
     <!-- This represents a category where one can place passwords and credentials -->
     <string name="category_keys">Võtmed</string>
     <string name="category_password">Parool</string>
-    <string name="category_passwords">Paroolid</string>
+    <string name="category_passwords">Salasõnad</string>
+    <string name="category_credentials">Autentimisteave</string>
     <string name="category_game">Mäng</string>
     <string name="category_games">Mängud</string>
     <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
     <string name="category_play">Esita</string>
     <string name="category_gift">Kink</string>
     <string name="category_gifts">Kingid</string>
+    <!-- Like a gift -->
+    <string name="category_present">Kingitus</string>
+    <!-- Like a gift -->
+    <string name="category_presents">Kingitused</string>
+
+    <string name="account_already_imported">Kasutajakonto on juba imporditud</string>
     <string name="no_notes_yet">Märkmeid veel pole</string>
     <string name="no_notes_yet_description">Uue märkme lisamiseks vajuta + nuppu</string>
     <string name="simple_more">Rohkem</string>
@@ -142,7 +157,24 @@
     <string name="add_category">Lisa %1$s</string>
     <string name="simple_checkbox">Märkeruut</string>
     <string name="unlock_notes">Eemalda märkmete lukustus</string>
-    <string name="error_dialog_min_version">Märkmete rakendus Androidile eeldab, et Nextcloudi versioon Androidile on vähemalt 3.18.</string>
+    <string name="error_dialog_title">Appikine, mis nüüd saab? 🙁</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Palun  proovi sundkorras rakendus kinni panna ja siis uuesti käivitada. Tegemist võis olla ühenduse veaga Nextcloudi serveri ja rakenduse vahel.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Kui probleem jätkub, siis proovi selle lahendamiseks tühjendada mõlema rakenduse andmeruumid: Nextcloud ja Nextcloudi Märkmed.</string>
+    <string name="error_dialog_tip_clear_storage">Andmeruumi saad tühjendada, kui avad rakenduse teabe ning valid „Andmeruum“ → „Tühjenda andmeruum“.  ⚠️ Hoiatus: sellega kustutad ka senisünkroniseerimata märkmed!</string>
+    <string name="error_dialog_tip_files_outdated">Sinu Nextcloudi rakendus tundub olema aegunud. Palun laadi Play Store\'i või F-Droidi rakendustepoest viimane versioon.</string>
+    <string name="error_dialog_tip_files_force_stop">Midagi on valesti sinu Nextcloudi rakendusega. Proovi jõuga peatada nii Nextcloudi kliendi kui Nextcloudi Märkmete rakenduse töö.</string>
+    <string name="error_dialog_tip_files_delete_storage">Kui rakenduste jõuga peatamine ei eita, siis proovi tühjendada mõlema andmeruumid.</string>
+    <string name="error_dialog_timeout_instance">Sinu server ei vastanud päringule etteantud aja jooksul. Palun kontrolli, et server toimib korralikult.</string>
+    <string name="error_dialog_timeout_toggle">Palun kontrolli, et sinu nutiseadme internetiühendus toimib. Mõnel juhul aitab ka mobiilse andmeside ja/või WiFi sisse- ja välja lülitamine.</string>
+    <string name="error_dialog_check_server">Serveri vastus päringule polnud korrektne. Palun kontrolli, kas sa saad neid märkmeid näha veebiliidesest.</string>
+    <string name="error_dialog_check_server_logs">Sinu Nextcloudi paigalduses on üks viga. Täpsem teave leidub serveri logides.</string>
+    <string name="error_dialog_check_maintenance">Palun kontrolli, et Nextcloudi server ei oleks hetkel hooldusrežiimis!</string>
+    <string name="error_dialog_insufficient_storage">Sinu Nextcloudi serveris pole enam vaba andmeruumi. Selleks, et kohalike failide sünkroniseerimine pilve toimiks, palun kustuta serverist mittevajalikke faile.</string>
+    <string name="error_dialog_we_need_info">Me vajame sinult järgnevat tehnilist teavet:</string>
+    <string name="error_dialog_server_app_enabled">Palun kontrolli, et serveris oleks paigaldatud ja sisselülitatud Märkmete rakendus.</string>
+    <string name="error_dialog_redirect">Sinu server vastas päringule http-protokolli olekukukoodiga 302, mis tähendab, et kas serverisse on paigaldamata Märkmete rakendus või mõni seadistus on vigane. Samuti võib seda põhjustada .htaccess faili eraldi tehtud muudatused  või Nextcloudi rakendused nagu OID Klient.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Palun keela Nextcloudi ja Märkmete rakenduste jaoks akukasutuse optimeerimine.</string>
+    <string name="error_dialog_min_version">Märkmete rakendus Androidile eeldab, et Nextcloudi Androidi rakenduse versioon on vähemalt 3.18.</string>
     <string name="added_content">Lisasin „%1$s“</string>
     <string name="shared_text_empty">Jagatud tekst oli tühi</string>
     <string name="append_to_note">Lisa märkmele</string>
@@ -155,6 +187,9 @@
     <string name="action_formatting_help">Vorming</string>
 
 
+    <string name="noteMode_plain_edit">Muutmisvaade vormindamata tekstile</string>
+    <string name="noteMode_plain_preview">Eelvaade vormindamata tekstile</string>
+    <string name="noteMode_rich_edit">Muutmisvaade vormindatud tekstile</string>
     <string name="noteMode_remember_last">Jäta minu viimane valik meelde</string>
 
     <string-array name="fontSize_entries">
@@ -187,29 +222,82 @@
     </plurals>
 
     <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">Kontekstikohane vormindus</string>
+    <string name="formatting_help_cbf_body_1">Märkmete rakenduse loomisel oli peamine eesmärk pakkuda võimalikult lihtsat tarvikut. Kuigi jah, sa saad oma tekste ka Markdowniga vormindada. Erinevate allpool toodud näidete puhul saad kasutada kiirklahve ja nii ei pea oma märkmete koostamisel neid koode sisestama.</string>
+    <string name="formatting_help_cbf_body_2">Lihtsalt vali tekstivahemik või klõpsi kursor suvalisse kohta tekstis ning näed hüpikmenüüd, milles vaikimisi kirjete kõrval on ka %1$s, %2$s, %3$s kirjed nagu %4$s või %5$s.</string>
+
     <string name="formatting_help_text_title">Tekst</string>
+    <string name="formatting_help_text_body">Markdowni abil on väga lihtne kuvada osa tekstist %1$spaksus kirjas%1$s ning teist osa %2$skaldkirjas%2$s.  Sa võid tekstis ka sõnu %3$släbikriipsutada%3$s ja loomulikult [lisada linke, nagu see Nextcloudi oma](https://nextcloud.com).</string>
+
     <string name="formatting_help_lists_title">Loendid</string>
     <string name="formatting_help_lists_body_1">Vahetevahel soovid kasutada nummerdatud loendeid:</string>
     <string name="formatting_help_lists_body_2">Esimene</string>
     <string name="formatting_help_lists_body_3">Teine</string>
-    <string name="formatting_help_lists_body_4">olmas</string>
+    <string name="formatting_help_lists_body_4">Kolmas</string>
     <string name="formatting_help_lists_body_5">Vahetevahel soovid kasutada jutupunkte:</string>
+    <string name="formatting_help_lists_body_6">Alusta rida kriipsuga</string>
+    <string name="formatting_help_lists_body_7">Ja kui tahad lisada alapunkte, siis lisa kaks tühikut kriipsu või tärni ette:</string>
+    <string name="formatting_help_lists_body_8">Sedaviisi</string>
+    <string name="formatting_help_lists_body_9">Ja see</string>
+
+    <string name="formatting_help_checkboxes_title">Märkeruudud</string>
+    <string name="formatting_help_checkboxes_body_1">Märkeruudu loomiseks kasuta loendit mille lõpus on nurksulud</string>
+    <string name="formatting_help_checkboxes_body_2">1. kirje</string>
+    <string name="formatting_help_checkboxes_body_3">2. kirje</string>
+
+    <string name="formatting_help_structured_documents_title">Struktureeritud dokumendid</string>
+    <string name="formatting_help_structured_documents_body_1">Vahetevahel on teksti liigendamisel abiks erinevate tasemetega alapealkirjad. Pealkirja lisamiseks pane rea algusesse %1$s. Kui järjest on mitu %2$s, siis märgib see väiksemat pealkirja.</string>
+    <string name="formatting_help_structured_documents_body_2">See on kolmanda taseme pealkiri</string>
+    <string name="formatting_help_structured_documents_body_3">Sa võid erinevate pealkirja suuruste jaoks kasutada üht %1$s kuni kuut %2$s.</string>
+    <string name="formatting_help_structured_documents_body_4">Kui tahad lisada tsitaati, siis kasuta rea ees %1$s tähemärki:</string>
+    <string name="formatting_help_structured_documents_body_5">Kujutlusvõime on tähtsam kui teadmised. Teadmised on piiratud. Kujutlusvõime ümbritseb maailma.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+
+    <string name="formatting_help_code_title">Kood</string>
+    <string name="formatting_help_code_body_1">Laähtekoodi saab Markdowni puhul vormindada mitmel viisil. Kui kasutad lõimitud koodiblokke, siis pane ta tagurpidi ülakomade vahele („backtick ehk `“):</string>
+    <string name="formatting_help_code_body_2">Markdown-vorming toetab ka lähtekoodi kuvamist nii, et ta paikneb mitmel real ilma taandreata („code fencing“):</string>
+    <string name="formatting_help_code_body_3">Kui sa soovid kasutada süntaksi esiletõstmist, siis kaasa see keel:</string>
+
+    <string name="formatting_help_tables_title">Tabelid</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column"> %1d. veerg</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Väärtus %1d</string>
+
+    <string name="formatting_help_images_body_1">Lingid peavad olema kas terviklikud võrguaadressid koos protokolli ja domeeniga või absoluutsed asukohad, mille aluses on %1$s tähemärk.</string>
+    <string name="formatting_help_images_body_2">Selleks, et sisestus vastaks Markdown-vormingu reeglitele, pead pildi võrguaadressis kasutama paomärke. Näiteks tähendab see, et võrguaadressi tühikute asemel peaks olema %1$s.</string>
     <string name="formatting_help_images_title">Pildid</string>
+    <string name="formatting_help_images_alt">Kaunist pilt</string>
+
     <string name="simple_other">Muu</string>
     <string name="sort_last_modified">Järjesta muutmise kuupäeva järgi</string>
     <string name="sort_alphabetically">Järjesta tähestikuliselt</string>
-    <string name="error_action_open_battery_settings">Akuseaded</string>
+    <string name="error_action_open_battery_settings">Akuseadistused</string>
     <string name="error_action_open_deck_info">Näita rakenduse teavet</string>
     <string name="error_action_open_network">Võrgu seadistused</string>
     <string name="error_action_update_files_app">Uuenda</string>
     <string name="no_account_configured_yet">Ühtegi kontot pole veel seadistatud</string>
     <string name="no_other_accounts">Sa pole veel seadistanud ühtegi teist kasutajakontot.</string>
     <string name="choose_account">Vali konto</string>
+    <string name="context_based_formatting">Kontekstikohane hüpikaken vorminduse jaoks.</string>
+    <plurals name="remove_account_message">
+        <item quantity="one">„%1$s“ kasutajakonto eemaldamisel kustutad ka ühe sünkroniseerimata muudatuse.</item>
+        <item quantity="other">„%1$s“ kasutajakonto eemaldamisel kustutad ka %2$d sünkroniseerimata muudatust.</item>
+    </plurals>
     <string name="remove_account">Eemalda fail: „%1$s“</string>
+
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Kasutajakonto lisamiseks peab sinu nutiseadmes olema toimiv internetiühendus.</string>
+    <string name="settings_notes_path">Vali kaust</string>
 
     <string name="simple_next">Järgmine</string>
     <string name="simple_prev">Eelmine</string>
     <string name="simple_backup">Varundus</string>
+    <string name="backup">Me tuvastasime, et rakendus on mittetaastuvas olekus. Palun varunda oma sünkroniseerimata muudatused ning kustuta Märkete rakenduse andmeruum.</string>
     <string name="settings_notes_path_description">Kaust sinu märkmete salvestamiseks Nextcloudis</string>
     <string-array name="settings_file_suffixes">
         <item translatable="false">.txt</item>
@@ -223,5 +311,7 @@
     <string name="progress_import_indeterminate">Impordin märkmeid…</string>
     <string name="progress_import">Märkmed on importimisel: %1$d/%2$d…</string>
     <string name="account_imported">Kasutajakonto on imporditud.</string>
+    <string name="direct_editing_error">Viga vormindatud teksti muutmisvaate laadimisel</string>
+    <string name="switch_to_plain_editing">Kasuta muutmisvaadet vormindamata tekstile</string>
     <string name="action_back">Tagasi</string>
     </resources>
