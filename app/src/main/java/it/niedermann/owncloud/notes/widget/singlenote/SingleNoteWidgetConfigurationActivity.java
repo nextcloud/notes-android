@@ -15,9 +15,6 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.appcompat.widget.Toolbar;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.exception.ExceptionHandler;
@@ -78,5 +75,11 @@ public class SingleNoteWidgetConfigurationActivity extends MainActivity {
                 Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @Override
+    public void onNoteActionsClick(int position, View v) {
+        // TODO
+        Toast.makeText(v.getContext(), "Not implemented yet", Toast.LENGTH_SHORT).show();
     }
 }

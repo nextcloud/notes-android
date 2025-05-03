@@ -55,6 +55,7 @@ public class NoteViewGridHolder extends NoteViewHolder {
         bindSearchableContent(context, binding.noteTitle, searchQuery, note.getTitle(), color);
         bindSearchableContent(context, binding.noteExcerpt, searchQuery, note.getExcerpt().replace(EXCERPT_LINE_SEPARATOR, "\n"), color);
         binding.noteExcerpt.setVisibility(TextUtils.isEmpty(note.getExcerpt()) ? GONE : VISIBLE);
+        bindActions(binding.noteActions, color);
     }
 
     @Nullable

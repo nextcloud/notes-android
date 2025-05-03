@@ -44,6 +44,7 @@ public class NoteViewHolderWithExcerpt extends NoteViewHolder {
 
         bindSearchableContent(context, binding.noteTitle, searchQuery, note.getTitle(), color);
         bindSearchableContent(context, binding.noteExcerpt, searchQuery, note.getExcerpt(), color);
+        bindActions(binding.noteActions, color);
     }
 
     @NonNull
