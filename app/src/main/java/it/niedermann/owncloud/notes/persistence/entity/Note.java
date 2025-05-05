@@ -108,6 +108,19 @@ public class Note implements Serializable, Item {
     }
 
     @Ignore
+    public Note(@Nullable Long remoteId, @Nullable Calendar modified, @NonNull String title, @NonNull String content, @NonNull String category, boolean favorite, @Nullable String eTag) {
+        this(remoteId,
+             modified,
+             title,
+             content,
+             category,
+             favorite,
+             eTag,
+             false,
+             false);
+    }
+    
+    @Ignore
     public Note(@Nullable Long remoteId, @Nullable Calendar modified, @NonNull String title, @NonNull String content, @NonNull String category, boolean favorite, @Nullable String eTag, boolean isShared, boolean readonly) {
         this.remoteId = remoteId;
         this.title = title;
@@ -117,6 +130,16 @@ public class Note implements Serializable, Item {
         this.category = category;
         this.eTag = eTag;
         this.isShared = isShared;
+    }
+
+    @Ignore
+    public Note(long id, @Nullable Long remoteId, @Nullable Calendar modified, @NonNull String title, @NonNull String content, @NonNull String category, boolean favorite, @Nullable String etag, @NonNull DBStatus status, long accountId, @NonNull String excerpt, int scrollY) {
+        this(remoteId, modified, title, content, category, favorite, etag, false, false);
+        this.id = id;
+        this.status = status;
+        this.accountId = accountId;
+        this.excerpt = excerpt;
+        this.scrollY = scrollY;
     }
 
     @Ignore
