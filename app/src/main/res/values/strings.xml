@@ -32,11 +32,142 @@
     <string name="menu_favorite">Favorite</string>
     <string name="menu_preview">Preview</string>
     <string name="menu_share">Share</string>
+    <string name="common_loading">Loading…</string>
+
 
     <string name="search_in_category">Search in %1$s</string>
     <string name="search_in_all">Search all notes</string>
 
     <string name="change_category_title">Choose a category</string>
+
+    <!-- UsersAndGroupsSearchProvider -->
+    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
+    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
+
+    <!-- QuickSharingPermissionsBottomSheetDialog -->
+    <string-array name="quick_sharing_permission_bottom_sheet_dialog_folder_share_values" translatable="false">
+        <item>@string/link_share_view_only</item>
+        <item>@string/link_share_allow_upload_and_editing</item>
+        <item>@string/link_share_file_drop</item>
+    </string-array>
+    <string-array name="quick_sharing_permission_bottom_sheet_dialog_note_share_values" translatable="false">
+        <item>@string/link_share_view_only</item>
+        <item>@string/link_share_editing</item>
+    </string-array>
+
+    <!-- NoteShareActivity -->
+    <string name="note_share_activity_activity_icon_content_description">note activity icon</string>
+    <string name="note_share_activity_share_icon_content_description">note share icon</string>
+    <string name="note_share_activity_external_icon_content_description">note share external icon</string>
+    <string name="note_share_activity_copy_icon_content_description">note share copy icon</string>
+    <string name="note_share_activity_more_icon_content_description">note share more icon</string>
+    <string name="note_share_activity_icon_content_description">note share icon</string>
+    <string name="note_share_activity_user_icon_content_description">note share user icon</string>
+    <string name="note_share_activity_contact_icon_content_description">note share contact icon</string>
+    <string name="note_share_activity_shared_with_you">Shared with you by %1$s</string>
+    <string name="note_share_activity_share_note">Share note</string>
+    <string name="note_share_activity_search_text">Name, Federated Cloud ID or email address…</string>
+    <string name="note_share_activity_share_link">Share link</string>
+    <string name="note_share_activity_resharing_not_allowed">Policy or permissions prevent resharing</string>
+    <string name="note_share_activity_could_not_retrieve_url">Could not retrieve URL</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" has been shared with you</string>
+    <string name="note_share_activity_contact_no_permission">Contact permission is required.</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">You are not allowed to create a public share.</string>
+
+    <string name="note_share_created">Share created</string>
+    <string name="note_share_activity_cannot_created">You are not allowed to create a share.</string>
+
+
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">Advanced Settings</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Hide download</string>
+    <string name="note_share_detail_activity_share_send_note">Note to recipient</string>
+    <string name="note_share_detail_activity_hint_note">Note</string>
+    <string name="note_share_detail_activity_common_next">Next</string>
+    <string name="note_share_detail_activity_share_copy_link">Share and Copy Link</string>
+    <string name="note_share_detail_activity_common_confirm">Confirm</string>
+    <string name="note_share_detail_activity_set_note">Set Note</string>
+    <string name="note_share_detail_activity_send_share">Send Share</string>
+    <string name="note_share_detail_activity_hint_name">Name</string>
+    <string name="note_share_detail_activity_link_name">Link Name</string>
+    <string name="note_share_detail_activity_share_link_empty_password">You must enter a password</string>
+    <string name="note_share_detail_activity_hint_password">Password</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Please select at least one permission to share.</string>
+    <string name="note_share_detail_activity_label_empty">Label cannot be empty</string>
+    <string name="note_share_detail_activity_cancel">Cancel</string>
+    <string name="note_share_detail_activity_create_share_error">Failed to create a share</string>
+
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Enter an optional password</string>
+    <string name="share_password_dialog_fragment_skip">Skip</string>
+
+    <string name="share_link_password_title">Enter a password</string>
+    <string name="common_ok">OK</string>
+    <string name="common_delete">Delete</string>
+    <string name="write_email">Send email</string>
+    <string name="no_browser_available">No app available to handle links</string>
+    <string name="no_email_app_available">No App available to handle mail address</string>
+    <string name="no_actions">No actions for this user</string>
+
+    <string name="failed_the_remove_share">Failed to remove share</string>
+    <string name="email_pick_failed">Failed to pick email address.</string>
+    <string name="failed_update_ui">Failed to update UI</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">No app available to select contacts</string>
+    <string name="activity_chooser_title">Send link to…</string>
+
+    <string name="activity_chooser_send_file_title">Send</string>
+    <string name="share_internal_link_to_folder_text">Internal share link only works for users with access to this folder</string>
+    <string name="share_internal_link_to_file_text">Internal share link only works for users with access to this file</string>
+    <string name="share_internal_link">Share internal link</string>
+    <string name="delete_link">Delete Link</string>
+    <string name="share_settings">Settings</string>
+    <string name="share_send_new_email">Send new email</string>
+    <string name="share_dialog_title">Sharing</string>
+    <string name="share_file">Share %1$s</string>
+    <string name="share_expiration_date_label">Expires %1$s</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Set expiration date</string>
+    <string name="share_via_link_section_title">Share link</string>
+    <string name="share_via_link_send_link_label">Send link</string>
+    <string name="share_password_title">Password-protected</string>
+    <string name="share_no_password_title">Set password</string>
+    <string name="share_with_title">Share with…</string>
+    <string name="share_via_link_unset_password">Unset</string>
+    <string name="add_another_public_share_link">Add another link</string>
+    <string name="add_new_public_share">Add new public share link</string>
+    <string name="public_share_name">New name</string>
+    <string name="share_link_with_label">Share link (%1$s)</string>
+    <string name="share_link">Share link</string>
+    <string name="allow_resharing">Allow resharing</string>
+    <string name="link_share_view_only">View only</string>
+    <string name="link_share_editing">Editing</string>
+    <string name="link_share_allow_upload_and_editing">Allow upload and editing</string>
+    <string name="link_share_file_drop">File drop (upload only)</string>
+    <string name="could_not_retrieve_shares">Could not retrieve shares</string>
+    <string name="share_permission_view_only">View only</string>
+    <string name="share_permission_can_edit">Can edit</string>
+    <string name="share_permission_file_drop">File drop</string>
+    <string name="share_permission_secure_file_drop">Secure file drop</string>
+    <string name="share_permissions">Share Permissions</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">%1$d download remaining</item>
+        <item quantity="other">%1$d downloads remaining</item>
+    </plurals>
+    <string name="username">Username</string>
+    <string name="share_group_clarification">%1$s (group)</string>
+    <string name="share_remote_clarification">%1$s (remote)</string>
+    <string name="share_room_clarification">%1$s (conversation)</string>
+    <string name="share_known_remote_on_clarification">on %1$s</string>
+    <string name="remote">(remote)</string>
+
+    <string name="empty" translatable="false" />
+
+    <string name="copy_link">Copy link</string>
+    <string name="share">Share</string>
+    <string name="clipboard_text_copied">Link copied</string>
+    <string name="clipboard_no_text_to_copy">Received no text to copy to clipboard</string>
+    <string name="clipboard_unexpected_error">Unexpected error while copying to clipboard</string>
+    <string name="clipboard_label">Text copied from %1$s</string>
 
     <string name="listview_updated_today">Today</string>
     <string name="listview_updated_yesterday">Yesterday</string>

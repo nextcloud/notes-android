@@ -24,6 +24,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
+ *
  * @link <a href="https://github.com/nextcloud/notes/wiki/API-0.2">Notes API v0.2</a>
  */
 public interface NotesAPI_0_2 {

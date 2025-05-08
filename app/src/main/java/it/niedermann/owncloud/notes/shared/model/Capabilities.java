@@ -10,8 +10,26 @@ import android.graphics.Color;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-public class Capabilities {
+import com.owncloud.android.lib.resources.shares.OCShare;
+
+import java.io.Serializable;
+
+@Entity(tableName = "capabilities")
+public class Capabilities implements Serializable {
+    @PrimaryKey
+    public int id = 1;
+
+    /**
+     * 30(Major) .0(Minor). 5(Micro)
+     */
+    private String nextcloudMajorVersion = null;
+    private String nextcloudMinorVersion = null;
+    private String nextcloudMicroVersion = null;
+
+    private boolean federationShare = false;
 
     private String apiVersion = null;
     @ColorInt
@@ -22,6 +40,43 @@ public class Capabilities {
     private String eTag;
 
     private boolean directEditingAvailable;
+
+    private boolean publicPasswordEnforced;
+    private boolean askForOptionalPassword;
+    private boolean isReSharingAllowed;
+    private int defaultPermission = OCShare.NO_PERMISSION;
+
+    public boolean isReSharingAllowed() {
+        return isReSharingAllowed;
+    }
+
+    public void setReSharingAllowed(boolean value) {
+        this.isReSharingAllowed = value;
+    }
+
+    public boolean getPublicPasswordEnforced() {
+        return publicPasswordEnforced;
+    }
+
+    public void setPublicPasswordEnforced(boolean value) {
+        this.publicPasswordEnforced = value;
+    }
+
+    public int getDefaultPermission() {
+        return defaultPermission;
+    }
+
+    public void setDefaultPermission(int value) {
+        this.defaultPermission = value;
+    }
+
+    public boolean getAskForOptionalPassword() {
+        return askForOptionalPassword;
+    }
+
+    public void setAskForOptionalPassword(boolean value) {
+        this.askForOptionalPassword = value;
+    }
 
     public void setApiVersion(String apiVersion) {
         this.apiVersion = apiVersion;
@@ -34,6 +89,41 @@ public class Capabilities {
     @Nullable
     public String getETag() {
         return eTag;
+    }
+
+    @Nullable
+    public String getNextcloudMajorVersion() {
+        return nextcloudMajorVersion;
+    }
+
+    @Nullable
+    public String getNextcloudMinorVersion() {
+        return nextcloudMinorVersion;
+    }
+
+    @Nullable
+    public String getNextcloudMicroVersion() {
+        return nextcloudMicroVersion;
+    }
+
+    public void setNextcloudMajorVersion(@Nullable String nextcloudMajorVersion) {
+        this.nextcloudMajorVersion = nextcloudMajorVersion;
+    }
+
+    public void setNextcloudMinorVersion(@Nullable String nextcloudMinorVersion) {
+        this.nextcloudMinorVersion = nextcloudMinorVersion;
+    }
+
+    public void setNextcloudMicroVersion(@Nullable String nextcloudMicroVersion) {
+        this.nextcloudMicroVersion = nextcloudMicroVersion;
+    }
+
+    public boolean getFederationShare() {
+        return federationShare;
+    }
+
+    public void setFederationShare(boolean value) {
+        this.federationShare = value;
     }
 
     public void setETag(@Nullable String eTag) {
@@ -69,6 +159,12 @@ public class Capabilities {
     public String toString() {
         return "Capabilities{" +
                 "apiVersion='" + apiVersion + '\'' +
+                ", nextcloudMajorVersion='" + nextcloudMajorVersion + '\'' +
+                ", nextcloudMinorVersion='" + nextcloudMinorVersion + '\'' +
+                ", nextcloudMicroVersion='" + nextcloudMicroVersion + '\'' +
+                ", federationShare=" + federationShare +
+                ", publicPasswordEnforced=" + publicPasswordEnforced +
+                ", askForOptionalPassword=" + askForOptionalPassword +
                 ", color=" + color +
                 ", textColor=" + textColor +
                 ", eTag='" + eTag + '\'' +

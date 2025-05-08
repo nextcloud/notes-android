@@ -18,6 +18,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializer;
+import com.google.gson.Strictness;
 import com.nextcloud.android.sso.api.NextcloudAPI;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
@@ -29,8 +30,10 @@ import it.niedermann.owncloud.notes.persistence.sync.CapabilitiesDeserializer;
 import it.niedermann.owncloud.notes.persistence.sync.FilesAPI;
 import it.niedermann.owncloud.notes.persistence.sync.NotesAPI;
 import it.niedermann.owncloud.notes.persistence.sync.OcsAPI;
+import it.niedermann.owncloud.notes.persistence.sync.ShareAPI;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
+import okhttp3.ResponseBody;
 import retrofit2.NextcloudRetrofitApiBuilder;
 import retrofit2.Retrofit;
 
@@ -47,12 +50,14 @@ public class ApiProvider {
 
     private static final String API_ENDPOINT_OCS = "/ocs/v2.php/cloud/";
     private static final String API_ENDPOINT_FILES ="/ocs/v2.php/apps/files/api/v1/";
+    private static final String API_ENDPOINT_FILES_SHARING ="/ocs/v2.php/apps/files_sharing/api/v1/";
 
     private static final Map<String, NextcloudAPI> API_CACHE = new ConcurrentHashMap<>();
 
     private static final Map<String, OcsAPI> API_CACHE_OCS = new ConcurrentHashMap<>();
     private static final Map<String, NotesAPI> API_CACHE_NOTES = new ConcurrentHashMap<>();
     private static final Map<String, FilesAPI> API_CACHE_FILES = new ConcurrentHashMap<>();
+    private static final Map<String, ShareAPI> API_CACHE_FILES_SHARING = new ConcurrentHashMap<>();
 
 
     public static ApiProvider getInstance() {
@@ -96,6 +101,15 @@ public class ApiProvider {
         return filesAPI;
     }
 
+    public synchronized ShareAPI getShareAPI(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount) {
+        if (API_CACHE_FILES_SHARING.containsKey(ssoAccount.name)) {
+            return API_CACHE_FILES_SHARING.get(ssoAccount.name);
+        }
+        final var shareAPI = new NextcloudRetrofitApiBuilder(getNextcloudAPI(context, ssoAccount), API_ENDPOINT_FILES_SHARING).create(ShareAPI.class);
+        API_CACHE_FILES_SHARING.put(ssoAccount.name, shareAPI);
+        return shareAPI;
+    }
+
     private synchronized NextcloudAPI getNextcloudAPI(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount) {
         if (API_CACHE.containsKey(ssoAccount.name)) {
             return API_CACHE.get(ssoAccount.name);
@@ -103,6 +117,7 @@ public class ApiProvider {
             Log.v(TAG, "NextcloudRequest account: " + ssoAccount.name);
             final var nextcloudAPI = new NextcloudAPI(context.getApplicationContext(), ssoAccount,
                     new GsonBuilder()
+                            .setStrictness(Strictness.LENIENT)
                             .excludeFieldsWithoutExposeAnnotation()
                             .registerTypeHierarchyAdapter(Calendar.class, (JsonSerializer<Calendar>) (src, typeOfSrc, ctx) -> new JsonPrimitive(src.getTimeInMillis() / 1_000))
                             .registerTypeHierarchyAdapter(Calendar.class, (JsonDeserializer<Calendar>) (src, typeOfSrc, ctx) -> {

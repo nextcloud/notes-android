@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Nextcloud - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2017 Andy Scherzinger <info@andy-scherzinger.de>
+  ~ SPDX-License-Identifier: AGPL-3.0-or-later OR GPL-2.0-only
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list_item"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/activity_row_layout_height"
+    android:background="?android:attr/activatedBackgroundIndicator"
+    android:minWidth="@dimen/activity_row_layout_min_width_independent"
+    android:orientation="horizontal"
+    android:paddingEnd="@dimen/spacer_2x"
+    android:paddingLeft="@dimen/spacer_2x"
+    android:paddingRight="@dimen/spacer_2x"
+    android:paddingStart="@dimen/spacer_2x">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="@dimen/default_icon_size"
+        android:layout_height="@dimen/default_icon_size"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="@dimen/spacer_2x"
+        android:contentDescription="@string/note_share_activity_activity_icon_content_description" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:textAppearance="?android:attr/textAppearanceLargePopupMenu" />
+
+</LinearLayout>
