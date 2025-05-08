@@ -95,7 +95,7 @@ ext {
 dependencies {
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'
 
-    implementation 'com.google.guava:guava:31.1-android'
+    implementation 'com.google.guava:guava:31.1-jre'
     implementation ('commons-httpclient:commons-httpclient:3.1') {
         exclude group: 'commons-logging', module: 'commons-logging'
     }
