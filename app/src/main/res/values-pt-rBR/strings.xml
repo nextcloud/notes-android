@@ -32,12 +32,40 @@
     <string name="menu_favorite">Favorita</string>
     <string name="menu_preview">Prever</string>
     <string name="menu_share">Compartilhar</string>
-
     <string name="search_in_category">Pesquisar em %1$s</string>
     <string name="search_in_all">Pesquisar todas as notas</string>
 
     <string name="change_category_title">Escolha uma categoria</string>
 
+    <string name="note_share_activity_shared_with_you">Compartilhado com você por %1$s</string>
+    <string name="note_share_activity_share_link">Compartilhar link</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Ocultar download</string>
+    <string name="note_share_detail_activity_hint_name">Nome</string>
+    <string name="note_share_detail_activity_link_name">Nome do link </string>
+    <string name="note_share_detail_activity_label_empty">A atiqueta não pode ficar vazia</string>
+    <string name="note_share_detail_activity_cancel">Cancelar</string>
+    <string name="common_delete">Excluir</string>
+    <string name="email_pick_failed">Falha ao escolher o endereço de e-mail.</string>
+    <string name="failed_update_ui">Falha ao atualizar a interface gráfica</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Nenhum aplicativo disponível para selecionar contatos</string>
+    <string name="delete_link">Excluir link</string>
+    <string name="share_send_new_email">Enviar novo e-mail </string>
+    <string name="share_file">Compartilhar %1$s</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Definir data de expiração</string>
+    <string name="share_via_link_section_title">Compartilhar link</string>
+    <string name="share_password_title">Protegido por senha</string>
+    <string name="allow_resharing">Permitir recompartilhamento</string>
+    <string name="could_not_retrieve_shares">Não foi possível recuperar os compartilhamentos</string>
+    <string name="share_permission_secure_file_drop">Depósito de arquivos seguro</string>
+    <string name="share_permissions">Permissões de compartilhamento </string>
+    <string name="username">Nome de usuário</string>
+    <string name="share_group_clarification">%1$s (grupo)</string>
+    <string name="share_remote_clarification">%1$s (remoto)</string>
+    <string name="share_known_remote_on_clarification">em %1$s</string>
+    <string name="copy_link">Copiar link</string>
+    <string name="clipboard_text_copied">Link copiado</string>
+    <string name="clipboard_unexpected_error">Erro inesperado ao copiar para a área de transferência</string>
     <string name="listview_updated_today">Hoje</string>
     <string name="listview_updated_yesterday">Ontem</string>
     <string name="listview_updated_this_week">Esta semana</string>

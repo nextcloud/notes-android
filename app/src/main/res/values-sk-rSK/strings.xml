@@ -32,12 +32,41 @@
     <string name="menu_favorite">Obľúbené</string>
     <string name="menu_preview">Náhľad</string>
     <string name="menu_share">Sprístupniť</string>
-
     <string name="search_in_category">Hľadať v %1$s</string>
     <string name="search_in_all">Hľadať všetky poznámky</string>
 
     <string name="change_category_title">Vybrať kategóriu</string>
 
+    <string name="note_share_activity_shared_with_you">Sprístupnené vám používateľom %1$s</string>
+    <string name="note_share_activity_share_link">Zdieľať odkaz</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Skryť sťahovanie</string>
+    <string name="note_share_detail_activity_hint_name">Názov</string>
+    <string name="note_share_detail_activity_link_name">Názov odkazu</string>
+    <string name="note_share_detail_activity_label_empty">Štítok nemôže byť prázdny</string>
+    <string name="note_share_detail_activity_cancel">Zrušiť</string>
+    <string name="common_delete">Vymazať</string>
+    <string name="email_pick_failed">Nepodarilo sa vybrať e-mailovú adresu.</string>
+    <string name="failed_update_ui">Nepodarilo sa aktualizovať UI</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Nie je k dispozícii žiadna aplikácia pre výber kontaktov</string>
+    <string name="delete_link">Zmazať odkaz</string>
+    <string name="share_send_new_email">Odoslať nový e-mail</string>
+    <string name="share_dialog_title">Zdieľanie</string>
+    <string name="share_file">Sprístupni %1$s</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Nastaviť dátum expirácie</string>
+    <string name="share_via_link_section_title">Zdieľať odkaz</string>
+    <string name="share_password_title">Chránené heslom</string>
+    <string name="allow_resharing">Povoliť zdieľanie ďalej</string>
+    <string name="could_not_retrieve_shares">Nie je možné získať zdieľania</string>
+    <string name="share_permission_secure_file_drop">Zabezpečený file drop</string>
+    <string name="share_permissions">Zdieľať oprávnenia</string>
+    <string name="username">Užívateľské meno</string>
+    <string name="share_group_clarification">%1$s (skupina)</string>
+    <string name="share_remote_clarification">%1$s (vzdialený)</string>
+    <string name="share_known_remote_on_clarification">na %1$s</string>
+    <string name="copy_link">Kopírovať odkaz</string>
+    <string name="clipboard_text_copied">Odkaz bol skopírovaný</string>
+    <string name="clipboard_unexpected_error">Nečakaná chyba pri kopírovaní do schránky</string>
     <string name="listview_updated_today">Dnes</string>
     <string name="listview_updated_yesterday">Včera</string>
     <string name="listview_updated_this_week">Tento týždeň</string>

@@ -32,12 +32,27 @@
     <string name="menu_favorite">المفضلة </string>
     <string name="menu_preview">معاينة</string>
     <string name="menu_share">شارك</string>
-
     <string name="search_in_category">البحث في %1$s</string>
     <string name="search_in_all">البحث في جميع الملاحظات</string>
 
     <string name="change_category_title">إختر التصنيف</string>
 
+    <string name="note_share_activity_shared_with_you">مشارك معك بواسطة %1$s</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">إخفاء التنزيل</string>
+    <string name="note_share_detail_activity_label_empty">لا يمكن أن تكون علامة التصنيف label فارغة</string>
+    <string name="common_delete">حذف</string>
+    <string name="failed_update_ui">فشل تحديث UI</string>
+    <string name="share_send_new_email">إرسال بريد جديد</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">تعيين تاريخ إنتهاء الصلاحية</string>
+    <string name="share_password_title">محمي بكلمة مرور</string>
+    <string name="share_permission_secure_file_drop">إسقاط آمن للملف</string>
+    <string name="username">اسم المستخدم</string>
+    <string name="share_group_clarification">%1$s(مجموعة)</string>
+    <string name="share_known_remote_on_clarification">على %1$s</string>
+    <string name="copy_link">نسخ الرابط</string>
+    <string name="clipboard_text_copied">تمّ نسخ الرابط</string>
+    <string name="clipboard_unexpected_error">خطأٌ غير متوقع أثناء النسخ إلى الحافظة</string>
     <string name="listview_updated_today">اليوم</string>
     <string name="listview_updated_yesterday">البارحة</string>
     <string name="listview_updated_this_week"> هذا الأسبوع</string>

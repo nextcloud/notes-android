@@ -32,12 +32,36 @@
     <string name="menu_favorite">Favoritt</string>
     <string name="menu_preview">Forhåndsvis</string>
     <string name="menu_share">Del</string>
-
     <string name="search_in_category">Søk i %1$s</string>
     <string name="search_in_all">Søk i alle notater</string>
 
     <string name="change_category_title">Velg kategori</string>
 
+    <string name="note_share_activity_shared_with_you">Delt med deg av %1$s</string>
+    <string name="note_share_activity_share_link">Del lenke</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Gjem nedlasting</string>
+    <string name="note_share_detail_activity_hint_name">Navn</string>
+    <string name="note_share_detail_activity_link_name">Navn på lenke</string>
+    <string name="note_share_detail_activity_label_empty">Merkelapp kan ikke være tom</string>
+    <string name="note_share_detail_activity_cancel">Avbryt</string>
+    <string name="common_delete">Slett</string>
+    <string name="email_pick_failed">Kunne ikke velge e-postadresse.</string>
+    <string name="failed_update_ui">Kunne ikke oppdatere brukergrensesnittet</string>
+    <string name="share_send_new_email">Send ny e-post</string>
+    <string name="share_file">Del %1$s</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Sett utløpsdato</string>
+    <string name="share_via_link_section_title">Del lenke</string>
+    <string name="share_password_title">Passordbeskyttet</string>
+    <string name="allow_resharing">TIllat videre deling</string>
+    <string name="could_not_retrieve_shares">Kunne ikke hente ressursen</string>
+    <string name="share_permission_secure_file_drop">Sikker filkasse</string>
+    <string name="username">Brukernavn</string>
+    <string name="share_group_clarification">%1$s (gruppe)</string>
+    <string name="share_known_remote_on_clarification">på %1$s</string>
+    <string name="copy_link">Kopier lenke</string>
+    <string name="clipboard_text_copied">Lenke kopiert</string>
+    <string name="clipboard_unexpected_error">Uventet feil ved kopiering til utklippstavle</string>
     <string name="listview_updated_today">Idag</string>
     <string name="listview_updated_yesterday">I går</string>
     <string name="listview_updated_this_week">Denne uken</string>

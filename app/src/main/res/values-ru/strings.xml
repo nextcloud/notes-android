@@ -32,12 +32,40 @@
     <string name="menu_favorite">Избранное</string>
     <string name="menu_preview">Предпросмотр</string>
     <string name="menu_share">Поделиться</string>
-
     <string name="search_in_category">Поиск в %1$s</string>
     <string name="search_in_all">Поиск всех заметок</string>
 
     <string name="change_category_title">Выберите категорию</string>
 
+    <string name="note_share_activity_shared_with_you">С вами поделился %1$s</string>
+    <string name="note_share_activity_share_link">Поделиться ссылкой</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Скрыть загрузку</string>
+    <string name="note_share_detail_activity_hint_name">Имя</string>
+    <string name="note_share_detail_activity_link_name">Название ссылки</string>
+    <string name="note_share_detail_activity_label_empty">Метка не может быть пустой</string>
+    <string name="note_share_detail_activity_cancel">Отмена</string>
+    <string name="common_delete">Удаление</string>
+    <string name="email_pick_failed">Невозможно выбрать адрес электронной почты.</string>
+    <string name="failed_update_ui">Не удалось обновить пользовательский интерфейс</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Приложение для выбора контактов недоступно</string>
+    <string name="delete_link">Удалить ссылку</string>
+    <string name="share_send_new_email">Отправить новое письмо</string>
+    <string name="share_file">Общий ресурс «%1$s»</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Установить крайний срок для ответов</string>
+    <string name="share_via_link_section_title">Поделиться ссылкой</string>
+    <string name="share_password_title">Защищено паролем</string>
+    <string name="allow_resharing">Разрешить повторную публикацию</string>
+    <string name="could_not_retrieve_shares">Не удалось получить перечень общих ресурсов</string>
+    <string name="share_permission_secure_file_drop">Защищенный очиститель файлов</string>
+    <string name="share_permissions">Права на публикацию</string>
+    <string name="username">Имя пользователя</string>
+    <string name="share_group_clarification">%1$s (группа)</string>
+    <string name="share_remote_clarification">%1$s (на сервере)</string>
+    <string name="share_known_remote_on_clarification">на %1$s</string>
+    <string name="copy_link">Копировать ссылку</string>
+    <string name="clipboard_text_copied">Ссылка скопирована</string>
+    <string name="clipboard_unexpected_error">Неожиданная ошибка во время копирования в буфер обмена</string>
     <string name="listview_updated_today">Сегодня</string>
     <string name="listview_updated_yesterday">Вчера</string>
     <string name="listview_updated_this_week">На этой неделе</string>

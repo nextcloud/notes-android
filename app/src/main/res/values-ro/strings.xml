@@ -32,12 +32,39 @@
     <string name="menu_favorite">Favorit</string>
     <string name="menu_preview">Previzualizare</string>
     <string name="menu_share">Partajează</string>
-
     <string name="search_in_category">Căutare în 1%1$s</string>
     <string name="search_in_all">Caută în toate notițele </string>
 
     <string name="change_category_title">Alege o categorie </string>
 
+    <string name="note_share_activity_shared_with_you">Partajat cu tine de către %1$s</string>
+    <string name="note_share_activity_share_link">Partajază legătură</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Ascunde descărcarea</string>
+    <string name="note_share_detail_activity_hint_name">Nume</string>
+    <string name="note_share_detail_activity_link_name">Numele legăturii</string>
+    <string name="note_share_detail_activity_label_empty">Eticheta nu poate fi goală</string>
+    <string name="note_share_detail_activity_cancel">Anulare</string>
+    <string name="common_delete">Șterge</string>
+    <string name="email_pick_failed">Nu s-a putut alege adresa de e-mail.</string>
+    <string name="failed_update_ui">Nu s-a putut actualiza interfața</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Nicio aplicație disponibilă pentru a selecta contacte</string>
+    <string name="delete_link">Șterge legătura</string>
+    <string name="share_send_new_email">Trimite un email nou</string>
+    <string name="share_file">Partajare %1$s</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Specifică data expirării</string>
+    <string name="share_via_link_section_title">Partajază legătură</string>
+    <string name="share_password_title">Protejat cu parolă</string>
+    <string name="allow_resharing">Permite repartajarea</string>
+    <string name="could_not_retrieve_shares">Nu am putut obține lista partajărilor</string>
+    <string name="share_permissions">Permisiuni de partajare</string>
+    <string name="username">Nume utilizator</string>
+    <string name="share_group_clarification">%1$s (grup)</string>
+    <string name="share_remote_clarification">%1$s (remote)</string>
+    <string name="share_known_remote_on_clarification">pe %1$s</string>
+    <string name="copy_link">Copiază link</string>
+    <string name="clipboard_text_copied">Link copiat</string>
+    <string name="clipboard_unexpected_error">Eroare neașteptată în timpul copierii</string>
     <string name="listview_updated_today">Azi</string>
     <string name="listview_updated_yesterday">Ieri</string>
     <string name="listview_updated_this_week">Săptămâna aceasta</string>

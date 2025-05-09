@@ -32,12 +32,35 @@
     <string name="menu_favorite">Preferito</string>
     <string name="menu_preview">Anteprima</string>
     <string name="menu_share">Condividi</string>
-
     <string name="search_in_category">Cerca in %1$s</string>
     <string name="search_in_all">Cerca tutte le note</string>
 
     <string name="change_category_title">Scegli una categoria</string>
 
+    <string name="note_share_activity_shared_with_you">Condiviso con te da %1$s</string>
+    <string name="note_share_activity_share_link">Collegamento di condivisione</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Nascondi scaricamento</string>
+    <string name="note_share_detail_activity_hint_name">Nome</string>
+    <string name="note_share_detail_activity_link_name">Nome collegamento</string>
+    <string name="note_share_detail_activity_label_empty">L\'etichetta non può essere vuota</string>
+    <string name="note_share_detail_activity_cancel">Annulla</string>
+    <string name="common_delete">Elimina</string>
+    <string name="email_pick_failed">Impossibile scegliere l\'indirizzo di posta.</string>
+    <string name="failed_update_ui">Aggiornamento interfaccia non riuscito</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Nessuna app disponibile per selezionare i contatti</string>
+    <string name="share_send_new_email">Invia una nuova email</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Imposta data di scadenza</string>
+    <string name="share_via_link_section_title">Collegamento di condivisione</string>
+    <string name="share_password_title">Protetta da password</string>
+    <string name="could_not_retrieve_shares">Impossibile recuperare le condivisioni</string>
+    <string name="share_permission_secure_file_drop">File drop sicuro</string>
+    <string name="username">Nome utente</string>
+    <string name="share_group_clarification">%1$s (gruppo)</string>
+    <string name="share_known_remote_on_clarification">su %1$s</string>
+    <string name="copy_link">Copia collegamento</string>
+    <string name="clipboard_text_copied">Collegamento copiato</string>
+    <string name="clipboard_unexpected_error">Errore inatteso durante la copia negli appunti</string>
     <string name="listview_updated_today">Oggi</string>
     <string name="listview_updated_yesterday">Ieri</string>
     <string name="listview_updated_this_week">Questa settimana</string>

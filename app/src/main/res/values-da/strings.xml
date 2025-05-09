@@ -32,12 +32,27 @@
     <string name="menu_favorite">Foretrukken</string>
     <string name="menu_preview">Vis eksempel</string>
     <string name="menu_share">Del</string>
-
     <string name="search_in_category">Søg i %1$s</string>
     <string name="search_in_all">Søg i alle noter</string>
 
     <string name="change_category_title">Vælg en kategori</string>
 
+    <string name="note_share_activity_shared_with_you">Delt med dig af %1$s</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Skjul download</string>
+    <string name="note_share_detail_activity_label_empty">Etiketten kan ikke være tom</string>
+    <string name="common_delete">Slet</string>
+    <string name="failed_update_ui">Formåede ikke at opdatere UI</string>
+    <string name="share_send_new_email">Send ny email</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Angiv udløbsdato</string>
+    <string name="share_password_title">Beskyttet med adgangskode</string>
+    <string name="share_permission_secure_file_drop">Sikkert fil drop</string>
+    <string name="username">Brugernavn</string>
+    <string name="share_group_clarification">%1$s (gruppe)</string>
+    <string name="share_known_remote_on_clarification">på %1$s</string>
+    <string name="copy_link">Kopier link</string>
+    <string name="clipboard_text_copied">Link kopieret</string>
+    <string name="clipboard_unexpected_error">Uventet fejl under kopiering til udklipsholder</string>
     <string name="listview_updated_today">I dag</string>
     <string name="listview_updated_yesterday">I går</string>
     <string name="listview_updated_this_week">Denne uge</string>

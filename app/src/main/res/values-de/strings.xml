@@ -32,12 +32,29 @@
     <string name="menu_favorite">Favorit</string>
     <string name="menu_preview">Vorschau</string>
     <string name="menu_share">Teilen</string>
-
     <string name="search_in_category">Suche in %1$s</string>
     <string name="search_in_all">In allen Notizen suchen</string>
 
     <string name="change_category_title">Kategorie auswählen</string>
 
+    <string name="note_share_activity_shared_with_you">Geteilt mit Ihnen von %1$s</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Download verbergen</string>
+    <string name="note_share_detail_activity_hint_name">Name</string>
+    <string name="note_share_detail_activity_label_empty">Bezeichnung darf nicht leer sein</string>
+    <string name="note_share_detail_activity_cancel">Abbrechen</string>
+    <string name="common_delete">Löschen</string>
+    <string name="failed_update_ui">Oberfläche konnte nicht aktualisiert werden</string>
+    <string name="share_send_new_email">Neue E-Mail senden</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Ablaufdatum setzen</string>
+    <string name="share_password_title">Passwortgeschützt</string>
+    <string name="share_permission_secure_file_drop">Sichere Dateiablage</string>
+    <string name="username">Kontenname</string>
+    <string name="share_group_clarification">%1$s (Gruppe)</string>
+    <string name="share_known_remote_on_clarification">auf %1$s</string>
+    <string name="copy_link">Link kopieren</string>
+    <string name="clipboard_text_copied">Link kopiert</string>
+    <string name="clipboard_unexpected_error">Unerwarteter Fehler beim Kopieren in die Zwischenablage</string>
     <string name="listview_updated_today">Heute</string>
     <string name="listview_updated_yesterday">Gestern</string>
     <string name="listview_updated_this_week">Diese Woche</string>

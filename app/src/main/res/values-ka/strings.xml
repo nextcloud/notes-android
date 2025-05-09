@@ -32,12 +32,36 @@
     <string name="menu_favorite">Favorite</string>
     <string name="menu_preview">Preview</string>
     <string name="menu_share">Share</string>
-
     <string name="search_in_category">Search in %1$s</string>
     <string name="search_in_all">Search all notes</string>
 
     <string name="change_category_title">Choose a category</string>
 
+    <string name="note_share_activity_shared_with_you">Shared with you by %1$s</string>
+    <string name="note_share_activity_share_link">გაზიარების ლინკი</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Hide download</string>
+    <string name="note_share_detail_activity_hint_name">სახელი</string>
+    <string name="note_share_detail_activity_link_name">Link Name</string>
+    <string name="note_share_detail_activity_label_empty">Label cannot be empty</string>
+    <string name="note_share_detail_activity_cancel">გაუქმება</string>
+    <string name="common_delete">წაშლა</string>
+    <string name="email_pick_failed">Failed to pick email address.</string>
+    <string name="failed_update_ui">Failed to update UI</string>
+    <string name="share_send_new_email">Send new email</string>
+    <string name="share_file">Share %1$s</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Set expiration date</string>
+    <string name="share_via_link_section_title">გაზიარების ლინკი</string>
+    <string name="share_password_title">Password-protected</string>
+    <string name="allow_resharing">Allow resharing</string>
+    <string name="could_not_retrieve_shares">Could not retrieve shares</string>
+    <string name="share_permission_secure_file_drop">Secure file drop</string>
+    <string name="username">Username</string>
+    <string name="share_group_clarification">%1$s (group)</string>
+    <string name="share_known_remote_on_clarification">on %1$s</string>
+    <string name="copy_link">Copy link</string>
+    <string name="clipboard_text_copied">ლინკი მოიკოპა</string>
+    <string name="clipboard_unexpected_error">Unexpected error while copying to clipboard</string>
     <string name="listview_updated_today">Today</string>
     <string name="listview_updated_yesterday">Yesterday</string>
     <string name="listview_updated_this_week">This week</string>

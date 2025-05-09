@@ -32,12 +32,31 @@
     <string name="menu_favorite">مورد‌ ‌علاقه‌</string>
     <string name="menu_preview">پیش‌نمایش</string>
     <string name="menu_share">هم‌رسانی</string>
-
     <string name="search_in_category">جستجو در %1$s</string>
     <string name="search_in_all">جستجو در همه یادداشت‌ها</string>
 
     <string name="change_category_title">انتخاب یک دسته‌بندی</string>
 
+    <string name="note_share_activity_shared_with_you">هم‌رسانده با شما به دست %1$s</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">نهفتن بارگیری</string>
+    <string name="note_share_detail_activity_hint_name">نام</string>
+    <string name="note_share_detail_activity_label_empty">برچسب نمی تواند خالی باشد</string>
+    <string name="note_share_detail_activity_cancel">ردکردن</string>
+    <string name="common_delete">حذف</string>
+    <string name="email_pick_failed">خطا در گرفتن نشانی رایانامه</string>
+    <string name="failed_update_ui">رابط کاربری بروز نشد</string>
+    <string name="share_send_new_email">فرستادن رایانامهٔ جدید</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">تنظیم تاریخ انقضا</string>
+    <string name="share_password_title">محافظت شده با گذرواژه</string>
+    <string name="could_not_retrieve_shares">امکان بازگردانی اشتراک گذاری‌ها وجود ندارد</string>
+    <string name="share_permission_secure_file_drop">Secure file drop</string>
+    <string name="username">نام کاربری</string>
+    <string name="share_group_clarification">%1$s (گروه)</string>
+    <string name="share_known_remote_on_clarification">روی %1$s</string>
+    <string name="copy_link">کپی کردن لینک</string>
+    <string name="clipboard_text_copied">پیوند رونوشت شد</string>
+    <string name="clipboard_unexpected_error">خطای غیرمنتظره هنگام کپی کردن در کلیپ بورد</string>
     <string name="listview_updated_today">امروز</string>
     <string name="listview_updated_yesterday">دیروز</string>
     <string name="listview_updated_this_week">این هفته</string>

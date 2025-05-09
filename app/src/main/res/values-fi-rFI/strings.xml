@@ -32,12 +32,30 @@
     <string name="menu_favorite">Suosikki</string>
     <string name="menu_preview">Esikatselu</string>
     <string name="menu_share">Jaa</string>
-
     <string name="search_in_category">Etsi luokasta %1$s</string>
     <string name="search_in_all">Etsi kaikista muistiinpanoista</string>
 
     <string name="change_category_title">Valitse luokka</string>
 
+    <string name="note_share_activity_shared_with_you">Jaettu sinulle käyttäjältä %1$s</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Piilota lataus</string>
+    <string name="note_share_detail_activity_hint_name">Nimi</string>
+    <string name="note_share_detail_activity_label_empty">Nimike ei voi olla tyhjä</string>
+    <string name="note_share_detail_activity_cancel">Peruuta</string>
+    <string name="common_delete">Poista</string>
+    <string name="email_pick_failed">Sähköpostiosoitteen valinta epäonnistui.</string>
+    <string name="failed_update_ui">Käyttöliittymän päivitys epäonnistui</string>
+    <string name="share_send_new_email">Lähetä uusi sähköposti</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Aseta vanhenemispäivä</string>
+    <string name="share_password_title">Salasanasuojattu</string>
+    <string name="could_not_retrieve_shares">Jakojen nouto ei onnistunut</string>
+    <string name="username">Käyttäjätunnus</string>
+    <string name="share_group_clarification">%1$s (ryhmä)</string>
+    <string name="share_known_remote_on_clarification">klo %1$s</string>
+    <string name="copy_link">Kopioi linkki</string>
+    <string name="clipboard_text_copied">Linkki kopioitu</string>
+    <string name="clipboard_unexpected_error">Odottamaton virhe kopioitaessa leikepöydälle</string>
     <string name="listview_updated_today">Tänään</string>
     <string name="listview_updated_yesterday">Eilen</string>
     <string name="listview_updated_this_week">Tämä viikko</string>

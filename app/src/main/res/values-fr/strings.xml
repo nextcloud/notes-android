@@ -32,12 +32,34 @@
     <string name="menu_favorite">Favoris</string>
     <string name="menu_preview">Aperçu</string>
     <string name="menu_share">Partager</string>
-
     <string name="search_in_category">Rechercher dans %1$s</string>
     <string name="search_in_all">Rechercher dans toutes les notes</string>
 
     <string name="change_category_title">Sélectionnez une catégorie</string>
 
+    <string name="note_share_activity_shared_with_you">Partagé avec vous par %1$s</string>
+    <string name="note_share_activity_share_link">Partager par lien</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Masquer le téléchargement</string>
+    <string name="note_share_detail_activity_hint_name">Nom</string>
+    <string name="note_share_detail_activity_link_name">Nom du lien</string>
+    <string name="note_share_detail_activity_label_empty">L\'étiquette ne peut être vide</string>
+    <string name="note_share_detail_activity_cancel">Annuler</string>
+    <string name="common_delete">Supprimer</string>
+    <string name="email_pick_failed">Le choix de l\'adresse e-mail a échoué.</string>
+    <string name="failed_update_ui">Échec de la mise à jour de l\'interface utilisateur</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Aucune application disponible pour sélectionner des contacts</string>
+    <string name="share_send_new_email">Envoyer un nouvel e-mail</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Définir une date d\'expiration</string>
+    <string name="share_password_title">Protégé par mot de passe</string>
+    <string name="could_not_retrieve_shares">Impossible de récupérer les partages</string>
+    <string name="share_permission_secure_file_drop">Dépôt sécurisé de fichiers</string>
+    <string name="username">Nom d\'utilisateur</string>
+    <string name="share_group_clarification">%1$s (groupe)</string>
+    <string name="share_known_remote_on_clarification">le %1$s</string>
+    <string name="copy_link">Copier le lien</string>
+    <string name="clipboard_text_copied">Lien copié</string>
+    <string name="clipboard_unexpected_error">Erreur inattendue lors de la copie dans le presse-papier</string>
     <string name="listview_updated_today">Aujourd’hui</string>
     <string name="listview_updated_yesterday">Hier</string>
     <string name="listview_updated_this_week">Cette semaine</string>

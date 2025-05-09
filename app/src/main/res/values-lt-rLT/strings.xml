@@ -31,12 +31,36 @@
     <string name="menu_favorite">Mėgstami</string>
     <string name="menu_preview">Peržiūra</string>
     <string name="menu_share">Bendrinti</string>
-
     <string name="search_in_category">Ieškoti %1$s</string>
     <string name="search_in_all">Ieškoti visuose užrašuose</string>
 
     <string name="change_category_title">Pasirinkite kategoriją</string>
 
+    <string name="note_share_activity_shared_with_you">%1$s bendrina su Jumis.</string>
+    <string name="note_share_activity_share_link">Viešinio nuoroda</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Slėpti atsisiuntimą</string>
+    <string name="note_share_detail_activity_hint_name">Pavadinimas</string>
+    <string name="note_share_detail_activity_link_name">Nuorodos pavadinimas</string>
+    <string name="note_share_detail_activity_label_empty">Etiketė negali būti tuščia</string>
+    <string name="note_share_detail_activity_cancel">Atsisakyti</string>
+    <string name="common_delete">Ištrinti</string>
+    <string name="email_pick_failed">Nepavyko pasirinkti el. pašto adreso.</string>
+    <string name="failed_update_ui">Nepavyko atnaujinti naudotojo sąsajos</string>
+    <string name="share_send_new_email">Siųsti naują elektroninį laišką</string>
+    <string name="share_file">Bendrinti %1$s</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Nustatyti galiojimo pabaigos datą</string>
+    <string name="share_via_link_section_title">Viešinio nuoroda</string>
+    <string name="share_password_title">Apsaugota slaptažodžiu</string>
+    <string name="allow_resharing">Leisti bendrinti iš naujo</string>
+    <string name="could_not_retrieve_shares">Nepavyko gauti viešinių</string>
+    <string name="share_permission_secure_file_drop">Saugus failų įkėlimas</string>
+    <string name="username">Naudotojo vardas</string>
+    <string name="share_group_clarification">%1$s (grupė)</string>
+    <string name="share_known_remote_on_clarification">ant %1$s</string>
+    <string name="copy_link">Kopijuoti nuorodą</string>
+    <string name="clipboard_text_copied">Nuoroda nukopijuota</string>
+    <string name="clipboard_unexpected_error">Netikėta klaida kopijuojant į iškarpinę</string>
     <string name="listview_updated_today">Šiandien</string>
     <string name="listview_updated_yesterday">Vakar</string>
     <string name="listview_updated_this_week">Šią savaitę</string>

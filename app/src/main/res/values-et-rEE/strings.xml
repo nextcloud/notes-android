@@ -32,12 +32,31 @@
     <string name="menu_favorite">Lemmik</string>
     <string name="menu_preview">Eelvaade</string>
     <string name="menu_share">Jaga</string>
-
     <string name="search_in_category">Otsi siin: %1$s</string>
     <string name="search_in_all">Otsi kõiki märkmeid</string>
 
     <string name="change_category_title">Vali kategooria</string>
 
+    <string name="note_share_activity_shared_with_you">Seda jagas sinuga %1$s</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Peida allalaaditu</string>
+    <string name="note_share_detail_activity_hint_name">Nimi</string>
+    <string name="note_share_detail_activity_label_empty">Silt ei saa olla tühi</string>
+    <string name="note_share_detail_activity_cancel">Katkesta</string>
+    <string name="common_delete">Kustuta</string>
+    <string name="email_pick_failed">Ei õnnestu valida e-posti aadressi</string>
+    <string name="failed_update_ui">Kasutajaliidese uuendamine ei õnnestunud</string>
+    <string name="share_send_new_email">Saada uus e-kiri</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Määra aegumise kuupäev</string>
+    <string name="share_password_title">Kaitstud salasõnaga</string>
+    <string name="could_not_retrieve_shares">Jaosmeedia laadimine ei õnnestunud</string>
+    <string name="share_permission_secure_file_drop">Turvaline failiedastus</string>
+    <string name="username">Kasutajanimi</string>
+    <string name="share_group_clarification">%1$s (grupp)</string>
+    <string name="share_known_remote_on_clarification">asukohas %1$s</string>
+    <string name="copy_link">Kopeeri link</string>
+    <string name="clipboard_text_copied">Link on kopeeritud</string>
+    <string name="clipboard_unexpected_error">Ootamatu viga lõikelauale kopeerimisel </string>
     <string name="listview_updated_today">Täna</string>
     <string name="listview_updated_yesterday">Eile</string>
     <string name="listview_updated_this_week">Käesolev nädal</string>

@@ -32,12 +32,34 @@
     <string name="menu_favorite">is fearr leat</string>
     <string name="menu_preview">Réamhamharc</string>
     <string name="menu_share">Comhroinn</string>
-
     <string name="search_in_category">Cuardaigh i %1$s</string>
     <string name="search_in_all">Cuardaigh gach nótaí</string>
 
     <string name="change_category_title">Roghnaigh catagóir</string>
 
+    <string name="note_share_activity_shared_with_you">Roinnte leat faoi %1$s</string>
+    <string name="note_share_activity_share_link">Comhroinn nasc</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Folaigh íoslódáil</string>
+    <string name="note_share_detail_activity_hint_name">Ainm</string>
+    <string name="note_share_detail_activity_link_name">Ainm Nasc</string>
+    <string name="note_share_detail_activity_label_empty">Ní féidir leis an lipéad a bheith folamh</string>
+    <string name="note_share_detail_activity_cancel">Cealaigh</string>
+    <string name="common_delete">Scrios</string>
+    <string name="email_pick_failed">Theip ar an seoladh ríomhphoist a phiocadh.</string>
+    <string name="failed_update_ui">Theip ar an Chomhéadain a nuashonrú</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Níl aip ar fáil chun teagmhálaithe a roghnú</string>
+    <string name="share_send_new_email">Seol ríomhphost nua</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Socraigh dáta éaga</string>
+    <string name="share_password_title">Pasfhocal cosanta</string>
+    <string name="could_not_retrieve_shares">Níorbh fhéidir scaireanna a aisghabháil</string>
+    <string name="share_permission_secure_file_drop">Titim comhad slán</string>
+    <string name="username">Ainm úsáideora</string>
+    <string name="share_group_clarification">%1$s (grúpa)</string>
+    <string name="share_known_remote_on_clarification">ar %1$s</string>
+    <string name="copy_link">Cóipeáil an nasc</string>
+    <string name="clipboard_text_copied">Cóipeáladh an nasc</string>
+    <string name="clipboard_unexpected_error">Earráid gan choinne agus cóipeáil chuig an ngearrthaisce</string>
     <string name="listview_updated_today">Inniu</string>
     <string name="listview_updated_yesterday">Inné</string>
     <string name="listview_updated_this_week">An tseachtain seo</string>

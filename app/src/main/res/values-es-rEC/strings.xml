@@ -32,12 +32,30 @@
     <string name="menu_favorite">Favorito</string>
     <string name="menu_preview">Vista previa</string>
     <string name="menu_share">Compartir</string>
-
     <string name="search_in_category">Buscar en %1$s</string>
     <string name="search_in_all">Buscar todas las notas</string>
 
     <string name="change_category_title">Elige una categoría</string>
 
+    <string name="note_share_activity_shared_with_you">Compartido contigo por %1$s</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Ocultar descarga</string>
+    <string name="note_share_detail_activity_hint_name">Nombre</string>
+    <string name="note_share_detail_activity_label_empty">La etiqueta no puede estar vacía</string>
+    <string name="note_share_detail_activity_cancel">Cancelar</string>
+    <string name="common_delete">Borrar</string>
+    <string name="failed_update_ui">Fallo al actualizar la interfaz de usuario</string>
+    <string name="share_send_new_email">Enviar correo electrónico nuevo</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Establecer fecha de expiración</string>
+    <string name="share_password_title">Protegido con contraseña</string>
+    <string name="could_not_retrieve_shares">No se pudieron recuperar los compartidos</string>
+    <string name="share_permission_secure_file_drop">Soltar archivo seguro</string>
+    <string name="username">Usuario</string>
+    <string name="share_group_clarification">%1$s (grupo)</string>
+    <string name="share_known_remote_on_clarification">en %1$s</string>
+    <string name="copy_link">Copiar liga</string>
+    <string name="clipboard_text_copied">Enlace copiado</string>
+    <string name="clipboard_unexpected_error">Se presentó un error inesperado al copiar al portapapeles</string>
     <string name="listview_updated_today">Hoy</string>
     <string name="listview_updated_yesterday">Ayer</string>
     <string name="listview_updated_this_week">Esta semana</string>

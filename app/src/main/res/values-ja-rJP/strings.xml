@@ -32,12 +32,35 @@
     <string name="menu_favorite">お気に入り</string>
     <string name="menu_preview">プレビュー</string>
     <string name="menu_share">共有</string>
-
     <string name="search_in_category">%1$sを検索</string>
     <string name="search_in_all">全てのノートを検索</string>
 
     <string name="change_category_title">カテゴリを選択</string>
 
+    <string name="note_share_activity_shared_with_you">%1$sと共有中</string>
+    <string name="note_share_activity_share_link">共有リンク</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">ダウンロードを隠す</string>
+    <string name="note_share_detail_activity_hint_name">名前</string>
+    <string name="note_share_detail_activity_link_name">リンク名</string>
+    <string name="note_share_detail_activity_label_empty">ラベルは空にできません</string>
+    <string name="note_share_detail_activity_cancel">キャンセル</string>
+    <string name="common_delete">削除</string>
+    <string name="email_pick_failed">メールアドレスの選択に失敗しました。</string>
+    <string name="failed_update_ui">UIの更新に失敗しました</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">連絡先を選択するためのアプリが利用できません</string>
+    <string name="share_send_new_email">メールを送信</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">有効期限を設定</string>
+    <string name="share_via_link_section_title">共有リンク</string>
+    <string name="share_password_title">パスワード保護</string>
+    <string name="could_not_retrieve_shares">共有元を取得できませんでした</string>
+    <string name="share_permission_secure_file_drop">セキュアなファイルドロップ</string>
+    <string name="username">ユーザー名</string>
+    <string name="share_group_clarification">%1$s (グループ)</string>
+    <string name="share_known_remote_on_clarification">%1$s上の</string>
+    <string name="copy_link">リンクをコピー</string>
+    <string name="clipboard_text_copied">リンクをコピーしました</string>
+    <string name="clipboard_unexpected_error">クリップボードにテキストをコピーするときにエラーが発生しました。</string>
     <string name="listview_updated_today">今日</string>
     <string name="listview_updated_yesterday">昨日</string>
     <string name="listview_updated_this_week">今週</string>

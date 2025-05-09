@@ -32,12 +32,32 @@
     <string name="menu_favorite">Preferidu</string>
     <string name="menu_preview">Anteprima</string>
     <string name="menu_share">Cumpartzi</string>
-
     <string name="search_in_category">Chirca in %1$s</string>
     <string name="search_in_all">Chirca totu is notas</string>
 
     <string name="change_category_title">Sèbera una categoria</string>
 
+    <string name="note_share_activity_shared_with_you">Cumpartzidu cun te dae %1$s</string>
+    <string name="note_share_activity_share_link">Cumpartzi ligòngiu</string>
+    <string name="note_share_detail_activity_hint_name">Nùmene</string>
+    <string name="note_share_detail_activity_label_empty">S\'eticheta non podet èssere bòida</string>
+    <string name="note_share_detail_activity_cancel">Annulla</string>
+    <string name="common_delete">Cantzella</string>
+    <string name="failed_update_ui">Non s\'est pòdidu agiornare UI</string>
+    <string name="share_send_new_email">Imbia messàgiu de posta nou</string>
+    <string name="share_file">Cumpartzi %1$s</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Cunfigura una data de iscadèntzia</string>
+    <string name="share_via_link_section_title">Cumpartzi ligòngiu</string>
+    <string name="share_password_title">Amparadu dae una crae</string>
+    <string name="allow_resharing">Permite sa re-cumpartzidura</string>
+    <string name="could_not_retrieve_shares">No at fatu a recuperare is cumpartziduras</string>
+    <string name="username">Nùmene utente</string>
+    <string name="share_group_clarification">%1$s (grupu)</string>
+    <string name="share_remote_clarification">%1$s (remotu)</string>
+    <string name="share_known_remote_on_clarification">in %1$s</string>
+    <string name="clipboard_text_copied">Ligòngiu copiadu</string>
+    <string name="clipboard_unexpected_error">Errore ispantosu in sa copiadura in sa punta de billete</string>
     <string name="listview_updated_today">Oe</string>
     <string name="listview_updated_yesterday">Eris</string>
     <string name="listview_updated_this_week">Custa chida</string>

@@ -32,12 +32,42 @@
     <string name="menu_favorite">Із зірочкою</string>
     <string name="menu_preview">Перегляд</string>
     <string name="menu_share">Спільний доступ</string>
-
     <string name="search_in_category">Шукати в %1$s</string>
     <string name="search_in_all">Шукати всі нотатки</string>
 
     <string name="change_category_title">Оберіть категорію</string>
 
+    <string name="note_share_activity_shared_with_you">%1$s поділив(-ла-)ся з вами</string>
+    <string name="note_share_activity_share_link">Передати у публічний доступ</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Приховати звантаження</string>
+    <string name="note_share_detail_activity_common_confirm">Підтвердити</string>
+    <string name="note_share_detail_activity_hint_name">Назва</string>
+    <string name="note_share_detail_activity_link_name">Назва посилання</string>
+    <string name="note_share_detail_activity_label_empty">Ярлик не може бути порожнім</string>
+    <string name="note_share_detail_activity_cancel">Скасувати</string>
+    <string name="common_delete">Вилучати</string>
+    <string name="email_pick_failed">Не вдалося вибрати ел. адресу.</string>
+    <string name="failed_update_ui">Неможливо оновити інтерфейс</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Відсутній застосунок для вибору контактів</string>
+    <string name="delete_link">Посилання на вилучення</string>
+    <string name="share_send_new_email">Надіслати новий лист</string>
+    <string name="share_dialog_title">Спільне</string>
+    <string name="share_file">Спільне %1$s</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Встановити термін дії</string>
+    <string name="share_via_link_section_title">Передати у публічний доступ</string>
+    <string name="share_password_title">Захищено паролем</string>
+    <string name="allow_resharing">Дозволяти передавати у спільний доступ іншим</string>
+    <string name="could_not_retrieve_shares">Не вдалося отримати спільні дані</string>
+    <string name="share_permission_secure_file_drop">Захищене додавання файлу</string>
+    <string name="share_permissions">Поділитися дозволами</string>
+    <string name="username">Ім\'я користувача</string>
+    <string name="share_group_clarification">%1$s (група)</string>
+    <string name="share_remote_clarification">%1$s (віддалено)</string>
+    <string name="share_known_remote_on_clarification">на %1$s</string>
+    <string name="copy_link">Копіювати посилання</string>
+    <string name="clipboard_text_copied">Посилання скопійовано</string>
+    <string name="clipboard_unexpected_error">Неочікувана помилка під час копіювання до буферу обміну</string>
     <string name="listview_updated_today">Сьогодні</string>
     <string name="listview_updated_yesterday">Вчора</string>
     <string name="listview_updated_this_week">Цього тижня</string>

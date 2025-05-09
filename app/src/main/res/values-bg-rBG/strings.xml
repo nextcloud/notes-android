@@ -32,12 +32,27 @@
     <string name="menu_favorite">Любима</string>
     <string name="menu_preview">Преглед</string>
     <string name="menu_share">Споделяне</string>
-
     <string name="search_in_category">Търсене в %1$s</string>
     <string name="search_in_all">Търсене във всички бележки</string>
 
     <string name="change_category_title">Изберете категория</string>
 
+    <string name="note_share_activity_shared_with_you">Споделено с Вас от %1$s</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Скрий свалянето</string>
+    <string name="note_share_detail_activity_label_empty">Етикетът не може да бъде празен</string>
+    <string name="common_delete">Изтриване</string>
+    <string name="failed_update_ui">Неуспешно обновяване на UI /потребителски интерфейс/</string>
+    <string name="share_send_new_email">Изпращане на нов имейл</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Срок на валидност</string>
+    <string name="share_password_title">Защитена с парола</string>
+    <string name="share_permission_secure_file_drop">Защитено пускане на файлове</string>
+    <string name="username">Потребител</string>
+    <string name="share_group_clarification">%1$s (група)</string>
+    <string name="share_known_remote_on_clarification">на %1$s</string>
+    <string name="copy_link">Копиране на връзката</string>
+    <string name="clipboard_text_copied">Връзката е копирана</string>
+    <string name="clipboard_unexpected_error">Неочаквана грешка при опит за копиране в клипборда</string>
     <string name="listview_updated_today">Днес</string>
     <string name="listview_updated_yesterday">Вчера</string>
     <string name="listview_updated_this_week">Тази седмица</string>

@@ -32,12 +32,42 @@
     <string name="menu_favorite">我的最愛</string>
     <string name="menu_preview">預覽</string>
     <string name="menu_share">分享</string>
-
     <string name="search_in_category">在 %1$s 中搜尋</string>
     <string name="search_in_all">搜尋所有的筆記</string>
 
     <string name="change_category_title">選一個分類</string>
 
+    <string name="note_share_activity_shared_with_you">%1$s 已與您分享</string>
+    <string name="note_share_activity_share_link">分享連結</string>
+    <string name="note_share_activity_subject_shared_with_you">已經與您分享了 \"%1$s\"</string>
+    <string name="note_share_detail_activity_common_confirm">確認</string>
+    <string name="note_share_detail_activity_hint_name">名字</string>
+    <string name="note_share_detail_activity_link_name">連結名稱</string>
+    <string name="note_share_detail_activity_label_empty">標籤不能為空</string>
+    <string name="note_share_detail_activity_cancel">取消</string>
+    <string name="common_delete">刪除</string>
+    <string name="email_pick_failed">無法挑選電郵地址。</string>
+    <string name="failed_update_ui">更新 UI 失敗</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">沒有應用程式可選取聯絡人</string>
+    <string name="delete_link">刪除連結</string>
+    <string name="share_send_new_email">傳送新電子郵件</string>
+    <string name="share_dialog_title">分享</string>
+    <string name="share_file">分享 %1$s</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">設定屆滿日期</string>
+    <string name="share_via_link_section_title">分享連結</string>
+    <string name="share_password_title">受密碼保護</string>
+    <string name="allow_resharing">允許轉分享</string>
+    <string name="could_not_retrieve_shares">無法從雲端取得共用</string>
+    <string name="share_permission_secure_file_drop">安全檔案投放</string>
+    <string name="share_permissions">分享權限</string>
+    <string name="username">用戶名稱</string>
+    <string name="share_group_clarification">%1$s （群組）</string>
+    <string name="share_remote_clarification">%1$s（遠端）</string>
+    <string name="share_known_remote_on_clarification">在 %1$s</string>
+    <string name="copy_link">複製連結</string>
+    <string name="clipboard_text_copied">已複製連結</string>
+    <string name="clipboard_unexpected_error">複製到剪貼板時出現不可遇期的錯誤</string>
     <string name="listview_updated_today">今日</string>
     <string name="listview_updated_yesterday">昨日</string>
     <string name="listview_updated_this_week">本星期</string>

@@ -32,12 +32,28 @@
     <string name="menu_favorite">Αγαπημένο</string>
     <string name="menu_preview">Προεπισκόπηση</string>
     <string name="menu_share">Διαμοιρασμός</string>
-
     <string name="search_in_category">Αναζήτηση σε %1$s</string>
     <string name="search_in_all">Αναζήτηση όλων των σημειώσεων</string>
 
     <string name="change_category_title">Επιλογή κατηγορίας</string>
 
+    <string name="note_share_activity_shared_with_you">Διαμοιράστηκε με εσάς από τον %1$s</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Απόκρυψη λήψης</string>
+    <string name="note_share_detail_activity_hint_name">Όνομα</string>
+    <string name="note_share_detail_activity_label_empty">Η ετικέτα δεν μπορεί να είναι κενή</string>
+    <string name="note_share_detail_activity_cancel">Ακύρωση</string>
+    <string name="common_delete">Διαγραφή</string>
+    <string name="failed_update_ui">Αποτυχία ενημέρωσης του UI</string>
+    <string name="share_send_new_email">Αποστολή νέου email</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Ορισμός ημερομηνίας λήξης</string>
+    <string name="share_password_title">Προστασία με συνθηματικό</string>
+    <string name="username">Όνομα χρήστη</string>
+    <string name="share_group_clarification">%1$s (ομάδα)</string>
+    <string name="share_known_remote_on_clarification">Ανοιχτό %1$s</string>
+    <string name="copy_link">Αντιγραφή συνδέσμου</string>
+    <string name="clipboard_text_copied">Ο σύνδεσμος αντιγράφηκε</string>
+    <string name="clipboard_unexpected_error">Μη αναμενόμενο σφάλμα κατά την αντιγραφή στο πρόχειρο</string>
     <string name="listview_updated_today">Σήμερα</string>
     <string name="listview_updated_yesterday">Χθες</string>
     <string name="listview_updated_this_week">Αυτή την εβδομάδα</string>

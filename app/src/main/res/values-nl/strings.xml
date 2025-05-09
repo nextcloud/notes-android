@@ -32,12 +32,36 @@
     <string name="menu_favorite">Favoriet</string>
     <string name="menu_preview">Voorbeeldweergave</string>
     <string name="menu_share">Delen</string>
-
     <string name="search_in_category">Zoeken in %1$s</string>
     <string name="search_in_all">Zoek in alle notities</string>
 
     <string name="change_category_title">Een categorie kiezen</string>
 
+    <string name="note_share_activity_shared_with_you">Gedeeld met u door %1$s</string>
+    <string name="note_share_activity_share_link">Deel link</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Verberg download</string>
+    <string name="note_share_detail_activity_hint_name">Naam</string>
+    <string name="note_share_detail_activity_link_name">Linknaam</string>
+    <string name="note_share_detail_activity_label_empty">Label mag niet leeg zijn</string>
+    <string name="note_share_detail_activity_cancel">Annuleren</string>
+    <string name="common_delete">Verwijder</string>
+    <string name="email_pick_failed">Email adres ophalen mislukt.</string>
+    <string name="failed_update_ui">Kon UI niet bijwerken</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Geen app beschikbaar voor het selecteren van contactpersonen</string>
+    <string name="share_send_new_email">Stuur nieuwe e-mail</string>
+    <string name="share_file">Deel %1$s</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Instellen vervaldatum</string>
+    <string name="share_via_link_section_title">Deel link</string>
+    <string name="share_password_title">Wachtwoord beveiligd</string>
+    <string name="allow_resharing">Opnieuw delen toestaan</string>
+    <string name="could_not_retrieve_shares">Kon shares niet ophalen</string>
+    <string name="username">Gebruikersnaam</string>
+    <string name="share_group_clarification">%1$s (groep)</string>
+    <string name="share_known_remote_on_clarification">op %1$s</string>
+    <string name="copy_link">Link kopiëren</string>
+    <string name="clipboard_text_copied">Link gekopieerd</string>
+    <string name="clipboard_unexpected_error">Onverwachte fout bij het kopiëren naar het klembord</string>
     <string name="listview_updated_today">Vandaag</string>
     <string name="listview_updated_yesterday">Gisteren</string>
     <string name="listview_updated_this_week">Deze week</string>

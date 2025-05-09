@@ -32,12 +32,40 @@
     <string name="menu_favorite">Омиљене</string>
     <string name="menu_preview">Преглед</string>
     <string name="menu_share">Подели</string>
-
     <string name="search_in_category">Претражи у %1$s</string>
     <string name="search_in_all">Претражи у свим белешкама</string>
 
     <string name="change_category_title">Одаберите категорију</string>
 
+    <string name="note_share_activity_shared_with_you">Дели са вама %1$s</string>
+    <string name="note_share_activity_share_link">Подели везу</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Сакриј преузимање</string>
+    <string name="note_share_detail_activity_hint_name">Име</string>
+    <string name="note_share_detail_activity_link_name">Име линка</string>
+    <string name="note_share_detail_activity_label_empty">Ознака не може да буде празна</string>
+    <string name="note_share_detail_activity_cancel">Откажи</string>
+    <string name="common_delete">Избриши</string>
+    <string name="email_pick_failed">Није успело бирање и-мејл адресе.</string>
+    <string name="failed_update_ui">Неуспело освежавање сучеља</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Нема апликације којом могу да се изаберу контакти</string>
+    <string name="delete_link">Обриши линк</string>
+    <string name="share_send_new_email">Пошаљи нови и-мејл</string>
+    <string name="share_file">Подели %1$s</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Постави датум истека</string>
+    <string name="share_via_link_section_title">Подели везу</string>
+    <string name="share_password_title">Заштићено лозинком</string>
+    <string name="allow_resharing">Дозволи дељење даље</string>
+    <string name="could_not_retrieve_shares">Не могу да добавим дељења</string>
+    <string name="share_permission_secure_file_drop">Сигурно место за упуштање фајлова</string>
+    <string name="share_permissions">Дозволе за дељење</string>
+    <string name="username">Корисничко име</string>
+    <string name="share_group_clarification">%1$s (група)</string>
+    <string name="share_remote_clarification">%1$s(удаљено)</string>
+    <string name="share_known_remote_on_clarification">на %1$s</string>
+    <string name="copy_link">Копирај везу</string>
+    <string name="clipboard_text_copied">Веза ископирана</string>
+    <string name="clipboard_unexpected_error">Неочекивана грешка приликом копирања у клипборд</string>
     <string name="listview_updated_today">Данас</string>
     <string name="listview_updated_yesterday">Јуче</string>
     <string name="listview_updated_this_week">Ове седмице</string>

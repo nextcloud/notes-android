@@ -32,12 +32,39 @@
     <string name="menu_favorite">Sık kullanılanlara ekle</string>
     <string name="menu_preview">Ön izleme</string>
     <string name="menu_share">Paylaş</string>
-
     <string name="search_in_category">%1$s içinde arama</string>
     <string name="search_in_all">Tüm notlarda arama</string>
 
     <string name="change_category_title">Bir kategori seçin</string>
 
+    <string name="note_share_activity_shared_with_you">Sizinle %1$s ile paylaşılmış</string>
+    <string name="note_share_activity_share_link">Bağlantıyı paylaş</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">İndirme gizlensin</string>
+    <string name="note_share_detail_activity_hint_name">Ad</string>
+    <string name="note_share_detail_activity_link_name">Bağlantı adı</string>
+    <string name="note_share_detail_activity_label_empty">Etiket boş olamaz</string>
+    <string name="note_share_detail_activity_cancel">İptal</string>
+    <string name="common_delete">Sil</string>
+    <string name="email_pick_failed">E-posta adresi alınamadı.</string>
+    <string name="failed_update_ui">Kullanıcı arayüzü güncellenemedi</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Kişilerin seçilmesi için kullanılabilecek bir uygulama yok</string>
+    <string name="delete_link">Bağlantıyı sil</string>
+    <string name="share_send_new_email">Yeni e-posta gönder</string>
+    <string name="share_file">%1$s paylaş</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Geçerlilik sonu tarihini ayarla</string>
+    <string name="share_via_link_section_title">Bağlantıyı paylaş</string>
+    <string name="share_password_title">Parola korumalı</string>
+    <string name="could_not_retrieve_shares">Paylaşımlar alınamadı</string>
+    <string name="share_permission_secure_file_drop">Güvenli dosya bırakma</string>
+    <string name="share_permissions">İzinleri paylaş</string>
+    <string name="username">Kullanıcı adı</string>
+    <string name="share_group_clarification">%1$s (grup)</string>
+    <string name="share_remote_clarification">%1$s (uzak)</string>
+    <string name="share_known_remote_on_clarification">%1$s zamanında</string>
+    <string name="copy_link">Bağlantıyı kopyala</string>
+    <string name="clipboard_text_copied">Bağlantı kopyalandı</string>
+    <string name="clipboard_unexpected_error">Panoya kopyalama sırasında beklenmeyen bir sorun çıktı</string>
     <string name="listview_updated_today">Bugün</string>
     <string name="listview_updated_yesterday">Dün</string>
     <string name="listview_updated_this_week">Bu hafta</string>

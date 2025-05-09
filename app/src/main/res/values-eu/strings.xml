@@ -32,12 +32,31 @@
     <string name="menu_favorite">Gogokoa</string>
     <string name="menu_preview">Aurreikusi</string>
     <string name="menu_share">Partekatu</string>
-
     <string name="search_in_category">Bilatu %1$s(e)n</string>
     <string name="search_in_all">Bilatu ohar guztiak</string>
 
     <string name="change_category_title">Hautatu kategoria bat</string>
 
+    <string name="note_share_activity_shared_with_you"> %1$s-(e)k zurekin partekatua</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Ezkutatu deskarga</string>
+    <string name="note_share_detail_activity_hint_name">Izena</string>
+    <string name="note_share_detail_activity_label_empty">Etiketa ezin da hutsik egon</string>
+    <string name="note_share_detail_activity_cancel">Utzi</string>
+    <string name="common_delete">Ezabatu</string>
+    <string name="email_pick_failed">Ezin izan da helbide elektronikoa hautatu.</string>
+    <string name="failed_update_ui">Erabiltzaile Interfazea (UI) eguneratzeak huts egin du</string>
+    <string name="share_send_new_email">Bidali posta-mezu berria</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Ezarri iraungitze-data</string>
+    <string name="share_password_title">Pasahitzez babestua</string>
+    <string name="could_not_retrieve_shares">Ezin izan dira partekatzeak berreskuratu</string>
+    <string name="share_permission_secure_file_drop">Fitxategi-jartze segurua</string>
+    <string name="username">Erabiltzaile-izena</string>
+    <string name="share_group_clarification">%1$s (taldea)</string>
+    <string name="share_known_remote_on_clarification">hemen: %1$s</string>
+    <string name="copy_link">Kopiatu esteka</string>
+    <string name="clipboard_text_copied">Esteka kopiatu da</string>
+    <string name="clipboard_unexpected_error">Ustekabeko errorea arbelera kopiatzean</string>
     <string name="listview_updated_today">Gaur</string>
     <string name="listview_updated_yesterday">Atzo</string>
     <string name="listview_updated_this_week">Aste honetan</string>

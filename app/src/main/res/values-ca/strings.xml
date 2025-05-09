@@ -32,12 +32,25 @@
     <string name="menu_favorite">Preferida</string>
     <string name="menu_preview">Previsualitza</string>
     <string name="menu_share">Comparteix</string>
-
     <string name="search_in_category">Cerca a %1$s</string>
     <string name="search_in_all">Cerca en totes les notes</string>
 
     <string name="change_category_title">Trieu una categoria</string>
 
+    <string name="note_share_activity_shared_with_you">Compartit per %1$s</string>
+    <string name="note_share_detail_activity_label_empty">L\'etiqueta no pot estar buida</string>
+    <string name="common_delete">Suprimir</string>
+    <string name="failed_update_ui">No s\'ha pogut actualitzar la IU</string>
+    <string name="share_send_new_email">Envia un correu nou</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Estableix la data de caducitat</string>
+    <string name="share_password_title">Protegit per contrasenya</string>
+    <string name="username">Nom d\'usuari</string>
+    <string name="share_group_clarification">%1$s (grup)</string>
+    <string name="share_known_remote_on_clarification">al %1$s</string>
+    <string name="copy_link">Copia l\'enllaç</string>
+    <string name="clipboard_text_copied">S\'ha copiat l\'enllaç</string>
+    <string name="clipboard_unexpected_error">Error inesperat mentre es copiava al porta-papers</string>
     <string name="listview_updated_today">Avui</string>
     <string name="listview_updated_yesterday">Ahir</string>
     <string name="listview_updated_this_week">Aquesta setmana</string>

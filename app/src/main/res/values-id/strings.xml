@@ -32,12 +32,32 @@
     <string name="menu_favorite">Favorit</string>
     <string name="menu_preview">Pratinjau</string>
     <string name="menu_share">Bagikan</string>
-
     <string name="search_in_category">Cari di %1$s</string>
     <string name="search_in_all">Cari semua catatan</string>
 
     <string name="change_category_title">Pilih kategori</string>
 
+    <string name="note_share_activity_shared_with_you">Dibagikan dengan Anda oleh %1$s</string>
+    <string name="note_share_activity_share_link">Bagikan tautan</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Sembunyikan unduhan</string>
+    <string name="note_share_detail_activity_hint_name">Nama</string>
+    <string name="note_share_detail_activity_link_name">Nama Tautan</string>
+    <string name="note_share_detail_activity_label_empty">Label tidak boleh kosong</string>
+    <string name="note_share_detail_activity_cancel">Batal</string>
+    <string name="common_delete">Hapus</string>
+    <string name="email_pick_failed">Gagal memilih alamat surel.</string>
+    <string name="failed_update_ui">Gagal memperbarui UI</string>
+    <string name="share_send_new_email">Kirim surel baru</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Atur tanggal kedaluwarsa</string>
+    <string name="share_via_link_section_title">Bagikan tautan</string>
+    <string name="share_password_title">Sandi dilindungi</string>
+    <string name="username">Username</string>
+    <string name="share_group_clarification">%1$s (grup)</string>
+    <string name="share_known_remote_on_clarification">pada %1$s</string>
+    <string name="copy_link">Salin tautan</string>
+    <string name="clipboard_text_copied">Link tersalin</string>
+    <string name="clipboard_unexpected_error">Kesalahan tak terduga terjadi ketika menyalin ke papan klip</string>
     <string name="listview_updated_today">Hari ini</string>
     <string name="listview_updated_yesterday">Kemarin</string>
     <string name="listview_updated_this_week">Pekan ini</string>

@@ -32,12 +32,27 @@
     <string name="menu_favorite">Oblíbená</string>
     <string name="menu_preview">Náhled</string>
     <string name="menu_share">Sdílet</string>
-
     <string name="search_in_category">Hledat v %1$s</string>
     <string name="search_in_all">Prohledat všechny poznámky</string>
 
     <string name="change_category_title">Zvolte kategorii</string>
 
+    <string name="note_share_activity_shared_with_you">Nasdílel(a) vám %1$s</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Skrýt stahování</string>
+    <string name="note_share_detail_activity_label_empty">Štítek je třeba vyplnit</string>
+    <string name="common_delete">Smazat</string>
+    <string name="failed_update_ui">Nepodařilo se aktualizovat uživatelské rozhraní</string>
+    <string name="share_send_new_email">Odeslat nový e-mail</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Nastavit datum skončení platnosti</string>
+    <string name="share_password_title">Chráněno heslem</string>
+    <string name="share_permission_secure_file_drop">Bezpečné předání souborů</string>
+    <string name="username">Uživatelské jméno</string>
+    <string name="share_group_clarification">%1$s (skupina)</string>
+    <string name="share_known_remote_on_clarification">na %1$s</string>
+    <string name="copy_link">Zkopírovat odkaz</string>
+    <string name="clipboard_text_copied">Odkaz zkopírován</string>
+    <string name="clipboard_unexpected_error">Neočekávaná chyba při kopírování do schránky</string>
     <string name="listview_updated_today">Dnes</string>
     <string name="listview_updated_yesterday">Včera</string>
     <string name="listview_updated_this_week">Tento týden</string>

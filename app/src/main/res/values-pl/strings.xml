@@ -32,12 +32,40 @@
     <string name="menu_favorite">Ulubiona</string>
     <string name="menu_preview">Podgląd</string>
     <string name="menu_share">Udostępnij</string>
-
     <string name="search_in_category">Szukaj w %1$s</string>
     <string name="search_in_all">Szukaj w notatkach</string>
 
     <string name="change_category_title">Wybierz kategorię</string>
 
+    <string name="note_share_activity_shared_with_you">Udostępnione przez %1$s</string>
+    <string name="note_share_activity_share_link">Udostępnij link</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Ukryj pobieranie</string>
+    <string name="note_share_detail_activity_hint_name">Nazwa</string>
+    <string name="note_share_detail_activity_link_name">Nazwa linku</string>
+    <string name="note_share_detail_activity_label_empty">Etykieta nie może być pusta</string>
+    <string name="note_share_detail_activity_cancel">Anuluj</string>
+    <string name="common_delete">Usuń</string>
+    <string name="email_pick_failed">Nie udało się wybrać adresu e-mail.</string>
+    <string name="failed_update_ui">Nie udało się zaktualizować UI</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Brak aplikacji dla wybranego kontaktu</string>
+    <string name="delete_link">Usuń link</string>
+    <string name="share_send_new_email">Wyślij nowy e-mail</string>
+    <string name="share_file">Udostępnij %1$s</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Ustaw datę wygaśnięcia</string>
+    <string name="share_via_link_section_title">Udostępnij link</string>
+    <string name="share_password_title">Zabezpieczone hasłem</string>
+    <string name="allow_resharing">Zezwalaj na dalsze udostępnianie</string>
+    <string name="could_not_retrieve_shares">Nie udało się pobrać udziałów</string>
+    <string name="share_permission_secure_file_drop">Bezpieczne upuszczenie pliku</string>
+    <string name="share_permissions">Uprawnienia udostępniania</string>
+    <string name="username">Nazwa użytkownika</string>
+    <string name="share_group_clarification">%1$s (grupa)</string>
+    <string name="share_remote_clarification">%1$s (zdalny)</string>
+    <string name="share_known_remote_on_clarification">na %1$s</string>
+    <string name="copy_link">Kopiuj link</string>
+    <string name="clipboard_text_copied">Link skopiowany</string>
+    <string name="clipboard_unexpected_error">Nieoczekiwany błąd podczas kopiowania do schowka</string>
     <string name="listview_updated_today">Dzisiaj</string>
     <string name="listview_updated_yesterday">Wczoraj</string>
     <string name="listview_updated_this_week">W tym tygodniu</string>

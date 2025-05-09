@@ -32,12 +32,34 @@
     <string name="menu_favorite">Favorito</string>
     <string name="menu_preview">Vista previa</string>
     <string name="menu_share">Compartir</string>
-
     <string name="search_in_category">Buscar en %1$s</string>
     <string name="search_in_all">Buscar todas as notas</string>
 
     <string name="change_category_title">Escoller unha categoría</string>
 
+    <string name="note_share_activity_shared_with_you">Compartido con Vde. por %1$s</string>
+    <string name="note_share_activity_share_link">Ligazón para compartir</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Agochar a descarga</string>
+    <string name="note_share_detail_activity_hint_name">Nome</string>
+    <string name="note_share_detail_activity_link_name">Nome da ligazón</string>
+    <string name="note_share_detail_activity_label_empty">A etiqueta non pode estar baleira</string>
+    <string name="note_share_detail_activity_cancel">Cancelar</string>
+    <string name="common_delete">Eliminar</string>
+    <string name="email_pick_failed">Produciuse un fallo ao escoller o enderezo de correo.</string>
+    <string name="failed_update_ui">Produciuse un fallo ao actualizar a IU</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Non hai ningunha aplicación dispoñíbel para seleccionar contactos</string>
+    <string name="share_send_new_email">Enviar correo-e novo</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Definir a data de caducidade</string>
+    <string name="share_password_title">Protexido con contrasinal</string>
+    <string name="could_not_retrieve_shares">Non foi posíbel recuperar as comparticións</string>
+    <string name="share_permission_secure_file_drop">Entrega segura de ficheiros</string>
+    <string name="username">Nome de usuario</string>
+    <string name="share_group_clarification">%1$s (grupo)</string>
+    <string name="share_known_remote_on_clarification">en %1$s</string>
+    <string name="copy_link">Copiar a ligazón</string>
+    <string name="clipboard_text_copied">Ligazón copiada</string>
+    <string name="clipboard_unexpected_error">Produciuse un erro non agardado ao copiar no portapapeis</string>
     <string name="listview_updated_today">Hoxe</string>
     <string name="listview_updated_yesterday">Onte</string>
     <string name="listview_updated_this_week">Esta semana</string>
