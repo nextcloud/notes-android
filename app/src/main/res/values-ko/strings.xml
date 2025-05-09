@@ -32,12 +32,16 @@
     <string name="menu_favorite">즐겨찾기</string>
     <string name="menu_preview">미리 보기</string>
     <string name="menu_share">공유</string>
-
     <string name="search_in_category">%1$s 에서 검색</string>
     <string name="search_in_all">모든 메모 검색</string>
 
     <string name="change_category_title">카테고리 선택</string>
 
+    <string name="failed_update_ui">UI 업데이트 실패</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">만료기한 설정</string>
+    <string name="share_group_clarification">%1$s(그룹)</string>
+    <string name="share_known_remote_on_clarification">%1$s 에</string>
     <string name="listview_updated_today">오늘</string>
     <string name="listview_updated_yesterday">어제</string>
     <string name="listview_updated_this_week">이번 주</string>

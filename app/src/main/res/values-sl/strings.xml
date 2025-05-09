@@ -32,12 +32,19 @@
     <string name="menu_favorite">Priljubljena</string>
     <string name="menu_preview">Predogled</string>
     <string name="menu_share">Souporaba</string>
-
     <string name="search_in_category">Poišči v %1$s</string>
     <string name="search_in_all">Preišči vse zabeležke</string>
 
     <string name="change_category_title">Izbor kategorije</string>
 
+    <string name="note_share_detail_activity_share_via_link_hide_download">Skrij prejem</string>
+    <string name="failed_update_ui">Posodabljanje uporabniškega vmesnika je spodletelo</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Nastavi datum preteka</string>
+    <string name="username">Uporabniško ime</string>
+    <string name="share_group_clarification">%1$s (skupina)</string>
+    <string name="share_known_remote_on_clarification">na %1$s</string>
+    <string name="copy_link">Kopiraj povezavo</string>
     <string name="listview_updated_today">Danes</string>
     <string name="listview_updated_yesterday">Včeraj</string>
     <string name="listview_updated_this_week">Zadnji teden</string>

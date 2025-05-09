@@ -32,12 +32,22 @@
     <string name="menu_favorite">我的最愛</string>
     <string name="menu_preview">預覽</string>
     <string name="menu_share">分享</string>
-
     <string name="search_in_category">在 %1$s 中搜尋</string>
     <string name="search_in_all">搜尋所有的筆記</string>
 
     <string name="change_category_title">選一個分類</string>
 
+    <string name="note_share_activity_shared_with_you">%1$s 已與您分享</string>
+    <string name="note_share_detail_activity_label_empty">標籤不能為空</string>
+    <string name="failed_update_ui">更新 UI 失敗</string>
+    <string name="share_send_new_email">傳送新電子郵件</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">設定屆滿日期</string>
+    <string name="share_password_title">受密碼保護</string>
+    <string name="username">用戶名稱</string>
+    <string name="share_group_clarification">%1$s （群組）</string>
+    <string name="share_known_remote_on_clarification">在 %1$s</string>
+    <string name="copy_link">複製連結</string>
     <string name="listview_updated_today">今日</string>
     <string name="listview_updated_yesterday">昨日</string>
     <string name="listview_updated_this_week">本星期</string>

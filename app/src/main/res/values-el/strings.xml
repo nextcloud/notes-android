@@ -32,7 +32,6 @@
     <string name="menu_favorite">Αγαπημένο</string>
     <string name="menu_preview">Προεπισκόπηση</string>
     <string name="menu_share">Διαμοιρασμός</string>
-
     <string name="search_in_category">Αναζήτηση σε %1$s</string>
     <string name="search_in_all">Αναζήτηση όλων των σημειώσεων</string>
 

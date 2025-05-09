@@ -32,12 +32,23 @@
     <string name="menu_favorite">收藏</string>
     <string name="menu_preview">预览</string>
     <string name="menu_share">共享</string>
-
     <string name="search_in_category">在%1$s中搜索</string>
     <string name="search_in_all">搜索所有笔记</string>
 
     <string name="change_category_title">选择一个分类</string>
 
+    <string name="note_share_activity_shared_with_you">您已通过 %1$s 共享</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">隐藏下载</string>
+    <string name="note_share_detail_activity_label_empty">标签不能是空白</string>
+    <string name="failed_update_ui">更新用户界面失败</string>
+    <string name="share_send_new_email">发送新邮件</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">设置过期日期</string>
+    <string name="share_password_title">密码已受保护</string>
+    <string name="username">用户名</string>
+    <string name="share_group_clarification">%1$s (群组)</string>
+    <string name="share_known_remote_on_clarification">在 %1$s</string>
+    <string name="copy_link">复制链接</string>
     <string name="listview_updated_today">今天</string>
     <string name="listview_updated_yesterday">昨天</string>
     <string name="listview_updated_this_week">本周</string>

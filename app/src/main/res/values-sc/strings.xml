@@ -32,12 +32,17 @@
     <string name="menu_favorite">Preferidu</string>
     <string name="menu_preview">Anteprima</string>
     <string name="menu_share">Cumpartzi</string>
-
     <string name="search_in_category">Chirca in %1$s</string>
     <string name="search_in_all">Chirca totu is notas</string>
 
     <string name="change_category_title">Sèbera una categoria</string>
 
+    <string name="failed_update_ui">Non s\'est pòdidu agiornare UI</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Cunfigura una data de iscadèntzia</string>
+    <string name="username">Nùmene utente</string>
+    <string name="share_group_clarification">%1$s (grupu)</string>
+    <string name="share_known_remote_on_clarification">in %1$s</string>
     <string name="listview_updated_today">Oe</string>
     <string name="listview_updated_yesterday">Eris</string>
     <string name="listview_updated_this_week">Custa chida</string>

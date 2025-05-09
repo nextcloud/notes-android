@@ -32,12 +32,13 @@
     <string name="menu_favorite">Suosikki</string>
     <string name="menu_preview">Esikatselu</string>
     <string name="menu_share">Jaa</string>
-
     <string name="search_in_category">Etsi luokasta %1$s</string>
     <string name="search_in_all">Etsi kaikista muistiinpanoista</string>
 
     <string name="change_category_title">Valitse luokka</string>
 
+    <string name="share_no_expiration_date_label">Aseta vanhenemispäivä</string>
+    <string name="share_group_clarification">%1$s (ryhmä)</string>
     <string name="listview_updated_today">Tänään</string>
     <string name="listview_updated_yesterday">Eilen</string>
     <string name="listview_updated_this_week">Tämä viikko</string>

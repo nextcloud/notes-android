@@ -32,12 +32,15 @@
     <string name="menu_favorite">Eftirlæti</string>
     <string name="menu_preview">Forskoðun</string>
     <string name="menu_share">Deila</string>
-
     <string name="search_in_category">Leita í %1$s</string>
     <string name="search_in_all">Leita í öllum minnispunktum</string>
 
     <string name="change_category_title">Veldu flokk</string>
 
+    <string name="failed_update_ui">Mistókst að uppfæra viðmótið</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Setja gildistíma</string>
+    <string name="share_group_clarification">%s hópurinn</string>
     <string name="listview_updated_today">Í dag</string>
     <string name="listview_updated_yesterday">Í gær</string>
     <string name="listview_updated_this_week">Í þessari viku</string>

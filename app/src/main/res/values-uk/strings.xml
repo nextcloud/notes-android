@@ -32,12 +32,21 @@
     <string name="menu_favorite">Із зірочкою</string>
     <string name="menu_preview">Перегляд</string>
     <string name="menu_share">Спільний доступ</string>
-
     <string name="search_in_category">Шукати в %1$s</string>
     <string name="search_in_all">Шукати всі нотатки</string>
 
     <string name="change_category_title">Оберіть категорію</string>
 
+    <string name="note_share_detail_activity_share_via_link_hide_download">Приховати звантаження</string>
+    <string name="note_share_detail_activity_label_empty">Ярлик не може бути порожнім</string>
+    <string name="failed_update_ui">Неможливо оновити інтерфейс</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Встановити термін дії</string>
+    <string name="share_password_title">Захищено паролем</string>
+    <string name="username">Ім\'я користувача</string>
+    <string name="share_group_clarification">%1$s (група)</string>
+    <string name="share_known_remote_on_clarification">на %1$s</string>
+    <string name="copy_link">Копіювати посилання</string>
     <string name="listview_updated_today">Сьогодні</string>
     <string name="listview_updated_yesterday">Вчора</string>
     <string name="listview_updated_this_week">Цього тижня</string>

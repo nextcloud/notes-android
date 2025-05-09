@@ -32,12 +32,15 @@
     <string name="menu_favorite">Kedvenc</string>
     <string name="menu_preview">Előnézet</string>
     <string name="menu_share">Megosztás</string>
-
     <string name="search_in_category">Keresés itt: %1$s</string>
     <string name="search_in_all">Keresés minden jegyzetben</string>
 
     <string name="change_category_title">Válasszon kategóriát</string>
 
+    <string name="failed_update_ui">A felhasználói felület frissítése sikertelen</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Lejárati idő beállítása</string>
+    <string name="share_group_clarification">%1$s (csoport)</string>
     <string name="listview_updated_today">Ma</string>
     <string name="listview_updated_yesterday">Tegnap</string>
     <string name="listview_updated_this_week">Ezen a héten</string>

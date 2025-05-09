@@ -32,12 +32,15 @@
     <string name="menu_favorite">お気に入り</string>
     <string name="menu_preview">プレビュー</string>
     <string name="menu_share">共有</string>
-
     <string name="search_in_category">%1$sを検索</string>
     <string name="search_in_all">全てのノートを検索</string>
 
     <string name="change_category_title">カテゴリを選択</string>
 
+    <string name="failed_update_ui">UIの更新に失敗しました</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">有効期限を設定</string>
+    <string name="share_group_clarification">%1$s (グループ)</string>
     <string name="listview_updated_today">今日</string>
     <string name="listview_updated_yesterday">昨日</string>
     <string name="listview_updated_this_week">今週</string>

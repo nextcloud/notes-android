@@ -32,12 +32,18 @@
     <string name="menu_favorite">Favorit</string>
     <string name="menu_preview">Previzualizare</string>
     <string name="menu_share">Partajează</string>
-
     <string name="search_in_category">Căutare în 1%1$s</string>
     <string name="search_in_all">Caută în toate notițele </string>
 
     <string name="change_category_title">Alege o categorie </string>
 
+    <string name="failed_update_ui">Nu s-a putut actualiza interfața</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Specifică data expirării</string>
+    <string name="username">Nume utilizator</string>
+    <string name="share_group_clarification">%1$s (grup)</string>
+    <string name="share_known_remote_on_clarification">pe %1$s</string>
+    <string name="copy_link">Copiază link</string>
     <string name="listview_updated_today">Azi</string>
     <string name="listview_updated_yesterday">Ieri</string>
     <string name="listview_updated_this_week">Săptămâna aceasta</string>

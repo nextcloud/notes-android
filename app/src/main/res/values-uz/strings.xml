@@ -32,12 +32,15 @@
     <string name="menu_favorite">Sevimli</string>
     <string name="menu_preview">Ko‘rib chiqish</string>
     <string name="menu_share">Ulashish</string>
-
     <string name="search_in_category"> %1$sni qidirish</string>
     <string name="search_in_all">Barcha qaydlarni qidiring</string>
 
     <string name="change_category_title">Kategoriyani tanlang</string>
 
+    <string name="share_no_expiration_date_label">Yaroqlilik muddatini belgilang</string>
+    <string name="username">Foydalanuvchi nomi</string>
+    <string name="share_known_remote_on_clarification"> %1$sda</string>
+    <string name="copy_link">Havolani nusxalash</string>
     <string name="listview_updated_today">Bugun</string>
     <string name="listview_updated_yesterday">Kecha</string>
     <string name="listview_updated_this_week">Shu hafta</string>

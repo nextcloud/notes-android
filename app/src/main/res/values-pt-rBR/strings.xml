@@ -32,12 +32,18 @@
     <string name="menu_favorite">Favorita</string>
     <string name="menu_preview">Prever</string>
     <string name="menu_share">Compartilhar</string>
-
     <string name="search_in_category">Pesquisar em %1$s</string>
     <string name="search_in_all">Pesquisar todas as notas</string>
 
     <string name="change_category_title">Escolha uma categoria</string>
 
+    <string name="failed_update_ui">Falha ao atualizar a interface gráfica</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Definir data de expiração</string>
+    <string name="username">Nome de usuário</string>
+    <string name="share_group_clarification">%1$s (grupo)</string>
+    <string name="share_known_remote_on_clarification">em %1$s</string>
+    <string name="copy_link">Copiar link</string>
     <string name="listview_updated_today">Hoje</string>
     <string name="listview_updated_yesterday">Ontem</string>
     <string name="listview_updated_this_week">Esta semana</string>

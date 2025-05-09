@@ -32,12 +32,16 @@
     <string name="menu_favorite">Favorite</string>
     <string name="menu_preview">Preview</string>
     <string name="menu_share">Share</string>
-
     <string name="search_in_category">Search in %1$s</string>
     <string name="search_in_all">Search all notes</string>
 
     <string name="change_category_title">Choose a category</string>
 
+    <string name="failed_update_ui">Failed to update UI</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Set expiration date</string>
+    <string name="share_group_clarification">%1$s (group)</string>
+    <string name="share_known_remote_on_clarification">on %1$s</string>
     <string name="listview_updated_today">Today</string>
     <string name="listview_updated_yesterday">Yesterday</string>
     <string name="listview_updated_this_week">This week</string>

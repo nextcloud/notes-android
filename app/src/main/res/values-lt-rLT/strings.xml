@@ -31,12 +31,16 @@
     <string name="menu_favorite">Mėgstami</string>
     <string name="menu_preview">Peržiūra</string>
     <string name="menu_share">Bendrinti</string>
-
     <string name="search_in_category">Ieškoti %1$s</string>
     <string name="search_in_all">Ieškoti visuose užrašuose</string>
 
     <string name="change_category_title">Pasirinkite kategoriją</string>
 
+    <string name="failed_update_ui">Nepavyko atnaujinti naudotojo sąsajos</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Nustatyti galiojimo pabaigos datą</string>
+    <string name="share_group_clarification">%1$s (grupė)</string>
+    <string name="share_known_remote_on_clarification">ant %1$s</string>
     <string name="listview_updated_today">Šiandien</string>
     <string name="listview_updated_yesterday">Vakar</string>
     <string name="listview_updated_this_week">Šią savaitę</string>

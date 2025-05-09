@@ -32,12 +32,21 @@
     <string name="menu_favorite">ئامراق</string>
     <string name="menu_preview">ئالدىن كۆرۈش</string>
     <string name="menu_share">ھەمبەھىرلەش</string>
-
     <string name="search_in_category">% 1 $ s دىن ئىزدەڭ</string>
     <string name="search_in_all">بارلىق خاتىرىلەرنى ئىزدەڭ</string>
 
     <string name="change_category_title">بىر تۈرنى تاللاڭ</string>
 
+    <string name="note_share_detail_activity_share_via_link_hide_download">چۈشۈرۈشنى يوشۇرۇش</string>
+    <string name="note_share_detail_activity_label_empty">بەلگە قۇرۇق بولالمايدۇ</string>
+    <string name="failed_update_ui">UI نى يېڭىلاش مەغلۇب بولدى</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">مۇددىتى توشۇش ۋاقتىنى بەلگىلەڭ</string>
+    <string name="share_password_title">پارول بىلەن قوغدىلىدۇ</string>
+    <string name="username">ئىشلەتكۈچى ئىسمى</string>
+    <string name="share_group_clarification">%1$s (گۇرۇپپا)</string>
+    <string name="share_known_remote_on_clarification">%1$s</string>
+    <string name="copy_link">ئۇلانمىنى كۆچۈرۈڭ</string>
     <string name="listview_updated_today">بۈگۈن</string>
     <string name="listview_updated_yesterday">تۈنۈگۈن</string>
     <string name="listview_updated_this_week">بۇ ھەپتە</string>

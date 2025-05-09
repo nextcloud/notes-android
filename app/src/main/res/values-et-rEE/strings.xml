@@ -32,12 +32,13 @@
     <string name="menu_favorite">Lemmik</string>
     <string name="menu_preview">Eelvaade</string>
     <string name="menu_share">Jaga</string>
-
     <string name="search_in_category">Otsi siin: %1$s</string>
     <string name="search_in_all">Otsi kõiki märkmeid</string>
 
     <string name="change_category_title">Vali kategooria</string>
 
+    <string name="share_no_expiration_date_label">Määra aegumise kuupäev</string>
+    <string name="share_group_clarification">%1$s (grupp)</string>
     <string name="listview_updated_today">Täna</string>
     <string name="listview_updated_yesterday">Eile</string>
     <string name="listview_updated_this_week">Käesolev nädal</string>

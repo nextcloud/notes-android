@@ -32,12 +32,17 @@
     <string name="menu_favorite">Favoriet</string>
     <string name="menu_preview">Voorbeeldweergave</string>
     <string name="menu_share">Delen</string>
-
     <string name="search_in_category">Zoeken in %1$s</string>
     <string name="search_in_all">Zoek in alle notities</string>
 
     <string name="change_category_title">Een categorie kiezen</string>
 
+    <string name="failed_update_ui">Kon UI niet bijwerken</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Instellen vervaldatum</string>
+    <string name="username">Gebruikersnaam</string>
+    <string name="share_group_clarification">%1$s (groep)</string>
+    <string name="share_known_remote_on_clarification">op %1$s</string>
     <string name="listview_updated_today">Vandaag</string>
     <string name="listview_updated_yesterday">Gisteren</string>
     <string name="listview_updated_this_week">Deze week</string>

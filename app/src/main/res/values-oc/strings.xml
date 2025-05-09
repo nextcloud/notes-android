@@ -31,12 +31,15 @@
     <string name="menu_favorite">Favorit</string>
     <string name="menu_preview">Apercebut</string>
     <string name="menu_share">Partejar</string>
-
     <string name="search_in_category">Cercar dins %1$s</string>
     <string name="search_in_all">Cercar totas las nòtas</string>
 
     <string name="change_category_title">Causir una categoria</string>
 
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Especificar una data d\'expiracion</string>
+    <string name="username">Nom d\'utilizaire</string>
+    <string name="copy_link">Copiar lo ligam</string>
     <string name="listview_updated_today">Uèi</string>
     <string name="listview_updated_yesterday">Ièr</string>
     <string name="listview_updated_this_week">Aquesta setmana</string>

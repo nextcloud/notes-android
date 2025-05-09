@@ -32,12 +32,14 @@
     <string name="menu_favorite">is fearr leat</string>
     <string name="menu_preview">Réamhamharc</string>
     <string name="menu_share">Comhroinn</string>
-
     <string name="search_in_category">Cuardaigh i %1$s</string>
     <string name="search_in_all">Cuardaigh gach nótaí</string>
 
     <string name="change_category_title">Roghnaigh catagóir</string>
 
+    <string name="failed_update_ui">Theip ar an Chomhéadain a nuashonrú</string>
+    <string name="share_no_expiration_date_label">Socraigh dáta éaga</string>
+    <string name="share_group_clarification">%1$s (grúpa)</string>
     <string name="listview_updated_today">Inniu</string>
     <string name="listview_updated_yesterday">Inné</string>
     <string name="listview_updated_this_week">An tseachtain seo</string>

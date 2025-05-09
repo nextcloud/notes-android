@@ -32,12 +32,15 @@
     <string name="menu_favorite">Favorit</string>
     <string name="menu_preview">Pratinjau</string>
     <string name="menu_share">Bagikan</string>
-
     <string name="search_in_category">Cari di %1$s</string>
     <string name="search_in_all">Cari semua catatan</string>
 
     <string name="change_category_title">Pilih kategori</string>
 
+    <string name="failed_update_ui">Gagal memperbarui UI</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Atur tanggal kedaluwarsa</string>
+    <string name="share_group_clarification">%1$s (grup)</string>
     <string name="listview_updated_today">Hari ini</string>
     <string name="listview_updated_yesterday">Kemarin</string>
     <string name="listview_updated_this_week">Pekan ini</string>

@@ -32,7 +32,6 @@
     <string name="menu_favorite">Favorit</string>
     <string name="menu_preview">Vorschau</string>
     <string name="menu_share">Teilen</string>
-
     <string name="search_in_category">Suche in %1$s</string>
     <string name="search_in_all">In allen Notizen suchen</string>
 

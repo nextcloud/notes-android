@@ -32,12 +32,13 @@
     <string name="menu_favorite">مورد‌ ‌علاقه‌</string>
     <string name="menu_preview">پیش‌نمایش</string>
     <string name="menu_share">هم‌رسانی</string>
-
     <string name="search_in_category">جستجو در %1$s</string>
     <string name="search_in_all">جستجو در همه یادداشت‌ها</string>
 
     <string name="change_category_title">انتخاب یک دسته‌بندی</string>
 
+    <string name="share_no_expiration_date_label">تنظیم تاریخ انقضا</string>
+    <string name="share_group_clarification">%1$s (گروه)</string>
     <string name="listview_updated_today">امروز</string>
     <string name="listview_updated_yesterday">دیروز</string>
     <string name="listview_updated_this_week">این هفته</string>

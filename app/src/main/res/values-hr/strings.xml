@@ -32,12 +32,14 @@
     <string name="menu_favorite">Favorit</string>
     <string name="menu_preview">Pretpregled</string>
     <string name="menu_share">Dijeli</string>
-
     <string name="search_in_category">Traži u %1$s</string>
     <string name="search_in_all">Pretraži sve bilješke</string>
 
     <string name="change_category_title">Odaberi kategoriju</string>
 
+    <string name="failed_update_ui">Ažuriranje korisničkog sučelja nije uspjelo</string>
+    <string name="share_no_expiration_date_label">Postavi datum isteka</string>
+    <string name="share_group_clarification">%1$s (grupa)</string>
     <string name="listview_updated_today">Danas</string>
     <string name="listview_updated_yesterday">Jučer</string>
     <string name="listview_updated_this_week">Ovaj tjedan</string>

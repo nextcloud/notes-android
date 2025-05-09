@@ -32,12 +32,18 @@
     <string name="menu_favorite">Ulubiona</string>
     <string name="menu_preview">Podgląd</string>
     <string name="menu_share">Udostępnij</string>
-
     <string name="search_in_category">Szukaj w %1$s</string>
     <string name="search_in_all">Szukaj w notatkach</string>
 
     <string name="change_category_title">Wybierz kategorię</string>
 
+    <string name="failed_update_ui">Nie udało się zaktualizować UI</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Ustaw datę wygaśnięcia</string>
+    <string name="username">Nazwa użytkownika</string>
+    <string name="share_group_clarification">%1$s (grupa)</string>
+    <string name="share_known_remote_on_clarification">na %1$s</string>
+    <string name="copy_link">Kopiuj link</string>
     <string name="listview_updated_today">Dzisiaj</string>
     <string name="listview_updated_yesterday">Wczoraj</string>
     <string name="listview_updated_this_week">W tym tygodniu</string>

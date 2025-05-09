@@ -32,12 +32,18 @@
     <string name="menu_favorite">Избранное</string>
     <string name="menu_preview">Предпросмотр</string>
     <string name="menu_share">Поделиться</string>
-
     <string name="search_in_category">Поиск в %1$s</string>
     <string name="search_in_all">Поиск всех заметок</string>
 
     <string name="change_category_title">Выберите категорию</string>
 
+    <string name="failed_update_ui">Не удалось обновить пользовательский интерфейс</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Установить крайний срок для ответов</string>
+    <string name="username">Имя пользователя</string>
+    <string name="share_group_clarification">%1$s (группа)</string>
+    <string name="share_known_remote_on_clarification">на %1$s</string>
+    <string name="copy_link">Копировать ссылку</string>
     <string name="listview_updated_today">Сегодня</string>
     <string name="listview_updated_yesterday">Вчера</string>
     <string name="listview_updated_this_week">На этой неделе</string>

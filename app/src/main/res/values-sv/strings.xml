@@ -32,12 +32,20 @@
     <string name="menu_favorite">Favorit</string>
     <string name="menu_preview">Förhandsvisning</string>
     <string name="menu_share">Dela</string>
-
     <string name="search_in_category">Sök i %1$s</string>
     <string name="search_in_all">Sök alla anteckningar</string>
 
     <string name="change_category_title">Välj en kategori</string>
 
+    <string name="note_share_detail_activity_share_via_link_hide_download">Dölj hämtning</string>
+    <string name="note_share_detail_activity_label_empty">Etiketten kan inte vara tom</string>
+    <string name="failed_update_ui">Misslyckades med att uppdatera UI</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Välj utgångsdatum</string>
+    <string name="username">Användarnamn</string>
+    <string name="share_group_clarification">%1$s (grupp)</string>
+    <string name="share_known_remote_on_clarification">på %1$s</string>
+    <string name="copy_link">Kopiera länk</string>
     <string name="listview_updated_today">Idag</string>
     <string name="listview_updated_yesterday">Igår</string>
     <string name="listview_updated_this_week">Denna vecka</string>

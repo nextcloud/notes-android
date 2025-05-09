@@ -32,12 +32,21 @@
     <string name="menu_favorite">Ưa thích</string>
     <string name="menu_preview">Xem trước</string>
     <string name="menu_share">Chia sẻ</string>
-
     <string name="search_in_category">Tìm kiếm trong %1$s</string>
     <string name="search_in_all">Tìm kiếm tất cả ghi chú</string>
 
     <string name="change_category_title">Chọn một hạng mục</string>
 
+    <string name="note_share_detail_activity_share_via_link_hide_download">Ẩn tải xuống</string>
+    <string name="note_share_detail_activity_label_empty">Nhãn không thể trống</string>
+    <string name="failed_update_ui">Cập nhật giao diện người dùng thất bại</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Đặt ngày hết hạn</string>
+    <string name="share_password_title">Mật khẩu được bảo vệ</string>
+    <string name="username">Tên đăng nhập</string>
+    <string name="share_group_clarification">%1$s (nhóm)</string>
+    <string name="share_known_remote_on_clarification">trên %1$s</string>
+    <string name="copy_link">Sao chép liên kết</string>
     <string name="listview_updated_today">Hôm nay</string>
     <string name="listview_updated_yesterday">Hôm qua</string>
     <string name="listview_updated_this_week">Tuần này</string>

@@ -32,12 +32,19 @@
     <string name="menu_favorite">Obľúbené</string>
     <string name="menu_preview">Náhľad</string>
     <string name="menu_share">Sprístupniť</string>
-
     <string name="search_in_category">Hľadať v %1$s</string>
     <string name="search_in_all">Hľadať všetky poznámky</string>
 
     <string name="change_category_title">Vybrať kategóriu</string>
 
+    <string name="note_share_detail_activity_share_via_link_hide_download">Skryť sťahovanie</string>
+    <string name="failed_update_ui">Nepodarilo sa aktualizovať UI</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Nastaviť dátum expirácie</string>
+    <string name="username">Užívateľské meno</string>
+    <string name="share_group_clarification">%1$s (skupina)</string>
+    <string name="share_known_remote_on_clarification">na %1$s</string>
+    <string name="copy_link">Kopírovať odkaz</string>
     <string name="listview_updated_today">Dnes</string>
     <string name="listview_updated_yesterday">Včera</string>
     <string name="listview_updated_this_week">Tento týždeň</string>

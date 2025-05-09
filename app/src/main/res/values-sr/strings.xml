@@ -32,12 +32,20 @@
     <string name="menu_favorite">Омиљене</string>
     <string name="menu_preview">Преглед</string>
     <string name="menu_share">Подели</string>
-
     <string name="search_in_category">Претражи у %1$s</string>
     <string name="search_in_all">Претражи у свим белешкама</string>
 
     <string name="change_category_title">Одаберите категорију</string>
 
+    <string name="note_share_detail_activity_share_via_link_hide_download">Сакриј преузимање</string>
+    <string name="note_share_detail_activity_label_empty">Ознака не може да буде празна</string>
+    <string name="failed_update_ui">Неуспело освежавање сучеља</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Постави датум истека</string>
+    <string name="username">Корисничко име</string>
+    <string name="share_group_clarification">%1$s (група)</string>
+    <string name="share_known_remote_on_clarification">на %1$s</string>
+    <string name="copy_link">Копирај везу</string>
     <string name="listview_updated_today">Данас</string>
     <string name="listview_updated_yesterday">Јуче</string>
     <string name="listview_updated_this_week">Ове седмице</string>
