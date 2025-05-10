@@ -32,13 +32,101 @@
     <string name="menu_favorite">Gogokoa</string>
     <string name="menu_preview">Aurreikusi</string>
     <string name="menu_share">Partekatu</string>
+    <string name="common_loading">Kargatzen…</string>
+
+
     <string name="search_in_category">Bilatu %1$s(e)n</string>
     <string name="search_in_all">Bilatu ohar guztiak</string>
 
     <string name="change_category_title">Hautatu kategoria bat</string>
 
+    <string name="note_share_activity_shared_with_you"> %1$s-(e)k zurekin partekatua</string>
+    <string name="note_share_activity_share_note">Partekatu oharra</string>
+    <string name="note_share_activity_search_text">Izena, federatutako hodei IDa edo helbide elektronikoa...</string>
+    <string name="note_share_activity_share_link">Partekatu esteka</string>
+    <string name="note_share_activity_resharing_not_allowed">Politikak edo baimenek ez dute berriro partekatzen uzten</string>
+    <string name="note_share_activity_could_not_retrieve_url">Ezin izan da URLa berreskuratu</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" zurekin partekatu dute</string>
+    <string name="note_share_activity_contact_no_permission">Kontaktuak atzitzeko baimena behar da.</string>
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">Ezarpen aurreratuak</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Ezkutatu deskarga</string>
+    <string name="note_share_detail_activity_share_send_note">Oharra hartzailearentzat</string>
+    <string name="note_share_detail_activity_hint_note">Oharra</string>
+    <string name="note_share_detail_activity_common_next">Hurrengoa</string>
+    <string name="note_share_detail_activity_share_copy_link">Partekatu eta kopiatu esteka</string>
+    <string name="note_share_detail_activity_common_confirm">Berretsi</string>
+    <string name="note_share_detail_activity_set_note">Ezarri oharra</string>
+    <string name="note_share_detail_activity_send_share">Bidali partekatzea</string>
+    <string name="note_share_detail_activity_hint_name">Izena</string>
+    <string name="note_share_detail_activity_link_name">Esteka-izena</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Pasahitz bat sartu behar duzu</string>
+    <string name="note_share_detail_activity_hint_password">Pasahitza</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Hautatu partekatzeko baimen bat gutxienez.</string>
+    <string name="note_share_detail_activity_label_empty">Etiketa ezin da hutsik egon</string>
+    <string name="note_share_detail_activity_cancel">Utzi</string>
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Sartu hautazko pasahitz bat</string>
+    <string name="share_password_dialog_fragment_skip">Saltatu</string>
+
+    <string name="share_link_password_title">Sartu pasahitza</string>
+    <string name="common_ok">Ados</string>
+    <string name="common_delete">Ezabatu</string>
+    <string name="write_email">Bidali mezu elektronikoa</string>
+    <string name="no_browser_available">Ez dago eskuragarri estekak kudeatzeko aplikaziorik</string>
+    <string name="no_email_app_available">Ez dago aplikaziorik helbide elektronikoak kudeatzeko</string>
+    <string name="no_actions">Ez dago ekintzarik erabiltzaile honentzat</string>
+
+    <string name="email_pick_failed">Ezin izan da helbide elektronikoa hautatu.</string>
+    <string name="failed_update_ui">Erabiltzaile Interfazea (UI) eguneratzeak huts egin du</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Ez dago eskuragarri kontaktuak hautatzeko aplikaziorik</string>
+    <string name="activity_chooser_send_file_title">Bidali</string>
+    <string name="share_internal_link_to_folder_text">Barneko partekatze-estekak karpeta honetarako sarbidea duten erabiltzaileentzat bakarrik balio du</string>
+    <string name="share_internal_link_to_file_text">Barneko partekatze-estekak fitxategi honetarako sarbidea duten erabiltzaileentzat bakarrik balio du</string>
+    <string name="share_internal_link">Partekatu barne-esteka</string>
+    <string name="delete_link">Ezabatu esteka</string>
+    <string name="share_settings">Ezarpenak</string>
+    <string name="share_send_new_email">Bidali posta-mezu berria</string>
+    <string name="share_dialog_title">Partekatzea</string>
+    <string name="share_file">Partekatu %1$s</string>
+    <string name="share_expiration_date_label">Iraungitzen da %1$s</string>
+    <string name="share_expiration_date_format">%1$s</string>
     <string name="share_no_expiration_date_label">Ezarri iraungitze-data</string>
+    <string name="share_via_link_section_title">Partekatu esteka</string>
+    <string name="share_via_link_send_link_label">Bidali esteka</string>
+    <string name="share_password_title">Pasahitzez babestua</string>
+    <string name="share_no_password_title">Pasahitza ezarri</string>
+    <string name="share_with_title">Partekatu honekin…</string>
+    <string name="share_via_link_unset_password">Kendu ezarpena</string>
+    <string name="add_another_public_share_link">Gehitu beste esteka bat</string>
+    <string name="add_new_public_share">Gehitu partekatzeko esteka berria</string>
+    <string name="public_share_name">Izen berria</string>
+    <string name="share_link_with_label">Partekatze-esteka (%1$s)</string>
+    <string name="share_link">Partekatu esteka</string>
+    <string name="link_share_view_only">Ikustea soilik</string>
+    <string name="link_share_editing">Edizioa</string>
+    <string name="link_share_allow_upload_and_editing">Onartu igotzea eta edizioa</string>
+    <string name="link_share_file_drop">Fitxategia jaregitea (igotzeko soilik)</string>
+    <string name="could_not_retrieve_shares">Ezin izan dira partekatzeak berreskuratu</string>
+    <string name="share_permission_view_only">Ikustea soilik</string>
+    <string name="share_permission_can_edit">Editatu dezake</string>
+    <string name="share_permission_file_drop">Fitxategiak jaregin</string>
+    <string name="share_permission_secure_file_drop">Fitxategi-jartze segurua</string>
+    <string name="share_permissions">Partekatze baimenak</string>
+    <string name="username">Erabiltzaile-izena</string>
     <string name="share_group_clarification">%1$s (taldea)</string>
+    <string name="share_remote_clarification">%1$s (urrunekoa)</string>
+    <string name="share_room_clarification">%1$s (elkarrizketa)</string>
+    <string name="share_known_remote_on_clarification">hemen: %1$s</string>
+    <string name="remote">(urrunekoa)</string>
+
+    <string name="copy_link">Kopiatu esteka</string>
+    <string name="share">Partekatu</string>
+    <string name="clipboard_text_copied">Esteka kopiatu da</string>
+    <string name="clipboard_no_text_to_copy">Ez da jaso testurik arbelera kopiatzeko</string>
+    <string name="clipboard_unexpected_error">Ustekabeko errorea arbelera kopiatzean</string>
+    <string name="clipboard_label">Testua hemendik kopiatua: %1$s</string>
+
     <string name="listview_updated_today">Gaur</string>
     <string name="listview_updated_yesterday">Atzo</string>
     <string name="listview_updated_this_week">Aste honetan</string>

@@ -32,10 +32,131 @@
     <string name="menu_favorite">Oblíbená</string>
     <string name="menu_preview">Náhled</string>
     <string name="menu_share">Sdílet</string>
+    <string name="common_loading">Načítání…</string>
+
+
     <string name="search_in_category">Hledat v %1$s</string>
     <string name="search_in_all">Prohledat všechny poznámky</string>
 
     <string name="change_category_title">Zvolte kategorii</string>
+
+    <!-- UsersAndGroupsSearchProvider -->
+    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
+    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
+
+    <!-- NoteShareActivity -->
+    <string name="note_share_activity_activity_icon_content_description">ikona aktivity v poznámce</string>
+    <string name="note_share_activity_share_icon_content_description">ikona sdílení poznámky</string>
+    <string name="note_share_activity_external_icon_content_description">externí ikona sdílení poznámky</string>
+    <string name="note_share_activity_copy_icon_content_description">ikona kopírování sdílení poznámky</string>
+    <string name="note_share_activity_more_icon_content_description">ikona další sdílení poznámky</string>
+    <string name="note_share_activity_icon_content_description">ikona sdílení poznámky</string>
+    <string name="note_share_activity_user_icon_content_description">ikona uživatele sdílení poznámky</string>
+    <string name="note_share_activity_contact_icon_content_description">ikona kontaktu sdílení poznámky</string>
+    <string name="note_share_activity_shared_with_you">Nasdílel(a) vám %1$s</string>
+    <string name="note_share_activity_share_note">Sdílet poznámku</string>
+    <string name="note_share_activity_search_text">Jméno, identifikátor v rámci federovaného cloudu, nebo e-mailová adresa…</string>
+    <string name="note_share_activity_share_link">Nasdílet odkaz</string>
+    <string name="note_share_activity_resharing_not_allowed">Zásada nebo oprávnění brání sdílení dál dalším</string>
+    <string name="note_share_activity_could_not_retrieve_url">Nepodařilo se získat URL</string>
+    <string name="note_share_activity_subject_shared_with_you">Bylo vám nasdíleno „%1$s“</string>
+    <string name="note_share_activity_contact_no_permission">Je vyžadováno oprávnění pro přístup ke kontaktům.</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">Nemáte oprávnění vytvářet veřejné sdílení.</string>
+
+    <string name="note_share_created">Sdílení vtvořeno</string>
+    <string name="note_share_activity_cannot_created">Nemáte oprávnění vytvářet sdílení.</string>
+
+
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">Pokročilá nastavení</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Skrýt stahování</string>
+    <string name="note_share_detail_activity_share_send_note">Poznámka pro příjemce</string>
+    <string name="note_share_detail_activity_hint_note">Poznámka</string>
+    <string name="note_share_detail_activity_common_next">Next</string>
+    <string name="note_share_detail_activity_share_copy_link">Nasdílet a zkopírovat odkaz</string>
+    <string name="note_share_detail_activity_common_confirm">Potvrdit</string>
+    <string name="note_share_detail_activity_set_note">Nastavit poznámku</string>
+    <string name="note_share_detail_activity_send_share">Odeslat sdílení</string>
+    <string name="note_share_detail_activity_hint_name">Název</string>
+    <string name="note_share_detail_activity_link_name">Název odkazu</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Je třeba zadat heslo</string>
+    <string name="note_share_detail_activity_hint_password">Heslo</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Vyberte alespoň jedno oprávnění pro sdílení.</string>
+    <string name="note_share_detail_activity_label_empty">Štítek je třeba vyplnit</string>
+    <string name="note_share_detail_activity_cancel">Storno</string>
+    <string name="note_share_detail_activity_create_share_error">Nepodařilo se vytvořit sdílení</string>
+
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Zadejte nepovinné heslo</string>
+    <string name="share_password_dialog_fragment_skip">Přeskočit</string>
+
+    <string name="share_link_password_title">Zadejte heslo</string>
+    <string name="common_ok">OK</string>
+    <string name="common_delete">Smazat</string>
+    <string name="write_email">Odeslat e-mail</string>
+    <string name="no_browser_available">Není k dispozici žádná aplikace pro práci s odkazy</string>
+    <string name="no_email_app_available">Není k dispozici žádná aplikace pro práci s e-maily</string>
+    <string name="no_actions">Žádné akce pro tohoto uživatele</string>
+
+    <string name="failed_the_remove_share">Nepodařilo se odebrat sdílení</string>
+    <string name="email_pick_failed">Nepodařilo se vybrat e-mailovou adresu.</string>
+    <string name="failed_update_ui">Nepodařilo se aktualizovat uživatelské rozhraní</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Pro označené kontakty není k dispozici žádná aplikace</string>
+    <string name="activity_chooser_title">Poslat odkaz na…</string>
+
+    <string name="activity_chooser_send_file_title">Odeslat</string>
+    <string name="share_internal_link_to_folder_text">Sdílení interním odkazem funguje pouze pro uživatele, kteří mají k této složce přístup</string>
+    <string name="share_internal_link_to_file_text">Sdílení interním odkazem funguje pouze pro uživatele, kteří mají k tomuto souboru přístup</string>
+    <string name="share_internal_link">Interní odkaz na sdílení</string>
+    <string name="delete_link">Smazat odkaz</string>
+    <string name="share_settings">Settings</string>
+    <string name="share_send_new_email">Odeslat nový e-mail</string>
+    <string name="share_dialog_title">Sdílení</string>
+    <string name="share_file">Nasdílet %1$s</string>
+    <string name="share_expiration_date_label">Platnost skončí %1$s</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Nastavit datum skončení platnosti</string>
+    <string name="share_via_link_section_title">Nasdílet odkaz</string>
+    <string name="share_via_link_send_link_label">Poslat odkaz</string>
+    <string name="share_password_title">Chráněno heslem</string>
+    <string name="share_no_password_title">Nastavit heslo</string>
+    <string name="share_with_title">Sdílet s…</string>
+    <string name="share_via_link_unset_password">Zrušit nastavení</string>
+    <string name="add_another_public_share_link">Přidat další odkaz</string>
+    <string name="add_new_public_share">Přidat nový veřejný odkaz na sdílení</string>
+    <string name="public_share_name">Nový název</string>
+    <string name="share_link_with_label">Odkaz na sdílení (%1$s)</string>
+    <string name="share_link">Nasdílet odkaz</string>
+    <string name="allow_resharing">Povolit příjemcům tohoto sdílení, aby sami mohli sdílet dalším</string>
+    <string name="link_share_view_only">Pouze prohlížet</string>
+    <string name="link_share_editing">Upravování</string>
+    <string name="link_share_allow_upload_and_editing">Umožnit nahrávání a úpravy</string>
+    <string name="link_share_file_drop">Předání souboru (pouze nahrání)</string>
+    <string name="could_not_retrieve_shares">Nedaří se získat sdílení</string>
+    <string name="share_permission_view_only">Pouze prohlížet</string>
+    <string name="share_permission_can_edit">Může upravovat</string>
+    <string name="share_permission_file_drop">Předání souboru</string>
+    <string name="share_permission_secure_file_drop">Bezpečné předání souborů</string>
+    <string name="share_permissions">Oprávnění pro sdílení</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">Zbývá %1$d stažení</item>
+        <item quantity="few">Zbývají %1$d stažení</item>
+        <item quantity="many">Zbývá %1$d stažení</item>
+        <item quantity="other">Zbývají %1$d stažení</item>
+    </plurals>
+    <string name="username">Uživatelské jméno</string>
+    <string name="share_group_clarification">%1$s (skupina)</string>
+    <string name="share_remote_clarification">%1$s (vzdálený)</string>
+    <string name="share_room_clarification">%1$s (konverzace)</string>
+    <string name="share_known_remote_on_clarification">na %1$s</string>
+    <string name="remote">(vzdálené)</string>
+
+    <string name="copy_link">Zkopírovat odkaz</string>
+    <string name="share">Nasdílet</string>
+    <string name="clipboard_text_copied">Odkaz zkopírován</string>
+    <string name="clipboard_no_text_to_copy">Neobdržen žádný text pro zkopírování do schránky</string>
+    <string name="clipboard_unexpected_error">Neočekávaná chyba při kopírování do schránky</string>
+    <string name="clipboard_label">Text zkopírován z %1$s</string>
 
     <string name="listview_updated_today">Dnes</string>
     <string name="listview_updated_yesterday">Včera</string>

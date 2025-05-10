@@ -32,15 +32,107 @@
     <string name="menu_favorite">Kedvenc</string>
     <string name="menu_preview">Előnézet</string>
     <string name="menu_share">Megosztás</string>
+    <string name="common_loading">Betöltés…</string>
+
+
     <string name="search_in_category">Keresés itt: %1$s</string>
     <string name="search_in_all">Keresés minden jegyzetben</string>
 
     <string name="change_category_title">Válasszon kategóriát</string>
 
+    <string name="note_share_activity_shared_with_you">%1$s megosztotta Önnel</string>
+    <string name="note_share_activity_share_note">Jegyzet megosztása</string>
+    <string name="note_share_activity_share_link">Megosztási hivatkozás</string>
+    <string name="note_share_activity_resharing_not_allowed">Házirend vagy jogosultságok tiltják a továbbosztást</string>
+    <string name="note_share_activity_could_not_retrieve_url">Az URL nem kérhető le</string>
+    <string name="note_share_activity_subject_shared_with_you">Megosztották Önnel: „%1$s”</string>
+    <string name="note_share_activity_contact_no_permission">Névjegy engedély szükséges.</string>
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">Speciális beállítások</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Letöltés elrejtése</string>
+    <string name="note_share_detail_activity_share_send_note">Jegyzet a címzettnek</string>
+    <string name="note_share_detail_activity_hint_note">Jegyzet</string>
+    <string name="note_share_detail_activity_common_next">Következő</string>
+    <string name="note_share_detail_activity_share_copy_link">Megosztás és hivatkozás másolása</string>
+    <string name="note_share_detail_activity_common_confirm">Megerősítés</string>
+    <string name="note_share_detail_activity_set_note">Jegyzet beállítása</string>
+    <string name="note_share_detail_activity_send_share">Megosztás küldése</string>
+    <string name="note_share_detail_activity_hint_name">Név</string>
+    <string name="note_share_detail_activity_link_name">Hivatkozás neve</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Meg kell adnia a jelszót</string>
+    <string name="note_share_detail_activity_hint_password">Jelszó</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Válasszon legalább egy jogosultságot a megosztáshoz.</string>
+    <string name="note_share_detail_activity_label_empty">A címke nem lehet üres</string>
+    <string name="note_share_detail_activity_cancel">Mégse</string>
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Adjon meg egy jelszót (nem kötelező)</string>
+    <string name="share_password_dialog_fragment_skip">Kihagyás</string>
+
+    <string name="share_link_password_title">Adja meg a jelszót</string>
+    <string name="common_ok">Rendben</string>
+    <string name="common_delete">Törlés</string>
+    <string name="write_email">E-mail küldése</string>
+    <string name="no_browser_available">Nincs elérhető alkalmazás hivatkozások kezeléséhez</string>
+    <string name="no_email_app_available">Nem érhető el alkalmazás a levélcímek kezeléséhez</string>
+    <string name="no_actions">Nincsenek műveletek ehhez a felhasználóhoz</string>
+
+    <string name="email_pick_failed">Az e-mail-cím kiválasztása sikertelen.</string>
     <string name="failed_update_ui">A felhasználói felület frissítése sikertelen</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Nem érhető el alkalmazás a névjegyek kiválasztásához</string>
+    <string name="activity_chooser_title">Hivatkozás küldése…</string>
+
+    <string name="activity_chooser_send_file_title">Küldés</string>
+    <string name="share_internal_link_to_folder_text">A belső megosztási hivatkozás csak azon felhasználóknál működik, akik hozzáférnek ehhez a mappához</string>
+    <string name="share_internal_link_to_file_text">A belső megosztási hivatkozás csak azon felhasználóknál működik, akik hozzáférnek ehhez a fájlhoz</string>
+    <string name="share_internal_link">Belső hivatkozás megosztása</string>
+    <string name="delete_link">Hivatkozás törlése</string>
+    <string name="share_settings">Beállítások</string>
+    <string name="share_send_new_email">Új e-mail küldése</string>
+    <string name="share_dialog_title">Megosztás</string>
+    <string name="share_file">%1$s megosztása</string>
+    <string name="share_expiration_date_label">Lejárat: %1$s</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_no_expiration_date_label">Lejárati idő beállítása</string>
+    <string name="share_via_link_section_title">Megosztási hivatkozás</string>
+    <string name="share_via_link_send_link_label">Hivatkozás küldése</string>
+    <string name="share_password_title">Jelszóval védett</string>
+    <string name="share_no_password_title">Jelszó beállítása</string>
+    <string name="share_with_title">Megosztás vele…</string>
+    <string name="share_via_link_unset_password">Kikapcsolás</string>
+    <string name="add_another_public_share_link">További hivatkozás hozzáadása</string>
+    <string name="add_new_public_share">Új nyilvános megosztási hivatkozás hozzáadása</string>
+    <string name="public_share_name">Új név</string>
+    <string name="share_link_with_label">Megosztási hivatkozás (%1$s)</string>
+    <string name="share_link">Megosztási hivatkozás</string>
+    <string name="allow_resharing">Megosztás továbbosztásának engedélyezése</string>
+    <string name="link_share_view_only">Csak megtekintés</string>
+    <string name="link_share_editing">Szerkesztés</string>
+    <string name="link_share_allow_upload_and_editing">Feltöltés és szerkesztés engedélyezése</string>
+    <string name="link_share_file_drop">Fájlelhelyezés (csak feltöltés)</string>
+    <string name="could_not_retrieve_shares">Nem sikerült lekérni a megosztásokat</string>
+    <string name="share_permission_view_only">Csak megtekintés</string>
+    <string name="share_permission_can_edit">Szerkesztheti</string>
+    <string name="share_permission_file_drop">Fájllerakat</string>
+    <string name="share_permission_secure_file_drop">Biztonságos fájllerakat</string>
+    <string name="share_permissions">Megosztási jogosultságok</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">%1$d letöltés maradt</item>
+        <item quantity="other">%1$d letöltés maradt</item>
+    </plurals>
+    <string name="username">Felhasználónév</string>
     <string name="share_group_clarification">%1$s (csoport)</string>
+    <string name="share_remote_clarification">%1$s (távoli)</string>
+    <string name="share_room_clarification">%1$s(beszélgetés)</string>
+    <string name="share_known_remote_on_clarification">ezen: %1$s</string>
+    <string name="remote">(távoli)</string>
+
+    <string name="copy_link">Hivatkozás másolása</string>
+    <string name="share">Megosztás</string>
+    <string name="clipboard_text_copied">Hivatkozás másolva</string>
+    <string name="clipboard_no_text_to_copy">Nem érkezett szöveg a vágólapra másoláshoz</string>
+    <string name="clipboard_unexpected_error">Váratlan hiba történt a vágólapra másolás során</string>
+    <string name="clipboard_label">Szöveg másolva innen: %1$s</string>
+
     <string name="listview_updated_today">Ma</string>
     <string name="listview_updated_yesterday">Tegnap</string>
     <string name="listview_updated_this_week">Ezen a héten</string>

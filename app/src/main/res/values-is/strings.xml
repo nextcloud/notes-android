@@ -32,15 +32,105 @@
     <string name="menu_favorite">Eftirlæti</string>
     <string name="menu_preview">Forskoðun</string>
     <string name="menu_share">Deila</string>
+    <string name="common_loading">Hleð inn…</string>
+
+
     <string name="search_in_category">Leita í %1$s</string>
     <string name="search_in_all">Leita í öllum minnispunktum</string>
 
     <string name="change_category_title">Veldu flokk</string>
 
+    <string name="note_share_activity_shared_with_you">Deilt með þér af %s</string>
+    <string name="note_share_activity_share_note">Deila minnispunkti</string>
+    <string name="note_share_activity_search_text">Nafn, skýjasambandsauðkenni eða tölvupóstfang …</string>
+    <string name="note_share_activity_share_link">Tengill á sameign</string>
+    <string name="note_share_activity_resharing_not_allowed">Stefnuregla eða heimildir koma í veg fyrir endurdeilingu</string>
+    <string name="note_share_activity_could_not_retrieve_url">Tókst ekki að ná í slóð</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" hefur verið deilt með þér</string>
+    <string name="note_share_activity_contact_no_permission">Heimild til aðgangs að tengiliðum er nauðsynleg.</string>
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">Ítarlegar stillingar</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Fela niðurhal</string>
+    <string name="note_share_detail_activity_share_send_note">Minnispunktur til viðtakanda</string>
+    <string name="note_share_detail_activity_hint_note">Minnispunktur</string>
+    <string name="note_share_detail_activity_common_next">Næst</string>
+    <string name="note_share_detail_activity_share_copy_link">Deila og afrita tengil</string>
+    <string name="note_share_detail_activity_common_confirm">Staðfesta</string>
+    <string name="note_share_detail_activity_set_note">Setja minnispunkt</string>
+    <string name="note_share_detail_activity_send_share">Senda sameign</string>
+    <string name="note_share_detail_activity_hint_name">Heiti</string>
+    <string name="note_share_detail_activity_link_name">Heiti tengils</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Þú verður að setja lykilorð</string>
+    <string name="note_share_detail_activity_hint_password">Lykilorð</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Veldu að minnsta kosti eina heimild til að deila.</string>
+    <string name="note_share_detail_activity_label_empty">Merki má ekki vera tómt</string>
+    <string name="note_share_detail_activity_cancel">Hætta við</string>
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Settu inn valkvætt lykilorð</string>
+    <string name="share_password_dialog_fragment_skip">Sleppa</string>
+
+    <string name="share_link_password_title">Settu inn lykilorð</string>
+    <string name="common_delete">Eyða</string>
+    <string name="write_email">Senda tölvupóst</string>
+    <string name="no_browser_available">Ekkert forrit tiltækt til að meðhöndla tengla</string>
+    <string name="no_email_app_available">Ekkert forrit er tiltækt sem getur meðhöndlað tölvupóstföng</string>
+    <string name="no_actions">Engar aðgerðir fyrir þennan notanda</string>
+
+    <string name="email_pick_failed">Mistókst að velja tölvupóstfang.</string>
     <string name="failed_update_ui">Mistókst að uppfæra viðmótið</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Ekkert forrit tiltækt til að velja tengiliði</string>
+    <string name="activity_chooser_send_file_title">Senda</string>
+    <string name="share_internal_link_to_folder_text">Innri deilingartengill virkar bara fyrir notendur sem eiga aðgang að þessari möppu</string>
+    <string name="share_internal_link_to_file_text">Innri deilingartengill virkar bara fyrir notendur sem eiga aðgang að þessari skrá</string>
+    <string name="share_internal_link">Deila innri tengli</string>
+    <string name="delete_link">Eyða tengli</string>
+    <string name="share_settings">Stillingar</string>
+    <string name="share_send_new_email">Senda nýjan tölvupóst</string>
+    <string name="share_dialog_title">Deiling</string>
+    <string name="share_file">Deila %1$s</string>
+    <string name="share_expiration_date_label">Rennur út %1$s</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_no_expiration_date_label">Setja gildistíma</string>
+    <string name="share_via_link_section_title">Tengill á sameign</string>
+    <string name="share_via_link_send_link_label">Senda tengil...</string>
+    <string name="share_password_title">Verja með lykilorði</string>
+    <string name="share_no_password_title">Stilltu lykilorð</string>
+    <string name="share_with_title">Deila með %1</string>
+    <string name="share_via_link_unset_password">Endurstilla</string>
+    <string name="add_another_public_share_link">Bæta við öðrum tengli</string>
+    <string name="add_new_public_share">Bæta við nýjum opinberum tengli</string>
+    <string name="public_share_name">Nýtt nafn</string>
+    <string name="share_link_with_label">Tengill á sameign(%1$s)</string>
+    <string name="share_link">Tengill á sameign</string>
+    <string name="allow_resharing">Leyfa endurdeilingu</string>
+    <string name="link_share_view_only">Einungis skoða</string>
+    <string name="link_share_editing">Breytingar</string>
+    <string name="link_share_allow_upload_and_editing">Leyfa innsendingu og breytingar</string>
+    <string name="link_share_file_drop">Slepping skráa (einungis innsending)</string>
+    <string name="could_not_retrieve_shares">Tókst ekki að ná í sameignir</string>
+    <string name="share_permission_view_only">Einungis skoða</string>
+    <string name="share_permission_can_edit">Getur breytt</string>
+    <string name="share_permission_file_drop">Slepping skráa</string>
+    <string name="share_permission_secure_file_drop">Örugg slepping skráa</string>
+    <string name="share_permissions">Heimildir sameignar</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">%1$d niðurhal eftir</item>
+        <item quantity="other">%1$d niðurhöl eftir</item>
+    </plurals>
+    <string name="username">Notandanafn</string>
     <string name="share_group_clarification">%s hópurinn</string>
+    <string name="share_remote_clarification">%1$s (fjartengt)</string>
+    <string name="share_room_clarification">%1$s (samtal)</string>
+    <string name="share_known_remote_on_clarification">á %1$s</string>
+    <string name="remote">(fjartengt)</string>
+
+    <string name="copy_link">Afrita tengil</string>
+    <string name="share">Deila</string>
+    <string name="clipboard_text_copied">Tengill afritaður</string>
+    <string name="clipboard_no_text_to_copy">Fékk engan texta til að afrita á klippispjald</string>
+    <string name="clipboard_unexpected_error">Óvænt villa kom upp við afritun á klippispjald</string>
+    <string name="clipboard_label">Texti afritaður úr %1$s</string>
+
     <string name="listview_updated_today">Í dag</string>
     <string name="listview_updated_yesterday">Í gær</string>
     <string name="listview_updated_this_week">Í þessari viku</string>

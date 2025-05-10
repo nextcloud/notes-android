@@ -32,18 +32,110 @@
     <string name="menu_favorite">Ulubiona</string>
     <string name="menu_preview">Podgląd</string>
     <string name="menu_share">Udostępnij</string>
+    <string name="common_loading">Wczytywanie…</string>
+
+
     <string name="search_in_category">Szukaj w %1$s</string>
     <string name="search_in_all">Szukaj w notatkach</string>
 
     <string name="change_category_title">Wybierz kategorię</string>
 
+    <string name="note_share_activity_shared_with_you">Udostępnione przez %1$s</string>
+    <string name="note_share_activity_share_note">Notatka udostępnienia</string>
+    <string name="note_share_activity_search_text">Nazwa, ID chmury stowarzyszonej lub adres e-mail</string>
+    <string name="note_share_activity_share_link">Udostępnij link</string>
+    <string name="note_share_activity_resharing_not_allowed">Polityka lub uprawnienia uniemożliwiają ponowne udostępnianie</string>
+    <string name="note_share_activity_could_not_retrieve_url">Nie można pobrać adresu URL</string>
+    <string name="note_share_activity_subject_shared_with_you">Udostępniono Tobie \"%1$s\"</string>
+    <string name="note_share_activity_contact_no_permission">Wymagane jest pozwolenie na lokalizację</string>
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">Ustawienia zaawansowane</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Ukryj pobieranie</string>
+    <string name="note_share_detail_activity_share_send_note">Informacja dla odbiorcy</string>
+    <string name="note_share_detail_activity_hint_note">Notatka</string>
+    <string name="note_share_detail_activity_common_next">Następna</string>
+    <string name="note_share_detail_activity_share_copy_link">Udostępnij i skopiuj odnośnik</string>
+    <string name="note_share_detail_activity_common_confirm">Potwierdź</string>
+    <string name="note_share_detail_activity_set_note">Ustaw notatkę</string>
+    <string name="note_share_detail_activity_send_share">Wyślij udostępnienie</string>
+    <string name="note_share_detail_activity_hint_name">Nazwa</string>
+    <string name="note_share_detail_activity_link_name">Nazwa linku</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Musisz wprowadzić hasło</string>
+    <string name="note_share_detail_activity_hint_password">Hasło</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Wybierz co najmniej jedno uprawnienie do udostępniania.</string>
+    <string name="note_share_detail_activity_label_empty">Etykieta nie może być pusta</string>
+    <string name="note_share_detail_activity_cancel">Anuluj</string>
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Wprowadź opcjonalne hasło</string>
+    <string name="share_password_dialog_fragment_skip">Pomiń</string>
+
+    <string name="share_link_password_title">Wprowadź hasło</string>
+    <string name="common_ok">OK</string>
+    <string name="common_delete">Usuń</string>
+    <string name="write_email">Wyślij e-mail</string>
+    <string name="no_browser_available">Brak aplikacji obsługującej odnośniki</string>
+    <string name="no_email_app_available">Brak dostępnej aplikacji do obsługi adresu e-mail</string>
+    <string name="no_actions">Brak aktywności dla tego użytkownika</string>
+
+    <string name="email_pick_failed">Nie udało się wybrać adresu e-mail.</string>
     <string name="failed_update_ui">Nie udało się zaktualizować UI</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Brak aplikacji dla wybranego kontaktu</string>
+    <string name="activity_chooser_title">Wyślij link do…</string>
+
+    <string name="activity_chooser_send_file_title">Wyślij</string>
+    <string name="share_internal_link_to_folder_text">Wewnętrzny link udostępnienia działa tylko dla użytkowników z dostępem do tego katalogu</string>
+    <string name="share_internal_link_to_file_text">Wewnętrzny link udostępnienia działa tylko dla użytkowników z dostępem do tego pliku</string>
+    <string name="share_internal_link">Udostępnij link wewnętrzny</string>
+    <string name="delete_link">Usuń link</string>
+    <string name="share_settings">Ustawienia</string>
+    <string name="share_send_new_email">Wyślij nowy e-mail</string>
+    <string name="share_dialog_title">Udostępnianie</string>
+    <string name="share_file">Udostępnij %1$s</string>
+    <string name="share_expiration_date_label">Wygaśnie o %1$s</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_no_expiration_date_label">Ustaw datę wygaśnięcia</string>
+    <string name="share_via_link_section_title">Udostępnij link</string>
+    <string name="share_via_link_send_link_label">Wyślij link</string>
+    <string name="share_password_title">Zabezpieczone hasłem</string>
+    <string name="share_no_password_title">Ustaw hasło</string>
+    <string name="share_with_title">Udostępnij z…</string>
+    <string name="share_via_link_unset_password">Usuń z ustawienia</string>
+    <string name="add_another_public_share_link">Dodaj kolejny link</string>
+    <string name="add_new_public_share">Dodaj nowy link publiczny do udostępnienia</string>
+    <string name="public_share_name">Nowa nazwa</string>
+    <string name="share_link_with_label">Udostępnij link (%1$s)</string>
+    <string name="share_link">Udostępnij link</string>
+    <string name="allow_resharing">Zezwalaj na dalsze udostępnianie</string>
+    <string name="link_share_view_only">Tylko podgląd</string>
+    <string name="link_share_editing">Edytowanie</string>
+    <string name="link_share_allow_upload_and_editing">Zezwalaj na wysyłanie i edytowanie</string>
+    <string name="link_share_file_drop">Upuszczanie pliku (tylko wysyłanie)</string>
+    <string name="could_not_retrieve_shares">Nie udało się pobrać udziałów</string>
+    <string name="share_permission_view_only">Tylko podgląd</string>
+    <string name="share_permission_can_edit">Może modyfikować</string>
+    <string name="share_permission_file_drop">Upuść plik</string>
+    <string name="share_permission_secure_file_drop">Bezpieczne upuszczenie pliku</string>
+    <string name="share_permissions">Uprawnienia udostępniania</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">Pozostało %1$d pobranie</item>
+        <item quantity="few">Pozostało %1$d pobrania</item>
+        <item quantity="many">Pozostało %1$d pobrań</item>
+        <item quantity="other">Pozostało %1$d pobrań</item>
+    </plurals>
     <string name="username">Nazwa użytkownika</string>
     <string name="share_group_clarification">%1$s (grupa)</string>
+    <string name="share_remote_clarification">%1$s (zdalny)</string>
+    <string name="share_room_clarification">%1$s (rozmowa)</string>
     <string name="share_known_remote_on_clarification">na %1$s</string>
+    <string name="remote">(zdalne)</string>
+
     <string name="copy_link">Kopiuj link</string>
+    <string name="share">Udostępnij</string>
+    <string name="clipboard_text_copied">Link skopiowany</string>
+    <string name="clipboard_no_text_to_copy">Nie otrzymano tekstu do skopiowania do schowka</string>
+    <string name="clipboard_unexpected_error">Nieoczekiwany błąd podczas kopiowania do schowka</string>
+    <string name="clipboard_label">Skopiowano tekst z %1$s</string>
+
     <string name="listview_updated_today">Dzisiaj</string>
     <string name="listview_updated_yesterday">Wczoraj</string>
     <string name="listview_updated_this_week">W tym tygodniu</string>

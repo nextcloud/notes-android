@@ -32,13 +32,130 @@
     <string name="menu_favorite">Lemmik</string>
     <string name="menu_preview">Eelvaade</string>
     <string name="menu_share">Jaga</string>
+    <string name="common_loading">Andmed on laadimisel…</string>
+
+
     <string name="search_in_category">Otsi siin: %1$s</string>
     <string name="search_in_all">Otsi kõiki märkmeid</string>
 
     <string name="change_category_title">Vali kategooria</string>
 
+    <!-- UsersAndGroupsSearchProvider -->
+    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
+    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
+
+    <!-- NoteShareActivity -->
+    <string name="note_share_activity_activity_icon_content_description">märkme aktiivsuse ikoon</string>
+    <string name="note_share_activity_share_icon_content_description">märkme jagamise ikoon</string>
+    <string name="note_share_activity_external_icon_content_description">märkme välise jagamise ikoon</string>
+    <string name="note_share_activity_copy_icon_content_description">märkme jagamise kopeerimise ikoon</string>
+    <string name="note_share_activity_more_icon_content_description">märkme täiendava jagamise ikoon</string>
+    <string name="note_share_activity_icon_content_description">märkme jagamise ikoon</string>
+    <string name="note_share_activity_user_icon_content_description">märkme kasutaja jagamise ikoon</string>
+    <string name="note_share_activity_contact_icon_content_description">märkme kontakti jagamise ikoon</string>
+    <string name="note_share_activity_shared_with_you">Seda jagas sinuga %1$s</string>
+    <string name="note_share_activity_share_note">Jaga märget</string>
+    <string name="note_share_activity_search_text">Nimi, tunnus liitpilves või e-posti aadress...</string>
+    <string name="note_share_activity_share_link">Jaga linki</string>
+    <string name="note_share_activity_resharing_not_allowed">Reeglid või õigused ei võimalda edasijagamist</string>
+    <string name="note_share_activity_could_not_retrieve_url">Võrguaadressi laadimine ei õnnestu</string>
+    <string name="note_share_activity_subject_shared_with_you">„%1$s“ on sinuga jagatud</string>
+    <string name="note_share_activity_contact_no_permission">Vajalikud on õigused kontaktide kasutamiseks</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">Sul pole luba avaliku jaosmeedia loomiseks</string>
+
+    <string name="note_share_created">Jaosmeedia on salvestatud</string>
+    <string name="note_share_activity_cannot_created">Sul pole luba jaosmeedia loomiseks</string>
+
+
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">Täpsemad seaded</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Peida allalaaditu</string>
+    <string name="note_share_detail_activity_share_send_note">Märge saajale</string>
+    <string name="note_share_detail_activity_hint_note">Märge</string>
+    <string name="note_share_detail_activity_common_next">Järgmine</string>
+    <string name="note_share_detail_activity_share_copy_link">Jaga ja kopeeri link</string>
+    <string name="note_share_detail_activity_common_confirm">Kinnita</string>
+    <string name="note_share_detail_activity_set_note">Koosta märge</string>
+    <string name="note_share_detail_activity_send_share">Saada jaosmeedia</string>
+    <string name="note_share_detail_activity_hint_name">Nimi</string>
+    <string name="note_share_detail_activity_link_name">Lingi nimi</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Sa pead sisestama salasõna</string>
+    <string name="note_share_detail_activity_hint_password">Salasõna</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Palun vali jaosmeedia jaoks vähemalt üks õigus.</string>
+    <string name="note_share_detail_activity_label_empty">Silt ei saa olla tühi</string>
+    <string name="note_share_detail_activity_cancel">Katkesta</string>
+    <string name="note_share_detail_activity_create_share_error">Jaosmeedia loomine ei õnnestunud</string>
+
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Kui soovid, siis lisa salasõna</string>
+    <string name="share_password_dialog_fragment_skip">Jäta vahele</string>
+
+    <string name="share_link_password_title">Sisesta salasõna</string>
+    <string name="common_ok">Sobib</string>
+    <string name="common_delete">Kustuta</string>
+    <string name="write_email">Saada e-kiri</string>
+    <string name="no_browser_available">Linkide avamiseks ei leidu sobilikku rakendust</string>
+    <string name="no_email_app_available">E-posti aadressi kasutamiseks ei leidu sobilikku rakendust</string>
+    <string name="no_actions">Selle kasutaja kohta ei leidu tegevusi</string>
+
+    <string name="failed_the_remove_share">Jaosmeedia eemaldamine ei õnnestunud</string>
+    <string name="email_pick_failed">Ei õnnestu valida e-posti aadressi</string>
+    <string name="failed_update_ui">Kasutajaliidese uuendamine ei õnnestunud</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Kontaktide valimiseks ei leidu sobilikku rakendust</string>
+    <string name="activity_chooser_title">Saada link…</string>
+
+    <string name="activity_chooser_send_file_title">Saada</string>
+    <string name="share_internal_link_to_folder_text">Sisemine jagamislink töötab ainult nende kasutajate jaoks, kelle on ligipääs sellele kaustale</string>
+    <string name="share_internal_link_to_file_text">Sisemine jagamislink töötab ainult nende kasutajate jaoks, kelle on ligipääs sellele failile</string>
+    <string name="share_internal_link">Jaga sisemist linki</string>
+    <string name="delete_link">Kustuta link</string>
+    <string name="share_settings">Seadistused</string>
+    <string name="share_send_new_email">Saada uus e-kiri</string>
+    <string name="share_dialog_title">Jagamine</string>
+    <string name="share_file">Jaga %1$s</string>
+    <string name="share_expiration_date_label">Aegub %1$s</string>
+    <string name="share_expiration_date_format">%1$s</string>
     <string name="share_no_expiration_date_label">Määra aegumise kuupäev</string>
+    <string name="share_via_link_section_title">Jaga linki</string>
+    <string name="share_via_link_send_link_label">Saada link</string>
+    <string name="share_password_title">Kaitstud salasõnaga</string>
+    <string name="share_no_password_title">Määra salasõna</string>
+    <string name="share_with_title">Jaga kasutades…</string>
+    <string name="share_via_link_unset_password">Eemalda seadistus</string>
+    <string name="add_another_public_share_link">Lisa veel üks link</string>
+    <string name="add_new_public_share">Lisa uus avalik jagamislink</string>
+    <string name="public_share_name">Uus nimi</string>
+    <string name="share_link_with_label">Jagamise link (%1$s)</string>
+    <string name="share_link">Jaga linki</string>
+    <string name="allow_resharing">Luba edasijagamine</string>
+    <string name="link_share_view_only">Ainult vaatamine</string>
+    <string name="link_share_editing">Muutmisel</string>
+    <string name="link_share_allow_upload_and_editing">Luba üleslaadimine ja muutmine</string>
+    <string name="link_share_file_drop">Failiedastus (ainult üleslaadimine)</string>
+    <string name="could_not_retrieve_shares">Jaosmeedia laadimine ei õnnestunud</string>
+    <string name="share_permission_view_only">Ainult vaatamine</string>
+    <string name="share_permission_can_edit">Võib muuta</string>
+    <string name="share_permission_file_drop">Failiedastus</string>
+    <string name="share_permission_secure_file_drop">Turvaline failiedastus</string>
+    <string name="share_permissions">Jaga õigusi</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">Jäänud on %1$d allalaadimine</item>
+        <item quantity="other">Jäänud on %1$d allalaadimist</item>
+    </plurals>
+    <string name="username">Kasutajanimi</string>
     <string name="share_group_clarification">%1$s (grupp)</string>
+    <string name="share_remote_clarification">%1$s (kaugseadmes)</string>
+    <string name="share_room_clarification">%1$s (vestlus)</string>
+    <string name="share_known_remote_on_clarification">asukohas %1$s</string>
+    <string name="remote">(kaugseade)</string>
+
+    <string name="copy_link">Kopeeri link</string>
+    <string name="share">Jaga</string>
+    <string name="clipboard_text_copied">Link on kopeeritud</string>
+    <string name="clipboard_no_text_to_copy">Ei leidunud teksti, mida lõikelauale kopeerida</string>
+    <string name="clipboard_unexpected_error">Ootamatu viga lõikelauale kopeerimisel </string>
+    <string name="clipboard_label">Tekst on kopeeritud siit: %1$s</string>
+
     <string name="listview_updated_today">Täna</string>
     <string name="listview_updated_yesterday">Eile</string>
     <string name="listview_updated_this_week">Käesolev nädal</string>

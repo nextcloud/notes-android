@@ -32,10 +32,107 @@
     <string name="menu_favorite">Foretrukken</string>
     <string name="menu_preview">Vis eksempel</string>
     <string name="menu_share">Del</string>
+    <string name="common_loading">Indlæser…</string>
+
+
     <string name="search_in_category">Søg i %1$s</string>
     <string name="search_in_all">Søg i alle noter</string>
 
     <string name="change_category_title">Vælg en kategori</string>
+
+    <string name="note_share_activity_shared_with_you">Delt med dig af %1$s</string>
+    <string name="note_share_activity_share_note">Del note</string>
+    <string name="note_share_activity_search_text">Navn, sammenkoblings cloud ID eller e-mailadresse…</string>
+    <string name="note_share_activity_share_link">Del link</string>
+    <string name="note_share_activity_resharing_not_allowed">Politik eller rettigheder forhindrer gen-deling</string>
+    <string name="note_share_activity_could_not_retrieve_url">Kunne ikke hente URL</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" er blevet delt med dig</string>
+    <string name="note_share_activity_contact_no_permission">Tilladelse til Kontakter er nødvendig.</string>
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">Avancerede indstillinger</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Skjul download</string>
+    <string name="note_share_detail_activity_share_send_note">Note til modtager</string>
+    <string name="note_share_detail_activity_hint_note">Note</string>
+    <string name="note_share_detail_activity_common_next">Næste</string>
+    <string name="note_share_detail_activity_share_copy_link">Del og kopier link</string>
+    <string name="note_share_detail_activity_common_confirm">Bekræft</string>
+    <string name="note_share_detail_activity_set_note">Sæt Note</string>
+    <string name="note_share_detail_activity_send_share">Send Deling</string>
+    <string name="note_share_detail_activity_hint_name">Navn</string>
+    <string name="note_share_detail_activity_link_name">Link Navn</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Du skal angive et kodeord</string>
+    <string name="note_share_detail_activity_hint_password">Adgangskode</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Vælg mindst en tilladelse til at dele.</string>
+    <string name="note_share_detail_activity_label_empty">Etiketten kan ikke være tom</string>
+    <string name="note_share_detail_activity_cancel">Annullér</string>
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Angiv et valgfrit kodeord</string>
+    <string name="share_password_dialog_fragment_skip">Spring over</string>
+
+    <string name="share_link_password_title">Angiv en adgangskodea password</string>
+    <string name="common_ok">OK</string>
+    <string name="common_delete">Slet</string>
+    <string name="write_email">Send e-mail</string>
+    <string name="no_browser_available">Ingen App tilgængelig til håndtering af links</string>
+    <string name="no_email_app_available">Ingen app tilgængelig til at håndtere mailadresser</string>
+    <string name="no_actions">Ingen handlinger for denne bruger</string>
+
+    <string name="email_pick_failed">Kunne ikke plukke e-mailadresse.</string>
+    <string name="failed_update_ui">Formåede ikke at opdatere UI</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Ingen app tilgængelig til at vælge kontakter</string>
+    <string name="activity_chooser_title">Send link til...</string>
+
+    <string name="activity_chooser_send_file_title">Send</string>
+    <string name="share_internal_link_to_folder_text">Internt dele link virker kun for brugere med adgang til denne mappe</string>
+    <string name="share_internal_link_to_file_text">Internt dele link virker kun for brugere med adgang til denne fil</string>
+    <string name="share_internal_link">Del internt link</string>
+    <string name="delete_link">Slet link</string>
+    <string name="share_settings">Indstillinger</string>
+    <string name="share_send_new_email">Send ny email</string>
+    <string name="share_dialog_title">Deling</string>
+    <string name="share_file">Del %1$s</string>
+    <string name="share_expiration_date_label">Udløber %1$s</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Angiv udløbsdato</string>
+    <string name="share_via_link_section_title">Del link</string>
+    <string name="share_via_link_send_link_label">Send link</string>
+    <string name="share_password_title">Beskyttet med adgangskode</string>
+    <string name="share_no_password_title">Angiv adgangskodepassword</string>
+    <string name="share_with_title">Del med...</string>
+    <string name="share_via_link_unset_password">Fjern indstilling</string>
+    <string name="add_another_public_share_link">Tilføj et link mere</string>
+    <string name="add_new_public_share">Tilføj nyt offentligt link til deling</string>
+    <string name="public_share_name">Nyt navn</string>
+    <string name="share_link_with_label">Del link (%1$s)</string>
+    <string name="share_link">Del link</string>
+    <string name="allow_resharing">Tillad videredeling</string>
+    <string name="link_share_view_only">Kun visning</string>
+    <string name="link_share_editing">Redigering</string>
+    <string name="link_share_allow_upload_and_editing">Tillad upload og redigering</string>
+    <string name="link_share_file_drop">Fil drop (kun upload)</string>
+    <string name="could_not_retrieve_shares">Kunne ikke hente delte drev</string>
+    <string name="share_permission_view_only">Kun visning</string>
+    <string name="share_permission_can_edit">Kan redigere</string>
+    <string name="share_permission_file_drop">Fil drop</string>
+    <string name="share_permission_secure_file_drop">Sikkert fil drop</string>
+    <string name="share_permissions">Del Tilladelser</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">%1$d resterende downloads</item>
+        <item quantity="other">%1$d resterende downloads</item>
+    </plurals>
+    <string name="username">Brugernavn</string>
+    <string name="share_group_clarification">%1$s (gruppe)</string>
+    <string name="share_remote_clarification">%1$s (ekstern)</string>
+    <string name="share_room_clarification">%1$s (samtale)</string>
+    <string name="share_known_remote_on_clarification">på %1$s</string>
+    <string name="remote">(fjernt)</string>
+
+    <string name="copy_link">Kopier link</string>
+    <string name="share">Del</string>
+    <string name="clipboard_text_copied">Link kopieret</string>
+    <string name="clipboard_no_text_to_copy">Modtog ingen tekst til kopiering til udklipsholder</string>
+    <string name="clipboard_unexpected_error">Uventet fejl under kopiering til udklipsholder</string>
+    <string name="clipboard_label">Tekst kopieret fra %1$s</string>
 
     <string name="listview_updated_today">I dag</string>
     <string name="listview_updated_yesterday">I går</string>

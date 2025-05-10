@@ -32,23 +32,129 @@
     <string name="menu_favorite">我的最愛</string>
     <string name="menu_preview">預覽</string>
     <string name="menu_share">分享</string>
+    <string name="common_loading">正在載入…</string>
+
+
     <string name="search_in_category">在 %1$s 中搜尋</string>
     <string name="search_in_all">搜尋所有的筆記</string>
 
     <string name="change_category_title">選一個分類</string>
 
+    <!-- UsersAndGroupsSearchProvider -->
+    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
+    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
+
+    <!-- NoteShareActivity -->
+    <string name="note_share_activity_activity_icon_content_description">note activity icon</string>
+    <string name="note_share_activity_share_icon_content_description">note share icon</string>
+    <string name="note_share_activity_external_icon_content_description">note share external icon</string>
+    <string name="note_share_activity_copy_icon_content_description">note share copy icon</string>
+    <string name="note_share_activity_more_icon_content_description">note share more icon</string>
+    <string name="note_share_activity_icon_content_description">note share icon</string>
+    <string name="note_share_activity_user_icon_content_description">note share user icon</string>
+    <string name="note_share_activity_contact_icon_content_description">note share contact icon</string>
     <string name="note_share_activity_shared_with_you">由 %1$s 與您分享</string>
+    <string name="note_share_activity_share_note">分享備註</string>
+    <string name="note_share_activity_search_text">名稱、聯邦雲端 ID 或電子郵件地址……</string>
+    <string name="note_share_activity_share_link">分享連結</string>
+    <string name="note_share_activity_resharing_not_allowed">政策或權限阻止了轉分享</string>
+    <string name="note_share_activity_could_not_retrieve_url">無法擷取 URL</string>
+    <string name="note_share_activity_subject_shared_with_you">「%1$s」已經和您分享</string>
+    <string name="note_share_activity_contact_no_permission">需要有聯絡人取用權。</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">您無權建立公開分享</string>
+
+    <string name="note_share_created">已建立分享</string>
+    <string name="note_share_activity_cannot_created">您無權建立分享。</string>
+
+
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">進階設定</string>
     <string name="note_share_detail_activity_share_via_link_hide_download">隱藏下載</string>
+    <string name="note_share_detail_activity_share_send_note">給接收者的備註</string>
+    <string name="note_share_detail_activity_hint_note">備註</string>
+    <string name="note_share_detail_activity_common_next">下一步</string>
+    <string name="note_share_detail_activity_share_copy_link">分享並複製連結</string>
+    <string name="note_share_detail_activity_common_confirm">確認</string>
+    <string name="note_share_detail_activity_set_note">設定備註</string>
+    <string name="note_share_detail_activity_send_share">傳送分享</string>
+    <string name="note_share_detail_activity_hint_name">名稱</string>
+    <string name="note_share_detail_activity_link_name">連結名稱</string>
+    <string name="note_share_detail_activity_share_link_empty_password">您必須輸入密碼</string>
+    <string name="note_share_detail_activity_hint_password">密碼</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">請選取至少一個要分享的取用權。</string>
     <string name="note_share_detail_activity_label_empty">標籤不可空白</string>
+    <string name="note_share_detail_activity_cancel">取消</string>
+    <string name="note_share_detail_activity_create_share_error">建立分享失敗</string>
+
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">請輸入密碼（選擇性）</string>
+    <string name="share_password_dialog_fragment_skip">跳過</string>
+
+    <string name="share_link_password_title">請輸入密碼</string>
+    <string name="common_ok">確定</string>
+    <string name="common_delete">刪除</string>
+    <string name="write_email">傳送電子郵件</string>
+    <string name="no_browser_available">沒有應用程式可以處理連結</string>
+    <string name="no_email_app_available">沒有應用程式可處理郵件地址</string>
+    <string name="no_actions">沒有此使用者可用的動作</string>
+
+    <string name="failed_the_remove_share">移除分享失敗</string>
+    <string name="email_pick_failed">挑選電子郵件地址失敗。</string>
     <string name="failed_update_ui">更新使用者介面失敗</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">沒有應用程式可選取聯絡人</string>
+    <string name="activity_chooser_title">傳送連結至…</string>
+
+    <string name="activity_chooser_send_file_title">傳送</string>
+    <string name="share_internal_link_to_folder_text">內部分享連結僅對有權存取這個資料夾的使用者有效</string>
+    <string name="share_internal_link_to_file_text">內部分享連結僅對有權存取這個檔案的使用者有效</string>
+    <string name="share_internal_link">分享內部連結</string>
+    <string name="delete_link">刪除連結</string>
+    <string name="share_settings">設定</string>
     <string name="share_send_new_email">傳送新電子郵件</string>
+    <string name="share_dialog_title">分享</string>
+    <string name="share_file">分享 %1$s</string>
+    <string name="share_expiration_date_label">到期 %1$s</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_no_expiration_date_label">設定到期日</string>
+    <string name="share_via_link_section_title">分享連結</string>
+    <string name="share_via_link_send_link_label">傳送連結</string>
     <string name="share_password_title">受密碼保護</string>
+    <string name="share_no_password_title">設定密碼</string>
+    <string name="share_with_title">分享給…</string>
+    <string name="share_via_link_unset_password">取消設定</string>
+    <string name="add_another_public_share_link">新增其他連結</string>
+    <string name="add_new_public_share">新增公開分享連結</string>
+    <string name="public_share_name">新名稱</string>
+    <string name="share_link_with_label">分享連結 (%1$s)</string>
+    <string name="share_link">分享連結</string>
+    <string name="allow_resharing">允許轉發分享</string>
+    <string name="link_share_view_only">僅供檢視</string>
+    <string name="link_share_editing">編輯</string>
+    <string name="link_share_allow_upload_and_editing">允許上傳及編輯</string>
+    <string name="link_share_file_drop">檔案投遞（僅供上傳）</string>
+    <string name="could_not_retrieve_shares">無法擷取分享</string>
+    <string name="share_permission_view_only">僅供檢視</string>
+    <string name="share_permission_can_edit">可以編輯</string>
+    <string name="share_permission_file_drop">檔案投遞</string>
+    <string name="share_permission_secure_file_drop">安全檔案投遞</string>
+    <string name="share_permissions">分享權限</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="other">剩 %1$d 個下載</item>
+    </plurals>
     <string name="username">使用者名稱</string>
     <string name="share_group_clarification">%1$s（群組）</string>
+    <string name="share_remote_clarification">%1$s（遠端）</string>
+    <string name="share_room_clarification">%1$s（對話）</string>
     <string name="share_known_remote_on_clarification">在 %1$s</string>
+    <string name="remote">（遠端）</string>
+
     <string name="copy_link">複製連結</string>
+    <string name="share">分享</string>
+    <string name="clipboard_text_copied">已複製連結</string>
+    <string name="clipboard_no_text_to_copy">沒有收到要複製到剪貼簿的文字</string>
+    <string name="clipboard_unexpected_error">複製到剪貼簿時發生預期外的錯誤</string>
+    <string name="clipboard_label">文字已從 %1$s 複製</string>
+
     <string name="listview_updated_today">今日</string>
     <string name="listview_updated_yesterday">昨日</string>
     <string name="listview_updated_this_week">這星期</string>

@@ -32,18 +32,113 @@
     <string name="menu_favorite">Favorita</string>
     <string name="menu_preview">Prever</string>
     <string name="menu_share">Compartilhar</string>
+    <string name="common_loading">Carregando…</string>
+
+
     <string name="search_in_category">Pesquisar em %1$s</string>
     <string name="search_in_all">Pesquisar todas as notas</string>
 
     <string name="change_category_title">Escolha uma categoria</string>
 
+    <string name="note_share_activity_shared_with_you">Compartilhado com você por %1$s</string>
+    <string name="note_share_activity_share_note">Compartilhar nota</string>
+    <string name="note_share_activity_search_text">Nome, Federated Cloud ID ou endereço de e-mail…</string>
+    <string name="note_share_activity_share_link">Compartilhar link</string>
+    <string name="note_share_activity_resharing_not_allowed">Política ou permissões impedem o compartilhamento</string>
+    <string name="note_share_activity_could_not_retrieve_url">Não foi possível recuperar a URL</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" foi compartilhado com você</string>
+    <string name="note_share_activity_contact_no_permission">É necessária a permissão de contato.</string>
+    <string name="note_share_created">Compartilhamento criado</string>
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">Configurações Avançadas </string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Ocultar download</string>
+    <string name="note_share_detail_activity_share_send_note">Anotação ao destinatário</string>
+    <string name="note_share_detail_activity_hint_note">Nota</string>
+    <string name="note_share_detail_activity_common_next">Próxima</string>
+    <string name="note_share_detail_activity_share_copy_link">Compartilhar e Copiar Link</string>
+    <string name="note_share_detail_activity_common_confirm">Confirmar</string>
+    <string name="note_share_detail_activity_set_note">Definir Nota </string>
+    <string name="note_share_detail_activity_send_share">Enviar Compartilhamento </string>
+    <string name="note_share_detail_activity_hint_name">Nome</string>
+    <string name="note_share_detail_activity_link_name">Nome do link </string>
+    <string name="note_share_detail_activity_share_link_empty_password">Você deve digitar uma senha</string>
+    <string name="note_share_detail_activity_hint_password">Senha</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Selecione ao menos uma permissão para compartilhar.</string>
+    <string name="note_share_detail_activity_label_empty">O rótulo não pode estar vazio</string>
+    <string name="note_share_detail_activity_cancel">Cancelar</string>
+    <string name="note_share_detail_activity_create_share_error">Falha ao criar um compartilhamento</string>
+
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Digite uma senha opcional</string>
+    <string name="share_password_dialog_fragment_skip">Pular</string>
+
+    <string name="share_link_password_title">Insira uma senha </string>
+    <string name="common_ok">OK</string>
+    <string name="common_delete">Excluir</string>
+    <string name="write_email">Enviar e-mail</string>
+    <string name="no_browser_available">Nenhum aplicativo disponível para lidar com links</string>
+    <string name="no_email_app_available">Nenhum aplicativo disponível para lidar com endereço de e-mail </string>
+    <string name="no_actions">Nenhuma ação para este usuário </string>
+
+    <string name="failed_the_remove_share">Falha ao remover compartilhamento</string>
+    <string name="email_pick_failed">Falha ao escolher o endereço de e-mail.</string>
     <string name="failed_update_ui">Falha ao atualizar a interface gráfica</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Nenhum aplicativo disponível para selecionar contatos</string>
+    <string name="activity_chooser_title">Enviar link para…</string>
+
+    <string name="activity_chooser_send_file_title">Enviar</string>
+    <string name="share_internal_link_to_folder_text">O link de compartilhamento interno só funciona para usuários com acesso a esta pasta</string>
+    <string name="share_internal_link_to_file_text">O link de compartilhamento interno só funciona para usuários com acesso a este arquivo</string>
+    <string name="share_internal_link">Compartilhar link interno</string>
+    <string name="delete_link">Excluir link</string>
+    <string name="share_settings">Configurações</string>
+    <string name="share_send_new_email">Enviar novo e-mail</string>
+    <string name="share_dialog_title">Compartilhamento</string>
+    <string name="share_file">Compartilhar %1$s</string>
+    <string name="share_expiration_date_label">Expira em %1$s</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_no_expiration_date_label">Definir data de expiração</string>
+    <string name="share_via_link_section_title">Compartilhar link</string>
+    <string name="share_via_link_send_link_label">Enviar link</string>
+    <string name="share_password_title">Protegido por senha</string>
+    <string name="share_no_password_title">Definir senha</string>
+    <string name="share_with_title">Compartilhar com…</string>
+    <string name="share_via_link_unset_password">Indefinir</string>
+    <string name="add_another_public_share_link">Adicionar outro link</string>
+    <string name="add_new_public_share">Adicionar novo link de compartilhamento público</string>
+    <string name="public_share_name">Novo nome</string>
+    <string name="share_link_with_label">Compartilhar link (%1$s)</string>
+    <string name="share_link">Compartilhar link</string>
+    <string name="allow_resharing">Permitir recompartilhamento</string>
+    <string name="link_share_view_only">Somente visualização </string>
+    <string name="link_share_editing">Editando</string>
+    <string name="link_share_allow_upload_and_editing">Permitir uploads e edição</string>
+    <string name="link_share_file_drop">Depósito de arquivos (somente uploads)</string>
+    <string name="could_not_retrieve_shares">Não foi possível recuperar os compartilhamentos</string>
+    <string name="share_permission_view_only">Somente visualização </string>
+    <string name="share_permission_can_edit">Pode editar</string>
+    <string name="share_permission_file_drop">Depósito de arquivos</string>
+    <string name="share_permission_secure_file_drop">Depósito de arquivos seguro</string>
+    <string name="share_permissions">Permissões de compartilhamento </string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">%1$d download restante</item>
+        <item quantity="many">%1$d downloads restantes</item>
+        <item quantity="other">%1$d downloads restantes</item>
+    </plurals>
     <string name="username">Nome de usuário</string>
     <string name="share_group_clarification">%1$s (grupo)</string>
+    <string name="share_remote_clarification">%1$s (remoto)</string>
+    <string name="share_room_clarification">%1$s (conversa)</string>
     <string name="share_known_remote_on_clarification">em %1$s</string>
+    <string name="remote">(remoto)</string>
+
     <string name="copy_link">Copiar link</string>
+    <string name="share">Compartilhamento</string>
+    <string name="clipboard_text_copied">Link copiado</string>
+    <string name="clipboard_no_text_to_copy">Nenhum texto foi recebido para copiar para a área de transferência</string>
+    <string name="clipboard_unexpected_error">Erro inesperado ao copiar para a área de transferência</string>
+    <string name="clipboard_label">Texto copiado de %1$s</string>
+
     <string name="listview_updated_today">Hoje</string>
     <string name="listview_updated_yesterday">Ontem</string>
     <string name="listview_updated_this_week">Esta semana</string>
@@ -64,7 +159,7 @@
     <string name="settings_gridview">Visualização em grade</string>
     <string name="settings_enable_direct_edit">Edição Direta</string>
     <string name="settings_enable_direct_edit_summary">Quando desativado, o editor avançado ficará oculto.</string>
-    <string name="settings_keep_screen_on">Mantenha a tela ligada</string>
+    <string name="settings_keep_screen_on">Manter tela ligada</string>
     <string name="settings_keep_screen_on_summary">Ao visualizar ou editar uma nota</string>
 
     <string name="error_sync">A sincronização falhou: %1$s</string>
@@ -319,8 +414,8 @@
     <string name="settings_file_suffix_description">Extensão para novas notas no seu Nextcloud</string>
     <string name="settings_file_suffix_success">Novo sufixo: %1$s</string>
     <string name="http_status_code">Código de Status HTTP: %1$d</string>
-    <string name="progress_import_indeterminate">Importando notas… </string>
-    <string name="progress_import">Importando notas %1$d de %2$d…</string>
+    <string name="progress_import_indeterminate">Importando notas…</string>
+    <string name="progress_import">Importando nota %1$d de %2$d…</string>
     <string name="account_imported">Conta importada.</string>
     <string name="direct_editing_error">Erro ao carregar edição avançada</string>
     <string name="switch_to_plain_editing">Mudar para edição simples</string>

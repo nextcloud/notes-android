@@ -32,10 +32,95 @@
     <string name="menu_favorite">Αγαπημένο</string>
     <string name="menu_preview">Προεπισκόπηση</string>
     <string name="menu_share">Διαμοιρασμός</string>
+    <string name="common_loading">Γίνεται φόρτωση…</string>
+
+
     <string name="search_in_category">Αναζήτηση σε %1$s</string>
     <string name="search_in_all">Αναζήτηση όλων των σημειώσεων</string>
 
     <string name="change_category_title">Επιλογή κατηγορίας</string>
+
+    <string name="note_share_activity_shared_with_you">Διαμοιράστηκε με εσάς από τον %1$s</string>
+    <string name="note_share_activity_share_note">Κοινή χρήση σημείωσης</string>
+    <string name="note_share_activity_share_link">Διαμοιρασμός συνδέσμου</string>
+    <string name="note_share_activity_could_not_retrieve_url">Αδυναμία ανάκτησης URL</string>
+    <string name="note_share_activity_subject_shared_with_you">Ο \"%1$s\" διαμοιράστηκε μαζί σας</string>
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">Ρυθμίσεις για Προχωρημένους</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Απόκρυψη λήψης</string>
+    <string name="note_share_detail_activity_share_send_note">Σημείωση προς τον παραλήπτη</string>
+    <string name="note_share_detail_activity_hint_note">Σημείωση</string>
+    <string name="note_share_detail_activity_common_next">Επόμενο</string>
+    <string name="note_share_detail_activity_common_confirm">Επιβεβαίωση</string>
+    <string name="note_share_detail_activity_set_note">Ορισμός Σημείωσης</string>
+    <string name="note_share_detail_activity_send_share">Αποστολή/Κοινή χρήση</string>
+    <string name="note_share_detail_activity_hint_name">Όνομα</string>
+    <string name="note_share_detail_activity_link_name">Όνομα Συνδέσμου</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Πρέπει να εισάγετε ένα συνθηματικό</string>
+    <string name="note_share_detail_activity_hint_password">Συνθηματικό</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Παρακαλούμε επιλέξτε τουλάχιστον μία άδεια για κοινή χρήση.</string>
+    <string name="note_share_detail_activity_label_empty">Η ετικέτα δεν μπορεί να είναι κενή</string>
+    <string name="note_share_detail_activity_cancel">Ακύρωση</string>
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Εισάγετε προαιρετικό συνθηματικό</string>
+    <string name="share_password_dialog_fragment_skip">Παράλειψη</string>
+
+    <string name="share_link_password_title">Εισάγετε συνθηματικό</string>
+    <string name="common_ok">ΟΚ</string>
+    <string name="common_delete">Διαγραφή</string>
+    <string name="write_email">Αποστολή email</string>
+    <string name="no_browser_available">Δεν υπάρχει διαθέσιμη εφαρμογή για χειρισμό συνδέσμων</string>
+    <string name="no_email_app_available">Δεν υπάρχει διαθέσιμη εφαρμογή για χειρισμό διεθύνσεων email</string>
+    <string name="no_actions">Δεν υπάρχουν ενέργειες για αυτόν τον χρήστη</string>
+
+    <string name="failed_update_ui">Αποτυχία ενημέρωσης του UI</string>
+    <string name="activity_chooser_title">Αποστολή συνδέσμου σε…</string>
+
+    <string name="activity_chooser_send_file_title">Αποστολή</string>
+    <string name="share_internal_link_to_folder_text">Οι εσωτερικοί κοινόχρηστοι σύνδεσμοι λειτουργούν μόνο για χρήστες με πρόσβαση στο φάκελο</string>
+    <string name="share_internal_link_to_file_text">Οι εσωτερικοί κοινόχρηστοι σύνδεσμοι λειτουργούν μόνο για χρήστες με πρόσβαση στο αρχείο</string>
+    <string name="share_internal_link">Κοινή χρήση εσωτερικού συνδέσμου</string>
+    <string name="delete_link">Διαγραφή Συνδέσμου</string>
+    <string name="share_settings">Ρυθμίσεις</string>
+    <string name="share_send_new_email">Αποστολή νέου email</string>
+    <string name="share_dialog_title">Διαμοιρασμός</string>
+    <string name="share_file">Διαμοιρασμός %1$s</string>
+    <string name="share_expiration_date_label">Λήγει στις %1$s</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Ορισμός ημερομηνίας λήξης</string>
+    <string name="share_via_link_section_title">Διαμοιρασμός συνδέσμου</string>
+    <string name="share_via_link_send_link_label">Αποστολή συνδέσμου</string>
+    <string name="share_password_title">Προστασία με συνθηματικό</string>
+    <string name="share_no_password_title">Ορισμός συνθηματικού</string>
+    <string name="share_with_title">Διαμοιρασμός με…</string>
+    <string name="share_via_link_unset_password">Απενεργοποίηση</string>
+    <string name="add_another_public_share_link">Προσθήκη άλλου συνδέσμου</string>
+    <string name="add_new_public_share">Προσθήκη νέου δημόσιου κοινόχρηστου συνδέσμου</string>
+    <string name="public_share_name">Νέο όνομα</string>
+    <string name="share_link_with_label">Κοινή χρήση συνδέσμου (%1$s)</string>
+    <string name="share_link">Διαμοιρασμός συνδέσμου</string>
+    <string name="allow_resharing">Επιτρέψτε τον επαναδιαμοιρασμό</string>
+    <string name="link_share_view_only">Μόνο προβολή</string>
+    <string name="link_share_allow_upload_and_editing">Επέτρεψε την μεταφόρτωση και επεξεργασία</string>
+    <string name="link_share_file_drop">Απόθεση αρχείου (μόνο μεταφόρτωση)</string>
+    <string name="could_not_retrieve_shares">Αδυναμία ανάκτησης κοινόχρηστων</string>
+    <string name="share_permission_view_only">Μόνο προβολή</string>
+    <string name="share_permission_can_edit">Μπορεί να επεξεργαστεί</string>
+    <string name="share_permission_file_drop">Απόθεση αρχείου</string>
+    <string name="share_permissions">Δικαιώματα κοινής χρήσης</string>
+    <string name="username">Όνομα χρήστη</string>
+    <string name="share_group_clarification">%1$s (ομάδα)</string>
+    <string name="share_remote_clarification">%1$s (απομακρυσμένα)</string>
+    <string name="share_room_clarification">%1$s (συνομιλιία)</string>
+    <string name="share_known_remote_on_clarification">Ανοιχτό %1$s</string>
+    <string name="remote">(εξ αποστάσεως)</string>
+
+    <string name="copy_link">Αντιγραφή συνδέσμου</string>
+    <string name="share">Διαμοιρασμός</string>
+    <string name="clipboard_text_copied">Ο σύνδεσμος αντιγράφηκε</string>
+    <string name="clipboard_no_text_to_copy">Δεν ελήφθη κείμενο για αντιγραφή στο πρόχειρο</string>
+    <string name="clipboard_unexpected_error">Μη αναμενόμενο σφάλμα κατά την αντιγραφή στο πρόχειρο</string>
+    <string name="clipboard_label">Κείμενο που αντιγράφηκε από τον %1$s</string>
 
     <string name="listview_updated_today">Σήμερα</string>
     <string name="listview_updated_yesterday">Χθες</string>

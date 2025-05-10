@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Nextcloud Notes - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
+<resources>
+    <string name="app_name">פתקים</string>
+    <string name="app_name_long">פתקים של Nextcloud</string>
+    <string name="label_all_notes">כל הפתקים</string>
+    <string name="label_favorites">מועדפים</string>
+    <string name="action_create">פתק חדש</string>
+    <string name="welcome_text">ברוך בואך אל %1$s</string>
+    <string name="action_settings">הגדרות</string>
+    <string name="action_trashbin">פתקים שנמחקו</string>
+    <string name="action_search">חיפוש</string>
+    <string name="action_sorting_method">שיטת מיון</string>
+    <string name="simple_cancel">ביטול</string>
+    <string name="simple_switch">החלפה</string>
+    <string name="simple_edit">עריכה</string>
+    <string name="simple_remove">הסרה</string>
+    <string name="action_edit_save">שמירה</string>
+    <string name="simple_about">על אודות</string>
+    <string name="simple_link">קישור</string>
+    <string name="action_note_deleted">%1$s נמחק</string>
+    <string name="action_note_restored">%1$s שוחזר</string>
+    <string name="action_undo">ביטול</string>
+    <string name="action_uncategorized">ללא קטגוריה</string>
+    <string name="menu_delete">מחיקה</string>
+    <string name="menu_change_category">קטגוריה</string>
+    <string name="menu_favorite">סימון כמועדף</string>
+    <string name="menu_preview">תצוגה מקדימה</string>
+    <string name="menu_share">שיתוף</string>
+    <string name="common_loading">בטעינה…</string>
+
+
+    <string name="search_in_category">חיפוש תחת %1$s</string>
+    <string name="search_in_all">חיפוש בכל הפתקים</string>
+
+    <string name="change_category_title">בחירת קטגוריה</string>
+
+    <string name="note_share_activity_shared_with_you">שותף אתך על ידי %1$s</string>
+    <string name="note_share_activity_share_note">פתק שיתוף</string>
+    <string name="note_share_activity_share_link">שיתוף קישור</string>
+    <string name="note_share_activity_could_not_retrieve_url">לא ניתן לקבל כתובת</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" שותף אתך</string>
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">הגדרות מתקדמות</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">הסתרת הורדה</string>
+    <string name="note_share_detail_activity_share_send_note">מסר לנמען</string>
+    <string name="note_share_detail_activity_hint_note">פתק</string>
+    <string name="note_share_detail_activity_common_confirm">אישור</string>
+    <string name="note_share_detail_activity_hint_name">שם</string>
+    <string name="note_share_detail_activity_share_link_empty_password">יש להכניס סיסמא</string>
+    <string name="note_share_detail_activity_hint_password">ססמה</string>
+    <string name="note_share_detail_activity_cancel">ביטול</string>
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">ניתן להקליד ססמה</string>
+    <string name="share_password_dialog_fragment_skip">דלג</string>
+
+    <string name="share_link_password_title">הכנסת סיסמא</string>
+    <string name="common_ok">בסדר</string>
+    <string name="common_delete">מחיקה</string>
+    <string name="write_email">שליחת דואר אלקטרוני</string>
+    <string name="no_browser_available">אין יישומון שיכול לטפל בקישורים</string>
+    <string name="activity_chooser_title">שליחת קישור אל…</string>
+
+    <string name="activity_chooser_send_file_title">שליחה</string>
+    <string name="share_internal_link_to_folder_text">קישורי שיתוף פנימיים עובדים רק עבור משתמש עם גישה לתיקייה הזו</string>
+    <string name="share_internal_link_to_file_text">קישורי שיתוף פנימיים עובדים רק עבור משתמש עם גישה לקובץ הזה</string>
+    <string name="share_internal_link">שיתוף קישור פנימי</string>
+    <string name="delete_link">מחק קישור</string>
+    <string name="share_settings">הגדרות</string>
+    <string name="share_dialog_title">שיתוף</string>
+    <string name="share_file">שיתוף %1$s</string>
+    <string name="share_expiration_date_label">תפוגה ב־%1$s</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">הגדרת תאריך תפוגה</string>
+    <string name="share_via_link_section_title">שיתוף קישור</string>
+    <string name="share_via_link_send_link_label">שליחת קישור</string>
+    <string name="share_password_title">מוגן בססמה</string>
+    <string name="share_with_title">שיתף עם…</string>
+    <string name="share_via_link_unset_password">ביטול הגדרה</string>
+    <string name="add_another_public_share_link">הוספת קישור נוסף</string>
+    <string name="add_new_public_share">הוסף קישור שיתוף ציבורי חדש</string>
+    <string name="share_link_with_label">שתף קישור (%1$s)</string>
+    <string name="share_link">שיתוף קישור</string>
+    <string name="allow_resharing">לאפשר שיתוף מחדש</string>
+    <string name="link_share_view_only">לצפיה בלבד</string>
+    <string name="link_share_allow_upload_and_editing">לאפשר העלאה ועריכה</string>
+    <string name="link_share_file_drop">השלכת קבצים (העלאה בלבד)</string>
+    <string name="could_not_retrieve_shares">לא ניתן למשוך את השיתופים</string>
+    <string name="share_permission_view_only">לצפיה בלבד</string>
+    <string name="share_permission_can_edit">ניתן לערוך</string>
+    <string name="username">שם משתמש</string>
+    <string name="share_group_clarification">%1$s (קבוצה)</string>
+    <string name="share_remote_clarification">%1$s (נשלט מרחוק)</string>
+    <string name="share_room_clarification">%1$s (דיון)</string>
+    <string name="share_known_remote_on_clarification">בתאריך %1$s</string>
+    <string name="copy_link">העתקת קישור</string>
+    <string name="share">שתף</string>
+    <string name="clipboard_text_copied">הקישור הועתק</string>
+    <string name="clipboard_no_text_to_copy">לא התקבל טקסט להעתקה ללוח הגזירים</string>
+    <string name="clipboard_unexpected_error">אירעה שגיאה בזמן העתקה ללוח</string>
+    <string name="clipboard_label">טקסט הועתק מ- %1$s</string>
+
+    <string name="listview_updated_today">היום</string>
+    <string name="listview_updated_yesterday">אתמול</string>
+    <string name="listview_updated_this_week">השבוע</string>
+    <string name="listview_updated_last_week">שבוע שעבר</string>
+    <string name="listview_updated_this_month">החודש</string>
+    <string name="listview_updated_last_month">חודש שעבר</string>
+
+    <string name="settings_note_mode">מצב תצוגת פתקים</string>
+    <string name="settings_theme_title">ערכת עיצוב</string>
+    <string name="settings_font_title">גופן ברוחב אחיד</string>
+    <string name="settings_font_size">גודל גופן</string>
+    <string name="settings_wifi_only">סנכרון רק דרך רשת אלחוטית</string>
+    <string name="settings_lock_summary">פרטי זיהוי להתקן</string>
+    <string name="settings_background_sync">סנכרון ברקע</string>
+    <string name="settings_gridview">תצוגת רשת</string>
+    <string name="error_sync">הסנכרון נכשל: %1$s</string>
+    <string name="error_synchronization">הסנכרון נכשל</string>
+    <string name="error_no_network">אין חיבור לאינטרנט</string>
+    <string name="error_unknown">אירעה שגיאה בלתי ידועה.</string>
+
+    <string name="about_version_title">גרסה</string>
+    <string name="about_version">אתה משתמש כרגע ב%1$s</string>
+    <string name="about_maintainer_title">מתחזק</string>
+    <string name="about_developers_title">מפתחים</string>
+    <string name="about_translators_title">מתרגמים</string>
+    <string name="about_translators_transifex">קהילת nextcloud ב %1$s</string>
+    <string name="about_testers_title">בודקים</string>
+    <string name="about_source_title">קוד מקור</string>
+    <string name="about_source">הפרוייקט מתארח ב GitHub %1$s</string>
+    <string name="about_issues_title">תקלו</string>
+    <string name="about_issues">ניתן לדווח על תקלות, להציע שיפורים ותכונות במערכת מעקב התקלות שלנו שב־GitHub: %1$s</string>
+    <string name="about_translate_title">תרגום</string>
+    <string name="about_translate">ניתן להצטרף לצוות של Nextcloud ב־Transifex ולסייע לנו לתרגם את היישומון הזה: %1$s</string>
+    <string name="about_app_license_title">רישיון היישומון</string>
+    <string name="about_app_license">היישומון מוגן ברישיון הציבורי הכללי של GNU גרסה 3 ומעלה.</string>
+    <string name="about_app_license_button">הצגת הרישיון</string>
+    <string name="about_icons_disclaimer_title">סמלים</string>
+    <string name="about_icons_disclaimer_app_icon">לסמל המקורי יש לגשת אל %1$s.</string>
+    <string name="about_icons_disclaimer_mdi_icons">כל שאר הסמלים בהם נעשה שימוש ביישומון זה הם %1$s שנוצרו על ידי Google בע״מ ומוגשים תחת הרישוי Apache 2.0.</string>
+    <string name="about_icons_disclaimer_mdi">עיצוב צלמיות </string>
+    <string name="about_credits_tab_title">תודות</string>
+    <string name="about_contribution_tab_title">תרומה</string>
+    <string name="about_license_tab_title">רישיון</string>
+
+    <string name="widget_note_list_title">רשימת פתקים</string>
+    <string name="widget_note_list_placeholder">אין פתקים</string>
+    <string name="widget_single_note_title">פתק בודד</string>
+    <string name="widget_single_note_placeholder_tv">לא נמצא פתק</string>
+    <string name="widget_not_logged_in">נא להיכנס לפתקים לפני השימוש בחלונית הזאת</string>
+    <string name="activity_select_single_note">נא לבחור פתק</string>
+
+    <string name="shortcut_create_long">יצירת פתק חדש</string>
+
+    <string name="pref_value_font_normal">רגיל</string>
+    <string name="pref_value_wifi_and_mobile">עדכון דרך רשת אלחוטית ונתונים סלולריים</string>
+    <string name="pref_value_lock">Password protection</string>
+
+    <string name="simple_error">שגיאה</string>
+    <string name="simple_close">סגור</string>
+    <string name="simple_copy">העתק</string>
+    <string name="simple_exception">חריגה</string>
+    <string name="pin_to_homescreen">הוסף למסך הבית</string>
+    <string name="note_has_been_deleted">פתק זה נמחק</string>
+    <string name="add_account">הוספת חשבון</string>
+
+    <string name="category_music">מוזיקה</string>
+    <string name="category_movies">סרטים</string>
+    <string name="category_movie">סרט</string>
+    <string name="category_work">עבודה</string>
+    <string name="category_tasks">משימות</string>
+    <string name="category_recipe">מתכון</string>
+    <string name="category_restaurant">מסעדה</string>
+    <string name="category_password">ססמה</string>
+    <string name="category_passwords">ססמאות</string>
+    <string name="category_game">משחק</string>
+    <string name="category_games">משחקים</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">נגן</string>
+    <!-- Like a gift -->
+    <string name="category_present">מתנה</string>
+    <string name="account_already_imported">החשבון הזה כבר עבר ייבוא</string>
+    <string name="no_notes_yet">אין פתקים עדיין</string>
+    <string name="no_notes_yet_description">לחיצה + כפתור כדי ליצור פתק חדש</string>
+    <string name="simple_more">עוד</string>
+    <string name="simple_move">העברה</string>
+    <string name="category_readonly">קריאה בלבד</string>
+    <string name="no_category">אין קטגוריה</string>
+    <string name="add_category">הוספת %1$s</string>
+    <string name="simple_checkbox">תיבת סימון</string>
+    <string name="unlock_notes">שחרור פתקים</string>
+    <string name="error_dialog_title">שוד ושבר - מה עכשיו? 🙁</string>
+    <string name="error_dialog_tip_files_outdated">נראה כי יישומון ה־Nextcloud שלך אינו עדכני. נא לבקר בחנות Play או ב־F-Droid כדי לעדכן לגרסה האחרונה.</string>
+    <string name="error_dialog_tip_files_force_stop">כנראה שמשהו השתבש ביישומון ה־Nextcloud שלך. נא לנסות לכפות עצירה על שניהם, יישומון ה־Nextcloud ויישומון הפתקים של Nextcloud.</string>
+    <string name="error_dialog_tip_files_delete_storage">אם כפיית עצירה לא עוזרת, ניתן לנסות לרוקן את האחסון של שני היישומונים.</string>
+    <string name="error_dialog_timeout_instance">לא חזרה תגובה מהשרת שלך בזמן קצוב. נא לוודא שהעותק פועל כראוי.</string>
+    <string name="error_dialog_check_maintenance">נא לבדוק שעותק ה־Nextcloud שלך אינו במצב תחזוקה כרגע.</string>
+    <string name="error_dialog_we_need_info">אנו זקוקים לפירוט הטכני הבא כדי לסייע לך:</string>
+    <string name="shared_text_empty">הטקסט ששותף היה ריק</string>
+    <string name="append_to_note">הוספה לסוף הפתק</string>
+    <string name="menu_edit_title">עריכת כותרת</string>
+    <string name="simple_security">אבטחה</string>
+    <string name="simple_synchronization">סנכרון</string>
+    <string name="manage_accounts">ניהול חשבונות</string>
+    <string name="action_formatting_help">עיצוב</string>
+
+
+    <string name="noteMode_remember_last">שמירת הבחירה האחרונה שלי</string>
+
+    <string-array name="fontSize_entries">
+        <item>קטן</item>
+        <item>בינוני</item>
+        <item>גדול</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>בהירה</item>
+        <item>כהה</item>
+        <item>ברירת מחדל של המערכת</item>
+    </string-array>
+
+    <plurals name="ab_selected">
+        <item quantity="one">נבחר %d</item>
+        <item quantity="two">נבחרו %d</item>
+        <item quantity="other">נבחרו %d</item>
+    </plurals>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">עיצוב מבוסס הקשר</string>
+    <string name="formatting_help_text_title">טקסט</string>
+    <string name="formatting_help_lists_title">רשימות</string>
+    <string name="formatting_help_lists_body_1">לפעמים יעניין אותך להוסיף רשימות ממוספרות:</string>
+    <string name="formatting_help_lists_body_2">אחת</string>
+    <string name="formatting_help_lists_body_3">שתיים</string>
+    <string name="formatting_help_lists_body_4">שלוש</string>
+    <string name="formatting_help_lists_body_5">לפעמים יעניין אותך דווקא תבליטים:</string>
+    <string name="formatting_help_lists_body_6">התחלת שורה במינוס</string>
+    <string name="formatting_help_lists_body_8">ככה</string>
+    <string name="formatting_help_lists_body_9">וככה</string>
+
+    <string name="formatting_help_checkboxes_title">תיבות סימון</string>
+    <string name="formatting_help_checkboxes_body_1">כדי ליצור תיבת סימון, יש להשתמש ברשימה עם סוגריים מרובעים אחריה</string>
+    <string name="formatting_help_checkboxes_body_2">פריט 1</string>
+    <string name="formatting_help_checkboxes_body_3">פריט 2</string>
+
+    <string name="formatting_help_structured_documents_title">מסמכים עם מבנה פנימ</string>
+    <string name="formatting_help_structured_documents_body_2">זו כותרת מסדר שלישי</string>
+    <string name="formatting_help_structured_documents_body_3">ניתן להשתמש ב־%1$s עד %2$s שש לגדלי כותרות שונים.</string>
+    <string name="formatting_help_structured_documents_body_4">כדי לצטט מישהו, יש להשתמש בתו %1$s לפני השורה:</string>
+    <string name="formatting_help_structured_documents_body_5">דמיון חשוב יותר מידע. ידע הוא מוגבל. דמיון חובק את העולם.</string>
+    <string name="formatting_help_structured_documents_body_6">- אלברט אינשטיין</string>
+
+    <string name="formatting_help_code_title">קוד</string>
+    <string name="formatting_help_tables_title">טבלאות</string>
+    <string name="formatting_help_images_title">תמונות</string>
+    <string name="simple_other">אחר</string>
+    <string name="error_action_open_deck_info">פתיחת פרטי יישומון</string>
+    <string name="error_action_open_network">הגדרות רשת</string>
+    <string name="error_action_update_files_app">עדכון</string>
+    <string name="choose_account">נא לבחור חשבון</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">על המכשיר שלך להיות מחובר לאינטרנט כדי שיתאפשר לך להוסיף חשבון.</string>
+    <string name="simple_next">הבא</string>
+    <string name="simple_prev">הקודם</string>
+    <string name="action_back">חזרה</string>
+    </resources>

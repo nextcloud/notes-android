@@ -32,15 +32,105 @@
     <string name="menu_favorite">お気に入り</string>
     <string name="menu_preview">プレビュー</string>
     <string name="menu_share">共有</string>
+    <string name="common_loading">読み込み中…</string>
+
+
     <string name="search_in_category">%1$sを検索</string>
     <string name="search_in_all">全てのノートを検索</string>
 
     <string name="change_category_title">カテゴリを選択</string>
 
+    <string name="note_share_activity_shared_with_you">%1$sと共有中</string>
+    <string name="note_share_activity_share_note">共有ノート</string>
+    <string name="note_share_activity_search_text">ユーザ名、クラウド統合ID、またはEメールアドレス ...</string>
+    <string name="note_share_activity_share_link">共有リンク</string>
+    <string name="note_share_activity_resharing_not_allowed">ポリシーまたは権限により再共有ができません</string>
+    <string name="note_share_activity_could_not_retrieve_url">URL を取得できませんでした</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" があなたに共有されました</string>
+    <string name="note_share_activity_contact_no_permission">連絡先の権限が必要です。</string>
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">詳細設定</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">ダウンロードを隠す</string>
+    <string name="note_share_detail_activity_share_send_note">受取人への注意</string>
+    <string name="note_share_detail_activity_hint_note">ノート</string>
+    <string name="note_share_detail_activity_common_next">次へ</string>
+    <string name="note_share_detail_activity_share_copy_link">リンクをコピーして共有</string>
+    <string name="note_share_detail_activity_common_confirm">承認</string>
+    <string name="note_share_detail_activity_set_note">ノート</string>
+    <string name="note_share_detail_activity_send_share">共有</string>
+    <string name="note_share_detail_activity_hint_name">名前</string>
+    <string name="note_share_detail_activity_link_name">リンク名</string>
+    <string name="note_share_detail_activity_share_link_empty_password">パスワードを入力しなければなりません</string>
+    <string name="note_share_detail_activity_hint_password">パスワード</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">共有する権限を1つ以上選択してください。</string>
+    <string name="note_share_detail_activity_label_empty">ラベルは空にできません</string>
+    <string name="note_share_detail_activity_cancel">キャンセル</string>
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">オプションのパスワードを入力</string>
+    <string name="share_link_password_title">パスワードを入力</string>
+    <string name="common_ok">OK</string>
+    <string name="common_delete">削除</string>
+    <string name="write_email">メールを送信</string>
+    <string name="no_browser_available">リンクを処理するアプリがありません</string>
+    <string name="no_email_app_available">メールアドレスの利用可能なアプリはありません</string>
+    <string name="no_actions">このユーザーに対するアクションはありません</string>
+
+    <string name="email_pick_failed">メールアドレスの選択に失敗しました。</string>
     <string name="failed_update_ui">UIの更新に失敗しました</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">連絡先を選択するためのアプリが利用できません</string>
+    <string name="activity_chooser_title">リンク送信…</string>
+
+    <string name="activity_chooser_send_file_title">送る</string>
+    <string name="share_internal_link_to_folder_text">内部共有リンクは、このフォルダーにアクセスできるユーザーにのみ機能します。</string>
+    <string name="share_internal_link_to_file_text">内部共有リンクは、このファイルにアクセスできるユーザーにのみ機能します。</string>
+    <string name="share_internal_link">内部リンクを共有</string>
+    <string name="delete_link">リンクを削除</string>
+    <string name="share_settings">設定</string>
+    <string name="share_send_new_email">メールを送信</string>
+    <string name="share_dialog_title">共有</string>
+    <string name="share_file">%1$s を共有</string>
+    <string name="share_expiration_date_label">有効期限%1$s</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_no_expiration_date_label">有効期限を設定</string>
+    <string name="share_via_link_section_title">共有リンク</string>
+    <string name="share_via_link_send_link_label">リンクを送信</string>
+    <string name="share_password_title">パスワード保護</string>
+    <string name="share_no_password_title">パスワード設定</string>
+    <string name="share_with_title">…と共有</string>
+    <string name="share_via_link_unset_password">設定を解除</string>
+    <string name="add_another_public_share_link">別のリンクを追加</string>
+    <string name="add_new_public_share">新規公開共有リンクを追加</string>
+    <string name="public_share_name">新しい名前</string>
+    <string name="share_link_with_label">リンクを共有(%1$s)</string>
+    <string name="share_link">共有リンク</string>
+    <string name="allow_resharing">再共有を許可する</string>
+    <string name="link_share_view_only">閲覧のみ</string>
+    <string name="link_share_editing">編集中</string>
+    <string name="link_share_allow_upload_and_editing">アップロードと編集を許可</string>
+    <string name="link_share_file_drop">ファイルドロップ(アップロードのみ)</string>
+    <string name="could_not_retrieve_shares">共有元を取得できませんでした</string>
+    <string name="share_permission_view_only">閲覧のみ</string>
+    <string name="share_permission_can_edit">編集可能</string>
+    <string name="share_permission_file_drop">ファイルを転送</string>
+    <string name="share_permission_secure_file_drop">セキュアなファイルドロップ</string>
+    <string name="share_permissions">共有権限</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="other">%1$dが未ダウンロード</item>
+    </plurals>
+    <string name="username">ユーザー名</string>
     <string name="share_group_clarification">%1$s (グループ)</string>
+    <string name="share_remote_clarification">%1$s (リモート)</string>
+    <string name="share_room_clarification">%1$s(会話)</string>
+    <string name="share_known_remote_on_clarification">%1$s上の</string>
+    <string name="remote">(リモート)</string>
+
+    <string name="copy_link">リンクをコピー</string>
+    <string name="share">共有</string>
+    <string name="clipboard_text_copied">リンクをコピーしました</string>
+    <string name="clipboard_no_text_to_copy">クリップボードにコピーするテキストを受け取らなかった</string>
+    <string name="clipboard_unexpected_error">クリップボードにテキストをコピーするときにエラーが発生しました。</string>
+    <string name="clipboard_label">%1$s からテキストをコピー</string>
+
     <string name="listview_updated_today">今日</string>
     <string name="listview_updated_yesterday">昨日</string>
     <string name="listview_updated_this_week">今週</string>

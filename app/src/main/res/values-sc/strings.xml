@@ -32,17 +32,78 @@
     <string name="menu_favorite">Preferidu</string>
     <string name="menu_preview">Anteprima</string>
     <string name="menu_share">Cumpartzi</string>
+    <string name="common_loading">Carrighende…</string>
+
+
     <string name="search_in_category">Chirca in %1$s</string>
     <string name="search_in_all">Chirca totu is notas</string>
 
     <string name="change_category_title">Sèbera una categoria</string>
 
+    <string name="note_share_activity_shared_with_you">Cumpartzidu cun te dae %1$s</string>
+    <string name="note_share_activity_share_note">Cumpartzi sa nota</string>
+    <string name="note_share_activity_share_link">Cumpartzi ligòngiu</string>
+    <string name="note_share_activity_could_not_retrieve_url">No at fatu a recuperare s\'URL</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" dd\'ant cumpartzidu cun tegus</string>
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">Cunfiguratzione avantzada</string>
+    <string name="note_share_detail_activity_share_send_note">Notas pro sa persone destinatària</string>
+    <string name="note_share_detail_activity_hint_note">Nota</string>
+    <string name="note_share_detail_activity_common_next">Imbeniente</string>
+    <string name="note_share_detail_activity_common_confirm">Cunfirma</string>
+    <string name="note_share_detail_activity_hint_name">Nùmene</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Depes insertare una crae</string>
+    <string name="note_share_detail_activity_hint_password">Crae</string>
+    <string name="note_share_detail_activity_label_empty">S\'eticheta non podet èssere bòida</string>
+    <string name="note_share_detail_activity_cancel">Annulla</string>
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Inserta una crae optzionale</string>
+    <string name="share_link_password_title">Dìgita una crae noa</string>
+    <string name="common_ok">AB</string>
+    <string name="common_delete">Cantzella</string>
+    <string name="write_email">Imbia messàgiu de posta eletrònica</string>
+    <string name="no_browser_available">Peruna aplicatzione pro gestire ligòngios a disponimentu</string>
     <string name="failed_update_ui">Non s\'est pòdidu agiornare UI</string>
+    <string name="share_internal_link_to_folder_text">Su ligòngiu de cumpartzidura interna funtzionat isceti pro utentes cun atzessu a custa cartella</string>
+    <string name="share_internal_link_to_file_text">Su ligòngiu de cumpartzidura interna funtzionat isceti pro utentes cun atzessu a custu archìviu</string>
+    <string name="share_internal_link">Cumpartzi ligòngiu internu</string>
+    <string name="share_settings">Cunfiguratzione</string>
+    <string name="share_send_new_email">Imbia messàgiu de posta nou</string>
+    <string name="share_dialog_title">Cumpartzende</string>
+    <string name="share_file">Cumpartzi %1$s</string>
+    <string name="share_expiration_date_label">Iscadet %1$s</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_no_expiration_date_label">Cunfigura una data de iscadèntzia</string>
+    <string name="share_via_link_section_title">Cumpartzi ligòngiu</string>
+    <string name="share_via_link_send_link_label">Imbia ligòngiu</string>
+    <string name="share_password_title">Amparadu dae una crae</string>
+    <string name="share_no_password_title">Cunfigura sa crae</string>
+    <string name="share_with_title">Cumpartzi cun...</string>
+    <string name="share_via_link_unset_password">Non cunfiguradu</string>
+    <string name="add_another_public_share_link">Agiunghe un\'àteru ligòngiu</string>
+    <string name="add_new_public_share">Agiunghe ligòngiu de cumpartzidura pùblica nou</string>
+    <string name="public_share_name">Nùmene nou</string>
+    <string name="share_link_with_label">Cumpartzi ligòngiu (%1$s)</string>
+    <string name="share_link">Cumpartzi ligòngiu</string>
+    <string name="allow_resharing">Permite sa re-cumpartzidura</string>
+    <string name="link_share_view_only">Isceti in visualizatzione</string>
+    <string name="link_share_file_drop">Trìsina documentu (isceti pro carrigare)</string>
+    <string name="could_not_retrieve_shares">No at fatu a recuperare is cumpartziduras</string>
+    <string name="share_permission_view_only">Isceti in visualizatzione</string>
+    <string name="share_permission_can_edit">Podet modificare</string>
     <string name="username">Nùmene utente</string>
     <string name="share_group_clarification">%1$s (grupu)</string>
+    <string name="share_remote_clarification">%1$s (remotu)</string>
+    <string name="share_room_clarification">%1$s (tzarrada)</string>
     <string name="share_known_remote_on_clarification">in %1$s</string>
+    <string name="remote">(remotu)</string>
+
+    <string name="share">Cumpartzidura</string>
+    <string name="clipboard_text_copied">Ligòngiu copiadu</string>
+    <string name="clipboard_no_text_to_copy">Testu de copiare in sa punta de billete non retzidu</string>
+    <string name="clipboard_unexpected_error">Errore ispantosu in sa copiadura in sa punta de billete</string>
+    <string name="clipboard_label">Testu copiadu dae %1$s</string>
+
     <string name="listview_updated_today">Oe</string>
     <string name="listview_updated_yesterday">Eris</string>
     <string name="listview_updated_this_week">Custa chida</string>

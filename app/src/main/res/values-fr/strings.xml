@@ -32,14 +32,109 @@
     <string name="menu_favorite">Favoris</string>
     <string name="menu_preview">Aperçu</string>
     <string name="menu_share">Partager</string>
+    <string name="common_loading">Chargement…</string>
+
+
     <string name="search_in_category">Rechercher dans %1$s</string>
     <string name="search_in_all">Rechercher dans toutes les notes</string>
 
     <string name="change_category_title">Sélectionnez une catégorie</string>
 
+    <string name="note_share_activity_shared_with_you">Partagé avec vous par %1$s</string>
+    <string name="note_share_activity_share_note">Partager la note</string>
+    <string name="note_share_activity_search_text">Nom, identifiant de Cloud fédéré ou adresse e-mail…</string>
+    <string name="note_share_activity_share_link">Partager par lien</string>
+    <string name="note_share_activity_resharing_not_allowed">La réglementation ou les autorisations empêchent le re-partage</string>
+    <string name="note_share_activity_could_not_retrieve_url">Impossible de récupérer l\'URL</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" a été partagé avec vous</string>
+    <string name="note_share_activity_contact_no_permission">La permission d\'accès à vos contacts est requise</string>
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">Paramètres avancés</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Masquer le téléchargement</string>
+    <string name="note_share_detail_activity_share_send_note">Note au destinataire</string>
+    <string name="note_share_detail_activity_hint_note">Note</string>
+    <string name="note_share_detail_activity_common_next">Suivante</string>
+    <string name="note_share_detail_activity_share_copy_link">Partager et copier le lien</string>
+    <string name="note_share_detail_activity_common_confirm">Confirmer</string>
+    <string name="note_share_detail_activity_set_note">Définir la note</string>
+    <string name="note_share_detail_activity_send_share">Envoyer Partager</string>
+    <string name="note_share_detail_activity_hint_name">Nom</string>
+    <string name="note_share_detail_activity_link_name">Nom du lien</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Vous devez saisir un mot de passe</string>
+    <string name="note_share_detail_activity_hint_password">Mot de passe</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Veuillez sélectionner au moins une permission à partager.</string>
+    <string name="note_share_detail_activity_label_empty">L\'étiquette ne peut être vide</string>
+    <string name="note_share_detail_activity_cancel">Annuler</string>
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Saisissez un mot de passe optionnel</string>
+    <string name="share_password_dialog_fragment_skip">Ignorer</string>
+
+    <string name="share_link_password_title">Entrez un mot de passe</string>
+    <string name="common_ok">OK</string>
+    <string name="common_delete">Supprimer</string>
+    <string name="write_email">Envoyer un e-mail</string>
+    <string name="no_browser_available">Aucune application n\'est disponible pour ouvrir les liens</string>
+    <string name="no_email_app_available">Aucune application disponible pour ouvrir l\'adresse e-mail</string>
+    <string name="no_actions">Aucune action pour cet utilisateur</string>
+
+    <string name="email_pick_failed">Le choix de l\'adresse e-mail a échoué.</string>
     <string name="failed_update_ui">Échec de la mise à jour de l\'interface utilisateur</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Aucune application disponible pour sélectionner des contacts</string>
+    <string name="activity_chooser_title">Envoyer le lien vers…</string>
+
+    <string name="activity_chooser_send_file_title">Envoyer</string>
+    <string name="share_internal_link_to_folder_text">le partage de lien interne fonctionne uniquement pour les utilisateurs qui ont accès à ce dossier</string>
+    <string name="share_internal_link_to_file_text">le partage de lien interne fonctionne uniquement pour les utilisateurs qui ont accès à ce fichier</string>
+    <string name="share_internal_link">Partager le lien interne</string>
+    <string name="delete_link">Supprimer le lien</string>
+    <string name="share_settings">Paramètres</string>
+    <string name="share_send_new_email">Envoyer un nouvel e-mail</string>
+    <string name="share_dialog_title">Partage</string>
+    <string name="share_file">Partager %1$s</string>
+    <string name="share_expiration_date_label">Expire le %1$s</string>
+    <string name="share_expiration_date_format">%1$s</string>
     <string name="share_no_expiration_date_label">Définir une date d\'expiration</string>
+    <string name="share_via_link_section_title">Partager par lien</string>
+    <string name="share_via_link_send_link_label">Envoyer le lien</string>
+    <string name="share_password_title">Protégé par mot de passe</string>
+    <string name="share_no_password_title">Définir un mot de passe</string>
+    <string name="share_with_title">Partager avec…</string>
+    <string name="share_via_link_unset_password">Désactiver</string>
+    <string name="add_another_public_share_link">Ajouter un autre lien</string>
+    <string name="add_new_public_share">Ajouter un nouveau lien de partage public</string>
+    <string name="public_share_name">Nouveau nom</string>
+    <string name="share_link_with_label">Partager le lien (%1$s)</string>
+    <string name="share_link">Partager par lien</string>
+    <string name="allow_resharing">Autoriser le repartage</string>
+    <string name="link_share_view_only">Afficher seulement</string>
+    <string name="link_share_editing">Éditer</string>
+    <string name="link_share_allow_upload_and_editing">Autoriser le téléversement et la modification</string>
+    <string name="link_share_file_drop">Dépôt de fichier (téléversement seulement)</string>
+    <string name="could_not_retrieve_shares">Impossible de récupérer les partages</string>
+    <string name="share_permission_view_only">Afficher seulement</string>
+    <string name="share_permission_can_edit">Peut modifier</string>
+    <string name="share_permission_file_drop">Dépôt de fichier</string>
+    <string name="share_permission_secure_file_drop">Dépôt sécurisé de fichiers</string>
+    <string name="share_permissions">Autorisations pour le partage</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">%1$d téléchargement restant</item>
+        <item quantity="many">%1$d téléchargements restants</item>
+        <item quantity="other">%1$d téléchargements restants</item>
+    </plurals>
+    <string name="username">Nom d\'utilisateur</string>
     <string name="share_group_clarification">%1$s (groupe)</string>
+    <string name="share_remote_clarification">%1$s (distant)</string>
+    <string name="share_room_clarification">%1$s (conversation)</string>
+    <string name="share_known_remote_on_clarification">le %1$s</string>
+    <string name="remote">(distant)</string>
+
+    <string name="copy_link">Copier le lien</string>
+    <string name="share">Partager</string>
+    <string name="clipboard_text_copied">Lien copié</string>
+    <string name="clipboard_no_text_to_copy">Aucun texte n\'a été reçu pour copier dans le presse-papier</string>
+    <string name="clipboard_unexpected_error">Erreur inattendue lors de la copie dans le presse-papier</string>
+    <string name="clipboard_label">Texte copié depuis %1$s</string>
+
     <string name="listview_updated_today">Aujourd’hui</string>
     <string name="listview_updated_yesterday">Hier</string>
     <string name="listview_updated_this_week">Cette semaine</string>

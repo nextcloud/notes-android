@@ -32,13 +32,100 @@
     <string name="menu_favorite">Suosikki</string>
     <string name="menu_preview">Esikatselu</string>
     <string name="menu_share">Jaa</string>
+    <string name="common_loading">Ladataan…</string>
+
+
     <string name="search_in_category">Etsi luokasta %1$s</string>
     <string name="search_in_all">Etsi kaikista muistiinpanoista</string>
 
     <string name="change_category_title">Valitse luokka</string>
 
+    <string name="note_share_activity_shared_with_you">Jaettu sinulle käyttäjältä %1$s</string>
+    <string name="note_share_activity_share_note">Jaa muistiinpano</string>
+    <string name="note_share_activity_share_link">Jaa linkki</string>
+    <string name="note_share_activity_could_not_retrieve_url">URL:n palautus epännistui</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" on jaettu kanssasi</string>
+    <string name="note_share_activity_contact_no_permission">Yhteystietojen käyttöoikeus vaaditaan.</string>
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">Lisäasetukset</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Piilota lataus</string>
+    <string name="note_share_detail_activity_share_send_note">Huomio vastaanottajalle</string>
+    <string name="note_share_detail_activity_hint_note">Huomio</string>
+    <string name="note_share_detail_activity_common_next">Seuraava</string>
+    <string name="note_share_detail_activity_share_copy_link">Jaa ja kopioi linkki</string>
+    <string name="note_share_detail_activity_common_confirm">Vahvista</string>
+    <string name="note_share_detail_activity_set_note">Aseta muistiinpano</string>
+    <string name="note_share_detail_activity_send_share">Lähetä Jaa</string>
+    <string name="note_share_detail_activity_hint_name">Nimi</string>
+    <string name="note_share_detail_activity_link_name">Linkin nimi</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Salasana on pakko antaa</string>
+    <string name="note_share_detail_activity_hint_password">Salasana</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Valitse vähintään yksi käyttöoikeus jakaaksesi.</string>
+    <string name="note_share_detail_activity_label_empty">Nimike ei voi olla tyhjä</string>
+    <string name="note_share_detail_activity_cancel">Peruuta</string>
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Syötä vaihtoehtoinen salasanan</string>
+    <string name="share_password_dialog_fragment_skip">Ohita</string>
+
+    <string name="share_link_password_title">Syötä salasana</string>
+    <string name="common_ok">OK</string>
+    <string name="common_delete">Poista</string>
+    <string name="write_email">Lähetä sähköposti</string>
+    <string name="no_browser_available">Linkkien käsittelyyn ei ole sovellusta</string>
+    <string name="no_email_app_available">Sähköpostiosoitteiden käsittelyyn ei ole saatavilla sovellusta</string>
+    <string name="no_actions">Ei tapahtumia tälle käyttäjälle</string>
+
+    <string name="email_pick_failed">Sähköpostiosoitteen valinta epäonnistui.</string>
+    <string name="failed_update_ui">Käyttöliittymän päivitys epäonnistui</string>
+    <string name="activity_chooser_send_file_title">Lähetä</string>
+    <string name="share_internal_link_to_folder_text">Sisäinen jaettu linkki toimii vain kayttäjillä, joilla on oikeudet tähän kansioon</string>
+    <string name="share_internal_link_to_file_text">Sisäinen jaettu linkki toimii vain käyttäjillä, joilla on oikeudet tähän tiedostoon</string>
+    <string name="share_internal_link">Jaa sisäinen linkki</string>
+    <string name="delete_link">Poista linkki</string>
+    <string name="share_settings">Asetukset</string>
+    <string name="share_send_new_email">Lähetä uusi sähköposti</string>
+    <string name="share_dialog_title">Jakaminen</string>
+    <string name="share_file">Jaa %1$s</string>
+    <string name="share_expiration_date_label">Vanhenee %1$s</string>
+    <string name="share_expiration_date_format">%1$s</string>
     <string name="share_no_expiration_date_label">Aseta vanhenemispäivä</string>
+    <string name="share_via_link_section_title">Jaa linkki</string>
+    <string name="share_via_link_send_link_label">Lähetä linkki</string>
+    <string name="share_password_title">Salasanasuojattu</string>
+    <string name="share_no_password_title">Aseta salasana</string>
+    <string name="share_with_title">Jaa…</string>
+    <string name="share_via_link_unset_password">Poista</string>
+    <string name="add_another_public_share_link">Lisää toinen linkki</string>
+    <string name="add_new_public_share">Lisää uusi julkinen jakolinkki</string>
+    <string name="public_share_name">Uusi nimi</string>
+    <string name="share_link_with_label">Jaa linkki (%1$s)</string>
+    <string name="share_link">Jaa linkki</string>
+    <string name="link_share_view_only">Vain katselu</string>
+    <string name="link_share_allow_upload_and_editing">Salli lähetys ja muokkaus</string>
+    <string name="link_share_file_drop">Tiedostojen pudotus (vain lähetys)</string>
+    <string name="could_not_retrieve_shares">Jakojen nouto ei onnistunut</string>
+    <string name="share_permission_view_only">Vain katselu</string>
+    <string name="share_permission_can_edit">Voi muokata</string>
+    <string name="share_permission_file_drop">Tiedoston pudotus</string>
+    <string name="share_permissions">Jaon oikeudet</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">%1$d lataus jäljellä</item>
+        <item quantity="other">%1$d latausta jäljellä</item>
+    </plurals>
+    <string name="username">Käyttäjätunnus</string>
     <string name="share_group_clarification">%1$s (ryhmä)</string>
+    <string name="share_remote_clarification">%1$s (etä)</string>
+    <string name="share_room_clarification">%1$s (keskustelu)</string>
+    <string name="share_known_remote_on_clarification">klo %1$s</string>
+    <string name="remote">(etä)</string>
+
+    <string name="copy_link">Kopioi linkki</string>
+    <string name="share">Jaa</string>
+    <string name="clipboard_text_copied">Linkki kopioitu</string>
+    <string name="clipboard_no_text_to_copy">Leikepöydälle ei kopioitunut mitään</string>
+    <string name="clipboard_unexpected_error">Odottamaton virhe kopioitaessa leikepöydälle</string>
+    <string name="clipboard_label">Teksti kopioitu %1$s</string>
+
     <string name="listview_updated_today">Tänään</string>
     <string name="listview_updated_yesterday">Eilen</string>
     <string name="listview_updated_this_week">Tämä viikko</string>

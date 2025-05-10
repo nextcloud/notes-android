@@ -32,21 +32,106 @@
     <string name="menu_favorite">Sık kullanılanlara ekle</string>
     <string name="menu_preview">Ön izleme</string>
     <string name="menu_share">Paylaş</string>
+    <string name="common_loading">Yükleniyor…</string>
+
+
     <string name="search_in_category">%1$s içinde arama</string>
     <string name="search_in_all">Tüm notlarda arama</string>
 
     <string name="change_category_title">Bir kategori seçin</string>
 
+    <string name="note_share_activity_shared_with_you">Sizinle %1$s ile paylaşılmış</string>
+    <string name="note_share_activity_share_note">Notu paylaş</string>
+    <string name="note_share_activity_search_text">Ad, birleşik bulut kimliği ya da e-posta adresi…</string>
+    <string name="note_share_activity_share_link">Bağlantıyı paylaş</string>
+    <string name="note_share_activity_resharing_not_allowed">Yeniden paylaşımı engelleyen ilke ya da izinler</string>
+    <string name="note_share_activity_could_not_retrieve_url">Adres alınamadı</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" ögesi sizinle paylaşıldı</string>
+    <string name="note_share_activity_contact_no_permission">Kişi izinleri gerekli.</string>
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">Gelişmiş ayarlar</string>
     <string name="note_share_detail_activity_share_via_link_hide_download">İndirme gizlensin</string>
+    <string name="note_share_detail_activity_share_send_note">Alıcıya not</string>
+    <string name="note_share_detail_activity_hint_note">Not</string>
+    <string name="note_share_detail_activity_common_next">Sonraki</string>
+    <string name="note_share_detail_activity_share_copy_link">Bağlantıyı paylaş ve kopyala</string>
+    <string name="note_share_detail_activity_common_confirm">Onayla</string>
+    <string name="note_share_detail_activity_set_note">Notu ayarla</string>
+    <string name="note_share_detail_activity_send_share">Paylaşımı gönder</string>
+    <string name="note_share_detail_activity_hint_name">Ad</string>
+    <string name="note_share_detail_activity_link_name">Bağlantı adı</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Bir parola yazmalısınız</string>
+    <string name="note_share_detail_activity_hint_password">Parola</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Lütfen paylaşmak için en az bir izin seçin.</string>
     <string name="note_share_detail_activity_label_empty">Etiket boş olamaz</string>
+    <string name="note_share_detail_activity_cancel">İptal</string>
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">İsteğe bağlı olarak parola yazın</string>
+    <string name="share_password_dialog_fragment_skip">Atla</string>
+
+    <string name="share_link_password_title">Bir parola yazın</string>
+    <string name="common_ok">Tamam</string>
+    <string name="common_delete">Sil</string>
+    <string name="write_email">E-posta gönder</string>
+    <string name="no_browser_available">Bağlantıları işleyecek bir uygulama bulunamadı</string>
+    <string name="no_email_app_available">E-posta adreslerini işleyecek bir uygulama bulunamadı</string>
+    <string name="no_actions">Bu kullanıcının bir işlemi yok</string>
+
+    <string name="email_pick_failed">E-posta adresi alınamadı.</string>
     <string name="failed_update_ui">Kullanıcı arayüzü güncellenemedi</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Kişilerin seçilmesi için kullanılabilecek bir uygulama yok</string>
+    <string name="activity_chooser_title">Bağlantıyı şuraya gönder …</string>
+
+    <string name="activity_chooser_send_file_title">Gönder</string>
+    <string name="share_internal_link_to_folder_text">İç bağlantı paylaşımı yalnızca bu klasöre erişebilen kullanıcılar için geçerlidir</string>
+    <string name="share_internal_link_to_file_text">İç bağlantı paylaşımı yalnızca bu dosyaya erişebilen kullanıcılar için geçerlidir</string>
+    <string name="share_internal_link">İç bağlantıyı paylaş</string>
+    <string name="delete_link">Bağlantıyı sil</string>
+    <string name="share_settings">Ayarlar</string>
+    <string name="share_send_new_email">Yeni e-posta gönder</string>
+    <string name="share_dialog_title">Paylaşılıyor</string>
+    <string name="share_file">%1$s paylaş</string>
+    <string name="share_expiration_date_label">Geçerlilik süresi %1$s zamanında dolacak</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_no_expiration_date_label">Geçerlilik sonu tarihini ayarla</string>
+    <string name="share_via_link_section_title">Bağlantıyı paylaş</string>
+    <string name="share_via_link_send_link_label">Bağlantı gönder</string>
     <string name="share_password_title">Parola korumalı</string>
+    <string name="share_no_password_title">Parola ayarla</string>
+    <string name="share_with_title">Şununla paylaş …</string>
+    <string name="share_via_link_unset_password">Ayarı kaldır</string>
+    <string name="add_another_public_share_link">Başka bir bağlantı ekle</string>
+    <string name="add_new_public_share">Yeni herkese açık paylaşım bağlantısı ekle</string>
+    <string name="public_share_name">Yeni ad</string>
+    <string name="share_link_with_label">Bağlantı paylaş (%1$s)</string>
+    <string name="share_link">Bağlantıyı paylaş</string>
+    <string name="link_share_view_only">Yalnızca görüntüleme</string>
+    <string name="link_share_editing">Düzenleniyor</string>
+    <string name="link_share_allow_upload_and_editing">Yüklenebilsin ve düzenlenebilsin</string>
+    <string name="could_not_retrieve_shares">Paylaşımlar alınamadı</string>
+    <string name="share_permission_view_only">Yalnızca görüntüleme</string>
+    <string name="share_permission_can_edit">Düzenleyebilir</string>
+    <string name="share_permission_file_drop">Dosya bırakma</string>
+    <string name="share_permission_secure_file_drop">Güvenli dosya bırakma</string>
+    <string name="share_permissions">İzinleri paylaş</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">%1$d indirme kaldı</item>
+        <item quantity="other">%1$d indirme kaldı</item>
+    </plurals>
     <string name="username">Kullanıcı adı</string>
     <string name="share_group_clarification">%1$s (grup)</string>
+    <string name="share_remote_clarification">%1$s (uzak)</string>
+    <string name="share_room_clarification">%1$s (görüşme)</string>
     <string name="share_known_remote_on_clarification">%1$s zamanında</string>
+    <string name="remote">(uzak)</string>
+
     <string name="copy_link">Bağlantıyı kopyala</string>
+    <string name="share">Paylaşma</string>
+    <string name="clipboard_text_copied">Bağlantı kopyalandı</string>
+    <string name="clipboard_no_text_to_copy">Panoya kopyalanacak bir metin alınamadı</string>
+    <string name="clipboard_unexpected_error">Panoya kopyalama sırasında beklenmeyen bir sorun çıktı</string>
+    <string name="clipboard_label">Metin %1$s kaynağından kopyalandı</string>
+
     <string name="listview_updated_today">Bugün</string>
     <string name="listview_updated_yesterday">Dün</string>
     <string name="listview_updated_this_week">Bu hafta</string>

@@ -32,20 +32,108 @@
     <string name="menu_favorite">Favorit</string>
     <string name="menu_preview">Förhandsvisning</string>
     <string name="menu_share">Dela</string>
+    <string name="common_loading">Laddar...</string>
+
+
     <string name="search_in_category">Sök i %1$s</string>
     <string name="search_in_all">Sök alla anteckningar</string>
 
     <string name="change_category_title">Välj en kategori</string>
 
+    <string name="note_share_activity_shared_with_you">Delad med dig av %1$s</string>
+    <string name="note_share_activity_share_note">Dela anteckning</string>
+    <string name="note_share_activity_search_text">Namn, federerat moln-ID eller e-postadress...</string>
+    <string name="note_share_activity_share_link">Delningslänk</string>
+    <string name="note_share_activity_resharing_not_allowed">Policy eller behörigheter förhindrar vidaredelning</string>
+    <string name="note_share_activity_could_not_retrieve_url">Kunde inte hämta URL</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" har delats med dig</string>
+    <string name="note_share_activity_contact_no_permission">Rättighet till kontakt krävs.</string>
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">Avancerade inställningar</string>
     <string name="note_share_detail_activity_share_via_link_hide_download">Dölj hämtning</string>
+    <string name="note_share_detail_activity_share_send_note">Notering till mottagare</string>
+    <string name="note_share_detail_activity_hint_note">Anteckning</string>
+    <string name="note_share_detail_activity_common_next">Nästa</string>
+    <string name="note_share_detail_activity_share_copy_link">Dela och kopiera länk</string>
+    <string name="note_share_detail_activity_common_confirm">Bekräfta</string>
+    <string name="note_share_detail_activity_set_note">Ange anteckning</string>
+    <string name="note_share_detail_activity_send_share">Skicka delning</string>
+    <string name="note_share_detail_activity_hint_name">Namn</string>
+    <string name="note_share_detail_activity_link_name">Länknamn</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Du måste ange ett lösenord</string>
+    <string name="note_share_detail_activity_hint_password">Lösenord</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Välj minst en behörighet att dela.</string>
     <string name="note_share_detail_activity_label_empty">Etiketten kan inte vara tom</string>
+    <string name="note_share_detail_activity_cancel">Avbryt</string>
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Ange ett valfritt lösenord</string>
+    <string name="share_password_dialog_fragment_skip">Hoppa över</string>
+
+    <string name="share_link_password_title">Ange ett lösenord</string>
+    <string name="common_ok">OK</string>
+    <string name="common_delete">Radera</string>
+    <string name="write_email">Skicka e-post</string>
+    <string name="no_browser_available">Ingen app tillgänglig för att hantera länkar</string>
+    <string name="no_email_app_available">Ingen tillgänglig applikation kan hantera e-postadresser</string>
+    <string name="no_actions">Inga tillgängliga åtgärder för användaren</string>
+
+    <string name="email_pick_failed">Det gick inte att välja e-postadress.</string>
     <string name="failed_update_ui">Misslyckades med att uppdatera UI</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Ingen app tillgänglig för att välja kontakter</string>
+    <string name="activity_chooser_title">Skicka länk till…</string>
+
+    <string name="activity_chooser_send_file_title">Skicka</string>
+    <string name="share_internal_link_to_folder_text">Intern länkdelning fungerar bara för användare med åtkomst till den här mappen</string>
+    <string name="share_internal_link_to_file_text">Intern länkdelning fungerar bara för användare med åtkomst till den här filen</string>
+    <string name="share_internal_link">Dela intern länk</string>
+    <string name="delete_link">Ta bort länk</string>
+    <string name="share_settings">Inställningar</string>
+    <string name="share_send_new_email">Skicka nytt mail</string>
+    <string name="share_dialog_title">Delning</string>
+    <string name="share_file">Dela %1$s</string>
+    <string name="share_expiration_date_label">Gick ut %1$s</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_no_expiration_date_label">Välj utgångsdatum</string>
+    <string name="share_via_link_section_title">Delningslänk</string>
+    <string name="share_via_link_send_link_label">Skicka länk</string>
+    <string name="share_password_title">Lösenordsskyddad</string>
+    <string name="share_no_password_title">Ange lösenord</string>
+    <string name="share_with_title">Delad med…</string>
+    <string name="share_via_link_unset_password">Inaktivera</string>
+    <string name="add_another_public_share_link">Lägg till en annan länk</string>
+    <string name="add_new_public_share">Lägg till en ny publik delad länk</string>
+    <string name="public_share_name">Nytt namn</string>
+    <string name="share_link_with_label">Dela länk (%1$s)</string>
+    <string name="share_link">Delningslänk</string>
+    <string name="allow_resharing">Tillåt vidaredelning</string>
+    <string name="link_share_view_only">Skrivskyddat läge</string>
+    <string name="link_share_editing">Ändrar</string>
+    <string name="link_share_allow_upload_and_editing">Tillåt uppladdning och redigering</string>
+    <string name="link_share_file_drop">Filinkast (endast uppladdning)</string>
+    <string name="could_not_retrieve_shares">Kunde inte hämta delade mappar</string>
+    <string name="share_permission_view_only">Skrivskyddat läge</string>
+    <string name="share_permission_can_edit">Kan ändra</string>
+    <string name="share_permission_file_drop">Filinkast</string>
+    <string name="share_permission_secure_file_drop">Säkert filinkast</string>
+    <string name="share_permissions">Dela behörigheter</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">%1$d återstående nedladdning</item>
+        <item quantity="other">%1$d återstående nedladdningar</item>
+    </plurals>
     <string name="username">Användarnamn</string>
     <string name="share_group_clarification">%1$s (grupp)</string>
+    <string name="share_remote_clarification">%1$s (extern)</string>
+    <string name="share_room_clarification">%1$s (konversation)</string>
     <string name="share_known_remote_on_clarification">på %1$s</string>
+    <string name="remote">(avlägsen)</string>
+
     <string name="copy_link">Kopiera länk</string>
+    <string name="share">Dela</string>
+    <string name="clipboard_text_copied">Länken har kopierats</string>
+    <string name="clipboard_no_text_to_copy">Mottog ingen text att kopiera</string>
+    <string name="clipboard_unexpected_error">Oväntat fel vid kopiering till urklipp</string>
+    <string name="clipboard_label">Text kopierad från %1$s</string>
+
     <string name="listview_updated_today">Idag</string>
     <string name="listview_updated_yesterday">Igår</string>
     <string name="listview_updated_this_week">Denna vecka</string>

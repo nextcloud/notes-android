@@ -32,17 +32,98 @@
     <string name="menu_favorite">Favoritt</string>
     <string name="menu_preview">Forhåndsvis</string>
     <string name="menu_share">Del</string>
+    <string name="common_loading">Laster...</string>
+
+
     <string name="search_in_category">Søk i %1$s</string>
     <string name="search_in_all">Søk i alle notater</string>
 
     <string name="change_category_title">Velg kategori</string>
 
+    <string name="note_share_activity_shared_with_you">Delt med deg av %1$s</string>
+    <string name="note_share_activity_share_note">Delingsnotat</string>
+    <string name="note_share_activity_share_link">Del lenke</string>
+    <string name="note_share_activity_could_not_retrieve_url">Kunne ikke hente URL</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" er blitt delt med deg</string>
+    <string name="note_share_activity_contact_no_permission">Kontaktrettighet kreves.</string>
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">Avanserte innstillinger</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Gjem nedlasting</string>
+    <string name="note_share_detail_activity_share_send_note">Melding til mottaker</string>
+    <string name="note_share_detail_activity_hint_note">Melding</string>
+    <string name="note_share_detail_activity_share_copy_link">Del og kopier kobling</string>
+    <string name="note_share_detail_activity_common_confirm">Bekreft</string>
+    <string name="note_share_detail_activity_set_note">Sett merknad</string>
+    <string name="note_share_detail_activity_send_share">Send deling</string>
+    <string name="note_share_detail_activity_hint_name">Navn</string>
+    <string name="note_share_detail_activity_link_name">Navn på lenke</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Du må skrive inn ett passord</string>
+    <string name="note_share_detail_activity_hint_password">PassordP</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Velg minst en rettighet for å dele.</string>
+    <string name="note_share_detail_activity_label_empty">Merkelapp kan ikke være tom</string>
+    <string name="note_share_detail_activity_cancel">Avbryt</string>
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Skriv inn et valgfri passord</string>
+    <string name="share_password_dialog_fragment_skip">Hopp over</string>
+
+    <string name="share_link_password_title">Skriv inn ett passord</string>
+    <string name="common_ok">Ok</string>
+    <string name="common_delete">Slett</string>
+    <string name="write_email">Send e-post</string>
+    <string name="no_browser_available">Ingen app tilgjengelig for å håndtere lenker</string>
+    <string name="no_email_app_available">Ingen program for å behandle e-post adresse</string>
+    <string name="no_actions">Ingen hendelser for denne brukeren</string>
+
+    <string name="email_pick_failed">Kunne ikke velge e-postadresse.</string>
     <string name="failed_update_ui">Kunne ikke oppdatere brukergrensesnittet</string>
+    <string name="activity_chooser_send_file_title">Send</string>
+    <string name="share_internal_link_to_folder_text">Intern dele-link virker bare for brukere med tilgang til til denne mappen</string>
+    <string name="share_internal_link_to_file_text">Intern dele-link virker bare for brukere med tilgang til til denne filen</string>
+    <string name="share_internal_link">Del intern link</string>
+    <string name="delete_link">Slett lenke</string>
+    <string name="share_settings">Innstillinger</string>
+    <string name="share_send_new_email">Send ny e-post</string>
+    <string name="share_dialog_title">Deling</string>
+    <string name="share_file">Del %1$s</string>
+    <string name="share_expiration_date_label">Utløper den %1$s</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_no_expiration_date_label">Sett utløpsdato</string>
+    <string name="share_via_link_section_title">Del lenke</string>
+    <string name="share_via_link_send_link_label">Send lenke</string>
+    <string name="share_password_title">Passordbeskyttet</string>
+    <string name="share_no_password_title">Velg passord</string>
+    <string name="share_with_title">Del med…</string>
+    <string name="share_via_link_unset_password">Ikke satt</string>
+    <string name="add_another_public_share_link">Legg til en lenke til</string>
+    <string name="add_new_public_share">Legg til ny offentlig delt lenke</string>
+    <string name="public_share_name">Nytt navn</string>
+    <string name="share_link_with_label">Del lenke (%1$s)</string>
+    <string name="share_link">Del lenke</string>
+    <string name="allow_resharing">TIllat videre deling</string>
+    <string name="link_share_view_only">Kun se</string>
+    <string name="link_share_editing">Rediger</string>
+    <string name="link_share_allow_upload_and_editing">Tillatt opplasting og redigering</string>
+    <string name="link_share_file_drop">Filkasse (kun opplasting)</string>
+    <string name="could_not_retrieve_shares">Kunne ikke hente ressursen</string>
+    <string name="share_permission_view_only">Kun se</string>
+    <string name="share_permission_can_edit">Kan redigere</string>
+    <string name="share_permission_file_drop">Filkasse</string>
+    <string name="share_permission_secure_file_drop">Sikker filkasse</string>
+    <string name="share_permissions">Rettigheter for deling</string>
     <string name="username">Brukernavn</string>
     <string name="share_group_clarification">%1$s (gruppe)</string>
+    <string name="share_remote_clarification">%1$s (ekstern)</string>
+    <string name="share_room_clarification">%1$s(samtale)</string>
     <string name="share_known_remote_on_clarification">på %1$s</string>
+    <string name="remote">(ekstern)</string>
+
+    <string name="copy_link">Kopier lenke</string>
+    <string name="share">Dele</string>
+    <string name="clipboard_text_copied">Lenke kopiert</string>
+    <string name="clipboard_no_text_to_copy">Ingen tekst ble mottatt for kopi til utklippstavlen</string>
+    <string name="clipboard_unexpected_error">Uventet feil ved kopiering til utklippstavle</string>
+    <string name="clipboard_label">Teksten ble kopiert fra %1$s</string>
+
     <string name="listview_updated_today">Idag</string>
     <string name="listview_updated_yesterday">I går</string>
     <string name="listview_updated_this_week">Denne uken</string>

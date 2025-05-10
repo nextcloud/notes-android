@@ -32,17 +32,104 @@
     <string name="menu_favorite">Favoriet</string>
     <string name="menu_preview">Voorbeeldweergave</string>
     <string name="menu_share">Delen</string>
+    <string name="common_loading">Laden…</string>
+
+
     <string name="search_in_category">Zoeken in %1$s</string>
     <string name="search_in_all">Zoek in alle notities</string>
 
     <string name="change_category_title">Een categorie kiezen</string>
 
+    <string name="note_share_activity_shared_with_you">Gedeeld met u door %1$s</string>
+    <string name="note_share_activity_share_note">Notitie delen</string>
+    <string name="note_share_activity_share_link">Deel link</string>
+    <string name="note_share_activity_could_not_retrieve_url">Kon URL niet ophalen</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" is met je gedeeld</string>
+    <string name="note_share_activity_contact_no_permission">Toestemming voor contact vereist</string>
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">Geavanceerde instellingen</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Verberg download</string>
+    <string name="note_share_detail_activity_share_send_note">Notitie voor ontvanger</string>
+    <string name="note_share_detail_activity_hint_note">Notitie</string>
+    <string name="note_share_detail_activity_common_next">Volgende</string>
+    <string name="note_share_detail_activity_share_copy_link">Deel en kopieer link</string>
+    <string name="note_share_detail_activity_common_confirm">Bevestigen</string>
+    <string name="note_share_detail_activity_set_note">Instellen notitie</string>
+    <string name="note_share_detail_activity_send_share">Stuur share</string>
+    <string name="note_share_detail_activity_hint_name">Naam</string>
+    <string name="note_share_detail_activity_link_name">Linknaam</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Je moet een wachtwoord opgeven</string>
+    <string name="note_share_detail_activity_hint_password">Wachtwoord</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Gelieve ten minste één machtiging te selecteren om te delen</string>
+    <string name="note_share_detail_activity_label_empty">Label mag niet leeg zijn</string>
+    <string name="note_share_detail_activity_cancel">Annuleren</string>
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Geef een niet verplicht wachtwoord in</string>
+    <string name="share_password_dialog_fragment_skip">Overslaan</string>
+
+    <string name="share_link_password_title">Voer een wachtwoord in</string>
+    <string name="common_ok">OK</string>
+    <string name="common_delete">Verwijder</string>
+    <string name="write_email">Verstuur e-mail</string>
+    <string name="no_browser_available">Geen app beschikbaar voor het openen van de link</string>
+    <string name="no_email_app_available">Geen app beschikbaar voor het openen van het mailadres</string>
+    <string name="no_actions">Geen acties voor deze gebruiker</string>
+
+    <string name="email_pick_failed">Email adres ophalen mislukt.</string>
     <string name="failed_update_ui">Kon UI niet bijwerken</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Geen app beschikbaar voor het selecteren van contactpersonen</string>
+    <string name="activity_chooser_title">Verstuur link naar…</string>
+
+    <string name="activity_chooser_send_file_title">Verzenden</string>
+    <string name="share_internal_link_to_folder_text">Interne link voor delen werkt alleen voor gebruikers met toegang tot deze map</string>
+    <string name="share_internal_link_to_file_text">Interne link voor delen werkt alleen voor gebruikers met toegang tot dit bestand</string>
+    <string name="share_internal_link">Deel interne link</string>
+    <string name="delete_link">Verwijder link</string>
+    <string name="share_settings">Instellingen</string>
+    <string name="share_send_new_email">Stuur nieuwe e-mail</string>
+    <string name="share_dialog_title">Delen</string>
+    <string name="share_file">Deel %1$s</string>
+    <string name="share_expiration_date_label">Vervalt op %1$s</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_no_expiration_date_label">Instellen vervaldatum</string>
+    <string name="share_via_link_section_title">Deel link</string>
+    <string name="share_via_link_send_link_label">Verstuur link</string>
+    <string name="share_password_title">Wachtwoord beveiligd</string>
+    <string name="share_no_password_title">Instellen wachtwoord</string>
+    <string name="share_with_title">Deel met…</string>
+    <string name="share_via_link_unset_password">Schakel uit</string>
+    <string name="add_another_public_share_link">Toevoegen andere link</string>
+    <string name="add_new_public_share">Voeg een nieuwe openbare deellink toe</string>
+    <string name="public_share_name">Nieuwe naam</string>
+    <string name="share_link_with_label">Link delen (%1$s)</string>
+    <string name="share_link">Deel link</string>
+    <string name="allow_resharing">Opnieuw delen toestaan</string>
+    <string name="link_share_view_only">Alleen bekijken</string>
+    <string name="link_share_allow_upload_and_editing">Uploaden en bewerken toestaan</string>
+    <string name="link_share_file_drop">Bestand droppen (alleen uploaden)</string>
+    <string name="could_not_retrieve_shares">Kon shares niet ophalen</string>
+    <string name="share_permission_view_only">Alleen bekijken</string>
+    <string name="share_permission_can_edit">Kan bewerken</string>
+    <string name="share_permission_file_drop">Bestandsopslag</string>
+    <string name="share_permissions">Deelmachtigingen</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">%1$d download resterend</item>
+        <item quantity="other">%1$d downloads resterend</item>
+    </plurals>
     <string name="username">Gebruikersnaam</string>
     <string name="share_group_clarification">%1$s (groep)</string>
+    <string name="share_remote_clarification">%1$s (extern)</string>
+    <string name="share_room_clarification">%1$s (gesprek)</string>
     <string name="share_known_remote_on_clarification">op %1$s</string>
+    <string name="remote">(remote)</string>
+
+    <string name="copy_link">Link kopiëren</string>
+    <string name="share">Delen</string>
+    <string name="clipboard_text_copied">Link gekopieerd</string>
+    <string name="clipboard_no_text_to_copy">Geen tekst ontvangen om te kopiëren naar het klembord</string>
+    <string name="clipboard_unexpected_error">Onverwachte fout bij het kopiëren naar het klembord</string>
+    <string name="clipboard_label">Tekst gekopieerd uit %1$s</string>
+
     <string name="listview_updated_today">Vandaag</string>
     <string name="listview_updated_yesterday">Gisteren</string>
     <string name="listview_updated_this_week">Deze week</string>

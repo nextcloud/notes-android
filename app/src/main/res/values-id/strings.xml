@@ -32,15 +32,91 @@
     <string name="menu_favorite">Favorit</string>
     <string name="menu_preview">Pratinjau</string>
     <string name="menu_share">Bagikan</string>
+    <string name="common_loading">Memuat…</string>
+
+
     <string name="search_in_category">Cari di %1$s</string>
     <string name="search_in_all">Cari semua catatan</string>
 
     <string name="change_category_title">Pilih kategori</string>
 
+    <string name="note_share_activity_shared_with_you">Dibagikan dengan Anda oleh %1$s</string>
+    <string name="note_share_activity_share_link">Bagikan tautan</string>
+    <string name="note_share_activity_could_not_retrieve_url">Tidak dapat mengambil URL</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" telah membagikan dengan Anda</string>
+    <string name="note_share_activity_contact_no_permission">Izin kontak diperlukan.</string>
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">Pengaturan Tambahan</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Sembunyikan unduhan</string>
+    <string name="note_share_detail_activity_share_send_note">Catatan untuk penerima</string>
+    <string name="note_share_detail_activity_hint_note">Catatan</string>
+    <string name="note_share_detail_activity_common_next">Berikutnya</string>
+    <string name="note_share_detail_activity_common_confirm">Konfirmasi</string>
+    <string name="note_share_detail_activity_set_note">Setel Catatan</string>
+    <string name="note_share_detail_activity_hint_name">Nama</string>
+    <string name="note_share_detail_activity_link_name">Nama Tautan</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Anda harus memasukkan kata sandi</string>
+    <string name="note_share_detail_activity_hint_password">Kata sandi</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Silakan pilih setidaknya satu izin untuk dibagikan.</string>
+    <string name="note_share_detail_activity_label_empty">Label tidak boleh kosong</string>
+    <string name="note_share_detail_activity_cancel">Batal</string>
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Masukkan sandi opsional</string>
+    <string name="share_password_dialog_fragment_skip">Lewati</string>
+
+    <string name="share_link_password_title">Masukkan kata sandi</string>
+    <string name="common_ok">Oke</string>
+    <string name="common_delete">Hapus</string>
+    <string name="write_email">Kirim email</string>
+    <string name="no_browser_available">Tidak ada aplikasi yang tersedia untuk menangani tautan</string>
+    <string name="no_email_app_available">Tidak ada aplikasi yang tersedia untuk menangani alamat surel</string>
+    <string name="no_actions">Tidak ada aksi untuk pengguna ini</string>
+
+    <string name="email_pick_failed">Gagal memilih alamat surel.</string>
     <string name="failed_update_ui">Gagal memperbarui UI</string>
+    <string name="activity_chooser_title">Kirim taukan ke…</string>
+
+    <string name="activity_chooser_send_file_title">Kirim</string>
+    <string name="share_internal_link_to_folder_text">Tautan berbagi internal hanya bekerja untuk pengguna dengan akses ke folder ini</string>
+    <string name="share_internal_link_to_file_text">Tautan berbagi internal hanya bekerja untuk pengguna dengan akses ke berkas ini</string>
+    <string name="share_internal_link">Bagikan tautan internal</string>
+    <string name="delete_link">Hapus tautan</string>
+    <string name="share_settings">Setelan</string>
+    <string name="share_send_new_email">Kirim surel baru</string>
+    <string name="share_dialog_title">Berbagi</string>
+    <string name="share_file">Bagikan %1$s</string>
+    <string name="share_expiration_date_label">Kadaluarsa %1$s</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_no_expiration_date_label">Atur tanggal kedaluwarsa</string>
+    <string name="share_via_link_section_title">Bagikan tautan</string>
+    <string name="share_via_link_send_link_label">Kirim tautan</string>
+    <string name="share_password_title">Sandi dilindungi</string>
+    <string name="share_with_title">Bagikan dengan…</string>
+    <string name="share_via_link_unset_password">Belum disetel</string>
+    <string name="add_another_public_share_link">Tambah tautan lain</string>
+    <string name="add_new_public_share">Tambahkan tautan berbagi baru</string>
+    <string name="public_share_name">Nama baru</string>
+    <string name="share_link_with_label">Bagikan tautan (%1$s)</string>
+    <string name="share_link">Bagikan tautan</string>
+    <string name="allow_resharing">Izinkan pembagian ulang</string>
+    <string name="link_share_view_only">Hanya lihat</string>
+    <string name="link_share_allow_upload_and_editing">Izinkan pengunggahan dan penyuntingan</string>
+    <string name="link_share_file_drop">Lepaskan berkas (hanya unggah)</string>
+    <string name="share_permission_view_only">Hanya lihat</string>
+    <string name="share_permissions">Bagikan Izin</string>
+    <string name="username">Username</string>
     <string name="share_group_clarification">%1$s (grup)</string>
+    <string name="share_remote_clarification">%1$s (remote)</string>
+    <string name="share_room_clarification">%1$s (percakapan)</string>
+    <string name="share_known_remote_on_clarification">pada %1$s</string>
+    <string name="remote">remote</string>
+
+    <string name="copy_link">Salin tautan</string>
+    <string name="clipboard_text_copied">Link tersalin</string>
+    <string name="clipboard_no_text_to_copy">Tidak ada teks yang disalin ke papan klip.</string>
+    <string name="clipboard_unexpected_error">Kesalahan tak terduga terjadi ketika menyalin ke papan klip</string>
+    <string name="clipboard_label">Teks tersalin dari %1$s</string>
+
     <string name="listview_updated_today">Hari ini</string>
     <string name="listview_updated_yesterday">Kemarin</string>
     <string name="listview_updated_this_week">Pekan ini</string>

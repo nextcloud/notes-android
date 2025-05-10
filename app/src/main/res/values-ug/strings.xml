@@ -32,21 +32,100 @@
     <string name="menu_favorite">ئامراق</string>
     <string name="menu_preview">ئالدىن كۆرۈش</string>
     <string name="menu_share">ھەمبەھىرلەش</string>
+    <string name="common_loading">Loading…</string>
+
+
     <string name="search_in_category">% 1 $ s دىن ئىزدەڭ</string>
     <string name="search_in_all">بارلىق خاتىرىلەرنى ئىزدەڭ</string>
 
     <string name="change_category_title">بىر تۈرنى تاللاڭ</string>
 
+    <string name="note_share_activity_shared_with_you">%1$s بىلەن ئورتاقلاشتى</string>
+    <string name="note_share_activity_share_note">ئورتاقلىشىش خاتىرىسى</string>
+    <string name="note_share_activity_share_link">ئۇلىنىشنى ھەمبەھىرلەش</string>
+    <string name="note_share_activity_could_not_retrieve_url">URL نى ئەسلىگە كەلتۈرەلمىدى</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" سىز بىلەن ئورتاقلاشتى</string>
+    <string name="note_share_activity_contact_no_permission">ئالاقىلىشىش رۇخسىتى تەلەپ قىلىنىدۇ.</string>
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">ئىلغار تەڭشەكلەر</string>
     <string name="note_share_detail_activity_share_via_link_hide_download">چۈشۈرۈشنى يوشۇرۇش</string>
+    <string name="note_share_detail_activity_share_send_note">تاپشۇرۇۋالغۇچىغا دىققەت قىلىڭ</string>
+    <string name="note_share_detail_activity_hint_note">دىققەت</string>
+    <string name="note_share_detail_activity_share_copy_link">ئۇلىنىشنى ھەمبەھىرلەش ۋە كۆچۈرۈش</string>
+    <string name="note_share_detail_activity_common_confirm">جەزملەشتۈرۈڭ</string>
+    <string name="note_share_detail_activity_set_note">ئەسكەرتىش</string>
+    <string name="note_share_detail_activity_send_share">ھەمبەھىر ئەۋەتىش</string>
+    <string name="note_share_detail_activity_hint_name">ئاتى</string>
+    <string name="note_share_detail_activity_link_name">ئۇلىنىش ئىسمى</string>
+    <string name="note_share_detail_activity_share_link_empty_password">پارول كىرگۈزۈشىڭىز كېرەك</string>
+    <string name="note_share_detail_activity_hint_password">پارول</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">ئورتاقلىشىش ئۈچۈن كەم دېگەندە بىر ئىجازەتنى تاللاڭ.</string>
     <string name="note_share_detail_activity_label_empty">بەلگە قۇرۇق بولالمايدۇ</string>
+    <string name="note_share_detail_activity_cancel">بىكار قىلىش</string>
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">ئىختىيارى پارول كىرگۈزۈڭ</string>
+    <string name="share_password_dialog_fragment_skip">ئاتلاش</string>
+
+    <string name="share_link_password_title">پارول كىرگۈزۈڭ</string>
+    <string name="common_ok">ماقۇل</string>
+    <string name="common_delete">ئۆچۈر</string>
+    <string name="write_email">ئېلېكترونلۇق خەت ئەۋەتىڭ</string>
+    <string name="no_browser_available">ئۇلىنىشنى بىر تەرەپ قىلىدىغان ئەپ يوق</string>
+    <string name="no_email_app_available">خەت ئادرېسىنى بىر تەرەپ قىلىدىغان ئەپ يوق</string>
+    <string name="no_actions">بۇ ئىشلەتكۈچى ئۈچۈن ھېچقانداق ھەرىكەت يوق</string>
+
+    <string name="email_pick_failed">ئېلېكترونلۇق خەت ئادرېسىنى تاللىيالمىدى.</string>
     <string name="failed_update_ui">UI نى يېڭىلاش مەغلۇب بولدى</string>
+    <string name="activity_chooser_title">ئۇلىنىش ئەۋەتىڭ…</string>
+
+    <string name="activity_chooser_send_file_title">ئەۋەتىڭ</string>
+    <string name="share_internal_link_to_folder_text">ئىچكى ئورتاقلىشىش ئۇلىنىشى پەقەت بۇ ھۆججەت قىسقۇچنى زىيارەت قىلىدىغان ئىشلەتكۈچىلەر ئۈچۈن ئىشلەيدۇ</string>
+    <string name="share_internal_link_to_file_text">ئىچكى ئورتاقلىشىش ئۇلىنىشى پەقەت بۇ ھۆججەتنى زىيارەت قىلالايدىغان ئىشلەتكۈچىلەر ئۈچۈن ئىشلەيدۇ</string>
+    <string name="share_internal_link">ئىچكى ئۇلىنىشنى ئورتاقلىشىش</string>
+    <string name="delete_link">ئۇلىنىشنى ئۆچۈرۈڭ</string>
+    <string name="share_settings">تەڭشەكلەر</string>
+    <string name="share_send_new_email">يېڭى ئېلېكترونلۇق خەت ئەۋەتىڭ</string>
+    <string name="share_dialog_title">ھەمبەھىر</string>
+    <string name="share_file">ئورتاقلىشىش%1$s</string>
+    <string name="share_expiration_date_label">ۋاقتى%1$s</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_no_expiration_date_label">مۇددىتى توشۇش ۋاقتىنى بەلگىلەڭ</string>
+    <string name="share_via_link_section_title">ئۇلىنىشنى ھەمبەھىرلەش</string>
+    <string name="share_via_link_send_link_label">ئۇلىنىش ئەۋەتىڭ</string>
     <string name="share_password_title">پارول بىلەن قوغدىلىدۇ</string>
+    <string name="share_no_password_title">پارول بەلگىلەڭ</string>
+    <string name="share_with_title">بىلەن ئورتاقلىشىش…</string>
+    <string name="share_via_link_unset_password">Unset</string>
+    <string name="add_another_public_share_link">باشقا ئۇلىنىش قوشۇڭ</string>
+    <string name="add_new_public_share">يېڭى ئاممىۋى ئورتاقلىشىش ئۇلانمىسىنى قوشۇڭ</string>
+    <string name="public_share_name">يېڭى ئىسىم</string>
+    <string name="share_link_with_label">ئورتاقلىشىش ئۇلىنىشى (%1$s)</string>
+    <string name="share_link">ئۇلىنىشنى ھەمبەھىرلەش</string>
+    <string name="allow_resharing">قايتا تولۇقلاشقا يول قويۇڭ</string>
+    <string name="link_share_view_only">پەقەت كۆرۈش</string>
+    <string name="link_share_editing">تەھرىرلەش</string>
+    <string name="link_share_allow_upload_and_editing">يوللاش ۋە تەھرىرلەشكە يول قويۇڭ</string>
+    <string name="link_share_file_drop">ھۆججەت چۈشۈرۈش (پەقەت يوللاش)</string>
+    <string name="could_not_retrieve_shares">پاينى ئەسلىگە كەلتۈرەلمىدى</string>
+    <string name="share_permission_view_only">پەقەت كۆرۈش</string>
+    <string name="share_permission_can_edit">تەھرىرلىيەلەيدۇ</string>
+    <string name="share_permission_file_drop">ھۆججەت چۈشۈرۈش</string>
+    <string name="share_permission_secure_file_drop">بىخەتەر ھۆججەت چۈشۈرۈش</string>
+    <string name="share_permissions">ئورتاقلىشىش ئىجازەتنامىسى</string>
     <string name="username">ئىشلەتكۈچى ئىسمى</string>
     <string name="share_group_clarification">%1$s (گۇرۇپپا)</string>
+    <string name="share_remote_clarification">%1$s (يىراق)</string>
+    <string name="share_room_clarification">%1$s (سۆھبەت)</string>
     <string name="share_known_remote_on_clarification">%1$s</string>
+    <string name="remote">(remote)</string>
+
     <string name="copy_link">ئۇلانمىنى كۆچۈرۈڭ</string>
+    <string name="share">ھەمبەھىرلەش</string>
+    <string name="clipboard_text_copied">ئۇلىنىش كۆچۈرۈلدى</string>
+    <string name="clipboard_no_text_to_copy">چاپلاش تاختىسىغا كۆچۈرەلەيدىغان تېكىست تاپشۇرۇۋالمىدى</string>
+    <string name="clipboard_unexpected_error">چاپلاش تاختىسىغا كۆچۈرگەندە كۈتۈلمىگەن خاتالىق</string>
+    <string name="clipboard_label">تېكىست%1$s دىن كۆچۈرۈلگەن</string>
+
     <string name="listview_updated_today">بۈگۈن</string>
     <string name="listview_updated_yesterday">تۈنۈگۈن</string>
     <string name="listview_updated_this_week">بۇ ھەپتە</string>

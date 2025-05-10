@@ -32,13 +32,100 @@
     <string name="menu_favorite">مورد‌ ‌علاقه‌</string>
     <string name="menu_preview">پیش‌نمایش</string>
     <string name="menu_share">هم‌رسانی</string>
+    <string name="common_loading">درحال بارگیری…</string>
+
+
     <string name="search_in_category">جستجو در %1$s</string>
     <string name="search_in_all">جستجو در همه یادداشت‌ها</string>
 
     <string name="change_category_title">انتخاب یک دسته‌بندی</string>
 
+    <string name="note_share_activity_shared_with_you">هم‌رسانده با شما به دست %1$s</string>
+    <string name="note_share_activity_share_note">یادداشت اشتراک گذاری</string>
+    <string name="note_share_activity_share_link">هم‌رسانی پیوند</string>
+    <string name="note_share_activity_could_not_retrieve_url">امکان بازیابی URL وجود ندارد</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" با شما به اشتراک گذاشته شد</string>
+    <string name="note_share_activity_contact_no_permission">دسترسی به مخاطب‌ها مورد نیاز است.</string>
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">تنظمیات پیش‌رفته</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">نهفتن بارگیری</string>
+    <string name="note_share_detail_activity_share_send_note">یادداشت به گیرنده</string>
+    <string name="note_share_detail_activity_hint_note">یادداشت</string>
+    <string name="note_share_detail_activity_share_copy_link">اشتراک‌گذاری و رونوشت پیوند</string>
+    <string name="note_share_detail_activity_common_confirm">تأیید</string>
+    <string name="note_share_detail_activity_set_note">تنظیم یادداشت</string>
+    <string name="note_share_detail_activity_send_share">ارسال اشتراک</string>
+    <string name="note_share_detail_activity_hint_name">نام</string>
+    <string name="note_share_detail_activity_link_name">نام پیوند</string>
+    <string name="note_share_detail_activity_share_link_empty_password">شما باید یک رمزعبور را وارد کنید</string>
+    <string name="note_share_detail_activity_hint_password">گذرواژه</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">لطفاً حداقل یک مجوز برای اشتراک‌گذاری انتخاب کنید.</string>
+    <string name="note_share_detail_activity_label_empty">برچسب نمی تواند خالی باشد</string>
+    <string name="note_share_detail_activity_cancel">ردکردن</string>
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">گذرواژه‌ای اختیاری وارد کنید</string>
+    <string name="share_password_dialog_fragment_skip">پرش</string>
+
+    <string name="share_link_password_title">یک رمزعبور را وارد کنید</string>
+    <string name="common_ok">مورد قبول</string>
+    <string name="common_delete">حذف</string>
+    <string name="write_email">فرستادن رایانامه</string>
+    <string name="no_browser_available">هیچ برنامه ای برای کنترل لینک ها در دسترس نیست</string>
+    <string name="no_email_app_available">هیچ برنامه ای برای رسیدگی به آدرس ایمیل موجود نیست.</string>
+    <string name="no_actions">هیچ اقدامی برای این کاربر وجود ندارد</string>
+
+    <string name="email_pick_failed">خطا در گرفتن نشانی رایانامه</string>
+    <string name="failed_update_ui">رابط کاربری بروز نشد</string>
+    <string name="activity_chooser_title">ارسال لینک به ....</string>
+
+    <string name="activity_chooser_send_file_title">ارسال</string>
+    <string name="share_internal_link_to_folder_text">پیوند هم‌رسانی داخلی تنها برای کاربرای کار می‌کند که به این شاخه دسترسی داشته باشند</string>
+    <string name="share_internal_link_to_file_text">پیوند هم‌رسانی داخلی تنها برای کاربرای کار می‌کند که به این پرونده دسترسی داشته باشند</string>
+    <string name="share_internal_link">هم‌رسانی پیوند داخلی</string>
+    <string name="delete_link">حذف پیوند</string>
+    <string name="share_settings">تنظیمات</string>
+    <string name="share_send_new_email">فرستادن رایانامهٔ جدید</string>
+    <string name="share_dialog_title">هم‌رسانی</string>
+    <string name="share_file">هم‌رسانی %1$s</string>
+    <string name="share_expiration_date_label">منقضی در%1$s</string>
+    <string name="share_expiration_date_format">%1$s</string>
     <string name="share_no_expiration_date_label">تنظیم تاریخ انقضا</string>
+    <string name="share_via_link_section_title">هم‌رسانی پیوند</string>
+    <string name="share_via_link_send_link_label">فرستادن پیوند</string>
+    <string name="share_password_title">محافظت شده با گذرواژه</string>
+    <string name="share_no_password_title">تنظیم گذرواژه</string>
+    <string name="share_with_title">هم‌رسانی با…</string>
+    <string name="share_via_link_unset_password">ناتنظیم</string>
+    <string name="add_another_public_share_link">افزودن پیوندی دیگر</string>
+    <string name="add_new_public_share">افزودن پیوند هم‌رسانی عمومی جدید</string>
+    <string name="public_share_name">اسم جدید</string>
+    <string name="share_link_with_label">هم‌رسانی پیوند (%1$s)</string>
+    <string name="share_link">هم‌رسانی پیوند</string>
+    <string name="allow_resharing">اجازهٔ بازهم‌رساندن</string>
+    <string name="link_share_view_only">تنها مشاهده</string>
+    <string name="link_share_editing">ویرایش کردن</string>
+    <string name="link_share_allow_upload_and_editing">مجاز به بارگذاری و ویرایش</string>
+    <string name="link_share_file_drop">انداختن فایل (فقط آپلود)</string>
+    <string name="could_not_retrieve_shares">امکان بازگردانی اشتراک گذاری‌ها وجود ندارد</string>
+    <string name="share_permission_view_only">تنها مشاهده</string>
+    <string name="share_permission_can_edit">توانایی ویرایش</string>
+    <string name="share_permission_file_drop">انداختن پرونده</string>
+    <string name="share_permission_secure_file_drop">Secure file drop</string>
+    <string name="share_permissions">اجازه‌های هم‌رسانی</string>
+    <string name="username">نام کاربری</string>
     <string name="share_group_clarification">%1$s (گروه)</string>
+    <string name="share_remote_clarification">%1$s (دوردست)</string>
+    <string name="share_room_clarification">%1$s (گفت‌وگو)</string>
+    <string name="share_known_remote_on_clarification">روی %1$s</string>
+    <string name="remote">(از راه دور)</string>
+
+    <string name="copy_link">کپی کردن لینک</string>
+    <string name="share">اشتراک‌گذاری</string>
+    <string name="clipboard_text_copied">پیوند رونوشت شد</string>
+    <string name="clipboard_no_text_to_copy">هیچ متنی برای کپی کردن در کلیپ بورد دریافت نشده است</string>
+    <string name="clipboard_unexpected_error">خطای غیرمنتظره هنگام کپی کردن در کلیپ بورد</string>
+    <string name="clipboard_label">متن کپی شده از %1$s</string>
+
     <string name="listview_updated_today">امروز</string>
     <string name="listview_updated_yesterday">دیروز</string>
     <string name="listview_updated_this_week">این هفته</string>

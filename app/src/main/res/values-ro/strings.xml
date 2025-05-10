@@ -32,18 +32,98 @@
     <string name="menu_favorite">Favorit</string>
     <string name="menu_preview">Previzualizare</string>
     <string name="menu_share">Partajează</string>
+    <string name="common_loading">Se încarcă...</string>
+
+
     <string name="search_in_category">Căutare în 1%1$s</string>
     <string name="search_in_all">Caută în toate notițele </string>
 
     <string name="change_category_title">Alege o categorie </string>
 
+    <string name="note_share_activity_shared_with_you">Partajat cu tine de către %1$s</string>
+    <string name="note_share_activity_share_note">Partajează nota</string>
+    <string name="note_share_activity_share_link">Partajază legătură</string>
+    <string name="note_share_activity_could_not_retrieve_url">Nu a fost găsit URL-ul</string>
+    <string name="note_share_activity_subject_shared_with_you">„%1$s” a fost partajat cu dumneavoastră</string>
+    <string name="note_share_activity_contact_no_permission">Este necesară permisiunea de contact.</string>
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">Setări avansate</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Ascunde descărcarea</string>
+    <string name="note_share_detail_activity_share_send_note">Notă către destinatar</string>
+    <string name="note_share_detail_activity_hint_note">Notă</string>
+    <string name="note_share_detail_activity_common_next">Următorul</string>
+    <string name="note_share_detail_activity_common_confirm">Confirmă</string>
+    <string name="note_share_detail_activity_set_note">Stabilește notița</string>
+    <string name="note_share_detail_activity_send_share">Trimite distribuirea</string>
+    <string name="note_share_detail_activity_hint_name">Nume</string>
+    <string name="note_share_detail_activity_link_name">Numele legăturii</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Trebuie să introduci o parolă</string>
+    <string name="note_share_detail_activity_hint_password">Parolă</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Alege cel puțin o permisiune pentru a partaja.</string>
+    <string name="note_share_detail_activity_label_empty">Eticheta nu poate fi goală</string>
+    <string name="note_share_detail_activity_cancel">Anulare</string>
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Introdu o parolă opțională</string>
+    <string name="share_password_dialog_fragment_skip">Sari peste</string>
+
+    <string name="share_link_password_title">Introduceţi parola</string>
+    <string name="common_delete">Șterge</string>
+    <string name="write_email">Trimite email</string>
+    <string name="no_browser_available">Nu există aplicație disponibilă care să acceseze legăturile</string>
+    <string name="no_email_app_available">Nu există aplicație disponibilă care să gestioneze adresa de email</string>
+    <string name="no_actions">Nici o acțiune pentru acest utilizator</string>
+
+    <string name="email_pick_failed">Nu s-a putut alege adresa de e-mail.</string>
     <string name="failed_update_ui">Nu s-a putut actualiza interfața</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Nicio aplicație disponibilă pentru a selecta contacte</string>
+    <string name="activity_chooser_title">Trimite link la…</string>
+
+    <string name="activity_chooser_send_file_title">Trimite</string>
+    <string name="share_internal_link_to_folder_text">Partajarea de linkuri interne functionează numai pentru utilizatorii cu acces la acest dosar</string>
+    <string name="share_internal_link_to_file_text">Partajarea de linkuri interne functionează numai pentru utilizatorii cu acces la acest fișier</string>
+    <string name="share_internal_link">Trimite link intern</string>
+    <string name="delete_link">Șterge legătura</string>
+    <string name="share_settings">Setări</string>
+    <string name="share_send_new_email">Trimite un email nou</string>
+    <string name="share_dialog_title">Partajare</string>
+    <string name="share_file">Partajare %1$s</string>
+    <string name="share_expiration_date_label">Expiră %1$s</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_no_expiration_date_label">Specifică data expirării</string>
+    <string name="share_via_link_section_title">Partajază legătură</string>
+    <string name="share_via_link_send_link_label">Trimite legătură</string>
+    <string name="share_password_title">Protejat cu parolă</string>
+    <string name="share_with_title">Partajează cu…</string>
+    <string name="share_via_link_unset_password">Desetează</string>
+    <string name="add_another_public_share_link">Adaugă un alt link</string>
+    <string name="add_new_public_share">Adaugă un link public partajat nou</string>
+    <string name="public_share_name">Nume nou</string>
+    <string name="share_link_with_label">Trimite link (%1$s)</string>
+    <string name="share_link">Partajază legătură</string>
+    <string name="allow_resharing">Permite repartajarea</string>
+    <string name="link_share_view_only">Numai se vizualizează</string>
+    <string name="link_share_editing">Se modifică</string>
+    <string name="link_share_allow_upload_and_editing">Permite încărcarea și editarea</string>
+    <string name="link_share_file_drop">Trage fișierul (numai încărcare)</string>
+    <string name="could_not_retrieve_shares">Nu am putut obține lista partajărilor</string>
+    <string name="share_permission_view_only">Numai se vizualizează</string>
+    <string name="share_permission_can_edit">Poate edita</string>
+    <string name="share_permission_file_drop">Aducere fișier</string>
+    <string name="share_permissions">Permisiuni de partajare</string>
     <string name="username">Nume utilizator</string>
     <string name="share_group_clarification">%1$s (grup)</string>
+    <string name="share_remote_clarification">%1$s (remote)</string>
+    <string name="share_room_clarification">%1$s (conversație)</string>
     <string name="share_known_remote_on_clarification">pe %1$s</string>
+    <string name="remote">(la distanță)</string>
+
     <string name="copy_link">Copiază link</string>
+    <string name="share">Partajează</string>
+    <string name="clipboard_text_copied">Link copiat</string>
+    <string name="clipboard_no_text_to_copy">Nici un text disponibil pentru copiere</string>
+    <string name="clipboard_unexpected_error">Eroare neașteptată în timpul copierii</string>
+    <string name="clipboard_label">Text copiat din %1$s</string>
+
     <string name="listview_updated_today">Azi</string>
     <string name="listview_updated_yesterday">Ieri</string>
     <string name="listview_updated_this_week">Săptămâna aceasta</string>

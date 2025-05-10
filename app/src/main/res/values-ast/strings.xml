@@ -30,6 +30,71 @@
     <string name="menu_favorite">Meter en Favoritos</string>
     <string name="menu_preview">Previsualizar</string>
     <string name="menu_share">Compartir</string>
+    <string name="common_loading">Cargando…</string>
+
+
+    <string name="note_share_activity_shared_with_you">%1$s compartió l\'elementu contigo</string>
+    <string name="note_share_activity_share_note">Compartir una nota</string>
+    <string name="note_share_activity_share_link">Compartir l\'enllaz</string>
+    <string name="note_share_activity_subject_shared_with_you">Compartiose \"%1$s\" contigo</string>
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">Configuración avanzada</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Esconder la descarga</string>
+    <string name="note_share_detail_activity_share_send_note">Nota al destinatariu</string>
+    <string name="note_share_detail_activity_hint_note">Nota</string>
+    <string name="note_share_detail_activity_common_next">Siguiente</string>
+    <string name="note_share_detail_activity_common_confirm">Confirmar</string>
+    <string name="note_share_detail_activity_hint_name">Nome</string>
+    <string name="note_share_detail_activity_link_name">Nome del enllaz</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Tienes qu\'introducir una contraseña</string>
+    <string name="note_share_detail_activity_hint_password">Contraseña</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Seleiciona polo menos un permisu pa compartir</string>
+    <string name="note_share_detail_activity_label_empty">La etiqueta nun pue tar baleru</string>
+    <string name="note_share_detail_activity_cancel">Encaboxar</string>
+    <string name="share_password_dialog_fragment_skip">Saltar</string>
+
+    <string name="share_link_password_title">Introduz una contraseña</string>
+    <string name="common_ok">Normal</string>
+    <string name="common_delete">Desaniciar</string>
+    <string name="write_email">Unviar un corréu electrónicu</string>
+    <string name="no_browser_available">Nun hai nenguna aplicación pa remanar esto</string>
+    <string name="no_email_app_available">Nun hai nenguna aplicación pa remanar esta direición de corréu electrónica</string>
+    <string name="no_actions">Nun hai nenguna aición pa esti usuariu</string>
+
+    <string name="email_pick_failed">Nun se pue escoyer la direición de corréu electrónicu.</string>
+    <string name="failed_update_ui">Nun se pue anovar la IU</string>
+    <string name="activity_chooser_send_file_title">Unviar</string>
+    <string name="share_internal_link">Compartir l\'enllaz internu</string>
+    <string name="share_settings">Configuración</string>
+    <string name="share_dialog_title">Compartición</string>
+    <string name="share_file">Compartir %1$s</string>
+    <string name="share_expiration_date_label">Caduca: %1$s</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Afitar la data de caducidá</string>
+    <string name="share_via_link_section_title">Compartir l\'enllaz</string>
+    <string name="share_via_link_send_link_label">Unviar l\'enllaz</string>
+    <string name="share_no_password_title">Afitar la contraseña</string>
+    <string name="add_another_public_share_link">Amestar otru enllaz</string>
+    <string name="public_share_name">Nome nuevu</string>
+    <string name="share_link_with_label">Compartir l\'enllaz (%1$s)</string>
+    <string name="share_link">Compartir l\'enllaz</string>
+    <string name="link_share_view_only">Ver namás</string>
+    <string name="link_share_allow_upload_and_editing">Permitir la xuba y la edición</string>
+    <string name="link_share_file_drop">Suelta de ficheros (namás xuba)</string>
+    <string name="share_permission_view_only">Ver namás</string>
+    <string name="share_permission_can_edit">Pue editar</string>
+    <string name="share_permission_file_drop">Suelta de ficheros</string>
+    <string name="username">Nome d\'usuariu</string>
+    <string name="share_group_clarification">%1$s (gropu)</string>
+    <string name="share_remote_clarification">%1$s (remotu)</string>
+    <string name="share_room_clarification">%1$s (conversación)</string>
+    <string name="remote">(remotu)</string>
+
+    <string name="copy_link">Copiar l\'enllaz</string>
+    <string name="share">Compartir</string>
+    <string name="clipboard_text_copied">Copióse l\'enllaz</string>
+    <string name="clipboard_label">Testu copiáu dende %1$s</string>
+
     <string name="listview_updated_today">Güei</string>
     <string name="listview_updated_yesterday">Ayeri</string>
     <string name="listview_updated_this_week">Esta selmana</string>

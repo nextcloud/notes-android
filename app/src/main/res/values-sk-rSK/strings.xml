@@ -32,19 +32,108 @@
     <string name="menu_favorite">Obľúbené</string>
     <string name="menu_preview">Náhľad</string>
     <string name="menu_share">Sprístupniť</string>
+    <string name="common_loading">Nahrávam...</string>
+
+
     <string name="search_in_category">Hľadať v %1$s</string>
     <string name="search_in_all">Hľadať všetky poznámky</string>
 
     <string name="change_category_title">Vybrať kategóriu</string>
 
+    <string name="note_share_activity_shared_with_you">Sprístupnené vám používateľom %1$s</string>
+    <string name="note_share_activity_share_note">Poznámka k zdieľaniu</string>
+    <string name="note_share_activity_search_text">Meno, ID v rámci Federatívneho cloudu, alebo e-mailová adresa…</string>
+    <string name="note_share_activity_share_link">Zdieľať odkaz</string>
+    <string name="note_share_activity_resharing_not_allowed">Opätovnému zdieľaniu bránia pravidlá alebo práva</string>
+    <string name="note_share_activity_could_not_retrieve_url">Nepodarilo sa načítať webovú adresu</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" vám bol sprístupnený</string>
+    <string name="note_share_activity_contact_no_permission">Vyžaduje sa prístup ku kontaktom</string>
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">Rozšírené nastavenia</string>
     <string name="note_share_detail_activity_share_via_link_hide_download">Skryť sťahovanie</string>
+    <string name="note_share_detail_activity_share_send_note">Poznámka pre príjemcu</string>
+    <string name="note_share_detail_activity_hint_note">Poznámka</string>
+    <string name="note_share_detail_activity_common_next">Ďalšie</string>
+    <string name="note_share_detail_activity_share_copy_link">Zdieľať a Kopírovať Odkaz</string>
+    <string name="note_share_detail_activity_common_confirm">Potvrdiť</string>
+    <string name="note_share_detail_activity_set_note">Nastaviť poznámku</string>
+    <string name="note_share_detail_activity_send_share">Odoslať zdieľanie</string>
+    <string name="note_share_detail_activity_hint_name">Názov</string>
+    <string name="note_share_detail_activity_link_name">Názov odkazu</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Musíte vložiť heslo</string>
+    <string name="note_share_detail_activity_hint_password">Heslo</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Vyberte aspoň jedno povolenie na zdieľanie.</string>
+    <string name="note_share_detail_activity_label_empty">Štítok nemôže byť prázdny</string>
+    <string name="note_share_detail_activity_cancel">Zrušiť</string>
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Zadajte voliteľné heslo </string>
+    <string name="share_link_password_title">Zadajte heslo</string>
+    <string name="common_ok">OK</string>
+    <string name="common_delete">Vymazať</string>
+    <string name="write_email">Odoslať email</string>
+    <string name="no_browser_available">Aplikácia na prácu s linkami nenájdená</string>
+    <string name="no_email_app_available">Aplikácia pre prácu s e-mailovými adresami nenájdená</string>
+    <string name="no_actions">Žiadne akcie pre tohto užívateľa</string>
+
+    <string name="email_pick_failed">Nepodarilo sa vybrať e-mailovú adresu.</string>
     <string name="failed_update_ui">Nepodarilo sa aktualizovať UI</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Nie je k dispozícii žiadna aplikácia pre výber kontaktov</string>
+    <string name="activity_chooser_title">Odoslať odkaz…</string>
+
+    <string name="activity_chooser_send_file_title">Odoslať</string>
+    <string name="share_internal_link_to_folder_text">Interný odkaz na zdieľanie funguje iba pre užívateľov s prístupom k tomuto adresáru</string>
+    <string name="share_internal_link_to_file_text">Interný odkaz na zdieľanie funguje iba pre používateľov s prístupom k tomuto súboru</string>
+    <string name="share_internal_link">Sprístupniť interný odkaz</string>
+    <string name="delete_link">Zmazať odkaz</string>
+    <string name="share_settings">Nastavenia</string>
+    <string name="share_send_new_email">Odoslať nový e-mail</string>
+    <string name="share_dialog_title">Zdieľanie</string>
+    <string name="share_file">Sprístupni %1$s</string>
+    <string name="share_expiration_date_label">Vyprší %1$s</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_no_expiration_date_label">Nastaviť dátum expirácie</string>
+    <string name="share_via_link_section_title">Zdieľať odkaz</string>
+    <string name="share_via_link_send_link_label">Odoslať odkaz</string>
+    <string name="share_password_title">Chránené heslom</string>
+    <string name="share_no_password_title">Nastaviť heslo</string>
+    <string name="share_with_title">Zdieľať s…</string>
+    <string name="share_via_link_unset_password">Zrušiť</string>
+    <string name="add_another_public_share_link">Pridať ďalší odkaz</string>
+    <string name="add_new_public_share">Pridajte nový odkaz na verejné zdieľanie</string>
+    <string name="public_share_name">Nový názov</string>
+    <string name="share_link_with_label">Zdieľať odkaz (%1$s)</string>
+    <string name="share_link">Zdieľať odkaz</string>
+    <string name="allow_resharing">Povoliť zdieľanie ďalej</string>
+    <string name="link_share_view_only">Iba pre čítanie</string>
+    <string name="link_share_editing">Úprava</string>
+    <string name="link_share_allow_upload_and_editing">Povoliť nahrávanie a úpravy</string>
+    <string name="link_share_file_drop">Odovzdávanie súborov (len nahrávanie)</string>
+    <string name="could_not_retrieve_shares">Nie je možné získať zdieľania</string>
+    <string name="share_permission_view_only">Iba pre čítanie</string>
+    <string name="share_permission_can_edit">Môže upravovať</string>
+    <string name="share_permission_file_drop">Vložiť súbor</string>
+    <string name="share_permission_secure_file_drop">Zabezpečený file drop</string>
+    <string name="share_permissions">Zdieľať oprávnenia</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">%1$d zostáva stiahnuť</item>
+        <item quantity="few">%1$d zostáva stiahnuť</item>
+        <item quantity="many">%1$d zostáva stiahnuť</item>
+        <item quantity="other">%1$d zostáva stiahnuť</item>
+    </plurals>
     <string name="username">Užívateľské meno</string>
     <string name="share_group_clarification">%1$s (skupina)</string>
+    <string name="share_remote_clarification">%1$s (vzdialený)</string>
+    <string name="share_room_clarification">%1$s (rozhovor)</string>
     <string name="share_known_remote_on_clarification">na %1$s</string>
+    <string name="remote">(vzdialené)</string>
+
     <string name="copy_link">Kopírovať odkaz</string>
+    <string name="share">Zdieľať</string>
+    <string name="clipboard_text_copied">Odkaz bol skopírovaný</string>
+    <string name="clipboard_no_text_to_copy">Nebol prijatý žiadny text pri kopírovaní do schránky</string>
+    <string name="clipboard_unexpected_error">Nečakaná chyba pri kopírovaní do schránky</string>
+    <string name="clipboard_label">Text kopírovaný z %1$s</string>
+
     <string name="listview_updated_today">Dnes</string>
     <string name="listview_updated_yesterday">Včera</string>
     <string name="listview_updated_this_week">Tento týždeň</string>

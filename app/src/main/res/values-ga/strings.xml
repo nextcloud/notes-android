@@ -32,14 +32,111 @@
     <string name="menu_favorite">is fearr leat</string>
     <string name="menu_preview">Réamhamharc</string>
     <string name="menu_share">Comhroinn</string>
+    <string name="common_loading">Á lódáil…</string>
+
+
     <string name="search_in_category">Cuardaigh i %1$s</string>
     <string name="search_in_all">Cuardaigh gach nótaí</string>
 
     <string name="change_category_title">Roghnaigh catagóir</string>
 
+    <string name="note_share_activity_shared_with_you">Roinnte leat faoi %1$s</string>
+    <string name="note_share_activity_share_note">Roinn nóta</string>
+    <string name="note_share_activity_search_text">Ainm, ID Néal Cónaidhme nó seoladh ríomhphoist…</string>
+    <string name="note_share_activity_share_link">Comhroinn nasc</string>
+    <string name="note_share_activity_resharing_not_allowed">Cuireann beartais nó ceadanna cosc ​​ar athroinnt</string>
+    <string name="note_share_activity_could_not_retrieve_url">Níorbh fhéidir an URL a aisghabháil</string>
+    <string name="note_share_activity_subject_shared_with_you">Roinneadh \"%1$s\" leat</string>
+    <string name="note_share_activity_contact_no_permission">Teastaíonn cead teagmhála.</string>
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">Ardsocruithe</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Folaigh íoslódáil</string>
+    <string name="note_share_detail_activity_share_send_note">Nóta don fhaighteoir</string>
+    <string name="note_share_detail_activity_hint_note">Nóta</string>
+    <string name="note_share_detail_activity_common_next">Ar aghaidh</string>
+    <string name="note_share_detail_activity_share_copy_link">Comhroinn agus Cóipeáil Nasc</string>
+    <string name="note_share_detail_activity_common_confirm">Deimhnigh</string>
+    <string name="note_share_detail_activity_set_note">Socraigh Nóta</string>
+    <string name="note_share_detail_activity_send_share">Seol Comhroinn</string>
+    <string name="note_share_detail_activity_hint_name">Ainm</string>
+    <string name="note_share_detail_activity_link_name">Ainm Nasc</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Caithfidh tú pasfhocal a chur isteach</string>
+    <string name="note_share_detail_activity_hint_password">Pasfhocal</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Roghnaigh cead amháin ar a laghad chun é a roinnt le do thoil.</string>
+    <string name="note_share_detail_activity_label_empty">Ní féidir leis an lipéad a bheith folamh</string>
+    <string name="note_share_detail_activity_cancel">Cealaigh</string>
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Cuir isteach pasfhocal roghnach</string>
+    <string name="share_password_dialog_fragment_skip">Scipeáil</string>
+
+    <string name="share_link_password_title">Cuir isteach pasfhocal</string>
+    <string name="common_ok">Ceart go leor</string>
+    <string name="common_delete">Scrios</string>
+    <string name="write_email">Seol ríomhphost</string>
+    <string name="no_browser_available">Níl aip ar fáil chun naisc a láimhseáil</string>
+    <string name="no_email_app_available">Níl aip ar fáil chun seoladh ríomhphoist a láimhseáil</string>
+    <string name="no_actions">Níl aon ghníomh don úsáideoir seo</string>
+
+    <string name="email_pick_failed">Theip ar an seoladh ríomhphoist a phiocadh.</string>
     <string name="failed_update_ui">Theip ar an Chomhéadain a nuashonrú</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Níl aip ar fáil chun teagmhálaithe a roghnú</string>
+    <string name="activity_chooser_title">Seol nasc chuig…</string>
+
+    <string name="activity_chooser_send_file_title">Seol</string>
+    <string name="share_internal_link_to_folder_text">Ní oibríonn nasc comhroinnte inmheánach ach d’úsáideoirí a bhfuil rochtain acu ar an bhfillteán seo</string>
+    <string name="share_internal_link_to_file_text">Ní oibríonn nasc comhroinnte inmheánach ach d’úsáideoirí a bhfuil rochtain acu ar an gcomhad seo</string>
+    <string name="share_internal_link">Roinn nasc inmheánach</string>
+    <string name="delete_link">Scrios Nasc</string>
+    <string name="share_settings">Socruithe</string>
+    <string name="share_send_new_email">Seol ríomhphost nua</string>
+    <string name="share_dialog_title">Roinnt</string>
+    <string name="share_file">Roinn %1$s</string>
+    <string name="share_expiration_date_label">In éag %1$s</string>
+    <string name="share_expiration_date_format">%1$s</string>
     <string name="share_no_expiration_date_label">Socraigh dáta éaga</string>
+    <string name="share_via_link_section_title">Comhroinn nasc</string>
+    <string name="share_via_link_send_link_label">Seol nasc</string>
+    <string name="share_password_title">Pasfhocal cosanta</string>
+    <string name="share_no_password_title">Socraigh pasfhocal</string>
+    <string name="share_with_title">Roinn le…</string>
+    <string name="share_via_link_unset_password">Díshocraithe</string>
+    <string name="add_another_public_share_link">Cuir nasc eile leis</string>
+    <string name="add_new_public_share">Cuir nasc comhroinnte poiblí nua leis</string>
+    <string name="public_share_name">Ainm nua</string>
+    <string name="share_link_with_label">Comhroinn nasc (%1$s)</string>
+    <string name="share_link">Comhroinn nasc</string>
+    <string name="allow_resharing">Ceadaigh athroinnt</string>
+    <string name="link_share_view_only">Amharc amháin</string>
+    <string name="link_share_editing">Eagarthóireacht</string>
+    <string name="link_share_allow_upload_and_editing">Ceadaigh uaslódáil agus eagarthóireacht</string>
+    <string name="link_share_file_drop">Scaoileadh comhaid (uaslódáil amháin)</string>
+    <string name="could_not_retrieve_shares">Níorbh fhéidir scaireanna a aisghabháil</string>
+    <string name="share_permission_view_only">Amharc amháin</string>
+    <string name="share_permission_can_edit">Is féidir eagarthóireacht a dhéanamh</string>
+    <string name="share_permission_file_drop">Titim comhad</string>
+    <string name="share_permission_secure_file_drop">Titim comhad slán</string>
+    <string name="share_permissions">Ceadanna Comhroinnte</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">%1$d íosluchtú fágtha</item>
+        <item quantity="two">%1$d íoslódálacha fágtha</item>
+        <item quantity="few">%1$d íoslódálacha fágtha</item>
+        <item quantity="many">%1$d íoslódálacha fágtha</item>
+        <item quantity="other">%1$d íoslódálacha fágtha</item>
+    </plurals>
+    <string name="username">Ainm úsáideora</string>
     <string name="share_group_clarification">%1$s (grúpa)</string>
+    <string name="share_remote_clarification">%1$s (iargúlta)</string>
+    <string name="share_room_clarification">%1$s (comhrá)</string>
+    <string name="share_known_remote_on_clarification">ar %1$s</string>
+    <string name="remote">(iargúlta)</string>
+
+    <string name="copy_link">Cóipeáil an nasc</string>
+    <string name="share">Comhroinn</string>
+    <string name="clipboard_text_copied">Cóipeáladh an nasc</string>
+    <string name="clipboard_no_text_to_copy">Ní bhfuarthas aon téacs le cóipeáil chuig an ngearrthaisce</string>
+    <string name="clipboard_unexpected_error">Earráid gan choinne agus cóipeáil chuig an ngearrthaisce</string>
+    <string name="clipboard_label">Cóipeáladh an téacs ó %1$s</string>
+
     <string name="listview_updated_today">Inniu</string>
     <string name="listview_updated_yesterday">Inné</string>
     <string name="listview_updated_this_week">An tseachtain seo</string>

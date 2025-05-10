@@ -32,10 +32,96 @@
     <string name="menu_favorite">Любима</string>
     <string name="menu_preview">Преглед</string>
     <string name="menu_share">Споделяне</string>
+    <string name="common_loading">Зареждане…</string>
+
+
     <string name="search_in_category">Търсене в %1$s</string>
     <string name="search_in_all">Търсене във всички бележки</string>
 
     <string name="change_category_title">Изберете категория</string>
+
+    <string name="note_share_activity_shared_with_you">Споделено с Вас от %1$s</string>
+    <string name="note_share_activity_share_note">Сподели бележка</string>
+    <string name="note_share_activity_share_link">Връзка за споделяне</string>
+    <string name="note_share_activity_could_not_retrieve_url">URL адресът не може да бъде извлечен</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" бе споделено с вас</string>
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">Допълнителни настройки</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Скрий свалянето</string>
+    <string name="note_share_detail_activity_share_send_note">Бележка за получателя</string>
+    <string name="note_share_detail_activity_hint_note">Бележка</string>
+    <string name="note_share_detail_activity_common_next">Следващо</string>
+    <string name="note_share_detail_activity_common_confirm">Потвърдете</string>
+    <string name="note_share_detail_activity_set_note">Задаване на Бележка</string>
+    <string name="note_share_detail_activity_send_share">Изпращане на Споделяне</string>
+    <string name="note_share_detail_activity_hint_name">Име</string>
+    <string name="note_share_detail_activity_link_name">Име на Връзка</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Трябва да въведете парола</string>
+    <string name="note_share_detail_activity_hint_password">Парола</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Моля, изберете поне едно право за споделяне.</string>
+    <string name="note_share_detail_activity_label_empty">Етикетът не може да бъде празен</string>
+    <string name="note_share_detail_activity_cancel">Отказ</string>
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Въведи опционална парола</string>
+    <string name="share_password_dialog_fragment_skip">Пропусни</string>
+
+    <string name="share_link_password_title">Въвеждане на парола</string>
+    <string name="common_ok">Добре</string>
+    <string name="common_delete">Изтриване</string>
+    <string name="write_email">Изпращане на имейл</string>
+    <string name="no_browser_available">Няма налично приложение за обработка на връзките</string>
+    <string name="no_email_app_available">Няма налично приложение за обработка на имейл адрес</string>
+    <string name="no_actions">Няма действия за този потребител</string>
+
+    <string name="failed_update_ui">Неуспешно обновяване на UI /потребителски интерфейс/</string>
+    <string name="activity_chooser_title">Изпращане на връзка чрез…</string>
+
+    <string name="activity_chooser_send_file_title">Изпращане</string>
+    <string name="share_internal_link_to_folder_text">Вътрешната връзка за споделяне работи само за потребители, които имат достъп до тази папка</string>
+    <string name="share_internal_link_to_file_text">Вътрешната връзка за споделяне работи само за потребители, които имат достъп до този файл</string>
+    <string name="share_internal_link">Сподели вътрешна връзка</string>
+    <string name="delete_link">Изтриване на връзка</string>
+    <string name="share_settings">Настройки</string>
+    <string name="share_send_new_email">Изпращане на нов имейл</string>
+    <string name="share_dialog_title">Споделяне</string>
+    <string name="share_file">Споделяне на %1$s</string>
+    <string name="share_expiration_date_label">Изтича %1$s</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Срок на валидност</string>
+    <string name="share_via_link_section_title">Връзка за споделяне</string>
+    <string name="share_via_link_send_link_label">Изпратете връзката</string>
+    <string name="share_password_title">Защитена с парола</string>
+    <string name="share_with_title">Споделете чрез ...</string>
+    <string name="share_via_link_unset_password">Да не се задава</string>
+    <string name="add_new_public_share">Добавете нова връзка за публично споделяне</string>
+    <string name="public_share_name">Ново име</string>
+    <string name="share_link_with_label">Споделяне на линк (%1$s)</string>
+    <string name="share_link">Връзка за споделяне</string>
+    <string name="allow_resharing">Разреши повторно споделяне.</string>
+    <string name="link_share_view_only">Само изглед</string>
+    <string name="link_share_editing">Редактиране</string>
+    <string name="link_share_allow_upload_and_editing">За качване и редактиране</string>
+    <string name="link_share_file_drop">Само за качване</string>
+    <string name="could_not_retrieve_shares"> 60% match 
+Споделянията не могат да бъдат извлечени</string>
+    <string name="share_permission_view_only">Само изглед</string>
+    <string name="share_permission_can_edit">Може да се редактира</string>
+    <string name="share_permission_file_drop">Пускане/Преместване/ на файл</string>
+    <string name="share_permission_secure_file_drop">Защитено пускане на файлове</string>
+    <string name="share_permissions">Права за споделяне</string>
+    <string name="username">Потребител</string>
+    <string name="share_group_clarification">%1$s (група)</string>
+    <string name="share_remote_clarification">%1$s (отдалечен)</string>
+    <string name="share_room_clarification">%1$s (разговор)</string>
+    <string name="share_known_remote_on_clarification">на %1$s</string>
+    <string name="remote">(отдалечен)</string>
+
+    <string name="copy_link">Копиране на връзката</string>
+    <string name="share">Споделяне</string>
+    <string name="clipboard_text_copied">Връзката е копирана</string>
+    <string name="clipboard_no_text_to_copy">Няма получен текст за копиране в клипборда</string>
+    <string name="clipboard_unexpected_error">Неочаквана грешка при опит за копиране в клипборда</string>
+    <string name="clipboard_label">Текста е копиран от %1$s</string>
 
     <string name="listview_updated_today">Днес</string>
     <string name="listview_updated_yesterday">Вчера</string>

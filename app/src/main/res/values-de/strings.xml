@@ -32,10 +32,125 @@
     <string name="menu_favorite">Favorit</string>
     <string name="menu_preview">Vorschau</string>
     <string name="menu_share">Teilen</string>
+    <string name="common_loading">Lade…</string>
+
+
     <string name="search_in_category">Suche in %1$s</string>
     <string name="search_in_all">In allen Notizen suchen</string>
 
     <string name="change_category_title">Kategorie auswählen</string>
+
+    <!-- UsersAndGroupsSearchProvider -->
+    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
+    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
+
+    <!-- NoteShareActivity -->
+    <string name="note_share_activity_activity_icon_content_description">Symbol für Notizaktivität</string>
+    <string name="note_share_activity_share_icon_content_description">Symbol zum Teilen von Notizen</string>
+    <string name="note_share_activity_external_icon_content_description">Symbol für externe Notizfreigabe</string>
+    <string name="note_share_activity_icon_content_description">Symbol zum Teilen von Notizen</string>
+    <string name="note_share_activity_shared_with_you">Geteilt mit Ihnen von %1$s</string>
+    <string name="note_share_activity_share_note">Notiz teilen</string>
+    <string name="note_share_activity_search_text">Name, Federated-Cloud-ID oder E-Mail-Adresse…</string>
+    <string name="note_share_activity_share_link">Link teilen</string>
+    <string name="note_share_activity_resharing_not_allowed">Richtlinien oder Berechtigungen verhindern das Weiterteilen</string>
+    <string name="note_share_activity_could_not_retrieve_url">URL konnte nicht abgerufen werden</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" wurde mit Ihnen geteilt</string>
+    <string name="note_share_activity_contact_no_permission">Eine Kontakterlaubnis ist erforderlich.</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">Sie dürfen keine öffentliche Freigabe erstellen</string>
+
+    <string name="note_share_created">Freigabe erstellt</string>
+    <string name="note_share_activity_cannot_created">Sie dürfen keine Freigabe erstellen</string>
+
+
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">Erweiterte Einstellungen</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Download verbergen</string>
+    <string name="note_share_detail_activity_share_send_note">Notiz an Empfänger</string>
+    <string name="note_share_detail_activity_hint_note">Notiz</string>
+    <string name="note_share_detail_activity_common_next">Nächstes</string>
+    <string name="note_share_detail_activity_share_copy_link">Teilen und Link kopieren</string>
+    <string name="note_share_detail_activity_common_confirm">Bestätigen</string>
+    <string name="note_share_detail_activity_set_note">Notiz setzen</string>
+    <string name="note_share_detail_activity_send_share">Freigabe senden</string>
+    <string name="note_share_detail_activity_hint_name">Name</string>
+    <string name="note_share_detail_activity_link_name">Link-Name</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Sie müssen ein Passwort eingeben</string>
+    <string name="note_share_detail_activity_hint_password">Passwort</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Bitte mindestens eine Berechtigung zum Teilen auswählen.</string>
+    <string name="note_share_detail_activity_label_empty">Bezeichnung darf nicht leer sein</string>
+    <string name="note_share_detail_activity_cancel">Abbrechen</string>
+    <string name="note_share_detail_activity_create_share_error">Freigabe konnte nicht erstellt werden</string>
+
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Passwort eingeben (optional)</string>
+    <string name="share_password_dialog_fragment_skip">Überspringen</string>
+
+    <string name="share_link_password_title">Passwort eingeben</string>
+    <string name="common_ok">OK</string>
+    <string name="common_delete">Löschen</string>
+    <string name="write_email">E-Mail senden</string>
+    <string name="no_browser_available">Keine App zum Öffnen von Links verfügbar</string>
+    <string name="no_email_app_available">Keine App zur Verarbeitung der E-Mail-Adresse verfügbar</string>
+    <string name="no_actions">Keine Aktionen für diesen Benutzer</string>
+
+    <string name="failed_the_remove_share">Freigabe konnte nicht entfernt werden</string>
+    <string name="email_pick_failed">E-Mail-Adresse konnte nicht ausgewählt werden.</string>
+    <string name="failed_update_ui">Oberfläche konnte nicht aktualisiert werden</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Keine App zum Auswählen von Kontakten verfügbar</string>
+    <string name="activity_chooser_title">Link senden an…</string>
+
+    <string name="activity_chooser_send_file_title">Senden</string>
+    <string name="share_internal_link_to_folder_text">Der interne Freigabelink funktioniert nur für Benutzer mit Zugriff auf diesen Ordner</string>
+    <string name="share_internal_link_to_file_text">Der interne Freigabelink funktioniert nur für Benutzer mit Zugriff auf diese Datei</string>
+    <string name="share_internal_link">Internen Link teilen</string>
+    <string name="delete_link">Link löschen</string>
+    <string name="share_settings">Einstellungen</string>
+    <string name="share_send_new_email">Neue E-Mail senden</string>
+    <string name="share_dialog_title">Teilen</string>
+    <string name="share_file">Teile %1$s</string>
+    <string name="share_expiration_date_label">Läuft am %1$s ab</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Ablaufdatum setzen</string>
+    <string name="share_via_link_section_title">Link teilen</string>
+    <string name="share_via_link_send_link_label">Link teilen</string>
+    <string name="share_password_title">Passwortgeschützt</string>
+    <string name="share_no_password_title">Passwort festlegen</string>
+    <string name="share_with_title">Teilen mit…</string>
+    <string name="share_via_link_unset_password">Entfernen</string>
+    <string name="add_another_public_share_link">Weiteren Link hinzufügen</string>
+    <string name="add_new_public_share">Öffentlichen Link zum Teilen hinzufügen</string>
+    <string name="public_share_name">Neuer Name</string>
+    <string name="share_link_with_label">Teile Link (%1$s)</string>
+    <string name="share_link">Link teilen</string>
+    <string name="allow_resharing">Weiterverteilen erlauben</string>
+    <string name="link_share_view_only">Nur anzeigen</string>
+    <string name="link_share_editing">Bearbeitung</string>
+    <string name="link_share_allow_upload_and_editing">Hochladen und Bearbeiten erlauben</string>
+    <string name="link_share_file_drop">Dateien ablegen (nur Hochladen)</string>
+    <string name="could_not_retrieve_shares">Freigaben konnten nicht abgerufen werden</string>
+    <string name="share_permission_view_only">Nur anzeigen</string>
+    <string name="share_permission_can_edit">Kann bearbeiten</string>
+    <string name="share_permission_file_drop">Dateiablage</string>
+    <string name="share_permission_secure_file_drop">Sichere Dateiablage</string>
+    <string name="share_permissions">Berechtigungen zum Teilen</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">%1$d verbleibender Download</item>
+        <item quantity="other">%1$d verbleibende Downloads</item>
+    </plurals>
+    <string name="username">Kontenname</string>
+    <string name="share_group_clarification">%1$s (Gruppe)</string>
+    <string name="share_remote_clarification">%1$s (extern)</string>
+    <string name="share_room_clarification">%1$s (Unterhaltung)</string>
+    <string name="share_known_remote_on_clarification">auf %1$s</string>
+    <string name="remote">(extern)</string>
+
+    <string name="copy_link">Link kopieren</string>
+    <string name="share">Teilen</string>
+    <string name="clipboard_text_copied">Link kopiert</string>
+    <string name="clipboard_no_text_to_copy">Kein Text zum Kopieren in die Zwischenablage empfangen</string>
+    <string name="clipboard_unexpected_error">Unerwarteter Fehler beim Kopieren in die Zwischenablage</string>
+    <string name="clipboard_label">Text von %1$s kopiert</string>
 
     <string name="listview_updated_today">Heute</string>
     <string name="listview_updated_yesterday">Gestern</string>
