@@ -32,27 +32,79 @@
     <string name="menu_favorite">סימון כמועדף</string>
     <string name="menu_preview">תצוגה מקדימה</string>
     <string name="menu_share">שיתוף</string>
+    <string name="common_loading">בטעינה…</string>
+
+
     <string name="search_in_category">חיפוש תחת %1$s</string>
     <string name="search_in_all">חיפוש בכל הפתקים</string>
 
     <string name="change_category_title">בחירת קטגוריה</string>
 
     <string name="note_share_activity_shared_with_you">שותף אתך על ידי %1$s</string>
+    <string name="note_share_activity_share_note">פתק שיתוף</string>
     <string name="note_share_activity_share_link">שיתוף קישור</string>
+    <string name="note_share_activity_could_not_retrieve_url">לא ניתן לקבל כתובת</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" שותף אתך</string>
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">הגדרות מתקדמות</string>
     <string name="note_share_detail_activity_share_via_link_hide_download">הסתרת הורדה</string>
+    <string name="note_share_detail_activity_share_send_note">מסר לנמען</string>
+    <string name="note_share_detail_activity_hint_note">פתק</string>
+    <string name="note_share_detail_activity_common_confirm">אישור</string>
     <string name="note_share_detail_activity_hint_name">שם</string>
+    <string name="note_share_detail_activity_share_link_empty_password">יש להכניס סיסמא</string>
+    <string name="note_share_detail_activity_hint_password">ססמה</string>
     <string name="note_share_detail_activity_cancel">ביטול</string>
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">ניתן להקליד ססמה</string>
+    <string name="share_password_dialog_fragment_skip">דלג</string>
+
+    <string name="share_link_password_title">הכנסת סיסמא</string>
+    <string name="common_ok">בסדר</string>
     <string name="common_delete">מחיקה</string>
+    <string name="write_email">שליחת דואר אלקטרוני</string>
+    <string name="no_browser_available">אין יישומון שיכול לטפל בקישורים</string>
+    <string name="activity_chooser_title">שליחת קישור אל…</string>
+
+    <string name="activity_chooser_send_file_title">שליחה</string>
+    <string name="share_internal_link_to_folder_text">קישורי שיתוף פנימיים עובדים רק עבור משתמש עם גישה לתיקייה הזו</string>
+    <string name="share_internal_link_to_file_text">קישורי שיתוף פנימיים עובדים רק עבור משתמש עם גישה לקובץ הזה</string>
+    <string name="share_internal_link">שיתוף קישור פנימי</string>
+    <string name="delete_link">מחק קישור</string>
+    <string name="share_settings">הגדרות</string>
+    <string name="share_dialog_title">שיתוף</string>
+    <string name="share_file">שיתוף %1$s</string>
+    <string name="share_expiration_date_label">תפוגה ב־%1$s</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_no_expiration_date_label">הגדרת תאריך תפוגה</string>
+    <string name="share_via_link_section_title">שיתוף קישור</string>
+    <string name="share_via_link_send_link_label">שליחת קישור</string>
     <string name="share_password_title">מוגן בססמה</string>
+    <string name="share_with_title">שיתף עם…</string>
+    <string name="share_via_link_unset_password">ביטול הגדרה</string>
+    <string name="add_another_public_share_link">הוספת קישור נוסף</string>
+    <string name="add_new_public_share">הוסף קישור שיתוף ציבורי חדש</string>
+    <string name="share_link_with_label">שתף קישור (%1$s)</string>
+    <string name="share_link">שיתוף קישור</string>
+    <string name="allow_resharing">לאפשר שיתוף מחדש</string>
+    <string name="link_share_view_only">לצפיה בלבד</string>
+    <string name="link_share_allow_upload_and_editing">לאפשר העלאה ועריכה</string>
+    <string name="link_share_file_drop">השלכת קבצים (העלאה בלבד)</string>
     <string name="could_not_retrieve_shares">לא ניתן למשוך את השיתופים</string>
+    <string name="share_permission_view_only">לצפיה בלבד</string>
+    <string name="share_permission_can_edit">ניתן לערוך</string>
     <string name="username">שם משתמש</string>
     <string name="share_group_clarification">%1$s (קבוצה)</string>
+    <string name="share_remote_clarification">%1$s (נשלט מרחוק)</string>
+    <string name="share_room_clarification">%1$s (דיון)</string>
     <string name="share_known_remote_on_clarification">בתאריך %1$s</string>
     <string name="copy_link">העתקת קישור</string>
+    <string name="share">שתף</string>
     <string name="clipboard_text_copied">הקישור הועתק</string>
+    <string name="clipboard_no_text_to_copy">לא התקבל טקסט להעתקה ללוח הגזירים</string>
     <string name="clipboard_unexpected_error">אירעה שגיאה בזמן העתקה ללוח</string>
+    <string name="clipboard_label">טקסט הועתק מ- %1$s</string>
+
     <string name="listview_updated_today">היום</string>
     <string name="listview_updated_yesterday">אתמול</string>
     <string name="listview_updated_this_week">השבוע</string>
