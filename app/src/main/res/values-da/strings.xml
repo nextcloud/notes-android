@@ -54,22 +54,22 @@
     <string name="note_share_detail_activity_share_send_note">Note til modtager</string>
     <string name="note_share_detail_activity_hint_note">Note</string>
     <string name="note_share_detail_activity_common_next">Næste</string>
-    <string name="note_share_detail_activity_share_copy_link">Del og kopier link</string>
+    <string name="note_share_detail_activity_share_copy_link">Del og kopiér link</string>
     <string name="note_share_detail_activity_common_confirm">Bekræft</string>
     <string name="note_share_detail_activity_set_note">Sæt Note</string>
     <string name="note_share_detail_activity_send_share">Send Deling</string>
     <string name="note_share_detail_activity_hint_name">Navn</string>
     <string name="note_share_detail_activity_link_name">Link Navn</string>
-    <string name="note_share_detail_activity_share_link_empty_password">Du skal angive et kodeord</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Du skal angive en adgangskode</string>
     <string name="note_share_detail_activity_hint_password">Adgangskode</string>
     <string name="note_share_detail_activity_no_share_permission_selected">Vælg mindst en tilladelse til at dele.</string>
     <string name="note_share_detail_activity_label_empty">Etiketten kan ikke være tom</string>
     <string name="note_share_detail_activity_cancel">Annullér</string>
     <!-- SharePasswordDialogFragment -->
-    <string name="share_password_dialog_fragment_share_link_optional_password_title">Angiv et valgfrit kodeord</string>
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Angiv en valgfri adgangskode</string>
     <string name="share_password_dialog_fragment_skip">Spring over</string>
 
-    <string name="share_link_password_title">Angiv en adgangskodea password</string>
+    <string name="share_link_password_title">Angiv en adgangskode</string>
     <string name="common_ok">OK</string>
     <string name="common_delete">Slet</string>
     <string name="write_email">Send e-mail</string>

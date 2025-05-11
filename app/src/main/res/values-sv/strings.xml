@@ -48,6 +48,12 @@
     <string name="note_share_activity_could_not_retrieve_url">Kunde inte hämta URL</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" har delats med dig</string>
     <string name="note_share_activity_contact_no_permission">Rättighet till kontakt krävs.</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">Du har inte behörighet att skapa en publik delning.</string>
+
+    <string name="note_share_created">Delningen skapad</string>
+    <string name="note_share_activity_cannot_created">Du har inte behörighet att skapa en delning.</string>
+
+
     <!-- NoteShareDetailActivity -->
     <string name="note_share_detail_activity_advanced_settings">Avancerade inställningar</string>
     <string name="note_share_detail_activity_share_via_link_hide_download">Dölj hämtning</string>
@@ -65,6 +71,8 @@
     <string name="note_share_detail_activity_no_share_permission_selected">Välj minst en behörighet att dela.</string>
     <string name="note_share_detail_activity_label_empty">Etiketten kan inte vara tom</string>
     <string name="note_share_detail_activity_cancel">Avbryt</string>
+    <string name="note_share_detail_activity_create_share_error">Kunde inte skapa en delning</string>
+
     <!-- SharePasswordDialogFragment -->
     <string name="share_password_dialog_fragment_share_link_optional_password_title">Ange ett valfritt lösenord</string>
     <string name="share_password_dialog_fragment_skip">Hoppa över</string>
@@ -77,6 +85,7 @@
     <string name="no_email_app_available">Ingen tillgänglig applikation kan hantera e-postadresser</string>
     <string name="no_actions">Inga tillgängliga åtgärder för användaren</string>
 
+    <string name="failed_the_remove_share">Kunde inte ta bort delning</string>
     <string name="email_pick_failed">Det gick inte att välja e-postadress.</string>
     <string name="failed_update_ui">Misslyckades med att uppdatera UI</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Ingen app tillgänglig för att välja kontakter</string>
