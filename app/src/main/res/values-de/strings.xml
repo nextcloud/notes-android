@@ -51,7 +51,7 @@
     <string name="note_share_activity_copy_icon_content_description">Symbol zum Notizen-Kopie teilen</string>
     <string name="note_share_activity_more_icon_content_description">Symbol für weitere Notizen teilen</string>
     <string name="note_share_activity_icon_content_description">Symbol zum Teilen von Notizen</string>
-    <string name="note_share_activity_user_icon_content_description">Nutzer-Symbol für Notizen teilen</string>
+    <string name="note_share_activity_user_icon_content_description">Benutzer-Symbol für Notizen teilen</string>
     <string name="note_share_activity_contact_icon_content_description">Kontakt-Symbol zum Notizen teilen</string>
     <string name="note_share_activity_shared_with_you">Geteilt mit Ihnen von %1$s</string>
     <string name="note_share_activity_share_note">Notiz teilen</string>
