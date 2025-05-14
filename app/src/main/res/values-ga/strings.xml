@@ -40,6 +40,19 @@
 
     <string name="change_category_title">Roghnaigh catagóir</string>
 
+    <!-- UsersAndGroupsSearchProvider -->
+    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.ÚsáideoiríAgusGrúpaíSoláthraíCuardaigh</string>
+    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.ÚsáideoiríAgusGrúpaíSoláthraíCuardaigh.gníomh.SHARE_WITH</string>
+
+    <!-- NoteShareActivity -->
+    <string name="note_share_activity_activity_icon_content_description">deilbhín gníomhaíochta nóta</string>
+    <string name="note_share_activity_share_icon_content_description">deilbhín comhroinnte nóta</string>
+    <string name="note_share_activity_external_icon_content_description">deilbhín seachtrach comhroinnte nótaí</string>
+    <string name="note_share_activity_copy_icon_content_description">deilbhín cóipeála comhroinnte nóta</string>
+    <string name="note_share_activity_more_icon_content_description">nóta roinnt níos mó deilbhín</string>
+    <string name="note_share_activity_icon_content_description">deilbhín comhroinnte nóta</string>
+    <string name="note_share_activity_user_icon_content_description">deilbhín úsáideora roinnte nóta</string>
+    <string name="note_share_activity_contact_icon_content_description">deilbhín teagmhála roinnte nóta</string>
     <string name="note_share_activity_shared_with_you">Roinnte leat faoi %1$s</string>
     <string name="note_share_activity_share_note">Roinn nóta</string>
     <string name="note_share_activity_search_text">Ainm, ID Néal Cónaidhme nó seoladh ríomhphoist…</string>
@@ -48,6 +61,12 @@
     <string name="note_share_activity_could_not_retrieve_url">Níorbh fhéidir an URL a aisghabháil</string>
     <string name="note_share_activity_subject_shared_with_you">Roinneadh \"%1$s\" leat</string>
     <string name="note_share_activity_contact_no_permission">Teastaíonn cead teagmhála.</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">Ní cheadaítear duit comhroinnt phoiblí a chruthú.</string>
+
+    <string name="note_share_created">Comhroinn cruthaithe</string>
+    <string name="note_share_activity_cannot_created">Ní cheadaítear duit comhroinnt a chruthú.</string>
+
+
     <!-- NoteShareDetailActivity -->
     <string name="note_share_detail_activity_advanced_settings">Ardsocruithe</string>
     <string name="note_share_detail_activity_share_via_link_hide_download">Folaigh íoslódáil</string>
@@ -65,6 +84,8 @@
     <string name="note_share_detail_activity_no_share_permission_selected">Roghnaigh cead amháin ar a laghad chun é a roinnt le do thoil.</string>
     <string name="note_share_detail_activity_label_empty">Ní féidir leis an lipéad a bheith folamh</string>
     <string name="note_share_detail_activity_cancel">Cealaigh</string>
+    <string name="note_share_detail_activity_create_share_error">Theip ar chomhroinnt a chruthú</string>
+
     <!-- SharePasswordDialogFragment -->
     <string name="share_password_dialog_fragment_share_link_optional_password_title">Cuir isteach pasfhocal roghnach</string>
     <string name="share_password_dialog_fragment_skip">Scipeáil</string>
@@ -77,6 +98,7 @@
     <string name="no_email_app_available">Níl aip ar fáil chun seoladh ríomhphoist a láimhseáil</string>
     <string name="no_actions">Níl aon ghníomh don úsáideoir seo</string>
 
+    <string name="failed_the_remove_share">Theip ar an gcomhroinnt a bhaint</string>
     <string name="email_pick_failed">Theip ar an seoladh ríomhphoist a phiocadh.</string>
     <string name="failed_update_ui">Theip ar an Chomhéadain a nuashonrú</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Níl aip ar fáil chun teagmhálaithe a roghnú</string>
