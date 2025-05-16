@@ -40,6 +40,19 @@
 
     <string name="change_category_title">Escolha uma categoria</string>
 
+    <!-- UsersAndGroupsSearchProvider -->
+    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
+    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
+
+    <!-- NoteShareActivity -->
+    <string name="note_share_activity_activity_icon_content_description">ícone de atividade de nota</string>
+    <string name="note_share_activity_share_icon_content_description">ícone de compartilhamento de nota</string>
+    <string name="note_share_activity_external_icon_content_description">ícone de compartilhamento externo de nota</string>
+    <string name="note_share_activity_copy_icon_content_description">ícone de cópia de compartilhamento de nota</string>
+    <string name="note_share_activity_more_icon_content_description">ícone para mais opções de compartilhamento de nota</string>
+    <string name="note_share_activity_icon_content_description">ícone de compartilhamento de nota</string>
+    <string name="note_share_activity_user_icon_content_description">ícone de usuário de compartilhamento de nota</string>
+    <string name="note_share_activity_contact_icon_content_description">ícone de contato de compartilhamento de nota</string>
     <string name="note_share_activity_shared_with_you">Compartilhado com você por %1$s</string>
     <string name="note_share_activity_share_note">Compartilhar nota</string>
     <string name="note_share_activity_search_text">Nome, ID de Nuvem Federada ou endereço de e-mail…</string>
@@ -48,7 +61,12 @@
     <string name="note_share_activity_could_not_retrieve_url">Não foi possível recuperar a URL</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" foi compartilhado com você</string>
     <string name="note_share_activity_contact_no_permission">É necessária a permissão de contato.</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">Você não tem permissões para criar um compartilhamento público.</string>
+
     <string name="note_share_created">Compartilhamento criado</string>
+    <string name="note_share_activity_cannot_created">Você não tem permissões para criar um compartilhamento.</string>
+
+
     <!-- NoteShareDetailActivity -->
     <string name="note_share_detail_activity_advanced_settings">Configurações Avançadas </string>
     <string name="note_share_detail_activity_share_via_link_hide_download">Ocultar download</string>
@@ -169,7 +187,7 @@
     <string name="error_unknown">Ocorreu um erro desconhecido.</string>
 
     <string name="about_version_title">Versão</string>
-    <string name="about_version">Você está atualmente usando %1$s</string>
+    <string name="about_version">No momento, você está usando %1$s</string>
     <string name="about_maintainer_title">Mantenedor</string>
     <string name="about_developers_title">Desenvolvedores</string>
     <string name="about_developers_original_author">autor original</string>
@@ -179,15 +197,15 @@
     <string name="about_source_title">Código-fonte</string>
     <string name="about_source">Este projeto está hospedado no GitHub: %1$s</string>
     <string name="about_issues_title">Problemas</string>
-    <string name="about_issues">Você pode relatar bugs, propostas de melhorias e solicitações de recursos no rastreador de problemas do GitHub:%1$s</string>
+    <string name="about_issues">Você pode relatar bugs, propostas de melhorias e solicitações de recursos no rastreador de problemas do GitHub: %1$s</string>
     <string name="about_translate_title">Traduzir</string>
-    <string name="about_translate">Junte-se à equipe Nextcloud no Transifex e nos ajude a traduzir este aplicativo: %1$s</string>
+    <string name="about_translate">Participe da equipe Nextcloud no Transifex e ajude-nos a traduzir este aplicativo: %1$s</string>
     <string name="about_app_license_title">Licença do aplicativo</string>
     <string name="about_app_license">Este aplicativo está licenciado sob a GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Ver licença</string>
     <string name="about_icons_disclaimer_title">Ícones</string>
     <string name="about_icons_disclaimer_app_icon">Para o ícone original, veja %1$s.</string>
-    <string name="about_icons_disclaimer_mdi_icons">Todos os outros ícones usados por este aplicativo %1$s são feitos pela Google Inc. e licenciados sob a Licença Apache 2.0.</string>
+    <string name="about_icons_disclaimer_mdi_icons">Todos os outros ícones usados por este aplicativo %1$s são feitos pelo Google Inc. e licenciados sob a Licença Apache 2.0.</string>
     <string name="about_icons_disclaimer_mdi">Ícones do Material Design</string>
     <string name="about_credits_tab_title">Créditos</string>
     <string name="about_contribution_tab_title">Contribuição</string>
