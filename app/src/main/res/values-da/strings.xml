@@ -62,7 +62,7 @@
     <string name="note_share_detail_activity_link_name">Link Navn</string>
     <string name="note_share_detail_activity_share_link_empty_password">Du skal angive en adgangskode</string>
     <string name="note_share_detail_activity_hint_password">Adgangskode</string>
-    <string name="note_share_detail_activity_no_share_permission_selected">Vælg mindst en tilladelse til at dele.</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Vælg mindst én tilladelse til at dele.</string>
     <string name="note_share_detail_activity_label_empty">Etiketten kan ikke være tom</string>
     <string name="note_share_detail_activity_cancel">Annullér</string>
     <!-- SharePasswordDialogFragment -->
@@ -97,7 +97,7 @@
     <string name="share_via_link_section_title">Del link</string>
     <string name="share_via_link_send_link_label">Send link</string>
     <string name="share_password_title">Beskyttet med adgangskode</string>
-    <string name="share_no_password_title">Angiv adgangskodepassword</string>
+    <string name="share_no_password_title">Angiv adgangskode</string>
     <string name="share_with_title">Del med...</string>
     <string name="share_via_link_unset_password">Fjern indstilling</string>
     <string name="add_another_public_share_link">Tilføj et link mere</string>
@@ -125,9 +125,9 @@
     <string name="share_remote_clarification">%1$s (ekstern)</string>
     <string name="share_room_clarification">%1$s (samtale)</string>
     <string name="share_known_remote_on_clarification">på %1$s</string>
-    <string name="remote">(fjernt)</string>
+    <string name="remote">(ekstern)</string>
 
-    <string name="copy_link">Kopier link</string>
+    <string name="copy_link">Kopiér link</string>
     <string name="share">Del</string>
     <string name="clipboard_text_copied">Link kopieret</string>
     <string name="clipboard_no_text_to_copy">Modtog ingen tekst til kopiering til udklipsholder</string>
