@@ -113,6 +113,10 @@
     <string name="share_permission_file_drop">Fitxategiak jaregin</string>
     <string name="share_permission_secure_file_drop">Fitxategi-jartze segurua</string>
     <string name="share_permissions">Partekatze baimenak</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">Deskarga %1$d falta da</item>
+        <item quantity="other">%1$d deskarga falta dira</item>
+    </plurals>
     <string name="username">Erabiltzaile-izena</string>
     <string name="share_group_clarification">%1$s (taldea)</string>
     <string name="share_remote_clarification">%1$s (urrunekoa)</string>
