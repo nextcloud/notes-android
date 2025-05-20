@@ -28,6 +28,7 @@
             <trusting group="androidx.databinding"/>
             <trusting group="androidx.fragment"/>
             <trusting group="androidx.lifecycle"/>
+            <trusting group="androidx.recyclerview" name="recyclerview-selection" version="1.2.0"/>
             <trusting group="androidx.room"/>
             <trusting group="androidx.savedstate"/>
             <trusting group="androidx.sqlite"/>
