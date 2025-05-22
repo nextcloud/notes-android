@@ -88,6 +88,7 @@
          </trusted-key>
          <trusted-key id="4021EEEAFF5DE8404DCD0A270AA3E5C3D232E79B" group="jakarta.inject" name="jakarta.inject-api" version="2.0.1"/>
          <trusted-key id="41CD49B4EF5876F9E9F691DABAC30622339994C4" group="org.jspecify" name="jspecify" version="1.0.0"/>
+         <trusted-key id="44F4797A52C336FA666CD9271DE461528F1F1B2A" group="org.apache.jackrabbit"/>
          <trusted-key id="44FBDBBC1A00FE414F1C1873586654072EAD6677" group="org.sonatype.oss" name="oss-parent" version="9"/>
          <trusted-key id="474DA67C32063DCA7FFE9CB5760F395DC40D55A7" group="^io[.]noties($|([.].*))" regex="true"/>
          <trusted-key id="47504B76CF89C15C0512D9AFE16AB52D79FD224F">
