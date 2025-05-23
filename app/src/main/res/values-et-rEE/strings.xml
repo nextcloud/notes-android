@@ -251,7 +251,7 @@
     <string name="category_key">Võti</string>
     <!-- This represents a category where one can place passwords and credentials -->
     <string name="category_keys">Võtmed</string>
-    <string name="category_password">Parool</string>
+    <string name="category_password">Salasõna</string>
     <string name="category_passwords">Salasõnad</string>
     <string name="category_credentials">Autentimisteave</string>
     <string name="category_game">Mäng</string>
