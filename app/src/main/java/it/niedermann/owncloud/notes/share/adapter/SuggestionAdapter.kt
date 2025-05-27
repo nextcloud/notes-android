@@ -43,13 +43,13 @@ class SuggestionAdapter(context: Context, cursor: Cursor?, private val account: 
                 if (iconId != null) {
                     icon.setImageDrawable(ContextCompat.getDrawable(context, iconId))
                 }
-            } catch (e: Exception) {
+            } catch (_: Exception) {
                 try {
                     val username = cursor.getStringOrNull(iconColumn)
                     if (username != null) {
                         AvatarLoader.load(context, icon, account, username)
                     }
-                } catch (e: Exception) {
+                } catch (_: Exception) {
                     icon.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_account_circle_grey_24dp))
                 }
             }
