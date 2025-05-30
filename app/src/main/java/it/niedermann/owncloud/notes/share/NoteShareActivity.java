@@ -1,15 +1,8 @@
 /*
- * Nextcloud Android client application
+ * Nextcloud Notes - Android Client
  *
- * @author Andy Scherzinger
- * @author Chris Narkiewicz <hello@ezaquarii.com>
- * @author TSI-mc
- *
- * Copyright (C) 2018 Andy Scherzinger
- * Copyright (C) 2020 Chris Narkiewicz <hello@ezaquarii.com>
- * Copyright (C) 2023 TSI-mc
- *
- * SPDX-License-Identifier: AGPL-3.0-or-later OR GPL-2.0-only
+ * SPDX-FileCopyrightText: 2015-2025 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
  */
 package it.niedermann.owncloud.notes.share;
 

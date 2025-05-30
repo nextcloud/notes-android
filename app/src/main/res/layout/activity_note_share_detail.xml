@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Nextcloud - Android Client
-  ~
-  ~ SPDX-FileCopyrightText: 2021 TSI-mc
-  ~ SPDX-FileCopyrightText: 2021 Nextcloud GmbH
-  ~ SPDX-License-Identifier: AGPL-3.0-or-later OR GPL-2.0-only
+ ~ Nextcloud Notes - Android Client
+ ~
+ ~ SPDX-FileCopyrightText: 2015-2025 Nextcloud GmbH and Nextcloud contributors
+ ~ SPDX-License-Identifier: GPL-3.0-or-later
 -->
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
