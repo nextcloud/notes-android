@@ -51,8 +51,8 @@
     <string name="note_share_activity_copy_icon_content_description">ícone de cópia de compartilhamento de nota</string>
     <string name="note_share_activity_more_icon_content_description">ícone para mais opções de compartilhamento de nota</string>
     <string name="note_share_activity_icon_content_description">ícone de compartilhamento de nota</string>
-    <string name="note_share_activity_user_icon_content_description">ícone de usuário de compartilhamento de nota</string>
-    <string name="note_share_activity_contact_icon_content_description">ícone de contato de compartilhamento de nota</string>
+    <string name="note_share_activity_user_icon_content_description">ícone de compartilhamento de usuário de nota</string>
+    <string name="note_share_activity_contact_icon_content_description">ícone de compartilhamento de contato de nota</string>
     <string name="note_share_activity_shared_with_you">Compartilhado com você por %1$s</string>
     <string name="note_share_activity_share_note">Compartilhar nota</string>
     <string name="note_share_activity_search_text">Nome, ID de Nuvem Federada ou endereço de e-mail…</string>
@@ -70,7 +70,7 @@
     <!-- NoteShareDetailActivity -->
     <string name="note_share_detail_activity_advanced_settings">Configurações Avançadas </string>
     <string name="note_share_detail_activity_share_via_link_hide_download">Ocultar download</string>
-    <string name="note_share_detail_activity_share_send_note">Anotação ao destinatário</string>
+    <string name="note_share_detail_activity_share_send_note">Nota ao destinatário</string>
     <string name="note_share_detail_activity_hint_note">Nota</string>
     <string name="note_share_detail_activity_common_next">Próxima</string>
     <string name="note_share_detail_activity_share_copy_link">Compartilhar e Copiar Link</string>
@@ -121,7 +121,7 @@
     <string name="share_password_title">Protegido por senha</string>
     <string name="share_no_password_title">Definir senha</string>
     <string name="share_with_title">Compartilhar com…</string>
-    <string name="share_via_link_unset_password">Indefinir</string>
+    <string name="share_via_link_unset_password">Redefinir</string>
     <string name="add_another_public_share_link">Adicionar outro link</string>
     <string name="add_new_public_share">Adicionar novo link de compartilhamento público</string>
     <string name="public_share_name">Novo nome</string>
@@ -137,7 +137,7 @@
     <string name="share_permission_can_edit">Pode editar</string>
     <string name="share_permission_file_drop">Depósito de arquivos</string>
     <string name="share_permission_secure_file_drop">Depósito de arquivos seguro</string>
-    <string name="share_permissions">Permissões de compartilhamento </string>
+    <string name="share_permissions">Permissões de Compartilhamento </string>
     <plurals name="share_download_limit_description">
         <item quantity="one">%1$d download restante</item>
         <item quantity="many">%1$d downloads restantes</item>
@@ -246,7 +246,7 @@
     <string name="category_recipes">Receitas</string>
     <string name="category_restaurant">Restaurante</string>
     <string name="category_restaurants">Restaurantes</string>
-    <string name="category_food">Alimentos</string>
+    <string name="category_food">Alimentação</string>
     <string name="category_bake">Assar</string>
     <!-- This represents a category where one can place passwords and credentials -->
     <string name="category_key">Chave</string>
@@ -416,7 +416,7 @@
     <string name="remove_account">Remover %1$s</string>
 
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Você deve estar conectado à Internet para adicionar uma conta. </string>
-    <string name="settings_notes_path">Definir a pasta</string>
+    <string name="settings_notes_path">Definir pasta</string>
 
     <string name="simple_next">Próximo</string>
     <string name="simple_prev">Anterior</string>
