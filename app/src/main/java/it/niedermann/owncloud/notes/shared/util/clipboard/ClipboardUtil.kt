@@ -1,10 +1,9 @@
 /*
- * Nextcloud - Android Client
+ * Nextcloud Notes - Android Client
  *
- * SPDX-FileCopyrightText: 2018 Andy Scherzinger <info@andy-scherzinger.de>
- * SPDX-License-Identifier: AGPL-3.0-or-later OR GPL-2.0-only
+ * SPDX-FileCopyrightText: 2015-2025 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
  */
-
 package it.niedermann.owncloud.notes.shared.util.clipboard
 
 import android.app.Activity
