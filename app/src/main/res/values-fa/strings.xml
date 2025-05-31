@@ -112,6 +112,10 @@
     <string name="share_permission_file_drop">انداختن پرونده</string>
     <string name="share_permission_secure_file_drop">Secure file drop</string>
     <string name="share_permissions">اجازه‌های هم‌رسانی</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">محدودیت دانلود: %d بار</item>
+        <item quantity="other">محدودیت دانلود: %d بار</item>
+    </plurals>
     <string name="username">نام کاربری</string>
     <string name="share_group_clarification">%1$s (گروه)</string>
     <string name="share_remote_clarification">%1$s (دوردست)</string>
