@@ -57,6 +57,7 @@
          <trusted-key id="19BEAB2D799C020F17C69126B16698A4ADF4D638" group="org.checkerframework" name="checker-qual"/>
          <trusted-key id="1A55F091AD28C07F831FA44D7905DE25C78AD456" group="com.google.protobuf"/>
          <trusted-key id="1D0A8B5E77C678A7C724445ABF984B4145EA13F7" group="com.squareup" name="javapoet" version="1.13.0"/>
+         <trusted-key id="1D217F8475EEE9F19AB8DD6B793FD5751A0F0780" group="com.squareup.retrofit2" name="retrofit" version="2.12.0"/>
          <trusted-key id="1D9AA7F9E1E2824728B8CD1794B291AEF984A085" group="io.reactivex.rxjava2"/>
          <trusted-key id="24D04176586361FDA94EE0315F7786DF73E61F56">
             <trusting group="com.google.devtools.ksp" name="symbol-processing-api" version="1.9.0-1.0.13"/>
