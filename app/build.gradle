@@ -107,7 +107,9 @@ dependencies {
     // Nextcloud SSO
     implementation 'com.github.nextcloud.android-common:ui:48ed8e86d9'
     implementation 'com.github.nextcloud:Android-SingleSignOn:1.3.2'
-    implementation 'com.github.stefan-niedermann:android-commons:1.1.0'
+	implementation "com.github.stefan-niedermann.android-commons:shared-preferences:$androidCommonsVersion"
+	implementation "com.github.stefan-niedermann.android-commons:reactive-livedata:$androidCommonsVersion"
+	implementation "com.github.stefan-niedermann.android-commons:util:$androidCommonsVersion"
     implementation "com.github.stefan-niedermann.nextcloud-commons:sso-glide:$commonsVersion"
     implementation "com.github.stefan-niedermann.nextcloud-commons:exception:$commonsVersion"
     implementation("com.github.stefan-niedermann.nextcloud-commons:markdown:$commonsVersion") {
