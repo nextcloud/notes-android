@@ -35,7 +35,7 @@
     <string name="common_loading">Yükleniyor…</string>
 
 
-    <string name="search_in_category">%1$s içinde arama</string>
+    <string name="search_in_category">%1$s içinde ara</string>
     <string name="search_in_all">Tüm notlarda arama</string>
 
     <string name="change_category_title">Bir kategori seçin</string>

@@ -42,7 +42,9 @@
 
     <string name="note_share_activity_shared_with_you">Gedeeld met u door %1$s</string>
     <string name="note_share_activity_share_note">Notitie delen</string>
+    <string name="note_share_activity_search_text">Naam, Federated Cloud ID of e-mailadres…</string>
     <string name="note_share_activity_share_link">Deel link</string>
+    <string name="note_share_activity_resharing_not_allowed">Beleid of machtigingen staan opnieuw delen niet toe</string>
     <string name="note_share_activity_could_not_retrieve_url">Kon URL niet ophalen</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" is met je gedeeld</string>
     <string name="note_share_activity_contact_no_permission">Toestemming voor contact vereist</string>
@@ -111,6 +113,7 @@
     <string name="share_permission_view_only">Alleen bekijken</string>
     <string name="share_permission_can_edit">Kan bewerken</string>
     <string name="share_permission_file_drop">Bestandsopslag</string>
+    <string name="share_permission_secure_file_drop">Veilige bestandoverdracht</string>
     <string name="share_permissions">Deelmachtigingen</string>
     <plurals name="share_download_limit_description">
         <item quantity="one">%1$d download resterend</item>
