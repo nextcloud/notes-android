@@ -70,6 +70,7 @@
     <string name="share_password_dialog_fragment_skip">Sleppa</string>
 
     <string name="share_link_password_title">Settu inn lykilorð</string>
+    <string name="common_ok">OK</string>
     <string name="common_delete">Eyða</string>
     <string name="write_email">Senda tölvupóst</string>
     <string name="no_browser_available">Ekkert forrit tiltækt til að meðhöndla tengla</string>
