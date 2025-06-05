@@ -67,6 +67,7 @@
     <string name="share_password_dialog_fragment_skip">Sari peste</string>
 
     <string name="share_link_password_title">Introduceţi parola</string>
+    <string name="common_ok">OK</string>
     <string name="common_delete">Șterge</string>
     <string name="write_email">Trimite email</string>
     <string name="no_browser_available">Nu există aplicație disponibilă care să acceseze legăturile</string>

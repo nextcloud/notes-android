@@ -53,6 +53,7 @@
     <string name="note_share_detail_activity_hint_password">Contraseña</string>
     <string name="note_share_detail_activity_no_share_permission_selected">Por favor, seleccioná al menos un permiso para compartir.</string>
     <string name="note_share_detail_activity_label_empty">La etiqueta no puede estar vacía</string>
+    <string name="note_share_detail_activity_cancel">Cancel</string>
     <!-- SharePasswordDialogFragment -->
     <string name="share_password_dialog_fragment_share_link_optional_password_title">Ingrese una contraseña opcional</string>
     <string name="share_password_dialog_fragment_skip">Saltar</string>

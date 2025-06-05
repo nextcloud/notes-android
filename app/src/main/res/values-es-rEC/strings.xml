@@ -62,6 +62,7 @@
     <!-- SharePasswordDialogFragment -->
     <string name="share_password_dialog_fragment_share_link_optional_password_title">Ingresa una contraseña opcional</string>
     <string name="share_link_password_title">Ingresa una contraseña</string>
+    <string name="common_ok">OK</string>
     <string name="common_delete">Borrar</string>
     <string name="write_email">Enviar correo electrónico</string>
     <string name="no_browser_available">No hay una aplicación disponible para manejar enlaces</string>
