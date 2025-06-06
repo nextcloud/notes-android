@@ -180,9 +180,9 @@
     <string name="about_app_license">Deze applicatie valt onder de GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Licentie weergeven</string>
     <string name="about_icons_disclaimer_title">Pictogrammen</string>
-    <string name="about_icons_disclaimer_app_icon">Voor het originele icoon zie %1$s</string>
+    <string name="about_icons_disclaimer_app_icon">Zie %1$s voor het originele pictogram.</string>
     <string name="about_icons_disclaimer_mdi_icons">Alle andere pictogrammen in deze app zijn %1$s gemaakt door Google Inc. en zijn gelicenseerd onder de Apache 2.0 Licensie.</string>
-    <string name="about_icons_disclaimer_mdi">Material Design iconen</string>
+    <string name="about_icons_disclaimer_mdi">Material Design pictogrammen</string>
     <string name="about_credits_tab_title">Verantwoording</string>
     <string name="about_contribution_tab_title">Bijdrage</string>
     <string name="about_license_tab_title">Licentie</string>
@@ -192,7 +192,7 @@
     <string name="widget_single_note_title">Enkele notitie</string>
     <string name="widget_single_note_placeholder_tv">Notitie niet gevonden</string>
     <string name="widget_not_logged_in">Login bij Notities voordat je deze widget gebruikt</string>
-    <string name="widget_entry_fav_contentDescription">\'Ster\'pictogram word gebruikt om object als favoriet te markeren</string>
+    <string name="widget_entry_fav_contentDescription">\'Ster\' pictogram wordt gebruikt om een object als favoriet te markeren</string>
 
     <string name="activity_select_single_note">Notitie selecteren</string>
 
