@@ -70,6 +70,7 @@
     <string name="no_browser_available">Nenhuma aplicação disponível para lidar com links</string>
     <string name="no_actions">Sem ações para este utilizador</string>
 
+    <string name="email_pick_failed">Erro ao escolher endereço de email.</string>
     <string name="failed_update_ui">Falha ao atualizar a IU</string>
     <string name="activity_chooser_title">Enviar hiperligação para…</string>
 
