@@ -72,7 +72,7 @@
     <string name="note_share_detail_activity_share_via_link_hide_download">Ocultar download</string>
     <string name="note_share_detail_activity_share_send_note">Nota ao destinatário</string>
     <string name="note_share_detail_activity_hint_note">Nota</string>
-    <string name="note_share_detail_activity_common_next">Próxima</string>
+    <string name="note_share_detail_activity_common_next">Próximo</string>
     <string name="note_share_detail_activity_share_copy_link">Compartilhar e Copiar Link</string>
     <string name="note_share_detail_activity_common_confirm">Confirmar</string>
     <string name="note_share_detail_activity_set_note">Definir Nota </string>
@@ -165,7 +165,7 @@
     <string name="listview_updated_last_month">Último mês</string>
 
     <string name="settings_note_mode">Modo de exibição de notas</string>
-    <string name="settings_note_mode_new">Comportamento da abertura de notas</string>
+    <string name="settings_note_mode_new">Comportamento da abertura de Notas</string>
     <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title"> Fonte monospaçada</string>
     <string name="settings_font_size">Tamanho da fonte</string>
@@ -293,7 +293,7 @@
     <string name="error_dialog_server_app_enabled">Verifique se você instalou e ativou o aplicativo \"Notes\" (\"Notas\") no seu servidor.</string>
     <string name="error_dialog_redirect">Seu servidor respondeu com um código de status HTTP 302, o que implica que você não instalou o aplicativo Notes no servidor ou que algo está configurado incorretamente. Isso pode ser causado por alterações no arquivo .htaccess ou por aplicativos como o Client OID.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Desative todas as otimizações de bateria do Nextcloud e do aplicativo Notes.</string>
-    <string name="error_dialog_min_version">O aplicativo Notes Android requer que o aplicativo Nextcloud Android tenha pelo menos a versão 3.18.</string>
+    <string name="error_dialog_min_version">O aplicativo Notas para Android requer que o aplicativo Nextcloud para Android seja pelo menos a versão 3.18.</string>
     <string name="added_content">\"%1$s\" adicionado</string>
     <string name="shared_text_empty">O texto compartilhado estava vazio</string>
     <string name="append_to_note">Anexar à nota</string>
@@ -428,9 +428,9 @@
         <item translatable="false">.md</item>
     </string-array>
     <string name="settings_notes_path_success">Pasta de novas notas: %1$s</string>
-    <string name="settings_file_suffix">Extensão</string>
-    <string name="settings_file_suffix_description">Extensão para novas notas no seu Nextcloud</string>
-    <string name="settings_file_suffix_success">Novo sufixo: %1$s</string>
+    <string name="settings_file_suffix">Extensão de arquivo</string>
+    <string name="settings_file_suffix_description">Extensão de arquivo para novas notas no seu Nextcloud</string>
+    <string name="settings_file_suffix_success">Novo sufixo de arquivo: %1$s</string>
     <string name="http_status_code">Código de Status HTTP: %1$d</string>
     <string name="progress_import_indeterminate">Importando notas…</string>
     <string name="progress_import">Importando nota %1$d de %2$d…</string>
