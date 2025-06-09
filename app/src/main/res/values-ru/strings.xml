@@ -67,6 +67,8 @@
     <string name="note_share_detail_activity_cancel">Отмена</string>
     <!-- SharePasswordDialogFragment -->
     <string name="share_password_dialog_fragment_share_link_optional_password_title">Введите дополнительный пароль</string>
+    <string name="share_password_dialog_fragment_skip">Пропустить</string>
+
     <string name="share_link_password_title">Введите пароль</string>
     <string name="common_ok">ОК</string>
     <string name="common_delete">Удаление</string>
