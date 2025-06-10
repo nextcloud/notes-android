@@ -40,6 +40,15 @@
 
     <string name="change_category_title">Оберіть категорію</string>
 
+    <!-- NoteShareActivity -->
+    <string name="note_share_activity_activity_icon_content_description">значок активності нотатки</string>
+    <string name="note_share_activity_share_icon_content_description">значок нотатки поділитися</string>
+    <string name="note_share_activity_external_icon_content_description">значок нотатки поділитися зовнішнім спільним ресурсом</string>
+    <string name="note_share_activity_copy_icon_content_description">значок нотатки копіювати спільний ресурс</string>
+    <string name="note_share_activity_more_icon_content_description">значок нотатки поділитися більше</string>
+    <string name="note_share_activity_icon_content_description">значок нотатки поділитися</string>
+    <string name="note_share_activity_user_icon_content_description">значок нотатки поділитися з користувачем</string>
+    <string name="note_share_activity_contact_icon_content_description">значок нотатки контакт спільного ресурсу</string>
     <string name="note_share_activity_shared_with_you">%1$s поділив(-ла-)ся з вами</string>
     <string name="note_share_activity_share_note">Поділитися нотаткою</string>
     <string name="note_share_activity_search_text">Ім\'я, ідентифікатор об\'єднаної хмари або ел.адреса...</string>
@@ -48,6 +57,12 @@
     <string name="note_share_activity_could_not_retrieve_url">Неможливо отримати посилання</string>
     <string name="note_share_activity_subject_shared_with_you">Вам було надано доступ до \"%1$s\"</string>
     <string name="note_share_activity_contact_no_permission">Потрібний доступ до контактів.</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">У вас відсутні права на створення спільних публічних ресурсів.</string>
+
+    <string name="note_share_created">Спільний ресурс створено</string>
+    <string name="note_share_activity_cannot_created">У вас відсутні права на створення спільних ресурсів.</string>
+
+
     <!-- NoteShareDetailActivity -->
     <string name="note_share_detail_activity_advanced_settings">Розширені</string>
     <string name="note_share_detail_activity_share_via_link_hide_download">Приховати звантаження</string>
@@ -65,6 +80,8 @@
     <string name="note_share_detail_activity_no_share_permission_selected">Виберіть принаймні один дозвіл для спільного використання.</string>
     <string name="note_share_detail_activity_label_empty">Ярлик не може бути порожнім</string>
     <string name="note_share_detail_activity_cancel">Скасувати</string>
+    <string name="note_share_detail_activity_create_share_error">Не вдалося створити спільний ресурс</string>
+
     <!-- SharePasswordDialogFragment -->
     <string name="share_password_dialog_fragment_share_link_optional_password_title">Введіть пароль (необов\'язково)</string>
     <string name="share_password_dialog_fragment_skip">Пропустити</string>
@@ -77,6 +94,7 @@
     <string name="no_email_app_available">Відсутній застосунок для опрацювання адреси ел. пошти</string>
     <string name="no_actions">Відсутні дії для цього користувача</string>
 
+    <string name="failed_the_remove_share">Не вдалося створити вилучити ресурс</string>
     <string name="email_pick_failed">Не вдалося вибрати ел. адресу.</string>
     <string name="failed_update_ui">Неможливо оновити інтерфейс</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Відсутній застосунок для вибору контактів</string>
