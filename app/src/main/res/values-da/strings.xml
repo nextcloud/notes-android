@@ -117,8 +117,8 @@
     <string name="share_permission_secure_file_drop">Sikkert fil drop</string>
     <string name="share_permissions">Del Tilladelser</string>
     <plurals name="share_download_limit_description">
-        <item quantity="one">%1$d resterende downloads</item>
-        <item quantity="other">%1$d resterende downloads</item>
+        <item quantity="one">%1$d resterende overførsel</item>
+        <item quantity="other">%1$d resterende overførsler</item>
     </plurals>
     <string name="username">Brugernavn</string>
     <string name="share_group_clarification">%1$s (gruppe)</string>
@@ -192,7 +192,7 @@
     <string name="widget_note_list_placeholder">Ingen noter</string>
     <string name="widget_single_note_title">Enkel note</string>
     <string name="widget_single_note_placeholder_tv">Note ikke fundet</string>
-    <string name="widget_not_logged_in">Log venligst ind i Notes før du bruger denne widget</string>
+    <string name="widget_not_logged_in">Log venligst ind i Noter før du bruger denne widget</string>
     <string name="widget_entry_fav_contentDescription">Stjerneikon bruges til at angive et element som en favorit</string>
 
     <string name="activity_select_single_note">Vælg note</string>
@@ -255,10 +255,10 @@
     <string name="unlock_notes">Lås noter op</string>
     <string name="error_dialog_title">Åh nej - hvad nu? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Forsøg venligst at tvinge app\'en til at lukke og start den påny igen. Der kan have været en ukorrekt forbindelse til Nextcloud-app\'en.</string>
-    <string name="error_dialog_tip_token_mismatch_clear_storage">Hvis problemet ikke løses, så forsøg at rydde lageret for begge apps: Nextcloud og Nextcloud Notes, for at løse problemet.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Hvis problemet ikke løses, så forsøg at rydde lageret for begge apps: Nextcloud og Nextcloud Noter, for at løse problemet.</string>
     <string name="error_dialog_tip_clear_storage">Du kan rydde lageret ved at åbne appoplysningerne og vælge Lager → Ryd lager. ⚠️ Advarsel: Dette vil slette endnu ikke synkroniserede noter!</string>
     <string name="error_dialog_tip_files_outdated">Din Nextcloud-app ser ud til at være forældet. Gå venligst til Play Butik eller F-Droid for at få seneste version.</string>
-    <string name="error_dialog_tip_files_force_stop">Det lader til at være noget galt med din Nextcloud-app. Forsøg venligst at gennemtvinge stop af både Nextcloud-app\'en og Nextcloud Notes-app\'en. </string>
+    <string name="error_dialog_tip_files_force_stop">Det lader til at være noget galt med din Nextcloud-app. Forsøg venligst at gennemtvinge stop af både Nextcloud-app\'en og Nextcloud Noter-app\'en. </string>
     <string name="error_dialog_tip_files_delete_storage">Hvis det ikke hjælper at stoppe begge, så kan du forsøge at rydde lagerpladsen for begge apps.</string>
     <string name="error_dialog_timeout_instance">Der var intet svar fra din server på nuværende tidspunkt. Sørg venligst for at sikre, at din instans kører rigtigt. </string>
     <string name="error_dialog_timeout_toggle">Tjek din netværksforbindelse. Undertiden kan det hjælpe at slukke og tænde for mobildata eller wifi.</string>
@@ -269,8 +269,8 @@
     <string name="error_dialog_we_need_info">Vi har brug for følgende tekniske information for at hjælpe dig:</string>
     <string name="error_dialog_server_app_enabled">Tjek venligst, om du har installeret og aktiveret appen \"Noter\" på din server.</string>
     <string name="error_dialog_redirect">Din server svarede med en HTTP 302-statuskode, hvilket betyder, at du endnu ikke har installeret app\'en Noter på din server, eller at der er en forkert konfiguration. Dette kan skyldes brugerdefinerede tilsidesættelser i en .htaccess-fil eller af apps fra Nextcloud som OID Client.</string>
-    <string name="error_dialog_tip_disable_battery_optimizations">Deaktiver venligst alle batterioptimeringer for Nextcloud og Notes-appen.</string>
-    <string name="error_dialog_min_version">Notes Android-appen kræver, at Nextcloud Android-appen er mindst version 3.18.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Deaktivér venligst alle batterioptimeringer for Nextcloud og Noter-appen.</string>
+    <string name="error_dialog_min_version">Noter Android-appen kræver, at Nextcloud Android-appen er mindst version 3.18.</string>
     <string name="added_content">Tilføjet \"%1$s\"</string>
     <string name="shared_text_empty">Den delte tekst var tom</string>
     <string name="append_to_note">Tilføj til note</string>
@@ -324,7 +324,7 @@
     <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Kontekstbaseret formatering</string>
-    <string name="formatting_help_cbf_body_1">Et vigtigt designmål med Notes-appen er at give et distraktionsfrit værktøj. Selvom du vil være i stand til at formatere dine tekster med Markdown. Til forskellige af de nedenfor nævnte eksempler kan du bruge genveje, så du kan formatere dine noter uden at indtaste koderne nedenfor.</string>
+    <string name="formatting_help_cbf_body_1">Et vigtigt designmål med Noter-appen er at give et distraktionsfrit værktøj. Selvom du vil være i stand til at formatere dine tekster med Markdown. Til forskellige af de nedenfor nævnte eksempler kan du bruge genveje, så du kan formatere dine noter uden at indtaste koderne nedenfor.</string>
     <string name="formatting_help_cbf_body_2">Du skal blot vælge en række tekst eller trykke på din markør på en hvilken som helst position, og du vil få en pop op-menu, som indeholder ud for standardindgangene %1$s, %2$s, %3$s poster som %4$s or %5$s.</string>
 
     <string name="formatting_help_text_title">Tekst</string>
@@ -393,7 +393,7 @@
     <string name="simple_next">Næste</string>
     <string name="simple_prev">Tidligere</string>
     <string name="simple_backup">Backup</string>
-    <string name="backup">Vi har registreret en uoprettelig tilstand af appen. Sikkerhedskopier dine usynkroniserede ændringer og ryd lagringen af ​​Notes-appen.</string>
+    <string name="backup">Vi har registreret en uoprettelig tilstand af appen. Sikkerhedskopiér dine usynkroniserede ændringer og ryd data for ​​Noter-appen.</string>
     <string name="settings_notes_path_description">Mappe for dine noter i Nextcloud</string>
     <string-array name="settings_file_suffixes">
         <item translatable="false">.txt</item>
