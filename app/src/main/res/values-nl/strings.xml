@@ -13,11 +13,11 @@
     <string name="action_create">Nieuwe notitie</string>
     <string name="welcome_text">Welkom bij %1$s</string>
     <string name="action_settings">Instellingen</string>
-    <string name="action_trashbin">Verwijder notities</string>
+    <string name="action_trashbin">Verwijderde notities</string>
     <string name="action_search">Zoeken</string>
-    <string name="action_sorting_method">Sorteer methode</string>
+    <string name="action_sorting_method">Sortering</string>
     <string name="simple_cancel">Annuleren</string>
-    <string name="simple_switch">Wissel</string>
+    <string name="simple_switch">Wisselen</string>
     <string name="simple_edit">Bewerken</string>
     <string name="simple_remove">Verwijderen</string>
     <string name="action_edit_save">Opslaan</string>
@@ -30,7 +30,7 @@
     <string name="menu_delete">Verwijderen</string>
     <string name="menu_change_category">Categorie</string>
     <string name="menu_favorite">Favoriet</string>
-    <string name="menu_preview">Voorbeeldweergave</string>
+    <string name="menu_preview">Voorbeeld</string>
     <string name="menu_share">Delen</string>
     <string name="common_loading">Laden…</string>
 
@@ -40,7 +40,11 @@
 
     <string name="change_category_title">Een categorie kiezen</string>
 
-    <string name="note_share_activity_shared_with_you">Gedeeld met u door %1$s</string>
+    <!-- UsersAndGroupsSearchProvider -->
+    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
+    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
+
+    <string name="note_share_activity_shared_with_you">Met je gedeeld door %1$s</string>
     <string name="note_share_activity_share_note">Notitie delen</string>
     <string name="note_share_activity_search_text">Naam, Federated Cloud ID of e-mailadres…</string>
     <string name="note_share_activity_share_link">Deel link</string>
@@ -48,6 +52,12 @@
     <string name="note_share_activity_could_not_retrieve_url">Kon URL niet ophalen</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" is met je gedeeld</string>
     <string name="note_share_activity_contact_no_permission">Toestemming voor contact vereist</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">Je mag geen openbare share aanmaken.</string>
+
+    <string name="note_share_created">Share aangemaakt</string>
+    <string name="note_share_activity_cannot_created">Je mag geen share aanmaken.</string>
+
+
     <!-- NoteShareDetailActivity -->
     <string name="note_share_detail_activity_advanced_settings">Geavanceerde instellingen</string>
     <string name="note_share_detail_activity_share_via_link_hide_download">Verberg download</string>
@@ -65,6 +75,8 @@
     <string name="note_share_detail_activity_no_share_permission_selected">Gelieve ten minste één machtiging te selecteren om te delen</string>
     <string name="note_share_detail_activity_label_empty">Label mag niet leeg zijn</string>
     <string name="note_share_detail_activity_cancel">Annuleren</string>
+    <string name="note_share_detail_activity_create_share_error">Aanmaak van share mislukt</string>
+
     <!-- SharePasswordDialogFragment -->
     <string name="share_password_dialog_fragment_share_link_optional_password_title">Geef een niet verplicht wachtwoord in</string>
     <string name="share_password_dialog_fragment_skip">Overslaan</string>
@@ -77,6 +89,7 @@
     <string name="no_email_app_available">Geen app beschikbaar voor het openen van het mailadres</string>
     <string name="no_actions">Geen acties voor deze gebruiker</string>
 
+    <string name="failed_the_remove_share">Verwijdering van share mislukt</string>
     <string name="email_pick_failed">Email adres ophalen mislukt.</string>
     <string name="failed_update_ui">Kon UI niet bijwerken</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Geen app beschikbaar voor het selecteren van contactpersonen</string>
@@ -107,6 +120,7 @@
     <string name="share_link">Deel link</string>
     <string name="allow_resharing">Opnieuw delen toestaan</string>
     <string name="link_share_view_only">Alleen bekijken</string>
+    <string name="link_share_editing">Bewerken</string>
     <string name="link_share_allow_upload_and_editing">Uploaden en bewerken toestaan</string>
     <string name="link_share_file_drop">Bestand droppen (alleen uploaden)</string>
     <string name="could_not_retrieve_shares">Kon shares niet ophalen</string>
@@ -173,7 +187,7 @@
     <string name="about_source_title">Broncode</string>
     <string name="about_source">Dit project wordt gehost op GitHub: %1$s</string>
     <string name="about_issues_title">Problemen</string>
-    <string name="about_issues">Je kunt bugs rapporteren, verbeteringen voorstellen en functionele aanpassingen aanvragen via de issue-tracker op GitHub: %1$s</string>
+    <string name="about_issues">Je kunt problemen rapporteren, verbeteringen voorstellen en functionele aanpassingen aanvragen via de issue-tracker op GitHub: %1$s</string>
     <string name="about_translate_title">Vertalen</string>
     <string name="about_translate">Word lid van het Nextcloud-team op Transifex en help ons deze app te vertalen: %1$s </string>
     <string name="about_app_license_title">App licentie</string>

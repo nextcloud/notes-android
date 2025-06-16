@@ -238,9 +238,9 @@
     <string name="category_movies">Filmes</string>
     <string name="category_movie">Filme</string>
     <string name="category_work">Trabalho</string>
-    <string name="category_todo">Por Fazer</string>
-    <string name="category_todos">Tarefas Pendentes</string>
-    <string name="category_checklists">Lista de Verificação</string>
+    <string name="category_todo">Tarefa</string>
+    <string name="category_todos">Tarefas</string>
+    <string name="category_checklists">Listas de verificação</string>
     <string name="category_tasks">Tarefas</string>
     <string name="category_recipe">Receita</string>
     <string name="category_recipes">Receitas</string>
@@ -254,11 +254,11 @@
     <string name="category_keys">Chaves</string>
     <string name="category_password">Senha</string>
     <string name="category_passwords">Senhas</string>
-    <string name="category_credentials">Credenciais</string>
+    <string name="category_credentials">Credencial</string>
     <string name="category_game">Jogo</string>
     <string name="category_games">Jogos</string>
     <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
-    <string name="category_play">Jogar</string>
+    <string name="category_play">Peça teatral</string>
     <string name="category_gift">Presente</string>
     <string name="category_gifts">Presentes</string>
     <!-- Like a gift -->
@@ -393,7 +393,7 @@
     <string name="formatting_help_tables_value">Valor %1d</string>
 
     <string name="formatting_help_images_body_1">Os links devem ser URLs completos, começando com um protocolo e domínio, ou caminhos absolutos, começando com um caractere %1$s.</string>
-    <string name="formatting_help_images_body_2">Para estar em conformidade com o formato Markdown, use caracteres de escape no URL da imagem. Isso significa, por exemplo, substituir espaços por  %1$s no endereço URL.</string>
+    <string name="formatting_help_images_body_2">Para estar em conformidade com o formato Markdown, use caracteres de escape no URL da imagem. Isso significa, por exemplo, substituir espaços por %1$s no URL.</string>
     <string name="formatting_help_images_title">Imagens</string>
     <string name="formatting_help_images_alt">Imagem bonita</string>
 
