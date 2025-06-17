@@ -260,7 +260,7 @@
     <string name="error_dialog_min_version">Приложението Notes за Android, изисква версията на приложението Android за Nextcloud да е поне 3.18.</string>
     <string name="added_content">Добавени %1$s</string>
     <string name="shared_text_empty">Споделеният текст беше празен</string>
-    <string name="append_to_note">Добавяне към бележка</string>
+    <string name="append_to_note">Добави към бележка</string>
     <string name="change_note_title">Промяна на заглавието на бележка</string>
     <string name="menu_edit_title">Редактиране на заглавието</string>
     <string name="simple_security">Сигурност</string>
