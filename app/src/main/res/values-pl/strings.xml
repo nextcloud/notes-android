@@ -40,6 +40,19 @@
 
     <string name="change_category_title">Wybierz kategorię</string>
 
+    <!-- UsersAndGroupsSearchProvider -->
+    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
+    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
+
+    <!-- NoteShareActivity -->
+    <string name="note_share_activity_activity_icon_content_description">ikona aktywności Note</string>
+    <string name="note_share_activity_share_icon_content_description">ikona udostępniania Note</string>
+    <string name="note_share_activity_external_icon_content_description">ikona zewnętrznego udostępniania Note</string>
+    <string name="note_share_activity_copy_icon_content_description">ikona kopiowania udostępniania Note</string>
+    <string name="note_share_activity_more_icon_content_description">ikona „więcej opcji udostępniania” Note</string>
+    <string name="note_share_activity_icon_content_description">ikona udostępniania Note</string>
+    <string name="note_share_activity_user_icon_content_description">ikona udostępniania użytkownikowi Note</string>
+    <string name="note_share_activity_contact_icon_content_description">ikona udostępniania kontaktowi Note</string>
     <string name="note_share_activity_shared_with_you">Udostępnione przez %1$s</string>
     <string name="note_share_activity_share_note">Notatka udostępnienia</string>
     <string name="note_share_activity_search_text">Nazwa, ID chmury stowarzyszonej lub adres e-mail</string>
@@ -48,6 +61,12 @@
     <string name="note_share_activity_could_not_retrieve_url">Nie można pobrać adresu URL</string>
     <string name="note_share_activity_subject_shared_with_you">Udostępniono Tobie \"%1$s\"</string>
     <string name="note_share_activity_contact_no_permission">Wymagane jest pozwolenie na lokalizację</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">Brak uprawnień do tworzenia udostępnień publicznych.</string>
+
+    <string name="note_share_created">Utworzono udostępnienie</string>
+    <string name="note_share_activity_cannot_created">Nie masz uprawnień do utworzenia udostępnienia.</string>
+
+
     <!-- NoteShareDetailActivity -->
     <string name="note_share_detail_activity_advanced_settings">Ustawienia zaawansowane</string>
     <string name="note_share_detail_activity_share_via_link_hide_download">Ukryj pobieranie</string>
@@ -65,6 +84,8 @@
     <string name="note_share_detail_activity_no_share_permission_selected">Wybierz co najmniej jedno uprawnienie do udostępniania.</string>
     <string name="note_share_detail_activity_label_empty">Etykieta nie może być pusta</string>
     <string name="note_share_detail_activity_cancel">Anuluj</string>
+    <string name="note_share_detail_activity_create_share_error">Nie udało się utworzyć udostępnienia</string>
+
     <!-- SharePasswordDialogFragment -->
     <string name="share_password_dialog_fragment_share_link_optional_password_title">Wprowadź opcjonalne hasło</string>
     <string name="share_password_dialog_fragment_skip">Pomiń</string>
@@ -77,6 +98,7 @@
     <string name="no_email_app_available">Brak dostępnej aplikacji do obsługi adresu e-mail</string>
     <string name="no_actions">Brak aktywności dla tego użytkownika</string>
 
+    <string name="failed_the_remove_share">Nie udało się usunąć udostępnienia</string>
     <string name="email_pick_failed">Nie udało się wybrać adresu e-mail.</string>
     <string name="failed_update_ui">Nie udało się zaktualizować UI</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Brak aplikacji dla wybranego kontaktu</string>
