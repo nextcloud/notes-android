@@ -100,7 +100,7 @@
     <string name="share_with_title">Compartir con…</string>
     <string name="share_via_link_unset_password">Sen definir</string>
     <string name="add_another_public_share_link">Engadir outra ligazón</string>
-    <string name="add_new_public_share">Engadir unha nova ligazón para compartir pública</string>
+    <string name="add_new_public_share">Engadir unha nova ligazón pública para compartir</string>
     <string name="public_share_name">Nome novo</string>
     <string name="share_link_with_label">Ligazón para compartir (%1$s)</string>
     <string name="share_link">Ligazón para compartir</string>
