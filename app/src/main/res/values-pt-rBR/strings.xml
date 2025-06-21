@@ -70,7 +70,7 @@
     <!-- NoteShareDetailActivity -->
     <string name="note_share_detail_activity_advanced_settings">Configurações Avançadas </string>
     <string name="note_share_detail_activity_share_via_link_hide_download">Ocultar download</string>
-    <string name="note_share_detail_activity_share_send_note">Nota ao destinatário</string>
+    <string name="note_share_detail_activity_share_send_note">Nota para o destinatário</string>
     <string name="note_share_detail_activity_hint_note">Nota</string>
     <string name="note_share_detail_activity_common_next">Próximo</string>
     <string name="note_share_detail_activity_share_copy_link">Compartilhar e Copiar Link</string>
