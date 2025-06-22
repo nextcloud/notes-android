@@ -86,7 +86,8 @@ As a workaround you can remove the account (or clear the storage of the app as d
 
 ### `TokenMismatchException`
 
-The reason of this error is not yet clear. It often seems to be connected to changes of the authentication (for example enabling 2FA after some time). Please clear the storage of both, the Notes and the Nextcloud Android apps as described in the [workarounds](https://github.com/nextcloud/notes-android/blob/main/FAQ.md#wrokarounds) section.
+Using any backup and restore tool as well as migrating to new hardware is not yet supported by the Nextcloud Files app. Given the Nextcloud Files app does not backup the tokens for 3rd party apps using Nextcloud Single Sign On, they are invalid when the Notes Android app is opened next time.
+Please either remove the account in the Notes Android app by clicking on the avatar or clear the storage of the Notes Android app as described below to solve this issue and reimport your account.
 
 ### Workarounds
 
