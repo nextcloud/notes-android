@@ -25,18 +25,25 @@
             android:orientation="vertical"
             tools:context="it.niedermann.owncloud.notes.edit.EditNoteActivity">
 
-            <it.niedermann.android.markdown.MarkdownViewerImpl
-                android:id="@+id/single_note_content"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacer_activity_sides"
-                android:lineSpacingMultiplier="@dimen/note_line_spacing"
-                android:padding="@dimen/spacer_2x"
-                android:paddingHorizontal="@dimen/spacer_2x"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/fg_default"
-                android:textIsSelectable="true"
-                tools:text="@tools:sample/lorem/random" />
+                android:orientation="vertical"
+                android:paddingBottom="72dp">
+
+                <it.niedermann.android.markdown.MarkdownViewerImpl
+                    android:id="@+id/single_note_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacer_activity_sides"
+                    android:lineSpacingMultiplier="@dimen/note_line_spacing"
+                    android:padding="@dimen/spacer_2x"
+                    android:paddingHorizontal="@dimen/spacer_2x"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/fg_default"
+                    android:textIsSelectable="true"
+                    tools:text="@tools:sample/lorem/random" />
+            </LinearLayout>
         </ScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
