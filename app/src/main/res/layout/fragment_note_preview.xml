@@ -28,7 +28,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingBottom="72dp">
 
                 <it.niedermann.android.markdown.MarkdownViewerImpl
                     android:id="@+id/single_note_content"
@@ -42,10 +43,6 @@
                     android:textColor="@color/fg_default"
                     android:textIsSelectable="true"
                     tools:text="@tools:sample/lorem/random" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="72dp" />
             </LinearLayout>
         </ScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
