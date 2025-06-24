@@ -108,12 +108,12 @@ dependencies {
         exclude group: 'commons-logging', module: 'commons-logging'
     }
 
-    implementation("com.github.nextcloud:android-library:2.20.0") {
+    implementation("com.github.nextcloud:android-library:ffc47c75fabbcbcdcd32b30e9836fde58d5c59d5") {
         exclude group: 'org.ogce', module: 'xpp3'
     }
 
     // Nextcloud SSO
-    implementation 'com.github.nextcloud.android-common:ui:48ed8e86d9'
+    implementation 'com.github.nextcloud.android-common:ui:1b779645b4ee2095ab133a8c939056eb13331453'
     implementation 'com.github.nextcloud:Android-SingleSignOn:1.3.2'
 	implementation "com.github.stefan-niedermann.android-commons:shared-preferences:$androidCommonsVersion"
 	implementation "com.github.stefan-niedermann.android-commons:reactive-livedata:$androidCommonsVersion"
