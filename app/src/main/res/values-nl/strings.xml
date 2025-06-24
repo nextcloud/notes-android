@@ -44,6 +44,15 @@
     <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
     <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
 
+    <!-- NoteShareActivity -->
+    <string name="note_share_activity_activity_icon_content_description">note activiteitspictogram</string>
+    <string name="note_share_activity_share_icon_content_description">note deel-pictogram</string>
+    <string name="note_share_activity_external_icon_content_description">note deel externe pictogram</string>
+    <string name="note_share_activity_copy_icon_content_description">note deel kopieerpictogram</string>
+    <string name="note_share_activity_more_icon_content_description">note deel meer pictogram</string>
+    <string name="note_share_activity_icon_content_description">note deel-pictogram</string>
+    <string name="note_share_activity_user_icon_content_description">note deel gebruiker pictogram</string>
+    <string name="note_share_activity_contact_icon_content_description">note deel contact pictogram</string>
     <string name="note_share_activity_shared_with_you">Met je gedeeld door %1$s</string>
     <string name="note_share_activity_share_note">Notitie delen</string>
     <string name="note_share_activity_search_text">Naam, Federated Cloud ID of e-mailadres…</string>

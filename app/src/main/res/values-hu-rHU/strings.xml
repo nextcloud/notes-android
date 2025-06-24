@@ -42,6 +42,7 @@
 
     <string name="note_share_activity_shared_with_you">%1$s megosztotta Önnel</string>
     <string name="note_share_activity_share_note">Jegyzet megosztása</string>
+    <string name="note_share_activity_search_text">Név, egyesített felhőazonosító vagy e-mail-cím…</string>
     <string name="note_share_activity_share_link">Megosztási hivatkozás</string>
     <string name="note_share_activity_resharing_not_allowed">Házirend vagy jogosultságok tiltják a továbbosztást</string>
     <string name="note_share_activity_could_not_retrieve_url">Az URL nem kérhető le</string>
