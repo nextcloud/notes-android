@@ -10,6 +10,7 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.room.AutoMigration;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
@@ -57,7 +58,8 @@ import it.niedermann.owncloud.notes.shared.model.Capabilities;
                 NotesListWidgetData.class,
                 ShareEntity.class,
                 Capabilities.class
-        }, version = 26
+        }, version = 26,
+        autoMigrations = { @AutoMigration(from = 25, to = 26) }
 )
 @TypeConverters({Converters.class})
 public abstract class NotesDatabase extends RoomDatabase {
@@ -96,8 +98,6 @@ public abstract class NotesDatabase extends RoomDatabase {
                         new Migration_23_24(context),
                         new Migration_24_25()
                 )
-                .fallbackToDestructiveMigrationOnDowngrade()
-                .fallbackToDestructiveMigration()
                 .addCallback(new RoomDatabase.Callback() {
                     @Override
                     public void onCreate(@NonNull SupportSQLiteDatabase db) {
