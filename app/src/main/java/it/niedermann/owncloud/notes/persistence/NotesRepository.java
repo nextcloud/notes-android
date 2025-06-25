@@ -923,7 +923,7 @@ public class NotesRepository {
                         callbacksPull.put(account.getId(), new ArrayList<>());
                     }
                     syncExecutor.submit(syncTask);
-                } catch (Throwable e) {
+                } catch (NextcloudFilesAppAccountNotFoundException e) {
                     Log.e(TAG, "... Could not find " + SingleSignOnAccount.class.getSimpleName() + " for account name " + account.getAccountName());
                     e.printStackTrace();
                 }
