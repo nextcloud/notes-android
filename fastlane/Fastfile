@@ -95,6 +95,7 @@ desc "Build app bundle"
 				  "android.injected.signing.key.password" => ENV["FASTLANE_NOTES_UPLOAD_KEY_PASSWORD"],
 				}
 			)
+		sh("mkdir -p ../release/")
 		sh("mv ../app/build/outputs/apk/play/release/app-play-release.apk ../release/nextcloud-notes-#{options[:versionCode]}.apk")
 	end
 
