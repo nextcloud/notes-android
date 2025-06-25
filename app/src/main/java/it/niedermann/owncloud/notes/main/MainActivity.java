@@ -99,7 +99,6 @@ import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesWorker;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
-import it.niedermann.owncloud.notes.share.helper.AvatarLoader;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
@@ -286,7 +285,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                     .apply(RequestOptions.circleCropTransform())
                     .into(activityBinding.launchAccountSwitcher);
 
-            mainViewModel.synchronizeNotes(nextAccount, new IResponseCallback<>() {
+            mainViewModel.synchronizeNotes(this, nextAccount, new IResponseCallback<>() {
                 @Override
                 public void onSuccess(Void v) {
                     Log.d(TAG, "Successfully synchronized notes for " + nextAccount.getAccountName());
@@ -376,7 +375,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             try {
                 // It is possible that after the deletion of the last account, this onResponse gets called before the ImportAccountActivity gets started.
                 if (SingleAccountHelper.getCurrentSingleSignOnAccount(this) != null) {
-                    mainViewModel.synchronizeNotes(currentAccount, new IResponseCallback<>() {
+                    mainViewModel.synchronizeNotes(this, currentAccount, new IResponseCallback<>() {
                         @Override
                         public void onSuccess(Void v) {
                             Log.d(TAG, "Successfully synchronized notes for " + currentAccount.getAccountName());
@@ -477,7 +476,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             final var syncLiveData = mainViewModel.getCurrentAccount();
             final Observer<Account> syncObserver = currentAccount -> {
                 syncLiveData.removeObservers(this);
-                mainViewModel.synchronizeCapabilitiesAndNotes(currentAccount, new IResponseCallback<>() {
+                mainViewModel.synchronizeCapabilitiesAndNotes(this, currentAccount, new IResponseCallback<>() {
                     @Override
                     public void onSuccess(Void v) {
                         Log.d(TAG, "Successfully synchronized capabilities and notes for " + currentAccount.getAccountName());

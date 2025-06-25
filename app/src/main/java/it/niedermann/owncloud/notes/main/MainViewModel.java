@@ -15,8 +15,8 @@ import static it.niedermann.owncloud.notes.main.MainActivity.ADAPTER_KEY_STARRED
 import static it.niedermann.owncloud.notes.main.slots.SlotterUtil.fillListByCategory;
 import static it.niedermann.owncloud.notes.main.slots.SlotterUtil.fillListByInitials;
 import static it.niedermann.owncloud.notes.main.slots.SlotterUtil.fillListByTime;
-import static it.niedermann.owncloud.notes.shared.model.CategorySortingMethod.SORT_MODIFIED_DESC;
 import static it.niedermann.owncloud.notes.shared.model.CategorySortingMethod.SORT_LEXICOGRAPHICAL_DESC;
+import static it.niedermann.owncloud.notes.shared.model.CategorySortingMethod.SORT_MODIFIED_DESC;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.DEFAULT_CATEGORY;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.RECENT;
@@ -44,6 +44,7 @@ import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundExce
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.UnknownErrorException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
+import com.owncloud.android.lib.common.utils.Log_OC;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -379,13 +380,13 @@ public class MainViewModel extends AndroidViewModel {
         return items;
     }
 
-    public void synchronizeCapabilitiesAndNotes(@NonNull Account localAccount, @NonNull IResponseCallback<Void> callback) {
+    public void synchronizeCapabilitiesAndNotes(Context context, @NonNull Account localAccount, @NonNull IResponseCallback<Void> callback) {
         Log.i(TAG, "[synchronizeCapabilitiesAndNotes] Synchronize capabilities for " + localAccount.getAccountName());
         synchronizeCapabilities(localAccount, new IResponseCallback<>() {
             @Override
             public void onSuccess(Void v) {
                 Log.i(TAG, "[synchronizeCapabilitiesAndNotes] Synchronize notes for " + localAccount.getAccountName());
-                synchronizeNotes(localAccount, callback);
+                synchronizeNotes(context, localAccount, callback);
             }
 
             @Override
@@ -442,7 +443,7 @@ public class MainViewModel extends AndroidViewModel {
     /**
      * Updates the network status if necessary and pulls the latest notes of the given {@param localAccount}
      */
-    public void synchronizeNotes(@NonNull Account currentAccount, @NonNull IResponseCallback<Void> callback) {
+    public void synchronizeNotes(Context context, @NonNull Account currentAccount, @NonNull IResponseCallback<Void> callback) {
         executor.submit(() -> {
             Log.v(TAG, "[synchronize] - currentAccount: " + currentAccount.getAccountName());
             if (!repo.isSyncPossible()) {
@@ -450,6 +451,14 @@ public class MainViewModel extends AndroidViewModel {
             }
             if (repo.isSyncPossible()) {
                 repo.scheduleSync(currentAccount, false);
+
+                try {
+                    final var ssoAccount = AccountImporter.getSingleSignOnAccount(context, currentAccount.getAccountName());
+                    CapabilitiesClient.getCapabilities(context, ssoAccount, null, ApiProvider.getInstance());
+                } catch (Throwable t) {
+                    Log_OC.e(TAG, t.getMessage());
+                }
+
                 callback.onSuccess(null);
             } else { // Sync is not possible
                 if (repo.isNetworkConnected() && repo.isSyncOnlyOnWifi()) {

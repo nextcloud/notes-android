@@ -171,7 +171,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                     binding.loadingLayout.setVisibility(View.GONE);
                 });
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                Log_OC.e(TAG, "Exception at NoteShareActivity.init: " + e);
             }
         });
     }
