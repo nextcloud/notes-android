@@ -879,9 +879,6 @@ public class NotesRepository {
             if (isSyncPossible() && (!Boolean.TRUE.equals(syncActive.get(account.getId())) || onlyLocalChanges)) {
                 syncActive.put(account.getId(), true);
                 try {
-                    final var ssoAccount = AccountImporter.getSingleSignOnAccount(context, account.getAccountName());
-                    CapabilitiesClient.getCapabilities(context,ssoAccount, null, ApiProvider.getInstance());
-
                     Log.d(TAG, "... starting now");
                     final NotesServerSyncTask syncTask = new NotesServerSyncTask(context, this, account, onlyLocalChanges, apiProvider) {
                         @Override
