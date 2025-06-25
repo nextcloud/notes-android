@@ -43,6 +43,10 @@ public class CapabilitiesClient {
             } else {
                 Log.w(TAG, "Response headers of capabilities are null");
             }
+
+            final var repository = NotesRepository.getInstance(context);
+            repository.insertCapabilities(capabilities);
+
             return capabilities;
         } catch (RuntimeException e) {
             final var cause = e.getCause();
