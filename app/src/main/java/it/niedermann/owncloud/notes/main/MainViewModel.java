@@ -15,8 +15,8 @@ import static it.niedermann.owncloud.notes.main.MainActivity.ADAPTER_KEY_STARRED
 import static it.niedermann.owncloud.notes.main.slots.SlotterUtil.fillListByCategory;
 import static it.niedermann.owncloud.notes.main.slots.SlotterUtil.fillListByInitials;
 import static it.niedermann.owncloud.notes.main.slots.SlotterUtil.fillListByTime;
-import static it.niedermann.owncloud.notes.shared.model.CategorySortingMethod.SORT_MODIFIED_DESC;
 import static it.niedermann.owncloud.notes.shared.model.CategorySortingMethod.SORT_LEXICOGRAPHICAL_DESC;
+import static it.niedermann.owncloud.notes.shared.model.CategorySortingMethod.SORT_MODIFIED_DESC;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.DEFAULT_CATEGORY;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.RECENT;
