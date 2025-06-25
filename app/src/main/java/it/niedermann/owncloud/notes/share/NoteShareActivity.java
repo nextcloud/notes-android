@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -149,9 +150,16 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         executorService.submit(() -> {
             try {
                 final var ssoAcc = SingleAccountHelper.getCurrentSingleSignOnAccount(NoteShareActivity.this);
+                Log.i(TAG, "SSOAccount created");
+
                 repository = new ShareRepository(NoteShareActivity.this, ssoAcc);
+                Log.i(TAG, "ShareRepository is created");
+
                 capabilities = repository.getCapabilities();
+                Log.i(TAG, "Capabilities are fetched");
+
                 repository.getSharesForNotesAndSaveShareEntities();
+                Log.i(TAG, "Notes share entities are fetched");
 
                 runOnUiThread(() -> {
                     binding.searchContainer.setVisibility(View.VISIBLE);
@@ -171,7 +179,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                     binding.loadingLayout.setVisibility(View.GONE);
                 });
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                Log.e(TAG, "Exception at NoteShareActivity.init: " + e);
             }
         });
     }

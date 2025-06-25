@@ -331,6 +331,10 @@ public class NotesRepository {
         db.getAccountDao().updateCapabilitiesETag(id, capabilitiesETag);
     }
 
+    public void insertCapabilities(Capabilities capabilities) {
+        db.getCapabilitiesDao().insert(capabilities);
+    }
+
     public void updateModified(long id, long modified) {
         db.getAccountDao().updateModified(id, modified);
     }
@@ -338,7 +342,6 @@ public class NotesRepository {
     public void updateDirectEditingAvailable(final long id, final boolean available) {
         db.getAccountDao().updateDirectEditingAvailable(id, available);
     }
-
 
     // Notes
 
@@ -876,6 +879,9 @@ public class NotesRepository {
             if (isSyncPossible() && (!Boolean.TRUE.equals(syncActive.get(account.getId())) || onlyLocalChanges)) {
                 syncActive.put(account.getId(), true);
                 try {
+                    final var ssoAccount = AccountImporter.getSingleSignOnAccount(context, account.getAccountName());
+                    CapabilitiesClient.getCapabilities(context,ssoAccount, null, ApiProvider.getInstance());
+
                     Log.d(TAG, "... starting now");
                     final NotesServerSyncTask syncTask = new NotesServerSyncTask(context, this, account, onlyLocalChanges, apiProvider) {
                         @Override
@@ -920,7 +926,7 @@ public class NotesRepository {
                         callbacksPull.put(account.getId(), new ArrayList<>());
                     }
                     syncExecutor.submit(syncTask);
-                } catch (NextcloudFilesAppAccountNotFoundException e) {
+                } catch (Throwable e) {
                     Log.e(TAG, "... Could not find " + SingleSignOnAccount.class.getSimpleName() + " for account name " + account.getAccountName());
                     e.printStackTrace();
                 }
