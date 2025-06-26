@@ -40,14 +40,33 @@
 
     <string name="change_category_title">Válasszon kategóriát</string>
 
+    <!-- UsersAndGroupsSearchProvider -->
+    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
+    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
+
+    <!-- NoteShareActivity -->
+    <string name="note_share_activity_activity_icon_content_description">jegyzet tevékenységikonja</string>
+    <string name="note_share_activity_share_icon_content_description">jegyzetmegosztás ikonja</string>
+    <string name="note_share_activity_external_icon_content_description">jegyzet külső megosztásának ikonja</string>
+    <string name="note_share_activity_copy_icon_content_description">jegyzetmegosztás másolási ikonja</string>
+    <string name="note_share_activity_more_icon_content_description">jegyzetmásolás továbbiak ikonja</string>
+    <string name="note_share_activity_icon_content_description">jegyzetmegosztás ikonja</string>
+    <string name="note_share_activity_user_icon_content_description">jegyzetmegosztás felhasználói ikonja</string>
+    <string name="note_share_activity_contact_icon_content_description">jegyzetmegosztás kapcsolati ikonja</string>
     <string name="note_share_activity_shared_with_you">%1$s megosztotta Önnel</string>
     <string name="note_share_activity_share_note">Jegyzet megosztása</string>
     <string name="note_share_activity_search_text">Név, egyesített felhőazonosító vagy e-mail-cím…</string>
     <string name="note_share_activity_share_link">Megosztási hivatkozás</string>
     <string name="note_share_activity_resharing_not_allowed">Házirend vagy jogosultságok tiltják a továbbosztást</string>
-    <string name="note_share_activity_could_not_retrieve_url">Az URL nem kérhető le</string>
+    <string name="note_share_activity_could_not_retrieve_url">A webcím nem kérhető le</string>
     <string name="note_share_activity_subject_shared_with_you">Megosztották Önnel: „%1$s”</string>
     <string name="note_share_activity_contact_no_permission">Névjegy engedély szükséges.</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">Nincs jogosultsága, hogy nyilvános megosztást hozzon létre.</string>
+
+    <string name="note_share_created">Megosztás létrehozva</string>
+    <string name="note_share_activity_cannot_created">Nincs jogosultsága, hogy megosztást hozzon létre.</string>
+
+
     <!-- NoteShareDetailActivity -->
     <string name="note_share_detail_activity_advanced_settings">Speciális beállítások</string>
     <string name="note_share_detail_activity_share_via_link_hide_download">Letöltés elrejtése</string>
@@ -65,6 +84,8 @@
     <string name="note_share_detail_activity_no_share_permission_selected">Válasszon legalább egy jogosultságot a megosztáshoz.</string>
     <string name="note_share_detail_activity_label_empty">A címke nem lehet üres</string>
     <string name="note_share_detail_activity_cancel">Mégse</string>
+    <string name="note_share_detail_activity_create_share_error">A megosztás létrehozása sikertelen</string>
+
     <!-- SharePasswordDialogFragment -->
     <string name="share_password_dialog_fragment_share_link_optional_password_title">Adjon meg egy jelszót (nem kötelező)</string>
     <string name="share_password_dialog_fragment_skip">Kihagyás</string>
@@ -73,10 +94,11 @@
     <string name="common_ok">Rendben</string>
     <string name="common_delete">Törlés</string>
     <string name="write_email">E-mail küldése</string>
-    <string name="no_browser_available">Nincs elérhető alkalmazás hivatkozások kezeléséhez</string>
+    <string name="no_browser_available">Nincs elérhető alkalmazás a hivatkozások kezeléséhez</string>
     <string name="no_email_app_available">Nem érhető el alkalmazás a levélcímek kezeléséhez</string>
     <string name="no_actions">Nincsenek műveletek ehhez a felhasználóhoz</string>
 
+    <string name="failed_the_remove_share">A megosztás eltávolítása sikertelen</string>
     <string name="email_pick_failed">Az e-mail-cím kiválasztása sikertelen.</string>
     <string name="failed_update_ui">A felhasználói felület frissítése sikertelen</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Nem érhető el alkalmazás a névjegyek kiválasztásához</string>
