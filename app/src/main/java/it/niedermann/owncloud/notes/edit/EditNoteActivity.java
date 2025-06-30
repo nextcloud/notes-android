@@ -110,7 +110,15 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     }
 
     private void setImeInsets() {
-        ViewCompat.setOnApplyWindowInsetsListener(this.getWindow().getDecorView(), (v, insets) -> {
+        final var window = getWindow();
+        if (window == null) {
+            return;
+        }
+
+        WindowCompat.setDecorFitsSystemWindows(window, false);
+
+        final var decorView = window.getDecorView();
+        ViewCompat.setOnApplyWindowInsetsListener(decorView, (v, insets) -> {
             Insets imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime());
             Insets navBarInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
 
