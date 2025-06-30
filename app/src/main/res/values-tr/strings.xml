@@ -144,7 +144,7 @@
     <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title">Sabit aralıklı yazı türü</string>
     <string name="settings_font_size">Yazı boyutu</string>
-    <string name="settings_wifi_only">Yalnızca Wi-Fi ile eşitlensin</string>
+    <string name="settings_wifi_only">Yalnızca kablosuz ağ ile eşitlensin</string>
     <string name="settings_lock">Uygulama kilidi (Beta)</string>
     <string name="settings_lock_summary">Aygıt kimlik doğrulama bilgileri</string>
     <string name="settings_background_sync">Arka planda eşitleme</string>
@@ -198,7 +198,7 @@
     <string name="shortcut_create_long">Not ekle</string>
 
     <string name="pref_value_font_normal">Normal</string>
-    <string name="pref_value_wifi_and_mobile">Wi-Fi ve mobil veri ile eşitlensin</string>
+    <string name="pref_value_wifi_and_mobile">Kablosuz ağ ve mobil veri ile eşitlensin</string>
     <string name="pref_value_lock">Parola koruması</string>
 
     <string name="simple_error">Hata</string>
@@ -259,13 +259,13 @@
     <string name="error_dialog_tip_files_force_stop">Nextcloud uygulamanızda bir sorun var gibi görünüyor. Lütfen hem Nextcloud uygulamasını hem de Nextcloud Notlar uygulamasını zorla kapatmayı deneyin.</string>
     <string name="error_dialog_tip_files_delete_storage">Zorla durdurmak sorunu çözmediyse iki uygulamanın da depolamalarını temizlemeyi deneyebilirsiniz.</string>
     <string name="error_dialog_timeout_instance">Belirtilen sürede sunucunuzdan bir yanıt alınamadı. Lütfen kopyanızın düzgün çalıştığından emin olun.</string>
-    <string name="error_dialog_timeout_toggle">Ağ bağlantınızı denetleyin. Mobil veriye geçmek ya da Wi-Fi bağlantısını kapatıp açmak yardımcı olabilir.</string>
+    <string name="error_dialog_timeout_toggle">Ağ bağlantınızı denetleyin. Mobil veriye geçmek ya da kablosuz ağ bağlantısını kapatıp açmak yardımcı olabilir.</string>
     <string name="error_dialog_check_server">Sunucunuz doğru şekilde yanıt vermedi. Lütfen notlarınıza site arayüzü üzerinden erişebiliyor musunuz diye bakın.</string>
     <string name="error_dialog_check_server_logs">Nextcloud kurulumunuz ile ilgili bir sorun var. Lütfen sunucu günlük dosyalarını inceleyin.</string>
     <string name="error_dialog_check_maintenance">Nextcloud kopyanızın bakım kipinde olmadığından emin olun.</string>
     <string name="error_dialog_insufficient_storage">Nextcloud kopyanızda boş depolama alanı kalmamış. Lütfen yerel değişikliklerinizi bulut ile eşitlemek için bazı dosyaları silerek yer açın.</string>
     <string name="error_dialog_we_need_info">Size yardımcı olabilmemiz için şu teknik bilgilere gerek duyacağız:</string>
-    <string name="error_dialog_server_app_enabled">Lütfen sunucunuzda \"Notlar\" uygulamasının kurulu ve etkinleştirilmiş olduğundan emin olun.</string>
+    <string name="error_dialog_server_app_enabled">Lütfen sunucunuzda \"Notlar\" uygulamasının kurulu ve kullanıma alınmış olduğundan emin olun.</string>
     <string name="error_dialog_redirect">Sunucunuz, üzerine Notlar uygulamasının kurulmadığı ya da bir şeyin yanlış yapılandırıldığı anlamına gelen HTTP 302 durum kodu ile yanıt verdi. Bu durum, bir .htaccess dosyasındaki özel kısıtlamalardan ya da OID İstemcisi gibi Nextcloud uygulamalarından kaynaklanabilir.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Lütfen Nextcloud ve Notlar uygulaması için tüm pil iyileştirmelerini kapatın.</string>
     <string name="error_dialog_min_version">Notlar Android uygulamasının çalışması için Nextcloud Android uygulamasının en az 3.18 sürümü gereklidir</string>
@@ -391,7 +391,7 @@
     <string name="simple_next">Sonraki</string>
     <string name="simple_prev">Önceki</string>
     <string name="simple_backup">Yedekle</string>
-    <string name="backup">Uygulamada geri döndürülemeyecek bir durum algılandı. Lütfen eşitlenmemiş değişikliklerinizi yedekleyin ve Notes uygulamasının depolama alanını temizleyin.</string>
+    <string name="backup">Uygulamada kurtarılamayacak bir durum bulundu. Lütfen eşitlenmemiş değişikliklerinizi yedekleyin ve Notes uygulamasının depolama alanını temizleyin.</string>
     <string name="settings_notes_path_description">Nextcloud üzerinde notlarınızın kaydedileceği klasör </string>
     <string-array name="settings_file_suffixes">
         <item translatable="false">.txt</item>
