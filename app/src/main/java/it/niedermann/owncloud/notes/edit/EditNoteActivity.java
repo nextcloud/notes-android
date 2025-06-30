@@ -20,9 +20,14 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 
+import com.nextcloud.android.common.ui.util.extensions.AppCompatActivityExtensionsKt;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
@@ -101,6 +106,26 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
 
         setSupportActionBar(binding.toolbar);
         binding.toolbar.setOnClickListener((v) -> fragment.showEditTitleDialog());
+        setImeInsets();
+    }
+
+    private void setImeInsets() {
+        ViewCompat.setOnApplyWindowInsetsListener(this.getWindow().getDecorView(), (v, insets) -> {
+            Insets imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime());
+            Insets navBarInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
+
+            // Apply bottom padding when keyboard is shown
+            int bottomPadding = Math.max(imeInsets.bottom, navBarInsets.bottom);
+
+            v.setPadding(
+                    v.getPaddingLeft(),
+                    v.getPaddingTop(),
+                    v.getPaddingRight(),
+                    bottomPadding
+            );
+
+            return insets;
+        });
     }
 
     @Override
