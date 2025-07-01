@@ -1,17 +1,16 @@
 <!--
   ~ Nextcloud Notes - Android Client
   ~
-  ~ SPDX-FileCopyrightText: 2018-2024 Google LLC
+  ~ SPDX-FileCopyrightText: 2018-2025 Google LLC
   ~ SPDX-License-Identifier: Apache-2.0
 -->
-<vector android:autoMirrored="true"
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
     android:height="24dp"
     android:tint="#757575"
-    android:viewportHeight="24.0"
-    android:viewportWidth="24.0"
-    android:width="24dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:viewportWidth="960"
+    android:viewportHeight="960">
     <path
-        android:fillColor="#FF757575"
-        android:pathData="M18,3v2h-2L16,3L8,3v2L6,5L6,3L4,3v18h2v-2h2v2h8v-2h2v2h2L20,3h-2zM8,17L6,17v-2h2v2zM8,13L6,13v-2h2v2zM8,9L6,9L6,7h2v2zM18,17h-2v-2h2v2zM18,13h-2v-2h2v2zM18,9h-2L16,7h2v2z" />
+        android:fillColor="@android:color/white"
+        android:pathData="M160,160L240,320L360,320L280,160L360,160L440,320L560,320L480,160L560,160L640,320L760,320L680,160L800,160Q833,160 856.5,183.5Q880,207 880,240L880,720Q880,753 856.5,776.5Q833,800 800,800L160,800Q127,800 103.5,776.5Q80,753 80,720L80,240Q80,207 103.5,183.5Q127,160 160,160Z"/>
 </vector>

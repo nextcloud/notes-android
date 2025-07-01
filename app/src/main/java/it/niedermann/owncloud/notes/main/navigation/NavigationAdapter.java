@@ -32,17 +32,17 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationViewHolder
     @ColorInt
     private int color;
     @DrawableRes
-    public static final int ICON_FOLDER = R.drawable.ic_folder_grey600_24dp;
+    public static final int ICON_FOLDER = R.drawable.selector_folder;
     @DrawableRes
-    public static final int ICON_NOFOLDER = R.drawable.ic_folder_open_grey600_24dp;
+    public static final int ICON_NOFOLDER = R.drawable.selector_folder_open;
     @DrawableRes
-    public static final int ICON_SUB_FOLDER = R.drawable.ic_folder_grey600_18dp;
+    public static final int ICON_SUB_FOLDER = R.drawable.selector_folder_18;
     @DrawableRes
-    public static final int ICON_MULTIPLE = R.drawable.ic_create_new_folder_grey600_24dp;
+    public static final int ICON_MULTIPLE = R.drawable.selector_new_folder;
     @DrawableRes
-    public static final int ICON_MULTIPLE_OPEN = R.drawable.ic_folder_grey600_24dp;
+    public static final int ICON_MULTIPLE_OPEN = R.drawable.selector_folder;
     @DrawableRes
-    public static final int ICON_SUB_MULTIPLE = R.drawable.ic_create_new_folder_grey600_18dp;
+    public static final int ICON_SUB_MULTIPLE = R.drawable.selector_new_folder_18;
 
     @NonNull
     private List<NavigationItem> items = new ArrayList<>();

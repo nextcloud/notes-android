@@ -100,7 +100,7 @@
         android:text="@string/noteMode_plain_edit"
         android:visibility="visible"
         app:backgroundTint="@color/defaultBrand"
-        app:layout_anchor="@id/scrollView"
-        app:layout_anchorGravity="bottom|end"
-        app:icon="@drawable/ic_edit_grey600_24dp" />
+        app:icon="@drawable/ic_edit_grey600_24dp"
+        app:layout_anchor="@+id/direct_editing"
+        app:layout_anchorGravity="center" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
