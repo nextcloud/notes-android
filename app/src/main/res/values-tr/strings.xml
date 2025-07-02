@@ -36,11 +36,24 @@
 
 
     <string name="search_in_category">%1$s içinde ara</string>
-    <string name="search_in_all">Tüm notlarda arama</string>
+    <string name="search_in_all">Tüm notlarda ara</string>
 
     <string name="change_category_title">Bir kategori seçin</string>
 
-    <string name="note_share_activity_shared_with_you">Sizinle %1$s ile paylaşılmış</string>
+    <!-- UsersAndGroupsSearchProvider -->
+    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
+    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
+
+    <!-- NoteShareActivity -->
+    <string name="note_share_activity_activity_icon_content_description">not işlem simgesi</string>
+    <string name="note_share_activity_share_icon_content_description">not paylaş simgesi</string>
+    <string name="note_share_activity_external_icon_content_description">not dış paylaş simgesi</string>
+    <string name="note_share_activity_copy_icon_content_description">not kopyasını paylaş simgesi</string>
+    <string name="note_share_activity_more_icon_content_description">not diğerlerini paylaş simgesi</string>
+    <string name="note_share_activity_icon_content_description">not paylaş simgesi</string>
+    <string name="note_share_activity_user_icon_content_description">not kullanıcıyı paylaş simgesi</string>
+    <string name="note_share_activity_contact_icon_content_description">not kişiyi paylaş simgesi</string>
+    <string name="note_share_activity_shared_with_you">Sizinle %1$s tarafından paylaşılmış</string>
     <string name="note_share_activity_share_note">Notu paylaş</string>
     <string name="note_share_activity_search_text">Ad, birleşik bulut kimliği ya da e-posta adresi…</string>
     <string name="note_share_activity_share_link">Bağlantıyı paylaş</string>
@@ -48,6 +61,12 @@
     <string name="note_share_activity_could_not_retrieve_url">Adres alınamadı</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" ögesi sizinle paylaşıldı</string>
     <string name="note_share_activity_contact_no_permission">Kişi izinleri gerekli.</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">Herkese açık bir paylaşım oluşturma izniniz yok.</string>
+
+    <string name="note_share_created">Paylaşım oluşturuldu</string>
+    <string name="note_share_activity_cannot_created">Bir paylaşım oluşturma izniniz yok.</string>
+
+
     <!-- NoteShareDetailActivity -->
     <string name="note_share_detail_activity_advanced_settings">Gelişmiş ayarlar</string>
     <string name="note_share_detail_activity_share_via_link_hide_download">İndirme gizlensin</string>
@@ -65,8 +84,10 @@
     <string name="note_share_detail_activity_no_share_permission_selected">Lütfen paylaşmak için en az bir izin seçin.</string>
     <string name="note_share_detail_activity_label_empty">Etiket boş olamaz</string>
     <string name="note_share_detail_activity_cancel">İptal</string>
+    <string name="note_share_detail_activity_create_share_error">Bir paylaşım oluşturulamadı</string>
+
     <!-- SharePasswordDialogFragment -->
-    <string name="share_password_dialog_fragment_share_link_optional_password_title">İsteğe bağlı olarak parola yazın</string>
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">İsteğe bağlı olarak bir parola yazın</string>
     <string name="share_password_dialog_fragment_skip">Atla</string>
 
     <string name="share_link_password_title">Bir parola yazın</string>
@@ -77,10 +98,11 @@
     <string name="no_email_app_available">E-posta adreslerini işleyecek bir uygulama bulunamadı</string>
     <string name="no_actions">Bu kullanıcının bir işlemi yok</string>
 
+    <string name="failed_the_remove_share">Paylaşım kaldırılamadı</string>
     <string name="email_pick_failed">E-posta adresi alınamadı.</string>
     <string name="failed_update_ui">Kullanıcı arayüzü güncellenemedi</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Kişilerin seçilmesi için kullanılabilecek bir uygulama yok</string>
-    <string name="activity_chooser_title">Bağlantıyı şuraya gönder …</string>
+    <string name="activity_chooser_title">Bağlantıyı şuraya gönder…</string>
 
     <string name="activity_chooser_send_file_title">Gönder</string>
     <string name="share_internal_link_to_folder_text">İç bağlantı paylaşımı yalnızca bu klasöre erişebilen kullanıcılar için geçerlidir</string>
@@ -98,22 +120,24 @@
     <string name="share_via_link_send_link_label">Bağlantı gönder</string>
     <string name="share_password_title">Parola korumalı</string>
     <string name="share_no_password_title">Parola ayarla</string>
-    <string name="share_with_title">Şununla paylaş …</string>
+    <string name="share_with_title">Şununla paylaş…</string>
     <string name="share_via_link_unset_password">Ayarı kaldır</string>
     <string name="add_another_public_share_link">Başka bir bağlantı ekle</string>
     <string name="add_new_public_share">Yeni herkese açık paylaşım bağlantısı ekle</string>
     <string name="public_share_name">Yeni ad</string>
-    <string name="share_link_with_label">Bağlantı paylaş (%1$s)</string>
+    <string name="share_link_with_label">Bağlantıyı paylaş (%1$s)</string>
     <string name="share_link">Bağlantıyı paylaş</string>
+    <string name="allow_resharing">Yeniden paylaşılabilsin</string>
     <string name="link_share_view_only">Yalnızca görüntüleme</string>
-    <string name="link_share_editing">Düzenleniyor</string>
-    <string name="link_share_allow_upload_and_editing">Yüklenebilsin ve düzenlenebilsin</string>
+    <string name="link_share_editing">Düzenleme</string>
+    <string name="link_share_allow_upload_and_editing">Yüklemeye ve düzenlemeye izin ver</string>
+    <string name="link_share_file_drop">Dosya bırakma (yalnızca yükleme)</string>
     <string name="could_not_retrieve_shares">Paylaşımlar alınamadı</string>
     <string name="share_permission_view_only">Yalnızca görüntüleme</string>
     <string name="share_permission_can_edit">Düzenleyebilir</string>
     <string name="share_permission_file_drop">Dosya bırakma</string>
     <string name="share_permission_secure_file_drop">Güvenli dosya bırakma</string>
-    <string name="share_permissions">İzinleri paylaş</string>
+    <string name="share_permissions">Paylaşım izinleri</string>
     <plurals name="share_download_limit_description">
         <item quantity="one">%1$d indirme kaldı</item>
         <item quantity="other">%1$d indirme kaldı</item>
