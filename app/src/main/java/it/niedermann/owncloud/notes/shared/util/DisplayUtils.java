@@ -44,13 +44,13 @@ import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 public class DisplayUtils {
 
     private static final Map<Integer, Collection<Integer>> SPECIAL_CATEGORY_REPLACEMENTS = Map.of(
-            R.drawable.ic_library_music_grey600_24dp, singletonList(R.string.category_music),
-            R.drawable.ic_local_movies_grey600_24dp, asList(R.string.category_movies, R.string.category_movie),
-            R.drawable.ic_work_grey600_24dp, singletonList(R.string.category_work),
+            R.drawable.selector_music, singletonList(R.string.category_music),
+            R.drawable.selector_movies, asList(R.string.category_movies, R.string.category_movie),
+            R.drawable.selector_work, singletonList(R.string.category_work),
             R.drawable.ic_baseline_checklist_24, asList(R.string.category_todo, R.string.category_todos, R.string.category_tasks, R.string.category_checklists),
-            R.drawable.ic_baseline_fastfood_24, asList(R.string.category_recipe, R.string.category_recipes, R.string.category_restaurant, R.string.category_restaurants, R.string.category_food, R.string.category_bake),
-            R.drawable.ic_baseline_vpn_key_24, asList(R.string.category_key, R.string.category_keys, R.string.category_password, R.string.category_passwords, R.string.category_credentials),
-            R.drawable.ic_baseline_games_24, asList(R.string.category_game, R.string.category_games, R.string.category_play),
+            R.drawable.selector_food, asList(R.string.category_recipe, R.string.category_recipes, R.string.category_restaurant, R.string.category_restaurants, R.string.category_food, R.string.category_bake),
+            R.drawable.selector_credentials, asList(R.string.category_key, R.string.category_keys, R.string.category_password, R.string.category_passwords, R.string.category_credentials),
+            R.drawable.selector_games, asList(R.string.category_game, R.string.category_games, R.string.category_play),
             R.drawable.ic_baseline_card_giftcard_24, asList(R.string.category_gift, R.string.category_gifts, R.string.category_present, R.string.category_presents)
     );
 

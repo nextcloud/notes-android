@@ -318,8 +318,8 @@ public class MainViewModel extends AndroidViewModel {
 
     private static List<NavigationItem> fromCategoriesWithNotesCount(@NonNull Context context, @Nullable String expandedCategory, @NonNull List<CategoryWithNotesCount> fromDatabase, int count, int favoritesCount) {
         final var categories = convertToCategoryNavigationItem(context, fromDatabase);
-        final var itemRecent = new NavigationItem(ADAPTER_KEY_RECENT, context.getString(R.string.label_all_notes), count, R.drawable.ic_access_time_grey600_24dp, RECENT);
-        final var itemFavorites = new NavigationItem(ADAPTER_KEY_STARRED, context.getString(R.string.label_favorites), favoritesCount, R.drawable.ic_star_yellow_24dp, FAVORITES);
+        final var itemRecent = new NavigationItem(ADAPTER_KEY_RECENT, context.getString(R.string.label_all_notes), count, R.drawable.selector_all_notes, RECENT);
+        final var itemFavorites = new NavigationItem(ADAPTER_KEY_STARRED, context.getString(R.string.label_favorites), favoritesCount, R.drawable.selector_favorites, FAVORITES);
 
         final var items = new ArrayList<NavigationItem>(fromDatabase.size() + 3);
         items.add(itemRecent);

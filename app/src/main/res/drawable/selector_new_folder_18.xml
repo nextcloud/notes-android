@@ -1,0 +1,10 @@
+<!--
+  ~ Nextcloud Notes - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2025 Nextcloud GmbH and Nextcloud contributors
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_create_new_folder_grey600_outline_18dp" android:state_selected="false" />
+    <item android:drawable="@drawable/ic_create_new_folder_grey600_18dp" android:state_selected="true" />
+</selector>
