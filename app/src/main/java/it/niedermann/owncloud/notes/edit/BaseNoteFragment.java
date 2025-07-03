@@ -272,7 +272,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                 if (ShortcutManagerCompat.isRequestPinShortcutSupported(context)) {
                     final var pinShortcutInfo = new ShortcutInfoCompat.Builder(context, String.valueOf(note.getId()))
                             .setShortLabel(note.getTitle())
-                            .setIcon(IconCompat.createWithResource(context.getApplicationContext(), TRUE.equals(note.getFavorite()) ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp))
+                            .setIcon(IconCompat.createWithResource(context.getApplicationContext(), TRUE.equals(note.getFavorite()) ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_border_grey_ccc_24dp))
                             .setIntent(new Intent(getActivity(), EditNoteActivity.class).putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId()).setAction(ACTION_SHORTCUT))
                             .build();
 
