@@ -193,7 +193,7 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
         Log.d(TAG, "loadNoteInWebView() called")
 
         context?.let { context ->
-            val repository = DirectEditingRepository.getInstance(context)
+            val repository = DirectEditingRepository.getInstance(context.applicationContext)
             val urlDisposable = repository.getDirectEditingUrl(account, note)
                 .observeOn(AndroidSchedulers.mainThread()).subscribe({ url ->
                     url?.let {
