@@ -83,7 +83,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
                     }
                 }
             }
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             Log.w(TAG, "Error caught at onDataSetChanged: " + e);
         }
     }
