@@ -28,8 +28,7 @@ public abstract class BrandedFragment extends Fragment implements Branded {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        final var activity = getActivity();
-        if (activity instanceof AppCompatActivity appCompatActivity) {
+        if (getActivity() instanceof AppCompatActivity appCompatActivity) {
             AppCompatActivityExtensionsKt.adjustUIForAPILevel35(appCompatActivity);
         }
         super.onCreate(savedInstanceState);
