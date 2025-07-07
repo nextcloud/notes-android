@@ -10,6 +10,7 @@ import com.nextcloud.android.sso.api.EmptyResponse;
 import com.nextcloud.android.sso.api.ParsedResponse;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
@@ -52,4 +53,7 @@ public interface NotesAPI_1_0 {
 
     @PUT("settings")
     Call<NotesSettings> putSettings(@Body NotesSettings settings);
+
+    @PUT("notes/{id}")
+    Call<Note> updateNote(@Path("id") long id, @Body Note note);
 }

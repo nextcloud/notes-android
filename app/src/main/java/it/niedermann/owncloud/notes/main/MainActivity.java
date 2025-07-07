@@ -786,7 +786,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     @Override
     public void onNoteFavoriteClick(int position, View view) {
-        final var toggleLiveData = mainViewModel.toggleFavoriteAndSync(((Note) adapter.getItem(position)).getId());
+        final var toggleLiveData = mainViewModel.toggleFavoriteAndSync(((Note) adapter.getItem(position)));
         toggleLiveData.observe(this, (next) -> toggleLiveData.removeObservers(this));
     }
 

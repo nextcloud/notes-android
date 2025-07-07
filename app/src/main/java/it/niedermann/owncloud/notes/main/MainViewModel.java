@@ -513,15 +513,14 @@ public class MainViewModel extends AndroidViewModel {
         });
     }
 
-    public LiveData<Void> toggleFavoriteAndSync(long noteId) {
+    public LiveData<Void> toggleFavoriteAndSync(Note note) {
         return switchMap(getCurrentAccount(), currentAccount -> {
-            if (currentAccount == null) {
-                return new MutableLiveData<>(null);
-            } else {
+            if (currentAccount != null) {
                 Log.v(TAG, "[toggleFavoriteAndSync] - currentAccount: " + currentAccount.getAccountName());
-                repo.toggleFavoriteAndSync(currentAccount, noteId);
-                return new MutableLiveData<>(null);
+                repo.toggleFavoriteAndSync(currentAccount, note);
             }
+
+            return new MutableLiveData<>(null);
         });
     }
 
