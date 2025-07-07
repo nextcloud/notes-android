@@ -211,6 +211,7 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
             getString(R.string.direct_editing_error),
             Snackbar.LENGTH_INDEFINITE,
         )
+
         if (note != null) {
             snackbar.setAction(R.string.switch_to_plain_editing) {
                 changeToEditMode()
@@ -220,6 +221,7 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
                 close()
             }
         }
+
         snackbar.show()
     }
 
@@ -227,31 +229,32 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun prepareWebView() {
-        val webSettings = binding.noteWebview.settings
-        // enable zoom
-        webSettings.setSupportZoom(true)
-        webSettings.builtInZoomControls = true
-        webSettings.displayZoomControls = false
+        binding.noteWebview.settings.run {
+            // enable zoom
+            setSupportZoom(true)
+            builtInZoomControls = true
+            displayZoomControls = false
 
-        // Non-responsive webs are zoomed out when loaded
-        webSettings.useWideViewPort = true
-        webSettings.loadWithOverviewMode = true
+            // Non-responsive webs are zoomed out when loaded
+            useWideViewPort = true
+            loadWithOverviewMode = true
 
-        // user agent
-        val userAgent =
-            getString(R.string.user_agent, getString(R.string.app_name), BuildConfig.VERSION_NAME)
-        webSettings.userAgentString = userAgent
+            // user agent
+            val userAgent =
+                getString(R.string.user_agent, getString(R.string.app_name), BuildConfig.VERSION_NAME)
+            userAgentString = userAgent
 
-        // no private data storing
-        webSettings.savePassword = false
-        webSettings.saveFormData = false
+            // no private data storing
+            savePassword = false
+            saveFormData = false
 
-        // disable local file access
-        webSettings.allowFileAccess = false
+            // disable local file access
+            allowFileAccess = false
 
-        // enable javascript
-        webSettings.javaScriptEnabled = true
-        webSettings.domStorageEnabled = true
+            // enable javascript
+            javaScriptEnabled = true
+            domStorageEnabled = true
+        }
 
         if (BuildConfig.DEBUG) {
             // caching disabled in debug mode
@@ -343,6 +346,11 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
     }
 
     private fun changeToEditMode() {
+        if (note == null || note.remoteId == null) {
+            Log.d(TAG, "note is null, cant edit")
+            return
+        }
+
         toggleLoadingUI(true)
         val updateDisposable = Single.just(note.remoteId)
             .map { remoteId ->
@@ -399,21 +407,25 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
 
         @JvmStatic
         fun newInstance(accountId: Long, noteId: Long): BaseNoteFragment {
-            val fragment = NoteDirectEditFragment()
-            val args = Bundle()
-            args.putLong(PARAM_NOTE_ID, noteId)
-            args.putLong(PARAM_ACCOUNT_ID, accountId)
-            fragment.arguments = args
-            return fragment
+            val bundle = Bundle().apply {
+                putLong(PARAM_NOTE_ID, noteId)
+                putLong(PARAM_ACCOUNT_ID, accountId)
+            }
+
+            return NoteDirectEditFragment().apply {
+                arguments = bundle
+            }
         }
 
         @JvmStatic
         fun newInstanceWithNewNote(newNote: Note?): BaseNoteFragment {
-            val fragment = NoteDirectEditFragment()
-            val args = Bundle()
-            args.putSerializable(PARAM_NEWNOTE, newNote)
-            fragment.arguments = args
-            return fragment
+            val bundle = Bundle().apply {
+                putSerializable(PARAM_NEWNOTE, newNote)
+            }
+
+            return NoteDirectEditFragment().apply {
+                arguments = bundle
+            }
         }
     }
 }
