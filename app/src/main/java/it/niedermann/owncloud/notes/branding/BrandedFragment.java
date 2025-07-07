@@ -6,13 +6,18 @@
  */
 package it.niedermann.owncloud.notes.branding;
 
+import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
+import com.nextcloud.android.common.ui.util.extensions.AppCompatActivityExtensionsKt;
 
 public abstract class BrandedFragment extends Fragment implements Branded {
 
@@ -20,6 +25,15 @@ public abstract class BrandedFragment extends Fragment implements Branded {
     protected int colorAccent;
     @ColorInt
     protected int colorPrimary;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        final var activity = getActivity();
+        if (activity instanceof AppCompatActivity appCompatActivity) {
+            AppCompatActivityExtensionsKt.adjustUIForAPILevel35(appCompatActivity);
+        }
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public void onStart() {
