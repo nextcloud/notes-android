@@ -188,21 +188,23 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
 
     private fun loadNoteInWebView(note: Note) {
         Log.d(TAG, "loadNoteInWebView() called")
-        val directEditingRepository =
-            DirectEditingRepository.getInstance(requireContext().applicationContext)
-        val urlDisposable = directEditingRepository.getDirectEditingUrl(account, note)
-            .observeOn(AndroidSchedulers.mainThread()).subscribe({ url ->
-                url?.let {
-                    if (BuildConfig.DEBUG) {
-                        Log.d(TAG, "loadNoteInWebView: url = $url")
+
+        context?.let { context ->
+            val repository = DirectEditingRepository.getInstance(context)
+            val urlDisposable = repository.getDirectEditingUrl(account, note)
+                .observeOn(AndroidSchedulers.mainThread()).subscribe({ url ->
+                    url?.let {
+                        if (BuildConfig.DEBUG) {
+                            Log.d(TAG, "loadNoteInWebView: url = $url")
+                        }
+                        binding.noteWebview.loadUrl(url)
                     }
-                    binding.noteWebview.loadUrl(url)
-                }
-            }, { throwable ->
-                handleLoadError()
-                Log.e(TAG, "loadNoteInWebView:", throwable)
-            })
-        disposables.add(urlDisposable)
+                }, { throwable ->
+                    handleLoadError()
+                    Log.e(TAG, "loadNoteInWebView:", throwable)
+                })
+            disposables.add(urlDisposable)
+        }
     }
 
     private fun handleLoadError() {
