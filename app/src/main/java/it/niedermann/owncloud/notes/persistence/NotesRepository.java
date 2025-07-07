@@ -12,6 +12,7 @@ import static androidx.lifecycle.Transformations.distinctUntilChanged;
 import static androidx.lifecycle.Transformations.map;
 import static java.util.stream.Collectors.toMap;
 import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
+import static it.niedermann.owncloud.notes.shared.util.ApiVersionUtil.getPreferredApiVersion;
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.generateNoteExcerpt;
 import static it.niedermann.owncloud.notes.widget.notelist.NoteListWidget.updateNoteListWidgets;
 import static it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget.updateSingleNoteWidgets;
@@ -47,6 +48,7 @@ import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundExce
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
+import com.owncloud.android.lib.common.utils.Log_OC;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -538,11 +540,26 @@ public class NotesRepository {
                 .collect(toMap(Note::getRemoteId, Note::getId));
     }
 
+    // FIXME: RACE CONDITION
     @AnyThread
-    public void toggleFavoriteAndSync(Account account, long noteId) {
+    public void toggleFavoriteAndSync(Account account, Note note) {
         executor.submit(() -> {
-            db.getNoteDao().toggleFavorite(noteId);
-            scheduleSync(account, true);
+            try {
+                final var ssoAccount = AccountImporter.getSingleSignOnAccount(context, account.getAccountName());
+                final var notesAPI = apiProvider.getNotesAPI(context, ssoAccount, getPreferredApiVersion(account.getApiVersion()));
+                note.setFavorite(!note.getFavorite());
+                final var result = notesAPI.updateNote(note);
+                final var response = result.execute();
+                if (response.isSuccessful()) {
+                    final var updatedNote = response.body();
+                    if (updatedNote != null) {
+                        db.getNoteDao().updateNote(updatedNote);
+                        scheduleSync(account, true);
+                    }
+                }
+            } catch (Exception e) {
+                Log_OC.e(TAG, "toggleFavoriteAndSync: " + e);
+            }
         });
     }
 

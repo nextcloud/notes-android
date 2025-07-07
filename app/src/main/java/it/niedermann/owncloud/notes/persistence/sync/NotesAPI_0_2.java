@@ -10,6 +10,7 @@ import com.nextcloud.android.sso.api.EmptyResponse;
 import com.nextcloud.android.sso.api.ParsedResponse;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
@@ -46,4 +47,7 @@ public interface NotesAPI_0_2 {
 
     @DELETE("notes/{remoteId}")
     Call<EmptyResponse> deleteNote(@Path("remoteId") long noteId);
+
+    @PUT("notes/{id}")
+    Call<Note> updateNote(@Path("id") long id, @Body NotesAPI.Note_0_2 note);
 }
