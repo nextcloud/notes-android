@@ -27,6 +27,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.nextcloud.android.common.ui.theme.utils.ColorRole
 import com.nextcloud.android.sso.helper.SingleAccountHelper
 import com.nextcloud.android.sso.model.SingleSignOnAccount
+import com.owncloud.android.lib.common.utils.Log_OC
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -44,6 +45,7 @@ import it.niedermann.owncloud.notes.shared.model.ApiVersion
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback
 import it.niedermann.owncloud.notes.shared.util.ExtendedFabUtil
 import it.niedermann.owncloud.notes.shared.util.rx.DisposableSet
+import okio.IOException
 import java.util.concurrent.TimeUnit
 
 class NoteDirectEditFragment : BaseNoteFragment(), Branded {
@@ -158,11 +160,19 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
         Log.d(TAG, "createAndLoadNote() called")
         val noteCreateDisposable = Single
             .fromCallable {
-                notesApi.createNote(newNote).execute().body()!!
+                try {
+                    val response = notesApi.createNote(newNote).execute()
+                    response.body()
+                } catch (e: IOException) {
+                    Log_OC.w(TAG, "Cant able to create a note: $e")
+                    null
+                }
             }
-            .map { createdNote ->
-                repo.updateRemoteId(newNote.id, createdNote.remoteId)
-                repo.getNoteById(newNote.id)
+            .flatMap { createdNote ->
+                createdNote?.let {
+                    repo.updateRemoteId(newNote.id, it.remoteId)
+                    Single.fromCallable { repo.getNoteById(newNote.id) }
+                }
             }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
