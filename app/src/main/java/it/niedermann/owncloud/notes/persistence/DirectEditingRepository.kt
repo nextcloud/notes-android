@@ -24,19 +24,20 @@ class DirectEditingRepository private constructor(private val applicationContext
         )
     }
 
-    private fun getNotesPath(account: SingleSignOnAccount): Single<String> {
+    private fun getNotesPath(account: SingleSignOnAccount): Single<String?> {
         return Single.fromCallable {
             val call = notesRepository.getServerSettings(account, ApiVersion.API_VERSION_1_0)
             val response = call.execute()
-            response.body()?.notesPath ?: throw RuntimeException("No notes path available")
+            response.body()?.notesPath
         }.subscribeOn(Schedulers.io())
     }
 
     fun getDirectEditingUrl(
         account: SingleSignOnAccount,
         note: Note,
-    ): Single<String> {
-        return getNotesPath(account)
+    ): Single<String?> {
+        val notesPath = getNotesPath(account)
+        return notesPath
             .flatMap { notesPath ->
                 val filesAPI = apiProvider.getFilesAPI(applicationContext, account)
                 Single.fromCallable {
@@ -50,7 +51,6 @@ class DirectEditingRepository private constructor(private val applicationContext
                         )
                     val response = call.execute()
                     response.body()?.ocs?.data?.url
-                        ?: throw RuntimeException("No url available")
                 }.subscribeOn(Schedulers.io())
             }
     }
