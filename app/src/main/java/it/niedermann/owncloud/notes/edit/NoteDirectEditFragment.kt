@@ -182,10 +182,12 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
             DirectEditingRepository.getInstance(requireContext().applicationContext)
         val urlDisposable = directEditingRepository.getDirectEditingUrl(account, note)
             .observeOn(AndroidSchedulers.mainThread()).subscribe({ url ->
-                if (BuildConfig.DEBUG) {
-                    Log.d(TAG, "loadNoteInWebView: url = $url")
+                url?.let {
+                    if (BuildConfig.DEBUG) {
+                        Log.d(TAG, "loadNoteInWebView: url = $url")
+                    }
+                    binding.noteWebview.loadUrl(url)
                 }
-                binding.noteWebview.loadUrl(url)
             }, { throwable ->
                 handleLoadError()
                 Log.e(TAG, "loadNoteInWebView:", throwable)
