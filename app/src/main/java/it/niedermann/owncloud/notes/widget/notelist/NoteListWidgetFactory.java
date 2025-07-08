@@ -64,6 +64,11 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
         dbNotes.clear();
         try {
             data = repo.getNoteListWidgetData(appWidgetId);
+            if (data == null) {
+                Log.w(TAG, "Widget data is null");
+                return;
+            }
+
             Log.v(TAG, "--- data - " + data);
             switch (data.getMode()) {
                 case MODE_DISPLAY_ALL ->
@@ -78,7 +83,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
                     }
                 }
             }
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             Log.w(TAG, "Error caught at onDataSetChanged: " + e);
         }
     }

@@ -34,12 +34,16 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
+import com.owncloud.android.lib.common.utils.Log_OC;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.FragmentNotePreviewBinding;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.util.SSOUtil;
+import kotlin.Unit;
+import kotlin.jvm.functions.Function0;
 
 public class NotePreviewFragment extends SearchableBaseNoteFragment implements OnRefreshListener {
 
@@ -135,11 +139,26 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         super.onNoteLoaded(note);
         noteLoaded = true;
         registerInternalNoteLinkHandler();
-        changedText = note.getContent();
-        binding.singleNoteContent.setMarkdownString(note.getContent(), setScrollY);
-        binding.singleNoteContent.getMarkdownString().observe(requireActivity(), (newContent) -> {
-            changedText = newContent.toString();
-            saveNote(null);
+
+        lifecycleScopeIOJob(() -> {
+            final String content = note.getContent();
+            changedText = content;
+
+            onMainThread(() -> {
+                binding.singleNoteContent.setMarkdownString(content, setScrollY);
+
+                final var activity = getActivity();
+                if (activity == null) {
+                    return Unit.INSTANCE;
+                }
+
+                binding.singleNoteContent.getMarkdownString().observe(activity, (newContent) -> {
+                    changedText = newContent.toString();
+                    saveNote(null);
+                });
+                return Unit.INSTANCE;
+            });
+            return Unit.INSTANCE;
         });
     }
 
@@ -176,21 +195,27 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     public void onRefresh() {
         if (noteLoaded && repo.isSyncPossible() && SSOUtil.isConfigured(getContext())) {
             binding.swiperefreshlayout.setRefreshing(true);
-            executor.submit(() -> {
+            lifecycleScopeIOJob(() -> {
                 try {
                     final var account = repo.getAccountByName(SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext()).name);
-                    repo.addCallbackPull(account, () -> executor.submit(() -> {
+
+                    repo.addCallbackPull(account, () -> {
                         note = repo.getNoteById(note.getId());
-                        changedText = note.getContent();
-                        requireActivity().runOnUiThread(() -> {
-                            binding.singleNoteContent.setMarkdownString(note.getContent());
+                        final String content = note.getContent();
+                        changedText = content;
+
+                        onMainThread(() -> {
+                            binding.singleNoteContent.setMarkdownString(content);
                             binding.swiperefreshlayout.setRefreshing(false);
+                            return Unit.INSTANCE;
                         });
-                    }));
+                    });
+
                     repo.scheduleSync(account, false);
-                } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-                    e.printStackTrace();
+                } catch (Exception e) {
+                    Log_OC.e(TAG, "onRefresh exception: " + e);
                 }
+                return Unit.INSTANCE;
             });
         } else {
             binding.swiperefreshlayout.setRefreshing(false);

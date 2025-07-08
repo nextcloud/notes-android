@@ -40,6 +40,8 @@ import it.niedermann.owncloud.notes.databinding.FragmentNoteEditBinding;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.util.DisplayUtils;
+import kotlin.Unit;
+import kotlin.jvm.functions.Function0;
 
 public class NoteEditFragment extends SearchableBaseNoteFragment {
 
@@ -180,22 +182,35 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     @Override
     protected void onNoteLoaded(Note note) {
         super.onNoteLoaded(note);
+        if (binding == null) {
+            return;
+        }
+
         if (TextUtils.isEmpty(note.getContent())) {
             openSoftKeyboard();
         }
 
-        binding.editContent.setMarkdownString(note.getContent());
-        binding.editContent.setEnabled(true);
+        lifecycleScopeIOJob(() -> {
+            // load potential big note on IO Dispatchers
+            final String content = note.getContent();
+            final var sp = PreferenceManager.getDefaultSharedPreferences(requireContext().getApplicationContext());
 
-        final var sp = PreferenceManager.getDefaultSharedPreferences(requireContext().getApplicationContext());
-        binding.editContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(requireContext(), sp));
-        if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
-            binding.editContent.setTypeface(Typeface.MONOSPACE);
-        }
+            onMainThread(() -> {
+                binding.editContent.setMarkdownString(content);
+                binding.editContent.setEnabled(true);
+                binding.editContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(requireContext(), sp));
 
-        if (lastSelection > 0 && binding.editContent.length() >= lastSelection) {
-            binding.editContent.setSelection(lastSelection);
-        }
+                if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
+                    binding.editContent.setTypeface(Typeface.MONOSPACE);
+                }
+
+                if (lastSelection > 0 && binding.editContent.length() >= lastSelection) {
+                    binding.editContent.setSelection(lastSelection);
+                }
+                return Unit.INSTANCE;
+            });
+            return Unit.INSTANCE;
+        });
     }
 
     private void openSoftKeyboard() {
