@@ -19,6 +19,18 @@ import com.nextcloud.android.common.ui.util.extensions.adjustUIForAPILevel35
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+/**
+ * An abstract base [Fragment] implementation that provides common branding support for UI
+ * components.
+ *
+ * This class reads and applies brand-specific colors (`colorPrimary`, `colorAccent`, etc.) when the
+ * fragment starts, and adjusts UI elements such as toolbar menu icons accordingly.
+ *
+ * Subclasses can extend this to inherit branding behavior while implementing their specific logic.
+ *
+ * @see BrandingUtil for brand color resolution and application.
+ * @see Branded for the interface definition related to branding behavior.
+ */
 abstract class BrandedFragment : Fragment(), Branded {
     @JvmField
     @ColorInt
@@ -74,12 +86,29 @@ abstract class BrandedFragment : Fragment(), Branded {
         }
     }
 
+    /**
+     * Launches the given [block] of code in the [Dispatchers.IO] context using the [lifecycleScope].
+     *
+     * This is useful for running long-running or blocking operations (e.g., file or network I/O)
+     * that should not block the main thread. The coroutine will be automatically canceled when
+     * the lifecycle is destroyed.
+     *
+     * @param block The code block to be executed on the IO dispatcher.
+     */
     fun lifecycleScopeIOJob(block: () -> Unit) {
         lifecycleScope.launch(Dispatchers.IO) {
             block()
         }
     }
 
+    /**
+     * Executes the given [block] on the main (UI) thread.
+     *
+     * This is typically used to perform UI-related tasks such as updating views from a background
+     * thread. Requires [activity] to be non-null; otherwise, the block will not be executed.
+     *
+     * @param block The code block to be executed on the main thread.
+     */
     fun onMainThread(block: () -> Unit) {
         activity?.runOnUiThread {
             block()
