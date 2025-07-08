@@ -540,7 +540,6 @@ public class NotesRepository {
                 .collect(toMap(Note::getRemoteId, Note::getId));
     }
 
-    // FIXME: RACE CONDITION
     @AnyThread
     public void toggleFavoriteAndSync(Account account, Note note) {
         executor.submit(() -> {
@@ -553,8 +552,8 @@ public class NotesRepository {
                 if (response.isSuccessful()) {
                     final var updatedNote = response.body();
                     if (updatedNote != null) {
-                        db.getNoteDao().updateNote(updatedNote);
-                        scheduleSync(account, true);
+                        //db.getNoteDao().updateNote(note);
+                        scheduleSync(account, false);
                     }
                 }
             } catch (Exception e) {
