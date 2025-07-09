@@ -552,7 +552,6 @@ public class NotesRepository {
                 if (response.isSuccessful()) {
                     final var updatedNote = response.body();
                     if (updatedNote != null) {
-                        //db.getNoteDao().updateNote(note);
                         scheduleSync(account, false);
                     }
                 }
