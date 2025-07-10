@@ -34,6 +34,7 @@ import androidx.preference.PreferenceManager;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import it.niedermann.android.markdown.controller.ControllerConnector;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.FragmentNoteEditBinding;
@@ -127,6 +128,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentNoteEditBinding.inflate(inflater, container, false);
+        ControllerConnector.connect(getViewLifecycleOwner(), binding.editContent, binding.controller);
         return binding.getRoot();
     }
 
@@ -305,6 +307,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
 
         final var util = BrandingUtil.of(color, requireContext());
         binding.editContent.setSearchColor(color);
+        util.notes.themeToolbar(binding.controller);
         binding.editContent.setHighlightColor(util.notes.getTextHighlightBackgroundColor(requireContext(), color, colorPrimary, colorAccent));
     }
 
