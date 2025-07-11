@@ -71,10 +71,10 @@
     <string name="common_delete">Hapus</string>
     <string name="write_email">Kirim email</string>
     <string name="no_browser_available">Tidak ada aplikasi yang tersedia untuk menangani tautan</string>
-    <string name="no_email_app_available">Tidak ada aplikasi yang tersedia untuk menangani alamat surel</string>
+    <string name="no_email_app_available">Tidak ada aplikasi yang tersedia untuk menangani alamat email</string>
     <string name="no_actions">Tidak ada aksi untuk pengguna ini</string>
 
-    <string name="email_pick_failed">Gagal memilih alamat surel.</string>
+    <string name="email_pick_failed">Gagal memilih alamat email.</string>
     <string name="failed_update_ui">Gagal memperbarui UI</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Tidak ada aplikasi yang tersedia untuk memilih kontak</string>
     <string name="activity_chooser_title">Kirim taukan ke…</string>
@@ -85,7 +85,7 @@
     <string name="share_internal_link">Bagikan tautan internal</string>
     <string name="delete_link">Hapus tautan</string>
     <string name="share_settings">Setelan</string>
-    <string name="share_send_new_email">Kirim surel baru</string>
+    <string name="share_send_new_email">Kirim email baru</string>
     <string name="share_dialog_title">Berbagi</string>
     <string name="share_file">Bagikan %1$s</string>
     <string name="share_expiration_date_label">Kadaluarsa %1$s</string>
