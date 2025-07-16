@@ -546,7 +546,16 @@ public class NotesRepository {
             try {
                 final var ssoAccount = AccountImporter.getSingleSignOnAccount(context, account.getAccountName());
                 final var notesAPI = apiProvider.getNotesAPI(context, ssoAccount, getPreferredApiVersion(account.getApiVersion()));
-                note.setFavorite(!note.getFavorite());
+
+                boolean newFavoriteValue = !note.getFavorite();
+                DBStatus newDBStatus = DBStatus.VOID;
+
+                if (newFavoriteValue) {
+                    newDBStatus = DBStatus.LOCAL_EDITED;
+                }
+
+                note.setFavorite(newFavoriteValue);
+                note.setStatus(newDBStatus);
                 final var result = notesAPI.updateNote(note);
                 final var response = result.execute();
                 if (response.isSuccessful()) {
