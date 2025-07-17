@@ -6,6 +6,7 @@
       <trusted-artifacts>
          <trust group="com.android.tools.build" name="aapt2" version="8.4.1-11315950" reason="ships OS specific artifacts (win/linux) - temp global trust"/>
          <trust file=".*-sources[.]jar" regex="true" reason="Android Studio downloads source jars but doesn't add checksums - fixes building in AS"/>
+		 <trust file=".*android-library-2.21.0.module" regex="true" reason="CodeQL fails to resolve this and write it to the metadata"/>
       </trusted-artifacts>
       <ignored-keys>
          <ignored-key id="EB095DA7D2F6AC0E" reason="Key couldn't be downloaded from any key server"/>
