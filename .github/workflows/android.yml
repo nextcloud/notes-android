@@ -81,27 +81,20 @@ jobs:
           name: app-dev-debug
           path: app/build/outputs/apk/dev/debug/app-dev-debug.apk
 
-      - name: Upload to Nextcloud and comment
-        env:
-          USER: ${{ secrets.NEXTCLOUD_USER }}
-          PASS: ${{ secrets.NEXTCLOUD_PASSWORD }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BUILD: pr-${{ github.event.pull_request.number }}-${{ github.sha }}
-          PR: ${{ github.event.pull_request.number }}
-          PUBLIC_URL: https://www.kaminsky.me/nc-dev/android-artifacts
-          DAV_URL: https://nextcloud.kaminsky.me/remote.php/dav/files/${{ secrets.NEXTCLOUD_USER }}/android-artifacts
-        run: |
-          APK=$(find app/build/outputs/apk/qa/debug -name "qa-debug-*.apk" | head -n1)
-          [ -f "$APK" ] || { echo "APK not found"; exit 1; }
-          
-          curl -u "$USER:$PASS" -T "$APK" "$DAV_URL/$BUILD.apk"
-          qrencode -o "$PR.png" "$PUBLIC_URL/$BUILD.apk"
-          curl -u "$USER:$PASS" -T "$PR.png" "$DAV_URL/$BUILD.png"
-          
-          COMMENT="APK file: $PUBLIC_URL/$BUILD.apk\n\n![QR Code]($PUBLIC_URL/$BUILD.png)\n\nTo test this change or fix, download and install the APK above. It can run in parallel to your existing app."
-          
-          curl -s -X POST \
-            -H "Authorization: token $GITHUB_TOKEN" \
-            -H "Content-Type: application/json" \
-            -d "$(jq -n --arg body "$COMMENT" '{body: $body}')" \
-            https://api.github.com/repos/${{ github.repository }}/issues/$PR/comments
+      - name: Comment on PR with artifact link
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const runId = process.env.GITHUB_RUN_ID;
+            const repo = context.repo.repo;
+            const owner = context.repo.owner;
+            const prNumber = context.payload.pull_request.number;
+            const artifactUrl = `https://github.com/${owner}/${repo}/actions/runs/${runId}`;
+
+            github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number: prNumber,
+              body: `🎉 Debug APK built and uploaded! You can download it from the [workflow artifacts](${artifactUrl}).`
+            });
