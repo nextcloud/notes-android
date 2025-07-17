@@ -7,6 +7,7 @@
          <trust group="com.android.tools.build" name="aapt2" version="8.4.1-11315950" reason="ships OS specific artifacts (win/linux) - temp global trust"/>
          <trust file=".*-javadoc[.]jar" regex="true" reason="Android Studio downloads javadoc jars but doesn't add checksums - fixes building in AS"/>
          <trust file=".*-sources[.]jar" regex="true" reason="Android Studio downloads source jars but doesn't add checksums - fixes building in AS"/>
+		 <trust file=".*android-library-2.21.0.module" regex="true" reason="CodeQL fails to resolve this and write it to the metadata"/>
       </trusted-artifacts>
       <trusted-keys>
          <trusted-key id="04543577D6A9CC626239C50C7ECBD740FF06AEB5">
