@@ -3,6 +3,7 @@
    <configuration>
       <verify-metadata>true</verify-metadata>
       <verify-signatures>true</verify-signatures>
+      <keyring-format>armored</keyring-format>
       <trusted-artifacts>
          <trust group="com.android.tools.build" name="aapt2" version="8.4.1-11315950" reason="ships OS specific artifacts (win/linux) - temp global trust"/>
          <trust file=".*-javadoc[.]jar" regex="true" reason="Android Studio downloads javadoc jars but doesn't add checksums - fixes building in AS"/>
