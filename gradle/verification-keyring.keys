@@ -616,6 +616,24 @@ ZlI/ojefaZkRseFrtl3X
 =qnqR
 -----END PGP PUBLIC KEY BLOCK-----
 
+pub    A6EA2E2BF22E0543
+uid    Tobias Warneke (for development purposes) <t.warneke@gmx.net>
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQGNBFJQhigBDADpuhND/VUQwJT0nnJxfjAIur59hyaZZ3Ph/KIgmCneyq7lzYO6
+xa1ucH8mqNBVNLLBhs4CjihBddU/ZKTX3WnZyhQKQMZr3Tg+TCNFmAR4/hnZ3NjZ
+N5N5gUj/dqVI2rIvypIuxUApl88BYMsxYpn2+8FKeMd8oBJLqFRJ3WNjB4Op2tRO
+XRWoxs1ypubS/IV1zkphHHpi6VSABlTyTWu4kXEj/1/GpsdtHRa9kvdWw7yKQbnM
+XuwOxtzZFJcyu0P2jYVfHHvxcjxuklc9edmCGdNxgKIoo0LXZOeFIi6OWtwzD0pn
+O6ovJ+PL9QscMdnQlPwsiCwjNUNue20GBv3aUIYc+Z8Gq0SqSan5V0IiKRHMJkzd
+FAhnpkSFBvHhPJn07BCcb1kctqL+xnLxIdi7arq3WNA/6bJjsojc/x3FdIvORIeP
+sqejhtL8mCBvbMAMHSBrFxclMp+HSz2ouHEEPIQam0KeN8t1yEqIy3/aYKMzHj9c
+C3s8XOaBCbJbKpMAEQEAAbQ9VG9iaWFzIFdhcm5la2UgKGZvciBkZXZlbG9wbWVu
+dCBwdXJwb3NlcykgPHQud2FybmVrZUBnbXgubmV0Pg==
+=q1C6
+-----END PGP PUBLIC KEY BLOCK-----
+
 pub    AC7A514BC9F9BB70
 uid    Punyashloka Biswal <punya@google.com>
 
@@ -1310,6 +1328,18 @@ trA4JZDSR0Bp1zEPKiSxjpG5FpfVv6lXmFboa5qkXAHG9+bcaRYoXun+wJ3ioWo+
 cQEdy/bsX03+MHMsms8likmfPIGVw73RF3HXjJ8GVqTkqbo4ZpgTw/7Z3+fAYE/v
 xquhnpl2HvE=
 =A/Aj
+-----END PGP PUBLIC KEY BLOCK-----
+
+pub    D46C5610D06E7001
+sub    00E25FE3776F21F2
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mDMEZsO4fRYJKwYBBAHaRw8BAQdAcxaiyqFbaECpSz7mhsXzopzN9Cxwv80WlWGN
+gM3qpOi4OARmw7h9EgorBgEEAZdVAQUBAQdA45tqjMbTvozvroU+Z0nApYG0r3Zl
+gI27fUSEIetPuEIDAQgHiH4EGBYKACYWIQTlLweHelgF+a9KsKzUbFYQ0G5wAQUC
+ZsO4fQIbDAUJBaOagAAKCRDUbFYQ0G5wAZG1AP4m+dkpV5g3AT7Lws/lUDrKrdTr
+5noqEjUmwUNCiuTOugEArO87llEEIabZngdpe7D+dvJ7Bb+BSX2fzHKmrsE6uwY=
+=9gxs
 -----END PGP PUBLIC KEY BLOCK-----
 
 pub    D9C565AA72BA2FDD
