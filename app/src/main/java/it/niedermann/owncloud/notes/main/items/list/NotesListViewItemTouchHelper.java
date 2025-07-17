@@ -101,7 +101,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                     case ItemTouchHelper.RIGHT -> {
                         viewHolder.setIsRecyclable(false);
                         final var adapterNote = (Note) adapter.getItem(viewHolder.getLayoutPosition());
-                        final var toggleLiveData = mainViewModel.toggleFavoriteAndSync(adapterNote.getId());
+                        final var toggleLiveData = mainViewModel.toggleFavoriteAndSync(adapterNote);
                         toggleLiveData.observe(lifecycleOwner, (next) -> toggleLiveData.removeObservers(lifecycleOwner));
                     }
                     default -> {

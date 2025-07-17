@@ -17,7 +17,9 @@ import com.nextcloud.android.sso.api.NextcloudAPI;
 import com.nextcloud.android.sso.api.ParsedResponse;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import io.reactivex.Observable;
@@ -103,6 +105,21 @@ public class NotesAPI {
             return notesAPI_0_2.createNote(new Note_0_2(note));
         } else {
             throw new UnsupportedOperationException("Used API version " + usedApiVersion + " does not support createNote().");
+        }
+    }
+
+    public Call<Note> updateNote(@NonNull Note note) {
+        final Long remoteId = note.getRemoteId();
+        if (remoteId == null) {
+            return null;
+        }
+
+        if (ApiVersion.API_VERSION_1_0.equals(usedApiVersion)) {
+            return notesAPI_1_0.updateNote(remoteId, note);
+        } else if (ApiVersion.API_VERSION_0_2.equals(usedApiVersion)) {
+            return notesAPI_0_2.updateNote(remoteId, new Note_0_2(note));
+        } else {
+            return null;
         }
     }
 
