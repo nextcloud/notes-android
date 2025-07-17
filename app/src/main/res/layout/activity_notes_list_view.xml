@@ -36,7 +36,6 @@
                     android:layout_marginVertical="@dimen/spacer_1hx"
                     app:cardBackgroundColor="@color/appbar"
                     app:cardCornerRadius="@dimen/spacer_4x"
-                    app:cardElevation="2dp"
                     app:strokeWidth="0dp">
 
                     <com.google.android.material.appbar.MaterialToolbar

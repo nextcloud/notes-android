@@ -11,6 +11,7 @@ import static android.os.Build.VERSION_CODES.O;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static com.nextcloud.android.common.ui.util.PlatformThemeUtil.isDarkMode;
+import static it.niedermann.owncloud.notes.NotesApplication.brandingUtil;
 import static it.niedermann.owncloud.notes.NotesApplication.isGridViewEnabled;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.DEFAULT_CATEGORY;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
@@ -603,6 +604,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         util.platform.colorNavigationView(binding.navigationView);
         util.material.themeFAB(activityBinding.fabCreate);
         util.notes.themeSearchCardView(binding.activityNotesListView.searchBarWrapper);
+        util.platform.colorTextView(binding.activityNotesListView.searchText, ColorRole.ON_SURFACE_VARIANT);
         util.notes.themeSearchToolbar(binding.activityNotesListView.searchToolbar);
         util.notes.themeToolbarSearchView(binding.activityNotesListView.searchView);
 
@@ -658,6 +660,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                 break;
             default: throw new IllegalStateException("Unknown method: " + method.name());
         }
+        brandingUtil().platform.colorImageView(activityBinding.sortingMethod, ColorRole.ON_SURFACE);
     }
 
     @Override

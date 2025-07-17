@@ -171,7 +171,7 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
     @Deprecated
     public void themeSearchCardView(@NonNull MaterialCardView searchBarWrapper) {
         withScheme(searchBarWrapper, scheme -> {
-            searchBarWrapper.setBackgroundTintList(ColorStateList.valueOf(dynamicColor.surface().getArgb(scheme)));
+            searchBarWrapper.setBackgroundTintList(ColorStateList.valueOf(dynamicColor.surfaceContainerHigh().getArgb(scheme)));
             return searchBarWrapper;
         });
     }
