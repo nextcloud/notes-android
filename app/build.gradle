@@ -83,7 +83,7 @@ android {
     }
 
     androidResources {
-            generateLocaleConfig true
+        generateLocaleConfig true
     }
 
     packagingOptions {
@@ -161,4 +161,17 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.mockito:mockito-core:5.18.0'
     testImplementation 'org.robolectric:robolectric:4.15.1'
+}
+
+// Run the compiler as a separate process
+tasks.withType(JavaCompile).configureEach {
+    options.fork = true
+
+    // Enable Incremental Compilation
+    options.incremental = true
+}
+
+tasks.withType(Test).configureEach {
+    // Run tests in parallel
+    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
 }
