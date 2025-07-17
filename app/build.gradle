@@ -54,7 +54,7 @@ android {
         }
     }
 
-    testCoverage.jacocoVersion = "0.8.8"
+    testCoverage.jacocoVersion = "0.8.13"
 
     flavorDimensions = ["version"]
 
@@ -85,6 +85,14 @@ android {
     androidResources {
             generateLocaleConfig true
     }
+
+    packagingOptions {
+        resources {
+            excludes += "META-INF/LICENSE*"
+            excludes += "META-INF/versions/9/OSGI-INF/MANIFEST*"
+            pickFirst "MANIFEST.MF" // workaround for duplicated manifest on some dependencies
+        }
+    }
 }
 
 ext {
@@ -100,7 +108,7 @@ dependencies {
         exclude group: 'commons-logging', module: 'commons-logging'
     }
 
-    implementation("com.github.nextcloud:android-library:2.19.1") {
+    implementation("com.github.nextcloud:android-library:2.21.0") {
         exclude group: 'org.ogce', module: 'xpp3'
     }
 
