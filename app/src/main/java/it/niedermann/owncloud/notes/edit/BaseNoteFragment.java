@@ -248,7 +248,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
             return true;
         } else if (itemId == R.id.menu_favorite) {
             note.setFavorite(!note.getFavorite());
-            repo.toggleFavoriteAndSync(localAccount, note.getId());
+            repo.toggleFavoriteAndSync(localAccount, note);
             listener.onNoteUpdated(note);
             prepareFavoriteOption(item);
             return true;
