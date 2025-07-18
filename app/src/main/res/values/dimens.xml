@@ -36,6 +36,8 @@
 
     <dimen name="spacer_activity_sides">0dp</dimen>
 
+    <dimen name="card_radius">12dp</dimen>
+
     <dimen name="default_icon_size">40dp</dimen>
 
     <!-- Drawer header -->

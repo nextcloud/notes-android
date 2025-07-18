@@ -9,11 +9,14 @@ package it.niedermann.owncloud.notes.branding;
 import static com.nextcloud.android.common.ui.util.ColorStateListUtilsKt.buildColorStateList;
 import static com.nextcloud.android.common.ui.util.PlatformThemeUtil.isDarkMode;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -207,6 +210,35 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
             closeButton.setColorFilter(dynamicColor.onSurface().getArgb(scheme));
             searchButton.setColorFilter(dynamicColor.onSurface().getArgb(scheme));
             return searchView;
+        });
+    }
+
+    public void themeBackgroundView(View view, Activity activity) {
+        withScheme(view, scheme -> {
+            activity.getWindow().getDecorView().setBackgroundColor(dynamicColor.surface().getArgb(scheme));
+            view.setBackgroundColor(dynamicColor.surface().getArgb(scheme));
+            return view;
+        });
+    }
+
+    public void themeBackgroundItemView(View view) {
+        withScheme(view, scheme -> {
+            StateListDrawable res = new StateListDrawable();
+            res.addState(new int[]{android.R.attr.state_activated}, new ColorDrawable(dynamicColor.secondaryContainer().getArgb(scheme)));
+            res.addState(new int[]{}, new ColorDrawable(dynamicColor.surface().getArgb(scheme)));
+            view.setBackground(res);
+            return view;
+        });
+    }
+
+    public void themeCard(@NonNull MaterialCardView view) {
+        withScheme(view, scheme -> {
+            view.setBackgroundTintList(buildColorStateList(
+                    new Pair<>(android.R.attr.state_activated, dynamicColor.secondaryContainer().getArgb(scheme)),
+                    new Pair<>(-android.R.attr.state_activated, dynamicColor.surface().getArgb(scheme)))
+            );
+            view.setStrokeColor(dynamicColor.outlineVariant().getArgb(scheme));
+            return view;
         });
     }
 }

@@ -8,10 +8,13 @@ package it.niedermann.owncloud.notes.main.items;
 
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.getFontSizeFromPreferences;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.IntRange;
@@ -23,11 +26,14 @@ import androidx.preference.PreferenceManager;
 import androidx.recyclerview.selection.SelectionTracker;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.nextcloud.android.common.ui.theme.utils.ColorRole;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.Branded;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemGridBinding;
 import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemGridOnlyTitleBinding;
 import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemWithExcerptBinding;
@@ -65,6 +71,8 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     private int color;
     @Nullable
     private Integer swipedPosition;
+
+    private boolean isMultiSelect = false;
 
     public <T extends Context & NoteClickListener> ItemAdapter(@NonNull T context, boolean gridView) {
         this.noteClickListener = context;
@@ -104,13 +112,19 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         if (gridView) {
             switch (viewType) {
                 case TYPE_SECTION -> {
-                    return new SectionViewHolder(ItemNotesListSectionItemBinding.inflate(inflater));
+                    ItemNotesListSectionItemBinding binding = ItemNotesListSectionItemBinding.inflate(inflater);
+                    BrandingUtil.of(color, parent.getContext()).platform.colorTextView(binding.sectionTitle);
+                    return new SectionViewHolder(binding);
                 }
                 case TYPE_NOTE_ONLY_TITLE -> {
-                    return new NoteViewGridHolderOnlyTitle(ItemNotesListNoteItemGridOnlyTitleBinding.inflate(inflater, parent, false), noteClickListener, monospace, fontSize);
+                    ItemNotesListNoteItemGridOnlyTitleBinding binding = ItemNotesListNoteItemGridOnlyTitleBinding.inflate(inflater, parent, false);
+                    BrandingUtil.of(color, parent.getContext()).notes.themeCard(binding.card);
+                    return new NoteViewGridHolderOnlyTitle(binding, noteClickListener, monospace, fontSize);
                 }
                 case TYPE_NOTE_WITH_EXCERPT, TYPE_NOTE_WITHOUT_EXCERPT -> {
-                    return new NoteViewGridHolder(ItemNotesListNoteItemGridBinding.inflate(inflater, parent, false), noteClickListener, monospace, fontSize);
+                    ItemNotesListNoteItemGridBinding binding = ItemNotesListNoteItemGridBinding.inflate(inflater, parent, false);
+                    BrandingUtil.of(color, parent.getContext()).notes.themeCard(binding.card);
+                    return new NoteViewGridHolder(binding, noteClickListener, monospace, fontSize);
                 }
                 default -> {
                     throw new IllegalArgumentException("Not supported viewType: " + viewType);
@@ -119,13 +133,19 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         } else {
             switch (viewType) {
                 case TYPE_SECTION -> {
-                    return new SectionViewHolder(ItemNotesListSectionItemBinding.inflate(inflater));
+                    ItemNotesListSectionItemBinding binding = ItemNotesListSectionItemBinding.inflate(inflater);
+                    BrandingUtil.of(color, parent.getContext()).platform.colorTextView(binding.sectionTitle);
+                    return new SectionViewHolder(binding);
                 }
                 case TYPE_NOTE_WITH_EXCERPT -> {
-                    return new NoteViewHolderWithExcerpt(ItemNotesListNoteItemWithExcerptBinding.inflate(inflater, parent, false), noteClickListener);
+                    ItemNotesListNoteItemWithExcerptBinding binding = ItemNotesListNoteItemWithExcerptBinding.inflate(inflater, parent, false);
+                    BrandingUtil.of(color, parent.getContext()).notes.themeBackgroundItemView(binding.noteSwipeable);
+                    return new NoteViewHolderWithExcerpt(binding, noteClickListener);
                 }
                 case TYPE_NOTE_ONLY_TITLE, TYPE_NOTE_WITHOUT_EXCERPT -> {
-                    return new NoteViewHolderWithoutExcerpt(ItemNotesListNoteItemWithoutExcerptBinding.inflate(inflater, parent, false), noteClickListener);
+                    ItemNotesListNoteItemWithoutExcerptBinding binding = ItemNotesListNoteItemWithoutExcerptBinding.inflate(inflater, parent, false);
+                    BrandingUtil.of(color, parent.getContext()).notes.themeBackgroundItemView(binding.noteSwipeable);
+                    return new NoteViewHolderWithoutExcerpt(binding, noteClickListener);
                 }
                 default -> {
                     throw new IllegalArgumentException("Not supported viewType: " + viewType);
@@ -149,15 +169,36 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         switch (getItemViewType(position)) {
             case TYPE_SECTION ->
                     ((SectionViewHolder) holder).bind((SectionItem) itemList.get(position));
-            case TYPE_NOTE_WITH_EXCERPT,
-                    TYPE_NOTE_WITHOUT_EXCERPT,
-                    TYPE_NOTE_ONLY_TITLE ->
-                    ((NoteViewHolder) holder).bind(isSelected, (Note) itemList.get(position), showCategory, color, searchQuery);
+            case TYPE_NOTE_WITH_EXCERPT, TYPE_NOTE_WITHOUT_EXCERPT, TYPE_NOTE_ONLY_TITLE -> {
+                holder.itemView.findViewById(R.id.custom_checkbox).setVisibility(tracker != null && tracker.hasSelection() ? View.VISIBLE : View.GONE);
+                if (isSelected) {
+                    holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.bg_highlighted));
+                    ((ImageView) holder.itemView.findViewById(R.id.custom_checkbox)).setImageDrawable(BrandingUtil.getInstance(holder.itemView.getContext()).platform.tintDrawable(holder.itemView.getContext(), R.drawable.ic_checkbox_marked, ColorRole.PRIMARY));
+                } else {
+                    holder.itemView.setBackgroundColor(holder.itemView.getContext().getColor(com.nextcloud.android.common.ui.R.color.bg_default));
+                    ((ImageView) holder.itemView.findViewById(R.id.custom_checkbox)).setImageResource(R.drawable.ic_checkbox_blank_outline);
+                }
+                holder.itemView.findViewById(R.id.custom_checkbox).setVisibility(isMultiSelect ? View.VISIBLE : View.GONE);
+                ((NoteViewHolder) holder).bind(isSelected, (Note) itemList.get(position), showCategory, color, searchQuery);
+            }
         }
     }
 
     public void setTracker(SelectionTracker<Long> tracker) {
         this.tracker = tracker;
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void setMultiSelect(boolean bool) {
+        if (isMultiSelect != bool) {
+            isMultiSelect = bool;
+            // endless loop incoming...
+            //notifyDataSetChanged();
+        }
+    }
+
+    public boolean isMultiSelect() {
+        return this.isMultiSelect;
     }
 
     public Item getItem(int notePosition) {
