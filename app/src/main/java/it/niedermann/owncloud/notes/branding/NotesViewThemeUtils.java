@@ -9,11 +9,16 @@ package it.niedermann.owncloud.notes.branding;
 import static com.nextcloud.android.common.ui.util.ColorStateListUtilsKt.buildColorStateList;
 import static com.nextcloud.android.common.ui.util.PlatformThemeUtil.isDarkMode;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.RippleDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -26,7 +31,9 @@ import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -38,6 +45,7 @@ import com.nextcloud.android.common.ui.theme.utils.MaterialViewThemeUtils;
 import dynamiccolor.MaterialDynamicColors;
 import it.niedermann.android.util.ColorUtil;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.databinding.DrawerLayoutBinding;
 import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
 import it.niedermann.owncloud.notes.shared.util.NotesColorUtil;
 import kotlin.Pair;
@@ -207,6 +215,24 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
             closeButton.setColorFilter(dynamicColor.onSurface().getArgb(scheme));
             searchButton.setColorFilter(dynamicColor.onSurface().getArgb(scheme));
             return searchView;
+        });
+    }
+
+    public void themeBackgroundView(View view, Activity activity) {
+        withScheme(view, scheme -> {
+            activity.getWindow().getDecorView().setBackgroundColor(dynamicColor.surface().getArgb(scheme));
+            view.setBackgroundColor(dynamicColor.surface().getArgb(scheme));
+            return view;
+        });
+    }
+
+    public void themeBackgroundItemView(View view) {
+        withScheme(view, scheme -> {
+            StateListDrawable res = new StateListDrawable();
+            res.addState(new int[]{android.R.attr.state_activated}, new ColorDrawable(dynamicColor.secondaryContainer().getArgb(scheme)));
+            res.addState(new int[]{}, new ColorDrawable(dynamicColor.surface().getArgb(scheme)));
+            view.setBackground(res);
+            return view;
         });
     }
 }
