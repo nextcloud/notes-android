@@ -9,6 +9,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/noteSwipeFrame"
+    android:clickable="true"
+    android:focusable="true"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/bg_attention">
@@ -122,6 +124,18 @@
                     tools:text="@tools:sample/lorem/random" />
             </LinearLayout>
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/custom_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:clickable="false"
+            android:contentDescription="@null"
+            android:focusable="false"
+            android:paddingStart="@dimen/spacer_1x"
+            android:paddingEnd="@dimen/spacer_1x"
+            android:src="@drawable/ic_checkbox_blank_outline" />
     </LinearLayout>
 
 </FrameLayout>

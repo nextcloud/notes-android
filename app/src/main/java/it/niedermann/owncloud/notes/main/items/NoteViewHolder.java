@@ -45,6 +45,7 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
 
     @CallSuper
     public void bind(boolean isSelected, @NonNull Note note, boolean showCategory, @ColorInt int color, @Nullable CharSequence searchQuery) {
+        itemView.setActivated(isSelected);
         itemView.setSelected(isSelected);
         itemView.setOnClickListener((view) -> noteClickListener.onNoteClick(getLayoutPosition(), view));
     }

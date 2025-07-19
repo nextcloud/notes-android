@@ -62,5 +62,17 @@
             android:textColor="@color/fg_default"
             tools:maxLength="50"
             tools:text="@tools:sample/lorem/random" />
+
+        <ImageView
+            android:id="@+id/custom_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:clickable="false"
+            android:contentDescription="@null"
+            android:focusable="false"
+            android:paddingStart="@dimen/spacer_1x"
+            android:paddingEnd="@dimen/spacer_1x"
+            android:src="@drawable/ic_checkbox_blank_outline" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
