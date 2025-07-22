@@ -133,8 +133,6 @@ class NoteListWidgetFactory internal constructor(private val context: Context, i
             createNoteIntent = getCreateNoteIntent(localAccount)
         }
 
-        val category = getCategoryTitle(context)
-
         return RemoteViews(context.packageName, R.layout.widget_entry).apply {
             setOnClickFillInIntent(R.id.widget_note_list_entry, openNoteIntent)
 
@@ -142,11 +140,7 @@ class NoteListWidgetFactory internal constructor(private val context: Context, i
                 setOnClickFillInIntent(R.id.widget_entry_fav_icon, createNoteIntent)
             }
 
-            if (category != null) {
-                setTextViewText(R.id.widget_entry_content_tv, category)
-            } else {
-                setTextViewText(R.id.widget_entry_content_tv, note.title)
-            }
+            setTextViewText(R.id.widget_entry_content_tv, (note.title + data?.category))
 
             val starIconId = if (note.favorite) {
                 R.drawable.ic_star_yellow_24dp
@@ -154,20 +148,6 @@ class NoteListWidgetFactory internal constructor(private val context: Context, i
                 R.drawable.ic_star_grey_ccc_24dp
             }
             setImageViewResource(R.id.widget_entry_fav_icon, starIconId)
-        }
-    }
-
-    private fun getCategoryTitle(context: Context): String? {
-        val widgetData = data ?: return null
-
-        return when (widgetData.mode) {
-            NotesListWidgetData.MODE_DISPLAY_STARRED -> context.getString(R.string.label_favorites)
-            NotesListWidgetData.MODE_DISPLAY_CATEGORY -> if ("" == widgetData.category)
-                context.getString(R.string.action_uncategorized)
-            else
-                widgetData.category
-
-            else -> context.getString(R.string.app_name)
         }
     }
 
