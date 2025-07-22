@@ -137,6 +137,11 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     @Override
     protected void onNoteLoaded(Note note) {
         super.onNoteLoaded(note);
+        if (note == null) {
+            Log_OC.w(TAG, "Note is null, onNoteLoaded");
+            return;
+        }
+
         noteLoaded = true;
         registerInternalNoteLinkHandler();
 

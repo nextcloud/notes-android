@@ -148,8 +148,13 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
         disposables.add(timeoutDisposable)
     }
 
-    override fun onNoteLoaded(note: Note) {
+    override fun onNoteLoaded(note: Note?) {
         super.onNoteLoaded(note)
+        if (note == null) {
+            Log_OC.w(TAG, "Note is null, onNoteLoaded")
+            return
+        }
+
         Log.d(TAG, "onNoteLoaded() called")
         val newNoteParam = arguments?.getSerializable(PARAM_NEWNOTE) as Note?
         if (newNoteParam != null || note.remoteId == null) {
