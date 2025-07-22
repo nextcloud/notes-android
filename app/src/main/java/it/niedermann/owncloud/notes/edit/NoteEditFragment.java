@@ -33,6 +33,7 @@ import androidx.preference.PreferenceManager;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.owncloud.android.lib.common.utils.Log_OC;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
@@ -182,7 +183,8 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     @Override
     protected void onNoteLoaded(Note note) {
         super.onNoteLoaded(note);
-        if (binding == null) {
+        if (binding == null || note == null) {
+            Log_OC.w(TAG, "Note is null, onNoteLoaded");
             return;
         }
 
