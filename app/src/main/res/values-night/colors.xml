@@ -38,4 +38,6 @@
 
     <color name="nc_grey">#222222</color>
     <color name="icon_on_nc_grey">#ffffff</color>
+
+    <color name="action_mode_background">#1E1E1E</color>
 </resources>

@@ -154,6 +154,7 @@ class NoteShareDetailActivity : BrandedActivity(),
                 colorMaterialButtonPrimaryOutlined(shareProcessBtnCancel)
             }
         }
+        util.notes.themeBackgroundView(binding.getRoot(), this)
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

@@ -58,6 +58,7 @@ public class AboutActivity extends LockedActivity {
         util.platform.themeStatusBar(this);
         util.material.themeToolbar(binding.toolbar);
         util.material.themeTabLayoutOnSurface(binding.tabs);
+        util.notes.themeBackgroundView(binding.getRoot(), this);
     }
 
     private static class TabsStateAdapter extends FragmentStateAdapter {

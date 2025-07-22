@@ -228,5 +228,6 @@ public class ManageAccountsActivity extends LockedActivity implements IManageAcc
         final var util = BrandingUtil.of(color, this);
         util.platform.themeStatusBar(this);
         util.material.themeToolbar(binding.toolbar);
+        util.notes.themeBackgroundView(binding.getRoot(), this);
     }
 }
