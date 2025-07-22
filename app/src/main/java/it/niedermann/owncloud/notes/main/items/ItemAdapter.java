@@ -178,7 +178,8 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                     holder.itemView.setBackgroundColor(holder.itemView.getContext().getColor(com.nextcloud.android.common.ui.R.color.bg_default));
                     ((ImageView) holder.itemView.findViewById(R.id.custom_checkbox)).setImageResource(R.drawable.ic_checkbox_blank_outline);
                 }
-                holder.itemView.findViewById(R.id.custom_checkbox).setVisibility(isMultiSelect ? View.VISIBLE : View.GONE);
+                //holder.itemView.findViewById(R.id.custom_checkbox).setVisibility(isMultiSelect ? View.VISIBLE : View.GONE);
+                holder.itemView.findViewById(R.id.custom_checkbox).setVisibility(View.GONE);
                 ((NoteViewHolder) holder).bind(isSelected, (Note) itemList.get(position), showCategory, color, searchQuery);
             }
         }
