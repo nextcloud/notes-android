@@ -2,7 +2,7 @@
 <!--
  ~ Nextcloud Notes - Android Client
  ~
- ~ SPDX-FileCopyrightText: 2017-2024 Nextcloud GmbH and Nextcloud contributors
+ ~ SPDX-FileCopyrightText: 2017-2025 Nextcloud GmbH and Nextcloud contributors
  ~ SPDX-License-Identifier: GPL-3.0-or-later
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,6 +12,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:gravity="center"
     android:paddingVertical="@dimen/spacer_1x"
     android:paddingStart="@null"
     android:paddingEnd="@dimen/spacer_1hx">
@@ -22,24 +23,33 @@
         android:layout_height="@dimen/widget_note_list_fav_icon_height"
         android:layout_gravity="center_vertical"
         android:contentDescription="@string/widget_entry_fav_contentDescription"
-        android:foregroundGravity="center_vertical"
         android:paddingStart="@dimen/widget_note_list_inner_padding"
         android:paddingEnd="@dimen/widget_note_list_outer_padding"
         app:srcCompat="@drawable/ic_star_yellow_24dp" />
 
     <TextView
-        android:id="@+id/widget_entry_content_tv"
+        android:id="@+id/widget_entry_title"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
+        android:layout_height="match_parent"
         android:layout_weight="1"
-        android:ellipsize="end"
-        android:gravity="center_vertical"
-        android:lines="1"
-        android:paddingStart="@dimen/widget_note_list_inner_padding"
-        android:paddingEnd="@dimen/widget_note_list_outer_padding"
+        android:layout_gravity="center_vertical"
+        android:textStyle="bold"
         android:textColor="@color/widget_foreground"
         android:textSize="14sp"
-        tools:text="@tools:sample/lorem/random" />
+        tools:text="First note" />
 
+    <TextView
+        android:id="@+id/widget_entry_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="4dp"
+        android:background="@drawable/border"
+        android:textSize="12sp"
+        android:textColor="@color/category_border"
+        android:gravity="center"
+        android:visibility="gone"
+        tools:visibility="visible"
+        tools:text="Important"/>
 </LinearLayout>
