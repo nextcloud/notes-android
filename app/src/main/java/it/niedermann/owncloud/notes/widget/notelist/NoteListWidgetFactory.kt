@@ -127,11 +127,26 @@ class NoteListWidgetFactory internal constructor(private val context: Context, i
 
         val openNoteIntent = getOpenNoteIntent(note)
 
+        var createNoteIntent: Intent? = null
+        data?.let {
+            val localAccount =  repo.getAccountById(it.accountId)
+            createNoteIntent = getCreateNoteIntent(localAccount)
+        }
+
+        val category = getCategoryTitle(context)
+
         return RemoteViews(context.packageName, R.layout.widget_entry).apply {
             setOnClickFillInIntent(R.id.widget_note_list_entry, openNoteIntent)
-            setTextViewText(R.id.widget_entry_content_tv,
-                (note.title + getCategoryTitle(context))
-            )
+
+            createNoteIntent?.let {
+                setOnClickFillInIntent(R.id.widget_entry_fav_icon, createNoteIntent)
+            }
+
+            if (category != null) {
+                setTextViewText(R.id.widget_entry_content_tv, category)
+            } else {
+                setTextViewText(R.id.widget_entry_content_tv, note.title)
+            }
 
             val starIconId = if (note.favorite) {
                 R.drawable.ic_star_yellow_24dp
@@ -143,10 +158,6 @@ class NoteListWidgetFactory internal constructor(private val context: Context, i
     }
 
     private fun getCategoryTitle(context: Context): String? {
-        if (data == null) {
-            return null
-        }
-
         val widgetData = data ?: return null
 
         return when (widgetData.mode) {
