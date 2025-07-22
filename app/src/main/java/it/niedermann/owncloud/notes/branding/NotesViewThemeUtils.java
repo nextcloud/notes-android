@@ -29,6 +29,7 @@ import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.google.android.material.appbar.AppBarLayout;
@@ -210,6 +211,25 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
             closeButton.setColorFilter(dynamicColor.onSurface().getArgb(scheme));
             searchButton.setColorFilter(dynamicColor.onSurface().getArgb(scheme));
             return searchView;
+        });
+    }
+
+    public void themeInternalLinkIcon(ImageView view) {
+        withScheme(view, scheme -> {
+            view
+                    .getBackground()
+                    .setColorFilter(ResourcesCompat.getColor(view.getContext().getResources(),
+                                    R.color.nc_grey,
+                                    null),
+                            PorterDuff.Mode.SRC_IN);
+            view
+                    .getDrawable()
+                    .mutate()
+                    .setColorFilter(ResourcesCompat.getColor(view.getContext().getResources(),
+                                    R.color.icon_on_nc_grey,
+                                    null),
+                            PorterDuff.Mode.SRC_IN);
+            return view;
         });
     }
 

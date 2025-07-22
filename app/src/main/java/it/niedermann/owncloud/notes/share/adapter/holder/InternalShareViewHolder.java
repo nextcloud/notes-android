@@ -35,20 +35,6 @@ public class InternalShareViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(OCShare share, ShareeListAdapterListener listener) {
-        binding.copyInternalLinkIcon
-                .getBackground()
-                .setColorFilter(ResourcesCompat.getColor(context.getResources(),
-                                R.color.widget_foreground,
-                                null),
-                        PorterDuff.Mode.SRC_IN);
-        binding.copyInternalLinkIcon
-                .getDrawable()
-                .mutate()
-                .setColorFilter(ResourcesCompat.getColor(context.getResources(),
-                                R.color.fg_contrast,
-                                null),
-                        PorterDuff.Mode.SRC_IN);
-
         if (share.isFolder()) {
             binding.shareInternalLinkText.setText(context.getString(R.string.share_internal_link_to_folder_text));
         } else {

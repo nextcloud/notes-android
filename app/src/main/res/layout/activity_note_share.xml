@@ -93,7 +93,7 @@
         android:id="@+id/btnShareButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.Button.Icon"
+        style="@style/Widget.Material3.Button.TextButton"
         android:paddingStart="@dimen/spacer_3x"
         android:paddingEnd="@dimen/zero"
         android:text="@string/note_share_activity_share_note"
