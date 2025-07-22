@@ -544,10 +544,15 @@ public class NotesRepository {
     public void toggleFavoriteAndSync(Account account, Note note) {
         executor.submit(() -> {
             try {
+                final var noteWithContent = getNoteById(note.getId());
+                if (noteWithContent == null) {
+                    return;
+                }
+
                 final var ssoAccount = AccountImporter.getSingleSignOnAccount(context, account.getAccountName());
                 final var notesAPI = apiProvider.getNotesAPI(context, ssoAccount, getPreferredApiVersion(account.getApiVersion()));
-                note.setFavorite(!note.getFavorite());
-                final var result = notesAPI.updateNote(note);
+                noteWithContent.setFavorite(!noteWithContent.getFavorite());
+                final var result = notesAPI.updateNote(noteWithContent);
                 final var response = result.execute();
                 if (response.isSuccessful()) {
                     final var updatedNote = response.body();
