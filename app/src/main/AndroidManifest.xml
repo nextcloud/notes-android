@@ -174,11 +174,13 @@
 
         <service
             android:name=".widget.singlenote.SingleNoteWidgetService"
-            android:permission="android.permission.BIND_REMOTEVIEWS" />
+            android:permission="android.permission.BIND_REMOTEVIEWS"
+            android:exported="false"/>
 
         <service
             android:name=".widget.notelist.NoteListWidgetService"
-            android:permission="android.permission.BIND_REMOTEVIEWS" />
+            android:permission="android.permission.BIND_REMOTEVIEWS"
+            android:exported="false"/>
 
         <service
             android:name=".quicksettings.NewNoteTileService"
