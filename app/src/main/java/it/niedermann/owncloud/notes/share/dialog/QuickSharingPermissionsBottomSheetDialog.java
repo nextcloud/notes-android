@@ -19,13 +19,14 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.owncloud.android.lib.resources.shares.OCShare;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.BrandedBottomSheetDialog;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.QuickSharingPermissionsBottomSheetFragmentBinding;
 import it.niedermann.owncloud.notes.share.adapter.QuickSharingPermissionsAdapter;
 import it.niedermann.owncloud.notes.share.helper.SharingMenuHelper;
@@ -34,11 +35,15 @@ import it.niedermann.owncloud.notes.share.model.QuickPermissionModel;
 /**
  * File Details Quick Sharing permissions options {@link android.app.Dialog} styled as a bottom sheet for main actions.
  */
-public class QuickSharingPermissionsBottomSheetDialog extends BottomSheetDialog {
+public class QuickSharingPermissionsBottomSheetDialog extends BrandedBottomSheetDialog {
     private QuickSharingPermissionsBottomSheetFragmentBinding binding;
     private final QuickPermissionSharingBottomSheetActions actions;
     private final Activity activity;
     private final OCShare ocShare;
+
+    private QuickSharingPermissionsAdapter adapter;
+
+    private int color = 0;
 
     public QuickSharingPermissionsBottomSheetDialog(Activity activity,
                                                     QuickPermissionSharingBottomSheetActions actions,
@@ -59,8 +64,6 @@ public class QuickSharingPermissionsBottomSheetDialog extends BottomSheetDialog 
             getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         }
 
-        // viewThemeUtils.platform.themeDialog(binding.getRoot());
-
         setUpRecyclerView();
         setOnShowListener(d ->
                 BottomSheetBehavior.from((View) binding.getRoot().getParent())
@@ -70,7 +73,7 @@ public class QuickSharingPermissionsBottomSheetDialog extends BottomSheetDialog 
 
     private void setUpRecyclerView() {
         List<QuickPermissionModel> quickPermissionModelList = getQuickPermissionList();
-        QuickSharingPermissionsAdapter adapter = new QuickSharingPermissionsAdapter(
+        adapter = new QuickSharingPermissionsAdapter(
                 quickPermissionModelList,
                 new QuickSharingPermissionsAdapter.QuickSharingPermissionViewHolder.OnPermissionChangeListener() {
                     @Override
@@ -82,9 +85,11 @@ public class QuickSharingPermissionsBottomSheetDialog extends BottomSheetDialog 
                     public void onDismissSheet() {
                         dismiss();
                     }
-                }
+                },
+                color
         );
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity);
+        adapter.applyBrand(color);
         binding.rvQuickSharePermissions.setLayoutManager(linearLayoutManager);
         binding.rvQuickSharePermissions.setAdapter(adapter);
     }
@@ -143,6 +148,16 @@ public class QuickSharingPermissionsBottomSheetDialog extends BottomSheetDialog 
     protected void onStop() {
         super.onStop();
         binding = null;
+    }
+
+    @Override
+    public void applyBrand(int color) {
+        this.color = color;
+        final var util = BrandingUtil.of(color, getContext());
+        if (adapter != null) {
+            adapter.applyBrand(color);
+        }
+        util.platform.themeDialog(binding.getRoot());
     }
 
     public interface QuickPermissionSharingBottomSheetActions {

@@ -9,14 +9,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/spacer_2x"
-    android:paddingBottom="@dimen/spacer_2x"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/spacer_2x">
+
+    <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_quick_share_permissions"
         android:layout_width="match_parent"
-        tools:listitem="@layout/item_quick_share_permissions"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/item_quick_share_permissions" />
 
 </LinearLayout>
