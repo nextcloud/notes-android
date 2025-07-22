@@ -11,6 +11,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService.RemoteViewsFactory
 import androidx.core.net.toUri
@@ -140,7 +141,14 @@ class NoteListWidgetFactory internal constructor(private val context: Context, i
                 setOnClickFillInIntent(R.id.widget_entry_fav_icon, createNoteIntent)
             }
 
-            setTextViewText(R.id.widget_entry_content_tv, (note.title + data?.category))
+            setTextViewText(R.id.widget_entry_title, note.title)
+
+            if (note.category.isEmpty()) {
+                setViewVisibility(R.id.widget_entry_category, View.GONE)
+            } else {
+                setViewVisibility(R.id.widget_entry_category, View.VISIBLE)
+                setTextViewText(R.id.widget_entry_category, note.category)
+            }
 
             val starIconId = if (note.favorite) {
                 R.drawable.ic_star_yellow_24dp
