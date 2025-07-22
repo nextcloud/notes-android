@@ -32,6 +32,7 @@ import androidx.core.graphics.drawable.IconCompat;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
+import com.owncloud.android.lib.common.utils.Log_OC;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -141,7 +142,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                     requireActivity().invalidateOptionsMenu();
                 }
             } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-                e.printStackTrace();
+               Log_OC.e(TAG, e.getLocalizedMessage());
             }
         });
         setHasOptionsMenu(true);
@@ -240,16 +241,26 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                     repo.updateNoteAndSync(localAccount, originalNote, null, null, null);
                 }
             });
-            listener.close();
+
+            if (listener != null) {
+                listener.close();
+            }
             return true;
         } else if (itemId == R.id.menu_delete) {
             repo.deleteNoteAndSync(localAccount, note.getId());
-            listener.close();
+
+            if (listener != null) {
+                listener.close();
+            }
             return true;
         } else if (itemId == R.id.menu_favorite) {
             note.setFavorite(!note.getFavorite());
             repo.toggleFavoriteAndSync(localAccount, note);
-            listener.onNoteUpdated(note);
+
+            if (listener != null) {
+                listener.onNoteUpdated(note);
+            }
+
             prepareFavoriteOption(item);
             return true;
         } else if (itemId == R.id.menu_category) {
@@ -288,22 +299,35 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     }
 
     protected void shareNote() {
+        if (note == null) {
+            Log_OC.w(TAG, "Note is null in shareNote");
+            return;
+        }
+
         ShareUtil.openShareDialog(requireContext(), note.getTitle(), note.getContent());
     }
 
     @CallSuper
     protected void onNoteLoaded(Note note) {
+        if (note == null) {
+            Log_OC.w(TAG, "Note is null in onNoteLoaded");
+            return;
+        }
+
         this.originalScrollY = note.getScrollY();
         scrollToY(originalScrollY);
         final var scrollView = getScrollView();
-        if (scrollView != null) {
-            scrollView.setOnScrollChangeListener((View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) -> {
-                if (scrollY > 0) {
-                    note.setScrollY(scrollY);
-                }
-                onScroll(scrollY, oldScrollY);
-            });
+        if (scrollView == null) {
+            Log_OC.w(TAG, "Scroll view is null, onNoteLoaded");
+            return;
         }
+
+        scrollView.setOnScrollChangeListener((View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) -> {
+            if (scrollY > 0) {
+                note.setScrollY(scrollY);
+            }
+            onScroll(scrollY, oldScrollY);
+        });
     }
 
     /**
