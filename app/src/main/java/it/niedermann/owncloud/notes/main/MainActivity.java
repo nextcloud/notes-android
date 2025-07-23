@@ -27,7 +27,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 
 import androidx.annotation.ColorInt;
@@ -607,7 +606,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         util.platform.colorNavigationView(binding.navigationView);
         util.material.themeFAB(activityBinding.fabCreate);
         util.notes.themeSearchCardView(binding.activityNotesListView.searchBarWrapper);
-        util.notes.themeBackgroundView(binding.activityNotesListView.getRoot(), this);
+        util.platform.colorViewBackground(getWindow().getDecorView());
+        util.platform.colorViewBackground(binding.getRoot());
         util.platform.colorTextView(binding.activityNotesListView.searchText, ColorRole.ON_SURFACE_VARIANT);
         util.notes.themeSearchToolbar(binding.activityNotesListView.searchToolbar);
         util.notes.themeToolbarSearchView(binding.activityNotesListView.searchView);

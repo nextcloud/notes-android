@@ -789,7 +789,8 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         util.platform.themeStatusBar(this);
         util.androidx.themeToolbarSearchView(binding.searchView);
         util.platform.themeHorizontalProgressBar(binding.progressBar);
-        util.notes.themeBackgroundView(binding.getRoot(), this);
+        util.platform.colorViewBackground(getWindow().getDecorView());
+        util.platform.colorViewBackground(binding.getRoot());
         util.platform.colorTextButtons(binding.btnShareButton);
     }
 

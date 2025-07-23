@@ -448,6 +448,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         final var util = BrandingUtil.of(color, this);
         util.platform.themeStatusBar(this);
         util.material.themeToolbar(binding.toolbar);
-        util.notes.themeBackgroundView(binding.getRoot(), this);
+        util.platform.colorViewBackground(getWindow().getDecorView());
+        util.platform.colorViewBackground(binding.getRoot());
     }
 }

@@ -10,7 +10,6 @@ package it.niedermann.owncloud.notes.about;
 
 import android.os.Bundle;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -58,7 +57,8 @@ public class AboutActivity extends LockedActivity {
         util.platform.themeStatusBar(this);
         util.material.themeToolbar(binding.toolbar);
         util.material.themeTabLayoutOnSurface(binding.tabs);
-        util.notes.themeBackgroundView(binding.getRoot(), this);
+        util.platform.colorViewBackground(getWindow().getDecorView());
+        util.platform.colorViewBackground(binding.getRoot());
     }
 
     private static class TabsStateAdapter extends FragmentStateAdapter {

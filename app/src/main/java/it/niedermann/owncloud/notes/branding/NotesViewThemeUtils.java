@@ -9,7 +9,6 @@ package it.niedermann.owncloud.notes.branding;
 import static com.nextcloud.android.common.ui.util.ColorStateListUtilsKt.buildColorStateList;
 import static com.nextcloud.android.common.ui.util.PlatformThemeUtil.isDarkMode;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -229,14 +228,6 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
                                     R.color.icon_on_nc_grey,
                                     null),
                             PorterDuff.Mode.SRC_IN);
-            return view;
-        });
-    }
-
-    public void themeBackgroundView(View view, Activity activity) {
-        withScheme(view, scheme -> {
-            activity.getWindow().getDecorView().setBackgroundColor(dynamicColor.surface().getArgb(scheme));
-            view.setBackgroundColor(dynamicColor.surface().getArgb(scheme));
             return view;
         });
     }
