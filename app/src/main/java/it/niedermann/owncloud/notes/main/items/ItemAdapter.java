@@ -10,6 +10,8 @@ import static it.niedermann.owncloud.notes.shared.util.NoteUtil.getFontSizeFromP
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -178,8 +180,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                     holder.itemView.setBackgroundColor(holder.itemView.getContext().getColor(com.nextcloud.android.common.ui.R.color.bg_default));
                     ((ImageView) holder.itemView.findViewById(R.id.custom_checkbox)).setImageResource(R.drawable.ic_checkbox_blank_outline);
                 }
-                //holder.itemView.findViewById(R.id.custom_checkbox).setVisibility(isMultiSelect ? View.VISIBLE : View.GONE);
-                holder.itemView.findViewById(R.id.custom_checkbox).setVisibility(View.GONE);
+                holder.itemView.findViewById(R.id.custom_checkbox).setVisibility(isMultiSelect ? View.VISIBLE : View.GONE);
                 ((NoteViewHolder) holder).bind(isSelected, (Note) itemList.get(position), showCategory, color, searchQuery);
             }
         }
@@ -193,8 +194,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     public void setMultiSelect(boolean bool) {
         if (isMultiSelect != bool) {
             isMultiSelect = bool;
-            // endless loop incoming...
-            //notifyDataSetChanged();
+            new Handler(Looper.getMainLooper()).post(this::notifyDataSetChanged);
         }
     }
 
