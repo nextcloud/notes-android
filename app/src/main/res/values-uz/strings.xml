@@ -14,7 +14,7 @@
     <string name="welcome_text"> %1$sga xush kelibsiz</string>
     <string name="action_settings">Sozlamalar</string>
     <string name="action_trashbin">O\'chirilgan qaydlar</string>
-    <string name="action_search">Qidiruv</string>
+    <string name="action_search">Qidirish</string>
     <string name="action_sorting_method">Saralash usuli</string>
     <string name="simple_cancel">Bekor qilish</string>
     <string name="simple_switch">Oʻzgartirish</string>
@@ -50,7 +50,7 @@
     <string name="note_share_detail_activity_cancel">Bekor qilish</string>
     <string name="share_password_dialog_fragment_skip">O\'tkazib yuborish</string>
 
-    <string name="common_ok">OK</string>
+    <string name="common_ok">Yaxshi</string>
     <string name="common_delete">O\'chirish</string>
     <string name="write_email">Xabar yuborish</string>
     <string name="activity_chooser_title">Havolani yuborish…</string>
