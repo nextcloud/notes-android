@@ -13,7 +13,9 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -26,6 +28,7 @@ import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.google.android.material.appbar.AppBarLayout;
@@ -207,6 +210,46 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
             closeButton.setColorFilter(dynamicColor.onSurface().getArgb(scheme));
             searchButton.setColorFilter(dynamicColor.onSurface().getArgb(scheme));
             return searchView;
+        });
+    }
+
+    public void themeInternalLinkIcon(ImageView view) {
+        withScheme(view, scheme -> {
+            view
+                    .getBackground()
+                    .setColorFilter(ResourcesCompat.getColor(view.getContext().getResources(),
+                                    R.color.nc_grey,
+                                    null),
+                            PorterDuff.Mode.SRC_IN);
+            view
+                    .getDrawable()
+                    .mutate()
+                    .setColorFilter(ResourcesCompat.getColor(view.getContext().getResources(),
+                                    R.color.icon_on_nc_grey,
+                                    null),
+                            PorterDuff.Mode.SRC_IN);
+            return view;
+        });
+    }
+
+    public void themeBackgroundItemView(View view) {
+        withScheme(view, scheme -> {
+            StateListDrawable res = new StateListDrawable();
+            res.addState(new int[]{android.R.attr.state_activated}, new ColorDrawable(dynamicColor.secondaryContainer().getArgb(scheme)));
+            res.addState(new int[]{}, new ColorDrawable(dynamicColor.surface().getArgb(scheme)));
+            view.setBackground(res);
+            return view;
+        });
+    }
+
+    public void themeCard(@NonNull MaterialCardView view) {
+        withScheme(view, scheme -> {
+            view.setBackgroundTintList(buildColorStateList(
+                    new Pair<>(android.R.attr.state_activated, dynamicColor.secondaryContainer().getArgb(scheme)),
+                    new Pair<>(-android.R.attr.state_activated, dynamicColor.surface().getArgb(scheme)))
+            );
+            view.setStrokeColor(dynamicColor.outlineVariant().getArgb(scheme));
+            return view;
         });
     }
 }

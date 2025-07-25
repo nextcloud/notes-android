@@ -5,27 +5,27 @@
  ~ SPDX-FileCopyrightText: 2015-2025 Nextcloud GmbH and Nextcloud contributors
  ~ SPDX-License-Identifier: GPL-3.0-or-later
 -->
-<LinearLayout android:id="@+id/copy_internal_container"
-    android:layout_height="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/copy_internal_container"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
     android:orientation="horizontal"
-    android:paddingBottom="@dimen/spacer_1x"
-    android:paddingEnd="@dimen/spacer_2x"
     android:paddingStart="@dimen/zero"
     android:paddingTop="@dimen/spacer_1x"
-    android:layout_weight="1"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:paddingEnd="@dimen/spacer_2x"
+    android:paddingBottom="@dimen/spacer_1x">
 
     <ImageView
+        android:id="@+id/copy_internal_link_icon"
+        android:layout_width="@dimen/default_icon_size"
+        android:layout_height="@dimen/default_icon_size"
+        android:layout_gravity="top"
+        android:layout_marginStart="@dimen/spacer_2x"
+        android:layout_marginEnd="@dimen/spacer_2x"
         android:background="@drawable/round_bgnd"
         android:contentDescription="@string/note_share_activity_external_icon_content_description"
-        android:id="@+id/copy_internal_link_icon"
-        android:layout_gravity="top"
-        android:layout_height="@dimen/default_icon_size"
-        android:layout_marginEnd="@dimen/spacer_2x"
-        android:layout_marginStart="@dimen/spacer_2x"
-        android:layout_width="@dimen/default_icon_size"
         android:padding="@dimen/spacer_1x"
         android:src="@drawable/ic_external" />
 

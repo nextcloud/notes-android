@@ -12,14 +12,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:focusable="true"
-    app:cardBackgroundColor="@color/appbar"
-    app:cardCornerRadius="@dimen/spacer_1x">
+    app:cardCornerRadius="@dimen/card_radius">
 
     <LinearLayout
         android:id="@+id/wrapper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/grid_item_background_selector"
         android:orientation="horizontal"
         android:paddingBottom="@dimen/spacer_1x">
 
@@ -62,5 +60,17 @@
             android:textColor="@color/fg_default"
             tools:maxLength="50"
             tools:text="@tools:sample/lorem/random" />
+
+        <ImageView
+            android:id="@+id/custom_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:clickable="false"
+            android:contentDescription="@null"
+            android:focusable="false"
+            android:paddingStart="@dimen/spacer_1x"
+            android:paddingEnd="@dimen/spacer_1x"
+            android:src="@drawable/ic_checkbox_blank_outline" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

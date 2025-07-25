@@ -41,5 +41,7 @@ public class PreferencesActivity extends LockedActivity {
         final var util = BrandingUtil.of(color, this);
         util.platform.themeStatusBar(this);
         util.material.themeToolbar(binding.toolbar);
+        util.platform.colorViewBackground(getWindow().getDecorView());
+        util.platform.colorViewBackground(binding.getRoot());
     }
 }

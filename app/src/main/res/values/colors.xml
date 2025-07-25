@@ -47,4 +47,6 @@
 
     <color name="widget_background">#ddffffff</color>
     <color name="widget_foreground">#222222</color>
+
+    <color name="action_mode_background">#ededed</color>
 </resources>

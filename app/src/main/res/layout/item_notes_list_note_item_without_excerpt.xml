@@ -15,8 +15,8 @@
 
     <ImageView
         android:id="@+id/noteFavoriteLeft"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="@dimen/button_padding"
         android:contentDescription="@string/menu_favorite"
@@ -24,12 +24,12 @@
 
     <ImageView
         android:id="@+id/noteDeleteRight"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="end|center_vertical"
         android:layout_marginEnd="@dimen/button_padding"
         android:contentDescription="@string/menu_delete"
-        app:srcCompat="@drawable/ic_delete_white_32dp" />
+        app:srcCompat="@drawable/ic_delete_white_24dp" />
 
     <LinearLayout
         android:id="@+id/noteSwipeable"
@@ -94,6 +94,18 @@
             android:textSize="@dimen/secondary_font_size"
             tools:maxLength="15"
             tools:text="@tools:sample/lorem/random" />
+
+        <ImageView
+            android:id="@+id/custom_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:clickable="false"
+            android:contentDescription="@null"
+            android:focusable="false"
+            android:paddingStart="@dimen/spacer_1x"
+            android:paddingEnd="@dimen/spacer_1x"
+            android:src="@drawable/ic_checkbox_blank_outline" />
     </LinearLayout>
 
 </FrameLayout>
