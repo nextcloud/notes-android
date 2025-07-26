@@ -275,7 +275,7 @@
     <string name="add_category">Lisa %1$s</string>
     <string name="simple_checkbox">Märkeruut</string>
     <string name="unlock_notes">Eemalda märkmete lukustus</string>
-    <string name="error_dialog_title">Appikine, mis nüüd saab? 🙁</string>
+    <string name="error_dialog_title">Appikene, mis nüüd saab? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Palun  proovi sundkorras rakendus kinni panna ja siis uuesti käivitada. Tegemist võis olla ühenduse veaga Nextcloudi serveri ja rakenduse vahel.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Kui probleem jätkub, siis proovi selle lahendamiseks tühjendada mõlema rakenduse andmeruumid: Nextcloud ja Nextcloudi Märkmed.</string>
     <string name="error_dialog_tip_clear_storage">Andmeruumi saad tühjendada, kui avad rakenduse teabe ning valid „Andmeruum“ → „Tühjenda andmeruum“.  ⚠️ Hoiatus: sellega kustutad ka senisünkroniseerimata märkmed!</string>
