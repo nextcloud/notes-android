@@ -40,6 +40,10 @@
 
     <string name="change_category_title">Оберіть категорію</string>
 
+    <!-- UsersAndGroupsSearchProvider -->
+    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
+    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
+
     <!-- NoteShareActivity -->
     <string name="note_share_activity_activity_icon_content_description">значок активності нотатки</string>
     <string name="note_share_activity_share_icon_content_description">значок нотатки поділитися</string>
