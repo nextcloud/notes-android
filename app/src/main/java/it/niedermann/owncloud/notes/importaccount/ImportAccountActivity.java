@@ -66,7 +66,6 @@ public class ImportAccountActivity extends AppCompatActivity {
 
         binding.welcomeText.setText(getString(R.string.welcome_text, getString(R.string.app_name)));
         binding.addButton.setOnClickListener((v) -> {
-            binding.addButton.setEnabled(false);
             binding.status.setVisibility(View.GONE);
             try {
                 AccountImporter.pickNewAccount(this);
