@@ -27,7 +27,7 @@ public abstract class BrandedActivity extends AppCompatActivity implements Brand
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        AppCompatActivityExtensionsKt.adjustUIForAPILevel35(this);
+        AppCompatActivityExtensionsKt.applyEdgeToEdgeWithSystemBarPadding(this);
         super.onCreate(savedInstanceState);
     }
 

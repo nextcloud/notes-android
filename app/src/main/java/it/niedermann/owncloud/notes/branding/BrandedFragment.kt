@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.nextcloud.android.common.ui.util.extensions.adjustUIForAPILevel35
+import com.nextcloud.android.common.ui.util.extensions.applyEdgeToEdgeWithSystemBarPadding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -43,7 +43,7 @@ abstract class BrandedFragment : Fragment(), Branded {
     override fun onCreate(savedInstanceState: Bundle?) {
         if (activity is AppCompatActivity) {
             val appCompatActivity = activity as AppCompatActivity
-            appCompatActivity.adjustUIForAPILevel35()
+            appCompatActivity.applyEdgeToEdgeWithSystemBarPadding()
         }
         super.onCreate(savedInstanceState)
     }
