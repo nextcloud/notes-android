@@ -32,7 +32,7 @@ public class ExceptionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        AppCompatActivityExtensionsKt.adjustUIForAPILevel35(this);
+        AppCompatActivityExtensionsKt.applyEdgeToEdgeWithSystemBarPadding(this);
         super.onCreate(savedInstanceState);
 
         final var binding = ActivityExceptionBinding.inflate(getLayoutInflater());

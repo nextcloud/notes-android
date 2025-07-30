@@ -54,7 +54,7 @@ public class ImportAccountActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AppCompatActivityExtensionsKt.adjustUIForAPILevel35(this);
+        AppCompatActivityExtensionsKt.applyEdgeToEdgeWithSystemBarPadding(this);
         super.onCreate(savedInstanceState);
 
         Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));
