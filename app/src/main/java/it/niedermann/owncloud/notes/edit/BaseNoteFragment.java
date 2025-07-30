@@ -390,6 +390,11 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
      * Opens a dialog in order to chose a category
      */
     private void showCategorySelector() {
+        if (note == null) {
+            Log.e(TAG, "note is null, showCategorySelector");
+            return;
+        }
+
         final var fragmentId = "fragment_category";
         final var manager = requireActivity().getSupportFragmentManager();
         final var frag = manager.findFragmentByTag(fragmentId);
@@ -405,6 +410,11 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
      * Opens a dialog in order to chose a category
      */
     public void showEditTitleDialog() {
+        if (note == null) {
+            Log.e(TAG, "note is null, showEditTitleDialog");
+            return;
+        }
+
         saveNote(null);
         final var fragmentId = "fragment_edit_title";
         final var manager = requireActivity().getSupportFragmentManager();
