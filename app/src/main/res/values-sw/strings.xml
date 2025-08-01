@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Nextcloud Notes - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
+<resources>
+    <string name="app_name">Madokezo</string>
+    <string name="app_name_long">Madokezo ya Nextcloud</string>
+    <string name="label_all_notes">Madokezo yote</string>
+    <string name="label_favorites">Vipendwa</string>
+    <string name="action_create">Dokezo jipya</string>
+    <string name="welcome_text">Karibu katika %1$s</string>
+    <string name="action_settings">Mipangilio</string>
+    <string name="action_trashbin">Futa madokezo</string>
+    <string name="action_search">Tafuta</string>
+    <string name="action_sorting_method">Mbinu ya kupanga</string>
+    <string name="simple_cancel">Ghairi</string>
+    <string name="simple_switch">Badili</string>
+    <string name="simple_edit">Hariri</string>
+    <string name="simple_remove">Ondoa</string>
+    <string name="action_edit_save">Hifadhi</string>
+    <string name="simple_about">Kuhusu</string>
+    <string name="simple_link">Kiungio</string>
+    <string name="action_note_deleted">Imefutwa %1$s</string>
+    <string name="action_note_restored">Imehifadhiwa %1$s</string>
+    <string name="action_undo">Tendua</string>
+    <string name="action_uncategorized">Haitambuliki</string>
+    <string name="menu_delete">Futa</string>
+    <string name="menu_change_category">Kipengele</string>
+    <string name="menu_favorite">Kipendwa</string>
+    <string name="menu_preview">Mwonekano wa awali</string>
+    <string name="menu_share">Shirikisha</string>
+    <string name="common_loading">Inapakia</string>
+
+
+    <string name="search_in_category">Tafuta katika %1$s</string>
+    <string name="search_in_all">Tafuta madokezo yote</string>
+
+    <string name="change_category_title">Chagua kipengele</string>
+
+    <!-- UsersAndGroupsSearchProvider -->
+    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
+    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
+
+    <!-- NoteShareActivity -->
+    <string name="note_share_activity_activity_icon_content_description">kumbuka aikoni ya shughuli</string>
+    <string name="note_share_activity_share_icon_content_description">kumbuka aikoni ya kushiriki</string>
+    <string name="note_share_activity_external_icon_content_description">kumbuka shiriki ikoni ya nje</string>
+    <string name="note_share_activity_copy_icon_content_description">kumbuka shiriki ikoni ya nakala</string>
+    <string name="note_share_activity_more_icon_content_description">kumbuka shiriki ikoni zaidi</string>
+    <string name="note_share_activity_icon_content_description">kumbuka aikoni ya kushiriki</string>
+    <string name="note_share_activity_user_icon_content_description">kumbuka shiriki ikoni ya mtumiaji</string>
+    <string name="note_share_activity_contact_icon_content_description">kumbuka shiriki ikoni ya anwani</string>
+    <string name="note_share_activity_shared_with_you">Imeshirikiwa na wewe kwa %1$s</string>
+    <string name="note_share_activity_share_note">Shiriki dokezo</string>
+    <string name="note_share_activity_search_text">Jina, Kitambulisho cha Cloud iliyoshirikishwa au anwani ya barua pepe...</string>
+    <string name="note_share_activity_share_link">Shirikisha kiungo</string>
+    <string name="note_share_activity_resharing_not_allowed">Sera au ruhusa huzuia kushiriki upya</string>
+    <string name="note_share_activity_could_not_retrieve_url">Haikuweza kupata URL</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" imeshirikiwa na wewe</string>
+    <string name="note_share_activity_contact_no_permission">Ruhusa ya mawasiliano inahitajika.</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">Huruhusiwi kuunda ushiriki wa umma.</string>
+
+    <string name="note_share_created">Shiriki imeundwa</string>
+    <string name="note_share_activity_cannot_created">Huruhusiwi kuunda kushiriki.</string>
+
+
+    <!-- NoteShareDetailActivity -->
+    <string name="note_share_detail_activity_advanced_settings">Mipangilio ya Kina</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Ficha upakuaji</string>
+    <string name="note_share_detail_activity_share_send_note">Dokezo kwa mpokeaji</string>
+    <string name="note_share_detail_activity_hint_note">Dokezo</string>
+    <string name="note_share_detail_activity_common_next">Inayofuata</string>
+    <string name="note_share_detail_activity_share_copy_link">Shiriki na nakili kiungo</string>
+    <string name="note_share_detail_activity_common_confirm">Thibitisha</string>
+    <string name="note_share_detail_activity_set_note">Weka dokezo</string>
+    <string name="note_share_detail_activity_send_share">Tuma shiriki</string>
+    <string name="note_share_detail_activity_hint_name">Jina</string>
+    <string name="note_share_detail_activity_link_name">Jina la Kiungo</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Lazima uweke nenosiri</string>
+    <string name="note_share_detail_activity_hint_password">Nenosiri</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Tafadhali chagua angalau ruhusa moja ili kushiriki.</string>
+    <string name="note_share_detail_activity_label_empty">Lebo haiwezi kuwa tupu</string>
+    <string name="note_share_detail_activity_cancel">Ghairi</string>
+    <string name="note_share_detail_activity_create_share_error">Imeshindwa kutengeneza ushiriki</string>
+
+    <!-- SharePasswordDialogFragment -->
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Weka nenosiri mbadala</string>
+    <string name="share_password_dialog_fragment_skip">Ruka</string>
+
+    <string name="share_link_password_title">Ingiza nenosiri</string>
+    <string name="common_ok">SAWA</string>
+    <string name="common_delete">Futa</string>
+    <string name="write_email">Tuma barua pepe</string>
+    <string name="no_browser_available">Hakuna programu inayopatikana kushughulikia viungo</string>
+    <string name="no_email_app_available">Hakuna Programu inayopatikana kushughulikia anwani ya barua pepe</string>
+    <string name="no_actions">Hakuna vitendo kwa mtumiaji huyu</string>
+
+    <string name="failed_the_remove_share">Imeshindwa kuondoa kushiriki</string>
+    <string name="email_pick_failed">Imeshindwa kuchagua anwani ya barua pepe.</string>
+    <string name="failed_update_ui">Imeshindwa kusasisha UI</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Hakuna programu inayopatikana ya kuchagua anwani</string>
+    <string name="activity_chooser_title">Tuma kiungo kwa...</string>
+
+    <string name="activity_chooser_send_file_title">Tuma</string>
+    <string name="share_internal_link_to_folder_text">Kiungo cha kushiriki ndani hufanya kazi kwa watumiaji walio na ufikiaji wa folda hii pekee</string>
+    <string name="share_internal_link_to_file_text">Kiungo cha kushiriki ndani hufanya kazi kwa watumiaji walio na ufikiaji wa faili hii pekee</string>
+    <string name="share_internal_link">Shiriki kiungo cha ndani</string>
+    <string name="delete_link">Futa kiungo</string>
+    <string name="share_settings">Mipangilio</string>
+    <string name="share_send_new_email">Tuma barua pepe mpya</string>
+    <string name="share_dialog_title">inashirikisha</string>
+    <string name="share_file">Shirikisha %1$s</string>
+    <string name="share_expiration_date_label">Inaisha wakati %1$s</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_no_expiration_date_label">Panga tarehe ya mwisho wa matumizi</string>
+    <string name="share_via_link_section_title">Shirikisha kiungo</string>
+    <string name="share_via_link_send_link_label">Tuma kiungo</string>
+    <string name="share_password_title">Nenosiri-linalindwa</string>
+    <string name="share_no_password_title">Weka nenosiri</string>
+    <string name="share_with_title">Shiriki na...</string>
+    <string name="share_via_link_unset_password">Haijawekwa</string>
+    <string name="add_another_public_share_link">Ongeza kiungo kingine</string>
+    <string name="add_new_public_share">Kiungo kipya cha ushiriki wa umma</string>
+    <string name="public_share_name">Jina jipya</string>
+    <string name="share_link_with_label">Shiriki ya kiungo (%1$s)</string>
+    <string name="share_link">Shirikisha kiungo</string>
+    <string name="allow_resharing">Ruhusu kushiriki upya</string>
+    <string name="link_share_view_only">Tazama pekee</string>
+    <string name="link_share_editing">Inahariri</string>
+    <string name="link_share_allow_upload_and_editing">Ruhusu upakiaji na uhariri</string>
+    <string name="link_share_file_drop">Kuacha faili (kupakia pekee)</string>
+    <string name="could_not_retrieve_shares">Haikuweza kurejesha shiriki</string>
+    <string name="share_permission_view_only">Tazama pekee</string>
+    <string name="share_permission_can_edit">Inaweza kuhariri</string>
+    <string name="share_permission_file_drop">Kuacha faili</string>
+    <string name="share_permission_secure_file_drop">Linda kushuka kwa faili</string>
+    <string name="share_permissions">Ruhusa za kushiriki </string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">%1$d download remaining</item>
+        <item quantity="other">%1$d vipakuliwa vilivyosalia</item>
+    </plurals>
+    <string name="username">Jina la mtumiaji</string>
+    <string name="share_group_clarification">%1$s (kundi)</string>
+    <string name="share_remote_clarification">%1$s (mbali)</string>
+    <string name="share_room_clarification">%1$s (mazungumzo)</string>
+    <string name="share_known_remote_on_clarification">juu ya %1$s</string>
+    <string name="remote">(mbali)</string>
+
+    <string name="copy_link">Nakili kiungio</string>
+    <string name="share">Shirikisha</string>
+    <string name="clipboard_text_copied">Kiungo kimenakiliwa</string>
+    <string name="clipboard_no_text_to_copy">Haijapokea maandishi ya kunakili kwenye ubao wa kunakili</string>
+    <string name="clipboard_unexpected_error">Hitilafu isiyotarajiwa wakati wa kunakili kwenye ubao wa kunakili</string>
+    <string name="clipboard_label">Maandishi yamenakiliwa kutoka %1$s</string>
+
+    <string name="listview_updated_today">Leo</string>
+    <string name="listview_updated_yesterday">Jana</string>
+    <string name="listview_updated_this_week">Wiki hii</string>
+    <string name="listview_updated_last_week">Wiki iliyopita</string>
+    <string name="listview_updated_this_month">Mwezi huu</string>
+    <string name="listview_updated_last_month">Mwezi uliopita</string>
+
+    <string name="settings_note_mode">Hali ya kuonyesha kwa madokezo</string>
+    <string name="settings_note_mode_new">Tabia za kufungua vidokezo</string>
+    <string name="settings_theme_title">Mandhari</string>
+    <string name="settings_font_title">Fonti ya nafasi moja</string>
+    <string name="settings_font_size">Ukubwa wa herufi</string>
+    <string name="settings_wifi_only">Sawazisha kwenye Wi-Fi pekee</string>
+    <string name="settings_lock">Kufunga programu (Beta)</string>
+    <string name="settings_lock_summary">Vitambulisho vya kifaa</string>
+    <string name="settings_background_sync">Usawazishaji wa usuli</string>
+    <string name="settings_prevent_screen_capture">Zuia kunasa skrini</string>
+    <string name="settings_gridview">Mwonekano wa gridi</string>
+    <string name="settings_enable_direct_edit">Hariri ya moja kwa moja</string>
+    <string name="settings_enable_direct_edit_summary">Ikizimwa, kihariri cha hali ya juu kitafichwa.</string>
+    <string name="settings_keep_screen_on">Washa skrini</string>
+    <string name="settings_keep_screen_on_summary">Wakati wa kutazama au kuhariri dokezo</string>
+
+    <string name="error_sync">Usawazishaji haukufaulu: %1$s</string>
+    <string name="error_synchronization">Usawazishaji haukufaulu</string>
+    <string name="error_no_network">Hakuna mtandao</string>
+    <string name="error_maintenance_mode">Seva iko katika hali ya matengenezo</string>
+    <string name="error_unknown">Hitilafu isiyojulikana imetokea.</string>
+
+    <string name="about_version_title">Toleo</string>
+    <string name="about_version">Sasa unatumia %1$s</string>
+    <string name="about_maintainer_title">Mtunzaji</string>
+    <string name="about_developers_title">Waendelezaji</string>
+    <string name="about_developers_original_author">mwandishi asilia</string>
+    <string name="about_translators_title">Watafsiri</string>
+    <string name="about_translators_transifex">Jamii ya Nextcloud juu ya %1$s</string>
+    <string name="about_testers_title">Wajaribu</string>
+    <string name="about_source_title">Msimbo wa chanzo</string>
+    <string name="about_source">Mradi huu unafanyiwa wenyeji katika GitHub: %1$s</string>
+    <string name="about_issues_title">Masuala</string>
+    <string name="about_issues">Unaweza kuripoti hitilafu, mapendekezo ya uboreshaji na maombi ya kipengele kwenye tracker ya suala la GitHub: %1$s</string>
+    <string name="about_translate_title">Tafsiri</string>
+    <string name="about_translate">Jiunge na timu ya Nextcloud kwenye Transifex na utusaidie kutafsiri programu hii: %1$s</string>
+    <string name="about_app_license_title">Leseni ya pprogram</string>
+    <string name="about_app_license">Programu hii imeidhinishwa chini ya GNU GENERAL PUBLIC LICENSE v3+.</string>
+    <string name="about_app_license_button">Angalia leseni</string>
+    <string name="about_icons_disclaimer_title">Aikono</string>
+    <string name="about_icons_disclaimer_app_icon">Kwa ikoni ya asili ona %1$s</string>
+    <string name="about_icons_disclaimer_mdi_icons">Aikoni zote zaidi zinazotumiwa na programu hii ni %1$s zilizotengenezwa na Google Inc. na zimepewa leseni chini ya Leseni ya Apache 2.0.</string>
+    <string name="about_icons_disclaimer_mdi">Aikoni za nyenzo za usanifu</string>
+    <string name="about_credits_tab_title">Alama</string>
+    <string name="about_contribution_tab_title">Mchango</string>
+    <string name="about_license_tab_title">Leseni</string>
+
+    <string name="widget_note_list_title">Orodha ya dokezo</string>
+    <string name="widget_note_list_placeholder">Hakuna dokezo</string>
+    <string name="widget_single_note_title">Dokezo moja</string>
+    <string name="widget_single_note_placeholder_tv">Dokezo halipo</string>
+    <string name="widget_not_logged_in">Tafadhali ingia kwenye madokezo kabla ya kutumia wijeti hii</string>
+    <string name="widget_entry_fav_contentDescription">Aikoni ya nyota hutumiwa kuashiria kipengee kama kipendwa</string>
+
+    <string name="activity_select_single_note">Chagua dokezo</string>
+
+    <string name="shortcut_create_long">Tengeneza dokezo jipya</string>
+
+    <string name="pref_value_font_normal">Kawaida</string>
+    <string name="pref_value_wifi_and_mobile">Sawazisha kwenye Wi-Fi na data ya simu</string>
+    <string name="pref_value_lock">Ulinzi wa nenosiri</string>
+
+    <string name="simple_error">Hitilafu</string>
+    <string name="simple_close">Funga</string>
+    <string name="simple_copy">Nakili</string>
+    <string name="simple_exception">Mbadala</string>
+    <string name="pin_to_homescreen">Bandika kwenye skrini ya nyumbani</string>
+    <string name="note_has_been_deleted">Dokezo hili limefutwa</string>
+    <string name="add_account">Ongeza akaunti</string>
+
+    <string name="category_music">Muziki</string>
+    <string name="category_movies">Filamu</string>
+    <string name="category_movie">Filamu</string>
+    <string name="category_work">Kazi</string>
+    <string name="category_todo">Ya kufanya</string>
+    <string name="category_todos">Vya kufanya</string>
+    <string name="category_checklists">Orodha za ukaguzi</string>
+    <string name="category_tasks">Kazi</string>
+    <string name="category_recipe">Kichocheo</string>
+    <string name="category_recipes">Vichocheo</string>
+    <string name="category_restaurant">Mgahawa</string>
+    <string name="category_restaurants">Migahawa</string>
+    <string name="category_food">Chakula</string>
+    <string name="category_bake">Oka</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_key">Ufunguo</string>
+    <!-- This represents a category where one can place passwords and credentials -->
+    <string name="category_keys">Funguo</string>
+    <string name="category_password">Nenosiri</string>
+    <string name="category_passwords">Manenosiri</string>
+    <string name="category_credentials">Kitambulisho</string>
+    <string name="category_game">Mchezo</string>
+    <string name="category_games">Michezo</string>
+    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
+    <string name="category_play">Cheza</string>
+    <string name="category_gift">Zawadi</string>
+    <string name="category_gifts">Zawadi</string>
+    <!-- Like a gift -->
+    <string name="category_present">Zawadi</string>
+    <!-- Like a gift -->
+    <string name="category_presents">Zawadi</string>
+
+    <string name="account_already_imported">Akaunti tayari imeingizwa</string>
+    <string name="no_notes_yet">Bado hakuna madokezo</string>
+    <string name="no_notes_yet_description">Bonyeza kitufe cha + ili kuunda dokezo jipya</string>
+    <string name="simple_more">Zaidi</string>
+    <string name="simple_move">Hamisha</string>
+    <string name="category_readonly">Read only</string>
+    <string name="no_category">Hakuna kipengele</string>
+    <string name="add_category">Ongeza %1$s</string>
+    <string name="simple_checkbox">Kisanduku cha kuteua</string>
+    <string name="unlock_notes">Fungua madokezo</string>
+    <string name="error_dialog_title">Oh hapana- nini sasa?</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Tafadhali jaribu kulazimisha kufunga programu na uiwashe upya. Huenda kulikuwa na muunganisho usio sahihi kwa programu ya Nextcloud.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Tatizo likiendelea, jaribu kufuta hifadhi ya programu zote mbili: Nextcloud na Nextcloud Notes ili kutatua suala hili.</string>
+    <string name="error_dialog_tip_clear_storage">Unaweza kufuta hifadhi kwa kufungua maelezo ya programu na kuchagua Hifadhi → Futa hifadhi. ⚠️ Onyo: Hii itafuta madokezo ambayo bado hayajasawazishwa!</string>
+    <string name="error_dialog_tip_files_outdated">Programu yako ya Nextcloud inaonekana kuwa imepitwa na wakati. Tafadhali tembelea Play Store au F-Droid ili kupata toleo jipya zaidi.</string>
+    <string name="error_dialog_tip_files_force_stop">Inaonekana kuna tatizo kwenye programu yako ya Nextcloud. Tafadhali jaribu kulazimisha kusimamisha zote mbili, programu ya Nextcloud na programu ya Nextcloud Notes.</string>
+    <string name="error_dialog_tip_files_delete_storage">Ikiwa kulazimisha kuwazuia haisaidii, unaweza kujaribu kufuta uhifadhi wa programu zote mbili.</string>
+    <string name="error_dialog_timeout_instance">Hakukuwa na jibu kutoka kwa seva yako kwa muda uliotolewa. Tafadhali hakikisha mfano wako unaendelea vizuri.</string>
+    <string name="error_dialog_timeout_toggle">Angalia muunganisho wako wa mtandao. Wakati fulani kugeuza data ya simu au Wi-Fi kuzima na kuwasha tena kunaweza kusaidia.</string>
+    <string name="error_dialog_check_server">Jibu la seva yako halikuwa sahihi. Tafadhali angalia kama unaweza kufikia madokezo yako kupitia kiolesura cha wavuti.</string>
+    <string name="error_dialog_check_server_logs">Kuna tatizo na usanidi wako wa Nextcloud. Tafadhali angalia faili za kumbukumbu za seva.</string>
+    <string name="error_dialog_check_maintenance">Tafadhali angalia ikiwa mfano wako wa Nextcloud hauko katika hali ya matengenezo kwa sasa.</string>
+    <string name="error_dialog_insufficient_storage">Mfano wako wa Nextcloud hauna hifadhi isiyolipishwa iliyosalia. Tafadhali futa baadhi ya faili ili kusawazisha mabadiliko yako ya ndani kwenye wingu lako.</string>
+    <string name="error_dialog_we_need_info">Tunahitaji maelezo yafuatayo ya kiufundi ili kukusaidia:</string>
+    <string name="error_dialog_server_app_enabled">Tafadhali hakikisha kuwa umesakinisha na kuwezesha programu ya \"Vidokezo\" kwenye seva yako.</string>
+    <string name="error_dialog_redirect">Seva yako ilijibu kwa msimbo wa hali ya HTTP 302, ambayo ina maana, kuwa hujasakinisha programu ya Vidokezo kwenye seva yako au kuna kitu kimesanidiwa vibaya. Hii inaweza kusababishwa na ubatilishaji maalum katika faili ya .htaccess au programu za Nextcloud kama vile OID Client.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Tafadhali zima uboreshaji wote wa betri kwa Nextcloud na programu ya Notes.</string>
+    <string name="error_dialog_min_version">Programu ya Android Notes inahitaji programu za Nextcloud Android iwe toleo la 3.18.</string>
+    <string name="added_content">Imeongezwa \"%1$s\"</string>
+    <string name="shared_text_empty">Maandishi yaliyoshirikiwa yalikuwa tupu</string>
+    <string name="append_to_note">Ongeza kwenye dokezo</string>
+    <string name="change_note_title">Badilisha kichwa cha dokezo</string>
+    <string name="menu_edit_title">Hariri kichwa cha habari</string>
+    <string name="simple_security">Ulinzi</string>
+    <string name="appearance_and_behavior">Muonekano na tabia</string>
+    <string name="simple_synchronization">Usawazishaji</string>
+    <string name="manage_accounts">Simamia akaunti</string>
+    <string name="action_formatting_help">Inaumbiza</string>
+
+
+    <string name="noteMode_plain_edit">Hali ya wazi ya kuhariri</string>
+    <string name="noteMode_plain_preview">Uhakiki wa wazi</string>
+    <string name="noteMode_rich_edit">Fikia hali ya kuhariri</string>
+    <string name="noteMode_remember_last">Kumbuka uteuzi wangu wa mwisho</string>
+
+    <string-array name="fontSize_entries">
+        <item>Ndogo</item>
+        <item>Kati</item>
+        <item>Kubwa</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Mwanga</item>
+        <item>Giza</item>
+        <item>Chaguomsingi ya Mfumo</item>
+    </string-array>
+
+    <plurals name="ab_selected">
+        <item quantity="one">%d selected</item>
+        <item quantity="other">%d imechaguliwa</item>
+    </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Deleted one note</item>
+        <item quantity="other">Imefuta %1$d madokezo</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="one">Restored one note</item>
+        <item quantity="other">Imehifadhi %1$d madokezo</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">Share content of %1$d note</item>
+        <item quantity="other">Imeshiriki maudhui ya %1$d madokezo</item>
+    </plurals>
+
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">Uumbizaji kulingana na muktadha</string>
+    <string name="formatting_help_cbf_body_1">Lengo kuu la muundo wa programu ya Notes ni kutoa zana isiyo na usumbufu. Ingawa utaweza kuunda maandishi yako na Markdown. Kwa mifano mbalimbali iliyotajwa hapa chini, unaweza kutumia njia za mkato ili uweze kufomati madokezo yako bila kuandika misimbo iliyo hapa chini.</string>
+    <string name="formatting_help_cbf_body_2">Chagua tu anuwai ya maandishi au uguse kishale chako katika nafasi yoyote na utapata menyu ibukizi ambayo ina karibu na maingizo chaguomsingi %1$s, %2$s, %3$s kama %4$s au %5$s.</string>
+
+    <string name="formatting_help_text_title">Maandishi</string>
+    <string name="formatting_help_text_body">Ni rahisi sana kutengeneza baadhi ya maneno %1$s bold%1$s na maneno mengine %2$ssitalic%2$s kwa kutumia Markdown. Unaweza %3$sstrike%3$s baadhi ya maneno kupitia na hata [kuunganisha kwa Nextcloud](https://nextcloud.com).</string>
+
+    <string name="formatting_help_lists_title">Orodha</string>
+    <string name="formatting_help_lists_body_1">Wakati mwingine unataka orodha zilizohesabiwa:</string>
+    <string name="formatting_help_lists_body_2">Moja</string>
+    <string name="formatting_help_lists_body_3">Mbili</string>
+    <string name="formatting_help_lists_body_4">Tatu</string>
+    <string name="formatting_help_lists_body_5">Wakati mwingine unataka pointi za risasi:</string>
+    <string name="formatting_help_lists_body_6">Anza mstari kwa dashi</string>
+    <string name="formatting_help_lists_body_7">Na ikiwa una pointi ndogo, weka nafasi mbili kabla ya dashi au nyota:</string>
+    <string name="formatting_help_lists_body_8">Kama hii</string>
+    <string name="formatting_help_lists_body_9">Na hii</string>
+
+    <string name="formatting_help_checkboxes_title">Visanduku vya kuteua</string>
+    <string name="formatting_help_checkboxes_body_1">Ili kuunda kisanduku cha kuteua, tumia orodha inayofuatwa na mabano</string>
+    <string name="formatting_help_checkboxes_body_2">Kipengee cha 1</string>
+    <string name="formatting_help_checkboxes_body_3">Kipengele cha 2</string>
+
+    <string name="formatting_help_structured_documents_title">Nyaraka zilizopangwa</string>
+    <string name="formatting_help_structured_documents_body_1">Wakati mwingine ni muhimu kuwa na viwango tofauti vya vichwa ili kuunda hati zako. Anza mistari kwa %1$s ili kuunda vichwa. %2$s nyingi kwa safu huashiria ukubwa wa vichwa vidogo.</string>
+    <string name="formatting_help_structured_documents_body_2">Hiki ni kichwa cha daraja la tatu</string>
+    <string name="formatting_help_structured_documents_body_3">Unaweza kutumia %1$s moja hadi %2$s sita kwa ukubwa tofauti wa vichwa.</string>
+    <string name="formatting_help_structured_documents_body_4">Ikiwa ungependa kumnukuu mtu, tumia herufi %1$s kabla ya mstari:</string>
+    <string name="formatting_help_structured_documents_body_5">Kufikiria ni muhimu zaidi kuliko maarifa. Ujuzi ni mdogo. Mawazo yanazunguka ulimwengu.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+
+    <string name="formatting_help_code_title">Msimbo</string>
+    <string name="formatting_help_code_body_1">Kuna njia nyingi tofauti za kuunda msimbo na Markdown. Ikiwa una vizuizi vya ndani vya msimbo, vifunge kwenye vijiti vya nyuma:</string>
+    <string name="formatting_help_code_body_2">Markdown pia inasaidia kitu kinachoitwa uzio wa msimbo, ambayo inaruhusu kwa mistari mingi bila kujipenyeza:</string>
+    <string name="formatting_help_code_body_3">Na ikiwa ungependa kutumia uangaziaji wa sintaksia, jumuisha lugha:</string>
+
+    <string name="formatting_help_tables_title">Majedwali</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">Safu wima %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Thamani %1d</string>
+
+    <string name="formatting_help_images_body_1">Viungo lazima viwe URL kamili zinazoanza na itifaki na kikoa au njia kamili zinazoanza na herufi %1$s.</string>
+    <string name="formatting_help_images_body_2">Ili kuendana na umbizo la Markdown, tafadhali tumia vibambo vya escape kwenye URL ya picha. Hii ina maana kwa mfano, kubadilisha nafasi na %1$s katika URL.</string>
+    <string name="formatting_help_images_title">Picha</string>
+    <string name="formatting_help_images_alt">Picha ya dhana</string>
+
+    <string name="simple_other">Mengine</string>
+    <string name="sort_last_modified">Panga kwa tarehe iliyorekebishwa</string>
+    <string name="sort_alphabetically">Panga kwa alfabeti</string>
+    <string name="error_action_open_battery_settings">Mipangilio ya betri</string>
+    <string name="error_action_open_deck_info">Fungua taarifa za program</string>
+    <string name="error_action_open_network">Mipangilio ya mtandao</string>
+    <string name="error_action_update_files_app">Sasisha</string>
+    <string name="no_account_configured_yet">Bado hakuna akaunti iliyosanidiwa</string>
+    <string name="no_other_accounts">Bado hujasanidi akaunti nyingine yoyote.</string>
+    <string name="choose_account">Chagua akaunti</string>
+    <string name="context_based_formatting">popover ya umbizo kulingana na muktadha</string>
+    <plurals name="remove_account_message">
+        <item quantity="one">Removing the account %1$s will also delete irrecoverable one unsynchronized change.</item>
+        <item quantity="other">Kuondoa akaunti %1$s pia kutafuta mabadiliko yasiyoweza kurejeshwa %2$d ambayo hayajasawazishwa.</item>
+    </plurals>
+    <string name="remove_account">Ondoa %1$s</string>
+
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Ni lazima uunganishwe kwenye intaneti ili uongeze akaunti.</string>
+    <string name="settings_notes_path">Weka folda</string>
+
+    <string name="simple_next">Inayofuata</string>
+    <string name="simple_prev">Iliyopita</string>
+    <string name="simple_backup">Nakili rudufu</string>
+    <string name="backup">Tuligundua hali isiyoweza kurekebishwa ya programu. Tafadhali chelezo mabadiliko yako ambayo hayajasawazishwa na ufute hifadhi ya programu ya Notes.</string>
+    <string name="settings_notes_path_description">Folda ya kuhifadhi madokezo yako kwenye Nextcloud yako</string>
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
+    <string name="settings_notes_path_success">Folda mpya ya madokezo: %1$s</string>
+    <string name="settings_file_suffix">Kiendelezi cha faili</string>
+    <string name="settings_file_suffix_description">Kiendelezi cha faili kwa maelezo mapya katika Nextcloud yako</string>
+    <string name="settings_file_suffix_success">Kiambishi kipya cha faili: %1$s</string>
+    <string name="http_status_code">Msimbo wa hali ya HTTP: %1$d</string>
+    <string name="progress_import_indeterminate">Inaleta maelezo...</string>
+    <string name="progress_import">Inaleta maelezo %1$d ya %2$d…</string>
+    <string name="account_imported">Akaunti imeingizwa.</string>
+    <string name="direct_editing_error">Hitilafu wakati wa kupakia uhariri tajiri</string>
+    <string name="switch_to_plain_editing">Badilisha hadi uhariri wa kawaida</string>
+    <string name="action_back">Rudi</string>
+    </resources>
