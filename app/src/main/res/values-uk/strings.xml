@@ -139,10 +139,10 @@
     <string name="share_permission_secure_file_drop">Захищене додавання файлу</string>
     <string name="share_permissions">Поділитися дозволами</string>
     <plurals name="share_download_limit_description">
-        <item quantity="one">%1$d залишилося завантажити</item>
-        <item quantity="few">%1$d залишилося завантажити</item>
-        <item quantity="many">%1$d залишилося завантажити</item>
-        <item quantity="other">%1$d залишилося завантажити</item>
+        <item quantity="one">%1$d залишилося звантажити</item>
+        <item quantity="few">%1$d залишилося звантажити</item>
+        <item quantity="many">%1$d залишилося звантажити</item>
+        <item quantity="other">%1$d залишилося звантажити</item>
     </plurals>
     <string name="username">Ім\'я користувача</string>
     <string name="share_group_clarification">%1$s (група)</string>
