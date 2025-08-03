@@ -33,6 +33,7 @@ import androidx.preference.PreferenceManager;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.owncloud.android.lib.common.utils.Log_OC;
 
 import it.niedermann.owncloud.notes.R;
@@ -42,7 +43,6 @@ import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.util.DisplayUtils;
 import kotlin.Unit;
-import kotlin.jvm.functions.Function0;
 
 public class NoteEditFragment extends SearchableBaseNoteFragment {
 
@@ -306,7 +306,17 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
         super.applyBrand(color);
 
         final var util = BrandingUtil.of(color, requireContext());
-        binding.editContent.setSearchColor(color);
+
+        lifecycleScopeIOJob(() -> {
+            try {
+                final var ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getContext());
+                binding.editContent.setCurrentSingleSignOnAccount(ssoAccount, color);
+            } catch (Exception e) {
+                Log_OC.e(TAG, "applyBrand exception: " + e);
+            }
+            return Unit.INSTANCE;
+        });
+
         binding.editContent.setHighlightColor(util.notes.getTextHighlightBackgroundColor(requireContext(), color, colorPrimary, colorAccent));
     }
 

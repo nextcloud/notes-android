@@ -31,8 +31,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
-import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.owncloud.android.lib.common.utils.Log_OC;
 
@@ -40,10 +38,8 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.FragmentNotePreviewBinding;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
-import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.util.SSOUtil;
 import kotlin.Unit;
-import kotlin.jvm.functions.Function0;
 
 public class NotePreviewFragment extends SearchableBaseNoteFragment implements OnRefreshListener {
 
@@ -233,7 +229,17 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         super.applyBrand(color);
 
         final var util = BrandingUtil.of(color, requireContext());
-        binding.singleNoteContent.setSearchColor(color);
+        
+        lifecycleScopeIOJob(() -> {
+            try {
+                final var ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getContext());
+                binding.singleNoteContent.setCurrentSingleSignOnAccount(ssoAccount, color);
+            } catch (Exception e) {
+                Log_OC.e(TAG, "applyBrand exception: " + e);
+            }
+            return Unit.INSTANCE;
+        });
+
         binding.singleNoteContent.setHighlightColor(util.notes.getTextHighlightBackgroundColor(requireContext(), color, colorPrimary, colorAccent));
     }
 

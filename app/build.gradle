@@ -12,7 +12,7 @@ apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
     compileSdk 35
-    namespace 'it.niedermann.owncloud.notes'
+    namespace = 'it.niedermann.owncloud.notes'
 
     defaultConfig {
         applicationId "it.niedermann.owncloud.notes"
@@ -29,7 +29,7 @@ android {
     }
 
     compileOptions {
-        coreLibraryDesugaringEnabled true
+        coreLibraryDesugaringEnabled = true
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
@@ -39,13 +39,13 @@ android {
     }
 
     buildFeatures {
-        viewBinding true
-        buildConfig true
+        viewBinding = true
+        buildConfig = true
     }
 
     buildTypes {
         debug {
-            testCoverageEnabled true
+            testCoverageEnabled = true
         }
 
         release {
@@ -73,17 +73,17 @@ android {
 
     testOptions {
         unitTests {
-            includeAndroidResources true
+            includeAndroidResources = true
         }
     }
 
     lintOptions {
-        abortOnError false
+        abortOnError = false
         disable 'MissingTranslation'
     }
 
     androidResources {
-        generateLocaleConfig true
+        generateLocaleConfig = true
     }
 
     packagingOptions {
