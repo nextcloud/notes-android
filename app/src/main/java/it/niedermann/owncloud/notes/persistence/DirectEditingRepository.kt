@@ -40,6 +40,10 @@ class DirectEditingRepository private constructor(private val applicationContext
         return notesPath
             .flatMap { notesPath ->
                 val filesAPI = apiProvider.getFilesAPI(applicationContext, account)
+                if (filesAPI == null) {
+                    return@flatMap null
+                }
+
                 Single.fromCallable {
                     val call =
                         filesAPI.getDirectEditingUrl(
