@@ -6,7 +6,6 @@
  */
 package it.niedermann.owncloud.notes.edit;
 
-import static java.lang.Boolean.TRUE;
 import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
 import static it.niedermann.owncloud.notes.shared.util.WidgetUtil.pendingIntentFlagCompat;
 
@@ -154,6 +153,10 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
 
         isNew = false;
         note = originalNote = repo.getNoteById(noteId);
+        if (note == null) {
+            Log_OC.d(TAG, "remoteNoteId will be used to get note");
+            note = repo.getNoteByRemoteId(noteId);
+        }
     }
 
     private void createNewNote() {
@@ -306,24 +309,41 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
             shareNote();
             return false;
         } else if (itemId == MENU_ID_PIN) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                final var context = requireContext();
-                if (ShortcutManagerCompat.isRequestPinShortcutSupported(context)) {
-                    final var pinShortcutInfo = new ShortcutInfoCompat.Builder(context, String.valueOf(note.getId()))
-                            .setShortLabel(note.getTitle())
-                            .setIcon(IconCompat.createWithResource(context.getApplicationContext(), TRUE.equals(note.getFavorite()) ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_border_grey_ccc_24dp))
-                            .setIntent(new Intent(getActivity(), EditNoteActivity.class).putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId()).setAction(ACTION_SHORTCUT))
-                            .build();
-
-                    ShortcutManagerCompat.requestPinShortcut(context, pinShortcutInfo, PendingIntent.getBroadcast(context, 0, ShortcutManagerCompat.createShortcutResultIntent(context, pinShortcutInfo), pendingIntentFlagCompat(0)).getIntentSender());
-                } else {
-                    Log.i(TAG, "RequestPinShortcut is not supported");
-                }
-            }
-
+            pinNoteToHome();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void pinNoteToHome() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            return;
+        }
+
+        if (!ShortcutManagerCompat.isRequestPinShortcutSupported(requireContext())) {
+            Log.i(TAG, "RequestPinShortcut is not supported");
+            return;
+        }
+
+        final var iconId = note.getFavorite() ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_border_grey_ccc_24dp;
+        final var icon = IconCompat.createWithResource(requireContext().getApplicationContext(), iconId);
+        final var intent = new Intent(getActivity(), EditNoteActivity.class)
+                .putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getRemoteId())
+                .setAction(ACTION_SHORTCUT);
+        final var noteId = String.valueOf(note.getRemoteId());
+
+        final var pinShortcutInfo = new ShortcutInfoCompat.Builder(requireContext(), noteId)
+                .setShortLabel(note.getTitle())
+                .setIcon(icon)
+                .setIntent(intent)
+                .build();
+
+        final var broadcastIntent = ShortcutManagerCompat.createShortcutResultIntent(requireContext(), pinShortcutInfo);
+        final var intentFlag = pendingIntentFlagCompat(0);
+        final var intentSender = PendingIntent
+                .getBroadcast(requireContext(), 0, broadcastIntent, intentFlag)
+                .getIntentSender();
+        ShortcutManagerCompat.requestPinShortcut(requireContext(), pinShortcutInfo, intentSender);
     }
 
     protected void shareNote() {
