@@ -98,54 +98,82 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        executor.submit(() -> {
-            try {
-                final var ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext().getApplicationContext());
-                this.localAccount = repo.getAccountByName(ssoAccount.name);
+        setHasOptionsMenu(true);
 
-                if (savedInstanceState == null) {
-                    final long id = requireArguments().getLong(PARAM_NOTE_ID);
-                    if (id > 0) {
-                        final long accountId = requireArguments().getLong(PARAM_ACCOUNT_ID);
-                        if (accountId > 0) {
-                            /* Switch account if account id has been provided */
-                            this.localAccount = repo.getAccountById(accountId);
-                            SingleAccountHelper.commitCurrentAccount(requireContext().getApplicationContext(), localAccount.getAccountName());
-                        }
-                        isNew = false;
-                        note = originalNote = repo.getNoteById(id);
-                        requireActivity().runOnUiThread(() -> onNoteLoaded(note));
-                        requireActivity().invalidateOptionsMenu();
-                    } else {
-                        final var paramNote = (Note) requireArguments().getSerializable(PARAM_NEWNOTE);
-                        final var content = requireArguments().getString(PARAM_CONTENT);
-                        if (paramNote == null) {
-                            if (content == null) {
-                                throw new IllegalArgumentException(PARAM_NOTE_ID + " is not given, argument " + PARAM_NEWNOTE + " is missing and " + PARAM_CONTENT + " is missing.");
-                            } else {
-                                note = new Note(-1, null, Calendar.getInstance(), NoteUtil.generateNoteTitle(content), content, getString(R.string.category_readonly), false, null, DBStatus.VOID, -1, "", 0, false, false);
-                                requireActivity().runOnUiThread(() -> onNoteLoaded(note));
-                                requireActivity().invalidateOptionsMenu();
-                            }
-                        } else {
-                            paramNote.setStatus(DBStatus.LOCAL_EDITED);
-                            note = repo.addNote(localAccount.getId(), paramNote);
-                            originalNote = null;
-                            requireActivity().runOnUiThread(() -> onNoteLoaded(note));
-                            requireActivity().invalidateOptionsMenu();
-                        }
-                    }
+        executor.execute(() -> {
+            try {
+                initializeAccount();
+
+                if (savedInstanceState != null) {
+                    loadFromSavedState(savedInstanceState);
                 } else {
-                    note = (Note) savedInstanceState.getSerializable(SAVEDKEY_NOTE);
-                    originalNote = (Note) savedInstanceState.getSerializable(SAVEDKEY_ORIGINAL_NOTE);
-                    requireActivity().runOnUiThread(() -> onNoteLoaded(note));
-                    requireActivity().invalidateOptionsMenu();
+                    loadFromArguments();
                 }
+
+                requireActivity().runOnUiThread(() -> {
+                    onNoteLoaded(note);
+                    requireActivity().invalidateOptionsMenu();
+
+                    if (listener != null) {
+                        listener.onNoteUpdated(note);
+                    }
+                });
             } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
                Log_OC.e(TAG, e.getLocalizedMessage());
             }
         });
-        setHasOptionsMenu(true);
+    }
+
+    private void initializeAccount() throws NextcloudFilesAppAccountNotFoundException, NoCurrentAccountSelectedException {
+        final var ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext().getApplicationContext());
+        this.localAccount = repo.getAccountByName(ssoAccount.name);
+    }
+
+    private void loadFromSavedState(Bundle savedInstanceState) {
+        note = (Note) savedInstanceState.getSerializable(SAVEDKEY_NOTE);
+        originalNote = (Note) savedInstanceState.getSerializable(SAVEDKEY_ORIGINAL_NOTE);
+    }
+
+    private void loadFromArguments() {
+        final long noteId = requireArguments().getLong(PARAM_NOTE_ID);
+
+        if (noteId > 0) {
+            loadExistingNote(noteId);
+        } else {
+            createNewNote();
+        }
+    }
+
+    private void loadExistingNote(long noteId) {
+        // Switch account if provided
+        final long accountId = requireArguments().getLong(PARAM_ACCOUNT_ID);
+        if (accountId > 0) {
+            this.localAccount = repo.getAccountById(accountId);
+            SingleAccountHelper.commitCurrentAccount(requireContext().getApplicationContext(), localAccount.getAccountName());
+        }
+
+        isNew = false;
+        note = originalNote = repo.getNoteById(noteId);
+    }
+
+    private void createNewNote() {
+        final var paramNote = (Note) requireArguments().getSerializable(PARAM_NEWNOTE);
+        final var content = requireArguments().getString(PARAM_CONTENT);
+
+        if (paramNote != null) {
+            // Create from provided note
+            paramNote.setStatus(DBStatus.LOCAL_EDITED);
+            note = repo.addNote(localAccount.getId(), paramNote);
+            originalNote = null;
+        } else if (content != null) {
+            // Create from content string
+            note = new Note(-1, null, Calendar.getInstance(),
+                    NoteUtil.generateNoteTitle(content), content,
+                    getString(R.string.category_readonly), false, null,
+                    DBStatus.VOID, -1, "", 0, false, false);
+        } else {
+            throw new IllegalArgumentException("Missing required parameters: noteId, newNote, or content");
+        }
     }
 
     @Nullable
