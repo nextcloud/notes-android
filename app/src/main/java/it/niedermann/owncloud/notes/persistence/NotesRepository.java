@@ -355,6 +355,10 @@ public class NotesRepository {
         return db.getNoteDao().getNoteById(id);
     }
 
+    public Note getNoteByRemoteId(long id) {
+        return db.getNoteDao().getNoteByRemoteId(id);
+    }
+
     public LiveData<Integer> count$(long accountId) {
         return db.getNoteDao().count$(accountId);
     }
