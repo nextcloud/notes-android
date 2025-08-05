@@ -6,7 +6,6 @@
  */
 package it.niedermann.owncloud.notes.edit;
 
-import static java.lang.Boolean.TRUE;
 import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
 import static it.niedermann.owncloud.notes.shared.util.WidgetUtil.pendingIntentFlagCompat;
 
