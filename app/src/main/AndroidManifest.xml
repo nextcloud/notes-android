@@ -31,6 +31,7 @@
 
         <activity
             android:name=".main.MainActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/app_name"
             android:theme="@style/Theme.App.Starting"
             android:exported="true">
@@ -77,10 +78,12 @@
 
         <activity
             android:name=".exception.ExceptionActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/app_name" />
 
         <activity
             android:name=".FormattingHelpActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/action_formatting_help"
             android:parentActivityName=".main.MainActivity"
             android:windowSoftInputMode="stateHidden" />
@@ -88,18 +91,21 @@
         <activity
             android:name=".manageaccounts.ManageAccountsActivity"
             android:label="@string/manage_accounts"
+            android:configChanges="orientation|screenSize"
             android:parentActivityName=".main.MainActivity"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
             android:name=".preferences.PreferencesActivity"
             android:label="@string/action_settings"
+            android:configChanges="orientation|screenSize"
             android:parentActivityName=".main.MainActivity"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
             android:name=".edit.EditNoteActivity"
             android:label="@string/simple_edit"
+            android:configChanges="orientation|screenSize"
             android:parentActivityName=".main.MainActivity"
             android:windowSoftInputMode="stateHidden"
             android:exported="true">
@@ -126,6 +132,7 @@
 
         <activity
             android:name=".about.AboutActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/simple_about"
             android:parentActivityName=".main.MainActivity" />
 
