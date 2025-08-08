@@ -32,7 +32,7 @@
     <string name="menu_favorite">Favorito</string>
     <string name="menu_preview">Previsualizar</string>
     <string name="menu_share">Compartir</string>
-    <string name="common_loading">Cargando...</string>
+    <string name="common_loading">Cargando…</string>
 
 
     <string name="search_in_category">Buscar en %1$s</string>
@@ -40,14 +40,33 @@
 
     <string name="change_category_title">Escoge una categoría</string>
 
-    <string name="note_share_activity_shared_with_you">Compartido contigo por %1$s</string>
+    <!-- UsersAndGroupsSearchProvider -->
+    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
+    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
+
+    <!-- NoteShareActivity -->
+    <string name="note_share_activity_activity_icon_content_description">ícono de actividad de las notas</string>
+    <string name="note_share_activity_share_icon_content_description">ícono de recurso compartido de las notas</string>
+    <string name="note_share_activity_external_icon_content_description">ícono de recurso compartido externo de las notas</string>
+    <string name="note_share_activity_copy_icon_content_description">ícono de copiar recurso compartido de las notas</string>
+    <string name="note_share_activity_more_icon_content_description">ícono de compartir más para las notas</string>
+    <string name="note_share_activity_icon_content_description">ícono de recurso compartido para las notas</string>
+    <string name="note_share_activity_user_icon_content_description">ícono de compartir a usuario para las notas</string>
+    <string name="note_share_activity_contact_icon_content_description">ícono de compartir a un contacto para la nota</string>
+    <string name="note_share_activity_shared_with_you">Compartido con Ud. por %1$s</string>
     <string name="note_share_activity_share_note">Compartir nota</string>
-    <string name="note_share_activity_search_text">Nombre, ID de nube federada o dirección de correo electrónico...</string>
-    <string name="note_share_activity_share_link">Compartir enlace</string>
+    <string name="note_share_activity_search_text">Nombre, ID de nube federada o dirección de correo electrónico…</string>
+    <string name="note_share_activity_share_link">Enlace al recurso compartido</string>
     <string name="note_share_activity_resharing_not_allowed">La política de compartir o los permisos impiden volver a compartir</string>
     <string name="note_share_activity_could_not_retrieve_url">No se ha podido recuperar la URL</string>
-    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" ha sido compartido contigo.</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" ha sido compartido con Ud.</string>
     <string name="note_share_activity_contact_no_permission">Se requiere el permiso de contactos.</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">No tiene permitido crear un recurso compartido público</string>
+
+    <string name="note_share_created">Se creó el recurso compartido</string>
+    <string name="note_share_activity_cannot_created">No tiene permitido crear un recurso compartido.</string>
+
+
     <!-- NoteShareDetailActivity -->
     <string name="note_share_detail_activity_advanced_settings">Ajustes avanzados</string>
     <string name="note_share_detail_activity_share_via_link_hide_download">Ocultar descarga</string>
@@ -60,14 +79,16 @@
     <string name="note_share_detail_activity_send_share">Enviar recurso compartido</string>
     <string name="note_share_detail_activity_hint_name">Nombre</string>
     <string name="note_share_detail_activity_link_name">Nombre del enlace</string>
-    <string name="note_share_detail_activity_share_link_empty_password">Debes introducir una contraseña</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Debe introducir una contraseña</string>
     <string name="note_share_detail_activity_hint_password">Contraseña</string>
-    <string name="note_share_detail_activity_no_share_permission_selected">Por favor, selecciona al menos un permiso para compartir.</string>
-    <string name="note_share_detail_activity_label_empty">La etiqueta no puede quedar vacía</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Por favor, seleccione al menos un permiso para compartir.</string>
+    <string name="note_share_detail_activity_label_empty">La etiqueta no puede estar vacía</string>
     <string name="note_share_detail_activity_cancel">Cancelar</string>
+    <string name="note_share_detail_activity_create_share_error">Fallo al crear un recurso compartido</string>
+
     <!-- SharePasswordDialogFragment -->
     <string name="share_password_dialog_fragment_share_link_optional_password_title">Escriba un contraseña opcional</string>
-    <string name="share_password_dialog_fragment_skip">Saltar</string>
+    <string name="share_password_dialog_fragment_skip">Omitir</string>
 
     <string name="share_link_password_title">Introduzca una contraseña</string>
     <string name="common_ok">OK</string>
@@ -77,35 +98,36 @@
     <string name="no_email_app_available">No hay ninguna app disponible para manejar direciones de correo electrónico</string>
     <string name="no_actions">No hay acciones para este usuario</string>
 
+    <string name="failed_the_remove_share">Fallo al remover recurso compartido</string>
     <string name="email_pick_failed">Fallo al seleccionar dirección de correo.</string>
     <string name="failed_update_ui">Fallo al actualizar la UI</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">No hay ninguna aplicación disponible para seleccionar contactos</string>
     <string name="activity_chooser_title">Enviar enlace a…</string>
 
     <string name="activity_chooser_send_file_title">Enviar</string>
-    <string name="share_internal_link_to_folder_text">Los links compartidos internos solo funcionan para los usuarios con acceso a esta carpeta</string>
-    <string name="share_internal_link_to_file_text">Los links compartidos internos solo funcionan para los usuarios con acceso a este archivo</string>
-    <string name="share_internal_link">Compartir enlace interno</string>
+    <string name="share_internal_link_to_folder_text">Los enlaces a los recursos compartidos internos solo funcionan para los usuarios con acceso a esta carpeta</string>
+    <string name="share_internal_link_to_file_text">Los enlaces a los recursos compartidos internos solo funcionan para los usuarios con acceso a este archivo</string>
+    <string name="share_internal_link">Compartir enlace interno a recurso compartido</string>
     <string name="delete_link">Eliminar enlace</string>
     <string name="share_settings">Ajustes</string>
-    <string name="share_send_new_email">Enviar nuevo email</string>
+    <string name="share_send_new_email">Enviar un nuevo correo electrónico</string>
     <string name="share_dialog_title">Compartiendo</string>
     <string name="share_file">Compartir %1$s</string>
     <string name="share_expiration_date_label">Caduca el %1$s</string>
     <string name="share_expiration_date_format">%1$s</string>
-    <string name="share_no_expiration_date_label">Fijar fecha de caducidad</string>
-    <string name="share_via_link_section_title">Compartir enlace</string>
+    <string name="share_no_expiration_date_label">Establecer fecha de caducidad</string>
+    <string name="share_via_link_section_title">Enlace al recurso compartido</string>
     <string name="share_via_link_send_link_label">Enviar enlace</string>
     <string name="share_password_title">Protegido con contraseña</string>
-    <string name="share_no_password_title">Crear contraseña</string>
+    <string name="share_no_password_title">Establecer contraseña</string>
     <string name="share_with_title">Compartir con…</string>
     <string name="share_via_link_unset_password">Desconfigurar</string>
     <string name="add_another_public_share_link">Añadir otro enlace</string>
-    <string name="add_new_public_share">Añadir un nuevo enlace público</string>
+    <string name="add_new_public_share">Añadir un nuevo enlace público al recurso compartido</string>
     <string name="public_share_name">Nuevo nombre</string>
-    <string name="share_link_with_label">Link para compartir (%1$s)</string>
-    <string name="share_link">Compartir enlace</string>
-    <string name="allow_resharing">Permitir compartir</string>
+    <string name="share_link_with_label">Enlace al recurso compartido (%1$s)</string>
+    <string name="share_link">Enlace al recurso compartido</string>
+    <string name="allow_resharing">Permitir volver a compartir</string>
     <string name="link_share_view_only">Solo lectura</string>
     <string name="link_share_editing">Editando</string>
     <string name="link_share_allow_upload_and_editing">Permitir la subida y la edición</string>
@@ -115,7 +137,7 @@
     <string name="share_permission_can_edit">Puede editar</string>
     <string name="share_permission_file_drop">Entrega de archivos</string>
     <string name="share_permission_secure_file_drop">Entrega de archivos segura</string>
-    <string name="share_permissions">Permisos al compartir</string>
+    <string name="share_permissions">Permisos del recurso compartido</string>
     <plurals name="share_download_limit_description">
         <item quantity="one">Queda %1$d descarga</item>
         <item quantity="many">Quedan %1$d descargas</item>
@@ -131,7 +153,7 @@
     <string name="copy_link">Copiar enlace</string>
     <string name="share">Compartir</string>
     <string name="clipboard_text_copied">Enlace copiado</string>
-    <string name="clipboard_no_text_to_copy">No se ha recibido ningún mensaje para copiar al portapapeles</string>
+    <string name="clipboard_no_text_to_copy">No se ha recibido ningún texto para copiar al portapapeles</string>
     <string name="clipboard_unexpected_error">Error inesperado al copiar al portapapeles</string>
     <string name="clipboard_label">Texto copiado de %1$s</string>
 
@@ -181,10 +203,10 @@
     <string name="about_app_license_title">Licencia de la aplicación</string>
     <string name="about_app_license">Esta aplicación está bajo la Licencia Pública General GNU v3+.</string>
     <string name="about_app_license_button">Ver licencia</string>
-    <string name="about_icons_disclaimer_title">Iconos</string>
-    <string name="about_icons_disclaimer_app_icon">Mire %1$spara ver el icono original.</string>
-    <string name="about_icons_disclaimer_mdi_icons">Todos los demás iconos utilizados por esta aplicación %1$s están hechos por Google Inc. y tienen licencia de Apache 2.0.</string>
-    <string name="about_icons_disclaimer_mdi">Iconos Material Design</string>
+    <string name="about_icons_disclaimer_title">Íconos</string>
+    <string name="about_icons_disclaimer_app_icon">Para el ícono original vea %1$s.</string>
+    <string name="about_icons_disclaimer_mdi_icons">Todos los demás íconos utilizados por esta aplicación están %1$s hechos por Google Inc. y están bajo la licencia Apache 2.0.</string>
+    <string name="about_icons_disclaimer_mdi">Íconos de Diseño Material</string>
     <string name="about_credits_tab_title">Créditos</string>
     <string name="about_contribution_tab_title">Contribuir</string>
     <string name="about_license_tab_title">Licencia</string>
@@ -194,7 +216,7 @@
     <string name="widget_single_note_title">Nota única</string>
     <string name="widget_single_note_placeholder_tv">Nota no encontrada</string>
     <string name="widget_not_logged_in">Por favor, inicia sesión en Notas antes de usar este widget</string>
-    <string name="widget_entry_fav_contentDescription">El icono de estrella se usa para indicar que el elemento es un favorito</string>
+    <string name="widget_entry_fav_contentDescription">El ícono de estrella se usa para indicar que el elemento es un favorito</string>
 
     <string name="activity_select_single_note">Selecciona nota</string>
 
@@ -269,7 +291,7 @@
     <string name="error_dialog_insufficient_storage">Su instancia de Nextcloud no tiene espacio libre de almacenamiento. Por favor elimine algunos archivos para sincronizar sus cambios locales con su nube.</string>
     <string name="error_dialog_we_need_info">Necesitamos la siguiente información técnica para ayudarle:</string>
     <string name="error_dialog_server_app_enabled">Por favor, asegúrate de que has instalado y activado la app «Notas» en tu servidor.</string>
-    <string name="error_dialog_redirect">Su servidor respondió con el código de estado HTTP 302, lo que implica que no está instalada la aplicación Notas en su servidor o que algo está mal configurado. Esto puede estar causado por anulaciones personalizadas en un archivo .htaccess o por aplicaciones de Nextcloud como OID Client.</string>
+    <string name="error_dialog_redirect">Su servidor respondió con el código de estado HTTP 302, lo que implica que no está instalada la aplicación Notas en su servidor o que algo está mal configurado. Esto puede ser causado por cambios personalizadas en un archivo .htaccess o por aplicaciones de Nextcloud como OID Client.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Por favor, desactiva todas las optimizaciones de la batería para Nextcloud y la app de Notas.</string>
     <string name="error_dialog_min_version">La aplicación de Notas de Android requiere que la la aplicación Nextcloud de Android sea al menos la versión 3.18.</string>
     <string name="added_content">Se ha añadido «%1$s»</string>
@@ -284,8 +306,8 @@
     <string name="action_formatting_help">Formato</string>
 
 
-    <string name="noteMode_plain_edit">Modo de edición plano</string>
-    <string name="noteMode_plain_preview">Vista previa en plano</string>
+    <string name="noteMode_plain_edit">Modo de edición en texto plano</string>
+    <string name="noteMode_plain_preview">Vista previa en texto plano</string>
     <string name="noteMode_rich_edit">Modo de edición enriquecido</string>
     <string name="noteMode_remember_last">Recordar mi última selección</string>
 
@@ -370,7 +392,7 @@
     <!-- Table cell value of a sample table -->
     <string name="formatting_help_tables_value">Valor %1d</string>
 
-    <string name="formatting_help_images_body_1">Los enlaces deben ser URL completas que comiencen con un protocolo y dominio o rutas absolutas que comiencen con el caracter %1$s.</string>
+    <string name="formatting_help_images_body_1">Los enlaces deben ser o bien URL completas que comiencen con un protocolo y dominio, o, rutas absolutas que comiencen con el carácter %1$s.</string>
     <string name="formatting_help_images_body_2">Para cumplir con el formato Markdown, utilice caracteres de escape en la URL de la imagen. Esto significa, por ejemplo, reemplazar espacios con %1$s en la URL.</string>
     <string name="formatting_help_images_title">Imágenes</string>
     <string name="formatting_help_images_alt">Imagen elegante</string>
@@ -414,6 +436,6 @@
     <string name="progress_import">Importando nota %1$d de %2$d…</string>
     <string name="account_imported">Cuenta importada.</string>
     <string name="direct_editing_error">Error al cargar el modo de edición enriquecido</string>
-    <string name="switch_to_plain_editing">Cambiar a edición plana</string>
+    <string name="switch_to_plain_editing">Cambiar a edición en texto plano</string>
     <string name="action_back">Atrás</string>
     </resources>
