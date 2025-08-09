@@ -18,7 +18,7 @@
     <string name="action_sorting_method">Sortimismeetod</string>
     <string name="simple_cancel">Loobu</string>
     <string name="simple_switch">Vaheta</string>
-    <string name="simple_edit">Redigeeri</string>
+    <string name="simple_edit">Muuda</string>
     <string name="simple_remove">Eemalda</string>
     <string name="action_edit_save">Salvesta</string>
     <string name="simple_about">Info</string>
@@ -63,7 +63,7 @@
     <string name="note_share_activity_contact_no_permission">Vajalikud on õigused kontaktide kasutamiseks</string>
     <string name="note_share_activity_you_are_not_allowed_to_share">Sul pole luba avaliku jaosmeedia loomiseks</string>
 
-    <string name="note_share_created">Jaosmeedia on salvestatud</string>
+    <string name="note_share_created">Jaosmeedia on loodud</string>
     <string name="note_share_activity_cannot_created">Sul pole luba jaosmeedia loomiseks</string>
 
 
@@ -170,14 +170,14 @@
     <string name="settings_font_size">Kirjasuurus</string>
     <string name="settings_wifi_only">Sünkroonimine ainult Wi-Fi kaudu</string>
     <string name="settings_lock">Rakenduse lukustus (Beta)</string>
-    <string name="settings_lock_summary">Seadme mandaadid</string>
+    <string name="settings_lock_summary">Nutiseadmepõhine autentimine</string>
     <string name="settings_background_sync">Taustsünkroniseerimine</string>
-    <string name="settings_prevent_screen_capture">Vältida ekraani jäädvustamist</string>
+    <string name="settings_prevent_screen_capture">Takista ekraanitõmmiste tegemist</string>
     <string name="settings_gridview">Ruudustikvaade</string>
     <string name="settings_enable_direct_edit">Otsemuutmine</string>
     <string name="settings_enable_direct_edit_summary">Kui see valik pole kasutusel, siis lisavõimalustega tekstitoimeti pole kasutusel.</string>
     <string name="settings_keep_screen_on">Hoia ekraani sisse lülitatud</string>
-    <string name="settings_keep_screen_on_summary">Märke vaaramisel ja muutmisel</string>
+    <string name="settings_keep_screen_on_summary">Märke vaatamisel ja muutmisel</string>
 
     <string name="error_sync">Sünkroniseerimine ei õnnestunud: %1$s</string>
     <string name="error_synchronization">Sünkroniseerimine ei õnnestunud</string>
