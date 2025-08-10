@@ -51,6 +51,7 @@
     <string name="note_share_detail_activity_share_via_link_hide_download">Gjem nedlasting</string>
     <string name="note_share_detail_activity_share_send_note">Melding til mottaker</string>
     <string name="note_share_detail_activity_hint_note">Melding</string>
+    <string name="note_share_detail_activity_common_next">Neste</string>
     <string name="note_share_detail_activity_share_copy_link">Del og kopier kobling</string>
     <string name="note_share_detail_activity_common_confirm">Bekreft</string>
     <string name="note_share_detail_activity_set_note">Sett merknad</string>
@@ -62,6 +63,8 @@
     <string name="note_share_detail_activity_no_share_permission_selected">Velg minst en rettighet for å dele.</string>
     <string name="note_share_detail_activity_label_empty">Merkelapp kan ikke være tom</string>
     <string name="note_share_detail_activity_cancel">Avbryt</string>
+    <string name="note_share_detail_activity_create_share_error">Klarte ikke å opprette deling</string>
+
     <!-- SharePasswordDialogFragment -->
     <string name="share_password_dialog_fragment_share_link_optional_password_title">Skriv inn et valgfri passord</string>
     <string name="share_password_dialog_fragment_skip">Hopp over</string>
@@ -74,8 +77,11 @@
     <string name="no_email_app_available">Ingen program for å behandle e-post adresse</string>
     <string name="no_actions">Ingen hendelser for denne brukeren</string>
 
-    <string name="email_pick_failed">Kunne ikke velge e-postadresse.</string>
-    <string name="failed_update_ui">Kunne ikke oppdatere brukergrensesnittet</string>
+    <string name="failed_the_remove_share">Fjerning av deling feilet</string>
+    <string name="email_pick_failed">Valg av e-postadresse feilet</string>
+    <string name="failed_update_ui">Oppdatering av brukergrensesnittet feilet</string>
+    <string name="activity_chooser_title">Send lenke til…</string>
+
     <string name="activity_chooser_send_file_title">Send</string>
     <string name="share_internal_link_to_folder_text">Intern dele-link virker bare for brukere med tilgang til til denne mappen</string>
     <string name="share_internal_link_to_file_text">Intern dele-link virker bare for brukere med tilgang til til denne filen</string>
