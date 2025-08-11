@@ -53,6 +53,9 @@ public interface NoteDao {
     @Query(getNoteById)
     Note getNoteById(long id);
 
+    @Query("SELECT * FROM NOTE WHERE remoteId = :id")
+    Note getNoteByRemoteId(long id);
+
     @Query("SELECT remoteId FROM NOTE WHERE id = :id")
     Long getRemoteId(long id);
 
