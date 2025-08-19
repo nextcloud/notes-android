@@ -69,6 +69,12 @@ android {
         play {
             dimension "version"
         }
+        qa {
+            applicationIdSuffix ".qa"
+            dimension "version"
+            versionCode 11
+            versionName "1"
+        }
     }
 
     testOptions {
