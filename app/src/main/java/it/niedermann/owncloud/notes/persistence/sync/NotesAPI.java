@@ -15,6 +15,7 @@ import com.google.gson.annotations.Expose;
 import com.nextcloud.android.sso.api.EmptyResponse;
 import com.nextcloud.android.sso.api.NextcloudAPI;
 import com.nextcloud.android.sso.api.ParsedResponse;
+import com.nextcloud.android.sso.exceptions.NextcloudNetworkException;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -68,7 +69,7 @@ public class NotesAPI {
         }
     }
 
-    public Observable<ParsedResponse<List<Note>>> getNotes(@NonNull Calendar lastModified, String lastETag) {
+    public Observable<ParsedResponse<List<Note>>> getNotes(@NonNull Calendar lastModified, String lastETag) throws NextcloudNetworkException {
         if (ApiVersion.API_VERSION_1_0.equals(usedApiVersion)) {
             return notesAPI_1_0.getNotes(lastModified.getTimeInMillis() / 1_000, lastETag);
         } else if (ApiVersion.API_VERSION_0_2.equals(usedApiVersion)) {
