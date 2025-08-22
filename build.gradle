@@ -16,6 +16,7 @@ buildscript {
         kotlinVersion = '2.2.20'
         commonsVersion = '2.3.7'
 		androidCommonsVersion = '1.1.0'
+        singleSignOnVersion = "1d31061d17"
     }
     repositories {
         mavenCentral()

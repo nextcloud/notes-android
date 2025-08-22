@@ -87,8 +87,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
         // https://github.com/nextcloud/android/pull/8405#issuecomment-852966877
         final int minVersionCode = 30170090;
         try {
-            Optional<FilesAppType> prod = FilesAppTypeRegistry.getInstance().getTypes().stream().filter(t -> t.type == FilesAppType.Type.PROD).findFirst();
-            Optional<FilesAppType> dev = FilesAppTypeRegistry.getInstance().getTypes().stream().filter(t -> t.type == FilesAppType.Type.DEV).findFirst();
+            Optional<FilesAppType> prod = FilesAppTypeRegistry.getInstance().getTypes().stream().filter(t -> t.stage() == FilesAppType.Stage.PROD).findFirst();
+            Optional<FilesAppType> dev = FilesAppTypeRegistry.getInstance().getTypes().stream().filter(t -> t.stage() == FilesAppType.Stage.DEV).findFirst();
             if (prod.isPresent() && VersionCheckHelper.getNextcloudFilesVersionCode(context, prod.get()) > minVersionCode) {
                 return generateTrashbinAppIntent(context, account, prod.get());
             } else if (dev.isPresent() && VersionCheckHelper.getNextcloudFilesVersionCode(context, dev.get()) > minVersionCode) {
@@ -105,7 +105,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
 
     private static Intent generateTrashbinAppIntent(@NonNull Context context, @NonNull Account account, FilesAppType type) throws PackageManager.NameNotFoundException {
         final var packageManager = context.getPackageManager();
-        final String packageName = type.packageId;
+        final String packageName = type.packageId();
         final var intent = new Intent();
         intent.setClassName(packageName, "com.owncloud.android.ui.trashbin.TrashbinActivity");
         if (packageManager.resolveActivity(intent, 0) != null) {
