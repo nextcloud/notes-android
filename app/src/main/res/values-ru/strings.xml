@@ -48,6 +48,12 @@
     <string name="note_share_activity_could_not_retrieve_url">Не удалось получить URL</string>
     <string name="note_share_activity_subject_shared_with_you">Вам предоставлен доступ к «%1$s»</string>
     <string name="note_share_activity_contact_no_permission">Требуется разрешение на контакт.</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">Вам не разрешено создавать публичные общие ресурсы.</string>
+
+    <string name="note_share_created">Общий ресурс создан</string>
+    <string name="note_share_activity_cannot_created">Вам не разрешено создавать общие ресурсы.</string>
+
+
     <!-- NoteShareDetailActivity -->
     <string name="note_share_detail_activity_advanced_settings">Дополнительные настройки</string>
     <string name="note_share_detail_activity_share_via_link_hide_download">Скрыть загрузку</string>
@@ -65,6 +71,8 @@
     <string name="note_share_detail_activity_no_share_permission_selected">Пожалуйста, выберите хотя бы одно разрешение.</string>
     <string name="note_share_detail_activity_label_empty">Метка не может быть пустой</string>
     <string name="note_share_detail_activity_cancel">Отмена</string>
+    <string name="note_share_detail_activity_create_share_error">Не удалось создать общий ресурс</string>
+
     <!-- SharePasswordDialogFragment -->
     <string name="share_password_dialog_fragment_share_link_optional_password_title">Введите дополнительный пароль</string>
     <string name="share_password_dialog_fragment_skip">Пропустить</string>
@@ -77,9 +85,12 @@
     <string name="no_email_app_available">Нет приложения для электронной почты</string>
     <string name="no_actions">Нет действий для этого пользователя</string>
 
+    <string name="failed_the_remove_share">Не удалось удалить общий ресурс</string>
     <string name="email_pick_failed">Невозможно выбрать адрес электронной почты.</string>
     <string name="failed_update_ui">Не удалось обновить пользовательский интерфейс</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Приложение для выбора контактов недоступно</string>
+    <string name="activity_chooser_title">Отправить ссылку...</string>
+
     <string name="activity_chooser_send_file_title">Отправить</string>
     <string name="share_internal_link_to_folder_text">Внутренние ссылки могут быть использованы только пользователями, у которых есть доступ к этой папке</string>
     <string name="share_internal_link_to_file_text">Внутренние ссылки могут быть использованы только пользователями, у которых есть доступ к этому файлу</string>
