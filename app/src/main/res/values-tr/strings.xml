@@ -152,9 +152,9 @@
     <string name="copy_link">Bağlantıyı kopyala</string>
     <string name="share">Paylaşma</string>
     <string name="clipboard_text_copied">Bağlantı kopyalandı</string>
-    <string name="clipboard_no_text_to_copy">Panoya kopyalanacak bir metin alınamadı</string>
+    <string name="clipboard_no_text_to_copy">Panoya kopyalanacak bir yazı alınamadı</string>
     <string name="clipboard_unexpected_error">Panoya kopyalama sırasında beklenmeyen bir sorun çıktı</string>
-    <string name="clipboard_label">Metin %1$s kaynağından kopyalandı</string>
+    <string name="clipboard_label">Yazı %1$s kaynağından kopyalandı</string>
 
     <string name="listview_updated_today">Bugün</string>
     <string name="listview_updated_yesterday">Dün</string>
@@ -294,7 +294,7 @@
     <string name="error_dialog_tip_disable_battery_optimizations">Lütfen Nextcloud ve Notlar uygulaması için tüm pil iyileştirmelerini kapatın.</string>
     <string name="error_dialog_min_version">Notlar Android uygulamasının çalışması için Nextcloud Android uygulamasının en az 3.18 sürümü gereklidir</string>
     <string name="added_content">\"%1$s\" eklendi</string>
-    <string name="shared_text_empty">Paylaşılan metin boş</string>
+    <string name="shared_text_empty">Paylaşılan yazı boş</string>
     <string name="append_to_note">Nota ekle</string>
     <string name="change_note_title">Not başlığını değiştir</string>
     <string name="menu_edit_title">Başlığı düzenle</string>
@@ -307,7 +307,7 @@
 
     <string name="noteMode_plain_edit">Yalın düzenleme kipi</string>
     <string name="noteMode_plain_preview">Yalın ön izleme</string>
-    <string name="noteMode_rich_edit">Zengin metin düzenleme kipi</string>
+    <string name="noteMode_rich_edit">Zengin yazı düzenleme kipi</string>
     <string name="noteMode_remember_last">Son seçimim hatırlansın</string>
 
     <string-array name="fontSize_entries">
@@ -346,10 +346,10 @@
     <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Bağlama göre biçimlendirme</string>
-    <string name="formatting_help_cbf_body_1">Notlar uygulamasının önemli bir tasarım amacı, dikkat dağıtmayan bir araç sağlamaktır. Yine de metinlerinizi Markdown kullanarak biçimlendirebilirsiniz. Aşağıdaki örneklerden bazılarında kısayol tuşlarını kullanarak notlarınızı aşağıdaki kodları yazmadan biçimlendirebilirsiniz.</string>
-    <string name="formatting_help_cbf_body_2">Yalnızca bir metin bölümü seçerek ya da herhangi bir konumda imlece dokunarak varsayılan kayıtların yanında açılan menüden %1$s, %2$s, %3$s, %4$s gibi kayıtlar ya da %5$s seçenekleri kullanabilirsiniz.</string>
+    <string name="formatting_help_cbf_body_1">Notlar uygulamasının önemli bir tasarım amacı, dikkat dağıtmayan bir araç sağlamaktır. Yine de yazılarınızı Markdown kullanarak biçimlendirebilirsiniz. Aşağıdaki örneklerden bazılarında kısayol tuşlarını kullanarak notlarınızı aşağıdaki kodları yazmadan biçimlendirebilirsiniz.</string>
+    <string name="formatting_help_cbf_body_2">Yalnızca bir yazı bölümü seçerek ya da herhangi bir konumda imlece dokunarak varsayılan kayıtların yanında açılan menüden %1$s, %2$s, %3$s, %4$s gibi kayıtlar ya da %5$s seçenekleri kullanabilirsiniz.</string>
 
-    <string name="formatting_help_text_title">Metin</string>
+    <string name="formatting_help_text_title">Yazı</string>
     <string name="formatting_help_text_body">Markdown ile bazı sözcükleri %1$skalın%1$s ya da %2$syatık%2$s yapmak çok kolaydır. Bazı sözcüklerin %3$süzerini çizebilir%3$s ve [Nextcloud bağlantısı](https://nextcloud.com) gibi bağlantı verebilirsiniz.</string>
 
     <string name="formatting_help_lists_title">Listeler</string>
