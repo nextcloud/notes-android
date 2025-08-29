@@ -366,4 +366,79 @@ public class CapabilitiesDeserializerTest {
         assertFalse("Wrongly reporting that direct editing is supported", capabilities1.isDirectEditingAvailable());
 
     }
+
+
+    @Test
+    public void testSharingDisabled() {
+        //language=json
+        final String response = "" +
+                "{" +
+                "    \"version\": {" +
+                "        \"major\": 20," +
+                "        \"minor\": 0," +
+                "        \"micro\": 7," +
+                "        \"string\": \"20.0.7\"," +
+                "        \"edition\": \"\"," +
+                "        \"extendedSupport\": false" +
+                "    }," +
+                "    \"capabilities\": {" +
+                "        \"core\": {" +
+                "            \"pollinterval\": 60," +
+                "            \"webdav-root\": \"remote.php/webdav\"" +
+                "        }," +
+                "        \"notes\": {" +
+                "            \"api_version\": [" +
+                "                \"0.2\"," +
+                "                \"1.1\"" +
+                "            ]," +
+                "            \"version\": \"4.0.4\"" +
+                "        }," +
+                "        \"files_sharing\": {" +
+                "            \"api_enabled\": true," +
+                "            \"public\": {" +
+                "                \"enabled\": false," +
+                "                \"expire_date\": {" +
+                "                    \"enabled\": false" +
+                "                }," +
+                "                \"multiple_links\": true," +
+                "                \"expire_date_internal\": {" +
+                "                    \"enabled\": false" +
+                "                }," +
+                "                \"send_mail\": false," +
+                "                \"upload\": true," +
+                "                \"upload_files_drop\": true" +
+                "            }," +
+                "            \"resharing\": false," +
+                "            \"user\": {" +
+                "                \"send_mail\": false," +
+                "                \"expire_date\": {" +
+                "                    \"enabled\": true" +
+                "                }" +
+                "            }," +
+                "            \"group_sharing\": false," +
+                "            \"group\": {" +
+                "                \"enabled\": true," +
+                "                \"expire_date\": {" +
+                "                    \"enabled\": true" +
+                "                }" +
+                "            }," +
+                "            \"default_permissions\": 31," +
+                "            \"federation\": {" +
+                "                \"outgoing\": true," +
+                "                \"incoming\": true," +
+                "                \"expire_date\": {" +
+                "                    \"enabled\": true" +
+                "                }" +
+                "            }," +
+                "            \"sharee\": {" +
+                "                \"query_lookup_default\": false" +
+                "            }" +
+                "        }" +
+                "    }" +
+                "}";
+        final var capabilities = deserializer.deserialize(JsonParser.parseString(response), null, null);
+        assertNull(capabilities.getETag());
+        assertEquals("[\"0.2\",\"1.1\"]", capabilities.getApiVersion());
+        assertFalse("Wrongly reporting that direct editing is supported", capabilities.isDirectEditingAvailable());
+    }
 }
