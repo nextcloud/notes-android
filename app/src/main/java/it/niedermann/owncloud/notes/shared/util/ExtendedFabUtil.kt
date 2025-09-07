@@ -25,18 +25,22 @@ object ExtendedFabUtil {
                 extendedFab.hide()
             } else {
                 if (extendedFab.animation == null) {
-                    val animation = AnimationUtils.loadAnimation(
-                        extendedFab.context,
-                        R.anim.abc_shrink_fade_out_from_bottom,
-                    )
-                    animation.setAnimationListener(object : Animation.AnimationListener {
-                        override fun onAnimationStart(animation: Animation) {}
-                        override fun onAnimationEnd(animation: Animation) {
-                            extendedFab.visibility = View.GONE
-                        }
+                    val animation =
+                        AnimationUtils.loadAnimation(
+                            extendedFab.context,
+                            R.anim.design_bottom_sheet_slide_out,
+                        )
+                    animation.setAnimationListener(
+                        object : Animation.AnimationListener {
+                            override fun onAnimationStart(animation: Animation) {}
 
-                        override fun onAnimationRepeat(animation: Animation) {}
-                    })
+                            override fun onAnimationEnd(animation: Animation) {
+                                extendedFab.visibility = View.GONE
+                            }
+
+                            override fun onAnimationRepeat(animation: Animation) {}
+                        },
+                    )
                     extendedFab.startAnimation(animation)
                 }
             }
