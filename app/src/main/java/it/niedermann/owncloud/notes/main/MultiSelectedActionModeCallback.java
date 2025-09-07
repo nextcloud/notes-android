@@ -80,7 +80,7 @@ public class MultiSelectedActionModeCallback implements Callback {
         this.fragmentManager = fragmentManager;
 
         final TypedValue typedValue = new TypedValue();
-        context.getTheme().resolveAttribute(com.google.android.material.R.attr.colorAccent, typedValue, true);
+        context.getTheme().resolveAttribute(com.google.android.material.R.attr.colorSecondary, typedValue, true);
         colorAccent = typedValue.data;
     }
 

@@ -31,7 +31,9 @@ import kotlinx.coroutines.launch
  * @see BrandingUtil for brand color resolution and application.
  * @see Branded for the interface definition related to branding behavior.
  */
-abstract class BrandedFragment : Fragment(), Branded {
+abstract class BrandedFragment :
+    Fragment(),
+    Branded {
     @JvmField
     @ColorInt
     protected var colorAccent: Int = 0
@@ -55,16 +57,16 @@ abstract class BrandedFragment : Fragment(), Branded {
         val typedValue = TypedValue()
 
         context.theme.resolveAttribute(
-            com.google.android.material.R.attr.colorAccent,
+            com.google.android.material.R.attr.colorSecondary,
             typedValue,
-            true
+            true,
         )
         colorAccent = typedValue.data
 
         context.theme.resolveAttribute(
-            com.google.android.material.R.attr.colorPrimary,
+            com.google.android.material.R.attr.colorPrimaryContainer,
             typedValue,
-            true
+            true,
         )
         colorPrimary = typedValue.data
 
@@ -75,7 +77,10 @@ abstract class BrandedFragment : Fragment(), Branded {
 
     @Suppress("DEPRECATION")
     @Deprecated("Deprecated in Java")
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    override fun onCreateOptionsMenu(
+        menu: Menu,
+        inflater: MenuInflater,
+    ) {
         super.onCreateOptionsMenu(menu, inflater)
         val utils = BrandingUtil.of(colorAccent, requireContext())
 
