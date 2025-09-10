@@ -286,7 +286,7 @@
     <string name="error_dialog_timeout_instance">Le serveur n’a pas répondu dans le temps imparti. Assurez-vous que votre instance fonctionne correctement.</string>
     <string name="error_dialog_timeout_toggle">Vérifiez votre connexion réseau. L\'activation et la désactivation des données mobiles ou du Wi-Fi peuvent aider.</string>
     <string name="error_dialog_check_server">Le serveur a renvoyé une réponse incorrecte. Vérifier si vous pouvez accéder à vos notes via l\'interface Web.</string>
-    <string name="error_dialog_check_server_logs">Il y a un problème avec votre configuration Nextcloud. Consulter les fichiers journaux du serveur.</string>
+    <string name="error_dialog_check_server_logs">Il y a un problème avec votre configuration Nextcloud. Consulter les fichiers de log du serveur.</string>
     <string name="error_dialog_check_maintenance">Vérifier si votre instance Nextcloud n\'est pas actuellement en mode maintenance.</string>
     <string name="error_dialog_insufficient_storage">Votre instance Nextcloud n\'a plus d\'espace disponible. Veuillez supprimer certains fichiers pour pouvoir synchroniser vos modifications locales dans votre cloud.</string>
     <string name="error_dialog_we_need_info">Nous avons besoin des informations techniques suivantes pour pouvoir vous aider :</string>
@@ -431,7 +431,7 @@
     <string name="settings_file_suffix">Extension de fichier</string>
     <string name="settings_file_suffix_description">Extension de fichier pour les nouvelles notes dans votre Nextcloud</string>
     <string name="settings_file_suffix_success">Nouveau suffixe de fichier : %1$s</string>
-    <string name="http_status_code">État HTTP : %1$d</string>
+    <string name="http_status_code">Code de statut HTTP : %1$d</string>
     <string name="progress_import_indeterminate">Importation des notes...</string>
     <string name="progress_import">Importation de la note %1$d sur %2$d...</string>
     <string name="account_imported">Compte importé.</string>
