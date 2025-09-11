@@ -226,7 +226,7 @@ abstract class NotesServerSyncTask extends Thread {
                 return false;
             }
 
-            final var fetchResponse = notesAPI.getNotes(localAccount.getModified(), localAccount.getETag()).blockingSingle();
+            final var fetchResponse = notesAPI.getNotes(modified, localAccount.getETag()).blockingSingle();
             final var remoteNotes = fetchResponse.getResponse();
             final var remoteIDs = new HashSet<Long>();
             // pull remote changes: update or create each remote note

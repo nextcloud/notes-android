@@ -88,6 +88,7 @@ public class NotesServerSyncTaskTest {
 
     @Test
     public void testPullRemoteChanges() {
+        when(account.getModified()).thenReturn(Calendar.getInstance());
         when(repo.getAccountById(anyLong())).thenReturn(account);
         when(repo.getIdMap(anyLong())).thenReturn(Map.of(1000L, 1L, 2000L, 2L));
         when(repo.updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(anyLong(), anyLong(), anyString(), anyBoolean(), anyString(), anyString(), anyString(), anyString())).thenReturn(1);
