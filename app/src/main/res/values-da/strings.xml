@@ -18,7 +18,7 @@
     <string name="action_sorting_method">Sorteringsmetode</string>
     <string name="simple_cancel">Annuller</string>
     <string name="simple_switch">Byt rundt</string>
-    <string name="simple_edit">Rediger</string>
+    <string name="simple_edit">Redigér</string>
     <string name="simple_remove">Fjern</string>
     <string name="action_edit_save">Gem</string>
     <string name="simple_about">Om</string>
@@ -275,7 +275,7 @@
     <string name="shared_text_empty">Den delte tekst var tom</string>
     <string name="append_to_note">Tilføj til note</string>
     <string name="change_note_title">Skift titel på note</string>
-    <string name="menu_edit_title">Rediger titel</string>
+    <string name="menu_edit_title">Redigér titel</string>
     <string name="simple_security">Sikkerhed</string>
     <string name="appearance_and_behavior">Udseende og adfærd</string>
     <string name="simple_synchronization">Synkronisering</string>
@@ -376,7 +376,7 @@
     <string name="error_action_open_battery_settings">Batteriindstillinger</string>
     <string name="error_action_open_deck_info">Åbn App info</string>
     <string name="error_action_open_network">Netværksindstillinger</string>
-    <string name="error_action_update_files_app">Opdater</string>
+    <string name="error_action_update_files_app">Opdatér</string>
     <string name="no_account_configured_yet">Ingen konto konfigureret endnu</string>
     <string name="no_other_accounts">Du har ikke konfigureret andre konti endnu.</string>
     <string name="choose_account">Vælg konto</string>
