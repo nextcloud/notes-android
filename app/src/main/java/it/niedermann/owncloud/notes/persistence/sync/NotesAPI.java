@@ -69,7 +69,7 @@ public class NotesAPI {
         }
     }
 
-    public Observable<ParsedResponse<List<Note>>> getNotes(@NonNull Calendar lastModified, String lastETag) throws NextcloudNetworkException {
+    public Observable<ParsedResponse<List<Note>>> getNotes(@NonNull Calendar lastModified, String lastETag) {
         if (ApiVersion.API_VERSION_1_0.equals(usedApiVersion)) {
             return notesAPI_1_0.getNotes(lastModified.getTimeInMillis() / 1_000, lastETag);
         } else if (ApiVersion.API_VERSION_0_2.equals(usedApiVersion)) {
