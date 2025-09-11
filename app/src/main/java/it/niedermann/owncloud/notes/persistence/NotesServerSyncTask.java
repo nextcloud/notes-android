@@ -292,10 +292,10 @@ abstract class NotesServerSyncTask extends Thread {
                     }
                 } else if (cause.getClass() == NextcloudApiNotRespondingException.class || cause instanceof NextcloudApiNotRespondingException) {
                     apiProvider.invalidateAPICache(ssoAccount);
+                } else if (cause.getClass() == NextcloudNetworkException.class) {
+                    Log.w(TAG, "Network connectivity issue during sync");
+                    return true;
                 }
-            } else if (t.getClass() == NextcloudNetworkException.class) {
-                Log.w(TAG, "Network connectivity issue during sync");
-                return true;
             }
 
             exceptions.add(t);
