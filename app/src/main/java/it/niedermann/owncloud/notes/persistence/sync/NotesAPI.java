@@ -15,6 +15,7 @@ import com.google.gson.annotations.Expose;
 import com.nextcloud.android.sso.api.EmptyResponse;
 import com.nextcloud.android.sso.api.NextcloudAPI;
 import com.nextcloud.android.sso.api.ParsedResponse;
+import com.nextcloud.android.sso.exceptions.NextcloudNetworkException;
 
 import java.util.Calendar;
 import java.util.HashMap;

@@ -6,18 +6,25 @@
  */
 package it.niedermann.owncloud.notes.persistence;
 
+import static java.net.HttpURLConnection.HTTP_NOT_FOUND;
+import static java.net.HttpURLConnection.HTTP_NOT_MODIFIED;
+import static java.net.HttpURLConnection.HTTP_UNAVAILABLE;
+import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_DELETED;
+import static it.niedermann.owncloud.notes.shared.util.NoteUtil.generateNoteExcerpt;
+
 import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import com.nextcloud.android.sso.AccountImporter;
-import com.nextcloud.android.sso.api.ParsedResponse;
 import com.nextcloud.android.sso.exceptions.NextcloudApiNotRespondingException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
+import com.nextcloud.android.sso.exceptions.NextcloudNetworkException;
 import com.nextcloud.android.sso.exceptions.TokenMismatchException;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
+import com.owncloud.android.lib.common.utils.Log_OC;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -26,7 +33,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import it.niedermann.owncloud.notes.BuildConfig;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
@@ -36,13 +42,6 @@ import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.model.SyncResultStatus;
 import it.niedermann.owncloud.notes.shared.util.ApiVersionUtil;
-import retrofit2.Response;
-
-import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_DELETED;
-import static it.niedermann.owncloud.notes.shared.util.NoteUtil.generateNoteExcerpt;
-import static java.net.HttpURLConnection.HTTP_NOT_FOUND;
-import static java.net.HttpURLConnection.HTTP_NOT_MODIFIED;
-import static java.net.HttpURLConnection.HTTP_UNAVAILABLE;
 
 
 /**
@@ -221,8 +220,13 @@ abstract class NotesServerSyncTask extends Thread {
             }
             localAccount.setModified(accountFromDatabase.getModified());
             localAccount.setETag(accountFromDatabase.getETag());
+            final var modified = localAccount.getModified();
+            if (modified == null) {
+                Log_OC.e(TAG, "modified is null cannot fetch notes");
+                return false;
+            }
 
-            final var fetchResponse = notesAPI.getNotes(localAccount.getModified(), localAccount.getETag()).blockingSingle();
+            final var fetchResponse = notesAPI.getNotes(modified, localAccount.getETag()).blockingSingle();
             final var remoteNotes = fetchResponse.getResponse();
             final var remoteIDs = new HashSet<Long>();
             // pull remote changes: update or create each remote note
@@ -288,8 +292,12 @@ abstract class NotesServerSyncTask extends Thread {
                     }
                 } else if (cause.getClass() == NextcloudApiNotRespondingException.class || cause instanceof NextcloudApiNotRespondingException) {
                     apiProvider.invalidateAPICache(ssoAccount);
+                } else if (cause.getClass() == NextcloudNetworkException.class) {
+                    Log.w(TAG, "Network connectivity issue during sync");
+                    return true;
                 }
             }
+
             exceptions.add(t);
             return false;
         }

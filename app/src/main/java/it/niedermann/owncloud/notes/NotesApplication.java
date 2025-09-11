@@ -61,7 +61,7 @@ public class NotesApplication extends Application {
             return;
         }
 
-        FilesAppTypeRegistry.getInstance().init(new FilesAppType(packageId, accountType, FilesAppType.Type.PROD));
+        FilesAppTypeRegistry.getInstance().init(new FilesAppType(packageId, accountType, FilesAppType.Stage.PROD));
     }
 
     public static BrandingUtil brandingUtil() {
