@@ -43,6 +43,7 @@
     <string name="note_share_activity_share_link">Havolani ulashing</string>
     <!-- NoteShareDetailActivity -->
     <string name="note_share_detail_activity_advanced_settings">Kengaytirilgan sozlamalar</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Yuklashni yashirish</string>
     <string name="note_share_detail_activity_common_next">Keyingisi</string>
     <string name="note_share_detail_activity_common_confirm">Tasdiqlang</string>
     <string name="note_share_detail_activity_hint_name">Nomi</string>
