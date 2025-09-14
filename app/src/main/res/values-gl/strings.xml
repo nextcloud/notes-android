@@ -374,7 +374,7 @@
     <string name="formatting_help_structured_documents_body_3">Pode empregar un %1$s ata  %2$s seis para diferentes tamaños de cabeceira.</string>
     <string name="formatting_help_structured_documents_body_4">Se desexa citar a alguén, use o carácter %1$s antes da liña:</string>
     <string name="formatting_help_structured_documents_body_5">A imaxinación é máis importante que o coñecemento. O coñecemento é limitado. A imaxinación rodea o mundo.</string>
-    <string name="formatting_help_structured_documents_body_6">– Albert Einstein</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
 
     <string name="formatting_help_code_title">Código</string>
     <string name="formatting_help_code_body_1">Hai moitos xeitos diferentes de estilo de código con Markdown. Se ten bloques de código en liña, envólvaos en remates «```» (símbolos acento grave):</string>
