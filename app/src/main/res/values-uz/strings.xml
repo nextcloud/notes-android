@@ -40,10 +40,38 @@
 
     <string name="change_category_title">Kategoriyani tanlang</string>
 
+    <!-- UsersAndGroupsSearchProvider -->
+    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
+    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
+
+    <!-- NoteShareActivity -->
+    <string name="note_share_activity_activity_icon_content_description">qayd harakat belgisi</string>
+    <string name="note_share_activity_share_icon_content_description">qayd almashish belgisi</string>
+    <string name="note_share_activity_external_icon_content_description">qayd almashish tashqi belgisi</string>
+    <string name="note_share_activity_copy_icon_content_description">qayd almashish nusxasi belgisi</string>
+    <string name="note_share_activity_more_icon_content_description">eslatmani koʻproq ulashing</string>
+    <string name="note_share_activity_icon_content_description">qayd almashish belgisi</string>
+    <string name="note_share_activity_user_icon_content_description">qayd almashish foydalanuvchi belgisi</string>
+    <string name="note_share_activity_contact_icon_content_description">qayd almashish kontakt belgisi</string>
+    <string name="note_share_activity_shared_with_you">%1$s sizga ulashdi</string>
+    <string name="note_share_activity_share_note">Eslatmani ulashish</string>
+    <string name="note_share_activity_search_text">Ism, Federatsiya bulutli identifikatori yoki elektron pochta manzili…</string>
     <string name="note_share_activity_share_link">Havolani ulashing</string>
+    <string name="note_share_activity_resharing_not_allowed">Siyosat yoki ruxsatlar qayta ulashishni taqiqlaydi</string>
+    <string name="note_share_activity_could_not_retrieve_url">URL manzilni olib bo‘lmadi</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" sizga ulashildi</string>
+    <string name="note_share_activity_contact_no_permission">Aloqa ruxsati talab qilinadi.</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">Ommaviy ulush yaratishga ruxsat berilmagan.</string>
+
+    <string name="note_share_created">Ulashish yaratildi</string>
+    <string name="note_share_activity_cannot_created">Ulanish yaratishga ruxsat berilmagan.</string>
+
+
     <!-- NoteShareDetailActivity -->
     <string name="note_share_detail_activity_advanced_settings">Kengaytirilgan sozlamalar</string>
     <string name="note_share_detail_activity_share_via_link_hide_download">Yuklashni yashirish</string>
+    <string name="note_share_detail_activity_share_send_note">Qabul qiluvchiga eslatma</string>
+    <string name="note_share_detail_activity_hint_note">Eslatma</string>
     <string name="note_share_detail_activity_common_next">Keyingisi</string>
     <string name="note_share_detail_activity_common_confirm">Tasdiqlang</string>
     <string name="note_share_detail_activity_hint_name">Nomi</string>
@@ -64,6 +92,7 @@
     <string name="add_new_public_share">Yangi umumiy ulashish havolasini qo\'shing</string>
     <string name="share_link">Havolani ulashing</string>
     <string name="allow_resharing">Qayta almashishga ruxsat bering</string>
+    <string name="link_share_editing">Tahrirlash</string>
     <string name="link_share_allow_upload_and_editing">Yuklash va tahrirlashga ruxsat bering</string>
     <string name="link_share_file_drop">Fayl tushishi (faqat yuklash)</string>
     <string name="share_permission_can_edit">tahrirlashi mumkin</string>
