@@ -49,8 +49,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:baselineAligned="false"
-            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <FrameLayout
@@ -77,10 +75,11 @@
                     app:srcCompat="@drawable/ic_sync_blue_18dp" />
             </FrameLayout>
 
-            <FrameLayout
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_marginTop="@dimen/spacer_2x"
+                android:orientation="vertical">
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/noteCategory"
@@ -104,7 +103,17 @@
                     app:textStartPadding="0dp"
                     tools:maxLength="50"
                     tools:text="@tools:sample/lorem/random" />
-            </FrameLayout>
+
+                <TextView
+                    android:id="@+id/noteModified"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:paddingStart="@dimen/spacer_1hx"
+                    android:paddingEnd="@dimen/spacer_2x"
+                    tools:text="27.11." />
+
+            </LinearLayout>
 
             <ImageView
                 android:id="@+id/custom_checkbox"

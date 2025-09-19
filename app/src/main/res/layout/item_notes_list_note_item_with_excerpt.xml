@@ -9,11 +9,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/noteSwipeFrame"
-    android:clickable="true"
-    android:focusable="true"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/bg_attention">
+    android:background="@color/bg_attention"
+    android:clickable="true"
+    android:focusable="true">
 
     <ImageView
         android:id="@+id/noteFavoriteLeft"
@@ -28,8 +28,9 @@
         android:id="@+id/noteDeleteRight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end|center_vertical"
-        android:layout_marginEnd="@dimen/button_padding"
+        android:layout_gravity="end|top"
+        android:layout_marginEnd="@dimen/spacer_1x"
+        android:layout_marginTop="@dimen/spacer_1x"
         android:contentDescription="@string/menu_delete"
         app:srcCompat="@drawable/ic_delete_white_24dp" />
 
@@ -72,8 +73,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:paddingStart="0dp"
             android:paddingVertical="@dimen/spacer_2x"
+            android:paddingStart="0dp"
             android:paddingEnd="@dimen/spacer_2x">
 
             <LinearLayout
@@ -115,8 +116,8 @@
                     android:layout_marginStart="@dimen/spacer_1x"
                     android:background="@drawable/border"
                     android:maxLines="1"
-                    android:paddingVertical="1dp"
                     android:paddingHorizontal="@dimen/spacer_1x"
+                    android:paddingVertical="1dp"
                     android:singleLine="true"
                     android:textColor="?android:textColorPrimary"
                     android:textSize="@dimen/secondary_font_size"
@@ -125,17 +126,35 @@
             </LinearLayout>
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/custom_checkbox"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="top"
-            android:clickable="false"
-            android:contentDescription="@null"
-            android:focusable="false"
-            android:paddingStart="@dimen/spacer_1x"
-            android:paddingEnd="@dimen/spacer_1x"
-            android:src="@drawable/ic_checkbox_blank_outline" />
-    </LinearLayout>
+            android:gravity="bottom"
+            android:orientation="vertical">
 
+            <ImageView
+                android:id="@+id/custom_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:clickable="false"
+                android:contentDescription="@null"
+                android:focusable="false"
+                android:paddingStart="@dimen/spacer_1x"
+                android:paddingEnd="@dimen/spacer_1x"
+                android:src="@drawable/ic_checkbox_blank_outline" />
+
+            <TextView
+                android:id="@+id/noteModified"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:paddingStart="@dimen/zero"
+                android:paddingTop="@dimen/spacer_1x"
+                android:paddingEnd="@dimen/spacer_1x"
+                android:paddingBottom="@dimen/spacer_2x"
+                tools:text="27.11." />
+
+        </LinearLayout>
+    </LinearLayout>
 </FrameLayout>
