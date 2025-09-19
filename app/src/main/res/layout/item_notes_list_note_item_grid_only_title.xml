@@ -15,62 +15,112 @@
     app:cardCornerRadius="@dimen/card_radius">
 
     <LinearLayout
-        android:id="@+id/wrapper"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:paddingBottom="@dimen/spacer_1x">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacer_2x"
+        android:orientation="vertical">
 
-        <FrameLayout
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/noteTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacer_2x"
+                android:layout_marginTop="@dimen/spacer_2x"
+                android:hyphenationFrequency="full"
+                android:textAppearance="?attr/textAppearanceHeadline5"
+                android:textColor="@color/fg_default"
+                tools:maxLength="50"
+                tools:text="@tools:sample/lorem/random" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacer_1qx">
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/noteFavorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/menu_favorite"
+                    android:padding="@dimen/spacer_2x"
+                    tools:src="@drawable/ic_star_yellow_24dp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/noteStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="4dp"
+                    android:baseline="14dp"
+                    app:srcCompat="@drawable/ic_sync_blue_18dp" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacer_2x"
+                android:orientation="vertical">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/noteCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="@dimen/spacer_2x"
+                    android:ellipsize="middle"
+                    android:padding="@dimen/spacer_1hx"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="@dimen/secondary_font_size"
+                    app:chipBackgroundColor="@color/defaultBrand"
+                    app:chipEndPadding="@dimen/spacer_1x"
+                    app:chipMinHeight="0dp"
+                    app:chipStartPadding="@dimen/spacer_1x"
+                    app:chipStrokeColor="@android:color/transparent"
+                    app:chipStrokeWidth="1dp"
+                    app:ensureMinTouchTargetSize="false"
+                    app:textEndPadding="0dp"
+                    app:textStartPadding="0dp"
+                    tools:maxLength="50"
+                    tools:text="@tools:sample/lorem/random" />
+
+                <TextView
+                    android:id="@+id/noteModified"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:paddingStart="@dimen/spacer_1hx"
+                    android:paddingEnd="@dimen/spacer_2x"
+                    tools:text="27.11." />
+
+            </LinearLayout>
 
             <ImageView
-                android:id="@+id/noteFavorite"
+                android:id="@+id/custom_checkbox"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/menu_favorite"
-                android:padding="@dimen/spacer_2x"
-                tools:src="@drawable/ic_star_yellow_24dp" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/noteStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|end"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="4dp"
-                android:baseline="14dp"
-                app:srcCompat="@drawable/ic_sync_blue_18dp" />
-        </FrameLayout>
-
-        <TextView
-            android:id="@+id/noteTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="@dimen/spacer_2x"
-            android:layout_marginEnd="@dimen/spacer_2x"
-            android:layout_marginBottom="@dimen/spacer_1x"
-            android:layout_weight="1"
-            android:hyphenationFrequency="full"
-            android:textAppearance="?attr/textAppearanceHeadline5"
-            android:textColor="@color/fg_default"
-            tools:maxLength="50"
-            tools:text="@tools:sample/lorem/random" />
-
-        <ImageView
-            android:id="@+id/custom_checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="top"
-            android:clickable="false"
-            android:contentDescription="@null"
-            android:focusable="false"
-            android:paddingStart="@dimen/spacer_1x"
-            android:paddingEnd="@dimen/spacer_1x"
-            android:src="@drawable/ic_checkbox_blank_outline" />
+                android:layout_height="match_parent"
+                android:layout_gravity="top"
+                android:clickable="false"
+                android:contentDescription="@null"
+                android:focusable="false"
+                android:paddingStart="@dimen/spacer_1x"
+                android:paddingEnd="@dimen/spacer_1x"
+                android:src="@drawable/ic_checkbox_blank_outline" />
+        </LinearLayout>
     </LinearLayout>
+
 </com.google.android.material.card.MaterialCardView>
