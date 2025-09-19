@@ -41,6 +41,7 @@ public class NoteViewHolderWithExcerpt extends NoteViewHolder {
         bindCategory(context, binding.noteCategory, showCategory, note.getCategory(), color);
         bindStatus(binding.noteStatus, note.getStatus(), color);
         bindFavorite(binding.noteFavorite, note.getFavorite());
+        bindModified(binding.noteModified, note.getModified());
 
         bindSearchableContent(context, binding.noteTitle, searchQuery, note.getTitle(), color);
         bindSearchableContent(context, binding.noteExcerpt, searchQuery, note.getExcerpt(), color);

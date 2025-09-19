@@ -12,6 +12,7 @@ import static com.nextcloud.android.common.ui.util.PlatformThemeUtil.isDarkMode;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,6 +28,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.chip.Chip;
 import com.nextcloud.android.common.ui.theme.utils.ColorRole;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
@@ -37,10 +42,16 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
     @NonNull
     private final NoteClickListener noteClickListener;
 
+    private final SimpleDateFormat sdf;
+
     public NoteViewHolder(@NonNull View v, @NonNull NoteClickListener noteClickListener) {
         super(v);
         this.noteClickListener = noteClickListener;
         this.setIsRecyclable(false);
+
+        Locale locale = v.getResources().getConfiguration().locale;
+        String pattern = DateFormat.getBestDateTimePattern(locale, "dd.MM.");
+        this.sdf = new SimpleDateFormat(pattern, locale);
     }
 
     @CallSuper
@@ -48,6 +59,15 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
         itemView.setActivated(isSelected);
         itemView.setSelected(isSelected);
         itemView.setOnClickListener((view) -> noteClickListener.onNoteClick(getLayoutPosition(), view));
+    }
+
+    protected void bindModified(@NonNull TextView noteModified, @Nullable Calendar modified) {
+        if (modified != null && modified.getTimeInMillis() > 0) {
+            noteModified.setText(sdf.format(modified.getTime()));
+            noteModified.setVisibility(VISIBLE);
+        } else {
+            noteModified.setVisibility(INVISIBLE);
+        }
     }
 
     protected void bindStatus(AppCompatImageView noteStatus, DBStatus status, int color) {
