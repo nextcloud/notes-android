@@ -19,4 +19,4 @@
     android:padding="@dimen/spacer_1x"
     android:textColor="@color/fg_default_selection"
     android:textStyle="bold"
-    android:textSize="@dimen/secondary_font_size" />
+    android:textSize="@dimen/primary_font_size" />
