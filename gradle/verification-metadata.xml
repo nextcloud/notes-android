@@ -59,6 +59,7 @@
             <trusting group="org.mockito" name="mockito-core" version="5.17.0"/>
             <trusting group="org.mockito" name="mockito-core" version="5.18.0"/>
             <trusting group="org.mockito" name="mockito-core" version="5.19.0"/>
+            <trusting group="org.mockito" name="mockito-core" version="5.20.0"/>
          </trusted-key>
          <trusted-key id="1597AB231B7ADD7E14B1D9C43F00DB67AE236E2E" group="org.conscrypt" name="conscrypt-openjdk-uber" version="2.5.2"/>
          <trusted-key id="190D5A957FF22273E601F7A7C92C5FEC70161C62" group="org.apache" name="apache" version="18"/>
