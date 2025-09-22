@@ -119,7 +119,8 @@ dependencies {
     }
 
     // Nextcloud SSO
-    implementation 'com.github.nextcloud.android-common:ui:0.28.0'
+    implementation 'com.github.nextcloud.android-common:ui:f686054406'
+    implementation 'com.github.nextcloud.android-common:core:f686054406'
     implementation("com.github.nextcloud:Android-SingleSignOn:$singleSignOnVersion") {
         version {
             strictly(singleSignOnVersion)

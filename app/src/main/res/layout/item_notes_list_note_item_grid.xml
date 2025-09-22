@@ -64,6 +64,17 @@
                     android:padding="@dimen/spacer_2x"
                     tools:src="@drawable/ic_star_yellow_24dp" />
 
+                <ImageView
+                    android:id="@+id/custom_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="top"
+                    android:clickable="false"
+                    android:contentDescription="@null"
+                    android:focusable="false"
+                    android:padding="@dimen/spacer_2x"
+                    android:src="@drawable/ic_checkbox_blank_outline" />
+
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/noteStatus"
                     android:layout_width="wrap_content"
@@ -114,18 +125,6 @@
                     tools:text="27.11." />
 
             </LinearLayout>
-
-            <ImageView
-                android:id="@+id/custom_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="top"
-                android:clickable="false"
-                android:contentDescription="@null"
-                android:focusable="false"
-                android:paddingStart="@dimen/spacer_1x"
-                android:paddingEnd="@dimen/spacer_1x"
-                android:src="@drawable/ic_checkbox_blank_outline" />
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
