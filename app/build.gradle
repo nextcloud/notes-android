@@ -18,8 +18,8 @@ android {
         applicationId "it.niedermann.owncloud.notes"
         minSdk 24
         targetSdk 35
-        versionCode 40050051
-        versionName "4.5.0 RC1"
+        versionCode 40050090
+        versionName "4.5.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
@@ -114,7 +114,7 @@ dependencies {
         exclude group: 'commons-logging', module: 'commons-logging'
     }
 
-    implementation("com.github.nextcloud:android-library:2.21.0") {
+    implementation("com.github.nextcloud:android-library:2.22.0") {
         exclude group: 'org.ogce', module: 'xpp3'
     }
 
