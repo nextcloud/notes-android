@@ -152,4 +152,17 @@ desc "Build app bundle"
 		)
 	end
 
+    desc "Upload Alpha version to play store"
+    lane :uploadAlphaToPlayStore do |options|
+        upload_to_play_store(
+            skip_upload_images: true,
+            skip_upload_aab: true,
+            skip_upload_changelogs: true,
+            skip_upload_metadata: true,
+            skip_upload_screenshots: true,
+            track: 'alpha',
+            apk: "/home/androiddaily/apks-notes/android-notes-" + options[:version] + ".apk",
+        )
+    end
+
 end
