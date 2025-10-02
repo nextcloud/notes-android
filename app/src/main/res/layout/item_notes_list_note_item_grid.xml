@@ -49,8 +49,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:baselineAligned="false"
-            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <FrameLayout
@@ -66,6 +64,17 @@
                     android:padding="@dimen/spacer_2x"
                     tools:src="@drawable/ic_star_yellow_24dp" />
 
+                <ImageView
+                    android:id="@+id/custom_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="top"
+                    android:clickable="false"
+                    android:contentDescription="@null"
+                    android:focusable="false"
+                    android:padding="@dimen/spacer_2x"
+                    android:src="@drawable/ic_checkbox_blank_outline" />
+
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/noteStatus"
                     android:layout_width="wrap_content"
@@ -77,10 +86,11 @@
                     app:srcCompat="@drawable/ic_sync_blue_18dp" />
             </FrameLayout>
 
-            <FrameLayout
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_marginTop="@dimen/spacer_2x"
+                android:orientation="vertical">
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/noteCategory"
@@ -104,19 +114,17 @@
                     app:textStartPadding="0dp"
                     tools:maxLength="50"
                     tools:text="@tools:sample/lorem/random" />
-            </FrameLayout>
 
-            <ImageView
-                android:id="@+id/custom_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="top"
-                android:clickable="false"
-                android:contentDescription="@null"
-                android:focusable="false"
-                android:paddingStart="@dimen/spacer_1x"
-                android:paddingEnd="@dimen/spacer_1x"
-                android:src="@drawable/ic_checkbox_blank_outline" />
+                <TextView
+                    android:id="@+id/noteModified"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:paddingStart="@dimen/spacer_1hx"
+                    android:paddingEnd="@dimen/spacer_2x"
+                    tools:text="27.11." />
+
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
