@@ -170,7 +170,7 @@
     <string name="settings_font_title"> Fonte monospaçada</string>
     <string name="settings_font_size">Tamanho da fonte</string>
     <string name="settings_wifi_only">Sincronizar apenas por Wi-Fi</string>
-    <string name="settings_lock">Bloqueio de aplicativo (Beta)</string>
+    <string name="settings_lock">Trancamento de aplicativo (Beta)</string>
     <string name="settings_lock_summary">Credenciais de dispositivo</string>
     <string name="settings_background_sync">Sincronização em segundo plano</string>
     <string name="settings_prevent_screen_capture">Proibir captura de tela</string>
@@ -275,7 +275,7 @@
     <string name="no_category">Sem categoria</string>
     <string name="add_category">Adicionar %1$s</string>
     <string name="simple_checkbox">Caixa de marcação</string>
-    <string name="unlock_notes">Destravar anotações</string>
+    <string name="unlock_notes">Destrancar notas</string>
     <string name="error_dialog_title">Oh não - E agora? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Tente forçar o fechamento do aplicativo e reinicie-o novamente. Pode ter havido uma conexão incorreta com o aplicativo Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Se o problema persistir, tente limpar o armazenamento dos dois aplicativos: Nextcloud e Anotações Nextcloud para resolver esse problema.</string>
