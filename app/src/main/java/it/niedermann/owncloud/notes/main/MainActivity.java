@@ -29,6 +29,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -327,6 +328,20 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                 binding.navigationMenu.setAdapter(menuAdapter);
             } else {
                 menuAdapter.updateAccount(this, nextAccount);
+            }
+        });
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (activityBinding.searchToolbar.getVisibility() == VISIBLE) {
+                    updateToolbars(false);
+                } else if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    binding.drawerLayout.closeDrawer(GravityCompat.START);
+                } else {
+                    setEnabled(false);
+                    getOnBackPressedDispatcher().onBackPressed();
+                }
             }
         });
     }
@@ -800,17 +815,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             toggleLiveData.removeObservers(this);
             adapter.notifyItemChanged(position);
         }});
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (activityBinding.searchToolbar.getVisibility() == VISIBLE) {
-            updateToolbars(false);
-        } else if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            binding.drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
     }
 
     private void updateToolbars(boolean enableSearch) {
