@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.graphics.Insets;
@@ -108,6 +109,15 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         setSupportActionBar(binding.toolbar);
         binding.toolbar.setOnClickListener((v) -> fragment.showEditTitleDialog());
         setImeInsets();
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                setEnabled(false);
+                getOnBackPressedDispatcher().onBackPressed();
+                close();
+            }
+        });
     }
 
     private void setImeInsets() {
@@ -358,12 +368,6 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
 
         fragment = NoteReadonlyFragment.newInstance(content.toString());
         replaceFragment();
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        close();
     }
 
     @Override
