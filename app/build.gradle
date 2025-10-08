@@ -118,8 +118,10 @@ dependencies {
         exclude group: 'org.ogce', module: 'xpp3'
     }
 
+    implementation("com.github.nextcloud.android-common:ui:$nextcloudAndroidCommonLib")
+    implementation("com.github.nextcloud.android-common:core:$nextcloudAndroidCommonLib")
+
     // Nextcloud SSO
-    implementation 'com.github.nextcloud.android-common:ui:0.28.0'
     implementation("com.github.nextcloud:Android-SingleSignOn:$singleSignOnVersion") {
         version {
             strictly(singleSignOnVersion)
@@ -171,6 +173,14 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.mockito:mockito-core:5.20.0'
     testImplementation 'org.robolectric:robolectric:4.16'
+}
+
+configurations.configureEach {
+    resolutionStrategy.eachDependency { details ->
+        if (details.requested.group == "com.github.nextcloud.android-common") {
+            details.useVersion(nextcloudAndroidCommonLib)
+        }
+    }
 }
 
 // Run the compiler as a separate process

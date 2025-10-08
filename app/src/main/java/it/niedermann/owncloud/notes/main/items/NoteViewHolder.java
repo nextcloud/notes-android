@@ -25,7 +25,10 @@ import androidx.recyclerview.selection.ItemDetailsLookup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.chip.Chip;
+import com.nextcloud.android.common.core.utils.DateFormatter;
 import com.nextcloud.android.common.ui.theme.utils.ColorRole;
+
+import java.util.Calendar;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
@@ -37,10 +40,14 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
     @NonNull
     private final NoteClickListener noteClickListener;
 
+    @NonNull
+    private final DateFormatter dateFormatter;
+
     public NoteViewHolder(@NonNull View v, @NonNull NoteClickListener noteClickListener) {
         super(v);
         this.noteClickListener = noteClickListener;
         this.setIsRecyclable(false);
+        this.dateFormatter = new DateFormatter(v.getContext());
     }
 
     @CallSuper
@@ -48,6 +55,15 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
         itemView.setActivated(isSelected);
         itemView.setSelected(isSelected);
         itemView.setOnClickListener((view) -> noteClickListener.onNoteClick(getLayoutPosition(), view));
+    }
+
+    protected void bindModified(@NonNull TextView noteModified, @Nullable Calendar modified) {
+        if (modified != null && modified.getTimeInMillis() > 0) {
+            noteModified.setText(dateFormatter.getConditionallyRelativeFormattedTimeSpan(modified));
+            noteModified.setVisibility(VISIBLE);
+        } else {
+            noteModified.setVisibility(INVISIBLE);
+        }
     }
 
     protected void bindStatus(AppCompatImageView noteStatus, DBStatus status, int color) {
