@@ -6,9 +6,6 @@
  * SPDX-FileCopyrightText: 2023 Álvaro Brey <alvaro.brey@nextcloud.com>
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
-
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
@@ -16,6 +13,7 @@ buildscript {
         kotlinVersion = '2.2.20'
         commonsVersion = '2.3.7'
 		androidCommonsVersion = '1.1.0'
+        nextcloudAndroidCommonLib = "ab22edd0cf"
         singleSignOnVersion = "17df25ce03d98b9d868249b41f7300bff6c54f3e"
     }
     repositories {
