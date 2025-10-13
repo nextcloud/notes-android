@@ -305,12 +305,20 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     public void applyBrand(int color) {
         super.applyBrand(color);
 
-        final var util = BrandingUtil.of(color, requireContext());
+        final var context = getContext();
+        if (context == null) {
+            return;
+        }
+
+        final var util = BrandingUtil.of(color, context);
 
         lifecycleScopeIOJob(() -> {
             try {
-                final var ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getContext());
-                binding.editContent.setCurrentSingleSignOnAccount(ssoAccount, color);
+                final var ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(context);
+                onMainThread(() -> {
+                    binding.editContent.setCurrentSingleSignOnAccount(ssoAccount, color);
+                    return Unit.INSTANCE;
+                });
             } catch (Exception e) {
                 Log_OC.e(TAG, "applyBrand exception: " + e);
             }
