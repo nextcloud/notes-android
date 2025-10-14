@@ -14,7 +14,7 @@ buildscript {
         commonsVersion = '2.3.7'
 		androidCommonsVersion = '1.1.0'
         nextcloudAndroidCommonLib = "0.29.0"
-        singleSignOnVersion = "3321ef3f02"
+        singleSignOnVersion = "b81212b2fb"
     }
     repositories {
         mavenCentral()
