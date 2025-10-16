@@ -227,7 +227,7 @@
 
     <string name="simple_error">Fejl</string>
     <string name="simple_close">Luk</string>
-    <string name="simple_copy">Kopier</string>
+    <string name="simple_copy">Kopiér</string>
     <string name="simple_exception">Undtagelse</string>
     <string name="pin_to_homescreen">Fastgør til hjemmeskærm</string>
     <string name="note_has_been_deleted">Denne note er blevet slettet</string>
