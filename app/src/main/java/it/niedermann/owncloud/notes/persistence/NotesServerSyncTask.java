@@ -17,6 +17,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.JsonSyntaxException;
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.NextcloudApiNotRespondingException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
@@ -34,6 +35,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import io.reactivex.Observable;
 import it.niedermann.owncloud.notes.BuildConfig;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
@@ -226,7 +228,21 @@ abstract class NotesServerSyncTask extends Thread {
                 return false;
             }
 
-            final var fetchResponse = notesAPI.getNotes(modified, localAccount.getETag()).blockingSingle();
+            final var fetchResponse = notesAPI.getNotes(modified, localAccount.getETag())
+                    .onErrorResumeNext(error -> {
+                        if (error instanceof JsonSyntaxException ||
+                                (error.getCause() != null && error.getCause() instanceof JsonSyntaxException)) {
+                            Log.w(TAG, "JSON parse error, likely 304 Not Modified");
+                            return Observable.empty();
+                        }
+                        return Observable.error(error);
+                    })
+                    .blockingFirst(null);
+
+            if (fetchResponse == null) {
+                Log.d(TAG, "No changes from server");
+                return true;
+            }
             final var remoteNotes = fetchResponse.getResponse();
             final var remoteIDs = new HashSet<Long>();
             // pull remote changes: update or create each remote note
