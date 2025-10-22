@@ -13,8 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
+import com.google.gson.JsonSyntaxException;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
+import io.reactivex.Observable;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 
 @WorkerThread
@@ -27,6 +29,8 @@ public class CapabilitiesClient {
     @WorkerThread
     public static Capabilities getCapabilities(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount, @Nullable String lastETag, @NonNull ApiProvider apiProvider) throws Throwable {
         final var ocsAPI = apiProvider.getOcsAPI(context, ssoAccount);
+        final var repository = NotesRepository.getInstance(context);
+
         try {
             final var response = ocsAPI.getCapabilities(lastETag).blockingSingle();
             final var capabilities = response.getResponse().ocs.data;
@@ -37,12 +41,16 @@ public class CapabilitiesClient {
                 Log.w(TAG, "Response headers of capabilities are null");
             }
 
-            final var repository = NotesRepository.getInstance(context);
             repository.insertCapabilities(capabilities);
-
             return capabilities;
         } catch (RuntimeException e) {
             final var cause = e.getCause();
+
+            if (e instanceof JsonSyntaxException || (cause instanceof JsonSyntaxException)) {
+                Log.w(TAG, "JSON parse error, likely 304 Not Modified");
+                return repository.getCapabilities();
+            }
+
             if (cause != null) {
                 throw cause;
             } else {
