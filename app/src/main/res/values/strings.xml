@@ -509,4 +509,23 @@
     <string name="switch_to_plain_editing">Switch to plain editing</string>
     <string name="action_back">Back</string>
     <string name="user_agent" translatable="false">Mozilla/5.0 (Android) %1$s-android/%2$s</string>
+    <string name="set_online_status">Online status</string>
+    <string name="status_message">Status message</string>
+    <string name="default_emoji" translatable="false">😃</string>
+    <string name="whats_your_status">What is your status?</string>
+    <string name="placeholder_predefined_status_icon" translatable="false">📆</string>
+    <string name="placeholder_predefined_status_name" translatable="false">In a meeting</string>
+    <string name="placeholder_predefined_status_clear_at" translatable="false">an hour</string>
+    <string name="divider" translatable="false">—</string>
+    <string name="clear_status_after">Clear status after</string>
+    <string name="clear">Clear</string>
+    <string name="set_message">Set message</string>
+    <string name="dontClear">Don\'t clear</string>
+    <string name="today">Today</string>
+    <string name="thirtyMinutes">30 minutes</string>
+    <string name="oneHour">1 hour</string>
+    <string name="fourHours">4 hours</string>
+    <string name="thisWeek">This week</string>
+    <string name="error_setting_status_message">Error setting status message!</string>
+    <string name="file_list_seconds_ago">seconds ago</string>
 </resources>

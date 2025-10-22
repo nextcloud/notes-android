@@ -72,4 +72,5 @@
     <dimen name="minimum_size_for_touchable_area">48dp</dimen>
 
     <dimen name="sharee_list_item_size">56dp</dimen>
+    <dimen name="online_status_item_height">60dp</dimen>
 </resources>
