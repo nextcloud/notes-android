@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
@@ -75,6 +76,20 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
             binding.accountHost.setText(Uri.parse(currentLocalAccount.getUrl()).getHost());
             AvatarLoader.INSTANCE.load(requireContext(), binding.currentAccountItemAvatar, currentLocalAccount);
             binding.accountLayout.setOnClickListener((v) -> dismiss());
+            binding.onlineStatus.setOnClickListener(v -> {
+                /*
+                 val setStatusDialog = SetOnlineStatusBottomSheet(currentStatus)
+                setStatusDialog.show((activity as DrawerActivity).supportFragmentManager, "fragment_set_status")
+                 */
+
+                dismiss();
+            });
+
+            binding.statusMessage.setOnClickListener(v -> {
+                final var setStatusMessageDialog = new SetStatusMessageBottomSheet(accountManager.user, currentStatus);
+                setStatusMessageDialog.show(requireActivity().getSupportFragmentManager(), "fragment_set_status_message");
+                dismiss();
+            });
 
             final var adapter = new AccountSwitcherAdapter((localAccount -> {
                 accountSwitcherListener.onAccountChosen(localAccount);

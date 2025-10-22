@@ -49,4 +49,9 @@
     <color name="widget_foreground">#222222</color>
 
     <color name="action_mode_background">#ededed</color>
+    <color name="fontAppbar">#666666</color>
+    <color name="transparent">#00000000</color>
+    <color name="secondary_button_background_color">#D6D7D7</color>
+    <color name="secondary_button_text_color">#000000</color>
+    <color name="primary_button_text_color">#ffffff</color>
 </resources>
