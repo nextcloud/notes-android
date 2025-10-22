@@ -13,16 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
-import com.nextcloud.android.sso.api.ParsedResponse;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
-import java.util.Map;
-
-import it.niedermann.owncloud.notes.persistence.sync.OcsAPI;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
-import it.niedermann.owncloud.notes.shared.model.OcsResponse;
-import it.niedermann.owncloud.notes.shared.model.OcsUser;
-import retrofit2.Response;
 
 @WorkerThread
 public class CapabilitiesClient {
