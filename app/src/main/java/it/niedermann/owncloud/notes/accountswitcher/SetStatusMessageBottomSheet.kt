@@ -22,6 +22,7 @@ import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import androidx.annotation.VisibleForTesting
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nextcloud.common.User
 import com.owncloud.android.lib.resources.users.ClearAt
@@ -35,6 +36,7 @@ import com.vanniktech.emoji.installForceSingleEmoji
 import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.accountswitcher.adapter.PredefinedStatusClickListener
 import it.niedermann.owncloud.notes.accountswitcher.adapter.PredefinedStatusListAdapter
+import it.niedermann.owncloud.notes.accountswitcher.repository.UserStatusRepository
 import it.niedermann.owncloud.notes.accountswitcher.task.ClearStatusTask
 import it.niedermann.owncloud.notes.accountswitcher.task.SetPredefinedCustomStatusTask
 import it.niedermann.owncloud.notes.accountswitcher.task.SetUserDefinedCustomStatusTask
@@ -45,6 +47,8 @@ import it.niedermann.owncloud.notes.shared.util.DisplayUtils
 import it.niedermann.owncloud.notes.util.runner.AsyncRunner
 import it.niedermann.owncloud.notes.util.runner.ThreadPoolAsyncRunner
 import it.niedermann.owncloud.notes.util.storage.UserStorage
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.Calendar
 import java.util.Locale
 
@@ -68,12 +72,11 @@ private const val CLEAR_AT_TYPE_END_OF = "end-of"
 
 class SetStatusMessageBottomSheet(val user: User, val currentStatus: Status?) :
     BrandedBottomSheetDialogFragment(R.layout.set_status_message_bottom_sheet),
-    PredefinedStatusClickListener,
-    Injectable {
+    PredefinedStatusClickListener{
 
     private lateinit var binding: SetStatusMessageBottomSheetBinding
 
-    private lateinit var accountManager: UserAccountManager
+    private lateinit var repository: UserStatusRepository
     private lateinit var predefinedStatus: ArrayList<PredefinedStatus>
     private lateinit var adapter: PredefinedStatusListAdapter
     private var selectedPredefinedMessageId: String? = null
@@ -88,6 +91,11 @@ class SetStatusMessageBottomSheet(val user: User, val currentStatus: Status?) :
         val uiHandler = Handler(Looper.getMainLooper())
         asyncRunner = ThreadPoolAsyncRunner(uiHandler, 4, "io")
         predefinedStatus = UserStorage.readPredefinedStatus(requireContext())
+
+        lifecycleScope.launch(Dispatchers.IO) {
+
+        }
+        repository = UserStatusRepository(requireContext())
         EmojiManager.install(GoogleEmojiProvider())
     }
 
