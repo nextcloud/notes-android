@@ -18,7 +18,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.nextcloud.android.sso.AccountImporter;
-import com.nextcloud.android.sso.api.EmptyResponse;
 import com.nextcloud.android.sso.exceptions.NextcloudApiNotRespondingException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
@@ -34,7 +33,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import it.niedermann.owncloud.notes.BuildConfig;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
@@ -282,11 +280,6 @@ abstract class NotesServerSyncTask extends Thread {
             return true;
         } catch (Throwable t) {
             final Throwable cause = t.getCause();
-            if (t instanceof ClassCastException castException && Objects.requireNonNull(castException.getMessage()).contains(EmptyResponse.class.getSimpleName())) {
-                Log.d(TAG, "Server returned empty response - Notes not modified.");
-                return true;
-            }
-
             if (t.getClass() == RuntimeException.class && cause != null) {
                 if (cause.getClass() == NextcloudHttpRequestFailedException.class || cause instanceof NextcloudHttpRequestFailedException) {
                     final NextcloudHttpRequestFailedException httpException = (NextcloudHttpRequestFailedException) cause;

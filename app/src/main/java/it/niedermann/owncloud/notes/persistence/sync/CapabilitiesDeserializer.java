@@ -17,8 +17,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
 
 import it.niedermann.android.util.ColorUtil;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
@@ -91,19 +89,9 @@ public class CapabilitiesDeserializer implements JsonDeserializer<Capabilities> 
             if (capabilities.has(CAPABILITIES_NOTES)) {
                 final var notes = capabilities.getAsJsonObject(CAPABILITIES_NOTES);
                 if (notes.has(CAPABILITIES_NOTES_API_VERSION)) {
-                    final var apiVersionElem = notes.get(CAPABILITIES_NOTES_API_VERSION);
-                    if (apiVersionElem.isJsonArray()) {
-                        List<String> versions = new ArrayList<>();
-                        for (JsonElement e : apiVersionElem.getAsJsonArray()) {
-                            versions.add(e.getAsString());
-                        }
-                        response.setApiVersion(String.join(",", versions));
-                    } else if (apiVersionElem.isJsonPrimitive()) {
-                        response.setApiVersion(apiVersionElem.getAsString());
-                    }
+                    response.setApiVersion(notes.get(CAPABILITIES_NOTES_API_VERSION).toString());
                 }
             }
-
             if (capabilities.has(CAPABILITIES_THEMING)) {
                 final var theming = capabilities.getAsJsonObject(CAPABILITIES_THEMING);
                 if (theming.has(CAPABILITIES_THEMING_COLOR)) {
