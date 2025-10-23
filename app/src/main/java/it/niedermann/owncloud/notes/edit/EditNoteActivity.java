@@ -76,15 +76,16 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
 
         repo = NotesRepository.getInstance(getApplicationContext());
 
-        try {
-            if (SingleAccountHelper.getCurrentSingleSignOnAccount(this) == null) {
-                throw new NoCurrentAccountSelectedException(this);
+        new Thread(() -> {
+            try {
+                if (SingleAccountHelper.getCurrentSingleSignOnAccount(EditNoteActivity.this) == null) {
+                    throw new NoCurrentAccountSelectedException(EditNoteActivity.this);
+                }
+            } catch (Exception e) {
+                Toast.makeText(this, R.string.no_account_configured_yet, Toast.LENGTH_LONG).show();
+                finish();
             }
-        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-            Toast.makeText(this, R.string.no_account_configured_yet, Toast.LENGTH_LONG).show();
-            finish();
-            return;
-        }
+        }).start();
 
         final var preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         new SharedPreferenceBooleanLiveData(preferences, getString(R.string.pref_key_keep_screen_on), true).observe(this, keepScreenOn -> {
