@@ -59,11 +59,6 @@ class NoteListWidget : AppWidgetProvider() {
             )
         }
 
-        if (intent.extras == null) {
-            Log.w(TAG, "Intent doesn't have bundle")
-            return
-        }
-
         Log.w(TAG, "Update widget via given appWidgetIds")
 
         val appWidgetIds = intArrayOf(intent.extras?.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1) ?: -1)
