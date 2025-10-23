@@ -82,8 +82,10 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
                     throw new NoCurrentAccountSelectedException(EditNoteActivity.this);
                 }
             } catch (Exception e) {
-                Toast.makeText(this, R.string.no_account_configured_yet, Toast.LENGTH_LONG).show();
-                finish();
+                runOnUiThread(() -> {
+                    Toast.makeText(EditNoteActivity.this, R.string.no_account_configured_yet, Toast.LENGTH_LONG).show();
+                    finish();
+                });
             }
         }).start();
 
