@@ -13,10 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
-import com.google.gson.JsonSyntaxException;
+import com.nextcloud.android.sso.api.EmptyResponse;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
-import io.reactivex.Observable;
+import java.util.Objects;
+
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 
 @WorkerThread
@@ -42,19 +43,19 @@ public class CapabilitiesClient {
             }
 
             repository.insertCapabilities(capabilities);
-            return capabilities;
-        } catch (RuntimeException e) {
-            final var cause = e.getCause();
 
-            if (e instanceof JsonSyntaxException || (cause instanceof JsonSyntaxException)) {
-                Log.w(TAG, "JSON parse error, likely 304 Not Modified");
+            return capabilities;
+        } catch (Throwable t) {
+            if (t instanceof ClassCastException castException && Objects.requireNonNull(castException.getMessage()).contains(EmptyResponse.class.getSimpleName())) {
+                Log.d(TAG, "Server returned empty response - Notes not modified.");
                 return repository.getCapabilities();
             }
 
+            final var cause = t.getCause();
             if (cause != null) {
                 throw cause;
             } else {
-                throw e;
+                throw t;
             }
         }
     }
