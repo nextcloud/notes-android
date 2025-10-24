@@ -14,7 +14,6 @@ import android.content.Intent;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
@@ -86,7 +85,7 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
             });
 
             binding.statusMessage.setOnClickListener(v -> {
-                final var setStatusMessageDialog = new SetStatusMessageBottomSheet(accountManager.user, currentStatus);
+                final var setStatusMessageDialog = new SetStatusMessageBottomSheet();
                 setStatusMessageDialog.show(requireActivity().getSupportFragmentManager(), "fragment_set_status_message");
                 dismiss();
             });

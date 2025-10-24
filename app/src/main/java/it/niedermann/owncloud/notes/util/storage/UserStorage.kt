@@ -23,4 +23,12 @@ object UserStorage {
         val type = object : TypeToken<ArrayList<PredefinedStatus>>() {}.type
         return Gson().fromJson(json, type)
     }
+
+    fun storePredefinedStatus(context: Context, statuses: ArrayList<PredefinedStatus>) {
+        val json = Gson().toJson(statuses)
+        getSharedPreferences(context).edit().apply {
+            putString(PREDEFINED_STATUS, json)
+            apply()
+        }
+    }
 }
