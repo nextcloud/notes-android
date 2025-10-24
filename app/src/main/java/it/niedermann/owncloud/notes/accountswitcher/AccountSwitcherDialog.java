@@ -22,6 +22,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.accountswitcher.repository.UserStatusRepository;
+import it.niedermann.owncloud.notes.branding.BrandedBottomSheetDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.DialogAccountSwitcherBinding;
@@ -29,6 +31,8 @@ import it.niedermann.owncloud.notes.manageaccounts.ManageAccountsActivity;
 import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.share.helper.AvatarLoader;
+import it.niedermann.owncloud.notes.util.ActivityExtensionsKt;
+import kotlin.Unit;
 
 /**
  * Displays all available {@link Account} entries and provides basic operations for them, like adding or switching
@@ -75,6 +79,7 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
             binding.accountHost.setText(Uri.parse(currentLocalAccount.getUrl()).getHost());
             AvatarLoader.INSTANCE.load(requireContext(), binding.currentAccountItemAvatar, currentLocalAccount);
             binding.accountLayout.setOnClickListener((v) -> dismiss());
+
             binding.onlineStatus.setOnClickListener(v -> {
                 final var setOnlineStatusBottomSheet = new SetOnlineStatusBottomSheet();
                 setOnlineStatusBottomSheet.show(requireActivity().getSupportFragmentManager(), "fragment_set_status");
@@ -121,6 +126,20 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
         NotesApplication.brandingUtil().dialog.colorMaterialAlertDialogBackground(requireContext(), builder);
 
         return builder.create();
+    }
+
+    private void showBottomSheetDialog(@NonNull AccountSwitcherBottomSheetTag tag) {
+        ActivityExtensionsKt.ssoAccount(requireActivity(), account -> {
+            if (account == null) {
+                return Unit.INSTANCE;
+            }
+            final var repository = new UserStatusRepository(requireContext(), account);
+
+            final var fragment = tag.fragment(repository, )
+            fragment.show(requireActivity().getSupportFragmentManager(), tag.name());
+            dismiss();
+            return Unit.INSTANCE;
+        });
     }
 
     public static DialogFragment newInstance(long currentAccountId) {

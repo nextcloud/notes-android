@@ -13,7 +13,6 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.card.MaterialCardView
 import com.nextcloud.android.common.ui.theme.utils.ColorRole
-import com.nextcloud.android.sso.helper.SingleAccountHelper
 import com.owncloud.android.lib.resources.users.Status
 import com.owncloud.android.lib.resources.users.StatusType
 import it.niedermann.owncloud.notes.R
@@ -27,7 +26,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class SetOnlineStatusBottomSheet :
+class SetOnlineStatusBottomSheet(
+    private val repository: UserStatusRepository,
+    private val currentStatus: Status
+) :
     BrandedBottomSheetDialogFragment(R.layout.set_online_status_bottom_sheet) {
 
     companion object {
@@ -36,12 +38,12 @@ class SetOnlineStatusBottomSheet :
 
     private lateinit var binding: SetOnlineStatusBottomSheetBinding
     private var cardViews: Triple<MaterialCardView, TextView, ImageView>? = null
-    private var repository: UserStatusRepository? = null
 
     @SuppressLint("DefaultLocale")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        visualizeStatus(currentStatus.status)
         initRepository()
         setupStatusClickListeners()
     }
@@ -62,35 +64,20 @@ class SetOnlineStatusBottomSheet :
 
     private fun initRepository() {
         lifecycleScope.launch(Dispatchers.IO) {
-            val ssoAccount =
-                SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext()) ?: return@launch
-            repository = UserStatusRepository(requireContext(), ssoAccount)
-            val currentStatus =
-                repository?.fetchUserStatus() ?: Status(StatusType.OFFLINE, "", "", -1)
-
-            val capabilities = repository?.getCapabilities()
-
-            if (capabilities?.isUserStatusSupportsBusy == true) {
+            val capabilities = repository.getCapabilities()
+            if (capabilities.isUserStatusSupportsBusy) {
                 binding.busyStatus.visibility = View.VISIBLE
             } else {
                 binding.busyStatus.visibility = View.GONE
             }
-
-            withContext(Dispatchers.Main) {
-                updateCurrentStatusViews(currentStatus)
-            }
         }
-    }
-
-    private fun updateCurrentStatusViews(it: Status) {
-        visualizeStatus(it.status)
     }
 
     private fun setStatus(statusType: StatusType) {
         lifecycleScope.launch(Dispatchers.IO) {
-            val result = repository?.setStatusType(statusType)
+            val result = repository.setStatusType(statusType)
             withContext(Dispatchers.Main) {
-                if (result == true) {
+                if (result) {
                     dismiss()
                 } else {
                     showErrorSnackbar()
@@ -140,10 +127,19 @@ class SetOnlineStatusBottomSheet :
                     dndHeadline,
                     invisibleHeadline
                 )
-                val color = ContextCompat.getColor(ctx, com.nextcloud.android.common.ui.R.color.high_emphasis_text)
+                val color = ContextCompat.getColor(
+                    ctx,
+                    com.nextcloud.android.common.ui.R.color.high_emphasis_text
+                )
                 headlines.forEach { it.setTextColor(color) }
                 listOf(awayIcon, dndIcon, invisibleIcon).forEach { it.imageTintList = null }
-                listOf(onlineStatus, awayStatus, busyStatus, dndStatus, invisibleStatus).forEach { it.isChecked = false }
+                listOf(
+                    onlineStatus,
+                    awayStatus,
+                    busyStatus,
+                    dndStatus,
+                    invisibleStatus
+                ).forEach { it.isChecked = false }
             }
         }
     }
