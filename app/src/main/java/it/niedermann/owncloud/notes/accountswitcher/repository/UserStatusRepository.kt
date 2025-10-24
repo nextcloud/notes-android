@@ -3,9 +3,9 @@ package it.niedermann.owncloud.notes.accountswitcher.repository
 import android.content.Context
 import com.nextcloud.android.sso.model.SingleSignOnAccount
 import com.owncloud.android.lib.common.utils.Log_OC
+import com.owncloud.android.lib.resources.users.PredefinedStatus
 import com.owncloud.android.lib.resources.users.Status
 import com.owncloud.android.lib.resources.users.StatusType
-import it.niedermann.owncloud.notes.accountswitcher.model.ExposedPredefinedStatus
 import it.niedermann.owncloud.notes.persistence.ApiProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -20,7 +20,7 @@ class UserStatusRepository(
 
     private val api by lazy { ApiProvider.getInstance().getUserStatusAPI(context, ssoAccount) }
 
-    suspend fun fetchPredefinedStatuses(): ArrayList<ExposedPredefinedStatus> = withContext(Dispatchers.IO) {
+    suspend fun fetchPredefinedStatuses(): ArrayList<PredefinedStatus> = withContext(Dispatchers.IO) {
         try {
             val response = api.fetchPredefinedStatuses().execute()
             if (response.isSuccessful) {
