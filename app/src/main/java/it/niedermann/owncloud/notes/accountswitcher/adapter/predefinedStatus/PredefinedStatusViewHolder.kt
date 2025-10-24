@@ -5,7 +5,7 @@
  * SPDX-FileCopyrightText: 2020 Nextcloud GmbH
  * SPDX-License-Identifier: AGPL-3.0-or-later OR GPL-2.0-only
  */
-package it.niedermann.owncloud.notes.accountswitcher.adapter
+package it.niedermann.owncloud.notes.accountswitcher.adapter.predefinedStatus
 
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
