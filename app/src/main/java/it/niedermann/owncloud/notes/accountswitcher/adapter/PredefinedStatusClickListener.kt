@@ -7,8 +7,8 @@
  */
 package it.niedermann.owncloud.notes.accountswitcher.adapter
 
-import it.niedermann.owncloud.notes.accountswitcher.model.ExposedPredefinedStatus
+import com.owncloud.android.lib.resources.users.PredefinedStatus
 
 interface PredefinedStatusClickListener {
-    fun onClick(predefinedStatus: ExposedPredefinedStatus)
+    fun onClick(predefinedStatus: PredefinedStatus)
 }

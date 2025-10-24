@@ -129,7 +129,6 @@ public class ApiProvider {
             final var nextcloudAPI = new NextcloudAPI(context.getApplicationContext(), ssoAccount,
                     new GsonBuilder()
                             .setStrictness(Strictness.LENIENT)
-                            .excludeFieldsWithoutExposeAnnotation()
                             .registerTypeHierarchyAdapter(Calendar.class, (JsonSerializer<Calendar>) (src, typeOfSrc, ctx) -> new JsonPrimitive(src.getTimeInMillis() / 1_000))
                             .registerTypeHierarchyAdapter(Calendar.class, (JsonDeserializer<Calendar>) (src, typeOfSrc, ctx) -> {
                                 final var calendar = Calendar.getInstance();

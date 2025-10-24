@@ -23,6 +23,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nextcloud.android.sso.helper.SingleAccountHelper
 import com.owncloud.android.lib.common.utils.Log_OC
+import com.owncloud.android.lib.resources.users.ClearAt
+import com.owncloud.android.lib.resources.users.PredefinedStatus
 import com.owncloud.android.lib.resources.users.Status
 import com.owncloud.android.lib.resources.users.StatusType
 import com.vanniktech.emoji.EmojiManager
@@ -33,8 +35,6 @@ import com.vanniktech.emoji.installForceSingleEmoji
 import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.accountswitcher.adapter.PredefinedStatusClickListener
 import it.niedermann.owncloud.notes.accountswitcher.adapter.PredefinedStatusListAdapter
-import it.niedermann.owncloud.notes.accountswitcher.model.ExposedClearAt
-import it.niedermann.owncloud.notes.accountswitcher.model.ExposedPredefinedStatus
 import it.niedermann.owncloud.notes.accountswitcher.repository.UserStatusRepository
 import it.niedermann.owncloud.notes.branding.BrandedBottomSheetDialogFragment
 import it.niedermann.owncloud.notes.branding.BrandingUtil
@@ -99,7 +99,7 @@ class SetStatusMessageBottomSheet :
         }
     }
 
-    private fun initPredefinedStatusAdapter(predefinedStatus: ArrayList<ExposedPredefinedStatus>) {
+    private fun initPredefinedStatusAdapter(predefinedStatus: ArrayList<PredefinedStatus>) {
         adapter = PredefinedStatusListAdapter(this, requireContext())
         Log_OC.d(TAG, "PredefinedStatusListAdapter initialized")
         adapter.list = predefinedStatus
@@ -159,11 +159,14 @@ class SetStatusMessageBottomSheet :
     }
 
     override fun applyBrand(color: Int) {
-        val viewThemeUtils = BrandingUtil.of(color, requireContext())
-        viewThemeUtils.material.colorMaterialButtonPrimaryBorderless(binding.clearStatus)
-        viewThemeUtils.material.colorMaterialButtonPrimaryTonal(binding.setStatus)
-        viewThemeUtils.material.colorTextInputLayout(binding.customStatusInputContainer)
-        viewThemeUtils.platform.themeDialog(binding.root)
+        BrandingUtil.of(color, requireContext()).run {
+            platform.themeDialog(binding.root)
+            material.run {
+                colorMaterialButtonPrimaryBorderless(binding.clearStatus)
+                colorMaterialButtonPrimaryTonal(binding.setStatus)
+                colorTextInputLayout(binding.customStatusInputContainer)
+            }
+        }
     }
 
     private fun updateCurrentStatusViews(it: Status) {
@@ -235,7 +238,7 @@ class SetStatusMessageBottomSheet :
         }
     }
 
-    private fun clearAtToUnixTime(clearAt: ExposedClearAt?): Long = when {
+    private fun clearAtToUnixTime(clearAt: ClearAt?): Long = when {
         clearAt?.type == CLEAR_AT_TYPE_PERIOD -> {
             System.currentTimeMillis() / ONE_SECOND_IN_MILLIS + clearAt.time.toLong()
         }
@@ -302,9 +305,9 @@ class SetStatusMessageBottomSheet :
         return binding.root
     }
 
-    override fun onClick(predefinedStatus: ExposedPredefinedStatus) {
+    override fun onClick(predefinedStatus: PredefinedStatus) {
         selectedPredefinedMessageId = predefinedStatus.id
-        clearAt = clearAtToUnixTime(predefinedStatus.exposedClearAt)
+        clearAt = clearAtToUnixTime(predefinedStatus.clearAt)
         binding.emoji.setText(predefinedStatus.icon)
         binding.customStatusInput.text?.clear()
         binding.customStatusInput.text?.append(predefinedStatus.message)
@@ -313,7 +316,7 @@ class SetStatusMessageBottomSheet :
         binding.clearStatusAfterSpinner.visibility = View.VISIBLE
         binding.clearStatusMessageTextView.text = getString(R.string.clear_status_after)
 
-        val clearAt = predefinedStatus.exposedClearAt
+        val clearAt = predefinedStatus.clearAt
         if (clearAt == null) {
             binding.clearStatusAfterSpinner.setSelection(0)
         } else {
@@ -325,7 +328,7 @@ class SetStatusMessageBottomSheet :
         setClearStatusAfterValue(binding.clearStatusAfterSpinner.selectedItemPosition)
     }
 
-    private fun updateClearAtViewsForPeriod(clearAt: ExposedClearAt) {
+    private fun updateClearAtViewsForPeriod(clearAt: ClearAt) {
         when (clearAt.time) {
             "1800" -> binding.clearStatusAfterSpinner.setSelection(POS_HALF_AN_HOUR)
             "3600" -> binding.clearStatusAfterSpinner.setSelection(POS_AN_HOUR)
@@ -334,7 +337,7 @@ class SetStatusMessageBottomSheet :
         }
     }
 
-    private fun updateClearAtViewsForEndOf(clearAt: ExposedClearAt) {
+    private fun updateClearAtViewsForEndOf(clearAt: ClearAt) {
         when (clearAt.time) {
             "day" -> binding.clearStatusAfterSpinner.setSelection(POS_TODAY)
             "week" -> binding.clearStatusAfterSpinner.setSelection(POS_END_OF_WEEK)
