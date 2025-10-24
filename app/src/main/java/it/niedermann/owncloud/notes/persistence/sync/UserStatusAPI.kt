@@ -1,3 +1,9 @@
+/*
+ * Nextcloud Notes - Android Client
+ *
+ * SPDX-FileCopyrightText: 2015-2025 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 package it.niedermann.owncloud.notes.persistence.sync
 
 import com.owncloud.android.lib.resources.users.PredefinedStatus
@@ -15,7 +21,7 @@ interface UserStatusAPI {
     fun fetchUserStatus(): Call<OcsResponse<Status>>
 
     @DELETE("user_status/message?format=json")
-    fun clearStatusMessage(): Call<OcsResponse<Void>>
+    fun clearStatusMessage(): Call<OcsResponse<List<Any>>>
 
     @GET("predefined_statuses?format=json")
     fun fetchPredefinedStatuses(): Call<OcsResponse<ArrayList<PredefinedStatus>>>
