@@ -45,6 +45,7 @@ public class Capabilities implements Serializable {
     private boolean askForOptionalPassword;
     private boolean isReSharingAllowed;
     private int defaultPermission = OCShare.NO_PERMISSION;
+    private Boolean userStatusSupportsBusy = null;
 
     public boolean isReSharingAllowed() {
         return isReSharingAllowed;
@@ -146,13 +147,20 @@ public class Capabilities implements Serializable {
         this.textColor = textColor;
     }
 
-
     public boolean isDirectEditingAvailable() {
         return directEditingAvailable;
     }
 
     public void setDirectEditingAvailable(boolean directEditingAvailable) {
         this.directEditingAvailable = directEditingAvailable;
+    }
+
+    public boolean isUserStatusSupportsBusy() {
+        return userStatusSupportsBusy;
+    }
+
+    public void setUserStatusSupportsBusy(boolean value) {
+        userStatusSupportsBusy = value;
     }
 
     @Override
@@ -169,6 +177,7 @@ public class Capabilities implements Serializable {
                 ", textColor=" + textColor +
                 ", eTag='" + eTag + '\'' +
                 ", hasDirectEditing=" + directEditingAvailable +
+                ", userStatusSupportsBusy=" + userStatusSupportsBusy +
                 '}';
     }
 }

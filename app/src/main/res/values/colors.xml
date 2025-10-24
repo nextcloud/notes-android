@@ -54,4 +54,7 @@
     <color name="secondary_button_background_color">#D6D7D7</color>
     <color name="secondary_button_text_color">#000000</color>
     <color name="primary_button_text_color">#ffffff</color>
+    <color name="online">#2D7B41</color>
+    <color name="busy">#DB0606</color>
+    <color name="offline">@color/high_emphasis_text</color>
 </resources>

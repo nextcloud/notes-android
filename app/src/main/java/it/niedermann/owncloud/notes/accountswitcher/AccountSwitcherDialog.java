@@ -76,11 +76,8 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
             AvatarLoader.INSTANCE.load(requireContext(), binding.currentAccountItemAvatar, currentLocalAccount);
             binding.accountLayout.setOnClickListener((v) -> dismiss());
             binding.onlineStatus.setOnClickListener(v -> {
-                /*
-                 val setStatusDialog = SetOnlineStatusBottomSheet(currentStatus)
-                setStatusDialog.show((activity as DrawerActivity).supportFragmentManager, "fragment_set_status")
-                 */
-
+                final var setOnlineStatusBottomSheet = new SetOnlineStatusBottomSheet();
+                setOnlineStatusBottomSheet.show(requireActivity().getSupportFragmentManager(), "fragment_set_status");
                 dismiss();
             });
 

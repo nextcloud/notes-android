@@ -528,4 +528,13 @@
     <string name="thisWeek">This week</string>
     <string name="error_setting_status_message">Error setting status message!</string>
     <string name="file_list_seconds_ago">seconds ago</string>
+    <string name="online_status">Online status</string>
+    <string name="online">Online</string>
+    <string name="dnd">Do not disturb</string>
+    <string name="away">Away</string>
+    <string name="invisible">Invisible</string>
+    <string name="busy">Busy</string>
+    <string name="mute_all_notifications">Mute all notifications</string>
+    <string name="appear_offline">Appear offline</string>
+    <string name="status_set_fail_message">Failed to set status!</string>
 </resources>
