@@ -1,5 +1,12 @@
+/*
+ * Nextcloud Android client application
+ *
+ * @author Tobias Kaminsky
+ * Copyright (C) 2020 Nextcloud GmbH
+ *
+ * SPDX-License-Identifier: AGPL-3.0-or-later OR GPL-2.0-only
+ */
 package it.niedermann.owncloud.notes.accountswitcher
-
 
 import android.annotation.SuppressLint
 import android.os.Bundle
