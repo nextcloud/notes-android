@@ -13,16 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
-import com.nextcloud.android.sso.api.ParsedResponse;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
-import java.util.Map;
-
-import it.niedermann.owncloud.notes.persistence.sync.OcsAPI;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
-import it.niedermann.owncloud.notes.shared.model.OcsResponse;
-import it.niedermann.owncloud.notes.shared.model.OcsUser;
-import retrofit2.Response;
+import it.niedermann.owncloud.notes.util.ThrowableExtensionsKt;
 
 @WorkerThread
 public class CapabilitiesClient {
@@ -34,6 +28,8 @@ public class CapabilitiesClient {
     @WorkerThread
     public static Capabilities getCapabilities(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount, @Nullable String lastETag, @NonNull ApiProvider apiProvider) throws Throwable {
         final var ocsAPI = apiProvider.getOcsAPI(context, ssoAccount);
+        final var repository = NotesRepository.getInstance(context);
+
         try {
             final var response = ocsAPI.getCapabilities(lastETag).blockingSingle();
             final var capabilities = response.getResponse().ocs.data;
@@ -44,16 +40,20 @@ public class CapabilitiesClient {
                 Log.w(TAG, "Response headers of capabilities are null");
             }
 
-            final var repository = NotesRepository.getInstance(context);
             repository.insertCapabilities(capabilities);
 
             return capabilities;
-        } catch (RuntimeException e) {
-            final var cause = e.getCause();
+        } catch (Throwable t) {
+            if (ThrowableExtensionsKt.isEmptyResponseCast(t)) {
+                Log.d(TAG, "Server returned empty response - Notes not modified.");
+                return repository.getCapabilities();
+            }
+
+            final var cause = t.getCause();
             if (cause != null) {
                 throw cause;
             } else {
-                throw e;
+                throw t;
             }
         }
     }

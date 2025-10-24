@@ -42,6 +42,7 @@ import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.model.SyncResultStatus;
 import it.niedermann.owncloud.notes.shared.util.ApiVersionUtil;
+import it.niedermann.owncloud.notes.util.ThrowableExtensionsKt;
 
 
 /**
@@ -280,6 +281,11 @@ abstract class NotesServerSyncTask extends Thread {
             return true;
         } catch (Throwable t) {
             final Throwable cause = t.getCause();
+            if (ThrowableExtensionsKt.isEmptyResponseCast(t)) {
+                Log.d(TAG, "Server returned empty response - Notes not modified.");
+                return true;
+            }
+
             if (t.getClass() == RuntimeException.class && cause != null) {
                 if (cause.getClass() == NextcloudHttpRequestFailedException.class || cause instanceof NextcloudHttpRequestFailedException) {
                     final NextcloudHttpRequestFailedException httpException = (NextcloudHttpRequestFailedException) cause;
