@@ -15,7 +15,7 @@
     <dimen name="spacer_3x">24dp</dimen>
     <dimen name="spacer_5x">40dp</dimen>
 
-    <dimen name="avatar_size">36dp</dimen>
+    <dimen name="avatar_size">40dp</dimen>
 
     <dimen name="spacer_activity_sides">0dp</dimen>
 
