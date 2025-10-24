@@ -156,7 +156,7 @@ public class Capabilities implements Serializable {
     }
 
     public boolean isUserStatusSupportsBusy() {
-        return userStatusSupportsBusy;
+        return userStatusSupportsBusy != null && userStatusSupportsBusy;
     }
 
     public void setUserStatusSupportsBusy(boolean value) {
