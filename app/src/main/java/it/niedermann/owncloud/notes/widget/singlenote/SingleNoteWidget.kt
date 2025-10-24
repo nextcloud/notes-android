@@ -13,14 +13,12 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
+import androidx.core.net.toUri
 import it.niedermann.owncloud.notes.R
-import it.niedermann.owncloud.notes.edit.BaseNoteFragment
 import it.niedermann.owncloud.notes.edit.EditNoteActivity
 import it.niedermann.owncloud.notes.persistence.NotesRepository
-import it.niedermann.owncloud.notes.shared.util.WidgetUtil
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-import androidx.core.net.toUri
 
 class SingleNoteWidget : AppWidgetProvider() {
     private val executor: ExecutorService = Executors.newCachedThreadPool()
@@ -52,44 +50,69 @@ class SingleNoteWidget : AppWidgetProvider() {
         super.onDeleted(context, appWidgetIds)
     }
 
-    companion object {
-        private val TAG: String = SingleNoteWidget::class.java.getSimpleName()
-        fun updateAppWidget(context: Context, awm: AppWidgetManager, appWidgetIds: IntArray) {
-            val templateIntent = Intent(context, EditNoteActivity::class.java)
-            val repo = NotesRepository.getInstance(context)
-
-            appWidgetIds.forEach { appWidgetId ->
-                repo.getSingleNoteWidgetData(appWidgetId)?.let { data ->
-                    templateIntent.putExtra(BaseNoteFragment.PARAM_ACCOUNT_ID, data.accountId)
-
-                    val serviceIntent = Intent(context, SingleNoteWidgetService::class.java).apply {
-                        putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
-                        setData(toUri(Intent.URI_INTENT_SCHEME).toUri())
-                    }
-
-
-                    val views = RemoteViews(context.packageName, R.layout.widget_single_note).apply {
-                        setPendingIntentTemplate(
-                            R.id.single_note_widget_lv, PendingIntent.getActivity(
-                                context, appWidgetId, templateIntent,
-                                WidgetUtil.pendingIntentFlagCompat(PendingIntent.FLAG_UPDATE_CURRENT)
-                            )
-                        )
-                        setRemoteAdapter(R.id.single_note_widget_lv, serviceIntent)
-                        setEmptyView(
-                            R.id.single_note_widget_lv,
-                            R.id.widget_single_note_placeholder_tv
-                        )
-                    }
-
-                    awm.run {
-                        updateAppWidget(appWidgetId, views)
-                        notifyAppWidgetViewDataChanged(appWidgetId, R.id.single_note_widget_lv)
-                    }
+    private fun updateAppWidget(context: Context, awm: AppWidgetManager, appWidgetIds: IntArray) {
+        val repo = NotesRepository.getInstance(context)
+        appWidgetIds.forEach { appWidgetId ->
+            repo.getSingleNoteWidgetData(appWidgetId)?.let { data ->
+                val pendingIntent = getPendingIntent(context, appWidgetId)
+                val serviceIntent = getServiceIntent(context, appWidgetId)
+                val views = getRemoteViews(context, pendingIntent, serviceIntent)
+                awm.run {
+                    updateAppWidget(appWidgetId, views)
+                    notifyAppWidgetViewDataChanged(appWidgetId, R.id.single_note_widget_lv)
                 }
             }
         }
+    }
 
+    private fun getPendingIntent(
+        context: Context,
+        id: Int
+    ): PendingIntent {
+        val intent = Intent(context, EditNoteActivity::class.java).apply {
+            setPackage(context.packageName)
+        }
+
+        val pendingIntentFlags = PendingIntent.FLAG_UPDATE_CURRENT or
+                PendingIntent.FLAG_MUTABLE or
+                Intent.FILL_IN_COMPONENT
+
+        return PendingIntent.getActivity(
+            context,
+            id,
+            intent,
+            pendingIntentFlags
+        )
+    }
+
+    private fun getServiceIntent(context: Context, id: Int): Intent {
+        return Intent(context, SingleNoteWidgetService::class.java).apply {
+            putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, id)
+            val dataFlag = toUri(Intent.URI_INTENT_SCHEME) + id
+            val dataUri = dataFlag.toUri()
+            setData(dataUri)
+        }
+    }
+
+    private fun getRemoteViews(
+        context: Context,
+        pendingIntent: PendingIntent,
+        serviceIntent: Intent
+    ): RemoteViews {
+        return RemoteViews(
+            context.packageName,
+            R.layout.widget_single_note
+        ).apply {
+            setPendingIntentTemplate(R.id.single_note_widget_lv, pendingIntent)
+            setEmptyView(
+                R.id.single_note_widget_lv,
+                R.id.widget_single_note_placeholder_tv
+            )
+            setRemoteAdapter(R.id.single_note_widget_lv, serviceIntent)
+        }
+    }
+
+    companion object {
         @JvmStatic
         fun updateSingleNoteWidgets(context: Context) {
             val intent = Intent(context, SingleNoteWidget::class.java).apply {

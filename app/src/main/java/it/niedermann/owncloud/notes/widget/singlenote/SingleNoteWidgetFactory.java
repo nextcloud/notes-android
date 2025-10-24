@@ -9,19 +9,19 @@ package it.niedermann.owncloud.notes.widget.singlenote;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import androidx.annotation.Nullable;
 
+import com.owncloud.android.lib.common.utils.Log_OC;
+
 import it.niedermann.android.markdown.MarkdownUtil;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
-import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
 
 public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
 
@@ -89,17 +89,24 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         }
 
         final var fillInIntent = new Intent();
-        final var args = new Bundle();
+        fillInIntent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
+        fillInIntent.putExtra(EditNoteActivity.PARAM_ACCOUNT_ID, note.getAccountId());
 
-        args.putLong(EditNoteActivity.PARAM_NOTE_ID, note.getId());
-        args.putLong(EditNoteActivity.PARAM_ACCOUNT_ID, note.getAccountId());
-        fillInIntent.putExtras(args);
+        final var noteContent = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_content);
+        noteContent.setOnClickFillInIntent(R.id.single_note_content_tv, fillInIntent);
 
-        final var note_content = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_content);
-        note_content.setOnClickFillInIntent(R.id.single_note_content_tv, fillInIntent);
-        note_content.setTextViewText(R.id.single_note_content_tv, MarkdownUtil.renderForRemoteView(context, note.getContent()));
-
-        return note_content;
+        CharSequence rendered;
+        try {
+            rendered = MarkdownUtil.renderForRemoteView(context, note.getContent());
+            if (rendered == null) {
+                rendered = "";
+            }
+        } catch (Exception e) {
+            Log_OC.e(TAG, "Markdown rendering failed", e);
+            rendered = note.getContent();
+        }
+        noteContent.setTextViewText(R.id.single_note_content_tv, rendered);
+        return noteContent;
     }
 
 
@@ -116,7 +123,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
 
     @Override
     public long getItemId(int position) {
-        return position;
+        return note != null ? note.getId() : position;
     }
 
     @Override
