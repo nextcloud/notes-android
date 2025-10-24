@@ -20,10 +20,12 @@ import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountswitcher.repository.UserStatusRepository;
-import it.niedermann.owncloud.notes.branding.BrandedBottomSheetDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.DialogAccountSwitcherBinding;
@@ -45,6 +47,7 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
     private DialogAccountSwitcherBinding binding;
     private AccountSwitcherListener accountSwitcherListener;
     private long currentAccountId;
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -81,15 +84,11 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
             binding.accountLayout.setOnClickListener((v) -> dismiss());
 
             binding.onlineStatus.setOnClickListener(v -> {
-                final var setOnlineStatusBottomSheet = new SetOnlineStatusBottomSheet();
-                setOnlineStatusBottomSheet.show(requireActivity().getSupportFragmentManager(), "fragment_set_status");
-                dismiss();
+                showBottomSheetDialog(AccountSwitcherBottomSheetTag.ONLINE_STATUS);
             });
 
             binding.statusMessage.setOnClickListener(v -> {
-                final var setStatusMessageDialog = new SetStatusMessageBottomSheet();
-                setStatusMessageDialog.show(requireActivity().getSupportFragmentManager(), "fragment_set_status_message");
-                dismiss();
+                showBottomSheetDialog(AccountSwitcherBottomSheetTag.MESSAGE_STATUS);
             });
 
             final var adapter = new AccountSwitcherAdapter((localAccount -> {
@@ -134,10 +133,18 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
                 return Unit.INSTANCE;
             }
             final var repository = new UserStatusRepository(requireContext(), account);
+            executor.execute(() -> {
+                final var currentStatus = repository.fetchUserStatus();
+                if (currentStatus == null) {
+                    return;
+                }
 
-            final var fragment = tag.fragment(repository, )
-            fragment.show(requireActivity().getSupportFragmentManager(), tag.name());
-            dismiss();
+                requireActivity().runOnUiThread(() -> {
+                    final var fragment = tag.fragment(repository, currentStatus);
+                    fragment.show(requireActivity().getSupportFragmentManager(), tag.name());
+                    dismiss();
+                });
+            });
             return Unit.INSTANCE;
         });
     }

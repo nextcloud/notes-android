@@ -105,9 +105,9 @@ class UserStatusRepository(
         }
     }
 
-    suspend fun fetchUserStatus(): Status? = withContext(Dispatchers.IO) {
+    fun fetchUserStatus(): Status? {
         val offlineStatus = Status(StatusType.OFFLINE, "", "", -1)
-        try {
+        return try {
             val call = api.fetchUserStatus()
             val response = call.execute()
             if (response.isSuccessful) {
