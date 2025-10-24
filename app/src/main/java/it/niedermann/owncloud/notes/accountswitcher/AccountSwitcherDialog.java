@@ -14,11 +14,13 @@ import android.content.Intent;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.owncloud.android.lib.resources.users.Status;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -33,6 +35,7 @@ import it.niedermann.owncloud.notes.manageaccounts.ManageAccountsActivity;
 import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.share.helper.AvatarLoader;
+import it.niedermann.owncloud.notes.shared.util.DisplayUtils;
 import it.niedermann.owncloud.notes.util.ActivityExtensionsKt;
 import kotlin.Unit;
 
@@ -47,6 +50,8 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
     private DialogAccountSwitcherBinding binding;
     private AccountSwitcherListener accountSwitcherListener;
     private long currentAccountId;
+    private UserStatusRepository repository;
+    private Status currentStatus;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     @Override
@@ -67,6 +72,34 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
         }
 
         repo = NotesRepository.getInstance(requireContext());
+        initRepositoryAndFetchCurrentStatus();
+    }
+
+    private void initRepositoryAndFetchCurrentStatus() {
+        ActivityExtensionsKt.ssoAccount(requireActivity(), account -> {
+            if (account != null) {
+                repository = new UserStatusRepository(requireContext(), account);
+            } else {
+                DisplayUtils.showSnackMessage(requireView(), R.string.account_switch_dialog_status_fetching_error_message);
+            }
+            executor.execute(() -> {
+                currentStatus = repository.fetchUserStatus();
+                requireActivity().runOnUiThread(() -> {
+                    final var message = currentStatus.getMessage();
+                    if (message != null) {
+                        binding.accountStatus.setVisibility(View.VISIBLE);
+                        binding.accountStatus.setText(message);
+                    }
+
+                    final var emoji = currentStatus.getIcon();
+                    if (emoji != null) {
+                        binding.accountStatusEmoji.setVisibility(View.VISIBLE);
+                        binding.accountStatusEmoji.setText(emoji);
+                    }
+                });
+            });
+            return Unit.INSTANCE;
+        });
     }
 
     @NonNull
@@ -128,25 +161,14 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
     }
 
     private void showBottomSheetDialog(@NonNull AccountSwitcherBottomSheetTag tag) {
-        ActivityExtensionsKt.ssoAccount(requireActivity(), account -> {
-            if (account == null) {
-                return Unit.INSTANCE;
-            }
-            final var repository = new UserStatusRepository(requireContext(), account);
-            executor.execute(() -> {
-                final var currentStatus = repository.fetchUserStatus();
-                if (currentStatus == null) {
-                    return;
-                }
+        if (repository == null || currentStatus == null) {
+            DisplayUtils.showSnackMessage(requireView(), R.string.account_switch_dialog_status_fetching_error_message);
+            return;
+        }
 
-                requireActivity().runOnUiThread(() -> {
-                    final var fragment = tag.fragment(repository, currentStatus);
-                    fragment.show(requireActivity().getSupportFragmentManager(), tag.name());
-                    dismiss();
-                });
-            });
-            return Unit.INSTANCE;
-        });
+        final var fragment = tag.fragment(repository, currentStatus);
+        fragment.show(requireActivity().getSupportFragmentManager(), tag.name());
+        dismiss();
     }
 
     public static DialogFragment newInstance(long currentAccountId) {

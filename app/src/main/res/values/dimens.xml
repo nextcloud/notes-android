@@ -25,7 +25,7 @@
     <dimen name="button_extra_width">180dp</dimen>
     <dimen name="bottom_navigation_view_margin">100dp</dimen>
 
-    <dimen name="avatar_size">36dp</dimen>
+    <dimen name="avatar_size">40dp</dimen>
 
     <dimen name="activity_row_layout_min_width_independent">196dip</dimen>
     <dimen name="activity_row_layout_height">48dp</dimen>
@@ -50,6 +50,8 @@
 
     <dimen name="primary_font_size">16sp</dimen>
     <dimen name="secondary_font_size">14sp</dimen>
+
+    <dimen name="emoji_size">14sp</dimen>
 
     <!-- Font Sizes -->
     <dimen name="note_font_size_minimum">12sp</dimen>
