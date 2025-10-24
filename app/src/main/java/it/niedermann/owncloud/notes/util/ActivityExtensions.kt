@@ -9,6 +9,19 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+/**
+ * Retrieves the currently active Single Sign-On (SSO) account associated with this [ComponentActivity].
+ *
+ * This function runs asynchronously using a coroutine:
+ * - The SSO account lookup is performed on the **IO dispatcher** (background thread).
+ * - Once the result is available, the [onCompleted] callback is invoked on the **main thread**.
+ *
+ * If fetching the account fails for any reason (e.g., no account found, SSO error, etc.),
+ * the callback will receive `null` and an error will be logged.
+ *
+ * @param onCompleted A callback that receives the retrieved [SingleSignOnAccount],
+ * or `null` if no valid account was found.
+ */
 fun ComponentActivity.ssoAccount(onCompleted: (SingleSignOnAccount?) -> Unit) {
     lifecycleScope.launch(Dispatchers.IO) {
         val result = try {
