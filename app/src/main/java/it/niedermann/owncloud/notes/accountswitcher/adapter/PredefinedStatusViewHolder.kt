@@ -9,8 +9,8 @@ package it.niedermann.owncloud.notes.accountswitcher.adapter
 
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
-import com.owncloud.android.lib.resources.users.PredefinedStatus
 import it.niedermann.owncloud.notes.R
+import it.niedermann.owncloud.notes.accountswitcher.model.ExposedPredefinedStatus
 import it.niedermann.owncloud.notes.databinding.PredefinedStatusBinding
 import it.niedermann.owncloud.notes.shared.util.DisplayUtils
 
@@ -18,15 +18,15 @@ private const val ONE_SECOND_IN_MILLIS = 1000
 
 class PredefinedStatusViewHolder(private val binding: PredefinedStatusBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(status: PredefinedStatus, clickListener: PredefinedStatusClickListener, context: Context) {
+    fun bind(status: ExposedPredefinedStatus, clickListener: PredefinedStatusClickListener, context: Context) {
         binding.root.setOnClickListener { clickListener.onClick(status) }
         binding.icon.text = status.icon
         binding.name.text = status.message
 
-        if (status.clearAt == null) {
+        if (status.exposedClearAt == null) {
             binding.clearAt.text = context.getString(R.string.dontClear)
         } else {
-            val clearAt = status.clearAt!!
+            val clearAt = status.exposedClearAt
             if (clearAt.type == "period") {
                 binding.clearAt.text = DisplayUtils.getRelativeTimestamp(
                     context,

@@ -1,13 +1,14 @@
 package it.niedermann.owncloud.notes.accountswitcher.repository
 
 import android.content.Context
-import android.util.Log
-import androidx.annotation.WorkerThread
 import com.nextcloud.android.sso.model.SingleSignOnAccount
+import com.owncloud.android.lib.common.utils.Log_OC
+import com.owncloud.android.lib.resources.users.Status
+import com.owncloud.android.lib.resources.users.StatusType
+import it.niedermann.owncloud.notes.accountswitcher.model.ExposedPredefinedStatus
 import it.niedermann.owncloud.notes.persistence.ApiProvider
-import it.niedermann.owncloud.notes.shared.model.OcsResponse
-import retrofit2.Response
-import kotlin.getValue
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class UserStatusRepository(
     private val context: Context,
@@ -17,47 +18,104 @@ class UserStatusRepository(
         private const val TAG = "UserStatusRepository"
     }
 
-    private val ocsAPI by lazy { ApiProvider.getInstance().getOcsAPI(context, ssoAccount) }
+    private val api by lazy { ApiProvider.getInstance().getUserStatusAPI(context, ssoAccount) }
 
-    @WorkerThread
-    fun clearStatus(): Boolean {
-        return try {
-            val response: Response<OcsResponse<Void>> = ocsAPI.clearStatusMessage().execute()
-            response.isSuccessful
+    suspend fun fetchPredefinedStatuses(): ArrayList<ExposedPredefinedStatus> = withContext(Dispatchers.IO) {
+        try {
+            val response = api.fetchPredefinedStatuses().execute()
+            if (response.isSuccessful) {
+                Log_OC.d(TAG, "✅ fetching predefined statuses successfully completed")
+                response.body()?.ocs?.data ?: arrayListOf()
+            } else {
+                Log_OC.e(TAG, "❌ fetching predefined statuses failed")
+                arrayListOf()
+            }
         } catch (t: Throwable) {
-            Log.e(TAG, "Clearing status failed", t)
+            Log_OC.e(TAG, "❌ fetching predefined statuses failed", t)
+            arrayListOf()
+        }
+    }
+
+    suspend fun clearStatus(): Boolean = withContext(Dispatchers.IO) {
+        try {
+            val call = api.clearStatusMessage()
+            val response = call.execute()
+            if (response.isSuccessful) {
+                Log_OC.d(TAG, "✅ clearing status successfully completed")
+                true
+            } else {
+                Log_OC.e(TAG, "❌ clearing status failed")
+                false
+            }
+        } catch (t: Throwable) {
+            Log_OC.e(TAG, "❌ clearing status failed", t)
             false
         }
     }
 
-    @WorkerThread
-    fun setPredefinedStatus(messageId: String, clearAt: Long? = null): Boolean {
-        val body = mutableMapOf<String, String>("messageId" to messageId)
-        clearAt?.let { body["clearAt"] = it.toString() }
+    suspend fun setPredefinedStatus(messageId: String, clearAt: Long? = null): Boolean =
+        withContext(Dispatchers.IO) {
+            try {
+                val body = mutableMapOf("messageId" to messageId)
+                clearAt?.let { body["clearAt"] = it.toString() }
+                val call = api.setPredefinedStatusMessage(body)
+                val response = call.execute()
+                if (response.isSuccessful) {
+                    Log_OC.d(TAG, "✅ predefined status successfully set")
+                    true
+                } else {
+                    Log_OC.e(TAG, "❌ setting predefined status failed")
+                    false
+                }
+            } catch (t: Throwable) {
+                Log_OC.e(TAG, "❌ setting predefined status failed", t)
+                false
+            }
+        }
 
-        return try {
-            val response: Response<OcsResponse<Void>> = ocsAPI.setPredefinedStatusMessage(body).execute()
-            response.isSuccessful
+    suspend fun setCustomStatus(
+        message: String,
+        statusIcon: String,
+        clearAt: Long? = null
+    ): Boolean = withContext(Dispatchers.IO) {
+        try {
+            val body = mutableMapOf(
+                "message" to message,
+                "statusIcon" to statusIcon
+            )
+            clearAt?.let { body["clearAt"] = it.toString() }
+
+            val call = api.setUserDefinedStatusMessage(body)
+            val response = call.execute()
+            if (response.isSuccessful) {
+                Log_OC.d(TAG, "✅ setting custom status successfully completed")
+                true
+            } else {
+                Log_OC.e(TAG, "❌ setting custom status failed")
+                false
+            }
         } catch (t: Throwable) {
-            Log.e(TAG, "Setting predefined status failed", t)
+            Log_OC.e(TAG, "❌setting custom status failed", t)
             false
         }
     }
 
-    @WorkerThread
-    fun setCustomStatus(message: String, statusIcon: String, clearAt: Long? = null): Boolean {
-        val body = mutableMapOf(
-            "message" to message,
-            "statusIcon" to statusIcon
-        )
-        clearAt?.let { body["clearAt"] = it.toString() }
+    suspend fun fetchUserStatus(): Status? = withContext(Dispatchers.IO) {
+        val offlineStatus = Status(StatusType.OFFLINE, "", "", -1)
+        try {
+            val call = api.fetchUserStatus()
+            val response = call.execute()
+            if (response.isSuccessful) {
+                Log_OC.d(TAG, "✅ fetching user status successfully completed")
+                response.body()?.ocs?.data ?: offlineStatus
+            } else {
+                Log_OC.e(TAG, "❌ fetching user status failed")
+                offlineStatus
+            }
 
-        return try {
-            val response: Response<OcsResponse<Void>> = ocsAPI.setUserDefinedStatusMessage(body).execute()
-            response.isSuccessful
         } catch (t: Throwable) {
-            Log.e(TAG, "Setting custom status failed", t)
-            false
+            Log_OC.e(TAG, "❌ fetching user status failed $t")
+            offlineStatus
         }
     }
 }

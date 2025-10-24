@@ -11,12 +11,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.owncloud.android.lib.resources.users.PredefinedStatus
+import it.niedermann.owncloud.notes.accountswitcher.model.ExposedPredefinedStatus
 import it.niedermann.owncloud.notes.databinding.PredefinedStatusBinding
 
 class PredefinedStatusListAdapter(private val clickListener: PredefinedStatusClickListener, val context: Context) :
     RecyclerView.Adapter<PredefinedStatusViewHolder>() {
-    internal var list: List<PredefinedStatus> = emptyList()
+    internal var list: List<ExposedPredefinedStatus> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PredefinedStatusViewHolder {
         val itemBinding = PredefinedStatusBinding.inflate(LayoutInflater.from(parent.context), parent, false)

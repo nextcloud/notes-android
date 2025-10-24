@@ -12,8 +12,6 @@ package it.niedermann.owncloud.notes.accountswitcher
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,13 +19,12 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
-import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.nextcloud.common.User
-import com.owncloud.android.lib.resources.users.ClearAt
-import com.owncloud.android.lib.resources.users.PredefinedStatus
+import com.nextcloud.android.sso.helper.SingleAccountHelper
+import com.owncloud.android.lib.common.utils.Log_OC
 import com.owncloud.android.lib.resources.users.Status
+import com.owncloud.android.lib.resources.users.StatusType
 import com.vanniktech.emoji.EmojiManager
 import com.vanniktech.emoji.EmojiPopup
 import com.vanniktech.emoji.google.GoogleEmojiProvider
@@ -36,19 +33,16 @@ import com.vanniktech.emoji.installForceSingleEmoji
 import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.accountswitcher.adapter.PredefinedStatusClickListener
 import it.niedermann.owncloud.notes.accountswitcher.adapter.PredefinedStatusListAdapter
+import it.niedermann.owncloud.notes.accountswitcher.model.ExposedClearAt
+import it.niedermann.owncloud.notes.accountswitcher.model.ExposedPredefinedStatus
 import it.niedermann.owncloud.notes.accountswitcher.repository.UserStatusRepository
-import it.niedermann.owncloud.notes.accountswitcher.task.ClearStatusTask
-import it.niedermann.owncloud.notes.accountswitcher.task.SetPredefinedCustomStatusTask
-import it.niedermann.owncloud.notes.accountswitcher.task.SetUserDefinedCustomStatusTask
 import it.niedermann.owncloud.notes.branding.BrandedBottomSheetDialogFragment
 import it.niedermann.owncloud.notes.branding.BrandingUtil
 import it.niedermann.owncloud.notes.databinding.SetStatusMessageBottomSheetBinding
 import it.niedermann.owncloud.notes.shared.util.DisplayUtils
-import it.niedermann.owncloud.notes.util.runner.AsyncRunner
-import it.niedermann.owncloud.notes.util.runner.ThreadPoolAsyncRunner
-import it.niedermann.owncloud.notes.util.storage.UserStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.Calendar
 import java.util.Locale
 
@@ -70,50 +64,53 @@ private const val LAST_SECOND_OF_MINUTE = 59
 private const val CLEAR_AT_TYPE_PERIOD = "period"
 private const val CLEAR_AT_TYPE_END_OF = "end-of"
 
-class SetStatusMessageBottomSheet(val user: User, val currentStatus: Status?) :
+class SetStatusMessageBottomSheet :
     BrandedBottomSheetDialogFragment(R.layout.set_status_message_bottom_sheet),
-    PredefinedStatusClickListener{
+    PredefinedStatusClickListener {
+    companion object {
+        private const val TAG = "SetStatusMessageBottomSheet"
+    }
 
     private lateinit var binding: SetStatusMessageBottomSheetBinding
 
-    private lateinit var repository: UserStatusRepository
-    private lateinit var predefinedStatus: ArrayList<PredefinedStatus>
+    private var repository: UserStatusRepository? = null
     private lateinit var adapter: PredefinedStatusListAdapter
     private var selectedPredefinedMessageId: String? = null
     private var clearAt: Long? = -1
     private lateinit var popup: EmojiPopup
 
-    lateinit var asyncRunner: AsyncRunner
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val uiHandler = Handler(Looper.getMainLooper())
-        asyncRunner = ThreadPoolAsyncRunner(uiHandler, 4, "io")
-        predefinedStatus = UserStorage.readPredefinedStatus(requireContext())
-
-        lifecycleScope.launch(Dispatchers.IO) {
-
-        }
-        repository = UserStatusRepository(requireContext())
         EmojiManager.install(GoogleEmojiProvider())
+    }
+
+    private fun initRepository() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            val ssoAccount =
+                SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext()) ?: return@launch
+            repository = UserStatusRepository(requireContext(), ssoAccount)
+            val predefinedStatus = repository?.fetchPredefinedStatuses() ?: arrayListOf()
+            val currentStatus = repository?.fetchUserStatus() ?: Status(StatusType.OFFLINE, "", "", -1)
+
+            withContext(Dispatchers.Main) {
+                updateCurrentStatusViews(currentStatus)
+                initPredefinedStatusAdapter(predefinedStatus)
+            }
+        }
+    }
+
+    private fun initPredefinedStatusAdapter(predefinedStatus: ArrayList<ExposedPredefinedStatus>) {
+        adapter = PredefinedStatusListAdapter(this, requireContext())
+        Log_OC.d(TAG, "PredefinedStatusListAdapter initialized")
+        adapter.list = predefinedStatus
+        binding.predefinedStatusList.adapter = adapter
+        binding.predefinedStatusList.layoutManager = LinearLayoutManager(context)
     }
 
     @SuppressLint("DefaultLocale")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        accountManager = (activity as BaseActivity).userAccountManager
-
-        currentStatus?.let {
-            updateCurrentStatusViews(it)
-        }
-
-        adapter = PredefinedStatusListAdapter(this, requireContext())
-        if (this::predefinedStatus.isInitialized) {
-            adapter.list = predefinedStatus
-        }
-        binding.predefinedStatusList.adapter = adapter
-        binding.predefinedStatusList.layoutManager = LinearLayoutManager(context)
+        initRepository()
 
         binding.clearStatus.setOnClickListener { clearStatus() }
         binding.setStatus.setOnClickListener { setStatusMessage() }
@@ -129,30 +126,34 @@ class SetStatusMessageBottomSheet(val user: User, val currentStatus: Status?) :
         binding.emoji.installForceSingleEmoji()
         binding.emoji.installDisableKeyboardInput(popup)
 
-        val adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_item)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        adapter.add(getString(R.string.dontClear))
-        adapter.add(getString(R.string.thirtyMinutes))
-        adapter.add(getString(R.string.oneHour))
-        adapter.add(getString(R.string.fourHours))
-        adapter.add(getString(R.string.today))
-        adapter.add(getString(R.string.thisWeek))
+        clearStatusAdapter()
+    }
+
+    private fun clearStatusAdapter() {
+        val adapter =
+            ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_item).apply {
+                setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                add(getString(R.string.dontClear))
+                add(getString(R.string.thirtyMinutes))
+                add(getString(R.string.oneHour))
+                add(getString(R.string.fourHours))
+                add(getString(R.string.today))
+                add(getString(R.string.thisWeek))
+            }
 
         binding.clearStatusAfterSpinner.apply {
             this.adapter = adapter
-            onItemClickListener = object : OnItemSelectedListener, AdapterView.OnItemClickListener {
-                override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+            onItemSelectedListener = object : OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
                     setClearStatusAfterValue(position)
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) = Unit
-
-                override fun onItemClick(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) = Unit
             }
         }
     }
@@ -180,7 +181,11 @@ class SetStatusMessageBottomSheet(val user: User, val currentStatus: Status?) :
             binding.remainingClearTime.apply {
                 binding.clearStatusMessageTextView.text = getString(R.string.clear)
                 visibility = View.VISIBLE
-                text = DisplayUtils.getRelativeTimestamp(context, it.clearAt * ONE_SECOND_IN_MILLIS, true)
+                text = DisplayUtils.getRelativeTimestamp(
+                    context,
+                    it.clearAt * ONE_SECOND_IN_MILLIS,
+                    true
+                )
                     .toString()
                     .replaceFirstChar { it.lowercase(Locale.getDefault()) }
                 setOnClickListener {
@@ -208,7 +213,7 @@ class SetStatusMessageBottomSheet(val user: User, val currentStatus: Status?) :
             POS_FOUR_HOURS -> {
                 // four hours
                 System.currentTimeMillis() / ONE_SECOND_IN_MILLIS +
-                    FOUR_HOURS * ONE_MINUTE_IN_SECONDS * ONE_MINUTE_IN_SECONDS
+                        FOUR_HOURS * ONE_MINUTE_IN_SECONDS * ONE_MINUTE_IN_SECONDS
             }
 
             POS_TODAY -> {
@@ -230,7 +235,7 @@ class SetStatusMessageBottomSheet(val user: User, val currentStatus: Status?) :
         }
     }
 
-    private fun clearAtToUnixTime(clearAt: ClearAt?): Long = when {
+    private fun clearAtToUnixTime(clearAt: ExposedClearAt?): Long = when {
         clearAt?.type == CLEAR_AT_TYPE_PERIOD -> {
             System.currentTimeMillis() / ONE_SECOND_IN_MILLIS + clearAt.time.toLong()
         }
@@ -255,53 +260,51 @@ class SetStatusMessageBottomSheet(val user: User, val currentStatus: Status?) :
     private fun dateToSeconds(date: Calendar) = date.timeInMillis / ONE_SECOND_IN_MILLIS
 
     private fun clearStatus() {
-        asyncRunner.postQuickTask(
-            ClearStatusTask(accountManager.currentOwnCloudAccount?.savedAccount, context),
-            { dismiss(it) }
-        )
+        lifecycleScope.launch(Dispatchers.IO) {
+            val result = repository?.clearStatus()
+            dismiss(result)
+        }
     }
 
     private fun setStatusMessage() {
         if (selectedPredefinedMessageId != null) {
-            asyncRunner.postQuickTask(
-                SetPredefinedCustomStatusTask(
-                    selectedPredefinedMessageId!!,
-                    clearAt,
-                    accountManager.currentOwnCloudAccount?.savedAccount,
-                    context
-                ),
-                { dismiss(it) }
-            )
+            lifecycleScope.launch(Dispatchers.IO) {
+                val result = repository?.setPredefinedStatus(selectedPredefinedMessageId!!, clearAt)
+                dismiss(result)
+            }
         } else {
-            asyncRunner.postQuickTask(
-                SetUserDefinedCustomStatusTask(
+            lifecycleScope.launch(Dispatchers.IO) {
+                val result = repository?.setCustomStatus(
                     binding.customStatusInput.text.toString(),
                     binding.emoji.text.toString(),
-                    clearAt,
-                    accountManager.currentOwnCloudAccount?.savedAccount,
-                    context
-                ),
-                { dismiss(it) }
-            )
+                    clearAt
+                )
+                dismiss(result)
+            }
         }
     }
 
-    private fun dismiss(boolean: Boolean) {
-        if (boolean) {
+    private suspend fun dismiss(boolean: Boolean?) = withContext(Dispatchers.Main) {
+        if (boolean == true) {
             dismiss()
         } else {
-            DisplayUtils.showSnackMessage(view, view?.resources?.getString(R.string.error_setting_status_message))
+            val message = view?.resources?.getString(R.string.error_setting_status_message)
+            DisplayUtils.showSnackMessage(view, message)
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = SetStatusMessageBottomSheetBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
-    override fun onClick(predefinedStatus: PredefinedStatus) {
+    override fun onClick(predefinedStatus: ExposedPredefinedStatus) {
         selectedPredefinedMessageId = predefinedStatus.id
-        clearAt = clearAtToUnixTime(predefinedStatus.clearAt)
+        clearAt = clearAtToUnixTime(predefinedStatus.exposedClearAt)
         binding.emoji.setText(predefinedStatus.icon)
         binding.customStatusInput.text?.clear()
         binding.customStatusInput.text?.append(predefinedStatus.message)
@@ -310,7 +313,7 @@ class SetStatusMessageBottomSheet(val user: User, val currentStatus: Status?) :
         binding.clearStatusAfterSpinner.visibility = View.VISIBLE
         binding.clearStatusMessageTextView.text = getString(R.string.clear_status_after)
 
-        val clearAt = predefinedStatus.clearAt
+        val clearAt = predefinedStatus.exposedClearAt
         if (clearAt == null) {
             binding.clearStatusAfterSpinner.setSelection(0)
         } else {
@@ -322,7 +325,7 @@ class SetStatusMessageBottomSheet(val user: User, val currentStatus: Status?) :
         setClearStatusAfterValue(binding.clearStatusAfterSpinner.selectedItemPosition)
     }
 
-    private fun updateClearAtViewsForPeriod(clearAt: ClearAt) {
+    private fun updateClearAtViewsForPeriod(clearAt: ExposedClearAt) {
         when (clearAt.time) {
             "1800" -> binding.clearStatusAfterSpinner.setSelection(POS_HALF_AN_HOUR)
             "3600" -> binding.clearStatusAfterSpinner.setSelection(POS_AN_HOUR)
@@ -331,17 +334,11 @@ class SetStatusMessageBottomSheet(val user: User, val currentStatus: Status?) :
         }
     }
 
-    private fun updateClearAtViewsForEndOf(clearAt: ClearAt) {
+    private fun updateClearAtViewsForEndOf(clearAt: ExposedClearAt) {
         when (clearAt.time) {
             "day" -> binding.clearStatusAfterSpinner.setSelection(POS_TODAY)
             "week" -> binding.clearStatusAfterSpinner.setSelection(POS_END_OF_WEEK)
             else -> binding.clearStatusAfterSpinner.setSelection(POS_DONT_CLEAR)
         }
-    }
-
-    @VisibleForTesting
-    fun setPredefinedStatus(predefinedStatus: ArrayList<PredefinedStatus>) {
-        adapter.list = predefinedStatus
-        binding.predefinedStatusList.adapter?.notifyDataSetChanged()
     }
 }
