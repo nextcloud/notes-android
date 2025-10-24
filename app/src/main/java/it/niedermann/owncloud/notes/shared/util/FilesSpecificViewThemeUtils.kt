@@ -7,6 +7,8 @@
 package it.niedermann.owncloud.notes.shared.util
 
 import android.content.Context
+import android.content.res.ColorStateList
+import android.view.View
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.annotation.Px
@@ -14,8 +16,13 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
+import com.google.android.material.card.MaterialCardView
+import com.nextcloud.android.common.ui.theme.MaterialSchemes
+import com.nextcloud.android.common.ui.util.PlatformThemeUtil
+import com.nextcloud.android.common.ui.util.extensions.toColorScheme
 import com.owncloud.android.lib.common.utils.Log_OC
 import com.owncloud.android.lib.resources.shares.ShareType
+import dynamiccolor.DynamicScheme
 import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.branding.BrandingUtil
 
@@ -29,6 +36,48 @@ object FilesSpecificViewThemeUtils {
 
         @Px
         const val LARGE = 8
+    }
+
+    private fun getSchemeInternal(context: Context, color: Int): DynamicScheme {
+        val scheme = MaterialSchemes.Companion.fromColor(color)
+        return when {
+            PlatformThemeUtil.isDarkMode(context) -> scheme.darkScheme
+            else -> scheme.lightScheme
+        }
+    }
+
+    private fun <R> withScheme(
+        view: View,
+        color: Int,
+        block: (DynamicScheme) -> R
+    ): R = block(getSchemeInternal(view.context, color))
+
+    fun themeStatusCardView(cardView: MaterialCardView, color: Int) {
+        withScheme(cardView, color) { scheme ->
+            cardView.backgroundTintList =
+                ColorStateList(
+                    arrayOf(
+                        intArrayOf(android.R.attr.state_checked),
+                        intArrayOf(-android.R.attr.state_checked)
+                    ),
+                    intArrayOf(
+                        scheme.surfaceContainerHighest,
+                        scheme.surface
+                    )
+                )
+            cardView.setStrokeColor(
+                ColorStateList(
+                    arrayOf(
+                        intArrayOf(android.R.attr.state_checked),
+                        intArrayOf(-android.R.attr.state_checked)
+                    ),
+                    intArrayOf(
+                        scheme.onSecondaryContainer,
+                        scheme.outlineVariant
+                    )
+                )
+            )
+        }
     }
 
     fun createAvatar(type: ShareType?, avatar: ImageView, context: Context) {

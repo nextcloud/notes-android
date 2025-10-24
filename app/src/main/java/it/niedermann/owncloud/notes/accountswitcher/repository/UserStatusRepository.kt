@@ -7,6 +7,8 @@ import com.owncloud.android.lib.resources.users.PredefinedStatus
 import com.owncloud.android.lib.resources.users.Status
 import com.owncloud.android.lib.resources.users.StatusType
 import it.niedermann.owncloud.notes.persistence.ApiProvider
+import it.niedermann.owncloud.notes.persistence.NotesRepository
+import it.niedermann.owncloud.notes.shared.model.Capabilities
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -18,7 +20,10 @@ class UserStatusRepository(
         private const val TAG = "UserStatusRepository"
     }
 
+    private val notesRepository: NotesRepository by lazy { NotesRepository.getInstance(context) }
     private val api by lazy { ApiProvider.getInstance().getUserStatusAPI(context, ssoAccount) }
+
+    fun getCapabilities(): Capabilities = notesRepository.capabilities
 
     suspend fun fetchPredefinedStatuses(): ArrayList<PredefinedStatus> = withContext(Dispatchers.IO) {
         try {
@@ -116,6 +121,25 @@ class UserStatusRepository(
         } catch (t: Throwable) {
             Log_OC.e(TAG, "❌ fetching user status failed $t")
             offlineStatus
+        }
+    }
+
+    suspend fun setStatusType(statusType: StatusType): Boolean = withContext(Dispatchers.IO) {
+        try {
+            val body = mutableMapOf(
+                "statusType" to statusType.string,
+            )
+            val response = api.setStatusType(body).execute()
+            if (response.isSuccessful) {
+                Log_OC.d(TAG, "✅ status type successfully set")
+                true
+            } else {
+                Log_OC.e(TAG, "❌ setting status type failed")
+                false
+            }
+        } catch (t: Throwable) {
+            Log_OC.e(TAG, "❌ setting status type failed", t)
+            false
         }
     }
 }

@@ -27,4 +27,8 @@ interface UserStatusAPI {
     @PUT("user_status/message/custom?format=json")
     @Headers("Content-Type: application/json")
     fun setUserDefinedStatusMessage(@Body body: Map<String, String>): Call<OcsResponse<Void>>
+
+    @PUT("user_status/status?format=json")
+    @Headers("Content-Type: application/json")
+    fun setStatusType(@Body body: Map<String, String>): Call<OcsResponse<Void>>
 }

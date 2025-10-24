@@ -73,4 +73,5 @@
 
     <dimen name="sharee_list_item_size">56dp</dimen>
     <dimen name="online_status_item_height">60dp</dimen>
+    <dimen name="iconized_single_line_item_icon_size">24dp</dimen>
 </resources>
