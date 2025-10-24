@@ -9,6 +9,7 @@
   ~ SPDX-License-Identifier: GPL-3.0-or-later
 -->
 <resources>
+    <dimen name="note_direct_edit_fab_margin_bottom">64dp</dimen>
     <dimen name="zero">0dp</dimen>
 
     <!-- Default screen margins, per the Android Design guidelines. -->
