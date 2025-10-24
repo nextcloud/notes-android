@@ -4,7 +4,7 @@
  * SPDX-FileCopyrightText: 2015-2025 Nextcloud GmbH and Nextcloud contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
-package it.niedermann.owncloud.notes.accountswitcher
+package it.niedermann.owncloud.notes.accountswitcher.bottomSheet
 
 import com.owncloud.android.lib.resources.users.Status
 import it.niedermann.owncloud.notes.accountswitcher.repository.UserStatusRepository

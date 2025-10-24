@@ -27,6 +27,8 @@ import java.util.concurrent.Executors;
 
 import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.accountswitcher.adapter.accountSwitcher.AccountSwitcherAdapter;
+import it.niedermann.owncloud.notes.accountswitcher.bottomSheet.AccountSwitcherBottomSheetTag;
 import it.niedermann.owncloud.notes.accountswitcher.repository.UserStatusRepository;
 import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;

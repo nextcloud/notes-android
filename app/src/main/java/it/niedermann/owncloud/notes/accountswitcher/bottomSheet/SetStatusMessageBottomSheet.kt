@@ -7,7 +7,7 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later OR GPL-2.0-only
  */
 
-package it.niedermann.owncloud.notes.accountswitcher
+package it.niedermann.owncloud.notes.accountswitcher.bottomSheet
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -31,8 +31,8 @@ import com.vanniktech.emoji.google.GoogleEmojiProvider
 import com.vanniktech.emoji.installDisableKeyboardInput
 import com.vanniktech.emoji.installForceSingleEmoji
 import it.niedermann.owncloud.notes.R
-import it.niedermann.owncloud.notes.accountswitcher.adapter.PredefinedStatusClickListener
-import it.niedermann.owncloud.notes.accountswitcher.adapter.PredefinedStatusListAdapter
+import it.niedermann.owncloud.notes.accountswitcher.adapter.predefinedStatus.PredefinedStatusClickListener
+import it.niedermann.owncloud.notes.accountswitcher.adapter.predefinedStatus.PredefinedStatusListAdapter
 import it.niedermann.owncloud.notes.accountswitcher.repository.UserStatusRepository
 import it.niedermann.owncloud.notes.branding.BrandedBottomSheetDialogFragment
 import it.niedermann.owncloud.notes.branding.BrandingUtil

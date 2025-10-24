@@ -6,7 +6,7 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-or-later OR GPL-2.0-only
  */
-package it.niedermann.owncloud.notes.accountswitcher
+package it.niedermann.owncloud.notes.accountswitcher.bottomSheet
 
 import android.annotation.SuppressLint
 import android.os.Bundle
