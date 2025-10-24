@@ -21,12 +21,10 @@ import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.nextcloud.android.sso.helper.SingleAccountHelper
 import com.owncloud.android.lib.common.utils.Log_OC
 import com.owncloud.android.lib.resources.users.ClearAt
 import com.owncloud.android.lib.resources.users.PredefinedStatus
 import com.owncloud.android.lib.resources.users.Status
-import com.owncloud.android.lib.resources.users.StatusType
 import com.vanniktech.emoji.EmojiManager
 import com.vanniktech.emoji.EmojiPopup
 import com.vanniktech.emoji.google.GoogleEmojiProvider
@@ -64,7 +62,10 @@ private const val LAST_SECOND_OF_MINUTE = 59
 private const val CLEAR_AT_TYPE_PERIOD = "period"
 private const val CLEAR_AT_TYPE_END_OF = "end-of"
 
-class SetStatusMessageBottomSheet :
+class SetStatusMessageBottomSheet(
+    private val repository: UserStatusRepository,
+    private val currentStatus: Status
+) :
     BrandedBottomSheetDialogFragment(R.layout.set_status_message_bottom_sheet),
     PredefinedStatusClickListener {
     companion object {
@@ -73,7 +74,6 @@ class SetStatusMessageBottomSheet :
 
     private lateinit var binding: SetStatusMessageBottomSheetBinding
 
-    private var repository: UserStatusRepository? = null
     private lateinit var adapter: PredefinedStatusListAdapter
     private var selectedPredefinedMessageId: String? = null
     private var clearAt: Long? = -1
@@ -86,14 +86,8 @@ class SetStatusMessageBottomSheet :
 
     private fun initRepository() {
         lifecycleScope.launch(Dispatchers.IO) {
-            val ssoAccount =
-                SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext()) ?: return@launch
-            repository = UserStatusRepository(requireContext(), ssoAccount)
-            val predefinedStatus = repository?.fetchPredefinedStatuses() ?: arrayListOf()
-            val currentStatus = repository?.fetchUserStatus() ?: Status(StatusType.OFFLINE, "", "", -1)
-
+            val predefinedStatus = repository.fetchPredefinedStatuses()
             withContext(Dispatchers.Main) {
-                updateCurrentStatusViews(currentStatus)
                 initPredefinedStatusAdapter(predefinedStatus)
             }
         }
@@ -111,7 +105,7 @@ class SetStatusMessageBottomSheet :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRepository()
-
+        updateCurrentStatusViews(currentStatus)
         binding.clearStatus.setOnClickListener { clearStatus() }
         binding.setStatus.setOnClickListener { setStatusMessage() }
         binding.emoji.setOnClickListener { popup.show() }
@@ -264,7 +258,7 @@ class SetStatusMessageBottomSheet :
 
     private fun clearStatus() {
         lifecycleScope.launch(Dispatchers.IO) {
-            val result = repository?.clearStatus()
+            val result = repository.clearStatus()
             dismiss(result)
         }
     }
@@ -272,12 +266,12 @@ class SetStatusMessageBottomSheet :
     private fun setStatusMessage() {
         if (selectedPredefinedMessageId != null) {
             lifecycleScope.launch(Dispatchers.IO) {
-                val result = repository?.setPredefinedStatus(selectedPredefinedMessageId!!, clearAt)
+                val result = repository.setPredefinedStatus(selectedPredefinedMessageId!!, clearAt)
                 dismiss(result)
             }
         } else {
             lifecycleScope.launch(Dispatchers.IO) {
-                val result = repository?.setCustomStatus(
+                val result = repository.setCustomStatus(
                     binding.customStatusInput.text.toString(),
                     binding.emoji.text.toString(),
                     clearAt
