@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
 
@@ -41,6 +42,15 @@ public abstract class LockedActivity extends BrandedActivity {
         if (isTaskRoot()) {
             askToUnlock();
         }
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                setEnabled(false);
+                getOnBackPressedDispatcher().onBackPressed();
+                NotesApplication.updateLastInteraction();
+            }
+        });
     }
 
     @Override
@@ -58,12 +68,6 @@ public abstract class LockedActivity extends BrandedActivity {
         if (isTaskRoot()) {
             NotesApplication.updateLastInteraction();
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        NotesApplication.updateLastInteraction();
     }
 
     @Override
