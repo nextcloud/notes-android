@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 buildscript {
     ext {
         kotlinVersion = '2.2.20'
-        commonsVersion = '2.3.7'
+        commonsVersion = '2.4.1'
 		androidCommonsVersion = '1.1.0'
         singleSignOnVersion = "1.3.4"
     }
