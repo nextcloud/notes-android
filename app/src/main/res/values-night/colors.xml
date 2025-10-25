@@ -40,4 +40,6 @@
     <color name="icon_on_nc_grey">#ffffff</color>
 
     <color name="action_mode_background">#1E1E1E</color>
+    <color name="fontAppbar">@android:color/white</color>
+    <color name="primary_button_text_color">#000000</color>
 </resources>
