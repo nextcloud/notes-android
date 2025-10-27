@@ -1,9 +1,8 @@
 /*
- * Nextcloud - Android Client
+ * Nextcloud Talk - Android Client
  *
- * SPDX-FileCopyrightText: 2020 Tobias Kaminsky <tobias@kaminsky.me>
- * SPDX-FileCopyrightText: 2020 Nextcloud GmbH
- * SPDX-License-Identifier: AGPL-3.0-or-later OR GPL-2.0-only
+ * SPDX-FileCopyrightText: 2022 Tim Krüger <t@timkrueger.me
+ * SPDX-License-Identifier: GPL-3.0-or-later
  */
 package it.niedermann.owncloud.notes.accountswitcher.adapter.predefinedStatus
 

@@ -1,12 +1,11 @@
 /*
- * Nextcloud Android client application
+ * Nextcloud Talk - Android Client
  *
- * @author Tobias Kaminsky
- * Copyright (C) 2020 Nextcloud GmbH
- *
- * SPDX-License-Identifier: AGPL-3.0-or-later OR GPL-2.0-only
+ * SPDX-FileCopyrightText: 2022-2023 Marcel Hibbe <dev@mhibbe.de>
+ * SPDX-FileCopyrightText: 2020 Nextcloud GmbH
+ * SPDX-FileCopyrightText: 2020 Tobias Kaminsky <tobias@kaminsky.me>
+ * SPDX-License-Identifier: GPL-3.0-or-later
  */
-
 package it.niedermann.owncloud.notes.accountswitcher.bottomSheet
 
 import android.annotation.SuppressLint

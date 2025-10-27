@@ -1,10 +1,8 @@
 /*
- * Nextcloud Android client application
+ * Nextcloud Talk - Android Client
  *
- * @author Tobias Kaminsky
- * Copyright (C) 2020 Nextcloud GmbH
- *
- * SPDX-License-Identifier: AGPL-3.0-or-later OR GPL-2.0-only
+ * SPDX-FileCopyrightText: 2025 Sowjanya Kota <sowjanya.kota@gmail.com>
+ * SPDX-License-Identifier: GPL-3.0-or-later
  */
 package it.niedermann.owncloud.notes.accountswitcher.bottomSheet
 
