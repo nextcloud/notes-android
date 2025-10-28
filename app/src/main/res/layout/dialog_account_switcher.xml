@@ -41,11 +41,18 @@
                 android:layout_gravity="bottom|end"
                 android:textSize="@dimen/emoji_size"
                 android:visibility="gone"
-                android:translationX="2dp"
-                android:translationY="2dp"
                 tools:visibility="visible"
                 tools:text="😀"
                 android:background="@android:color/transparent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/accountStatusIcon"
+                android:layout_width="@dimen/user_status_icon_size"
+                android:layout_height="@dimen/user_status_icon_size"
+                android:layout_gravity="bottom|end"
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_user_status_away"
+                tools:visibility="visible"/>
         </FrameLayout>
 
         <LinearLayout

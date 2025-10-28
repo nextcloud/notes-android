@@ -21,6 +21,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.owncloud.android.lib.resources.users.Status;
+import com.owncloud.android.lib.resources.users.StatusType;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -39,6 +40,7 @@ import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.share.helper.AvatarLoader;
 import it.niedermann.owncloud.notes.shared.util.DisplayUtils;
 import it.niedermann.owncloud.notes.util.ActivityExtensionsKt;
+import it.niedermann.owncloud.notes.util.StatusTypeExtensionsKt;
 import kotlin.Unit;
 
 /**
@@ -97,6 +99,10 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
                     if (emoji != null) {
                         binding.accountStatusEmoji.setVisibility(View.VISIBLE);
                         binding.accountStatusEmoji.setText(emoji);
+                    } else {
+                        final var status = currentStatus.getStatus();
+                        binding.accountStatusIcon.setVisibility(View.VISIBLE);
+                        binding.accountStatusIcon.setImageResource(StatusTypeExtensionsKt.getImageResource(status));
                     }
                 });
             });

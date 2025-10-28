@@ -26,6 +26,7 @@
     <dimen name="bottom_navigation_view_margin">100dp</dimen>
 
     <dimen name="avatar_size">40dp</dimen>
+    <dimen name="user_status_icon_size">16dp</dimen>
 
     <dimen name="activity_row_layout_min_width_independent">196dip</dimen>
     <dimen name="activity_row_layout_height">48dp</dimen>
