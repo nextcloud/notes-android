@@ -1,5 +1,5 @@
 /*
- * Nextcloud Talk - Android Client
+ * Nextcloud Notes - Android Client
  *
  * SPDX-FileCopyrightText: 2025 Sowjanya Kota <sowjanya.kota@gmail.com>
  * SPDX-License-Identifier: GPL-3.0-or-later

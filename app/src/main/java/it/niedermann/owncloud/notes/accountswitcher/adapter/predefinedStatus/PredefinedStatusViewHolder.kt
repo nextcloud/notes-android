@@ -1,5 +1,5 @@
 /*
- * Nextcloud Talk - Android Client
+ * Nextcloud Notes - Android Client
  *
  * SPDX-FileCopyrightText: 2020 Tobias Kaminsky <tobias@kaminsky.me>
  * SPDX-FileCopyrightText: 2020 Nextcloud GmbH

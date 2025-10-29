@@ -1,5 +1,5 @@
 /*
- * Nextcloud Talk - Android Client
+ * Nextcloud Notes - Android Client
  *
  * SPDX-FileCopyrightText: 2022-2023 Marcel Hibbe <dev@mhibbe.de>
  * SPDX-FileCopyrightText: 2020 Nextcloud GmbH
