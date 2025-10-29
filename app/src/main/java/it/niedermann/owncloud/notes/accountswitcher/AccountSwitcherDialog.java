@@ -14,14 +14,23 @@ import android.content.Intent;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.owncloud.android.lib.resources.users.Status;
+import com.owncloud.android.lib.resources.users.StatusType;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.accountswitcher.adapter.accountSwitcher.AccountSwitcherAdapter;
+import it.niedermann.owncloud.notes.accountswitcher.bottomSheet.AccountSwitcherBottomSheetTag;
+import it.niedermann.owncloud.notes.accountswitcher.repository.UserStatusRepository;
 import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.DialogAccountSwitcherBinding;
@@ -29,6 +38,10 @@ import it.niedermann.owncloud.notes.manageaccounts.ManageAccountsActivity;
 import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.share.helper.AvatarLoader;
+import it.niedermann.owncloud.notes.shared.util.DisplayUtils;
+import it.niedermann.owncloud.notes.util.ActivityExtensionsKt;
+import it.niedermann.owncloud.notes.util.StatusTypeExtensionsKt;
+import kotlin.Unit;
 
 /**
  * Displays all available {@link Account} entries and provides basic operations for them, like adding or switching
@@ -41,6 +54,9 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
     private DialogAccountSwitcherBinding binding;
     private AccountSwitcherListener accountSwitcherListener;
     private long currentAccountId;
+    private UserStatusRepository repository;
+    private Status currentStatus;
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -60,6 +76,38 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
         }
 
         repo = NotesRepository.getInstance(requireContext());
+        initRepositoryAndFetchCurrentStatus();
+    }
+
+    private void initRepositoryAndFetchCurrentStatus() {
+        ActivityExtensionsKt.ssoAccount(requireActivity(), account -> {
+            if (account != null) {
+                repository = new UserStatusRepository(requireContext(), account);
+            } else {
+                DisplayUtils.showSnackMessage(requireView(), R.string.account_switch_dialog_status_fetching_error_message);
+            }
+            executor.execute(() -> {
+                currentStatus = repository.fetchUserStatus();
+                requireActivity().runOnUiThread(() -> {
+                    final var message = currentStatus.getMessage();
+                    if (message != null) {
+                        binding.accountStatus.setVisibility(View.VISIBLE);
+                        binding.accountStatus.setText(message);
+                    }
+
+                    final var emoji = currentStatus.getIcon();
+                    if (emoji != null) {
+                        binding.accountStatusEmoji.setVisibility(View.VISIBLE);
+                        binding.accountStatusEmoji.setText(emoji);
+                    } else {
+                        final var status = currentStatus.getStatus();
+                        binding.accountStatusIcon.setVisibility(View.VISIBLE);
+                        binding.accountStatusIcon.setImageResource(StatusTypeExtensionsKt.getImageResource(status));
+                    }
+                });
+            });
+            return Unit.INSTANCE;
+        });
     }
 
     @NonNull
@@ -75,6 +123,14 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
             binding.accountHost.setText(Uri.parse(currentLocalAccount.getUrl()).getHost());
             AvatarLoader.INSTANCE.load(requireContext(), binding.currentAccountItemAvatar, currentLocalAccount);
             binding.accountLayout.setOnClickListener((v) -> dismiss());
+
+            binding.onlineStatus.setOnClickListener(v -> {
+                showBottomSheetDialog(AccountSwitcherBottomSheetTag.ONLINE_STATUS);
+            });
+
+            binding.statusMessage.setOnClickListener(v -> {
+                showBottomSheetDialog(AccountSwitcherBottomSheetTag.MESSAGE_STATUS);
+            });
 
             final var adapter = new AccountSwitcherAdapter((localAccount -> {
                 accountSwitcherListener.onAccountChosen(localAccount);
@@ -110,6 +166,17 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
         NotesApplication.brandingUtil().dialog.colorMaterialAlertDialogBackground(requireContext(), builder);
 
         return builder.create();
+    }
+
+    private void showBottomSheetDialog(@NonNull AccountSwitcherBottomSheetTag tag) {
+        if (repository == null || currentStatus == null) {
+            DisplayUtils.showSnackMessage(requireView(), R.string.account_switch_dialog_status_fetching_error_message);
+            return;
+        }
+
+        final var fragment = tag.fragment(repository, currentStatus);
+        fragment.show(requireActivity().getSupportFragmentManager(), tag.name());
+        dismiss();
     }
 
     public static DialogFragment newInstance(long currentAccountId) {

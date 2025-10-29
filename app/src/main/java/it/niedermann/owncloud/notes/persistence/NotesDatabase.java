@@ -58,8 +58,11 @@ import it.niedermann.owncloud.notes.shared.model.Capabilities;
                 NotesListWidgetData.class,
                 ShareEntity.class,
                 Capabilities.class
-        }, version = 26,
-        autoMigrations = { @AutoMigration(from = 25, to = 26) }
+        }, version = 27,
+        autoMigrations = {
+                @AutoMigration(from = 25, to = 26),
+                @AutoMigration(from = 26, to = 27),
+        }
 )
 @TypeConverters({Converters.class})
 public abstract class NotesDatabase extends RoomDatabase {
@@ -77,9 +80,9 @@ public abstract class NotesDatabase extends RoomDatabase {
 
     private static NotesDatabase create(final Context context) {
         return Room.databaseBuilder(
-                context,
-                NotesDatabase.class,
-                NOTES_DB_NAME)
+                        context,
+                        NotesDatabase.class,
+                        NOTES_DB_NAME)
                 .addMigrations(
                         new Migration_9_10(), // v2.0.0
                         new Migration_10_11(context),

@@ -124,4 +124,31 @@
         tools:ignore="ResourceCycle">
         <item name="widgetLayout">@layout/preference_switch</item>
     </style>
+
+    <style name="Nextcloud.Material.TextButton" parent="Widget.Material3.Button.TextButton.Icon">
+        <item name="android:typeface">sans</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Button.Borderless" parent="Widget.Material3.Button.TextButton">
+        <item name="android:textColor">@drawable/borderless_btn</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:typeface">sans</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Button" parent="Widget.Material3.Button.UnelevatedButton">
+        <item name="colorButtonNormal">@color/secondary_button_background_color</item>
+        <item name="android:textColor">@color/secondary_button_text_color</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:typeface">sans</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Button.Primary" parent="Button">
+        <item name="colorButtonNormal">@color/primary</item>
+        <item name="android:textColor">@color/primary_button_text_color</item>
+        <item name="android:typeface">sans</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

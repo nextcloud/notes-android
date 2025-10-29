@@ -22,15 +22,38 @@
         android:padding="@dimen/spacer_2x"
         android:paddingHorizontal="@dimen/spacer_1x">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/currentAccountItemAvatar"
+        <FrameLayout
             android:layout_width="@dimen/avatar_size"
             android:layout_height="@dimen/avatar_size"
-            android:layout_marginStart="@dimen/spacer_activity_sides"
-            android:contentDescription="@null"
-            android:focusable="false"
-            android:scaleType="center"
-            app:srcCompat="@drawable/ic_account_circle_grey_24dp" />
+            android:layout_marginStart="@dimen/spacer_activity_sides">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/currentAccountItemAvatar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@null"
+                app:srcCompat="@drawable/ic_account_circle_grey_24dp" />
+
+            <TextView
+                android:id="@+id/accountStatusEmoji"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:textSize="@dimen/emoji_size"
+                android:visibility="gone"
+                tools:visibility="visible"
+                tools:text="😀"
+                android:background="@android:color/transparent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/accountStatusIcon"
+                android:layout_width="@dimen/user_status_icon_size"
+                android:layout_height="@dimen/user_status_icon_size"
+                android:layout_gravity="bottom|end"
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_user_status_away"
+                tools:visibility="visible"/>
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -50,12 +73,22 @@
                 tools:text="@tools:sample/full_names" />
 
             <TextView
+                android:id="@+id/accountStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:ellipsize="middle"
+                android:singleLine="true"
+                android:textColor="@color/secondary_text_color"
+                tools:text="@string/placeholder_user_status" />
+
+            <TextView
                 android:id="@+id/accountHost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="middle"
                 android:singleLine="true"
-                android:textAppearance="?attr/textAppearanceListItemSecondary"
                 tools:text="@tools:sample/full_names" />
         </LinearLayout>
 
@@ -68,6 +101,57 @@
             android:focusable="false"
             android:scaleType="center"
             app:srcCompat="@drawable/check" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/statusView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/spacer_1x"
+        android:paddingEnd="@dimen/zero"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/online_status"
+            style="@style/Nextcloud.Material.TextButton"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/online_status_item_height"
+            android:ellipsize="middle"
+            android:padding="@dimen/zero"
+            android:paddingStart="@dimen/spacer_1x"
+            android:paddingEnd="@dimen/spacer_1x"
+            android:text="@string/set_online_status"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textColor="@color/fontAppbar"
+            app:icon="@drawable/ic_check_circle"
+            app:iconGravity="start"
+            app:iconPadding="@dimen/spacer_1x"
+            app:iconTint="@color/fontAppbar" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/status_message"
+            style="@style/Nextcloud.Material.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/online_status_item_height"
+            android:layout_weight="1"
+            android:ellipsize="middle"
+            android:padding="@dimen/zero"
+            android:paddingStart="@dimen/spacer_1x"
+            android:paddingEnd="@dimen/spacer_1x"
+            android:text="@string/status_message"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textColor="@color/fontAppbar"
+            app:icon="@drawable/chat_bubble"
+            app:iconGravity="start"
+            app:iconPadding="@dimen/spacer_1x"
+            app:iconTint="@color/fontAppbar" />
     </LinearLayout>
 
     <View

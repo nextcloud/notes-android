@@ -32,6 +32,7 @@ import it.niedermann.owncloud.notes.shared.model.Capabilities;
 public class CapabilitiesDeserializer implements JsonDeserializer<Capabilities> {
 
     private static final String CAPABILITIES = "capabilities";
+    private static final String CAPABILITIES_USER_STATUS = "user_status";
     private static final String CAPABILITIES_NOTES = "notes";
     private static final String CAPABILITIES_NOTES_API_VERSION = "api_version";
     private static final String CAPABILITIES_THEMING = "theming";
@@ -42,6 +43,7 @@ public class CapabilitiesDeserializer implements JsonDeserializer<Capabilities> 
     private static final String CAPABILITIES_FILES_DIRECT_EDITING_SUPPORTS_FILE_ID = "supportsFileId";
     private static final String CAPABILITIES_FILES_SHARING = "files_sharing";
     private static final String VERSION = "version";
+    private static final String CAPABILITIES_SUPPORTS_BUSY = "supports_busy";
 
     @Override
     public Capabilities deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
@@ -110,6 +112,16 @@ public class CapabilitiesDeserializer implements JsonDeserializer<Capabilities> 
                 }
             }
             response.setDirectEditingAvailable(hasDirectEditingCapability(capabilities));
+
+            if (capabilities.has(CAPABILITIES_USER_STATUS)) {
+                final var userStatus = capabilities.getAsJsonObject(CAPABILITIES_USER_STATUS);
+                if (userStatus.has(CAPABILITIES_SUPPORTS_BUSY)) {
+                    final var userStatusSupportsBusy = userStatus.getAsJsonPrimitive(CAPABILITIES_SUPPORTS_BUSY);
+                    if (userStatusSupportsBusy != null) {
+                        response.setUserStatusSupportsBusy(userStatusSupportsBusy.getAsBoolean());
+                    }
+                }
+            }
         }
         return response;
     }
