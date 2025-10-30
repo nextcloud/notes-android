@@ -422,4 +422,25 @@
     <string name="direct_editing_error">載入增強編輯模式時發生錯誤</string>
     <string name="switch_to_plain_editing">切換到普通編輯模式</string>
     <string name="action_back">返回</string>
+    <string name="set_online_status">線上狀態</string>
+    <string name="status_message">狀態訊息</string>
+    <string name="whats_your_status">您目前的狀態是什麼呢？</string>
+    <string name="clear_status_after">繼此之後清空狀態</string>
+    <string name="clear">清除</string>
+    <string name="set_message">設置訊息</string>
+    <string name="today">今日</string>
+    <string name="thirtyMinutes">30 分鐘</string>
+    <string name="oneHour">1 小時</string>
+    <string name="fourHours">4 小時</string>
+    <string name="thisWeek">本星期</string>
+    <string name="error_setting_status_message">設定狀態訊息時發生錯誤！</string>
+    <string name="file_list_seconds_ago">秒前</string>
+    <string name="online_status">線上狀態</string>
+    <string name="online">在線</string>
+    <string name="dnd">請勿打擾</string>
+    <string name="away">離開</string>
+    <string name="invisible">隱藏</string>
+    <string name="busy">忙碌</string>
+    <string name="mute_all_notifications">所有通知靜音</string>
+    <string name="appear_offline">顯示為離線</string>
     </resources>

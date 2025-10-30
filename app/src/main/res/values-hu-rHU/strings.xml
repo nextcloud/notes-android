@@ -432,4 +432,25 @@
     <string name="direct_editing_error">Hiba a formázott szöveges szerkesztő betöltése során</string>
     <string name="switch_to_plain_editing">Átváltás az egyszerű szerkesztésre</string>
     <string name="action_back">Vissza</string>
+    <string name="set_online_status">Elérhető állapot</string>
+    <string name="status_message">Állapotüzenet</string>
+    <string name="whats_your_status">Mi az állapota?</string>
+    <string name="clear_status_after">Állapot törlése ennyi idő után</string>
+    <string name="clear">Törlés</string>
+    <string name="set_message">Üzenet beállítása</string>
+    <string name="dontClear">Ne törölje</string>
+    <string name="today">Ma</string>
+    <string name="thirtyMinutes">30 perc</string>
+    <string name="oneHour">1 óra</string>
+    <string name="fourHours">4 óra</string>
+    <string name="thisWeek">Ezen a héten</string>
+    <string name="error_setting_status_message">Hiba az állapotüzenet beállítása során!</string>
+    <string name="file_list_seconds_ago">pár másodperce</string>
+    <string name="online_status">Elérhető állapot</string>
+    <string name="online">Elérhető</string>
+    <string name="dnd">Ne zavarjanak</string>
+    <string name="invisible">Láthatatlan</string>
+    <string name="busy">Foglalt</string>
+    <string name="mute_all_notifications">Összes értesítés némítása</string>
+    <string name="appear_offline">Megjelenés nem kapcsolódottként</string>
     </resources>

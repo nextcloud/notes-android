@@ -432,4 +432,26 @@
     <string name="direct_editing_error">Viga vormindatud teksti muutmisvaate laadimisel</string>
     <string name="switch_to_plain_editing">Kasuta muutmisvaadet vormindamata tekstile</string>
     <string name="action_back">Tagasi</string>
+    <string name="set_online_status">Olek võrgus</string>
+    <string name="status_message">Olekuteade</string>
+    <string name="whats_your_status">Mis on su olek?</string>
+    <string name="clear_status_after">Eemalda olekuteade peale</string>
+    <string name="clear">Tühjenda</string>
+    <string name="set_message">Lisa olekuteade</string>
+    <string name="dontClear">Ära kustuta</string>
+    <string name="today">Täna</string>
+    <string name="thirtyMinutes">30 minutit</string>
+    <string name="oneHour">1 tundi</string>
+    <string name="fourHours">4 tundi</string>
+    <string name="thisWeek">Käesoleval nädalal</string>
+    <string name="error_setting_status_message">Olekuteate lisamisel tekkis viga!</string>
+    <string name="file_list_seconds_ago">sekundit tagasi</string>
+    <string name="online_status">Olek võrgus</string>
+    <string name="online">Võrgus</string>
+    <string name="dnd">Ära sega</string>
+    <string name="away">Eemal</string>
+    <string name="invisible">Nähtamatu</string>
+    <string name="busy">Hõivatud</string>
+    <string name="mute_all_notifications">Sellega summutad teavitused</string>
+    <string name="appear_offline">Sellega paistad olema võrgust väljas</string>
     </resources>

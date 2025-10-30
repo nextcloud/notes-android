@@ -404,4 +404,24 @@
     <string name="direct_editing_error">Error while loading rich editing</string>
     <string name="switch_to_plain_editing">Switch to plain editing</string>
     <string name="action_back">بازگشت</string>
+    <string name="set_online_status">وضعیت برخط</string>
+    <string name="status_message">پیام وضعیت</string>
+    <string name="whats_your_status">وضعیت شما چیست؟</string>
+    <string name="clear_status_after">پاک کردن وضعیت بعدی</string>
+    <string name="clear">پاک کردن</string>
+    <string name="dontClear">پاک نکن</string>
+    <string name="today">امروز.</string>
+    <string name="thirtyMinutes">۳۰ دقیقه</string>
+    <string name="oneHour">۱ ساعت</string>
+    <string name="fourHours">۴ ساعت</string>
+    <string name="thisWeek">این هفته</string>
+    <string name="file_list_seconds_ago">یک ثانیه پیش</string>
+    <string name="online_status">وضعیت برخط</string>
+    <string name="online">برخط</string>
+    <string name="dnd">مزاحم نشوید</string>
+    <string name="away">دور از دسترس</string>
+    <string name="invisible">مخفی</string>
+    <string name="busy">مشغول</string>
+    <string name="mute_all_notifications">خاموش کردن همه اعلانات</string>
+    <string name="appear_offline">نمایش آفلاین</string>
     </resources>

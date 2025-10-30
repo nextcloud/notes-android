@@ -397,4 +397,20 @@
     <string name="direct_editing_error">Грешка при зареждане на богато редактиране</string>
     <string name="switch_to_plain_editing">Превключване към обикновено редактиране</string>
     <string name="action_back">Назад</string>
+    <string name="set_online_status">Състояние</string>
+    <string name="status_message">Съобщение за състоянито</string>
+    <string name="whats_your_status">Какво е вашето състояние?</string>
+    <string name="clear_status_after">Изчистване на състоянието след</string>
+    <string name="clear">Изчистване</string>
+    <string name="dontClear">Не изчиствай</string>
+    <string name="today">Днес</string>
+    <string name="thirtyMinutes">30 минути</string>
+    <string name="oneHour">1 час</string>
+    <string name="fourHours">4 чàса</string>
+    <string name="file_list_seconds_ago">преди секунди</string>
+    <string name="online_status">Състояние</string>
+    <string name="online">На линия /онлайн/</string>
+    <string name="dnd">Не безпокой</string>
+    <string name="away">Винаги</string>
+    <string name="busy">Зает</string>
     </resources>

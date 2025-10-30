@@ -444,4 +444,26 @@
     <string name="direct_editing_error">Chyba při načítání upravování formátovaného textu</string>
     <string name="switch_to_plain_editing">Přepnout do upravování neformátovaného textu</string>
     <string name="action_back">Zpět</string>
+    <string name="set_online_status">Stav online</string>
+    <string name="status_message">Stavová zpráva</string>
+    <string name="whats_your_status">Jaký je váš stav?</string>
+    <string name="clear_status_after">Vyčistit stav po uplynutí</string>
+    <string name="clear">Vyčistit</string>
+    <string name="set_message">Nastavit zprávu</string>
+    <string name="dontClear">Nečistit</string>
+    <string name="today">Dnes</string>
+    <string name="thirtyMinutes">30 minut</string>
+    <string name="oneHour">1 hodiny</string>
+    <string name="fourHours">4 hodiny</string>
+    <string name="thisWeek">Tento týden</string>
+    <string name="error_setting_status_message">Chyba při nastavování stavové zprávy!</string>
+    <string name="file_list_seconds_ago">sekund před</string>
+    <string name="online_status">Stav online</string>
+    <string name="online">Online</string>
+    <string name="dnd">Nerušit</string>
+    <string name="away">Pryč</string>
+    <string name="invisible">Neviditelný</string>
+    <string name="busy">Zaneprázdněn(a)</string>
+    <string name="mute_all_notifications">Ztlumit veškerá upozornění</string>
+    <string name="appear_offline">Jevit se offline</string>
     </resources>

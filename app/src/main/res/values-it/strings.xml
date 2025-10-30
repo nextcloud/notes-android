@@ -408,4 +408,22 @@
     <string name="direct_editing_error">Errore durante il caricamento della modifica avanzata</string>
     <string name="switch_to_plain_editing">Passa alla modifica semplice</string>
     <string name="action_back">Indietro</string>
+    <string name="status_message">Messaggio di stato</string>
+    <string name="whats_your_status">Qual è il tuo stato?</string>
+    <string name="clear_status_after">Togli lo stato dopo</string>
+    <string name="clear">Pulisci</string>
+    <string name="dontClear">Non cancellare</string>
+    <string name="today">Ogg</string>
+    <string name="thirtyMinutes">30 minuti</string>
+    <string name="oneHour">1 ora</string>
+    <string name="fourHours">4 ore</string>
+    <string name="thisWeek">Questa settimana</string>
+    <string name="file_list_seconds_ago">secondi fa</string>
+    <string name="online">In linea</string>
+    <string name="dnd">Non disturbare</string>
+    <string name="away">Assente</string>
+    <string name="invisible">Invisibile</string>
+    <string name="busy">Occupato</string>
+    <string name="mute_all_notifications">Muta tutte le notifiche</string>
+    <string name="appear_offline">Appari non in linea</string>
     </resources>

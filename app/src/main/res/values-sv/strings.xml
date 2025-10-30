@@ -419,4 +419,26 @@
     <string name="direct_editing_error">Fel vid inläsning av utökad redigering</string>
     <string name="switch_to_plain_editing">Byt till enkel redigering</string>
     <string name="action_back">Tillbaka</string>
+    <string name="set_online_status">Online-status</string>
+    <string name="status_message">Statusmeddelande</string>
+    <string name="whats_your_status">Vad är din status?</string>
+    <string name="clear_status_after">Rensa status efter</string>
+    <string name="clear">Rensa</string>
+    <string name="set_message">Ange meddelande</string>
+    <string name="dontClear">Rensa inte</string>
+    <string name="today">Idag</string>
+    <string name="thirtyMinutes">30 minuter</string>
+    <string name="oneHour">1 timme</string>
+    <string name="fourHours">4 timmar</string>
+    <string name="thisWeek">Denna vecka</string>
+    <string name="error_setting_status_message">Fel uppstod vid skapande av statusmeddelande!</string>
+    <string name="file_list_seconds_ago">sekunder sedan</string>
+    <string name="online_status">Online-status</string>
+    <string name="online">Online</string>
+    <string name="dnd">Stör ej</string>
+    <string name="away">Borta</string>
+    <string name="invisible">Osynlig</string>
+    <string name="busy">Upptagen</string>
+    <string name="mute_all_notifications">Stäng av alla aviseringar</string>
+    <string name="appear_offline">Visa som frånkopplad</string>
     </resources>

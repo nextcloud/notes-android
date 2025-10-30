@@ -243,4 +243,24 @@
     <string name="direct_editing_error">Hebo un error mentanto se cargaba la edición arriquecida</string>
     <string name="switch_to_plain_editing">Cambiar a la edición ensin formatu</string>
     <string name="action_back">Atrás</string>
+    <string name="set_online_status">Estáu en llinia</string>
+    <string name="status_message">Mensaxe del estáu</string>
+    <string name="whats_your_status">¿Cuál ye\'l to estáu?</string>
+    <string name="clear_status_after">Borrar l\'estúa dempués de</string>
+    <string name="clear">Borrar</string>
+    <string name="dontClear">Nun borrar</string>
+    <string name="today">Güei</string>
+    <string name="thirtyMinutes">30 minutos</string>
+    <string name="oneHour">1 hora</string>
+    <string name="fourHours">4 hores</string>
+    <string name="thisWeek">Esta selmana</string>
+    <string name="file_list_seconds_ago">hai segundos</string>
+    <string name="online_status">Estáu en llinia</string>
+    <string name="online">En llinia</string>
+    <string name="dnd">Nun molestar</string>
+    <string name="away">Ausente</string>
+    <string name="invisible">Invisible</string>
+    <string name="busy">Ocupáu</string>
+    <string name="mute_all_notifications">Desactivar tolos avisos</string>
+    <string name="appear_offline">Apaecer desconectáu</string>
     </resources>

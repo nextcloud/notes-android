@@ -372,4 +372,22 @@
     <string name="direct_editing_error">Keng tahrirni yuklashda xatolik yuz berdi</string>
     <string name="switch_to_plain_editing">Oddiy tahrirlashga o\'tish</string>
     <string name="action_back">Orqaga</string>
+    <string name="set_online_status">Onlayn holat</string>
+    <string name="status_message">Holat xabari</string>
+    <string name="whats_your_status">Sizning holatingiz qanday?</string>
+    <string name="clear_status_after">Holatni tozalashdan keyin</string>
+    <string name="today">Bugun</string>
+    <string name="thirtyMinutes">30 daqiqa</string>
+    <string name="oneHour">1 soat</string>
+    <string name="fourHours">4 soat</string>
+    <string name="thisWeek">Shu hafta</string>
+    <string name="file_list_seconds_ago">soniya avval</string>
+    <string name="online_status">Onlayn holat</string>
+    <string name="online">Onlayn</string>
+    <string name="dnd">Bezovta qilmang</string>
+    <string name="away">Uzoqda</string>
+    <string name="invisible">Ko\'rinmas</string>
+    <string name="busy">Band</string>
+    <string name="mute_all_notifications">Barcha bildirishnomalarni o\'chirish</string>
+    <string name="appear_offline">Oflayn ko\'rinishda</string>
     </resources>

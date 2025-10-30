@@ -225,4 +225,24 @@
     <string name="simple_prev">Anterior</string>
     <string name="simple_backup">Backup</string>
     <string name="action_back">Anterior</string>
+    <string name="set_online_status">Estado on-line</string>
+    <string name="status_message">Mensagem de estado</string>
+    <string name="whats_your_status">Qual é o seu estado?</string>
+    <string name="clear_status_after">Limpar mensagem de estado após</string>
+    <string name="clear">Limpar</string>
+    <string name="dontClear">Não limpar</string>
+    <string name="today">Hoje</string>
+    <string name="thirtyMinutes">30 minutos</string>
+    <string name="oneHour">1 hora</string>
+    <string name="fourHours">4 horas</string>
+    <string name="thisWeek">Esta semana</string>
+    <string name="file_list_seconds_ago">segundos atrás</string>
+    <string name="online_status">Estado on-line</string>
+    <string name="online">On-line</string>
+    <string name="dnd">Não incomodar</string>
+    <string name="away">Ausente</string>
+    <string name="invisible">Invisível </string>
+    <string name="busy">Ocupado</string>
+    <string name="mute_all_notifications">Desativar todas as notificações</string>
+    <string name="appear_offline">Aparecer offline</string>
     </resources>

@@ -420,4 +420,22 @@
     <string name="direct_editing_error">Chyba pri načítaní rich editora</string>
     <string name="switch_to_plain_editing">Prepnúť na jednoduchú úpravu</string>
     <string name="action_back">Späť</string>
+    <string name="set_online_status">Stav pripojenia</string>
+    <string name="status_message">Správa o stave</string>
+    <string name="whats_your_status">Aký je váš stav?</string>
+    <string name="clear_status_after">Vyčistiť správu o stave po</string>
+    <string name="clear">Vyčistiť</string>
+    <string name="dontClear">Nemazať</string>
+    <string name="today">Dnes</string>
+    <string name="thirtyMinutes">30 minút</string>
+    <string name="oneHour">1 hodina</string>
+    <string name="fourHours">4 hodiny</string>
+    <string name="thisWeek">Tento týždeň</string>
+    <string name="file_list_seconds_ago">sekúnd dozadu</string>
+    <string name="online_status">Stav pripojenia</string>
+    <string name="online">Pripojený</string>
+    <string name="dnd">Nerušiť</string>
+    <string name="away">Preč</string>
+    <string name="invisible">Neviditeľnosť</string>
+    <string name="busy">Zaneprázdnený</string>
     </resources>

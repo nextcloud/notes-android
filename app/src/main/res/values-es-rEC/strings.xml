@@ -395,4 +395,24 @@
     <string name="direct_editing_error">Error al cargar la edición enriquecida</string>
     <string name="switch_to_plain_editing">Cambiar a edición simple</string>
     <string name="action_back">Atrás</string>
+    <string name="set_online_status">Estado en línea</string>
+    <string name="status_message">Mensaje de estado</string>
+    <string name="whats_your_status">¿Cuál es tu estado?</string>
+    <string name="clear_status_after">Borrar estado después de</string>
+    <string name="clear">Limpiar</string>
+    <string name="dontClear">No borrar</string>
+    <string name="today">Hoy</string>
+    <string name="thirtyMinutes">30 minutos</string>
+    <string name="oneHour">1 hora</string>
+    <string name="fourHours">4 horas</string>
+    <string name="thisWeek">Esta semana</string>
+    <string name="file_list_seconds_ago">hace segundos</string>
+    <string name="online_status">Estado en línea</string>
+    <string name="online">En línea</string>
+    <string name="dnd">No molestar</string>
+    <string name="away">Ausente</string>
+    <string name="invisible">Invisible</string>
+    <string name="busy">Ocupado</string>
+    <string name="mute_all_notifications">Silenciar todas las notificaciones</string>
+    <string name="appear_offline">Aparecer como desconectado</string>
     </resources>

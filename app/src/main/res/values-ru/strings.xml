@@ -431,4 +431,25 @@
     <string name="direct_editing_error">Ошибка при загрузке форматированного редактирования</string>
     <string name="switch_to_plain_editing">Переключиться на простое редактирование</string>
     <string name="action_back">Назад</string>
+    <string name="set_online_status">Онлайн подключения</string>
+    <string name="status_message">Описание статуса</string>
+    <string name="whats_your_status">Какой у Вас статус?</string>
+    <string name="clear_status_after">Очистить статус после</string>
+    <string name="clear">Очистить</string>
+    <string name="set_message">Установить сообщение</string>
+    <string name="dontClear">Не очищать</string>
+    <string name="today">Сегодня</string>
+    <string name="thirtyMinutes">30 минут.</string>
+    <string name="oneHour">1 час</string>
+    <string name="thisWeek">На этой неделе</string>
+    <string name="error_setting_status_message">Ошибка при установке сообщения статуса</string>
+    <string name="file_list_seconds_ago">только что</string>
+    <string name="online_status">Онлайн подключения</string>
+    <string name="online">В сети</string>
+    <string name="dnd">Не беспокоить</string>
+    <string name="away">Неактивен</string>
+    <string name="invisible">Невидимый</string>
+    <string name="busy">Занят</string>
+    <string name="mute_all_notifications">Без уведомлений</string>
+    <string name="appear_offline">\"Не в сети\" для остальных</string>
     </resources>

@@ -436,4 +436,24 @@
     <string name="direct_editing_error">خطأ في تحميل التحرير الغني rich editing</string>
     <string name="switch_to_plain_editing">بدّل إلى التحرير العادي plain editing</string>
     <string name="action_back">عودة</string>
+    <string name="set_online_status">حالة الاتصال</string>
+    <string name="status_message">رسالة الحالة</string>
+    <string name="whats_your_status">ماهي حالتك؟</string>
+    <string name="clear_status_after">مسح رسالة الحالة بعد</string>
+    <string name="clear">محو</string>
+    <string name="dontClear">لا تمحُ</string>
+    <string name="today">اليوم</string>
+    <string name="thirtyMinutes">30 دقيقة</string>
+    <string name="oneHour">1 ساعة</string>
+    <string name="fourHours">4 ساعات</string>
+    <string name="thisWeek">هذا الأسبوع</string>
+    <string name="file_list_seconds_ago">منذ ثوان مضت</string>
+    <string name="online_status">حالة الاتصال</string>
+    <string name="online">مُتّصلٌ</string>
+    <string name="dnd">الرجاء عدم الإزعاج</string>
+    <string name="away">بالخارج</string>
+    <string name="invisible">غير مرئي</string>
+    <string name="busy">مشغول</string>
+    <string name="mute_all_notifications">عدم إظهار جميع التنبيهات</string>
+    <string name="appear_offline">الحالة غير متصل</string>
     </resources>

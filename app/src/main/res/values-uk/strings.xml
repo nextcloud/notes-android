@@ -444,4 +444,25 @@
     <string name="direct_editing_error">Помилка під час завантаження форматованого редагування</string>
     <string name="switch_to_plain_editing">Перемкнутися до простого редагування</string>
     <string name="action_back">Назад</string>
+    <string name="set_online_status">Мій статус доступності</string>
+    <string name="status_message">Повідомлення про статус</string>
+    <string name="whats_your_status">Який ваш статус?</string>
+    <string name="clear_status_after">Очистити статус після</string>
+    <string name="clear">Очистити</string>
+    <string name="set_message">Встановити повідомлення</string>
+    <string name="today">Сьогодні</string>
+    <string name="thirtyMinutes">30 хвилин</string>
+    <string name="oneHour">1 година</string>
+    <string name="fourHours">4 години</string>
+    <string name="thisWeek">Цього тижня</string>
+    <string name="error_setting_status_message">Помилка під час встановлення повідмлення про статус!</string>
+    <string name="file_list_seconds_ago">кілька секунд тому</string>
+    <string name="online_status">Мій статус доступності</string>
+    <string name="online">Доступний(-а)</string>
+    <string name="dnd">Не турбувати</string>
+    <string name="away">Відсутній(-я)</string>
+    <string name="invisible">Невидимка</string>
+    <string name="busy">Зайнято</string>
+    <string name="mute_all_notifications">Вимкнути всі сповіщення</string>
+    <string name="appear_offline">Перебуваю поза мережею</string>
     </resources>

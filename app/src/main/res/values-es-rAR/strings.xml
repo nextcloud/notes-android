@@ -215,4 +215,20 @@
     <string name="simple_prev">Anterior</string>
     <string name="simple_backup">Respaldar</string>
     <string name="action_back">Atrás</string>
+    <string name="set_online_status">Estado en línea</string>
+    <string name="status_message">Mensaje de estado</string>
+    <string name="whats_your_status">¿Cuál es su estado?</string>
+    <string name="clear">Borrar</string>
+    <string name="dontClear">No vaciar</string>
+    <string name="today">Hoy</string>
+    <string name="thirtyMinutes">30 minutos</string>
+    <string name="oneHour">1 hora</string>
+    <string name="fourHours">4 horas</string>
+    <string name="thisWeek">Esta semana</string>
+    <string name="file_list_seconds_ago">segundos</string>
+    <string name="online_status">Estado en línea</string>
+    <string name="online">En línea</string>
+    <string name="dnd">No molestar</string>
+    <string name="away">Lejos</string>
+    <string name="invisible">Invisible</string>
     </resources>
