@@ -408,4 +408,12 @@
     <string name="direct_editing_error">Errore durante il caricamento della modifica avanzata</string>
     <string name="switch_to_plain_editing">Passa alla modifica semplice</string>
     <string name="action_back">Indietro</string>
+    <string name="whats_your_status">Qual è il tuo stato?</string>
+    <string name="clear_status_after">Togli lo stato dopo</string>
+    <string name="today">Ogg</string>
+    <string name="thirtyMinutes">30 minuti</string>
+    <string name="oneHour">1 ora</string>
+    <string name="away">Assente</string>
+    <string name="invisible">Invisibile</string>
+    <string name="busy">Occupato</string>
     </resources>

@@ -432,4 +432,12 @@
     <string name="direct_editing_error">Hiba a formázott szöveges szerkesztő betöltése során</string>
     <string name="switch_to_plain_editing">Átváltás az egyszerű szerkesztésre</string>
     <string name="action_back">Vissza</string>
+    <string name="set_online_status">Elérhető állapot</string>
+    <string name="whats_your_status">Mi az állapota?</string>
+    <string name="today">Ma</string>
+    <string name="thirtyMinutes">30 perc</string>
+    <string name="oneHour">1 óra</string>
+    <string name="error_setting_status_message">Hiba az állapotüzenet beállítása során!</string>
+    <string name="online_status">Elérhető állapot</string>
+    <string name="busy">Foglalt</string>
     </resources>

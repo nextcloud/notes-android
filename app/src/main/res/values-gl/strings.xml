@@ -432,4 +432,11 @@
     <string name="direct_editing_error">Produciuse un erro ao cargar a edición mellorada</string>
     <string name="switch_to_plain_editing">Cambiar á edición simple</string>
     <string name="action_back">Atrás</string>
+    <string name="whats_your_status">Cal é o seu estado?</string>
+    <string name="thirtyMinutes">30 minutos</string>
+    <string name="oneHour">1 hora</string>
+    <string name="error_setting_status_message">Produciuse un erro ao axustar a mensaxe de estado!</string>
+    <string name="online_status">Estado en liña</string>
+    <string name="away">Ausente</string>
+    <string name="busy">Ocupado</string>
     </resources>

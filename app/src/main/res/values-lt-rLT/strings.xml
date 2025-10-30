@@ -308,4 +308,15 @@
     <string name="simple_next">Kitas</string>
     <string name="simple_prev">Ankstesnis</string>
     <string name="action_back">Atgal</string>
+    <string name="set_online_status">Prisijungimo būsena</string>
+    <string name="whats_your_status">Kokia jūsų būsena?</string>
+    <string name="clear_status_after">Išvalyti būseną po</string>
+    <string name="today">Šiandien</string>
+    <string name="thirtyMinutes">30 minučių</string>
+    <string name="oneHour">1 valanda</string>
+    <string name="online_status">Prisijungimo būsena</string>
+    <string name="away">Atsitraukęs</string>
+    <string name="invisible">Nematomas</string>
+    <string name="busy">Užimtas laikas</string>
+    <string name="appear_offline">Atrodyti atsijungusiu</string>
     </resources>

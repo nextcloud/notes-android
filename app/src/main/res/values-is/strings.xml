@@ -442,4 +442,13 @@
     <string name="direct_editing_error">Villa við að hlaða inn sniðnum textabreytingum</string>
     <string name="switch_to_plain_editing">Skipta yfir í breytingar á hreinum texta</string>
     <string name="action_back">Til baka</string>
+    <string name="set_online_status">Staða á netinu</string>
+    <string name="whats_your_status">Hver er staðan á þér?</string>
+    <string name="today">Í dag</string>
+    <string name="thirtyMinutes">30 mínútur</string>
+    <string name="oneHour">1 klukkustund</string>
+    <string name="error_setting_status_message">Villa kom upp við að setja stöðuskilaboð!</string>
+    <string name="online_status">Staða á netinu</string>
+    <string name="away">Fjarverandi</string>
+    <string name="busy">Upptekinn</string>
     </resources>

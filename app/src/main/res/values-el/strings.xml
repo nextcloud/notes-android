@@ -381,4 +381,6 @@
     <string name="direct_editing_error">Σφάλμα κατά την φόρτωση της πλούσιας επεξεργασίας</string>
     <string name="switch_to_plain_editing">Αλλαγή σε απλή επεξεργασία</string>
     <string name="action_back">Πίσω</string>
+    <string name="whats_your_status">Ποια είναι η κατάστασή σας;</string>
+    <string name="busy">Απασχολημένος</string>
     </resources>

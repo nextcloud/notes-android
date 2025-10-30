@@ -271,4 +271,12 @@
     <string name="simple_next">הבא</string>
     <string name="simple_prev">הקודם</string>
     <string name="action_back">חזרה</string>
+    <string name="set_online_status">מצב מקוון</string>
+    <string name="whats_your_status">מה המצב שלך?</string>
+    <string name="today">היום</string>
+    <string name="thirtyMinutes">30 דקות</string>
+    <string name="oneHour">שעה</string>
+    <string name="online_status">מצב מקוון</string>
+    <string name="away">לא פה</string>
+    <string name="busy">עסוק</string>
     </resources>

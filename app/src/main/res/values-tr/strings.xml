@@ -432,4 +432,23 @@
     <string name="direct_editing_error">Zengin düzenleme yüklenirken sorun çıktı</string>
     <string name="switch_to_plain_editing">Yalın düzenlemeye geç</string>
     <string name="action_back">Geri</string>
+    <string name="set_online_status">Çevrim içi durumu</string>
+    <string name="status_message">Durum iletisi</string>
+    <string name="whats_your_status">Durumunuz nedir?</string>
+    <string name="clear_status_after">Durum şu kadar sonra kaldırılsın</string>
+    <string name="clear">Temizle</string>
+    <string name="set_message">İletiyi ayarla</string>
+    <string name="today">Bugün</string>
+    <string name="thirtyMinutes">30 dakika</string>
+    <string name="oneHour">1 saat</string>
+    <string name="fourHours">4 saat</string>
+    <string name="thisWeek">Bu hafta</string>
+    <string name="error_setting_status_message">Durum iletisi ayarlanırken sorun çıktı!</string>
+    <string name="online_status">Çevrim içi durumu</string>
+    <string name="dnd">Rahatsız etmeyin</string>
+    <string name="away">Uzakta</string>
+    <string name="invisible">Görünmez</string>
+    <string name="busy">Meşgul</string>
+    <string name="mute_all_notifications">Tüm bildirimleri kapat</string>
+    <string name="appear_offline">Çevrim dışı görün</string>
     </resources>

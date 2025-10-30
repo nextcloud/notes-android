@@ -438,4 +438,23 @@
     <string name="direct_editing_error">Грешка приликом учитавања детаљног уређивања</string>
     <string name="switch_to_plain_editing">Пређи на просто уређивање</string>
     <string name="action_back">Назад</string>
+    <string name="set_online_status">Мрежни статус</string>
+    <string name="status_message">Порука стања</string>
+    <string name="whats_your_status">Који је ваш статус?</string>
+    <string name="clear_status_after">Обриши статус након</string>
+    <string name="clear">Очисти</string>
+    <string name="set_message">Постави поруку</string>
+    <string name="today">Данас</string>
+    <string name="thirtyMinutes">30 минута</string>
+    <string name="oneHour">1 сат</string>
+    <string name="fourHours">4 сата</string>
+    <string name="thisWeek">Ове недеље</string>
+    <string name="error_setting_status_message">Грешка приликом постављања статусне поруке!</string>
+    <string name="online_status">Мрежни статус</string>
+    <string name="dnd">Не узнемиравај</string>
+    <string name="away">Одсутан</string>
+    <string name="invisible">Невидљива</string>
+    <string name="busy">Заузет</string>
+    <string name="mute_all_notifications">Искључи сва обавештења</string>
+    <string name="appear_offline">Прикажи као ван мреже</string>
     </resources>

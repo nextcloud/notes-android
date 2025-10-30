@@ -362,4 +362,23 @@
     <string name="progress_import">Đang nhập ghi chú %1$d trong số %2$d...</string>
     <string name="account_imported">Đã nhập tài khoản.</string>
     <string name="action_back">Quay lại</string>
+    <string name="set_online_status">Trạng thái trực tuyến</string>
+    <string name="status_message">Thông báo trạng thái</string>
+    <string name="whats_your_status">Trạng thái của bạn là gì?</string>
+    <string name="clear_status_after">Xóa trạng thái sau</string>
+    <string name="clear">Xóa</string>
+    <string name="today">Hôm nay</string>
+    <string name="thirtyMinutes">30 phút</string>
+    <string name="oneHour">1 tiếng</string>
+    <string name="fourHours">4 tiếng</string>
+    <string name="thisWeek">Tuần này</string>
+    <string name="file_list_seconds_ago">vài giây trước</string>
+    <string name="online_status">Trạng thái trực tuyến</string>
+    <string name="online">Trực tuyến</string>
+    <string name="dnd">Đừng làm phiền</string>
+    <string name="away">Tạm vắng</string>
+    <string name="invisible">Vô hình</string>
+    <string name="busy">Bận</string>
+    <string name="mute_all_notifications">Tắt tiếng tất cả thông báo</string>
+    <string name="appear_offline">Đang offline</string>
     </resources>

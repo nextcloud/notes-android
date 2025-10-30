@@ -406,4 +406,16 @@
     <string name="direct_editing_error">Feil ved lasting av rik endringsmodus</string>
     <string name="switch_to_plain_editing">Bytt til ren endringsmodus</string>
     <string name="action_back">Tilbake</string>
+    <string name="set_online_status">Online-status</string>
+    <string name="status_message">Statusmelding</string>
+    <string name="whats_your_status">Hva er din status?</string>
+    <string name="clear_status_after">Fjern status etter</string>
+    <string name="today">I dag</string>
+    <string name="thirtyMinutes">30 minutter</string>
+    <string name="oneHour">1 time</string>
+    <string name="online_status">Online-status</string>
+    <string name="away">Borte</string>
+    <string name="invisible">Usynlig</string>
+    <string name="busy">Opptatt</string>
+    <string name="appear_offline">Vis som frakoblet</string>
     </resources>

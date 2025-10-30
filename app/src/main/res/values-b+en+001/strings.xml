@@ -432,4 +432,7 @@
     <string name="direct_editing_error">Error while loading rich editing</string>
     <string name="switch_to_plain_editing">Switch to plain editing</string>
     <string name="action_back">Back</string>
+    <string name="whats_your_status">What is your status?</string>
+    <string name="error_setting_status_message">Error setting status message!</string>
+    <string name="busy">Busy</string>
     </resources>

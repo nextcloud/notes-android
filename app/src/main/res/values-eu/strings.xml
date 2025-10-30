@@ -407,4 +407,7 @@
     <string name="direct_editing_error">Errore bat gertatu da edizio aberatsa kargatzean</string>
     <string name="switch_to_plain_editing">Aldatu edizio arruntera</string>
     <string name="action_back">Atzera</string>
+    <string name="thirtyMinutes">30 minutu</string>
+    <string name="away">Kanpoan</string>
+    <string name="busy">Lanpetua</string>
     </resources>

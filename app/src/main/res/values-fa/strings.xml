@@ -404,4 +404,9 @@
     <string name="direct_editing_error">Error while loading rich editing</string>
     <string name="switch_to_plain_editing">Switch to plain editing</string>
     <string name="action_back">بازگشت</string>
+    <string name="whats_your_status">وضعیت شما چیست؟</string>
+    <string name="thirtyMinutes">۳۰ دقیقه</string>
+    <string name="online_status">وضعیت برخط</string>
+    <string name="away">دور از دسترس</string>
+    <string name="busy">مشغول</string>
     </resources>

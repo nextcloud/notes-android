@@ -432,4 +432,10 @@
     <string name="direct_editing_error">Viga vormindatud teksti muutmisvaate laadimisel</string>
     <string name="switch_to_plain_editing">Kasuta muutmisvaadet vormindamata tekstile</string>
     <string name="action_back">Tagasi</string>
+    <string name="whats_your_status">Mis on su olek?</string>
+    <string name="thirtyMinutes">30 minutit</string>
+    <string name="error_setting_status_message">Olekuteate lisamisel tekkis viga!</string>
+    <string name="online_status">Olek võrgus</string>
+    <string name="away">Eemal</string>
+    <string name="busy">Hõivatud</string>
     </resources>

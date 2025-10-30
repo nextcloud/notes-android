@@ -432,4 +432,7 @@
     <string name="direct_editing_error">Fejl under indlæsning af udvidet redigering</string>
     <string name="switch_to_plain_editing">Skift til almindelig redigering</string>
     <string name="action_back">Tilbage</string>
+    <string name="whats_your_status">Hvad er din status</string>
+    <string name="error_setting_status_message">Fejl under angivelse af statusbesked!</string>
+    <string name="busy">Optaget</string>
     </resources>

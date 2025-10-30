@@ -397,4 +397,11 @@
     <string name="progress_import">Se importă notiţele %1$d din %2$d ...</string>
     <string name="account_imported">Cont importat.</string>
     <string name="action_back">Înapoi</string>
+    <string name="whats_your_status">Care este statusul tău?</string>
+    <string name="clear_status_after">Șterge statusul după</string>
+    <string name="today">Azi</string>
+    <string name="thirtyMinutes">30 de minute</string>
+    <string name="oneHour">1 oră</string>
+    <string name="away">Departe</string>
+    <string name="busy">Ocupat</string>
     </resources>

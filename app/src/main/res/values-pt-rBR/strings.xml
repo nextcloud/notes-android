@@ -438,4 +438,17 @@
     <string name="direct_editing_error">Erro ao carregar edição avançada</string>
     <string name="switch_to_plain_editing">Mudar para edição simples</string>
     <string name="action_back">Voltar</string>
+    <string name="set_online_status">Status on-line</string>
+    <string name="status_message">Mensagem de status</string>
+    <string name="clear_status_after">Limpar status após</string>
+    <string name="set_message">Definir mensagem</string>
+    <string name="today">Hoje</string>
+    <string name="thirtyMinutes">30 minutos</string>
+    <string name="oneHour">1 hora</string>
+    <string name="error_setting_status_message">Erro ao definir a mensagem de status!</string>
+    <string name="online_status">Status on-line</string>
+    <string name="away">Ausente</string>
+    <string name="invisible">Invisível</string>
+    <string name="busy">Ocupado</string>
+    <string name="appear_offline">Aparecer off-line</string>
     </resources>

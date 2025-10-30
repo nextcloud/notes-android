@@ -238,4 +238,9 @@
     <string name="simple_prev">Previo</string>
     <string name="simple_backup">Respaldar</string>
     <string name="action_back">Atrás</string>
+    <string name="whats_your_status">¿Cuál es su estado?</string>
+    <string name="thirtyMinutes">30 minutos</string>
+    <string name="online_status">Estado en línea</string>
+    <string name="away">Ausente</string>
+    <string name="busy">Ocupado</string>
     </resources>

@@ -373,4 +373,13 @@
     <string name="direct_editing_error">Kesalahan saat memuat pengeditan kaya</string>
     <string name="switch_to_plain_editing">Beralih ke pengeditan biasa</string>
     <string name="action_back">Kembali</string>
+    <string name="set_online_status">Status online</string>
+    <string name="whats_your_status">Apa status Anda?</string>
+    <string name="today">Hari ini</string>
+    <string name="thirtyMinutes">30 Menit</string>
+    <string name="oneHour">1 jam</string>
+    <string name="error_setting_status_message">Kesalahan saat mengatur pesan status!</string>
+    <string name="online_status">Status online</string>
+    <string name="away">Jauh</string>
+    <string name="busy">Sibuk</string>
     </resources>

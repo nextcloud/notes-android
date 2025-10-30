@@ -432,4 +432,7 @@
     <string name="direct_editing_error">Fehler beim Laden des Rich-Bearbeitungsmodus</string>
     <string name="switch_to_plain_editing">Zum einfachen Bearbeitungsmodus wechseln</string>
     <string name="action_back">Zurück</string>
+    <string name="whats_your_status">Wie ist Ihr Status?</string>
+    <string name="error_setting_status_message">Fehler beim Festlegen der Statusnachricht!</string>
+    <string name="busy">Beschäftigt</string>
     </resources>

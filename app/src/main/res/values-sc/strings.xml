@@ -340,4 +340,18 @@
     <string name="settings_file_suffix_success">Sufissu de archìviu nou: %1$s</string>
     <string name="http_status_code">Còdighe de istadu HTTP: %1$d</string>
     <string name="action_back">In segus</string>
+    <string name="set_online_status">Istadu in lìnia</string>
+    <string name="status_message">Messàgiu de istadu</string>
+    <string name="clear_status_after">Lìmpia s\'istadu a pustis</string>
+    <string name="clear">Lìmpia</string>
+    <string name="today">Oe </string>
+    <string name="thirtyMinutes">30 minutos</string>
+    <string name="oneHour">1 ora</string>
+    <string name="fourHours">4 oras</string>
+    <string name="online_status">Istadu in lìnia</string>
+    <string name="away">Ausente</string>
+    <string name="invisible">Invisìbile</string>
+    <string name="busy">Impinnadu</string>
+    <string name="mute_all_notifications">Istuda totu is notìficas</string>
+    <string name="appear_offline">Mustra•ti foras de lìnia</string>
     </resources>

@@ -450,4 +450,11 @@
     <string name="direct_editing_error">Earráid agus eagarthóireacht shaibhir á lódáil</string>
     <string name="switch_to_plain_editing">Téigh go gnátheagarthóireacht</string>
     <string name="action_back">Ar ais</string>
+    <string name="whats_your_status">Cad é do stádas?</string>
+    <string name="thirtyMinutes">30 nóiméad</string>
+    <string name="oneHour">1 uair</string>
+    <string name="error_setting_status_message">Earráid ag socrú teachtaireachta stádais!</string>
+    <string name="online_status">Stádas ar líne</string>
+    <string name="away">Amach</string>
+    <string name="busy">Gnóthach</string>
     </resources>

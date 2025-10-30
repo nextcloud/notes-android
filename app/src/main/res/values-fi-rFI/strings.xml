@@ -386,4 +386,7 @@
     <string name="progress_import">Tuodaan muistiinpanoa %1$d/%2$d…</string>
     <string name="account_imported">Tili tuotu.</string>
     <string name="action_back">Takaisin</string>
+    <string name="whats_your_status">Mikä on tilatietosi?</string>
+    <string name="thirtyMinutes">30 minuuttia</string>
+    <string name="busy">Varattu</string>
     </resources>

@@ -404,4 +404,24 @@
     <string name="direct_editing_error">加载富文本编辑时出错</string>
     <string name="switch_to_plain_editing">切换到普通编辑模式</string>
     <string name="action_back">返回</string>
+    <string name="set_online_status">在线状态</string>
+    <string name="status_message">状态消息</string>
+    <string name="whats_your_status">您的状态如何？</string>
+    <string name="clear_status_after">清除状态于</string>
+    <string name="clear">清除</string>
+    <string name="set_message">设置消息</string>
+    <string name="today">今天</string>
+    <string name="thirtyMinutes">30 分钟</string>
+    <string name="oneHour">1 小时</string>
+    <string name="fourHours">4 小时</string>
+    <string name="thisWeek">本周后</string>
+    <string name="error_setting_status_message">设置状态消息时出错！</string>
+    <string name="file_list_seconds_ago">几秒前</string>
+    <string name="online_status">在线状态</string>
+    <string name="online">在线</string>
+    <string name="dnd">勿扰</string>
+    <string name="invisible">隐藏</string>
+    <string name="busy">忙碌</string>
+    <string name="mute_all_notifications">静音所有通知</string>
+    <string name="appear_offline">显示为离线</string>
     </resources>

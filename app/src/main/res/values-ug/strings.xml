@@ -402,4 +402,21 @@
     <string name="direct_editing_error">مول تەھرىرلەشنى يۈكلەۋاتقاندا خاتالىق</string>
     <string name="switch_to_plain_editing">ئاددىي تەھرىرلەشكە ئالماشتۇرۇڭ</string>
     <string name="action_back">قايتىش</string>
+    <string name="set_online_status">توردىكى ئورنى</string>
+    <string name="status_message">ھالەت ئۇچۇرى</string>
+    <string name="whats_your_status">ئەھۋالىڭىز نېمە؟</string>
+    <string name="clear_status_after">كېيىنكى ھالەتنى ئېنىقلاش</string>
+    <string name="clear">Clear</string>
+    <string name="today">بۈگۈن</string>
+    <string name="thirtyMinutes">30 مىنۇت</string>
+    <string name="oneHour">1 hour</string>
+    <string name="fourHours">4 سائەت</string>
+    <string name="thisWeek">بۇ ھەپتە</string>
+    <string name="online_status">توردىكى ئورنى</string>
+    <string name="dnd">ئاۋارە قىلماڭ</string>
+    <string name="away">يىراق</string>
+    <string name="invisible">كۆرۈنمەيدۇ</string>
+    <string name="busy">ئالدىراش</string>
+    <string name="mute_all_notifications">بارلىق ئۇقتۇرۇشلارنى ئاۋازسىز قىلىڭ</string>
+    <string name="appear_offline">تورسىز كۆرۈنۈش</string>
     </resources>

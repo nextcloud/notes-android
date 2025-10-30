@@ -384,4 +384,12 @@
     <string name="progress_import">%2$d의 노트 %1$d 불러오는 중...</string>
     <string name="account_imported">계정을 불러왔습니다.</string>
     <string name="action_back">뒤로</string>
+    <string name="whats_your_status">당신의 상태는?</string>
+    <string name="clear_status_after">상태 메시지 지우기 예약</string>
+    <string name="today">오늘</string>
+    <string name="thirtyMinutes">30분</string>
+    <string name="oneHour">1시간</string>
+    <string name="away">자리비움</string>
+    <string name="invisible">숨겨짐</string>
+    <string name="busy">바쁨</string>
     </resources>

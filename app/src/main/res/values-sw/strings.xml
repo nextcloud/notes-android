@@ -432,4 +432,23 @@
     <string name="direct_editing_error">Hitilafu wakati wa kupakia uhariri tajiri</string>
     <string name="switch_to_plain_editing">Badilisha hadi uhariri wa kawaida</string>
     <string name="action_back">Rudi</string>
+    <string name="set_online_status">Hali ya mtandaoni</string>
+    <string name="status_message">Hali ya ujumbe</string>
+    <string name="whats_your_status">Hadhi yako ni nini?</string>
+    <string name="clear_status_after">Futa hali baada ya</string>
+    <string name="clear">Futa</string>
+    <string name="set_message">Weka ujumbe</string>
+    <string name="today">Leo</string>
+    <string name="thirtyMinutes">Dakika 30</string>
+    <string name="oneHour">Saa 1</string>
+    <string name="fourHours">Masaa 4</string>
+    <string name="thisWeek">Wiki hii</string>
+    <string name="error_setting_status_message">Hitilafu katika kuweka ujumbe wa hali!</string>
+    <string name="online_status">Hali ya mtandaoni</string>
+    <string name="dnd">Acha kusumbua</string>
+    <string name="away">Mbali</string>
+    <string name="invisible">Haionekani</string>
+    <string name="busy">Bize</string>
+    <string name="mute_all_notifications">Zima arifu zote</string>
+    <string name="appear_offline">Tokea nje ya mtandao</string>
     </resources>
