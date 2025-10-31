@@ -454,4 +454,6 @@
     <string name="busy">Beschäftigt</string>
     <string name="mute_all_notifications">Alle Benachrichtigungen stummschalten</string>
     <string name="appear_offline">Offline erscheinen</string>
+    <string name="status_set_fail_message">Status konnte nicht gesetzt werden!</string>
+    <string name="account_switch_dialog_status_fetching_error_message">Der Status konnten nicht abgerufen werden. Bitte noch einmal versuchen.</string>
     </resources>

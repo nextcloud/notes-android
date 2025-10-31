@@ -454,4 +454,6 @@
     <string name="busy">Busy</string>
     <string name="mute_all_notifications">Mute all notifications</string>
     <string name="appear_offline">Appear offline</string>
+    <string name="status_set_fail_message">Failed to set status!</string>
+    <string name="account_switch_dialog_status_fetching_error_message">Failed to fetch status, please try again.</string>
     </resources>
