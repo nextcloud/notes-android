@@ -444,13 +444,16 @@
     <string name="clear_status_after">Обриши статус након</string>
     <string name="clear">Очисти</string>
     <string name="set_message">Постави поруку</string>
+    <string name="dontClear">Не бриши</string>
     <string name="today">Данас</string>
     <string name="thirtyMinutes">30 минута</string>
     <string name="oneHour">1 сат</string>
     <string name="fourHours">4 сата</string>
     <string name="thisWeek">Ове недеље</string>
     <string name="error_setting_status_message">Грешка приликом постављања статусне поруке!</string>
+    <string name="file_list_seconds_ago">пре неколико секунди</string>
     <string name="online_status">Мрежни статус</string>
+    <string name="online">На мрежи</string>
     <string name="dnd">Не узнемиравај</string>
     <string name="away">Одсутан</string>
     <string name="invisible">Невидљива</string>

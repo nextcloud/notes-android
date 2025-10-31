@@ -401,4 +401,21 @@
     <string name="direct_editing_error">S\'ha produït un error en carregar l\'edició enriquida</string>
     <string name="switch_to_plain_editing">Canvia a edició sense format</string>
     <string name="action_back">Torna</string>
+    <string name="set_online_status">Estat en línia</string>
+    <string name="status_message">Missatge d\'estat</string>
+    <string name="whats_your_status">Quin és el vostre estat?</string>
+    <string name="clear_status_after">Esborra l\'estat després de</string>
+    <string name="clear">Neteja</string>
+    <string name="dontClear">No l\'esborris</string>
+    <string name="today">Avui</string>
+    <string name="thirtyMinutes">30 minuts</string>
+    <string name="oneHour">1 hora</string>
+    <string name="fourHours">4 hores</string>
+    <string name="thisWeek">Aquesta setmana</string>
+    <string name="file_list_seconds_ago">fa uns segons</string>
+    <string name="online_status">Estat en línia</string>
+    <string name="online">En línia</string>
+    <string name="busy">Ocupat</string>
+    <string name="mute_all_notifications">Silencieu totes les notificacions</string>
+    <string name="appear_offline">Apareixeu fora de línia</string>
     </resources>

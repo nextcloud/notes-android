@@ -407,7 +407,20 @@
     <string name="direct_editing_error">Errore bat gertatu da edizio aberatsa kargatzean</string>
     <string name="switch_to_plain_editing">Aldatu edizio arruntera</string>
     <string name="action_back">Atzera</string>
+    <string name="status_message">Egoera-mezua</string>
+    <string name="clear_status_after">Garbitu egoera honen ondoren</string>
+    <string name="clear">Garbitu</string>
+    <string name="dontClear">Ez ezabatu</string>
+    <string name="today">Gaur</string>
     <string name="thirtyMinutes">30 minutu</string>
+    <string name="oneHour">Ordu 1</string>
+    <string name="fourHours">4 ordu</string>
+    <string name="thisWeek">Aste honetan</string>
+    <string name="file_list_seconds_ago">duela segundo batzuk</string>
+    <string name="online">Linean</string>
+    <string name="dnd">Ez molestatu</string>
     <string name="away">Kanpoan</string>
+    <string name="invisible">Ikusezina</string>
     <string name="busy">Lanpetua</string>
+    <string name="mute_all_notifications">Isilarazi jakinarazpen guztiak</string>
     </resources>

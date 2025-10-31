@@ -403,14 +403,23 @@
     <string name="switch_to_plain_editing">プレーン編集モードに切り替える</string>
     <string name="action_back">戻る</string>
     <string name="set_online_status">オンラインステータス</string>
+    <string name="status_message">状態メッセージ</string>
     <string name="whats_your_status">現在のオンラインステータスは？</string>
     <string name="clear_status_after">ステータスの有効期限</string>
+    <string name="clear">クリア</string>
+    <string name="set_message">メッセージを設定</string>
     <string name="today">今日</string>
     <string name="thirtyMinutes">30分</string>
     <string name="oneHour">1時間</string>
+    <string name="fourHours">4時間</string>
     <string name="error_setting_status_message">ステータスメッセージの設定中にエラーが発生しました。</string>
+    <string name="file_list_seconds_ago">数秒前</string>
     <string name="online_status">オンラインステータス</string>
+    <string name="online">オンライン</string>
+    <string name="dnd">取り込み中</string>
     <string name="away">不在</string>
     <string name="invisible">ステータスを隠す</string>
     <string name="busy">ビジー</string>
+    <string name="mute_all_notifications">全ての通知をミュートします</string>
+    <string name="appear_offline">オフライン</string>
     </resources>

@@ -440,15 +440,26 @@
     <string name="action_back">Voltar</string>
     <string name="set_online_status">Status on-line</string>
     <string name="status_message">Mensagem de status</string>
+    <string name="whats_your_status">Qual é o seu status?</string>
     <string name="clear_status_after">Limpar status após</string>
+    <string name="clear">Limpar</string>
     <string name="set_message">Definir mensagem</string>
+    <string name="dontClear">Não limpe</string>
     <string name="today">Hoje</string>
     <string name="thirtyMinutes">30 minutos</string>
     <string name="oneHour">1 hora</string>
+    <string name="fourHours">4 horas</string>
+    <string name="thisWeek">Esta semana</string>
     <string name="error_setting_status_message">Erro ao definir a mensagem de status!</string>
+    <string name="file_list_seconds_ago">segundos atrás</string>
     <string name="online_status">Status on-line</string>
+    <string name="online">On-line</string>
+    <string name="dnd">Não perturbe</string>
     <string name="away">Ausente</string>
     <string name="invisible">Invisível</string>
     <string name="busy">Ocupado</string>
+    <string name="mute_all_notifications">Silenciar todas as notificações</string>
     <string name="appear_offline">Aparecer off-line</string>
+    <string name="status_set_fail_message">Falha ao definir o status!</string>
+    <string name="account_switch_dialog_status_fetching_error_message">Não foi possível obter o status. Tente novamente.</string>
     </resources>

@@ -387,6 +387,15 @@
     <string name="account_imported">Tili tuotu.</string>
     <string name="action_back">Takaisin</string>
     <string name="whats_your_status">Mikä on tilatietosi?</string>
+    <string name="clear_status_after">Tyhjennä tilatieto</string>
+    <string name="clear">Tyhjennä</string>
+    <string name="dontClear">Älä tyhjennä</string>
+    <string name="today">Tänään</string>
     <string name="thirtyMinutes">30 minuuttia</string>
+    <string name="thisWeek">Tällä viikolla</string>
+    <string name="file_list_seconds_ago">sekunteja sitten</string>
+    <string name="online">Online</string>
     <string name="busy">Varattu</string>
+    <string name="mute_all_notifications">Mykistä kaikki ilmoitukset</string>
+    <string name="appear_offline">Näytä olevan poissa</string>
     </resources>

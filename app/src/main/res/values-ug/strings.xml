@@ -407,12 +407,15 @@
     <string name="whats_your_status">ئەھۋالىڭىز نېمە؟</string>
     <string name="clear_status_after">كېيىنكى ھالەتنى ئېنىقلاش</string>
     <string name="clear">Clear</string>
+    <string name="dontClear">ئېنىق ئەمەس</string>
     <string name="today">بۈگۈن</string>
     <string name="thirtyMinutes">30 مىنۇت</string>
     <string name="oneHour">1 hour</string>
     <string name="fourHours">4 سائەت</string>
     <string name="thisWeek">بۇ ھەپتە</string>
+    <string name="file_list_seconds_ago">سېكۇنت بۇرۇن</string>
     <string name="online_status">توردىكى ئورنى</string>
+    <string name="online">توردا</string>
     <string name="dnd">ئاۋارە قىلماڭ</string>
     <string name="away">يىراق</string>
     <string name="invisible">كۆرۈنمەيدۇ</string>

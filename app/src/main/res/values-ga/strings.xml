@@ -450,11 +450,26 @@
     <string name="direct_editing_error">Earráid agus eagarthóireacht shaibhir á lódáil</string>
     <string name="switch_to_plain_editing">Téigh go gnátheagarthóireacht</string>
     <string name="action_back">Ar ais</string>
+    <string name="set_online_status">Stádas ar líne</string>
+    <string name="status_message">Teachtaireacht stádais</string>
     <string name="whats_your_status">Cad é do stádas?</string>
+    <string name="clear_status_after">Stádas soiléir tar éis</string>
+    <string name="clear">Glan</string>
+    <string name="set_message">Socraigh teachtaireacht</string>
+    <string name="dontClear">Ná soiléir</string>
+    <string name="today">Inniu</string>
     <string name="thirtyMinutes">30 nóiméad</string>
     <string name="oneHour">1 uair</string>
+    <string name="fourHours">4 uair an chloig</string>
+    <string name="thisWeek">An tseachtain seo</string>
     <string name="error_setting_status_message">Earráid ag socrú teachtaireachta stádais!</string>
+    <string name="file_list_seconds_ago">soicind ó shin</string>
     <string name="online_status">Stádas ar líne</string>
+    <string name="online">Ar líne</string>
+    <string name="dnd">Ná cur as</string>
     <string name="away">Amach</string>
+    <string name="invisible">Dofheicthe</string>
     <string name="busy">Gnóthach</string>
+    <string name="mute_all_notifications">Balbhaigh gach fógra</string>
+    <string name="appear_offline">Le feiceáil as líne</string>
     </resources>

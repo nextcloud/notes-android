@@ -435,11 +435,19 @@
     <string name="status_message">Statusbericht</string>
     <string name="whats_your_status">Wat is je status?</string>
     <string name="clear_status_after">Maak de status leeg na</string>
+    <string name="clear">Terug</string>
+    <string name="dontClear">Niet opruimen</string>
     <string name="today">Vandaag</string>
     <string name="thirtyMinutes">30 minuten</string>
     <string name="oneHour">1 uur</string>
+    <string name="fourHours">4 uur</string>
+    <string name="thisWeek">Deze week</string>
+    <string name="file_list_seconds_ago">seconden geleden</string>
+    <string name="online">Online</string>
+    <string name="dnd">Niet storen</string>
     <string name="away">Afwezig</string>
     <string name="invisible">Verborgen</string>
     <string name="busy">Bezet</string>
+    <string name="mute_all_notifications">Onderdruk alle meldingen</string>
     <string name="appear_offline">Toon afwezig</string>
     </resources>

@@ -438,13 +438,16 @@
     <string name="clear_status_after">Futa hali baada ya</string>
     <string name="clear">Futa</string>
     <string name="set_message">Weka ujumbe</string>
+    <string name="dontClear">Usifute</string>
     <string name="today">Leo</string>
     <string name="thirtyMinutes">Dakika 30</string>
     <string name="oneHour">Saa 1</string>
     <string name="fourHours">Masaa 4</string>
     <string name="thisWeek">Wiki hii</string>
     <string name="error_setting_status_message">Hitilafu katika kuweka ujumbe wa hali!</string>
+    <string name="file_list_seconds_ago">sukunde zilizopita</string>
     <string name="online_status">Hali ya mtandaoni</string>
+    <string name="online">Mtandaoni</string>
     <string name="dnd">Acha kusumbua</string>
     <string name="away">Mbali</string>
     <string name="invisible">Haionekani</string>

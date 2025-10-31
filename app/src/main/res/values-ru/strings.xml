@@ -437,11 +437,16 @@
     <string name="clear_status_after">Очистить статус после</string>
     <string name="clear">Очистить</string>
     <string name="set_message">Установить сообщение</string>
+    <string name="dontClear">Не очищать</string>
     <string name="today">Сегодня</string>
     <string name="thirtyMinutes">30 минут.</string>
     <string name="oneHour">1 час</string>
+    <string name="thisWeek">На этой неделе</string>
     <string name="error_setting_status_message">Ошибка при установке сообщения статуса</string>
+    <string name="file_list_seconds_ago">только что</string>
     <string name="online_status">Онлайн подключения</string>
+    <string name="online">В сети</string>
+    <string name="dnd">Не беспокоить</string>
     <string name="away">Неактивен</string>
     <string name="invisible">Невидимый</string>
     <string name="busy">Занят</string>

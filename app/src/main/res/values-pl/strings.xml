@@ -448,14 +448,24 @@
     <string name="status_message">Komunikat statusu</string>
     <string name="whats_your_status">Jaki jest Twój status?</string>
     <string name="clear_status_after">Wyczyść status po</string>
+    <string name="clear">Wyczyść</string>
     <string name="set_message">Ustaw wiadomość</string>
+    <string name="dontClear">Nie czyść</string>
     <string name="today">Dzisiaj</string>
     <string name="thirtyMinutes">30 minut</string>
     <string name="oneHour">1 godzina</string>
+    <string name="fourHours">4 godziny</string>
+    <string name="thisWeek">W tym tygodniu</string>
     <string name="error_setting_status_message">Błąd podczas ustawiania wiadomości o statusie!</string>
+    <string name="file_list_seconds_ago">przed chwilą</string>
     <string name="online_status">Status online</string>
+    <string name="online">Online</string>
+    <string name="dnd">Nie przeszkadzać</string>
     <string name="away">Bezczynny</string>
     <string name="invisible">Niewidoczny</string>
     <string name="busy">Brak dostępności</string>
+    <string name="mute_all_notifications">Wycisz wszystkie powiadomienia</string>
     <string name="appear_offline">Wyglądaj jako offline</string>
+    <string name="status_set_fail_message">Nie udało się ustawić statusu.</string>
+    <string name="account_switch_dialog_status_fetching_error_message">Nie udało się pobrać statusu, spróbuj ponownie.</string>
     </resources>

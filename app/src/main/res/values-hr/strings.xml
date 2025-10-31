@@ -389,6 +389,9 @@
     <string name="account_imported">Račun je uvezen.</string>
     <string name="action_back">Natrag</string>
     <string name="whats_your_status">Koji je vaš status?</string>
+    <string name="clear_status_after">Izbriši status nakon</string>
+    <string name="clear">Izbriši</string>
     <string name="oneHour">1 sat</string>
+    <string name="file_list_seconds_ago">prije par sekundi</string>
     <string name="busy">Zauzeto</string>
     </resources>

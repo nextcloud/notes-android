@@ -415,10 +415,15 @@
     <string name="whats_your_status">Kako želite nastaviti stanje?</string>
     <string name="clear_status_after">Počisti stanje</string>
     <string name="clear">Počisti</string>
+    <string name="dontClear">Ne počisti</string>
     <string name="today">Danes</string>
     <string name="thirtyMinutes">30 minut</string>
     <string name="oneHour">po 1 uri</string>
     <string name="fourHours">4 urah</string>
+    <string name="thisWeek">še ta teden</string>
+    <string name="file_list_seconds_ago">pred nekaj sekundami</string>
+    <string name="online">Trenutno na spletu</string>
+    <string name="dnd">Ne moti</string>
     <string name="away">Ne spremljam</string>
     <string name="invisible">Drugim nevidno</string>
     <string name="busy">Zasedeno</string>

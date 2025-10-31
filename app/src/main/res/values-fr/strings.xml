@@ -438,11 +438,26 @@
     <string name="direct_editing_error">Erreur lors du chargement de l\'édition enrichie</string>
     <string name="switch_to_plain_editing">Bascule vers l\'édition simple</string>
     <string name="action_back">Retour</string>
+    <string name="set_online_status">Statut de connexion</string>
+    <string name="status_message">Message de statut</string>
     <string name="whats_your_status">Quel est votre statut ?</string>
+    <string name="clear_status_after">Effacer le statut après</string>
+    <string name="clear">Effacer</string>
+    <string name="set_message">Définir le message</string>
+    <string name="dontClear">Ne pas effacer</string>
+    <string name="today">Aujourd’hui</string>
     <string name="thirtyMinutes">30 minutes</string>
     <string name="oneHour">1 heure</string>
+    <string name="fourHours">4 heures</string>
+    <string name="thisWeek">Cette semaine</string>
     <string name="error_setting_status_message">Erreur de définition du message d\'état !</string>
+    <string name="file_list_seconds_ago">à l\'instant</string>
     <string name="online_status">Statut de connexion</string>
+    <string name="online">En ligne</string>
+    <string name="dnd">Ne pas déranger</string>
     <string name="away">Absent·e</string>
+    <string name="invisible">Invisible</string>
     <string name="busy">Occupé</string>
+    <string name="mute_all_notifications">Désactiver les notifications</string>
+    <string name="appear_offline">Apparaître hors-ligne</string>
     </resources>

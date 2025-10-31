@@ -381,6 +381,21 @@
     <string name="direct_editing_error">Σφάλμα κατά την φόρτωση της πλούσιας επεξεργασίας</string>
     <string name="switch_to_plain_editing">Αλλαγή σε απλή επεξεργασία</string>
     <string name="action_back">Πίσω</string>
+    <string name="set_online_status">Κατάσταση σε σύνδεση</string>
+    <string name="status_message">Μήνυμα κατάστασης</string>
     <string name="whats_your_status">Ποια είναι η κατάστασή σας;</string>
+    <string name="clear_status_after">Εκκαθάριση κατάστασης μετά από</string>
+    <string name="clear">Εκκαθάριση</string>
+    <string name="dontClear">Να μην καθαριστεί</string>
+    <string name="today">Σήμερα</string>
+    <string name="thirtyMinutes">30 λεπτά</string>
+    <string name="oneHour">1 ώρα</string>
+    <string name="thisWeek">Αυτή την εβδομάδα</string>
+    <string name="file_list_seconds_ago">δευτερόλεπτα πριν</string>
+    <string name="online_status">Κατάσταση σε σύνδεση</string>
+    <string name="online">Σε σύνδεση</string>
+    <string name="dnd">Μην ενοχλείτε</string>
+    <string name="away">Λείπω</string>
+    <string name="invisible">Αόρατο</string>
     <string name="busy">Απασχολημένος</string>
     </resources>

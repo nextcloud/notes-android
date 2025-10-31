@@ -432,7 +432,24 @@
     <string name="direct_editing_error">Fejl under indlæsning af udvidet redigering</string>
     <string name="switch_to_plain_editing">Skift til almindelig redigering</string>
     <string name="action_back">Tilbage</string>
+    <string name="set_online_status">Online status</string>
+    <string name="status_message">Statusbesked</string>
     <string name="whats_your_status">Hvad er din status</string>
+    <string name="clear_status_after">Ryd status efter</string>
+    <string name="clear">Ryd</string>
+    <string name="set_message">Indstil besked</string>
+    <string name="dontClear">Ryd ikke</string>
+    <string name="today">I dag</string>
+    <string name="thirtyMinutes">30 minutter</string>
+    <string name="thisWeek">Denne uge</string>
     <string name="error_setting_status_message">Fejl under angivelse af statusbesked!</string>
+    <string name="file_list_seconds_ago">få sekunder siden</string>
+    <string name="online_status">Online status</string>
+    <string name="online">Online</string>
+    <string name="dnd">Forstyr ikke</string>
+    <string name="away">Ikke tilstede</string>
+    <string name="invisible">Usynlig</string>
     <string name="busy">Optaget</string>
+    <string name="mute_all_notifications">Vis ikke notifikationer</string>
+    <string name="appear_offline">Er offline</string>
     </resources>

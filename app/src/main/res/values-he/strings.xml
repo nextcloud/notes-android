@@ -272,11 +272,22 @@
     <string name="simple_prev">הקודם</string>
     <string name="action_back">חזרה</string>
     <string name="set_online_status">מצב מקוון</string>
+    <string name="status_message">הודעת מצב</string>
     <string name="whats_your_status">מה המצב שלך?</string>
+    <string name="clear_status_after">לפנות את המצב לאחר</string>
+    <string name="clear">פינוי</string>
+    <string name="dontClear">לא לפנות</string>
     <string name="today">היום</string>
     <string name="thirtyMinutes">30 דקות</string>
     <string name="oneHour">שעה</string>
+    <string name="fourHours">4 שעות</string>
+    <string name="thisWeek">השבוע</string>
+    <string name="file_list_seconds_ago">לפני מספר שניות</string>
     <string name="online_status">מצב מקוון</string>
+    <string name="online">מקוון</string>
     <string name="away">לא פה</string>
+    <string name="invisible">נסתרת</string>
     <string name="busy">עסוק</string>
+    <string name="mute_all_notifications">השתקת כל ההתראות</string>
+    <string name="appear_offline">להופיע במצב בלתי מקוון</string>
     </resources>

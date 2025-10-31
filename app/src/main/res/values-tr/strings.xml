@@ -438,13 +438,16 @@
     <string name="clear_status_after">Durum şu kadar sonra kaldırılsın</string>
     <string name="clear">Temizle</string>
     <string name="set_message">İletiyi ayarla</string>
+    <string name="dontClear">Kaldırılmasın</string>
     <string name="today">Bugün</string>
     <string name="thirtyMinutes">30 dakika</string>
     <string name="oneHour">1 saat</string>
     <string name="fourHours">4 saat</string>
     <string name="thisWeek">Bu hafta</string>
     <string name="error_setting_status_message">Durum iletisi ayarlanırken sorun çıktı!</string>
+    <string name="file_list_seconds_ago">saniye önce</string>
     <string name="online_status">Çevrim içi durumu</string>
+    <string name="online">Çevrim içi</string>
     <string name="dnd">Rahatsız etmeyin</string>
     <string name="away">Uzakta</string>
     <string name="invisible">Görünmez</string>
