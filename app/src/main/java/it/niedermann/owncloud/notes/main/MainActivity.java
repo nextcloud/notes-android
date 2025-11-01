@@ -22,12 +22,22 @@ import static it.niedermann.owncloud.notes.shared.util.SSOUtil.askForNewAccount;
 import android.accounts.NetworkErrorException;
 import android.animation.AnimatorInflater;
 import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.ColorInt;
@@ -36,6 +46,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.SearchView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -44,6 +55,7 @@ import androidx.core.splashscreen.SplashScreen;
 import androidx.core.view.GravityCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.selection.SelectionTracker;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -66,11 +78,14 @@ import com.nextcloud.android.sso.exceptions.UnknownErrorException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 
 import java.net.HttpURLConnection;
+import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
+import hct.Hct;
 import it.niedermann.android.util.ColorUtil;
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.NotesApplication;
@@ -108,6 +123,7 @@ import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 import it.niedermann.owncloud.notes.shared.util.CustomAppGlideModule;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
+import it.niedermann.owncloud.notes.util.LinkHelper;
 
 public class MainActivity extends LockedActivity implements NoteClickListener, AccountPickerListener, AccountSwitcherListener, CategoryDialogFragment.CategoryDialogListener {
 
@@ -170,6 +186,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
         setupToolbars();
         setupNavigationList();
+        setupDrawerAppMenu();
+        setupDrawerAppMenuListener();
         setupNotesList();
 
         mainViewModel.getAccountsCount().observe(this, (count) -> {
@@ -344,6 +362,52 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                 }
             }
         });
+    }
+
+    private void setupDrawerAppMenu() {
+        // hide ecosystem apps based user preference or for branded clients
+        boolean isShowEcosystemApps = PreferenceManager
+                .getDefaultSharedPreferences(getApplicationContext())
+                .getBoolean(getString(R.string.pref_key_show_ecosystem_apps), true);
+        boolean shouldHideTopBanner = getResources().getBoolean(R.bool.is_branded_client) || !isShowEcosystemApps;
+
+        if (shouldHideTopBanner) {
+            binding.drawerEcosystemApps.setVisibility(GONE);
+        } else {
+            binding.drawerEcosystemApps.setVisibility(VISIBLE);
+        }
+    }
+
+    private void setupDrawerAppMenuListener() {
+        // Add listeners to the ecosystem items to launch the app or app-store
+        binding.drawerEcosystemFiles.setOnClickListener(v -> LinkHelper.INSTANCE.openAppOrStore(LinkHelper.APP_NEXTCLOUD_FILES, mainViewModel.getCurrentAccount().getValue().getAccountName(), this));
+        binding.drawerEcosystemTalk.setOnClickListener(v -> LinkHelper.INSTANCE.openAppOrStore(LinkHelper.APP_NEXTCLOUD_TALK, mainViewModel.getCurrentAccount().getValue().getAccountName(), this));
+        binding.drawerEcosystemMore.setOnClickListener(v -> LinkHelper.INSTANCE.openAppStore("Nextcloud", true, this));
+    }
+
+    private void themeDrawerAppMenu(int color) {
+        ColorStateList colorStateList = ColorStateList.valueOf(color);
+        binding.drawerEcosystemFilesIcon.setImageTintList(colorStateList);
+        ((GradientDrawable) binding.drawerEcosystemFilesIcon.getBackground())
+                .setStroke(convertDpToPixel(1, this), color);
+        binding.drawerEcosystemFilesText.setTextColor(color);
+
+        binding.drawerEcosystemTalkIcon.setImageTintList(colorStateList);
+        ((GradientDrawable) binding.drawerEcosystemTalkIcon.getBackground())
+                .setStroke(convertDpToPixel(1, this), color);
+        binding.drawerEcosystemTalkText.setTextColor(color);
+
+        binding.drawerEcosystemMoreIcon.setImageTintList(colorStateList);
+        ((GradientDrawable) binding.drawerEcosystemMoreIcon.getBackground())
+                .setStroke(convertDpToPixel(1, this), color);
+        binding.drawerEcosystemMoreText.setTextColor(color);
+    }
+
+    public static int convertDpToPixel(float dp, Context context) {
+        Resources resources = context.getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+
+        return (int) (dp * ((float) metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 
     private void showAppAccountNotFoundAlertDialog(NextcloudFilesAppAccountNotFoundException e) {
@@ -632,6 +696,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         @ColorInt final int headerTextColor = ColorUtil.getForegroundColorForBackgroundColor(color);
         binding.appName.setTextColor(headerTextColor);
         DrawableCompat.setTint(binding.logo.getDrawable(), headerTextColor);
+        themeDrawerAppMenu(headerTextColor);
 
         adapter.applyBrand(color);
         adapterCategories.applyBrand(color);

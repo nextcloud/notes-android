@@ -42,6 +42,14 @@
             android:summary="%s"
             android:title="@string/settings_theme_title" />
 
+        <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
+            android:defaultValue="true"
+            android:icon="@drawable/ic_rocket_launch_grey600_24dp"
+            android:key="@string/pref_key_show_ecosystem_apps"
+            android:layout="@layout/item_pref"
+            android:title="@string/settings_show_ecosystem_apps"
+            android:summary="@string/settings_show_ecosystem_apps_summary"/>
+
         <ListPreference
             android:defaultValue="@string/pref_value_mode_last"
             android:entries="@array/noteMode_entries_new"
@@ -59,7 +67,6 @@
             android:layout="@layout/item_pref"
             android:title="@string/settings_enable_direct_edit"
             android:summary="@string/settings_enable_direct_edit_summary" />
-
 
         <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
             android:icon="@drawable/ic_baseline_dashboard_24"

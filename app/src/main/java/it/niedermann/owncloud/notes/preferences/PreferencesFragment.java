@@ -41,6 +41,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
     private BrandedSwitchPreference backgroundSyncPref;
     private BrandedSwitchPreference keepScreenOnPref;
     private BrandedSwitchPreference enableDirectEditorPref;
+    private BrandedSwitchPreference showEcosystemAppBarPref;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -49,6 +50,8 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
         viewModel = new ViewModelProvider(requireActivity()).get(PreferencesViewModel.class);
 
         fontPref = findPreference(getString(R.string.pref_key_font));
+
+        showEcosystemAppBarPref = findPreference(getString(R.string.pref_key_show_ecosystem_apps));
 
         gridViewPref = findPreference(getString(R.string.pref_key_gridview));
         if (gridViewPref != null) {
@@ -141,6 +144,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
         lockPref.applyBrand(color);
         wifiOnlyPref.applyBrand(color);
         gridViewPref.applyBrand(color);
+        showEcosystemAppBarPref.applyBrand(color);
         preventScreenCapturePref.applyBrand(color);
         backgroundSyncPref.applyBrand(color);
         keepScreenOnPref.applyBrand(color);
