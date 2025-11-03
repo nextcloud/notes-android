@@ -15,17 +15,17 @@ import androidx.core.net.toUri
 import com.owncloud.android.lib.common.utils.Log_OC
 import java.util.Locale
 
+/**
+ * Helper class for opening Nextcloud apps if present
+ * or falling back to opening the app store
+ * in case the app is not yet installed on the device.
+ */
 object LinkHelper {
     const val APP_NEXTCLOUD_FILES = "com.nextcloud.client"
     const val APP_NEXTCLOUD_NOTES = "it.niedermann.owncloud.notes"
     const val APP_NEXTCLOUD_TALK = "com.nextcloud.talk2"
     const val KEY_ACCOUNT: String = "KEY_ACCOUNT"
     private const val TAG = "LinkHelper"
-
-    fun isHttpOrHttpsLink(link: String?): Boolean =
-        link?.lowercase(Locale.getDefault())?.let {
-            it.startsWith("http://") || it.startsWith("https://")
-        } == true
 
     /**
      * Open specified app and, if not installed redirect to corresponding download.
