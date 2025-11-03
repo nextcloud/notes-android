@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -21,7 +22,6 @@ import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.owncloud.android.lib.resources.users.Status;
-import com.owncloud.android.lib.resources.users.StatusType;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -90,13 +90,13 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
                 currentStatus = repository.fetchUserStatus();
                 requireActivity().runOnUiThread(() -> {
                     final var message = currentStatus.getMessage();
-                    if (message != null) {
+                    if (!TextUtils.isEmpty(message)) {
                         binding.accountStatus.setVisibility(View.VISIBLE);
                         binding.accountStatus.setText(message);
                     }
 
                     final var emoji = currentStatus.getIcon();
-                    if (emoji != null) {
+                    if (!TextUtils.isEmpty(emoji)) {
                         binding.accountStatusEmoji.setVisibility(View.VISIBLE);
                         binding.accountStatusEmoji.setText(emoji);
                     } else {
