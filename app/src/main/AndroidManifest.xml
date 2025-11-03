@@ -14,6 +14,7 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="com.owncloud.android.providers.PERMISSION" />
     <queries>
+        <package android:name="com.nextcloud.talk2" />
         <package android:name="com.nextcloud.client" />
         <package android:name="com.nextcloud.android.beta" />
     </queries>
