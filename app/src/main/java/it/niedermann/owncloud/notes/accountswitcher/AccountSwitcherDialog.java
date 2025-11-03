@@ -193,5 +193,6 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
     public void applyBrand(int color) {
         final var util = BrandingUtil.of(color, requireContext());
         util.notes.colorLayerDrawable((LayerDrawable) binding.check.getDrawable(), R.id.area, color);
+        util.notes.colorBackgroundDrawable(binding.accountStatusIcon);
     }
 }
