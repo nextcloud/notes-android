@@ -50,9 +50,10 @@
                 android:layout_width="@dimen/user_status_icon_size"
                 android:layout_height="@dimen/user_status_icon_size"
                 android:layout_gravity="bottom|end"
+                android:background="@drawable/round_bgnd"
                 android:visibility="gone"
                 app:srcCompat="@drawable/ic_user_status_away"
-                tools:visibility="visible"/>
+                tools:visibility="visible" />
         </FrameLayout>
 
         <LinearLayout

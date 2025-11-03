@@ -69,6 +69,13 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
         });
     }
 
+    public void colorBackgroundDrawable(@NonNull ImageView view) {
+        withScheme(view, scheme -> {
+            view.setBackgroundTintList(ColorStateList.valueOf(dynamicColor.surface().getArgb(scheme)));
+            return view;
+        });
+    }
+
     /**
      * The Notes app uses custom navigation view items because they have several features which are
      * not covered by {@link NavigationItem}.
