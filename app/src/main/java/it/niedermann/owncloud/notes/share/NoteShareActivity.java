@@ -35,6 +35,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.nextcloud.android.common.ui.theme.utils.ColorRole;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.owncloud.android.lib.common.utils.Log_OC;
 import com.owncloud.android.lib.resources.shares.OCShare;
@@ -788,6 +789,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         final var util = BrandingUtil.of(color, this);
         util.platform.themeStatusBar(this);
         util.androidx.themeToolbarSearchView(binding.searchView);
+        util.platform.colorCircularProgressBar(binding.loadingLayoutIndicator, ColorRole.PRIMARY);
         util.platform.themeHorizontalProgressBar(binding.progressBar);
         util.platform.colorViewBackground(getWindow().getDecorView());
         util.platform.colorViewBackground(binding.getRoot());
