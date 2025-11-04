@@ -449,8 +449,11 @@
     <string name="online_status">Elérhető állapot</string>
     <string name="online">Elérhető</string>
     <string name="dnd">Ne zavarjanak</string>
+    <string name="away">Távol</string>
     <string name="invisible">Láthatatlan</string>
     <string name="busy">Foglalt</string>
     <string name="mute_all_notifications">Összes értesítés némítása</string>
     <string name="appear_offline">Megjelenés nem kapcsolódottként</string>
+    <string name="status_set_fail_message">Nem sikerült beállítani az állapotot.</string>
+    <string name="account_switch_dialog_status_fetching_error_message">Nem sikerült lekérni az állapotot, próbálja újra.</string>
     </resources>
