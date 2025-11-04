@@ -186,6 +186,8 @@
     <string name="settings_lock_summary">Device credentials</string>
     <string name="settings_background_sync">Background synchronization</string>
     <string name="settings_prevent_screen_capture">Prevent screen capture</string>
+    <string name="settings_show_ecosystem_apps">Show app switcher</string>
+    <string name="settings_show_ecosystem_apps_summary">Nextcloud app suggestions in navigation heading</string>
     <string name="settings_gridview">Grid view</string>
     <string name="settings_enable_direct_edit">Direct Edit</string>
     <string name="settings_enable_direct_edit_summary">When disabled, the advanced editor will be hidden.</string>
@@ -261,6 +263,7 @@
     <string name="pref_key_last_note_mode" translatable="false">lastNoteMode</string>
     <string name="pref_key_background_sync" translatable="false">backgroundSync</string>
     <string name="pref_key_enable_direct_edit" translatable="false">directEditPreference</string>
+    <string name="pref_key_show_ecosystem_apps" translatable="false">show_ecosystem_apps</string>
     <string name="pref_value_mode_edit" translatable="false">edit</string>
     <string name="pref_value_mode_direct_edit" translatable="false">directEdit</string>
     <string name="pref_value_mode_preview" translatable="false">preview</string>
@@ -539,4 +542,9 @@
     <string name="status_set_fail_message">Failed to set status!</string>
     <string name="account_switch_dialog_status_fetching_error_message">Failed to fetch status, please try again.</string>
     <string name="placeholder_user_status" translatable="false">Online</string>
+    <string name="ecosystem_apps_display_files">Files</string>
+    <string name="ecosystem_apps_display_talk">Talk</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="ecosystem_apps_more">More Nextcloud Apps</string>
+    <string name="ecosystem_apps_display_more">More</string>
 </resources>
