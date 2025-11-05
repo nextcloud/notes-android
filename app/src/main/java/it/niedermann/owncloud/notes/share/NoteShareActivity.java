@@ -22,6 +22,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -223,7 +224,9 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         binding.searchView.setIconifiedByDefault(false);
         binding.searchView.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
         binding.searchView.setQueryHint(getResources().getString(R.string.note_share_activity_search_text));
-        binding.searchView.setInputType(InputType.TYPE_NULL);
+        binding.searchView.setInputType(InputType.TYPE_CLASS_TEXT);
+        binding.searchView.setFocusable(true);
+        binding.searchView.setFocusableInTouchMode(true);
 
         View closeButton = binding.searchView.findViewById(androidx.appcompat.R.id.search_close_btn);
         closeButton.setOnClickListener(v -> {
@@ -282,6 +285,13 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                     suggestionAdapter.swapCursor(null);
                 }
                 return false;
+            }
+        });
+
+        binding.searchView.setOnQueryTextFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(binding.searchView.findFocus(), InputMethodManager.SHOW_IMPLICIT);
             }
         });
 
