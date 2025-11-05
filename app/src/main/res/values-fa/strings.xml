@@ -147,6 +147,8 @@
     <string name="settings_lock_summary">اعتبارنامه‌های دستگاه</string>
     <string name="settings_background_sync">همگام‌سازی پس زمینه</string>
     <string name="settings_prevent_screen_capture">Prevent screen capture</string>
+    <string name="settings_show_ecosystem_apps">نمایش تغییردهنده برنامه</string>
+    <string name="settings_show_ecosystem_apps_summary">پیشنهادات برنامه Nextcloud در عنوان ناوبری</string>
     <string name="settings_gridview">نمایش گرید</string>
     <string name="settings_keep_screen_on">Keep screen on</string>
     <string name="settings_keep_screen_on_summary">When viewing or editing a note</string>
@@ -424,4 +426,9 @@
     <string name="busy">مشغول</string>
     <string name="mute_all_notifications">خاموش کردن همه اعلانات</string>
     <string name="appear_offline">نمایش آفلاین</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">پرونده‌ها</string>
+    <string name="ecosystem_apps_display_talk">گفتگو</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="ecosystem_apps_more">برنامه‌های بیشتر Nextcloud</string>
+    <string name="ecosystem_apps_display_more">بیشتر</string>
+</resources>

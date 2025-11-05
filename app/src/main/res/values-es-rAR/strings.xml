@@ -129,6 +129,7 @@
     <string name="settings_font_size">Tamaño de fuente</string>
     <string name="settings_wifi_only">SIncronizar sólo por Wi-Fi</string>
     <string name="settings_lock_summary">Contraseña del dispositivo</string>
+    <string name="settings_show_ecosystem_apps_summary">Sugerencias de aplicaciones de Nextcloud en el encabezado de navegación</string>
     <string name="settings_gridview">Vista de cuadrícula</string>
     <string name="error_sync">Falló la sincronización: %1$s</string>
     <string name="error_no_network">No hay conexión de red</string>
@@ -231,4 +232,8 @@
     <string name="dnd">No molestar</string>
     <string name="away">Lejos</string>
     <string name="invisible">Invisible</string>
-    </resources>
+    <string name="ecosystem_apps_display_talk">Hablar</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="ecosystem_apps_more">Más apps de Nextcloud</string>
+    <string name="ecosystem_apps_display_more">Más</string>
+</resources>

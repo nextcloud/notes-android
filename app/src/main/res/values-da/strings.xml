@@ -452,4 +452,7 @@
     <string name="busy">Optaget</string>
     <string name="mute_all_notifications">Vis ikke notifikationer</string>
     <string name="appear_offline">Er offline</string>
+    <string name="ecosystem_apps_display_talk">Snak</string>
+    <string name="ecosystem_apps_talk">Nextcloud Snak</string>
+    <string name="ecosystem_apps_more">Flere Nextcloud apps</string>
     </resources>

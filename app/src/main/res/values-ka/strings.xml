@@ -143,6 +143,8 @@
     <string name="settings_lock_summary">Device credentials</string>
     <string name="settings_background_sync">Background synchronization</string>
     <string name="settings_prevent_screen_capture">Prevent screen capture</string>
+    <string name="settings_show_ecosystem_apps">Show app switcher</string>
+    <string name="settings_show_ecosystem_apps_summary">Nextcloud app suggestions in navigation heading</string>
     <string name="settings_gridview">Grid view</string>
     <string name="settings_keep_screen_on">Keep screen on</string>
     <string name="settings_keep_screen_on_summary">When viewing or editing a note</string>
@@ -417,4 +419,8 @@
     <string name="away">Away</string>
     <string name="invisible">Invisible</string>
     <string name="busy">Busy</string>
-    </resources>
+    <string name="ecosystem_apps_display_talk">Talk</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="ecosystem_apps_more">More Nextcloud Apps</string>
+    <string name="ecosystem_apps_display_more">More</string>
+</resources>

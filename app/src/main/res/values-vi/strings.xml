@@ -367,6 +367,7 @@
     <string name="whats_your_status">Trạng thái của bạn là gì?</string>
     <string name="clear_status_after">Xóa trạng thái sau</string>
     <string name="clear">Xóa</string>
+    <string name="dontClear">Không xoá</string>
     <string name="today">Hôm nay</string>
     <string name="thirtyMinutes">30 phút</string>
     <string name="oneHour">1 tiếng</string>
@@ -381,4 +382,7 @@
     <string name="busy">Bận</string>
     <string name="mute_all_notifications">Tắt tiếng tất cả thông báo</string>
     <string name="appear_offline">Đang offline</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">Tệp Tin</string>
+    <string name="ecosystem_apps_display_talk">Nói chuyện</string>
+    <string name="ecosystem_apps_display_more">Thêm</string>
+</resources>

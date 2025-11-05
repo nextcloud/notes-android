@@ -175,6 +175,8 @@
     <string name="settings_lock_summary">Poświadczenia urządzenia</string>
     <string name="settings_background_sync">Synchronizacja w tle</string>
     <string name="settings_prevent_screen_capture">Uniemożliwiaj przechwytywanie ekranu</string>
+    <string name="settings_show_ecosystem_apps">Pokaż przełącznik aplikacji</string>
+    <string name="settings_show_ecosystem_apps_summary">Sugestie aplikacji Nextcloud w nagłówku nawigacji</string>
     <string name="settings_gridview">Widok siatki</string>
     <string name="settings_enable_direct_edit">Edycja bezpośrednia</string>
     <string name="settings_enable_direct_edit_summary">Po wyłączeniu zaawansowany edytor będzie ukryty.</string>
@@ -468,4 +470,9 @@
     <string name="appear_offline">Wyglądaj jako offline</string>
     <string name="status_set_fail_message">Nie udało się ustawić statusu.</string>
     <string name="account_switch_dialog_status_fetching_error_message">Nie udało się pobrać statusu, spróbuj ponownie.</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">Pliki</string>
+    <string name="ecosystem_apps_display_talk">Talk</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="ecosystem_apps_more">Więcej aplikacji Nextcloud</string>
+    <string name="ecosystem_apps_display_more">Więcej</string>
+</resources>

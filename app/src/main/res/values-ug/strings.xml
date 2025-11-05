@@ -143,6 +143,8 @@
     <string name="settings_lock_summary">ئۈسكۈنە كىنىشكىسى</string>
     <string name="settings_background_sync">تەگلىك ماس قەدەمدە</string>
     <string name="settings_prevent_screen_capture">ئېكراننىڭ تارتىۋېلىشىنىڭ ئالدىنى ئالىدۇ</string>
+    <string name="settings_show_ecosystem_apps">ئەپ ئالماشتۇرغۇچنى كۆرسەت</string>
+    <string name="settings_show_ecosystem_apps_summary">يول باشلاش ماۋزۇسىدىكى Nextcloud ئەپ تەكلىپلىرى</string>
     <string name="settings_gridview">كاتەكچە كۆرۈنۈش</string>
     <string name="settings_enable_direct_edit">بىۋاسىتە تەھرىرلەش</string>
     <string name="settings_enable_direct_edit_summary">چەكلەنگەندە ، ئىلغار تەھرىرلىگۈچ يوشۇرۇن بولىدۇ.</string>
@@ -422,4 +424,9 @@
     <string name="busy">ئالدىراش</string>
     <string name="mute_all_notifications">بارلىق ئۇقتۇرۇشلارنى ئاۋازسىز قىلىڭ</string>
     <string name="appear_offline">تورسىز كۆرۈنۈش</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">ھۆججەتلەر</string>
+    <string name="ecosystem_apps_display_talk">پاراڭ</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="ecosystem_apps_more">تېخىمۇ كۆپ Nextcloud ئەپلىرى</string>
+    <string name="ecosystem_apps_display_more">تېخىمۇ كۆپ</string>
+</resources>

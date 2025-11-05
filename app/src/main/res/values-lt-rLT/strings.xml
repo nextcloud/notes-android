@@ -327,4 +327,8 @@
     <string name="busy">Užimtas laikas</string>
     <string name="mute_all_notifications">Išjungti visus pranešimus</string>
     <string name="appear_offline">Atrodyti atsijungusiu</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">Failai</string>
+    <string name="ecosystem_apps_display_talk">Kalba</string>
+    <string name="ecosystem_apps_more">Daugiau Nextcloud programėlių</string>
+    <string name="ecosystem_apps_display_more">Daugiau</string>
+</resources>

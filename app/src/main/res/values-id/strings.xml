@@ -144,6 +144,8 @@
     <string name="settings_lock_summary">Kredensial perangkat</string>
     <string name="settings_background_sync">Sinkronisasi latar belakang</string>
     <string name="settings_prevent_screen_capture">Cegah tangkapan layar</string>
+    <string name="settings_show_ecosystem_apps">Tampilkan pengalih aplikasi</string>
+    <string name="settings_show_ecosystem_apps_summary">Saran aplikasi Nextcloud dalam judul navigasi</string>
     <string name="settings_gridview">Tampilan kotak</string>
     <string name="settings_keep_screen_on">Jaga tetap layar hidup</string>
     <string name="settings_keep_screen_on_summary">Ketika melihat atau mengedit catatan</string>
@@ -395,4 +397,7 @@
     <string name="busy">Sibuk</string>
     <string name="mute_all_notifications">Bisukan semua notifikasi</string>
     <string name="appear_offline">Tampak offline</string>
-    </resources>
+    <string name="ecosystem_apps_display_talk">Talk</string>
+    <string name="ecosystem_apps_more">Aplikasi Nextcloud Lainnya</string>
+    <string name="ecosystem_apps_display_more">Lainnya</string>
+</resources>

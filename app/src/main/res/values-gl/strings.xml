@@ -173,6 +173,8 @@
     <string name="settings_lock_summary">Credenciais do dispositivo</string>
     <string name="settings_background_sync">Sincronización do traballo en segundo plano</string>
     <string name="settings_prevent_screen_capture">Evitar a captura da pantalla</string>
+    <string name="settings_show_ecosystem_apps">Amosar o conmutador de aplicacións</string>
+    <string name="settings_show_ecosystem_apps_summary">Suxestións da aplicación Nextcloud no título de navegación</string>
     <string name="settings_gridview">Ver como grade</string>
     <string name="settings_enable_direct_edit">Edición directa</string>
     <string name="settings_enable_direct_edit_summary">Cando estea desactivado, o editor avanzado agocharase.</string>
@@ -456,4 +458,9 @@
     <string name="appear_offline">Aparecer como sen conexión</string>
     <string name="status_set_fail_message">Produciuse un fallo ao definir o estado!</string>
     <string name="account_switch_dialog_status_fetching_error_message">Produciuse un fallo ao obter o estado, ténteo de novo</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">Ficheiros</string>
+    <string name="ecosystem_apps_display_talk">Parladoiro</string>
+    <string name="ecosystem_apps_talk">Parladoiro de Nextcloud</string>
+    <string name="ecosystem_apps_more">Máis aplicacións de Nextcloud</string>
+    <string name="ecosystem_apps_display_more">Máis</string>
+</resources>

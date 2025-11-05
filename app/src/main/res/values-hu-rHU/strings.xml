@@ -173,6 +173,8 @@
     <string name="settings_lock_summary">Eszközhitelesítő-adatok</string>
     <string name="settings_background_sync">Háttér-szinkronizálás</string>
     <string name="settings_prevent_screen_capture">A képernyő rögzítésének megakadályozása</string>
+    <string name="settings_show_ecosystem_apps">Alkalmazásváltó megjelenítése</string>
+    <string name="settings_show_ecosystem_apps_summary">Nextcloud alkalmazásjavaslatok a navigációs fejlécben</string>
     <string name="settings_gridview">Rács nézet</string>
     <string name="settings_enable_direct_edit">Közvetlen szerkesztés</string>
     <string name="settings_enable_direct_edit_summary">Ha ki van kapcsolva, akkor a fejlett szerkesztő el lesz rejtve.</string>
@@ -456,4 +458,9 @@
     <string name="appear_offline">Megjelenés nem kapcsolódottként</string>
     <string name="status_set_fail_message">Nem sikerült beállítani az állapotot.</string>
     <string name="account_switch_dialog_status_fetching_error_message">Nem sikerült lekérni az állapotot, próbálja újra.</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">Fájlok</string>
+    <string name="ecosystem_apps_display_talk">Beszélgetés</string>
+    <string name="ecosystem_apps_talk">Nextcloud Beszélgetés</string>
+    <string name="ecosystem_apps_more">További nextcloudos alkalmazások</string>
+    <string name="ecosystem_apps_display_more">Továbbiak</string>
+</resources>

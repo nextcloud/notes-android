@@ -151,6 +151,8 @@
     <string name="settings_lock_summary">Prihlasovacie údaje zariadenia</string>
     <string name="settings_background_sync">Synchronizácia na pozadí</string>
     <string name="settings_prevent_screen_capture">Zakázať snímanie obrazovky</string>
+    <string name="settings_show_ecosystem_apps">Zobraziť prepínač aplikácií</string>
+    <string name="settings_show_ecosystem_apps_summary">Návrhy Nextcloud aplikácií v navigačnom záhlaví</string>
     <string name="settings_gridview">Zobrazenie v mriežke</string>
     <string name="settings_enable_direct_edit">Priama úprava</string>
     <string name="settings_enable_direct_edit_summary">Keď je zakázaný, rozšírený editor bude skrytý.</string>
@@ -438,4 +440,9 @@
     <string name="away">Preč</string>
     <string name="invisible">Neviditeľnosť</string>
     <string name="busy">Zaneprázdnený</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">Súbory</string>
+    <string name="ecosystem_apps_display_talk">Talk /Rozhovor/</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk /Rozhovor/</string>
+    <string name="ecosystem_apps_more">Ďalšie Nextcloud aplikácie</string>
+    <string name="ecosystem_apps_display_more">Viac</string>
+</resources>

@@ -225,4 +225,5 @@
     <string name="busy">Ocupat</string>
     <string name="mute_all_notifications">Amudir totas las notificacions</string>
     <string name="appear_offline">Aparéisser fòra linha</string>
+    <string name="ecosystem_apps_display_talk">Charrar</string>
     </resources>

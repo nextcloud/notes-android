@@ -407,4 +407,8 @@
     <string name="file_list_seconds_ago">secunde în urmă</string>
     <string name="away">Departe</string>
     <string name="busy">Ocupat</string>
-    </resources>
+    <string name="ecosystem_apps_display_talk">Discuție</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="ecosystem_apps_more">Mai multe aplicații Nextcloud</string>
+    <string name="ecosystem_apps_display_more">Mai mult</string>
+</resources>

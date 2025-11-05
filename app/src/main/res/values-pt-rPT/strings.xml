@@ -132,6 +132,8 @@
     <string name="settings_font_size">Tamanho do tipo de letra</string>
     <string name="settings_lock_summary">Credenciais de dispositivo</string>
     <string name="settings_prevent_screen_capture">Não permitir captura de ecrã </string>
+    <string name="settings_show_ecosystem_apps">Mostrar alternador de aplicações</string>
+    <string name="settings_show_ecosystem_apps_summary">Sugestões de aplicações Nextcloud no cabeçalho da navegação</string>
     <string name="settings_gridview">Vista em grelha</string>
     <string name="error_sync">A sincronização falhou: %1$s</string>
     <string name="error_no_network">Sem ligação de rede</string>
@@ -245,4 +247,9 @@
     <string name="busy">Ocupado</string>
     <string name="mute_all_notifications">Desativar todas as notificações</string>
     <string name="appear_offline">Aparecer offline</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">Ficheiros</string>
+    <string name="ecosystem_apps_display_talk">Falar</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="ecosystem_apps_more">Mais Aplicações Nextcloud</string>
+    <string name="ecosystem_apps_display_more">Mais</string>
+</resources>

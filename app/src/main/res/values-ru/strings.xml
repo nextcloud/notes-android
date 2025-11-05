@@ -162,6 +162,8 @@
     <string name="settings_lock_summary">Данные устройства</string>
     <string name="settings_background_sync">Синхр. в фоновом режиме</string>
     <string name="settings_prevent_screen_capture">Запретить захват экрана</string>
+    <string name="settings_show_ecosystem_apps">Показать переключатель приложений</string>
+    <string name="settings_show_ecosystem_apps_summary">Рекомендации по приложению Nextcloud в заголовке навигации</string>
     <string name="settings_gridview">Вид сеткой</string>
     <string name="settings_enable_direct_edit">Прямое редактирование</string>
     <string name="settings_enable_direct_edit_summary">При отключении будет скрыт расширенный редактор</string>
@@ -452,4 +454,9 @@
     <string name="busy">Занят</string>
     <string name="mute_all_notifications">Без уведомлений</string>
     <string name="appear_offline">\"Не в сети\" для остальных</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">Файлы</string>
+    <string name="ecosystem_apps_display_talk">Конференции</string>
+    <string name="ecosystem_apps_talk">Конференции для Nextcloud</string>
+    <string name="ecosystem_apps_more">Больше приложений для Nextcloud</string>
+    <string name="ecosystem_apps_display_more">Ещё</string>
+</resources>

@@ -173,6 +173,7 @@
     <string name="settings_lock_summary">Nutiseadmepõhine autentimine</string>
     <string name="settings_background_sync">Taustsünkroniseerimine</string>
     <string name="settings_prevent_screen_capture">Takista ekraanitõmmiste tegemist</string>
+    <string name="settings_show_ecosystem_apps_summary">Nextcloudi rakenduse soovitused päises</string>
     <string name="settings_gridview">Ruudustikvaade</string>
     <string name="settings_enable_direct_edit">Otsemuutmine</string>
     <string name="settings_enable_direct_edit_summary">Kui see valik pole kasutusel, siis lisavõimalustega tekstitoimeti pole kasutusel.</string>
@@ -456,4 +457,8 @@
     <string name="appear_offline">Sellega paistad olema võrgust väljas</string>
     <string name="status_set_fail_message">Oleku määramine ei õnnestunud!</string>
     <string name="account_switch_dialog_status_fetching_error_message">Oleku tuvastamine ei õnnestunud, palun proovi uuesti.</string>
-    </resources>
+    <string name="ecosystem_apps_display_talk">Vestlusrakendus Talk</string>
+    <string name="ecosystem_apps_talk">Nextcloudi suhtlusrakendus (Nextcloud Talk)</string>
+    <string name="ecosystem_apps_more">Veel Nextcloudi rakendusi</string>
+    <string name="ecosystem_apps_display_more">Veel</string>
+</resources>

@@ -174,6 +174,8 @@
     <string name="settings_lock_summary">Informations d\'identification du terminal</string>
     <string name="settings_background_sync">Synchronisation en tâche de fond</string>
     <string name="settings_prevent_screen_capture">Empêcher la capture d\'écran</string>
+    <string name="settings_show_ecosystem_apps">Afficher le sélecteur d\'applications</string>
+    <string name="settings_show_ecosystem_apps_summary">Suggestions d\'applications Nextcloud dans l\'en-tête de navigation</string>
     <string name="settings_gridview">Vue en grille</string>
     <string name="settings_enable_direct_edit">Édition directe</string>
     <string name="settings_enable_direct_edit_summary">Une fois désactivé, l’éditeur avancé sera masqué.</string>
@@ -460,4 +462,9 @@
     <string name="busy">Occupé</string>
     <string name="mute_all_notifications">Désactiver les notifications</string>
     <string name="appear_offline">Apparaître hors-ligne</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">Fichiers</string>
+    <string name="ecosystem_apps_display_talk">Talk</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="ecosystem_apps_more">Plus d\'applications Nextcloud</string>
+    <string name="ecosystem_apps_display_more">Plus</string>
+</resources>
