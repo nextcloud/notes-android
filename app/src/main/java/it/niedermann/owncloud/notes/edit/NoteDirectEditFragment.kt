@@ -45,7 +45,6 @@ import it.niedermann.owncloud.notes.shared.model.ApiVersion
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback
 import it.niedermann.owncloud.notes.shared.util.ExtendedFabUtil
 import it.niedermann.owncloud.notes.shared.util.rx.DisposableSet
-import okio.IOException
 import java.util.concurrent.TimeUnit
 
 class NoteDirectEditFragment : BaseNoteFragment(), Branded {
@@ -155,29 +154,56 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
             return
         }
 
-        Log.d(TAG, "onNoteLoaded() called")
+        Log.d("createAndLoadNote", "onNoteLoaded() called")
         val newNoteParam = arguments?.getSerializable(PARAM_NEWNOTE) as Note?
-        if (newNoteParam != null || note.remoteId == null) {
-            createAndLoadNote(note)
-        } else {
-            loadNoteInWebView(note)
+        Log.v(
+            "createAndLoadNote",
+            "on note loaded: newNote null:  ${newNoteParam == null}; remoteId: ${note.remoteId}"
+        )
+
+        if (repo.isSyncPossible) {
+            val acc = repo.getAccountByName(account.name)
+            repo.scheduleSync(acc, false)
+
+            // todo wait until sync is done, how?
+            repo.syncStatus.observe(this) { state: Boolean ->
+                if (!state) {
+                    // update note
+                    val updatedNote = repo.getNoteById(note.id)
+
+                    Log.v(
+                        "createAndLoadNote",
+                        "on note loaded: updatedNote null :  ${newNoteParam == null}; remoteId: ${note.remoteId}"
+                    )
+
+                    //if (updatedNote != null || updatedNote?.remoteId == null) {
+                    //    createAndLoadNote(note)
+                    //} else {
+                    loadNoteInWebView(updatedNote)
+                    //}
+                }
+            }
+            Log.v("createAndLoadNote", "sync started")
         }
     }
 
+
+    // TODO test with a real, 'slow" server!
     private fun createAndLoadNote(newNote: Note) {
-        Log.d(TAG, "createAndLoadNote() called")
+        Log.d("createAndLoadNote", "createAndLoadNote() called with internal id: ${newNote.id}")
         val noteCreateDisposable = Single
             .fromCallable {
                 try {
                     val response = notesApi.createNote(newNote).execute()
                     response.body()
-                } catch (e: IOException) {
-                    Log_OC.w(TAG, "Cant able to create a note: $e")
+                } catch (e: Exception) {
+                    Log_OC.w("createAndLoadNote", "Cant able to create a note: $e")
                     null
                 }
             }
             .flatMap { createdNote ->
-                createdNote?.let {
+                createdNote.let {
+                    Log_OC.d("createAndLoadNote", "created note on server: ${it.remoteId}")
                     repo.updateRemoteId(newNote.id, it.remoteId)
                     Single.fromCallable { repo.getNoteById(newNote.id) }
                 }
@@ -189,7 +215,7 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
             }, { throwable ->
                 note = null
                 handleLoadError()
-                Log.e(TAG, "createAndLoadNote:", throwable)
+                Log.e("createAndLoadNote", "createAndLoadNote:", throwable)
             })
         disposables.add(noteCreateDisposable)
     }
