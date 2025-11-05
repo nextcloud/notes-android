@@ -176,6 +176,8 @@
     <string name="settings_lock_summary">Dintiúir gléas</string>
     <string name="settings_background_sync">Sioncronú cúlra</string>
     <string name="settings_prevent_screen_capture">Cosc a chur ar ghabháil scáileáin</string>
+    <string name="settings_show_ecosystem_apps">Taispeáin athróir aip</string>
+    <string name="settings_show_ecosystem_apps_summary">Moltaí aip Nextcloud sa cheannteideal nascleanúna</string>
     <string name="settings_gridview">Radharc greille</string>
     <string name="settings_enable_direct_edit">Eagar Díreach</string>
     <string name="settings_enable_direct_edit_summary">Nuair a bheidh sé díchumasaithe, cuirfear an t-ardeagarthóir i bhfolach.</string>
@@ -474,4 +476,9 @@
     <string name="appear_offline">Le feiceáil as líne</string>
     <string name="status_set_fail_message">Theip ar an stádas a shocrú!</string>
     <string name="account_switch_dialog_status_fetching_error_message">Theip ar an stádas a fháil, déan iarracht arís.</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">Comhaid</string>
+    <string name="ecosystem_apps_display_talk">Caint</string>
+    <string name="ecosystem_apps_talk">Caint Nextcloud</string>
+    <string name="ecosystem_apps_more">Tuilleadh aipeanna Nextcloud</string>
+    <string name="ecosystem_apps_display_more">Tuilleadh</string>
+</resources>

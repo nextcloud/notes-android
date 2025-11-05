@@ -290,4 +290,7 @@
     <string name="busy">עסוק</string>
     <string name="mute_all_notifications">השתקת כל ההתראות</string>
     <string name="appear_offline">להופיע במצב בלתי מקוון</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">קבצים</string>
+    <string name="ecosystem_apps_display_talk">שיחה</string>
+    <string name="ecosystem_apps_display_more">יותר</string>
+</resources>

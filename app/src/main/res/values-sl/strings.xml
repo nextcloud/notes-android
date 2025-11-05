@@ -143,6 +143,8 @@
     <string name="settings_lock_summary">Poverila naprave</string>
     <string name="settings_background_sync"> Usklajevanje v ozadju</string>
     <string name="settings_prevent_screen_capture">Prepreči zajem zaslona</string>
+    <string name="settings_show_ecosystem_apps">Pokaži preklopnika programov</string>
+    <string name="settings_show_ecosystem_apps_summary">Predlogi programov Nextcloud v naslovu</string>
     <string name="settings_gridview">Mrežni pogled</string>
     <string name="settings_enable_direct_edit">Neposredno urejanje</string>
     <string name="settings_enable_direct_edit_summary">Onemogočena možnost skrije prikaz naprednih možnosti urejevalnika.</string>
@@ -429,4 +431,9 @@
     <string name="busy">Zasedeno</string>
     <string name="mute_all_notifications">Utiša vsa obvestila</string>
     <string name="appear_offline">Pokaže kot brez povezave</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">Datoteke</string>
+    <string name="ecosystem_apps_display_talk">Pogovor Talk</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="ecosystem_apps_more">Več programov Nexcloud</string>
+    <string name="ecosystem_apps_display_more">Več</string>
+</resources>

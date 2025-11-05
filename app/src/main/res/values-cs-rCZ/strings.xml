@@ -175,6 +175,8 @@
     <string name="settings_lock_summary">Přihlašovací údaje zařízení</string>
     <string name="settings_background_sync">Synchronizace na pozadí</string>
     <string name="settings_prevent_screen_capture">Bránit pořizování snímků obrazovky</string>
+    <string name="settings_show_ecosystem_apps">Zobrazit přepínač aplikací</string>
+    <string name="settings_show_ecosystem_apps_summary">Doporučování Nextcloud aplikací v záhlaví navigace</string>
     <string name="settings_gridview">Zobrazení v mřížce</string>
     <string name="settings_enable_direct_edit">Přímá úprava</string>
     <string name="settings_enable_direct_edit_summary">Pokud je vypnutý, pokročilý editor bude skryt.</string>
@@ -468,4 +470,9 @@
     <string name="appear_offline">Jevit se offline</string>
     <string name="status_set_fail_message">Nepodařilo se nastavit stav!</string>
     <string name="account_switch_dialog_status_fetching_error_message">Nepodařilo se načíst stav – zkuste to znovu.</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">Soubory</string>
+    <string name="ecosystem_apps_display_talk">Talk</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="ecosystem_apps_more">Další Nextcloud aplikace</string>
+    <string name="ecosystem_apps_display_more">Další</string>
+</resources>

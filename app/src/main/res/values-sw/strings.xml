@@ -173,6 +173,8 @@
     <string name="settings_lock_summary">Vitambulisho vya kifaa</string>
     <string name="settings_background_sync">Usawazishaji wa usuli</string>
     <string name="settings_prevent_screen_capture">Zuia kunasa skrini</string>
+    <string name="settings_show_ecosystem_apps">Onesha kibadilisha programu</string>
+    <string name="settings_show_ecosystem_apps_summary">Mapendekezo ya programu ya Nextcloud katika kichwa cha urambazaji</string>
     <string name="settings_gridview">Mwonekano wa gridi</string>
     <string name="settings_enable_direct_edit">Hariri ya moja kwa moja</string>
     <string name="settings_enable_direct_edit_summary">Ikizimwa, kihariri cha hali ya juu kitafichwa.</string>
@@ -454,4 +456,9 @@
     <string name="busy">Bize</string>
     <string name="mute_all_notifications">Zima arifu zote</string>
     <string name="appear_offline">Tokea nje ya mtandao</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">Faili</string>
+    <string name="ecosystem_apps_display_talk">Talk</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="ecosystem_apps_more">Programu zaidi za Nextcloud</string>
+    <string name="ecosystem_apps_display_more">Zaidi</string>
+</resources>

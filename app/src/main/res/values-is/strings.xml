@@ -149,6 +149,8 @@
     <string name="settings_lock_summary">Auðkenni tækis</string>
     <string name="settings_background_sync">Samstilling í bakgrunni</string>
     <string name="settings_prevent_screen_capture">Koma í veg fyrir upptöku af skjá</string>
+    <string name="settings_show_ecosystem_apps">Sýna forritaskipti</string>
+    <string name="settings_show_ecosystem_apps_summary">Tillögur Nextcloud-forrita í flakkfyrirsögn</string>
     <string name="settings_gridview">Reitasýn</string>
     <string name="settings_enable_direct_edit">Breyta beint</string>
     <string name="settings_enable_direct_edit_summary">Þegar þetta er óvirkt verður ítarlegi ritillinn falinn.</string>
@@ -464,4 +466,9 @@
     <string name="busy">Upptekinn</string>
     <string name="mute_all_notifications">Þagga allar tilkynningar</string>
     <string name="appear_offline">Birtast ótengt</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">Skráaforrit</string>
+    <string name="ecosystem_apps_display_talk">Spjalla</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="ecosystem_apps_more">Fleiri Nextcloud-forrit</string>
+    <string name="ecosystem_apps_display_more">Meira</string>
+</resources>

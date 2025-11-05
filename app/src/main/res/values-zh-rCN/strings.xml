@@ -150,6 +150,8 @@
     <string name="settings_lock_summary">设备凭据</string>
     <string name="settings_background_sync">后台同步</string>
     <string name="settings_prevent_screen_capture">防止截屏</string>
+    <string name="settings_show_ecosystem_apps">显示应用切换器</string>
+    <string name="settings_show_ecosystem_apps_summary">导航栏中的 Nextcloud 应用推荐</string>
     <string name="settings_gridview">网格视图</string>
     <string name="settings_enable_direct_edit">直接编辑</string>
     <string name="settings_enable_direct_edit_summary">禁用后，高级编辑器将隐藏。</string>
@@ -424,4 +426,9 @@
     <string name="busy">忙碌</string>
     <string name="mute_all_notifications">静音所有通知</string>
     <string name="appear_offline">显示为离线</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">文件</string>
+    <string name="ecosystem_apps_display_talk">通话</string>
+    <string name="ecosystem_apps_talk">Nextcloud 通话</string>
+    <string name="ecosystem_apps_more">更多 Nextcloud 应用</string>
+    <string name="ecosystem_apps_display_more">更多</string>
+</resources>

@@ -173,6 +173,8 @@
     <string name="settings_lock_summary">Apparaatinloggegevens</string>
     <string name="settings_background_sync">Achtergrondsynchronisatie</string>
     <string name="settings_prevent_screen_capture">Voorkomen schermafdruk</string>
+    <string name="settings_show_ecosystem_apps">Toon app switcher</string>
+    <string name="settings_show_ecosystem_apps_summary">Nextcloud app suggesties in navigatiekopregel</string>
     <string name="settings_gridview">Rasterweergave</string>
     <string name="settings_enable_direct_edit">Direct bewerken</string>
     <string name="settings_enable_direct_edit_summary">Indien uitgeschakeld, wordt de geavanceerde editor verborgen.</string>
@@ -450,4 +452,9 @@
     <string name="busy">Bezet</string>
     <string name="mute_all_notifications">Onderdruk alle meldingen</string>
     <string name="appear_offline">Toon afwezig</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">Bestanden</string>
+    <string name="ecosystem_apps_display_talk">Talk</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="ecosystem_apps_more">Meer Nextcloud Apps</string>
+    <string name="ecosystem_apps_display_more">Meer</string>
+</resources>

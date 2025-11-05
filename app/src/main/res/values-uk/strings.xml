@@ -175,6 +175,8 @@
     <string name="settings_lock_summary">Розблокування пристрою</string>
     <string name="settings_background_sync">Фонова синхронізація</string>
     <string name="settings_prevent_screen_capture">Запобігати захопленню екрана</string>
+    <string name="settings_show_ecosystem_apps">Показувати перемикач застосунків</string>
+    <string name="settings_show_ecosystem_apps_summary">Пропозиції застосунків Nextcloud у заголовку навігації</string>
     <string name="settings_gridview">Упорядкування у формі сітки</string>
     <string name="settings_enable_direct_edit">Пряме редагування</string>
     <string name="settings_enable_direct_edit_summary">Якщо вимкнено, розширений редактор буде приховано.</string>
@@ -450,6 +452,7 @@
     <string name="clear_status_after">Очистити статус після</string>
     <string name="clear">Очистити</string>
     <string name="set_message">Встановити повідомлення</string>
+    <string name="dontClear">Залишити поточний</string>
     <string name="today">Сьогодні</string>
     <string name="thirtyMinutes">30 хвилин</string>
     <string name="oneHour">1 година</string>
@@ -465,4 +468,9 @@
     <string name="busy">Зайнято</string>
     <string name="mute_all_notifications">Вимкнути всі сповіщення</string>
     <string name="appear_offline">Перебуваю поза мережею</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">Файли</string>
+    <string name="ecosystem_apps_display_talk">Розмови</string>
+    <string name="ecosystem_apps_talk">Розмови Nextcloud</string>
+    <string name="ecosystem_apps_more">Більше застосунків Nextcloud</string>
+    <string name="ecosystem_apps_display_more">Більше</string>
+</resources>

@@ -147,6 +147,8 @@
     <string name="settings_lock_summary">Enhetens legitimasjon</string>
     <string name="settings_background_sync">Synkronisering i bakgrunnen</string>
     <string name="settings_prevent_screen_capture">Forhindre skjermopptak</string>
+    <string name="settings_show_ecosystem_apps">Vis app-velger</string>
+    <string name="settings_show_ecosystem_apps_summary">Vis Nextcloud app-forslag i navigasjonen</string>
     <string name="settings_gridview">Rutenett-visning</string>
     <string name="settings_enable_direct_edit">Direkte redigering</string>
     <string name="settings_enable_direct_edit_summary">Når den er deaktivert, blir den avanserte redigereren skjult.</string>
@@ -426,4 +428,9 @@
     <string name="busy">Opptatt</string>
     <string name="mute_all_notifications">Demp alle varslinger</string>
     <string name="appear_offline">Vis som frakoblet</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">Filer</string>
+    <string name="ecosystem_apps_display_talk">Samtale</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="ecosystem_apps_more">Flere Nextcloud apper</string>
+    <string name="ecosystem_apps_display_more">Mer</string>
+</resources>

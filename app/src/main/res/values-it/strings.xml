@@ -144,6 +144,8 @@
     <string name="settings_lock_summary">Credenziali dispositivo</string>
     <string name="settings_background_sync">Sincronizzazione in background</string>
     <string name="settings_prevent_screen_capture">Impedisci cattura dello schermo</string>
+    <string name="settings_show_ecosystem_apps">Mostra il selettore delle applicazioni</string>
+    <string name="settings_show_ecosystem_apps_summary">Consigli delle applicazioni di Nextcloud nell\'intestazione di navigazione</string>
     <string name="settings_gridview">Vista griglia</string>
     <string name="settings_enable_direct_edit">Modifica Diretta</string>
     <string name="settings_enable_direct_edit_summary">Quando disabilitato, l\'editor avanzato sarà nascosto.</string>
@@ -426,4 +428,9 @@
     <string name="busy">Occupato</string>
     <string name="mute_all_notifications">Muta tutte le notifiche</string>
     <string name="appear_offline">Appari non in linea</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">File</string>
+    <string name="ecosystem_apps_display_talk">Talk</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="ecosystem_apps_more">Altre applicazioni di Nextcloud</string>
+    <string name="ecosystem_apps_display_more">Altro</string>
+</resources>

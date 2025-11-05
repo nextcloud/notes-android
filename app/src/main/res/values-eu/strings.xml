@@ -148,6 +148,8 @@
     <string name="settings_lock_summary">Gailuaren kredentzialak</string>
     <string name="settings_background_sync">Atzeko planoko sinkronizazioa</string>
     <string name="settings_prevent_screen_capture">Eragotzi pantaila argazkia</string>
+    <string name="settings_show_ecosystem_apps">Erakutsi aplikazioen aldatzailea</string>
+    <string name="settings_show_ecosystem_apps_summary">Nextcloud aplikazioaren iradokizunak nabigazio goiburuan</string>
     <string name="settings_gridview">Sareta ikuspegia</string>
     <string name="settings_enable_direct_edit">Zuzeneko edizioa</string>
     <string name="settings_enable_direct_edit_summary">Desgaituta dagoenean, editore aurreratua ezkutatu egingo da.</string>
@@ -423,4 +425,9 @@
     <string name="invisible">Ikusezina</string>
     <string name="busy">Lanpetua</string>
     <string name="mute_all_notifications">Isilarazi jakinarazpen guztiak</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">Fitxategiak</string>
+    <string name="ecosystem_apps_display_talk">Hizketaldia</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="ecosystem_apps_more">Nextcloud aplikazio gehiago</string>
+    <string name="ecosystem_apps_display_more">Gehiago</string>
+</resources>

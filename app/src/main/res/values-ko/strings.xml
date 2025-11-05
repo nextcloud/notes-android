@@ -144,6 +144,8 @@
     <string name="settings_lock_summary">기기 인증 정보</string>
     <string name="settings_background_sync">백그라운드 동기화</string>
     <string name="settings_prevent_screen_capture">화면 캡처 방지</string>
+    <string name="settings_show_ecosystem_apps">앱 스위치 도구 보이기</string>
+    <string name="settings_show_ecosystem_apps_summary">탐색창 상단에 표시되는 Nextcloud 앱 제안</string>
     <string name="settings_gridview">바둑판식 보기</string>
     <string name="settings_keep_screen_on">화면을 계속 띄워놓기</string>
     <string name="settings_keep_screen_on_summary">메모를 보거나 편집할 때</string>
@@ -397,4 +399,9 @@
     <string name="busy">바쁨</string>
     <string name="mute_all_notifications">모든 알림을 음소거</string>
     <string name="appear_offline">접속 안함으로 표시</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">파일</string>
+    <string name="ecosystem_apps_display_talk">토크</string>
+    <string name="ecosystem_apps_talk">Nextcloud 토크</string>
+    <string name="ecosystem_apps_more">더 많은 Nextcloud 앱</string>
+    <string name="ecosystem_apps_display_more">더 보기</string>
+</resources>

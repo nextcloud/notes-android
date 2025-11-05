@@ -376,6 +376,7 @@
     <string name="status_message">Holat xabari</string>
     <string name="whats_your_status">Sizning holatingiz qanday?</string>
     <string name="clear_status_after">Holatni tozalashdan keyin</string>
+    <string name="dontClear">Aniq emas</string>
     <string name="today">Bugun</string>
     <string name="thirtyMinutes">30 daqiqa</string>
     <string name="oneHour">1 soat</string>
@@ -390,4 +391,6 @@
     <string name="busy">Band</string>
     <string name="mute_all_notifications">Barcha bildirishnomalarni o\'chirish</string>
     <string name="appear_offline">Oflayn ko\'rinishda</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">Fayllar</string>
+    <string name="ecosystem_apps_display_more">Ko\'proq</string>
+</resources>

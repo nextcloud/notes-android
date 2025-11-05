@@ -173,6 +173,8 @@
     <string name="settings_lock_summary">Enhedslegitimationsoplysninger</string>
     <string name="settings_background_sync">Synkronisering i baggrunden</string>
     <string name="settings_prevent_screen_capture">Forhindr skærmoptagelse</string>
+    <string name="settings_show_ecosystem_apps">Vis app skifter</string>
+    <string name="settings_show_ecosystem_apps_summary">Nextcloud app anbefalinger i navigationspanelet</string>
     <string name="settings_gridview">Grid visning</string>
     <string name="settings_enable_direct_edit">Direkte redigering</string>
     <string name="settings_enable_direct_edit_summary">Når den er deaktiveret, vil den avancerede editor blive skjult.</string>
@@ -452,4 +454,9 @@
     <string name="busy">Optaget</string>
     <string name="mute_all_notifications">Vis ikke notifikationer</string>
     <string name="appear_offline">Er offline</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">Filer</string>
+    <string name="ecosystem_apps_display_talk">Snak</string>
+    <string name="ecosystem_apps_talk">Nextcloud Snak</string>
+    <string name="ecosystem_apps_more">Flere Nextcloud apps</string>
+    <string name="ecosystem_apps_display_more">Mere</string>
+</resources>

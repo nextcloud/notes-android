@@ -142,6 +142,7 @@
     <string name="settings_lock_summary">Laitteen valtuudet</string>
     <string name="settings_background_sync">Taustasynkronointi</string>
     <string name="settings_prevent_screen_capture">Estä ruudunkaappaus</string>
+    <string name="settings_show_ecosystem_apps_summary">Nextcloud-sovellusehdotukset navigointipalkissa</string>
     <string name="settings_gridview">Ruudukkonäkymä</string>
     <string name="error_sync">Synkronointi epäonnistui: %1$s</string>
     <string name="error_synchronization">Synkronointi epäonnistui</string>
@@ -398,4 +399,9 @@
     <string name="busy">Varattu</string>
     <string name="mute_all_notifications">Mykistä kaikki ilmoitukset</string>
     <string name="appear_offline">Näytä olevan poissa</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">Tiedostot</string>
+    <string name="ecosystem_apps_display_talk">Talk</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="ecosystem_apps_more">Lisää Nextcloud-sovelluksia</string>
+    <string name="ecosystem_apps_display_more">Lisää</string>
+</resources>

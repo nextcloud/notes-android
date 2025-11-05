@@ -168,6 +168,8 @@
     <string name="settings_lock_summary">裝置身份驗證</string>
     <string name="settings_background_sync">背景同步</string>
     <string name="settings_prevent_screen_capture">防止螢幕截圖</string>
+    <string name="settings_show_ecosystem_apps">顯示應用程式切換器</string>
+    <string name="settings_show_ecosystem_apps_summary">導覽列中的 Nextcloud 應用程式建議</string>
     <string name="settings_gridview">網格檢視</string>
     <string name="settings_enable_direct_edit">直接編輯</string>
     <string name="settings_enable_direct_edit_summary">停用時，高級編輯器將被隱藏。</string>
@@ -446,4 +448,9 @@
     <string name="appear_offline">顯示為離線</string>
     <string name="status_set_fail_message">狀態切換失敗!</string>
     <string name="account_switch_dialog_status_fetching_error_message">無法擷取狀態，請重試。</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">檔案</string>
+    <string name="ecosystem_apps_display_talk">講座</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="ecosystem_apps_more">更多 Nextcloud 應用程式</string>
+    <string name="ecosystem_apps_display_more">更多</string>
+</resources>

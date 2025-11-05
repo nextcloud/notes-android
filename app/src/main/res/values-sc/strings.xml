@@ -120,6 +120,8 @@
     <string name="settings_lock_summary">Credentziales de su dispositivu</string>
     <string name="settings_background_sync">Sincronizatzione isfundu</string>
     <string name="settings_prevent_screen_capture">Impedi sa catura de ischermu</string>
+    <string name="settings_show_ecosystem_apps">Mustra su cuncambiadore de aplicatziones</string>
+    <string name="settings_show_ecosystem_apps_summary">Cussìgios de aplicatziones de Nextcloud in s\'intestatzione de su navigadore</string>
     <string name="settings_gridview">Bista grìllia</string>
     <string name="error_sync">Sincronizatzione faddida: %1$s</string>
     <string name="error_synchronization">Sincronizatzione faddida</string>
@@ -357,4 +359,7 @@
     <string name="busy">Impinnadu</string>
     <string name="mute_all_notifications">Istuda totu is notìficas</string>
     <string name="appear_offline">Mustra•ti foras de lìnia</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">Archìvios</string>
+    <string name="ecosystem_apps_display_talk">Faedda</string>
+    <string name="ecosystem_apps_display_more">Prus</string>
+</resources>

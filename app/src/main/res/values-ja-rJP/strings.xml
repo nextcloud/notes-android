@@ -148,6 +148,8 @@
     <string name="settings_lock_summary">デバイスの資格情報</string>
     <string name="settings_background_sync">バックグラウンド同期</string>
     <string name="settings_prevent_screen_capture">スクリーンショットを防止</string>
+    <string name="settings_show_ecosystem_apps">アップスイッチャーを表示</string>
+    <string name="settings_show_ecosystem_apps_summary">ナビゲーションの見出しにおけるNextcloudアプリの提案</string>
     <string name="settings_gridview">グリッド表示</string>
     <string name="settings_enable_direct_edit">直接編集する</string>
     <string name="settings_enable_direct_edit_summary">無効にすると、詳細エディターは非表示になります。</string>
@@ -422,4 +424,9 @@
     <string name="busy">ビジー</string>
     <string name="mute_all_notifications">全ての通知をミュートします</string>
     <string name="appear_offline">オフライン</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">ファイル</string>
+    <string name="ecosystem_apps_display_talk">トーク</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="ecosystem_apps_more">もっと Nextcloud アプリを見る</string>
+    <string name="ecosystem_apps_display_more">さらに表示</string>
+</resources>

@@ -413,4 +413,7 @@
     <string name="dnd">Не безпокой</string>
     <string name="away">Винаги</string>
     <string name="busy">Зает</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">Файлове</string>
+    <string name="ecosystem_apps_display_talk">Talk</string>
+    <string name="ecosystem_apps_display_more">Повече </string>
+</resources>

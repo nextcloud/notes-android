@@ -173,6 +173,8 @@
     <string name="settings_lock_summary">Aygıt kimlik doğrulama bilgileri</string>
     <string name="settings_background_sync">Arka planda eşitleme</string>
     <string name="settings_prevent_screen_capture">Ekran görüntüsü alınamasın</string>
+    <string name="settings_show_ecosystem_apps">Uygulama değiştiriciyi görüntüle</string>
+    <string name="settings_show_ecosystem_apps_summary">Gezinme başlığında Nextcloud uygulama önerileri</string>
     <string name="settings_gridview">Tablo görünümü</string>
     <string name="settings_enable_direct_edit">Doğrudan düzenleme</string>
     <string name="settings_enable_direct_edit_summary">Kapatıldığındai gelişmiş düzenleyici gizlenir.</string>
@@ -454,4 +456,9 @@
     <string name="busy">Meşgul</string>
     <string name="mute_all_notifications">Tüm bildirimleri kapat</string>
     <string name="appear_offline">Çevrim dışı görün</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">Dosyalar</string>
+    <string name="ecosystem_apps_display_talk">Konuş</string>
+    <string name="ecosystem_apps_talk">Nextcloud Konuş</string>
+    <string name="ecosystem_apps_more">Diğer Nextcloud uygulamaları</string>
+    <string name="ecosystem_apps_display_more">Diğer</string>
+</resources>

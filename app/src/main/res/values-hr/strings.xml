@@ -394,4 +394,7 @@
     <string name="oneHour">1 sat</string>
     <string name="file_list_seconds_ago">prije par sekundi</string>
     <string name="busy">Zauzeto</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">Datoteke</string>
+    <string name="ecosystem_apps_display_talk">Razgovor</string>
+    <string name="ecosystem_apps_display_more">Više</string>
+</resources>
