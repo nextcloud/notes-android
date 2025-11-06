@@ -9,7 +9,6 @@ package it.niedermann.owncloud.notes.accountswitcher;
 
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
@@ -18,6 +17,7 @@ import android.text.TextUtils;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -56,13 +56,15 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
     private long currentAccountId;
     private UserStatusRepository repository;
     private Status currentStatus;
-    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private ExecutorService executor;
 
     @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        if (context instanceof AccountSwitcherListener) {
-            this.accountSwitcherListener = (AccountSwitcherListener) context;
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        executor = Executors.newSingleThreadExecutor();
+
+        if (requireContext() instanceof AccountSwitcherListener context) {
+            this.accountSwitcherListener = context;
         } else {
             throw new ClassCastException("Caller must implement " + AccountSwitcherListener.class.getSimpleName());
         }
@@ -84,30 +86,55 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
             if (account != null) {
                 repository = new UserStatusRepository(requireContext(), account);
             } else {
-                DisplayUtils.showSnackMessage(requireView(), R.string.account_switch_dialog_status_fetching_error_message);
+                final var view = getView();
+                if (view != null) {
+                    DisplayUtils.showSnackMessage(view, R.string.account_switch_dialog_status_fetching_error_message);
+                }
             }
+
             executor.execute(() -> {
                 currentStatus = repository.fetchUserStatus();
-                requireActivity().runOnUiThread(() -> {
-                    final var message = currentStatus.getMessage();
-                    if (!TextUtils.isEmpty(message)) {
-                        binding.accountStatus.setVisibility(View.VISIBLE);
-                        binding.accountStatus.setText(message);
-                    }
 
-                    final var emoji = currentStatus.getIcon();
-                    if (!TextUtils.isEmpty(emoji)) {
-                        binding.accountStatusEmoji.setVisibility(View.VISIBLE);
-                        binding.accountStatusEmoji.setText(emoji);
-                    } else {
-                        final var status = currentStatus.getStatus();
-                        binding.accountStatusIcon.setVisibility(View.VISIBLE);
-                        binding.accountStatusIcon.setImageResource(StatusTypeExtensionsKt.getImageResource(status));
-                    }
-                });
+                if (isAdded() && getActivity() != null && !requireActivity().isFinishing()) {
+                    requireActivity().runOnUiThread(() -> {
+                        if (binding == null) {
+                            return;
+                        }
+
+                        final var message = currentStatus.getMessage();
+                        if (!TextUtils.isEmpty(message)) {
+                            binding.accountStatus.setVisibility(View.VISIBLE);
+                            binding.accountStatus.setText(message);
+                        }
+
+                        final var emoji = currentStatus.getIcon();
+                        if (!TextUtils.isEmpty(emoji)) {
+                            binding.accountStatusEmoji.setVisibility(View.VISIBLE);
+                            binding.accountStatusEmoji.setText(emoji);
+                        } else {
+                            final var status = currentStatus.getStatus();
+                            binding.accountStatusIcon.setVisibility(View.VISIBLE);
+                            binding.accountStatusIcon.setImageResource(StatusTypeExtensionsKt.getImageResource(status));
+                        }
+                    });
+                }
             });
             return Unit.INSTANCE;
         });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (executor != null && !executor.isShutdown()) {
+            executor.shutdownNow();
+        }
     }
 
     @NonNull
@@ -124,13 +151,9 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
             AvatarLoader.INSTANCE.load(requireContext(), binding.currentAccountItemAvatar, currentLocalAccount);
             binding.accountLayout.setOnClickListener((v) -> dismiss());
 
-            binding.onlineStatus.setOnClickListener(v -> {
-                showBottomSheetDialog(AccountSwitcherBottomSheetTag.ONLINE_STATUS);
-            });
+            binding.onlineStatus.setOnClickListener(v -> showBottomSheetDialog(AccountSwitcherBottomSheetTag.ONLINE_STATUS));
 
-            binding.statusMessage.setOnClickListener(v -> {
-                showBottomSheetDialog(AccountSwitcherBottomSheetTag.MESSAGE_STATUS);
-            });
+            binding.statusMessage.setOnClickListener(v -> showBottomSheetDialog(AccountSwitcherBottomSheetTag.MESSAGE_STATUS));
 
             final var adapter = new AccountSwitcherAdapter((localAccount -> {
                 accountSwitcherListener.onAccountChosen(localAccount);
@@ -170,7 +193,10 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
 
     private void showBottomSheetDialog(@NonNull AccountSwitcherBottomSheetTag tag) {
         if (repository == null || currentStatus == null) {
-            DisplayUtils.showSnackMessage(requireView(), R.string.account_switch_dialog_status_fetching_error_message);
+            final var view = getView();
+            if (view != null) {
+                DisplayUtils.showSnackMessage(view, R.string.account_switch_dialog_status_fetching_error_message);
+            }
             return;
         }
 
