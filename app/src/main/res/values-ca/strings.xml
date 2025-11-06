@@ -142,6 +142,8 @@
     <string name="settings_lock_summary">Credencials del dispositiu</string>
     <string name="settings_background_sync">Sincronització en segon pla</string>
     <string name="settings_prevent_screen_capture">Impedeix la captura de la pantalla</string>
+    <string name="settings_show_ecosystem_apps">Mostra el selector d\'aplicacions</string>
+    <string name="settings_show_ecosystem_apps_summary">Suggeriments de l\'aplicació Nextcloud a la capçalera de navegació</string>
     <string name="settings_gridview">Visualització de quadrícula</string>
     <string name="settings_enable_direct_edit">Edició directa</string>
     <string name="settings_enable_direct_edit_summary">Si es desactiva, l\'editor avançat quedarà amagat.</string>
@@ -418,4 +420,9 @@
     <string name="busy">Ocupat</string>
     <string name="mute_all_notifications">Silencieu totes les notificacions</string>
     <string name="appear_offline">Apareixeu fora de línia</string>
-    </resources>
+    <string name="ecosystem_apps_display_files">Fitxers</string>
+    <string name="ecosystem_apps_display_talk">Converses</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="ecosystem_apps_more">Més aplicacions de Nextcloud</string>
+    <string name="ecosystem_apps_display_more">Més</string>
+</resources>

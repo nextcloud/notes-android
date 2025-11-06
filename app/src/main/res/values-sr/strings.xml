@@ -462,6 +462,7 @@
     <string name="busy">Заузет</string>
     <string name="mute_all_notifications">Искључи сва обавештења</string>
     <string name="appear_offline">Прикажи као ван мреже</string>
+    <string name="status_set_fail_message">Није успело постављање статуса!</string>
     <string name="ecosystem_apps_display_files">Фајлови</string>
     <string name="ecosystem_apps_display_talk">Разговор</string>
     <string name="ecosystem_apps_talk">Nextcloud Talk</string>

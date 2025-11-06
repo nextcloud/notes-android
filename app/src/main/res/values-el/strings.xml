@@ -398,7 +398,9 @@
     <string name="away">Λείπω</string>
     <string name="invisible">Αόρατο</string>
     <string name="busy">Απασχολημένος</string>
+    <string name="ecosystem_apps_display_files">Αρχεία</string>
     <string name="ecosystem_apps_display_talk">Talk</string>
     <string name="ecosystem_apps_talk">Nextcloud Talk</string>
     <string name="ecosystem_apps_more">Περισσότερες εφαρμογές Nextcloud</string>
-    </resources>
+    <string name="ecosystem_apps_display_more">Περισσότερα</string>
+</resources>

@@ -174,6 +174,7 @@
     <string name="settings_lock_summary">Credenciales del dispositivo</string>
     <string name="settings_background_sync">Sincronización en segundo plano</string>
     <string name="settings_prevent_screen_capture">Evitar la captura de pantalla</string>
+    <string name="settings_show_ecosystem_apps">Mostrar conmutador de apps</string>
     <string name="settings_show_ecosystem_apps_summary">Sugerencias de Nextcloud app en encabezado de navegación</string>
     <string name="settings_gridview">Vista en cuadrícula</string>
     <string name="settings_enable_direct_edit">Edición directa</string>
@@ -461,6 +462,7 @@
     <string name="busy">Ocupado</string>
     <string name="mute_all_notifications">Silenciar todas las notificaciones</string>
     <string name="appear_offline">Aparecer como desconectado</string>
+    <string name="ecosystem_apps_display_files">Archivos</string>
     <string name="ecosystem_apps_display_talk">Talk</string>
     <string name="ecosystem_apps_talk">Nextcloud Talk</string>
     <string name="ecosystem_apps_more">Más apps de Nextcloud</string>

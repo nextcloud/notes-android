@@ -174,7 +174,7 @@
     <string name="settings_background_sync">Sincronización do traballo en segundo plano</string>
     <string name="settings_prevent_screen_capture">Evitar a captura da pantalla</string>
     <string name="settings_show_ecosystem_apps">Amosar o conmutador de aplicacións</string>
-    <string name="settings_show_ecosystem_apps_summary">Suxestións da aplicación Nextcloud no título de navegación</string>
+    <string name="settings_show_ecosystem_apps_summary">Suxestión de aplicacións de Nextcloud na cabeceira de navegación</string>
     <string name="settings_gridview">Ver como grade</string>
     <string name="settings_enable_direct_edit">Edición directa</string>
     <string name="settings_enable_direct_edit_summary">Cando estea desactivado, o editor avanzado agocharase.</string>
