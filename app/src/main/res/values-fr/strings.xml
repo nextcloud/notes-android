@@ -462,6 +462,8 @@
     <string name="busy">Occupé</string>
     <string name="mute_all_notifications">Désactiver les notifications</string>
     <string name="appear_offline">Apparaître hors-ligne</string>
+    <string name="status_set_fail_message">Impossible de définir le statut.</string>
+    <string name="account_switch_dialog_status_fetching_error_message">Impossible de récupérer le statut, Veuillez réessayer.</string>
     <string name="ecosystem_apps_display_files">Fichiers</string>
     <string name="ecosystem_apps_display_talk">Talk</string>
     <string name="ecosystem_apps_talk">Nextcloud Talk</string>
