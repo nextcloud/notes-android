@@ -456,6 +456,8 @@
     <string name="busy">Bize</string>
     <string name="mute_all_notifications">Zima arifu zote</string>
     <string name="appear_offline">Tokea nje ya mtandao</string>
+    <string name="status_set_fail_message">Imeshindwa kuweka hali!</string>
+    <string name="account_switch_dialog_status_fetching_error_message">Imeshindwa kuleta hali, tafadhali jaribu tena.</string>
     <string name="ecosystem_apps_display_files">Faili</string>
     <string name="ecosystem_apps_display_talk">Talk</string>
     <string name="ecosystem_apps_talk">Nextcloud Talk</string>

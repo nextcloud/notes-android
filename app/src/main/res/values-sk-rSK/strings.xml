@@ -440,6 +440,8 @@
     <string name="away">Preč</string>
     <string name="invisible">Neviditeľnosť</string>
     <string name="busy">Zaneprázdnený</string>
+    <string name="mute_all_notifications">Stlmiť všetky upozornenia</string>
+    <string name="appear_offline">Zdá sa byť offline</string>
     <string name="ecosystem_apps_display_files">Súbory</string>
     <string name="ecosystem_apps_display_talk">Talk /Rozhovor/</string>
     <string name="ecosystem_apps_talk">Nextcloud Talk /Rozhovor/</string>
