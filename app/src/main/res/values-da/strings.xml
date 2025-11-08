@@ -445,7 +445,7 @@
     <string name="thirtyMinutes">30 minutter</string>
     <string name="thisWeek">Denne uge</string>
     <string name="error_setting_status_message">Fejl under angivelse af statusbesked!</string>
-    <string name="file_list_seconds_ago">få sekunder siden</string>
+    <string name="file_list_seconds_ago">sekunder siden</string>
     <string name="online_status">Online status</string>
     <string name="online">Online</string>
     <string name="dnd">Forstyr ikke</string>
