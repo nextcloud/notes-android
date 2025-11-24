@@ -51,6 +51,7 @@
     <string name="note_share_detail_activity_share_via_link_hide_download">نهفتن بارگیری</string>
     <string name="note_share_detail_activity_share_send_note">یادداشت به گیرنده</string>
     <string name="note_share_detail_activity_hint_note">یادداشت</string>
+    <string name="note_share_detail_activity_common_next">بعدی</string>
     <string name="note_share_detail_activity_share_copy_link">اشتراک‌گذاری و رونوشت پیوند</string>
     <string name="note_share_detail_activity_common_confirm">تأیید</string>
     <string name="note_share_detail_activity_set_note">تنظیم یادداشت</string>
