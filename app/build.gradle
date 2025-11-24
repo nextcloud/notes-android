@@ -102,7 +102,7 @@ android {
 }
 
 ext {
-    glideVersion = '4.16.0'
+    glideVersion = '5.0.5'
     roomVersion = "2.8.4"
 }
 
