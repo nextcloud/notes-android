@@ -415,5 +415,6 @@
     <string name="busy">Ocupado</string>
     <string name="mute_all_notifications">Silenciar todas las notificaciones</string>
     <string name="appear_offline">Aparecer como desconectado</string>
+    <string name="ecosystem_apps_display_files">Archivo</string>
     <string name="ecosystem_apps_display_talk">Hablar</string>
     </resources>
