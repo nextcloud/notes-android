@@ -32,7 +32,7 @@
     <string name="menu_favorite">Oblíbená</string>
     <string name="menu_preview">Náhled</string>
     <string name="menu_share">Sdílet</string>
-    <string name="common_loading">Načítání…</string>
+    <string name="common_loading">Načítání …</string>
 
 
     <string name="search_in_category">Hledat v %1$s</string>
@@ -55,7 +55,7 @@
     <string name="note_share_activity_contact_icon_content_description">ikona kontaktu sdílení poznámky</string>
     <string name="note_share_activity_shared_with_you">Nasdílel(a) vám %1$s</string>
     <string name="note_share_activity_share_note">Sdílet poznámku</string>
-    <string name="note_share_activity_search_text">Jméno, identifikátor v rámci federovaného cloudu, nebo e-mailová adresa…</string>
+    <string name="note_share_activity_search_text">Jméno, identifikátor v rámci federovaného cloudu, nebo e-mailová adresa …</string>
     <string name="note_share_activity_share_link">Nasdílet odkaz</string>
     <string name="note_share_activity_resharing_not_allowed">Zásada nebo oprávnění brání sdílení dál dalším</string>
     <string name="note_share_activity_could_not_retrieve_url">Nepodařilo se získat URL</string>
@@ -102,7 +102,7 @@
     <string name="email_pick_failed">Nepodařilo se vybrat e-mailovou adresu.</string>
     <string name="failed_update_ui">Nepodařilo se aktualizovat uživatelské rozhraní</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Pro označené kontakty není k dispozici žádná aplikace</string>
-    <string name="activity_chooser_title">Poslat odkaz na…</string>
+    <string name="activity_chooser_title">Poslat odkaz na …</string>
 
     <string name="activity_chooser_send_file_title">Odeslat</string>
     <string name="share_internal_link_to_folder_text">Sdílení interním odkazem funguje pouze pro uživatele, kteří mají k této složce přístup</string>
@@ -120,7 +120,7 @@
     <string name="share_via_link_send_link_label">Poslat odkaz</string>
     <string name="share_password_title">Chráněno heslem</string>
     <string name="share_no_password_title">Nastavit heslo</string>
-    <string name="share_with_title">Sdílet s…</string>
+    <string name="share_with_title">Sdílet s …</string>
     <string name="share_via_link_unset_password">Zrušit nastavení</string>
     <string name="add_another_public_share_link">Přidat další odkaz</string>
     <string name="add_new_public_share">Přidat nový veřejný odkaz na sdílení</string>
@@ -440,8 +440,8 @@
     <string name="settings_file_suffix_description">Přípona souboru pro nové poznámky ve vámi využívané instanci Nextcloud</string>
     <string name="settings_file_suffix_success">Přípona nového souboru: %1$s</string>
     <string name="http_status_code">HTTP stavový kód: %1$d</string>
-    <string name="progress_import_indeterminate">Importují se poznámky…</string>
-    <string name="progress_import">Importuje se poznámka %1$d z %2$d…</string>
+    <string name="progress_import_indeterminate">Importování poznámek …</string>
+    <string name="progress_import">Importování poznámky %1$d z %2$d…</string>
     <string name="account_imported">Účet naimportován.</string>
     <string name="direct_editing_error">Chyba při načítání upravování formátovaného textu</string>
     <string name="switch_to_plain_editing">Přepnout do upravování neformátovaného textu</string>
