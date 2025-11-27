@@ -194,6 +194,7 @@
     <string name="no_category">Sem categoria</string>
     <string name="simple_checkbox">Caixa de seleção</string>
     <string name="simple_security">Segurança</string>
+    <string name="appearance_and_behavior">Aspeto e comportamento</string>
     <string name="simple_synchronization">Sincronização</string>
     <string name="manage_accounts">Gerir contas</string>
     <string name="action_formatting_help">Formação </string>
