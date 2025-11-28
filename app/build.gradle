@@ -154,7 +154,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.13.0'
     
     // Vanitech
-    implementation 'com.vanniktech:emoji-google:0.22.0'
+    implementation 'com.vanniktech:emoji-google:0.23.0'
 
     // Database
     implementation "androidx.room:room-runtime:${roomVersion}"
