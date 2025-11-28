@@ -8,6 +8,7 @@ package it.niedermann.owncloud.notes.edit
 
 import android.annotation.SuppressLint
 import android.net.http.SslError
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -48,7 +49,9 @@ import it.niedermann.owncloud.notes.shared.util.rx.DisposableSet
 import okio.IOException
 import java.util.concurrent.TimeUnit
 
-class NoteDirectEditFragment : BaseNoteFragment(), Branded {
+class NoteDirectEditFragment :
+    BaseNoteFragment(),
+    Branded {
     private var _binding: FragmentNoteDirectEditBinding? = null
     private val binding: FragmentNoteDirectEditBinding?
         get() = _binding
@@ -69,9 +72,7 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
     // for hiding / showing the fab
     private var scrollStart: Int = 0
 
-    public override fun getScrollView(): ScrollView? {
-        return null
-    }
+    public override fun getScrollView(): ScrollView? = null
 
     override fun scrollToY(y: Int) {
         // do nothing
@@ -137,14 +138,16 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
 
     override fun onResume() {
         super.onResume()
-        val timeoutDisposable = Single.just(Unit)
-            .delay(LOAD_TIMEOUT_SECONDS, TimeUnit.SECONDS)
-            .map {
-                if (binding?.noteWebview?.isVisible == false) {
-                    Log.w(TAG, "Editor not loaded after $LOAD_TIMEOUT_SECONDS seconds")
-                    handleLoadError()
-                }
-            }.subscribe()
+        val timeoutDisposable =
+            Single
+                .just(Unit)
+                .delay(LOAD_TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                .map {
+                    if (binding?.noteWebview?.isVisible == false) {
+                        Log.w(TAG, "Editor not loaded after $LOAD_TIMEOUT_SECONDS seconds")
+                        handleLoadError()
+                    }
+                }.subscribe()
         disposables.add(timeoutDisposable)
     }
 
@@ -156,7 +159,12 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
         }
 
         Log.d(TAG, "onNoteLoaded() called")
-        val newNoteParam = arguments?.getSerializable(PARAM_NEWNOTE) as Note?
+        val newNoteParam =
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+                arguments?.getSerializable(PARAM_NEWNOTE) as Note?
+            } else {
+                arguments?.getSerializable(PARAM_NEWNOTE, Note::class.java)
+            }
         if (newNoteParam != null || note.remoteId == null) {
             createAndLoadNote(note)
         } else {
@@ -166,31 +174,30 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
 
     private fun createAndLoadNote(newNote: Note) {
         Log.d(TAG, "createAndLoadNote() called")
-        val noteCreateDisposable = Single
-            .fromCallable {
-                try {
-                    val response = notesApi.createNote(newNote).execute()
-                    response.body()
-                } catch (e: IOException) {
-                    Log_OC.w(TAG, "Cant able to create a note: $e")
-                    null
-                }
-            }
-            .flatMap { createdNote ->
-                createdNote?.let {
-                    repo.updateRemoteId(newNote.id, it.remoteId)
-                    Single.fromCallable { repo.getNoteById(newNote.id) }
-                }
-            }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ createdNote ->
-                loadNoteInWebView(createdNote)
-            }, { throwable ->
-                note = null
-                handleLoadError()
-                Log.e(TAG, "createAndLoadNote:", throwable)
-            })
+        val noteCreateDisposable =
+            Single
+                .fromCallable {
+                    try {
+                        val response = notesApi.createNote(newNote).execute()
+                        response.body()
+                    } catch (e: IOException) {
+                        Log_OC.w(TAG, "Cant able to create a note: $e")
+                        null
+                    }
+                }.flatMap { createdNote ->
+                    createdNote?.let {
+                        repo.updateRemoteId(newNote.id, it.remoteId)
+                        Single.fromCallable { repo.getNoteById(newNote.id) }
+                    }
+                }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ createdNote ->
+                    loadNoteInWebView(createdNote)
+                }, { throwable ->
+                    note = null
+                    handleLoadError()
+                    Log.e(TAG, "createAndLoadNote:", throwable)
+                })
         disposables.add(noteCreateDisposable)
     }
 
@@ -199,29 +206,33 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
 
         context?.let { context ->
             val repository = DirectEditingRepository.getInstance(context.applicationContext)
-            val urlDisposable = repository.getDirectEditingUrl(account, note)
-                .observeOn(AndroidSchedulers.mainThread()).subscribe({ url ->
-                    url?.let {
-                        if (BuildConfig.DEBUG) {
-                            Log.d(TAG, "loadNoteInWebView: url = $url")
+            val urlDisposable =
+                repository
+                    .getDirectEditingUrl(account, note)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({ url ->
+                        url?.let {
+                            if (BuildConfig.DEBUG) {
+                                Log.d(TAG, "loadNoteInWebView: url = $url")
+                            }
+                            binding?.noteWebview?.loadUrl(url)
                         }
-                        binding?.noteWebview?.loadUrl(url)
-                    }
-                }, { throwable ->
-                    handleLoadError()
-                    Log.e(TAG, "loadNoteInWebView:", throwable)
-                })
+                    }, { throwable ->
+                        handleLoadError()
+                        Log.e(TAG, "loadNoteInWebView:", throwable)
+                    })
             disposables.add(urlDisposable)
         }
     }
 
     private fun handleLoadError() {
         binding?.run {
-            val snackbar = BrandedSnackbar.make(
-                plainEditingFab,
-                getString(R.string.direct_editing_error),
-                Snackbar.LENGTH_INDEFINITE,
-            )
+            val snackbar =
+                BrandedSnackbar.make(
+                    plainEditingFab,
+                    getString(R.string.direct_editing_error),
+                    Snackbar.LENGTH_INDEFINITE,
+                )
 
             if (note != null) {
                 snackbar.setAction(R.string.switch_to_plain_editing) {
@@ -278,31 +289,32 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
             JS_INTERFACE_NAME,
         )
 
-        binding?.noteWebview?.webViewClient = object : WebViewClient() {
-            override fun onReceivedError(
-                view: WebView?,
-                request: WebResourceRequest?,
-                error: WebResourceError?,
-            ) {
-                super.onReceivedError(view, request, error)
-                if (request?.isForMainFrame == true) {
-                    handleLoadError()
+        binding?.noteWebview?.webViewClient =
+            object : WebViewClient() {
+                override fun onReceivedError(
+                    view: WebView?,
+                    request: WebResourceRequest?,
+                    error: WebResourceError?,
+                ) {
+                    super.onReceivedError(view, request, error)
+                    if (request?.isForMainFrame == true) {
+                        handleLoadError()
+                    }
                 }
-            }
 
-            @SuppressLint("WebViewClientOnReceivedSslError") // only for debug mode
-            override fun onReceivedSslError(
-                view: WebView?,
-                handler: SslErrorHandler?,
-                error: SslError?,
-            ) {
-                if (BuildConfig.DEBUG) {
-                    handler?.proceed()
-                } else {
-                    super.onReceivedSslError(view, handler, error)
+                @SuppressLint("WebViewClientOnReceivedSslError") // only for debug mode
+                override fun onReceivedSslError(
+                    view: WebView?,
+                    handler: SslErrorHandler?,
+                    error: SslError?,
+                ) {
+                    if (BuildConfig.DEBUG) {
+                        handler?.proceed()
+                    } else {
+                        super.onReceivedSslError(view, handler, error)
+                    }
                 }
             }
-        }
     }
 
     /**
@@ -333,7 +345,9 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
         }
     }
 
-    private class DirectEditingMobileInterface(val noteDirectEditFragment: NoteDirectEditFragment) {
+    private class DirectEditingMobileInterface(
+        val noteDirectEditFragment: NoteDirectEditFragment,
+    ) {
         @JavascriptInterface
         fun close() {
             noteDirectEditFragment.close()
@@ -367,20 +381,26 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
         }
 
         toggleLoadingUI(true)
-        val updateDisposable = Single.just(note.remoteId)
-            .map { remoteId ->
-                val newNote = notesApi.getNote(remoteId).singleOrError().blockingGet().response
-                val localAccount = repo.getAccountByName(account.name)
-                repo.updateNoteAndSync(localAccount, note, newNote.content, newNote.title, null)
-            }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                listener?.changeMode(NoteFragmentListener.Mode.EDIT, true)
-            }, { throwable ->
-                Log.e(TAG, "changeToEditMode: ", throwable)
-                listener?.changeMode(NoteFragmentListener.Mode.EDIT, true)
-            })
+        val updateDisposable =
+            Single
+                .just(note.remoteId)
+                .map { remoteId ->
+                    val newNote =
+                        notesApi
+                            .getNote(remoteId)
+                            .singleOrError()
+                            .blockingGet()
+                            .response
+                    val localAccount = repo.getAccountByName(account.name)
+                    repo.updateNoteAndSync(localAccount, note, newNote.content, newNote.title, null)
+                }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    listener?.changeMode(NoteFragmentListener.Mode.EDIT, true)
+                }, { throwable ->
+                    Log.e(TAG, "changeToEditMode: ", throwable)
+                    listener?.changeMode(NoteFragmentListener.Mode.EDIT, true)
+                })
         disposables.add(updateDisposable)
     }
 
@@ -410,7 +430,8 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
         private const val JS_RESULT_OK = "ok"
 
         // language=js
-        private val JS_CLOSE = """
+        private val JS_CLOSE =
+            """
             (function () {
               var closeIcons = document.getElementsByClassName("icon-close");
               if (closeIcons.length > 0) {
@@ -420,14 +441,18 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
               }
               return "$JS_RESULT_OK";
             })();
-        """.trimIndent()
+            """.trimIndent()
 
         @JvmStatic
-        fun newInstance(accountId: Long, noteId: Long): BaseNoteFragment {
-            val bundle = Bundle().apply {
-                putLong(PARAM_NOTE_ID, noteId)
-                putLong(PARAM_ACCOUNT_ID, accountId)
-            }
+        fun newInstance(
+            accountId: Long,
+            noteId: Long,
+        ): BaseNoteFragment {
+            val bundle =
+                Bundle().apply {
+                    putLong(PARAM_NOTE_ID, noteId)
+                    putLong(PARAM_ACCOUNT_ID, accountId)
+                }
 
             return NoteDirectEditFragment().apply {
                 arguments = bundle
@@ -436,9 +461,10 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
 
         @JvmStatic
         fun newInstanceWithNewNote(newNote: Note?): BaseNoteFragment {
-            val bundle = Bundle().apply {
-                putSerializable(PARAM_NEWNOTE, newNote)
-            }
+            val bundle =
+                Bundle().apply {
+                    putSerializable(PARAM_NEWNOTE, newNote)
+                }
 
             return NoteDirectEditFragment().apply {
                 arguments = bundle

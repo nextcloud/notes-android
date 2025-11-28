@@ -20,30 +20,33 @@ import it.niedermann.owncloud.notes.share.model.QuickPermissionModel
 class QuickSharingPermissionsAdapter(
     private val quickPermissionList: MutableList<QuickPermissionModel>,
     private val onPermissionChangeListener: QuickSharingPermissionViewHolder.OnPermissionChangeListener,
-    private var color: Int = 0
-) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>(), Branded {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    private var color: Int = 0,
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
+    Branded {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): RecyclerView.ViewHolder {
         val binding = ItemQuickSharePermissionsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         BrandingUtil.of(color, parent.context).platform.colorImageView(binding.tvQuickShareCheckIcon, ColorRole.PRIMARY)
         return QuickSharingPermissionViewHolder(
             binding,
             binding.root,
             onPermissionChangeListener,
-            BrandingUtil.of(color, binding.root.context)
+            BrandingUtil.of(color, binding.root.context),
         )
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: RecyclerView.ViewHolder,
+        position: Int,
+    ) {
         if (holder is QuickSharingPermissionViewHolder) {
             holder.bindData(quickPermissionList[position])
         }
     }
 
-    override fun getItemCount(): Int {
-        return quickPermissionList.size
-    }
+    override fun getItemCount(): Int = quickPermissionList.size
 
     override fun applyBrand(color: Int) {
         this.color = color
@@ -55,10 +58,8 @@ class QuickSharingPermissionsAdapter(
         itemView: View,
         val onPermissionChangeListener: OnPermissionChangeListener,
         val util: BrandingUtil,
-    ) :
-        RecyclerView
-        .ViewHolder(itemView) {
-
+    ) : RecyclerView
+            .ViewHolder(itemView) {
         fun bindData(quickPermissionModel: QuickPermissionModel) {
             binding.tvQuickShareName.text = quickPermissionModel.permissionName
             if (quickPermissionModel.isSelected) {
@@ -70,7 +71,7 @@ class QuickSharingPermissionsAdapter(
             itemView.setOnClickListener {
                 // if user select different options then only update the permission
                 if (!quickPermissionModel.isSelected) {
-                    onPermissionChangeListener.onPermissionChanged(adapterPosition)
+                    onPermissionChangeListener.onPermissionChanged(bindingAdapterPosition)
                 } else {
                     // dismiss sheet on selection of same permission
                     onPermissionChangeListener.onDismissSheet()
@@ -80,6 +81,7 @@ class QuickSharingPermissionsAdapter(
 
         interface OnPermissionChangeListener {
             fun onPermissionChanged(position: Int)
+
             fun onDismissSheet()
         }
     }
