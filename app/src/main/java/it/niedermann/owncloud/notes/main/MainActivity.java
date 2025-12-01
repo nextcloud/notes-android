@@ -226,20 +226,20 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
             switch (selectedCategory.getType()) {
                 case RECENT -> {
-                    activityBinding.searchText.setText(getString(R.string.search_in_all));
+                    activityBinding.searchBar.searchText.setText(getString(R.string.search_in_all));
                 }
                 case FAVORITES -> {
-                    activityBinding.searchText.setText(getString(R.string.search_in_category, getString(R.string.label_favorites)));
+                    activityBinding.searchBar.searchText.setText(getString(R.string.search_in_category, getString(R.string.label_favorites)));
                 }
                 case UNCATEGORIZED -> {
-                    activityBinding.searchText.setText(getString(R.string.search_in_category, getString(R.string.action_uncategorized)));
+                    activityBinding.searchBar.searchText.setText(getString(R.string.search_in_category, getString(R.string.action_uncategorized)));
                 }
                 default -> {
                     final String category = selectedCategory.getCategory();
                     if (category == null) {
                         throw new IllegalStateException(NavigationCategory.class.getSimpleName() + " type is " + DEFAULT_CATEGORY + ", but category is null.");
                     }
-                    activityBinding.searchText.setText(getString(R.string.search_in_category, NoteUtil.extendCategory(category)));
+                    activityBinding.searchBar.searchText.setText(getString(R.string.search_in_category, NoteUtil.extendCategory(category)));
                 }
             }
 
@@ -280,7 +280,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         mainViewModel.getSearchTerm().observe(this, adapter::setHighlightSearchQuery);
         mainViewModel.getCategorySortingMethodOfSelectedCategory().observe(this, methodOfCategory -> {
             updateSortMethodIcon(methodOfCategory.second);
-            activityBinding.sortingMethod.setOnClickListener((v) -> {
+            activityBinding.searchBar.sortingMethod.setOnClickListener((v) -> {
                 if (methodOfCategory.first != null) {
                     int newId = 0;
                     if (methodOfCategory.second != null)
@@ -303,7 +303,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                     .placeholder(R.drawable.ic_account_circle_grey_24dp)
                     .error(R.drawable.ic_account_circle_grey_24dp)
                     .apply(RequestOptions.circleCropTransform())
-                    .into(activityBinding.launchAccountSwitcher);
+                    .into(activityBinding.searchBar.launchAccountSwitcher);
 
             mainViewModel.synchronizeNotes(this, nextAccount, new IResponseCallback<>() {
                 @Override
@@ -331,7 +331,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                 }
             });
             fabCreate.show();
-            activityBinding.launchAccountSwitcher.setOnClickListener((v) -> AccountSwitcherDialog.newInstance(nextAccount.getId()).show(getSupportFragmentManager(), AccountSwitcherDialog.class.getSimpleName()));
+            activityBinding.searchBar.launchAccountSwitcher.setOnClickListener((v) -> AccountSwitcherDialog.newInstance(nextAccount.getId()).show(getSupportFragmentManager(), AccountSwitcherDialog.class.getSimpleName()));
 
             if (menuAdapter == null) {
                 menuAdapter = new MenuAdapter(getApplicationContext(), nextAccount, REQUEST_CODE_SERVER_SETTINGS, (menuItem) -> {
@@ -484,13 +484,13 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     private void setupToolbars() {
         setSupportActionBar(binding.activityNotesListView.searchToolbar);
-        activityBinding.homeToolbar.setOnClickListener((v) -> {
+        activityBinding.searchBar.homeToolbar.setOnClickListener((v) -> {
             if (activityBinding.searchToolbar.getVisibility() == GONE) {
                 updateToolbars(true);
             }
         });
 
-        final var toggle = new ActionBarDrawerToggle(this, binding.drawerLayout, activityBinding.homeToolbar, 0, 0);
+        final var toggle = new ActionBarDrawerToggle(this, binding.drawerLayout, activityBinding.searchBar.homeToolbar, 0, 0);
         binding.drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -525,7 +525,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             listView.setLayoutManager(gridLayoutManager);
             listView.addItemDecoration(new GridItemDecoration(adapter, spanCount,
                     getResources().getDimensionPixelSize(R.dimen.spacer_3x),
-                    getResources().getDimensionPixelSize(R.dimen.spacer_5x),
+                    getResources().getDimensionPixelSize(R.dimen.spacer_3x),
                     getResources().getDimensionPixelSize(R.dimen.spacer_3x),
                     getResources().getDimensionPixelSize(R.dimen.spacer_1x),
                     getResources().getDimensionPixelSize(R.dimen.spacer_activity_sides) + getResources().getDimensionPixelSize(R.dimen.spacer_1x)
@@ -535,7 +535,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             listView.setLayoutManager(layoutManager);
             listView.addItemDecoration(new SectionItemDecoration(adapter,
                     getResources().getDimensionPixelSize(R.dimen.spacer_activity_sides) + getResources().getDimensionPixelSize(R.dimen.spacer_1x) + getResources().getDimensionPixelSize(R.dimen.spacer_3x) + getResources().getDimensionPixelSize(R.dimen.spacer_2x),
-                    getResources().getDimensionPixelSize(R.dimen.spacer_5x),
+                    getResources().getDimensionPixelSize(R.dimen.spacer_3x),
                     getResources().getDimensionPixelSize(R.dimen.spacer_1x),
                     0
             ));
@@ -684,11 +684,11 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         util.platform.colorCircularProgressBar(activityBinding.progressCircular, ColorRole.PRIMARY);
         util.platform.colorNavigationView(binding.navigationView);
         util.material.themeFAB(activityBinding.fabCreate);
-        util.notes.themeSearchCardView(binding.activityNotesListView.searchBarWrapper);
-        util.platform.colorViewBackground(getWindow().getDecorView());
-        util.platform.colorViewBackground(binding.getRoot());
-        util.platform.colorViewBackground(binding.activityNotesListView.activityNotesListView);
-        util.platform.colorTextView(binding.activityNotesListView.searchText, ColorRole.ON_SURFACE_VARIANT);
+        util.notes.themeSearchCardView(binding.activityNotesListView.searchBar.searchBarCardWrapper);
+        util.platform.colorViewBackground(getWindow().getDecorView(), ColorRole.SURFACE_CONTAINER);
+        util.platform.colorViewBackground(binding.getRoot(), ColorRole.SURFACE_CONTAINER);
+        util.platform.colorViewBackground(binding.activityNotesListView.activityNotesListView, ColorRole.SURFACE_CONTAINER);
+        util.platform.colorTextView(binding.activityNotesListView.searchBar.searchText, ColorRole.ON_SURFACE_VARIANT);
         util.notes.themeSearchToolbar(binding.activityNotesListView.searchToolbar);
         util.notes.themeToolbarSearchView(binding.activityNotesListView.searchView);
 
@@ -723,29 +723,29 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         CategorySortingMethod newMethod = (method != null) ? method: CategorySortingMethod.SORT_MODIFIED_DESC;
         switch (newMethod){
             case SORT_MODIFIED_DESC :
-                activityBinding.sortingMethod.setImageResource(R.drawable.modification_desc);
-                activityBinding.sortingMethod.setContentDescription(getString(R.string.sort_alphabetically));
+                activityBinding.searchBar.sortingMethod.setImageResource(R.drawable.modification_desc);
+                activityBinding.searchBar.sortingMethod.setContentDescription(getString(R.string.sort_alphabetically));
                 if (SDK_INT >= O) {
-                    activityBinding.sortingMethod.setTooltipText(getString(R.string.sort_alphabetically));
+                    activityBinding.searchBar.sortingMethod.setTooltipText(getString(R.string.sort_alphabetically));
                 }
                 break;
             case SORT_LEXICOGRAPHICAL_ASC:
-                activityBinding.sortingMethod.setImageResource(R.drawable.alphabetical_asc);
-                activityBinding.sortingMethod.setContentDescription(getString(R.string.sort_alphabetically));
+                activityBinding.searchBar.sortingMethod.setImageResource(R.drawable.alphabetical_asc);
+                activityBinding.searchBar.sortingMethod.setContentDescription(getString(R.string.sort_alphabetically));
                 if (SDK_INT >= O) {
-                    activityBinding.sortingMethod.setTooltipText(getString(R.string.sort_alphabetically));
+                    activityBinding.searchBar.sortingMethod.setTooltipText(getString(R.string.sort_alphabetically));
                 }
                 break;
             case SORT_LEXICOGRAPHICAL_DESC:
-                activityBinding.sortingMethod.setImageResource(R.drawable.alphabetical_desc);
-                activityBinding.sortingMethod.setContentDescription(getString(R.string.sort_last_modified));
+                activityBinding.searchBar.sortingMethod.setImageResource(R.drawable.alphabetical_desc);
+                activityBinding.searchBar.sortingMethod.setContentDescription(getString(R.string.sort_last_modified));
                 if (SDK_INT >= O) {
-                    activityBinding.sortingMethod.setTooltipText(getString(R.string.sort_last_modified));
+                    activityBinding.searchBar.sortingMethod.setTooltipText(getString(R.string.sort_last_modified));
                 }
                 break;
             default: throw new IllegalStateException("Unknown method: " + method.name());
         }
-        brandingUtil().platform.colorImageView(activityBinding.sortingMethod, ColorRole.ON_SURFACE);
+        brandingUtil().platform.colorImageView(activityBinding.searchBar.sortingMethod, ColorRole.ON_SURFACE);
     }
 
     @Override
@@ -883,7 +883,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     }
 
     private void updateToolbars(boolean enableSearch) {
-        activityBinding.homeToolbar.setVisibility(enableSearch ? GONE : VISIBLE);
+        activityBinding.searchBar.searchBarWrapper.setVisibility(enableSearch ? GONE : VISIBLE);
         activityBinding.searchToolbar.setVisibility(enableSearch ? VISIBLE : GONE);
         activityBinding.appBar.setStateListAnimator(AnimatorInflater.loadStateListAnimator(activityBinding.appBar.getContext(), enableSearch
                 ? R.animator.appbar_elevation_on

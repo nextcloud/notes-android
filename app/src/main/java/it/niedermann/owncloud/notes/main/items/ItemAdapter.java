@@ -28,6 +28,7 @@ import androidx.preference.PreferenceManager;
 import androidx.recyclerview.selection.SelectionTracker;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.card.MaterialCardView;
 import com.nextcloud.android.common.ui.theme.utils.ColorRole;
 
 import java.util.ArrayList;
@@ -120,12 +121,12 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                 }
                 case TYPE_NOTE_ONLY_TITLE -> {
                     ItemNotesListNoteItemGridOnlyTitleBinding binding = ItemNotesListNoteItemGridOnlyTitleBinding.inflate(inflater, parent, false);
-                    BrandingUtil.of(color, parent.getContext()).notes.themeCard(binding.card);
+                    BrandingUtil.of(color, parent.getContext()).notes.themeCard(binding.noteCard);
                     return new NoteViewGridHolderOnlyTitle(binding, noteClickListener, monospace, fontSize);
                 }
                 case TYPE_NOTE_WITH_EXCERPT, TYPE_NOTE_WITHOUT_EXCERPT -> {
                     ItemNotesListNoteItemGridBinding binding = ItemNotesListNoteItemGridBinding.inflate(inflater, parent, false);
-                    BrandingUtil.of(color, parent.getContext()).notes.themeCard(binding.card);
+                    BrandingUtil.of(color, parent.getContext()).notes.themeCard(binding.noteCard);
                     return new NoteViewGridHolder(binding, noteClickListener, monospace, fontSize);
                 }
                 default -> {
@@ -141,12 +142,12 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                 }
                 case TYPE_NOTE_WITH_EXCERPT -> {
                     ItemNotesListNoteItemWithExcerptBinding binding = ItemNotesListNoteItemWithExcerptBinding.inflate(inflater, parent, false);
-                    BrandingUtil.of(color, parent.getContext()).notes.themeBackgroundItemView(binding.noteSwipeable);
+                    BrandingUtil.of(color, parent.getContext()).notes.themeCard(binding.noteCard);
                     return new NoteViewHolderWithExcerpt(binding, noteClickListener);
                 }
                 case TYPE_NOTE_ONLY_TITLE, TYPE_NOTE_WITHOUT_EXCERPT -> {
                     ItemNotesListNoteItemWithoutExcerptBinding binding = ItemNotesListNoteItemWithoutExcerptBinding.inflate(inflater, parent, false);
-                    BrandingUtil.of(color, parent.getContext()).notes.themeBackgroundItemView(binding.noteSwipeable);
+                    BrandingUtil.of(color, parent.getContext()).notes.themeCard(binding.noteCard);
                     return new NoteViewHolderWithoutExcerpt(binding, noteClickListener);
                 }
                 default -> {
@@ -175,8 +176,10 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                 holder.itemView.findViewById(R.id.custom_checkbox).setVisibility(tracker != null && tracker.hasSelection() ? View.VISIBLE : View.GONE);
                 holder.itemView.setSelected(isSelected);
                 if (isSelected) {
+                    ((MaterialCardView) holder.itemView.findViewById(R.id.noteCard)).setStrokeWidth((int) holder.itemView.getResources().getDimension(R.dimen.card_stroke_width_selected));
                     ((ImageView) holder.itemView.findViewById(R.id.custom_checkbox)).setImageDrawable(BrandingUtil.getInstance(holder.itemView.getContext()).platform.tintDrawable(holder.itemView.getContext(), R.drawable.ic_checkbox_marked, ColorRole.PRIMARY));
                 } else {
+                    ((MaterialCardView) holder.itemView.findViewById(R.id.noteCard)).setStrokeWidth((int) holder.itemView.getResources().getDimension(R.dimen.card_stroke_width));
                     ((ImageView) holder.itemView.findViewById(R.id.custom_checkbox)).setImageResource(R.drawable.ic_checkbox_blank_outline);
                 }
                 holder.itemView.findViewById(R.id.custom_checkbox).setVisibility(isMultiSelect ? View.VISIBLE : View.GONE);

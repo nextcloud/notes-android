@@ -255,7 +255,10 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
                     new Pair<>(android.R.attr.state_activated, dynamicColor.secondaryContainer().getArgb(scheme)),
                     new Pair<>(-android.R.attr.state_activated, dynamicColor.surface().getArgb(scheme)))
             );
-            view.setStrokeColor(dynamicColor.outlineVariant().getArgb(scheme));
+            view.setStrokeColor(buildColorStateList(
+                    new Pair<>(android.R.attr.state_activated, dynamicColor.onSecondaryContainer().getArgb(scheme)),
+                    new Pair<>(-android.R.attr.state_activated, dynamicColor.outlineVariant().getArgb(scheme)))
+            );
             return view;
         });
     }

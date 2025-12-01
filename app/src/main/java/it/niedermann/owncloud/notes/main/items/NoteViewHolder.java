@@ -112,7 +112,7 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
-    public abstract void showSwipe(boolean left);
+    public abstract void showSwipe(float dX);
 
     @Nullable
     public abstract View getNoteSwipeable();

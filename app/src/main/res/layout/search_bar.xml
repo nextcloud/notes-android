@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ ~ Nextcloud Notes - Android Client
+ ~
+ ~ SPDX-FileCopyrightText: 2015-2025 Nextcloud GmbH and Nextcloud contributors
+ ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/searchBarWrapper"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/spacer_1hx"
+    android:orientation="horizontal">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/home_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        app:contentInsetStartWithNavigation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/searchBarCardWrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/appbar"
+                app:cardCornerRadius="@dimen/spacer_4x"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/search_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/spacer_2x"
+                        android:layout_marginEnd="@dimen/zero"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:gravity="start"
+                        android:lines="1"
+                        android:textSize="16sp"
+                        tools:text="@string/search_in_all" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/sorting_method"
+                        android:layout_width="40dp"
+                        android:layout_height="48dp"
+                        android:layout_gravity="center_vertical|end"
+                        android:layout_marginEnd="@dimen/spacer_1x"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="@string/action_sorting_method"
+                        android:padding="@dimen/spacer_1x"
+                        android:tint="?attr/colorAccent"
+                        app:srcCompat="@drawable/alphabetical_asc" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/launchAccountSwitcher"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center_vertical|end"
+        android:layout_marginStart="@dimen/spacer_1x"
+        android:layout_marginEnd="@dimen/spacer_1x"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="@dimen/spacer_1x"
+        android:tooltipText="@string/manage_accounts"
+        app:srcCompat="@drawable/ic_account_circle_grey_24dp"
+        tools:targetApi="o" />
+
+</LinearLayout>
