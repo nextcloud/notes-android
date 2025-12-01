@@ -173,11 +173,10 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                     ((SectionViewHolder) holder).bind((SectionItem) itemList.get(position));
             case TYPE_NOTE_WITH_EXCERPT, TYPE_NOTE_WITHOUT_EXCERPT, TYPE_NOTE_ONLY_TITLE -> {
                 holder.itemView.findViewById(R.id.custom_checkbox).setVisibility(tracker != null && tracker.hasSelection() ? View.VISIBLE : View.GONE);
+                holder.itemView.setSelected(isSelected);
                 if (isSelected) {
-                    holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.bg_highlighted));
                     ((ImageView) holder.itemView.findViewById(R.id.custom_checkbox)).setImageDrawable(BrandingUtil.getInstance(holder.itemView.getContext()).platform.tintDrawable(holder.itemView.getContext(), R.drawable.ic_checkbox_marked, ColorRole.PRIMARY));
                 } else {
-                    holder.itemView.setBackgroundColor(holder.itemView.getContext().getColor(com.nextcloud.android.common.ui.R.color.bg_default));
                     ((ImageView) holder.itemView.findViewById(R.id.custom_checkbox)).setImageResource(R.drawable.ic_checkbox_blank_outline);
                 }
                 holder.itemView.findViewById(R.id.custom_checkbox).setVisibility(isMultiSelect ? View.VISIBLE : View.GONE);

@@ -251,7 +251,7 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
 
     public void themeCard(@NonNull MaterialCardView view) {
         withScheme(view, scheme -> {
-            view.setBackgroundTintList(buildColorStateList(
+            view.setCardBackgroundColor(buildColorStateList(
                     new Pair<>(android.R.attr.state_activated, dynamicColor.secondaryContainer().getArgb(scheme)),
                     new Pair<>(-android.R.attr.state_activated, dynamicColor.surface().getArgb(scheme)))
             );
