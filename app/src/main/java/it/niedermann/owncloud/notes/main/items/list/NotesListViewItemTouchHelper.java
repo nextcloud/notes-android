@@ -9,6 +9,7 @@ package it.niedermann.owncloud.notes.main.items.list;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 
@@ -114,7 +115,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
             public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
                 final var noteViewHolder = (NoteViewHolder) viewHolder;
                 // show swipe icon on the side
-                noteViewHolder.showSwipe(dX > 0);
+                noteViewHolder.showSwipe(dX);
                 // move only swipeable part of item (not leave-behind)
                 getDefaultUIUtil().onDraw(c, recyclerView, noteViewHolder.getNoteSwipeable(), dX, dY, actionState, isCurrentlyActive);
             }

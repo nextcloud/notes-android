@@ -34,7 +34,7 @@ public class NoteViewGridHolderOnlyTitle extends NoteViewHolder {
         }
     }
 
-    public void showSwipe(boolean left) {
+    public void showSwipe(float dX) {
         throw new UnsupportedOperationException(NoteViewGridHolderOnlyTitle.class.getSimpleName() + " does not support swiping");
     }
 

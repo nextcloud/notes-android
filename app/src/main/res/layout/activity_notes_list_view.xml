@@ -28,65 +28,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/searchBarWrapper"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/spacer_activity_sides"
-                    android:layout_marginVertical="@dimen/spacer_1hx"
-                    app:cardBackgroundColor="@color/appbar"
-                    app:cardCornerRadius="@dimen/spacer_4x"
-                    app:strokeWidth="0dp">
-
-                    <com.google.android.material.appbar.MaterialToolbar
-                        android:id="@+id/home_toolbar"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        app:contentInsetStartWithNavigation="0dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/search_text"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_weight="1"
-                                android:ellipsize="end"
-                                android:gravity="start"
-                                android:lines="1"
-                                android:textSize="16sp"
-                                tools:text="@string/search_in_all" />
-
-                            <androidx.appcompat.widget.AppCompatImageView
-                                android:id="@+id/sorting_method"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical|end"
-                                android:background="?attr/selectableItemBackgroundBorderless"
-                                android:contentDescription="@string/action_sorting_method"
-                                android:padding="@dimen/spacer_2x"
-                                android:tint="?attr/colorAccent"
-                                android:translationX="@dimen/spacer_2x"
-                                app:srcCompat="@drawable/alphabetical_asc" />
-
-                            <androidx.appcompat.widget.AppCompatImageView
-                                android:id="@+id/launchAccountSwitcher"
-                                android:layout_width="?attr/actionBarSize"
-                                android:layout_height="?attr/actionBarSize"
-                                android:layout_gravity="center_vertical|end"
-                                android:background="?attr/selectableItemBackgroundBorderless"
-                                android:paddingVertical="@dimen/spacer_2x"
-                                android:tooltipText="@string/manage_accounts"
-                                app:srcCompat="@drawable/ic_account_circle_grey_24dp"
-                                tools:targetApi="o" />
-                        </LinearLayout>
-                    </com.google.android.material.appbar.MaterialToolbar>
-
-                </com.google.android.material.card.MaterialCardView>
+                <include
+                    android:id="@id/search_bar"
+                    layout="@layout/search_bar"/>
 
                 <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/search_toolbar"
