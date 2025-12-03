@@ -175,6 +175,7 @@
     <string name="listview_updated_last_week">Last week</string>
     <string name="listview_updated_this_month">This month</string>
     <string name="listview_updated_last_month">Last month</string>
+    <string name="listview_no_content">No content</string>
 
     <string name="settings_note_mode">Display mode for notes</string>
     <string name="settings_note_mode_new">Notes opening behaviour</string>

@@ -40,12 +40,10 @@ import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemGridBinding;
 import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemGridOnlyTitleBinding;
 import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemWithExcerptBinding;
-import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemWithoutExcerptBinding;
 import it.niedermann.owncloud.notes.databinding.ItemNotesListSectionItemBinding;
 import it.niedermann.owncloud.notes.main.items.grid.NoteViewGridHolder;
 import it.niedermann.owncloud.notes.main.items.grid.NoteViewGridHolderOnlyTitle;
-import it.niedermann.owncloud.notes.main.items.list.NoteViewHolderWithExcerpt;
-import it.niedermann.owncloud.notes.main.items.list.NoteViewHolderWithoutExcerpt;
+import it.niedermann.owncloud.notes.main.items.list.NoteViewListHolder;
 import it.niedermann.owncloud.notes.main.items.section.SectionItem;
 import it.niedermann.owncloud.notes.main.items.section.SectionViewHolder;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
@@ -140,15 +138,10 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                     BrandingUtil.of(color, parent.getContext()).platform.colorTextView(binding.sectionTitle);
                     return new SectionViewHolder(binding);
                 }
-                case TYPE_NOTE_WITH_EXCERPT -> {
+                case TYPE_NOTE_WITH_EXCERPT, TYPE_NOTE_ONLY_TITLE, TYPE_NOTE_WITHOUT_EXCERPT -> {
                     ItemNotesListNoteItemWithExcerptBinding binding = ItemNotesListNoteItemWithExcerptBinding.inflate(inflater, parent, false);
                     BrandingUtil.of(color, parent.getContext()).notes.themeCard(binding.noteCard);
-                    return new NoteViewHolderWithExcerpt(binding, noteClickListener);
-                }
-                case TYPE_NOTE_ONLY_TITLE, TYPE_NOTE_WITHOUT_EXCERPT -> {
-                    ItemNotesListNoteItemWithoutExcerptBinding binding = ItemNotesListNoteItemWithoutExcerptBinding.inflate(inflater, parent, false);
-                    BrandingUtil.of(color, parent.getContext()).notes.themeCard(binding.noteCard);
-                    return new NoteViewHolderWithoutExcerpt(binding, noteClickListener);
+                    return new NoteViewListHolder(binding, noteClickListener);
                 }
                 default -> {
                     throw new IllegalArgumentException("Not supported viewType: " + viewType);
