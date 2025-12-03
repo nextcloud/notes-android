@@ -18,8 +18,7 @@
         android:id="@+id/noteSwipeFrame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="@dimen/spacer_1x"
-        android:layout_marginEnd="@dimen/spacer_1x"
+        android:layout_margin="@dimen/spacer_1x"
         app:cardBackgroundColor="@color/bg_attention"
         app:strokeColor="@color/transparent">
 
@@ -113,7 +112,7 @@
                     android:layout_weight="1"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:paddingVertical="@dimen/spacer_2x"
+                    android:paddingVertical="@dimen/spacer_1x"
                     android:textColor="?android:textColorPrimary"
                     android:textSize="@dimen/primary_font_size"
                     tools:text="@tools:sample/lorem/random" />
