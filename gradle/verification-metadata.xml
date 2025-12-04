@@ -38,6 +38,7 @@
             <trusting group="androidx.room"/>
             <trusting group="androidx.savedstate"/>
             <trusting group="androidx.sqlite"/>
+            <trusting group="androidx.swiperefreshlayout" name="swiperefreshlayout" version="1.2.0"/>
             <trusting group="androidx.test"/>
             <trusting group="androidx.test.espresso" name="espresso-idling-resource" version="3.7.0"/>
             <trusting group="androidx.work" name="work-runtime" version="2.10.1"/>
