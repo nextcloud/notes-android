@@ -67,13 +67,10 @@ jobs:
             -   name: Run analysis wrapper
                 env:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-                # Memory that is set in jvmargs must be wisely chosen.
-                # E.g. with -Xmx5g and -Xmx1g android talk builds always failed with "The operation was canceled". -Xmx3g seems to work so far.
                 run: |
                     mkdir -p "$HOME/.gradle"
                     {
-                        echo "org.gradle.jvmargs=-Xmx3g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:+UseParallelGC -XX:MaxMetaspaceSize=1g"
+                        echo "org.gradle.jvmargs=-Xmx1g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
                         echo "org.gradle.configureondemand=true"
                         echo "kapt.incremental.apt=true"
                     } > "$HOME/.gradle/gradle.properties"
