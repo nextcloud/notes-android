@@ -7,42 +7,8 @@
   ~ SPDX-License-Identifier: GPL-3.0-or-later
 -->
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="spacer_1qx">2dp</dimen>
-    <dimen name="spacer_1hx">4dp</dimen>
-    <dimen name="spacer_1x">8dp</dimen>
-    <dimen name="spacer_2x">16dp</dimen>
-    <dimen name="spacer_3x">24dp</dimen>
-    <dimen name="spacer_5x">40dp</dimen>
-
-    <dimen name="avatar_size">40dp</dimen>
-
-    <dimen name="spacer_activity_sides">0dp</dimen>
-
-    <!-- Drawer header -->
-    <dimen name="drawer_header_height">100dp</dimen>
-    <dimen name="drawer_header_logo_size">42dp</dimen>
-
-    <!-- Buttons -->
-    <dimen name="button_padding">@dimen/spacer_2x</dimen>
-
-    <dimen name="primary_font_size">16sp</dimen>
-    <dimen name="secondary_font_size">14sp</dimen>
-
-    <!-- Font Sizes -->
-    <dimen name="note_font_size_small">16sp</dimen>
-    <dimen name="note_font_size_medium">18sp</dimen>
-    <dimen name="note_font_size_large">22sp</dimen>
-
-    <item format="float" name="note_line_spacing" type="dimen">1.15</item>
-
     <!-- Widgets -->
     <dimen name="widget_outer_radius">@android:dimen/system_app_widget_background_radius</dimen>
     <dimen name="widget_margin">@android:dimen/system_app_widget_background_radius</dimen>
     <dimen name="widget_inner_padding_vertical">@android:dimen/system_app_widget_inner_radius</dimen>
-    <dimen name="widget_inner_padding_horizontal">@dimen/spacer_1x</dimen>
-    <dimen name="widget_note_list_outer_padding">4dp</dimen>
-    <dimen name="widget_note_list_inner_padding">4dp</dimen>
-    <dimen name="widget_note_list_fav_icon_width">26dp</dimen>
-    <dimen name="widget_note_list_fav_icon_height">20dp</dimen>
 </resources>
