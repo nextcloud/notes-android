@@ -6,30 +6,31 @@
  */
 package it.niedermann.owncloud.notes.main.items.list;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.view.View;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemWithoutExcerptBinding;
+import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemWithExcerptBinding;
 import it.niedermann.owncloud.notes.main.items.NoteViewHolder;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 
-public class NoteViewHolderWithoutExcerpt extends NoteViewHolder {
+public class NoteViewListHolder extends NoteViewHolder {
     @NonNull
-    private final ItemNotesListNoteItemWithoutExcerptBinding binding;
+    private final ItemNotesListNoteItemWithExcerptBinding binding;
 
     private final int defaultSwipeBackgroundColor;
     private final int starSwipeBackgroundColor;
     private final int deleteSwipeBackgroundColor;
 
-    public NoteViewHolderWithoutExcerpt(@NonNull ItemNotesListNoteItemWithoutExcerptBinding binding, @NonNull NoteClickListener noteClickListener) {
+
+    public NoteViewListHolder(@NonNull ItemNotesListNoteItemWithExcerptBinding binding, @NonNull NoteClickListener noteClickListener) {
         super(binding.getRoot(), noteClickListener);
         this.binding = binding;
         Resources resources = binding.getRoot().getContext().getResources();
@@ -51,15 +52,27 @@ public class NoteViewHolderWithoutExcerpt extends NoteViewHolder {
         }
     }
 
-    public void bind(boolean isSelected, @NonNull Note note, boolean showCategory, int color, @Nullable CharSequence searchQuery) {
+    public void bind(boolean isSelected, @NonNull Note note, boolean showCategory, @ColorInt int color, @Nullable CharSequence searchQuery) {
         super.bind(isSelected, note, showCategory, color, searchQuery);
-        @NonNull final Context context = itemView.getContext();
+        @NonNull final var context = itemView.getContext();
         binding.noteCard.setAlpha(DBStatus.LOCAL_DELETED.equals(note.getStatus()) ? 0.5f : 1.0f);
         bindCategory(context, binding.noteCategory, showCategory, note.getCategory(), color);
         bindStatus(binding.noteStatus, note.getStatus(), color);
         bindFavorite(binding.noteFavorite, note.getFavorite());
         bindModified(binding.noteModified, note.getModified());
+
         bindSearchableContent(context, binding.noteTitle, searchQuery, note.getTitle(), color);
+        if (note.getExcerpt().isEmpty()) {
+            bindSearchableContent(
+                    context,
+                    binding.noteExcerpt,
+                    searchQuery,
+                    context.getString(R.string.listview_no_content),
+                    color
+            );
+        } else {
+            bindSearchableContent(context, binding.noteExcerpt, searchQuery, note.getExcerpt(), color);
+        }
     }
 
     @NonNull

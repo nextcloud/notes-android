@@ -2,7 +2,7 @@
 <!--
  ~ Nextcloud Notes - Android Client
  ~
- ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors
+ ~ SPDX-FileCopyrightText: 2015-2025 Nextcloud GmbH and Nextcloud contributors
  ~ SPDX-License-Identifier: GPL-3.0-or-later
 -->
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,7 +16,8 @@
     android:ellipsize="end"
     android:gravity="center_vertical"
     android:hint="@string/listview_updated_yesterday"
-    android:padding="@dimen/spacer_1x"
+    android:paddingStart="@dimen/spacer_1x"
+    android:paddingEnd="@dimen/zero"
     android:textColor="@color/fg_default_selection"
-    android:textStyle="bold"
-    android:textSize="@dimen/primary_font_size" />
+    android:textSize="@dimen/primary_font_size"
+    android:textStyle="bold" />

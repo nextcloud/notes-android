@@ -68,21 +68,23 @@
 
                 <ImageView
                     android:id="@+id/noteFavorite"
-                    android:layout_width="56dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/menu_favorite"
-                    android:padding="@dimen/spacer_2x"
+                    android:paddingStart="@dimen/spacer_list_card"
+                    android:paddingEnd="@dimen/spacer_1x"
                     tools:src="@drawable/ic_star_yellow_24dp" />
 
                 <ImageView
                     android:id="@+id/custom_checkbox"
-                    android:layout_width="56dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:clickable="false"
                     android:contentDescription="@null"
                     android:focusable="false"
-                    android:padding="@dimen/spacer_2x"
+                    android:paddingStart="@dimen/spacer_list_card"
+                    android:paddingEnd="@dimen/spacer_1x"
                     android:src="@drawable/ic_checkbox_blank_outline" />
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -91,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|end"
                     android:layout_marginTop="12dp"
-                    android:layout_marginEnd="4dp"
+                    android:layout_marginEnd="0dp"
                     android:baseline="14dp"
                     app:srcCompat="@drawable/ic_sync_blue_18dp" />
             </FrameLayout>
@@ -101,9 +103,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:paddingVertical="@dimen/spacer_2x"
+                android:paddingTop="@dimen/spacer_1x"
+                android:paddingBottom="@dimen/spacer_list_card"
                 android:paddingStart="@dimen/zero"
-                android:paddingEnd="@dimen/spacer_2x">
+                android:paddingEnd="@dimen/spacer_list_card">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -130,7 +133,6 @@
                         tools:text="27.11." />
 
                 </LinearLayout>
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
