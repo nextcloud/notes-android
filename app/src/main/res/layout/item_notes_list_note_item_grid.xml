@@ -2,7 +2,7 @@
 <!--
  ~ Nextcloud Notes - Android Client
  ~
- ~ SPDX-FileCopyrightText: 2020-2024 Nextcloud GmbH and Nextcloud contributors
+ ~ SPDX-FileCopyrightText: 2020-2025 Nextcloud GmbH and Nextcloud contributors
  ~ SPDX-License-Identifier: GPL-3.0-or-later
 -->
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -18,15 +18,14 @@
         android:id="@+id/wrapper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/spacer_1x">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/noteTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacer_2x"
-            android:layout_marginTop="@dimen/spacer_2x"
+            android:layout_marginTop="@dimen/spacer_list_card"
             android:layout_marginBottom="@dimen/spacer_1x"
             android:hyphenationFrequency="full"
             android:textAppearance="?attr/textAppearanceHeadline5"
@@ -34,17 +33,16 @@
             tools:maxLength="50"
             tools:text="@tools:sample/lorem/random" />
 
-
         <TextView
             android:id="@+id/noteExcerpt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacer_2x"
+            android:layout_marginBottom="@dimen/spacer_1x"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/fg_default"
             tools:maxLength="200"
             tools:text="@tools:sample/lorem/random" />
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -61,7 +59,8 @@
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/menu_favorite"
-                    android:padding="@dimen/spacer_2x"
+                    android:paddingStart="@dimen/spacer_2x"
+                    android:paddingEnd="@dimen/spacer_list_card"
                     tools:src="@drawable/ic_star_yellow_24dp" />
 
                 <ImageView
@@ -72,7 +71,8 @@
                     android:clickable="false"
                     android:contentDescription="@null"
                     android:focusable="false"
-                    android:padding="@dimen/spacer_2x"
+                    android:paddingStart="@dimen/spacer_2x"
+                    android:paddingEnd="@dimen/spacer_list_card"
                     android:src="@drawable/ic_checkbox_blank_outline" />
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -80,8 +80,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|end"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="4dp"
+                    android:layout_marginTop="@dimen/spacer_1x"
+                    android:layout_marginEnd="2dp"
                     android:baseline="14dp"
                     app:srcCompat="@drawable/ic_sync_blue_18dp" />
             </FrameLayout>
@@ -89,7 +89,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacer_2x"
+                android:layout_marginBottom="@dimen/spacer_2x"
+                android:gravity="center_vertical"
+                android:minHeight="@dimen/iconized_single_line_item_icon_size"
                 android:orientation="vertical">
 
                 <com.google.android.material.chip.Chip
@@ -120,8 +122,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:paddingStart="@dimen/spacer_1hx"
-                    android:paddingEnd="@dimen/spacer_2x"
+                    android:layout_marginEnd="@dimen/spacer_2x"
                     tools:text="27.11." />
 
             </LinearLayout>

@@ -52,7 +52,6 @@ import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 
 public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Branded {
 
-
     public static final int TYPE_SECTION = 0;
     public static final int TYPE_NOTE_WITH_EXCERPT = 1;
     public static final int TYPE_NOTE_WITHOUT_EXCERPT = 2;
@@ -85,8 +84,8 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         setHasStableIds(true);
     }
 
-
-    // FIXME this causes {@link it.niedermann.owncloud.notes.noteslist.items.list.NotesListViewItemTouchHelper} to not call clearView anymore → After marking a note as favorite, it stays yellow.
+    // FIXME this causes {@link it.niedermann.owncloud.notes.noteslist.items.list.NotesListViewItemTouchHelper} to
+    // not call clearView anymore → After marking a note as favorite, it stays yellow.
     @Override
     public long getItemId(int position) {
         return getItemViewType(position) == TYPE_SECTION
@@ -118,13 +117,31 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                     return new SectionViewHolder(binding);
                 }
                 case TYPE_NOTE_ONLY_TITLE -> {
-                    ItemNotesListNoteItemGridOnlyTitleBinding binding = ItemNotesListNoteItemGridOnlyTitleBinding.inflate(inflater, parent, false);
+                    ItemNotesListNoteItemGridOnlyTitleBinding binding = ItemNotesListNoteItemGridOnlyTitleBinding
+                        .inflate(inflater, parent, false);
                     BrandingUtil.of(color, parent.getContext()).notes.themeCard(binding.noteCard);
+                    BrandingUtil.of(color, parent.getContext()).platform.colorTextView(
+                        binding.noteTitle, ColorRole.ON_SURFACE
+                    );
+                    BrandingUtil.of(color, parent.getContext()).platform.colorTextView(
+                        binding.noteModified, ColorRole.ON_SURFACE_VARIANT
+                    );
                     return new NoteViewGridHolderOnlyTitle(binding, noteClickListener, monospace, fontSize);
                 }
                 case TYPE_NOTE_WITH_EXCERPT, TYPE_NOTE_WITHOUT_EXCERPT -> {
-                    ItemNotesListNoteItemGridBinding binding = ItemNotesListNoteItemGridBinding.inflate(inflater, parent, false);
+                    ItemNotesListNoteItemGridBinding binding = ItemNotesListNoteItemGridBinding.inflate(
+                        inflater, parent, false
+                    );
                     BrandingUtil.of(color, parent.getContext()).notes.themeCard(binding.noteCard);
+                    BrandingUtil.of(color, parent.getContext()).platform.colorTextView(
+                        binding.noteTitle, ColorRole.ON_SURFACE
+                    );
+                    BrandingUtil.of(color, parent.getContext()).platform.colorTextView(
+                        binding.noteExcerpt, ColorRole.ON_SURFACE_VARIANT
+                    );
+                    BrandingUtil.of(color, parent.getContext()).platform.colorTextView(
+                        binding.noteModified, ColorRole.ON_SURFACE_VARIANT
+                    );
                     return new NoteViewGridHolder(binding, noteClickListener, monospace, fontSize);
                 }
                 default -> {
@@ -139,8 +156,18 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                     return new SectionViewHolder(binding);
                 }
                 case TYPE_NOTE_WITH_EXCERPT, TYPE_NOTE_ONLY_TITLE, TYPE_NOTE_WITHOUT_EXCERPT -> {
-                    ItemNotesListNoteItemWithExcerptBinding binding = ItemNotesListNoteItemWithExcerptBinding.inflate(inflater, parent, false);
+                    ItemNotesListNoteItemWithExcerptBinding binding = ItemNotesListNoteItemWithExcerptBinding
+                        .inflate(inflater, parent, false);
                     BrandingUtil.of(color, parent.getContext()).notes.themeCard(binding.noteCard);
+                    BrandingUtil.of(color, parent.getContext()).platform.colorTextView(
+                        binding.noteTitle, ColorRole.ON_SURFACE
+                    );
+                    BrandingUtil.of(color, parent.getContext()).platform.colorTextView(
+                        binding.noteExcerpt, ColorRole.ON_SURFACE_VARIANT
+                    );
+                    BrandingUtil.of(color, parent.getContext()).platform.colorTextView(
+                        binding.noteModified, ColorRole.ON_SURFACE_VARIANT
+                    );
                     return new NoteViewListHolder(binding, noteClickListener);
                 }
                 default -> {
@@ -166,18 +193,30 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             case TYPE_SECTION ->
                     ((SectionViewHolder) holder).bind((SectionItem) itemList.get(position));
             case TYPE_NOTE_WITH_EXCERPT, TYPE_NOTE_WITHOUT_EXCERPT, TYPE_NOTE_ONLY_TITLE -> {
-                holder.itemView.findViewById(R.id.custom_checkbox).setVisibility(tracker != null && tracker.hasSelection() ? View.VISIBLE : View.GONE);
+                holder.itemView.findViewById(R.id.custom_checkbox).setVisibility(tracker != null &&
+                    tracker.hasSelection() ? View.VISIBLE : View.GONE);
                 holder.itemView.setSelected(isSelected);
                 if (isSelected) {
                     ((MaterialCardView) holder.itemView.findViewById(R.id.noteCard)).setStrokeWidth((int) holder.itemView.getResources().getDimension(R.dimen.card_stroke_width_selected));
-                    ((ImageView) holder.itemView.findViewById(R.id.custom_checkbox)).setImageDrawable(BrandingUtil.getInstance(holder.itemView.getContext()).platform.tintDrawable(holder.itemView.getContext(), R.drawable.ic_checkbox_marked, ColorRole.PRIMARY));
+                    ((ImageView) holder.itemView.findViewById(R.id.custom_checkbox)).setImageDrawable(
+                        BrandingUtil.getInstance(holder.itemView.getContext()).platform.tintDrawable(
+                            holder.itemView.getContext(), R.drawable.ic_checkbox_marked, ColorRole.PRIMARY)
+                    );
                 } else {
                     ((MaterialCardView) holder.itemView.findViewById(R.id.noteCard)).setStrokeWidth((int) holder.itemView.getResources().getDimension(R.dimen.card_stroke_width));
-                    ((ImageView) holder.itemView.findViewById(R.id.custom_checkbox)).setImageResource(R.drawable.ic_checkbox_blank_outline);
+                    ((ImageView) holder.itemView.findViewById(R.id.custom_checkbox)).setImageResource(
+                        R.drawable.ic_checkbox_blank_outline
+                    );
                 }
-                holder.itemView.findViewById(R.id.custom_checkbox).setVisibility(isMultiSelect ? View.VISIBLE : View.GONE);
-                holder.itemView.findViewById(R.id.noteFavorite).setVisibility(isMultiSelect ? View.GONE : View.VISIBLE);
-                ((NoteViewHolder) holder).bind(isSelected, (Note) itemList.get(position), showCategory, color, searchQuery);
+                holder.itemView.findViewById(R.id.custom_checkbox).setVisibility(
+                    isMultiSelect ? View.VISIBLE : View.GONE
+                );
+                holder.itemView.findViewById(R.id.noteFavorite).setVisibility(
+                    isMultiSelect ? View.GONE : View.VISIBLE
+                );
+                ((NoteViewHolder) holder).bind(
+                    isSelected, (Note) itemList.get(position), showCategory, color, searchQuery
+                );
             }
         }
     }

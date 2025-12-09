@@ -525,7 +525,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             listView.setLayoutManager(gridLayoutManager);
             listView.addItemDecoration(new GridItemDecoration(adapter, spanCount,
                     getResources().getDimensionPixelSize(R.dimen.spacer_3x),
-                    getResources().getDimensionPixelSize(R.dimen.spacer_3x),
+                    getResources().getDimensionPixelSize(R.dimen.spacer_2x),
                     getResources().getDimensionPixelSize(R.dimen.spacer_3x),
                     getResources().getDimensionPixelSize(R.dimen.spacer_1x),
                     getResources().getDimensionPixelSize(R.dimen.spacer_activity_sides) + getResources().getDimensionPixelSize(R.dimen.spacer_1x)
