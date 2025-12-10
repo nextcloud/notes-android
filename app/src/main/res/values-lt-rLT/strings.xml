@@ -124,7 +124,6 @@
     <string name="listview_updated_last_week">Praeitą savaitę</string>
     <string name="listview_updated_this_month">Šį mėnesį</string>
     <string name="listview_updated_last_month">Praeitą mėnesį</string>
-
     <string name="settings_note_mode">Užrašų rodinio veiksena</string>
     <string name="settings_theme_title">Apipavidalinimas</string>
     <string name="settings_font_title">Lygiaplotis šriftas</string>

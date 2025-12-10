@@ -164,7 +164,6 @@
     <string name="listview_updated_last_week">W zeszłym tygodniu</string>
     <string name="listview_updated_this_month">W tym miesiącu</string>
     <string name="listview_updated_last_month">W zeszłym miesiącu</string>
-
     <string name="settings_note_mode">Tryb wyświetlania notatek</string>
     <string name="settings_note_mode_new">Zachowanie otwierania notatek</string>
     <string name="settings_theme_title">Motyw</string>

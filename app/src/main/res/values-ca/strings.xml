@@ -131,7 +131,6 @@
     <string name="listview_updated_last_week">La setmana passada</string>
     <string name="listview_updated_this_month">Aquest mes</string>
     <string name="listview_updated_last_month">El mes passat</string>
-
     <string name="settings_note_mode">Mode de visualització per a les notes</string>
     <string name="settings_note_mode_new">Comportament de l\'obertura de notes</string>
     <string name="settings_theme_title">Tema</string>

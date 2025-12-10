@@ -162,7 +162,6 @@
     <string name="listview_updated_last_week">Geçen hafta</string>
     <string name="listview_updated_this_month">Bu ay</string>
     <string name="listview_updated_last_month">Geçen ay</string>
-
     <string name="settings_note_mode">Notların görüntülenme kipi</string>
     <string name="settings_note_mode_new">Not açılma davranışı</string>
     <string name="settings_theme_title">Tema</string>
@@ -456,6 +455,8 @@
     <string name="busy">Meşgul</string>
     <string name="mute_all_notifications">Tüm bildirimleri kapat</string>
     <string name="appear_offline">Çevrim dışı görün</string>
+    <string name="status_set_fail_message">Durum ayarlanamadı!</string>
+    <string name="account_switch_dialog_status_fetching_error_message">Durum alınamadı. Lütfen yeniden deneyin.</string>
     <string name="ecosystem_apps_display_files">Dosyalar</string>
     <string name="ecosystem_apps_display_talk">Konuş</string>
     <string name="ecosystem_apps_talk">Nextcloud Konuş</string>

@@ -137,7 +137,6 @@
     <string name="listview_updated_last_week">هفته گذشته</string>
     <string name="listview_updated_this_month">این ماه</string>
     <string name="listview_updated_last_month">ماه گذشته</string>
-
     <string name="settings_note_mode">حالت نمایش یادداشت‌ها</string>
     <string name="settings_note_mode_new">Notes opening behaviour</string>
     <string name="settings_theme_title">"تم "</string>

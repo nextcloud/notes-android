@@ -111,7 +111,6 @@
     <string name="listview_updated_last_week">שבוע שעבר</string>
     <string name="listview_updated_this_month">החודש</string>
     <string name="listview_updated_last_month">חודש שעבר</string>
-
     <string name="settings_note_mode">מצב תצוגת פתקים</string>
     <string name="settings_theme_title">ערכת עיצוב</string>
     <string name="settings_font_title">גופן ברוחב אחיד</string>

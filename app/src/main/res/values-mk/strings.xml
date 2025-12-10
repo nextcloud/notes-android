@@ -105,7 +105,6 @@
     <string name="listview_updated_last_week">Минатата недела</string>
     <string name="listview_updated_this_month">Овој месец</string>
     <string name="listview_updated_last_month">Минатиот месец</string>
-
     <string name="settings_theme_title">Тема</string>
     <string name="settings_font_size">Големина на фонт</string>
     <string name="settings_wifi_only">Синхронизирај само преку Wi-Fi</string>

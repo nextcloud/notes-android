@@ -162,7 +162,6 @@
     <string name="listview_updated_last_week">Letzte Woche</string>
     <string name="listview_updated_this_month">Diesen Monat</string>
     <string name="listview_updated_last_month">Letzten Monat</string>
-
     <string name="settings_note_mode">Anzeigemodus für Notizen</string>
     <string name="settings_note_mode_new">Verhalten beim Öffnen von Notizen</string>
     <string name="settings_theme_title">Design</string>

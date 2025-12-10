@@ -149,7 +149,6 @@
     <string name="listview_updated_last_week">Förra veckan</string>
     <string name="listview_updated_this_month">Denna månad</string>
     <string name="listview_updated_last_month">Förra månaden</string>
-
     <string name="settings_note_mode">Visningsläge för anteckningar</string>
     <string name="settings_note_mode_new">Notes startfunktion</string>
     <string name="settings_theme_title">Tema</string>

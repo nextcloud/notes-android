@@ -151,7 +151,6 @@
     <string name="listview_updated_last_week">За последнюю неделю</string>
     <string name="listview_updated_this_month">Этот месяц</string>
     <string name="listview_updated_last_month">За последний месяц</string>
-
     <string name="settings_note_mode">Режим показа заметок</string>
     <string name="settings_note_mode_new">Поведение при открытии приложения Заметки</string>
     <string name="settings_theme_title">Тема</string>

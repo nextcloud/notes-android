@@ -164,7 +164,6 @@
     <string name="listview_updated_last_week">Минулого тижня</string>
     <string name="listview_updated_this_month">Цього місяця</string>
     <string name="listview_updated_last_month">Минулого місяця</string>
-
     <string name="settings_note_mode">Показувати нотатки</string>
     <string name="settings_note_mode_new">Поведінка під час відкриття застосунку Нотатки</string>
     <string name="settings_theme_title">Тема</string>

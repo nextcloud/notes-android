@@ -134,7 +134,6 @@
     <string name="listview_updated_last_week">저번 주</string>
     <string name="listview_updated_this_month">이번 달</string>
     <string name="listview_updated_last_month">저번 달</string>
-
     <string name="settings_note_mode">노트 표시 모드</string>
     <string name="settings_theme_title">테마</string>
     <string name="settings_font_title">Monospace 글꼴</string>

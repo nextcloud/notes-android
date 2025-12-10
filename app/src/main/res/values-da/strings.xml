@@ -162,7 +162,6 @@
     <string name="listview_updated_last_week">Seneste uge</string>
     <string name="listview_updated_this_month">Denne måned</string>
     <string name="listview_updated_last_month">Seneste måned</string>
-
     <string name="settings_note_mode">Visningstilstand for noter</string>
     <string name="settings_note_mode_new">Ved åbning af note</string>
     <string name="settings_theme_title">Tema</string>

@@ -133,7 +133,6 @@
     <string name="listview_updated_last_week">Viime viikolla</string>
     <string name="listview_updated_this_month">Tämä kuukausi</string>
     <string name="listview_updated_last_month">Viime kuussa</string>
-
     <string name="settings_note_mode">Muistiinpanojen esitystapa</string>
     <string name="settings_theme_title">Teema</string>
     <string name="settings_font_title">Tasalevyinen fontti</string>

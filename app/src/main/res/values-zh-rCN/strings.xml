@@ -139,7 +139,6 @@
     <string name="listview_updated_last_week">上周</string>
     <string name="listview_updated_this_month">本月</string>
     <string name="listview_updated_last_month">上月</string>
-
     <string name="settings_note_mode">笔记的显示模式</string>
     <string name="settings_note_mode_new">笔记打开行为</string>
     <string name="settings_theme_title">主题</string>
@@ -422,6 +421,7 @@
     <string name="online_status">在线状态</string>
     <string name="online">在线</string>
     <string name="dnd">勿扰</string>
+    <string name="away">离开</string>
     <string name="invisible">隐藏</string>
     <string name="busy">忙碌</string>
     <string name="mute_all_notifications">静音所有通知</string>
