@@ -133,7 +133,6 @@
     <string name="listview_updated_last_week">Minggu lalu</string>
     <string name="listview_updated_this_month">Bulan ini</string>
     <string name="listview_updated_last_month">Bulan lalu</string>
-
     <string name="settings_note_mode">Mode tampilan untuk catatan</string>
     <string name="settings_note_mode_new">Catatan perilaku pembukaan</string>
     <string name="settings_theme_title">Tema</string>

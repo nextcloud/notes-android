@@ -129,7 +129,6 @@
     <string name="listview_updated_last_week">Προηγούμενη εβδομάδα</string>
     <string name="listview_updated_this_month">Αυτό το μήνα</string>
     <string name="listview_updated_last_month">Προηγούμενος μήνας</string>
-
     <string name="settings_note_mode">Κατάσταση οθόνης για σημειώσεις</string>
     <string name="settings_theme_title">Θέμα</string>
     <string name="settings_font_title">Γραμματοσειρά monospace</string>

@@ -127,7 +127,6 @@
     <string name="listview_updated_last_week">Ultima semana</string>
     <string name="listview_updated_this_month">Este mês</string>
     <string name="listview_updated_last_month">Ultimo mês</string>
-
     <string name="settings_theme_title">Tema</string>
     <string name="settings_font_size">Tamanho do tipo de letra</string>
     <string name="settings_lock_summary">Credenciais de dispositivo</string>

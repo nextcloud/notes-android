@@ -137,7 +137,6 @@
     <string name="listview_updated_last_week">先週</string>
     <string name="listview_updated_this_month">今月</string>
     <string name="listview_updated_last_month">先月</string>
-
     <string name="settings_note_mode">ノートの表示モード</string>
     <string name="settings_note_mode_new">ノート開封時の動作</string>
     <string name="settings_theme_title">テーマ</string>

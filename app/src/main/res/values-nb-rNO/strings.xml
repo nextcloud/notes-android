@@ -136,7 +136,6 @@
     <string name="listview_updated_last_week">Forrige uke</string>
     <string name="listview_updated_this_month">Denne måneden</string>
     <string name="listview_updated_last_month">Forrige måned</string>
-
     <string name="settings_note_mode">Visningsmodus for notater</string>
     <string name="settings_note_mode_new">Åpningsoppførsel fra Notes</string>
     <string name="settings_theme_title">Tema</string>

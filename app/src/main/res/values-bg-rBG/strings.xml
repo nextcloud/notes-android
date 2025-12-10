@@ -129,7 +129,6 @@
     <string name="listview_updated_last_week">Миналата седмица</string>
     <string name="listview_updated_this_month">Този месец</string>
     <string name="listview_updated_last_month">Миналия месец</string>
-
     <string name="settings_note_mode">Режим на показване на бележки</string>
     <string name="settings_note_mode_new">Поведение при отваряне на бележките</string>
     <string name="settings_theme_title">Тема</string>

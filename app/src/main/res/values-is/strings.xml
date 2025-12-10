@@ -138,7 +138,6 @@
     <string name="listview_updated_last_week">Í síðustu viku</string>
     <string name="listview_updated_this_month">Í þessum mánuði</string>
     <string name="listview_updated_last_month">Í síðasta mánuði</string>
-
     <string name="settings_note_mode">Birtingarhamur minnispunkta</string>
     <string name="settings_note_mode_new">Hegðun minnispunktaforrits við opnun</string>
     <string name="settings_theme_title">Þema</string>

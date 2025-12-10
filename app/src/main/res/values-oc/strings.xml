@@ -91,7 +91,6 @@
     <string name="listview_updated_last_week">La setmana passada</string>
     <string name="listview_updated_this_month">Aqueste mes</string>
     <string name="listview_updated_last_month">Lo mes passat</string>
-
     <string name="settings_note_mode">Mòde d’afichatge per las nòtas</string>
     <string name="settings_theme_title">Tèma</string>
     <string name="settings_font_title">Poliça monospace</string>

@@ -162,7 +162,6 @@
     <string name="listview_updated_last_week">Vorige week</string>
     <string name="listview_updated_this_month">Deze maand</string>
     <string name="listview_updated_last_month">Vorige maand</string>
-
     <string name="settings_note_mode">Weergavemodus voor notities</string>
     <string name="settings_note_mode_new">Notities gedrag bij openen</string>
     <string name="settings_theme_title">Thema</string>

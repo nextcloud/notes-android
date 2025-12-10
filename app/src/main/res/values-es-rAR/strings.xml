@@ -122,7 +122,6 @@
     <string name="listview_updated_last_week">Semana pasada</string>
     <string name="listview_updated_this_month">Este mes</string>
     <string name="listview_updated_last_month">Mes pasado</string>
-
     <string name="settings_note_mode">Modo de visualización para notas</string>
     <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title">Fuente monoespaciada</string>

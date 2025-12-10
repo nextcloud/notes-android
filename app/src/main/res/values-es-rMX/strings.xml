@@ -126,7 +126,6 @@
     <string name="listview_updated_last_week">Semana pasada</string>
     <string name="listview_updated_this_month">Este mes</string>
     <string name="listview_updated_last_month">Mes pasado</string>
-
     <string name="settings_theme_title">Tema</string>
     <string name="settings_wifi_only">Sincronizar solo con Wi-Fi</string>
     <string name="settings_lock_summary">Credenciales del dispositivo</string>

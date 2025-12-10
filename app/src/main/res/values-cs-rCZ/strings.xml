@@ -164,7 +164,6 @@
     <string name="listview_updated_last_week">Minulý týden</string>
     <string name="listview_updated_this_month">Tento měsíc</string>
     <string name="listview_updated_last_month">Minulý měsíc</string>
-
     <string name="settings_note_mode">Režim zobrazení poznámek</string>
     <string name="settings_note_mode_new">Chování Poznámek při otevírání</string>
     <string name="settings_theme_title">Motiv vzhledu</string>

@@ -133,7 +133,6 @@
     <string name="listview_updated_last_week">Ultima settimana</string>
     <string name="listview_updated_this_month">Questo mese</string>
     <string name="listview_updated_last_month">Ultimo mese</string>
-
     <string name="settings_note_mode">Modalità di visualizzazione delle note</string>
     <string name="settings_note_mode_new">Comportamento di apertura delle note</string>
     <string name="settings_theme_title">Tema</string>

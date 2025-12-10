@@ -162,7 +162,6 @@
     <string name="listview_updated_last_week">Előző hét</string>
     <string name="listview_updated_this_month">Ebben a hónapban</string>
     <string name="listview_updated_last_month">Előző hónap</string>
-
     <string name="settings_note_mode">Jegyzet módok megjelenítés</string>
     <string name="settings_note_mode_new">Jegyzetek megnyitási viselkedése</string>
     <string name="settings_theme_title">Téma</string>

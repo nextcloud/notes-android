@@ -143,7 +143,6 @@
     <string name="listview_updated_last_week">الأسبوع الماضي</string>
     <string name="listview_updated_this_month"> هذا الشهر</string>
     <string name="listview_updated_last_month">الشهر الماضي</string>
-
     <string name="settings_note_mode">وضع العرض للملاحظات</string>
     <string name="settings_note_mode_new">السلوك عند فتح الملاحظات</string>
     <string name="settings_theme_title">السمة</string>

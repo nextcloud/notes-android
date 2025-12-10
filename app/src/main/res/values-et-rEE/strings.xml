@@ -162,7 +162,6 @@
     <string name="listview_updated_last_week">Eelmine nädal</string>
     <string name="listview_updated_this_month">Käesolev kuu</string>
     <string name="listview_updated_last_month">Eelmine kuu</string>
-
     <string name="settings_note_mode">Märkuste kuvamise režiim</string>
     <string name="settings_note_mode_new">Käitumine märgete avamisel</string>
     <string name="settings_theme_title">Kujundus</string>
