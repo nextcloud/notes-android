@@ -164,6 +164,8 @@
     <string name="listview_updated_last_week">Минулого тижня</string>
     <string name="listview_updated_this_month">Цього місяця</string>
     <string name="listview_updated_last_month">Минулого місяця</string>
+    <string name="listview_no_content">Відсутній вміст</string>
+
     <string name="settings_note_mode">Показувати нотатки</string>
     <string name="settings_note_mode_new">Поведінка під час відкриття застосунку Нотатки</string>
     <string name="settings_theme_title">Тема</string>
@@ -467,6 +469,8 @@
     <string name="busy">Зайнято</string>
     <string name="mute_all_notifications">Вимкнути всі сповіщення</string>
     <string name="appear_offline">Перебуваю поза мережею</string>
+    <string name="status_set_fail_message">Не вдалося встановити статус!</string>
+    <string name="account_switch_dialog_status_fetching_error_message">Не вдалося отримати статус, спробуйте ще раз.</string>
     <string name="ecosystem_apps_display_files">Файли</string>
     <string name="ecosystem_apps_display_talk">Розмови</string>
     <string name="ecosystem_apps_talk">Розмови Nextcloud</string>

@@ -162,6 +162,8 @@
     <string name="listview_updated_last_week">A semana pasada</string>
     <string name="listview_updated_this_month">Este mes</string>
     <string name="listview_updated_last_month">O mes pasado</string>
+    <string name="listview_no_content">Sen contido</string>
+
     <string name="settings_note_mode">Modo de vista das notas</string>
     <string name="settings_note_mode_new">Comportamento de apertura das notas</string>
     <string name="settings_theme_title">Tema</string>
