@@ -19,19 +19,41 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.nextcloud.android.common.ui.theme.utils.ColorRole;
+
 import it.niedermann.owncloud.notes.BuildConfig;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.BrandedFragment;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.FragmentAboutCreditsTabBinding;
 
-public class AboutFragmentCreditsTab extends Fragment {
+public class AboutFragmentCreditsTab extends BrandedFragment {
+
+    private FragmentAboutCreditsTabBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final var binding = FragmentAboutCreditsTabBinding.inflate(inflater, container, false);
+        binding = FragmentAboutCreditsTabBinding.inflate(inflater, container, false);
         binding.aboutVersion.setText(getString(R.string.about_version, strong(BuildConfig.VERSION_NAME)));
         final var founderText = getString(R.string.about_developers_stefan, getString(R.string.about_developers_original_author));
         setTextWithURL(binding.aboutDevelopers, getResources(), R.string.about_developers, founderText, R.string.url_niedermann_it);
         setTextWithURL(binding.aboutTranslators, getResources(), R.string.about_translators_transifex, R.string.about_translators_transifex_label, R.string.url_translations);
         return binding.getRoot();
+    }
+
+    @Override
+    public void applyBrand(int color) {
+        final var util = BrandingUtil.of(color, requireContext());
+        util.platform.colorTextView(binding.aboutNotesHeadline, ColorRole.ON_SURFACE);
+        util.platform.colorTextView(binding.aboutVersionHeadline);
+        util.platform.colorTextView(binding.aboutVersion, ColorRole.ON_SURFACE_VARIANT);
+        util.platform.colorTextView(binding.aboutDevelopersHeadline);
+        util.platform.colorTextView(binding.aboutDevelopers, ColorRole.ON_SURFACE_VARIANT);
+        util.platform.colorTextView(binding.aboutMaintainerHeadline);
+        util.platform.colorTextView(binding.aboutMaintainer, ColorRole.ON_SURFACE_VARIANT);
+        util.platform.colorTextView(binding.aboutTranslatorsHeadline);
+        util.platform.colorTextView(binding.aboutTranslators, ColorRole.ON_SURFACE_VARIANT);
+        util.platform.colorTextView(binding.aboutTestersHeadline);
+        util.platform.colorTextView(binding.aboutTesters, ColorRole.ON_SURFACE_VARIANT);
     }
 }
