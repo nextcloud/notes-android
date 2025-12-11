@@ -2,7 +2,7 @@
 <!--
  ~ Nextcloud Notes - Android Client
  ~
- ~ SPDX-FileCopyrightText: 2016-2024 Nextcloud GmbH and Nextcloud contributors
+ ~ SPDX-FileCopyrightText: 2016-2025 Nextcloud GmbH and Nextcloud contributors
  ~ SPDX-License-Identifier: GPL-3.0-or-later
 -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -17,83 +17,87 @@
         android:padding="@dimen/spacer_2x">
 
         <TextView
+            android:id="@+id/about_notes_headline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginVertical="30dp"
+            android:layout_marginVertical="@dimen/spacer_3x"
             android:text="@string/app_name"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/fg_default_low"
             android:textSize="26sp"
             app:drawableTopCompat="@mipmap/ic_launcher" />
 
         <TextView
-            style="?android:attr/listSeparatorTextViewStyle"
+            android:id="@+id/about_version_headline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/about_version_title" />
+            android:text="@string/about_version_title"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/about_version"
-            style="?android:attr/editTextPreferenceStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:paddingTop="@dimen/spacer_1x"
             android:text="@string/about_version" />
 
         <TextView
-            style="?android:attr/listSeparatorTextViewStyle"
+            android:id="@+id/about_maintainer_headline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/about_maintainer_title" />
+            android:layout_marginTop="@dimen/spacer_2x"
+            android:text="@string/about_maintainer_title"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/about_maintainer"
-            style="?android:attr/editTextPreferenceStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:paddingTop="@dimen/spacer_1x"
             android:text="@string/about_maintainer" />
 
         <TextView
-            style="?android:attr/listSeparatorTextViewStyle"
+            android:id="@+id/about_developers_headline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/about_developers_title" />
+            android:layout_marginTop="@dimen/spacer_2x"
+            android:text="@string/about_developers_title"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/about_developers"
-            style="?android:attr/editTextPreferenceStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:paddingTop="@dimen/spacer_1x"
             android:text="@string/about_developers" />
 
         <TextView
-            style="?android:attr/listSeparatorTextViewStyle"
+            android:id="@+id/about_translators_headline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/about_translators_title" />
+            android:layout_marginTop="@dimen/spacer_2x"
+            android:text="@string/about_translators_title"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/about_translators"
-            style="?android:attr/editTextPreferenceStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:paddingTop="@dimen/spacer_1x"
             android:text="@string/about_translators_transifex" />
 
         <TextView
-            style="?android:attr/listSeparatorTextViewStyle"
+            android:id="@+id/about_testers_headline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/about_testers_title" />
+            android:layout_marginTop="@dimen/spacer_2x"
+            android:text="@string/about_testers_title"
+            android:textStyle="bold" />
 
         <TextView
-            style="?android:attr/editTextPreferenceStyle"
+            android:id="@+id/about_testers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:paddingTop="@dimen/spacer_1x"
             android:text="@string/about_testers" />
     </LinearLayout>
 </ScrollView>

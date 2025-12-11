@@ -2,7 +2,7 @@
 <!--
  ~ Nextcloud Notes - Android Client
  ~
- ~ SPDX-FileCopyrightText: 2016-2024 Nextcloud GmbH and Nextcloud contributors
+ ~ SPDX-FileCopyrightText: 2016-2025 Nextcloud GmbH and Nextcloud contributors
  ~ SPDX-License-Identifier: GPL-3.0-or-later
 -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -17,16 +17,17 @@
         android:padding="@dimen/spacer_2x">
 
         <TextView
-            style="?android:attr/listSeparatorTextViewStyle"
+            android:id="@+id/about_app_license_headline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/about_app_license_title" />
+            android:text="@string/about_app_license_title"
+            android:textStyle="bold" />
 
         <TextView
-            style="?android:attr/editTextPreferenceStyle"
+            android:id="@+id/about_app_license"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:paddingVertical="@dimen/spacer_1x"
             android:text="@string/about_app_license" />
 
         <com.google.android.material.button.MaterialButton
@@ -38,24 +39,25 @@
             app:backgroundTint="@color/defaultBrand" />
 
         <TextView
-            style="?android:attr/listSeparatorTextViewStyle"
+            android:id="@+id/about_icons_disclaimer_headline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacer_2x"
-            android:text="@string/about_icons_disclaimer_title" />
+            android:text="@string/about_icons_disclaimer_title"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/about_icons_disclaimer_app_icon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:paddingTop="@dimen/spacer_1x"
             android:text="@string/about_icons_disclaimer_app_icon" />
 
         <TextView
             android:id="@+id/about_icons_disclaimer_mdi_icons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:paddingTop="@dimen/spacer_1x"
             android:text="@string/about_icons_disclaimer_mdi_icons" />
     </LinearLayout>
 </ScrollView>

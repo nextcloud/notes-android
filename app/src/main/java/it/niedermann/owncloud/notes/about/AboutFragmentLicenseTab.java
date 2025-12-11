@@ -22,6 +22,8 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.core.graphics.drawable.DrawableCompat;
 
+import com.nextcloud.android.common.ui.theme.utils.ColorRole;
+
 import it.niedermann.android.util.ColorUtil;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedFragment;
@@ -45,5 +47,10 @@ public class AboutFragmentLicenseTab extends BrandedFragment {
     public void applyBrand(int color) {
         final var util = BrandingUtil.of(color, requireContext());
         util.material.colorMaterialButtonPrimaryFilled(binding.aboutAppLicenseButton);
+        util.platform.colorTextView(binding.aboutAppLicenseHeadline);
+        util.platform.colorTextView(binding.aboutAppLicense, ColorRole.ON_SURFACE_VARIANT);
+        util.platform.colorTextView(binding.aboutIconsDisclaimerHeadline);
+        util.platform.colorTextView(binding.aboutIconsDisclaimerMdiIcons, ColorRole.ON_SURFACE_VARIANT);
+        util.platform.colorTextView(binding.aboutIconsDisclaimerAppIcon, ColorRole.ON_SURFACE_VARIANT);
     }
 }

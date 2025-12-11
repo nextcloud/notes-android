@@ -2,7 +2,7 @@
 <!--
  ~ Nextcloud Notes - Android Client
  ~
- ~ SPDX-FileCopyrightText: 2016-2024 Nextcloud GmbH and Nextcloud contributors
+ ~ SPDX-FileCopyrightText: 2016-2025 Nextcloud GmbH and Nextcloud contributors
  ~ SPDX-License-Identifier: GPL-3.0-or-later
 -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,45 +16,47 @@
         android:padding="@dimen/spacer_2x">
 
         <TextView
-            style="?android:attr/listSeparatorTextViewStyle"
+            android:id="@+id/about_source_headline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/about_source_title" />
+            android:text="@string/about_source_title"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/about_source"
-            style="?android:attr/editTextPreferenceStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:paddingTop="@dimen/spacer_1x"
             android:text="@string/about_source" />
 
         <TextView
-            style="?android:attr/listSeparatorTextViewStyle"
+            android:id="@+id/about_issues_headline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/about_issues_title" />
+            android:layout_marginTop="@dimen/spacer_2x"
+            android:text="@string/about_issues_title"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/about_issues"
-            style="?android:attr/editTextPreferenceStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:paddingTop="@dimen/spacer_1x"
             android:text="@string/about_issues" />
 
         <TextView
-            style="?android:attr/listSeparatorTextViewStyle"
+            android:id="@+id/about_translate_headline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/about_translate_title" />
+            android:layout_marginTop="@dimen/spacer_2x"
+            android:text="@string/about_translate_title"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/about_translate"
-            style="?android:attr/editTextPreferenceStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:paddingTop="@dimen/spacer_1x"
             android:text="@string/about_translate" />
     </LinearLayout>
 </ScrollView>
