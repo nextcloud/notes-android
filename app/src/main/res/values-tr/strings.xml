@@ -162,6 +162,8 @@
     <string name="listview_updated_last_week">Geçen hafta</string>
     <string name="listview_updated_this_month">Bu ay</string>
     <string name="listview_updated_last_month">Geçen ay</string>
+    <string name="listview_no_content">Herhangi bir içerik yok</string>
+
     <string name="settings_note_mode">Notların görüntülenme kipi</string>
     <string name="settings_note_mode_new">Not açılma davranışı</string>
     <string name="settings_theme_title">Tema</string>

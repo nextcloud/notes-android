@@ -161,6 +161,8 @@
     <string name="listview_updated_last_week">上星期</string>
     <string name="listview_updated_this_month">這個月</string>
     <string name="listview_updated_last_month">上個月</string>
+    <string name="listview_no_content">無內容</string>
+
     <string name="settings_note_mode">筆記顯示模式</string>
     <string name="settings_note_mode_new">筆記開啟行為</string>
     <string name="settings_theme_title">佈景主題</string>
