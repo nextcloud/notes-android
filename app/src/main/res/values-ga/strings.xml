@@ -165,6 +165,8 @@
     <string name="listview_updated_last_week">An tseachtain seo caite</string>
     <string name="listview_updated_this_month">An mhí seo</string>
     <string name="listview_updated_last_month">An mhí seo caite</string>
+    <string name="listview_no_content">Gan aon ábhar</string>
+
     <string name="settings_note_mode">Mód taispeána le haghaidh nótaí</string>
     <string name="settings_note_mode_new">Nótaí iompar oscailte</string>
     <string name="settings_theme_title">Téama</string>
