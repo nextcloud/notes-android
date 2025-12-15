@@ -46,6 +46,10 @@
     <string name="note_share_activity_could_not_retrieve_url">URL:n palautus epännistui</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" on jaettu kanssasi</string>
     <string name="note_share_activity_contact_no_permission">Yhteystietojen käyttöoikeus vaaditaan.</string>
+    <string name="note_share_created">Jako luotu</string>
+    <string name="note_share_activity_cannot_created">Sinulla ei ole oikeutta luoda jakoa.</string>
+
+
     <!-- NoteShareDetailActivity -->
     <string name="note_share_detail_activity_advanced_settings">Lisäasetukset</string>
     <string name="note_share_detail_activity_share_via_link_hide_download">Piilota lataus</string>
@@ -63,6 +67,8 @@
     <string name="note_share_detail_activity_no_share_permission_selected">Valitse vähintään yksi käyttöoikeus jakaaksesi.</string>
     <string name="note_share_detail_activity_label_empty">Nimike ei voi olla tyhjä</string>
     <string name="note_share_detail_activity_cancel">Peruuta</string>
+    <string name="note_share_detail_activity_create_share_error">Jaon luominen epäonnistui</string>
+
     <!-- SharePasswordDialogFragment -->
     <string name="share_password_dialog_fragment_share_link_optional_password_title">Syötä vaihtoehtoinen salasanan</string>
     <string name="share_password_dialog_fragment_skip">Ohita</string>
@@ -75,8 +81,11 @@
     <string name="no_email_app_available">Sähköpostiosoitteiden käsittelyyn ei ole saatavilla sovellusta</string>
     <string name="no_actions">Ei tapahtumia tälle käyttäjälle</string>
 
+    <string name="failed_the_remove_share">Jaon poistaminen epäonnistui</string>
     <string name="email_pick_failed">Sähköpostiosoitteen valinta epäonnistui.</string>
     <string name="failed_update_ui">Käyttöliittymän päivitys epäonnistui</string>
+    <string name="activity_chooser_title">Lähetä linkki…</string>
+
     <string name="activity_chooser_send_file_title">Lähetä</string>
     <string name="share_internal_link_to_folder_text">Sisäinen jaettu linkki toimii vain kayttäjillä, joilla on oikeudet tähän kansioon</string>
     <string name="share_internal_link_to_file_text">Sisäinen jaettu linkki toimii vain käyttäjillä, joilla on oikeudet tähän tiedostoon</string>
@@ -100,6 +109,7 @@
     <string name="public_share_name">Uusi nimi</string>
     <string name="share_link_with_label">Jaa linkki (%1$s)</string>
     <string name="share_link">Jaa linkki</string>
+    <string name="allow_resharing">Salli jakaminen uudelleen</string>
     <string name="link_share_view_only">Vain katselu</string>
     <string name="link_share_editing">Muokkaaminen</string>
     <string name="link_share_allow_upload_and_editing">Salli lähetys ja muokkaus</string>
@@ -133,6 +143,8 @@
     <string name="listview_updated_last_week">Viime viikolla</string>
     <string name="listview_updated_this_month">Tämä kuukausi</string>
     <string name="listview_updated_last_month">Viime kuussa</string>
+    <string name="listview_no_content">Ei sisältöä</string>
+
     <string name="settings_note_mode">Muistiinpanojen esitystapa</string>
     <string name="settings_theme_title">Teema</string>
     <string name="settings_font_title">Tasalevyinen fontti</string>
@@ -142,6 +154,7 @@
     <string name="settings_lock_summary">Laitteen valtuudet</string>
     <string name="settings_background_sync">Taustasynkronointi</string>
     <string name="settings_prevent_screen_capture">Estä ruudunkaappaus</string>
+    <string name="settings_show_ecosystem_apps">Näytä sovellusvaihdin</string>
     <string name="settings_show_ecosystem_apps_summary">Nextcloud-sovellusehdotukset navigointipalkissa</string>
     <string name="settings_gridview">Ruudukkonäkymä</string>
     <string name="error_sync">Synkronointi epäonnistui: %1$s</string>
@@ -387,19 +400,27 @@
     <string name="progress_import">Tuodaan muistiinpanoa %1$d/%2$d…</string>
     <string name="account_imported">Tili tuotu.</string>
     <string name="action_back">Takaisin</string>
+    <string name="status_message">Tilaviesti</string>
     <string name="whats_your_status">Mikä on tilatietosi?</string>
     <string name="clear_status_after">Tyhjennä tilatieto</string>
     <string name="clear">Tyhjennä</string>
+    <string name="set_message">Aseta viesti</string>
     <string name="dontClear">Älä tyhjennä</string>
     <string name="today">Tänään</string>
     <string name="thirtyMinutes">30 minuuttia</string>
+    <string name="oneHour">1 tunti</string>
+    <string name="fourHours">4 tuntia</string>
     <string name="thisWeek">Tällä viikolla</string>
+    <string name="error_setting_status_message">Virhe tilaviestiä asettaessa!</string>
     <string name="file_list_seconds_ago">sekunteja sitten</string>
     <string name="online">Online</string>
     <string name="dnd">Älä häiritse</string>
+    <string name="away">Poissa</string>
+    <string name="invisible">Näkymätön</string>
     <string name="busy">Varattu</string>
     <string name="mute_all_notifications">Mykistä kaikki ilmoitukset</string>
     <string name="appear_offline">Näytä olevan poissa</string>
+    <string name="status_set_fail_message">Tilan asettaminen epäonnistui!</string>
     <string name="ecosystem_apps_display_files">Tiedostot</string>
     <string name="ecosystem_apps_display_talk">Talk</string>
     <string name="ecosystem_apps_talk">Nextcloud Talk</string>
