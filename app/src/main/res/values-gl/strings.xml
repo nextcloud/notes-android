@@ -284,7 +284,7 @@
     <string name="error_dialog_tip_clear_storage">Pode limpar o almacenamento abrindo a información da aplicación e seleccionando Almacenamento → Limpar o almacenamento.⚠️ Advertencia: Isto eliminará as notas que aínda non estean sincronizadas.</string>
     <string name="error_dialog_tip_files_outdated">A súa aplicación Nextcloud semella estar desactualizada. Visite a Play Store ou F-Droid para obter a última versión.</string>
     <string name="error_dialog_tip_files_force_stop">Semella que algo foi mal na súa aplicación Nextcloud. Tente forzar a parar ámbalas dúas aplicacións,  Nextcloud e Nextcloud Notas.</string>
-    <string name="error_dialog_tip_files_delete_storage">Se detelos pola forza non axuda, pode tentar limpar o almacenamento de ambas as aplicacións.</string>
+    <string name="error_dialog_tip_files_delete_storage">Se detelas pola forza non axuda, pode tentar limpar o almacenamento de ámbalas dúas aplicacións.</string>
     <string name="error_dialog_timeout_instance">Non houbo resposta do seu servidor no tempo dado. Asegúrese de que a súa instancia funciona correctamente.</string>
     <string name="error_dialog_timeout_toggle">Comprobe a súa conexión de rede. Ás veces apagar e volver acender os datos móbiles ou a wifi pode axudar.</string>
     <string name="error_dialog_check_server">A resposta do servidor non foi correcta. Comprobe se pode acceder a Notas a través da interface web.</string>
