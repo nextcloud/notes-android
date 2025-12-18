@@ -54,7 +54,6 @@
     <string name="note_share_activity_user_icon_content_description">qayd almashish foydalanuvchi belgisi</string>
     <string name="note_share_activity_contact_icon_content_description">qayd almashish kontakt belgisi</string>
     <string name="note_share_activity_shared_with_you">%1$s sizga ulashdi</string>
-    <string name="note_share_activity_share_note">Eslatmani ulashish</string>
     <string name="note_share_activity_search_text">Ism, Federatsiya bulutli identifikatori yoki elektron pochta manzili…</string>
     <string name="note_share_activity_share_link">Havolani ulashing</string>
     <string name="note_share_activity_resharing_not_allowed">Siyosat yoki ruxsatlar qayta ulashishni taqiqlaydi</string>

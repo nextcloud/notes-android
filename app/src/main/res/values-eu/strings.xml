@@ -41,7 +41,6 @@
     <string name="change_category_title">Hautatu kategoria bat</string>
 
     <string name="note_share_activity_shared_with_you"> %1$s-(e)k zurekin partekatua</string>
-    <string name="note_share_activity_share_note">Partekatu oharra</string>
     <string name="note_share_activity_search_text">Izena, federatutako hodei IDa edo helbide elektronikoa...</string>
     <string name="note_share_activity_share_link">Partekatu esteka</string>
     <string name="note_share_activity_resharing_not_allowed">Politikak edo baimenek ez dute berriro partekatzen uzten</string>

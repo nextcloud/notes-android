@@ -39,7 +39,6 @@
     <string name="change_category_title">Escolha uma categoria </string>
 
     <string name="note_share_activity_shared_with_you">Partilhado consigo por %1$s</string>
-    <string name="note_share_activity_share_note">Partilhar nota</string>
     <string name="note_share_activity_share_link">Partilhar ligação</string>
     <string name="note_share_activity_could_not_retrieve_url">Não foi possível obter o URL</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" foi partilhado consigo</string>

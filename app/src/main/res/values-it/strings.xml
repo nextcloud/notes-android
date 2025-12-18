@@ -41,7 +41,6 @@
     <string name="change_category_title">Scegli una categoria</string>
 
     <string name="note_share_activity_shared_with_you">Condiviso con te da %1$s</string>
-    <string name="note_share_activity_share_note">Condividi nota</string>
     <string name="note_share_activity_search_text">Nome, Federated Cloud ID o indirizzo e-mail...</string>
     <string name="note_share_activity_share_link">Collegamento di condivisione</string>
     <string name="note_share_activity_resharing_not_allowed">La policy o le autorizzazioni impediscono la ricondivisione</string>

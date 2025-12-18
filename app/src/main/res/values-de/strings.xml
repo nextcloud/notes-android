@@ -54,7 +54,6 @@
     <string name="note_share_activity_user_icon_content_description">Benutzer-Symbol für Notizen teilen</string>
     <string name="note_share_activity_contact_icon_content_description">Kontakt-Symbol zum Notizen teilen</string>
     <string name="note_share_activity_shared_with_you">Geteilt mit Ihnen von %1$s</string>
-    <string name="note_share_activity_share_note">Notiz teilen</string>
     <string name="note_share_activity_search_text">Name, Federated-Cloud-ID oder E-Mail-Adresse…</string>
     <string name="note_share_activity_share_link">Link teilen</string>
     <string name="note_share_activity_resharing_not_allowed">Richtlinien oder Berechtigungen verhindern das Weiterteilen</string>

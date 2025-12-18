@@ -41,7 +41,6 @@
     <string name="change_category_title">Vybrať kategóriu</string>
 
     <string name="note_share_activity_shared_with_you">Sprístupnené vám používateľom %1$s</string>
-    <string name="note_share_activity_share_note">Poznámka k zdieľaniu</string>
     <string name="note_share_activity_search_text">Meno, ID v rámci Federatívneho cloudu, alebo e-mailová adresa…</string>
     <string name="note_share_activity_share_link">Zdieľať odkaz</string>
     <string name="note_share_activity_resharing_not_allowed">Opätovnému zdieľaniu bránia pravidlá alebo práva</string>

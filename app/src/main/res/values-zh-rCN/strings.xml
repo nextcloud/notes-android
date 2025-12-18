@@ -41,7 +41,6 @@
     <string name="change_category_title">选择一个分类</string>
 
     <string name="note_share_activity_shared_with_you">您已通过 %1$s 共享</string>
-    <string name="note_share_activity_share_note">共享笔记</string>
     <string name="note_share_activity_search_text">名称，联合云 ID 或电子邮箱地址…</string>
     <string name="note_share_activity_share_link">共享链接</string>
     <string name="note_share_activity_resharing_not_allowed">策略或权限阻止再次共享</string>

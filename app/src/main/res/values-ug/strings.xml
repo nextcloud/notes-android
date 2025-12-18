@@ -54,7 +54,6 @@
     <string name="note_share_activity_user_icon_content_description">خاتىرە ھەمبەھىرلەش ئىشلەتكۈچى سىنبەلگىسى</string>
     <string name="note_share_activity_contact_icon_content_description">خاتىرە ھەمبەھىرلەش ئالاقىداش سىنبەلگىسى</string>
     <string name="note_share_activity_shared_with_you">%1$s بىلەن ئورتاقلاشتى</string>
-    <string name="note_share_activity_share_note">ئورتاقلىشىش خاتىرىسى</string>
     <string name="note_share_activity_search_text">ئىسمى ، فېدېراتسىيە بۇلۇت كىملىكى ياكى ئېلخەت ئادرېسى…</string>
     <string name="note_share_activity_share_link">ئۇلىنىشنى ھەمبەھىرلەش</string>
     <string name="note_share_activity_resharing_not_allowed">تۈزۈم ياكى ئىجازەت قايتا-ھەمبەھىرلەشنى توسىدۇ</string>

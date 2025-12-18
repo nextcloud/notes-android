@@ -54,7 +54,6 @@
     <string name="note_share_activity_user_icon_content_description">ikona uživatele sdílení poznámky</string>
     <string name="note_share_activity_contact_icon_content_description">ikona kontaktu sdílení poznámky</string>
     <string name="note_share_activity_shared_with_you">Nasdílel(a) vám %1$s</string>
-    <string name="note_share_activity_share_note">Sdílet poznámku</string>
     <string name="note_share_activity_search_text">Jméno, identifikátor v rámci federovaného cloudu, nebo e-mailová adresa …</string>
     <string name="note_share_activity_share_link">Nasdílet odkaz</string>
     <string name="note_share_activity_resharing_not_allowed">Zásada nebo oprávnění brání sdílení dál dalším</string>

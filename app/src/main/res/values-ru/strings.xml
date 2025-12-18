@@ -41,7 +41,6 @@
     <string name="change_category_title">Выберите категорию</string>
 
     <string name="note_share_activity_shared_with_you">С вами поделился %1$s</string>
-    <string name="note_share_activity_share_note">Комментарий к общему ресурсу</string>
     <string name="note_share_activity_search_text">Имя, ID федеративного облака или email адрес…</string>
     <string name="note_share_activity_share_link">Поделиться ссылкой</string>
     <string name="note_share_activity_resharing_not_allowed">Политика или разрешения запрещают повторное предоставление общего доступа</string>

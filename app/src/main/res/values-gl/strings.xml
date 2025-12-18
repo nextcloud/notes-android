@@ -54,7 +54,6 @@
     <string name="note_share_activity_user_icon_content_description">Icona de usuario de compartición de notas</string>
     <string name="note_share_activity_contact_icon_content_description">icona de contacto de compartición de notas</string>
     <string name="note_share_activity_shared_with_you">Compartido con Vde. por %1$s</string>
-    <string name="note_share_activity_share_note">Compartir nota</string>
     <string name="note_share_activity_search_text">Nome, ID da nube federada ou enderezo de correo…</string>
     <string name="note_share_activity_share_link">Ligazón para compartir</string>
     <string name="note_share_activity_resharing_not_allowed">A directiva ou os permisos impiden volver compartir</string>

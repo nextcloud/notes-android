@@ -41,7 +41,6 @@
     <string name="change_category_title">Alege o categorie </string>
 
     <string name="note_share_activity_shared_with_you">Partajat cu tine de către %1$s</string>
-    <string name="note_share_activity_share_note">Partajează nota</string>
     <string name="note_share_activity_share_link">Partajază legătură</string>
     <string name="note_share_activity_could_not_retrieve_url">Nu a fost găsit URL-ul</string>
     <string name="note_share_activity_subject_shared_with_you">„%1$s” a fost partajat cu dumneavoastră</string>

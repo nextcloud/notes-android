@@ -54,7 +54,6 @@
     <string name="note_share_activity_user_icon_content_description">icône de partage de notes d\'utilisateur</string>
     <string name="note_share_activity_contact_icon_content_description">noter l\'icône de contact de partage</string>
     <string name="note_share_activity_shared_with_you">Partagé avec vous par %1$s</string>
-    <string name="note_share_activity_share_note">Partager la note</string>
     <string name="note_share_activity_search_text">Nom, identifiant de Cloud fédéré ou adresse e-mail…</string>
     <string name="note_share_activity_share_link">Partager par lien</string>
     <string name="note_share_activity_resharing_not_allowed">La réglementation ou les autorisations empêchent le re-partage</string>

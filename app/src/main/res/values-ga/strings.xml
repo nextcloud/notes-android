@@ -54,7 +54,6 @@
     <string name="note_share_activity_user_icon_content_description">deilbhín úsáideora roinnte nóta</string>
     <string name="note_share_activity_contact_icon_content_description">deilbhín teagmhála roinnte nóta</string>
     <string name="note_share_activity_shared_with_you">Roinnte leat faoi %1$s</string>
-    <string name="note_share_activity_share_note">Roinn nóta</string>
     <string name="note_share_activity_search_text">Ainm, ID Néal Cónaidhme nó seoladh ríomhphoist…</string>
     <string name="note_share_activity_share_link">Comhroinn nasc</string>
     <string name="note_share_activity_resharing_not_allowed">Cuireann beartais nó ceadanna cosc ​​ar athroinnt</string>

@@ -54,7 +54,6 @@
     <string name="note_share_activity_user_icon_content_description">ikona udostępniania użytkownikowi Note</string>
     <string name="note_share_activity_contact_icon_content_description">ikona udostępniania kontaktowi Note</string>
     <string name="note_share_activity_shared_with_you">Udostępnione przez %1$s</string>
-    <string name="note_share_activity_share_note">Notatka udostępnienia</string>
     <string name="note_share_activity_search_text">Nazwa, ID chmury stowarzyszonej lub adres e-mail</string>
     <string name="note_share_activity_share_link">Udostępnij link</string>
     <string name="note_share_activity_resharing_not_allowed">Polityka lub uprawnienia uniemożliwiają ponowne udostępnianie</string>

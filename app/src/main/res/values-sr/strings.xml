@@ -54,7 +54,6 @@
     <string name="note_share_activity_user_icon_content_description">note share user icon</string>
     <string name="note_share_activity_contact_icon_content_description">note share contact icon</string>
     <string name="note_share_activity_shared_with_you">Дели са вама %1$s</string>
-    <string name="note_share_activity_share_note">Белешка дељења</string>
     <string name="note_share_activity_search_text">Име, ИД здруженог облака или адреса е-поште…</string>
     <string name="note_share_activity_share_link">Подели везу</string>
     <string name="note_share_activity_resharing_not_allowed">Полиса или дозволе спречавају поновно дељење</string>

@@ -40,7 +40,6 @@
     <string name="change_category_title">Pasirinkite kategoriją</string>
 
     <string name="note_share_activity_shared_with_you">%1$s bendrina su Jumis.</string>
-    <string name="note_share_activity_share_note">Pasidalinimo pastaba</string>
     <string name="note_share_activity_share_link">Viešinio nuoroda</string>
     <string name="note_share_activity_could_not_retrieve_url">Nepavyko nuskaityti URL</string>
     <string name="note_share_activity_subject_shared_with_you">„%1$s“ yra bendrinama su jumis</string>

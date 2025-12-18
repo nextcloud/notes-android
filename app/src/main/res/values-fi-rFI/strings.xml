@@ -41,7 +41,6 @@
     <string name="change_category_title">Valitse luokka</string>
 
     <string name="note_share_activity_shared_with_you">Jaettu sinulle käyttäjältä %1$s</string>
-    <string name="note_share_activity_share_note">Jaa muistiinpano</string>
     <string name="note_share_activity_share_link">Jaa linkki</string>
     <string name="note_share_activity_could_not_retrieve_url">URL:n palautus epännistui</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" on jaettu kanssasi</string>

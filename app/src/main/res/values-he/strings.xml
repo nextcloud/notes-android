@@ -41,7 +41,6 @@
     <string name="change_category_title">בחירת קטגוריה</string>
 
     <string name="note_share_activity_shared_with_you">שותף אתך על ידי %1$s</string>
-    <string name="note_share_activity_share_note">פתק שיתוף</string>
     <string name="note_share_activity_share_link">שיתוף קישור</string>
     <string name="note_share_activity_could_not_retrieve_url">לא ניתן לקבל כתובת</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" שותף אתך</string>

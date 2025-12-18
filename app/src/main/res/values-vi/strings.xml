@@ -41,7 +41,6 @@
     <string name="change_category_title">Chọn một hạng mục</string>
 
     <string name="note_share_activity_shared_with_you">%1$s đã chia sẻ với bạn</string>
-    <string name="note_share_activity_share_note">Chia sẻ ghi chú</string>
     <string name="note_share_activity_share_link">Chia sẻ liên kết</string>
     <string name="note_share_activity_could_not_retrieve_url">Không thể truy xuất URL</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" đã chia sẽ với bạn</string>

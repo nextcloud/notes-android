@@ -41,7 +41,6 @@
     <string name="change_category_title">Choose a category</string>
 
     <string name="note_share_activity_shared_with_you">Shared with you by %1$s</string>
-    <string name="note_share_activity_share_note">Share note</string>
     <string name="note_share_activity_share_link">გაზიარების ლინკი</string>
     <string name="note_share_activity_could_not_retrieve_url">Could not retrieve URL</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" has been shared with you</string>

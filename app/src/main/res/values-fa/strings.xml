@@ -41,7 +41,6 @@
     <string name="change_category_title">انتخاب یک دسته‌بندی</string>
 
     <string name="note_share_activity_shared_with_you">هم‌رسانده با شما به دست %1$s</string>
-    <string name="note_share_activity_share_note">یادداشت اشتراک گذاری</string>
     <string name="note_share_activity_share_link">هم‌رسانی پیوند</string>
     <string name="note_share_activity_could_not_retrieve_url">امکان بازیابی URL وجود ندارد</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" با شما به اشتراک گذاشته شد</string>

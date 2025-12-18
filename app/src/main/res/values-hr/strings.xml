@@ -41,7 +41,6 @@
     <string name="change_category_title">Odaberi kategoriju</string>
 
     <string name="note_share_activity_shared_with_you">S vama podijelio %1$s</string>
-    <string name="note_share_activity_share_note">Dijeli bilješku</string>
     <string name="note_share_activity_share_link">Dijeli poveznicu</string>
     <string name="note_share_activity_could_not_retrieve_url">Nije moguće dohvatiti URL</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" je dijeljen s vama</string>

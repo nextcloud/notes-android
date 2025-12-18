@@ -41,7 +41,6 @@
     <string name="change_category_title">Изберете категория</string>
 
     <string name="note_share_activity_shared_with_you">Споделено с Вас от %1$s</string>
-    <string name="note_share_activity_share_note">Сподели бележка</string>
     <string name="note_share_activity_share_link">Връзка за споделяне</string>
     <string name="note_share_activity_could_not_retrieve_url">URL адресът не може да бъде извлечен</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" бе споделено с вас</string>
