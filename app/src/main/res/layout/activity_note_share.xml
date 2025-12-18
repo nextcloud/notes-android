@@ -91,18 +91,18 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnShareButton"
+        style="@style/Widget.Material3.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Widget.Material3.Button.TextButton"
-        android:paddingStart="@dimen/spacer_3x"
-        android:paddingEnd="@dimen/zero"
-        android:text="@string/note_share_activity_share_note"
-        android:textAlignment="textStart"
+        android:layout_marginStart="@dimen/spacer_2x"
+        android:layout_marginEnd="@dimen/spacer_2x"
+        android:text="@string/note_share_activity_send_copy_to"
         android:textColor="@color/text_color"
-        app:iconPadding="@dimen/share_button_padding"
-        app:iconTint="@color/text_color"
-        app:icon="@drawable/ic_share_white_24dp"
-        app:iconGravity="start" />
+        app:cornerRadius="@dimen/button_corner_radius"
+        app:icon="@drawable/ic_forward"
+        app:iconGravity="textStart"
+        app:iconPadding="@dimen/spacer_1x"
+        app:iconTint="@color/text_color" />
 
     <LinearLayout
         android:id="@+id/shared_with_you_container"
