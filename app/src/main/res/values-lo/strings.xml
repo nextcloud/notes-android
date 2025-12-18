@@ -54,7 +54,6 @@
     <string name="note_share_activity_user_icon_content_description">note share user icon</string>
     <string name="note_share_activity_contact_icon_content_description">note share contact icon</string>
     <string name="note_share_activity_shared_with_you">ແບ່ງປັນໂດຍທ່ານ %1$s</string>
-    <string name="note_share_activity_share_note">ໝາຍເຫດການແບ່ງປັນ</string>
     <string name="note_share_activity_search_text">Name, Federated Cloud ID or email address…</string>
     <string name="note_share_activity_share_link">ແບ່ງປັນລິງ</string>
     <string name="note_share_activity_resharing_not_allowed">Policy or permissions prevent resharing</string>

@@ -31,7 +31,6 @@
 
 
     <string name="note_share_activity_shared_with_you"> %1$s сподели со тебе</string>
-    <string name="note_share_activity_share_note">Споделување со забелешка </string>
     <string name="note_share_activity_share_link">Сподели ја врската</string>
     <string name="note_share_activity_could_not_retrieve_url">Неможе да се превземе адресата</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" е споделено со тебе</string>

@@ -41,7 +41,6 @@
     <string name="change_category_title">Επιλογή κατηγορίας</string>
 
     <string name="note_share_activity_shared_with_you">Διαμοιράστηκε με εσάς από τον %1$s</string>
-    <string name="note_share_activity_share_note">Κοινή χρήση σημείωσης</string>
     <string name="note_share_activity_share_link">Διαμοιρασμός συνδέσμου</string>
     <string name="note_share_activity_could_not_retrieve_url">Αδυναμία ανάκτησης URL</string>
     <string name="note_share_activity_subject_shared_with_you">Ο \"%1$s\" διαμοιράστηκε μαζί σας</string>

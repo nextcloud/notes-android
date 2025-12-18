@@ -41,7 +41,6 @@
     <string name="change_category_title">Trieu una categoria</string>
 
     <string name="note_share_activity_shared_with_you">Compartit per %1$s</string>
-    <string name="note_share_activity_share_note">Nota de l\'element compartit</string>
     <string name="note_share_activity_share_link">Comparteix un enllaç</string>
     <string name="note_share_activity_could_not_retrieve_url">No s\'ha pogut recuperar la URL</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" us ha estat compartit</string>

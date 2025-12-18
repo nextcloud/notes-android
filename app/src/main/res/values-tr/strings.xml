@@ -54,7 +54,6 @@
     <string name="note_share_activity_user_icon_content_description">not kullanıcıyı paylaş simgesi</string>
     <string name="note_share_activity_contact_icon_content_description">not kişiyi paylaş simgesi</string>
     <string name="note_share_activity_shared_with_you">Sizinle %1$s tarafından paylaşılmış</string>
-    <string name="note_share_activity_share_note">Notu paylaş</string>
     <string name="note_share_activity_search_text">Ad, birleşik bulut kimliği ya da e-posta adresi…</string>
     <string name="note_share_activity_share_link">Bağlantıyı paylaş</string>
     <string name="note_share_activity_resharing_not_allowed">Yeniden paylaşımı engelleyen ilke ya da izinler</string>

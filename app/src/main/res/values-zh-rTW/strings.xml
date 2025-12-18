@@ -54,7 +54,6 @@
     <string name="note_share_activity_user_icon_content_description">note share user icon</string>
     <string name="note_share_activity_contact_icon_content_description">note share contact icon</string>
     <string name="note_share_activity_shared_with_you">由 %1$s 與您分享</string>
-    <string name="note_share_activity_share_note">分享備註</string>
     <string name="note_share_activity_search_text">名稱、聯邦雲端 ID 或電子郵件地址……</string>
     <string name="note_share_activity_share_link">分享連結</string>
     <string name="note_share_activity_resharing_not_allowed">政策或權限阻止了轉分享</string>

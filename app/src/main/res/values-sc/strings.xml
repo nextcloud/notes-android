@@ -41,7 +41,6 @@
     <string name="change_category_title">Sèbera una categoria</string>
 
     <string name="note_share_activity_shared_with_you">Cumpartzidu cun te dae %1$s</string>
-    <string name="note_share_activity_share_note">Cumpartzi sa nota</string>
     <string name="note_share_activity_share_link">Cumpartzi ligòngiu</string>
     <string name="note_share_activity_could_not_retrieve_url">No at fatu a recuperare s\'URL</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" dd\'ant cumpartzidu cun tegus</string>

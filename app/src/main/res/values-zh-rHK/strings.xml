@@ -50,7 +50,6 @@
     <string name="note_share_activity_user_icon_content_description">筆記分享用戶圖標</string>
     <string name="note_share_activity_contact_icon_content_description">筆記分享聯絡人圖標</string>
     <string name="note_share_activity_shared_with_you">%1$s 已與您分享</string>
-    <string name="note_share_activity_share_note">分享筆記</string>
     <string name="note_share_activity_search_text">名稱、聯合雲端 ID 或電郵地址 …</string>
     <string name="note_share_activity_share_link">分享連結</string>
     <string name="note_share_activity_resharing_not_allowed">策略或權限阻止了重新分享。</string>

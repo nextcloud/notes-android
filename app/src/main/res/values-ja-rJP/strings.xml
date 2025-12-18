@@ -41,7 +41,6 @@
     <string name="change_category_title">カテゴリを選択</string>
 
     <string name="note_share_activity_shared_with_you">%1$sと共有中</string>
-    <string name="note_share_activity_share_note">共有ノート</string>
     <string name="note_share_activity_search_text">ユーザ名、クラウド統合ID、またはEメールアドレス ...</string>
     <string name="note_share_activity_share_link">共有リンク</string>
     <string name="note_share_activity_resharing_not_allowed">ポリシーまたは権限により再共有ができません</string>

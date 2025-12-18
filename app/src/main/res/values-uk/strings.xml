@@ -54,7 +54,6 @@
     <string name="note_share_activity_user_icon_content_description">значок нотатки поділитися з користувачем</string>
     <string name="note_share_activity_contact_icon_content_description">значок нотатки контакт спільного ресурсу</string>
     <string name="note_share_activity_shared_with_you">%1$s поділив(-ла-)ся з вами</string>
-    <string name="note_share_activity_share_note">Поділитися нотаткою</string>
     <string name="note_share_activity_search_text">Ім\'я, ідентифікатор об\'єднаної хмари або ел.адреса...</string>
     <string name="note_share_activity_share_link">Передати у публічний доступ</string>
     <string name="note_share_activity_resharing_not_allowed">Політика або дозволи забороняють подальшу передачу у спільний доступ</string>

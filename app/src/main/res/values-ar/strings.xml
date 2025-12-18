@@ -41,7 +41,6 @@
     <string name="change_category_title">إختر التصنيف</string>
 
     <string name="note_share_activity_shared_with_you">مشارك معك بواسطة %1$s</string>
-    <string name="note_share_activity_share_note">ملاحظة عن المشاركة</string>
     <string name="note_share_activity_search_text">الاسم أو مُعرِّف السحابة الاتحادية أو عنوان البريد الإلكتروني ...</string>
     <string name="note_share_activity_share_link">رابط مشاركة</string>
     <string name="note_share_activity_resharing_not_allowed">السياسة و الأذونات تمنع إعادة المشاركة</string>

@@ -34,7 +34,6 @@
 
 
     <string name="note_share_activity_shared_with_you">%1$s compartió l\'elementu contigo</string>
-    <string name="note_share_activity_share_note">Compartir una nota</string>
     <string name="note_share_activity_share_link">Compartir l\'enllaz</string>
     <string name="note_share_activity_subject_shared_with_you">Compartiose \"%1$s\" contigo</string>
     <!-- NoteShareDetailActivity -->

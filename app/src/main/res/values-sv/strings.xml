@@ -41,7 +41,6 @@
     <string name="change_category_title">Välj en kategori</string>
 
     <string name="note_share_activity_shared_with_you">Delad med dig av %1$s</string>
-    <string name="note_share_activity_share_note">Dela anteckning</string>
     <string name="note_share_activity_search_text">Namn, federerat moln-ID eller e-postadress...</string>
     <string name="note_share_activity_share_link">Delningslänk</string>
     <string name="note_share_activity_resharing_not_allowed">Policy eller behörigheter förhindrar vidaredelning</string>

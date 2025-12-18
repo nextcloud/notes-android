@@ -54,7 +54,6 @@
     <string name="note_share_activity_user_icon_content_description">note del bruger ikon</string>
     <string name="note_share_activity_contact_icon_content_description">not del kontakt ikon</string>
     <string name="note_share_activity_shared_with_you">Delt med dig af %1$s</string>
-    <string name="note_share_activity_share_note">Del note</string>
     <string name="note_share_activity_search_text">Navn, sammenkoblings cloud ID eller e-mailadresse…</string>
     <string name="note_share_activity_share_link">Del link</string>
     <string name="note_share_activity_resharing_not_allowed">Politik eller rettigheder forhindrer gen-deling</string>

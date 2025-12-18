@@ -54,7 +54,6 @@
     <string name="note_share_activity_user_icon_content_description">kumbuka shiriki ikoni ya mtumiaji</string>
     <string name="note_share_activity_contact_icon_content_description">kumbuka shiriki ikoni ya anwani</string>
     <string name="note_share_activity_shared_with_you">Imeshirikiwa na wewe kwa %1$s</string>
-    <string name="note_share_activity_share_note">Shiriki dokezo</string>
     <string name="note_share_activity_search_text">Jina, Kitambulisho cha Cloud iliyoshirikishwa au anwani ya barua pepe...</string>
     <string name="note_share_activity_share_link">Shirikisha kiungo</string>
     <string name="note_share_activity_resharing_not_allowed">Sera au ruhusa huzuia kushiriki upya</string>

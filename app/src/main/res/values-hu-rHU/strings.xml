@@ -54,7 +54,6 @@
     <string name="note_share_activity_user_icon_content_description">jegyzetmegosztás felhasználói ikonja</string>
     <string name="note_share_activity_contact_icon_content_description">jegyzetmegosztás kapcsolati ikonja</string>
     <string name="note_share_activity_shared_with_you">%1$s megosztotta Önnel</string>
-    <string name="note_share_activity_share_note">Jegyzet megosztása</string>
     <string name="note_share_activity_search_text">Név, egyesített felhőazonosító vagy e-mail-cím…</string>
     <string name="note_share_activity_share_link">Megosztási hivatkozás</string>
     <string name="note_share_activity_resharing_not_allowed">Házirend vagy jogosultságok tiltják a továbbosztást</string>

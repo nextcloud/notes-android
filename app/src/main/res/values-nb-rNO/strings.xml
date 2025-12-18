@@ -41,7 +41,6 @@
     <string name="change_category_title">Velg kategori</string>
 
     <string name="note_share_activity_shared_with_you">Delt med deg av %1$s</string>
-    <string name="note_share_activity_share_note">Delingsnotat</string>
     <string name="note_share_activity_share_link">Del lenke</string>
     <string name="note_share_activity_could_not_retrieve_url">Kunne ikke hente URL</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" er blitt delt med deg</string>

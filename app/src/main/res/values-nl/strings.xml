@@ -54,7 +54,6 @@
     <string name="note_share_activity_user_icon_content_description">note deel gebruiker pictogram</string>
     <string name="note_share_activity_contact_icon_content_description">note deel contact pictogram</string>
     <string name="note_share_activity_shared_with_you">Met je gedeeld door %1$s</string>
-    <string name="note_share_activity_share_note">Notitie delen</string>
     <string name="note_share_activity_search_text">Naam, Federated Cloud ID of e-mailadres…</string>
     <string name="note_share_activity_share_link">Deel link</string>
     <string name="note_share_activity_resharing_not_allowed">Beleid of machtigingen staan opnieuw delen niet toe</string>

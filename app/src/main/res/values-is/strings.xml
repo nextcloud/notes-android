@@ -41,7 +41,6 @@
     <string name="change_category_title">Veldu flokk</string>
 
     <string name="note_share_activity_shared_with_you">Deilt með þér af %s</string>
-    <string name="note_share_activity_share_note">Deila minnispunkti</string>
     <string name="note_share_activity_search_text">Nafn, skýjasambandsauðkenni eða tölvupóstfang …</string>
     <string name="note_share_activity_share_link">Tengill á sameign</string>
     <string name="note_share_activity_resharing_not_allowed">Stefnuregla eða heimildir koma í veg fyrir endurdeilingu</string>

@@ -41,7 +41,6 @@
     <string name="change_category_title">카테고리 선택</string>
 
     <string name="note_share_activity_shared_with_you">다음을 이용해 나와 공유됨 %1$s</string>
-    <string name="note_share_activity_share_note">공유 노트</string>
     <string name="note_share_activity_search_text">이름, 연결된 클라우드 ID 또는 이메일 주소...</string>
     <string name="note_share_activity_resharing_not_allowed">재공유 방지 정책 및 권한</string>
     <string name="note_share_activity_could_not_retrieve_url">주소를 불러올 수 없습니다.</string>
