@@ -1,290 +1,336 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Nextcloud Notes - Android Client
-  ~
-  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
-  ~ SPDX-License-Identifier: GPL-3.0-or-later
--->
-<resources>
-    <string name="app_name">Бележки</string>
-    <string name="app_name_long">Nextcloud Бележки</string>
-    <string name="label_all_notes">Всички бележки</string>
-    <string name="label_favorites">Любими</string>
-    <string name="action_create">Нова бележка</string>
-    <string name="welcome_text">Добре дошли на%1$s</string>
-    <string name="action_settings">Настройки</string>
-    <string name="action_trashbin">Изтрити бележки</string>
-    <string name="action_search">Търсене</string>
-    <string name="action_sorting_method">Метод на сортиране</string>
-    <string name="simple_cancel">Отказ</string>
-    <string name="simple_switch">Превключване</string>
-    <string name="simple_edit">Променяне</string>
-    <string name="simple_remove">Премахване</string>
-    <string name="action_edit_save">Запис</string>
-    <string name="simple_about">Относно</string>
-    <string name="simple_link">Връзка</string>
-    <string name="action_note_deleted">Изтриване %1$s</string>
-    <string name="action_note_restored">Възстановено%1$s</string>
-    <string name="action_undo">Отмяна</string>
-    <string name="action_uncategorized">Некатегоризирани</string>
-    <string name="menu_delete">Изтриване</string>
-    <string name="menu_change_category">Категория</string>
-    <string name="menu_favorite">Любима</string>
-    <string name="menu_preview">Преглед</string>
-    <string name="menu_share">Споделяне</string>
-    <string name="common_loading">Зареждане…</string>
-
-
-    <string name="search_in_category">Търсене в %1$s</string>
-    <string name="search_in_all">Търсене във всички бележки</string>
-
-    <string name="change_category_title">Изберете категория</string>
-
-    <string name="note_share_activity_shared_with_you">Споделено с Вас от %1$s</string>
-    <string name="note_share_activity_share_link">Връзка за споделяне</string>
-    <string name="note_share_activity_could_not_retrieve_url">URL адресът не може да бъде извлечен</string>
-    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" бе споделено с вас</string>
-    <!-- NoteShareDetailActivity -->
-    <string name="note_share_detail_activity_advanced_settings">Допълнителни настройки</string>
-    <string name="note_share_detail_activity_share_via_link_hide_download">Скрий свалянето</string>
-    <string name="note_share_detail_activity_share_send_note">Бележка за получателя</string>
-    <string name="note_share_detail_activity_hint_note">Бележка</string>
-    <string name="note_share_detail_activity_common_next">Следващо</string>
-    <string name="note_share_detail_activity_common_confirm">Потвърдете</string>
-    <string name="note_share_detail_activity_set_note">Задаване на Бележка</string>
-    <string name="note_share_detail_activity_send_share">Изпращане на Споделяне</string>
-    <string name="note_share_detail_activity_hint_name">Име</string>
-    <string name="note_share_detail_activity_link_name">Име на Връзка</string>
-    <string name="note_share_detail_activity_share_link_empty_password">Трябва да въведете парола</string>
-    <string name="note_share_detail_activity_hint_password">Парола</string>
-    <string name="note_share_detail_activity_no_share_permission_selected">Моля, изберете поне едно право за споделяне.</string>
-    <string name="note_share_detail_activity_label_empty">Етикетът не може да бъде празен</string>
-    <string name="note_share_detail_activity_cancel">Отказ</string>
-    <!-- SharePasswordDialogFragment -->
-    <string name="share_password_dialog_fragment_share_link_optional_password_title">Въведи опционална парола</string>
-    <string name="share_password_dialog_fragment_skip">Пропусни</string>
-
-    <string name="share_link_password_title">Въвеждане на парола</string>
-    <string name="common_ok">Добре</string>
-    <string name="common_delete">Изтриване</string>
-    <string name="write_email">Изпращане на имейл</string>
-    <string name="no_browser_available">Няма налично приложение за обработка на връзките</string>
-    <string name="no_email_app_available">Няма налично приложение за обработка на имейл адрес</string>
-    <string name="no_actions">Няма действия за този потребител</string>
-
-    <string name="failed_update_ui">Неуспешно обновяване на UI /потребителски интерфейс/</string>
-    <string name="activity_chooser_title">Изпращане на връзка чрез…</string>
-
-    <string name="activity_chooser_send_file_title">Изпращане</string>
-    <string name="share_internal_link_to_folder_text">Вътрешната връзка за споделяне работи само за потребители, които имат достъп до тази папка</string>
-    <string name="share_internal_link_to_file_text">Вътрешната връзка за споделяне работи само за потребители, които имат достъп до този файл</string>
-    <string name="share_internal_link">Сподели вътрешна връзка</string>
-    <string name="delete_link">Изтриване на връзка</string>
-    <string name="share_settings">Настройки</string>
-    <string name="share_send_new_email">Изпращане на нов имейл</string>
-    <string name="share_dialog_title">Споделяне</string>
-    <string name="share_file">Споделяне на %1$s</string>
-    <string name="share_expiration_date_label">Изтича %1$s</string>
-    <string name="share_expiration_date_format">%1$s</string>
-    <string name="share_no_expiration_date_label">Срок на валидност</string>
-    <string name="share_via_link_section_title">Връзка за споделяне</string>
-    <string name="share_via_link_send_link_label">Изпратете връзката</string>
-    <string name="share_password_title">Защитена с парола</string>
-    <string name="share_with_title">Споделете чрез ...</string>
-    <string name="share_via_link_unset_password">Да не се задава</string>
-    <string name="add_new_public_share">Добавете нова връзка за публично споделяне</string>
-    <string name="public_share_name">Ново име</string>
-    <string name="share_link_with_label">Споделяне на линк (%1$s)</string>
-    <string name="share_link">Връзка за споделяне</string>
-    <string name="allow_resharing">Разреши повторно споделяне.</string>
-    <string name="link_share_view_only">Само изглед</string>
-    <string name="link_share_editing">Редактиране</string>
-    <string name="link_share_allow_upload_and_editing">За качване и редактиране</string>
-    <string name="link_share_file_drop">Само за качване</string>
-    <string name="could_not_retrieve_shares"> 60% match 
-Споделянията не могат да бъдат извлечени</string>
-    <string name="share_permission_view_only">Само изглед</string>
-    <string name="share_permission_can_edit">Може да се редактира</string>
-    <string name="share_permission_file_drop">Пускане/Преместване/ на файл</string>
-    <string name="share_permission_secure_file_drop">Защитено пускане на файлове</string>
-    <string name="share_permissions">Права за споделяне</string>
-    <string name="username">Потребител</string>
-    <string name="share_group_clarification">%1$s (група)</string>
-    <string name="share_remote_clarification">%1$s (отдалечен)</string>
-    <string name="share_room_clarification">%1$s (разговор)</string>
-    <string name="share_known_remote_on_clarification">на %1$s</string>
-    <string name="remote">(отдалечен)</string>
-
-    <string name="copy_link">Копиране на връзката</string>
-    <string name="share">Споделяне</string>
-    <string name="clipboard_text_copied">Връзката е копирана</string>
-    <string name="clipboard_no_text_to_copy">Няма получен текст за копиране в клипборда</string>
-    <string name="clipboard_unexpected_error">Неочаквана грешка при опит за копиране в клипборда</string>
-    <string name="clipboard_label">Текста е копиран от %1$s</string>
-
-    <string name="listview_updated_today">Днес</string>
-    <string name="listview_updated_yesterday">Вчера</string>
-    <string name="listview_updated_this_week">Тази седмица</string>
-    <string name="listview_updated_last_week">Миналата седмица</string>
-    <string name="listview_updated_this_month">Този месец</string>
-    <string name="listview_updated_last_month">Миналия месец</string>
-    <string name="settings_note_mode">Режим на показване на бележки</string>
-    <string name="settings_note_mode_new">Поведение при отваряне на бележките</string>
-    <string name="settings_theme_title">Тема</string>
-    <string name="settings_font_title">Monospace/Монопространствен/ шрифт</string>
-    <string name="settings_font_size">Размер на шрифта</string>
-    <string name="settings_wifi_only">Синхронизиране само на Wi-Fi</string>
-    <string name="settings_lock">Заключване на приложения (бета)</string>
-    <string name="settings_lock_summary">Удостоверяване/идентификационни данни/ на устройството</string>
-    <string name="settings_background_sync">Фонова синхронизация</string>
-    <string name="settings_prevent_screen_capture">Предотвратява заснемането на екрана</string>
-    <string name="settings_gridview">Решетъчен изглед</string>
-    <string name="settings_keep_screen_on">Дръжте екрана включен</string>
-    <string name="settings_keep_screen_on_summary">Когато преглеждате или редактирате бележка</string>
-
-    <string name="error_sync">Синхронизацията е неуспешна: %1$s</string>
-    <string name="error_synchronization">Синхронизацията е неуспешна</string>
-    <string name="error_no_network">Няма връзка с Интернет</string>
-    <string name="error_maintenance_mode">Сървърът е в режим на поддръжка</string>
-    <string name="error_unknown">Възникна неизвестна грешка</string>
-
-    <string name="about_version_title">Версия</string>
-    <string name="about_version">В момента използвате%1$s</string>
-    <string name="about_maintainer_title">Отговорник</string>
-    <string name="about_developers_title">Разработчици</string>
-    <string name="about_developers_original_author">оригинален автор</string>
-    <string name="about_translators_title">Преводачи</string>
-    <string name="about_translators_transifex">Nextcloud общност на %1$s</string>
-    <string name="about_testers_title">Тестери</string>
-    <string name="about_source_title">Изходен код</string>
-    <string name="about_source">Този проект се хоства на GitHub: %1$s</string>
-    <string name="about_issues_title">Проблеми</string>
-    <string name="about_issues">Можете да съобщите за грешки, предложения за подобрения и заявки за функции на GitHub issue tracker/проследяване напроблеми/: %1$s</string>
-    <string name="about_translate_title">Превод</string>
-    <string name="about_translate">Присъединете се към екипа на Nextcloud в Transifex и ни помогнете да преведем това приложение: %1$s</string>
-    <string name="about_app_license_title">Лиценз на приложението</string>
+  <resources>
     <string name="about_app_license">Това приложение се разпространява под лиценза за GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Преглед на лиценза</string>
-    <string name="about_icons_disclaimer_title">Икони</string>
-    <string name="about_icons_disclaimer_app_icon">За оригиналната икона вижте %1$s.</string>
-    <string name="about_icons_disclaimer_mdi_icons">Всички следващи икони, използвани от това приложение, са%1$s направени от Google Inc. и лицензирани под  Apache 2.0 лиценз.</string>
-    <string name="about_icons_disclaimer_mdi">Икони за материален дизайн</string>
-    <string name="about_credits_tab_title">Кредити</string>
+    <string name="about_app_license_title">Лиценз на приложението</string>
     <string name="about_contribution_tab_title">Принос</string>
+    <string name="about_credits_tab_title">Кредити</string>
+    <string name="about_developers_original_author">оригинален автор</string>
+    <string name="about_developers_title">Разработчици</string>
+    <string name="about_icons_disclaimer_app_icon">За оригиналната икона вижте %1$s.</string>
+    <string name="about_icons_disclaimer_mdi">Икони за материален дизайн</string>
+    <string name="about_icons_disclaimer_mdi_icons">Всички следващи икони, използвани от това приложение, са%1$s направени от Google Inc. и лицензирани под  Apache 2.0 лиценз.</string>
+    <string name="about_icons_disclaimer_title">Икони</string>
+    <string name="about_issues">Можете да съобщите за грешки, предложения за подобрения и заявки за функции на GitHub issue tracker/проследяване напроблеми/: %1$s</string>
+    <string name="about_issues_title">Проблеми</string>
     <string name="about_license_tab_title">Лиценз</string>
-
-    <string name="widget_note_list_title">Списък с бележки</string>
-    <string name="widget_note_list_placeholder">Няма бележки</string>
-    <string name="widget_single_note_title">Единична бележка</string>
-    <string name="widget_single_note_placeholder_tv">Бележката не е открита</string>
-    <string name="widget_not_logged_in">Моля, влезте в Notes преди да използвате този изпълним модул</string>
-    <string name="widget_entry_fav_contentDescription">Иконата със звезда се използва за обозначаване на елемент като любим</string>
-
+    <string name="about_maintainer_title">Отговорник</string>
+    <string name="about_source">Този проект се хоства на GitHub: %1$s</string>
+    <string name="about_source_title">Изходен код</string>
+    <string name="about_testers_title">Тестери</string>
+    <string name="about_translate">Присъединете се към екипа на Nextcloud в Transifex и ни помогнете да преведем това приложение: %1$s</string>
+    <string name="about_translate_title">Превод</string>
+    <string name="about_translators_title">Преводачи</string>
+    <string name="about_translators_transifex">Nextcloud общност на %1$s</string>
+    <string name="about_version">В момента използвате%1$s</string>
+    <string name="about_version_title">Версия</string>
+    <string name="account_already_imported">Профилът вече е импортиран</string>
+    <string name="account_imported">Профилът е импортиран.</string>
+    <string name="action_back">Назад</string>
+    <string name="action_create">Нова бележка</string>
+    <string name="action_edit_save">Запис</string>
+    <string name="action_formatting_help">Форматиране</string>
+    <string name="action_note_deleted">Изтриване %1$s</string>
+    <string name="action_note_restored">Възстановено%1$s</string>
+    <string name="action_search">Търсене</string>
+    <string name="action_settings">Настройки</string>
+    <string name="action_sorting_method">Метод на сортиране</string>
+    <string name="action_trashbin">Изтрити бележки</string>
+    <string name="action_uncategorized">Некатегоризирани</string>
+    <string name="action_undo">Отмяна</string>
+    <string name="activity_chooser_send_file_title">Изпращане</string>
+    <string name="activity_chooser_title">Изпращане на връзка чрез…</string>
     <string name="activity_select_single_note">Избор на бележка</string>
-
-    <string name="shortcut_create_long">Създай нова бележка</string>
-
-    <string name="pref_value_font_normal">Нормално</string>
-    <string name="pref_value_wifi_and_mobile">Синхронизиране на Wi-Fi и мобилни данни</string>
-    <string name="pref_value_lock">Password protection</string>
-
-    <string name="simple_error">Грешка</string>
-    <string name="simple_close">Затваряне</string>
-    <string name="simple_copy">Копиране</string>
-    <string name="simple_exception">Изключение</string>
-    <string name="pin_to_homescreen">Фиксиране към началния екран</string>
-    <string name="note_has_been_deleted">Тази бележка е изтрита</string>
     <string name="add_account">Добавяне на регистрация</string>
-
-    <string name="category_music">Музика</string>
-    <string name="category_movies">Филми</string>
-    <string name="category_movie">Филм</string>
-    <string name="category_work">Служебен</string>
-    <string name="category_todo">ToDo/задача/</string>
-    <string name="category_todos">ToDos/задачи/</string>
+    <string name="add_category">Добавяне %1$s</string>
+    <string name="add_new_public_share">Добавете нова връзка за публично споделяне</string>
+    <string name="added_content">Добавени %1$s</string>
+    <string name="allow_resharing">Разреши повторно споделяне.</string>
+    <string name="app_name">Бележки</string>
+    <string name="app_name_long">Nextcloud Бележки</string>
+    <string name="appearance_and_behavior">Изглед и поведение</string>
+    <string name="append_to_note">Добави към бележка</string>
+    <string name="away">Винаги</string>
+    <string name="backup">Открихме непоправимо състояние на приложението. Моля, архивирайте несинхронизираните си промени и изчистете хранилището на приложението Бележки.</string>
+    <string name="busy">Зает</string>
+    <string name="category_bake">Печене</string>
     <string name="category_checklists">Контролни списъци</string>
-    <string name="category_tasks">Задачи</string>
+    <string name="category_credentials">Идентификационни данни/Потр. име и парола/</string>
+    <string name="category_food">Храна</string>
+    <string name="category_game">Игра</string>
+    <string name="category_games">Игри</string>
+    <string name="category_gift">Дарба</string>
+    <string name="category_gifts">Дарби</string>
+    <string name="category_key">Ключ</string>
+    <string name="category_keys">Ключове</string>
+    <string name="category_movie">Филм</string>
+    <string name="category_movies">Филми</string>
+    <string name="category_music">Музика</string>
+    <string name="category_password">Парола</string>
+    <string name="category_passwords">Пароли</string>
+    <string name="category_play">Играене</string>
+    <string name="category_present">Подарък</string>
+    <string name="category_presents">Подаръци</string>
+    <string name="category_readonly">Само за четене</string>
     <string name="category_recipe">Рецепта</string>
     <string name="category_recipes">Рецепти</string>
     <string name="category_restaurant">Ресторант</string>
     <string name="category_restaurants">Ресторанти</string>
-    <string name="category_food">Храна</string>
-    <string name="category_bake">Печене</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_key">Ключ</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_keys">Ключове</string>
-    <string name="category_password">Парола</string>
-    <string name="category_passwords">Пароли</string>
-    <string name="category_credentials">Идентификационни данни/Потр. име и парола/</string>
-    <string name="category_game">Игра</string>
-    <string name="category_games">Игри</string>
-    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
-    <string name="category_play">Играене</string>
-    <string name="category_gift">Дарба</string>
-    <string name="category_gifts">Дарби</string>
-    <!-- Like a gift -->
-    <string name="category_present">Подарък</string>
-    <!-- Like a gift -->
-    <string name="category_presents">Подаръци</string>
-
-    <string name="account_already_imported">Профилът вече е импортиран</string>
-    <string name="no_notes_yet">Не са открити бележки</string>
-    <string name="no_notes_yet_description">Натискане на бутон +, за създаване на нова бележка</string>
-    <string name="simple_more">Още</string>
-    <string name="simple_move">Преместване</string>
-    <string name="category_readonly">Само за четене</string>
-    <string name="no_category">Без категория</string>
-    <string name="add_category">Добавяне %1$s</string>
-    <string name="simple_checkbox">Отметка</string>
-    <string name="unlock_notes">Отключване на бележки</string>
-    <string name="error_dialog_title">О не - сега какво? 🙁</string>
-    <string name="error_dialog_tip_token_mismatch_retry">Моля, опитайте принудително да затворите приложението и отново да го рестартирате. Възможно е да е имало неправилна връзка с приложението Nextcloud.</string>
-    <string name="error_dialog_tip_token_mismatch_clear_storage">Ако проблемът продължава, опитайте се да изчистите хранилището на двете приложения: Nextcloud и Nextcloud Бележки, за да разрешите този проблем.</string>
-    <string name="error_dialog_tip_clear_storage">Можете да изчистите хранилището, като отворите информацията за приложението и изберете Хранилище → Изчистване на хранилище. ⚠️ Предупреждение: Това ще изтрие все още несинхронизираните бележки!</string>
-    <string name="error_dialog_tip_files_outdated">Вашето приложение Nextcloud изглежда е остаряло. Моля, посетете Play Store или F-Droid, за да получите най-новата версия.</string>
-    <string name="error_dialog_tip_files_force_stop">Изглежда, че нещо не е наред с вашето приложение Nextcloud. Моля, опитайте да спрете принудиттелно и двете приложения -и Nextcloud и приложението Nextcloud Бележки.</string>
-    <string name="error_dialog_tip_files_delete_storage">Ако принудителното им спиране не помогне, можете да опитате да изчистите хранилището на двете приложения.</string>
-    <string name="error_dialog_timeout_instance">Нямаше отговор от вашия сървър в дадения момент. Моля, уверете се, че вашият сървър работи добре.</string>
-    <string name="error_dialog_timeout_toggle">Проверете си мрежовата връзка. Понякога изключването и повторното включване на мобилни данни или Wi-Fi може да помогне.</string>
+    <string name="category_tasks">Задачи</string>
+    <string name="category_todo">ToDo/задача/</string>
+    <string name="category_todos">ToDos/задачи/</string>
+    <string name="category_work">Служебен</string>
+    <string name="change_category_title">Изберете категория</string>
+    <string name="change_note_title">Промяна на заглавието на бележка</string>
+    <string name="choose_account">Избор на профил</string>
+    <string name="clear">Изчистване</string>
+    <string name="clear_status_after">Изчистване на състоянието след</string>
+    <string name="clipboard_label">Текста е копиран от %1$s</string>
+    <string name="clipboard_no_text_to_copy">Няма получен текст за копиране в клипборда</string>
+    <string name="clipboard_text_copied">Връзката е копирана</string>
+    <string name="clipboard_unexpected_error">Неочаквана грешка при опит за копиране в клипборда</string>
+    <string name="common_delete">Изтриване</string>
+    <string name="common_loading">Зареждане…</string>
+    <string name="common_ok">Добре</string>
+    <string name="context_based_formatting"> Изскачащ прозорец за форматиране, базирано на контекст</string>
+    <string name="copy_link">Копиране на връзката</string>
+    <string name="could_not_retrieve_shares"> 60% match 
+Споделянията не могат да бъдат извлечени</string>
+    <string name="delete_link">Изтриване на връзка</string>
+    <string name="direct_editing_error">Грешка при зареждане на богато редактиране</string>
+    <string name="dnd">Не безпокой</string>
+    <string name="dontClear">Не изчиствай</string>
+    <string name="ecosystem_apps_display_files">Файлове</string>
+    <string name="ecosystem_apps_display_more">Повече </string>
+    <string name="ecosystem_apps_display_talk">Talk</string>
+    <string name="error_action_open_battery_settings">Настройки на батерията</string>
+    <string name="error_action_open_deck_info">Отворяне на информация за приложението</string>
+    <string name="error_action_open_network">Настройки на мрежата</string>
+    <string name="error_action_update_files_app">Обновяване</string>
+    <string name="error_dialog_check_maintenance">Моля, проверете дали вашето приложение Nextcloud в момента не е в режим на поддръжка.</string>
     <string name="error_dialog_check_server">Отговорът на вашия сървър не беше правилен. Моля, проверете дали имате достъп до бележките си чрез уеб интерфейс.</string>
     <string name="error_dialog_check_server_logs">Има проблем с вашата настройка на Nextcloud. Моля, разгледайте /журналите/ файловете за вход на сървъра.</string>
-    <string name="error_dialog_check_maintenance">Моля, проверете дали вашето приложение Nextcloud в момента не е в режим на поддръжка.</string>
     <string name="error_dialog_insufficient_storage">Вашето приложение Nextcloud няма свободно място в хранилището. Моля, изтрийте някои файлове, за да синхронизирате локалните си промени във вашия облак.</string>
-    <string name="error_dialog_we_need_info">Имаме нужда от следната техническа информация, за да ви помогнем:</string>
-    <string name="error_dialog_server_app_enabled">Моля, уверете се, че сте инсталирали и активирали приложението „Бележки“ на вашия сървър.</string>
-    <string name="error_dialog_redirect">Сървърът ви отговори с код за състояние HTTP 302, което означава, че не сте инсталирали приложението Бележки на вашия сървър или нещо е конфигурирано неправилно. Това може да бъде причинено от персонализирани замени в .htaccess-файл или от приложения на Nextcloud, като OID Клиент.</string>
-    <string name="error_dialog_tip_disable_battery_optimizations">Моля, деактивирайте всички оптимизации на батерията за Nextcloud и приложението Бележки.</string>
     <string name="error_dialog_min_version">Приложението Notes за Android, изисква версията на приложението Android за Nextcloud да е поне 3.18.</string>
-    <string name="added_content">Добавени %1$s</string>
-    <string name="shared_text_empty">Споделеният текст беше празен</string>
-    <string name="append_to_note">Добави към бележка</string>
-    <string name="change_note_title">Промяна на заглавието на бележка</string>
-    <string name="menu_edit_title">Редактиране на заглавието</string>
-    <string name="simple_security">Сигурност</string>
-    <string name="appearance_and_behavior">Изглед и поведение</string>
-    <string name="simple_synchronization">Синхронизиране</string>
+    <string name="error_dialog_redirect">Сървърът ви отговори с код за състояние HTTP 302, което означава, че не сте инсталирали приложението Бележки на вашия сървър или нещо е конфигурирано неправилно. Това може да бъде причинено от персонализирани замени в .htaccess-файл или от приложения на Nextcloud, като OID Клиент.</string>
+    <string name="error_dialog_server_app_enabled">Моля, уверете се, че сте инсталирали и активирали приложението „Бележки“ на вашия сървър.</string>
+    <string name="error_dialog_timeout_instance">Нямаше отговор от вашия сървър в дадения момент. Моля, уверете се, че вашият сървър работи добре.</string>
+    <string name="error_dialog_timeout_toggle">Проверете си мрежовата връзка. Понякога изключването и повторното включване на мобилни данни или Wi-Fi може да помогне.</string>
+    <string name="error_dialog_tip_clear_storage">Можете да изчистите хранилището, като отворите информацията за приложението и изберете Хранилище → Изчистване на хранилище. ⚠️ Предупреждение: Това ще изтрие все още несинхронизираните бележки!</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Моля, деактивирайте всички оптимизации на батерията за Nextcloud и приложението Бележки.</string>
+    <string name="error_dialog_tip_files_delete_storage">Ако принудителното им спиране не помогне, можете да опитате да изчистите хранилището на двете приложения.</string>
+    <string name="error_dialog_tip_files_force_stop">Изглежда, че нещо не е наред с вашето приложение Nextcloud. Моля, опитайте да спрете принудиттелно и двете приложения -и Nextcloud и приложението Nextcloud Бележки.</string>
+    <string name="error_dialog_tip_files_outdated">Вашето приложение Nextcloud изглежда е остаряло. Моля, посетете Play Store или F-Droid, за да получите най-новата версия.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Ако проблемът продължава, опитайте се да изчистите хранилището на двете приложения: Nextcloud и Nextcloud Бележки, за да разрешите този проблем.</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Моля, опитайте принудително да затворите приложението и отново да го рестартирате. Възможно е да е имало неправилна връзка с приложението Nextcloud.</string>
+    <string name="error_dialog_title">О не - сега какво? 🙁</string>
+    <string name="error_dialog_we_need_info">Имаме нужда от следната техническа информация, за да ви помогнем:</string>
+    <string name="error_maintenance_mode">Сървърът е в режим на поддръжка</string>
+    <string name="error_no_network">Няма връзка с Интернет</string>
+    <string name="error_sync">Синхронизацията е неуспешна: %1$s</string>
+    <string name="error_synchronization">Синхронизацията е неуспешна</string>
+    <string name="error_unknown">Възникна неизвестна грешка</string>
+    <string name="failed_update_ui">Неуспешно обновяване на UI /потребителски интерфейс/</string>
+    <string name="file_list_seconds_ago">преди секунди</string>
+    <string name="formatting_help_cbf_body_1">Основна цел на дизайна на приложението Notes е да предостави инструмент, който да не ви разсейва. Въпреки че ще можете да форматирате текстовете си с Markdown. За различни от посочените по -долу примери можете да използвате преки пътища, за да може да форматирате бележките си, без да въвеждате кодовете по -долу.</string>
+    <string name="formatting_help_cbf_body_2">Просто изберете диапазон с текст или чукнете с курсора на която и да е позиция и ще получите изскачащо меню, което съдържа до записите по подразбиране %1$s, %2$s, %3$s записи като %4$s или %5$s.</string>
+    <string name="formatting_help_cbf_title">Форматиране, базирано на контекст</string>
+    <string name="formatting_help_checkboxes_body_1">За създаване на квадратче за отметка, използвайте списък, последван от скоби</string>
+    <string name="formatting_help_checkboxes_body_2">Елемент 1</string>
+    <string name="formatting_help_checkboxes_body_3">Елемент 2</string>
+    <string name="formatting_help_checkboxes_title">Квадратчета за отметка</string>
+    <string name="formatting_help_code_body_1">Има много различни начини за оформление на код с Markdown. Ако имате вградени кодови блокове, заградете ги в скоби:</string>
+    <string name="formatting_help_code_body_2">Markdown също поддържа нещо, наречено кодово ограждане, което позволява множество редове без отстъп:</string>
+    <string name="formatting_help_code_body_3">И ако искате да използвате подчертаване на синтаксиса, включете езика:</string>
+    <string name="formatting_help_code_title">Код</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_images_alt">Луксозно изображение</string>
+    <string name="formatting_help_images_body_1">Връзките трябва да бъдат или пълни URL адреси, започващи с протокол и домейн, или абсолютни пътища, започващи с %1$sзнак.</string>
+    <string name="formatting_help_images_body_2">За да съответствате на Markdown формата, моля, използвайте превключващи знаци в URL адреса на изображението. Това означава например да замените интервалите с%1$s в URL адреса.</string>
+    <string name="formatting_help_images_title">Изображения</string>
+    <string name="formatting_help_lists_body_1">Понякога искате номерирани списъци:</string>
+    <string name="formatting_help_lists_body_2">Едно</string>
+    <string name="formatting_help_lists_body_3">Две</string>
+    <string name="formatting_help_lists_body_4">Три</string>
+    <string name="formatting_help_lists_body_5">Понякога искате точки с водещи символи:</string>
+    <string name="formatting_help_lists_body_6">Започване на реда с тире</string>
+    <string name="formatting_help_lists_body_7">И ако имате подточки, поставете два интервала пред тирето или звездата:</string>
+    <string name="formatting_help_lists_body_8">Като това</string>
+    <string name="formatting_help_lists_body_9">И това</string>
+    <string name="formatting_help_lists_title">Списъци</string>
+    <string name="formatting_help_structured_documents_body_1">Понякога е полезно да имате различни нива на заглавки за да структурирате документите си. Започнете редовете с %1$s, за да създадете заглавия. Умножаването %2$s им в реда означава по -малки размери на заглавията.</string>
+    <string name="formatting_help_structured_documents_body_2">Това е заглавие от трето ниво</string>
+    <string name="formatting_help_structured_documents_body_3">Можете да използвате от едно %1$s чак до %2$s шест за различни размери на заглавията.</string>
+    <string name="formatting_help_structured_documents_body_4">Ако искате да цитирате някого, използвайте знака %1$s преди реда:</string>
+    <string name="formatting_help_structured_documents_body_5">Въображението е по-важно от знанието. Знанията са ограничени. Въображението обгражда света.</string>
+    <string name="formatting_help_structured_documents_body_6">- Алберт Айнщайн</string>
+    <string name="formatting_help_structured_documents_title">Структурирани документи</string>
+    <string name="formatting_help_tables_column">Колона %1d</string>
+    <string name="formatting_help_tables_title">Таблици</string>
+    <string name="formatting_help_tables_value">Стойност%1d</string>
+    <string name="formatting_help_text_body">Много е лесно да направите няколко думи %1$sbold %1$s и други думи %2$sitalic%2$s с Markdown. Можете да%3$sstrike/зачеркване/ %3$s някои думи чрез и дори [връзка към Nextcloud] (https://nextcloud.com).</string>
+    <string name="formatting_help_text_title">Текст</string>
+    <string name="fourHours">4 чàса</string>
+    <string name="http_status_code">HTTP код на състоянието: %1$d</string>
+    <string name="label_all_notes">Всички бележки</string>
+    <string name="label_favorites">Любими</string>
+    <string name="link_share_allow_upload_and_editing">За качване и редактиране</string>
+    <string name="link_share_editing">Редактиране</string>
+    <string name="link_share_file_drop">Само за качване</string>
+    <string name="link_share_view_only">Само изглед</string>
+    <string name="listview_updated_last_month">Миналия месец</string>
+    <string name="listview_updated_last_week">Миналата седмица</string>
+    <string name="listview_updated_this_month">Този месец</string>
+    <string name="listview_updated_this_week">Тази седмица</string>
+    <string name="listview_updated_today">Днес</string>
+    <string name="listview_updated_yesterday">Вчера</string>
     <string name="manage_accounts">Управление на профилите</string>
-    <string name="action_formatting_help">Форматиране</string>
-
-
+    <string name="menu_change_category">Категория</string>
+    <string name="menu_delete">Изтриване</string>
+    <string name="menu_edit_title">Редактиране на заглавието</string>
+    <string name="menu_favorite">Любима</string>
+    <string name="menu_preview">Преглед</string>
+    <string name="menu_share">Споделяне</string>
+    <string name="no_account_configured_yet">Все още няма конфигуриран профил</string>
+    <string name="no_actions">Няма действия за този потребител</string>
+    <string name="no_browser_available">Няма налично приложение за обработка на връзките</string>
+    <string name="no_category">Без категория</string>
+    <string name="no_email_app_available">Няма налично приложение за обработка на имейл адрес</string>
+    <string name="no_notes_yet">Не са открити бележки</string>
+    <string name="no_notes_yet_description">Натискане на бутон +, за създаване на нова бележка</string>
+    <string name="no_other_accounts">Все още не сте конфигурирали други профили.</string>
     <string name="noteMode_plain_edit">Режим на обикновено редактиране</string>
     <string name="noteMode_plain_preview">Обикновен преглед</string>
-    <string name="noteMode_rich_edit">Режим на богато редактиране</string>
     <string name="noteMode_remember_last">Запаметяване на последният ми избор</string>
-
-    <string-array name="fontSize_entries">
-        <item>Малък</item>
-        <item>Средно</item>
-        <item>Голям</item>
-    </string-array>
-
-    <string-array name="darkmode_entries">
-        <item>Светла</item>
-        <item>Тъмна</item>
-        <item>Система по подразбиране</item>
-    </string-array>
-
+    <string name="noteMode_rich_edit">Режим на богато редактиране</string>
+    <string name="note_has_been_deleted">Тази бележка е изтрита</string>
+    <string name="note_share_activity_could_not_retrieve_url">URL адресът не може да бъде извлечен</string>
+    <string name="note_share_activity_share_link">Връзка за споделяне</string>
+    <string name="note_share_activity_shared_with_you">Споделено с Вас от %1$s</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" бе споделено с вас</string>
+    <string name="note_share_detail_activity_advanced_settings">Допълнителни настройки</string>
+    <string name="note_share_detail_activity_cancel">Отказ</string>
+    <string name="note_share_detail_activity_common_confirm">Потвърдете</string>
+    <string name="note_share_detail_activity_common_next">Следващо</string>
+    <string name="note_share_detail_activity_hint_name">Име</string>
+    <string name="note_share_detail_activity_hint_note">Бележка</string>
+    <string name="note_share_detail_activity_hint_password">Парола</string>
+    <string name="note_share_detail_activity_label_empty">Етикетът не може да бъде празен</string>
+    <string name="note_share_detail_activity_link_name">Име на Връзка</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Моля, изберете поне едно право за споделяне.</string>
+    <string name="note_share_detail_activity_send_share">Изпращане на Споделяне</string>
+    <string name="note_share_detail_activity_set_note">Задаване на Бележка</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Трябва да въведете парола</string>
+    <string name="note_share_detail_activity_share_send_note">Бележка за получателя</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Скрий свалянето</string>
+    <string name="oneHour">1 час</string>
+    <string name="online">На линия /онлайн/</string>
+    <string name="online_status">Състояние</string>
+    <string name="pin_to_homescreen">Фиксиране към началния екран</string>
+    <string name="pref_value_font_normal">Нормално</string>
+    <string name="pref_value_lock">Password protection</string>
+    <string name="pref_value_wifi_and_mobile">Синхронизиране на Wi-Fi и мобилни данни</string>
+    <string name="progress_import">Импортиране на бележка%1$d от %2$d...</string>
+    <string name="progress_import_indeterminate">Импортиране на бележки...</string>
+    <string name="public_share_name">Ново име</string>
+    <string name="remote">(отдалечен)</string>
+    <string name="remove_account">Премахване %1$s</string>
+    <string name="search_in_all">Търсене във всички бележки</string>
+    <string name="search_in_category">Търсене в %1$s</string>
+    <string name="set_online_status">Състояние</string>
+    <string name="settings_background_sync">Фонова синхронизация</string>
+    <string name="settings_file_suffix">Разширение на файл</string>
+    <string name="settings_file_suffix_description">Разширение на файл за нови бележки във вашия Nextcloud</string>
+    <string name="settings_file_suffix_success">Суфикс на нов файл: %1$s</string>
+    <string name="settings_font_size">Размер на шрифта</string>
+    <string name="settings_font_title">Monospace/Монопространствен/ шрифт</string>
+    <string name="settings_gridview">Решетъчен изглед</string>
+    <string name="settings_keep_screen_on">Дръжте екрана включен</string>
+    <string name="settings_keep_screen_on_summary">Когато преглеждате или редактирате бележка</string>
+    <string name="settings_lock">Заключване на приложения (бета)</string>
+    <string name="settings_lock_summary">Удостоверяване/идентификационни данни/ на устройството</string>
+    <string name="settings_note_mode">Режим на показване на бележки</string>
+    <string name="settings_note_mode_new">Поведение при отваряне на бележките</string>
+    <string name="settings_notes_path">Задаване на папка</string>
+    <string name="settings_notes_path_description">Папка за съхраняване на вашите бележки във вашия Nextcloud</string>
+    <string name="settings_notes_path_success">Папка с нови бележки: %1$s</string>
+    <string name="settings_prevent_screen_capture">Предотвратява заснемането на екрана</string>
+    <string name="settings_theme_title">Тема</string>
+    <string name="settings_wifi_only">Синхронизиране само на Wi-Fi</string>
+    <string name="share">Споделяне</string>
+    <string name="share_dialog_title">Споделяне</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_expiration_date_label">Изтича %1$s</string>
+    <string name="share_file">Споделяне на %1$s</string>
+    <string name="share_group_clarification">%1$s (група)</string>
+    <string name="share_internal_link">Сподели вътрешна връзка</string>
+    <string name="share_internal_link_to_file_text">Вътрешната връзка за споделяне работи само за потребители, които имат достъп до този файл</string>
+    <string name="share_internal_link_to_folder_text">Вътрешната връзка за споделяне работи само за потребители, които имат достъп до тази папка</string>
+    <string name="share_known_remote_on_clarification">на %1$s</string>
+    <string name="share_link">Връзка за споделяне</string>
+    <string name="share_link_password_title">Въвеждане на парола</string>
+    <string name="share_link_with_label">Споделяне на линк (%1$s)</string>
+    <string name="share_no_expiration_date_label">Срок на валидност</string>
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Въведи опционална парола</string>
+    <string name="share_password_dialog_fragment_skip">Пропусни</string>
+    <string name="share_password_title">Защитена с парола</string>
+    <string name="share_permission_can_edit">Може да се редактира</string>
+    <string name="share_permission_file_drop">Пускане/Преместване/ на файл</string>
+    <string name="share_permission_secure_file_drop">Защитено пускане на файлове</string>
+    <string name="share_permission_view_only">Само изглед</string>
+    <string name="share_permissions">Права за споделяне</string>
+    <string name="share_remote_clarification">%1$s (отдалечен)</string>
+    <string name="share_room_clarification">%1$s (разговор)</string>
+    <string name="share_send_new_email">Изпращане на нов имейл</string>
+    <string name="share_settings">Настройки</string>
+    <string name="share_via_link_section_title">Връзка за споделяне</string>
+    <string name="share_via_link_send_link_label">Изпратете връзката</string>
+    <string name="share_via_link_unset_password">Да не се задава</string>
+    <string name="share_with_title">Споделете чрез ...</string>
+    <string name="shared_text_empty">Споделеният текст беше празен</string>
+    <string name="shortcut_create_long">Създай нова бележка</string>
+    <string name="simple_about">Относно</string>
+    <string name="simple_backup">Архивиране</string>
+    <string name="simple_cancel">Отказ</string>
+    <string name="simple_checkbox">Отметка</string>
+    <string name="simple_close">Затваряне</string>
+    <string name="simple_copy">Копиране</string>
+    <string name="simple_edit">Променяне</string>
+    <string name="simple_error">Грешка</string>
+    <string name="simple_exception">Изключение</string>
+    <string name="simple_link">Връзка</string>
+    <string name="simple_more">Още</string>
+    <string name="simple_move">Преместване</string>
+    <string name="simple_next">Следващ</string>
+    <string name="simple_other">Друг</string>
+    <string name="simple_prev">Предишен </string>
+    <string name="simple_remove">Премахване</string>
+    <string name="simple_security">Сигурност</string>
+    <string name="simple_switch">Превключване</string>
+    <string name="simple_synchronization">Синхронизиране</string>
+    <string name="sort_alphabetically">Сортиране по азбучен ред</string>
+    <string name="sort_last_modified">Сортиране по дата на промяна</string>
+    <string name="status_message">Съобщение за състоянито</string>
+    <string name="switch_to_plain_editing">Превключване към обикновено редактиране</string>
+    <string name="thirtyMinutes">30 минути</string>
+    <string name="today">Днес</string>
+    <string name="unlock_notes">Отключване на бележки</string>
+    <string name="username">Потребител</string>
+    <string name="welcome_text">Добре дошли на%1$s</string>
+    <string name="whats_your_status">Какво е вашето състояние?</string>
+    <string name="widget_entry_fav_contentDescription">Иконата със звезда се използва за обозначаване на елемент като любим</string>
+    <string name="widget_not_logged_in">Моля, влезте в Notes преди да използвате този изпълним модул</string>
+    <string name="widget_note_list_placeholder">Няма бележки</string>
+    <string name="widget_note_list_title">Списък с бележки</string>
+    <string name="widget_single_note_placeholder_tv">Бележката не е открита</string>
+    <string name="widget_single_note_title">Единична бележка</string>
+    <string name="write_email">Изпращане на имейл</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Трябва да сте свързани с интернет, за да добавите профил.</string>
     <plurals name="ab_selected">
         <item quantity="one">%d избранa</item>
         <item quantity="other">%d избрани</item>
@@ -301,117 +347,8 @@
         <item quantity="one">Споделяне на съдържание от %1$d бележки</item>
         <item quantity="other">Споделяне на съдържание от %1$d бележки</item>
     </plurals>
-
-    <string name="formatting_help_divider" translateable="false">---</string>
-    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
-    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
-    <string name="formatting_help_codefence" translateable="false">```</string>
-    <string name="formatting_help_codefence_outer" translateable="false">````</string>
-    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
-    <string name="formatting_help_cbf_title">Форматиране, базирано на контекст</string>
-    <string name="formatting_help_cbf_body_1">Основна цел на дизайна на приложението Notes е да предостави инструмент, който да не ви разсейва. Въпреки че ще можете да форматирате текстовете си с Markdown. За различни от посочените по -долу примери можете да използвате преки пътища, за да може да форматирате бележките си, без да въвеждате кодовете по -долу.</string>
-    <string name="formatting_help_cbf_body_2">Просто изберете диапазон с текст или чукнете с курсора на която и да е позиция и ще получите изскачащо меню, което съдържа до записите по подразбиране %1$s, %2$s, %3$s записи като %4$s или %5$s.</string>
-
-    <string name="formatting_help_text_title">Текст</string>
-    <string name="formatting_help_text_body">Много е лесно да направите няколко думи %1$sbold %1$s и други думи %2$sitalic%2$s с Markdown. Можете да%3$sstrike/зачеркване/ %3$s някои думи чрез и дори [връзка към Nextcloud] (https://nextcloud.com).</string>
-
-    <string name="formatting_help_lists_title">Списъци</string>
-    <string name="formatting_help_lists_body_1">Понякога искате номерирани списъци:</string>
-    <string name="formatting_help_lists_body_2">Едно</string>
-    <string name="formatting_help_lists_body_3">Две</string>
-    <string name="formatting_help_lists_body_4">Три</string>
-    <string name="formatting_help_lists_body_5">Понякога искате точки с водещи символи:</string>
-    <string name="formatting_help_lists_body_6">Започване на реда с тире</string>
-    <string name="formatting_help_lists_body_7">И ако имате подточки, поставете два интервала пред тирето или звездата:</string>
-    <string name="formatting_help_lists_body_8">Като това</string>
-    <string name="formatting_help_lists_body_9">И това</string>
-
-    <string name="formatting_help_checkboxes_title">Квадратчета за отметка</string>
-    <string name="formatting_help_checkboxes_body_1">За създаване на квадратче за отметка, използвайте списък, последван от скоби</string>
-    <string name="formatting_help_checkboxes_body_2">Елемент 1</string>
-    <string name="formatting_help_checkboxes_body_3">Елемент 2</string>
-
-    <string name="formatting_help_structured_documents_title">Структурирани документи</string>
-    <string name="formatting_help_structured_documents_body_1">Понякога е полезно да имате различни нива на заглавки за да структурирате документите си. Започнете редовете с %1$s, за да създадете заглавия. Умножаването %2$s им в реда означава по -малки размери на заглавията.</string>
-    <string name="formatting_help_structured_documents_body_2">Това е заглавие от трето ниво</string>
-    <string name="formatting_help_structured_documents_body_3">Можете да използвате от едно %1$s чак до %2$s шест за различни размери на заглавията.</string>
-    <string name="formatting_help_structured_documents_body_4">Ако искате да цитирате някого, използвайте знака %1$s преди реда:</string>
-    <string name="formatting_help_structured_documents_body_5">Въображението е по-важно от знанието. Знанията са ограничени. Въображението обгражда света.</string>
-    <string name="formatting_help_structured_documents_body_6">- Алберт Айнщайн</string>
-
-    <string name="formatting_help_code_title">Код</string>
-    <string name="formatting_help_code_body_1">Има много различни начини за оформление на код с Markdown. Ако имате вградени кодови блокове, заградете ги в скоби:</string>
-    <string name="formatting_help_code_body_2">Markdown също поддържа нещо, наречено кодово ограждане, което позволява множество редове без отстъп:</string>
-    <string name="formatting_help_code_body_3">И ако искате да използвате подчертаване на синтаксиса, включете езика:</string>
-
-    <string name="formatting_help_tables_title">Таблици</string>
-    <!-- Column header of a sample table -->
-    <string name="formatting_help_tables_column">Колона %1d</string>
-    <!-- Table cell value of a sample table -->
-    <string name="formatting_help_tables_value">Стойност%1d</string>
-
-    <string name="formatting_help_images_body_1">Връзките трябва да бъдат или пълни URL адреси, започващи с протокол и домейн, или абсолютни пътища, започващи с %1$sзнак.</string>
-    <string name="formatting_help_images_body_2">За да съответствате на Markdown формата, моля, използвайте превключващи знаци в URL адреса на изображението. Това означава например да замените интервалите с%1$s в URL адреса.</string>
-    <string name="formatting_help_images_title">Изображения</string>
-    <string name="formatting_help_images_alt">Луксозно изображение</string>
-
-    <string name="simple_other">Друг</string>
-    <string name="sort_last_modified">Сортиране по дата на промяна</string>
-    <string name="sort_alphabetically">Сортиране по азбучен ред</string>
-    <string name="error_action_open_battery_settings">Настройки на батерията</string>
-    <string name="error_action_open_deck_info">Отворяне на информация за приложението</string>
-    <string name="error_action_open_network">Настройки на мрежата</string>
-    <string name="error_action_update_files_app">Обновяване</string>
-    <string name="no_account_configured_yet">Все още няма конфигуриран профил</string>
-    <string name="no_other_accounts">Все още не сте конфигурирали други профили.</string>
-    <string name="choose_account">Избор на профил</string>
-    <string name="context_based_formatting"> Изскачащ прозорец за форматиране, базирано на контекст</string>
     <plurals name="remove_account_message">
         <item quantity="one">Премахването на профил %1$s ще изтрие и невъзстановимите едно несинхронизирани промени.</item>
         <item quantity="other">Премахването на профил %1$sще изтрие и невъзстановимите%2$d несинхронизирани промени.</item>
     </plurals>
-    <string name="remove_account">Премахване %1$s</string>
-
-    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Трябва да сте свързани с интернет, за да добавите профил.</string>
-    <string name="settings_notes_path">Задаване на папка</string>
-
-    <string name="simple_next">Следващ</string>
-    <string name="simple_prev">Предишен </string>
-    <string name="simple_backup">Архивиране</string>
-    <string name="backup">Открихме непоправимо състояние на приложението. Моля, архивирайте несинхронизираните си промени и изчистете хранилището на приложението Бележки.</string>
-    <string name="settings_notes_path_description">Папка за съхраняване на вашите бележки във вашия Nextcloud</string>
-    <string-array name="settings_file_suffixes">
-        <item translatable="false">.txt</item>
-        <item translatable="false">.md</item>
-    </string-array>
-    <string name="settings_notes_path_success">Папка с нови бележки: %1$s</string>
-    <string name="settings_file_suffix">Разширение на файл</string>
-    <string name="settings_file_suffix_description">Разширение на файл за нови бележки във вашия Nextcloud</string>
-    <string name="settings_file_suffix_success">Суфикс на нов файл: %1$s</string>
-    <string name="http_status_code">HTTP код на състоянието: %1$d</string>
-    <string name="progress_import_indeterminate">Импортиране на бележки...</string>
-    <string name="progress_import">Импортиране на бележка%1$d от %2$d...</string>
-    <string name="account_imported">Профилът е импортиран.</string>
-    <string name="direct_editing_error">Грешка при зареждане на богато редактиране</string>
-    <string name="switch_to_plain_editing">Превключване към обикновено редактиране</string>
-    <string name="action_back">Назад</string>
-    <string name="set_online_status">Състояние</string>
-    <string name="status_message">Съобщение за състоянито</string>
-    <string name="whats_your_status">Какво е вашето състояние?</string>
-    <string name="clear_status_after">Изчистване на състоянието след</string>
-    <string name="clear">Изчистване</string>
-    <string name="dontClear">Не изчиствай</string>
-    <string name="today">Днес</string>
-    <string name="thirtyMinutes">30 минути</string>
-    <string name="oneHour">1 час</string>
-    <string name="fourHours">4 чàса</string>
-    <string name="file_list_seconds_ago">преди секунди</string>
-    <string name="online_status">Състояние</string>
-    <string name="online">На линия /онлайн/</string>
-    <string name="dnd">Не безпокой</string>
-    <string name="away">Винаги</string>
-    <string name="busy">Зает</string>
-    <string name="ecosystem_apps_display_files">Файлове</string>
-    <string name="ecosystem_apps_display_talk">Talk</string>
-    <string name="ecosystem_apps_display_more">Повече </string>
 </resources>

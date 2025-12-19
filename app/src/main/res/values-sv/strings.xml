@@ -1,316 +1,367 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Nextcloud Notes - Android Client
-  ~
-  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
-  ~ SPDX-License-Identifier: GPL-3.0-or-later
--->
-<resources>
-    <string name="app_name">Anteckningar</string>
-    <string name="app_name_long">Nextcloud anteckningar</string>
-    <string name="label_all_notes">Alla anteckningar</string>
-    <string name="label_favorites">Favoriter</string>
-    <string name="action_create">Ny anteckning</string>
-    <string name="welcome_text">Välkommen till %1$s</string>
-    <string name="action_settings">Inställningar</string>
-    <string name="action_trashbin">Borttagna anteckningar</string>
-    <string name="action_search">Sök</string>
-    <string name="action_sorting_method">Sorteringsmetod</string>
-    <string name="simple_cancel">Avbryt</string>
-    <string name="simple_switch">Växla</string>
-    <string name="simple_edit">Redigera</string>
-    <string name="simple_remove">Ta bort</string>
-    <string name="action_edit_save">Spara</string>
-    <string name="simple_about">Om</string>
-    <string name="simple_link">Länk</string>
-    <string name="action_note_deleted">Tog bort %1$s</string>
-    <string name="action_note_restored">Återställde %1$s</string>
-    <string name="action_undo">Gör om</string>
-    <string name="action_uncategorized">Okategoriserade</string>
-    <string name="menu_delete">Ta bort</string>
-    <string name="menu_change_category">Kategori</string>
-    <string name="menu_favorite">Favorit</string>
-    <string name="menu_preview">Förhandsvisning</string>
-    <string name="menu_share">Dela</string>
-    <string name="common_loading">Laddar...</string>
-
-
-    <string name="search_in_category">Sök i %1$s</string>
-    <string name="search_in_all">Sök alla anteckningar</string>
-
-    <string name="change_category_title">Välj en kategori</string>
-
-    <string name="note_share_activity_shared_with_you">Delad med dig av %1$s</string>
-    <string name="note_share_activity_search_text">Namn, federerat moln-ID eller e-postadress...</string>
-    <string name="note_share_activity_share_link">Delningslänk</string>
-    <string name="note_share_activity_resharing_not_allowed">Policy eller behörigheter förhindrar vidaredelning</string>
-    <string name="note_share_activity_could_not_retrieve_url">Kunde inte hämta URL</string>
-    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" har delats med dig</string>
-    <string name="note_share_activity_contact_no_permission">Rättighet till kontakt krävs.</string>
-    <string name="note_share_activity_you_are_not_allowed_to_share">Du har inte behörighet att skapa en publik delning.</string>
-
-    <string name="note_share_created">Delningen skapad</string>
-    <string name="note_share_activity_cannot_created">Du har inte behörighet att skapa en delning.</string>
-
-
-    <!-- NoteShareDetailActivity -->
-    <string name="note_share_detail_activity_advanced_settings">Avancerade inställningar</string>
-    <string name="note_share_detail_activity_share_via_link_hide_download">Dölj hämtning</string>
-    <string name="note_share_detail_activity_share_send_note">Notering till mottagare</string>
-    <string name="note_share_detail_activity_hint_note">Anteckning</string>
-    <string name="note_share_detail_activity_common_next">Nästa</string>
-    <string name="note_share_detail_activity_share_copy_link">Dela och kopiera länk</string>
-    <string name="note_share_detail_activity_common_confirm">Bekräfta</string>
-    <string name="note_share_detail_activity_set_note">Ange anteckning</string>
-    <string name="note_share_detail_activity_send_share">Skicka delning</string>
-    <string name="note_share_detail_activity_hint_name">Namn</string>
-    <string name="note_share_detail_activity_link_name">Länknamn</string>
-    <string name="note_share_detail_activity_share_link_empty_password">Du måste ange ett lösenord</string>
-    <string name="note_share_detail_activity_hint_password">Lösenord</string>
-    <string name="note_share_detail_activity_no_share_permission_selected">Välj minst en behörighet att dela.</string>
-    <string name="note_share_detail_activity_label_empty">Etiketten kan inte vara tom</string>
-    <string name="note_share_detail_activity_cancel">Avbryt</string>
-    <string name="note_share_detail_activity_create_share_error">Kunde inte skapa en delning</string>
-
-    <!-- SharePasswordDialogFragment -->
-    <string name="share_password_dialog_fragment_share_link_optional_password_title">Ange ett valfritt lösenord</string>
-    <string name="share_password_dialog_fragment_skip">Hoppa över</string>
-
-    <string name="share_link_password_title">Ange ett lösenord</string>
-    <string name="common_ok">OK</string>
-    <string name="common_delete">Radera</string>
-    <string name="write_email">Skicka e-post</string>
-    <string name="no_browser_available">Ingen app tillgänglig för att hantera länkar</string>
-    <string name="no_email_app_available">Ingen tillgänglig applikation kan hantera e-postadresser</string>
-    <string name="no_actions">Inga tillgängliga åtgärder för användaren</string>
-
-    <string name="failed_the_remove_share">Kunde inte ta bort delning</string>
-    <string name="email_pick_failed">Det gick inte att välja e-postadress.</string>
-    <string name="failed_update_ui">Misslyckades med att uppdatera UI</string>
-    <string name="file_detail_sharing_fragment_no_contact_app_message">Ingen app tillgänglig för att välja kontakter</string>
-    <string name="activity_chooser_title">Skicka länk till…</string>
-
-    <string name="activity_chooser_send_file_title">Skicka</string>
-    <string name="share_internal_link_to_folder_text">Intern länkdelning fungerar bara för användare med åtkomst till den här mappen</string>
-    <string name="share_internal_link_to_file_text">Intern länkdelning fungerar bara för användare med åtkomst till den här filen</string>
-    <string name="share_internal_link">Dela intern länk</string>
-    <string name="delete_link">Ta bort länk</string>
-    <string name="share_settings">Inställningar</string>
-    <string name="share_send_new_email">Skicka nytt mail</string>
-    <string name="share_dialog_title">Delning</string>
-    <string name="share_file">Dela %1$s</string>
-    <string name="share_expiration_date_label">Gick ut %1$s</string>
-    <string name="share_expiration_date_format">%1$s</string>
-    <string name="share_no_expiration_date_label">Välj utgångsdatum</string>
-    <string name="share_via_link_section_title">Delningslänk</string>
-    <string name="share_via_link_send_link_label">Skicka länk</string>
-    <string name="share_password_title">Lösenordsskyddad</string>
-    <string name="share_no_password_title">Ange lösenord</string>
-    <string name="share_with_title">Delad med…</string>
-    <string name="share_via_link_unset_password">Inaktivera</string>
-    <string name="add_another_public_share_link">Lägg till en annan länk</string>
-    <string name="add_new_public_share">Lägg till en ny publik delad länk</string>
-    <string name="public_share_name">Nytt namn</string>
-    <string name="share_link_with_label">Dela länk (%1$s)</string>
-    <string name="share_link">Delningslänk</string>
-    <string name="allow_resharing">Tillåt vidaredelning</string>
-    <string name="link_share_view_only">Skrivskyddat läge</string>
-    <string name="link_share_editing">Ändrar</string>
-    <string name="link_share_allow_upload_and_editing">Tillåt uppladdning och redigering</string>
-    <string name="link_share_file_drop">Filinkast (endast uppladdning)</string>
-    <string name="could_not_retrieve_shares">Kunde inte hämta delade mappar</string>
-    <string name="share_permission_view_only">Skrivskyddat läge</string>
-    <string name="share_permission_can_edit">Kan ändra</string>
-    <string name="share_permission_file_drop">Filinkast</string>
-    <string name="share_permission_secure_file_drop">Säkert filinkast</string>
-    <string name="share_permissions">Dela behörigheter</string>
-    <plurals name="share_download_limit_description">
-        <item quantity="one">%1$d återstående nedladdning</item>
-        <item quantity="other">%1$d återstående nedladdningar</item>
-    </plurals>
-    <string name="username">Användarnamn</string>
-    <string name="share_group_clarification">%1$s (grupp)</string>
-    <string name="share_remote_clarification">%1$s (extern)</string>
-    <string name="share_room_clarification">%1$s (konversation)</string>
-    <string name="share_known_remote_on_clarification">på %1$s</string>
-    <string name="remote">(avlägsen)</string>
-
-    <string name="copy_link">Kopiera länk</string>
-    <string name="share">Dela</string>
-    <string name="clipboard_text_copied">Länken har kopierats</string>
-    <string name="clipboard_no_text_to_copy">Mottog ingen text att kopiera</string>
-    <string name="clipboard_unexpected_error">Oväntat fel vid kopiering till urklipp</string>
-    <string name="clipboard_label">Text kopierad från %1$s</string>
-
-    <string name="listview_updated_today">Idag</string>
-    <string name="listview_updated_yesterday">Igår</string>
-    <string name="listview_updated_this_week">Denna vecka</string>
-    <string name="listview_updated_last_week">Förra veckan</string>
-    <string name="listview_updated_this_month">Denna månad</string>
-    <string name="listview_updated_last_month">Förra månaden</string>
-    <string name="listview_no_content">Inget innehåll</string>
-
-    <string name="settings_note_mode">Visningsläge för anteckningar</string>
-    <string name="settings_note_mode_new">Notes startfunktion</string>
-    <string name="settings_theme_title">Tema</string>
-    <string name="settings_font_title">Monospace font</string>
-    <string name="settings_font_size">Teckenstorlek</string>
-    <string name="settings_wifi_only">Synkronisera endast med Wi-Fi</string>
-    <string name="settings_lock">Applåsning (Beta)</string>
-    <string name="settings_lock_summary">Enhetsuppgifter</string>
-    <string name="settings_background_sync">Bakgrundssynkronisering</string>
-    <string name="settings_prevent_screen_capture">Hindra skärmklipp</string>
-    <string name="settings_show_ecosystem_apps">Visa appväxlare</string>
-    <string name="settings_show_ecosystem_apps_summary">Nextcloud-appförslag i navigeringsrubriken</string>
-    <string name="settings_gridview">Rutnätsvy</string>
-    <string name="settings_enable_direct_edit">Direktredigering</string>
-    <string name="settings_enable_direct_edit_summary">När inaktiverad döljs den avancerade redigeraren.</string>
-    <string name="settings_keep_screen_on">Håll skärmen igång</string>
-    <string name="settings_keep_screen_on_summary">När du visar eller redigerar en anteckning</string>
-
-    <string name="error_sync">Synkronisering misslyckades: %1$s</string>
-    <string name="error_synchronization">Synkroniseringen misslyckades</string>
-    <string name="error_no_network">Ingen nätverksanslutning</string>
-    <string name="error_maintenance_mode">Servern står i underhållsläge</string>
-    <string name="error_unknown">Ett okänt fel uppstod.</string>
-
-    <string name="about_version_title">Version</string>
-    <string name="about_version">Du använder %1$s för närvarande</string>
-    <string name="about_maintainer_title">Underhållare</string>
-    <string name="about_developers_title">Utvecklare</string>
-    <string name="about_developers_original_author">Ursprungsskribent</string>
-    <string name="about_translators_title">Översättare</string>
-    <string name="about_translators_transifex">Nextcloud community på %1$s</string>
-    <string name="about_testers_title">Testare</string>
-    <string name="about_source_title">Källkod</string>
-    <string name="about_source">Detta projekt finns på GitHub: %1$s</string>
-    <string name="about_issues_title">Problem</string>
-    <string name="about_issues">Du kan rapportera fel, förbättringsförslag och funktionsönskningar på GitHub- problemhanteraren: %1$s</string>
-    <string name="about_translate_title">Översätt</string>
-    <string name="about_translate">Gå med i Nextcloud-gruppen på Transifex och hjälp oss översätta denna app: %1$s</string>
-    <string name="about_app_license_title">Applicens</string>
+  <resources>
     <string name="about_app_license">Denna app är licensierad under GNU GENERAL PUBLIC LICENSE v3+</string>
     <string name="about_app_license_button">Visa licens</string>
-    <string name="about_icons_disclaimer_title">Ikoner</string>
-    <string name="about_icons_disclaimer_app_icon">Se %1$sför originalikonen</string>
-    <string name="about_icons_disclaimer_mdi_icons">Alla ytterligare ikoner som används i appen är %1$s från Google Inc. och licensierade under Apache 2.0-licensen.</string>
-    <string name="about_icons_disclaimer_mdi">Ikoner i Material Design</string>
-    <string name="about_credits_tab_title">Upphovsmän</string>
+    <string name="about_app_license_title">Applicens</string>
     <string name="about_contribution_tab_title">Medverkan</string>
+    <string name="about_credits_tab_title">Upphovsmän</string>
+    <string name="about_developers_original_author">Ursprungsskribent</string>
+    <string name="about_developers_title">Utvecklare</string>
+    <string name="about_icons_disclaimer_app_icon">Se %1$sför originalikonen</string>
+    <string name="about_icons_disclaimer_mdi">Ikoner i Material Design</string>
+    <string name="about_icons_disclaimer_mdi_icons">Alla ytterligare ikoner som används i appen är %1$s från Google Inc. och licensierade under Apache 2.0-licensen.</string>
+    <string name="about_icons_disclaimer_title">Ikoner</string>
+    <string name="about_issues">Du kan rapportera fel, förbättringsförslag och funktionsönskningar på GitHub- problemhanteraren: %1$s</string>
+    <string name="about_issues_title">Problem</string>
     <string name="about_license_tab_title">Licens</string>
-
-    <string name="widget_note_list_title">Anteckningslista</string>
-    <string name="widget_note_list_placeholder">Inga anteckningar</string>
-    <string name="widget_single_note_title">Enstaka anteckning</string>
-    <string name="widget_single_note_placeholder_tv">Anteckning hittades inte</string>
-    <string name="widget_not_logged_in">Vänligen logga in i Anteckningar innan denna används</string>
-    <string name="widget_entry_fav_contentDescription">Stjärnan används för att markera ett objekt som favorit</string>
-
+    <string name="about_maintainer_title">Underhållare</string>
+    <string name="about_source">Detta projekt finns på GitHub: %1$s</string>
+    <string name="about_source_title">Källkod</string>
+    <string name="about_testers_title">Testare</string>
+    <string name="about_translate">Gå med i Nextcloud-gruppen på Transifex och hjälp oss översätta denna app: %1$s</string>
+    <string name="about_translate_title">Översätt</string>
+    <string name="about_translators_title">Översättare</string>
+    <string name="about_translators_transifex">Nextcloud community på %1$s</string>
+    <string name="about_version">Du använder %1$s för närvarande</string>
+    <string name="about_version_title">Version</string>
+    <string name="account_already_imported">Kontot har redan importerats</string>
+    <string name="account_imported">Konto importerat.</string>
+    <string name="account_switch_dialog_status_fetching_error_message">Kunde inte hämta status, försök igen.</string>
+    <string name="action_back">Tillbaka</string>
+    <string name="action_create">Ny anteckning</string>
+    <string name="action_edit_save">Spara</string>
+    <string name="action_formatting_help">Formatering</string>
+    <string name="action_note_deleted">Tog bort %1$s</string>
+    <string name="action_note_restored">Återställde %1$s</string>
+    <string name="action_search">Sök</string>
+    <string name="action_settings">Inställningar</string>
+    <string name="action_sorting_method">Sorteringsmetod</string>
+    <string name="action_trashbin">Borttagna anteckningar</string>
+    <string name="action_uncategorized">Okategoriserade</string>
+    <string name="action_undo">Gör om</string>
+    <string name="activity_chooser_send_file_title">Skicka</string>
+    <string name="activity_chooser_title">Skicka länk till…</string>
     <string name="activity_select_single_note">Välj anteckning</string>
-
-    <string name="shortcut_create_long">Skapa en ny anteckning</string>
-
-    <string name="pref_value_font_normal">Normal</string>
-    <string name="pref_value_wifi_and_mobile">Synkronisera med Wi-Fi och mobildata</string>
-    <string name="pref_value_lock">Lösenordsskydd</string>
-
-    <string name="simple_error">Fel</string>
-    <string name="simple_close">Stäng</string>
-    <string name="simple_copy">Kopiera</string>
-    <string name="simple_exception">Undantag</string>
-    <string name="pin_to_homescreen">Fäst på hemskärmen</string>
-    <string name="note_has_been_deleted">Denna anteckning har raderats</string>
     <string name="add_account">Lägg till konto</string>
-
-    <string name="category_music">Musik</string>
-    <string name="category_movies">Filmer</string>
-    <string name="category_movie">Film</string>
-    <string name="category_work">Arbete</string>
-    <string name="category_todo">Uppgifter</string>
-    <string name="category_todos">Uppgifter</string>
+    <string name="add_another_public_share_link">Lägg till en annan länk</string>
+    <string name="add_category">Lägg till %1$s</string>
+    <string name="add_new_public_share">Lägg till en ny publik delad länk</string>
+    <string name="added_content">La till \"%1$s\"</string>
+    <string name="allow_resharing">Tillåt vidaredelning</string>
+    <string name="app_name">Anteckningar</string>
+    <string name="app_name_long">Nextcloud anteckningar</string>
+    <string name="appear_offline">Visa som frånkopplad</string>
+    <string name="appearance_and_behavior">Utseende och beteende</string>
+    <string name="append_to_note">Lägg till i anteckning</string>
+    <string name="away">Borta</string>
+    <string name="backup">Vi upptäckte ett oåterkalleligt tillstånd i appen. Säkerhetskopiera dina osynkroniserade ändringar och rensa lagringen av Antecknings-appen.</string>
+    <string name="busy">Upptagen</string>
+    <string name="category_bake">Bakat</string>
     <string name="category_checklists">Checklistor</string>
-    <string name="category_tasks">Uppgifter</string>
+    <string name="category_credentials">Uppgifter</string>
+    <string name="category_food">Mat</string>
+    <string name="category_game">Spel</string>
+    <string name="category_games">Spel</string>
+    <string name="category_gift">Gåva</string>
+    <string name="category_gifts">Gåvor</string>
+    <string name="category_key">Nyckel</string>
+    <string name="category_keys">Nycklar</string>
+    <string name="category_movie">Film</string>
+    <string name="category_movies">Filmer</string>
+    <string name="category_music">Musik</string>
+    <string name="category_password">Lösenord</string>
+    <string name="category_passwords">Lösenord</string>
+    <string name="category_play">Spela</string>
+    <string name="category_present">Present</string>
+    <string name="category_presents">Presenter</string>
+    <string name="category_readonly">Läsbehörighet</string>
     <string name="category_recipe">Recept</string>
     <string name="category_recipes">Recept</string>
     <string name="category_restaurant">Restaurang</string>
     <string name="category_restaurants">Restauranger</string>
-    <string name="category_food">Mat</string>
-    <string name="category_bake">Bakat</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_key">Nyckel</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_keys">Nycklar</string>
-    <string name="category_password">Lösenord</string>
-    <string name="category_passwords">Lösenord</string>
-    <string name="category_credentials">Uppgifter</string>
-    <string name="category_game">Spel</string>
-    <string name="category_games">Spel</string>
-    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
-    <string name="category_play">Spela</string>
-    <string name="category_gift">Gåva</string>
-    <string name="category_gifts">Gåvor</string>
-    <!-- Like a gift -->
-    <string name="category_present">Present</string>
-    <!-- Like a gift -->
-    <string name="category_presents">Presenter</string>
-
-    <string name="account_already_imported">Kontot har redan importerats</string>
-    <string name="no_notes_yet">Inga anteckningar än</string>
-    <string name="no_notes_yet_description">Tryck på + knappen för att skapa en ny anteckning</string>
-    <string name="simple_more">Mer</string>
-    <string name="simple_move">Flytta</string>
-    <string name="category_readonly">Läsbehörighet</string>
-    <string name="no_category">Ingen kategori</string>
-    <string name="add_category">Lägg till %1$s</string>
-    <string name="simple_checkbox">Kryssruta</string>
-    <string name="unlock_notes">Lås upp anteckningar</string>
-    <string name="error_dialog_title">Å nej - Vad händer nu?🙁</string>
-    <string name="error_dialog_tip_token_mismatch_retry">Försök med att Tvinga appen att stänga och återstarta. En felaktig anslutning till Nextcloud-appen kan ha förekommit.</string>
-    <string name="error_dialog_tip_token_mismatch_clear_storage">Om problemet kvarstår, prova med att rensa lagringen på både appen Nextcloud och Nextcloud Notes.</string>
-    <string name="error_dialog_tip_clear_storage">Du kan tömma lagringsminnet genom att öppna appinfo och välja Lagring  → Tömma minne. ⚠️ Varning! Åtgärden tar bort anteckning som ännu inte synkroniserats.</string>
-    <string name="error_dialog_tip_files_outdated">Din Nextcloud-app verkar utdaterad. Besök Play Butiken eller F-Droid för att hämta senaste versionen</string>
-    <string name="error_dialog_tip_files_force_stop">Något verkar vara fel med din Nextcloud-app. Försök att tvångsavsluta både Nextcloud- och Nextcloud Notes-apparna.</string>
-    <string name="error_dialog_tip_files_delete_storage">Om tvångsavslutning ej hjälper kan du försöka rensa datan på båda appar.</string>
-    <string name="error_dialog_timeout_instance">Din server svarade inte inom den angivna tiden. Kontrollera att den fungerar normalt.</string>
-    <string name="error_dialog_timeout_toggle">Kontrollera din nätverkanslutning. Ibland kan det hjälpa att slå av och slå på mobildata Wi-Fi.</string>
+    <string name="category_tasks">Uppgifter</string>
+    <string name="category_todo">Uppgifter</string>
+    <string name="category_todos">Uppgifter</string>
+    <string name="category_work">Arbete</string>
+    <string name="change_category_title">Välj en kategori</string>
+    <string name="change_note_title">Ändra anteckningstitel</string>
+    <string name="choose_account">Välj konto</string>
+    <string name="clear">Rensa</string>
+    <string name="clear_status_after">Rensa status efter</string>
+    <string name="clipboard_label">Text kopierad från %1$s</string>
+    <string name="clipboard_no_text_to_copy">Mottog ingen text att kopiera</string>
+    <string name="clipboard_text_copied">Länken har kopierats</string>
+    <string name="clipboard_unexpected_error">Oväntat fel vid kopiering till urklipp</string>
+    <string name="common_delete">Radera</string>
+    <string name="common_loading">Laddar...</string>
+    <string name="common_ok">OK</string>
+    <string name="context_based_formatting">Kontextbaserad formaterings-popover</string>
+    <string name="copy_link">Kopiera länk</string>
+    <string name="could_not_retrieve_shares">Kunde inte hämta delade mappar</string>
+    <string name="delete_link">Ta bort länk</string>
+    <string name="direct_editing_error">Fel vid inläsning av utökad redigering</string>
+    <string name="dnd">Stör ej</string>
+    <string name="dontClear">Rensa inte</string>
+    <string name="ecosystem_apps_display_files">Filer</string>
+    <string name="ecosystem_apps_display_more">Mer</string>
+    <string name="ecosystem_apps_display_talk">Talk</string>
+    <string name="ecosystem_apps_more">Fler Nextcloud-appar</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="email_pick_failed">Det gick inte att välja e-postadress.</string>
+    <string name="error_action_open_battery_settings">Batteriinställningar</string>
+    <string name="error_action_open_deck_info">Öppna appinformation</string>
+    <string name="error_action_open_network">Nätverksinställningar</string>
+    <string name="error_action_update_files_app">Uppdatera</string>
+    <string name="error_dialog_check_maintenance">Kontrollera att underhållsläge inte är aktivt på Nextcloud-installation.</string>
     <string name="error_dialog_check_server">Inkorrekt svar från din server. Kontrollera att du har tillgång till dina anteckningar genom din webbläsare.</string>
     <string name="error_dialog_check_server_logs">Det finns problem med din Nextcloud-installation. Ta gärna en titt i serverns loggfiler. </string>
-    <string name="error_dialog_check_maintenance">Kontrollera att underhållsläge inte är aktivt på Nextcloud-installation.</string>
     <string name="error_dialog_insufficient_storage">Din Nextcloud-installation har slut på diskutrymme. Ta bort några filer för att kunna synkronisera ändringar till ditt moln.</string>
-    <string name="error_dialog_we_need_info">Vi behöver följande teknisk information för att kunna hjälpa dig:</string>
-    <string name="error_dialog_server_app_enabled">Se till att du har installerat och aktiverat Notes-appen på din server.</string>
-    <string name="error_dialog_redirect">Din server svarade med ett HTTP 302 statusmeddelande, vilket innebär att du inte har installerat Notes-appen på din server eller att något är felkonfigurerat. Detta kan orsakas av manuella ändringar i en .htaccess-fil eller av Nextcloud-appar som \"OID Client\".</string>
-    <string name="error_dialog_tip_disable_battery_optimizations">Stäng av alla batterioptimeringar för Nextcloud och Notes-appen.</string>
     <string name="error_dialog_min_version">Anteckningar Android-appen kräver att Nextcloud Android-appen är minst version 3.18.</string>
-    <string name="added_content">La till \"%1$s\"</string>
-    <string name="shared_text_empty">Den delade texten var tom</string>
-    <string name="append_to_note">Lägg till i anteckning</string>
-    <string name="change_note_title">Ändra anteckningstitel</string>
-    <string name="menu_edit_title">Redigera titel</string>
-    <string name="simple_security">Säkerhet</string>
-    <string name="appearance_and_behavior">Utseende och beteende</string>
-    <string name="simple_synchronization">Synkronisering</string>
+    <string name="error_dialog_redirect">Din server svarade med ett HTTP 302 statusmeddelande, vilket innebär att du inte har installerat Notes-appen på din server eller att något är felkonfigurerat. Detta kan orsakas av manuella ändringar i en .htaccess-fil eller av Nextcloud-appar som \"OID Client\".</string>
+    <string name="error_dialog_server_app_enabled">Se till att du har installerat och aktiverat Notes-appen på din server.</string>
+    <string name="error_dialog_timeout_instance">Din server svarade inte inom den angivna tiden. Kontrollera att den fungerar normalt.</string>
+    <string name="error_dialog_timeout_toggle">Kontrollera din nätverkanslutning. Ibland kan det hjälpa att slå av och slå på mobildata Wi-Fi.</string>
+    <string name="error_dialog_tip_clear_storage">Du kan tömma lagringsminnet genom att öppna appinfo och välja Lagring  → Tömma minne. ⚠️ Varning! Åtgärden tar bort anteckning som ännu inte synkroniserats.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Stäng av alla batterioptimeringar för Nextcloud och Notes-appen.</string>
+    <string name="error_dialog_tip_files_delete_storage">Om tvångsavslutning ej hjälper kan du försöka rensa datan på båda appar.</string>
+    <string name="error_dialog_tip_files_force_stop">Något verkar vara fel med din Nextcloud-app. Försök att tvångsavsluta både Nextcloud- och Nextcloud Notes-apparna.</string>
+    <string name="error_dialog_tip_files_outdated">Din Nextcloud-app verkar utdaterad. Besök Play Butiken eller F-Droid för att hämta senaste versionen</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Om problemet kvarstår, prova med att rensa lagringen på både appen Nextcloud och Nextcloud Notes.</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Försök med att Tvinga appen att stänga och återstarta. En felaktig anslutning till Nextcloud-appen kan ha förekommit.</string>
+    <string name="error_dialog_title">Å nej - Vad händer nu?🙁</string>
+    <string name="error_dialog_we_need_info">Vi behöver följande teknisk information för att kunna hjälpa dig:</string>
+    <string name="error_maintenance_mode">Servern står i underhållsläge</string>
+    <string name="error_no_network">Ingen nätverksanslutning</string>
+    <string name="error_setting_status_message">Fel uppstod vid skapande av statusmeddelande!</string>
+    <string name="error_sync">Synkronisering misslyckades: %1$s</string>
+    <string name="error_synchronization">Synkroniseringen misslyckades</string>
+    <string name="error_unknown">Ett okänt fel uppstod.</string>
+    <string name="failed_the_remove_share">Kunde inte ta bort delning</string>
+    <string name="failed_update_ui">Misslyckades med att uppdatera UI</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Ingen app tillgänglig för att välja kontakter</string>
+    <string name="file_list_seconds_ago">sekunder sedan</string>
+    <string name="formatting_help_cbf_body_1">Ett stort deignmål med Notes-appen är att tillahandahålla ett distraktionsfritt verktyg. Fast du kan formatera dina texter med Markdown. För de olika nedan nämnda exemplena kan du använda genvägar så att du kan formatera dina anteckningar utan att skriva in koderna nedan.</string>
+    <string name="formatting_help_cbf_body_2">Markera bara ett stycke text eller tryck på din markör vid valfri position och du kommer få en popup-meny som utöver standardposterna såsom %1$s, %2$s, %3$s även innehåller poster som %4$s eller %5$s.</string>
+    <string name="formatting_help_cbf_title">Innehållsbaserad formatering</string>
+    <string name="formatting_help_checkboxes_body_1">Använd en lista följt av hakparenteset för att skapa en kryssruta</string>
+    <string name="formatting_help_checkboxes_body_2">Punkt 1</string>
+    <string name="formatting_help_checkboxes_body_3">Punkt 2</string>
+    <string name="formatting_help_checkboxes_title">Bockrutefråga</string>
+    <string name="formatting_help_code_body_1">Det finns många olika sätt att utforma kod med Markdown. Om du har infällda kodblock, omge dem med backticks:</string>
+    <string name="formatting_help_code_body_2">Markdown stödjer också något som kallas för kodavgränsning, vilket tillåter flera rader utan indentering:</string>
+    <string name="formatting_help_code_body_3">Och om du vill använda syntaxmarkering kan du inkludera språket:</string>
+    <string name="formatting_help_code_title">Kod</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_images_alt">Snygg bild</string>
+    <string name="formatting_help_images_body_1">Länkar måste antingen vara kompletta webbadresser som börjar med ett protokoll och en domän eller absoluta sökvägar som börjar med ett %1$s tecken.</string>
+    <string name="formatting_help_images_body_2">För att överensstämma med Markdown-formatet, använd escape-tecken i bildens URL. Detta innebär till exempel att ersätta mellanslag med %1$s i URL:en..</string>
+    <string name="formatting_help_images_title">Bilder</string>
+    <string name="formatting_help_lists_body_1">Ibland vill du ha en numrerad lista:</string>
+    <string name="formatting_help_lists_body_2">En</string>
+    <string name="formatting_help_lists_body_3">Två</string>
+    <string name="formatting_help_lists_body_4">Tre</string>
+    <string name="formatting_help_lists_body_5">Ibland vill du punktlistor:</string>
+    <string name="formatting_help_lists_body_6">Börja en rad med ett tankesträck</string>
+    <string name="formatting_help_lists_body_7">Sätt två mellanslag framför tankesträcket eller stjärnan om du vill ha underpunkter:</string>
+    <string name="formatting_help_lists_body_8">Så här</string>
+    <string name="formatting_help_lists_body_9">Och så här</string>
+    <string name="formatting_help_lists_title">Listor</string>
+    <string name="formatting_help_structured_documents_body_1">Ibland är det användbart att ha olika nivåer på rubriker för att strukturera dina dokument. Inled raden med %1$s för att skapa rukbriker. Flera %2$s i rad innebär mindre rubrikstorlekar.</string>
+    <string name="formatting_help_structured_documents_body_2">Detta är en rubrik på tredje nivån</string>
+    <string name="formatting_help_structured_documents_body_3">Den kan använda en %1$s ända upp till %2$s sex för olika rubrikstorlekar</string>
+    <string name="formatting_help_structured_documents_body_4">Om du vill citera någon kan du använda %1$s-tecknet framför raden: </string>
+    <string name="formatting_help_structured_documents_body_5">Fantasi är viktigare än kunskap. Kunskap är begränsad. Fantasi omsluter världen.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+    <string name="formatting_help_structured_documents_title">Strukturerat dokument</string>
+    <string name="formatting_help_tables_column">Kolumn %1d</string>
+    <string name="formatting_help_tables_title">Tabeller</string>
+    <string name="formatting_help_tables_value">Värde %1d</string>
+    <string name="formatting_help_text_body">Med Markdown är det enkelt att sätta en del ord i %1$sfetstil%1$s och andra %2$skursiva%2$s. Du kan %3$söverstyka%3$s ord och även [länka till Nextcloud](https://nextcloud.com).</string>
+    <string name="formatting_help_text_title">Text</string>
+    <string name="fourHours">4 timmar</string>
+    <string name="http_status_code">HTTP statuskod: %1$d</string>
+    <string name="invisible">Osynlig</string>
+    <string name="label_all_notes">Alla anteckningar</string>
+    <string name="label_favorites">Favoriter</string>
+    <string name="link_share_allow_upload_and_editing">Tillåt uppladdning och redigering</string>
+    <string name="link_share_editing">Ändrar</string>
+    <string name="link_share_file_drop">Filinkast (endast uppladdning)</string>
+    <string name="link_share_view_only">Skrivskyddat läge</string>
+    <string name="listview_no_content">Inget innehåll</string>
+    <string name="listview_updated_last_month">Förra månaden</string>
+    <string name="listview_updated_last_week">Förra veckan</string>
+    <string name="listview_updated_this_month">Denna månad</string>
+    <string name="listview_updated_this_week">Denna vecka</string>
+    <string name="listview_updated_today">Idag</string>
+    <string name="listview_updated_yesterday">Igår</string>
     <string name="manage_accounts">Hantera konton</string>
-    <string name="action_formatting_help">Formatering</string>
-
-
+    <string name="menu_change_category">Kategori</string>
+    <string name="menu_delete">Ta bort</string>
+    <string name="menu_edit_title">Redigera titel</string>
+    <string name="menu_favorite">Favorit</string>
+    <string name="menu_preview">Förhandsvisning</string>
+    <string name="menu_share">Dela</string>
+    <string name="mute_all_notifications">Stäng av alla aviseringar</string>
+    <string name="no_account_configured_yet">Inget konto konfigurerat än</string>
+    <string name="no_actions">Inga tillgängliga åtgärder för användaren</string>
+    <string name="no_browser_available">Ingen app tillgänglig för att hantera länkar</string>
+    <string name="no_category">Ingen kategori</string>
+    <string name="no_email_app_available">Ingen tillgänglig applikation kan hantera e-postadresser</string>
+    <string name="no_notes_yet">Inga anteckningar än</string>
+    <string name="no_notes_yet_description">Tryck på + knappen för att skapa en ny anteckning</string>
+    <string name="no_other_accounts">Du har inte konfigurerat några andra konton än.</string>
     <string name="noteMode_plain_edit">Enkel redigeringsfunktion</string>
     <string name="noteMode_plain_preview">Enkel förhandsvisning</string>
-    <string name="noteMode_rich_edit">Rich redigeringsfunktion</string>
     <string name="noteMode_remember_last">Kom ihåg mitt sista val</string>
-
-    <string-array name="fontSize_entries">
-        <item>Liten</item>
-        <item>Medium</item>
-        <item>Stor</item>
-    </string-array>
-
-    <string-array name="darkmode_entries">
-        <item>Ljust</item>
-        <item>Mörkt</item>
-        <item>Systemstandard</item>
-    </string-array>
-
+    <string name="noteMode_rich_edit">Rich redigeringsfunktion</string>
+    <string name="note_has_been_deleted">Denna anteckning har raderats</string>
+    <string name="note_share_activity_cannot_created">Du har inte behörighet att skapa en delning.</string>
+    <string name="note_share_activity_contact_no_permission">Rättighet till kontakt krävs.</string>
+    <string name="note_share_activity_could_not_retrieve_url">Kunde inte hämta URL</string>
+    <string name="note_share_activity_resharing_not_allowed">Policy eller behörigheter förhindrar vidaredelning</string>
+    <string name="note_share_activity_search_text">Namn, federerat moln-ID eller e-postadress...</string>
+    <string name="note_share_activity_share_link">Delningslänk</string>
+    <string name="note_share_activity_shared_with_you">Delad med dig av %1$s</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" har delats med dig</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">Du har inte behörighet att skapa en publik delning.</string>
+    <string name="note_share_created">Delningen skapad</string>
+    <string name="note_share_detail_activity_advanced_settings">Avancerade inställningar</string>
+    <string name="note_share_detail_activity_cancel">Avbryt</string>
+    <string name="note_share_detail_activity_common_confirm">Bekräfta</string>
+    <string name="note_share_detail_activity_common_next">Nästa</string>
+    <string name="note_share_detail_activity_create_share_error">Kunde inte skapa en delning</string>
+    <string name="note_share_detail_activity_hint_name">Namn</string>
+    <string name="note_share_detail_activity_hint_note">Anteckning</string>
+    <string name="note_share_detail_activity_hint_password">Lösenord</string>
+    <string name="note_share_detail_activity_label_empty">Etiketten kan inte vara tom</string>
+    <string name="note_share_detail_activity_link_name">Länknamn</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Välj minst en behörighet att dela.</string>
+    <string name="note_share_detail_activity_send_share">Skicka delning</string>
+    <string name="note_share_detail_activity_set_note">Ange anteckning</string>
+    <string name="note_share_detail_activity_share_copy_link">Dela och kopiera länk</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Du måste ange ett lösenord</string>
+    <string name="note_share_detail_activity_share_send_note">Notering till mottagare</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Dölj hämtning</string>
+    <string name="oneHour">1 timme</string>
+    <string name="online">Online</string>
+    <string name="online_status">Online-status</string>
+    <string name="pin_to_homescreen">Fäst på hemskärmen</string>
+    <string name="pref_value_font_normal">Normal</string>
+    <string name="pref_value_lock">Lösenordsskydd</string>
+    <string name="pref_value_wifi_and_mobile">Synkronisera med Wi-Fi och mobildata</string>
+    <string name="progress_import">Importerar anteckning %1$d av %2$d... </string>
+    <string name="progress_import_indeterminate">Importerar anteckningar...</string>
+    <string name="public_share_name">Nytt namn</string>
+    <string name="remote">(avlägsen)</string>
+    <string name="remove_account">Ta bort %1$s</string>
+    <string name="search_in_all">Sök alla anteckningar</string>
+    <string name="search_in_category">Sök i %1$s</string>
+    <string name="set_message">Ange meddelande</string>
+    <string name="set_online_status">Online-status</string>
+    <string name="settings_background_sync">Bakgrundssynkronisering</string>
+    <string name="settings_enable_direct_edit">Direktredigering</string>
+    <string name="settings_enable_direct_edit_summary">När inaktiverad döljs den avancerade redigeraren.</string>
+    <string name="settings_file_suffix">Filändelse</string>
+    <string name="settings_file_suffix_description">Filändelse för nya anteckningar i ditt Nextcloud</string>
+    <string name="settings_file_suffix_success">Ny filändelse: %1$s</string>
+    <string name="settings_font_size">Teckenstorlek</string>
+    <string name="settings_font_title">Monospace font</string>
+    <string name="settings_gridview">Rutnätsvy</string>
+    <string name="settings_keep_screen_on">Håll skärmen igång</string>
+    <string name="settings_keep_screen_on_summary">När du visar eller redigerar en anteckning</string>
+    <string name="settings_lock">Applåsning (Beta)</string>
+    <string name="settings_lock_summary">Enhetsuppgifter</string>
+    <string name="settings_note_mode">Visningsläge för anteckningar</string>
+    <string name="settings_note_mode_new">Notes startfunktion</string>
+    <string name="settings_notes_path">Sätt mapp</string>
+    <string name="settings_notes_path_description">Mapp för att lagra din anteckningar i ditt Nextcloud</string>
+    <string name="settings_notes_path_success">Ny anteckningsmapp: %1$s</string>
+    <string name="settings_prevent_screen_capture">Hindra skärmklipp</string>
+    <string name="settings_show_ecosystem_apps">Visa appväxlare</string>
+    <string name="settings_show_ecosystem_apps_summary">Nextcloud-appförslag i navigeringsrubriken</string>
+    <string name="settings_theme_title">Tema</string>
+    <string name="settings_wifi_only">Synkronisera endast med Wi-Fi</string>
+    <string name="share">Dela</string>
+    <string name="share_dialog_title">Delning</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_expiration_date_label">Gick ut %1$s</string>
+    <string name="share_file">Dela %1$s</string>
+    <string name="share_group_clarification">%1$s (grupp)</string>
+    <string name="share_internal_link">Dela intern länk</string>
+    <string name="share_internal_link_to_file_text">Intern länkdelning fungerar bara för användare med åtkomst till den här filen</string>
+    <string name="share_internal_link_to_folder_text">Intern länkdelning fungerar bara för användare med åtkomst till den här mappen</string>
+    <string name="share_known_remote_on_clarification">på %1$s</string>
+    <string name="share_link">Delningslänk</string>
+    <string name="share_link_password_title">Ange ett lösenord</string>
+    <string name="share_link_with_label">Dela länk (%1$s)</string>
+    <string name="share_no_expiration_date_label">Välj utgångsdatum</string>
+    <string name="share_no_password_title">Ange lösenord</string>
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Ange ett valfritt lösenord</string>
+    <string name="share_password_dialog_fragment_skip">Hoppa över</string>
+    <string name="share_password_title">Lösenordsskyddad</string>
+    <string name="share_permission_can_edit">Kan ändra</string>
+    <string name="share_permission_file_drop">Filinkast</string>
+    <string name="share_permission_secure_file_drop">Säkert filinkast</string>
+    <string name="share_permission_view_only">Skrivskyddat läge</string>
+    <string name="share_permissions">Dela behörigheter</string>
+    <string name="share_remote_clarification">%1$s (extern)</string>
+    <string name="share_room_clarification">%1$s (konversation)</string>
+    <string name="share_send_new_email">Skicka nytt mail</string>
+    <string name="share_settings">Inställningar</string>
+    <string name="share_via_link_section_title">Delningslänk</string>
+    <string name="share_via_link_send_link_label">Skicka länk</string>
+    <string name="share_via_link_unset_password">Inaktivera</string>
+    <string name="share_with_title">Delad med…</string>
+    <string name="shared_text_empty">Den delade texten var tom</string>
+    <string name="shortcut_create_long">Skapa en ny anteckning</string>
+    <string name="simple_about">Om</string>
+    <string name="simple_backup">Backup</string>
+    <string name="simple_cancel">Avbryt</string>
+    <string name="simple_checkbox">Kryssruta</string>
+    <string name="simple_close">Stäng</string>
+    <string name="simple_copy">Kopiera</string>
+    <string name="simple_edit">Redigera</string>
+    <string name="simple_error">Fel</string>
+    <string name="simple_exception">Undantag</string>
+    <string name="simple_link">Länk</string>
+    <string name="simple_more">Mer</string>
+    <string name="simple_move">Flytta</string>
+    <string name="simple_next">Nästa</string>
+    <string name="simple_other">Övrigt</string>
+    <string name="simple_prev">Föregående</string>
+    <string name="simple_remove">Ta bort</string>
+    <string name="simple_security">Säkerhet</string>
+    <string name="simple_switch">Växla</string>
+    <string name="simple_synchronization">Synkronisering</string>
+    <string name="sort_alphabetically">Sortera alfabetiskt</string>
+    <string name="sort_last_modified">Sortera efter ändrat datum</string>
+    <string name="status_message">Statusmeddelande</string>
+    <string name="status_set_fail_message">Kunde inte sätta status!</string>
+    <string name="switch_to_plain_editing">Byt till enkel redigering</string>
+    <string name="thirtyMinutes">30 minuter</string>
+    <string name="thisWeek">Denna vecka</string>
+    <string name="today">Idag</string>
+    <string name="unlock_notes">Lås upp anteckningar</string>
+    <string name="username">Användarnamn</string>
+    <string name="welcome_text">Välkommen till %1$s</string>
+    <string name="whats_your_status">Vad är din status?</string>
+    <string name="widget_entry_fav_contentDescription">Stjärnan används för att markera ett objekt som favorit</string>
+    <string name="widget_not_logged_in">Vänligen logga in i Anteckningar innan denna används</string>
+    <string name="widget_note_list_placeholder">Inga anteckningar</string>
+    <string name="widget_note_list_title">Anteckningslista</string>
+    <string name="widget_single_note_placeholder_tv">Anteckning hittades inte</string>
+    <string name="widget_single_note_title">Enstaka anteckning</string>
+    <string name="write_email">Skicka e-post</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Du måste vara ansluten till internet för att lägga till ett konto.</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">%1$d återstående nedladdning</item>
+        <item quantity="other">%1$d återstående nedladdningar</item>
+    </plurals>
     <plurals name="ab_selected">
         <item quantity="one">%d vald</item>
         <item quantity="other">%d valda</item>
@@ -327,127 +378,8 @@
         <item quantity="one">Dela innehållet i %1$d anteckning</item>
         <item quantity="other">Dela innehållet i %1$d anteckningar</item>
     </plurals>
-
-    <string name="formatting_help_divider" translateable="false">---</string>
-    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
-    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
-    <string name="formatting_help_codefence" translateable="false">```</string>
-    <string name="formatting_help_codefence_outer" translateable="false">````</string>
-    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
-    <string name="formatting_help_cbf_title">Innehållsbaserad formatering</string>
-    <string name="formatting_help_cbf_body_1">Ett stort deignmål med Notes-appen är att tillahandahålla ett distraktionsfritt verktyg. Fast du kan formatera dina texter med Markdown. För de olika nedan nämnda exemplena kan du använda genvägar så att du kan formatera dina anteckningar utan att skriva in koderna nedan.</string>
-    <string name="formatting_help_cbf_body_2">Markera bara ett stycke text eller tryck på din markör vid valfri position och du kommer få en popup-meny som utöver standardposterna såsom %1$s, %2$s, %3$s även innehåller poster som %4$s eller %5$s.</string>
-
-    <string name="formatting_help_text_title">Text</string>
-    <string name="formatting_help_text_body">Med Markdown är det enkelt att sätta en del ord i %1$sfetstil%1$s och andra %2$skursiva%2$s. Du kan %3$söverstyka%3$s ord och även [länka till Nextcloud](https://nextcloud.com).</string>
-
-    <string name="formatting_help_lists_title">Listor</string>
-    <string name="formatting_help_lists_body_1">Ibland vill du ha en numrerad lista:</string>
-    <string name="formatting_help_lists_body_2">En</string>
-    <string name="formatting_help_lists_body_3">Två</string>
-    <string name="formatting_help_lists_body_4">Tre</string>
-    <string name="formatting_help_lists_body_5">Ibland vill du punktlistor:</string>
-    <string name="formatting_help_lists_body_6">Börja en rad med ett tankesträck</string>
-    <string name="formatting_help_lists_body_7">Sätt två mellanslag framför tankesträcket eller stjärnan om du vill ha underpunkter:</string>
-    <string name="formatting_help_lists_body_8">Så här</string>
-    <string name="formatting_help_lists_body_9">Och så här</string>
-
-    <string name="formatting_help_checkboxes_title">Bockrutefråga</string>
-    <string name="formatting_help_checkboxes_body_1">Använd en lista följt av hakparenteset för att skapa en kryssruta</string>
-    <string name="formatting_help_checkboxes_body_2">Punkt 1</string>
-    <string name="formatting_help_checkboxes_body_3">Punkt 2</string>
-
-    <string name="formatting_help_structured_documents_title">Strukturerat dokument</string>
-    <string name="formatting_help_structured_documents_body_1">Ibland är det användbart att ha olika nivåer på rubriker för att strukturera dina dokument. Inled raden med %1$s för att skapa rukbriker. Flera %2$s i rad innebär mindre rubrikstorlekar.</string>
-    <string name="formatting_help_structured_documents_body_2">Detta är en rubrik på tredje nivån</string>
-    <string name="formatting_help_structured_documents_body_3">Den kan använda en %1$s ända upp till %2$s sex för olika rubrikstorlekar</string>
-    <string name="formatting_help_structured_documents_body_4">Om du vill citera någon kan du använda %1$s-tecknet framför raden: </string>
-    <string name="formatting_help_structured_documents_body_5">Fantasi är viktigare än kunskap. Kunskap är begränsad. Fantasi omsluter världen.</string>
-    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
-
-    <string name="formatting_help_code_title">Kod</string>
-    <string name="formatting_help_code_body_1">Det finns många olika sätt att utforma kod med Markdown. Om du har infällda kodblock, omge dem med backticks:</string>
-    <string name="formatting_help_code_body_2">Markdown stödjer också något som kallas för kodavgränsning, vilket tillåter flera rader utan indentering:</string>
-    <string name="formatting_help_code_body_3">Och om du vill använda syntaxmarkering kan du inkludera språket:</string>
-
-    <string name="formatting_help_tables_title">Tabeller</string>
-    <!-- Column header of a sample table -->
-    <string name="formatting_help_tables_column">Kolumn %1d</string>
-    <!-- Table cell value of a sample table -->
-    <string name="formatting_help_tables_value">Värde %1d</string>
-
-    <string name="formatting_help_images_body_1">Länkar måste antingen vara kompletta webbadresser som börjar med ett protokoll och en domän eller absoluta sökvägar som börjar med ett %1$s tecken.</string>
-    <string name="formatting_help_images_body_2">För att överensstämma med Markdown-formatet, använd escape-tecken i bildens URL. Detta innebär till exempel att ersätta mellanslag med %1$s i URL:en..</string>
-    <string name="formatting_help_images_title">Bilder</string>
-    <string name="formatting_help_images_alt">Snygg bild</string>
-
-    <string name="simple_other">Övrigt</string>
-    <string name="sort_last_modified">Sortera efter ändrat datum</string>
-    <string name="sort_alphabetically">Sortera alfabetiskt</string>
-    <string name="error_action_open_battery_settings">Batteriinställningar</string>
-    <string name="error_action_open_deck_info">Öppna appinformation</string>
-    <string name="error_action_open_network">Nätverksinställningar</string>
-    <string name="error_action_update_files_app">Uppdatera</string>
-    <string name="no_account_configured_yet">Inget konto konfigurerat än</string>
-    <string name="no_other_accounts">Du har inte konfigurerat några andra konton än.</string>
-    <string name="choose_account">Välj konto</string>
-    <string name="context_based_formatting">Kontextbaserad formaterings-popover</string>
     <plurals name="remove_account_message">
         <item quantity="one">Om du tar bort kontot %1$s kommer det också att ta bort en osynkroniserad ändring som inte kan återställas.</item>
         <item quantity="other">Om du tar bort kontot %1$s raderas också oåterställbara %2$d osynkroniserade ändringar.</item>
     </plurals>
-    <string name="remove_account">Ta bort %1$s</string>
-
-    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Du måste vara ansluten till internet för att lägga till ett konto.</string>
-    <string name="settings_notes_path">Sätt mapp</string>
-
-    <string name="simple_next">Nästa</string>
-    <string name="simple_prev">Föregående</string>
-    <string name="simple_backup">Backup</string>
-    <string name="backup">Vi upptäckte ett oåterkalleligt tillstånd i appen. Säkerhetskopiera dina osynkroniserade ändringar och rensa lagringen av Antecknings-appen.</string>
-    <string name="settings_notes_path_description">Mapp för att lagra din anteckningar i ditt Nextcloud</string>
-    <string-array name="settings_file_suffixes">
-        <item translatable="false">.txt</item>
-        <item translatable="false">.md</item>
-    </string-array>
-    <string name="settings_notes_path_success">Ny anteckningsmapp: %1$s</string>
-    <string name="settings_file_suffix">Filändelse</string>
-    <string name="settings_file_suffix_description">Filändelse för nya anteckningar i ditt Nextcloud</string>
-    <string name="settings_file_suffix_success">Ny filändelse: %1$s</string>
-    <string name="http_status_code">HTTP statuskod: %1$d</string>
-    <string name="progress_import_indeterminate">Importerar anteckningar...</string>
-    <string name="progress_import">Importerar anteckning %1$d av %2$d... </string>
-    <string name="account_imported">Konto importerat.</string>
-    <string name="direct_editing_error">Fel vid inläsning av utökad redigering</string>
-    <string name="switch_to_plain_editing">Byt till enkel redigering</string>
-    <string name="action_back">Tillbaka</string>
-    <string name="set_online_status">Online-status</string>
-    <string name="status_message">Statusmeddelande</string>
-    <string name="whats_your_status">Vad är din status?</string>
-    <string name="clear_status_after">Rensa status efter</string>
-    <string name="clear">Rensa</string>
-    <string name="set_message">Ange meddelande</string>
-    <string name="dontClear">Rensa inte</string>
-    <string name="today">Idag</string>
-    <string name="thirtyMinutes">30 minuter</string>
-    <string name="oneHour">1 timme</string>
-    <string name="fourHours">4 timmar</string>
-    <string name="thisWeek">Denna vecka</string>
-    <string name="error_setting_status_message">Fel uppstod vid skapande av statusmeddelande!</string>
-    <string name="file_list_seconds_ago">sekunder sedan</string>
-    <string name="online_status">Online-status</string>
-    <string name="online">Online</string>
-    <string name="dnd">Stör ej</string>
-    <string name="away">Borta</string>
-    <string name="invisible">Osynlig</string>
-    <string name="busy">Upptagen</string>
-    <string name="mute_all_notifications">Stäng av alla aviseringar</string>
-    <string name="appear_offline">Visa som frånkopplad</string>
-    <string name="status_set_fail_message">Kunde inte sätta status!</string>
-    <string name="account_switch_dialog_status_fetching_error_message">Kunde inte hämta status, försök igen.</string>
-    <string name="ecosystem_apps_display_files">Filer</string>
-    <string name="ecosystem_apps_display_talk">Talk</string>
-    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
-    <string name="ecosystem_apps_more">Fler Nextcloud-appar</string>
-    <string name="ecosystem_apps_display_more">Mer</string>
 </resources>

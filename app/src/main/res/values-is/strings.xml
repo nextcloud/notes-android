@@ -1,316 +1,392 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Nextcloud Notes - Android Client
-  ~
-  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
-  ~ SPDX-License-Identifier: GPL-3.0-or-later
--->
-<resources>
-    <string name="app_name">Minnispunktar</string>
-    <string name="app_name_long">Nextcloud-minnispunktar</string>
-    <string name="label_all_notes">Allir minnispunktar</string>
-    <string name="label_favorites">Eftirlæti</string>
-    <string name="action_create">Nýr minnispunktur</string>
-    <string name="welcome_text">Velkomin í %s</string>
-    <string name="action_settings">Stillingar</string>
-    <string name="action_trashbin">Eyddir minnispunktar</string>
-    <string name="action_search">Leita</string>
-    <string name="action_sorting_method">Röðunaraðferð</string>
-    <string name="simple_cancel">Hætta við</string>
-    <string name="simple_switch">Skipta</string>
-    <string name="simple_edit">Breyta</string>
-    <string name="simple_remove">Fjarlægja</string>
-    <string name="action_edit_save">Vista</string>
-    <string name="simple_about">Um hugbúnaðinn</string>
-    <string name="simple_link">Tengill</string>
-    <string name="action_note_deleted">Eyddi %1$s</string>
-    <string name="action_note_restored">Endurheimti %1$s</string>
-    <string name="action_undo">Afturkalla</string>
-    <string name="action_uncategorized">Óflokkað</string>
-    <string name="menu_delete">Eyða</string>
-    <string name="menu_change_category">Flokkur</string>
-    <string name="menu_favorite">Eftirlæti</string>
-    <string name="menu_preview">Forskoðun</string>
-    <string name="menu_share">Deila</string>
-    <string name="common_loading">Hleð inn…</string>
-
-
-    <string name="search_in_category">Leita í %1$s</string>
-    <string name="search_in_all">Leita í öllum minnispunktum</string>
-
-    <string name="change_category_title">Veldu flokk</string>
-
-    <string name="note_share_activity_shared_with_you">Deilt með þér af %s</string>
-    <string name="note_share_activity_search_text">Nafn, skýjasambandsauðkenni eða tölvupóstfang …</string>
-    <string name="note_share_activity_share_link">Tengill á sameign</string>
-    <string name="note_share_activity_resharing_not_allowed">Stefnuregla eða heimildir koma í veg fyrir endurdeilingu</string>
-    <string name="note_share_activity_could_not_retrieve_url">Tókst ekki að ná í slóð</string>
-    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" hefur verið deilt með þér</string>
-    <string name="note_share_activity_contact_no_permission">Heimild til aðgangs að tengiliðum er nauðsynleg.</string>
-    <!-- NoteShareDetailActivity -->
-    <string name="note_share_detail_activity_advanced_settings">Ítarlegar stillingar</string>
-    <string name="note_share_detail_activity_share_via_link_hide_download">Fela niðurhal</string>
-    <string name="note_share_detail_activity_share_send_note">Minnispunktur til viðtakanda</string>
-    <string name="note_share_detail_activity_hint_note">Minnispunktur</string>
-    <string name="note_share_detail_activity_common_next">Næst</string>
-    <string name="note_share_detail_activity_share_copy_link">Deila og afrita tengil</string>
-    <string name="note_share_detail_activity_common_confirm">Staðfesta</string>
-    <string name="note_share_detail_activity_set_note">Setja minnispunkt</string>
-    <string name="note_share_detail_activity_send_share">Senda sameign</string>
-    <string name="note_share_detail_activity_hint_name">Heiti</string>
-    <string name="note_share_detail_activity_link_name">Heiti tengils</string>
-    <string name="note_share_detail_activity_share_link_empty_password">Þú verður að setja lykilorð</string>
-    <string name="note_share_detail_activity_hint_password">Lykilorð</string>
-    <string name="note_share_detail_activity_no_share_permission_selected">Veldu að minnsta kosti eina heimild til að deila.</string>
-    <string name="note_share_detail_activity_label_empty">Merki má ekki vera tómt</string>
-    <string name="note_share_detail_activity_cancel">Hætta við</string>
-    <!-- SharePasswordDialogFragment -->
-    <string name="share_password_dialog_fragment_share_link_optional_password_title">Settu inn valkvætt lykilorð</string>
-    <string name="share_password_dialog_fragment_skip">Sleppa</string>
-
-    <string name="share_link_password_title">Settu inn lykilorð</string>
-    <string name="common_ok">OK</string>
-    <string name="common_delete">Eyða</string>
-    <string name="write_email">Senda tölvupóst</string>
-    <string name="no_browser_available">Ekkert forrit tiltækt til að meðhöndla tengla</string>
-    <string name="no_email_app_available">Ekkert forrit er tiltækt sem getur meðhöndlað tölvupóstföng</string>
-    <string name="no_actions">Engar aðgerðir fyrir þennan notanda</string>
-
-    <string name="email_pick_failed">Mistókst að velja tölvupóstfang.</string>
-    <string name="failed_update_ui">Mistókst að uppfæra viðmótið</string>
-    <string name="file_detail_sharing_fragment_no_contact_app_message">Ekkert forrit tiltækt til að velja tengiliði</string>
-    <string name="activity_chooser_send_file_title">Senda</string>
-    <string name="share_internal_link_to_folder_text">Innri deilingartengill virkar bara fyrir notendur sem eiga aðgang að þessari möppu</string>
-    <string name="share_internal_link_to_file_text">Innri deilingartengill virkar bara fyrir notendur sem eiga aðgang að þessari skrá</string>
-    <string name="share_internal_link">Deila innri tengli</string>
-    <string name="delete_link">Eyða tengli</string>
-    <string name="share_settings">Stillingar</string>
-    <string name="share_send_new_email">Senda nýjan tölvupóst</string>
-    <string name="share_dialog_title">Deiling</string>
-    <string name="share_file">Deila %1$s</string>
-    <string name="share_expiration_date_label">Rennur út %1$s</string>
-    <string name="share_expiration_date_format">%1$s</string>
-    <string name="share_no_expiration_date_label">Setja gildistíma</string>
-    <string name="share_via_link_section_title">Tengill á sameign</string>
-    <string name="share_via_link_send_link_label">Senda tengil...</string>
-    <string name="share_password_title">Verja með lykilorði</string>
-    <string name="share_no_password_title">Stilltu lykilorð</string>
-    <string name="share_with_title">Deila með %1</string>
-    <string name="share_via_link_unset_password">Endurstilla</string>
-    <string name="add_another_public_share_link">Bæta við öðrum tengli</string>
-    <string name="add_new_public_share">Bæta við nýjum opinberum tengli</string>
-    <string name="public_share_name">Nýtt nafn</string>
-    <string name="share_link_with_label">Tengill á sameign(%1$s)</string>
-    <string name="share_link">Tengill á sameign</string>
-    <string name="allow_resharing">Leyfa endurdeilingu</string>
-    <string name="link_share_view_only">Einungis skoða</string>
-    <string name="link_share_editing">Breytingar</string>
-    <string name="link_share_allow_upload_and_editing">Leyfa innsendingu og breytingar</string>
-    <string name="link_share_file_drop">Slepping skráa (einungis innsending)</string>
-    <string name="could_not_retrieve_shares">Tókst ekki að ná í sameignir</string>
-    <string name="share_permission_view_only">Einungis skoða</string>
-    <string name="share_permission_can_edit">Getur breytt</string>
-    <string name="share_permission_file_drop">Slepping skráa</string>
-    <string name="share_permission_secure_file_drop">Örugg slepping skráa</string>
-    <string name="share_permissions">Heimildir sameignar</string>
-    <plurals name="share_download_limit_description">
-        <item quantity="one">%1$d niðurhal eftir</item>
-        <item quantity="other">%1$d niðurhöl eftir</item>
-    </plurals>
-    <string name="username">Notandanafn</string>
-    <string name="share_group_clarification">%s hópurinn</string>
-    <string name="share_remote_clarification">%1$s (fjartengt)</string>
-    <string name="share_room_clarification">%1$s (samtal)</string>
-    <string name="share_known_remote_on_clarification">á %1$s</string>
-    <string name="remote">(fjartengt)</string>
-
-    <string name="copy_link">Afrita tengil</string>
-    <string name="share">Deila</string>
-    <string name="clipboard_text_copied">Tengill afritaður</string>
-    <string name="clipboard_no_text_to_copy">Fékk engan texta til að afrita á klippispjald</string>
-    <string name="clipboard_unexpected_error">Óvænt villa kom upp við afritun á klippispjald</string>
-    <string name="clipboard_label">Texti afritaður úr %1$s</string>
-
-    <string name="listview_updated_today">Í dag</string>
-    <string name="listview_updated_yesterday">Í gær</string>
-    <string name="listview_updated_this_week">Í þessari viku</string>
-    <string name="listview_updated_last_week">Í síðustu viku</string>
-    <string name="listview_updated_this_month">Í þessum mánuði</string>
-    <string name="listview_updated_last_month">Í síðasta mánuði</string>
-    <string name="settings_note_mode">Birtingarhamur minnispunkta</string>
-    <string name="settings_note_mode_new">Hegðun minnispunktaforrits við opnun</string>
-    <string name="settings_theme_title">Þema</string>
-    <string name="settings_font_title">Jafnbreitt letur</string>
-    <string name="settings_font_size">Leturstærð</string>
-    <string name="settings_wifi_only">Aðeins samstilla á WiFi-neti</string>
-    <string name="settings_lock">Forritslæsing (beta-prófun)</string>
-    <string name="settings_lock_summary">Auðkenni tækis</string>
-    <string name="settings_background_sync">Samstilling í bakgrunni</string>
-    <string name="settings_prevent_screen_capture">Koma í veg fyrir upptöku af skjá</string>
-    <string name="settings_show_ecosystem_apps">Sýna forritaskipti</string>
-    <string name="settings_show_ecosystem_apps_summary">Tillögur Nextcloud-forrita í flakkfyrirsögn</string>
-    <string name="settings_gridview">Reitasýn</string>
-    <string name="settings_enable_direct_edit">Breyta beint</string>
-    <string name="settings_enable_direct_edit_summary">Þegar þetta er óvirkt verður ítarlegi ritillinn falinn.</string>
-    <string name="settings_keep_screen_on">Halda skjá í gangi</string>
-    <string name="settings_keep_screen_on_summary">Þegar minnispunktur er skoðaður eða honum breytt</string>
-
-    <string name="error_sync">Samstilling mistókst: %1$s</string>
-    <string name="error_synchronization">Samstilling mistókst</string>
-    <string name="error_no_network">Engin nettenging</string>
-    <string name="error_maintenance_mode">Þjónninn er í viðhaldsham</string>
-    <string name="error_unknown">Óþekkt villa kom upp.</string>
-
-    <string name="about_version_title">Útgáfa</string>
-    <string name="about_version">Þú ert núna að nota %1$s</string>
-    <string name="about_maintainer_title">Umsjónarmaður</string>
-    <string name="about_developers_title">Forritarar</string>
-    <string name="about_developers_original_author">upprunalegur höfundur</string>
-    <string name="about_translators_title">Þýðendur</string>
-    <string name="about_translators_transifex">Nextcloud-samfélagið á %1$s</string>
-    <string name="about_testers_title">Prófarar</string>
-    <string name="about_source_title">Frumkóði</string>
-    <string name="about_source">Þetta verkefni er hýst á GitHub: %1$s</string>
-    <string name="about_issues_title">Villutilkynningar</string>
-    <string name="about_issues">Þú getur tilkynnt um villur, beðið um viðbótareiginleika og betrumbætur á GitHub villuskrásetjaranum: %1$s</string>
-    <string name="about_translate_title">Þýða</string>
-    <string name="about_translate">Gakktu í Nextcloud-teymið á Transifex og hjálpaðu okkur að þýða þetta forrit: %1$s</string>
-    <string name="about_app_license_title">Notkunarleyfi forritsins</string>
+  <resources>
     <string name="about_app_license">Þessu forriti er dreift með almenna GNU GENERAL PUBLIC notkunarleyfinu v3+.</string>
     <string name="about_app_license_button">Skoða notkunarleyfi</string>
-    <string name="about_icons_disclaimer_title">Táknmyndir</string>
-    <string name="about_icons_disclaimer_app_icon">Vegna upprunalegrar táknmyndar ættirðu að skoða %1$s.</string>
-    <string name="about_icons_disclaimer_mdi_icons">Allar aðrar táknmyndir eru gerðar af Google Inc. %1$s og útgefnar samkvæmt Apache 2.0 hugbúnaðarleyfinu.</string>
-    <string name="about_icons_disclaimer_mdi">Material Design táknmyndir</string>
-    <string name="about_credits_tab_title">Þakkir til</string>
+    <string name="about_app_license_title">Notkunarleyfi forritsins</string>
     <string name="about_contribution_tab_title">Framlög</string>
+    <string name="about_credits_tab_title">Þakkir til</string>
+    <string name="about_developers_original_author">upprunalegur höfundur</string>
+    <string name="about_developers_title">Forritarar</string>
+    <string name="about_icons_disclaimer_app_icon">Vegna upprunalegrar táknmyndar ættirðu að skoða %1$s.</string>
+    <string name="about_icons_disclaimer_mdi">Material Design táknmyndir</string>
+    <string name="about_icons_disclaimer_mdi_icons">Allar aðrar táknmyndir eru gerðar af Google Inc. %1$s og útgefnar samkvæmt Apache 2.0 hugbúnaðarleyfinu.</string>
+    <string name="about_icons_disclaimer_title">Táknmyndir</string>
+    <string name="about_issues">Þú getur tilkynnt um villur, beðið um viðbótareiginleika og betrumbætur á GitHub villuskrásetjaranum: %1$s</string>
+    <string name="about_issues_title">Villutilkynningar</string>
     <string name="about_license_tab_title">Notkunarleyfi</string>
-
-    <string name="widget_note_list_title">Listi yfir minnispunkta</string>
-    <string name="widget_note_list_placeholder">Engir minnispunktar</string>
-    <string name="widget_single_note_title">Stakur minnispunktur</string>
-    <string name="widget_single_note_placeholder_tv">Minnispunktur fannst ekki</string>
-    <string name="widget_not_logged_in">Skráðu þig inn í minnispunktaforritið áður en þú notar þennan viðmótshluta</string>
-    <string name="widget_entry_fav_contentDescription">Stjörnutáknið er notað til að sýna að atriði sé eftirlæti</string>
-
+    <string name="about_maintainer_title">Umsjónarmaður</string>
+    <string name="about_source">Þetta verkefni er hýst á GitHub: %1$s</string>
+    <string name="about_source_title">Frumkóði</string>
+    <string name="about_testers_title">Prófarar</string>
+    <string name="about_translate">Gakktu í Nextcloud-teymið á Transifex og hjálpaðu okkur að þýða þetta forrit: %1$s</string>
+    <string name="about_translate_title">Þýða</string>
+    <string name="about_translators_title">Þýðendur</string>
+    <string name="about_translators_transifex">Nextcloud-samfélagið á %1$s</string>
+    <string name="about_version">Þú ert núna að nota %1$s</string>
+    <string name="about_version_title">Útgáfa</string>
+    <string name="account_already_imported">Aðgangur hefur þegar verið fluttur inn</string>
+    <string name="account_imported">Aðgangur fluttur inn.</string>
+    <string name="action_back">Til baka</string>
+    <string name="action_create">Nýr minnispunktur</string>
+    <string name="action_edit_save">Vista</string>
+    <string name="action_formatting_help">Sniðmótun</string>
+    <string name="action_note_deleted">Eyddi %1$s</string>
+    <string name="action_note_restored">Endurheimti %1$s</string>
+    <string name="action_search">Leita</string>
+    <string name="action_settings">Stillingar</string>
+    <string name="action_sorting_method">Röðunaraðferð</string>
+    <string name="action_trashbin">Eyddir minnispunktar</string>
+    <string name="action_uncategorized">Óflokkað</string>
+    <string name="action_undo">Afturkalla</string>
+    <string name="activity_chooser_send_file_title">Senda</string>
     <string name="activity_select_single_note">Veldu minnispunkt</string>
-
-    <string name="shortcut_create_long">Búa til nýjan minnispunkt</string>
-
-    <string name="pref_value_font_normal">Venjulegt</string>
-    <string name="pref_value_wifi_and_mobile">Samstilla á WiFi-neti og farsímatengingu</string>
-    <string name="pref_value_lock">Verndun með lykilorði</string>
-
-    <string name="simple_error">Villa</string>
-    <string name="simple_close">Loka</string>
-    <string name="simple_copy">Afrita</string>
-    <string name="simple_exception">Undantekning</string>
-    <string name="pin_to_homescreen">Festa á heimaskjá</string>
-    <string name="note_has_been_deleted">Minnispunktinum hefur verið eytt</string>
     <string name="add_account">Bæta við notandaaðgangi</string>
-
-    <string name="category_music">Tónlist</string>
-    <string name="category_movies">Kvikmyndir</string>
-    <string name="category_movie">Kvikmynd</string>
-    <string name="category_work">Vinna</string>
-    <string name="category_todo">Verkefnalisti</string>
-    <string name="category_todos">Verkefnalistar</string>
+    <string name="add_another_public_share_link">Bæta við öðrum tengli</string>
+    <string name="add_category">Bæta við %1$s</string>
+    <string name="add_new_public_share">Bæta við nýjum opinberum tengli</string>
+    <string name="added_content">Bætti við \"%1$s\"</string>
+    <string name="allow_resharing">Leyfa endurdeilingu</string>
+    <string name="app_name">Minnispunktar</string>
+    <string name="app_name_long">Nextcloud-minnispunktar</string>
+    <string name="appear_offline">Birtast ótengt</string>
+    <string name="appearance_and_behavior">Útlit og hegðun</string>
+    <string name="append_to_note">Bæta neðan á minnispunkt</string>
+    <string name="away">Fjarverandi</string>
+    <string name="backup">Við greindum óendurkræft ástand forritsins. Taktu afrit af ósamstilltu
+ breytingunum þínum og hreinsaðu geymslurými minnispunktaforritsins.</string>
+    <string name="busy">Upptekinn</string>
+    <string name="category_bake">Bakstur</string>
     <string name="category_checklists">Gátlistar</string>
-    <string name="category_tasks">Verkefni</string>
+    <string name="category_credentials">Auðkenni</string>
+    <string name="category_food">Matur</string>
+    <string name="category_game">Leikur</string>
+    <string name="category_games">Leikir</string>
+    <string name="category_gift">Gjöf</string>
+    <string name="category_gifts">Gjafir</string>
+    <string name="category_key">Lykill</string>
+    <string name="category_keys">Lyklar</string>
+    <string name="category_movie">Kvikmynd</string>
+    <string name="category_movies">Kvikmyndir</string>
+    <string name="category_music">Tónlist</string>
+    <string name="category_password">Lykilorð</string>
+    <string name="category_passwords">Lykilorð</string>
+    <string name="category_play">Spila</string>
+    <string name="category_present">Glaðningur</string>
+    <string name="category_presents">Glaðningar</string>
+    <string name="category_readonly">Skrifvarið</string>
     <string name="category_recipe">Uppskrift</string>
     <string name="category_recipes">Uppskriftir</string>
     <string name="category_restaurant">Veitingastaður</string>
     <string name="category_restaurants">Veitingastaðir</string>
-    <string name="category_food">Matur</string>
-    <string name="category_bake">Bakstur</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_key">Lykill</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_keys">Lyklar</string>
-    <string name="category_password">Lykilorð</string>
-    <string name="category_passwords">Lykilorð</string>
-    <string name="category_credentials">Auðkenni</string>
-    <string name="category_game">Leikur</string>
-    <string name="category_games">Leikir</string>
-    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
-    <string name="category_play">Spila</string>
-    <string name="category_gift">Gjöf</string>
-    <string name="category_gifts">Gjafir</string>
-    <!-- Like a gift -->
-    <string name="category_present">Glaðningur</string>
-    <!-- Like a gift -->
-    <string name="category_presents">Glaðningar</string>
-
-    <string name="account_already_imported">Aðgangur hefur þegar verið fluttur inn</string>
-    <string name="no_notes_yet">Engir minnispunktar ennþá</string>
-    <string name="no_notes_yet_description">Ýttu á + hnappinn til að búa til nýjan minnispunkt</string>
-    <string name="simple_more">Meira</string>
-    <string name="simple_move">Færa</string>
-    <string name="category_readonly">Skrifvarið</string>
-    <string name="no_category">Enginn flokkur</string>
-    <string name="add_category">Bæta við %1$s</string>
-    <string name="simple_checkbox">Hakreitur</string>
-    <string name="unlock_notes">Aflæsa minnispunktum</string>
-    <string name="error_dialog_title">Ó-nei - Hvað nú? 🙁</string>
-    <string name="error_dialog_tip_token_mismatch_retry">Prófaðu að þvinga lokun á forritinu og endurræsa það síðan. Mögulega hefur verið röng tenging við Nextcloud-forritið.</string>
-    <string name="error_dialog_tip_token_mismatch_clear_storage">Ef vandamálið er viðvarandi, skaltu reyna að hreinsa geymslurými beggja
- forritanna, Nextcloud og Nextcloud Notes, til að leysa málið.</string>
-    <string name="error_dialog_tip_clear_storage">Þú getur hreinsað geymslurýmið með því að opna upplýsingar forritsins og
- velja Geymslurými → Hreinsa geymslurými. ⚠️ Aðvörun: Þetta mun eyða þeim
- minnispunktum sem ekki hafa verið samstilltir!</string>
-    <string name="error_dialog_tip_files_outdated">Nextcloud-forritið þitt lítur út fyrir að vera úrelt. Farðu inn á Play Store
- eða F-Droid til að sækja nýjustu útgáfuna.</string>
-    <string name="error_dialog_tip_files_force_stop">Eitthvað virðist vera í ólagi með Nextcloud-forritið þitt. Reyndu að þvinga
- fram stöðvun beggja forritanna, Nextcloud og Nextcloud Notes.</string>
-    <string name="error_dialog_tip_files_delete_storage">Ef þvinguð stöðvun leysir ekki vandamálið, skaltu reyna að hreinsa geymslurými beggja forritanna.</string>
-    <string name="error_dialog_timeout_instance">Netþjónninn svaraði ekki innan tímamarka. Athugaðu hvort hann sé að starfa
- eðlilega.</string>
-    <string name="error_dialog_timeout_toggle">Athugaðu netsambandið þitt. Stundum getur hjálpað að víxla af farsímagögnum
- og/eða Wi-Fi og síðan aftur á.</string>
+    <string name="category_tasks">Verkefni</string>
+    <string name="category_todo">Verkefnalisti</string>
+    <string name="category_todos">Verkefnalistar</string>
+    <string name="category_work">Vinna</string>
+    <string name="change_category_title">Veldu flokk</string>
+    <string name="change_note_title">Breyta titli minnispunkts</string>
+    <string name="choose_account">Veldu aðgang</string>
+    <string name="clear">Hreinsa</string>
+    <string name="clear_status_after">Hreinsa stöðu eftir</string>
+    <string name="clipboard_label">Texti afritaður úr %1$s</string>
+    <string name="clipboard_no_text_to_copy">Fékk engan texta til að afrita á klippispjald</string>
+    <string name="clipboard_text_copied">Tengill afritaður</string>
+    <string name="clipboard_unexpected_error">Óvænt villa kom upp við afritun á klippispjald</string>
+    <string name="common_delete">Eyða</string>
+    <string name="common_loading">Hleð inn…</string>
+    <string name="common_ok">OK</string>
+    <string name="context_based_formatting">Sprettgluggi fyrir samhengisháða forsníðingu</string>
+    <string name="copy_link">Afrita tengil</string>
+    <string name="could_not_retrieve_shares">Tókst ekki að ná í sameignir</string>
+    <string name="delete_link">Eyða tengli</string>
+    <string name="direct_editing_error">Villa við að hlaða inn sniðnum textabreytingum</string>
+    <string name="dnd">Ekki ónáða</string>
+    <string name="dontClear">Ekki hreinsa</string>
+    <string name="ecosystem_apps_display_files">Skráaforrit</string>
+    <string name="ecosystem_apps_display_more">Meira</string>
+    <string name="ecosystem_apps_display_talk">Spjalla</string>
+    <string name="ecosystem_apps_more">Fleiri Nextcloud-forrit</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="email_pick_failed">Mistókst að velja tölvupóstfang.</string>
+    <string name="error_action_open_battery_settings">Stillingar rafhlöðu</string>
+    <string name="error_action_open_deck_info">Opna upplýsingar um forrit</string>
+    <string name="error_action_open_network">Netkerfisstillingar</string>
+    <string name="error_action_update_files_app">Uppfæra</string>
+    <string name="error_dialog_check_maintenance">Athugaðu hvort Nextcloud-þjónninn þinn sé nokkuð núna í viðhaldsham.</string>
     <string name="error_dialog_check_server">Svarið frá netþjóninum var ekki rétt. Athugaðu hvort þú getur komist í
  minnispunktana þína í gegnum vefviðmótið.</string>
     <string name="error_dialog_check_server_logs">Það er vandamál með Nextcloud-uppsetninguna þína. Athugaðu atvikaskrár netþjónsins.</string>
-    <string name="error_dialog_check_maintenance">Athugaðu hvort Nextcloud-þjónninn þinn sé nokkuð núna í viðhaldsham.</string>
     <string name="error_dialog_insufficient_storage">Nextcloud-netþjónninn þinn á ekkert laust geymslupláss eftir. Eyddu einhverjum skrám til að geta samstillt breytingar á tækinu yfir í skýið.</string>
-    <string name="error_dialog_we_need_info">Við þurfum eftirfarandi tæknilegar upplýsingar til að geta aðstoðað þig:</string>
-    <string name="error_dialog_server_app_enabled">Gakktu úr skugga um að þú hafir sett upp og virkjað Notes-forritið á netþjóninum þínum.</string>
+    <string name="error_dialog_min_version">Minnispunktaforritið Notes á Android krefst þess að Nextcloud- forritið á
+ Android sé að minnsta kosti af útgáfu 3.18.</string>
     <string name="error_dialog_redirect">Þjónninn þinn svaraði með HTTP 302 stöðukóðae, sem bendir til að þú hafir
  ekki sett Notes minnispunktaforritið upp á netþjóninum eða að eitthvað sé
  vanstillt. Þetta getur komið til vegna sérsniðinna skipana í .htaccess-skrá
  eða vegna Nextcloud-forrita á borð við OID Client.</string>
+    <string name="error_dialog_server_app_enabled">Gakktu úr skugga um að þú hafir sett upp og virkjað Notes-forritið á netþjóninum þínum.</string>
+    <string name="error_dialog_timeout_instance">Netþjónninn svaraði ekki innan tímamarka. Athugaðu hvort hann sé að starfa
+ eðlilega.</string>
+    <string name="error_dialog_timeout_toggle">Athugaðu netsambandið þitt. Stundum getur hjálpað að víxla af farsímagögnum
+ og/eða Wi-Fi og síðan aftur á.</string>
+    <string name="error_dialog_tip_clear_storage">Þú getur hreinsað geymslurýmið með því að opna upplýsingar forritsins og
+ velja Geymslurými → Hreinsa geymslurými. ⚠️ Aðvörun: Þetta mun eyða þeim
+ minnispunktum sem ekki hafa verið samstilltir!</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Gerðu allar bestanir á rafhlöðunotkun óvirkar fyrir Nextcloud og
  Notes-forritið.</string>
-    <string name="error_dialog_min_version">Minnispunktaforritið Notes á Android krefst þess að Nextcloud- forritið á
- Android sé að minnsta kosti af útgáfu 3.18.</string>
-    <string name="added_content">Bætti við \"%1$s\"</string>
-    <string name="shared_text_empty">Deildur texti var tómur</string>
-    <string name="append_to_note">Bæta neðan á minnispunkt</string>
-    <string name="change_note_title">Breyta titli minnispunkts</string>
-    <string name="menu_edit_title">Breyta titli</string>
-    <string name="simple_security">Öryggi</string>
-    <string name="appearance_and_behavior">Útlit og hegðun</string>
-    <string name="simple_synchronization">Samstilling</string>
+    <string name="error_dialog_tip_files_delete_storage">Ef þvinguð stöðvun leysir ekki vandamálið, skaltu reyna að hreinsa geymslurými beggja forritanna.</string>
+    <string name="error_dialog_tip_files_force_stop">Eitthvað virðist vera í ólagi með Nextcloud-forritið þitt. Reyndu að þvinga
+ fram stöðvun beggja forritanna, Nextcloud og Nextcloud Notes.</string>
+    <string name="error_dialog_tip_files_outdated">Nextcloud-forritið þitt lítur út fyrir að vera úrelt. Farðu inn á Play Store
+ eða F-Droid til að sækja nýjustu útgáfuna.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Ef vandamálið er viðvarandi, skaltu reyna að hreinsa geymslurými beggja
+ forritanna, Nextcloud og Nextcloud Notes, til að leysa málið.</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Prófaðu að þvinga lokun á forritinu og endurræsa það síðan. Mögulega hefur verið röng tenging við Nextcloud-forritið.</string>
+    <string name="error_dialog_title">Ó-nei - Hvað nú? 🙁</string>
+    <string name="error_dialog_we_need_info">Við þurfum eftirfarandi tæknilegar upplýsingar til að geta aðstoðað þig:</string>
+    <string name="error_maintenance_mode">Þjónninn er í viðhaldsham</string>
+    <string name="error_no_network">Engin nettenging</string>
+    <string name="error_setting_status_message">Villa kom upp við að setja stöðuskilaboð!</string>
+    <string name="error_sync">Samstilling mistókst: %1$s</string>
+    <string name="error_synchronization">Samstilling mistókst</string>
+    <string name="error_unknown">Óþekkt villa kom upp.</string>
+    <string name="failed_update_ui">Mistókst að uppfæra viðmótið</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Ekkert forrit tiltækt til að velja tengiliði</string>
+    <string name="file_list_seconds_ago">sekúndum síðan</string>
+    <string name="formatting_help_cbf_body_1">Aðalmarkmið hönnunar Notes-minnispunktaforritsins er að búa til verkfæri án
+ óþarfa truflana. Samt þannig að þú getir sniðið textann þinn með Markdown.
+ Fyrir mörg af þeim dæmum sem sjást hér fyrir neðan, geturðu notað flýtilykla
+ til að sníða minnispunktana þina, þannig að þú þurfir ekki að setja inn alla
+ kóðanahér að neðan.</string>
+    <string name="formatting_help_cbf_body_2">Þú einfaldlega velur textahluta eða bankar á bendilinn hvar sem er og þú munt
+ sjá sprettvalmynd which sem inniheldur næst sjálfgefnu færslunum %1$s, %2$s, 
+%3$s færslur eins og %4$s eða %5$s.</string>
+    <string name="formatting_help_cbf_title">Samhengisháð forsníðing</string>
+    <string name="formatting_help_checkboxes_body_1">Til að búa til hakreiti skaltu nota lista með hornklofum á eftir</string>
+    <string name="formatting_help_checkboxes_body_2">Atriði 1</string>
+    <string name="formatting_help_checkboxes_body_3">Atriði 2</string>
+    <string name="formatting_help_checkboxes_title">Gátreitir</string>
+    <string name="formatting_help_code_body_1">Það eru margar mismunandi leiðir til að stílsetja kóða með Markdown. Ef þú
+ ert með innfelldar kóðablokkir, skaltu setja öfugar broddkommur (backticks)
+ utan um þær:</string>
+    <string name="formatting_help_code_body_2">Markdown styður einnig nokkuð sem er kallað kóðamörk (code fencing), sem
+ gerir kleift að setja inn margar línur án inndráttar:</string>
+    <string name="formatting_help_code_body_3">Og ef þú vilt nota málfræðilitun (syntax highlighting) skaltu hafa með
+ forritunarmálið:</string>
+    <string name="formatting_help_code_title">Kóði</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_images_alt">Skrautleg mynd</string>
+    <string name="formatting_help_images_body_1">Tenglar þurfa annað hvort að vera fullar URL-slóðir sem byrja á samskiptamáta
+ og léni, eða algildar slóðir sem byrja á %1$s stafnum.</string>
+    <string name="formatting_help_images_body_2">Til að gæta samræmis við Markdown-sniðið, skaltu nota lausnarstafi (escape
+ characters) í slíð myndarinnar. Þetta þýðir meðal annars að skipta þarf
+ bilum út fyrir %1$s í slóðinni.</string>
+    <string name="formatting_help_images_title">Myndir</string>
+    <string name="formatting_help_lists_body_1">Stundum viltu fá tölusetta lista:</string>
+    <string name="formatting_help_lists_body_2">Eitt</string>
+    <string name="formatting_help_lists_body_3">Tvö</string>
+    <string name="formatting_help_lists_body_4">Þrjú</string>
+    <string name="formatting_help_lists_body_5">Stundum viltu fá lista með áherslupunktum:</string>
+    <string name="formatting_help_lists_body_6">Byrjaðu línu á bandstriki</string>
+    <string name="formatting_help_lists_body_7">Ob ef þú ert með undirpunkta, skaltu setja tvö bil á undan bandstriki eða
+ stjörnu:</string>
+    <string name="formatting_help_lists_body_8">Eins og þetta</string>
+    <string name="formatting_help_lists_body_9">Og þetta</string>
+    <string name="formatting_help_lists_title">Listar</string>
+    <string name="formatting_help_structured_documents_body_1">Stundum kemur sér vel að hafa mismunandi stig fyrirsagna til að skipuleggja
+ efni skjala. Byrjaðu línur á %1$s til að búa til fyrirsögn. Mörg %2$s í röð
+ skilgreina minni fyrirsagnir af lægri stigum.</string>
+    <string name="formatting_help_structured_documents_body_2">Þetta er þriðja-stigs fyrirsögn</string>
+    <string name="formatting_help_structured_documents_body_3">Þú getur notað allt frá einu %1$s og upp að sex %2$s six fyrir mismunandi
+ stig fyrirsagna.</string>
+    <string name="formatting_help_structured_documents_body_4">Ef þú ætlar að vitna í einhvern, skaltu nota %1$s staf fremst í línunni:</string>
+    <string name="formatting_help_structured_documents_body_5">Ímyndunarafl er mikilvægara en þekking. Þekking er takmörkuð. Ímyndunaraflið
+ er allsstaðar í heiminum.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+    <string name="formatting_help_structured_documents_title">Skipulögð skjöl</string>
+    <string name="formatting_help_tables_column">Dálkur %1d</string>
+    <string name="formatting_help_tables_title">Töflur</string>
+    <string name="formatting_help_tables_value">Gildi %1d</string>
+    <string name="formatting_help_text_body">Það er mjög auðvelt að gera sum orð %1$sfeitletruð%1$s og önnur orð 
+%2$siskáletruð%2$s með Markdown. Þú getur líka %3$sgegnumstrikað%3$s orð og
+ jafnvel [tengt í Nextcloud](https://nextcloud.com).</string>
+    <string name="formatting_help_text_title">Texti</string>
+    <string name="fourHours">4 klukkustundir</string>
+    <string name="http_status_code">HTTP-stöðukóði: %1$d</string>
+    <string name="invisible">Ósýnilegt</string>
+    <string name="label_all_notes">Allir minnispunktar</string>
+    <string name="label_favorites">Eftirlæti</string>
+    <string name="link_share_allow_upload_and_editing">Leyfa innsendingu og breytingar</string>
+    <string name="link_share_editing">Breytingar</string>
+    <string name="link_share_file_drop">Slepping skráa (einungis innsending)</string>
+    <string name="link_share_view_only">Einungis skoða</string>
+    <string name="listview_updated_last_month">Í síðasta mánuði</string>
+    <string name="listview_updated_last_week">Í síðustu viku</string>
+    <string name="listview_updated_this_month">Í þessum mánuði</string>
+    <string name="listview_updated_this_week">Í þessari viku</string>
+    <string name="listview_updated_today">Í dag</string>
+    <string name="listview_updated_yesterday">Í gær</string>
     <string name="manage_accounts">Sýsla með notandaaðganga</string>
-    <string name="action_formatting_help">Sniðmótun</string>
-
-
+    <string name="menu_change_category">Flokkur</string>
+    <string name="menu_delete">Eyða</string>
+    <string name="menu_edit_title">Breyta titli</string>
+    <string name="menu_favorite">Eftirlæti</string>
+    <string name="menu_preview">Forskoðun</string>
+    <string name="menu_share">Deila</string>
+    <string name="mute_all_notifications">Þagga allar tilkynningar</string>
+    <string name="no_account_configured_yet">Enginn aðgangur stilltur</string>
+    <string name="no_actions">Engar aðgerðir fyrir þennan notanda</string>
+    <string name="no_browser_available">Ekkert forrit tiltækt til að meðhöndla tengla</string>
+    <string name="no_category">Enginn flokkur</string>
+    <string name="no_email_app_available">Ekkert forrit er tiltækt sem getur meðhöndlað tölvupóstföng</string>
+    <string name="no_notes_yet">Engir minnispunktar ennþá</string>
+    <string name="no_notes_yet_description">Ýttu á + hnappinn til að búa til nýjan minnispunkt</string>
+    <string name="no_other_accounts">Þú hefur enn ekki skráð neina aðra aðganga.</string>
     <string name="noteMode_plain_edit">Breytingar á hreinum texta</string>
     <string name="noteMode_plain_preview">Forskoðun hreins texta</string>
-    <string name="noteMode_rich_edit">Breytingahamur sniðins texta</string>
     <string name="noteMode_remember_last">Muna það sem ég valdi síðast</string>
-
-    <string-array name="fontSize_entries">
-        <item>Lítið</item>
-        <item>miðlungs</item>
-        <item>Stórt</item>
-    </string-array>
-
-    <string-array name="darkmode_entries">
-        <item>Ljóst</item>
-        <item>Dökkt</item>
-        <item>Sjálfgefið kerfi</item>
-    </string-array>
-
+    <string name="noteMode_rich_edit">Breytingahamur sniðins texta</string>
+    <string name="note_has_been_deleted">Minnispunktinum hefur verið eytt</string>
+    <string name="note_share_activity_contact_no_permission">Heimild til aðgangs að tengiliðum er nauðsynleg.</string>
+    <string name="note_share_activity_could_not_retrieve_url">Tókst ekki að ná í slóð</string>
+    <string name="note_share_activity_resharing_not_allowed">Stefnuregla eða heimildir koma í veg fyrir endurdeilingu</string>
+    <string name="note_share_activity_search_text">Nafn, skýjasambandsauðkenni eða tölvupóstfang …</string>
+    <string name="note_share_activity_share_link">Tengill á sameign</string>
+    <string name="note_share_activity_shared_with_you">Deilt með þér af %s</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" hefur verið deilt með þér</string>
+    <string name="note_share_detail_activity_advanced_settings">Ítarlegar stillingar</string>
+    <string name="note_share_detail_activity_cancel">Hætta við</string>
+    <string name="note_share_detail_activity_common_confirm">Staðfesta</string>
+    <string name="note_share_detail_activity_common_next">Næst</string>
+    <string name="note_share_detail_activity_hint_name">Heiti</string>
+    <string name="note_share_detail_activity_hint_note">Minnispunktur</string>
+    <string name="note_share_detail_activity_hint_password">Lykilorð</string>
+    <string name="note_share_detail_activity_label_empty">Merki má ekki vera tómt</string>
+    <string name="note_share_detail_activity_link_name">Heiti tengils</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Veldu að minnsta kosti eina heimild til að deila.</string>
+    <string name="note_share_detail_activity_send_share">Senda sameign</string>
+    <string name="note_share_detail_activity_set_note">Setja minnispunkt</string>
+    <string name="note_share_detail_activity_share_copy_link">Deila og afrita tengil</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Þú verður að setja lykilorð</string>
+    <string name="note_share_detail_activity_share_send_note">Minnispunktur til viðtakanda</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Fela niðurhal</string>
+    <string name="oneHour">1 klukkustund</string>
+    <string name="online">Á netinu</string>
+    <string name="online_status">Staða á netinu</string>
+    <string name="pin_to_homescreen">Festa á heimaskjá</string>
+    <string name="pref_value_font_normal">Venjulegt</string>
+    <string name="pref_value_lock">Verndun með lykilorði</string>
+    <string name="pref_value_wifi_and_mobile">Samstilla á WiFi-neti og farsímatengingu</string>
+    <string name="progress_import">Flyt inn minnispunkt %1$d af %2$d…</string>
+    <string name="progress_import_indeterminate">Flyt inn minnispunkta…</string>
+    <string name="public_share_name">Nýtt nafn</string>
+    <string name="remote">(fjartengt)</string>
+    <string name="remove_account">Fjarlægja %1$s</string>
+    <string name="search_in_all">Leita í öllum minnispunktum</string>
+    <string name="search_in_category">Leita í %1$s</string>
+    <string name="set_message">Setja skilaboð</string>
+    <string name="set_online_status">Staða á netinu</string>
+    <string name="settings_background_sync">Samstilling í bakgrunni</string>
+    <string name="settings_enable_direct_edit">Breyta beint</string>
+    <string name="settings_enable_direct_edit_summary">Þegar þetta er óvirkt verður ítarlegi ritillinn falinn.</string>
+    <string name="settings_file_suffix">Skráarending</string>
+    <string name="settings_file_suffix_description">Skráarending fyrir nýja minnispunkta á Nextcloud-svæðinu þínu</string>
+    <string name="settings_file_suffix_success">Skráarending nýrra skráa: %1$s</string>
+    <string name="settings_font_size">Leturstærð</string>
+    <string name="settings_font_title">Jafnbreitt letur</string>
+    <string name="settings_gridview">Reitasýn</string>
+    <string name="settings_keep_screen_on">Halda skjá í gangi</string>
+    <string name="settings_keep_screen_on_summary">Þegar minnispunktur er skoðaður eða honum breytt</string>
+    <string name="settings_lock">Forritslæsing (beta-prófun)</string>
+    <string name="settings_lock_summary">Auðkenni tækis</string>
+    <string name="settings_note_mode">Birtingarhamur minnispunkta</string>
+    <string name="settings_note_mode_new">Hegðun minnispunktaforrits við opnun</string>
+    <string name="settings_notes_path">Setja möppu</string>
+    <string name="settings_notes_path_description">Mappa til að geyma minnispunktana þína á Nextcloud-svæðinu þínu</string>
+    <string name="settings_notes_path_success">Mappa undir nýja minnispunkta: %1$s</string>
+    <string name="settings_prevent_screen_capture">Koma í veg fyrir upptöku af skjá</string>
+    <string name="settings_show_ecosystem_apps">Sýna forritaskipti</string>
+    <string name="settings_show_ecosystem_apps_summary">Tillögur Nextcloud-forrita í flakkfyrirsögn</string>
+    <string name="settings_theme_title">Þema</string>
+    <string name="settings_wifi_only">Aðeins samstilla á WiFi-neti</string>
+    <string name="share">Deila</string>
+    <string name="share_dialog_title">Deiling</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_expiration_date_label">Rennur út %1$s</string>
+    <string name="share_file">Deila %1$s</string>
+    <string name="share_group_clarification">%s hópurinn</string>
+    <string name="share_internal_link">Deila innri tengli</string>
+    <string name="share_internal_link_to_file_text">Innri deilingartengill virkar bara fyrir notendur sem eiga aðgang að þessari skrá</string>
+    <string name="share_internal_link_to_folder_text">Innri deilingartengill virkar bara fyrir notendur sem eiga aðgang að þessari möppu</string>
+    <string name="share_known_remote_on_clarification">á %1$s</string>
+    <string name="share_link">Tengill á sameign</string>
+    <string name="share_link_password_title">Settu inn lykilorð</string>
+    <string name="share_link_with_label">Tengill á sameign(%1$s)</string>
+    <string name="share_no_expiration_date_label">Setja gildistíma</string>
+    <string name="share_no_password_title">Stilltu lykilorð</string>
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Settu inn valkvætt lykilorð</string>
+    <string name="share_password_dialog_fragment_skip">Sleppa</string>
+    <string name="share_password_title">Verja með lykilorði</string>
+    <string name="share_permission_can_edit">Getur breytt</string>
+    <string name="share_permission_file_drop">Slepping skráa</string>
+    <string name="share_permission_secure_file_drop">Örugg slepping skráa</string>
+    <string name="share_permission_view_only">Einungis skoða</string>
+    <string name="share_permissions">Heimildir sameignar</string>
+    <string name="share_remote_clarification">%1$s (fjartengt)</string>
+    <string name="share_room_clarification">%1$s (samtal)</string>
+    <string name="share_send_new_email">Senda nýjan tölvupóst</string>
+    <string name="share_settings">Stillingar</string>
+    <string name="share_via_link_section_title">Tengill á sameign</string>
+    <string name="share_via_link_send_link_label">Senda tengil...</string>
+    <string name="share_via_link_unset_password">Endurstilla</string>
+    <string name="share_with_title">Deila með %1</string>
+    <string name="shared_text_empty">Deildur texti var tómur</string>
+    <string name="shortcut_create_long">Búa til nýjan minnispunkt</string>
+    <string name="simple_about">Um hugbúnaðinn</string>
+    <string name="simple_backup">Taka öryggisafrit</string>
+    <string name="simple_cancel">Hætta við</string>
+    <string name="simple_checkbox">Hakreitur</string>
+    <string name="simple_close">Loka</string>
+    <string name="simple_copy">Afrita</string>
+    <string name="simple_edit">Breyta</string>
+    <string name="simple_error">Villa</string>
+    <string name="simple_exception">Undantekning</string>
+    <string name="simple_link">Tengill</string>
+    <string name="simple_more">Meira</string>
+    <string name="simple_move">Færa</string>
+    <string name="simple_next">Næsta</string>
+    <string name="simple_other">Annað</string>
+    <string name="simple_prev">Fyrra</string>
+    <string name="simple_remove">Fjarlægja</string>
+    <string name="simple_security">Öryggi</string>
+    <string name="simple_switch">Skipta</string>
+    <string name="simple_synchronization">Samstilling</string>
+    <string name="sort_alphabetically">Raða í stafrófsröð</string>
+    <string name="sort_last_modified">Sort by modified date</string>
+    <string name="status_message">Stöðuskilaboð</string>
+    <string name="switch_to_plain_editing">Skipta yfir í breytingar á hreinum texta</string>
+    <string name="thirtyMinutes">30 mínútur</string>
+    <string name="thisWeek">Í þessari viku</string>
+    <string name="today">Í dag</string>
+    <string name="unlock_notes">Aflæsa minnispunktum</string>
+    <string name="username">Notandanafn</string>
+    <string name="welcome_text">Velkomin í %s</string>
+    <string name="whats_your_status">Hver er staðan á þér?</string>
+    <string name="widget_entry_fav_contentDescription">Stjörnutáknið er notað til að sýna að atriði sé eftirlæti</string>
+    <string name="widget_not_logged_in">Skráðu þig inn í minnispunktaforritið áður en þú notar þennan viðmótshluta</string>
+    <string name="widget_note_list_placeholder">Engir minnispunktar</string>
+    <string name="widget_note_list_title">Listi yfir minnispunkta</string>
+    <string name="widget_single_note_placeholder_tv">Minnispunktur fannst ekki</string>
+    <string name="widget_single_note_title">Stakur minnispunktur</string>
+    <string name="write_email">Senda tölvupóst</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Þú þarft internettengingu til að geta bætt við aðgangi.</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">%1$d niðurhal eftir</item>
+        <item quantity="other">%1$d niðurhöl eftir</item>
+    </plurals>
     <plurals name="ab_selected">
         <item quantity="one">%d valið</item>
         <item quantity="other">%d valið</item>
@@ -327,146 +403,8 @@
         <item quantity="one">Deila efni úr %1$d minnispunkti</item>
         <item quantity="other">Deila efni úr %1$d minnispunktum</item>
     </plurals>
-
-    <string name="formatting_help_divider" translateable="false">---</string>
-    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
-    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
-    <string name="formatting_help_codefence" translateable="false">```</string>
-    <string name="formatting_help_codefence_outer" translateable="false">````</string>
-    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
-    <string name="formatting_help_cbf_title">Samhengisháð forsníðing</string>
-    <string name="formatting_help_cbf_body_1">Aðalmarkmið hönnunar Notes-minnispunktaforritsins er að búa til verkfæri án
- óþarfa truflana. Samt þannig að þú getir sniðið textann þinn með Markdown.
- Fyrir mörg af þeim dæmum sem sjást hér fyrir neðan, geturðu notað flýtilykla
- til að sníða minnispunktana þina, þannig að þú þurfir ekki að setja inn alla
- kóðanahér að neðan.</string>
-    <string name="formatting_help_cbf_body_2">Þú einfaldlega velur textahluta eða bankar á bendilinn hvar sem er og þú munt
- sjá sprettvalmynd which sem inniheldur næst sjálfgefnu færslunum %1$s, %2$s, 
-%3$s færslur eins og %4$s eða %5$s.</string>
-
-    <string name="formatting_help_text_title">Texti</string>
-    <string name="formatting_help_text_body">Það er mjög auðvelt að gera sum orð %1$sfeitletruð%1$s og önnur orð 
-%2$siskáletruð%2$s með Markdown. Þú getur líka %3$sgegnumstrikað%3$s orð og
- jafnvel [tengt í Nextcloud](https://nextcloud.com).</string>
-
-    <string name="formatting_help_lists_title">Listar</string>
-    <string name="formatting_help_lists_body_1">Stundum viltu fá tölusetta lista:</string>
-    <string name="formatting_help_lists_body_2">Eitt</string>
-    <string name="formatting_help_lists_body_3">Tvö</string>
-    <string name="formatting_help_lists_body_4">Þrjú</string>
-    <string name="formatting_help_lists_body_5">Stundum viltu fá lista með áherslupunktum:</string>
-    <string name="formatting_help_lists_body_6">Byrjaðu línu á bandstriki</string>
-    <string name="formatting_help_lists_body_7">Ob ef þú ert með undirpunkta, skaltu setja tvö bil á undan bandstriki eða
- stjörnu:</string>
-    <string name="formatting_help_lists_body_8">Eins og þetta</string>
-    <string name="formatting_help_lists_body_9">Og þetta</string>
-
-    <string name="formatting_help_checkboxes_title">Gátreitir</string>
-    <string name="formatting_help_checkboxes_body_1">Til að búa til hakreiti skaltu nota lista með hornklofum á eftir</string>
-    <string name="formatting_help_checkboxes_body_2">Atriði 1</string>
-    <string name="formatting_help_checkboxes_body_3">Atriði 2</string>
-
-    <string name="formatting_help_structured_documents_title">Skipulögð skjöl</string>
-    <string name="formatting_help_structured_documents_body_1">Stundum kemur sér vel að hafa mismunandi stig fyrirsagna til að skipuleggja
- efni skjala. Byrjaðu línur á %1$s til að búa til fyrirsögn. Mörg %2$s í röð
- skilgreina minni fyrirsagnir af lægri stigum.</string>
-    <string name="formatting_help_structured_documents_body_2">Þetta er þriðja-stigs fyrirsögn</string>
-    <string name="formatting_help_structured_documents_body_3">Þú getur notað allt frá einu %1$s og upp að sex %2$s six fyrir mismunandi
- stig fyrirsagna.</string>
-    <string name="formatting_help_structured_documents_body_4">Ef þú ætlar að vitna í einhvern, skaltu nota %1$s staf fremst í línunni:</string>
-    <string name="formatting_help_structured_documents_body_5">Ímyndunarafl er mikilvægara en þekking. Þekking er takmörkuð. Ímyndunaraflið
- er allsstaðar í heiminum.</string>
-    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
-
-    <string name="formatting_help_code_title">Kóði</string>
-    <string name="formatting_help_code_body_1">Það eru margar mismunandi leiðir til að stílsetja kóða með Markdown. Ef þú
- ert með innfelldar kóðablokkir, skaltu setja öfugar broddkommur (backticks)
- utan um þær:</string>
-    <string name="formatting_help_code_body_2">Markdown styður einnig nokkuð sem er kallað kóðamörk (code fencing), sem
- gerir kleift að setja inn margar línur án inndráttar:</string>
-    <string name="formatting_help_code_body_3">Og ef þú vilt nota málfræðilitun (syntax highlighting) skaltu hafa með
- forritunarmálið:</string>
-
-    <string name="formatting_help_tables_title">Töflur</string>
-    <!-- Column header of a sample table -->
-    <string name="formatting_help_tables_column">Dálkur %1d</string>
-    <!-- Table cell value of a sample table -->
-    <string name="formatting_help_tables_value">Gildi %1d</string>
-
-    <string name="formatting_help_images_body_1">Tenglar þurfa annað hvort að vera fullar URL-slóðir sem byrja á samskiptamáta
- og léni, eða algildar slóðir sem byrja á %1$s stafnum.</string>
-    <string name="formatting_help_images_body_2">Til að gæta samræmis við Markdown-sniðið, skaltu nota lausnarstafi (escape
- characters) í slíð myndarinnar. Þetta þýðir meðal annars að skipta þarf
- bilum út fyrir %1$s í slóðinni.</string>
-    <string name="formatting_help_images_title">Myndir</string>
-    <string name="formatting_help_images_alt">Skrautleg mynd</string>
-
-    <string name="simple_other">Annað</string>
-    <string name="sort_last_modified">Sort by modified date</string>
-    <string name="sort_alphabetically">Raða í stafrófsröð</string>
-    <string name="error_action_open_battery_settings">Stillingar rafhlöðu</string>
-    <string name="error_action_open_deck_info">Opna upplýsingar um forrit</string>
-    <string name="error_action_open_network">Netkerfisstillingar</string>
-    <string name="error_action_update_files_app">Uppfæra</string>
-    <string name="no_account_configured_yet">Enginn aðgangur stilltur</string>
-    <string name="no_other_accounts">Þú hefur enn ekki skráð neina aðra aðganga.</string>
-    <string name="choose_account">Veldu aðgang</string>
-    <string name="context_based_formatting">Sprettgluggi fyrir samhengisháða forsníðingu</string>
     <plurals name="remove_account_message">
         <item quantity="one">Sé aðgangurinn %1$s fjarlægður, verður einni ósamstilltri breytingu einnig eytt óafturkræft.</item>
         <item quantity="other">Sé aðgangurinn %1$s fjarlægður, verður %2$d ósamstilltum breytingum einnig eytt óafturkræft.</item>
     </plurals>
-    <string name="remove_account">Fjarlægja %1$s</string>
-
-    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Þú þarft internettengingu til að geta bætt við aðgangi.</string>
-    <string name="settings_notes_path">Setja möppu</string>
-
-    <string name="simple_next">Næsta</string>
-    <string name="simple_prev">Fyrra</string>
-    <string name="simple_backup">Taka öryggisafrit</string>
-    <string name="backup">Við greindum óendurkræft ástand forritsins. Taktu afrit af ósamstilltu
- breytingunum þínum og hreinsaðu geymslurými minnispunktaforritsins.</string>
-    <string name="settings_notes_path_description">Mappa til að geyma minnispunktana þína á Nextcloud-svæðinu þínu</string>
-    <string-array name="settings_file_suffixes">
-        <item translatable="false">.txt</item>
-        <item translatable="false">.md</item>
-    </string-array>
-    <string name="settings_notes_path_success">Mappa undir nýja minnispunkta: %1$s</string>
-    <string name="settings_file_suffix">Skráarending</string>
-    <string name="settings_file_suffix_description">Skráarending fyrir nýja minnispunkta á Nextcloud-svæðinu þínu</string>
-    <string name="settings_file_suffix_success">Skráarending nýrra skráa: %1$s</string>
-    <string name="http_status_code">HTTP-stöðukóði: %1$d</string>
-    <string name="progress_import_indeterminate">Flyt inn minnispunkta…</string>
-    <string name="progress_import">Flyt inn minnispunkt %1$d af %2$d…</string>
-    <string name="account_imported">Aðgangur fluttur inn.</string>
-    <string name="direct_editing_error">Villa við að hlaða inn sniðnum textabreytingum</string>
-    <string name="switch_to_plain_editing">Skipta yfir í breytingar á hreinum texta</string>
-    <string name="action_back">Til baka</string>
-    <string name="set_online_status">Staða á netinu</string>
-    <string name="status_message">Stöðuskilaboð</string>
-    <string name="whats_your_status">Hver er staðan á þér?</string>
-    <string name="clear_status_after">Hreinsa stöðu eftir</string>
-    <string name="clear">Hreinsa</string>
-    <string name="set_message">Setja skilaboð</string>
-    <string name="dontClear">Ekki hreinsa</string>
-    <string name="today">Í dag</string>
-    <string name="thirtyMinutes">30 mínútur</string>
-    <string name="oneHour">1 klukkustund</string>
-    <string name="fourHours">4 klukkustundir</string>
-    <string name="thisWeek">Í þessari viku</string>
-    <string name="error_setting_status_message">Villa kom upp við að setja stöðuskilaboð!</string>
-    <string name="file_list_seconds_ago">sekúndum síðan</string>
-    <string name="online_status">Staða á netinu</string>
-    <string name="online">Á netinu</string>
-    <string name="dnd">Ekki ónáða</string>
-    <string name="away">Fjarverandi</string>
-    <string name="invisible">Ósýnilegt</string>
-    <string name="busy">Upptekinn</string>
-    <string name="mute_all_notifications">Þagga allar tilkynningar</string>
-    <string name="appear_offline">Birtast ótengt</string>
-    <string name="ecosystem_apps_display_files">Skráaforrit</string>
-    <string name="ecosystem_apps_display_talk">Spjalla</string>
-    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
-    <string name="ecosystem_apps_more">Fleiri Nextcloud-forrit</string>
-    <string name="ecosystem_apps_display_more">Meira</string>
 </resources>

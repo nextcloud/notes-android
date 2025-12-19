@@ -1,302 +1,355 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Nextcloud Notes - Android Client
-  ~
-  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
-  ~ SPDX-License-Identifier: GPL-3.0-or-later
--->
-<resources>
-    <string name="app_name">Notes</string>
-    <string name="app_name_long">Nextcloud Notes</string>
-    <string name="label_all_notes">すべてのノート</string>
-    <string name="label_favorites">お気に入り</string>
-    <string name="action_create">新しいノート</string>
-    <string name="welcome_text">%1$sへようこそ</string>
-    <string name="action_settings">設定</string>
-    <string name="action_trashbin">ゴミ箱</string>
-    <string name="action_search">検索</string>
-    <string name="action_sorting_method">並べ替え方法</string>
-    <string name="simple_cancel">キャンセル</string>
-    <string name="simple_switch">切り替え</string>
-    <string name="simple_edit">編集</string>
-    <string name="simple_remove">削除</string>
-    <string name="action_edit_save">保存</string>
-    <string name="simple_about">バージョン情報</string>
-    <string name="simple_link">リンク</string>
-    <string name="action_note_deleted">%1$sを削除しました</string>
-    <string name="action_note_restored">%1$s を復元しました</string>
-    <string name="action_undo">元に戻す</string>
-    <string name="action_uncategorized">未分類</string>
-    <string name="menu_delete">削除</string>
-    <string name="menu_change_category">カテゴリ</string>
-    <string name="menu_favorite">お気に入り</string>
-    <string name="menu_preview">プレビュー</string>
-    <string name="menu_share">共有</string>
-    <string name="common_loading">読み込み中…</string>
-
-
-    <string name="search_in_category">%1$sを検索</string>
-    <string name="search_in_all">全てのノートを検索</string>
-
-    <string name="change_category_title">カテゴリを選択</string>
-
-    <string name="note_share_activity_shared_with_you">%1$sと共有中</string>
-    <string name="note_share_activity_search_text">ユーザ名、クラウド統合ID、またはEメールアドレス ...</string>
-    <string name="note_share_activity_share_link">共有リンク</string>
-    <string name="note_share_activity_resharing_not_allowed">ポリシーまたは権限により再共有ができません</string>
-    <string name="note_share_activity_could_not_retrieve_url">URL を取得できませんでした</string>
-    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" があなたに共有されました</string>
-    <string name="note_share_activity_contact_no_permission">連絡先の権限が必要です。</string>
-    <!-- NoteShareDetailActivity -->
-    <string name="note_share_detail_activity_advanced_settings">詳細設定</string>
-    <string name="note_share_detail_activity_share_via_link_hide_download">ダウンロードを隠す</string>
-    <string name="note_share_detail_activity_share_send_note">受取人への注意</string>
-    <string name="note_share_detail_activity_hint_note">ノート</string>
-    <string name="note_share_detail_activity_common_next">次へ</string>
-    <string name="note_share_detail_activity_share_copy_link">リンクをコピーして共有</string>
-    <string name="note_share_detail_activity_common_confirm">承認</string>
-    <string name="note_share_detail_activity_set_note">ノート</string>
-    <string name="note_share_detail_activity_send_share">共有</string>
-    <string name="note_share_detail_activity_hint_name">名前</string>
-    <string name="note_share_detail_activity_link_name">リンク名</string>
-    <string name="note_share_detail_activity_share_link_empty_password">パスワードを入力しなければなりません</string>
-    <string name="note_share_detail_activity_hint_password">パスワード</string>
-    <string name="note_share_detail_activity_no_share_permission_selected">共有する権限を1つ以上選択してください。</string>
-    <string name="note_share_detail_activity_label_empty">ラベルは空にできません</string>
-    <string name="note_share_detail_activity_cancel">キャンセル</string>
-    <!-- SharePasswordDialogFragment -->
-    <string name="share_password_dialog_fragment_share_link_optional_password_title">オプションのパスワードを入力</string>
-    <string name="share_link_password_title">パスワードを入力</string>
-    <string name="common_ok">OK</string>
-    <string name="common_delete">削除</string>
-    <string name="write_email">メールを送信</string>
-    <string name="no_browser_available">リンクを処理するアプリがありません</string>
-    <string name="no_email_app_available">メールアドレスの利用可能なアプリはありません</string>
-    <string name="no_actions">このユーザーに対するアクションはありません</string>
-
-    <string name="email_pick_failed">メールアドレスの選択に失敗しました。</string>
-    <string name="failed_update_ui">UIの更新に失敗しました</string>
-    <string name="file_detail_sharing_fragment_no_contact_app_message">連絡先を選択するためのアプリが利用できません</string>
-    <string name="activity_chooser_title">リンク送信…</string>
-
-    <string name="activity_chooser_send_file_title">送る</string>
-    <string name="share_internal_link_to_folder_text">内部共有リンクは、このフォルダーにアクセスできるユーザーにのみ機能します。</string>
-    <string name="share_internal_link_to_file_text">内部共有リンクは、このファイルにアクセスできるユーザーにのみ機能します。</string>
-    <string name="share_internal_link">内部リンクを共有</string>
-    <string name="delete_link">リンクを削除</string>
-    <string name="share_settings">設定</string>
-    <string name="share_send_new_email">メールを送信</string>
-    <string name="share_dialog_title">共有</string>
-    <string name="share_file">%1$s を共有</string>
-    <string name="share_expiration_date_label">有効期限%1$s</string>
-    <string name="share_expiration_date_format">%1$s</string>
-    <string name="share_no_expiration_date_label">有効期限を設定</string>
-    <string name="share_via_link_section_title">共有リンク</string>
-    <string name="share_via_link_send_link_label">リンクを送信</string>
-    <string name="share_password_title">パスワード保護</string>
-    <string name="share_no_password_title">パスワード設定</string>
-    <string name="share_with_title">…と共有</string>
-    <string name="share_via_link_unset_password">設定を解除</string>
-    <string name="add_another_public_share_link">別のリンクを追加</string>
-    <string name="add_new_public_share">新規公開共有リンクを追加</string>
-    <string name="public_share_name">新しい名前</string>
-    <string name="share_link_with_label">リンクを共有(%1$s)</string>
-    <string name="share_link">共有リンク</string>
-    <string name="allow_resharing">再共有を許可する</string>
-    <string name="link_share_view_only">閲覧のみ</string>
-    <string name="link_share_editing">編集中</string>
-    <string name="link_share_allow_upload_and_editing">アップロードと編集を許可</string>
-    <string name="link_share_file_drop">ファイルドロップ(アップロードのみ)</string>
-    <string name="could_not_retrieve_shares">共有元を取得できませんでした</string>
-    <string name="share_permission_view_only">閲覧のみ</string>
-    <string name="share_permission_can_edit">編集可能</string>
-    <string name="share_permission_file_drop">ファイルを転送</string>
-    <string name="share_permission_secure_file_drop">セキュアなファイルドロップ</string>
-    <string name="share_permissions">共有権限</string>
-    <plurals name="share_download_limit_description">
-        <item quantity="other">%1$dが未ダウンロード</item>
-    </plurals>
-    <string name="username">ユーザー名</string>
-    <string name="share_group_clarification">%1$s (グループ)</string>
-    <string name="share_remote_clarification">%1$s (リモート)</string>
-    <string name="share_room_clarification">%1$s(会話)</string>
-    <string name="share_known_remote_on_clarification">%1$s上の</string>
-    <string name="remote">(リモート)</string>
-
-    <string name="copy_link">リンクをコピー</string>
-    <string name="share">共有</string>
-    <string name="clipboard_text_copied">リンクをコピーしました</string>
-    <string name="clipboard_no_text_to_copy">クリップボードにコピーするテキストを受け取らなかった</string>
-    <string name="clipboard_unexpected_error">クリップボードにテキストをコピーするときにエラーが発生しました。</string>
-    <string name="clipboard_label">%1$s からテキストをコピー</string>
-
-    <string name="listview_updated_today">今日</string>
-    <string name="listview_updated_yesterday">昨日</string>
-    <string name="listview_updated_this_week">今週</string>
-    <string name="listview_updated_last_week">先週</string>
-    <string name="listview_updated_this_month">今月</string>
-    <string name="listview_updated_last_month">先月</string>
-    <string name="settings_note_mode">ノートの表示モード</string>
-    <string name="settings_note_mode_new">ノート開封時の動作</string>
-    <string name="settings_theme_title">テーマ</string>
-    <string name="settings_font_title">モノスペースフォント</string>
-    <string name="settings_font_size">フォントサイズ</string>
-    <string name="settings_wifi_only">Wi-Fi接続時のみ同期する</string>
-    <string name="settings_lock">アプリロック（ベータ）</string>
-    <string name="settings_lock_summary">デバイスの資格情報</string>
-    <string name="settings_background_sync">バックグラウンド同期</string>
-    <string name="settings_prevent_screen_capture">スクリーンショットを防止</string>
-    <string name="settings_show_ecosystem_apps">アップスイッチャーを表示</string>
-    <string name="settings_show_ecosystem_apps_summary">ナビゲーションの見出しにおけるNextcloudアプリの提案</string>
-    <string name="settings_gridview">グリッド表示</string>
-    <string name="settings_enable_direct_edit">直接編集する</string>
-    <string name="settings_enable_direct_edit_summary">無効にすると、詳細エディターは非表示になります。</string>
-    <string name="settings_keep_screen_on">画面を表示したままにする</string>
-    <string name="settings_keep_screen_on_summary">ノートを表示または編集する場合</string>
-
-    <string name="error_sync">同期に失敗しました: %1$s</string>
-    <string name="error_synchronization">同期に失敗</string>
-    <string name="error_no_network">ネットワークに接続されていません</string>
-    <string name="error_maintenance_mode">サーバーはメンテナンスモードです</string>
-    <string name="error_unknown">不明なエラーが発生しました</string>
-
-    <string name="about_version_title">バージョン</string>
-    <string name="about_version">現在%1$sを使用しています</string>
-    <string name="about_maintainer_title">管理者</string>
-    <string name="about_developers_title">開発者</string>
-    <string name="about_developers_original_author">原作者</string>
-    <string name="about_translators_title">翻訳者</string>
-    <string name="about_translators_transifex">%1$sのNextcloud コミュニティー</string>
-    <string name="about_testers_title">テスター</string>
-    <string name="about_source_title">ソースコード</string>
-    <string name="about_source">このプロジェクトはGitHub:%1$sにホストされています。</string>
-    <string name="about_issues_title">問題</string>
-    <string name="about_issues">GitHub の問題追跡ツールで、不具合、拡張の提案、機能のリクエストを報告できます: %1$s</string>
-    <string name="about_translate_title">翻訳</string>
-    <string name="about_translate">Transifex の Nextcloud チームに参加して、このアプリの翻訳を手伝ってください: %1$s</string>
-    <string name="about_app_license_title">アプリ ライセンス</string>
+  <resources>
     <string name="about_app_license">このアプリケーションは GNU GENERAL PUBLIC LICENSE v3+ で許諾されています。</string>
     <string name="about_app_license_button">ライセンスを表示</string>
-    <string name="about_icons_disclaimer_title">アイコン</string>
-    <string name="about_icons_disclaimer_app_icon">オリジナルのアイコンは %1$sを参照。</string>
-    <string name="about_icons_disclaimer_mdi_icons">このアプリで使用しているすべてのアイコンは、%1$sGoogle Inc.によって作成されたもので、Apache 2.0利用許諾によって許諾されています。</string>
-    <string name="about_icons_disclaimer_mdi">マテリアルデザインアイコン</string>
-    <string name="about_credits_tab_title">クレジット</string>
+    <string name="about_app_license_title">アプリ ライセンス</string>
     <string name="about_contribution_tab_title">貢献</string>
+    <string name="about_credits_tab_title">クレジット</string>
+    <string name="about_developers_original_author">原作者</string>
+    <string name="about_developers_title">開発者</string>
+    <string name="about_icons_disclaimer_app_icon">オリジナルのアイコンは %1$sを参照。</string>
+    <string name="about_icons_disclaimer_mdi">マテリアルデザインアイコン</string>
+    <string name="about_icons_disclaimer_mdi_icons">このアプリで使用しているすべてのアイコンは、%1$sGoogle Inc.によって作成されたもので、Apache 2.0利用許諾によって許諾されています。</string>
+    <string name="about_icons_disclaimer_title">アイコン</string>
+    <string name="about_issues">GitHub の問題追跡ツールで、不具合、拡張の提案、機能のリクエストを報告できます: %1$s</string>
+    <string name="about_issues_title">問題</string>
     <string name="about_license_tab_title">利用許諾</string>
-
-    <string name="widget_note_list_title">ノート一覧</string>
-    <string name="widget_note_list_placeholder">ノートがありません</string>
-    <string name="widget_single_note_title">一つのノート</string>
-    <string name="widget_single_note_placeholder_tv">ノートが見つかりません</string>
-    <string name="widget_not_logged_in">このウィジェットを使用する前に、ノートにログインしてください</string>
-    <string name="widget_entry_fav_contentDescription">星印は、アイテムをお気に入りとして示すために使用されます</string>
-
+    <string name="about_maintainer_title">管理者</string>
+    <string name="about_source">このプロジェクトはGitHub:%1$sにホストされています。</string>
+    <string name="about_source_title">ソースコード</string>
+    <string name="about_testers_title">テスター</string>
+    <string name="about_translate">Transifex の Nextcloud チームに参加して、このアプリの翻訳を手伝ってください: %1$s</string>
+    <string name="about_translate_title">翻訳</string>
+    <string name="about_translators_title">翻訳者</string>
+    <string name="about_translators_transifex">%1$sのNextcloud コミュニティー</string>
+    <string name="about_version">現在%1$sを使用しています</string>
+    <string name="about_version_title">バージョン</string>
+    <string name="account_already_imported">アカウントはすでにインポートされています</string>
+    <string name="account_imported">アカウントを導入しました。</string>
+    <string name="action_back">戻る</string>
+    <string name="action_create">新しいノート</string>
+    <string name="action_edit_save">保存</string>
+    <string name="action_formatting_help">フォーマット</string>
+    <string name="action_note_deleted">%1$sを削除しました</string>
+    <string name="action_note_restored">%1$s を復元しました</string>
+    <string name="action_search">検索</string>
+    <string name="action_settings">設定</string>
+    <string name="action_sorting_method">並べ替え方法</string>
+    <string name="action_trashbin">ゴミ箱</string>
+    <string name="action_uncategorized">未分類</string>
+    <string name="action_undo">元に戻す</string>
+    <string name="activity_chooser_send_file_title">送る</string>
+    <string name="activity_chooser_title">リンク送信…</string>
     <string name="activity_select_single_note">ノートを選択</string>
-
-    <string name="shortcut_create_long">新しいノートを作成</string>
-
-    <string name="pref_value_font_normal">ノーマル</string>
-    <string name="pref_value_wifi_and_mobile">Wi-Fiおよびモバイル接続時に同期する</string>
-    <string name="pref_value_lock">パスワード保護</string>
-
-    <string name="simple_error">エラー</string>
-    <string name="simple_close">閉じる</string>
-    <string name="simple_copy">コピー</string>
-    <string name="simple_exception">例外</string>
-    <string name="pin_to_homescreen">ホームスクリーンにピン留めする</string>
-    <string name="note_has_been_deleted">ノートが削除されました</string>
     <string name="add_account">アカウントを追加</string>
-
-    <string name="category_music">音楽</string>
-    <string name="category_movies">動画</string>
-    <string name="category_movie">ムービー</string>
-    <string name="category_work">業種</string>
-    <string name="category_todo">ToDo</string>
-    <string name="category_todos">ToDo</string>
+    <string name="add_another_public_share_link">別のリンクを追加</string>
+    <string name="add_category">%1$s を追加</string>
+    <string name="add_new_public_share">新規公開共有リンクを追加</string>
+    <string name="added_content">\"%1$s\"に追加</string>
+    <string name="allow_resharing">再共有を許可する</string>
+    <string name="app_name">Notes</string>
+    <string name="app_name_long">Nextcloud Notes</string>
+    <string name="appear_offline">オフライン</string>
+    <string name="appearance_and_behavior">外観と挙動</string>
+    <string name="append_to_note">ノートに追記</string>
+    <string name="away">不在</string>
+    <string name="backup">アプリの回復不可能な状態を検知しました。同期されていない変更をバックアップし、ノートアプリのストレージの消去を実施してください。</string>
+    <string name="busy">ビジー</string>
+    <string name="category_bake">焼く</string>
     <string name="category_checklists">チェックリスト</string>
-    <string name="category_tasks">タスク</string>
+    <string name="category_credentials">資格情報</string>
+    <string name="category_food">食べ物</string>
+    <string name="category_game">ゲーム</string>
+    <string name="category_games">ゲーム</string>
+    <string name="category_gift">贈り物</string>
+    <string name="category_gifts">贈り物</string>
+    <string name="category_key">キー</string>
+    <string name="category_keys">キー</string>
+    <string name="category_movie">ムービー</string>
+    <string name="category_movies">動画</string>
+    <string name="category_music">音楽</string>
+    <string name="category_password">パスワード</string>
+    <string name="category_passwords">パスワード</string>
+    <string name="category_play">再生</string>
+    <string name="category_present">プレゼント</string>
+    <string name="category_presents">プレゼント</string>
+    <string name="category_readonly">読み込み専用</string>
     <string name="category_recipe">レシピ</string>
     <string name="category_recipes">レシピ</string>
     <string name="category_restaurant">飲食店</string>
     <string name="category_restaurants">レストラン</string>
-    <string name="category_food">食べ物</string>
-    <string name="category_bake">焼く</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_key">キー</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_keys">キー</string>
-    <string name="category_password">パスワード</string>
-    <string name="category_passwords">パスワード</string>
-    <string name="category_credentials">資格情報</string>
-    <string name="category_game">ゲーム</string>
-    <string name="category_games">ゲーム</string>
-    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
-    <string name="category_play">再生</string>
-    <string name="category_gift">贈り物</string>
-    <string name="category_gifts">贈り物</string>
-    <!-- Like a gift -->
-    <string name="category_present">プレゼント</string>
-    <!-- Like a gift -->
-    <string name="category_presents">プレゼント</string>
-
-    <string name="account_already_imported">アカウントはすでにインポートされています</string>
-    <string name="no_notes_yet">まだノートはありません</string>
-    <string name="no_notes_yet_description">+ ボタンを押して新しいノートを作成</string>
-    <string name="simple_more">さらに表示</string>
-    <string name="simple_move">移動</string>
-    <string name="category_readonly">読み込み専用</string>
-    <string name="no_category">カテゴリ無し</string>
-    <string name="add_category">%1$s を追加</string>
-    <string name="simple_checkbox">チェックボックス</string>
-    <string name="unlock_notes">ノートをアンロック</string>
-    <string name="error_dialog_title">おやまあ、どうしたことでしょう？🙁</string>
-    <string name="error_dialog_tip_token_mismatch_retry">アプリの強制終了と再起動を試みてください。Nextcloudアプリへの接続が正しくない接続があったかも知れません。</string>
-    <string name="error_dialog_tip_token_mismatch_clear_storage">この問題が続くようでしたら、下記両方のアプリでストレージをクリアして問題が解決できるか試してください：Nextcloud と Nextcloud Notes</string>
-    <string name="error_dialog_tip_clear_storage">アプリ情報を開き、次の手順を実施することでストレージを消去できます: ストレージ → ストレージを消去 ⚠️ 警告: この操作で、まだ同期されていないノートが消去されます！</string>
-    <string name="error_dialog_tip_files_outdated">Nextcloudアプリが古いようです。プレイストアかF-Droidから最新版を入手してください。</string>
-    <string name="error_dialog_tip_files_force_stop">Nextcloudアプリで何か不具合が発生しました。NextcloudアプリとNextcloud Notesアプリの両方を強制終了してください。</string>
-    <string name="error_dialog_tip_files_delete_storage">強制終了で改善されない場合は、両方のアプリのストレージをクリアしてみてください。</string>
-    <string name="error_dialog_timeout_instance">一定時間内にサーバーからの反応がありませんでした。サーバーが正常に動いているか確認してください。</string>
-    <string name="error_dialog_timeout_toggle">ネットワーク接続を確認してください。モバイルデータやWi-Fiのオフ/オンを繰り返してみるとうまくいく場合があります。</string>
+    <string name="category_tasks">タスク</string>
+    <string name="category_todo">ToDo</string>
+    <string name="category_todos">ToDo</string>
+    <string name="category_work">業種</string>
+    <string name="change_category_title">カテゴリを選択</string>
+    <string name="change_note_title">ノートタイトルを変更</string>
+    <string name="choose_account">アカウントを選択</string>
+    <string name="clear">クリア</string>
+    <string name="clear_status_after">ステータスの有効期限</string>
+    <string name="clipboard_label">%1$s からテキストをコピー</string>
+    <string name="clipboard_no_text_to_copy">クリップボードにコピーするテキストを受け取らなかった</string>
+    <string name="clipboard_text_copied">リンクをコピーしました</string>
+    <string name="clipboard_unexpected_error">クリップボードにテキストをコピーするときにエラーが発生しました。</string>
+    <string name="common_delete">削除</string>
+    <string name="common_loading">読み込み中…</string>
+    <string name="common_ok">OK</string>
+    <string name="context_based_formatting">コンテキストに基づいた書式設定</string>
+    <string name="copy_link">リンクをコピー</string>
+    <string name="could_not_retrieve_shares">共有元を取得できませんでした</string>
+    <string name="delete_link">リンクを削除</string>
+    <string name="direct_editing_error">リッチ編集の読み込み中にエラーが発生</string>
+    <string name="dnd">取り込み中</string>
+    <string name="ecosystem_apps_display_files">ファイル</string>
+    <string name="ecosystem_apps_display_more">さらに表示</string>
+    <string name="ecosystem_apps_display_talk">トーク</string>
+    <string name="ecosystem_apps_more">もっと Nextcloud アプリを見る</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="email_pick_failed">メールアドレスの選択に失敗しました。</string>
+    <string name="error_action_open_battery_settings">バッテリー設定</string>
+    <string name="error_action_open_deck_info">アプリ情報を開く</string>
+    <string name="error_action_open_network">ネットワーク設定</string>
+    <string name="error_action_update_files_app">更新</string>
+    <string name="error_dialog_check_maintenance">Nextcloudサーバーがメンテナンスモード中かどうか確認してください。</string>
     <string name="error_dialog_check_server">サーバーからの反応が不正です。Webインターフェースからnotesにアクセス出来るか確認してください。</string>
     <string name="error_dialog_check_server_logs">Nextcloudのセットアップに問題があります。サーバーのログファイルを確認してください。</string>
-    <string name="error_dialog_check_maintenance">Nextcloudサーバーがメンテナンスモード中かどうか確認してください。</string>
     <string name="error_dialog_insufficient_storage">Nextcloudサーバーのストレージに空き容量がありません。ローカルの変更をクラウドに同期するには一部のファイルを削除してください。</string>
-    <string name="error_dialog_we_need_info">サポートには下記技術情報が必要です：</string>
-    <string name="error_dialog_server_app_enabled">ご利用のサーバーに ”Notes” プラグインアプリがインストールされ、有効になっていることを確認してください。</string>
-    <string name="error_dialog_redirect">サーバーがHTTPステータスコード 302を返しました。これはNotesアプリがインストールされていないか、構成が誤っていることを意味します。.htaccessファイルのカスタムオーバーライドやOIDクライアントのようなNextcloudアプリが原因の可能性があります。</string>
-    <string name="error_dialog_tip_disable_battery_optimizations">NextcloudとNotesアプリに対してバッテリー最適化をすべて無効にしてください。</string>
     <string name="error_dialog_min_version">ノート Androidアプリは、Nextcloud Androidアプリのバージョン3.18以上が必要です。</string>
-    <string name="added_content">\"%1$s\"に追加</string>
-    <string name="shared_text_empty">共有テキストは空です</string>
-    <string name="append_to_note">ノートに追記</string>
-    <string name="change_note_title">ノートタイトルを変更</string>
-    <string name="menu_edit_title">タイトルを編集</string>
-    <string name="simple_security">セキュリティ</string>
-    <string name="appearance_and_behavior">外観と挙動</string>
-    <string name="simple_synchronization">同期</string>
+    <string name="error_dialog_redirect">サーバーがHTTPステータスコード 302を返しました。これはNotesアプリがインストールされていないか、構成が誤っていることを意味します。.htaccessファイルのカスタムオーバーライドやOIDクライアントのようなNextcloudアプリが原因の可能性があります。</string>
+    <string name="error_dialog_server_app_enabled">ご利用のサーバーに ”Notes” プラグインアプリがインストールされ、有効になっていることを確認してください。</string>
+    <string name="error_dialog_timeout_instance">一定時間内にサーバーからの反応がありませんでした。サーバーが正常に動いているか確認してください。</string>
+    <string name="error_dialog_timeout_toggle">ネットワーク接続を確認してください。モバイルデータやWi-Fiのオフ/オンを繰り返してみるとうまくいく場合があります。</string>
+    <string name="error_dialog_tip_clear_storage">アプリ情報を開き、次の手順を実施することでストレージを消去できます: ストレージ → ストレージを消去 ⚠️ 警告: この操作で、まだ同期されていないノートが消去されます！</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">NextcloudとNotesアプリに対してバッテリー最適化をすべて無効にしてください。</string>
+    <string name="error_dialog_tip_files_delete_storage">強制終了で改善されない場合は、両方のアプリのストレージをクリアしてみてください。</string>
+    <string name="error_dialog_tip_files_force_stop">Nextcloudアプリで何か不具合が発生しました。NextcloudアプリとNextcloud Notesアプリの両方を強制終了してください。</string>
+    <string name="error_dialog_tip_files_outdated">Nextcloudアプリが古いようです。プレイストアかF-Droidから最新版を入手してください。</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">この問題が続くようでしたら、下記両方のアプリでストレージをクリアして問題が解決できるか試してください：Nextcloud と Nextcloud Notes</string>
+    <string name="error_dialog_tip_token_mismatch_retry">アプリの強制終了と再起動を試みてください。Nextcloudアプリへの接続が正しくない接続があったかも知れません。</string>
+    <string name="error_dialog_title">おやまあ、どうしたことでしょう？🙁</string>
+    <string name="error_dialog_we_need_info">サポートには下記技術情報が必要です：</string>
+    <string name="error_maintenance_mode">サーバーはメンテナンスモードです</string>
+    <string name="error_no_network">ネットワークに接続されていません</string>
+    <string name="error_setting_status_message">ステータスメッセージの設定中にエラーが発生しました。</string>
+    <string name="error_sync">同期に失敗しました: %1$s</string>
+    <string name="error_synchronization">同期に失敗</string>
+    <string name="error_unknown">不明なエラーが発生しました</string>
+    <string name="failed_update_ui">UIの更新に失敗しました</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">連絡先を選択するためのアプリが利用できません</string>
+    <string name="file_list_seconds_ago">数秒前</string>
+    <string name="formatting_help_cbf_body_1">Notesアプリの重要な設計目標は、注意力を阻害しないツールを提供することです。その為にMarkdownを使ってテキストを修飾できるようにしました。以下は、コードを入力することなくショートカットを使ってメモを書式設定する例です。</string>
+    <string name="formatting_help_cbf_body_2">テキストの範囲を選択するか、カーソルを任意の位置でタップすると、デフォルトのエントリ%1$s、%2$s、%3$sや%4$s、%5$sなどのエントリの横にあるポップアップメニューが表示されます。</string>
+    <string name="formatting_help_cbf_title">コンテキストに基づいた書式設定 </string>
+    <string name="formatting_help_checkboxes_body_1">チェックボックスを作成するには、リストの後に角括弧を使用します</string>
+    <string name="formatting_help_checkboxes_body_2">アイテム1</string>
+    <string name="formatting_help_checkboxes_body_3">アイテム2</string>
+    <string name="formatting_help_checkboxes_title">チェックボックス</string>
+    <string name="formatting_help_code_body_1">Markdownのコード書式にはさまざまな方法があります。インラインのコードブロックにする場合は、バッククオートでくくります:</string>
+    <string name="formatting_help_code_body_2">Markdownは、コードフェンシングと呼ばれるものもサポートしています。これにより、インデントなしで複数行に適用できます:</string>
+    <string name="formatting_help_code_body_3">言語毎の構文の強調表示を使用する場合は、言語指定します:</string>
+    <string name="formatting_help_code_title">コード</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_images_alt">ファンシー画像</string>
+    <string name="formatting_help_images_body_1">リンクは、プロトコルとドメインから始まる完全URLか%1$sから始まる絶対パスである必要があります。</string>
+    <string name="formatting_help_images_body_2">マークダウン形式に準拠するには、画像URL内にエスケープ文字を使用してください。これは例えば、URL内の%1$sをスペースで置き換えるなどが該当します。</string>
+    <string name="formatting_help_images_title">画像</string>
+    <string name="formatting_help_lists_body_1">番号付きのリストにしたい場合には:</string>
+    <string name="formatting_help_lists_body_2">一つ目</string>
+    <string name="formatting_help_lists_body_3">2つめ</string>
+    <string name="formatting_help_lists_body_4">3つめ</string>
+    <string name="formatting_help_lists_body_5">箇条書きにしたい場合には:</string>
+    <string name="formatting_help_lists_body_6">ダッシュで行を開始する</string>
+    <string name="formatting_help_lists_body_7">また、小項目がある場合は、ダッシュや星の前にスペースを2つ入れます:</string>
+    <string name="formatting_help_lists_body_8">このように</string>
+    <string name="formatting_help_lists_body_9">そしてこれ</string>
+    <string name="formatting_help_lists_title">リスト</string>
+    <string name="formatting_help_structured_documents_body_1">文書を構造化するために、さまざまなレベルの見出しがあると便利なことがあります。見出しを作るには、行頭から%1$sで書き始めて見出しを作成します。複数の%2$sを使うと見出しのサイズが小さくなります。</string>
+    <string name="formatting_help_structured_documents_body_2">これは見出し3です</string>
+    <string name="formatting_help_structured_documents_body_3">1つ目の %1$sから%2$sまで、6つのさまざまな見出しの大きさを使うことができます。</string>
+    <string name="formatting_help_structured_documents_body_4">なにかを引用したい場合は、行頭に%1$s文字を使用します:</string>
+    <string name="formatting_help_structured_documents_body_5">知識より想像力が重要です。知識は限られていますが、想像力は世界を駆け巡ります。</string>
+    <string name="formatting_help_structured_documents_body_6">- アルバート・アインシュタイン</string>
+    <string name="formatting_help_structured_documents_title">構造化ドキュメント</string>
+    <string name="formatting_help_tables_column">カラム %1d</string>
+    <string name="formatting_help_tables_title">テーブル</string>
+    <string name="formatting_help_tables_value">値 %1d</string>
+    <string name="formatting_help_text_body">マークダウンで単語を %1$s太字%1$s にしたり、%2$s斜体%2$s するのは簡単です。 その他、単語を%3$s打ち消し %3$s たり、[Nextcloudへリンク](https://nextcloud.com)することもできます。</string>
+    <string name="formatting_help_text_title">テキスト</string>
+    <string name="fourHours">4時間</string>
+    <string name="http_status_code">HTTPステータスコード: %1$d</string>
+    <string name="invisible">ステータスを隠す</string>
+    <string name="label_all_notes">すべてのノート</string>
+    <string name="label_favorites">お気に入り</string>
+    <string name="link_share_allow_upload_and_editing">アップロードと編集を許可</string>
+    <string name="link_share_editing">編集中</string>
+    <string name="link_share_file_drop">ファイルドロップ(アップロードのみ)</string>
+    <string name="link_share_view_only">閲覧のみ</string>
+    <string name="listview_updated_last_month">先月</string>
+    <string name="listview_updated_last_week">先週</string>
+    <string name="listview_updated_this_month">今月</string>
+    <string name="listview_updated_this_week">今週</string>
+    <string name="listview_updated_today">今日</string>
+    <string name="listview_updated_yesterday">昨日</string>
     <string name="manage_accounts">アカウント管理</string>
-    <string name="action_formatting_help">フォーマット</string>
-
-
+    <string name="menu_change_category">カテゴリ</string>
+    <string name="menu_delete">削除</string>
+    <string name="menu_edit_title">タイトルを編集</string>
+    <string name="menu_favorite">お気に入り</string>
+    <string name="menu_preview">プレビュー</string>
+    <string name="menu_share">共有</string>
+    <string name="mute_all_notifications">全ての通知をミュートします</string>
+    <string name="no_account_configured_yet">設定済みアカウントがまだありません</string>
+    <string name="no_actions">このユーザーに対するアクションはありません</string>
+    <string name="no_browser_available">リンクを処理するアプリがありません</string>
+    <string name="no_category">カテゴリ無し</string>
+    <string name="no_email_app_available">メールアドレスの利用可能なアプリはありません</string>
+    <string name="no_notes_yet">まだノートはありません</string>
+    <string name="no_notes_yet_description">+ ボタンを押して新しいノートを作成</string>
+    <string name="no_other_accounts">他のアカウントはまだ設定されていません。</string>
     <string name="noteMode_plain_edit">プレーン編集モード</string>
     <string name="noteMode_plain_preview">プレビュー</string>
-    <string name="noteMode_rich_edit">リッチ編集モード</string>
     <string name="noteMode_remember_last">最後に使用したモードで開く</string>
-
-    <string-array name="fontSize_entries">
-        <item>小</item>
-        <item>中</item>
-        <item>大</item>
-    </string-array>
-
-    <string-array name="darkmode_entries">
-        <item>明るい</item>
-        <item>暗い</item>
-        <item>システムのデフォルト</item>
-    </string-array>
-
+    <string name="noteMode_rich_edit">リッチ編集モード</string>
+    <string name="note_has_been_deleted">ノートが削除されました</string>
+    <string name="note_share_activity_contact_no_permission">連絡先の権限が必要です。</string>
+    <string name="note_share_activity_could_not_retrieve_url">URL を取得できませんでした</string>
+    <string name="note_share_activity_resharing_not_allowed">ポリシーまたは権限により再共有ができません</string>
+    <string name="note_share_activity_search_text">ユーザ名、クラウド統合ID、またはEメールアドレス ...</string>
+    <string name="note_share_activity_share_link">共有リンク</string>
+    <string name="note_share_activity_shared_with_you">%1$sと共有中</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" があなたに共有されました</string>
+    <string name="note_share_detail_activity_advanced_settings">詳細設定</string>
+    <string name="note_share_detail_activity_cancel">キャンセル</string>
+    <string name="note_share_detail_activity_common_confirm">承認</string>
+    <string name="note_share_detail_activity_common_next">次へ</string>
+    <string name="note_share_detail_activity_hint_name">名前</string>
+    <string name="note_share_detail_activity_hint_note">ノート</string>
+    <string name="note_share_detail_activity_hint_password">パスワード</string>
+    <string name="note_share_detail_activity_label_empty">ラベルは空にできません</string>
+    <string name="note_share_detail_activity_link_name">リンク名</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">共有する権限を1つ以上選択してください。</string>
+    <string name="note_share_detail_activity_send_share">共有</string>
+    <string name="note_share_detail_activity_set_note">ノート</string>
+    <string name="note_share_detail_activity_share_copy_link">リンクをコピーして共有</string>
+    <string name="note_share_detail_activity_share_link_empty_password">パスワードを入力しなければなりません</string>
+    <string name="note_share_detail_activity_share_send_note">受取人への注意</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">ダウンロードを隠す</string>
+    <string name="oneHour">1時間</string>
+    <string name="online">オンライン</string>
+    <string name="online_status">オンラインステータス</string>
+    <string name="pin_to_homescreen">ホームスクリーンにピン留めする</string>
+    <string name="pref_value_font_normal">ノーマル</string>
+    <string name="pref_value_lock">パスワード保護</string>
+    <string name="pref_value_wifi_and_mobile">Wi-Fiおよびモバイル接続時に同期する</string>
+    <string name="progress_import">%2$d中%1$dのノートをインポート中...</string>
+    <string name="progress_import_indeterminate">ノートを導入しています…</string>
+    <string name="public_share_name">新しい名前</string>
+    <string name="remote">(リモート)</string>
+    <string name="remove_account">%1$sを削除</string>
+    <string name="search_in_all">全てのノートを検索</string>
+    <string name="search_in_category">%1$sを検索</string>
+    <string name="set_message">メッセージを設定</string>
+    <string name="set_online_status">オンラインステータス</string>
+    <string name="settings_background_sync">バックグラウンド同期</string>
+    <string name="settings_enable_direct_edit">直接編集する</string>
+    <string name="settings_enable_direct_edit_summary">無効にすると、詳細エディターは非表示になります。</string>
+    <string name="settings_file_suffix">ファイル拡張子</string>
+    <string name="settings_file_suffix_description">Nextcloud内の新しいノートのファイル拡張子</string>
+    <string name="settings_file_suffix_success">新規ファイル接尾辞: %1$s</string>
+    <string name="settings_font_size">フォントサイズ</string>
+    <string name="settings_font_title">モノスペースフォント</string>
+    <string name="settings_gridview">グリッド表示</string>
+    <string name="settings_keep_screen_on">画面を表示したままにする</string>
+    <string name="settings_keep_screen_on_summary">ノートを表示または編集する場合</string>
+    <string name="settings_lock">アプリロック（ベータ）</string>
+    <string name="settings_lock_summary">デバイスの資格情報</string>
+    <string name="settings_note_mode">ノートの表示モード</string>
+    <string name="settings_note_mode_new">ノート開封時の動作</string>
+    <string name="settings_notes_path">フォルダーを設定</string>
+    <string name="settings_notes_path_description">ノートを保管するNextcloud内のフォルダー</string>
+    <string name="settings_notes_path_success">新規ノートフォルダー: %1$s</string>
+    <string name="settings_prevent_screen_capture">スクリーンショットを防止</string>
+    <string name="settings_show_ecosystem_apps">アップスイッチャーを表示</string>
+    <string name="settings_show_ecosystem_apps_summary">ナビゲーションの見出しにおけるNextcloudアプリの提案</string>
+    <string name="settings_theme_title">テーマ</string>
+    <string name="settings_wifi_only">Wi-Fi接続時のみ同期する</string>
+    <string name="share">共有</string>
+    <string name="share_dialog_title">共有</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_expiration_date_label">有効期限%1$s</string>
+    <string name="share_file">%1$s を共有</string>
+    <string name="share_group_clarification">%1$s (グループ)</string>
+    <string name="share_internal_link">内部リンクを共有</string>
+    <string name="share_internal_link_to_file_text">内部共有リンクは、このファイルにアクセスできるユーザーにのみ機能します。</string>
+    <string name="share_internal_link_to_folder_text">内部共有リンクは、このフォルダーにアクセスできるユーザーにのみ機能します。</string>
+    <string name="share_known_remote_on_clarification">%1$s上の</string>
+    <string name="share_link">共有リンク</string>
+    <string name="share_link_password_title">パスワードを入力</string>
+    <string name="share_link_with_label">リンクを共有(%1$s)</string>
+    <string name="share_no_expiration_date_label">有効期限を設定</string>
+    <string name="share_no_password_title">パスワード設定</string>
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">オプションのパスワードを入力</string>
+    <string name="share_password_title">パスワード保護</string>
+    <string name="share_permission_can_edit">編集可能</string>
+    <string name="share_permission_file_drop">ファイルを転送</string>
+    <string name="share_permission_secure_file_drop">セキュアなファイルドロップ</string>
+    <string name="share_permission_view_only">閲覧のみ</string>
+    <string name="share_permissions">共有権限</string>
+    <string name="share_remote_clarification">%1$s (リモート)</string>
+    <string name="share_room_clarification">%1$s(会話)</string>
+    <string name="share_send_new_email">メールを送信</string>
+    <string name="share_settings">設定</string>
+    <string name="share_via_link_section_title">共有リンク</string>
+    <string name="share_via_link_send_link_label">リンクを送信</string>
+    <string name="share_via_link_unset_password">設定を解除</string>
+    <string name="share_with_title">…と共有</string>
+    <string name="shared_text_empty">共有テキストは空です</string>
+    <string name="shortcut_create_long">新しいノートを作成</string>
+    <string name="simple_about">バージョン情報</string>
+    <string name="simple_backup">バックアップ</string>
+    <string name="simple_cancel">キャンセル</string>
+    <string name="simple_checkbox">チェックボックス</string>
+    <string name="simple_close">閉じる</string>
+    <string name="simple_copy">コピー</string>
+    <string name="simple_edit">編集</string>
+    <string name="simple_error">エラー</string>
+    <string name="simple_exception">例外</string>
+    <string name="simple_link">リンク</string>
+    <string name="simple_more">さらに表示</string>
+    <string name="simple_move">移動</string>
+    <string name="simple_next">次へ</string>
+    <string name="simple_other">その他</string>
+    <string name="simple_prev">前へ</string>
+    <string name="simple_remove">削除</string>
+    <string name="simple_security">セキュリティ</string>
+    <string name="simple_switch">切り替え</string>
+    <string name="simple_synchronization">同期</string>
+    <string name="sort_alphabetically">アルファベット順にソート</string>
+    <string name="sort_last_modified">更新日付でソート</string>
+    <string name="status_message">状態メッセージ</string>
+    <string name="switch_to_plain_editing">プレーン編集モードに切り替える</string>
+    <string name="thirtyMinutes">30分</string>
+    <string name="today">今日</string>
+    <string name="unlock_notes">ノートをアンロック</string>
+    <string name="username">ユーザー名</string>
+    <string name="welcome_text">%1$sへようこそ</string>
+    <string name="whats_your_status">現在のオンラインステータスは？</string>
+    <string name="widget_entry_fav_contentDescription">星印は、アイテムをお気に入りとして示すために使用されます</string>
+    <string name="widget_not_logged_in">このウィジェットを使用する前に、ノートにログインしてください</string>
+    <string name="widget_note_list_placeholder">ノートがありません</string>
+    <string name="widget_note_list_title">ノート一覧</string>
+    <string name="widget_single_note_placeholder_tv">ノートが見つかりません</string>
+    <string name="widget_single_note_title">一つのノート</string>
+    <string name="write_email">メールを送信</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">アカウントの追加にはインターネットへの接続が必要です</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="other">%1$dが未ダウンロード</item>
+    </plurals>
     <plurals name="ab_selected">
         <item quantity="other">%d 選択済</item>
     </plurals>
@@ -309,122 +362,7 @@
     <plurals name="share_multiple">
         <item quantity="other"> %1$dノートの内容を共有</item>
     </plurals>
-
-    <string name="formatting_help_divider" translateable="false">---</string>
-    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
-    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
-    <string name="formatting_help_codefence" translateable="false">```</string>
-    <string name="formatting_help_codefence_outer" translateable="false">````</string>
-    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
-    <string name="formatting_help_cbf_title">コンテキストに基づいた書式設定 </string>
-    <string name="formatting_help_cbf_body_1">Notesアプリの重要な設計目標は、注意力を阻害しないツールを提供することです。その為にMarkdownを使ってテキストを修飾できるようにしました。以下は、コードを入力することなくショートカットを使ってメモを書式設定する例です。</string>
-    <string name="formatting_help_cbf_body_2">テキストの範囲を選択するか、カーソルを任意の位置でタップすると、デフォルトのエントリ%1$s、%2$s、%3$sや%4$s、%5$sなどのエントリの横にあるポップアップメニューが表示されます。</string>
-
-    <string name="formatting_help_text_title">テキスト</string>
-    <string name="formatting_help_text_body">マークダウンで単語を %1$s太字%1$s にしたり、%2$s斜体%2$s するのは簡単です。 その他、単語を%3$s打ち消し %3$s たり、[Nextcloudへリンク](https://nextcloud.com)することもできます。</string>
-
-    <string name="formatting_help_lists_title">リスト</string>
-    <string name="formatting_help_lists_body_1">番号付きのリストにしたい場合には:</string>
-    <string name="formatting_help_lists_body_2">一つ目</string>
-    <string name="formatting_help_lists_body_3">2つめ</string>
-    <string name="formatting_help_lists_body_4">3つめ</string>
-    <string name="formatting_help_lists_body_5">箇条書きにしたい場合には:</string>
-    <string name="formatting_help_lists_body_6">ダッシュで行を開始する</string>
-    <string name="formatting_help_lists_body_7">また、小項目がある場合は、ダッシュや星の前にスペースを2つ入れます:</string>
-    <string name="formatting_help_lists_body_8">このように</string>
-    <string name="formatting_help_lists_body_9">そしてこれ</string>
-
-    <string name="formatting_help_checkboxes_title">チェックボックス</string>
-    <string name="formatting_help_checkboxes_body_1">チェックボックスを作成するには、リストの後に角括弧を使用します</string>
-    <string name="formatting_help_checkboxes_body_2">アイテム1</string>
-    <string name="formatting_help_checkboxes_body_3">アイテム2</string>
-
-    <string name="formatting_help_structured_documents_title">構造化ドキュメント</string>
-    <string name="formatting_help_structured_documents_body_1">文書を構造化するために、さまざまなレベルの見出しがあると便利なことがあります。見出しを作るには、行頭から%1$sで書き始めて見出しを作成します。複数の%2$sを使うと見出しのサイズが小さくなります。</string>
-    <string name="formatting_help_structured_documents_body_2">これは見出し3です</string>
-    <string name="formatting_help_structured_documents_body_3">1つ目の %1$sから%2$sまで、6つのさまざまな見出しの大きさを使うことができます。</string>
-    <string name="formatting_help_structured_documents_body_4">なにかを引用したい場合は、行頭に%1$s文字を使用します:</string>
-    <string name="formatting_help_structured_documents_body_5">知識より想像力が重要です。知識は限られていますが、想像力は世界を駆け巡ります。</string>
-    <string name="formatting_help_structured_documents_body_6">- アルバート・アインシュタイン</string>
-
-    <string name="formatting_help_code_title">コード</string>
-    <string name="formatting_help_code_body_1">Markdownのコード書式にはさまざまな方法があります。インラインのコードブロックにする場合は、バッククオートでくくります:</string>
-    <string name="formatting_help_code_body_2">Markdownは、コードフェンシングと呼ばれるものもサポートしています。これにより、インデントなしで複数行に適用できます:</string>
-    <string name="formatting_help_code_body_3">言語毎の構文の強調表示を使用する場合は、言語指定します:</string>
-
-    <string name="formatting_help_tables_title">テーブル</string>
-    <!-- Column header of a sample table -->
-    <string name="formatting_help_tables_column">カラム %1d</string>
-    <!-- Table cell value of a sample table -->
-    <string name="formatting_help_tables_value">値 %1d</string>
-
-    <string name="formatting_help_images_body_1">リンクは、プロトコルとドメインから始まる完全URLか%1$sから始まる絶対パスである必要があります。</string>
-    <string name="formatting_help_images_body_2">マークダウン形式に準拠するには、画像URL内にエスケープ文字を使用してください。これは例えば、URL内の%1$sをスペースで置き換えるなどが該当します。</string>
-    <string name="formatting_help_images_title">画像</string>
-    <string name="formatting_help_images_alt">ファンシー画像</string>
-
-    <string name="simple_other">その他</string>
-    <string name="sort_last_modified">更新日付でソート</string>
-    <string name="sort_alphabetically">アルファベット順にソート</string>
-    <string name="error_action_open_battery_settings">バッテリー設定</string>
-    <string name="error_action_open_deck_info">アプリ情報を開く</string>
-    <string name="error_action_open_network">ネットワーク設定</string>
-    <string name="error_action_update_files_app">更新</string>
-    <string name="no_account_configured_yet">設定済みアカウントがまだありません</string>
-    <string name="no_other_accounts">他のアカウントはまだ設定されていません。</string>
-    <string name="choose_account">アカウントを選択</string>
-    <string name="context_based_formatting">コンテキストに基づいた書式設定</string>
     <plurals name="remove_account_message">
         <item quantity="other">アカウント「%1$s」を削除すると、同期されていない%2$d件の変更も削除され、復元が出来なくなります。</item>
     </plurals>
-    <string name="remove_account">%1$sを削除</string>
-
-    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">アカウントの追加にはインターネットへの接続が必要です</string>
-    <string name="settings_notes_path">フォルダーを設定</string>
-
-    <string name="simple_next">次へ</string>
-    <string name="simple_prev">前へ</string>
-    <string name="simple_backup">バックアップ</string>
-    <string name="backup">アプリの回復不可能な状態を検知しました。同期されていない変更をバックアップし、ノートアプリのストレージの消去を実施してください。</string>
-    <string name="settings_notes_path_description">ノートを保管するNextcloud内のフォルダー</string>
-    <string-array name="settings_file_suffixes">
-        <item translatable="false">.txt</item>
-        <item translatable="false">.md</item>
-    </string-array>
-    <string name="settings_notes_path_success">新規ノートフォルダー: %1$s</string>
-    <string name="settings_file_suffix">ファイル拡張子</string>
-    <string name="settings_file_suffix_description">Nextcloud内の新しいノートのファイル拡張子</string>
-    <string name="settings_file_suffix_success">新規ファイル接尾辞: %1$s</string>
-    <string name="http_status_code">HTTPステータスコード: %1$d</string>
-    <string name="progress_import_indeterminate">ノートを導入しています…</string>
-    <string name="progress_import">%2$d中%1$dのノートをインポート中...</string>
-    <string name="account_imported">アカウントを導入しました。</string>
-    <string name="direct_editing_error">リッチ編集の読み込み中にエラーが発生</string>
-    <string name="switch_to_plain_editing">プレーン編集モードに切り替える</string>
-    <string name="action_back">戻る</string>
-    <string name="set_online_status">オンラインステータス</string>
-    <string name="status_message">状態メッセージ</string>
-    <string name="whats_your_status">現在のオンラインステータスは？</string>
-    <string name="clear_status_after">ステータスの有効期限</string>
-    <string name="clear">クリア</string>
-    <string name="set_message">メッセージを設定</string>
-    <string name="today">今日</string>
-    <string name="thirtyMinutes">30分</string>
-    <string name="oneHour">1時間</string>
-    <string name="fourHours">4時間</string>
-    <string name="error_setting_status_message">ステータスメッセージの設定中にエラーが発生しました。</string>
-    <string name="file_list_seconds_ago">数秒前</string>
-    <string name="online_status">オンラインステータス</string>
-    <string name="online">オンライン</string>
-    <string name="dnd">取り込み中</string>
-    <string name="away">不在</string>
-    <string name="invisible">ステータスを隠す</string>
-    <string name="busy">ビジー</string>
-    <string name="mute_all_notifications">全ての通知をミュートします</string>
-    <string name="appear_offline">オフライン</string>
-    <string name="ecosystem_apps_display_files">ファイル</string>
-    <string name="ecosystem_apps_display_talk">トーク</string>
-    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
-    <string name="ecosystem_apps_more">もっと Nextcloud アプリを見る</string>
-    <string name="ecosystem_apps_display_more">さらに表示</string>
 </resources>

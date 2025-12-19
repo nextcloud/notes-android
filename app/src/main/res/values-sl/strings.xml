@@ -1,297 +1,346 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Nextcloud Notes - Android Client
-  ~
-  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
-  ~ SPDX-License-Identifier: GPL-3.0-or-later
--->
-<resources>
-    <string name="app_name">Notes</string>
-    <string name="app_name_long">Nextcloud Notes</string>
-    <string name="label_all_notes">Vse zabeležke</string>
-    <string name="label_favorites">Priljubljene</string>
-    <string name="action_create">Nova zabeležka</string>
-    <string name="welcome_text">Dobrodošli v %1$s</string>
-    <string name="action_settings">Nastavitve</string>
-    <string name="action_trashbin">Izbrisane zabeležke</string>
-    <string name="action_search">Poišči</string>
-    <string name="action_sorting_method">Način razvrščanja</string>
-    <string name="simple_cancel">Prekliči</string>
-    <string name="simple_switch">Preklopi</string>
-    <string name="simple_edit">Uredi</string>
-    <string name="simple_remove">Odstrani</string>
-    <string name="action_edit_save">Shrani</string>
-    <string name="simple_about">O programu</string>
-    <string name="simple_link">Povezava</string>
-    <string name="action_note_deleted">Izbrisano %1$s</string>
-    <string name="action_note_restored">Obnovljeno %1$s</string>
-    <string name="action_undo">Razveljavi</string>
-    <string name="action_uncategorized">Neopredeljeno</string>
-    <string name="menu_delete">Izbriši</string>
-    <string name="menu_change_category">Kategorija</string>
-    <string name="menu_favorite">Priljubljena</string>
-    <string name="menu_preview">Predogled</string>
-    <string name="menu_share">Souporaba</string>
-    <string name="common_loading">Poteka nalaganje …</string>
-
-
-    <string name="search_in_category">Poišči v %1$s</string>
-    <string name="search_in_all">Preišči vse zabeležke</string>
-
-    <string name="change_category_title">Izbor kategorije</string>
-
-    <string name="note_share_activity_shared_with_you">Souporabo omogoča %1$s</string>
-    <string name="note_share_activity_share_link">Povezava za souporabo</string>
-    <string name="note_share_activity_could_not_retrieve_url">Naslova URL ni mogoče pridobiti</string>
-    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" vam je oddan v souporabo</string>
-    <string name="note_share_activity_contact_no_permission">Zahtevano je dovoljenje za dostop do stikov.</string>
-    <!-- NoteShareDetailActivity -->
-    <string name="note_share_detail_activity_advanced_settings">Napredne nastavitve</string>
-    <string name="note_share_detail_activity_share_via_link_hide_download">Skrij prejem</string>
-    <string name="note_share_detail_activity_share_send_note">Sporočilo za prejemnika</string>
-    <string name="note_share_detail_activity_hint_note">Opomba</string>
-    <string name="note_share_detail_activity_common_next">Naslednji</string>
-    <string name="note_share_detail_activity_common_confirm">Potrdi</string>
-    <string name="note_share_detail_activity_set_note">Nastavi sporočilo</string>
-    <string name="note_share_detail_activity_send_share">Pošlji povezavo do mesta souporabe</string>
-    <string name="note_share_detail_activity_hint_name">Ime podpisnika</string>
-    <string name="note_share_detail_activity_link_name">Ime povezave</string>
-    <string name="note_share_detail_activity_share_link_empty_password">Vpisati je treba geslo.</string>
-    <string name="note_share_detail_activity_hint_password">Geslo</string>
-    <string name="note_share_detail_activity_no_share_permission_selected">Izbrati je treba vsaj eno dovoljenje za souporabo.</string>
-    <string name="note_share_detail_activity_label_empty">Oznaka ne sme biti prazno polje</string>
-    <string name="note_share_detail_activity_cancel">Prekliči</string>
-    <!-- SharePasswordDialogFragment -->
-    <string name="share_password_dialog_fragment_share_link_optional_password_title">Vpis gesla na željo</string>
-    <string name="share_password_dialog_fragment_skip">Preskoči</string>
-
-    <string name="share_link_password_title">Vpis gesla</string>
-    <string name="common_ok">V redu</string>
-    <string name="common_delete">Izbriši</string>
-    <string name="write_email">Pošlji elektronsko sporočilo</string>
-    <string name="no_browser_available">Ni nameščenega programa, ki upravlja s povezavami</string>
-    <string name="no_email_app_available">Ni nameščenega programa, ki upravlja elektronskimi naslovi.</string>
-    <string name="no_actions">Ni dejanj za tega uporabnika</string>
-
-    <string name="email_pick_failed">Elektronskega naslova ni mogoče izbrati.</string>
-    <string name="failed_update_ui">Posodabljanje uporabniškega vmesnika je spodletelo</string>
-    <string name="activity_chooser_title">Pošlji povezavo …</string>
-
-    <string name="activity_chooser_send_file_title">Pošlji</string>
-    <string name="share_internal_link_to_folder_text">Notranja povezava mesta souporabe deluje le za uporabnike z dostopom do mape.</string>
-    <string name="share_internal_link_to_file_text">Notranja povezava mesta souporabe deluje le za uporabnike z dostopom do datoteke.</string>
-    <string name="share_internal_link">Notranja povezava mesta souporabe</string>
-    <string name="delete_link">Izbriši povezavo</string>
-    <string name="share_settings">Nastavitve</string>
-    <string name="share_send_new_email">Pošlji novo elektronsko sporočilo</string>
-    <string name="share_dialog_title">Souporaba</string>
-    <string name="share_file">Omogoči souporabo %1$s</string>
-    <string name="share_expiration_date_label">Preteče %1$s</string>
-    <string name="share_expiration_date_format">%1$s</string>
-    <string name="share_no_expiration_date_label">Nastavi datum preteka</string>
-    <string name="share_via_link_section_title">Povezava za souporabo</string>
-    <string name="share_via_link_send_link_label">Pošlji povezavo</string>
-    <string name="share_password_title">Zaščiteno z geslom</string>
-    <string name="share_no_password_title">Nastavi geslo</string>
-    <string name="share_with_title">Omogoči souporabo …</string>
-    <string name="share_via_link_unset_password">Odstrani izbor</string>
-    <string name="add_another_public_share_link">Dodaj novo povezavo</string>
-    <string name="add_new_public_share">Nova javna povezava za souporabo</string>
-    <string name="public_share_name">Novo ime</string>
-    <string name="share_link_with_label">Povezava souporabe (%1$s)</string>
-    <string name="share_link">Povezava za souporabo</string>
-    <string name="allow_resharing">Dovoli nadaljnjo souporabo</string>
-    <string name="link_share_view_only">Le ogled</string>
-    <string name="link_share_editing">Urejanje</string>
-    <string name="link_share_allow_upload_and_editing">Dovoli pošiljanje in urejanje</string>
-    <string name="link_share_file_drop">Poteg datotek v okno (samo nalaganje)</string>
-    <string name="could_not_retrieve_shares">Naslovov mest souporabe ni mogoče pridobiti</string>
-    <string name="share_permission_view_only">Le ogled</string>
-    <string name="share_permission_can_edit">Lahko ureja</string>
-    <string name="share_permission_file_drop">Poteg datotek v mapo</string>
-    <string name="share_permission_secure_file_drop">Varno pošiljanje daottek</string>
-    <string name="share_permissions">Dovoljenja souporabe</string>
-    <string name="username">Uporabniško ime</string>
-    <string name="share_group_clarification">%1$s (skupina)</string>
-    <string name="share_remote_clarification">%1$s (oddaljeno)</string>
-    <string name="share_room_clarification">%1$s (pogovor)</string>
-    <string name="share_known_remote_on_clarification">na %1$s</string>
-    <string name="remote">(oddaljeno) </string>
-
-    <string name="copy_link">Kopiraj povezavo</string>
-    <string name="share">Souporaba</string>
-    <string name="clipboard_text_copied">Povezava je kopirana</string>
-    <string name="clipboard_no_text_to_copy">Ni prejetega besedila za kopiranje v odložišče</string>
-    <string name="clipboard_unexpected_error">Prišlo je do nepričakovane napake med kopiranjem v odložišče</string>
-    <string name="clipboard_label">Besedilo je kopirano iz %1$s</string>
-
-    <string name="listview_updated_today">Danes</string>
-    <string name="listview_updated_yesterday">Včeraj</string>
-    <string name="listview_updated_this_week">Zadnji teden</string>
-    <string name="listview_updated_last_week">Zadnji teden</string>
-    <string name="listview_updated_this_month">Zadnji mesec</string>
-    <string name="listview_updated_last_month">Zadnji mesec</string>
-    <string name="settings_note_mode">Način odpiranja zabeležk</string>
-    <string name="settings_note_mode_new">Obnašanje odpiranja beležk</string>
-    <string name="settings_theme_title">Tema</string>
-    <string name="settings_font_title">Pisava enotne širine</string>
-    <string name="settings_font_size">Velikost pisave</string>
-    <string name="settings_wifi_only">Usklajuj le na Wi-Fi</string>
-    <string name="settings_lock">Zaklep aplikacije (beta)</string>
-    <string name="settings_lock_summary">Poverila naprave</string>
-    <string name="settings_background_sync"> Usklajevanje v ozadju</string>
-    <string name="settings_prevent_screen_capture">Prepreči zajem zaslona</string>
-    <string name="settings_show_ecosystem_apps">Pokaži preklopnika programov</string>
-    <string name="settings_show_ecosystem_apps_summary">Predlogi programov Nextcloud v naslovu</string>
-    <string name="settings_gridview">Mrežni pogled</string>
-    <string name="settings_enable_direct_edit">Neposredno urejanje</string>
-    <string name="settings_enable_direct_edit_summary">Onemogočena možnost skrije prikaz naprednih možnosti urejevalnika.</string>
-    <string name="settings_keep_screen_on">Ohrani zaslon prižgan</string>
-    <string name="settings_keep_screen_on_summary">Med pregledovanjem in urejanjem zabeležk</string>
-
-    <string name="error_sync">Usklajevanje je spodletelo: %1$s</string>
-    <string name="error_synchronization">Usklajevanje je spodletelo</string>
-    <string name="error_no_network">Ni omrežne povezave</string>
-    <string name="error_maintenance_mode">Strežnik je v načinu vzdrževanja.</string>
-    <string name="error_unknown">Prišlo je do neznane napake.</string>
-
-    <string name="about_version_title">Različica</string>
-    <string name="about_version">Trenutno je v uporabi %1$s</string>
-    <string name="about_maintainer_title">Vzdrževalec</string>
-    <string name="about_developers_title">Razvijalci</string>
-    <string name="about_developers_original_author">izvorni avtor</string>
-    <string name="about_translators_title">Prevajalci</string>
-    <string name="about_translators_transifex">Skupnost Nextcloud na %1$s</string>
-    <string name="about_testers_title">Preizkuševalci</string>
-    <string name="about_source_title">Izvorna koda</string>
-    <string name="about_source">Projekt gostuje na GitHub: %1$s</string>
-    <string name="about_issues_title">Odzivi</string>
-    <string name="about_issues">Poročila o hroščih, predloge za izboljšave in prošnje za nove programske zmožnosti je mogoče objaviti na sledilniku GitHub: %1$s</string>
-    <string name="about_translate_title">Prevodi</string>
-    <string name="about_translate">Pridružite se skupini Nextcloud na spletišču Transifex in pomagajte pri prevodu programa: %1$s</string>
-    <string name="about_app_license_title">Dovoljenje za uporabo</string>
+  <resources>
     <string name="about_app_license">Program je objavljen pod pogoji Splošnega javnega dovoljenja (GNU GPL) različice 3 ali novejše.</string>
     <string name="about_app_license_button">Podrobno besedilo dovoljenja</string>
-    <string name="about_icons_disclaimer_title">Ikone</string>
-    <string name="about_icons_disclaimer_app_icon">Za izvorno ikono si oglejte %1$s.</string>
-    <string name="about_icons_disclaimer_mdi_icons">Vse ostale ikone, uporabljene v programu, so del zbirke %1$s, ki jo je pod pogoji dovoljenja Apache 2.0 objavilo podjetje Google Inc..</string>
-    <string name="about_icons_disclaimer_mdi">Ikone Material Design</string>
-    <string name="about_credits_tab_title">Zasluge</string>
+    <string name="about_app_license_title">Dovoljenje za uporabo</string>
     <string name="about_contribution_tab_title">Skupnost</string>
+    <string name="about_credits_tab_title">Zasluge</string>
+    <string name="about_developers_original_author">izvorni avtor</string>
+    <string name="about_developers_title">Razvijalci</string>
+    <string name="about_icons_disclaimer_app_icon">Za izvorno ikono si oglejte %1$s.</string>
+    <string name="about_icons_disclaimer_mdi">Ikone Material Design</string>
+    <string name="about_icons_disclaimer_mdi_icons">Vse ostale ikone, uporabljene v programu, so del zbirke %1$s, ki jo je pod pogoji dovoljenja Apache 2.0 objavilo podjetje Google Inc..</string>
+    <string name="about_icons_disclaimer_title">Ikone</string>
+    <string name="about_issues">Poročila o hroščih, predloge za izboljšave in prošnje za nove programske zmožnosti je mogoče objaviti na sledilniku GitHub: %1$s</string>
+    <string name="about_issues_title">Odzivi</string>
     <string name="about_license_tab_title">Dovoljenje</string>
-
-    <string name="widget_note_list_title">Seznam zabeležk</string>
-    <string name="widget_note_list_placeholder">Ni zabeležk</string>
-    <string name="widget_single_note_title">Samostojna zabeležka</string>
-    <string name="widget_single_note_placeholder_tv">Zabeležke ni mogoče najti</string>
-    <string name="widget_not_logged_in">Pred uporabo gradnika se je treba prijaviti v program Beležka Notes</string>
-    <string name="widget_entry_fav_contentDescription">Zvezdica označuje priljubljene predmete</string>
-
+    <string name="about_maintainer_title">Vzdrževalec</string>
+    <string name="about_source">Projekt gostuje na GitHub: %1$s</string>
+    <string name="about_source_title">Izvorna koda</string>
+    <string name="about_testers_title">Preizkuševalci</string>
+    <string name="about_translate">Pridružite se skupini Nextcloud na spletišču Transifex in pomagajte pri prevodu programa: %1$s</string>
+    <string name="about_translate_title">Prevodi</string>
+    <string name="about_translators_title">Prevajalci</string>
+    <string name="about_translators_transifex">Skupnost Nextcloud na %1$s</string>
+    <string name="about_version">Trenutno je v uporabi %1$s</string>
+    <string name="about_version_title">Različica</string>
+    <string name="account_already_imported">Račun je že bil uvožen</string>
+    <string name="account_imported">Račun je uspešno uvožen.</string>
+    <string name="action_back">Nazaj</string>
+    <string name="action_create">Nova zabeležka</string>
+    <string name="action_edit_save">Shrani</string>
+    <string name="action_formatting_help">Oblikovanje</string>
+    <string name="action_note_deleted">Izbrisano %1$s</string>
+    <string name="action_note_restored">Obnovljeno %1$s</string>
+    <string name="action_search">Poišči</string>
+    <string name="action_settings">Nastavitve</string>
+    <string name="action_sorting_method">Način razvrščanja</string>
+    <string name="action_trashbin">Izbrisane zabeležke</string>
+    <string name="action_uncategorized">Neopredeljeno</string>
+    <string name="action_undo">Razveljavi</string>
+    <string name="activity_chooser_send_file_title">Pošlji</string>
+    <string name="activity_chooser_title">Pošlji povezavo …</string>
     <string name="activity_select_single_note">Izbor zabeležke</string>
-
-    <string name="shortcut_create_long">Ustvari novo zabeležko</string>
-
-    <string name="pref_value_font_normal">Običajno</string>
-    <string name="pref_value_wifi_and_mobile">Usklajuj na Wi-Fi in mobilni povezavi</string>
-    <string name="pref_value_lock">Zaščita z geslom</string>
-
-    <string name="simple_error">Napaka</string>
-    <string name="simple_close">Zapri</string>
-    <string name="simple_copy">Kopiraj</string>
-    <string name="simple_exception">Izjema</string>
-    <string name="pin_to_homescreen">Pripni na osnovni zaslon</string>
-    <string name="note_has_been_deleted">Ta zabeležka je bila izbrisana</string>
     <string name="add_account">Dodaj račun</string>
-
-    <string name="category_music">Glasba</string>
-    <string name="category_movies">Video</string>
-    <string name="category_movie">Video</string>
-    <string name="category_work">Delo</string>
-    <string name="category_todo">Naloga</string>
-    <string name="category_todos">Naloge</string>
+    <string name="add_another_public_share_link">Dodaj novo povezavo</string>
+    <string name="add_category">Dodaj %1$s</string>
+    <string name="add_new_public_share">Nova javna povezava za souporabo</string>
+    <string name="added_content">Dodano »%1$s«</string>
+    <string name="allow_resharing">Dovoli nadaljnjo souporabo</string>
+    <string name="app_name">Notes</string>
+    <string name="app_name_long">Nextcloud Notes</string>
+    <string name="appear_offline">Pokaže kot brez povezave</string>
+    <string name="appearance_and_behavior">Videz in obnašanje</string>
+    <string name="append_to_note">Pripni k zabeležki</string>
+    <string name="away">Ne spremljam</string>
+    <string name="backup">Zaznano je neobnovljivo stanje delovanja programa. Ustvarite varnostno kopijo neusklajenih sprememb in počistite shrambo programa Beležka.</string>
+    <string name="busy">Zasedeno</string>
+    <string name="category_bake">Peka</string>
     <string name="category_checklists">Zbirni seznam</string>
-    <string name="category_tasks">Naloge</string>
+    <string name="category_credentials">Poverila</string>
+    <string name="category_food">Hrana</string>
+    <string name="category_game">Igra</string>
+    <string name="category_games">Igre</string>
+    <string name="category_gift">Drobna pozornost</string>
+    <string name="category_gifts">Drobne pozornosti</string>
+    <string name="category_key">Ključ</string>
+    <string name="category_keys">Ključi</string>
+    <string name="category_movie">Video</string>
+    <string name="category_movies">Video</string>
+    <string name="category_music">Glasba</string>
+    <string name="category_password">Geslo</string>
+    <string name="category_passwords">Gesla</string>
+    <string name="category_play">Igrani nastop</string>
+    <string name="category_present">Darilo</string>
+    <string name="category_presents">Darila</string>
+    <string name="category_readonly">Le za branje</string>
     <string name="category_recipe">Recept</string>
     <string name="category_recipes">Recepti</string>
     <string name="category_restaurant">Restavracija</string>
     <string name="category_restaurants">Restavracije</string>
-    <string name="category_food">Hrana</string>
-    <string name="category_bake">Peka</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_key">Ključ</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_keys">Ključi</string>
-    <string name="category_password">Geslo</string>
-    <string name="category_passwords">Gesla</string>
-    <string name="category_credentials">Poverila</string>
-    <string name="category_game">Igra</string>
-    <string name="category_games">Igre</string>
-    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
-    <string name="category_play">Igrani nastop</string>
-    <string name="category_gift">Drobna pozornost</string>
-    <string name="category_gifts">Drobne pozornosti</string>
-    <!-- Like a gift -->
-    <string name="category_present">Darilo</string>
-    <!-- Like a gift -->
-    <string name="category_presents">Darila</string>
-
-    <string name="account_already_imported">Račun je že bil uvožen</string>
-    <string name="no_notes_yet">Ni še dodane nobene zabeležke</string>
-    <string name="no_notes_yet_description">Pritisnite gumb + za novo zabeležko</string>
-    <string name="simple_more">Več</string>
-    <string name="simple_move">Premakni</string>
-    <string name="category_readonly">Le za branje</string>
-    <string name="no_category">Brez kategorije</string>
-    <string name="add_category">Dodaj %1$s</string>
-    <string name="simple_checkbox">Izbirno polje</string>
-    <string name="unlock_notes">Odkleni zabeležke</string>
-    <string name="error_dialog_title">Ojoj, kaj pa zdaj? 🙁</string>
-    <string name="error_dialog_tip_token_mismatch_retry">Poskusite vsiliti končanje programa in ga ponovno zagnati. Morda je težava v neustrezni povezavi z okoljem Nextcloud</string>
-    <string name="error_dialog_tip_token_mismatch_clear_storage">Če se težava še naprej pojavlja, poskusite počistiti podatke programa Nextcloud in Nextcloud Notes.</string>
-    <string name="error_dialog_tip_clear_storage">Shrambo je mogoče počistiti med podrobnostmi programa Shramba → Počisti shrambo. ⚠️ Opozorilo: s tem izbrišete tudi zabeležke, ki še niso usklajene!</string>
-    <string name="error_dialog_tip_files_outdated">Program Nextcloud je očitno starejše različice. Posodobite jo prek Trgovine Play ali s posodabljalnikom F-Droid.</string>
-    <string name="error_dialog_tip_files_force_stop">Kaže, da je nekaj narobe s programom Nextcloud. Poskusite vsiljeno zaustaviti programa Nextcloud in Nextcloud Notes.</string>
-    <string name="error_dialog_tip_files_delete_storage">Vsiljeno zaustavljanje ni imelo ustreznega učinka. Poskusite lahko še počistiti podatke shrambe obeh programov.</string>
-    <string name="error_dialog_timeout_instance">V podanem času program ni pridobil ustreznega odziva strežnika. Prepričajte se, da program deluje pravilno.</string>
-    <string name="error_dialog_timeout_toggle">Preverite omrežno povezavo. Včasih preklapljanje med mobilnimi in Wi-Fi podatki razreši težavo.</string>
+    <string name="category_tasks">Naloge</string>
+    <string name="category_todo">Naloga</string>
+    <string name="category_todos">Naloge</string>
+    <string name="category_work">Delo</string>
+    <string name="change_category_title">Izbor kategorije</string>
+    <string name="change_note_title">Spremeni naslov zabeležke</string>
+    <string name="choose_account">Izbor računa</string>
+    <string name="clear">Počisti</string>
+    <string name="clear_status_after">Počisti stanje</string>
+    <string name="clipboard_label">Besedilo je kopirano iz %1$s</string>
+    <string name="clipboard_no_text_to_copy">Ni prejetega besedila za kopiranje v odložišče</string>
+    <string name="clipboard_text_copied">Povezava je kopirana</string>
+    <string name="clipboard_unexpected_error">Prišlo je do nepričakovane napake med kopiranjem v odložišče</string>
+    <string name="common_delete">Izbriši</string>
+    <string name="common_loading">Poteka nalaganje …</string>
+    <string name="common_ok">V redu</string>
+    <string name="context_based_formatting">Pojavno okno vsebinskega oblikovanja</string>
+    <string name="copy_link">Kopiraj povezavo</string>
+    <string name="could_not_retrieve_shares">Naslovov mest souporabe ni mogoče pridobiti</string>
+    <string name="delete_link">Izbriši povezavo</string>
+    <string name="direct_editing_error">Napaka nalaganja oblikovnega urejevalnika</string>
+    <string name="dnd">Ne moti</string>
+    <string name="dontClear">Ne počisti</string>
+    <string name="ecosystem_apps_display_files">Datoteke</string>
+    <string name="ecosystem_apps_display_more">Več</string>
+    <string name="ecosystem_apps_display_talk">Pogovor Talk</string>
+    <string name="ecosystem_apps_more">Več programov Nexcloud</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="email_pick_failed">Elektronskega naslova ni mogoče izbrati.</string>
+    <string name="error_action_open_battery_settings">Nastavitve baterije</string>
+    <string name="error_action_open_deck_info">Odpri podrobnosti programa</string>
+    <string name="error_action_open_network">Nastavitve omrežja</string>
+    <string name="error_action_update_files_app">Posodobi</string>
+    <string name="error_dialog_check_maintenance">Preverite, ali je morda namestitev Nextcloud trenutno v vzdrževalnem načinu.</string>
     <string name="error_dialog_check_server">Prejet je napačen odziv s strežnika. Preverite, ali imate dostop do zabeležk prek spletnega vmesnika.</string>
     <string name="error_dialog_check_server_logs">Prišlo je do napake z namestitvijo Nextcloud. Preverite zapis dnevnika na strežniku.</string>
-    <string name="error_dialog_check_maintenance">Preverite, ali je morda namestitev Nextcloud trenutno v vzdrževalnem načinu.</string>
     <string name="error_dialog_insufficient_storage">V shrambi ni več prostora. Za nadaljevanje usklajevanja z oblakom je treba Izbrisati nekaj krajevnih datotek.</string>
-    <string name="error_dialog_we_need_info">Z ustrezno pomoč potrebujemo nekaj tehničnih podrobnosti sistema:</string>
-    <string name="error_dialog_server_app_enabled">Prepričajte se, da ste namestili in omogočili tudi program »Notes« na strežniku.</string>
-    <string name="error_dialog_redirect">S strežnika je prejet odziv s kodo stanja HTTP 302, kar kaže na to, da program Notes ni nameščen, ali pa je napačno nastavljen. Napaka se pojavi tudi pri nekaterih določilih v datoteki .htaccess oziroma programih, kot je odjemalec OID.</string>
-    <string name="error_dialog_tip_disable_battery_optimizations">Onemogočite vso optimizacijo porabe baterije za programa Nextcloud in Notes.</string>
     <string name="error_dialog_min_version">Program Notes za okolje Android zahteva vsaj različico Nextcloud 3.18.</string>
-    <string name="added_content">Dodano »%1$s«</string>
-    <string name="shared_text_empty">Besedilo v souporabi je brez vsebine</string>
-    <string name="append_to_note">Pripni k zabeležki</string>
-    <string name="change_note_title">Spremeni naslov zabeležke</string>
-    <string name="menu_edit_title">Uredi naslov</string>
-    <string name="simple_security">Varnost</string>
-    <string name="appearance_and_behavior">Videz in obnašanje</string>
-    <string name="simple_synchronization">Usklajevanje</string>
+    <string name="error_dialog_redirect">S strežnika je prejet odziv s kodo stanja HTTP 302, kar kaže na to, da program Notes ni nameščen, ali pa je napačno nastavljen. Napaka se pojavi tudi pri nekaterih določilih v datoteki .htaccess oziroma programih, kot je odjemalec OID.</string>
+    <string name="error_dialog_server_app_enabled">Prepričajte se, da ste namestili in omogočili tudi program »Notes« na strežniku.</string>
+    <string name="error_dialog_timeout_instance">V podanem času program ni pridobil ustreznega odziva strežnika. Prepričajte se, da program deluje pravilno.</string>
+    <string name="error_dialog_timeout_toggle">Preverite omrežno povezavo. Včasih preklapljanje med mobilnimi in Wi-Fi podatki razreši težavo.</string>
+    <string name="error_dialog_tip_clear_storage">Shrambo je mogoče počistiti med podrobnostmi programa Shramba → Počisti shrambo. ⚠️ Opozorilo: s tem izbrišete tudi zabeležke, ki še niso usklajene!</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Onemogočite vso optimizacijo porabe baterije za programa Nextcloud in Notes.</string>
+    <string name="error_dialog_tip_files_delete_storage">Vsiljeno zaustavljanje ni imelo ustreznega učinka. Poskusite lahko še počistiti podatke shrambe obeh programov.</string>
+    <string name="error_dialog_tip_files_force_stop">Kaže, da je nekaj narobe s programom Nextcloud. Poskusite vsiljeno zaustaviti programa Nextcloud in Nextcloud Notes.</string>
+    <string name="error_dialog_tip_files_outdated">Program Nextcloud je očitno starejše različice. Posodobite jo prek Trgovine Play ali s posodabljalnikom F-Droid.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Če se težava še naprej pojavlja, poskusite počistiti podatke programa Nextcloud in Nextcloud Notes.</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Poskusite vsiliti končanje programa in ga ponovno zagnati. Morda je težava v neustrezni povezavi z okoljem Nextcloud</string>
+    <string name="error_dialog_title">Ojoj, kaj pa zdaj? 🙁</string>
+    <string name="error_dialog_we_need_info">Z ustrezno pomoč potrebujemo nekaj tehničnih podrobnosti sistema:</string>
+    <string name="error_maintenance_mode">Strežnik je v načinu vzdrževanja.</string>
+    <string name="error_no_network">Ni omrežne povezave</string>
+    <string name="error_sync">Usklajevanje je spodletelo: %1$s</string>
+    <string name="error_synchronization">Usklajevanje je spodletelo</string>
+    <string name="error_unknown">Prišlo je do neznane napake.</string>
+    <string name="failed_update_ui">Posodabljanje uporabniškega vmesnika je spodletelo</string>
+    <string name="file_list_seconds_ago">pred nekaj sekundami</string>
+    <string name="formatting_help_cbf_body_1">Najpomembnejša funkcija programa Notes je enostavno in hitro beleženje besedila, ki ga je mogoče tudi oblikovati z oblikovnim jezikom Markdown. Za spodaj omenjeno oblikovanje, je mogoče uporabiti tipkovne bližnjice, kar še dodatno poenostavi vnos..</string>
+    <string name="formatting_help_cbf_body_2">Enostavno izberite besedilo, ali pa pritisnite na kazalko, in pojavil se bo meni, ki vključuje ob privzetih možnosti %1$s, %2$s, %3$s tudi take, kot sta %4$s in %5$s.</string>
+    <string name="formatting_help_cbf_title">Vsebinsko oblikovanje</string>
+    <string name="formatting_help_checkboxes_body_1">Izbirno polje ustvarite s seznamom, ki mu sledi oklepaj</string>
+    <string name="formatting_help_checkboxes_body_2">Predmet A</string>
+    <string name="formatting_help_checkboxes_body_3">Predmet B</string>
+    <string name="formatting_help_checkboxes_title">Izbirna polja</string>
+    <string name="formatting_help_code_body_1">Na voljo je več različnih načinov oblikovanja z Markdown. Če želite določiti medvrstične bloke besedila, zapišite to med navedke:</string>
+    <string name="formatting_help_code_body_2">Oblikovni jezik Markdown podpira tudi tako imenovano obrobljanje kode, kar omogoča zapis več vrstic brez zamika:</string>
+    <string name="formatting_help_code_body_3">Če bi želeli uporabiti poudarjanje skladnje, vključite tudi jezik:</string>
+    <string name="formatting_help_code_title">Šifra</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_inline" translateable="false">» %1$s «</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_images_alt">Posebna slika</string>
+    <string name="formatting_help_images_body_1">Povezave so lahko ali polni naslovi URL skupaj z navedbo protokola in domene ali pa absolutne poti, ki se začnejo z znakom %1$s.</string>
+    <string name="formatting_help_images_body_2">Za usklajenost z zapisom Markdown je priporočljivo uporabiti ubežne znake v naslovih URL slik. To pomeni na primer zamenjavo  presledka za znakom %1$s v naslovu URL.</string>
+    <string name="formatting_help_images_title">Slike</string>
+    <string name="formatting_help_lists_body_1">Včasih pridejo prav oštevilčeni seznami:</string>
+    <string name="formatting_help_lists_body_2">Ena</string>
+    <string name="formatting_help_lists_body_3">Dve</string>
+    <string name="formatting_help_lists_body_4">Tri</string>
+    <string name="formatting_help_lists_body_5">Včasih pridejo prav točkovni seznami</string>
+    <string name="formatting_help_lists_body_6">Začnite vrstico s črtico</string>
+    <string name="formatting_help_lists_body_7">Če želite vpisati podrejene točke, postavite dva presledka pred črtico oziroma zvezdico:</string>
+    <string name="formatting_help_lists_body_8">Tako,</string>
+    <string name="formatting_help_lists_body_9">in tako,</string>
+    <string name="formatting_help_lists_title">Seznami</string>
+    <string name="formatting_help_structured_documents_body_1">Včasih je uporabno besedilo strukturirati na več ravni. Vrstice začnite z %1$s, da ustvarite prvi naslov, več zaporednih %2$s pa pomeni manjšo velikost naslova.</string>
+    <string name="formatting_help_structured_documents_body_2">To je naslov tretje ravni</string>
+    <string name="formatting_help_structured_documents_body_3">Uporabite lahko en %1$s pa vse do %2$s šest različnih velikosti naslova.</string>
+    <string name="formatting_help_structured_documents_body_4">Če želite kaj zapisati v navedku, uporabite znak %1$s pred vrstico:</string>
+    <string name="formatting_help_structured_documents_body_5">Domišljija je pomembnejša od znanja. Znanje je omejeno, domišljija pa obkroži ves svet.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+    <string name="formatting_help_structured_documents_title">Strukturirani dokumenti</string>
+    <string name="formatting_help_tables_column">Stolpec %1d</string>
+    <string name="formatting_help_tables_title">Razpredelnice</string>
+    <string name="formatting_help_tables_value">Vrednost %1d</string>
+    <string name="formatting_help_text_body">Z oblikovnim jezikom Markdown je besede zelo enostavno zapisati %1$skrepko%1$s oziroma %2$sležeče%2$s. Besede je mogoče tudi %3$sprečrtati%3$s in celo vpisati povezavo do na primer [spletišča Nextcloud](https://nextcloud.com).</string>
+    <string name="formatting_help_text_title">Besedilo</string>
+    <string name="fourHours">4 urah</string>
+    <string name="http_status_code">Stanje kode HTTP: %1$d</string>
+    <string name="invisible">Drugim nevidno</string>
+    <string name="label_all_notes">Vse zabeležke</string>
+    <string name="label_favorites">Priljubljene</string>
+    <string name="link_share_allow_upload_and_editing">Dovoli pošiljanje in urejanje</string>
+    <string name="link_share_editing">Urejanje</string>
+    <string name="link_share_file_drop">Poteg datotek v okno (samo nalaganje)</string>
+    <string name="link_share_view_only">Le ogled</string>
+    <string name="listview_updated_last_month">Zadnji mesec</string>
+    <string name="listview_updated_last_week">Zadnji teden</string>
+    <string name="listview_updated_this_month">Zadnji mesec</string>
+    <string name="listview_updated_this_week">Zadnji teden</string>
+    <string name="listview_updated_today">Danes</string>
+    <string name="listview_updated_yesterday">Včeraj</string>
     <string name="manage_accounts">Upravljanje z računi</string>
-    <string name="action_formatting_help">Oblikovanje</string>
-
-
+    <string name="menu_change_category">Kategorija</string>
+    <string name="menu_delete">Izbriši</string>
+    <string name="menu_edit_title">Uredi naslov</string>
+    <string name="menu_favorite">Priljubljena</string>
+    <string name="menu_preview">Predogled</string>
+    <string name="menu_share">Souporaba</string>
+    <string name="mute_all_notifications">Utiša vsa obvestila</string>
+    <string name="no_account_configured_yet">Ni nastavljenega nobenega računa</string>
+    <string name="no_actions">Ni dejanj za tega uporabnika</string>
+    <string name="no_browser_available">Ni nameščenega programa, ki upravlja s povezavami</string>
+    <string name="no_category">Brez kategorije</string>
+    <string name="no_email_app_available">Ni nameščenega programa, ki upravlja elektronskimi naslovi.</string>
+    <string name="no_notes_yet">Ni še dodane nobene zabeležke</string>
+    <string name="no_notes_yet_description">Pritisnite gumb + za novo zabeležko</string>
+    <string name="no_other_accounts">Ni nastavljenega nobenega drugega računa</string>
     <string name="noteMode_plain_edit">Besedilni urejevalni način</string>
     <string name="noteMode_plain_preview">Predogled urejevalnega načina</string>
-    <string name="noteMode_rich_edit">Oblikovni urejevalni način</string>
     <string name="noteMode_remember_last">Zapomni si zadnjo izbiro</string>
-
-    <string-array name="fontSize_entries">
-        <item>Majhna</item>
-        <item>Srednja</item>
-        <item>Velika</item>
-    </string-array>
-
-    <string-array name="darkmode_entries">
-        <item>Svetla</item>
-        <item>Temna</item>
-        <item>Sistemsko privzeto</item>
-    </string-array>
-
+    <string name="noteMode_rich_edit">Oblikovni urejevalni način</string>
+    <string name="note_has_been_deleted">Ta zabeležka je bila izbrisana</string>
+    <string name="note_share_activity_contact_no_permission">Zahtevano je dovoljenje za dostop do stikov.</string>
+    <string name="note_share_activity_could_not_retrieve_url">Naslova URL ni mogoče pridobiti</string>
+    <string name="note_share_activity_share_link">Povezava za souporabo</string>
+    <string name="note_share_activity_shared_with_you">Souporabo omogoča %1$s</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" vam je oddan v souporabo</string>
+    <string name="note_share_detail_activity_advanced_settings">Napredne nastavitve</string>
+    <string name="note_share_detail_activity_cancel">Prekliči</string>
+    <string name="note_share_detail_activity_common_confirm">Potrdi</string>
+    <string name="note_share_detail_activity_common_next">Naslednji</string>
+    <string name="note_share_detail_activity_hint_name">Ime podpisnika</string>
+    <string name="note_share_detail_activity_hint_note">Opomba</string>
+    <string name="note_share_detail_activity_hint_password">Geslo</string>
+    <string name="note_share_detail_activity_label_empty">Oznaka ne sme biti prazno polje</string>
+    <string name="note_share_detail_activity_link_name">Ime povezave</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Izbrati je treba vsaj eno dovoljenje za souporabo.</string>
+    <string name="note_share_detail_activity_send_share">Pošlji povezavo do mesta souporabe</string>
+    <string name="note_share_detail_activity_set_note">Nastavi sporočilo</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Vpisati je treba geslo.</string>
+    <string name="note_share_detail_activity_share_send_note">Sporočilo za prejemnika</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Skrij prejem</string>
+    <string name="oneHour">po 1 uri</string>
+    <string name="online">Trenutno na spletu</string>
+    <string name="pin_to_homescreen">Pripni na osnovni zaslon</string>
+    <string name="pref_value_font_normal">Običajno</string>
+    <string name="pref_value_lock">Zaščita z geslom</string>
+    <string name="pref_value_wifi_and_mobile">Usklajuj na Wi-Fi in mobilni povezavi</string>
+    <string name="progress_import">Poteka uvažanje sporočilca %1$d od %2$d…</string>
+    <string name="progress_import_indeterminate">Poteka uvažanje sporočilc ...</string>
+    <string name="public_share_name">Novo ime</string>
+    <string name="remote">(oddaljeno) </string>
+    <string name="remove_account">Odstrani %1$s</string>
+    <string name="search_in_all">Preišči vse zabeležke</string>
+    <string name="search_in_category">Poišči v %1$s</string>
+    <string name="settings_background_sync"> Usklajevanje v ozadju</string>
+    <string name="settings_enable_direct_edit">Neposredno urejanje</string>
+    <string name="settings_enable_direct_edit_summary">Onemogočena možnost skrije prikaz naprednih možnosti urejevalnika.</string>
+    <string name="settings_file_suffix">Pripona datotek</string>
+    <string name="settings_file_suffix_description">Privzeta pripona za nova sporočilca v okolju Nextcloud</string>
+    <string name="settings_file_suffix_success">Nova pripona datotek: %1$s</string>
+    <string name="settings_font_size">Velikost pisave</string>
+    <string name="settings_font_title">Pisava enotne širine</string>
+    <string name="settings_gridview">Mrežni pogled</string>
+    <string name="settings_keep_screen_on">Ohrani zaslon prižgan</string>
+    <string name="settings_keep_screen_on_summary">Med pregledovanjem in urejanjem zabeležk</string>
+    <string name="settings_lock">Zaklep aplikacije (beta)</string>
+    <string name="settings_lock_summary">Poverila naprave</string>
+    <string name="settings_note_mode">Način odpiranja zabeležk</string>
+    <string name="settings_note_mode_new">Obnašanje odpiranja beležk</string>
+    <string name="settings_notes_path">Nastavi mapo</string>
+    <string name="settings_notes_path_description">Mapa za shranjevanje sporočilc v okolju Nextcloud</string>
+    <string name="settings_notes_path_success">Nova mapa sporočilc: %1$s</string>
+    <string name="settings_prevent_screen_capture">Prepreči zajem zaslona</string>
+    <string name="settings_show_ecosystem_apps">Pokaži preklopnika programov</string>
+    <string name="settings_show_ecosystem_apps_summary">Predlogi programov Nextcloud v naslovu</string>
+    <string name="settings_theme_title">Tema</string>
+    <string name="settings_wifi_only">Usklajuj le na Wi-Fi</string>
+    <string name="share">Souporaba</string>
+    <string name="share_dialog_title">Souporaba</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_expiration_date_label">Preteče %1$s</string>
+    <string name="share_file">Omogoči souporabo %1$s</string>
+    <string name="share_group_clarification">%1$s (skupina)</string>
+    <string name="share_internal_link">Notranja povezava mesta souporabe</string>
+    <string name="share_internal_link_to_file_text">Notranja povezava mesta souporabe deluje le za uporabnike z dostopom do datoteke.</string>
+    <string name="share_internal_link_to_folder_text">Notranja povezava mesta souporabe deluje le za uporabnike z dostopom do mape.</string>
+    <string name="share_known_remote_on_clarification">na %1$s</string>
+    <string name="share_link">Povezava za souporabo</string>
+    <string name="share_link_password_title">Vpis gesla</string>
+    <string name="share_link_with_label">Povezava souporabe (%1$s)</string>
+    <string name="share_no_expiration_date_label">Nastavi datum preteka</string>
+    <string name="share_no_password_title">Nastavi geslo</string>
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Vpis gesla na željo</string>
+    <string name="share_password_dialog_fragment_skip">Preskoči</string>
+    <string name="share_password_title">Zaščiteno z geslom</string>
+    <string name="share_permission_can_edit">Lahko ureja</string>
+    <string name="share_permission_file_drop">Poteg datotek v mapo</string>
+    <string name="share_permission_secure_file_drop">Varno pošiljanje daottek</string>
+    <string name="share_permission_view_only">Le ogled</string>
+    <string name="share_permissions">Dovoljenja souporabe</string>
+    <string name="share_remote_clarification">%1$s (oddaljeno)</string>
+    <string name="share_room_clarification">%1$s (pogovor)</string>
+    <string name="share_send_new_email">Pošlji novo elektronsko sporočilo</string>
+    <string name="share_settings">Nastavitve</string>
+    <string name="share_via_link_section_title">Povezava za souporabo</string>
+    <string name="share_via_link_send_link_label">Pošlji povezavo</string>
+    <string name="share_via_link_unset_password">Odstrani izbor</string>
+    <string name="share_with_title">Omogoči souporabo …</string>
+    <string name="shared_text_empty">Besedilo v souporabi je brez vsebine</string>
+    <string name="shortcut_create_long">Ustvari novo zabeležko</string>
+    <string name="simple_about">O programu</string>
+    <string name="simple_backup">Varnostna kopija</string>
+    <string name="simple_cancel">Prekliči</string>
+    <string name="simple_checkbox">Izbirno polje</string>
+    <string name="simple_close">Zapri</string>
+    <string name="simple_copy">Kopiraj</string>
+    <string name="simple_edit">Uredi</string>
+    <string name="simple_error">Napaka</string>
+    <string name="simple_exception">Izjema</string>
+    <string name="simple_link">Povezava</string>
+    <string name="simple_more">Več</string>
+    <string name="simple_move">Premakni</string>
+    <string name="simple_next">Naslednje</string>
+    <string name="simple_other">Drugo</string>
+    <string name="simple_prev">Predhodno</string>
+    <string name="simple_remove">Odstrani</string>
+    <string name="simple_security">Varnost</string>
+    <string name="simple_switch">Preklopi</string>
+    <string name="simple_synchronization">Usklajevanje</string>
+    <string name="sort_alphabetically">Razvrsti abecedno</string>
+    <string name="sort_last_modified">Razvrsti po datumu spremembe</string>
+    <string name="switch_to_plain_editing">Preklopi na besedilno urejanje</string>
+    <string name="thirtyMinutes">30 minut</string>
+    <string name="thisWeek">še ta teden</string>
+    <string name="today">Danes</string>
+    <string name="unlock_notes">Odkleni zabeležke</string>
+    <string name="username">Uporabniško ime</string>
+    <string name="welcome_text">Dobrodošli v %1$s</string>
+    <string name="whats_your_status">Kako želite nastaviti stanje?</string>
+    <string name="widget_entry_fav_contentDescription">Zvezdica označuje priljubljene predmete</string>
+    <string name="widget_not_logged_in">Pred uporabo gradnika se je treba prijaviti v program Beležka Notes</string>
+    <string name="widget_note_list_placeholder">Ni zabeležk</string>
+    <string name="widget_note_list_title">Seznam zabeležk</string>
+    <string name="widget_single_note_placeholder_tv">Zabeležke ni mogoče najti</string>
+    <string name="widget_single_note_title">Samostojna zabeležka</string>
+    <string name="write_email">Pošlji elektronsko sporočilo</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Za dodajanje računa mora biti vzpostavljena povezava z omrežjem.</string>
     <plurals name="ab_selected">
         <item quantity="one">%d izbrana</item>
         <item quantity="two">%d izbrani</item>
@@ -316,122 +365,10 @@
         <item quantity="few">Souporaba vsebine %1$d zabeležk</item>
         <item quantity="other">Souporaba vsebine %1$d zabeležk</item>
     </plurals>
-
-    <string name="formatting_help_divider" translateable="false">---</string>
-    <string name="formatting_help_codefence_inline" translateable="false">» %1$s «</string>
-    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
-    <string name="formatting_help_codefence" translateable="false">```</string>
-    <string name="formatting_help_codefence_outer" translateable="false">````</string>
-    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
-    <string name="formatting_help_cbf_title">Vsebinsko oblikovanje</string>
-    <string name="formatting_help_cbf_body_1">Najpomembnejša funkcija programa Notes je enostavno in hitro beleženje besedila, ki ga je mogoče tudi oblikovati z oblikovnim jezikom Markdown. Za spodaj omenjeno oblikovanje, je mogoče uporabiti tipkovne bližnjice, kar še dodatno poenostavi vnos..</string>
-    <string name="formatting_help_cbf_body_2">Enostavno izberite besedilo, ali pa pritisnite na kazalko, in pojavil se bo meni, ki vključuje ob privzetih možnosti %1$s, %2$s, %3$s tudi take, kot sta %4$s in %5$s.</string>
-
-    <string name="formatting_help_text_title">Besedilo</string>
-    <string name="formatting_help_text_body">Z oblikovnim jezikom Markdown je besede zelo enostavno zapisati %1$skrepko%1$s oziroma %2$sležeče%2$s. Besede je mogoče tudi %3$sprečrtati%3$s in celo vpisati povezavo do na primer [spletišča Nextcloud](https://nextcloud.com).</string>
-
-    <string name="formatting_help_lists_title">Seznami</string>
-    <string name="formatting_help_lists_body_1">Včasih pridejo prav oštevilčeni seznami:</string>
-    <string name="formatting_help_lists_body_2">Ena</string>
-    <string name="formatting_help_lists_body_3">Dve</string>
-    <string name="formatting_help_lists_body_4">Tri</string>
-    <string name="formatting_help_lists_body_5">Včasih pridejo prav točkovni seznami</string>
-    <string name="formatting_help_lists_body_6">Začnite vrstico s črtico</string>
-    <string name="formatting_help_lists_body_7">Če želite vpisati podrejene točke, postavite dva presledka pred črtico oziroma zvezdico:</string>
-    <string name="formatting_help_lists_body_8">Tako,</string>
-    <string name="formatting_help_lists_body_9">in tako,</string>
-
-    <string name="formatting_help_checkboxes_title">Izbirna polja</string>
-    <string name="formatting_help_checkboxes_body_1">Izbirno polje ustvarite s seznamom, ki mu sledi oklepaj</string>
-    <string name="formatting_help_checkboxes_body_2">Predmet A</string>
-    <string name="formatting_help_checkboxes_body_3">Predmet B</string>
-
-    <string name="formatting_help_structured_documents_title">Strukturirani dokumenti</string>
-    <string name="formatting_help_structured_documents_body_1">Včasih je uporabno besedilo strukturirati na več ravni. Vrstice začnite z %1$s, da ustvarite prvi naslov, več zaporednih %2$s pa pomeni manjšo velikost naslova.</string>
-    <string name="formatting_help_structured_documents_body_2">To je naslov tretje ravni</string>
-    <string name="formatting_help_structured_documents_body_3">Uporabite lahko en %1$s pa vse do %2$s šest različnih velikosti naslova.</string>
-    <string name="formatting_help_structured_documents_body_4">Če želite kaj zapisati v navedku, uporabite znak %1$s pred vrstico:</string>
-    <string name="formatting_help_structured_documents_body_5">Domišljija je pomembnejša od znanja. Znanje je omejeno, domišljija pa obkroži ves svet.</string>
-    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
-
-    <string name="formatting_help_code_title">Šifra</string>
-    <string name="formatting_help_code_body_1">Na voljo je več različnih načinov oblikovanja z Markdown. Če želite določiti medvrstične bloke besedila, zapišite to med navedke:</string>
-    <string name="formatting_help_code_body_2">Oblikovni jezik Markdown podpira tudi tako imenovano obrobljanje kode, kar omogoča zapis več vrstic brez zamika:</string>
-    <string name="formatting_help_code_body_3">Če bi želeli uporabiti poudarjanje skladnje, vključite tudi jezik:</string>
-
-    <string name="formatting_help_tables_title">Razpredelnice</string>
-    <!-- Column header of a sample table -->
-    <string name="formatting_help_tables_column">Stolpec %1d</string>
-    <!-- Table cell value of a sample table -->
-    <string name="formatting_help_tables_value">Vrednost %1d</string>
-
-    <string name="formatting_help_images_body_1">Povezave so lahko ali polni naslovi URL skupaj z navedbo protokola in domene ali pa absolutne poti, ki se začnejo z znakom %1$s.</string>
-    <string name="formatting_help_images_body_2">Za usklajenost z zapisom Markdown je priporočljivo uporabiti ubežne znake v naslovih URL slik. To pomeni na primer zamenjavo  presledka za znakom %1$s v naslovu URL.</string>
-    <string name="formatting_help_images_title">Slike</string>
-    <string name="formatting_help_images_alt">Posebna slika</string>
-
-    <string name="simple_other">Drugo</string>
-    <string name="sort_last_modified">Razvrsti po datumu spremembe</string>
-    <string name="sort_alphabetically">Razvrsti abecedno</string>
-    <string name="error_action_open_battery_settings">Nastavitve baterije</string>
-    <string name="error_action_open_deck_info">Odpri podrobnosti programa</string>
-    <string name="error_action_open_network">Nastavitve omrežja</string>
-    <string name="error_action_update_files_app">Posodobi</string>
-    <string name="no_account_configured_yet">Ni nastavljenega nobenega računa</string>
-    <string name="no_other_accounts">Ni nastavljenega nobenega drugega računa</string>
-    <string name="choose_account">Izbor računa</string>
-    <string name="context_based_formatting">Pojavno okno vsebinskega oblikovanja</string>
     <plurals name="remove_account_message">
         <item quantity="one">Odstranjevanje računa %1$s trajno izbriše tudi neusklajeno spremembo.</item>
         <item quantity="two">Odstranjevanje računa %1$s trajno izbriše tudi %2$d neusklajeni spremembi.</item>
         <item quantity="few">Odstranjevanje računa %1$s trajno izbriše tudi %2$d neusklajene spremembe.</item>
         <item quantity="other">Odstranjevanje računa %1$s trajno izbriše tudi %2$d neusklajenih sprememb.</item>
     </plurals>
-    <string name="remove_account">Odstrani %1$s</string>
-
-    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Za dodajanje računa mora biti vzpostavljena povezava z omrežjem.</string>
-    <string name="settings_notes_path">Nastavi mapo</string>
-
-    <string name="simple_next">Naslednje</string>
-    <string name="simple_prev">Predhodno</string>
-    <string name="simple_backup">Varnostna kopija</string>
-    <string name="backup">Zaznano je neobnovljivo stanje delovanja programa. Ustvarite varnostno kopijo neusklajenih sprememb in počistite shrambo programa Beležka.</string>
-    <string name="settings_notes_path_description">Mapa za shranjevanje sporočilc v okolju Nextcloud</string>
-    <string-array name="settings_file_suffixes">
-        <item translatable="false">.txt</item>
-        <item translatable="false">.md</item>
-    </string-array>
-    <string name="settings_notes_path_success">Nova mapa sporočilc: %1$s</string>
-    <string name="settings_file_suffix">Pripona datotek</string>
-    <string name="settings_file_suffix_description">Privzeta pripona za nova sporočilca v okolju Nextcloud</string>
-    <string name="settings_file_suffix_success">Nova pripona datotek: %1$s</string>
-    <string name="http_status_code">Stanje kode HTTP: %1$d</string>
-    <string name="progress_import_indeterminate">Poteka uvažanje sporočilc ...</string>
-    <string name="progress_import">Poteka uvažanje sporočilca %1$d od %2$d…</string>
-    <string name="account_imported">Račun je uspešno uvožen.</string>
-    <string name="direct_editing_error">Napaka nalaganja oblikovnega urejevalnika</string>
-    <string name="switch_to_plain_editing">Preklopi na besedilno urejanje</string>
-    <string name="action_back">Nazaj</string>
-    <string name="whats_your_status">Kako želite nastaviti stanje?</string>
-    <string name="clear_status_after">Počisti stanje</string>
-    <string name="clear">Počisti</string>
-    <string name="dontClear">Ne počisti</string>
-    <string name="today">Danes</string>
-    <string name="thirtyMinutes">30 minut</string>
-    <string name="oneHour">po 1 uri</string>
-    <string name="fourHours">4 urah</string>
-    <string name="thisWeek">še ta teden</string>
-    <string name="file_list_seconds_ago">pred nekaj sekundami</string>
-    <string name="online">Trenutno na spletu</string>
-    <string name="dnd">Ne moti</string>
-    <string name="away">Ne spremljam</string>
-    <string name="invisible">Drugim nevidno</string>
-    <string name="busy">Zasedeno</string>
-    <string name="mute_all_notifications">Utiša vsa obvestila</string>
-    <string name="appear_offline">Pokaže kot brez povezave</string>
-    <string name="ecosystem_apps_display_files">Datoteke</string>
-    <string name="ecosystem_apps_display_talk">Pogovor Talk</string>
-    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
-    <string name="ecosystem_apps_more">Več programov Nexcloud</string>
-    <string name="ecosystem_apps_display_more">Več</string>
 </resources>

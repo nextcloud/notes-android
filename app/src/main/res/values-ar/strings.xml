@@ -1,119 +1,355 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Nextcloud Notes - Android Client
-  ~
-  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
-  ~ SPDX-License-Identifier: GPL-3.0-or-later
--->
-<resources>
-    <string name="app_name">الملاحظات</string>
-    <string name="app_name_long">ملاحظات نيكست كلاود</string>
-    <string name="label_all_notes">جميع الملاحظات</string>
-    <string name="label_favorites">المُفضّلة</string>
+  <resources>
+    <string name="about_app_license">التطبيق مسجل تحت شهادة GNU العامة الاصدار 3+</string>
+    <string name="about_app_license_button">عرض الرخصة</string>
+    <string name="about_app_license_title">رخصة التطبيق</string>
+    <string name="about_contribution_tab_title">مساهمة</string>
+    <string name="about_credits_tab_title">شكرٌ و تقديرٌ</string>
+    <string name="about_developers_original_author">الكاتب الأصلي</string>
+    <string name="about_developers_title">المُطوّرون</string>
+    <string name="about_icons_disclaimer_app_icon">لرؤية الأيقونة الأصلية %1$s.</string>
+    <string name="about_icons_disclaimer_mdi">أيقونات من طراز Material Design</string>
+    <string name="about_icons_disclaimer_mdi_icons">جميع الأيقونات الأخرى التي يستخدمها هذا  التطبيق  %1$s هي من إنتاج Google Inc. ومرخصة بموجب ترخيص Apache 2.0.</string>
+    <string name="about_icons_disclaimer_title">الأيقونات</string>
+    <string name="about_issues">يمكنك الإبلاغ عن الأخطاء، ترشيح مزايا أو طلب تحسينات على GitHub issue tracker:%1$s</string>
+    <string name="about_issues_title">المشاكل</string>
+    <string name="about_license_tab_title">الرخصة</string>
+    <string name="about_maintainer_title">مُنسّق</string>
+    <string name="about_source">هذا المشروع مستضاف على Github: %1$s</string>
+    <string name="about_source_title">الكود المصدري</string>
+    <string name="about_testers_title">المجَرِّبون</string>
+    <string name="about_translate">إنضم إلى فريق نكست كلاود على Transifex وساعد في ترجمة هذا التطبيق: %1$s</string>
+    <string name="about_translate_title">تَرجِم</string>
+    <string name="about_translators_title">المترجِمون</string>
+    <string name="about_translators_transifex">مجتمع نكست كلاود على %1$s</string>
+    <string name="about_version">أنت حاليّاً تستعمل %1$s</string>
+    <string name="about_version_title">الإصدار</string>
+    <string name="account_already_imported">سبق استيراد الحساب</string>
+    <string name="account_imported">الحساب تمّ استيراده</string>
+    <string name="action_back">عودة</string>
     <string name="action_create">ملاحظة Note جديدة </string>
-    <string name="welcome_text">مرحبًا بك في %1$s</string>
-    <string name="action_settings">الإعدادات</string>
-    <string name="action_trashbin">ملاحظات محذوفة</string>
-    <string name="action_search">بحث</string>
-    <string name="action_sorting_method">طريقة الترتيب</string>
-    <string name="simple_cancel">إلغاء</string>
-    <string name="simple_switch">تبديل</string>
-    <string name="simple_edit">تعديل</string>
-    <string name="simple_remove">حذف</string>
     <string name="action_edit_save">حفظ</string>
-    <string name="simple_about">عن</string>
-    <string name="simple_link">رابط</string>
+    <string name="action_formatting_help">التنسيق</string>
     <string name="action_note_deleted">محذوف \'%1$s\'</string>
     <string name="action_note_restored">أُسترجع \'%1$s\'</string>
-    <string name="action_undo">تراجع</string>
+    <string name="action_search">بحث</string>
+    <string name="action_settings">الإعدادات</string>
+    <string name="action_sorting_method">طريقة الترتيب</string>
+    <string name="action_trashbin">ملاحظات محذوفة</string>
     <string name="action_uncategorized">غير مصنف</string>
-    <string name="menu_delete">حذف </string>
+    <string name="action_undo">تراجع</string>
+    <string name="activity_chooser_send_file_title">أرسِل</string>
+    <string name="activity_chooser_title">إرسال الرابط إلى…</string>
+    <string name="activity_select_single_note">إختيار ملاحظة</string>
+    <string name="add_account">أضف حسابا</string>
+    <string name="add_another_public_share_link">إضافة رابط آخر</string>
+    <string name="add_category">أضف %1$s</string>
+    <string name="add_new_public_share">إضافة رابط مشاركة عام جديد</string>
+    <string name="added_content">\"%1$s\" أضيفت</string>
+    <string name="allow_resharing">السماح بإعادة المشاركة </string>
+    <string name="app_name">الملاحظات</string>
+    <string name="app_name_long">ملاحظات نيكست كلاود</string>
+    <string name="appear_offline">الحالة غير متصل</string>
+    <string name="appearance_and_behavior">المظهر وسلوك واجهة الويب</string>
+    <string name="append_to_note">إلحاق بملاحظة</string>
+    <string name="away">بالخارج</string>
+    <string name="backup">اكتشفنا حالة غير قابلة للاسترداد للتطبيق. يرجى الاحتفاظ بنسخة احتياطية من التغييرات غير المتزامنة ومسح تخزين تطبيق Notes.</string>
+    <string name="busy">مشغول</string>
+    <string name="category_bake">خَبْز</string>
+    <string name="category_checklists">قائمة مراجعة</string>
+    <string name="category_credentials">حيثيّات الدخول credentials</string>
+    <string name="category_food">طعام</string>
+    <string name="category_game">لعبة</string>
+    <string name="category_games">ألعاب</string>
+    <string name="category_gift">هدية</string>
+    <string name="category_gifts">هدايا</string>
+    <string name="category_key">مفتاح</string>
+    <string name="category_keys">مفاتيح</string>
+    <string name="category_movie">فلم</string>
+    <string name="category_movies">أفلام</string>
+    <string name="category_music">موسيقى</string>
+    <string name="category_password">كلمة مرور</string>
+    <string name="category_passwords">كلمات مرور</string>
+    <string name="category_play">تشغيل</string>
+    <string name="category_present">جائزة</string>
+    <string name="category_presents">جوائز</string>
+    <string name="category_readonly">للقراءة فقط</string>
+    <string name="category_recipe">وصفة أكل</string>
+    <string name="category_recipes">وصفات أكل</string>
+    <string name="category_restaurant">مطعم</string>
+    <string name="category_restaurants">مطاعم</string>
+    <string name="category_tasks">المهام</string>
+    <string name="category_todo">مَهَمّة</string>
+    <string name="category_todos">مَهَام</string>
+    <string name="category_work">عمل</string>
+    <string name="change_category_title">إختر التصنيف</string>
+    <string name="change_note_title">تغيير عنوان ملاحظة</string>
+    <string name="choose_account">إختر حسابًا</string>
+    <string name="clear">محو</string>
+    <string name="clear_status_after">مسح رسالة الحالة بعد</string>
+    <string name="clipboard_label">تم نسخ النص من %1$s</string>
+    <string name="clipboard_no_text_to_copy">لم يستلم نص لنسخه في الحافظة</string>
+    <string name="clipboard_text_copied">تمّ نسخ الرابط</string>
+    <string name="clipboard_unexpected_error">خطأٌ غير متوقع أثناء النسخ إلى الحافظة</string>
+    <string name="common_delete">حذف</string>
+    <string name="common_loading">التحميل جارٍ ...</string>
+    <string name="common_ok">موافق</string>
+    <string name="context_based_formatting">نافذة منبثقة للتنسيق القائم على السياق Context based formatting</string>
+    <string name="copy_link">نسخ الرابط</string>
+    <string name="could_not_retrieve_shares">لايمكن استعادة المشاركات</string>
+    <string name="delete_link">حذف الرابط</string>
+    <string name="direct_editing_error">خطأ في تحميل التحرير الغني rich editing</string>
+    <string name="dnd">الرجاء عدم الإزعاج</string>
+    <string name="dontClear">لا تمحُ</string>
+    <string name="ecosystem_apps_display_files">الملفّات</string>
+    <string name="ecosystem_apps_display_more">المزيد</string>
+    <string name="ecosystem_apps_display_talk">محادثة Talk</string>
+    <string name="ecosystem_apps_more">المزيد من تطبيقات نكست كلاود</string>
+    <string name="ecosystem_apps_talk">تطبيق \"المحادثة\" talk من نكست كلاود</string>
+    <string name="email_pick_failed">تعذّر التقاط عنوان الإيميل.</string>
+    <string name="error_action_open_battery_settings">إعدادات البطارية</string>
+    <string name="error_action_open_deck_info">فتح معلومات التطبيق</string>
+    <string name="error_action_open_network">إعدادات الشبكة</string>
+    <string name="error_action_update_files_app">تحديث</string>
+    <string name="error_dialog_check_maintenance">يرجى التحقق من أن الخادم ليس في وضع الصيانة حاليًا.</string>
+    <string name="error_dialog_check_server">لم تكن استجابة الخادم صحيحة. يرجى التحقق مما إذا كان يمكنك الوصول إلى ملاحظاتك عبر واجهة الويب.</string>
+    <string name="error_dialog_check_server_logs">هناك مشكلة في إعداد الخادم الخاص بك. يرجى مراجعة سجل أنشطة الخادم.</string>
+    <string name="error_dialog_insufficient_storage">خادومك ليس لديه مساحة تخزين فارغة متبقية. يرجى حذف بعض الملفات لمزامنة تغييراتك المحلية في سحابتك.</string>
+    <string name="error_dialog_min_version">تطبيق الملاحظات Notes على الأندرويد يلزمه تطبيق Notes على نكست كلاود بإصدار لا يقل عن 3,18.</string>
+    <string name="error_dialog_redirect">استجاب خادومك برمز حالة HTTP 302 ، مما يعني أنك لم تقم بتثبيت تطبيق Notes عليه أو أنه تم تكوين شيء ما بشكل خاطئ. يمكن أن يحدث هذا بسبب بعض التخصيصات في ملف htaccess أو تطبيقات Nextcloud مثل عميل OID.</string>
+    <string name="error_dialog_server_app_enabled">يرجى التأكد من تنصيب و تفعيل تطبيق \"Notes\" على خادومك.</string>
+    <string name="error_dialog_timeout_instance">لم تكن هناك استجابة من الخادم في الوقت المحدد. يرجى التأكد من أنه يعمل بشكل جيد.</string>
+    <string name="error_dialog_timeout_toggle">تحقق من اتصالك بالشبكة. أحياناُ، يمكن لإيقاف ثم إعادة تشغيل بيانات الهاتف المحمول أو الواي فاي Wi-Fi أن يحل المشكل.</string>
+    <string name="error_dialog_tip_clear_storage">يمكنك تنظيف ذاكرة التطبيق بفتح \"معلومات التطبيق\" app info ثم اختيار \"التخزين\" ثم \"محو التخزين\" Storage → Clear storage.
+⚠️ تحذير: هذا سيؤدي إلى حذف الملاحظات التي لم تتم مزامنتها حتى الآن.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">يرجى تعطيل جميع تحسينات البطارية لـ Nextcloud وتطبيق Notes.</string>
+    <string name="error_dialog_tip_files_delete_storage">إذا لم يساعد إيقافهم بالقوة ، فيمكنك محاولة مسح تخزين كلا التطبيقين.</string>
+    <string name="error_dialog_tip_files_force_stop">يبدو أن هناك خطأ ما في تطبيقك نكست كلاود. يرجى محاولة فرض إيقاف كلا التطبيقين: Nextcloud و Nextcloud Notes.</string>
+    <string name="error_dialog_tip_files_outdated">تطبيقك نيكست كلاود يبدو انه لم يتم تحديثه منذ وقت طويل. رجاءً، قم بزيارةمتجر تطبيقات \"إف-درويد\" f-droid للحصول على آخر إصدار منه.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">اذا تكررت المشكلة، حاول تنظيف مساحة التخزين في التطبيقين كلاهما: 
+نيكست كلاود nextcloud، نيكست كلاود ملاحظات nextcloud notes لحل هذه المشكلة.</string>
+    <string name="error_dialog_tip_token_mismatch_retry">رجاءً، إفرض غلق التطبيق ثم أعد تشغيله، ربما هنالك خطأ في الاتصال مع تطبيق نيكست كلاود.</string>
+    <string name="error_dialog_title">آه لا، ماذا الان؟🙁</string>
+    <string name="error_dialog_we_need_info">نحتاج إلى المعلومات الفنية التالية لمساعدتك:</string>
+    <string name="error_maintenance_mode">الخادم في وضع الصيانة</string>
+    <string name="error_no_network">لا يتوفر اتصال</string>
+    <string name="error_sync">فشل في المزامنة: \'%1$s\'</string>
+    <string name="error_synchronization">فشل في المزامنة</string>
+    <string name="error_unknown">حدث خطأ غير مُحدّدٍ</string>
+    <string name="failed_update_ui">فشل تحديث UI</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">لا يوجد تطبيق لتحديد جهات الاتصال</string>
+    <string name="file_list_seconds_ago">منذ ثوان مضت</string>
+    <string name="formatting_help_cbf_body_1">يتمثل أحد أهداف التصميم الرئيسية لتطبيق Notes في توفير أداة خالية من التشتيت. على الرغم من أنك ستتمكن من تنسيق النصوص الخاصة بك باستخدام Markdown. بالنسبة للعديد من الأمثلة المذكورة أدناه ، يمكنك استخدام الاختصارات حتى تتمكن من تنسيق ملاحظاتك دون كتابة الرموز أدناه. </string>
+    <string name="formatting_help_cbf_body_2">ما عليك سوى تحديد نطاق من النص أو النقر على المؤشر في أي موضع وستحصل على قائمة منبثقة تحتوي بالإضافة إلى مُداخلها الافتراضية %1$s, %2$s, %3$s مداخل مثل %4$s أو %5$s.</string>
+    <string name="formatting_help_cbf_title">تنسيق بحسب السياق </string>
+    <string name="formatting_help_checkboxes_body_1">لإنشاء مربع اختيار ، استخدم قائمة متبوعة بأقواس</string>
+    <string name="formatting_help_checkboxes_body_2">عنصر 1</string>
+    <string name="formatting_help_checkboxes_body_3">عنصر 2</string>
+    <string name="formatting_help_checkboxes_title">مربعات الاختيار</string>
+    <string name="formatting_help_code_body_1">هناك العديد من الطرق المختلفة لتصميم التعليمات البرمجية باستخدام تنسيق مارك داون Markdown. إذا كان لديك كتل من الكود، فلُفّها في backticks :</string>
+    <string name="formatting_help_code_body_2">يدعم Markdown أيضًا شيئًا يسمى سياج الكود، والذي يسمح بخطوط متعددة بدون مسافة بادئة:</string>
+    <string name="formatting_help_code_body_3">وإذا كنت ترغب في استخدام تمييز بناء الجملة syntax highlighting، فقم بتضمين اللغة:</string>
+    <string name="formatting_help_code_title">الرمز</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_images_alt">صورة خيالية</string>
+    <string name="formatting_help_images_body_1">يجب أن تكون الروابط إمّا عناوين URL كاملة تبدأ ببروتوكول و نطاق، أو مسارات مطلقة تبدأ بحرف
+ %1$s:</string>
+    <string name="formatting_help_images_body_2">من أجل التوافق مع تنسيق Markdown، يرجى استخدام أحرف الهروب escape characters في عنوان URL للصورة. هذا يعني على سبيل المثال، استبدل المسافات بـ%1$s في الـ URL.</string>
+    <string name="formatting_help_images_title">صور</string>
+    <string name="formatting_help_lists_body_1">أحياناً تريد قوائم مرقمة numbered lists:</string>
+    <string name="formatting_help_lists_body_2">واحد</string>
+    <string name="formatting_help_lists_body_3">إثنان</string>
+    <string name="formatting_help_lists_body_4">ثلاثة</string>
+    <string name="formatting_help_lists_body_5">في بعض الأحيان تريد بنوداً مُنقّطة bullet points:</string>
+    <string name="formatting_help_lists_body_6">ابدأ سطرًا بشَرْطَة</string>
+    <string name="formatting_help_lists_body_7">وإذا كانت لديك نقاط فرعية، فضع مسافتين قبل الشَرْطَة أو النجمة:</string>
+    <string name="formatting_help_lists_body_8">مثل هذا</string>
+    <string name="formatting_help_lists_body_9"> و هذا</string>
+    <string name="formatting_help_lists_title">قوائم</string>
+    <string name="formatting_help_structured_documents_body_1">من المفيد أحيانًا أن يكون لديك مستويات مختلفة من العناوين لبناء مستنداتك. إبدإ الأسطر بـ %1$s لإنشاء العناوين. %2$s متعددة في سطر يشير إلى أحجام عناوين أصغر.</string>
+    <string name="formatting_help_structured_documents_body_2">هذا عنوان من الدرجة الثالثة</string>
+    <string name="formatting_help_structured_documents_body_3">يمكنك إستخدام واحد %1$s على طول حتى %2$s ستة لأحجام العناوين المختلفة.</string>
+    <string name="formatting_help_structured_documents_body_4">إذا كنت ترغب في الاقتباس من أحد، فاستخدم الحرف %1$s قبل السطر:</string>
+    <string name="formatting_help_structured_documents_body_5">الخيال أكثر أهمية من المعرفة. المعرفة محدودة. الخيال يُطوّق العالم.</string>
+    <string name="formatting_help_structured_documents_body_6">- ألبرت أينشتاين</string>
+    <string name="formatting_help_structured_documents_title">مستندات مُهَيْكَلة</string>
+    <string name="formatting_help_tables_column">عمود %1d</string>
+    <string name="formatting_help_tables_title">الجداول</string>
+    <string name="formatting_help_tables_value">قيمة %1d</string>
+    <string name="formatting_help_text_body">من السهل جدًا كتابة بعض الكلمات %1$sثخينة bold%1$s وبعض الكلمات %2$sمائلة italic%2$s بإستخدام تنسيق مارك داون Markdown. يمكنك %3$sشطب strike%3$s بعض الكلمات. [رابط إلى نكست كلاود] (https://nextcloud.com).</string>
+    <string name="formatting_help_text_title">نص</string>
+    <string name="fourHours">4 ساعات</string>
+    <string name="http_status_code">رمز حالة HTTP status code: %1$d</string>
+    <string name="invisible">غير مرئي</string>
+    <string name="label_all_notes">جميع الملاحظات</string>
+    <string name="label_favorites">المُفضّلة</string>
+    <string name="link_share_allow_upload_and_editing">السماح بالرفع و التعديل</string>
+    <string name="link_share_editing">جارِ التعديل</string>
+    <string name="link_share_file_drop">إفلات ملف (للرفع فقط)</string>
+    <string name="link_share_view_only">للعرض فقط</string>
+    <string name="listview_updated_last_month">الشهر الماضي</string>
+    <string name="listview_updated_last_week">الأسبوع الماضي</string>
+    <string name="listview_updated_this_month"> هذا الشهر</string>
+    <string name="listview_updated_this_week"> هذا الأسبوع</string>
+    <string name="listview_updated_today">اليوم</string>
+    <string name="listview_updated_yesterday">البارحة</string>
+    <string name="manage_accounts">إدارة الحسابات</string>
     <string name="menu_change_category">التصنيف</string>
+    <string name="menu_delete">حذف </string>
+    <string name="menu_edit_title">تحرير عنوان</string>
     <string name="menu_favorite">المفضلة </string>
     <string name="menu_preview">معاينة</string>
     <string name="menu_share">شارك</string>
-    <string name="common_loading">التحميل جارٍ ...</string>
-
-
-    <string name="search_in_category">البحث في %1$s</string>
-    <string name="search_in_all">البحث في جميع الملاحظات</string>
-
-    <string name="change_category_title">إختر التصنيف</string>
-
-    <string name="note_share_activity_shared_with_you">مشارك معك بواسطة %1$s</string>
+    <string name="mute_all_notifications">عدم إظهار جميع التنبيهات</string>
+    <string name="no_account_configured_yet">لم تتم تهيئة الحساب حتى الآن</string>
+    <string name="no_actions">لا يوجد خيارات لهذا المستخدم</string>
+    <string name="no_browser_available">لا يوجد تطبيق متاح للتعامل مع الروابط</string>
+    <string name="no_category">لا تصنيف</string>
+    <string name="no_email_app_available">لا يوجد تطبيق لتعاملات البريد الالكتروني</string>
+    <string name="no_notes_yet">لا توجد ملاحظات حتى الآن</string>
+    <string name="no_notes_yet_description">اضغط  +  لانشاء ملاحظة جديدة </string>
+    <string name="no_other_accounts">أنت لم تقم بتهيئة أي حسابات أخرى حتى الآن.</string>
+    <string name="noteMode_plain_edit">وضعية التحرير العادي plain</string>
+    <string name="noteMode_plain_preview">معاينة عادية</string>
+    <string name="noteMode_remember_last">تذكر آخر اختيار</string>
+    <string name="noteMode_rich_edit">وضعية التحرير الغني rich</string>
+    <string name="note_has_been_deleted">هذه الملاحظة تمّ مسحها</string>
+    <string name="note_share_activity_contact_no_permission">إذن الاتصال بالجهة مطلوب.</string>
+    <string name="note_share_activity_could_not_retrieve_url">لا يمكن استرجاع الرابط</string>
+    <string name="note_share_activity_resharing_not_allowed">السياسة و الأذونات تمنع إعادة المشاركة</string>
     <string name="note_share_activity_search_text">الاسم أو مُعرِّف السحابة الاتحادية أو عنوان البريد الإلكتروني ...</string>
     <string name="note_share_activity_share_link">رابط مشاركة</string>
-    <string name="note_share_activity_resharing_not_allowed">السياسة و الأذونات تمنع إعادة المشاركة</string>
-    <string name="note_share_activity_could_not_retrieve_url">لا يمكن استرجاع الرابط</string>
+    <string name="note_share_activity_shared_with_you">مشارك معك بواسطة %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">تمت مشاركة \"%1$s\" معك</string>
-    <string name="note_share_activity_contact_no_permission">إذن الاتصال بالجهة مطلوب.</string>
-    <!-- NoteShareDetailActivity -->
     <string name="note_share_detail_activity_advanced_settings">الإعدادات المتقدمة</string>
-    <string name="note_share_detail_activity_share_via_link_hide_download">إخفاء التنزيل</string>
-    <string name="note_share_detail_activity_hint_note">ملاحظة</string>
-    <string name="note_share_detail_activity_common_next">التالي</string>
-    <string name="note_share_detail_activity_share_copy_link">شارك و انسخ الرابط</string>
-    <string name="note_share_detail_activity_common_confirm">تأكيد</string>
-    <string name="note_share_detail_activity_set_note">تعيين ملاحظة</string>
-    <string name="note_share_detail_activity_send_share">إرسال مشاركة</string>
-    <string name="note_share_detail_activity_hint_name">الاسم</string>
-    <string name="note_share_detail_activity_link_name">اسم الرابط</string>
-    <string name="note_share_detail_activity_share_link_empty_password">يجب عليك إدخال كلمة مرور</string>
-    <string name="note_share_detail_activity_hint_password">كلمة المرور</string>
-    <string name="note_share_detail_activity_no_share_permission_selected">الرجاء اختيار على الأقل صلاحية واحدة للمشاركة</string>
-    <string name="note_share_detail_activity_label_empty">لا يمكن أن تكون علامة التصنيف label فارغة</string>
     <string name="note_share_detail_activity_cancel">إلغاء</string>
-    <!-- SharePasswordDialogFragment -->
+    <string name="note_share_detail_activity_common_confirm">تأكيد</string>
+    <string name="note_share_detail_activity_common_next">التالي</string>
+    <string name="note_share_detail_activity_hint_name">الاسم</string>
+    <string name="note_share_detail_activity_hint_note">ملاحظة</string>
+    <string name="note_share_detail_activity_hint_password">كلمة المرور</string>
+    <string name="note_share_detail_activity_label_empty">لا يمكن أن تكون علامة التصنيف label فارغة</string>
+    <string name="note_share_detail_activity_link_name">اسم الرابط</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">الرجاء اختيار على الأقل صلاحية واحدة للمشاركة</string>
+    <string name="note_share_detail_activity_send_share">إرسال مشاركة</string>
+    <string name="note_share_detail_activity_set_note">تعيين ملاحظة</string>
+    <string name="note_share_detail_activity_share_copy_link">شارك و انسخ الرابط</string>
+    <string name="note_share_detail_activity_share_link_empty_password">يجب عليك إدخال كلمة مرور</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">إخفاء التنزيل</string>
+    <string name="oneHour">1 ساعة</string>
+    <string name="online">مُتّصلٌ</string>
+    <string name="online_status">حالة الاتصال</string>
+    <string name="pin_to_homescreen">تثبيت في الشاشة الرئيسية</string>
+    <string name="pref_value_font_normal">عادي</string>
+    <string name="pref_value_lock">محمي بكلمة مرور</string>
+    <string name="pref_value_wifi_and_mobile">مزامنة على الواي فاي Wi-Fi، و بيانات الهاتف النقّال mobile data</string>
+    <string name="progress_import">إستيراد الملاحظة %1$d من %2$d…</string>
+    <string name="progress_import_indeterminate">إستيراد ملاحظات ...</string>
+    <string name="public_share_name">اسم جديد</string>
+    <string name="remote">(عن بعد)</string>
+    <string name="remove_account">حذف %1$s</string>
+    <string name="search_in_all">البحث في جميع الملاحظات</string>
+    <string name="search_in_category">البحث في %1$s</string>
+    <string name="set_online_status">حالة الاتصال</string>
+    <string name="settings_background_sync">مزامنة في الخلفية</string>
+    <string name="settings_enable_direct_edit">التحرير المباشر</string>
+    <string name="settings_enable_direct_edit_summary">عند تعطيله، سيتم إخفاء المحرّر المتقدم </string>
+    <string name="settings_file_suffix">إمتداد الملف</string>
+    <string name="settings_file_suffix_description">إمتداد الملف لملاحظاتك الجديدة في خادم نكست كلاود</string>
+    <string name="settings_file_suffix_success">لاحقة الملف الجديدة suffix: %1$s</string>
+    <string name="settings_font_size">حجم الخط</string>
+    <string name="settings_font_title">خط font أحادي المسافة</string>
+    <string name="settings_gridview">عرض كمخطط</string>
+    <string name="settings_keep_screen_on">حافظ على الشاشة قيد العمل</string>
+    <string name="settings_keep_screen_on_summary">عند عرض أو تحرير ملاحظة</string>
+    <string name="settings_lock">قفل التطبيق (بيتا)</string>
+    <string name="settings_lock_summary">حيثيات الدخول للجهاز</string>
+    <string name="settings_note_mode">وضع العرض للملاحظات</string>
+    <string name="settings_note_mode_new">السلوك عند فتح الملاحظات</string>
+    <string name="settings_notes_path">تعيين مُجلّد</string>
+    <string name="settings_notes_path_description">مجلد لتخزين ملاحظاتك في خادم نكست كلاود</string>
+    <string name="settings_notes_path_success">مُجلّد ملاحظات جديدة: %1$s</string>
+    <string name="settings_prevent_screen_capture">منع التقاط صورة للشاشة</string>
+    <string name="settings_show_ecosystem_apps">إظهار مُبدِّل التطبيقات app switcher</string>
+    <string name="settings_show_ecosystem_apps_summary">مقترحات بتطبيقات من نكست كلاود في شريط التصفح navigation heading</string>
+    <string name="settings_theme_title">السمة</string>
+    <string name="settings_wifi_only">المزامنة فقط على الواي فاي</string>
+    <string name="share">مُشارَكة</string>
+    <string name="share_dialog_title">المشاركة</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_expiration_date_label">تنتهي %1$s</string>
+    <string name="share_file">شارك %1$s</string>
+    <string name="share_group_clarification">%1$s(مجموعة)</string>
+    <string name="share_internal_link">شارك الرابط الداخلي</string>
+    <string name="share_internal_link_to_file_text">يعمل رابط المشاركة الداخلية فقط للمستخدمين الذين لديهم حق الوصول إلى هذا الملف</string>
+    <string name="share_internal_link_to_folder_text">يعمل رابط المشاركة الداخلية فقط للمستخدمين الذين لديهم حق الوصول إلى هذا المجلد</string>
+    <string name="share_known_remote_on_clarification">على %1$s</string>
+    <string name="share_link">رابط مشاركة</string>
+    <string name="share_link_password_title">إدخِل كلمة المرور</string>
+    <string name="share_link_with_label">مشاركة الرابط (%1$s)</string>
+    <string name="share_no_expiration_date_label">تعيين تاريخ إنتهاء الصلاحية</string>
+    <string name="share_no_password_title">تعيين كلمة المرور</string>
     <string name="share_password_dialog_fragment_share_link_optional_password_title">أدخل كلمة مرور اختيارية</string>
     <string name="share_password_dialog_fragment_skip">تخطي</string>
-
-    <string name="share_link_password_title">إدخِل كلمة المرور</string>
-    <string name="common_ok">موافق</string>
-    <string name="common_delete">حذف</string>
-    <string name="write_email">إرسال بريد</string>
-    <string name="no_browser_available">لا يوجد تطبيق متاح للتعامل مع الروابط</string>
-    <string name="no_email_app_available">لا يوجد تطبيق لتعاملات البريد الالكتروني</string>
-    <string name="no_actions">لا يوجد خيارات لهذا المستخدم</string>
-
-    <string name="email_pick_failed">تعذّر التقاط عنوان الإيميل.</string>
-    <string name="failed_update_ui">فشل تحديث UI</string>
-    <string name="file_detail_sharing_fragment_no_contact_app_message">لا يوجد تطبيق لتحديد جهات الاتصال</string>
-    <string name="activity_chooser_title">إرسال الرابط إلى…</string>
-
-    <string name="activity_chooser_send_file_title">أرسِل</string>
-    <string name="share_internal_link_to_folder_text">يعمل رابط المشاركة الداخلية فقط للمستخدمين الذين لديهم حق الوصول إلى هذا المجلد</string>
-    <string name="share_internal_link_to_file_text">يعمل رابط المشاركة الداخلية فقط للمستخدمين الذين لديهم حق الوصول إلى هذا الملف</string>
-    <string name="share_internal_link">شارك الرابط الداخلي</string>
-    <string name="delete_link">حذف الرابط</string>
-    <string name="share_settings">الإعدادات</string>
-    <string name="share_send_new_email">إرسال بريد جديد</string>
-    <string name="share_dialog_title">المشاركة</string>
-    <string name="share_file">شارك %1$s</string>
-    <string name="share_expiration_date_label">تنتهي %1$s</string>
-    <string name="share_expiration_date_format">%1$s</string>
-    <string name="share_no_expiration_date_label">تعيين تاريخ إنتهاء الصلاحية</string>
-    <string name="share_via_link_section_title">رابط مشاركة</string>
-    <string name="share_via_link_send_link_label">أرسل الرابط</string>
     <string name="share_password_title">محمي بكلمة مرور</string>
-    <string name="share_no_password_title">تعيين كلمة المرور</string>
-    <string name="share_with_title">شارك مع…</string>
-    <string name="share_via_link_unset_password">غير محدد</string>
-    <string name="add_another_public_share_link">إضافة رابط آخر</string>
-    <string name="add_new_public_share">إضافة رابط مشاركة عام جديد</string>
-    <string name="public_share_name">اسم جديد</string>
-    <string name="share_link_with_label">مشاركة الرابط (%1$s)</string>
-    <string name="share_link">رابط مشاركة</string>
-    <string name="allow_resharing">السماح بإعادة المشاركة </string>
-    <string name="link_share_view_only">للعرض فقط</string>
-    <string name="link_share_editing">جارِ التعديل</string>
-    <string name="link_share_allow_upload_and_editing">السماح بالرفع و التعديل</string>
-    <string name="link_share_file_drop">إفلات ملف (للرفع فقط)</string>
-    <string name="could_not_retrieve_shares">لايمكن استعادة المشاركات</string>
-    <string name="share_permission_view_only">للعرض فقط</string>
     <string name="share_permission_can_edit">يمكنه التعديل</string>
     <string name="share_permission_file_drop">إسقاط الملف</string>
     <string name="share_permission_secure_file_drop">إسقاط آمن للملف</string>
+    <string name="share_permission_view_only">للعرض فقط</string>
     <string name="share_permissions">صلاحيات المشاركة</string>
+    <string name="share_remote_clarification">%1$s (بعيد)</string>
+    <string name="share_room_clarification">%1$s (محادثة)</string>
+    <string name="share_send_new_email">إرسال بريد جديد</string>
+    <string name="share_settings">الإعدادات</string>
+    <string name="share_via_link_section_title">رابط مشاركة</string>
+    <string name="share_via_link_send_link_label">أرسل الرابط</string>
+    <string name="share_via_link_unset_password">غير محدد</string>
+    <string name="share_with_title">شارك مع…</string>
+    <string name="shared_text_empty">كان النصّ المُشارًك فارغًا</string>
+    <string name="shortcut_create_long">انشاء ملاحظة جديدة</string>
+    <string name="simple_about">عن</string>
+    <string name="simple_backup">النسخ الاحتياطي</string>
+    <string name="simple_cancel">إلغاء</string>
+    <string name="simple_checkbox">مربع اختيار</string>
+    <string name="simple_close">إغلاق</string>
+    <string name="simple_copy">إنسخ</string>
+    <string name="simple_edit">تعديل</string>
+    <string name="simple_error">خطأ</string>
+    <string name="simple_exception">استثناء</string>
+    <string name="simple_link">رابط</string>
+    <string name="simple_more">المزيد</string>
+    <string name="simple_move">نقل</string>
+    <string name="simple_next">التالي</string>
+    <string name="simple_other">آخر</string>
+    <string name="simple_prev">السابق</string>
+    <string name="simple_remove">حذف</string>
+    <string name="simple_security">الأمان</string>
+    <string name="simple_switch">تبديل</string>
+    <string name="simple_synchronization">المزامنة</string>
+    <string name="sort_alphabetically">الترتيب حسب الأبجدية</string>
+    <string name="sort_last_modified">ترتيب حسب تاريخ آخر تعديل</string>
+    <string name="status_message">رسالة الحالة</string>
+    <string name="switch_to_plain_editing">بدّل إلى التحرير العادي plain editing</string>
+    <string name="thirtyMinutes">30 دقيقة</string>
+    <string name="thisWeek">هذا الأسبوع</string>
+    <string name="today">اليوم</string>
+    <string name="unlock_notes">فتح قفل الملاحظات</string>
+    <string name="username">اسم المستخدم</string>
+    <string name="welcome_text">مرحبًا بك في %1$s</string>
+    <string name="whats_your_status">ماهي حالتك؟</string>
+    <string name="widget_entry_fav_contentDescription">أيقونة النجمة تستخدم لتسجيل عنصر كمُفضّل favorite</string>
+    <string name="widget_not_logged_in">الرجاء تسجيل الدخول إلى تطبيق الملاحظات Notes قبل إستخدامك لهذه الوَدْجَة Widget</string>
+    <string name="widget_note_list_placeholder">لا ملاحظات</string>
+    <string name="widget_note_list_title">قائمة الملاحظات</string>
+    <string name="widget_single_note_placeholder_tv">الملاحظة غير موجودة</string>
+    <string name="widget_single_note_title">ملاحظة مفردة</string>
+    <string name="write_email">إرسال بريد</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">يجب أن تكون متصلًا بالانترنت ليُمكنك إضاف حساب.</string>
     <plurals name="share_download_limit_description">
         <item quantity="zero">متبقي %1$d تنزيل</item>
         <item quantity="one">متبقي %1$d تنزيل</item>
@@ -122,189 +358,6 @@
         <item quantity="many">متبقي %1$d تنزيل</item>
         <item quantity="other">متبقي %1$d تنزيل</item>
     </plurals>
-    <string name="username">اسم المستخدم</string>
-    <string name="share_group_clarification">%1$s(مجموعة)</string>
-    <string name="share_remote_clarification">%1$s (بعيد)</string>
-    <string name="share_room_clarification">%1$s (محادثة)</string>
-    <string name="share_known_remote_on_clarification">على %1$s</string>
-    <string name="remote">(عن بعد)</string>
-
-    <string name="copy_link">نسخ الرابط</string>
-    <string name="share">مُشارَكة</string>
-    <string name="clipboard_text_copied">تمّ نسخ الرابط</string>
-    <string name="clipboard_no_text_to_copy">لم يستلم نص لنسخه في الحافظة</string>
-    <string name="clipboard_unexpected_error">خطأٌ غير متوقع أثناء النسخ إلى الحافظة</string>
-    <string name="clipboard_label">تم نسخ النص من %1$s</string>
-
-    <string name="listview_updated_today">اليوم</string>
-    <string name="listview_updated_yesterday">البارحة</string>
-    <string name="listview_updated_this_week"> هذا الأسبوع</string>
-    <string name="listview_updated_last_week">الأسبوع الماضي</string>
-    <string name="listview_updated_this_month"> هذا الشهر</string>
-    <string name="listview_updated_last_month">الشهر الماضي</string>
-    <string name="settings_note_mode">وضع العرض للملاحظات</string>
-    <string name="settings_note_mode_new">السلوك عند فتح الملاحظات</string>
-    <string name="settings_theme_title">السمة</string>
-    <string name="settings_font_title">خط font أحادي المسافة</string>
-    <string name="settings_font_size">حجم الخط</string>
-    <string name="settings_wifi_only">المزامنة فقط على الواي فاي</string>
-    <string name="settings_lock">قفل التطبيق (بيتا)</string>
-    <string name="settings_lock_summary">حيثيات الدخول للجهاز</string>
-    <string name="settings_background_sync">مزامنة في الخلفية</string>
-    <string name="settings_prevent_screen_capture">منع التقاط صورة للشاشة</string>
-    <string name="settings_show_ecosystem_apps">إظهار مُبدِّل التطبيقات app switcher</string>
-    <string name="settings_show_ecosystem_apps_summary">مقترحات بتطبيقات من نكست كلاود في شريط التصفح navigation heading</string>
-    <string name="settings_gridview">عرض كمخطط</string>
-    <string name="settings_enable_direct_edit">التحرير المباشر</string>
-    <string name="settings_enable_direct_edit_summary">عند تعطيله، سيتم إخفاء المحرّر المتقدم </string>
-    <string name="settings_keep_screen_on">حافظ على الشاشة قيد العمل</string>
-    <string name="settings_keep_screen_on_summary">عند عرض أو تحرير ملاحظة</string>
-
-    <string name="error_sync">فشل في المزامنة: \'%1$s\'</string>
-    <string name="error_synchronization">فشل في المزامنة</string>
-    <string name="error_no_network">لا يتوفر اتصال</string>
-    <string name="error_maintenance_mode">الخادم في وضع الصيانة</string>
-    <string name="error_unknown">حدث خطأ غير مُحدّدٍ</string>
-
-    <string name="about_version_title">الإصدار</string>
-    <string name="about_version">أنت حاليّاً تستعمل %1$s</string>
-    <string name="about_maintainer_title">مُنسّق</string>
-    <string name="about_developers_title">المُطوّرون</string>
-    <string name="about_developers_original_author">الكاتب الأصلي</string>
-    <string name="about_translators_title">المترجِمون</string>
-    <string name="about_translators_transifex">مجتمع نكست كلاود على %1$s</string>
-    <string name="about_testers_title">المجَرِّبون</string>
-    <string name="about_source_title">الكود المصدري</string>
-    <string name="about_source">هذا المشروع مستضاف على Github: %1$s</string>
-    <string name="about_issues_title">المشاكل</string>
-    <string name="about_issues">يمكنك الإبلاغ عن الأخطاء، ترشيح مزايا أو طلب تحسينات على GitHub issue tracker:%1$s</string>
-    <string name="about_translate_title">تَرجِم</string>
-    <string name="about_translate">إنضم إلى فريق نكست كلاود على Transifex وساعد في ترجمة هذا التطبيق: %1$s</string>
-    <string name="about_app_license_title">رخصة التطبيق</string>
-    <string name="about_app_license">التطبيق مسجل تحت شهادة GNU العامة الاصدار 3+</string>
-    <string name="about_app_license_button">عرض الرخصة</string>
-    <string name="about_icons_disclaimer_title">الأيقونات</string>
-    <string name="about_icons_disclaimer_app_icon">لرؤية الأيقونة الأصلية %1$s.</string>
-    <string name="about_icons_disclaimer_mdi_icons">جميع الأيقونات الأخرى التي يستخدمها هذا  التطبيق  %1$s هي من إنتاج Google Inc. ومرخصة بموجب ترخيص Apache 2.0.</string>
-    <string name="about_icons_disclaimer_mdi">أيقونات من طراز Material Design</string>
-    <string name="about_credits_tab_title">شكرٌ و تقديرٌ</string>
-    <string name="about_contribution_tab_title">مساهمة</string>
-    <string name="about_license_tab_title">الرخصة</string>
-
-    <string name="widget_note_list_title">قائمة الملاحظات</string>
-    <string name="widget_note_list_placeholder">لا ملاحظات</string>
-    <string name="widget_single_note_title">ملاحظة مفردة</string>
-    <string name="widget_single_note_placeholder_tv">الملاحظة غير موجودة</string>
-    <string name="widget_not_logged_in">الرجاء تسجيل الدخول إلى تطبيق الملاحظات Notes قبل إستخدامك لهذه الوَدْجَة Widget</string>
-    <string name="widget_entry_fav_contentDescription">أيقونة النجمة تستخدم لتسجيل عنصر كمُفضّل favorite</string>
-
-    <string name="activity_select_single_note">إختيار ملاحظة</string>
-
-    <string name="shortcut_create_long">انشاء ملاحظة جديدة</string>
-
-    <string name="pref_value_font_normal">عادي</string>
-    <string name="pref_value_wifi_and_mobile">مزامنة على الواي فاي Wi-Fi، و بيانات الهاتف النقّال mobile data</string>
-    <string name="pref_value_lock">محمي بكلمة مرور</string>
-
-    <string name="simple_error">خطأ</string>
-    <string name="simple_close">إغلاق</string>
-    <string name="simple_copy">إنسخ</string>
-    <string name="simple_exception">استثناء</string>
-    <string name="pin_to_homescreen">تثبيت في الشاشة الرئيسية</string>
-    <string name="note_has_been_deleted">هذه الملاحظة تمّ مسحها</string>
-    <string name="add_account">أضف حسابا</string>
-
-    <string name="category_music">موسيقى</string>
-    <string name="category_movies">أفلام</string>
-    <string name="category_movie">فلم</string>
-    <string name="category_work">عمل</string>
-    <string name="category_todo">مَهَمّة</string>
-    <string name="category_todos">مَهَام</string>
-    <string name="category_checklists">قائمة مراجعة</string>
-    <string name="category_tasks">المهام</string>
-    <string name="category_recipe">وصفة أكل</string>
-    <string name="category_recipes">وصفات أكل</string>
-    <string name="category_restaurant">مطعم</string>
-    <string name="category_restaurants">مطاعم</string>
-    <string name="category_food">طعام</string>
-    <string name="category_bake">خَبْز</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_key">مفتاح</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_keys">مفاتيح</string>
-    <string name="category_password">كلمة مرور</string>
-    <string name="category_passwords">كلمات مرور</string>
-    <string name="category_credentials">حيثيّات الدخول credentials</string>
-    <string name="category_game">لعبة</string>
-    <string name="category_games">ألعاب</string>
-    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
-    <string name="category_play">تشغيل</string>
-    <string name="category_gift">هدية</string>
-    <string name="category_gifts">هدايا</string>
-    <!-- Like a gift -->
-    <string name="category_present">جائزة</string>
-    <!-- Like a gift -->
-    <string name="category_presents">جوائز</string>
-
-    <string name="account_already_imported">سبق استيراد الحساب</string>
-    <string name="no_notes_yet">لا توجد ملاحظات حتى الآن</string>
-    <string name="no_notes_yet_description">اضغط  +  لانشاء ملاحظة جديدة </string>
-    <string name="simple_more">المزيد</string>
-    <string name="simple_move">نقل</string>
-    <string name="category_readonly">للقراءة فقط</string>
-    <string name="no_category">لا تصنيف</string>
-    <string name="add_category">أضف %1$s</string>
-    <string name="simple_checkbox">مربع اختيار</string>
-    <string name="unlock_notes">فتح قفل الملاحظات</string>
-    <string name="error_dialog_title">آه لا، ماذا الان؟🙁</string>
-    <string name="error_dialog_tip_token_mismatch_retry">رجاءً، إفرض غلق التطبيق ثم أعد تشغيله، ربما هنالك خطأ في الاتصال مع تطبيق نيكست كلاود.</string>
-    <string name="error_dialog_tip_token_mismatch_clear_storage">اذا تكررت المشكلة، حاول تنظيف مساحة التخزين في التطبيقين كلاهما: 
-نيكست كلاود nextcloud، نيكست كلاود ملاحظات nextcloud notes لحل هذه المشكلة.</string>
-    <string name="error_dialog_tip_clear_storage">يمكنك تنظيف ذاكرة التطبيق بفتح \"معلومات التطبيق\" app info ثم اختيار \"التخزين\" ثم \"محو التخزين\" Storage → Clear storage.
-⚠️ تحذير: هذا سيؤدي إلى حذف الملاحظات التي لم تتم مزامنتها حتى الآن.</string>
-    <string name="error_dialog_tip_files_outdated">تطبيقك نيكست كلاود يبدو انه لم يتم تحديثه منذ وقت طويل. رجاءً، قم بزيارةمتجر تطبيقات \"إف-درويد\" f-droid للحصول على آخر إصدار منه.</string>
-    <string name="error_dialog_tip_files_force_stop">يبدو أن هناك خطأ ما في تطبيقك نكست كلاود. يرجى محاولة فرض إيقاف كلا التطبيقين: Nextcloud و Nextcloud Notes.</string>
-    <string name="error_dialog_tip_files_delete_storage">إذا لم يساعد إيقافهم بالقوة ، فيمكنك محاولة مسح تخزين كلا التطبيقين.</string>
-    <string name="error_dialog_timeout_instance">لم تكن هناك استجابة من الخادم في الوقت المحدد. يرجى التأكد من أنه يعمل بشكل جيد.</string>
-    <string name="error_dialog_timeout_toggle">تحقق من اتصالك بالشبكة. أحياناُ، يمكن لإيقاف ثم إعادة تشغيل بيانات الهاتف المحمول أو الواي فاي Wi-Fi أن يحل المشكل.</string>
-    <string name="error_dialog_check_server">لم تكن استجابة الخادم صحيحة. يرجى التحقق مما إذا كان يمكنك الوصول إلى ملاحظاتك عبر واجهة الويب.</string>
-    <string name="error_dialog_check_server_logs">هناك مشكلة في إعداد الخادم الخاص بك. يرجى مراجعة سجل أنشطة الخادم.</string>
-    <string name="error_dialog_check_maintenance">يرجى التحقق من أن الخادم ليس في وضع الصيانة حاليًا.</string>
-    <string name="error_dialog_insufficient_storage">خادومك ليس لديه مساحة تخزين فارغة متبقية. يرجى حذف بعض الملفات لمزامنة تغييراتك المحلية في سحابتك.</string>
-    <string name="error_dialog_we_need_info">نحتاج إلى المعلومات الفنية التالية لمساعدتك:</string>
-    <string name="error_dialog_server_app_enabled">يرجى التأكد من تنصيب و تفعيل تطبيق \"Notes\" على خادومك.</string>
-    <string name="error_dialog_redirect">استجاب خادومك برمز حالة HTTP 302 ، مما يعني أنك لم تقم بتثبيت تطبيق Notes عليه أو أنه تم تكوين شيء ما بشكل خاطئ. يمكن أن يحدث هذا بسبب بعض التخصيصات في ملف htaccess أو تطبيقات Nextcloud مثل عميل OID.</string>
-    <string name="error_dialog_tip_disable_battery_optimizations">يرجى تعطيل جميع تحسينات البطارية لـ Nextcloud وتطبيق Notes.</string>
-    <string name="error_dialog_min_version">تطبيق الملاحظات Notes على الأندرويد يلزمه تطبيق Notes على نكست كلاود بإصدار لا يقل عن 3,18.</string>
-    <string name="added_content">\"%1$s\" أضيفت</string>
-    <string name="shared_text_empty">كان النصّ المُشارًك فارغًا</string>
-    <string name="append_to_note">إلحاق بملاحظة</string>
-    <string name="change_note_title">تغيير عنوان ملاحظة</string>
-    <string name="menu_edit_title">تحرير عنوان</string>
-    <string name="simple_security">الأمان</string>
-    <string name="appearance_and_behavior">المظهر وسلوك واجهة الويب</string>
-    <string name="simple_synchronization">المزامنة</string>
-    <string name="manage_accounts">إدارة الحسابات</string>
-    <string name="action_formatting_help">التنسيق</string>
-
-
-    <string name="noteMode_plain_edit">وضعية التحرير العادي plain</string>
-    <string name="noteMode_plain_preview">معاينة عادية</string>
-    <string name="noteMode_rich_edit">وضعية التحرير الغني rich</string>
-    <string name="noteMode_remember_last">تذكر آخر اختيار</string>
-
-    <string-array name="fontSize_entries">
-        <item>صغير</item>
-        <item>متوسط</item>
-        <item>كبير</item>
-    </string-array>
-
-    <string-array name="darkmode_entries">
-        <item>فاتح</item>
-        <item>داكن</item>
-        <item>إفتراضي النظام</item>
-    </string-array>
-
     <plurals name="ab_selected">
         <item quantity="zero">%d محدد</item>
         <item quantity="one">%d محدد</item>
@@ -337,72 +390,6 @@
         <item quantity="many">مشاركة محتوي %1$d ملاحظات</item>
         <item quantity="other">مشاركة محتوي %1$d ملاحظات</item>
     </plurals>
-
-    <string name="formatting_help_divider" translateable="false">---</string>
-    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
-    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
-    <string name="formatting_help_codefence" translateable="false">```</string>
-    <string name="formatting_help_codefence_outer" translateable="false">````</string>
-    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
-    <string name="formatting_help_cbf_title">تنسيق بحسب السياق </string>
-    <string name="formatting_help_cbf_body_1">يتمثل أحد أهداف التصميم الرئيسية لتطبيق Notes في توفير أداة خالية من التشتيت. على الرغم من أنك ستتمكن من تنسيق النصوص الخاصة بك باستخدام Markdown. بالنسبة للعديد من الأمثلة المذكورة أدناه ، يمكنك استخدام الاختصارات حتى تتمكن من تنسيق ملاحظاتك دون كتابة الرموز أدناه. </string>
-    <string name="formatting_help_cbf_body_2">ما عليك سوى تحديد نطاق من النص أو النقر على المؤشر في أي موضع وستحصل على قائمة منبثقة تحتوي بالإضافة إلى مُداخلها الافتراضية %1$s, %2$s, %3$s مداخل مثل %4$s أو %5$s.</string>
-
-    <string name="formatting_help_text_title">نص</string>
-    <string name="formatting_help_text_body">من السهل جدًا كتابة بعض الكلمات %1$sثخينة bold%1$s وبعض الكلمات %2$sمائلة italic%2$s بإستخدام تنسيق مارك داون Markdown. يمكنك %3$sشطب strike%3$s بعض الكلمات. [رابط إلى نكست كلاود] (https://nextcloud.com).</string>
-
-    <string name="formatting_help_lists_title">قوائم</string>
-    <string name="formatting_help_lists_body_1">أحياناً تريد قوائم مرقمة numbered lists:</string>
-    <string name="formatting_help_lists_body_2">واحد</string>
-    <string name="formatting_help_lists_body_3">إثنان</string>
-    <string name="formatting_help_lists_body_4">ثلاثة</string>
-    <string name="formatting_help_lists_body_5">في بعض الأحيان تريد بنوداً مُنقّطة bullet points:</string>
-    <string name="formatting_help_lists_body_6">ابدأ سطرًا بشَرْطَة</string>
-    <string name="formatting_help_lists_body_7">وإذا كانت لديك نقاط فرعية، فضع مسافتين قبل الشَرْطَة أو النجمة:</string>
-    <string name="formatting_help_lists_body_8">مثل هذا</string>
-    <string name="formatting_help_lists_body_9"> و هذا</string>
-
-    <string name="formatting_help_checkboxes_title">مربعات الاختيار</string>
-    <string name="formatting_help_checkboxes_body_1">لإنشاء مربع اختيار ، استخدم قائمة متبوعة بأقواس</string>
-    <string name="formatting_help_checkboxes_body_2">عنصر 1</string>
-    <string name="formatting_help_checkboxes_body_3">عنصر 2</string>
-
-    <string name="formatting_help_structured_documents_title">مستندات مُهَيْكَلة</string>
-    <string name="formatting_help_structured_documents_body_1">من المفيد أحيانًا أن يكون لديك مستويات مختلفة من العناوين لبناء مستنداتك. إبدإ الأسطر بـ %1$s لإنشاء العناوين. %2$s متعددة في سطر يشير إلى أحجام عناوين أصغر.</string>
-    <string name="formatting_help_structured_documents_body_2">هذا عنوان من الدرجة الثالثة</string>
-    <string name="formatting_help_structured_documents_body_3">يمكنك إستخدام واحد %1$s على طول حتى %2$s ستة لأحجام العناوين المختلفة.</string>
-    <string name="formatting_help_structured_documents_body_4">إذا كنت ترغب في الاقتباس من أحد، فاستخدم الحرف %1$s قبل السطر:</string>
-    <string name="formatting_help_structured_documents_body_5">الخيال أكثر أهمية من المعرفة. المعرفة محدودة. الخيال يُطوّق العالم.</string>
-    <string name="formatting_help_structured_documents_body_6">- ألبرت أينشتاين</string>
-
-    <string name="formatting_help_code_title">الرمز</string>
-    <string name="formatting_help_code_body_1">هناك العديد من الطرق المختلفة لتصميم التعليمات البرمجية باستخدام تنسيق مارك داون Markdown. إذا كان لديك كتل من الكود، فلُفّها في backticks :</string>
-    <string name="formatting_help_code_body_2">يدعم Markdown أيضًا شيئًا يسمى سياج الكود، والذي يسمح بخطوط متعددة بدون مسافة بادئة:</string>
-    <string name="formatting_help_code_body_3">وإذا كنت ترغب في استخدام تمييز بناء الجملة syntax highlighting، فقم بتضمين اللغة:</string>
-
-    <string name="formatting_help_tables_title">الجداول</string>
-    <!-- Column header of a sample table -->
-    <string name="formatting_help_tables_column">عمود %1d</string>
-    <!-- Table cell value of a sample table -->
-    <string name="formatting_help_tables_value">قيمة %1d</string>
-
-    <string name="formatting_help_images_body_1">يجب أن تكون الروابط إمّا عناوين URL كاملة تبدأ ببروتوكول و نطاق، أو مسارات مطلقة تبدأ بحرف
- %1$s:</string>
-    <string name="formatting_help_images_body_2">من أجل التوافق مع تنسيق Markdown، يرجى استخدام أحرف الهروب escape characters في عنوان URL للصورة. هذا يعني على سبيل المثال، استبدل المسافات بـ%1$s في الـ URL.</string>
-    <string name="formatting_help_images_title">صور</string>
-    <string name="formatting_help_images_alt">صورة خيالية</string>
-
-    <string name="simple_other">آخر</string>
-    <string name="sort_last_modified">ترتيب حسب تاريخ آخر تعديل</string>
-    <string name="sort_alphabetically">الترتيب حسب الأبجدية</string>
-    <string name="error_action_open_battery_settings">إعدادات البطارية</string>
-    <string name="error_action_open_deck_info">فتح معلومات التطبيق</string>
-    <string name="error_action_open_network">إعدادات الشبكة</string>
-    <string name="error_action_update_files_app">تحديث</string>
-    <string name="no_account_configured_yet">لم تتم تهيئة الحساب حتى الآن</string>
-    <string name="no_other_accounts">أنت لم تقم بتهيئة أي حسابات أخرى حتى الآن.</string>
-    <string name="choose_account">إختر حسابًا</string>
-    <string name="context_based_formatting">نافذة منبثقة للتنسيق القائم على السياق Context based formatting</string>
     <plurals name="remove_account_message">
         <item quantity="zero">سوف تؤدي إزالة الحساب%1$s أيضًا إلى حذف التغييرات غير المتزامنة الغير قابلة للاسترداد %2$d.</item>
         <item quantity="one">سوف تؤدي إزالة الحساب%1$s أيضًا إلى حذف التغيير غير المتزامن الغير قابل للاسترداد.</item>
@@ -411,54 +398,4 @@
         <item quantity="many">سوف تؤدي إزالة الحساب%1$s أيضًا إلى حذف التغييرات غير المتزامنة الغير قابلة للاسترداد %2$d.</item>
         <item quantity="other">سوف تؤدي إزالة الحساب %1$s أيضًا إلى حذف التغييرات غير المتزامنة الغير قابلة للاسترداد %2$d.</item>
     </plurals>
-    <string name="remove_account">حذف %1$s</string>
-
-    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">يجب أن تكون متصلًا بالانترنت ليُمكنك إضاف حساب.</string>
-    <string name="settings_notes_path">تعيين مُجلّد</string>
-
-    <string name="simple_next">التالي</string>
-    <string name="simple_prev">السابق</string>
-    <string name="simple_backup">النسخ الاحتياطي</string>
-    <string name="backup">اكتشفنا حالة غير قابلة للاسترداد للتطبيق. يرجى الاحتفاظ بنسخة احتياطية من التغييرات غير المتزامنة ومسح تخزين تطبيق Notes.</string>
-    <string name="settings_notes_path_description">مجلد لتخزين ملاحظاتك في خادم نكست كلاود</string>
-    <string-array name="settings_file_suffixes">
-        <item translatable="false">.txt</item>
-        <item translatable="false">.md</item>
-    </string-array>
-    <string name="settings_notes_path_success">مُجلّد ملاحظات جديدة: %1$s</string>
-    <string name="settings_file_suffix">إمتداد الملف</string>
-    <string name="settings_file_suffix_description">إمتداد الملف لملاحظاتك الجديدة في خادم نكست كلاود</string>
-    <string name="settings_file_suffix_success">لاحقة الملف الجديدة suffix: %1$s</string>
-    <string name="http_status_code">رمز حالة HTTP status code: %1$d</string>
-    <string name="progress_import_indeterminate">إستيراد ملاحظات ...</string>
-    <string name="progress_import">إستيراد الملاحظة %1$d من %2$d…</string>
-    <string name="account_imported">الحساب تمّ استيراده</string>
-    <string name="direct_editing_error">خطأ في تحميل التحرير الغني rich editing</string>
-    <string name="switch_to_plain_editing">بدّل إلى التحرير العادي plain editing</string>
-    <string name="action_back">عودة</string>
-    <string name="set_online_status">حالة الاتصال</string>
-    <string name="status_message">رسالة الحالة</string>
-    <string name="whats_your_status">ماهي حالتك؟</string>
-    <string name="clear_status_after">مسح رسالة الحالة بعد</string>
-    <string name="clear">محو</string>
-    <string name="dontClear">لا تمحُ</string>
-    <string name="today">اليوم</string>
-    <string name="thirtyMinutes">30 دقيقة</string>
-    <string name="oneHour">1 ساعة</string>
-    <string name="fourHours">4 ساعات</string>
-    <string name="thisWeek">هذا الأسبوع</string>
-    <string name="file_list_seconds_ago">منذ ثوان مضت</string>
-    <string name="online_status">حالة الاتصال</string>
-    <string name="online">مُتّصلٌ</string>
-    <string name="dnd">الرجاء عدم الإزعاج</string>
-    <string name="away">بالخارج</string>
-    <string name="invisible">غير مرئي</string>
-    <string name="busy">مشغول</string>
-    <string name="mute_all_notifications">عدم إظهار جميع التنبيهات</string>
-    <string name="appear_offline">الحالة غير متصل</string>
-    <string name="ecosystem_apps_display_files">الملفّات</string>
-    <string name="ecosystem_apps_display_talk">محادثة Talk</string>
-    <string name="ecosystem_apps_talk">تطبيق \"المحادثة\" talk من نكست كلاود</string>
-    <string name="ecosystem_apps_more">المزيد من تطبيقات نكست كلاود</string>
-    <string name="ecosystem_apps_display_more">المزيد</string>
 </resources>

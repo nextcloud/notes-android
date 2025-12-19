@@ -1,300 +1,352 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Nextcloud Notes - Android Client
-  ~
-  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
-  ~ SPDX-License-Identifier: GPL-3.0-or-later
--->
-<resources>
-    <string name="app_name">یادداشت‌ها</string>
-    <string name="app_name_long">یادداشت‌های نکست کلود</string>
-    <string name="label_all_notes">همه یادداشت‌ها</string>
-    <string name="label_favorites">مورد علاقه‌ها</string>
-    <string name="action_create">یادداشت جدید</string>
-    <string name="welcome_text">به %1$s خوش آمدید</string>
-    <string name="action_settings">تنظیمات</string>
-    <string name="action_trashbin">یادداشت‌های حذف شده</string>
-    <string name="action_search">جستجو</string>
-    <string name="action_sorting_method">روش مرتب‌سازی</string>
-    <string name="simple_cancel">لغو</string>
-    <string name="simple_switch">تعویض</string>
-    <string name="simple_edit">ویرایش</string>
-    <string name="simple_remove">حذف</string>
-    <string name="action_edit_save">ذخیره</string>
-    <string name="simple_about">درباره</string>
-    <string name="simple_link">پیوند</string>
-    <string name="action_note_deleted">حذف شد %1$s</string>
-    <string name="action_note_restored">بازیابی شد %1$s</string>
-    <string name="action_undo">برگرداندن</string>
-    <string name="action_uncategorized">دسته‌بندی نشده</string>
-    <string name="menu_delete">حذف</string>
-    <string name="menu_change_category">دسته‌بندی</string>
-    <string name="menu_favorite">مورد‌ ‌علاقه‌</string>
-    <string name="menu_preview">پیش‌نمایش</string>
-    <string name="menu_share">هم‌رسانی</string>
-    <string name="common_loading">درحال بارگیری…</string>
-
-
-    <string name="search_in_category">جستجو در %1$s</string>
-    <string name="search_in_all">جستجو در همه یادداشت‌ها</string>
-
-    <string name="change_category_title">انتخاب یک دسته‌بندی</string>
-
-    <string name="note_share_activity_shared_with_you">هم‌رسانده با شما به دست %1$s</string>
-    <string name="note_share_activity_share_link">هم‌رسانی پیوند</string>
-    <string name="note_share_activity_could_not_retrieve_url">امکان بازیابی URL وجود ندارد</string>
-    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" با شما به اشتراک گذاشته شد</string>
-    <string name="note_share_activity_contact_no_permission">دسترسی به مخاطب‌ها مورد نیاز است.</string>
-    <!-- NoteShareDetailActivity -->
-    <string name="note_share_detail_activity_advanced_settings">تنظمیات پیش‌رفته</string>
-    <string name="note_share_detail_activity_share_via_link_hide_download">نهفتن بارگیری</string>
-    <string name="note_share_detail_activity_share_send_note">یادداشت به گیرنده</string>
-    <string name="note_share_detail_activity_hint_note">یادداشت</string>
-    <string name="note_share_detail_activity_common_next">بعدی</string>
-    <string name="note_share_detail_activity_share_copy_link">اشتراک‌گذاری و رونوشت پیوند</string>
-    <string name="note_share_detail_activity_common_confirm">تأیید</string>
-    <string name="note_share_detail_activity_set_note">تنظیم یادداشت</string>
-    <string name="note_share_detail_activity_send_share">ارسال اشتراک</string>
-    <string name="note_share_detail_activity_hint_name">نام</string>
-    <string name="note_share_detail_activity_link_name">نام پیوند</string>
-    <string name="note_share_detail_activity_share_link_empty_password">شما باید یک رمزعبور را وارد کنید</string>
-    <string name="note_share_detail_activity_hint_password">گذرواژه</string>
-    <string name="note_share_detail_activity_no_share_permission_selected">لطفاً حداقل یک مجوز برای اشتراک‌گذاری انتخاب کنید.</string>
-    <string name="note_share_detail_activity_label_empty">برچسب نمی تواند خالی باشد</string>
-    <string name="note_share_detail_activity_cancel">ردکردن</string>
-    <!-- SharePasswordDialogFragment -->
-    <string name="share_password_dialog_fragment_share_link_optional_password_title">گذرواژه‌ای اختیاری وارد کنید</string>
-    <string name="share_password_dialog_fragment_skip">پرش</string>
-
-    <string name="share_link_password_title">یک رمزعبور را وارد کنید</string>
-    <string name="common_ok">مورد قبول</string>
-    <string name="common_delete">حذف</string>
-    <string name="write_email">فرستادن رایانامه</string>
-    <string name="no_browser_available">هیچ برنامه ای برای کنترل لینک ها در دسترس نیست</string>
-    <string name="no_email_app_available">هیچ برنامه ای برای رسیدگی به آدرس ایمیل موجود نیست.</string>
-    <string name="no_actions">هیچ اقدامی برای این کاربر وجود ندارد</string>
-
-    <string name="email_pick_failed">خطا در گرفتن نشانی رایانامه</string>
-    <string name="failed_update_ui">رابط کاربری بروز نشد</string>
-    <string name="activity_chooser_title">ارسال لینک به ....</string>
-
-    <string name="activity_chooser_send_file_title">ارسال</string>
-    <string name="share_internal_link_to_folder_text">پیوند هم‌رسانی داخلی تنها برای کاربرای کار می‌کند که به این شاخه دسترسی داشته باشند</string>
-    <string name="share_internal_link_to_file_text">پیوند هم‌رسانی داخلی تنها برای کاربرای کار می‌کند که به این پرونده دسترسی داشته باشند</string>
-    <string name="share_internal_link">هم‌رسانی پیوند داخلی</string>
-    <string name="delete_link">حذف پیوند</string>
-    <string name="share_settings">تنظیمات</string>
-    <string name="share_send_new_email">فرستادن رایانامهٔ جدید</string>
-    <string name="share_dialog_title">هم‌رسانی</string>
-    <string name="share_file">هم‌رسانی %1$s</string>
-    <string name="share_expiration_date_label">منقضی در%1$s</string>
-    <string name="share_expiration_date_format">%1$s</string>
-    <string name="share_no_expiration_date_label">تنظیم تاریخ انقضا</string>
-    <string name="share_via_link_section_title">هم‌رسانی پیوند</string>
-    <string name="share_via_link_send_link_label">فرستادن پیوند</string>
-    <string name="share_password_title">محافظت شده با گذرواژه</string>
-    <string name="share_no_password_title">تنظیم گذرواژه</string>
-    <string name="share_with_title">هم‌رسانی با…</string>
-    <string name="share_via_link_unset_password">ناتنظیم</string>
-    <string name="add_another_public_share_link">افزودن پیوندی دیگر</string>
-    <string name="add_new_public_share">افزودن پیوند هم‌رسانی عمومی جدید</string>
-    <string name="public_share_name">اسم جدید</string>
-    <string name="share_link_with_label">هم‌رسانی پیوند (%1$s)</string>
-    <string name="share_link">هم‌رسانی پیوند</string>
-    <string name="allow_resharing">اجازهٔ بازهم‌رساندن</string>
-    <string name="link_share_view_only">تنها مشاهده</string>
-    <string name="link_share_editing">ویرایش کردن</string>
-    <string name="link_share_allow_upload_and_editing">مجاز به بارگذاری و ویرایش</string>
-    <string name="link_share_file_drop">انداختن فایل (فقط آپلود)</string>
-    <string name="could_not_retrieve_shares">امکان بازگردانی اشتراک گذاری‌ها وجود ندارد</string>
-    <string name="share_permission_view_only">تنها مشاهده</string>
-    <string name="share_permission_can_edit">توانایی ویرایش</string>
-    <string name="share_permission_file_drop">انداختن پرونده</string>
-    <string name="share_permission_secure_file_drop">Secure file drop</string>
-    <string name="share_permissions">اجازه‌های هم‌رسانی</string>
-    <plurals name="share_download_limit_description">
-        <item quantity="one">محدودیت دانلود: %d بار</item>
-        <item quantity="other">محدودیت دانلود: %d بار</item>
-    </plurals>
-    <string name="username">نام کاربری</string>
-    <string name="share_group_clarification">%1$s (گروه)</string>
-    <string name="share_remote_clarification">%1$s (دوردست)</string>
-    <string name="share_room_clarification">%1$s (گفت‌وگو)</string>
-    <string name="share_known_remote_on_clarification">روی %1$s</string>
-    <string name="remote">(از راه دور)</string>
-
-    <string name="copy_link">کپی کردن لینک</string>
-    <string name="share">اشتراک‌گذاری</string>
-    <string name="clipboard_text_copied">پیوند رونوشت شد</string>
-    <string name="clipboard_no_text_to_copy">هیچ متنی برای کپی کردن در کلیپ بورد دریافت نشده است</string>
-    <string name="clipboard_unexpected_error">خطای غیرمنتظره هنگام کپی کردن در کلیپ بورد</string>
-    <string name="clipboard_label">متن کپی شده از %1$s</string>
-
-    <string name="listview_updated_today">امروز</string>
-    <string name="listview_updated_yesterday">دیروز</string>
-    <string name="listview_updated_this_week">این هفته</string>
-    <string name="listview_updated_last_week">هفته گذشته</string>
-    <string name="listview_updated_this_month">این ماه</string>
-    <string name="listview_updated_last_month">ماه گذشته</string>
-    <string name="settings_note_mode">حالت نمایش یادداشت‌ها</string>
-    <string name="settings_note_mode_new">Notes opening behaviour</string>
-    <string name="settings_theme_title">"تم "</string>
-    <string name="settings_font_title">قلم Monospace</string>
-    <string name="settings_font_size">اندازهٔ قلم</string>
-    <string name="settings_wifi_only">همگام‌سازی فقط در Wi-Fi</string>
-    <string name="settings_lock">App lock (Beta)</string>
-    <string name="settings_lock_summary">اعتبارنامه‌های دستگاه</string>
-    <string name="settings_background_sync">همگام‌سازی پس زمینه</string>
-    <string name="settings_prevent_screen_capture">Prevent screen capture</string>
-    <string name="settings_show_ecosystem_apps">نمایش تغییردهنده برنامه</string>
-    <string name="settings_show_ecosystem_apps_summary">پیشنهادات برنامه Nextcloud در عنوان ناوبری</string>
-    <string name="settings_gridview">نمایش گرید</string>
-    <string name="settings_keep_screen_on">Keep screen on</string>
-    <string name="settings_keep_screen_on_summary">When viewing or editing a note</string>
-
-    <string name="error_sync">همگام‌سازی انجام نشد:%1$s</string>
-    <string name="error_synchronization">همگام‌سازی انجام نشد</string>
-    <string name="error_no_network">هیچ ارتباطی با شبکه برقرار نیست</string>
-    <string name="error_maintenance_mode">کارساز در حال نگه‌داری است</string>
-    <string name="error_unknown">یک خطای ناشناخته رخ داده است.</string>
-
-    <string name="about_version_title">نسخه</string>
-    <string name="about_version"> شما در حال استفاده %1$s هستید</string>
-    <string name="about_maintainer_title">نگاه‌دارنده</string>
-    <string name="about_developers_title">توسعه دهندگان</string>
-    <string name="about_developers_original_author">original author</string>
-    <string name="about_translators_title">مترجم</string>
-    <string name="about_translators_transifex">انجمن نکست کلود در %1$s</string>
-    <string name="about_testers_title">آزمایش کنندگان</string>
-    <string name="about_source_title">کد منبع</string>
-    <string name="about_source">این پروژه در GitHub میزبانی شده است: %1$s</string>
-    <string name="about_issues_title">مسائل</string>
-    <string name="about_issues">شما می توانید اشکالات ، پیشنهادات پیشرفت و درخواست ویژگی را در ردیاب شماره GitHub گزارش دهید: %1$s</string>
-    <string name="about_translate_title">ترجمه</string>
-    <string name="about_translate">در Transifex به تیم Nextcloud بپیوندید و در ترجمه این برنامه به ما کمک کنید: %1$s</string>
-    <string name="about_app_license_title">مجوز برنامه</string>
+  <resources>
     <string name="about_app_license">این برنامه تحت مجوز GNU GENERAL PUBLIC LICENSE v3 + مجاز است.</string>
     <string name="about_app_license_button">مشاهده مجوز</string>
-    <string name="about_icons_disclaimer_title">آیکون‌ها</string>
-    <string name="about_icons_disclaimer_app_icon">برای مشاره آیکون اصلی %1$s را ببینید.</string>
-    <string name="about_icons_disclaimer_mdi_icons">تمام نمادهای دیگری که توسط این برنامه استفاده می شود%1$s توسط Google Inc ساخته شده و تحت مجوز Apache 2.0 دارای مجوز هستند.</string>
-    <string name="about_icons_disclaimer_mdi">آیکن های طراحی متریال</string>
-    <string name="about_credits_tab_title">اعتبارات</string>
+    <string name="about_app_license_title">مجوز برنامه</string>
     <string name="about_contribution_tab_title">مشارکت</string>
+    <string name="about_credits_tab_title">اعتبارات</string>
+    <string name="about_developers_original_author">original author</string>
+    <string name="about_developers_title">توسعه دهندگان</string>
+    <string name="about_icons_disclaimer_app_icon">برای مشاره آیکون اصلی %1$s را ببینید.</string>
+    <string name="about_icons_disclaimer_mdi">آیکن های طراحی متریال</string>
+    <string name="about_icons_disclaimer_mdi_icons">تمام نمادهای دیگری که توسط این برنامه استفاده می شود%1$s توسط Google Inc ساخته شده و تحت مجوز Apache 2.0 دارای مجوز هستند.</string>
+    <string name="about_icons_disclaimer_title">آیکون‌ها</string>
+    <string name="about_issues">شما می توانید اشکالات ، پیشنهادات پیشرفت و درخواست ویژگی را در ردیاب شماره GitHub گزارش دهید: %1$s</string>
+    <string name="about_issues_title">مسائل</string>
     <string name="about_license_tab_title">مجوز</string>
-
-    <string name="widget_note_list_title">لیست یادداشت‌ها</string>
-    <string name="widget_note_list_placeholder">بدون یادداشت</string>
-    <string name="widget_single_note_title">یادداشت واحد</string>
-    <string name="widget_single_note_placeholder_tv">یادداشت یافت نشد</string>
-    <string name="widget_not_logged_in">لطفاً قبل از استفاده از این ویجت، به یادداشت‌ها وارد شوید</string>
-    <string name="widget_entry_fav_contentDescription">Star icon is used to denote an item as a favorite</string>
-
+    <string name="about_maintainer_title">نگاه‌دارنده</string>
+    <string name="about_source">این پروژه در GitHub میزبانی شده است: %1$s</string>
+    <string name="about_source_title">کد منبع</string>
+    <string name="about_testers_title">آزمایش کنندگان</string>
+    <string name="about_translate">در Transifex به تیم Nextcloud بپیوندید و در ترجمه این برنامه به ما کمک کنید: %1$s</string>
+    <string name="about_translate_title">ترجمه</string>
+    <string name="about_translators_title">مترجم</string>
+    <string name="about_translators_transifex">انجمن نکست کلود در %1$s</string>
+    <string name="about_version"> شما در حال استفاده %1$s هستید</string>
+    <string name="about_version_title">نسخه</string>
+    <string name="account_already_imported">حساب قبلاً وارد شده است</string>
+    <string name="account_imported">Account imported.</string>
+    <string name="action_back">بازگشت</string>
+    <string name="action_create">یادداشت جدید</string>
+    <string name="action_edit_save">ذخیره</string>
+    <string name="action_formatting_help">قالب‌بندی</string>
+    <string name="action_note_deleted">حذف شد %1$s</string>
+    <string name="action_note_restored">بازیابی شد %1$s</string>
+    <string name="action_search">جستجو</string>
+    <string name="action_settings">تنظیمات</string>
+    <string name="action_sorting_method">روش مرتب‌سازی</string>
+    <string name="action_trashbin">یادداشت‌های حذف شده</string>
+    <string name="action_uncategorized">دسته‌بندی نشده</string>
+    <string name="action_undo">برگرداندن</string>
+    <string name="activity_chooser_send_file_title">ارسال</string>
+    <string name="activity_chooser_title">ارسال لینک به ....</string>
     <string name="activity_select_single_note">انتخاب یادداشت</string>
-
-    <string name="shortcut_create_long">ساختن یادداشت جدید</string>
-
-    <string name="pref_value_font_normal">معمولی</string>
-    <string name="pref_value_wifi_and_mobile">همگام‌سازی در حالت اتصال به Wi-Fi و اینترنت همراه</string>
-    <string name="pref_value_lock">محافظت از رمز عبور</string>
-
-    <string name="simple_error">خطا</string>
-    <string name="simple_close">بستن</string>
-    <string name="simple_copy">رونوشت</string>
-    <string name="simple_exception">استثنا</string>
-    <string name="pin_to_homescreen">اتصال به صفحه اصلی</string>
-    <string name="note_has_been_deleted">این یادداشت حذف شده است</string>
     <string name="add_account">افزودن حساب کاربری</string>
-
-    <string name="category_music">موسیقی</string>
-    <string name="category_movies">فیلم‌ها</string>
-    <string name="category_movie">فیلم</string>
-    <string name="category_work">کار</string>
-    <string name="category_todo">ToDo</string>
-    <string name="category_todos">ToDos</string>
+    <string name="add_another_public_share_link">افزودن پیوندی دیگر</string>
+    <string name="add_category">افزودن%1$s</string>
+    <string name="add_new_public_share">افزودن پیوند هم‌رسانی عمومی جدید</string>
+    <string name="added_content">اضافه ‌شده %1$s</string>
+    <string name="allow_resharing">اجازهٔ بازهم‌رساندن</string>
+    <string name="app_name">یادداشت‌ها</string>
+    <string name="app_name_long">یادداشت‌های نکست کلود</string>
+    <string name="appear_offline">نمایش آفلاین</string>
+    <string name="appearance_and_behavior">Appearance and behavior</string>
+    <string name="append_to_note">به یادداشت اضافه کنید</string>
+    <string name="away">دور از دسترس</string>
+    <string name="backup">We detected an irrecoverably state of the app. Please backup your unsynchronized changes and clear the storage of the Notes app.</string>
+    <string name="busy">مشغول</string>
+    <string name="category_bake">Bake</string>
     <string name="category_checklists">Checklists</string>
-    <string name="category_tasks">وظایف</string>
+    <string name="category_credentials">Credential</string>
+    <string name="category_food">Food</string>
+    <string name="category_game">بازی</string>
+    <string name="category_games">بازی ها</string>
+    <string name="category_gift">Gift</string>
+    <string name="category_gifts">Gifts</string>
+    <string name="category_key">Key</string>
+    <string name="category_keys">Keys</string>
+    <string name="category_movie">فیلم</string>
+    <string name="category_movies">فیلم‌ها</string>
+    <string name="category_music">موسیقی</string>
+    <string name="category_password">کلمه عبور</string>
+    <string name="category_passwords">کلمات عبور</string>
+    <string name="category_play">پخش کردن</string>
+    <string name="category_present">حاضر</string>
+    <string name="category_presents">Presents</string>
+    <string name="category_readonly">فقط خواندنی</string>
     <string name="category_recipe">Recipe</string>
     <string name="category_recipes">Recipes</string>
     <string name="category_restaurant">رستوران</string>
     <string name="category_restaurants">Restaurants</string>
-    <string name="category_food">Food</string>
-    <string name="category_bake">Bake</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_key">Key</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_keys">Keys</string>
-    <string name="category_password">کلمه عبور</string>
-    <string name="category_passwords">کلمات عبور</string>
-    <string name="category_credentials">Credential</string>
-    <string name="category_game">بازی</string>
-    <string name="category_games">بازی ها</string>
-    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
-    <string name="category_play">پخش کردن</string>
-    <string name="category_gift">Gift</string>
-    <string name="category_gifts">Gifts</string>
-    <!-- Like a gift -->
-    <string name="category_present">حاضر</string>
-    <!-- Like a gift -->
-    <string name="category_presents">Presents</string>
-
-    <string name="account_already_imported">حساب قبلاً وارد شده است</string>
-    <string name="no_notes_yet">هنوز هیچ یادداشتی وجود ندارد</string>
-    <string name="no_notes_yet_description">دکمه + را فشار دهید تا یک یادداشت جدید ایجاد کنید</string>
-    <string name="simple_more">بیش‌تر</string>
-    <string name="simple_move">انتقال</string>
-    <string name="category_readonly">فقط خواندنی</string>
-    <string name="no_category">بدون دسته‌بندی</string>
-    <string name="add_category">افزودن%1$s</string>
-    <string name="simple_checkbox">جعبه علامت</string>
-    <string name="unlock_notes">یادداشت‌های باز</string>
-    <string name="error_dialog_title">وای نه - حالا چی کار کنیم؟</string>
-    <string name="error_dialog_tip_token_mismatch_retry">لطفا از طریق توقف اجباری برنامه را بسته و دوباره اجرا کنید. ممکن است یک اتصال نادرست با نکست‌کلود ایجاد شده باشد.  </string>
-    <string name="error_dialog_tip_token_mismatch_clear_storage">اگر این مشکل استمرار داشت، سعی کنید با پاک کردن فضای ذخیره‌سازی هردو برنامک : Nextcloud و  Nextcloud Notes این مورد را برطرف کنید.</string>
-    <string name="error_dialog_tip_clear_storage">You can clear the storage by opening the app info and selecting Storage → Clear storage. ⚠️ Warning: This will delete not yet synchronized notes!</string>
-    <string name="error_dialog_tip_files_outdated">ظاهرا برنامک یادداشت منسوخ شده است. لطفا آخرین نسخه را از Play Store  یا F-Droid دانلود کنید.</string>
-    <string name="error_dialog_tip_files_force_stop">به نظر می‌رسد که مشکلی در برنامک نکست‌کلود ایجاد شده است. لطفا سعی کنید با توقف اجباری هر دو برنامک Nextcloud app  و Nextcloud Notes   را ببندید.  </string>
-    <string name="error_dialog_tip_files_delete_storage">"اگر توقف اجباری برنامه‌ها کمکی نکرد، می‌توانید پاک‌کردن فضای ذخیره‌سازی هردو برنامه را پاک کنید. "</string>
-    <string name="error_dialog_timeout_instance">پاسخ از سمت سرور شما با نام داده شده دریافت نشد. لطفا بررسی کنید که نمونه شما به درستی کار می‌کند.</string>
-    <string name="error_dialog_timeout_toggle">اتصال اینترنت خود را بررسی کنید. خاموش کردن اینترنت همراه و وای‌فای و روشن کردن مجدد آنها در برخی از مواقع می‌تواند کارساز باشد. </string>
+    <string name="category_tasks">وظایف</string>
+    <string name="category_todo">ToDo</string>
+    <string name="category_todos">ToDos</string>
+    <string name="category_work">کار</string>
+    <string name="change_category_title">انتخاب یک دسته‌بندی</string>
+    <string name="change_note_title">عوض‌کردن عنوان یادداشت</string>
+    <string name="choose_account">حساب کاربری را انتخاب کنید</string>
+    <string name="clear">پاک کردن</string>
+    <string name="clear_status_after">پاک کردن وضعیت بعدی</string>
+    <string name="clipboard_label">متن کپی شده از %1$s</string>
+    <string name="clipboard_no_text_to_copy">هیچ متنی برای کپی کردن در کلیپ بورد دریافت نشده است</string>
+    <string name="clipboard_text_copied">پیوند رونوشت شد</string>
+    <string name="clipboard_unexpected_error">خطای غیرمنتظره هنگام کپی کردن در کلیپ بورد</string>
+    <string name="common_delete">حذف</string>
+    <string name="common_loading">درحال بارگیری…</string>
+    <string name="common_ok">مورد قبول</string>
+    <string name="context_based_formatting">بازپخش قالب بندی مبتنی بر متن</string>
+    <string name="copy_link">کپی کردن لینک</string>
+    <string name="could_not_retrieve_shares">امکان بازگردانی اشتراک گذاری‌ها وجود ندارد</string>
+    <string name="delete_link">حذف پیوند</string>
+    <string name="direct_editing_error">Error while loading rich editing</string>
+    <string name="dnd">مزاحم نشوید</string>
+    <string name="dontClear">پاک نکن</string>
+    <string name="ecosystem_apps_display_files">پرونده‌ها</string>
+    <string name="ecosystem_apps_display_more">بیشتر</string>
+    <string name="ecosystem_apps_display_talk">گفتگو</string>
+    <string name="ecosystem_apps_more">برنامه‌های بیشتر Nextcloud</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="email_pick_failed">خطا در گرفتن نشانی رایانامه</string>
+    <string name="error_action_open_battery_settings">تنظیمات باتری</string>
+    <string name="error_action_open_deck_info">باز کردن اطلاعات برنامه</string>
+    <string name="error_action_open_network">تنظیمات شبکه</string>
+    <string name="error_action_update_files_app">به‌روزرسانی</string>
+    <string name="error_dialog_check_maintenance">لطفا بررسی کنید که نسخه نکست‌کلود شما در حال حاضر در حالت تعمیر و نگهداری نباشد.</string>
     <string name="error_dialog_check_server">پاسخ درستی از سرور شما دریافت نشد. لطفا دسترسی به یادداشت‌های خود را از طریق وب بررسی کنید.</string>
     <string name="error_dialog_check_server_logs"> مشکلی در نصب ابر Nextcloud وجود دارد. لطفا لاگ‌های سرور را بررسی کنید.</string>
-    <string name="error_dialog_check_maintenance">لطفا بررسی کنید که نسخه نکست‌کلود شما در حال حاضر در حالت تعمیر و نگهداری نباشد.</string>
     <string name="error_dialog_insufficient_storage">فضای برنامک نکست‌کلود شما پر شده است.لطفا یعضی از فایل‌های خود در را فضای ابری برای همگام‌سازی تغییرات محلی پاک کنید.  </string>
-    <string name="error_dialog_we_need_info">ما برای کمک به شما احتیاج به دنبال کردن اطلاعات فنی داریم:</string>
-    <string name="error_dialog_server_app_enabled">لطفا از نصب و فعال بودن برنامک یادداشت بر روی سرور، اطمینان حاصل کنید.</string>
-    <string name="error_dialog_redirect">پاسخ سرور شما کد حالت HTTP 302 است. که دلالت بر عدم نصب برنامک یادداشت بر روی سرور و یا پیکربندی نامناسب دارد. این مشکل می‌تواند به دلیل تغییرات نامناسب ایجاد شده در فایل .htaccess و یا به دلیل برنامه‌های مرتبط با Nextcloud مثل OID Client رخ دهد.</string>
-    <string name="error_dialog_tip_disable_battery_optimizations">لطفا تمامی فرایند‌های بهینه‌سازی مصرف باتری برای Nextcloud و Notes app   را غیر فعال کنید.</string>
     <string name="error_dialog_min_version">The Notes Android app requires the Nextcloud Android app to be at least version 3.18.</string>
-    <string name="added_content">اضافه ‌شده %1$s</string>
-    <string name="shared_text_empty">متن به اشتراک گذاشته‌شده خالی است</string>
-    <string name="append_to_note">به یادداشت اضافه کنید</string>
-    <string name="change_note_title">عوض‌کردن عنوان یادداشت</string>
-    <string name="menu_edit_title">ویرایش عنوان</string>
-    <string name="simple_security">امنیت</string>
-    <string name="appearance_and_behavior">Appearance and behavior</string>
-    <string name="simple_synchronization">همگام‌سازی</string>
+    <string name="error_dialog_redirect">پاسخ سرور شما کد حالت HTTP 302 است. که دلالت بر عدم نصب برنامک یادداشت بر روی سرور و یا پیکربندی نامناسب دارد. این مشکل می‌تواند به دلیل تغییرات نامناسب ایجاد شده در فایل .htaccess و یا به دلیل برنامه‌های مرتبط با Nextcloud مثل OID Client رخ دهد.</string>
+    <string name="error_dialog_server_app_enabled">لطفا از نصب و فعال بودن برنامک یادداشت بر روی سرور، اطمینان حاصل کنید.</string>
+    <string name="error_dialog_timeout_instance">پاسخ از سمت سرور شما با نام داده شده دریافت نشد. لطفا بررسی کنید که نمونه شما به درستی کار می‌کند.</string>
+    <string name="error_dialog_timeout_toggle">اتصال اینترنت خود را بررسی کنید. خاموش کردن اینترنت همراه و وای‌فای و روشن کردن مجدد آنها در برخی از مواقع می‌تواند کارساز باشد. </string>
+    <string name="error_dialog_tip_clear_storage">You can clear the storage by opening the app info and selecting Storage → Clear storage. ⚠️ Warning: This will delete not yet synchronized notes!</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">لطفا تمامی فرایند‌های بهینه‌سازی مصرف باتری برای Nextcloud و Notes app   را غیر فعال کنید.</string>
+    <string name="error_dialog_tip_files_delete_storage">"اگر توقف اجباری برنامه‌ها کمکی نکرد، می‌توانید پاک‌کردن فضای ذخیره‌سازی هردو برنامه را پاک کنید. "</string>
+    <string name="error_dialog_tip_files_force_stop">به نظر می‌رسد که مشکلی در برنامک نکست‌کلود ایجاد شده است. لطفا سعی کنید با توقف اجباری هر دو برنامک Nextcloud app  و Nextcloud Notes   را ببندید.  </string>
+    <string name="error_dialog_tip_files_outdated">ظاهرا برنامک یادداشت منسوخ شده است. لطفا آخرین نسخه را از Play Store  یا F-Droid دانلود کنید.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">اگر این مشکل استمرار داشت، سعی کنید با پاک کردن فضای ذخیره‌سازی هردو برنامک : Nextcloud و  Nextcloud Notes این مورد را برطرف کنید.</string>
+    <string name="error_dialog_tip_token_mismatch_retry">لطفا از طریق توقف اجباری برنامه را بسته و دوباره اجرا کنید. ممکن است یک اتصال نادرست با نکست‌کلود ایجاد شده باشد.  </string>
+    <string name="error_dialog_title">وای نه - حالا چی کار کنیم؟</string>
+    <string name="error_dialog_we_need_info">ما برای کمک به شما احتیاج به دنبال کردن اطلاعات فنی داریم:</string>
+    <string name="error_maintenance_mode">کارساز در حال نگه‌داری است</string>
+    <string name="error_no_network">هیچ ارتباطی با شبکه برقرار نیست</string>
+    <string name="error_sync">همگام‌سازی انجام نشد:%1$s</string>
+    <string name="error_synchronization">همگام‌سازی انجام نشد</string>
+    <string name="error_unknown">یک خطای ناشناخته رخ داده است.</string>
+    <string name="failed_update_ui">رابط کاربری بروز نشد</string>
+    <string name="file_list_seconds_ago">یک ثانیه پیش</string>
+    <string name="formatting_help_cbf_body_1">هدف اصلی از طراحی برنامک یادداشت، ارائه دادن یک ابزار بی‌حواس‌پرتی برای یادداشت‌برداری است. می‌توانید متن‌ها را در قالب Markdown بنویسید. برای انواع مختلفی از مثال‌های ذکر شده در زیر، می‌توانید از میانبرها جهت قالب‌دهی یادداشت‌های خود بدون وارد کردن کد استفاده کنید.</string>
+    <string name="formatting_help_cbf_body_2">فقط کافی است یک دامنه متن را انتخاب کنید یا روی مکان نما در هر موقعیتی ضربه بزنید و یک منوی بازشونده دریافت می کنید که در کنار ورودی‌های پیش‌فرض %1$s و %2$s و %3$s شامل ورودی‌‌هایی مانند %4$s و %5$s می‌باشد.</string>
+    <string name="formatting_help_cbf_title">قالب‌بندی مبتنی بر متن</string>
+    <string name="formatting_help_checkboxes_body_1">برای ساختن جعبه ‌علامت در ابتدای اجزای فهرست، براکت قرار دهید:</string>
+    <string name="formatting_help_checkboxes_body_2">ایتم 1</string>
+    <string name="formatting_help_checkboxes_body_3">ایتم 2</string>
+    <string name="formatting_help_checkboxes_title">جعبه علامت</string>
+    <string name="formatting_help_code_body_1">راه‌های مختلفی برای قرار‌دادن کد در Markdown وجود دارد. اگر شما قصد قرار دادن بلوک‌های کد در داخل متون را دارید، آنها را بین دو ` قرار دهید.</string>
+    <string name="formatting_help_code_body_2">همچنین Markdown قادر به پشتیبانی از code fencing می‌باشد،  چیزی که به شما اجازه قرار‌دادن چندین خط، بدون تورفتگی را می‌دهد:</string>
+    <string name="formatting_help_code_body_3">اگر شما نیاز به مشخص کردن syntax در یک زبان دارید:</string>
+    <string name="formatting_help_code_title">کد</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_images_alt">تصویر فانتزی</string>
+    <string name="formatting_help_images_body_1">Links have to be either complete URLs starting with a protocol and domain or absolute paths starting with a %1$s character.</string>
+    <string name="formatting_help_images_body_2">In order to conform to the Markdown format, please use escape characters in the image URL. This means for example, replace spaces with %1$s in the URL.</string>
+    <string name="formatting_help_images_title">تصاویر</string>
+    <string name="formatting_help_lists_body_1">زمانی که قصد استفاده از فهرست با شماره دارید:</string>
+    <string name="formatting_help_lists_body_2">" یک"</string>
+    <string name="formatting_help_lists_body_3">" دو"</string>
+    <string name="formatting_help_lists_body_4">" سه"</string>
+    <string name="formatting_help_lists_body_5">زمانی که شما قصد گذاشتن بولت پوینت دارید:</string>
+    <string name="formatting_help_lists_body_6">شروع خط با خط‌ تیره</string>
+    <string name="formatting_help_lists_body_7">اگر قصد گذاشتن ساب‌پونت دارید، قبل از خط تیره یا ستاره، به اندازه ۲ کاراکتر فضای خالی قرار دهید:</string>
+    <string name="formatting_help_lists_body_8">مانند این</string>
+    <string name="formatting_help_lists_body_9">و این</string>
+    <string name="formatting_help_lists_title">فهرست</string>
+    <string name="formatting_help_structured_documents_body_1">" گاهی اوقات برای بهسازی ساختار مستند‌های خود، بهتر است که سرفصل‌های موجود در مستند را در سطوح متفاوتی داشته باشیم. برای ایجاد سرفصل‌ها در متون، باید ابتدای خط‌ها را با یک %1$s آغاز کنیم. استفاده از چند %2$s در یک ردیف، نمایان‌گر سطوح پایین‌تر سرفصل‌ها با اندازه کوچکتر است."</string>
+    <string name="formatting_help_structured_documents_body_2">برای نمونه این متن یک سرفصل لایه سوم است</string>
+    <string name="formatting_help_structured_documents_body_3">می‌توان از یک علامت %1$s تا شش علامت %2$s برای نمایش اندازه‌های مختلف سرفصل‌ها استفاده کرد.</string>
+    <string name="formatting_help_structured_documents_body_4">اگر شما تمایل دارید نقل قول از شخصی بگذارید، قبل از شروع خط، از کاراکتر > استفاده کنید:</string>
+    <string name="formatting_help_structured_documents_body_5">تصور، از دانش مهم‌تر است. دانش، محدود است. تخیل، دنیا را احاطه می‌کند.</string>
+    <string name="formatting_help_structured_documents_body_6">- آلبرت انیشتین</string>
+    <string name="formatting_help_structured_documents_title">ساختار مستند‌ها</string>
+    <string name="formatting_help_tables_column">Column %1d</string>
+    <string name="formatting_help_tables_title">جدول‌ها</string>
+    <string name="formatting_help_tables_value">Value %1d</string>
+    <string name="formatting_help_text_body">به راحتی می‌توان با Markdown کلمات را به حالت %1$sbold%1$s و  کلمات دیگر را به حالت %2$sitalic%2$s درآورد. همچنین می‌توانید کلمات را به حالت %3$sstrike%3$s وحتی به صورت  [link to Nextcloud](https://nextcloud.com) درآورید:</string>
+    <string name="formatting_help_text_title">متن</string>
+    <string name="fourHours">۴ ساعت</string>
+    <string name="http_status_code">HTTP status code: %1$d</string>
+    <string name="invisible">مخفی</string>
+    <string name="label_all_notes">همه یادداشت‌ها</string>
+    <string name="label_favorites">مورد علاقه‌ها</string>
+    <string name="link_share_allow_upload_and_editing">مجاز به بارگذاری و ویرایش</string>
+    <string name="link_share_editing">ویرایش کردن</string>
+    <string name="link_share_file_drop">انداختن فایل (فقط آپلود)</string>
+    <string name="link_share_view_only">تنها مشاهده</string>
+    <string name="listview_updated_last_month">ماه گذشته</string>
+    <string name="listview_updated_last_week">هفته گذشته</string>
+    <string name="listview_updated_this_month">این ماه</string>
+    <string name="listview_updated_this_week">این هفته</string>
+    <string name="listview_updated_today">امروز</string>
+    <string name="listview_updated_yesterday">دیروز</string>
     <string name="manage_accounts">مدیریت حساب‌ها</string>
-    <string name="action_formatting_help">قالب‌بندی</string>
-
-
+    <string name="menu_change_category">دسته‌بندی</string>
+    <string name="menu_delete">حذف</string>
+    <string name="menu_edit_title">ویرایش عنوان</string>
+    <string name="menu_favorite">مورد‌ ‌علاقه‌</string>
+    <string name="menu_preview">پیش‌نمایش</string>
+    <string name="menu_share">هم‌رسانی</string>
+    <string name="mute_all_notifications">خاموش کردن همه اعلانات</string>
+    <string name="no_account_configured_yet">No account configured yet</string>
+    <string name="no_actions">هیچ اقدامی برای این کاربر وجود ندارد</string>
+    <string name="no_browser_available">هیچ برنامه ای برای کنترل لینک ها در دسترس نیست</string>
+    <string name="no_category">بدون دسته‌بندی</string>
+    <string name="no_email_app_available">هیچ برنامه ای برای رسیدگی به آدرس ایمیل موجود نیست.</string>
+    <string name="no_notes_yet">هنوز هیچ یادداشتی وجود ندارد</string>
+    <string name="no_notes_yet_description">دکمه + را فشار دهید تا یک یادداشت جدید ایجاد کنید</string>
+    <string name="no_other_accounts">شما تاکنون هیچ حساب کاربری دیگری را ایجاد نکرده‌اید.</string>
     <string name="noteMode_plain_edit">Plain edit mode</string>
     <string name="noteMode_plain_preview">Plain preview</string>
-    <string name="noteMode_rich_edit">Rich edit mode</string>
     <string name="noteMode_remember_last">آخرین انتخاب من را به خاطر بسپار</string>
-
-    <string-array name="fontSize_entries">
-        <item>کوچک</item>
-        <item>متوسط</item>
-        <item>بزرگ</item>
-    </string-array>
-
-    <string-array name="darkmode_entries">
-        <item>روشن</item>
-        <item>تیره</item>
-        <item>پیش فرض سیستم</item>
-    </string-array>
-
+    <string name="noteMode_rich_edit">Rich edit mode</string>
+    <string name="note_has_been_deleted">این یادداشت حذف شده است</string>
+    <string name="note_share_activity_contact_no_permission">دسترسی به مخاطب‌ها مورد نیاز است.</string>
+    <string name="note_share_activity_could_not_retrieve_url">امکان بازیابی URL وجود ندارد</string>
+    <string name="note_share_activity_share_link">هم‌رسانی پیوند</string>
+    <string name="note_share_activity_shared_with_you">هم‌رسانده با شما به دست %1$s</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" با شما به اشتراک گذاشته شد</string>
+    <string name="note_share_detail_activity_advanced_settings">تنظمیات پیش‌رفته</string>
+    <string name="note_share_detail_activity_cancel">ردکردن</string>
+    <string name="note_share_detail_activity_common_confirm">تأیید</string>
+    <string name="note_share_detail_activity_common_next">بعدی</string>
+    <string name="note_share_detail_activity_hint_name">نام</string>
+    <string name="note_share_detail_activity_hint_note">یادداشت</string>
+    <string name="note_share_detail_activity_hint_password">گذرواژه</string>
+    <string name="note_share_detail_activity_label_empty">برچسب نمی تواند خالی باشد</string>
+    <string name="note_share_detail_activity_link_name">نام پیوند</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">لطفاً حداقل یک مجوز برای اشتراک‌گذاری انتخاب کنید.</string>
+    <string name="note_share_detail_activity_send_share">ارسال اشتراک</string>
+    <string name="note_share_detail_activity_set_note">تنظیم یادداشت</string>
+    <string name="note_share_detail_activity_share_copy_link">اشتراک‌گذاری و رونوشت پیوند</string>
+    <string name="note_share_detail_activity_share_link_empty_password">شما باید یک رمزعبور را وارد کنید</string>
+    <string name="note_share_detail_activity_share_send_note">یادداشت به گیرنده</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">نهفتن بارگیری</string>
+    <string name="oneHour">۱ ساعت</string>
+    <string name="online">برخط</string>
+    <string name="online_status">وضعیت برخط</string>
+    <string name="pin_to_homescreen">اتصال به صفحه اصلی</string>
+    <string name="pref_value_font_normal">معمولی</string>
+    <string name="pref_value_lock">محافظت از رمز عبور</string>
+    <string name="pref_value_wifi_and_mobile">همگام‌سازی در حالت اتصال به Wi-Fi و اینترنت همراه</string>
+    <string name="progress_import">Importing note %1$d of %2$d…</string>
+    <string name="progress_import_indeterminate">Importing notes…</string>
+    <string name="public_share_name">اسم جدید</string>
+    <string name="remote">(از راه دور)</string>
+    <string name="remove_account">Remove %1$s</string>
+    <string name="search_in_all">جستجو در همه یادداشت‌ها</string>
+    <string name="search_in_category">جستجو در %1$s</string>
+    <string name="set_online_status">وضعیت برخط</string>
+    <string name="settings_background_sync">همگام‌سازی پس زمینه</string>
+    <string name="settings_file_suffix">File extension</string>
+    <string name="settings_file_suffix_description">File extension for new notes in your Nextcloud</string>
+    <string name="settings_file_suffix_success">New file suffix: %1$s</string>
+    <string name="settings_font_size">اندازهٔ قلم</string>
+    <string name="settings_font_title">قلم Monospace</string>
+    <string name="settings_gridview">نمایش گرید</string>
+    <string name="settings_keep_screen_on">Keep screen on</string>
+    <string name="settings_keep_screen_on_summary">When viewing or editing a note</string>
+    <string name="settings_lock">App lock (Beta)</string>
+    <string name="settings_lock_summary">اعتبارنامه‌های دستگاه</string>
+    <string name="settings_note_mode">حالت نمایش یادداشت‌ها</string>
+    <string name="settings_note_mode_new">Notes opening behaviour</string>
+    <string name="settings_notes_path">Set folder</string>
+    <string name="settings_notes_path_description">Folder to store your notes in your Nextcloud</string>
+    <string name="settings_notes_path_success">New notes folder: %1$s</string>
+    <string name="settings_prevent_screen_capture">Prevent screen capture</string>
+    <string name="settings_show_ecosystem_apps">نمایش تغییردهنده برنامه</string>
+    <string name="settings_show_ecosystem_apps_summary">پیشنهادات برنامه Nextcloud در عنوان ناوبری</string>
+    <string name="settings_theme_title">"تم "</string>
+    <string name="settings_wifi_only">همگام‌سازی فقط در Wi-Fi</string>
+    <string name="share">اشتراک‌گذاری</string>
+    <string name="share_dialog_title">هم‌رسانی</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_expiration_date_label">منقضی در%1$s</string>
+    <string name="share_file">هم‌رسانی %1$s</string>
+    <string name="share_group_clarification">%1$s (گروه)</string>
+    <string name="share_internal_link">هم‌رسانی پیوند داخلی</string>
+    <string name="share_internal_link_to_file_text">پیوند هم‌رسانی داخلی تنها برای کاربرای کار می‌کند که به این پرونده دسترسی داشته باشند</string>
+    <string name="share_internal_link_to_folder_text">پیوند هم‌رسانی داخلی تنها برای کاربرای کار می‌کند که به این شاخه دسترسی داشته باشند</string>
+    <string name="share_known_remote_on_clarification">روی %1$s</string>
+    <string name="share_link">هم‌رسانی پیوند</string>
+    <string name="share_link_password_title">یک رمزعبور را وارد کنید</string>
+    <string name="share_link_with_label">هم‌رسانی پیوند (%1$s)</string>
+    <string name="share_no_expiration_date_label">تنظیم تاریخ انقضا</string>
+    <string name="share_no_password_title">تنظیم گذرواژه</string>
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">گذرواژه‌ای اختیاری وارد کنید</string>
+    <string name="share_password_dialog_fragment_skip">پرش</string>
+    <string name="share_password_title">محافظت شده با گذرواژه</string>
+    <string name="share_permission_can_edit">توانایی ویرایش</string>
+    <string name="share_permission_file_drop">انداختن پرونده</string>
+    <string name="share_permission_secure_file_drop">Secure file drop</string>
+    <string name="share_permission_view_only">تنها مشاهده</string>
+    <string name="share_permissions">اجازه‌های هم‌رسانی</string>
+    <string name="share_remote_clarification">%1$s (دوردست)</string>
+    <string name="share_room_clarification">%1$s (گفت‌وگو)</string>
+    <string name="share_send_new_email">فرستادن رایانامهٔ جدید</string>
+    <string name="share_settings">تنظیمات</string>
+    <string name="share_via_link_section_title">هم‌رسانی پیوند</string>
+    <string name="share_via_link_send_link_label">فرستادن پیوند</string>
+    <string name="share_via_link_unset_password">ناتنظیم</string>
+    <string name="share_with_title">هم‌رسانی با…</string>
+    <string name="shared_text_empty">متن به اشتراک گذاشته‌شده خالی است</string>
+    <string name="shortcut_create_long">ساختن یادداشت جدید</string>
+    <string name="simple_about">درباره</string>
+    <string name="simple_backup">پشتیبان‌گیری</string>
+    <string name="simple_cancel">لغو</string>
+    <string name="simple_checkbox">جعبه علامت</string>
+    <string name="simple_close">بستن</string>
+    <string name="simple_copy">رونوشت</string>
+    <string name="simple_edit">ویرایش</string>
+    <string name="simple_error">خطا</string>
+    <string name="simple_exception">استثنا</string>
+    <string name="simple_link">پیوند</string>
+    <string name="simple_more">بیش‌تر</string>
+    <string name="simple_move">انتقال</string>
+    <string name="simple_next">بعدی</string>
+    <string name="simple_other">دیگر</string>
+    <string name="simple_prev">قبلی</string>
+    <string name="simple_remove">حذف</string>
+    <string name="simple_security">امنیت</string>
+    <string name="simple_switch">تعویض</string>
+    <string name="simple_synchronization">همگام‌سازی</string>
+    <string name="sort_alphabetically">مرتب‌سازی طبق الفبا</string>
+    <string name="sort_last_modified">مرتب‌سازی طبق تاریخ</string>
+    <string name="status_message">پیام وضعیت</string>
+    <string name="switch_to_plain_editing">Switch to plain editing</string>
+    <string name="thirtyMinutes">۳۰ دقیقه</string>
+    <string name="thisWeek">این هفته</string>
+    <string name="today">امروز.</string>
+    <string name="unlock_notes">یادداشت‌های باز</string>
+    <string name="username">نام کاربری</string>
+    <string name="welcome_text">به %1$s خوش آمدید</string>
+    <string name="whats_your_status">وضعیت شما چیست؟</string>
+    <string name="widget_entry_fav_contentDescription">Star icon is used to denote an item as a favorite</string>
+    <string name="widget_not_logged_in">لطفاً قبل از استفاده از این ویجت، به یادداشت‌ها وارد شوید</string>
+    <string name="widget_note_list_placeholder">بدون یادداشت</string>
+    <string name="widget_note_list_title">لیست یادداشت‌ها</string>
+    <string name="widget_single_note_placeholder_tv">یادداشت یافت نشد</string>
+    <string name="widget_single_note_title">یادداشت واحد</string>
+    <string name="write_email">فرستادن رایانامه</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">برای اضافه کردن حساب باید به اینترنت متصل شوید.</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">محدودیت دانلود: %d بار</item>
+        <item quantity="other">محدودیت دانلود: %d بار</item>
+    </plurals>
     <plurals name="ab_selected">
         <item quantity="one">%d انتخاب شد</item>
         <item quantity="other">%d انتخاب شد</item>
@@ -311,123 +363,8 @@
         <item quantity="one">Share content of %1$d note</item>
         <item quantity="other">Share content of %1$d notes</item>
     </plurals>
-
-    <string name="formatting_help_divider" translateable="false">---</string>
-    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
-    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
-    <string name="formatting_help_codefence" translateable="false">```</string>
-    <string name="formatting_help_codefence_outer" translateable="false">````</string>
-    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
-    <string name="formatting_help_cbf_title">قالب‌بندی مبتنی بر متن</string>
-    <string name="formatting_help_cbf_body_1">هدف اصلی از طراحی برنامک یادداشت، ارائه دادن یک ابزار بی‌حواس‌پرتی برای یادداشت‌برداری است. می‌توانید متن‌ها را در قالب Markdown بنویسید. برای انواع مختلفی از مثال‌های ذکر شده در زیر، می‌توانید از میانبرها جهت قالب‌دهی یادداشت‌های خود بدون وارد کردن کد استفاده کنید.</string>
-    <string name="formatting_help_cbf_body_2">فقط کافی است یک دامنه متن را انتخاب کنید یا روی مکان نما در هر موقعیتی ضربه بزنید و یک منوی بازشونده دریافت می کنید که در کنار ورودی‌های پیش‌فرض %1$s و %2$s و %3$s شامل ورودی‌‌هایی مانند %4$s و %5$s می‌باشد.</string>
-
-    <string name="formatting_help_text_title">متن</string>
-    <string name="formatting_help_text_body">به راحتی می‌توان با Markdown کلمات را به حالت %1$sbold%1$s و  کلمات دیگر را به حالت %2$sitalic%2$s درآورد. همچنین می‌توانید کلمات را به حالت %3$sstrike%3$s وحتی به صورت  [link to Nextcloud](https://nextcloud.com) درآورید:</string>
-
-    <string name="formatting_help_lists_title">فهرست</string>
-    <string name="formatting_help_lists_body_1">زمانی که قصد استفاده از فهرست با شماره دارید:</string>
-    <string name="formatting_help_lists_body_2">" یک"</string>
-    <string name="formatting_help_lists_body_3">" دو"</string>
-    <string name="formatting_help_lists_body_4">" سه"</string>
-    <string name="formatting_help_lists_body_5">زمانی که شما قصد گذاشتن بولت پوینت دارید:</string>
-    <string name="formatting_help_lists_body_6">شروع خط با خط‌ تیره</string>
-    <string name="formatting_help_lists_body_7">اگر قصد گذاشتن ساب‌پونت دارید، قبل از خط تیره یا ستاره، به اندازه ۲ کاراکتر فضای خالی قرار دهید:</string>
-    <string name="formatting_help_lists_body_8">مانند این</string>
-    <string name="formatting_help_lists_body_9">و این</string>
-
-    <string name="formatting_help_checkboxes_title">جعبه علامت</string>
-    <string name="formatting_help_checkboxes_body_1">برای ساختن جعبه ‌علامت در ابتدای اجزای فهرست، براکت قرار دهید:</string>
-    <string name="formatting_help_checkboxes_body_2">ایتم 1</string>
-    <string name="formatting_help_checkboxes_body_3">ایتم 2</string>
-
-    <string name="formatting_help_structured_documents_title">ساختار مستند‌ها</string>
-    <string name="formatting_help_structured_documents_body_1">" گاهی اوقات برای بهسازی ساختار مستند‌های خود، بهتر است که سرفصل‌های موجود در مستند را در سطوح متفاوتی داشته باشیم. برای ایجاد سرفصل‌ها در متون، باید ابتدای خط‌ها را با یک %1$s آغاز کنیم. استفاده از چند %2$s در یک ردیف، نمایان‌گر سطوح پایین‌تر سرفصل‌ها با اندازه کوچکتر است."</string>
-    <string name="formatting_help_structured_documents_body_2">برای نمونه این متن یک سرفصل لایه سوم است</string>
-    <string name="formatting_help_structured_documents_body_3">می‌توان از یک علامت %1$s تا شش علامت %2$s برای نمایش اندازه‌های مختلف سرفصل‌ها استفاده کرد.</string>
-    <string name="formatting_help_structured_documents_body_4">اگر شما تمایل دارید نقل قول از شخصی بگذارید، قبل از شروع خط، از کاراکتر > استفاده کنید:</string>
-    <string name="formatting_help_structured_documents_body_5">تصور، از دانش مهم‌تر است. دانش، محدود است. تخیل، دنیا را احاطه می‌کند.</string>
-    <string name="formatting_help_structured_documents_body_6">- آلبرت انیشتین</string>
-
-    <string name="formatting_help_code_title">کد</string>
-    <string name="formatting_help_code_body_1">راه‌های مختلفی برای قرار‌دادن کد در Markdown وجود دارد. اگر شما قصد قرار دادن بلوک‌های کد در داخل متون را دارید، آنها را بین دو ` قرار دهید.</string>
-    <string name="formatting_help_code_body_2">همچنین Markdown قادر به پشتیبانی از code fencing می‌باشد،  چیزی که به شما اجازه قرار‌دادن چندین خط، بدون تورفتگی را می‌دهد:</string>
-    <string name="formatting_help_code_body_3">اگر شما نیاز به مشخص کردن syntax در یک زبان دارید:</string>
-
-    <string name="formatting_help_tables_title">جدول‌ها</string>
-    <!-- Column header of a sample table -->
-    <string name="formatting_help_tables_column">Column %1d</string>
-    <!-- Table cell value of a sample table -->
-    <string name="formatting_help_tables_value">Value %1d</string>
-
-    <string name="formatting_help_images_body_1">Links have to be either complete URLs starting with a protocol and domain or absolute paths starting with a %1$s character.</string>
-    <string name="formatting_help_images_body_2">In order to conform to the Markdown format, please use escape characters in the image URL. This means for example, replace spaces with %1$s in the URL.</string>
-    <string name="formatting_help_images_title">تصاویر</string>
-    <string name="formatting_help_images_alt">تصویر فانتزی</string>
-
-    <string name="simple_other">دیگر</string>
-    <string name="sort_last_modified">مرتب‌سازی طبق تاریخ</string>
-    <string name="sort_alphabetically">مرتب‌سازی طبق الفبا</string>
-    <string name="error_action_open_battery_settings">تنظیمات باتری</string>
-    <string name="error_action_open_deck_info">باز کردن اطلاعات برنامه</string>
-    <string name="error_action_open_network">تنظیمات شبکه</string>
-    <string name="error_action_update_files_app">به‌روزرسانی</string>
-    <string name="no_account_configured_yet">No account configured yet</string>
-    <string name="no_other_accounts">شما تاکنون هیچ حساب کاربری دیگری را ایجاد نکرده‌اید.</string>
-    <string name="choose_account">حساب کاربری را انتخاب کنید</string>
-    <string name="context_based_formatting">بازپخش قالب بندی مبتنی بر متن</string>
     <plurals name="remove_account_message">
         <item quantity="one">Removing the account %1$s will also delete irrecoverable one unsynchronized change.</item>
         <item quantity="other">Removing the account %1$s will also delete irrecoverable %2$d unsynchronized changes.</item>
     </plurals>
-    <string name="remove_account">Remove %1$s</string>
-
-    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">برای اضافه کردن حساب باید به اینترنت متصل شوید.</string>
-    <string name="settings_notes_path">Set folder</string>
-
-    <string name="simple_next">بعدی</string>
-    <string name="simple_prev">قبلی</string>
-    <string name="simple_backup">پشتیبان‌گیری</string>
-    <string name="backup">We detected an irrecoverably state of the app. Please backup your unsynchronized changes and clear the storage of the Notes app.</string>
-    <string name="settings_notes_path_description">Folder to store your notes in your Nextcloud</string>
-    <string-array name="settings_file_suffixes">
-        <item translatable="false">.txt</item>
-        <item translatable="false">.md</item>
-    </string-array>
-    <string name="settings_notes_path_success">New notes folder: %1$s</string>
-    <string name="settings_file_suffix">File extension</string>
-    <string name="settings_file_suffix_description">File extension for new notes in your Nextcloud</string>
-    <string name="settings_file_suffix_success">New file suffix: %1$s</string>
-    <string name="http_status_code">HTTP status code: %1$d</string>
-    <string name="progress_import_indeterminate">Importing notes…</string>
-    <string name="progress_import">Importing note %1$d of %2$d…</string>
-    <string name="account_imported">Account imported.</string>
-    <string name="direct_editing_error">Error while loading rich editing</string>
-    <string name="switch_to_plain_editing">Switch to plain editing</string>
-    <string name="action_back">بازگشت</string>
-    <string name="set_online_status">وضعیت برخط</string>
-    <string name="status_message">پیام وضعیت</string>
-    <string name="whats_your_status">وضعیت شما چیست؟</string>
-    <string name="clear_status_after">پاک کردن وضعیت بعدی</string>
-    <string name="clear">پاک کردن</string>
-    <string name="dontClear">پاک نکن</string>
-    <string name="today">امروز.</string>
-    <string name="thirtyMinutes">۳۰ دقیقه</string>
-    <string name="oneHour">۱ ساعت</string>
-    <string name="fourHours">۴ ساعت</string>
-    <string name="thisWeek">این هفته</string>
-    <string name="file_list_seconds_ago">یک ثانیه پیش</string>
-    <string name="online_status">وضعیت برخط</string>
-    <string name="online">برخط</string>
-    <string name="dnd">مزاحم نشوید</string>
-    <string name="away">دور از دسترس</string>
-    <string name="invisible">مخفی</string>
-    <string name="busy">مشغول</string>
-    <string name="mute_all_notifications">خاموش کردن همه اعلانات</string>
-    <string name="appear_offline">نمایش آفلاین</string>
-    <string name="ecosystem_apps_display_files">پرونده‌ها</string>
-    <string name="ecosystem_apps_display_talk">گفتگو</string>
-    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
-    <string name="ecosystem_apps_more">برنامه‌های بیشتر Nextcloud</string>
-    <string name="ecosystem_apps_display_more">بیشتر</string>
 </resources>

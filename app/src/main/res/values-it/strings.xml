@@ -1,298 +1,349 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Nextcloud Notes - Android Client
-  ~
-  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
-  ~ SPDX-License-Identifier: GPL-3.0-or-later
--->
-<resources>
-    <string name="app_name">Note</string>
-    <string name="app_name_long">Nextcloud Note</string>
-    <string name="label_all_notes">Tutte le note</string>
-    <string name="label_favorites">Preferite</string>
-    <string name="action_create">Nuova nota</string>
-    <string name="welcome_text">Benvenuti in %1$s</string>
-    <string name="action_settings">Impostazioni</string>
-    <string name="action_trashbin">Note eliminate</string>
-    <string name="action_search">Cerca</string>
-    <string name="action_sorting_method">Metodo di ordinamento</string>
-    <string name="simple_cancel">Annulla</string>
-    <string name="simple_switch">Scambia</string>
-    <string name="simple_edit">Modifica</string>
-    <string name="simple_remove">Rimuovi</string>
-    <string name="action_edit_save">Salva</string>
-    <string name="simple_about">Informazioni</string>
-    <string name="simple_link">Collegamento</string>
-    <string name="action_note_deleted">Eliminato %1$s</string>
-    <string name="action_note_restored">Ripristinato %1$s</string>
-    <string name="action_undo">Annulla</string>
-    <string name="action_uncategorized">Senza categoria</string>
-    <string name="menu_delete">Elimina</string>
-    <string name="menu_change_category">Categoria</string>
-    <string name="menu_favorite">Preferito</string>
-    <string name="menu_preview">Anteprima</string>
-    <string name="menu_share">Condividi</string>
-    <string name="common_loading">Caricamento…</string>
-
-
-    <string name="search_in_category">Cerca in %1$s</string>
-    <string name="search_in_all">Cerca tutte le note</string>
-
-    <string name="change_category_title">Scegli una categoria</string>
-
-    <string name="note_share_activity_shared_with_you">Condiviso con te da %1$s</string>
-    <string name="note_share_activity_search_text">Nome, Federated Cloud ID o indirizzo e-mail...</string>
-    <string name="note_share_activity_share_link">Collegamento di condivisione</string>
-    <string name="note_share_activity_resharing_not_allowed">La policy o le autorizzazioni impediscono la ricondivisione</string>
-    <string name="note_share_activity_could_not_retrieve_url">Impossibile recuperare l\'URL</string>
-    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" è stato condiviso con te</string>
-    <string name="note_share_activity_contact_no_permission">Autorizzazione Contatti richiesta</string>
-    <!-- NoteShareDetailActivity -->
-    <string name="note_share_detail_activity_advanced_settings">Impostazioni avanzate</string>
-    <string name="note_share_detail_activity_share_via_link_hide_download">Nascondi scaricamento</string>
-    <string name="note_share_detail_activity_share_send_note">Nota al destinatario</string>
-    <string name="note_share_detail_activity_hint_note">Nota</string>
-    <string name="note_share_detail_activity_common_next">Successivo</string>
-    <string name="note_share_detail_activity_share_copy_link">Condividi e copia il collegamento</string>
-    <string name="note_share_detail_activity_common_confirm">Conferma</string>
-    <string name="note_share_detail_activity_set_note">Imposta nota</string>
-    <string name="note_share_detail_activity_send_share">Invia condivisione</string>
-    <string name="note_share_detail_activity_hint_name">Nome</string>
-    <string name="note_share_detail_activity_link_name">Nome collegamento</string>
-    <string name="note_share_detail_activity_share_link_empty_password">Devi digitare una password</string>
-    <string name="note_share_detail_activity_hint_password">Password</string>
-    <string name="note_share_detail_activity_no_share_permission_selected">Seleziona almeno un permesso da condividere.</string>
-    <string name="note_share_detail_activity_label_empty">L\'etichetta non può essere vuota</string>
-    <string name="note_share_detail_activity_cancel">Annulla</string>
-    <!-- SharePasswordDialogFragment -->
-    <string name="share_password_dialog_fragment_share_link_optional_password_title">Digita una password facoltativa</string>
-    <string name="share_link_password_title">Digita una password</string>
-    <string name="common_ok">OK</string>
-    <string name="common_delete">Elimina</string>
-    <string name="write_email">Invia email</string>
-    <string name="no_browser_available">Nessun applicazione disponibile per gestire i collegamenti</string>
-    <string name="no_email_app_available">Nessuna applicazione disponibile per gestire l\'indirizzo email</string>
-    <string name="no_actions">Nessuna azione per questo utente</string>
-
-    <string name="email_pick_failed">Impossibile scegliere l\'indirizzo di posta.</string>
-    <string name="failed_update_ui">Aggiornamento interfaccia non riuscito</string>
-    <string name="file_detail_sharing_fragment_no_contact_app_message">Nessuna app disponibile per selezionare i contatti</string>
-    <string name="activity_chooser_title">Invia collegamento a…</string>
-
-    <string name="activity_chooser_send_file_title">Invia</string>
-    <string name="share_internal_link_to_folder_text">Il collegamento di condivisione funziona solo per gli utenti con accesso a questa cartella</string>
-    <string name="share_internal_link_to_file_text">Il collegamento di condivisione funziona solo per gli utenti con accesso a questo file</string>
-    <string name="share_internal_link">Condividi collegamento interno</string>
-    <string name="delete_link">Elimina collegamento</string>
-    <string name="share_settings">Impostazioni</string>
-    <string name="share_send_new_email">Invia una nuova email</string>
-    <string name="share_dialog_title">Condivisione</string>
-    <string name="share_file">Condividi %1$s</string>
-    <string name="share_expiration_date_label">Scade il %1$s</string>
-    <string name="share_expiration_date_format">%1$s</string>
-    <string name="share_no_expiration_date_label">Imposta data di scadenza</string>
-    <string name="share_via_link_section_title">Collegamento di condivisione</string>
-    <string name="share_via_link_send_link_label">Invia collegamento</string>
-    <string name="share_password_title">Protetta da password</string>
-    <string name="share_no_password_title">Imposta password</string>
-    <string name="share_with_title">Condividi con…</string>
-    <string name="share_via_link_unset_password">Rimuovi</string>
-    <string name="add_another_public_share_link">Aggiungi un altro collegamento</string>
-    <string name="add_new_public_share">Aggiungi nuovo collegamento pubblico di condivisione</string>
-    <string name="public_share_name">Nuovo nome</string>
-    <string name="share_link_with_label">Collegamento di condivisione (%1$s)</string>
-    <string name="share_link">Collegamento di condivisione</string>
-    <string name="link_share_view_only">Sola lettura</string>
-    <string name="link_share_editing">Modificando</string>
-    <string name="link_share_allow_upload_and_editing">Consenti caricamento e modifica</string>
-    <string name="link_share_file_drop">Rilascio file (solo caricamento)</string>
-    <string name="could_not_retrieve_shares">Impossibile recuperare le condivisioni</string>
-    <string name="share_permission_view_only">Sola lettura</string>
-    <string name="share_permission_can_edit">Può modificare</string>
-    <string name="share_permission_file_drop">Elimina file</string>
-    <string name="share_permission_secure_file_drop">File drop sicuro</string>
-    <string name="share_permissions">Condividi permessi</string>
-    <string name="username">Nome utente</string>
-    <string name="share_group_clarification">%1$s (gruppo)</string>
-    <string name="share_remote_clarification">%1$s (remota)</string>
-    <string name="share_room_clarification">%1$s (conversazione)</string>
-    <string name="share_known_remote_on_clarification">su %1$s</string>
-    <string name="remote">(remota)</string>
-
-    <string name="copy_link">Copia collegamento</string>
-    <string name="share">Condividi</string>
-    <string name="clipboard_text_copied">Collegamento copiato</string>
-    <string name="clipboard_no_text_to_copy">Nessun testo ricevuto da copiare negli appunti</string>
-    <string name="clipboard_unexpected_error">Errore inatteso durante la copia negli appunti</string>
-    <string name="clipboard_label">Testo copiato da %1$s</string>
-
-    <string name="listview_updated_today">Oggi</string>
-    <string name="listview_updated_yesterday">Ieri</string>
-    <string name="listview_updated_this_week">Questa settimana</string>
-    <string name="listview_updated_last_week">Ultima settimana</string>
-    <string name="listview_updated_this_month">Questo mese</string>
-    <string name="listview_updated_last_month">Ultimo mese</string>
-    <string name="settings_note_mode">Modalità di visualizzazione delle note</string>
-    <string name="settings_note_mode_new">Comportamento di apertura delle note</string>
-    <string name="settings_theme_title">Tema</string>
-    <string name="settings_font_title">Carattere a spaziatura fissa</string>
-    <string name="settings_font_size">Dimensione carattere</string>
-    <string name="settings_wifi_only">Sincronizza solo con Wi-Fi</string>
-    <string name="settings_lock">Blocco applicazione (Beta)</string>
-    <string name="settings_lock_summary">Credenziali dispositivo</string>
-    <string name="settings_background_sync">Sincronizzazione in background</string>
-    <string name="settings_prevent_screen_capture">Impedisci cattura dello schermo</string>
-    <string name="settings_show_ecosystem_apps">Mostra il selettore delle applicazioni</string>
-    <string name="settings_show_ecosystem_apps_summary">Consigli delle applicazioni di Nextcloud nell\'intestazione di navigazione</string>
-    <string name="settings_gridview">Vista griglia</string>
-    <string name="settings_enable_direct_edit">Modifica Diretta</string>
-    <string name="settings_enable_direct_edit_summary">Quando disabilitato, l\'editor avanzato sarà nascosto.</string>
-    <string name="settings_keep_screen_on">Mantieni lo schermo acceso</string>
-    <string name="settings_keep_screen_on_summary">Durante la visualizzazione o la modifica di una nota</string>
-
-    <string name="error_sync">Sincronizzazione non riuscita: %1$s</string>
-    <string name="error_synchronization">Sincronizzazione non riuscita</string>
-    <string name="error_no_network">Nessuna connessione di rete</string>
-    <string name="error_maintenance_mode">Il server è in modalità di manutenzione</string>
-    <string name="error_unknown">Si è verificato un errore sconosciuto.</string>
-
-    <string name="about_version_title">Versione</string>
-    <string name="about_version">Attualmente stai usando %1$s</string>
-    <string name="about_maintainer_title">Responsabile</string>
-    <string name="about_developers_title">Sviluppatori</string>
-    <string name="about_developers_original_author">autore originale</string>
-    <string name="about_translators_title">Traduttori</string>
-    <string name="about_translators_transifex">Comunità di Nextcloud attiva %1$s</string>
-    <string name="about_testers_title">Tester</string>
-    <string name="about_source_title">Codice sorgente</string>
-    <string name="about_source">Questo progetto è ospitato su GitHub: %1$s</string>
-    <string name="about_issues_title">Problemi</string>
-    <string name="about_issues">Puoi segnalare bug, proporre miglioramenti e richiedere funzionalità tramite il sistema di tracciamento dei problemi di GitHub: %1$s</string>
-    <string name="about_translate_title">Traduci</string>
-    <string name="about_translate">Unisciti al team di Nextcloud su Transifex e aiutaci a tradurre questa applicazione: %1$s</string>
-    <string name="about_app_license_title">Licenza applicazione</string>
+  <resources>
     <string name="about_app_license">Questa applicazione è rilasciata nei termini della licenza GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Visualizza licenza</string>
-    <string name="about_icons_disclaimer_title">Icone</string>
-    <string name="about_icons_disclaimer_app_icon">Per l\'icona originale, vedi %1$s.</string>
-    <string name="about_icons_disclaimer_mdi_icons">Tutte le altre icone utilizzate da questa applicazione sono %1$s realizzate da Google Inc. e rilasciate nei termini della licenza Apache 2.0.</string>
-    <string name="about_icons_disclaimer_mdi">Icone in Material Design</string>
-    <string name="about_credits_tab_title">Riconoscimenti</string>
+    <string name="about_app_license_title">Licenza applicazione</string>
     <string name="about_contribution_tab_title">Contributi</string>
+    <string name="about_credits_tab_title">Riconoscimenti</string>
+    <string name="about_developers_original_author">autore originale</string>
+    <string name="about_developers_title">Sviluppatori</string>
+    <string name="about_icons_disclaimer_app_icon">Per l\'icona originale, vedi %1$s.</string>
+    <string name="about_icons_disclaimer_mdi">Icone in Material Design</string>
+    <string name="about_icons_disclaimer_mdi_icons">Tutte le altre icone utilizzate da questa applicazione sono %1$s realizzate da Google Inc. e rilasciate nei termini della licenza Apache 2.0.</string>
+    <string name="about_icons_disclaimer_title">Icone</string>
+    <string name="about_issues">Puoi segnalare bug, proporre miglioramenti e richiedere funzionalità tramite il sistema di tracciamento dei problemi di GitHub: %1$s</string>
+    <string name="about_issues_title">Problemi</string>
     <string name="about_license_tab_title">Licenza</string>
-
-    <string name="widget_note_list_title">Elenco di note</string>
-    <string name="widget_note_list_placeholder">Nessuna nota</string>
-    <string name="widget_single_note_title">Nota singola</string>
-    <string name="widget_single_note_placeholder_tv">Nota non trovata</string>
-    <string name="widget_not_logged_in">Accedi a Note prima di utilizzare questo widget</string>
-    <string name="widget_entry_fav_contentDescription">L\'icona a stella è utilizzata per marcare un elemento come preferito</string>
-
+    <string name="about_maintainer_title">Responsabile</string>
+    <string name="about_source">Questo progetto è ospitato su GitHub: %1$s</string>
+    <string name="about_source_title">Codice sorgente</string>
+    <string name="about_testers_title">Tester</string>
+    <string name="about_translate">Unisciti al team di Nextcloud su Transifex e aiutaci a tradurre questa applicazione: %1$s</string>
+    <string name="about_translate_title">Traduci</string>
+    <string name="about_translators_title">Traduttori</string>
+    <string name="about_translators_transifex">Comunità di Nextcloud attiva %1$s</string>
+    <string name="about_version">Attualmente stai usando %1$s</string>
+    <string name="about_version_title">Versione</string>
+    <string name="account_already_imported">L\'account è già stato importato</string>
+    <string name="account_imported">Account importato</string>
+    <string name="action_back">Indietro</string>
+    <string name="action_create">Nuova nota</string>
+    <string name="action_edit_save">Salva</string>
+    <string name="action_formatting_help">Formattazione</string>
+    <string name="action_note_deleted">Eliminato %1$s</string>
+    <string name="action_note_restored">Ripristinato %1$s</string>
+    <string name="action_search">Cerca</string>
+    <string name="action_settings">Impostazioni</string>
+    <string name="action_sorting_method">Metodo di ordinamento</string>
+    <string name="action_trashbin">Note eliminate</string>
+    <string name="action_uncategorized">Senza categoria</string>
+    <string name="action_undo">Annulla</string>
+    <string name="activity_chooser_send_file_title">Invia</string>
+    <string name="activity_chooser_title">Invia collegamento a…</string>
     <string name="activity_select_single_note">Seleziona nota</string>
-
-    <string name="shortcut_create_long">Crea una nuova nota</string>
-
-    <string name="pref_value_font_normal">Normale</string>
-    <string name="pref_value_wifi_and_mobile">Sincronizza su Wi-FI e dati mobili</string>
-    <string name="pref_value_lock">Protezione con password</string>
-
-    <string name="simple_error">Errore</string>
-    <string name="simple_close">Chiudi</string>
-    <string name="simple_copy">Copia</string>
-    <string name="simple_exception">Eccezione</string>
-    <string name="pin_to_homescreen">Appunta alla schermata iniziale</string>
-    <string name="note_has_been_deleted">Questa nota è stata eliminata</string>
     <string name="add_account">Aggiungi account</string>
-
-    <string name="category_music">Musica</string>
-    <string name="category_movies">Film</string>
-    <string name="category_movie">Film</string>
-    <string name="category_work">Lavoro</string>
-    <string name="category_todo">Da fare</string>
-    <string name="category_todos">Cose da fare</string>
+    <string name="add_another_public_share_link">Aggiungi un altro collegamento</string>
+    <string name="add_category">Aggiungi %1$s</string>
+    <string name="add_new_public_share">Aggiungi nuovo collegamento pubblico di condivisione</string>
+    <string name="added_content">Aggiunto \"%1$s\"</string>
+    <string name="app_name">Note</string>
+    <string name="app_name_long">Nextcloud Note</string>
+    <string name="appear_offline">Appari non in linea</string>
+    <string name="appearance_and_behavior">Aspetto e comportamento</string>
+    <string name="append_to_note">Aggiungi a nota</string>
+    <string name="away">Assente</string>
+    <string name="backup">Abbiamo rilevato uno stato dell\'applicazione non recuperabile. Fai il backup delle modifiche non sincronizzate e cancella i dati dell\'applicazione Note. </string>
+    <string name="busy">Occupato</string>
+    <string name="category_bake">Cottura al forno</string>
     <string name="category_checklists">Lista di controllo</string>
-    <string name="category_tasks">Compiti</string>
+    <string name="category_credentials">Credenziali</string>
+    <string name="category_food">Cibo</string>
+    <string name="category_game">Gioco</string>
+    <string name="category_games">Giochi</string>
+    <string name="category_gift">Regalo</string>
+    <string name="category_gifts">Regali</string>
+    <string name="category_key">Chiave</string>
+    <string name="category_keys">Chiavi</string>
+    <string name="category_movie">Film</string>
+    <string name="category_movies">Film</string>
+    <string name="category_music">Musica</string>
+    <string name="category_password">Password</string>
+    <string name="category_passwords">Password</string>
+    <string name="category_play">Gioca</string>
+    <string name="category_present">Regalo</string>
+    <string name="category_presents">Regali</string>
+    <string name="category_readonly">Sola lettura</string>
     <string name="category_recipe">Ricetta</string>
     <string name="category_recipes">Ricette</string>
     <string name="category_restaurant">Ristorante</string>
     <string name="category_restaurants">Ristoranti</string>
-    <string name="category_food">Cibo</string>
-    <string name="category_bake">Cottura al forno</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_key">Chiave</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_keys">Chiavi</string>
-    <string name="category_password">Password</string>
-    <string name="category_passwords">Password</string>
-    <string name="category_credentials">Credenziali</string>
-    <string name="category_game">Gioco</string>
-    <string name="category_games">Giochi</string>
-    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
-    <string name="category_play">Gioca</string>
-    <string name="category_gift">Regalo</string>
-    <string name="category_gifts">Regali</string>
-    <!-- Like a gift -->
-    <string name="category_present">Regalo</string>
-    <!-- Like a gift -->
-    <string name="category_presents">Regali</string>
-
-    <string name="account_already_imported">L\'account è già stato importato</string>
-    <string name="no_notes_yet">Ancora nessuna nota</string>
-    <string name="no_notes_yet_description">Premi il pulsante + per creare una nuova nota</string>
-    <string name="simple_more">Altro</string>
-    <string name="simple_move">Sposta</string>
-    <string name="category_readonly">Sola lettura</string>
-    <string name="no_category">Nessuna categoria</string>
-    <string name="add_category">Aggiungi %1$s</string>
-    <string name="simple_checkbox">Casella di selezione</string>
-    <string name="unlock_notes">Sblocca note</string>
-    <string name="error_dialog_title">Oh no - Cosa succede adesso? 🙁</string>
-    <string name="error_dialog_tip_token_mismatch_retry">Prova a forzare la chiusura dell\'applicazione e riavviarla nuovamente. Potrebbe essersi verificato un problema di connessione all\'applicazione Nextcloud. </string>
-    <string name="error_dialog_tip_token_mismatch_clear_storage">Se il problema persiste, prova a cancellare l\'archiviazione di entrambe le applicazioni Nextcloud e Nextcloud Note per risolvere il problema.</string>
-    <string name="error_dialog_tip_clear_storage">Puoi a cancellare l\'archiviazione aprendo le informazioni dell\'applicazione e selezionando Archiviazione → Cancella archiviazione. ⚠️ Avviso: questo eliminerà le note non ancora sincronizzate!</string>
-    <string name="error_dialog_tip_files_outdated">La tua applicazioni di Nextcloud sembra essere datata. Visita il Play Store o F-Droid per ottenere l\'ultima versione.</string>
-    <string name="error_dialog_tip_files_force_stop">Sembra che ci sia un problema con la tua applicazione di Nextcloud. Prova a fermare entrambe le applicazioni Nextcloud e Nextcloud Note.</string>
-    <string name="error_dialog_tip_files_delete_storage">Se fermarle non aiuta, puoi provare a cancellare l\'archiviazione di entrambe le applicazioni.</string>
-    <string name="error_dialog_timeout_instance">Non è stata ricevuta una risposta dal server nel tempo stabilito. Assicurati che la tua istanza sia correttamente in esecuzione.</string>
-    <string name="error_dialog_timeout_toggle">Controlla la tua connessione di rete. A volte disattivare e riattivare i dati mobili o Wi-Fi può aiutare.</string>
+    <string name="category_tasks">Compiti</string>
+    <string name="category_todo">Da fare</string>
+    <string name="category_todos">Cose da fare</string>
+    <string name="category_work">Lavoro</string>
+    <string name="change_category_title">Scegli una categoria</string>
+    <string name="change_note_title">Cambia titolo della nota</string>
+    <string name="choose_account">Scegli account</string>
+    <string name="clear">Pulisci</string>
+    <string name="clear_status_after">Togli lo stato dopo</string>
+    <string name="clipboard_label">Testo copiato da %1$s</string>
+    <string name="clipboard_no_text_to_copy">Nessun testo ricevuto da copiare negli appunti</string>
+    <string name="clipboard_text_copied">Collegamento copiato</string>
+    <string name="clipboard_unexpected_error">Errore inatteso durante la copia negli appunti</string>
+    <string name="common_delete">Elimina</string>
+    <string name="common_loading">Caricamento…</string>
+    <string name="common_ok">OK</string>
+    <string name="context_based_formatting">Finestra di formattazione basata sul contesto</string>
+    <string name="copy_link">Copia collegamento</string>
+    <string name="could_not_retrieve_shares">Impossibile recuperare le condivisioni</string>
+    <string name="delete_link">Elimina collegamento</string>
+    <string name="direct_editing_error">Errore durante il caricamento della modifica avanzata</string>
+    <string name="dnd">Non disturbare</string>
+    <string name="dontClear">Non cancellare</string>
+    <string name="ecosystem_apps_display_files">File</string>
+    <string name="ecosystem_apps_display_more">Altro</string>
+    <string name="ecosystem_apps_display_talk">Talk</string>
+    <string name="ecosystem_apps_more">Altre applicazioni di Nextcloud</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="email_pick_failed">Impossibile scegliere l\'indirizzo di posta.</string>
+    <string name="error_action_open_battery_settings">Impostazioni batteria</string>
+    <string name="error_action_open_deck_info">Apri informazioni applicazione</string>
+    <string name="error_action_open_network">Impostazioni di rete</string>
+    <string name="error_action_update_files_app">Aggiorna</string>
+    <string name="error_dialog_check_maintenance">Controlla che la tua istanza di Nextcloud non sia attualmente in manutenzione.</string>
     <string name="error_dialog_check_server">La risposta del tuo server non era corretta. Controlla se puoi accedere alle tue note tramite l\'interfaccia web.</string>
     <string name="error_dialog_check_server_logs">Si è verificato un problema con la tua installazione di Nextcloud. Controlla nei file di registro del server.</string>
-    <string name="error_dialog_check_maintenance">Controlla che la tua istanza di Nextcloud non sia attualmente in manutenzione.</string>
     <string name="error_dialog_insufficient_storage">La tua istanza di Nextcloud non ha più spazio libero. Elimina alcuni file per sincronizzare le modifiche locali con il tuo cloud.</string>
-    <string name="error_dialog_we_need_info">Ci servono le seguenti informazioni tecniche per aiutarti:</string>
-    <string name="error_dialog_server_app_enabled">Assicurati di aver installato e abilitato l\'applicazione \"Note\" sul tuo server.</string>
-    <string name="error_dialog_redirect">Il tuo server ha risposto con un codice di stato HTTP 302, che implica che non hai installato l\'applicazione Note sul tuo server o qualcosa non è configurato correttamente. Questo può essere causato da configurazioni personalizzate nel file .htaccess o da applicazioni di Nextcloud come OID Client.</string>
-    <string name="error_dialog_tip_disable_battery_optimizations">Disabilita tutte le ottimizzazioni della batteria per le applicazioni Nextcloud e Note.</string>
     <string name="error_dialog_min_version">L\'applicazione Note di Android richiede che l\'applicazione Nextcloud di Android sia almeno alla versione 3.18.</string>
-    <string name="added_content">Aggiunto \"%1$s\"</string>
-    <string name="shared_text_empty">Il testo condiviso era vuoto</string>
-    <string name="append_to_note">Aggiungi a nota</string>
-    <string name="change_note_title">Cambia titolo della nota</string>
-    <string name="menu_edit_title">Modifica titolo</string>
-    <string name="simple_security">Sicurezza</string>
-    <string name="appearance_and_behavior">Aspetto e comportamento</string>
-    <string name="simple_synchronization">Sincronizzazione</string>
+    <string name="error_dialog_redirect">Il tuo server ha risposto con un codice di stato HTTP 302, che implica che non hai installato l\'applicazione Note sul tuo server o qualcosa non è configurato correttamente. Questo può essere causato da configurazioni personalizzate nel file .htaccess o da applicazioni di Nextcloud come OID Client.</string>
+    <string name="error_dialog_server_app_enabled">Assicurati di aver installato e abilitato l\'applicazione \"Note\" sul tuo server.</string>
+    <string name="error_dialog_timeout_instance">Non è stata ricevuta una risposta dal server nel tempo stabilito. Assicurati che la tua istanza sia correttamente in esecuzione.</string>
+    <string name="error_dialog_timeout_toggle">Controlla la tua connessione di rete. A volte disattivare e riattivare i dati mobili o Wi-Fi può aiutare.</string>
+    <string name="error_dialog_tip_clear_storage">Puoi a cancellare l\'archiviazione aprendo le informazioni dell\'applicazione e selezionando Archiviazione → Cancella archiviazione. ⚠️ Avviso: questo eliminerà le note non ancora sincronizzate!</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Disabilita tutte le ottimizzazioni della batteria per le applicazioni Nextcloud e Note.</string>
+    <string name="error_dialog_tip_files_delete_storage">Se fermarle non aiuta, puoi provare a cancellare l\'archiviazione di entrambe le applicazioni.</string>
+    <string name="error_dialog_tip_files_force_stop">Sembra che ci sia un problema con la tua applicazione di Nextcloud. Prova a fermare entrambe le applicazioni Nextcloud e Nextcloud Note.</string>
+    <string name="error_dialog_tip_files_outdated">La tua applicazioni di Nextcloud sembra essere datata. Visita il Play Store o F-Droid per ottenere l\'ultima versione.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Se il problema persiste, prova a cancellare l\'archiviazione di entrambe le applicazioni Nextcloud e Nextcloud Note per risolvere il problema.</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Prova a forzare la chiusura dell\'applicazione e riavviarla nuovamente. Potrebbe essersi verificato un problema di connessione all\'applicazione Nextcloud. </string>
+    <string name="error_dialog_title">Oh no - Cosa succede adesso? 🙁</string>
+    <string name="error_dialog_we_need_info">Ci servono le seguenti informazioni tecniche per aiutarti:</string>
+    <string name="error_maintenance_mode">Il server è in modalità di manutenzione</string>
+    <string name="error_no_network">Nessuna connessione di rete</string>
+    <string name="error_sync">Sincronizzazione non riuscita: %1$s</string>
+    <string name="error_synchronization">Sincronizzazione non riuscita</string>
+    <string name="error_unknown">Si è verificato un errore sconosciuto.</string>
+    <string name="failed_update_ui">Aggiornamento interfaccia non riuscito</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Nessuna app disponibile per selezionare i contatti</string>
+    <string name="file_list_seconds_ago">secondi fa</string>
+    <string name="formatting_help_cbf_body_1">Un obiettivo fondamentale dell\'applicazione Note è di fornire uno strumento senza distrazioni. Potrai comunque formattare i tuoi testi con Markdown. Per i vari esempi sotto indicati, puoi usare le scorciatoie in modo da formattare le note senza digitare i codici sottostanti.</string>
+    <string name="formatting_help_cbf_body_2">Ti basta selezionare un intervallo di testo o toccare il cursore in qualsiasi posizione e apparirà un menu contenente accanto alle voci predefinite %1$s, %2$s, %3$s elementi come %4$s o %5$s.</string>
+    <string name="formatting_help_cbf_title">Formattazione basata sul contesto</string>
+    <string name="formatting_help_checkboxes_body_1">Per creare una casella di selezione, usa un elenco seguito da parentesi</string>
+    <string name="formatting_help_checkboxes_body_2">Elemento 1</string>
+    <string name="formatting_help_checkboxes_body_3">Elemento 2</string>
+    <string name="formatting_help_checkboxes_title">Caselle di selezione</string>
+    <string name="formatting_help_code_body_1">Esistono molti modi diversi per definire lo stile del codice con Markdown. Se hai blocchi di codice in linea, racchiudili tra apici inversi:</string>
+    <string name="formatting_help_code_body_2">Markdown supporta anche raggruppamenti di codice, che consente a righe multiple senza indentazione:</string>
+    <string name="formatting_help_code_body_3">E se desideri utilizzare l\'evidenziazione della sintassi, includi il linguaggio:</string>
+    <string name="formatting_help_code_title">Codice</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_images_alt">Immagine di fantasia</string>
+    <string name="formatting_help_images_body_1">I collegamenti devono essere URL completi che iniziano con un protocollo e un dominio di rete o percorsi assoluti che iniziano con un carattere %1$s.</string>
+    <string name="formatting_help_images_body_2">Per conformarsi al formato Markdown, utilizza i caratteri di escape nell\'URL dell\'immagine. Ciò significa, ad esempio, sostituire gli spazi con %1$snell\'URL.</string>
+    <string name="formatting_help_images_title">Immagini</string>
+    <string name="formatting_help_lists_body_1">A volte hai bisogno di elenchi numerati:</string>
+    <string name="formatting_help_lists_body_2">Uno</string>
+    <string name="formatting_help_lists_body_3">Due</string>
+    <string name="formatting_help_lists_body_4">Tre</string>
+    <string name="formatting_help_lists_body_5">A volte hai bisogno dei punti elenco:</string>
+    <string name="formatting_help_lists_body_6">Inizia un riga con un trattino</string>
+    <string name="formatting_help_lists_body_7">E se hai sotto-punti, metti due spazi prima del trattino o dell\'asterisco:</string>
+    <string name="formatting_help_lists_body_8">Come questo</string>
+    <string name="formatting_help_lists_body_9">E questo</string>
+    <string name="formatting_help_lists_title">Elenchi</string>
+    <string name="formatting_help_structured_documents_body_1">Talvolta è utile avere diversi livelli di intestazione per strutturare i tuoi documenti. Inizia le righe con un %1$s per creare intestazioni. Più %2$s in una riga indicano dimensioni minori di intestazione.</string>
+    <string name="formatting_help_structured_documents_body_2">Questa è un\'intestazione di terzo livello</string>
+    <string name="formatting_help_structured_documents_body_3">Puoi utilizzare da un %1$s fino a sei %2$s per diverse dimensioni di intestazione.</string>
+    <string name="formatting_help_structured_documents_body_4">Se vuoi citare qualcuno, utilizza il carattere %1$s prima della riga:</string>
+    <string name="formatting_help_structured_documents_body_5">L\'immaginazione è più importante della conoscenza. La conoscenza è limitata, l\'immaginazione abbraccia il mondo.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+    <string name="formatting_help_structured_documents_title">Documenti strutturati</string>
+    <string name="formatting_help_tables_column">Colonna %1d</string>
+    <string name="formatting_help_tables_title">Tabelle</string>
+    <string name="formatting_help_tables_value">Valore %1d</string>
+    <string name="formatting_help_text_body">È molto semplice rendere alcune parole in %1$sgrassetto%1$s e altre in %2$scorsivo%2$s con Markdown. Puoi %3$sbarrare%3$s alcune parole e anche [collegarle a Nextcloud](https://nextcloud.com).</string>
+    <string name="formatting_help_text_title">Testo</string>
+    <string name="fourHours">4 ore</string>
+    <string name="http_status_code">Codice di stato HTTP: %1$d</string>
+    <string name="invisible">Invisibile</string>
+    <string name="label_all_notes">Tutte le note</string>
+    <string name="label_favorites">Preferite</string>
+    <string name="link_share_allow_upload_and_editing">Consenti caricamento e modifica</string>
+    <string name="link_share_editing">Modificando</string>
+    <string name="link_share_file_drop">Rilascio file (solo caricamento)</string>
+    <string name="link_share_view_only">Sola lettura</string>
+    <string name="listview_updated_last_month">Ultimo mese</string>
+    <string name="listview_updated_last_week">Ultima settimana</string>
+    <string name="listview_updated_this_month">Questo mese</string>
+    <string name="listview_updated_this_week">Questa settimana</string>
+    <string name="listview_updated_today">Oggi</string>
+    <string name="listview_updated_yesterday">Ieri</string>
     <string name="manage_accounts">Gestisci account</string>
-    <string name="action_formatting_help">Formattazione</string>
-
-
+    <string name="menu_change_category">Categoria</string>
+    <string name="menu_delete">Elimina</string>
+    <string name="menu_edit_title">Modifica titolo</string>
+    <string name="menu_favorite">Preferito</string>
+    <string name="menu_preview">Anteprima</string>
+    <string name="menu_share">Condividi</string>
+    <string name="mute_all_notifications">Muta tutte le notifiche</string>
+    <string name="no_account_configured_yet">Ancora nessun account configurato</string>
+    <string name="no_actions">Nessuna azione per questo utente</string>
+    <string name="no_browser_available">Nessun applicazione disponibile per gestire i collegamenti</string>
+    <string name="no_category">Nessuna categoria</string>
+    <string name="no_email_app_available">Nessuna applicazione disponibile per gestire l\'indirizzo email</string>
+    <string name="no_notes_yet">Ancora nessuna nota</string>
+    <string name="no_notes_yet_description">Premi il pulsante + per creare una nuova nota</string>
+    <string name="no_other_accounts">Non hai configurato ancora alcun account.</string>
     <string name="noteMode_plain_edit">Modalità di modifica semplice</string>
     <string name="noteMode_plain_preview">Anteprima semplice</string>
-    <string name="noteMode_rich_edit">Modalità di modifica avanzata</string>
     <string name="noteMode_remember_last">Ricorda la mia ultima selezione</string>
-
-    <string-array name="fontSize_entries">
-        <item>Piccola</item>
-        <item>Media</item>
-        <item>Grande</item>
-    </string-array>
-
-    <string-array name="darkmode_entries">
-        <item>Chiaro</item>
-        <item>Scuro</item>
-        <item>Predefiniti di sistema</item>
-    </string-array>
-
+    <string name="noteMode_rich_edit">Modalità di modifica avanzata</string>
+    <string name="note_has_been_deleted">Questa nota è stata eliminata</string>
+    <string name="note_share_activity_contact_no_permission">Autorizzazione Contatti richiesta</string>
+    <string name="note_share_activity_could_not_retrieve_url">Impossibile recuperare l\'URL</string>
+    <string name="note_share_activity_resharing_not_allowed">La policy o le autorizzazioni impediscono la ricondivisione</string>
+    <string name="note_share_activity_search_text">Nome, Federated Cloud ID o indirizzo e-mail...</string>
+    <string name="note_share_activity_share_link">Collegamento di condivisione</string>
+    <string name="note_share_activity_shared_with_you">Condiviso con te da %1$s</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" è stato condiviso con te</string>
+    <string name="note_share_detail_activity_advanced_settings">Impostazioni avanzate</string>
+    <string name="note_share_detail_activity_cancel">Annulla</string>
+    <string name="note_share_detail_activity_common_confirm">Conferma</string>
+    <string name="note_share_detail_activity_common_next">Successivo</string>
+    <string name="note_share_detail_activity_hint_name">Nome</string>
+    <string name="note_share_detail_activity_hint_note">Nota</string>
+    <string name="note_share_detail_activity_hint_password">Password</string>
+    <string name="note_share_detail_activity_label_empty">L\'etichetta non può essere vuota</string>
+    <string name="note_share_detail_activity_link_name">Nome collegamento</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Seleziona almeno un permesso da condividere.</string>
+    <string name="note_share_detail_activity_send_share">Invia condivisione</string>
+    <string name="note_share_detail_activity_set_note">Imposta nota</string>
+    <string name="note_share_detail_activity_share_copy_link">Condividi e copia il collegamento</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Devi digitare una password</string>
+    <string name="note_share_detail_activity_share_send_note">Nota al destinatario</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Nascondi scaricamento</string>
+    <string name="oneHour">1 ora</string>
+    <string name="online">In linea</string>
+    <string name="pin_to_homescreen">Appunta alla schermata iniziale</string>
+    <string name="pref_value_font_normal">Normale</string>
+    <string name="pref_value_lock">Protezione con password</string>
+    <string name="pref_value_wifi_and_mobile">Sincronizza su Wi-FI e dati mobili</string>
+    <string name="progress_import">Importazione nota %1$d di %2$d ...</string>
+    <string name="progress_import_indeterminate">Importazione note in corso...</string>
+    <string name="public_share_name">Nuovo nome</string>
+    <string name="remote">(remota)</string>
+    <string name="remove_account">Rimuovi %1$s</string>
+    <string name="search_in_all">Cerca tutte le note</string>
+    <string name="search_in_category">Cerca in %1$s</string>
+    <string name="settings_background_sync">Sincronizzazione in background</string>
+    <string name="settings_enable_direct_edit">Modifica Diretta</string>
+    <string name="settings_enable_direct_edit_summary">Quando disabilitato, l\'editor avanzato sarà nascosto.</string>
+    <string name="settings_file_suffix">Estensione dei file</string>
+    <string name="settings_file_suffix_description">Estensione del file per le nuove note nel tuo Nextcloud</string>
+    <string name="settings_file_suffix_success">Nuovo suffisso file: %1$s</string>
+    <string name="settings_font_size">Dimensione carattere</string>
+    <string name="settings_font_title">Carattere a spaziatura fissa</string>
+    <string name="settings_gridview">Vista griglia</string>
+    <string name="settings_keep_screen_on">Mantieni lo schermo acceso</string>
+    <string name="settings_keep_screen_on_summary">Durante la visualizzazione o la modifica di una nota</string>
+    <string name="settings_lock">Blocco applicazione (Beta)</string>
+    <string name="settings_lock_summary">Credenziali dispositivo</string>
+    <string name="settings_note_mode">Modalità di visualizzazione delle note</string>
+    <string name="settings_note_mode_new">Comportamento di apertura delle note</string>
+    <string name="settings_notes_path">Imposta cartella</string>
+    <string name="settings_notes_path_description">Cartella in cui salvare le note nel tuo Nextcloud</string>
+    <string name="settings_notes_path_success">Nuova cartella note: %1$s</string>
+    <string name="settings_prevent_screen_capture">Impedisci cattura dello schermo</string>
+    <string name="settings_show_ecosystem_apps">Mostra il selettore delle applicazioni</string>
+    <string name="settings_show_ecosystem_apps_summary">Consigli delle applicazioni di Nextcloud nell\'intestazione di navigazione</string>
+    <string name="settings_theme_title">Tema</string>
+    <string name="settings_wifi_only">Sincronizza solo con Wi-Fi</string>
+    <string name="share">Condividi</string>
+    <string name="share_dialog_title">Condivisione</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_expiration_date_label">Scade il %1$s</string>
+    <string name="share_file">Condividi %1$s</string>
+    <string name="share_group_clarification">%1$s (gruppo)</string>
+    <string name="share_internal_link">Condividi collegamento interno</string>
+    <string name="share_internal_link_to_file_text">Il collegamento di condivisione funziona solo per gli utenti con accesso a questo file</string>
+    <string name="share_internal_link_to_folder_text">Il collegamento di condivisione funziona solo per gli utenti con accesso a questa cartella</string>
+    <string name="share_known_remote_on_clarification">su %1$s</string>
+    <string name="share_link">Collegamento di condivisione</string>
+    <string name="share_link_password_title">Digita una password</string>
+    <string name="share_link_with_label">Collegamento di condivisione (%1$s)</string>
+    <string name="share_no_expiration_date_label">Imposta data di scadenza</string>
+    <string name="share_no_password_title">Imposta password</string>
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Digita una password facoltativa</string>
+    <string name="share_password_title">Protetta da password</string>
+    <string name="share_permission_can_edit">Può modificare</string>
+    <string name="share_permission_file_drop">Elimina file</string>
+    <string name="share_permission_secure_file_drop">File drop sicuro</string>
+    <string name="share_permission_view_only">Sola lettura</string>
+    <string name="share_permissions">Condividi permessi</string>
+    <string name="share_remote_clarification">%1$s (remota)</string>
+    <string name="share_room_clarification">%1$s (conversazione)</string>
+    <string name="share_send_new_email">Invia una nuova email</string>
+    <string name="share_settings">Impostazioni</string>
+    <string name="share_via_link_section_title">Collegamento di condivisione</string>
+    <string name="share_via_link_send_link_label">Invia collegamento</string>
+    <string name="share_via_link_unset_password">Rimuovi</string>
+    <string name="share_with_title">Condividi con…</string>
+    <string name="shared_text_empty">Il testo condiviso era vuoto</string>
+    <string name="shortcut_create_long">Crea una nuova nota</string>
+    <string name="simple_about">Informazioni</string>
+    <string name="simple_backup">Backup</string>
+    <string name="simple_cancel">Annulla</string>
+    <string name="simple_checkbox">Casella di selezione</string>
+    <string name="simple_close">Chiudi</string>
+    <string name="simple_copy">Copia</string>
+    <string name="simple_edit">Modifica</string>
+    <string name="simple_error">Errore</string>
+    <string name="simple_exception">Eccezione</string>
+    <string name="simple_link">Collegamento</string>
+    <string name="simple_more">Altro</string>
+    <string name="simple_move">Sposta</string>
+    <string name="simple_next">Successivo</string>
+    <string name="simple_other">Altro</string>
+    <string name="simple_prev">Precedente</string>
+    <string name="simple_remove">Rimuovi</string>
+    <string name="simple_security">Sicurezza</string>
+    <string name="simple_switch">Scambia</string>
+    <string name="simple_synchronization">Sincronizzazione</string>
+    <string name="sort_alphabetically">Ordine alfabetico</string>
+    <string name="sort_last_modified">Ordina per data di modifica</string>
+    <string name="status_message">Messaggio di stato</string>
+    <string name="switch_to_plain_editing">Passa alla modifica semplice</string>
+    <string name="thirtyMinutes">30 minuti</string>
+    <string name="thisWeek">Questa settimana</string>
+    <string name="today">Ogg</string>
+    <string name="unlock_notes">Sblocca note</string>
+    <string name="username">Nome utente</string>
+    <string name="welcome_text">Benvenuti in %1$s</string>
+    <string name="whats_your_status">Qual è il tuo stato?</string>
+    <string name="widget_entry_fav_contentDescription">L\'icona a stella è utilizzata per marcare un elemento come preferito</string>
+    <string name="widget_not_logged_in">Accedi a Note prima di utilizzare questo widget</string>
+    <string name="widget_note_list_placeholder">Nessuna nota</string>
+    <string name="widget_note_list_title">Elenco di note</string>
+    <string name="widget_single_note_placeholder_tv">Nota non trovata</string>
+    <string name="widget_single_note_title">Nota singola</string>
+    <string name="write_email">Invia email</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Devi essere connesso a Internet per aggiungere un account.</string>
     <plurals name="ab_selected">
         <item quantity="one">%d selezionato</item>
         <item quantity="many">%d selezionati</item>
@@ -313,122 +364,9 @@
         <item quantity="many">Condividi il contenuto di %1$d note</item>
         <item quantity="other">Condividi il contenuto di %1$d note</item>
     </plurals>
-
-    <string name="formatting_help_divider" translateable="false">---</string>
-    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
-    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
-    <string name="formatting_help_codefence" translateable="false">```</string>
-    <string name="formatting_help_codefence_outer" translateable="false">````</string>
-    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
-    <string name="formatting_help_cbf_title">Formattazione basata sul contesto</string>
-    <string name="formatting_help_cbf_body_1">Un obiettivo fondamentale dell\'applicazione Note è di fornire uno strumento senza distrazioni. Potrai comunque formattare i tuoi testi con Markdown. Per i vari esempi sotto indicati, puoi usare le scorciatoie in modo da formattare le note senza digitare i codici sottostanti.</string>
-    <string name="formatting_help_cbf_body_2">Ti basta selezionare un intervallo di testo o toccare il cursore in qualsiasi posizione e apparirà un menu contenente accanto alle voci predefinite %1$s, %2$s, %3$s elementi come %4$s o %5$s.</string>
-
-    <string name="formatting_help_text_title">Testo</string>
-    <string name="formatting_help_text_body">È molto semplice rendere alcune parole in %1$sgrassetto%1$s e altre in %2$scorsivo%2$s con Markdown. Puoi %3$sbarrare%3$s alcune parole e anche [collegarle a Nextcloud](https://nextcloud.com).</string>
-
-    <string name="formatting_help_lists_title">Elenchi</string>
-    <string name="formatting_help_lists_body_1">A volte hai bisogno di elenchi numerati:</string>
-    <string name="formatting_help_lists_body_2">Uno</string>
-    <string name="formatting_help_lists_body_3">Due</string>
-    <string name="formatting_help_lists_body_4">Tre</string>
-    <string name="formatting_help_lists_body_5">A volte hai bisogno dei punti elenco:</string>
-    <string name="formatting_help_lists_body_6">Inizia un riga con un trattino</string>
-    <string name="formatting_help_lists_body_7">E se hai sotto-punti, metti due spazi prima del trattino o dell\'asterisco:</string>
-    <string name="formatting_help_lists_body_8">Come questo</string>
-    <string name="formatting_help_lists_body_9">E questo</string>
-
-    <string name="formatting_help_checkboxes_title">Caselle di selezione</string>
-    <string name="formatting_help_checkboxes_body_1">Per creare una casella di selezione, usa un elenco seguito da parentesi</string>
-    <string name="formatting_help_checkboxes_body_2">Elemento 1</string>
-    <string name="formatting_help_checkboxes_body_3">Elemento 2</string>
-
-    <string name="formatting_help_structured_documents_title">Documenti strutturati</string>
-    <string name="formatting_help_structured_documents_body_1">Talvolta è utile avere diversi livelli di intestazione per strutturare i tuoi documenti. Inizia le righe con un %1$s per creare intestazioni. Più %2$s in una riga indicano dimensioni minori di intestazione.</string>
-    <string name="formatting_help_structured_documents_body_2">Questa è un\'intestazione di terzo livello</string>
-    <string name="formatting_help_structured_documents_body_3">Puoi utilizzare da un %1$s fino a sei %2$s per diverse dimensioni di intestazione.</string>
-    <string name="formatting_help_structured_documents_body_4">Se vuoi citare qualcuno, utilizza il carattere %1$s prima della riga:</string>
-    <string name="formatting_help_structured_documents_body_5">L\'immaginazione è più importante della conoscenza. La conoscenza è limitata, l\'immaginazione abbraccia il mondo.</string>
-    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
-
-    <string name="formatting_help_code_title">Codice</string>
-    <string name="formatting_help_code_body_1">Esistono molti modi diversi per definire lo stile del codice con Markdown. Se hai blocchi di codice in linea, racchiudili tra apici inversi:</string>
-    <string name="formatting_help_code_body_2">Markdown supporta anche raggruppamenti di codice, che consente a righe multiple senza indentazione:</string>
-    <string name="formatting_help_code_body_3">E se desideri utilizzare l\'evidenziazione della sintassi, includi il linguaggio:</string>
-
-    <string name="formatting_help_tables_title">Tabelle</string>
-    <!-- Column header of a sample table -->
-    <string name="formatting_help_tables_column">Colonna %1d</string>
-    <!-- Table cell value of a sample table -->
-    <string name="formatting_help_tables_value">Valore %1d</string>
-
-    <string name="formatting_help_images_body_1">I collegamenti devono essere URL completi che iniziano con un protocollo e un dominio di rete o percorsi assoluti che iniziano con un carattere %1$s.</string>
-    <string name="formatting_help_images_body_2">Per conformarsi al formato Markdown, utilizza i caratteri di escape nell\'URL dell\'immagine. Ciò significa, ad esempio, sostituire gli spazi con %1$snell\'URL.</string>
-    <string name="formatting_help_images_title">Immagini</string>
-    <string name="formatting_help_images_alt">Immagine di fantasia</string>
-
-    <string name="simple_other">Altro</string>
-    <string name="sort_last_modified">Ordina per data di modifica</string>
-    <string name="sort_alphabetically">Ordine alfabetico</string>
-    <string name="error_action_open_battery_settings">Impostazioni batteria</string>
-    <string name="error_action_open_deck_info">Apri informazioni applicazione</string>
-    <string name="error_action_open_network">Impostazioni di rete</string>
-    <string name="error_action_update_files_app">Aggiorna</string>
-    <string name="no_account_configured_yet">Ancora nessun account configurato</string>
-    <string name="no_other_accounts">Non hai configurato ancora alcun account.</string>
-    <string name="choose_account">Scegli account</string>
-    <string name="context_based_formatting">Finestra di formattazione basata sul contesto</string>
     <plurals name="remove_account_message">
         <item quantity="one">La rimozione dell\'account %1$s eliminerà irrevocabilmente anche una modifica non sincronizzata.</item>
         <item quantity="many">La rimozione dell\'account %1$s eliminerà irrevocabilmente anche %2$d modifiche non sincronizzate.</item>
         <item quantity="other">La rimozione dell\'account %1$s eliminerà irrevocabilmente anche %2$d modifiche non sincronizzate.</item>
     </plurals>
-    <string name="remove_account">Rimuovi %1$s</string>
-
-    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Devi essere connesso a Internet per aggiungere un account.</string>
-    <string name="settings_notes_path">Imposta cartella</string>
-
-    <string name="simple_next">Successivo</string>
-    <string name="simple_prev">Precedente</string>
-    <string name="simple_backup">Backup</string>
-    <string name="backup">Abbiamo rilevato uno stato dell\'applicazione non recuperabile. Fai il backup delle modifiche non sincronizzate e cancella i dati dell\'applicazione Note. </string>
-    <string name="settings_notes_path_description">Cartella in cui salvare le note nel tuo Nextcloud</string>
-    <string-array name="settings_file_suffixes">
-        <item translatable="false">.txt</item>
-        <item translatable="false">.md</item>
-    </string-array>
-    <string name="settings_notes_path_success">Nuova cartella note: %1$s</string>
-    <string name="settings_file_suffix">Estensione dei file</string>
-    <string name="settings_file_suffix_description">Estensione del file per le nuove note nel tuo Nextcloud</string>
-    <string name="settings_file_suffix_success">Nuovo suffisso file: %1$s</string>
-    <string name="http_status_code">Codice di stato HTTP: %1$d</string>
-    <string name="progress_import_indeterminate">Importazione note in corso...</string>
-    <string name="progress_import">Importazione nota %1$d di %2$d ...</string>
-    <string name="account_imported">Account importato</string>
-    <string name="direct_editing_error">Errore durante il caricamento della modifica avanzata</string>
-    <string name="switch_to_plain_editing">Passa alla modifica semplice</string>
-    <string name="action_back">Indietro</string>
-    <string name="status_message">Messaggio di stato</string>
-    <string name="whats_your_status">Qual è il tuo stato?</string>
-    <string name="clear_status_after">Togli lo stato dopo</string>
-    <string name="clear">Pulisci</string>
-    <string name="dontClear">Non cancellare</string>
-    <string name="today">Ogg</string>
-    <string name="thirtyMinutes">30 minuti</string>
-    <string name="oneHour">1 ora</string>
-    <string name="fourHours">4 ore</string>
-    <string name="thisWeek">Questa settimana</string>
-    <string name="file_list_seconds_ago">secondi fa</string>
-    <string name="online">In linea</string>
-    <string name="dnd">Non disturbare</string>
-    <string name="away">Assente</string>
-    <string name="invisible">Invisibile</string>
-    <string name="busy">Occupato</string>
-    <string name="mute_all_notifications">Muta tutte le notifiche</string>
-    <string name="appear_offline">Appari non in linea</string>
-    <string name="ecosystem_apps_display_files">File</string>
-    <string name="ecosystem_apps_display_talk">Talk</string>
-    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
-    <string name="ecosystem_apps_more">Altre applicazioni di Nextcloud</string>
-    <string name="ecosystem_apps_display_more">Altro</string>
 </resources>

@@ -1,327 +1,372 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Nextcloud Notes - Android Client
-  ~
-  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
-  ~ SPDX-License-Identifier: GPL-3.0-or-later
--->
-<resources>
-    <string name="app_name">Noter</string>
-    <string name="app_name_long">Nextcloud noter</string>
-    <string name="label_all_notes">Alle noter</string>
-    <string name="label_favorites">Foretrukne</string>
-    <string name="action_create">Ny note</string>
-    <string name="welcome_text">Velkommen til %1$s</string>
-    <string name="action_settings">Indstillinger</string>
-    <string name="action_trashbin">Slettede noter</string>
-    <string name="action_search">Søg</string>
-    <string name="action_sorting_method">Sorteringsmetode</string>
-    <string name="simple_cancel">Annuller</string>
-    <string name="simple_switch">Byt rundt</string>
-    <string name="simple_edit">Redigér</string>
-    <string name="simple_remove">Fjern</string>
-    <string name="action_edit_save">Gem</string>
-    <string name="simple_about">Om</string>
-    <string name="simple_link">Link</string>
-    <string name="action_note_deleted">%1$s blev slettet</string>
-    <string name="action_note_restored">%1$s blev gendannet</string>
-    <string name="action_undo">Fortryd</string>
-    <string name="action_uncategorized">Ikke kategoriseret</string>
-    <string name="menu_delete">Slet</string>
-    <string name="menu_change_category">Kategori</string>
-    <string name="menu_favorite">Foretrukken</string>
-    <string name="menu_preview">Vis eksempel</string>
-    <string name="menu_share">Del</string>
-    <string name="common_loading">Indlæser…</string>
-
-
-    <string name="search_in_category">Søg i %1$s</string>
-    <string name="search_in_all">Søg i alle noter</string>
-
-    <string name="change_category_title">Vælg en kategori</string>
-
-    <!-- UsersAndGroupsSearchProvider -->
-    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
-    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
-
-    <!-- NoteShareActivity -->
-    <string name="note_share_activity_activity_icon_content_description">note aktivitet ikon</string>
-    <string name="note_share_activity_share_icon_content_description">note del ikon</string>
-    <string name="note_share_activity_external_icon_content_description">note del eksternt ikon</string>
-    <string name="note_share_activity_copy_icon_content_description">note del kopi ikon</string>
-    <string name="note_share_activity_more_icon_content_description">not del mere ikon</string>
-    <string name="note_share_activity_icon_content_description">note del inok</string>
-    <string name="note_share_activity_user_icon_content_description">note del bruger ikon</string>
-    <string name="note_share_activity_contact_icon_content_description">not del kontakt ikon</string>
-    <string name="note_share_activity_shared_with_you">Delt med dig af %1$s</string>
-    <string name="note_share_activity_search_text">Navn, sammenkoblings cloud ID eller e-mailadresse…</string>
-    <string name="note_share_activity_share_link">Del link</string>
-    <string name="note_share_activity_resharing_not_allowed">Politik eller rettigheder forhindrer gen-deling</string>
-    <string name="note_share_activity_could_not_retrieve_url">Kunne ikke hente URL</string>
-    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" er blevet delt med dig</string>
-    <string name="note_share_activity_contact_no_permission">Tilladelse til Kontakter er nødvendig.</string>
-    <string name="note_share_activity_you_are_not_allowed_to_share">Du har ikke tilladelse til at oprette en offentlig deling.</string>
-
-    <string name="note_share_created">Deling oprettet</string>
-    <string name="note_share_activity_cannot_created">Du har ikke tilladelse til at oprette en deling.</string>
-
-
-    <!-- NoteShareDetailActivity -->
-    <string name="note_share_detail_activity_advanced_settings">Avancerede indstillinger</string>
-    <string name="note_share_detail_activity_share_via_link_hide_download">Skjul download</string>
-    <string name="note_share_detail_activity_share_send_note">Note til modtager</string>
-    <string name="note_share_detail_activity_hint_note">Note</string>
-    <string name="note_share_detail_activity_common_next">Næste</string>
-    <string name="note_share_detail_activity_share_copy_link">Del og kopiér link</string>
-    <string name="note_share_detail_activity_common_confirm">Bekræft</string>
-    <string name="note_share_detail_activity_set_note">Sæt Note</string>
-    <string name="note_share_detail_activity_send_share">Send Deling</string>
-    <string name="note_share_detail_activity_hint_name">Navn</string>
-    <string name="note_share_detail_activity_link_name">Link Navn</string>
-    <string name="note_share_detail_activity_share_link_empty_password">Du skal angive en adgangskode</string>
-    <string name="note_share_detail_activity_hint_password">Adgangskode</string>
-    <string name="note_share_detail_activity_no_share_permission_selected">Vælg mindst én tilladelse til at dele.</string>
-    <string name="note_share_detail_activity_label_empty">Etiketten kan ikke være tom</string>
-    <string name="note_share_detail_activity_cancel">Annullér</string>
-    <string name="note_share_detail_activity_create_share_error">Kunne ikke oprette en deling</string>
-
-    <!-- SharePasswordDialogFragment -->
-    <string name="share_password_dialog_fragment_share_link_optional_password_title">Angiv en valgfri adgangskode</string>
-    <string name="share_password_dialog_fragment_skip">Spring over</string>
-
-    <string name="share_link_password_title">Angiv en adgangskode</string>
-    <string name="common_ok">OK</string>
-    <string name="common_delete">Slet</string>
-    <string name="write_email">Send e-mail</string>
-    <string name="no_browser_available">Ingen App tilgængelig til håndtering af links</string>
-    <string name="no_email_app_available">Ingen app tilgængelig til at håndtere mailadresser</string>
-    <string name="no_actions">Ingen handlinger for denne bruger</string>
-
-    <string name="failed_the_remove_share">Kunne ikke fjerne deling</string>
-    <string name="email_pick_failed">Kunne ikke plukke e-mailadresse.</string>
-    <string name="failed_update_ui">Formåede ikke at opdatere UI</string>
-    <string name="file_detail_sharing_fragment_no_contact_app_message">Ingen app tilgængelig til at vælge kontakter</string>
-    <string name="activity_chooser_title">Send link til...</string>
-
-    <string name="activity_chooser_send_file_title">Send</string>
-    <string name="share_internal_link_to_folder_text">Internt dele link virker kun for brugere med adgang til denne mappe</string>
-    <string name="share_internal_link_to_file_text">Internt dele link virker kun for brugere med adgang til denne fil</string>
-    <string name="share_internal_link">Del internt link</string>
-    <string name="delete_link">Slet link</string>
-    <string name="share_settings">Indstillinger</string>
-    <string name="share_send_new_email">Send ny email</string>
-    <string name="share_dialog_title">Deling</string>
-    <string name="share_file">Del %1$s</string>
-    <string name="share_expiration_date_label">Udløber %1$s</string>
-    <string name="share_expiration_date_format">%1$s</string>
-    <string name="share_no_expiration_date_label">Angiv udløbsdato</string>
-    <string name="share_via_link_section_title">Del link</string>
-    <string name="share_via_link_send_link_label">Send link</string>
-    <string name="share_password_title">Beskyttet med adgangskode</string>
-    <string name="share_no_password_title">Angiv adgangskode</string>
-    <string name="share_with_title">Del med...</string>
-    <string name="share_via_link_unset_password">Fjern indstilling</string>
-    <string name="add_another_public_share_link">Tilføj et link mere</string>
-    <string name="add_new_public_share">Tilføj nyt offentligt link til deling</string>
-    <string name="public_share_name">Nyt navn</string>
-    <string name="share_link_with_label">Del link (%1$s)</string>
-    <string name="share_link">Del link</string>
-    <string name="allow_resharing">Tillad videredeling</string>
-    <string name="link_share_view_only">Kun visning</string>
-    <string name="link_share_editing">Redigering</string>
-    <string name="link_share_allow_upload_and_editing">Tillad upload og redigering</string>
-    <string name="link_share_file_drop">Fil drop (kun upload)</string>
-    <string name="could_not_retrieve_shares">Kunne ikke hente delte drev</string>
-    <string name="share_permission_view_only">Kun visning</string>
-    <string name="share_permission_can_edit">Kan redigere</string>
-    <string name="share_permission_file_drop">Fil drop</string>
-    <string name="share_permission_secure_file_drop">Sikkert fil drop</string>
-    <string name="share_permissions">Del Tilladelser</string>
-    <plurals name="share_download_limit_description">
-        <item quantity="one">%1$d resterende overførsel</item>
-        <item quantity="other">%1$d resterende overførsler</item>
-    </plurals>
-    <string name="username">Brugernavn</string>
-    <string name="share_group_clarification">%1$s (gruppe)</string>
-    <string name="share_remote_clarification">%1$s (ekstern)</string>
-    <string name="share_room_clarification">%1$s (samtale)</string>
-    <string name="share_known_remote_on_clarification">på %1$s</string>
-    <string name="remote">(ekstern)</string>
-
-    <string name="copy_link">Kopiér link</string>
-    <string name="share">Del</string>
-    <string name="clipboard_text_copied">Link kopieret</string>
-    <string name="clipboard_no_text_to_copy">Modtog ingen tekst til kopiering til udklipsholder</string>
-    <string name="clipboard_unexpected_error">Uventet fejl under kopiering til udklipsholder</string>
-    <string name="clipboard_label">Tekst kopieret fra %1$s</string>
-
-    <string name="listview_updated_today">I dag</string>
-    <string name="listview_updated_yesterday">I går</string>
-    <string name="listview_updated_this_week">Denne uge</string>
-    <string name="listview_updated_last_week">Seneste uge</string>
-    <string name="listview_updated_this_month">Denne måned</string>
-    <string name="listview_updated_last_month">Seneste måned</string>
-    <string name="settings_note_mode">Visningstilstand for noter</string>
-    <string name="settings_note_mode_new">Ved åbning af note</string>
-    <string name="settings_theme_title">Tema</string>
-    <string name="settings_font_title">Monospace font</string>
-    <string name="settings_font_size">Skriftstørrelse</string>
-    <string name="settings_wifi_only">Synkroniser kun på Wi-Fi</string>
-    <string name="settings_lock">App lås (beta)</string>
-    <string name="settings_lock_summary">Enhedslegitimationsoplysninger</string>
-    <string name="settings_background_sync">Synkronisering i baggrunden</string>
-    <string name="settings_prevent_screen_capture">Forhindr skærmoptagelse</string>
-    <string name="settings_show_ecosystem_apps">Vis app skifter</string>
-    <string name="settings_show_ecosystem_apps_summary">Nextcloud app anbefalinger i navigationspanelet</string>
-    <string name="settings_gridview">Grid visning</string>
-    <string name="settings_enable_direct_edit">Direkte redigering</string>
-    <string name="settings_enable_direct_edit_summary">Når den er deaktiveret, vil den avancerede editor blive skjult.</string>
-    <string name="settings_keep_screen_on">Hold skærmen tændt</string>
-    <string name="settings_keep_screen_on_summary">Mens du læser eller redigerer en note</string>
-
-    <string name="error_sync">Synkronisering fejlede: %1$s</string>
-    <string name="error_synchronization">Synkroniseringen mislykkedes</string>
-    <string name="error_no_network">Ingen netværksforbindelse</string>
-    <string name="error_maintenance_mode">Serveren er i vedligeholdelsestilstand</string>
-    <string name="error_unknown">En ukendt fejl er opstået</string>
-
-    <string name="about_version_title">Version</string>
-    <string name="about_version">Du bruger lige nu %1$s</string>
-    <string name="about_maintainer_title">Maintainer</string>
-    <string name="about_developers_title">Udviklere</string>
-    <string name="about_developers_original_author">original forfatter</string>
-    <string name="about_translators_title">Oversættere</string>
-    <string name="about_translators_transifex">Nextcloud fællesskabet på %1$s</string>
-    <string name="about_testers_title">Testere</string>
-    <string name="about_source_title">Kildekode</string>
-    <string name="about_source">Dette projekt hostes på GitHub: %1$s</string>
-    <string name="about_issues_title">Problemer</string>
-    <string name="about_issues">Du kan rapportere fejl, foreslå forbedringer og ønske nye funktioner på Github: %1$s</string>
-    <string name="about_translate_title">Oversæt</string>
-    <string name="about_translate">Bliv en del af Nextcloudholdet på Transifex, og hjælp os med at oversætte denne app: %1$s</string>
-    <string name="about_app_license_title">App licens</string>
+  <resources>
     <string name="about_app_license">Denne applikation er licenseret under GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Vis licens</string>
-    <string name="about_icons_disclaimer_title">Ikoner</string>
-    <string name="about_icons_disclaimer_app_icon">For det oprindelige ikon, se %1$s.</string>
-    <string name="about_icons_disclaimer_mdi_icons">Alle andre ikoner som anvendes af app\'en er %1$s lavet med Google Inc. og licensieret under et Apache 2.0-licens.</string>
-    <string name="about_icons_disclaimer_mdi">Material Design ikoner</string>
-    <string name="about_credits_tab_title">Credits</string>
+    <string name="about_app_license_title">App licens</string>
     <string name="about_contribution_tab_title">Bidrag</string>
+    <string name="about_credits_tab_title">Credits</string>
+    <string name="about_developers_original_author">original forfatter</string>
+    <string name="about_developers_title">Udviklere</string>
+    <string name="about_icons_disclaimer_app_icon">For det oprindelige ikon, se %1$s.</string>
+    <string name="about_icons_disclaimer_mdi">Material Design ikoner</string>
+    <string name="about_icons_disclaimer_mdi_icons">Alle andre ikoner som anvendes af app\'en er %1$s lavet med Google Inc. og licensieret under et Apache 2.0-licens.</string>
+    <string name="about_icons_disclaimer_title">Ikoner</string>
+    <string name="about_issues">Du kan rapportere fejl, foreslå forbedringer og ønske nye funktioner på Github: %1$s</string>
+    <string name="about_issues_title">Problemer</string>
     <string name="about_license_tab_title">Licens</string>
-
-    <string name="widget_note_list_title">Noteliste </string>
-    <string name="widget_note_list_placeholder">Ingen noter</string>
-    <string name="widget_single_note_title">Enkel note</string>
-    <string name="widget_single_note_placeholder_tv">Note ikke fundet</string>
-    <string name="widget_not_logged_in">Log venligst ind i Noter før du bruger denne widget</string>
-    <string name="widget_entry_fav_contentDescription">Stjerneikon bruges til at angive et element som en favorit</string>
-
+    <string name="about_maintainer_title">Maintainer</string>
+    <string name="about_source">Dette projekt hostes på GitHub: %1$s</string>
+    <string name="about_source_title">Kildekode</string>
+    <string name="about_testers_title">Testere</string>
+    <string name="about_translate">Bliv en del af Nextcloudholdet på Transifex, og hjælp os med at oversætte denne app: %1$s</string>
+    <string name="about_translate_title">Oversæt</string>
+    <string name="about_translators_title">Oversættere</string>
+    <string name="about_translators_transifex">Nextcloud fællesskabet på %1$s</string>
+    <string name="about_version">Du bruger lige nu %1$s</string>
+    <string name="about_version_title">Version</string>
+    <string name="account_already_imported">Kontoen er allerede importeret</string>
+    <string name="account_imported">Konto importeret.</string>
+    <string name="action_back">Tilbage</string>
+    <string name="action_create">Ny note</string>
+    <string name="action_edit_save">Gem</string>
+    <string name="action_formatting_help">Formatering</string>
+    <string name="action_note_deleted">%1$s blev slettet</string>
+    <string name="action_note_restored">%1$s blev gendannet</string>
+    <string name="action_search">Søg</string>
+    <string name="action_settings">Indstillinger</string>
+    <string name="action_sorting_method">Sorteringsmetode</string>
+    <string name="action_trashbin">Slettede noter</string>
+    <string name="action_uncategorized">Ikke kategoriseret</string>
+    <string name="action_undo">Fortryd</string>
+    <string name="activity_chooser_send_file_title">Send</string>
+    <string name="activity_chooser_title">Send link til...</string>
     <string name="activity_select_single_note">Vælg note</string>
-
-    <string name="shortcut_create_long">Opret en ny note</string>
-
-    <string name="pref_value_font_normal">Normal</string>
-    <string name="pref_value_wifi_and_mobile">Synkroniser på Wi-Fi og mobil data</string>
-    <string name="pref_value_lock">Adgangskodebeskyttelse</string>
-
-    <string name="simple_error">Fejl</string>
-    <string name="simple_close">Luk</string>
-    <string name="simple_copy">Kopiér</string>
-    <string name="simple_exception">Undtagelse</string>
-    <string name="pin_to_homescreen">Fastgør til hjemmeskærm</string>
-    <string name="note_has_been_deleted">Denne note er blevet slettet</string>
     <string name="add_account">Tilføj konto</string>
-
-    <string name="category_music">Musik</string>
-    <string name="category_movies">Film</string>
-    <string name="category_movie">Film</string>
-    <string name="category_work">Arbejde</string>
-    <string name="category_todo">ToDo</string>
-    <string name="category_todos">ToDos</string>
+    <string name="add_another_public_share_link">Tilføj et link mere</string>
+    <string name="add_category">Tilføj %1$s</string>
+    <string name="add_new_public_share">Tilføj nyt offentligt link til deling</string>
+    <string name="added_content">Tilføjet \"%1$s\"</string>
+    <string name="allow_resharing">Tillad videredeling</string>
+    <string name="app_name">Noter</string>
+    <string name="app_name_long">Nextcloud noter</string>
+    <string name="appear_offline">Er offline</string>
+    <string name="appearance_and_behavior">Udseende og adfærd</string>
+    <string name="append_to_note">Tilføj til note</string>
+    <string name="away">Ikke tilstede</string>
+    <string name="backup">Vi har registreret en uoprettelig tilstand af appen. Sikkerhedskopiér dine usynkroniserede ændringer og ryd data for ​​Noter-appen.</string>
+    <string name="busy">Optaget</string>
+    <string name="category_bake">Bage</string>
     <string name="category_checklists">Tjeklister</string>
-    <string name="category_tasks">Opgaver</string>
+    <string name="category_credentials">Legitimationsoplysninger</string>
+    <string name="category_food">Mad</string>
+    <string name="category_game">Spil</string>
+    <string name="category_games">Spil</string>
+    <string name="category_gift">Gave</string>
+    <string name="category_gifts">Gaver</string>
+    <string name="category_key">Nøgle</string>
+    <string name="category_keys">Nøgler</string>
+    <string name="category_movie">Film</string>
+    <string name="category_movies">Film</string>
+    <string name="category_music">Musik</string>
+    <string name="category_password">Adgangskode</string>
+    <string name="category_passwords">Adgangskoder</string>
+    <string name="category_play">Afspil</string>
+    <string name="category_present">Gave</string>
+    <string name="category_presents">Gaver</string>
+    <string name="category_readonly">Skrivebeskyttet</string>
     <string name="category_recipe">Opskrift</string>
     <string name="category_recipes">Opskrifter</string>
     <string name="category_restaurant">Restaurant</string>
     <string name="category_restaurants">Restaurants</string>
-    <string name="category_food">Mad</string>
-    <string name="category_bake">Bage</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_key">Nøgle</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_keys">Nøgler</string>
-    <string name="category_password">Adgangskode</string>
-    <string name="category_passwords">Adgangskoder</string>
-    <string name="category_credentials">Legitimationsoplysninger</string>
-    <string name="category_game">Spil</string>
-    <string name="category_games">Spil</string>
-    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
-    <string name="category_play">Afspil</string>
-    <string name="category_gift">Gave</string>
-    <string name="category_gifts">Gaver</string>
-    <!-- Like a gift -->
-    <string name="category_present">Gave</string>
-    <!-- Like a gift -->
-    <string name="category_presents">Gaver</string>
-
-    <string name="account_already_imported">Kontoen er allerede importeret</string>
-    <string name="no_notes_yet">Ingen noter endnu</string>
-    <string name="no_notes_yet_description">Tryk på + for at oprette en ny note</string>
-    <string name="simple_more">Mere</string>
-    <string name="simple_move">Flyt</string>
-    <string name="category_readonly">Skrivebeskyttet</string>
-    <string name="no_category">Ingen kategori</string>
-    <string name="add_category">Tilføj %1$s</string>
-    <string name="simple_checkbox">Afkrydsningsfelt</string>
-    <string name="unlock_notes">Lås noter op</string>
-    <string name="error_dialog_title">Åh nej - hvad nu? 🙁</string>
-    <string name="error_dialog_tip_token_mismatch_retry">Forsøg venligst at tvinge app\'en til at lukke og start den påny igen. Der kan have været en ukorrekt forbindelse til Nextcloud-app\'en.</string>
-    <string name="error_dialog_tip_token_mismatch_clear_storage">Hvis problemet ikke løses, så forsøg at rydde lageret for begge apps: Nextcloud og Nextcloud Noter, for at løse problemet.</string>
-    <string name="error_dialog_tip_clear_storage">Du kan rydde lageret ved at åbne appoplysningerne og vælge Lager → Ryd lager. ⚠️ Advarsel: Dette vil slette endnu ikke synkroniserede noter!</string>
-    <string name="error_dialog_tip_files_outdated">Din Nextcloud-app ser ud til at være forældet. Gå venligst til Play Butik eller F-Droid for at få seneste version.</string>
-    <string name="error_dialog_tip_files_force_stop">Det lader til at være noget galt med din Nextcloud-app. Forsøg venligst at gennemtvinge stop af både Nextcloud-app\'en og Nextcloud Noter-app\'en. </string>
-    <string name="error_dialog_tip_files_delete_storage">Hvis det ikke hjælper at stoppe begge, så kan du forsøge at rydde lagerpladsen for begge apps.</string>
-    <string name="error_dialog_timeout_instance">Der var intet svar fra din server på nuværende tidspunkt. Sørg venligst for at sikre, at din instans kører rigtigt. </string>
-    <string name="error_dialog_timeout_toggle">Tjek din netværksforbindelse. Undertiden kan det hjælpe at slukke og tænde for mobildata eller wifi.</string>
+    <string name="category_tasks">Opgaver</string>
+    <string name="category_todo">ToDo</string>
+    <string name="category_todos">ToDos</string>
+    <string name="category_work">Arbejde</string>
+    <string name="change_category_title">Vælg en kategori</string>
+    <string name="change_note_title">Skift titel på note</string>
+    <string name="choose_account">Vælg konto</string>
+    <string name="clear">Ryd</string>
+    <string name="clear_status_after">Ryd status efter</string>
+    <string name="clipboard_label">Tekst kopieret fra %1$s</string>
+    <string name="clipboard_no_text_to_copy">Modtog ingen tekst til kopiering til udklipsholder</string>
+    <string name="clipboard_text_copied">Link kopieret</string>
+    <string name="clipboard_unexpected_error">Uventet fejl under kopiering til udklipsholder</string>
+    <string name="common_delete">Slet</string>
+    <string name="common_loading">Indlæser…</string>
+    <string name="common_ok">OK</string>
+    <string name="context_based_formatting">Kontekstbaseret formatering popover</string>
+    <string name="copy_link">Kopiér link</string>
+    <string name="could_not_retrieve_shares">Kunne ikke hente delte drev</string>
+    <string name="delete_link">Slet link</string>
+    <string name="direct_editing_error">Fejl under indlæsning af udvidet redigering</string>
+    <string name="dnd">Forstyr ikke</string>
+    <string name="dontClear">Ryd ikke</string>
+    <string name="ecosystem_apps_display_files">Filer</string>
+    <string name="ecosystem_apps_display_more">Mere</string>
+    <string name="ecosystem_apps_display_talk">Snak</string>
+    <string name="ecosystem_apps_more">Flere Nextcloud apps</string>
+    <string name="ecosystem_apps_talk">Nextcloud Snak</string>
+    <string name="email_pick_failed">Kunne ikke plukke e-mailadresse.</string>
+    <string name="error_action_open_battery_settings">Batteriindstillinger</string>
+    <string name="error_action_open_deck_info">Åbn App info</string>
+    <string name="error_action_open_network">Netværksindstillinger</string>
+    <string name="error_action_update_files_app">Opdatér</string>
+    <string name="error_dialog_check_maintenance">Sørg venligst for at din Nextcloud-instans ikke er i vedligeholdelsestilstand. </string>
     <string name="error_dialog_check_server">Svaret fra din server var ikke korrekt. Tjek venligst om du kan tilgå dine noter via webgrænsefladen.</string>
     <string name="error_dialog_check_server_logs">Der er et problem med din opsætning af Nextcloud. Kig venligst i serverens logfiler. </string>
-    <string name="error_dialog_check_maintenance">Sørg venligst for at din Nextcloud-instans ikke er i vedligeholdelsestilstand. </string>
     <string name="error_dialog_insufficient_storage">Din Nextcloud-instans har ikke mere ledig lagerplads. Slet venligst nogle filer for at synkronisere dine lokale ændringer ind i skyen.</string>
-    <string name="error_dialog_we_need_info">Vi har brug for følgende tekniske information for at hjælpe dig:</string>
-    <string name="error_dialog_server_app_enabled">Tjek venligst, om du har installeret og aktiveret appen \"Noter\" på din server.</string>
-    <string name="error_dialog_redirect">Din server svarede med en HTTP 302-statuskode, hvilket betyder, at du endnu ikke har installeret app\'en Noter på din server, eller at der er en forkert konfiguration. Dette kan skyldes brugerdefinerede tilsidesættelser i en .htaccess-fil eller af apps fra Nextcloud som OID Client.</string>
-    <string name="error_dialog_tip_disable_battery_optimizations">Deaktivér venligst alle batterioptimeringer for Nextcloud og Noter-appen.</string>
     <string name="error_dialog_min_version">Noter Android-appen kræver, at Nextcloud Android-appen er mindst version 3.18.</string>
-    <string name="added_content">Tilføjet \"%1$s\"</string>
-    <string name="shared_text_empty">Den delte tekst var tom</string>
-    <string name="append_to_note">Tilføj til note</string>
-    <string name="change_note_title">Skift titel på note</string>
-    <string name="menu_edit_title">Redigér titel</string>
-    <string name="simple_security">Sikkerhed</string>
-    <string name="appearance_and_behavior">Udseende og adfærd</string>
-    <string name="simple_synchronization">Synkronisering</string>
+    <string name="error_dialog_redirect">Din server svarede med en HTTP 302-statuskode, hvilket betyder, at du endnu ikke har installeret app\'en Noter på din server, eller at der er en forkert konfiguration. Dette kan skyldes brugerdefinerede tilsidesættelser i en .htaccess-fil eller af apps fra Nextcloud som OID Client.</string>
+    <string name="error_dialog_server_app_enabled">Tjek venligst, om du har installeret og aktiveret appen \"Noter\" på din server.</string>
+    <string name="error_dialog_timeout_instance">Der var intet svar fra din server på nuværende tidspunkt. Sørg venligst for at sikre, at din instans kører rigtigt. </string>
+    <string name="error_dialog_timeout_toggle">Tjek din netværksforbindelse. Undertiden kan det hjælpe at slukke og tænde for mobildata eller wifi.</string>
+    <string name="error_dialog_tip_clear_storage">Du kan rydde lageret ved at åbne appoplysningerne og vælge Lager → Ryd lager. ⚠️ Advarsel: Dette vil slette endnu ikke synkroniserede noter!</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Deaktivér venligst alle batterioptimeringer for Nextcloud og Noter-appen.</string>
+    <string name="error_dialog_tip_files_delete_storage">Hvis det ikke hjælper at stoppe begge, så kan du forsøge at rydde lagerpladsen for begge apps.</string>
+    <string name="error_dialog_tip_files_force_stop">Det lader til at være noget galt med din Nextcloud-app. Forsøg venligst at gennemtvinge stop af både Nextcloud-app\'en og Nextcloud Noter-app\'en. </string>
+    <string name="error_dialog_tip_files_outdated">Din Nextcloud-app ser ud til at være forældet. Gå venligst til Play Butik eller F-Droid for at få seneste version.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Hvis problemet ikke løses, så forsøg at rydde lageret for begge apps: Nextcloud og Nextcloud Noter, for at løse problemet.</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Forsøg venligst at tvinge app\'en til at lukke og start den påny igen. Der kan have været en ukorrekt forbindelse til Nextcloud-app\'en.</string>
+    <string name="error_dialog_title">Åh nej - hvad nu? 🙁</string>
+    <string name="error_dialog_we_need_info">Vi har brug for følgende tekniske information for at hjælpe dig:</string>
+    <string name="error_maintenance_mode">Serveren er i vedligeholdelsestilstand</string>
+    <string name="error_no_network">Ingen netværksforbindelse</string>
+    <string name="error_setting_status_message">Fejl under angivelse af statusbesked!</string>
+    <string name="error_sync">Synkronisering fejlede: %1$s</string>
+    <string name="error_synchronization">Synkroniseringen mislykkedes</string>
+    <string name="error_unknown">En ukendt fejl er opstået</string>
+    <string name="failed_the_remove_share">Kunne ikke fjerne deling</string>
+    <string name="failed_update_ui">Formåede ikke at opdatere UI</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Ingen app tilgængelig til at vælge kontakter</string>
+    <string name="file_list_seconds_ago">sekunder siden</string>
+    <string name="formatting_help_cbf_body_1">Et vigtigt designmål med Noter-appen er at give et distraktionsfrit værktøj. Selvom du vil være i stand til at formatere dine tekster med Markdown. Til forskellige af de nedenfor nævnte eksempler kan du bruge genveje, så du kan formatere dine noter uden at indtaste koderne nedenfor.</string>
+    <string name="formatting_help_cbf_body_2">Du skal blot vælge en række tekst eller trykke på din markør på en hvilken som helst position, og du vil få en pop op-menu, som indeholder ud for standardindgangene %1$s, %2$s, %3$s poster som %4$s or %5$s.</string>
+    <string name="formatting_help_cbf_title">Kontekstbaseret formatering</string>
+    <string name="formatting_help_checkboxes_body_1">For at oprette et afkrydsningsfelt skal du bruge en liste efterfulgt af parenteser</string>
+    <string name="formatting_help_checkboxes_body_2">Punkt 1</string>
+    <string name="formatting_help_checkboxes_body_3">Punkt 2</string>
+    <string name="formatting_help_checkboxes_title">Afkrydsningsfelter</string>
+    <string name="formatting_help_code_body_1">Der er mange forskellige måder at style kode med Markdown. Hvis du har inline kodeblokke, skal du pakke dem ind i backticks:</string>
+    <string name="formatting_help_code_body_2">Markdown understøtter også noget, der kaldes kodehegn, som giver mulighed for flere linjer uden indrykning:</string>
+    <string name="formatting_help_code_body_3">Og hvis du gerne vil bruge syntaksfremhævning, skal du inkludere sproget:</string>
+    <string name="formatting_help_code_title">Kode</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_images_alt">Fancy billede</string>
+    <string name="formatting_help_images_body_1">Links skal være enten fuldstændige URLer startende med en protokol og domæne eller absolutte stier, startende med en %1$s karakter.</string>
+    <string name="formatting_help_images_body_2">For at bekræfte Markdown formatet, så anvend venligst escape karakterer i billede URL\'en. Det betyder for eksempel, erstat mellemrum med %1$s i URL\'en.</string>
+    <string name="formatting_help_images_title">Billeder</string>
+    <string name="formatting_help_lists_body_1">Nogle gange vil du have nummererede lister:</string>
+    <string name="formatting_help_lists_body_2">En</string>
+    <string name="formatting_help_lists_body_3">To</string>
+    <string name="formatting_help_lists_body_4">Tre</string>
+    <string name="formatting_help_lists_body_5">Nogle gange vil du have punkttegn:</string>
+    <string name="formatting_help_lists_body_6">Start en linje med en bindestreg</string>
+    <string name="formatting_help_lists_body_7">Og hvis du har underpoint, skal du sætte to mellemrum før bindestreg eller stjerne:</string>
+    <string name="formatting_help_lists_body_8">Som her</string>
+    <string name="formatting_help_lists_body_9">Og her</string>
+    <string name="formatting_help_lists_title">Lister</string>
+    <string name="formatting_help_structured_documents_body_1">SNogle gange er det nyttigt at have forskellige niveauer af overskrifter til at strukturere dine dokumenter. Start linjer med en %1$s for at oprette overskrifter. Flere %2$s i træk angiver mindre overskriftsstørrelser.</string>
+    <string name="formatting_help_structured_documents_body_2">Dette er en overskrift på tredje niveau</string>
+    <string name="formatting_help_structured_documents_body_3">Du kan anvende en %1$s hele vejen op til %2$s seks for forskellige overskriftsstørrelser.</string>
+    <string name="formatting_help_structured_documents_body_4">Hvis du ønsker at citere nogen, så anvende %1$s karakteren før linjen:</string>
+    <string name="formatting_help_structured_documents_body_5">Fantasi er vigtigere end viden. Viden er begrænset. Fantasi omkranser verden.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+    <string name="formatting_help_structured_documents_title">Strukturerede dokumenter</string>
+    <string name="formatting_help_tables_column">Kolonne %1d</string>
+    <string name="formatting_help_tables_title">Tabeller</string>
+    <string name="formatting_help_tables_value">Værdi %1d</string>
+    <string name="formatting_help_text_body">Det er meget nemt at lave nogle ord %1$sbold%1$s og andre ord %2$sitalic%2$s med Markdown. Du kan %3$sstrike%3$s snogle ord gennem og endda [link til Nextcloud](https://nextcloud.com).</string>
+    <string name="formatting_help_text_title">Tekst</string>
+    <string name="http_status_code">HTTP statuskode: %1$d</string>
+    <string name="invisible">Usynlig</string>
+    <string name="label_all_notes">Alle noter</string>
+    <string name="label_favorites">Foretrukne</string>
+    <string name="link_share_allow_upload_and_editing">Tillad upload og redigering</string>
+    <string name="link_share_editing">Redigering</string>
+    <string name="link_share_file_drop">Fil drop (kun upload)</string>
+    <string name="link_share_view_only">Kun visning</string>
+    <string name="listview_updated_last_month">Seneste måned</string>
+    <string name="listview_updated_last_week">Seneste uge</string>
+    <string name="listview_updated_this_month">Denne måned</string>
+    <string name="listview_updated_this_week">Denne uge</string>
+    <string name="listview_updated_today">I dag</string>
+    <string name="listview_updated_yesterday">I går</string>
     <string name="manage_accounts">Administrer konti</string>
-    <string name="action_formatting_help">Formatering</string>
-
-
+    <string name="menu_change_category">Kategori</string>
+    <string name="menu_delete">Slet</string>
+    <string name="menu_edit_title">Redigér titel</string>
+    <string name="menu_favorite">Foretrukken</string>
+    <string name="menu_preview">Vis eksempel</string>
+    <string name="menu_share">Del</string>
+    <string name="mute_all_notifications">Vis ikke notifikationer</string>
+    <string name="no_account_configured_yet">Ingen konto konfigureret endnu</string>
+    <string name="no_actions">Ingen handlinger for denne bruger</string>
+    <string name="no_browser_available">Ingen App tilgængelig til håndtering af links</string>
+    <string name="no_category">Ingen kategori</string>
+    <string name="no_email_app_available">Ingen app tilgængelig til at håndtere mailadresser</string>
+    <string name="no_notes_yet">Ingen noter endnu</string>
+    <string name="no_notes_yet_description">Tryk på + for at oprette en ny note</string>
+    <string name="no_other_accounts">Du har ikke konfigureret andre konti endnu.</string>
     <string name="noteMode_plain_edit">Almindelig redigeringstilstand</string>
     <string name="noteMode_plain_preview">Almindelig forhåndsvisning</string>
-    <string name="noteMode_rich_edit">Udvidet redigeringstilstand</string>
     <string name="noteMode_remember_last">Husk mit sidste valg</string>
-
-    <string-array name="fontSize_entries">
-        <item>Lille</item>
-        <item>Mellem</item>
-        <item>Stor</item>
-    </string-array>
-
-    <string-array name="darkmode_entries">
-        <item>Lys</item>
-        <item>Mørk</item>
-        <item>System Standard</item>
-    </string-array>
-
+    <string name="noteMode_rich_edit">Udvidet redigeringstilstand</string>
+    <string name="note_has_been_deleted">Denne note er blevet slettet</string>
+    <string name="note_share_activity_activity_icon_content_description">note aktivitet ikon</string>
+    <string name="note_share_activity_cannot_created">Du har ikke tilladelse til at oprette en deling.</string>
+    <string name="note_share_activity_contact_icon_content_description">not del kontakt ikon</string>
+    <string name="note_share_activity_contact_no_permission">Tilladelse til Kontakter er nødvendig.</string>
+    <string name="note_share_activity_copy_icon_content_description">note del kopi ikon</string>
+    <string name="note_share_activity_could_not_retrieve_url">Kunne ikke hente URL</string>
+    <string name="note_share_activity_external_icon_content_description">note del eksternt ikon</string>
+    <string name="note_share_activity_icon_content_description">note del inok</string>
+    <string name="note_share_activity_more_icon_content_description">not del mere ikon</string>
+    <string name="note_share_activity_resharing_not_allowed">Politik eller rettigheder forhindrer gen-deling</string>
+    <string name="note_share_activity_search_text">Navn, sammenkoblings cloud ID eller e-mailadresse…</string>
+    <string name="note_share_activity_share_icon_content_description">note del ikon</string>
+    <string name="note_share_activity_share_link">Del link</string>
+    <string name="note_share_activity_shared_with_you">Delt med dig af %1$s</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" er blevet delt med dig</string>
+    <string name="note_share_activity_user_icon_content_description">note del bruger ikon</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">Du har ikke tilladelse til at oprette en offentlig deling.</string>
+    <string name="note_share_created">Deling oprettet</string>
+    <string name="note_share_detail_activity_advanced_settings">Avancerede indstillinger</string>
+    <string name="note_share_detail_activity_cancel">Annullér</string>
+    <string name="note_share_detail_activity_common_confirm">Bekræft</string>
+    <string name="note_share_detail_activity_common_next">Næste</string>
+    <string name="note_share_detail_activity_create_share_error">Kunne ikke oprette en deling</string>
+    <string name="note_share_detail_activity_hint_name">Navn</string>
+    <string name="note_share_detail_activity_hint_note">Note</string>
+    <string name="note_share_detail_activity_hint_password">Adgangskode</string>
+    <string name="note_share_detail_activity_label_empty">Etiketten kan ikke være tom</string>
+    <string name="note_share_detail_activity_link_name">Link Navn</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Vælg mindst én tilladelse til at dele.</string>
+    <string name="note_share_detail_activity_send_share">Send Deling</string>
+    <string name="note_share_detail_activity_set_note">Sæt Note</string>
+    <string name="note_share_detail_activity_share_copy_link">Del og kopiér link</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Du skal angive en adgangskode</string>
+    <string name="note_share_detail_activity_share_send_note">Note til modtager</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Skjul download</string>
+    <string name="online">Online</string>
+    <string name="online_status">Online status</string>
+    <string name="pin_to_homescreen">Fastgør til hjemmeskærm</string>
+    <string name="pref_value_font_normal">Normal</string>
+    <string name="pref_value_lock">Adgangskodebeskyttelse</string>
+    <string name="pref_value_wifi_and_mobile">Synkroniser på Wi-Fi og mobil data</string>
+    <string name="progress_import">Importerer note %1$d af %2$d...</string>
+    <string name="progress_import_indeterminate">Importerer noter...</string>
+    <string name="public_share_name">Nyt navn</string>
+    <string name="remote">(ekstern)</string>
+    <string name="remove_account">Fjern %1$s</string>
+    <string name="search_in_all">Søg i alle noter</string>
+    <string name="search_in_category">Søg i %1$s</string>
+    <string name="set_message">Indstil besked</string>
+    <string name="set_online_status">Online status</string>
+    <string name="settings_background_sync">Synkronisering i baggrunden</string>
+    <string name="settings_enable_direct_edit">Direkte redigering</string>
+    <string name="settings_enable_direct_edit_summary">Når den er deaktiveret, vil den avancerede editor blive skjult.</string>
+    <string name="settings_file_suffix">Fil-endelse</string>
+    <string name="settings_file_suffix_description">Filendelse for nye noter i Nextcloud</string>
+    <string name="settings_file_suffix_success">Nyt filsuffiks: %1$s</string>
+    <string name="settings_font_size">Skriftstørrelse</string>
+    <string name="settings_font_title">Monospace font</string>
+    <string name="settings_gridview">Grid visning</string>
+    <string name="settings_keep_screen_on">Hold skærmen tændt</string>
+    <string name="settings_keep_screen_on_summary">Mens du læser eller redigerer en note</string>
+    <string name="settings_lock">App lås (beta)</string>
+    <string name="settings_lock_summary">Enhedslegitimationsoplysninger</string>
+    <string name="settings_note_mode">Visningstilstand for noter</string>
+    <string name="settings_note_mode_new">Ved åbning af note</string>
+    <string name="settings_notes_path">Sæt mappe</string>
+    <string name="settings_notes_path_description">Mappe for dine noter i Nextcloud</string>
+    <string name="settings_notes_path_success">Mappe for nye noter: %1$s</string>
+    <string name="settings_prevent_screen_capture">Forhindr skærmoptagelse</string>
+    <string name="settings_show_ecosystem_apps">Vis app skifter</string>
+    <string name="settings_show_ecosystem_apps_summary">Nextcloud app anbefalinger i navigationspanelet</string>
+    <string name="settings_theme_title">Tema</string>
+    <string name="settings_wifi_only">Synkroniser kun på Wi-Fi</string>
+    <string name="share">Del</string>
+    <string name="share_dialog_title">Deling</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_expiration_date_label">Udløber %1$s</string>
+    <string name="share_file">Del %1$s</string>
+    <string name="share_group_clarification">%1$s (gruppe)</string>
+    <string name="share_internal_link">Del internt link</string>
+    <string name="share_internal_link_to_file_text">Internt dele link virker kun for brugere med adgang til denne fil</string>
+    <string name="share_internal_link_to_folder_text">Internt dele link virker kun for brugere med adgang til denne mappe</string>
+    <string name="share_known_remote_on_clarification">på %1$s</string>
+    <string name="share_link">Del link</string>
+    <string name="share_link_password_title">Angiv en adgangskode</string>
+    <string name="share_link_with_label">Del link (%1$s)</string>
+    <string name="share_no_expiration_date_label">Angiv udløbsdato</string>
+    <string name="share_no_password_title">Angiv adgangskode</string>
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Angiv en valgfri adgangskode</string>
+    <string name="share_password_dialog_fragment_skip">Spring over</string>
+    <string name="share_password_title">Beskyttet med adgangskode</string>
+    <string name="share_permission_can_edit">Kan redigere</string>
+    <string name="share_permission_file_drop">Fil drop</string>
+    <string name="share_permission_secure_file_drop">Sikkert fil drop</string>
+    <string name="share_permission_view_only">Kun visning</string>
+    <string name="share_permissions">Del Tilladelser</string>
+    <string name="share_remote_clarification">%1$s (ekstern)</string>
+    <string name="share_room_clarification">%1$s (samtale)</string>
+    <string name="share_send_new_email">Send ny email</string>
+    <string name="share_settings">Indstillinger</string>
+    <string name="share_via_link_section_title">Del link</string>
+    <string name="share_via_link_send_link_label">Send link</string>
+    <string name="share_via_link_unset_password">Fjern indstilling</string>
+    <string name="share_with_title">Del med...</string>
+    <string name="shared_text_empty">Den delte tekst var tom</string>
+    <string name="shortcut_create_long">Opret en ny note</string>
+    <string name="simple_about">Om</string>
+    <string name="simple_backup">Backup</string>
+    <string name="simple_cancel">Annuller</string>
+    <string name="simple_checkbox">Afkrydsningsfelt</string>
+    <string name="simple_close">Luk</string>
+    <string name="simple_copy">Kopiér</string>
+    <string name="simple_edit">Redigér</string>
+    <string name="simple_error">Fejl</string>
+    <string name="simple_exception">Undtagelse</string>
+    <string name="simple_link">Link</string>
+    <string name="simple_more">Mere</string>
+    <string name="simple_move">Flyt</string>
+    <string name="simple_next">Næste</string>
+    <string name="simple_other">Andet</string>
+    <string name="simple_prev">Tidligere</string>
+    <string name="simple_remove">Fjern</string>
+    <string name="simple_security">Sikkerhed</string>
+    <string name="simple_switch">Byt rundt</string>
+    <string name="simple_synchronization">Synkronisering</string>
+    <string name="sort_alphabetically">Sorter alfabetisk</string>
+    <string name="sort_last_modified">Sorter efter dato ændret</string>
+    <string name="status_message">Statusbesked</string>
+    <string name="switch_to_plain_editing">Skift til almindelig redigering</string>
+    <string name="thirtyMinutes">30 minutter</string>
+    <string name="thisWeek">Denne uge</string>
+    <string name="today">I dag</string>
+    <string name="unlock_notes">Lås noter op</string>
+    <string name="username">Brugernavn</string>
+    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
+    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
+    <string name="welcome_text">Velkommen til %1$s</string>
+    <string name="whats_your_status">Hvad er din status</string>
+    <string name="widget_entry_fav_contentDescription">Stjerneikon bruges til at angive et element som en favorit</string>
+    <string name="widget_not_logged_in">Log venligst ind i Noter før du bruger denne widget</string>
+    <string name="widget_note_list_placeholder">Ingen noter</string>
+    <string name="widget_note_list_title">Noteliste </string>
+    <string name="widget_single_note_placeholder_tv">Note ikke fundet</string>
+    <string name="widget_single_note_title">Enkel note</string>
+    <string name="write_email">Send e-mail</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Du skal være koblet på en internetforbindelse for at tilføje en konto.</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">%1$d resterende overførsel</item>
+        <item quantity="other">%1$d resterende overførsler</item>
+    </plurals>
     <plurals name="ab_selected">
         <item quantity="one">%d valgt</item>
         <item quantity="other">%d valgt</item>
@@ -338,123 +383,8 @@
         <item quantity="one">Del indhold i %1$d note</item>
         <item quantity="other">Del indhold i %1$d noter</item>
     </plurals>
-
-    <string name="formatting_help_divider" translateable="false">---</string>
-    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
-    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
-    <string name="formatting_help_codefence" translateable="false">```</string>
-    <string name="formatting_help_codefence_outer" translateable="false">````</string>
-    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
-    <string name="formatting_help_cbf_title">Kontekstbaseret formatering</string>
-    <string name="formatting_help_cbf_body_1">Et vigtigt designmål med Noter-appen er at give et distraktionsfrit værktøj. Selvom du vil være i stand til at formatere dine tekster med Markdown. Til forskellige af de nedenfor nævnte eksempler kan du bruge genveje, så du kan formatere dine noter uden at indtaste koderne nedenfor.</string>
-    <string name="formatting_help_cbf_body_2">Du skal blot vælge en række tekst eller trykke på din markør på en hvilken som helst position, og du vil få en pop op-menu, som indeholder ud for standardindgangene %1$s, %2$s, %3$s poster som %4$s or %5$s.</string>
-
-    <string name="formatting_help_text_title">Tekst</string>
-    <string name="formatting_help_text_body">Det er meget nemt at lave nogle ord %1$sbold%1$s og andre ord %2$sitalic%2$s med Markdown. Du kan %3$sstrike%3$s snogle ord gennem og endda [link til Nextcloud](https://nextcloud.com).</string>
-
-    <string name="formatting_help_lists_title">Lister</string>
-    <string name="formatting_help_lists_body_1">Nogle gange vil du have nummererede lister:</string>
-    <string name="formatting_help_lists_body_2">En</string>
-    <string name="formatting_help_lists_body_3">To</string>
-    <string name="formatting_help_lists_body_4">Tre</string>
-    <string name="formatting_help_lists_body_5">Nogle gange vil du have punkttegn:</string>
-    <string name="formatting_help_lists_body_6">Start en linje med en bindestreg</string>
-    <string name="formatting_help_lists_body_7">Og hvis du har underpoint, skal du sætte to mellemrum før bindestreg eller stjerne:</string>
-    <string name="formatting_help_lists_body_8">Som her</string>
-    <string name="formatting_help_lists_body_9">Og her</string>
-
-    <string name="formatting_help_checkboxes_title">Afkrydsningsfelter</string>
-    <string name="formatting_help_checkboxes_body_1">For at oprette et afkrydsningsfelt skal du bruge en liste efterfulgt af parenteser</string>
-    <string name="formatting_help_checkboxes_body_2">Punkt 1</string>
-    <string name="formatting_help_checkboxes_body_3">Punkt 2</string>
-
-    <string name="formatting_help_structured_documents_title">Strukturerede dokumenter</string>
-    <string name="formatting_help_structured_documents_body_1">SNogle gange er det nyttigt at have forskellige niveauer af overskrifter til at strukturere dine dokumenter. Start linjer med en %1$s for at oprette overskrifter. Flere %2$s i træk angiver mindre overskriftsstørrelser.</string>
-    <string name="formatting_help_structured_documents_body_2">Dette er en overskrift på tredje niveau</string>
-    <string name="formatting_help_structured_documents_body_3">Du kan anvende en %1$s hele vejen op til %2$s seks for forskellige overskriftsstørrelser.</string>
-    <string name="formatting_help_structured_documents_body_4">Hvis du ønsker at citere nogen, så anvende %1$s karakteren før linjen:</string>
-    <string name="formatting_help_structured_documents_body_5">Fantasi er vigtigere end viden. Viden er begrænset. Fantasi omkranser verden.</string>
-    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
-
-    <string name="formatting_help_code_title">Kode</string>
-    <string name="formatting_help_code_body_1">Der er mange forskellige måder at style kode med Markdown. Hvis du har inline kodeblokke, skal du pakke dem ind i backticks:</string>
-    <string name="formatting_help_code_body_2">Markdown understøtter også noget, der kaldes kodehegn, som giver mulighed for flere linjer uden indrykning:</string>
-    <string name="formatting_help_code_body_3">Og hvis du gerne vil bruge syntaksfremhævning, skal du inkludere sproget:</string>
-
-    <string name="formatting_help_tables_title">Tabeller</string>
-    <!-- Column header of a sample table -->
-    <string name="formatting_help_tables_column">Kolonne %1d</string>
-    <!-- Table cell value of a sample table -->
-    <string name="formatting_help_tables_value">Værdi %1d</string>
-
-    <string name="formatting_help_images_body_1">Links skal være enten fuldstændige URLer startende med en protokol og domæne eller absolutte stier, startende med en %1$s karakter.</string>
-    <string name="formatting_help_images_body_2">For at bekræfte Markdown formatet, så anvend venligst escape karakterer i billede URL\'en. Det betyder for eksempel, erstat mellemrum med %1$s i URL\'en.</string>
-    <string name="formatting_help_images_title">Billeder</string>
-    <string name="formatting_help_images_alt">Fancy billede</string>
-
-    <string name="simple_other">Andet</string>
-    <string name="sort_last_modified">Sorter efter dato ændret</string>
-    <string name="sort_alphabetically">Sorter alfabetisk</string>
-    <string name="error_action_open_battery_settings">Batteriindstillinger</string>
-    <string name="error_action_open_deck_info">Åbn App info</string>
-    <string name="error_action_open_network">Netværksindstillinger</string>
-    <string name="error_action_update_files_app">Opdatér</string>
-    <string name="no_account_configured_yet">Ingen konto konfigureret endnu</string>
-    <string name="no_other_accounts">Du har ikke konfigureret andre konti endnu.</string>
-    <string name="choose_account">Vælg konto</string>
-    <string name="context_based_formatting">Kontekstbaseret formatering popover</string>
     <plurals name="remove_account_message">
         <item quantity="one">Fjernelse af kontoen %1$s vil også slette ikke fortrydelige ikke  synkroniseret ændring.</item>
         <item quantity="other">Fjernelse af kontoen %1$s vil også slette ikke fortrydelige %2$d ikke synkroniserede ændringer.</item>
     </plurals>
-    <string name="remove_account">Fjern %1$s</string>
-
-    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Du skal være koblet på en internetforbindelse for at tilføje en konto.</string>
-    <string name="settings_notes_path">Sæt mappe</string>
-
-    <string name="simple_next">Næste</string>
-    <string name="simple_prev">Tidligere</string>
-    <string name="simple_backup">Backup</string>
-    <string name="backup">Vi har registreret en uoprettelig tilstand af appen. Sikkerhedskopiér dine usynkroniserede ændringer og ryd data for ​​Noter-appen.</string>
-    <string name="settings_notes_path_description">Mappe for dine noter i Nextcloud</string>
-    <string-array name="settings_file_suffixes">
-        <item translatable="false">.txt</item>
-        <item translatable="false">.md</item>
-    </string-array>
-    <string name="settings_notes_path_success">Mappe for nye noter: %1$s</string>
-    <string name="settings_file_suffix">Fil-endelse</string>
-    <string name="settings_file_suffix_description">Filendelse for nye noter i Nextcloud</string>
-    <string name="settings_file_suffix_success">Nyt filsuffiks: %1$s</string>
-    <string name="http_status_code">HTTP statuskode: %1$d</string>
-    <string name="progress_import_indeterminate">Importerer noter...</string>
-    <string name="progress_import">Importerer note %1$d af %2$d...</string>
-    <string name="account_imported">Konto importeret.</string>
-    <string name="direct_editing_error">Fejl under indlæsning af udvidet redigering</string>
-    <string name="switch_to_plain_editing">Skift til almindelig redigering</string>
-    <string name="action_back">Tilbage</string>
-    <string name="set_online_status">Online status</string>
-    <string name="status_message">Statusbesked</string>
-    <string name="whats_your_status">Hvad er din status</string>
-    <string name="clear_status_after">Ryd status efter</string>
-    <string name="clear">Ryd</string>
-    <string name="set_message">Indstil besked</string>
-    <string name="dontClear">Ryd ikke</string>
-    <string name="today">I dag</string>
-    <string name="thirtyMinutes">30 minutter</string>
-    <string name="thisWeek">Denne uge</string>
-    <string name="error_setting_status_message">Fejl under angivelse af statusbesked!</string>
-    <string name="file_list_seconds_ago">sekunder siden</string>
-    <string name="online_status">Online status</string>
-    <string name="online">Online</string>
-    <string name="dnd">Forstyr ikke</string>
-    <string name="away">Ikke tilstede</string>
-    <string name="invisible">Usynlig</string>
-    <string name="busy">Optaget</string>
-    <string name="mute_all_notifications">Vis ikke notifikationer</string>
-    <string name="appear_offline">Er offline</string>
-    <string name="ecosystem_apps_display_files">Filer</string>
-    <string name="ecosystem_apps_display_talk">Snak</string>
-    <string name="ecosystem_apps_talk">Nextcloud Snak</string>
-    <string name="ecosystem_apps_more">Flere Nextcloud apps</string>
-    <string name="ecosystem_apps_display_more">Mere</string>
 </resources>

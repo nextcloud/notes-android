@@ -1,304 +1,357 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Nextcloud Notes - Android Client
-  ~
-  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
-  ~ SPDX-License-Identifier: GPL-3.0-or-later
--->
-<resources>
-    <string name="app_name">笔记</string>
-    <string name="app_name_long">Nextcloud 笔记</string>
-    <string name="label_all_notes">所有笔记</string>
-    <string name="label_favorites">收藏</string>
-    <string name="action_create">新建笔记</string>
-    <string name="welcome_text">欢迎来到 %1$s</string>
-    <string name="action_settings">设置</string>
-    <string name="action_trashbin">已删除的笔记</string>
-    <string name="action_search">搜索</string>
-    <string name="action_sorting_method">排序方法</string>
-    <string name="simple_cancel">取消</string>
-    <string name="simple_switch">切换</string>
-    <string name="simple_edit">编辑</string>
-    <string name="simple_remove">移除</string>
-    <string name="action_edit_save">保存</string>
-    <string name="simple_about">关于</string>
-    <string name="simple_link">链接</string>
-    <string name="action_note_deleted">已删除 %1$s</string>
-    <string name="action_note_restored">已恢复 %1$s</string>
-    <string name="action_undo">撤销</string>
-    <string name="action_uncategorized">未分类</string>
-    <string name="menu_delete">删除</string>
-    <string name="menu_change_category">分类</string>
-    <string name="menu_favorite">收藏</string>
-    <string name="menu_preview">预览</string>
-    <string name="menu_share">共享</string>
-    <string name="common_loading">正在加载 ...</string>
-
-
-    <string name="search_in_category">在%1$s中搜索</string>
-    <string name="search_in_all">搜索所有笔记</string>
-
-    <string name="change_category_title">选择一个分类</string>
-
-    <string name="note_share_activity_shared_with_you">您已通过 %1$s 共享</string>
-    <string name="note_share_activity_search_text">名称，联合云 ID 或电子邮箱地址…</string>
-    <string name="note_share_activity_share_link">共享链接</string>
-    <string name="note_share_activity_resharing_not_allowed">策略或权限阻止再次共享</string>
-    <string name="note_share_activity_could_not_retrieve_url">无法获取地址</string>
-    <string name="note_share_activity_subject_shared_with_you">已与你共享 “%1$s”</string>
-    <string name="note_share_activity_contact_no_permission">需要联系人权限</string>
-    <!-- NoteShareDetailActivity -->
-    <string name="note_share_detail_activity_advanced_settings">高级设置</string>
-    <string name="note_share_detail_activity_share_via_link_hide_download">隐藏下载</string>
-    <string name="note_share_detail_activity_share_send_note">接收者备注</string>
-    <string name="note_share_detail_activity_hint_note">备注</string>
-    <string name="note_share_detail_activity_common_next">下一个</string>
-    <string name="note_share_detail_activity_share_copy_link">共享并复制链接</string>
-    <string name="note_share_detail_activity_common_confirm">确认</string>
-    <string name="note_share_detail_activity_set_note">设置附注</string>
-    <string name="note_share_detail_activity_send_share">发送共享</string>
-    <string name="note_share_detail_activity_hint_name">名称</string>
-    <string name="note_share_detail_activity_link_name">链接名称</string>
-    <string name="note_share_detail_activity_share_link_empty_password">您必须输入密码</string>
-    <string name="note_share_detail_activity_hint_password">密码</string>
-    <string name="note_share_detail_activity_no_share_permission_selected">请选择至少一个要共享的权限</string>
-    <string name="note_share_detail_activity_label_empty">标签不能是空白</string>
-    <string name="note_share_detail_activity_cancel">取消</string>
-    <!-- SharePasswordDialogFragment -->
-    <string name="share_password_dialog_fragment_share_link_optional_password_title">输入一个可选密码</string>
-    <string name="share_password_dialog_fragment_skip">跳过</string>
-
-    <string name="share_link_password_title">输入密码</string>
-    <string name="common_ok">确定</string>
-    <string name="common_delete">删除</string>
-    <string name="write_email">发送电子邮件</string>
-    <string name="no_browser_available">没有可用来打开链接的应用</string>
-    <string name="no_email_app_available">没有可处理邮件地址的应用</string>
-    <string name="no_actions">该用户没有操作</string>
-
-    <string name="email_pick_failed">未能选择电子邮箱地址</string>
-    <string name="failed_update_ui">更新用户界面失败</string>
-    <string name="file_detail_sharing_fragment_no_contact_app_message">没有可用于选择联系人的应用</string>
-    <string name="activity_chooser_title">发送链接到…</string>
-
-    <string name="activity_chooser_send_file_title">发送</string>
-    <string name="share_internal_link_to_folder_text">内部共享链接仅对有权访问此文件夹的用户有效</string>
-    <string name="share_internal_link_to_file_text">内部共享链接仅对有权访问此文件的用户有效</string>
-    <string name="share_internal_link">共享内部链接</string>
-    <string name="delete_link">删除链接</string>
-    <string name="share_settings">设置</string>
-    <string name="share_send_new_email">发送新邮件</string>
-    <string name="share_dialog_title">共享</string>
-    <string name="share_file">共享 %1$s</string>
-    <string name="share_expiration_date_label">过期 %1$s</string>
-    <string name="share_expiration_date_format">%1$s</string>
-    <string name="share_no_expiration_date_label">设置过期日期</string>
-    <string name="share_via_link_section_title">共享链接</string>
-    <string name="share_via_link_send_link_label">发送链接</string>
-    <string name="share_password_title">密码已受保护</string>
-    <string name="share_no_password_title">设置密码</string>
-    <string name="share_with_title">共享给…</string>
-    <string name="share_via_link_unset_password">取消设置</string>
-    <string name="add_another_public_share_link">添加其他链接</string>
-    <string name="add_new_public_share">添加新的公共共享链接</string>
-    <string name="public_share_name">新名称</string>
-    <string name="share_link_with_label">共享链接 (%1$s)</string>
-    <string name="share_link">共享链接</string>
-    <string name="allow_resharing">允许再次共享</string>
-    <string name="link_share_view_only">仅查看</string>
-    <string name="link_share_editing">编辑</string>
-    <string name="link_share_allow_upload_and_editing">允许上传和编辑</string>
-    <string name="link_share_file_drop">文件拖放（仅上传）</string>
-    <string name="could_not_retrieve_shares">无法检索共享</string>
-    <string name="share_permission_view_only">仅查看</string>
-    <string name="share_permission_can_edit">可以编辑</string>
-    <string name="share_permission_file_drop">文件拖放</string>
-    <string name="share_permission_secure_file_drop">安全文件拖放</string>
-    <string name="share_permissions">共享权限</string>
-    <plurals name="share_download_limit_description">
-        <item quantity="other">剩余 %1$d 个下载</item>
-    </plurals>
-    <string name="username">用户名</string>
-    <string name="share_group_clarification">%1$s (群组)</string>
-    <string name="share_remote_clarification">%1$s (远程)</string>
-    <string name="share_room_clarification">%1$s (对话)</string>
-    <string name="share_known_remote_on_clarification">在 %1$s</string>
-    <string name="remote">(远程)</string>
-
-    <string name="copy_link">复制链接</string>
-    <string name="share">共享</string>
-    <string name="clipboard_text_copied">已复制链接</string>
-    <string name="clipboard_no_text_to_copy">没有收到要复制到剪贴板的文本</string>
-    <string name="clipboard_unexpected_error">在复制内容到剪贴板时发生了一个预料外的错误</string>
-    <string name="clipboard_label">从%1$s复制文本</string>
-
-    <string name="listview_updated_today">今天</string>
-    <string name="listview_updated_yesterday">昨天</string>
-    <string name="listview_updated_this_week">本周</string>
-    <string name="listview_updated_last_week">上周</string>
-    <string name="listview_updated_this_month">本月</string>
-    <string name="listview_updated_last_month">上月</string>
-    <string name="settings_note_mode">笔记的显示模式</string>
-    <string name="settings_note_mode_new">笔记打开行为</string>
-    <string name="settings_theme_title">主题</string>
-    <string name="settings_font_title">等宽字体</string>
-    <string name="settings_font_size">字体大小</string>
-    <string name="settings_wifi_only">仅在Wi-Fi下同步</string>
-    <string name="settings_lock">应用锁 （测试版）</string>
-    <string name="settings_lock_summary">设备凭据</string>
-    <string name="settings_background_sync">后台同步</string>
-    <string name="settings_prevent_screen_capture">防止截屏</string>
-    <string name="settings_show_ecosystem_apps">显示应用切换器</string>
-    <string name="settings_show_ecosystem_apps_summary">导航栏中的 Nextcloud 应用推荐</string>
-    <string name="settings_gridview">网格视图</string>
-    <string name="settings_enable_direct_edit">直接编辑</string>
-    <string name="settings_enable_direct_edit_summary">禁用后，高级编辑器将隐藏。</string>
-    <string name="settings_keep_screen_on">保持屏幕常亮</string>
-    <string name="settings_keep_screen_on_summary">查看或编辑笔记时</string>
-
-    <string name="error_sync">同步失败：%1$s</string>
-    <string name="error_synchronization">同步失败</string>
-    <string name="error_no_network">没有网络连接</string>
-    <string name="error_maintenance_mode">服务器处于维护模式下</string>
-    <string name="error_unknown">出现未知错误。</string>
-
-    <string name="about_version_title">版本</string>
-    <string name="about_version">您正使用 %1$s</string>
-    <string name="about_maintainer_title">维护者</string>
-    <string name="about_developers_title">开发者</string>
-    <string name="about_developers_original_author">原作者</string>
-    <string name="about_translators_title">翻译人员</string>
-    <string name="about_translators_transifex">%1$s 上的 Nextcloud 社区</string>
-    <string name="about_testers_title">测试人员</string>
-    <string name="about_source_title">源代码</string>
-    <string name="about_source">此项目托管在GitHub上：%1$s</string>
-    <string name="about_issues_title">问题</string>
-    <string name="about_issues">你可以通过GitHub议题跟踪器报告bug、提议增强已有功能和请求新功能：%1$s</string>
-    <string name="about_translate_title">翻译</string>
-    <string name="about_translate">加入 Transifex 上的 Nextcloud 团队，帮助我们翻译这个应用程序：%1$s</string>
-    <string name="about_app_license_title">应用授权</string>
+  <resources>
     <string name="about_app_license">此程序通过 GNU 通用公共许可证 V3+ 授权。</string>
     <string name="about_app_license_button">查看授权</string>
-    <string name="about_icons_disclaimer_title">图标</string>
-    <string name="about_icons_disclaimer_app_icon">原始图标见 %1$s</string>
-    <string name="about_icons_disclaimer_mdi_icons">本应用所使用的所有其他图标为 %1$s，其由 Google Inc. 制作并在 Apache 2.0 许可证下授权</string>
-    <string name="about_icons_disclaimer_mdi">Material Design 图标</string>
-    <string name="about_credits_tab_title">致谢</string>
+    <string name="about_app_license_title">应用授权</string>
     <string name="about_contribution_tab_title">贡献</string>
+    <string name="about_credits_tab_title">致谢</string>
+    <string name="about_developers_original_author">原作者</string>
+    <string name="about_developers_title">开发者</string>
+    <string name="about_icons_disclaimer_app_icon">原始图标见 %1$s</string>
+    <string name="about_icons_disclaimer_mdi">Material Design 图标</string>
+    <string name="about_icons_disclaimer_mdi_icons">本应用所使用的所有其他图标为 %1$s，其由 Google Inc. 制作并在 Apache 2.0 许可证下授权</string>
+    <string name="about_icons_disclaimer_title">图标</string>
+    <string name="about_issues">你可以通过GitHub议题跟踪器报告bug、提议增强已有功能和请求新功能：%1$s</string>
+    <string name="about_issues_title">问题</string>
     <string name="about_license_tab_title">授权</string>
-
-    <string name="widget_note_list_title">笔记列表</string>
-    <string name="widget_note_list_placeholder">没有笔记</string>
-    <string name="widget_single_note_title">单个笔记</string>
-    <string name="widget_single_note_placeholder_tv">未找到笔记</string>
-    <string name="widget_not_logged_in">请在使用此小部件之前登录 Notes</string>
-    <string name="widget_entry_fav_contentDescription">星形图标用于将条目标注为收藏</string>
-
+    <string name="about_maintainer_title">维护者</string>
+    <string name="about_source">此项目托管在GitHub上：%1$s</string>
+    <string name="about_source_title">源代码</string>
+    <string name="about_testers_title">测试人员</string>
+    <string name="about_translate">加入 Transifex 上的 Nextcloud 团队，帮助我们翻译这个应用程序：%1$s</string>
+    <string name="about_translate_title">翻译</string>
+    <string name="about_translators_title">翻译人员</string>
+    <string name="about_translators_transifex">%1$s 上的 Nextcloud 社区</string>
+    <string name="about_version">您正使用 %1$s</string>
+    <string name="about_version_title">版本</string>
+    <string name="account_already_imported">账号已被导入</string>
+    <string name="account_imported">账号已导入</string>
+    <string name="action_back">返回</string>
+    <string name="action_create">新建笔记</string>
+    <string name="action_edit_save">保存</string>
+    <string name="action_formatting_help">格式</string>
+    <string name="action_note_deleted">已删除 %1$s</string>
+    <string name="action_note_restored">已恢复 %1$s</string>
+    <string name="action_search">搜索</string>
+    <string name="action_settings">设置</string>
+    <string name="action_sorting_method">排序方法</string>
+    <string name="action_trashbin">已删除的笔记</string>
+    <string name="action_uncategorized">未分类</string>
+    <string name="action_undo">撤销</string>
+    <string name="activity_chooser_send_file_title">发送</string>
+    <string name="activity_chooser_title">发送链接到…</string>
     <string name="activity_select_single_note">选择笔记</string>
-
-    <string name="shortcut_create_long">创建新便笺</string>
-
-    <string name="pref_value_font_normal">普通</string>
-    <string name="pref_value_wifi_and_mobile">在有 Wi-Fi 和移动数据网络时同步</string>
-    <string name="pref_value_lock">密码保护</string>
-
-    <string name="simple_error">错误</string>
-    <string name="simple_close">关闭</string>
-    <string name="simple_copy">复制</string>
-    <string name="simple_exception">异常</string>
-    <string name="pin_to_homescreen">固定到主屏幕</string>
-    <string name="note_has_been_deleted">此笔记已被删除</string>
     <string name="add_account">添加账号</string>
-
-    <string name="category_music">音乐</string>
-    <string name="category_movies">影片</string>
-    <string name="category_movie">影片</string>
-    <string name="category_work">工作</string>
-    <string name="category_todo">待办事项</string>
-    <string name="category_todos">待办事项</string>
+    <string name="add_another_public_share_link">添加其他链接</string>
+    <string name="add_category">添加 %1$s</string>
+    <string name="add_new_public_share">添加新的公共共享链接</string>
+    <string name="added_content">添加%1$s</string>
+    <string name="allow_resharing">允许再次共享</string>
+    <string name="app_name">笔记</string>
+    <string name="app_name_long">Nextcloud 笔记</string>
+    <string name="appear_offline">显示为离线</string>
+    <string name="appearance_and_behavior">外观和行为</string>
+    <string name="append_to_note">追加笔记</string>
+    <string name="away">离开</string>
+    <string name="backup">我们检测到应用程序一个不可恢复的状态。请备份您的未同步的更改并清除Notes应用程序的存储。</string>
+    <string name="busy">忙碌</string>
+    <string name="category_bake">烘焙</string>
     <string name="category_checklists">清单</string>
-    <string name="category_tasks">任务</string>
+    <string name="category_credentials">凭据</string>
+    <string name="category_food">食物</string>
+    <string name="category_game">游戏</string>
+    <string name="category_games">游戏</string>
+    <string name="category_gift">礼物</string>
+    <string name="category_gifts">礼物</string>
+    <string name="category_key">密钥</string>
+    <string name="category_keys">密钥</string>
+    <string name="category_movie">影片</string>
+    <string name="category_movies">影片</string>
+    <string name="category_music">音乐</string>
+    <string name="category_password">密码</string>
+    <string name="category_passwords">密码</string>
+    <string name="category_play">玩</string>
+    <string name="category_present">礼物</string>
+    <string name="category_presents">礼物</string>
+    <string name="category_readonly">只读</string>
     <string name="category_recipe">菜谱</string>
     <string name="category_recipes">菜谱</string>
     <string name="category_restaurant">饭馆</string>
     <string name="category_restaurants">饭馆</string>
-    <string name="category_food">食物</string>
-    <string name="category_bake">烘焙</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_key">密钥</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_keys">密钥</string>
-    <string name="category_password">密码</string>
-    <string name="category_passwords">密码</string>
-    <string name="category_credentials">凭据</string>
-    <string name="category_game">游戏</string>
-    <string name="category_games">游戏</string>
-    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
-    <string name="category_play">玩</string>
-    <string name="category_gift">礼物</string>
-    <string name="category_gifts">礼物</string>
-    <!-- Like a gift -->
-    <string name="category_present">礼物</string>
-    <!-- Like a gift -->
-    <string name="category_presents">礼物</string>
-
-    <string name="account_already_imported">账号已被导入</string>
-    <string name="no_notes_yet">还没有便签</string>
-    <string name="no_notes_yet_description">按 + 按钮创建新笔记</string>
-    <string name="simple_more">更多</string>
-    <string name="simple_move">移动</string>
-    <string name="category_readonly">只读</string>
-    <string name="no_category">没有分类</string>
-    <string name="add_category">添加 %1$s</string>
-    <string name="simple_checkbox">复选框</string>
-    <string name="unlock_notes">解锁笔记</string>
-    <string name="error_dialog_title">哦，不。所以会怎么样？🙁</string>
-    <string name="error_dialog_tip_token_mismatch_retry">请尝试强行关闭应用并重新打开。可能是与 Nextcloud 应用的连接不正确。</string>
-    <string name="error_dialog_tip_token_mismatch_clear_storage">如果问题持续存在，尝试通过清除 Nextcloud 和 Nextcloud 笔记两个应用的缓存来解决问题。</string>
-    <string name="error_dialog_tip_clear_storage">你可以通过打开应用信息，选择“存储>清除存储”来清除存储。⚠️ 警告：这将删除尚未同步的笔记！</string>
-    <string name="error_dialog_tip_files_outdated">您的 Nextcloud 应用似乎已经过时了。请访问 Play 商店或 F-Droid 以获取最新版本。</string>
-    <string name="error_dialog_tip_files_force_stop">您的 Nextcloud 应用似乎出现了问题。请尝试强行停止 Nextcloud 和 Nextcloud 笔记两个应用。</string>
-    <string name="error_dialog_tip_files_delete_storage">如果强行停止没有效果，您可以尝试清除两个应用的存储空间。</string>
-    <string name="error_dialog_timeout_instance">服务器没有在规定的时间内回答。请确保您的服务器实例在正常运行。</string>
-    <string name="error_dialog_timeout_toggle">检查您的网络连接。有时候关闭并重新开启移动数据或 Wi-Fi 有帮助。</string>
+    <string name="category_tasks">任务</string>
+    <string name="category_todo">待办事项</string>
+    <string name="category_todos">待办事项</string>
+    <string name="category_work">工作</string>
+    <string name="change_category_title">选择一个分类</string>
+    <string name="change_note_title">更改笔记标题</string>
+    <string name="choose_account">选择账号</string>
+    <string name="clear">清除</string>
+    <string name="clear_status_after">清除状态于</string>
+    <string name="clipboard_label">从%1$s复制文本</string>
+    <string name="clipboard_no_text_to_copy">没有收到要复制到剪贴板的文本</string>
+    <string name="clipboard_text_copied">已复制链接</string>
+    <string name="clipboard_unexpected_error">在复制内容到剪贴板时发生了一个预料外的错误</string>
+    <string name="common_delete">删除</string>
+    <string name="common_loading">正在加载 ...</string>
+    <string name="common_ok">确定</string>
+    <string name="context_based_formatting">基于上下文的格式弹出窗口 </string>
+    <string name="copy_link">复制链接</string>
+    <string name="could_not_retrieve_shares">无法检索共享</string>
+    <string name="delete_link">删除链接</string>
+    <string name="direct_editing_error">加载富文本编辑时出错</string>
+    <string name="dnd">勿扰</string>
+    <string name="ecosystem_apps_display_files">文件</string>
+    <string name="ecosystem_apps_display_more">更多</string>
+    <string name="ecosystem_apps_display_talk">通话</string>
+    <string name="ecosystem_apps_more">更多 Nextcloud 应用</string>
+    <string name="ecosystem_apps_talk">Nextcloud 通话</string>
+    <string name="email_pick_failed">未能选择电子邮箱地址</string>
+    <string name="error_action_open_battery_settings">电池设置</string>
+    <string name="error_action_open_deck_info">打开应用信息</string>
+    <string name="error_action_open_network">网络设置</string>
+    <string name="error_action_update_files_app">更新</string>
+    <string name="error_dialog_check_maintenance">请检查您的 Nextcloud 实例是否处于维护模式。</string>
     <string name="error_dialog_check_server">服务器响应的内容不正确。请检查您是否能通过网页界面访问笔记应用。</string>
     <string name="error_dialog_check_server_logs">您的 Nextcloud 配置有一些问题。请查看服务器日志。</string>
-    <string name="error_dialog_check_maintenance">请检查您的 Nextcloud 实例是否处于维护模式。</string>
     <string name="error_dialog_insufficient_storage">您的 Nextcloud 实例已经没有可用的存储空间了。请删除一些文件来允许本地的变更同步到云。</string>
-    <string name="error_dialog_we_need_info">我们需要以下技术信息来帮助您：</string>
-    <string name="error_dialog_server_app_enabled">请确保您已经在您的服务器上安装并已启用了“笔记”应用。</string>
-    <string name="error_dialog_redirect">您的服务器确实以 HTTP 302 状态代码响应，这意味着您的服务器上没有安装笔记应用，或者是配置错误。这可能是由 .htaccess 文件中或如OID客户端的 Nextcloud 应用程序的自定义重载造成的。</string>
-    <string name="error_dialog_tip_disable_battery_optimizations">请为Nextcloud应用以及笔记应用禁用所有电池优化设置。</string>
     <string name="error_dialog_min_version">Notes 安卓应用需要的 Nextcloud 安卓应用的最低版本为 3.18</string>
-    <string name="added_content">添加%1$s</string>
-    <string name="shared_text_empty">共享文本是空的</string>
-    <string name="append_to_note">追加笔记</string>
-    <string name="change_note_title">更改笔记标题</string>
-    <string name="menu_edit_title">编辑标题</string>
-    <string name="simple_security">安全</string>
-    <string name="appearance_and_behavior">外观和行为</string>
-    <string name="simple_synchronization">同步</string>
+    <string name="error_dialog_redirect">您的服务器确实以 HTTP 302 状态代码响应，这意味着您的服务器上没有安装笔记应用，或者是配置错误。这可能是由 .htaccess 文件中或如OID客户端的 Nextcloud 应用程序的自定义重载造成的。</string>
+    <string name="error_dialog_server_app_enabled">请确保您已经在您的服务器上安装并已启用了“笔记”应用。</string>
+    <string name="error_dialog_timeout_instance">服务器没有在规定的时间内回答。请确保您的服务器实例在正常运行。</string>
+    <string name="error_dialog_timeout_toggle">检查您的网络连接。有时候关闭并重新开启移动数据或 Wi-Fi 有帮助。</string>
+    <string name="error_dialog_tip_clear_storage">你可以通过打开应用信息，选择“存储>清除存储”来清除存储。⚠️ 警告：这将删除尚未同步的笔记！</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">请为Nextcloud应用以及笔记应用禁用所有电池优化设置。</string>
+    <string name="error_dialog_tip_files_delete_storage">如果强行停止没有效果，您可以尝试清除两个应用的存储空间。</string>
+    <string name="error_dialog_tip_files_force_stop">您的 Nextcloud 应用似乎出现了问题。请尝试强行停止 Nextcloud 和 Nextcloud 笔记两个应用。</string>
+    <string name="error_dialog_tip_files_outdated">您的 Nextcloud 应用似乎已经过时了。请访问 Play 商店或 F-Droid 以获取最新版本。</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">如果问题持续存在，尝试通过清除 Nextcloud 和 Nextcloud 笔记两个应用的缓存来解决问题。</string>
+    <string name="error_dialog_tip_token_mismatch_retry">请尝试强行关闭应用并重新打开。可能是与 Nextcloud 应用的连接不正确。</string>
+    <string name="error_dialog_title">哦，不。所以会怎么样？🙁</string>
+    <string name="error_dialog_we_need_info">我们需要以下技术信息来帮助您：</string>
+    <string name="error_maintenance_mode">服务器处于维护模式下</string>
+    <string name="error_no_network">没有网络连接</string>
+    <string name="error_setting_status_message">设置状态消息时出错！</string>
+    <string name="error_sync">同步失败：%1$s</string>
+    <string name="error_synchronization">同步失败</string>
+    <string name="error_unknown">出现未知错误。</string>
+    <string name="failed_update_ui">更新用户界面失败</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">没有可用于选择联系人的应用</string>
+    <string name="file_list_seconds_ago">几秒前</string>
+    <string name="formatting_help_cbf_body_1">Notes应用程序的主要设计目标是提供无干扰的工具。 因此您将能够使用Markdown设置文本格式。 对于下面提到的各种示例，您可以使用快捷方式，以便无需输入以下代码即可格式化笔记。</string>
+    <string name="formatting_help_cbf_body_2">只需选中一段文本或在您任何位置处的光标上单击，您将获得一个弹出包括以下默认实体的弹出菜单，包括%1$s，%2$s，%3$s和%4$s或%5$s。</string>
+    <string name="formatting_help_cbf_title">基于格式的文本</string>
+    <string name="formatting_help_checkboxes_body_1">要创建一个复选框，使用后跟方括号的列表</string>
+    <string name="formatting_help_checkboxes_body_2">第1项</string>
+    <string name="formatting_help_checkboxes_body_3">第2项</string>
+    <string name="formatting_help_checkboxes_title">复选框</string>
+    <string name="formatting_help_code_body_1">有多种使用Markdown设置代码样式的方法。 如果您有内联代码块，请将其包装在反引号中转义：</string>
+    <string name="formatting_help_code_body_2">Markdown支持代码块，可以允许您写数行无格式文本</string>
+    <string name="formatting_help_code_body_3">如果您想使用代码着色，请在这里设定使用的语言：</string>
+    <string name="formatting_help_code_title">代码</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_inline" translateable="false">‘%1$s’</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_codefence_outer" translateable="false">```` </string>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_images_alt">精致图片</string>
+    <string name="formatting_help_images_body_1">链接要么是以协议和域开头的完整 URL，要么是以 %1$s 字符开头的绝对路径。</string>
+    <string name="formatting_help_images_body_2">为了符合 Markdown 格式，请在图像 URL 中使用转义字符。这意味着采取将 URL 中的空格替换为 %1$s 等操作</string>
+    <string name="formatting_help_images_title">图片</string>
+    <string name="formatting_help_lists_body_1">有时您希望有一个已经自动编号过的列表：</string>
+    <string name="formatting_help_lists_body_2">一</string>
+    <string name="formatting_help_lists_body_3">二</string>
+    <string name="formatting_help_lists_body_4">三</string>
+    <string name="formatting_help_lists_body_5">有时您会想要列出要点：</string>
+    <string name="formatting_help_lists_body_6">通过一个短划线来开始新的一行</string>
+    <string name="formatting_help_lists_body_7">并且如果您有副要点，请在句子开始之前打两个空格</string>
+    <string name="formatting_help_lists_body_8">像这样</string>
+    <string name="formatting_help_lists_body_9">并且这样</string>
+    <string name="formatting_help_lists_title">列表</string>
+    <string name="formatting_help_structured_documents_body_1">有时您的文档中包含不同等级的标题或纲领是非常有用的。在行的开始使用%1$s来创建标题。在一行中重复%2$s以创建更小号的标题。</string>
+    <string name="formatting_help_structured_documents_body_2">这是三级标题</string>
+    <string name="formatting_help_structured_documents_body_3">您可以使用从%1$s到%2$s的共六个不同等级的标题大小。</string>
+    <string name="formatting_help_structured_documents_body_4">如果您想要引用某句话，请在句首添加%1$s符号。</string>
+    <string name="formatting_help_structured_documents_body_5">想象力比知识更重要。 知识是有限的，而想象力则充满世界。</string>
+    <string name="formatting_help_structured_documents_body_6">——阿尔伯特·爱因斯坦</string>
+    <string name="formatting_help_structured_documents_title">结构化文档</string>
+    <string name="formatting_help_tables_column">列 %1d</string>
+    <string name="formatting_help_tables_title">表格</string>
+    <string name="formatting_help_tables_value">值 %1d</string>
+    <string name="formatting_help_text_body">使用Markdown将使您非常容易的对%1$s加粗为%1$s，并且其他文本%2$s倾斜为%2$s。您可以%3$s删除%3$s某些文本并甚至可以[链接到Nextcloud](https://nextcloud.com)。</string>
+    <string name="formatting_help_text_title">文本 </string>
+    <string name="fourHours">4 小时</string>
+    <string name="http_status_code">HTTP 状态码：%1$d</string>
+    <string name="invisible">隐藏</string>
+    <string name="label_all_notes">所有笔记</string>
+    <string name="label_favorites">收藏</string>
+    <string name="link_share_allow_upload_and_editing">允许上传和编辑</string>
+    <string name="link_share_editing">编辑</string>
+    <string name="link_share_file_drop">文件拖放（仅上传）</string>
+    <string name="link_share_view_only">仅查看</string>
+    <string name="listview_updated_last_month">上月</string>
+    <string name="listview_updated_last_week">上周</string>
+    <string name="listview_updated_this_month">本月</string>
+    <string name="listview_updated_this_week">本周</string>
+    <string name="listview_updated_today">今天</string>
+    <string name="listview_updated_yesterday">昨天</string>
     <string name="manage_accounts">管理账号</string>
-    <string name="action_formatting_help">格式</string>
-
-
+    <string name="menu_change_category">分类</string>
+    <string name="menu_delete">删除</string>
+    <string name="menu_edit_title">编辑标题</string>
+    <string name="menu_favorite">收藏</string>
+    <string name="menu_preview">预览</string>
+    <string name="menu_share">共享</string>
+    <string name="mute_all_notifications">静音所有通知</string>
+    <string name="no_account_configured_yet">尚未配置账号</string>
+    <string name="no_actions">该用户没有操作</string>
+    <string name="no_browser_available">没有可用来打开链接的应用</string>
+    <string name="no_category">没有分类</string>
+    <string name="no_email_app_available">没有可处理邮件地址的应用</string>
+    <string name="no_notes_yet">还没有便签</string>
+    <string name="no_notes_yet_description">按 + 按钮创建新笔记</string>
+    <string name="no_other_accounts">您尚未配置任何其他帐户。</string>
     <string name="noteMode_plain_edit">普通编辑模式</string>
     <string name="noteMode_plain_preview">普通预览模式</string>
-    <string name="noteMode_rich_edit">富文本编辑模式</string>
     <string name="noteMode_remember_last">记住我上一次的选择</string>
-
-    <string-array name="fontSize_entries">
-        <item>小</item>
-        <item>中等</item>
-        <item>大</item>
-    </string-array>
-
-    <string-array name="darkmode_entries">
-        <item>浅色</item>
-        <item>深色</item>
-        <item>系统默认</item>
-    </string-array>
-
+    <string name="noteMode_rich_edit">富文本编辑模式</string>
+    <string name="note_has_been_deleted">此笔记已被删除</string>
+    <string name="note_share_activity_contact_no_permission">需要联系人权限</string>
+    <string name="note_share_activity_could_not_retrieve_url">无法获取地址</string>
+    <string name="note_share_activity_resharing_not_allowed">策略或权限阻止再次共享</string>
+    <string name="note_share_activity_search_text">名称，联合云 ID 或电子邮箱地址…</string>
+    <string name="note_share_activity_share_link">共享链接</string>
+    <string name="note_share_activity_shared_with_you">您已通过 %1$s 共享</string>
+    <string name="note_share_activity_subject_shared_with_you">已与你共享 “%1$s”</string>
+    <string name="note_share_detail_activity_advanced_settings">高级设置</string>
+    <string name="note_share_detail_activity_cancel">取消</string>
+    <string name="note_share_detail_activity_common_confirm">确认</string>
+    <string name="note_share_detail_activity_common_next">下一个</string>
+    <string name="note_share_detail_activity_hint_name">名称</string>
+    <string name="note_share_detail_activity_hint_note">备注</string>
+    <string name="note_share_detail_activity_hint_password">密码</string>
+    <string name="note_share_detail_activity_label_empty">标签不能是空白</string>
+    <string name="note_share_detail_activity_link_name">链接名称</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">请选择至少一个要共享的权限</string>
+    <string name="note_share_detail_activity_send_share">发送共享</string>
+    <string name="note_share_detail_activity_set_note">设置附注</string>
+    <string name="note_share_detail_activity_share_copy_link">共享并复制链接</string>
+    <string name="note_share_detail_activity_share_link_empty_password">您必须输入密码</string>
+    <string name="note_share_detail_activity_share_send_note">接收者备注</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">隐藏下载</string>
+    <string name="oneHour">1 小时</string>
+    <string name="online">在线</string>
+    <string name="online_status">在线状态</string>
+    <string name="pin_to_homescreen">固定到主屏幕</string>
+    <string name="pref_value_font_normal">普通</string>
+    <string name="pref_value_lock">密码保护</string>
+    <string name="pref_value_wifi_and_mobile">在有 Wi-Fi 和移动数据网络时同步</string>
+    <string name="progress_import">正导入 %2$d 中的笔记 %1$d …</string>
+    <string name="progress_import_indeterminate">导入笔记中…</string>
+    <string name="public_share_name">新名称</string>
+    <string name="remote">(远程)</string>
+    <string name="remove_account">移除 %1$s</string>
+    <string name="search_in_all">搜索所有笔记</string>
+    <string name="search_in_category">在%1$s中搜索</string>
+    <string name="set_message">设置消息</string>
+    <string name="set_online_status">在线状态</string>
+    <string name="settings_background_sync">后台同步</string>
+    <string name="settings_enable_direct_edit">直接编辑</string>
+    <string name="settings_enable_direct_edit_summary">禁用后，高级编辑器将隐藏。</string>
+    <string name="settings_file_suffix">文件扩展名</string>
+    <string name="settings_file_suffix_description">你的 Nextcloud 中新笔记的文件扩展名</string>
+    <string name="settings_file_suffix_success">新文件后缀：%1$s</string>
+    <string name="settings_font_size">字体大小</string>
+    <string name="settings_font_title">等宽字体</string>
+    <string name="settings_gridview">网格视图</string>
+    <string name="settings_keep_screen_on">保持屏幕常亮</string>
+    <string name="settings_keep_screen_on_summary">查看或编辑笔记时</string>
+    <string name="settings_lock">应用锁 （测试版）</string>
+    <string name="settings_lock_summary">设备凭据</string>
+    <string name="settings_note_mode">笔记的显示模式</string>
+    <string name="settings_note_mode_new">笔记打开行为</string>
+    <string name="settings_notes_path">设置文件夹</string>
+    <string name="settings_notes_path_description">在你的 Nextcloud 中储存你的笔记的文件夹 </string>
+    <string name="settings_notes_path_success">新笔记文件夹：%1$s</string>
+    <string name="settings_prevent_screen_capture">防止截屏</string>
+    <string name="settings_show_ecosystem_apps">显示应用切换器</string>
+    <string name="settings_show_ecosystem_apps_summary">导航栏中的 Nextcloud 应用推荐</string>
+    <string name="settings_theme_title">主题</string>
+    <string name="settings_wifi_only">仅在Wi-Fi下同步</string>
+    <string name="share">共享</string>
+    <string name="share_dialog_title">共享</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_expiration_date_label">过期 %1$s</string>
+    <string name="share_file">共享 %1$s</string>
+    <string name="share_group_clarification">%1$s (群组)</string>
+    <string name="share_internal_link">共享内部链接</string>
+    <string name="share_internal_link_to_file_text">内部共享链接仅对有权访问此文件的用户有效</string>
+    <string name="share_internal_link_to_folder_text">内部共享链接仅对有权访问此文件夹的用户有效</string>
+    <string name="share_known_remote_on_clarification">在 %1$s</string>
+    <string name="share_link">共享链接</string>
+    <string name="share_link_password_title">输入密码</string>
+    <string name="share_link_with_label">共享链接 (%1$s)</string>
+    <string name="share_no_expiration_date_label">设置过期日期</string>
+    <string name="share_no_password_title">设置密码</string>
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">输入一个可选密码</string>
+    <string name="share_password_dialog_fragment_skip">跳过</string>
+    <string name="share_password_title">密码已受保护</string>
+    <string name="share_permission_can_edit">可以编辑</string>
+    <string name="share_permission_file_drop">文件拖放</string>
+    <string name="share_permission_secure_file_drop">安全文件拖放</string>
+    <string name="share_permission_view_only">仅查看</string>
+    <string name="share_permissions">共享权限</string>
+    <string name="share_remote_clarification">%1$s (远程)</string>
+    <string name="share_room_clarification">%1$s (对话)</string>
+    <string name="share_send_new_email">发送新邮件</string>
+    <string name="share_settings">设置</string>
+    <string name="share_via_link_section_title">共享链接</string>
+    <string name="share_via_link_send_link_label">发送链接</string>
+    <string name="share_via_link_unset_password">取消设置</string>
+    <string name="share_with_title">共享给…</string>
+    <string name="shared_text_empty">共享文本是空的</string>
+    <string name="shortcut_create_long">创建新便笺</string>
+    <string name="simple_about">关于</string>
+    <string name="simple_backup">备份</string>
+    <string name="simple_cancel">取消</string>
+    <string name="simple_checkbox">复选框</string>
+    <string name="simple_close">关闭</string>
+    <string name="simple_copy">复制</string>
+    <string name="simple_edit">编辑</string>
+    <string name="simple_error">错误</string>
+    <string name="simple_exception">异常</string>
+    <string name="simple_link">链接</string>
+    <string name="simple_more">更多</string>
+    <string name="simple_move">移动</string>
+    <string name="simple_next">下一则 </string>
+    <string name="simple_other">其他</string>
+    <string name="simple_prev">上一则</string>
+    <string name="simple_remove">移除</string>
+    <string name="simple_security">安全</string>
+    <string name="simple_switch">切换</string>
+    <string name="simple_synchronization">同步</string>
+    <string name="sort_alphabetically">按照字母表顺序排序</string>
+    <string name="sort_last_modified">按修改日期排序</string>
+    <string name="status_message">状态消息</string>
+    <string name="switch_to_plain_editing">切换到普通编辑模式</string>
+    <string name="thirtyMinutes">30 分钟</string>
+    <string name="thisWeek">本周后</string>
+    <string name="today">今天</string>
+    <string name="unlock_notes">解锁笔记</string>
+    <string name="username">用户名</string>
+    <string name="welcome_text">欢迎来到 %1$s</string>
+    <string name="whats_your_status">您的状态如何？</string>
+    <string name="widget_entry_fav_contentDescription">星形图标用于将条目标注为收藏</string>
+    <string name="widget_not_logged_in">请在使用此小部件之前登录 Notes</string>
+    <string name="widget_note_list_placeholder">没有笔记</string>
+    <string name="widget_note_list_title">笔记列表</string>
+    <string name="widget_single_note_placeholder_tv">未找到笔记</string>
+    <string name="widget_single_note_title">单个笔记</string>
+    <string name="write_email">发送电子邮件</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">要添加账号，你必须连接到互联网。</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="other">剩余 %1$d 个下载</item>
+    </plurals>
     <plurals name="ab_selected">
         <item quantity="other">已选择 %d 个</item>
     </plurals>
@@ -311,123 +364,7 @@
     <plurals name="share_multiple">
         <item quantity="other">分享%1$d条笔记的内容</item>
     </plurals>
-
-    <string name="formatting_help_divider" translateable="false">---</string>
-    <string name="formatting_help_codefence_inline" translateable="false">‘%1$s’</string>
-    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
-    <string name="formatting_help_codefence" translateable="false">```</string>
-    <string name="formatting_help_codefence_outer" translateable="false">```` </string>
-    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
-    <string name="formatting_help_cbf_title">基于格式的文本</string>
-    <string name="formatting_help_cbf_body_1">Notes应用程序的主要设计目标是提供无干扰的工具。 因此您将能够使用Markdown设置文本格式。 对于下面提到的各种示例，您可以使用快捷方式，以便无需输入以下代码即可格式化笔记。</string>
-    <string name="formatting_help_cbf_body_2">只需选中一段文本或在您任何位置处的光标上单击，您将获得一个弹出包括以下默认实体的弹出菜单，包括%1$s，%2$s，%3$s和%4$s或%5$s。</string>
-
-    <string name="formatting_help_text_title">文本 </string>
-    <string name="formatting_help_text_body">使用Markdown将使您非常容易的对%1$s加粗为%1$s，并且其他文本%2$s倾斜为%2$s。您可以%3$s删除%3$s某些文本并甚至可以[链接到Nextcloud](https://nextcloud.com)。</string>
-
-    <string name="formatting_help_lists_title">列表</string>
-    <string name="formatting_help_lists_body_1">有时您希望有一个已经自动编号过的列表：</string>
-    <string name="formatting_help_lists_body_2">一</string>
-    <string name="formatting_help_lists_body_3">二</string>
-    <string name="formatting_help_lists_body_4">三</string>
-    <string name="formatting_help_lists_body_5">有时您会想要列出要点：</string>
-    <string name="formatting_help_lists_body_6">通过一个短划线来开始新的一行</string>
-    <string name="formatting_help_lists_body_7">并且如果您有副要点，请在句子开始之前打两个空格</string>
-    <string name="formatting_help_lists_body_8">像这样</string>
-    <string name="formatting_help_lists_body_9">并且这样</string>
-
-    <string name="formatting_help_checkboxes_title">复选框</string>
-    <string name="formatting_help_checkboxes_body_1">要创建一个复选框，使用后跟方括号的列表</string>
-    <string name="formatting_help_checkboxes_body_2">第1项</string>
-    <string name="formatting_help_checkboxes_body_3">第2项</string>
-
-    <string name="formatting_help_structured_documents_title">结构化文档</string>
-    <string name="formatting_help_structured_documents_body_1">有时您的文档中包含不同等级的标题或纲领是非常有用的。在行的开始使用%1$s来创建标题。在一行中重复%2$s以创建更小号的标题。</string>
-    <string name="formatting_help_structured_documents_body_2">这是三级标题</string>
-    <string name="formatting_help_structured_documents_body_3">您可以使用从%1$s到%2$s的共六个不同等级的标题大小。</string>
-    <string name="formatting_help_structured_documents_body_4">如果您想要引用某句话，请在句首添加%1$s符号。</string>
-    <string name="formatting_help_structured_documents_body_5">想象力比知识更重要。 知识是有限的，而想象力则充满世界。</string>
-    <string name="formatting_help_structured_documents_body_6">——阿尔伯特·爱因斯坦</string>
-
-    <string name="formatting_help_code_title">代码</string>
-    <string name="formatting_help_code_body_1">有多种使用Markdown设置代码样式的方法。 如果您有内联代码块，请将其包装在反引号中转义：</string>
-    <string name="formatting_help_code_body_2">Markdown支持代码块，可以允许您写数行无格式文本</string>
-    <string name="formatting_help_code_body_3">如果您想使用代码着色，请在这里设定使用的语言：</string>
-
-    <string name="formatting_help_tables_title">表格</string>
-    <!-- Column header of a sample table -->
-    <string name="formatting_help_tables_column">列 %1d</string>
-    <!-- Table cell value of a sample table -->
-    <string name="formatting_help_tables_value">值 %1d</string>
-
-    <string name="formatting_help_images_body_1">链接要么是以协议和域开头的完整 URL，要么是以 %1$s 字符开头的绝对路径。</string>
-    <string name="formatting_help_images_body_2">为了符合 Markdown 格式，请在图像 URL 中使用转义字符。这意味着采取将 URL 中的空格替换为 %1$s 等操作</string>
-    <string name="formatting_help_images_title">图片</string>
-    <string name="formatting_help_images_alt">精致图片</string>
-
-    <string name="simple_other">其他</string>
-    <string name="sort_last_modified">按修改日期排序</string>
-    <string name="sort_alphabetically">按照字母表顺序排序</string>
-    <string name="error_action_open_battery_settings">电池设置</string>
-    <string name="error_action_open_deck_info">打开应用信息</string>
-    <string name="error_action_open_network">网络设置</string>
-    <string name="error_action_update_files_app">更新</string>
-    <string name="no_account_configured_yet">尚未配置账号</string>
-    <string name="no_other_accounts">您尚未配置任何其他帐户。</string>
-    <string name="choose_account">选择账号</string>
-    <string name="context_based_formatting">基于上下文的格式弹出窗口 </string>
     <plurals name="remove_account_message">
         <item quantity="other">移除账号 %1$s 也将不可恢复地删除 %2$d 未同步的更改</item>
     </plurals>
-    <string name="remove_account">移除 %1$s</string>
-
-    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">要添加账号，你必须连接到互联网。</string>
-    <string name="settings_notes_path">设置文件夹</string>
-
-    <string name="simple_next">下一则 </string>
-    <string name="simple_prev">上一则</string>
-    <string name="simple_backup">备份</string>
-    <string name="backup">我们检测到应用程序一个不可恢复的状态。请备份您的未同步的更改并清除Notes应用程序的存储。</string>
-    <string name="settings_notes_path_description">在你的 Nextcloud 中储存你的笔记的文件夹 </string>
-    <string-array name="settings_file_suffixes">
-        <item translatable="false">.txt </item>
-        <item translatable="false">.md </item>
-    </string-array>
-    <string name="settings_notes_path_success">新笔记文件夹：%1$s</string>
-    <string name="settings_file_suffix">文件扩展名</string>
-    <string name="settings_file_suffix_description">你的 Nextcloud 中新笔记的文件扩展名</string>
-    <string name="settings_file_suffix_success">新文件后缀：%1$s</string>
-    <string name="http_status_code">HTTP 状态码：%1$d</string>
-    <string name="progress_import_indeterminate">导入笔记中…</string>
-    <string name="progress_import">正导入 %2$d 中的笔记 %1$d …</string>
-    <string name="account_imported">账号已导入</string>
-    <string name="direct_editing_error">加载富文本编辑时出错</string>
-    <string name="switch_to_plain_editing">切换到普通编辑模式</string>
-    <string name="action_back">返回</string>
-    <string name="set_online_status">在线状态</string>
-    <string name="status_message">状态消息</string>
-    <string name="whats_your_status">您的状态如何？</string>
-    <string name="clear_status_after">清除状态于</string>
-    <string name="clear">清除</string>
-    <string name="set_message">设置消息</string>
-    <string name="today">今天</string>
-    <string name="thirtyMinutes">30 分钟</string>
-    <string name="oneHour">1 小时</string>
-    <string name="fourHours">4 小时</string>
-    <string name="thisWeek">本周后</string>
-    <string name="error_setting_status_message">设置状态消息时出错！</string>
-    <string name="file_list_seconds_ago">几秒前</string>
-    <string name="online_status">在线状态</string>
-    <string name="online">在线</string>
-    <string name="dnd">勿扰</string>
-    <string name="away">离开</string>
-    <string name="invisible">隐藏</string>
-    <string name="busy">忙碌</string>
-    <string name="mute_all_notifications">静音所有通知</string>
-    <string name="appear_offline">显示为离线</string>
-    <string name="ecosystem_apps_display_files">文件</string>
-    <string name="ecosystem_apps_display_talk">通话</string>
-    <string name="ecosystem_apps_talk">Nextcloud 通话</string>
-    <string name="ecosystem_apps_more">更多 Nextcloud 应用</string>
-    <string name="ecosystem_apps_display_more">更多</string>
 </resources>

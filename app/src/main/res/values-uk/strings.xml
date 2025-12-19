@@ -1,331 +1,379 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Nextcloud Notes - Android Client
-  ~
-  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
-  ~ SPDX-License-Identifier: GPL-3.0-or-later
--->
-<resources>
-    <string name="app_name">Нотатки</string>
-    <string name="app_name_long">Нотатки для Nextcloud</string>
-    <string name="label_all_notes">Усі нотатки</string>
-    <string name="label_favorites">Із зірочкою</string>
+  <resources>
+    <string name="about_app_license">Цей застосунок ліцензовано ліцензією GNU GENERAL PUBLIC LICENSE v3+.</string>
+    <string name="about_app_license_button">Переглянути ліцензію</string>
+    <string name="about_app_license_title">Ліцензія застосунку</string>
+    <string name="about_contribution_tab_title">Внесок</string>
+    <string name="about_credits_tab_title">Подяки</string>
+    <string name="about_developers_original_author">перший автор</string>
+    <string name="about_developers_title">Розробники</string>
+    <string name="about_icons_disclaimer_app_icon">Для оригінального розміру значка див. %1$s.</string>
+    <string name="about_icons_disclaimer_mdi">Material Design Icons</string>
+    <string name="about_icons_disclaimer_mdi_icons">Усі значки, які було використано у цьому застосунку, є %1$s, розроблені Google Inc. та мають ліцензію Apache 2.0 License. </string>
+    <string name="about_icons_disclaimer_title">Значки</string>
+    <string name="about_issues">Ви можете повідомляти про помилки, пропонувати удосконалення та надсилати запити на додаткові функції через систему відстеження вад GitHub: %1$s</string>
+    <string name="about_issues_title">Помилики</string>
+    <string name="about_license_tab_title">Ліцензія</string>
+    <string name="about_maintainer_title">Утримувач</string>
+    <string name="about_source">Цей проєкт розміщено на GitHub: %1$s</string>
+    <string name="about_source_title">Вихідний код</string>
+    <string name="about_testers_title">Тестувальники</string>
+    <string name="about_translate">Приєднуйтесь до команди Nextcloud на Transifex та допоможіть нам перекласти цей застосунок: %1$s</string>
+    <string name="about_translate_title">Перекласти</string>
+    <string name="about_translators_title">Перекладачі</string>
+    <string name="about_translators_transifex">Спільнота Nextcloud на %1$s</string>
+    <string name="about_version">Ви використовуєте %1$s</string>
+    <string name="about_version_title">Версія</string>
+    <string name="account_already_imported">Обліковий запис вже імпортовано</string>
+    <string name="account_imported">Обліковий запис імпортовано.</string>
+    <string name="account_switch_dialog_status_fetching_error_message">Не вдалося отримати статус, спробуйте ще раз.</string>
+    <string name="action_back">Назад</string>
     <string name="action_create">Новий запис</string>
-    <string name="welcome_text">Вітаємо у %1$s</string>
-    <string name="action_settings">Налаштування</string>
-    <string name="action_trashbin">Вилучені нотатки</string>
-    <string name="action_search">Пошук</string>
-    <string name="action_sorting_method">Спосіб впорядкування</string>
-    <string name="simple_cancel">Скасувати</string>
-    <string name="simple_switch">Перемкнути</string>
-    <string name="simple_edit">Редагувати</string>
-    <string name="simple_remove">Вилучити</string>
     <string name="action_edit_save">Зберегти</string>
-    <string name="simple_about">Про застосунок</string>
-    <string name="simple_link">Посилання</string>
+    <string name="action_formatting_help">Форматування</string>
     <string name="action_note_deleted">Вилучено %1$s</string>
     <string name="action_note_restored">Відновлено %1$s</string>
-    <string name="action_undo">скасувати зміни</string>
+    <string name="action_search">Пошук</string>
+    <string name="action_settings">Налаштування</string>
+    <string name="action_sorting_method">Спосіб впорядкування</string>
+    <string name="action_trashbin">Вилучені нотатки</string>
     <string name="action_uncategorized">Некатегоризоване</string>
-    <string name="menu_delete">Вилучити</string>
+    <string name="action_undo">скасувати зміни</string>
+    <string name="activity_chooser_send_file_title">Надіслати</string>
+    <string name="activity_chooser_title">Надіслати посилання до…</string>
+    <string name="activity_select_single_note">Оберіть нотатку</string>
+    <string name="add_account">Додати обліковий запис</string>
+    <string name="add_another_public_share_link">Додати інше посилання</string>
+    <string name="add_category">Додати %1$s</string>
+    <string name="add_new_public_share">Додати нове публічне посилання</string>
+    <string name="added_content">Додано \"%1$s\"</string>
+    <string name="allow_resharing">Дозволяти передавати у спільний доступ іншим</string>
+    <string name="app_name">Нотатки</string>
+    <string name="app_name_long">Нотатки для Nextcloud</string>
+    <string name="appear_offline">Перебуваю поза мережею</string>
+    <string name="appearance_and_behavior">Вигляд і поведінка</string>
+    <string name="append_to_note">Доповнити нотатку</string>
+    <string name="away">Відсутній(-я)</string>
+    <string name="backup">Ми виявили непоправний стан застосунку. Зробіть резервну копію ваших несинхронізованих змін і очистіть сховище застосунку Notes.</string>
+    <string name="busy">Зайнято</string>
+    <string name="category_bake">Випічка</string>
+    <string name="category_checklists">Контрольні списки</string>
+    <string name="category_credentials">Облікові дані</string>
+    <string name="category_food">Їжа</string>
+    <string name="category_game">Гра</string>
+    <string name="category_games">Ігри</string>
+    <string name="category_gift">Подарунок</string>
+    <string name="category_gifts">Подарунки</string>
+    <string name="category_key">Ключ</string>
+    <string name="category_keys">Ключі</string>
+    <string name="category_movie">Фільм</string>
+    <string name="category_movies">Відео</string>
+    <string name="category_music">Музика</string>
+    <string name="category_password">Пароль</string>
+    <string name="category_passwords">Паролі</string>
+    <string name="category_play">Грати</string>
+    <string name="category_present">Презентувати</string>
+    <string name="category_presents">Подарунки</string>
+    <string name="category_readonly">Тільки читання</string>
+    <string name="category_recipe">Рецепт</string>
+    <string name="category_recipes">Рецепти</string>
+    <string name="category_restaurant">Ресторан</string>
+    <string name="category_restaurants">Ресторани</string>
+    <string name="category_tasks">Завдання</string>
+    <string name="category_todo">Завдання</string>
+    <string name="category_todos">Завдання</string>
+    <string name="category_work">Робочий</string>
+    <string name="change_category_title">Оберіть категорію</string>
+    <string name="change_note_title">Змінити заголовок нотатки</string>
+    <string name="choose_account">Оберіть обліковий запис</string>
+    <string name="clear">Очистити</string>
+    <string name="clear_status_after">Очистити статус після</string>
+    <string name="clipboard_label">Текст скопійовано з %1$s</string>
+    <string name="clipboard_no_text_to_copy">Відсутній текст для копіювання до буферу обміну</string>
+    <string name="clipboard_text_copied">Посилання скопійовано</string>
+    <string name="clipboard_unexpected_error">Неочікувана помилка під час копіювання до буферу обміну</string>
+    <string name="common_delete">Вилучати</string>
+    <string name="common_loading">Завантаження…</string>
+    <string name="common_ok">Гаразд</string>
+    <string name="context_based_formatting">Контекстне форматування</string>
+    <string name="copy_link">Копіювати посилання</string>
+    <string name="could_not_retrieve_shares">Не вдалося отримати спільні дані</string>
+    <string name="delete_link">Посилання на вилучення</string>
+    <string name="direct_editing_error">Помилка під час завантаження форматованого редагування</string>
+    <string name="dnd">Не турбувати</string>
+    <string name="dontClear">Залишити поточний</string>
+    <string name="ecosystem_apps_display_files">Файли</string>
+    <string name="ecosystem_apps_display_more">Більше</string>
+    <string name="ecosystem_apps_display_talk">Розмови</string>
+    <string name="ecosystem_apps_more">Більше застосунків Nextcloud</string>
+    <string name="ecosystem_apps_talk">Розмови Nextcloud</string>
+    <string name="email_pick_failed">Не вдалося вибрати ел. адресу.</string>
+    <string name="error_action_open_battery_settings">Налаштування батареї</string>
+    <string name="error_action_open_deck_info">Відкрити інформацію про застосунок</string>
+    <string name="error_action_open_network">Налаштування мережі</string>
+    <string name="error_action_update_files_app">Оновлення</string>
+    <string name="error_dialog_check_maintenance">Будь ласка, перевірте, чи ваш сервер Nextcloud наразі не перебуває в режимі обслуговування.</string>
+    <string name="error_dialog_check_server">Отримано неправильну відповідь від сервера. Перевірте, чи ви маєте доступ до вашіх нотаток через вебінтерфейс.</string>
+    <string name="error_dialog_check_server_logs">Виникла проблема з налаштуванням Nextcloud. Будь ласка, подивіться файли журналу сервера.</string>
+    <string name="error_dialog_insufficient_storage">Ваш сервер Nextcloud не має вільного місця. Будь ласка, вилучіть непотрібні файлі, щоби можна було виконувати синхронізацію змін на пристрої з хмарою.</string>
+    <string name="error_dialog_min_version">Застосунок \"Нотатки\" для Android вимагає версію не менше 3.18 застосунку Nextcloud для Android.</string>
+    <string name="error_dialog_redirect">Ваш сервер відповів кодом стану HTTP 302, що означає, що ви не встановили застосунок \"Нотатки\" на своєму сервері або щось налаштовано неправильно. Це може бути спричинено нестандартними перевизначеннями у файлі .htaccess або програмами Nextcloud, як-от OID-клієнт.</string>
+    <string name="error_dialog_server_app_enabled">Переконайтесь, що ви встановили та увімкнули застосунок \"Нотатки\" на своєму сервері.</string>
+    <string name="error_dialog_timeout_instance">За відведений час відповіді від вашого сервера не надійшло. Переконайтесь, що ваш сервер працює добре.</string>
+    <string name="error_dialog_timeout_toggle">Перевірте підключення до мережі. Іноді може допомогти вимкнення та ввімкнення мобільного передавання даних або Wi-Fi.</string>
+    <string name="error_dialog_tip_clear_storage">Щоби очистити сховище, відкрийте вкладку інформації у застосунку та виберіть Пам\'ять → Очистити пам\'ять. ⚠️ Увага: це призведе до вилучення усіх нотаток, які ще не було синхронізовано!</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Вимкніть усі оптимізації батареї для застосунків Nextcloud та Нотатки Nextcloud.</string>
+    <string name="error_dialog_tip_files_delete_storage">Якщо примусове їх завершення не допомагає, спробуйте очистити сховище обох застосунків.</string>
+    <string name="error_dialog_tip_files_force_stop">Щось, здається, не так із вашим застосунком Nextcloud. Спробуйте примусово зупинити обидва застосунки: Nextcloud та Нотатки Nextcloud.</string>
+    <string name="error_dialog_tip_files_outdated">Ваш застосунок Nextcloud може бути застарілим. Будь ласка, відвідайте Play Маркет або F-Droid, щоби оновити ваш застосунок до останньої версії.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Якщо проблема не зникає, спробуйте очистити пам’ять обох застосунків: Nextcloud та Нотатки Nextcloud.</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Спробуйте примусово закрити застосунок та наново запустити. Можливо, встановлено неправильне з\'єднання із застосунком Nextcloud.</string>
+    <string name="error_dialog_title">От халепа!</string>
+    <string name="error_dialog_we_need_info">Нам потрібна наступна технічна інформація, щоб допомогти вам:</string>
+    <string name="error_maintenance_mode">Сервер у режимі обслуговування</string>
+    <string name="error_no_network">Відсутнє підключення до мережі</string>
+    <string name="error_setting_status_message">Помилка під час встановлення повідмлення про статус!</string>
+    <string name="error_sync">Синхронізація не вдалася: %1$s</string>
+    <string name="error_synchronization">Синхронізація не вдалася</string>
+    <string name="error_unknown">Сталася невідома помилка.</string>
+    <string name="failed_the_remove_share">Не вдалося створити вилучити ресурс</string>
+    <string name="failed_update_ui">Неможливо оновити інтерфейс</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Відсутній застосунок для вибору контактів</string>
+    <string name="file_list_seconds_ago">кілька секунд тому</string>
+    <string name="formatting_help_cbf_body_1">Застосунок \"Нотатки\" надає можливість вести нотатки без відволікання уваги. Хоча ви зможете форматувати свої тексти за допомогою Markdown. Для різних із наведених нижче прикладів ви можете використовувати ярлики, щоб форматувати нотатки, не вводячи коди нижче.</string>
+    <string name="formatting_help_cbf_body_2">Просто виберіть діапазон тексту або натисніть на курсор у будь-якій позиції, і ви отримаєте спливаюче меню, де поряд із типовими елементами %1$s, %2$s, %3$s містяться елементи на зразок %4$s або %5$s.</string>
+    <string name="formatting_help_cbf_title">Контекстне форматування</string>
+    <string name="formatting_help_checkboxes_body_1">Щоб створити прапорець, використовуйте список, за яким слідують дужки</string>
+    <string name="formatting_help_checkboxes_body_2">Пункт 1</string>
+    <string name="formatting_help_checkboxes_body_3">Пункт 2</string>
+    <string name="formatting_help_checkboxes_title">Прапорці</string>
+    <string name="formatting_help_code_body_1">Існує багато різних способів стилізувати код за допомогою Markdown. Якщо у вас є вбудовані блоки коду, оберніть їх символами зворотнього апострофу:</string>
+    <string name="formatting_help_code_body_2">Markdown також підтримує те, що називається огородженням коду, що дозволяє використовувати кілька рядків без відступу:</string>
+    <string name="formatting_help_code_body_3">А якщо ви хочете використовувати підсвічування синтаксису, додайте назву мови:</string>
+    <string name="formatting_help_code_title">Код</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_images_alt">Чудове зображення</string>
+    <string name="formatting_help_images_body_1">Посилання мають бути або повними URL-адресами, що починаються з протоколу та домену, або абсолютними шляхами, що починаються з символу %1$s.</string>
+    <string name="formatting_help_images_body_2">Щоб відповідати формату Markdown, будь ласка, використовуйте escape-символи в URL-адресі зображення. Це означає, наприклад, замінити пробіли на %1$s в URL-адресі.</string>
+    <string name="formatting_help_images_title">Зображення</string>
+    <string name="formatting_help_lists_body_1">Іноді вам потрібні нумеровані списки:</string>
+    <string name="formatting_help_lists_body_2">Один</string>
+    <string name="formatting_help_lists_body_3">Два</string>
+    <string name="formatting_help_lists_body_4">Три</string>
+    <string name="formatting_help_lists_body_5">Іноді вам потрібні ненумеровані списки:</string>
+    <string name="formatting_help_lists_body_6">Почніть рядок з риски</string>
+    <string name="formatting_help_lists_body_7">А якщо у вас є підпункти, поставте два пробіли перед тире або зірочку:</string>
+    <string name="formatting_help_lists_body_8">Ось так</string>
+    <string name="formatting_help_lists_body_9">І так</string>
+    <string name="formatting_help_lists_title">Списки</string>
+    <string name="formatting_help_structured_documents_body_1">Іноді корисно мати різні рівні заголовків для структурування документів. Почніть рядки з %1$s, щоб створити заголовки. Кілька %2$s поспіль позначають менші розміри заголовків.</string>
+    <string name="formatting_help_structured_documents_body_2">Це заголовок третього рівня</string>
+    <string name="formatting_help_structured_documents_body_3">Ви можете використовувати один %1$s аж до шести %2$s для різних розмірів заголовка.</string>
+    <string name="formatting_help_structured_documents_body_4">Якщо ви хочете процитувати когось, використовуйте символ %1$s перед рядком:</string>
+    <string name="formatting_help_structured_documents_body_5">Уява важливіша за знання. Знання обмежене. Уява охоплює весь світ.</string>
+    <string name="formatting_help_structured_documents_body_6">- Альберт Ейнштейн</string>
+    <string name="formatting_help_structured_documents_title">Структуровані документи</string>
+    <string name="formatting_help_tables_column">Колонка %1d</string>
+    <string name="formatting_help_tables_title">Таблиці</string>
+    <string name="formatting_help_tables_value">Значення %1d</string>
+    <string name="formatting_help_text_body">За допомогою Markdown дуже легко зробити деякі слова %1$sжирними%1$s, а інші слова %2$sкурсивом%2$s. Ви можете %3$sперекреслити%3$s деякі слова та навіть [послатися до Nextcloud](https://nextcloud.com).</string>
+    <string name="formatting_help_text_title">Текст</string>
+    <string name="fourHours">4 години</string>
+    <string name="http_status_code">Код стану HTTP: %1$d</string>
+    <string name="invisible">Невидимка</string>
+    <string name="label_all_notes">Усі нотатки</string>
+    <string name="label_favorites">Із зірочкою</string>
+    <string name="link_share_allow_upload_and_editing">Може завантажувати та редагувати</string>
+    <string name="link_share_editing">Редагування</string>
+    <string name="link_share_file_drop">Додати файл (тільки завантажування)</string>
+    <string name="link_share_view_only">Лише перегляд</string>
+    <string name="listview_no_content">Відсутній вміст</string>
+    <string name="listview_updated_last_month">Минулого місяця</string>
+    <string name="listview_updated_last_week">Минулого тижня</string>
+    <string name="listview_updated_this_month">Цього місяця</string>
+    <string name="listview_updated_this_week">Цього тижня</string>
+    <string name="listview_updated_today">Сьогодні</string>
+    <string name="listview_updated_yesterday">Вчора</string>
+    <string name="manage_accounts">Облікові записи</string>
     <string name="menu_change_category">Категорія</string>
+    <string name="menu_delete">Вилучити</string>
+    <string name="menu_edit_title">Редагувати</string>
     <string name="menu_favorite">Із зірочкою</string>
     <string name="menu_preview">Перегляд</string>
     <string name="menu_share">Спільний доступ</string>
-    <string name="common_loading">Завантаження…</string>
-
-
-    <string name="search_in_category">Шукати в %1$s</string>
-    <string name="search_in_all">Шукати всі нотатки</string>
-
-    <string name="change_category_title">Оберіть категорію</string>
-
-    <!-- UsersAndGroupsSearchProvider -->
-    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
-    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
-
-    <!-- NoteShareActivity -->
+    <string name="mute_all_notifications">Вимкнути всі сповіщення</string>
+    <string name="no_account_configured_yet">Жодного облікового запису ще не налаштовано</string>
+    <string name="no_actions">Відсутні дії для цього користувача</string>
+    <string name="no_browser_available">Відсутні застосунки для обробки посилань</string>
+    <string name="no_category">Без категорії</string>
+    <string name="no_email_app_available">Відсутній застосунок для опрацювання адреси ел. пошти</string>
+    <string name="no_notes_yet">Нотатки поки відсутні</string>
+    <string name="no_notes_yet_description">Натисніть кнопку \"+\", щоб створити нову нотатку</string>
+    <string name="no_other_accounts">Ви ще не налаштували жодного іншого облікового запису.</string>
+    <string name="noteMode_plain_edit">Режим простого редагування</string>
+    <string name="noteMode_plain_preview">Режим простого перегляду</string>
+    <string name="noteMode_remember_last">Запам\'ятовувати останній вибір</string>
+    <string name="noteMode_rich_edit">Режим форматованого редагування</string>
+    <string name="note_has_been_deleted">Цю нотатку було вилучено</string>
     <string name="note_share_activity_activity_icon_content_description">значок активності нотатки</string>
-    <string name="note_share_activity_share_icon_content_description">значок нотатки поділитися</string>
-    <string name="note_share_activity_external_icon_content_description">значок нотатки поділитися зовнішнім спільним ресурсом</string>
-    <string name="note_share_activity_copy_icon_content_description">значок нотатки копіювати спільний ресурс</string>
-    <string name="note_share_activity_more_icon_content_description">значок нотатки поділитися більше</string>
-    <string name="note_share_activity_icon_content_description">значок нотатки поділитися</string>
-    <string name="note_share_activity_user_icon_content_description">значок нотатки поділитися з користувачем</string>
-    <string name="note_share_activity_contact_icon_content_description">значок нотатки контакт спільного ресурсу</string>
-    <string name="note_share_activity_shared_with_you">%1$s поділив(-ла-)ся з вами</string>
-    <string name="note_share_activity_search_text">Ім\'я, ідентифікатор об\'єднаної хмари або ел.адреса...</string>
-    <string name="note_share_activity_share_link">Передати у публічний доступ</string>
-    <string name="note_share_activity_resharing_not_allowed">Політика або дозволи забороняють подальшу передачу у спільний доступ</string>
-    <string name="note_share_activity_could_not_retrieve_url">Неможливо отримати посилання</string>
-    <string name="note_share_activity_subject_shared_with_you">Вам було надано доступ до \"%1$s\"</string>
-    <string name="note_share_activity_contact_no_permission">Потрібний доступ до контактів.</string>
-    <string name="note_share_activity_you_are_not_allowed_to_share">У вас відсутні права на створення спільних публічних ресурсів.</string>
-
-    <string name="note_share_created">Спільний ресурс створено</string>
     <string name="note_share_activity_cannot_created">У вас відсутні права на створення спільних ресурсів.</string>
-
-
-    <!-- NoteShareDetailActivity -->
+    <string name="note_share_activity_contact_icon_content_description">значок нотатки контакт спільного ресурсу</string>
+    <string name="note_share_activity_contact_no_permission">Потрібний доступ до контактів.</string>
+    <string name="note_share_activity_copy_icon_content_description">значок нотатки копіювати спільний ресурс</string>
+    <string name="note_share_activity_could_not_retrieve_url">Неможливо отримати посилання</string>
+    <string name="note_share_activity_external_icon_content_description">значок нотатки поділитися зовнішнім спільним ресурсом</string>
+    <string name="note_share_activity_icon_content_description">значок нотатки поділитися</string>
+    <string name="note_share_activity_more_icon_content_description">значок нотатки поділитися більше</string>
+    <string name="note_share_activity_resharing_not_allowed">Політика або дозволи забороняють подальшу передачу у спільний доступ</string>
+    <string name="note_share_activity_search_text">Ім\'я, ідентифікатор об\'єднаної хмари або ел.адреса...</string>
+    <string name="note_share_activity_share_icon_content_description">значок нотатки поділитися</string>
+    <string name="note_share_activity_share_link">Передати у публічний доступ</string>
+    <string name="note_share_activity_shared_with_you">%1$s поділив(-ла-)ся з вами</string>
+    <string name="note_share_activity_subject_shared_with_you">Вам було надано доступ до \"%1$s\"</string>
+    <string name="note_share_activity_user_icon_content_description">значок нотатки поділитися з користувачем</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">У вас відсутні права на створення спільних публічних ресурсів.</string>
+    <string name="note_share_created">Спільний ресурс створено</string>
     <string name="note_share_detail_activity_advanced_settings">Розширені</string>
-    <string name="note_share_detail_activity_share_via_link_hide_download">Приховати звантаження</string>
-    <string name="note_share_detail_activity_share_send_note">Примітка для одержувача</string>
-    <string name="note_share_detail_activity_hint_note">Нотатка</string>
-    <string name="note_share_detail_activity_common_next">Далі</string>
-    <string name="note_share_detail_activity_share_copy_link">Поділитися та копіювати посилання</string>
-    <string name="note_share_detail_activity_common_confirm">Підтвердити</string>
-    <string name="note_share_detail_activity_set_note">Встановити нотатку</string>
-    <string name="note_share_detail_activity_send_share">Поділитися</string>
-    <string name="note_share_detail_activity_hint_name">Назва</string>
-    <string name="note_share_detail_activity_link_name">Назва посилання</string>
-    <string name="note_share_detail_activity_share_link_empty_password">Ви повинні ввести пароль</string>
-    <string name="note_share_detail_activity_hint_password">Пароль</string>
-    <string name="note_share_detail_activity_no_share_permission_selected">Виберіть принаймні один дозвіл для спільного використання.</string>
-    <string name="note_share_detail_activity_label_empty">Ярлик не може бути порожнім</string>
     <string name="note_share_detail_activity_cancel">Скасувати</string>
+    <string name="note_share_detail_activity_common_confirm">Підтвердити</string>
+    <string name="note_share_detail_activity_common_next">Далі</string>
     <string name="note_share_detail_activity_create_share_error">Не вдалося створити спільний ресурс</string>
-
-    <!-- SharePasswordDialogFragment -->
+    <string name="note_share_detail_activity_hint_name">Назва</string>
+    <string name="note_share_detail_activity_hint_note">Нотатка</string>
+    <string name="note_share_detail_activity_hint_password">Пароль</string>
+    <string name="note_share_detail_activity_label_empty">Ярлик не може бути порожнім</string>
+    <string name="note_share_detail_activity_link_name">Назва посилання</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Виберіть принаймні один дозвіл для спільного використання.</string>
+    <string name="note_share_detail_activity_send_share">Поділитися</string>
+    <string name="note_share_detail_activity_set_note">Встановити нотатку</string>
+    <string name="note_share_detail_activity_share_copy_link">Поділитися та копіювати посилання</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Ви повинні ввести пароль</string>
+    <string name="note_share_detail_activity_share_send_note">Примітка для одержувача</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Приховати звантаження</string>
+    <string name="oneHour">1 година</string>
+    <string name="online">Доступний(-а)</string>
+    <string name="online_status">Мій статус доступності</string>
+    <string name="pin_to_homescreen">Закріпити на головному екрані</string>
+    <string name="pref_value_font_normal">Звичайно</string>
+    <string name="pref_value_lock">Захист паролем</string>
+    <string name="pref_value_wifi_and_mobile">Синхронізувати по Wi-Fi та мобільним даним</string>
+    <string name="progress_import">Імпортування нотатки %1$d з %2$d...</string>
+    <string name="progress_import_indeterminate">Імпортування нотаток...</string>
+    <string name="public_share_name">Нова назва</string>
+    <string name="remote">(віддалено)</string>
+    <string name="remove_account">Вилучити %1$s</string>
+    <string name="search_in_all">Шукати всі нотатки</string>
+    <string name="search_in_category">Шукати в %1$s</string>
+    <string name="set_message">Встановити повідомлення</string>
+    <string name="set_online_status">Мій статус доступності</string>
+    <string name="settings_background_sync">Фонова синхронізація</string>
+    <string name="settings_enable_direct_edit">Пряме редагування</string>
+    <string name="settings_enable_direct_edit_summary">Якщо вимкнено, розширений редактор буде приховано.</string>
+    <string name="settings_file_suffix">Розширення файлу</string>
+    <string name="settings_file_suffix_description">Розширення файлу для нових нотаток у хмарі Nextcloud</string>
+    <string name="settings_file_suffix_success">Суфікс нового файлу: %1$s</string>
+    <string name="settings_font_size">Розмір шрифту</string>
+    <string name="settings_font_title">Моноширинний шрифт</string>
+    <string name="settings_gridview">Упорядкування у формі сітки</string>
+    <string name="settings_keep_screen_on">Тримати екран увімкненим</string>
+    <string name="settings_keep_screen_on_summary">Під час перегляду або редагування нотатки</string>
+    <string name="settings_lock">Блокування застосунку (бета)</string>
+    <string name="settings_lock_summary">Розблокування пристрою</string>
+    <string name="settings_note_mode">Показувати нотатки</string>
+    <string name="settings_note_mode_new">Поведінка під час відкриття застосунку Нотатки</string>
+    <string name="settings_notes_path">Встановити каталог</string>
+    <string name="settings_notes_path_description">Каталог для збереження нотаток у хмарі Nextcloud</string>
+    <string name="settings_notes_path_success">Новий каталог нотаток: %1$s</string>
+    <string name="settings_prevent_screen_capture">Запобігати захопленню екрана</string>
+    <string name="settings_show_ecosystem_apps">Показувати перемикач застосунків</string>
+    <string name="settings_show_ecosystem_apps_summary">Пропозиції застосунків Nextcloud у заголовку навігації</string>
+    <string name="settings_theme_title">Тема</string>
+    <string name="settings_wifi_only">Синхронізувати тільки по WI-Fi</string>
+    <string name="share">Спільний доступ</string>
+    <string name="share_dialog_title">Спільне</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_expiration_date_label">Дійсне до %1$s</string>
+    <string name="share_file">Спільне %1$s</string>
+    <string name="share_group_clarification">%1$s (група)</string>
+    <string name="share_internal_link">Поділитися внутрішнім посиланням</string>
+    <string name="share_internal_link_to_file_text">Внутрішнє посилання спільного доступу дійсне лише для користувачів, які мають доступ до цього файлу</string>
+    <string name="share_internal_link_to_folder_text">Внутрішнє посилання спільного доступу дійсне лише для користувачів, які мають доступ до цього каталогу</string>
+    <string name="share_known_remote_on_clarification">на %1$s</string>
+    <string name="share_link">Передати у публічний доступ</string>
+    <string name="share_link_password_title">Введіть пароль</string>
+    <string name="share_link_with_label">Поділитися посиланням (%1$s)</string>
+    <string name="share_no_expiration_date_label">Встановити термін дії</string>
+    <string name="share_no_password_title">Встановити пароль</string>
     <string name="share_password_dialog_fragment_share_link_optional_password_title">Введіть пароль (необов\'язково)</string>
     <string name="share_password_dialog_fragment_skip">Пропустити</string>
-
-    <string name="share_link_password_title">Введіть пароль</string>
-    <string name="common_ok">Гаразд</string>
-    <string name="common_delete">Вилучати</string>
-    <string name="write_email">Запрошення</string>
-    <string name="no_browser_available">Відсутні застосунки для обробки посилань</string>
-    <string name="no_email_app_available">Відсутній застосунок для опрацювання адреси ел. пошти</string>
-    <string name="no_actions">Відсутні дії для цього користувача</string>
-
-    <string name="failed_the_remove_share">Не вдалося створити вилучити ресурс</string>
-    <string name="email_pick_failed">Не вдалося вибрати ел. адресу.</string>
-    <string name="failed_update_ui">Неможливо оновити інтерфейс</string>
-    <string name="file_detail_sharing_fragment_no_contact_app_message">Відсутній застосунок для вибору контактів</string>
-    <string name="activity_chooser_title">Надіслати посилання до…</string>
-
-    <string name="activity_chooser_send_file_title">Надіслати</string>
-    <string name="share_internal_link_to_folder_text">Внутрішнє посилання спільного доступу дійсне лише для користувачів, які мають доступ до цього каталогу</string>
-    <string name="share_internal_link_to_file_text">Внутрішнє посилання спільного доступу дійсне лише для користувачів, які мають доступ до цього файлу</string>
-    <string name="share_internal_link">Поділитися внутрішнім посиланням</string>
-    <string name="delete_link">Посилання на вилучення</string>
-    <string name="share_settings">Налаштування</string>
-    <string name="share_send_new_email">Надіслати новий лист</string>
-    <string name="share_dialog_title">Спільне</string>
-    <string name="share_file">Спільне %1$s</string>
-    <string name="share_expiration_date_label">Дійсне до %1$s</string>
-    <string name="share_expiration_date_format">%1$s</string>
-    <string name="share_no_expiration_date_label">Встановити термін дії</string>
-    <string name="share_via_link_section_title">Передати у публічний доступ</string>
-    <string name="share_via_link_send_link_label">Надіслати посилання</string>
     <string name="share_password_title">Захищено паролем</string>
-    <string name="share_no_password_title">Встановити пароль</string>
-    <string name="share_with_title">Поділитися з...</string>
-    <string name="share_via_link_unset_password">Зняти</string>
-    <string name="add_another_public_share_link">Додати інше посилання</string>
-    <string name="add_new_public_share">Додати нове публічне посилання</string>
-    <string name="public_share_name">Нова назва</string>
-    <string name="share_link_with_label">Поділитися посиланням (%1$s)</string>
-    <string name="share_link">Передати у публічний доступ</string>
-    <string name="allow_resharing">Дозволяти передавати у спільний доступ іншим</string>
-    <string name="link_share_view_only">Лише перегляд</string>
-    <string name="link_share_editing">Редагування</string>
-    <string name="link_share_allow_upload_and_editing">Може завантажувати та редагувати</string>
-    <string name="link_share_file_drop">Додати файл (тільки завантажування)</string>
-    <string name="could_not_retrieve_shares">Не вдалося отримати спільні дані</string>
-    <string name="share_permission_view_only">Лише перегляд</string>
     <string name="share_permission_can_edit">Може редагувати</string>
     <string name="share_permission_file_drop">Перетягнути файл</string>
     <string name="share_permission_secure_file_drop">Захищене додавання файлу</string>
+    <string name="share_permission_view_only">Лише перегляд</string>
     <string name="share_permissions">Поділитися дозволами</string>
+    <string name="share_remote_clarification">%1$s (віддалено)</string>
+    <string name="share_room_clarification">%1$s (розмова)</string>
+    <string name="share_send_new_email">Надіслати новий лист</string>
+    <string name="share_settings">Налаштування</string>
+    <string name="share_via_link_section_title">Передати у публічний доступ</string>
+    <string name="share_via_link_send_link_label">Надіслати посилання</string>
+    <string name="share_via_link_unset_password">Зняти</string>
+    <string name="share_with_title">Поділитися з...</string>
+    <string name="shared_text_empty">Поширений текст порожній</string>
+    <string name="shortcut_create_long">Створити нову нотатку</string>
+    <string name="simple_about">Про застосунок</string>
+    <string name="simple_backup">Резервне копіювання</string>
+    <string name="simple_cancel">Скасувати</string>
+    <string name="simple_checkbox">Прапорець</string>
+    <string name="simple_close">Закрити</string>
+    <string name="simple_copy">Копіювати</string>
+    <string name="simple_edit">Редагувати</string>
+    <string name="simple_error">Помилка</string>
+    <string name="simple_exception">Виняток</string>
+    <string name="simple_link">Посилання</string>
+    <string name="simple_more">Додатково</string>
+    <string name="simple_move">Перемістити</string>
+    <string name="simple_next">Далі</string>
+    <string name="simple_other">Інший</string>
+    <string name="simple_prev">Назад</string>
+    <string name="simple_remove">Вилучити</string>
+    <string name="simple_security">Безпека</string>
+    <string name="simple_switch">Перемкнути</string>
+    <string name="simple_synchronization">Синхронізація</string>
+    <string name="sort_alphabetically">Впорядкувати за абеткою</string>
+    <string name="sort_last_modified">Впорядкувати за датою зміни</string>
+    <string name="status_message">Повідомлення про статус</string>
+    <string name="status_set_fail_message">Не вдалося встановити статус!</string>
+    <string name="switch_to_plain_editing">Перемкнутися до простого редагування</string>
+    <string name="thirtyMinutes">30 хвилин</string>
+    <string name="thisWeek">Цього тижня</string>
+    <string name="today">Сьогодні</string>
+    <string name="unlock_notes">Розблокувати нотатки</string>
+    <string name="username">Ім\'я користувача</string>
+    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
+    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
+    <string name="welcome_text">Вітаємо у %1$s</string>
+    <string name="whats_your_status">Який ваш статус?</string>
+    <string name="widget_entry_fav_contentDescription">Значок зірочки використовується для позначення вподобаного елемента</string>
+    <string name="widget_not_logged_in">Будь ласка, увійдіть до Нотаток перед використанням цього віджету</string>
+    <string name="widget_note_list_placeholder">Нотатки відсутні</string>
+    <string name="widget_note_list_title">Перелік нотаток</string>
+    <string name="widget_single_note_placeholder_tv">Нотатку не знайдено</string>
+    <string name="widget_single_note_title">Одна нотатка</string>
+    <string name="write_email">Запрошення</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Для додавання облікового запису потрібне з\'єднання з мережею.</string>
     <plurals name="share_download_limit_description">
         <item quantity="one">%1$d залишилося звантажити</item>
         <item quantity="few">%1$d залишилося звантажити</item>
         <item quantity="many">%1$d залишилося звантажити</item>
         <item quantity="other">%1$d залишилося звантажити</item>
     </plurals>
-    <string name="username">Ім\'я користувача</string>
-    <string name="share_group_clarification">%1$s (група)</string>
-    <string name="share_remote_clarification">%1$s (віддалено)</string>
-    <string name="share_room_clarification">%1$s (розмова)</string>
-    <string name="share_known_remote_on_clarification">на %1$s</string>
-    <string name="remote">(віддалено)</string>
-
-    <string name="copy_link">Копіювати посилання</string>
-    <string name="share">Спільний доступ</string>
-    <string name="clipboard_text_copied">Посилання скопійовано</string>
-    <string name="clipboard_no_text_to_copy">Відсутній текст для копіювання до буферу обміну</string>
-    <string name="clipboard_unexpected_error">Неочікувана помилка під час копіювання до буферу обміну</string>
-    <string name="clipboard_label">Текст скопійовано з %1$s</string>
-
-    <string name="listview_updated_today">Сьогодні</string>
-    <string name="listview_updated_yesterday">Вчора</string>
-    <string name="listview_updated_this_week">Цього тижня</string>
-    <string name="listview_updated_last_week">Минулого тижня</string>
-    <string name="listview_updated_this_month">Цього місяця</string>
-    <string name="listview_updated_last_month">Минулого місяця</string>
-    <string name="listview_no_content">Відсутній вміст</string>
-
-    <string name="settings_note_mode">Показувати нотатки</string>
-    <string name="settings_note_mode_new">Поведінка під час відкриття застосунку Нотатки</string>
-    <string name="settings_theme_title">Тема</string>
-    <string name="settings_font_title">Моноширинний шрифт</string>
-    <string name="settings_font_size">Розмір шрифту</string>
-    <string name="settings_wifi_only">Синхронізувати тільки по WI-Fi</string>
-    <string name="settings_lock">Блокування застосунку (бета)</string>
-    <string name="settings_lock_summary">Розблокування пристрою</string>
-    <string name="settings_background_sync">Фонова синхронізація</string>
-    <string name="settings_prevent_screen_capture">Запобігати захопленню екрана</string>
-    <string name="settings_show_ecosystem_apps">Показувати перемикач застосунків</string>
-    <string name="settings_show_ecosystem_apps_summary">Пропозиції застосунків Nextcloud у заголовку навігації</string>
-    <string name="settings_gridview">Упорядкування у формі сітки</string>
-    <string name="settings_enable_direct_edit">Пряме редагування</string>
-    <string name="settings_enable_direct_edit_summary">Якщо вимкнено, розширений редактор буде приховано.</string>
-    <string name="settings_keep_screen_on">Тримати екран увімкненим</string>
-    <string name="settings_keep_screen_on_summary">Під час перегляду або редагування нотатки</string>
-
-    <string name="error_sync">Синхронізація не вдалася: %1$s</string>
-    <string name="error_synchronization">Синхронізація не вдалася</string>
-    <string name="error_no_network">Відсутнє підключення до мережі</string>
-    <string name="error_maintenance_mode">Сервер у режимі обслуговування</string>
-    <string name="error_unknown">Сталася невідома помилка.</string>
-
-    <string name="about_version_title">Версія</string>
-    <string name="about_version">Ви використовуєте %1$s</string>
-    <string name="about_maintainer_title">Утримувач</string>
-    <string name="about_developers_title">Розробники</string>
-    <string name="about_developers_original_author">перший автор</string>
-    <string name="about_translators_title">Перекладачі</string>
-    <string name="about_translators_transifex">Спільнота Nextcloud на %1$s</string>
-    <string name="about_testers_title">Тестувальники</string>
-    <string name="about_source_title">Вихідний код</string>
-    <string name="about_source">Цей проєкт розміщено на GitHub: %1$s</string>
-    <string name="about_issues_title">Помилики</string>
-    <string name="about_issues">Ви можете повідомляти про помилки, пропонувати удосконалення та надсилати запити на додаткові функції через систему відстеження вад GitHub: %1$s</string>
-    <string name="about_translate_title">Перекласти</string>
-    <string name="about_translate">Приєднуйтесь до команди Nextcloud на Transifex та допоможіть нам перекласти цей застосунок: %1$s</string>
-    <string name="about_app_license_title">Ліцензія застосунку</string>
-    <string name="about_app_license">Цей застосунок ліцензовано ліцензією GNU GENERAL PUBLIC LICENSE v3+.</string>
-    <string name="about_app_license_button">Переглянути ліцензію</string>
-    <string name="about_icons_disclaimer_title">Значки</string>
-    <string name="about_icons_disclaimer_app_icon">Для оригінального розміру значка див. %1$s.</string>
-    <string name="about_icons_disclaimer_mdi_icons">Усі значки, які було використано у цьому застосунку, є %1$s, розроблені Google Inc. та мають ліцензію Apache 2.0 License. </string>
-    <string name="about_icons_disclaimer_mdi">Material Design Icons</string>
-    <string name="about_credits_tab_title">Подяки</string>
-    <string name="about_contribution_tab_title">Внесок</string>
-    <string name="about_license_tab_title">Ліцензія</string>
-
-    <string name="widget_note_list_title">Перелік нотаток</string>
-    <string name="widget_note_list_placeholder">Нотатки відсутні</string>
-    <string name="widget_single_note_title">Одна нотатка</string>
-    <string name="widget_single_note_placeholder_tv">Нотатку не знайдено</string>
-    <string name="widget_not_logged_in">Будь ласка, увійдіть до Нотаток перед використанням цього віджету</string>
-    <string name="widget_entry_fav_contentDescription">Значок зірочки використовується для позначення вподобаного елемента</string>
-
-    <string name="activity_select_single_note">Оберіть нотатку</string>
-
-    <string name="shortcut_create_long">Створити нову нотатку</string>
-
-    <string name="pref_value_font_normal">Звичайно</string>
-    <string name="pref_value_wifi_and_mobile">Синхронізувати по Wi-Fi та мобільним даним</string>
-    <string name="pref_value_lock">Захист паролем</string>
-
-    <string name="simple_error">Помилка</string>
-    <string name="simple_close">Закрити</string>
-    <string name="simple_copy">Копіювати</string>
-    <string name="simple_exception">Виняток</string>
-    <string name="pin_to_homescreen">Закріпити на головному екрані</string>
-    <string name="note_has_been_deleted">Цю нотатку було вилучено</string>
-    <string name="add_account">Додати обліковий запис</string>
-
-    <string name="category_music">Музика</string>
-    <string name="category_movies">Відео</string>
-    <string name="category_movie">Фільм</string>
-    <string name="category_work">Робочий</string>
-    <string name="category_todo">Завдання</string>
-    <string name="category_todos">Завдання</string>
-    <string name="category_checklists">Контрольні списки</string>
-    <string name="category_tasks">Завдання</string>
-    <string name="category_recipe">Рецепт</string>
-    <string name="category_recipes">Рецепти</string>
-    <string name="category_restaurant">Ресторан</string>
-    <string name="category_restaurants">Ресторани</string>
-    <string name="category_food">Їжа</string>
-    <string name="category_bake">Випічка</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_key">Ключ</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_keys">Ключі</string>
-    <string name="category_password">Пароль</string>
-    <string name="category_passwords">Паролі</string>
-    <string name="category_credentials">Облікові дані</string>
-    <string name="category_game">Гра</string>
-    <string name="category_games">Ігри</string>
-    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
-    <string name="category_play">Грати</string>
-    <string name="category_gift">Подарунок</string>
-    <string name="category_gifts">Подарунки</string>
-    <!-- Like a gift -->
-    <string name="category_present">Презентувати</string>
-    <!-- Like a gift -->
-    <string name="category_presents">Подарунки</string>
-
-    <string name="account_already_imported">Обліковий запис вже імпортовано</string>
-    <string name="no_notes_yet">Нотатки поки відсутні</string>
-    <string name="no_notes_yet_description">Натисніть кнопку \"+\", щоб створити нову нотатку</string>
-    <string name="simple_more">Додатково</string>
-    <string name="simple_move">Перемістити</string>
-    <string name="category_readonly">Тільки читання</string>
-    <string name="no_category">Без категорії</string>
-    <string name="add_category">Додати %1$s</string>
-    <string name="simple_checkbox">Прапорець</string>
-    <string name="unlock_notes">Розблокувати нотатки</string>
-    <string name="error_dialog_title">От халепа!</string>
-    <string name="error_dialog_tip_token_mismatch_retry">Спробуйте примусово закрити застосунок та наново запустити. Можливо, встановлено неправильне з\'єднання із застосунком Nextcloud.</string>
-    <string name="error_dialog_tip_token_mismatch_clear_storage">Якщо проблема не зникає, спробуйте очистити пам’ять обох застосунків: Nextcloud та Нотатки Nextcloud.</string>
-    <string name="error_dialog_tip_clear_storage">Щоби очистити сховище, відкрийте вкладку інформації у застосунку та виберіть Пам\'ять → Очистити пам\'ять. ⚠️ Увага: це призведе до вилучення усіх нотаток, які ще не було синхронізовано!</string>
-    <string name="error_dialog_tip_files_outdated">Ваш застосунок Nextcloud може бути застарілим. Будь ласка, відвідайте Play Маркет або F-Droid, щоби оновити ваш застосунок до останньої версії.</string>
-    <string name="error_dialog_tip_files_force_stop">Щось, здається, не так із вашим застосунком Nextcloud. Спробуйте примусово зупинити обидва застосунки: Nextcloud та Нотатки Nextcloud.</string>
-    <string name="error_dialog_tip_files_delete_storage">Якщо примусове їх завершення не допомагає, спробуйте очистити сховище обох застосунків.</string>
-    <string name="error_dialog_timeout_instance">За відведений час відповіді від вашого сервера не надійшло. Переконайтесь, що ваш сервер працює добре.</string>
-    <string name="error_dialog_timeout_toggle">Перевірте підключення до мережі. Іноді може допомогти вимкнення та ввімкнення мобільного передавання даних або Wi-Fi.</string>
-    <string name="error_dialog_check_server">Отримано неправильну відповідь від сервера. Перевірте, чи ви маєте доступ до вашіх нотаток через вебінтерфейс.</string>
-    <string name="error_dialog_check_server_logs">Виникла проблема з налаштуванням Nextcloud. Будь ласка, подивіться файли журналу сервера.</string>
-    <string name="error_dialog_check_maintenance">Будь ласка, перевірте, чи ваш сервер Nextcloud наразі не перебуває в режимі обслуговування.</string>
-    <string name="error_dialog_insufficient_storage">Ваш сервер Nextcloud не має вільного місця. Будь ласка, вилучіть непотрібні файлі, щоби можна було виконувати синхронізацію змін на пристрої з хмарою.</string>
-    <string name="error_dialog_we_need_info">Нам потрібна наступна технічна інформація, щоб допомогти вам:</string>
-    <string name="error_dialog_server_app_enabled">Переконайтесь, що ви встановили та увімкнули застосунок \"Нотатки\" на своєму сервері.</string>
-    <string name="error_dialog_redirect">Ваш сервер відповів кодом стану HTTP 302, що означає, що ви не встановили застосунок \"Нотатки\" на своєму сервері або щось налаштовано неправильно. Це може бути спричинено нестандартними перевизначеннями у файлі .htaccess або програмами Nextcloud, як-от OID-клієнт.</string>
-    <string name="error_dialog_tip_disable_battery_optimizations">Вимкніть усі оптимізації батареї для застосунків Nextcloud та Нотатки Nextcloud.</string>
-    <string name="error_dialog_min_version">Застосунок \"Нотатки\" для Android вимагає версію не менше 3.18 застосунку Nextcloud для Android.</string>
-    <string name="added_content">Додано \"%1$s\"</string>
-    <string name="shared_text_empty">Поширений текст порожній</string>
-    <string name="append_to_note">Доповнити нотатку</string>
-    <string name="change_note_title">Змінити заголовок нотатки</string>
-    <string name="menu_edit_title">Редагувати</string>
-    <string name="simple_security">Безпека</string>
-    <string name="appearance_and_behavior">Вигляд і поведінка</string>
-    <string name="simple_synchronization">Синхронізація</string>
-    <string name="manage_accounts">Облікові записи</string>
-    <string name="action_formatting_help">Форматування</string>
-
-
-    <string name="noteMode_plain_edit">Режим простого редагування</string>
-    <string name="noteMode_plain_preview">Режим простого перегляду</string>
-    <string name="noteMode_rich_edit">Режим форматованого редагування</string>
-    <string name="noteMode_remember_last">Запам\'ятовувати останній вибір</string>
-
-    <string-array name="fontSize_entries">
-        <item>Малий</item>
-        <item>Середній</item>
-        <item>Великий</item>
-    </string-array>
-
-    <string-array name="darkmode_entries">
-        <item>Світла</item>
-        <item>Темна</item>
-        <item>Системна</item>
-    </string-array>
-
     <plurals name="ab_selected">
         <item quantity="one">%d обрано</item>
         <item quantity="few">%d обрано</item>
@@ -350,129 +398,10 @@
         <item quantity="many">Поділитися вмістом %1$d нотаток</item>
         <item quantity="other">Поділитися вмістом %1$d нотаток</item>
     </plurals>
-
-    <string name="formatting_help_divider" translateable="false">---</string>
-    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
-    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
-    <string name="formatting_help_codefence" translateable="false">```</string>
-    <string name="formatting_help_codefence_outer" translateable="false">````</string>
-    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
-    <string name="formatting_help_cbf_title">Контекстне форматування</string>
-    <string name="formatting_help_cbf_body_1">Застосунок \"Нотатки\" надає можливість вести нотатки без відволікання уваги. Хоча ви зможете форматувати свої тексти за допомогою Markdown. Для різних із наведених нижче прикладів ви можете використовувати ярлики, щоб форматувати нотатки, не вводячи коди нижче.</string>
-    <string name="formatting_help_cbf_body_2">Просто виберіть діапазон тексту або натисніть на курсор у будь-якій позиції, і ви отримаєте спливаюче меню, де поряд із типовими елементами %1$s, %2$s, %3$s містяться елементи на зразок %4$s або %5$s.</string>
-
-    <string name="formatting_help_text_title">Текст</string>
-    <string name="formatting_help_text_body">За допомогою Markdown дуже легко зробити деякі слова %1$sжирними%1$s, а інші слова %2$sкурсивом%2$s. Ви можете %3$sперекреслити%3$s деякі слова та навіть [послатися до Nextcloud](https://nextcloud.com).</string>
-
-    <string name="formatting_help_lists_title">Списки</string>
-    <string name="formatting_help_lists_body_1">Іноді вам потрібні нумеровані списки:</string>
-    <string name="formatting_help_lists_body_2">Один</string>
-    <string name="formatting_help_lists_body_3">Два</string>
-    <string name="formatting_help_lists_body_4">Три</string>
-    <string name="formatting_help_lists_body_5">Іноді вам потрібні ненумеровані списки:</string>
-    <string name="formatting_help_lists_body_6">Почніть рядок з риски</string>
-    <string name="formatting_help_lists_body_7">А якщо у вас є підпункти, поставте два пробіли перед тире або зірочку:</string>
-    <string name="formatting_help_lists_body_8">Ось так</string>
-    <string name="formatting_help_lists_body_9">І так</string>
-
-    <string name="formatting_help_checkboxes_title">Прапорці</string>
-    <string name="formatting_help_checkboxes_body_1">Щоб створити прапорець, використовуйте список, за яким слідують дужки</string>
-    <string name="formatting_help_checkboxes_body_2">Пункт 1</string>
-    <string name="formatting_help_checkboxes_body_3">Пункт 2</string>
-
-    <string name="formatting_help_structured_documents_title">Структуровані документи</string>
-    <string name="formatting_help_structured_documents_body_1">Іноді корисно мати різні рівні заголовків для структурування документів. Почніть рядки з %1$s, щоб створити заголовки. Кілька %2$s поспіль позначають менші розміри заголовків.</string>
-    <string name="formatting_help_structured_documents_body_2">Це заголовок третього рівня</string>
-    <string name="formatting_help_structured_documents_body_3">Ви можете використовувати один %1$s аж до шести %2$s для різних розмірів заголовка.</string>
-    <string name="formatting_help_structured_documents_body_4">Якщо ви хочете процитувати когось, використовуйте символ %1$s перед рядком:</string>
-    <string name="formatting_help_structured_documents_body_5">Уява важливіша за знання. Знання обмежене. Уява охоплює весь світ.</string>
-    <string name="formatting_help_structured_documents_body_6">- Альберт Ейнштейн</string>
-
-    <string name="formatting_help_code_title">Код</string>
-    <string name="formatting_help_code_body_1">Існує багато різних способів стилізувати код за допомогою Markdown. Якщо у вас є вбудовані блоки коду, оберніть їх символами зворотнього апострофу:</string>
-    <string name="formatting_help_code_body_2">Markdown також підтримує те, що називається огородженням коду, що дозволяє використовувати кілька рядків без відступу:</string>
-    <string name="formatting_help_code_body_3">А якщо ви хочете використовувати підсвічування синтаксису, додайте назву мови:</string>
-
-    <string name="formatting_help_tables_title">Таблиці</string>
-    <!-- Column header of a sample table -->
-    <string name="formatting_help_tables_column">Колонка %1d</string>
-    <!-- Table cell value of a sample table -->
-    <string name="formatting_help_tables_value">Значення %1d</string>
-
-    <string name="formatting_help_images_body_1">Посилання мають бути або повними URL-адресами, що починаються з протоколу та домену, або абсолютними шляхами, що починаються з символу %1$s.</string>
-    <string name="formatting_help_images_body_2">Щоб відповідати формату Markdown, будь ласка, використовуйте escape-символи в URL-адресі зображення. Це означає, наприклад, замінити пробіли на %1$s в URL-адресі.</string>
-    <string name="formatting_help_images_title">Зображення</string>
-    <string name="formatting_help_images_alt">Чудове зображення</string>
-
-    <string name="simple_other">Інший</string>
-    <string name="sort_last_modified">Впорядкувати за датою зміни</string>
-    <string name="sort_alphabetically">Впорядкувати за абеткою</string>
-    <string name="error_action_open_battery_settings">Налаштування батареї</string>
-    <string name="error_action_open_deck_info">Відкрити інформацію про застосунок</string>
-    <string name="error_action_open_network">Налаштування мережі</string>
-    <string name="error_action_update_files_app">Оновлення</string>
-    <string name="no_account_configured_yet">Жодного облікового запису ще не налаштовано</string>
-    <string name="no_other_accounts">Ви ще не налаштували жодного іншого облікового запису.</string>
-    <string name="choose_account">Оберіть обліковий запис</string>
-    <string name="context_based_formatting">Контекстне форматування</string>
     <plurals name="remove_account_message">
         <item quantity="one">Видалення облікового запису %1$s також призведе до видалення невідновних несинхронізованих змін.</item>
         <item quantity="few">Видалення облікового запису %1$s також призведе до видалення невідновних %2$d несинхронізованих змін.</item>
         <item quantity="many">Видалення облікового запису %1$s також призведе до видалення невідновних %2$d несинхронізованих змін.</item>
         <item quantity="other">Видалення облікового запису %1$s також призведе до видалення невідновних %2$d несинхронізованих змін.</item>
     </plurals>
-    <string name="remove_account">Вилучити %1$s</string>
-
-    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Для додавання облікового запису потрібне з\'єднання з мережею.</string>
-    <string name="settings_notes_path">Встановити каталог</string>
-
-    <string name="simple_next">Далі</string>
-    <string name="simple_prev">Назад</string>
-    <string name="simple_backup">Резервне копіювання</string>
-    <string name="backup">Ми виявили непоправний стан застосунку. Зробіть резервну копію ваших несинхронізованих змін і очистіть сховище застосунку Notes.</string>
-    <string name="settings_notes_path_description">Каталог для збереження нотаток у хмарі Nextcloud</string>
-    <string-array name="settings_file_suffixes">
-        <item translatable="false">.txt</item>
-        <item translatable="false">.md</item>
-    </string-array>
-    <string name="settings_notes_path_success">Новий каталог нотаток: %1$s</string>
-    <string name="settings_file_suffix">Розширення файлу</string>
-    <string name="settings_file_suffix_description">Розширення файлу для нових нотаток у хмарі Nextcloud</string>
-    <string name="settings_file_suffix_success">Суфікс нового файлу: %1$s</string>
-    <string name="http_status_code">Код стану HTTP: %1$d</string>
-    <string name="progress_import_indeterminate">Імпортування нотаток...</string>
-    <string name="progress_import">Імпортування нотатки %1$d з %2$d...</string>
-    <string name="account_imported">Обліковий запис імпортовано.</string>
-    <string name="direct_editing_error">Помилка під час завантаження форматованого редагування</string>
-    <string name="switch_to_plain_editing">Перемкнутися до простого редагування</string>
-    <string name="action_back">Назад</string>
-    <string name="set_online_status">Мій статус доступності</string>
-    <string name="status_message">Повідомлення про статус</string>
-    <string name="whats_your_status">Який ваш статус?</string>
-    <string name="clear_status_after">Очистити статус після</string>
-    <string name="clear">Очистити</string>
-    <string name="set_message">Встановити повідомлення</string>
-    <string name="dontClear">Залишити поточний</string>
-    <string name="today">Сьогодні</string>
-    <string name="thirtyMinutes">30 хвилин</string>
-    <string name="oneHour">1 година</string>
-    <string name="fourHours">4 години</string>
-    <string name="thisWeek">Цього тижня</string>
-    <string name="error_setting_status_message">Помилка під час встановлення повідмлення про статус!</string>
-    <string name="file_list_seconds_ago">кілька секунд тому</string>
-    <string name="online_status">Мій статус доступності</string>
-    <string name="online">Доступний(-а)</string>
-    <string name="dnd">Не турбувати</string>
-    <string name="away">Відсутній(-я)</string>
-    <string name="invisible">Невидимка</string>
-    <string name="busy">Зайнято</string>
-    <string name="mute_all_notifications">Вимкнути всі сповіщення</string>
-    <string name="appear_offline">Перебуваю поза мережею</string>
-    <string name="status_set_fail_message">Не вдалося встановити статус!</string>
-    <string name="account_switch_dialog_status_fetching_error_message">Не вдалося отримати статус, спробуйте ще раз.</string>
-    <string name="ecosystem_apps_display_files">Файли</string>
-    <string name="ecosystem_apps_display_talk">Розмови</string>
-    <string name="ecosystem_apps_talk">Розмови Nextcloud</string>
-    <string name="ecosystem_apps_more">Більше застосунків Nextcloud</string>
-    <string name="ecosystem_apps_display_more">Більше</string>
 </resources>

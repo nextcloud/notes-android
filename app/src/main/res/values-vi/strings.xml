@@ -1,267 +1,315 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Nextcloud Notes - Android Client
-  ~
-  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
-  ~ SPDX-License-Identifier: GPL-3.0-or-later
--->
-<resources>
-    <string name="app_name">Ghi chú</string>
-    <string name="app_name_long">Nextcloud Ghi chú</string>
-    <string name="label_all_notes">Tất cả ghi chú</string>
-    <string name="label_favorites">Ưa thích</string>
+  <resources>
+    <string name="about_app_license">Ứng dụng này được cấp phép dưới GNU GENERAL PUBLIC LICENSE v3+.</string>
+    <string name="about_app_license_button">Xem giấy phép</string>
+    <string name="about_app_license_title">Giấy phép ứng dụng</string>
+    <string name="about_contribution_tab_title">Đóng góp</string>
+    <string name="about_credits_tab_title">Ghi nhận</string>
+    <string name="about_developers_title">Nhà phát triển</string>
+    <string name="about_icons_disclaimer_app_icon">Để tìm biểu tượng ban đầu hãy xem %1$s.</string>
+    <string name="about_icons_disclaimer_mdi">Biểu tượng Thiết kế Material</string>
+    <string name="about_icons_disclaimer_mdi_icons">Tất cả biểu tượng mới hơn được ứng dụng này sử dụng được %1$s tạo bởi Google Inc. và được cấp phép dưới Apache 2.0 License.</string>
+    <string name="about_icons_disclaimer_title">Biểu tượng</string>
+    <string name="about_issues">Bạn có thể báo cáo lỗi, đề nghị cải thiện và yêu cầu tính năng tại trình theo dõi vấn đề của GitHub: %1$s</string>
+    <string name="about_issues_title">Vấn đề</string>
+    <string name="about_license_tab_title">Giấy phép</string>
+    <string name="about_maintainer_title">Người duy trì</string>
+    <string name="about_source">Dự án này được lưu trữ trên GitHub: %1$s</string>
+    <string name="about_source_title">Mã nguồn</string>
+    <string name="about_testers_title">Người thử nghiệm</string>
+    <string name="about_translate">Tham gia nhóm Nextcloud trên Transifex và giúp chúng tôi dịch ứng dụng này: %1$s</string>
+    <string name="about_translate_title">Dịch</string>
+    <string name="about_translators_title">Người phiên dịch</string>
+    <string name="about_translators_transifex">Cộng đồng Nextcloud trên %1$s</string>
+    <string name="about_version">Hiện tại bạn đang sử dụng %1$s</string>
+    <string name="about_version_title">Phiên bản</string>
+    <string name="account_already_imported">Tài khoản đã được nhập sẵn</string>
+    <string name="account_imported">Đã nhập tài khoản.</string>
+    <string name="action_back">Quay lại</string>
     <string name="action_create">Ghi chú mới</string>
-    <string name="welcome_text">Chào mừng đến %1$s</string>
-    <string name="action_settings">Cài đặt</string>
-    <string name="action_trashbin">Ghi chú đã xoá</string>
-    <string name="action_search">Tìm</string>
-    <string name="action_sorting_method">Phương pháp sắp xếp</string>
-    <string name="simple_cancel">Hủy</string>
-    <string name="simple_switch">Chuyển</string>
-    <string name="simple_edit">Chỉnh sửa</string>
-    <string name="simple_remove">Xoá</string>
     <string name="action_edit_save">Lưu</string>
-    <string name="simple_about">Giới thiệu</string>
-    <string name="simple_link">Liên kết</string>
+    <string name="action_formatting_help">Định dạng</string>
     <string name="action_note_deleted">Đã xóa %1$s</string>
     <string name="action_note_restored">Đã khôi phục %1$s</string>
-    <string name="action_undo">Hoàn tác</string>
+    <string name="action_search">Tìm</string>
+    <string name="action_settings">Cài đặt</string>
+    <string name="action_sorting_method">Phương pháp sắp xếp</string>
+    <string name="action_trashbin">Ghi chú đã xoá</string>
     <string name="action_uncategorized">Chưa phân loại</string>
-    <string name="menu_delete">Xóa</string>
+    <string name="action_undo">Hoàn tác</string>
+    <string name="activity_chooser_send_file_title">Gửi</string>
+    <string name="activity_chooser_title">Gửi liên kết đến…</string>
+    <string name="activity_select_single_note">Chọn ghi chú</string>
+    <string name="add_account">Thêm tài khoản</string>
+    <string name="add_another_public_share_link">Thêm một liên kết khác</string>
+    <string name="add_category">Thêm %1$s</string>
+    <string name="add_new_public_share">Thêm liên kết chia sẻ công khai mới</string>
+    <string name="added_content">Đã thêm \"%1$s\"</string>
+    <string name="allow_resharing">Cho phép chia sẻ lại</string>
+    <string name="app_name">Ghi chú</string>
+    <string name="app_name_long">Nextcloud Ghi chú</string>
+    <string name="appear_offline">Đang offline</string>
+    <string name="appearance_and_behavior">Ngoại hình và hành vi</string>
+    <string name="append_to_note">Thêm vào ghi chú</string>
+    <string name="away">Tạm vắng</string>
+    <string name="backup">Chúng tôi đã phát hiện trạng thái không thể phục hồi của ứng dụng. Vui lòng sao lưu các thay đổi chưa đồng bộ và xóa bộ nhớ của ứng dụng Ghi chú.</string>
+    <string name="busy">Bận</string>
+    <string name="category_food">Thức ăn</string>
+    <string name="category_game">Trò chơi</string>
+    <string name="category_games">Trò chơi</string>
+    <string name="category_movie">Xem phim</string>
+    <string name="category_movies">Phim</string>
+    <string name="category_music">Nhạc</string>
+    <string name="category_password">Mật khẩu</string>
+    <string name="category_passwords">Mật khẩu</string>
+    <string name="category_play">Chơi</string>
+    <string name="category_present">Trình bày</string>
+    <string name="category_readonly">Chỉ xem</string>
+    <string name="category_recipes">Công thức nấu ăn</string>
+    <string name="category_tasks">Nhiệm vụ</string>
+    <string name="category_work">Công việc</string>
+    <string name="change_category_title">Chọn một hạng mục</string>
+    <string name="change_note_title">Đổi tiêu đề ghi chú</string>
+    <string name="choose_account">Chọn tài khoản</string>
+    <string name="clear">Xóa</string>
+    <string name="clear_status_after">Xóa trạng thái sau</string>
+    <string name="clipboard_label">Văn bản đã được sao chép từ %1$s</string>
+    <string name="clipboard_no_text_to_copy">Không nhận được văn bản nào để sao chép vào khay nhớ tạm</string>
+    <string name="clipboard_text_copied">Đã sao chép liên kết</string>
+    <string name="clipboard_unexpected_error">Lỗi không mong muốn khi sao chép vào khay nhớ tạm</string>
+    <string name="common_delete">Xóa</string>
+    <string name="common_loading">Đang tải…</string>
+    <string name="common_ok">Đồng ý</string>
+    <string name="context_based_formatting">Hiện lên định dạng dựa trên ngữ cảnh</string>
+    <string name="copy_link">Sao chép liên kết</string>
+    <string name="could_not_retrieve_shares">Không thể truy xuất lượt chia sẻ</string>
+    <string name="delete_link">Xóa liên kết</string>
+    <string name="dnd">Đừng làm phiền</string>
+    <string name="dontClear">Không xoá</string>
+    <string name="ecosystem_apps_display_files">Tệp Tin</string>
+    <string name="ecosystem_apps_display_more">Thêm</string>
+    <string name="ecosystem_apps_display_talk">Nói chuyện</string>
+    <string name="error_action_open_battery_settings">Cài đặt pin</string>
+    <string name="error_action_open_deck_info">Mở Thông tin ứng dụng</string>
+    <string name="error_action_open_network">Cài đặt mạng</string>
+    <string name="error_action_update_files_app">Cập nhật</string>
+    <string name="error_dialog_check_maintenance">Vui lòng kiểm tra xem bản sao Nextcloud của bạn hiện tại có đang không ở trong chế độ bảo trì không.</string>
+    <string name="error_dialog_check_server">Phản hồi của máy chủ của bạn không chính xác. Vui lòng kiểm tra xem bạn có thể truy cập các ghi chú của bạn qua giao diện web không.</string>
+    <string name="error_dialog_check_server_logs">Có vấn đề với thiết lập Nextcloud của bạn. Vui lòng xem các tệp nhật ký của máy chủ.</string>
+    <string name="error_dialog_insufficient_storage">Bản sao Nextcloud của bạn không còn bộ nhớ trống. Vui lòng xoá một số tệp để đồng bộ các thay đổi cục bộ của bạn vào đám mây của bạn.</string>
+    <string name="error_dialog_redirect">Máy chủ của bạn đã phản hồi bằng mã trạng thái HTTP 302, nó có nghĩa là bạn chưa cài đặt ứng dụng Ghi chú trên máy chủ của bạn hoặc có gì đó bị thiết lập sai. Điều này có thể bị gây ra bởi những sự ghi đè tuỳ chỉnh trong tệp .htaccess hoặc bởi các ứng dụng Nextcloud như OID Client.</string>
+    <string name="error_dialog_server_app_enabled">Vui lòng chắc chắn rằng bạn đã cài đặt và bật ứng dụng \"Ghi chú\" trên máy chủ của bạn.</string>
+    <string name="error_dialog_timeout_instance">Không có phản hồi từ máy chủ của bạn trong thời gian được đưa ra. Vui lòng chắc chắn rằng bản sao của bạn đang chạy tốt.</string>
+    <string name="error_dialog_timeout_toggle">Hãy kiểm tra kết nối mạng của bạn. Đôi khi việc tắt và bật lại dữ liệu di động hoặc Wi-Fi có thể giúp.</string>
+    <string name="error_dialog_tip_clear_storage">Bạn có thể xoá bộ nhớ bằng cách mở thông tin ứng dụng và chọn Bộ nhớ → Xoá bộ nhớ. ⚠️ Cảnh báo: Việc này sẽ xoá các ghi chú chưa được đồng bộ hoá!</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Vui lòng tắt tất cả tối ưu hoá pin cho Nextcloud và ứng dụng Ghi chú.</string>
+    <string name="error_dialog_tip_files_delete_storage">Nếu việc buộc dừng chúng không giúp gì được, bạn có thể cố gắng xoá bộ nhớ của cả hai ứng dụng.</string>
+    <string name="error_dialog_tip_files_force_stop">Có gì đó có vẻ sai với ứng dụng Nextcloud của bạn. Vui lòng cố gắng buộc dừng cả hai, ứng dụng Nextcloud và ứng dụng Nextcloud Ghi chú.</string>
+    <string name="error_dialog_tip_files_outdated">Ứng dụng Nextcloud của bạn có vẻ đã lỗi thời. Vui lòng đi đến CH Play hoặc F-Droid để lấy phiên bản mới nhất.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Nếu vấn đề vẫn tiếp diễn, hãy cố gắng xoá bộ nhớ của cả hai ứng dụng: Nextcloud và Nextcloud Ghi chú để giải quyết vấn đề này.</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Vui lòng cố gắng buộc dừng và khởi động lại ứng dụng. Có thể đã có một kết nối không chính xác đến ứng dụng Nextcloud.</string>
+    <string name="error_dialog_title">Ôi không - Làm gì bây giờ? 🙁</string>
+    <string name="error_dialog_we_need_info">Chúng tôi cần thông tin kỹ thuật sau đây để giúp bạn:</string>
+    <string name="error_maintenance_mode">Máy chủ đang trong chế độ bảo trì</string>
+    <string name="error_no_network">Không có kết nối mạng</string>
+    <string name="error_sync">Đồng bộ hoá thất bại: %1$s</string>
+    <string name="error_synchronization">Đồng bộ hoá thất bại</string>
+    <string name="error_unknown">Đã xảy ra lỗi không xác định.</string>
+    <string name="failed_update_ui">Cập nhật giao diện người dùng thất bại</string>
+    <string name="file_list_seconds_ago">vài giây trước</string>
+    <string name="formatting_help_cbf_body_1">Một mục đích thiết kế lớn của ứng dụng Ghi chú là để cung cấp một công cụ không có sự xao nhãng. Tuy nhiên, bạn sẽ có thể định dạng văn bản của bạn bằng Markdown. Đối với các ví dụ khác nhau được nhắc đến dưới đây, bạn có thể sử dụng các lối tắt để bạn có thể định dạng các ghi chú mà không đánh các mã ở dưới.</string>
+    <string name="formatting_help_cbf_body_2">Chỉ cần chọn một phạm vi văn bản hoặc chạmvào con trỏ tại bất kỳ vị trí nào và bạn sẽ thấy một menu popup chứa các mục %4$s hoặc %5$s bên cạnh các mục mặc định %1$s, %2$s, %3$s.</string>
+    <string name="formatting_help_cbf_title">Định dạng dựa trên ngữ cảnh</string>
+    <string name="formatting_help_checkboxes_body_1">Để tạo ô đánh dấu, hãy sử dụng danh sách có ngoặc theo sau</string>
+    <string name="formatting_help_checkboxes_body_2">Mục 1</string>
+    <string name="formatting_help_checkboxes_body_3">Mục 2</string>
+    <string name="formatting_help_checkboxes_title">Hộp chọn</string>
+    <string name="formatting_help_code_body_1">Có nhiều cách tạo kiểu cho mã bằng Markdown. Nếu bạn có khối mã, hãy bọc chúng trong backtick:</string>
+    <string name="formatting_help_code_body_2">Markdown cũng hỗ trợ code fencing, nó cho phép tạo nhiều dòng mà không thụt vào:</string>
+    <string name="formatting_help_code_body_3">Và nếu bạn muốn đánh dấu cú pháp, hãy bao gồm ngôn ngữ:</string>
+    <string name="formatting_help_code_title">Mã</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_images_alt">Hình ảnh đẹp</string>
+    <string name="formatting_help_images_title">Hình ảnh</string>
+    <string name="formatting_help_lists_body_1">Đôi khi bạn muốn các danh sách đánh số:</string>
+    <string name="formatting_help_lists_body_2">Một</string>
+    <string name="formatting_help_lists_body_3">Hai</string>
+    <string name="formatting_help_lists_body_4">Ba</string>
+    <string name="formatting_help_lists_body_5">Đôi khi bạn muốn gạch đầu dòng:</string>
+    <string name="formatting_help_lists_body_6">Bắt đầu một dòng bằng dấu gạch ngang</string>
+    <string name="formatting_help_lists_body_7">Và nếu bạn có mục con, hãy đặt hai dấu cách trước dấu gạch ngang hoặc sao:</string>
+    <string name="formatting_help_lists_body_8">Như thế này</string>
+    <string name="formatting_help_lists_body_9">Và thế này</string>
+    <string name="formatting_help_lists_title">Danh sách</string>
+    <string name="formatting_help_structured_documents_body_1">Đôi khi việc có tiêu đề có cấp khác nhau để cấu trúc hóa tài liệu của bạn là rất hữu dụng. Bắt đầu dòng bằng %1$s để tạo tiêu đề. Nhiều %2$s liên tục chỉ ra kích cỡ tiêu đề nhỏ hơn.</string>
+    <string name="formatting_help_structured_documents_body_2">Đây là tiêu đề cấp ba</string>
+    <string name="formatting_help_structured_documents_body_3">Bạn có thể sử dụng một %1$s cho đến tối đa %2$s sáu để tạo kích cỡ tiêu đề khác nhau.</string>
+    <string name="formatting_help_structured_documents_body_4">Nếu bạn muốn trích dẫn ai đó, hãy sử dụng kí tự %1$s trước dòng:</string>
+    <string name="formatting_help_structured_documents_title">Tài liệu có cấu trúc</string>
+    <string name="formatting_help_tables_column">Cột %1d</string>
+    <string name="formatting_help_tables_title">Bảng</string>
+    <string name="formatting_help_tables_value">Giá trị %1d</string>
+    <string name="formatting_help_text_body">Việc làm cho một số từ trở nên %1$sđậm%1$s và các từ khác %2$snghiêng%2$s bằng Markdown là rất dễ. Bạn có thể %3$sgạch bỏ%3$s một số từ và thậm chí là [liên kết đến Nextcloud](https://nextcloud.com).</string>
+    <string name="formatting_help_text_title">Văn bản</string>
+    <string name="fourHours">4 tiếng</string>
+    <string name="http_status_code">Mã trạng thái HTTP: %1$d</string>
+    <string name="invisible">Vô hình</string>
+    <string name="label_all_notes">Tất cả ghi chú</string>
+    <string name="label_favorites">Ưa thích</string>
+    <string name="link_share_allow_upload_and_editing">Cho phép tải lên và chỉnh sửa</string>
+    <string name="link_share_editing">Chỉnh sửa</string>
+    <string name="link_share_file_drop">Kéo thả file (chỉ áp dụng trong trường hợp tải lên)</string>
+    <string name="link_share_view_only">Chỉ xem</string>
+    <string name="listview_updated_last_month">Tháng trước</string>
+    <string name="listview_updated_last_week">Tuần trước</string>
+    <string name="listview_updated_this_month">Tháng này</string>
+    <string name="listview_updated_this_week">Tuần này</string>
+    <string name="listview_updated_today">Hôm nay</string>
+    <string name="listview_updated_yesterday">Hôm qua</string>
+    <string name="manage_accounts">Quản lý tài khoản</string>
     <string name="menu_change_category">Hạng mục</string>
+    <string name="menu_delete">Xóa</string>
+    <string name="menu_edit_title">Chỉnh sửa tiêu đề</string>
     <string name="menu_favorite">Ưa thích</string>
     <string name="menu_preview">Xem trước</string>
     <string name="menu_share">Chia sẻ</string>
-    <string name="common_loading">Đang tải…</string>
-
-
-    <string name="search_in_category">Tìm kiếm trong %1$s</string>
-    <string name="search_in_all">Tìm kiếm tất cả ghi chú</string>
-
-    <string name="change_category_title">Chọn một hạng mục</string>
-
-    <string name="note_share_activity_shared_with_you">%1$s đã chia sẻ với bạn</string>
-    <string name="note_share_activity_share_link">Chia sẻ liên kết</string>
-    <string name="note_share_activity_could_not_retrieve_url">Không thể truy xuất URL</string>
-    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" đã chia sẽ với bạn</string>
-    <!-- NoteShareDetailActivity -->
-    <string name="note_share_detail_activity_advanced_settings">Cài đặt nâng cao</string>
-    <string name="note_share_detail_activity_share_via_link_hide_download">Ẩn tải xuống</string>
-    <string name="note_share_detail_activity_share_send_note">Ghi chú cho người nhận</string>
-    <string name="note_share_detail_activity_hint_note">Ghi chú</string>
-    <string name="note_share_detail_activity_common_next">Tiếp theo</string>
-    <string name="note_share_detail_activity_common_confirm">Xác nhận</string>
-    <string name="note_share_detail_activity_set_note">Đặt ghi chú</string>
-    <string name="note_share_detail_activity_send_share">Gửi kho</string>
-    <string name="note_share_detail_activity_hint_name">Tên</string>
-    <string name="note_share_detail_activity_link_name">Tên liên kết</string>
-    <string name="note_share_detail_activity_share_link_empty_password">Bạn hãy nhập một mật khẩu</string>
-    <string name="note_share_detail_activity_hint_password">Mật khẩu</string>
-    <string name="note_share_detail_activity_no_share_permission_selected">Vui lòng chọn ít nhất một quyền để chia sẻ.</string>
-    <string name="note_share_detail_activity_label_empty">Nhãn không thể trống</string>
-    <string name="note_share_detail_activity_cancel">Hủy bỏ</string>
-    <!-- SharePasswordDialogFragment -->
-    <string name="share_password_dialog_fragment_share_link_optional_password_title">Nhập mật khẩu tùy chọn</string>
-    <string name="share_password_dialog_fragment_skip">Bỏ qua</string>
-
-    <string name="share_link_password_title">Nhập mật khẩu</string>
-    <string name="common_ok">Đồng ý</string>
-    <string name="common_delete">Xóa</string>
-    <string name="write_email">Gửi email</string>
-    <string name="no_browser_available">Không có ứng dụng để xử lý các liên kết</string>
-    <string name="no_email_app_available">Không có ứng dụng để xử lý địa chỉ mail</string>
+    <string name="mute_all_notifications">Tắt tiếng tất cả thông báo</string>
+    <string name="no_account_configured_yet">Chưa có tài khoản nào được thiết lập</string>
     <string name="no_actions">Không có hành động nào cho người dùng này</string>
-
-    <string name="failed_update_ui">Cập nhật giao diện người dùng thất bại</string>
-    <string name="activity_chooser_title">Gửi liên kết đến…</string>
-
-    <string name="activity_chooser_send_file_title">Gửi</string>
-    <string name="share_internal_link_to_folder_text">Liên kết chia sẻ nội bộ chỉ hoạt động đối với người dùng có quyền truy cập vào thư mục này</string>
-    <string name="share_internal_link_to_file_text">Liên kết chia sẻ nội bộ chỉ hoạt động đối với người dùng có quyền truy cập vào tệp này</string>
-    <string name="share_internal_link">Chia sẻ liên kết nội bộ</string>
-    <string name="delete_link">Xóa liên kết</string>
-    <string name="share_settings">Cài đặt</string>
-    <string name="share_send_new_email">Gửi email mới</string>
-    <string name="share_dialog_title">Đang chia sẽ</string>
-    <string name="share_file">Chia sẽ %1$s</string>
-    <string name="share_expiration_date_label">Hết hạn %1$s</string>
-    <string name="share_expiration_date_format">%1$s</string>
-    <string name="share_no_expiration_date_label">Đặt ngày hết hạn</string>
-    <string name="share_via_link_section_title">Chia sẻ liên kết</string>
-    <string name="share_via_link_send_link_label">Gửi liên kết</string>
-    <string name="share_password_title">Mật khẩu được bảo vệ</string>
-    <string name="share_no_password_title">Đặt mật khẩu</string>
-    <string name="share_with_title">Chia sẽ với…</string>
-    <string name="share_via_link_unset_password">Bỏ cài đặt</string>
-    <string name="add_another_public_share_link">Thêm một liên kết khác</string>
-    <string name="add_new_public_share">Thêm liên kết chia sẻ công khai mới</string>
+    <string name="no_browser_available">Không có ứng dụng để xử lý các liên kết</string>
+    <string name="no_category">Không có hạng mục</string>
+    <string name="no_email_app_available">Không có ứng dụng để xử lý địa chỉ mail</string>
+    <string name="no_notes_yet">Chưa có ghi chú</string>
+    <string name="no_notes_yet_description">Nhấn nút + để tạo ghi chú mới</string>
+    <string name="no_other_accounts">Bạn chưa thiết lập tài khoản nào khác.</string>
+    <string name="noteMode_remember_last">Nhớ sự lựa chọn cuối của tôi</string>
+    <string name="note_has_been_deleted">Ghi chú này đã bị xoá</string>
+    <string name="note_share_activity_could_not_retrieve_url">Không thể truy xuất URL</string>
+    <string name="note_share_activity_share_link">Chia sẻ liên kết</string>
+    <string name="note_share_activity_shared_with_you">%1$s đã chia sẻ với bạn</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" đã chia sẽ với bạn</string>
+    <string name="note_share_detail_activity_advanced_settings">Cài đặt nâng cao</string>
+    <string name="note_share_detail_activity_cancel">Hủy bỏ</string>
+    <string name="note_share_detail_activity_common_confirm">Xác nhận</string>
+    <string name="note_share_detail_activity_common_next">Tiếp theo</string>
+    <string name="note_share_detail_activity_hint_name">Tên</string>
+    <string name="note_share_detail_activity_hint_note">Ghi chú</string>
+    <string name="note_share_detail_activity_hint_password">Mật khẩu</string>
+    <string name="note_share_detail_activity_label_empty">Nhãn không thể trống</string>
+    <string name="note_share_detail_activity_link_name">Tên liên kết</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Vui lòng chọn ít nhất một quyền để chia sẻ.</string>
+    <string name="note_share_detail_activity_send_share">Gửi kho</string>
+    <string name="note_share_detail_activity_set_note">Đặt ghi chú</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Bạn hãy nhập một mật khẩu</string>
+    <string name="note_share_detail_activity_share_send_note">Ghi chú cho người nhận</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Ẩn tải xuống</string>
+    <string name="oneHour">1 tiếng</string>
+    <string name="online">Trực tuyến</string>
+    <string name="online_status">Trạng thái trực tuyến</string>
+    <string name="pin_to_homescreen">Ghim vào màn hình chính</string>
+    <string name="pref_value_font_normal">Bình thường</string>
+    <string name="pref_value_lock">Password protection</string>
+    <string name="pref_value_wifi_and_mobile">Đồng bộ khi có Wi-Fi và dữ liệu di động</string>
+    <string name="progress_import">Đang nhập ghi chú %1$d trong số %2$d...</string>
+    <string name="progress_import_indeterminate">Đang nhập các ghi chú...</string>
     <string name="public_share_name">Tên mới</string>
-    <string name="share_link_with_label">Chi sẻ liên kết (%1$s)</string>
-    <string name="share_link">Chia sẻ liên kết</string>
-    <string name="allow_resharing">Cho phép chia sẻ lại</string>
-    <string name="link_share_view_only">Chỉ xem</string>
-    <string name="link_share_editing">Chỉnh sửa</string>
-    <string name="link_share_allow_upload_and_editing">Cho phép tải lên và chỉnh sửa</string>
-    <string name="link_share_file_drop">Kéo thả file (chỉ áp dụng trong trường hợp tải lên)</string>
-    <string name="could_not_retrieve_shares">Không thể truy xuất lượt chia sẻ</string>
-    <string name="share_permission_view_only">Chỉ xem</string>
-    <string name="share_permission_can_edit">Có thể chỉnh sửa</string>
-    <string name="share_permission_file_drop">Thả file</string>
-    <string name="share_permissions">Quyền kho</string>
-    <string name="username">Tên đăng nhập</string>
-    <string name="share_group_clarification">%1$s (nhóm)</string>
-    <string name="share_remote_clarification">%1$s (từ xa)</string>
-    <string name="share_room_clarification">%1$s (cuộc hội thoại)</string>
-    <string name="share_known_remote_on_clarification">trên %1$s</string>
     <string name="remote">(từ xa)</string>
-
-    <string name="copy_link">Sao chép liên kết</string>
-    <string name="share">Chia sẻ</string>
-    <string name="clipboard_text_copied">Đã sao chép liên kết</string>
-    <string name="clipboard_no_text_to_copy">Không nhận được văn bản nào để sao chép vào khay nhớ tạm</string>
-    <string name="clipboard_unexpected_error">Lỗi không mong muốn khi sao chép vào khay nhớ tạm</string>
-    <string name="clipboard_label">Văn bản đã được sao chép từ %1$s</string>
-
-    <string name="listview_updated_today">Hôm nay</string>
-    <string name="listview_updated_yesterday">Hôm qua</string>
-    <string name="listview_updated_this_week">Tuần này</string>
-    <string name="listview_updated_last_week">Tuần trước</string>
-    <string name="listview_updated_this_month">Tháng này</string>
-    <string name="listview_updated_last_month">Tháng trước</string>
-    <string name="settings_note_mode">Chế độ hiển thị cho các ghi chú</string>
-    <string name="settings_theme_title">Chủ đề</string>
-    <string name="settings_font_title">Phông chữ đơn cách</string>
-    <string name="settings_font_size">Cỡ chữ</string>
-    <string name="settings_wifi_only">Đồng bộ chỉ khi có Wi-Fi</string>
-    <string name="settings_lock">Khoá ứng dụng (Beta)</string>
-    <string name="settings_lock_summary">Thông tin thiết bị</string>
+    <string name="remove_account">Xoá %1$s</string>
+    <string name="search_in_all">Tìm kiếm tất cả ghi chú</string>
+    <string name="search_in_category">Tìm kiếm trong %1$s</string>
+    <string name="set_online_status">Trạng thái trực tuyến</string>
     <string name="settings_background_sync">Đồng bộ hoá trong nền</string>
-    <string name="settings_prevent_screen_capture">Ngăn chặn chụp màn hình</string>
+    <string name="settings_file_suffix">Phần mở rộng tệp</string>
+    <string name="settings_file_suffix_description">Phần mở rộng tệp cho các bản ghi chú mới trên Nextcloud của bạn</string>
+    <string name="settings_file_suffix_success">Hậu tố tệp mới: %1$s</string>
+    <string name="settings_font_size">Cỡ chữ</string>
+    <string name="settings_font_title">Phông chữ đơn cách</string>
     <string name="settings_gridview">Hiển thị dạng lưới</string>
     <string name="settings_keep_screen_on">Giữ màn hình luôn mở</string>
     <string name="settings_keep_screen_on_summary">Khi đang xem hoặc sửa ghi chú</string>
-
-    <string name="error_sync">Đồng bộ hoá thất bại: %1$s</string>
-    <string name="error_synchronization">Đồng bộ hoá thất bại</string>
-    <string name="error_no_network">Không có kết nối mạng</string>
-    <string name="error_maintenance_mode">Máy chủ đang trong chế độ bảo trì</string>
-    <string name="error_unknown">Đã xảy ra lỗi không xác định.</string>
-
-    <string name="about_version_title">Phiên bản</string>
-    <string name="about_version">Hiện tại bạn đang sử dụng %1$s</string>
-    <string name="about_maintainer_title">Người duy trì</string>
-    <string name="about_developers_title">Nhà phát triển</string>
-    <string name="about_translators_title">Người phiên dịch</string>
-    <string name="about_translators_transifex">Cộng đồng Nextcloud trên %1$s</string>
-    <string name="about_testers_title">Người thử nghiệm</string>
-    <string name="about_source_title">Mã nguồn</string>
-    <string name="about_source">Dự án này được lưu trữ trên GitHub: %1$s</string>
-    <string name="about_issues_title">Vấn đề</string>
-    <string name="about_issues">Bạn có thể báo cáo lỗi, đề nghị cải thiện và yêu cầu tính năng tại trình theo dõi vấn đề của GitHub: %1$s</string>
-    <string name="about_translate_title">Dịch</string>
-    <string name="about_translate">Tham gia nhóm Nextcloud trên Transifex và giúp chúng tôi dịch ứng dụng này: %1$s</string>
-    <string name="about_app_license_title">Giấy phép ứng dụng</string>
-    <string name="about_app_license">Ứng dụng này được cấp phép dưới GNU GENERAL PUBLIC LICENSE v3+.</string>
-    <string name="about_app_license_button">Xem giấy phép</string>
-    <string name="about_icons_disclaimer_title">Biểu tượng</string>
-    <string name="about_icons_disclaimer_app_icon">Để tìm biểu tượng ban đầu hãy xem %1$s.</string>
-    <string name="about_icons_disclaimer_mdi_icons">Tất cả biểu tượng mới hơn được ứng dụng này sử dụng được %1$s tạo bởi Google Inc. và được cấp phép dưới Apache 2.0 License.</string>
-    <string name="about_icons_disclaimer_mdi">Biểu tượng Thiết kế Material</string>
-    <string name="about_credits_tab_title">Ghi nhận</string>
-    <string name="about_contribution_tab_title">Đóng góp</string>
-    <string name="about_license_tab_title">Giấy phép</string>
-
-    <string name="widget_note_list_title">Danh sách ghi chú</string>
-    <string name="widget_note_list_placeholder">Không có ghi chú</string>
-    <string name="widget_single_note_title">Ghi chú đơn</string>
-    <string name="widget_single_note_placeholder_tv">Không tìm thấy ghi chú</string>
-    <string name="widget_not_logged_in">Vui lòng đăng nhập vào Ghi chú trước khi sử dụng tiện ích này</string>
-    <string name="widget_entry_fav_contentDescription">Biểu tượng ngôi sao thể hiện mục được yêu thích</string>
-
-    <string name="activity_select_single_note">Chọn ghi chú</string>
-
+    <string name="settings_lock">Khoá ứng dụng (Beta)</string>
+    <string name="settings_lock_summary">Thông tin thiết bị</string>
+    <string name="settings_note_mode">Chế độ hiển thị cho các ghi chú</string>
+    <string name="settings_notes_path">Đặt thư mục</string>
+    <string name="settings_notes_path_description">Thư mục để lưu trữ các bản ghi chú trên Nextcloud của bạn</string>
+    <string name="settings_notes_path_success">Thư mục bản ghi chú mới: %1$s</string>
+    <string name="settings_prevent_screen_capture">Ngăn chặn chụp màn hình</string>
+    <string name="settings_theme_title">Chủ đề</string>
+    <string name="settings_wifi_only">Đồng bộ chỉ khi có Wi-Fi</string>
+    <string name="share">Chia sẻ</string>
+    <string name="share_dialog_title">Đang chia sẽ</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_expiration_date_label">Hết hạn %1$s</string>
+    <string name="share_file">Chia sẽ %1$s</string>
+    <string name="share_group_clarification">%1$s (nhóm)</string>
+    <string name="share_internal_link">Chia sẻ liên kết nội bộ</string>
+    <string name="share_internal_link_to_file_text">Liên kết chia sẻ nội bộ chỉ hoạt động đối với người dùng có quyền truy cập vào tệp này</string>
+    <string name="share_internal_link_to_folder_text">Liên kết chia sẻ nội bộ chỉ hoạt động đối với người dùng có quyền truy cập vào thư mục này</string>
+    <string name="share_known_remote_on_clarification">trên %1$s</string>
+    <string name="share_link">Chia sẻ liên kết</string>
+    <string name="share_link_password_title">Nhập mật khẩu</string>
+    <string name="share_link_with_label">Chi sẻ liên kết (%1$s)</string>
+    <string name="share_no_expiration_date_label">Đặt ngày hết hạn</string>
+    <string name="share_no_password_title">Đặt mật khẩu</string>
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Nhập mật khẩu tùy chọn</string>
+    <string name="share_password_dialog_fragment_skip">Bỏ qua</string>
+    <string name="share_password_title">Mật khẩu được bảo vệ</string>
+    <string name="share_permission_can_edit">Có thể chỉnh sửa</string>
+    <string name="share_permission_file_drop">Thả file</string>
+    <string name="share_permission_view_only">Chỉ xem</string>
+    <string name="share_permissions">Quyền kho</string>
+    <string name="share_remote_clarification">%1$s (từ xa)</string>
+    <string name="share_room_clarification">%1$s (cuộc hội thoại)</string>
+    <string name="share_send_new_email">Gửi email mới</string>
+    <string name="share_settings">Cài đặt</string>
+    <string name="share_via_link_section_title">Chia sẻ liên kết</string>
+    <string name="share_via_link_send_link_label">Gửi liên kết</string>
+    <string name="share_via_link_unset_password">Bỏ cài đặt</string>
+    <string name="share_with_title">Chia sẽ với…</string>
+    <string name="shared_text_empty">Văn bản được chia sẻ bị trống</string>
     <string name="shortcut_create_long">Tạo một ghi chú mới</string>
-
-    <string name="pref_value_font_normal">Bình thường</string>
-    <string name="pref_value_wifi_and_mobile">Đồng bộ khi có Wi-Fi và dữ liệu di động</string>
-    <string name="pref_value_lock">Password protection</string>
-
-    <string name="simple_error">Lỗi</string>
+    <string name="simple_about">Giới thiệu</string>
+    <string name="simple_backup">Sao lưu</string>
+    <string name="simple_cancel">Hủy</string>
+    <string name="simple_checkbox">Hộp chọn</string>
     <string name="simple_close">Đóng</string>
     <string name="simple_copy">Sao chép</string>
+    <string name="simple_edit">Chỉnh sửa</string>
+    <string name="simple_error">Lỗi</string>
     <string name="simple_exception">Ngoại lệ</string>
-    <string name="pin_to_homescreen">Ghim vào màn hình chính</string>
-    <string name="note_has_been_deleted">Ghi chú này đã bị xoá</string>
-    <string name="add_account">Thêm tài khoản</string>
-
-    <string name="category_music">Nhạc</string>
-    <string name="category_movies">Phim</string>
-    <string name="category_movie">Xem phim</string>
-    <string name="category_work">Công việc</string>
-    <string name="category_tasks">Nhiệm vụ</string>
-    <string name="category_recipes">Công thức nấu ăn</string>
-    <string name="category_food">Thức ăn</string>
-    <string name="category_password">Mật khẩu</string>
-    <string name="category_passwords">Mật khẩu</string>
-    <string name="category_game">Trò chơi</string>
-    <string name="category_games">Trò chơi</string>
-    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
-    <string name="category_play">Chơi</string>
-    <!-- Like a gift -->
-    <string name="category_present">Trình bày</string>
-    <string name="account_already_imported">Tài khoản đã được nhập sẵn</string>
-    <string name="no_notes_yet">Chưa có ghi chú</string>
-    <string name="no_notes_yet_description">Nhấn nút + để tạo ghi chú mới</string>
+    <string name="simple_link">Liên kết</string>
     <string name="simple_more">hơn</string>
     <string name="simple_move">Dịch chuyển</string>
-    <string name="category_readonly">Chỉ xem</string>
-    <string name="no_category">Không có hạng mục</string>
-    <string name="add_category">Thêm %1$s</string>
-    <string name="simple_checkbox">Hộp chọn</string>
-    <string name="unlock_notes">Mở khoá ghi chú</string>
-    <string name="error_dialog_title">Ôi không - Làm gì bây giờ? 🙁</string>
-    <string name="error_dialog_tip_token_mismatch_retry">Vui lòng cố gắng buộc dừng và khởi động lại ứng dụng. Có thể đã có một kết nối không chính xác đến ứng dụng Nextcloud.</string>
-    <string name="error_dialog_tip_token_mismatch_clear_storage">Nếu vấn đề vẫn tiếp diễn, hãy cố gắng xoá bộ nhớ của cả hai ứng dụng: Nextcloud và Nextcloud Ghi chú để giải quyết vấn đề này.</string>
-    <string name="error_dialog_tip_clear_storage">Bạn có thể xoá bộ nhớ bằng cách mở thông tin ứng dụng và chọn Bộ nhớ → Xoá bộ nhớ. ⚠️ Cảnh báo: Việc này sẽ xoá các ghi chú chưa được đồng bộ hoá!</string>
-    <string name="error_dialog_tip_files_outdated">Ứng dụng Nextcloud của bạn có vẻ đã lỗi thời. Vui lòng đi đến CH Play hoặc F-Droid để lấy phiên bản mới nhất.</string>
-    <string name="error_dialog_tip_files_force_stop">Có gì đó có vẻ sai với ứng dụng Nextcloud của bạn. Vui lòng cố gắng buộc dừng cả hai, ứng dụng Nextcloud và ứng dụng Nextcloud Ghi chú.</string>
-    <string name="error_dialog_tip_files_delete_storage">Nếu việc buộc dừng chúng không giúp gì được, bạn có thể cố gắng xoá bộ nhớ của cả hai ứng dụng.</string>
-    <string name="error_dialog_timeout_instance">Không có phản hồi từ máy chủ của bạn trong thời gian được đưa ra. Vui lòng chắc chắn rằng bản sao của bạn đang chạy tốt.</string>
-    <string name="error_dialog_timeout_toggle">Hãy kiểm tra kết nối mạng của bạn. Đôi khi việc tắt và bật lại dữ liệu di động hoặc Wi-Fi có thể giúp.</string>
-    <string name="error_dialog_check_server">Phản hồi của máy chủ của bạn không chính xác. Vui lòng kiểm tra xem bạn có thể truy cập các ghi chú của bạn qua giao diện web không.</string>
-    <string name="error_dialog_check_server_logs">Có vấn đề với thiết lập Nextcloud của bạn. Vui lòng xem các tệp nhật ký của máy chủ.</string>
-    <string name="error_dialog_check_maintenance">Vui lòng kiểm tra xem bản sao Nextcloud của bạn hiện tại có đang không ở trong chế độ bảo trì không.</string>
-    <string name="error_dialog_insufficient_storage">Bản sao Nextcloud của bạn không còn bộ nhớ trống. Vui lòng xoá một số tệp để đồng bộ các thay đổi cục bộ của bạn vào đám mây của bạn.</string>
-    <string name="error_dialog_we_need_info">Chúng tôi cần thông tin kỹ thuật sau đây để giúp bạn:</string>
-    <string name="error_dialog_server_app_enabled">Vui lòng chắc chắn rằng bạn đã cài đặt và bật ứng dụng \"Ghi chú\" trên máy chủ của bạn.</string>
-    <string name="error_dialog_redirect">Máy chủ của bạn đã phản hồi bằng mã trạng thái HTTP 302, nó có nghĩa là bạn chưa cài đặt ứng dụng Ghi chú trên máy chủ của bạn hoặc có gì đó bị thiết lập sai. Điều này có thể bị gây ra bởi những sự ghi đè tuỳ chỉnh trong tệp .htaccess hoặc bởi các ứng dụng Nextcloud như OID Client.</string>
-    <string name="error_dialog_tip_disable_battery_optimizations">Vui lòng tắt tất cả tối ưu hoá pin cho Nextcloud và ứng dụng Ghi chú.</string>
-    <string name="added_content">Đã thêm \"%1$s\"</string>
-    <string name="shared_text_empty">Văn bản được chia sẻ bị trống</string>
-    <string name="append_to_note">Thêm vào ghi chú</string>
-    <string name="change_note_title">Đổi tiêu đề ghi chú</string>
-    <string name="menu_edit_title">Chỉnh sửa tiêu đề</string>
+    <string name="simple_next">Tiếp</string>
+    <string name="simple_other">Khác</string>
+    <string name="simple_prev">Trước</string>
+    <string name="simple_remove">Xoá</string>
     <string name="simple_security">Bảo mật</string>
-    <string name="appearance_and_behavior">Ngoại hình và hành vi</string>
+    <string name="simple_switch">Chuyển</string>
     <string name="simple_synchronization">Đồng bộ hoá</string>
-    <string name="manage_accounts">Quản lý tài khoản</string>
-    <string name="action_formatting_help">Định dạng</string>
-
-
-    <string name="noteMode_remember_last">Nhớ sự lựa chọn cuối của tôi</string>
-
-    <string-array name="fontSize_entries">
-        <item>Nhỏ</item>
-        <item>Trung bình</item>
-        <item>Lớn</item>
-    </string-array>
-
-    <string-array name="darkmode_entries">
-        <item>Sáng</item>
-        <item>Tối</item>
-        <item>Mặc định hệ thống</item>
-    </string-array>
-
+    <string name="sort_alphabetically">Sắp xếp theo bảng chữ cái</string>
+    <string name="sort_last_modified">Sắp xếp theo ngày sửa đổi</string>
+    <string name="status_message">Thông báo trạng thái</string>
+    <string name="thirtyMinutes">30 phút</string>
+    <string name="thisWeek">Tuần này</string>
+    <string name="today">Hôm nay</string>
+    <string name="unlock_notes">Mở khoá ghi chú</string>
+    <string name="username">Tên đăng nhập</string>
+    <string name="welcome_text">Chào mừng đến %1$s</string>
+    <string name="whats_your_status">Trạng thái của bạn là gì?</string>
+    <string name="widget_entry_fav_contentDescription">Biểu tượng ngôi sao thể hiện mục được yêu thích</string>
+    <string name="widget_not_logged_in">Vui lòng đăng nhập vào Ghi chú trước khi sử dụng tiện ích này</string>
+    <string name="widget_note_list_placeholder">Không có ghi chú</string>
+    <string name="widget_note_list_title">Danh sách ghi chú</string>
+    <string name="widget_single_note_placeholder_tv">Không tìm thấy ghi chú</string>
+    <string name="widget_single_note_title">Ghi chú đơn</string>
+    <string name="write_email">Gửi email</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Bạn phải có kết nối internet để thêm tài khoản.</string>
     <plurals name="ab_selected">
         <item quantity="other">Đã chọn %d</item>
     </plurals>
@@ -274,113 +322,7 @@
     <plurals name="share_multiple">
         <item quantity="other">Chia sẻ nội dung của %1$d ghi chú</item>
     </plurals>
-
-    <string name="formatting_help_divider" translateable="false">---</string>
-    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
-    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
-    <string name="formatting_help_codefence" translateable="false">```</string>
-    <string name="formatting_help_codefence_outer" translateable="false">````</string>
-    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
-    <string name="formatting_help_cbf_title">Định dạng dựa trên ngữ cảnh</string>
-    <string name="formatting_help_cbf_body_1">Một mục đích thiết kế lớn của ứng dụng Ghi chú là để cung cấp một công cụ không có sự xao nhãng. Tuy nhiên, bạn sẽ có thể định dạng văn bản của bạn bằng Markdown. Đối với các ví dụ khác nhau được nhắc đến dưới đây, bạn có thể sử dụng các lối tắt để bạn có thể định dạng các ghi chú mà không đánh các mã ở dưới.</string>
-    <string name="formatting_help_cbf_body_2">Chỉ cần chọn một phạm vi văn bản hoặc chạmvào con trỏ tại bất kỳ vị trí nào và bạn sẽ thấy một menu popup chứa các mục %4$s hoặc %5$s bên cạnh các mục mặc định %1$s, %2$s, %3$s.</string>
-
-    <string name="formatting_help_text_title">Văn bản</string>
-    <string name="formatting_help_text_body">Việc làm cho một số từ trở nên %1$sđậm%1$s và các từ khác %2$snghiêng%2$s bằng Markdown là rất dễ. Bạn có thể %3$sgạch bỏ%3$s một số từ và thậm chí là [liên kết đến Nextcloud](https://nextcloud.com).</string>
-
-    <string name="formatting_help_lists_title">Danh sách</string>
-    <string name="formatting_help_lists_body_1">Đôi khi bạn muốn các danh sách đánh số:</string>
-    <string name="formatting_help_lists_body_2">Một</string>
-    <string name="formatting_help_lists_body_3">Hai</string>
-    <string name="formatting_help_lists_body_4">Ba</string>
-    <string name="formatting_help_lists_body_5">Đôi khi bạn muốn gạch đầu dòng:</string>
-    <string name="formatting_help_lists_body_6">Bắt đầu một dòng bằng dấu gạch ngang</string>
-    <string name="formatting_help_lists_body_7">Và nếu bạn có mục con, hãy đặt hai dấu cách trước dấu gạch ngang hoặc sao:</string>
-    <string name="formatting_help_lists_body_8">Như thế này</string>
-    <string name="formatting_help_lists_body_9">Và thế này</string>
-
-    <string name="formatting_help_checkboxes_title">Hộp chọn</string>
-    <string name="formatting_help_checkboxes_body_1">Để tạo ô đánh dấu, hãy sử dụng danh sách có ngoặc theo sau</string>
-    <string name="formatting_help_checkboxes_body_2">Mục 1</string>
-    <string name="formatting_help_checkboxes_body_3">Mục 2</string>
-
-    <string name="formatting_help_structured_documents_title">Tài liệu có cấu trúc</string>
-    <string name="formatting_help_structured_documents_body_1">Đôi khi việc có tiêu đề có cấp khác nhau để cấu trúc hóa tài liệu của bạn là rất hữu dụng. Bắt đầu dòng bằng %1$s để tạo tiêu đề. Nhiều %2$s liên tục chỉ ra kích cỡ tiêu đề nhỏ hơn.</string>
-    <string name="formatting_help_structured_documents_body_2">Đây là tiêu đề cấp ba</string>
-    <string name="formatting_help_structured_documents_body_3">Bạn có thể sử dụng một %1$s cho đến tối đa %2$s sáu để tạo kích cỡ tiêu đề khác nhau.</string>
-    <string name="formatting_help_structured_documents_body_4">Nếu bạn muốn trích dẫn ai đó, hãy sử dụng kí tự %1$s trước dòng:</string>
-    <string name="formatting_help_code_title">Mã</string>
-    <string name="formatting_help_code_body_1">Có nhiều cách tạo kiểu cho mã bằng Markdown. Nếu bạn có khối mã, hãy bọc chúng trong backtick:</string>
-    <string name="formatting_help_code_body_2">Markdown cũng hỗ trợ code fencing, nó cho phép tạo nhiều dòng mà không thụt vào:</string>
-    <string name="formatting_help_code_body_3">Và nếu bạn muốn đánh dấu cú pháp, hãy bao gồm ngôn ngữ:</string>
-
-    <string name="formatting_help_tables_title">Bảng</string>
-    <!-- Column header of a sample table -->
-    <string name="formatting_help_tables_column">Cột %1d</string>
-    <!-- Table cell value of a sample table -->
-    <string name="formatting_help_tables_value">Giá trị %1d</string>
-
-    <string name="formatting_help_images_title">Hình ảnh</string>
-    <string name="formatting_help_images_alt">Hình ảnh đẹp</string>
-
-    <string name="simple_other">Khác</string>
-    <string name="sort_last_modified">Sắp xếp theo ngày sửa đổi</string>
-    <string name="sort_alphabetically">Sắp xếp theo bảng chữ cái</string>
-    <string name="error_action_open_battery_settings">Cài đặt pin</string>
-    <string name="error_action_open_deck_info">Mở Thông tin ứng dụng</string>
-    <string name="error_action_open_network">Cài đặt mạng</string>
-    <string name="error_action_update_files_app">Cập nhật</string>
-    <string name="no_account_configured_yet">Chưa có tài khoản nào được thiết lập</string>
-    <string name="no_other_accounts">Bạn chưa thiết lập tài khoản nào khác.</string>
-    <string name="choose_account">Chọn tài khoản</string>
-    <string name="context_based_formatting">Hiện lên định dạng dựa trên ngữ cảnh</string>
     <plurals name="remove_account_message">
         <item quantity="other">Việc xoá tài khoản %1$s cũng sẽ xoá %2$d thay đổi chưa được đồng bộ hoá và không thể phục hồi.</item>
     </plurals>
-    <string name="remove_account">Xoá %1$s</string>
-
-    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Bạn phải có kết nối internet để thêm tài khoản.</string>
-    <string name="settings_notes_path">Đặt thư mục</string>
-
-    <string name="simple_next">Tiếp</string>
-    <string name="simple_prev">Trước</string>
-    <string name="simple_backup">Sao lưu</string>
-    <string name="backup">Chúng tôi đã phát hiện trạng thái không thể phục hồi của ứng dụng. Vui lòng sao lưu các thay đổi chưa đồng bộ và xóa bộ nhớ của ứng dụng Ghi chú.</string>
-    <string name="settings_notes_path_description">Thư mục để lưu trữ các bản ghi chú trên Nextcloud của bạn</string>
-    <string-array name="settings_file_suffixes">
-        <item translatable="false">.txt</item>
-        <item translatable="false">.md</item>
-    </string-array>
-    <string name="settings_notes_path_success">Thư mục bản ghi chú mới: %1$s</string>
-    <string name="settings_file_suffix">Phần mở rộng tệp</string>
-    <string name="settings_file_suffix_description">Phần mở rộng tệp cho các bản ghi chú mới trên Nextcloud của bạn</string>
-    <string name="settings_file_suffix_success">Hậu tố tệp mới: %1$s</string>
-    <string name="http_status_code">Mã trạng thái HTTP: %1$d</string>
-    <string name="progress_import_indeterminate">Đang nhập các ghi chú...</string>
-    <string name="progress_import">Đang nhập ghi chú %1$d trong số %2$d...</string>
-    <string name="account_imported">Đã nhập tài khoản.</string>
-    <string name="action_back">Quay lại</string>
-    <string name="set_online_status">Trạng thái trực tuyến</string>
-    <string name="status_message">Thông báo trạng thái</string>
-    <string name="whats_your_status">Trạng thái của bạn là gì?</string>
-    <string name="clear_status_after">Xóa trạng thái sau</string>
-    <string name="clear">Xóa</string>
-    <string name="dontClear">Không xoá</string>
-    <string name="today">Hôm nay</string>
-    <string name="thirtyMinutes">30 phút</string>
-    <string name="oneHour">1 tiếng</string>
-    <string name="fourHours">4 tiếng</string>
-    <string name="thisWeek">Tuần này</string>
-    <string name="file_list_seconds_ago">vài giây trước</string>
-    <string name="online_status">Trạng thái trực tuyến</string>
-    <string name="online">Trực tuyến</string>
-    <string name="dnd">Đừng làm phiền</string>
-    <string name="away">Tạm vắng</string>
-    <string name="invisible">Vô hình</string>
-    <string name="busy">Bận</string>
-    <string name="mute_all_notifications">Tắt tiếng tất cả thông báo</string>
-    <string name="appear_offline">Đang offline</string>
-    <string name="ecosystem_apps_display_files">Tệp Tin</string>
-    <string name="ecosystem_apps_display_talk">Nói chuyện</string>
-    <string name="ecosystem_apps_display_more">Thêm</string>
 </resources>

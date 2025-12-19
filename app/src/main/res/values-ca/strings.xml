@@ -1,296 +1,345 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Nextcloud Notes - Android Client
-  ~
-  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
-  ~ SPDX-License-Identifier: GPL-3.0-or-later
--->
-<resources>
-    <string name="app_name">Notes</string>
-    <string name="app_name_long">Notes del Nextcloud</string>
-    <string name="label_all_notes">Totes les notes</string>
-    <string name="label_favorites">Preferides</string>
-    <string name="action_create">Nota nova</string>
-    <string name="welcome_text">Us donem la benvinguda a %1$s</string>
-    <string name="action_settings">Paràmetres</string>
-    <string name="action_trashbin">Notes suprimides</string>
-    <string name="action_search">Cerca</string>
-    <string name="action_sorting_method">Mètode d\'ordenació</string>
-    <string name="simple_cancel">Cancel·la</string>
-    <string name="simple_switch">Canvia</string>
-    <string name="simple_edit">Edita</string>
-    <string name="simple_remove">Suprimeix</string>
-    <string name="action_edit_save">Desa</string>
-    <string name="simple_about">Quant a</string>
-    <string name="simple_link">Enllaç</string>
-    <string name="action_note_deleted">S\'ha suprimit %1$s</string>
-    <string name="action_note_restored">S\'ha restaurat %1$s</string>
-    <string name="action_undo">Desfés</string>
-    <string name="action_uncategorized">Sense categoria</string>
-    <string name="menu_delete">Suprimeix</string>
-    <string name="menu_change_category">Categoria</string>
-    <string name="menu_favorite">Preferida</string>
-    <string name="menu_preview">Previsualitza</string>
-    <string name="menu_share">Comparteix</string>
-    <string name="common_loading">S\'està carregant…</string>
-
-
-    <string name="search_in_category">Cerca a %1$s</string>
-    <string name="search_in_all">Cerca en totes les notes</string>
-
-    <string name="change_category_title">Trieu una categoria</string>
-
-    <string name="note_share_activity_shared_with_you">Compartit per %1$s</string>
-    <string name="note_share_activity_share_link">Comparteix un enllaç</string>
-    <string name="note_share_activity_could_not_retrieve_url">No s\'ha pogut recuperar la URL</string>
-    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" us ha estat compartit</string>
-    <string name="note_share_activity_contact_no_permission">Cal permís dels contactes.</string>
-    <!-- NoteShareDetailActivity -->
-    <string name="note_share_detail_activity_advanced_settings">Paràmetres avançats</string>
-    <string name="note_share_detail_activity_share_send_note">Nota per al destinatari</string>
-    <string name="note_share_detail_activity_hint_note">Nota</string>
-    <string name="note_share_detail_activity_common_next">Següent</string>
-    <string name="note_share_detail_activity_common_confirm">Confirma</string>
-    <string name="note_share_detail_activity_set_note">Estableix la nota</string>
-    <string name="note_share_detail_activity_send_share">Envia la compartició</string>
-    <string name="note_share_detail_activity_hint_name">Nom</string>
-    <string name="note_share_detail_activity_link_name">Nom de l\'enllaç</string>
-    <string name="note_share_detail_activity_share_link_empty_password">Heu d\'escriure una contrasenya</string>
-    <string name="note_share_detail_activity_hint_password">Contrasenya</string>
-    <string name="note_share_detail_activity_no_share_permission_selected">Seleccioneu almenys un permís per compartir.</string>
-    <string name="note_share_detail_activity_label_empty">L\'etiqueta no pot estar buida</string>
-    <string name="note_share_detail_activity_cancel">Cancel·la</string>
-    <!-- SharePasswordDialogFragment -->
-    <string name="share_password_dialog_fragment_share_link_optional_password_title">Introduïu una contrasenya opcional</string>
-    <string name="share_password_dialog_fragment_skip">Omet</string>
-
-    <string name="share_link_password_title">Escriviu una contrasenya</string>
-    <string name="common_ok">Correcta</string>
-    <string name="common_delete">Suprimir</string>
-    <string name="write_email">Enviar correu</string>
-    <string name="no_browser_available">No hi ha cap aplicació disponible per manegar els enllaços</string>
-    <string name="no_email_app_available">No hi ha cap aplicació disponible per gestionar l\'adreça de correu</string>
-    <string name="no_actions">No hi ha cap acció per a aquest usuari</string>
-
-    <string name="email_pick_failed">No s\'ha pogut triar l\'adreça electrònica.</string>
-    <string name="failed_update_ui">No s\'ha pogut actualitzar la IU</string>
-    <string name="file_detail_sharing_fragment_no_contact_app_message">No hi ha cap aplicació disponible per a seleccionar contactes</string>
-    <string name="activity_chooser_title">Envia l\'enllaç a…</string>
-
-    <string name="activity_chooser_send_file_title">Envia</string>
-    <string name="share_internal_link_to_folder_text">L\'enllaç de compartició intern només funciona per a usuaris amb permís d\'accés a aquesta carpeta</string>
-    <string name="share_internal_link_to_file_text">L\'enllaç de compartició intern només funciona per a usuaris amb permís d\'accés a aquest fitxer</string>
-    <string name="share_internal_link">Compartir l\'enllaç intern</string>
-    <string name="delete_link">Suprimir enllaç</string>
-    <string name="share_settings">Paràmetres</string>
-    <string name="share_send_new_email">Envia un correu nou</string>
-    <string name="share_dialog_title">Ús compartit</string>
-    <string name="share_file">Comparteix %1$s</string>
-    <string name="share_expiration_date_label">Caduca el %1$s</string>
-    <string name="share_expiration_date_format">%1$s</string>
-    <string name="share_no_expiration_date_label">Estableix la data de caducitat</string>
-    <string name="share_via_link_section_title">Comparteix un enllaç</string>
-    <string name="share_via_link_send_link_label">Envia l\'enllaç</string>
-    <string name="share_password_title">Protegit per contrasenya</string>
-    <string name="share_no_password_title">Estableix una contrasenya</string>
-    <string name="share_with_title">Comparteix amb…</string>
-    <string name="share_via_link_unset_password">No definit</string>
-    <string name="add_another_public_share_link">Afegeix un altre enllaç</string>
-    <string name="add_new_public_share">Afegeix nou enllaç d\'accés públic</string>
-    <string name="public_share_name">Nou nom</string>
-    <string name="share_link_with_label">Compartir enllaç (%1$s)</string>
-    <string name="share_link">Comparteix un enllaç</string>
-    <string name="allow_resharing">Permet l\'ús compartit derivat</string>
-    <string name="link_share_view_only">Només visualitació</string>
-    <string name="link_share_editing">Edició</string>
-    <string name="link_share_allow_upload_and_editing">Permet la pujada i l\'edició</string>
-    <string name="link_share_file_drop">Tramesa de fitxers (només pujada)</string>
-    <string name="could_not_retrieve_shares">No s\'ha pogut recuperar la compartició</string>
-    <string name="share_permission_view_only">Només visualitació</string>
-    <string name="share_permission_can_edit">Pot editar</string>
-    <string name="share_permission_file_drop">Pujada de fitxers</string>
-    <string name="share_permissions">Compartir permisos</string>
-    <string name="username">Nom d\'usuari</string>
-    <string name="share_group_clarification">%1$s (grup)</string>
-    <string name="share_remote_clarification">%1$s (remot)</string>
-    <string name="share_room_clarification">%1$s(conversa)</string>
-    <string name="share_known_remote_on_clarification">al %1$s</string>
-    <string name="remote">(remot)</string>
-
-    <string name="copy_link">Copia l\'enllaç</string>
-    <string name="share">Comparteix</string>
-    <string name="clipboard_text_copied">S\'ha copiat l\'enllaç</string>
-    <string name="clipboard_no_text_to_copy">No s\'ha rebut cap text per copiar al porta-retalls</string>
-    <string name="clipboard_unexpected_error">Error inesperat mentre es copiava al porta-papers</string>
-    <string name="clipboard_label">Text copiat des de %1$s</string>
-
-    <string name="listview_updated_today">Avui</string>
-    <string name="listview_updated_yesterday">Ahir</string>
-    <string name="listview_updated_this_week">Aquesta setmana</string>
-    <string name="listview_updated_last_week">La setmana passada</string>
-    <string name="listview_updated_this_month">Aquest mes</string>
-    <string name="listview_updated_last_month">El mes passat</string>
-    <string name="settings_note_mode">Mode de visualització per a les notes</string>
-    <string name="settings_note_mode_new">Comportament de l\'obertura de notes</string>
-    <string name="settings_theme_title">Tema</string>
-    <string name="settings_font_title">Tipus de lletra de mida fixa</string>
-    <string name="settings_font_size">Mida de la lletra</string>
-    <string name="settings_wifi_only">Sincronitza només per la connexió sense fil</string>
-    <string name="settings_lock">Blocatge de l\'aplicació (beta)</string>
-    <string name="settings_lock_summary">Credencials del dispositiu</string>
-    <string name="settings_background_sync">Sincronització en segon pla</string>
-    <string name="settings_prevent_screen_capture">Impedeix la captura de la pantalla</string>
-    <string name="settings_show_ecosystem_apps">Mostra el selector d\'aplicacions</string>
-    <string name="settings_show_ecosystem_apps_summary">Suggeriments de l\'aplicació Nextcloud a la capçalera de navegació</string>
-    <string name="settings_gridview">Visualització de quadrícula</string>
-    <string name="settings_enable_direct_edit">Edició directa</string>
-    <string name="settings_enable_direct_edit_summary">Si es desactiva, l\'editor avançat quedarà amagat.</string>
-    <string name="settings_keep_screen_on">Mantén la pantalla encesa</string>
-    <string name="settings_keep_screen_on_summary">Quan visualitzi o editi una nota</string>
-
-    <string name="error_sync">S\'ha produït un error en la sincronització: %1$s</string>
-    <string name="error_synchronization">S\'ha produït un error en la sincronització</string>
-    <string name="error_no_network">No hi ha connexió a la xarxa</string>
-    <string name="error_maintenance_mode">El servidor es troba en mode de manteniment</string>
-    <string name="error_unknown">S\'ha produït un error desconegut</string>
-
-    <string name="about_version_title">Versió</string>
-    <string name="about_version">Actualment, teniu la versió %1$s</string>
-    <string name="about_maintainer_title">Manteniment</string>
-    <string name="about_developers_title">Desenvolupament</string>
-    <string name="about_developers_original_author">autor original</string>
-    <string name="about_translators_title">Traducció</string>
-    <string name="about_translators_transifex">Comunitat del Nextcloud a %1$s</string>
-    <string name="about_testers_title">Verificació</string>
-    <string name="about_source_title">Codi font</string>
-    <string name="about_source">Aquest projecte s\'allotja a GitHub: %1$s</string>
-    <string name="about_issues_title">Errors</string>
-    <string name="about_issues">Podeu informar d\'errors, proposar millores i demanar noves funcionalitats al gestor d\'errors de GitHub: %1$s</string>
-    <string name="about_translate_title">Traducció</string>
-    <string name="about_translate">Uniu-vos a l\'equip del Nextcloud a Transifex i ajudeu-nos a traduir aquesta aplicació: %1$s</string>
-    <string name="about_app_license_title">Llicència de l\'aplicació</string>
+  <resources>
     <string name="about_app_license">Aquesta aplicació està publicada sota la Llicència Pública General de GNU v3+.</string>
     <string name="about_app_license_button">Mostra la llicència</string>
-    <string name="about_icons_disclaimer_title">Icones</string>
-    <string name="about_icons_disclaimer_app_icon">Per a veure la icona original, consulteu %1$s.</string>
-    <string name="about_icons_disclaimer_mdi_icons">La resta d\'icones que utilitza aquesta aplicació són %1$s fetes per Google Inc. i publicades sota la llicència Apache 2.0.</string>
-    <string name="about_icons_disclaimer_mdi">icones de Material Design</string>
-    <string name="about_credits_tab_title">Crèdits</string>
+    <string name="about_app_license_title">Llicència de l\'aplicació</string>
     <string name="about_contribution_tab_title">Contribució</string>
+    <string name="about_credits_tab_title">Crèdits</string>
+    <string name="about_developers_original_author">autor original</string>
+    <string name="about_developers_title">Desenvolupament</string>
+    <string name="about_icons_disclaimer_app_icon">Per a veure la icona original, consulteu %1$s.</string>
+    <string name="about_icons_disclaimer_mdi">icones de Material Design</string>
+    <string name="about_icons_disclaimer_mdi_icons">La resta d\'icones que utilitza aquesta aplicació són %1$s fetes per Google Inc. i publicades sota la llicència Apache 2.0.</string>
+    <string name="about_icons_disclaimer_title">Icones</string>
+    <string name="about_issues">Podeu informar d\'errors, proposar millores i demanar noves funcionalitats al gestor d\'errors de GitHub: %1$s</string>
+    <string name="about_issues_title">Errors</string>
     <string name="about_license_tab_title">Llicència</string>
-
-    <string name="widget_note_list_title">Llista de notes</string>
-    <string name="widget_note_list_placeholder">No hi ha notes</string>
-    <string name="widget_single_note_title">Una nota</string>
-    <string name="widget_single_note_placeholder_tv">No s\'ha trobat la nota</string>
-    <string name="widget_not_logged_in">Inicieu la sessió a l\'aplicació Notes abans d\'utilitzar aquest giny</string>
-    <string name="widget_entry_fav_contentDescription">La icona de l\'estrella serveix per a marcar un element com a preferit</string>
-
+    <string name="about_maintainer_title">Manteniment</string>
+    <string name="about_source">Aquest projecte s\'allotja a GitHub: %1$s</string>
+    <string name="about_source_title">Codi font</string>
+    <string name="about_testers_title">Verificació</string>
+    <string name="about_translate">Uniu-vos a l\'equip del Nextcloud a Transifex i ajudeu-nos a traduir aquesta aplicació: %1$s</string>
+    <string name="about_translate_title">Traducció</string>
+    <string name="about_translators_title">Traducció</string>
+    <string name="about_translators_transifex">Comunitat del Nextcloud a %1$s</string>
+    <string name="about_version">Actualment, teniu la versió %1$s</string>
+    <string name="about_version_title">Versió</string>
+    <string name="account_already_imported">Ja s\'ha importat el compte</string>
+    <string name="account_imported">S\'ha importat el compte.</string>
+    <string name="action_back">Torna</string>
+    <string name="action_create">Nota nova</string>
+    <string name="action_edit_save">Desa</string>
+    <string name="action_formatting_help">Format</string>
+    <string name="action_note_deleted">S\'ha suprimit %1$s</string>
+    <string name="action_note_restored">S\'ha restaurat %1$s</string>
+    <string name="action_search">Cerca</string>
+    <string name="action_settings">Paràmetres</string>
+    <string name="action_sorting_method">Mètode d\'ordenació</string>
+    <string name="action_trashbin">Notes suprimides</string>
+    <string name="action_uncategorized">Sense categoria</string>
+    <string name="action_undo">Desfés</string>
+    <string name="activity_chooser_send_file_title">Envia</string>
+    <string name="activity_chooser_title">Envia l\'enllaç a…</string>
     <string name="activity_select_single_note">Seleccioneu una nota</string>
-
-    <string name="shortcut_create_long">Crea una nota nova</string>
-
-    <string name="pref_value_font_normal">Normal</string>
-    <string name="pref_value_wifi_and_mobile">Sincronitza per la connexió sense fil i dades mòbils</string>
-    <string name="pref_value_lock">Protecció amb contrasenya</string>
-
-    <string name="simple_error">Error</string>
-    <string name="simple_close">Tanca</string>
-    <string name="simple_copy">Copia</string>
-    <string name="simple_exception">Excepció</string>
-    <string name="pin_to_homescreen">Fixa-ho a la pantalla d\'inici</string>
-    <string name="note_has_been_deleted">S\'ha suprimit aquesta nota</string>
     <string name="add_account">Afegeix un compte</string>
-
-    <string name="category_music">Música</string>
-    <string name="category_movies">Pel·lícules</string>
-    <string name="category_movie">Pel·lícula</string>
-    <string name="category_work">Feina</string>
-    <string name="category_todo">Tasca pendent</string>
-    <string name="category_todos">Tasques pendents</string>
+    <string name="add_another_public_share_link">Afegeix un altre enllaç</string>
+    <string name="add_category">Afegeix %1$s</string>
+    <string name="add_new_public_share">Afegeix nou enllaç d\'accés públic</string>
+    <string name="added_content">S\'ha afegit «%1$s»</string>
+    <string name="allow_resharing">Permet l\'ús compartit derivat</string>
+    <string name="app_name">Notes</string>
+    <string name="app_name_long">Notes del Nextcloud</string>
+    <string name="appear_offline">Apareixeu fora de línia</string>
+    <string name="appearance_and_behavior">Aparença i comportament</string>
+    <string name="append_to_note">Afegeix a la nota</string>
+    <string name="backup">S\'ha detectat un estat irrecuperable de l\'aplicació. Feu una còpia de seguretat dels canvis sense sincronitzar i esborreu l\'emmagatzematge de l\'aplicació Notes.</string>
+    <string name="busy">Ocupat</string>
+    <string name="category_bake">Cuina</string>
     <string name="category_checklists">Llistes</string>
-    <string name="category_tasks">Tasques</string>
+    <string name="category_credentials">Credencial</string>
+    <string name="category_food">Menjar</string>
+    <string name="category_game">Joc</string>
+    <string name="category_games">Jocs</string>
+    <string name="category_gift">Regal</string>
+    <string name="category_gifts">Regals</string>
+    <string name="category_key">Clau</string>
+    <string name="category_keys">Claus</string>
+    <string name="category_movie">Pel·lícula</string>
+    <string name="category_movies">Pel·lícules</string>
+    <string name="category_music">Música</string>
+    <string name="category_password">Contrasenya</string>
+    <string name="category_passwords">Contrasenyes</string>
+    <string name="category_play">Joguina</string>
+    <string name="category_present">Obsequi</string>
+    <string name="category_presents">Obsequis</string>
+    <string name="category_readonly">Només de lectura</string>
     <string name="category_recipe">Recepta</string>
     <string name="category_recipes">Receptes</string>
     <string name="category_restaurant">Restaurant</string>
     <string name="category_restaurants">Restaurants</string>
-    <string name="category_food">Menjar</string>
-    <string name="category_bake">Cuina</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_key">Clau</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_keys">Claus</string>
-    <string name="category_password">Contrasenya</string>
-    <string name="category_passwords">Contrasenyes</string>
-    <string name="category_credentials">Credencial</string>
-    <string name="category_game">Joc</string>
-    <string name="category_games">Jocs</string>
-    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
-    <string name="category_play">Joguina</string>
-    <string name="category_gift">Regal</string>
-    <string name="category_gifts">Regals</string>
-    <!-- Like a gift -->
-    <string name="category_present">Obsequi</string>
-    <!-- Like a gift -->
-    <string name="category_presents">Obsequis</string>
-
-    <string name="account_already_imported">Ja s\'ha importat el compte</string>
-    <string name="no_notes_yet">Encara no hi ha notes</string>
-    <string name="no_notes_yet_description">Premeu el botó + per a crear una nota nova</string>
-    <string name="simple_more">Més</string>
-    <string name="simple_move">Mou</string>
-    <string name="category_readonly">Només de lectura</string>
-    <string name="no_category">Sense categoria</string>
-    <string name="add_category">Afegeix %1$s</string>
-    <string name="simple_checkbox">Casella de selecció</string>
-    <string name="unlock_notes">Desbloca les notes</string>
-    <string name="error_dialog_title">Oh, no! I ara què? </string>
-    <string name="error_dialog_tip_token_mismatch_retry">Proveu de forçar el tancament de l\'aplicació i reinicieu-la. Pot ser que hi hagi hagut una connexió incorrecta a l\'aplicació Nextcloud.</string>
-    <string name="error_dialog_tip_token_mismatch_clear_storage">Si el problema persisteix, proveu d\'esborrar l\'emmagatzematge de totes dues aplicacions: Nextcloud i Notes del Nextcloud per tal de resoldre el problema.</string>
-    <string name="error_dialog_tip_clear_storage">Per a esborrar l\'emmagatzematge, obriu la informació de l\'aplicació i seleccioneu Emmagatzematge → Esborra l\'emmagatzematge. ⚠️ Avís: això també esborrarà les notes que encara no s\'hagin sincronitzat!</string>
-    <string name="error_dialog_tip_files_outdated">Sembla que l\'aplicació Nextcloud està obsoleta. Visiteu la Play Store o l\'F-Droid per a obtenir la darrera versió.</string>
-    <string name="error_dialog_tip_files_force_stop">Sembla que hi ha algun problema amb la vostra aplicació Nextcloud. Intenteu forçar l\'aturada tant de l\'aplicació Nextcloud com de l\'aplicació Notes del Nextcloud.</string>
-    <string name="error_dialog_tip_files_delete_storage">Si forçar-ne l\'aturada no ajuda, podeu provar d\'esborrar l\'emmagatzematge de totes dues aplicacions.</string>
-    <string name="error_dialog_timeout_instance">No hi ha hagut cap resposta del servidor en el temps donat. Assegureu-vos que la vostra instància funcioni correctament.</string>
-    <string name="error_dialog_timeout_toggle">Comproveu la connexió a la xarxa. De vegades, desactivar i tornar a activar les dades mòbils o la connexió sense fil pot ajudar.</string>
+    <string name="category_tasks">Tasques</string>
+    <string name="category_todo">Tasca pendent</string>
+    <string name="category_todos">Tasques pendents</string>
+    <string name="category_work">Feina</string>
+    <string name="change_category_title">Trieu una categoria</string>
+    <string name="change_note_title">Canvia el títol de la nota</string>
+    <string name="choose_account">Trieu un compte</string>
+    <string name="clear">Neteja</string>
+    <string name="clear_status_after">Esborra l\'estat després de</string>
+    <string name="clipboard_label">Text copiat des de %1$s</string>
+    <string name="clipboard_no_text_to_copy">No s\'ha rebut cap text per copiar al porta-retalls</string>
+    <string name="clipboard_text_copied">S\'ha copiat l\'enllaç</string>
+    <string name="clipboard_unexpected_error">Error inesperat mentre es copiava al porta-papers</string>
+    <string name="common_delete">Suprimir</string>
+    <string name="common_loading">S\'està carregant…</string>
+    <string name="common_ok">Correcta</string>
+    <string name="context_based_formatting">Element emergent de format basat en el context</string>
+    <string name="copy_link">Copia l\'enllaç</string>
+    <string name="could_not_retrieve_shares">No s\'ha pogut recuperar la compartició</string>
+    <string name="delete_link">Suprimir enllaç</string>
+    <string name="direct_editing_error">S\'ha produït un error en carregar l\'edició enriquida</string>
+    <string name="dontClear">No l\'esborris</string>
+    <string name="ecosystem_apps_display_files">Fitxers</string>
+    <string name="ecosystem_apps_display_more">Més</string>
+    <string name="ecosystem_apps_display_talk">Converses</string>
+    <string name="ecosystem_apps_more">Més aplicacions de Nextcloud</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="email_pick_failed">No s\'ha pogut triar l\'adreça electrònica.</string>
+    <string name="error_action_open_battery_settings">Paràmetres de la bateria</string>
+    <string name="error_action_open_deck_info">Obre la informació de l\'aplicació</string>
+    <string name="error_action_open_network">Paràmetres de la xarxa</string>
+    <string name="error_action_update_files_app">Actualitza</string>
+    <string name="error_dialog_check_maintenance">Comproveu que la vostra instància del Nextcloud no estigui en mode de manteniment.</string>
     <string name="error_dialog_check_server">La resposta del servidor no ha estat correcta. Comproveu que podeu accedir les vostres notes des de la interfície web.</string>
     <string name="error_dialog_check_server_logs">Hi ha un problema amb la vostra configuració del Nextcloud. Consulteu els fitxers de registre del servidor.</string>
-    <string name="error_dialog_check_maintenance">Comproveu que la vostra instància del Nextcloud no estigui en mode de manteniment.</string>
     <string name="error_dialog_insufficient_storage">No queda espai d\'emmagatzematge lliure a la vostra instància del Nextcloud. Suprimiu alguns fitxers per a sincronitzar els canvis locals en el núvol.</string>
-    <string name="error_dialog_we_need_info">Necessitem la informació tècnica següent per a poder ajudar-vos:</string>
-    <string name="error_dialog_server_app_enabled">Assegureu-vos que hàgiu instal·lat i activat l\'aplicació «Notes» al vostre servidor.</string>
-    <string name="error_dialog_redirect">El vostre servidor ha respost amb un codi d\'estat HTTP 302, que vol dir que no teniu instal·lada l\'aplicació Notes al vostre servidor o que hi ha alguna cosa mal configurada. Això pot tenir la causa en una anul·lació personalitzada en un fitxer .htaccess o en aplicacions del Nextcloud com Client OID.</string>
-    <string name="error_dialog_tip_disable_battery_optimizations">Inhabiliteu totes les optimitzacions de la bateria per a les aplicacions Nextcloud i Notes.</string>
     <string name="error_dialog_min_version">L\'aplicació Notes per a l\'Android requereix que la versió de l\'aplicació Nextcloud instal·lada sigui com a mínim la versió 3.18.</string>
-    <string name="added_content">S\'ha afegit «%1$s»</string>
-    <string name="shared_text_empty">El text compartit estava buit</string>
-    <string name="append_to_note">Afegeix a la nota</string>
-    <string name="change_note_title">Canvia el títol de la nota</string>
-    <string name="menu_edit_title">Edita el títol</string>
-    <string name="simple_security">Seguretat</string>
-    <string name="appearance_and_behavior">Aparença i comportament</string>
-    <string name="simple_synchronization">Sincronització</string>
+    <string name="error_dialog_redirect">El vostre servidor ha respost amb un codi d\'estat HTTP 302, que vol dir que no teniu instal·lada l\'aplicació Notes al vostre servidor o que hi ha alguna cosa mal configurada. Això pot tenir la causa en una anul·lació personalitzada en un fitxer .htaccess o en aplicacions del Nextcloud com Client OID.</string>
+    <string name="error_dialog_server_app_enabled">Assegureu-vos que hàgiu instal·lat i activat l\'aplicació «Notes» al vostre servidor.</string>
+    <string name="error_dialog_timeout_instance">No hi ha hagut cap resposta del servidor en el temps donat. Assegureu-vos que la vostra instància funcioni correctament.</string>
+    <string name="error_dialog_timeout_toggle">Comproveu la connexió a la xarxa. De vegades, desactivar i tornar a activar les dades mòbils o la connexió sense fil pot ajudar.</string>
+    <string name="error_dialog_tip_clear_storage">Per a esborrar l\'emmagatzematge, obriu la informació de l\'aplicació i seleccioneu Emmagatzematge → Esborra l\'emmagatzematge. ⚠️ Avís: això també esborrarà les notes que encara no s\'hagin sincronitzat!</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Inhabiliteu totes les optimitzacions de la bateria per a les aplicacions Nextcloud i Notes.</string>
+    <string name="error_dialog_tip_files_delete_storage">Si forçar-ne l\'aturada no ajuda, podeu provar d\'esborrar l\'emmagatzematge de totes dues aplicacions.</string>
+    <string name="error_dialog_tip_files_force_stop">Sembla que hi ha algun problema amb la vostra aplicació Nextcloud. Intenteu forçar l\'aturada tant de l\'aplicació Nextcloud com de l\'aplicació Notes del Nextcloud.</string>
+    <string name="error_dialog_tip_files_outdated">Sembla que l\'aplicació Nextcloud està obsoleta. Visiteu la Play Store o l\'F-Droid per a obtenir la darrera versió.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Si el problema persisteix, proveu d\'esborrar l\'emmagatzematge de totes dues aplicacions: Nextcloud i Notes del Nextcloud per tal de resoldre el problema.</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Proveu de forçar el tancament de l\'aplicació i reinicieu-la. Pot ser que hi hagi hagut una connexió incorrecta a l\'aplicació Nextcloud.</string>
+    <string name="error_dialog_title">Oh, no! I ara què? </string>
+    <string name="error_dialog_we_need_info">Necessitem la informació tècnica següent per a poder ajudar-vos:</string>
+    <string name="error_maintenance_mode">El servidor es troba en mode de manteniment</string>
+    <string name="error_no_network">No hi ha connexió a la xarxa</string>
+    <string name="error_sync">S\'ha produït un error en la sincronització: %1$s</string>
+    <string name="error_synchronization">S\'ha produït un error en la sincronització</string>
+    <string name="error_unknown">S\'ha produït un error desconegut</string>
+    <string name="failed_update_ui">No s\'ha pogut actualitzar la IU</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">No hi ha cap aplicació disponible per a seleccionar contactes</string>
+    <string name="file_list_seconds_ago">fa uns segons</string>
+    <string name="formatting_help_cbf_body_1">Un objectiu principal del disseny de l\'aplicació Notes és proporcionar una eina lliure de distraccions. Tanmateix, podreu formatar els vostres textos amb Markdown. Per a molts dels exemples esmentats a continuació, podeu utilitzar dreceres per a formatar les vostres notes sense haver d\'escriure els codis següents.</string>
+    <string name="formatting_help_cbf_body_2">Només cal que seleccioneu un fragment de text o toqueu qualsevol posició amb el cursor i apareixerà un menú emergent que conté, juntament amb les entrades per defecte %1$s, %2$s i %3$s, entrades com %4$s o %5$s.</string>
+    <string name="formatting_help_cbf_title">Format basat en el context</string>
+    <string name="formatting_help_checkboxes_body_1">Per a crear una casella de selecció, utilitzeu una llista seguida de claudàtors.</string>
+    <string name="formatting_help_checkboxes_body_2">Element 1</string>
+    <string name="formatting_help_checkboxes_body_3">Element 2</string>
+    <string name="formatting_help_checkboxes_title">Caselles de selecció</string>
+    <string name="formatting_help_code_body_1">Hi ha diferents maneres de definir l\'estil de codi amb Markdown. Si teniu blocs de codi entre línies, poseu-los entre accents greus:</string>
+    <string name="formatting_help_code_body_2">Markdown també admet l\'aïllament de codi, que permet inserir diverses línies sense sagnat:</string>
+    <string name="formatting_help_code_body_3">Si voleu utilitzar el ressaltat de sintaxi, incloeu-hi el llenguatge:</string>
+    <string name="formatting_help_code_title">Codi</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_images_alt">Imatge bonica</string>
+    <string name="formatting_help_images_body_1">Els enllaços han de ser URL complets que comencin per un protocol i un domini o bé camins absoluts que comencin pel caràcter %1$s.</string>
+    <string name="formatting_help_images_body_2">Per a complir amb el format Markdown, utilitzeu caràcters d\'escapament a l\'URL de la imatge. Això vol dir, per exemple, que heu de substituir els espais per %1$s a l\'URL.</string>
+    <string name="formatting_help_images_title">Imatges</string>
+    <string name="formatting_help_lists_body_1">De vegades voleu numerar llistes:</string>
+    <string name="formatting_help_lists_body_2">Un</string>
+    <string name="formatting_help_lists_body_3">Dos</string>
+    <string name="formatting_help_lists_body_4">Tres</string>
+    <string name="formatting_help_lists_body_5">De vegades, voleu posar-hi pics:</string>
+    <string name="formatting_help_lists_body_6">Comenceu una línia amb un guió.</string>
+    <string name="formatting_help_lists_body_7">Si teniu elements secundaris, poseu dos espais abans del guió o l\'asterisc:</string>
+    <string name="formatting_help_lists_body_8">Com això</string>
+    <string name="formatting_help_lists_body_9">I això</string>
+    <string name="formatting_help_lists_title">Llistes</string>
+    <string name="formatting_help_structured_documents_body_1">De vegades, és útil tenir diferents nivells de capçaleres per a estructurar els vostres documents. Comenceu les línies amb %1$s per a crear capçaleres. Diversos %2$s seguits denoten mides de capçalera més petites.</string>
+    <string name="formatting_help_structured_documents_body_2">Això és una capçalera de tercer nivell</string>
+    <string name="formatting_help_structured_documents_body_3">Podeu utilitzar d\'un %1$s a sis %2$s per a obtenir diferents mides de capçalera.</string>
+    <string name="formatting_help_structured_documents_body_4">Si voleu citar algú, utilitzeu el caràcter %1$s abans de la línia:</string>
+    <string name="formatting_help_structured_documents_body_5">La imaginació és més important que el coneixement. El coneixement és limitat. La imaginació encercla el món.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+    <string name="formatting_help_structured_documents_title">Documents estructurats</string>
+    <string name="formatting_help_tables_column">Columna %1d</string>
+    <string name="formatting_help_tables_title">Taules</string>
+    <string name="formatting_help_tables_value">Valor %1d</string>
+    <string name="formatting_help_text_body">És molt fàcil posar paraules en %1$snegreta%1$s i d\'altres en %2$scursiva%2$s amb Markdown. Podeu %3$sratllar%3$s paraules i fins i tot [afegir enllaços al Nextcloud](https://nextcloud.com).</string>
+    <string name="formatting_help_text_title">Text</string>
+    <string name="fourHours">4 hores</string>
+    <string name="http_status_code">Codi d\'estat HTTP: %1$d</string>
+    <string name="label_all_notes">Totes les notes</string>
+    <string name="label_favorites">Preferides</string>
+    <string name="link_share_allow_upload_and_editing">Permet la pujada i l\'edició</string>
+    <string name="link_share_editing">Edició</string>
+    <string name="link_share_file_drop">Tramesa de fitxers (només pujada)</string>
+    <string name="link_share_view_only">Només visualitació</string>
+    <string name="listview_updated_last_month">El mes passat</string>
+    <string name="listview_updated_last_week">La setmana passada</string>
+    <string name="listview_updated_this_month">Aquest mes</string>
+    <string name="listview_updated_this_week">Aquesta setmana</string>
+    <string name="listview_updated_today">Avui</string>
+    <string name="listview_updated_yesterday">Ahir</string>
     <string name="manage_accounts">Gestiona els comptes</string>
-    <string name="action_formatting_help">Format</string>
-
-
+    <string name="menu_change_category">Categoria</string>
+    <string name="menu_delete">Suprimeix</string>
+    <string name="menu_edit_title">Edita el títol</string>
+    <string name="menu_favorite">Preferida</string>
+    <string name="menu_preview">Previsualitza</string>
+    <string name="menu_share">Comparteix</string>
+    <string name="mute_all_notifications">Silencieu totes les notificacions</string>
+    <string name="no_account_configured_yet">Encara no s\'ha configurat cap compte</string>
+    <string name="no_actions">No hi ha cap acció per a aquest usuari</string>
+    <string name="no_browser_available">No hi ha cap aplicació disponible per manegar els enllaços</string>
+    <string name="no_category">Sense categoria</string>
+    <string name="no_email_app_available">No hi ha cap aplicació disponible per gestionar l\'adreça de correu</string>
+    <string name="no_notes_yet">Encara no hi ha notes</string>
+    <string name="no_notes_yet_description">Premeu el botó + per a crear una nota nova</string>
+    <string name="no_other_accounts">Encara no heu configurat cap altre compte.</string>
     <string name="noteMode_plain_edit">Mode d\'edició sense format</string>
     <string name="noteMode_plain_preview">Previsualització sense format</string>
-    <string name="noteMode_rich_edit">Mode d\'edició enriquit</string>
     <string name="noteMode_remember_last">Recorda la darrera selecció</string>
-
-    <string-array name="fontSize_entries">
-        <item>Petita</item>
-        <item>Mitjana</item>
-        <item>Gran</item>
-    </string-array>
-
-    <string-array name="darkmode_entries">
-        <item>Clar</item>
-        <item>Fosc</item>
-        <item>Tema per defecte del sistema</item>
-    </string-array>
-
+    <string name="noteMode_rich_edit">Mode d\'edició enriquit</string>
+    <string name="note_has_been_deleted">S\'ha suprimit aquesta nota</string>
+    <string name="note_share_activity_contact_no_permission">Cal permís dels contactes.</string>
+    <string name="note_share_activity_could_not_retrieve_url">No s\'ha pogut recuperar la URL</string>
+    <string name="note_share_activity_share_link">Comparteix un enllaç</string>
+    <string name="note_share_activity_shared_with_you">Compartit per %1$s</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" us ha estat compartit</string>
+    <string name="note_share_detail_activity_advanced_settings">Paràmetres avançats</string>
+    <string name="note_share_detail_activity_cancel">Cancel·la</string>
+    <string name="note_share_detail_activity_common_confirm">Confirma</string>
+    <string name="note_share_detail_activity_common_next">Següent</string>
+    <string name="note_share_detail_activity_hint_name">Nom</string>
+    <string name="note_share_detail_activity_hint_note">Nota</string>
+    <string name="note_share_detail_activity_hint_password">Contrasenya</string>
+    <string name="note_share_detail_activity_label_empty">L\'etiqueta no pot estar buida</string>
+    <string name="note_share_detail_activity_link_name">Nom de l\'enllaç</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Seleccioneu almenys un permís per compartir.</string>
+    <string name="note_share_detail_activity_send_share">Envia la compartició</string>
+    <string name="note_share_detail_activity_set_note">Estableix la nota</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Heu d\'escriure una contrasenya</string>
+    <string name="note_share_detail_activity_share_send_note">Nota per al destinatari</string>
+    <string name="oneHour">1 hora</string>
+    <string name="online">En línia</string>
+    <string name="online_status">Estat en línia</string>
+    <string name="pin_to_homescreen">Fixa-ho a la pantalla d\'inici</string>
+    <string name="pref_value_font_normal">Normal</string>
+    <string name="pref_value_lock">Protecció amb contrasenya</string>
+    <string name="pref_value_wifi_and_mobile">Sincronitza per la connexió sense fil i dades mòbils</string>
+    <string name="progress_import">S\'està important la nota %1$d/%2$d…</string>
+    <string name="progress_import_indeterminate">S\'estan important les notes…</string>
+    <string name="public_share_name">Nou nom</string>
+    <string name="remote">(remot)</string>
+    <string name="remove_account">Suprimeix %1$s</string>
+    <string name="search_in_all">Cerca en totes les notes</string>
+    <string name="search_in_category">Cerca a %1$s</string>
+    <string name="set_online_status">Estat en línia</string>
+    <string name="settings_background_sync">Sincronització en segon pla</string>
+    <string name="settings_enable_direct_edit">Edició directa</string>
+    <string name="settings_enable_direct_edit_summary">Si es desactiva, l\'editor avançat quedarà amagat.</string>
+    <string name="settings_file_suffix">Extensió dels fitxers</string>
+    <string name="settings_file_suffix_description">Extensió de fitxer per a les notes noves al Nextcloud</string>
+    <string name="settings_file_suffix_success">Sufix dels fitxers nous: %1$s</string>
+    <string name="settings_font_size">Mida de la lletra</string>
+    <string name="settings_font_title">Tipus de lletra de mida fixa</string>
+    <string name="settings_gridview">Visualització de quadrícula</string>
+    <string name="settings_keep_screen_on">Mantén la pantalla encesa</string>
+    <string name="settings_keep_screen_on_summary">Quan visualitzi o editi una nota</string>
+    <string name="settings_lock">Blocatge de l\'aplicació (beta)</string>
+    <string name="settings_lock_summary">Credencials del dispositiu</string>
+    <string name="settings_note_mode">Mode de visualització per a les notes</string>
+    <string name="settings_note_mode_new">Comportament de l\'obertura de notes</string>
+    <string name="settings_notes_path">Defineix la carpeta</string>
+    <string name="settings_notes_path_description">Carpeta on s\'emmagatzemaran les notes al Nextcloud</string>
+    <string name="settings_notes_path_success">Carpeta per a les notes noves: %1$s</string>
+    <string name="settings_prevent_screen_capture">Impedeix la captura de la pantalla</string>
+    <string name="settings_show_ecosystem_apps">Mostra el selector d\'aplicacions</string>
+    <string name="settings_show_ecosystem_apps_summary">Suggeriments de l\'aplicació Nextcloud a la capçalera de navegació</string>
+    <string name="settings_theme_title">Tema</string>
+    <string name="settings_wifi_only">Sincronitza només per la connexió sense fil</string>
+    <string name="share">Comparteix</string>
+    <string name="share_dialog_title">Ús compartit</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_expiration_date_label">Caduca el %1$s</string>
+    <string name="share_file">Comparteix %1$s</string>
+    <string name="share_group_clarification">%1$s (grup)</string>
+    <string name="share_internal_link">Compartir l\'enllaç intern</string>
+    <string name="share_internal_link_to_file_text">L\'enllaç de compartició intern només funciona per a usuaris amb permís d\'accés a aquest fitxer</string>
+    <string name="share_internal_link_to_folder_text">L\'enllaç de compartició intern només funciona per a usuaris amb permís d\'accés a aquesta carpeta</string>
+    <string name="share_known_remote_on_clarification">al %1$s</string>
+    <string name="share_link">Comparteix un enllaç</string>
+    <string name="share_link_password_title">Escriviu una contrasenya</string>
+    <string name="share_link_with_label">Compartir enllaç (%1$s)</string>
+    <string name="share_no_expiration_date_label">Estableix la data de caducitat</string>
+    <string name="share_no_password_title">Estableix una contrasenya</string>
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Introduïu una contrasenya opcional</string>
+    <string name="share_password_dialog_fragment_skip">Omet</string>
+    <string name="share_password_title">Protegit per contrasenya</string>
+    <string name="share_permission_can_edit">Pot editar</string>
+    <string name="share_permission_file_drop">Pujada de fitxers</string>
+    <string name="share_permission_view_only">Només visualitació</string>
+    <string name="share_permissions">Compartir permisos</string>
+    <string name="share_remote_clarification">%1$s (remot)</string>
+    <string name="share_room_clarification">%1$s(conversa)</string>
+    <string name="share_send_new_email">Envia un correu nou</string>
+    <string name="share_settings">Paràmetres</string>
+    <string name="share_via_link_section_title">Comparteix un enllaç</string>
+    <string name="share_via_link_send_link_label">Envia l\'enllaç</string>
+    <string name="share_via_link_unset_password">No definit</string>
+    <string name="share_with_title">Comparteix amb…</string>
+    <string name="shared_text_empty">El text compartit estava buit</string>
+    <string name="shortcut_create_long">Crea una nota nova</string>
+    <string name="simple_about">Quant a</string>
+    <string name="simple_backup">Fes una còpia de seguretat</string>
+    <string name="simple_cancel">Cancel·la</string>
+    <string name="simple_checkbox">Casella de selecció</string>
+    <string name="simple_close">Tanca</string>
+    <string name="simple_copy">Copia</string>
+    <string name="simple_edit">Edita</string>
+    <string name="simple_error">Error</string>
+    <string name="simple_exception">Excepció</string>
+    <string name="simple_link">Enllaç</string>
+    <string name="simple_more">Més</string>
+    <string name="simple_move">Mou</string>
+    <string name="simple_next">Següent</string>
+    <string name="simple_other">Altres</string>
+    <string name="simple_prev">Anterior</string>
+    <string name="simple_remove">Suprimeix</string>
+    <string name="simple_security">Seguretat</string>
+    <string name="simple_switch">Canvia</string>
+    <string name="simple_synchronization">Sincronització</string>
+    <string name="sort_alphabetically">Ordena alfabèticament</string>
+    <string name="sort_last_modified">Ordena per la data de modificació</string>
+    <string name="status_message">Missatge d\'estat</string>
+    <string name="switch_to_plain_editing">Canvia a edició sense format</string>
+    <string name="thirtyMinutes">30 minuts</string>
+    <string name="thisWeek">Aquesta setmana</string>
+    <string name="today">Avui</string>
+    <string name="unlock_notes">Desbloca les notes</string>
+    <string name="username">Nom d\'usuari</string>
+    <string name="welcome_text">Us donem la benvinguda a %1$s</string>
+    <string name="whats_your_status">Quin és el vostre estat?</string>
+    <string name="widget_entry_fav_contentDescription">La icona de l\'estrella serveix per a marcar un element com a preferit</string>
+    <string name="widget_not_logged_in">Inicieu la sessió a l\'aplicació Notes abans d\'utilitzar aquest giny</string>
+    <string name="widget_note_list_placeholder">No hi ha notes</string>
+    <string name="widget_note_list_title">Llista de notes</string>
+    <string name="widget_single_note_placeholder_tv">No s\'ha trobat la nota</string>
+    <string name="widget_single_note_title">Una nota</string>
+    <string name="write_email">Enviar correu</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Heu de tenir connexió a Internet per a afegir un compte.</string>
     <plurals name="ab_selected">
         <item quantity="one">%d nota seleccionada</item>
         <item quantity="other">%d notes seleccionades</item>
@@ -307,120 +356,8 @@
         <item quantity="one">Comparteix el contingut d\'%1$d nota</item>
         <item quantity="other">Comparteix el contingut de %1$d notes</item>
     </plurals>
-
-    <string name="formatting_help_divider" translateable="false">---</string>
-    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
-    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
-    <string name="formatting_help_codefence" translateable="false">```</string>
-    <string name="formatting_help_codefence_outer" translateable="false">````</string>
-    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
-    <string name="formatting_help_cbf_title">Format basat en el context</string>
-    <string name="formatting_help_cbf_body_1">Un objectiu principal del disseny de l\'aplicació Notes és proporcionar una eina lliure de distraccions. Tanmateix, podreu formatar els vostres textos amb Markdown. Per a molts dels exemples esmentats a continuació, podeu utilitzar dreceres per a formatar les vostres notes sense haver d\'escriure els codis següents.</string>
-    <string name="formatting_help_cbf_body_2">Només cal que seleccioneu un fragment de text o toqueu qualsevol posició amb el cursor i apareixerà un menú emergent que conté, juntament amb les entrades per defecte %1$s, %2$s i %3$s, entrades com %4$s o %5$s.</string>
-
-    <string name="formatting_help_text_title">Text</string>
-    <string name="formatting_help_text_body">És molt fàcil posar paraules en %1$snegreta%1$s i d\'altres en %2$scursiva%2$s amb Markdown. Podeu %3$sratllar%3$s paraules i fins i tot [afegir enllaços al Nextcloud](https://nextcloud.com).</string>
-
-    <string name="formatting_help_lists_title">Llistes</string>
-    <string name="formatting_help_lists_body_1">De vegades voleu numerar llistes:</string>
-    <string name="formatting_help_lists_body_2">Un</string>
-    <string name="formatting_help_lists_body_3">Dos</string>
-    <string name="formatting_help_lists_body_4">Tres</string>
-    <string name="formatting_help_lists_body_5">De vegades, voleu posar-hi pics:</string>
-    <string name="formatting_help_lists_body_6">Comenceu una línia amb un guió.</string>
-    <string name="formatting_help_lists_body_7">Si teniu elements secundaris, poseu dos espais abans del guió o l\'asterisc:</string>
-    <string name="formatting_help_lists_body_8">Com això</string>
-    <string name="formatting_help_lists_body_9">I això</string>
-
-    <string name="formatting_help_checkboxes_title">Caselles de selecció</string>
-    <string name="formatting_help_checkboxes_body_1">Per a crear una casella de selecció, utilitzeu una llista seguida de claudàtors.</string>
-    <string name="formatting_help_checkboxes_body_2">Element 1</string>
-    <string name="formatting_help_checkboxes_body_3">Element 2</string>
-
-    <string name="formatting_help_structured_documents_title">Documents estructurats</string>
-    <string name="formatting_help_structured_documents_body_1">De vegades, és útil tenir diferents nivells de capçaleres per a estructurar els vostres documents. Comenceu les línies amb %1$s per a crear capçaleres. Diversos %2$s seguits denoten mides de capçalera més petites.</string>
-    <string name="formatting_help_structured_documents_body_2">Això és una capçalera de tercer nivell</string>
-    <string name="formatting_help_structured_documents_body_3">Podeu utilitzar d\'un %1$s a sis %2$s per a obtenir diferents mides de capçalera.</string>
-    <string name="formatting_help_structured_documents_body_4">Si voleu citar algú, utilitzeu el caràcter %1$s abans de la línia:</string>
-    <string name="formatting_help_structured_documents_body_5">La imaginació és més important que el coneixement. El coneixement és limitat. La imaginació encercla el món.</string>
-    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
-
-    <string name="formatting_help_code_title">Codi</string>
-    <string name="formatting_help_code_body_1">Hi ha diferents maneres de definir l\'estil de codi amb Markdown. Si teniu blocs de codi entre línies, poseu-los entre accents greus:</string>
-    <string name="formatting_help_code_body_2">Markdown també admet l\'aïllament de codi, que permet inserir diverses línies sense sagnat:</string>
-    <string name="formatting_help_code_body_3">Si voleu utilitzar el ressaltat de sintaxi, incloeu-hi el llenguatge:</string>
-
-    <string name="formatting_help_tables_title">Taules</string>
-    <!-- Column header of a sample table -->
-    <string name="formatting_help_tables_column">Columna %1d</string>
-    <!-- Table cell value of a sample table -->
-    <string name="formatting_help_tables_value">Valor %1d</string>
-
-    <string name="formatting_help_images_body_1">Els enllaços han de ser URL complets que comencin per un protocol i un domini o bé camins absoluts que comencin pel caràcter %1$s.</string>
-    <string name="formatting_help_images_body_2">Per a complir amb el format Markdown, utilitzeu caràcters d\'escapament a l\'URL de la imatge. Això vol dir, per exemple, que heu de substituir els espais per %1$s a l\'URL.</string>
-    <string name="formatting_help_images_title">Imatges</string>
-    <string name="formatting_help_images_alt">Imatge bonica</string>
-
-    <string name="simple_other">Altres</string>
-    <string name="sort_last_modified">Ordena per la data de modificació</string>
-    <string name="sort_alphabetically">Ordena alfabèticament</string>
-    <string name="error_action_open_battery_settings">Paràmetres de la bateria</string>
-    <string name="error_action_open_deck_info">Obre la informació de l\'aplicació</string>
-    <string name="error_action_open_network">Paràmetres de la xarxa</string>
-    <string name="error_action_update_files_app">Actualitza</string>
-    <string name="no_account_configured_yet">Encara no s\'ha configurat cap compte</string>
-    <string name="no_other_accounts">Encara no heu configurat cap altre compte.</string>
-    <string name="choose_account">Trieu un compte</string>
-    <string name="context_based_formatting">Element emergent de format basat en el context</string>
     <plurals name="remove_account_message">
         <item quantity="one">Si suprimiu el compte %1$s, també se suprimirà un canvi sense sincronitzar de manera irrecuperable.</item>
         <item quantity="other">Si suprimiu el compte %1$s, també se suprimiran %2$d canvis sense sincronitzar de manera irrecuperable.</item>
     </plurals>
-    <string name="remove_account">Suprimeix %1$s</string>
-
-    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Heu de tenir connexió a Internet per a afegir un compte.</string>
-    <string name="settings_notes_path">Defineix la carpeta</string>
-
-    <string name="simple_next">Següent</string>
-    <string name="simple_prev">Anterior</string>
-    <string name="simple_backup">Fes una còpia de seguretat</string>
-    <string name="backup">S\'ha detectat un estat irrecuperable de l\'aplicació. Feu una còpia de seguretat dels canvis sense sincronitzar i esborreu l\'emmagatzematge de l\'aplicació Notes.</string>
-    <string name="settings_notes_path_description">Carpeta on s\'emmagatzemaran les notes al Nextcloud</string>
-    <string-array name="settings_file_suffixes">
-        <item translatable="false">.txt</item>
-        <item translatable="false">.md</item>
-    </string-array>
-    <string name="settings_notes_path_success">Carpeta per a les notes noves: %1$s</string>
-    <string name="settings_file_suffix">Extensió dels fitxers</string>
-    <string name="settings_file_suffix_description">Extensió de fitxer per a les notes noves al Nextcloud</string>
-    <string name="settings_file_suffix_success">Sufix dels fitxers nous: %1$s</string>
-    <string name="http_status_code">Codi d\'estat HTTP: %1$d</string>
-    <string name="progress_import_indeterminate">S\'estan important les notes…</string>
-    <string name="progress_import">S\'està important la nota %1$d/%2$d…</string>
-    <string name="account_imported">S\'ha importat el compte.</string>
-    <string name="direct_editing_error">S\'ha produït un error en carregar l\'edició enriquida</string>
-    <string name="switch_to_plain_editing">Canvia a edició sense format</string>
-    <string name="action_back">Torna</string>
-    <string name="set_online_status">Estat en línia</string>
-    <string name="status_message">Missatge d\'estat</string>
-    <string name="whats_your_status">Quin és el vostre estat?</string>
-    <string name="clear_status_after">Esborra l\'estat després de</string>
-    <string name="clear">Neteja</string>
-    <string name="dontClear">No l\'esborris</string>
-    <string name="today">Avui</string>
-    <string name="thirtyMinutes">30 minuts</string>
-    <string name="oneHour">1 hora</string>
-    <string name="fourHours">4 hores</string>
-    <string name="thisWeek">Aquesta setmana</string>
-    <string name="file_list_seconds_ago">fa uns segons</string>
-    <string name="online_status">Estat en línia</string>
-    <string name="online">En línia</string>
-    <string name="busy">Ocupat</string>
-    <string name="mute_all_notifications">Silencieu totes les notificacions</string>
-    <string name="appear_offline">Apareixeu fora de línia</string>
-    <string name="ecosystem_apps_display_files">Fitxers</string>
-    <string name="ecosystem_apps_display_talk">Converses</string>
-    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
-    <string name="ecosystem_apps_more">Més aplicacions de Nextcloud</string>
-    <string name="ecosystem_apps_display_more">Més</string>
 </resources>

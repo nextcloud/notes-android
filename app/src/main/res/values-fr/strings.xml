@@ -1,328 +1,377 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Nextcloud Notes - Android Client
-  ~
-  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
-  ~ SPDX-License-Identifier: GPL-3.0-or-later
--->
-<resources>
-    <string name="app_name">Notes</string>
-    <string name="app_name_long">Nextcloud Notes</string>
-    <string name="label_all_notes">Toutes les notes</string>
-    <string name="label_favorites">Favoris</string>
+  <resources>
+    <string name="about_app_license">Cette application est sous licence GNU GENERAL PUBLIC LICENSE v3+.</string>
+    <string name="about_app_license_button">Voir la licence</string>
+    <string name="about_app_license_title">Licence de l\'application</string>
+    <string name="about_contribution_tab_title">Contributions</string>
+    <string name="about_credits_tab_title">Crédits</string>
+    <string name="about_developers_original_author">auteur original</string>
+    <string name="about_developers_title">Développeurs</string>
+    <string name="about_icons_disclaimer_app_icon">Pour l’icône originale voir %1$s.</string>
+    <string name="about_icons_disclaimer_mdi">Icônes Material Design</string>
+    <string name="about_icons_disclaimer_mdi_icons">Les icônes suivantes utilisées dans cette applications sont %1$s réalisées par Google Inc. et sous licence Apache 2.0.</string>
+    <string name="about_icons_disclaimer_title">Icônes</string>
+    <string name="about_issues">Vous pouvez signaler des anomalies, suggérer des améliorations et demander de nouvelles fonctionnalités sur GitHub : %1$s</string>
+    <string name="about_issues_title">Bugs</string>
+    <string name="about_license_tab_title">Licence</string>
+    <string name="about_maintainer_title">Responsable</string>
+    <string name="about_source">Ce projet est hébergé sur GitHub : %1$s</string>
+    <string name="about_source_title">Code source</string>
+    <string name="about_testers_title">Testeurs</string>
+    <string name="about_translate">Rejoignez l\'équipe Nextcloud sur Transifex et aidez-nous à traduire cette application : %1$s</string>
+    <string name="about_translate_title">Traduire</string>
+    <string name="about_translators_title">Traducteurs</string>
+    <string name="about_translators_transifex">Communauté Nextcloud sur %1$s</string>
+    <string name="about_version">Vous utilisez actuellement %1$s</string>
+    <string name="about_version_title">Version</string>
+    <string name="account_already_imported">Ce compte a déjà été importé</string>
+    <string name="account_imported">Compte importé.</string>
+    <string name="account_switch_dialog_status_fetching_error_message">Impossible de récupérer le statut, Veuillez réessayer.</string>
+    <string name="action_back">Retour</string>
     <string name="action_create">Nouvelle note</string>
-    <string name="welcome_text">Bienvenue sur %1$s</string>
-    <string name="action_settings">Paramètres</string>
-    <string name="action_trashbin">Notes supprimées</string>
-    <string name="action_search">Rechercher</string>
-    <string name="action_sorting_method">Méthode de tri</string>
-    <string name="simple_cancel">Annuler</string>
-    <string name="simple_switch">Basculer</string>
-    <string name="simple_edit">Modifier</string>
-    <string name="simple_remove">Supprimer</string>
     <string name="action_edit_save">Enregistrer</string>
-    <string name="simple_about">À propos</string>
-    <string name="simple_link">Lien</string>
+    <string name="action_formatting_help">Formatage</string>
     <string name="action_note_deleted">%1$s supprimé</string>
     <string name="action_note_restored">%1$s restauré</string>
-    <string name="action_undo">Annuler</string>
+    <string name="action_search">Rechercher</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="action_sorting_method">Méthode de tri</string>
+    <string name="action_trashbin">Notes supprimées</string>
     <string name="action_uncategorized">Non catégorisé</string>
-    <string name="menu_delete">Supprimer</string>
+    <string name="action_undo">Annuler</string>
+    <string name="activity_chooser_send_file_title">Envoyer</string>
+    <string name="activity_chooser_title">Envoyer le lien vers…</string>
+    <string name="activity_select_single_note">Choisir une note</string>
+    <string name="add_account">Ajouter un compte</string>
+    <string name="add_another_public_share_link">Ajouter un autre lien</string>
+    <string name="add_category">Ajouter %1$s</string>
+    <string name="add_new_public_share">Ajouter un nouveau lien de partage public</string>
+    <string name="added_content">\"%1$s\" ajouté</string>
+    <string name="allow_resharing">Autoriser le repartage</string>
+    <string name="app_name">Notes</string>
+    <string name="app_name_long">Nextcloud Notes</string>
+    <string name="appear_offline">Apparaître hors-ligne</string>
+    <string name="appearance_and_behavior">Apparence et comportement</string>
+    <string name="append_to_note">Ajouter à la note</string>
+    <string name="away">Absent·e</string>
+    <string name="backup">Nous avons détecté un état irrécupérable de l\'application. Veuillez sauvegarder vos modifications non-synchronisées puis effacer le stockage de l\'application Notes.</string>
+    <string name="busy">Occupé</string>
+    <string name="category_bake">Cuire</string>
+    <string name="category_checklists">Listes de contrôle</string>
+    <string name="category_credentials">Information d\'identification</string>
+    <string name="category_food">Nourriture</string>
+    <string name="category_game">Jeu</string>
+    <string name="category_games">Jeux</string>
+    <string name="category_gift">Don</string>
+    <string name="category_gifts">Dons</string>
+    <string name="category_key">Clé</string>
+    <string name="category_keys">Clés</string>
+    <string name="category_movie">Film</string>
+    <string name="category_movies">Films</string>
+    <string name="category_music">Musique</string>
+    <string name="category_password">Mot de passe</string>
+    <string name="category_passwords">Mots de passe</string>
+    <string name="category_play">Lire</string>
+    <string name="category_present">Cadeau</string>
+    <string name="category_presents">Cadeaux</string>
+    <string name="category_readonly">Lecture seule</string>
+    <string name="category_recipe">Recette</string>
+    <string name="category_recipes">Recettes</string>
+    <string name="category_restaurant">Restaurant</string>
+    <string name="category_restaurants">Restaurant</string>
+    <string name="category_tasks">Tâches</string>
+    <string name="category_todo">Tâche</string>
+    <string name="category_todos">Tâches</string>
+    <string name="category_work">Travail</string>
+    <string name="change_category_title">Sélectionnez une catégorie</string>
+    <string name="change_note_title">Modifier le titre de la note</string>
+    <string name="choose_account">Sélectionnez un compte</string>
+    <string name="clear">Effacer</string>
+    <string name="clear_status_after">Effacer le statut après</string>
+    <string name="clipboard_label">Texte copié depuis %1$s</string>
+    <string name="clipboard_no_text_to_copy">Aucun texte n\'a été reçu pour copier dans le presse-papier</string>
+    <string name="clipboard_text_copied">Lien copié</string>
+    <string name="clipboard_unexpected_error">Erreur inattendue lors de la copie dans le presse-papier</string>
+    <string name="common_delete">Supprimer</string>
+    <string name="common_loading">Chargement…</string>
+    <string name="common_ok">OK</string>
+    <string name="context_based_formatting">Suggestions de mise en forme contextuelle</string>
+    <string name="copy_link">Copier le lien</string>
+    <string name="could_not_retrieve_shares">Impossible de récupérer les partages</string>
+    <string name="delete_link">Supprimer le lien</string>
+    <string name="direct_editing_error">Erreur lors du chargement de l\'édition enrichie</string>
+    <string name="dnd">Ne pas déranger</string>
+    <string name="dontClear">Ne pas effacer</string>
+    <string name="ecosystem_apps_display_files">Fichiers</string>
+    <string name="ecosystem_apps_display_more">Plus</string>
+    <string name="ecosystem_apps_display_talk">Talk</string>
+    <string name="ecosystem_apps_more">Plus d\'applications Nextcloud</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="email_pick_failed">Le choix de l\'adresse e-mail a échoué.</string>
+    <string name="error_action_open_battery_settings">Paramètres de batterie</string>
+    <string name="error_action_open_deck_info">Ouvrir les informations de l\'application</string>
+    <string name="error_action_open_network">Paramètres réseau</string>
+    <string name="error_action_update_files_app">Mise à jour</string>
+    <string name="error_dialog_check_maintenance">Vérifier si votre instance Nextcloud n\'est pas actuellement en mode maintenance.</string>
+    <string name="error_dialog_check_server">Le serveur a renvoyé une réponse incorrecte. Vérifier si vous pouvez accéder à vos notes via l\'interface Web.</string>
+    <string name="error_dialog_check_server_logs">Il y a un problème avec votre configuration Nextcloud. Consulter les fichiers de log du serveur.</string>
+    <string name="error_dialog_insufficient_storage">Votre instance Nextcloud n\'a plus d\'espace disponible. Veuillez supprimer certains fichiers pour pouvoir synchroniser vos modifications locales dans votre cloud.</string>
+    <string name="error_dialog_min_version">L\'application Notes Android  nécessite que l\'application Nextcloud Android soit au moins en version 3.18.</string>
+    <string name="error_dialog_redirect">Votre serveur a répondu avec le code HTTP 302, ce qui implique que vous n\'avez pas installé l\'application Notes sur votre serveur ou que quelque chose est mal configuré. Cela peut être dû à des modifications du fichier .htaccess or à une autre application Nextcloud comme OID Client.</string>
+    <string name="error_dialog_server_app_enabled">Veuillez vérifier que vous avez installé et activé l\'application \"Notes\" sur votre serveur.</string>
+    <string name="error_dialog_timeout_instance">Le serveur n’a pas répondu dans le temps imparti. Assurez-vous que votre instance fonctionne correctement.</string>
+    <string name="error_dialog_timeout_toggle">Vérifiez votre connexion réseau. L\'activation et la désactivation des données mobiles ou du Wi-Fi peuvent aider.</string>
+    <string name="error_dialog_tip_clear_storage">Vous pouvez nettoyer l\'espace de stockage en ouvrant les paramètres Android de l\'application et en sélectionnant Stockage → Effacer le stockage. ⚠️ Attention: cela supprimera les notes non encore synchronisées avec votre serveur Nextcloud!</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Veuillez désactiver toutes les options d\'optimalisation de la batterie pour les applications Nextcloud et Notes.</string>
+    <string name="error_dialog_tip_files_delete_storage">Si l’arrêt forcé ne fonctionne pas, vous pouvez essayer d\'effacer les données des deux applications.</string>
+    <string name="error_dialog_tip_files_force_stop">Quelque chose semble ne pas fonctionner avec votre application Nextcloud. Essayer de forcer l\'arrêt des applications Nextcloud et Nextcloud Notes.</string>
+    <string name="error_dialog_tip_files_outdated">Votre application Nextcloud semble ancienne. Veuillez visiter le Play Store ou F-Droid pour installer la dernière version.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Si le problème persiste, essayez d\'effacer les données des deux applications : Nextcloud et Nextcloud Notes pour résoudre ce problème.</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Essayez de forcer la fermeture de l\'application puis redémarrer la. Il y avait peut-être une mauvaise connexion à Nextcloud.</string>
+    <string name="error_dialog_title">Oh non ! - Et maintenant ? 🙁</string>
+    <string name="error_dialog_we_need_info">Nous avons besoin des informations techniques suivantes pour pouvoir vous aider :</string>
+    <string name="error_maintenance_mode">Le serveur est en mode maintenance</string>
+    <string name="error_no_network">Aucune connexion réseau</string>
+    <string name="error_setting_status_message">Erreur de définition du message d\'état !</string>
+    <string name="error_sync">Échec de synchronisation : %1$s</string>
+    <string name="error_synchronization">Échec de synchronisation</string>
+    <string name="error_unknown">Une erreur inconnue est survenue</string>
+    <string name="failed_the_remove_share">Échec de la suppression du partage</string>
+    <string name="failed_update_ui">Échec de la mise à jour de l\'interface utilisateur</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Aucune application disponible pour sélectionner des contacts</string>
+    <string name="file_list_seconds_ago">à l\'instant</string>
+    <string name="formatting_help_cbf_body_1">Un but majeur de l\'app Notes est de fournir une application de note sans distraction, bien que vous puissiez formater vos textes avec Markdown. Pour les divers exemples mentionnés ci-dessous, vous pouvez utiliser des raccourcis afin de pouvoir formater vos notes sans taper les codes ci-dessous. </string>
+    <string name="formatting_help_cbf_body_2">Sélectionner simplement une partie du texte ou taper sur votre curseur à n\'importe quelle position et vous aurez un menu popup qui contient à coté des entrées par défaut %1$s, %2$s, %3$s des entrées comme %4$s ou %5$s.</string>
+    <string name="formatting_help_cbf_title">Mise en forme contextuelle</string>
+    <string name="formatting_help_checkboxes_body_1">Pour créer une case à cocher, utilisez une liste suivie de crochets.</string>
+    <string name="formatting_help_checkboxes_body_2">Élément 1</string>
+    <string name="formatting_help_checkboxes_body_3">Élément 2</string>
+    <string name="formatting_help_checkboxes_title">Case à cocher</string>
+    <string name="formatting_help_code_body_1">Il existe de nombreuses façons différentes de styliser du code avec Markdown. Si vous avez des blocs de code, enveloppez-les dans des accents grave :</string>
+    <string name="formatting_help_code_body_2">Markdown supporte aussi quelque chose appelé \"code fencing\", qui permet plusieurs lignes sans indentation.</string>
+    <string name="formatting_help_code_body_3">Et si vous voulez utiliser la coloration syntaxique, incluez le langage.</string>
+    <string name="formatting_help_code_title">Code</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_images_alt">Image retouchée</string>
+    <string name="formatting_help_images_body_1">Les liens doivent être des URL complètes commençant par un protocole et un domaine ou des chemins absolus commençant par un caractère %1$s.</string>
+    <string name="formatting_help_images_body_2">Afin de se conformer au format Markdown, veuillez utiliser des caractères d’échappement dans l’URL de l’image. Cela signifie par exemple, remplacer les espaces par %1$sdans l’URL.</string>
+    <string name="formatting_help_images_title">Images</string>
+    <string name="formatting_help_lists_body_1">Parfois, vous voulez des listes numérotées :</string>
+    <string name="formatting_help_lists_body_2">Un</string>
+    <string name="formatting_help_lists_body_3">Deux</string>
+    <string name="formatting_help_lists_body_4">Trois</string>
+    <string name="formatting_help_lists_body_5">Parfois, vous voulez des puces :</string>
+    <string name="formatting_help_lists_body_6">Démarrer une ligne avec un tiret</string>
+    <string name="formatting_help_lists_body_7">Et si vous avez des sous-points, placez deux espaces avant le tiret ou l\'étoile :</string>
+    <string name="formatting_help_lists_body_8">Comme celà</string>
+    <string name="formatting_help_lists_body_9">Et celà</string>
+    <string name="formatting_help_lists_title">Listes</string>
+    <string name="formatting_help_structured_documents_body_1">Parfois, il est pratique d\'avoir différents niveaux de titres pour structurer votre document. Démarrer des lignes avec un %1$s pour créer des titres. Plusieurs %2$s à la suite, signifie un titre plus petit.</string>
+    <string name="formatting_help_structured_documents_body_2">Ceci est un titre de troisième niveau</string>
+    <string name="formatting_help_structured_documents_body_3">Vous pouvez utiliser à partir de un %1$s jusque six %2$s pour des titres de tailles différentes.</string>
+    <string name="formatting_help_structured_documents_body_4">Si vous souhaitez citer quelqu\'un, utilisez le caractère %1$s avant la ligne :</string>
+    <string name="formatting_help_structured_documents_body_5">L\'imagination est plus importante que la connaissance. La connaissance est limitée. L\'imagination encercle le monde.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+    <string name="formatting_help_structured_documents_title">Documents structurés</string>
+    <string name="formatting_help_tables_column">Colonne %1d</string>
+    <string name="formatting_help_tables_title">Tableaux</string>
+    <string name="formatting_help_tables_value">Valeur %1d</string>
+    <string name="formatting_help_text_body">Il est très facile de mettre des mots en %1$sgras%1$s et d\'autres en %2$sitalique%2$s avec Markdown. Vous pouvez %3$sbarrer%3$s quelques mots et même créer un [lien vers Nextcloud](https://nextcloud.com).</string>
+    <string name="formatting_help_text_title">Texte</string>
+    <string name="fourHours">4 heures</string>
+    <string name="http_status_code">Code de statut HTTP : %1$d</string>
+    <string name="invisible">Invisible</string>
+    <string name="label_all_notes">Toutes les notes</string>
+    <string name="label_favorites">Favoris</string>
+    <string name="link_share_allow_upload_and_editing">Autoriser le téléversement et la modification</string>
+    <string name="link_share_editing">Éditer</string>
+    <string name="link_share_file_drop">Dépôt de fichier (téléversement seulement)</string>
+    <string name="link_share_view_only">Afficher seulement</string>
+    <string name="listview_updated_last_month">Mois dernier</string>
+    <string name="listview_updated_last_week">Semaine dernière</string>
+    <string name="listview_updated_this_month">Ce mois-ci</string>
+    <string name="listview_updated_this_week">Cette semaine</string>
+    <string name="listview_updated_today">Aujourd’hui</string>
+    <string name="listview_updated_yesterday">Hier</string>
+    <string name="manage_accounts">Gérer les comptes</string>
     <string name="menu_change_category">Catégorie</string>
+    <string name="menu_delete">Supprimer</string>
+    <string name="menu_edit_title">Modifier le titre</string>
     <string name="menu_favorite">Favoris</string>
     <string name="menu_preview">Aperçu</string>
     <string name="menu_share">Partager</string>
-    <string name="common_loading">Chargement…</string>
-
-
-    <string name="search_in_category">Rechercher dans %1$s</string>
-    <string name="search_in_all">Rechercher dans toutes les notes</string>
-
-    <string name="change_category_title">Sélectionnez une catégorie</string>
-
-    <!-- UsersAndGroupsSearchProvider -->
-    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
-    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
-
-    <!-- NoteShareActivity -->
+    <string name="mute_all_notifications">Désactiver les notifications</string>
+    <string name="no_account_configured_yet">Aucun compte n\'est encore configuré</string>
+    <string name="no_actions">Aucune action pour cet utilisateur</string>
+    <string name="no_browser_available">Aucune application n\'est disponible pour ouvrir les liens</string>
+    <string name="no_category">Sans catégorie</string>
+    <string name="no_email_app_available">Aucune application disponible pour ouvrir l\'adresse e-mail</string>
+    <string name="no_notes_yet">Aucune note pour l\'instant</string>
+    <string name="no_notes_yet_description">Créez une nouvelle note avec le bouton +</string>
+    <string name="no_other_accounts">Vous n\'avez pas encore configuré d\'autres comptes.</string>
+    <string name="noteMode_plain_edit">Édition simple</string>
+    <string name="noteMode_plain_preview">Prévisualization simple</string>
+    <string name="noteMode_remember_last">Mémoriser ma dernière sélection</string>
+    <string name="noteMode_rich_edit">Édition texte enrichi</string>
+    <string name="note_has_been_deleted">Cette note a été supprimée</string>
     <string name="note_share_activity_activity_icon_content_description">icône d\'activité de note</string>
-    <string name="note_share_activity_share_icon_content_description">icône de partage de notes</string>
-    <string name="note_share_activity_external_icon_content_description">icône externe de partage de notes</string>
-    <string name="note_share_activity_copy_icon_content_description">icône de copie de partage de note</string>
-    <string name="note_share_activity_more_icon_content_description">note partager plus d\'icône</string>
-    <string name="note_share_activity_icon_content_description">icône de partage de notes</string>
-    <string name="note_share_activity_user_icon_content_description">icône de partage de notes d\'utilisateur</string>
-    <string name="note_share_activity_contact_icon_content_description">noter l\'icône de contact de partage</string>
-    <string name="note_share_activity_shared_with_you">Partagé avec vous par %1$s</string>
-    <string name="note_share_activity_search_text">Nom, identifiant de Cloud fédéré ou adresse e-mail…</string>
-    <string name="note_share_activity_share_link">Partager par lien</string>
-    <string name="note_share_activity_resharing_not_allowed">La réglementation ou les autorisations empêchent le re-partage</string>
-    <string name="note_share_activity_could_not_retrieve_url">Impossible de récupérer l\'URL</string>
-    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" a été partagé avec vous</string>
-    <string name="note_share_activity_contact_no_permission">La permission d\'accès à vos contacts est requise</string>
-    <string name="note_share_activity_you_are_not_allowed_to_share">Vous n\'êtes pas autorisé à créer un partage public.</string>
-
-    <string name="note_share_created">Partage créé</string>
     <string name="note_share_activity_cannot_created">Vous n\'êtes pas autorisé à créer un partage.</string>
-
-
-    <!-- NoteShareDetailActivity -->
+    <string name="note_share_activity_contact_icon_content_description">noter l\'icône de contact de partage</string>
+    <string name="note_share_activity_contact_no_permission">La permission d\'accès à vos contacts est requise</string>
+    <string name="note_share_activity_copy_icon_content_description">icône de copie de partage de note</string>
+    <string name="note_share_activity_could_not_retrieve_url">Impossible de récupérer l\'URL</string>
+    <string name="note_share_activity_external_icon_content_description">icône externe de partage de notes</string>
+    <string name="note_share_activity_icon_content_description">icône de partage de notes</string>
+    <string name="note_share_activity_more_icon_content_description">note partager plus d\'icône</string>
+    <string name="note_share_activity_resharing_not_allowed">La réglementation ou les autorisations empêchent le re-partage</string>
+    <string name="note_share_activity_search_text">Nom, identifiant de Cloud fédéré ou adresse e-mail…</string>
+    <string name="note_share_activity_share_icon_content_description">icône de partage de notes</string>
+    <string name="note_share_activity_share_link">Partager par lien</string>
+    <string name="note_share_activity_shared_with_you">Partagé avec vous par %1$s</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" a été partagé avec vous</string>
+    <string name="note_share_activity_user_icon_content_description">icône de partage de notes d\'utilisateur</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">Vous n\'êtes pas autorisé à créer un partage public.</string>
+    <string name="note_share_created">Partage créé</string>
     <string name="note_share_detail_activity_advanced_settings">Paramètres avancés</string>
-    <string name="note_share_detail_activity_share_via_link_hide_download">Masquer le téléchargement</string>
-    <string name="note_share_detail_activity_share_send_note">Note au destinataire</string>
-    <string name="note_share_detail_activity_hint_note">Note</string>
-    <string name="note_share_detail_activity_common_next">Suivante</string>
-    <string name="note_share_detail_activity_share_copy_link">Partager et copier le lien</string>
-    <string name="note_share_detail_activity_common_confirm">Confirmer</string>
-    <string name="note_share_detail_activity_set_note">Définir la note</string>
-    <string name="note_share_detail_activity_send_share">Envoyer Partager</string>
-    <string name="note_share_detail_activity_hint_name">Nom</string>
-    <string name="note_share_detail_activity_link_name">Nom du lien</string>
-    <string name="note_share_detail_activity_share_link_empty_password">Vous devez saisir un mot de passe</string>
-    <string name="note_share_detail_activity_hint_password">Mot de passe</string>
-    <string name="note_share_detail_activity_no_share_permission_selected">Veuillez sélectionner au moins une permission à partager.</string>
-    <string name="note_share_detail_activity_label_empty">L\'étiquette ne peut être vide</string>
     <string name="note_share_detail_activity_cancel">Annuler</string>
+    <string name="note_share_detail_activity_common_confirm">Confirmer</string>
+    <string name="note_share_detail_activity_common_next">Suivante</string>
     <string name="note_share_detail_activity_create_share_error">Échec de la création d\'un partage</string>
-
-    <!-- SharePasswordDialogFragment -->
+    <string name="note_share_detail_activity_hint_name">Nom</string>
+    <string name="note_share_detail_activity_hint_note">Note</string>
+    <string name="note_share_detail_activity_hint_password">Mot de passe</string>
+    <string name="note_share_detail_activity_label_empty">L\'étiquette ne peut être vide</string>
+    <string name="note_share_detail_activity_link_name">Nom du lien</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Veuillez sélectionner au moins une permission à partager.</string>
+    <string name="note_share_detail_activity_send_share">Envoyer Partager</string>
+    <string name="note_share_detail_activity_set_note">Définir la note</string>
+    <string name="note_share_detail_activity_share_copy_link">Partager et copier le lien</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Vous devez saisir un mot de passe</string>
+    <string name="note_share_detail_activity_share_send_note">Note au destinataire</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Masquer le téléchargement</string>
+    <string name="oneHour">1 heure</string>
+    <string name="online">En ligne</string>
+    <string name="online_status">Statut de connexion</string>
+    <string name="pin_to_homescreen">Épingler sur l\'écran d\'accueil</string>
+    <string name="pref_value_font_normal">Normal</string>
+    <string name="pref_value_lock">Protection par mot de passe</string>
+    <string name="pref_value_wifi_and_mobile">Synchroniser en Wifi et données mobiles</string>
+    <string name="progress_import">Importation de la note %1$d sur %2$d...</string>
+    <string name="progress_import_indeterminate">Importation des notes...</string>
+    <string name="public_share_name">Nouveau nom</string>
+    <string name="remote">(distant)</string>
+    <string name="remove_account">Supprimer %1$s</string>
+    <string name="search_in_all">Rechercher dans toutes les notes</string>
+    <string name="search_in_category">Rechercher dans %1$s</string>
+    <string name="set_message">Définir le message</string>
+    <string name="set_online_status">Statut de connexion</string>
+    <string name="settings_background_sync">Synchronisation en tâche de fond</string>
+    <string name="settings_enable_direct_edit">Édition directe</string>
+    <string name="settings_enable_direct_edit_summary">Une fois désactivé, l’éditeur avancé sera masqué.</string>
+    <string name="settings_file_suffix">Extension de fichier</string>
+    <string name="settings_file_suffix_description">Extension de fichier pour les nouvelles notes dans votre Nextcloud</string>
+    <string name="settings_file_suffix_success">Nouveau suffixe de fichier : %1$s</string>
+    <string name="settings_font_size">Taille des caractères</string>
+    <string name="settings_font_title">Texte monospace</string>
+    <string name="settings_gridview">Vue en grille</string>
+    <string name="settings_keep_screen_on">Laisser l\'écran allumé</string>
+    <string name="settings_keep_screen_on_summary">Lors de la visualisation ou l\'édition d\'une note</string>
+    <string name="settings_lock">Verrouillage de l\'application (Bêta)</string>
+    <string name="settings_lock_summary">Informations d\'identification du terminal</string>
+    <string name="settings_note_mode">Mode d\'affichage des notes</string>
+    <string name="settings_note_mode_new">Comportement à l\'ouverture de Notes</string>
+    <string name="settings_notes_path">Paramétrer un dossier</string>
+    <string name="settings_notes_path_description">Dossier pour stocker vos notes dans Nextcloud</string>
+    <string name="settings_notes_path_success">Nouveau dossier pour vos notes : %1$s</string>
+    <string name="settings_prevent_screen_capture">Empêcher la capture d\'écran</string>
+    <string name="settings_show_ecosystem_apps">Afficher le sélecteur d\'applications</string>
+    <string name="settings_show_ecosystem_apps_summary">Suggestions d\'applications Nextcloud dans l\'en-tête de navigation</string>
+    <string name="settings_theme_title">Thème</string>
+    <string name="settings_wifi_only">Synchroniser uniquement en Wifi</string>
+    <string name="share">Partager</string>
+    <string name="share_dialog_title">Partage</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_expiration_date_label">Expire le %1$s</string>
+    <string name="share_file">Partager %1$s</string>
+    <string name="share_group_clarification">%1$s (groupe)</string>
+    <string name="share_internal_link">Partager le lien interne</string>
+    <string name="share_internal_link_to_file_text">le partage de lien interne fonctionne uniquement pour les utilisateurs qui ont accès à ce fichier</string>
+    <string name="share_internal_link_to_folder_text">le partage de lien interne fonctionne uniquement pour les utilisateurs qui ont accès à ce dossier</string>
+    <string name="share_known_remote_on_clarification">le %1$s</string>
+    <string name="share_link">Partager par lien</string>
+    <string name="share_link_password_title">Entrez un mot de passe</string>
+    <string name="share_link_with_label">Partager le lien (%1$s)</string>
+    <string name="share_no_expiration_date_label">Définir une date d\'expiration</string>
+    <string name="share_no_password_title">Définir un mot de passe</string>
     <string name="share_password_dialog_fragment_share_link_optional_password_title">Saisissez un mot de passe optionnel</string>
     <string name="share_password_dialog_fragment_skip">Ignorer</string>
-
-    <string name="share_link_password_title">Entrez un mot de passe</string>
-    <string name="common_ok">OK</string>
-    <string name="common_delete">Supprimer</string>
-    <string name="write_email">Envoyer un e-mail</string>
-    <string name="no_browser_available">Aucune application n\'est disponible pour ouvrir les liens</string>
-    <string name="no_email_app_available">Aucune application disponible pour ouvrir l\'adresse e-mail</string>
-    <string name="no_actions">Aucune action pour cet utilisateur</string>
-
-    <string name="failed_the_remove_share">Échec de la suppression du partage</string>
-    <string name="email_pick_failed">Le choix de l\'adresse e-mail a échoué.</string>
-    <string name="failed_update_ui">Échec de la mise à jour de l\'interface utilisateur</string>
-    <string name="file_detail_sharing_fragment_no_contact_app_message">Aucune application disponible pour sélectionner des contacts</string>
-    <string name="activity_chooser_title">Envoyer le lien vers…</string>
-
-    <string name="activity_chooser_send_file_title">Envoyer</string>
-    <string name="share_internal_link_to_folder_text">le partage de lien interne fonctionne uniquement pour les utilisateurs qui ont accès à ce dossier</string>
-    <string name="share_internal_link_to_file_text">le partage de lien interne fonctionne uniquement pour les utilisateurs qui ont accès à ce fichier</string>
-    <string name="share_internal_link">Partager le lien interne</string>
-    <string name="delete_link">Supprimer le lien</string>
-    <string name="share_settings">Paramètres</string>
-    <string name="share_send_new_email">Envoyer un nouvel e-mail</string>
-    <string name="share_dialog_title">Partage</string>
-    <string name="share_file">Partager %1$s</string>
-    <string name="share_expiration_date_label">Expire le %1$s</string>
-    <string name="share_expiration_date_format">%1$s</string>
-    <string name="share_no_expiration_date_label">Définir une date d\'expiration</string>
-    <string name="share_via_link_section_title">Partager par lien</string>
-    <string name="share_via_link_send_link_label">Envoyer le lien</string>
     <string name="share_password_title">Protégé par mot de passe</string>
-    <string name="share_no_password_title">Définir un mot de passe</string>
-    <string name="share_with_title">Partager avec…</string>
-    <string name="share_via_link_unset_password">Désactiver</string>
-    <string name="add_another_public_share_link">Ajouter un autre lien</string>
-    <string name="add_new_public_share">Ajouter un nouveau lien de partage public</string>
-    <string name="public_share_name">Nouveau nom</string>
-    <string name="share_link_with_label">Partager le lien (%1$s)</string>
-    <string name="share_link">Partager par lien</string>
-    <string name="allow_resharing">Autoriser le repartage</string>
-    <string name="link_share_view_only">Afficher seulement</string>
-    <string name="link_share_editing">Éditer</string>
-    <string name="link_share_allow_upload_and_editing">Autoriser le téléversement et la modification</string>
-    <string name="link_share_file_drop">Dépôt de fichier (téléversement seulement)</string>
-    <string name="could_not_retrieve_shares">Impossible de récupérer les partages</string>
-    <string name="share_permission_view_only">Afficher seulement</string>
     <string name="share_permission_can_edit">Peut modifier</string>
     <string name="share_permission_file_drop">Dépôt de fichier</string>
     <string name="share_permission_secure_file_drop">Dépôt sécurisé de fichiers</string>
+    <string name="share_permission_view_only">Afficher seulement</string>
     <string name="share_permissions">Autorisations pour le partage</string>
+    <string name="share_remote_clarification">%1$s (distant)</string>
+    <string name="share_room_clarification">%1$s (conversation)</string>
+    <string name="share_send_new_email">Envoyer un nouvel e-mail</string>
+    <string name="share_settings">Paramètres</string>
+    <string name="share_via_link_section_title">Partager par lien</string>
+    <string name="share_via_link_send_link_label">Envoyer le lien</string>
+    <string name="share_via_link_unset_password">Désactiver</string>
+    <string name="share_with_title">Partager avec…</string>
+    <string name="shared_text_empty">Le texte partagé est vide</string>
+    <string name="shortcut_create_long">Créer une nouvelle note</string>
+    <string name="simple_about">À propos</string>
+    <string name="simple_backup">Sauvegarde</string>
+    <string name="simple_cancel">Annuler</string>
+    <string name="simple_checkbox">Case à cocher</string>
+    <string name="simple_close">Fermer</string>
+    <string name="simple_copy">Copier</string>
+    <string name="simple_edit">Modifier</string>
+    <string name="simple_error">Erreur</string>
+    <string name="simple_exception">Exception</string>
+    <string name="simple_link">Lien</string>
+    <string name="simple_more">Plus</string>
+    <string name="simple_move">Déplacer</string>
+    <string name="simple_next">Suivant</string>
+    <string name="simple_other">Divers</string>
+    <string name="simple_prev">Précédent</string>
+    <string name="simple_remove">Supprimer</string>
+    <string name="simple_security">Sécurité</string>
+    <string name="simple_switch">Basculer</string>
+    <string name="simple_synchronization">Synchronisation</string>
+    <string name="sort_alphabetically">Trier alphabétiquement</string>
+    <string name="sort_last_modified">Tirer par date de dernière modification</string>
+    <string name="status_message">Message de statut</string>
+    <string name="status_set_fail_message">Impossible de définir le statut.</string>
+    <string name="switch_to_plain_editing">Bascule vers l\'édition simple</string>
+    <string name="thirtyMinutes">30 minutes</string>
+    <string name="thisWeek">Cette semaine</string>
+    <string name="today">Aujourd’hui</string>
+    <string name="unlock_notes">Déverrouiller les notes</string>
+    <string name="username">Nom d\'utilisateur</string>
+    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
+    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
+    <string name="welcome_text">Bienvenue sur %1$s</string>
+    <string name="whats_your_status">Quel est votre statut ?</string>
+    <string name="widget_entry_fav_contentDescription">L\'icône étoile sert à marquer un élément comme favori</string>
+    <string name="widget_not_logged_in">Veuillez vous connecter à Notes avant d\'utiliser ce widget</string>
+    <string name="widget_note_list_placeholder">Aucune note</string>
+    <string name="widget_note_list_title">Liste des notes</string>
+    <string name="widget_single_note_placeholder_tv">Note non trouvée</string>
+    <string name="widget_single_note_title">Une seule note</string>
+    <string name="write_email">Envoyer un e-mail</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Vous devez être connecté à internet pour ajouter un compte.</string>
     <plurals name="share_download_limit_description">
         <item quantity="one">%1$d téléchargement restant</item>
         <item quantity="many">%1$d téléchargements restants</item>
         <item quantity="other">%1$d téléchargements restants</item>
     </plurals>
-    <string name="username">Nom d\'utilisateur</string>
-    <string name="share_group_clarification">%1$s (groupe)</string>
-    <string name="share_remote_clarification">%1$s (distant)</string>
-    <string name="share_room_clarification">%1$s (conversation)</string>
-    <string name="share_known_remote_on_clarification">le %1$s</string>
-    <string name="remote">(distant)</string>
-
-    <string name="copy_link">Copier le lien</string>
-    <string name="share">Partager</string>
-    <string name="clipboard_text_copied">Lien copié</string>
-    <string name="clipboard_no_text_to_copy">Aucun texte n\'a été reçu pour copier dans le presse-papier</string>
-    <string name="clipboard_unexpected_error">Erreur inattendue lors de la copie dans le presse-papier</string>
-    <string name="clipboard_label">Texte copié depuis %1$s</string>
-
-    <string name="listview_updated_today">Aujourd’hui</string>
-    <string name="listview_updated_yesterday">Hier</string>
-    <string name="listview_updated_this_week">Cette semaine</string>
-    <string name="listview_updated_last_week">Semaine dernière</string>
-    <string name="listview_updated_this_month">Ce mois-ci</string>
-    <string name="listview_updated_last_month">Mois dernier</string>
-    <string name="settings_note_mode">Mode d\'affichage des notes</string>
-    <string name="settings_note_mode_new">Comportement à l\'ouverture de Notes</string>
-    <string name="settings_theme_title">Thème</string>
-    <string name="settings_font_title">Texte monospace</string>
-    <string name="settings_font_size">Taille des caractères</string>
-    <string name="settings_wifi_only">Synchroniser uniquement en Wifi</string>
-    <string name="settings_lock">Verrouillage de l\'application (Bêta)</string>
-    <string name="settings_lock_summary">Informations d\'identification du terminal</string>
-    <string name="settings_background_sync">Synchronisation en tâche de fond</string>
-    <string name="settings_prevent_screen_capture">Empêcher la capture d\'écran</string>
-    <string name="settings_show_ecosystem_apps">Afficher le sélecteur d\'applications</string>
-    <string name="settings_show_ecosystem_apps_summary">Suggestions d\'applications Nextcloud dans l\'en-tête de navigation</string>
-    <string name="settings_gridview">Vue en grille</string>
-    <string name="settings_enable_direct_edit">Édition directe</string>
-    <string name="settings_enable_direct_edit_summary">Une fois désactivé, l’éditeur avancé sera masqué.</string>
-    <string name="settings_keep_screen_on">Laisser l\'écran allumé</string>
-    <string name="settings_keep_screen_on_summary">Lors de la visualisation ou l\'édition d\'une note</string>
-
-    <string name="error_sync">Échec de synchronisation : %1$s</string>
-    <string name="error_synchronization">Échec de synchronisation</string>
-    <string name="error_no_network">Aucune connexion réseau</string>
-    <string name="error_maintenance_mode">Le serveur est en mode maintenance</string>
-    <string name="error_unknown">Une erreur inconnue est survenue</string>
-
-    <string name="about_version_title">Version</string>
-    <string name="about_version">Vous utilisez actuellement %1$s</string>
-    <string name="about_maintainer_title">Responsable</string>
-    <string name="about_developers_title">Développeurs</string>
-    <string name="about_developers_original_author">auteur original</string>
-    <string name="about_translators_title">Traducteurs</string>
-    <string name="about_translators_transifex">Communauté Nextcloud sur %1$s</string>
-    <string name="about_testers_title">Testeurs</string>
-    <string name="about_source_title">Code source</string>
-    <string name="about_source">Ce projet est hébergé sur GitHub : %1$s</string>
-    <string name="about_issues_title">Bugs</string>
-    <string name="about_issues">Vous pouvez signaler des anomalies, suggérer des améliorations et demander de nouvelles fonctionnalités sur GitHub : %1$s</string>
-    <string name="about_translate_title">Traduire</string>
-    <string name="about_translate">Rejoignez l\'équipe Nextcloud sur Transifex et aidez-nous à traduire cette application : %1$s</string>
-    <string name="about_app_license_title">Licence de l\'application</string>
-    <string name="about_app_license">Cette application est sous licence GNU GENERAL PUBLIC LICENSE v3+.</string>
-    <string name="about_app_license_button">Voir la licence</string>
-    <string name="about_icons_disclaimer_title">Icônes</string>
-    <string name="about_icons_disclaimer_app_icon">Pour l’icône originale voir %1$s.</string>
-    <string name="about_icons_disclaimer_mdi_icons">Les icônes suivantes utilisées dans cette applications sont %1$s réalisées par Google Inc. et sous licence Apache 2.0.</string>
-    <string name="about_icons_disclaimer_mdi">Icônes Material Design</string>
-    <string name="about_credits_tab_title">Crédits</string>
-    <string name="about_contribution_tab_title">Contributions</string>
-    <string name="about_license_tab_title">Licence</string>
-
-    <string name="widget_note_list_title">Liste des notes</string>
-    <string name="widget_note_list_placeholder">Aucune note</string>
-    <string name="widget_single_note_title">Une seule note</string>
-    <string name="widget_single_note_placeholder_tv">Note non trouvée</string>
-    <string name="widget_not_logged_in">Veuillez vous connecter à Notes avant d\'utiliser ce widget</string>
-    <string name="widget_entry_fav_contentDescription">L\'icône étoile sert à marquer un élément comme favori</string>
-
-    <string name="activity_select_single_note">Choisir une note</string>
-
-    <string name="shortcut_create_long">Créer une nouvelle note</string>
-
-    <string name="pref_value_font_normal">Normal</string>
-    <string name="pref_value_wifi_and_mobile">Synchroniser en Wifi et données mobiles</string>
-    <string name="pref_value_lock">Protection par mot de passe</string>
-
-    <string name="simple_error">Erreur</string>
-    <string name="simple_close">Fermer</string>
-    <string name="simple_copy">Copier</string>
-    <string name="simple_exception">Exception</string>
-    <string name="pin_to_homescreen">Épingler sur l\'écran d\'accueil</string>
-    <string name="note_has_been_deleted">Cette note a été supprimée</string>
-    <string name="add_account">Ajouter un compte</string>
-
-    <string name="category_music">Musique</string>
-    <string name="category_movies">Films</string>
-    <string name="category_movie">Film</string>
-    <string name="category_work">Travail</string>
-    <string name="category_todo">Tâche</string>
-    <string name="category_todos">Tâches</string>
-    <string name="category_checklists">Listes de contrôle</string>
-    <string name="category_tasks">Tâches</string>
-    <string name="category_recipe">Recette</string>
-    <string name="category_recipes">Recettes</string>
-    <string name="category_restaurant">Restaurant</string>
-    <string name="category_restaurants">Restaurant</string>
-    <string name="category_food">Nourriture</string>
-    <string name="category_bake">Cuire</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_key">Clé</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_keys">Clés</string>
-    <string name="category_password">Mot de passe</string>
-    <string name="category_passwords">Mots de passe</string>
-    <string name="category_credentials">Information d\'identification</string>
-    <string name="category_game">Jeu</string>
-    <string name="category_games">Jeux</string>
-    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
-    <string name="category_play">Lire</string>
-    <string name="category_gift">Don</string>
-    <string name="category_gifts">Dons</string>
-    <!-- Like a gift -->
-    <string name="category_present">Cadeau</string>
-    <!-- Like a gift -->
-    <string name="category_presents">Cadeaux</string>
-
-    <string name="account_already_imported">Ce compte a déjà été importé</string>
-    <string name="no_notes_yet">Aucune note pour l\'instant</string>
-    <string name="no_notes_yet_description">Créez une nouvelle note avec le bouton +</string>
-    <string name="simple_more">Plus</string>
-    <string name="simple_move">Déplacer</string>
-    <string name="category_readonly">Lecture seule</string>
-    <string name="no_category">Sans catégorie</string>
-    <string name="add_category">Ajouter %1$s</string>
-    <string name="simple_checkbox">Case à cocher</string>
-    <string name="unlock_notes">Déverrouiller les notes</string>
-    <string name="error_dialog_title">Oh non ! - Et maintenant ? 🙁</string>
-    <string name="error_dialog_tip_token_mismatch_retry">Essayez de forcer la fermeture de l\'application puis redémarrer la. Il y avait peut-être une mauvaise connexion à Nextcloud.</string>
-    <string name="error_dialog_tip_token_mismatch_clear_storage">Si le problème persiste, essayez d\'effacer les données des deux applications : Nextcloud et Nextcloud Notes pour résoudre ce problème.</string>
-    <string name="error_dialog_tip_clear_storage">Vous pouvez nettoyer l\'espace de stockage en ouvrant les paramètres Android de l\'application et en sélectionnant Stockage → Effacer le stockage. ⚠️ Attention: cela supprimera les notes non encore synchronisées avec votre serveur Nextcloud!</string>
-    <string name="error_dialog_tip_files_outdated">Votre application Nextcloud semble ancienne. Veuillez visiter le Play Store ou F-Droid pour installer la dernière version.</string>
-    <string name="error_dialog_tip_files_force_stop">Quelque chose semble ne pas fonctionner avec votre application Nextcloud. Essayer de forcer l\'arrêt des applications Nextcloud et Nextcloud Notes.</string>
-    <string name="error_dialog_tip_files_delete_storage">Si l’arrêt forcé ne fonctionne pas, vous pouvez essayer d\'effacer les données des deux applications.</string>
-    <string name="error_dialog_timeout_instance">Le serveur n’a pas répondu dans le temps imparti. Assurez-vous que votre instance fonctionne correctement.</string>
-    <string name="error_dialog_timeout_toggle">Vérifiez votre connexion réseau. L\'activation et la désactivation des données mobiles ou du Wi-Fi peuvent aider.</string>
-    <string name="error_dialog_check_server">Le serveur a renvoyé une réponse incorrecte. Vérifier si vous pouvez accéder à vos notes via l\'interface Web.</string>
-    <string name="error_dialog_check_server_logs">Il y a un problème avec votre configuration Nextcloud. Consulter les fichiers de log du serveur.</string>
-    <string name="error_dialog_check_maintenance">Vérifier si votre instance Nextcloud n\'est pas actuellement en mode maintenance.</string>
-    <string name="error_dialog_insufficient_storage">Votre instance Nextcloud n\'a plus d\'espace disponible. Veuillez supprimer certains fichiers pour pouvoir synchroniser vos modifications locales dans votre cloud.</string>
-    <string name="error_dialog_we_need_info">Nous avons besoin des informations techniques suivantes pour pouvoir vous aider :</string>
-    <string name="error_dialog_server_app_enabled">Veuillez vérifier que vous avez installé et activé l\'application \"Notes\" sur votre serveur.</string>
-    <string name="error_dialog_redirect">Votre serveur a répondu avec le code HTTP 302, ce qui implique que vous n\'avez pas installé l\'application Notes sur votre serveur ou que quelque chose est mal configuré. Cela peut être dû à des modifications du fichier .htaccess or à une autre application Nextcloud comme OID Client.</string>
-    <string name="error_dialog_tip_disable_battery_optimizations">Veuillez désactiver toutes les options d\'optimalisation de la batterie pour les applications Nextcloud et Notes.</string>
-    <string name="error_dialog_min_version">L\'application Notes Android  nécessite que l\'application Nextcloud Android soit au moins en version 3.18.</string>
-    <string name="added_content">\"%1$s\" ajouté</string>
-    <string name="shared_text_empty">Le texte partagé est vide</string>
-    <string name="append_to_note">Ajouter à la note</string>
-    <string name="change_note_title">Modifier le titre de la note</string>
-    <string name="menu_edit_title">Modifier le titre</string>
-    <string name="simple_security">Sécurité</string>
-    <string name="appearance_and_behavior">Apparence et comportement</string>
-    <string name="simple_synchronization">Synchronisation</string>
-    <string name="manage_accounts">Gérer les comptes</string>
-    <string name="action_formatting_help">Formatage</string>
-
-
-    <string name="noteMode_plain_edit">Édition simple</string>
-    <string name="noteMode_plain_preview">Prévisualization simple</string>
-    <string name="noteMode_rich_edit">Édition texte enrichi</string>
-    <string name="noteMode_remember_last">Mémoriser ma dernière sélection</string>
-
-    <string-array name="fontSize_entries">
-        <item>Petit</item>
-        <item>Moyen</item>
-        <item>Grand</item>
-    </string-array>
-
-    <string-array name="darkmode_entries">
-        <item>Clair</item>
-        <item>Sombre</item>
-        <item>Défaut du système</item>
-    </string-array>
-
     <plurals name="ab_selected">
         <item quantity="one">%d sélectionné</item>
         <item quantity="many">%d sélectionné(s)</item>
@@ -343,128 +392,9 @@
         <item quantity="many">Partager le contenu de %1$d notes</item>
         <item quantity="other">Partager le contenu de %1$d notes</item>
     </plurals>
-
-    <string name="formatting_help_divider" translateable="false">---</string>
-    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
-    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
-    <string name="formatting_help_codefence" translateable="false">```</string>
-    <string name="formatting_help_codefence_outer" translateable="false">````</string>
-    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
-    <string name="formatting_help_cbf_title">Mise en forme contextuelle</string>
-    <string name="formatting_help_cbf_body_1">Un but majeur de l\'app Notes est de fournir une application de note sans distraction, bien que vous puissiez formater vos textes avec Markdown. Pour les divers exemples mentionnés ci-dessous, vous pouvez utiliser des raccourcis afin de pouvoir formater vos notes sans taper les codes ci-dessous. </string>
-    <string name="formatting_help_cbf_body_2">Sélectionner simplement une partie du texte ou taper sur votre curseur à n\'importe quelle position et vous aurez un menu popup qui contient à coté des entrées par défaut %1$s, %2$s, %3$s des entrées comme %4$s ou %5$s.</string>
-
-    <string name="formatting_help_text_title">Texte</string>
-    <string name="formatting_help_text_body">Il est très facile de mettre des mots en %1$sgras%1$s et d\'autres en %2$sitalique%2$s avec Markdown. Vous pouvez %3$sbarrer%3$s quelques mots et même créer un [lien vers Nextcloud](https://nextcloud.com).</string>
-
-    <string name="formatting_help_lists_title">Listes</string>
-    <string name="formatting_help_lists_body_1">Parfois, vous voulez des listes numérotées :</string>
-    <string name="formatting_help_lists_body_2">Un</string>
-    <string name="formatting_help_lists_body_3">Deux</string>
-    <string name="formatting_help_lists_body_4">Trois</string>
-    <string name="formatting_help_lists_body_5">Parfois, vous voulez des puces :</string>
-    <string name="formatting_help_lists_body_6">Démarrer une ligne avec un tiret</string>
-    <string name="formatting_help_lists_body_7">Et si vous avez des sous-points, placez deux espaces avant le tiret ou l\'étoile :</string>
-    <string name="formatting_help_lists_body_8">Comme celà</string>
-    <string name="formatting_help_lists_body_9">Et celà</string>
-
-    <string name="formatting_help_checkboxes_title">Case à cocher</string>
-    <string name="formatting_help_checkboxes_body_1">Pour créer une case à cocher, utilisez une liste suivie de crochets.</string>
-    <string name="formatting_help_checkboxes_body_2">Élément 1</string>
-    <string name="formatting_help_checkboxes_body_3">Élément 2</string>
-
-    <string name="formatting_help_structured_documents_title">Documents structurés</string>
-    <string name="formatting_help_structured_documents_body_1">Parfois, il est pratique d\'avoir différents niveaux de titres pour structurer votre document. Démarrer des lignes avec un %1$s pour créer des titres. Plusieurs %2$s à la suite, signifie un titre plus petit.</string>
-    <string name="formatting_help_structured_documents_body_2">Ceci est un titre de troisième niveau</string>
-    <string name="formatting_help_structured_documents_body_3">Vous pouvez utiliser à partir de un %1$s jusque six %2$s pour des titres de tailles différentes.</string>
-    <string name="formatting_help_structured_documents_body_4">Si vous souhaitez citer quelqu\'un, utilisez le caractère %1$s avant la ligne :</string>
-    <string name="formatting_help_structured_documents_body_5">L\'imagination est plus importante que la connaissance. La connaissance est limitée. L\'imagination encercle le monde.</string>
-    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
-
-    <string name="formatting_help_code_title">Code</string>
-    <string name="formatting_help_code_body_1">Il existe de nombreuses façons différentes de styliser du code avec Markdown. Si vous avez des blocs de code, enveloppez-les dans des accents grave :</string>
-    <string name="formatting_help_code_body_2">Markdown supporte aussi quelque chose appelé \"code fencing\", qui permet plusieurs lignes sans indentation.</string>
-    <string name="formatting_help_code_body_3">Et si vous voulez utiliser la coloration syntaxique, incluez le langage.</string>
-
-    <string name="formatting_help_tables_title">Tableaux</string>
-    <!-- Column header of a sample table -->
-    <string name="formatting_help_tables_column">Colonne %1d</string>
-    <!-- Table cell value of a sample table -->
-    <string name="formatting_help_tables_value">Valeur %1d</string>
-
-    <string name="formatting_help_images_body_1">Les liens doivent être des URL complètes commençant par un protocole et un domaine ou des chemins absolus commençant par un caractère %1$s.</string>
-    <string name="formatting_help_images_body_2">Afin de se conformer au format Markdown, veuillez utiliser des caractères d’échappement dans l’URL de l’image. Cela signifie par exemple, remplacer les espaces par %1$sdans l’URL.</string>
-    <string name="formatting_help_images_title">Images</string>
-    <string name="formatting_help_images_alt">Image retouchée</string>
-
-    <string name="simple_other">Divers</string>
-    <string name="sort_last_modified">Tirer par date de dernière modification</string>
-    <string name="sort_alphabetically">Trier alphabétiquement</string>
-    <string name="error_action_open_battery_settings">Paramètres de batterie</string>
-    <string name="error_action_open_deck_info">Ouvrir les informations de l\'application</string>
-    <string name="error_action_open_network">Paramètres réseau</string>
-    <string name="error_action_update_files_app">Mise à jour</string>
-    <string name="no_account_configured_yet">Aucun compte n\'est encore configuré</string>
-    <string name="no_other_accounts">Vous n\'avez pas encore configuré d\'autres comptes.</string>
-    <string name="choose_account">Sélectionnez un compte</string>
-    <string name="context_based_formatting">Suggestions de mise en forme contextuelle</string>
     <plurals name="remove_account_message">
         <item quantity="one">Supprimer le compte %1$s supprimera aussi définitivement un changement non-synchronisé.</item>
         <item quantity="many">Supprimer le compte %1$s supprimera aussi définitivement  %2$d changements non-synchronisés.</item>
         <item quantity="other">Supprimer le compte %1$s supprimera aussi définitivement  %2$d changements non-synchronisés.</item>
     </plurals>
-    <string name="remove_account">Supprimer %1$s</string>
-
-    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Vous devez être connecté à internet pour ajouter un compte.</string>
-    <string name="settings_notes_path">Paramétrer un dossier</string>
-
-    <string name="simple_next">Suivant</string>
-    <string name="simple_prev">Précédent</string>
-    <string name="simple_backup">Sauvegarde</string>
-    <string name="backup">Nous avons détecté un état irrécupérable de l\'application. Veuillez sauvegarder vos modifications non-synchronisées puis effacer le stockage de l\'application Notes.</string>
-    <string name="settings_notes_path_description">Dossier pour stocker vos notes dans Nextcloud</string>
-    <string-array name="settings_file_suffixes">
-        <item translatable="false">.txt</item>
-        <item translatable="false">.md</item>
-    </string-array>
-    <string name="settings_notes_path_success">Nouveau dossier pour vos notes : %1$s</string>
-    <string name="settings_file_suffix">Extension de fichier</string>
-    <string name="settings_file_suffix_description">Extension de fichier pour les nouvelles notes dans votre Nextcloud</string>
-    <string name="settings_file_suffix_success">Nouveau suffixe de fichier : %1$s</string>
-    <string name="http_status_code">Code de statut HTTP : %1$d</string>
-    <string name="progress_import_indeterminate">Importation des notes...</string>
-    <string name="progress_import">Importation de la note %1$d sur %2$d...</string>
-    <string name="account_imported">Compte importé.</string>
-    <string name="direct_editing_error">Erreur lors du chargement de l\'édition enrichie</string>
-    <string name="switch_to_plain_editing">Bascule vers l\'édition simple</string>
-    <string name="action_back">Retour</string>
-    <string name="set_online_status">Statut de connexion</string>
-    <string name="status_message">Message de statut</string>
-    <string name="whats_your_status">Quel est votre statut ?</string>
-    <string name="clear_status_after">Effacer le statut après</string>
-    <string name="clear">Effacer</string>
-    <string name="set_message">Définir le message</string>
-    <string name="dontClear">Ne pas effacer</string>
-    <string name="today">Aujourd’hui</string>
-    <string name="thirtyMinutes">30 minutes</string>
-    <string name="oneHour">1 heure</string>
-    <string name="fourHours">4 heures</string>
-    <string name="thisWeek">Cette semaine</string>
-    <string name="error_setting_status_message">Erreur de définition du message d\'état !</string>
-    <string name="file_list_seconds_ago">à l\'instant</string>
-    <string name="online_status">Statut de connexion</string>
-    <string name="online">En ligne</string>
-    <string name="dnd">Ne pas déranger</string>
-    <string name="away">Absent·e</string>
-    <string name="invisible">Invisible</string>
-    <string name="busy">Occupé</string>
-    <string name="mute_all_notifications">Désactiver les notifications</string>
-    <string name="appear_offline">Apparaître hors-ligne</string>
-    <string name="status_set_fail_message">Impossible de définir le statut.</string>
-    <string name="account_switch_dialog_status_fetching_error_message">Impossible de récupérer le statut, Veuillez réessayer.</string>
-    <string name="ecosystem_apps_display_files">Fichiers</string>
-    <string name="ecosystem_apps_display_talk">Talk</string>
-    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
-    <string name="ecosystem_apps_more">Plus d\'applications Nextcloud</string>
-    <string name="ecosystem_apps_display_more">Plus</string>
 </resources>

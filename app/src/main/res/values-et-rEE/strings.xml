@@ -1,329 +1,377 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Nextcloud Notes - Android Client
-  ~
-  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
-  ~ SPDX-License-Identifier: GPL-3.0-or-later
--->
-<resources>
-    <string name="app_name">Märkmed</string>
-    <string name="app_name_long">Nextcloudi märkmed</string>
-    <string name="label_all_notes">Kõik märkmed</string>
-    <string name="label_favorites">Lemmikud</string>
-    <string name="action_create">Uus märge</string>
-    <string name="welcome_text">Tere tulemast rakendusse %1$s</string>
-    <string name="action_settings">Seadistused</string>
-    <string name="action_trashbin">Kustutatud märkmed</string>
-    <string name="action_search">Otsi</string>
-    <string name="action_sorting_method">Sortimismeetod</string>
-    <string name="simple_cancel">Loobu</string>
-    <string name="simple_switch">Vaheta</string>
-    <string name="simple_edit">Muuda</string>
-    <string name="simple_remove">Eemalda</string>
-    <string name="action_edit_save">Salvesta</string>
-    <string name="simple_about">Info</string>
-    <string name="simple_link">Link</string>
-    <string name="action_note_deleted">Kustutatud %1$s</string>
-    <string name="action_note_restored">Taastatud %1$s</string>
-    <string name="action_undo">Tühista</string>
-    <string name="action_uncategorized">Määratlemata</string>
-    <string name="menu_delete">Kustuta</string>
-    <string name="menu_change_category">Kategooria</string>
-    <string name="menu_favorite">Lemmik</string>
-    <string name="menu_preview">Eelvaade</string>
-    <string name="menu_share">Jaga</string>
-    <string name="common_loading">Andmed on laadimisel…</string>
-
-
-    <string name="search_in_category">Otsi siin: %1$s</string>
-    <string name="search_in_all">Otsi kõiki märkmeid</string>
-
-    <string name="change_category_title">Vali kategooria</string>
-
-    <!-- UsersAndGroupsSearchProvider -->
-    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
-    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
-
-    <!-- NoteShareActivity -->
-    <string name="note_share_activity_activity_icon_content_description">märkme aktiivsuse ikoon</string>
-    <string name="note_share_activity_share_icon_content_description">märkme jagamise ikoon</string>
-    <string name="note_share_activity_external_icon_content_description">märkme välise jagamise ikoon</string>
-    <string name="note_share_activity_copy_icon_content_description">märkme jagamise kopeerimise ikoon</string>
-    <string name="note_share_activity_more_icon_content_description">märkme täiendava jagamise ikoon</string>
-    <string name="note_share_activity_icon_content_description">märkme jagamise ikoon</string>
-    <string name="note_share_activity_user_icon_content_description">märkme kasutaja jagamise ikoon</string>
-    <string name="note_share_activity_contact_icon_content_description">märkme kontakti jagamise ikoon</string>
-    <string name="note_share_activity_shared_with_you">Seda jagas sinuga %1$s</string>
-    <string name="note_share_activity_search_text">Nimi, tunnus liitpilves või e-posti aadress...</string>
-    <string name="note_share_activity_share_link">Jaga linki</string>
-    <string name="note_share_activity_resharing_not_allowed">Reeglid või õigused ei võimalda edasijagamist</string>
-    <string name="note_share_activity_could_not_retrieve_url">Võrguaadressi laadimine ei õnnestu</string>
-    <string name="note_share_activity_subject_shared_with_you">„%1$s“ on sinuga jagatud</string>
-    <string name="note_share_activity_contact_no_permission">Vajalikud on õigused kontaktide kasutamiseks</string>
-    <string name="note_share_activity_you_are_not_allowed_to_share">Sul pole luba avaliku jaosmeedia loomiseks</string>
-
-    <string name="note_share_created">Jaosmeedia on loodud</string>
-    <string name="note_share_activity_cannot_created">Sul pole luba jaosmeedia loomiseks</string>
-
-
-    <!-- NoteShareDetailActivity -->
-    <string name="note_share_detail_activity_advanced_settings">Täpsemad seaded</string>
-    <string name="note_share_detail_activity_share_via_link_hide_download">Peida allalaaditu</string>
-    <string name="note_share_detail_activity_share_send_note">Märge saajale</string>
-    <string name="note_share_detail_activity_hint_note">Märge</string>
-    <string name="note_share_detail_activity_common_next">Järgmine</string>
-    <string name="note_share_detail_activity_share_copy_link">Jaga ja kopeeri link</string>
-    <string name="note_share_detail_activity_common_confirm">Kinnita</string>
-    <string name="note_share_detail_activity_set_note">Koosta märge</string>
-    <string name="note_share_detail_activity_send_share">Saada jaosmeedia</string>
-    <string name="note_share_detail_activity_hint_name">Nimi</string>
-    <string name="note_share_detail_activity_link_name">Lingi nimi</string>
-    <string name="note_share_detail_activity_share_link_empty_password">Sa pead sisestama salasõna</string>
-    <string name="note_share_detail_activity_hint_password">Salasõna</string>
-    <string name="note_share_detail_activity_no_share_permission_selected">Palun vali jaosmeedia jaoks vähemalt üks õigus.</string>
-    <string name="note_share_detail_activity_label_empty">Silt ei saa olla tühi</string>
-    <string name="note_share_detail_activity_cancel">Katkesta</string>
-    <string name="note_share_detail_activity_create_share_error">Jaosmeedia loomine ei õnnestunud</string>
-
-    <!-- SharePasswordDialogFragment -->
-    <string name="share_password_dialog_fragment_share_link_optional_password_title">Kui soovid, siis lisa salasõna</string>
-    <string name="share_password_dialog_fragment_skip">Jäta vahele</string>
-
-    <string name="share_link_password_title">Sisesta salasõna</string>
-    <string name="common_ok">Sobib</string>
-    <string name="common_delete">Kustuta</string>
-    <string name="write_email">Saada e-kiri</string>
-    <string name="no_browser_available">Linkide avamiseks ei leidu sobilikku rakendust</string>
-    <string name="no_email_app_available">E-posti aadressi kasutamiseks ei leidu sobilikku rakendust</string>
-    <string name="no_actions">Selle kasutaja kohta ei leidu tegevusi</string>
-
-    <string name="failed_the_remove_share">Jaosmeedia eemaldamine ei õnnestunud</string>
-    <string name="email_pick_failed">Ei õnnestu valida e-posti aadressi</string>
-    <string name="failed_update_ui">Kasutajaliidese uuendamine ei õnnestunud</string>
-    <string name="file_detail_sharing_fragment_no_contact_app_message">Kontaktide valimiseks ei leidu sobilikku rakendust</string>
-    <string name="activity_chooser_title">Saada link…</string>
-
-    <string name="activity_chooser_send_file_title">Saada</string>
-    <string name="share_internal_link_to_folder_text">Sisemine jagamislink töötab ainult nende kasutajate jaoks, kelle on ligipääs sellele kaustale</string>
-    <string name="share_internal_link_to_file_text">Sisemine jagamislink töötab ainult nende kasutajate jaoks, kelle on ligipääs sellele failile</string>
-    <string name="share_internal_link">Jaga sisemist linki</string>
-    <string name="delete_link">Kustuta link</string>
-    <string name="share_settings">Seadistused</string>
-    <string name="share_send_new_email">Saada uus e-kiri</string>
-    <string name="share_dialog_title">Jagamine</string>
-    <string name="share_file">Jaga %1$s</string>
-    <string name="share_expiration_date_label">Aegub %1$s</string>
-    <string name="share_expiration_date_format">%1$s</string>
-    <string name="share_no_expiration_date_label">Määra aegumise kuupäev</string>
-    <string name="share_via_link_section_title">Jaga linki</string>
-    <string name="share_via_link_send_link_label">Saada link</string>
-    <string name="share_password_title">Kaitstud salasõnaga</string>
-    <string name="share_no_password_title">Määra salasõna</string>
-    <string name="share_with_title">Jaga kasutades…</string>
-    <string name="share_via_link_unset_password">Eemalda seadistus</string>
-    <string name="add_another_public_share_link">Lisa veel üks link</string>
-    <string name="add_new_public_share">Lisa uus avalik jagamislink</string>
-    <string name="public_share_name">Uus nimi</string>
-    <string name="share_link_with_label">Jagamise link (%1$s)</string>
-    <string name="share_link">Jaga linki</string>
-    <string name="allow_resharing">Luba edasijagamine</string>
-    <string name="link_share_view_only">Ainult vaatamine</string>
-    <string name="link_share_editing">Muutmisel</string>
-    <string name="link_share_allow_upload_and_editing">Luba üleslaadimine ja muutmine</string>
-    <string name="link_share_file_drop">Failiedastus (ainult üleslaadimine)</string>
-    <string name="could_not_retrieve_shares">Jaosmeedia laadimine ei õnnestunud</string>
-    <string name="share_permission_view_only">Ainult vaatamine</string>
-    <string name="share_permission_can_edit">Võib muuta</string>
-    <string name="share_permission_file_drop">Failiedastus</string>
-    <string name="share_permission_secure_file_drop">Turvaline failiedastus</string>
-    <string name="share_permissions">Jaga õigusi</string>
-    <plurals name="share_download_limit_description">
-        <item quantity="one">Jäänud on %1$d allalaadimine</item>
-        <item quantity="other">Jäänud on %1$d allalaadimist</item>
-    </plurals>
-    <string name="username">Kasutajanimi</string>
-    <string name="share_group_clarification">%1$s (grupp)</string>
-    <string name="share_remote_clarification">%1$s (kaugseadmes)</string>
-    <string name="share_room_clarification">%1$s (vestlus)</string>
-    <string name="share_known_remote_on_clarification">asukohas %1$s</string>
-    <string name="remote">(kaugseade)</string>
-
-    <string name="copy_link">Kopeeri link</string>
-    <string name="share">Jaga</string>
-    <string name="clipboard_text_copied">Link on kopeeritud</string>
-    <string name="clipboard_no_text_to_copy">Ei leidunud teksti, mida lõikelauale kopeerida</string>
-    <string name="clipboard_unexpected_error">Ootamatu viga lõikelauale kopeerimisel </string>
-    <string name="clipboard_label">Tekst on kopeeritud siit: %1$s</string>
-
-    <string name="listview_updated_today">Täna</string>
-    <string name="listview_updated_yesterday">Eile</string>
-    <string name="listview_updated_this_week">Käesolev nädal</string>
-    <string name="listview_updated_last_week">Eelmine nädal</string>
-    <string name="listview_updated_this_month">Käesolev kuu</string>
-    <string name="listview_updated_last_month">Eelmine kuu</string>
-    <string name="listview_no_content">Sisu pole</string>
-
-    <string name="settings_note_mode">Märkuste kuvamise režiim</string>
-    <string name="settings_note_mode_new">Käitumine märgete avamisel</string>
-    <string name="settings_theme_title">Kujundus</string>
-    <string name="settings_font_title">Monospace kirjastiil</string>
-    <string name="settings_font_size">Kirjasuurus</string>
-    <string name="settings_wifi_only">Sünkroonimine ainult Wi-Fi kaudu</string>
-    <string name="settings_lock">Rakenduse lukustus (Beta)</string>
-    <string name="settings_lock_summary">Nutiseadmepõhine autentimine</string>
-    <string name="settings_background_sync">Taustsünkroniseerimine</string>
-    <string name="settings_prevent_screen_capture">Takista ekraanitõmmiste tegemist</string>
-    <string name="settings_show_ecosystem_apps">Näita rakenduste vahetajat</string>
-    <string name="settings_show_ecosystem_apps_summary">Nextcloudi rakenduse soovitused päises</string>
-    <string name="settings_gridview">Ruudustikvaade</string>
-    <string name="settings_enable_direct_edit">Otsemuutmine</string>
-    <string name="settings_enable_direct_edit_summary">Kui see valik pole kasutusel, siis lisavõimalustega tekstitoimeti pole kasutusel.</string>
-    <string name="settings_keep_screen_on">Hoia ekraani sisse lülitatud</string>
-    <string name="settings_keep_screen_on_summary">Märke vaatamisel ja muutmisel</string>
-
-    <string name="error_sync">Sünkroniseerimine ei õnnestunud: %1$s</string>
-    <string name="error_synchronization">Sünkroniseerimine ei õnnestunud</string>
-    <string name="error_no_network">Võrguühendust pole</string>
-    <string name="error_maintenance_mode">Server on hooldusrežiimis</string>
-    <string name="error_unknown">Tekkinud on tundmatu viga.</string>
-
-    <string name="about_version_title">Versioon</string>
-    <string name="about_version">Sul on hetkel kasutusel: %1$s</string>
-    <string name="about_maintainer_title">Haldaja</string>
-    <string name="about_developers_title">Arendajad</string>
-    <string name="about_developers_original_author">algne autor</string>
-    <string name="about_translators_title">Tõlkijad</string>
-    <string name="about_translators_transifex">Nextcloudi kogukond: %1$s</string>
-    <string name="about_testers_title">Testijad</string>
-    <string name="about_source_title">Lähtekood</string>
-    <string name="about_source">Selle projekti lähtekood on GitHubis: %1$s</string>
-    <string name="about_issues_title">Veahaldus</string>
-    <string name="about_issues">Palun teata vigadest, parandusettepanekutest või uute arenduste ideedest meie GitHubi veahalduses: %1$s</string>
-    <string name="about_translate_title">Tõlgi</string>
-    <string name="about_translate">Liitu Nextcloudi tiimiga Transifexis ja aita meil seda rakendust tõlkida: %1$s</string>
-    <string name="about_app_license_title">Rakenduse litsents</string>
+  <resources>
     <string name="about_app_license">See rakendus on litsentseeritud GNU Üldise Avaliku Litsentsi versioon 3 või hilisema alusel.</string>
     <string name="about_app_license_button">Vaata litsentsi</string>
-    <string name="about_icons_disclaimer_title">Ikoonid</string>
-    <string name="about_icons_disclaimer_app_icon">Algse ikooni leiad siit: %1$s.</string>
-    <string name="about_icons_disclaimer_mdi_icons">Kõik muud siin rakenduses kasutatavad ikoonid on „%1$s“ ja tehtud Google Inc. poolt ning valdatud Apache 2.0 litsentsi alusel.</string>
-    <string name="about_icons_disclaimer_mdi">Material Designi ikoonid</string>
-    <string name="about_credits_tab_title">Tänuavaldused</string>
+    <string name="about_app_license_title">Rakenduse litsents</string>
     <string name="about_contribution_tab_title">Kaastöö</string>
+    <string name="about_credits_tab_title">Tänuavaldused</string>
+    <string name="about_developers_original_author">algne autor</string>
+    <string name="about_developers_title">Arendajad</string>
+    <string name="about_icons_disclaimer_app_icon">Algse ikooni leiad siit: %1$s.</string>
+    <string name="about_icons_disclaimer_mdi">Material Designi ikoonid</string>
+    <string name="about_icons_disclaimer_mdi_icons">Kõik muud siin rakenduses kasutatavad ikoonid on „%1$s“ ja tehtud Google Inc. poolt ning valdatud Apache 2.0 litsentsi alusel.</string>
+    <string name="about_icons_disclaimer_title">Ikoonid</string>
+    <string name="about_issues">Palun teata vigadest, parandusettepanekutest või uute arenduste ideedest meie GitHubi veahalduses: %1$s</string>
+    <string name="about_issues_title">Veahaldus</string>
     <string name="about_license_tab_title">Litsents</string>
-
-    <string name="widget_note_list_title">Märkmete loend</string>
-    <string name="widget_note_list_placeholder">Märkmeid ei leidu</string>
-    <string name="widget_single_note_title">Üksik märge</string>
-    <string name="widget_single_note_placeholder_tv">Märget ei leidu</string>
-    <string name="widget_not_logged_in">Enne selle vidin kasutamist palun logi sisse rakendusse Märkmed</string>
-    <string name="widget_entry_fav_contentDescription">Tähekese ikooniga saad märget tähistada kui lemmikut</string>
-
+    <string name="about_maintainer_title">Haldaja</string>
+    <string name="about_source">Selle projekti lähtekood on GitHubis: %1$s</string>
+    <string name="about_source_title">Lähtekood</string>
+    <string name="about_testers_title">Testijad</string>
+    <string name="about_translate">Liitu Nextcloudi tiimiga Transifexis ja aita meil seda rakendust tõlkida: %1$s</string>
+    <string name="about_translate_title">Tõlgi</string>
+    <string name="about_translators_title">Tõlkijad</string>
+    <string name="about_translators_transifex">Nextcloudi kogukond: %1$s</string>
+    <string name="about_version">Sul on hetkel kasutusel: %1$s</string>
+    <string name="about_version_title">Versioon</string>
+    <string name="account_already_imported">Kasutajakonto on juba imporditud</string>
+    <string name="account_imported">Kasutajakonto on imporditud.</string>
+    <string name="account_switch_dialog_status_fetching_error_message">Oleku tuvastamine ei õnnestunud, palun proovi uuesti.</string>
+    <string name="action_back">Tagasi</string>
+    <string name="action_create">Uus märge</string>
+    <string name="action_edit_save">Salvesta</string>
+    <string name="action_formatting_help">Vorming</string>
+    <string name="action_note_deleted">Kustutatud %1$s</string>
+    <string name="action_note_restored">Taastatud %1$s</string>
+    <string name="action_search">Otsi</string>
+    <string name="action_settings">Seadistused</string>
+    <string name="action_sorting_method">Sortimismeetod</string>
+    <string name="action_trashbin">Kustutatud märkmed</string>
+    <string name="action_uncategorized">Määratlemata</string>
+    <string name="action_undo">Tühista</string>
+    <string name="activity_chooser_send_file_title">Saada</string>
+    <string name="activity_chooser_title">Saada link…</string>
     <string name="activity_select_single_note">Vali märge</string>
-
-    <string name="shortcut_create_long">Koosta uus märge</string>
-
-    <string name="pref_value_font_normal">Tavaline</string>
-    <string name="pref_value_wifi_and_mobile">Sünkrooni WiFi ja mobiilse andmeside kaudu</string>
-    <string name="pref_value_lock">Kaitstud salasõnaga</string>
-
-    <string name="simple_error">Viga</string>
-    <string name="simple_close">Sulge</string>
-    <string name="simple_copy">Kopeeri</string>
-    <string name="simple_exception">Erand</string>
-    <string name="pin_to_homescreen">Kinnita avalehele</string>
-    <string name="note_has_been_deleted">See märge on kustutatud</string>
     <string name="add_account">Lisa konto</string>
-
-    <string name="category_music">Muusika</string>
-    <string name="category_movies">Filmid</string>
-    <string name="category_movie">Film</string>
-    <string name="category_work">Töö</string>
-    <string name="category_todo">Tegemine</string>
-    <string name="category_todos">Tegemised</string>
+    <string name="add_another_public_share_link">Lisa veel üks link</string>
+    <string name="add_category">Lisa %1$s</string>
+    <string name="add_new_public_share">Lisa uus avalik jagamislink</string>
+    <string name="added_content">Lisasin „%1$s“</string>
+    <string name="allow_resharing">Luba edasijagamine</string>
+    <string name="app_name">Märkmed</string>
+    <string name="app_name_long">Nextcloudi märkmed</string>
+    <string name="appear_offline">Sellega paistad olema võrgust väljas</string>
+    <string name="appearance_and_behavior">Välimus ja käitumine</string>
+    <string name="append_to_note">Lisa märkmele</string>
+    <string name="away">Eemal</string>
+    <string name="backup">Me tuvastasime, et rakendus on mittetaastuvas olekus. Palun varunda oma sünkroniseerimata muudatused ning kustuta Märkete rakenduse andmeruum.</string>
+    <string name="busy">Hõivatud</string>
+    <string name="category_bake">Küpsetamine</string>
     <string name="category_checklists">Kontrollkaardid</string>
-    <string name="category_tasks">Ülesanded</string>
+    <string name="category_credentials">Autentimisteave</string>
+    <string name="category_food">Toit</string>
+    <string name="category_game">Mäng</string>
+    <string name="category_games">Mängud</string>
+    <string name="category_gift">Kink</string>
+    <string name="category_gifts">Kingid</string>
+    <string name="category_key">Võti</string>
+    <string name="category_keys">Võtmed</string>
+    <string name="category_movie">Film</string>
+    <string name="category_movies">Filmid</string>
+    <string name="category_music">Muusika</string>
+    <string name="category_password">Salasõna</string>
+    <string name="category_passwords">Salasõnad</string>
+    <string name="category_play">Esita</string>
+    <string name="category_present">Kingitus</string>
+    <string name="category_presents">Kingitused</string>
+    <string name="category_readonly">kirjutuskaitstud</string>
     <string name="category_recipe">Retsept</string>
     <string name="category_recipes">Retseptid</string>
     <string name="category_restaurant">Restoran</string>
     <string name="category_restaurants">Restoranid</string>
-    <string name="category_food">Toit</string>
-    <string name="category_bake">Küpsetamine</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_key">Võti</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_keys">Võtmed</string>
-    <string name="category_password">Salasõna</string>
-    <string name="category_passwords">Salasõnad</string>
-    <string name="category_credentials">Autentimisteave</string>
-    <string name="category_game">Mäng</string>
-    <string name="category_games">Mängud</string>
-    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
-    <string name="category_play">Esita</string>
-    <string name="category_gift">Kink</string>
-    <string name="category_gifts">Kingid</string>
-    <!-- Like a gift -->
-    <string name="category_present">Kingitus</string>
-    <!-- Like a gift -->
-    <string name="category_presents">Kingitused</string>
-
-    <string name="account_already_imported">Kasutajakonto on juba imporditud</string>
-    <string name="no_notes_yet">Märkmeid veel pole</string>
-    <string name="no_notes_yet_description">Uue märkme lisamiseks vajuta + nuppu</string>
-    <string name="simple_more">Rohkem</string>
-    <string name="simple_move">Liiguta</string>
-    <string name="category_readonly">kirjutuskaitstud</string>
-    <string name="no_category">Kategooriat pole</string>
-    <string name="add_category">Lisa %1$s</string>
-    <string name="simple_checkbox">Märkeruut</string>
-    <string name="unlock_notes">Eemalda märkmete lukustus</string>
-    <string name="error_dialog_title">Appikene, mis nüüd saab? 🙁</string>
-    <string name="error_dialog_tip_token_mismatch_retry">Palun  proovi sundkorras rakendus kinni panna ja siis uuesti käivitada. Tegemist võis olla ühenduse veaga Nextcloudi serveri ja rakenduse vahel.</string>
-    <string name="error_dialog_tip_token_mismatch_clear_storage">Kui probleem jätkub, siis proovi selle lahendamiseks tühjendada mõlema rakenduse andmeruumid: Nextcloud ja Nextcloudi Märkmed.</string>
-    <string name="error_dialog_tip_clear_storage">Andmeruumi saad tühjendada, kui avad rakenduse teabe ning valid „Andmeruum“ → „Tühjenda andmeruum“.  ⚠️ Hoiatus: sellega kustutad ka senisünkroniseerimata märkmed!</string>
-    <string name="error_dialog_tip_files_outdated">Sinu Nextcloudi rakendus tundub olema aegunud. Palun laadi Play Store\'i või F-Droidi rakendustepoest viimane versioon.</string>
-    <string name="error_dialog_tip_files_force_stop">Midagi on valesti sinu Nextcloudi rakendusega. Proovi jõuga peatada nii Nextcloudi kliendi kui Nextcloudi Märkmete rakenduse töö.</string>
-    <string name="error_dialog_tip_files_delete_storage">Kui rakenduste jõuga peatamine ei eita, siis proovi tühjendada mõlema andmeruumid.</string>
-    <string name="error_dialog_timeout_instance">Sinu server ei vastanud päringule etteantud aja jooksul. Palun kontrolli, et server toimib korralikult.</string>
-    <string name="error_dialog_timeout_toggle">Palun kontrolli, et sinu nutiseadme internetiühendus toimib. Mõnel juhul aitab ka mobiilse andmeside ja/või WiFi sisse- ja välja lülitamine.</string>
+    <string name="category_tasks">Ülesanded</string>
+    <string name="category_todo">Tegemine</string>
+    <string name="category_todos">Tegemised</string>
+    <string name="category_work">Töö</string>
+    <string name="change_category_title">Vali kategooria</string>
+    <string name="change_note_title">Muuda märkme pealkirja</string>
+    <string name="choose_account">Vali konto</string>
+    <string name="clear">Tühjenda</string>
+    <string name="clear_status_after">Eemalda olekuteade peale</string>
+    <string name="clipboard_label">Tekst on kopeeritud siit: %1$s</string>
+    <string name="clipboard_no_text_to_copy">Ei leidunud teksti, mida lõikelauale kopeerida</string>
+    <string name="clipboard_text_copied">Link on kopeeritud</string>
+    <string name="clipboard_unexpected_error">Ootamatu viga lõikelauale kopeerimisel </string>
+    <string name="common_delete">Kustuta</string>
+    <string name="common_loading">Andmed on laadimisel…</string>
+    <string name="common_ok">Sobib</string>
+    <string name="context_based_formatting">Kontekstikohane hüpikaken vorminduse jaoks.</string>
+    <string name="copy_link">Kopeeri link</string>
+    <string name="could_not_retrieve_shares">Jaosmeedia laadimine ei õnnestunud</string>
+    <string name="delete_link">Kustuta link</string>
+    <string name="direct_editing_error">Viga vormindatud teksti muutmisvaate laadimisel</string>
+    <string name="dnd">Ära sega</string>
+    <string name="dontClear">Ära kustuta</string>
+    <string name="ecosystem_apps_display_files">Failid</string>
+    <string name="ecosystem_apps_display_more">Veel</string>
+    <string name="ecosystem_apps_display_talk">Vestlusrakendus Talk</string>
+    <string name="ecosystem_apps_more">Veel Nextcloudi rakendusi</string>
+    <string name="ecosystem_apps_talk">Nextcloudi suhtlusrakendus (Nextcloud Talk)</string>
+    <string name="email_pick_failed">Ei õnnestu valida e-posti aadressi</string>
+    <string name="error_action_open_battery_settings">Akuseadistused</string>
+    <string name="error_action_open_deck_info">Näita rakenduse teavet</string>
+    <string name="error_action_open_network">Võrgu seadistused</string>
+    <string name="error_action_update_files_app">Uuenda</string>
+    <string name="error_dialog_check_maintenance">Palun kontrolli, et Nextcloudi server ei oleks hetkel hooldusrežiimis!</string>
     <string name="error_dialog_check_server">Serveri vastus päringule polnud korrektne. Palun kontrolli, kas sa saad neid märkmeid näha veebiliidesest.</string>
     <string name="error_dialog_check_server_logs">Sinu Nextcloudi paigalduses on üks viga. Täpsem teave leidub serveri logides.</string>
-    <string name="error_dialog_check_maintenance">Palun kontrolli, et Nextcloudi server ei oleks hetkel hooldusrežiimis!</string>
     <string name="error_dialog_insufficient_storage">Sinu Nextcloudi serveris pole enam vaba andmeruumi. Selleks, et kohalike failide sünkroniseerimine pilve toimiks, palun kustuta serverist mittevajalikke faile.</string>
-    <string name="error_dialog_we_need_info">Me vajame sinult järgnevat tehnilist teavet:</string>
-    <string name="error_dialog_server_app_enabled">Palun kontrolli, et serveris oleks paigaldatud ja sisselülitatud Märkmete rakendus.</string>
-    <string name="error_dialog_redirect">Sinu server vastas päringule http-protokolli olekukukoodiga 302, mis tähendab, et kas serverisse on paigaldamata Märkmete rakendus või mõni seadistus on vigane. Samuti võib seda põhjustada .htaccess faili eraldi tehtud muudatused  või Nextcloudi rakendused nagu OID Klient.</string>
-    <string name="error_dialog_tip_disable_battery_optimizations">Palun keela Nextcloudi ja Märkmete rakenduste jaoks akukasutuse optimeerimine.</string>
     <string name="error_dialog_min_version">Märkmete rakendus Androidile eeldab, et Nextcloudi Androidi rakenduse versioon on vähemalt 3.18.</string>
-    <string name="added_content">Lisasin „%1$s“</string>
-    <string name="shared_text_empty">Jagatud tekst oli tühi</string>
-    <string name="append_to_note">Lisa märkmele</string>
-    <string name="change_note_title">Muuda märkme pealkirja</string>
-    <string name="menu_edit_title">Muuda pealkirja</string>
-    <string name="simple_security">Turvalisus</string>
-    <string name="appearance_and_behavior">Välimus ja käitumine</string>
-    <string name="simple_synchronization">Sünkroniseerimine</string>
+    <string name="error_dialog_redirect">Sinu server vastas päringule http-protokolli olekukukoodiga 302, mis tähendab, et kas serverisse on paigaldamata Märkmete rakendus või mõni seadistus on vigane. Samuti võib seda põhjustada .htaccess faili eraldi tehtud muudatused  või Nextcloudi rakendused nagu OID Klient.</string>
+    <string name="error_dialog_server_app_enabled">Palun kontrolli, et serveris oleks paigaldatud ja sisselülitatud Märkmete rakendus.</string>
+    <string name="error_dialog_timeout_instance">Sinu server ei vastanud päringule etteantud aja jooksul. Palun kontrolli, et server toimib korralikult.</string>
+    <string name="error_dialog_timeout_toggle">Palun kontrolli, et sinu nutiseadme internetiühendus toimib. Mõnel juhul aitab ka mobiilse andmeside ja/või WiFi sisse- ja välja lülitamine.</string>
+    <string name="error_dialog_tip_clear_storage">Andmeruumi saad tühjendada, kui avad rakenduse teabe ning valid „Andmeruum“ → „Tühjenda andmeruum“.  ⚠️ Hoiatus: sellega kustutad ka senisünkroniseerimata märkmed!</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Palun keela Nextcloudi ja Märkmete rakenduste jaoks akukasutuse optimeerimine.</string>
+    <string name="error_dialog_tip_files_delete_storage">Kui rakenduste jõuga peatamine ei eita, siis proovi tühjendada mõlema andmeruumid.</string>
+    <string name="error_dialog_tip_files_force_stop">Midagi on valesti sinu Nextcloudi rakendusega. Proovi jõuga peatada nii Nextcloudi kliendi kui Nextcloudi Märkmete rakenduse töö.</string>
+    <string name="error_dialog_tip_files_outdated">Sinu Nextcloudi rakendus tundub olema aegunud. Palun laadi Play Store\'i või F-Droidi rakendustepoest viimane versioon.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Kui probleem jätkub, siis proovi selle lahendamiseks tühjendada mõlema rakenduse andmeruumid: Nextcloud ja Nextcloudi Märkmed.</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Palun  proovi sundkorras rakendus kinni panna ja siis uuesti käivitada. Tegemist võis olla ühenduse veaga Nextcloudi serveri ja rakenduse vahel.</string>
+    <string name="error_dialog_title">Appikene, mis nüüd saab? 🙁</string>
+    <string name="error_dialog_we_need_info">Me vajame sinult järgnevat tehnilist teavet:</string>
+    <string name="error_maintenance_mode">Server on hooldusrežiimis</string>
+    <string name="error_no_network">Võrguühendust pole</string>
+    <string name="error_setting_status_message">Olekuteate lisamisel tekkis viga!</string>
+    <string name="error_sync">Sünkroniseerimine ei õnnestunud: %1$s</string>
+    <string name="error_synchronization">Sünkroniseerimine ei õnnestunud</string>
+    <string name="error_unknown">Tekkinud on tundmatu viga.</string>
+    <string name="failed_the_remove_share">Jaosmeedia eemaldamine ei õnnestunud</string>
+    <string name="failed_update_ui">Kasutajaliidese uuendamine ei õnnestunud</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Kontaktide valimiseks ei leidu sobilikku rakendust</string>
+    <string name="file_list_seconds_ago">sekundit tagasi</string>
+    <string name="formatting_help_cbf_body_1">Märkmete rakenduse loomisel oli peamine eesmärk pakkuda võimalikult lihtsat tarvikut. Kuigi jah, sa saad oma tekste ka Markdowniga vormindada. Erinevate allpool toodud näidete puhul saad kasutada kiirklahve ja nii ei pea oma märkmete koostamisel neid koode sisestama.</string>
+    <string name="formatting_help_cbf_body_2">Lihtsalt vali tekstivahemik või klõpsi kursor suvalisse kohta tekstis ning näed hüpikmenüüd, milles vaikimisi kirjete kõrval on ka %1$s, %2$s, %3$s kirjed nagu %4$s või %5$s.</string>
+    <string name="formatting_help_cbf_title">Kontekstikohane vormindus</string>
+    <string name="formatting_help_checkboxes_body_1">Märkeruudu loomiseks kasuta loendit mille lõpus on nurksulud</string>
+    <string name="formatting_help_checkboxes_body_2">1. kirje</string>
+    <string name="formatting_help_checkboxes_body_3">2. kirje</string>
+    <string name="formatting_help_checkboxes_title">Märkeruudud</string>
+    <string name="formatting_help_code_body_1">Laähtekoodi saab Markdowni puhul vormindada mitmel viisil. Kui kasutad lõimitud koodiblokke, siis pane ta tagurpidi ülakomade vahele („backtick ehk `“):</string>
+    <string name="formatting_help_code_body_2">Markdown-vorming toetab ka lähtekoodi kuvamist nii, et ta paikneb mitmel real ilma taandreata („code fencing“):</string>
+    <string name="formatting_help_code_body_3">Kui sa soovid kasutada süntaksi esiletõstmist, siis kaasa see keel:</string>
+    <string name="formatting_help_code_title">Kood</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_images_alt">Kaunist pilt</string>
+    <string name="formatting_help_images_body_1">Lingid peavad olema kas terviklikud võrguaadressid koos protokolli ja domeeniga või absoluutsed asukohad, mille aluses on %1$s tähemärk.</string>
+    <string name="formatting_help_images_body_2">Selleks, et sisestus vastaks Markdown-vormingu reeglitele, pead pildi võrguaadressis kasutama paomärke. Näiteks tähendab see, et võrguaadressi tühikute asemel peaks olema %1$s.</string>
+    <string name="formatting_help_images_title">Pildid</string>
+    <string name="formatting_help_lists_body_1">Vahetevahel soovid kasutada nummerdatud loendeid:</string>
+    <string name="formatting_help_lists_body_2">Esimene</string>
+    <string name="formatting_help_lists_body_3">Teine</string>
+    <string name="formatting_help_lists_body_4">Kolmas</string>
+    <string name="formatting_help_lists_body_5">Vahetevahel soovid kasutada jutupunkte:</string>
+    <string name="formatting_help_lists_body_6">Alusta rida kriipsuga</string>
+    <string name="formatting_help_lists_body_7">Ja kui tahad lisada alapunkte, siis lisa kaks tühikut kriipsu või tärni ette:</string>
+    <string name="formatting_help_lists_body_8">Sedaviisi</string>
+    <string name="formatting_help_lists_body_9">Ja see</string>
+    <string name="formatting_help_lists_title">Loendid</string>
+    <string name="formatting_help_structured_documents_body_1">Vahetevahel on teksti liigendamisel abiks erinevate tasemetega alapealkirjad. Pealkirja lisamiseks pane rea algusesse %1$s. Kui järjest on mitu %2$s, siis märgib see väiksemat pealkirja.</string>
+    <string name="formatting_help_structured_documents_body_2">See on kolmanda taseme pealkiri</string>
+    <string name="formatting_help_structured_documents_body_3">Sa võid erinevate pealkirja suuruste jaoks kasutada üht %1$s kuni kuut %2$s.</string>
+    <string name="formatting_help_structured_documents_body_4">Kui tahad lisada tsitaati, siis kasuta rea ees %1$s tähemärki:</string>
+    <string name="formatting_help_structured_documents_body_5">Kujutlusvõime on tähtsam kui teadmised. Teadmised on piiratud. Kujutlusvõime ümbritseb maailma.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+    <string name="formatting_help_structured_documents_title">Struktureeritud dokumendid</string>
+    <string name="formatting_help_tables_column"> %1d. veerg</string>
+    <string name="formatting_help_tables_title">Tabelid</string>
+    <string name="formatting_help_tables_value">Väärtus %1d</string>
+    <string name="formatting_help_text_body">Markdowni abil on väga lihtne kuvada osa tekstist %1$spaksus kirjas%1$s ning teist osa %2$skaldkirjas%2$s.  Sa võid tekstis ka sõnu %3$släbikriipsutada%3$s ja loomulikult [lisada linke, nagu see Nextcloudi oma](https://nextcloud.com).</string>
+    <string name="formatting_help_text_title">Tekst</string>
+    <string name="fourHours">4 tundi</string>
+    <string name="http_status_code">HTTP olekukood: %1$d</string>
+    <string name="invisible">Nähtamatu</string>
+    <string name="label_all_notes">Kõik märkmed</string>
+    <string name="label_favorites">Lemmikud</string>
+    <string name="link_share_allow_upload_and_editing">Luba üleslaadimine ja muutmine</string>
+    <string name="link_share_editing">Muutmisel</string>
+    <string name="link_share_file_drop">Failiedastus (ainult üleslaadimine)</string>
+    <string name="link_share_view_only">Ainult vaatamine</string>
+    <string name="listview_no_content">Sisu pole</string>
+    <string name="listview_updated_last_month">Eelmine kuu</string>
+    <string name="listview_updated_last_week">Eelmine nädal</string>
+    <string name="listview_updated_this_month">Käesolev kuu</string>
+    <string name="listview_updated_this_week">Käesolev nädal</string>
+    <string name="listview_updated_today">Täna</string>
+    <string name="listview_updated_yesterday">Eile</string>
     <string name="manage_accounts">Halda kontosid</string>
-    <string name="action_formatting_help">Vorming</string>
-
-
+    <string name="menu_change_category">Kategooria</string>
+    <string name="menu_delete">Kustuta</string>
+    <string name="menu_edit_title">Muuda pealkirja</string>
+    <string name="menu_favorite">Lemmik</string>
+    <string name="menu_preview">Eelvaade</string>
+    <string name="menu_share">Jaga</string>
+    <string name="mute_all_notifications">Sellega summutad teavitused</string>
+    <string name="no_account_configured_yet">Ühtegi kontot pole veel seadistatud</string>
+    <string name="no_actions">Selle kasutaja kohta ei leidu tegevusi</string>
+    <string name="no_browser_available">Linkide avamiseks ei leidu sobilikku rakendust</string>
+    <string name="no_category">Kategooriat pole</string>
+    <string name="no_email_app_available">E-posti aadressi kasutamiseks ei leidu sobilikku rakendust</string>
+    <string name="no_notes_yet">Märkmeid veel pole</string>
+    <string name="no_notes_yet_description">Uue märkme lisamiseks vajuta + nuppu</string>
+    <string name="no_other_accounts">Sa pole veel seadistanud ühtegi teist kasutajakontot.</string>
     <string name="noteMode_plain_edit">Muutmisvaade vormindamata tekstile</string>
     <string name="noteMode_plain_preview">Eelvaade vormindamata tekstile</string>
-    <string name="noteMode_rich_edit">Muutmisvaade vormindatud tekstile</string>
     <string name="noteMode_remember_last">Jäta minu viimane valik meelde</string>
-
-    <string-array name="fontSize_entries">
-        <item>Väike</item>
-        <item>Keskmine</item>
-        <item>Suur</item>
-    </string-array>
-
-    <string-array name="darkmode_entries">
-        <item>Tume kujundus</item>
-        <item>Hele kujundus</item>
-        <item>Süsteemi kujundus</item>
-    </string-array>
-
+    <string name="noteMode_rich_edit">Muutmisvaade vormindatud tekstile</string>
+    <string name="note_has_been_deleted">See märge on kustutatud</string>
+    <string name="note_share_activity_activity_icon_content_description">märkme aktiivsuse ikoon</string>
+    <string name="note_share_activity_cannot_created">Sul pole luba jaosmeedia loomiseks</string>
+    <string name="note_share_activity_contact_icon_content_description">märkme kontakti jagamise ikoon</string>
+    <string name="note_share_activity_contact_no_permission">Vajalikud on õigused kontaktide kasutamiseks</string>
+    <string name="note_share_activity_copy_icon_content_description">märkme jagamise kopeerimise ikoon</string>
+    <string name="note_share_activity_could_not_retrieve_url">Võrguaadressi laadimine ei õnnestu</string>
+    <string name="note_share_activity_external_icon_content_description">märkme välise jagamise ikoon</string>
+    <string name="note_share_activity_icon_content_description">märkme jagamise ikoon</string>
+    <string name="note_share_activity_more_icon_content_description">märkme täiendava jagamise ikoon</string>
+    <string name="note_share_activity_resharing_not_allowed">Reeglid või õigused ei võimalda edasijagamist</string>
+    <string name="note_share_activity_search_text">Nimi, tunnus liitpilves või e-posti aadress...</string>
+    <string name="note_share_activity_share_icon_content_description">märkme jagamise ikoon</string>
+    <string name="note_share_activity_share_link">Jaga linki</string>
+    <string name="note_share_activity_shared_with_you">Seda jagas sinuga %1$s</string>
+    <string name="note_share_activity_subject_shared_with_you">„%1$s“ on sinuga jagatud</string>
+    <string name="note_share_activity_user_icon_content_description">märkme kasutaja jagamise ikoon</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">Sul pole luba avaliku jaosmeedia loomiseks</string>
+    <string name="note_share_created">Jaosmeedia on loodud</string>
+    <string name="note_share_detail_activity_advanced_settings">Täpsemad seaded</string>
+    <string name="note_share_detail_activity_cancel">Katkesta</string>
+    <string name="note_share_detail_activity_common_confirm">Kinnita</string>
+    <string name="note_share_detail_activity_common_next">Järgmine</string>
+    <string name="note_share_detail_activity_create_share_error">Jaosmeedia loomine ei õnnestunud</string>
+    <string name="note_share_detail_activity_hint_name">Nimi</string>
+    <string name="note_share_detail_activity_hint_note">Märge</string>
+    <string name="note_share_detail_activity_hint_password">Salasõna</string>
+    <string name="note_share_detail_activity_label_empty">Silt ei saa olla tühi</string>
+    <string name="note_share_detail_activity_link_name">Lingi nimi</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Palun vali jaosmeedia jaoks vähemalt üks õigus.</string>
+    <string name="note_share_detail_activity_send_share">Saada jaosmeedia</string>
+    <string name="note_share_detail_activity_set_note">Koosta märge</string>
+    <string name="note_share_detail_activity_share_copy_link">Jaga ja kopeeri link</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Sa pead sisestama salasõna</string>
+    <string name="note_share_detail_activity_share_send_note">Märge saajale</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Peida allalaaditu</string>
+    <string name="oneHour">1 tundi</string>
+    <string name="online">Võrgus</string>
+    <string name="online_status">Olek võrgus</string>
+    <string name="pin_to_homescreen">Kinnita avalehele</string>
+    <string name="pref_value_font_normal">Tavaline</string>
+    <string name="pref_value_lock">Kaitstud salasõnaga</string>
+    <string name="pref_value_wifi_and_mobile">Sünkrooni WiFi ja mobiilse andmeside kaudu</string>
+    <string name="progress_import">Märkmed on importimisel: %1$d/%2$d…</string>
+    <string name="progress_import_indeterminate">Impordin märkmeid…</string>
+    <string name="public_share_name">Uus nimi</string>
+    <string name="remote">(kaugseade)</string>
+    <string name="remove_account">Eemalda fail: „%1$s“</string>
+    <string name="search_in_all">Otsi kõiki märkmeid</string>
+    <string name="search_in_category">Otsi siin: %1$s</string>
+    <string name="set_message">Lisa olekuteade</string>
+    <string name="set_online_status">Olek võrgus</string>
+    <string name="settings_background_sync">Taustsünkroniseerimine</string>
+    <string name="settings_enable_direct_edit">Otsemuutmine</string>
+    <string name="settings_enable_direct_edit_summary">Kui see valik pole kasutusel, siis lisavõimalustega tekstitoimeti pole kasutusel.</string>
+    <string name="settings_file_suffix">Faililaiend</string>
+    <string name="settings_file_suffix_description">Sinu märkmete faililaiend Nextcloudis</string>
+    <string name="settings_file_suffix_success">Uue faili järelliide: %1$s</string>
+    <string name="settings_font_size">Kirjasuurus</string>
+    <string name="settings_font_title">Monospace kirjastiil</string>
+    <string name="settings_gridview">Ruudustikvaade</string>
+    <string name="settings_keep_screen_on">Hoia ekraani sisse lülitatud</string>
+    <string name="settings_keep_screen_on_summary">Märke vaatamisel ja muutmisel</string>
+    <string name="settings_lock">Rakenduse lukustus (Beta)</string>
+    <string name="settings_lock_summary">Nutiseadmepõhine autentimine</string>
+    <string name="settings_note_mode">Märkuste kuvamise režiim</string>
+    <string name="settings_note_mode_new">Käitumine märgete avamisel</string>
+    <string name="settings_notes_path">Vali kaust</string>
+    <string name="settings_notes_path_description">Kaust sinu märkmete salvestamiseks Nextcloudis</string>
+    <string name="settings_notes_path_success">Uute märkmete kaust: %1$s</string>
+    <string name="settings_prevent_screen_capture">Takista ekraanitõmmiste tegemist</string>
+    <string name="settings_show_ecosystem_apps">Näita rakenduste vahetajat</string>
+    <string name="settings_show_ecosystem_apps_summary">Nextcloudi rakenduse soovitused päises</string>
+    <string name="settings_theme_title">Kujundus</string>
+    <string name="settings_wifi_only">Sünkroonimine ainult Wi-Fi kaudu</string>
+    <string name="share">Jaga</string>
+    <string name="share_dialog_title">Jagamine</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_expiration_date_label">Aegub %1$s</string>
+    <string name="share_file">Jaga %1$s</string>
+    <string name="share_group_clarification">%1$s (grupp)</string>
+    <string name="share_internal_link">Jaga sisemist linki</string>
+    <string name="share_internal_link_to_file_text">Sisemine jagamislink töötab ainult nende kasutajate jaoks, kelle on ligipääs sellele failile</string>
+    <string name="share_internal_link_to_folder_text">Sisemine jagamislink töötab ainult nende kasutajate jaoks, kelle on ligipääs sellele kaustale</string>
+    <string name="share_known_remote_on_clarification">asukohas %1$s</string>
+    <string name="share_link">Jaga linki</string>
+    <string name="share_link_password_title">Sisesta salasõna</string>
+    <string name="share_link_with_label">Jagamise link (%1$s)</string>
+    <string name="share_no_expiration_date_label">Määra aegumise kuupäev</string>
+    <string name="share_no_password_title">Määra salasõna</string>
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Kui soovid, siis lisa salasõna</string>
+    <string name="share_password_dialog_fragment_skip">Jäta vahele</string>
+    <string name="share_password_title">Kaitstud salasõnaga</string>
+    <string name="share_permission_can_edit">Võib muuta</string>
+    <string name="share_permission_file_drop">Failiedastus</string>
+    <string name="share_permission_secure_file_drop">Turvaline failiedastus</string>
+    <string name="share_permission_view_only">Ainult vaatamine</string>
+    <string name="share_permissions">Jaga õigusi</string>
+    <string name="share_remote_clarification">%1$s (kaugseadmes)</string>
+    <string name="share_room_clarification">%1$s (vestlus)</string>
+    <string name="share_send_new_email">Saada uus e-kiri</string>
+    <string name="share_settings">Seadistused</string>
+    <string name="share_via_link_section_title">Jaga linki</string>
+    <string name="share_via_link_send_link_label">Saada link</string>
+    <string name="share_via_link_unset_password">Eemalda seadistus</string>
+    <string name="share_with_title">Jaga kasutades…</string>
+    <string name="shared_text_empty">Jagatud tekst oli tühi</string>
+    <string name="shortcut_create_long">Koosta uus märge</string>
+    <string name="simple_about">Info</string>
+    <string name="simple_backup">Varundus</string>
+    <string name="simple_cancel">Loobu</string>
+    <string name="simple_checkbox">Märkeruut</string>
+    <string name="simple_close">Sulge</string>
+    <string name="simple_copy">Kopeeri</string>
+    <string name="simple_edit">Muuda</string>
+    <string name="simple_error">Viga</string>
+    <string name="simple_exception">Erand</string>
+    <string name="simple_link">Link</string>
+    <string name="simple_more">Rohkem</string>
+    <string name="simple_move">Liiguta</string>
+    <string name="simple_next">Järgmine</string>
+    <string name="simple_other">Muu</string>
+    <string name="simple_prev">Eelmine</string>
+    <string name="simple_remove">Eemalda</string>
+    <string name="simple_security">Turvalisus</string>
+    <string name="simple_switch">Vaheta</string>
+    <string name="simple_synchronization">Sünkroniseerimine</string>
+    <string name="sort_alphabetically">Järjesta tähestikuliselt</string>
+    <string name="sort_last_modified">Järjesta muutmise kuupäeva järgi</string>
+    <string name="status_message">Olekuteade</string>
+    <string name="status_set_fail_message">Oleku määramine ei õnnestunud!</string>
+    <string name="switch_to_plain_editing">Kasuta muutmisvaadet vormindamata tekstile</string>
+    <string name="thirtyMinutes">30 minutit</string>
+    <string name="thisWeek">Käesoleval nädalal</string>
+    <string name="today">Täna</string>
+    <string name="unlock_notes">Eemalda märkmete lukustus</string>
+    <string name="username">Kasutajanimi</string>
+    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
+    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
+    <string name="welcome_text">Tere tulemast rakendusse %1$s</string>
+    <string name="whats_your_status">Mis on su olek?</string>
+    <string name="widget_entry_fav_contentDescription">Tähekese ikooniga saad märget tähistada kui lemmikut</string>
+    <string name="widget_not_logged_in">Enne selle vidin kasutamist palun logi sisse rakendusse Märkmed</string>
+    <string name="widget_note_list_placeholder">Märkmeid ei leidu</string>
+    <string name="widget_note_list_title">Märkmete loend</string>
+    <string name="widget_single_note_placeholder_tv">Märget ei leidu</string>
+    <string name="widget_single_note_title">Üksik märge</string>
+    <string name="write_email">Saada e-kiri</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Kasutajakonto lisamiseks peab sinu nutiseadmes olema toimiv internetiühendus.</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">Jäänud on %1$d allalaadimine</item>
+        <item quantity="other">Jäänud on %1$d allalaadimist</item>
+    </plurals>
     <plurals name="ab_selected">
         <item quantity="one">%d valitud</item>
         <item quantity="other">%d valitud</item>
@@ -340,127 +388,8 @@
         <item quantity="one">Jaga %1$d märkme sisu</item>
         <item quantity="other">Jaga %1$d märkme sisu</item>
     </plurals>
-
-    <string name="formatting_help_divider" translateable="false">---</string>
-    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
-    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
-    <string name="formatting_help_codefence" translateable="false">```</string>
-    <string name="formatting_help_codefence_outer" translateable="false">````</string>
-    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
-    <string name="formatting_help_cbf_title">Kontekstikohane vormindus</string>
-    <string name="formatting_help_cbf_body_1">Märkmete rakenduse loomisel oli peamine eesmärk pakkuda võimalikult lihtsat tarvikut. Kuigi jah, sa saad oma tekste ka Markdowniga vormindada. Erinevate allpool toodud näidete puhul saad kasutada kiirklahve ja nii ei pea oma märkmete koostamisel neid koode sisestama.</string>
-    <string name="formatting_help_cbf_body_2">Lihtsalt vali tekstivahemik või klõpsi kursor suvalisse kohta tekstis ning näed hüpikmenüüd, milles vaikimisi kirjete kõrval on ka %1$s, %2$s, %3$s kirjed nagu %4$s või %5$s.</string>
-
-    <string name="formatting_help_text_title">Tekst</string>
-    <string name="formatting_help_text_body">Markdowni abil on väga lihtne kuvada osa tekstist %1$spaksus kirjas%1$s ning teist osa %2$skaldkirjas%2$s.  Sa võid tekstis ka sõnu %3$släbikriipsutada%3$s ja loomulikult [lisada linke, nagu see Nextcloudi oma](https://nextcloud.com).</string>
-
-    <string name="formatting_help_lists_title">Loendid</string>
-    <string name="formatting_help_lists_body_1">Vahetevahel soovid kasutada nummerdatud loendeid:</string>
-    <string name="formatting_help_lists_body_2">Esimene</string>
-    <string name="formatting_help_lists_body_3">Teine</string>
-    <string name="formatting_help_lists_body_4">Kolmas</string>
-    <string name="formatting_help_lists_body_5">Vahetevahel soovid kasutada jutupunkte:</string>
-    <string name="formatting_help_lists_body_6">Alusta rida kriipsuga</string>
-    <string name="formatting_help_lists_body_7">Ja kui tahad lisada alapunkte, siis lisa kaks tühikut kriipsu või tärni ette:</string>
-    <string name="formatting_help_lists_body_8">Sedaviisi</string>
-    <string name="formatting_help_lists_body_9">Ja see</string>
-
-    <string name="formatting_help_checkboxes_title">Märkeruudud</string>
-    <string name="formatting_help_checkboxes_body_1">Märkeruudu loomiseks kasuta loendit mille lõpus on nurksulud</string>
-    <string name="formatting_help_checkboxes_body_2">1. kirje</string>
-    <string name="formatting_help_checkboxes_body_3">2. kirje</string>
-
-    <string name="formatting_help_structured_documents_title">Struktureeritud dokumendid</string>
-    <string name="formatting_help_structured_documents_body_1">Vahetevahel on teksti liigendamisel abiks erinevate tasemetega alapealkirjad. Pealkirja lisamiseks pane rea algusesse %1$s. Kui järjest on mitu %2$s, siis märgib see väiksemat pealkirja.</string>
-    <string name="formatting_help_structured_documents_body_2">See on kolmanda taseme pealkiri</string>
-    <string name="formatting_help_structured_documents_body_3">Sa võid erinevate pealkirja suuruste jaoks kasutada üht %1$s kuni kuut %2$s.</string>
-    <string name="formatting_help_structured_documents_body_4">Kui tahad lisada tsitaati, siis kasuta rea ees %1$s tähemärki:</string>
-    <string name="formatting_help_structured_documents_body_5">Kujutlusvõime on tähtsam kui teadmised. Teadmised on piiratud. Kujutlusvõime ümbritseb maailma.</string>
-    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
-
-    <string name="formatting_help_code_title">Kood</string>
-    <string name="formatting_help_code_body_1">Laähtekoodi saab Markdowni puhul vormindada mitmel viisil. Kui kasutad lõimitud koodiblokke, siis pane ta tagurpidi ülakomade vahele („backtick ehk `“):</string>
-    <string name="formatting_help_code_body_2">Markdown-vorming toetab ka lähtekoodi kuvamist nii, et ta paikneb mitmel real ilma taandreata („code fencing“):</string>
-    <string name="formatting_help_code_body_3">Kui sa soovid kasutada süntaksi esiletõstmist, siis kaasa see keel:</string>
-
-    <string name="formatting_help_tables_title">Tabelid</string>
-    <!-- Column header of a sample table -->
-    <string name="formatting_help_tables_column"> %1d. veerg</string>
-    <!-- Table cell value of a sample table -->
-    <string name="formatting_help_tables_value">Väärtus %1d</string>
-
-    <string name="formatting_help_images_body_1">Lingid peavad olema kas terviklikud võrguaadressid koos protokolli ja domeeniga või absoluutsed asukohad, mille aluses on %1$s tähemärk.</string>
-    <string name="formatting_help_images_body_2">Selleks, et sisestus vastaks Markdown-vormingu reeglitele, pead pildi võrguaadressis kasutama paomärke. Näiteks tähendab see, et võrguaadressi tühikute asemel peaks olema %1$s.</string>
-    <string name="formatting_help_images_title">Pildid</string>
-    <string name="formatting_help_images_alt">Kaunist pilt</string>
-
-    <string name="simple_other">Muu</string>
-    <string name="sort_last_modified">Järjesta muutmise kuupäeva järgi</string>
-    <string name="sort_alphabetically">Järjesta tähestikuliselt</string>
-    <string name="error_action_open_battery_settings">Akuseadistused</string>
-    <string name="error_action_open_deck_info">Näita rakenduse teavet</string>
-    <string name="error_action_open_network">Võrgu seadistused</string>
-    <string name="error_action_update_files_app">Uuenda</string>
-    <string name="no_account_configured_yet">Ühtegi kontot pole veel seadistatud</string>
-    <string name="no_other_accounts">Sa pole veel seadistanud ühtegi teist kasutajakontot.</string>
-    <string name="choose_account">Vali konto</string>
-    <string name="context_based_formatting">Kontekstikohane hüpikaken vorminduse jaoks.</string>
     <plurals name="remove_account_message">
         <item quantity="one">„%1$s“ kasutajakonto eemaldamisel kustutad ka ühe sünkroniseerimata muudatuse.</item>
         <item quantity="other">„%1$s“ kasutajakonto eemaldamisel kustutad ka %2$d sünkroniseerimata muudatust.</item>
     </plurals>
-    <string name="remove_account">Eemalda fail: „%1$s“</string>
-
-    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Kasutajakonto lisamiseks peab sinu nutiseadmes olema toimiv internetiühendus.</string>
-    <string name="settings_notes_path">Vali kaust</string>
-
-    <string name="simple_next">Järgmine</string>
-    <string name="simple_prev">Eelmine</string>
-    <string name="simple_backup">Varundus</string>
-    <string name="backup">Me tuvastasime, et rakendus on mittetaastuvas olekus. Palun varunda oma sünkroniseerimata muudatused ning kustuta Märkete rakenduse andmeruum.</string>
-    <string name="settings_notes_path_description">Kaust sinu märkmete salvestamiseks Nextcloudis</string>
-    <string-array name="settings_file_suffixes">
-        <item translatable="false">.txt</item>
-        <item translatable="false">.md</item>
-    </string-array>
-    <string name="settings_notes_path_success">Uute märkmete kaust: %1$s</string>
-    <string name="settings_file_suffix">Faililaiend</string>
-    <string name="settings_file_suffix_description">Sinu märkmete faililaiend Nextcloudis</string>
-    <string name="settings_file_suffix_success">Uue faili järelliide: %1$s</string>
-    <string name="http_status_code">HTTP olekukood: %1$d</string>
-    <string name="progress_import_indeterminate">Impordin märkmeid…</string>
-    <string name="progress_import">Märkmed on importimisel: %1$d/%2$d…</string>
-    <string name="account_imported">Kasutajakonto on imporditud.</string>
-    <string name="direct_editing_error">Viga vormindatud teksti muutmisvaate laadimisel</string>
-    <string name="switch_to_plain_editing">Kasuta muutmisvaadet vormindamata tekstile</string>
-    <string name="action_back">Tagasi</string>
-    <string name="set_online_status">Olek võrgus</string>
-    <string name="status_message">Olekuteade</string>
-    <string name="whats_your_status">Mis on su olek?</string>
-    <string name="clear_status_after">Eemalda olekuteade peale</string>
-    <string name="clear">Tühjenda</string>
-    <string name="set_message">Lisa olekuteade</string>
-    <string name="dontClear">Ära kustuta</string>
-    <string name="today">Täna</string>
-    <string name="thirtyMinutes">30 minutit</string>
-    <string name="oneHour">1 tundi</string>
-    <string name="fourHours">4 tundi</string>
-    <string name="thisWeek">Käesoleval nädalal</string>
-    <string name="error_setting_status_message">Olekuteate lisamisel tekkis viga!</string>
-    <string name="file_list_seconds_ago">sekundit tagasi</string>
-    <string name="online_status">Olek võrgus</string>
-    <string name="online">Võrgus</string>
-    <string name="dnd">Ära sega</string>
-    <string name="away">Eemal</string>
-    <string name="invisible">Nähtamatu</string>
-    <string name="busy">Hõivatud</string>
-    <string name="mute_all_notifications">Sellega summutad teavitused</string>
-    <string name="appear_offline">Sellega paistad olema võrgust väljas</string>
-    <string name="status_set_fail_message">Oleku määramine ei õnnestunud!</string>
-    <string name="account_switch_dialog_status_fetching_error_message">Oleku tuvastamine ei õnnestunud, palun proovi uuesti.</string>
-    <string name="ecosystem_apps_display_files">Failid</string>
-    <string name="ecosystem_apps_display_talk">Vestlusrakendus Talk</string>
-    <string name="ecosystem_apps_talk">Nextcloudi suhtlusrakendus (Nextcloud Talk)</string>
-    <string name="ecosystem_apps_more">Veel Nextcloudi rakendusi</string>
-    <string name="ecosystem_apps_display_more">Veel</string>
 </resources>
