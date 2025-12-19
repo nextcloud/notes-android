@@ -1,326 +1,375 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Nextcloud Notes - Android Client
-  ~
-  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
-  ~ SPDX-License-Identifier: GPL-3.0-or-later
--->
-<resources>
-    <string name="app_name">Notes</string>
-    <string name="app_name_long">Nextcloud Notes</string>
-    <string name="label_all_notes">All notes</string>
-    <string name="label_favorites">ລາຍການທີ່ມັກ</string>
-    <string name="action_create">New note</string>
-    <string name="welcome_text">Welcome to %1$s</string>
-    <string name="action_settings">ການຕັ້ງຄ່າ</string>
-    <string name="action_trashbin">Deleted notes</string>
-    <string name="action_search">ຄົ້ນຫາ</string>
-    <string name="action_sorting_method">Sorting method</string>
-    <string name="simple_cancel">ຍົກເລີກ</string>
-    <string name="simple_switch">Switch</string>
-    <string name="simple_edit">ແກ້ໄຂ</string>
-    <string name="simple_remove">ຍ້າຍອອກ</string>
-    <string name="action_edit_save">ບັນທຶກ</string>
-    <string name="simple_about">ກ່ຽວກັບ</string>
-    <string name="simple_link">ລິງ</string>
-    <string name="action_note_deleted">Deleted %1$s</string>
-    <string name="action_note_restored">Restored %1$s</string>
-    <string name="action_undo">Undo</string>
-    <string name="action_uncategorized">Uncategorized</string>
-    <string name="menu_delete">ລຶບ</string>
-    <string name="menu_change_category">Category</string>
-    <string name="menu_favorite">ລາຍການທີ່ມັກ</string>
-    <string name="menu_preview">ເບິ່ງຕົວຢ່າງ</string>
-    <string name="menu_share">ແບ່ງປັນ</string>
-    <string name="common_loading">ກຳລັງໂຫຼດ</string>
-
-
-    <string name="search_in_category">Search in %1$s</string>
-    <string name="search_in_all">Search all notes</string>
-
-    <string name="change_category_title">Choose a category</string>
-
-    <!-- UsersAndGroupsSearchProvider -->
-    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
-    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
-
-    <!-- NoteShareActivity -->
-    <string name="note_share_activity_activity_icon_content_description">note activity icon</string>
-    <string name="note_share_activity_share_icon_content_description">note share icon</string>
-    <string name="note_share_activity_external_icon_content_description">note share external icon</string>
-    <string name="note_share_activity_copy_icon_content_description">note share copy icon</string>
-    <string name="note_share_activity_more_icon_content_description">note share more icon</string>
-    <string name="note_share_activity_icon_content_description">note share icon</string>
-    <string name="note_share_activity_user_icon_content_description">note share user icon</string>
-    <string name="note_share_activity_contact_icon_content_description">note share contact icon</string>
-    <string name="note_share_activity_shared_with_you">ແບ່ງປັນໂດຍທ່ານ %1$s</string>
-    <string name="note_share_activity_search_text">Name, Federated Cloud ID or email address…</string>
-    <string name="note_share_activity_share_link">ແບ່ງປັນລິງ</string>
-    <string name="note_share_activity_resharing_not_allowed">Policy or permissions prevent resharing</string>
-    <string name="note_share_activity_could_not_retrieve_url">ບໍ່ສາມາດເກັບURL ໄດ້</string>
-    <string name="note_share_activity_subject_shared_with_you">\"%1$s\"ໄດ້ຖືກແບ່ງໂດຍທ່ານ</string>
-    <string name="note_share_activity_contact_no_permission">Contact permission is required.</string>
-    <string name="note_share_activity_you_are_not_allowed_to_share">You are not allowed to create a public share.</string>
-
-    <string name="note_share_created">Share created</string>
-    <string name="note_share_activity_cannot_created">You are not allowed to create a share.</string>
-
-
-    <!-- NoteShareDetailActivity -->
-    <string name="note_share_detail_activity_advanced_settings">ຕັ້ງ​ຄ່າ​ຂັ້ນ​ສູງ</string>
-    <string name="note_share_detail_activity_share_via_link_hide_download">ເຊື່ອງການດາວໂຫຼດ</string>
-    <string name="note_share_detail_activity_share_send_note">ລະບຸຜູ້ຮັບ</string>
-    <string name="note_share_detail_activity_hint_note">ຫມາຍເຫດ</string>
-    <string name="note_share_detail_activity_common_next">Next</string>
-    <string name="note_share_detail_activity_share_copy_link">Share and Copy Link</string>
-    <string name="note_share_detail_activity_common_confirm">ຢືນຢັນ</string>
-    <string name="note_share_detail_activity_set_note">Set Note</string>
-    <string name="note_share_detail_activity_send_share">Send Share</string>
-    <string name="note_share_detail_activity_hint_name">ຊື່</string>
-    <string name="note_share_detail_activity_link_name">Link Name</string>
-    <string name="note_share_detail_activity_share_link_empty_password"> ທ່ານຕ້ອງໃສ່ລະຫັດຜ່ານ</string>
-    <string name="note_share_detail_activity_hint_password">ລະຫັດຜ່ານ</string>
-    <string name="note_share_detail_activity_no_share_permission_selected">Please select at least one permission to share.</string>
-    <string name="note_share_detail_activity_label_empty">Label ບໍ່ສາມາດເປົ່າວ່າງໄດ້</string>
-    <string name="note_share_detail_activity_cancel">ຍົກເລີກ</string>
-    <string name="note_share_detail_activity_create_share_error">Failed to create a share</string>
-
-    <!-- SharePasswordDialogFragment -->
-    <string name="share_password_dialog_fragment_share_link_optional_password_title"> ທາງເລືອກເຂົ້າລະຫັດຜ່ານ</string>
-    <string name="share_password_dialog_fragment_skip">ຂ້າມໄປ</string>
-
-    <string name="share_link_password_title">ໃສ່ລະຫັດຜ່ານ</string>
-    <string name="common_ok">ຕົກລົງ</string>
-    <string name="common_delete">ລຶບ</string>
-    <string name="write_email">ສົ່ງອີເມວ</string>
-    <string name="no_browser_available">ບໍ່ມີແອັບພລິເຄຊັນທີ່ສາມາດຈັດການກັບລິ້ງໄດ້</string>
-    <string name="no_email_app_available">No App available to handle mail address</string>
-    <string name="no_actions">No actions for this user</string>
-
-    <string name="failed_the_remove_share">Failed to remove share</string>
-    <string name="email_pick_failed">Failed to pick email address.</string>
-    <string name="failed_update_ui">ອັບເດດ  UI ບໍ່ສຳເລັດ</string>
-    <string name="file_detail_sharing_fragment_no_contact_app_message">No app available to select contacts</string>
-    <string name="activity_chooser_title">ສົ່ງລິ້ງໄປຫາ...</string>
-
-    <string name="activity_chooser_send_file_title">ສົ່ງ</string>
-    <string name="share_internal_link_to_folder_text">ການເຊື່ອມຕໍ່ການແບ່ງປັນ ສໍາລັບຜູ້ໃຊ້ທີ່ມີການເຂົ້າເຖິງໂຟນເດີນີ້ເທົ່ານັ້ນ</string>
-    <string name="share_internal_link_to_file_text">ການເຊື່ອມຕໍ່ການແບ່ງປັນການເຮັດວຽກສໍາລັບຜູ້ໃຊ້ທີ່ມີການເຂົ້າເຖິງຟາຍນີ້ເທົ່ານັ້ນ</string>
-    <string name="share_internal_link">ແບ່ງປັນລິງພາຍໃນ</string>
-    <string name="delete_link">Delete Link</string>
-    <string name="share_settings">ການຕັ້ງຄ່າ</string>
-    <string name="share_send_new_email">Send new email</string>
-    <string name="share_dialog_title">ການແບ່ງປັນ</string>
-    <string name="share_file">ແບ່ງປັນ%1$s</string>
-    <string name="share_expiration_date_label">ສິ້ນສຸດ%1$s</string>
-    <string name="share_expiration_date_format">%1$s</string>
-    <string name="share_no_expiration_date_label">ກໍານົດວັນໝົດອາຍຸ</string>
-    <string name="share_via_link_section_title">ແບ່ງປັນລິງ</string>
-    <string name="share_via_link_send_link_label">ສົ່ງລິງ</string>
-    <string name="share_password_title">ລະຫັດປ້ອງກັນ</string>
-    <string name="share_no_password_title">ກຳນົດລະຫັດຜ່ານ</string>
-    <string name="share_with_title">ແບ່ງປັນດ້ວຍ</string>
-    <string name="share_via_link_unset_password">ຍົກເລີກການຕັ້ງຄ່າ</string>
-    <string name="add_another_public_share_link">ເພີ່ມລິງອຶ່ນອີ</string>
-    <string name="add_new_public_share">ເພິ່ມການແບ່ງປັນສາທາລະນະໃໝ່</string>
-    <string name="public_share_name">ຊື່ໄໝ່</string>
-    <string name="share_link_with_label">ແບ່ງປັນ(%1$s)</string>
-    <string name="share_link">ແບ່ງປັນລິງ</string>
-    <string name="allow_resharing">ອະນຸຍາດໃຫ້ ການແບ່ງປັນຄືນ</string>
-    <string name="link_share_view_only">ເບິ່ງເທົ່ານັ້ນ</string>
-    <string name="link_share_editing">Editing</string>
-    <string name="link_share_allow_upload_and_editing">ອະນຸຍາດໃຫ້ ອັບ ໂຫຼດ ແລະ  ແກ້ ໄຂໄດ້</string>
-    <string name="link_share_file_drop">ການຖິ້ືມຟາຍ (ອັງໂຫຼດຢ່າງດຽວ)</string>
-    <string name="could_not_retrieve_shares">ບໍ່ສາມາດເອົາການແບ່ງປັນຄືນໄດ້</string>
-    <string name="share_permission_view_only">ເບິ່ງເທົ່ານັ້ນ</string>
-    <string name="share_permission_can_edit">ສາມາດແກ້ໄຂໄດ້</string>
-    <string name="share_permission_file_drop">ຈຸດສົ່ງໄຟລ໌</string>
-    <string name="share_permission_secure_file_drop">Secure file drop</string>
-    <string name="share_permissions">Share Permissions</string>
-    <plurals name="share_download_limit_description">
-        <item quantity="other">%1$d downloads remaining</item>
-    </plurals>
-    <string name="username">ຊື່ຜູ້ໃຊ້</string>
-    <string name="share_group_clarification"> (ກຸ່ມ)%1$s</string>
-    <string name="share_remote_clarification"> %1$s(ໄລຍະໄກ)</string>
-    <string name="share_room_clarification"> %1$s(ສົນທະນາ)</string>
-    <string name="share_known_remote_on_clarification">%1$s</string>
-    <string name="remote">(ໄລຍະໄກ)</string>
-
-    <string name="copy_link">ສຳເນົາລິງ</string>
-    <string name="share">ແບ່ງປັນ</string>
-    <string name="clipboard_text_copied">ສຳເນົາລິງ</string>
-    <string name="clipboard_no_text_to_copy">ບໍ່ໄດ້ຮັບຂໍ້ຄວາມທີ່ຈະສໍາເນົາໄປຍັງຄລິບ</string>
-    <string name="clipboard_unexpected_error">ຂໍ້ຜິດພາດໃນຂະນະທີ່ສໍາເນົາຄລິບ</string>
-    <string name="clipboard_label">ສໍາເນົາຂໍ້ຄວາມຈາກ%1$s</string>
-
-    <string name="listview_updated_today">ມື້ນີ້</string>
-    <string name="listview_updated_yesterday">ມື້ວານນີ້</string>
-    <string name="listview_updated_this_week">ທິດນີ້</string>
-    <string name="listview_updated_last_week">Last week</string>
-    <string name="listview_updated_this_month">This month</string>
-    <string name="listview_updated_last_month">Last month</string>
-    <string name="settings_note_mode">Display mode for notes</string>
-    <string name="settings_note_mode_new">Notes opening behaviour</string>
-    <string name="settings_theme_title">ຫົວຂໍ້</string>
-    <string name="settings_font_title">Monospace font</string>
-    <string name="settings_font_size">Font size</string>
-    <string name="settings_wifi_only">Sync only on Wi-Fi</string>
-    <string name="settings_lock">App lock (Beta)</string>
-    <string name="settings_lock_summary">ການຢັ້ງຢືນອຸປະກອນ</string>
-    <string name="settings_background_sync">Background synchronization</string>
-    <string name="settings_prevent_screen_capture">Prevent screen capture</string>
-    <string name="settings_show_ecosystem_apps">Show app switcher</string>
-    <string name="settings_show_ecosystem_apps_summary">Nextcloud app suggestions in navigation heading</string>
-    <string name="settings_gridview">ເບິ່ງຕາຕະລາງ</string>
-    <string name="settings_enable_direct_edit">Direct Edit</string>
-    <string name="settings_enable_direct_edit_summary">When disabled, the advanced editor will be hidden.</string>
-    <string name="settings_keep_screen_on">Keep screen on</string>
-    <string name="settings_keep_screen_on_summary">When viewing or editing a note</string>
-
-    <string name="error_sync">Synchronization failed: %1$s</string>
-    <string name="error_synchronization">Synchronization failed</string>
-    <string name="error_no_network">ບໍ່ມີການເຊື່ອມຕໍ່ເຄືອຂ່າຍ</string>
-    <string name="error_maintenance_mode">Server is in maintenance mode</string>
-    <string name="error_unknown">An unknown error has occurred.</string>
-
-    <string name="about_version_title">Version</string>
-    <string name="about_version">You are currently using %1$s</string>
-    <string name="about_maintainer_title">Maintainer</string>
-    <string name="about_developers_title">Developers</string>
-    <string name="about_developers_original_author">original author</string>
-    <string name="about_translators_title">Translators</string>
-    <string name="about_translators_transifex">Nextcloud community on %1$s</string>
-    <string name="about_testers_title">Testers</string>
-    <string name="about_source_title">Source code</string>
-    <string name="about_source">This project is hosted on GitHub: %1$s</string>
-    <string name="about_issues_title">Issues</string>
-    <string name="about_issues">You can report bugs, enhancement proposals and feature requests at the GitHub issue tracker: %1$s</string>
-    <string name="about_translate_title">ແປ</string>
-    <string name="about_translate">Join the Nextcloud team on Transifex and help us to translate this app: %1$s</string>
-    <string name="about_app_license_title">App license</string>
+  <resources>
     <string name="about_app_license">This application is licensed under the GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">View license</string>
-    <string name="about_icons_disclaimer_title">Icons</string>
-    <string name="about_icons_disclaimer_app_icon">For the original icon see %1$s.</string>
-    <string name="about_icons_disclaimer_mdi_icons">All further icons used by this app are %1$s made by Google Inc. and licensed under the Apache 2.0 License.</string>
-    <string name="about_icons_disclaimer_mdi">Material Design Icons</string>
-    <string name="about_credits_tab_title">Credits</string>
+    <string name="about_app_license_title">App license</string>
     <string name="about_contribution_tab_title">Contribution</string>
+    <string name="about_credits_tab_title">Credits</string>
+    <string name="about_developers_original_author">original author</string>
+    <string name="about_developers_title">Developers</string>
+    <string name="about_icons_disclaimer_app_icon">For the original icon see %1$s.</string>
+    <string name="about_icons_disclaimer_mdi">Material Design Icons</string>
+    <string name="about_icons_disclaimer_mdi_icons">All further icons used by this app are %1$s made by Google Inc. and licensed under the Apache 2.0 License.</string>
+    <string name="about_icons_disclaimer_title">Icons</string>
+    <string name="about_issues">You can report bugs, enhancement proposals and feature requests at the GitHub issue tracker: %1$s</string>
+    <string name="about_issues_title">Issues</string>
     <string name="about_license_tab_title">ໃບອະນຸຍາດ</string>
-
-    <string name="widget_note_list_title">Note list</string>
-    <string name="widget_note_list_placeholder">No notes</string>
-    <string name="widget_single_note_title">Single note</string>
-    <string name="widget_single_note_placeholder_tv">Note not found</string>
-    <string name="widget_not_logged_in">Please login to Notes before using this widget</string>
-    <string name="widget_entry_fav_contentDescription">Star icon is used to denote an item as a favorite</string>
-
+    <string name="about_maintainer_title">Maintainer</string>
+    <string name="about_source">This project is hosted on GitHub: %1$s</string>
+    <string name="about_source_title">Source code</string>
+    <string name="about_testers_title">Testers</string>
+    <string name="about_translate">Join the Nextcloud team on Transifex and help us to translate this app: %1$s</string>
+    <string name="about_translate_title">ແປ</string>
+    <string name="about_translators_title">Translators</string>
+    <string name="about_translators_transifex">Nextcloud community on %1$s</string>
+    <string name="about_version">You are currently using %1$s</string>
+    <string name="about_version_title">Version</string>
+    <string name="account_already_imported">Account has already been imported</string>
+    <string name="account_imported">Account imported.</string>
+    <string name="account_switch_dialog_status_fetching_error_message">Failed to fetch status, please try again.</string>
+    <string name="action_back">ຫຼັງ</string>
+    <string name="action_create">New note</string>
+    <string name="action_edit_save">ບັນທຶກ</string>
+    <string name="action_formatting_help">Formatting</string>
+    <string name="action_note_deleted">Deleted %1$s</string>
+    <string name="action_note_restored">Restored %1$s</string>
+    <string name="action_search">ຄົ້ນຫາ</string>
+    <string name="action_settings">ການຕັ້ງຄ່າ</string>
+    <string name="action_sorting_method">Sorting method</string>
+    <string name="action_trashbin">Deleted notes</string>
+    <string name="action_uncategorized">Uncategorized</string>
+    <string name="action_undo">Undo</string>
+    <string name="activity_chooser_send_file_title">ສົ່ງ</string>
+    <string name="activity_chooser_title">ສົ່ງລິ້ງໄປຫາ...</string>
     <string name="activity_select_single_note">Select note</string>
-
-    <string name="shortcut_create_long">Create a new note</string>
-
-    <string name="pref_value_font_normal">Normal</string>
-    <string name="pref_value_wifi_and_mobile">Sync on Wi-Fi and mobile data</string>
-    <string name="pref_value_lock">ລະຫັດປ້ອງກັນ</string>
-
-    <string name="simple_error">ຜິດພາດ</string>
-    <string name="simple_close">ປິດ</string>
-    <string name="simple_copy">ສຳເນົາ</string>
-    <string name="simple_exception">Exception</string>
-    <string name="pin_to_homescreen">Pin to homescreen</string>
-    <string name="note_has_been_deleted">This note has been deleted</string>
     <string name="add_account">ເພີ່ມບັນຊີ</string>
-
-    <string name="category_music">ເພງ</string>
-    <string name="category_movies">ລະຄອນໂທລະທັດ</string>
-    <string name="category_movie">Movie</string>
-    <string name="category_work">Work</string>
-    <string name="category_todo">ToDo</string>
-    <string name="category_todos">ToDos</string>
+    <string name="add_another_public_share_link">ເພີ່ມລິງອຶ່ນອີ</string>
+    <string name="add_category">Add %1$s</string>
+    <string name="add_new_public_share">ເພິ່ມການແບ່ງປັນສາທາລະນະໃໝ່</string>
+    <string name="added_content">Added "%1$s"</string>
+    <string name="allow_resharing">ອະນຸຍາດໃຫ້ ການແບ່ງປັນຄືນ</string>
+    <string name="app_name">Notes</string>
+    <string name="app_name_long">Nextcloud Notes</string>
+    <string name="appear_offline">Appear offline</string>
+    <string name="appearance_and_behavior">Appearance and behavior</string>
+    <string name="append_to_note">Append to note</string>
+    <string name="away">ອອກໄປ</string>
+    <string name="backup">We detected an irrecoverably state of the app. Please backup your unsynchronized changes and clear the storage of the Notes app.</string>
+    <string name="busy">Busy</string>
+    <string name="category_bake">Bake</string>
     <string name="category_checklists">Checklists</string>
-    <string name="category_tasks">Tasks</string>
+    <string name="category_credentials">Credential</string>
+    <string name="category_food">Food</string>
+    <string name="category_game">Game</string>
+    <string name="category_games">Games</string>
+    <string name="category_gift">Gift</string>
+    <string name="category_gifts">Gifts</string>
+    <string name="category_key">Key</string>
+    <string name="category_keys">Keys</string>
+    <string name="category_movie">Movie</string>
+    <string name="category_movies">ລະຄອນໂທລະທັດ</string>
+    <string name="category_music">ເພງ</string>
+    <string name="category_password">ລະຫັດຜ່ານ</string>
+    <string name="category_passwords">Passwords</string>
+    <string name="category_play">Play</string>
+    <string name="category_present">Present</string>
+    <string name="category_presents">Presents</string>
+    <string name="category_readonly">ອ່ານຢ່າງດຽວ</string>
     <string name="category_recipe">Recipe</string>
     <string name="category_recipes">Recipes</string>
     <string name="category_restaurant">Restaurant</string>
     <string name="category_restaurants">Restaurants</string>
-    <string name="category_food">Food</string>
-    <string name="category_bake">Bake</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_key">Key</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_keys">Keys</string>
-    <string name="category_password">ລະຫັດຜ່ານ</string>
-    <string name="category_passwords">Passwords</string>
-    <string name="category_credentials">Credential</string>
-    <string name="category_game">Game</string>
-    <string name="category_games">Games</string>
-    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
-    <string name="category_play">Play</string>
-    <string name="category_gift">Gift</string>
-    <string name="category_gifts">Gifts</string>
-    <!-- Like a gift -->
-    <string name="category_present">Present</string>
-    <!-- Like a gift -->
-    <string name="category_presents">Presents</string>
-
-    <string name="account_already_imported">Account has already been imported</string>
-    <string name="no_notes_yet">No notes yet</string>
-    <string name="no_notes_yet_description">Press + button to create a new note</string>
-    <string name="simple_more">ເພີ່ມເຕີມ</string>
-    <string name="simple_move">ຍ້າຍ</string>
-    <string name="category_readonly">ອ່ານຢ່າງດຽວ</string>
-    <string name="no_category">No category</string>
-    <string name="add_category">Add %1$s</string>
-    <string name="simple_checkbox">ເຄື່ອງໝາຍກ່ອງ</string>
-    <string name="unlock_notes">Unlock notes</string>
-    <string name="error_dialog_title">Oh no - What now? 🙁</string>
-    <string name="error_dialog_tip_token_mismatch_retry">Please try to force close the app and restart it again. There might have been an incorrect connection to the Nextcloud app.</string>
-    <string name="error_dialog_tip_token_mismatch_clear_storage">If the issue persists, try to clear the storage of both apps: Nextcloud and Nextcloud Notes to solve this issue.</string>
-    <string name="error_dialog_tip_clear_storage">You can clear the storage by opening the app info and selecting Storage → Clear storage. ⚠️ Warning: This will delete not yet synchronized notes!</string>
-    <string name="error_dialog_tip_files_outdated">Your Nextcloud app seems to be outdated. Please visit the Play Store or F-Droid to get the latest version.</string>
-    <string name="error_dialog_tip_files_force_stop">Something seems to be wrong with your Nextcloud app. Please try to force stop both, the Nextcloud app and the Nextcloud Notes app.</string>
-    <string name="error_dialog_tip_files_delete_storage">If force stopping them does not help, you can try to clear the storage of both apps.</string>
-    <string name="error_dialog_timeout_instance">There wasn\'t a response from your server in the given time. Please make sure your instance is running well.</string>
-    <string name="error_dialog_timeout_toggle">Check your network connection. Sometime toggling the mobile data or Wi-Fi off and on again can help.</string>
+    <string name="category_tasks">Tasks</string>
+    <string name="category_todo">ToDo</string>
+    <string name="category_todos">ToDos</string>
+    <string name="category_work">Work</string>
+    <string name="change_category_title">Choose a category</string>
+    <string name="change_note_title">Change note title</string>
+    <string name="choose_account">ເລືອກບັນຊີ</string>
+    <string name="clear">ລຶບລ້າງ</string>
+    <string name="clear_status_after">Clear status after</string>
+    <string name="clipboard_label">ສໍາເນົາຂໍ້ຄວາມຈາກ%1$s</string>
+    <string name="clipboard_no_text_to_copy">ບໍ່ໄດ້ຮັບຂໍ້ຄວາມທີ່ຈະສໍາເນົາໄປຍັງຄລິບ</string>
+    <string name="clipboard_text_copied">ສຳເນົາລິງ</string>
+    <string name="clipboard_unexpected_error">ຂໍ້ຜິດພາດໃນຂະນະທີ່ສໍາເນົາຄລິບ</string>
+    <string name="common_delete">ລຶບ</string>
+    <string name="common_loading">ກຳລັງໂຫຼດ</string>
+    <string name="common_ok">ຕົກລົງ</string>
+    <string name="context_based_formatting">Context based formatting popover</string>
+    <string name="copy_link">ສຳເນົາລິງ</string>
+    <string name="could_not_retrieve_shares">ບໍ່ສາມາດເອົາການແບ່ງປັນຄືນໄດ້</string>
+    <string name="delete_link">Delete Link</string>
+    <string name="direct_editing_error">Error while loading rich editing</string>
+    <string name="dnd">ຫ້າມລົບກວນ</string>
+    <string name="dontClear">ບໍ່ຈະແຈ້ງ</string>
+    <string name="ecosystem_apps_display_files">ຟາຍ</string>
+    <string name="ecosystem_apps_display_more">More</string>
+    <string name="ecosystem_apps_display_talk">Talk</string>
+    <string name="ecosystem_apps_more">More Nextcloud Apps</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="email_pick_failed">Failed to pick email address.</string>
+    <string name="error_action_open_battery_settings">Battery settings</string>
+    <string name="error_action_open_deck_info">Open App info</string>
+    <string name="error_action_open_network">Network settings</string>
+    <string name="error_action_update_files_app">Update</string>
+    <string name="error_dialog_check_maintenance">Please check whether your Nextcloud instance is not currently in maintenance mode.</string>
     <string name="error_dialog_check_server">The response of your server was not correct. Please check whether you can access your notes via web interface.</string>
     <string name="error_dialog_check_server_logs">There is an issue with your Nextcloud setup. Please have a look into the server log files.</string>
-    <string name="error_dialog_check_maintenance">Please check whether your Nextcloud instance is not currently in maintenance mode.</string>
     <string name="error_dialog_insufficient_storage">Your Nextcloud instance has no free storage left. Please delete some files to sync your local changes into your cloud.</string>
-    <string name="error_dialog_we_need_info">We need the following technical information to help you:</string>
-    <string name="error_dialog_server_app_enabled">Please make sure you have installed and enabled the "Notes" app on your server.</string>
-    <string name="error_dialog_redirect">Your server did respond with a HTTP 302 status code, which implies, that you do not have installed the Notes app on your server or something is misconfigured. This can be caused by custom overrides in a .htaccess-file or by Nextcloud apps like OID Client.</string>
-    <string name="error_dialog_tip_disable_battery_optimizations">Please disable all battery optimizations for Nextcloud and the Notes app.</string>
     <string name="error_dialog_min_version">The Notes Android app requires the Nextcloud Android app to be at least version 3.18.</string>
-    <string name="added_content">Added "%1$s"</string>
-    <string name="shared_text_empty">Shared text was empty</string>
-    <string name="append_to_note">Append to note</string>
-    <string name="change_note_title">Change note title</string>
-    <string name="menu_edit_title">Edit title</string>
-    <string name="simple_security">Security</string>
-    <string name="appearance_and_behavior">Appearance and behavior</string>
-    <string name="simple_synchronization">ການປະຕິບັດການພ້ອມກັນ</string>
+    <string name="error_dialog_redirect">Your server did respond with a HTTP 302 status code, which implies, that you do not have installed the Notes app on your server or something is misconfigured. This can be caused by custom overrides in a .htaccess-file or by Nextcloud apps like OID Client.</string>
+    <string name="error_dialog_server_app_enabled">Please make sure you have installed and enabled the "Notes" app on your server.</string>
+    <string name="error_dialog_timeout_instance">There wasn\'t a response from your server in the given time. Please make sure your instance is running well.</string>
+    <string name="error_dialog_timeout_toggle">Check your network connection. Sometime toggling the mobile data or Wi-Fi off and on again can help.</string>
+    <string name="error_dialog_tip_clear_storage">You can clear the storage by opening the app info and selecting Storage → Clear storage. ⚠️ Warning: This will delete not yet synchronized notes!</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Please disable all battery optimizations for Nextcloud and the Notes app.</string>
+    <string name="error_dialog_tip_files_delete_storage">If force stopping them does not help, you can try to clear the storage of both apps.</string>
+    <string name="error_dialog_tip_files_force_stop">Something seems to be wrong with your Nextcloud app. Please try to force stop both, the Nextcloud app and the Nextcloud Notes app.</string>
+    <string name="error_dialog_tip_files_outdated">Your Nextcloud app seems to be outdated. Please visit the Play Store or F-Droid to get the latest version.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">If the issue persists, try to clear the storage of both apps: Nextcloud and Nextcloud Notes to solve this issue.</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Please try to force close the app and restart it again. There might have been an incorrect connection to the Nextcloud app.</string>
+    <string name="error_dialog_title">Oh no - What now? 🙁</string>
+    <string name="error_dialog_we_need_info">We need the following technical information to help you:</string>
+    <string name="error_maintenance_mode">Server is in maintenance mode</string>
+    <string name="error_no_network">ບໍ່ມີການເຊື່ອມຕໍ່ເຄືອຂ່າຍ</string>
+    <string name="error_setting_status_message">Error setting status message!</string>
+    <string name="error_sync">Synchronization failed: %1$s</string>
+    <string name="error_synchronization">Synchronization failed</string>
+    <string name="error_unknown">An unknown error has occurred.</string>
+    <string name="failed_the_remove_share">Failed to remove share</string>
+    <string name="failed_update_ui">ອັບເດດ  UI ບໍ່ສຳເລັດ</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">No app available to select contacts</string>
+    <string name="file_list_seconds_ago">ວິນາທີຜ່ານມາ</string>
+    <string name="formatting_help_cbf_body_1">A major design goal of the Notes app is to provide a distraction free tool. Though you will be able to format your texts with Markdown. For various of the below mentioned examples, you can use shortcuts so you can format your notes without typing in the codes below.</string>
+    <string name="formatting_help_cbf_body_2">Just select a range of text or tap on your cursor at any position and you will get a popup menu which contains next to the default entries %1$s, %2$s, %3$s entries like %4$s or %5$s.</string>
+    <string name="formatting_help_cbf_title">Context based formatting</string>
+    <string name="formatting_help_checkboxes_body_1">To create a checkbox, use a list followed by brackets</string>
+    <string name="formatting_help_checkboxes_body_2">Item 1</string>
+    <string name="formatting_help_checkboxes_body_3">Item 2</string>
+    <string name="formatting_help_checkboxes_title">ກ່ອງໝາຍຕິກ</string>
+    <string name="formatting_help_code_body_1">There are many different ways to style code with Markdown. If you have inline code blocks, wrap them in backticks:</string>
+    <string name="formatting_help_code_body_2">Markdown also supports something called code fencing, which allows for multiple lines without indentation:</string>
+    <string name="formatting_help_code_body_3">And if you\'d like to use syntax highlighting, include the language:</string>
+    <string name="formatting_help_code_title">Code</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_images_alt">Fancy image</string>
+    <string name="formatting_help_images_body_1">Links have to be either complete URLs starting with a protocol and domain or absolute paths starting with a %1$s character.</string>
+    <string name="formatting_help_images_body_2">In order to conform to the Markdown format, please use escape characters in the image URL. This means for example, replace spaces with %1$s in the URL.</string>
+    <string name="formatting_help_images_title">ຮູບພາບ</string>
+    <string name="formatting_help_lists_body_1">Sometimes you want numbered lists:</string>
+    <string name="formatting_help_lists_body_2">One</string>
+    <string name="formatting_help_lists_body_3">Two</string>
+    <string name="formatting_help_lists_body_4">Three</string>
+    <string name="formatting_help_lists_body_5">Sometimes you want bullet points:</string>
+    <string name="formatting_help_lists_body_6">Start a line with a dash</string>
+    <string name="formatting_help_lists_body_7">And if you have sub points, put two spaces before the dash or star:</string>
+    <string name="formatting_help_lists_body_8">Like this</string>
+    <string name="formatting_help_lists_body_9">And this</string>
+    <string name="formatting_help_lists_title">Lists</string>
+    <string name="formatting_help_structured_documents_body_1">Sometimes it\'s useful to have different levels of headings to structure your documents. Start lines with a %1$s to create headings. Multiple %2$s in a row denote smaller heading sizes.</string>
+    <string name="formatting_help_structured_documents_body_2">This is a third-tier heading</string>
+    <string name="formatting_help_structured_documents_body_3">You can use one %1$s all the way up to %2$s six for different heading sizes.</string>
+    <string name="formatting_help_structured_documents_body_4">If you\'d like to quote someone, use the %1$s character before the line:</string>
+    <string name="formatting_help_structured_documents_body_5">Imagination is more important than knowledge. Knowledge is limited. Imagination encircles the world.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+    <string name="formatting_help_structured_documents_title">Structured documents</string>
+    <string name="formatting_help_tables_column">Column %1d</string>
+    <string name="formatting_help_tables_title">Tables</string>
+    <string name="formatting_help_tables_value">Value %1d</string>
+    <string name="formatting_help_text_body">It\'s very easy to make some words %1$sbold%1$s and other words %2$sitalic%2$s with Markdown. You can %3$sstrike%3$s some words through and even [link to Nextcloud](https://nextcloud.com).</string>
+    <string name="formatting_help_text_title">ຂໍ້ຄວາມ</string>
+    <string name="fourHours">4 ຊົ່ວໂມງ</string>
+    <string name="http_status_code">HTTP status code: %1$d</string>
+    <string name="invisible">ເບິ່ງບໍ່ເຫັນ</string>
+    <string name="label_all_notes">All notes</string>
+    <string name="label_favorites">ລາຍການທີ່ມັກ</string>
+    <string name="link_share_allow_upload_and_editing">ອະນຸຍາດໃຫ້ ອັບ ໂຫຼດ ແລະ  ແກ້ ໄຂໄດ້</string>
+    <string name="link_share_editing">Editing</string>
+    <string name="link_share_file_drop">ການຖິ້ືມຟາຍ (ອັງໂຫຼດຢ່າງດຽວ)</string>
+    <string name="link_share_view_only">ເບິ່ງເທົ່ານັ້ນ</string>
+    <string name="listview_updated_last_month">Last month</string>
+    <string name="listview_updated_last_week">Last week</string>
+    <string name="listview_updated_this_month">This month</string>
+    <string name="listview_updated_this_week">ທິດນີ້</string>
+    <string name="listview_updated_today">ມື້ນີ້</string>
+    <string name="listview_updated_yesterday">ມື້ວານນີ້</string>
     <string name="manage_accounts">ຈັດການບັນຊີ</string>
-    <string name="action_formatting_help">Formatting</string>
-
-
+    <string name="menu_change_category">Category</string>
+    <string name="menu_delete">ລຶບ</string>
+    <string name="menu_edit_title">Edit title</string>
+    <string name="menu_favorite">ລາຍການທີ່ມັກ</string>
+    <string name="menu_preview">ເບິ່ງຕົວຢ່າງ</string>
+    <string name="menu_share">ແບ່ງປັນ</string>
+    <string name="mute_all_notifications">Mute all notifications</string>
+    <string name="no_account_configured_yet">No account configured yet</string>
+    <string name="no_actions">No actions for this user</string>
+    <string name="no_browser_available">ບໍ່ມີແອັບພລິເຄຊັນທີ່ສາມາດຈັດການກັບລິ້ງໄດ້</string>
+    <string name="no_category">No category</string>
+    <string name="no_email_app_available">No App available to handle mail address</string>
+    <string name="no_notes_yet">No notes yet</string>
+    <string name="no_notes_yet_description">Press + button to create a new note</string>
+    <string name="no_other_accounts">You don\'t have configured any other accounts yet.</string>
     <string name="noteMode_plain_edit">Plain edit mode</string>
     <string name="noteMode_plain_preview">Plain preview</string>
-    <string name="noteMode_rich_edit">Rich edit mode</string>
     <string name="noteMode_remember_last">Remember my last selection</string>
-
-    <string-array name="fontSize_entries">
-        <item>Small</item>
-        <item>Medium</item>
-        <item>Large</item>
-    </string-array>
-
-    <string-array name="darkmode_entries">
-        <item>ແຈ້ງ</item>
-        <item>ມືດ</item>
-        <item>System Default</item>
-    </string-array>
-
+    <string name="noteMode_rich_edit">Rich edit mode</string>
+    <string name="note_has_been_deleted">This note has been deleted</string>
+    <string name="note_share_activity_activity_icon_content_description">note activity icon</string>
+    <string name="note_share_activity_cannot_created">You are not allowed to create a share.</string>
+    <string name="note_share_activity_contact_icon_content_description">note share contact icon</string>
+    <string name="note_share_activity_contact_no_permission">Contact permission is required.</string>
+    <string name="note_share_activity_copy_icon_content_description">note share copy icon</string>
+    <string name="note_share_activity_could_not_retrieve_url">ບໍ່ສາມາດເກັບURL ໄດ້</string>
+    <string name="note_share_activity_external_icon_content_description">note share external icon</string>
+    <string name="note_share_activity_icon_content_description">note share icon</string>
+    <string name="note_share_activity_more_icon_content_description">note share more icon</string>
+    <string name="note_share_activity_resharing_not_allowed">Policy or permissions prevent resharing</string>
+    <string name="note_share_activity_search_text">Name, Federated Cloud ID or email address…</string>
+    <string name="note_share_activity_share_icon_content_description">note share icon</string>
+    <string name="note_share_activity_share_link">ແບ່ງປັນລິງ</string>
+    <string name="note_share_activity_shared_with_you">ແບ່ງປັນໂດຍທ່ານ %1$s</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\"ໄດ້ຖືກແບ່ງໂດຍທ່ານ</string>
+    <string name="note_share_activity_user_icon_content_description">note share user icon</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">You are not allowed to create a public share.</string>
+    <string name="note_share_created">Share created</string>
+    <string name="note_share_detail_activity_advanced_settings">ຕັ້ງ​ຄ່າ​ຂັ້ນ​ສູງ</string>
+    <string name="note_share_detail_activity_cancel">ຍົກເລີກ</string>
+    <string name="note_share_detail_activity_common_confirm">ຢືນຢັນ</string>
+    <string name="note_share_detail_activity_common_next">Next</string>
+    <string name="note_share_detail_activity_create_share_error">Failed to create a share</string>
+    <string name="note_share_detail_activity_hint_name">ຊື່</string>
+    <string name="note_share_detail_activity_hint_note">ຫມາຍເຫດ</string>
+    <string name="note_share_detail_activity_hint_password">ລະຫັດຜ່ານ</string>
+    <string name="note_share_detail_activity_label_empty">Label ບໍ່ສາມາດເປົ່າວ່າງໄດ້</string>
+    <string name="note_share_detail_activity_link_name">Link Name</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Please select at least one permission to share.</string>
+    <string name="note_share_detail_activity_send_share">Send Share</string>
+    <string name="note_share_detail_activity_set_note">Set Note</string>
+    <string name="note_share_detail_activity_share_copy_link">Share and Copy Link</string>
+    <string name="note_share_detail_activity_share_link_empty_password"> ທ່ານຕ້ອງໃສ່ລະຫັດຜ່ານ</string>
+    <string name="note_share_detail_activity_share_send_note">ລະບຸຜູ້ຮັບ</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">ເຊື່ອງການດາວໂຫຼດ</string>
+    <string name="oneHour">1 ຊົ່ວໂມງ</string>
+    <string name="online">ອອນລາຍ</string>
+    <string name="online_status">ສະຖານະພາບອອນລາຍ</string>
+    <string name="pin_to_homescreen">Pin to homescreen</string>
+    <string name="pref_value_font_normal">Normal</string>
+    <string name="pref_value_lock">ລະຫັດປ້ອງກັນ</string>
+    <string name="pref_value_wifi_and_mobile">Sync on Wi-Fi and mobile data</string>
+    <string name="progress_import">Importing note %1$d of %2$d…</string>
+    <string name="progress_import_indeterminate">Importing notes…</string>
+    <string name="public_share_name">ຊື່ໄໝ່</string>
+    <string name="remote">(ໄລຍະໄກ)</string>
+    <string name="remove_account">Remove %1$s</string>
+    <string name="search_in_all">Search all notes</string>
+    <string name="search_in_category">Search in %1$s</string>
+    <string name="set_message">Set message</string>
+    <string name="set_online_status">ສະຖານະພາບອອນລາຍ</string>
+    <string name="settings_background_sync">Background synchronization</string>
+    <string name="settings_enable_direct_edit">Direct Edit</string>
+    <string name="settings_enable_direct_edit_summary">When disabled, the advanced editor will be hidden.</string>
+    <string name="settings_file_suffix">File extension</string>
+    <string name="settings_file_suffix_description">File extension for new notes in your Nextcloud</string>
+    <string name="settings_file_suffix_success">New file suffix: %1$s</string>
+    <string name="settings_font_size">Font size</string>
+    <string name="settings_font_title">Monospace font</string>
+    <string name="settings_gridview">ເບິ່ງຕາຕະລາງ</string>
+    <string name="settings_keep_screen_on">Keep screen on</string>
+    <string name="settings_keep_screen_on_summary">When viewing or editing a note</string>
+    <string name="settings_lock">App lock (Beta)</string>
+    <string name="settings_lock_summary">ການຢັ້ງຢືນອຸປະກອນ</string>
+    <string name="settings_note_mode">Display mode for notes</string>
+    <string name="settings_note_mode_new">Notes opening behaviour</string>
+    <string name="settings_notes_path">Set folder</string>
+    <string name="settings_notes_path_description">Folder to store your notes in your Nextcloud</string>
+    <string name="settings_notes_path_success">New notes folder: %1$s</string>
+    <string name="settings_prevent_screen_capture">Prevent screen capture</string>
+    <string name="settings_show_ecosystem_apps">Show app switcher</string>
+    <string name="settings_show_ecosystem_apps_summary">Nextcloud app suggestions in navigation heading</string>
+    <string name="settings_theme_title">ຫົວຂໍ້</string>
+    <string name="settings_wifi_only">Sync only on Wi-Fi</string>
+    <string name="share">ແບ່ງປັນ</string>
+    <string name="share_dialog_title">ການແບ່ງປັນ</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_expiration_date_label">ສິ້ນສຸດ%1$s</string>
+    <string name="share_file">ແບ່ງປັນ%1$s</string>
+    <string name="share_group_clarification"> (ກຸ່ມ)%1$s</string>
+    <string name="share_internal_link">ແບ່ງປັນລິງພາຍໃນ</string>
+    <string name="share_internal_link_to_file_text">ການເຊື່ອມຕໍ່ການແບ່ງປັນການເຮັດວຽກສໍາລັບຜູ້ໃຊ້ທີ່ມີການເຂົ້າເຖິງຟາຍນີ້ເທົ່ານັ້ນ</string>
+    <string name="share_internal_link_to_folder_text">ການເຊື່ອມຕໍ່ການແບ່ງປັນ ສໍາລັບຜູ້ໃຊ້ທີ່ມີການເຂົ້າເຖິງໂຟນເດີນີ້ເທົ່ານັ້ນ</string>
+    <string name="share_known_remote_on_clarification">%1$s</string>
+    <string name="share_link">ແບ່ງປັນລິງ</string>
+    <string name="share_link_password_title">ໃສ່ລະຫັດຜ່ານ</string>
+    <string name="share_link_with_label">ແບ່ງປັນ(%1$s)</string>
+    <string name="share_no_expiration_date_label">ກໍານົດວັນໝົດອາຍຸ</string>
+    <string name="share_no_password_title">ກຳນົດລະຫັດຜ່ານ</string>
+    <string name="share_password_dialog_fragment_share_link_optional_password_title"> ທາງເລືອກເຂົ້າລະຫັດຜ່ານ</string>
+    <string name="share_password_dialog_fragment_skip">ຂ້າມໄປ</string>
+    <string name="share_password_title">ລະຫັດປ້ອງກັນ</string>
+    <string name="share_permission_can_edit">ສາມາດແກ້ໄຂໄດ້</string>
+    <string name="share_permission_file_drop">ຈຸດສົ່ງໄຟລ໌</string>
+    <string name="share_permission_secure_file_drop">Secure file drop</string>
+    <string name="share_permission_view_only">ເບິ່ງເທົ່ານັ້ນ</string>
+    <string name="share_permissions">Share Permissions</string>
+    <string name="share_remote_clarification"> %1$s(ໄລຍະໄກ)</string>
+    <string name="share_room_clarification"> %1$s(ສົນທະນາ)</string>
+    <string name="share_send_new_email">Send new email</string>
+    <string name="share_settings">ການຕັ້ງຄ່າ</string>
+    <string name="share_via_link_section_title">ແບ່ງປັນລິງ</string>
+    <string name="share_via_link_send_link_label">ສົ່ງລິງ</string>
+    <string name="share_via_link_unset_password">ຍົກເລີກການຕັ້ງຄ່າ</string>
+    <string name="share_with_title">ແບ່ງປັນດ້ວຍ</string>
+    <string name="shared_text_empty">Shared text was empty</string>
+    <string name="shortcut_create_long">Create a new note</string>
+    <string name="simple_about">ກ່ຽວກັບ</string>
+    <string name="simple_backup">Backup</string>
+    <string name="simple_cancel">ຍົກເລີກ</string>
+    <string name="simple_checkbox">ເຄື່ອງໝາຍກ່ອງ</string>
+    <string name="simple_close">ປິດ</string>
+    <string name="simple_copy">ສຳເນົາ</string>
+    <string name="simple_edit">ແກ້ໄຂ</string>
+    <string name="simple_error">ຜິດພາດ</string>
+    <string name="simple_exception">Exception</string>
+    <string name="simple_link">ລິງ</string>
+    <string name="simple_more">ເພີ່ມເຕີມ</string>
+    <string name="simple_move">ຍ້າຍ</string>
+    <string name="simple_next">ທັດໄປ</string>
+    <string name="simple_other">ອື່ນໆ</string>
+    <string name="simple_prev">ກ່ອນໜ້າ</string>
+    <string name="simple_remove">ຍ້າຍອອກ</string>
+    <string name="simple_security">Security</string>
+    <string name="simple_switch">Switch</string>
+    <string name="simple_synchronization">ການປະຕິບັດການພ້ອມກັນ</string>
+    <string name="sort_alphabetically">Sort by alphabet</string>
+    <string name="sort_last_modified">ຈັດລຽງຕາມລຳດັບວັນທີປັບປ່ຽນ</string>
+    <string name="status_message">ສະຖານະຂໍ້ຄວາມ</string>
+    <string name="status_set_fail_message">Failed to set status!</string>
+    <string name="switch_to_plain_editing">Switch to plain editing</string>
+    <string name="thirtyMinutes">30 ນາທີ</string>
+    <string name="thisWeek">ທິດນີ້</string>
+    <string name="today">ມື້ນີ້</string>
+    <string name="unlock_notes">Unlock notes</string>
+    <string name="username">ຊື່ຜູ້ໃຊ້</string>
+    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
+    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
+    <string name="welcome_text">Welcome to %1$s</string>
+    <string name="whats_your_status">What is your status?</string>
+    <string name="widget_entry_fav_contentDescription">Star icon is used to denote an item as a favorite</string>
+    <string name="widget_not_logged_in">Please login to Notes before using this widget</string>
+    <string name="widget_note_list_placeholder">No notes</string>
+    <string name="widget_note_list_title">Note list</string>
+    <string name="widget_single_note_placeholder_tv">Note not found</string>
+    <string name="widget_single_note_title">Single note</string>
+    <string name="write_email">ສົ່ງອີເມວ</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">You have to be connected to the internet in order to add an account.</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="other">%1$d downloads remaining</item>
+    </plurals>
     <plurals name="ab_selected">
         <item quantity="other">%d selected</item>
     </plurals>
@@ -333,126 +382,7 @@
     <plurals name="share_multiple">
         <item quantity="other">Share content of %1$d note</item>
     </plurals>
-
-    <string name="formatting_help_divider" translateable="false">---</string>
-    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
-    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
-    <string name="formatting_help_codefence" translateable="false">```</string>
-    <string name="formatting_help_codefence_outer" translateable="false">````</string>
-    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
-    <string name="formatting_help_cbf_title">Context based formatting</string>
-    <string name="formatting_help_cbf_body_1">A major design goal of the Notes app is to provide a distraction free tool. Though you will be able to format your texts with Markdown. For various of the below mentioned examples, you can use shortcuts so you can format your notes without typing in the codes below.</string>
-    <string name="formatting_help_cbf_body_2">Just select a range of text or tap on your cursor at any position and you will get a popup menu which contains next to the default entries %1$s, %2$s, %3$s entries like %4$s or %5$s.</string>
-
-    <string name="formatting_help_text_title">ຂໍ້ຄວາມ</string>
-    <string name="formatting_help_text_body">It\'s very easy to make some words %1$sbold%1$s and other words %2$sitalic%2$s with Markdown. You can %3$sstrike%3$s some words through and even [link to Nextcloud](https://nextcloud.com).</string>
-
-    <string name="formatting_help_lists_title">Lists</string>
-    <string name="formatting_help_lists_body_1">Sometimes you want numbered lists:</string>
-    <string name="formatting_help_lists_body_2">One</string>
-    <string name="formatting_help_lists_body_3">Two</string>
-    <string name="formatting_help_lists_body_4">Three</string>
-    <string name="formatting_help_lists_body_5">Sometimes you want bullet points:</string>
-    <string name="formatting_help_lists_body_6">Start a line with a dash</string>
-    <string name="formatting_help_lists_body_7">And if you have sub points, put two spaces before the dash or star:</string>
-    <string name="formatting_help_lists_body_8">Like this</string>
-    <string name="formatting_help_lists_body_9">And this</string>
-
-    <string name="formatting_help_checkboxes_title">ກ່ອງໝາຍຕິກ</string>
-    <string name="formatting_help_checkboxes_body_1">To create a checkbox, use a list followed by brackets</string>
-    <string name="formatting_help_checkboxes_body_2">Item 1</string>
-    <string name="formatting_help_checkboxes_body_3">Item 2</string>
-
-    <string name="formatting_help_structured_documents_title">Structured documents</string>
-    <string name="formatting_help_structured_documents_body_1">Sometimes it\'s useful to have different levels of headings to structure your documents. Start lines with a %1$s to create headings. Multiple %2$s in a row denote smaller heading sizes.</string>
-    <string name="formatting_help_structured_documents_body_2">This is a third-tier heading</string>
-    <string name="formatting_help_structured_documents_body_3">You can use one %1$s all the way up to %2$s six for different heading sizes.</string>
-    <string name="formatting_help_structured_documents_body_4">If you\'d like to quote someone, use the %1$s character before the line:</string>
-    <string name="formatting_help_structured_documents_body_5">Imagination is more important than knowledge. Knowledge is limited. Imagination encircles the world.</string>
-    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
-
-    <string name="formatting_help_code_title">Code</string>
-    <string name="formatting_help_code_body_1">There are many different ways to style code with Markdown. If you have inline code blocks, wrap them in backticks:</string>
-    <string name="formatting_help_code_body_2">Markdown also supports something called code fencing, which allows for multiple lines without indentation:</string>
-    <string name="formatting_help_code_body_3">And if you\'d like to use syntax highlighting, include the language:</string>
-
-    <string name="formatting_help_tables_title">Tables</string>
-    <!-- Column header of a sample table -->
-    <string name="formatting_help_tables_column">Column %1d</string>
-    <!-- Table cell value of a sample table -->
-    <string name="formatting_help_tables_value">Value %1d</string>
-
-    <string name="formatting_help_images_body_1">Links have to be either complete URLs starting with a protocol and domain or absolute paths starting with a %1$s character.</string>
-    <string name="formatting_help_images_body_2">In order to conform to the Markdown format, please use escape characters in the image URL. This means for example, replace spaces with %1$s in the URL.</string>
-    <string name="formatting_help_images_title">ຮູບພາບ</string>
-    <string name="formatting_help_images_alt">Fancy image</string>
-
-    <string name="simple_other">ອື່ນໆ</string>
-    <string name="sort_last_modified">ຈັດລຽງຕາມລຳດັບວັນທີປັບປ່ຽນ</string>
-    <string name="sort_alphabetically">Sort by alphabet</string>
-    <string name="error_action_open_battery_settings">Battery settings</string>
-    <string name="error_action_open_deck_info">Open App info</string>
-    <string name="error_action_open_network">Network settings</string>
-    <string name="error_action_update_files_app">Update</string>
-    <string name="no_account_configured_yet">No account configured yet</string>
-    <string name="no_other_accounts">You don\'t have configured any other accounts yet.</string>
-    <string name="choose_account">ເລືອກບັນຊີ</string>
-    <string name="context_based_formatting">Context based formatting popover</string>
     <plurals name="remove_account_message">
         <item quantity="other">Removing the account %1$s will also delete irrecoverable %2$d unsynchronized changes.</item>
     </plurals>
-    <string name="remove_account">Remove %1$s</string>
-
-    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">You have to be connected to the internet in order to add an account.</string>
-    <string name="settings_notes_path">Set folder</string>
-
-    <string name="simple_next">ທັດໄປ</string>
-    <string name="simple_prev">ກ່ອນໜ້າ</string>
-    <string name="simple_backup">Backup</string>
-    <string name="backup">We detected an irrecoverably state of the app. Please backup your unsynchronized changes and clear the storage of the Notes app.</string>
-    <string name="settings_notes_path_description">Folder to store your notes in your Nextcloud</string>
-    <string-array name="settings_file_suffixes">
-        <item translatable="false">.txt</item>
-        <item translatable="false">.md</item>
-    </string-array>
-    <string name="settings_notes_path_success">New notes folder: %1$s</string>
-    <string name="settings_file_suffix">File extension</string>
-    <string name="settings_file_suffix_description">File extension for new notes in your Nextcloud</string>
-    <string name="settings_file_suffix_success">New file suffix: %1$s</string>
-    <string name="http_status_code">HTTP status code: %1$d</string>
-    <string name="progress_import_indeterminate">Importing notes…</string>
-    <string name="progress_import">Importing note %1$d of %2$d…</string>
-    <string name="account_imported">Account imported.</string>
-    <string name="direct_editing_error">Error while loading rich editing</string>
-    <string name="switch_to_plain_editing">Switch to plain editing</string>
-    <string name="action_back">ຫຼັງ</string>
-    <string name="set_online_status">ສະຖານະພາບອອນລາຍ</string>
-    <string name="status_message">ສະຖານະຂໍ້ຄວາມ</string>
-    <string name="whats_your_status">What is your status?</string>
-    <string name="clear_status_after">Clear status after</string>
-    <string name="clear">ລຶບລ້າງ</string>
-    <string name="set_message">Set message</string>
-    <string name="dontClear">ບໍ່ຈະແຈ້ງ</string>
-    <string name="today">ມື້ນີ້</string>
-    <string name="thirtyMinutes">30 ນາທີ</string>
-    <string name="oneHour">1 ຊົ່ວໂມງ</string>
-    <string name="fourHours">4 ຊົ່ວໂມງ</string>
-    <string name="thisWeek">ທິດນີ້</string>
-    <string name="error_setting_status_message">Error setting status message!</string>
-    <string name="file_list_seconds_ago">ວິນາທີຜ່ານມາ</string>
-    <string name="online_status">ສະຖານະພາບອອນລາຍ</string>
-    <string name="online">ອອນລາຍ</string>
-    <string name="dnd">ຫ້າມລົບກວນ</string>
-    <string name="away">ອອກໄປ</string>
-    <string name="invisible">ເບິ່ງບໍ່ເຫັນ</string>
-    <string name="busy">Busy</string>
-    <string name="mute_all_notifications">Mute all notifications</string>
-    <string name="appear_offline">Appear offline</string>
-    <string name="status_set_fail_message">Failed to set status!</string>
-    <string name="account_switch_dialog_status_fetching_error_message">Failed to fetch status, please try again.</string>
-    <string name="ecosystem_apps_display_files">ຟາຍ</string>
-    <string name="ecosystem_apps_display_talk">Talk</string>
-    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
-    <string name="ecosystem_apps_more">More Nextcloud Apps</string>
-    <string name="ecosystem_apps_display_more">More</string>
 </resources>

@@ -1,327 +1,370 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Nextcloud Notes - Android Client
-  ~
-  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
-  ~ SPDX-License-Identifier: GPL-3.0-or-later
--->
-<resources>
-    <string name="app_name">Notities</string>
-    <string name="app_name_long">Nextcloud Notities</string>
-    <string name="label_all_notes">Alle notities</string>
-    <string name="label_favorites">Favorieten</string>
-    <string name="action_create">Nieuwe notitie</string>
-    <string name="welcome_text">Welkom bij %1$s</string>
-    <string name="action_settings">Instellingen</string>
-    <string name="action_trashbin">Verwijderde notities</string>
-    <string name="action_search">Zoeken</string>
-    <string name="action_sorting_method">Sortering</string>
-    <string name="simple_cancel">Annuleren</string>
-    <string name="simple_switch">Wisselen</string>
-    <string name="simple_edit">Bewerken</string>
-    <string name="simple_remove">Verwijderen</string>
-    <string name="action_edit_save">Opslaan</string>
-    <string name="simple_about">Over</string>
-    <string name="simple_link">Link</string>
-    <string name="action_note_deleted">Verwijderd %1$s</string>
-    <string name="action_note_restored">Hersteld %1$s</string>
-    <string name="action_undo">Ongedaan maken</string>
-    <string name="action_uncategorized">Niet gecategoriseerd</string>
-    <string name="menu_delete">Verwijderen</string>
-    <string name="menu_change_category">Categorie</string>
-    <string name="menu_favorite">Favoriet</string>
-    <string name="menu_preview">Voorbeeld</string>
-    <string name="menu_share">Delen</string>
-    <string name="common_loading">Laden…</string>
-
-
-    <string name="search_in_category">Zoeken in %1$s</string>
-    <string name="search_in_all">Zoek in alle notities</string>
-
-    <string name="change_category_title">Een categorie kiezen</string>
-
-    <!-- UsersAndGroupsSearchProvider -->
-    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
-    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
-
-    <!-- NoteShareActivity -->
-    <string name="note_share_activity_activity_icon_content_description">note activiteitspictogram</string>
-    <string name="note_share_activity_share_icon_content_description">note deel-pictogram</string>
-    <string name="note_share_activity_external_icon_content_description">note deel externe pictogram</string>
-    <string name="note_share_activity_copy_icon_content_description">note deel kopieerpictogram</string>
-    <string name="note_share_activity_more_icon_content_description">note deel meer pictogram</string>
-    <string name="note_share_activity_icon_content_description">note deel-pictogram</string>
-    <string name="note_share_activity_user_icon_content_description">note deel gebruiker pictogram</string>
-    <string name="note_share_activity_contact_icon_content_description">note deel contact pictogram</string>
-    <string name="note_share_activity_shared_with_you">Met je gedeeld door %1$s</string>
-    <string name="note_share_activity_search_text">Naam, Federated Cloud ID of e-mailadres…</string>
-    <string name="note_share_activity_share_link">Deel link</string>
-    <string name="note_share_activity_resharing_not_allowed">Beleid of machtigingen staan opnieuw delen niet toe</string>
-    <string name="note_share_activity_could_not_retrieve_url">Kon URL niet ophalen</string>
-    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" is met je gedeeld</string>
-    <string name="note_share_activity_contact_no_permission">Toestemming voor contact vereist</string>
-    <string name="note_share_activity_you_are_not_allowed_to_share">Je mag geen openbare share aanmaken.</string>
-
-    <string name="note_share_created">Share aangemaakt</string>
-    <string name="note_share_activity_cannot_created">Je mag geen share aanmaken.</string>
-
-
-    <!-- NoteShareDetailActivity -->
-    <string name="note_share_detail_activity_advanced_settings">Geavanceerde instellingen</string>
-    <string name="note_share_detail_activity_share_via_link_hide_download">Verberg download</string>
-    <string name="note_share_detail_activity_share_send_note">Notitie voor ontvanger</string>
-    <string name="note_share_detail_activity_hint_note">Notitie</string>
-    <string name="note_share_detail_activity_common_next">Volgende</string>
-    <string name="note_share_detail_activity_share_copy_link">Deel en kopieer link</string>
-    <string name="note_share_detail_activity_common_confirm">Bevestigen</string>
-    <string name="note_share_detail_activity_set_note">Instellen notitie</string>
-    <string name="note_share_detail_activity_send_share">Stuur share</string>
-    <string name="note_share_detail_activity_hint_name">Naam</string>
-    <string name="note_share_detail_activity_link_name">Linknaam</string>
-    <string name="note_share_detail_activity_share_link_empty_password">Je moet een wachtwoord opgeven</string>
-    <string name="note_share_detail_activity_hint_password">Wachtwoord</string>
-    <string name="note_share_detail_activity_no_share_permission_selected">Gelieve ten minste één machtiging te selecteren om te delen</string>
-    <string name="note_share_detail_activity_label_empty">Label mag niet leeg zijn</string>
-    <string name="note_share_detail_activity_cancel">Annuleren</string>
-    <string name="note_share_detail_activity_create_share_error">Aanmaak van share mislukt</string>
-
-    <!-- SharePasswordDialogFragment -->
-    <string name="share_password_dialog_fragment_share_link_optional_password_title">Geef een niet verplicht wachtwoord in</string>
-    <string name="share_password_dialog_fragment_skip">Overslaan</string>
-
-    <string name="share_link_password_title">Voer een wachtwoord in</string>
-    <string name="common_ok">OK</string>
-    <string name="common_delete">Verwijder</string>
-    <string name="write_email">Verstuur e-mail</string>
-    <string name="no_browser_available">Geen app beschikbaar voor het openen van de link</string>
-    <string name="no_email_app_available">Geen app beschikbaar voor het openen van het mailadres</string>
-    <string name="no_actions">Geen acties voor deze gebruiker</string>
-
-    <string name="failed_the_remove_share">Verwijdering van share mislukt</string>
-    <string name="email_pick_failed">Email adres ophalen mislukt.</string>
-    <string name="failed_update_ui">Kon UI niet bijwerken</string>
-    <string name="file_detail_sharing_fragment_no_contact_app_message">Geen app beschikbaar voor het selecteren van contactpersonen</string>
-    <string name="activity_chooser_title">Verstuur link naar…</string>
-
-    <string name="activity_chooser_send_file_title">Verzenden</string>
-    <string name="share_internal_link_to_folder_text">Interne link voor delen werkt alleen voor gebruikers met toegang tot deze map</string>
-    <string name="share_internal_link_to_file_text">Interne link voor delen werkt alleen voor gebruikers met toegang tot dit bestand</string>
-    <string name="share_internal_link">Deel interne link</string>
-    <string name="delete_link">Verwijder link</string>
-    <string name="share_settings">Instellingen</string>
-    <string name="share_send_new_email">Stuur nieuwe e-mail</string>
-    <string name="share_dialog_title">Delen</string>
-    <string name="share_file">Deel %1$s</string>
-    <string name="share_expiration_date_label">Vervalt op %1$s</string>
-    <string name="share_expiration_date_format">%1$s</string>
-    <string name="share_no_expiration_date_label">Instellen vervaldatum</string>
-    <string name="share_via_link_section_title">Deel link</string>
-    <string name="share_via_link_send_link_label">Verstuur link</string>
-    <string name="share_password_title">Wachtwoord beveiligd</string>
-    <string name="share_no_password_title">Instellen wachtwoord</string>
-    <string name="share_with_title">Deel met…</string>
-    <string name="share_via_link_unset_password">Schakel uit</string>
-    <string name="add_another_public_share_link">Toevoegen andere link</string>
-    <string name="add_new_public_share">Voeg een nieuwe openbare deellink toe</string>
-    <string name="public_share_name">Nieuwe naam</string>
-    <string name="share_link_with_label">Link delen (%1$s)</string>
-    <string name="share_link">Deel link</string>
-    <string name="allow_resharing">Opnieuw delen toestaan</string>
-    <string name="link_share_view_only">Alleen bekijken</string>
-    <string name="link_share_editing">Bewerken</string>
-    <string name="link_share_allow_upload_and_editing">Uploaden en bewerken toestaan</string>
-    <string name="link_share_file_drop">Bestand droppen (alleen uploaden)</string>
-    <string name="could_not_retrieve_shares">Kon shares niet ophalen</string>
-    <string name="share_permission_view_only">Alleen bekijken</string>
-    <string name="share_permission_can_edit">Kan bewerken</string>
-    <string name="share_permission_file_drop">Bestandsopslag</string>
-    <string name="share_permission_secure_file_drop">Veilige bestandoverdracht</string>
-    <string name="share_permissions">Deelmachtigingen</string>
-    <plurals name="share_download_limit_description">
-        <item quantity="one">%1$d download resterend</item>
-        <item quantity="other">%1$d downloads resterend</item>
-    </plurals>
-    <string name="username">Gebruikersnaam</string>
-    <string name="share_group_clarification">%1$s (groep)</string>
-    <string name="share_remote_clarification">%1$s (extern)</string>
-    <string name="share_room_clarification">%1$s (gesprek)</string>
-    <string name="share_known_remote_on_clarification">op %1$s</string>
-    <string name="remote">(remote)</string>
-
-    <string name="copy_link">Link kopiëren</string>
-    <string name="share">Delen</string>
-    <string name="clipboard_text_copied">Link gekopieerd</string>
-    <string name="clipboard_no_text_to_copy">Geen tekst ontvangen om te kopiëren naar het klembord</string>
-    <string name="clipboard_unexpected_error">Onverwachte fout bij het kopiëren naar het klembord</string>
-    <string name="clipboard_label">Tekst gekopieerd uit %1$s</string>
-
-    <string name="listview_updated_today">Vandaag</string>
-    <string name="listview_updated_yesterday">Gisteren</string>
-    <string name="listview_updated_this_week">Deze week</string>
-    <string name="listview_updated_last_week">Vorige week</string>
-    <string name="listview_updated_this_month">Deze maand</string>
-    <string name="listview_updated_last_month">Vorige maand</string>
-    <string name="settings_note_mode">Weergavemodus voor notities</string>
-    <string name="settings_note_mode_new">Notities gedrag bij openen</string>
-    <string name="settings_theme_title">Thema</string>
-    <string name="settings_font_title">Monospace lettertype</string>
-    <string name="settings_font_size">Fontgrootte</string>
-    <string name="settings_wifi_only">Alleen met Wi-Fi synchroniseren</string>
-    <string name="settings_lock">App slot (Beta)</string>
-    <string name="settings_lock_summary">Apparaatinloggegevens</string>
-    <string name="settings_background_sync">Achtergrondsynchronisatie</string>
-    <string name="settings_prevent_screen_capture">Voorkomen schermafdruk</string>
-    <string name="settings_show_ecosystem_apps">Toon app switcher</string>
-    <string name="settings_show_ecosystem_apps_summary">Nextcloud app suggesties in navigatiekopregel</string>
-    <string name="settings_gridview">Rasterweergave</string>
-    <string name="settings_enable_direct_edit">Direct bewerken</string>
-    <string name="settings_enable_direct_edit_summary">Indien uitgeschakeld, wordt de geavanceerde editor verborgen.</string>
-    <string name="settings_keep_screen_on">Scherm aan laten</string>
-    <string name="settings_keep_screen_on_summary">Tijdens het bekijken of bewerken van een notitie</string>
-
-    <string name="error_sync">Synchronisatie mislukt: %1$s</string>
-    <string name="error_synchronization">Synchronisatie mislukt</string>
-    <string name="error_no_network">Geen netwerkverbinding</string>
-    <string name="error_maintenance_mode">Server in onderhoudsmodus</string>
-    <string name="error_unknown">Een onbekende fout trad op.</string>
-
-    <string name="about_version_title">Versie</string>
-    <string name="about_version">Je gebruikt nu %1$s</string>
-    <string name="about_maintainer_title">Projectleider</string>
-    <string name="about_developers_title">Ontwikkelaars</string>
-    <string name="about_developers_original_author">oorspronkelijke ontwikkelaar</string>
-    <string name="about_translators_title">Vertalers</string>
-    <string name="about_translators_transifex">Nextcloud-gemeenschap op %1$s</string>
-    <string name="about_testers_title">Testers</string>
-    <string name="about_source_title">Broncode</string>
-    <string name="about_source">Dit project wordt gehost op GitHub: %1$s</string>
-    <string name="about_issues_title">Problemen</string>
-    <string name="about_issues">Je kunt problemen rapporteren, verbeteringen voorstellen en functionele aanpassingen aanvragen via de issue-tracker op GitHub: %1$s</string>
-    <string name="about_translate_title">Vertalen</string>
-    <string name="about_translate">Word lid van het Nextcloud-team op Transifex en help ons deze app te vertalen: %1$s </string>
-    <string name="about_app_license_title">App licentie</string>
+  <resources>
     <string name="about_app_license">Deze applicatie valt onder de GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Licentie weergeven</string>
-    <string name="about_icons_disclaimer_title">Pictogrammen</string>
-    <string name="about_icons_disclaimer_app_icon">Zie %1$s voor het originele pictogram.</string>
-    <string name="about_icons_disclaimer_mdi_icons">Alle andere pictogrammen in deze app zijn %1$s gemaakt door Google Inc. en zijn gelicenseerd onder de Apache 2.0 Licensie.</string>
-    <string name="about_icons_disclaimer_mdi">Material Design pictogrammen</string>
-    <string name="about_credits_tab_title">Verantwoording</string>
+    <string name="about_app_license_title">App licentie</string>
     <string name="about_contribution_tab_title">Bijdrage</string>
+    <string name="about_credits_tab_title">Verantwoording</string>
+    <string name="about_developers_original_author">oorspronkelijke ontwikkelaar</string>
+    <string name="about_developers_title">Ontwikkelaars</string>
+    <string name="about_icons_disclaimer_app_icon">Zie %1$s voor het originele pictogram.</string>
+    <string name="about_icons_disclaimer_mdi">Material Design pictogrammen</string>
+    <string name="about_icons_disclaimer_mdi_icons">Alle andere pictogrammen in deze app zijn %1$s gemaakt door Google Inc. en zijn gelicenseerd onder de Apache 2.0 Licensie.</string>
+    <string name="about_icons_disclaimer_title">Pictogrammen</string>
+    <string name="about_issues">Je kunt problemen rapporteren, verbeteringen voorstellen en functionele aanpassingen aanvragen via de issue-tracker op GitHub: %1$s</string>
+    <string name="about_issues_title">Problemen</string>
     <string name="about_license_tab_title">Licentie</string>
-
-    <string name="widget_note_list_title">Notitielijst</string>
-    <string name="widget_note_list_placeholder">Geen notities</string>
-    <string name="widget_single_note_title">Enkele notitie</string>
-    <string name="widget_single_note_placeholder_tv">Notitie niet gevonden</string>
-    <string name="widget_not_logged_in">Login bij Notities voordat je deze widget gebruikt</string>
-    <string name="widget_entry_fav_contentDescription">\'Ster\' pictogram wordt gebruikt om een object als favoriet te markeren</string>
-
+    <string name="about_maintainer_title">Projectleider</string>
+    <string name="about_source">Dit project wordt gehost op GitHub: %1$s</string>
+    <string name="about_source_title">Broncode</string>
+    <string name="about_testers_title">Testers</string>
+    <string name="about_translate">Word lid van het Nextcloud-team op Transifex en help ons deze app te vertalen: %1$s </string>
+    <string name="about_translate_title">Vertalen</string>
+    <string name="about_translators_title">Vertalers</string>
+    <string name="about_translators_transifex">Nextcloud-gemeenschap op %1$s</string>
+    <string name="about_version">Je gebruikt nu %1$s</string>
+    <string name="about_version_title">Versie</string>
+    <string name="account_already_imported">Account is al geïmporteerd</string>
+    <string name="account_imported">Account geïmporteerd</string>
+    <string name="action_back">Terug</string>
+    <string name="action_create">Nieuwe notitie</string>
+    <string name="action_edit_save">Opslaan</string>
+    <string name="action_formatting_help">Opmaak</string>
+    <string name="action_note_deleted">Verwijderd %1$s</string>
+    <string name="action_note_restored">Hersteld %1$s</string>
+    <string name="action_search">Zoeken</string>
+    <string name="action_settings">Instellingen</string>
+    <string name="action_sorting_method">Sortering</string>
+    <string name="action_trashbin">Verwijderde notities</string>
+    <string name="action_uncategorized">Niet gecategoriseerd</string>
+    <string name="action_undo">Ongedaan maken</string>
+    <string name="activity_chooser_send_file_title">Verzenden</string>
+    <string name="activity_chooser_title">Verstuur link naar…</string>
     <string name="activity_select_single_note">Notitie selecteren</string>
-
-    <string name="shortcut_create_long">Een nieuwe notitie maken</string>
-
-    <string name="pref_value_font_normal">Normaal</string>
-    <string name="pref_value_wifi_and_mobile">Met Wi-Fi en mobiele data synchroniseren</string>
-    <string name="pref_value_lock">Wachtwoordbeveiliging</string>
-
-    <string name="simple_error">Fout</string>
-    <string name="simple_close">Sluit</string>
-    <string name="simple_copy">Kopieër</string>
-    <string name="simple_exception">Uitzondering</string>
-    <string name="pin_to_homescreen">Vastzetten op startscherm</string>
-    <string name="note_has_been_deleted">Deze notitie is verwijderd</string>
     <string name="add_account">Account toevoegen</string>
-
-    <string name="category_music">Muziek</string>
-    <string name="category_movies">Films</string>
-    <string name="category_movie">Film</string>
-    <string name="category_work">Werk</string>
-    <string name="category_todo">Taak</string>
-    <string name="category_todos">Taken</string>
+    <string name="add_another_public_share_link">Toevoegen andere link</string>
+    <string name="add_category">Toevoegen %1$s</string>
+    <string name="add_new_public_share">Voeg een nieuwe openbare deellink toe</string>
+    <string name="added_content">\"%1$s\" toegevoegd</string>
+    <string name="allow_resharing">Opnieuw delen toestaan</string>
+    <string name="app_name">Notities</string>
+    <string name="app_name_long">Nextcloud Notities</string>
+    <string name="appear_offline">Toon afwezig</string>
+    <string name="appearance_and_behavior">Uiterlijk en gedrag</string>
+    <string name="append_to_note">Achteraan aan notitie toevoegen</string>
+    <string name="away">Afwezig</string>
+    <string name="backup">We hebben een onherstelbare staat van de app gedetecteerd. Maak een back-up van je niet-gesynchroniseerde wijzigingen en wis de opslag van de Notes-app.</string>
+    <string name="busy">Bezet</string>
+    <string name="category_bake">Bakken</string>
     <string name="category_checklists">Controlelijst</string>
-    <string name="category_tasks">Taken</string>
+    <string name="category_credentials">Inloggegevens</string>
+    <string name="category_food">Eten</string>
+    <string name="category_game">Spel</string>
+    <string name="category_games">Spellen</string>
+    <string name="category_gift">Cadeau</string>
+    <string name="category_gifts">Cadeaus</string>
+    <string name="category_key">Sleutel</string>
+    <string name="category_keys">Sleutels</string>
+    <string name="category_movie">Film</string>
+    <string name="category_movies">Films</string>
+    <string name="category_music">Muziek</string>
+    <string name="category_password">Wachtwoord</string>
+    <string name="category_passwords">Wachtwoorden</string>
+    <string name="category_play">Spelen</string>
+    <string name="category_present">Cadeau</string>
+    <string name="category_presents">Cadeaus</string>
+    <string name="category_readonly">Alleen lezen</string>
     <string name="category_recipe">Recept</string>
     <string name="category_recipes">Recepten</string>
     <string name="category_restaurant">Restaurant</string>
     <string name="category_restaurants">Restaurants</string>
-    <string name="category_food">Eten</string>
-    <string name="category_bake">Bakken</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_key">Sleutel</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_keys">Sleutels</string>
-    <string name="category_password">Wachtwoord</string>
-    <string name="category_passwords">Wachtwoorden</string>
-    <string name="category_credentials">Inloggegevens</string>
-    <string name="category_game">Spel</string>
-    <string name="category_games">Spellen</string>
-    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
-    <string name="category_play">Spelen</string>
-    <string name="category_gift">Cadeau</string>
-    <string name="category_gifts">Cadeaus</string>
-    <!-- Like a gift -->
-    <string name="category_present">Cadeau</string>
-    <!-- Like a gift -->
-    <string name="category_presents">Cadeaus</string>
-
-    <string name="account_already_imported">Account is al geïmporteerd</string>
-    <string name="no_notes_yet">Nog geen notities</string>
-    <string name="no_notes_yet_description">Druk op de + knop om een nieuwe notitie te maken</string>
-    <string name="simple_more">Meer</string>
-    <string name="simple_move">Verplaatsen</string>
-    <string name="category_readonly">Alleen lezen</string>
-    <string name="no_category">Geen categorie</string>
-    <string name="add_category">Toevoegen %1$s</string>
-    <string name="simple_checkbox">Aanvinkvakje</string>
-    <string name="unlock_notes">Ontgrendel notities</string>
-    <string name="error_dialog_title">Oh nee - wat nu? 🙁</string>
-    <string name="error_dialog_tip_token_mismatch_retry">Probeer de app te sluiten en opnieuw te starten. Er was misschien een onjuiste verbinding met de Nextcloud-app.</string>
-    <string name="error_dialog_tip_token_mismatch_clear_storage">Als het probleem blijft aanhouden, probeer dan de gegevensopslag bij Nextcloud en de Nextcloud Notes apps te wissen.</string>
-    <string name="error_dialog_tip_clear_storage">Je kunt de opslag wissen door de app-info te openen en Opslag → Opslag wissen te selecteren. ⚠️ Waarschuwing: hiermee worden de nog niet gesynchroniseerde notities verwijderd!</string>
-    <string name="error_dialog_tip_files_outdated">Je Nextcloud app lijkt te zijn verouderd. Download alstublieft de nieuwste versie in de Google Play Store of in F-Droid.</string>
-    <string name="error_dialog_tip_files_force_stop">Er lijkt iets mis te zijn met je Nextcloud app. Probeer alstublieft de apps geforceerd af te sluiten, zowel de Nextcloud app als de Nextcloud Notes app.</string>
-    <string name="error_dialog_tip_files_delete_storage">Als geforceerd afsluiten niet helpt, probeer dan van beide apps de gegevensopslag te wissen.</string>
-    <string name="error_dialog_timeout_instance">Er was binnen de gestelde tijd geen reactie ontvangen van je server. Controleer alstublieft of je Nextcloud-instantie wel goed loopt.</string>
-    <string name="error_dialog_timeout_toggle">Controleer je netwerk verbinding. Het kan ook helpen de dataverbinding of WIFI uit en weer aan te zetten.</string>
+    <string name="category_tasks">Taken</string>
+    <string name="category_todo">Taak</string>
+    <string name="category_todos">Taken</string>
+    <string name="category_work">Werk</string>
+    <string name="change_category_title">Een categorie kiezen</string>
+    <string name="change_note_title">Notitie titel wijzigen</string>
+    <string name="choose_account">Kies account</string>
+    <string name="clear">Terug</string>
+    <string name="clear_status_after">Maak de status leeg na</string>
+    <string name="clipboard_label">Tekst gekopieerd uit %1$s</string>
+    <string name="clipboard_no_text_to_copy">Geen tekst ontvangen om te kopiëren naar het klembord</string>
+    <string name="clipboard_text_copied">Link gekopieerd</string>
+    <string name="clipboard_unexpected_error">Onverwachte fout bij het kopiëren naar het klembord</string>
+    <string name="common_delete">Verwijder</string>
+    <string name="common_loading">Laden…</string>
+    <string name="common_ok">OK</string>
+    <string name="context_based_formatting">Context gebaseerde formatterings-popover</string>
+    <string name="copy_link">Link kopiëren</string>
+    <string name="could_not_retrieve_shares">Kon shares niet ophalen</string>
+    <string name="delete_link">Verwijder link</string>
+    <string name="direct_editing_error">Fout bij laden uitgebreid bewerken</string>
+    <string name="dnd">Niet storen</string>
+    <string name="dontClear">Niet opruimen</string>
+    <string name="ecosystem_apps_display_files">Bestanden</string>
+    <string name="ecosystem_apps_display_more">Meer</string>
+    <string name="ecosystem_apps_display_talk">Talk</string>
+    <string name="ecosystem_apps_more">Meer Nextcloud Apps</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="email_pick_failed">Email adres ophalen mislukt.</string>
+    <string name="error_action_open_battery_settings">Batterij instellingen</string>
+    <string name="error_action_open_deck_info">Open app-informatie</string>
+    <string name="error_action_open_network">Netwerk instellingen</string>
+    <string name="error_action_update_files_app">Update</string>
+    <string name="error_dialog_check_maintenance">Controleer alstublieft of je Nextcloud instantie momenteel niet in onderhouds-modus draait.</string>
     <string name="error_dialog_check_server">Je server gaf een onjuiste reactie. Controleer alstublieft of de Notes app in de web-interface wel goed werkt.</string>
     <string name="error_dialog_check_server_logs">Er is iets mis met je Nextcloud instellingen. Controleer alstublieft de server log bestanden.</string>
-    <string name="error_dialog_check_maintenance">Controleer alstublieft of je Nextcloud instantie momenteel niet in onderhouds-modus draait.</string>
     <string name="error_dialog_insufficient_storage">Je Nextcloud instantie heeft geen vrije ruimte meer. Verwijder enkele bestanden om je lokale gegevens te kunnen synchroniseren.</string>
-    <string name="error_dialog_we_need_info">We hebben de volgende technische informatie nodig om je te kunnen helpen: </string>
-    <string name="error_dialog_server_app_enabled">Zorg er alstublieft voor dat je de \"Notes\" app hebt geïnstalleerd en aangezet op jouw server.</string>
-    <string name="error_dialog_redirect">Je server heeft gereageerd met een HTTP 302-statuscode, wat inhoudt dat je de Notes-app niet op je server hebt geïnstalleerd of dat er iets verkeerd is geconfigureerd. Dit kan worden veroorzaakt door maatwerk aanpassingen in een .htaccess-bestand of door Nextcloud-apps zoals de OID Client.</string>
-    <string name="error_dialog_tip_disable_battery_optimizations">Schakel de batterijoptimalisatie uit voor Nextcloud en de Notes app.</string>
     <string name="error_dialog_min_version">De Notitie app voor Android vereist minstens Nextcloud Android app versie 3.18.</string>
-    <string name="added_content">\"%1$s\" toegevoegd</string>
-    <string name="shared_text_empty">Gedeelde tekst was leeg</string>
-    <string name="append_to_note">Achteraan aan notitie toevoegen</string>
-    <string name="change_note_title">Notitie titel wijzigen</string>
-    <string name="menu_edit_title">Titel bewerken</string>
-    <string name="simple_security">Beveiliging</string>
-    <string name="appearance_and_behavior">Uiterlijk en gedrag</string>
-    <string name="simple_synchronization">Synchronisatie</string>
+    <string name="error_dialog_redirect">Je server heeft gereageerd met een HTTP 302-statuscode, wat inhoudt dat je de Notes-app niet op je server hebt geïnstalleerd of dat er iets verkeerd is geconfigureerd. Dit kan worden veroorzaakt door maatwerk aanpassingen in een .htaccess-bestand of door Nextcloud-apps zoals de OID Client.</string>
+    <string name="error_dialog_server_app_enabled">Zorg er alstublieft voor dat je de \"Notes\" app hebt geïnstalleerd en aangezet op jouw server.</string>
+    <string name="error_dialog_timeout_instance">Er was binnen de gestelde tijd geen reactie ontvangen van je server. Controleer alstublieft of je Nextcloud-instantie wel goed loopt.</string>
+    <string name="error_dialog_timeout_toggle">Controleer je netwerk verbinding. Het kan ook helpen de dataverbinding of WIFI uit en weer aan te zetten.</string>
+    <string name="error_dialog_tip_clear_storage">Je kunt de opslag wissen door de app-info te openen en Opslag → Opslag wissen te selecteren. ⚠️ Waarschuwing: hiermee worden de nog niet gesynchroniseerde notities verwijderd!</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Schakel de batterijoptimalisatie uit voor Nextcloud en de Notes app.</string>
+    <string name="error_dialog_tip_files_delete_storage">Als geforceerd afsluiten niet helpt, probeer dan van beide apps de gegevensopslag te wissen.</string>
+    <string name="error_dialog_tip_files_force_stop">Er lijkt iets mis te zijn met je Nextcloud app. Probeer alstublieft de apps geforceerd af te sluiten, zowel de Nextcloud app als de Nextcloud Notes app.</string>
+    <string name="error_dialog_tip_files_outdated">Je Nextcloud app lijkt te zijn verouderd. Download alstublieft de nieuwste versie in de Google Play Store of in F-Droid.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Als het probleem blijft aanhouden, probeer dan de gegevensopslag bij Nextcloud en de Nextcloud Notes apps te wissen.</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Probeer de app te sluiten en opnieuw te starten. Er was misschien een onjuiste verbinding met de Nextcloud-app.</string>
+    <string name="error_dialog_title">Oh nee - wat nu? 🙁</string>
+    <string name="error_dialog_we_need_info">We hebben de volgende technische informatie nodig om je te kunnen helpen: </string>
+    <string name="error_maintenance_mode">Server in onderhoudsmodus</string>
+    <string name="error_no_network">Geen netwerkverbinding</string>
+    <string name="error_sync">Synchronisatie mislukt: %1$s</string>
+    <string name="error_synchronization">Synchronisatie mislukt</string>
+    <string name="error_unknown">Een onbekende fout trad op.</string>
+    <string name="failed_the_remove_share">Verwijdering van share mislukt</string>
+    <string name="failed_update_ui">Kon UI niet bijwerken</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Geen app beschikbaar voor het selecteren van contactpersonen</string>
+    <string name="file_list_seconds_ago">seconden geleden</string>
+    <string name="formatting_help_cbf_body_1">Het ontwerpdoel van de Notes-app is om een afleidingsvrij hulpmiddel te bieden. Maar je kunt altijd je teksten opmaken met Markdown. Voor verschillende van de onderstaande voorbeelden kunt je snelcodes gebruiken, zodat je notities kunt opmaken zonder de onderstaande codes in te typen.</string>
+    <string name="formatting_help_cbf_body_2">Selecteer gewoon een tekstbereik of tik op een willekeurige positie op je cursor en je krijgt een pop-upmenu met naast de standaardvermeldingen %1$s, %2$s, %3$s ook meldingen zoals %4$s of %5$s.</string>
+    <string name="formatting_help_cbf_title">Opmaat context gebaseerd</string>
+    <string name="formatting_help_checkboxes_body_1">Gebruik een lijst gevolgd door haakjes om een aanvinkvakje te maken</string>
+    <string name="formatting_help_checkboxes_body_2">Object 1</string>
+    <string name="formatting_help_checkboxes_body_3">Object 2</string>
+    <string name="formatting_help_checkboxes_title">Aanvinkvakjes</string>
+    <string name="formatting_help_code_body_1">Er zijn veel verschillende manieren om code te markeren met Markdown. Als je inline codeblokken hebt, bed ze dan in m.b.v. backticks:</string>
+    <string name="formatting_help_code_body_2">Markdown ondersteunt ook iets dat \"code fencing\" wordt genoemd, wat meerdere regels mogelijk maakt zonder inspringen:</string>
+    <string name="formatting_help_code_body_3">En als je syntaxisaccentuering wilt gebruiken, neemt dan deze taal op:</string>
+    <string name="formatting_help_code_title">Code</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_images_alt">Leuke afbeelding</string>
+    <string name="formatting_help_images_body_1">Links moeten ofwel volledige URL\'s zijn die beginnen met een protocol en domein of absolute paden die beginnen met een %1$s teken.</string>
+    <string name="formatting_help_images_body_2">Gebruik escape-tekens in de afbeeldings-URL om te voldoen aan het Markdown-formaat. Dit betekent bijvoorbeeld spaties vervangen door %1$sin de URL.</string>
+    <string name="formatting_help_images_title">Afbeeldingen</string>
+    <string name="formatting_help_lists_body_1">Soms wil je een genummerde lijst:</string>
+    <string name="formatting_help_lists_body_2">Een</string>
+    <string name="formatting_help_lists_body_3">Twee</string>
+    <string name="formatting_help_lists_body_4">drie</string>
+    <string name="formatting_help_lists_body_5">Soms wil je puntenlijsten:</string>
+    <string name="formatting_help_lists_body_6">Begin de regel met een streepje</string>
+    <string name="formatting_help_lists_body_7">En als je subpunten hebt, plaats dan twee spaties voor het streepje of de ster:</string>
+    <string name="formatting_help_lists_body_8">Vind dit leuk</string>
+    <string name="formatting_help_lists_body_9">En dit</string>
+    <string name="formatting_help_lists_title">Lijsten</string>
+    <string name="formatting_help_structured_documents_body_1">Soms is het handig om verschillende niveaus van koppen te hebben om documenten te structureren. Begin regels met een %1$s om koppen te maken. Meerdere %2$s op regel geven kleinere kopformaten aan.</string>
+    <string name="formatting_help_structured_documents_body_2">Dit is een derde niveau kop</string>
+    <string name="formatting_help_structured_documents_body_3">Je kunt een %1$s overal gebruiken tot %2$s zes voor verschillende kpformaten.</string>
+    <string name="formatting_help_structured_documents_body_4">Als je iemand wil citeren, gebruik het %1$s teken voor de regel:</string>
+    <string name="formatting_help_structured_documents_body_5">Verbeelding is belangrijker dan kennis. Kennis is beperkt. Verbeelding omsluit de wereld.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+    <string name="formatting_help_structured_documents_title">Gestructureerde documenten</string>
+    <string name="formatting_help_tables_column">Kolom %1d</string>
+    <string name="formatting_help_tables_title">Tabellen</string>
+    <string name="formatting_help_tables_value">Waarde %1d</string>
+    <string name="formatting_help_text_body">Het is met Markdown makkelijk om sommige woorden %1$svergedrukt%1$s en andere woorden %2$scursief%2$s te maken. Je kunt enkele woorden %3$sdoorhalen%3$s en zelfs een [link to Nextcloud](https://nextcloud.com).</string>
+    <string name="formatting_help_text_title">Tekst</string>
+    <string name="fourHours">4 uur</string>
+    <string name="http_status_code">HTTP status code: %1$d</string>
+    <string name="invisible">Verborgen</string>
+    <string name="label_all_notes">Alle notities</string>
+    <string name="label_favorites">Favorieten</string>
+    <string name="link_share_allow_upload_and_editing">Uploaden en bewerken toestaan</string>
+    <string name="link_share_editing">Bewerken</string>
+    <string name="link_share_file_drop">Bestand droppen (alleen uploaden)</string>
+    <string name="link_share_view_only">Alleen bekijken</string>
+    <string name="listview_updated_last_month">Vorige maand</string>
+    <string name="listview_updated_last_week">Vorige week</string>
+    <string name="listview_updated_this_month">Deze maand</string>
+    <string name="listview_updated_this_week">Deze week</string>
+    <string name="listview_updated_today">Vandaag</string>
+    <string name="listview_updated_yesterday">Gisteren</string>
     <string name="manage_accounts">Accounts beheren </string>
-    <string name="action_formatting_help">Opmaak</string>
-
-
+    <string name="menu_change_category">Categorie</string>
+    <string name="menu_delete">Verwijderen</string>
+    <string name="menu_edit_title">Titel bewerken</string>
+    <string name="menu_favorite">Favoriet</string>
+    <string name="menu_preview">Voorbeeld</string>
+    <string name="menu_share">Delen</string>
+    <string name="mute_all_notifications">Onderdruk alle meldingen</string>
+    <string name="no_account_configured_yet">Nog geen account geconfigureerd</string>
+    <string name="no_actions">Geen acties voor deze gebruiker</string>
+    <string name="no_browser_available">Geen app beschikbaar voor het openen van de link</string>
+    <string name="no_category">Geen categorie</string>
+    <string name="no_email_app_available">Geen app beschikbaar voor het openen van het mailadres</string>
+    <string name="no_notes_yet">Nog geen notities</string>
+    <string name="no_notes_yet_description">Druk op de + knop om een nieuwe notitie te maken</string>
+    <string name="no_other_accounts">U heeft nog geen andere accounts geconfigureerd.</string>
     <string name="noteMode_plain_edit">Normale bewerkmodus</string>
     <string name="noteMode_plain_preview">Normaal voorbeeld</string>
-    <string name="noteMode_rich_edit">Uitgebreide bewerkmodus</string>
     <string name="noteMode_remember_last">Onthoud je laatste selectie</string>
-
-    <string-array name="fontSize_entries">
-        <item>Klein</item>
-        <item>Gemiddeld</item>
-        <item>Groot</item>
-    </string-array>
-
-    <string-array name="darkmode_entries">
-        <item>Licht</item>
-        <item>Donker</item>
-        <item>Systeemstandaard</item>
-    </string-array>
-
+    <string name="noteMode_rich_edit">Uitgebreide bewerkmodus</string>
+    <string name="note_has_been_deleted">Deze notitie is verwijderd</string>
+    <string name="note_share_activity_activity_icon_content_description">note activiteitspictogram</string>
+    <string name="note_share_activity_cannot_created">Je mag geen share aanmaken.</string>
+    <string name="note_share_activity_contact_icon_content_description">note deel contact pictogram</string>
+    <string name="note_share_activity_contact_no_permission">Toestemming voor contact vereist</string>
+    <string name="note_share_activity_copy_icon_content_description">note deel kopieerpictogram</string>
+    <string name="note_share_activity_could_not_retrieve_url">Kon URL niet ophalen</string>
+    <string name="note_share_activity_external_icon_content_description">note deel externe pictogram</string>
+    <string name="note_share_activity_icon_content_description">note deel-pictogram</string>
+    <string name="note_share_activity_more_icon_content_description">note deel meer pictogram</string>
+    <string name="note_share_activity_resharing_not_allowed">Beleid of machtigingen staan opnieuw delen niet toe</string>
+    <string name="note_share_activity_search_text">Naam, Federated Cloud ID of e-mailadres…</string>
+    <string name="note_share_activity_share_icon_content_description">note deel-pictogram</string>
+    <string name="note_share_activity_share_link">Deel link</string>
+    <string name="note_share_activity_shared_with_you">Met je gedeeld door %1$s</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" is met je gedeeld</string>
+    <string name="note_share_activity_user_icon_content_description">note deel gebruiker pictogram</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">Je mag geen openbare share aanmaken.</string>
+    <string name="note_share_created">Share aangemaakt</string>
+    <string name="note_share_detail_activity_advanced_settings">Geavanceerde instellingen</string>
+    <string name="note_share_detail_activity_cancel">Annuleren</string>
+    <string name="note_share_detail_activity_common_confirm">Bevestigen</string>
+    <string name="note_share_detail_activity_common_next">Volgende</string>
+    <string name="note_share_detail_activity_create_share_error">Aanmaak van share mislukt</string>
+    <string name="note_share_detail_activity_hint_name">Naam</string>
+    <string name="note_share_detail_activity_hint_note">Notitie</string>
+    <string name="note_share_detail_activity_hint_password">Wachtwoord</string>
+    <string name="note_share_detail_activity_label_empty">Label mag niet leeg zijn</string>
+    <string name="note_share_detail_activity_link_name">Linknaam</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Gelieve ten minste één machtiging te selecteren om te delen</string>
+    <string name="note_share_detail_activity_send_share">Stuur share</string>
+    <string name="note_share_detail_activity_set_note">Instellen notitie</string>
+    <string name="note_share_detail_activity_share_copy_link">Deel en kopieer link</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Je moet een wachtwoord opgeven</string>
+    <string name="note_share_detail_activity_share_send_note">Notitie voor ontvanger</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Verberg download</string>
+    <string name="oneHour">1 uur</string>
+    <string name="online">Online</string>
+    <string name="pin_to_homescreen">Vastzetten op startscherm</string>
+    <string name="pref_value_font_normal">Normaal</string>
+    <string name="pref_value_lock">Wachtwoordbeveiliging</string>
+    <string name="pref_value_wifi_and_mobile">Met Wi-Fi en mobiele data synchroniseren</string>
+    <string name="progress_import">Notitie %1$d van %2$d importeren</string>
+    <string name="progress_import_indeterminate">Notities importeren...</string>
+    <string name="public_share_name">Nieuwe naam</string>
+    <string name="remote">(remote)</string>
+    <string name="remove_account">Verwijder %1$s</string>
+    <string name="search_in_all">Zoek in alle notities</string>
+    <string name="search_in_category">Zoeken in %1$s</string>
+    <string name="settings_background_sync">Achtergrondsynchronisatie</string>
+    <string name="settings_enable_direct_edit">Direct bewerken</string>
+    <string name="settings_enable_direct_edit_summary">Indien uitgeschakeld, wordt de geavanceerde editor verborgen.</string>
+    <string name="settings_file_suffix">Bestandsextensie</string>
+    <string name="settings_file_suffix_description">Bestandsextensies voor nieuwe notities in je Nextcloud</string>
+    <string name="settings_file_suffix_success">Nieuwe bestandsachtervoegsel: %1$s</string>
+    <string name="settings_font_size">Fontgrootte</string>
+    <string name="settings_font_title">Monospace lettertype</string>
+    <string name="settings_gridview">Rasterweergave</string>
+    <string name="settings_keep_screen_on">Scherm aan laten</string>
+    <string name="settings_keep_screen_on_summary">Tijdens het bekijken of bewerken van een notitie</string>
+    <string name="settings_lock">App slot (Beta)</string>
+    <string name="settings_lock_summary">Apparaatinloggegevens</string>
+    <string name="settings_note_mode">Weergavemodus voor notities</string>
+    <string name="settings_note_mode_new">Notities gedrag bij openen</string>
+    <string name="settings_notes_path">Instellen map</string>
+    <string name="settings_notes_path_description">Map om je notities in Nextcloud op te slaan</string>
+    <string name="settings_notes_path_success">Nieuw notitiesmap: %1$s</string>
+    <string name="settings_prevent_screen_capture">Voorkomen schermafdruk</string>
+    <string name="settings_show_ecosystem_apps">Toon app switcher</string>
+    <string name="settings_show_ecosystem_apps_summary">Nextcloud app suggesties in navigatiekopregel</string>
+    <string name="settings_theme_title">Thema</string>
+    <string name="settings_wifi_only">Alleen met Wi-Fi synchroniseren</string>
+    <string name="share">Delen</string>
+    <string name="share_dialog_title">Delen</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_expiration_date_label">Vervalt op %1$s</string>
+    <string name="share_file">Deel %1$s</string>
+    <string name="share_group_clarification">%1$s (groep)</string>
+    <string name="share_internal_link">Deel interne link</string>
+    <string name="share_internal_link_to_file_text">Interne link voor delen werkt alleen voor gebruikers met toegang tot dit bestand</string>
+    <string name="share_internal_link_to_folder_text">Interne link voor delen werkt alleen voor gebruikers met toegang tot deze map</string>
+    <string name="share_known_remote_on_clarification">op %1$s</string>
+    <string name="share_link">Deel link</string>
+    <string name="share_link_password_title">Voer een wachtwoord in</string>
+    <string name="share_link_with_label">Link delen (%1$s)</string>
+    <string name="share_no_expiration_date_label">Instellen vervaldatum</string>
+    <string name="share_no_password_title">Instellen wachtwoord</string>
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Geef een niet verplicht wachtwoord in</string>
+    <string name="share_password_dialog_fragment_skip">Overslaan</string>
+    <string name="share_password_title">Wachtwoord beveiligd</string>
+    <string name="share_permission_can_edit">Kan bewerken</string>
+    <string name="share_permission_file_drop">Bestandsopslag</string>
+    <string name="share_permission_secure_file_drop">Veilige bestandoverdracht</string>
+    <string name="share_permission_view_only">Alleen bekijken</string>
+    <string name="share_permissions">Deelmachtigingen</string>
+    <string name="share_remote_clarification">%1$s (extern)</string>
+    <string name="share_room_clarification">%1$s (gesprek)</string>
+    <string name="share_send_new_email">Stuur nieuwe e-mail</string>
+    <string name="share_settings">Instellingen</string>
+    <string name="share_via_link_section_title">Deel link</string>
+    <string name="share_via_link_send_link_label">Verstuur link</string>
+    <string name="share_via_link_unset_password">Schakel uit</string>
+    <string name="share_with_title">Deel met…</string>
+    <string name="shared_text_empty">Gedeelde tekst was leeg</string>
+    <string name="shortcut_create_long">Een nieuwe notitie maken</string>
+    <string name="simple_about">Over</string>
+    <string name="simple_backup">Back-up</string>
+    <string name="simple_cancel">Annuleren</string>
+    <string name="simple_checkbox">Aanvinkvakje</string>
+    <string name="simple_close">Sluit</string>
+    <string name="simple_copy">Kopieër</string>
+    <string name="simple_edit">Bewerken</string>
+    <string name="simple_error">Fout</string>
+    <string name="simple_exception">Uitzondering</string>
+    <string name="simple_link">Link</string>
+    <string name="simple_more">Meer</string>
+    <string name="simple_move">Verplaatsen</string>
+    <string name="simple_next">Volgende</string>
+    <string name="simple_other">Ander</string>
+    <string name="simple_prev">Vorige</string>
+    <string name="simple_remove">Verwijderen</string>
+    <string name="simple_security">Beveiliging</string>
+    <string name="simple_switch">Wisselen</string>
+    <string name="simple_synchronization">Synchronisatie</string>
+    <string name="sort_alphabetically">Op alfabet sorteren</string>
+    <string name="sort_last_modified">Op wijzigingsdatum sorteren</string>
+    <string name="status_message">Statusbericht</string>
+    <string name="switch_to_plain_editing">Ga naar normaal bewerken</string>
+    <string name="thirtyMinutes">30 minuten</string>
+    <string name="thisWeek">Deze week</string>
+    <string name="today">Vandaag</string>
+    <string name="unlock_notes">Ontgrendel notities</string>
+    <string name="username">Gebruikersnaam</string>
+    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
+    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
+    <string name="welcome_text">Welkom bij %1$s</string>
+    <string name="whats_your_status">Wat is je status?</string>
+    <string name="widget_entry_fav_contentDescription">\'Ster\' pictogram wordt gebruikt om een object als favoriet te markeren</string>
+    <string name="widget_not_logged_in">Login bij Notities voordat je deze widget gebruikt</string>
+    <string name="widget_note_list_placeholder">Geen notities</string>
+    <string name="widget_note_list_title">Notitielijst</string>
+    <string name="widget_single_note_placeholder_tv">Notitie niet gevonden</string>
+    <string name="widget_single_note_title">Enkele notitie</string>
+    <string name="write_email">Verstuur e-mail</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Je moet verbonden zijn met het Internet om een account toe te voegen.</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">%1$d download resterend</item>
+        <item quantity="other">%1$d downloads resterend</item>
+    </plurals>
     <plurals name="ab_selected">
         <item quantity="one">%d geselecteerd</item>
         <item quantity="other">%d geselecteerd</item>
@@ -338,121 +381,8 @@
         <item quantity="one">Inhoud van %1$d notitie delen</item>
         <item quantity="other">Inhoud van %1$d notities delen</item>
     </plurals>
-
-    <string name="formatting_help_divider" translateable="false">---</string>
-    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
-    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
-    <string name="formatting_help_codefence" translateable="false">```</string>
-    <string name="formatting_help_codefence_outer" translateable="false">````</string>
-    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
-    <string name="formatting_help_cbf_title">Opmaat context gebaseerd</string>
-    <string name="formatting_help_cbf_body_1">Het ontwerpdoel van de Notes-app is om een afleidingsvrij hulpmiddel te bieden. Maar je kunt altijd je teksten opmaken met Markdown. Voor verschillende van de onderstaande voorbeelden kunt je snelcodes gebruiken, zodat je notities kunt opmaken zonder de onderstaande codes in te typen.</string>
-    <string name="formatting_help_cbf_body_2">Selecteer gewoon een tekstbereik of tik op een willekeurige positie op je cursor en je krijgt een pop-upmenu met naast de standaardvermeldingen %1$s, %2$s, %3$s ook meldingen zoals %4$s of %5$s.</string>
-
-    <string name="formatting_help_text_title">Tekst</string>
-    <string name="formatting_help_text_body">Het is met Markdown makkelijk om sommige woorden %1$svergedrukt%1$s en andere woorden %2$scursief%2$s te maken. Je kunt enkele woorden %3$sdoorhalen%3$s en zelfs een [link to Nextcloud](https://nextcloud.com).</string>
-
-    <string name="formatting_help_lists_title">Lijsten</string>
-    <string name="formatting_help_lists_body_1">Soms wil je een genummerde lijst:</string>
-    <string name="formatting_help_lists_body_2">Een</string>
-    <string name="formatting_help_lists_body_3">Twee</string>
-    <string name="formatting_help_lists_body_4">drie</string>
-    <string name="formatting_help_lists_body_5">Soms wil je puntenlijsten:</string>
-    <string name="formatting_help_lists_body_6">Begin de regel met een streepje</string>
-    <string name="formatting_help_lists_body_7">En als je subpunten hebt, plaats dan twee spaties voor het streepje of de ster:</string>
-    <string name="formatting_help_lists_body_8">Vind dit leuk</string>
-    <string name="formatting_help_lists_body_9">En dit</string>
-
-    <string name="formatting_help_checkboxes_title">Aanvinkvakjes</string>
-    <string name="formatting_help_checkboxes_body_1">Gebruik een lijst gevolgd door haakjes om een aanvinkvakje te maken</string>
-    <string name="formatting_help_checkboxes_body_2">Object 1</string>
-    <string name="formatting_help_checkboxes_body_3">Object 2</string>
-
-    <string name="formatting_help_structured_documents_title">Gestructureerde documenten</string>
-    <string name="formatting_help_structured_documents_body_1">Soms is het handig om verschillende niveaus van koppen te hebben om documenten te structureren. Begin regels met een %1$s om koppen te maken. Meerdere %2$s op regel geven kleinere kopformaten aan.</string>
-    <string name="formatting_help_structured_documents_body_2">Dit is een derde niveau kop</string>
-    <string name="formatting_help_structured_documents_body_3">Je kunt een %1$s overal gebruiken tot %2$s zes voor verschillende kpformaten.</string>
-    <string name="formatting_help_structured_documents_body_4">Als je iemand wil citeren, gebruik het %1$s teken voor de regel:</string>
-    <string name="formatting_help_structured_documents_body_5">Verbeelding is belangrijker dan kennis. Kennis is beperkt. Verbeelding omsluit de wereld.</string>
-    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
-
-    <string name="formatting_help_code_title">Code</string>
-    <string name="formatting_help_code_body_1">Er zijn veel verschillende manieren om code te markeren met Markdown. Als je inline codeblokken hebt, bed ze dan in m.b.v. backticks:</string>
-    <string name="formatting_help_code_body_2">Markdown ondersteunt ook iets dat \"code fencing\" wordt genoemd, wat meerdere regels mogelijk maakt zonder inspringen:</string>
-    <string name="formatting_help_code_body_3">En als je syntaxisaccentuering wilt gebruiken, neemt dan deze taal op:</string>
-
-    <string name="formatting_help_tables_title">Tabellen</string>
-    <!-- Column header of a sample table -->
-    <string name="formatting_help_tables_column">Kolom %1d</string>
-    <!-- Table cell value of a sample table -->
-    <string name="formatting_help_tables_value">Waarde %1d</string>
-
-    <string name="formatting_help_images_body_1">Links moeten ofwel volledige URL\'s zijn die beginnen met een protocol en domein of absolute paden die beginnen met een %1$s teken.</string>
-    <string name="formatting_help_images_body_2">Gebruik escape-tekens in de afbeeldings-URL om te voldoen aan het Markdown-formaat. Dit betekent bijvoorbeeld spaties vervangen door %1$sin de URL.</string>
-    <string name="formatting_help_images_title">Afbeeldingen</string>
-    <string name="formatting_help_images_alt">Leuke afbeelding</string>
-
-    <string name="simple_other">Ander</string>
-    <string name="sort_last_modified">Op wijzigingsdatum sorteren</string>
-    <string name="sort_alphabetically">Op alfabet sorteren</string>
-    <string name="error_action_open_battery_settings">Batterij instellingen</string>
-    <string name="error_action_open_deck_info">Open app-informatie</string>
-    <string name="error_action_open_network">Netwerk instellingen</string>
-    <string name="error_action_update_files_app">Update</string>
-    <string name="no_account_configured_yet">Nog geen account geconfigureerd</string>
-    <string name="no_other_accounts">U heeft nog geen andere accounts geconfigureerd.</string>
-    <string name="choose_account">Kies account</string>
-    <string name="context_based_formatting">Context gebaseerde formatterings-popover</string>
     <plurals name="remove_account_message">
         <item quantity="one">Als je het %1$s account verwijdert, wordt ook één onherstelbare niet-gesynchroniseerde wijzigingen verwijderd.</item>
         <item quantity="other">Als je het %1$s account verwijdert, worden ook %2$d onherstelbare  niet-gesynchroniseerde wijzigingen verwijderd.</item>
     </plurals>
-    <string name="remove_account">Verwijder %1$s</string>
-
-    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Je moet verbonden zijn met het Internet om een account toe te voegen.</string>
-    <string name="settings_notes_path">Instellen map</string>
-
-    <string name="simple_next">Volgende</string>
-    <string name="simple_prev">Vorige</string>
-    <string name="simple_backup">Back-up</string>
-    <string name="backup">We hebben een onherstelbare staat van de app gedetecteerd. Maak een back-up van je niet-gesynchroniseerde wijzigingen en wis de opslag van de Notes-app.</string>
-    <string name="settings_notes_path_description">Map om je notities in Nextcloud op te slaan</string>
-    <string-array name="settings_file_suffixes">
-        <item translatable="false">.txt</item>
-        <item translatable="false">.md</item>
-    </string-array>
-    <string name="settings_notes_path_success">Nieuw notitiesmap: %1$s</string>
-    <string name="settings_file_suffix">Bestandsextensie</string>
-    <string name="settings_file_suffix_description">Bestandsextensies voor nieuwe notities in je Nextcloud</string>
-    <string name="settings_file_suffix_success">Nieuwe bestandsachtervoegsel: %1$s</string>
-    <string name="http_status_code">HTTP status code: %1$d</string>
-    <string name="progress_import_indeterminate">Notities importeren...</string>
-    <string name="progress_import">Notitie %1$d van %2$d importeren</string>
-    <string name="account_imported">Account geïmporteerd</string>
-    <string name="direct_editing_error">Fout bij laden uitgebreid bewerken</string>
-    <string name="switch_to_plain_editing">Ga naar normaal bewerken</string>
-    <string name="action_back">Terug</string>
-    <string name="status_message">Statusbericht</string>
-    <string name="whats_your_status">Wat is je status?</string>
-    <string name="clear_status_after">Maak de status leeg na</string>
-    <string name="clear">Terug</string>
-    <string name="dontClear">Niet opruimen</string>
-    <string name="today">Vandaag</string>
-    <string name="thirtyMinutes">30 minuten</string>
-    <string name="oneHour">1 uur</string>
-    <string name="fourHours">4 uur</string>
-    <string name="thisWeek">Deze week</string>
-    <string name="file_list_seconds_ago">seconden geleden</string>
-    <string name="online">Online</string>
-    <string name="dnd">Niet storen</string>
-    <string name="away">Afwezig</string>
-    <string name="invisible">Verborgen</string>
-    <string name="busy">Bezet</string>
-    <string name="mute_all_notifications">Onderdruk alle meldingen</string>
-    <string name="appear_offline">Toon afwezig</string>
-    <string name="ecosystem_apps_display_files">Bestanden</string>
-    <string name="ecosystem_apps_display_talk">Talk</string>
-    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
-    <string name="ecosystem_apps_more">Meer Nextcloud Apps</string>
-    <string name="ecosystem_apps_display_more">Meer</string>
 </resources>

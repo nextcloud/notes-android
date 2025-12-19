@@ -1,329 +1,378 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Nextcloud Notes - Android Client
-  ~
-  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
-  ~ SPDX-License-Identifier: GPL-3.0-or-later
--->
-<resources>
-    <string name="app_name">Poznámky</string>
-    <string name="app_name_long">Nextcloud poznámky</string>
-    <string name="label_all_notes">Všechny poznámky</string>
-    <string name="label_favorites">Oblíbené</string>
+  <resources>
+    <string name="about_app_license">Tato aplikace je vydávána pod licencí GNU GENERAL PUBLIC LICENSE v3+.</string>
+    <string name="about_app_license_button">Zobrazit licenci</string>
+    <string name="about_app_license_title">Licence aplikace</string>
+    <string name="about_contribution_tab_title">Zapojení se</string>
+    <string name="about_credits_tab_title">Zásluhy</string>
+    <string name="about_developers_original_author">původní autor</string>
+    <string name="about_developers_title">Vývojáři</string>
+    <string name="about_icons_disclaimer_app_icon">Původní ikona, viz %1$s.</string>
+    <string name="about_icons_disclaimer_mdi">Ikony ve stylu Material Design</string>
+    <string name="about_icons_disclaimer_mdi_icons">Všechny další ikony používané touto aplikací jsou %1$s, vytvořené společností Google Inc. a vydávané pod licencí Apache 2.0.</string>
+    <string name="about_icons_disclaimer_title">Ikony</string>
+    <string name="about_issues">Chyby, návrhy na zlepšení a další funkce je možné posílat prostřednictvím systému správy hlášení na portálu GitHub: %1$s</string>
+    <string name="about_issues_title">Problémy</string>
+    <string name="about_license_tab_title">Licence</string>
+    <string name="about_maintainer_title">Vývoj spravuje</string>
+    <string name="about_source">Tento projekt je hostován na portálu GitHub: %1$s</string>
+    <string name="about_source_title">Zdrojové kódy</string>
+    <string name="about_testers_title">Testeři</string>
+    <string name="about_translate">Připojte se k týmu Nexcloud na portálu Transifex a pomozte nám překládat (i) tuto aplikaci: %1$s</string>
+    <string name="about_translate_title">Překládání</string>
+    <string name="about_translators_title">Překladatelé</string>
+    <string name="about_translators_transifex">Nextcloud komunita na portálu %1$s</string>
+    <string name="about_version">Nyní používáte %1$s</string>
+    <string name="about_version_title">Verze</string>
+    <string name="account_already_imported">Účet už byl naimportován</string>
+    <string name="account_imported">Účet naimportován.</string>
+    <string name="account_switch_dialog_status_fetching_error_message">Nepodařilo se načíst stav – zkuste to znovu.</string>
+    <string name="action_back">Zpět</string>
     <string name="action_create">Nová poznámka</string>
-    <string name="welcome_text">Vítejte v %1$s</string>
-    <string name="action_settings">Nastavení</string>
-    <string name="action_trashbin">Smazané poznámky</string>
-    <string name="action_search">Hledat</string>
-    <string name="action_sorting_method">Způsob řazení</string>
-    <string name="simple_cancel">Storno</string>
-    <string name="simple_switch">Přepnout</string>
-    <string name="simple_edit">Upravit</string>
-    <string name="simple_remove">Odebrat</string>
     <string name="action_edit_save">Uložit</string>
-    <string name="simple_about">O aplikaci</string>
-    <string name="simple_link">Odkaz</string>
+    <string name="action_formatting_help">Formátování</string>
     <string name="action_note_deleted">Smazáno %1$s</string>
     <string name="action_note_restored">Obnoveno %1$s</string>
-    <string name="action_undo">Zpět</string>
+    <string name="action_search">Hledat</string>
+    <string name="action_settings">Nastavení</string>
+    <string name="action_sorting_method">Způsob řazení</string>
+    <string name="action_trashbin">Smazané poznámky</string>
     <string name="action_uncategorized">Nezařazeno</string>
-    <string name="menu_delete">Smazat</string>
+    <string name="action_undo">Zpět</string>
+    <string name="activity_chooser_send_file_title">Odeslat</string>
+    <string name="activity_chooser_title">Poslat odkaz na …</string>
+    <string name="activity_select_single_note">Vybrat poznámku</string>
+    <string name="add_account">Přidat účet</string>
+    <string name="add_another_public_share_link">Přidat další odkaz</string>
+    <string name="add_category">Přidat %1$s</string>
+    <string name="add_new_public_share">Přidat nový veřejný odkaz na sdílení</string>
+    <string name="added_content">Přidáno „%1$s“</string>
+    <string name="allow_resharing">Povolit příjemcům tohoto sdílení, aby sami mohli sdílet dalším</string>
+    <string name="app_name">Poznámky</string>
+    <string name="app_name_long">Nextcloud poznámky</string>
+    <string name="appear_offline">Jevit se offline</string>
+    <string name="appearance_and_behavior">Vzhled a chování</string>
+    <string name="append_to_note">Připojit k poznámce</string>
+    <string name="away">Pryč</string>
+    <string name="backup">Byl zjištěn stav aplikace, ze kterého se nelze zotavit. Prosíme proveďte zálohu svých nesesynchronizovaných změn a vyčistěte úložiště aplikace Poznámky.</string>
+    <string name="busy">Zaneprázdněn(a)</string>
+    <string name="category_bake">Pečivo</string>
+    <string name="category_checklists">Kontrolní seznamy</string>
+    <string name="category_credentials">Přihlašovací údaj</string>
+    <string name="category_food">Jídlo</string>
+    <string name="category_game">Hra</string>
+    <string name="category_games">Hry</string>
+    <string name="category_gift">Dárek</string>
+    <string name="category_gifts">Dárky</string>
+    <string name="category_key">Klíč</string>
+    <string name="category_keys">Klíč</string>
+    <string name="category_movie">Film</string>
+    <string name="category_movies">Filmy</string>
+    <string name="category_music">Hudba</string>
+    <string name="category_password">Heslo</string>
+    <string name="category_passwords">Hesla</string>
+    <string name="category_play">Hrát</string>
+    <string name="category_present">Dárky</string>
+    <string name="category_presents">Dárky</string>
+    <string name="category_readonly">Pouze pro čtení</string>
+    <string name="category_recipe">Recept</string>
+    <string name="category_recipes">Recepty</string>
+    <string name="category_restaurant">Restaurace</string>
+    <string name="category_restaurants">Restaurace</string>
+    <string name="category_tasks">Úkoly</string>
+    <string name="category_todo">Úkol</string>
+    <string name="category_todos">Úkoly</string>
+    <string name="category_work">Práce</string>
+    <string name="change_category_title">Zvolte kategorii</string>
+    <string name="change_note_title">Změnit nadpis poznámky</string>
+    <string name="choose_account">Zvolte účet</string>
+    <string name="clear">Vyčistit</string>
+    <string name="clear_status_after">Vyčistit stav po uplynutí</string>
+    <string name="clipboard_label">Text zkopírován z %1$s</string>
+    <string name="clipboard_no_text_to_copy">Neobdržen žádný text pro zkopírování do schránky</string>
+    <string name="clipboard_text_copied">Odkaz zkopírován</string>
+    <string name="clipboard_unexpected_error">Neočekávaná chyba při kopírování do schránky</string>
+    <string name="common_delete">Smazat</string>
+    <string name="common_loading">Načítání …</string>
+    <string name="common_ok">OK</string>
+    <string name="context_based_formatting">Kontextové vyskakovací okno formátování</string>
+    <string name="copy_link">Zkopírovat odkaz</string>
+    <string name="could_not_retrieve_shares">Nedaří se získat sdílení</string>
+    <string name="delete_link">Smazat odkaz</string>
+    <string name="direct_editing_error">Chyba při načítání upravování formátovaného textu</string>
+    <string name="dnd">Nerušit</string>
+    <string name="dontClear">Nečistit</string>
+    <string name="ecosystem_apps_display_files">Soubory</string>
+    <string name="ecosystem_apps_display_more">Další</string>
+    <string name="ecosystem_apps_display_talk">Talk</string>
+    <string name="ecosystem_apps_more">Další Nextcloud aplikace</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="email_pick_failed">Nepodařilo se vybrat e-mailovou adresu.</string>
+    <string name="error_action_open_battery_settings">Nastavení správy napájení</string>
+    <string name="error_action_open_deck_info">Otevřít informace o aplikaci</string>
+    <string name="error_action_open_network">Nastavení sítě</string>
+    <string name="error_action_update_files_app">Aktualizovat</string>
+    <string name="error_dialog_check_maintenance">Zkontrolujte, zda vámi využívaná instance Nextcloud právě není v tuto chvíli v režimu údržby.</string>
+    <string name="error_dialog_check_server">Odpověď od serveru nebyla správná. Zkontrolujte, zda ke svým poznámkám můžete přistupovat přes webové rozhraní.</string>
+    <string name="error_dialog_check_server_logs">Je problém s nastavením vámi využívané instance Nextcloud. Podívejte se do souborů se záznamem událostí na serveru.</string>
+    <string name="error_dialog_insufficient_storage">Na vámi využívané instanci Nexcloud nezbývá žádné volné místo na úložišti. Aby bylo možné synchronizovat vaše místní změny do vámi využívaného cloudu, je třeba nejprve smazat nějaké soubory.</string>
+    <string name="error_dialog_min_version">Android aplikace Poznámky vyžaduje, aby Android aplikace Nextcloud byla přinejmenším verze 3.18.</string>
+    <string name="error_dialog_redirect">Vámi využívaný server odpověděl HTTP stavovým kódem 302, což ukazuje na to, že na serveru buď není nainstalovaná aplikace Poznámky, nebo je něco nesprávně nastavené. Toto může být způsobeno uživatelsky určenými přepsáními v souboru .htaccess nebo Nextcloud aplikacemi jako je OID klient.</string>
+    <string name="error_dialog_server_app_enabled">Ověřte, že na vámi využívaném serveru je nainstalovaná a zapnutá aplikace „Poznámky“.</string>
+    <string name="error_dialog_timeout_instance">Server neodpověděl do určené doby. Ověřte, že vámi využívaná instance je v pořádku spuštěná.</string>
+    <string name="error_dialog_timeout_toggle">Zkontrolujte nastavení sítě. Někdy může pomoci vypnout a zase zapnout mobilní data nebo Wi-Fi.</string>
+    <string name="error_dialog_tip_clear_storage">Úložiště můžete vyčistit otevřením nformací o aplikaci a vybráním Úložiště a mezipaměť → Vyčistit úložiště. ⚠️ Varování: toto nenávratně odstraní poznámky, které ještě nebyly synchronizovány se serverem. </string>
+    <string name="error_dialog_tip_disable_battery_optimizations">V nastavení systému prosím pro aplikace Nextcloud a Notes vypněte veškeré optimalizace spotřeby energie z akumulátoru.</string>
+    <string name="error_dialog_tip_files_delete_storage">Pokud vynucení jejich zastavení nepomůže, můžete zkusit vyčistit úložiště obou aplikací.</string>
+    <string name="error_dialog_tip_files_force_stop">Zdá se, že s vaší aplikací Nextcloud není něco v pořádku. Zkuste vynutit zastavení obojího – aplikace Nextcloud a Nextcloud Poznámky.</string>
+    <string name="error_dialog_tip_files_outdated">Zdá se, že aplikace Nextcloud, nainstalovaná na vašem zařízení, je staré verze. Přejděte prosím do Play Store nebo F-Droid a nainstalujte si nejnovější verzi.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Pokud problém přetrvává, zkuste problém vyřešit vyčištěním úložišť obou aplikací: Nextcloud a Nextcloud poznámky.</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Prosím pokuste se vynutit ukončení aplikace a spusťte ji znovu. Možná se něco nepodařilo při spojení s aplikací Nextcloud.</string>
+    <string name="error_dialog_title">Ó ne – co teď? 🙁</string>
+    <string name="error_dialog_we_need_info">Abychom vám mohli pomoci, potřebujeme následující technické údaje:</string>
+    <string name="error_maintenance_mode">Na serveru probíhá údržba</string>
+    <string name="error_no_network">Žádné síťové spojení</string>
+    <string name="error_setting_status_message">Chyba při nastavování stavové zprávy!</string>
+    <string name="error_sync">Synchronizace se nezdařila: %1$s</string>
+    <string name="error_synchronization">Synchronizace se nezdařila</string>
+    <string name="error_unknown">Došlo k neznámé chybě.</string>
+    <string name="failed_the_remove_share">Nepodařilo se odebrat sdílení</string>
+    <string name="failed_update_ui">Nepodařilo se aktualizovat uživatelské rozhraní</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Pro označené kontakty není k dispozici žádná aplikace</string>
+    <string name="file_list_seconds_ago">sekund před</string>
+    <string name="formatting_help_cbf_body_1">Hlavním cílem návrhu aplikace Poznámky je poskytovat nástroj, kterého používání nerozptyluje. Ačkoli můžete texty formátovat pomocí Markdown značek. Pro různé z níže uvedených příkladů můžete použít zkratky, takže své poznámky můžete formátovat bez zadávání níže uvedených kódů.</string>
+    <string name="formatting_help_cbf_body_2">Stačí jen vybrat část textu nebo klepnout na kurzor v libovolné pozici a obdržíte vyskakovací nabídky, která obsahuje kromě výchozích položek %1$s, %2$s, %3$s položky jako %4$s nebo %5$s.</string>
+    <string name="formatting_help_cbf_title">Formátování založené na kontextu</string>
+    <string name="formatting_help_checkboxes_body_1">Pro vytvoření zaškrtávací kolonky použijte seznam následovaný závorkami</string>
+    <string name="formatting_help_checkboxes_body_2">Položka 1</string>
+    <string name="formatting_help_checkboxes_body_3">Položka 2</string>
+    <string name="formatting_help_checkboxes_title">Zaškrtávací kolonky</string>
+    <string name="formatting_help_code_body_1">Ve značkovacím jazyce Markdown existuje mnoho různých způsobů jak opatřovat stylem zápis kódu. Pokud máte bloky kódu přímo v rámci řádku, obklopte je zpětnými jednoduchými uvozovkami (backticks):</string>
+    <string name="formatting_help_code_body_2">Značkovací jazyk Markdown také podporuje něco co se nazývá „oplocení“ kódu, což umožňuje vícero řádek bez odsazení:</string>
+    <string name="formatting_help_code_body_3">A pokud chcete použít zvýrazňování syntaxe, včetně jazyka:</string>
+    <string name="formatting_help_code_title">Kód</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_images_alt">Ozdobný obrázek</string>
+    <string name="formatting_help_images_body_1">Je třeba, aby odkazy byly buď kompletní URL adresy, začínající na protokol a doménu, nebo úplné popisy umístění, začínající znakem %1$s.</string>
+    <string name="formatting_help_images_body_2">Aby odpovídalo formátu Markdown, použijte v URL adrese význam zbavujících znaků (escape). To například znamená, že v URL je třeba nahradit mezery za %1$s.</string>
+    <string name="formatting_help_images_title">Obrázky</string>
+    <string name="formatting_help_lists_body_1">Pokud budete chtít číslované seznamy:</string>
+    <string name="formatting_help_lists_body_2">Jedna</string>
+    <string name="formatting_help_lists_body_3">Dva</string>
+    <string name="formatting_help_lists_body_4">Tři</string>
+    <string name="formatting_help_lists_body_5">Pokud budete chtít odrážky:</string>
+    <string name="formatting_help_lists_body_6">Řádek začněte znakem mínus</string>
+    <string name="formatting_help_lists_body_7">A pokud máte dílčí body, pak před mínus či hvězdičku dejte dvě mezery:</string>
+    <string name="formatting_help_lists_body_8">Dát lajk</string>
+    <string name="formatting_help_lists_body_9">A toto</string>
+    <string name="formatting_help_lists_title">Seznamy</string>
+    <string name="formatting_help_structured_documents_body_1">Někdy je užitečné mít různé úrovně nadpisů a strukturovat tak dokumenty. Začněte s řádky s %1$s pro vytvoření nadpisů. Vícero %2$s za sebou značí nižší úrovně nadpisů.</string>
+    <string name="formatting_help_structured_documents_body_2">Toto je nadpis třetí úrovně</string>
+    <string name="formatting_help_structured_documents_body_3">Je také možné použít jedno %1$s až po %2$s šest pro různé velikosti nadpisů.</string>
+    <string name="formatting_help_structured_documents_body_4">Pokud chcete někoho citovat, použijte před řádkem znak %1$s:</string>
+    <string name="formatting_help_structured_documents_body_5">Představivost je důležitější než znalosti. Znalosti jsou omezené. Představivost zahrnuje celý svět.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+    <string name="formatting_help_structured_documents_title">Strukturované dokumenty</string>
+    <string name="formatting_help_tables_column">Sloupec %1d</string>
+    <string name="formatting_help_tables_title">Tabulky</string>
+    <string name="formatting_help_tables_value">Hodnota %1d</string>
+    <string name="formatting_help_text_body">Pomocí značkovacího jazyka Markdown je velice jednoduché vypsat některé slova %1$stučně%1$s a jiná %2$sskloněná (kurzíva)%2$s. Je také možné některá slova %3$spřeškrtnout%3$s a dokonce [odkaz na Nextcloud](https://nextcloud.com).</string>
+    <string name="formatting_help_text_title">Text</string>
+    <string name="fourHours">4 hodiny</string>
+    <string name="http_status_code">HTTP stavový kód: %1$d</string>
+    <string name="invisible">Neviditelný</string>
+    <string name="label_all_notes">Všechny poznámky</string>
+    <string name="label_favorites">Oblíbené</string>
+    <string name="link_share_allow_upload_and_editing">Umožnit nahrávání a úpravy</string>
+    <string name="link_share_editing">Upravování</string>
+    <string name="link_share_file_drop">Předání souboru (pouze nahrání)</string>
+    <string name="link_share_view_only">Pouze prohlížet</string>
+    <string name="listview_updated_last_month">Minulý měsíc</string>
+    <string name="listview_updated_last_week">Minulý týden</string>
+    <string name="listview_updated_this_month">Tento měsíc</string>
+    <string name="listview_updated_this_week">Tento týden</string>
+    <string name="listview_updated_today">Dnes</string>
+    <string name="listview_updated_yesterday">Včera</string>
+    <string name="manage_accounts">Spravovat účty</string>
     <string name="menu_change_category">Kategorie</string>
+    <string name="menu_delete">Smazat</string>
+    <string name="menu_edit_title">Upravit nadpis</string>
     <string name="menu_favorite">Oblíbená</string>
     <string name="menu_preview">Náhled</string>
     <string name="menu_share">Sdílet</string>
-    <string name="common_loading">Načítání …</string>
-
-
-    <string name="search_in_category">Hledat v %1$s</string>
-    <string name="search_in_all">Prohledat všechny poznámky</string>
-
-    <string name="change_category_title">Zvolte kategorii</string>
-
-    <!-- UsersAndGroupsSearchProvider -->
-    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
-    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
-
-    <!-- NoteShareActivity -->
+    <string name="mute_all_notifications">Ztlumit veškerá upozornění</string>
+    <string name="no_account_configured_yet">Zatím není nastavený žádný účet</string>
+    <string name="no_actions">Žádné akce pro tohoto uživatele</string>
+    <string name="no_browser_available">Není k dispozici žádná aplikace pro práci s odkazy</string>
+    <string name="no_category">Žádná kategorie</string>
+    <string name="no_email_app_available">Není k dispozici žádná aplikace pro práci s e-maily</string>
+    <string name="no_notes_yet">Zatím žádné poznámky</string>
+    <string name="no_notes_yet_description">Novou poznámku vytvoříte klepnutím na + (plus)</string>
+    <string name="no_other_accounts">Zatím jste nenastavili žádné další účty.</string>
+    <string name="noteMode_plain_edit">Režim upravování neformátovaného textu</string>
+    <string name="noteMode_plain_preview">Náhled neformátovaného textu</string>
+    <string name="noteMode_remember_last">Zapamatovat si můj poslední výběr</string>
+    <string name="noteMode_rich_edit">Režim upravování formátovaného textu</string>
+    <string name="note_has_been_deleted">Tato poznámka byla smazána</string>
     <string name="note_share_activity_activity_icon_content_description">ikona aktivity v poznámce</string>
-    <string name="note_share_activity_share_icon_content_description">ikona sdílení poznámky</string>
-    <string name="note_share_activity_external_icon_content_description">externí ikona sdílení poznámky</string>
-    <string name="note_share_activity_copy_icon_content_description">ikona kopírování sdílení poznámky</string>
-    <string name="note_share_activity_more_icon_content_description">ikona další sdílení poznámky</string>
-    <string name="note_share_activity_icon_content_description">ikona sdílení poznámky</string>
-    <string name="note_share_activity_user_icon_content_description">ikona uživatele sdílení poznámky</string>
-    <string name="note_share_activity_contact_icon_content_description">ikona kontaktu sdílení poznámky</string>
-    <string name="note_share_activity_shared_with_you">Nasdílel(a) vám %1$s</string>
-    <string name="note_share_activity_search_text">Jméno, identifikátor v rámci federovaného cloudu, nebo e-mailová adresa …</string>
-    <string name="note_share_activity_share_link">Nasdílet odkaz</string>
-    <string name="note_share_activity_resharing_not_allowed">Zásada nebo oprávnění brání sdílení dál dalším</string>
-    <string name="note_share_activity_could_not_retrieve_url">Nepodařilo se získat URL</string>
-    <string name="note_share_activity_subject_shared_with_you">Bylo vám nasdíleno „%1$s“</string>
-    <string name="note_share_activity_contact_no_permission">Je vyžadováno oprávnění pro přístup ke kontaktům.</string>
-    <string name="note_share_activity_you_are_not_allowed_to_share">Nemáte oprávnění vytvářet veřejné sdílení.</string>
-
-    <string name="note_share_created">Sdílení vtvořeno</string>
     <string name="note_share_activity_cannot_created">Nemáte oprávnění vytvářet sdílení.</string>
-
-
-    <!-- NoteShareDetailActivity -->
+    <string name="note_share_activity_contact_icon_content_description">ikona kontaktu sdílení poznámky</string>
+    <string name="note_share_activity_contact_no_permission">Je vyžadováno oprávnění pro přístup ke kontaktům.</string>
+    <string name="note_share_activity_copy_icon_content_description">ikona kopírování sdílení poznámky</string>
+    <string name="note_share_activity_could_not_retrieve_url">Nepodařilo se získat URL</string>
+    <string name="note_share_activity_external_icon_content_description">externí ikona sdílení poznámky</string>
+    <string name="note_share_activity_icon_content_description">ikona sdílení poznámky</string>
+    <string name="note_share_activity_more_icon_content_description">ikona další sdílení poznámky</string>
+    <string name="note_share_activity_resharing_not_allowed">Zásada nebo oprávnění brání sdílení dál dalším</string>
+    <string name="note_share_activity_search_text">Jméno, identifikátor v rámci federovaného cloudu, nebo e-mailová adresa …</string>
+    <string name="note_share_activity_share_icon_content_description">ikona sdílení poznámky</string>
+    <string name="note_share_activity_share_link">Nasdílet odkaz</string>
+    <string name="note_share_activity_shared_with_you">Nasdílel(a) vám %1$s</string>
+    <string name="note_share_activity_subject_shared_with_you">Bylo vám nasdíleno „%1$s“</string>
+    <string name="note_share_activity_user_icon_content_description">ikona uživatele sdílení poznámky</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">Nemáte oprávnění vytvářet veřejné sdílení.</string>
+    <string name="note_share_created">Sdílení vtvořeno</string>
     <string name="note_share_detail_activity_advanced_settings">Pokročilá nastavení</string>
-    <string name="note_share_detail_activity_share_via_link_hide_download">Skrýt stahování</string>
-    <string name="note_share_detail_activity_share_send_note">Poznámka pro příjemce</string>
-    <string name="note_share_detail_activity_hint_note">Poznámka</string>
-    <string name="note_share_detail_activity_common_next">Next</string>
-    <string name="note_share_detail_activity_share_copy_link">Nasdílet a zkopírovat odkaz</string>
-    <string name="note_share_detail_activity_common_confirm">Potvrdit</string>
-    <string name="note_share_detail_activity_set_note">Nastavit poznámku</string>
-    <string name="note_share_detail_activity_send_share">Odeslat sdílení</string>
-    <string name="note_share_detail_activity_hint_name">Název</string>
-    <string name="note_share_detail_activity_link_name">Název odkazu</string>
-    <string name="note_share_detail_activity_share_link_empty_password">Je třeba zadat heslo</string>
-    <string name="note_share_detail_activity_hint_password">Heslo</string>
-    <string name="note_share_detail_activity_no_share_permission_selected">Vyberte alespoň jedno oprávnění pro sdílení.</string>
-    <string name="note_share_detail_activity_label_empty">Štítek je třeba vyplnit</string>
     <string name="note_share_detail_activity_cancel">Storno</string>
+    <string name="note_share_detail_activity_common_confirm">Potvrdit</string>
+    <string name="note_share_detail_activity_common_next">Next</string>
     <string name="note_share_detail_activity_create_share_error">Nepodařilo se vytvořit sdílení</string>
-
-    <!-- SharePasswordDialogFragment -->
+    <string name="note_share_detail_activity_hint_name">Název</string>
+    <string name="note_share_detail_activity_hint_note">Poznámka</string>
+    <string name="note_share_detail_activity_hint_password">Heslo</string>
+    <string name="note_share_detail_activity_label_empty">Štítek je třeba vyplnit</string>
+    <string name="note_share_detail_activity_link_name">Název odkazu</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Vyberte alespoň jedno oprávnění pro sdílení.</string>
+    <string name="note_share_detail_activity_send_share">Odeslat sdílení</string>
+    <string name="note_share_detail_activity_set_note">Nastavit poznámku</string>
+    <string name="note_share_detail_activity_share_copy_link">Nasdílet a zkopírovat odkaz</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Je třeba zadat heslo</string>
+    <string name="note_share_detail_activity_share_send_note">Poznámka pro příjemce</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Skrýt stahování</string>
+    <string name="oneHour">1 hodiny</string>
+    <string name="online">Online</string>
+    <string name="online_status">Stav online</string>
+    <string name="pin_to_homescreen">Připnout na domovskou obrazovku</string>
+    <string name="pref_value_font_normal">Normální</string>
+    <string name="pref_value_lock">Ochrana heslem</string>
+    <string name="pref_value_wifi_and_mobile">Synchronizovat přes Wi-Fi a mobilní data</string>
+    <string name="progress_import">Importování poznámky %1$d z %2$d…</string>
+    <string name="progress_import_indeterminate">Importování poznámek …</string>
+    <string name="public_share_name">Nový název</string>
+    <string name="remote">(vzdálené)</string>
+    <string name="remove_account">Odebrat %1$s</string>
+    <string name="search_in_all">Prohledat všechny poznámky</string>
+    <string name="search_in_category">Hledat v %1$s</string>
+    <string name="set_message">Nastavit zprávu</string>
+    <string name="set_online_status">Stav online</string>
+    <string name="settings_background_sync">Synchronizace na pozadí</string>
+    <string name="settings_enable_direct_edit">Přímá úprava</string>
+    <string name="settings_enable_direct_edit_summary">Pokud je vypnutý, pokročilý editor bude skryt.</string>
+    <string name="settings_file_suffix">Přípona souboru</string>
+    <string name="settings_file_suffix_description">Přípona souboru pro nové poznámky ve vámi využívané instanci Nextcloud</string>
+    <string name="settings_file_suffix_success">Přípona nového souboru: %1$s</string>
+    <string name="settings_font_size">Velikost písmen</string>
+    <string name="settings_font_title">Písmo se všemi znaky stejně širokými</string>
+    <string name="settings_gridview">Zobrazení v mřížce</string>
+    <string name="settings_keep_screen_on">Nezhasínat obrazovku</string>
+    <string name="settings_keep_screen_on_summary">Při zobrazování či upravování poznámky</string>
+    <string name="settings_lock">Zámek aplikace (zatím vyvíjeno)</string>
+    <string name="settings_lock_summary">Přihlašovací údaje zařízení</string>
+    <string name="settings_note_mode">Režim zobrazení poznámek</string>
+    <string name="settings_note_mode_new">Chování Poznámek při otevírání</string>
+    <string name="settings_notes_path">Nastavit složku</string>
+    <string name="settings_notes_path_description">Složka do které ukládat vaše poznámky na vámi využívané instanci Nextcloud</string>
+    <string name="settings_notes_path_success">Složka pro nové poznámky: %1$s</string>
+    <string name="settings_prevent_screen_capture">Bránit pořizování snímků obrazovky</string>
+    <string name="settings_show_ecosystem_apps">Zobrazit přepínač aplikací</string>
+    <string name="settings_show_ecosystem_apps_summary">Doporučování Nextcloud aplikací v záhlaví navigace</string>
+    <string name="settings_theme_title">Motiv vzhledu</string>
+    <string name="settings_wifi_only">Synchronizovat pouze přes Wi-Fi</string>
+    <string name="share">Nasdílet</string>
+    <string name="share_dialog_title">Sdílení</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_expiration_date_label">Platnost skončí %1$s</string>
+    <string name="share_file">Nasdílet %1$s</string>
+    <string name="share_group_clarification">%1$s (skupina)</string>
+    <string name="share_internal_link">Interní odkaz na sdílení</string>
+    <string name="share_internal_link_to_file_text">Sdílení interním odkazem funguje pouze pro uživatele, kteří mají k tomuto souboru přístup</string>
+    <string name="share_internal_link_to_folder_text">Sdílení interním odkazem funguje pouze pro uživatele, kteří mají k této složce přístup</string>
+    <string name="share_known_remote_on_clarification">na %1$s</string>
+    <string name="share_link">Nasdílet odkaz</string>
+    <string name="share_link_password_title">Zadejte heslo</string>
+    <string name="share_link_with_label">Odkaz na sdílení (%1$s)</string>
+    <string name="share_no_expiration_date_label">Nastavit datum skončení platnosti</string>
+    <string name="share_no_password_title">Nastavit heslo</string>
     <string name="share_password_dialog_fragment_share_link_optional_password_title">Zadejte nepovinné heslo</string>
     <string name="share_password_dialog_fragment_skip">Přeskočit</string>
-
-    <string name="share_link_password_title">Zadejte heslo</string>
-    <string name="common_ok">OK</string>
-    <string name="common_delete">Smazat</string>
-    <string name="write_email">Odeslat e-mail</string>
-    <string name="no_browser_available">Není k dispozici žádná aplikace pro práci s odkazy</string>
-    <string name="no_email_app_available">Není k dispozici žádná aplikace pro práci s e-maily</string>
-    <string name="no_actions">Žádné akce pro tohoto uživatele</string>
-
-    <string name="failed_the_remove_share">Nepodařilo se odebrat sdílení</string>
-    <string name="email_pick_failed">Nepodařilo se vybrat e-mailovou adresu.</string>
-    <string name="failed_update_ui">Nepodařilo se aktualizovat uživatelské rozhraní</string>
-    <string name="file_detail_sharing_fragment_no_contact_app_message">Pro označené kontakty není k dispozici žádná aplikace</string>
-    <string name="activity_chooser_title">Poslat odkaz na …</string>
-
-    <string name="activity_chooser_send_file_title">Odeslat</string>
-    <string name="share_internal_link_to_folder_text">Sdílení interním odkazem funguje pouze pro uživatele, kteří mají k této složce přístup</string>
-    <string name="share_internal_link_to_file_text">Sdílení interním odkazem funguje pouze pro uživatele, kteří mají k tomuto souboru přístup</string>
-    <string name="share_internal_link">Interní odkaz na sdílení</string>
-    <string name="delete_link">Smazat odkaz</string>
-    <string name="share_settings">Settings</string>
-    <string name="share_send_new_email">Odeslat nový e-mail</string>
-    <string name="share_dialog_title">Sdílení</string>
-    <string name="share_file">Nasdílet %1$s</string>
-    <string name="share_expiration_date_label">Platnost skončí %1$s</string>
-    <string name="share_expiration_date_format">%1$s</string>
-    <string name="share_no_expiration_date_label">Nastavit datum skončení platnosti</string>
-    <string name="share_via_link_section_title">Nasdílet odkaz</string>
-    <string name="share_via_link_send_link_label">Poslat odkaz</string>
     <string name="share_password_title">Chráněno heslem</string>
-    <string name="share_no_password_title">Nastavit heslo</string>
-    <string name="share_with_title">Sdílet s …</string>
-    <string name="share_via_link_unset_password">Zrušit nastavení</string>
-    <string name="add_another_public_share_link">Přidat další odkaz</string>
-    <string name="add_new_public_share">Přidat nový veřejný odkaz na sdílení</string>
-    <string name="public_share_name">Nový název</string>
-    <string name="share_link_with_label">Odkaz na sdílení (%1$s)</string>
-    <string name="share_link">Nasdílet odkaz</string>
-    <string name="allow_resharing">Povolit příjemcům tohoto sdílení, aby sami mohli sdílet dalším</string>
-    <string name="link_share_view_only">Pouze prohlížet</string>
-    <string name="link_share_editing">Upravování</string>
-    <string name="link_share_allow_upload_and_editing">Umožnit nahrávání a úpravy</string>
-    <string name="link_share_file_drop">Předání souboru (pouze nahrání)</string>
-    <string name="could_not_retrieve_shares">Nedaří se získat sdílení</string>
-    <string name="share_permission_view_only">Pouze prohlížet</string>
     <string name="share_permission_can_edit">Může upravovat</string>
     <string name="share_permission_file_drop">Předání souboru</string>
     <string name="share_permission_secure_file_drop">Bezpečné předání souborů</string>
+    <string name="share_permission_view_only">Pouze prohlížet</string>
     <string name="share_permissions">Oprávnění pro sdílení</string>
+    <string name="share_remote_clarification">%1$s (vzdálený)</string>
+    <string name="share_room_clarification">%1$s (konverzace)</string>
+    <string name="share_send_new_email">Odeslat nový e-mail</string>
+    <string name="share_settings">Settings</string>
+    <string name="share_via_link_section_title">Nasdílet odkaz</string>
+    <string name="share_via_link_send_link_label">Poslat odkaz</string>
+    <string name="share_via_link_unset_password">Zrušit nastavení</string>
+    <string name="share_with_title">Sdílet s …</string>
+    <string name="shared_text_empty">Sdílený text je prázdný</string>
+    <string name="shortcut_create_long">Vytvořit novou poznámku</string>
+    <string name="simple_about">O aplikaci</string>
+    <string name="simple_backup">Zazálohovat</string>
+    <string name="simple_cancel">Storno</string>
+    <string name="simple_checkbox">Zatržítko</string>
+    <string name="simple_close">Zavřít</string>
+    <string name="simple_copy">Zkopírovat</string>
+    <string name="simple_edit">Upravit</string>
+    <string name="simple_error">Chyba</string>
+    <string name="simple_exception">Výjimka</string>
+    <string name="simple_link">Odkaz</string>
+    <string name="simple_more">Další</string>
+    <string name="simple_move">Přesunout</string>
+    <string name="simple_next">Další</string>
+    <string name="simple_other">Ostatní</string>
+    <string name="simple_prev">Předchozí</string>
+    <string name="simple_remove">Odebrat</string>
+    <string name="simple_security">Zabezpečení</string>
+    <string name="simple_switch">Přepnout</string>
+    <string name="simple_synchronization">Synchronizace</string>
+    <string name="sort_alphabetically">Seřadit abecedně</string>
+    <string name="sort_last_modified">Seřadit podle data změny</string>
+    <string name="status_message">Stavová zpráva</string>
+    <string name="status_set_fail_message">Nepodařilo se nastavit stav!</string>
+    <string name="switch_to_plain_editing">Přepnout do upravování neformátovaného textu</string>
+    <string name="thirtyMinutes">30 minut</string>
+    <string name="thisWeek">Tento týden</string>
+    <string name="today">Dnes</string>
+    <string name="unlock_notes">Odemknout poznámky</string>
+    <string name="username">Uživatelské jméno</string>
+    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
+    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
+    <string name="welcome_text">Vítejte v %1$s</string>
+    <string name="whats_your_status">Jaký je váš stav?</string>
+    <string name="widget_entry_fav_contentDescription">Ikonka hvězdičky slouží pro označení položky jako oblíbené</string>
+    <string name="widget_not_logged_in">Abyste mohli využívat tuto miniaplikaci plochy, přihlaste se  do aplikace Poznámky</string>
+    <string name="widget_note_list_placeholder">Žádné poznámky</string>
+    <string name="widget_note_list_title">Seznam poznámek</string>
+    <string name="widget_single_note_placeholder_tv">Poznámka nenalezena</string>
+    <string name="widget_single_note_title">Jediná poznámka</string>
+    <string name="write_email">Odeslat e-mail</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Abyste mohli přidat účet je třeba, abyste byli připojení k Internetu.</string>
     <plurals name="share_download_limit_description">
         <item quantity="one">Zbývá %1$d stažení</item>
         <item quantity="few">Zbývají %1$d stažení</item>
         <item quantity="many">Zbývá %1$d stažení</item>
         <item quantity="other">Zbývají %1$d stažení</item>
     </plurals>
-    <string name="username">Uživatelské jméno</string>
-    <string name="share_group_clarification">%1$s (skupina)</string>
-    <string name="share_remote_clarification">%1$s (vzdálený)</string>
-    <string name="share_room_clarification">%1$s (konverzace)</string>
-    <string name="share_known_remote_on_clarification">na %1$s</string>
-    <string name="remote">(vzdálené)</string>
-
-    <string name="copy_link">Zkopírovat odkaz</string>
-    <string name="share">Nasdílet</string>
-    <string name="clipboard_text_copied">Odkaz zkopírován</string>
-    <string name="clipboard_no_text_to_copy">Neobdržen žádný text pro zkopírování do schránky</string>
-    <string name="clipboard_unexpected_error">Neočekávaná chyba při kopírování do schránky</string>
-    <string name="clipboard_label">Text zkopírován z %1$s</string>
-
-    <string name="listview_updated_today">Dnes</string>
-    <string name="listview_updated_yesterday">Včera</string>
-    <string name="listview_updated_this_week">Tento týden</string>
-    <string name="listview_updated_last_week">Minulý týden</string>
-    <string name="listview_updated_this_month">Tento měsíc</string>
-    <string name="listview_updated_last_month">Minulý měsíc</string>
-    <string name="settings_note_mode">Režim zobrazení poznámek</string>
-    <string name="settings_note_mode_new">Chování Poznámek při otevírání</string>
-    <string name="settings_theme_title">Motiv vzhledu</string>
-    <string name="settings_font_title">Písmo se všemi znaky stejně širokými</string>
-    <string name="settings_font_size">Velikost písmen</string>
-    <string name="settings_wifi_only">Synchronizovat pouze přes Wi-Fi</string>
-    <string name="settings_lock">Zámek aplikace (zatím vyvíjeno)</string>
-    <string name="settings_lock_summary">Přihlašovací údaje zařízení</string>
-    <string name="settings_background_sync">Synchronizace na pozadí</string>
-    <string name="settings_prevent_screen_capture">Bránit pořizování snímků obrazovky</string>
-    <string name="settings_show_ecosystem_apps">Zobrazit přepínač aplikací</string>
-    <string name="settings_show_ecosystem_apps_summary">Doporučování Nextcloud aplikací v záhlaví navigace</string>
-    <string name="settings_gridview">Zobrazení v mřížce</string>
-    <string name="settings_enable_direct_edit">Přímá úprava</string>
-    <string name="settings_enable_direct_edit_summary">Pokud je vypnutý, pokročilý editor bude skryt.</string>
-    <string name="settings_keep_screen_on">Nezhasínat obrazovku</string>
-    <string name="settings_keep_screen_on_summary">Při zobrazování či upravování poznámky</string>
-
-    <string name="error_sync">Synchronizace se nezdařila: %1$s</string>
-    <string name="error_synchronization">Synchronizace se nezdařila</string>
-    <string name="error_no_network">Žádné síťové spojení</string>
-    <string name="error_maintenance_mode">Na serveru probíhá údržba</string>
-    <string name="error_unknown">Došlo k neznámé chybě.</string>
-
-    <string name="about_version_title">Verze</string>
-    <string name="about_version">Nyní používáte %1$s</string>
-    <string name="about_maintainer_title">Vývoj spravuje</string>
-    <string name="about_developers_title">Vývojáři</string>
-    <string name="about_developers_original_author">původní autor</string>
-    <string name="about_translators_title">Překladatelé</string>
-    <string name="about_translators_transifex">Nextcloud komunita na portálu %1$s</string>
-    <string name="about_testers_title">Testeři</string>
-    <string name="about_source_title">Zdrojové kódy</string>
-    <string name="about_source">Tento projekt je hostován na portálu GitHub: %1$s</string>
-    <string name="about_issues_title">Problémy</string>
-    <string name="about_issues">Chyby, návrhy na zlepšení a další funkce je možné posílat prostřednictvím systému správy hlášení na portálu GitHub: %1$s</string>
-    <string name="about_translate_title">Překládání</string>
-    <string name="about_translate">Připojte se k týmu Nexcloud na portálu Transifex a pomozte nám překládat (i) tuto aplikaci: %1$s</string>
-    <string name="about_app_license_title">Licence aplikace</string>
-    <string name="about_app_license">Tato aplikace je vydávána pod licencí GNU GENERAL PUBLIC LICENSE v3+.</string>
-    <string name="about_app_license_button">Zobrazit licenci</string>
-    <string name="about_icons_disclaimer_title">Ikony</string>
-    <string name="about_icons_disclaimer_app_icon">Původní ikona, viz %1$s.</string>
-    <string name="about_icons_disclaimer_mdi_icons">Všechny další ikony používané touto aplikací jsou %1$s, vytvořené společností Google Inc. a vydávané pod licencí Apache 2.0.</string>
-    <string name="about_icons_disclaimer_mdi">Ikony ve stylu Material Design</string>
-    <string name="about_credits_tab_title">Zásluhy</string>
-    <string name="about_contribution_tab_title">Zapojení se</string>
-    <string name="about_license_tab_title">Licence</string>
-
-    <string name="widget_note_list_title">Seznam poznámek</string>
-    <string name="widget_note_list_placeholder">Žádné poznámky</string>
-    <string name="widget_single_note_title">Jediná poznámka</string>
-    <string name="widget_single_note_placeholder_tv">Poznámka nenalezena</string>
-    <string name="widget_not_logged_in">Abyste mohli využívat tuto miniaplikaci plochy, přihlaste se  do aplikace Poznámky</string>
-    <string name="widget_entry_fav_contentDescription">Ikonka hvězdičky slouží pro označení položky jako oblíbené</string>
-
-    <string name="activity_select_single_note">Vybrat poznámku</string>
-
-    <string name="shortcut_create_long">Vytvořit novou poznámku</string>
-
-    <string name="pref_value_font_normal">Normální</string>
-    <string name="pref_value_wifi_and_mobile">Synchronizovat přes Wi-Fi a mobilní data</string>
-    <string name="pref_value_lock">Ochrana heslem</string>
-
-    <string name="simple_error">Chyba</string>
-    <string name="simple_close">Zavřít</string>
-    <string name="simple_copy">Zkopírovat</string>
-    <string name="simple_exception">Výjimka</string>
-    <string name="pin_to_homescreen">Připnout na domovskou obrazovku</string>
-    <string name="note_has_been_deleted">Tato poznámka byla smazána</string>
-    <string name="add_account">Přidat účet</string>
-
-    <string name="category_music">Hudba</string>
-    <string name="category_movies">Filmy</string>
-    <string name="category_movie">Film</string>
-    <string name="category_work">Práce</string>
-    <string name="category_todo">Úkol</string>
-    <string name="category_todos">Úkoly</string>
-    <string name="category_checklists">Kontrolní seznamy</string>
-    <string name="category_tasks">Úkoly</string>
-    <string name="category_recipe">Recept</string>
-    <string name="category_recipes">Recepty</string>
-    <string name="category_restaurant">Restaurace</string>
-    <string name="category_restaurants">Restaurace</string>
-    <string name="category_food">Jídlo</string>
-    <string name="category_bake">Pečivo</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_key">Klíč</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_keys">Klíč</string>
-    <string name="category_password">Heslo</string>
-    <string name="category_passwords">Hesla</string>
-    <string name="category_credentials">Přihlašovací údaj</string>
-    <string name="category_game">Hra</string>
-    <string name="category_games">Hry</string>
-    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
-    <string name="category_play">Hrát</string>
-    <string name="category_gift">Dárek</string>
-    <string name="category_gifts">Dárky</string>
-    <!-- Like a gift -->
-    <string name="category_present">Dárky</string>
-    <!-- Like a gift -->
-    <string name="category_presents">Dárky</string>
-
-    <string name="account_already_imported">Účet už byl naimportován</string>
-    <string name="no_notes_yet">Zatím žádné poznámky</string>
-    <string name="no_notes_yet_description">Novou poznámku vytvoříte klepnutím na + (plus)</string>
-    <string name="simple_more">Další</string>
-    <string name="simple_move">Přesunout</string>
-    <string name="category_readonly">Pouze pro čtení</string>
-    <string name="no_category">Žádná kategorie</string>
-    <string name="add_category">Přidat %1$s</string>
-    <string name="simple_checkbox">Zatržítko</string>
-    <string name="unlock_notes">Odemknout poznámky</string>
-    <string name="error_dialog_title">Ó ne – co teď? 🙁</string>
-    <string name="error_dialog_tip_token_mismatch_retry">Prosím pokuste se vynutit ukončení aplikace a spusťte ji znovu. Možná se něco nepodařilo při spojení s aplikací Nextcloud.</string>
-    <string name="error_dialog_tip_token_mismatch_clear_storage">Pokud problém přetrvává, zkuste problém vyřešit vyčištěním úložišť obou aplikací: Nextcloud a Nextcloud poznámky.</string>
-    <string name="error_dialog_tip_clear_storage">Úložiště můžete vyčistit otevřením nformací o aplikaci a vybráním Úložiště a mezipaměť → Vyčistit úložiště. ⚠️ Varování: toto nenávratně odstraní poznámky, které ještě nebyly synchronizovány se serverem. </string>
-    <string name="error_dialog_tip_files_outdated">Zdá se, že aplikace Nextcloud, nainstalovaná na vašem zařízení, je staré verze. Přejděte prosím do Play Store nebo F-Droid a nainstalujte si nejnovější verzi.</string>
-    <string name="error_dialog_tip_files_force_stop">Zdá se, že s vaší aplikací Nextcloud není něco v pořádku. Zkuste vynutit zastavení obojího – aplikace Nextcloud a Nextcloud Poznámky.</string>
-    <string name="error_dialog_tip_files_delete_storage">Pokud vynucení jejich zastavení nepomůže, můžete zkusit vyčistit úložiště obou aplikací.</string>
-    <string name="error_dialog_timeout_instance">Server neodpověděl do určené doby. Ověřte, že vámi využívaná instance je v pořádku spuštěná.</string>
-    <string name="error_dialog_timeout_toggle">Zkontrolujte nastavení sítě. Někdy může pomoci vypnout a zase zapnout mobilní data nebo Wi-Fi.</string>
-    <string name="error_dialog_check_server">Odpověď od serveru nebyla správná. Zkontrolujte, zda ke svým poznámkám můžete přistupovat přes webové rozhraní.</string>
-    <string name="error_dialog_check_server_logs">Je problém s nastavením vámi využívané instance Nextcloud. Podívejte se do souborů se záznamem událostí na serveru.</string>
-    <string name="error_dialog_check_maintenance">Zkontrolujte, zda vámi využívaná instance Nextcloud právě není v tuto chvíli v režimu údržby.</string>
-    <string name="error_dialog_insufficient_storage">Na vámi využívané instanci Nexcloud nezbývá žádné volné místo na úložišti. Aby bylo možné synchronizovat vaše místní změny do vámi využívaného cloudu, je třeba nejprve smazat nějaké soubory.</string>
-    <string name="error_dialog_we_need_info">Abychom vám mohli pomoci, potřebujeme následující technické údaje:</string>
-    <string name="error_dialog_server_app_enabled">Ověřte, že na vámi využívaném serveru je nainstalovaná a zapnutá aplikace „Poznámky“.</string>
-    <string name="error_dialog_redirect">Vámi využívaný server odpověděl HTTP stavovým kódem 302, což ukazuje na to, že na serveru buď není nainstalovaná aplikace Poznámky, nebo je něco nesprávně nastavené. Toto může být způsobeno uživatelsky určenými přepsáními v souboru .htaccess nebo Nextcloud aplikacemi jako je OID klient.</string>
-    <string name="error_dialog_tip_disable_battery_optimizations">V nastavení systému prosím pro aplikace Nextcloud a Notes vypněte veškeré optimalizace spotřeby energie z akumulátoru.</string>
-    <string name="error_dialog_min_version">Android aplikace Poznámky vyžaduje, aby Android aplikace Nextcloud byla přinejmenším verze 3.18.</string>
-    <string name="added_content">Přidáno „%1$s“</string>
-    <string name="shared_text_empty">Sdílený text je prázdný</string>
-    <string name="append_to_note">Připojit k poznámce</string>
-    <string name="change_note_title">Změnit nadpis poznámky</string>
-    <string name="menu_edit_title">Upravit nadpis</string>
-    <string name="simple_security">Zabezpečení</string>
-    <string name="appearance_and_behavior">Vzhled a chování</string>
-    <string name="simple_synchronization">Synchronizace</string>
-    <string name="manage_accounts">Spravovat účty</string>
-    <string name="action_formatting_help">Formátování</string>
-
-
-    <string name="noteMode_plain_edit">Režim upravování neformátovaného textu</string>
-    <string name="noteMode_plain_preview">Náhled neformátovaného textu</string>
-    <string name="noteMode_rich_edit">Režim upravování formátovaného textu</string>
-    <string name="noteMode_remember_last">Zapamatovat si můj poslední výběr</string>
-
-    <string-array name="fontSize_entries">
-        <item>Malé</item>
-        <item>Střední</item>
-        <item>Velké</item>
-    </string-array>
-
-    <string-array name="darkmode_entries">
-        <item>Světlý</item>
-        <item>Tmavý</item>
-        <item>Systémové výchozí</item>
-    </string-array>
-
     <plurals name="ab_selected">
         <item quantity="one">vybrána %d</item>
         <item quantity="few">vybrány %d</item>
@@ -348,129 +397,10 @@
         <item quantity="many">Sdílet obsah %1$d poznámek</item>
         <item quantity="other">Sdílet obsah %1$d poznámek</item>
     </plurals>
-
-    <string name="formatting_help_divider" translateable="false">---</string>
-    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
-    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
-    <string name="formatting_help_codefence" translateable="false">```</string>
-    <string name="formatting_help_codefence_outer" translateable="false">````</string>
-    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
-    <string name="formatting_help_cbf_title">Formátování založené na kontextu</string>
-    <string name="formatting_help_cbf_body_1">Hlavním cílem návrhu aplikace Poznámky je poskytovat nástroj, kterého používání nerozptyluje. Ačkoli můžete texty formátovat pomocí Markdown značek. Pro různé z níže uvedených příkladů můžete použít zkratky, takže své poznámky můžete formátovat bez zadávání níže uvedených kódů.</string>
-    <string name="formatting_help_cbf_body_2">Stačí jen vybrat část textu nebo klepnout na kurzor v libovolné pozici a obdržíte vyskakovací nabídky, která obsahuje kromě výchozích položek %1$s, %2$s, %3$s položky jako %4$s nebo %5$s.</string>
-
-    <string name="formatting_help_text_title">Text</string>
-    <string name="formatting_help_text_body">Pomocí značkovacího jazyka Markdown je velice jednoduché vypsat některé slova %1$stučně%1$s a jiná %2$sskloněná (kurzíva)%2$s. Je také možné některá slova %3$spřeškrtnout%3$s a dokonce [odkaz na Nextcloud](https://nextcloud.com).</string>
-
-    <string name="formatting_help_lists_title">Seznamy</string>
-    <string name="formatting_help_lists_body_1">Pokud budete chtít číslované seznamy:</string>
-    <string name="formatting_help_lists_body_2">Jedna</string>
-    <string name="formatting_help_lists_body_3">Dva</string>
-    <string name="formatting_help_lists_body_4">Tři</string>
-    <string name="formatting_help_lists_body_5">Pokud budete chtít odrážky:</string>
-    <string name="formatting_help_lists_body_6">Řádek začněte znakem mínus</string>
-    <string name="formatting_help_lists_body_7">A pokud máte dílčí body, pak před mínus či hvězdičku dejte dvě mezery:</string>
-    <string name="formatting_help_lists_body_8">Dát lajk</string>
-    <string name="formatting_help_lists_body_9">A toto</string>
-
-    <string name="formatting_help_checkboxes_title">Zaškrtávací kolonky</string>
-    <string name="formatting_help_checkboxes_body_1">Pro vytvoření zaškrtávací kolonky použijte seznam následovaný závorkami</string>
-    <string name="formatting_help_checkboxes_body_2">Položka 1</string>
-    <string name="formatting_help_checkboxes_body_3">Položka 2</string>
-
-    <string name="formatting_help_structured_documents_title">Strukturované dokumenty</string>
-    <string name="formatting_help_structured_documents_body_1">Někdy je užitečné mít různé úrovně nadpisů a strukturovat tak dokumenty. Začněte s řádky s %1$s pro vytvoření nadpisů. Vícero %2$s za sebou značí nižší úrovně nadpisů.</string>
-    <string name="formatting_help_structured_documents_body_2">Toto je nadpis třetí úrovně</string>
-    <string name="formatting_help_structured_documents_body_3">Je také možné použít jedno %1$s až po %2$s šest pro různé velikosti nadpisů.</string>
-    <string name="formatting_help_structured_documents_body_4">Pokud chcete někoho citovat, použijte před řádkem znak %1$s:</string>
-    <string name="formatting_help_structured_documents_body_5">Představivost je důležitější než znalosti. Znalosti jsou omezené. Představivost zahrnuje celý svět.</string>
-    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
-
-    <string name="formatting_help_code_title">Kód</string>
-    <string name="formatting_help_code_body_1">Ve značkovacím jazyce Markdown existuje mnoho různých způsobů jak opatřovat stylem zápis kódu. Pokud máte bloky kódu přímo v rámci řádku, obklopte je zpětnými jednoduchými uvozovkami (backticks):</string>
-    <string name="formatting_help_code_body_2">Značkovací jazyk Markdown také podporuje něco co se nazývá „oplocení“ kódu, což umožňuje vícero řádek bez odsazení:</string>
-    <string name="formatting_help_code_body_3">A pokud chcete použít zvýrazňování syntaxe, včetně jazyka:</string>
-
-    <string name="formatting_help_tables_title">Tabulky</string>
-    <!-- Column header of a sample table -->
-    <string name="formatting_help_tables_column">Sloupec %1d</string>
-    <!-- Table cell value of a sample table -->
-    <string name="formatting_help_tables_value">Hodnota %1d</string>
-
-    <string name="formatting_help_images_body_1">Je třeba, aby odkazy byly buď kompletní URL adresy, začínající na protokol a doménu, nebo úplné popisy umístění, začínající znakem %1$s.</string>
-    <string name="formatting_help_images_body_2">Aby odpovídalo formátu Markdown, použijte v URL adrese význam zbavujících znaků (escape). To například znamená, že v URL je třeba nahradit mezery za %1$s.</string>
-    <string name="formatting_help_images_title">Obrázky</string>
-    <string name="formatting_help_images_alt">Ozdobný obrázek</string>
-
-    <string name="simple_other">Ostatní</string>
-    <string name="sort_last_modified">Seřadit podle data změny</string>
-    <string name="sort_alphabetically">Seřadit abecedně</string>
-    <string name="error_action_open_battery_settings">Nastavení správy napájení</string>
-    <string name="error_action_open_deck_info">Otevřít informace o aplikaci</string>
-    <string name="error_action_open_network">Nastavení sítě</string>
-    <string name="error_action_update_files_app">Aktualizovat</string>
-    <string name="no_account_configured_yet">Zatím není nastavený žádný účet</string>
-    <string name="no_other_accounts">Zatím jste nenastavili žádné další účty.</string>
-    <string name="choose_account">Zvolte účet</string>
-    <string name="context_based_formatting">Kontextové vyskakovací okno formátování</string>
     <plurals name="remove_account_message">
         <item quantity="one">Odebrání účtu %1$s také nenahraditelně odstraní jednu nesynchronizovanou změnu.</item>
         <item quantity="few">Odebrání účtu %1$s také nenahraditelně odstraní %2$d nesynchronizované změny.</item>
         <item quantity="many">Odebrání účtu %1$s také nenahraditelně odstraní %2$d nesynchronizovaných změn.</item>
         <item quantity="other">Odebrání účtu %1$s také nenahraditelně odstraní %2$d nesynchronizované změny.</item>
     </plurals>
-    <string name="remove_account">Odebrat %1$s</string>
-
-    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Abyste mohli přidat účet je třeba, abyste byli připojení k Internetu.</string>
-    <string name="settings_notes_path">Nastavit složku</string>
-
-    <string name="simple_next">Další</string>
-    <string name="simple_prev">Předchozí</string>
-    <string name="simple_backup">Zazálohovat</string>
-    <string name="backup">Byl zjištěn stav aplikace, ze kterého se nelze zotavit. Prosíme proveďte zálohu svých nesesynchronizovaných změn a vyčistěte úložiště aplikace Poznámky.</string>
-    <string name="settings_notes_path_description">Složka do které ukládat vaše poznámky na vámi využívané instanci Nextcloud</string>
-    <string-array name="settings_file_suffixes">
-        <item translatable="false">.txt</item>
-        <item translatable="false">.md</item>
-    </string-array>
-    <string name="settings_notes_path_success">Složka pro nové poznámky: %1$s</string>
-    <string name="settings_file_suffix">Přípona souboru</string>
-    <string name="settings_file_suffix_description">Přípona souboru pro nové poznámky ve vámi využívané instanci Nextcloud</string>
-    <string name="settings_file_suffix_success">Přípona nového souboru: %1$s</string>
-    <string name="http_status_code">HTTP stavový kód: %1$d</string>
-    <string name="progress_import_indeterminate">Importování poznámek …</string>
-    <string name="progress_import">Importování poznámky %1$d z %2$d…</string>
-    <string name="account_imported">Účet naimportován.</string>
-    <string name="direct_editing_error">Chyba při načítání upravování formátovaného textu</string>
-    <string name="switch_to_plain_editing">Přepnout do upravování neformátovaného textu</string>
-    <string name="action_back">Zpět</string>
-    <string name="set_online_status">Stav online</string>
-    <string name="status_message">Stavová zpráva</string>
-    <string name="whats_your_status">Jaký je váš stav?</string>
-    <string name="clear_status_after">Vyčistit stav po uplynutí</string>
-    <string name="clear">Vyčistit</string>
-    <string name="set_message">Nastavit zprávu</string>
-    <string name="dontClear">Nečistit</string>
-    <string name="today">Dnes</string>
-    <string name="thirtyMinutes">30 minut</string>
-    <string name="oneHour">1 hodiny</string>
-    <string name="fourHours">4 hodiny</string>
-    <string name="thisWeek">Tento týden</string>
-    <string name="error_setting_status_message">Chyba při nastavování stavové zprávy!</string>
-    <string name="file_list_seconds_ago">sekund před</string>
-    <string name="online_status">Stav online</string>
-    <string name="online">Online</string>
-    <string name="dnd">Nerušit</string>
-    <string name="away">Pryč</string>
-    <string name="invisible">Neviditelný</string>
-    <string name="busy">Zaneprázdněn(a)</string>
-    <string name="mute_all_notifications">Ztlumit veškerá upozornění</string>
-    <string name="appear_offline">Jevit se offline</string>
-    <string name="status_set_fail_message">Nepodařilo se nastavit stav!</string>
-    <string name="account_switch_dialog_status_fetching_error_message">Nepodařilo se načíst stav – zkuste to znovu.</string>
-    <string name="ecosystem_apps_display_files">Soubory</string>
-    <string name="ecosystem_apps_display_talk">Talk</string>
-    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
-    <string name="ecosystem_apps_more">Další Nextcloud aplikace</string>
-    <string name="ecosystem_apps_display_more">Další</string>
 </resources>

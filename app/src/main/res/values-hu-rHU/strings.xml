@@ -1,327 +1,376 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Nextcloud Notes - Android Client
-  ~
-  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
-  ~ SPDX-License-Identifier: GPL-3.0-or-later
--->
-<resources>
-    <string name="app_name">Jegyzetek</string>
-    <string name="app_name_long">Nextcloud jegyzetek</string>
-    <string name="label_all_notes">Minden jegyzet</string>
-    <string name="label_favorites">Kedvencek</string>
-    <string name="action_create">Új jegyzet</string>
-    <string name="welcome_text">Üdvözli a %1$s</string>
-    <string name="action_settings">Beállítások</string>
-    <string name="action_trashbin">Törölt jegyzetek</string>
-    <string name="action_search">Keresés</string>
-    <string name="action_sorting_method">Rendezési mód</string>
-    <string name="simple_cancel">Mégse</string>
-    <string name="simple_switch">Kapcsoló</string>
-    <string name="simple_edit">Szerkesztés</string>
-    <string name="simple_remove">Eltávolítás</string>
-    <string name="action_edit_save">Mentés</string>
-    <string name="simple_about">Névjegy</string>
-    <string name="simple_link">Hivatkozás</string>
-    <string name="action_note_deleted">%1$s törölve</string>
-    <string name="action_note_restored">%1$s visszaállítva</string>
-    <string name="action_undo">Visszavonás</string>
-    <string name="action_uncategorized">Kategorizálatlan</string>
-    <string name="menu_delete">Törlés</string>
-    <string name="menu_change_category">Kategória</string>
-    <string name="menu_favorite">Kedvenc</string>
-    <string name="menu_preview">Előnézet</string>
-    <string name="menu_share">Megosztás</string>
-    <string name="common_loading">Betöltés…</string>
-
-
-    <string name="search_in_category">Keresés itt: %1$s</string>
-    <string name="search_in_all">Keresés minden jegyzetben</string>
-
-    <string name="change_category_title">Válasszon kategóriát</string>
-
-    <!-- UsersAndGroupsSearchProvider -->
-    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
-    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
-
-    <!-- NoteShareActivity -->
-    <string name="note_share_activity_activity_icon_content_description">jegyzet tevékenységikonja</string>
-    <string name="note_share_activity_share_icon_content_description">jegyzetmegosztás ikonja</string>
-    <string name="note_share_activity_external_icon_content_description">jegyzet külső megosztásának ikonja</string>
-    <string name="note_share_activity_copy_icon_content_description">jegyzetmegosztás másolási ikonja</string>
-    <string name="note_share_activity_more_icon_content_description">jegyzetmásolás továbbiak ikonja</string>
-    <string name="note_share_activity_icon_content_description">jegyzetmegosztás ikonja</string>
-    <string name="note_share_activity_user_icon_content_description">jegyzetmegosztás felhasználói ikonja</string>
-    <string name="note_share_activity_contact_icon_content_description">jegyzetmegosztás kapcsolati ikonja</string>
-    <string name="note_share_activity_shared_with_you">%1$s megosztotta Önnel</string>
-    <string name="note_share_activity_search_text">Név, egyesített felhőazonosító vagy e-mail-cím…</string>
-    <string name="note_share_activity_share_link">Megosztási hivatkozás</string>
-    <string name="note_share_activity_resharing_not_allowed">Házirend vagy jogosultságok tiltják a továbbosztást</string>
-    <string name="note_share_activity_could_not_retrieve_url">A webcím nem kérhető le</string>
-    <string name="note_share_activity_subject_shared_with_you">Megosztották Önnel: „%1$s”</string>
-    <string name="note_share_activity_contact_no_permission">Névjegy engedély szükséges.</string>
-    <string name="note_share_activity_you_are_not_allowed_to_share">Nincs jogosultsága, hogy nyilvános megosztást hozzon létre.</string>
-
-    <string name="note_share_created">Megosztás létrehozva</string>
-    <string name="note_share_activity_cannot_created">Nincs jogosultsága, hogy megosztást hozzon létre.</string>
-
-
-    <!-- NoteShareDetailActivity -->
-    <string name="note_share_detail_activity_advanced_settings">Speciális beállítások</string>
-    <string name="note_share_detail_activity_share_via_link_hide_download">Letöltés elrejtése</string>
-    <string name="note_share_detail_activity_share_send_note">Jegyzet a címzettnek</string>
-    <string name="note_share_detail_activity_hint_note">Jegyzet</string>
-    <string name="note_share_detail_activity_common_next">Következő</string>
-    <string name="note_share_detail_activity_share_copy_link">Megosztás és hivatkozás másolása</string>
-    <string name="note_share_detail_activity_common_confirm">Megerősítés</string>
-    <string name="note_share_detail_activity_set_note">Jegyzet beállítása</string>
-    <string name="note_share_detail_activity_send_share">Megosztás küldése</string>
-    <string name="note_share_detail_activity_hint_name">Név</string>
-    <string name="note_share_detail_activity_link_name">Hivatkozás neve</string>
-    <string name="note_share_detail_activity_share_link_empty_password">Meg kell adnia a jelszót</string>
-    <string name="note_share_detail_activity_hint_password">Jelszó</string>
-    <string name="note_share_detail_activity_no_share_permission_selected">Válasszon legalább egy jogosultságot a megosztáshoz.</string>
-    <string name="note_share_detail_activity_label_empty">A címke nem lehet üres</string>
-    <string name="note_share_detail_activity_cancel">Mégse</string>
-    <string name="note_share_detail_activity_create_share_error">A megosztás létrehozása sikertelen</string>
-
-    <!-- SharePasswordDialogFragment -->
-    <string name="share_password_dialog_fragment_share_link_optional_password_title">Adjon meg egy jelszót (nem kötelező)</string>
-    <string name="share_password_dialog_fragment_skip">Kihagyás</string>
-
-    <string name="share_link_password_title">Adja meg a jelszót</string>
-    <string name="common_ok">Rendben</string>
-    <string name="common_delete">Törlés</string>
-    <string name="write_email">E-mail küldése</string>
-    <string name="no_browser_available">Nincs elérhető alkalmazás a hivatkozások kezeléséhez</string>
-    <string name="no_email_app_available">Nem érhető el alkalmazás a levélcímek kezeléséhez</string>
-    <string name="no_actions">Nincsenek műveletek ehhez a felhasználóhoz</string>
-
-    <string name="failed_the_remove_share">A megosztás eltávolítása sikertelen</string>
-    <string name="email_pick_failed">Az e-mail-cím kiválasztása sikertelen.</string>
-    <string name="failed_update_ui">A felhasználói felület frissítése sikertelen</string>
-    <string name="file_detail_sharing_fragment_no_contact_app_message">Nem érhető el alkalmazás a névjegyek kiválasztásához</string>
-    <string name="activity_chooser_title">Hivatkozás küldése…</string>
-
-    <string name="activity_chooser_send_file_title">Küldés</string>
-    <string name="share_internal_link_to_folder_text">A belső megosztási hivatkozás csak azon felhasználóknál működik, akik hozzáférnek ehhez a mappához</string>
-    <string name="share_internal_link_to_file_text">A belső megosztási hivatkozás csak azon felhasználóknál működik, akik hozzáférnek ehhez a fájlhoz</string>
-    <string name="share_internal_link">Belső hivatkozás megosztása</string>
-    <string name="delete_link">Hivatkozás törlése</string>
-    <string name="share_settings">Beállítások</string>
-    <string name="share_send_new_email">Új e-mail küldése</string>
-    <string name="share_dialog_title">Megosztás</string>
-    <string name="share_file">%1$s megosztása</string>
-    <string name="share_expiration_date_label">Lejárat: %1$s</string>
-    <string name="share_expiration_date_format">%1$s</string>
-    <string name="share_no_expiration_date_label">Lejárati idő beállítása</string>
-    <string name="share_via_link_section_title">Megosztási hivatkozás</string>
-    <string name="share_via_link_send_link_label">Hivatkozás küldése</string>
-    <string name="share_password_title">Jelszóval védett</string>
-    <string name="share_no_password_title">Jelszó beállítása</string>
-    <string name="share_with_title">Megosztás vele…</string>
-    <string name="share_via_link_unset_password">Kikapcsolás</string>
-    <string name="add_another_public_share_link">További hivatkozás hozzáadása</string>
-    <string name="add_new_public_share">Új nyilvános megosztási hivatkozás hozzáadása</string>
-    <string name="public_share_name">Új név</string>
-    <string name="share_link_with_label">Megosztási hivatkozás (%1$s)</string>
-    <string name="share_link">Megosztási hivatkozás</string>
-    <string name="allow_resharing">Továbbosztás engedélyezése</string>
-    <string name="link_share_view_only">Csak megtekintés</string>
-    <string name="link_share_editing">Szerkesztés</string>
-    <string name="link_share_allow_upload_and_editing">Feltöltés és szerkesztés engedélyezése</string>
-    <string name="link_share_file_drop">Fájllerakat (csak feltöltés)</string>
-    <string name="could_not_retrieve_shares">Nem sikerült lekérni a megosztásokat</string>
-    <string name="share_permission_view_only">Csak megtekintés</string>
-    <string name="share_permission_can_edit">Szerkesztheti</string>
-    <string name="share_permission_file_drop">Fájllerakat</string>
-    <string name="share_permission_secure_file_drop">Biztonságos fájllerakat</string>
-    <string name="share_permissions">Megosztási jogosultságok</string>
-    <plurals name="share_download_limit_description">
-        <item quantity="one">%1$d letöltés maradt</item>
-        <item quantity="other">%1$d letöltés maradt</item>
-    </plurals>
-    <string name="username">Felhasználónév</string>
-    <string name="share_group_clarification">%1$s (csoport)</string>
-    <string name="share_remote_clarification">%1$s (távoli)</string>
-    <string name="share_room_clarification">%1$s(beszélgetés)</string>
-    <string name="share_known_remote_on_clarification">ezen: %1$s</string>
-    <string name="remote">(távoli)</string>
-
-    <string name="copy_link">Hivatkozás másolása</string>
-    <string name="share">Megosztás</string>
-    <string name="clipboard_text_copied">Hivatkozás másolva</string>
-    <string name="clipboard_no_text_to_copy">Nem érkezett szöveg a vágólapra másoláshoz</string>
-    <string name="clipboard_unexpected_error">Váratlan hiba történt a vágólapra másolás során</string>
-    <string name="clipboard_label">Szöveg másolva innen: %1$s</string>
-
-    <string name="listview_updated_today">Ma</string>
-    <string name="listview_updated_yesterday">Tegnap</string>
-    <string name="listview_updated_this_week">Ezen a héten</string>
-    <string name="listview_updated_last_week">Előző hét</string>
-    <string name="listview_updated_this_month">Ebben a hónapban</string>
-    <string name="listview_updated_last_month">Előző hónap</string>
-    <string name="settings_note_mode">Jegyzet módok megjelenítés</string>
-    <string name="settings_note_mode_new">Jegyzetek megnyitási viselkedése</string>
-    <string name="settings_theme_title">Téma</string>
-    <string name="settings_font_title">Fix szélességű betűkészlet</string>
-    <string name="settings_font_size">Betűméret</string>
-    <string name="settings_wifi_only">Szinkronizálás csak Wi-Fin</string>
-    <string name="settings_lock">Alkalmazás zár (Béta)</string>
-    <string name="settings_lock_summary">Eszközhitelesítő-adatok</string>
-    <string name="settings_background_sync">Háttér-szinkronizálás</string>
-    <string name="settings_prevent_screen_capture">A képernyő rögzítésének megakadályozása</string>
-    <string name="settings_show_ecosystem_apps">Alkalmazásváltó megjelenítése</string>
-    <string name="settings_show_ecosystem_apps_summary">Nextcloud alkalmazásjavaslatok a navigációs fejlécben</string>
-    <string name="settings_gridview">Rács nézet</string>
-    <string name="settings_enable_direct_edit">Közvetlen szerkesztés</string>
-    <string name="settings_enable_direct_edit_summary">Ha ki van kapcsolva, akkor a fejlett szerkesztő el lesz rejtve.</string>
-    <string name="settings_keep_screen_on">Képernyő bekapcsolva tartása</string>
-    <string name="settings_keep_screen_on_summary">Jegyzet megtekintése vagy szerkesztése során</string>
-
-    <string name="error_sync">Szinkronizálás sikertelen: %1$s</string>
-    <string name="error_synchronization">Szinkronizálás sikertelen</string>
-    <string name="error_no_network">Nincs hálózati kapcsolat</string>
-    <string name="error_maintenance_mode">A kiszolgáló karbantartási módban van</string>
-    <string name="error_unknown">Ismeretlen hiba történt.</string>
-
-    <string name="about_version_title">Verzió</string>
-    <string name="about_version">Jelenleg ezt a verziót használja: %1$s</string>
-    <string name="about_maintainer_title">Karbantartó</string>
-    <string name="about_developers_title">Fejlesztők</string>
-    <string name="about_developers_original_author">eredeti szerző</string>
-    <string name="about_translators_title">Fordítók</string>
-    <string name="about_translators_transifex">Nextcloud közösség a %1$s</string>
-    <string name="about_testers_title">Tesztelők</string>
-    <string name="about_source_title">Forráskód</string>
-    <string name="about_source">A projekt a GitHubon található: %1$s</string>
-    <string name="about_issues_title">Hibajegyek</string>
-    <string name="about_issues">Hibákat jelenthet, fejlesztési javaslatokat adhat és funkciókat kérhet a GitHub hibakövetőjében: %1$s</string>
-    <string name="about_translate_title">Fordítás</string>
-    <string name="about_translate">Csatlakozzon a Nextcloud csapathoz a Transifexen, és segítsen az alkalmazás lefordításában: %1$s</string>
-    <string name="about_app_license_title">Alkalmazás licence</string>
+  <resources>
     <string name="about_app_license">Ez az alkalmazás GNU GENERAL PUBLIC LICENSE v3+ alatt kerül közreadásra.</string>
     <string name="about_app_license_button">Licenc megtekintése</string>
-    <string name="about_icons_disclaimer_title">Ikonok</string>
-    <string name="about_icons_disclaimer_app_icon">Az eredeti ikon itt található: %1$s.</string>
-    <string name="about_icons_disclaimer_mdi_icons">Az alkalmazás által használt összes többi ikon a Google által készített %1$s része, és azok Apache 2.0 License alatt érhetők el.</string>
-    <string name="about_icons_disclaimer_mdi">Material Design ikonok</string>
-    <string name="about_credits_tab_title">Köszönet</string>
+    <string name="about_app_license_title">Alkalmazás licence</string>
     <string name="about_contribution_tab_title">Közreműködés</string>
+    <string name="about_credits_tab_title">Köszönet</string>
+    <string name="about_developers_original_author">eredeti szerző</string>
+    <string name="about_developers_title">Fejlesztők</string>
+    <string name="about_icons_disclaimer_app_icon">Az eredeti ikon itt található: %1$s.</string>
+    <string name="about_icons_disclaimer_mdi">Material Design ikonok</string>
+    <string name="about_icons_disclaimer_mdi_icons">Az alkalmazás által használt összes többi ikon a Google által készített %1$s része, és azok Apache 2.0 License alatt érhetők el.</string>
+    <string name="about_icons_disclaimer_title">Ikonok</string>
+    <string name="about_issues">Hibákat jelenthet, fejlesztési javaslatokat adhat és funkciókat kérhet a GitHub hibakövetőjében: %1$s</string>
+    <string name="about_issues_title">Hibajegyek</string>
     <string name="about_license_tab_title">Licenc</string>
-
-    <string name="widget_note_list_title">Jegyzetlista</string>
-    <string name="widget_note_list_placeholder">Nincsenek jegyzetek</string>
-    <string name="widget_single_note_title">Egyszeri jegyzet</string>
-    <string name="widget_single_note_placeholder_tv">Jegyzet nem található</string>
-    <string name="widget_not_logged_in">Jelentkezzen be a Jegyzetekbe mielőtt ezt a modult használná</string>
-    <string name="widget_entry_fav_contentDescription">A csillag ikon az elem kedvencként megjelölésére szolgál</string>
-
+    <string name="about_maintainer_title">Karbantartó</string>
+    <string name="about_source">A projekt a GitHubon található: %1$s</string>
+    <string name="about_source_title">Forráskód</string>
+    <string name="about_testers_title">Tesztelők</string>
+    <string name="about_translate">Csatlakozzon a Nextcloud csapathoz a Transifexen, és segítsen az alkalmazás lefordításában: %1$s</string>
+    <string name="about_translate_title">Fordítás</string>
+    <string name="about_translators_title">Fordítók</string>
+    <string name="about_translators_transifex">Nextcloud közösség a %1$s</string>
+    <string name="about_version">Jelenleg ezt a verziót használja: %1$s</string>
+    <string name="about_version_title">Verzió</string>
+    <string name="account_already_imported">A fiók már importálásra került</string>
+    <string name="account_imported">Fiók importálva.</string>
+    <string name="account_switch_dialog_status_fetching_error_message">Nem sikerült lekérni az állapotot, próbálja újra.</string>
+    <string name="action_back">Vissza</string>
+    <string name="action_create">Új jegyzet</string>
+    <string name="action_edit_save">Mentés</string>
+    <string name="action_formatting_help">Formázás</string>
+    <string name="action_note_deleted">%1$s törölve</string>
+    <string name="action_note_restored">%1$s visszaállítva</string>
+    <string name="action_search">Keresés</string>
+    <string name="action_settings">Beállítások</string>
+    <string name="action_sorting_method">Rendezési mód</string>
+    <string name="action_trashbin">Törölt jegyzetek</string>
+    <string name="action_uncategorized">Kategorizálatlan</string>
+    <string name="action_undo">Visszavonás</string>
+    <string name="activity_chooser_send_file_title">Küldés</string>
+    <string name="activity_chooser_title">Hivatkozás küldése…</string>
     <string name="activity_select_single_note">Válasszon jegyzetet</string>
-
-    <string name="shortcut_create_long">Új jegyzet létrehozása</string>
-
-    <string name="pref_value_font_normal">Normál</string>
-    <string name="pref_value_wifi_and_mobile">Szinkronizálás Wi-Fin és mobil adatkapcsolaton</string>
-    <string name="pref_value_lock">Jelszavas védelem</string>
-
-    <string name="simple_error">Hiba</string>
-    <string name="simple_close">Bezárás</string>
-    <string name="simple_copy">Másolás</string>
-    <string name="simple_exception">Kivétel</string>
-    <string name="pin_to_homescreen">Rögzítés a kezdőképernyőre</string>
-    <string name="note_has_been_deleted">A jegyzet már törölve lett</string>
     <string name="add_account">Fiók hozzáadása</string>
-
-    <string name="category_music">Zene</string>
-    <string name="category_movies">Filmek</string>
-    <string name="category_movie">Film</string>
-    <string name="category_work">Munkahelyi</string>
-    <string name="category_todo">Teendő</string>
-    <string name="category_todos">Teendők</string>
+    <string name="add_another_public_share_link">További hivatkozás hozzáadása</string>
+    <string name="add_category">%1$s hozzáadása</string>
+    <string name="add_new_public_share">Új nyilvános megosztási hivatkozás hozzáadása</string>
+    <string name="added_content">„%1$s” hozzáadva</string>
+    <string name="allow_resharing">Továbbosztás engedélyezése</string>
+    <string name="app_name">Jegyzetek</string>
+    <string name="app_name_long">Nextcloud jegyzetek</string>
+    <string name="appear_offline">Megjelenés nem kapcsolódottként</string>
+    <string name="appearance_and_behavior">Megjelenés és viselkedés</string>
+    <string name="append_to_note">Hozzáfűzés a jegyzethez</string>
+    <string name="away">Távol</string>
+    <string name="backup">Az alkalmazás olyan állapotot észlelt, amelyből nem tud helyreállni. Készítsen biztonsági mentést a még nem szinkronizált változtatásokról, és törölje a Jegyzetek alkalmazás tárolóját.</string>
+    <string name="busy">Foglalt</string>
+    <string name="category_bake">Sütés</string>
     <string name="category_checklists">Ellenőrzőlisták</string>
-    <string name="category_tasks">Feladatok</string>
+    <string name="category_credentials">Hitelesítő adat</string>
+    <string name="category_food">Étel</string>
+    <string name="category_game">Játék</string>
+    <string name="category_games">Játékok</string>
+    <string name="category_gift">Ajándék</string>
+    <string name="category_gifts">Ajándékok</string>
+    <string name="category_key">Kulcs</string>
+    <string name="category_keys">Kulcsok</string>
+    <string name="category_movie">Film</string>
+    <string name="category_movies">Filmek</string>
+    <string name="category_music">Zene</string>
+    <string name="category_password">Jelszó</string>
+    <string name="category_passwords">Jelszavak</string>
+    <string name="category_play">Színdarab</string>
+    <string name="category_present">Meglepetés</string>
+    <string name="category_presents">Meglepetések</string>
+    <string name="category_readonly">Csak olvasható</string>
     <string name="category_recipe">Recept</string>
     <string name="category_recipes">Receptek</string>
     <string name="category_restaurant">Étterem</string>
     <string name="category_restaurants">Éttermek</string>
-    <string name="category_food">Étel</string>
-    <string name="category_bake">Sütés</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_key">Kulcs</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_keys">Kulcsok</string>
-    <string name="category_password">Jelszó</string>
-    <string name="category_passwords">Jelszavak</string>
-    <string name="category_credentials">Hitelesítő adat</string>
-    <string name="category_game">Játék</string>
-    <string name="category_games">Játékok</string>
-    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
-    <string name="category_play">Színdarab</string>
-    <string name="category_gift">Ajándék</string>
-    <string name="category_gifts">Ajándékok</string>
-    <!-- Like a gift -->
-    <string name="category_present">Meglepetés</string>
-    <!-- Like a gift -->
-    <string name="category_presents">Meglepetések</string>
-
-    <string name="account_already_imported">A fiók már importálásra került</string>
-    <string name="no_notes_yet">Még nincsenek jegyzetek</string>
-    <string name="no_notes_yet_description">Új jegyzet hozzáadásához kattintson a + gombra</string>
-    <string name="simple_more">Több</string>
-    <string name="simple_move">Áthelyezés</string>
-    <string name="category_readonly">Csak olvasható</string>
-    <string name="no_category">Nincs kategória</string>
-    <string name="add_category">%1$s hozzáadása</string>
-    <string name="simple_checkbox">Jelölőmező</string>
-    <string name="unlock_notes">Jegyzetek feloldása</string>
-    <string name="error_dialog_title">Jaj ne – Most mi legyen? 🙁</string>
-    <string name="error_dialog_tip_token_mismatch_retry">Próbálja kényszeríteni az alkalmazás bezárását, és indítsa újra. Lehet, hogy hibás volt a kapcsolat a többi Nextcloud alkalmazással.</string>
-    <string name="error_dialog_tip_token_mismatch_clear_storage">Ha a probléma továbbra is fennáll, próbálja kiüríteni mindkét alkalmazás tárolóját: a Nextcloudét és a Nextcloud Jegyzetekét.</string>
-    <string name="error_dialog_tip_clear_storage">Törölheti a tárhelyet az alkalmazás adatainak megnyitásával, és válassza a Tárolás → Tárolás törlése lehetőséget. ⚠️ Figyelem: Ezzel törli a még nem szinkronizált jegyzeteket!</string>
-    <string name="error_dialog_tip_files_outdated">A Nextcloud alkalmazása elavultnak tűnik. Keresse fel a Play Áruházat vagy az F-Droidot, hogy beszerezze a legfrissebb verziót.</string>
-    <string name="error_dialog_tip_files_force_stop">Valami hibásnak tűnik a Nextcloud alkalmazásában. Próbálja mindkettőt leállítani, a Nextcloud és a Nextcloud Jegyzetek alkalmazást is.</string>
-    <string name="error_dialog_tip_files_delete_storage">Ha a kényszerített leállítás nem segít, akkor megpróbálhatja mindkét alkalmazás tárolóját kiüríteni.</string>
-    <string name="error_dialog_timeout_instance">A megadott időn belül nem érkezett válasz a kiszolgálótól. Győződjön meg róla, hogy a példánya helyesen fut.</string>
-    <string name="error_dialog_timeout_toggle">Ellenőrizze a hálózati kapcsolatát. Néha a mobil adathasználat vagy a Wi-Fi ki- és bekapcsolása is segíthet.</string>
+    <string name="category_tasks">Feladatok</string>
+    <string name="category_todo">Teendő</string>
+    <string name="category_todos">Teendők</string>
+    <string name="category_work">Munkahelyi</string>
+    <string name="change_category_title">Válasszon kategóriát</string>
+    <string name="change_note_title">Jegyzet címének módosítása</string>
+    <string name="choose_account">Válasszon fiókot</string>
+    <string name="clear">Törlés</string>
+    <string name="clear_status_after">Állapot törlése ennyi idő után</string>
+    <string name="clipboard_label">Szöveg másolva innen: %1$s</string>
+    <string name="clipboard_no_text_to_copy">Nem érkezett szöveg a vágólapra másoláshoz</string>
+    <string name="clipboard_text_copied">Hivatkozás másolva</string>
+    <string name="clipboard_unexpected_error">Váratlan hiba történt a vágólapra másolás során</string>
+    <string name="common_delete">Törlés</string>
+    <string name="common_loading">Betöltés…</string>
+    <string name="common_ok">Rendben</string>
+    <string name="context_based_formatting">Környezetfüggő formázási felbukkanó menü</string>
+    <string name="copy_link">Hivatkozás másolása</string>
+    <string name="could_not_retrieve_shares">Nem sikerült lekérni a megosztásokat</string>
+    <string name="delete_link">Hivatkozás törlése</string>
+    <string name="direct_editing_error">Hiba a formázott szöveges szerkesztő betöltése során</string>
+    <string name="dnd">Ne zavarjanak</string>
+    <string name="dontClear">Ne törölje</string>
+    <string name="ecosystem_apps_display_files">Fájlok</string>
+    <string name="ecosystem_apps_display_more">Továbbiak</string>
+    <string name="ecosystem_apps_display_talk">Beszélgetés</string>
+    <string name="ecosystem_apps_more">További nextcloudos alkalmazások</string>
+    <string name="ecosystem_apps_talk">Nextcloud Beszélgetés</string>
+    <string name="email_pick_failed">Az e-mail-cím kiválasztása sikertelen.</string>
+    <string name="error_action_open_battery_settings">Akkumulátorbeállítások</string>
+    <string name="error_action_open_deck_info">Alkalmazásinformációk megnyitása</string>
+    <string name="error_action_open_network">Hálózati beállítások</string>
+    <string name="error_action_update_files_app">Frissítés</string>
+    <string name="error_dialog_check_maintenance">Ellenőrizze, hogy a Nextcloud példánya nincs-e karbantartási módban.</string>
     <string name="error_dialog_check_server">A kiszolgáló válasza helytelen volt. Ellenőrizze, hogy eléri-e a Jegyzetek alkalmazást a webes felületen keresztül.</string>
     <string name="error_dialog_check_server_logs">Hiba van a Nextcloudja beállításaiban. Nézzen bele a kiszolgáló naplófájljaiba.</string>
-    <string name="error_dialog_check_maintenance">Ellenőrizze, hogy a Nextcloud példánya nincs-e karbantartási módban.</string>
     <string name="error_dialog_insufficient_storage">A Nextcloud példányán elfogyott a szabad hely. Töröljön pár fájlt, hogy szinkronizálhassa a helyi változtatásait a felhővel.</string>
-    <string name="error_dialog_we_need_info">A következő műszaki információkra van szükségünk, hogy segíthessünk:</string>
-    <string name="error_dialog_server_app_enabled">Bizonyosodjon meg róla, hogy telepítette és bekapcsolta a „Jegyzetek” alkalmazást a szerverén.</string>
-    <string name="error_dialog_redirect">A kiszolgálója 302-es HTTP állapotkóddal válaszolt, amely arra utal, hogy nincs telepítve a Jegyzetek alkalmazás a kiszolgálón, vagy valami hibásan van beállítva. Ezt egyéni felülírások is okozhatják, mint egy .htaccess-fájl vagy az OID klienshez hasonló Nextcloud alkalmazások.</string>
-    <string name="error_dialog_tip_disable_battery_optimizations">Kapcsoljon ki minden energiatakarékossági beállítást a Nextcloud valamint a Jegyzetek alkalmazáshoz.</string>
     <string name="error_dialog_min_version">A Jegyzetek androidos alkalmazáshoz a Nextcloud androidos alkalmazásnak legalább a 3.18-as verziója szükséges.</string>
-    <string name="added_content">„%1$s” hozzáadva</string>
-    <string name="shared_text_empty">A megosztott szöveg üres volt</string>
-    <string name="append_to_note">Hozzáfűzés a jegyzethez</string>
-    <string name="change_note_title">Jegyzet címének módosítása</string>
-    <string name="menu_edit_title">Cím szerkesztése</string>
-    <string name="simple_security">Biztonság</string>
-    <string name="appearance_and_behavior">Megjelenés és viselkedés</string>
-    <string name="simple_synchronization">Szinkronizálás</string>
+    <string name="error_dialog_redirect">A kiszolgálója 302-es HTTP állapotkóddal válaszolt, amely arra utal, hogy nincs telepítve a Jegyzetek alkalmazás a kiszolgálón, vagy valami hibásan van beállítva. Ezt egyéni felülírások is okozhatják, mint egy .htaccess-fájl vagy az OID klienshez hasonló Nextcloud alkalmazások.</string>
+    <string name="error_dialog_server_app_enabled">Bizonyosodjon meg róla, hogy telepítette és bekapcsolta a „Jegyzetek” alkalmazást a szerverén.</string>
+    <string name="error_dialog_timeout_instance">A megadott időn belül nem érkezett válasz a kiszolgálótól. Győződjön meg róla, hogy a példánya helyesen fut.</string>
+    <string name="error_dialog_timeout_toggle">Ellenőrizze a hálózati kapcsolatát. Néha a mobil adathasználat vagy a Wi-Fi ki- és bekapcsolása is segíthet.</string>
+    <string name="error_dialog_tip_clear_storage">Törölheti a tárhelyet az alkalmazás adatainak megnyitásával, és válassza a Tárolás → Tárolás törlése lehetőséget. ⚠️ Figyelem: Ezzel törli a még nem szinkronizált jegyzeteket!</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Kapcsoljon ki minden energiatakarékossági beállítást a Nextcloud valamint a Jegyzetek alkalmazáshoz.</string>
+    <string name="error_dialog_tip_files_delete_storage">Ha a kényszerített leállítás nem segít, akkor megpróbálhatja mindkét alkalmazás tárolóját kiüríteni.</string>
+    <string name="error_dialog_tip_files_force_stop">Valami hibásnak tűnik a Nextcloud alkalmazásában. Próbálja mindkettőt leállítani, a Nextcloud és a Nextcloud Jegyzetek alkalmazást is.</string>
+    <string name="error_dialog_tip_files_outdated">A Nextcloud alkalmazása elavultnak tűnik. Keresse fel a Play Áruházat vagy az F-Droidot, hogy beszerezze a legfrissebb verziót.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Ha a probléma továbbra is fennáll, próbálja kiüríteni mindkét alkalmazás tárolóját: a Nextcloudét és a Nextcloud Jegyzetekét.</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Próbálja kényszeríteni az alkalmazás bezárását, és indítsa újra. Lehet, hogy hibás volt a kapcsolat a többi Nextcloud alkalmazással.</string>
+    <string name="error_dialog_title">Jaj ne – Most mi legyen? 🙁</string>
+    <string name="error_dialog_we_need_info">A következő műszaki információkra van szükségünk, hogy segíthessünk:</string>
+    <string name="error_maintenance_mode">A kiszolgáló karbantartási módban van</string>
+    <string name="error_no_network">Nincs hálózati kapcsolat</string>
+    <string name="error_setting_status_message">Hiba az állapotüzenet beállítása során!</string>
+    <string name="error_sync">Szinkronizálás sikertelen: %1$s</string>
+    <string name="error_synchronization">Szinkronizálás sikertelen</string>
+    <string name="error_unknown">Ismeretlen hiba történt.</string>
+    <string name="failed_the_remove_share">A megosztás eltávolítása sikertelen</string>
+    <string name="failed_update_ui">A felhasználói felület frissítése sikertelen</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Nem érhető el alkalmazás a névjegyek kiválasztásához</string>
+    <string name="file_list_seconds_ago">pár másodperce</string>
+    <string name="formatting_help_cbf_body_1">A Jegyzetek alkalmazás egyik célkitűzése, hogy egyszerű legyen, és ne vonja el a figyelmet. Viszont Markdownnal formázhatja a szövegeket. A lent említett példák némelyikénél rövidítéseket is használhat, így anélkül formázhatja meg a jegyzeteket, hogy beírná a lenti kódokat.</string>
+    <string name="formatting_help_cbf_body_2">Csak válasszon ki egy szövegtartományt, vagy érintse meg bárhol a kurzort, és megjelenik egy előugró menü, amely az alapértelmezett %1$s, %2$s, %3$s bejegyzések mellett ezeket is tartalmazza: %4$s, %5$s.</string>
+    <string name="formatting_help_cbf_title">Környezetfüggő formázás</string>
+    <string name="formatting_help_checkboxes_body_1">Jelölőnégyzet létrehozásához használjon egy listát, amelyet zárójelek követnek</string>
+    <string name="formatting_help_checkboxes_body_2">1. elem</string>
+    <string name="formatting_help_checkboxes_body_3">2. elem</string>
+    <string name="formatting_help_checkboxes_title">Jelölőnégyzetek</string>
+    <string name="formatting_help_code_body_1">A Markdown segítségével sokféleképpen jeleníthet meg forráskódot. Ha beágyazott kódblokkok vannak, csomagolja őket fordított idézőjelek közé:</string>
+    <string name="formatting_help_code_body_2">A Markdown támogatja az úgynevezett kódkeretezést is, amely több sort tesz lehetővé behúzás nélkül:</string>
+    <string name="formatting_help_code_body_3">Ha pedig szintaxiskiemelést szeretné használni, adja meg a nyelvet:</string>
+    <string name="formatting_help_code_title">Kód</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_images_alt">Díszes kép</string>
+    <string name="formatting_help_images_body_1">A hivatkozásoknak vagy teljes, protokollal és domainnal kezdődő URL-eknek, vagy %1$s karakterrel kezdődő abszolút útvonalaknak kell lenniük.</string>
+    <string name="formatting_help_images_body_2">Hogy megfeleljen a Markdown formátumnak, használjon feloldó karaktereket a kép URL-ben. Ez például azt jelenti, hogy cserélje erre a szóközöket az URL-ben: %1$s.</string>
+    <string name="formatting_help_images_title">Képek</string>
+    <string name="formatting_help_lists_body_1">Néha számozott listákat szeretne:</string>
+    <string name="formatting_help_lists_body_2">Egy</string>
+    <string name="formatting_help_lists_body_3">Két</string>
+    <string name="formatting_help_lists_body_4">Három</string>
+    <string name="formatting_help_lists_body_5">Néha felsorolást szeretne:</string>
+    <string name="formatting_help_lists_body_6">Kezdjen egy sort kötőjellel</string>
+    <string name="formatting_help_lists_body_7">És ha alpontokat szeretne, rakjon két szóközt a kötőjel vagy csillag elé:</string>
+    <string name="formatting_help_lists_body_8">Így</string>
+    <string name="formatting_help_lists_body_9">És így</string>
+    <string name="formatting_help_lists_title">Listák</string>
+    <string name="formatting_help_structured_documents_body_1">Néha hasznos, ha különböző szintű címsorok vannak a dokumentumok strukturálásához. Címsorok létrehozásához kezdje a sorokat %1$s karakterrel. Több %2$s karakter kisebb címsorméretet jelöl.</string>
+    <string name="formatting_help_structured_documents_body_2">Ez egy harmadik szintű címsor</string>
+    <string name="formatting_help_structured_documents_body_3">Használhat egy %1$s karaktert égészen hat %2$s karakterig a különböző fejlécméretekhez.</string>
+    <string name="formatting_help_structured_documents_body_4">Ha valakit idézni szeretne, használja a %1$s karaktert a sor előtt:</string>
+    <string name="formatting_help_structured_documents_body_5">A képzelet sokkal fontosabb, mint a tudás. A tudás véges. A képzelet felöleli az egész világot.</string>
+    <string name="formatting_help_structured_documents_body_6">– Albert Einstein</string>
+    <string name="formatting_help_structured_documents_title">Strukturált dokumentumok</string>
+    <string name="formatting_help_tables_column">%1d. oszlop</string>
+    <string name="formatting_help_tables_title">Táblázatok</string>
+    <string name="formatting_help_tables_value">%1d. érték</string>
+    <string name="formatting_help_text_body">Nagyon egyszerűen írhat Markdownnal %1$sfélkövéren%1$s, valamint %2$sdőlten%2$s. Át is %3$shúzhat%3$s szavakat, valamint [hivatkozhat a Nextcloudra](https://nextcloud.com).</string>
+    <string name="formatting_help_text_title">Szöveg</string>
+    <string name="fourHours">4 óra</string>
+    <string name="http_status_code">HTTP állapotkód: %1$d</string>
+    <string name="invisible">Láthatatlan</string>
+    <string name="label_all_notes">Minden jegyzet</string>
+    <string name="label_favorites">Kedvencek</string>
+    <string name="link_share_allow_upload_and_editing">Feltöltés és szerkesztés engedélyezése</string>
+    <string name="link_share_editing">Szerkesztés</string>
+    <string name="link_share_file_drop">Fájllerakat (csak feltöltés)</string>
+    <string name="link_share_view_only">Csak megtekintés</string>
+    <string name="listview_updated_last_month">Előző hónap</string>
+    <string name="listview_updated_last_week">Előző hét</string>
+    <string name="listview_updated_this_month">Ebben a hónapban</string>
+    <string name="listview_updated_this_week">Ezen a héten</string>
+    <string name="listview_updated_today">Ma</string>
+    <string name="listview_updated_yesterday">Tegnap</string>
     <string name="manage_accounts">Fiókok kezelése</string>
-    <string name="action_formatting_help">Formázás</string>
-
-
+    <string name="menu_change_category">Kategória</string>
+    <string name="menu_delete">Törlés</string>
+    <string name="menu_edit_title">Cím szerkesztése</string>
+    <string name="menu_favorite">Kedvenc</string>
+    <string name="menu_preview">Előnézet</string>
+    <string name="menu_share">Megosztás</string>
+    <string name="mute_all_notifications">Összes értesítés némítása</string>
+    <string name="no_account_configured_yet">Nincs még fiók beállítva</string>
+    <string name="no_actions">Nincsenek műveletek ehhez a felhasználóhoz</string>
+    <string name="no_browser_available">Nincs elérhető alkalmazás a hivatkozások kezeléséhez</string>
+    <string name="no_category">Nincs kategória</string>
+    <string name="no_email_app_available">Nem érhető el alkalmazás a levélcímek kezeléséhez</string>
+    <string name="no_notes_yet">Még nincsenek jegyzetek</string>
+    <string name="no_notes_yet_description">Új jegyzet hozzáadásához kattintson a + gombra</string>
+    <string name="no_other_accounts">Még egyetlen más fiókot sem állított be.</string>
     <string name="noteMode_plain_edit">Egyszerű szerkesztési mód</string>
     <string name="noteMode_plain_preview">Egyszerű előnézet</string>
-    <string name="noteMode_rich_edit">Formázott szöveges mód</string>
     <string name="noteMode_remember_last">A legutóbbi döntés megjegyzése</string>
-
-    <string-array name="fontSize_entries">
-        <item>Kicsi</item>
-        <item>Közepes</item>
-        <item>Nagy</item>
-    </string-array>
-
-    <string-array name="darkmode_entries">
-        <item>Világos</item>
-        <item>Sötét</item>
-        <item>Rendszer alapértelmezése</item>
-    </string-array>
-
+    <string name="noteMode_rich_edit">Formázott szöveges mód</string>
+    <string name="note_has_been_deleted">A jegyzet már törölve lett</string>
+    <string name="note_share_activity_activity_icon_content_description">jegyzet tevékenységikonja</string>
+    <string name="note_share_activity_cannot_created">Nincs jogosultsága, hogy megosztást hozzon létre.</string>
+    <string name="note_share_activity_contact_icon_content_description">jegyzetmegosztás kapcsolati ikonja</string>
+    <string name="note_share_activity_contact_no_permission">Névjegy engedély szükséges.</string>
+    <string name="note_share_activity_copy_icon_content_description">jegyzetmegosztás másolási ikonja</string>
+    <string name="note_share_activity_could_not_retrieve_url">A webcím nem kérhető le</string>
+    <string name="note_share_activity_external_icon_content_description">jegyzet külső megosztásának ikonja</string>
+    <string name="note_share_activity_icon_content_description">jegyzetmegosztás ikonja</string>
+    <string name="note_share_activity_more_icon_content_description">jegyzetmásolás továbbiak ikonja</string>
+    <string name="note_share_activity_resharing_not_allowed">Házirend vagy jogosultságok tiltják a továbbosztást</string>
+    <string name="note_share_activity_search_text">Név, egyesített felhőazonosító vagy e-mail-cím…</string>
+    <string name="note_share_activity_share_icon_content_description">jegyzetmegosztás ikonja</string>
+    <string name="note_share_activity_share_link">Megosztási hivatkozás</string>
+    <string name="note_share_activity_shared_with_you">%1$s megosztotta Önnel</string>
+    <string name="note_share_activity_subject_shared_with_you">Megosztották Önnel: „%1$s”</string>
+    <string name="note_share_activity_user_icon_content_description">jegyzetmegosztás felhasználói ikonja</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">Nincs jogosultsága, hogy nyilvános megosztást hozzon létre.</string>
+    <string name="note_share_created">Megosztás létrehozva</string>
+    <string name="note_share_detail_activity_advanced_settings">Speciális beállítások</string>
+    <string name="note_share_detail_activity_cancel">Mégse</string>
+    <string name="note_share_detail_activity_common_confirm">Megerősítés</string>
+    <string name="note_share_detail_activity_common_next">Következő</string>
+    <string name="note_share_detail_activity_create_share_error">A megosztás létrehozása sikertelen</string>
+    <string name="note_share_detail_activity_hint_name">Név</string>
+    <string name="note_share_detail_activity_hint_note">Jegyzet</string>
+    <string name="note_share_detail_activity_hint_password">Jelszó</string>
+    <string name="note_share_detail_activity_label_empty">A címke nem lehet üres</string>
+    <string name="note_share_detail_activity_link_name">Hivatkozás neve</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Válasszon legalább egy jogosultságot a megosztáshoz.</string>
+    <string name="note_share_detail_activity_send_share">Megosztás küldése</string>
+    <string name="note_share_detail_activity_set_note">Jegyzet beállítása</string>
+    <string name="note_share_detail_activity_share_copy_link">Megosztás és hivatkozás másolása</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Meg kell adnia a jelszót</string>
+    <string name="note_share_detail_activity_share_send_note">Jegyzet a címzettnek</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Letöltés elrejtése</string>
+    <string name="oneHour">1 óra</string>
+    <string name="online">Elérhető</string>
+    <string name="online_status">Elérhető állapot</string>
+    <string name="pin_to_homescreen">Rögzítés a kezdőképernyőre</string>
+    <string name="pref_value_font_normal">Normál</string>
+    <string name="pref_value_lock">Jelszavas védelem</string>
+    <string name="pref_value_wifi_and_mobile">Szinkronizálás Wi-Fin és mobil adatkapcsolaton</string>
+    <string name="progress_import">%1$d. / %2$d jegyzet importálása…</string>
+    <string name="progress_import_indeterminate">Jegyzetek importálása…</string>
+    <string name="public_share_name">Új név</string>
+    <string name="remote">(távoli)</string>
+    <string name="remove_account">%1$s eltávolítása</string>
+    <string name="search_in_all">Keresés minden jegyzetben</string>
+    <string name="search_in_category">Keresés itt: %1$s</string>
+    <string name="set_message">Üzenet beállítása</string>
+    <string name="set_online_status">Elérhető állapot</string>
+    <string name="settings_background_sync">Háttér-szinkronizálás</string>
+    <string name="settings_enable_direct_edit">Közvetlen szerkesztés</string>
+    <string name="settings_enable_direct_edit_summary">Ha ki van kapcsolva, akkor a fejlett szerkesztő el lesz rejtve.</string>
+    <string name="settings_file_suffix">Fájlkiterjesztés</string>
+    <string name="settings_file_suffix_description">Az új jegyzetek fájlkiterjesztése a Nextcloudban</string>
+    <string name="settings_file_suffix_success">Új fájl utótagja: %1$s</string>
+    <string name="settings_font_size">Betűméret</string>
+    <string name="settings_font_title">Fix szélességű betűkészlet</string>
+    <string name="settings_gridview">Rács nézet</string>
+    <string name="settings_keep_screen_on">Képernyő bekapcsolva tartása</string>
+    <string name="settings_keep_screen_on_summary">Jegyzet megtekintése vagy szerkesztése során</string>
+    <string name="settings_lock">Alkalmazás zár (Béta)</string>
+    <string name="settings_lock_summary">Eszközhitelesítő-adatok</string>
+    <string name="settings_note_mode">Jegyzet módok megjelenítés</string>
+    <string name="settings_note_mode_new">Jegyzetek megnyitási viselkedése</string>
+    <string name="settings_notes_path">Mappa megadása</string>
+    <string name="settings_notes_path_description">A jegyzetek Nextcloudban történő tárolásához használt mappa</string>
+    <string name="settings_notes_path_success">Új jegyzetek mappa: %1$s</string>
+    <string name="settings_prevent_screen_capture">A képernyő rögzítésének megakadályozása</string>
+    <string name="settings_show_ecosystem_apps">Alkalmazásváltó megjelenítése</string>
+    <string name="settings_show_ecosystem_apps_summary">Nextcloud alkalmazásjavaslatok a navigációs fejlécben</string>
+    <string name="settings_theme_title">Téma</string>
+    <string name="settings_wifi_only">Szinkronizálás csak Wi-Fin</string>
+    <string name="share">Megosztás</string>
+    <string name="share_dialog_title">Megosztás</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_expiration_date_label">Lejárat: %1$s</string>
+    <string name="share_file">%1$s megosztása</string>
+    <string name="share_group_clarification">%1$s (csoport)</string>
+    <string name="share_internal_link">Belső hivatkozás megosztása</string>
+    <string name="share_internal_link_to_file_text">A belső megosztási hivatkozás csak azon felhasználóknál működik, akik hozzáférnek ehhez a fájlhoz</string>
+    <string name="share_internal_link_to_folder_text">A belső megosztási hivatkozás csak azon felhasználóknál működik, akik hozzáférnek ehhez a mappához</string>
+    <string name="share_known_remote_on_clarification">ezen: %1$s</string>
+    <string name="share_link">Megosztási hivatkozás</string>
+    <string name="share_link_password_title">Adja meg a jelszót</string>
+    <string name="share_link_with_label">Megosztási hivatkozás (%1$s)</string>
+    <string name="share_no_expiration_date_label">Lejárati idő beállítása</string>
+    <string name="share_no_password_title">Jelszó beállítása</string>
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Adjon meg egy jelszót (nem kötelező)</string>
+    <string name="share_password_dialog_fragment_skip">Kihagyás</string>
+    <string name="share_password_title">Jelszóval védett</string>
+    <string name="share_permission_can_edit">Szerkesztheti</string>
+    <string name="share_permission_file_drop">Fájllerakat</string>
+    <string name="share_permission_secure_file_drop">Biztonságos fájllerakat</string>
+    <string name="share_permission_view_only">Csak megtekintés</string>
+    <string name="share_permissions">Megosztási jogosultságok</string>
+    <string name="share_remote_clarification">%1$s (távoli)</string>
+    <string name="share_room_clarification">%1$s(beszélgetés)</string>
+    <string name="share_send_new_email">Új e-mail küldése</string>
+    <string name="share_settings">Beállítások</string>
+    <string name="share_via_link_section_title">Megosztási hivatkozás</string>
+    <string name="share_via_link_send_link_label">Hivatkozás küldése</string>
+    <string name="share_via_link_unset_password">Kikapcsolás</string>
+    <string name="share_with_title">Megosztás vele…</string>
+    <string name="shared_text_empty">A megosztott szöveg üres volt</string>
+    <string name="shortcut_create_long">Új jegyzet létrehozása</string>
+    <string name="simple_about">Névjegy</string>
+    <string name="simple_backup">Biztonsági mentés</string>
+    <string name="simple_cancel">Mégse</string>
+    <string name="simple_checkbox">Jelölőmező</string>
+    <string name="simple_close">Bezárás</string>
+    <string name="simple_copy">Másolás</string>
+    <string name="simple_edit">Szerkesztés</string>
+    <string name="simple_error">Hiba</string>
+    <string name="simple_exception">Kivétel</string>
+    <string name="simple_link">Hivatkozás</string>
+    <string name="simple_more">Több</string>
+    <string name="simple_move">Áthelyezés</string>
+    <string name="simple_next">Következő</string>
+    <string name="simple_other">Egyéb</string>
+    <string name="simple_prev">Előző</string>
+    <string name="simple_remove">Eltávolítás</string>
+    <string name="simple_security">Biztonság</string>
+    <string name="simple_switch">Kapcsoló</string>
+    <string name="simple_synchronization">Szinkronizálás</string>
+    <string name="sort_alphabetically">Rendezés név szerint</string>
+    <string name="sort_last_modified">Rendezés módosítás dátuma szerint</string>
+    <string name="status_message">Állapotüzenet</string>
+    <string name="status_set_fail_message">Nem sikerült beállítani az állapotot.</string>
+    <string name="switch_to_plain_editing">Átváltás az egyszerű szerkesztésre</string>
+    <string name="thirtyMinutes">30 perc</string>
+    <string name="thisWeek">Ezen a héten</string>
+    <string name="today">Ma</string>
+    <string name="unlock_notes">Jegyzetek feloldása</string>
+    <string name="username">Felhasználónév</string>
+    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
+    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
+    <string name="welcome_text">Üdvözli a %1$s</string>
+    <string name="whats_your_status">Mi az állapota?</string>
+    <string name="widget_entry_fav_contentDescription">A csillag ikon az elem kedvencként megjelölésére szolgál</string>
+    <string name="widget_not_logged_in">Jelentkezzen be a Jegyzetekbe mielőtt ezt a modult használná</string>
+    <string name="widget_note_list_placeholder">Nincsenek jegyzetek</string>
+    <string name="widget_note_list_title">Jegyzetlista</string>
+    <string name="widget_single_note_placeholder_tv">Jegyzet nem található</string>
+    <string name="widget_single_note_title">Egyszeri jegyzet</string>
+    <string name="write_email">E-mail küldése</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Internetkapcsolatra van szükség, hogy fiókot adjon hozzá.</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">%1$d letöltés maradt</item>
+        <item quantity="other">%1$d letöltés maradt</item>
+    </plurals>
     <plurals name="ab_selected">
         <item quantity="one">%d kiválasztva</item>
         <item quantity="other">%d kiválasztva</item>
@@ -338,127 +387,8 @@
         <item quantity="one">%1$d jegyzet tartalmának megosztása</item>
         <item quantity="other">%1$d jegyzet tartalmának megosztása</item>
     </plurals>
-
-    <string name="formatting_help_divider" translateable="false">---</string>
-    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
-    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
-    <string name="formatting_help_codefence" translateable="false">```</string>
-    <string name="formatting_help_codefence_outer" translateable="false">````</string>
-    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
-    <string name="formatting_help_cbf_title">Környezetfüggő formázás</string>
-    <string name="formatting_help_cbf_body_1">A Jegyzetek alkalmazás egyik célkitűzése, hogy egyszerű legyen, és ne vonja el a figyelmet. Viszont Markdownnal formázhatja a szövegeket. A lent említett példák némelyikénél rövidítéseket is használhat, így anélkül formázhatja meg a jegyzeteket, hogy beírná a lenti kódokat.</string>
-    <string name="formatting_help_cbf_body_2">Csak válasszon ki egy szövegtartományt, vagy érintse meg bárhol a kurzort, és megjelenik egy előugró menü, amely az alapértelmezett %1$s, %2$s, %3$s bejegyzések mellett ezeket is tartalmazza: %4$s, %5$s.</string>
-
-    <string name="formatting_help_text_title">Szöveg</string>
-    <string name="formatting_help_text_body">Nagyon egyszerűen írhat Markdownnal %1$sfélkövéren%1$s, valamint %2$sdőlten%2$s. Át is %3$shúzhat%3$s szavakat, valamint [hivatkozhat a Nextcloudra](https://nextcloud.com).</string>
-
-    <string name="formatting_help_lists_title">Listák</string>
-    <string name="formatting_help_lists_body_1">Néha számozott listákat szeretne:</string>
-    <string name="formatting_help_lists_body_2">Egy</string>
-    <string name="formatting_help_lists_body_3">Két</string>
-    <string name="formatting_help_lists_body_4">Három</string>
-    <string name="formatting_help_lists_body_5">Néha felsorolást szeretne:</string>
-    <string name="formatting_help_lists_body_6">Kezdjen egy sort kötőjellel</string>
-    <string name="formatting_help_lists_body_7">És ha alpontokat szeretne, rakjon két szóközt a kötőjel vagy csillag elé:</string>
-    <string name="formatting_help_lists_body_8">Így</string>
-    <string name="formatting_help_lists_body_9">És így</string>
-
-    <string name="formatting_help_checkboxes_title">Jelölőnégyzetek</string>
-    <string name="formatting_help_checkboxes_body_1">Jelölőnégyzet létrehozásához használjon egy listát, amelyet zárójelek követnek</string>
-    <string name="formatting_help_checkboxes_body_2">1. elem</string>
-    <string name="formatting_help_checkboxes_body_3">2. elem</string>
-
-    <string name="formatting_help_structured_documents_title">Strukturált dokumentumok</string>
-    <string name="formatting_help_structured_documents_body_1">Néha hasznos, ha különböző szintű címsorok vannak a dokumentumok strukturálásához. Címsorok létrehozásához kezdje a sorokat %1$s karakterrel. Több %2$s karakter kisebb címsorméretet jelöl.</string>
-    <string name="formatting_help_structured_documents_body_2">Ez egy harmadik szintű címsor</string>
-    <string name="formatting_help_structured_documents_body_3">Használhat egy %1$s karaktert égészen hat %2$s karakterig a különböző fejlécméretekhez.</string>
-    <string name="formatting_help_structured_documents_body_4">Ha valakit idézni szeretne, használja a %1$s karaktert a sor előtt:</string>
-    <string name="formatting_help_structured_documents_body_5">A képzelet sokkal fontosabb, mint a tudás. A tudás véges. A képzelet felöleli az egész világot.</string>
-    <string name="formatting_help_structured_documents_body_6">– Albert Einstein</string>
-
-    <string name="formatting_help_code_title">Kód</string>
-    <string name="formatting_help_code_body_1">A Markdown segítségével sokféleképpen jeleníthet meg forráskódot. Ha beágyazott kódblokkok vannak, csomagolja őket fordított idézőjelek közé:</string>
-    <string name="formatting_help_code_body_2">A Markdown támogatja az úgynevezett kódkeretezést is, amely több sort tesz lehetővé behúzás nélkül:</string>
-    <string name="formatting_help_code_body_3">Ha pedig szintaxiskiemelést szeretné használni, adja meg a nyelvet:</string>
-
-    <string name="formatting_help_tables_title">Táblázatok</string>
-    <!-- Column header of a sample table -->
-    <string name="formatting_help_tables_column">%1d. oszlop</string>
-    <!-- Table cell value of a sample table -->
-    <string name="formatting_help_tables_value">%1d. érték</string>
-
-    <string name="formatting_help_images_body_1">A hivatkozásoknak vagy teljes, protokollal és domainnal kezdődő URL-eknek, vagy %1$s karakterrel kezdődő abszolút útvonalaknak kell lenniük.</string>
-    <string name="formatting_help_images_body_2">Hogy megfeleljen a Markdown formátumnak, használjon feloldó karaktereket a kép URL-ben. Ez például azt jelenti, hogy cserélje erre a szóközöket az URL-ben: %1$s.</string>
-    <string name="formatting_help_images_title">Képek</string>
-    <string name="formatting_help_images_alt">Díszes kép</string>
-
-    <string name="simple_other">Egyéb</string>
-    <string name="sort_last_modified">Rendezés módosítás dátuma szerint</string>
-    <string name="sort_alphabetically">Rendezés név szerint</string>
-    <string name="error_action_open_battery_settings">Akkumulátorbeállítások</string>
-    <string name="error_action_open_deck_info">Alkalmazásinformációk megnyitása</string>
-    <string name="error_action_open_network">Hálózati beállítások</string>
-    <string name="error_action_update_files_app">Frissítés</string>
-    <string name="no_account_configured_yet">Nincs még fiók beállítva</string>
-    <string name="no_other_accounts">Még egyetlen más fiókot sem állított be.</string>
-    <string name="choose_account">Válasszon fiókot</string>
-    <string name="context_based_formatting">Környezetfüggő formázási felbukkanó menü</string>
     <plurals name="remove_account_message">
         <item quantity="one">A(z) %1$s fiók eltávolítása véglegesen töröl egy nem szinkronizált változtatást.</item>
         <item quantity="other">A(z) %1$s fiók eltávolítása véglegesen töröl %2$d nem szinkronizált változtatást.</item>
     </plurals>
-    <string name="remove_account">%1$s eltávolítása</string>
-
-    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Internetkapcsolatra van szükség, hogy fiókot adjon hozzá.</string>
-    <string name="settings_notes_path">Mappa megadása</string>
-
-    <string name="simple_next">Következő</string>
-    <string name="simple_prev">Előző</string>
-    <string name="simple_backup">Biztonsági mentés</string>
-    <string name="backup">Az alkalmazás olyan állapotot észlelt, amelyből nem tud helyreállni. Készítsen biztonsági mentést a még nem szinkronizált változtatásokról, és törölje a Jegyzetek alkalmazás tárolóját.</string>
-    <string name="settings_notes_path_description">A jegyzetek Nextcloudban történő tárolásához használt mappa</string>
-    <string-array name="settings_file_suffixes">
-        <item translatable="false">.txt</item>
-        <item translatable="false">.md</item>
-    </string-array>
-    <string name="settings_notes_path_success">Új jegyzetek mappa: %1$s</string>
-    <string name="settings_file_suffix">Fájlkiterjesztés</string>
-    <string name="settings_file_suffix_description">Az új jegyzetek fájlkiterjesztése a Nextcloudban</string>
-    <string name="settings_file_suffix_success">Új fájl utótagja: %1$s</string>
-    <string name="http_status_code">HTTP állapotkód: %1$d</string>
-    <string name="progress_import_indeterminate">Jegyzetek importálása…</string>
-    <string name="progress_import">%1$d. / %2$d jegyzet importálása…</string>
-    <string name="account_imported">Fiók importálva.</string>
-    <string name="direct_editing_error">Hiba a formázott szöveges szerkesztő betöltése során</string>
-    <string name="switch_to_plain_editing">Átváltás az egyszerű szerkesztésre</string>
-    <string name="action_back">Vissza</string>
-    <string name="set_online_status">Elérhető állapot</string>
-    <string name="status_message">Állapotüzenet</string>
-    <string name="whats_your_status">Mi az állapota?</string>
-    <string name="clear_status_after">Állapot törlése ennyi idő után</string>
-    <string name="clear">Törlés</string>
-    <string name="set_message">Üzenet beállítása</string>
-    <string name="dontClear">Ne törölje</string>
-    <string name="today">Ma</string>
-    <string name="thirtyMinutes">30 perc</string>
-    <string name="oneHour">1 óra</string>
-    <string name="fourHours">4 óra</string>
-    <string name="thisWeek">Ezen a héten</string>
-    <string name="error_setting_status_message">Hiba az állapotüzenet beállítása során!</string>
-    <string name="file_list_seconds_ago">pár másodperce</string>
-    <string name="online_status">Elérhető állapot</string>
-    <string name="online">Elérhető</string>
-    <string name="dnd">Ne zavarjanak</string>
-    <string name="away">Távol</string>
-    <string name="invisible">Láthatatlan</string>
-    <string name="busy">Foglalt</string>
-    <string name="mute_all_notifications">Összes értesítés némítása</string>
-    <string name="appear_offline">Megjelenés nem kapcsolódottként</string>
-    <string name="status_set_fail_message">Nem sikerült beállítani az állapotot.</string>
-    <string name="account_switch_dialog_status_fetching_error_message">Nem sikerült lekérni az állapotot, próbálja újra.</string>
-    <string name="ecosystem_apps_display_files">Fájlok</string>
-    <string name="ecosystem_apps_display_talk">Beszélgetés</string>
-    <string name="ecosystem_apps_talk">Nextcloud Beszélgetés</string>
-    <string name="ecosystem_apps_more">További nextcloudos alkalmazások</string>
-    <string name="ecosystem_apps_display_more">Továbbiak</string>
 </resources>

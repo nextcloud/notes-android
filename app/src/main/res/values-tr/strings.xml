@@ -1,329 +1,377 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Nextcloud Notes - Android Client
-  ~
-  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
-  ~ SPDX-License-Identifier: GPL-3.0-or-later
--->
-<resources>
-    <string name="app_name">Notlar</string>
-    <string name="app_name_long">Nextcloud Notes</string>
-    <string name="label_all_notes">Tum notlar</string>
-    <string name="label_favorites">Sık kullanılanlar</string>
-    <string name="action_create">Not ekle</string>
-    <string name="welcome_text">%1$s uygulamasına hoş geldiniz</string>
-    <string name="action_settings">Ayarlar</string>
-    <string name="action_trashbin">Silinmiş notlar</string>
-    <string name="action_search">Arama</string>
-    <string name="action_sorting_method">Sıralama yöntemi</string>
-    <string name="simple_cancel">İptal</string>
-    <string name="simple_switch">Değiştir</string>
-    <string name="simple_edit">Düzenle</string>
-    <string name="simple_remove">Sil</string>
-    <string name="action_edit_save">Kaydet</string>
-    <string name="simple_about">Hakkında</string>
-    <string name="simple_link">Bağlantı</string>
-    <string name="action_note_deleted">%1$s silindi</string>
-    <string name="action_note_restored">%1$s geri yüklendi</string>
-    <string name="action_undo">Geri al</string>
-    <string name="action_uncategorized">Kategorisiz</string>
-    <string name="menu_delete">Sil</string>
-    <string name="menu_change_category">Kategori</string>
-    <string name="menu_favorite">Sık kullanılanlara ekle</string>
-    <string name="menu_preview">Ön izleme</string>
-    <string name="menu_share">Paylaş</string>
-    <string name="common_loading">Yükleniyor…</string>
-
-
-    <string name="search_in_category">%1$s içinde ara</string>
-    <string name="search_in_all">Tüm notlarda ara</string>
-
-    <string name="change_category_title">Bir kategori seçin</string>
-
-    <!-- UsersAndGroupsSearchProvider -->
-    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
-    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
-
-    <!-- NoteShareActivity -->
-    <string name="note_share_activity_activity_icon_content_description">not işlem simgesi</string>
-    <string name="note_share_activity_share_icon_content_description">not paylaş simgesi</string>
-    <string name="note_share_activity_external_icon_content_description">not dış paylaş simgesi</string>
-    <string name="note_share_activity_copy_icon_content_description">not kopyasını paylaş simgesi</string>
-    <string name="note_share_activity_more_icon_content_description">not diğerlerini paylaş simgesi</string>
-    <string name="note_share_activity_icon_content_description">not paylaş simgesi</string>
-    <string name="note_share_activity_user_icon_content_description">not kullanıcıyı paylaş simgesi</string>
-    <string name="note_share_activity_contact_icon_content_description">not kişiyi paylaş simgesi</string>
-    <string name="note_share_activity_shared_with_you">Sizinle %1$s tarafından paylaşılmış</string>
-    <string name="note_share_activity_search_text">Ad, birleşik bulut kimliği ya da e-posta adresi…</string>
-    <string name="note_share_activity_share_link">Bağlantıyı paylaş</string>
-    <string name="note_share_activity_resharing_not_allowed">Yeniden paylaşımı engelleyen ilke ya da izinler</string>
-    <string name="note_share_activity_could_not_retrieve_url">Adres alınamadı</string>
-    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" ögesi sizinle paylaşıldı</string>
-    <string name="note_share_activity_contact_no_permission">Kişi izinleri gerekli.</string>
-    <string name="note_share_activity_you_are_not_allowed_to_share">Herkese açık bir paylaşım oluşturma izniniz yok.</string>
-
-    <string name="note_share_created">Paylaşım oluşturuldu</string>
-    <string name="note_share_activity_cannot_created">Bir paylaşım oluşturma izniniz yok.</string>
-
-
-    <!-- NoteShareDetailActivity -->
-    <string name="note_share_detail_activity_advanced_settings">Gelişmiş ayarlar</string>
-    <string name="note_share_detail_activity_share_via_link_hide_download">İndirme gizlensin</string>
-    <string name="note_share_detail_activity_share_send_note">Alıcıya not</string>
-    <string name="note_share_detail_activity_hint_note">Not</string>
-    <string name="note_share_detail_activity_common_next">Sonraki</string>
-    <string name="note_share_detail_activity_share_copy_link">Bağlantıyı paylaş ve kopyala</string>
-    <string name="note_share_detail_activity_common_confirm">Onayla</string>
-    <string name="note_share_detail_activity_set_note">Notu ayarla</string>
-    <string name="note_share_detail_activity_send_share">Paylaşımı gönder</string>
-    <string name="note_share_detail_activity_hint_name">Ad</string>
-    <string name="note_share_detail_activity_link_name">Bağlantı adı</string>
-    <string name="note_share_detail_activity_share_link_empty_password">Bir parola yazmalısınız</string>
-    <string name="note_share_detail_activity_hint_password">Parola</string>
-    <string name="note_share_detail_activity_no_share_permission_selected">Lütfen paylaşmak için en az bir izin seçin.</string>
-    <string name="note_share_detail_activity_label_empty">Etiket boş olamaz</string>
-    <string name="note_share_detail_activity_cancel">İptal</string>
-    <string name="note_share_detail_activity_create_share_error">Bir paylaşım oluşturulamadı</string>
-
-    <!-- SharePasswordDialogFragment -->
-    <string name="share_password_dialog_fragment_share_link_optional_password_title">İsteğe bağlı olarak bir parola yazın</string>
-    <string name="share_password_dialog_fragment_skip">Atla</string>
-
-    <string name="share_link_password_title">Bir parola yazın</string>
-    <string name="common_ok">Tamam</string>
-    <string name="common_delete">Sil</string>
-    <string name="write_email">E-posta gönder</string>
-    <string name="no_browser_available">Bağlantıları işleyecek bir uygulama bulunamadı</string>
-    <string name="no_email_app_available">E-posta adreslerini işleyecek bir uygulama bulunamadı</string>
-    <string name="no_actions">Bu kullanıcının bir işlemi yok</string>
-
-    <string name="failed_the_remove_share">Paylaşım kaldırılamadı</string>
-    <string name="email_pick_failed">E-posta adresi alınamadı.</string>
-    <string name="failed_update_ui">Kullanıcı arayüzü güncellenemedi</string>
-    <string name="file_detail_sharing_fragment_no_contact_app_message">Kişilerin seçilmesi için kullanılabilecek bir uygulama yok</string>
-    <string name="activity_chooser_title">Bağlantıyı şuraya gönder…</string>
-
-    <string name="activity_chooser_send_file_title">Gönder</string>
-    <string name="share_internal_link_to_folder_text">İç bağlantı paylaşımı yalnızca bu klasöre erişebilen kullanıcılar için geçerlidir</string>
-    <string name="share_internal_link_to_file_text">İç bağlantı paylaşımı yalnızca bu dosyaya erişebilen kullanıcılar için geçerlidir</string>
-    <string name="share_internal_link">İç bağlantıyı paylaş</string>
-    <string name="delete_link">Bağlantıyı sil</string>
-    <string name="share_settings">Ayarlar</string>
-    <string name="share_send_new_email">Yeni e-posta gönder</string>
-    <string name="share_dialog_title">Paylaşılıyor</string>
-    <string name="share_file">%1$s paylaş</string>
-    <string name="share_expiration_date_label">Geçerlilik süresi %1$s zamanında dolacak</string>
-    <string name="share_expiration_date_format">%1$s</string>
-    <string name="share_no_expiration_date_label">Geçerlilik sonu tarihini ayarla</string>
-    <string name="share_via_link_section_title">Bağlantıyı paylaş</string>
-    <string name="share_via_link_send_link_label">Bağlantı gönder</string>
-    <string name="share_password_title">Parola korumalı</string>
-    <string name="share_no_password_title">Parola ayarla</string>
-    <string name="share_with_title">Şununla paylaş…</string>
-    <string name="share_via_link_unset_password">Ayarı kaldır</string>
-    <string name="add_another_public_share_link">Başka bir bağlantı ekle</string>
-    <string name="add_new_public_share">Yeni herkese açık paylaşım bağlantısı ekle</string>
-    <string name="public_share_name">Yeni ad</string>
-    <string name="share_link_with_label">Bağlantıyı paylaş (%1$s)</string>
-    <string name="share_link">Bağlantıyı paylaş</string>
-    <string name="allow_resharing">Yeniden paylaşılabilsin</string>
-    <string name="link_share_view_only">Yalnızca görüntüleme</string>
-    <string name="link_share_editing">Düzenleme</string>
-    <string name="link_share_allow_upload_and_editing">Yüklemeye ve düzenlemeye izin ver</string>
-    <string name="link_share_file_drop">Dosya bırakma (yalnızca yükleme)</string>
-    <string name="could_not_retrieve_shares">Paylaşımlar alınamadı</string>
-    <string name="share_permission_view_only">Yalnızca görüntüleme</string>
-    <string name="share_permission_can_edit">Düzenleyebilir</string>
-    <string name="share_permission_file_drop">Dosya bırakma</string>
-    <string name="share_permission_secure_file_drop">Güvenli dosya bırakma</string>
-    <string name="share_permissions">Paylaşım izinleri</string>
-    <plurals name="share_download_limit_description">
-        <item quantity="one">%1$d indirme kaldı</item>
-        <item quantity="other">%1$d indirme kaldı</item>
-    </plurals>
-    <string name="username">Kullanıcı adı</string>
-    <string name="share_group_clarification">%1$s (grup)</string>
-    <string name="share_remote_clarification">%1$s (uzak)</string>
-    <string name="share_room_clarification">%1$s (görüşme)</string>
-    <string name="share_known_remote_on_clarification">%1$s zamanında</string>
-    <string name="remote">(uzak)</string>
-
-    <string name="copy_link">Bağlantıyı kopyala</string>
-    <string name="share">Paylaşma</string>
-    <string name="clipboard_text_copied">Bağlantı kopyalandı</string>
-    <string name="clipboard_no_text_to_copy">Panoya kopyalanacak bir yazı alınamadı</string>
-    <string name="clipboard_unexpected_error">Panoya kopyalama sırasında beklenmeyen bir sorun çıktı</string>
-    <string name="clipboard_label">Yazı %1$s kaynağından kopyalandı</string>
-
-    <string name="listview_updated_today">Bugün</string>
-    <string name="listview_updated_yesterday">Dün</string>
-    <string name="listview_updated_this_week">Bu hafta</string>
-    <string name="listview_updated_last_week">Geçen hafta</string>
-    <string name="listview_updated_this_month">Bu ay</string>
-    <string name="listview_updated_last_month">Geçen ay</string>
-    <string name="listview_no_content">Herhangi bir içerik yok</string>
-
-    <string name="settings_note_mode">Notların görüntülenme kipi</string>
-    <string name="settings_note_mode_new">Not açılma davranışı</string>
-    <string name="settings_theme_title">Tema</string>
-    <string name="settings_font_title">Sabit aralıklı yazı türü</string>
-    <string name="settings_font_size">Yazı boyutu</string>
-    <string name="settings_wifi_only">Yalnızca kablosuz ağ ile eşitlensin</string>
-    <string name="settings_lock">Uygulama kilidi (Beta)</string>
-    <string name="settings_lock_summary">Aygıt kimlik doğrulama bilgileri</string>
-    <string name="settings_background_sync">Arka planda eşitleme</string>
-    <string name="settings_prevent_screen_capture">Ekran görüntüsü alınamasın</string>
-    <string name="settings_show_ecosystem_apps">Uygulama değiştiriciyi görüntüle</string>
-    <string name="settings_show_ecosystem_apps_summary">Gezinme başlığında Nextcloud uygulama önerileri</string>
-    <string name="settings_gridview">Tablo görünümü</string>
-    <string name="settings_enable_direct_edit">Doğrudan düzenleme</string>
-    <string name="settings_enable_direct_edit_summary">Kapatıldığındai gelişmiş düzenleyici gizlenir.</string>
-    <string name="settings_keep_screen_on">Ekran açık kalsın</string>
-    <string name="settings_keep_screen_on_summary">Bir notu görüntüler ya da düzenlerken</string>
-
-    <string name="error_sync">Eşitlenemedi: %1$s</string>
-    <string name="error_synchronization">Eşitlenemedi</string>
-    <string name="error_no_network">Ağ bağlantısı yok</string>
-    <string name="error_maintenance_mode">Sunucu bakım kipinde</string>
-    <string name="error_unknown">Bilinmeyen bir sorun çıktı.</string>
-
-    <string name="about_version_title">Sürüm</string>
-    <string name="about_version">Şu anda %1$s kullanıyorsunuz</string>
-    <string name="about_maintainer_title">Sorumlu</string>
-    <string name="about_developers_title">Geliştiriciler</string>
-    <string name="about_developers_original_author">özgün yazar</string>
-    <string name="about_translators_title">Çevirmenler</string>
-    <string name="about_translators_transifex">%1$s üzerindeki Nextcloud topluluğu</string>
-    <string name="about_testers_title">Deneyenler</string>
-    <string name="about_source_title">Kaynak kodu</string>
-    <string name="about_source">Bu proje GitHub üzerinde barındırılmaktadır: %1$s</string>
-    <string name="about_issues_title">Sorunlar</string>
-    <string name="about_issues">Sorun, istek ve önerilerinizi GitHub sorun izleyiciye yazabilirsiniz: %1$s</string>
-    <string name="about_translate_title">Çevirin</string>
-    <string name="about_translate">Transifex üzerindeki Nextcloud takımına katılarak uygulamanın çevirisini yapmamıza yardımcı olabilirsiniz: %1$s</string>
-    <string name="about_app_license_title">Uygulama lisansı</string>
+  <resources>
     <string name="about_app_license">Bu uygulama GNU GENEL KAMU LİSANSI 3 sürüm ve üzeri koşulları altında dağıtılmaktadır.</string>
     <string name="about_app_license_button">Lisansa bakın</string>
-    <string name="about_icons_disclaimer_title">Simgeler</string>
-    <string name="about_icons_disclaimer_app_icon">Özgün simge için %1$s üzerine bakın.</string>
-    <string name="about_icons_disclaimer_mdi_icons">Bu uygulama tarafından kullanılan tüm simgeler %1$s Google Inc. tarafından oluşturulmuştur ve Apache 2.0 Lisansı koşullarına göre lisanslanmıştır.</string>
-    <string name="about_icons_disclaimer_mdi">Material Design Icons</string>
-    <string name="about_credits_tab_title">Emeği geçenler</string>
+    <string name="about_app_license_title">Uygulama lisansı</string>
     <string name="about_contribution_tab_title">Katkı</string>
+    <string name="about_credits_tab_title">Emeği geçenler</string>
+    <string name="about_developers_original_author">özgün yazar</string>
+    <string name="about_developers_title">Geliştiriciler</string>
+    <string name="about_icons_disclaimer_app_icon">Özgün simge için %1$s üzerine bakın.</string>
+    <string name="about_icons_disclaimer_mdi">Material Design Icons</string>
+    <string name="about_icons_disclaimer_mdi_icons">Bu uygulama tarafından kullanılan tüm simgeler %1$s Google Inc. tarafından oluşturulmuştur ve Apache 2.0 Lisansı koşullarına göre lisanslanmıştır.</string>
+    <string name="about_icons_disclaimer_title">Simgeler</string>
+    <string name="about_issues">Sorun, istek ve önerilerinizi GitHub sorun izleyiciye yazabilirsiniz: %1$s</string>
+    <string name="about_issues_title">Sorunlar</string>
     <string name="about_license_tab_title">Lisans</string>
-
-    <string name="widget_note_list_title">Not listesi</string>
-    <string name="widget_note_list_placeholder">Herhangi bir not yok</string>
-    <string name="widget_single_note_title">Tek not</string>
-    <string name="widget_single_note_placeholder_tv">Not bulunamadı</string>
-    <string name="widget_not_logged_in">Bu pano bileşenini kullanabilmek için lütfen Notlar üzerinde oturum açın</string>
-    <string name="widget_entry_fav_contentDescription">Sık kullanılan ögeler için kullanılacak yıldız simgesi</string>
-
+    <string name="about_maintainer_title">Sorumlu</string>
+    <string name="about_source">Bu proje GitHub üzerinde barındırılmaktadır: %1$s</string>
+    <string name="about_source_title">Kaynak kodu</string>
+    <string name="about_testers_title">Deneyenler</string>
+    <string name="about_translate">Transifex üzerindeki Nextcloud takımına katılarak uygulamanın çevirisini yapmamıza yardımcı olabilirsiniz: %1$s</string>
+    <string name="about_translate_title">Çevirin</string>
+    <string name="about_translators_title">Çevirmenler</string>
+    <string name="about_translators_transifex">%1$s üzerindeki Nextcloud topluluğu</string>
+    <string name="about_version">Şu anda %1$s kullanıyorsunuz</string>
+    <string name="about_version_title">Sürüm</string>
+    <string name="account_already_imported">Hesap zaten içe aktarılmış</string>
+    <string name="account_imported">Hesap içe aktarıldı.</string>
+    <string name="account_switch_dialog_status_fetching_error_message">Durum alınamadı. Lütfen yeniden deneyin.</string>
+    <string name="action_back">Geri</string>
+    <string name="action_create">Not ekle</string>
+    <string name="action_edit_save">Kaydet</string>
+    <string name="action_formatting_help">Biçimlendirme</string>
+    <string name="action_note_deleted">%1$s silindi</string>
+    <string name="action_note_restored">%1$s geri yüklendi</string>
+    <string name="action_search">Arama</string>
+    <string name="action_settings">Ayarlar</string>
+    <string name="action_sorting_method">Sıralama yöntemi</string>
+    <string name="action_trashbin">Silinmiş notlar</string>
+    <string name="action_uncategorized">Kategorisiz</string>
+    <string name="action_undo">Geri al</string>
+    <string name="activity_chooser_send_file_title">Gönder</string>
+    <string name="activity_chooser_title">Bağlantıyı şuraya gönder…</string>
     <string name="activity_select_single_note">Not seçin</string>
-
-    <string name="shortcut_create_long">Not ekle</string>
-
-    <string name="pref_value_font_normal">Normal</string>
-    <string name="pref_value_wifi_and_mobile">Kablosuz ağ ve mobil veri ile eşitlensin</string>
-    <string name="pref_value_lock">Parola koruması</string>
-
-    <string name="simple_error">Hata</string>
-    <string name="simple_close">Kapat</string>
-    <string name="simple_copy">Kopyala</string>
-    <string name="simple_exception">İstisna</string>
-    <string name="pin_to_homescreen">Ana sayfaya sabitle</string>
-    <string name="note_has_been_deleted">Bu not silinmiş</string>
     <string name="add_account">Hesap ekle</string>
-
-    <string name="category_music">Müzik</string>
-    <string name="category_movies">Filmler</string>
-    <string name="category_movie">Film</string>
-    <string name="category_work">İş</string>
-    <string name="category_todo">Yapılacak iş</string>
-    <string name="category_todos">Yapılacak işler</string>
+    <string name="add_another_public_share_link">Başka bir bağlantı ekle</string>
+    <string name="add_category">%1$s ekle</string>
+    <string name="add_new_public_share">Yeni herkese açık paylaşım bağlantısı ekle</string>
+    <string name="added_content">\"%1$s\" eklendi</string>
+    <string name="allow_resharing">Yeniden paylaşılabilsin</string>
+    <string name="app_name">Notlar</string>
+    <string name="app_name_long">Nextcloud Notes</string>
+    <string name="appear_offline">Çevrim dışı görün</string>
+    <string name="appearance_and_behavior">Görünüm ve davranış</string>
+    <string name="append_to_note">Nota ekle</string>
+    <string name="away">Uzakta</string>
+    <string name="backup">Uygulamada kurtarılamayacak bir durum bulundu. Lütfen eşitlenmemiş değişikliklerinizi yedekleyin ve Notes uygulamasının depolama alanını temizleyin.</string>
+    <string name="busy">Meşgul</string>
+    <string name="category_bake">Pişirme</string>
     <string name="category_checklists">Denetim listeleri</string>
-    <string name="category_tasks">Görevler</string>
+    <string name="category_credentials">Kimlik doğrulama bilgisi</string>
+    <string name="category_food">Yemek</string>
+    <string name="category_game">Oyun</string>
+    <string name="category_games">Oyunlar</string>
+    <string name="category_gift">Hediye</string>
+    <string name="category_gifts">Hediyeler</string>
+    <string name="category_key">Anahtar</string>
+    <string name="category_keys">Anahtarlar</string>
+    <string name="category_movie">Film</string>
+    <string name="category_movies">Filmler</string>
+    <string name="category_music">Müzik</string>
+    <string name="category_password">Parola</string>
+    <string name="category_passwords">Parolalar</string>
+    <string name="category_play">Oynat</string>
+    <string name="category_present">Armağan</string>
+    <string name="category_presents">Armağanlar</string>
+    <string name="category_readonly">Salt okunur</string>
     <string name="category_recipe">Tarif</string>
     <string name="category_recipes">Tarifler</string>
     <string name="category_restaurant">Restoran</string>
     <string name="category_restaurants">Restoranlar</string>
-    <string name="category_food">Yemek</string>
-    <string name="category_bake">Pişirme</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_key">Anahtar</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_keys">Anahtarlar</string>
-    <string name="category_password">Parola</string>
-    <string name="category_passwords">Parolalar</string>
-    <string name="category_credentials">Kimlik doğrulama bilgisi</string>
-    <string name="category_game">Oyun</string>
-    <string name="category_games">Oyunlar</string>
-    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
-    <string name="category_play">Oynat</string>
-    <string name="category_gift">Hediye</string>
-    <string name="category_gifts">Hediyeler</string>
-    <!-- Like a gift -->
-    <string name="category_present">Armağan</string>
-    <!-- Like a gift -->
-    <string name="category_presents">Armağanlar</string>
-
-    <string name="account_already_imported">Hesap zaten içe aktarılmış</string>
-    <string name="no_notes_yet">Henüz bir not yok</string>
-    <string name="no_notes_yet_description">Yeni bir not eklemek için + tuşuna basın</string>
-    <string name="simple_more">Diğer</string>
-    <string name="simple_move">Taşı</string>
-    <string name="category_readonly">Salt okunur</string>
-    <string name="no_category">Kategori yok</string>
-    <string name="add_category">%1$s ekle</string>
-    <string name="simple_checkbox">İşaret kutusu</string>
-    <string name="unlock_notes">Kilidi açma notları</string>
-    <string name="error_dialog_title">Hayıır. Şimdi ne olacak? 🙁</string>
-    <string name="error_dialog_tip_token_mismatch_retry">Lütfen uygulamayı zorla kapatıp yeniden başlatın. Yanlış bir Nextcloud uygulaması bağlantısı olmalı.</string>
-    <string name="error_dialog_tip_token_mismatch_clear_storage">Sorun sürerse, çözmek için hem Nextcloud uygulamasının hem de Nextcloud Notlar uygulamasının depolamalarını temizlemeyi deneyin.</string>
-    <string name="error_dialog_tip_clear_storage">Depolamayı temizlemek için uygulama bilgilerini açın ve Depolama (Hafıza) → Depolamayı temizle (Veriyi sil) seçin. ⚠️ Uyarı: Bu işlem henüz eşitlenmemiş notları silmeyecek!</string>
-    <string name="error_dialog_tip_files_outdated">Nextcloud uygulamanız eski görünüyor. Lütfen son sürümü almak için Play Store ya da F-Droid mağazalarına gidin.</string>
-    <string name="error_dialog_tip_files_force_stop">Nextcloud uygulamanızda bir sorun var gibi görünüyor. Lütfen hem Nextcloud uygulamasını hem de Nextcloud Notlar uygulamasını zorla kapatmayı deneyin.</string>
-    <string name="error_dialog_tip_files_delete_storage">Zorla durdurmak sorunu çözmediyse iki uygulamanın da depolamalarını temizlemeyi deneyebilirsiniz.</string>
-    <string name="error_dialog_timeout_instance">Belirtilen sürede sunucunuzdan bir yanıt alınamadı. Lütfen kopyanızın düzgün çalıştığından emin olun.</string>
-    <string name="error_dialog_timeout_toggle">Ağ bağlantınızı denetleyin. Mobil veriye geçmek ya da kablosuz ağ bağlantısını kapatıp açmak yardımcı olabilir.</string>
+    <string name="category_tasks">Görevler</string>
+    <string name="category_todo">Yapılacak iş</string>
+    <string name="category_todos">Yapılacak işler</string>
+    <string name="category_work">İş</string>
+    <string name="change_category_title">Bir kategori seçin</string>
+    <string name="change_note_title">Not başlığını değiştir</string>
+    <string name="choose_account">Hesap seçin</string>
+    <string name="clear">Temizle</string>
+    <string name="clear_status_after">Durum şu kadar sonra kaldırılsın</string>
+    <string name="clipboard_label">Yazı %1$s kaynağından kopyalandı</string>
+    <string name="clipboard_no_text_to_copy">Panoya kopyalanacak bir yazı alınamadı</string>
+    <string name="clipboard_text_copied">Bağlantı kopyalandı</string>
+    <string name="clipboard_unexpected_error">Panoya kopyalama sırasında beklenmeyen bir sorun çıktı</string>
+    <string name="common_delete">Sil</string>
+    <string name="common_loading">Yükleniyor…</string>
+    <string name="common_ok">Tamam</string>
+    <string name="context_based_formatting">Bağlam tabanlı biçimlendirme açılan penceresi</string>
+    <string name="copy_link">Bağlantıyı kopyala</string>
+    <string name="could_not_retrieve_shares">Paylaşımlar alınamadı</string>
+    <string name="delete_link">Bağlantıyı sil</string>
+    <string name="direct_editing_error">Zengin düzenleme yüklenirken sorun çıktı</string>
+    <string name="dnd">Rahatsız etmeyin</string>
+    <string name="dontClear">Kaldırılmasın</string>
+    <string name="ecosystem_apps_display_files">Dosyalar</string>
+    <string name="ecosystem_apps_display_more">Diğer</string>
+    <string name="ecosystem_apps_display_talk">Konuş</string>
+    <string name="ecosystem_apps_more">Diğer Nextcloud uygulamaları</string>
+    <string name="ecosystem_apps_talk">Nextcloud Konuş</string>
+    <string name="email_pick_failed">E-posta adresi alınamadı.</string>
+    <string name="error_action_open_battery_settings">Pil ayarları</string>
+    <string name="error_action_open_deck_info">Uygulama bilgilerini aç</string>
+    <string name="error_action_open_network">Ağ ayarları</string>
+    <string name="error_action_update_files_app">Güncelle</string>
+    <string name="error_dialog_check_maintenance">Nextcloud kopyanızın bakım kipinde olmadığından emin olun.</string>
     <string name="error_dialog_check_server">Sunucunuz doğru şekilde yanıt vermedi. Lütfen notlarınıza site arayüzü üzerinden erişebiliyor musunuz diye bakın.</string>
     <string name="error_dialog_check_server_logs">Nextcloud kurulumunuz ile ilgili bir sorun var. Lütfen sunucu günlük dosyalarını inceleyin.</string>
-    <string name="error_dialog_check_maintenance">Nextcloud kopyanızın bakım kipinde olmadığından emin olun.</string>
     <string name="error_dialog_insufficient_storage">Nextcloud kopyanızda boş depolama alanı kalmamış. Lütfen yerel değişikliklerinizi bulut ile eşitlemek için bazı dosyaları silerek yer açın.</string>
-    <string name="error_dialog_we_need_info">Size yardımcı olabilmemiz için şu teknik bilgilere gerek duyacağız:</string>
-    <string name="error_dialog_server_app_enabled">Lütfen sunucunuzda \"Notlar\" uygulamasının kurulu ve kullanıma alınmış olduğundan emin olun.</string>
-    <string name="error_dialog_redirect">Sunucunuz, üzerine Notlar uygulamasının kurulmadığı ya da bir şeyin yanlış yapılandırıldığı anlamına gelen HTTP 302 durum kodu ile yanıt verdi. Bu durum, bir .htaccess dosyasındaki özel kısıtlamalardan ya da OID İstemcisi gibi Nextcloud uygulamalarından kaynaklanabilir.</string>
-    <string name="error_dialog_tip_disable_battery_optimizations">Lütfen Nextcloud ve Notlar uygulaması için tüm pil iyileştirmelerini kapatın.</string>
     <string name="error_dialog_min_version">Notlar Android uygulamasının çalışması için Nextcloud Android uygulamasının en az 3.18 sürümü gereklidir</string>
-    <string name="added_content">\"%1$s\" eklendi</string>
-    <string name="shared_text_empty">Paylaşılan yazı boş</string>
-    <string name="append_to_note">Nota ekle</string>
-    <string name="change_note_title">Not başlığını değiştir</string>
-    <string name="menu_edit_title">Başlığı düzenle</string>
-    <string name="simple_security">Güvenlik</string>
-    <string name="appearance_and_behavior">Görünüm ve davranış</string>
-    <string name="simple_synchronization">Eşitleme</string>
+    <string name="error_dialog_redirect">Sunucunuz, üzerine Notlar uygulamasının kurulmadığı ya da bir şeyin yanlış yapılandırıldığı anlamına gelen HTTP 302 durum kodu ile yanıt verdi. Bu durum, bir .htaccess dosyasındaki özel kısıtlamalardan ya da OID İstemcisi gibi Nextcloud uygulamalarından kaynaklanabilir.</string>
+    <string name="error_dialog_server_app_enabled">Lütfen sunucunuzda \"Notlar\" uygulamasının kurulu ve kullanıma alınmış olduğundan emin olun.</string>
+    <string name="error_dialog_timeout_instance">Belirtilen sürede sunucunuzdan bir yanıt alınamadı. Lütfen kopyanızın düzgün çalıştığından emin olun.</string>
+    <string name="error_dialog_timeout_toggle">Ağ bağlantınızı denetleyin. Mobil veriye geçmek ya da kablosuz ağ bağlantısını kapatıp açmak yardımcı olabilir.</string>
+    <string name="error_dialog_tip_clear_storage">Depolamayı temizlemek için uygulama bilgilerini açın ve Depolama (Hafıza) → Depolamayı temizle (Veriyi sil) seçin. ⚠️ Uyarı: Bu işlem henüz eşitlenmemiş notları silmeyecek!</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Lütfen Nextcloud ve Notlar uygulaması için tüm pil iyileştirmelerini kapatın.</string>
+    <string name="error_dialog_tip_files_delete_storage">Zorla durdurmak sorunu çözmediyse iki uygulamanın da depolamalarını temizlemeyi deneyebilirsiniz.</string>
+    <string name="error_dialog_tip_files_force_stop">Nextcloud uygulamanızda bir sorun var gibi görünüyor. Lütfen hem Nextcloud uygulamasını hem de Nextcloud Notlar uygulamasını zorla kapatmayı deneyin.</string>
+    <string name="error_dialog_tip_files_outdated">Nextcloud uygulamanız eski görünüyor. Lütfen son sürümü almak için Play Store ya da F-Droid mağazalarına gidin.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Sorun sürerse, çözmek için hem Nextcloud uygulamasının hem de Nextcloud Notlar uygulamasının depolamalarını temizlemeyi deneyin.</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Lütfen uygulamayı zorla kapatıp yeniden başlatın. Yanlış bir Nextcloud uygulaması bağlantısı olmalı.</string>
+    <string name="error_dialog_title">Hayıır. Şimdi ne olacak? 🙁</string>
+    <string name="error_dialog_we_need_info">Size yardımcı olabilmemiz için şu teknik bilgilere gerek duyacağız:</string>
+    <string name="error_maintenance_mode">Sunucu bakım kipinde</string>
+    <string name="error_no_network">Ağ bağlantısı yok</string>
+    <string name="error_setting_status_message">Durum iletisi ayarlanırken sorun çıktı!</string>
+    <string name="error_sync">Eşitlenemedi: %1$s</string>
+    <string name="error_synchronization">Eşitlenemedi</string>
+    <string name="error_unknown">Bilinmeyen bir sorun çıktı.</string>
+    <string name="failed_the_remove_share">Paylaşım kaldırılamadı</string>
+    <string name="failed_update_ui">Kullanıcı arayüzü güncellenemedi</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Kişilerin seçilmesi için kullanılabilecek bir uygulama yok</string>
+    <string name="file_list_seconds_ago">saniye önce</string>
+    <string name="formatting_help_cbf_body_1">Notlar uygulamasının önemli bir tasarım amacı, dikkat dağıtmayan bir araç sağlamaktır. Yine de yazılarınızı Markdown kullanarak biçimlendirebilirsiniz. Aşağıdaki örneklerden bazılarında kısayol tuşlarını kullanarak notlarınızı aşağıdaki kodları yazmadan biçimlendirebilirsiniz.</string>
+    <string name="formatting_help_cbf_body_2">Yalnızca bir yazı bölümü seçerek ya da herhangi bir konumda imlece dokunarak varsayılan kayıtların yanında açılan menüden %1$s, %2$s, %3$s, %4$s gibi kayıtlar ya da %5$s seçenekleri kullanabilirsiniz.</string>
+    <string name="formatting_help_cbf_title">Bağlama göre biçimlendirme</string>
+    <string name="formatting_help_checkboxes_body_1">Bir işaret kutusu eklemek için köşeli parantezler ile biten bir liste kullanın</string>
+    <string name="formatting_help_checkboxes_body_2">1. öge</string>
+    <string name="formatting_help_checkboxes_body_3">2. öge</string>
+    <string name="formatting_help_checkboxes_title">İşaret kutuları</string>
+    <string name="formatting_help_code_body_1">Markdown ile kod yazmanın birçok farklı yolu vardır. Satır arası kod bloklarınız varsa, bunları ters tırnaklar arasında yazın:</string>
+    <string name="formatting_help_code_body_2">Markdown ayrıca kod çiti olarak adlandırılan ve girinti olmadan birden fazla satıra izin veren bir şeyi destekler:</string>
+    <string name="formatting_help_code_body_3">Ve söz dizimi vurgulamasını kullanmak istiyorsanız, dili ekleyin:</string>
+    <string name="formatting_help_code_title">Kod</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_images_alt">Süslü görsel</string>
+    <string name="formatting_help_images_body_1">Bağlantılar, bir iletişim kuralı ve etki alanı ile başlayan tam adresler ya da %1$s karakteriyle başlayan mutlak yollar olmalıdır.</string>
+    <string name="formatting_help_images_body_2">Markdown biçimine uymak için lütfen görsel adresinde kaçış karakterlerini kullanın. Örneğin görsel adresindeki boşlukları %1$s ile değiştirmelisiniz.</string>
+    <string name="formatting_help_images_title">Görseller</string>
+    <string name="formatting_help_lists_body_1">Bazen listelerin numaralı olmasını istersiniz:</string>
+    <string name="formatting_help_lists_body_2">Bir</string>
+    <string name="formatting_help_lists_body_3">İki</string>
+    <string name="formatting_help_lists_body_4">Üç</string>
+    <string name="formatting_help_lists_body_5">Bazen listelerde madde imi kullanılmasını istersiniz:</string>
+    <string name="formatting_help_lists_body_6">Bir satıra tire ile başlayın</string>
+    <string name="formatting_help_lists_body_7">Alt imler için tire ya da yıldız önüne iki boşluk ekleyin:</string>
+    <string name="formatting_help_lists_body_8">Bunun gibi</string>
+    <string name="formatting_help_lists_body_9">Ve bunun gibi</string>
+    <string name="formatting_help_lists_title">Listeler</string>
+    <string name="formatting_help_structured_documents_body_1">Bazen belgelerinizi yapılandırmak için farklı düzeylerde başlıklar kullanmak yararlı olabilir. Başlık oluşturmak için satırlara %1$s ile başlayın. Bir satırda %2$s gibi birden çok simge kullanılması başlık düzeyini ve boyutunu azaltır.</string>
+    <string name="formatting_help_structured_documents_body_2">Bu üçüncü düzey bir başlık</string>
+    <string name="formatting_help_structured_documents_body_3">Farklı başlık boyutları için bir %1$s ile altı %2$s arasında seçim yapabilirsiniz.</string>
+    <string name="formatting_help_structured_documents_body_4">Birinden alıntı yapmak isterseniz satırdan önce %1$s karakterini kullanın:</string>
+    <string name="formatting_help_structured_documents_body_5">Hayal gücü bilgiden daha önemlidir. Bilgi sınırlıyken, hayal gücü tüm dünyayı kapsar.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+    <string name="formatting_help_structured_documents_title">Yapılandırılmış belgeler</string>
+    <string name="formatting_help_tables_column">Sütun: %1d</string>
+    <string name="formatting_help_tables_title">Tablolar</string>
+    <string name="formatting_help_tables_value">Değer: %1d</string>
+    <string name="formatting_help_text_body">Markdown ile bazı sözcükleri %1$skalın%1$s ya da %2$syatık%2$s yapmak çok kolaydır. Bazı sözcüklerin %3$süzerini çizebilir%3$s ve [Nextcloud bağlantısı](https://nextcloud.com) gibi bağlantı verebilirsiniz.</string>
+    <string name="formatting_help_text_title">Yazı</string>
+    <string name="fourHours">4 saat</string>
+    <string name="http_status_code">HTTP durum kodu: %1$d</string>
+    <string name="invisible">Görünmez</string>
+    <string name="label_all_notes">Tum notlar</string>
+    <string name="label_favorites">Sık kullanılanlar</string>
+    <string name="link_share_allow_upload_and_editing">Yüklemeye ve düzenlemeye izin ver</string>
+    <string name="link_share_editing">Düzenleme</string>
+    <string name="link_share_file_drop">Dosya bırakma (yalnızca yükleme)</string>
+    <string name="link_share_view_only">Yalnızca görüntüleme</string>
+    <string name="listview_no_content">Herhangi bir içerik yok</string>
+    <string name="listview_updated_last_month">Geçen ay</string>
+    <string name="listview_updated_last_week">Geçen hafta</string>
+    <string name="listview_updated_this_month">Bu ay</string>
+    <string name="listview_updated_this_week">Bu hafta</string>
+    <string name="listview_updated_today">Bugün</string>
+    <string name="listview_updated_yesterday">Dün</string>
     <string name="manage_accounts">Hesap yönetimi</string>
-    <string name="action_formatting_help">Biçimlendirme</string>
-
-
+    <string name="menu_change_category">Kategori</string>
+    <string name="menu_delete">Sil</string>
+    <string name="menu_edit_title">Başlığı düzenle</string>
+    <string name="menu_favorite">Sık kullanılanlara ekle</string>
+    <string name="menu_preview">Ön izleme</string>
+    <string name="menu_share">Paylaş</string>
+    <string name="mute_all_notifications">Tüm bildirimleri kapat</string>
+    <string name="no_account_configured_yet">Henüz bir hesap yapılandırılmamış</string>
+    <string name="no_actions">Bu kullanıcının bir işlemi yok</string>
+    <string name="no_browser_available">Bağlantıları işleyecek bir uygulama bulunamadı</string>
+    <string name="no_category">Kategori yok</string>
+    <string name="no_email_app_available">E-posta adreslerini işleyecek bir uygulama bulunamadı</string>
+    <string name="no_notes_yet">Henüz bir not yok</string>
+    <string name="no_notes_yet_description">Yeni bir not eklemek için + tuşuna basın</string>
+    <string name="no_other_accounts">Henüz başka bir hesap yapılandırmamışsınız.</string>
     <string name="noteMode_plain_edit">Yalın düzenleme kipi</string>
     <string name="noteMode_plain_preview">Yalın ön izleme</string>
-    <string name="noteMode_rich_edit">Zengin yazı düzenleme kipi</string>
     <string name="noteMode_remember_last">Son seçimim hatırlansın</string>
-
-    <string-array name="fontSize_entries">
-        <item>Küçük</item>
-        <item>Orta</item>
-        <item>Büyük</item>
-    </string-array>
-
-    <string-array name="darkmode_entries">
-        <item>Açık</item>
-        <item>Koyu</item>
-        <item>Sistem varsayılanı</item>
-    </string-array>
-
+    <string name="noteMode_rich_edit">Zengin yazı düzenleme kipi</string>
+    <string name="note_has_been_deleted">Bu not silinmiş</string>
+    <string name="note_share_activity_activity_icon_content_description">not işlem simgesi</string>
+    <string name="note_share_activity_cannot_created">Bir paylaşım oluşturma izniniz yok.</string>
+    <string name="note_share_activity_contact_icon_content_description">not kişiyi paylaş simgesi</string>
+    <string name="note_share_activity_contact_no_permission">Kişi izinleri gerekli.</string>
+    <string name="note_share_activity_copy_icon_content_description">not kopyasını paylaş simgesi</string>
+    <string name="note_share_activity_could_not_retrieve_url">Adres alınamadı</string>
+    <string name="note_share_activity_external_icon_content_description">not dış paylaş simgesi</string>
+    <string name="note_share_activity_icon_content_description">not paylaş simgesi</string>
+    <string name="note_share_activity_more_icon_content_description">not diğerlerini paylaş simgesi</string>
+    <string name="note_share_activity_resharing_not_allowed">Yeniden paylaşımı engelleyen ilke ya da izinler</string>
+    <string name="note_share_activity_search_text">Ad, birleşik bulut kimliği ya da e-posta adresi…</string>
+    <string name="note_share_activity_share_icon_content_description">not paylaş simgesi</string>
+    <string name="note_share_activity_share_link">Bağlantıyı paylaş</string>
+    <string name="note_share_activity_shared_with_you">Sizinle %1$s tarafından paylaşılmış</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" ögesi sizinle paylaşıldı</string>
+    <string name="note_share_activity_user_icon_content_description">not kullanıcıyı paylaş simgesi</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">Herkese açık bir paylaşım oluşturma izniniz yok.</string>
+    <string name="note_share_created">Paylaşım oluşturuldu</string>
+    <string name="note_share_detail_activity_advanced_settings">Gelişmiş ayarlar</string>
+    <string name="note_share_detail_activity_cancel">İptal</string>
+    <string name="note_share_detail_activity_common_confirm">Onayla</string>
+    <string name="note_share_detail_activity_common_next">Sonraki</string>
+    <string name="note_share_detail_activity_create_share_error">Bir paylaşım oluşturulamadı</string>
+    <string name="note_share_detail_activity_hint_name">Ad</string>
+    <string name="note_share_detail_activity_hint_note">Not</string>
+    <string name="note_share_detail_activity_hint_password">Parola</string>
+    <string name="note_share_detail_activity_label_empty">Etiket boş olamaz</string>
+    <string name="note_share_detail_activity_link_name">Bağlantı adı</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Lütfen paylaşmak için en az bir izin seçin.</string>
+    <string name="note_share_detail_activity_send_share">Paylaşımı gönder</string>
+    <string name="note_share_detail_activity_set_note">Notu ayarla</string>
+    <string name="note_share_detail_activity_share_copy_link">Bağlantıyı paylaş ve kopyala</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Bir parola yazmalısınız</string>
+    <string name="note_share_detail_activity_share_send_note">Alıcıya not</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">İndirme gizlensin</string>
+    <string name="oneHour">1 saat</string>
+    <string name="online">Çevrim içi</string>
+    <string name="online_status">Çevrim içi durumu</string>
+    <string name="pin_to_homescreen">Ana sayfaya sabitle</string>
+    <string name="pref_value_font_normal">Normal</string>
+    <string name="pref_value_lock">Parola koruması</string>
+    <string name="pref_value_wifi_and_mobile">Kablosuz ağ ve mobil veri ile eşitlensin</string>
+    <string name="progress_import">Not %1$d / %2$d içe aktarılıyor…</string>
+    <string name="progress_import_indeterminate">Notlar içe aktarılıyor…</string>
+    <string name="public_share_name">Yeni ad</string>
+    <string name="remote">(uzak)</string>
+    <string name="remove_account">%1$s sil</string>
+    <string name="search_in_all">Tüm notlarda ara</string>
+    <string name="search_in_category">%1$s içinde ara</string>
+    <string name="set_message">İletiyi ayarla</string>
+    <string name="set_online_status">Çevrim içi durumu</string>
+    <string name="settings_background_sync">Arka planda eşitleme</string>
+    <string name="settings_enable_direct_edit">Doğrudan düzenleme</string>
+    <string name="settings_enable_direct_edit_summary">Kapatıldığındai gelişmiş düzenleyici gizlenir.</string>
+    <string name="settings_file_suffix">Dosya uzantısı</string>
+    <string name="settings_file_suffix_description">Nextcloud üzerinde notlarınız için kullanılacak dosya uzantısı </string>
+    <string name="settings_file_suffix_success">Yeni dosya son eki: %1$s</string>
+    <string name="settings_font_size">Yazı boyutu</string>
+    <string name="settings_font_title">Sabit aralıklı yazı türü</string>
+    <string name="settings_gridview">Tablo görünümü</string>
+    <string name="settings_keep_screen_on">Ekran açık kalsın</string>
+    <string name="settings_keep_screen_on_summary">Bir notu görüntüler ya da düzenlerken</string>
+    <string name="settings_lock">Uygulama kilidi (Beta)</string>
+    <string name="settings_lock_summary">Aygıt kimlik doğrulama bilgileri</string>
+    <string name="settings_note_mode">Notların görüntülenme kipi</string>
+    <string name="settings_note_mode_new">Not açılma davranışı</string>
+    <string name="settings_notes_path">Klasörü ayarla</string>
+    <string name="settings_notes_path_description">Nextcloud üzerinde notlarınızın kaydedileceği klasör </string>
+    <string name="settings_notes_path_success">Yeni notlar klasörü: %1$s</string>
+    <string name="settings_prevent_screen_capture">Ekran görüntüsü alınamasın</string>
+    <string name="settings_show_ecosystem_apps">Uygulama değiştiriciyi görüntüle</string>
+    <string name="settings_show_ecosystem_apps_summary">Gezinme başlığında Nextcloud uygulama önerileri</string>
+    <string name="settings_theme_title">Tema</string>
+    <string name="settings_wifi_only">Yalnızca kablosuz ağ ile eşitlensin</string>
+    <string name="share">Paylaşma</string>
+    <string name="share_dialog_title">Paylaşılıyor</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_expiration_date_label">Geçerlilik süresi %1$s zamanında dolacak</string>
+    <string name="share_file">%1$s paylaş</string>
+    <string name="share_group_clarification">%1$s (grup)</string>
+    <string name="share_internal_link">İç bağlantıyı paylaş</string>
+    <string name="share_internal_link_to_file_text">İç bağlantı paylaşımı yalnızca bu dosyaya erişebilen kullanıcılar için geçerlidir</string>
+    <string name="share_internal_link_to_folder_text">İç bağlantı paylaşımı yalnızca bu klasöre erişebilen kullanıcılar için geçerlidir</string>
+    <string name="share_known_remote_on_clarification">%1$s zamanında</string>
+    <string name="share_link">Bağlantıyı paylaş</string>
+    <string name="share_link_password_title">Bir parola yazın</string>
+    <string name="share_link_with_label">Bağlantıyı paylaş (%1$s)</string>
+    <string name="share_no_expiration_date_label">Geçerlilik sonu tarihini ayarla</string>
+    <string name="share_no_password_title">Parola ayarla</string>
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">İsteğe bağlı olarak bir parola yazın</string>
+    <string name="share_password_dialog_fragment_skip">Atla</string>
+    <string name="share_password_title">Parola korumalı</string>
+    <string name="share_permission_can_edit">Düzenleyebilir</string>
+    <string name="share_permission_file_drop">Dosya bırakma</string>
+    <string name="share_permission_secure_file_drop">Güvenli dosya bırakma</string>
+    <string name="share_permission_view_only">Yalnızca görüntüleme</string>
+    <string name="share_permissions">Paylaşım izinleri</string>
+    <string name="share_remote_clarification">%1$s (uzak)</string>
+    <string name="share_room_clarification">%1$s (görüşme)</string>
+    <string name="share_send_new_email">Yeni e-posta gönder</string>
+    <string name="share_settings">Ayarlar</string>
+    <string name="share_via_link_section_title">Bağlantıyı paylaş</string>
+    <string name="share_via_link_send_link_label">Bağlantı gönder</string>
+    <string name="share_via_link_unset_password">Ayarı kaldır</string>
+    <string name="share_with_title">Şununla paylaş…</string>
+    <string name="shared_text_empty">Paylaşılan yazı boş</string>
+    <string name="shortcut_create_long">Not ekle</string>
+    <string name="simple_about">Hakkında</string>
+    <string name="simple_backup">Yedekle</string>
+    <string name="simple_cancel">İptal</string>
+    <string name="simple_checkbox">İşaret kutusu</string>
+    <string name="simple_close">Kapat</string>
+    <string name="simple_copy">Kopyala</string>
+    <string name="simple_edit">Düzenle</string>
+    <string name="simple_error">Hata</string>
+    <string name="simple_exception">İstisna</string>
+    <string name="simple_link">Bağlantı</string>
+    <string name="simple_more">Diğer</string>
+    <string name="simple_move">Taşı</string>
+    <string name="simple_next">Sonraki</string>
+    <string name="simple_other">Diğer</string>
+    <string name="simple_prev">Önceki</string>
+    <string name="simple_remove">Sil</string>
+    <string name="simple_security">Güvenlik</string>
+    <string name="simple_switch">Değiştir</string>
+    <string name="simple_synchronization">Eşitleme</string>
+    <string name="sort_alphabetically">Alfabeye göre sırala</string>
+    <string name="sort_last_modified">Değişiklik tarihine göre sırala</string>
+    <string name="status_message">Durum iletisi</string>
+    <string name="status_set_fail_message">Durum ayarlanamadı!</string>
+    <string name="switch_to_plain_editing">Yalın düzenlemeye geç</string>
+    <string name="thirtyMinutes">30 dakika</string>
+    <string name="thisWeek">Bu hafta</string>
+    <string name="today">Bugün</string>
+    <string name="unlock_notes">Kilidi açma notları</string>
+    <string name="username">Kullanıcı adı</string>
+    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
+    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
+    <string name="welcome_text">%1$s uygulamasına hoş geldiniz</string>
+    <string name="whats_your_status">Durumunuz nedir?</string>
+    <string name="widget_entry_fav_contentDescription">Sık kullanılan ögeler için kullanılacak yıldız simgesi</string>
+    <string name="widget_not_logged_in">Bu pano bileşenini kullanabilmek için lütfen Notlar üzerinde oturum açın</string>
+    <string name="widget_note_list_placeholder">Herhangi bir not yok</string>
+    <string name="widget_note_list_title">Not listesi</string>
+    <string name="widget_single_note_placeholder_tv">Not bulunamadı</string>
+    <string name="widget_single_note_title">Tek not</string>
+    <string name="write_email">E-posta gönder</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Bir hesap ekleyebilmeniz için çalışan bir İnternet bağlantınız olmalı.</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">%1$d indirme kaldı</item>
+        <item quantity="other">%1$d indirme kaldı</item>
+    </plurals>
     <plurals name="ab_selected">
         <item quantity="one">%d seçilmiş</item>
         <item quantity="other">%d seçilmiş</item>
@@ -340,127 +388,8 @@
         <item quantity="one">%1$d notun içeriğini paylaş</item>
         <item quantity="other">%1$d notun içeriğini paylaş</item>
     </plurals>
-
-    <string name="formatting_help_divider" translateable="false">---</string>
-    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
-    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
-    <string name="formatting_help_codefence" translateable="false">```</string>
-    <string name="formatting_help_codefence_outer" translateable="false">````</string>
-    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
-    <string name="formatting_help_cbf_title">Bağlama göre biçimlendirme</string>
-    <string name="formatting_help_cbf_body_1">Notlar uygulamasının önemli bir tasarım amacı, dikkat dağıtmayan bir araç sağlamaktır. Yine de yazılarınızı Markdown kullanarak biçimlendirebilirsiniz. Aşağıdaki örneklerden bazılarında kısayol tuşlarını kullanarak notlarınızı aşağıdaki kodları yazmadan biçimlendirebilirsiniz.</string>
-    <string name="formatting_help_cbf_body_2">Yalnızca bir yazı bölümü seçerek ya da herhangi bir konumda imlece dokunarak varsayılan kayıtların yanında açılan menüden %1$s, %2$s, %3$s, %4$s gibi kayıtlar ya da %5$s seçenekleri kullanabilirsiniz.</string>
-
-    <string name="formatting_help_text_title">Yazı</string>
-    <string name="formatting_help_text_body">Markdown ile bazı sözcükleri %1$skalın%1$s ya da %2$syatık%2$s yapmak çok kolaydır. Bazı sözcüklerin %3$süzerini çizebilir%3$s ve [Nextcloud bağlantısı](https://nextcloud.com) gibi bağlantı verebilirsiniz.</string>
-
-    <string name="formatting_help_lists_title">Listeler</string>
-    <string name="formatting_help_lists_body_1">Bazen listelerin numaralı olmasını istersiniz:</string>
-    <string name="formatting_help_lists_body_2">Bir</string>
-    <string name="formatting_help_lists_body_3">İki</string>
-    <string name="formatting_help_lists_body_4">Üç</string>
-    <string name="formatting_help_lists_body_5">Bazen listelerde madde imi kullanılmasını istersiniz:</string>
-    <string name="formatting_help_lists_body_6">Bir satıra tire ile başlayın</string>
-    <string name="formatting_help_lists_body_7">Alt imler için tire ya da yıldız önüne iki boşluk ekleyin:</string>
-    <string name="formatting_help_lists_body_8">Bunun gibi</string>
-    <string name="formatting_help_lists_body_9">Ve bunun gibi</string>
-
-    <string name="formatting_help_checkboxes_title">İşaret kutuları</string>
-    <string name="formatting_help_checkboxes_body_1">Bir işaret kutusu eklemek için köşeli parantezler ile biten bir liste kullanın</string>
-    <string name="formatting_help_checkboxes_body_2">1. öge</string>
-    <string name="formatting_help_checkboxes_body_3">2. öge</string>
-
-    <string name="formatting_help_structured_documents_title">Yapılandırılmış belgeler</string>
-    <string name="formatting_help_structured_documents_body_1">Bazen belgelerinizi yapılandırmak için farklı düzeylerde başlıklar kullanmak yararlı olabilir. Başlık oluşturmak için satırlara %1$s ile başlayın. Bir satırda %2$s gibi birden çok simge kullanılması başlık düzeyini ve boyutunu azaltır.</string>
-    <string name="formatting_help_structured_documents_body_2">Bu üçüncü düzey bir başlık</string>
-    <string name="formatting_help_structured_documents_body_3">Farklı başlık boyutları için bir %1$s ile altı %2$s arasında seçim yapabilirsiniz.</string>
-    <string name="formatting_help_structured_documents_body_4">Birinden alıntı yapmak isterseniz satırdan önce %1$s karakterini kullanın:</string>
-    <string name="formatting_help_structured_documents_body_5">Hayal gücü bilgiden daha önemlidir. Bilgi sınırlıyken, hayal gücü tüm dünyayı kapsar.</string>
-    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
-
-    <string name="formatting_help_code_title">Kod</string>
-    <string name="formatting_help_code_body_1">Markdown ile kod yazmanın birçok farklı yolu vardır. Satır arası kod bloklarınız varsa, bunları ters tırnaklar arasında yazın:</string>
-    <string name="formatting_help_code_body_2">Markdown ayrıca kod çiti olarak adlandırılan ve girinti olmadan birden fazla satıra izin veren bir şeyi destekler:</string>
-    <string name="formatting_help_code_body_3">Ve söz dizimi vurgulamasını kullanmak istiyorsanız, dili ekleyin:</string>
-
-    <string name="formatting_help_tables_title">Tablolar</string>
-    <!-- Column header of a sample table -->
-    <string name="formatting_help_tables_column">Sütun: %1d</string>
-    <!-- Table cell value of a sample table -->
-    <string name="formatting_help_tables_value">Değer: %1d</string>
-
-    <string name="formatting_help_images_body_1">Bağlantılar, bir iletişim kuralı ve etki alanı ile başlayan tam adresler ya da %1$s karakteriyle başlayan mutlak yollar olmalıdır.</string>
-    <string name="formatting_help_images_body_2">Markdown biçimine uymak için lütfen görsel adresinde kaçış karakterlerini kullanın. Örneğin görsel adresindeki boşlukları %1$s ile değiştirmelisiniz.</string>
-    <string name="formatting_help_images_title">Görseller</string>
-    <string name="formatting_help_images_alt">Süslü görsel</string>
-
-    <string name="simple_other">Diğer</string>
-    <string name="sort_last_modified">Değişiklik tarihine göre sırala</string>
-    <string name="sort_alphabetically">Alfabeye göre sırala</string>
-    <string name="error_action_open_battery_settings">Pil ayarları</string>
-    <string name="error_action_open_deck_info">Uygulama bilgilerini aç</string>
-    <string name="error_action_open_network">Ağ ayarları</string>
-    <string name="error_action_update_files_app">Güncelle</string>
-    <string name="no_account_configured_yet">Henüz bir hesap yapılandırılmamış</string>
-    <string name="no_other_accounts">Henüz başka bir hesap yapılandırmamışsınız.</string>
-    <string name="choose_account">Hesap seçin</string>
-    <string name="context_based_formatting">Bağlam tabanlı biçimlendirme açılan penceresi</string>
     <plurals name="remove_account_message">
         <item quantity="one">%1$s hesabı silindiğinde bir eşitlenmemiş değişiklik de geri alınamayacak şekilde silinecek.</item>
         <item quantity="other">%1$s hesabı silindiğinde %2$d eşitlenmemiş değişiklik de geri alınamayacak şekilde silinecek.</item>
     </plurals>
-    <string name="remove_account">%1$s sil</string>
-
-    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Bir hesap ekleyebilmeniz için çalışan bir İnternet bağlantınız olmalı.</string>
-    <string name="settings_notes_path">Klasörü ayarla</string>
-
-    <string name="simple_next">Sonraki</string>
-    <string name="simple_prev">Önceki</string>
-    <string name="simple_backup">Yedekle</string>
-    <string name="backup">Uygulamada kurtarılamayacak bir durum bulundu. Lütfen eşitlenmemiş değişikliklerinizi yedekleyin ve Notes uygulamasının depolama alanını temizleyin.</string>
-    <string name="settings_notes_path_description">Nextcloud üzerinde notlarınızın kaydedileceği klasör </string>
-    <string-array name="settings_file_suffixes">
-        <item translatable="false">.txt</item>
-        <item translatable="false">.md</item>
-    </string-array>
-    <string name="settings_notes_path_success">Yeni notlar klasörü: %1$s</string>
-    <string name="settings_file_suffix">Dosya uzantısı</string>
-    <string name="settings_file_suffix_description">Nextcloud üzerinde notlarınız için kullanılacak dosya uzantısı </string>
-    <string name="settings_file_suffix_success">Yeni dosya son eki: %1$s</string>
-    <string name="http_status_code">HTTP durum kodu: %1$d</string>
-    <string name="progress_import_indeterminate">Notlar içe aktarılıyor…</string>
-    <string name="progress_import">Not %1$d / %2$d içe aktarılıyor…</string>
-    <string name="account_imported">Hesap içe aktarıldı.</string>
-    <string name="direct_editing_error">Zengin düzenleme yüklenirken sorun çıktı</string>
-    <string name="switch_to_plain_editing">Yalın düzenlemeye geç</string>
-    <string name="action_back">Geri</string>
-    <string name="set_online_status">Çevrim içi durumu</string>
-    <string name="status_message">Durum iletisi</string>
-    <string name="whats_your_status">Durumunuz nedir?</string>
-    <string name="clear_status_after">Durum şu kadar sonra kaldırılsın</string>
-    <string name="clear">Temizle</string>
-    <string name="set_message">İletiyi ayarla</string>
-    <string name="dontClear">Kaldırılmasın</string>
-    <string name="today">Bugün</string>
-    <string name="thirtyMinutes">30 dakika</string>
-    <string name="oneHour">1 saat</string>
-    <string name="fourHours">4 saat</string>
-    <string name="thisWeek">Bu hafta</string>
-    <string name="error_setting_status_message">Durum iletisi ayarlanırken sorun çıktı!</string>
-    <string name="file_list_seconds_ago">saniye önce</string>
-    <string name="online_status">Çevrim içi durumu</string>
-    <string name="online">Çevrim içi</string>
-    <string name="dnd">Rahatsız etmeyin</string>
-    <string name="away">Uzakta</string>
-    <string name="invisible">Görünmez</string>
-    <string name="busy">Meşgul</string>
-    <string name="mute_all_notifications">Tüm bildirimleri kapat</string>
-    <string name="appear_offline">Çevrim dışı görün</string>
-    <string name="status_set_fail_message">Durum ayarlanamadı!</string>
-    <string name="account_switch_dialog_status_fetching_error_message">Durum alınamadı. Lütfen yeniden deneyin.</string>
-    <string name="ecosystem_apps_display_files">Dosyalar</string>
-    <string name="ecosystem_apps_display_talk">Konuş</string>
-    <string name="ecosystem_apps_talk">Nextcloud Konuş</string>
-    <string name="ecosystem_apps_more">Diğer Nextcloud uygulamaları</string>
-    <string name="ecosystem_apps_display_more">Diğer</string>
 </resources>

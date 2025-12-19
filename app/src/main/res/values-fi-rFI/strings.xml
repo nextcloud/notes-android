@@ -1,299 +1,345 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Nextcloud Notes - Android Client
-  ~
-  ~ SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors/translators
-  ~ SPDX-License-Identifier: GPL-3.0-or-later
--->
-<resources>
-    <string name="app_name">Muistiinpanot</string>
-    <string name="app_name_long">Nextcloud Notes</string>
-    <string name="label_all_notes">Kaikki muistiinpanot</string>
-    <string name="label_favorites">Suosikit</string>
-    <string name="action_create">Uusi muistiinpano</string>
-    <string name="welcome_text">Tervetuloa, tämä on %1$s</string>
-    <string name="action_settings">Asetukset</string>
-    <string name="action_trashbin">Poistetut muistiinpanot</string>
-    <string name="action_search">Etsi</string>
-    <string name="action_sorting_method">Järjestämistapa</string>
-    <string name="simple_cancel">Peruuta</string>
-    <string name="simple_switch">Kytkin</string>
-    <string name="simple_edit">Muokkaa</string>
-    <string name="simple_remove">Poista</string>
-    <string name="action_edit_save">Tallenna</string>
-    <string name="simple_about">Tietoja</string>
-    <string name="simple_link">Linkki</string>
-    <string name="action_note_deleted">Poistettiin %1$s</string>
-    <string name="action_note_restored">Palautettiin %1$s</string>
-    <string name="action_undo">Kumoa</string>
-    <string name="action_uncategorized">Luokittelemattomat</string>
-    <string name="menu_delete">Poista</string>
-    <string name="menu_change_category">Luokka</string>
-    <string name="menu_favorite">Suosikki</string>
-    <string name="menu_preview">Esikatselu</string>
-    <string name="menu_share">Jaa</string>
-    <string name="common_loading">Ladataan…</string>
-
-
-    <string name="search_in_category">Etsi luokasta %1$s</string>
-    <string name="search_in_all">Etsi kaikista muistiinpanoista</string>
-
-    <string name="change_category_title">Valitse luokka</string>
-
-    <string name="note_share_activity_shared_with_you">Jaettu sinulle käyttäjältä %1$s</string>
-    <string name="note_share_activity_share_link">Jaa linkki</string>
-    <string name="note_share_activity_could_not_retrieve_url">URL:n palautus epännistui</string>
-    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" on jaettu kanssasi</string>
-    <string name="note_share_activity_contact_no_permission">Yhteystietojen käyttöoikeus vaaditaan.</string>
-    <string name="note_share_created">Jako luotu</string>
-    <string name="note_share_activity_cannot_created">Sinulla ei ole oikeutta luoda jakoa.</string>
-
-
-    <!-- NoteShareDetailActivity -->
-    <string name="note_share_detail_activity_advanced_settings">Lisäasetukset</string>
-    <string name="note_share_detail_activity_share_via_link_hide_download">Piilota lataus</string>
-    <string name="note_share_detail_activity_share_send_note">Huomio vastaanottajalle</string>
-    <string name="note_share_detail_activity_hint_note">Huomio</string>
-    <string name="note_share_detail_activity_common_next">Seuraava</string>
-    <string name="note_share_detail_activity_share_copy_link">Jaa ja kopioi linkki</string>
-    <string name="note_share_detail_activity_common_confirm">Vahvista</string>
-    <string name="note_share_detail_activity_set_note">Aseta muistiinpano</string>
-    <string name="note_share_detail_activity_send_share">Lähetä Jaa</string>
-    <string name="note_share_detail_activity_hint_name">Nimi</string>
-    <string name="note_share_detail_activity_link_name">Linkin nimi</string>
-    <string name="note_share_detail_activity_share_link_empty_password">Salasana on pakko antaa</string>
-    <string name="note_share_detail_activity_hint_password">Salasana</string>
-    <string name="note_share_detail_activity_no_share_permission_selected">Valitse vähintään yksi käyttöoikeus jakaaksesi.</string>
-    <string name="note_share_detail_activity_label_empty">Nimike ei voi olla tyhjä</string>
-    <string name="note_share_detail_activity_cancel">Peruuta</string>
-    <string name="note_share_detail_activity_create_share_error">Jaon luominen epäonnistui</string>
-
-    <!-- SharePasswordDialogFragment -->
-    <string name="share_password_dialog_fragment_share_link_optional_password_title">Syötä vaihtoehtoinen salasanan</string>
-    <string name="share_password_dialog_fragment_skip">Ohita</string>
-
-    <string name="share_link_password_title">Syötä salasana</string>
-    <string name="common_ok">OK</string>
-    <string name="common_delete">Poista</string>
-    <string name="write_email">Lähetä sähköposti</string>
-    <string name="no_browser_available">Linkkien käsittelyyn ei ole sovellusta</string>
-    <string name="no_email_app_available">Sähköpostiosoitteiden käsittelyyn ei ole saatavilla sovellusta</string>
-    <string name="no_actions">Ei tapahtumia tälle käyttäjälle</string>
-
-    <string name="failed_the_remove_share">Jaon poistaminen epäonnistui</string>
-    <string name="email_pick_failed">Sähköpostiosoitteen valinta epäonnistui.</string>
-    <string name="failed_update_ui">Käyttöliittymän päivitys epäonnistui</string>
-    <string name="activity_chooser_title">Lähetä linkki…</string>
-
-    <string name="activity_chooser_send_file_title">Lähetä</string>
-    <string name="share_internal_link_to_folder_text">Sisäinen jaettu linkki toimii vain kayttäjillä, joilla on oikeudet tähän kansioon</string>
-    <string name="share_internal_link_to_file_text">Sisäinen jaettu linkki toimii vain käyttäjillä, joilla on oikeudet tähän tiedostoon</string>
-    <string name="share_internal_link">Jaa sisäinen linkki</string>
-    <string name="delete_link">Poista linkki</string>
-    <string name="share_settings">Asetukset</string>
-    <string name="share_send_new_email">Lähetä uusi sähköposti</string>
-    <string name="share_dialog_title">Jakaminen</string>
-    <string name="share_file">Jaa %1$s</string>
-    <string name="share_expiration_date_label">Vanhenee %1$s</string>
-    <string name="share_expiration_date_format">%1$s</string>
-    <string name="share_no_expiration_date_label">Aseta vanhenemispäivä</string>
-    <string name="share_via_link_section_title">Jaa linkki</string>
-    <string name="share_via_link_send_link_label">Lähetä linkki</string>
-    <string name="share_password_title">Salasanasuojattu</string>
-    <string name="share_no_password_title">Aseta salasana</string>
-    <string name="share_with_title">Jaa…</string>
-    <string name="share_via_link_unset_password">Poista</string>
-    <string name="add_another_public_share_link">Lisää toinen linkki</string>
-    <string name="add_new_public_share">Lisää uusi julkinen jakolinkki</string>
-    <string name="public_share_name">Uusi nimi</string>
-    <string name="share_link_with_label">Jaa linkki (%1$s)</string>
-    <string name="share_link">Jaa linkki</string>
-    <string name="allow_resharing">Salli jakaminen uudelleen</string>
-    <string name="link_share_view_only">Vain katselu</string>
-    <string name="link_share_editing">Muokkaaminen</string>
-    <string name="link_share_allow_upload_and_editing">Salli lähetys ja muokkaus</string>
-    <string name="link_share_file_drop">Tiedostojen pudotus (vain lähetys)</string>
-    <string name="could_not_retrieve_shares">Jakojen nouto ei onnistunut</string>
-    <string name="share_permission_view_only">Vain katselu</string>
-    <string name="share_permission_can_edit">Voi muokata</string>
-    <string name="share_permission_file_drop">Tiedoston pudotus</string>
-    <string name="share_permissions">Jaon oikeudet</string>
-    <plurals name="share_download_limit_description">
-        <item quantity="one">%1$d lataus jäljellä</item>
-        <item quantity="other">%1$d latausta jäljellä</item>
-    </plurals>
-    <string name="username">Käyttäjätunnus</string>
-    <string name="share_group_clarification">%1$s (ryhmä)</string>
-    <string name="share_remote_clarification">%1$s (etä)</string>
-    <string name="share_room_clarification">%1$s (keskustelu)</string>
-    <string name="share_known_remote_on_clarification">klo %1$s</string>
-    <string name="remote">(etä)</string>
-
-    <string name="copy_link">Kopioi linkki</string>
-    <string name="share">Jaa</string>
-    <string name="clipboard_text_copied">Linkki kopioitu</string>
-    <string name="clipboard_no_text_to_copy">Leikepöydälle ei kopioitunut mitään</string>
-    <string name="clipboard_unexpected_error">Odottamaton virhe kopioitaessa leikepöydälle</string>
-    <string name="clipboard_label">Teksti kopioitu %1$s</string>
-
-    <string name="listview_updated_today">Tänään</string>
-    <string name="listview_updated_yesterday">Eilen</string>
-    <string name="listview_updated_this_week">Tämä viikko</string>
-    <string name="listview_updated_last_week">Viime viikolla</string>
-    <string name="listview_updated_this_month">Tämä kuukausi</string>
-    <string name="listview_updated_last_month">Viime kuussa</string>
-    <string name="listview_no_content">Ei sisältöä</string>
-
-    <string name="settings_note_mode">Muistiinpanojen esitystapa</string>
-    <string name="settings_theme_title">Teema</string>
-    <string name="settings_font_title">Tasalevyinen fontti</string>
-    <string name="settings_font_size">Fontin koko</string>
-    <string name="settings_wifi_only">Synkronoi vain wifi-yhteydellä</string>
-    <string name="settings_lock">Sovelluksen lukitus (Beta)</string>
-    <string name="settings_lock_summary">Laitteen valtuudet</string>
-    <string name="settings_background_sync">Taustasynkronointi</string>
-    <string name="settings_prevent_screen_capture">Estä ruudunkaappaus</string>
-    <string name="settings_show_ecosystem_apps">Näytä sovellusvaihdin</string>
-    <string name="settings_show_ecosystem_apps_summary">Nextcloud-sovellusehdotukset navigointipalkissa</string>
-    <string name="settings_gridview">Ruudukkonäkymä</string>
-    <string name="error_sync">Synkronointi epäonnistui: %1$s</string>
-    <string name="error_synchronization">Synkronointi epäonnistui</string>
-    <string name="error_no_network">Ei verkkoyhteyttä</string>
-    <string name="error_maintenance_mode">Palvelin on huoltotilassa</string>
-    <string name="error_unknown">Tapahtui tuntematon virhe.</string>
-
-    <string name="about_version_title">Versio</string>
-    <string name="about_version">Käytössäsi on %1$s</string>
-    <string name="about_maintainer_title">Ylläpitäjät</string>
-    <string name="about_developers_title">Kehittäjät</string>
-    <string name="about_translators_title">Kääntäjät</string>
-    <string name="about_translators_transifex">Nextcloud-yhteisö paikassa %1$s</string>
-    <string name="about_testers_title">Testaajat</string>
-    <string name="about_source_title">Lähdekoodi</string>
-    <string name="about_source">Tämä projekti on GitHubissa: %1$s</string>
-    <string name="about_issues_title">Ongelmat</string>
-    <string name="about_issues">Voit raportoida virheitä ja ehdottaa parannuksia ja uusia tomintoja GitHub:n ongelmien seuraaja toiminnolla: %1$s</string>
-    <string name="about_translate_title">Käännä</string>
-    <string name="about_translate">Liity Nextcloud joukkoon Transflex:ssa ja auta meitä tämän sovelluksen käännöstyössä: %1$s</string>
-    <string name="about_app_license_title">Sovelluslisenssi</string>
+  <resources>
     <string name="about_app_license">Tämä sovellus on GNU GENERAL PUBLIC LICENSE v3+ -lisensoitu.</string>
     <string name="about_app_license_button">Näytä lisenssi</string>
-    <string name="about_icons_disclaimer_title">Kuvakkeet</string>
-    <string name="about_icons_disclaimer_app_icon">Katso alkuperäinen kuvake %1$s.</string>
-    <string name="about_icons_disclaimer_mdi_icons">Kaikki muut tämän sovelluksen kuvakkeet on %1$s tehnyt Google Inc. ja ne on lisensoitu Apache 2.0 lisenssillä.</string>
-    <string name="about_icons_disclaimer_mdi">Material Design-kuvakkeet</string>
-    <string name="about_credits_tab_title">Tekijät</string>
+    <string name="about_app_license_title">Sovelluslisenssi</string>
     <string name="about_contribution_tab_title">Kontribuutio</string>
+    <string name="about_credits_tab_title">Tekijät</string>
+    <string name="about_developers_title">Kehittäjät</string>
+    <string name="about_icons_disclaimer_app_icon">Katso alkuperäinen kuvake %1$s.</string>
+    <string name="about_icons_disclaimer_mdi">Material Design-kuvakkeet</string>
+    <string name="about_icons_disclaimer_mdi_icons">Kaikki muut tämän sovelluksen kuvakkeet on %1$s tehnyt Google Inc. ja ne on lisensoitu Apache 2.0 lisenssillä.</string>
+    <string name="about_icons_disclaimer_title">Kuvakkeet</string>
+    <string name="about_issues">Voit raportoida virheitä ja ehdottaa parannuksia ja uusia tomintoja GitHub:n ongelmien seuraaja toiminnolla: %1$s</string>
+    <string name="about_issues_title">Ongelmat</string>
     <string name="about_license_tab_title">Lisenssi</string>
-
-    <string name="widget_note_list_title">Muistiinpanolista</string>
-    <string name="widget_note_list_placeholder">Ei muistiinpanoja</string>
-    <string name="widget_single_note_title">Yksittäinen muistiinpano</string>
-    <string name="widget_single_note_placeholder_tv">Muistiinpanoa ei löytynyt</string>
-    <string name="widget_not_logged_in">Kirjaudu Notes sovellukseen ennen kuin käytät pienoissovellusta</string>
-    <string name="widget_entry_fav_contentDescription">Tähtikuvaketta käytetään suosikin ilmaisemiseen</string>
-
+    <string name="about_maintainer_title">Ylläpitäjät</string>
+    <string name="about_source">Tämä projekti on GitHubissa: %1$s</string>
+    <string name="about_source_title">Lähdekoodi</string>
+    <string name="about_testers_title">Testaajat</string>
+    <string name="about_translate">Liity Nextcloud joukkoon Transflex:ssa ja auta meitä tämän sovelluksen käännöstyössä: %1$s</string>
+    <string name="about_translate_title">Käännä</string>
+    <string name="about_translators_title">Kääntäjät</string>
+    <string name="about_translators_transifex">Nextcloud-yhteisö paikassa %1$s</string>
+    <string name="about_version">Käytössäsi on %1$s</string>
+    <string name="about_version_title">Versio</string>
+    <string name="account_already_imported">Tili on jo tuotu</string>
+    <string name="account_imported">Tili tuotu.</string>
+    <string name="action_back">Takaisin</string>
+    <string name="action_create">Uusi muistiinpano</string>
+    <string name="action_edit_save">Tallenna</string>
+    <string name="action_formatting_help">Muotoilu</string>
+    <string name="action_note_deleted">Poistettiin %1$s</string>
+    <string name="action_note_restored">Palautettiin %1$s</string>
+    <string name="action_search">Etsi</string>
+    <string name="action_settings">Asetukset</string>
+    <string name="action_sorting_method">Järjestämistapa</string>
+    <string name="action_trashbin">Poistetut muistiinpanot</string>
+    <string name="action_uncategorized">Luokittelemattomat</string>
+    <string name="action_undo">Kumoa</string>
+    <string name="activity_chooser_send_file_title">Lähetä</string>
+    <string name="activity_chooser_title">Lähetä linkki…</string>
     <string name="activity_select_single_note">Valitse muistiinpano</string>
-
-    <string name="shortcut_create_long">Luo uusi muistiinpano</string>
-
-    <string name="pref_value_font_normal">Normaali</string>
-    <string name="pref_value_wifi_and_mobile">Synkronoi wifi- ja mobiilidatayhteydellä</string>
-    <string name="pref_value_lock">Salasanasuojaus</string>
-
-    <string name="simple_error">Virhe</string>
-    <string name="simple_close">Sulje</string>
-    <string name="simple_copy">Kopioi</string>
-    <string name="simple_exception">Poikkeus</string>
-    <string name="pin_to_homescreen">Kiinnitä kotinäyttöön</string>
-    <string name="note_has_been_deleted">Tämä muistiinpano on poistettu</string>
     <string name="add_account">Lisää tili</string>
-
-    <string name="category_music">Musiikki</string>
-    <string name="category_movies">Elokuvat</string>
-    <string name="category_movie">Elokuva</string>
-    <string name="category_work">Työ</string>
-    <string name="category_todo">ToD</string>
-    <string name="category_todos">ToDo:t</string>
+    <string name="add_another_public_share_link">Lisää toinen linkki</string>
+    <string name="add_category">Lisää %1$s</string>
+    <string name="add_new_public_share">Lisää uusi julkinen jakolinkki</string>
+    <string name="added_content">Lisätty \"%1$s\"</string>
+    <string name="allow_resharing">Salli jakaminen uudelleen</string>
+    <string name="app_name">Muistiinpanot</string>
+    <string name="app_name_long">Nextcloud Notes</string>
+    <string name="appear_offline">Näytä olevan poissa</string>
+    <string name="appearance_and_behavior">Ulkoasu ja toiminta</string>
+    <string name="append_to_note">Lisää muistiinpanoon</string>
+    <string name="away">Poissa</string>
+    <string name="backup">Havaitsimme virheellisen sovelluksen tilan, jota ei voida palauttaa. Varmuuskopioi synkronoimattomat muutokset ja tyhjennä muistiinpanosovelluksen tallennustila.</string>
+    <string name="busy">Varattu</string>
+    <string name="category_bake">Leivonta</string>
     <string name="category_checklists">Tsekkilistat</string>
-    <string name="category_tasks">Tehtävät</string>
+    <string name="category_food">Ruoka</string>
+    <string name="category_game">Peli</string>
+    <string name="category_games">Pelit</string>
+    <string name="category_gift">Lahja</string>
+    <string name="category_gifts">Lahjat</string>
+    <string name="category_key">Avain</string>
+    <string name="category_keys">Avaimet</string>
+    <string name="category_movie">Elokuva</string>
+    <string name="category_movies">Elokuvat</string>
+    <string name="category_music">Musiikki</string>
+    <string name="category_password">Salasana</string>
+    <string name="category_passwords">Salasanat</string>
+    <string name="category_play">Esitys</string>
+    <string name="category_present">Lahja</string>
+    <string name="category_presents">Lahjat</string>
+    <string name="category_readonly">Vain luku</string>
     <string name="category_recipe">Resepti</string>
     <string name="category_recipes">Reseptit</string>
     <string name="category_restaurant">Ravintola</string>
     <string name="category_restaurants">Ravintolat</string>
-    <string name="category_food">Ruoka</string>
-    <string name="category_bake">Leivonta</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_key">Avain</string>
-    <!-- This represents a category where one can place passwords and credentials -->
-    <string name="category_keys">Avaimet</string>
-    <string name="category_password">Salasana</string>
-    <string name="category_passwords">Salasanat</string>
-    <string name="category_game">Peli</string>
-    <string name="category_games">Pelit</string>
-    <!-- This is a noun, analogue to "game", like "theatre" or "drama" -->
-    <string name="category_play">Esitys</string>
-    <string name="category_gift">Lahja</string>
-    <string name="category_gifts">Lahjat</string>
-    <!-- Like a gift -->
-    <string name="category_present">Lahja</string>
-    <!-- Like a gift -->
-    <string name="category_presents">Lahjat</string>
-
-    <string name="account_already_imported">Tili on jo tuotu</string>
-    <string name="no_notes_yet">Ei muistiinpanoja</string>
-    <string name="no_notes_yet_description">Paina + luodaksesi uuden muistiinpanon</string>
-    <string name="simple_more">Lisää</string>
-    <string name="simple_move">Siirrä</string>
-    <string name="category_readonly">Vain luku</string>
-    <string name="no_category">Ei luokkaa</string>
-    <string name="add_category">Lisää %1$s</string>
-    <string name="simple_checkbox">Valintaruutu</string>
-    <string name="unlock_notes">Avaa muistiinpanojen lukitus</string>
-    <string name="error_dialog_title">Voi ei - Mitä nyt? 🙁</string>
-    <string name="error_dialog_tip_token_mismatch_retry">Yritä pakottaa sovelluksen sulkeminen ja käynnistä se uudelleen. Nextcloud-sovellukseen on saattanut olla virheellinen yhteys.</string>
-    <string name="error_dialog_tip_token_mismatch_clear_storage">Jos ongelma jatkuu, yritä tyhjentää sekä Nextcloud- että Nextcloud Notes-sovellusten tallennustilat ratkaistaksesi ongelman.</string>
-    <string name="error_dialog_tip_clear_storage">Voit tyhjentää tallennustilan avaamalla sovelluksen tiedot ja valitsemalla Tallennustila → Tyhjennä tallennustila. Tämä poistaa kaikki synkronoimattomat muistiinpanot!</string>
-    <string name="error_dialog_tip_files_outdated">Nextcloud-sovelluksesi on vanhentunut. Lataa uusin version Play Storesta tai F-Droidista.</string>
-    <string name="error_dialog_tip_files_force_stop">Nextcloud-sovelluksessasi vaikuttaa olevan jokin ongelma. Yritä pakottaa sekä Nextcloud- että Nextcloud Notes-sovelluksen lopetus.</string>
-    <string name="error_dialog_tip_files_delete_storage">Jos pakotettu lopettaminen ei auta, voit yrittää tyhjentää sovelluksien tallennustilan.</string>
-    <string name="error_dialog_timeout_instance">Palvelimen aikakatkaisu. Varmista, että se on toiminnassa.</string>
-    <string name="error_dialog_timeout_toggle">Tarkista verkkoyhteytesi. Joskus mobiilidatan ja Wi-Fin välillä vaihtaminen saattaa auttaa. </string>
+    <string name="category_tasks">Tehtävät</string>
+    <string name="category_todo">ToD</string>
+    <string name="category_todos">ToDo:t</string>
+    <string name="category_work">Työ</string>
+    <string name="change_category_title">Valitse luokka</string>
+    <string name="change_note_title">Muuta muistinpanon otsikkoa</string>
+    <string name="choose_account">Valitse tili</string>
+    <string name="clear">Tyhjennä</string>
+    <string name="clear_status_after">Tyhjennä tilatieto</string>
+    <string name="clipboard_label">Teksti kopioitu %1$s</string>
+    <string name="clipboard_no_text_to_copy">Leikepöydälle ei kopioitunut mitään</string>
+    <string name="clipboard_text_copied">Linkki kopioitu</string>
+    <string name="clipboard_unexpected_error">Odottamaton virhe kopioitaessa leikepöydälle</string>
+    <string name="common_delete">Poista</string>
+    <string name="common_loading">Ladataan…</string>
+    <string name="common_ok">OK</string>
+    <string name="context_based_formatting">Kontekstiin perustuva muotoilu - ponnahdusikkuna</string>
+    <string name="copy_link">Kopioi linkki</string>
+    <string name="could_not_retrieve_shares">Jakojen nouto ei onnistunut</string>
+    <string name="delete_link">Poista linkki</string>
+    <string name="dnd">Älä häiritse</string>
+    <string name="dontClear">Älä tyhjennä</string>
+    <string name="ecosystem_apps_display_files">Tiedostot</string>
+    <string name="ecosystem_apps_display_more">Lisää</string>
+    <string name="ecosystem_apps_display_talk">Talk</string>
+    <string name="ecosystem_apps_more">Lisää Nextcloud-sovelluksia</string>
+    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
+    <string name="email_pick_failed">Sähköpostiosoitteen valinta epäonnistui.</string>
+    <string name="error_action_open_battery_settings">Akkuasetukset</string>
+    <string name="error_action_open_deck_info">Avaa sovelluksen tiedot</string>
+    <string name="error_action_open_network">Verkkoasetukset</string>
+    <string name="error_action_update_files_app">Päivitä</string>
+    <string name="error_dialog_check_maintenance">Varmista, ettei Nextcloud-palvelin ole ylläpitotilassa.</string>
     <string name="error_dialog_check_server">Palvelimesi vastaus oli virheellinen. Tarkista, onnistuuko muistiinpanojen käyttäminen verkkokäyttöliittymän kautta.</string>
     <string name="error_dialog_check_server_logs">Nextcloud-asennuksessasi on ongelma. Katso lisätietoja palvelimen lokitiedostoista.</string>
-    <string name="error_dialog_check_maintenance">Varmista, ettei Nextcloud-palvelin ole ylläpitotilassa.</string>
     <string name="error_dialog_insufficient_storage">Nextcloud-palvelimellasi ei ole vapaata tallennustilaa. Poista tiedostoja, jotta paikallisten muutosten synkronointi pilveen onnistuu.</string>
-    <string name="error_dialog_we_need_info">Tarvitsemme seuraavat tekniset tiedot auttaaksemme sinua:</string>
-    <string name="error_dialog_server_app_enabled">Varmista, että olet asentanut \"Notes\"-sovelluksen palvelimellasi.</string>
-    <string name="error_dialog_redirect">Palvelimesi vastasi HTTP 302-tilakoodilla, joka viittaa siihen, että sinulla ei ole Notes-sovellusta asennettuna palvelimellesi tai jokin asetus on väärin. Tämä saattaa johtua mukautetusta .htaccess-tiedostosta tai Nextcloud-sovelluksista, kuten OID-Clientistä.</string>
-    <string name="error_dialog_tip_disable_battery_optimizations">Poista käytöstä akun optimointi Nextcloud- ja Muistiinpanot-sovelluksilta.</string>
     <string name="error_dialog_min_version">Muistiinpanosovellus vaatii Nextcloud-sovelluksen version 3.18 tai uudemman.</string>
-    <string name="added_content">Lisätty \"%1$s\"</string>
-    <string name="shared_text_empty">Jaettu teksti oli tyhjä</string>
-    <string name="append_to_note">Lisää muistiinpanoon</string>
-    <string name="change_note_title">Muuta muistinpanon otsikkoa</string>
-    <string name="menu_edit_title">Muokkaa otsikkoa</string>
-    <string name="simple_security">Tietoturva</string>
-    <string name="appearance_and_behavior">Ulkoasu ja toiminta</string>
-    <string name="simple_synchronization">Synkronointi</string>
+    <string name="error_dialog_redirect">Palvelimesi vastasi HTTP 302-tilakoodilla, joka viittaa siihen, että sinulla ei ole Notes-sovellusta asennettuna palvelimellesi tai jokin asetus on väärin. Tämä saattaa johtua mukautetusta .htaccess-tiedostosta tai Nextcloud-sovelluksista, kuten OID-Clientistä.</string>
+    <string name="error_dialog_server_app_enabled">Varmista, että olet asentanut \"Notes\"-sovelluksen palvelimellasi.</string>
+    <string name="error_dialog_timeout_instance">Palvelimen aikakatkaisu. Varmista, että se on toiminnassa.</string>
+    <string name="error_dialog_timeout_toggle">Tarkista verkkoyhteytesi. Joskus mobiilidatan ja Wi-Fin välillä vaihtaminen saattaa auttaa. </string>
+    <string name="error_dialog_tip_clear_storage">Voit tyhjentää tallennustilan avaamalla sovelluksen tiedot ja valitsemalla Tallennustila → Tyhjennä tallennustila. Tämä poistaa kaikki synkronoimattomat muistiinpanot!</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Poista käytöstä akun optimointi Nextcloud- ja Muistiinpanot-sovelluksilta.</string>
+    <string name="error_dialog_tip_files_delete_storage">Jos pakotettu lopettaminen ei auta, voit yrittää tyhjentää sovelluksien tallennustilan.</string>
+    <string name="error_dialog_tip_files_force_stop">Nextcloud-sovelluksessasi vaikuttaa olevan jokin ongelma. Yritä pakottaa sekä Nextcloud- että Nextcloud Notes-sovelluksen lopetus.</string>
+    <string name="error_dialog_tip_files_outdated">Nextcloud-sovelluksesi on vanhentunut. Lataa uusin version Play Storesta tai F-Droidista.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Jos ongelma jatkuu, yritä tyhjentää sekä Nextcloud- että Nextcloud Notes-sovellusten tallennustilat ratkaistaksesi ongelman.</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Yritä pakottaa sovelluksen sulkeminen ja käynnistä se uudelleen. Nextcloud-sovellukseen on saattanut olla virheellinen yhteys.</string>
+    <string name="error_dialog_title">Voi ei - Mitä nyt? 🙁</string>
+    <string name="error_dialog_we_need_info">Tarvitsemme seuraavat tekniset tiedot auttaaksemme sinua:</string>
+    <string name="error_maintenance_mode">Palvelin on huoltotilassa</string>
+    <string name="error_no_network">Ei verkkoyhteyttä</string>
+    <string name="error_setting_status_message">Virhe tilaviestiä asettaessa!</string>
+    <string name="error_sync">Synkronointi epäonnistui: %1$s</string>
+    <string name="error_synchronization">Synkronointi epäonnistui</string>
+    <string name="error_unknown">Tapahtui tuntematon virhe.</string>
+    <string name="failed_the_remove_share">Jaon poistaminen epäonnistui</string>
+    <string name="failed_update_ui">Käyttöliittymän päivitys epäonnistui</string>
+    <string name="file_list_seconds_ago">sekunteja sitten</string>
+    <string name="formatting_help_cbf_body_1">Muistiinpanosovelluksen päätavoitteena on tarjota häiriötön työkalu. Voit silti muotoilla tekstiä Markdown-syntaksilla. Moniin alla mainittuihin esimerkkeihin on pikanäppäimet, jotta voit kirjoittaa muistiinpanoja ilman muotoilumerkkien kirjoittamista.</string>
+    <string name="formatting_help_cbf_body_2">Valitse vain teksti tai näpäytä mitä tahansa kohtaa ruudulta ja ponnahdusvalikko aukeaa. Valikossa on oletusvalintojen %1$s, %2$sja %3$s lisäksi pikavalintoja kuten %4$s ja %5$s.</string>
+    <string name="formatting_help_cbf_title">Kontekstiin perustuva muotoilu</string>
+    <string name="formatting_help_checkboxes_body_1">Luodaksesi valintaruudun, käytä listaa hakasuluilla</string>
+    <string name="formatting_help_checkboxes_body_2">Tietue 1</string>
+    <string name="formatting_help_checkboxes_body_3">Tietue 2</string>
+    <string name="formatting_help_checkboxes_title">Valintaruudut</string>
+    <string name="formatting_help_code_body_1">Markdownilla voit muotoilla koodia monella eri tavalla. Rivillä olevan koodin voi sisällyttää gravis-merkkien väliin:</string>
+    <string name="formatting_help_code_body_2">Markdown tukee myös koodin aitaamista, jolla useamman rivin koodi näytetään sisentämättömänä:</string>
+    <string name="formatting_help_code_body_3">Ja jos haluat käyttää syntaksin korostusta, sisällytä ohjelmointikieli:</string>
+    <string name="formatting_help_code_title">Koodi</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_images_body_1">Linkkien tulee olla joko kokonaisia, protokollalla ja domainilla alkavia URL-osotteita tai absoluuttisia polkuja alkaen %1$s-merkillä.</string>
+    <string name="formatting_help_images_title">Kuvat</string>
+    <string name="formatting_help_lists_body_1">Joskus saatat haluta numeroituja luetteloita:</string>
+    <string name="formatting_help_lists_body_2">Yksi</string>
+    <string name="formatting_help_lists_body_3">Kaksi</string>
+    <string name="formatting_help_lists_body_4">Kolme</string>
+    <string name="formatting_help_lists_body_5">Toisinaan saatat haluta luettelomerkit:</string>
+    <string name="formatting_help_lists_body_6">Aloita rivi viivalla</string>
+    <string name="formatting_help_lists_body_7">Ja jos haluat alakohtia, lisää kaksi välilyöntiä ennen viivaa tai tähteä:</string>
+    <string name="formatting_help_lists_body_8">Kuten näin</string>
+    <string name="formatting_help_lists_body_9">Tai näin</string>
+    <string name="formatting_help_lists_title">Luettelot</string>
+    <string name="formatting_help_structured_documents_body_1">Joskus on kätevää luoda eri tason otsikoita dokumentin rakenteen jäsentämiseen. Aloita rivit %1$s-merkillä luodaksesi otsikoita. Useampi %2$s rivillä merkitsee pienempää otsikkokokoa.</string>
+    <string name="formatting_help_structured_documents_body_2">Tämä on kolmannen tason otsikko</string>
+    <string name="formatting_help_structured_documents_body_3">Voit käyttää otsikoiden kokoja yhdestä%1$s-merkistä kuuteen %2$s-merkkiin asti.</string>
+    <string name="formatting_help_structured_documents_body_4">Jos haluat lisätä lainauksen, käytä %1$s-merkkiä rivin alussa ennen riviä:</string>
+    <string name="formatting_help_structured_documents_body_5">Mielikuvitus on tärkeämpää kuin tieto. Tieto on rajallista. Mielikuvitus ympäröi maailman.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+    <string name="formatting_help_structured_documents_title">Rakenteelliset asiakirjat</string>
+    <string name="formatting_help_tables_column">Sarake %1d</string>
+    <string name="formatting_help_tables_title">Taulukot</string>
+    <string name="formatting_help_tables_value">Arvo %1d</string>
+    <string name="formatting_help_text_body">On todella helppoa %1$slihavoida%1$s ja %2$skursivoida%2$s sanoja Markdownilla. Voit %3$syliviivata%3$s sanoja ja jopa [linkata Nextcloudiin](https://nextcloud.com).</string>
+    <string name="formatting_help_text_title">Teksti</string>
+    <string name="fourHours">4 tuntia</string>
+    <string name="http_status_code">HTTP-tilakoodi: %1$d</string>
+    <string name="invisible">Näkymätön</string>
+    <string name="label_all_notes">Kaikki muistiinpanot</string>
+    <string name="label_favorites">Suosikit</string>
+    <string name="link_share_allow_upload_and_editing">Salli lähetys ja muokkaus</string>
+    <string name="link_share_editing">Muokkaaminen</string>
+    <string name="link_share_file_drop">Tiedostojen pudotus (vain lähetys)</string>
+    <string name="link_share_view_only">Vain katselu</string>
+    <string name="listview_no_content">Ei sisältöä</string>
+    <string name="listview_updated_last_month">Viime kuussa</string>
+    <string name="listview_updated_last_week">Viime viikolla</string>
+    <string name="listview_updated_this_month">Tämä kuukausi</string>
+    <string name="listview_updated_this_week">Tämä viikko</string>
+    <string name="listview_updated_today">Tänään</string>
+    <string name="listview_updated_yesterday">Eilen</string>
     <string name="manage_accounts">Tilien hallinta</string>
-    <string name="action_formatting_help">Muotoilu</string>
-
-
+    <string name="menu_change_category">Luokka</string>
+    <string name="menu_delete">Poista</string>
+    <string name="menu_edit_title">Muokkaa otsikkoa</string>
+    <string name="menu_favorite">Suosikki</string>
+    <string name="menu_preview">Esikatselu</string>
+    <string name="menu_share">Jaa</string>
+    <string name="mute_all_notifications">Mykistä kaikki ilmoitukset</string>
+    <string name="no_account_configured_yet">Tiliä ei ole vielä asetettu</string>
+    <string name="no_actions">Ei tapahtumia tälle käyttäjälle</string>
+    <string name="no_browser_available">Linkkien käsittelyyn ei ole sovellusta</string>
+    <string name="no_category">Ei luokkaa</string>
+    <string name="no_email_app_available">Sähköpostiosoitteiden käsittelyyn ei ole saatavilla sovellusta</string>
+    <string name="no_notes_yet">Ei muistiinpanoja</string>
+    <string name="no_notes_yet_description">Paina + luodaksesi uuden muistiinpanon</string>
+    <string name="no_other_accounts">Et ole vielä määrittänyt muita tilejä.</string>
     <string name="noteMode_remember_last">Muista viimeisin valintani</string>
-
-    <string-array name="fontSize_entries">
-        <item>Pieni</item>
-        <item>Normaali</item>
-        <item>Suuri</item>
-    </string-array>
-
-    <string-array name="darkmode_entries">
-        <item>Vaalea</item>
-        <item>Tumma</item>
-        <item>Järjestelmän oletus</item>
-    </string-array>
-
+    <string name="note_has_been_deleted">Tämä muistiinpano on poistettu</string>
+    <string name="note_share_activity_cannot_created">Sinulla ei ole oikeutta luoda jakoa.</string>
+    <string name="note_share_activity_contact_no_permission">Yhteystietojen käyttöoikeus vaaditaan.</string>
+    <string name="note_share_activity_could_not_retrieve_url">URL:n palautus epännistui</string>
+    <string name="note_share_activity_share_link">Jaa linkki</string>
+    <string name="note_share_activity_shared_with_you">Jaettu sinulle käyttäjältä %1$s</string>
+    <string name="note_share_activity_subject_shared_with_you">\"%1$s\" on jaettu kanssasi</string>
+    <string name="note_share_created">Jako luotu</string>
+    <string name="note_share_detail_activity_advanced_settings">Lisäasetukset</string>
+    <string name="note_share_detail_activity_cancel">Peruuta</string>
+    <string name="note_share_detail_activity_common_confirm">Vahvista</string>
+    <string name="note_share_detail_activity_common_next">Seuraava</string>
+    <string name="note_share_detail_activity_create_share_error">Jaon luominen epäonnistui</string>
+    <string name="note_share_detail_activity_hint_name">Nimi</string>
+    <string name="note_share_detail_activity_hint_note">Huomio</string>
+    <string name="note_share_detail_activity_hint_password">Salasana</string>
+    <string name="note_share_detail_activity_label_empty">Nimike ei voi olla tyhjä</string>
+    <string name="note_share_detail_activity_link_name">Linkin nimi</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Valitse vähintään yksi käyttöoikeus jakaaksesi.</string>
+    <string name="note_share_detail_activity_send_share">Lähetä Jaa</string>
+    <string name="note_share_detail_activity_set_note">Aseta muistiinpano</string>
+    <string name="note_share_detail_activity_share_copy_link">Jaa ja kopioi linkki</string>
+    <string name="note_share_detail_activity_share_link_empty_password">Salasana on pakko antaa</string>
+    <string name="note_share_detail_activity_share_send_note">Huomio vastaanottajalle</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Piilota lataus</string>
+    <string name="oneHour">1 tunti</string>
+    <string name="online">Online</string>
+    <string name="pin_to_homescreen">Kiinnitä kotinäyttöön</string>
+    <string name="pref_value_font_normal">Normaali</string>
+    <string name="pref_value_lock">Salasanasuojaus</string>
+    <string name="pref_value_wifi_and_mobile">Synkronoi wifi- ja mobiilidatayhteydellä</string>
+    <string name="progress_import">Tuodaan muistiinpanoa %1$d/%2$d…</string>
+    <string name="progress_import_indeterminate">Tuodaan muistiinpanoja...</string>
+    <string name="public_share_name">Uusi nimi</string>
+    <string name="remote">(etä)</string>
+    <string name="remove_account">Poista %1$s</string>
+    <string name="search_in_all">Etsi kaikista muistiinpanoista</string>
+    <string name="search_in_category">Etsi luokasta %1$s</string>
+    <string name="set_message">Aseta viesti</string>
+    <string name="settings_background_sync">Taustasynkronointi</string>
+    <string name="settings_file_suffix">Tiedostopääte</string>
+    <string name="settings_file_suffix_description">Tiedostopääte uusille Nextcloud-muistiinpanoille</string>
+    <string name="settings_file_suffix_success">Uuden tiedoston pääte: %1$s</string>
+    <string name="settings_font_size">Fontin koko</string>
+    <string name="settings_font_title">Tasalevyinen fontti</string>
+    <string name="settings_gridview">Ruudukkonäkymä</string>
+    <string name="settings_lock">Sovelluksen lukitus (Beta)</string>
+    <string name="settings_lock_summary">Laitteen valtuudet</string>
+    <string name="settings_note_mode">Muistiinpanojen esitystapa</string>
+    <string name="settings_notes_path">Aseta kansio</string>
+    <string name="settings_notes_path_description">Hakemisto, johon muistiinpanot tallennetaan Nextcloudissa</string>
+    <string name="settings_notes_path_success">Uusi muistiinpanojen hakemisto: %1$s</string>
+    <string name="settings_prevent_screen_capture">Estä ruudunkaappaus</string>
+    <string name="settings_show_ecosystem_apps">Näytä sovellusvaihdin</string>
+    <string name="settings_show_ecosystem_apps_summary">Nextcloud-sovellusehdotukset navigointipalkissa</string>
+    <string name="settings_theme_title">Teema</string>
+    <string name="settings_wifi_only">Synkronoi vain wifi-yhteydellä</string>
+    <string name="share">Jaa</string>
+    <string name="share_dialog_title">Jakaminen</string>
+    <string name="share_expiration_date_format">%1$s</string>
+    <string name="share_expiration_date_label">Vanhenee %1$s</string>
+    <string name="share_file">Jaa %1$s</string>
+    <string name="share_group_clarification">%1$s (ryhmä)</string>
+    <string name="share_internal_link">Jaa sisäinen linkki</string>
+    <string name="share_internal_link_to_file_text">Sisäinen jaettu linkki toimii vain käyttäjillä, joilla on oikeudet tähän tiedostoon</string>
+    <string name="share_internal_link_to_folder_text">Sisäinen jaettu linkki toimii vain kayttäjillä, joilla on oikeudet tähän kansioon</string>
+    <string name="share_known_remote_on_clarification">klo %1$s</string>
+    <string name="share_link">Jaa linkki</string>
+    <string name="share_link_password_title">Syötä salasana</string>
+    <string name="share_link_with_label">Jaa linkki (%1$s)</string>
+    <string name="share_no_expiration_date_label">Aseta vanhenemispäivä</string>
+    <string name="share_no_password_title">Aseta salasana</string>
+    <string name="share_password_dialog_fragment_share_link_optional_password_title">Syötä vaihtoehtoinen salasanan</string>
+    <string name="share_password_dialog_fragment_skip">Ohita</string>
+    <string name="share_password_title">Salasanasuojattu</string>
+    <string name="share_permission_can_edit">Voi muokata</string>
+    <string name="share_permission_file_drop">Tiedoston pudotus</string>
+    <string name="share_permission_view_only">Vain katselu</string>
+    <string name="share_permissions">Jaon oikeudet</string>
+    <string name="share_remote_clarification">%1$s (etä)</string>
+    <string name="share_room_clarification">%1$s (keskustelu)</string>
+    <string name="share_send_new_email">Lähetä uusi sähköposti</string>
+    <string name="share_settings">Asetukset</string>
+    <string name="share_via_link_section_title">Jaa linkki</string>
+    <string name="share_via_link_send_link_label">Lähetä linkki</string>
+    <string name="share_via_link_unset_password">Poista</string>
+    <string name="share_with_title">Jaa…</string>
+    <string name="shared_text_empty">Jaettu teksti oli tyhjä</string>
+    <string name="shortcut_create_long">Luo uusi muistiinpano</string>
+    <string name="simple_about">Tietoja</string>
+    <string name="simple_backup">Varmuuskopioi</string>
+    <string name="simple_cancel">Peruuta</string>
+    <string name="simple_checkbox">Valintaruutu</string>
+    <string name="simple_close">Sulje</string>
+    <string name="simple_copy">Kopioi</string>
+    <string name="simple_edit">Muokkaa</string>
+    <string name="simple_error">Virhe</string>
+    <string name="simple_exception">Poikkeus</string>
+    <string name="simple_link">Linkki</string>
+    <string name="simple_more">Lisää</string>
+    <string name="simple_move">Siirrä</string>
+    <string name="simple_next">Seuraava</string>
+    <string name="simple_other">Muu</string>
+    <string name="simple_prev">Edellinen</string>
+    <string name="simple_remove">Poista</string>
+    <string name="simple_security">Tietoturva</string>
+    <string name="simple_switch">Kytkin</string>
+    <string name="simple_synchronization">Synkronointi</string>
+    <string name="sort_alphabetically">Järjestä aakkosjärjestyksen mukaan</string>
+    <string name="sort_last_modified">Järjestä muokkauspäiväyksen mukaan</string>
+    <string name="status_message">Tilaviesti</string>
+    <string name="status_set_fail_message">Tilan asettaminen epäonnistui!</string>
+    <string name="thirtyMinutes">30 minuuttia</string>
+    <string name="thisWeek">Tällä viikolla</string>
+    <string name="today">Tänään</string>
+    <string name="unlock_notes">Avaa muistiinpanojen lukitus</string>
+    <string name="username">Käyttäjätunnus</string>
+    <string name="welcome_text">Tervetuloa, tämä on %1$s</string>
+    <string name="whats_your_status">Mikä on tilatietosi?</string>
+    <string name="widget_entry_fav_contentDescription">Tähtikuvaketta käytetään suosikin ilmaisemiseen</string>
+    <string name="widget_not_logged_in">Kirjaudu Notes sovellukseen ennen kuin käytät pienoissovellusta</string>
+    <string name="widget_note_list_placeholder">Ei muistiinpanoja</string>
+    <string name="widget_note_list_title">Muistiinpanolista</string>
+    <string name="widget_single_note_placeholder_tv">Muistiinpanoa ei löytynyt</string>
+    <string name="widget_single_note_title">Yksittäinen muistiinpano</string>
+    <string name="write_email">Lähetä sähköposti</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Sinun tulee olla yhteydessä internetiin, jotta voit lisätä tilin.</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">%1$d lataus jäljellä</item>
+        <item quantity="other">%1$d latausta jäljellä</item>
+    </plurals>
     <plurals name="ab_selected">
         <item quantity="one">%d valittu</item>
         <item quantity="other">%d valittu</item>
@@ -310,119 +356,8 @@
         <item quantity="one">Jaa %1$d muistiinpanon sisältö</item>
         <item quantity="other">Jaa %1$d muistiinpanon sisältö</item>
     </plurals>
-
-    <string name="formatting_help_divider" translateable="false">---</string>
-    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
-    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
-    <string name="formatting_help_codefence" translateable="false">```</string>
-    <string name="formatting_help_codefence_outer" translateable="false">````</string>
-    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
-    <string name="formatting_help_cbf_title">Kontekstiin perustuva muotoilu</string>
-    <string name="formatting_help_cbf_body_1">Muistiinpanosovelluksen päätavoitteena on tarjota häiriötön työkalu. Voit silti muotoilla tekstiä Markdown-syntaksilla. Moniin alla mainittuihin esimerkkeihin on pikanäppäimet, jotta voit kirjoittaa muistiinpanoja ilman muotoilumerkkien kirjoittamista.</string>
-    <string name="formatting_help_cbf_body_2">Valitse vain teksti tai näpäytä mitä tahansa kohtaa ruudulta ja ponnahdusvalikko aukeaa. Valikossa on oletusvalintojen %1$s, %2$sja %3$s lisäksi pikavalintoja kuten %4$s ja %5$s.</string>
-
-    <string name="formatting_help_text_title">Teksti</string>
-    <string name="formatting_help_text_body">On todella helppoa %1$slihavoida%1$s ja %2$skursivoida%2$s sanoja Markdownilla. Voit %3$syliviivata%3$s sanoja ja jopa [linkata Nextcloudiin](https://nextcloud.com).</string>
-
-    <string name="formatting_help_lists_title">Luettelot</string>
-    <string name="formatting_help_lists_body_1">Joskus saatat haluta numeroituja luetteloita:</string>
-    <string name="formatting_help_lists_body_2">Yksi</string>
-    <string name="formatting_help_lists_body_3">Kaksi</string>
-    <string name="formatting_help_lists_body_4">Kolme</string>
-    <string name="formatting_help_lists_body_5">Toisinaan saatat haluta luettelomerkit:</string>
-    <string name="formatting_help_lists_body_6">Aloita rivi viivalla</string>
-    <string name="formatting_help_lists_body_7">Ja jos haluat alakohtia, lisää kaksi välilyöntiä ennen viivaa tai tähteä:</string>
-    <string name="formatting_help_lists_body_8">Kuten näin</string>
-    <string name="formatting_help_lists_body_9">Tai näin</string>
-
-    <string name="formatting_help_checkboxes_title">Valintaruudut</string>
-    <string name="formatting_help_checkboxes_body_1">Luodaksesi valintaruudun, käytä listaa hakasuluilla</string>
-    <string name="formatting_help_checkboxes_body_2">Tietue 1</string>
-    <string name="formatting_help_checkboxes_body_3">Tietue 2</string>
-
-    <string name="formatting_help_structured_documents_title">Rakenteelliset asiakirjat</string>
-    <string name="formatting_help_structured_documents_body_1">Joskus on kätevää luoda eri tason otsikoita dokumentin rakenteen jäsentämiseen. Aloita rivit %1$s-merkillä luodaksesi otsikoita. Useampi %2$s rivillä merkitsee pienempää otsikkokokoa.</string>
-    <string name="formatting_help_structured_documents_body_2">Tämä on kolmannen tason otsikko</string>
-    <string name="formatting_help_structured_documents_body_3">Voit käyttää otsikoiden kokoja yhdestä%1$s-merkistä kuuteen %2$s-merkkiin asti.</string>
-    <string name="formatting_help_structured_documents_body_4">Jos haluat lisätä lainauksen, käytä %1$s-merkkiä rivin alussa ennen riviä:</string>
-    <string name="formatting_help_structured_documents_body_5">Mielikuvitus on tärkeämpää kuin tieto. Tieto on rajallista. Mielikuvitus ympäröi maailman.</string>
-    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
-
-    <string name="formatting_help_code_title">Koodi</string>
-    <string name="formatting_help_code_body_1">Markdownilla voit muotoilla koodia monella eri tavalla. Rivillä olevan koodin voi sisällyttää gravis-merkkien väliin:</string>
-    <string name="formatting_help_code_body_2">Markdown tukee myös koodin aitaamista, jolla useamman rivin koodi näytetään sisentämättömänä:</string>
-    <string name="formatting_help_code_body_3">Ja jos haluat käyttää syntaksin korostusta, sisällytä ohjelmointikieli:</string>
-
-    <string name="formatting_help_tables_title">Taulukot</string>
-    <!-- Column header of a sample table -->
-    <string name="formatting_help_tables_column">Sarake %1d</string>
-    <!-- Table cell value of a sample table -->
-    <string name="formatting_help_tables_value">Arvo %1d</string>
-
-    <string name="formatting_help_images_body_1">Linkkien tulee olla joko kokonaisia, protokollalla ja domainilla alkavia URL-osotteita tai absoluuttisia polkuja alkaen %1$s-merkillä.</string>
-    <string name="formatting_help_images_title">Kuvat</string>
-    <string name="simple_other">Muu</string>
-    <string name="sort_last_modified">Järjestä muokkauspäiväyksen mukaan</string>
-    <string name="sort_alphabetically">Järjestä aakkosjärjestyksen mukaan</string>
-    <string name="error_action_open_battery_settings">Akkuasetukset</string>
-    <string name="error_action_open_deck_info">Avaa sovelluksen tiedot</string>
-    <string name="error_action_open_network">Verkkoasetukset</string>
-    <string name="error_action_update_files_app">Päivitä</string>
-    <string name="no_account_configured_yet">Tiliä ei ole vielä asetettu</string>
-    <string name="no_other_accounts">Et ole vielä määrittänyt muita tilejä.</string>
-    <string name="choose_account">Valitse tili</string>
-    <string name="context_based_formatting">Kontekstiin perustuva muotoilu - ponnahdusikkuna</string>
     <plurals name="remove_account_message">
         <item quantity="one">Tilin %1$s poistamalla poistetaan myös yksi synkronoimaton muutos, jota ei voida jälkeenpäin palauttaa.</item>
         <item quantity="other">Tilin %1$s poistamalla poistetaan myös %2$d synkronoimatonta muutosta, joita ei voida jälkeenpäin palauttaa.</item>
     </plurals>
-    <string name="remove_account">Poista %1$s</string>
-
-    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Sinun tulee olla yhteydessä internetiin, jotta voit lisätä tilin.</string>
-    <string name="settings_notes_path">Aseta kansio</string>
-
-    <string name="simple_next">Seuraava</string>
-    <string name="simple_prev">Edellinen</string>
-    <string name="simple_backup">Varmuuskopioi</string>
-    <string name="backup">Havaitsimme virheellisen sovelluksen tilan, jota ei voida palauttaa. Varmuuskopioi synkronoimattomat muutokset ja tyhjennä muistiinpanosovelluksen tallennustila.</string>
-    <string name="settings_notes_path_description">Hakemisto, johon muistiinpanot tallennetaan Nextcloudissa</string>
-    <string-array name="settings_file_suffixes">
-        <item translatable="false">.txt</item>
-        <item translatable="false">.md</item>
-    </string-array>
-    <string name="settings_notes_path_success">Uusi muistiinpanojen hakemisto: %1$s</string>
-    <string name="settings_file_suffix">Tiedostopääte</string>
-    <string name="settings_file_suffix_description">Tiedostopääte uusille Nextcloud-muistiinpanoille</string>
-    <string name="settings_file_suffix_success">Uuden tiedoston pääte: %1$s</string>
-    <string name="http_status_code">HTTP-tilakoodi: %1$d</string>
-    <string name="progress_import_indeterminate">Tuodaan muistiinpanoja...</string>
-    <string name="progress_import">Tuodaan muistiinpanoa %1$d/%2$d…</string>
-    <string name="account_imported">Tili tuotu.</string>
-    <string name="action_back">Takaisin</string>
-    <string name="status_message">Tilaviesti</string>
-    <string name="whats_your_status">Mikä on tilatietosi?</string>
-    <string name="clear_status_after">Tyhjennä tilatieto</string>
-    <string name="clear">Tyhjennä</string>
-    <string name="set_message">Aseta viesti</string>
-    <string name="dontClear">Älä tyhjennä</string>
-    <string name="today">Tänään</string>
-    <string name="thirtyMinutes">30 minuuttia</string>
-    <string name="oneHour">1 tunti</string>
-    <string name="fourHours">4 tuntia</string>
-    <string name="thisWeek">Tällä viikolla</string>
-    <string name="error_setting_status_message">Virhe tilaviestiä asettaessa!</string>
-    <string name="file_list_seconds_ago">sekunteja sitten</string>
-    <string name="online">Online</string>
-    <string name="dnd">Älä häiritse</string>
-    <string name="away">Poissa</string>
-    <string name="invisible">Näkymätön</string>
-    <string name="busy">Varattu</string>
-    <string name="mute_all_notifications">Mykistä kaikki ilmoitukset</string>
-    <string name="appear_offline">Näytä olevan poissa</string>
-    <string name="status_set_fail_message">Tilan asettaminen epäonnistui!</string>
-    <string name="ecosystem_apps_display_files">Tiedostot</string>
-    <string name="ecosystem_apps_display_talk">Talk</string>
-    <string name="ecosystem_apps_talk">Nextcloud Talk</string>
-    <string name="ecosystem_apps_more">Lisää Nextcloud-sovelluksia</string>
-    <string name="ecosystem_apps_display_more">Lisää</string>
 </resources>
