@@ -15,14 +15,51 @@
         <item>@string/pref_value_mode_direct_edit</item>
         <item>@string/pref_value_mode_last</item>
     </string-array>
+
     <string-array name="fontSize_values">
         <item>@string/pref_value_font_size_small</item>
         <item>@string/pref_value_font_size_medium</item>
         <item>@string/pref_value_font_size_large</item>
     </string-array>
+
     <string-array name="darkMode_values">
         <item>@string/pref_value_theme_light</item>
         <item>@string/pref_value_theme_dark</item>
         <item>@string/pref_value_theme_system_default</item>
+    </string-array>
+
+    <string-array name="noteMode_entries_new" translatable="false">
+        <item>@string/noteMode_plain_edit</item>
+        <item>@string/noteMode_plain_preview</item>
+        <item>@string/noteMode_rich_edit</item>
+        <item>@string/noteMode_remember_last</item>
+    </string-array>
+
+    <string-array name="fontSize_entries">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Light</item>
+        <item>Dark</item>
+        <item>System Default</item>
+    </string-array>
+
+    <string-array name="settings_file_suffixes">
+        <item translatable="false">.txt</item>
+        <item translatable="false">.md</item>
+    </string-array>
+
+    <!-- QuickSharingPermissionsBottomSheetDialog -->
+    <string-array name="quick_sharing_permission_bottom_sheet_dialog_folder_share_values" translatable="false">
+        <item>@string/link_share_view_only</item>
+        <item>@string/link_share_allow_upload_and_editing</item>
+        <item>@string/link_share_file_drop</item>
+    </string-array>
+    <string-array name="quick_sharing_permission_bottom_sheet_dialog_note_share_values" translatable="false">
+        <item>@string/link_share_view_only</item>
+        <item>@string/link_share_editing</item>
     </string-array>
 </resources>

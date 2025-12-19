@@ -44,16 +44,6 @@
     <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
     <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
 
-    <!-- QuickSharingPermissionsBottomSheetDialog -->
-    <string-array name="quick_sharing_permission_bottom_sheet_dialog_folder_share_values" translatable="false">
-        <item>@string/link_share_view_only</item>
-        <item>@string/link_share_allow_upload_and_editing</item>
-        <item>@string/link_share_file_drop</item>
-    </string-array>
-    <string-array name="quick_sharing_permission_bottom_sheet_dialog_note_share_values" translatable="false">
-        <item>@string/link_share_view_only</item>
-        <item>@string/link_share_editing</item>
-    </string-array>
 
     <!-- NoteShareActivity -->
     <string name="note_share_activity_activity_icon_content_description">note activity icon</string>
@@ -364,25 +354,6 @@
     <string name="noteMode_rich_edit">Rich edit mode</string>
     <string name="noteMode_remember_last">Remember my last selection</string>
 
-    <string-array name="noteMode_entries_new" translatable="false">
-        <item>@string/noteMode_plain_edit</item>
-        <item>@string/noteMode_plain_preview</item>
-        <item>@string/noteMode_rich_edit</item>
-        <item>@string/noteMode_remember_last</item>
-    </string-array>
-
-    <string-array name="fontSize_entries">
-        <item>Small</item>
-        <item>Medium</item>
-        <item>Large</item>
-    </string-array>
-
-    <string-array name="darkmode_entries">
-        <item>Light</item>
-        <item>Dark</item>
-        <item>System Default</item>
-    </string-array>
-
     <plurals name="ab_selected">
         <item quantity="one">%d selected</item>
         <item quantity="other">%d selected</item>
@@ -497,10 +468,7 @@
     <string name="simple_backup">Backup</string>
     <string name="backup">We detected an irrecoverably state of the app. Please backup your unsynchronized changes and clear the storage of the Notes app.</string>
     <string name="settings_notes_path_description">Folder to store your notes in your Nextcloud</string>
-    <string-array name="settings_file_suffixes">
-        <item translatable="false">.txt</item>
-        <item translatable="false">.md</item>
-    </string-array>
+
     <string name="settings_notes_path_success">New notes folder: %1$s</string>
     <string name="settings_file_suffix">File extension</string>
     <string name="settings_file_suffix_description">File extension for new notes in your Nextcloud</string>
