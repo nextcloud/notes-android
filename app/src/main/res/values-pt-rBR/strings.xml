@@ -231,6 +231,7 @@
     <string name="note_share_activity_more_icon_content_description">ícone para mais opções de compartilhamento de nota</string>
     <string name="note_share_activity_resharing_not_allowed">Política ou permissões impedem o compartilhamento</string>
     <string name="note_share_activity_search_text">Nome, ID de Nuvem Federada ou endereço de e-mail…</string>
+    <string name="note_share_activity_send_copy_to">Enviar cópia para</string>
     <string name="note_share_activity_share_icon_content_description">ícone de compartilhamento de nota</string>
     <string name="note_share_activity_share_link">Compartilhar link</string>
     <string name="note_share_activity_shared_with_you">Compartilhado com você por %1$s</string>

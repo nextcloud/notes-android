@@ -231,6 +231,7 @@
     <string name="note_share_activity_more_icon_content_description">märkme täiendava jagamise ikoon</string>
     <string name="note_share_activity_resharing_not_allowed">Reeglid või õigused ei võimalda edasijagamist</string>
     <string name="note_share_activity_search_text">Nimi, tunnus liitpilves või e-posti aadress...</string>
+    <string name="note_share_activity_send_copy_to">Saada koopia asukohta</string>
     <string name="note_share_activity_share_icon_content_description">märkme jagamise ikoon</string>
     <string name="note_share_activity_share_link">Jaga linki</string>
     <string name="note_share_activity_shared_with_you">Seda jagas sinuga %1$s</string>
