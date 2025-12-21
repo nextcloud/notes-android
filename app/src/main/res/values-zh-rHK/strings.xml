@@ -231,6 +231,7 @@
     <string name="note_share_activity_more_icon_content_description">筆記分享更多圖標</string>
     <string name="note_share_activity_resharing_not_allowed">策略或權限阻止了重新分享。</string>
     <string name="note_share_activity_search_text">名稱、聯合雲端 ID 或電郵地址 …</string>
+    <string name="note_share_activity_send_copy_to">傳送副本至</string>
     <string name="note_share_activity_share_icon_content_description">筆記分享圖標</string>
     <string name="note_share_activity_share_link">分享連結</string>
     <string name="note_share_activity_shared_with_you">%1$s 已與您分享</string>
