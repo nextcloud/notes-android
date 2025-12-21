@@ -231,6 +231,7 @@
     <string name="note_share_activity_more_icon_content_description">not diğerlerini paylaş simgesi</string>
     <string name="note_share_activity_resharing_not_allowed">Yeniden paylaşımı engelleyen ilke ya da izinler</string>
     <string name="note_share_activity_search_text">Ad, birleşik bulut kimliği ya da e-posta adresi…</string>
+    <string name="note_share_activity_send_copy_to">Kopyasını şuraya gönder</string>
     <string name="note_share_activity_share_icon_content_description">not paylaş simgesi</string>
     <string name="note_share_activity_share_link">Bağlantıyı paylaş</string>
     <string name="note_share_activity_shared_with_you">Sizinle %1$s tarafından paylaşılmış</string>

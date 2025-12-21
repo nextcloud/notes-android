@@ -192,6 +192,7 @@
     <string name="link_share_editing">تەھرىرلەش</string>
     <string name="link_share_file_drop">ھۆججەت چۈشۈرۈش (پەقەت يوللاش)</string>
     <string name="link_share_view_only">پەقەت كۆرۈش</string>
+    <string name="listview_no_content">مەزمۇن يوق</string>
     <string name="listview_updated_last_month">ئالدىنقى ئاي</string>
     <string name="listview_updated_last_week">ئالدىنقى ھەپتە</string>
     <string name="listview_updated_this_month">بۇ ئاي</string>
@@ -230,6 +231,7 @@
     <string name="note_share_activity_more_icon_content_description">خاتىرە ھەمبەھىرلەش تېخىمۇ-كۆپ سىنبەلگىسى</string>
     <string name="note_share_activity_resharing_not_allowed">تۈزۈم ياكى ئىجازەت قايتا-ھەمبەھىرلەشنى توسىدۇ</string>
     <string name="note_share_activity_search_text">ئىسمى ، فېدېراتسىيە بۇلۇت كىملىكى ياكى ئېلخەت ئادرېسى…</string>
+    <string name="note_share_activity_send_copy_to">كۆچۈرمىسىنى ئەۋەت</string>
     <string name="note_share_activity_share_icon_content_description">خاتىرە ھەمبەھىرلەش سىنبەلگىسى</string>
     <string name="note_share_activity_share_link">ئۇلىنىشنى ھەمبەھىرلەش</string>
     <string name="note_share_activity_shared_with_you">%1$s بىلەن ئورتاقلاشتى</string>
