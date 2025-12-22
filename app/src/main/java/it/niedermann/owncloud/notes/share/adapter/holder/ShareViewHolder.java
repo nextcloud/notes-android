@@ -48,7 +48,7 @@ public class ShareViewHolder extends BrandedViewHolder {
     }
 
     public void bind(OCShare share, ShareeListAdapterListener listener) {
-        String accountName = account.getDisplayName();
+        String accountUserName = account.getUserName();
         String name = share.getSharedWithDisplayName();
         binding.icon.setTag(null);
         final var shareType = share.getShareType();
@@ -89,14 +89,10 @@ public class ShareViewHolder extends BrandedViewHolder {
 
         binding.name.setText(name);
 
-        if (accountName == null) {
-            binding.overflowMenu.setVisibility(View.GONE);
-            return;
-        }
-
-        if (accountName.equalsIgnoreCase(share.getShareWith()) || accountName.equalsIgnoreCase(share.getUserId())) {
+        if (accountUserName.equalsIgnoreCase(share.getShareWith()) ||
+            accountUserName.equalsIgnoreCase(share.getUserId())) {
             binding.overflowMenu.setVisibility(View.VISIBLE);
-            
+
             String permissionName = SharingMenuHelper.getPermissionName(context, share);
             setPermissionName(permissionName);
 
