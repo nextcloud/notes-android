@@ -231,6 +231,13 @@ class ShareRepository(private val applicationContext: Context, private val accou
         )
     }
 
+    /**
+     * Fetches all shares for the given file or folder identified by its remote ID.
+     *
+     * @param remoteId The remote file ID on the server for which to retrieve shares.
+     * @return A list of [OCShare] objects if the request is successful, or `null` if the request fails or an exception
+     * occurs.
+     */
     fun getShares(remoteId: Long): List<OCShare>? {
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
         val call = shareAPI.getShares(remoteId)
@@ -314,6 +321,13 @@ class ShareRepository(private val applicationContext: Context, private val accou
         }
     }
 
+    /**
+     * Updates an existing share.
+     *
+     * @param shareId The id of the share to update.
+     * @param requestBody The [UpdateShareRequest] containing the new share attributes.
+     * @return An [ApiResult] with the server response [OcsResponse] on success, or an error result on failure.
+     */
     fun updateShare(shareId: Long, requestBody: UpdateShareRequest): ApiResult<OcsResponse<CreateShareResponse>?> {
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
         val call = shareAPI.updateShare(shareId, requestBody)
@@ -391,6 +405,14 @@ class ShareRepository(private val applicationContext: Context, private val accou
         }
     }
 
+    /**
+     * Updates the permissions for an existing share.
+     *
+     * @param shareId The id of the share to update.
+     * @param permissions The new permission level to set
+     * @return An [ApiResult] containing the server response [OcsResponse] with the updated share details on success,
+     * or an error message on failure.
+     */
     fun updateSharePermission(shareId: Long, permissions: Int? = null): ApiResult<OcsResponse<CreateShareResponse>?> {
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
         val requestBody = UpdateSharePermissionRequest(permissions = permissions)
