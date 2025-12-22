@@ -229,6 +229,7 @@
     <string name="note_share_detail_activity_share_send_note">받는이에게 메모</string>
     <string name="note_share_detail_activity_share_via_link_hide_download">다운로드 숨기기</string>
     <string name="oneHour">1시간</string>
+    <string name="online">온라인</string>
     <string name="pin_to_homescreen">홈 화면에 고정</string>
     <string name="pref_value_font_normal">일반</string>
     <string name="pref_value_lock">암호 보호</string>
