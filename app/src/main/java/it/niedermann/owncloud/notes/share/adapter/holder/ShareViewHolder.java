@@ -18,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.owncloud.android.lib.resources.shares.OCShare;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.BrandedViewHolder;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ItemShareShareBinding;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.share.helper.AvatarLoader;
@@ -25,13 +27,14 @@ import it.niedermann.owncloud.notes.share.helper.SharingMenuHelper;
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
 import it.niedermann.owncloud.notes.shared.util.FilesSpecificViewThemeUtils;
 
-public class ShareViewHolder extends RecyclerView.ViewHolder {
+public class ShareViewHolder extends BrandedViewHolder {
     private ItemShareShareBinding binding;
     private Account account;
     private Context context;
 
     public ShareViewHolder(@NonNull View itemView) {
         super(itemView);
+        bindBranding();
     }
 
     public ShareViewHolder(ItemShareShareBinding binding,
@@ -41,10 +44,11 @@ public class ShareViewHolder extends RecyclerView.ViewHolder {
         this.binding = binding;
         this.account = account;
         this.context = context;
+        bindBranding();
     }
 
     public void bind(OCShare share, ShareeListAdapterListener listener) {
-        String accountName = account.getDisplayName();
+        String accountUserName = account.getUserName();
         String name = share.getSharedWithDisplayName();
         binding.icon.setTag(null);
         final var shareType = share.getShareType();
@@ -85,12 +89,8 @@ public class ShareViewHolder extends RecyclerView.ViewHolder {
 
         binding.name.setText(name);
 
-        if (accountName == null) {
-            binding.overflowMenu.setVisibility(View.GONE);
-            return;
-        }
-
-        if (accountName.equalsIgnoreCase(share.getShareWith()) || accountName.equalsIgnoreCase(share.getUserId())) {
+        if (accountUserName.equalsIgnoreCase(share.getShareWith()) ||
+            accountUserName.equalsIgnoreCase(share.getUserId())) {
             binding.overflowMenu.setVisibility(View.VISIBLE);
 
             String permissionName = SharingMenuHelper.getPermissionName(context, share);
@@ -118,6 +118,15 @@ public class ShareViewHolder extends RecyclerView.ViewHolder {
             AvatarLoader.INSTANCE.load(context, avatar, account, name);
         } catch (StringIndexOutOfBoundsException e) {
             avatar.setImageResource(fallback);
+        }
+    }
+
+    @Override
+    public void applyBrand(int color) {
+        final var util = BrandingUtil.of(color, context);
+        if (binding != null) {
+            util.androidx.colorPrimaryTextViewElement(binding.permissionName);
+            util.platform.colorImageViewBackgroundAndIcon(binding.icon);
         }
     }
 }

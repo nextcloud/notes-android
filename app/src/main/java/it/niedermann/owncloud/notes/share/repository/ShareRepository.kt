@@ -37,17 +37,14 @@ import it.niedermann.owncloud.notes.shared.util.extensions.toExpirationDateStrin
 import org.json.JSONObject
 import java.util.Date
 
-class ShareRepository(
-    private val applicationContext: Context,
-    private val account: SingleSignOnAccount
-) {
+class ShareRepository(private val applicationContext: Context, private val account: SingleSignOnAccount) {
 
     private val tag = "ShareRepository"
     private val gson = Gson()
     private val apiProvider: ApiProvider by lazy { ApiProvider.getInstance() }
     private val notesRepository: NotesRepository by lazy {
         NotesRepository.getInstance(
-            applicationContext,
+            applicationContext
         )
     }
 
@@ -61,7 +58,13 @@ class ShareRepository(
         val notesPathResponseResult = getNotesPathResponseResult() ?: return null
         val notesPath = notesPathResponseResult.notesPath
         val notesSuffix = notesPathResponseResult.fileSuffix
-        return StringConstants.PATH + notesPath + StringConstants.PATH + note.title + notesSuffix
+        return if (note.category.isEmpty()) {
+            StringConstants.PATH + notesPath + StringConstants.PATH + note.title + notesSuffix
+        } else {
+            StringConstants.PATH + notesPath + StringConstants.PATH + note.category + StringConstants.PATH +
+                note.title +
+                notesSuffix
+        }
     }
 
     fun getShareEntitiesForSpecificNote(note: Note): List<ShareEntity> {
@@ -135,11 +138,17 @@ class ShareRepository(
 
     private fun LinkedTreeMap<*, *>.getList(key: String): ArrayList<*>? = this[key] as? ArrayList<*>
 
-    fun getSharees(
-        searchString: String,
-        page: Int,
-        perPage: Int
-    ): ArrayList<JSONObject> {
+    /**
+     * Searches for potential share recipients (sharees).
+     *
+     * Queries the server for users, groups, remotes, emails, circles, and rooms that match the provided criteria.
+     *
+     * @param searchString Query string.
+     * @param page Page number for paginated results.
+     * @param perPage Number of results to return per page.
+     * @return [ArrayList] of [JSONObject]s representing the share recipients.
+     */
+    fun getSharees(searchString: String, page: Int, perPage: Int): ArrayList<JSONObject> {
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
         val call = shareAPI.getSharees(
             search = searchString,
@@ -232,6 +241,13 @@ class ShareRepository(
         )
     }
 
+    /**
+     * Fetches all shares for the given file or folder identified by its remote ID.
+     *
+     * @param remoteId The remote file ID on the server for which to retrieve shares.
+     * @return A list of [OCShare] objects if the request is successful, or `null` if the request fails or an exception
+     * occurs.
+     */
     fun getShares(remoteId: Long): List<OCShare>? {
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
         val call = shareAPI.getShares(remoteId)
@@ -299,7 +315,6 @@ class ShareRepository(
             val call = shareAPI.removeShare(share.id)
             val response = call.execute()
             if (response.isSuccessful) {
-
                 if (share.shareType != null && share.shareType == ShareType.PUBLIC_LINK) {
                     note.setIsShared(false)
                     updateNote(note)
@@ -316,16 +331,20 @@ class ShareRepository(
         }
     }
 
-    fun updateShare(
-        shareId: Long,
-        requestBody: UpdateShareRequest
-    ): ApiResult<OcsResponse<CreateShareResponse>?> {
+    /**
+     * Updates an existing share.
+     *
+     * @param shareId The id of the share to update.
+     * @param requestBody The [UpdateShareRequest] containing the new share attributes.
+     * @return An [ApiResult] with the server response [OcsResponse] on success, or an error result on failure.
+     */
+    fun updateShare(shareId: Long, requestBody: UpdateShareRequest): ApiResult<OcsResponse<CreateShareResponse>?> {
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
         val call = shareAPI.updateShare(shareId, requestBody)
         val response = call.execute()
         return try {
             if (response.isSuccessful) {
-                Log_OC.d(tag, "Share updated successfully: ${response.body().toString()}")
+                Log_OC.d(tag, "Share updated successfully: ${response.body()}")
                 ApiResult.Success(
                     data = response.body(),
                     message = applicationContext.getString(R.string.note_share_created)
@@ -396,10 +415,15 @@ class ShareRepository(
         }
     }
 
-    fun updateSharePermission(
-        shareId: Long,
-        permissions: Int? = null,
-    ): ApiResult<OcsResponse<CreateShareResponse>?> {
+    /**
+     * Updates the permissions for an existing share.
+     *
+     * @param shareId The id of the share to update.
+     * @param permissions The new permission level to set
+     * @return An [ApiResult] containing the server response [OcsResponse] with the updated share details on success,
+     * or an error message on failure.
+     */
+    fun updateSharePermission(shareId: Long, permissions: Int? = null): ApiResult<OcsResponse<CreateShareResponse>?> {
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
         val requestBody = UpdateSharePermissionRequest(permissions = permissions)
 

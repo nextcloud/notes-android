@@ -63,12 +63,15 @@
             tools:text="View only" />
     </LinearLayout>
 
-    <ImageView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/overflow_menu"
-        android:layout_width="wrap_content"
+        style="@style/Button.IconButton"
+        android:layout_width="@dimen/minimum_size_for_touchable_area"
         android:layout_height="match_parent"
+        android:minHeight="@dimen/minimum_size_for_touchable_area"
         android:contentDescription="@string/note_share_activity_more_icon_content_description"
-        android:paddingStart="@dimen/spacer_2x"
-        android:paddingEnd="@dimen/spacer_2x"
-        android:src="@drawable/ic_dots_vertical" />
+        app:cornerRadius="@dimen/iconized_single_line_item_icon_size"
+        app:icon="@drawable/ic_dots_vertical"
+        app:iconSize="@dimen/iconized_single_line_item_icon_size"
+        app:iconTint="@color/icon_color_default" />
 </LinearLayout>

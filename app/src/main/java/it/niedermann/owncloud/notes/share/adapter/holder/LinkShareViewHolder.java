@@ -11,9 +11,11 @@ import android.graphics.PorterDuff;
 import android.text.TextUtils;
 import android.view.View;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 
+import com.nextcloud.android.common.ui.theme.utils.ColorRole;
 import com.owncloud.android.lib.resources.shares.OCShare;
 import com.owncloud.android.lib.resources.shares.ShareType;
 
@@ -27,6 +29,8 @@ import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
 public class LinkShareViewHolder extends BrandedViewHolder {
     private ItemShareLinkShareBinding binding;
     private Context context;
+
+    private BrandingUtil brandingUtil;
 
     public LinkShareViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -46,13 +50,17 @@ public class LinkShareViewHolder extends BrandedViewHolder {
             binding.icon.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(),
                     R.drawable.ic_email,
                     null));
+            if (publicShare.getLabel() != null && !publicShare.getLabel().isEmpty()) {
+                brandingUtil.platform.colorTextView(binding.name, ColorRole.ON_SURFACE_VARIANT);
+                binding.label.setText(publicShare.getLabel());
+                binding.label.setVisibility(View.VISIBLE);
+            } else {
+                brandingUtil.platform.colorTextView(binding.name, ColorRole.ON_SURFACE);
+                binding.label.setVisibility(View.GONE);
+            }
             binding.copyLink.setVisibility(View.GONE);
-
-            binding.icon.getBackground().setColorFilter(context.getResources().getColor(R.color.nc_grey),
-                    PorterDuff.Mode.SRC_IN);
-            binding.icon.getDrawable().mutate().setColorFilter(context.getResources().getColor(R.color.icon_on_nc_grey),
-                    PorterDuff.Mode.SRC_IN);
         } else {
+            brandingUtil.platform.colorTextView(binding.name, ColorRole.ON_SURFACE);
             if (!TextUtils.isEmpty(publicShare.getLabel())) {
                 String text = String.format(context.getString(R.string.share_link_with_label), publicShare.getLabel());
                 binding.name.setText(text);
@@ -89,10 +97,11 @@ public class LinkShareViewHolder extends BrandedViewHolder {
 
     @Override
     public void applyBrand(int color) {
-        final var util = BrandingUtil.of(color, context);
+        brandingUtil = BrandingUtil.of(color, context);
         if (binding != null) {
-            util.androidx.colorPrimaryTextViewElement(binding.permissionName);
-            util.platform.colorImageViewBackgroundAndIcon(binding.icon);
+            brandingUtil.androidx.colorPrimaryTextViewElement(binding.permissionName);
+            brandingUtil.platform.colorTextView(binding.label, ColorRole.ON_SURFACE);
+            brandingUtil.platform.colorImageViewBackgroundAndIcon(binding.icon);
         }
     }
 }
