@@ -138,6 +138,16 @@ class ShareRepository(private val applicationContext: Context, private val accou
 
     private fun LinkedTreeMap<*, *>.getList(key: String): ArrayList<*>? = this[key] as? ArrayList<*>
 
+    /**
+     * Searches for potential share recipients (sharees).
+     *
+     * Queries the server for users, groups, remotes, emails, circles, and rooms that match the provided criteria.
+     *
+     * @param searchString Query string.
+     * @param page Page number for paginated results.
+     * @param perPage Number of results to return per page.
+     * @return [ArrayList] of [JSONObject]s representing the share recipients.
+     */
     fun getSharees(searchString: String, page: Int, perPage: Int): ArrayList<JSONObject> {
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
         val call = shareAPI.getSharees(
