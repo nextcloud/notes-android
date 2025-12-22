@@ -8,12 +8,18 @@ package it.niedermann.owncloud.notes.share.model
 
 import com.owncloud.android.lib.resources.shares.OCShare
 import com.owncloud.android.lib.resources.shares.ShareType
+import it.niedermann.owncloud.notes.shared.util.extensions.toExpirationDateLong
 
-fun List<CreateShareResponse>.toOCShareList(): List<OCShare> {
-    return map { response ->
-        response.toOCShare()
-    }.filter { it.id != -1L }
-}
+/**
+ * Maps a list of [CreateShareResponse] to a list of [OCShare] objects.
+ *
+ * Filters out any responses that could not be parsed correctly (where the ID is -1).
+ *
+ * @return A list of valid [OCShare] instances.
+ */
+fun List<CreateShareResponse>.toOCShareList(): List<OCShare> = map { response ->
+    response.toOCShare()
+}.filter { it.id != -1L }
 
 fun CreateShareResponse.toOCShare(): OCShare {
     val response = this
@@ -31,7 +37,7 @@ fun CreateShareResponse.toOCShare(): OCShare {
         sharedWithDisplayName = response.shareWithDisplayname
         isFolder = response.itemType == "folder"
         userId = response.uidOwner
-        shareLink =  response.url
+        shareLink = response.url
         isPasswordProtected = !response.password.isNullOrEmpty()
         note = response.note
         isHideFileDownload = (response.hideDownload == 1L)
@@ -39,5 +45,6 @@ fun CreateShareResponse.toOCShare(): OCShare {
         isHasPreview = response.hasPreview
         mimetype = response.mimetype
         ownerDisplayName = response.displaynameOwner
+        expirationDate = response.expirationDate?.toExpirationDateLong() ?: 0L
     }
 }

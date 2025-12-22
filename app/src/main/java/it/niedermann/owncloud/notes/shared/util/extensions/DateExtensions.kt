@@ -10,6 +10,13 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-fun Date.toExpirationDateString(): String {
-    return SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(this)
-}
+fun Date.toExpirationDateString(): String = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(this)
+
+/**
+ * Parses an expiration date string in "yyyy-MM-dd 00:00:00" format into a millisecond timestamp
+ * representing the start of that day.
+ *
+ * @return The time in milliseconds since the epoch, or 0 if parsing fails.
+ */
+fun String.toExpirationDateLong(): Long =
+    SimpleDateFormat("yyyy-MM-dd 00:00:00", Locale.getDefault()).parse(this)?.time ?: 0L

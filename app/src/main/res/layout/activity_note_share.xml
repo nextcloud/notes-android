@@ -78,54 +78,63 @@
 
     </com.google.android.material.appbar.MaterialToolbar>
 
-    <LinearLayout
-        android:id="@+id/search_container"
-        tools:visibility="visible"
-        android:visibility="gone"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/searchCardWrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingStart="@dimen/spacer_2x"
-        android:paddingEnd="@dimen/zero">
+        android:layout_marginHorizontal="@dimen/spacer_2x"
+        app:cardBackgroundColor="@color/grey600"
+        app:cardCornerRadius="@dimen/spacer_4x"
+        app:strokeWidth="0dp">
 
-        <ImageView
-            android:id="@+id/searchViewIcon"
-            android:layout_width="@dimen/default_icon_size"
-            android:layout_height="@dimen/default_icon_size"
-            android:layout_gravity="center_vertical"
-            android:contentDescription="@string/note_share_activity_user_icon_content_description"
-            android:padding="@dimen/spacer_1x"
-            android:src="@drawable/ic_search_grey600_24dp" />
-
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
-            style="@style/nextcloud.SearchView"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/search_container"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/spacer_1hx"
-            android:layout_weight="1"
-            android:hint="@string/note_share_activity_search_text"
-            app:searchIcon="@null" />
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:paddingEnd="@dimen/zero"
             android:visibility="gone"
-            style="@android:style/Widget.ProgressBar.Small" />
+            tools:visibility="visible">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/pick_contact_email_btn"
-            android:layout_width="@dimen/minimum_size_for_touchable_area"
-            android:layout_height="@dimen/minimum_size_for_touchable_area"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="@dimen/spacer_1hx"
-            android:contentDescription="@string/note_share_activity_contact_icon_content_description"
-            android:padding="12dp"
-            android:src="@drawable/ic_contact_book" />
+            <ImageView
+                android:id="@+id/searchViewIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/minimum_size_for_touchable_area"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/spacer_2x"
+                android:contentDescription="@string/note_share_activity_user_icon_content_description"
+                android:src="@drawable/ic_search_grey600_24dp" />
 
-    </LinearLayout>
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView"
+                style="@style/nextcloud.SearchView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/note_share_activity_search_text"
+                app:searchIcon="@null" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@android:style/Widget.ProgressBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/pick_contact_email_btn"
+                android:layout_width="@dimen/minimum_size_for_touchable_area"
+                android:layout_height="@dimen/minimum_size_for_touchable_area"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="@string/note_share_activity_contact_icon_content_description"
+                android:paddingEnd="@dimen/spacer_2x"
+                android:paddingStart="@dimen/spacer_1x"
+                android:src="@drawable/ic_contact_book" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnShareButton"
@@ -133,6 +142,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacer_2x"
+        android:layout_marginTop="@dimen/spacer_1x"
         android:layout_marginEnd="@dimen/spacer_2x"
         android:text="@string/note_share_activity_send_copy_to"
         android:textColor="@color/text_color"

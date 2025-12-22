@@ -44,8 +44,10 @@ import com.owncloud.android.lib.resources.shares.ShareType;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -467,6 +469,22 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     }
 
     @Override
+    public void showShareExpirationSnackbar(OCShare share) {
+        String expirationDescription = getString(
+            R.string.share_expires,
+            SimpleDateFormat.getDateInstance().format(new Date(share.getExpirationDate()))
+        );
+        Snackbar snackbar = Snackbar
+            .make(binding.getRoot(), expirationDescription, Snackbar.LENGTH_LONG)
+            .setAction(R.string.dismiss, view -> {
+                // Clicking on empty action will dismiss snackbar
+            });
+        final var util = BrandingUtil.of(BrandingUtil.readBrandMainColor(this), this);
+        util.material.themeSnackbar(snackbar);
+        snackbar.show();
+    }
+
+    @Override
     public void showPermissionsDialog(OCShare share) {
         new QuickSharingPermissionsBottomSheetDialog(this, this, share).show();
     }
@@ -807,12 +825,17 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         final var util = BrandingUtil.of(color, this);
         util.platform.themeStatusBar(this);
         util.material.themeToolbar(binding.toolbar);
-        util.androidx.themeToolbarSearchView(binding.searchView);
+        util.notes.themeContentSearchView(binding.searchView);
+        util.platform.colorImageView(binding.searchViewIcon, ColorRole.ON_SURFACE_VARIANT);
+        util.platform.colorImageView(binding.pickContactEmailBtn, ColorRole.ON_SURFACE_VARIANT);
         util.platform.colorCircularProgressBar(binding.loadingLayoutIndicator, ColorRole.PRIMARY);
         util.platform.themeHorizontalProgressBar(binding.progressBar);
         util.platform.colorViewBackground(getWindow().getDecorView());
         util.platform.colorViewBackground(binding.getRoot());
         util.material.colorMaterialButtonPrimaryOutlined(binding.btnShareButton);
+        util.platform.colorTextView(binding.title, ColorRole.ON_SURFACE);
+        util.platform.colorTextView(binding.fileName, ColorRole.ON_SURFACE_VARIANT);
+        util.notes.themeSearchCardView(binding.searchCardWrapper);
     }
 
     @Override

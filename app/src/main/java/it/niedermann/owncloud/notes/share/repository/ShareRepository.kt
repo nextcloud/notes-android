@@ -33,6 +33,7 @@ import it.niedermann.owncloud.notes.shared.model.NotesSettings
 import it.niedermann.owncloud.notes.shared.model.OcsResponse
 import it.niedermann.owncloud.notes.shared.util.StringConstants
 import it.niedermann.owncloud.notes.shared.util.extensions.getErrorMessage
+import it.niedermann.owncloud.notes.shared.util.extensions.toExpirationDateLong
 import it.niedermann.owncloud.notes.shared.util.extensions.toExpirationDateString
 import org.json.JSONObject
 import java.util.Date
@@ -109,6 +110,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
                     val uidOwner = map?.get("uid_owner") as? String
                     val displayNameOwner = map?.get("displayname_owner") as? String
                     val url = map?.get("url") as? String
+                    val expirationDateString = map?.get("expiration") as? String
 
                     id?.toInt()?.let {
                         val entity = ShareEntity(
@@ -122,7 +124,8 @@ class ShareRepository(private val applicationContext: Context, private val accou
                             displayname_file_owner = displayNameFileOwner,
                             uid_owner = uidOwner,
                             displayname_owner = displayNameOwner,
-                            url = url
+                            url = url,
+                            expiration_date = expirationDateString?.toExpirationDateLong()
                         )
 
                         entities.add(entity)

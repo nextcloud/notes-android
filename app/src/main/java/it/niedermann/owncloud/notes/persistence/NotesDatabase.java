@@ -58,10 +58,11 @@ import it.niedermann.owncloud.notes.shared.model.Capabilities;
                 NotesListWidgetData.class,
                 ShareEntity.class,
                 Capabilities.class
-        }, version = 27,
+        }, version = 28,
         autoMigrations = {
                 @AutoMigration(from = 25, to = 26),
                 @AutoMigration(from = 26, to = 27),
+                @AutoMigration(from = 27, to = 28),
         }
 )
 @TypeConverters({Converters.class})

@@ -19,6 +19,7 @@ import android.graphics.drawable.StateListDrawable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
@@ -28,7 +29,6 @@ import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.google.android.material.appbar.AppBarLayout;
@@ -216,6 +216,28 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
             editText.setTextColor(dynamicColor.onSurface().getArgb(scheme));
             closeButton.setColorFilter(dynamicColor.onSurface().getArgb(scheme));
             searchButton.setColorFilter(dynamicColor.onSurface().getArgb(scheme));
+            return searchView;
+        });
+    }
+
+    /**
+     * @deprecated Should be replaced with {@link com.google.android.material.search.SearchView}
+     */
+    @Deprecated
+    public void themeContentSearchView(@NonNull SearchView searchView) {
+        withScheme(searchView, scheme -> {
+            // hacky as no default way is provided
+            final var editText = (AppCompatAutoCompleteTextView) searchView
+            .findViewById(androidx.appcompat.R.id.search_src_text);
+            final var searchPlate = (LinearLayout) searchView.findViewById(androidx.appcompat.R.id.search_plate);
+            final var closeButton = (ImageView) searchView.findViewById(androidx.appcompat.R.id.search_close_btn);
+            final var searchButton = (ImageView) searchView.findViewById(androidx.appcompat.R.id.search_button);
+            editText.setHintTextColor(dynamicColor.onSurfaceVariant().getArgb(scheme));
+            editText.setHighlightColor(dynamicColor.inverseOnSurface().getArgb(scheme));
+            editText.setTextColor(dynamicColor.onSurface().getArgb(scheme));
+            closeButton.setColorFilter(dynamicColor.onSurface().getArgb(scheme));
+            searchButton.setColorFilter(dynamicColor.onSurface().getArgb(scheme));
+            searchPlate.setBackgroundColor(dynamicColor.surfaceContainerHigh().getArgb(scheme));
             return searchView;
         });
     }

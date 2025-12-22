@@ -139,5 +139,9 @@ data class CreateShareResponse(
 
     @Expose
     @SerializedName("password")
-    val password: String?
+    val password: String?,
+
+    @Expose
+    @SerializedName("expiration")
+    val expirationDate: String?
 )

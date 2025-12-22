@@ -15,6 +15,8 @@ public interface ShareeListAdapterListener {
 
     void showSharingMenuActionSheet(OCShare share);
 
+    void showShareExpirationSnackbar(OCShare share);
+
     void copyInternalLink();
 
     void createPublicShareLink();

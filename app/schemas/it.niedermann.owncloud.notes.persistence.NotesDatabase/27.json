@@ -1,0 +1,741 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 27,
+    "identityHash": "9bb1af64fb5d0c3bbf0520e757004e1f",
+    "entities": [
+      {
+        "tableName": "Account",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `url` TEXT NOT NULL DEFAULT '', `userName` TEXT NOT NULL DEFAULT '', `accountName` TEXT NOT NULL DEFAULT '', `eTag` TEXT, `modified` INTEGER, `apiVersion` TEXT, `color` INTEGER NOT NULL DEFAULT -16743735, `textColor` INTEGER NOT NULL DEFAULT -16777216, `capabilitiesETag` TEXT, `displayName` TEXT, `directEditingAvailable` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "url",
+            "columnName": "url",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "userName",
+            "columnName": "userName",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "accountName",
+            "columnName": "accountName",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "eTag",
+            "columnName": "eTag",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "modified",
+            "columnName": "modified",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "apiVersion",
+            "columnName": "apiVersion",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "color",
+            "columnName": "color",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-16743735"
+          },
+          {
+            "fieldPath": "textColor",
+            "columnName": "textColor",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-16777216"
+          },
+          {
+            "fieldPath": "capabilitiesETag",
+            "columnName": "capabilitiesETag",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "displayName",
+            "columnName": "displayName",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "directEditingAvailable",
+            "columnName": "directEditingAvailable",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "IDX_ACCOUNT_MODIFIED",
+            "unique": false,
+            "columnNames": [
+              "modified"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IDX_ACCOUNT_MODIFIED` ON `${TABLE_NAME}` (`modified`)"
+          },
+          {
+            "name": "IDX_ACCOUNT_URL",
+            "unique": false,
+            "columnNames": [
+              "url"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IDX_ACCOUNT_URL` ON `${TABLE_NAME}` (`url`)"
+          },
+          {
+            "name": "IDX_ACCOUNT_USERNAME",
+            "unique": false,
+            "columnNames": [
+              "userName"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IDX_ACCOUNT_USERNAME` ON `${TABLE_NAME}` (`userName`)"
+          },
+          {
+            "name": "IDX_ACCOUNT_ACCOUNTNAME",
+            "unique": false,
+            "columnNames": [
+              "accountName"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IDX_ACCOUNT_ACCOUNTNAME` ON `${TABLE_NAME}` (`accountName`)"
+          },
+          {
+            "name": "IDX_ACCOUNT_ETAG",
+            "unique": false,
+            "columnNames": [
+              "eTag"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IDX_ACCOUNT_ETAG` ON `${TABLE_NAME}` (`eTag`)"
+          }
+        ]
+      },
+      {
+        "tableName": "Note",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `remoteId` INTEGER, `accountId` INTEGER NOT NULL, `status` TEXT NOT NULL, `title` TEXT NOT NULL DEFAULT '', `category` TEXT NOT NULL DEFAULT '', `modified` INTEGER, `content` TEXT NOT NULL DEFAULT '', `favorite` INTEGER NOT NULL DEFAULT 0, `isShared` INTEGER NOT NULL DEFAULT 0, `readonly` INTEGER NOT NULL DEFAULT 0, `eTag` TEXT, `excerpt` TEXT NOT NULL DEFAULT '', `scrollY` INTEGER NOT NULL DEFAULT 0, FOREIGN KEY(`accountId`) REFERENCES `Account`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "remoteId",
+            "columnName": "remoteId",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "accountId",
+            "columnName": "accountId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "category",
+            "columnName": "category",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "modified",
+            "columnName": "modified",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "content",
+            "columnName": "content",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "favorite",
+            "columnName": "favorite",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "isShared",
+            "columnName": "isShared",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "readonly",
+            "columnName": "readonly",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "eTag",
+            "columnName": "eTag",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "excerpt",
+            "columnName": "excerpt",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "scrollY",
+            "columnName": "scrollY",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "IDX_NOTE_ACCOUNTID",
+            "unique": false,
+            "columnNames": [
+              "accountId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IDX_NOTE_ACCOUNTID` ON `${TABLE_NAME}` (`accountId`)"
+          },
+          {
+            "name": "IDX_NOTE_CATEGORY",
+            "unique": false,
+            "columnNames": [
+              "category"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IDX_NOTE_CATEGORY` ON `${TABLE_NAME}` (`category`)"
+          },
+          {
+            "name": "IDX_NOTE_FAVORITE",
+            "unique": false,
+            "columnNames": [
+              "favorite"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IDX_NOTE_FAVORITE` ON `${TABLE_NAME}` (`favorite`)"
+          },
+          {
+            "name": "IDX_NOTE_IS_SHARED",
+            "unique": false,
+            "columnNames": [
+              "isShared"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IDX_NOTE_IS_SHARED` ON `${TABLE_NAME}` (`isShared`)"
+          },
+          {
+            "name": "IDX_READONLY",
+            "unique": false,
+            "columnNames": [
+              "readonly"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IDX_READONLY` ON `${TABLE_NAME}` (`readonly`)"
+          },
+          {
+            "name": "IDX_NOTE_MODIFIED",
+            "unique": false,
+            "columnNames": [
+              "modified"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IDX_NOTE_MODIFIED` ON `${TABLE_NAME}` (`modified`)"
+          },
+          {
+            "name": "IDX_NOTE_REMOTEID",
+            "unique": false,
+            "columnNames": [
+              "remoteId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IDX_NOTE_REMOTEID` ON `${TABLE_NAME}` (`remoteId`)"
+          },
+          {
+            "name": "IDX_NOTE_STATUS",
+            "unique": false,
+            "columnNames": [
+              "status"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IDX_NOTE_STATUS` ON `${TABLE_NAME}` (`status`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "Account",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "accountId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "CategoryOptions",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`accountId` INTEGER NOT NULL, `category` TEXT NOT NULL, `sortingMethod` INTEGER, PRIMARY KEY(`accountId`, `category`), FOREIGN KEY(`accountId`) REFERENCES `Account`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "accountId",
+            "columnName": "accountId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "category",
+            "columnName": "category",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sortingMethod",
+            "columnName": "sortingMethod",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "accountId",
+            "category"
+          ]
+        },
+        "indices": [
+          {
+            "name": "IDX_CATEGORIYOPTIONS_ACCOUNTID",
+            "unique": false,
+            "columnNames": [
+              "accountId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IDX_CATEGORIYOPTIONS_ACCOUNTID` ON `${TABLE_NAME}` (`accountId`)"
+          },
+          {
+            "name": "IDX_CATEGORIYOPTIONS_CATEGORY",
+            "unique": false,
+            "columnNames": [
+              "category"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IDX_CATEGORIYOPTIONS_CATEGORY` ON `${TABLE_NAME}` (`category`)"
+          },
+          {
+            "name": "IDX_CATEGORIYOPTIONS_SORTING_METHOD",
+            "unique": false,
+            "columnNames": [
+              "sortingMethod"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IDX_CATEGORIYOPTIONS_SORTING_METHOD` ON `${TABLE_NAME}` (`sortingMethod`)"
+          },
+          {
+            "name": "IDX_UNIQUE_CATEGORYOPTIONS_ACCOUNT_CATEGORY",
+            "unique": true,
+            "columnNames": [
+              "accountId",
+              "category"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `IDX_UNIQUE_CATEGORYOPTIONS_ACCOUNT_CATEGORY` ON `${TABLE_NAME}` (`accountId`, `category`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "Account",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "accountId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "SingleNoteWidgetData",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`noteId` INTEGER NOT NULL, `id` INTEGER NOT NULL, `accountId` INTEGER NOT NULL, `themeMode` INTEGER NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`accountId`) REFERENCES `Account`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`noteId`) REFERENCES `Note`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "noteId",
+            "columnName": "noteId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "accountId",
+            "columnName": "accountId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "themeMode",
+            "columnName": "themeMode",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "IDX_SINGLENOTEWIDGETDATA_ACCOUNTID",
+            "unique": false,
+            "columnNames": [
+              "accountId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IDX_SINGLENOTEWIDGETDATA_ACCOUNTID` ON `${TABLE_NAME}` (`accountId`)"
+          },
+          {
+            "name": "IDX_SINGLENOTEWIDGETDATA_NOTEID",
+            "unique": false,
+            "columnNames": [
+              "noteId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IDX_SINGLENOTEWIDGETDATA_NOTEID` ON `${TABLE_NAME}` (`noteId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "Account",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "accountId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "Note",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "noteId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "NotesListWidgetData",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`mode` INTEGER NOT NULL, `category` TEXT, `id` INTEGER NOT NULL, `accountId` INTEGER NOT NULL, `themeMode` INTEGER NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`accountId`) REFERENCES `Account`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "mode",
+            "columnName": "mode",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "category",
+            "columnName": "category",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "accountId",
+            "columnName": "accountId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "themeMode",
+            "columnName": "themeMode",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "IDX_NOTESLISTWIDGETDATA_ACCOUNTID",
+            "unique": false,
+            "columnNames": [
+              "accountId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IDX_NOTESLISTWIDGETDATA_ACCOUNTID` ON `${TABLE_NAME}` (`accountId`)"
+          },
+          {
+            "name": "IDX_NOTESLISTWIDGETDATA_CATEGORY",
+            "unique": false,
+            "columnNames": [
+              "category"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IDX_NOTESLISTWIDGETDATA_CATEGORY` ON `${TABLE_NAME}` (`category`)"
+          },
+          {
+            "name": "IDX_NOTESLISTWIDGETDATA_ACCOUNT_CATEGORY",
+            "unique": false,
+            "columnNames": [
+              "accountId",
+              "category"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `IDX_NOTESLISTWIDGETDATA_ACCOUNT_CATEGORY` ON `${TABLE_NAME}` (`accountId`, `category`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "Account",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "accountId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "share_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `note` TEXT, `path` TEXT, `file_target` TEXT, `share_with` TEXT, `share_with_displayname` TEXT, `uid_file_owner` TEXT, `displayname_file_owner` TEXT, `uid_owner` TEXT, `displayname_owner` TEXT, `url` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "note",
+            "columnName": "note",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "path",
+            "columnName": "path",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "file_target",
+            "columnName": "file_target",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "share_with",
+            "columnName": "share_with",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "share_with_displayname",
+            "columnName": "share_with_displayname",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "uid_file_owner",
+            "columnName": "uid_file_owner",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "displayname_file_owner",
+            "columnName": "displayname_file_owner",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "uid_owner",
+            "columnName": "uid_owner",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "displayname_owner",
+            "columnName": "displayname_owner",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "url",
+            "columnName": "url",
+            "affinity": "TEXT"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "capabilities",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `nextcloudMajorVersion` TEXT, `nextcloudMinorVersion` TEXT, `nextcloudMicroVersion` TEXT, `federationShare` INTEGER NOT NULL, `apiVersion` TEXT, `color` INTEGER NOT NULL, `textColor` INTEGER NOT NULL, `eTag` TEXT, `directEditingAvailable` INTEGER NOT NULL, `publicPasswordEnforced` INTEGER NOT NULL, `askForOptionalPassword` INTEGER NOT NULL, `isReSharingAllowed` INTEGER NOT NULL, `defaultPermission` INTEGER NOT NULL, `userStatusSupportsBusy` INTEGER, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nextcloudMajorVersion",
+            "columnName": "nextcloudMajorVersion",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "nextcloudMinorVersion",
+            "columnName": "nextcloudMinorVersion",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "nextcloudMicroVersion",
+            "columnName": "nextcloudMicroVersion",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "federationShare",
+            "columnName": "federationShare",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "apiVersion",
+            "columnName": "apiVersion",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "color",
+            "columnName": "color",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "textColor",
+            "columnName": "textColor",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "eTag",
+            "columnName": "eTag",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "directEditingAvailable",
+            "columnName": "directEditingAvailable",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "publicPasswordEnforced",
+            "columnName": "publicPasswordEnforced",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "askForOptionalPassword",
+            "columnName": "askForOptionalPassword",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isReSharingAllowed",
+            "columnName": "isReSharingAllowed",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "defaultPermission",
+            "columnName": "defaultPermission",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userStatusSupportsBusy",
+            "columnName": "userStatusSupportsBusy",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9bb1af64fb5d0c3bbf0520e757004e1f')"
+    ]
+  }
+}
