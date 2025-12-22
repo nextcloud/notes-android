@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.nextcloud.android.common.ui.theme.utils.ColorRole;
 import com.owncloud.android.lib.resources.shares.OCShare;
 import com.owncloud.android.lib.resources.shares.ShareType;
 
@@ -90,30 +91,36 @@ public class ShareeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        BrandingUtil brandingUtil = BrandingUtil.of(color, parent.getContext());
+        LayoutInflater layoutInflater = LayoutInflater.from(activity);
         switch (ShareType.fromValue(viewType)) {
             case PUBLIC_LINK, EMAIL -> {
-                return new LinkShareViewHolder(
-                        ItemShareLinkShareBinding.inflate(LayoutInflater.from(activity),
-                                parent,
-                                false),
-                        activity);
+                ItemShareLinkShareBinding binding = ItemShareLinkShareBinding.inflate(
+                    layoutInflater, parent, false);
+                brandingUtil.platform.colorTextView(binding.name, ColorRole.ON_SURFACE);
+                brandingUtil.platform.colorTextView(binding.subline, ColorRole.ON_SURFACE_VARIANT);
+                return new LinkShareViewHolder(binding, activity);
             }
              case NEW_PUBLIC_LINK -> {
-                 ItemAddPublicShareBinding binding = ItemAddPublicShareBinding.inflate(LayoutInflater.from(activity), parent, false);
-                 BrandingUtil.of(color, parent.getContext()).notes.themeInternalLinkIcon(binding.addNewPublicShareLinkIcon);
+                 ItemAddPublicShareBinding binding = ItemAddPublicShareBinding.inflate(
+                     layoutInflater, parent, false);
+                 brandingUtil.notes.themeInternalLinkIcon(binding.addNewPublicShareLinkIcon);
+                 brandingUtil.platform.colorTextView(binding.addNewPublicShareLinkText, ColorRole.ON_SURFACE);
                 return new NewLinkShareViewHolder(binding);
             }
             case INTERNAL -> {
-                ItemInternalShareLinkBinding binding = ItemInternalShareLinkBinding.inflate(LayoutInflater.from(activity), parent, false);
-                BrandingUtil.of(color, parent.getContext()).notes.themeInternalLinkIcon(binding.copyInternalLinkIcon);
+                ItemInternalShareLinkBinding binding = ItemInternalShareLinkBinding.inflate(
+                    layoutInflater, parent, false);
+                brandingUtil.notes.themeInternalLinkIcon(binding.copyInternalLinkIcon);
+                brandingUtil.platform.colorTextView(binding.shareInternalLink, ColorRole.ON_SURFACE);
+                brandingUtil.platform.colorTextView(binding.shareInternalLinkText, ColorRole.ON_SURFACE_VARIANT);
                 return new InternalShareViewHolder(binding, activity);
             }
             default -> {
-                return new ShareViewHolder(ItemShareShareBinding.inflate(LayoutInflater.from(activity),
-                        parent,
-                        false),
-                        account,
-                        activity);
+                ItemShareShareBinding binding = ItemShareShareBinding.inflate(
+                    layoutInflater, parent, false);
+                brandingUtil.platform.colorTextView(binding.name, ColorRole.ON_SURFACE);
+                return new ShareViewHolder(binding, account, activity);
             }
         }
     }

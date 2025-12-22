@@ -224,17 +224,11 @@ public class NotesViewThemeUtils extends ViewThemeUtilsBase {
         withScheme(view, scheme -> {
             view
                     .getBackground()
-                    .setColorFilter(ResourcesCompat.getColor(view.getContext().getResources(),
-                                    R.color.nc_grey,
-                                    null),
-                            PorterDuff.Mode.SRC_IN);
+                    .setColorFilter(dynamicColor.surfaceContainerHigh().getArgb(scheme), PorterDuff.Mode.SRC_IN);
             view
                     .getDrawable()
                     .mutate()
-                    .setColorFilter(ResourcesCompat.getColor(view.getContext().getResources(),
-                                    R.color.icon_on_nc_grey,
-                                    null),
-                            PorterDuff.Mode.SRC_IN);
+                    .setColorFilter(dynamicColor.onSurface().getArgb(scheme), PorterDuff.Mode.SRC_IN);
             return view;
         });
     }

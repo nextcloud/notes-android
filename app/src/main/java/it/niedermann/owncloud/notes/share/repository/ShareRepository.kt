@@ -37,17 +37,14 @@ import it.niedermann.owncloud.notes.shared.util.extensions.toExpirationDateStrin
 import org.json.JSONObject
 import java.util.Date
 
-class ShareRepository(
-    private val applicationContext: Context,
-    private val account: SingleSignOnAccount
-) {
+class ShareRepository(private val applicationContext: Context, private val account: SingleSignOnAccount) {
 
     private val tag = "ShareRepository"
     private val gson = Gson()
     private val apiProvider: ApiProvider by lazy { ApiProvider.getInstance() }
     private val notesRepository: NotesRepository by lazy {
         NotesRepository.getInstance(
-            applicationContext,
+            applicationContext
         )
     }
 
@@ -61,7 +58,13 @@ class ShareRepository(
         val notesPathResponseResult = getNotesPathResponseResult() ?: return null
         val notesPath = notesPathResponseResult.notesPath
         val notesSuffix = notesPathResponseResult.fileSuffix
-        return StringConstants.PATH + notesPath + StringConstants.PATH + note.title + notesSuffix
+        return if (note.category.isEmpty()) {
+            StringConstants.PATH + notesPath + StringConstants.PATH + note.title + notesSuffix
+        } else {
+            StringConstants.PATH + notesPath + StringConstants.PATH + note.category + StringConstants.PATH +
+                note.title +
+                notesSuffix
+        }
     }
 
     fun getShareEntitiesForSpecificNote(note: Note): List<ShareEntity> {
@@ -135,11 +138,7 @@ class ShareRepository(
 
     private fun LinkedTreeMap<*, *>.getList(key: String): ArrayList<*>? = this[key] as? ArrayList<*>
 
-    fun getSharees(
-        searchString: String,
-        page: Int,
-        perPage: Int
-    ): ArrayList<JSONObject> {
+    fun getSharees(searchString: String, page: Int, perPage: Int): ArrayList<JSONObject> {
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
         val call = shareAPI.getSharees(
             search = searchString,
@@ -299,7 +298,6 @@ class ShareRepository(
             val call = shareAPI.removeShare(share.id)
             val response = call.execute()
             if (response.isSuccessful) {
-
                 if (share.shareType != null && share.shareType == ShareType.PUBLIC_LINK) {
                     note.setIsShared(false)
                     updateNote(note)
@@ -316,16 +314,13 @@ class ShareRepository(
         }
     }
 
-    fun updateShare(
-        shareId: Long,
-        requestBody: UpdateShareRequest
-    ): ApiResult<OcsResponse<CreateShareResponse>?> {
+    fun updateShare(shareId: Long, requestBody: UpdateShareRequest): ApiResult<OcsResponse<CreateShareResponse>?> {
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
         val call = shareAPI.updateShare(shareId, requestBody)
         val response = call.execute()
         return try {
             if (response.isSuccessful) {
-                Log_OC.d(tag, "Share updated successfully: ${response.body().toString()}")
+                Log_OC.d(tag, "Share updated successfully: ${response.body()}")
                 ApiResult.Success(
                     data = response.body(),
                     message = applicationContext.getString(R.string.note_share_created)
@@ -396,10 +391,7 @@ class ShareRepository(
         }
     }
 
-    fun updateSharePermission(
-        shareId: Long,
-        permissions: Int? = null,
-    ): ApiResult<OcsResponse<CreateShareResponse>?> {
+    fun updateSharePermission(shareId: Long, permissions: Int? = null): ApiResult<OcsResponse<CreateShareResponse>?> {
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
         val requestBody = UpdateSharePermissionRequest(permissions = permissions)
 

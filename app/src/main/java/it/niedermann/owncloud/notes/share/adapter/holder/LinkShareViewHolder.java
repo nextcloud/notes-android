@@ -47,11 +47,6 @@ public class LinkShareViewHolder extends BrandedViewHolder {
                     R.drawable.ic_email,
                     null));
             binding.copyLink.setVisibility(View.GONE);
-
-            binding.icon.getBackground().setColorFilter(context.getResources().getColor(R.color.nc_grey),
-                    PorterDuff.Mode.SRC_IN);
-            binding.icon.getDrawable().mutate().setColorFilter(context.getResources().getColor(R.color.icon_on_nc_grey),
-                    PorterDuff.Mode.SRC_IN);
         } else {
             if (!TextUtils.isEmpty(publicShare.getLabel())) {
                 String text = String.format(context.getString(R.string.share_link_with_label), publicShare.getLabel());

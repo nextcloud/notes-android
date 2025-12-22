@@ -27,6 +27,6 @@ public class NewLinkShareViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(ShareeListAdapterListener listener) {
-        binding.addNewPublicShareLink.setOnClickListener(v -> listener.createPublicShareLink());
+        binding.addNewPublicShareLinkPlus.setOnClickListener(v -> listener.createPublicShareLink());
     }
 }
