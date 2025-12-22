@@ -108,6 +108,8 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         executorService = Executors.newSingleThreadScheduledExecutor();
         binding = ActivityNoteShareBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        setSupportActionBar(binding.toolbar);
+        binding.toolbar.setNavigationOnClickListener(v -> backPressed());
         registerResultLauncher();
         initializeArguments();
         initializeOnBackPressedDispatcher();
@@ -127,12 +129,16 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                Intent intent = new Intent(NoteShareActivity.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
-                finish();
+                backPressed();
             }
         });
+    }
+
+    private void backPressed() {
+        Intent intent = new Intent(NoteShareActivity.this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+        finish();
     }
 
     private void initializeArguments() {
@@ -156,6 +162,8 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                 repository.getSharesForNotesAndSaveShareEntities();
 
                 runOnUiThread(() -> {
+                    binding.title.setText(R.string.activity_sharing_title);
+                    binding.fileName.setText(note.getTitle());
                     binding.searchContainer.setVisibility(View.VISIBLE);
                     binding.sharesList.setVisibility(View.VISIBLE);
                     binding.sharesList.setAdapter(new ShareeListAdapter(this, new ArrayList<>(), this, account));
@@ -798,6 +806,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     public void applyBrand(int color) {
         final var util = BrandingUtil.of(color, this);
         util.platform.themeStatusBar(this);
+        util.material.themeToolbar(binding.toolbar);
         util.androidx.themeToolbarSearchView(binding.searchView);
         util.platform.colorCircularProgressBar(binding.loadingLayoutIndicator, ColorRole.PRIMARY);
         util.platform.themeHorizontalProgressBar(binding.progressBar);
