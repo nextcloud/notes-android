@@ -39,6 +39,7 @@
     <string name="action_undo">Poništi</string>
     <string name="activity_chooser_send_file_title">Pošaljite</string>
     <string name="activity_select_single_note">Odaberi bilješku</string>
+    <string name="activity_sharing_title">Dijeljenje</string>
     <string name="add_account">Dodaj račun</string>
     <string name="add_another_public_share_link">Dodaj drugu poveznicu</string>
     <string name="add_category">Dodaj %1$s</string>

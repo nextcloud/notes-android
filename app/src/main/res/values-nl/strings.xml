@@ -41,6 +41,7 @@
     <string name="activity_chooser_send_file_title">Verzenden</string>
     <string name="activity_chooser_title">Verstuur link naar…</string>
     <string name="activity_select_single_note">Notitie selecteren</string>
+    <string name="activity_sharing_title">Delen</string>
     <string name="add_account">Account toevoegen</string>
     <string name="add_another_public_share_link">Toevoegen andere link</string>
     <string name="add_category">Toevoegen %1$s</string>

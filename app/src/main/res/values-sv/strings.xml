@@ -42,6 +42,7 @@
     <string name="activity_chooser_send_file_title">Skicka</string>
     <string name="activity_chooser_title">Skicka länk till…</string>
     <string name="activity_select_single_note">Välj anteckning</string>
+    <string name="activity_sharing_title">Delning</string>
     <string name="add_account">Lägg till konto</string>
     <string name="add_another_public_share_link">Lägg till en annan länk</string>
     <string name="add_category">Lägg till %1$s</string>

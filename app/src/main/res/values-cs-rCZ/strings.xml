@@ -192,6 +192,7 @@
     <string name="link_share_editing">Upravování</string>
     <string name="link_share_file_drop">Předání souboru (pouze nahrání)</string>
     <string name="link_share_view_only">Pouze prohlížet</string>
+    <string name="listview_no_content">Žádný obsah</string>
     <string name="listview_updated_last_month">Minulý měsíc</string>
     <string name="listview_updated_last_week">Minulý týden</string>
     <string name="listview_updated_this_month">Tento měsíc</string>

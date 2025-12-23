@@ -42,6 +42,7 @@
     <string name="activity_chooser_send_file_title">ئەۋەتىڭ</string>
     <string name="activity_chooser_title">ئۇلىنىش ئەۋەتىڭ…</string>
     <string name="activity_select_single_note">ئىزاھاتنى تاللاڭ</string>
+    <string name="activity_sharing_title">ھەمبەھىرلەش</string>
     <string name="add_account">ھېسابات قوشۇڭ</string>
     <string name="add_another_public_share_link">باشقا ئۇلىنىش قوشۇڭ</string>
     <string name="add_category">%1$s نى قوشۇڭ</string>

@@ -37,6 +37,7 @@
     <string name="action_uncategorized">Sena categoria</string>
     <string name="action_undo">Annulla</string>
     <string name="activity_select_single_note">Seletziona nota</string>
+    <string name="activity_sharing_title">Cumpartzende</string>
     <string name="add_account">Agiunghe contu</string>
     <string name="add_another_public_share_link">Agiunghe un\'àteru ligòngiu</string>
     <string name="add_category">Agiunghe %1$s</string>

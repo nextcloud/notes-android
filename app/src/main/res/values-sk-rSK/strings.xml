@@ -41,6 +41,7 @@
     <string name="activity_chooser_send_file_title">Odoslať</string>
     <string name="activity_chooser_title">Odoslať odkaz…</string>
     <string name="activity_select_single_note">Vybrať poznámku</string>
+    <string name="activity_sharing_title">Zdieľanie</string>
     <string name="add_account">Pridať účet</string>
     <string name="add_another_public_share_link">Pridať ďalší odkaz</string>
     <string name="add_category">Pridať %1$s</string>

@@ -27,6 +27,7 @@
     <string name="activity_chooser_send_file_title">Enviar</string>
     <string name="activity_chooser_title">Enviar Link a…</string>
     <string name="activity_select_single_note">Seleccionar nota</string>
+    <string name="activity_sharing_title">Compartir</string>
     <string name="add_account">Agregar cuenta</string>
     <string name="add_another_public_share_link">Agregar otro enlace</string>
     <string name="add_new_public_share">Agregar un nuevo enlace publico</string>

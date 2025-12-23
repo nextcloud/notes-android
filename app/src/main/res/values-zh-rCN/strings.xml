@@ -41,6 +41,7 @@
     <string name="activity_chooser_send_file_title">发送</string>
     <string name="activity_chooser_title">发送链接到…</string>
     <string name="activity_select_single_note">选择笔记</string>
+    <string name="activity_sharing_title">共享</string>
     <string name="add_account">添加账号</string>
     <string name="add_another_public_share_link">添加其他链接</string>
     <string name="add_category">添加 %1$s</string>

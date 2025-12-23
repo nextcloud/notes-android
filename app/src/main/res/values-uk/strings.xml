@@ -42,6 +42,7 @@
     <string name="activity_chooser_send_file_title">Надіслати</string>
     <string name="activity_chooser_title">Надіслати посилання до…</string>
     <string name="activity_select_single_note">Оберіть нотатку</string>
+    <string name="activity_sharing_title">Спільне</string>
     <string name="add_account">Додати обліковий запис</string>
     <string name="add_another_public_share_link">Додати інше посилання</string>
     <string name="add_category">Додати %1$s</string>
@@ -231,6 +232,7 @@
     <string name="note_share_activity_more_icon_content_description">значок нотатки поділитися більше</string>
     <string name="note_share_activity_resharing_not_allowed">Політика або дозволи забороняють подальшу передачу у спільний доступ</string>
     <string name="note_share_activity_search_text">Ім\'я, ідентифікатор об\'єднаної хмари або ел.адреса...</string>
+    <string name="note_share_activity_send_copy_to">Надіслати копію до</string>
     <string name="note_share_activity_share_icon_content_description">значок нотатки поділитися</string>
     <string name="note_share_activity_share_link">Передати у публічний доступ</string>
     <string name="note_share_activity_shared_with_you">%1$s поділив(-ла-)ся з вами</string>
