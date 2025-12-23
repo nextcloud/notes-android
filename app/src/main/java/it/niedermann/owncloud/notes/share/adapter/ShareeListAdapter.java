@@ -215,6 +215,11 @@ public class ShareeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         List<OCShare> users = new ArrayList<>();
 
         for (OCShare share : shares) {
+            if (share.getShareWith().equalsIgnoreCase(account.getAccountName().split("@")[0])) {
+                // this is then an incoming share, shown via "shared with you"
+                continue;
+            }
+            
             if (share.getShareType()  != null) {
                 if (ShareType.PUBLIC_LINK == share.getShareType() || ShareType.EMAIL == share.getShareType()) {
                     links.add(share);

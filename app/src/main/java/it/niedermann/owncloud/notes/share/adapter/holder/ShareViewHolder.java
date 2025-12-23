@@ -13,7 +13,6 @@ import android.widget.ImageView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.owncloud.android.lib.resources.shares.OCShare;
 
@@ -78,7 +77,7 @@ public class ShareViewHolder extends BrandedViewHolder {
                 binding.icon.setTag(share.getShareWith());
 
                 if (share.getSharedWithDisplayName() != null) {
-                    AvatarLoader.INSTANCE.load(context, binding.icon, account, share.getSharedWithDisplayName());
+                    AvatarLoader.INSTANCE.load(context, binding.icon, account, share.getShareWith());
                 }
 
                 // binding.icon.setOnClickListener(v -> listener.showProfileBottomSheet(user, share.getShareWith()));
@@ -89,8 +88,9 @@ public class ShareViewHolder extends BrandedViewHolder {
 
         binding.name.setText(name);
 
-        if (accountUserName.equalsIgnoreCase(share.getShareWith()) ||
-            accountUserName.equalsIgnoreCase(share.getUserId())) {
+        if (accountUserName.equalsIgnoreCase(share.getShareWith()) && accountUserName.equalsIgnoreCase(share.getUserId())) {
+            binding.overflowMenu.setVisibility(View.GONE);
+        } else {
             binding.overflowMenu.setVisibility(View.VISIBLE);
 
             String permissionName = SharingMenuHelper.getPermissionName(context, share);
@@ -99,8 +99,6 @@ public class ShareViewHolder extends BrandedViewHolder {
             // bind listener to edit privileges
             binding.overflowMenu.setOnClickListener(v -> listener.showSharingMenuActionSheet(share));
             binding.shareNameLayout.setOnClickListener(v -> listener.showPermissionsDialog(share));
-        } else {
-            binding.overflowMenu.setVisibility(View.GONE);
         }
     }
 

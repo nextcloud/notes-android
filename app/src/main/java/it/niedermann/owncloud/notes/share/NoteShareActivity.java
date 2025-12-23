@@ -356,11 +356,21 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                 return;
             }
 
-            final var share = shares.get(0);
+            OCShare share = null;
+            for (OCShare s : shares) {
+                if (account.getAccountName().split("@")[0].equalsIgnoreCase(s.getShareWith())) {
+                    share = s;
+                    break;
+                }
+            }
 
+            if (share == null) {
+                return;
+            }
+            
             binding.sharedWithYouUsername.setText(
                     String.format(getString(R.string.note_share_activity_shared_with_you), share.getOwnerDisplayName()));
-            AvatarLoader.INSTANCE.load(this, binding.sharedWithYouAvatar, account);
+            AvatarLoader.INSTANCE.load(this, binding.sharedWithYouAvatar, account, share.getUserId());
             binding.sharedWithYouAvatar.setVisibility(View.VISIBLE);
 
             String description = share.getNote();
@@ -371,6 +381,8 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             } else {
                 binding.sharedWithYouNoteContainer.setVisibility(View.GONE);
             }
+
+            binding.sharedWithYouContainer.setVisibility(View.VISIBLE);
         }
     }
 
@@ -555,10 +567,8 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
         // Get shares from remote
         final var remoteShares = repository.getShareFromNote(note);
-        if (remoteShares != null) {
-            for (var entity : remoteShares) {
-                addSharesToList(entity.getId(), targetList);
-            }
+        for (var entity : remoteShares) {
+            addSharesToList(entity.getId(), targetList);
         }
     }
 
