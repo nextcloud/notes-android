@@ -7,17 +7,18 @@
 package it.niedermann.owncloud.notes.share.adapter.holder;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
 import android.text.TextUtils;
 import android.view.View;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.nextcloud.android.common.ui.theme.utils.ColorRole;
 import com.owncloud.android.lib.resources.shares.OCShare;
 import com.owncloud.android.lib.resources.shares.ShareType;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedViewHolder;
@@ -83,6 +84,21 @@ public class LinkShareViewHolder extends BrandedViewHolder {
             binding.shareByLinkContainer.setOnClickListener(v -> listener.showPermissionsDialog(publicShare));
         }
 
+        if (publicShare.getExpirationDate() > 0) {
+            String expirationDescription = context.getString(
+                R.string.share_expires,
+                SimpleDateFormat.getDateInstance().format(new Date(publicShare.getExpirationDate()))
+            );
+            binding.expirationStatus.setContentDescription(expirationDescription);
+            binding.expirationStatus.setVisibility(View.VISIBLE);
+            binding.shareIconContainer.setOnClickListener(
+                v -> listener.showShareExpirationSnackbar(publicShare)
+            );
+        } else {
+            binding.expirationStatus.setContentDescription(null);
+            binding.expirationStatus.setVisibility(View.GONE);
+        }
+
         binding.copyLink.setOnClickListener(v -> listener.copyLink(publicShare));
     }
 
@@ -102,6 +118,7 @@ public class LinkShareViewHolder extends BrandedViewHolder {
             brandingUtil.androidx.colorPrimaryTextViewElement(binding.permissionName);
             brandingUtil.platform.colorTextView(binding.label, ColorRole.ON_SURFACE);
             brandingUtil.platform.colorImageViewBackgroundAndIcon(binding.icon);
+            brandingUtil.platform.colorImageView(binding.expirationStatus, ColorRole.ON_PRIMARY_CONTAINER);
         }
     }
 }

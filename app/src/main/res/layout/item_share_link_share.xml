@@ -14,17 +14,36 @@
     android:layout_marginVertical="@dimen/spacer_1x"
     android:orientation="horizontal">
 
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="@dimen/default_icon_size"
-        android:layout_height="@dimen/default_icon_size"
+    <FrameLayout
+        android:id="@+id/shareIconContainer"
+        android:layout_width="@dimen/minimum_size_for_touchable_area"
+        android:layout_height="@dimen/minimum_size_for_touchable_area"
+        android:layout_centerVertical="true"
         android:layout_marginStart="@dimen/spacer_2x"
         android:layout_marginTop="@dimen/spacer_1hx"
-        android:layout_marginEnd="@dimen/spacer_2x"
-        android:background="@drawable/round_bgnd"
-        android:contentDescription="@string/note_share_activity_share_icon_content_description"
-        android:padding="@dimen/spacer_1x"
-        android:src="@drawable/shared_via_link" />
+        android:layout_marginEnd="@dimen/spacer_1x">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/default_icon_size"
+            android:layout_height="@dimen/default_icon_size"
+            android:background="@drawable/round_bgnd"
+            android:contentDescription="@string/note_share_activity_share_icon_content_description"
+            android:padding="@dimen/spacer_1x"
+            android:src="@drawable/shared_via_link" />
+
+        <ImageView
+            android:id="@+id/expiration_status"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_gravity="bottom|end"
+            android:background="@drawable/round_bgnd"
+            android:contentDescription="@null"
+            android:padding="1dp"
+            android:layout_margin="@dimen/spacer_1hx"
+            android:src="@drawable/schedule_24px"
+            android:tint="@color/text_color" />
+    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/share_name_layout"
