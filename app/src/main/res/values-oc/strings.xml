@@ -26,6 +26,7 @@
     <string name="action_uncategorized">Desorganizadas</string>
     <string name="action_undo">Desfar</string>
     <string name="activity_chooser_send_file_title">Enviar</string>
+    <string name="activity_sharing_title">Partiment</string>
     <string name="add_account">Apondre un compte</string>
     <string name="add_another_public_share_link">Ajustar un autre ligam</string>
     <string name="add_category">Apondre %1$s</string>

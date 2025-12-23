@@ -40,6 +40,7 @@
     <string name="activity_chooser_send_file_title">Lähetä</string>
     <string name="activity_chooser_title">Lähetä linkki…</string>
     <string name="activity_select_single_note">Valitse muistiinpano</string>
+    <string name="activity_sharing_title">Jakaminen</string>
     <string name="add_account">Lisää tili</string>
     <string name="add_another_public_share_link">Lisää toinen linkki</string>
     <string name="add_category">Lisää %1$s</string>

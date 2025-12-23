@@ -40,6 +40,7 @@
     <string name="action_undo">Desegin</string>
     <string name="activity_chooser_send_file_title">Bidali</string>
     <string name="activity_select_single_note">Hautatu oharra</string>
+    <string name="activity_sharing_title">Partekatzea</string>
     <string name="add_account">Gehitu kontua</string>
     <string name="add_another_public_share_link">Gehitu beste esteka bat</string>
     <string name="add_category">Gehitu %1$s</string>

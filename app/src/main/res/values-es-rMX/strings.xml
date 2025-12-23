@@ -35,6 +35,7 @@
     <string name="activity_chooser_send_file_title">Enviar</string>
     <string name="activity_chooser_title">Enviar enlace a…</string>
     <string name="activity_select_single_note">Seleccionar nota</string>
+    <string name="activity_sharing_title">Compartiendo</string>
     <string name="add_account">Agregar cuenta</string>
     <string name="add_another_public_share_link">Añadir otro enlace</string>
     <string name="add_category">Añadir %1$s</string>

@@ -41,6 +41,7 @@
     <string name="activity_chooser_send_file_title">Отправить</string>
     <string name="activity_chooser_title">Отправить ссылку...</string>
     <string name="activity_select_single_note">Выберите заметку</string>
+    <string name="activity_sharing_title">Параметры публикации</string>
     <string name="add_account">Добавить аккаунт</string>
     <string name="add_another_public_share_link">Добавить другую ссылку</string>
     <string name="add_category">Добавить %1$s </string>

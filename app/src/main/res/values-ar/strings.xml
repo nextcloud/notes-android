@@ -41,6 +41,7 @@
     <string name="activity_chooser_send_file_title">أرسِل</string>
     <string name="activity_chooser_title">إرسال الرابط إلى…</string>
     <string name="activity_select_single_note">إختيار ملاحظة</string>
+    <string name="activity_sharing_title">المشاركة</string>
     <string name="add_account">أضف حسابا</string>
     <string name="add_another_public_share_link">إضافة رابط آخر</string>
     <string name="add_category">أضف %1$s</string>

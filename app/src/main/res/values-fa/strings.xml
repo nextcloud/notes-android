@@ -41,6 +41,7 @@
     <string name="activity_chooser_send_file_title">ارسال</string>
     <string name="activity_chooser_title">ارسال لینک به ....</string>
     <string name="activity_select_single_note">انتخاب یادداشت</string>
+    <string name="activity_sharing_title">هم‌رسانی</string>
     <string name="add_account">افزودن حساب کاربری</string>
     <string name="add_another_public_share_link">افزودن پیوندی دیگر</string>
     <string name="add_category">افزودن%1$s</string>

@@ -41,6 +41,7 @@
     <string name="activity_chooser_send_file_title">Pošlji</string>
     <string name="activity_chooser_title">Pošlji povezavo …</string>
     <string name="activity_select_single_note">Izbor zabeležke</string>
+    <string name="activity_sharing_title">Souporaba</string>
     <string name="add_account">Dodaj račun</string>
     <string name="add_another_public_share_link">Dodaj novo povezavo</string>
     <string name="add_category">Dodaj %1$s</string>

@@ -41,6 +41,7 @@
     <string name="activity_chooser_send_file_title">Envia</string>
     <string name="activity_chooser_title">Envia l\'enllaç a…</string>
     <string name="activity_select_single_note">Seleccioneu una nota</string>
+    <string name="activity_sharing_title">Ús compartit</string>
     <string name="add_account">Afegeix un compte</string>
     <string name="add_another_public_share_link">Afegeix un altre enllaç</string>
     <string name="add_category">Afegeix %1$s</string>

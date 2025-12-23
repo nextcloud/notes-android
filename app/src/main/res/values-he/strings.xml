@@ -39,6 +39,7 @@
     <string name="activity_chooser_send_file_title">שליחה</string>
     <string name="activity_chooser_title">שליחת קישור אל…</string>
     <string name="activity_select_single_note">נא לבחור פתק</string>
+    <string name="activity_sharing_title">שיתוף</string>
     <string name="add_account">הוספת חשבון</string>
     <string name="add_another_public_share_link">הוספת קישור נוסף</string>
     <string name="add_category">הוספת %1$s</string>

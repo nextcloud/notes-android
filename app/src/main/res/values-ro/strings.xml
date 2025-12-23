@@ -40,6 +40,7 @@
     <string name="activity_chooser_send_file_title">Trimite</string>
     <string name="activity_chooser_title">Trimite link la…</string>
     <string name="activity_select_single_note">Selectează o notă</string>
+    <string name="activity_sharing_title">Partajare</string>
     <string name="add_account">Adaugă cont</string>
     <string name="add_another_public_share_link">Adaugă un alt link</string>
     <string name="add_category">Adaugă %1$s</string>

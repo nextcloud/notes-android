@@ -41,6 +41,7 @@
     <string name="activity_chooser_send_file_title">Yuborish</string>
     <string name="activity_chooser_title">Havolani yuborish…</string>
     <string name="activity_select_single_note">Eslatmani tanlang</string>
+    <string name="activity_sharing_title">Ulashish</string>
     <string name="add_account">Akkaunt qo\'shish</string>
     <string name="add_category"> %1$s ni qo\'shish</string>
     <string name="add_new_public_share">Yangi umumiy ulashish havolasini qo\'shing</string>

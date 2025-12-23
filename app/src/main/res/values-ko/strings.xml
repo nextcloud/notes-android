@@ -39,6 +39,7 @@
     <string name="action_undo">실행 취소</string>
     <string name="activity_chooser_send_file_title">전송</string>
     <string name="activity_select_single_note">메모 선택</string>
+    <string name="activity_sharing_title">공유</string>
     <string name="add_account">계정 추가</string>
     <string name="add_another_public_share_link">다른 링크 추가</string>
     <string name="add_category">%1$s(으)로 추가</string>

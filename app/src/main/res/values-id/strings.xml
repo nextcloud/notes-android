@@ -41,6 +41,7 @@
     <string name="activity_chooser_send_file_title">Kirim</string>
     <string name="activity_chooser_title">Kirim taukan ke…</string>
     <string name="activity_select_single_note">Pilih catatan</string>
+    <string name="activity_sharing_title">Berbagi</string>
     <string name="add_account">Tambah akun</string>
     <string name="add_another_public_share_link">Tambah tautan lain</string>
     <string name="add_category">Tambah %1$s</string>

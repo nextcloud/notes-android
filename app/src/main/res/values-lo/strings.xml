@@ -42,6 +42,7 @@
     <string name="activity_chooser_send_file_title">ສົ່ງ</string>
     <string name="activity_chooser_title">ສົ່ງລິ້ງໄປຫາ...</string>
     <string name="activity_select_single_note">Select note</string>
+    <string name="activity_sharing_title">ການແບ່ງປັນ</string>
     <string name="add_account">ເພີ່ມບັນຊີ</string>
     <string name="add_another_public_share_link">ເພີ່ມລິງອຶ່ນອີ</string>
     <string name="add_category">Add %1$s</string>

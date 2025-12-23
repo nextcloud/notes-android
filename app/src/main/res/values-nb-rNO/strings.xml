@@ -41,6 +41,7 @@
     <string name="activity_chooser_send_file_title">Send</string>
     <string name="activity_chooser_title">Send lenke til…</string>
     <string name="activity_select_single_note">Velg notat</string>
+    <string name="activity_sharing_title">Deling</string>
     <string name="add_account">Legg til en konto</string>
     <string name="add_another_public_share_link">Legg til en lenke til</string>
     <string name="add_category">Legg til%1$s</string>

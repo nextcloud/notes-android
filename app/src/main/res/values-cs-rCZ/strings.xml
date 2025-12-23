@@ -42,6 +42,7 @@
     <string name="activity_chooser_send_file_title">Odeslat</string>
     <string name="activity_chooser_title">Poslat odkaz na …</string>
     <string name="activity_select_single_note">Vybrat poznámku</string>
+    <string name="activity_sharing_title">Sdílení</string>
     <string name="add_account">Přidat účet</string>
     <string name="add_another_public_share_link">Přidat další odkaz</string>
     <string name="add_category">Přidat %1$s</string>
@@ -192,6 +193,7 @@
     <string name="link_share_editing">Upravování</string>
     <string name="link_share_file_drop">Předání souboru (pouze nahrání)</string>
     <string name="link_share_view_only">Pouze prohlížet</string>
+    <string name="listview_no_content">Žádný obsah</string>
     <string name="listview_updated_last_month">Minulý měsíc</string>
     <string name="listview_updated_last_week">Minulý týden</string>
     <string name="listview_updated_this_month">Tento měsíc</string>

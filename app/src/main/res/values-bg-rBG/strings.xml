@@ -41,6 +41,7 @@
     <string name="activity_chooser_send_file_title">Изпращане</string>
     <string name="activity_chooser_title">Изпращане на връзка чрез…</string>
     <string name="activity_select_single_note">Избор на бележка</string>
+    <string name="activity_sharing_title">Споделяне</string>
     <string name="add_account">Добавяне на регистрация</string>
     <string name="add_category">Добавяне %1$s</string>
     <string name="add_new_public_share">Добавете нова връзка за публично споделяне</string>
