@@ -93,6 +93,7 @@
     <string name="context_based_formatting">Kontekstga asoslangan formatlash ochiladi</string>
     <string name="copy_link">Havolani nusxalash</string>
     <string name="direct_editing_error">Keng tahrirni yuklashda xatolik yuz berdi</string>
+    <string name="dismiss">Rad etish</string>
     <string name="dnd">Bezovta qilmang</string>
     <string name="dontClear">Aniq emas</string>
     <string name="ecosystem_apps_display_files">Fayllar</string>

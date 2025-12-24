@@ -69,6 +69,7 @@
     <string name="copy_link">Copiar hiperligação</string>
     <string name="could_not_retrieve_shares">Não foi possível obter as partilhas</string>
     <string name="delete_link">Eliminar hiperligação</string>
+    <string name="dismiss">Dispensar</string>
     <string name="dnd">Não incomodar</string>
     <string name="dontClear">Não limpar</string>
     <string name="ecosystem_apps_display_files">Ficheiros</string>

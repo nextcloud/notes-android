@@ -98,6 +98,7 @@
     <string name="could_not_retrieve_shares">Could not retrieve shares</string>
     <string name="delete_link">Delete Link</string>
     <string name="direct_editing_error">Error while loading rich editing</string>
+    <string name="dismiss">Dismiss</string>
     <string name="dnd">Do not disturb</string>
     <string name="dontClear">Don\'t clear</string>
     <string name="ecosystem_apps_display_more">More</string>

@@ -96,6 +96,7 @@
     <string name="copy_link">링크 주소 복사</string>
     <string name="could_not_retrieve_shares">공유를 가져올 수 없습니다.</string>
     <string name="delete_link">링크 삭제</string>
+    <string name="dismiss">끄기</string>
     <string name="dnd">방해 없음</string>
     <string name="ecosystem_apps_display_files">파일</string>
     <string name="ecosystem_apps_display_more">더 보기</string>

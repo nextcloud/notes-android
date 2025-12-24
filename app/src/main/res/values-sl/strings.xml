@@ -100,6 +100,7 @@
     <string name="could_not_retrieve_shares">Naslovov mest souporabe ni mogoče pridobiti</string>
     <string name="delete_link">Izbriši povezavo</string>
     <string name="direct_editing_error">Napaka nalaganja oblikovnega urejevalnika</string>
+    <string name="dismiss">Prekliči</string>
     <string name="dnd">Ne moti</string>
     <string name="dontClear">Ne počisti</string>
     <string name="ecosystem_apps_display_files">Datoteke</string>

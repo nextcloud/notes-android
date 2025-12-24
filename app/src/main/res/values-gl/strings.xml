@@ -101,6 +101,7 @@
     <string name="could_not_retrieve_shares">Non foi posíbel recuperar as comparticións</string>
     <string name="delete_link">Eliminar a ligazón</string>
     <string name="direct_editing_error">Produciuse un erro ao cargar a edición mellorada</string>
+    <string name="dismiss">Desbotar</string>
     <string name="dnd">Non molestar</string>
     <string name="dontClear">Non limpar</string>
     <string name="ecosystem_apps_display_files">Ficheiros</string>

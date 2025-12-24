@@ -101,6 +101,7 @@
     <string name="could_not_retrieve_shares">ບໍ່ສາມາດເອົາການແບ່ງປັນຄືນໄດ້</string>
     <string name="delete_link">Delete Link</string>
     <string name="direct_editing_error">Error while loading rich editing</string>
+    <string name="dismiss">ຍົກເລີກ</string>
     <string name="dnd">ຫ້າມລົບກວນ</string>
     <string name="dontClear">ບໍ່ຈະແຈ້ງ</string>
     <string name="ecosystem_apps_display_files">ຟາຍ</string>

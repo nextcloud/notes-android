@@ -75,6 +75,7 @@
     <string name="copy_link">Kopijuoti nuorodą</string>
     <string name="could_not_retrieve_shares">Nepavyko gauti viešinių</string>
     <string name="delete_link">Ištrinti nuorodą</string>
+    <string name="dismiss">Atmesti</string>
     <string name="dnd">Netrukdyti</string>
     <string name="dontClear">Neišvalyti</string>
     <string name="ecosystem_apps_display_files">Failai</string>

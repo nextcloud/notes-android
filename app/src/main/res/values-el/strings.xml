@@ -41,6 +41,7 @@
     <string name="activity_chooser_send_file_title">Αποστολή</string>
     <string name="activity_chooser_title">Αποστολή συνδέσμου σε…</string>
     <string name="activity_select_single_note">Επιλογή σημείωσης</string>
+    <string name="activity_sharing_title">Διαμοιρασμός</string>
     <string name="add_account">Προσθήκη λογαριασμού</string>
     <string name="add_another_public_share_link">Προσθήκη άλλου συνδέσμου</string>
     <string name="add_category">Προσθήκη %1$s</string>

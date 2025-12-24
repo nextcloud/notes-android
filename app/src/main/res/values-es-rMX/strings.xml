@@ -69,6 +69,7 @@
     <string name="copy_link">Copiar enlace</string>
     <string name="could_not_retrieve_shares">No se pudieron obtener los recursos compartidos</string>
     <string name="delete_link">Eliminar enlace</string>
+    <string name="dismiss">Descartar</string>
     <string name="dnd">No molestar</string>
     <string name="dontClear">No borrar</string>
     <string name="ecosystem_apps_display_files">Archivo</string>

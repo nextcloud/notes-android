@@ -42,6 +42,7 @@
     <string name="activity_chooser_send_file_title">Send</string>
     <string name="activity_chooser_title">Send link to…</string>
     <string name="activity_select_single_note">Select note</string>
+    <string name="activity_sharing_title">Sharing</string>
     <string name="add_account">Add account</string>
     <string name="add_another_public_share_link">Add another link</string>
     <string name="add_category">Add %1$s</string>
@@ -100,6 +101,7 @@
     <string name="could_not_retrieve_shares">Could not retrieve shares</string>
     <string name="delete_link">Delete Link</string>
     <string name="direct_editing_error">Error while loading rich editing</string>
+    <string name="dismiss">Dismiss</string>
     <string name="dnd">Do not disturb</string>
     <string name="dontClear">Don\'t clear</string>
     <string name="ecosystem_apps_display_files">Files</string>

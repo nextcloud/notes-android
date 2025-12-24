@@ -97,6 +97,7 @@
     <string name="copy_link">Copiază link</string>
     <string name="could_not_retrieve_shares">Nu am putut obține lista partajărilor</string>
     <string name="delete_link">Șterge legătura</string>
+    <string name="dismiss">Elimină</string>
     <string name="ecosystem_apps_display_more">Mai mult</string>
     <string name="ecosystem_apps_display_talk">Discuție</string>
     <string name="ecosystem_apps_more">Mai multe aplicații Nextcloud</string>

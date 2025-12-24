@@ -97,6 +97,7 @@
     <string name="could_not_retrieve_shares">Tidak dapat menerima berkas bersama</string>
     <string name="delete_link">Hapus tautan</string>
     <string name="direct_editing_error">Kesalahan saat memuat pengeditan kaya</string>
+    <string name="dismiss">Batal</string>
     <string name="dnd">Jangan diganggu</string>
     <string name="dontClear">Jangan dihapus</string>
     <string name="ecosystem_apps_display_more">Lainnya</string>

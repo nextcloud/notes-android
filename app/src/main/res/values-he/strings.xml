@@ -79,6 +79,7 @@
     <string name="copy_link">העתקת קישור</string>
     <string name="could_not_retrieve_shares">לא ניתן למשוך את השיתופים</string>
     <string name="delete_link">מחק קישור</string>
+    <string name="dismiss">שחרור</string>
     <string name="dontClear">לא לפנות</string>
     <string name="ecosystem_apps_display_files">קבצים</string>
     <string name="ecosystem_apps_display_more">יותר</string>

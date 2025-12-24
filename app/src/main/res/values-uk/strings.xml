@@ -101,6 +101,7 @@
     <string name="could_not_retrieve_shares">Не вдалося отримати спільні дані</string>
     <string name="delete_link">Посилання на вилучення</string>
     <string name="direct_editing_error">Помилка під час завантаження форматованого редагування</string>
+    <string name="dismiss">Сховати</string>
     <string name="dnd">Не турбувати</string>
     <string name="dontClear">Залишити поточний</string>
     <string name="ecosystem_apps_display_files">Файли</string>

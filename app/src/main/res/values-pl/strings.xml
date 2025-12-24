@@ -101,6 +101,7 @@
     <string name="could_not_retrieve_shares">Nie udało się pobrać udziałów</string>
     <string name="delete_link">Usuń link</string>
     <string name="direct_editing_error">Błąd podczas ładowania bogatej modyfikacji</string>
+    <string name="dismiss">Odrzuć</string>
     <string name="dnd">Nie przeszkadzać</string>
     <string name="dontClear">Nie czyść</string>
     <string name="ecosystem_apps_display_files">Pliki</string>

@@ -99,6 +99,7 @@
     <string name="could_not_retrieve_shares">Impossibile recuperare le condivisioni</string>
     <string name="delete_link">Elimina collegamento</string>
     <string name="direct_editing_error">Errore durante il caricamento della modifica avanzata</string>
+    <string name="dismiss">Rifiuta</string>
     <string name="dnd">Non disturbare</string>
     <string name="dontClear">Non cancellare</string>
     <string name="ecosystem_apps_display_files">File</string>

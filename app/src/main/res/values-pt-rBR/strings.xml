@@ -101,6 +101,7 @@
     <string name="could_not_retrieve_shares">Não foi possível recuperar os compartilhamentos</string>
     <string name="delete_link">Excluir link</string>
     <string name="direct_editing_error">Erro ao carregar edição avançada</string>
+    <string name="dismiss">Dispensar</string>
     <string name="dnd">Não perturbe</string>
     <string name="dontClear">Não limpe</string>
     <string name="ecosystem_apps_display_files">Arquivos</string>

@@ -101,6 +101,7 @@
     <string name="could_not_retrieve_shares">Не могу да добавим дељења</string>
     <string name="delete_link">Обриши линк</string>
     <string name="direct_editing_error">Грешка приликом учитавања детаљног уређивања</string>
+    <string name="dismiss">Одбаци</string>
     <string name="dnd">Не узнемиравај</string>
     <string name="dontClear">Не бриши</string>
     <string name="ecosystem_apps_display_files">Фајлови</string>
