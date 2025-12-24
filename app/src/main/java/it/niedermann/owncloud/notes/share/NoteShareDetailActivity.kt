@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import androidx.lifecycle.lifecycleScope
+import com.nextcloud.android.common.ui.theme.utils.ColorRole
 import com.nextcloud.android.sso.helper.SingleAccountHelper
 import com.owncloud.android.lib.common.utils.Log_OC
 import com.owncloud.android.lib.resources.shares.OCShare
@@ -46,7 +47,8 @@ import java.util.Date
  * 2. This will handle both Advanced Permissions and Send New Email functionality for existing shares to modify them.
  */
 @Suppress("TooManyFunctions")
-class NoteShareDetailActivity : BrandedActivity(),
+class NoteShareDetailActivity :
+    BrandedActivity(),
     ExpirationDatePickerDialogFragment.OnExpiryDateListener {
 
     companion object {
@@ -86,6 +88,8 @@ class NoteShareDetailActivity : BrandedActivity(),
 
         binding = ActivityNoteShareDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
+        binding.toolbar.setNavigationOnClickListener({ v -> backPressed() })
         val arguments = intent.extras
 
         arguments?.let {
@@ -122,6 +126,9 @@ class NoteShareDetailActivity : BrandedActivity(),
         }
     }
 
+    private fun backPressed() {
+        finish()
+    }
 
     override fun applyBrand(color: Int) {
         val util = BrandingUtil.of(color, this)
@@ -136,6 +143,8 @@ class NoteShareDetailActivity : BrandedActivity(),
                 colorTextView(shareProcessAdvancePermissionTitle)
 
                 themeCheckbox(shareProcessAllowResharingCheckbox)
+
+                colorTextView(title, ColorRole.ON_SURFACE)
             }
 
             util.androidx.run {
@@ -152,6 +161,8 @@ class NoteShareDetailActivity : BrandedActivity(),
 
                 colorMaterialButtonPrimaryFilled(shareProcessBtnNext)
                 colorMaterialButtonPrimaryOutlined(shareProcessBtnCancel)
+
+                themeToolbar(toolbar)
             }
         }
         util.platform.colorViewBackground(window.decorView)
@@ -448,12 +459,9 @@ class NoteShareDetailActivity : BrandedActivity(),
         }
     }
 
-
-    private fun getReSharePermission(): Int {
-        return SharePermissionsBuilder().apply {
-            setSharePermission(true)
-        }.build()
-    }
+    private fun getReSharePermission(): Int = SharePermissionsBuilder().apply {
+        setSharePermission(true)
+    }.build()
 
     /**
      * method to validate the step 1 screen information

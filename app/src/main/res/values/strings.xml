@@ -517,6 +517,7 @@
     <string name="ecosystem_apps_more">More Nextcloud Apps</string>
     <string name="ecosystem_apps_display_more">More</string>
     <string name="activity_sharing_title">Sharing</string>
+    <string name="activity_sharing_details_title">Sharing Details</string>
     <string name="share_expires">Share expires on %1$s</string>
     <string name="dismiss">Dismiss</string>
 </resources>
