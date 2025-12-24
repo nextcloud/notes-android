@@ -203,6 +203,9 @@ class NoteShareDetailActivity :
         } else {
             binding.shareProcessSetExpDateSwitch.visibility = View.GONE
         }
+
+        binding.noteText.setText(share?.note)
+
         shareProcessStep = SCREEN_TYPE_PERMISSION
     }
 
