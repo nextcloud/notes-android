@@ -100,6 +100,7 @@
     <string name="could_not_retrieve_shares">No se han podido recuperar los recursos compartidos</string>
     <string name="delete_link">Eliminar enlace</string>
     <string name="direct_editing_error">Error al cargar el modo de edición enriquecido</string>
+    <string name="dismiss">Descartar</string>
     <string name="dnd">No molestar</string>
     <string name="dontClear">No eliminar</string>
     <string name="ecosystem_apps_display_files">Archivos</string>

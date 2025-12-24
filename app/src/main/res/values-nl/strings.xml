@@ -100,6 +100,7 @@
     <string name="could_not_retrieve_shares">Kon shares niet ophalen</string>
     <string name="delete_link">Verwijder link</string>
     <string name="direct_editing_error">Fout bij laden uitgebreid bewerken</string>
+    <string name="dismiss">Wissen</string>
     <string name="dnd">Niet storen</string>
     <string name="dontClear">Niet opruimen</string>
     <string name="ecosystem_apps_display_files">Bestanden</string>

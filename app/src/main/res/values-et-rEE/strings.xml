@@ -101,6 +101,7 @@
     <string name="could_not_retrieve_shares">Jaosmeedia laadimine ei õnnestunud</string>
     <string name="delete_link">Kustuta link</string>
     <string name="direct_editing_error">Viga vormindatud teksti muutmisvaate laadimisel</string>
+    <string name="dismiss">Loobu</string>
     <string name="dnd">Ära sega</string>
     <string name="dontClear">Ära kustuta</string>
     <string name="ecosystem_apps_display_files">Failid</string>

@@ -70,6 +70,7 @@
     <string name="common_ok">Normal</string>
     <string name="copy_link">Copiar l\'enllaz</string>
     <string name="direct_editing_error">Hebo un error mentanto se cargaba la edición arriquecida</string>
+    <string name="dismiss">Escartar</string>
     <string name="dnd">Nun molestar</string>
     <string name="dontClear">Nun borrar</string>
     <string name="ecosystem_apps_display_files">Ficheros</string>

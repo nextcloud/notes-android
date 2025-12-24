@@ -100,6 +100,7 @@
     <string name="could_not_retrieve_shares">لايمكن استعادة المشاركات</string>
     <string name="delete_link">حذف الرابط</string>
     <string name="direct_editing_error">خطأ في تحميل التحرير الغني rich editing</string>
+    <string name="dismiss">الغاء</string>
     <string name="dnd">الرجاء عدم الإزعاج</string>
     <string name="dontClear">لا تمحُ</string>
     <string name="ecosystem_apps_display_files">الملفّات</string>

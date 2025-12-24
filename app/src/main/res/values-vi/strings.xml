@@ -85,6 +85,7 @@
     <string name="copy_link">Sao chép liên kết</string>
     <string name="could_not_retrieve_shares">Không thể truy xuất lượt chia sẻ</string>
     <string name="delete_link">Xóa liên kết</string>
+    <string name="dismiss">Bỏ qua</string>
     <string name="dnd">Đừng làm phiền</string>
     <string name="dontClear">Không xoá</string>
     <string name="ecosystem_apps_display_files">Tệp Tin</string>

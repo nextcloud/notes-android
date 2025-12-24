@@ -101,6 +101,7 @@
     <string name="could_not_retrieve_shares">Níorbh fhéidir scaireanna a aisghabháil</string>
     <string name="delete_link">Scrios Nasc</string>
     <string name="direct_editing_error">Earráid agus eagarthóireacht shaibhir á lódáil</string>
+    <string name="dismiss">Díbhe</string>
     <string name="dnd">Ná cur as</string>
     <string name="dontClear">Ná soiléir</string>
     <string name="ecosystem_apps_display_files">Comhaid</string>

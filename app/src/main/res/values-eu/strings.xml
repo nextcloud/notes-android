@@ -97,6 +97,7 @@
     <string name="could_not_retrieve_shares">Ezin izan dira partekatzeak berreskuratu</string>
     <string name="delete_link">Ezabatu esteka</string>
     <string name="direct_editing_error">Errore bat gertatu da edizio aberatsa kargatzean</string>
+    <string name="dismiss">Ezikusi</string>
     <string name="dnd">Ez molestatu</string>
     <string name="dontClear">Ez ezabatu</string>
     <string name="ecosystem_apps_display_files">Fitxategiak</string>

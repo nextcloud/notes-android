@@ -100,6 +100,7 @@
     <string name="could_not_retrieve_shares">Tókst ekki að ná í sameignir</string>
     <string name="delete_link">Eyða tengli</string>
     <string name="direct_editing_error">Villa við að hlaða inn sniðnum textabreytingum</string>
+    <string name="dismiss">Hafna</string>
     <string name="dnd">Ekki ónáða</string>
     <string name="dontClear">Ekki hreinsa</string>
     <string name="ecosystem_apps_display_files">Skráaforrit</string>

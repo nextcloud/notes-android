@@ -97,6 +97,7 @@
     <string name="copy_link">Kopioi linkki</string>
     <string name="could_not_retrieve_shares">Jakojen nouto ei onnistunut</string>
     <string name="delete_link">Poista linkki</string>
+    <string name="dismiss">Hylkää</string>
     <string name="dnd">Älä häiritse</string>
     <string name="dontClear">Älä tyhjennä</string>
     <string name="ecosystem_apps_display_files">Tiedostot</string>

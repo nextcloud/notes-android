@@ -101,6 +101,7 @@
     <string name="could_not_retrieve_shares">Paylaşımlar alınamadı</string>
     <string name="delete_link">Bağlantıyı sil</string>
     <string name="direct_editing_error">Zengin düzenleme yüklenirken sorun çıktı</string>
+    <string name="dismiss">Yok say</string>
     <string name="dnd">Rahatsız etmeyin</string>
     <string name="dontClear">Kaldırılmasın</string>
     <string name="ecosystem_apps_display_files">Dosyalar</string>

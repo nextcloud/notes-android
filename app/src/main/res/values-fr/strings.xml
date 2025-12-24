@@ -101,6 +101,7 @@
     <string name="could_not_retrieve_shares">Impossible de récupérer les partages</string>
     <string name="delete_link">Supprimer le lien</string>
     <string name="direct_editing_error">Erreur lors du chargement de l\'édition enrichie</string>
+    <string name="dismiss">Rejeter</string>
     <string name="dnd">Ne pas déranger</string>
     <string name="dontClear">Ne pas effacer</string>
     <string name="ecosystem_apps_display_files">Fichiers</string>

@@ -100,6 +100,7 @@
     <string name="could_not_retrieve_shares">无法检索共享</string>
     <string name="delete_link">删除链接</string>
     <string name="direct_editing_error">加载富文本编辑时出错</string>
+    <string name="dismiss">关闭</string>
     <string name="dnd">勿扰</string>
     <string name="ecosystem_apps_display_files">文件</string>
     <string name="ecosystem_apps_display_more">更多</string>

@@ -100,6 +100,7 @@
     <string name="could_not_retrieve_shares">امکان بازگردانی اشتراک گذاری‌ها وجود ندارد</string>
     <string name="delete_link">حذف پیوند</string>
     <string name="direct_editing_error">Error while loading rich editing</string>
+    <string name="dismiss">رد کردن</string>
     <string name="dnd">مزاحم نشوید</string>
     <string name="dontClear">پاک نکن</string>
     <string name="ecosystem_apps_display_files">پرونده‌ها</string>

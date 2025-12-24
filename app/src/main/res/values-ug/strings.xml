@@ -101,6 +101,7 @@
     <string name="could_not_retrieve_shares">پاينى ئەسلىگە كەلتۈرەلمىدى</string>
     <string name="delete_link">ئۇلىنىشنى ئۆچۈرۈڭ</string>
     <string name="direct_editing_error">مول تەھرىرلەشنى يۈكلەۋاتقاندا خاتالىق</string>
+    <string name="dismiss">پەرۋا قىلما</string>
     <string name="dnd">ئاۋارە قىلماڭ</string>
     <string name="dontClear">ئېنىق ئەمەس</string>
     <string name="ecosystem_apps_display_files">ھۆججەتلەر</string>

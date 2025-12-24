@@ -100,6 +100,7 @@
     <string name="could_not_retrieve_shares">共有元を取得できませんでした</string>
     <string name="delete_link">リンクを削除</string>
     <string name="direct_editing_error">リッチ編集の読み込み中にエラーが発生</string>
+    <string name="dismiss">閉じる</string>
     <string name="dnd">取り込み中</string>
     <string name="ecosystem_apps_display_files">ファイル</string>
     <string name="ecosystem_apps_display_more">さらに表示</string>

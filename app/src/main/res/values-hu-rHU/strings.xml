@@ -101,6 +101,7 @@
     <string name="could_not_retrieve_shares">Nem sikerült lekérni a megosztásokat</string>
     <string name="delete_link">Hivatkozás törlése</string>
     <string name="direct_editing_error">Hiba a formázott szöveges szerkesztő betöltése során</string>
+    <string name="dismiss">Eltüntetés</string>
     <string name="dnd">Ne zavarjanak</string>
     <string name="dontClear">Ne törölje</string>
     <string name="ecosystem_apps_display_files">Fájlok</string>

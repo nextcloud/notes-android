@@ -101,6 +101,7 @@
     <string name="could_not_retrieve_shares">Haikuweza kurejesha shiriki</string>
     <string name="delete_link">Futa kiungo</string>
     <string name="direct_editing_error">Hitilafu wakati wa kupakia uhariri tajiri</string>
+    <string name="dismiss">Tawanya</string>
     <string name="dnd">Acha kusumbua</string>
     <string name="dontClear">Usifute</string>
     <string name="ecosystem_apps_display_files">Faili</string>

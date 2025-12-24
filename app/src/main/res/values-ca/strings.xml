@@ -99,6 +99,7 @@
     <string name="could_not_retrieve_shares">No s\'ha pogut recuperar la compartició</string>
     <string name="delete_link">Suprimir enllaç</string>
     <string name="direct_editing_error">S\'ha produït un error en carregar l\'edició enriquida</string>
+    <string name="dismiss">Descarta</string>
     <string name="dontClear">No l\'esborris</string>
     <string name="ecosystem_apps_display_files">Fitxers</string>
     <string name="ecosystem_apps_display_more">Més</string>

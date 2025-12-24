@@ -100,6 +100,7 @@
     <string name="could_not_retrieve_shares">Не удалось получить перечень общих ресурсов</string>
     <string name="delete_link">Удалить ссылку</string>
     <string name="direct_editing_error">Ошибка при загрузке форматированного редактирования</string>
+    <string name="dismiss">Скрыть</string>
     <string name="dnd">Не беспокоить</string>
     <string name="dontClear">Не очищать</string>
     <string name="ecosystem_apps_display_files">Файлы</string>

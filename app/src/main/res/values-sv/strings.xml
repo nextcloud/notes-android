@@ -101,6 +101,7 @@
     <string name="could_not_retrieve_shares">Kunde inte hämta delade mappar</string>
     <string name="delete_link">Ta bort länk</string>
     <string name="direct_editing_error">Fel vid inläsning av utökad redigering</string>
+    <string name="dismiss">Avfärda</string>
     <string name="dnd">Stör ej</string>
     <string name="dontClear">Rensa inte</string>
     <string name="ecosystem_apps_display_files">Filer</string>

@@ -99,6 +99,7 @@
 Споделянията не могат да бъдат извлечени</string>
     <string name="delete_link">Изтриване на връзка</string>
     <string name="direct_editing_error">Грешка при зареждане на богато редактиране</string>
+    <string name="dismiss">Затвори</string>
     <string name="dnd">Не безпокой</string>
     <string name="dontClear">Не изчиствай</string>
     <string name="ecosystem_apps_display_files">Файлове</string>

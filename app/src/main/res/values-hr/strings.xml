@@ -95,6 +95,7 @@
     <string name="copy_link">Kopiraj poveznicu</string>
     <string name="could_not_retrieve_shares">Dohvaćanje dijeljenja nije uspjelo</string>
     <string name="delete_link">Izbriši poveznicu</string>
+    <string name="dismiss">Odpusti</string>
     <string name="ecosystem_apps_display_files">Datoteke</string>
     <string name="ecosystem_apps_display_more">Više</string>
     <string name="ecosystem_apps_display_talk">Razgovor</string>

@@ -101,6 +101,7 @@
     <string name="could_not_retrieve_shares">Nedaří se získat sdílení</string>
     <string name="delete_link">Smazat odkaz</string>
     <string name="direct_editing_error">Chyba při načítání upravování formátovaného textu</string>
+    <string name="dismiss">Zahodit</string>
     <string name="dnd">Nerušit</string>
     <string name="dontClear">Nečistit</string>
     <string name="ecosystem_apps_display_files">Soubory</string>

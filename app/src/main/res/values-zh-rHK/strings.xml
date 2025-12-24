@@ -101,6 +101,7 @@
     <string name="could_not_retrieve_shares">無法從雲端取得共用</string>
     <string name="delete_link">刪除連結</string>
     <string name="direct_editing_error">載入增強編輯模式時發生錯誤</string>
+    <string name="dismiss">忽略</string>
     <string name="dnd">請勿打擾</string>
     <string name="dontClear">不要清除</string>
     <string name="ecosystem_apps_display_files">檔案</string>

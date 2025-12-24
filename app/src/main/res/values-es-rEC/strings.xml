@@ -99,6 +99,7 @@
     <string name="could_not_retrieve_shares">No se pudieron recuperar los compartidos</string>
     <string name="delete_link">Eliminar enlace</string>
     <string name="direct_editing_error">Error al cargar la edición enriquecida</string>
+    <string name="dismiss">Descartar</string>
     <string name="dnd">No molestar</string>
     <string name="dontClear">No borrar</string>
     <string name="ecosystem_apps_display_files">Archivo</string>
