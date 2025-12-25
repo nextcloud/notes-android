@@ -301,6 +301,7 @@
     <string name="share_dialog_title">Paylaşılıyor</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Geçerlilik süresi %1$s zamanında dolacak</string>
+    <string name="share_expires">Paylaşım geçerlilik sonu: %1$s</string>
     <string name="share_file">%1$s paylaş</string>
     <string name="share_group_clarification">%1$s (grup)</string>
     <string name="share_internal_link">İç bağlantıyı paylaş</string>

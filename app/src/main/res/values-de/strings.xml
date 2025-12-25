@@ -101,6 +101,7 @@
     <string name="could_not_retrieve_shares">Freigaben konnten nicht abgerufen werden</string>
     <string name="delete_link">Link löschen</string>
     <string name="direct_editing_error">Fehler beim Laden des Rich-Bearbeitungsmodus</string>
+    <string name="dismiss">Verwerfen</string>
     <string name="dnd">Nicht stören</string>
     <string name="dontClear">Nicht löschen</string>
     <string name="ecosystem_apps_display_files">Dateien</string>
@@ -300,6 +301,7 @@
     <string name="share_dialog_title">Teilen</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Läuft am %1$s ab</string>
+    <string name="share_expires">Freigabe läuft ab am %1$s</string>
     <string name="share_file">Teile %1$s</string>
     <string name="share_group_clarification">%1$s (Gruppe)</string>
     <string name="share_internal_link">Internen Link teilen</string>
