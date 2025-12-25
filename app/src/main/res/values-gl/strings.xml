@@ -301,6 +301,7 @@
     <string name="share_dialog_title">Compartindo</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Caduca o %1$s</string>
+    <string name="share_expires">A compartición caduca o %1$s</string>
     <string name="share_file">Compartir %1$s</string>
     <string name="share_group_clarification">%1$s (grupo)</string>
     <string name="share_internal_link">Compartir a ligazón interna</string>

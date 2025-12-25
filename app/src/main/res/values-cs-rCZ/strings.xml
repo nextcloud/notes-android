@@ -101,6 +101,7 @@
     <string name="could_not_retrieve_shares">Nedaří se získat sdílení</string>
     <string name="delete_link">Smazat odkaz</string>
     <string name="direct_editing_error">Chyba při načítání upravování formátovaného textu</string>
+    <string name="dismiss">Zahodit</string>
     <string name="dnd">Nerušit</string>
     <string name="dontClear">Nečistit</string>
     <string name="ecosystem_apps_display_files">Soubory</string>
@@ -232,6 +233,7 @@
     <string name="note_share_activity_more_icon_content_description">ikona další sdílení poznámky</string>
     <string name="note_share_activity_resharing_not_allowed">Zásada nebo oprávnění brání sdílení dál dalším</string>
     <string name="note_share_activity_search_text">Jméno, identifikátor v rámci federovaného cloudu, nebo e-mailová adresa …</string>
+    <string name="note_share_activity_send_copy_to">Poslat kopii uživateli</string>
     <string name="note_share_activity_share_icon_content_description">ikona sdílení poznámky</string>
     <string name="note_share_activity_share_link">Nasdílet odkaz</string>
     <string name="note_share_activity_shared_with_you">Nasdílel(a) vám %1$s</string>

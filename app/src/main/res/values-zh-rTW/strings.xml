@@ -301,6 +301,7 @@
     <string name="share_dialog_title">分享</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">到期 %1$s</string>
+    <string name="share_expires">分享過期於 %1$s</string>
     <string name="share_file">分享 %1$s</string>
     <string name="share_group_clarification">%1$s（群組）</string>
     <string name="share_internal_link">分享內部連結</string>

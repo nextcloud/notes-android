@@ -233,6 +233,7 @@
     <string name="note_share_activity_more_icon_content_description">nóta roinnt níos mó deilbhín</string>
     <string name="note_share_activity_resharing_not_allowed">Cuireann beartais nó ceadanna cosc ​​ar athroinnt</string>
     <string name="note_share_activity_search_text">Ainm, ID Néal Cónaidhme nó seoladh ríomhphoist…</string>
+    <string name="note_share_activity_send_copy_to">Seol cóip chuig</string>
     <string name="note_share_activity_share_icon_content_description">deilbhín comhroinnte nóta</string>
     <string name="note_share_activity_share_link">Comhroinn nasc</string>
     <string name="note_share_activity_shared_with_you">Roinnte leat faoi %1$s</string>
@@ -300,6 +301,7 @@
     <string name="share_dialog_title">Roinnt</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">In éag %1$s</string>
+    <string name="share_expires">Rachaidh an scair in éag ar %1$s</string>
     <string name="share_file">Roinn %1$s</string>
     <string name="share_group_clarification">%1$s (grúpa)</string>
     <string name="share_internal_link">Roinn nasc inmheánach</string>

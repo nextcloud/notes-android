@@ -301,6 +301,7 @@
     <string name="share_dialog_title">Спільне</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Дійсне до %1$s</string>
+    <string name="share_expires">Спільний доступ спливає %1$s</string>
     <string name="share_file">Спільне %1$s</string>
     <string name="share_group_clarification">%1$s (група)</string>
     <string name="share_internal_link">Поділитися внутрішнім посиланням</string>
