@@ -301,6 +301,7 @@
     <string name="share_dialog_title">Jagamine</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Aegub %1$s</string>
+    <string name="share_expires">Jagamine aegub %1$s</string>
     <string name="share_file">Jaga %1$s</string>
     <string name="share_group_clarification">%1$s (grupp)</string>
     <string name="share_internal_link">Jaga sisemist linki</string>
