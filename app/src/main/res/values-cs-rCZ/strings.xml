@@ -301,6 +301,7 @@
     <string name="share_dialog_title">Sdílení</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Platnost skončí %1$s</string>
+    <string name="share_expires">Platnost sdílení skončí %1$s</string>
     <string name="share_file">Nasdílet %1$s</string>
     <string name="share_group_clarification">%1$s (skupina)</string>
     <string name="share_internal_link">Interní odkaz na sdílení</string>
