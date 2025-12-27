@@ -36,6 +36,7 @@ import it.niedermann.owncloud.notes.shared.util.extensions.getErrorMessage
 import it.niedermann.owncloud.notes.shared.util.extensions.toExpirationDateLong
 import it.niedermann.owncloud.notes.shared.util.extensions.toExpirationDateString
 import org.json.JSONObject
+import retrofit2.Response
 import java.util.Date
 
 class ShareRepository(private val applicationContext: Context, private val account: SingleSignOnAccount) {
@@ -59,13 +60,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
         val notesPathResponseResult = getNotesPathResponseResult() ?: return null
         val notesPath = notesPathResponseResult.notesPath
         val notesSuffix = notesPathResponseResult.fileSuffix
-        return if (note.category.isEmpty()) {
-            StringConstants.PATH + notesPath + StringConstants.PATH + note.title + notesSuffix
-        } else {
-            StringConstants.PATH + notesPath + StringConstants.PATH + note.category + StringConstants.PATH +
-                note.title +
-                notesSuffix
-        }
+        return StringConstants.PATH + notesPath + StringConstants.PATH + note.category + StringConstants.PATH + note.title + notesSuffix
     }
 
     fun getShareEntitiesForSpecificNote(note: Note): List<ShareEntity> {
@@ -289,25 +284,37 @@ class ShareRepository(private val applicationContext: Context, private val accou
         }
     }
 
-    fun getShareFromNote(note: Note): List<OCShare>? {
+    fun getShareFromNote(note: Note): List<OCShare> {
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
-        val path = getNotePath(note) ?: return null
-        val call = shareAPI.getShareFromNote(path)
-        val response = call.execute()
+        val path = getNotePath(note) ?: return emptyList<OCShare>()
 
+        val callSharedWithMe = shareAPI.getShareFromNote(path, true)
+        var response = callSharedWithMe.execute()
+        val sharedWithMe = parseResponse(response)
+
+        val callSharedWithOthers = shareAPI.getShareFromNote(path, false)
+        response = callSharedWithOthers.execute()
+        val sharedWithOthers = parseResponse(response)
+
+        sharedWithOthers.addAll(sharedWithMe)
+        
+        return sharedWithOthers
+    }
+
+    private fun parseResponse(response: Response<OcsResponse<List<CreateShareResponse>>>): MutableList<OCShare> {
         return try {
             if (response.isSuccessful) {
                 val body = response.body()
                 Log_OC.d(tag, "Response successful: $body")
-                body?.ocs?.data?.toOCShareList()
+                body?.ocs?.data?.toOCShareList()?.toMutableList() ?: mutableListOf()
             } else {
                 val errorBody = response.errorBody()?.string()
                 Log_OC.d(tag, "Response failed: $errorBody")
-                null
+                mutableListOf()
             }
         } catch (e: Exception) {
             Log_OC.d(tag, "Exception while getting share from note: ", e)
-            null
+            mutableListOf()
         }
     }
 
