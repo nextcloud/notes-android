@@ -75,15 +75,15 @@
                     android:paddingEnd="@dimen/spacer_list_card"
                     android:src="@drawable/ic_checkbox_blank_outline" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/noteStatus"
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/noteSyncStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|end"
-                    android:layout_marginTop="@dimen/spacer_1x"
-                    android:layout_marginEnd="2dp"
-                    android:baseline="14dp"
-                    app:srcCompat="@drawable/ic_sync_blue_18dp" />
+                    android:layout_marginStart="16dp"
+                    android:indeterminate="true"
+                    app:indicatorInset="@dimen/zero"
+                    app:indicatorSize="24dp"
+                    app:trackThickness="3dp" />
             </FrameLayout>
 
             <LinearLayout

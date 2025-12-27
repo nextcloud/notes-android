@@ -20,11 +20,11 @@ import androidx.annotation.CallSuper;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.selection.ItemDetailsLookup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.chip.Chip;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.nextcloud.android.common.core.utils.DateFormatter;
 import com.nextcloud.android.common.ui.theme.utils.ColorRole;
 
@@ -66,12 +66,12 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
-    protected void bindStatus(AppCompatImageView noteStatus, DBStatus status, int color) {
-        noteStatus.setVisibility(DBStatus.VOID.equals(status) ? INVISIBLE : VISIBLE);
+    protected void bindStatus(CircularProgressIndicator noteSyncStatus, DBStatus status, int color) {
+        noteSyncStatus.setVisibility(DBStatus.VOID.equals(status) ? INVISIBLE : VISIBLE);
 
-        final var context = noteStatus.getContext();
+        final var context = noteSyncStatus.getContext();
         final var util = BrandingUtil.of(color, context);
-        util.platform.tintDrawable(context, noteStatus.getDrawable(), ColorRole.ON_PRIMARY_CONTAINER);
+        util.material.colorProgressBar(noteSyncStatus, ColorRole.PRIMARY);
     }
 
     protected void bindCategory(@NonNull Context context, @NonNull TextView noteCategory, boolean showCategory, @NonNull String category, int color) {
