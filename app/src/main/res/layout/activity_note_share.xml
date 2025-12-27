@@ -59,9 +59,9 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:lines="1"
+                android:text="@string/activity_sharing_title"
                 android:textColor="@color/fontAppbar"
-                android:textSize="18sp"
-                tools:text="Share Note" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/file_name"

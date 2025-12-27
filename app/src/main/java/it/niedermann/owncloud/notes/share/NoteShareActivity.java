@@ -164,7 +164,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                 repository.getSharesForNotesAndSaveShareEntities();
 
                 runOnUiThread(() -> {
-                    binding.title.setText(R.string.activity_sharing_title);
                     binding.fileName.setText(note.getTitle());
                     binding.searchContainer.setVisibility(View.VISIBLE);
                     binding.sharesList.setVisibility(View.VISIBLE);

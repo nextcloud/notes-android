@@ -20,6 +20,7 @@ import androidx.annotation.StringRes;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.nextcloud.android.common.ui.theme.utils.ColorRole;
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 
@@ -149,7 +150,7 @@ public class ManageAccountsActivity extends LockedActivity implements IManageAcc
             mainColor$.removeObservers(this);
             final var util = BrandingUtil.of(color, this);
             util.material.colorTextInputLayout(binding.inputWrapper);
-            util.material.colorProgressBar(binding.progress);
+            util.material.colorProgressBar(binding.progress, ColorRole.PRIMARY);
         });
 
         binding.inputWrapper.setHint(title);

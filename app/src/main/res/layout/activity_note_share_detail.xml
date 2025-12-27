@@ -12,8 +12,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:minHeight="400dp">
+    android:focusableInTouchMode="true">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_close_24px">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/spacer_2x"
+                android:ellipsize="end"
+                android:lines="1"
+                android:text="@string/activity_sharing_details_title"
+                android:textColor="@color/fontAppbar"
+                android:textSize="18sp" />
+
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -22,7 +43,7 @@
         android:padding="@dimen/spacer_2x"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <LinearLayout
             android:orientation="vertical"
@@ -219,34 +240,37 @@
                 android:visibility="gone"/>
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/spacer_2x"
-                android:gravity="end"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacer_2x"
+                android:orientation="horizontal"
+                android:weightSum="1.0">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/share_process_btn_cancel"
                     style="@style/Widget.Material3.Button.OutlinedButton"
-                    android:layout_width="@dimen/button_width"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/zero"
+                    android:layout_height="match_parent"
                     android:layout_marginEnd="@dimen/spacer_1x"
+                    android:layout_weight=".5"
                     android:text="@string/note_share_detail_activity_cancel"
                     app:cornerRadius="@dimen/button_corner_radius" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/share_process_btn_next"
-                    android:layout_width="@dimen/button_extra_width"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/zero"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/spacer_1x"
+                    android:layout_weight=".5"
                     android:text="@string/note_share_detail_activity_common_next"
                     android:theme="@style/Widget.Material3.Button.IconButton.Filled"
-                    app:cornerRadius="@dimen/button_corner_radius"/>
+                    app:cornerRadius="@dimen/button_corner_radius" />
 
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/bottom_navigation_view_margin" />
+                android:layout_height="?android:attr/actionBarSize" />
 
         </LinearLayout>
 

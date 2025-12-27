@@ -57,7 +57,7 @@ public class NoteViewListHolder extends NoteViewHolder {
         @NonNull final var context = itemView.getContext();
         binding.noteCard.setAlpha(DBStatus.LOCAL_DELETED.equals(note.getStatus()) ? 0.5f : 1.0f);
         bindCategory(context, binding.noteCategory, showCategory, note.getCategory(), color);
-        bindStatus(binding.noteStatus, note.getStatus(), color);
+        bindStatus(binding.noteSyncStatus, note.getStatus(), color);
         bindFavorite(binding.noteFavorite, note.getFavorite());
         bindModified(binding.noteModified, note.getModified());
 
