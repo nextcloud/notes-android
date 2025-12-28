@@ -94,6 +94,7 @@
     <string name="could_not_retrieve_shares">Αδυναμία ανάκτησης κοινόχρηστων</string>
     <string name="delete_link">Διαγραφή Συνδέσμου</string>
     <string name="direct_editing_error">Σφάλμα κατά την φόρτωση της πλούσιας επεξεργασίας</string>
+    <string name="dismiss">Αποδέσμευση</string>
     <string name="dnd">Μην ενοχλείτε</string>
     <string name="dontClear">Να μην καθαριστεί</string>
     <string name="ecosystem_apps_display_files">Αρχεία</string>
