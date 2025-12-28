@@ -100,6 +100,7 @@
     <string name="could_not_retrieve_shares">Kunne ikke hente delte drev</string>
     <string name="delete_link">Slet link</string>
     <string name="direct_editing_error">Fejl under indlæsning af udvidet redigering</string>
+    <string name="dismiss">Afvis</string>
     <string name="dnd">Forstyr ikke</string>
     <string name="dontClear">Ryd ikke</string>
     <string name="ecosystem_apps_display_files">Filer</string>

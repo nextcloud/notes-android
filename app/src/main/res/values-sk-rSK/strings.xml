@@ -133,6 +133,7 @@
     <string name="error_dialog_we_need_info">Aby sme vám pomohli, potrebujeme následovné technické informácie:</string>
     <string name="error_maintenance_mode">Server je v móde údržby</string>
     <string name="error_no_network">Bez sieťového pripojenia</string>
+    <string name="error_setting_status_message">Chyba pri nastavovaní správy stavu!</string>
     <string name="error_sync">Synchronizácia zlyhala: %1$s</string>
     <string name="error_synchronization">Synchronizácia zlyhala</string>
     <string name="error_unknown">Vyskytla sa neznáma chyba</string>
@@ -255,6 +256,7 @@
     <string name="remove_account">Vzdialené: %1$s</string>
     <string name="search_in_all">Hľadať všetky poznámky</string>
     <string name="search_in_category">Hľadať v %1$s</string>
+    <string name="set_message">Nastaviť správu</string>
     <string name="set_online_status">Stav pripojenia</string>
     <string name="settings_background_sync">Synchronizácia na pozadí</string>
     <string name="settings_enable_direct_edit">Priama úprava</string>

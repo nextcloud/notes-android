@@ -301,6 +301,7 @@
     <string name="share_dialog_title">Sharing</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Expires %1$s</string>
+    <string name="share_expires">Share expires on %1$s</string>
     <string name="share_file">Share %1$s</string>
     <string name="share_group_clarification">%1$s (group)</string>
     <string name="share_internal_link">Share internal link</string>
