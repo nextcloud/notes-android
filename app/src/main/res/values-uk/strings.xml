@@ -42,6 +42,7 @@
     <string name="activity_chooser_send_file_title">Надіслати</string>
     <string name="activity_chooser_title">Надіслати посилання до…</string>
     <string name="activity_select_single_note">Оберіть нотатку</string>
+    <string name="activity_sharing_details_title">Деталі спільного доступу</string>
     <string name="activity_sharing_title">Спільне</string>
     <string name="add_account">Додати обліковий запис</string>
     <string name="add_another_public_share_link">Додати інше посилання</string>

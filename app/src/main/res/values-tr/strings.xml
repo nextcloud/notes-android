@@ -42,6 +42,7 @@
     <string name="activity_chooser_send_file_title">Gönder</string>
     <string name="activity_chooser_title">Bağlantıyı şuraya gönder…</string>
     <string name="activity_select_single_note">Not seçin</string>
+    <string name="activity_sharing_details_title">Paylaşım ayrıntıları</string>
     <string name="activity_sharing_title">Paylaşılıyor</string>
     <string name="add_account">Hesap ekle</string>
     <string name="add_another_public_share_link">Başka bir bağlantı ekle</string>

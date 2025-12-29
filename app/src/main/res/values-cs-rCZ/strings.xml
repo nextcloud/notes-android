@@ -42,6 +42,7 @@
     <string name="activity_chooser_send_file_title">Odeslat</string>
     <string name="activity_chooser_title">Poslat odkaz na …</string>
     <string name="activity_select_single_note">Vybrat poznámku</string>
+    <string name="activity_sharing_details_title">Podrobnosti sdílení</string>
     <string name="activity_sharing_title">Sdílení</string>
     <string name="add_account">Přidat účet</string>
     <string name="add_another_public_share_link">Přidat další odkaz</string>

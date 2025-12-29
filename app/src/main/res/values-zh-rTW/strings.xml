@@ -42,6 +42,7 @@
     <string name="activity_chooser_send_file_title">傳送</string>
     <string name="activity_chooser_title">傳送連結至…</string>
     <string name="activity_select_single_note">選擇筆記</string>
+    <string name="activity_sharing_details_title">分享詳細資訊</string>
     <string name="activity_sharing_title">分享</string>
     <string name="add_account">新增帳戶</string>
     <string name="add_another_public_share_link">新增其他連結</string>

@@ -42,6 +42,7 @@
     <string name="activity_chooser_send_file_title">Senden</string>
     <string name="activity_chooser_title">Link senden an…</string>
     <string name="activity_select_single_note">Notiz auswählen</string>
+    <string name="activity_sharing_details_title">Freigabedetails</string>
     <string name="activity_sharing_title">Teilen</string>
     <string name="add_account">Konto hinzufügen</string>
     <string name="add_another_public_share_link">Weiteren Link hinzufügen</string>
