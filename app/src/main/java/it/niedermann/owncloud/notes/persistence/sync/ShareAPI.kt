@@ -67,6 +67,6 @@ interface ShareAPI {
     @GET("shares/?format=json")
     fun getShareFromNote(
         @Query("path") path: String,
-        @Query("shared_with_me") sharedWithMe: Boolean = true
+        @Query("shared_with_me") sharedWithMe: Boolean = false
     ): Call<OcsResponse<List<CreateShareResponse>>>
 }
