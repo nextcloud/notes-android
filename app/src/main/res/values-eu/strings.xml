@@ -48,6 +48,7 @@
     <string name="added_content">\"%1$s\" gehituta</string>
     <string name="app_name">Oharrak</string>
     <string name="app_name_long">Nextcloud Oharrak</string>
+    <string name="appear_offline">Lineaz kanpo agertzen da</string>
     <string name="appearance_and_behavior">Itxura eta portaera</string>
     <string name="append_to_note">Gehitu oharrari</string>
     <string name="away">Kanpoan</string>
