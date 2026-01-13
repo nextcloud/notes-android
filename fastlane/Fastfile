@@ -56,7 +56,7 @@ desc "Build app bundle"
         preReleaseChecks(versionInfo: versionInfo, tagName: tagName, type: versionComponents["type"], track: storeTrack)
         checkArtifactsExist()
         tag(name: tagName)
-        createGithubRelease_RC(name: versionInfo["versionName"], tag: tagName, versionCode: versionInfo["versionCode"])
+        createGithubRelease(name: versionInfo["versionName"], tag: tagName, versionCode: versionInfo["versionCode"], track: storeTrack)
         uploadToPlayStore(track: storeTrack)
     end
 
@@ -147,8 +147,9 @@ desc "Build app bundle"
 			api_token: ENV["FASTLANE_NEXTCLOUD_GITHUB_API_TOKEN"],
 			name: options[:name],
 			tag_name: options[:tag],
+			is_prerelease: options[:track] == 'beta' ? true : false,
 			description: (File.read("metadata/android/en-US/changelogs/" + options[:versionCode] + ".txt") rescue "No changelog provided"),
-			upload_assets: [ "release/nextcloud-notes-" + options[:versionCode] + ".apk" ]
+			upload_assets: [ "release/nextcloud-notes-" + options[:versionCode].to_s + ".apk" ]
 		)
 	end
 
