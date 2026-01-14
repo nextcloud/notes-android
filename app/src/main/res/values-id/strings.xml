@@ -100,6 +100,7 @@
     <string name="dismiss">Batal</string>
     <string name="dnd">Jangan diganggu</string>
     <string name="dontClear">Jangan dihapus</string>
+    <string name="ecosystem_apps_display_files">File</string>
     <string name="ecosystem_apps_display_more">Lainnya</string>
     <string name="ecosystem_apps_display_talk">Talk</string>
     <string name="ecosystem_apps_more">Aplikasi Nextcloud Lainnya</string>
