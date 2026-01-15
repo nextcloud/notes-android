@@ -79,6 +79,7 @@ import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.exceptions.TokenMismatchException;
 import com.nextcloud.android.sso.exceptions.UnknownErrorException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
+import com.owncloud.android.lib.common.utils.Log_OC;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -389,12 +390,18 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     }
 
     private void setupDrawerAppMenuListener() {
-        final var accountName = Objects.requireNonNull(mainViewModel.getCurrentAccount().getValue()).getAccountName();
-
-        // Add listeners to the ecosystem items to launch the app or app-store
-        binding.drawerEcosystemFiles.setOnClickListener(v ->  ecosystemManager.openApp(EcosystemApp.FILES, accountName));
-        binding.drawerEcosystemTalk.setOnClickListener(v -> ecosystemManager.openApp(EcosystemApp.TALK, accountName));
+        binding.drawerEcosystemFiles.setOnClickListener(v ->  ecosystemManager.openApp(EcosystemApp.FILES, getAccountName()));
+        binding.drawerEcosystemTalk.setOnClickListener(v -> ecosystemManager.openApp(EcosystemApp.TALK, getAccountName()));
         binding.drawerEcosystemMore.setOnClickListener(v -> LinkHelper.INSTANCE.openAppStore("Nextcloud", true, this));
+    }
+
+    private String getAccountName() {
+        final var currentAccount = mainViewModel.getCurrentAccount().getValue();
+        if (currentAccount == null) {
+            return null;
+        }
+
+        return currentAccount.getAccountName();
     }
 
     private void themeDrawerAppMenu(int color) {
@@ -498,12 +505,17 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         ecosystemManager.receiveAccount(intent, new AccountReceiverCallback() {
             @Override
             public void onAccountReceived(@NotNull String accountName) {
-
+                final var account = mainViewModel.getAccountByName(accountName);
+                if (account != null) {
+                    mainViewModel.postCurrentAccount(account);
+                } else {
+                    Log_OC.e(TAG, "account not found");
+                }
             }
 
             @Override
             public void onAccountError(@NotNull String reason) {
-
+                Log_OC.e(TAG,"on account error: " + reason);
             }
         });
     }
