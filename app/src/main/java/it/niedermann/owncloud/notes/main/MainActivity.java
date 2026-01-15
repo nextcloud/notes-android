@@ -505,7 +505,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
             @Override
             public void onAccountError(@NotNull String reason) {
-                Log_OC.e(TAG,"on account error: " + reason);
+                Log_OC.w(TAG, "handleEcosystemIntent: " + reason);
             }
         });
     }
