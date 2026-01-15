@@ -497,7 +497,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             public void onAccountReceived(@NotNull String accountName) {
                 final var account = mainViewModel.getAccountByName(accountName);
                 if (account != null) {
-                    mainViewModel.postCurrentAccount(account);
+                    onAccountChosen(account);
                 } else {
                     Log_OC.e(TAG, "account not found");
                 }
