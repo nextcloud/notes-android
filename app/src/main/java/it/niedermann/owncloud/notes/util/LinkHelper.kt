@@ -10,10 +10,7 @@ package it.niedermann.owncloud.notes.util
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import androidx.core.net.toUri
-import com.owncloud.android.lib.common.utils.Log_OC
-import java.util.Locale
 
 /**
  * Helper class for opening Nextcloud apps if present
@@ -21,34 +18,7 @@ import java.util.Locale
  * in case the app is not yet installed on the device.
  */
 object LinkHelper {
-    const val APP_NEXTCLOUD_FILES = "com.nextcloud.client"
-    const val APP_NEXTCLOUD_NOTES = "it.niedermann.owncloud.notes"
-    const val APP_NEXTCLOUD_TALK = "com.nextcloud.talk2"
-    const val KEY_ACCOUNT: String = "KEY_ACCOUNT"
     private const val TAG = "LinkHelper"
-
-    /**
-     * Open specified app and, if not installed redirect to corresponding download.
-     *
-     * @param packageName of app to be opened
-     * @param userHash to pass in intent
-     */
-    fun openAppOrStore(
-        packageName: String,
-        userHash: String?,
-        context: Context,
-    ) {
-        val intent = context.packageManager.getLaunchIntentForPackage(packageName)
-        if (intent != null) {
-            // app installed - open directly
-            // TODO handle null user?
-            intent.putExtra(KEY_ACCOUNT, userHash)
-            context.startActivity(intent)
-        } else {
-            // app not found - open market (Google Play Store, F-Droid, etc.)
-            openAppStore(packageName, false, context)
-        }
-    }
 
     /**
      * Open app store page of specified app or search for specified string. Will attempt to open browser when no app
@@ -66,7 +36,7 @@ object LinkHelper {
         val intent = Intent(Intent.ACTION_VIEW, "market://$suffix".toUri())
         try {
             context.startActivity(intent)
-        } catch (activityNotFoundException1: ActivityNotFoundException) {
+        } catch (_: ActivityNotFoundException) {
             // all is lost: open google play store web page for app
             if (!search) {
                 suffix = "apps/$suffix"
@@ -75,58 +45,4 @@ object LinkHelper {
             context.startActivity(intent)
         }
     }
-
-    // region Validation
-    private const val HTTP = "http"
-    private const val HTTPS = "https"
-    private const val FILE = "file"
-    private const val CONTENT = "content"
-
-    /**
-     * Validates if a string can be converted to a valid URI
-     */
-    @Suppress("TooGenericExceptionCaught", "ReturnCount")
-    fun validateAndGetURI(uriString: String?): Uri? {
-        if (uriString.isNullOrBlank()) {
-            Log_OC.w(TAG, "Given uriString is null or blank")
-            return null
-        }
-
-        return try {
-            val uri = uriString.toUri()
-            if (uri.scheme == null) {
-                return null
-            }
-
-            val validSchemes = listOf(HTTP, HTTPS, FILE, CONTENT)
-            if (uri.scheme in validSchemes) uri else null
-        } catch (e: Exception) {
-            Log_OC.e(TAG, "Invalid URI string: $uriString -- $e")
-            null
-        }
-    }
-
-    /**
-     * Validates if a URL string is valid
-     */
-    @Suppress("TooGenericExceptionCaught", "ReturnCount")
-    fun validateAndGetURL(url: String?): String? {
-        if (url.isNullOrBlank()) {
-            Log_OC.w(TAG, "Given url is null or blank")
-            return null
-        }
-
-        return try {
-            val uri = url.toUri()
-            if (uri.scheme == null) {
-                return null
-            }
-            val validSchemes = listOf(HTTP, HTTPS)
-            if (uri.scheme in validSchemes) url else null
-        } catch (e: Exception) {
-            Log_OC.e(TAG, "Invalid URL: $url -- $e")
-            null
-        }
-    }
-    // endregion
 }

@@ -67,6 +67,9 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.nextcloud.android.common.core.utils.ecosystem.AccountReceiverCallback;
+import com.nextcloud.android.common.core.utils.ecosystem.EcosystemApp;
+import com.nextcloud.android.common.core.utils.ecosystem.EcosystemManager;
 import com.nextcloud.android.common.ui.theme.utils.ColorRole;
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.AccountImportCancelledException;
@@ -77,10 +80,13 @@ import com.nextcloud.android.sso.exceptions.TokenMismatchException;
 import com.nextcloud.android.sso.exceptions.UnknownErrorException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.net.HttpURLConnection;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
@@ -133,6 +139,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     protected MainViewModel mainViewModel;
 
+    private EcosystemManager ecosystemManager;
+
     private boolean gridView = true;
 
     public static final String ADAPTER_KEY_RECENT = "recent";
@@ -173,6 +181,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
         setContentView(binding.getRoot());
 
+        ecosystemManager = new EcosystemManager(this);
+        handleEcosystemIntent(getIntent());
         this.coordinatorLayout = binding.activityNotesListView.activityNotesListView;
         this.swipeRefreshLayout = binding.activityNotesListView.swiperefreshlayout;
         this.fabCreate = binding.activityNotesListView.fabCreate;
@@ -379,9 +389,11 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     }
 
     private void setupDrawerAppMenuListener() {
+        final var accountName = Objects.requireNonNull(mainViewModel.getCurrentAccount().getValue()).getAccountName();
+
         // Add listeners to the ecosystem items to launch the app or app-store
-        binding.drawerEcosystemFiles.setOnClickListener(v -> LinkHelper.INSTANCE.openAppOrStore(LinkHelper.APP_NEXTCLOUD_FILES, mainViewModel.getCurrentAccount().getValue().getAccountName(), this));
-        binding.drawerEcosystemTalk.setOnClickListener(v -> LinkHelper.INSTANCE.openAppOrStore(LinkHelper.APP_NEXTCLOUD_TALK, mainViewModel.getCurrentAccount().getValue().getAccountName(), this));
+        binding.drawerEcosystemFiles.setOnClickListener(v ->  ecosystemManager.openApp(EcosystemApp.FILES, accountName));
+        binding.drawerEcosystemTalk.setOnClickListener(v -> ecosystemManager.openApp(EcosystemApp.TALK, accountName));
         binding.drawerEcosystemMore.setOnClickListener(v -> LinkHelper.INSTANCE.openAppStore("Nextcloud", true, this));
     }
 
@@ -480,6 +492,20 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         mainViewModel.restoreInstanceState();
+    }
+
+    private void handleEcosystemIntent(Intent intent) {
+        ecosystemManager.receiveAccount(intent, new AccountReceiverCallback() {
+            @Override
+            public void onAccountReceived(@NotNull String accountName) {
+
+            }
+
+            @Override
+            public void onAccountError(@NotNull String reason) {
+
+            }
+        });
     }
 
     private void setupToolbars() {
@@ -754,6 +780,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             activityBinding.searchView.setQuery(intent.getStringExtra(SearchManager.QUERY), true);
         }
         super.onNewIntent(intent);
+        handleEcosystemIntent(intent);
     }
 
     @Override
