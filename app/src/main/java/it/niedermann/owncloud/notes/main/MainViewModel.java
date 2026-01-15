@@ -126,6 +126,10 @@ public class MainViewModel extends AndroidViewModel {
         return distinctUntilChanged(currentAccount);
     }
 
+    public Account getAccountByName(String accountName) {
+        return repo.getAccountByName(accountName);
+    }
+
     public void postCurrentAccount(@NonNull Account account) {
         state.set(KEY_CURRENT_ACCOUNT, account);
         BrandingUtil.saveBrandColor(getApplication(), account.getColor());
