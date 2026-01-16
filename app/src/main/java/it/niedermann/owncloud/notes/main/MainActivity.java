@@ -118,6 +118,7 @@ import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 import it.niedermann.owncloud.notes.shared.util.CustomAppGlideModule;
+import it.niedermann.owncloud.notes.shared.util.DisplayUtils;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 import it.niedermann.owncloud.notes.util.LinkHelper;
@@ -499,7 +500,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                 if (account != null) {
                     onAccountChosen(account);
                 } else {
-                    Log_OC.e(TAG, "account not found");
+                    Log_OC.w(TAG, "account not found");
+                    DisplayUtils.showSnackMessage(MainActivity.this, R.string.account_not_found);
                 }
             }
 
