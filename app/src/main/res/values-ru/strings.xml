@@ -224,6 +224,7 @@
     <string name="note_share_activity_could_not_retrieve_url">Не удалось получить URL</string>
     <string name="note_share_activity_resharing_not_allowed">Политика или разрешения запрещают повторное предоставление общего доступа</string>
     <string name="note_share_activity_search_text">Имя, ID федеративного облака или email адрес…</string>
+    <string name="note_share_activity_send_copy_to">Отправить копию</string>
     <string name="note_share_activity_share_link">Поделиться ссылкой</string>
     <string name="note_share_activity_shared_with_you">С вами поделился %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">Вам предоставлен доступ к «%1$s»</string>
