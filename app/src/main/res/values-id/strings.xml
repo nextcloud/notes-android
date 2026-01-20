@@ -274,9 +274,12 @@
     <string name="share_link_password_title">Masukkan kata sandi</string>
     <string name="share_link_with_label">Bagikan tautan (%1$s)</string>
     <string name="share_no_expiration_date_label">Atur tanggal kedaluwarsa</string>
+    <string name="share_no_password_title">Tetapkan kata sandi</string>
     <string name="share_password_dialog_fragment_share_link_optional_password_title">Masukkan sandi opsional</string>
     <string name="share_password_dialog_fragment_skip">Lewati</string>
     <string name="share_password_title">Sandi dilindungi</string>
+    <string name="share_permission_can_edit">Dapat mengedit</string>
+    <string name="share_permission_file_drop">Drop file</string>
     <string name="share_permission_secure_file_drop">Tempat penyimpanan file aman</string>
     <string name="share_permission_view_only">Hanya lihat</string>
     <string name="share_permissions">Bagikan Izin</string>
