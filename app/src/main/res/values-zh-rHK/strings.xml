@@ -120,7 +120,7 @@
     <string name="error_dialog_check_server_logs">您的 Nextcloud 設置存在問題。請查看伺服器記錄檔案。</string>
     <string name="error_dialog_insufficient_storage">您的 Nextcloud 沒有剩餘可用的存儲空間。請刪除一些檔案，以將近端更改同步到雲中。</string>
     <string name="error_dialog_min_version">Notes Android 應用程式要求 Nextcloud Android 應用程式最低版本為 3.18。</string>
-    <string name="error_dialog_redirect">您的伺服器確實以HTTP 302狀態代碼響應，這表示您尚未在伺服器上安裝 Notes 應用程式或配置錯誤。這可能是由 .htaccess 檔案中的自定義替代引起的，也可能是由 Nextcloud 應用程式（如 OID 客戶端）引起的。</string>
+    <string name="error_dialog_redirect">您的伺服器確實以HTTP 302狀態代碼響應，這表示您尚未在伺服器上安裝 Notes 應用程式或配置錯誤。這可能是由 .htaccess 檔案中的自訂替代引起的，也可能是由 Nextcloud 應用程式（如 OID 客戶端）引起的。</string>
     <string name="error_dialog_server_app_enabled">請確保您已在伺服器上安裝並啟用 Notes 應用程式。</string>
     <string name="error_dialog_timeout_instance">伺服器沒有在規定的時間回應。請確保您的伺服器實例在正常運行。</string>
     <string name="error_dialog_timeout_toggle">檢查您的網絡連接。有時候，切換流動數據或Wi-Fi可能會有所幫助。</string>
