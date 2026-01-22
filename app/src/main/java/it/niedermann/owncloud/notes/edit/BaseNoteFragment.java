@@ -69,7 +69,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     private static final String SAVEDKEY_NOTE = "note";
     private static final String SAVEDKEY_ORIGINAL_NOTE = "original_note";
 
-    private Account localAccount;
+    protected Account localAccount;
 
     protected Note note;
     // TODO do we really need this? The reference to note is currently the same

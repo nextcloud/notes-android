@@ -141,6 +141,11 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         noteLoaded = true;
         registerInternalNoteLinkHandler();
 
+        // Set the image URL prefix for loading images from the Nextcloud server
+        if (localAccount != null && !localAccount.getUrl().isEmpty()) {
+            binding.singleNoteContent.setMarkdownImageUrlPrefix(localAccount.getUrl());
+        }
+
         lifecycleScopeIOJob(() -> {
             final String content = note.getContent();
             changedText = content;
