@@ -104,6 +104,7 @@
     <string name="ecosystem_apps_display_more">Lainnya</string>
     <string name="ecosystem_apps_display_talk">Talk</string>
     <string name="ecosystem_apps_more">Aplikasi Nextcloud Lainnya</string>
+    <string name="ecosystem_apps_talk">Talk Nextcloud</string>
     <string name="email_pick_failed">Gagal memilih alamat email.</string>
     <string name="error_action_open_battery_settings">Pengaturan baterai</string>
     <string name="error_action_open_deck_info">Buka Info Aplikasi</string>
