@@ -91,9 +91,9 @@
     <string name="clear">Очистити</string>
     <string name="clear_status_after">Очистити статус після</string>
     <string name="clipboard_label">Текст скопійовано з %1$s</string>
-    <string name="clipboard_no_text_to_copy">Відсутній текст для копіювання до буферу обміну</string>
+    <string name="clipboard_no_text_to_copy">Відсутній текст для копіювання до буфера обміну</string>
     <string name="clipboard_text_copied">Посилання скопійовано</string>
-    <string name="clipboard_unexpected_error">Неочікувана помилка під час копіювання до буферу обміну</string>
+    <string name="clipboard_unexpected_error">Неочікувана помилка під час копіювання до буфера обміну</string>
     <string name="common_delete">Вилучати</string>
     <string name="common_loading">Завантаження…</string>
     <string name="common_ok">Гаразд</string>
