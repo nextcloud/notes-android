@@ -26,6 +26,7 @@
     <string name="about_version_title">Versie</string>
     <string name="account_already_imported">Account is al geïmporteerd</string>
     <string name="account_imported">Account geïmporteerd</string>
+    <string name="account_switch_dialog_status_fetching_error_message">Ophalen status mislukt, probeer opnieuw alstublieft</string>
     <string name="action_back">Terug</string>
     <string name="action_create">Nieuwe notitie</string>
     <string name="action_edit_save">Opslaan</string>
@@ -41,6 +42,7 @@
     <string name="activity_chooser_send_file_title">Verzenden</string>
     <string name="activity_chooser_title">Verstuur link naar…</string>
     <string name="activity_select_single_note">Notitie selecteren</string>
+    <string name="activity_sharing_details_title">Details delen</string>
     <string name="activity_sharing_title">Delen</string>
     <string name="add_account">Account toevoegen</string>
     <string name="add_another_public_share_link">Toevoegen andere link</string>
@@ -133,6 +135,7 @@
     <string name="error_dialog_we_need_info">We hebben de volgende technische informatie nodig om je te kunnen helpen: </string>
     <string name="error_maintenance_mode">Server in onderhoudsmodus</string>
     <string name="error_no_network">Geen netwerkverbinding</string>
+    <string name="error_setting_status_message">Fout bij instellen statusbericht!</string>
     <string name="error_sync">Synchronisatie mislukt: %1$s</string>
     <string name="error_synchronization">Synchronisatie mislukt</string>
     <string name="error_unknown">Een onbekende fout trad op.</string>
@@ -192,6 +195,7 @@
     <string name="link_share_editing">Bewerken</string>
     <string name="link_share_file_drop">Bestand droppen (alleen uploaden)</string>
     <string name="link_share_view_only">Alleen bekijken</string>
+    <string name="listview_no_content">Geen inhoud</string>
     <string name="listview_updated_last_month">Vorige maand</string>
     <string name="listview_updated_last_week">Vorige week</string>
     <string name="listview_updated_this_month">Deze maand</string>
@@ -230,6 +234,7 @@
     <string name="note_share_activity_more_icon_content_description">note deel meer pictogram</string>
     <string name="note_share_activity_resharing_not_allowed">Beleid of machtigingen staan opnieuw delen niet toe</string>
     <string name="note_share_activity_search_text">Naam, Federated Cloud ID of e-mailadres…</string>
+    <string name="note_share_activity_send_copy_to">Stuur kopie naar</string>
     <string name="note_share_activity_share_icon_content_description">note deel-pictogram</string>
     <string name="note_share_activity_share_link">Deel link</string>
     <string name="note_share_activity_shared_with_you">Met je gedeeld door %1$s</string>
@@ -256,6 +261,7 @@
     <string name="note_share_detail_activity_share_via_link_hide_download">Verberg download</string>
     <string name="oneHour">1 uur</string>
     <string name="online">Online</string>
+    <string name="online_status">Online status</string>
     <string name="pin_to_homescreen">Vastzetten op startscherm</string>
     <string name="pref_value_font_normal">Normaal</string>
     <string name="pref_value_lock">Wachtwoordbeveiliging</string>
@@ -267,6 +273,8 @@
     <string name="remove_account">Verwijder %1$s</string>
     <string name="search_in_all">Zoek in alle notities</string>
     <string name="search_in_category">Zoeken in %1$s</string>
+    <string name="set_message">Stel bericht in</string>
+    <string name="set_online_status">Online status</string>
     <string name="settings_background_sync">Achtergrondsynchronisatie</string>
     <string name="settings_enable_direct_edit">Direct bewerken</string>
     <string name="settings_enable_direct_edit_summary">Indien uitgeschakeld, wordt de geavanceerde editor verborgen.</string>
@@ -294,6 +302,7 @@
     <string name="share_dialog_title">Delen</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Vervalt op %1$s</string>
+    <string name="share_expires">Delen verloopt op %1$s</string>
     <string name="share_file">Deel %1$s</string>
     <string name="share_group_clarification">%1$s (groep)</string>
     <string name="share_internal_link">Deel interne link</string>
@@ -345,6 +354,7 @@
     <string name="sort_alphabetically">Op alfabet sorteren</string>
     <string name="sort_last_modified">Op wijzigingsdatum sorteren</string>
     <string name="status_message">Statusbericht</string>
+    <string name="status_set_fail_message">Instellen status mislukt!</string>
     <string name="switch_to_plain_editing">Ga naar normaal bewerken</string>
     <string name="thirtyMinutes">30 minuten</string>
     <string name="thisWeek">Deze week</string>
