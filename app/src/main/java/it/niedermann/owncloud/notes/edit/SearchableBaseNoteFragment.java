@@ -104,12 +104,8 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
             getDirectEditingButton().setVisibility(View.GONE);
             ExtendedFloatingActionButton edit = getNormalEditButton();
             if(edit!=null) {
-                edit.setVisibility(View.VISIBLE);
-                edit.setOnClickListener(v -> {
-                    if (listener != null) {
-                        listener.changeMode(NoteFragmentListener.Mode.EDIT, true);
-                    }
-                });
+                // Hide the FAB - use the toolbar menu icon instead for a cleaner UI
+                edit.setVisibility(View.GONE);
             }
         }
     }

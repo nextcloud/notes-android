@@ -34,6 +34,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.owncloud.android.lib.common.utils.Log_OC;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.FragmentNotePreviewBinding;
@@ -46,6 +51,8 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     private static final String TAG = NotePreviewFragment.class.getSimpleName();
 
     private String changedText;
+    private String originalContent;  // Store original to prevent saving transformed content
+    private boolean initialLoadComplete = false;  // Flag to skip saving during initial load
 
     protected FragmentNotePreviewBinding binding;
 
@@ -130,6 +137,70 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         }
     }
 
+    /**
+     * Transforms attachment paths in markdown to use WebDAV URLs.
+     * Converts: ![alt](.attachments.XXX/file.jpg)
+     * To: ![alt](/remote.php/dav/files/{username}/Notes/{category}/.attachments.XXX/file.jpg)
+     *
+     * Uses WebDAV which works with SSO-Glide authentication.
+     */
+    private String transformAttachmentUrls(String content, Note note) {
+        Log.i(TAG, "=== transformAttachmentUrls called ===");
+        Log.i(TAG, "content length: " + (content != null ? content.length() : "null"));
+
+        if (content == null || localAccount == null || note == null) {
+            Log.w(TAG, "Skipping transform - content, localAccount, or note is null");
+            return content;
+        }
+
+        String username = localAccount.getUserName();
+        // TODO: fetch actual notes path from server settings if customized
+        String notesPath = "Notes";
+
+        // Get the note's category (subfolder path)
+        String category = note.getCategory();
+        String fullPath;
+        if (category != null && !category.isEmpty()) {
+            fullPath = notesPath + "/" + category;
+        } else {
+            fullPath = notesPath;
+        }
+
+        Log.i(TAG, "Username: " + username + ", NotesPath: " + notesPath + ", Category: " + category + ", FullPath: " + fullPath);
+        Log.i(TAG, "Content preview: " + content.substring(0, Math.min(content.length(), 300)));
+
+        // Pattern to match markdown images with .attachments paths
+        // Matches: ![any alt text](.attachments.XXX/filename)
+        Pattern pattern = Pattern.compile("(!\\[[^\\]]*\\]\\()(\\.attachments\\.[^)]+)(\\))");
+        Matcher matcher = pattern.matcher(content);
+        StringBuffer result = new StringBuffer();
+
+        int matchCount = 0;
+        while (matcher.find()) {
+            matchCount++;
+            String prefix = matcher.group(1);  // ![alt](
+            String path = matcher.group(2);    // .attachments.XXX/filename
+            String suffix = matcher.group(3);  // )
+
+            Log.i(TAG, "Found match #" + matchCount + ": " + matcher.group(0));
+            Log.i(TAG, "  path: " + path);
+
+            // Build the WebDAV URL including category subfolder
+            String webdavUrl = "/remote.php/dav/files/" + username + "/" + fullPath + "/" + path;
+            Log.i(TAG, "  WebDAV URL: " + webdavUrl);
+
+            matcher.appendReplacement(result, Matcher.quoteReplacement(prefix + webdavUrl + suffix));
+        }
+        matcher.appendTail(result);
+
+        Log.i(TAG, "Total matches found: " + matchCount);
+        if (matchCount > 0) {
+            Log.i(TAG, "Transformed content preview: " + result.toString().substring(0, Math.min(result.length(), 500)));
+        }
+
+        return result.toString();
+    }
+
     @Override
     protected void onNoteLoaded(Note note) {
         super.onNoteLoaded(note);
@@ -147,11 +218,16 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         }
 
         lifecycleScopeIOJob(() -> {
-            final String content = note.getContent();
-            changedText = content;
+            originalContent = note.getContent();  // Store original for comparison
+            changedText = originalContent;  // Keep original for saving
+            initialLoadComplete = false;  // Reset flag before setting content
+
+            // Transform attachment URLs for display only
+            final String displayContent = transformAttachmentUrls(originalContent, note);
+            Log.d(TAG, "Original content has attachments: " + (originalContent != null && originalContent.contains(".attachments.")));
 
             onMainThread(() -> {
-                binding.singleNoteContent.setMarkdownString(content, setScrollY);
+                binding.singleNoteContent.setMarkdownString(displayContent, setScrollY);
 
                 final var activity = getActivity();
                 if (activity == null) {
@@ -159,8 +235,24 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
                 }
 
                 binding.singleNoteContent.getMarkdownString().observe(activity, (newContent) -> {
-                    changedText = newContent.toString();
-                    saveNote(null);
+                    // Skip saving during initial load or if content matches original
+                    if (!initialLoadComplete) {
+                        initialLoadComplete = true;
+                        Log.d(TAG, "Skipping save during initial load");
+                        return;
+                    }
+
+                    String newContentStr = newContent.toString();
+                    // Only save if the content is actually different from original
+                    // and doesn't contain our transformed API URLs
+                    if (!newContentStr.equals(originalContent) &&
+                        !newContentStr.contains("/index.php/apps/notes/api/v1/notes/") &&
+                        !newContentStr.contains("/attachment?path=")) {
+                        changedText = newContentStr;
+                        saveNote(null);
+                    } else {
+                        Log.d(TAG, "Skipping save - content unchanged or contains transformed URLs");
+                    }
                 });
                 return Unit.INSTANCE;
             });
@@ -208,10 +300,15 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
                     repo.addCallbackPull(account, () -> {
                         note = repo.getNoteById(note.getId());
                         final String content = note.getContent();
+                        originalContent = content;  // Store original
                         changedText = content;
 
+                        // Transform attachment URLs for display
+                        final String displayContent = transformAttachmentUrls(content, note);
+
                         onMainThread(() -> {
-                            binding.singleNoteContent.setMarkdownString(content);
+                            initialLoadComplete = false;  // Reset flag before setting content
+                            binding.singleNoteContent.setMarkdownString(displayContent);
                             binding.swiperefreshlayout.setRefreshing(false);
                             return Unit.INSTANCE;
                         });
