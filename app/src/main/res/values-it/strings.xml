@@ -135,6 +135,7 @@
     <string name="error_sync">Sincronizzazione non riuscita: %1$s</string>
     <string name="error_synchronization">Sincronizzazione non riuscita</string>
     <string name="error_unknown">Si è verificato un errore sconosciuto.</string>
+    <string name="failed_the_remove_share">Rimozione della condivisione non riuscita</string>
     <string name="failed_update_ui">Aggiornamento interfaccia non riuscito</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Nessuna app disponibile per selezionare i contatti</string>
     <string name="file_list_seconds_ago">secondi fa</string>
@@ -190,6 +191,7 @@
     <string name="link_share_editing">Modificando</string>
     <string name="link_share_file_drop">Rilascio file (solo caricamento)</string>
     <string name="link_share_view_only">Sola lettura</string>
+    <string name="listview_no_content">Nessun contenuto</string>
     <string name="listview_updated_last_month">Ultimo mese</string>
     <string name="listview_updated_last_week">Ultima settimana</string>
     <string name="listview_updated_this_month">Questo mese</string>
@@ -221,9 +223,11 @@
     <string name="note_share_activity_could_not_retrieve_url">Impossibile recuperare l\'URL</string>
     <string name="note_share_activity_resharing_not_allowed">La policy o le autorizzazioni impediscono la ricondivisione</string>
     <string name="note_share_activity_search_text">Nome, Federated Cloud ID o indirizzo e-mail...</string>
+    <string name="note_share_activity_send_copy_to">Invia copia a</string>
     <string name="note_share_activity_share_link">Collegamento di condivisione</string>
     <string name="note_share_activity_shared_with_you">Condiviso con te da %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" è stato condiviso con te</string>
+    <string name="note_share_created">Condivisione creata</string>
     <string name="note_share_detail_activity_advanced_settings">Impostazioni avanzate</string>
     <string name="note_share_detail_activity_cancel">Annulla</string>
     <string name="note_share_detail_activity_common_confirm">Conferma</string>
@@ -242,6 +246,7 @@
     <string name="note_share_detail_activity_share_via_link_hide_download">Nascondi scaricamento</string>
     <string name="oneHour">1 ora</string>
     <string name="online">In linea</string>
+    <string name="online_status">Stato in linea</string>
     <string name="pin_to_homescreen">Appunta alla schermata iniziale</string>
     <string name="pref_value_font_normal">Normale</string>
     <string name="pref_value_lock">Protezione con password</string>
@@ -253,6 +258,8 @@
     <string name="remove_account">Rimuovi %1$s</string>
     <string name="search_in_all">Cerca tutte le note</string>
     <string name="search_in_category">Cerca in %1$s</string>
+    <string name="set_message">Imposta message</string>
+    <string name="set_online_status">Stato in linea</string>
     <string name="settings_background_sync">Sincronizzazione in background</string>
     <string name="settings_enable_direct_edit">Modifica Diretta</string>
     <string name="settings_enable_direct_edit_summary">Quando disabilitato, l\'editor avanzato sarà nascosto.</string>
@@ -292,6 +299,7 @@
     <string name="share_no_expiration_date_label">Imposta data di scadenza</string>
     <string name="share_no_password_title">Imposta password</string>
     <string name="share_password_dialog_fragment_share_link_optional_password_title">Digita una password facoltativa</string>
+    <string name="share_password_dialog_fragment_skip">Salta</string>
     <string name="share_password_title">Protetta da password</string>
     <string name="share_permission_can_edit">Può modificare</string>
     <string name="share_permission_file_drop">Elimina file</string>
