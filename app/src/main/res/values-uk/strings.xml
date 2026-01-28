@@ -49,7 +49,7 @@
     <string name="add_category">Додати %1$s</string>
     <string name="add_new_public_share">Додати нове публічне посилання</string>
     <string name="added_content">Додано \"%1$s\"</string>
-    <string name="allow_resharing">Дозволяти передавати у спільний доступ іншим</string>
+    <string name="allow_resharing">Дозволити повторно передавати у спільний доступ</string>
     <string name="app_name">Нотатки</string>
     <string name="app_name_long">Нотатки для Nextcloud</string>
     <string name="appear_offline">Перебуваю поза мережею</string>
@@ -236,7 +236,7 @@
     <string name="note_share_activity_search_text">Ім\'я, ідентифікатор об\'єднаної хмари або ел.адреса...</string>
     <string name="note_share_activity_send_copy_to">Надіслати копію до</string>
     <string name="note_share_activity_share_icon_content_description">значок нотатки поділитися</string>
-    <string name="note_share_activity_share_link">Передати у публічний доступ</string>
+    <string name="note_share_activity_share_link">Надати у публічний доступ</string>
     <string name="note_share_activity_shared_with_you">%1$s поділив(-ла-)ся з вами</string>
     <string name="note_share_activity_subject_shared_with_you">Вам було надано доступ до \"%1$s\"</string>
     <string name="note_share_activity_user_icon_content_description">значок нотатки поділитися з користувачем</string>
@@ -309,7 +309,7 @@
     <string name="share_internal_link_to_file_text">Внутрішнє посилання спільного доступу дійсне лише для користувачів, які мають доступ до цього файлу</string>
     <string name="share_internal_link_to_folder_text">Внутрішнє посилання спільного доступу дійсне лише для користувачів, які мають доступ до цього каталогу</string>
     <string name="share_known_remote_on_clarification">на %1$s</string>
-    <string name="share_link">Передати у публічний доступ</string>
+    <string name="share_link">Надати у публічний доступ</string>
     <string name="share_link_password_title">Введіть пароль</string>
     <string name="share_link_with_label">Поділитися посиланням (%1$s)</string>
     <string name="share_no_expiration_date_label">Встановити термін дії</string>
@@ -326,7 +326,7 @@
     <string name="share_room_clarification">%1$s (розмова)</string>
     <string name="share_send_new_email">Надіслати новий лист</string>
     <string name="share_settings">Налаштування</string>
-    <string name="share_via_link_section_title">Передати у публічний доступ</string>
+    <string name="share_via_link_section_title">Надати у публічний доступ</string>
     <string name="share_via_link_send_link_label">Надіслати посилання</string>
     <string name="share_via_link_unset_password">Зняти</string>
     <string name="share_with_title">Поділитися з...</string>
