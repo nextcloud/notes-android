@@ -13,7 +13,7 @@ buildscript {
         kotlinVersion = '2.3.0'
         commonsVersion = '2.4.1'
 		androidCommonsVersion = '1.1.1'
-        nextcloudAndroidCommonLib = "0.31.0"
+        nextcloudAndroidCommonLib = "4fc0f29981"
         singleSignOnVersion = "1.3.4"
     }
     repositories {
