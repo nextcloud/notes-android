@@ -42,6 +42,7 @@
     <string name="activity_chooser_send_file_title">Tuma</string>
     <string name="activity_chooser_title">Tuma kiungo kwa...</string>
     <string name="activity_select_single_note">Chagua dokezo</string>
+    <string name="activity_sharing_details_title">Inashiriki Maelezo</string>
     <string name="activity_sharing_title">inashirikisha</string>
     <string name="add_account">Ongeza akaunti</string>
     <string name="add_another_public_share_link">Ongeza kiungo kingine</string>
@@ -233,6 +234,7 @@
     <string name="note_share_activity_more_icon_content_description">kumbuka shiriki ikoni zaidi</string>
     <string name="note_share_activity_resharing_not_allowed">Sera au ruhusa huzuia kushiriki upya</string>
     <string name="note_share_activity_search_text">Jina, Kitambulisho cha Cloud iliyoshirikishwa au anwani ya barua pepe...</string>
+    <string name="note_share_activity_send_copy_to">Tuma nakala kwa</string>
     <string name="note_share_activity_share_icon_content_description">kumbuka aikoni ya kushiriki</string>
     <string name="note_share_activity_share_link">Shirikisha kiungo</string>
     <string name="note_share_activity_shared_with_you">Imeshirikiwa na wewe kwa %1$s</string>
@@ -300,6 +302,7 @@
     <string name="share_dialog_title">inashirikisha</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Inaisha wakati %1$s</string>
+    <string name="share_expires">Muda wa kushiriki utakwisha %1$s</string>
     <string name="share_file">Shirikisha %1$s</string>
     <string name="share_group_clarification">%1$s (kundi)</string>
     <string name="share_internal_link">Shiriki kiungo cha ndani</string>
