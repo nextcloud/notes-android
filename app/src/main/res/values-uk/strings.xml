@@ -26,6 +26,7 @@
     <string name="about_version_title">Версія</string>
     <string name="account_already_imported">Обліковий запис вже імпортовано</string>
     <string name="account_imported">Обліковий запис імпортовано.</string>
+    <string name="account_not_found">Обліковий запис не знайдено!</string>
     <string name="account_switch_dialog_status_fetching_error_message">Не вдалося отримати статус, спробуйте ще раз.</string>
     <string name="action_back">Назад</string>
     <string name="action_create">Новий запис</string>

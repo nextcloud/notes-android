@@ -26,6 +26,7 @@
     <string name="about_version_title">نەشرى</string>
     <string name="account_already_imported">ھېسابات ئاللىبۇرۇن ئىمپورت قىلىنغان</string>
     <string name="account_imported">ھېسابات ئىمپورت قىلىندى.</string>
+    <string name="account_not_found">ھېسابات تېپىلمىدى!</string>
     <string name="account_switch_dialog_status_fetching_error_message">ھالەتنى چۈشۈرۈش مەغلۇپ بولدى، قايتا سىناپ بېقىڭ</string>
     <string name="action_back">قايتىش</string>
     <string name="action_create">يېڭى خاتىرە</string>

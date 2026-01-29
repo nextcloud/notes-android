@@ -26,6 +26,7 @@
     <string name="about_version_title">Version</string>
     <string name="account_already_imported">Account has already been imported</string>
     <string name="account_imported">Account imported.</string>
+    <string name="account_not_found">ບໍ່ພົບບັນຊີ!</string>
     <string name="account_switch_dialog_status_fetching_error_message">Failed to fetch status, please try again.</string>
     <string name="action_back">ຫຼັງ</string>
     <string name="action_create">New note</string>

@@ -26,6 +26,7 @@
     <string name="about_version_title">Versión</string>
     <string name="account_already_imported">La cuenta ya ha sido importada</string>
     <string name="account_imported">Cuenta importada.</string>
+    <string name="account_not_found">¡No se encontró la cuenta!</string>
     <string name="action_back">Atrás</string>
     <string name="action_create">Nota nueva</string>
     <string name="action_edit_save">Guardar</string>

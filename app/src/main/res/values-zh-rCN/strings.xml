@@ -26,6 +26,7 @@
     <string name="about_version_title">版本</string>
     <string name="account_already_imported">账号已被导入</string>
     <string name="account_imported">账号已导入</string>
+    <string name="account_not_found">找不到账号！</string>
     <string name="action_back">返回</string>
     <string name="action_create">新建笔记</string>
     <string name="action_edit_save">保存</string>

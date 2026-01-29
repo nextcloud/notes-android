@@ -26,6 +26,7 @@
     <string name="about_version_title">Bertsioa</string>
     <string name="account_already_imported">Kontua dagoeneko inportatu da</string>
     <string name="account_imported">Kontua inportatuta.</string>
+    <string name="account_not_found">Ez da kontua aurkitu!</string>
     <string name="action_back">Atzera</string>
     <string name="action_create">Ohar berria</string>
     <string name="action_edit_save">Gorde</string>

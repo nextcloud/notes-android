@@ -26,6 +26,7 @@
     <string name="about_version_title">Verzia</string>
     <string name="account_already_imported">Účet už bol importovaný</string>
     <string name="account_imported">Účet bol importovaný.</string>
+    <string name="account_not_found">Účet sa nenašiel!</string>
     <string name="account_switch_dialog_status_fetching_error_message">Nepodarilo sa získať stav, prosím, skúste to znova.</string>
     <string name="action_back">Späť</string>
     <string name="action_create">Nová poznámka</string>

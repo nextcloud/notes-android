@@ -24,6 +24,7 @@
     <string name="about_version">אתה משתמש כרגע ב%1$s</string>
     <string name="about_version_title">גרסה</string>
     <string name="account_already_imported">החשבון הזה כבר עבר ייבוא</string>
+    <string name="account_not_found">החשבון לא נמצא!</string>
     <string name="action_back">חזרה</string>
     <string name="action_create">פתק חדש</string>
     <string name="action_edit_save">שמירה</string>

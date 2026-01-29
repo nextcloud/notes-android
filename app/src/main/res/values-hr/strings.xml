@@ -25,6 +25,7 @@
     <string name="about_version_title">Inačica</string>
     <string name="account_already_imported">Račun je već uvezen</string>
     <string name="account_imported">Račun je uvezen.</string>
+    <string name="account_not_found">Korisnički račun nije pronađen!</string>
     <string name="action_back">Natrag</string>
     <string name="action_create">Nova bilješka</string>
     <string name="action_edit_save">Spremi</string>
@@ -48,8 +49,10 @@
     <string name="allow_resharing">Dopustite ponovno dijeljenje zajedničkih resursa</string>
     <string name="app_name">Bilješke</string>
     <string name="app_name_long">Nextcloud Notes</string>
+    <string name="appear_offline">Prikaži se kao izvan mreže</string>
     <string name="appearance_and_behavior">Izgled and ponašanje</string>
     <string name="append_to_note">Dodaj bilješci</string>
+    <string name="away">Odsutan</string>
     <string name="backup">Otkrili smo nepopravljivo stanje aplikacije. Izradite sigurnosnu kopiju nesinkroniziranih promjena i izbrišite pohranjene podatke aplikacije Notes.</string>
     <string name="busy">Zauzeto</string>
     <string name="category_bake">Peći</string>
@@ -96,6 +99,7 @@
     <string name="could_not_retrieve_shares">Dohvaćanje dijeljenja nije uspjelo</string>
     <string name="delete_link">Izbriši poveznicu</string>
     <string name="dismiss">Odpusti</string>
+    <string name="dnd">Ne ometaj</string>
     <string name="ecosystem_apps_display_files">Datoteke</string>
     <string name="ecosystem_apps_display_more">Više</string>
     <string name="ecosystem_apps_display_talk">Razgovor</string>
@@ -171,6 +175,7 @@
     <string name="formatting_help_text_body">Riječi možete vrlo jednostavno %1$spodebljati%1$s ili pisati u %2$skurzivu%2$s s pomoću oznaka Markdown. Također možete %3$sprekrižiti%3$s riječi i čak [staviti poveznicu na Nextcloud](https://nextcloud.com).</string>
     <string name="formatting_help_text_title">Tekst</string>
     <string name="http_status_code">Šifra statusa HTTP-a: %1$d</string>
+    <string name="invisible">Nevidljiv</string>
     <string name="label_all_notes">Sve bilješke</string>
     <string name="label_favorites">Favoriti</string>
     <string name="link_share_allow_upload_and_editing">Omogući otpremanje i uređivanje</string>
@@ -190,6 +195,7 @@
     <string name="menu_favorite">Favorit</string>
     <string name="menu_preview">Pretpregled</string>
     <string name="menu_share">Dijeli</string>
+    <string name="mute_all_notifications">Utišaj sve obavijesti</string>
     <string name="no_account_configured_yet">Još uvijek nema konfiguriranih računa</string>
     <string name="no_actions">Nema radnji za ovog korisnika</string>
     <string name="no_browser_available">Nema dostupnih aplikacija za upravljanje poveznicama</string>
@@ -220,6 +226,7 @@
     <string name="note_share_detail_activity_share_send_note">Obavijest primatelju</string>
     <string name="note_share_detail_activity_share_via_link_hide_download">Sakrij preuzimanje</string>
     <string name="oneHour">1 sat</string>
+    <string name="online">Na mreži</string>
     <string name="pin_to_homescreen">Prikvačite na početni zaslon</string>
     <string name="pref_value_font_normal">Normalno</string>
     <string name="pref_value_lock">Zaštita zaporkom</string>
@@ -299,6 +306,7 @@
     <string name="simple_synchronization">Sinkronizacija</string>
     <string name="sort_alphabetically">Razvrstaj po abecedi</string>
     <string name="sort_last_modified">Razvrstaj prema datumu izmjene</string>
+    <string name="today">Danas</string>
     <string name="unlock_notes">Otključaj bilješke</string>
     <string name="username">Korisničko ime</string>
     <string name="welcome_text">Dobrodošli u %1$s</string>

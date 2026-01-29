@@ -26,6 +26,7 @@
     <string name="about_version_title">Versie</string>
     <string name="account_already_imported">Account is al geïmporteerd</string>
     <string name="account_imported">Account geïmporteerd</string>
+    <string name="account_not_found">Account niet gevonden!</string>
     <string name="account_switch_dialog_status_fetching_error_message">Ophalen status mislukt, probeer opnieuw alstublieft</string>
     <string name="action_back">Terug</string>
     <string name="action_create">Nieuwe notitie</string>

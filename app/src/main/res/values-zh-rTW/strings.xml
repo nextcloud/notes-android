@@ -26,6 +26,7 @@
     <string name="about_version_title">版本</string>
     <string name="account_already_imported">已成功匯入帳戶</string>
     <string name="account_imported">已匯入賬戶。</string>
+    <string name="account_not_found">找不到帳號！</string>
     <string name="account_switch_dialog_status_fetching_error_message">無法擷取狀態，請重試。</string>
     <string name="action_back">返回</string>
     <string name="action_create">新筆記</string>

@@ -16,6 +16,7 @@
     <string name="about_translators_title">Traductores</string>
     <string name="about_version_title">Versión</string>
     <string name="account_already_imported">La cuenta ya ha sido importada</string>
+    <string name="account_not_found">Cuenta no encontrada!</string>
     <string name="action_back">Atrás</string>
     <string name="action_create">Nueva nota</string>
     <string name="action_edit_save">Guardar</string>

@@ -26,6 +26,7 @@
     <string name="about_version_title">Leagan</string>
     <string name="account_already_imported">Iompórtáladh an cuntas cheana</string>
     <string name="account_imported">Cuntas allmhairithe.</string>
+    <string name="account_not_found">Cuntas gan aimsiú!</string>
     <string name="account_switch_dialog_status_fetching_error_message">Theip ar an stádas a fháil, déan iarracht arís.</string>
     <string name="action_back">Ar ais</string>
     <string name="action_create">Nóta nua</string>

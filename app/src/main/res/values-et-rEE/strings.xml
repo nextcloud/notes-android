@@ -26,6 +26,7 @@
     <string name="about_version_title">Versioon</string>
     <string name="account_already_imported">Kasutajakonto on juba imporditud</string>
     <string name="account_imported">Kasutajakonto on imporditud.</string>
+    <string name="account_not_found">Kontot ei leidu!</string>
     <string name="account_switch_dialog_status_fetching_error_message">Oleku tuvastamine ei õnnestunud, palun proovi uuesti.</string>
     <string name="action_back">Tagasi</string>
     <string name="action_create">Uus märge</string>

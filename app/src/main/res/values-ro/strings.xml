@@ -25,6 +25,7 @@
     <string name="about_version_title">Versiune</string>
     <string name="account_already_imported">Acest cont a fost deja importat</string>
     <string name="account_imported">Cont importat.</string>
+    <string name="account_not_found">Contul nu a fost găsit!</string>
     <string name="action_back">Înapoi</string>
     <string name="action_create">Notă nouă</string>
     <string name="action_edit_save">Salvează</string>

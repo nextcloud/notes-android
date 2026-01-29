@@ -26,6 +26,7 @@
     <string name="about_version_title">Версия</string>
     <string name="account_already_imported">Учётная запись уже импортирована</string>
     <string name="account_imported">Учетная запись импортирована.</string>
+    <string name="account_not_found">Учётная запись не найдена!</string>
     <string name="action_back">Назад</string>
     <string name="action_create">Новая заметка</string>
     <string name="action_edit_save">Сохранить</string>

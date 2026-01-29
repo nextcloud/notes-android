@@ -26,6 +26,7 @@
     <string name="about_version_title">Versjon</string>
     <string name="account_already_imported">Kontoen har allerede blitt importert</string>
     <string name="account_imported">Konto importert.</string>
+    <string name="account_not_found">Konto ble ikke funnet!</string>
     <string name="action_back">Tilbake</string>
     <string name="action_create">Nytt notat</string>
     <string name="action_edit_save">Lagre</string>

@@ -26,6 +26,7 @@
     <string name="about_version_title">Verzió</string>
     <string name="account_already_imported">A fiók már importálásra került</string>
     <string name="account_imported">Fiók importálva.</string>
+    <string name="account_not_found">A fiók nem található!</string>
     <string name="account_switch_dialog_status_fetching_error_message">Nem sikerült lekérni az állapotot, próbálja újra.</string>
     <string name="action_back">Vissza</string>
     <string name="action_create">Új jegyzet</string>
