@@ -14,7 +14,10 @@ import android.util.Log
 import android.view.View
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService.RemoteViewsFactory
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import com.nextcloud.android.common.ui.theme.utils.ColorRole
+import com.nextcloud.android.common.ui.util.PlatformThemeUtil
 import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.edit.EditNoteActivity
 import it.niedermann.owncloud.notes.persistence.NotesRepository
@@ -148,6 +151,12 @@ class NoteListWidgetFactory internal constructor(private val context: Context, i
             } else {
                 setViewVisibility(R.id.widget_entry_category, View.VISIBLE)
                 setTextViewText(R.id.widget_entry_category, note.category)
+
+                if (PlatformThemeUtil.isDarkMode(context)) {
+                    setTextColor(R.id.widget_entry_category,ContextCompat.getColor(context, R.color.text_color))
+                } else {
+                    setTextColor(R.id.widget_entry_category,ContextCompat.getColor(context, R.color.category_border))
+                }
             }
 
             val starIconId = if (note.favorite) {
