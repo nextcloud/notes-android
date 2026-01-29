@@ -25,6 +25,7 @@
     <string name="about_version_title">버전</string>
     <string name="account_already_imported">계정을 이미 가져왔습니다.</string>
     <string name="account_imported">계정을 불러왔습니다.</string>
+    <string name="account_not_found">계정을 찾을 수 없습니다!</string>
     <string name="action_back">뒤로</string>
     <string name="action_create">새 메모</string>
     <string name="action_edit_save">저장</string>

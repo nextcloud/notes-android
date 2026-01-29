@@ -26,6 +26,7 @@
     <string name="about_version_title">Version</string>
     <string name="account_already_imported">Kontot har redan importerats</string>
     <string name="account_imported">Konto importerat.</string>
+    <string name="account_not_found">Kontot hittades inte!</string>
     <string name="account_switch_dialog_status_fetching_error_message">Kunde inte hämta status, försök igen.</string>
     <string name="action_back">Tillbaka</string>
     <string name="action_create">Ny anteckning</string>

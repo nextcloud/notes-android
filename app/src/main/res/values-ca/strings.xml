@@ -26,6 +26,7 @@
     <string name="about_version_title">Versió</string>
     <string name="account_already_imported">Ja s\'ha importat el compte</string>
     <string name="account_imported">S\'ha importat el compte.</string>
+    <string name="account_not_found">No s\'ha trobat el compte!</string>
     <string name="action_back">Torna</string>
     <string name="action_create">Nota nova</string>
     <string name="action_edit_save">Desa</string>

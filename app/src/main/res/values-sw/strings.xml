@@ -26,6 +26,7 @@
     <string name="about_version_title">Toleo</string>
     <string name="account_already_imported">Akaunti tayari imeingizwa</string>
     <string name="account_imported">Akaunti imeingizwa.</string>
+    <string name="account_not_found">Akaunti haipo</string>
     <string name="account_switch_dialog_status_fetching_error_message">Imeshindwa kuleta hali, tafadhali jaribu tena.</string>
     <string name="action_back">Rudi</string>
     <string name="action_create">Dokezo jipya</string>

@@ -25,6 +25,7 @@
     <string name="about_version_title">Phiên bản</string>
     <string name="account_already_imported">Tài khoản đã được nhập sẵn</string>
     <string name="account_imported">Đã nhập tài khoản.</string>
+    <string name="account_not_found">Không tìm thấy tài khoản!</string>
     <string name="action_back">Quay lại</string>
     <string name="action_create">Ghi chú mới</string>
     <string name="action_edit_save">Lưu</string>

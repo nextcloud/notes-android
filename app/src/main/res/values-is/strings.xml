@@ -26,6 +26,7 @@
     <string name="about_version_title">Útgáfa</string>
     <string name="account_already_imported">Aðgangur hefur þegar verið fluttur inn</string>
     <string name="account_imported">Aðgangur fluttur inn.</string>
+    <string name="account_not_found">Notandaaðgangur fannst ekki!</string>
     <string name="action_back">Til baka</string>
     <string name="action_create">Nýr minnispunktur</string>
     <string name="action_edit_save">Vista</string>

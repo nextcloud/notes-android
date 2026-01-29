@@ -26,6 +26,7 @@
     <string name="about_version_title">Različica</string>
     <string name="account_already_imported">Račun je že bil uvožen</string>
     <string name="account_imported">Račun je uspešno uvožen.</string>
+    <string name="account_not_found">Računa ni mogoče najti!</string>
     <string name="action_back">Nazaj</string>
     <string name="action_create">Nova zabeležka</string>
     <string name="action_edit_save">Shrani</string>

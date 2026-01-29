@@ -26,6 +26,7 @@
     <string name="about_version_title">Versão</string>
     <string name="account_already_imported">Conta já foi importada</string>
     <string name="account_imported">Conta importada.</string>
+    <string name="account_not_found">Conta não encontrada!</string>
     <string name="account_switch_dialog_status_fetching_error_message">Não foi possível obter o status. Tente novamente.</string>
     <string name="action_back">Voltar</string>
     <string name="action_create">Nova nota</string>

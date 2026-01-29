@@ -25,6 +25,7 @@
     <string name="about_version_title">Versio</string>
     <string name="account_already_imported">Tili on jo tuotu</string>
     <string name="account_imported">Tili tuotu.</string>
+    <string name="account_not_found">Tiliä ei löydy!</string>
     <string name="action_back">Takaisin</string>
     <string name="action_create">Uusi muistiinpano</string>
     <string name="action_edit_save">Tallenna</string>

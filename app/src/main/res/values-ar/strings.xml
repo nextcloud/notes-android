@@ -26,6 +26,7 @@
     <string name="about_version_title">الإصدار</string>
     <string name="account_already_imported">سبق استيراد الحساب</string>
     <string name="account_imported">الحساب تمّ استيراده</string>
+    <string name="account_not_found">الحساب غير موجود </string>
     <string name="action_back">عودة</string>
     <string name="action_create">ملاحظة Note جديدة </string>
     <string name="action_edit_save">حفظ</string>

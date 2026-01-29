@@ -26,6 +26,7 @@
     <string name="about_version_title">Versiya</string>
     <string name="account_already_imported">Akkaunt allaqachon import qilingan</string>
     <string name="account_imported">Hisob import qilindi.</string>
+    <string name="account_not_found">Akkaunt mavjud emas</string>
     <string name="action_back">Orqaga</string>
     <string name="action_create">Yangi eslatma</string>
     <string name="action_edit_save">Saqlash</string>

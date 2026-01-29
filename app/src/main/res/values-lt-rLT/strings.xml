@@ -18,6 +18,7 @@
     <string name="about_version">Šiuo metu naudojate %1$s</string>
     <string name="about_version_title">Versija</string>
     <string name="account_already_imported">Paskyra jau buvo importuota</string>
+    <string name="account_not_found">Paskyra nerasta!</string>
     <string name="action_back">Atgal</string>
     <string name="action_create">Nauji užrašai</string>
     <string name="action_edit_save">Įrašyti</string>

@@ -21,6 +21,7 @@
     <string name="about_translators_transifex">A comunidade Nextcloud na %1$s</string>
     <string name="about_version">Atualmente, está a usar a versão %1$s</string>
     <string name="about_version_title">Versão</string>
+    <string name="account_not_found">Conta não encontrada!</string>
     <string name="action_back">Anterior</string>
     <string name="action_create">Nova nota</string>
     <string name="action_edit_save">Guardar</string>

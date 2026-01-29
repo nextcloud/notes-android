@@ -26,6 +26,7 @@
     <string name="about_version_title">Sürüm</string>
     <string name="account_already_imported">Hesap zaten içe aktarılmış</string>
     <string name="account_imported">Hesap içe aktarıldı.</string>
+    <string name="account_not_found">Hesap bulunamadı!</string>
     <string name="account_switch_dialog_status_fetching_error_message">Durum alınamadı. Lütfen yeniden deneyin.</string>
     <string name="action_back">Geri</string>
     <string name="action_create">Not ekle</string>

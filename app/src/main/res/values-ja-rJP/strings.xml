@@ -26,6 +26,7 @@
     <string name="about_version_title">バージョン</string>
     <string name="account_already_imported">アカウントはすでにインポートされています</string>
     <string name="account_imported">アカウントを導入しました。</string>
+    <string name="account_not_found">アカウントが見つかりません！</string>
     <string name="action_back">戻る</string>
     <string name="action_create">新しいノート</string>
     <string name="action_edit_save">保存</string>

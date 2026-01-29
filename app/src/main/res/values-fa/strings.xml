@@ -26,6 +26,7 @@
     <string name="about_version_title">نسخه</string>
     <string name="account_already_imported">حساب قبلاً وارد شده است</string>
     <string name="account_imported">Account imported.</string>
+    <string name="account_not_found">حساب پیدا نشد!</string>
     <string name="action_back">بازگشت</string>
     <string name="action_create">یادداشت جدید</string>
     <string name="action_edit_save">ذخیره</string>
