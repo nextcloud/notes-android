@@ -57,4 +57,6 @@
     <color name="online">#2D7B41</color>
     <color name="busy">#DB0606</color>
     <color name="offline">@color/high_emphasis_text</color>
+
+    <color name="category_widget_background">@color/transparent</color>
 </resources>

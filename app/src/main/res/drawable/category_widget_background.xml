@@ -1,0 +1,15 @@
+<!--
+  ~ Nextcloud Notes - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2017-2026 Nextcloud GmbH and Nextcloud contributors
+  ~ SPDX-FileCopyrightText: 2017-2026 Alper Ozturk <alper.ozturk@nextcloud.com>
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/category_widget_background" />
+    <stroke
+        android:width="1dip"
+        android:color="@color/category_border" />
+    <corners android:radius="8dp" />
+</shape>
