@@ -43,6 +43,6 @@
     <color name="fontAppbar">@android:color/white</color>
     <color name="primary_button_text_color">#000000</color>
 
-    <color name="note_category_background">@color/material_dynamic_secondary20</color>
+    <color name="category_widget_background">@color/material_dynamic_secondary20</color>
     <color name="category_border">@color/transparent</color>
 </resources>

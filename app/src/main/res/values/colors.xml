@@ -58,5 +58,5 @@
     <color name="busy">#DB0606</color>
     <color name="offline">@color/high_emphasis_text</color>
 
-    <color name="note_category_background">@color/transparent</color>
+    <color name="category_widget_background">@color/transparent</color>
 </resources>
