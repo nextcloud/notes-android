@@ -49,4 +49,6 @@
     <color name="widget_foreground">#222222</color>
 
     <color name="action_mode_background">#ededed</color>
+
+    <color name="category_widget_background">@android:color/transparent</color>
 </resources>

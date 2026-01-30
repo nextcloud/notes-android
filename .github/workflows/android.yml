@@ -74,7 +74,7 @@ jobs:
       - name: Build debug APK
         run: bash ./gradlew assembleDev --stacktrace --no-configuration-cache
       - name: Upload APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
           name: app-dev-debug
           path: app/build/outputs/apk/dev/debug/app-dev-debug.apk
