@@ -26,6 +26,7 @@
     <string name="about_version_title">Версия</string>
     <string name="account_already_imported">Профилът вече е импортиран</string>
     <string name="account_imported">Профилът е импортиран.</string>
+    <string name="account_not_found">Няма намерен профил!</string>
     <string name="action_back">Назад</string>
     <string name="action_create">Нова бележка</string>
     <string name="action_edit_save">Запис</string>
