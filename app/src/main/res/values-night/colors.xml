@@ -40,4 +40,7 @@
     <color name="icon_on_nc_grey">#ffffff</color>
 
     <color name="action_mode_background">#1E1E1E</color>
+
+    <color name="category_widget_background">@color/material_dynamic_secondary20</color>
+    <color name="category_border">@android:color/transparent</color>
 </resources>
