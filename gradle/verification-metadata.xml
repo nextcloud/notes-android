@@ -45,6 +45,7 @@
             <trusting group="androidx.work" name="work-runtime" version="2.10.4"/>
             <trusting group="androidx.work" name="work-runtime" version="2.10.5"/>
             <trusting group="androidx.work" name="work-runtime" version="2.11.0"/>
+            <trusting group="androidx.work" name="work-runtime" version="2.11.1"/>
             <trusting group="^androidx[.]compose($|([.].*))" regex="true"/>
             <trusting group="^com[.]android($|([.].*))" regex="true"/>
          </trusted-key>
