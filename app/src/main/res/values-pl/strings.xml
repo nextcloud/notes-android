@@ -19,7 +19,7 @@
     <string name="about_source_title">Kod źródłowy</string>
     <string name="about_testers_title">Testerzy</string>
     <string name="about_translate">Dołącz do zespołu Nextcloud na Transifex i pomóż nam przetłumaczyć aplikację: %1$s</string>
-    <string name="about_translate_title">Tłumaczyć</string>
+    <string name="about_translate_title">Tłumaczenie</string>
     <string name="about_translators_title">Tłumacze</string>
     <string name="about_translators_transifex">Społeczność Nextcloud na %1$s</string>
     <string name="about_version">Aktualnie używasz %1$s</string>
@@ -43,6 +43,7 @@
     <string name="activity_chooser_send_file_title">Wyślij</string>
     <string name="activity_chooser_title">Wyślij link do…</string>
     <string name="activity_select_single_note">Wybierz notatkę</string>
+    <string name="activity_sharing_details_title">Szczegóły udostępniania</string>
     <string name="activity_sharing_title">Udostępnianie</string>
     <string name="add_account">Dodaj konto</string>
     <string name="add_another_public_share_link">Dodaj kolejny link</string>
@@ -195,6 +196,7 @@
     <string name="link_share_editing">Edytowanie</string>
     <string name="link_share_file_drop">Upuszczanie pliku (tylko wysyłanie)</string>
     <string name="link_share_view_only">Tylko podgląd</string>
+    <string name="listview_no_content">Brak treści</string>
     <string name="listview_updated_last_month">W zeszłym miesiącu</string>
     <string name="listview_updated_last_week">W zeszłym tygodniu</string>
     <string name="listview_updated_this_month">W tym miesiącu</string>
@@ -233,6 +235,7 @@
     <string name="note_share_activity_more_icon_content_description">ikona „więcej opcji udostępniania” Note</string>
     <string name="note_share_activity_resharing_not_allowed">Polityka lub uprawnienia uniemożliwiają ponowne udostępnianie</string>
     <string name="note_share_activity_search_text">Nazwa, ID chmury stowarzyszonej lub adres e-mail</string>
+    <string name="note_share_activity_send_copy_to">Wyślij kopię do</string>
     <string name="note_share_activity_share_icon_content_description">ikona udostępniania Note</string>
     <string name="note_share_activity_share_link">Udostępnij link</string>
     <string name="note_share_activity_shared_with_you">Udostępnione przez %1$s</string>
@@ -300,6 +303,7 @@
     <string name="share_dialog_title">Udostępnianie</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Wygaśnie o %1$s</string>
+    <string name="share_expires">Udostępnianie wygasa %1$s</string>
     <string name="share_file">Udostępnij %1$s</string>
     <string name="share_group_clarification">%1$s (grupa)</string>
     <string name="share_internal_link">Udostępnij link wewnętrzny</string>

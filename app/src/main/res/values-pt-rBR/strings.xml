@@ -43,7 +43,7 @@
     <string name="activity_chooser_send_file_title">Enviar</string>
     <string name="activity_chooser_title">Enviar link para…</string>
     <string name="activity_select_single_note">Selecionar anotação</string>
-    <string name="activity_sharing_details_title">Compartilhando Detalhes</string>
+    <string name="activity_sharing_details_title">Detalhes do compartilhamento</string>
     <string name="activity_sharing_title">Compartilhamento</string>
     <string name="add_account">Adicionar conta</string>
     <string name="add_another_public_share_link">Adicionar outro link</string>
