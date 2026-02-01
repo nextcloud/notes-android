@@ -337,6 +337,7 @@
     <string name="sort_alphabetically">按照字母表顺序排序</string>
     <string name="sort_last_modified">按修改日期排序</string>
     <string name="status_message">状态消息</string>
+    <string name="status_set_fail_message">无法设置状态！</string>
     <string name="switch_to_plain_editing">切换到普通编辑模式</string>
     <string name="thirtyMinutes">30 分钟</string>
     <string name="thisWeek">本周后</string>
