@@ -268,6 +268,7 @@
     <string name="share_link_password_title">Unesite zaporku</string>
     <string name="share_link_with_label">Dijeli poveznicu (%1$s)</string>
     <string name="share_no_expiration_date_label">Postavi datum isteka</string>
+    <string name="share_no_password_title">Postavi lozinku</string>
     <string name="share_password_dialog_fragment_share_link_optional_password_title">Unesite neobveznu zaporku</string>
     <string name="share_password_dialog_fragment_skip">Preskoči</string>
     <string name="share_password_title">Zaštićeno zaporkom</string>
