@@ -233,6 +233,7 @@
     <string name="note_share_activity_more_icon_content_description">jegyzetmásolás továbbiak ikonja</string>
     <string name="note_share_activity_resharing_not_allowed">Házirend vagy jogosultságok tiltják a továbbosztást</string>
     <string name="note_share_activity_search_text">Név, egyesített felhőazonosító vagy e-mail-cím…</string>
+    <string name="note_share_activity_send_copy_to">Másolat küldése…</string>
     <string name="note_share_activity_share_icon_content_description">jegyzetmegosztás ikonja</string>
     <string name="note_share_activity_share_link">Megosztási hivatkozás</string>
     <string name="note_share_activity_shared_with_you">%1$s megosztotta Önnel</string>
