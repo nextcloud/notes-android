@@ -10,7 +10,7 @@
 
 buildscript {
     ext {
-        kotlinVersion = '2.3.0'
+        kotlinVersion = '2.3.10'
         commonsVersion = '2.4.1'
 		androidCommonsVersion = '1.1.1'
         nextcloudAndroidCommonLib = "4fc0f29981"
