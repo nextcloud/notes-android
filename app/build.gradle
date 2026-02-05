@@ -18,8 +18,8 @@ android {
         minSdk 24
         compileSdk = 36
         targetSdk 36
-        versionCode 40060023
-        versionName "4.6.2 Alpha 3"
+        versionCode 40070020
+        versionName "4.7.0 Alpha 1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
