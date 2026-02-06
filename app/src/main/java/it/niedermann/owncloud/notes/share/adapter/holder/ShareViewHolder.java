@@ -11,9 +11,9 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.owncloud.android.lib.resources.shares.OCShare;
 
@@ -31,6 +31,8 @@ public class ShareViewHolder extends BrandedViewHolder {
     private ItemShareShareBinding binding;
     private Account account;
     private Context context;
+    @ColorInt
+    private int color;
 
     public ShareViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -62,28 +64,34 @@ public class ShareViewHolder extends BrandedViewHolder {
             case GROUP:
                 name = context.getString(R.string.share_group_clarification, name);
                 viewThemeUtils.createAvatar(share.getShareType(), binding.icon, context);
+                BrandingUtil.of(color, context).platform.colorImageViewBackgroundAndIcon(binding.icon);
                 break;
             case ROOM:
                 name = context.getString(R.string.share_room_clarification, name);
                 viewThemeUtils.createAvatar(share.getShareType(), binding.icon, context);
+                BrandingUtil.of(color, context).platform.colorImageViewBackgroundAndIcon(binding.icon);
                 break;
             case CIRCLE:
                 viewThemeUtils.createAvatar(share.getShareType(), binding.icon, context);
+                BrandingUtil.of(color, context).platform.colorImageViewBackgroundAndIcon(binding.icon);
                 break;
             case FEDERATED:
                 name = context.getString(R.string.share_remote_clarification, name);
-                setImage(binding.icon, share.getSharedWithDisplayName(), R.drawable.ic_account_circle_grey_24dp);
+                setImage(binding.icon, share.getShareWith(), R.drawable.ic_account_circle_grey_24dp);
+                BrandingUtil.of(color, context).platform.colorImageViewBackgroundAndIcon(binding.icon);
                 break;
             case USER:
                 binding.icon.setTag(share.getShareWith());
 
-                if (share.getSharedWithDisplayName() != null) {
-                    AvatarLoader.INSTANCE.load(context, binding.icon, account, share.getSharedWithDisplayName());
+                if (share.getShareWith() != null) {
+                    AvatarLoader.INSTANCE.load(context, binding.icon, account, share.getShareWith());
                 }
 
                 // binding.icon.setOnClickListener(v -> listener.showProfileBottomSheet(user, share.getShareWith()));
+                break;
             default:
                 setImage(binding.icon, name, R.drawable.ic_account_circle_grey_24dp);
+                BrandingUtil.of(color, context).platform.colorImageViewBackgroundAndIcon(binding.icon);
                 break;
         }
 
@@ -123,10 +131,10 @@ public class ShareViewHolder extends BrandedViewHolder {
 
     @Override
     public void applyBrand(int color) {
-        final var util = BrandingUtil.of(color, context);
+        this.color = color;
+        final var util = BrandingUtil.of(this.color, context);
         if (binding != null) {
             util.androidx.colorPrimaryTextViewElement(binding.permissionName);
-            util.platform.colorImageViewBackgroundAndIcon(binding.icon);
         }
     }
 }
