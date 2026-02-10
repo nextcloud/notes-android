@@ -93,7 +93,7 @@ public class QuickSharingPermissionsBottomSheetDialog extends BrandedBottomSheet
      */
     private void handlePermissionChanged(List<QuickPermission> quickPermissionList, int position) {
         final var type = quickPermissionList.get(position).getType();
-        int permissionFlag = type.getPermissionFlag(false);
+        int permissionFlag = type.getPermissionFlag();
         actions.onQuickPermissionChanged(ocShare, permissionFlag);
         dismiss();
     }
@@ -103,7 +103,7 @@ public class QuickSharingPermissionsBottomSheetDialog extends BrandedBottomSheet
      */
     private List<QuickPermission> getQuickPermissionList() {
         final var selectedType = SharePermissionManager.INSTANCE.getSelectedType(ocShare);
-        return selectedType.getAvailablePermissions(false);
+        return selectedType.getAvailablePermissions();
     }
 
     @Override

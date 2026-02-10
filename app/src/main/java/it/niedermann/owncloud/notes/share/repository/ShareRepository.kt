@@ -32,9 +32,7 @@ import it.niedermann.owncloud.notes.shared.model.OcsResponse
 import it.niedermann.owncloud.notes.shared.util.StringConstants
 import it.niedermann.owncloud.notes.shared.util.extensions.getErrorMessage
 import it.niedermann.owncloud.notes.shared.util.extensions.toExpirationDateLong
-import it.niedermann.owncloud.notes.shared.util.extensions.toExpirationDateString
 import org.json.JSONObject
-import java.util.Date
 
 class ShareRepository(private val applicationContext: Context, private val account: SingleSignOnAccount) {
 
