@@ -50,20 +50,21 @@ import it.niedermann.owncloud.notes.persistence.migration.Migration_9_10;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 
 @Database(
-        entities = {
-                Account.class,
-                Note.class,
-                CategoryOptions.class,
-                SingleNoteWidgetData.class,
-                NotesListWidgetData.class,
-                ShareEntity.class,
-                Capabilities.class
-        }, version = 28,
-        autoMigrations = {
-                @AutoMigration(from = 25, to = 26),
-                @AutoMigration(from = 26, to = 27),
-                @AutoMigration(from = 27, to = 28),
-        }
+    entities = {
+        Account.class,
+        Note.class,
+        CategoryOptions.class,
+        SingleNoteWidgetData.class,
+        NotesListWidgetData.class,
+        ShareEntity.class,
+        Capabilities.class
+    }, version = 29,
+    autoMigrations = {
+        @AutoMigration(from = 25, to = 26),
+        @AutoMigration(from = 26, to = 27),
+        @AutoMigration(from = 27, to = 28),
+        @AutoMigration(from = 28, to = 29),
+    }
 )
 @TypeConverters({Converters.class})
 public abstract class NotesDatabase extends RoomDatabase {

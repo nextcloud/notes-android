@@ -7,6 +7,7 @@
 package it.niedermann.owncloud.notes.persistence.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -19,4 +20,7 @@ interface ShareDao {
 
     @Query("SELECT * FROM share_table WHERE path = :path")
     fun getShareEntities(path: String): List<ShareEntity>
+
+    @Query("DELETE FROM share_table WHERE id = :id")
+    fun deleteById(id: Int)
 }

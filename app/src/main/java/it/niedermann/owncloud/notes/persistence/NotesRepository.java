@@ -1010,6 +1010,10 @@ public class NotesRepository {
         return db.getShareDao().getShareEntities(path);
     }
 
+    public void deleteShareById(int id) {
+        db.getShareDao().deleteById(id);
+    }
+
     public void updateNote(Note note) {
         db.getNoteDao().updateNote(note);
     }

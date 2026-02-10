@@ -124,23 +124,12 @@ class NoteShareDetailActivity :
                     updateViewForNoteScreenType()
                 }
                 implementClickEvents()
-                setVisibilitiesOfShareOption()
             }
         }
     }
 
     private fun backPressed() {
         finish()
-    }
-
-    private fun setVisibilitiesOfShareOption() {
-        binding.run {
-            if (canSetFileRequest()) {
-                shareProcessPermissionFileDrop.visibility = View.VISIBLE
-            } else {
-                shareProcessPermissionFileDrop.visibility = View.GONE
-            }
-        }
     }
 
     override fun applyBrand(color: Int) {
@@ -150,7 +139,6 @@ class NoteShareDetailActivity :
             util.platform.run {
                 themeRadioButton(canViewRadioButton)
                 themeRadioButton(canEditRadioButton)
-                themeRadioButton(shareProcessPermissionFileDrop)
 
                 colorTextView(shareProcessEditShareLink)
                 colorTextView(shareProcessAdvancePermissionTitle)
@@ -229,7 +217,7 @@ class NoteShareDetailActivity :
     }
 
     private fun updateViewForUpdate() {
-        if (share?.isFolder == true) updateViewForFolder() else updateViewForFile()
+        updateViewForFile()
 
         selectRadioButtonAccordingToPermission()
 
@@ -269,7 +257,7 @@ class NoteShareDetailActivity :
     }
 
     private fun selectRadioButtonAccordingToPermission() {
-        val selectedType = SharePermissionManager.getSelectedType(share, encrypted = false)
+        val selectedType = SharePermissionManager.getSelectedType(share)
         binding.run {
             when (selectedType) {
                 QuickPermissionType.VIEW_ONLY -> {
@@ -280,10 +268,6 @@ class NoteShareDetailActivity :
                     canEditRadioButton.isChecked = true
                 }
 
-                QuickPermissionType.FILE_REQUEST -> {
-                    shareProcessPermissionFileDrop.isChecked = true
-                }
-
                 else -> Unit
             }
         }
@@ -292,7 +276,7 @@ class NoteShareDetailActivity :
     private fun setMaxPermissionsIfDefaultPermissionExists() {
         if (repository.getCapabilities().defaultPermission != OCShare.NO_PERMISSION) {
             binding.canEditRadioButton.isChecked = true
-            permission = SharePermissionManager.getMaximumPermission(isFolder())
+            permission = SharePermissionManager.getMaximumPermission()
         }
     }
 
@@ -372,13 +356,8 @@ class NoteShareDetailActivity :
             shareProcessSetPasswordSwitch.visibility = View.VISIBLE
 
             if (share != null) {
-                if (SharePermissionManager.isFileRequest(share)) {
-                    shareProcessHideDownloadCheckbox.visibility = View.GONE
-                } else {
-                    shareProcessHideDownloadCheckbox.visibility = View.VISIBLE
-                    shareProcessHideDownloadCheckbox.isChecked =
-                        share?.isHideFileDownload == true
-                }
+                shareProcessHideDownloadCheckbox.visibility = View.VISIBLE
+                shareProcessHideDownloadCheckbox.isChecked = share?.isHideFileDownload == true
             }
         }
     }
@@ -401,20 +380,6 @@ class NoteShareDetailActivity :
 
     private fun updateViewForFile() {
         binding.canEditRadioButton.text = getString(R.string.link_share_editing)
-        binding.shareProcessPermissionFileDrop.visibility = View.GONE
-    }
-
-    private fun updateViewForFolder() {
-        binding.run {
-            canEditRadioButton.text =
-                getString(R.string.link_share_allow_upload_and_editing)
-            shareProcessPermissionFileDrop.visibility = View.VISIBLE
-            if (isSecureShare) {
-                shareProcessPermissionFileDrop.visibility = View.GONE
-                shareProcessAllowResharingCheckbox.visibility = View.GONE
-                shareProcessSetExpDateSwitch.visibility = View.GONE
-            }
-        }
     }
 
     /**
@@ -473,11 +438,7 @@ class NoteShareDetailActivity :
                     }
 
                     R.id.can_edit_radio_button -> {
-                        permission = SharePermissionManager.getMaximumPermission(isFolder())
-                    }
-
-                    R.id.share_process_permission_file_drop -> {
-                        permission = OCShare.CREATE_PERMISSION_FLAG
+                        permission = SharePermissionManager.getMaximumPermission()
                     }
                 }
             }
@@ -604,7 +565,6 @@ class NoteShareDetailActivity :
         binding.shareProcessAllowResharingCheckbox.isChecked -> getReSharePermission()
         binding.canViewRadioButton.isChecked -> OCShare.READ_PERMISSION_FLAG
         binding.canEditRadioButton.isChecked -> OCShare.MAXIMUM_PERMISSIONS_FOR_FILE
-        binding.shareProcessPermissionFileDrop.isChecked -> OCShare.CREATE_PERMISSION_FLAG
         else -> permission
     }
 
@@ -627,9 +587,10 @@ class NoteShareDetailActivity :
 
     private suspend fun updateShare(noteText: String, label: String, password: String, sendEmail: Boolean) {
         val downloadPermission = !binding.shareProcessHideDownloadCheckbox.isChecked
+
         val requestBody = repository.getUpdateShareRequest(
             downloadPermission = downloadPermission,
-            share = share,
+            share = share!!,
             noteText = noteText,
             label = label,
             password = password,
@@ -673,7 +634,7 @@ class NoteShareDetailActivity :
         )
 
         if (result.isSuccess()) {
-            repository.getSharesForNotesAndSaveShareEntities()
+            repository.fetchSharesForNotesAndSaveShareEntities()
         }
 
         handleResult(result.isSuccess())
@@ -707,9 +668,7 @@ class NoteShareDetailActivity :
     }
 
     // region Helpers
-    private fun isFolder(): Boolean = (share?.isFolder == true)
-
-    private fun canSetFileRequest(): Boolean = isFolder() && shareType.isPublicOrMail()
+    private fun canSetFileRequest(): Boolean = shareType.isPublicOrMail()
 
     private fun isPublicShare(): Boolean = (shareType == ShareType.PUBLIC_LINK)
     // endregion

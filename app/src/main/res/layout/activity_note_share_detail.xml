@@ -78,13 +78,6 @@
                     android:minHeight="@dimen/minimum_size_for_touchable_area"
                     android:text="@string/link_share_allow_upload_and_editing" />
 
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/share_process_permission_file_drop"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="@dimen/minimum_size_for_touchable_area"
-                    android:text="@string/link_share_file_drop" />
-
             </RadioGroup>
 
             <androidx.appcompat.widget.AppCompatTextView

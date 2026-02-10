@@ -25,5 +25,6 @@ data class ShareEntity(
     val uid_owner: String? = null,
     val displayname_owner: String? = null,
     val url: String? = null,
-    val expiration_date: Long? = null
+    val expiration_date: Long? = null,
+    val permissions: Double? = null
 )

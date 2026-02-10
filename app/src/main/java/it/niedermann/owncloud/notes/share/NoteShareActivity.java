@@ -161,7 +161,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                 final var ssoAcc = SingleAccountHelper.getCurrentSingleSignOnAccount(NoteShareActivity.this);
                 repository = new ShareRepository(NoteShareActivity.this, ssoAcc);
                 capabilities = repository.getCapabilities();
-                repository.getSharesForNotesAndSaveShareEntities();
+                repository.fetchSharesForNotesAndSaveShareEntities();
 
                 runOnUiThread(() -> {
                     binding.fileName.setText(note.getTitle());
@@ -519,17 +519,16 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                     return;
                 }
 
-                List<OCShare> tempShares = new ArrayList<>();
-
-                // to show share with users/groups info
+                List<OCShare> remoteNotes;
                 if (note != null) {
-                    // get shares from local DB
-                    populateSharesList(tempShares);
+                    remoteNotes = repository.fetchSharesFromNote(note);
+                } else {
+                    remoteNotes = new ArrayList<>();
                 }
 
                 runOnUiThread(() -> {
                     shares.clear();
-                    shares.addAll(tempShares);
+                    shares.addAll(remoteNotes);
 
                     adapter.removeAll();
                     adapter.addShares(shares);
@@ -542,35 +541,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                 Log_OC.d(TAG, "Exception while updateShareeListAdapter: " + e);
             }
         });
-    }
-
-    private void populateSharesList(List<OCShare> targetList) {
-        // Get shares from local DB
-        final var shareEntities = repository.getShareEntitiesForSpecificNote(note);
-        for (var entity : shareEntities) {
-            if (entity.getId() != null) {
-                addSharesToList(entity.getId(), targetList);
-            }
-        }
-
-        // Get shares from remote
-        final var remoteShares = repository.getShareFromNote(note);
-        if (remoteShares != null) {
-            for (var entity : remoteShares) {
-                addSharesToList(entity.getId(), targetList);
-            }
-        }
-    }
-
-    private void addSharesToList(long id, List<OCShare> targetList) {
-        final var result = repository.getShares(id);
-        if (result != null) {
-            for (OCShare ocShare : result) {
-                if (!targetList.contains(ocShare)) {
-                    targetList.add(ocShare);
-                }
-            }
-        }
     }
 
     private void addPublicShares(ShareeListAdapter adapter) {
@@ -759,12 +729,17 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     }
 
     private void updateShare(OCShare share) {
+        if (note == null) {
+            Log_OC.e(TAG, "note is null, cannot update share");
+            return;
+        }
+
         executorService.submit(() -> {
             try {
-                final var updatedShares = repository.getShares(share.getId());
+                final var updatedShares = repository.fetchSharesFromNote(note);
 
                 runOnUiThread(() -> {
-                    if (updatedShares != null && binding.sharesList.getAdapter() instanceof ShareeListAdapter adapter) {
+                    if (binding.sharesList.getAdapter() instanceof ShareeListAdapter adapter) {
                         OCShare updatedShare = null;
                         for (int i=0;i<updatedShares.size();i++) {
                             if (updatedShares.get(i).getId() == share.getId()) {

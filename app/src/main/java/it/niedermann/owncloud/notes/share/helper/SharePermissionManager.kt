@@ -21,7 +21,7 @@ object SharePermissionManager {
             return false
         }
 
-        return hasPermission(share.permissions, getMaximumPermission(share.isFolder))
+        return hasPermission(share.permissions, getMaximumPermission())
     }
 
     fun isViewOnly(share: OCShare?): Boolean {
@@ -36,27 +36,6 @@ object SharePermissionManager {
                 )
     }
 
-    @Suppress("ReturnCount")
-    fun isFileRequest(share: OCShare?): Boolean {
-        if (share == null) {
-            return false
-        }
-
-        if (!share.isFolder) {
-            return false
-        }
-
-        return share.permissions != OCShare.NO_PERMISSION && share.permissions == OCShare.CREATE_PERMISSION_FLAG
-    }
-
-    fun isSecureFileDrop(share: OCShare?): Boolean {
-        if (share == null) {
-            return false
-        }
-
-        return hasPermission(share.permissions, OCShare.CREATE_PERMISSION_FLAG + OCShare.READ_PERMISSION_FLAG)
-    }
-
     fun canReshare(share: OCShare?): Boolean {
         if (share == null) {
             return false
@@ -65,22 +44,14 @@ object SharePermissionManager {
         return (share.permissions and OCShare.SHARE_PERMISSION_FLAG) > 0
     }
 
-    fun getSelectedType(share: OCShare?, encrypted: Boolean): QuickPermissionType = if (canEdit(share)) {
+    fun getSelectedType(share: OCShare?): QuickPermissionType = if (canEdit(share)) {
         QuickPermissionType.CAN_EDIT
-    } else if (encrypted && isSecureFileDrop(share)) {
-        QuickPermissionType.SECURE_FILE_DROP
     } else if (isViewOnly(share)) {
         QuickPermissionType.VIEW_ONLY
-    } else if (isFileRequest(share)) {
-        QuickPermissionType.FILE_REQUEST
     } else {
         QuickPermissionType.NONE
     }
 
-    fun getMaximumPermission(isFolder: Boolean): Int = if (isFolder) {
-        OCShare.MAXIMUM_PERMISSIONS_FOR_FOLDER
-    } else {
-        OCShare.MAXIMUM_PERMISSIONS_FOR_FILE
-    }
+    fun getMaximumPermission(): Int = OCShare.MAXIMUM_PERMISSIONS_FOR_FILE
     // endregion
 }
