@@ -23,8 +23,9 @@ import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ItemShareShareBinding;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.share.helper.AvatarLoader;
-import it.niedermann.owncloud.notes.share.helper.SharingMenuHelper;
+import it.niedermann.owncloud.notes.share.helper.SharePermissionManager;
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
+import it.niedermann.owncloud.notes.share.model.QuickPermissionType;
 import it.niedermann.owncloud.notes.shared.util.FilesSpecificViewThemeUtils;
 
 public class ShareViewHolder extends BrandedViewHolder {
@@ -101,8 +102,8 @@ public class ShareViewHolder extends BrandedViewHolder {
             accountUserName.equalsIgnoreCase(share.getUserId())) {
             binding.overflowMenu.setVisibility(View.VISIBLE);
 
-            String permissionName = SharingMenuHelper.getPermissionName(context, share);
-            setPermissionName(permissionName);
+            QuickPermissionType quickPermissionType = SharePermissionManager.INSTANCE.getSelectedType(share, false);
+            setPermissionName(quickPermissionType.getText(context));
 
             // bind listener to edit privileges
             binding.overflowMenu.setOnClickListener(v -> listener.showSharingMenuActionSheet(share));

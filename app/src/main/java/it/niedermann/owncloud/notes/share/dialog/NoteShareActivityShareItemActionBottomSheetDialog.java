@@ -19,7 +19,7 @@ import com.owncloud.android.lib.resources.shares.ShareType;
 import it.niedermann.owncloud.notes.branding.BrandedBottomSheetDialog;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ItemNoteShareActionBinding;
-import it.niedermann.owncloud.notes.share.helper.SharingMenuHelper;
+import it.niedermann.owncloud.notes.share.helper.SharePermissionManager;
 import it.niedermann.owncloud.notes.share.listener.NoteShareItemAction;
 
 public class NoteShareActivityShareItemActionBottomSheetDialog extends BrandedBottomSheetDialog {
@@ -63,7 +63,7 @@ public class NoteShareActivityShareItemActionBottomSheetDialog extends BrandedBo
             binding.menuShareSendLink.setVisibility(View.GONE);
         }
 
-        if (SharingMenuHelper.isSecureFileDrop(ocShare)) {
+        if (SharePermissionManager.INSTANCE.isSecureFileDrop(ocShare)) {
             binding.menuShareAdvancedPermissions.setVisibility(View.GONE);
             binding.menuShareAddAnotherLink.setVisibility(View.GONE);
         }

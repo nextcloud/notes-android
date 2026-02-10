@@ -6,19 +6,19 @@
  */
 package it.niedermann.owncloud.notes.share.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.ColorInt
 import androidx.recyclerview.widget.RecyclerView
 import com.nextcloud.android.common.ui.theme.utils.ColorRole
 import it.niedermann.owncloud.notes.branding.Branded
 import it.niedermann.owncloud.notes.branding.BrandingUtil
 import it.niedermann.owncloud.notes.databinding.ItemQuickSharePermissionsBinding
-import it.niedermann.owncloud.notes.share.model.QuickPermissionModel
+import it.niedermann.owncloud.notes.share.model.QuickPermission
 
 class QuickSharingPermissionsAdapter(
-    private val quickPermissionList: MutableList<QuickPermissionModel>,
+    private val quickPermissionList: MutableList<QuickPermission>,
     private val onPermissionChangeListener: QuickSharingPermissionViewHolder.OnPermissionChangeListener,
     private var color: Int = 0
 ) :
@@ -45,6 +45,7 @@ class QuickSharingPermissionsAdapter(
         return quickPermissionList.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun applyBrand(color: Int) {
         this.color = color
         notifyDataSetChanged()
@@ -59,9 +60,10 @@ class QuickSharingPermissionsAdapter(
         RecyclerView
         .ViewHolder(itemView) {
 
-        fun bindData(quickPermissionModel: QuickPermissionModel) {
-            binding.tvQuickShareName.text = quickPermissionModel.permissionName
-            if (quickPermissionModel.isSelected) {
+        fun bindData(quickPermission: QuickPermission) {
+            val permissionName = quickPermission.type.getText(itemView.context)
+            binding.tvQuickShareName.text = permissionName
+            if (quickPermission.isSelected) {
                 binding.tvQuickShareCheckIcon.visibility = View.VISIBLE
             } else {
                 binding.tvQuickShareCheckIcon.visibility = View.INVISIBLE
@@ -69,7 +71,7 @@ class QuickSharingPermissionsAdapter(
 
             itemView.setOnClickListener {
                 // if user select different options then only update the permission
-                if (!quickPermissionModel.isSelected) {
+                if (!quickPermission.isSelected) {
                     onPermissionChangeListener.onPermissionChanged(adapterPosition)
                 } else {
                     // dismiss sheet on selection of same permission

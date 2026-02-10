@@ -25,13 +25,15 @@ import it.niedermann.owncloud.notes.databinding.ActivityNoteShareDetailBinding
 import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.persistence.isSuccess
 import it.niedermann.owncloud.notes.share.dialog.ExpirationDatePickerDialogFragment
-import it.niedermann.owncloud.notes.share.helper.SharingMenuHelper
+import it.niedermann.owncloud.notes.share.helper.SharePermissionManager
+import it.niedermann.owncloud.notes.share.model.QuickPermissionType
 import it.niedermann.owncloud.notes.share.model.SharePasswordRequest
 import it.niedermann.owncloud.notes.share.repository.ShareRepository
 import it.niedermann.owncloud.notes.shared.util.DisplayUtils
 import it.niedermann.owncloud.notes.shared.util.clipboard.ClipboardUtil
 import it.niedermann.owncloud.notes.shared.util.extensions.getParcelableArgument
 import it.niedermann.owncloud.notes.shared.util.extensions.getSerializableArgument
+import it.niedermann.owncloud.notes.util.isPublicOrMail
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -113,7 +115,7 @@ class NoteShareDetailActivity :
             val ssoAcc =
                 SingleAccountHelper.getCurrentSingleSignOnAccount(this@NoteShareDetailActivity)
             repository = ShareRepository(this@NoteShareDetailActivity, ssoAcc)
-            permission = repository.getCapabilities().defaultPermission
+            permission = share?.permissions ?: repository.getCapabilities().defaultPermission
 
             withContext(Dispatchers.Main) {
                 if (shareProcessStep == SCREEN_TYPE_PERMISSION) {
@@ -135,8 +137,8 @@ class NoteShareDetailActivity :
 
         binding.run {
             util.platform.run {
-                themeRadioButton(shareProcessPermissionReadOnly)
-                themeRadioButton(shareProcessPermissionUploadEditing)
+                themeRadioButton(canViewRadioButton)
+                themeRadioButton(canEditRadioButton)
                 themeRadioButton(shareProcessPermissionFileDrop)
 
                 colorTextView(shareProcessEditShareLink)
@@ -212,14 +214,7 @@ class NoteShareDetailActivity :
     private fun setupModificationUI() {
         if (share?.isFolder == true) updateViewForFolder() else updateViewForFile()
 
-        // read only / allow upload and editing / file drop
-        if (SharingMenuHelper.isUploadAndEditingAllowed(share)) {
-            binding.shareProcessPermissionUploadEditing.isChecked = true
-        } else if (SharingMenuHelper.isFileDrop(share) && share?.isFolder == true) {
-            binding.shareProcessPermissionFileDrop.isChecked = true
-        } else if (SharingMenuHelper.isReadOnly(share)) {
-            binding.shareProcessPermissionReadOnly.isChecked = true
-        }
+        selectRadioButtonAccordingToPermission()
 
         shareType = share?.shareType ?: ShareType.NO_SHARED
 
@@ -238,6 +233,35 @@ class NoteShareDetailActivity :
         showPasswordInput(binding.shareProcessSetPasswordSwitch.isChecked)
         updateExpirationDateView()
         showExpirationDateInput(binding.shareProcessSetExpDateSwitch.isChecked)
+        setMaxPermissionsIfDefaultPermissionExists()
+    }
+
+    private fun selectRadioButtonAccordingToPermission() {
+        val selectedType = SharePermissionManager.getSelectedType(share, encrypted = false)
+        binding.run {
+            when (selectedType) {
+                QuickPermissionType.VIEW_ONLY -> {
+                    canViewRadioButton.isChecked = true
+                }
+
+                QuickPermissionType.CAN_EDIT -> {
+                    canEditRadioButton.isChecked = true
+                }
+
+                QuickPermissionType.FILE_REQUEST -> {
+                    shareProcessPermissionFileDrop.isChecked = true
+                }
+
+                else -> Unit
+            }
+        }
+    }
+
+    private fun setMaxPermissionsIfDefaultPermissionExists() {
+        if (repository.getCapabilities().defaultPermission != OCShare.NO_PERMISSION) {
+            binding.canEditRadioButton.isChecked = true
+            permission = SharePermissionManager.getMaximumPermission(isFolder())
+        }
     }
 
     private fun setupUpdateUI() {
@@ -300,7 +324,7 @@ class NoteShareDetailActivity :
                     shareProcessAllowResharingCheckbox.visibility = View.GONE
                 }
                 shareProcessAllowResharingCheckbox.isChecked =
-                    SharingMenuHelper.canReshare(share)
+                    SharePermissionManager.canReshare(share)
             }
         }
     }
@@ -315,7 +339,7 @@ class NoteShareDetailActivity :
             shareProcessSetPasswordSwitch.visibility = View.VISIBLE
 
             if (share != null) {
-                if (SharingMenuHelper.isFileDrop(share)) {
+                if (SharePermissionManager.isFileRequest(share)) {
                     shareProcessHideDownloadCheckbox.visibility = View.GONE
                 } else {
                     shareProcessHideDownloadCheckbox.visibility = View.VISIBLE
@@ -343,13 +367,13 @@ class NoteShareDetailActivity :
     }
 
     private fun updateViewForFile() {
-        binding.shareProcessPermissionUploadEditing.text = getString(R.string.link_share_editing)
+        binding.canEditRadioButton.text = getString(R.string.link_share_editing)
         binding.shareProcessPermissionFileDrop.visibility = View.GONE
     }
 
     private fun updateViewForFolder() {
         binding.run {
-            shareProcessPermissionUploadEditing.text =
+            canEditRadioButton.text =
                 getString(R.string.link_share_allow_upload_and_editing)
             shareProcessPermissionFileDrop.visibility = View.VISIBLE
             if (isSecureShare) {
@@ -382,6 +406,7 @@ class NoteShareDetailActivity :
         }
     }
 
+    @Suppress("LongMethod")
     private fun implementClickEvents() {
         binding.run {
             shareProcessBtnCancel.setOnClickListener {
@@ -406,6 +431,24 @@ class NoteShareDetailActivity :
             shareProcessSelectExpDate.setOnClickListener {
                 showExpirationDateDialog()
             }
+
+            // region RadioButtons
+            shareProcessPermissionRadioGroup.setOnCheckedChangeListener { _, optionId ->
+                when (optionId) {
+                    R.id.can_view_radio_button -> {
+                        permission = OCShare.READ_PERMISSION_FLAG
+                    }
+
+                    R.id.can_edit_radio_button -> {
+                        permission = SharePermissionManager.getMaximumPermission(isFolder())
+                    }
+
+                    R.id.share_process_permission_file_drop -> {
+                        permission = OCShare.CREATE_PERMISSION_FLAG
+                    }
+                }
+            }
+            // endregion
         }
     }
 
@@ -526,8 +569,8 @@ class NoteShareDetailActivity :
      */
     private fun getSelectedPermission() = when {
         binding.shareProcessAllowResharingCheckbox.isChecked -> getReSharePermission()
-        binding.shareProcessPermissionReadOnly.isChecked -> OCShare.READ_PERMISSION_FLAG
-        binding.shareProcessPermissionUploadEditing.isChecked -> OCShare.MAXIMUM_PERMISSIONS_FOR_FILE
+        binding.canViewRadioButton.isChecked -> OCShare.READ_PERMISSION_FLAG
+        binding.canEditRadioButton.isChecked -> OCShare.MAXIMUM_PERMISSIONS_FOR_FILE
         binding.shareProcessPermissionFileDrop.isChecked -> OCShare.CREATE_PERMISSION_FLAG
         else -> permission
     }
@@ -627,4 +670,12 @@ class NoteShareDetailActivity :
     override fun onDateUnSet() {
         binding.shareProcessSetExpDateSwitch.isChecked = false
     }
+
+    // region Helpers
+    private fun isFolder(): Boolean = (share?.isFolder == true)
+
+    private fun canSetFileRequest(): Boolean = isFolder() && shareType.isPublicOrMail()
+
+    private fun isPublicShare(): Boolean = (shareType == ShareType.PUBLIC_LINK)
+    // endregion
 }

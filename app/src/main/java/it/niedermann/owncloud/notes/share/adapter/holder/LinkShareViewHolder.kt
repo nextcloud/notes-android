@@ -1,124 +1,168 @@
 /*
  * Nextcloud Notes - Android Client
  *
- * SPDX-FileCopyrightText: 2015-2025 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-FileCopyrightText: 2015-2026 Nextcloud GmbH and Nextcloud contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
-package it.niedermann.owncloud.notes.share.adapter.holder;
+package it.niedermann.owncloud.notes.share.adapter.holder
 
-import android.content.Context;
-import android.text.TextUtils;
-import android.view.View;
+import android.text.TextUtils
+import android.view.View
+import androidx.core.content.res.ResourcesCompat
+import com.nextcloud.android.common.ui.theme.utils.ColorRole
+import com.owncloud.android.lib.resources.shares.OCShare
+import com.owncloud.android.lib.resources.shares.ShareType
+import it.niedermann.owncloud.notes.R
+import it.niedermann.owncloud.notes.branding.BrandedViewHolder
+import it.niedermann.owncloud.notes.branding.BrandingUtil
+import it.niedermann.owncloud.notes.databinding.ItemShareLinkShareBinding
+import it.niedermann.owncloud.notes.share.helper.SharePermissionManager
+import it.niedermann.owncloud.notes.share.helper.SharePermissionManager.isSecureFileDrop
+import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener
+import it.niedermann.owncloud.notes.share.model.QuickPermissionType
+import it.niedermann.owncloud.notes.util.remainingDownloadLimit
 
-import androidx.annotation.NonNull;
-import androidx.core.content.res.ResourcesCompat;
+class LinkShareViewHolder(
+    private val binding: ItemShareLinkShareBinding
+) : BrandedViewHolder(binding.root) {
 
-import com.nextcloud.android.common.ui.theme.utils.ColorRole;
-import com.owncloud.android.lib.resources.shares.OCShare;
-import com.owncloud.android.lib.resources.shares.ShareType;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.branding.BrandedViewHolder;
-import it.niedermann.owncloud.notes.branding.BrandingUtil;
-import it.niedermann.owncloud.notes.databinding.ItemShareLinkShareBinding;
-import it.niedermann.owncloud.notes.share.helper.SharingMenuHelper;
-import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
-
-public class LinkShareViewHolder extends BrandedViewHolder {
-    private ItemShareLinkShareBinding binding;
-    private Context context;
-
-    private BrandingUtil brandingUtil;
-
-    public LinkShareViewHolder(@NonNull View itemView) {
-        super(itemView);
-        bindBranding();
+    init {
+        bindBranding()
     }
 
-    public LinkShareViewHolder(ItemShareLinkShareBinding binding, Context context) {
-        this(binding.getRoot());
-        this.binding = binding;
-        this.context = context;
-        bindBranding();
+    fun bind(publicShare: OCShare, listener: ShareeListAdapterListener, position: Int) {
+        val quickPermissionType = SharePermissionManager.getSelectedType(publicShare, false)
+
+        setName(binding, publicShare, position)
+        setSubline(binding, publicShare)
+        setPermissionName(binding, publicShare, quickPermissionType)
+        setOnClickListeners(binding, listener, publicShare)
+        configureCopyLink(binding, listener, publicShare)
     }
 
-    public void bind(OCShare publicShare, ShareeListAdapterListener listener) {
-        if (publicShare.getShareType() != null && ShareType.EMAIL == publicShare.getShareType()) {
-            binding.name.setText(publicShare.getSharedWithDisplayName());
-            binding.icon.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(),
-                    R.drawable.ic_email,
-                    null));
-            if (publicShare.getLabel() != null && !publicShare.getLabel().isEmpty()) {
-                brandingUtil.platform.colorTextView(binding.name, ColorRole.ON_SURFACE_VARIANT);
-                binding.label.setText(publicShare.getLabel());
-                binding.label.setVisibility(View.VISIBLE);
-            } else {
-                brandingUtil.platform.colorTextView(binding.name, ColorRole.ON_SURFACE);
-                binding.label.setVisibility(View.GONE);
+    @Suppress("ReturnCount")
+    private fun setName(
+        binding: ItemShareLinkShareBinding?,
+        publicShare: OCShare,
+        position: Int
+    ) {
+        val context = binding?.root?.context
+
+        if (binding == null || context == null) {
+            return
+        }
+
+        if (ShareType.PUBLIC_LINK == publicShare.shareType) {
+            val label = publicShare.label
+            binding.name.text = when {
+                label.isNullOrBlank() && position == 0 ->
+                    context.getString(R.string.share_link)
+
+                label.isNullOrBlank() ->
+                    context.getString(R.string.share_link_with_label, position.toString())
+
+                else ->
+                    context.getString(R.string.share_link_with_label, label)
             }
-            binding.copyLink.setVisibility(View.GONE);
-        } else {
-            brandingUtil.platform.colorTextView(binding.name, ColorRole.ON_SURFACE);
-            if (!TextUtils.isEmpty(publicShare.getLabel())) {
-                String text = String.format(context.getString(R.string.share_link_with_label), publicShare.getLabel());
-                binding.name.setText(text);
-            } else {
-                if (SharingMenuHelper.isSecureFileDrop(publicShare)) {
-                    binding.name.setText(context.getResources().getString(R.string.share_permission_secure_file_drop));
-                } else {
-                    binding.name.setText(R.string.share_link);
-                }
-            }
+            return
         }
 
-        binding.subline.setVisibility(View.GONE);
+        if (ShareType.EMAIL == publicShare.shareType) {
+            binding.name.text = publicShare.sharedWithDisplayName
 
-        String permissionName = SharingMenuHelper.getPermissionName(context, publicShare);
-        setPermissionName(publicShare, permissionName);
-
-        binding.overflowMenu.setOnClickListener(v -> listener.showSharingMenuActionSheet(publicShare));
-        if (!SharingMenuHelper.isSecureFileDrop(publicShare)) {
-            binding.shareByLinkContainer.setOnClickListener(v -> listener.showPermissionsDialog(publicShare));
+            val emailDrawable = ResourcesCompat.getDrawable(context.resources, R.drawable.ic_email, null)
+            binding.icon.setImageDrawable(emailDrawable)
+            binding.copyLink.visibility = View.GONE
+            return
         }
 
-        if (publicShare.getExpirationDate() > 0) {
-            String expirationDescription = context.getString(
-                R.string.share_expires,
-                SimpleDateFormat.getDateInstance().format(new Date(publicShare.getExpirationDate()))
-            );
-            binding.expirationStatus.setContentDescription(expirationDescription);
-            binding.expirationStatus.setVisibility(View.VISIBLE);
-            binding.shareIconContainer.setOnClickListener(
-                v -> listener.showShareExpirationSnackbar(publicShare)
-            );
-        } else {
-            binding.expirationStatus.setContentDescription(null);
-            binding.expirationStatus.setVisibility(View.GONE);
-        }
-
-        binding.copyLink.setOnClickListener(v -> listener.copyLink(publicShare));
-    }
-
-    private void setPermissionName(OCShare publicShare, String permissionName) {
-        if (!TextUtils.isEmpty(permissionName) && !SharingMenuHelper.isSecureFileDrop(publicShare)) {
-            binding.permissionName.setText(permissionName);
-            binding.permissionName.setVisibility(View.VISIBLE);
-        } else {
-            binding.permissionName.setVisibility(View.GONE);
+        val label = publicShare.label
+        if (!label.isNullOrEmpty()) {
+            binding.name.text = context.getString(R.string.share_link_with_label, label)
         }
     }
 
-    @Override
-    public void applyBrand(int color) {
-        brandingUtil = BrandingUtil.of(color, context);
-        if (binding != null) {
-            brandingUtil.androidx.colorPrimaryTextViewElement(binding.permissionName);
-            brandingUtil.platform.colorTextView(binding.label, ColorRole.ON_SURFACE);
-            brandingUtil.platform.colorImageViewBackgroundAndIcon(binding.icon);
-            brandingUtil.platform.colorImageView(binding.expirationStatus, ColorRole.ON_PRIMARY_CONTAINER);
+    private fun setSubline(binding: ItemShareLinkShareBinding?, publicShare: OCShare) {
+        val context = binding?.root?.context
+        if (binding == null || context == null) {
+            return
         }
+
+        val downloadLimit = publicShare.fileDownloadLimit
+        if (downloadLimit != null) {
+            val remaining = publicShare.remainingDownloadLimit() ?: return
+            val text = context.resources.getQuantityString(
+                R.plurals.share_download_limit_description,
+                remaining,
+                remaining
+            )
+
+            binding.subline.text = text
+            binding.subline.visibility = View.VISIBLE
+            return
+        }
+
+        binding.subline.visibility = View.GONE
+    }
+
+    private fun setPermissionName(
+        binding: ItemShareLinkShareBinding?,
+        publicShare: OCShare?,
+        quickPermissionType: QuickPermissionType
+    ) {
+        val context = binding?.root?.context
+
+        if (binding == null || context == null) {
+            return
+        }
+
+        val permissionName = quickPermissionType.getText(context)
+
+        if (TextUtils.isEmpty(permissionName) || (isSecureFileDrop(publicShare))) {
+            binding.permissionName.visibility = View.GONE
+            return
+        }
+
+        binding.permissionName.text = permissionName
+        binding.permissionName.visibility = View.VISIBLE
+    }
+
+    private fun setOnClickListeners(
+        binding: ItemShareLinkShareBinding?,
+        listener: ShareeListAdapterListener,
+        publicShare: OCShare
+    ) {
+        if (binding == null) {
+            return
+        }
+
+        binding.overflowMenu.setOnClickListener {
+            listener.showSharingMenuActionSheet(publicShare)
+        }
+        binding.shareByLinkContainer.setOnClickListener {
+            listener.showPermissionsDialog(publicShare)
+        }
+    }
+
+    private fun configureCopyLink(
+        binding: ItemShareLinkShareBinding?,
+        listener: ShareeListAdapterListener,
+        publicShare: OCShare
+    ) {
+        val context = binding?.root?.context
+
+        if (binding == null || context == null) {
+            return
+        }
+
+        binding.copyLink.setOnClickListener { listener.copyLink(publicShare) }
+    }
+
+    override fun applyBrand(color: Int) {
+        val brandingUtil = BrandingUtil.of(color, binding.root.context)
+        brandingUtil.androidx.colorPrimaryTextViewElement(binding.permissionName)
+        brandingUtil.platform.colorTextView(binding.label, ColorRole.ON_SURFACE)
+        brandingUtil.platform.colorImageViewBackgroundAndIcon(binding.icon)
+        brandingUtil.platform.colorImageView(binding.expirationStatus, ColorRole.ON_PRIMARY_CONTAINER)
     }
 }
