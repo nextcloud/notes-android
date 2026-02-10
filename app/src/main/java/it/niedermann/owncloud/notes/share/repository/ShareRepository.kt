@@ -206,6 +206,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
         downloadPermission: Boolean,
         share: OCShare?,
         noteText: String,
+        label: String,
         password: String,
         sendEmail: Boolean,
         chosenExpDateInMills: Long,
@@ -238,6 +239,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
             password = password,
             publicUpload = "false",
             expireDate = getExpirationDate(chosenExpDateInMills),
+            label = label,
             note = noteText,
             attributes = attributes,
             sendMail = sendEmail.toString()

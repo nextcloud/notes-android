@@ -25,6 +25,9 @@ data class UpdateShareRequest(
     val expireDate: String?,
 
     @Expose
+    val label: String?,
+
+    @Expose
     val note: String,
 
     /**
