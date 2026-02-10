@@ -90,7 +90,7 @@ class NoteShareDetailActivity :
         binding = ActivityNoteShareDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
-        binding.toolbar.setNavigationOnClickListener({ v -> backPressed() })
+        binding.toolbar.setNavigationOnClickListener { backPressed() }
         val arguments = intent.extras
 
         arguments?.let {
@@ -639,9 +639,5 @@ class NoteShareDetailActivity :
         binding.shareProcessSetExpDateSwitch.isChecked = false
     }
 
-    // region Helpers
-    private fun canSetFileRequest(): Boolean = shareType.isPublicOrMail()
-
     private fun isPublicShare(): Boolean = (shareType == ShareType.PUBLIC_LINK)
-    // endregion
 }
