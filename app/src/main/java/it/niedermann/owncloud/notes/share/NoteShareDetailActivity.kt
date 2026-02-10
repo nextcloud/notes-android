@@ -557,17 +557,15 @@ class NoteShareDetailActivity :
     }
 
     private suspend fun updateShare(noteText: String, label: String, password: String, sendEmail: Boolean) {
-        val downloadPermission = !binding.shareProcessHideDownloadCheckbox.isChecked
+        val hideDownload = binding.shareProcessHideDownloadCheckbox.isChecked
 
         val requestBody = repository.getUpdateShareRequest(
-            downloadPermission = downloadPermission,
-            share = share!!,
             noteText = noteText,
             label = label,
             password = password,
-            sendEmail = sendEmail,
             chosenExpDateInMills = chosenExpDateInMills,
-            permission = permission
+            permission = permission,
+            hideDownload = hideDownload
         )
 
         val updateShareResult = repository.updateShare(share!!.id, requestBody)

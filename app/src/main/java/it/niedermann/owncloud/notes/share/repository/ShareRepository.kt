@@ -21,8 +21,6 @@ import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.persistence.entity.ShareEntity
 import it.niedermann.owncloud.notes.share.model.CreateShareRequest
 import it.niedermann.owncloud.notes.share.model.CreateShareResponse
-import it.niedermann.owncloud.notes.share.model.ShareAttributesV1
-import it.niedermann.owncloud.notes.share.model.ShareAttributesV2
 import it.niedermann.owncloud.notes.share.model.SharePasswordRequest
 import it.niedermann.owncloud.notes.share.model.UpdateSharePermissionRequest
 import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
@@ -200,46 +198,21 @@ class ShareRepository(private val applicationContext: Context, private val accou
     }
 
     fun getUpdateShareRequest(
-        downloadPermission: Boolean,
-        share: OCShare,
-        noteText: String,
-        label: String,
+        noteText: String?,
+        label: String?,
         password: String,
-        sendEmail: Boolean,
         chosenExpDateInMills: Long,
-        permission: Int
+        permission: Int,
+        hideDownload: Boolean
     ): UpdateShareRequest {
-        val capabilities = getCapabilities()
-        val shouldUseShareAttributesV2 = (capabilities.nextcloudMajorVersion?.toInt() ?: 0) >= 30
-
-        val shareAttributes = arrayOf(
-            if (shouldUseShareAttributesV2) {
-                ShareAttributesV2(
-                    scope = "permissions",
-                    key = "download",
-                    value = downloadPermission
-                )
-            } else {
-                ShareAttributesV1(
-                    scope = "permissions",
-                    key = "download",
-                    enabled = downloadPermission
-                )
-            }
-        )
-
-        val attributes = gson.toJson(shareAttributes)
-
         return UpdateShareRequest(
-            share_id = share.id.toInt(),
             permissions = if (permission == -1) null else permission,
             password = password,
-            publicUpload = "false",
             expireDate = getExpirationDate(chosenExpDateInMills),
             label = label,
             note = noteText,
-            attributes = attributes,
-            sendMail = sendEmail.toString()
+            attributes = "[]",
+            hideDownload = hideDownload.toString()
         )
     }
 
@@ -386,10 +359,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
                     message = applicationContext.getString(R.string.note_share_created)
                 )
             } else {
-                val errorMessage = response.getErrorMessage()
-                if (errorMessage == null) {
-                    return ApiResult.Error(message = defaultErrorMessage)
-                }
+                val errorMessage = response.getErrorMessage() ?: return ApiResult.Error(message = defaultErrorMessage)
                 Log_OC.d(tag, "Response failed: $errorMessage")
                 ApiResult.Error(message = errorMessage)
             }

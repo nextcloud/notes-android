@@ -7,47 +7,34 @@
 package it.niedermann.owncloud.notes.share.model
 
 import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 
 data class UpdateShareRequest(
     @Expose
-    val share_id: Int,
+    @SerializedName("permissions")
+    val permissions: Int? = null,
 
     @Expose
-    val permissions: Int?,
+    @SerializedName("password")
+    val password: String? = null,
 
     @Expose
-    val password: String,
+    @SerializedName("note")
+    val note: String? = null,
 
     @Expose
-    val publicUpload: String,
+    @SerializedName("label")
+    val label: String? = null,
 
     @Expose
-    val expireDate: String?,
+    @SerializedName("expireDate")
+    val expireDate: String? = null,
 
     @Expose
-    val label: String?,
+    @SerializedName("hideDownload")
+    val hideDownload: String? = null,
 
     @Expose
-    val note: String,
-
-    /**
-     * Array of ShareAttributes data class in JSON format
-     */
-    @Expose
-    val attributes: String?,
-
-    @Expose
-    val sendMail: String
-)
-
-data class ShareAttributesV2(
-    var scope: String,
-    var key: String,
-    var value: Boolean
-)
-
-data class ShareAttributesV1(
-    var scope: String,
-    var key: String,
-    var enabled: Boolean
+    @SerializedName("attributes")
+    val attributes: String? = null
 )
