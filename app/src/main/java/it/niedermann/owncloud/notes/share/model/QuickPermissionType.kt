@@ -7,8 +7,6 @@
 package it.niedermann.owncloud.notes.share.model
 
 import android.content.Context
-import android.graphics.drawable.Drawable
-import androidx.core.content.ContextCompat
 import com.owncloud.android.lib.resources.shares.OCShare
 import it.niedermann.owncloud.notes.R
 
@@ -18,8 +16,6 @@ enum class QuickPermissionType(val iconId: Int, val textId: Int) {
     CAN_EDIT(R.drawable.ic_edit, R.string.share_permission_can_edit);
 
     fun getText(context: Context): String = context.getString(textId)
-
-    fun getIcon(context: Context): Drawable? = ContextCompat.getDrawable(context, iconId)
 
     fun getPermissionFlag(): Int = when (this) {
         NONE -> OCShare.NO_PERMISSION
