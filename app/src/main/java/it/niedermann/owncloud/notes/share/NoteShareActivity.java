@@ -885,6 +885,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                         false,
                         share,
                         "",
+                    "",
                         password,
                         false,
                         -1,
