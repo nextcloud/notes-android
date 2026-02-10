@@ -27,11 +27,14 @@ import it.niedermann.owncloud.notes.share.dialog.ExpirationDatePickerDialogFragm
 import it.niedermann.owncloud.notes.share.helper.SharePermissionManager
 import it.niedermann.owncloud.notes.share.model.QuickPermissionType
 import it.niedermann.owncloud.notes.share.model.SharePasswordRequest
+import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
 import it.niedermann.owncloud.notes.share.repository.ShareRepository
 import it.niedermann.owncloud.notes.shared.util.DisplayUtils
 import it.niedermann.owncloud.notes.shared.util.clipboard.ClipboardUtil
 import it.niedermann.owncloud.notes.shared.util.extensions.getParcelableArgument
 import it.niedermann.owncloud.notes.shared.util.extensions.getSerializableArgument
+import it.niedermann.owncloud.notes.shared.util.extensions.toExpirationDateString
+import it.niedermann.owncloud.notes.util.DateUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -559,13 +562,14 @@ class NoteShareDetailActivity :
     private suspend fun updateShare(noteText: String, label: String, password: String, sendEmail: Boolean) {
         val hideDownload = binding.shareProcessHideDownloadCheckbox.isChecked
 
-        val requestBody = repository.getUpdateShareRequest(
-            noteText = noteText,
-            label = label,
+        val requestBody = UpdateShareRequest(
+            permissions = if (permission == -1) null else permission,
             password = password,
-            chosenExpDateInMills = chosenExpDateInMills,
-            permission = permission,
-            hideDownload = hideDownload
+            expireDate = DateUtil.getExpirationDate(chosenExpDateInMills),
+            label = label,
+            note = noteText,
+            attributes = "[]",
+            hideDownload = hideDownload.toString()
         )
 
         val updateShareResult = repository.updateShare(share!!.id, requestBody)
