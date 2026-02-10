@@ -7,14 +7,10 @@
 package it.niedermann.owncloud.notes.share.adapter.holder;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.owncloud.android.lib.resources.shares.OCShare;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemInternalShareLinkBinding;
@@ -34,13 +30,8 @@ public class InternalShareViewHolder extends RecyclerView.ViewHolder {
         this.context = context;
     }
 
-    public void bind(OCShare share, ShareeListAdapterListener listener) {
-        if (share.isFolder()) {
-            binding.shareInternalLinkText.setText(context.getString(R.string.share_internal_link_to_folder_text));
-        } else {
-            binding.shareInternalLinkText.setText(context.getString(R.string.share_internal_link_to_file_text));
-        }
-
+    public void bind(ShareeListAdapterListener listener) {
+        binding.shareInternalLinkText.setText(context.getString(R.string.share_internal_link_to_file_text));
         binding.copyInternalContainer.setOnClickListener(l -> listener.copyInternalLink());
     }
 }

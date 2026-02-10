@@ -17,7 +17,6 @@ import it.niedermann.owncloud.notes.branding.BrandedViewHolder
 import it.niedermann.owncloud.notes.branding.BrandingUtil
 import it.niedermann.owncloud.notes.databinding.ItemShareLinkShareBinding
 import it.niedermann.owncloud.notes.share.helper.SharePermissionManager
-import it.niedermann.owncloud.notes.share.helper.SharePermissionManager.isSecureFileDrop
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener
 import it.niedermann.owncloud.notes.share.model.QuickPermissionType
 import it.niedermann.owncloud.notes.util.remainingDownloadLimit
@@ -31,11 +30,11 @@ class LinkShareViewHolder(
     }
 
     fun bind(publicShare: OCShare, listener: ShareeListAdapterListener, position: Int) {
-        val quickPermissionType = SharePermissionManager.getSelectedType(publicShare, false)
+        val quickPermissionType = SharePermissionManager.getSelectedType(publicShare)
 
         setName(binding, publicShare, position)
         setSubline(binding, publicShare)
-        setPermissionName(binding, publicShare, quickPermissionType)
+        setPermissionName(binding, quickPermissionType)
         setOnClickListeners(binding, listener, publicShare)
         configureCopyLink(binding, listener, publicShare)
     }
@@ -107,7 +106,6 @@ class LinkShareViewHolder(
 
     private fun setPermissionName(
         binding: ItemShareLinkShareBinding?,
-        publicShare: OCShare?,
         quickPermissionType: QuickPermissionType
     ) {
         val context = binding?.root?.context
@@ -118,7 +116,7 @@ class LinkShareViewHolder(
 
         val permissionName = quickPermissionType.getText(context)
 
-        if (TextUtils.isEmpty(permissionName) || (isSecureFileDrop(publicShare))) {
+        if (TextUtils.isEmpty(permissionName)) {
             binding.permissionName.visibility = View.GONE
             return
         }

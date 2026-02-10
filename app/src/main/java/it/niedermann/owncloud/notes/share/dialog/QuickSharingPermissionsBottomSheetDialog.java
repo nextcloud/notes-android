@@ -25,7 +25,6 @@ import it.niedermann.owncloud.notes.databinding.QuickSharingPermissionsBottomShe
 import it.niedermann.owncloud.notes.share.adapter.QuickSharingPermissionsAdapter;
 import it.niedermann.owncloud.notes.share.helper.SharePermissionManager;
 import it.niedermann.owncloud.notes.share.model.QuickPermission;
-import it.niedermann.owncloud.notes.util.OCShareExtensionsKt;
 
 /**
  * File Details Quick Sharing permissions options {@link android.app.Dialog} styled as a bottom sheet for main actions.
@@ -94,7 +93,7 @@ public class QuickSharingPermissionsBottomSheetDialog extends BrandedBottomSheet
      */
     private void handlePermissionChanged(List<QuickPermission> quickPermissionList, int position) {
         final var type = quickPermissionList.get(position).getType();
-        int permissionFlag = type.getPermissionFlag(ocShare.isFolder());
+        int permissionFlag = type.getPermissionFlag(false);
         actions.onQuickPermissionChanged(ocShare, permissionFlag);
         dismiss();
     }
@@ -103,9 +102,8 @@ public class QuickSharingPermissionsBottomSheetDialog extends BrandedBottomSheet
      * Prepare the list of permissions needs to be displayed on recyclerview
      */
     private List<QuickPermission> getQuickPermissionList() {
-        final var selectedType = SharePermissionManager.INSTANCE.getSelectedType(ocShare, false);
-        final var hasFileRequestPermission = OCShareExtensionsKt.hasFileRequestPermission(ocShare);
-        return selectedType.getAvailablePermissions(hasFileRequestPermission);
+        final var selectedType = SharePermissionManager.INSTANCE.getSelectedType(ocShare);
+        return selectedType.getAvailablePermissions(false);
     }
 
     @Override

@@ -102,7 +102,7 @@ public class ShareViewHolder extends BrandedViewHolder {
             accountUserName.equalsIgnoreCase(share.getUserId())) {
             binding.overflowMenu.setVisibility(View.VISIBLE);
 
-            QuickPermissionType quickPermissionType = SharePermissionManager.INSTANCE.getSelectedType(share, false);
+            QuickPermissionType quickPermissionType = SharePermissionManager.INSTANCE.getSelectedType(share);
             setPermissionName(quickPermissionType.getText(context));
 
             // bind listener to edit privileges

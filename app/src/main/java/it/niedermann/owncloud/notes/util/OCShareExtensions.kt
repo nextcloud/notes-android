@@ -9,8 +9,6 @@ package it.niedermann.owncloud.notes.util
 import com.owncloud.android.lib.resources.shares.OCShare
 import com.owncloud.android.lib.resources.shares.ShareType
 
-fun OCShare.hasFileRequestPermission(): Boolean = (isFolder && shareType?.isPublicOrMail() == true)
-
 fun ShareType.isPublicOrMail(): Boolean = (this == ShareType.PUBLIC_LINK || this == ShareType.EMAIL)
 
 fun OCShare?.remainingDownloadLimit(): Int? {

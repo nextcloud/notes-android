@@ -68,11 +68,6 @@ class ShareRepository(private val applicationContext: Context, private val accou
         }
     }
 
-    fun getShareEntitiesForSpecificNote(note: Note): List<ShareEntity> {
-        val path = getNotePath(note)
-        return notesRepository.getShareEntities(path)
-    }
-
     private fun getExpirationDate(chosenExpDateInMills: Long): String? {
         if (chosenExpDateInMills == -1L) {
             return null
@@ -84,13 +79,13 @@ class ShareRepository(private val applicationContext: Context, private val accou
     fun getCapabilities(): Capabilities = notesRepository.capabilities
 
     // region API calls
-    fun getSharesForNotesAndSaveShareEntities() {
+    fun fetchSharesForNotesAndSaveShareEntities() {
         val notesPathResponseResult = getNotesPathResponseResult() ?: return
         val notesPath = notesPathResponseResult.notesPath
         val remotePath = "/$notesPath"
 
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
-        val call = shareAPI.getSharesForSpecificNote(remotePath)
+        val call = shareAPI.fetchSharesForSpecificNote(remotePath)
         val entities = arrayListOf<ShareEntity>()
 
         try {
@@ -111,6 +106,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
                     val displayNameOwner = map?.get("displayname_owner") as? String
                     val url = map?.get("url") as? String
                     val expirationDateString = map?.get("expiration") as? String
+                    val permissions = map?.get("permissions") as? Double
 
                     id?.toInt()?.let {
                         val entity = ShareEntity(
@@ -125,7 +121,8 @@ class ShareRepository(private val applicationContext: Context, private val accou
                             uid_owner = uidOwner,
                             displayname_owner = displayNameOwner,
                             url = url,
-                            expiration_date = expirationDateString?.toExpirationDateLong()
+                            expiration_date = expirationDateString?.toExpirationDateLong(),
+                            permissions = permissions
                         )
 
                         entities.add(entity)
@@ -153,7 +150,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
      */
     fun getSharees(searchString: String, page: Int, perPage: Int): ArrayList<JSONObject> {
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
-        val call = shareAPI.getSharees(
+        val call = shareAPI.fetchSharees(
             search = searchString,
             page = page.toString(),
             perPage = perPage.toString()
@@ -204,7 +201,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
 
     fun getUpdateShareRequest(
         downloadPermission: Boolean,
-        share: OCShare?,
+        share: OCShare,
         noteText: String,
         label: String,
         password: String,
@@ -234,7 +231,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
         val attributes = gson.toJson(shareAttributes)
 
         return UpdateShareRequest(
-            share_id = share!!.id.toInt(),
+            share_id = share.id.toInt(),
             permissions = if (permission == -1) null else permission,
             password = password,
             publicUpload = "false",
@@ -244,33 +241,6 @@ class ShareRepository(private val applicationContext: Context, private val accou
             attributes = attributes,
             sendMail = sendEmail.toString()
         )
-    }
-
-    /**
-     * Fetches all shares for the given file or folder identified by its remote ID.
-     *
-     * @param remoteId The remote file ID on the server for which to retrieve shares.
-     * @return A list of [OCShare] objects if the request is successful, or `null` if the request fails or an exception
-     * occurs.
-     */
-    fun getShares(remoteId: Long): List<OCShare>? {
-        val shareAPI = apiProvider.getShareAPI(applicationContext, account)
-        val call = shareAPI.getShares(remoteId)
-        val response = call.execute()
-
-        return try {
-            if (response.isSuccessful) {
-                val result =
-                    response.body()?.ocs?.data ?: throw RuntimeException("No shares available")
-                result.toOCShareList()
-            } else {
-                Log_OC.d(tag, "Failed to getShares: ${response.errorBody()?.string()}")
-                null
-            }
-        } catch (e: Exception) {
-            Log_OC.d(tag, "Exception while getShares: $e")
-            null
-        }
     }
 
     fun sendEmail(shareId: Long, requestBody: SharePasswordRequest): Boolean {
@@ -291,25 +261,31 @@ class ShareRepository(private val applicationContext: Context, private val accou
         }
     }
 
-    fun getShareFromNote(note: Note): List<OCShare>? {
-        val shareAPI = apiProvider.getShareAPI(applicationContext, account)
-        val path = getNotePath(note) ?: return null
-        val call = shareAPI.getShareFromNote(path)
+    fun fetchSharesFromNote(note: Note): List<OCShare> {
+        val sharesWithMe = fetchShares(note, sharedWithMe = true)
+        val sharesWithOthers = fetchShares(note, sharedWithMe = false)
+        return sharesWithOthers + sharesWithMe
+    }
+
+    private fun fetchShares(note: Note, sharedWithMe: Boolean): List<OCShare> {
+        val api = apiProvider.getShareAPI(applicationContext, account)
+        val path = getNotePath(note) ?: return emptyList()
+        val call = api.fetchSharesFromNote(path, sharedWithMe)
         val response = call.execute()
 
         return try {
             if (response.isSuccessful) {
                 val body = response.body()
                 Log_OC.d(tag, "Response successful: $body")
-                body?.ocs?.data?.toOCShareList()
+                body?.ocs?.data?.toOCShareList() ?: emptyList()
             } else {
                 val errorBody = response.errorBody()?.string()
                 Log_OC.d(tag, "Response failed: $errorBody")
-                null
+                emptyList()
             }
         } catch (e: Exception) {
             Log_OC.d(tag, "Exception while getting share from note: ", e)
-            null
+            emptyList()
         }
     }
 
@@ -324,6 +300,9 @@ class ShareRepository(private val applicationContext: Context, private val accou
                     note.setIsShared(false)
                     updateNote(note)
                 }
+
+                // delete previously stored shared
+                notesRepository.deleteShareById(share.id.toInt())
 
                 Log_OC.d(tag, "Share removed successfully.")
             } else {
