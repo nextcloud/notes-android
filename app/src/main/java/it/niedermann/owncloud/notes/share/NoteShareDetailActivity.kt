@@ -39,7 +39,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Date
-import kotlin.text.clear
 
 /**
  * Activity class to show share permission options, set expiration date, change label, set password, send note
@@ -589,8 +588,8 @@ class NoteShareDetailActivity :
             lifecycleScope.launch(Dispatchers.IO) {
                 val noteText = binding.noteText.text.toString().trim()
                 val password = binding.shareProcessEnterPassword.text.toString().trim()
-
-                updateShare(noteText, password, false)
+                val label = binding.shareProcessChangeName.text.toString()
+                updateShare(noteText, label, password, false)
             }
         } else {
             // else show step 2 (note screen)
@@ -618,23 +617,25 @@ class NoteShareDetailActivity :
 
         lifecycleScope.launch(Dispatchers.IO) {
             if (share != null && share?.note != noteText) {
-                updateShare(noteText, password, true)
+                val label = binding.shareProcessChangeName.text.toString()
+                updateShare(noteText, label, password, true)
             } else {
                 createShare(noteText, password)
             }
         }
     }
 
-    private suspend fun updateShare(noteText: String, password: String, sendEmail: Boolean) {
+    private suspend fun updateShare(noteText: String, label: String, password: String, sendEmail: Boolean) {
         val downloadPermission = !binding.shareProcessHideDownloadCheckbox.isChecked
         val requestBody = repository.getUpdateShareRequest(
-            downloadPermission,
-            share,
-            noteText,
-            password,
-            sendEmail,
-            chosenExpDateInMills,
-            permission
+            downloadPermission = downloadPermission,
+            share = share,
+            noteText = noteText,
+            label = label,
+            password = password,
+            sendEmail = sendEmail,
+            chosenExpDateInMills = chosenExpDateInMills,
+            permission = permission
         )
 
         val updateShareResult = repository.updateShare(share!!.id, requestBody)
