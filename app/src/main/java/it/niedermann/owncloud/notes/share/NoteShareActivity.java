@@ -76,6 +76,7 @@ import it.niedermann.owncloud.notes.share.listener.NoteShareItemAction;
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
 import it.niedermann.owncloud.notes.share.model.CreateShareResponse;
 import it.niedermann.owncloud.notes.share.model.CreateShareResponseExtensionsKt;
+import it.niedermann.owncloud.notes.share.model.UpdateShareRequest;
 import it.niedermann.owncloud.notes.share.model.UsersAndGroupsSearchConfig;
 import it.niedermann.owncloud.notes.share.repository.ShareRepository;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
@@ -84,6 +85,7 @@ import it.niedermann.owncloud.notes.shared.util.DisplayUtils;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 import it.niedermann.owncloud.notes.shared.util.clipboard.ClipboardUtil;
 import it.niedermann.owncloud.notes.shared.util.extensions.BundleExtensionsKt;
+import it.niedermann.owncloud.notes.util.DateUtil;
 
 public class NoteShareActivity extends BrandedActivity implements ShareeListAdapterListener, NoteShareItemAction, QuickSharingPermissionsBottomSheetDialog.QuickPermissionSharingBottomSheetActions, SharePasswordDialogFragment.SharePasswordDialogListener {
 
@@ -856,13 +858,14 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
         executorService.submit(() -> {
             {
-                final var requestBody = repository.getUpdateShareRequest(
-                        share.getNote(),
-                        share.getLabel(),
-                        password,
-                        -1,
-                        share.getPermissions(),
-                    share.isHideFileDownload()
+                final var requestBody = new UpdateShareRequest(
+                    share.getPermissions(),
+                    password,
+                    share.getNote(),
+                    share.getLabel(),
+                    DateUtil.INSTANCE.getExpirationDate(share.getExpirationDate()),
+                    "[]",
+                    Boolean.toString(share.isHideFileDownload())
                 );
                 final var result = repository.updateShare(share.getId(), requestBody);
 

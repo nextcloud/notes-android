@@ -66,14 +66,6 @@ class ShareRepository(private val applicationContext: Context, private val accou
         }
     }
 
-    private fun getExpirationDate(chosenExpDateInMills: Long): String? {
-        if (chosenExpDateInMills == -1L) {
-            return null
-        }
-
-        return Date(chosenExpDateInMills).toExpirationDateString()
-    }
-
     fun getCapabilities(): Capabilities = notesRepository.capabilities
 
     // region API calls
@@ -195,25 +187,6 @@ class ShareRepository(private val applicationContext: Context, private val accou
         } else {
             ArrayList()
         }
-    }
-
-    fun getUpdateShareRequest(
-        noteText: String?,
-        label: String?,
-        password: String,
-        chosenExpDateInMills: Long,
-        permission: Int,
-        hideDownload: Boolean
-    ): UpdateShareRequest {
-        return UpdateShareRequest(
-            permissions = if (permission == -1) null else permission,
-            password = password,
-            expireDate = getExpirationDate(chosenExpDateInMills),
-            label = label,
-            note = noteText,
-            attributes = "[]",
-            hideDownload = hideDownload.toString()
-        )
     }
 
     fun sendEmail(shareId: Long, requestBody: SharePasswordRequest): Boolean {
