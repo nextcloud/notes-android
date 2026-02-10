@@ -16,7 +16,6 @@ import com.nextcloud.android.common.ui.theme.utils.ColorRole
 import com.nextcloud.android.sso.helper.SingleAccountHelper
 import com.owncloud.android.lib.common.utils.Log_OC
 import com.owncloud.android.lib.resources.shares.OCShare
-import com.owncloud.android.lib.resources.shares.SharePermissionsBuilder
 import com.owncloud.android.lib.resources.shares.ShareType
 import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.branding.BrandedActivity
@@ -141,10 +140,6 @@ class NoteShareDetailActivity :
                 themeRadioButton(canEditRadioButton)
 
                 colorTextView(shareProcessEditShareLink)
-                colorTextView(shareProcessAdvancePermissionTitle)
-
-                themeCheckbox(shareProcessAllowResharingCheckbox)
-
                 colorTextView(title, ColorRole.ON_SURFACE)
             }
 
@@ -191,10 +186,6 @@ class NoteShareDetailActivity :
         }
 
         updateView()
-
-        if (isSecureShare) {
-            binding.shareProcessAdvancePermissionTitle.visibility = View.GONE
-        }
 
         // show or hide expiry date
         if (isExpDateShown && !isSecureShare) {
@@ -329,20 +320,7 @@ class NoteShareDetailActivity :
             shareProcessChangeNameSwitch.visibility = View.GONE
             shareProcessChangeNameContainer.visibility = View.GONE
             shareProcessHideDownloadCheckbox.visibility = View.GONE
-            if (isSecureShare) {
-                shareProcessAllowResharingCheckbox.visibility = View.GONE
-            } else {
-                shareProcessAllowResharingCheckbox.visibility = View.VISIBLE
-            }
             shareProcessSetPasswordSwitch.visibility = View.GONE
-
-            if (share != null) {
-                if (!isReShareShown) {
-                    shareProcessAllowResharingCheckbox.visibility = View.GONE
-                }
-                shareProcessAllowResharingCheckbox.isChecked =
-                    SharePermissionManager.canReshare(share)
-            }
         }
     }
 
@@ -352,7 +330,6 @@ class NoteShareDetailActivity :
     private fun updateViewForExternalAndLinkShare() {
         binding.run {
             shareProcessHideDownloadCheckbox.visibility = View.VISIBLE
-            shareProcessAllowResharingCheckbox.visibility = View.GONE
             shareProcessSetPasswordSwitch.visibility = View.VISIBLE
 
             if (share != null) {
@@ -499,10 +476,6 @@ class NoteShareDetailActivity :
         }
     }
 
-    private fun getReSharePermission(): Int = SharePermissionsBuilder().apply {
-        setSharePermission(true)
-    }.build()
-
     /**
      * method to validate the step 1 screen information
      */
@@ -562,9 +535,8 @@ class NoteShareDetailActivity :
      *  get the permissions on the basis of selection
      */
     private fun getSelectedPermission() = when {
-        binding.shareProcessAllowResharingCheckbox.isChecked -> getReSharePermission()
         binding.canViewRadioButton.isChecked -> OCShare.READ_PERMISSION_FLAG
-        binding.canEditRadioButton.isChecked -> OCShare.MAXIMUM_PERMISSIONS_FOR_FILE
+        binding.canEditRadioButton.isChecked -> SharePermissionManager.getMaximumPermission()
         else -> permission
     }
 
