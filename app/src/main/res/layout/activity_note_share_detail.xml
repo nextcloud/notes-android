@@ -80,24 +80,6 @@
 
             </RadioGroup>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/share_process_advance_permission_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacer_2x"
-                android:text="@string/note_share_detail_activity_advanced_settings"
-                android:textColor="@color/defaultBrand"
-                android:textStyle="bold"/>
-
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/share_process_allow_resharing_checkbox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="@dimen/minimum_size_for_touchable_area"
-                android:text="@string/allow_resharing"
-                android:visibility="gone"
-                tools:visibility="visible" />
-
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/share_process_set_password_switch"
                 android:layout_width="match_parent"
