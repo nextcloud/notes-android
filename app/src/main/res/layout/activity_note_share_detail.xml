@@ -65,14 +65,14 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/share_process_permission_read_only"
+                    android:id="@+id/can_view_radio_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minHeight="@dimen/minimum_size_for_touchable_area"
                     android:text="@string/link_share_view_only" />
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/share_process_permission_upload_editing"
+                    android:id="@+id/can_edit_radio_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minHeight="@dimen/minimum_size_for_touchable_area"
