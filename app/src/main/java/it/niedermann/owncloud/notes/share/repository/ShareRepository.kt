@@ -280,8 +280,9 @@ class ShareRepository(private val applicationContext: Context, private val accou
                     message = applicationContext.getString(R.string.note_share_created)
                 )
             } else {
-                Log_OC.d(tag, "Failed to update share: ${response.errorBody()?.string()}")
-                ApiResult.Error(message = response.getErrorMessage() ?: "")
+                val message = response.errorBody()?.string()
+                Log_OC.d(tag, "Failed to update share: $message")
+                ApiResult.Error(message = message ?: "")
             }
         } catch (e: Exception) {
             Log_OC.d(tag, "Exception while updating share", e)

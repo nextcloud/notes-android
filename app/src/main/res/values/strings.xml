@@ -69,7 +69,7 @@
 
 
     <!-- NoteShareDetailActivity -->
-    <string name="note_share_detail_activity_advanced_settings">Advanced Settings</string>
+    <string name="note_share_detail_activity_password_error_message">This password looks a bit weak. For better security, try using a longer password with a mix of letters, numbers, and symbols.</string>
     <string name="note_share_detail_activity_share_via_link_hide_download">Hide download</string>
     <string name="note_share_detail_activity_share_send_note">Note to recipient</string>
     <string name="note_share_detail_activity_hint_note">Note</string>

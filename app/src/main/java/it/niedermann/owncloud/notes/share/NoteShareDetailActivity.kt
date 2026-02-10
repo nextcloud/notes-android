@@ -21,6 +21,7 @@ import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.branding.BrandedActivity
 import it.niedermann.owncloud.notes.branding.BrandingUtil
 import it.niedermann.owncloud.notes.databinding.ActivityNoteShareDetailBinding
+import it.niedermann.owncloud.notes.persistence.ApiResult
 import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.persistence.isSuccess
 import it.niedermann.owncloud.notes.share.dialog.ExpirationDatePickerDialogFragment
@@ -578,10 +579,15 @@ class NoteShareDetailActivity :
             val sendEmailResult = repository.sendEmail(share!!.id, SharePasswordRequest(password))
             handleResult(sendEmailResult)
         } else {
-            handleResult(updateShareResult.isSuccess())
+            val errorResult = updateShareResult as ApiResult.Error
+            var errorMessage: String? = null
+            if (errorResult.message.contains("password")) {
+                errorMessage = getString(R.string.note_share_detail_activity_password_error_message)
+            }
+            handleResult(false, errorMessage = errorMessage)
         }
 
-        if (!sendEmail) {
+        if (updateShareResult.isSuccess() && !sendEmail) {
             withContext(Dispatchers.Main) {
                 if (!TextUtils.isEmpty(share?.shareLink)) {
                     ClipboardUtil.copyToClipboard(this@NoteShareDetailActivity, share?.shareLink)
@@ -613,16 +619,17 @@ class NoteShareDetailActivity :
         handleResult(result.isSuccess())
     }
 
-    private suspend fun handleResult(success: Boolean) {
+    private suspend fun handleResult(success: Boolean, errorMessage: String? = null) {
         withContext(Dispatchers.Main) {
             if (success) {
                 val resultIntent = Intent()
                 setResult(RESULT_OK, resultIntent)
                 finish()
             } else {
+                val message = errorMessage ?: getString(R.string.note_share_detail_activity_create_share_error)
                 DisplayUtils.showSnackMessage(
                     this@NoteShareDetailActivity,
-                    getString(R.string.note_share_detail_activity_create_share_error)
+                    message
                 )
             }
         }
