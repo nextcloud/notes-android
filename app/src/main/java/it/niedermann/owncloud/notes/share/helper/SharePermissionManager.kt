@@ -11,11 +11,9 @@ import it.niedermann.owncloud.notes.share.model.QuickPermissionType
 
 object SharePermissionManager {
 
-    // region Permission check
     fun hasPermission(permission: Int, permissionFlag: Int): Boolean =
         permission != OCShare.NO_PERMISSION && (permission and permissionFlag) == permissionFlag
 
-    // region Helper Methods
     fun canEdit(share: OCShare?): Boolean {
         if (share == null) {
             return false
@@ -36,14 +34,6 @@ object SharePermissionManager {
                 )
     }
 
-    fun canReshare(share: OCShare?): Boolean {
-        if (share == null) {
-            return false
-        }
-
-        return (share.permissions and OCShare.SHARE_PERMISSION_FLAG) > 0
-    }
-
     fun getSelectedType(share: OCShare?): QuickPermissionType = if (canEdit(share)) {
         QuickPermissionType.CAN_EDIT
     } else if (isViewOnly(share)) {
@@ -53,5 +43,4 @@ object SharePermissionManager {
     }
 
     fun getMaximumPermission(): Int = OCShare.MAXIMUM_PERMISSIONS_FOR_FILE
-    // endregion
 }
