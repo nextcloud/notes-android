@@ -39,6 +39,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Date
+import kotlin.text.clear
 
 /**
  * Activity class to show share permission options, set expiration date, change label, set password, send note
@@ -119,17 +120,28 @@ class NoteShareDetailActivity :
 
             withContext(Dispatchers.Main) {
                 if (shareProcessStep == SCREEN_TYPE_PERMISSION) {
-                    showShareProcessFirst()
+                    setupUI()
                 } else {
-                    showShareProcessSecond()
+                    updateViewForNoteScreenType()
                 }
                 implementClickEvents()
+                setVisibilitiesOfShareOption()
             }
         }
     }
 
     private fun backPressed() {
         finish()
+    }
+
+    private fun setVisibilitiesOfShareOption() {
+        binding.run {
+            if (canSetFileRequest()) {
+                shareProcessPermissionFileDrop.visibility = View.VISIBLE
+            } else {
+                shareProcessPermissionFileDrop.visibility = View.GONE
+            }
+        }
     }
 
     override fun applyBrand(color: Int) {
@@ -184,16 +196,14 @@ class NoteShareDetailActivity :
         }
     }
 
-    private fun showShareProcessFirst() {
-        binding.shareProcessGroupOne.visibility = View.VISIBLE
-        binding.shareProcessEditShareLink.visibility = View.VISIBLE
-        binding.shareProcessGroupTwo.visibility = View.GONE
-
-        if (share != null) {
-            setupModificationUI()
-        } else {
-            setupUpdateUI()
+    private fun setupUI() {
+        binding.run {
+            shareProcessGroupOne.visibility = View.VISIBLE
+            shareProcessEditShareLink.visibility = View.VISIBLE
+            shareProcessGroupTwo.visibility = View.GONE
         }
+
+        updateView()
 
         if (isSecureShare) {
             binding.shareProcessAdvancePermissionTitle.visibility = View.GONE
@@ -211,7 +221,15 @@ class NoteShareDetailActivity :
         shareProcessStep = SCREEN_TYPE_PERMISSION
     }
 
-    private fun setupModificationUI() {
+    private fun updateView() {
+        if (share != null) {
+            updateViewForUpdate()
+        } else {
+            updateViewForCreate()
+        }
+    }
+
+    private fun updateViewForUpdate() {
         if (share?.isFolder == true) updateViewForFolder() else updateViewForFile()
 
         selectRadioButtonAccordingToPermission()
@@ -221,7 +239,7 @@ class NoteShareDetailActivity :
         // show different text for link share and other shares
         // because we have link to share in Public Link
         binding.shareProcessBtnNext.text = getString(
-            if (shareType == ShareType.PUBLIC_LINK) {
+            if (isPublicShare()) {
                 R.string.note_share_detail_activity_share_copy_link
             } else {
                 R.string.note_share_detail_activity_common_confirm
@@ -233,7 +251,22 @@ class NoteShareDetailActivity :
         showPasswordInput(binding.shareProcessSetPasswordSwitch.isChecked)
         updateExpirationDateView()
         showExpirationDateInput(binding.shareProcessSetExpDateSwitch.isChecked)
-        setMaxPermissionsIfDefaultPermissionExists()
+        maskPasswordInput()
+    }
+
+    private fun maskPasswordInput() {
+        if (share?.isPasswordProtected == false) {
+            return
+        }
+
+        binding.shareProcessEnterPassword.run {
+            setText("••••••")
+            setOnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) {
+                    text?.clear()
+                }
+            }
+        }
     }
 
     private fun selectRadioButtonAccordingToPermission() {
@@ -264,7 +297,7 @@ class NoteShareDetailActivity :
         }
     }
 
-    private fun setupUpdateUI() {
+    private fun updateViewForCreate() {
         binding.shareProcessBtnNext.text =
             getString(R.string.note_share_detail_activity_common_next)
         note.let {
@@ -273,6 +306,7 @@ class NoteShareDetailActivity :
         }
         showPasswordInput(binding.shareProcessSetPasswordSwitch.isChecked)
         showExpirationDateInput(binding.shareProcessSetExpDateSwitch.isChecked)
+        setMaxPermissionsIfDefaultPermissionExists()
     }
 
     private fun updateViewForShareType() {
@@ -387,7 +421,7 @@ class NoteShareDetailActivity :
     /**
      * update views for screen type Note
      */
-    private fun showShareProcessSecond() {
+    private fun updateViewForNoteScreenType() {
         binding.run {
             shareProcessGroupOne.visibility = View.GONE
             shareProcessEditShareLink.visibility = View.GONE
@@ -477,7 +511,7 @@ class NoteShareDetailActivity :
         // and if user is in step 1 (permission screen) then remove the activity
         else {
             if (shareProcessStep == SCREEN_TYPE_NOTE) {
-                showShareProcessFirst()
+                setupUI()
             } else {
                 finish()
             }
@@ -560,7 +594,7 @@ class NoteShareDetailActivity :
             }
         } else {
             // else show step 2 (note screen)
-            showShareProcessSecond()
+            updateViewForNoteScreenType()
         }
     }
 
