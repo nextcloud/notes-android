@@ -859,6 +859,14 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
         executorService.submit(() -> {
             {
+                boolean isDownloadAndAllowsSyncEnabled = repository.isAllowDownloadAndSync(share);
+
+                String attributes = UpdateShareRequest.Companion.createAttributes(
+                    repository.getCapabilities(),
+                    isDownloadAndAllowsSyncEnabled,
+                    share.getShareType()
+                );
+
                 final var requestBody = new UpdateShareRequest(
                     share.getPermissions(),
                     password,
@@ -866,7 +874,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                     share.getLabel(),
                     DateUtil.INSTANCE.getExpirationDate(share.getExpirationDate()),
                     Boolean.toString(share.isHideFileDownload()),
-                    ""
+                    attributes
                 );
                 final var result = repository.updateShare(share.getId(), requestBody);
 
