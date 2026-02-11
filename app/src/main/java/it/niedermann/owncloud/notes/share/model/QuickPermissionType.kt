@@ -10,6 +10,16 @@ import android.content.Context
 import com.owncloud.android.lib.resources.shares.OCShare
 import it.niedermann.owncloud.notes.R
 
+/**
+ * Represents predefined quick permission types for sharing a note.
+ *
+ * Each type defines:
+ * - An icon resource ([iconId])
+ * - A string resource ([textId])
+ * - A corresponding permission flag used by [OCShare]
+ *
+ * These types are typically used to simplify permission selection in the UI.
+ */
 enum class QuickPermissionType(val iconId: Int, val textId: Int) {
     NONE(R.drawable.ic_unknown, R.string.share_permission_unknown),
     VIEW_ONLY(R.drawable.ic_eye, R.string.share_permission_view_only),
