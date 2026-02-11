@@ -46,9 +46,6 @@ interface ShareAPI {
     @POST("shares?format=json")
     fun addShare(@Body request: CreateShareRequest): Call<OcsResponse<CreateShareResponse>>
 
-    @POST("shares/{shareId}/send-email?format=json")
-    fun sendEmail(@Path("shareId") shareId: Long, @Body password: SharePasswordRequest?): Call<Any>
-
     @PUT("shares/{shareId}?format=json")
     fun updateShare(@Path("shareId") shareId: Long, @Body request: UpdateShareRequest): Call<OcsResponse<CreateShareResponse>>
 

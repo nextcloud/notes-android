@@ -644,13 +644,13 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
     @Override
     public void advancedPermissions(OCShare share) {
-        modifyExistingShare(share, NoteShareDetailActivity.SCREEN_TYPE_PERMISSION);
+        modifyExistingShare(share, NoteShareDetailActivity.SCREEN_TYPE_PERMISSION, false);
     }
 
 
     @Override
     public void sendNewEmail(OCShare share) {
-        modifyExistingShare(share, NoteShareDetailActivity.SCREEN_TYPE_NOTE);
+        modifyExistingShare(share, NoteShareDetailActivity.SCREEN_TYPE_NOTE, true);
     }
 
     @Override
@@ -683,13 +683,14 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         createPublicShareLink();
     }
 
-    private void modifyExistingShare(OCShare share, int screenTypePermission) {
+    private void modifyExistingShare(OCShare share, int screenTypePermission, boolean sendEmail) {
         Bundle bundle = new Bundle();
 
         bundle.putSerializable(NoteShareDetailActivity.ARG_OCSHARE, share);
         bundle.putInt(NoteShareDetailActivity.ARG_SCREEN_TYPE, screenTypePermission);
         bundle.putBoolean(NoteShareDetailActivity.ARG_RESHARE_SHOWN, !isReshareForbidden(share));
         bundle.putBoolean(NoteShareDetailActivity.ARG_EXP_DATE_SHOWN, getExpDateShown());
+        bundle.putBoolean(NoteShareDetailActivity.ARG_SEND_EMAIL, sendEmail);
 
         Intent intent = new Intent(this, NoteShareDetailActivity.class);
         intent.putExtras(bundle);

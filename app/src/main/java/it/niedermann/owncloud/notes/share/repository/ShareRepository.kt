@@ -21,7 +21,6 @@ import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.persistence.entity.ShareEntity
 import it.niedermann.owncloud.notes.share.model.CreateShareRequest
 import it.niedermann.owncloud.notes.share.model.CreateShareResponse
-import it.niedermann.owncloud.notes.share.model.SharePasswordRequest
 import it.niedermann.owncloud.notes.share.model.UpdateSharePermissionRequest
 import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
 import it.niedermann.owncloud.notes.share.model.toOCShareList
@@ -184,24 +183,6 @@ class ShareRepository(private val applicationContext: Context, private val accou
             }.toCollection(ArrayList())
         } else {
             ArrayList()
-        }
-    }
-
-    fun sendEmail(shareId: Long, requestBody: SharePasswordRequest): Boolean {
-        val shareAPI = apiProvider.getShareAPI(applicationContext, account)
-        val call = shareAPI.sendEmail(shareId, requestBody)
-        val response = call.execute()
-
-        return try {
-            if (response.isSuccessful) {
-                true
-            } else {
-                Log_OC.d(tag, "Failed to send-email: ${response.errorBody()?.string()}")
-                false
-            }
-        } catch (e: Exception) {
-            Log_OC.d(tag, "Exception while send-email: $e")
-            false
         }
     }
 

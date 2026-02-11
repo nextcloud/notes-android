@@ -63,6 +63,7 @@ class NoteShareDetailActivity :
         const val ARG_SCREEN_TYPE = "arg_screen_type"
         const val ARG_RESHARE_SHOWN = "arg_reshare_shown"
         const val ARG_EXP_DATE_SHOWN = "arg_exp_date_shown"
+        const val ARG_SEND_EMAIL = "ard_send_email"
         private const val ARG_SECURE_SHARE = "secure_share"
 
         // types of screens to be displayed
@@ -82,9 +83,11 @@ class NoteShareDetailActivity :
     private var isReShareShown: Boolean = true // show or hide reShare option
     private var isExpDateShown: Boolean = true // show or hide expiry date option
     private var isSecureShare: Boolean = false
+    private var sendEmail: Boolean = false
 
     private var expirationDatePickerFragment: ExpirationDatePickerDialogFragment? = null
     private lateinit var repository: ShareRepository
+    private val passwordMask = "••••••"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -110,6 +113,7 @@ class NoteShareDetailActivity :
             isReShareShown = it.getBoolean(ARG_RESHARE_SHOWN, true)
             isExpDateShown = it.getBoolean(ARG_EXP_DATE_SHOWN, true)
             isSecureShare = it.getBoolean(ARG_SECURE_SHARE, false)
+            sendEmail = it.getBoolean(ARG_SEND_EMAIL, shareType == ShareType.EMAIL)
         }
 
         lifecycleScope.launch(Dispatchers.IO) {
@@ -240,7 +244,7 @@ class NoteShareDetailActivity :
         }
 
         binding.shareProcessEnterPassword.run {
-            setText("••••••")
+            setText(passwordMask)
             setOnFocusChangeListener { _, hasFocus ->
                 if (hasFocus) {
                     text?.clear()
@@ -525,7 +529,7 @@ class NoteShareDetailActivity :
                 val noteText = binding.noteText.text.toString().trim()
                 val password = binding.shareProcessEnterPassword.text.toString().trim()
                 val label = binding.shareProcessChangeName.text.toString()
-                updateShare(noteText, label, password, false)
+                updateShare(noteText, label, password)
             }
         } else {
             // else show step 2 (note screen)
@@ -552,47 +556,53 @@ class NoteShareDetailActivity :
         lifecycleScope.launch(Dispatchers.IO) {
             if (share != null && share?.note != noteText) {
                 val label = binding.shareProcessChangeName.text.toString()
-                updateShare(noteText, label, password, true)
+                updateShare(noteText, label, password)
             } else {
                 createShare(noteText, password)
             }
         }
     }
 
-    private suspend fun updateShare(noteText: String, label: String, password: String, sendEmail: Boolean) {
-        val hideDownload = binding.shareProcessHideDownloadCheckbox.isChecked
-
-        val requestBody = UpdateShareRequest(
-            permissions = if (permission == -1) null else permission,
-            password = password,
+    private suspend fun updateShare(
+        noteText: String,
+        label: String,
+        password: String
+    ) {
+        val request = UpdateShareRequest(
+            permissions = permission.takeIf { it != -1 },
+            password = if (password != passwordMask) {
+                password
+            } else {
+                null
+            },
             expireDate = DateUtil.getExpirationDate(chosenExpDateInMills),
             label = label,
             note = noteText,
             attributes = "[]",
-            hideDownload = hideDownload.toString()
+            hideDownload = binding.shareProcessHideDownloadCheckbox.isChecked.toString()
         )
 
-        val updateShareResult = repository.updateShare(share!!.id, requestBody)
+        val result = repository.updateShare(share?.id ?: return, request)
 
-        if (updateShareResult.isSuccess() && sendEmail) {
-            val sendEmailResult = repository.sendEmail(share!!.id, SharePasswordRequest(password))
-            handleResult(sendEmailResult)
-        } else {
-            val errorResult = updateShareResult as ApiResult.Error
-            var errorMessage: String? = null
-            if (errorResult.message.contains("password")) {
-                errorMessage = getString(R.string.note_share_detail_activity_password_error_message)
-            }
-            handleResult(false, errorMessage = errorMessage)
+        if (!result.isSuccess()) {
+            val errorMessage = (result as? ApiResult.Error)
+                ?.message
+                ?.takeIf { it.contains("password", ignoreCase = true) }
+                ?.let { getString(R.string.note_share_detail_activity_password_error_message) }
+
+            handleResult(false, errorMessage)
+            return
         }
 
-        if (updateShareResult.isSuccess() && !sendEmail) {
-            withContext(Dispatchers.Main) {
-                if (!TextUtils.isEmpty(share?.shareLink)) {
-                    ClipboardUtil.copyToClipboard(this@NoteShareDetailActivity, share?.shareLink)
+        handleResult(true)
+
+        share?.shareLink
+            ?.takeIf { it.isNotEmpty() }
+            ?.let {
+                withContext(Dispatchers.Main) {
+                    ClipboardUtil.copyToClipboard(this@NoteShareDetailActivity, it)
                 }
             }
-        }
     }
 
     private suspend fun createShare(noteText: String, password: String) {
