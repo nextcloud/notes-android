@@ -46,7 +46,19 @@ class SuggestionAdapter(context: Context, cursor: Cursor?, private val account: 
     override fun bindView(view: View, context: Context, cursor: Cursor) {
         val suggestion =
             cursor.getString(cursor.getColumnIndexOrThrow(SearchManager.SUGGEST_COLUMN_TEXT_1))
-        view.findViewById<TextView>(R.id.suggestion_text).text = suggestion
+        val suggestionTextView = view.findViewById<TextView>(R.id.suggestion_text)
+        suggestionTextView.text = suggestion
+
+        val sublineColumn = cursor.getColumnIndex(SearchManager.SUGGEST_COLUMN_TEXT_2)
+        if (sublineColumn != -1 && suggestionTextView.text.isEmpty()) {
+            val subline = cursor.getStringOrNull(sublineColumn)
+            if (!subline.isNullOrEmpty()) {
+                suggestionTextView.visibility = View.VISIBLE
+                suggestionTextView.text = subline
+            } else {
+                suggestionTextView.visibility = View.GONE
+            }
+        }
 
         val icon = view.findViewById<ImageView>(R.id.suggestion_icon)
         val iconColumn = cursor.getColumnIndex(SearchManager.SUGGEST_COLUMN_ICON_1)

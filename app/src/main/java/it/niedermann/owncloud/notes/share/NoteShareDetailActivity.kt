@@ -27,7 +27,6 @@ import it.niedermann.owncloud.notes.persistence.isSuccess
 import it.niedermann.owncloud.notes.share.dialog.ExpirationDatePickerDialogFragment
 import it.niedermann.owncloud.notes.share.helper.SharePermissionManager
 import it.niedermann.owncloud.notes.share.model.QuickPermissionType
-import it.niedermann.owncloud.notes.share.model.SharePasswordRequest
 import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
 import it.niedermann.owncloud.notes.share.repository.ShareRepository
 import it.niedermann.owncloud.notes.shared.util.DisplayUtils

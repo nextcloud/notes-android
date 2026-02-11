@@ -21,7 +21,7 @@
         android:id="@+id/copy_internal_link_icon"
         android:layout_width="@dimen/default_icon_size"
         android:layout_height="@dimen/default_icon_size"
-        android:layout_gravity="top"
+        android:layout_gravity="center"
         android:layout_marginStart="@dimen/spacer_2x"
         android:layout_marginEnd="@dimen/spacer_2x"
         android:background="@drawable/round_bgnd"
