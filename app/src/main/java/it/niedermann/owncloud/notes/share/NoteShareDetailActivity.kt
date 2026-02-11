@@ -628,7 +628,12 @@ class NoteShareDetailActivity :
             "false", // TODO: Check how to determine it
             password,
             permission,
-            noteText
+            noteText,
+            UpdateShareRequest.createAttributes(
+                repository.getCapabilities(),
+                binding.allowDownloadAndSync.isChecked,
+                shareType
+            )
         )
 
         if (result.isSuccess()) {

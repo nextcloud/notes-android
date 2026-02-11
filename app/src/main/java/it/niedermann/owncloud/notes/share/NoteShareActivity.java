@@ -398,7 +398,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             requestPasswordForShareViaLink(true, capabilities.getAskForOptionalPassword());
         } else {
             executorService.submit(() -> {
-                final var result = repository.addShare(note, ShareType.PUBLIC_LINK, "", "false", "", 0, "");
+                final var result = repository.addShare(note, ShareType.PUBLIC_LINK, "");
                 runOnUiThread(() -> {
                     if (result instanceof ApiResult.Success<OcsResponse<CreateShareResponse>> successResponse && binding.sharesList.getAdapter() instanceof ShareeListAdapter adapter) {
                         DisplayUtils.showSnackMessage(NoteShareActivity.this, successResponse.getMessage());
@@ -835,8 +835,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                     "",
                     "false",
                     password,
-                    repository.getCapabilities().getDefaultPermission(),
-                    ""
+                    repository.getCapabilities().getDefaultPermission()
             );
 
             runOnUiThread(() -> {
