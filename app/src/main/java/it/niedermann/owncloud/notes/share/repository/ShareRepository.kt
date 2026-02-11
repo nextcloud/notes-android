@@ -21,6 +21,8 @@ import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.persistence.entity.ShareEntity
 import it.niedermann.owncloud.notes.share.model.CreateShareRequest
 import it.niedermann.owncloud.notes.share.model.CreateShareResponse
+import it.niedermann.owncloud.notes.share.model.ShareAttributesV1
+import it.niedermann.owncloud.notes.share.model.ShareAttributesV2
 import it.niedermann.owncloud.notes.share.model.UpdateSharePermissionRequest
 import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
 import it.niedermann.owncloud.notes.share.model.toOCShareList
@@ -127,6 +129,18 @@ class ShareRepository(private val applicationContext: Context, private val accou
 
     fun getShareByPathAndDisplayName(share: OCShare): ShareEntity? {
         return notesRepository.getShareByPathAndDisplayName(share)
+    }
+
+    fun isAllowDownloadAndSync(share: OCShare): Boolean {
+        val entity = getShareByPathAndDisplayName(share)
+        val attributes = entity?.attributes ?: return false
+        val capabilities = notesRepository.capabilities
+        val shouldUseShareAttributesV2 = (capabilities.nextcloudMajorVersion?.toInt() ?: 0) >= 30
+        return if (shouldUseShareAttributesV2) {
+            ShareAttributesV2.getAttributes(attributes).first().value
+        } else {
+            ShareAttributesV1.getAttributes(attributes).first().enabled
+        }
     }
 
     private fun LinkedTreeMap<*, *>.getList(key: String): ArrayList<*>? = this[key] as? ArrayList<*>

@@ -43,8 +43,8 @@ data class UpdateShareRequest(
     val attributes: String? = null
 ) {
     companion object {
-        fun createAttributes(capabilities: Capabilities, allowDownloadAndSync: Boolean, type: ShareType): String {
-            if (type != ShareType.INTERNAL && type != ShareType.USER) {
+        fun createAttributes(capabilities: Capabilities, allowDownloadAndSync: Boolean, type: ShareType?): String {
+            if (type == null || (type != ShareType.INTERNAL && type != ShareType.USER)) {
                 return "[]"
             }
 
