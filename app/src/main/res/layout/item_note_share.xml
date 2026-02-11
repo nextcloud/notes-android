@@ -1,13 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
  ~ Nextcloud Notes - Android Client
  ~
  ~ SPDX-FileCopyrightText: 2015-2025 Nextcloud GmbH and Nextcloud contributors
  ~ SPDX-License-Identifier: GPL-3.0-or-later
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/share_by_link_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -51,12 +50,12 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:gravity="center_vertical"
-            android:visibility="gone"
             android:singleLine="true"
-            tools:text="5 downloads remaining"
-            tools:visibility="visible"
             android:textColor="@color/fg_default_selection"
-            android:textSize="@dimen/note_font_size_small" />
+            android:textSize="@dimen/note_font_size_small"
+            android:visibility="gone"
+            tools:text="5 downloads remaining"
+            tools:visibility="visible" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/permission_name"
@@ -64,34 +63,36 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:singleLine="true"
-            tools:text="View only"
-            app:drawableEndCompat="@drawable/ic_baseline_arrow_drop_down_24"
-            app:drawableTint="@color/defaultBrand"
-            app:drawableRightCompat="@drawable/ic_baseline_arrow_drop_down_24"
             android:textColor="@color/defaultBrand"
-            android:textSize="@dimen/note_font_size_minimum" />
+            android:textSize="@dimen/note_font_size_minimum"
+            app:drawableEndCompat="@drawable/ic_baseline_arrow_drop_down_24"
+            app:drawableRightCompat="@drawable/ic_baseline_arrow_drop_down_24"
+            app:drawableTint="@color/defaultBrand"
+            tools:text="View only" />
     </LinearLayout>
 
-    <ImageView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/copy_link"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/Button.IconButton"
+        android:layout_width="@dimen/minimum_size_for_touchable_area"
+        android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
         android:contentDescription="@string/note_share_activity_copy_icon_content_description"
-        android:paddingStart="@dimen/spacer_2x"
-        android:paddingTop="@dimen/spacer_1hx"
-        android:paddingEnd="@dimen/spacer_2x"
-        android:paddingBottom="@dimen/spacer_1hx"
+        android:minHeight="@dimen/minimum_size_for_touchable_area"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_content_copy" />
+        app:icon="@drawable/ic_content_copy"
+        app:iconSize="@dimen/iconized_single_line_item_icon_size"
+        app:iconTint="@color/icon_color_default" />
 
-    <ImageView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/overflow_menu"
-        android:layout_width="wrap_content"
+        style="@style/Button.IconButton"
+        android:layout_width="@dimen/minimum_size_for_touchable_area"
         android:layout_height="match_parent"
         android:contentDescription="@string/note_share_activity_more_icon_content_description"
-        android:paddingStart="@dimen/spacer_2x"
-        android:paddingEnd="@dimen/spacer_2x"
-        android:src="@drawable/ic_dots_vertical" />
+        android:minHeight="@dimen/minimum_size_for_touchable_area"
+        app:icon="@drawable/ic_dots_vertical"
+        app:iconSize="@dimen/iconized_single_line_item_icon_size"
+        app:iconTint="@color/icon_color_default" />
 
 </LinearLayout>
