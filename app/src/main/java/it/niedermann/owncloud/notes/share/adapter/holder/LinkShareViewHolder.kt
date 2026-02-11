@@ -21,6 +21,10 @@ import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener
 import it.niedermann.owncloud.notes.share.model.QuickPermissionType
 import it.niedermann.owncloud.notes.util.remainingDownloadLimit
 
+/**
+ * ViewHolder responsible for displaying public and email link shares
+ * inside the share list.
+ */
 class LinkShareViewHolder(
     private val binding: ItemShareLinkShareBinding
 ) : BrandedViewHolder(binding.root) {

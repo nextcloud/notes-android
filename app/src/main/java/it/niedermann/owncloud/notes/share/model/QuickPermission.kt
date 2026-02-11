@@ -6,4 +6,7 @@
  */
 package it.niedermann.owncloud.notes.share.model
 
+/**
+ * Represents a selectable quick permission option in the UI.
+ */
 data class QuickPermission(val type: QuickPermissionType, var isSelected: Boolean)

@@ -9,6 +9,14 @@ package it.niedermann.owncloud.notes.share.helper
 import com.owncloud.android.lib.resources.shares.OCShare
 import it.niedermann.owncloud.notes.share.model.QuickPermissionType
 
+/**
+ * Utility object responsible for evaluating and mapping share permissions.
+ *
+ * Provides helper methods to:
+ * - Check specific permission flags
+ * - Determine edit/view-only capability
+ * - Map raw permission flags to [QuickPermissionType]
+ */
 object SharePermissionManager {
 
     fun hasPermission(permission: Int, permissionFlag: Int): Boolean =
