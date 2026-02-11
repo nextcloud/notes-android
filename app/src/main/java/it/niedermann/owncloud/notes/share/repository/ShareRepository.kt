@@ -291,6 +291,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
 
     fun updateNote(note: Note) = notesRepository.updateNote(note)
 
+    @JvmOverloads
     fun addShare(
         note: Note,
         shareType: ShareType,
@@ -298,7 +299,8 @@ class ShareRepository(private val applicationContext: Context, private val accou
         publicUpload: String = "false",
         password: String = "",
         permissions: Int = 0,
-        shareNote: String = ""
+        shareNote: String = "",
+        attributes: String = "[]"
     ): ApiResult<OcsResponse<CreateShareResponse>?> {
         val defaultErrorMessage =
             applicationContext.getString(R.string.note_share_activity_cannot_created)
@@ -316,7 +318,8 @@ class ShareRepository(private val applicationContext: Context, private val accou
             publicUpload = publicUpload,
             password = password,
             permissions = permissions,
-            note = shareNote
+            note = shareNote,
+            attributes = attributes
         )
 
         val shareAPI = apiProvider.getShareAPI(applicationContext, account)
