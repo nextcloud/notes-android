@@ -94,6 +94,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
                     val url = map?.get("url") as? String
                     val expirationDateString = map?.get("expiration") as? String
                     val permissions = map?.get("permissions") as? Double
+                    val attributes = map?.get("attributes") as? String
 
                     id?.toInt()?.let {
                         val entity = ShareEntity(
@@ -109,7 +110,8 @@ class ShareRepository(private val applicationContext: Context, private val accou
                             displayname_owner = displayNameOwner,
                             url = url,
                             expiration_date = expirationDateString?.toExpirationDateLong(),
-                            permissions = permissions
+                            permissions = permissions,
+                            attributes = attributes
                         )
 
                         entities.add(entity)
@@ -121,6 +123,10 @@ class ShareRepository(private val applicationContext: Context, private val accou
         } catch (e: Exception) {
             Log_OC.d(tag, "Exception while getSharesForSpecificNote: $e")
         }
+    }
+
+    fun getShareByPathAndDisplayName(share: OCShare): ShareEntity? {
+        return notesRepository.getShareByPathAndDisplayName(share)
     }
 
     private fun LinkedTreeMap<*, *>.getList(key: String): ArrayList<*>? = this[key] as? ArrayList<*>

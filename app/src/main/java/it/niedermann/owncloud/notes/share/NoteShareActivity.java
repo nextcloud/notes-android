@@ -865,8 +865,8 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                     share.getNote(),
                     share.getLabel(),
                     DateUtil.INSTANCE.getExpirationDate(share.getExpirationDate()),
-                    "[]",
-                    Boolean.toString(share.isHideFileDownload())
+                    Boolean.toString(share.isHideFileDownload()),
+                    ""
                 );
                 final var result = repository.updateShare(share.getId(), requestBody);
 

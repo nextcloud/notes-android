@@ -27,6 +27,8 @@ import it.niedermann.owncloud.notes.persistence.isSuccess
 import it.niedermann.owncloud.notes.share.dialog.ExpirationDatePickerDialogFragment
 import it.niedermann.owncloud.notes.share.helper.SharePermissionManager
 import it.niedermann.owncloud.notes.share.model.QuickPermissionType
+import it.niedermann.owncloud.notes.share.model.ShareAttributesV1
+import it.niedermann.owncloud.notes.share.model.ShareAttributesV2
 import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
 import it.niedermann.owncloud.notes.share.repository.ShareRepository
 import it.niedermann.owncloud.notes.shared.util.DisplayUtils
@@ -149,6 +151,7 @@ class NoteShareDetailActivity :
             }
 
             util.androidx.run {
+                colorSwitchCompat(allowDownloadAndSync)
                 colorSwitchCompat(shareProcessSetPasswordSwitch)
                 colorSwitchCompat(shareProcessSetExpDateSwitch)
                 colorSwitchCompat(shareProcessHideDownloadCheckbox)
@@ -326,6 +329,23 @@ class NoteShareDetailActivity :
             shareProcessChangeNameContainer.visibility = View.GONE
             shareProcessHideDownloadCheckbox.visibility = View.GONE
             shareProcessSetPasswordSwitch.visibility = View.GONE
+            allowDownloadAndSync.visibility = View.VISIBLE
+
+            share?.let {
+                val entity = repository.getShareByPathAndDisplayName(it)
+                val attributes = entity?.attributes ?: return
+                share?.attributes = attributes
+
+                val capabilities = repository.getCapabilities()
+                val shouldUseShareAttributesV2 = (capabilities.nextcloudMajorVersion?.toInt() ?: 0) >= 30
+                val isDownloadAndAllowsSyncEnabled = if (shouldUseShareAttributesV2) {
+                    ShareAttributesV2.getAttributes(attributes).first().value
+                } else {
+                    ShareAttributesV1.getAttributes(attributes).first().enabled
+                }
+
+                binding.allowDownloadAndSync.isChecked = isDownloadAndAllowsSyncEnabled
+            }
         }
     }
 
@@ -577,7 +597,11 @@ class NoteShareDetailActivity :
             expireDate = DateUtil.getExpirationDate(chosenExpDateInMills),
             label = label,
             note = noteText,
-            attributes = "[]",
+            attributes = UpdateShareRequest.createAttributes(
+                repository.getCapabilities(),
+                binding.allowDownloadAndSync.isChecked,
+                shareType
+            ),
             hideDownload = binding.shareProcessHideDownloadCheckbox.isChecked.toString()
         )
 

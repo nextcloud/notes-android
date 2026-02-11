@@ -136,6 +136,16 @@
 
 
             <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/allow_download_and_sync"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacer_1x"
+                android:minHeight="@dimen/minimum_size_for_touchable_area"
+                android:text="@string/note_share_detail_activity_allow_download_and_sync"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/share_process_hide_download_checkbox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
