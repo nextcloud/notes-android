@@ -49,6 +49,7 @@ import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 import com.owncloud.android.lib.common.utils.Log_OC;
+import com.owncloud.android.lib.resources.shares.OCShare;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -1006,8 +1007,12 @@ public class NotesRepository {
         db.getShareDao().addShareEntities(entities);
     }
 
-    public List<ShareEntity> getShareEntities(String path) {
-        return db.getShareDao().getShareEntities(path);
+    public ShareEntity getShareByPathAndDisplayName(@NonNull OCShare share) {
+        if (share.getPath() == null || share.getSharedWithDisplayName() == null) {
+            return null;
+        }
+
+        return db.getShareDao().getShareByPathAndDisplayName(share.getPath(), share.getSharedWithDisplayName());
     }
 
     public void deleteShareById(int id) {
