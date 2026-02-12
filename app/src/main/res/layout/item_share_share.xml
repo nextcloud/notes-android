@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Nextcloud - Android Client
   ~
   ~ SPDX-FileCopyrightText: 2021 TSI-mc
@@ -65,11 +64,11 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/overflow_menu"
-        style="@style/Button.IconButton"
+        style="?attr/materialIconButtonStyle"
         android:layout_width="@dimen/minimum_size_for_touchable_area"
         android:layout_height="match_parent"
-        android:minHeight="@dimen/minimum_size_for_touchable_area"
         android:contentDescription="@string/note_share_activity_more_icon_content_description"
+        android:minHeight="@dimen/minimum_size_for_touchable_area"
         app:cornerRadius="@dimen/iconized_single_line_item_icon_size"
         app:icon="@drawable/ic_dots_vertical"
         app:iconSize="@dimen/iconized_single_line_item_icon_size"

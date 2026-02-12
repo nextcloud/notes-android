@@ -69,8 +69,9 @@
 
 
     <!-- NoteShareDetailActivity -->
-    <string name="note_share_detail_activity_advanced_settings">Advanced Settings</string>
+    <string name="note_share_detail_activity_password_error_message">This password looks a bit weak. For better security, try using a longer password with a mix of letters, numbers, and symbols.</string>
     <string name="note_share_detail_activity_share_via_link_hide_download">Hide download</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Allow download and sync</string>
     <string name="note_share_detail_activity_share_send_note">Note to recipient</string>
     <string name="note_share_detail_activity_hint_note">Note</string>
     <string name="note_share_detail_activity_common_next">Next</string>
@@ -109,7 +110,8 @@
     <string name="share_internal_link_to_folder_text">Internal share link only works for users with access to this folder</string>
     <string name="share_internal_link_to_file_text">Internal share link only works for users with access to this file</string>
     <string name="share_internal_link">Share internal link</string>
-    <string name="delete_link">Delete Link</string>
+    <string name="share_delete_link">Delete link</string>
+    <string name="delete_share">Delete share</string>
     <string name="share_settings">Settings</string>
     <string name="share_send_new_email">Send new email</string>
     <string name="share_dialog_title">Sharing</string>
@@ -135,6 +137,9 @@
     <string name="link_share_file_drop">File drop (upload only)</string>
     <string name="could_not_retrieve_shares">Could not retrieve shares</string>
     <string name="share_permission_view_only">View only</string>
+    <string name="share_permission_unknown">Unknown</string>
+
+    <string name="share_permission_file_request">File request</string>
     <string name="share_permission_can_edit">Can edit</string>
     <string name="share_permission_file_drop">File drop</string>
     <string name="share_permission_secure_file_drop">Secure file drop</string>

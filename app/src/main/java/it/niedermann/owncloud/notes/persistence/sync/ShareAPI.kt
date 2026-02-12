@@ -24,7 +24,7 @@ import retrofit2.http.Query
 
 interface ShareAPI {
     @GET("sharees")
-    fun getSharees(
+    fun fetchSharees(
         @Query("format") format: String = "json",
         @Query("itemType") itemType: String = "file",
         @Query("search") search: String,
@@ -33,14 +33,8 @@ interface ShareAPI {
         @Query("lookup") lookup: String = "false",
     ): LinkedTreeMap<String, Any?>?
 
-    @GET("shares/{remoteId}?format=json")
-    fun getShares(
-        @Path("remoteId") remoteId: Long,
-        @Query("include_tags") includeTags: Boolean = true,
-    ): Call<OcsResponse<List<CreateShareResponse>>>
-
     @GET("shares/?format=json")
-    fun getSharesForSpecificNote(
+    fun fetchSharesForSpecificNote(
         @Query("path") path: String,
         @Query("reshares") reshares: Boolean = true,
         @Query("subfiles") subfiles: Boolean = true
@@ -52,9 +46,6 @@ interface ShareAPI {
     @POST("shares?format=json")
     fun addShare(@Body request: CreateShareRequest): Call<OcsResponse<CreateShareResponse>>
 
-    @POST("shares/{shareId}/send-email?format=json")
-    fun sendEmail(@Path("shareId") shareId: Long, @Body password: SharePasswordRequest?): Call<Any>
-
     @PUT("shares/{shareId}?format=json")
     fun updateShare(@Path("shareId") shareId: Long, @Body request: UpdateShareRequest): Call<OcsResponse<CreateShareResponse>>
 
@@ -65,8 +56,8 @@ interface ShareAPI {
     ): Call<OcsResponse<CreateShareResponse>>
 
     @GET("shares/?format=json")
-    fun getShareFromNote(
+    fun fetchSharesFromNote(
         @Query("path") path: String,
-        @Query("shared_with_me") sharedWithMe: Boolean = true
+        @Query("shared_with_me") sharedWithMe: Boolean = false
     ): Call<OcsResponse<List<CreateShareResponse>>>
 }

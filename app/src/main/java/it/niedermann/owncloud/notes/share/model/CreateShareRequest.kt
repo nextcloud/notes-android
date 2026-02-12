@@ -28,5 +28,8 @@ data class CreateShareRequest(
     val permissions: Int?,
 
     @Expose
-    val note: String?
+    val note: String?,
+
+    @Expose
+    val attributes: String?
 )
