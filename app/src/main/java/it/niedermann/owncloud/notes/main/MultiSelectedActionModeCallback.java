@@ -166,11 +166,7 @@ public class MultiSelectedActionModeCallback implements Callback {
                     currentAccount$.removeObservers(lifecycleOwner);
                     executor.submit(() -> {{
                         final var note = mainViewModel.getFullNote(selection.get(0));
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable(NoteShareActivity.ARG_NOTE, note);
-                        bundle.putSerializable(NoteShareActivity.ARG_ACCOUNT, account);
-                        Intent intent = new Intent(mainActivity, NoteShareActivity.class);
-                        intent.putExtras(bundle);
+                        final Intent intent = NoteShareActivity.getActivityStartIntent(note, account, mainActivity);
                         mainActivity.startActivity(intent);
                     }});
                 });

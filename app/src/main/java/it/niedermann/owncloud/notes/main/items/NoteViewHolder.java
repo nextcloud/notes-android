@@ -6,6 +6,7 @@
  */
 package it.niedermann.owncloud.notes.main.items;
 
+import static android.view.View.GONE;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static com.nextcloud.android.common.ui.util.PlatformThemeUtil.isDarkMode;
@@ -23,6 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.selection.ItemDetailsLookup;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.nextcloud.android.common.core.utils.DateFormatter;
@@ -76,7 +78,7 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
 
     protected void bindCategory(@NonNull Context context, @NonNull TextView noteCategory, boolean showCategory, @NonNull String category, int color) {
         if (!showCategory || category.isEmpty()) {
-            noteCategory.setVisibility(View.GONE);
+            noteCategory.setVisibility(GONE);
         } else {
             noteCategory.setText(category);
 
@@ -110,6 +112,18 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
             final var util = BrandingUtil.of(color, context);
             util.platform.highlightText(textView, content, searchQuery.toString());
         }
+    }
+
+    protected void bindNoteSharedIcon(@NonNull Context context, boolean shared, @NonNull MaterialButton noteShareIcon, int color) {
+        if (shared) {
+            noteShareIcon.setVisibility(VISIBLE);
+            noteShareIcon.setOnClickListener(view -> noteClickListener.openShare(getLayoutPosition()));
+        } else {
+            noteShareIcon.setVisibility(GONE);
+        }
+
+        final var util = BrandingUtil.of(color, context);
+        util.material.colorMaterialButtonContent(noteShareIcon, ColorRole.PRIMARY);
     }
 
     public abstract void showSwipe(float dX);
