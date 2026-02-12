@@ -168,16 +168,21 @@
                         tools:maxLength="15"
                         tools:text="@tools:sample/lorem/random" />
 
-                    <ImageView
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/noteShared"
-                        android:layout_marginStart="@dimen/spacer_1x"
+                        style="@style/Widget.Material3.Button.IconButton"
                         android:layout_width="@dimen/note_shared_icon_size"
                         android:layout_height="@dimen/note_shared_icon_size"
+                        android:layout_marginStart="@dimen/spacer_1x"
                         android:contentDescription="@string/menu_shared_note"
                         android:visibility="gone"
-                        app:srcCompat="@drawable/ic_share_white_24dp"
-                        app:tint="@color/defaultBrand"
+                        app:backgroundTint="@android:color/transparent"
+                        app:icon="@drawable/ic_share_white_24dp"
+                        app:iconGravity="textStart"
+                        app:iconSize="@dimen/note_shared_icon_size"
+                        app:iconTint="@color/defaultBrand"
                         tools:visibility="visible" />
+
                 </LinearLayout>
             </LinearLayout>
 
