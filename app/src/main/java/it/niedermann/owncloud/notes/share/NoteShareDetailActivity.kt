@@ -9,7 +9,9 @@ package it.niedermann.owncloud.notes.share
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import com.nextcloud.android.common.ui.theme.utils.ColorRole
@@ -87,6 +89,7 @@ class NoteShareDetailActivity :
     private var expirationDatePickerFragment: ExpirationDatePickerDialogFragment? = null
     private lateinit var repository: ShareRepository
     private val passwordMask = "••••••"
+    private var enteredNoteText = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -201,6 +204,7 @@ class NoteShareDetailActivity :
         }
 
         binding.noteText.setText(share?.note)
+        enteredNoteText = share?.note ?: ""
 
         shareProcessStep = SCREEN_TYPE_PERMISSION
     }
@@ -383,10 +387,10 @@ class NoteShareDetailActivity :
                 shareProcessBtnNext.text =
                     getString(R.string.note_share_detail_activity_set_note)
                 noteText.setText(share?.note)
+                enteredNoteText = share?.note ?: ""
             } else {
                 shareProcessBtnNext.text =
                     getString(R.string.note_share_detail_activity_send_share)
-                noteText.setText(R.string.empty)
             }
             shareProcessStep = SCREEN_TYPE_NOTE
             shareProcessBtnNext.performClick()
@@ -396,6 +400,16 @@ class NoteShareDetailActivity :
     @Suppress("LongMethod")
     private fun implementClickEvents() {
         binding.run {
+            noteText.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) = Unit
+
+                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                    enteredNoteText = s.toString()
+                }
+
+                override fun afterTextChanged(s: Editable) = Unit
+            })
+
             shareProcessBtnCancel.setOnClickListener {
                 onCancelClick()
             }
@@ -532,10 +546,9 @@ class NoteShareDetailActivity :
         // if modifying existing share information then execute the process
         if (share != null) {
             lifecycleScope.launch(Dispatchers.IO) {
-                val noteText = binding.noteText.text.toString().trim()
                 val password = binding.shareProcessEnterPassword.text.toString().trim()
                 val label = binding.shareProcessChangeName.text.toString()
-                updateShare(noteText, label, password)
+                updateShare(label, password)
             }
         } else {
             // else show step 2 (note screen)
@@ -556,21 +569,19 @@ class NoteShareDetailActivity :
      * method to validate step 2 (note screen) information
      */
     private fun createOrUpdateShare() {
-        val noteText = binding.noteText.text.toString().trim()
         val password = binding.shareProcessEnterPassword.text.toString().trim()
 
         lifecycleScope.launch(Dispatchers.IO) {
-            if (share != null && share?.note != noteText) {
+            if (share != null && share?.note != enteredNoteText) {
                 val label = binding.shareProcessChangeName.text.toString()
-                updateShare(noteText, label, password)
+                updateShare(label, password)
             } else {
-                createShare(noteText, password)
+                createShare(password)
             }
         }
     }
 
     private suspend fun updateShare(
-        noteText: String,
         label: String,
         password: String
     ) {
@@ -583,7 +594,7 @@ class NoteShareDetailActivity :
             },
             expireDate = DateUtil.getExpirationDate(chosenExpDateInMills),
             label = label,
-            note = noteText,
+            note = enteredNoteText.trim(),
             attributes = UpdateShareRequest.createAttributes(
                 repository.getCapabilities(),
                 binding.allowDownloadAndSync.isChecked,
@@ -615,7 +626,7 @@ class NoteShareDetailActivity :
             }
     }
 
-    private suspend fun createShare(noteText: String, password: String) {
+    private suspend fun createShare(password: String) {
         if (note == null || shareeName == null) {
             Log_OC.d(TAG, "validateShareProcessSecond cancelled")
             return
@@ -628,7 +639,7 @@ class NoteShareDetailActivity :
             "false", // TODO: Check how to determine it
             password,
             permission,
-            noteText,
+            enteredNoteText.trim(),
             UpdateShareRequest.createAttributes(
                 repository.getCapabilities(),
                 binding.allowDownloadAndSync.isChecked,
