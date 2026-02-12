@@ -9,29 +9,33 @@ package it.niedermann.owncloud.notes.share
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import com.nextcloud.android.common.ui.theme.utils.ColorRole
 import com.nextcloud.android.sso.helper.SingleAccountHelper
 import com.owncloud.android.lib.common.utils.Log_OC
 import com.owncloud.android.lib.resources.shares.OCShare
-import com.owncloud.android.lib.resources.shares.SharePermissionsBuilder
 import com.owncloud.android.lib.resources.shares.ShareType
 import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.branding.BrandedActivity
 import it.niedermann.owncloud.notes.branding.BrandingUtil
 import it.niedermann.owncloud.notes.databinding.ActivityNoteShareDetailBinding
+import it.niedermann.owncloud.notes.persistence.ApiResult
 import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.persistence.isSuccess
 import it.niedermann.owncloud.notes.share.dialog.ExpirationDatePickerDialogFragment
-import it.niedermann.owncloud.notes.share.helper.SharingMenuHelper
-import it.niedermann.owncloud.notes.share.model.SharePasswordRequest
+import it.niedermann.owncloud.notes.share.helper.SharePermissionManager
+import it.niedermann.owncloud.notes.share.model.QuickPermissionType
+import it.niedermann.owncloud.notes.share.model.UpdateShareRequest
 import it.niedermann.owncloud.notes.share.repository.ShareRepository
 import it.niedermann.owncloud.notes.shared.util.DisplayUtils
 import it.niedermann.owncloud.notes.shared.util.clipboard.ClipboardUtil
 import it.niedermann.owncloud.notes.shared.util.extensions.getParcelableArgument
 import it.niedermann.owncloud.notes.shared.util.extensions.getSerializableArgument
+import it.niedermann.owncloud.notes.util.DateUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -60,6 +64,7 @@ class NoteShareDetailActivity :
         const val ARG_SCREEN_TYPE = "arg_screen_type"
         const val ARG_RESHARE_SHOWN = "arg_reshare_shown"
         const val ARG_EXP_DATE_SHOWN = "arg_exp_date_shown"
+        const val ARG_SEND_EMAIL = "ard_send_email"
         private const val ARG_SECURE_SHARE = "secure_share"
 
         // types of screens to be displayed
@@ -79,9 +84,12 @@ class NoteShareDetailActivity :
     private var isReShareShown: Boolean = true // show or hide reShare option
     private var isExpDateShown: Boolean = true // show or hide expiry date option
     private var isSecureShare: Boolean = false
+    private var sendEmail: Boolean = false
 
     private var expirationDatePickerFragment: ExpirationDatePickerDialogFragment? = null
     private lateinit var repository: ShareRepository
+    private val passwordMask = "••••••"
+    private var enteredNoteText = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,7 +97,7 @@ class NoteShareDetailActivity :
         binding = ActivityNoteShareDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
-        binding.toolbar.setNavigationOnClickListener({ v -> backPressed() })
+        binding.toolbar.setNavigationOnClickListener { backPressed() }
         val arguments = intent.extras
 
         arguments?.let {
@@ -107,19 +115,20 @@ class NoteShareDetailActivity :
             isReShareShown = it.getBoolean(ARG_RESHARE_SHOWN, true)
             isExpDateShown = it.getBoolean(ARG_EXP_DATE_SHOWN, true)
             isSecureShare = it.getBoolean(ARG_SECURE_SHARE, false)
+            sendEmail = it.getBoolean(ARG_SEND_EMAIL, shareType == ShareType.EMAIL)
         }
 
         lifecycleScope.launch(Dispatchers.IO) {
             val ssoAcc =
                 SingleAccountHelper.getCurrentSingleSignOnAccount(this@NoteShareDetailActivity)
             repository = ShareRepository(this@NoteShareDetailActivity, ssoAcc)
-            permission = repository.getCapabilities().defaultPermission
+            permission = share?.permissions ?: repository.getCapabilities().defaultPermission
 
             withContext(Dispatchers.Main) {
                 if (shareProcessStep == SCREEN_TYPE_PERMISSION) {
-                    showShareProcessFirst()
+                    setupUI()
                 } else {
-                    showShareProcessSecond()
+                    updateViewForNoteScreenType()
                 }
                 implementClickEvents()
             }
@@ -135,19 +144,15 @@ class NoteShareDetailActivity :
 
         binding.run {
             util.platform.run {
-                themeRadioButton(shareProcessPermissionReadOnly)
-                themeRadioButton(shareProcessPermissionUploadEditing)
-                themeRadioButton(shareProcessPermissionFileDrop)
+                themeRadioButton(canViewRadioButton)
+                themeRadioButton(canEditRadioButton)
 
                 colorTextView(shareProcessEditShareLink)
-                colorTextView(shareProcessAdvancePermissionTitle)
-
-                themeCheckbox(shareProcessAllowResharingCheckbox)
-
                 colorTextView(title, ColorRole.ON_SURFACE)
             }
 
             util.androidx.run {
+                colorSwitchCompat(allowDownloadAndSync)
                 colorSwitchCompat(shareProcessSetPasswordSwitch)
                 colorSwitchCompat(shareProcessSetExpDateSwitch)
                 colorSwitchCompat(shareProcessHideDownloadCheckbox)
@@ -182,20 +187,14 @@ class NoteShareDetailActivity :
         }
     }
 
-    private fun showShareProcessFirst() {
-        binding.shareProcessGroupOne.visibility = View.VISIBLE
-        binding.shareProcessEditShareLink.visibility = View.VISIBLE
-        binding.shareProcessGroupTwo.visibility = View.GONE
-
-        if (share != null) {
-            setupModificationUI()
-        } else {
-            setupUpdateUI()
+    private fun setupUI() {
+        binding.run {
+            shareProcessGroupOne.visibility = View.VISIBLE
+            shareProcessEditShareLink.visibility = View.VISIBLE
+            shareProcessGroupTwo.visibility = View.GONE
         }
 
-        if (isSecureShare) {
-            binding.shareProcessAdvancePermissionTitle.visibility = View.GONE
-        }
+        updateView()
 
         // show or hide expiry date
         if (isExpDateShown && !isSecureShare) {
@@ -205,28 +204,30 @@ class NoteShareDetailActivity :
         }
 
         binding.noteText.setText(share?.note)
+        enteredNoteText = share?.note ?: ""
 
         shareProcessStep = SCREEN_TYPE_PERMISSION
     }
 
-    private fun setupModificationUI() {
-        if (share?.isFolder == true) updateViewForFolder() else updateViewForFile()
-
-        // read only / allow upload and editing / file drop
-        if (SharingMenuHelper.isUploadAndEditingAllowed(share)) {
-            binding.shareProcessPermissionUploadEditing.isChecked = true
-        } else if (SharingMenuHelper.isFileDrop(share) && share?.isFolder == true) {
-            binding.shareProcessPermissionFileDrop.isChecked = true
-        } else if (SharingMenuHelper.isReadOnly(share)) {
-            binding.shareProcessPermissionReadOnly.isChecked = true
+    private fun updateView() {
+        if (share != null) {
+            updateViewForUpdate()
+        } else {
+            updateViewForCreate()
         }
+    }
+
+    private fun updateViewForUpdate() {
+        updateViewForFile()
+
+        selectRadioButtonAccordingToPermission()
 
         shareType = share?.shareType ?: ShareType.NO_SHARED
 
         // show different text for link share and other shares
         // because we have link to share in Public Link
         binding.shareProcessBtnNext.text = getString(
-            if (shareType == ShareType.PUBLIC_LINK) {
+            if (isPublicShare()) {
                 R.string.note_share_detail_activity_share_copy_link
             } else {
                 R.string.note_share_detail_activity_common_confirm
@@ -238,9 +239,49 @@ class NoteShareDetailActivity :
         showPasswordInput(binding.shareProcessSetPasswordSwitch.isChecked)
         updateExpirationDateView()
         showExpirationDateInput(binding.shareProcessSetExpDateSwitch.isChecked)
+        maskPasswordInput()
     }
 
-    private fun setupUpdateUI() {
+    private fun maskPasswordInput() {
+        if (share?.isPasswordProtected == false) {
+            return
+        }
+
+        binding.shareProcessEnterPassword.run {
+            setText(passwordMask)
+            setOnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) {
+                    text?.clear()
+                }
+            }
+        }
+    }
+
+    private fun selectRadioButtonAccordingToPermission() {
+        val selectedType = SharePermissionManager.getSelectedType(share)
+        binding.run {
+            when (selectedType) {
+                QuickPermissionType.VIEW_ONLY -> {
+                    canViewRadioButton.isChecked = true
+                }
+
+                QuickPermissionType.CAN_EDIT -> {
+                    canEditRadioButton.isChecked = true
+                }
+
+                else -> Unit
+            }
+        }
+    }
+
+    private fun setMaxPermissionsIfDefaultPermissionExists() {
+        if (repository.getCapabilities().defaultPermission != OCShare.NO_PERMISSION) {
+            binding.canEditRadioButton.isChecked = true
+            permission = SharePermissionManager.getMaximumPermission()
+        }
+    }
+
+    private fun updateViewForCreate() {
         binding.shareProcessBtnNext.text =
             getString(R.string.note_share_detail_activity_common_next)
         note.let {
@@ -249,6 +290,7 @@ class NoteShareDetailActivity :
         }
         showPasswordInput(binding.shareProcessSetPasswordSwitch.isChecked)
         showExpirationDateInput(binding.shareProcessSetExpDateSwitch.isChecked)
+        setMaxPermissionsIfDefaultPermissionExists()
     }
 
     private fun updateViewForShareType() {
@@ -288,19 +330,12 @@ class NoteShareDetailActivity :
             shareProcessChangeNameSwitch.visibility = View.GONE
             shareProcessChangeNameContainer.visibility = View.GONE
             shareProcessHideDownloadCheckbox.visibility = View.GONE
-            if (isSecureShare) {
-                shareProcessAllowResharingCheckbox.visibility = View.GONE
-            } else {
-                shareProcessAllowResharingCheckbox.visibility = View.VISIBLE
-            }
             shareProcessSetPasswordSwitch.visibility = View.GONE
+            allowDownloadAndSync.visibility = View.VISIBLE
 
-            if (share != null) {
-                if (!isReShareShown) {
-                    shareProcessAllowResharingCheckbox.visibility = View.GONE
-                }
-                shareProcessAllowResharingCheckbox.isChecked =
-                    SharingMenuHelper.canReshare(share)
+            share?.let {
+                val isDownloadAndAllowsSyncEnabled = repository.isAllowDownloadAndSync(it)
+                binding.allowDownloadAndSync.isChecked = isDownloadAndAllowsSyncEnabled
             }
         }
     }
@@ -311,17 +346,11 @@ class NoteShareDetailActivity :
     private fun updateViewForExternalAndLinkShare() {
         binding.run {
             shareProcessHideDownloadCheckbox.visibility = View.VISIBLE
-            shareProcessAllowResharingCheckbox.visibility = View.GONE
             shareProcessSetPasswordSwitch.visibility = View.VISIBLE
 
             if (share != null) {
-                if (SharingMenuHelper.isFileDrop(share)) {
-                    shareProcessHideDownloadCheckbox.visibility = View.GONE
-                } else {
-                    shareProcessHideDownloadCheckbox.visibility = View.VISIBLE
-                    shareProcessHideDownloadCheckbox.isChecked =
-                        share?.isHideFileDownload == true
-                }
+                shareProcessHideDownloadCheckbox.visibility = View.VISIBLE
+                shareProcessHideDownloadCheckbox.isChecked = share?.isHideFileDownload == true
             }
         }
     }
@@ -343,27 +372,13 @@ class NoteShareDetailActivity :
     }
 
     private fun updateViewForFile() {
-        binding.shareProcessPermissionUploadEditing.text = getString(R.string.link_share_editing)
-        binding.shareProcessPermissionFileDrop.visibility = View.GONE
-    }
-
-    private fun updateViewForFolder() {
-        binding.run {
-            shareProcessPermissionUploadEditing.text =
-                getString(R.string.link_share_allow_upload_and_editing)
-            shareProcessPermissionFileDrop.visibility = View.VISIBLE
-            if (isSecureShare) {
-                shareProcessPermissionFileDrop.visibility = View.GONE
-                shareProcessAllowResharingCheckbox.visibility = View.GONE
-                shareProcessSetExpDateSwitch.visibility = View.GONE
-            }
-        }
+        binding.canEditRadioButton.text = getString(R.string.link_share_editing)
     }
 
     /**
      * update views for screen type Note
      */
-    private fun showShareProcessSecond() {
+    private fun updateViewForNoteScreenType() {
         binding.run {
             shareProcessGroupOne.visibility = View.GONE
             shareProcessEditShareLink.visibility = View.GONE
@@ -372,18 +387,29 @@ class NoteShareDetailActivity :
                 shareProcessBtnNext.text =
                     getString(R.string.note_share_detail_activity_set_note)
                 noteText.setText(share?.note)
+                enteredNoteText = share?.note ?: ""
             } else {
                 shareProcessBtnNext.text =
                     getString(R.string.note_share_detail_activity_send_share)
-                noteText.setText(R.string.empty)
             }
             shareProcessStep = SCREEN_TYPE_NOTE
             shareProcessBtnNext.performClick()
         }
     }
 
+    @Suppress("LongMethod")
     private fun implementClickEvents() {
         binding.run {
+            noteText.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) = Unit
+
+                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                    enteredNoteText = s.toString()
+                }
+
+                override fun afterTextChanged(s: Editable) = Unit
+            })
+
             shareProcessBtnCancel.setOnClickListener {
                 onCancelClick()
             }
@@ -406,6 +432,20 @@ class NoteShareDetailActivity :
             shareProcessSelectExpDate.setOnClickListener {
                 showExpirationDateDialog()
             }
+
+            // region RadioButtons
+            shareProcessPermissionRadioGroup.setOnCheckedChangeListener { _, optionId ->
+                when (optionId) {
+                    R.id.can_view_radio_button -> {
+                        permission = OCShare.READ_PERMISSION_FLAG
+                    }
+
+                    R.id.can_edit_radio_button -> {
+                        permission = SharePermissionManager.getMaximumPermission()
+                    }
+                }
+            }
+            // endregion
         }
     }
 
@@ -434,7 +474,7 @@ class NoteShareDetailActivity :
         // and if user is in step 1 (permission screen) then remove the activity
         else {
             if (shareProcessStep == SCREEN_TYPE_NOTE) {
-                showShareProcessFirst()
+                setupUI()
             } else {
                 finish()
             }
@@ -461,10 +501,6 @@ class NoteShareDetailActivity :
             binding.shareProcessEnterPassword.setText(R.string.empty)
         }
     }
-
-    private fun getReSharePermission(): Int = SharePermissionsBuilder().apply {
-        setSharePermission(true)
-    }.build()
 
     /**
      * method to validate the step 1 screen information
@@ -510,14 +546,13 @@ class NoteShareDetailActivity :
         // if modifying existing share information then execute the process
         if (share != null) {
             lifecycleScope.launch(Dispatchers.IO) {
-                val noteText = binding.noteText.text.toString().trim()
                 val password = binding.shareProcessEnterPassword.text.toString().trim()
-
-                updateShare(noteText, password, false)
+                val label = binding.shareProcessChangeName.text.toString()
+                updateShare(label, password)
             }
         } else {
             // else show step 2 (note screen)
-            showShareProcessSecond()
+            updateViewForNoteScreenType()
         }
     }
 
@@ -525,10 +560,8 @@ class NoteShareDetailActivity :
      *  get the permissions on the basis of selection
      */
     private fun getSelectedPermission() = when {
-        binding.shareProcessAllowResharingCheckbox.isChecked -> getReSharePermission()
-        binding.shareProcessPermissionReadOnly.isChecked -> OCShare.READ_PERMISSION_FLAG
-        binding.shareProcessPermissionUploadEditing.isChecked -> OCShare.MAXIMUM_PERMISSIONS_FOR_FILE
-        binding.shareProcessPermissionFileDrop.isChecked -> OCShare.CREATE_PERMISSION_FLAG
+        binding.canViewRadioButton.isChecked -> OCShare.READ_PERMISSION_FLAG
+        binding.canEditRadioButton.isChecked -> SharePermissionManager.getMaximumPermission()
         else -> permission
     }
 
@@ -536,49 +569,64 @@ class NoteShareDetailActivity :
      * method to validate step 2 (note screen) information
      */
     private fun createOrUpdateShare() {
-        val noteText = binding.noteText.text.toString().trim()
         val password = binding.shareProcessEnterPassword.text.toString().trim()
 
         lifecycleScope.launch(Dispatchers.IO) {
-            if (share != null && share?.note != noteText) {
-                updateShare(noteText, password, true)
+            if (share != null && share?.note != enteredNoteText) {
+                val label = binding.shareProcessChangeName.text.toString()
+                updateShare(label, password)
             } else {
-                createShare(noteText, password)
+                createShare(password)
             }
         }
     }
 
-    private suspend fun updateShare(noteText: String, password: String, sendEmail: Boolean) {
-        val downloadPermission = !binding.shareProcessHideDownloadCheckbox.isChecked
-        val requestBody = repository.getUpdateShareRequest(
-            downloadPermission,
-            share,
-            noteText,
-            password,
-            sendEmail,
-            chosenExpDateInMills,
-            permission
+    private suspend fun updateShare(
+        label: String,
+        password: String
+    ) {
+        val request = UpdateShareRequest(
+            permissions = permission.takeIf { it != -1 },
+            password = if (password != passwordMask) {
+                password
+            } else {
+                null
+            },
+            expireDate = DateUtil.getExpirationDate(chosenExpDateInMills),
+            label = label,
+            note = enteredNoteText.trim(),
+            attributes = UpdateShareRequest.createAttributes(
+                repository.getCapabilities(),
+                binding.allowDownloadAndSync.isChecked,
+                shareType
+            ),
+            hideDownload = binding.shareProcessHideDownloadCheckbox.isChecked.toString()
         )
 
-        val updateShareResult = repository.updateShare(share!!.id, requestBody)
+        val result = repository.updateShare(share?.id ?: return, request)
 
-        if (updateShareResult.isSuccess() && sendEmail) {
-            val sendEmailResult = repository.sendEmail(share!!.id, SharePasswordRequest(password))
-            handleResult(sendEmailResult)
-        } else {
-            handleResult(updateShareResult.isSuccess())
+        if (!result.isSuccess()) {
+            val errorMessage = (result as? ApiResult.Error)
+                ?.message
+                ?.takeIf { it.contains("password", ignoreCase = true) }
+                ?.let { getString(R.string.note_share_detail_activity_password_error_message) }
+
+            handleResult(false, errorMessage)
+            return
         }
 
-        if (!sendEmail) {
-            withContext(Dispatchers.Main) {
-                if (!TextUtils.isEmpty(share?.shareLink)) {
-                    ClipboardUtil.copyToClipboard(this@NoteShareDetailActivity, share?.shareLink)
+        handleResult(true)
+
+        share?.shareLink
+            ?.takeIf { it.isNotEmpty() }
+            ?.let {
+                withContext(Dispatchers.Main) {
+                    ClipboardUtil.copyToClipboard(this@NoteShareDetailActivity, it)
                 }
             }
-        }
     }
 
-    private suspend fun createShare(noteText: String, password: String) {
+    private suspend fun createShare(password: String) {
         if (note == null || shareeName == null) {
             Log_OC.d(TAG, "validateShareProcessSecond cancelled")
             return
@@ -591,26 +639,32 @@ class NoteShareDetailActivity :
             "false", // TODO: Check how to determine it
             password,
             permission,
-            noteText
+            enteredNoteText.trim(),
+            UpdateShareRequest.createAttributes(
+                repository.getCapabilities(),
+                binding.allowDownloadAndSync.isChecked,
+                shareType
+            )
         )
 
         if (result.isSuccess()) {
-            repository.getSharesForNotesAndSaveShareEntities()
+            repository.fetchSharesForNotesAndSaveShareEntities()
         }
 
         handleResult(result.isSuccess())
     }
 
-    private suspend fun handleResult(success: Boolean) {
+    private suspend fun handleResult(success: Boolean, errorMessage: String? = null) {
         withContext(Dispatchers.Main) {
             if (success) {
                 val resultIntent = Intent()
                 setResult(RESULT_OK, resultIntent)
                 finish()
             } else {
+                val message = errorMessage ?: getString(R.string.note_share_detail_activity_create_share_error)
                 DisplayUtils.showSnackMessage(
                     this@NoteShareDetailActivity,
-                    getString(R.string.note_share_detail_activity_create_share_error)
+                    message
                 )
             }
         }
@@ -627,4 +681,6 @@ class NoteShareDetailActivity :
     override fun onDateUnSet() {
         binding.shareProcessSetExpDateSwitch.isChecked = false
     }
+
+    private fun isPublicShare(): Boolean = (shareType == ShareType.PUBLIC_LINK)
 }

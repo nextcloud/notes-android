@@ -16,10 +16,10 @@ import com.nextcloud.android.common.ui.theme.utils.ColorRole;
 import com.owncloud.android.lib.resources.shares.OCShare;
 import com.owncloud.android.lib.resources.shares.ShareType;
 
+import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedBottomSheetDialog;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ItemNoteShareActionBinding;
-import it.niedermann.owncloud.notes.share.helper.SharingMenuHelper;
 import it.niedermann.owncloud.notes.share.listener.NoteShareItemAction;
 
 public class NoteShareActivityShareItemActionBottomSheetDialog extends BrandedBottomSheetDialog {
@@ -55,18 +55,23 @@ public class NoteShareActivityShareItemActionBottomSheetDialog extends BrandedBo
     }
 
     private void updateUI() {
-        if (ocShare.getShareType() != null && ocShare.getShareType() == ShareType.PUBLIC_LINK) {
+        final var shareType = ocShare.getShareType();
+
+        if (shareType == ShareType.PUBLIC_LINK) {
             binding.menuShareAddAnotherLink.setVisibility(View.VISIBLE);
-            binding.menuShareSendLink.setVisibility(View.VISIBLE);
+
+            // Not implemented yet
+            binding.menuShareSendLink.setVisibility(View.GONE);
         } else {
             binding.menuShareAddAnotherLink.setVisibility(View.GONE);
             binding.menuShareSendLink.setVisibility(View.GONE);
         }
 
-        if (SharingMenuHelper.isSecureFileDrop(ocShare)) {
-            binding.menuShareAdvancedPermissions.setVisibility(View.GONE);
-            binding.menuShareAddAnotherLink.setVisibility(View.GONE);
+        int menuUnshareTextId = R.string.share_delete_link;
+        if (shareType == ShareType.USER) {
+            menuUnshareTextId = R.string.delete_share;
         }
+        binding.menuUnshareText.setText(getContext().getString(menuUnshareTextId));
     }
 
     private void setupClickListener() {

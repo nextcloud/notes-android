@@ -76,6 +76,7 @@ import it.niedermann.owncloud.notes.share.listener.NoteShareItemAction;
 import it.niedermann.owncloud.notes.share.listener.ShareeListAdapterListener;
 import it.niedermann.owncloud.notes.share.model.CreateShareResponse;
 import it.niedermann.owncloud.notes.share.model.CreateShareResponseExtensionsKt;
+import it.niedermann.owncloud.notes.share.model.UpdateShareRequest;
 import it.niedermann.owncloud.notes.share.model.UsersAndGroupsSearchConfig;
 import it.niedermann.owncloud.notes.share.repository.ShareRepository;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
@@ -84,6 +85,7 @@ import it.niedermann.owncloud.notes.shared.util.DisplayUtils;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 import it.niedermann.owncloud.notes.shared.util.clipboard.ClipboardUtil;
 import it.niedermann.owncloud.notes.shared.util.extensions.BundleExtensionsKt;
+import it.niedermann.owncloud.notes.util.DateUtil;
 
 public class NoteShareActivity extends BrandedActivity implements ShareeListAdapterListener, NoteShareItemAction, QuickSharingPermissionsBottomSheetDialog.QuickPermissionSharingBottomSheetActions, SharePasswordDialogFragment.SharePasswordDialogListener {
 
@@ -161,7 +163,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                 final var ssoAcc = SingleAccountHelper.getCurrentSingleSignOnAccount(NoteShareActivity.this);
                 repository = new ShareRepository(NoteShareActivity.this, ssoAcc);
                 capabilities = repository.getCapabilities();
-                repository.getSharesForNotesAndSaveShareEntities();
+                repository.fetchSharesForNotesAndSaveShareEntities();
 
                 runOnUiThread(() -> {
                     binding.fileName.setText(note.getTitle());
@@ -396,7 +398,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
             requestPasswordForShareViaLink(true, capabilities.getAskForOptionalPassword());
         } else {
             executorService.submit(() -> {
-                final var result = repository.addShare(note, ShareType.PUBLIC_LINK, "", "false", "", 0, "");
+                final var result = repository.addShare(note, ShareType.PUBLIC_LINK, "");
                 runOnUiThread(() -> {
                     if (result instanceof ApiResult.Success<OcsResponse<CreateShareResponse>> successResponse && binding.sharesList.getAdapter() instanceof ShareeListAdapter adapter) {
                         DisplayUtils.showSnackMessage(NoteShareActivity.this, successResponse.getMessage());
@@ -519,17 +521,16 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                     return;
                 }
 
-                List<OCShare> tempShares = new ArrayList<>();
-
-                // to show share with users/groups info
+                List<OCShare> remoteNotes;
                 if (note != null) {
-                    // get shares from local DB
-                    populateSharesList(tempShares);
+                    remoteNotes = repository.fetchSharesFromNote(note);
+                } else {
+                    remoteNotes = new ArrayList<>();
                 }
 
                 runOnUiThread(() -> {
                     shares.clear();
-                    shares.addAll(tempShares);
+                    shares.addAll(remoteNotes);
 
                     adapter.removeAll();
                     adapter.addShares(shares);
@@ -542,35 +543,6 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                 Log_OC.d(TAG, "Exception while updateShareeListAdapter: " + e);
             }
         });
-    }
-
-    private void populateSharesList(List<OCShare> targetList) {
-        // Get shares from local DB
-        final var shareEntities = repository.getShareEntitiesForSpecificNote(note);
-        for (var entity : shareEntities) {
-            if (entity.getId() != null) {
-                addSharesToList(entity.getId(), targetList);
-            }
-        }
-
-        // Get shares from remote
-        final var remoteShares = repository.getShareFromNote(note);
-        if (remoteShares != null) {
-            for (var entity : remoteShares) {
-                addSharesToList(entity.getId(), targetList);
-            }
-        }
-    }
-
-    private void addSharesToList(long id, List<OCShare> targetList) {
-        final var result = repository.getShares(id);
-        if (result != null) {
-            for (OCShare ocShare : result) {
-                if (!targetList.contains(ocShare)) {
-                    targetList.add(ocShare);
-                }
-            }
-        }
     }
 
     private void addPublicShares(ShareeListAdapter adapter) {
@@ -672,13 +644,13 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
     @Override
     public void advancedPermissions(OCShare share) {
-        modifyExistingShare(share, NoteShareDetailActivity.SCREEN_TYPE_PERMISSION);
+        modifyExistingShare(share, NoteShareDetailActivity.SCREEN_TYPE_PERMISSION, false);
     }
 
 
     @Override
     public void sendNewEmail(OCShare share) {
-        modifyExistingShare(share, NoteShareDetailActivity.SCREEN_TYPE_NOTE);
+        modifyExistingShare(share, NoteShareDetailActivity.SCREEN_TYPE_NOTE, true);
     }
 
     @Override
@@ -711,13 +683,14 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
         createPublicShareLink();
     }
 
-    private void modifyExistingShare(OCShare share, int screenTypePermission) {
+    private void modifyExistingShare(OCShare share, int screenTypePermission, boolean sendEmail) {
         Bundle bundle = new Bundle();
 
         bundle.putSerializable(NoteShareDetailActivity.ARG_OCSHARE, share);
         bundle.putInt(NoteShareDetailActivity.ARG_SCREEN_TYPE, screenTypePermission);
         bundle.putBoolean(NoteShareDetailActivity.ARG_RESHARE_SHOWN, !isReshareForbidden(share));
         bundle.putBoolean(NoteShareDetailActivity.ARG_EXP_DATE_SHOWN, getExpDateShown());
+        bundle.putBoolean(NoteShareDetailActivity.ARG_SEND_EMAIL, sendEmail);
 
         Intent intent = new Intent(this, NoteShareDetailActivity.class);
         intent.putExtras(bundle);
@@ -759,12 +732,17 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     }
 
     private void updateShare(OCShare share) {
+        if (note == null) {
+            Log_OC.e(TAG, "note is null, cannot update share");
+            return;
+        }
+
         executorService.submit(() -> {
             try {
-                final var updatedShares = repository.getShares(share.getId());
+                final var updatedShares = repository.fetchSharesFromNote(note);
 
                 runOnUiThread(() -> {
-                    if (updatedShares != null && binding.sharesList.getAdapter() instanceof ShareeListAdapter adapter) {
+                    if (binding.sharesList.getAdapter() instanceof ShareeListAdapter adapter) {
                         OCShare updatedShare = null;
                         for (int i=0;i<updatedShares.size();i++) {
                             if (updatedShares.get(i).getId() == share.getId()) {
@@ -857,8 +835,7 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
                     "",
                     "false",
                     password,
-                    repository.getCapabilities().getDefaultPermission(),
-                    ""
+                    repository.getCapabilities().getDefaultPermission()
             );
 
             runOnUiThread(() -> {
@@ -881,14 +858,22 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
 
         executorService.submit(() -> {
             {
-                final var requestBody = repository.getUpdateShareRequest(
-                        false,
-                        share,
-                        "",
-                        password,
-                        false,
-                        -1,
-                        share.getPermissions()
+                boolean isDownloadAndAllowsSyncEnabled = repository.isAllowDownloadAndSync(share);
+
+                String attributes = UpdateShareRequest.Companion.createAttributes(
+                    repository.getCapabilities(),
+                    isDownloadAndAllowsSyncEnabled,
+                    share.getShareType()
+                );
+
+                final var requestBody = new UpdateShareRequest(
+                    share.getPermissions(),
+                    password,
+                    share.getNote(),
+                    share.getLabel(),
+                    DateUtil.INSTANCE.getExpirationDate(share.getExpirationDate()),
+                    Boolean.toString(share.isHideFileDownload()),
+                    attributes
                 );
                 final var result = repository.updateShare(share.getId(), requestBody);
 

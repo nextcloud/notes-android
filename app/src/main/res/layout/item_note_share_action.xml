@@ -140,11 +140,12 @@
             app:tint="@color/defaultBrand" />
 
         <TextView
+            android:id="@+id/menu_unshare_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/bottom_sheet_text_start_margin"
-            android:text="@string/delete_link"
+            android:text="@string/share_delete_link"
             android:textColor="@color/text_color"
             android:textSize="@dimen/bottom_sheet_text_size" />
 
