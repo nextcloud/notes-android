@@ -46,6 +46,7 @@ public class NoteViewGridHolderOnlyTitle extends NoteViewHolder {
         bindFavorite(binding.noteFavorite, note.getFavorite());
         bindModified(binding.noteModified, note.getModified());
         bindSearchableContent(context, binding.noteTitle, searchQuery, note.getTitle(), color);
+        bindNoteSharedIcon(context, note.isShared(), binding.noteShared, color);
     }
 
     @Nullable

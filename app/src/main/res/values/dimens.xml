@@ -26,6 +26,8 @@
     <dimen name="button_extra_width">180dp</dimen>
     <dimen name="bottom_navigation_view_margin">100dp</dimen>
 
+    <dimen name="note_shared_icon_size">18dp</dimen>
+
     <dimen name="avatar_size">40dp</dimen>
     <dimen name="user_status_icon_size">16dp</dimen>
 
