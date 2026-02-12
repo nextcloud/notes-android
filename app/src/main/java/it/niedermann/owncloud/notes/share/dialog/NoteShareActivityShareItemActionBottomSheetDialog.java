@@ -16,6 +16,7 @@ import com.nextcloud.android.common.ui.theme.utils.ColorRole;
 import com.owncloud.android.lib.resources.shares.OCShare;
 import com.owncloud.android.lib.resources.shares.ShareType;
 
+import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedBottomSheetDialog;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ItemNoteShareActionBinding;
@@ -54,7 +55,9 @@ public class NoteShareActivityShareItemActionBottomSheetDialog extends BrandedBo
     }
 
     private void updateUI() {
-        if (ocShare.getShareType() != null && ocShare.getShareType() == ShareType.PUBLIC_LINK) {
+        final var shareType = ocShare.getShareType();
+
+        if (shareType == ShareType.PUBLIC_LINK) {
             binding.menuShareAddAnotherLink.setVisibility(View.VISIBLE);
 
             // Not implemented yet
@@ -63,6 +66,12 @@ public class NoteShareActivityShareItemActionBottomSheetDialog extends BrandedBo
             binding.menuShareAddAnotherLink.setVisibility(View.GONE);
             binding.menuShareSendLink.setVisibility(View.GONE);
         }
+
+        int menuUnshareTextId = R.string.delete_link;
+        if (shareType == ShareType.USER) {
+            menuUnshareTextId = R.string.delete_share;
+        }
+        binding.menuUnshareText.setText(getContext().getString(menuUnshareTextId));
     }
 
     private void setupClickListener() {

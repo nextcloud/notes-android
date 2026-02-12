@@ -140,6 +140,7 @@
             app:tint="@color/defaultBrand" />
 
         <TextView
+            android:id="@+id/menu_unshare_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
