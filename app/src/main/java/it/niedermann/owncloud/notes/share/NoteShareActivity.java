@@ -104,6 +104,16 @@ public class NoteShareActivity extends BrandedActivity implements ShareeListAdap
     private ActivityResultLauncher<Intent> resultLauncher;
     private final List<OCShare> shares = Collections.synchronizedList(new ArrayList<>());
 
+    public static Intent getActivityStartIntent(@NonNull Note note, @NonNull Account account, @NonNull Activity activity) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(NoteShareActivity.ARG_NOTE, note);
+        bundle.putSerializable(NoteShareActivity.ARG_ACCOUNT, account);
+
+        Intent intent = new Intent(activity, NoteShareActivity.class);
+        intent.putExtras(bundle);
+        return intent;
+    }
+
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
