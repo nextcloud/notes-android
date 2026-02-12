@@ -116,7 +116,7 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
         if (shared) {
             noteShareIcon.setVisibility(VISIBLE);
         } else {
-            noteShareIcon.setVisibility(INVISIBLE);
+            noteShareIcon.setVisibility(GONE);
         }
 
         final var util = BrandingUtil.of(color, context);
