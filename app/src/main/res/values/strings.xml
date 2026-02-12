@@ -111,6 +111,7 @@
     <string name="share_internal_link_to_file_text">Internal share link only works for users with access to this file</string>
     <string name="share_internal_link">Share internal link</string>
     <string name="delete_link">Delete Link</string>
+    <string name="delete_share">Delete share</string>
     <string name="share_settings">Settings</string>
     <string name="share_send_new_email">Send new email</string>
     <string name="share_dialog_title">Sharing</string>
