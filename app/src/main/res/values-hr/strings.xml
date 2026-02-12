@@ -103,6 +103,8 @@
     <string name="ecosystem_apps_display_files">Datoteke</string>
     <string name="ecosystem_apps_display_more">Više</string>
     <string name="ecosystem_apps_display_talk">Razgovor</string>
+    <string name="ecosystem_apps_more">Više Nextcloud aplikacija</string>
+    <string name="email_pick_failed">Odabir adrese e‑pošte nije uspio.</string>
     <string name="error_action_open_battery_settings">Postavke baterije</string>
     <string name="error_action_open_deck_info">Otvori informacije o aplikaciji</string>
     <string name="error_action_open_network">Postavke mreže</string>
@@ -126,10 +128,12 @@
     <string name="error_dialog_we_need_info">Potrebne su nam sljedeće tehničke informacije kako bismo vam pomogli:</string>
     <string name="error_maintenance_mode">Poslužitelj je u načinu održavanja</string>
     <string name="error_no_network">Nema veze s mrežom</string>
+    <string name="error_setting_status_message">Pogreška pri postavljanju poruke statusa!</string>
     <string name="error_sync">Sinkronizacija nije uspjela: %1$s</string>
     <string name="error_synchronization">Sinkronizacija nije uspjela</string>
     <string name="error_unknown">Došlo je do nepoznate pogreške.</string>
     <string name="failed_update_ui">Ažuriranje korisničkog sučelja nije uspjelo</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Nema dostupne aplikacije za odabir kontakata</string>
     <string name="file_list_seconds_ago">prije par sekundi</string>
     <string name="formatting_help_cbf_body_1">Glavni cilj pri razvoju aplikacije Notes je stvoriti alat koji se može upotrebljavati bez ometanja. Svoje tekstove možete oblikovati posebnim oznakama Markdown. Za razne primjere navedene u nastavku možete se koristiti prečacima kako biste oblikovali svoje bilješke bez upisivanja šifri.</string>
     <string name="formatting_help_cbf_body_2">Odaberite raspon teksta ili dodirnite pokazivačem bilo koji položaj i prikazat će se skočni izbornik koji sadrži unose kao što su %4$s ili %5$s pored zadanih unosa %1$s, %2$s, %3$s.</string>
@@ -206,7 +210,11 @@
     <string name="no_other_accounts">Nemate konfiguriranih računa.</string>
     <string name="noteMode_remember_last">Zapamti moj posljednji izbor</string>
     <string name="note_has_been_deleted">Bilješka je izbrisana</string>
+    <string name="note_share_activity_contact_no_permission">Potrebno je dopuštenje za kontakte.</string>
     <string name="note_share_activity_could_not_retrieve_url">Nije moguće dohvatiti URL</string>
+    <string name="note_share_activity_resharing_not_allowed">Ponovno dijeljenje nije dopušteno</string>
+    <string name="note_share_activity_search_text">Pretraži korisnike ili grupe</string>
+    <string name="note_share_activity_send_copy_to">Pošalji kopiju u</string>
     <string name="note_share_activity_share_link">Dijeli poveznicu</string>
     <string name="note_share_activity_shared_with_you">S vama podijelio %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" je dijeljen s vama</string>
@@ -227,6 +235,7 @@
     <string name="note_share_detail_activity_share_via_link_hide_download">Sakrij preuzimanje</string>
     <string name="oneHour">1 sat</string>
     <string name="online">Na mreži</string>
+    <string name="online_status">Postavi online status</string>
     <string name="pin_to_homescreen">Prikvačite na početni zaslon</string>
     <string name="pref_value_font_normal">Normalno</string>
     <string name="pref_value_lock">Zaštita zaporkom</string>
@@ -238,6 +247,8 @@
     <string name="remove_account">Ukloni %1$s</string>
     <string name="search_in_all">Pretraži sve bilješke</string>
     <string name="search_in_category">Traži u %1$s</string>
+    <string name="set_message">Postavi poruku</string>
+    <string name="set_online_status">Postavi online status</string>
     <string name="settings_background_sync">Pozadinska sinkronizacija</string>
     <string name="settings_file_suffix">Ekstenzija datoteke</string>
     <string name="settings_file_suffix_description">Ekstenzija datoteke za nove bilješke u Nextcloudu</string>
@@ -252,6 +263,8 @@
     <string name="settings_notes_path_description">Mapa za spremanje bilješki u Nextcloudu</string>
     <string name="settings_notes_path_success">Nova mapa za bilješke: %1$s</string>
     <string name="settings_prevent_screen_capture">Spriječi snimanje zaslona</string>
+    <string name="settings_show_ecosystem_apps">Prikaži aplikacije ekosustava</string>
+    <string name="settings_show_ecosystem_apps_summary">Prikaži preporučene aplikacije iz Nextcloud ekosustava</string>
     <string name="settings_theme_title">Tamna tema</string>
     <string name="settings_wifi_only">Sinkroniziraj samo putem bežične (Wi-Fi) mreže</string>
     <string name="share">Dijeli</string>
@@ -274,6 +287,7 @@
     <string name="share_password_title">Zaštićeno zaporkom</string>
     <string name="share_permission_can_edit">Uređivanje moguće</string>
     <string name="share_permission_file_drop">Povlačenje datoteke</string>
+    <string name="share_permission_secure_file_drop">Siguran prijenos datoteka</string>
     <string name="share_permission_view_only">Samo za gledanje</string>
     <string name="share_permissions">Dopuštenja za dijeljenje</string>
     <string name="share_remote_clarification">%1$s (udaljeno)</string>
@@ -307,6 +321,7 @@
     <string name="simple_synchronization">Sinkronizacija</string>
     <string name="sort_alphabetically">Razvrstaj po abecedi</string>
     <string name="sort_last_modified">Razvrstaj prema datumu izmjene</string>
+    <string name="status_set_fail_message">Nije moguće dohvatiti ili postaviti status. Provjerite vezu s poslužiteljem.</string>
     <string name="today">Danas</string>
     <string name="unlock_notes">Otključaj bilješke</string>
     <string name="username">Korisničko ime</string>
@@ -320,6 +335,11 @@
     <string name="widget_single_note_title">Jedna bilješka</string>
     <string name="write_email">Pošalji poruku e-pošte</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Trebate uspostaviti internetsku vezu za dodavanje računa.</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">Ova poveznica dopušta još %d preuzimanje.</item>
+        <item quantity="few">Ova poveznica dopušta još %d preuzimanja.</item>
+        <item quantity="other">Ova poveznica dopušta još %d preuzimanja.</item>
+    </plurals>
     <plurals name="ab_selected">
         <item quantity="one">Odabrano je %d</item>
         <item quantity="few">Odabrano je %d</item>
