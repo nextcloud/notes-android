@@ -67,7 +67,7 @@ public class NoteShareActivityShareItemActionBottomSheetDialog extends BrandedBo
             binding.menuShareSendLink.setVisibility(View.GONE);
         }
 
-        int menuUnshareTextId = R.string.delete_link;
+        int menuUnshareTextId = R.string.share_delete_link;
         if (shareType == ShareType.USER) {
             menuUnshareTextId = R.string.delete_share;
         }
