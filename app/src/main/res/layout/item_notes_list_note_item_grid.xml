@@ -125,6 +125,18 @@
                     android:layout_marginEnd="@dimen/spacer_2x"
                     tools:text="27.11." />
 
+                <ImageView
+                    android:id="@+id/noteShared"
+                    android:layout_width="@dimen/note_shared_icon_size"
+                    android:layout_height="@dimen/note_shared_icon_size"
+                    android:layout_gravity="end"
+                    android:contentDescription="@string/menu_shared_note"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/ic_share_white_24dp"
+                    android:layout_marginEnd="@dimen/spacer_2x"
+                    app:tint="@color/defaultBrand"
+                    tools:visibility="visible" />
+
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

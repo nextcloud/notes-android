@@ -73,6 +73,8 @@ public class NoteViewListHolder extends NoteViewHolder {
         } else {
             bindSearchableContent(context, binding.noteExcerpt, searchQuery, note.getExcerpt(), color);
         }
+
+        bindNoteSharedIcon(context, note.isShared(), binding.noteShared, color);
     }
 
     @NonNull

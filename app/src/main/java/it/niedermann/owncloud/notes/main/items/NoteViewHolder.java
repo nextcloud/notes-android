@@ -112,6 +112,17 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
+    protected void bindNoteSharedIcon(@NonNull Context context, boolean shared, @NonNull ImageView noteShareIcon, int color) {
+        if (shared) {
+            noteShareIcon.setVisibility(VISIBLE);
+        } else {
+            noteShareIcon.setVisibility(INVISIBLE);
+        }
+
+        final var util = BrandingUtil.of(color, context);
+        util.platform.colorImageView(noteShareIcon,ColorRole.PRIMARY);
+    }
+
     public abstract void showSwipe(float dX);
 
     @Nullable
