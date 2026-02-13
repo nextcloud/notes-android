@@ -101,7 +101,7 @@
     <string name="context_based_formatting">Context gebaseerde formatterings-popover</string>
     <string name="copy_link">Link kopiëren</string>
     <string name="could_not_retrieve_shares">Kon shares niet ophalen</string>
-    <string name="delete_link">Verwijder link</string>
+    <string name="delete_share">Verwijder share</string>
     <string name="direct_editing_error">Fout bij laden uitgebreid bewerken</string>
     <string name="dismiss">Wissen</string>
     <string name="dnd">Niet storen</string>
@@ -243,7 +243,7 @@
     <string name="note_share_activity_user_icon_content_description">note deel gebruiker pictogram</string>
     <string name="note_share_activity_you_are_not_allowed_to_share">Je mag geen openbare share aanmaken.</string>
     <string name="note_share_created">Share aangemaakt</string>
-    <string name="note_share_detail_activity_advanced_settings">Geavanceerde instellingen</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Download en synchroniseren toestaan</string>
     <string name="note_share_detail_activity_cancel">Annuleren</string>
     <string name="note_share_detail_activity_common_confirm">Bevestigen</string>
     <string name="note_share_detail_activity_common_next">Volgende</string>
@@ -320,7 +320,9 @@
     <string name="share_password_title">Wachtwoord beveiligd</string>
     <string name="share_permission_can_edit">Kan bewerken</string>
     <string name="share_permission_file_drop">Bestandsopslag</string>
+    <string name="share_permission_file_request">Bestandsaanvraag</string>
     <string name="share_permission_secure_file_drop">Veilige bestandoverdracht</string>
+    <string name="share_permission_unknown">Onbekend</string>
     <string name="share_permission_view_only">Alleen bekijken</string>
     <string name="share_permissions">Deelmachtigingen</string>
     <string name="share_remote_clarification">%1$s (extern)</string>

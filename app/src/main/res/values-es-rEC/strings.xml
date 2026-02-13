@@ -98,7 +98,6 @@
     <string name="context_based_formatting">Popover de formato contextual</string>
     <string name="copy_link">Copiar liga</string>
     <string name="could_not_retrieve_shares">No se pudieron recuperar los compartidos</string>
-    <string name="delete_link">Eliminar enlace</string>
     <string name="direct_editing_error">Error al cargar la edición enriquecida</string>
     <string name="dismiss">Descartar</string>
     <string name="dnd">No molestar</string>
@@ -217,7 +216,6 @@
     <string name="note_share_activity_share_link">Compartir liga</string>
     <string name="note_share_activity_shared_with_you">Compartido contigo por %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" ha sido compartido contigo</string>
-    <string name="note_share_detail_activity_advanced_settings">Configuración avanzada</string>
     <string name="note_share_detail_activity_cancel">Cancelar</string>
     <string name="note_share_detail_activity_common_confirm">Confirmar</string>
     <string name="note_share_detail_activity_hint_name">Nombre</string>
@@ -264,6 +262,7 @@
     <string name="settings_prevent_screen_capture">Evitar la captura de pantalla</string>
     <string name="settings_theme_title">Tema</string>
     <string name="settings_wifi_only">Sincronizar solo con Wi-Fi</string>
+    <string name="share_delete_link">Eliminar enlace</string>
     <string name="share_dialog_title">Compartiendo</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Vence %1$s</string>
@@ -281,6 +280,7 @@
     <string name="share_password_title">Protegido con contraseña</string>
     <string name="share_permission_file_drop">Soltar archivo</string>
     <string name="share_permission_secure_file_drop">Soltar archivo seguro</string>
+    <string name="share_permission_unknown">Desconocido</string>
     <string name="share_permission_view_only">Solo vista</string>
     <string name="share_permissions">Permisos de compartición</string>
     <string name="share_remote_clarification">%1$s (remoto)</string>

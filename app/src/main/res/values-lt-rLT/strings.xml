@@ -75,7 +75,7 @@
     <string name="common_ok">Gerai</string>
     <string name="copy_link">Kopijuoti nuorodą</string>
     <string name="could_not_retrieve_shares">Nepavyko gauti viešinių</string>
-    <string name="delete_link">Ištrinti nuorodą</string>
+    <string name="delete_share">Ištrinti viešinį</string>
     <string name="dismiss">Atmesti</string>
     <string name="dnd">Netrukdyti</string>
     <string name="dontClear">Neišvalyti</string>
@@ -182,7 +182,6 @@
     <string name="note_share_activity_share_link">Viešinio nuoroda</string>
     <string name="note_share_activity_shared_with_you">%1$s bendrina su Jumis.</string>
     <string name="note_share_activity_subject_shared_with_you">„%1$s“ yra bendrinama su jumis</string>
-    <string name="note_share_detail_activity_advanced_settings">Išplėstiniai nustatymai</string>
     <string name="note_share_detail_activity_cancel">Atsisakyti</string>
     <string name="note_share_detail_activity_common_confirm">Patvirtinti</string>
     <string name="note_share_detail_activity_common_next">Kitas</string>
@@ -217,6 +216,7 @@
     <string name="settings_theme_title">Apipavidalinimas</string>
     <string name="settings_wifi_only">Sinchronizuoti tik naudojant belaidį (Wi-Fi)</string>
     <string name="share">Bendrinti</string>
+    <string name="share_delete_link">Ištrinti nuorodą</string>
     <string name="share_dialog_title">Bendrinimas</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Galioja iki %1$s</string>
@@ -235,7 +235,9 @@
     <string name="share_password_title">Apsaugota slaptažodžiu</string>
     <string name="share_permission_can_edit">Gali taisyti</string>
     <string name="share_permission_file_drop">Failų įkėlimas</string>
+    <string name="share_permission_file_request">Failų įkėlimui</string>
     <string name="share_permission_secure_file_drop">Saugus failų įkėlimas</string>
+    <string name="share_permission_unknown">Nežinoma</string>
     <string name="share_permission_view_only">Tik peržiūrėti</string>
     <string name="share_remote_clarification">%1$s (nuotolinis)</string>
     <string name="share_room_clarification">%1$s (pokalbis)</string>

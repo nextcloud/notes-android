@@ -98,7 +98,6 @@
     <string name="copy_link">Копиране на връзката</string>
     <string name="could_not_retrieve_shares"> 60% match 
 Споделянията не могат да бъдат извлечени</string>
-    <string name="delete_link">Изтриване на връзка</string>
     <string name="direct_editing_error">Грешка при зареждане на богато редактиране</string>
     <string name="dismiss">Затвори</string>
     <string name="dnd">Не безпокой</string>
@@ -216,7 +215,6 @@
     <string name="note_share_activity_share_link">Връзка за споделяне</string>
     <string name="note_share_activity_shared_with_you">Споделено с Вас от %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" бе споделено с вас</string>
-    <string name="note_share_detail_activity_advanced_settings">Допълнителни настройки</string>
     <string name="note_share_detail_activity_cancel">Отказ</string>
     <string name="note_share_detail_activity_common_confirm">Потвърдете</string>
     <string name="note_share_detail_activity_common_next">Следващо</string>

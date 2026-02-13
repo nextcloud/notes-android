@@ -69,7 +69,6 @@
     <string name="common_ok">Ok</string>
     <string name="copy_link">Copiar hiperligação</string>
     <string name="could_not_retrieve_shares">Não foi possível obter as partilhas</string>
-    <string name="delete_link">Eliminar hiperligação</string>
     <string name="dismiss">Dispensar</string>
     <string name="dnd">Não incomodar</string>
     <string name="dontClear">Não limpar</string>
@@ -119,7 +118,7 @@
     <string name="note_share_activity_share_link">Partilhar ligação</string>
     <string name="note_share_activity_shared_with_you">Partilhado consigo por %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" foi partilhado consigo</string>
-    <string name="note_share_detail_activity_advanced_settings">Definições Avançadas </string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Permitir transferência e sincronizar</string>
     <string name="note_share_detail_activity_cancel">Cancelar</string>
     <string name="note_share_detail_activity_common_confirm">Confirmar</string>
     <string name="note_share_detail_activity_common_next">Seguinte</string>
@@ -171,6 +170,7 @@
     <string name="share_password_title">Protegido com Senha</string>
     <string name="share_permission_can_edit">Pode editar</string>
     <string name="share_permission_file_drop">File drop</string>
+    <string name="share_permission_unknown">Desconhecido</string>
     <string name="share_permission_view_only">Visualizar apenas</string>
     <string name="share_permissions">Permissões de Partilha</string>
     <string name="share_remote_clarification">%1$s (remoto)</string>

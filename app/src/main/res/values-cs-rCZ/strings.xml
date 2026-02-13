@@ -101,7 +101,6 @@
     <string name="context_based_formatting">Kontextové vyskakovací okno formátování</string>
     <string name="copy_link">Zkopírovat odkaz</string>
     <string name="could_not_retrieve_shares">Nedaří se získat sdílení</string>
-    <string name="delete_link">Smazat odkaz</string>
     <string name="direct_editing_error">Chyba při načítání upravování formátovaného textu</string>
     <string name="dismiss">Zahodit</string>
     <string name="dnd">Nerušit</string>
@@ -243,7 +242,6 @@
     <string name="note_share_activity_user_icon_content_description">ikona uživatele sdílení poznámky</string>
     <string name="note_share_activity_you_are_not_allowed_to_share">Nemáte oprávnění vytvářet veřejné sdílení.</string>
     <string name="note_share_created">Sdílení vtvořeno</string>
-    <string name="note_share_detail_activity_advanced_settings">Pokročilá nastavení</string>
     <string name="note_share_detail_activity_cancel">Storno</string>
     <string name="note_share_detail_activity_common_confirm">Potvrdit</string>
     <string name="note_share_detail_activity_common_next">Next</string>

@@ -220,7 +220,6 @@
     <string name="note_share_activity_user_icon_content_description">qayd almashish foydalanuvchi belgisi</string>
     <string name="note_share_activity_you_are_not_allowed_to_share">Ommaviy ulush yaratishga ruxsat berilmagan.</string>
     <string name="note_share_created">Ulashish yaratildi</string>
-    <string name="note_share_detail_activity_advanced_settings">Kengaytirilgan sozlamalar</string>
     <string name="note_share_detail_activity_cancel">Bekor qilish</string>
     <string name="note_share_detail_activity_common_confirm">Tasdiqlang</string>
     <string name="note_share_detail_activity_common_next">Keyingisi</string>
@@ -270,6 +269,7 @@
     <string name="share_no_expiration_date_label">Yaroqlilik muddatini belgilang</string>
     <string name="share_password_dialog_fragment_skip">O\'tkazib yuborish</string>
     <string name="share_permission_can_edit">tahrirlashi mumkin</string>
+    <string name="share_permission_unknown">Noma\'lum</string>
     <string name="share_settings">Sozlamalar</string>
     <string name="share_via_link_section_title">Havolani ulashing</string>
     <string name="shared_text_empty">Umumiy matn boʻsh edi</string>

@@ -97,7 +97,6 @@
     <string name="context_based_formatting">Meniu ce conține formatare bazată pe context</string>
     <string name="copy_link">Copiază link</string>
     <string name="could_not_retrieve_shares">Nu am putut obține lista partajărilor</string>
-    <string name="delete_link">Șterge legătura</string>
     <string name="dismiss">Elimină</string>
     <string name="ecosystem_apps_display_more">Mai mult</string>
     <string name="ecosystem_apps_display_talk">Discuție</string>
@@ -212,7 +211,6 @@
     <string name="note_share_activity_share_link">Partajază legătură</string>
     <string name="note_share_activity_shared_with_you">Partajat cu tine de către %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">„%1$s” a fost partajat cu dumneavoastră</string>
-    <string name="note_share_detail_activity_advanced_settings">Setări avansate</string>
     <string name="note_share_detail_activity_cancel">Anulare</string>
     <string name="note_share_detail_activity_common_confirm">Confirmă</string>
     <string name="note_share_detail_activity_common_next">Următorul</string>
@@ -276,6 +274,7 @@
     <string name="share_password_title">Protejat cu parolă</string>
     <string name="share_permission_can_edit">Poate edita</string>
     <string name="share_permission_file_drop">Aducere fișier</string>
+    <string name="share_permission_unknown">Necunoscut</string>
     <string name="share_permission_view_only">Numai se vizualizează</string>
     <string name="share_permissions">Permisiuni de partajare</string>
     <string name="share_remote_clarification">%1$s (remote)</string>

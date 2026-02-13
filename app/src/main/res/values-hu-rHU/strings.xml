@@ -100,7 +100,7 @@
     <string name="context_based_formatting">Környezetfüggő formázási felbukkanó menü</string>
     <string name="copy_link">Hivatkozás másolása</string>
     <string name="could_not_retrieve_shares">Nem sikerült lekérni a megosztásokat</string>
-    <string name="delete_link">Hivatkozás törlése</string>
+    <string name="delete_share">Megosztás törlése</string>
     <string name="direct_editing_error">Hiba a formázott szöveges szerkesztő betöltése során</string>
     <string name="dismiss">Eltüntetés</string>
     <string name="dnd">Ne zavarjanak</string>
@@ -241,7 +241,7 @@
     <string name="note_share_activity_user_icon_content_description">jegyzetmegosztás felhasználói ikonja</string>
     <string name="note_share_activity_you_are_not_allowed_to_share">Nincs jogosultsága, hogy nyilvános megosztást hozzon létre.</string>
     <string name="note_share_created">Megosztás létrehozva</string>
-    <string name="note_share_detail_activity_advanced_settings">Speciális beállítások</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Letöltés és szinkronizálás engedélyezése</string>
     <string name="note_share_detail_activity_cancel">Mégse</string>
     <string name="note_share_detail_activity_common_confirm">Megerősítés</string>
     <string name="note_share_detail_activity_common_next">Következő</string>
@@ -298,6 +298,7 @@
     <string name="settings_theme_title">Téma</string>
     <string name="settings_wifi_only">Szinkronizálás csak Wi-Fin</string>
     <string name="share">Megosztás</string>
+    <string name="share_delete_link">Hivatkozás törlése</string>
     <string name="share_dialog_title">Megosztás</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Lejárat: %1$s</string>
@@ -317,7 +318,9 @@
     <string name="share_password_title">Jelszóval védett</string>
     <string name="share_permission_can_edit">Szerkesztheti</string>
     <string name="share_permission_file_drop">Fájllerakat</string>
+    <string name="share_permission_file_request">Fájlkérés</string>
     <string name="share_permission_secure_file_drop">Biztonságos fájllerakat</string>
+    <string name="share_permission_unknown">Ismeretlen</string>
     <string name="share_permission_view_only">Csak megtekintés</string>
     <string name="share_permissions">Megosztási jogosultságok</string>
     <string name="share_remote_clarification">%1$s (távoli)</string>

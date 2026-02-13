@@ -141,7 +141,6 @@
     <string name="note_share_activity_share_link">Compartir l\'enllaz</string>
     <string name="note_share_activity_shared_with_you">%1$s compartió l\'elementu contigo</string>
     <string name="note_share_activity_subject_shared_with_you">Compartiose \"%1$s\" contigo</string>
-    <string name="note_share_detail_activity_advanced_settings">Configuración avanzada</string>
     <string name="note_share_detail_activity_cancel">Encaboxar</string>
     <string name="note_share_detail_activity_common_confirm">Confirmar</string>
     <string name="note_share_detail_activity_common_next">Siguiente</string>

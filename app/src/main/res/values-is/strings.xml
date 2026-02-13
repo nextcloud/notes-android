@@ -99,7 +99,7 @@
     <string name="context_based_formatting">Sprettgluggi fyrir samhengisháða forsníðingu</string>
     <string name="copy_link">Afrita tengil</string>
     <string name="could_not_retrieve_shares">Tókst ekki að ná í sameignir</string>
-    <string name="delete_link">Eyða tengli</string>
+    <string name="delete_share">Eyða sameign</string>
     <string name="direct_editing_error">Villa við að hlaða inn sniðnum textabreytingum</string>
     <string name="dismiss">Hafna</string>
     <string name="dnd">Ekki ónáða</string>
@@ -260,7 +260,7 @@
     <string name="note_share_activity_share_link">Tengill á sameign</string>
     <string name="note_share_activity_shared_with_you">Deilt með þér af %s</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" hefur verið deilt með þér</string>
-    <string name="note_share_detail_activity_advanced_settings">Ítarlegar stillingar</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Leyfa niðurhal og samstillingu</string>
     <string name="note_share_detail_activity_cancel">Hætta við</string>
     <string name="note_share_detail_activity_common_confirm">Staðfesta</string>
     <string name="note_share_detail_activity_common_next">Næst</string>
@@ -316,6 +316,7 @@
     <string name="settings_theme_title">Þema</string>
     <string name="settings_wifi_only">Aðeins samstilla á WiFi-neti</string>
     <string name="share">Deila</string>
+    <string name="share_delete_link">Eyða tengli</string>
     <string name="share_dialog_title">Deiling</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Rennur út %1$s</string>
@@ -335,7 +336,9 @@
     <string name="share_password_title">Verja með lykilorði</string>
     <string name="share_permission_can_edit">Getur breytt</string>
     <string name="share_permission_file_drop">Slepping skráa</string>
+    <string name="share_permission_file_request">Beiðni um skrá</string>
     <string name="share_permission_secure_file_drop">Örugg slepping skráa</string>
+    <string name="share_permission_unknown">Óþekkt</string>
     <string name="share_permission_view_only">Einungis skoða</string>
     <string name="share_permissions">Heimildir sameignar</string>
     <string name="share_remote_clarification">%1$s (fjartengt)</string>

@@ -101,7 +101,7 @@
     <string name="context_based_formatting">Xanela emerxente de formato baseado no contexto</string>
     <string name="copy_link">Copiar a ligazón</string>
     <string name="could_not_retrieve_shares">Non foi posíbel recuperar as comparticións</string>
-    <string name="delete_link">Eliminar a ligazón</string>
+    <string name="delete_share">Eliminar o recurso compartido</string>
     <string name="direct_editing_error">Produciuse un erro ao cargar a edición mellorada</string>
     <string name="dismiss">Desbotar</string>
     <string name="dnd">Non molestar</string>
@@ -243,7 +243,7 @@
     <string name="note_share_activity_user_icon_content_description">Icona de usuario de compartición de notas</string>
     <string name="note_share_activity_you_are_not_allowed_to_share">Vde. non ten permiso para crear unha compartición pública.</string>
     <string name="note_share_created">Compartición creada</string>
-    <string name="note_share_detail_activity_advanced_settings">Axustes avanzados</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Permitir a descarga e a sincronización</string>
     <string name="note_share_detail_activity_cancel">Cancelar</string>
     <string name="note_share_detail_activity_common_confirm">Confirmar</string>
     <string name="note_share_detail_activity_common_next">Seguinte</string>
@@ -300,6 +300,7 @@
     <string name="settings_theme_title">Tema</string>
     <string name="settings_wifi_only">Sincronizar só con wifi</string>
     <string name="share">Compartir</string>
+    <string name="share_delete_link">Eliminar ligazón</string>
     <string name="share_dialog_title">Compartindo</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Caduca o %1$s</string>
@@ -320,7 +321,9 @@
     <string name="share_password_title">Protexido con contrasinal</string>
     <string name="share_permission_can_edit">Pode editar</string>
     <string name="share_permission_file_drop">Soltar o ficheiro</string>
+    <string name="share_permission_file_request">Solicitude de ficheiro</string>
     <string name="share_permission_secure_file_drop">Entrega segura de ficheiros</string>
+    <string name="share_permission_unknown">Descoñecido</string>
     <string name="share_permission_view_only">Só ver</string>
     <string name="share_permissions">Permisos ao compartir</string>
     <string name="share_remote_clarification">%1$s (remoto)</string>

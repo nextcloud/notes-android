@@ -26,6 +26,7 @@
     <string name="about_version_title">Version</string>
     <string name="account_already_imported">Kontoen er allerede importeret</string>
     <string name="account_imported">Konto importeret.</string>
+    <string name="account_not_found">Konto blev ikke fundet.</string>
     <string name="action_back">Tilbage</string>
     <string name="action_create">Ny note</string>
     <string name="action_edit_save">Gem</string>
@@ -98,7 +99,6 @@
     <string name="context_based_formatting">Kontekstbaseret formatering popover</string>
     <string name="copy_link">Kopiér link</string>
     <string name="could_not_retrieve_shares">Kunne ikke hente delte drev</string>
-    <string name="delete_link">Slet link</string>
     <string name="direct_editing_error">Fejl under indlæsning af udvidet redigering</string>
     <string name="dismiss">Afvis</string>
     <string name="dnd">Forstyr ikke</string>
@@ -237,7 +237,6 @@
     <string name="note_share_activity_user_icon_content_description">note del bruger ikon</string>
     <string name="note_share_activity_you_are_not_allowed_to_share">Du har ikke tilladelse til at oprette en offentlig deling.</string>
     <string name="note_share_created">Deling oprettet</string>
-    <string name="note_share_detail_activity_advanced_settings">Avancerede indstillinger</string>
     <string name="note_share_detail_activity_cancel">Annullér</string>
     <string name="note_share_detail_activity_common_confirm">Bekræft</string>
     <string name="note_share_detail_activity_common_next">Næste</string>

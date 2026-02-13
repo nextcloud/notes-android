@@ -79,7 +79,6 @@
     <string name="common_ok">בסדר</string>
     <string name="copy_link">העתקת קישור</string>
     <string name="could_not_retrieve_shares">לא ניתן למשוך את השיתופים</string>
-    <string name="delete_link">מחק קישור</string>
     <string name="dismiss">שחרור</string>
     <string name="dontClear">לא לפנות</string>
     <string name="ecosystem_apps_display_files">קבצים</string>
@@ -160,7 +159,6 @@
     <string name="note_share_activity_share_link">שיתוף קישור</string>
     <string name="note_share_activity_shared_with_you">שותף אתך על ידי %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" שותף אתך</string>
-    <string name="note_share_detail_activity_advanced_settings">הגדרות מתקדמות</string>
     <string name="note_share_detail_activity_cancel">ביטול</string>
     <string name="note_share_detail_activity_common_confirm">אישור</string>
     <string name="note_share_detail_activity_hint_name">שם</string>
@@ -188,6 +186,7 @@
     <string name="settings_theme_title">ערכת עיצוב</string>
     <string name="settings_wifi_only">סנכרון רק דרך רשת אלחוטית</string>
     <string name="share">שתף</string>
+    <string name="share_delete_link">מחיקת קישור</string>
     <string name="share_dialog_title">שיתוף</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">תפוגה ב־%1$s</string>
@@ -205,6 +204,7 @@
     <string name="share_password_dialog_fragment_skip">דלג</string>
     <string name="share_password_title">מוגן בססמה</string>
     <string name="share_permission_can_edit">ניתן לערוך</string>
+    <string name="share_permission_unknown">לא ידוע</string>
     <string name="share_permission_view_only">לצפיה בלבד</string>
     <string name="share_remote_clarification">%1$s (נשלט מרחוק)</string>
     <string name="share_room_clarification">%1$s (דיון)</string>

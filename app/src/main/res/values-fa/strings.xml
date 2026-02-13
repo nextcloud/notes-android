@@ -99,7 +99,7 @@
     <string name="context_based_formatting">بازپخش قالب بندی مبتنی بر متن</string>
     <string name="copy_link">کپی کردن لینک</string>
     <string name="could_not_retrieve_shares">امکان بازگردانی اشتراک گذاری‌ها وجود ندارد</string>
-    <string name="delete_link">حذف پیوند</string>
+    <string name="delete_share">حذف اشتراک‌گذاری</string>
     <string name="direct_editing_error">Error while loading rich editing</string>
     <string name="dismiss">رد کردن</string>
     <string name="dnd">مزاحم نشوید</string>
@@ -223,7 +223,7 @@
     <string name="note_share_activity_share_link">هم‌رسانی پیوند</string>
     <string name="note_share_activity_shared_with_you">هم‌رسانده با شما به دست %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" با شما به اشتراک گذاشته شد</string>
-    <string name="note_share_detail_activity_advanced_settings">تنظمیات پیش‌رفته</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">اجازه دانلود و همگام‌سازی</string>
     <string name="note_share_detail_activity_cancel">ردکردن</string>
     <string name="note_share_detail_activity_common_confirm">تأیید</string>
     <string name="note_share_detail_activity_common_next">بعدی</string>
@@ -276,6 +276,7 @@
     <string name="settings_theme_title">"تم "</string>
     <string name="settings_wifi_only">همگام‌سازی فقط در Wi-Fi</string>
     <string name="share">اشتراک‌گذاری</string>
+    <string name="share_delete_link">حذف پیوند</string>
     <string name="share_dialog_title">هم‌رسانی</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">منقضی در%1$s</string>
@@ -295,7 +296,9 @@
     <string name="share_password_title">محافظت شده با گذرواژه</string>
     <string name="share_permission_can_edit">توانایی ویرایش</string>
     <string name="share_permission_file_drop">انداختن پرونده</string>
+    <string name="share_permission_file_request">درخواست فایل</string>
     <string name="share_permission_secure_file_drop">Secure file drop</string>
+    <string name="share_permission_unknown">ناشناخته.</string>
     <string name="share_permission_view_only">تنها مشاهده</string>
     <string name="share_permissions">اجازه‌های هم‌رسانی</string>
     <string name="share_remote_clarification">%1$s (دوردست)</string>

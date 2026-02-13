@@ -101,7 +101,7 @@
     <string name="context_based_formatting">Контекстне форматування</string>
     <string name="copy_link">Копіювати посилання</string>
     <string name="could_not_retrieve_shares">Не вдалося отримати спільні дані</string>
-    <string name="delete_link">Посилання на вилучення</string>
+    <string name="delete_share">Вилучити зі спільного доступу</string>
     <string name="direct_editing_error">Помилка під час завантаження форматованого редагування</string>
     <string name="dismiss">Сховати</string>
     <string name="dnd">Не турбувати</string>
@@ -243,7 +243,7 @@
     <string name="note_share_activity_user_icon_content_description">значок нотатки поділитися з користувачем</string>
     <string name="note_share_activity_you_are_not_allowed_to_share">У вас відсутні права на створення спільних публічних ресурсів.</string>
     <string name="note_share_created">Спільний ресурс створено</string>
-    <string name="note_share_detail_activity_advanced_settings">Розширені</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Дозволити звантаження та синхронізацію</string>
     <string name="note_share_detail_activity_cancel">Скасувати</string>
     <string name="note_share_detail_activity_common_confirm">Підтвердити</string>
     <string name="note_share_detail_activity_common_next">Далі</string>
@@ -300,6 +300,7 @@
     <string name="settings_theme_title">Тема</string>
     <string name="settings_wifi_only">Синхронізувати тільки по WI-Fi</string>
     <string name="share">Спільний доступ</string>
+    <string name="share_delete_link">Вилучити посилання</string>
     <string name="share_dialog_title">Спільне</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Дійсне до %1$s</string>
@@ -320,7 +321,9 @@
     <string name="share_password_title">Захищено паролем</string>
     <string name="share_permission_can_edit">Може редагувати</string>
     <string name="share_permission_file_drop">Перетягнути файл</string>
+    <string name="share_permission_file_request">Запит на файл</string>
     <string name="share_permission_secure_file_drop">Захищене додавання файлу</string>
+    <string name="share_permission_unknown">Невідомо</string>
     <string name="share_permission_view_only">Лише перегляд</string>
     <string name="share_permissions">Поділитися дозволами</string>
     <string name="share_remote_clarification">%1$s (віддалено)</string>

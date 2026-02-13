@@ -79,6 +79,7 @@
     <string name="common_ok">AB</string>
     <string name="context_based_formatting">Bentana de formatatzione basada subra de su cuntestu</string>
     <string name="could_not_retrieve_shares">No at fatu a recuperare is cumpartziduras</string>
+    <string name="delete_share">Cantzella sa cumpartzidura</string>
     <string name="dismiss">Iscarta</string>
     <string name="dnd">No istorbes</string>
     <string name="dontClear">Non nche ddu lìmpies</string>
@@ -187,7 +188,6 @@
     <string name="note_share_activity_share_link">Cumpartzi ligòngiu</string>
     <string name="note_share_activity_shared_with_you">Cumpartzidu cun te dae %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" dd\'ant cumpartzidu cun tegus</string>
-    <string name="note_share_detail_activity_advanced_settings">Cunfiguratzione avantzada</string>
     <string name="note_share_detail_activity_cancel">Annulla</string>
     <string name="note_share_detail_activity_common_confirm">Cunfirma</string>
     <string name="note_share_detail_activity_common_next">Imbeniente</string>
@@ -245,6 +245,7 @@
     <string name="share_password_dialog_fragment_share_link_optional_password_title">Inserta una crae optzionale</string>
     <string name="share_password_title">Amparadu dae una crae</string>
     <string name="share_permission_can_edit">Podet modificare</string>
+    <string name="share_permission_unknown">Disconnotu</string>
     <string name="share_permission_view_only">Isceti in visualizatzione</string>
     <string name="share_remote_clarification">%1$s (remotu)</string>
     <string name="share_room_clarification">%1$s (tzarrada)</string>

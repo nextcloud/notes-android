@@ -96,7 +96,7 @@
     <string name="common_ok">Oke</string>
     <string name="copy_link">Salin tautan</string>
     <string name="could_not_retrieve_shares">Tidak dapat menerima berkas bersama</string>
-    <string name="delete_link">Hapus tautan</string>
+    <string name="delete_share">Hapus pembagian</string>
     <string name="direct_editing_error">Kesalahan saat memuat pengeditan kaya</string>
     <string name="dismiss">Batal</string>
     <string name="dnd">Jangan diganggu</string>
@@ -211,7 +211,7 @@
     <string name="note_share_activity_share_link">Bagikan tautan</string>
     <string name="note_share_activity_shared_with_you">Dibagikan dengan Anda oleh %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" telah membagikan dengan Anda</string>
-    <string name="note_share_detail_activity_advanced_settings">Pengaturan Tambahan</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Izinkan unduh dan sinkron</string>
     <string name="note_share_detail_activity_cancel">Batal</string>
     <string name="note_share_detail_activity_common_confirm">Konfirmasi</string>
     <string name="note_share_detail_activity_common_next">Berikutnya</string>
@@ -263,6 +263,7 @@
     <string name="settings_theme_title">Tema</string>
     <string name="settings_wifi_only">Sinkronkan saja pada Wi-Fi</string>
     <string name="share">Bagikan</string>
+    <string name="share_delete_link">Hapus tautan</string>
     <string name="share_dialog_title">Berbagi</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Kadaluarsa %1$s</string>
@@ -282,7 +283,9 @@
     <string name="share_password_title">Sandi dilindungi</string>
     <string name="share_permission_can_edit">Dapat mengedit</string>
     <string name="share_permission_file_drop">Drop file</string>
+    <string name="share_permission_file_request">Permintaan file</string>
     <string name="share_permission_secure_file_drop">Tempat penyimpanan file aman</string>
+    <string name="share_permission_unknown">Tidak diketahui</string>
     <string name="share_permission_view_only">Hanya lihat</string>
     <string name="share_permissions">Bagikan Izin</string>
     <string name="share_remote_clarification">%1$s (remote)</string>

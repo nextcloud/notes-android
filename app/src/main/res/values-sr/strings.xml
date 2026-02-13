@@ -100,7 +100,7 @@
     <string name="context_based_formatting">Искачући облачић форматирања у зависности од контекста</string>
     <string name="copy_link">Копирај везу</string>
     <string name="could_not_retrieve_shares">Не могу да добавим дељења</string>
-    <string name="delete_link">Обриши линк</string>
+    <string name="delete_share">Обриши дељење</string>
     <string name="direct_editing_error">Грешка приликом учитавања детаљног уређивања</string>
     <string name="dismiss">Одбаци</string>
     <string name="dnd">Не узнемиравај</string>
@@ -240,7 +240,7 @@
     <string name="note_share_activity_user_icon_content_description">note share user icon</string>
     <string name="note_share_activity_you_are_not_allowed_to_share">Немате право да креирате јавно дељење.</string>
     <string name="note_share_created">Дељење је креирано</string>
-    <string name="note_share_detail_activity_advanced_settings">Напредне поставке</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Дозволи преузимање и сихронизацију</string>
     <string name="note_share_detail_activity_cancel">Откажи</string>
     <string name="note_share_detail_activity_common_confirm">Потврди</string>
     <string name="note_share_detail_activity_common_next">Следеће</string>
@@ -297,6 +297,7 @@
     <string name="settings_theme_title">Тема</string>
     <string name="settings_wifi_only">Синхронизуј само преко бежичне везе</string>
     <string name="share">Пдели</string>
+    <string name="share_delete_link">Обриши везу</string>
     <string name="share_dialog_title">Дељење</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Истиче %1$s</string>
@@ -316,7 +317,9 @@
     <string name="share_password_title">Заштићено лозинком</string>
     <string name="share_permission_can_edit">Може да уређује</string>
     <string name="share_permission_file_drop">Место за упуштање фајлова</string>
+    <string name="share_permission_file_request">Захтев за фајл</string>
     <string name="share_permission_secure_file_drop">Сигурно место за упуштање фајлова</string>
+    <string name="share_permission_unknown">Непознато</string>
     <string name="share_permission_view_only">Само преглед</string>
     <string name="share_permissions">Дозволе за дељење</string>
     <string name="share_remote_clarification">%1$s(удаљено)</string>

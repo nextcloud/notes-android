@@ -85,7 +85,7 @@
     <string name="context_based_formatting">Hiện lên định dạng dựa trên ngữ cảnh</string>
     <string name="copy_link">Sao chép liên kết</string>
     <string name="could_not_retrieve_shares">Không thể truy xuất lượt chia sẻ</string>
-    <string name="delete_link">Xóa liên kết</string>
+    <string name="delete_share">Xóa chia sẻ</string>
     <string name="dismiss">Bỏ qua</string>
     <string name="dnd">Đừng làm phiền</string>
     <string name="dontClear">Không xoá</string>
@@ -196,7 +196,6 @@
     <string name="note_share_activity_share_link">Chia sẻ liên kết</string>
     <string name="note_share_activity_shared_with_you">%1$s đã chia sẻ với bạn</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" đã chia sẽ với bạn</string>
-    <string name="note_share_detail_activity_advanced_settings">Cài đặt nâng cao</string>
     <string name="note_share_detail_activity_cancel">Hủy bỏ</string>
     <string name="note_share_detail_activity_common_confirm">Xác nhận</string>
     <string name="note_share_detail_activity_common_next">Tiếp theo</string>
@@ -264,6 +263,7 @@
     <string name="share_password_title">Mật khẩu được bảo vệ</string>
     <string name="share_permission_can_edit">Có thể chỉnh sửa</string>
     <string name="share_permission_file_drop">Thả file</string>
+    <string name="share_permission_unknown">Không xác định</string>
     <string name="share_permission_view_only">Chỉ xem</string>
     <string name="share_permissions">Quyền kho</string>
     <string name="share_remote_clarification">%1$s (từ xa)</string>

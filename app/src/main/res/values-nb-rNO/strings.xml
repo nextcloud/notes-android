@@ -99,7 +99,7 @@
     <string name="context_based_formatting">Popover for kontekstbasert formatering</string>
     <string name="copy_link">Kopier lenke</string>
     <string name="could_not_retrieve_shares">Kunne ikke hente ressursen</string>
-    <string name="delete_link">Slett lenke</string>
+    <string name="delete_share">Slett delt ressurs</string>
     <string name="direct_editing_error">Feil ved lasting av rik endringsmodus</string>
     <string name="dismiss">Avvis</string>
     <string name="dnd">Ikke forstyrr</string>
@@ -224,7 +224,7 @@
     <string name="note_share_activity_share_link">Del lenke</string>
     <string name="note_share_activity_shared_with_you">Delt med deg av %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" er blitt delt med deg</string>
-    <string name="note_share_detail_activity_advanced_settings">Avanserte innstillinger</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Tillat nedlasting og synkronisering</string>
     <string name="note_share_detail_activity_cancel">Avbryt</string>
     <string name="note_share_detail_activity_common_confirm">Bekreft</string>
     <string name="note_share_detail_activity_common_next">Neste</string>
@@ -280,6 +280,7 @@
     <string name="settings_theme_title">Tema</string>
     <string name="settings_wifi_only">Synkroniser kun med WiFi</string>
     <string name="share">Dele</string>
+    <string name="share_delete_link">Slett kobling</string>
     <string name="share_dialog_title">Deling</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Utløper den %1$s</string>
@@ -299,7 +300,9 @@
     <string name="share_password_title">Passordbeskyttet</string>
     <string name="share_permission_can_edit">Kan redigere</string>
     <string name="share_permission_file_drop">Filkasse</string>
+    <string name="share_permission_file_request">Filforespørsel</string>
     <string name="share_permission_secure_file_drop">Sikker filkasse</string>
+    <string name="share_permission_unknown">Ukjent</string>
     <string name="share_permission_view_only">Kun se</string>
     <string name="share_permissions">Rettigheter for deling</string>
     <string name="share_remote_clarification">%1$s (ekstern)</string>

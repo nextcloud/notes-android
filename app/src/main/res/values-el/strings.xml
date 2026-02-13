@@ -26,6 +26,7 @@
     <string name="about_version_title">Έκδοση</string>
     <string name="account_already_imported">Ο λογαριασμός έχει εισαχθεί ήδη</string>
     <string name="account_imported">Έγινε εισαγωγή του Λογαριασμού</string>
+    <string name="account_not_found">Δεν βρέθηκε λογαριασμός!</string>
     <string name="action_back">Πίσω</string>
     <string name="action_create">Νέα σημείωση</string>
     <string name="action_edit_save">Αποθήκευση</string>
@@ -92,7 +93,6 @@
     <string name="context_based_formatting">Μορφοποίηση βάσει περιεχομένου popover</string>
     <string name="copy_link">Αντιγραφή συνδέσμου</string>
     <string name="could_not_retrieve_shares">Αδυναμία ανάκτησης κοινόχρηστων</string>
-    <string name="delete_link">Διαγραφή Συνδέσμου</string>
     <string name="direct_editing_error">Σφάλμα κατά την φόρτωση της πλούσιας επεξεργασίας</string>
     <string name="dismiss">Αποδέσμευση</string>
     <string name="dnd">Μην ενοχλείτε</string>
@@ -206,7 +206,6 @@
     <string name="note_share_activity_share_link">Διαμοιρασμός συνδέσμου</string>
     <string name="note_share_activity_shared_with_you">Διαμοιράστηκε με εσάς από τον %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">Ο \"%1$s\" διαμοιράστηκε μαζί σας</string>
-    <string name="note_share_detail_activity_advanced_settings">Ρυθμίσεις για Προχωρημένους</string>
     <string name="note_share_detail_activity_cancel">Ακύρωση</string>
     <string name="note_share_detail_activity_common_confirm">Επιβεβαίωση</string>
     <string name="note_share_detail_activity_common_next">Επόμενο</string>

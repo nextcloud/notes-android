@@ -97,7 +97,7 @@
     <string name="context_based_formatting">Testuinguruan oinarritutako formateatze leiho gainerakorra </string>
     <string name="copy_link">Kopiatu esteka</string>
     <string name="could_not_retrieve_shares">Ezin izan dira partekatzeak berreskuratu</string>
-    <string name="delete_link">Ezabatu esteka</string>
+    <string name="delete_share">Ezabatu partekatzea</string>
     <string name="direct_editing_error">Errore bat gertatu da edizio aberatsa kargatzean</string>
     <string name="dismiss">Ezikusi</string>
     <string name="dnd">Ez molestatu</string>
@@ -224,7 +224,7 @@
     <string name="note_share_activity_share_link">Partekatu esteka</string>
     <string name="note_share_activity_shared_with_you"> %1$s-(e)k zurekin partekatua</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" zurekin partekatu dute</string>
-    <string name="note_share_detail_activity_advanced_settings">Ezarpen aurreratuak</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Baimendu deskargatu eta sinkronizatzea</string>
     <string name="note_share_detail_activity_cancel">Utzi</string>
     <string name="note_share_detail_activity_common_confirm">Berretsi</string>
     <string name="note_share_detail_activity_common_next">Hurrengoa</string>
@@ -296,7 +296,9 @@
     <string name="share_password_title">Pasahitzez babestua</string>
     <string name="share_permission_can_edit">Editatu dezake</string>
     <string name="share_permission_file_drop">Fitxategiak jaregin</string>
+    <string name="share_permission_file_request">Fitxategi eskaera</string>
     <string name="share_permission_secure_file_drop">Fitxategi-jartze segurua</string>
+    <string name="share_permission_unknown">Ezezaguna</string>
     <string name="share_permission_view_only">Ikustea soilik</string>
     <string name="share_permissions">Partekatze baimenak</string>
     <string name="share_remote_clarification">%1$s (urrunekoa)</string>

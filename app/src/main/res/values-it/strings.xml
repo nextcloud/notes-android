@@ -98,7 +98,7 @@
     <string name="context_based_formatting">Finestra di formattazione basata sul contesto</string>
     <string name="copy_link">Copia collegamento</string>
     <string name="could_not_retrieve_shares">Impossibile recuperare le condivisioni</string>
-    <string name="delete_link">Elimina collegamento</string>
+    <string name="delete_share">Elimina condivisione</string>
     <string name="direct_editing_error">Errore durante il caricamento della modifica avanzata</string>
     <string name="dismiss">Rifiuta</string>
     <string name="dnd">Non disturbare</string>
@@ -229,7 +229,7 @@
     <string name="note_share_activity_shared_with_you">Condiviso con te da %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" è stato condiviso con te</string>
     <string name="note_share_created">Condivisione creata</string>
-    <string name="note_share_detail_activity_advanced_settings">Impostazioni avanzate</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Consenti scaricamento e sincr.</string>
     <string name="note_share_detail_activity_cancel">Annulla</string>
     <string name="note_share_detail_activity_common_confirm">Conferma</string>
     <string name="note_share_detail_activity_common_next">Successivo</string>
@@ -304,7 +304,9 @@
     <string name="share_password_title">Protetta da password</string>
     <string name="share_permission_can_edit">Può modificare</string>
     <string name="share_permission_file_drop">Elimina file</string>
+    <string name="share_permission_file_request">Richiesta file</string>
     <string name="share_permission_secure_file_drop">File drop sicuro</string>
+    <string name="share_permission_unknown">Sconosciuto</string>
     <string name="share_permission_view_only">Sola lettura</string>
     <string name="share_permissions">Condividi permessi</string>
     <string name="share_remote_clarification">%1$s (remota)</string>

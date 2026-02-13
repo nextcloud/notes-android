@@ -101,7 +101,7 @@
     <string name="context_based_formatting">Pop-up für die kontextbasierte Formatierung</string>
     <string name="copy_link">Link kopieren</string>
     <string name="could_not_retrieve_shares">Freigaben konnten nicht abgerufen werden</string>
-    <string name="delete_link">Link löschen</string>
+    <string name="delete_share">Freigabe löschen</string>
     <string name="direct_editing_error">Fehler beim Laden des Rich-Bearbeitungsmodus</string>
     <string name="dismiss">Verwerfen</string>
     <string name="dnd">Nicht stören</string>
@@ -243,7 +243,6 @@
     <string name="note_share_activity_user_icon_content_description">Benutzer-Symbol für Notizen teilen</string>
     <string name="note_share_activity_you_are_not_allowed_to_share">Sie dürfen keine öffentliche Freigabe erstellen</string>
     <string name="note_share_created">Freigabe erstellt</string>
-    <string name="note_share_detail_activity_advanced_settings">Erweiterte Einstellungen</string>
     <string name="note_share_detail_activity_cancel">Abbrechen</string>
     <string name="note_share_detail_activity_common_confirm">Bestätigen</string>
     <string name="note_share_detail_activity_common_next">Nächstes</string>
@@ -320,7 +319,9 @@
     <string name="share_password_title">Passwortgeschützt</string>
     <string name="share_permission_can_edit">Kann bearbeiten</string>
     <string name="share_permission_file_drop">Dateiablage</string>
+    <string name="share_permission_file_request">Dateianfrage</string>
     <string name="share_permission_secure_file_drop">Sichere Dateiablage</string>
+    <string name="share_permission_unknown">Unbekannt</string>
     <string name="share_permission_view_only">Nur anzeigen</string>
     <string name="share_permissions">Berechtigungen zum Teilen</string>
     <string name="share_remote_clarification">%1$s (extern)</string>

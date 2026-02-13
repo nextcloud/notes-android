@@ -101,7 +101,7 @@
     <string name="context_based_formatting">Ventana emergente para formato basado en el contexto</string>
     <string name="copy_link">Copiar enlace</string>
     <string name="could_not_retrieve_shares">No se han podido recuperar los recursos compartidos</string>
-    <string name="delete_link">Eliminar enlace</string>
+    <string name="delete_share">Eliminar recurso compartido</string>
     <string name="direct_editing_error">Error al cargar el modo de edición enriquecido</string>
     <string name="dismiss">Descartar</string>
     <string name="dnd">No molestar</string>
@@ -243,7 +243,6 @@
     <string name="note_share_activity_user_icon_content_description">ícono de compartir a usuario para las notas</string>
     <string name="note_share_activity_you_are_not_allowed_to_share">No tiene permitido crear un recurso compartido público</string>
     <string name="note_share_created">Se creó el recurso compartido</string>
-    <string name="note_share_detail_activity_advanced_settings">Ajustes avanzados</string>
     <string name="note_share_detail_activity_cancel">Cancelar</string>
     <string name="note_share_detail_activity_common_confirm">Confirmar</string>
     <string name="note_share_detail_activity_common_next">Siguiente</string>
@@ -300,6 +299,7 @@
     <string name="settings_theme_title">Tema</string>
     <string name="settings_wifi_only">Sincronizar solo sobre Wi-Fi</string>
     <string name="share">Compartir</string>
+    <string name="share_delete_link">Eliminar enlace</string>
     <string name="share_dialog_title">Compartiendo</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Caduca el %1$s</string>
@@ -320,7 +320,9 @@
     <string name="share_password_title">Protegido con contraseña</string>
     <string name="share_permission_can_edit">Puede editar</string>
     <string name="share_permission_file_drop">Entrega de archivos</string>
+    <string name="share_permission_file_request">Solicitud de archivo</string>
     <string name="share_permission_secure_file_drop">Entrega de archivos segura</string>
+    <string name="share_permission_unknown">Desconocido</string>
     <string name="share_permission_view_only">Solo lectura</string>
     <string name="share_permissions">Permisos del recurso compartido</string>
     <string name="share_remote_clarification">%1$s (remoto)</string>

@@ -97,7 +97,7 @@
     <string name="context_based_formatting">Skočni okvir za oblikovanje ovisno o kontekstu</string>
     <string name="copy_link">Kopiraj poveznicu</string>
     <string name="could_not_retrieve_shares">Dohvaćanje dijeljenja nije uspjelo</string>
-    <string name="delete_link">Izbriši poveznicu</string>
+    <string name="delete_share">Izbriši dijeljenje</string>
     <string name="dismiss">Odpusti</string>
     <string name="dnd">Ne ometaj</string>
     <string name="ecosystem_apps_display_files">Datoteke</string>
@@ -218,7 +218,7 @@
     <string name="note_share_activity_share_link">Dijeli poveznicu</string>
     <string name="note_share_activity_shared_with_you">S vama podijelio %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" je dijeljen s vama</string>
-    <string name="note_share_detail_activity_advanced_settings">Napredne postavke</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Dopusti preuzimanje i sinkronizaciju</string>
     <string name="note_share_detail_activity_cancel">Odustani</string>
     <string name="note_share_detail_activity_common_confirm">Potvrdi</string>
     <string name="note_share_detail_activity_common_next">Dalje</string>
@@ -287,7 +287,9 @@
     <string name="share_password_title">Zaštićeno zaporkom</string>
     <string name="share_permission_can_edit">Uređivanje moguće</string>
     <string name="share_permission_file_drop">Povlačenje datoteke</string>
+    <string name="share_permission_file_request">Zahtjev za datotekom</string>
     <string name="share_permission_secure_file_drop">Siguran prijenos datoteka</string>
+    <string name="share_permission_unknown">Nepoznati dokument</string>
     <string name="share_permission_view_only">Samo za gledanje</string>
     <string name="share_permissions">Dopuštenja za dijeljenje</string>
     <string name="share_remote_clarification">%1$s (udaljeno)</string>

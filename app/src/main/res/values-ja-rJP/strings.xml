@@ -99,7 +99,7 @@
     <string name="context_based_formatting">コンテキストに基づいた書式設定</string>
     <string name="copy_link">リンクをコピー</string>
     <string name="could_not_retrieve_shares">共有元を取得できませんでした</string>
-    <string name="delete_link">リンクを削除</string>
+    <string name="delete_share">共有を解除</string>
     <string name="direct_editing_error">リッチ編集の読み込み中にエラーが発生</string>
     <string name="dismiss">閉じる</string>
     <string name="dnd">取り込み中</string>
@@ -226,7 +226,7 @@
     <string name="note_share_activity_share_link">共有リンク</string>
     <string name="note_share_activity_shared_with_you">%1$sと共有中</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" があなたに共有されました</string>
-    <string name="note_share_detail_activity_advanced_settings">詳細設定</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">ダウンロードと同期を許可</string>
     <string name="note_share_detail_activity_cancel">キャンセル</string>
     <string name="note_share_detail_activity_common_confirm">承認</string>
     <string name="note_share_detail_activity_common_next">次へ</string>
@@ -300,7 +300,9 @@
     <string name="share_password_title">パスワード保護</string>
     <string name="share_permission_can_edit">編集可能</string>
     <string name="share_permission_file_drop">ファイルを転送</string>
+    <string name="share_permission_file_request">ファイルリクエスト</string>
     <string name="share_permission_secure_file_drop">セキュアなファイルドロップ</string>
+    <string name="share_permission_unknown">不明</string>
     <string name="share_permission_view_only">閲覧のみ</string>
     <string name="share_permissions">共有権限</string>
     <string name="share_remote_clarification">%1$s (リモート)</string>
