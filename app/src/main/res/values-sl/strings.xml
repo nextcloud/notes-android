@@ -99,7 +99,7 @@
     <string name="context_based_formatting">Pojavno okno vsebinskega oblikovanja</string>
     <string name="copy_link">Kopiraj povezavo</string>
     <string name="could_not_retrieve_shares">Naslovov mest souporabe ni mogoče pridobiti</string>
-    <string name="delete_link">Izbriši povezavo</string>
+    <string name="delete_share">Izbriši mesto souporabe</string>
     <string name="direct_editing_error">Napaka nalaganja oblikovnega urejevalnika</string>
     <string name="dismiss">Prekliči</string>
     <string name="dnd">Ne moti</string>
@@ -223,7 +223,6 @@
     <string name="note_share_activity_share_link">Povezava za souporabo</string>
     <string name="note_share_activity_shared_with_you">Souporabo omogoča %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" vam je oddan v souporabo</string>
-    <string name="note_share_detail_activity_advanced_settings">Napredne nastavitve</string>
     <string name="note_share_detail_activity_cancel">Prekliči</string>
     <string name="note_share_detail_activity_common_confirm">Potrdi</string>
     <string name="note_share_detail_activity_common_next">Naslednji</string>
@@ -295,6 +294,7 @@
     <string name="share_permission_can_edit">Lahko ureja</string>
     <string name="share_permission_file_drop">Poteg datotek v mapo</string>
     <string name="share_permission_secure_file_drop">Varno pošiljanje daottek</string>
+    <string name="share_permission_unknown">Neznano</string>
     <string name="share_permission_view_only">Le ogled</string>
     <string name="share_permissions">Dovoljenja souporabe</string>
     <string name="share_remote_clarification">%1$s (oddaljeno)</string>

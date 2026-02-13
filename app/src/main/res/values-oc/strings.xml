@@ -114,7 +114,6 @@
     <string name="note_share_activity_share_link">Partejar via ligam</string>
     <string name="note_share_activity_shared_with_you">Partejat amb vos per %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" es estat partejat amb vos</string>
-    <string name="note_share_detail_activity_advanced_settings">Paramètres avançats</string>
     <string name="note_share_detail_activity_cancel">Anullar</string>
     <string name="note_share_detail_activity_common_confirm">Confirmar</string>
     <string name="note_share_detail_activity_common_next">Seguent</string>
@@ -158,6 +157,7 @@
     <string name="share_password_dialog_fragment_skip">Sautar</string>
     <string name="share_password_title">Protegit per senhal</string>
     <string name="share_permission_can_edit">Pòt modificar</string>
+    <string name="share_permission_unknown">Desconegut</string>
     <string name="share_permission_view_only">Veire solament</string>
     <string name="share_permissions">Permissions de partatge</string>
     <string name="share_settings">Paramètres</string>

@@ -101,7 +101,7 @@
     <string name="context_based_formatting">popover ya umbizo kulingana na muktadha</string>
     <string name="copy_link">Nakili kiungio</string>
     <string name="could_not_retrieve_shares">Haikuweza kurejesha shiriki</string>
-    <string name="delete_link">Futa kiungo</string>
+    <string name="delete_share">Futa kushiriki</string>
     <string name="direct_editing_error">Hitilafu wakati wa kupakia uhariri tajiri</string>
     <string name="dismiss">Tawanya</string>
     <string name="dnd">Acha kusumbua</string>
@@ -243,7 +243,7 @@
     <string name="note_share_activity_user_icon_content_description">kumbuka shiriki ikoni ya mtumiaji</string>
     <string name="note_share_activity_you_are_not_allowed_to_share">Huruhusiwi kuunda ushiriki wa umma.</string>
     <string name="note_share_created">Shiriki imeundwa</string>
-    <string name="note_share_detail_activity_advanced_settings">Mipangilio ya Kina</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Ruhusu upakuaji na usawazishe</string>
     <string name="note_share_detail_activity_cancel">Ghairi</string>
     <string name="note_share_detail_activity_common_confirm">Thibitisha</string>
     <string name="note_share_detail_activity_common_next">Inayofuata</string>
@@ -300,6 +300,7 @@
     <string name="settings_theme_title">Mandhari</string>
     <string name="settings_wifi_only">Sawazisha kwenye Wi-Fi pekee</string>
     <string name="share">Shirikisha</string>
+    <string name="share_delete_link">Futa kiungo</string>
     <string name="share_dialog_title">inashirikisha</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Inaisha wakati %1$s</string>
@@ -320,7 +321,9 @@
     <string name="share_password_title">Nenosiri-linalindwa</string>
     <string name="share_permission_can_edit">Inaweza kuhariri</string>
     <string name="share_permission_file_drop">Kuacha faili</string>
+    <string name="share_permission_file_request">Ombi la faili</string>
     <string name="share_permission_secure_file_drop">Linda kushuka kwa faili</string>
+    <string name="share_permission_unknown">Haijulikani</string>
     <string name="share_permission_view_only">Tazama pekee</string>
     <string name="share_permissions">Ruhusa za kushiriki </string>
     <string name="share_remote_clarification">%1$s (mbali)</string>

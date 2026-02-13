@@ -100,7 +100,7 @@
     <string name="context_based_formatting">مەزمۇننى ئاساس قىلغان فورماتلاش ئېغىزى</string>
     <string name="copy_link">ئۇلانمىنى كۆچۈرۈڭ</string>
     <string name="could_not_retrieve_shares">پاينى ئەسلىگە كەلتۈرەلمىدى</string>
-    <string name="delete_link">ئۇلىنىشنى ئۆچۈرۈڭ</string>
+    <string name="delete_share">ھەمبەھىرنى ئۆچۈرۈڭ</string>
     <string name="direct_editing_error">مول تەھرىرلەشنى يۈكلەۋاتقاندا خاتالىق</string>
     <string name="dismiss">پەرۋا قىلما</string>
     <string name="dnd">ئاۋارە قىلماڭ</string>
@@ -242,7 +242,7 @@
     <string name="note_share_activity_user_icon_content_description">خاتىرە ھەمبەھىرلەش ئىشلەتكۈچى سىنبەلگىسى</string>
     <string name="note_share_activity_you_are_not_allowed_to_share">سىز ئاممىۋىي ھەمبەھىر قۇرۇشقا يول قۇيۇلمايسىز</string>
     <string name="note_share_created">ھەمبەھىر قۇرۇلدى</string>
-    <string name="note_share_detail_activity_advanced_settings">ئىلغار تەڭشەكلەر</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">چۈشۈرۈش ۋە ماسقەدەملەشكە يول قويۇڭ</string>
     <string name="note_share_detail_activity_cancel">بىكار قىلىش</string>
     <string name="note_share_detail_activity_common_confirm">جەزملەشتۈرۈڭ</string>
     <string name="note_share_detail_activity_common_next">كېيىنكى</string>
@@ -299,6 +299,7 @@
     <string name="settings_theme_title">باشتېما</string>
     <string name="settings_wifi_only">پەقەت Wi-Fi دا ماسقەدەملەڭ</string>
     <string name="share">ھەمبەھىرلەش</string>
+    <string name="share_delete_link">ئۇلىنىشنى ئۆچۈرۈڭ</string>
     <string name="share_dialog_title">ھەمبەھىر</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">ۋاقتى%1$s</string>
@@ -318,7 +319,9 @@
     <string name="share_password_title">پارول بىلەن قوغدىلىدۇ</string>
     <string name="share_permission_can_edit">تەھرىرلىيەلەيدۇ</string>
     <string name="share_permission_file_drop">ھۆججەت چۈشۈرۈش</string>
+    <string name="share_permission_file_request">ھۆججەت تەلىپى</string>
     <string name="share_permission_secure_file_drop">بىخەتەر ھۆججەت چۈشۈرۈش</string>
+    <string name="share_permission_unknown">نامەلۇم</string>
     <string name="share_permission_view_only">پەقەت كۆرۈش</string>
     <string name="share_permissions">ئورتاقلىشىش ئىجازەتنامىسى</string>
     <string name="share_remote_clarification">%1$s (يىراق)</string>

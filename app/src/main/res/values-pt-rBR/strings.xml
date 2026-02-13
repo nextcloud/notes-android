@@ -101,7 +101,7 @@
     <string name="context_based_formatting">Formatação baseada no contexto popover</string>
     <string name="copy_link">Copiar link</string>
     <string name="could_not_retrieve_shares">Não foi possível recuperar os compartilhamentos</string>
-    <string name="delete_link">Excluir link</string>
+    <string name="delete_share">Excluir compartilhamento</string>
     <string name="direct_editing_error">Erro ao carregar edição avançada</string>
     <string name="dismiss">Dispensar</string>
     <string name="dnd">Não perturbe</string>
@@ -243,7 +243,7 @@
     <string name="note_share_activity_user_icon_content_description">ícone de compartilhamento de usuário de nota</string>
     <string name="note_share_activity_you_are_not_allowed_to_share">Você não tem permissões para criar um compartilhamento público.</string>
     <string name="note_share_created">Compartilhamento criado</string>
-    <string name="note_share_detail_activity_advanced_settings">Configurações Avançadas </string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Permitir download e sincronização</string>
     <string name="note_share_detail_activity_cancel">Cancelar</string>
     <string name="note_share_detail_activity_common_confirm">Confirmar</string>
     <string name="note_share_detail_activity_common_next">Próximo</string>
@@ -300,6 +300,7 @@
     <string name="settings_theme_title">Tema</string>
     <string name="settings_wifi_only">Sincronizar apenas por Wi-Fi</string>
     <string name="share">Compartilhar</string>
+    <string name="share_delete_link">Excluir link</string>
     <string name="share_dialog_title">Compartilhamento</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Expira em %1$s</string>
@@ -320,7 +321,9 @@
     <string name="share_password_title">Protegido por senha</string>
     <string name="share_permission_can_edit">Pode editar</string>
     <string name="share_permission_file_drop">Depósito de arquivos</string>
+    <string name="share_permission_file_request">Solicitação de arquivo</string>
     <string name="share_permission_secure_file_drop">Depósito de arquivos seguro</string>
+    <string name="share_permission_unknown">Desconhecido</string>
     <string name="share_permission_view_only">Somente visualização </string>
     <string name="share_permissions">Permissões de Compartilhamento </string>
     <string name="share_remote_clarification">%1$s (remoto)</string>

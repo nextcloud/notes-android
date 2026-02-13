@@ -58,7 +58,6 @@
     <string name="common_ok">Aceptar</string>
     <string name="copy_link">Copiar link</string>
     <string name="could_not_retrieve_shares">No se pudieron recuperar los recursos compartidos</string>
-    <string name="delete_link">Eliminar enlace</string>
     <string name="dismiss">Despedir</string>
     <string name="dnd">No molestar</string>
     <string name="dontClear">No vaciar</string>
@@ -108,7 +107,6 @@
     <string name="note_share_activity_share_link">Compartir link</string>
     <string name="note_share_activity_shared_with_you">Compartido contigo por %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" ha sido compartido con usted</string>
-    <string name="note_share_detail_activity_advanced_settings">Configuración avanzada</string>
     <string name="note_share_detail_activity_cancel">Cancel</string>
     <string name="note_share_detail_activity_common_confirm">Confirmar</string>
     <string name="note_share_detail_activity_hint_name">Nombre</string>
@@ -159,6 +157,7 @@
     <string name="share_permission_can_edit">Puede editar</string>
     <string name="share_permission_file_drop">Entrega de archivos</string>
     <string name="share_permission_secure_file_drop">Entrega de archivos segura</string>
+    <string name="share_permission_unknown">Desconocido</string>
     <string name="share_permission_view_only">Solo ver</string>
     <string name="share_permissions">Permisos del recurso compartido</string>
     <string name="share_remote_clarification">%1$s (remoto)</string>

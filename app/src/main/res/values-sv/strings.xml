@@ -100,7 +100,7 @@
     <string name="context_based_formatting">Kontextbaserad formaterings-popover</string>
     <string name="copy_link">Kopiera länk</string>
     <string name="could_not_retrieve_shares">Kunde inte hämta delade mappar</string>
-    <string name="delete_link">Ta bort länk</string>
+    <string name="delete_share">Ta bort delning</string>
     <string name="direct_editing_error">Fel vid inläsning av utökad redigering</string>
     <string name="dismiss">Avfärda</string>
     <string name="dnd">Stör ej</string>
@@ -233,7 +233,7 @@
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" har delats med dig</string>
     <string name="note_share_activity_you_are_not_allowed_to_share">Du har inte behörighet att skapa en publik delning.</string>
     <string name="note_share_created">Delningen skapad</string>
-    <string name="note_share_detail_activity_advanced_settings">Avancerade inställningar</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Tillåt nedladdning och synkronisering</string>
     <string name="note_share_detail_activity_cancel">Avbryt</string>
     <string name="note_share_detail_activity_common_confirm">Bekräfta</string>
     <string name="note_share_detail_activity_common_next">Nästa</string>
@@ -290,6 +290,7 @@
     <string name="settings_theme_title">Tema</string>
     <string name="settings_wifi_only">Synkronisera endast med Wi-Fi</string>
     <string name="share">Dela</string>
+    <string name="share_delete_link">Ta bort länk</string>
     <string name="share_dialog_title">Delning</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Gick ut %1$s</string>
@@ -309,7 +310,9 @@
     <string name="share_password_title">Lösenordsskyddad</string>
     <string name="share_permission_can_edit">Kan ändra</string>
     <string name="share_permission_file_drop">Filinkast</string>
+    <string name="share_permission_file_request">Filförfrågan</string>
     <string name="share_permission_secure_file_drop">Säkert filinkast</string>
+    <string name="share_permission_unknown">Okänd</string>
     <string name="share_permission_view_only">Skrivskyddat läge</string>
     <string name="share_permissions">Dela behörigheter</string>
     <string name="share_remote_clarification">%1$s (extern)</string>

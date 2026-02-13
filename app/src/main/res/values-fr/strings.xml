@@ -100,7 +100,7 @@
     <string name="context_based_formatting">Suggestions de mise en forme contextuelle</string>
     <string name="copy_link">Copier le lien</string>
     <string name="could_not_retrieve_shares">Impossible de récupérer les partages</string>
-    <string name="delete_link">Supprimer le lien</string>
+    <string name="delete_share">Supprimer le partage</string>
     <string name="direct_editing_error">Erreur lors du chargement de l\'édition enrichie</string>
     <string name="dismiss">Rejeter</string>
     <string name="dnd">Ne pas déranger</string>
@@ -240,7 +240,7 @@
     <string name="note_share_activity_user_icon_content_description">icône de partage de notes d\'utilisateur</string>
     <string name="note_share_activity_you_are_not_allowed_to_share">Vous n\'êtes pas autorisé à créer un partage public.</string>
     <string name="note_share_created">Partage créé</string>
-    <string name="note_share_detail_activity_advanced_settings">Paramètres avancés</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Autoriser le téléchargement et la synchronisation</string>
     <string name="note_share_detail_activity_cancel">Annuler</string>
     <string name="note_share_detail_activity_common_confirm">Confirmer</string>
     <string name="note_share_detail_activity_common_next">Suivante</string>
@@ -297,6 +297,7 @@
     <string name="settings_theme_title">Thème</string>
     <string name="settings_wifi_only">Synchroniser uniquement en Wifi</string>
     <string name="share">Partager</string>
+    <string name="share_delete_link">Supprimer le lien</string>
     <string name="share_dialog_title">Partage</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Expire le %1$s</string>
@@ -316,7 +317,9 @@
     <string name="share_password_title">Protégé par mot de passe</string>
     <string name="share_permission_can_edit">Peut modifier</string>
     <string name="share_permission_file_drop">Dépôt de fichier</string>
+    <string name="share_permission_file_request">Demande de fichier</string>
     <string name="share_permission_secure_file_drop">Dépôt sécurisé de fichiers</string>
+    <string name="share_permission_unknown">Inconnu</string>
     <string name="share_permission_view_only">Afficher seulement</string>
     <string name="share_permissions">Autorisations pour le partage</string>
     <string name="share_remote_clarification">%1$s (distant)</string>

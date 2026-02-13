@@ -97,7 +97,7 @@
     <string name="context_based_formatting">Kontekstiin perustuva muotoilu - ponnahdusikkuna</string>
     <string name="copy_link">Kopioi linkki</string>
     <string name="could_not_retrieve_shares">Jakojen nouto ei onnistunut</string>
-    <string name="delete_link">Poista linkki</string>
+    <string name="delete_share">Poista jako</string>
     <string name="dismiss">Hylkää</string>
     <string name="dnd">Älä häiritse</string>
     <string name="dontClear">Älä tyhjennä</string>
@@ -220,7 +220,7 @@
     <string name="note_share_activity_shared_with_you">Jaettu sinulle käyttäjältä %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" on jaettu kanssasi</string>
     <string name="note_share_created">Jako luotu</string>
-    <string name="note_share_detail_activity_advanced_settings">Lisäasetukset</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Salli lataus ja synkronointi</string>
     <string name="note_share_detail_activity_cancel">Peruuta</string>
     <string name="note_share_detail_activity_common_confirm">Vahvista</string>
     <string name="note_share_detail_activity_common_next">Seuraava</string>
@@ -289,6 +289,8 @@
     <string name="share_password_title">Salasanasuojattu</string>
     <string name="share_permission_can_edit">Voi muokata</string>
     <string name="share_permission_file_drop">Tiedoston pudotus</string>
+    <string name="share_permission_file_request">Tiedostopyyntö</string>
+    <string name="share_permission_unknown">Tuntematon</string>
     <string name="share_permission_view_only">Vain katselu</string>
     <string name="share_permissions">Jaon oikeudet</string>
     <string name="share_remote_clarification">%1$s (etä)</string>

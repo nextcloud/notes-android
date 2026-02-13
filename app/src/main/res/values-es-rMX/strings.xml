@@ -69,7 +69,7 @@
     <string name="common_ok">Aceptar</string>
     <string name="copy_link">Copiar enlace</string>
     <string name="could_not_retrieve_shares">No se pudieron obtener los recursos compartidos</string>
-    <string name="delete_link">Eliminar enlace</string>
+    <string name="delete_share">Borrar recurso compartido</string>
     <string name="dismiss">Descartar</string>
     <string name="dnd">No molestar</string>
     <string name="dontClear">No borrar</string>
@@ -130,7 +130,6 @@
     <string name="note_share_activity_share_link">Compartir enlace</string>
     <string name="note_share_activity_shared_with_you">Compartido con Ud. por %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" ha sido compartido contigo</string>
-    <string name="note_share_detail_activity_advanced_settings">Configuraciones Avanzadas</string>
     <string name="note_share_detail_activity_cancel">Cancelar</string>
     <string name="note_share_detail_activity_common_confirm">Confirmar</string>
     <string name="note_share_detail_activity_hint_name">Nombre</string>
@@ -163,6 +162,7 @@
     <string name="settings_theme_title">Tema</string>
     <string name="settings_wifi_only">Sincronizar solo con Wi-Fi</string>
     <string name="share">Compartir</string>
+    <string name="share_delete_link">Eliminar enlace</string>
     <string name="share_dialog_title">Compartiendo</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Expira el %1$s</string>
@@ -182,7 +182,9 @@
     <string name="share_password_title">Protegido con contraseña</string>
     <string name="share_permission_can_edit">Puede editar</string>
     <string name="share_permission_file_drop">Entrega de archivos</string>
+    <string name="share_permission_file_request">Solicitud de archivo</string>
     <string name="share_permission_secure_file_drop">Entrega de archivos segura</string>
+    <string name="share_permission_unknown">Desconocido</string>
     <string name="share_permission_view_only">Sólo lectura</string>
     <string name="share_permissions">Permisos del recurso compartido</string>
     <string name="share_remote_clarification">%1$s (remoto)</string>

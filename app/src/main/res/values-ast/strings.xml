@@ -69,6 +69,7 @@
     <string name="common_loading">Cargando…</string>
     <string name="common_ok">Normal</string>
     <string name="copy_link">Copiar l\'enllaz</string>
+    <string name="delete_share">Desaniciar la compartición</string>
     <string name="direct_editing_error">Hebo un error mentanto se cargaba la edición arriquecida</string>
     <string name="dismiss">Escartar</string>
     <string name="dnd">Nun molestar</string>
@@ -141,7 +142,6 @@
     <string name="note_share_activity_share_link">Compartir l\'enllaz</string>
     <string name="note_share_activity_shared_with_you">%1$s compartió l\'elementu contigo</string>
     <string name="note_share_activity_subject_shared_with_you">Compartiose \"%1$s\" contigo</string>
-    <string name="note_share_detail_activity_advanced_settings">Configuración avanzada</string>
     <string name="note_share_detail_activity_cancel">Encaboxar</string>
     <string name="note_share_detail_activity_common_confirm">Confirmar</string>
     <string name="note_share_detail_activity_common_next">Siguiente</string>
@@ -186,6 +186,8 @@
     <string name="share_password_dialog_fragment_skip">Saltar</string>
     <string name="share_permission_can_edit">Pue editar</string>
     <string name="share_permission_file_drop">Suelta de ficheros</string>
+    <string name="share_permission_file_request">Solicitú de ficheru</string>
+    <string name="share_permission_unknown">Desconocí­u</string>
     <string name="share_permission_view_only">Ver namás</string>
     <string name="share_remote_clarification">%1$s (remotu)</string>
     <string name="share_room_clarification">%1$s (conversación)</string>

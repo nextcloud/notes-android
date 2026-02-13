@@ -101,7 +101,7 @@
     <string name="context_based_formatting">Kontekstikohane hüpikaken vorminduse jaoks.</string>
     <string name="copy_link">Kopeeri link</string>
     <string name="could_not_retrieve_shares">Jaosmeedia laadimine ei õnnestunud</string>
-    <string name="delete_link">Kustuta link</string>
+    <string name="delete_share">Kustuta jagamine</string>
     <string name="direct_editing_error">Viga vormindatud teksti muutmisvaate laadimisel</string>
     <string name="dismiss">Loobu</string>
     <string name="dnd">Ära sega</string>
@@ -243,7 +243,7 @@
     <string name="note_share_activity_user_icon_content_description">märkme kasutaja jagamise ikoon</string>
     <string name="note_share_activity_you_are_not_allowed_to_share">Sul pole luba avaliku jaosmeedia loomiseks</string>
     <string name="note_share_created">Jaosmeedia on loodud</string>
-    <string name="note_share_detail_activity_advanced_settings">Täpsemad seaded</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Luba allalaadimine ja sünkroonimine</string>
     <string name="note_share_detail_activity_cancel">Katkesta</string>
     <string name="note_share_detail_activity_common_confirm">Kinnita</string>
     <string name="note_share_detail_activity_common_next">Järgmine</string>
@@ -300,6 +300,7 @@
     <string name="settings_theme_title">Kujundus</string>
     <string name="settings_wifi_only">Sünkroonimine ainult Wi-Fi kaudu</string>
     <string name="share">Jaga</string>
+    <string name="share_delete_link">Kustuta link</string>
     <string name="share_dialog_title">Jagamine</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Aegub %1$s</string>
@@ -320,7 +321,9 @@
     <string name="share_password_title">Kaitstud salasõnaga</string>
     <string name="share_permission_can_edit">Võib muuta</string>
     <string name="share_permission_file_drop">Failiedastus</string>
+    <string name="share_permission_file_request">Failipäring</string>
     <string name="share_permission_secure_file_drop">Turvaline failiedastus</string>
+    <string name="share_permission_unknown">Teadmata</string>
     <string name="share_permission_view_only">Ainult vaatamine</string>
     <string name="share_permissions">Jaga õigusi</string>
     <string name="share_remote_clarification">%1$s (kaugseadmes)</string>

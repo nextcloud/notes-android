@@ -101,7 +101,7 @@
     <string name="context_based_formatting">Bağlam tabanlı biçimlendirme açılan penceresi</string>
     <string name="copy_link">Bağlantıyı kopyala</string>
     <string name="could_not_retrieve_shares">Paylaşımlar alınamadı</string>
-    <string name="delete_link">Bağlantıyı sil</string>
+    <string name="delete_share">Paylaşımı sil</string>
     <string name="direct_editing_error">Zengin düzenleme yüklenirken sorun çıktı</string>
     <string name="dismiss">Yok say</string>
     <string name="dnd">Rahatsız etmeyin</string>
@@ -243,7 +243,7 @@
     <string name="note_share_activity_user_icon_content_description">not kullanıcıyı paylaş simgesi</string>
     <string name="note_share_activity_you_are_not_allowed_to_share">Herkese açık bir paylaşım oluşturma izniniz yok.</string>
     <string name="note_share_created">Paylaşım oluşturuldu</string>
-    <string name="note_share_detail_activity_advanced_settings">Gelişmiş ayarlar</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">İndirmeye izin ver ve eşitle</string>
     <string name="note_share_detail_activity_cancel">İptal</string>
     <string name="note_share_detail_activity_common_confirm">Onayla</string>
     <string name="note_share_detail_activity_common_next">Sonraki</string>
@@ -300,6 +300,7 @@
     <string name="settings_theme_title">Tema</string>
     <string name="settings_wifi_only">Yalnızca kablosuz ağ ile eşitlensin</string>
     <string name="share">Paylaşma</string>
+    <string name="share_delete_link">Bağlantıyı sil</string>
     <string name="share_dialog_title">Paylaşılıyor</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Geçerlilik süresi %1$s zamanında dolacak</string>
@@ -320,7 +321,9 @@
     <string name="share_password_title">Parola korumalı</string>
     <string name="share_permission_can_edit">Düzenleyebilir</string>
     <string name="share_permission_file_drop">Dosya bırakma</string>
+    <string name="share_permission_file_request">Dosya isteme</string>
     <string name="share_permission_secure_file_drop">Güvenli dosya bırakma</string>
+    <string name="share_permission_unknown">Bilinmiyor</string>
     <string name="share_permission_view_only">Yalnızca görüntüleme</string>
     <string name="share_permissions">Paylaşım izinleri</string>
     <string name="share_remote_clarification">%1$s (uzak)</string>

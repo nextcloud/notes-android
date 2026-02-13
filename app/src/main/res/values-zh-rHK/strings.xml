@@ -101,7 +101,7 @@
     <string name="context_based_formatting">基於 context 的格式彈出框</string>
     <string name="copy_link">複製連結</string>
     <string name="could_not_retrieve_shares">無法從雲端取得共用</string>
-    <string name="delete_link">刪除連結</string>
+    <string name="delete_share">刪除分享</string>
     <string name="direct_editing_error">載入增強編輯模式時發生錯誤</string>
     <string name="dismiss">忽略</string>
     <string name="dnd">請勿打擾</string>
@@ -243,7 +243,7 @@
     <string name="note_share_activity_user_icon_content_description">筆記分享用戶圖標</string>
     <string name="note_share_activity_you_are_not_allowed_to_share">您無權創建公開分享</string>
     <string name="note_share_created">分享已創建</string>
-    <string name="note_share_detail_activity_advanced_settings">進階設定</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">允許下載及同步</string>
     <string name="note_share_detail_activity_cancel">取消</string>
     <string name="note_share_detail_activity_common_confirm">確認</string>
     <string name="note_share_detail_activity_common_next">下一</string>
@@ -300,6 +300,7 @@
     <string name="settings_theme_title">佈景主題</string>
     <string name="settings_wifi_only">只在有 Wi-Fi 時同步</string>
     <string name="share">分享</string>
+    <string name="share_delete_link">刪除連結</string>
     <string name="share_dialog_title">分享</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">過期 %1$s</string>
@@ -320,7 +321,9 @@
     <string name="share_password_title">受密碼保護</string>
     <string name="share_permission_can_edit">可編輯</string>
     <string name="share_permission_file_drop">檔案拖放</string>
+    <string name="share_permission_file_request">檔案請求</string>
     <string name="share_permission_secure_file_drop">安全檔案投放</string>
+    <string name="share_permission_unknown">不詳</string>
     <string name="share_permission_view_only">僅檢視</string>
     <string name="share_permissions">分享權限</string>
     <string name="share_remote_clarification">%1$s（遠端）</string>

@@ -101,7 +101,7 @@
     <string name="context_based_formatting">An popover formáidithe bunaithe ar chomhthéacs</string>
     <string name="copy_link">Cóipeáil an nasc</string>
     <string name="could_not_retrieve_shares">Níorbh fhéidir scaireanna a aisghabháil</string>
-    <string name="delete_link">Scrios Nasc</string>
+    <string name="delete_share">Scrios an sciar</string>
     <string name="direct_editing_error">Earráid agus eagarthóireacht shaibhir á lódáil</string>
     <string name="dismiss">Díbhe</string>
     <string name="dnd">Ná cur as</string>
@@ -243,7 +243,7 @@
     <string name="note_share_activity_user_icon_content_description">deilbhín úsáideora roinnte nóta</string>
     <string name="note_share_activity_you_are_not_allowed_to_share">Ní cheadaítear duit comhroinnt phoiblí a chruthú.</string>
     <string name="note_share_created">Comhroinn cruthaithe</string>
-    <string name="note_share_detail_activity_advanced_settings">Ardsocruithe</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Ceadaigh íoslódáil agus sioncrónú</string>
     <string name="note_share_detail_activity_cancel">Cealaigh</string>
     <string name="note_share_detail_activity_common_confirm">Deimhnigh</string>
     <string name="note_share_detail_activity_common_next">Ar aghaidh</string>
@@ -300,6 +300,7 @@
     <string name="settings_theme_title">Téama</string>
     <string name="settings_wifi_only">Sioncronaigh ar Wi-Fi amháin</string>
     <string name="share">Comhroinn</string>
+    <string name="share_delete_link">Scrios an nasc</string>
     <string name="share_dialog_title">Roinnt</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">In éag %1$s</string>
@@ -320,7 +321,9 @@
     <string name="share_password_title">Pasfhocal cosanta</string>
     <string name="share_permission_can_edit">Is féidir eagarthóireacht a dhéanamh</string>
     <string name="share_permission_file_drop">Titim comhad</string>
+    <string name="share_permission_file_request">Iarratas comhad</string>
     <string name="share_permission_secure_file_drop">Titim comhad slán</string>
+    <string name="share_permission_unknown">Anaithnid</string>
     <string name="share_permission_view_only">Amharc amháin</string>
     <string name="share_permissions">Ceadanna Comhroinnte</string>
     <string name="share_remote_clarification">%1$s (iargúlta)</string>

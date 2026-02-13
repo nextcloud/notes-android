@@ -101,7 +101,7 @@
     <string name="context_based_formatting">Kontextové okno formátovania</string>
     <string name="copy_link">Kopírovať odkaz</string>
     <string name="could_not_retrieve_shares">Nie je možné získať zdieľania</string>
-    <string name="delete_link">Zmazať odkaz</string>
+    <string name="delete_share">Odstrániť zdieľanie</string>
     <string name="direct_editing_error">Chyba pri načítaní rich editora</string>
     <string name="dismiss">Zatvoriť</string>
     <string name="dnd">Nerušiť</string>
@@ -243,7 +243,7 @@
     <string name="note_share_activity_user_icon_content_description">ikona na zdieľanie poznámky s používateľom</string>
     <string name="note_share_activity_you_are_not_allowed_to_share">Nie je povolené vytvárať verejný zdieľaný odkaz.</string>
     <string name="note_share_created">Zdieľanie vytvorené</string>
-    <string name="note_share_detail_activity_advanced_settings">Rozšírené nastavenia</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Povoliť sťahovanie a synchronizáciu</string>
     <string name="note_share_detail_activity_cancel">Zrušiť</string>
     <string name="note_share_detail_activity_common_confirm">Potvrdiť</string>
     <string name="note_share_detail_activity_common_next">Ďalšie</string>
@@ -320,7 +320,9 @@
     <string name="share_password_title">Chránené heslom</string>
     <string name="share_permission_can_edit">Môže upravovať</string>
     <string name="share_permission_file_drop">Vložiť súbor</string>
+    <string name="share_permission_file_request">Žiadosť o súbor</string>
     <string name="share_permission_secure_file_drop">Zabezpečený file drop</string>
+    <string name="share_permission_unknown">Neznámy</string>
     <string name="share_permission_view_only">Iba pre čítanie</string>
     <string name="share_permissions">Zdieľať oprávnenia</string>
     <string name="share_remote_clarification">%1$s (vzdialený)</string>

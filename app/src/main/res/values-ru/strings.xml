@@ -99,7 +99,7 @@
     <string name="context_based_formatting">Всплывающее окно контекстного форматирования</string>
     <string name="copy_link">Копировать ссылку</string>
     <string name="could_not_retrieve_shares">Не удалось получить перечень общих ресурсов</string>
-    <string name="delete_link">Удалить ссылку</string>
+    <string name="delete_share">Удалить общий ресурс</string>
     <string name="direct_editing_error">Ошибка при загрузке форматированного редактирования</string>
     <string name="dismiss">Скрыть</string>
     <string name="dnd">Не беспокоить</string>
@@ -231,7 +231,7 @@
     <string name="note_share_activity_subject_shared_with_you">Вам предоставлен доступ к «%1$s»</string>
     <string name="note_share_activity_you_are_not_allowed_to_share">Вам не разрешено создавать публичные общие ресурсы.</string>
     <string name="note_share_created">Общий ресурс создан</string>
-    <string name="note_share_detail_activity_advanced_settings">Дополнительные настройки</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Разрешить загрузку и синхронизацию</string>
     <string name="note_share_detail_activity_cancel">Отмена</string>
     <string name="note_share_detail_activity_common_confirm">Подтвердить</string>
     <string name="note_share_detail_activity_common_next">Далее</string>
@@ -288,6 +288,7 @@
     <string name="settings_theme_title">Тема</string>
     <string name="settings_wifi_only">Синхр. только по Wi-Fi</string>
     <string name="share">Поделиться</string>
+    <string name="share_delete_link">Удалить ссылку</string>
     <string name="share_dialog_title">Параметры публикации</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Истекает %1$s</string>
@@ -307,7 +308,9 @@
     <string name="share_password_title">Защищено паролем</string>
     <string name="share_permission_can_edit">Разрешено редактировать</string>
     <string name="share_permission_file_drop">Приём файлов</string>
+    <string name="share_permission_file_request">Запрос файла</string>
     <string name="share_permission_secure_file_drop">Защищенный очиститель файлов</string>
+    <string name="share_permission_unknown">Неизвестно</string>
     <string name="share_permission_view_only">Для просмотра</string>
     <string name="share_permissions">Права на публикацию</string>
     <string name="share_remote_clarification">%1$s (на сервере)</string>
