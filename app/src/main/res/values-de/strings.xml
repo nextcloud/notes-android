@@ -210,6 +210,7 @@
     <string name="menu_favorite">Favorit</string>
     <string name="menu_preview">Vorschau</string>
     <string name="menu_share">Teilen</string>
+    <string name="menu_shared_note">Geteilte Notiz</string>
     <string name="mute_all_notifications">Alle Benachrichtigungen stummschalten</string>
     <string name="no_account_configured_yet">Bislang kein Konto eingerichtet</string>
     <string name="no_actions">Keine Aktionen für diesen Benutzer</string>
@@ -243,6 +244,7 @@
     <string name="note_share_activity_user_icon_content_description">Benutzer-Symbol für Notizen teilen</string>
     <string name="note_share_activity_you_are_not_allowed_to_share">Sie dürfen keine öffentliche Freigabe erstellen</string>
     <string name="note_share_created">Freigabe erstellt</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Herunterladen und synchronisieren zulassen</string>
     <string name="note_share_detail_activity_cancel">Abbrechen</string>
     <string name="note_share_detail_activity_common_confirm">Bestätigen</string>
     <string name="note_share_detail_activity_common_next">Nächstes</string>
@@ -253,6 +255,7 @@
     <string name="note_share_detail_activity_label_empty">Bezeichnung darf nicht leer sein</string>
     <string name="note_share_detail_activity_link_name">Link-Name</string>
     <string name="note_share_detail_activity_no_share_permission_selected">Bitte mindestens eine Berechtigung zum Teilen auswählen.</string>
+    <string name="note_share_detail_activity_password_error_message">Dieses Passwort ist etwas schwach. Für mehr Sicherheit bitte ein längeres Passwort mit einer Mischung aus Buchstaben, Zahlen und Sonderzeichen verwenden.</string>
     <string name="note_share_detail_activity_send_share">Freigabe senden</string>
     <string name="note_share_detail_activity_set_note">Notiz setzen</string>
     <string name="note_share_detail_activity_share_copy_link">Teilen und Link kopieren</string>
@@ -299,6 +302,7 @@
     <string name="settings_theme_title">Design</string>
     <string name="settings_wifi_only">Nur über WLAN synchronisieren</string>
     <string name="share">Teilen</string>
+    <string name="share_delete_link">Link löschen</string>
     <string name="share_dialog_title">Teilen</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Läuft am %1$s ab</string>

@@ -101,6 +101,7 @@
     <string name="context_based_formatting">Context based formatting popover</string>
     <string name="copy_link">Copy link</string>
     <string name="could_not_retrieve_shares">Could not retrieve shares</string>
+    <string name="delete_share">Delete share</string>
     <string name="direct_editing_error">Error while loading rich editing</string>
     <string name="dismiss">Dismiss</string>
     <string name="dnd">Do not disturb</string>
@@ -209,6 +210,7 @@
     <string name="menu_favorite">Favourite</string>
     <string name="menu_preview">Preview</string>
     <string name="menu_share">Share</string>
+    <string name="menu_shared_note">Shared note</string>
     <string name="mute_all_notifications">Mute all notifications</string>
     <string name="no_account_configured_yet">No account configured yet</string>
     <string name="no_actions">No actions for this user</string>
@@ -242,6 +244,7 @@
     <string name="note_share_activity_user_icon_content_description">note share user icon</string>
     <string name="note_share_activity_you_are_not_allowed_to_share">You are not allowed to create a public share.</string>
     <string name="note_share_created">Share created</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Allow download and sync</string>
     <string name="note_share_detail_activity_cancel">Cancel</string>
     <string name="note_share_detail_activity_common_confirm">Confirm</string>
     <string name="note_share_detail_activity_common_next">Next</string>
@@ -252,6 +255,7 @@
     <string name="note_share_detail_activity_label_empty">Label cannot be empty</string>
     <string name="note_share_detail_activity_link_name">Link Name</string>
     <string name="note_share_detail_activity_no_share_permission_selected">Please select at least one permission to share.</string>
+    <string name="note_share_detail_activity_password_error_message">This password looks a bit weak. For better security, try using a longer password with a mix of letters, numbers, and symbols.</string>
     <string name="note_share_detail_activity_send_share">Send Share</string>
     <string name="note_share_detail_activity_set_note">Set Note</string>
     <string name="note_share_detail_activity_share_copy_link">Share and Copy Link</string>
@@ -298,6 +302,7 @@
     <string name="settings_theme_title">Theme</string>
     <string name="settings_wifi_only">Sync only on Wi-Fi</string>
     <string name="share">Share</string>
+    <string name="share_delete_link">Delete link</string>
     <string name="share_dialog_title">Sharing</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Expires %1$s</string>
@@ -318,7 +323,9 @@
     <string name="share_password_title">Password-protected</string>
     <string name="share_permission_can_edit">Can edit</string>
     <string name="share_permission_file_drop">File drop</string>
+    <string name="share_permission_file_request">File request</string>
     <string name="share_permission_secure_file_drop">Secure file drop</string>
+    <string name="share_permission_unknown">Unknown</string>
     <string name="share_permission_view_only">View only</string>
     <string name="share_permissions">Share Permissions</string>
     <string name="share_remote_clarification">%1$s (remote)</string>

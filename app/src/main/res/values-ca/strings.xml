@@ -98,6 +98,7 @@
     <string name="context_based_formatting">Element emergent de format basat en el context</string>
     <string name="copy_link">Copia l\'enllaç</string>
     <string name="could_not_retrieve_shares">No s\'ha pogut recuperar la compartició</string>
+    <string name="delete_share">Suprimeix l\'element compartit</string>
     <string name="direct_editing_error">S\'ha produït un error en carregar l\'edició enriquida</string>
     <string name="dismiss">Descarta</string>
     <string name="dontClear">No l\'esborris</string>
@@ -220,6 +221,7 @@
     <string name="note_share_activity_share_link">Comparteix un enllaç</string>
     <string name="note_share_activity_shared_with_you">Compartit per %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" us ha estat compartit</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Permet la baixada i la sincronització</string>
     <string name="note_share_detail_activity_cancel">Cancel·la</string>
     <string name="note_share_detail_activity_common_confirm">Confirma</string>
     <string name="note_share_detail_activity_common_next">Següent</string>
@@ -272,6 +274,7 @@
     <string name="settings_theme_title">Tema</string>
     <string name="settings_wifi_only">Sincronitza només per la connexió sense fil</string>
     <string name="share">Comparteix</string>
+    <string name="share_delete_link">Suprimeix l\'enllaç</string>
     <string name="share_dialog_title">Ús compartit</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Caduca el %1$s</string>
@@ -291,6 +294,8 @@
     <string name="share_password_title">Protegit per contrasenya</string>
     <string name="share_permission_can_edit">Pot editar</string>
     <string name="share_permission_file_drop">Pujada de fitxers</string>
+    <string name="share_permission_file_request">Sol·licitud de fitxer</string>
+    <string name="share_permission_unknown">Desconegut</string>
     <string name="share_permission_view_only">Només visualitació</string>
     <string name="share_permissions">Compartir permisos</string>
     <string name="share_remote_clarification">%1$s (remot)</string>

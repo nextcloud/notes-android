@@ -93,6 +93,7 @@
     <string name="context_based_formatting">Μορφοποίηση βάσει περιεχομένου popover</string>
     <string name="copy_link">Αντιγραφή συνδέσμου</string>
     <string name="could_not_retrieve_shares">Αδυναμία ανάκτησης κοινόχρηστων</string>
+    <string name="delete_share">Διαγραφή κοινόχρηστου</string>
     <string name="direct_editing_error">Σφάλμα κατά την φόρτωση της πλούσιας επεξεργασίας</string>
     <string name="dismiss">Αποδέσμευση</string>
     <string name="dnd">Μην ενοχλείτε</string>
@@ -206,6 +207,7 @@
     <string name="note_share_activity_share_link">Διαμοιρασμός συνδέσμου</string>
     <string name="note_share_activity_shared_with_you">Διαμοιράστηκε με εσάς από τον %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">Ο \"%1$s\" διαμοιράστηκε μαζί σας</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Να επιτρέπεται η λήψη και ο συγχρονισμός</string>
     <string name="note_share_detail_activity_cancel">Ακύρωση</string>
     <string name="note_share_detail_activity_common_confirm">Επιβεβαίωση</string>
     <string name="note_share_detail_activity_common_next">Επόμενο</string>
@@ -271,6 +273,8 @@
     <string name="share_password_title">Προστασία με συνθηματικό</string>
     <string name="share_permission_can_edit">Μπορεί να επεξεργαστεί</string>
     <string name="share_permission_file_drop">Απόθεση αρχείου</string>
+    <string name="share_permission_file_request">Αίτημα αρχείου</string>
+    <string name="share_permission_unknown">Άγνωστο</string>
     <string name="share_permission_view_only">Μόνο προβολή</string>
     <string name="share_permissions">Δικαιώματα κοινής χρήσης</string>
     <string name="share_remote_clarification">%1$s (απομακρυσμένα)</string>

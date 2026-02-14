@@ -101,6 +101,7 @@
     <string name="context_based_formatting">Kontextové vyskakovací okno formátování</string>
     <string name="copy_link">Zkopírovat odkaz</string>
     <string name="could_not_retrieve_shares">Nedaří se získat sdílení</string>
+    <string name="delete_share">Smazat sdílení</string>
     <string name="direct_editing_error">Chyba při načítání upravování formátovaného textu</string>
     <string name="dismiss">Zahodit</string>
     <string name="dnd">Nerušit</string>
@@ -242,6 +243,7 @@
     <string name="note_share_activity_user_icon_content_description">ikona uživatele sdílení poznámky</string>
     <string name="note_share_activity_you_are_not_allowed_to_share">Nemáte oprávnění vytvářet veřejné sdílení.</string>
     <string name="note_share_created">Sdílení vtvořeno</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Povolit stahování a synchronizaci</string>
     <string name="note_share_detail_activity_cancel">Storno</string>
     <string name="note_share_detail_activity_common_confirm">Potvrdit</string>
     <string name="note_share_detail_activity_common_next">Next</string>
@@ -298,6 +300,7 @@
     <string name="settings_theme_title">Motiv vzhledu</string>
     <string name="settings_wifi_only">Synchronizovat pouze přes Wi-Fi</string>
     <string name="share">Nasdílet</string>
+    <string name="share_delete_link">Smazat odkaz</string>
     <string name="share_dialog_title">Sdílení</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Platnost skončí %1$s</string>
@@ -318,7 +321,9 @@
     <string name="share_password_title">Chráněno heslem</string>
     <string name="share_permission_can_edit">Může upravovat</string>
     <string name="share_permission_file_drop">Předání souboru</string>
+    <string name="share_permission_file_request">Žádost o soubor</string>
     <string name="share_permission_secure_file_drop">Bezpečné předání souborů</string>
+    <string name="share_permission_unknown">Neznámé</string>
     <string name="share_permission_view_only">Pouze prohlížet</string>
     <string name="share_permissions">Oprávnění pro sdílení</string>
     <string name="share_remote_clarification">%1$s (vzdálený)</string>

@@ -99,6 +99,7 @@
     <string name="context_based_formatting">نافذة منبثقة للتنسيق القائم على السياق Context based formatting</string>
     <string name="copy_link">نسخ الرابط</string>
     <string name="could_not_retrieve_shares">لايمكن استعادة المشاركات</string>
+    <string name="delete_share">حذف المشاركة</string>
     <string name="direct_editing_error">خطأ في تحميل التحرير الغني rich editing</string>
     <string name="dismiss">الغاء</string>
     <string name="dnd">الرجاء عدم الإزعاج</string>
@@ -228,6 +229,7 @@
     <string name="note_share_activity_share_link">رابط مشاركة</string>
     <string name="note_share_activity_shared_with_you">مشارك معك بواسطة %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">تمت مشاركة \"%1$s\" معك</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">السماح بالتنزيل و المزامنة</string>
     <string name="note_share_detail_activity_cancel">إلغاء</string>
     <string name="note_share_detail_activity_common_confirm">تأكيد</string>
     <string name="note_share_detail_activity_common_next">التالي</string>
@@ -281,6 +283,7 @@
     <string name="settings_theme_title">السمة</string>
     <string name="settings_wifi_only">المزامنة فقط على الواي فاي</string>
     <string name="share">مُشارَكة</string>
+    <string name="share_delete_link">حذف الرابط</string>
     <string name="share_dialog_title">المشاركة</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">تنتهي %1$s</string>
@@ -300,7 +303,9 @@
     <string name="share_password_title">محمي بكلمة مرور</string>
     <string name="share_permission_can_edit">يمكنه التعديل</string>
     <string name="share_permission_file_drop">إسقاط الملف</string>
+    <string name="share_permission_file_request">طلب الملف</string>
     <string name="share_permission_secure_file_drop">إسقاط آمن للملف</string>
+    <string name="share_permission_unknown">غير معروف</string>
     <string name="share_permission_view_only">للعرض فقط</string>
     <string name="share_permissions">صلاحيات المشاركة</string>
     <string name="share_remote_clarification">%1$s (بعيد)</string>

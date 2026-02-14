@@ -264,6 +264,7 @@
     <string name="settings_theme_title">Тема</string>
     <string name="settings_wifi_only">Синхронизиране само на Wi-Fi</string>
     <string name="share">Споделяне</string>
+    <string name="share_delete_link">Изтриване на връзка</string>
     <string name="share_dialog_title">Споделяне</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Изтича %1$s</string>
@@ -283,6 +284,7 @@
     <string name="share_permission_can_edit">Може да се редактира</string>
     <string name="share_permission_file_drop">Пускане/Преместване/ на файл</string>
     <string name="share_permission_secure_file_drop">Защитено пускане на файлове</string>
+    <string name="share_permission_unknown">Неизвестен</string>
     <string name="share_permission_view_only">Само изглед</string>
     <string name="share_permissions">Права за споделяне</string>
     <string name="share_remote_clarification">%1$s (отдалечен)</string>
