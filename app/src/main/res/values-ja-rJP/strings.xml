@@ -297,6 +297,7 @@
     <string name="share_no_expiration_date_label">有効期限を設定</string>
     <string name="share_no_password_title">パスワード設定</string>
     <string name="share_password_dialog_fragment_share_link_optional_password_title">オプションのパスワードを入力</string>
+    <string name="share_password_dialog_fragment_skip">スキップ</string>
     <string name="share_password_title">パスワード保護</string>
     <string name="share_permission_can_edit">編集可能</string>
     <string name="share_permission_file_drop">ファイルを転送</string>

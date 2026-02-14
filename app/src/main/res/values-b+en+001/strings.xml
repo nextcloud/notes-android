@@ -210,6 +210,7 @@
     <string name="menu_favorite">Favourite</string>
     <string name="menu_preview">Preview</string>
     <string name="menu_share">Share</string>
+    <string name="menu_shared_note">Shared note</string>
     <string name="mute_all_notifications">Mute all notifications</string>
     <string name="no_account_configured_yet">No account configured yet</string>
     <string name="no_actions">No actions for this user</string>
@@ -254,6 +255,7 @@
     <string name="note_share_detail_activity_label_empty">Label cannot be empty</string>
     <string name="note_share_detail_activity_link_name">Link Name</string>
     <string name="note_share_detail_activity_no_share_permission_selected">Please select at least one permission to share.</string>
+    <string name="note_share_detail_activity_password_error_message">This password looks a bit weak. For better security, try using a longer password with a mix of letters, numbers, and symbols.</string>
     <string name="note_share_detail_activity_send_share">Send Share</string>
     <string name="note_share_detail_activity_set_note">Set Note</string>
     <string name="note_share_detail_activity_share_copy_link">Share and Copy Link</string>

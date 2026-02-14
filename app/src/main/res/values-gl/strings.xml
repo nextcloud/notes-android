@@ -210,6 +210,7 @@
     <string name="menu_favorite">Favorito</string>
     <string name="menu_preview">Vista previa</string>
     <string name="menu_share">Compartir</string>
+    <string name="menu_shared_note">Nota compartida</string>
     <string name="mute_all_notifications">Silenciar todas as notificacións</string>
     <string name="no_account_configured_yet">Aínda non hai ningunha conta configurada</string>
     <string name="no_actions">Non hai accións para este usuario</string>
@@ -254,6 +255,7 @@
     <string name="note_share_detail_activity_label_empty">A etiqueta non pode estar baleira</string>
     <string name="note_share_detail_activity_link_name">Nome da ligazón</string>
     <string name="note_share_detail_activity_no_share_permission_selected">Seleccione polo menos un permiso para compartir.</string>
+    <string name="note_share_detail_activity_password_error_message">Este contrasinal semella ser algo feble. Para unha maior seguridade, tente empregar un contrasinal máis longo cunha mestura de letras, números e símbolos.</string>
     <string name="note_share_detail_activity_send_share">Enviar o compartido</string>
     <string name="note_share_detail_activity_set_note">Definir a nota</string>
     <string name="note_share_detail_activity_share_copy_link">Compartir e copiar a ligazón</string>
@@ -300,7 +302,7 @@
     <string name="settings_theme_title">Tema</string>
     <string name="settings_wifi_only">Sincronizar só con wifi</string>
     <string name="share">Compartir</string>
-    <string name="share_delete_link">Eliminar ligazón</string>
+    <string name="share_delete_link">Eliminar a ligazón</string>
     <string name="share_dialog_title">Compartindo</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Caduca o %1$s</string>

@@ -210,6 +210,7 @@
     <string name="menu_favorite">Favorit</string>
     <string name="menu_preview">Vorschau</string>
     <string name="menu_share">Teilen</string>
+    <string name="menu_shared_note">Geteilte Notiz</string>
     <string name="mute_all_notifications">Alle Benachrichtigungen stummschalten</string>
     <string name="no_account_configured_yet">Bislang kein Konto eingerichtet</string>
     <string name="no_actions">Keine Aktionen für diesen Benutzer</string>
@@ -254,6 +255,7 @@
     <string name="note_share_detail_activity_label_empty">Bezeichnung darf nicht leer sein</string>
     <string name="note_share_detail_activity_link_name">Link-Name</string>
     <string name="note_share_detail_activity_no_share_permission_selected">Bitte mindestens eine Berechtigung zum Teilen auswählen.</string>
+    <string name="note_share_detail_activity_password_error_message">Dieses Passwort ist etwas schwach. Für mehr Sicherheit bitte ein längeres Passwort mit einer Mischung aus Buchstaben, Zahlen und Sonderzeichen verwenden.</string>
     <string name="note_share_detail_activity_send_share">Freigabe senden</string>
     <string name="note_share_detail_activity_set_note">Notiz setzen</string>
     <string name="note_share_detail_activity_share_copy_link">Teilen und Link kopieren</string>
