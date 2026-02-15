@@ -64,6 +64,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.nextcloud.android.common.core.utils.ecosystem.AccountReceiverCallback;
 import com.nextcloud.android.common.core.utils.ecosystem.EcosystemApp;
 import com.nextcloud.android.common.core.utils.ecosystem.EcosystemManager;
+import com.nextcloud.android.common.core.utils.ecosystem.LinkHelper;
 import com.nextcloud.android.common.ui.theme.utils.ColorRole;
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.AccountImportCancelledException;
@@ -122,7 +123,6 @@ import it.niedermann.owncloud.notes.shared.util.CustomAppGlideModule;
 import it.niedermann.owncloud.notes.shared.util.DisplayUtils;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
-import it.niedermann.owncloud.notes.util.LinkHelper;
 
 public class MainActivity extends LockedActivity implements NoteClickListener, AccountPickerListener, AccountSwitcherListener, CategoryDialogFragment.CategoryDialogListener {
 
