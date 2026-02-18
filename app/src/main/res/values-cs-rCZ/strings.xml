@@ -210,6 +210,7 @@
     <string name="menu_favorite">Oblíbená</string>
     <string name="menu_preview">Náhled</string>
     <string name="menu_share">Sdílet</string>
+    <string name="menu_shared_note">Nasdílet poznámku</string>
     <string name="mute_all_notifications">Ztlumit veškerá upozornění</string>
     <string name="no_account_configured_yet">Zatím není nastavený žádný účet</string>
     <string name="no_actions">Žádné akce pro tohoto uživatele</string>
@@ -254,6 +255,7 @@
     <string name="note_share_detail_activity_label_empty">Štítek je třeba vyplnit</string>
     <string name="note_share_detail_activity_link_name">Název odkazu</string>
     <string name="note_share_detail_activity_no_share_permission_selected">Vyberte alespoň jedno oprávnění pro sdílení.</string>
+    <string name="note_share_detail_activity_password_error_message">Toto heslo se jeví být poněkud slabé. Pro lepší zabezpečení zkuste použít delší heslo tvořené kombinací písmen, číslic a symbolů.</string>
     <string name="note_share_detail_activity_send_share">Odeslat sdílení</string>
     <string name="note_share_detail_activity_set_note">Nastavit poznámku</string>
     <string name="note_share_detail_activity_share_copy_link">Nasdílet a zkopírovat odkaz</string>
