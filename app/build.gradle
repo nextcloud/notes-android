@@ -115,7 +115,7 @@ dependencies {
         exclude group: 'commons-logging', module: 'commons-logging'
     }
 
-    implementation("com.github.nextcloud:android-library:2.22.2") {
+    implementation("com.github.nextcloud:android-library:2.23.0") {
         exclude group: 'org.ogce', module: 'xpp3'
     }
 
