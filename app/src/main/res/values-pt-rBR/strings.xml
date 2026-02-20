@@ -210,6 +210,7 @@
     <string name="menu_favorite">Favorita</string>
     <string name="menu_preview">Prever</string>
     <string name="menu_share">Compartilhar</string>
+    <string name="menu_shared_note">Nota compartilhada</string>
     <string name="mute_all_notifications">Silenciar todas as notificações</string>
     <string name="no_account_configured_yet">Nenhuma conta foi configurada</string>
     <string name="no_actions">Nenhuma ação para este usuário </string>
@@ -254,6 +255,7 @@
     <string name="note_share_detail_activity_label_empty">O rótulo não pode estar vazio</string>
     <string name="note_share_detail_activity_link_name">Nome do link </string>
     <string name="note_share_detail_activity_no_share_permission_selected">Selecione ao menos uma permissão para compartilhar.</string>
+    <string name="note_share_detail_activity_password_error_message">Esta senha parece um pouco fraca. Para maior segurança, tente usar uma senha mais longa com uma combinação de letras, números e símbolos.</string>
     <string name="note_share_detail_activity_send_share">Enviar Compartilhamento </string>
     <string name="note_share_detail_activity_set_note">Definir Nota </string>
     <string name="note_share_detail_activity_share_copy_link">Compartilhar e Copiar Link</string>

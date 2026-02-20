@@ -210,6 +210,7 @@
     <string name="menu_favorite">Ulubiona</string>
     <string name="menu_preview">Podgląd</string>
     <string name="menu_share">Udostępnij</string>
+    <string name="menu_shared_note">Udostępniona notatka</string>
     <string name="mute_all_notifications">Wycisz wszystkie powiadomienia</string>
     <string name="no_account_configured_yet">Nie skonfigurowano jeszcze konta</string>
     <string name="no_actions">Brak aktywności dla tego użytkownika</string>
@@ -254,6 +255,7 @@
     <string name="note_share_detail_activity_label_empty">Etykieta nie może być pusta</string>
     <string name="note_share_detail_activity_link_name">Nazwa linku</string>
     <string name="note_share_detail_activity_no_share_permission_selected">Wybierz co najmniej jedno uprawnienie do udostępniania.</string>
+    <string name="note_share_detail_activity_password_error_message">Hasło jest trochę za słabe. Dla leszego bezpieczeństwa, spróbuj użyć dłuższego hasła zawierającego kombinację liter, liczb i symboli.</string>
     <string name="note_share_detail_activity_send_share">Wyślij udostępnienie</string>
     <string name="note_share_detail_activity_set_note">Ustaw notatkę</string>
     <string name="note_share_detail_activity_share_copy_link">Udostępnij i skopiuj odnośnik</string>
@@ -300,6 +302,7 @@
     <string name="settings_theme_title">Motyw</string>
     <string name="settings_wifi_only">Synchronizuj tylko przez Wi-Fi</string>
     <string name="share">Udostępnij</string>
+    <string name="share_delete_link">Usuń link</string>
     <string name="share_dialog_title">Udostępnianie</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Wygaśnie o %1$s</string>
