@@ -51,6 +51,7 @@
     <string name="allow_resharing">Επιτρέψτε τον επαναδιαμοιρασμό</string>
     <string name="app_name">Σημειώσεις</string>
     <string name="app_name_long">Nextcloud Σημειώσεις</string>
+    <string name="appear_offline">Εμφάνιση ως αποσυνδεδεμένος/η</string>
     <string name="appearance_and_behavior">Εμφάνιση και συμπεριφορά</string>
     <string name="append_to_note">Προσάρτηση στη σημείωση</string>
     <string name="away">Λείπω</string>
@@ -193,6 +194,7 @@
     <string name="menu_favorite">Αγαπημένο</string>
     <string name="menu_preview">Προεπισκόπηση</string>
     <string name="menu_share">Διαμοιρασμός</string>
+    <string name="mute_all_notifications">Σίγαση όλων των ειδοποιήσεων</string>
     <string name="no_account_configured_yet">Δεν έχει ρυθμιστεί ακόμη κάποιος λογαριασμός</string>
     <string name="no_actions">Δεν υπάρχουν ενέργειες για αυτόν τον χρήστη</string>
     <string name="no_browser_available">Δεν υπάρχει διαθέσιμη εφαρμογή για χειρισμό συνδέσμων</string>

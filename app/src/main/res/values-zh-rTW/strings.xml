@@ -210,6 +210,7 @@
     <string name="menu_favorite">我的最愛</string>
     <string name="menu_preview">預覽</string>
     <string name="menu_share">分享</string>
+    <string name="menu_shared_note">已分享的筆記</string>
     <string name="mute_all_notifications">靜音所有通知</string>
     <string name="no_account_configured_yet">尚未設定任何帳號</string>
     <string name="no_actions">沒有此使用者可用的動作</string>
@@ -254,6 +255,7 @@
     <string name="note_share_detail_activity_label_empty">標籤不可空白</string>
     <string name="note_share_detail_activity_link_name">連結名稱</string>
     <string name="note_share_detail_activity_no_share_permission_selected">請選取至少一個要分享的取用權。</string>
+    <string name="note_share_detail_activity_password_error_message">此密碼強度稍弱。為提升安全性，建議使用包含字母、數字及符號的較長密碼。</string>
     <string name="note_share_detail_activity_send_share">傳送分享</string>
     <string name="note_share_detail_activity_set_note">設定備註</string>
     <string name="note_share_detail_activity_share_copy_link">分享並複製連結</string>
