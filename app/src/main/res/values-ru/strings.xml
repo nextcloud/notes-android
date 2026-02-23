@@ -345,6 +345,7 @@
     <string name="sort_alphabetically">Сортировать по алфавиту</string>
     <string name="sort_last_modified">Сортировать по дате изменения</string>
     <string name="status_message">Описание статуса</string>
+    <string name="status_set_fail_message">Не удалось установить статус!</string>
     <string name="switch_to_plain_editing">Переключиться на простое редактирование</string>
     <string name="thirtyMinutes">30 минут.</string>
     <string name="thisWeek">На этой неделе</string>
