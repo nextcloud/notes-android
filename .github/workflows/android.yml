@@ -27,7 +27,7 @@ jobs:
           check-latest: true
           cache: 'gradle'
       - name: Validate Gradle Wrapper
-        uses: gradle/actions/wrapper-validation@f29f5a9d7b09a7c6b29859002d29d24e1674c884 # v5.0.1
+        uses: gradle/actions/wrapper-validation@0723195856401067f7a2779048b490ace7a47d7c # v5.0.2
 
   lint:
     name: Lint
