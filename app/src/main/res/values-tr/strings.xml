@@ -210,6 +210,7 @@
     <string name="menu_favorite">Sık kullanılanlara ekle</string>
     <string name="menu_preview">Ön izleme</string>
     <string name="menu_share">Paylaş</string>
+    <string name="menu_shared_note">Paylaşılmış not</string>
     <string name="mute_all_notifications">Tüm bildirimleri kapat</string>
     <string name="no_account_configured_yet">Henüz bir hesap yapılandırılmamış</string>
     <string name="no_actions">Bu kullanıcının bir işlemi yok</string>
@@ -254,6 +255,7 @@
     <string name="note_share_detail_activity_label_empty">Etiket boş olamaz</string>
     <string name="note_share_detail_activity_link_name">Bağlantı adı</string>
     <string name="note_share_detail_activity_no_share_permission_selected">Lütfen paylaşmak için en az bir izin seçin.</string>
+    <string name="note_share_detail_activity_password_error_message">Bu parola biraz zayıf görünüyor. Daha iyi güvenlik sağlamak için harf, rakam ve simge karakterlerinden oluşan daha uzun bir parola kullanmayı deneyin.</string>
     <string name="note_share_detail_activity_send_share">Paylaşımı gönder</string>
     <string name="note_share_detail_activity_set_note">Notu ayarla</string>
     <string name="note_share_detail_activity_share_copy_link">Bağlantıyı paylaş ve kopyala</string>
