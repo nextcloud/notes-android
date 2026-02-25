@@ -217,7 +217,7 @@
     <string name="no_browser_available">Відсутні застосунки для обробки посилань</string>
     <string name="no_category">Без категорії</string>
     <string name="no_email_app_available">Відсутній застосунок для опрацювання адреси ел. пошти</string>
-    <string name="no_notes_yet">Нотатки поки відсутні</string>
+    <string name="no_notes_yet">Нотатки відсутні</string>
     <string name="no_notes_yet_description">Натисніть кнопку \"+\", щоб створити нову нотатку</string>
     <string name="no_other_accounts">Ви ще не налаштували жодного іншого облікового запису.</string>
     <string name="noteMode_plain_edit">Режим простого редагування</string>
