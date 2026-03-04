@@ -190,6 +190,8 @@
     <string name="settings_enable_direct_edit_summary">When disabled, the advanced editor will be hidden.</string>
     <string name="settings_keep_screen_on">Keep screen on</string>
     <string name="settings_keep_screen_on_summary">When viewing or editing a note</string>
+    <string name="settings_swipe_actions">Swipe actions</string>
+    <string name="settings_swipe_actions_summary">Mark as favorite or delete notes with a swipe</string>
 
     <string name="error_sync">Synchronization failed: %1$s</string>
     <string name="error_synchronization">Synchronization failed</string>
@@ -261,6 +263,7 @@
     <string name="pref_key_background_sync" translatable="false">backgroundSync</string>
     <string name="pref_key_enable_direct_edit" translatable="false">directEditPreference</string>
     <string name="pref_key_show_ecosystem_apps" translatable="false">show_ecosystem_apps</string>
+    <string name="pref_key_swipe_actions" translatable="false">swipe_actions</string>
     <string name="pref_value_mode_edit" translatable="false">edit</string>
     <string name="pref_value_mode_direct_edit" translatable="false">directEdit</string>
     <string name="pref_value_mode_preview" translatable="false">preview</string>
