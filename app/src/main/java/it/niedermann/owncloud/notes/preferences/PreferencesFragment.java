@@ -37,6 +37,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
     private BrandedSwitchPreference lockPref;
     private BrandedSwitchPreference wifiOnlyPref;
     private BrandedSwitchPreference gridViewPref;
+    private BrandedSwitchPreference swipeActionsPref;
     private BrandedSwitchPreference preventScreenCapturePref;
     private BrandedSwitchPreference backgroundSyncPref;
     private BrandedSwitchPreference keepScreenOnPref;
@@ -64,6 +65,17 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
             });
         } else {
             Log.e(TAG, "Could not find preference with key: \"" + getString(R.string.pref_key_gridview) + "\"");
+        }
+
+        swipeActionsPref = findPreference(getString(R.string.pref_key_swipe_actions));
+        if (swipeActionsPref != null) {
+            swipeActionsPref.setOnPreferenceChangeListener((Preference preference, Object newValue) -> {
+                final Boolean swipeEnabled = (Boolean) newValue;
+                Log.v(TAG, "swipeEnabled: " + swipeEnabled);
+                viewModel.resultCode$.setValue(Activity.RESULT_OK);
+                NotesApplication.updateSwipeEnabled(swipeEnabled);
+                return true;
+            });
         }
 
         keepScreenOnPref = findPreference(getString(R.string.pref_key_keep_screen_on));
@@ -144,6 +156,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
         lockPref.applyBrand(color);
         wifiOnlyPref.applyBrand(color);
         gridViewPref.applyBrand(color);
+        swipeActionsPref.applyBrand(color);
         showEcosystemAppBarPref.applyBrand(color);
         preventScreenCapturePref.applyBrand(color);
         backgroundSyncPref.applyBrand(color);

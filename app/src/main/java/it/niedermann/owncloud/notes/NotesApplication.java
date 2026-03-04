@@ -36,6 +36,7 @@ public class NotesApplication extends Application {
     private static long lastInteraction = 0;
     private static String PREF_KEY_THEME;
     private static boolean isGridViewEnabled = false;
+    private static boolean isSwipeEnabled = true;
     private static BrandingUtil brandingUtil;
 
     @Override
@@ -45,6 +46,7 @@ public class NotesApplication extends Application {
         final var prefs = getDefaultSharedPreferences(getApplicationContext());
         lockedPreference = prefs.getBoolean(getString(R.string.pref_key_lock), false);
         isGridViewEnabled = getDefaultSharedPreferences(this).getBoolean(getString(R.string.pref_key_gridview), false);
+        isSwipeEnabled = getDefaultSharedPreferences(this).getBoolean(getString(R.string.pref_key_swipe_actions), true);
         super.onCreate();
         brandingUtil = BrandingUtil.getInstance(this);
         if (BuildConfig.DEBUG) {
@@ -78,6 +80,14 @@ public class NotesApplication extends Application {
 
     public static void updateGridViewEnabled(boolean gridView) {
         isGridViewEnabled = gridView;
+    }
+
+    public static boolean isSwipeEnabled() {
+        return isSwipeEnabled;
+    }
+
+    public static void updateSwipeEnabled(boolean swipeEnabled) {
+        isSwipeEnabled = swipeEnabled;
     }
 
     public static DarkModeSetting getAppTheme(Context context) {

@@ -24,6 +24,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.android.material.snackbar.Snackbar;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.main.MainViewModel;
 import it.niedermann.owncloud.notes.main.items.ItemAdapter;
@@ -63,7 +64,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
              */
             @Override
             public int getSwipeDirs(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
-                if (gridView || viewHolder instanceof SectionViewHolder) return 0;
+                if (gridView || !NotesApplication.isSwipeEnabled() || viewHolder instanceof SectionViewHolder) return 0;
                 return super.getSwipeDirs(recyclerView, viewHolder);
             }
 
