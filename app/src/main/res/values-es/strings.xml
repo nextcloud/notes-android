@@ -243,6 +243,7 @@
     <string name="note_share_activity_user_icon_content_description">ícono de compartir a usuario para las notas</string>
     <string name="note_share_activity_you_are_not_allowed_to_share">No tiene permitido crear un recurso compartido público</string>
     <string name="note_share_created">Se creó el recurso compartido</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Permitir descarga y sincronización</string>
     <string name="note_share_detail_activity_cancel">Cancelar</string>
     <string name="note_share_detail_activity_common_confirm">Confirmar</string>
     <string name="note_share_detail_activity_common_next">Siguiente</string>
