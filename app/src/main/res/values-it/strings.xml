@@ -285,6 +285,7 @@
     <string name="settings_theme_title">Tema</string>
     <string name="settings_wifi_only">Sincronizza solo con Wi-Fi</string>
     <string name="share">Condividi</string>
+    <string name="share_delete_link">Elimina link</string>
     <string name="share_dialog_title">Condivisione</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Scade il %1$s</string>
