@@ -228,6 +228,7 @@
     <string name="note_share_activity_could_not_retrieve_url">Kunde inte hämta URL</string>
     <string name="note_share_activity_resharing_not_allowed">Policy eller behörigheter förhindrar vidaredelning</string>
     <string name="note_share_activity_search_text">Namn, federerat moln-ID eller e-postadress...</string>
+    <string name="note_share_activity_send_copy_to">Skicka kopia till</string>
     <string name="note_share_activity_share_link">Delningslänk</string>
     <string name="note_share_activity_shared_with_you">Delad med dig av %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" har delats med dig</string>
