@@ -24,6 +24,9 @@ target/
 .idea/
 .gradle/
 local.properties
+keystore.properties
+*.jks
+*.keystore
 sample_client/local.properties
 tests/local.properties
 tests/test_cases/local.properties

@@ -10,6 +10,23 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.jetbrains.kotlin.android'
 
+def releaseKeystorePropertiesFile = rootProject.file("keystore.properties")
+def releaseKeystoreProperties = new Properties()
+def hasLocalReleaseSigning = false
+
+if (releaseKeystorePropertiesFile.exists()) {
+    releaseKeystorePropertiesFile.withInputStream { stream ->
+        releaseKeystoreProperties.load(stream)
+    }
+
+    hasLocalReleaseSigning = [
+            "storeFile",
+            "storePassword",
+            "keyAlias",
+            "keyPassword"
+    ].every { key -> releaseKeystoreProperties.getProperty(key)?.trim() }
+}
+
 android {
     namespace = 'it.niedermann.owncloud.notes'
 
@@ -43,11 +60,25 @@ android {
         buildConfig = true
     }
 
+    signingConfigs {
+        releaseLocal {
+            if (hasLocalReleaseSigning) {
+                storeFile file(releaseKeystoreProperties.getProperty("storeFile"))
+                storePassword releaseKeystoreProperties.getProperty("storePassword")
+                keyAlias releaseKeystoreProperties.getProperty("keyAlias")
+                keyPassword releaseKeystoreProperties.getProperty("keyPassword")
+            }
+        }
+    }
+
     buildTypes {
 
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            if (hasLocalReleaseSigning) {
+                signingConfig signingConfigs.getByName("releaseLocal")
+            }
         }
         debug {
             enableUnitTestCoverage true
