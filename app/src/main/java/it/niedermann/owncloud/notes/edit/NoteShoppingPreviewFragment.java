@@ -23,6 +23,7 @@ public class NoteShoppingPreviewFragment extends NotePreviewFragment {
     private static final Pattern CHECKED_CHECKBOX_LINE_PATTERN = Pattern.compile(
             "^\\s*(?:[-*+]\\s+|\\d+[.)]\\s+)\\[[xX]\\]\\s*.*$"
     );
+    private static final Pattern HEADING_PATTERN = Pattern.compile("^\\s*#+\\s+.*$");
 
     private final List<HiddenLine> hiddenLines = new ArrayList<>();
 
@@ -59,11 +60,15 @@ public class NoteShoppingPreviewFragment extends NotePreviewFragment {
     protected String mapContentForDisplay(@NonNull String content) {
         hiddenLines.clear();
 
+        final List<String> sourceLines = splitLines(content);
+        final boolean[] orphanHeadings = findOrphanHeadings(sourceLines);
+
         final var visibleLines = new ArrayList<String>();
         int visibleIndex = 0;
 
-        for (final String line : splitLines(content)) {
-            if (isCheckedCheckboxLine(line)) {
+        for (int i = 0; i < sourceLines.size(); i++) {
+            final String line = sourceLines.get(i);
+            if (isCheckedCheckboxLine(line) || orphanHeadings[i]) {
                 hiddenLines.add(new HiddenLine(visibleIndex, line));
             } else {
                 visibleLines.add(line);
@@ -106,6 +111,38 @@ public class NoteShoppingPreviewFragment extends NotePreviewFragment {
 
     private boolean isCheckedCheckboxLine(@NonNull String line) {
         return CHECKED_CHECKBOX_LINE_PATTERN.matcher(line).matches();
+    }
+
+    private boolean isHeadingLine(@NonNull String line) {
+        return HEADING_PATTERN.matcher(line).matches();
+    }
+
+    @NonNull
+    private boolean[] findOrphanHeadings(@NonNull List<String> lines) {
+        final boolean[] orphanHeadings = new boolean[lines.size()];
+
+        for (int i = 0; i < lines.size(); i++) {
+            if (!isHeadingLine(lines.get(i))) {
+                continue;
+            }
+
+            boolean hasVisibleContentInSection = false;
+            for (int j = i + 1; j < lines.size(); j++) {
+                final String nextLine = lines.get(j);
+                if (isHeadingLine(nextLine)) {
+                    break;
+                }
+
+                if (!isCheckedCheckboxLine(nextLine) && !nextLine.trim().isEmpty()) {
+                    hasVisibleContentInSection = true;
+                    break;
+                }
+            }
+
+            orphanHeadings[i] = !hasVisibleContentInSection;
+        }
+
+        return orphanHeadings;
     }
 
     @NonNull
