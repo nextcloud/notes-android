@@ -31,6 +31,7 @@
     <string name="menu_change_category">Category</string>
     <string name="menu_favorite">Favorite</string>
     <string name="menu_preview">Preview</string>
+    <string name="menu_shopping">Shopping</string>
     <string name="menu_share">Share</string>
     <string name="menu_shared_note">Shared note</string>
     <string name="common_loading">Loading…</string>
@@ -268,6 +269,7 @@
     <string name="pref_value_mode_edit" translatable="false">edit</string>
     <string name="pref_value_mode_direct_edit" translatable="false">directEdit</string>
     <string name="pref_value_mode_preview" translatable="false">preview</string>
+    <string name="pref_value_mode_shopping" translatable="false">shopping</string>
     <string name="pref_value_mode_last" translatable="false">last</string>
     <string name="pref_value_font_size_small" translatable="false">small</string>
     <string name="pref_value_font_size_medium" translatable="false">medium</string>

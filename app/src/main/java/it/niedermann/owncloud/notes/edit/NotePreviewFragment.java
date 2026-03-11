@@ -57,12 +57,9 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.menu_edit).setVisible(true);
-        if(getNormalEditButton().getVisibility() == View.VISIBLE) {
-            menu.findItem(R.id.menu_edit).setVisible(false);
-        }
-
+        menu.findItem(R.id.menu_edit).setVisible(!shouldShowShoppingMode());
         menu.findItem(R.id.menu_preview).setVisible(false);
+        menu.findItem(R.id.menu_shopping).setVisible(shouldShowShoppingMode());
     }
 
     @Override
@@ -144,23 +141,40 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         lifecycleScopeIOJob(() -> {
             final String content = note.getContent();
             changedText = content;
+            final String displayContent = mapContentForDisplay(content);
 
             onMainThread(() -> {
-                binding.singleNoteContent.setMarkdownString(content, setScrollY);
+                binding.singleNoteContent.setMarkdownString(displayContent, setScrollY);
 
                 final var activity = getActivity();
                 if (activity == null) {
                     return Unit.INSTANCE;
                 }
 
-                binding.singleNoteContent.getMarkdownString().observe(activity, (newContent) -> {
-                    changedText = newContent.toString();
-                    saveNote(null);
-                });
+                if (shouldObserveMarkdownChanges()) {
+                    binding.singleNoteContent.getMarkdownString().observe(activity, (newContent) -> {
+                        changedText = mapContentForSaving(newContent.toString());
+                        saveNote(null);
+                    });
+                }
                 return Unit.INSTANCE;
             });
             return Unit.INSTANCE;
         });
+    }
+
+    @NonNull
+    protected String mapContentForDisplay(@NonNull String content) {
+        return content;
+    }
+
+    @NonNull
+    protected String mapContentForSaving(@NonNull String content) {
+        return content;
+    }
+
+    protected boolean shouldObserveMarkdownChanges() {
+        return true;
     }
 
     protected void registerInternalNoteLinkHandler() {
@@ -204,9 +218,10 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
                         note = repo.getNoteById(note.getId());
                         final String content = note.getContent();
                         changedText = content;
+                        final String displayContent = mapContentForDisplay(content);
 
                         onMainThread(() -> {
-                            binding.singleNoteContent.setMarkdownString(content);
+                            binding.singleNoteContent.setMarkdownString(displayContent);
                             binding.swiperefreshlayout.setRefreshing(false);
                             return Unit.INSTANCE;
                         });

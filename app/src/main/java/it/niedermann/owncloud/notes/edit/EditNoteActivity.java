@@ -287,6 +287,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         final var prefValueEdit = getString(R.string.pref_value_mode_edit);
         final var prefValueDirectEdit = getString(R.string.pref_value_mode_direct_edit);
         final var prefValuePreview = getString(R.string.pref_value_mode_preview);
+        final var prefValueShopping = getString(R.string.pref_value_mode_shopping);
 
         if (effectiveMode.equals(prefValueEdit)) {
             return NoteEditFragment.newInstance(accountId, noteId);
@@ -294,9 +295,19 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
             return NoteDirectEditFragment.newInstance(accountId, noteId);
         } else if (effectiveMode.equals(prefValuePreview)) {
             return NotePreviewFragment.newInstance(accountId, noteId);
+        } else if (effectiveMode.equals(prefValueShopping)) {
+            if (isShoppingModeAvailable(noteId)) {
+                return NoteShoppingPreviewFragment.newInstance(accountId, noteId);
+            }
+            return NotePreviewFragment.newInstance(accountId, noteId);
         } else {
             throw new IllegalStateException("Unknown note modePref: " + modePref);
         }
+    }
+
+    private boolean isShoppingModeAvailable(long noteId) {
+        final var note = repo.getNoteById(noteId);
+        return note != null && BaseNoteFragment.isShoppingTitle(note.getTitle());
     }
 
 
@@ -388,6 +399,9 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         } else if (itemId == R.id.menu_edit) {
             changeMode(Mode.EDIT, false);
             return true;
+        } else if (itemId == R.id.menu_shopping) {
+            changeMode(Mode.SHOPPING, false);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -404,6 +418,8 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         final String prefKeyLastMode = getString(R.string.pref_key_last_note_mode);
         if (fragment instanceof NoteEditFragment) {
             preferences.edit().putString(prefKeyLastMode, getString(R.string.pref_value_mode_edit)).apply();
+        } else if (fragment instanceof NoteShoppingPreviewFragment) {
+            preferences.edit().putString(prefKeyLastMode, getString(R.string.pref_value_mode_shopping)).apply();
         } else if (fragment instanceof NotePreviewFragment) {
             preferences.edit().putString(prefKeyLastMode, getString(R.string.pref_value_mode_preview)).apply();
         } else if (fragment instanceof NoteDirectEditFragment) {
@@ -438,6 +454,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         switch (mode) {
             case EDIT -> launchExistingNote(getAccountId(), getNoteId(), getString(R.string.pref_value_mode_edit), reloadNote);
             case PREVIEW -> launchExistingNote(getAccountId(), getNoteId(), getString(R.string.pref_value_mode_preview), reloadNote);
+            case SHOPPING -> launchExistingNote(getAccountId(), getNoteId(), getString(R.string.pref_value_mode_shopping), reloadNote);
             case DIRECT_EDIT -> launchExistingNote(getAccountId(), getNoteId(), getString(R.string.pref_value_mode_direct_edit), reloadNote);
             default -> throw new IllegalStateException("Unknown mode: " + mode);
         }

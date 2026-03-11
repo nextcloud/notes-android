@@ -35,6 +35,7 @@ import com.owncloud.android.lib.common.utils.Log_OC;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -59,6 +60,7 @@ import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 public abstract class BaseNoteFragment extends BrandedFragment implements CategoryDialogListener, EditTitleListener {
 
     private static final String TAG = BaseNoteFragment.class.getSimpleName();
+    private static final String SHOPPING_TITLE_KEYWORD = "einkaufen";
     protected final ExecutorService executor = Executors.newCachedThreadPool();
 
     protected static final int MENU_ID_PIN = -1;
@@ -530,7 +532,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
 
     public interface NoteFragmentListener {
         enum Mode {
-            EDIT, PREVIEW, DIRECT_EDIT
+            EDIT, PREVIEW, SHOPPING, DIRECT_EDIT
         }
 
         void close();
@@ -538,5 +540,13 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         void onNoteUpdated(Note note);
 
         void changeMode(@NonNull Mode mode, boolean reloadNote);
+    }
+
+    protected static boolean isShoppingTitle(@Nullable String title) {
+        return title != null && title.toLowerCase(Locale.ROOT).contains(SHOPPING_TITLE_KEYWORD);
+    }
+
+    protected boolean shouldShowShoppingMode() {
+        return note != null && isShoppingTitle(note.getTitle());
     }
 }

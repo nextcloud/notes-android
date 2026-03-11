@@ -84,6 +84,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_edit).setVisible(false);
         menu.findItem(R.id.menu_preview).setVisible(true);
+        menu.findItem(R.id.menu_shopping).setVisible(false);
     }
 
     @Override
