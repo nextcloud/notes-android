@@ -218,7 +218,7 @@
     <string name="no_category">Keine Kategorie</string>
     <string name="no_email_app_available">Keine App zur Verarbeitung der E-Mail-Adresse verfügbar</string>
     <string name="no_notes_yet">Noch keine Notizen vorhanden</string>
-    <string name="no_notes_yet_description">Drücke den \"+\"-Knopf um eine neue Notiz zu erstellen</string>
+    <string name="no_notes_yet_description">Den \"+\"-Knopf drücken, um eine neue Notiz zu erstellen</string>
     <string name="no_other_accounts">Sie haben bislang keine weiteren Konten eingerichtet.</string>
     <string name="noteMode_plain_edit">Einfacher Bearbeitungsmodus</string>
     <string name="noteMode_plain_preview">Einfache Vorschau</string>
@@ -335,7 +335,7 @@
     <string name="share_via_link_section_title">Link teilen</string>
     <string name="share_via_link_send_link_label">Link teilen</string>
     <string name="share_via_link_unset_password">Entfernen</string>
-    <string name="share_with_title">Teilen mit…</string>
+    <string name="share_with_title">Teilen mit …</string>
     <string name="shared_text_empty">Der geteilte Text war ohne Inhalt</string>
     <string name="shortcut_create_long">Neue Notiz erstellen</string>
     <string name="simple_about">Über</string>
@@ -372,7 +372,7 @@
     <string name="welcome_text">Willkommen bei %1$s</string>
     <string name="whats_your_status">Wie ist Ihr Status?</string>
     <string name="widget_entry_fav_contentDescription">Das Stern-Symbol markiert den Eintrag als Favorit</string>
-    <string name="widget_not_logged_in">Bitte melden Sie sich bei Notes vor Nutzung des Widgets an</string>
+    <string name="widget_not_logged_in">Bitte bei Notes vor Nutzung des Widgets anmelden</string>
     <string name="widget_note_list_placeholder">Keine Notizen</string>
     <string name="widget_note_list_title">Liste der Notizen</string>
     <string name="widget_single_note_placeholder_tv">Notiz nicht gefunden</string>
