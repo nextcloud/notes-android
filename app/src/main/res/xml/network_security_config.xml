@@ -2,14 +2,16 @@
 <!--
   ~ Nextcloud Notes - Android Client
   ~
-  ~ SPDX-FileCopyrightText: 2017-2024 Nextcloud GmbH and Nextcloud contributors
-  ~ SPDX-FileCopyrightText: 2017 Andrea Scarpino <me@andreascarpino.it
+  ~ SPDX-FileCopyrightText: 2017-2026 Nextcloud GmbH and Nextcloud contributors
+  ~ SPDX-FileCopyrightText: 2017 Andrea Scarpino <me@andreascarpino.it>
   ~ SPDX-License-Identifier: GPL-3.0-or-later
 -->
 <network-security-config>
+    <!-- Allowing cleartextTrafficPermitted - we don't control the server yet strongly suggesting TLS/SSL -->
     <base-config cleartextTrafficPermitted="true">
         <trust-anchors>
             <certificates src="system" />
+            <!-- We allow user-certificates so managed device can make use of self-signed/client certificates -->
             <certificates src="user" />
         </trust-anchors>
     </base-config>
