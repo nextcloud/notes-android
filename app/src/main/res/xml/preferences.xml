@@ -75,6 +75,14 @@
             android:title="@string/settings_gridview" />
 
         <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
+            android:defaultValue="true"
+            android:icon="@drawable/ic_swipe_grey600_24dp"
+            android:key="@string/pref_key_swipe_actions"
+            android:layout="@layout/item_pref"
+            android:title="@string/settings_swipe_actions"
+            android:summary="@string/settings_swipe_actions_summary" />
+
+        <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
             android:defaultValue="@string/pref_value_font_normal"
             android:icon="@drawable/ic_text_format_grey600_24dp"
             android:key="@string/pref_key_font"
