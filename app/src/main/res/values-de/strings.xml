@@ -299,6 +299,8 @@
     <string name="settings_prevent_screen_capture">Bildschirmaufnahme verhindern</string>
     <string name="settings_show_ecosystem_apps">App-Umschalter anzeigen</string>
     <string name="settings_show_ecosystem_apps_summary">Nextcloud-App-Vorschläge in der Navigationsüberschrift</string>
+    <string name="settings_swipe_actions">Wischaktionen</string>
+    <string name="settings_swipe_actions_summary">Als Favorit markieren oder Notizen mit einem Wisch löschen</string>
     <string name="settings_theme_title">Design</string>
     <string name="settings_wifi_only">Nur über WLAN synchronisieren</string>
     <string name="share">Teilen</string>
