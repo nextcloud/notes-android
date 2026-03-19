@@ -299,6 +299,8 @@
     <string name="settings_prevent_screen_capture">Proibir captura de tela</string>
     <string name="settings_show_ecosystem_apps">Mostrar alternador de aplicativos</string>
     <string name="settings_show_ecosystem_apps_summary">Sugestões de aplicativos Nextcloud no título de navegação</string>
+    <string name="settings_swipe_actions">Ações de deslizar</string>
+    <string name="settings_swipe_actions_summary">Marque como favorito ou exclua notas com um simples deslizar</string>
     <string name="settings_theme_title">Tema</string>
     <string name="settings_wifi_only">Sincronizar apenas por Wi-Fi</string>
     <string name="share">Compartilhar</string>

@@ -299,6 +299,8 @@
     <string name="settings_prevent_screen_capture">Prevent screen capture</string>
     <string name="settings_show_ecosystem_apps">Show app switcher</string>
     <string name="settings_show_ecosystem_apps_summary">Nextcloud app suggestions in navigation heading</string>
+    <string name="settings_swipe_actions">Swipe actions</string>
+    <string name="settings_swipe_actions_summary">Mark as favorite or delete notes with a swipe</string>
     <string name="settings_theme_title">Theme</string>
     <string name="settings_wifi_only">Sync only on Wi-Fi</string>
     <string name="share">Share</string>

@@ -299,6 +299,8 @@
     <string name="settings_prevent_screen_capture">防止螢幕截圖</string>
     <string name="settings_show_ecosystem_apps">顯示應用程式切換器</string>
     <string name="settings_show_ecosystem_apps_summary">導覽列中的 Nextcloud 應用程式建議</string>
+    <string name="settings_swipe_actions">滑動動作</string>
+    <string name="settings_swipe_actions_summary">透過滑動手勢將筆記標記為最愛或刪除</string>
     <string name="settings_theme_title">佈景主題</string>
     <string name="settings_wifi_only">只在有 Wi-Fi 時同步</string>
     <string name="share">分享</string>
