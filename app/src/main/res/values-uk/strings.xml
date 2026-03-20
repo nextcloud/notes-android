@@ -299,6 +299,8 @@
     <string name="settings_prevent_screen_capture">Запобігати захопленню екрана</string>
     <string name="settings_show_ecosystem_apps">Показувати перемикач застосунків</string>
     <string name="settings_show_ecosystem_apps_summary">Пропозиції застосунків Nextcloud у заголовку навігації</string>
+    <string name="settings_swipe_actions">Дії гортання</string>
+    <string name="settings_swipe_actions_summary">Позначати зірочкою або вилучати нотатки під час гортання</string>
     <string name="settings_theme_title">Тема</string>
     <string name="settings_wifi_only">Синхронізувати тільки по WI-Fi</string>
     <string name="share">Спільний доступ</string>

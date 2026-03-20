@@ -299,6 +299,8 @@
     <string name="settings_prevent_screen_capture">Ekran görüntüsü alınamasın</string>
     <string name="settings_show_ecosystem_apps">Uygulama değiştiriciyi görüntüle</string>
     <string name="settings_show_ecosystem_apps_summary">Gezinme başlığında Nextcloud uygulama önerileri</string>
+    <string name="settings_swipe_actions">Kaydırma eylemleri</string>
+    <string name="settings_swipe_actions_summary">Notlarınızı favoriye işaretleyin veya kaydırarak silin.</string>
     <string name="settings_theme_title">Tema</string>
     <string name="settings_wifi_only">Yalnızca kablosuz ağ ile eşitlensin</string>
     <string name="share">Paylaşma</string>
