@@ -299,6 +299,8 @@
     <string name="settings_prevent_screen_capture">Bránit pořizování snímků obrazovky</string>
     <string name="settings_show_ecosystem_apps">Zobrazit přepínač aplikací</string>
     <string name="settings_show_ecosystem_apps_summary">Doporučování Nextcloud aplikací v záhlaví navigace</string>
+    <string name="settings_swipe_actions">Akce při přejetí prstem</string>
+    <string name="settings_swipe_actions_summary">Označujte poznámky jako oblíbené nebo je mažte pomocí přejetí prstem</string>
     <string name="settings_theme_title">Motiv vzhledu</string>
     <string name="settings_wifi_only">Synchronizovat pouze přes Wi-Fi</string>
     <string name="share">Nasdílet</string>
