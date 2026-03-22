@@ -299,6 +299,8 @@
     <string name="settings_prevent_screen_capture">Cosc a chur ar ghabháil scáileáin</string>
     <string name="settings_show_ecosystem_apps">Taispeáin athróir aip</string>
     <string name="settings_show_ecosystem_apps_summary">Moltaí aip Nextcloud sa cheannteideal nascleanúna</string>
+    <string name="settings_swipe_actions">Gníomhartha svaidhpeála</string>
+    <string name="settings_swipe_actions_summary">Marcáil mar is fearr leat nótaí nó scrios iad le svaidhpeáil</string>
     <string name="settings_theme_title">Téama</string>
     <string name="settings_wifi_only">Sioncronaigh ar Wi-Fi amháin</string>
     <string name="share">Comhroinn</string>
