@@ -195,6 +195,7 @@
     <string name="link_share_editing">Éditer</string>
     <string name="link_share_file_drop">Dépôt de fichier (téléversement seulement)</string>
     <string name="link_share_view_only">Afficher seulement</string>
+    <string name="listview_no_content">Aucun contenu</string>
     <string name="listview_updated_last_month">Mois dernier</string>
     <string name="listview_updated_last_week">Semaine dernière</string>
     <string name="listview_updated_this_month">Ce mois-ci</string>
@@ -208,6 +209,7 @@
     <string name="menu_favorite">Favoris</string>
     <string name="menu_preview">Aperçu</string>
     <string name="menu_share">Partager</string>
+    <string name="menu_shared_note">Note partagée</string>
     <string name="mute_all_notifications">Désactiver les notifications</string>
     <string name="no_account_configured_yet">Aucun compte n\'est encore configuré</string>
     <string name="no_actions">Aucune action pour cet utilisateur</string>
