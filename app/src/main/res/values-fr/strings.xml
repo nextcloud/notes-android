@@ -254,6 +254,7 @@
     <string name="note_share_detail_activity_label_empty">L\'étiquette ne peut être vide</string>
     <string name="note_share_detail_activity_link_name">Nom du lien</string>
     <string name="note_share_detail_activity_no_share_permission_selected">Veuillez sélectionner au moins une permission à partager.</string>
+    <string name="note_share_detail_activity_password_error_message">Ce mot de passe semble un peu faible. Pour une meilleure sécurité, essayez d’utiliser un mot de passe avec un mélange de lettres, de chiffres et de symboles.</string>
     <string name="note_share_detail_activity_send_share">Envoyer Partager</string>
     <string name="note_share_detail_activity_set_note">Définir la note</string>
     <string name="note_share_detail_activity_share_copy_link">Partager et copier le lien</string>
