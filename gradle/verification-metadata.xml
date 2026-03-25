@@ -27,6 +27,7 @@
          <trusted-key id="0E225917414670F4442C250DFD533C07C264648F">
             <trusting group="androidx.core"/>
             <trusting group="androidx.databinding"/>
+            <trusting group="androidx.work" name="work-runtime" version="2.11.2"/>
             <trusting group="^androidx[.]compose($|([.].*))" regex="true"/>
             <trusting group="^com[.]android($|([.].*))" regex="true"/>
          </trusted-key>
