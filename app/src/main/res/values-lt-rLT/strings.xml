@@ -38,6 +38,7 @@
     <string name="add_account">Pridėti paskyrą</string>
     <string name="add_another_public_share_link">Pridėti kitą nuorodą</string>
     <string name="add_category">Pridėti %1$s</string>
+    <string name="add_new_public_share">Pridėti naują viešo bendrinimo nuorodą</string>
     <string name="added_content">Pridėta \"%1$s\"</string>
     <string name="allow_resharing">Leisti bendrinti iš naujo</string>
     <string name="app_name">Užrašai</string>
@@ -106,10 +107,12 @@
     <string name="error_dialog_we_need_info">Norint jums padėti, mums reikia techninės informacijos:</string>
     <string name="error_maintenance_mode">Serveris yra techninės priežiūros veiksenoje</string>
     <string name="error_no_network">Nėra tinklo ryšio</string>
+    <string name="error_setting_status_message">Klaida nustatant būsenos pranešimą!</string>
     <string name="error_sync">Sinchronizacija nepavyko: %1$s</string>
     <string name="error_synchronization">Sinchronizacija nepavyko</string>
     <string name="error_unknown">Įvyko nežinoma klaida.</string>
     <string name="failed_update_ui">Nepavyko atnaujinti naudotojo sąsajos</string>
+    <string name="file_detail_sharing_fragment_no_contact_app_message">Nėra programėlės, kuria būtų galima pasirinkti kontaktus</string>
     <string name="file_list_seconds_ago">prieš keletą sekundžių</string>
     <string name="formatting_help_cbf_body_1">Pagrindinis „Notes“ programos dizaino tikslas yra pateikti dėmesio neblaškantį įrankį. Nors jūs galėsite formatuoti savo tekstus naudodami „Markdown“. Įvairiems žemiau pateiktiems pavyzdžiams Jūs galite naudoti nuorodas, tai leidžia formatuoti savo užrašus neįvedant žemiau esančių kodų.</string>
     <string name="formatting_help_cbf_body_2">Tiesiog pasirinkite teksto diapazoną arba bakstelėkite žymeklį bet kurioje vietoje ir atsiras meniu, kuriame yra numatytieji įrašai %1$s, %2$s, %3$s, %4$s arba %5$s.</string>
@@ -171,17 +174,24 @@
     <string name="menu_share">Bendrinti</string>
     <string name="mute_all_notifications">Išjungti visus pranešimus</string>
     <string name="no_account_configured_yet">Kol kas nėra sukonfiguruotų paskyrų</string>
+    <string name="no_actions">Šiam vartotojui veiksmų nėra</string>
     <string name="no_browser_available">Nėra programėlės, skirtos apdoroti nuorodas</string>
     <string name="no_category">Be kategorijos</string>
+    <string name="no_email_app_available">Nėra programėlės, skirtos tvarkyti pašto adresą</string>
     <string name="no_notes_yet">Nėra užrašų</string>
     <string name="no_notes_yet_description">Norėdami sukurti užrašus, paspauskite mygtuką +</string>
     <string name="no_other_accounts">Dar nesukonfigūravote kitų paskyrų.</string>
     <string name="noteMode_remember_last">Prisiminti paskutinį pasirinkimą</string>
     <string name="note_has_been_deleted">Šie užrašai ištrinti</string>
+    <string name="note_share_activity_contact_no_permission">Reikalingas kontaktinis leidimas.</string>
     <string name="note_share_activity_could_not_retrieve_url">Nepavyko nuskaityti URL</string>
+    <string name="note_share_activity_resharing_not_allowed">Patvrtinta politika arba leidimai neleidžia pakartotinai bendrinti</string>
+    <string name="note_share_activity_search_text">Vardas, „Federated Cloud“ ID arba el. pašto adresas…</string>
+    <string name="note_share_activity_send_copy_to">Siųsti kopiją į</string>
     <string name="note_share_activity_share_link">Viešinio nuoroda</string>
     <string name="note_share_activity_shared_with_you">%1$s bendrina su Jumis.</string>
     <string name="note_share_activity_subject_shared_with_you">„%1$s“ yra bendrinama su jumis</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Leisti atsisiųsti ir sinchronizuoti</string>
     <string name="note_share_detail_activity_cancel">Atsisakyti</string>
     <string name="note_share_detail_activity_common_confirm">Patvirtinti</string>
     <string name="note_share_detail_activity_common_next">Kitas</string>
@@ -197,6 +207,7 @@
     <string name="note_share_detail_activity_share_send_note">Pastaba gavėjui</string>
     <string name="note_share_detail_activity_share_via_link_hide_download">Slėpti atsisiuntimą</string>
     <string name="oneHour">1 valanda</string>
+    <string name="online">Prisijungęs</string>
     <string name="online_status">Prisijungimo būsena</string>
     <string name="pin_to_homescreen">Prisegti prie pradžios ekrano</string>
     <string name="pref_value_font_normal">Normalus</string>
@@ -206,6 +217,7 @@
     <string name="remote">(nuotolinis)</string>
     <string name="search_in_all">Ieškoti visuose užrašuose</string>
     <string name="search_in_category">Ieškoti %1$s</string>
+    <string name="set_message">Nustatyti pranešimą</string>
     <string name="set_online_status">Prisijungimo būsena</string>
     <string name="settings_background_sync">Foninis sinchronizavimas</string>
     <string name="settings_font_size">Šrifto dydis</string>
@@ -213,6 +225,8 @@
     <string name="settings_gridview">Tinklelio rodinys</string>
     <string name="settings_lock_summary">Įrenginio prisijungimo duomenys</string>
     <string name="settings_note_mode">Užrašų rodinio veiksena</string>
+    <string name="settings_show_ecosystem_apps">Rodyti programėllių perjungiklį</string>
+    <string name="settings_show_ecosystem_apps_summary">„Nextcloud“ programėlės pasiūlymai naršymo antraštėje</string>
     <string name="settings_theme_title">Apipavidalinimas</string>
     <string name="settings_wifi_only">Sinchronizuoti tik naudojant belaidį (Wi-Fi)</string>
     <string name="share">Bendrinti</string>
@@ -222,6 +236,7 @@
     <string name="share_expiration_date_label">Galioja iki %1$s</string>
     <string name="share_file">Bendrinti %1$s</string>
     <string name="share_group_clarification">%1$s (grupė)</string>
+    <string name="share_internal_link">Bendrinkite vidinę nuorodą</string>
     <string name="share_internal_link_to_file_text">Vidinė viešinio nuoroda veikia tik tiems naudotojams, kurie turi prieigą prie šio failo</string>
     <string name="share_internal_link_to_folder_text">Vidinė viešinio nuoroda veikia tik tiems naudotojams, kurie turi prieigą prie šio aplanko</string>
     <string name="share_known_remote_on_clarification">ant %1$s</string>
@@ -270,6 +285,7 @@
     <string name="sort_alphabetically">Išrikiuokite pagal abecėlę</string>
     <string name="sort_last_modified">Išrikiuokite pagal redagavimo datą</string>
     <string name="status_message">Būsenos žinutė</string>
+    <string name="status_set_fail_message">Nepavyko nustatyti būsenos!</string>
     <string name="thirtyMinutes">30 minučių</string>
     <string name="thisWeek">Šią savaitę</string>
     <string name="today">Šiandien</string>
@@ -283,6 +299,12 @@
     <string name="widget_single_note_title">Vieni užrašai</string>
     <string name="write_email">Siųsti elektroninį laišką</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Norėdami pridėti paskyrą, turite būti prisijungę prie interneto.</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">Liko %1$d atsisiuntimas</item>
+        <item quantity="few">Liko %1$d atsisiuntimai</item>
+        <item quantity="many">Liko %1$d atisiuntimų</item>
+        <item quantity="other">Liko %1$d atisiuntimų</item>
+    </plurals>
     <plurals name="ab_selected">
         <item quantity="one">%d pasirinkta</item>
         <item quantity="few">%d pasirinkta</item>
