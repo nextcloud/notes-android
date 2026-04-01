@@ -114,7 +114,7 @@ abstract class NotesServerSyncTask extends Thread {
      * Push local changes: for each locally created/edited/deleted Note, use NotesClient in order to push the changed to the server.
      */
     private boolean pushLocalChanges() {
-        Log.d(TAG, "pushLocalChanges()");
+        Log.d("createAndLoadNote", "pushLocalChanges()");
 
         boolean success = true;
         final var notes = repo.getLocalModifiedNotes(localAccount.getId());
@@ -135,7 +135,7 @@ abstract class NotesServerSyncTask extends Thread {
                                     throw new Exception("Server returned null after editing \"" + note.getTitle() + "\" (#" + note.getId() + ")");
                                 }
                             } else if (editResponse.code() == HTTP_NOT_FOUND) {
-                                Log.v(TAG, "   ...Note does no longer exist on server → recreate");
+                                Log.v("createAndLoadNote", "   ...Note does no longer exist on server → recreate");
                                 final var createResponse = notesAPI.createNote(note).execute();
                                 if (createResponse.isSuccessful()) {
                                     remoteNote = createResponse.body();
@@ -150,16 +150,22 @@ abstract class NotesServerSyncTask extends Thread {
                                 throw new Exception(editResponse.message());
                             }
                         } else {
-                            Log.v(TAG, "   ...Note does not have a remoteId yet → create");
+                            Log.v("createAndLoadNote", "   ...Note does not have a remoteId yet → create");
                             final var createResponse = notesAPI.createNote(note).execute();
                             if (createResponse.isSuccessful()) {
                                 remoteNote = createResponse.body();
                                 if (remoteNote == null) {
-                                    Log.e(TAG, "   ...Tried to create \"" + note.getTitle() + "\" (#" + note.getId() + ") but the server response was null.");
+                                    Log.e("createAndLoadNote", "   ...Tried to create \"" + note.getTitle() + "\" (#" + note.getId() + ") but the server response was null.");
                                     throw new Exception("Server returned null after creating \"" + note.getTitle() + "\" (#" + note.getId() + ")");
+
                                 }
+                                Log.v("createAndLoadNote", "remoteNote remoteId: " + remoteNote.getRemoteId());
+                                Log.v("createAndLoadNote", "internal id: " + note.getId() + " remote: " + note.getRemoteId());
                                 repo.updateRemoteId(note.getId(), remoteNote.getRemoteId());
+                                Note updatedNote = repo.getNoteById(note.getId());
+                                Log.v("createAndLoadNote", "internal id: " + updatedNote.getId() + " remote: " + updatedNote.getRemoteId());
                             } else {
+                                Log.v("createAndLoadNote", "create failed: " + createResponse.message());
                                 throw new Exception(createResponse.message());
                             }
                         }
