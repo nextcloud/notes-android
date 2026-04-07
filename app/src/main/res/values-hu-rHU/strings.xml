@@ -43,6 +43,7 @@
     <string name="activity_chooser_send_file_title">Küldés</string>
     <string name="activity_chooser_title">Hivatkozás küldése…</string>
     <string name="activity_select_single_note">Válasszon jegyzetet</string>
+    <string name="activity_sharing_details_title">Megosztás részletei</string>
     <string name="activity_sharing_title">Megosztás</string>
     <string name="add_account">Fiók hozzáadása</string>
     <string name="add_another_public_share_link">További hivatkozás hozzáadása</string>
@@ -195,6 +196,7 @@
     <string name="link_share_editing">Szerkesztés</string>
     <string name="link_share_file_drop">Fájllerakat (csak feltöltés)</string>
     <string name="link_share_view_only">Csak megtekintés</string>
+    <string name="listview_no_content">Nincs tartalom</string>
     <string name="listview_updated_last_month">Előző hónap</string>
     <string name="listview_updated_last_week">Előző hét</string>
     <string name="listview_updated_this_month">Ebben a hónapban</string>
@@ -208,6 +210,7 @@
     <string name="menu_favorite">Kedvenc</string>
     <string name="menu_preview">Előnézet</string>
     <string name="menu_share">Megosztás</string>
+    <string name="menu_shared_note">Jegyzet megosztva</string>
     <string name="mute_all_notifications">Összes értesítés némítása</string>
     <string name="no_account_configured_yet">Nincs még fiók beállítva</string>
     <string name="no_actions">Nincsenek műveletek ehhez a felhasználóhoz</string>
@@ -252,6 +255,7 @@
     <string name="note_share_detail_activity_label_empty">A címke nem lehet üres</string>
     <string name="note_share_detail_activity_link_name">Hivatkozás neve</string>
     <string name="note_share_detail_activity_no_share_permission_selected">Válasszon legalább egy jogosultságot a megosztáshoz.</string>
+    <string name="note_share_detail_activity_password_error_message">Ez a jelszó gyengének tűnik. A jobb biztonság érdekében próbáljon hosszabb jelszót használni, amely betűket, számokat és szimbólumokat is tartalmaz.</string>
     <string name="note_share_detail_activity_send_share">Megosztás küldése</string>
     <string name="note_share_detail_activity_set_note">Jegyzet beállítása</string>
     <string name="note_share_detail_activity_share_copy_link">Megosztás és hivatkozás másolása</string>
@@ -264,7 +268,7 @@
     <string name="pin_to_homescreen">Rögzítés a kezdőképernyőre</string>
     <string name="pref_value_font_normal">Normál</string>
     <string name="pref_value_lock">Jelszavas védelem</string>
-    <string name="pref_value_wifi_and_mobile">Szinkronizálás Wi-Fin és mobil adatkapcsolaton</string>
+    <string name="pref_value_wifi_and_mobile">Szinkronizálás Wi-Fi-n és mobil adatkapcsolaton</string>
     <string name="progress_import">%1$d. / %2$d jegyzet importálása…</string>
     <string name="progress_import_indeterminate">Jegyzetek importálása…</string>
     <string name="public_share_name">Új név</string>
@@ -295,6 +299,8 @@
     <string name="settings_prevent_screen_capture">A képernyő rögzítésének megakadályozása</string>
     <string name="settings_show_ecosystem_apps">Alkalmazásváltó megjelenítése</string>
     <string name="settings_show_ecosystem_apps_summary">Nextcloud alkalmazásjavaslatok a navigációs fejlécben</string>
+    <string name="settings_swipe_actions">Seprési műveletek</string>
+    <string name="settings_swipe_actions_summary">Kedvencnek jelölés vagy a jegyzet törlése sepréssel</string>
     <string name="settings_theme_title">Téma</string>
     <string name="settings_wifi_only">Szinkronizálás csak Wi-Fin</string>
     <string name="share">Megosztás</string>
@@ -302,6 +308,7 @@
     <string name="share_dialog_title">Megosztás</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Lejárat: %1$s</string>
+    <string name="share_expires">A megosztás ekkor lejár: %1$s</string>
     <string name="share_file">%1$s megosztása</string>
     <string name="share_group_clarification">%1$s (csoport)</string>
     <string name="share_internal_link">Belső hivatkozás megosztása</string>
