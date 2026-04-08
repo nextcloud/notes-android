@@ -1,6 +1,6 @@
 <!--
-  - SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
-  - SPDX-License-Identifier: GPL-3.0-or-later
+ ~ SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+ ~ SPDX-License-Identifier: GPL-3.0-or-later
 -->
 # Agents.md
 
@@ -161,6 +161,7 @@ XML:
 
 ## Code Style
 
+[//]: # (REUSE-IgnoreStart)
 - Do not exceed 300 line of code per file.
 - Line length: **120 characters**
 - Standard Android Studio formatter with EditorConfig.
@@ -170,7 +171,7 @@ XML:
 - Every new file must end with exactly one empty trailing line (no more, no less).
 - Do not add comments, documentation for every function you created instead make it self explanatory as much as possible.
 - `ktlint_code_style = android_studio`; disabled ktlint rules: `import-ordering`, `no-consecutive-comments`; trailing commas disallowed
-- All new files must include an SPDX license header: `SPDX-License-Identifier: GPL-3.0-or-later`
+- All new files must include an SPDX license header: ` SPDX-License-Identifier: GPL-3.0-or-later `
 - Translations: only modify `values/strings.xml`; never the translated `values-*/strings.xml` files
 - Create models, states in different files instead of doing it one single file.
 - Do not use magic number.
@@ -179,6 +180,8 @@ XML:
 - Use modern Java for Java classes. Optionals, virtual threads, records, streams if necessary.
 - Avoid hardcoded strings, colors, dimensions. Use resources.
 - Run lint, spotbugsGplayDebug, detekt, spotlessKotlinCheck and fix findings inside the files that have been changed.
+
+[//]: # (REUSE-IgnoreEnd)
 
 ## Testing
 
