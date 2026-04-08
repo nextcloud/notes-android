@@ -51,6 +51,7 @@
     <string name="allow_resharing">Allow resharing</string>
     <string name="app_name">Notes</string>
     <string name="app_name_long">Nextcloud Notes</string>
+    <string name="appear_offline">ხაზგარეშე გამოჩენა</string>
     <string name="appearance_and_behavior">Appearance and behavior</string>
     <string name="append_to_note">Append to note</string>
     <string name="away">Away</string>
@@ -102,6 +103,7 @@
     <string name="dismiss">Dismiss</string>
     <string name="dnd">Do not disturb</string>
     <string name="dontClear">Don\'t clear</string>
+    <string name="ecosystem_apps_display_files">ფაილები</string>
     <string name="ecosystem_apps_display_more">More</string>
     <string name="ecosystem_apps_display_talk">Talk</string>
     <string name="ecosystem_apps_more">More Nextcloud Apps</string>
@@ -201,6 +203,7 @@
     <string name="menu_favorite">Favorite</string>
     <string name="menu_preview">Preview</string>
     <string name="menu_share">Share</string>
+    <string name="mute_all_notifications">ყველა გაფრთხილების დადუმება</string>
     <string name="no_account_configured_yet">No account configured yet</string>
     <string name="no_actions">No actions for this user</string>
     <string name="no_browser_available">No app available to handle links</string>
