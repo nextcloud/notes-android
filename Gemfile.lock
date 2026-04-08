@@ -175,7 +175,7 @@ GEM
     optparse (0.8.1)
     os (1.1.4)
     plist (3.7.2)
-    public_suffix (5.1.1)
+    public_suffix (7.0.5)
     rake (13.3.1)
     representable (3.2.0)
       declarative (< 0.1.0)
