@@ -5,20 +5,29 @@
     <string name="about_app_license_title">Programėlės licencija</string>
     <string name="about_contribution_tab_title">Prisidėjo</string>
     <string name="about_credits_tab_title">Padėkos</string>
+    <string name="about_developers_original_author">originalus autorius</string>
     <string name="about_developers_title">Plėtotojai</string>
+    <string name="about_icons_disclaimer_app_icon">Originalią piktogramą žr. %1$s.</string>
+    <string name="about_icons_disclaimer_mdi">„Material Design“ piktogramos</string>
+    <string name="about_icons_disclaimer_mdi_icons">Visas kitas šioje programėlėje naudojamas piktogramas %1$s sukūrė „Google Inc.“ ir jos licencijuojamos pagal „Apache 2.0“ licenciją.</string>
     <string name="about_icons_disclaimer_title">Piktogramos</string>
+    <string name="about_issues">Apie klaidas, patobulinimų pasiūlymus ir funkcijų užklausas galite pranešti „GitHub“ problemų stebėjimo priemonėje: %1$s</string>
     <string name="about_issues_title">Problemos</string>
     <string name="about_license_tab_title">Licencija</string>
     <string name="about_maintainer_title">Prižiūrėtojas</string>
+    <string name="about_source">Šis projektas talpinamas „GitHub“: %1$s</string>
     <string name="about_source_title">Pradinis kodas</string>
     <string name="about_testers_title">Testuotojai</string>
+    <string name="about_translate">Prisijunkite prie „Nextcloud“ komandos „Transifex“ platformoje ir padėkite mums išversti šią programėlę: %1$s</string>
     <string name="about_translate_title">Versti</string>
     <string name="about_translators_title">Vertėjai</string>
     <string name="about_translators_transifex">Nextcloud bendruomenė, esanti %1$s</string>
     <string name="about_version">Šiuo metu naudojate %1$s</string>
     <string name="about_version_title">Versija</string>
     <string name="account_already_imported">Paskyra jau buvo importuota</string>
+    <string name="account_imported">Paskyra importuota.</string>
     <string name="account_not_found">Paskyra nerasta!</string>
+    <string name="account_switch_dialog_status_fetching_error_message">Nepavyko gauti būsenos, bandykite dar kartą.</string>
     <string name="action_back">Atgal</string>
     <string name="action_create">Nauji užrašai</string>
     <string name="action_edit_save">Įrašyti</string>
@@ -34,6 +43,7 @@
     <string name="activity_chooser_send_file_title">Siųsti</string>
     <string name="activity_chooser_title">Siųsti nuorodą…</string>
     <string name="activity_select_single_note">Pasirinkti užrašus</string>
+    <string name="activity_sharing_details_title">Dalijimasis informacija</string>
     <string name="activity_sharing_title">Bendrinimas</string>
     <string name="add_account">Pridėti paskyrą</string>
     <string name="add_another_public_share_link">Pridėti kitą nuorodą</string>
@@ -44,12 +54,21 @@
     <string name="app_name">Užrašai</string>
     <string name="app_name_long">Nextcloud užrašai</string>
     <string name="appear_offline">Atrodyti atsijungusiu</string>
+    <string name="appearance_and_behavior">Išvaizda ir elgsena</string>
     <string name="append_to_note">Pridėti prie užrašų</string>
     <string name="away">Atsitraukęs</string>
+    <string name="backup">Nustatėme, kad programėlė yra nepataisomai sugadinta. Prašome išsaugoti nesinchronizuotus pakeitimus ir išvalyti „Notes“ programėlės atmintį.</string>
     <string name="busy">Užimtas laikas</string>
+    <string name="category_bake">Parengti</string>
+    <string name="category_checklists">Kontrolinis sąrašas</string>
+    <string name="category_credentials">Prisijungimo duomenys </string>
     <string name="category_food">Maistas</string>
     <string name="category_game">Žaidimas</string>
     <string name="category_games">Žaidimai</string>
+    <string name="category_gift">Dovana</string>
+    <string name="category_gifts">Dovanos</string>
+    <string name="category_key">Raktas</string>
+    <string name="category_keys">Raktai</string>
     <string name="category_movie">Filmas</string>
     <string name="category_movies">Filmai</string>
     <string name="category_music">Muzika</string>
@@ -57,10 +76,15 @@
     <string name="category_passwords">Slaptažodžiai</string>
     <string name="category_play">Atkurti</string>
     <string name="category_present">Pristatymas</string>
+    <string name="category_presents">Dovanos</string>
     <string name="category_readonly">Tik skaitymui</string>
+    <string name="category_recipe">Receptai</string>
     <string name="category_recipes">Receptai</string>
     <string name="category_restaurant">Restoranas</string>
+    <string name="category_restaurants">Restoranai</string>
     <string name="category_tasks">Užduotys</string>
+    <string name="category_todo">Užduotis</string>
+    <string name="category_todos">Užduotys</string>
     <string name="category_work">Darbas</string>
     <string name="change_category_title">Pasirinkite kategoriją</string>
     <string name="change_note_title">Pakeisti užrašo pavadinimą</string>
@@ -74,9 +98,11 @@
     <string name="common_delete">Ištrinti</string>
     <string name="common_loading">Įkeliama…</string>
     <string name="common_ok">Gerai</string>
+    <string name="context_based_formatting">Kontekstu pagrįstas iššokantis formatavimo langas</string>
     <string name="copy_link">Kopijuoti nuorodą</string>
     <string name="could_not_retrieve_shares">Nepavyko gauti viešinių</string>
     <string name="delete_share">Ištrinti viešinį</string>
+    <string name="direct_editing_error">Įkeliant išplėstinio redagavimo funkciją įvyko klaida</string>
     <string name="dismiss">Atmesti</string>
     <string name="dnd">Netrukdyti</string>
     <string name="dontClear">Neišvalyti</string>
@@ -84,6 +110,7 @@
     <string name="ecosystem_apps_display_more">Daugiau</string>
     <string name="ecosystem_apps_display_talk">Kalba</string>
     <string name="ecosystem_apps_more">Daugiau Nextcloud programėlių</string>
+    <string name="ecosystem_apps_talk">„Nextcloud Talk“</string>
     <string name="email_pick_failed">Nepavyko pasirinkti el. pašto adreso.</string>
     <string name="error_action_open_battery_settings">Akumuliatoriaus nustatymai</string>
     <string name="error_action_open_deck_info">Atidaryti programos informaciją</string>
@@ -93,10 +120,12 @@
     <string name="error_dialog_check_server">Atsakymas iš Jūsų serverio nebuvo teisingas. Patikrinkite, ar galite pasiekti savo užrašus naudodami žiniatinklio sąsają.</string>
     <string name="error_dialog_check_server_logs">Kyla problemų dėl „Nextcloud“ programos nustatymų. Peržiūrėkite serverio sisteminio žurnalo įrašus.</string>
     <string name="error_dialog_insufficient_storage">„Nextcloud“ programa nebeturi laisvos vietos saugykloje. Prašome, ištrinkite nereikalingus failus, kad lokalūs pakeitimai būtų sinchronizuoti su debesimi.</string>
+    <string name="error_dialog_min_version">Programėlei „Nextcloud Notes“ reikalinga ne senesnė nei 3.18 versijos „Nextcloud“ skirta „Android“ programėlė.</string>
     <string name="error_dialog_redirect">Jūsų serverio atsakymas turi HTTP 302 klaidos kodą, tai reiškia, kad jūs neįdiegėte „Notes“ programos savo serveryje arba ji įdiegta netinkamai. Taip galėjo dėl nustatymų pakeitimų .htaccess faile arba „Nextcloud“ programos, tokios kaip OID klientas.</string>
     <string name="error_dialog_server_app_enabled">Įsitikinkite, kad įdiegėte ir įjungėte programą „Užrašai“ savo serveryje.</string>
     <string name="error_dialog_timeout_instance">Jūsų serveris yra nepasiekiamas. Įsitikinkite, kad Jūsų programa veikia tinkamai.</string>
     <string name="error_dialog_timeout_toggle">Pasitikrinkite interneto tinklo ryšį. Gali būti naudinga perjungti mobiliųjų duomenų arba „Wi-Fi“ ryšį.</string>
+    <string name="error_dialog_tip_clear_storage">Atmintį galite išvalyti atidarydami programėlės informaciją ir pasirinkdami Atmintis → Išvalyti atmintį. ⚠️ Įspėjimas: tai ištrins dar nesinchronizuotus užrašus!</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Išjunkite visus „Nextcloud“ ir „Notes“ programos akumuliatoriams optimizavimus.</string>
     <string name="error_dialog_tip_files_delete_storage">Jei priverstinis programos sustabdymas nepadėjo, galite pabandyti išvalyti abiejų programų saugyklas.</string>
     <string name="error_dialog_tip_files_force_stop">Atrodo, kad kažkas negerai su jūsų „Nextcloud“ programa. Pabandykite priverstinai sustabdyti programas: „Nextcloud“ ir „Nextcloud Notes“.</string>
@@ -111,6 +140,7 @@
     <string name="error_sync">Sinchronizacija nepavyko: %1$s</string>
     <string name="error_synchronization">Sinchronizacija nepavyko</string>
     <string name="error_unknown">Įvyko nežinoma klaida.</string>
+    <string name="failed_the_remove_share">Nepavyko pašalinti bendrinimo</string>
     <string name="failed_update_ui">Nepavyko atnaujinti naudotojo sąsajos</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Nėra programėlės, kuria būtų galima pasirinkti kontaktus</string>
     <string name="file_list_seconds_ago">prieš keletą sekundžių</string>
@@ -129,7 +159,11 @@
     <string name="formatting_help_codefence_inline" translateable="false">\'%1$s\'</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\\'%1$s\\\'</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```java skriptas</string>
+    <string name="formatting_help_codefence_outer" translateable="false">„“</string>
     <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_images_alt">Išskirtinis paveikslėlis</string>
+    <string name="formatting_help_images_body_1">Nuorodos turi būti arba pilni URL adresai, prasidedantys protokolu ir domenu, arba absoliutūs keliai, prasidedantys %1$s simboliu.</string>
+    <string name="formatting_help_images_body_2">Kad atitiktumėte „Markdown“ formatą, vaizdo URL naudokite kaitos simbolius. Pavyzdžiui, URL tarpus pakeiskite %1$s.</string>
     <string name="formatting_help_images_title">Paveikslai</string>
     <string name="formatting_help_lists_body_1">Kai reikalingi sunumeruoti sąrašai:</string>
     <string name="formatting_help_lists_body_2">Vienas</string>
@@ -148,10 +182,13 @@
     <string name="formatting_help_structured_documents_body_5">Vaizduotė yra svarbiau nei žinios. Žinios yra ribotos. Vaizduotė supa visą pasaulį.</string>
     <string name="formatting_help_structured_documents_body_6">- Albertas Einšteinas</string>
     <string name="formatting_help_structured_documents_title">Struktūrizuoti dokumentai</string>
+    <string name="formatting_help_tables_column">Stulpelis %1d</string>
     <string name="formatting_help_tables_title">Lentelės</string>
+    <string name="formatting_help_tables_value">Reikšmė %1d</string>
     <string name="formatting_help_text_body">Jei reikia, lengvai galima %1$sparyškišnti%1$s ar %2$spakreipti%2$s ar %3$sperbraukti %3$satitinkamus  žodžius panaudojant Markdown.  </string>
     <string name="formatting_help_text_title">Tekstas</string>
     <string name="fourHours">4 valandos</string>
+    <string name="http_status_code">HTTP būsenos kodas: %1$d</string>
     <string name="invisible">Nematomas</string>
     <string name="label_all_notes">Visi užrašai</string>
     <string name="label_favorites">Mėgstami</string>
@@ -159,6 +196,7 @@
     <string name="link_share_editing">Taisymas</string>
     <string name="link_share_file_drop">Failų įmetimas (tik įkėlimas)</string>
     <string name="link_share_view_only">Tik peržiūrėti</string>
+    <string name="listview_no_content">Nėra turinio</string>
     <string name="listview_updated_last_month">Praeitą mėnesį</string>
     <string name="listview_updated_last_week">Praeitą savaitę</string>
     <string name="listview_updated_this_month">Šį mėnesį</string>
@@ -172,6 +210,7 @@
     <string name="menu_favorite">Mėgstami</string>
     <string name="menu_preview">Peržiūra</string>
     <string name="menu_share">Bendrinti</string>
+    <string name="menu_shared_note">Bendrinamas užrašas</string>
     <string name="mute_all_notifications">Išjungti visus pranešimus</string>
     <string name="no_account_configured_yet">Kol kas nėra sukonfiguruotų paskyrų</string>
     <string name="no_actions">Šiam vartotojui veiksmų nėra</string>
@@ -181,26 +220,43 @@
     <string name="no_notes_yet">Nėra užrašų</string>
     <string name="no_notes_yet_description">Norėdami sukurti užrašus, paspauskite mygtuką +</string>
     <string name="no_other_accounts">Dar nesukonfigūravote kitų paskyrų.</string>
+    <string name="noteMode_plain_edit">Paprastas redagavimo režimas</string>
+    <string name="noteMode_plain_preview">Paprasta peržiūra</string>
     <string name="noteMode_remember_last">Prisiminti paskutinį pasirinkimą</string>
+    <string name="noteMode_rich_edit">Išplėstinis redagavimo režimas</string>
     <string name="note_has_been_deleted">Šie užrašai ištrinti</string>
+    <string name="note_share_activity_activity_icon_content_description">pažymėti veiklos piktogramą</string>
+    <string name="note_share_activity_cannot_created">Jums neleidžiama sukurti bendrinimo.</string>
+    <string name="note_share_activity_contact_icon_content_description">užrašo bendrinimo su kontaktu piktograma</string>
     <string name="note_share_activity_contact_no_permission">Reikalingas kontaktinis leidimas.</string>
+    <string name="note_share_activity_copy_icon_content_description"> užrašo bendrinimo nuorodos kopijavimo piktograma</string>
     <string name="note_share_activity_could_not_retrieve_url">Nepavyko nuskaityti URL</string>
+    <string name="note_share_activity_external_icon_content_description">išorinio bendrinimo piktograma</string>
+    <string name="note_share_activity_icon_content_description">užrašo bendrinimo piktograma</string>
+    <string name="note_share_activity_more_icon_content_description">papildomų bendrinimo parinkčių piktograma</string>
     <string name="note_share_activity_resharing_not_allowed">Patvrtinta politika arba leidimai neleidžia pakartotinai bendrinti</string>
     <string name="note_share_activity_search_text">Vardas, „Federated Cloud“ ID arba el. pašto adresas…</string>
     <string name="note_share_activity_send_copy_to">Siųsti kopiją į</string>
+    <string name="note_share_activity_share_icon_content_description">užrašo bendrinimo piktograma</string>
     <string name="note_share_activity_share_link">Viešinio nuoroda</string>
     <string name="note_share_activity_shared_with_you">%1$s bendrina su Jumis.</string>
     <string name="note_share_activity_subject_shared_with_you">„%1$s“ yra bendrinama su jumis</string>
+    <string name="note_share_activity_user_icon_content_description">užrašo bendrinimo su vartotoju piktograma</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">Jums neleidžiama kurti viešo bendrinimo.</string>
+    <string name="note_share_created">Bendrinimas sukurtas</string>
     <string name="note_share_detail_activity_allow_download_and_sync">Leisti atsisiųsti ir sinchronizuoti</string>
     <string name="note_share_detail_activity_cancel">Atsisakyti</string>
     <string name="note_share_detail_activity_common_confirm">Patvirtinti</string>
     <string name="note_share_detail_activity_common_next">Kitas</string>
+    <string name="note_share_detail_activity_create_share_error">Nepavyko sukurti bendrinimo</string>
     <string name="note_share_detail_activity_hint_name">Pavadinimas</string>
     <string name="note_share_detail_activity_hint_note">Apie</string>
     <string name="note_share_detail_activity_hint_password">Slaptažodis</string>
     <string name="note_share_detail_activity_label_empty">Etiketė negali būti tuščia</string>
     <string name="note_share_detail_activity_link_name">Nuorodos pavadinimas</string>
     <string name="note_share_detail_activity_no_share_permission_selected">Pasirinkite bent vieną teisių grupę bendrinimui.</string>
+    <string name="note_share_detail_activity_password_error_message">Šis slaptažodis atrodo šiek tiek silpnas. Norėdami užtikrinti geresnį saugumą, pabandykite naudoti ilgesnį slaptažodį, sudarytą iš raidžių, skaičių ir simbolių.</string>
+    <string name="note_share_detail_activity_send_share">Siųsti bendrinimą</string>
     <string name="note_share_detail_activity_set_note">Įrašyti pastabą</string>
     <string name="note_share_detail_activity_share_copy_link">Bendrinti ir kopijuoti nuorodą</string>
     <string name="note_share_detail_activity_share_link_empty_password">Privalote įvesti slaptažodį</string>
@@ -213,20 +269,38 @@
     <string name="pref_value_font_normal">Normalus</string>
     <string name="pref_value_lock">Apsauga slaptažodžiu</string>
     <string name="pref_value_wifi_and_mobile">Sinchronizuoti naudojant belaidį (Wi-Fi) ir mobiliuosius duomenis</string>
+    <string name="progress_import">Importuojama %1$d iš %2$d…</string>
+    <string name="progress_import_indeterminate">Importuojami užrašai…</string>
     <string name="public_share_name">Naujas pavadinimas</string>
     <string name="remote">(nuotolinis)</string>
+    <string name="remove_account">Šalinti %1$s</string>
     <string name="search_in_all">Ieškoti visuose užrašuose</string>
     <string name="search_in_category">Ieškoti %1$s</string>
     <string name="set_message">Nustatyti pranešimą</string>
     <string name="set_online_status">Prisijungimo būsena</string>
     <string name="settings_background_sync">Foninis sinchronizavimas</string>
+    <string name="settings_enable_direct_edit">Tiesioginis redagavimas</string>
+    <string name="settings_enable_direct_edit_summary">Jei ši funkcija bus išjungta, išplėstinis redaktorius bus paslėptas.</string>
+    <string name="settings_file_suffix">Failo plėtinys</string>
+    <string name="settings_file_suffix_description">Naujų užrašų failų plėtinys jūsų „Nextcloud“</string>
+    <string name="settings_file_suffix_success">Nauja failo priesaga: %1$s</string>
     <string name="settings_font_size">Šrifto dydis</string>
     <string name="settings_font_title">Lygiaplotis šriftas</string>
     <string name="settings_gridview">Tinklelio rodinys</string>
+    <string name="settings_keep_screen_on">Laikykite ekraną įjungtą</string>
+    <string name="settings_keep_screen_on_summary">Peržiūrint arba redaguojant užrašą</string>
+    <string name="settings_lock">Programėlių užraktas (beta versija)</string>
     <string name="settings_lock_summary">Įrenginio prisijungimo duomenys</string>
     <string name="settings_note_mode">Užrašų rodinio veiksena</string>
+    <string name="settings_note_mode_new">„Užrašų“ atidarymo būdas</string>
+    <string name="settings_notes_path">Nustatyti aplanką</string>
+    <string name="settings_notes_path_description">Aplankas, skirtas jūsų užrašams saugoti jūsų „Nextcloud“</string>
+    <string name="settings_notes_path_success">Naujas užrašų aplankas: %1$s</string>
+    <string name="settings_prevent_screen_capture">Užkirsti kelią ekrano kopijavimui</string>
     <string name="settings_show_ecosystem_apps">Rodyti programėllių perjungiklį</string>
     <string name="settings_show_ecosystem_apps_summary">„Nextcloud“ programėlės pasiūlymai naršymo antraštėje</string>
+    <string name="settings_swipe_actions">Braukimo veiksmai</string>
+    <string name="settings_swipe_actions_summary">Pažymėkite kaip mėgstamiausią arba ištrinkite užrašus vienu braukimu</string>
     <string name="settings_theme_title">Apipavidalinimas</string>
     <string name="settings_wifi_only">Sinchronizuoti tik naudojant belaidį (Wi-Fi)</string>
     <string name="share">Bendrinti</string>
@@ -234,6 +308,7 @@
     <string name="share_dialog_title">Bendrinimas</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Galioja iki %1$s</string>
+    <string name="share_expires">Bendrinimas baigs galioti %1$s</string>
     <string name="share_file">Bendrinti %1$s</string>
     <string name="share_group_clarification">%1$s (grupė)</string>
     <string name="share_internal_link">Bendrinkite vidinę nuorodą</string>
@@ -254,6 +329,7 @@
     <string name="share_permission_secure_file_drop">Saugus failų įkėlimas</string>
     <string name="share_permission_unknown">Nežinoma</string>
     <string name="share_permission_view_only">Tik peržiūrėti</string>
+    <string name="share_permissions">Bendrinimo leidimai</string>
     <string name="share_remote_clarification">%1$s (nuotolinis)</string>
     <string name="share_room_clarification">%1$s (pokalbis)</string>
     <string name="share_send_new_email">Siųsti naują elektroninį laišką</string>
@@ -265,6 +341,7 @@
     <string name="shared_text_empty">Pasidalintas tekstas buvo tuščias</string>
     <string name="shortcut_create_long">Sukurti naujus užrašus</string>
     <string name="simple_about">Apie</string>
+    <string name="simple_backup">Atsarginė kopija</string>
     <string name="simple_cancel">Atsisakyti</string>
     <string name="simple_checkbox">Žymimasis langelis</string>
     <string name="simple_close">Užverti</string>
@@ -286,12 +363,17 @@
     <string name="sort_last_modified">Išrikiuokite pagal redagavimo datą</string>
     <string name="status_message">Būsenos žinutė</string>
     <string name="status_set_fail_message">Nepavyko nustatyti būsenos!</string>
+    <string name="switch_to_plain_editing">Perjungti į paprastą redagavimo režimą</string>
     <string name="thirtyMinutes">30 minučių</string>
     <string name="thisWeek">Šią savaitę</string>
     <string name="today">Šiandien</string>
     <string name="unlock_notes">Atrakinti užrašus</string>
     <string name="username">Naudotojo vardas</string>
+    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
+    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
+    <string name="welcome_text">Sveiki atvykę į %1$s</string>
     <string name="whats_your_status">Kokia jūsų būsena?</string>
+    <string name="widget_entry_fav_contentDescription">Žvaigždutės piktograma naudojama elementui pažymėti kaip mėgstamiausiam</string>
     <string name="widget_not_logged_in">Prieš naudodami šį valdiklį, prisijunkite prie Užrašų</string>
     <string name="widget_note_list_placeholder">Užrašų nėra</string>
     <string name="widget_note_list_title">Užrašų sąrašas</string>
@@ -311,4 +393,28 @@
         <item quantity="many">%d pasirinkta</item>
         <item quantity="other">%d pasirinkta</item>
     </plurals>
-    </resources>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Ištrintas vienas užrašas</item>
+        <item quantity="few">Ištrinti %1$d užrašai</item>
+        <item quantity="many">Ištrinta %1$d užrašų</item>
+        <item quantity="other">Ištrinti %1$d užrašai</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="one">Atkurtas vienas užrašas</item>
+        <item quantity="few">Atkurti %1$d užrašai</item>
+        <item quantity="many">Atkurta %1$d užrašų</item>
+        <item quantity="other">Atkurti %1$d užrašai</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">Bendrinti %1$d užrašo turinį</item>
+        <item quantity="few">Bendrinti %1$d užrašų turinį</item>
+        <item quantity="many">Bendrinti %1$d užrašų turinį</item>
+        <item quantity="other">Bendrinti %1$d užrašų turinį</item>
+    </plurals>
+    <plurals name="remove_account_message">
+        <item quantity="one">Pašalinus paskyrą %1$s, taip pat bus ištrintas vienas neatkuriamas nesinchronizuotas pakeitimas.</item>
+        <item quantity="few">Pašalinus paskyrą %1$s, taip pat bus ištrinti neatkuriami %2$d nesinchronizuoti pakeitimai.</item>
+        <item quantity="many">Pašalinus paskyrą %1$s, taip pat bus ištrinti neatkuriamų %2$d nesinchronizuotų pakeitimų.</item>
+        <item quantity="other">Pašalinus paskyrą %1$s, taip pat bus ištrinti neatkuriamų %2$d nesinchronizuotų pakeitimų.</item>
+    </plurals>
+</resources>
