@@ -43,6 +43,7 @@
     <string name="activity_chooser_send_file_title">Envoyer</string>
     <string name="activity_chooser_title">Envoyer le lien vers…</string>
     <string name="activity_select_single_note">Choisir une note</string>
+    <string name="activity_sharing_details_title">Détails du partage</string>
     <string name="activity_sharing_title">Partage</string>
     <string name="add_account">Ajouter un compte</string>
     <string name="add_another_public_share_link">Ajouter un autre lien</string>
@@ -298,6 +299,8 @@
     <string name="settings_prevent_screen_capture">Empêcher la capture d\'écran</string>
     <string name="settings_show_ecosystem_apps">Afficher le sélecteur d\'applications</string>
     <string name="settings_show_ecosystem_apps_summary">Suggestions d\'applications Nextcloud dans l\'en-tête de navigation</string>
+    <string name="settings_swipe_actions">Actions de balayages</string>
+    <string name="settings_swipe_actions_summary">Marquer une note comme favori ou la supprimer d’un simple geste du doigt</string>
     <string name="settings_theme_title">Thème</string>
     <string name="settings_wifi_only">Synchroniser uniquement en Wifi</string>
     <string name="share">Partager</string>
@@ -305,6 +308,7 @@
     <string name="share_dialog_title">Partage</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Expire le %1$s</string>
+    <string name="share_expires">Le partage expire le %1$s</string>
     <string name="share_file">Partager %1$s</string>
     <string name="share_group_clarification">%1$s (groupe)</string>
     <string name="share_internal_link">Partager le lien interne</string>
