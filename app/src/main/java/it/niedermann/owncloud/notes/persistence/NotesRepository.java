@@ -521,7 +521,8 @@ public class NotesRepository {
     public Note addNote(long accountId, @NonNull Note note) {
         note.setAccountId(accountId);
         note.setExcerpt(generateNoteExcerpt(note.getContent(), note.getTitle()));
-        return db.getNoteDao().getNoteById(db.getNoteDao().addNote(note));
+        note.setId(db.getNoteDao().addNote(note));
+        return note;
     }
 
     @MainThread
