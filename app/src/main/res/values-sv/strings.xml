@@ -2,16 +2,16 @@
   <resources>
     <string name="about_app_license">Denna app är licensierad under GNU GENERAL PUBLIC LICENSE v3+</string>
     <string name="about_app_license_button">Visa licens</string>
-    <string name="about_app_license_title">Applicens</string>
+    <string name="about_app_license_title">Appens licens</string>
     <string name="about_contribution_tab_title">Medverkan</string>
     <string name="about_credits_tab_title">Upphovsmän</string>
     <string name="about_developers_original_author">Ursprungsskribent</string>
     <string name="about_developers_title">Utvecklare</string>
-    <string name="about_icons_disclaimer_app_icon">Se %1$sför originalikonen</string>
+    <string name="about_icons_disclaimer_app_icon">För originalikonen, se %1$s.</string>
     <string name="about_icons_disclaimer_mdi">Ikoner i Material Design</string>
     <string name="about_icons_disclaimer_mdi_icons">Alla ytterligare ikoner som används i appen är %1$s från Google Inc. och licensierade under Apache 2.0-licensen.</string>
     <string name="about_icons_disclaimer_title">Ikoner</string>
-    <string name="about_issues">Du kan rapportera fel, förbättringsförslag och funktionsönskningar på GitHub- problemhanteraren: %1$s</string>
+    <string name="about_issues">Du kan rapportera fel, förbättringsförslag och funktionsönskningar på problemhanteraren på GitHub: %1$s</string>
     <string name="about_issues_title">Problem</string>
     <string name="about_license_tab_title">Licens</string>
     <string name="about_maintainer_title">Underhållare</string>
@@ -115,8 +115,8 @@
     <string name="error_action_open_deck_info">Öppna appinformation</string>
     <string name="error_action_open_network">Nätverksinställningar</string>
     <string name="error_action_update_files_app">Uppdatera</string>
-    <string name="error_dialog_check_maintenance">Kontrollera att underhållsläge inte är aktivt på Nextcloud-installation.</string>
-    <string name="error_dialog_check_server">Inkorrekt svar från din server. Kontrollera att du har tillgång till dina anteckningar genom din webbläsare.</string>
+    <string name="error_dialog_check_maintenance">Kontrollera att underhållsläget inte är aktivt på din Nextcloud-installation.</string>
+    <string name="error_dialog_check_server">Servern gav ett ogiltigt svar. Kontrollera att du har tillgång till dina anteckningar genom din webbläsare.</string>
     <string name="error_dialog_check_server_logs">Det finns problem med din Nextcloud-installation. Ta gärna en titt i serverns loggfiler. </string>
     <string name="error_dialog_insufficient_storage">Din Nextcloud-installation har slut på diskutrymme. Ta bort några filer för att kunna synkronisera ändringar till ditt moln.</string>
     <string name="error_dialog_min_version">Anteckningar Android-appen kräver att Nextcloud Android-appen är minst version 3.18.</string>
@@ -130,7 +130,7 @@
     <string name="error_dialog_tip_files_force_stop">Något verkar vara fel med din Nextcloud-app. Försök att tvångsavsluta både Nextcloud- och Nextcloud Notes-apparna.</string>
     <string name="error_dialog_tip_files_outdated">Din Nextcloud-app verkar utdaterad. Besök Play Butiken eller F-Droid för att hämta senaste versionen</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Om problemet kvarstår, prova med att rensa lagringen på både appen Nextcloud och Nextcloud Notes.</string>
-    <string name="error_dialog_tip_token_mismatch_retry">Försök med att Tvinga appen att stänga och återstarta. En felaktig anslutning till Nextcloud-appen kan ha förekommit.</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Försök att tvångsavsluta appen och starta om den. En felaktig anslutning till Nextcloud-appen kan ha förekommit.</string>
     <string name="error_dialog_title">Å nej - Vad händer nu?🙁</string>
     <string name="error_dialog_we_need_info">Vi behöver följande teknisk information för att kunna hjälpa dig:</string>
     <string name="error_maintenance_mode">Servern står i underhållsläge</string>
