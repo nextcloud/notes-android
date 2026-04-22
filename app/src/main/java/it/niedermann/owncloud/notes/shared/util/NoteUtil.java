@@ -18,6 +18,8 @@ import it.niedermann.owncloud.notes.R;
 import static it.niedermann.android.markdown.MarkdownUtil.removeMarkdown;
 import static it.niedermann.android.markdown.MarkdownUtil.replaceCheckboxesWithEmojis;
 
+import java.util.regex.Pattern;
+
 /**
  * Provides basic functionality for Note operations.
  */
@@ -69,18 +71,49 @@ public class NoteUtil {
      */
     @NonNull
     public static String generateNoteExcerpt(@NonNull String content, @Nullable String title) {
-        content = removeMarkdown(replaceCheckboxesWithEmojis(content.trim()));
-        if (TextUtils.isEmpty(content)) {
+        final var trimmedContent = content.trim();
+
+        if (isHtml(trimmedContent)) {
+            return sanitizeHtml(trimmedContent);
+        }
+
+        final var emojiReplacedWithCheckBoxesContent = replaceCheckboxesWithEmojis(trimmedContent);
+        var result = removeMarkdown(emojiReplacedWithCheckBoxesContent);
+        if (TextUtils.isEmpty(result)) {
             return "";
         }
+
         if (!TextUtils.isEmpty(title)) {
-            assert title != null;
             final String trimmedTitle = removeMarkdown(replaceCheckboxesWithEmojis(title.trim()));
-            if (content.startsWith(trimmedTitle)) {
-                content = content.substring(trimmedTitle.length());
+            if (result.startsWith(trimmedTitle)) {
+                result = result.substring(trimmedTitle.length());
             }
         }
-        return truncateString(content.trim(), 200).replace("\n", EXCERPT_LINE_SEPARATOR);
+
+        return truncateString(result.trim(), 200).replace("\n", EXCERPT_LINE_SEPARATOR);
+    }
+
+    private static final Pattern HTML_PATTERN = Pattern.compile(
+        "(?is)<(?:!DOCTYPE|/?(?:[a-z][a-z0-9]*))[^>]*>"
+    );
+
+    private static boolean isHtml(String content) {
+        if (content == null || content.isEmpty()) {
+            return false;
+        }
+
+        return HTML_PATTERN.matcher(content).find();
+    }
+
+    private static String sanitizeHtml(String html) {
+        // Remove script tags and their content
+        String sanitized = html.replaceAll("(?is)<script[^>]*>.*?</script>", "");
+
+        // Remove event handlers (onclick, onerror, onload, etc.)
+        sanitized = sanitized.replaceAll("(?i)\\s+on\\w+\\s*=\\s*['\"][^'\"]*['\"]", "");
+        sanitized = sanitized.replaceAll("(?i)\\s+on\\w+\\s*=\\s*[^\\s>]+", "");
+
+        return sanitized.trim();
     }
 
     @NonNull
