@@ -1,0 +1,5 @@
+## 33.1.0 (April 23, 2026)
+
+- Bug fixes and performance improvements
+
+For a full list, please see https://github.com/nextcloud/notes-android/milestone/58
