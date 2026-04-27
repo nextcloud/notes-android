@@ -14,6 +14,7 @@ import static org.junit.Assert.assertTrue;
 import android.graphics.Color;
 
 import com.google.gson.JsonParser;
+import com.owncloud.android.lib.resources.shares.OCShare;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -116,7 +117,6 @@ public class CapabilitiesDeserializerTest {
         assertEquals(Color.parseColor("#1E4164"), capabilities.getColor());
         assertEquals(Color.parseColor("#ffffff"), capabilities.getTextColor());
     }
-
 
     @Test
     public void testRealisticSample() {
@@ -314,7 +314,6 @@ public class CapabilitiesDeserializerTest {
         assertFalse("Wrongly reporting that direct editing is supported", capabilities.isDirectEditingAvailable());
     }
 
-
     @Test
     public void testDirectEditing() {
         //language=json
@@ -364,12 +363,10 @@ public class CapabilitiesDeserializerTest {
                 "}";
         final var capabilities1 = deserializer.deserialize(JsonParser.parseString(responseNotOk), null, null);
         assertFalse("Wrongly reporting that direct editing is supported", capabilities1.isDirectEditingAvailable());
-
     }
 
-
     @Test
-    public void testSharingDisabled() {
+    public void testPublicSharingDisabledWithoutPassword() {
         //language=json
         final String response = "" +
                 "{" +
@@ -382,10 +379,6 @@ public class CapabilitiesDeserializerTest {
                 "        \"extendedSupport\": false" +
                 "    }," +
                 "    \"capabilities\": {" +
-                "        \"core\": {" +
-                "            \"pollinterval\": 60," +
-                "            \"webdav-root\": \"remote.php/webdav\"" +
-                "        }," +
                 "        \"notes\": {" +
                 "            \"api_version\": [" +
                 "                \"0.2\"," +
@@ -437,8 +430,134 @@ public class CapabilitiesDeserializerTest {
                 "    }" +
                 "}";
         final var capabilities = deserializer.deserialize(JsonParser.parseString(response), null, null);
-        assertNull(capabilities.getETag());
         assertEquals("[\"0.2\",\"1.1\"]", capabilities.getApiVersion());
-        assertFalse("Wrongly reporting that direct editing is supported", capabilities.isDirectEditingAvailable());
+        assertFalse(capabilities.getPublicPasswordEnforced());
+        assertFalse(capabilities.getAskForOptionalPassword());
+        assertFalse(capabilities.isReSharingAllowed());
+        assertEquals(31, capabilities.getDefaultPermission());
+        assertTrue(capabilities.getFederationShare());
+    }
+
+    @Test
+    public void testShareApiDisabledKeepsDefaults() {
+        //language=json
+        final String response = "" +
+                "{" +
+                "    \"version\": {" +
+                "        \"major\": 31," +
+                "        \"minor\": 0," +
+                "        \"micro\": 8" +
+                "    }," +
+                "    \"capabilities\": {" +
+                "        \"notes\": {" +
+                "            \"api_version\": [" +
+                "                \"0.2\"," +
+                "                \"1.1\"" +
+                "            ]" +
+                "        }," +
+                "        \"files_sharing\": {" +
+                "            \"api_enabled\": false," +
+                "            \"public\": {" +
+                "                \"enabled\": false" +
+                "            }," +
+                "            \"user\": {" +
+                "                \"send_mail\": false" +
+                "            }," +
+                "            \"resharing\": false," +
+                "            \"federation\": {" +
+                "                \"outgoing\": true," +
+                "                \"incoming\": true," +
+                "                \"expire_date\": {" +
+                "                    \"enabled\": true" +
+                "                }" +
+                "            }" +
+                "        }" +
+                "    }" +
+                "}";
+        final var capabilities = deserializer.deserialize(JsonParser.parseString(response), null, null);
+        assertEquals("[\"0.2\",\"1.1\"]", capabilities.getApiVersion());
+        assertTrue(capabilities.getFederationShare());
+        assertFalse(capabilities.getPublicPasswordEnforced());
+        assertFalse(capabilities.getAskForOptionalPassword());
+        assertFalse(capabilities.isReSharingAllowed());
+        assertEquals(OCShare.NO_PERMISSION, capabilities.getDefaultPermission());
+    }
+
+    @Test
+    public void testMissingDefaultPermissionsKeepsDefault() {
+        //language=json
+        final String response = "" +
+                "{" +
+                "    \"version\": {" +
+                "        \"major\": 33," +
+                "        \"minor\": 0," +
+                "        \"micro\": 2" +
+                "    }," +
+                "    \"capabilities\": {" +
+                "        \"notes\": {" +
+                "            \"api_version\": [" +
+                "                \"0.2\"," +
+                "                \"1.1\"" +
+                "            ]" +
+                "        }," +
+                "        \"files_sharing\": {" +
+                "            \"api_enabled\": true," +
+                "            \"public\": {" +
+                "                \"enabled\": false" +
+                "            }," +
+                "            \"resharing\": false," +
+                "            \"federation\": {" +
+                "                \"outgoing\": true," +
+                "                \"incoming\": true," +
+                "                \"expire_date\": {" +
+                "                    \"enabled\": true" +
+                "                }" +
+                "            }" +
+                "        }" +
+                "    }" +
+                "}";
+        final var capabilities = deserializer.deserialize(JsonParser.parseString(response), null, null);
+        assertEquals("[\"0.2\",\"1.1\"]", capabilities.getApiVersion());
+        assertTrue(capabilities.getFederationShare());
+        assertFalse(capabilities.isReSharingAllowed());
+        assertEquals(OCShare.NO_PERMISSION, capabilities.getDefaultPermission());
+    }
+
+    @Test
+    public void testMissingFederationKeepsDefault() {
+        //language=json
+        final String response = "" +
+                "{" +
+                "    \"version\": {" +
+                "        \"major\": 33," +
+                "        \"minor\": 0," +
+                "        \"micro\": 2" +
+                "    }," +
+                "    \"capabilities\": {" +
+                "        \"notes\": {" +
+                "            \"api_version\": [" +
+                "                \"0.2\"," +
+                "                \"1.1\"" +
+                "            ]" +
+                "        }," +
+                "        \"files_sharing\": {" +
+                "            \"api_enabled\": true," +
+                "            \"public\": {" +
+                "                \"enabled\": true," +
+                "                \"password\": {" +
+                "                    \"enforced\": false," +
+                "                    \"askForOptionalPassword\": false" +
+                "                }" +
+                "            }," +
+                "            \"resharing\": true," +
+                "            \"default_permissions\": 31" +
+                "        }" +
+                "    }" +
+                "}";
+        final var capabilities = deserializer.deserialize(JsonParser.parseString(response), null, null);
+        assertEquals("[\"0.2\",\"1.1\"]", capabilities.getApiVersion());
+        assertFalse(capabilities.getFederationShare());
+        assertTrue(capabilities.isReSharingAllowed());
+        assertEquals(31, capabilities.getDefaultPermission());
     }
 }
