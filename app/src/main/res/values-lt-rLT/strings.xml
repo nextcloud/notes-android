@@ -265,7 +265,7 @@
     <string name="oneHour">1 valanda</string>
     <string name="online">Prisijungęs</string>
     <string name="online_status">Prisijungimo būsena</string>
-    <string name="pin_to_homescreen">Prisegti prie pradžios ekrano</string>
+    <string name="pin_to_homescreen">Prisegti prie Pradžios ekrano</string>
     <string name="pref_value_font_normal">Normalus</string>
     <string name="pref_value_lock">Apsauga slaptažodžiu</string>
     <string name="pref_value_wifi_and_mobile">Sinchronizuoti naudojant belaidį (Wi-Fi) ir mobiliuosius duomenis</string>
