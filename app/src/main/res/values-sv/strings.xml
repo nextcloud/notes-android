@@ -5,11 +5,11 @@
     <string name="about_app_license_title">Appens licens</string>
     <string name="about_contribution_tab_title">Medverkan</string>
     <string name="about_credits_tab_title">Upphovsmän</string>
-    <string name="about_developers_original_author">Ursprungsskribent</string>
+    <string name="about_developers_original_author">Ursprunglig utvecklare</string>
     <string name="about_developers_title">Utvecklare</string>
     <string name="about_icons_disclaimer_app_icon">För originalikonen, se %1$s.</string>
     <string name="about_icons_disclaimer_mdi">Ikoner i Material Design</string>
-    <string name="about_icons_disclaimer_mdi_icons">Alla ytterligare ikoner som används i appen är %1$s från Google Inc. och licensierade under Apache 2.0-licensen.</string>
+    <string name="about_icons_disclaimer_mdi_icons">Alla övriga ikoner som används i appen är %1$s och är skapade av Google Inc. och licensierade under Apache 2.0-licensen.</string>
     <string name="about_icons_disclaimer_title">Ikoner</string>
     <string name="about_issues">Du kan rapportera fel, förbättringsförslag och funktionsönskningar på problemhanteraren på GitHub: %1$s</string>
     <string name="about_issues_title">Problem</string>
@@ -21,7 +21,7 @@
     <string name="about_translate">Gå med i Nextcloud-gruppen på Transifex och hjälp oss översätta denna app: %1$s</string>
     <string name="about_translate_title">Översätt</string>
     <string name="about_translators_title">Översättare</string>
-    <string name="about_translators_transifex">Nextcloud community på %1$s</string>
+    <string name="about_translators_transifex">Nextcloud-gemenskapen på %1$s</string>
     <string name="about_version">Du använder %1$s för närvarande</string>
     <string name="about_version_title">Version</string>
     <string name="account_already_imported">Kontot har redan importerats</string>
@@ -48,7 +48,7 @@
     <string name="add_another_public_share_link">Lägg till en annan länk</string>
     <string name="add_category">Lägg till %1$s</string>
     <string name="add_new_public_share">Lägg till en ny publik delad länk</string>
-    <string name="added_content">La till \"%1$s\"</string>
+    <string name="added_content">Lade till \"%1$s\"</string>
     <string name="allow_resharing">Tillåt vidaredelning</string>
     <string name="app_name">Anteckningar</string>
     <string name="app_name_long">Nextcloud anteckningar</string>
@@ -233,7 +233,7 @@
     <string name="note_share_activity_shared_with_you">Delad med dig av %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" har delats med dig</string>
     <string name="note_share_activity_you_are_not_allowed_to_share">Du har inte behörighet att skapa en publik delning.</string>
-    <string name="note_share_created">Delningen skapad</string>
+    <string name="note_share_created">Delning skapad</string>
     <string name="note_share_detail_activity_allow_download_and_sync">Tillåt nedladdning och synkronisering</string>
     <string name="note_share_detail_activity_cancel">Avbryt</string>
     <string name="note_share_detail_activity_common_confirm">Bekräfta</string>
@@ -261,7 +261,7 @@
     <string name="progress_import">Importerar anteckning %1$d av %2$d... </string>
     <string name="progress_import_indeterminate">Importerar anteckningar...</string>
     <string name="public_share_name">Nytt namn</string>
-    <string name="remote">(avlägsen)</string>
+    <string name="remote">(fjärr)</string>
     <string name="remove_account">Ta bort %1$s</string>
     <string name="search_in_all">Sök alla anteckningar</string>
     <string name="search_in_category">Sök i %1$s</string>
@@ -274,7 +274,7 @@
     <string name="settings_file_suffix_description">Filändelse för nya anteckningar i ditt Nextcloud</string>
     <string name="settings_file_suffix_success">Ny filändelse: %1$s</string>
     <string name="settings_font_size">Teckenstorlek</string>
-    <string name="settings_font_title">Monospace font</string>
+    <string name="settings_font_title">Monospace-typsnitt</string>
     <string name="settings_gridview">Rutnätsvy</string>
     <string name="settings_keep_screen_on">Håll skärmen igång</string>
     <string name="settings_keep_screen_on_summary">När du visar eller redigerar en anteckning</string>
@@ -282,8 +282,8 @@
     <string name="settings_lock_summary">Enhetsuppgifter</string>
     <string name="settings_note_mode">Visningsläge för anteckningar</string>
     <string name="settings_note_mode_new">Notes startfunktion</string>
-    <string name="settings_notes_path">Sätt mapp</string>
-    <string name="settings_notes_path_description">Mapp för att lagra din anteckningar i ditt Nextcloud</string>
+    <string name="settings_notes_path">Ange mapp</string>
+    <string name="settings_notes_path_description">Mapp för att lagra dina anteckningar i ditt Nextcloud</string>
     <string name="settings_notes_path_success">Ny anteckningsmapp: %1$s</string>
     <string name="settings_prevent_screen_capture">Hindra skärmklipp</string>
     <string name="settings_show_ecosystem_apps">Visa appväxlare</string>
@@ -358,7 +358,7 @@
     <string name="welcome_text">Välkommen till %1$s</string>
     <string name="whats_your_status">Vad är din status?</string>
     <string name="widget_entry_fav_contentDescription">Stjärnan används för att markera ett objekt som favorit</string>
-    <string name="widget_not_logged_in">Vänligen logga in i Anteckningar innan denna används</string>
+    <string name="widget_not_logged_in">Logga in i Anteckningar innan den används</string>
     <string name="widget_note_list_placeholder">Inga anteckningar</string>
     <string name="widget_note_list_title">Anteckningslista</string>
     <string name="widget_single_note_placeholder_tv">Anteckning hittades inte</string>
