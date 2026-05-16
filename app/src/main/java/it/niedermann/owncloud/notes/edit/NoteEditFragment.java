@@ -39,6 +39,7 @@ import com.owncloud.android.lib.common.utils.Log_OC;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.FragmentNoteEditBinding;
+import it.niedermann.owncloud.notes.edit.preview.AttachmentPreviewController;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.util.DisplayUtils;
@@ -54,6 +55,9 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     private static final long DELAY_AFTER_SYNC = 5000; // Wait for this time after saving before checking for next save
 
     private FragmentNoteEditBinding binding;
+
+    @Nullable
+    private AttachmentPreviewController attachmentPreviewController;
 
     private Handler handler;
     private boolean saveActive;
@@ -209,6 +213,14 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
                 if (lastSelection > 0 && binding.editContent.length() >= lastSelection) {
                     binding.editContent.setSelection(lastSelection);
                 }
+
+                if (attachmentPreviewController != null) {
+                    attachmentPreviewController.detach();
+                }
+                if (localAccount != null) {
+                    attachmentPreviewController = new AttachmentPreviewController(binding.editContent, localAccount);
+                    attachmentPreviewController.attach(note);
+                }
                 return Unit.INSTANCE;
             });
             return Unit.INSTANCE;
@@ -241,6 +253,15 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
         } else {
             keyboardShown = false;
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        if (attachmentPreviewController != null) {
+            attachmentPreviewController.detach();
+            attachmentPreviewController = null;
+        }
+        super.onDestroyView();
     }
 
     private void cancelTimers() {

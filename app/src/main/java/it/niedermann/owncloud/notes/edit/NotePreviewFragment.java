@@ -34,15 +34,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.owncloud.android.lib.common.utils.Log_OC;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.FragmentNotePreviewBinding;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.shared.util.AttachmentUrlUtil;
 import it.niedermann.owncloud.notes.shared.util.SSOUtil;
 import kotlin.Unit;
 
@@ -138,66 +136,29 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     }
 
     /**
-     * Transforms attachment paths in markdown to use WebDAV URLs.
-     * Converts: ![alt](.attachments.XXX/file.jpg)
-     * To: ![alt](/remote.php/dav/files/{username}/Notes/{category}/.attachments.XXX/file.jpg)
-     *
-     * Uses WebDAV which works with SSO-Glide authentication.
+     * Transforms attachment paths in markdown to authenticated WebDAV URLs so
+     * images render via SSO-Glide. The note content itself is not modified; the
+     * returned string is used for display only.
      */
     private String transformAttachmentUrls(String content, Note note) {
-        Log.i(TAG, "=== transformAttachmentUrls called ===");
-        Log.i(TAG, "content length: " + (content != null ? content.length() : "null"));
-
         if (content == null || localAccount == null || note == null) {
-            Log.w(TAG, "Skipping transform - content, localAccount, or note is null");
             return content;
         }
 
-        String username = localAccount.getUserName();
-        // TODO: fetch actual notes path from server settings if customized
-        String notesPath = "Notes";
+        final String username = localAccount.getUserName();
+        final String category = note.getCategory();
 
-        // Get the note's category (subfolder path)
-        String category = note.getCategory();
-        String fullPath;
-        if (category != null && !category.isEmpty()) {
-            fullPath = notesPath + "/" + category;
-        } else {
-            fullPath = notesPath;
-        }
-
-        Log.i(TAG, "Username: " + username + ", NotesPath: " + notesPath + ", Category: " + category + ", FullPath: " + fullPath);
-        Log.i(TAG, "Content preview: " + content.substring(0, Math.min(content.length(), 300)));
-
-        // Pattern to match markdown images with .attachments paths
-        // Matches: ![any alt text](.attachments.XXX/filename)
-        Pattern pattern = Pattern.compile("(!\\[[^\\]]*\\]\\()(\\.attachments\\.[^)]+)(\\))");
-        Matcher matcher = pattern.matcher(content);
-        StringBuffer result = new StringBuffer();
-
-        int matchCount = 0;
+        final Matcher matcher = AttachmentUrlUtil.ATTACHMENT_PATTERN.matcher(content);
+        final StringBuffer result = new StringBuffer();
         while (matcher.find()) {
-            matchCount++;
-            String prefix = matcher.group(1);  // ![alt](
-            String path = matcher.group(2);    // .attachments.XXX/filename
-            String suffix = matcher.group(3);  // )
-
-            Log.i(TAG, "Found match #" + matchCount + ": " + matcher.group(0));
-            Log.i(TAG, "  path: " + path);
-
-            // Build the WebDAV URL including category subfolder
-            String webdavUrl = "/remote.php/dav/files/" + username + "/" + fullPath + "/" + path;
-            Log.i(TAG, "  WebDAV URL: " + webdavUrl);
-
+            final String prefix = matcher.group(1);
+            final String path = matcher.group(2);
+            final String suffix = matcher.group(3);
+            final String webdavUrl = AttachmentUrlUtil.transformAttachmentPath(
+                    path, username, "Notes", category);
             matcher.appendReplacement(result, Matcher.quoteReplacement(prefix + webdavUrl + suffix));
         }
         matcher.appendTail(result);
-
-        Log.i(TAG, "Total matches found: " + matchCount);
-        if (matchCount > 0) {
-            Log.i(TAG, "Transformed content preview: " + result.toString().substring(0, Math.min(result.length(), 500)));
-        }
-
         return result.toString();
     }
 
