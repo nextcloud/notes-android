@@ -29,7 +29,7 @@
     <string name="account_not_found">Hesap bulunamadı!</string>
     <string name="account_switch_dialog_status_fetching_error_message">Durum alınamadı. Lütfen yeniden deneyin.</string>
     <string name="action_back">Geri</string>
-    <string name="action_create">Not ekle</string>
+    <string name="action_create">Yeni not</string>
     <string name="action_edit_save">Kaydet</string>
     <string name="action_formatting_help">Biçimlendirme</string>
     <string name="action_note_deleted">%1$s silindi</string>
@@ -218,7 +218,7 @@
     <string name="no_category">Kategori yok</string>
     <string name="no_email_app_available">E-posta adreslerini işleyecek bir uygulama bulunamadı</string>
     <string name="no_notes_yet">Henüz bir not yok</string>
-    <string name="no_notes_yet_description">Yeni bir not eklemek için + tuşuna basın</string>
+    <string name="no_notes_yet_description">Yeni bir not oluşturmak için + tuşuna basın</string>
     <string name="no_other_accounts">Henüz başka bir hesap yapılandırmamışsınız.</string>
     <string name="noteMode_plain_edit">Yalın düzenleme kipi</string>
     <string name="noteMode_plain_preview">Yalın ön izleme</string>
@@ -339,7 +339,7 @@
     <string name="share_via_link_unset_password">Ayarı kaldır</string>
     <string name="share_with_title">Şununla paylaş…</string>
     <string name="shared_text_empty">Paylaşılan yazı boş</string>
-    <string name="shortcut_create_long">Not ekle</string>
+    <string name="shortcut_create_long">Yeni bir not oluştur</string>
     <string name="simple_about">Hakkında</string>
     <string name="simple_backup">Yedekle</string>
     <string name="simple_cancel">İptal</string>
