@@ -21,6 +21,11 @@ import org.robolectric.annotation.Config
 @RunWith(RobolectricTestRunner::class)
 class NoteUtilTest : TestCase() {
 
+    companion object {
+        private const val NO_RAW_HTML_TAGS = "Excerpts must not contain raw HTML tags"
+        private const val TRUNCATED_TO_200 = "Excerpt must be truncated to 200 chars"
+    }
+
     @Test
     fun testIsEmptyLine() {
         assertTrue(NoteUtil.isEmptyLine(" "))
@@ -119,10 +124,10 @@ class NoteUtilTest : TestCase() {
         """.trimIndent()
 
         val excerpt = NoteUtil.generateNoteExcerpt(html, "Title")
-        assertFalse("Excerpts must not contain raw HTML tags", excerpt.contains("<a "))
-        assertFalse("Excerpts must not contain raw HTML tags", excerpt.contains("<img"))
+        assertFalse(NO_RAW_HTML_TAGS, excerpt.contains("<a "))
+        assertFalse(NO_RAW_HTML_TAGS, excerpt.contains("<img"))
         assertTrue("Excerpt should contain visible text content", excerpt.contains("click"))
-        assertTrue("Excerpt must be truncated to 200 chars", excerpt.length <= 200)
+        assertTrue(TRUNCATED_TO_200, excerpt.length <= 200)
 
         assertEquals(excerpt, NoteUtil.generateNoteExcerpt(html, null))
 
@@ -137,7 +142,7 @@ class NoteUtilTest : TestCase() {
         // excerpt is always truncated to 200 chars rather than storing the full note content.
         val code = "if (a < b && b > c) { List<String> names = new ArrayList<>(); }"
         val codeExcerpt = NoteUtil.generateNoteExcerpt(code, "Java Logic")
-        assertTrue("Excerpt must be truncated to 200 chars", codeExcerpt.length <= 200)
+        assertTrue(TRUNCATED_TO_200, codeExcerpt.length <= 200)
 
         val uncompletedHtml = "<div><p>This note is never closed"
         assertTrue(NoteUtil.generateNoteExcerpt(uncompletedHtml, null).contains("This note is never closed"))
@@ -145,7 +150,7 @@ class NoteUtilTest : TestCase() {
         val longHtml = "<div><p>Very long content that should be shortened eventually...</p></div>"
         val longExcerpt = NoteUtil.generateNoteExcerpt(longHtml, "Long Note")
         assertFalse(longExcerpt.endsWith("<"))
-        assertTrue("Excerpt must be truncated to 200 chars", longExcerpt.length <= 200)
+        assertTrue(TRUNCATED_TO_200, longExcerpt.length <= 200)
     }
 
     private fun testRealisticUserNotes() {
@@ -240,9 +245,9 @@ class NoteUtilTest : TestCase() {
         """.trimIndent()
 
         val clippingExcerpt = NoteUtil.generateNoteExcerpt(webClipping, "Sleep Tips")
-        assertFalse("Excerpts must not contain raw HTML tags", clippingExcerpt.contains("<h1>"))
+        assertFalse(NO_RAW_HTML_TAGS, clippingExcerpt.contains("<h1>"))
         assertTrue("Excerpt should contain visible text content", clippingExcerpt.contains("quality sleep"))
-        assertTrue("Excerpt must be truncated to 200 chars", clippingExcerpt.length <= 200)
+        assertTrue(TRUNCATED_TO_200, clippingExcerpt.length <= 200)
     }
 
     private fun testTravelPlanNote() {
