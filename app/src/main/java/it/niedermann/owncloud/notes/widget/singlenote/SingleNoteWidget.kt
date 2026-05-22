@@ -12,6 +12,7 @@ import android.appwidget.AppWidgetProvider
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.view.View
 import android.widget.RemoteViews
 import androidx.core.net.toUri
 import it.niedermann.owncloud.notes.R
@@ -35,10 +36,16 @@ class SingleNoteWidget : AppWidgetProvider() {
     override fun onReceive(context: Context, intent: Intent?) {
         super.onReceive(context, intent)
         val awm = AppWidgetManager.getInstance(context)
-
         val provider = ComponentName(context, SingleNoteWidget::class.java)
         val appWidgetIds = awm.getAppWidgetIds(provider)
-        updateAppWidget(context, awm, appWidgetIds)
+
+        if (intent?.action == ACTION_DATA_CHANGED) {
+            appWidgetIds.forEach { appWidgetId ->
+                awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.single_note_widget_lv)
+            }
+        } else {
+            updateAppWidget(context, awm, appWidgetIds)
+        }
     }
 
     override fun onDeleted(context: Context, appWidgetIds: IntArray) {
@@ -104,19 +111,19 @@ class SingleNoteWidget : AppWidgetProvider() {
             R.layout.widget_single_note
         ).apply {
             setPendingIntentTemplate(R.id.single_note_widget_lv, pendingIntent)
-            setEmptyView(
-                R.id.single_note_widget_lv,
-                R.id.widget_single_note_placeholder_tv
-            )
             setRemoteAdapter(R.id.single_note_widget_lv, serviceIntent)
+            setViewVisibility(R.id.widget_single_note_placeholder_tv, View.VISIBLE)
+            setTextViewText(R.id.widget_single_note_placeholder_tv, context.getString(R.string.widget_single_note_loading))
         }
     }
 
     companion object {
+        private const val ACTION_DATA_CHANGED = "it.niedermann.owncloud.notes.ACTION_WIDGET_DATA_CHANGED"
+
         @JvmStatic
         fun updateSingleNoteWidgets(context: Context) {
             val intent = Intent(context, SingleNoteWidget::class.java).apply {
-                setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE)
+                action = ACTION_DATA_CHANGED
             }
             context.sendBroadcast(intent)
         }
