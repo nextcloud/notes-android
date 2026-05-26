@@ -21,7 +21,6 @@ import org.robolectric.annotation.Config
 @RunWith(RobolectricTestRunner::class)
 class NoteUtilTest : TestCase() {
 
-    /** Assertion messages shared across test methods. */
     companion object {
         private const val NO_RAW_HTML_TAGS = "Excerpts must not contain raw HTML tags"
         private const val TRUNCATED_TO_200 = "Excerpt must be truncated to 200 chars"
