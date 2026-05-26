@@ -138,8 +138,6 @@ class NoteUtilTest : TestCase() {
     }
 
     private fun testEdgeCases() {
-        // Note: isHtml() matches <String> as a tag, so the excerpt strips it. This is a known
-        // limitation of the broad HTML detection heuristic; the important property is that the
         // excerpt is always truncated to 200 chars rather than storing the full note content.
         val code = "if (a < b && b > c) { List<String> names = new ArrayList<>(); }"
         val codeExcerpt = NoteUtil.generateNoteExcerpt(code, "Java Logic")
