@@ -260,7 +260,6 @@
     <string name="pref_key_lock" translatable="false">lock</string>
     <string name="pref_key_prevent_screen_capture" translatable="false">preventScreenCapture</string>
     <string name="pref_category_security" translatable="false">security</string>
-    <string name="pref_key_last_note_mode" translatable="false">lastNoteMode</string>
     <string name="pref_key_background_sync" translatable="false">backgroundSync</string>
     <string name="pref_key_enable_direct_edit" translatable="false">directEditPreference</string>
     <string name="pref_key_show_ecosystem_apps" translatable="false">show_ecosystem_apps</string>
@@ -268,7 +267,6 @@
     <string name="pref_value_mode_edit" translatable="false">edit</string>
     <string name="pref_value_mode_direct_edit" translatable="false">directEdit</string>
     <string name="pref_value_mode_preview" translatable="false">preview</string>
-    <string name="pref_value_mode_last" translatable="false">last</string>
     <string name="pref_value_font_size_small" translatable="false">small</string>
     <string name="pref_value_font_size_medium" translatable="false">medium</string>
     <string name="pref_value_font_size_large" translatable="false">large</string>

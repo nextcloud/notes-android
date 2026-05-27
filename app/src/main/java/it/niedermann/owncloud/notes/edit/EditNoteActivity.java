@@ -249,40 +249,52 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
 
 
     /**
-     * Returns the preferred mode for the account. If the mode is "remember last" the last mode is returned.
-     * If the mode is "direct edit" and the account does not support direct edit, the default mode is returned.
+     * Returns the preferred mode for the note. Checks the per-note stored mode first, then falls
+     * back to the global preference. If the mode is "remember last" the last mode is returned.
+     * If the mode is "direct edit" and the account does not support direct edit, edit mode is returned.
      */
-    private String getPreferenceMode(long accountId) {
-
-        final var prefKeyNoteMode = getString(R.string.pref_key_note_mode);
-        final var prefKeyLastMode = getString(R.string.pref_key_last_note_mode);
+    private String getPreferenceMode(long accountId, long noteId) {
         final var defaultMode = getString(R.string.pref_value_mode_edit);
-        final var prefValueLast = getString(R.string.pref_value_mode_last);
         final var prefValueDirectEdit = getString(R.string.pref_value_mode_direct_edit);
 
-
-        final var preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        final String modePreference = preferences.getString(prefKeyNoteMode, defaultMode);
-
-        String effectiveMode = modePreference;
-        if (modePreference.equals(prefValueLast)) {
-            effectiveMode = preferences.getString(prefKeyLastMode, defaultMode);
+        final Note note = noteId > 0 ? repo.getNoteById(noteId) : null;
+        final String storedMode = note == null ? null : note.getNoteMode();
+        if (storedMode != null) {
+            if (storedMode.equals(prefValueDirectEdit) && !isDirectEditingAvailable(accountId)) {
+                return defaultMode;
+            }
+            return storedMode;
         }
 
-        if (effectiveMode.equals(prefValueDirectEdit)) {
-            final Account accountById = repo.getAccountById(accountId);
-            final var directEditAvailable = accountById != null && accountById.isDirectEditingAvailable();
-            if (!directEditAvailable) {
-                effectiveMode = defaultMode;
-            }
+        final var prefKeyNoteMode = getString(R.string.pref_key_note_mode);
+        final var prefValuePreview = getString(R.string.pref_value_mode_preview);
+
+        final var preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String effectiveMode = preferences.getString(prefKeyNoteMode, defaultMode);
+
+        // A previously stored "remember last" value is no longer a valid mode; fall back to the default.
+        final boolean knownMode = effectiveMode.equals(defaultMode)
+                || effectiveMode.equals(prefValuePreview)
+                || effectiveMode.equals(prefValueDirectEdit);
+        if (!knownMode) {
+            effectiveMode = defaultMode;
+        }
+
+        if (effectiveMode.equals(prefValueDirectEdit) && !isDirectEditingAvailable(accountId)) {
+            effectiveMode = defaultMode;
         }
 
         return effectiveMode;
     }
 
+    private boolean isDirectEditingAvailable(long accountId) {
+        final Account account = repo.getAccountById(accountId);
+        return account != null && account.isDirectEditingAvailable();
+    }
+
     private BaseNoteFragment getNoteFragment(long accountId, long noteId, final @Nullable String modePref) {
 
-        final var effectiveMode = modePref == null ? getPreferenceMode(accountId) : modePref;
+        final var effectiveMode = modePref == null ? getPreferenceMode(accountId, noteId) : modePref;
 
         final var prefValueEdit = getString(R.string.pref_value_mode_edit);
         final var prefValueDirectEdit = getString(R.string.pref_value_mode_direct_edit);
@@ -302,7 +314,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
 
     @NonNull
     private BaseNoteFragment getNewNoteFragment(Note newNote) {
-        final var mode = getPreferenceMode(getAccountId());
+        final var mode = getPreferenceMode(getAccountId(), 0);
 
         final var prefValueDirectEdit = getString(R.string.pref_value_mode_direct_edit);
 
@@ -397,18 +409,6 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
      * Send result and closes the Activity
      */
     public void close() {
-        /* TODO enhancement: store last mode in note
-         * for cross device functionality per note mode should be stored on the server.
-         */
-        final var preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        final String prefKeyLastMode = getString(R.string.pref_key_last_note_mode);
-        if (fragment instanceof NoteEditFragment) {
-            preferences.edit().putString(prefKeyLastMode, getString(R.string.pref_value_mode_edit)).apply();
-        } else if (fragment instanceof NotePreviewFragment) {
-            preferences.edit().putString(prefKeyLastMode, getString(R.string.pref_value_mode_preview)).apply();
-        } else if (fragment instanceof NoteDirectEditFragment) {
-            preferences.edit().putString(prefKeyLastMode, getString(R.string.pref_value_mode_direct_edit)).apply();
-        }
         fragment.onCloseNote();
 
         if(isTaskRoot()) {
@@ -435,12 +435,17 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
 
     @Override
     public void changeMode(@NonNull Mode mode, boolean reloadNote) {
-        switch (mode) {
-            case EDIT -> launchExistingNote(getAccountId(), getNoteId(), getString(R.string.pref_value_mode_edit), reloadNote);
-            case PREVIEW -> launchExistingNote(getAccountId(), getNoteId(), getString(R.string.pref_value_mode_preview), reloadNote);
-            case DIRECT_EDIT -> launchExistingNote(getAccountId(), getNoteId(), getString(R.string.pref_value_mode_direct_edit), reloadNote);
+        final String modeString = switch (mode) {
+            case EDIT -> getString(R.string.pref_value_mode_edit);
+            case PREVIEW -> getString(R.string.pref_value_mode_preview);
+            case DIRECT_EDIT -> getString(R.string.pref_value_mode_direct_edit);
             default -> throw new IllegalStateException("Unknown mode: " + mode);
+        };
+        final long noteId = getNoteId();
+        if (noteId > 0) {
+            repo.updateNoteMode(noteId, modeString);
         }
+        launchExistingNote(getAccountId(), noteId, modeString, reloadNote);
     }
 
 
