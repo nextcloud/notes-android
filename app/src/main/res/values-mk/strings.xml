@@ -130,6 +130,7 @@
     <string name="pref_value_wifi_and_mobile">Синхронизирај на Wi-Fi и на мобилен интернет</string>
     <string name="public_share_name">Ново име</string>
     <string name="remote">(далечински)</string>
+    <string name="remove_account">Избриши %1$s</string>
     <string name="set_online_status">Присутен</string>
     <string name="settings_background_sync">Синхронизација во позадина</string>
     <string name="settings_font_size">Големина на фонт</string>
