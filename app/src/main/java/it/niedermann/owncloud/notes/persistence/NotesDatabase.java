@@ -46,6 +46,7 @@ import it.niedermann.owncloud.notes.persistence.migration.Migration_21_22;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_22_23;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_23_24;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_24_25;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_29_30;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_9_10;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 
@@ -58,7 +59,7 @@ import it.niedermann.owncloud.notes.shared.model.Capabilities;
         NotesListWidgetData.class,
         ShareEntity.class,
         Capabilities.class
-    }, version = 29,
+    }, version = 30,
     autoMigrations = {
         @AutoMigration(from = 25, to = 26),
         @AutoMigration(from = 26, to = 27),
@@ -101,7 +102,8 @@ public abstract class NotesDatabase extends RoomDatabase {
                         new Migration_21_22(context),
                         new Migration_22_23(),
                         new Migration_23_24(context),
-                        new Migration_24_25()
+                        new Migration_24_25(),
+                        new Migration_29_30()
                 )
                 .addCallback(new RoomDatabase.Callback() {
                     @Override

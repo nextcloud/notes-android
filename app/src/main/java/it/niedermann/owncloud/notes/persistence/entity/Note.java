@@ -103,6 +103,10 @@ public class Note implements Serializable, Item {
     @ColumnInfo(defaultValue = "0")
     private int scrollY = 0;
 
+    @Nullable
+    @ColumnInfo(defaultValue = "NULL")
+    private String noteMode;
+
     public Note() {
         super();
     }
@@ -270,6 +274,15 @@ public class Note implements Serializable, Item {
 
     public void setScrollY(int scrollY) {
         this.scrollY = scrollY;
+    }
+
+    @Nullable
+    public String getNoteMode() {
+        return noteMode;
+    }
+
+    public void setNoteMode(@Nullable String noteMode) {
+        this.noteMode = noteMode;
     }
 
     @Override
