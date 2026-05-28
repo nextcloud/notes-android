@@ -113,7 +113,10 @@ public class NoteUtil {
         sanitized = sanitized.replaceAll("(?i)\\s+on\\w+\\s*=\\s*['\"][^'\"]*['\"]", "");
         sanitized = sanitized.replaceAll("(?i)\\s+on\\w+\\s*=\\s*[^\\s>]+", "");
 
-        return sanitized.trim();
+        // Strip remaining HTML tags so the excerpt contains plain text only
+        sanitized = sanitized.replaceAll("<[^>]+>", "");
+
+        return truncateString(sanitized.trim(), 200).replace("\n", EXCERPT_LINE_SEPARATOR);
     }
 
     @NonNull

