@@ -27,6 +27,7 @@
     <string name="account_already_imported">Учётная запись уже импортирована</string>
     <string name="account_imported">Учетная запись импортирована.</string>
     <string name="account_not_found">Учётная запись не найдена!</string>
+    <string name="account_switch_dialog_status_fetching_error_message">Не удалось получить статус. Повторите попытку.</string>
     <string name="action_back">Назад</string>
     <string name="action_create">Новая заметка</string>
     <string name="action_edit_save">Сохранить</string>
@@ -42,6 +43,7 @@
     <string name="activity_chooser_send_file_title">Отправить</string>
     <string name="activity_chooser_title">Отправить ссылку...</string>
     <string name="activity_select_single_note">Выберите заметку</string>
+    <string name="activity_sharing_details_title">Подробности общего доступа</string>
     <string name="activity_sharing_title">Параметры публикации</string>
     <string name="add_account">Добавить аккаунт</string>
     <string name="add_another_public_share_link">Добавить другую ссылку</string>
@@ -185,6 +187,7 @@
     <string name="formatting_help_tables_value">Значение %1d</string>
     <string name="formatting_help_text_body">С помощью Markdown очень легко выполнить написание одних слов %1$sжирным шрифтом%1$s, а других - %2$sкурсивом%2$s. Вы также можете %3$sперечеркнуть%3$s слова или даже вставить ссылку, например, на [Nextcloud](https://nextcloud.com).</string>
     <string name="formatting_help_text_title">Текст</string>
+    <string name="fourHours">4 часа</string>
     <string name="http_status_code">Код состояния HTTP: %1$d</string>
     <string name="invisible">Невидимый</string>
     <string name="label_all_notes">Все заметки</string>
@@ -193,6 +196,7 @@
     <string name="link_share_editing">Редактирование</string>
     <string name="link_share_file_drop">Хранилище (только загрузка файлов)</string>
     <string name="link_share_view_only">Для просмотра</string>
+    <string name="listview_no_content">Нет контента</string>
     <string name="listview_updated_last_month">За последний месяц</string>
     <string name="listview_updated_last_week">За последнюю неделю</string>
     <string name="listview_updated_this_month">Этот месяц</string>
@@ -206,6 +210,7 @@
     <string name="menu_favorite">Избранное</string>
     <string name="menu_preview">Предпросмотр</string>
     <string name="menu_share">Поделиться</string>
+    <string name="menu_shared_note">Общая заметка</string>
     <string name="mute_all_notifications">Без уведомлений</string>
     <string name="no_account_configured_yet">Учётная запись пока не настроена</string>
     <string name="no_actions">Нет действий для этого пользователя</string>
@@ -220,15 +225,23 @@
     <string name="noteMode_remember_last">Запоминать выбранный режим</string>
     <string name="noteMode_rich_edit">Режим форматированного редактирования</string>
     <string name="note_has_been_deleted">Запись была удалена</string>
+    <string name="note_share_activity_activity_icon_content_description">note activity icon</string>
     <string name="note_share_activity_cannot_created">Вам не разрешено создавать общие ресурсы.</string>
+    <string name="note_share_activity_contact_icon_content_description">note share contact icon</string>
     <string name="note_share_activity_contact_no_permission">Требуется разрешение на контакт.</string>
+    <string name="note_share_activity_copy_icon_content_description">note share copy icon</string>
     <string name="note_share_activity_could_not_retrieve_url">Не удалось получить URL</string>
+    <string name="note_share_activity_external_icon_content_description">note share external icon</string>
+    <string name="note_share_activity_icon_content_description">note share icon</string>
+    <string name="note_share_activity_more_icon_content_description">note share more icon</string>
     <string name="note_share_activity_resharing_not_allowed">Политика или разрешения запрещают повторное предоставление общего доступа</string>
     <string name="note_share_activity_search_text">Имя, ID федеративного облака или email адрес…</string>
     <string name="note_share_activity_send_copy_to">Отправить копию</string>
+    <string name="note_share_activity_share_icon_content_description">note share icon</string>
     <string name="note_share_activity_share_link">Поделиться ссылкой</string>
     <string name="note_share_activity_shared_with_you">С вами поделился %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">Вам предоставлен доступ к «%1$s»</string>
+    <string name="note_share_activity_user_icon_content_description">note share user icon</string>
     <string name="note_share_activity_you_are_not_allowed_to_share">Вам не разрешено создавать публичные общие ресурсы.</string>
     <string name="note_share_created">Общий ресурс создан</string>
     <string name="note_share_detail_activity_allow_download_and_sync">Разрешить загрузку и синхронизацию</string>
@@ -242,6 +255,7 @@
     <string name="note_share_detail_activity_label_empty">Метка не может быть пустой</string>
     <string name="note_share_detail_activity_link_name">Название ссылки</string>
     <string name="note_share_detail_activity_no_share_permission_selected">Пожалуйста, выберите хотя бы одно разрешение.</string>
+    <string name="note_share_detail_activity_password_error_message">Этот пароль выглядит слабым. Для большей безопасности попробуйте использовать более длинный пароль, состоящий из букв, цифр и символов.</string>
     <string name="note_share_detail_activity_send_share">Переслать</string>
     <string name="note_share_detail_activity_set_note">Создать заметку</string>
     <string name="note_share_detail_activity_share_copy_link">Опубликовать и скопировать ссылку </string>
@@ -285,6 +299,8 @@
     <string name="settings_prevent_screen_capture">Запретить захват экрана</string>
     <string name="settings_show_ecosystem_apps">Показать переключатель приложений</string>
     <string name="settings_show_ecosystem_apps_summary">Рекомендации по приложению Nextcloud в заголовке навигации</string>
+    <string name="settings_swipe_actions">Действия смахивания</string>
+    <string name="settings_swipe_actions_summary">Отметьте как избранное или удалите заметки одним движением пальца</string>
     <string name="settings_theme_title">Тема</string>
     <string name="settings_wifi_only">Синхр. только по Wi-Fi</string>
     <string name="share">Поделиться</string>
@@ -292,6 +308,7 @@
     <string name="share_dialog_title">Параметры публикации</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Истекает %1$s</string>
+    <string name="share_expires">Срок действия общего доступа истекает %1$s</string>
     <string name="share_file">Общий ресурс «%1$s»</string>
     <string name="share_group_clarification">%1$s (группа)</string>
     <string name="share_internal_link">Опубликовать внутреннюю ссылку</string>
@@ -352,6 +369,8 @@
     <string name="today">Сегодня</string>
     <string name="unlock_notes">Разблокировать заметки</string>
     <string name="username">Имя пользователя</string>
+    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
+    <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
     <string name="welcome_text">Добро пожаловать в %1$s</string>
     <string name="whats_your_status">Какой у Вас статус?</string>
     <string name="widget_entry_fav_contentDescription">Значок звездочки используется для обозначения элемента как избранного</string>
