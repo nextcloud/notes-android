@@ -38,6 +38,7 @@ public class NotesApplication extends Application {
     private static boolean isGridViewEnabled = false;
     private static boolean isSwipeEnabled = true;
     private static BrandingUtil brandingUtil;
+    private static NotesApplication instance;
 
     @Override
     public void onCreate() {
@@ -48,7 +49,8 @@ public class NotesApplication extends Application {
         isGridViewEnabled = getDefaultSharedPreferences(this).getBoolean(getString(R.string.pref_key_gridview), false);
         isSwipeEnabled = getDefaultSharedPreferences(this).getBoolean(getString(R.string.pref_key_swipe_actions), true);
         super.onCreate();
-        brandingUtil = BrandingUtil.getInstance(this);
+        instance = this;
+        resetBrandingUtil();
         if (BuildConfig.DEBUG) {
             WebView.setWebContentsDebuggingEnabled(true);
         }
@@ -68,6 +70,10 @@ public class NotesApplication extends Application {
 
     public static BrandingUtil brandingUtil() {
         return brandingUtil;
+    }
+
+    public static void resetBrandingUtil() {
+        brandingUtil = BrandingUtil.getInstance(instance);
     }
 
     public static void setAppTheme(DarkModeSetting setting) {
