@@ -27,6 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import it.niedermann.android.sharedpreferences.SharedPreferenceIntLiveData;
+import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 
 public class BrandingUtil extends ViewThemeUtilsBase {
@@ -88,9 +89,9 @@ public class BrandingUtil extends ViewThemeUtilsBase {
         Log.v(TAG, "--- Write: shared_preference_theme_main" + " | " + color);
         editor.putInt(pref_key_branding_main, color);
         editor.apply();
-        if (context instanceof BrandedActivity) {
-            if (color != previousMainColor) {
-                final var activity = (BrandedActivity) context;
+        if (color != previousMainColor) {
+            NotesApplication.resetBrandingUtil();
+            if (context instanceof BrandedActivity activity) {
                 activity.runOnUiThread(() -> ActivityCompat.recreate(activity));
             }
         }
