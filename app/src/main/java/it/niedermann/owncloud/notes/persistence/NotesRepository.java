@@ -14,6 +14,7 @@ import static java.util.stream.Collectors.toMap;
 import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
 import static it.niedermann.owncloud.notes.shared.util.ApiVersionUtil.getPreferredApiVersion;
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.generateNoteExcerpt;
+import static it.niedermann.owncloud.notes.widget.interactivelist.InteractiveNoteListWidget.updateInteractiveNoteListWidgets;
 import static it.niedermann.owncloud.notes.widget.notelist.NoteListWidget.updateNoteListWidgets;
 import static it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget.updateSingleNoteWidgets;
 
@@ -677,6 +678,7 @@ public class NotesRepository {
         executor.submit(() -> {
             updateSingleNoteWidgets(context);
             updateNoteListWidgets(context);
+            updateInteractiveNoteListWidgets(context);
         });
     }
 
