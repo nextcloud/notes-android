@@ -70,6 +70,10 @@ public class NotesApplication extends Application {
         return brandingUtil;
     }
 
+    public static void reloadBrandingUtil(Context context) {
+        brandingUtil = BrandingUtil.getInstance(context.getApplicationContext());
+    }
+
     public static void setAppTheme(DarkModeSetting setting) {
         AppCompatDelegate.setDefaultNightMode(setting.getModeId());
     }
