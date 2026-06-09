@@ -66,6 +66,7 @@ import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(sdk = 36)
 public class NotesRepositoryTest {
 
     @Rule

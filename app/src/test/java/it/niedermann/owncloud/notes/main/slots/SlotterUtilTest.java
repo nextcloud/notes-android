@@ -13,6 +13,7 @@ import androidx.test.core.app.ApplicationProvider;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.util.Calendar;
 import java.util.List;
@@ -21,6 +22,7 @@ import it.niedermann.owncloud.notes.main.items.section.SectionItem;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(sdk = 36)
 public class SlotterUtilTest {
 
     @Test

@@ -24,12 +24,14 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.util.Arrays;
 
 import it.niedermann.owncloud.notes.main.items.ItemAdapter;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(sdk = 36)
 public class GridItemDecorationTest {
 
     private final ItemAdapter itemAdapter = mock(ItemAdapter.class);

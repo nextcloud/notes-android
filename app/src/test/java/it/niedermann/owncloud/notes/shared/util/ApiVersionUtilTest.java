@@ -11,6 +11,7 @@ import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -20,6 +21,7 @@ import java.util.Iterator;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(sdk = 36)
 public class ApiVersionUtilTest extends TestCase {
 
     @Test

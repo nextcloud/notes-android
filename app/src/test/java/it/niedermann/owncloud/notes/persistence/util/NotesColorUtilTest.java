@@ -16,12 +16,14 @@ import androidx.core.util.Pair;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 
 import it.niedermann.owncloud.notes.shared.util.NotesColorUtil;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(sdk = 36)
 public class NotesColorUtilTest {
     @Test
     public void testContrastRatioIsSufficient() {
