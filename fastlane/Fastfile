@@ -62,7 +62,7 @@ desc "Build app bundle"
 
     desc "Run tests"
     lane :test do
-        gradle(task: "clean testPlayReleaseUnitTest testFdroidReleaseUnitTest")
+         gradle(task: "clean testPlayDebugUnitTest testFdroidDebugUnitTest testDevDebugUnitTest testQaDebugUnitTest")
     end
 
     desc "Build app bundle"
