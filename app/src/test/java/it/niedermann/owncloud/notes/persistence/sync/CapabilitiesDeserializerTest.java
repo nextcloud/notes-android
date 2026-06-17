@@ -18,8 +18,10 @@ import com.google.gson.JsonParser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(sdk = 36)
 public class CapabilitiesDeserializerTest {
 
     private final CapabilitiesDeserializer deserializer = new CapabilitiesDeserializer();

@@ -23,6 +23,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -34,6 +35,7 @@ import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 import it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(sdk = 36)
 public class MainViewModelTest {
 
     @Rule

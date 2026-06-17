@@ -19,6 +19,7 @@ import org.robolectric.annotation.Config
  * Tests the NoteUtil.
  */
 @RunWith(RobolectricTestRunner::class)
+@Config(sdk = [36])
 class NoteUtilTest : TestCase() {
 
     companion object {

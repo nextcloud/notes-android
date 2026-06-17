@@ -19,6 +19,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.io.IOException;
 import java.util.Map;
@@ -39,6 +40,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(sdk = 36)
 public class CapabilitiesClientTest {
 
     @Rule
