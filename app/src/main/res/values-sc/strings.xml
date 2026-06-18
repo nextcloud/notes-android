@@ -160,6 +160,7 @@
     <string name="invisible">Invisìbile</string>
     <string name="label_all_notes">Totu is notas</string>
     <string name="label_favorites">Preferidos</string>
+    <string name="link_share_allow_upload_and_editing">Allow upload and editing</string>
     <string name="link_share_file_drop">Trìsina documentu (isceti pro carrigare)</string>
     <string name="link_share_view_only">Isceti in visualizatzione</string>
     <string name="listview_updated_last_month">Su mese passadu</string>
@@ -197,6 +198,7 @@
     <string name="note_share_detail_activity_label_empty">S\'eticheta non podet èssere bòida</string>
     <string name="note_share_detail_activity_share_link_empty_password">Depes insertare una crae</string>
     <string name="note_share_detail_activity_share_send_note">Notas pro sa persone destinatària</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Hide download</string>
     <string name="oneHour">1 ora</string>
     <string name="online_status">Istadu in lìnia</string>
     <string name="pin_to_homescreen">Apica a s\'ischermu printzipale</string>
