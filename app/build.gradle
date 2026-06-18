@@ -161,6 +161,7 @@ dependencies {
     // Database
     implementation "androidx.room:room-runtime:${roomVersion}"
     annotationProcessor "androidx.room:room-compiler:${roomVersion}"
+    annotationProcessor "org.jetbrains.kotlin:kotlin-metadata-jvm:$kotlinVersion"
 
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:3.0.0'
