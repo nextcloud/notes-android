@@ -15,7 +15,7 @@ android {
     defaultConfig {
         applicationId "it.niedermann.owncloud.notes"
         minSdk 28
-        compileSdk = 36
+        compileSdk = 37
         targetSdk 36
         versionCode 340100050
         versionName "34.1.0 Alpha 1"
