@@ -235,6 +235,7 @@
     <string name="note_share_detail_activity_set_note">Estableix la nota</string>
     <string name="note_share_detail_activity_share_link_empty_password">Heu d\'escriure una contrasenya</string>
     <string name="note_share_detail_activity_share_send_note">Nota per al destinatari</string>
+    <string name="note_share_detail_activity_share_via_link_hide_download">Hide download</string>
     <string name="oneHour">1 hora</string>
     <string name="online">En línia</string>
     <string name="online_status">Estat en línia</string>
