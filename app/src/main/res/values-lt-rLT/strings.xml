@@ -118,7 +118,7 @@
     <string name="error_action_update_files_app">Atnaujinti</string>
     <string name="error_dialog_check_maintenance">Patikrinkite, ar jūsų „Nextcloud“ elementas šiuo metu aptarnavimo režime.</string>
     <string name="error_dialog_check_server">Atsakymas iš Jūsų serverio nebuvo teisingas. Patikrinkite, ar galite pasiekti savo užrašus naudodami žiniatinklio sąsają.</string>
-    <string name="error_dialog_check_server_logs">Kyla problemų dėl jūsų „Nextcloud“ nustatymų. Peržiūrėkite serverio žurnalo įrašus.</string>
+    <string name="error_dialog_check_server_logs">Kyla problemų dėl jūsų „Nextcloud“ sąrankos. Peržiūrėkite serverio žurnalo įrašus.</string>
     <string name="error_dialog_insufficient_storage">„Nextcloud“ elementas nebeturi laisvos vietos saugykloje. Prašome, ištrinkite nereikalingus failus, kad lokalūs pakeitimai būtų sinchronizuoti su debesimi.</string>
     <string name="error_dialog_min_version">Programėlei „Nextcloud Notes“ reikalinga ne senesnė nei 3.18 versijos „Nextcloud“ skirta „Android“ programėlė.</string>
     <string name="error_dialog_redirect">Jūsų serverio atsakymas turi HTTP 302 klaidos kodą, tai reiškia, kad jūs neįdiegėte „Notes“ programėlės savo serveryje arba ji įdiegta netinkamai. Taip galėjo dėl nustatymų pakeitimų .htaccess faile arba „Nextcloud“ programėlėje, tokios kaip OID klientas.</string>
