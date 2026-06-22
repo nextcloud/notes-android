@@ -10,6 +10,7 @@ import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -53,9 +54,16 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
             Log.v(TAG, "Fetch note with id " + noteId);
             note = repo.getNoteById(noteId);
 
+            final var views = new RemoteViews(context.getPackageName(), R.layout.widget_single_note);
             if (note == null) {
                 Log.e(TAG, "Error: note not found");
+                views.setViewVisibility(R.id.widget_single_note_placeholder_tv, View.VISIBLE);
+                views.setTextViewText(R.id.widget_single_note_placeholder_tv,
+                        context.getString(R.string.widget_single_note_note_not_found));
+            } else {
+                views.setViewVisibility(R.id.widget_single_note_placeholder_tv, View.GONE);
             }
+            AppWidgetManager.getInstance(context).partiallyUpdateAppWidget(appWidgetId, views);
         } else {
             Log.w(TAG, "Widget with ID " + appWidgetId + " seems to be not configured yet.");
         }
@@ -110,7 +118,6 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
     }
 
 
-    // TODO Set loading view
     @Override
     public RemoteViews getLoadingView() {
         return null;
