@@ -160,6 +160,7 @@
     <string name="formatting_help_structured_documents_body_1">Kadang-kadang, memiliki tingkat judul berbeda berguna untuk menyusun dokumen Anda. Mulai baris dengan %1$s untuk membuat judul. Beberapa %2$s berturut-turut menunjukkan ukuran judul yang lebih kecil.</string>
     <string name="formatting_help_structured_documents_body_2">Ini adalah judul tingkat ketiga</string>
     <string name="formatting_help_structured_documents_body_3">Anda dapat menggunakan satu %1$s hingga %2$s enam untuk berbagai ukuran judul.</string>
+    <string name="formatting_help_structured_documents_body_4">Jika Anda ingin mengutip seseorang, gunakan karakter %1$s sebelum barisnya:</string>
     <string name="formatting_help_structured_documents_body_5">Imajinasi lebih penting daripada pengetahuan. Pengetahuan terbatas. Imajinasi melingkari dunia.</string>
     <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
     <string name="formatting_help_structured_documents_title">Dokumen terstruktur</string>
@@ -208,6 +209,7 @@
     <string name="note_share_activity_could_not_retrieve_url">Tidak dapat mengambil URL</string>
     <string name="note_share_activity_resharing_not_allowed">Peraturan atau izin mencegah membagikan ulang</string>
     <string name="note_share_activity_search_text">Nama, ID pengguna dari server lain, atau alamat email…</string>
+    <string name="note_share_activity_send_copy_to">Kirim salinan ke</string>
     <string name="note_share_activity_share_link">Bagikan tautan</string>
     <string name="note_share_activity_shared_with_you">Dibagikan dengan Anda oleh %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" telah membagikan dengan Anda</string>
