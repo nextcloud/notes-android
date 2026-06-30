@@ -28,22 +28,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/plain_editing_fab"
-        style="?attr/floatingActionButtonPrimaryStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/note_direct_edit_fab_margin_bottom"
-        android:layout_marginEnd="@dimen/spacer_2x"
-        android:contentDescription="@string/noteMode_plain_edit"
-        android:text="@string/noteMode_plain_edit"
-        android:visibility="gone"
-        app:backgroundTint="@color/defaultBrand"
-        app:icon="@drawable/ic_notes"
-        app:layout_anchor="@id/note_webview"
-        app:layout_anchorGravity="bottom|end"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:visibility="visible" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

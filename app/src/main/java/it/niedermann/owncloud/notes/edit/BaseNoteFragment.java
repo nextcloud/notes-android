@@ -375,6 +375,9 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                 note.setScrollY(scrollY);
             }
             onScroll(scrollY, oldScrollY);
+            if (listener != null) {
+                listener.onScroll(scrollY, oldScrollY);
+            }
         });
     }
 
@@ -538,5 +541,9 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         void onNoteUpdated(Note note);
 
         void changeMode(@NonNull Mode mode, boolean reloadNote);
+
+        void onScroll(int scrollY, int oldScrollY);
+
+        void onSearchActive(boolean active);
     }
 }

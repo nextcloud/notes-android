@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +29,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
@@ -50,6 +52,7 @@ import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
+import it.niedermann.owncloud.notes.shared.util.ExtendedFabUtil;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
@@ -109,6 +112,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         setSupportActionBar(binding.toolbar);
         binding.toolbar.setOnClickListener((v) -> fragment.showEditTitleDialog());
         setImeInsets();
+        setupFabs();
 
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
@@ -245,8 +249,58 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         } else {
             binding.toolbar.setVisibility(View.VISIBLE);
         }
+        updateFabVisibility();
     }
 
+    private void setupFabs() {
+        binding.fabEdit.setOnClickListener(v -> changeMode(Mode.EDIT, false));
+        binding.fabDirectEdit.setOnClickListener(v -> changeMode(Mode.DIRECT_EDIT, false));
+        binding.fabPreview.setOnClickListener(v -> changeMode(Mode.PREVIEW, false));
+    }
+
+    private void updateFabVisibility() {
+        final boolean directEditEnabled = isDirectEditEnabled();
+
+        binding.fabEdit.hide();
+        binding.fabDirectEdit.hide();
+        binding.fabPreview.hide();
+
+        final var margin1x = getResources().getDimensionPixelSize(R.dimen.spacer_2x);
+        final var params = (androidx.coordinatorlayout.widget.CoordinatorLayout.LayoutParams) binding.fabEdit.getLayoutParams();
+
+        if (fragment instanceof NotePreviewFragment && !(fragment instanceof NoteReadonlyFragment)) {
+            if (directEditEnabled) {
+                binding.fabDirectEdit.show();
+                binding.fabEdit.show();
+                params.setMargins(margin1x, margin1x, margin1x, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 88, getResources().getDisplayMetrics()));
+            } else {
+                binding.fabEdit.show();
+                params.setMargins(margin1x, margin1x, margin1x, margin1x);
+            }
+        } else if (fragment instanceof NoteEditFragment || fragment instanceof NoteDirectEditFragment) {
+            binding.fabPreview.show();
+        }
+        binding.fabEdit.setLayoutParams(params);
+
+        final var paramsPreview = (androidx.coordinatorlayout.widget.CoordinatorLayout.LayoutParams) binding.fabPreview.getLayoutParams();
+        paramsPreview.setMargins(margin1x, margin1x, margin1x, margin1x);
+        binding.fabPreview.setLayoutParams(paramsPreview);
+    }
+
+    private boolean isDirectEditEnabled() {
+        final long accountId = getAccountId();
+        final Account account = repo.getAccountById(accountId);
+        final boolean directEditRemotelyAvailable = account != null && account.isDirectEditingAvailable();
+        final var preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        return preferences.getBoolean(getString(R.string.pref_key_enable_direct_edit), true) && directEditRemotelyAvailable;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.menu_preview).setVisible(false);
+        menu.findItem(R.id.menu_edit).setVisible(false);
+        return super.onPrepareOptionsMenu(menu);
+    }
 
     /**
      * Returns the preferred mode for the account. If the mode is "remember last" the last mode is returned.
@@ -450,11 +504,51 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     }
 
     @Override
+    public void onSearchActive(boolean active) {
+        if (active) {
+            binding.fabEdit.hide();
+            binding.fabDirectEdit.hide();
+            binding.fabPreview.hide();
+        } else {
+            updateFabVisibility();
+        }
+    }
+
+    @Override
+    public void onScroll(int scrollY, int oldScrollY) {
+        if (isFabActive(binding.fabEdit)) {
+            ExtendedFabUtil.toggleVisibilityOnScroll(binding.fabEdit, scrollY, oldScrollY);
+        }
+        if (isFabActive(binding.fabDirectEdit)) {
+            ExtendedFabUtil.toggleVisibilityOnScroll(binding.fabDirectEdit, scrollY, oldScrollY);
+        }
+        if (isFabActive(binding.fabPreview)) {
+            ExtendedFabUtil.toggleVisibilityOnScroll(binding.fabPreview, scrollY, oldScrollY);
+        }
+    }
+
+    private boolean isFabActive(FloatingActionButton fab) {
+        final boolean directEditEnabled = isDirectEditEnabled();
+
+        if (fab == binding.fabEdit) {
+            return (fragment instanceof NotePreviewFragment && !(fragment instanceof NoteReadonlyFragment));
+        } else if (fab == binding.fabDirectEdit) {
+            return (fragment instanceof NotePreviewFragment && directEditEnabled);
+        } else if (fab == binding.fabPreview) {
+            return (fragment instanceof NoteEditFragment || fragment instanceof NoteDirectEditFragment);
+        }
+        return false;
+    }
+
+    @Override
     public void applyBrand(int color) {
         final var util = BrandingUtil.of(color, this);
         util.platform.themeStatusBar(this);
         util.material.themeToolbar(binding.toolbar);
         util.platform.colorViewBackground(getWindow().getDecorView());
         util.platform.colorViewBackground(binding.getRoot());
+        util.material.themeFAB(binding.fabEdit);
+        util.material.themeFAB(binding.fabDirectEdit);
+        util.material.themeFAB(binding.fabPreview);
     }
 }

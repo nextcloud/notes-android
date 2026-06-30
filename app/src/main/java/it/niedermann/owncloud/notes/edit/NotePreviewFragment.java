@@ -29,7 +29,6 @@ import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener;
 
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.owncloud.android.lib.common.utils.Log_OC;
@@ -57,12 +56,6 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.menu_edit).setVisible(true);
-        if(getNormalEditButton().getVisibility() == View.VISIBLE) {
-            menu.findItem(R.id.menu_edit).setVisible(false);
-        }
-
-        menu.findItem(R.id.menu_preview).setVisible(false);
     }
 
     @Override
@@ -89,16 +82,6 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     @Override
     protected FloatingActionButton getSearchPrevButton() {
         return binding.searchPrev;
-    }
-
-    @Override
-    protected @NonNull ExtendedFloatingActionButton getDirectEditingButton() {
-        return binding.directEditing;
-    }
-
-    @Override
-    protected ExtendedFloatingActionButton getNormalEditButton() {
-        return binding.edit;
     }
 
     @Override

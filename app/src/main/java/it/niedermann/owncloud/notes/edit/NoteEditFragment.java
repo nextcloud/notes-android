@@ -31,7 +31,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
 
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.owncloud.android.lib.common.utils.Log_OC;
@@ -82,8 +81,6 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.menu_edit).setVisible(false);
-        menu.findItem(R.id.menu_preview).setVisible(true);
     }
 
     @Override
@@ -112,16 +109,6 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     @Override
     protected FloatingActionButton getSearchPrevButton() {
         return binding.searchPrev;
-    }
-
-    @Override
-    protected @NonNull ExtendedFloatingActionButton getDirectEditingButton() {
-        return binding.directEditing;
-    }
-
-    protected ExtendedFloatingActionButton getNormalEditButton() {
-        // the edit fragment does not have a button
-        return null;
     }
 
     @Nullable

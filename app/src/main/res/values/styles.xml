@@ -161,4 +161,5 @@
         <item name="iconGravity">textStart</item>
         <item name="iconPadding">0dp</item>
     </style>
+
 </resources>

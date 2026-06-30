@@ -9,8 +9,8 @@ package it.niedermann.owncloud.notes.shared.util
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import com.google.android.material.R
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 object ExtendedFabUtil {
     @JvmStatic
@@ -28,7 +28,7 @@ object ExtendedFabUtil {
                     val animation =
                         AnimationUtils.loadAnimation(
                             extendedFab.context,
-                            R.anim.design_bottom_sheet_slide_out,
+                            com.google.android.material.R.anim.design_bottom_sheet_slide_out,
                         )
                     animation.setAnimationListener(
                         object : Animation.AnimationListener {
@@ -70,6 +70,20 @@ object ExtendedFabUtil {
             setExtendedFabVisibility(extendedFab, false)
         } else if (scrollY < oldScrollY && !extendedFab.isShown) {
             setExtendedFabVisibility(extendedFab, true)
+        }
+    }
+
+    @JvmStatic
+    fun toggleVisibilityOnScroll(
+        fab: FloatingActionButton,
+        scrollY: Int,
+        oldScrollY: Int,
+    ) {
+        @Suppress("ConvertTwoComparisonsToRangeCheck")
+        if (oldScrollY > 0 && scrollY > oldScrollY && fab.isShown) {
+            fab.hide()
+        } else if (scrollY < oldScrollY && !fab.isShown) {
+            fab.show()
         }
     }
 }

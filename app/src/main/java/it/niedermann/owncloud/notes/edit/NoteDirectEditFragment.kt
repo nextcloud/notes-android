@@ -43,7 +43,6 @@ import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.persistence.sync.NotesAPI
 import it.niedermann.owncloud.notes.shared.model.ApiVersion
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback
-import it.niedermann.owncloud.notes.shared.util.ExtendedFabUtil
 import it.niedermann.owncloud.notes.shared.util.rx.DisposableSet
 import okio.IOException
 import java.util.concurrent.TimeUnit
@@ -84,35 +83,24 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
     ): View? {
         Log.d(TAG, "onCreateView() called")
         _binding = FragmentNoteDirectEditBinding.inflate(inflater, container, false)
-        setupFab()
+        setupScrollDetection()
         prepareWebView()
         return binding?.root
     }
 
-    @SuppressLint("ClickableViewAccessibility") // touch listener only for UI purposes, no need to handle click
-    private fun setupFab() {
-        binding?.run {
-            plainEditingFab.isExtended = false
-            ExtendedFabUtil.toggleExtendedOnLongClick(plainEditingFab)
-
-            // manually detect scroll as we can't get it from the webview (maybe with custom JS?)
-            noteWebview.setOnTouchListener { _, event ->
-                when (event.action) {
-                    MotionEvent.ACTION_DOWN -> {
-                        scrollStart = event.y.toInt()
-                    }
-                    MotionEvent.ACTION_UP -> {
-                        val scrollEnd = event.y.toInt()
-                        ExtendedFabUtil.toggleVisibilityOnScroll(
-                            plainEditingFab,
-                            scrollStart,
-                            scrollEnd,
-                        )
-                    }
+    @SuppressLint("ClickableViewAccessibility")
+    private fun setupScrollDetection() {
+        binding?.noteWebview?.setOnTouchListener { _, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    scrollStart = event.y.toInt()
                 }
-                return@setOnTouchListener false
+                MotionEvent.ACTION_UP -> {
+                    val scrollEnd = event.y.toInt()
+                    listener?.onScroll(scrollStart, scrollEnd)
+                }
             }
-            plainEditingFab.setOnClickListener { switchToPlainEdit() }
+            return@setOnTouchListener false
         }
     }
 
@@ -218,7 +206,7 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
     private fun handleLoadError() {
         binding?.run {
             val snackbar = BrandedSnackbar.make(
-                plainEditingFab,
+                root,
                 getString(R.string.direct_editing_error),
                 Snackbar.LENGTH_INDEFINITE,
             )
@@ -328,7 +316,6 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
         val util = BrandingUtil.of(color, requireContext())
 
         binding?.run {
-            util.material.themeExtendedFAB(plainEditingFab)
             util.platform.colorCircularProgressBar(progress, ColorRole.PRIMARY)
         }
     }
@@ -398,7 +385,6 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
             binding?.run {
                 progress.isVisible = loading
                 noteWebview.isVisible = !loading
-                plainEditingFab.isVisible = !loading
             }
         }
     }

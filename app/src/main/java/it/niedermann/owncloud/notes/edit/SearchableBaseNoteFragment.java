@@ -23,7 +23,6 @@ import androidx.appcompat.widget.SearchView;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
@@ -35,7 +34,6 @@ import java.util.regex.Pattern;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
-import it.niedermann.owncloud.notes.shared.util.ExtendedFabUtil;
 
 public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
@@ -50,7 +48,6 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     private static final int delay = 50; // If the search string does not change after $delay ms, then the search task starts.
     private static final int shortStringDelay = 200; // A longer delay for short search strings.
     private static final int shortStringSize = 3; // The maximum length of a short search string.
-    private boolean directEditRemotelyAvailable = false; // avoid using this directly, instead use: isDirectEditEnabled()
 
     @ColorInt
     private int color;
@@ -75,62 +72,11 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     @Override
     protected void onScroll(int scrollY, int oldScrollY) {
         super.onScroll(scrollY, oldScrollY);
-        if (isDirectEditEnabled()) {
-            // only show FAB if search is not active
-            if (getSearchNextButton() == null || getSearchNextButton().getVisibility() != View.VISIBLE) {
-                final ExtendedFloatingActionButton directFab = getDirectEditingButton();
-                ExtendedFabUtil.toggleVisibilityOnScroll(directFab, scrollY, oldScrollY);
-            }
-        }
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        checkDirectEditingAvailable();
-        if (isDirectEditEnabled()) {
-            ExtendedFloatingActionButton edit = getNormalEditButton();
-            if (edit != null) edit.setVisibility(View.GONE);
-            final ExtendedFloatingActionButton directEditingButton = getDirectEditingButton();
-            directEditingButton.setExtended(false);
-            directEditingButton.setVisibility(View.VISIBLE);
-            ExtendedFabUtil.toggleExtendedOnLongClick(directEditingButton);
-            directEditingButton.setOnClickListener(v -> {
-                if (listener != null) {
-                    listener.changeMode(NoteFragmentListener.Mode.DIRECT_EDIT, false);
-                }
-            });
-        } else {
-            getDirectEditingButton().setVisibility(View.GONE);
-            ExtendedFloatingActionButton edit = getNormalEditButton();
-            if(edit!=null) {
-                edit.setVisibility(View.VISIBLE);
-                edit.setOnClickListener(v -> {
-                    if (listener != null) {
-                        listener.changeMode(NoteFragmentListener.Mode.EDIT, true);
-                    }
-                });
-            }
-        }
-    }
-
-    private void checkDirectEditingAvailable() {
-        try {
-            final SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext());
-            final Account localAccount = repo.getAccountByName(ssoAccount.name);
-            directEditRemotelyAvailable = localAccount != null && localAccount.isDirectEditingAvailable();
-        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-            Log.w(TAG, "checkDirectEditingAvailable: ", e);
-            directEditRemotelyAvailable = false;
-        }
-    }
-
-    protected boolean isDirectEditEnabled() {
-        if (!directEditRemotelyAvailable) {
-            return false;
-        }
-        final var sp = PreferenceManager.getDefaultSharedPreferences(requireContext().getApplicationContext());
-        return sp.getBoolean(getString(R.string.pref_key_enable_direct_edit), true);
     }
 
     @Override
@@ -163,11 +109,17 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
                         colorWithText("", null, color);
                         searchQuery = "";
                         hideSearchFabs();
+                        if (listener != null) {
+                            listener.onSearchActive(false);
+                        }
                     } else {
                         jumpToOccurrence();
                         colorWithText(searchQuery, null, color);
                         occurrenceCount = countOccurrences(getContent(), searchQuery);
                         showSearchFabs();
+                        if (listener != null) {
+                            listener.onSearchActive(true);
+                        }
                     }
 
                     oldVisibility = currentVisibility;
@@ -278,13 +230,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
     protected abstract FloatingActionButton getSearchPrevButton();
 
-    @NonNull
-    protected abstract ExtendedFloatingActionButton getDirectEditingButton();
-
-    protected abstract ExtendedFloatingActionButton getNormalEditButton();
-
     private void showSearchFabs() {
-        ExtendedFabUtil.setExtendedFabVisibility(getDirectEditingButton(), false);
         final var next = getSearchNextButton();
         final var prev = getSearchPrevButton();
         if (prev != null) {
@@ -376,10 +322,5 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         final var util = BrandingUtil.of(color, requireContext());
         util.material.themeFAB(getSearchNextButton());
         util.material.themeFAB(getSearchPrevButton());
-        util.material.themeExtendedFAB(getDirectEditingButton());
-        var editFab = getNormalEditButton();
-        if(editFab != null) {
-            util.material.themeExtendedFAB(editFab);
-        }
     }
 }
