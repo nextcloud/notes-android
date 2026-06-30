@@ -6,6 +6,7 @@
  */
 package it.niedermann.owncloud.notes.persistence.dao;
 
+import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
@@ -124,6 +125,9 @@ public interface NoteDao {
 
     @Query("UPDATE NOTE SET scrollY = :scrollY WHERE id = :id")
     void updateScrollY(long id, int scrollY);
+
+    @Query("UPDATE NOTE SET noteMode = :noteMode WHERE id = :id")
+    void updateNoteMode(long id, @Nullable String noteMode);
 
     @Query("UPDATE NOTE SET status = :status WHERE id = :id")
     void updateStatus(long id, DBStatus status);
