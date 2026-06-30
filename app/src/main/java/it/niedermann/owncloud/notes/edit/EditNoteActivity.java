@@ -266,24 +266,27 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         binding.fabPreview.hide();
 
         final var margin1x = getResources().getDimensionPixelSize(R.dimen.spacer_2x);
-        final var params = (androidx.coordinatorlayout.widget.CoordinatorLayout.LayoutParams) binding.fabEdit.getLayoutParams();
+        final var paramsEdit = (androidx.coordinatorlayout.widget.CoordinatorLayout.LayoutParams) binding.fabEdit.getLayoutParams();
+        final var paramsPreview = (androidx.coordinatorlayout.widget.CoordinatorLayout.LayoutParams) binding.fabPreview.getLayoutParams();
 
         if (fragment instanceof NotePreviewFragment && !(fragment instanceof NoteReadonlyFragment)) {
             if (directEditEnabled) {
                 binding.fabDirectEdit.show();
                 binding.fabEdit.show();
-                params.setMargins(margin1x, margin1x, margin1x, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 88, getResources().getDisplayMetrics()));
+                paramsEdit.setMargins(margin1x, margin1x, margin1x, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 88, getResources().getDisplayMetrics()));
             } else {
                 binding.fabEdit.show();
-                params.setMargins(margin1x, margin1x, margin1x, margin1x);
+                paramsEdit.setMargins(margin1x, margin1x, margin1x, margin1x);
             }
         } else if (fragment instanceof NoteEditFragment || fragment instanceof NoteDirectEditFragment) {
             binding.fabPreview.show();
+            if (fragment instanceof NoteDirectEditFragment) {
+                paramsPreview.setMargins(margin1x, margin1x, margin1x, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 64, getResources().getDisplayMetrics()));
+            } else {
+                paramsPreview.setMargins(margin1x, margin1x, margin1x, margin1x);
+            }
         }
-        binding.fabEdit.setLayoutParams(params);
-
-        final var paramsPreview = (androidx.coordinatorlayout.widget.CoordinatorLayout.LayoutParams) binding.fabPreview.getLayoutParams();
-        paramsPreview.setMargins(margin1x, margin1x, margin1x, margin1x);
+        binding.fabEdit.setLayoutParams(paramsEdit);
         binding.fabPreview.setLayoutParams(paramsPreview);
     }
 
