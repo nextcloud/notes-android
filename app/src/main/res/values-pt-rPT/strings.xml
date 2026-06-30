@@ -9,6 +9,7 @@
     <string name="about_developers_title">Desenvolvedores</string>
     <string name="about_icons_disclaimer_app_icon">Para o ícone original, veja %1$s.</string>
     <string name="about_icons_disclaimer_mdi">Ícones de Desenho de Material</string>
+    <string name="about_icons_disclaimer_mdi_icons">Todos os outros ícones usados por este aplicativo são %1$s feitos pela Google Inc. e licenciados sob a Licença Apache 2.0.</string>
     <string name="about_icons_disclaimer_title">Ícones</string>
     <string name="about_issues">Pode reportar erros, propor melhorias e pedir funcionalidades no monitorizador de problemas do GitHub: %1$s</string>
     <string name="about_issues_title">Problemas</string>
@@ -43,6 +44,7 @@
     <string name="activity_sharing_title">Partilha</string>
     <string name="add_account">Adicionar conta</string>
     <string name="add_another_public_share_link">Adicionar outra hiperligação</string>
+    <string name="add_category">Adicionar %1$s</string>
     <string name="add_new_public_share">Adicionar nova hiperligação de partilha pública</string>
     <string name="allow_resharing">Permitir repartilha</string>
     <string name="app_name">Notas</string>
@@ -54,6 +56,7 @@
     <string name="busy">Ocupado</string>
     <string name="category_bake">Assar</string>
     <string name="category_food">Alimentação</string>
+    <string name="category_game">Jogo</string>
     <string name="category_games">Jogos</string>
     <string name="category_gift">Presente</string>
     <string name="category_gifts">Presentes</string>
@@ -66,6 +69,7 @@
     <string name="category_readonly">Apenas leitura</string>
     <string name="category_recipe">Receita</string>
     <string name="category_recipes">Receitas</string>
+    <string name="category_restaurant">Restaurante</string>
     <string name="category_tasks">Tarefas</string>
     <string name="category_todo">Tarefa</string>
     <string name="category_work">Emprego</string>
@@ -83,6 +87,7 @@
     <string name="context_based_formatting">Formatação baseada no contexto popover</string>
     <string name="copy_link">Copiar hiperligação</string>
     <string name="could_not_retrieve_shares">Não foi possível obter as partilhas</string>
+    <string name="delete_share">Excluir compartilhamento</string>
     <string name="direct_editing_error">Erro ao carregar edição avançada</string>
     <string name="dismiss">Dispensar</string>
     <string name="dnd">Não incomodar</string>
@@ -93,6 +98,7 @@
     <string name="ecosystem_apps_more">Mais Aplicações Nextcloud</string>
     <string name="ecosystem_apps_talk">Nextcloud Talk</string>
     <string name="email_pick_failed">Erro ao escolher endereço de email.</string>
+    <string name="error_action_open_battery_settings">Configurações da bateria</string>
     <string name="error_action_open_deck_info">Abra as informações do Aplicativo</string>
     <string name="error_action_open_network">Configurações da rede</string>
     <string name="error_action_update_files_app">Atualizar</string>
@@ -103,6 +109,7 @@
     <string name="error_dialog_timeout_instance">Não houve resposta do seu servidor no tempo especificado. Verifique se sua instância está funcionando bem.</string>
     <string name="error_dialog_tip_clear_storage">Você pode limpar o armazenamento ao abrir as informações do aplicativo e selecionar Armazenamento → Limpar armazenamento. ⚠️ Aviso: Isto excluirá as notas ainda não sincronizadas!</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Desative todas as otimizações de bateria do Nextcloud e do aplicativo Notes.</string>
+    <string name="error_dialog_tip_files_delete_storage">Se a interrupção forçada não ajudar, você pode tentar limpar o armazenamento de ambos os aplicativos.</string>
     <string name="error_dialog_tip_files_outdated">Seu aplicativo Nextcloud parece estar desatualizado. Visite a Play Store ou o F-Droid para obter a versão mais recente.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Se o problema persistir, tente limpar o armazenamento dos dois aplicativos: Nextcloud e Anotações Nextcloud para resolver esse problema.</string>
     <string name="error_dialog_tip_token_mismatch_retry">Tente forçar o fechamento do aplicativo e reinicie-o novamente. Pode ter havido uma conexão incorreta com o aplicativo Nextcloud.</string>
@@ -119,20 +126,24 @@
     <string name="file_list_seconds_ago">segundos atrás</string>
     <string name="formatting_help_cbf_body_1">Um dos principais objetivos de design do aplicativo Notes é fornecer uma ferramenta sem distrações. Então você pode formatar seus textos com o Markdown. Para vários dos exemplos mencionados abaixo, você pode usar atalhos para formatar suas anotações sem digitar os códigos abaixo.</string>
     <string name="formatting_help_cbf_body_2">Basta selecionar um intervalo de texto ou tocar no cursor em qualquer posição e você obterá um menu pop-up que contém ao lado das entradas padrão %1$s, %2$s, %3$s entradas como %4$s ou %5$s.</string>
+    <string name="formatting_help_checkboxes_body_1">Para criar uma caixa de seleção, use uma lista seguida por colchetes</string>
     <string name="formatting_help_checkboxes_body_2">Item 1</string>
     <string name="formatting_help_checkboxes_title">Caixas de seleção</string>
     <string name="formatting_help_code_body_1">Existem muitas maneiras diferentes de estilizar o código com o Markdown. Se você tiver blocos de códigos embutidos, envolva-os em barras de proteção:</string>
     <string name="formatting_help_code_body_3">E se você quiser destacar a sintaxe, inclua a linguagem:</string>
+    <string name="formatting_help_code_title">Código</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_images_body_2">Para estar em conformidade com o formato Markdown, use caracteres de escape no URL da imagem. Isso significa, por exemplo, substituir espaços por %1$s no URL.</string>
     <string name="formatting_help_images_title">Imagens</string>
     <string name="formatting_help_lists_body_1">Às vezes você deseja listas numeradas:</string>
     <string name="formatting_help_lists_body_4">Três</string>
+    <string name="formatting_help_lists_body_6">Começar uma linha com um hífen</string>
     <string name="formatting_help_lists_body_7">E se você tiver subpontos, coloque dois espaços antes do traço ou estrela:</string>
     <string name="formatting_help_lists_body_9">E isso</string>
     <string name="formatting_help_structured_documents_body_2">Este é um cabeçalho de terceira camada</string>
     <string name="formatting_help_structured_documents_body_4">Se você quiser citar alguém, use o caractere %1$s antes da linha:</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
     <string name="formatting_help_tables_column">Coluna %1d</string>
     <string name="formatting_help_tables_title">Tabelas</string>
     <string name="formatting_help_text_title">Texto</string>
@@ -192,6 +203,7 @@
     <string name="note_share_detail_activity_password_error_message">Esta senha parece um pouco fraca. Para maior segurança, tente usar uma senha mais longa com uma combinação de letras, números e símbolos.</string>
     <string name="note_share_detail_activity_send_share">Enviar Partilha</string>
     <string name="note_share_detail_activity_set_note">Definir Nota</string>
+    <string name="note_share_detail_activity_share_copy_link">Compartilhar e Copiar Link</string>
     <string name="note_share_detail_activity_share_link_empty_password">Você deve introduzir uma palavra-passe</string>
     <string name="note_share_detail_activity_share_send_note">Nota para o destinatário</string>
     <string name="note_share_detail_activity_share_via_link_hide_download">Ocultar transferência</string>
@@ -209,6 +221,7 @@
     <string name="set_message">Definir mensagem</string>
     <string name="set_online_status">Estado on-line</string>
     <string name="settings_background_sync">Sincronização em segundo plano</string>
+    <string name="settings_enable_direct_edit_summary">Quando desativado, o editor avançado ficará oculto.</string>
     <string name="settings_file_suffix_success">Novo sufixo de arquivo: %1$s</string>
     <string name="settings_font_size">Tamanho do tipo de letra</string>
     <string name="settings_font_title"> Fonte monospaçada</string>
@@ -276,6 +289,7 @@
     <string name="simple_synchronization">Sincronização</string>
     <string name="sort_last_modified">Ordenar por data de modificação</string>
     <string name="status_message">Mensagem de estado</string>
+    <string name="status_set_fail_message">Falha ao definir o status!</string>
     <string name="switch_to_plain_editing">Mudar para edição simples</string>
     <string name="thirtyMinutes">30 minutos</string>
     <string name="thisWeek">Esta semana</string>
@@ -285,6 +299,7 @@
     <string name="whats_your_status">Qual é o seu estado?</string>
     <string name="widget_entry_fav_contentDescription">O ícone de estrela é usado para denotar um item como favorito </string>
     <string name="widget_not_logged_in">Faça login no Notes antes de usar este widget</string>
+    <string name="widget_note_list_title">Lista de notas</string>
     <string name="widget_single_note_placeholder_tv">Nota não encontrada</string>
     <string name="widget_single_note_title">Nota única</string>
     <string name="write_email">Enviar mensagem</string>
