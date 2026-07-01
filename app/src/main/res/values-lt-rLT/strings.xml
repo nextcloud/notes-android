@@ -145,7 +145,7 @@
     <string name="file_detail_sharing_fragment_no_contact_app_message">Nėra programėlės, kuria būtų galima pasirinkti kontaktus</string>
     <string name="file_list_seconds_ago">prieš keletą sekundžių</string>
     <string name="formatting_help_cbf_body_1">Vienas iš pagrindinių „Notes“ programėlės kūrimo tikslų – sukurti įrankį, kuris neatsitrauktų dėmesio. Tačiau tekstą galėsite formatuoti naudodami „Markdown“. Daugeliu toliau pateiktų pavyzdžių atveju galite naudoti sparčiuosius klavišus, kad formatuotumėte užrašus be būtinybės įvesti žemiau nurodytus kodus.</string>
-    <string name="formatting_help_cbf_body_2">Tiesiog pasirinkite teksto diapazoną arba bakstelėkite žymeklį bet kurioje vietoje ir atsiras meniu, kuriame yra numatytieji įrašai %1$s, %2$s, %3$s, %4$s arba %5$s.</string>
+    <string name="formatting_help_cbf_body_2">Tiesiog pasirinkite teksto rėžį arba bakstelėkite žymeklį bet kurioje vietoje ir atsiras meniu, kuriame yra numatytieji įrašai %1$s, %2$s, %3$s, %4$s arba %5$s.</string>
     <string name="formatting_help_cbf_title">Kontekstu pagrįstas formatavimas</string>
     <string name="formatting_help_checkboxes_body_1">Norėdami sukurti žymimajį langelį, naudokite sąrašą, po kurio pateikiamos skliaustuose</string>
     <string name="formatting_help_checkboxes_body_2">1 elementas</string>
