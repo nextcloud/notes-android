@@ -101,6 +101,6 @@
         android:visibility="visible"
         app:backgroundTint="@color/defaultBrand"
         app:icon="@drawable/ic_edit_grey600_24dp"
-        app:layout_anchor="@+id/direct_editing"
-        app:layout_anchorGravity="center" />
+        app:layout_anchor="@id/scrollView"
+        app:layout_anchorGravity="bottom|end" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
