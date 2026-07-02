@@ -83,5 +83,7 @@
     <dimen name="online_status_item_height">60dp</dimen>
     <dimen name="iconized_single_line_item_icon_size">24dp</dimen>
 
+    <dimen name="fab_size">56dp</dimen>
     <dimen name="fab_stack_offset">72dp</dimen>
+    <dimen name="fab_stack_offset_reduced">64dp</dimen>
 </resources>

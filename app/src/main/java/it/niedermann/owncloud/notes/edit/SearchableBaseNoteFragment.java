@@ -104,14 +104,14 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
             if (directEditFab != null) {
                 directEditFab.setExtended(false);
                 directEditFab.show();
-                directEditFab.setTranslationY(0);
+                directEditFab.setTranslationY(-getResources().getDimension(R.dimen.fab_size) * 0.75f);
                 ExtendedFabUtil.toggleExtendedOnLongClick(directEditFab);
                 directEditFab.setOnClickListener(v -> onDirectEditFabClick());
             }
             if (normalEditFab != null && normalEditFab != directEditFab) {
                 normalEditFab.setExtended(false);
                 normalEditFab.show();
-                normalEditFab.setTranslationY(-getResources().getDimension(R.dimen.fab_stack_offset));
+                normalEditFab.setTranslationY(-getResources().getDimension(R.dimen.fab_size) * 0.75f - getResources().getDimension(R.dimen.fab_stack_offset_reduced));
                 ExtendedFabUtil.toggleExtendedOnLongClick(normalEditFab);
                 normalEditFab.setOnClickListener(v -> onNormalEditFabClick());
             }

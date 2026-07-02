@@ -23,6 +23,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.ScrollView
 import androidx.core.view.isVisible
+import androidx.preference.PreferenceManager
 import com.google.android.material.snackbar.Snackbar
 import com.nextcloud.android.common.ui.theme.utils.ColorRole
 import com.nextcloud.android.sso.helper.SingleAccountHelper
@@ -98,6 +99,15 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
 
             previewFab.isExtended = false
             ExtendedFabUtil.toggleExtendedOnLongClick(previewFab)
+
+            if (isDirectEditEnabled()) {
+                val shift = resources.getDimension(R.dimen.fab_size) * 0.75f
+                val reducedOffset = resources.getDimension(R.dimen.fab_stack_offset_reduced)
+                val originalOffset = resources.getDimension(R.dimen.fab_stack_offset)
+
+                previewFab.translationY = -shift
+                plainEditingFab.translationY = -shift - (reducedOffset - originalOffset)
+            }
 
             // manually detect scroll as we can't get it from the webview (maybe with custom JS?)
             noteWebview.setOnTouchListener { _, event ->
@@ -428,6 +438,11 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
                 previewFab.isVisible = !loading
             }
         }
+    }
+
+    private fun isDirectEditEnabled(): Boolean {
+        val sp = PreferenceManager.getDefaultSharedPreferences(requireContext().applicationContext)
+        return sp.getBoolean(getString(R.string.pref_key_enable_direct_edit), true)
     }
 
     companion object {
