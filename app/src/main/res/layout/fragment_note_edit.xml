@@ -84,4 +84,19 @@
         app:icon="@drawable/ic_eye_grey600_24dp"
         app:layout_anchor="@id/scrollView"
         app:layout_anchorGravity="bottom|end" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/direct_editing"
+        style="?attr/floatingActionButtonPrimaryStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/spacer_2x"
+        android:contentDescription="@string/noteMode_rich_edit"
+        android:text="@string/noteMode_rich_edit"
+        android:visibility="gone"
+        app:backgroundTint="@color/defaultBrand"
+        app:icon="@drawable/ic_rich_editing"
+        app:layout_anchor="@id/scrollView"
+        app:layout_anchorGravity="bottom|end" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

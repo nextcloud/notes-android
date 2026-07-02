@@ -118,14 +118,13 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
 
     @Override
     protected @NonNull ExtendedFloatingActionButton getDirectEditingButton() {
-        // Direct editing is not supported in the plain editor fragment
-        return binding.preview;
+        return binding.directEditing;
     }
 
     @Override
     protected void onDirectEditFabClick() {
         if (listener != null) {
-            listener.changeMode(NoteFragmentListener.Mode.PREVIEW, true);
+            listener.changeMode(NoteFragmentListener.Mode.DIRECT_EDIT, true);
         }
     }
 
