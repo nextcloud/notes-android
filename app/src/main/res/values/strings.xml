@@ -244,6 +244,12 @@
     <string name="widget_single_note_placeholder_tv">Note not found</string>
     <string name="widget_not_logged_in">Please login to Notes before using this widget</string>
     <string name="widget_entry_fav_contentDescription">Star icon is used to denote an item as a favorite</string>
+    <string name="widget_interactive_note_list_title">Interactive notes</string>
+    <string name="widget_create_note_contentDescription">Create note</string>
+    <string name="widget_sort_favorites_first">Favourites on top</string>
+    <string name="widget_sort_order">Sort order</string>
+    <string name="widget_sort_newest_first">Newest first</string>
+    <string name="widget_sort_oldest_first">Oldest first</string>
 
     <string name="activity_select_single_note">Select note</string>
 
