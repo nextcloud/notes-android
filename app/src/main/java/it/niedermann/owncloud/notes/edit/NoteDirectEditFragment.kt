@@ -55,6 +55,7 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
 
     private val disposables: DisposableSet = DisposableSet()
     private var switchToEditPending = false
+    private var switchToPreviewPending = false
 
     val account: SingleSignOnAccount by lazy {
         SingleAccountHelper.getCurrentSingleSignOnAccount(
@@ -95,6 +96,9 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
             plainEditingFab.isExtended = false
             ExtendedFabUtil.toggleExtendedOnLongClick(plainEditingFab)
 
+            previewFab.isExtended = false
+            ExtendedFabUtil.toggleExtendedOnLongClick(previewFab)
+
             // manually detect scroll as we can't get it from the webview (maybe with custom JS?)
             noteWebview.setOnTouchListener { _, event ->
                 when (event.action) {
@@ -108,11 +112,17 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
                             scrollStart,
                             scrollEnd,
                         )
+                        ExtendedFabUtil.toggleVisibilityOnScroll(
+                            previewFab,
+                            scrollStart,
+                            scrollEnd,
+                        )
                     }
                 }
                 return@setOnTouchListener false
             }
             plainEditingFab.setOnClickListener { switchToPlainEdit() }
+            previewFab.setOnClickListener { switchToPreview() }
         }
     }
 
@@ -122,7 +132,19 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
             val resultWithoutQuotes = result.replace("\"", "")
             if (resultWithoutQuotes != JS_RESULT_OK) {
                 Log.w(TAG, "Closing via JS failed: $resultWithoutQuotes")
-                changeToEditMode()
+                changeMode(NoteFragmentListener.Mode.EDIT)
+            }
+            // if result is OK, switch will be handled by JS interface callback
+        }
+    }
+
+    private fun switchToPreview() {
+        switchToPreviewPending = true
+        binding?.noteWebview?.evaluateJavascript(JS_CLOSE) { result ->
+            val resultWithoutQuotes = result.replace("\"", "")
+            if (resultWithoutQuotes != JS_RESULT_OK) {
+                Log.w(TAG, "Closing via JS failed: $resultWithoutQuotes")
+                changeMode(NoteFragmentListener.Mode.PREVIEW)
             }
             // if result is OK, switch will be handled by JS interface callback
         }
@@ -225,7 +247,7 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
 
             if (note != null) {
                 snackbar.setAction(R.string.switch_to_plain_editing) {
-                    changeToEditMode()
+                    changeMode(NoteFragmentListener.Mode.EDIT)
                 }
             } else {
                 snackbar.setAction(R.string.action_back) {
@@ -329,6 +351,7 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
 
         binding?.run {
             util.material.themeExtendedFAB(plainEditingFab)
+            util.material.themeExtendedFAB(previewFab)
             util.platform.colorCircularProgressBar(progress, ColorRole.PRIMARY)
         }
     }
@@ -353,14 +376,17 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
     private fun close() {
         if (switchToEditPending) {
             Log.d(TAG, "close: switching to plain edit")
-            changeToEditMode()
+            changeMode(NoteFragmentListener.Mode.EDIT)
+        } else if (switchToPreviewPending) {
+            Log.d(TAG, "close: switching to preview")
+            changeMode(NoteFragmentListener.Mode.PREVIEW)
         } else {
             Log.d(TAG, "close: closing")
             listener?.close()
         }
     }
 
-    private fun changeToEditMode() {
+    private fun changeMode(targetMode: NoteFragmentListener.Mode) {
         if (note == null || note.remoteId == null) {
             Log.d(TAG, "note is null, cant edit")
             return
@@ -376,10 +402,10 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                listener?.changeMode(NoteFragmentListener.Mode.EDIT, true)
+                listener?.changeMode(targetMode, true)
             }, { throwable ->
-                Log.e(TAG, "changeToEditMode: ", throwable)
-                listener?.changeMode(NoteFragmentListener.Mode.EDIT, true)
+                Log.e(TAG, "changeMode: ", throwable)
+                listener?.changeMode(targetMode, true)
             })
         disposables.add(updateDisposable)
     }
@@ -399,6 +425,7 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
                 progress.isVisible = loading
                 noteWebview.isVisible = !loading
                 plainEditingFab.isVisible = !loading
+                previewFab.isVisible = !loading
             }
         }
     }
