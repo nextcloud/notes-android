@@ -77,11 +77,14 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         super.onScroll(scrollY, oldScrollY);
         // only show FAB if search is not active
         if (getSearchNextButton() == null || getSearchNextButton().getVisibility() != View.VISIBLE) {
+            final ExtendedFloatingActionButton directFab = getDirectEditingButton();
+            final ExtendedFloatingActionButton editFab = getNormalEditButton();
             if (isDirectEditEnabled()) {
-                final ExtendedFloatingActionButton directFab = getDirectEditingButton();
                 ExtendedFabUtil.toggleVisibilityOnScroll(directFab, scrollY, oldScrollY);
+                if (editFab != null && editFab != directFab) {
+                    ExtendedFabUtil.toggleVisibilityOnScroll(editFab, scrollY, oldScrollY);
+                }
             } else {
-                final ExtendedFloatingActionButton editFab = getNormalEditButton();
                 if (editFab != null) {
                     ExtendedFabUtil.toggleVisibilityOnScroll(editFab, scrollY, oldScrollY);
                 }
@@ -98,14 +101,19 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         final var normalEditFab = getNormalEditButton();
 
         if (isDirectEditEnabled()) {
-            if (normalEditFab != null && normalEditFab != directEditFab) {
-                normalEditFab.hide();
-            }
             if (directEditFab != null) {
                 directEditFab.setExtended(false);
                 directEditFab.show();
+                directEditFab.setTranslationY(0);
                 ExtendedFabUtil.toggleExtendedOnLongClick(directEditFab);
                 directEditFab.setOnClickListener(v -> onDirectEditFabClick());
+            }
+            if (normalEditFab != null && normalEditFab != directEditFab) {
+                normalEditFab.setExtended(false);
+                normalEditFab.show();
+                normalEditFab.setTranslationY(-getResources().getDimension(R.dimen.fab_stack_offset));
+                ExtendedFabUtil.toggleExtendedOnLongClick(normalEditFab);
+                normalEditFab.setOnClickListener(v -> onNormalEditFabClick());
             }
         } else {
             if (directEditFab != null && directEditFab != normalEditFab) {
@@ -114,6 +122,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
             if (normalEditFab != null) {
                 normalEditFab.setExtended(false);
                 normalEditFab.show();
+                normalEditFab.setTranslationY(0);
                 ExtendedFabUtil.toggleExtendedOnLongClick(normalEditFab);
                 normalEditFab.setOnClickListener(v -> onNormalEditFabClick());
             }
@@ -326,12 +335,16 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         if (next != null) {
             next.hide();
         }
+        final var directEditFab = getDirectEditingButton();
+        final var normalEditFab = getNormalEditButton();
         if (isDirectEditEnabled()) {
-            getDirectEditingButton().show();
+            directEditFab.show();
+            if (normalEditFab != null && normalEditFab != directEditFab) {
+                normalEditFab.show();
+            }
         } else {
-            final var edit = getNormalEditButton();
-            if (edit != null) {
-                edit.show();
+            if (normalEditFab != null) {
+                normalEditFab.show();
             }
         }
     }
