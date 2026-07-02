@@ -83,7 +83,9 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_edit).setVisible(false);
-        menu.findItem(R.id.menu_preview).setVisible(true);
+        final boolean fabVisible = (getNormalEditButton() != null && getNormalEditButton().getVisibility() == View.VISIBLE)
+                || (getDirectEditingButton() != null && getDirectEditingButton().getVisibility() == View.VISIBLE);
+        menu.findItem(R.id.menu_preview).setVisible(!fabVisible);
     }
 
     @Override
@@ -116,12 +118,27 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
 
     @Override
     protected @NonNull ExtendedFloatingActionButton getDirectEditingButton() {
-        return binding.directEditing;
+        // Direct editing is not supported in the plain editor fragment
+        return binding.preview;
     }
 
+    @Override
+    protected void onDirectEditFabClick() {
+        if (listener != null) {
+            listener.changeMode(NoteFragmentListener.Mode.PREVIEW, true);
+        }
+    }
+
+    @Override
+    protected void onNormalEditFabClick() {
+        if (listener != null) {
+            listener.changeMode(NoteFragmentListener.Mode.PREVIEW, true);
+        }
+    }
+
+    @Override
     protected ExtendedFloatingActionButton getNormalEditButton() {
-        // the edit fragment does not have a button
-        return null;
+        return binding.preview;
     }
 
     @Nullable

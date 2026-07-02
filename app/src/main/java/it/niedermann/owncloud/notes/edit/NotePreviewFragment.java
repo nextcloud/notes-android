@@ -57,11 +57,9 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.menu_edit).setVisible(true);
-        if(getNormalEditButton().getVisibility() == View.VISIBLE) {
-            menu.findItem(R.id.menu_edit).setVisible(false);
-        }
-
+        final boolean fabVisible = (getNormalEditButton() != null && getNormalEditButton().getVisibility() == View.VISIBLE)
+                || (getDirectEditingButton() != null && getDirectEditingButton().getVisibility() == View.VISIBLE);
+        menu.findItem(R.id.menu_edit).setVisible(!fabVisible);
         menu.findItem(R.id.menu_preview).setVisible(false);
     }
 
