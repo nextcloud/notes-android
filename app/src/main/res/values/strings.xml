@@ -363,6 +363,14 @@
     <string name="noteMode_rich_edit">Rich edit mode</string>
     <string name="noteMode_remember_last">Remember my last selection</string>
 
+    <string name="fontSize_small">Small</string>
+    <string name="fontSize_medium">Medium</string>
+    <string name="fontSize_large">Large</string>
+
+    <string name="darkmode_light">Light</string>
+    <string name="darkmode_dark">Dark</string>
+    <string name="darkmode_system_default">System Default</string>
+
     <plurals name="ab_selected">
         <item quantity="one">%d selected</item>
         <item quantity="other">%d selected</item>
