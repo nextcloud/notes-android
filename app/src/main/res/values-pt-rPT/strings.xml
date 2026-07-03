@@ -58,6 +58,7 @@
     <string name="backup">Detectamos um estado irrecuperável do aplicativo. Faça backup de suas alterações não sincronizadas e limpe o armazenamento do aplicativo Notas.</string>
     <string name="busy">Ocupado</string>
     <string name="category_bake">Assar</string>
+    <string name="category_checklists">Listas de verificação</string>
     <string name="category_credentials">Credencial</string>
     <string name="category_food">Alimentação</string>
     <string name="category_game">Jogo</string>
@@ -79,6 +80,7 @@
     <string name="category_restaurants">Restaurantes</string>
     <string name="category_tasks">Tarefas</string>
     <string name="category_todo">Tarefa</string>
+    <string name="category_todos">Tarefas</string>
     <string name="category_work">Emprego</string>
     <string name="change_category_title">Escolha uma categoria </string>
     <string name="choose_account">Escolher conta</string>
@@ -120,6 +122,7 @@
     <string name="error_dialog_tip_clear_storage">Você pode limpar o armazenamento ao abrir as informações do aplicativo e selecionar Armazenamento → Limpar armazenamento. ⚠️ Aviso: Isto excluirá as notas ainda não sincronizadas!</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Desative todas as otimizações de bateria do Nextcloud e do aplicativo Notes.</string>
     <string name="error_dialog_tip_files_delete_storage">Se a interrupção forçada não ajudar, você pode tentar limpar o armazenamento de ambos os aplicativos.</string>
+    <string name="error_dialog_tip_files_force_stop">Parece que algo está errado com seu aplicativo Nextcloud. Tente forçar a parada de ambos, o aplicativo Nextcloud e o aplicativo Nextcloud Notes.</string>
     <string name="error_dialog_tip_files_outdated">Seu aplicativo Nextcloud parece estar desatualizado. Visite a Play Store ou o F-Droid para obter a versão mais recente.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Se o problema persistir, tente limpar o armazenamento dos dois aplicativos: Nextcloud e Anotações Nextcloud para resolver esse problema.</string>
     <string name="error_dialog_tip_token_mismatch_retry">Tente forçar o fechamento do aplicativo e reinicie-o novamente. Pode ter havido uma conexão incorreta com o aplicativo Nextcloud.</string>
@@ -145,6 +148,7 @@
     <string name="formatting_help_code_body_2">O Markdown também suporta algo chamado código de cercas, que permite várias linhas sem recuo:</string>
     <string name="formatting_help_code_body_3">E se você quiser destacar a sintaxe, inclua a linguagem:</string>
     <string name="formatting_help_code_title">Código</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
@@ -155,6 +159,7 @@
     <string name="formatting_help_lists_body_1">Às vezes você deseja listas numeradas:</string>
     <string name="formatting_help_lists_body_3">Dois</string>
     <string name="formatting_help_lists_body_4">Três</string>
+    <string name="formatting_help_lists_body_5">Algumas vezes você pode querer marcações:</string>
     <string name="formatting_help_lists_body_6">Começar uma linha com um hífen</string>
     <string name="formatting_help_lists_body_7">E se você tiver subpontos, coloque dois espaços antes do traço ou estrela:</string>
     <string name="formatting_help_lists_body_8">Como isso</string>
@@ -167,6 +172,7 @@
     <string name="formatting_help_structured_documents_title">Documentos estruturados</string>
     <string name="formatting_help_tables_column">Coluna %1d</string>
     <string name="formatting_help_tables_title">Tabelas</string>
+    <string name="formatting_help_tables_value">Valor %1d</string>
     <string name="formatting_help_text_body">É muito fácil fazer algumas palavras %1$snegritas%1$s e outras %2$sitálicas%2$s com Markdown. Você pode %3$sriscar%3$s algumas palavras e até [apontar para o Nextcloud](https://nextcloud.com).</string>
     <string name="formatting_help_text_title">Texto</string>
     <string name="fourHours">4 horas</string>
@@ -192,6 +198,7 @@
     <string name="menu_preview">Pré-visualizar</string>
     <string name="menu_share">Partilhar</string>
     <string name="mute_all_notifications">Desativar todas as notificações</string>
+    <string name="no_account_configured_yet">Nenhuma conta foi configurada</string>
     <string name="no_actions">Sem ações para este utilizador</string>
     <string name="no_browser_available">Nenhuma aplicação disponível para lidar com links</string>
     <string name="no_category">Sem categoria</string>
@@ -209,6 +216,7 @@
     <string name="note_share_activity_could_not_retrieve_url">Não foi possível obter o URL</string>
     <string name="note_share_activity_external_icon_content_description">ícone de compartilhamento externo de nota</string>
     <string name="note_share_activity_icon_content_description">ícone de compartilhamento de nota</string>
+    <string name="note_share_activity_more_icon_content_description">ícone para mais opções de compartilhamento de nota</string>
     <string name="note_share_activity_resharing_not_allowed">Política ou permissões impedem o recompartilhamento</string>
     <string name="note_share_activity_search_text">Nome, ID de Nuvem Federada ou endereço de e-mail…</string>
     <string name="note_share_activity_share_icon_content_description">ícone de compartilhamento de nota</string>
@@ -216,6 +224,7 @@
     <string name="note_share_activity_shared_with_you">Partilhado consigo por %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" foi partilhado consigo</string>
     <string name="note_share_activity_user_icon_content_description">ícone de compartilhamento de usuário de nota</string>
+    <string name="note_share_created">Compartilhamento criado</string>
     <string name="note_share_detail_activity_allow_download_and_sync">Permitir transferência e sincronizar</string>
     <string name="note_share_detail_activity_cancel">Cancelar</string>
     <string name="note_share_detail_activity_common_confirm">Confirmar</string>
@@ -252,6 +261,7 @@
     <string name="settings_background_sync">Sincronização em segundo plano</string>
     <string name="settings_enable_direct_edit_summary">Quando desativado, o editor avançado ficará oculto.</string>
     <string name="settings_file_suffix">Extensão de arquivo</string>
+    <string name="settings_file_suffix_description">Extensão de arquivo para novas notas no seu Nextcloud</string>
     <string name="settings_file_suffix_success">Novo sufixo de arquivo: %1$s</string>
     <string name="settings_font_size">Tamanho do tipo de letra</string>
     <string name="settings_font_title"> Fonte monospaçada</string>
@@ -268,6 +278,7 @@
     <string name="settings_show_ecosystem_apps_summary">Sugestões de aplicações Nextcloud no cabeçalho da navegação</string>
     <string name="settings_swipe_actions_summary">Marque como favorito ou exclua notas com um simples deslizar</string>
     <string name="settings_theme_title">Tema</string>
+    <string name="settings_wifi_only">Sincronizar apenas por Wi-Fi</string>
     <string name="share">Partilhar</string>
     <string name="share_delete_link">Excluir link</string>
     <string name="share_dialog_title">Partilha</string>
@@ -332,6 +343,7 @@
     <string name="today">Hoje</string>
     <string name="unlock_notes">Destrancar notas</string>
     <string name="username">Nome de utilizador</string>
+    <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
     <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
     <string name="welcome_text">Bem-vindo a %1$s</string>
     <string name="whats_your_status">Qual é o seu estado?</string>
