@@ -26,6 +26,19 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
       alt="Get it on F-Droid"
       height="80">](https://f-droid.org/repository/browse/?fdid=it.niedermann.owncloud.notes)
 
+Signing certificate fingerprints to [verify](https://developer.android.com/studio/command-line/apksigner#usage-verify) the APK using the official Android documentation.
+
+Apk from Github:
+`it.niedermann.owncloud.notes 3E:25:DD:12:88:F6:45:1C:EF:8E:12:EE:F0:A2:50:2D:74:94:AC:B9:B0:A0:7F:F3:B9:E6:39:B4:03:17:81:CF`
+
+Installed from F-Droid and Openapk:
+`it.niedermann.owncloud.notes
+3E:80:F3:2D:F2:C8:9E:4C:DD:3A:32:F1:00:21:78:D8:D4:F2:1B:9D:A8:9F:8A:DD:6A:BA:E2:9F:D3:C9:5C:0B`
+
+Installed frm the GooglePlay:
+`it.niedermann.owncloud.notes
+F6:0A:21:D2:08:65:7A:46:F6:57:3A:01:9E:F5:D3:09:05:23:E5:0A:EB:FD:0F:73:6F:DE:DC:F9:73:87:C4:96`
+
 ## :eyes: Screenshots
 
 | _ | _ | _ |
