@@ -375,6 +375,7 @@
     <string name="widget_not_logged_in">Log venligst ind i Noter før du bruger denne widget</string>
     <string name="widget_note_list_placeholder">Ingen noter</string>
     <string name="widget_note_list_title">Noteliste </string>
+    <string name="widget_single_note_note_not_found">Note ikke fundet</string>
     <string name="widget_single_note_placeholder_tv">Note ikke fundet</string>
     <string name="widget_single_note_title">Enkel note</string>
     <string name="write_email">Send e-mail</string>

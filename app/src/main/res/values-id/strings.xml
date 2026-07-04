@@ -334,6 +334,7 @@
     <string name="widget_not_logged_in">Silakan masuk ke Catatan sebelum menggunakan widget ini</string>
     <string name="widget_note_list_placeholder">Tidak ada catatan</string>
     <string name="widget_note_list_title">Daftar catatan</string>
+    <string name="widget_single_note_note_not_found">Catatan tidak ditemukan</string>
     <string name="widget_single_note_placeholder_tv">Catatan tidak ditemukan</string>
     <string name="widget_single_note_title">Satu catatan</string>
     <string name="write_email">Kirim email</string>

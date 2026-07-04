@@ -377,6 +377,7 @@
     <string name="widget_not_logged_in">Veuillez vous connecter à Notes avant d\'utiliser ce widget</string>
     <string name="widget_note_list_placeholder">Aucune note</string>
     <string name="widget_note_list_title">Liste des notes</string>
+    <string name="widget_single_note_note_not_found">Note non trouvée</string>
     <string name="widget_single_note_placeholder_tv">Note non trouvée</string>
     <string name="widget_single_note_title">Une seule note</string>
     <string name="write_email">Envoyer un e-mail</string>

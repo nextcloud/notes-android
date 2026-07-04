@@ -372,6 +372,7 @@
     <string name="widget_not_logged_in">Prihláste sa prosím do Poznámok skôr než začnete používať tento widget</string>
     <string name="widget_note_list_placeholder">Nie sú žiadne poznámky</string>
     <string name="widget_note_list_title">Zoznam poznámok</string>
+    <string name="widget_single_note_note_not_found">Poznámky sa nenašli</string>
     <string name="widget_single_note_placeholder_tv">Poznámky sa nenašli</string>
     <string name="widget_single_note_title">Jedna poznámka</string>
     <string name="write_email">Odoslať email</string>

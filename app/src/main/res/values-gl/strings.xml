@@ -375,6 +375,7 @@
     <string name="widget_not_logged_in">Acceda a Notas antes de empregar este trebello</string>
     <string name="widget_note_list_placeholder">Non hai notas</string>
     <string name="widget_note_list_title">Lista de notas</string>
+    <string name="widget_single_note_note_not_found">Non se atopou a nota</string>
     <string name="widget_single_note_placeholder_tv">Non se atopou a nota</string>
     <string name="widget_single_note_title">Nota única</string>
     <string name="write_email">Enviar o correo</string>

@@ -224,6 +224,7 @@
     <string name="widget_not_logged_in">Por favor inica sesión en Notes antes de usar este widget</string>
     <string name="widget_note_list_placeholder">No hay notas</string>
     <string name="widget_note_list_title">Lista de notas</string>
+    <string name="widget_single_note_note_not_found">Nota no encontrada</string>
     <string name="widget_single_note_placeholder_tv">Nota no encontrada</string>
     <string name="widget_single_note_title">Única nota</string>
     <string name="write_email">Enviar correo electrónico</string>

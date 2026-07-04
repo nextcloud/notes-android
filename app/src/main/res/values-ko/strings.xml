@@ -333,6 +333,7 @@
     <string name="widget_not_logged_in">이 위젯을 사용하려면 먼저 로그인하십시오</string>
     <string name="widget_note_list_placeholder">메모 없음</string>
     <string name="widget_note_list_title">메모 목록</string>
+    <string name="widget_single_note_note_not_found">메모 없음</string>
     <string name="widget_single_note_placeholder_tv">메모 없음</string>
     <string name="widget_single_note_title">메모 1개</string>
     <string name="write_email">이메일 보내기</string>

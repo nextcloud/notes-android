@@ -361,6 +361,7 @@
     <string name="widget_not_logged_in">Logga in i Anteckningar innan den används</string>
     <string name="widget_note_list_placeholder">Inga anteckningar</string>
     <string name="widget_note_list_title">Anteckningslista</string>
+    <string name="widget_single_note_note_not_found">Anteckning hittades inte</string>
     <string name="widget_single_note_placeholder_tv">Anteckning hittades inte</string>
     <string name="widget_single_note_title">Enstaka anteckning</string>
     <string name="write_email">Skicka e-post</string>

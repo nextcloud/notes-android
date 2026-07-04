@@ -340,6 +340,7 @@
     <string name="widget_not_logged_in">Please login to Notes before using this widget</string>
     <string name="widget_note_list_placeholder">No notes</string>
     <string name="widget_note_list_title">Note list</string>
+    <string name="widget_single_note_note_not_found">Note not found</string>
     <string name="widget_single_note_placeholder_tv">Note not found</string>
     <string name="widget_single_note_title">Single note</string>
     <string name="write_email">ელ.ფოსტის გაგზავნა</string>

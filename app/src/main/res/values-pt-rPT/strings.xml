@@ -48,6 +48,7 @@
     <string name="add_another_public_share_link">Adicionar outra hiperligação</string>
     <string name="add_category">Adicionar %1$s</string>
     <string name="add_new_public_share">Adicionar nova hiperligação de partilha pública</string>
+    <string name="added_content">\"%1$s\" adicionado</string>
     <string name="allow_resharing">Permitir repartilha</string>
     <string name="app_name">Notas</string>
     <string name="app_name_long">Nextcloud Notes</string>
@@ -66,6 +67,7 @@
     <string name="category_gift">Presente</string>
     <string name="category_gifts">Presentes</string>
     <string name="category_key">Chave</string>
+    <string name="category_keys">Chaves</string>
     <string name="category_movies">Filmes</string>
     <string name="category_music">Música</string>
     <string name="category_password">Palavra-passe</string>
@@ -117,6 +119,7 @@
     <string name="error_dialog_insufficient_storage">Sua instância do Nextcloud não tem mais espaço livre. Exclua alguns arquivos para sincronizar suas alterações locais com a nuvem.</string>
     <string name="error_dialog_min_version">O aplicativo Notas para Android requer que o aplicativo Nextcloud para Android seja pelo menos a versão 3.18.</string>
     <string name="error_dialog_redirect">Seu servidor respondeu com um código de status HTTP 302, o que implica que você não instalou o aplicativo Notes no servidor ou que algo está configurado incorretamente. Isso pode ser causado por alterações no arquivo .htaccess ou por aplicativos como o Client OID.</string>
+    <string name="error_dialog_server_app_enabled">Verifique se você instalou e ativou o aplicativo \"Notes\" (\"Notas\") no seu servidor.</string>
     <string name="error_dialog_timeout_instance">Não houve resposta do seu servidor no tempo especificado. Verifique se sua instância está funcionando bem.</string>
     <string name="error_dialog_timeout_toggle">Verifique sua conexão de rede. Às vezes, desativar e ativar os dados móveis ou o Wi-Fi pode ajudar.</string>
     <string name="error_dialog_tip_clear_storage">Você pode limpar o armazenamento ao abrir as informações do aplicativo e selecionar Armazenamento → Limpar armazenamento. ⚠️ Aviso: Isto excluirá as notas ainda não sincronizadas!</string>
@@ -143,6 +146,7 @@
     <string name="formatting_help_cbf_title">Formatação baseada em contexto</string>
     <string name="formatting_help_checkboxes_body_1">Para criar uma caixa de seleção, use uma lista seguida por colchetes</string>
     <string name="formatting_help_checkboxes_body_2">Item 1</string>
+    <string name="formatting_help_checkboxes_body_3">Item 2</string>
     <string name="formatting_help_checkboxes_title">Caixas de seleção</string>
     <string name="formatting_help_code_body_1">Existem muitas maneiras diferentes de estilizar o código com o Markdown. Se você tiver blocos de códigos embutidos, envolva-os em barras de proteção:</string>
     <string name="formatting_help_code_body_2">O Markdown também suporta algo chamado código de cercas, que permite várias linhas sem recuo:</string>
@@ -157,6 +161,7 @@
     <string name="formatting_help_images_body_2">Para estar em conformidade com o formato Markdown, use caracteres de escape no URL da imagem. Isso significa, por exemplo, substituir espaços por %1$s no URL.</string>
     <string name="formatting_help_images_title">Imagens</string>
     <string name="formatting_help_lists_body_1">Às vezes você deseja listas numeradas:</string>
+    <string name="formatting_help_lists_body_2">Um</string>
     <string name="formatting_help_lists_body_3">Dois</string>
     <string name="formatting_help_lists_body_4">Três</string>
     <string name="formatting_help_lists_body_5">Algumas vezes você pode querer marcações:</string>
@@ -166,6 +171,7 @@
     <string name="formatting_help_lists_body_9">E isso</string>
     <string name="formatting_help_structured_documents_body_1">Às vezes, é útil ter diferentes níveis de títulos para estruturar seus documentos. Iniciar linhas com um %1$s para criar cabeçalhos. Vários %2$s em sequência indicam tamanhos de cabeçalho menores. </string>
     <string name="formatting_help_structured_documents_body_2">Este é um cabeçalho de terceira camada</string>
+    <string name="formatting_help_structured_documents_body_3">Você pode usar um %1$s em todo o trecho até seis %2$s para diferentes tamanhos de cabeçalho.</string>
     <string name="formatting_help_structured_documents_body_4">Se você quiser citar alguém, use o caractere %1$s antes da linha:</string>
     <string name="formatting_help_structured_documents_body_5">Imaginação é mais importante que conhecimento. O conhecimento é limitado. A imaginação dá voltas no mundo.</string>
     <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
@@ -176,6 +182,7 @@
     <string name="formatting_help_text_body">É muito fácil fazer algumas palavras %1$snegritas%1$s e outras %2$sitálicas%2$s com Markdown. Você pode %3$sriscar%3$s algumas palavras e até [apontar para o Nextcloud](https://nextcloud.com).</string>
     <string name="formatting_help_text_title">Texto</string>
     <string name="fourHours">4 horas</string>
+    <string name="http_status_code">Código de Status HTTP: %1$d</string>
     <string name="invisible">Invisível </string>
     <string name="label_all_notes">Todas as notas</string>
     <string name="label_favorites">Favoritos</string>
@@ -205,11 +212,13 @@
     <string name="no_email_app_available">Nenhum aplicativo disponível para lidar com endereço de e-mail </string>
     <string name="no_notes_yet">Sem notas ainda</string>
     <string name="no_notes_yet_description">Pressione o botão + para criar uma nova nota</string>
+    <string name="noteMode_plain_edit">Modo de edição simples</string>
     <string name="noteMode_plain_preview">Pré-visualização simples</string>
     <string name="noteMode_remember_last">Lembrar a minha última escolha</string>
     <string name="noteMode_rich_edit">Modo de edição avançado</string>
     <string name="note_has_been_deleted">A anotação foi excluída</string>
     <string name="note_share_activity_activity_icon_content_description">ícone de atividade de nota</string>
+    <string name="note_share_activity_cannot_created">Você não tem permissões para criar um compartilhamento.</string>
     <string name="note_share_activity_contact_icon_content_description">ícone de compartilhamento de contato de nota</string>
     <string name="note_share_activity_contact_no_permission">É necessária a permissão de contato.</string>
     <string name="note_share_activity_copy_icon_content_description">ícone de cópia de compartilhamento de nota</string>
@@ -246,6 +255,7 @@
     <string name="oneHour">1 hora</string>
     <string name="online">On-line</string>
     <string name="online_status">Estado on-line</string>
+    <string name="pin_to_homescreen">Fixar na tela inicial</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_lock">Protegido por palavra-passe</string>
     <string name="pref_value_wifi_and_mobile">Sincronizar com Wi-Fi e dados móveis</string>
@@ -259,6 +269,7 @@
     <string name="set_message">Definir mensagem</string>
     <string name="set_online_status">Estado on-line</string>
     <string name="settings_background_sync">Sincronização em segundo plano</string>
+    <string name="settings_enable_direct_edit">Edição Direta</string>
     <string name="settings_enable_direct_edit_summary">Quando desativado, o editor avançado ficará oculto.</string>
     <string name="settings_file_suffix">Extensão de arquivo</string>
     <string name="settings_file_suffix_description">Extensão de arquivo para novas notas no seu Nextcloud</string>
@@ -269,6 +280,7 @@
     <string name="settings_keep_screen_on">Manter tela ligada</string>
     <string name="settings_lock">Trancamento de aplicativo (Beta)</string>
     <string name="settings_lock_summary">Credenciais de dispositivo</string>
+    <string name="settings_note_mode">Modo de exibição de notas</string>
     <string name="settings_note_mode_new">Comportamento da abertura de Notas</string>
     <string name="settings_notes_path">Definir pasta</string>
     <string name="settings_notes_path_description">Pasta para armazenar suas notas no seu Nextcloud</string>
@@ -301,6 +313,7 @@
     <string name="share_password_title">Protegido com Senha</string>
     <string name="share_permission_can_edit">Pode editar</string>
     <string name="share_permission_file_drop">File drop</string>
+    <string name="share_permission_file_request">Solicitação de arquivo</string>
     <string name="share_permission_secure_file_drop">Depósito de arquivos seguro</string>
     <string name="share_permission_unknown">Desconhecido</string>
     <string name="share_permission_view_only">Visualizar apenas</string>
@@ -334,6 +347,7 @@
     <string name="simple_security">Segurança</string>
     <string name="simple_switch">Trocar </string>
     <string name="simple_synchronization">Sincronização</string>
+    <string name="sort_alphabetically">Ordenar alfabeticamente</string>
     <string name="sort_last_modified">Ordenar por data de modificação</string>
     <string name="status_message">Mensagem de estado</string>
     <string name="status_set_fail_message">Falha ao definir o status!</string>
@@ -351,6 +365,7 @@
     <string name="widget_not_logged_in">Faça login no Notes antes de usar este widget</string>
     <string name="widget_note_list_placeholder">Sem anotações</string>
     <string name="widget_note_list_title">Lista de notas</string>
+    <string name="widget_single_note_note_not_found">Nota não encontrada</string>
     <string name="widget_single_note_placeholder_tv">Nota não encontrada</string>
     <string name="widget_single_note_title">Nota única</string>
     <string name="write_email">Enviar mensagem</string>

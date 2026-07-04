@@ -377,6 +377,7 @@
     <string name="widget_not_logged_in">Logáil isteach ar Nótaí sula n-úsáideann tú an ghiuirléid seo le do thoil</string>
     <string name="widget_note_list_placeholder">Gan nótaí</string>
     <string name="widget_note_list_title">Liosta nótaí</string>
+    <string name="widget_single_note_note_not_found">Nóta gan aimsiú</string>
     <string name="widget_single_note_placeholder_tv">Nóta gan aimsiú</string>
     <string name="widget_single_note_title">Nóta amháin</string>
     <string name="write_email">Seol ríomhphost</string>

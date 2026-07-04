@@ -377,6 +377,7 @@
     <string name="widget_not_logged_in">لطفاً قبل از استفاده از این ویجت، به نکست‌کلود وارد شوید</string>
     <string name="widget_note_list_placeholder">بدون یادداشت</string>
     <string name="widget_note_list_title">لیست یادداشت‌ها</string>
+    <string name="widget_single_note_note_not_found">یادداشت یافت نشد</string>
     <string name="widget_single_note_placeholder_tv">یادداشت یافت نشد</string>
     <string name="widget_single_note_title">یادداشت واحد</string>
     <string name="write_email">ارسال ایمیل</string>

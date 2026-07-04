@@ -244,6 +244,7 @@
     <string name="widget_not_logged_in">נא להיכנס לפתקים לפני השימוש בחלונית הזאת</string>
     <string name="widget_note_list_placeholder">אין פתקים</string>
     <string name="widget_note_list_title">רשימת פתקים</string>
+    <string name="widget_single_note_note_not_found">לא נמצא פתק</string>
     <string name="widget_single_note_placeholder_tv">לא נמצא פתק</string>
     <string name="widget_single_note_title">פתק בודד</string>
     <string name="write_email">שליחת דואר אלקטרוני</string>

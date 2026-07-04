@@ -385,6 +385,7 @@
     <string name="widget_not_logged_in">Skráðu þig inn í minnispunktaforritið áður en þú notar þennan viðmótshluta</string>
     <string name="widget_note_list_placeholder">Engir minnispunktar</string>
     <string name="widget_note_list_title">Listi yfir minnispunkta</string>
+    <string name="widget_single_note_note_not_found">Minnispunktur fannst ekki</string>
     <string name="widget_single_note_placeholder_tv">Minnispunktur fannst ekki</string>
     <string name="widget_single_note_title">Stakur minnispunktur</string>
     <string name="write_email">Senda tölvupóst</string>
