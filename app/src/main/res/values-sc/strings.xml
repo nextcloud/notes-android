@@ -289,6 +289,7 @@
     <string name="widget_not_logged_in">Incarca su butone + pro creare una nota noa</string>
     <string name="widget_note_list_placeholder">Peruna nota</string>
     <string name="widget_note_list_title">Lista de notas</string>
+    <string name="widget_single_note_note_not_found">Nota no agatada</string>
     <string name="widget_single_note_placeholder_tv">Nota no agatada</string>
     <string name="widget_single_note_title">Nota sìngula</string>
     <string name="write_email">Imbia messàgiu de posta eletrònica</string>

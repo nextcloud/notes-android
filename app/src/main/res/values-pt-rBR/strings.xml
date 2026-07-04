@@ -377,6 +377,7 @@
     <string name="widget_not_logged_in">Faça login no Notes antes de usar este widget</string>
     <string name="widget_note_list_placeholder">Sem anotações</string>
     <string name="widget_note_list_title">Lista de notas</string>
+    <string name="widget_single_note_note_not_found">Anotação não encontrada</string>
     <string name="widget_single_note_placeholder_tv">Anotação não encontrada</string>
     <string name="widget_single_note_title">Anotação simples</string>
     <string name="write_email">Enviar e-mail</string>

@@ -371,6 +371,7 @@
     <string name="widget_not_logged_in">بۇ كىچىك قورالنى ئىشلىتىشتىن بۇرۇن خاتىرىلەرگە كىرىڭ</string>
     <string name="widget_note_list_placeholder">خاتىرە يوق</string>
     <string name="widget_note_list_title">ئەسكەرتىش تىزىملىكى</string>
+    <string name="widget_single_note_note_not_found">دىققەت تېپىلمىدى</string>
     <string name="widget_single_note_placeholder_tv">دىققەت تېپىلمىدى</string>
     <string name="widget_single_note_title">يەككە خاتىرە</string>
     <string name="write_email">ئېلېكترونلۇق خەت ئەۋەتىڭ</string>

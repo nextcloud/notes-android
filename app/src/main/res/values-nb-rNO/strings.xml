@@ -221,6 +221,9 @@
     <string name="note_has_been_deleted">Dette notatet har blitt slettet</string>
     <string name="note_share_activity_contact_no_permission">Kontaktrettighet kreves.</string>
     <string name="note_share_activity_could_not_retrieve_url">Kunne ikke hente URL</string>
+    <string name="note_share_activity_resharing_not_allowed">Policy eller rettigheter hindrer gjendeling</string>
+    <string name="note_share_activity_search_text">Navn, Sammenknyttet sky-ID eller e-postadresse</string>
+    <string name="note_share_activity_send_copy_to">Send kopi til...</string>
     <string name="note_share_activity_share_link">Del lenke</string>
     <string name="note_share_activity_shared_with_you">Delt med deg av %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" er blitt delt med deg</string>
@@ -255,6 +258,7 @@
     <string name="remove_account">Fjern %1$s</string>
     <string name="search_in_all">Søk i alle notater</string>
     <string name="search_in_category">Søk i %1$s</string>
+    <string name="set_message">Sett melding</string>
     <string name="set_online_status">Online-status</string>
     <string name="settings_background_sync">Synkronisering i bakgrunnen</string>
     <string name="settings_enable_direct_edit">Direkte redigering</string>
@@ -337,6 +341,7 @@
     <string name="sort_alphabetically">Sorter alfabetisk</string>
     <string name="sort_last_modified">Sorter etter dato endret</string>
     <string name="status_message">Statusmelding</string>
+    <string name="status_set_fail_message">Kunne ikke sette status!</string>
     <string name="switch_to_plain_editing">Bytt til ren endringsmodus</string>
     <string name="thirtyMinutes">30 minutter</string>
     <string name="thisWeek">Denne uken</string>
@@ -349,10 +354,15 @@
     <string name="widget_not_logged_in">Logg inn i Notater før du bruker dette miniprogrammet</string>
     <string name="widget_note_list_placeholder">Ingen notater</string>
     <string name="widget_note_list_title">Notatliste</string>
+    <string name="widget_single_note_note_not_found">Notatet ble ikke funnet</string>
     <string name="widget_single_note_placeholder_tv">Notatet ble ikke funnet</string>
     <string name="widget_single_note_title">Enkeltnotat</string>
     <string name="write_email">Send e-post</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Du må være koblet til internett for å kunne legge til en konto.</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">%1$d nedlasting gjenstår</item>
+        <item quantity="other">%1$d nedlastinger gjenstår</item>
+    </plurals>
     <plurals name="ab_selected">
         <item quantity="one">%d er valgt</item>
         <item quantity="other">%d valgt</item>

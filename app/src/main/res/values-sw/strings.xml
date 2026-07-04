@@ -373,6 +373,7 @@
     <string name="widget_not_logged_in">Tafadhali ingia kwenye madokezo kabla ya kutumia wijeti hii</string>
     <string name="widget_note_list_placeholder">Hakuna dokezo</string>
     <string name="widget_note_list_title">Orodha ya dokezo</string>
+    <string name="widget_single_note_note_not_found">Dokezo halipo</string>
     <string name="widget_single_note_placeholder_tv">Dokezo halipo</string>
     <string name="widget_single_note_title">Dokezo moja</string>
     <string name="write_email">Tuma barua pepe</string>

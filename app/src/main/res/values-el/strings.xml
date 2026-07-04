@@ -323,6 +323,7 @@
     <string name="widget_not_logged_in">Παρακαλούμε συνδεθείτε στις Σημειώσεις πρωτού να χρησιμοποιήσετε αυτό το γραφικό στοιχείο.</string>
     <string name="widget_note_list_placeholder">Καμία σημείωση</string>
     <string name="widget_note_list_title">Λίστα σημειώσεων</string>
+    <string name="widget_single_note_note_not_found">Η σημείωση δεν βρέθηκε</string>
     <string name="widget_single_note_placeholder_tv">Η σημείωση δεν βρέθηκε</string>
     <string name="widget_single_note_title">Απλή σημείωση</string>
     <string name="write_email">Αποστολή email</string>

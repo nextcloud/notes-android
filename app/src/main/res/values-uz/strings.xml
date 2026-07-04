@@ -349,6 +349,7 @@
     <string name="widget_not_logged_in">Iltimos, ushbu vidjetdan foydalanishdan oldin Eslatmalar tizimiga kiring</string>
     <string name="widget_note_list_placeholder">Qayd yo\'q</string>
     <string name="widget_note_list_title">Eslatmalar ro\'yxati</string>
+    <string name="widget_single_note_note_not_found">Eslatma topilmadi</string>
     <string name="widget_single_note_placeholder_tv">Eslatma topilmadi</string>
     <string name="widget_single_note_title">Yagona eslatma</string>
     <string name="write_email">Xabar yuborish</string>
