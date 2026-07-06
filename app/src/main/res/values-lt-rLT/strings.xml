@@ -377,7 +377,8 @@
     <string name="widget_not_logged_in">Prieš naudodami šį valdiklį, prisijunkite prie Užrašų</string>
     <string name="widget_note_list_placeholder">Užrašų nėra</string>
     <string name="widget_note_list_title">Užrašų sąrašas</string>
-    <string name="widget_single_note_note_not_found">Užrašai nerasti</string>
+    <string name="widget_single_note_loading">Įkeliamas užrašas...</string>
+    <string name="widget_single_note_note_not_found">Užrašas nerastas</string>
     <string name="widget_single_note_placeholder_tv">Užrašai nerasti</string>
     <string name="widget_single_note_title">Vieni užrašai</string>
     <string name="write_email">Siųsti elektroninį laišką</string>
