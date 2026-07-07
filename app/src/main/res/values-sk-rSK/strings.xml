@@ -210,6 +210,7 @@
     <string name="menu_favorite">Obľúbené</string>
     <string name="menu_preview">Náhľad</string>
     <string name="menu_share">Sprístupniť</string>
+    <string name="menu_shared_note">Zdieľaná poznámka</string>
     <string name="mute_all_notifications">Stlmiť všetky upozornenia</string>
     <string name="no_account_configured_yet">Nie je ešte nastavený žiadny účet</string>
     <string name="no_actions">Žiadne akcie pre tohto užívateľa</string>
@@ -254,6 +255,7 @@
     <string name="note_share_detail_activity_label_empty">Štítok nemôže byť prázdny</string>
     <string name="note_share_detail_activity_link_name">Názov odkazu</string>
     <string name="note_share_detail_activity_no_share_permission_selected">Vyberte aspoň jedno povolenie na zdieľanie.</string>
+    <string name="note_share_detail_activity_password_error_message">Toto heslo vyzerá trochu slabé. Pre lepšie zabezpečenie skúste použiť dlhšie heslo s kombináciou písmen, čísel a symbolov.</string>
     <string name="note_share_detail_activity_send_share">Odoslať zdieľanie</string>
     <string name="note_share_detail_activity_set_note">Nastaviť poznámku</string>
     <string name="note_share_detail_activity_share_copy_link">Zdieľať a Kopírovať Odkaz</string>
@@ -297,9 +299,12 @@
     <string name="settings_prevent_screen_capture">Zakázať snímanie obrazovky</string>
     <string name="settings_show_ecosystem_apps">Zobraziť prepínač aplikácií</string>
     <string name="settings_show_ecosystem_apps_summary">Návrhy Nextcloud aplikácií v navigačnom záhlaví</string>
+    <string name="settings_swipe_actions">Akcie potiahnutia</string>
+    <string name="settings_swipe_actions_summary">Označte ako obľúbené alebo odstráňte poznámky potiahnutím prsta</string>
     <string name="settings_theme_title">Motív vzhľadu</string>
     <string name="settings_wifi_only">Synchronizovať len na Wi-Fi</string>
     <string name="share">Zdieľať</string>
+    <string name="share_delete_link">Odstrániť odkaz</string>
     <string name="share_dialog_title">Zdieľanie</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Vyprší %1$s</string>
@@ -372,6 +377,7 @@
     <string name="widget_not_logged_in">Prihláste sa prosím do Poznámok skôr než začnete používať tento widget</string>
     <string name="widget_note_list_placeholder">Nie sú žiadne poznámky</string>
     <string name="widget_note_list_title">Zoznam poznámok</string>
+    <string name="widget_single_note_loading">Načítava sa poznámka…</string>
     <string name="widget_single_note_note_not_found">Poznámky sa nenašli</string>
     <string name="widget_single_note_placeholder_tv">Poznámky sa nenašli</string>
     <string name="widget_single_note_title">Jedna poznámka</string>
