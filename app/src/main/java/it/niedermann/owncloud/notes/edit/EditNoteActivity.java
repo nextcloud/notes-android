@@ -108,7 +108,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
 
         setSupportActionBar(binding.toolbar);
         binding.toolbar.setOnClickListener((v) -> fragment.showEditTitleDialog());
-        setImeInsets();
+        setWindowInsets();
 
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
@@ -120,7 +120,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         });
     }
 
-    private void setImeInsets() {
+    private void setWindowInsets() {
         final var window = getWindow();
         if (window == null) {
             return;
@@ -128,22 +128,22 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
 
         WindowCompat.setDecorFitsSystemWindows(window, false);
 
-        final var decorView = window.getDecorView();
-        ViewCompat.setOnApplyWindowInsetsListener(decorView, (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, insets) -> {
+            Insets barInsets = insets.getInsets(
+                    WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
             Insets imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime());
-            Insets navBarInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
 
             // Apply bottom padding when keyboard is shown
-            int bottomPadding = Math.max(imeInsets.bottom, navBarInsets.bottom);
+            int bottomPadding = Math.max(imeInsets.bottom, barInsets.bottom);
 
             v.setPadding(
-                    v.getPaddingLeft(),
-                    v.getPaddingTop(),
-                    v.getPaddingRight(),
+                    barInsets.left,
+                    barInsets.top,
+                    barInsets.right,
                     bottomPadding
             );
 
-            return insets;
+            return WindowInsetsCompat.CONSUMED;
         });
     }
 
