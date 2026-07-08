@@ -377,6 +377,7 @@
     <string name="widget_not_logged_in">Для использования виджета необходимо выполнить вход в приложении «Заметки»</string>
     <string name="widget_note_list_placeholder">Заметок нет</string>
     <string name="widget_note_list_title">Список заметок</string>
+    <string name="widget_single_note_loading">Загрузка заметки…</string>
     <string name="widget_single_note_note_not_found">Заметка не найдена</string>
     <string name="widget_single_note_placeholder_tv">Заметка не найдена</string>
     <string name="widget_single_note_title">Одна заметка</string>
