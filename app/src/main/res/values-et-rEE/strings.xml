@@ -377,6 +377,8 @@
     <string name="widget_not_logged_in">Enne selle vidin kasutamist palun logi sisse rakendusse Märkmed</string>
     <string name="widget_note_list_placeholder">Märkmeid ei leidu</string>
     <string name="widget_note_list_title">Märkmete loend</string>
+    <string name="widget_single_note_loading">Laadin märget…</string>
+    <string name="widget_single_note_note_not_found">Märget ei leidu</string>
     <string name="widget_single_note_placeholder_tv">Märget ei leidu</string>
     <string name="widget_single_note_title">Üksik märge</string>
     <string name="write_email">Saada e-kiri</string>

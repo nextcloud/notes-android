@@ -377,6 +377,8 @@
     <string name="widget_not_logged_in">Bitte bei Notes vor Nutzung des Widgets anmelden</string>
     <string name="widget_note_list_placeholder">Keine Notizen</string>
     <string name="widget_note_list_title">Liste der Notizen</string>
+    <string name="widget_single_note_loading">Lade Notiz …</string>
+    <string name="widget_single_note_note_not_found">Notiz nicht gefunden</string>
     <string name="widget_single_note_placeholder_tv">Notiz nicht gefunden</string>
     <string name="widget_single_note_title">Eine Notiz</string>
     <string name="write_email">E-Mail senden</string>

@@ -377,6 +377,8 @@
     <string name="widget_not_logged_in">Будь ласка, увійдіть до Нотаток перед використанням цього віджету</string>
     <string name="widget_note_list_placeholder">Нотатки відсутні</string>
     <string name="widget_note_list_title">Перелік нотаток</string>
+    <string name="widget_single_note_loading">Завантаження нотатки ...</string>
+    <string name="widget_single_note_note_not_found">Нотатку не знайдено</string>
     <string name="widget_single_note_placeholder_tv">Нотатку не знайдено</string>
     <string name="widget_single_note_title">Одна нотатка</string>
     <string name="write_email">Запрошення</string>

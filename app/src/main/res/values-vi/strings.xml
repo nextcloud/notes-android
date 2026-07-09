@@ -309,6 +309,7 @@
     <string name="widget_not_logged_in">Vui lòng đăng nhập vào Ghi chú trước khi sử dụng tiện ích này</string>
     <string name="widget_note_list_placeholder">Không có ghi chú</string>
     <string name="widget_note_list_title">Danh sách ghi chú</string>
+    <string name="widget_single_note_note_not_found">Không tìm thấy ghi chú</string>
     <string name="widget_single_note_placeholder_tv">Không tìm thấy ghi chú</string>
     <string name="widget_single_note_title">Ghi chú đơn</string>
     <string name="write_email">Gửi email</string>

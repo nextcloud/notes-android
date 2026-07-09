@@ -337,6 +337,7 @@
     <string name="widget_not_logged_in">Kirjaudu Notes sovellukseen ennen kuin käytät pienoissovellusta</string>
     <string name="widget_note_list_placeholder">Ei muistiinpanoja</string>
     <string name="widget_note_list_title">Muistiinpanolista</string>
+    <string name="widget_single_note_note_not_found">Muistiinpanoa ei löytynyt</string>
     <string name="widget_single_note_placeholder_tv">Muistiinpanoa ei löytynyt</string>
     <string name="widget_single_note_title">Yksittäinen muistiinpano</string>
     <string name="write_email">Lähetä sähköposti</string>

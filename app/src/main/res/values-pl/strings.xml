@@ -375,6 +375,7 @@
     <string name="widget_not_logged_in">Zaloguj się do Notatek przed użyciem tego widżetu</string>
     <string name="widget_note_list_placeholder">Brak notatek</string>
     <string name="widget_note_list_title">Lista notatek</string>
+    <string name="widget_single_note_note_not_found">Nie znaleziono notatki</string>
     <string name="widget_single_note_placeholder_tv">Nie znaleziono notatki</string>
     <string name="widget_single_note_title">Pojedyncza notatka</string>
     <string name="write_email">Wyślij e-mail</string>

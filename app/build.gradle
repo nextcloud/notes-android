@@ -8,18 +8,17 @@
  */
 
 apply plugin: 'com.android.application'
-apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
     namespace = 'it.niedermann.owncloud.notes'
 
     defaultConfig {
         applicationId "it.niedermann.owncloud.notes"
-        minSdk 24
-        compileSdk = 36
+        minSdk 28
+        compileSdk = 37
         targetSdk 36
-        versionCode 330020003
-        versionName "3.0.0 Alpha 03"
+        versionCode 340100050
+        versionName "34.1.0 Alpha 1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
@@ -30,12 +29,14 @@ android {
 
     compileOptions {
         coreLibraryDesugaringEnabled = true
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
     }
 
-    kotlinOptions {
-        jvmTarget = '17'
+    kotlin {
+        jvmToolchain {
+            languageVersion.set(JavaLanguageVersion.of(21))
+        }
     }
 
     buildFeatures {
@@ -115,7 +116,7 @@ dependencies {
         exclude group: 'commons-logging', module: 'commons-logging'
     }
 
-    implementation("com.github.nextcloud:android-library:2.23.0") {
+    implementation("com.github.nextcloud:android-library:2.24.0") {
         exclude group: 'org.ogce', module: 'xpp3'
     }
 
@@ -143,10 +144,10 @@ dependencies {
 
     // Android X
     implementation 'androidx.appcompat:appcompat:1.7.1'
-    implementation 'androidx.core:core-ktx:1.18.0'
+    implementation 'androidx.core:core-ktx:1.19.0'
     implementation 'androidx.core:core-splashscreen:1.2.0'
     implementation 'androidx.fragment:fragment:1.8.9'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.10.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.11.0'
     implementation 'androidx.preference:preference:1.2.1'
     implementation 'androidx.recyclerview:recyclerview-selection:1.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.4.0'
@@ -160,6 +161,7 @@ dependencies {
     // Database
     implementation "androidx.room:room-runtime:${roomVersion}"
     annotationProcessor "androidx.room:room-compiler:${roomVersion}"
+    annotationProcessor "org.jetbrains.kotlin:kotlin-metadata-jvm:$kotlinVersion"
 
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:3.0.0'

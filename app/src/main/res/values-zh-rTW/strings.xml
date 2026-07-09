@@ -377,6 +377,8 @@
     <string name="widget_not_logged_in">在使用此小工具之前，請先登入到 Notes</string>
     <string name="widget_note_list_placeholder">沒有筆記</string>
     <string name="widget_note_list_title">筆記清單</string>
+    <string name="widget_single_note_loading">正在載入筆記……</string>
+    <string name="widget_single_note_note_not_found">找不到筆記</string>
     <string name="widget_single_note_placeholder_tv">找不到筆記</string>
     <string name="widget_single_note_title">單則筆記</string>
     <string name="write_email">傳送電子郵件</string>

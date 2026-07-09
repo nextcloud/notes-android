@@ -372,6 +372,7 @@
     <string name="widget_not_logged_in">Login bij Notities voordat je deze widget gebruikt</string>
     <string name="widget_note_list_placeholder">Geen notities</string>
     <string name="widget_note_list_title">Notitielijst</string>
+    <string name="widget_single_note_note_not_found">Notitie niet gevonden</string>
     <string name="widget_single_note_placeholder_tv">Notitie niet gevonden</string>
     <string name="widget_single_note_title">Enkele notitie</string>
     <string name="write_email">Verstuur e-mail</string>

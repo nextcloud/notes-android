@@ -319,6 +319,7 @@
     <string name="widget_not_logged_in">Vă rugăm să vă autentificați în Notițe înainte de a folosi această componentă vizuală </string>
     <string name="widget_note_list_placeholder">Nu există notițe </string>
     <string name="widget_note_list_title">Listă notițe</string>
+    <string name="widget_single_note_note_not_found">Notiță nu a fost găsită </string>
     <string name="widget_single_note_placeholder_tv">Notiță nu a fost găsită </string>
     <string name="widget_single_note_title">O singură notiță</string>
     <string name="write_email">Trimite email</string>

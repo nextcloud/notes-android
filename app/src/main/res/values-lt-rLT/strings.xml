@@ -118,7 +118,7 @@
     <string name="error_action_update_files_app">Atnaujinti</string>
     <string name="error_dialog_check_maintenance">Patikrinkite, ar jūsų „Nextcloud“ elementas šiuo metu aptarnavimo režime.</string>
     <string name="error_dialog_check_server">Atsakymas iš Jūsų serverio nebuvo teisingas. Patikrinkite, ar galite pasiekti savo užrašus naudodami žiniatinklio sąsają.</string>
-    <string name="error_dialog_check_server_logs">Kyla problemų dėl jūsų „Nextcloud“ nustatymų. Peržiūrėkite serverio žurnalo įrašus.</string>
+    <string name="error_dialog_check_server_logs">Kyla problemų dėl jūsų „Nextcloud“ sąrankos. Peržiūrėkite serverio žurnalo įrašus.</string>
     <string name="error_dialog_insufficient_storage">„Nextcloud“ elementas nebeturi laisvos vietos saugykloje. Prašome, ištrinkite nereikalingus failus, kad lokalūs pakeitimai būtų sinchronizuoti su debesimi.</string>
     <string name="error_dialog_min_version">Programėlei „Nextcloud Notes“ reikalinga ne senesnė nei 3.18 versijos „Nextcloud“ skirta „Android“ programėlė.</string>
     <string name="error_dialog_redirect">Jūsų serverio atsakymas turi HTTP 302 klaidos kodą, tai reiškia, kad jūs neįdiegėte „Notes“ programėlės savo serveryje arba ji įdiegta netinkamai. Taip galėjo dėl nustatymų pakeitimų .htaccess faile arba „Nextcloud“ programėlėje, tokios kaip OID klientas.</string>
@@ -145,7 +145,7 @@
     <string name="file_detail_sharing_fragment_no_contact_app_message">Nėra programėlės, kuria būtų galima pasirinkti kontaktus</string>
     <string name="file_list_seconds_ago">prieš keletą sekundžių</string>
     <string name="formatting_help_cbf_body_1">Vienas iš pagrindinių „Notes“ programėlės kūrimo tikslų – sukurti įrankį, kuris neatsitrauktų dėmesio. Tačiau tekstą galėsite formatuoti naudodami „Markdown“. Daugeliu toliau pateiktų pavyzdžių atveju galite naudoti sparčiuosius klavišus, kad formatuotumėte užrašus be būtinybės įvesti žemiau nurodytus kodus.</string>
-    <string name="formatting_help_cbf_body_2">Tiesiog pasirinkite teksto diapazoną arba bakstelėkite žymeklį bet kurioje vietoje ir atsiras meniu, kuriame yra numatytieji įrašai %1$s, %2$s, %3$s, %4$s arba %5$s.</string>
+    <string name="formatting_help_cbf_body_2">Tiesiog pasirinkite teksto rėžį arba bakstelėkite žymeklį bet kurioje vietoje ir atsiras meniu, kuriame yra numatytieji įrašai %1$s, %2$s, %3$s, %4$s arba %5$s.</string>
     <string name="formatting_help_cbf_title">Kontekstu pagrįstas formatavimas</string>
     <string name="formatting_help_checkboxes_body_1">Norėdami sukurti žymimajį langelį, naudokite sąrašą, po kurio pateikiamos skliaustuose</string>
     <string name="formatting_help_checkboxes_body_2">1 elementas</string>
@@ -377,6 +377,8 @@
     <string name="widget_not_logged_in">Prieš naudodami šį valdiklį, prisijunkite prie Užrašų</string>
     <string name="widget_note_list_placeholder">Užrašų nėra</string>
     <string name="widget_note_list_title">Užrašų sąrašas</string>
+    <string name="widget_single_note_loading">Įkeliamas užrašas...</string>
+    <string name="widget_single_note_note_not_found">Užrašas nerastas</string>
     <string name="widget_single_note_placeholder_tv">Užrašai nerasti</string>
     <string name="widget_single_note_title">Vieni užrašai</string>
     <string name="write_email">Siųsti elektroninį laišką</string>

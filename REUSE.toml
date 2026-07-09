@@ -10,3 +10,9 @@ path = ["app/schemas/it.niedermann.owncloud.notes.persistence.NotesDatabase/**.j
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2016-2025 Nextcloud GmbH and Nextcloud contributors"
 SPDX-License-Identifier = "GPL-3.0-or-later"
+
+[[annotations]]
+path = ["CLAUDE.md"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Nextcloud GmbH and Nextcloud contributors"
+SPDX-License-Identifier = "GPL-3.0-or-later"
