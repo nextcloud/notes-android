@@ -92,7 +92,7 @@ import retrofit2.Call;
 @SuppressWarnings("UnusedReturnValue")
 public class NotesRepository {
 
-    private static final String TAG = NotesRepository.class.getSimpleName();
+    private static final String TAG = "createAndLoadNote";
 
     private static NotesRepository instance;
 
