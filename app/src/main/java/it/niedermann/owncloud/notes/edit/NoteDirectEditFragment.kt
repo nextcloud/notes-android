@@ -312,21 +312,19 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
                 val url = request?.url ?: return false
                 val scheme = url.scheme?.lowercase()
                 val accountUrl = runCatching { account.url }.getOrNull()
-                if ((scheme == "http" || scheme == "https") &&
+                val staysOnServer = (scheme == "http" || scheme == "https") &&
                     accountUrl != null && url.toString().startsWith(accountUrl)
-                ) {
-                    return false
-                }
-                return try {
-                    val intent = Intent(Intent.ACTION_VIEW, url).apply {
-                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                if (!staysOnServer) {
+                    try {
+                        val intent = Intent(Intent.ACTION_VIEW, url).apply {
+                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        }
+                        startActivity(intent)
+                    } catch (e: ActivityNotFoundException) {
+                        Log.w(TAG, "No app available to open $url", e)
                     }
-                    startActivity(intent)
-                    true
-                } catch (e: ActivityNotFoundException) {
-                    Log.w(TAG, "No app available to open $url", e)
-                    true
                 }
+                return !staysOnServer
             }
         }
     }
