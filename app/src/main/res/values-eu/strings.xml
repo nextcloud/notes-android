@@ -345,7 +345,6 @@
     <string name="widget_note_list_placeholder">Oharrik ez</string>
     <string name="widget_note_list_title">Oharren zerrenda</string>
     <string name="widget_single_note_note_not_found">Oharra ez da aurkitu</string>
-    <string name="widget_single_note_placeholder_tv">Oharra ez da aurkitu</string>
     <string name="widget_single_note_title">Ohar bakarra</string>
     <string name="write_email">Bidali mezu elektronikoa</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Kontu bat gehitzeko internetera konektatuta egon behar duzu.</string>

@@ -350,7 +350,6 @@
     <string name="widget_note_list_placeholder">ノートがありません</string>
     <string name="widget_note_list_title">ノート一覧</string>
     <string name="widget_single_note_note_not_found">ノートが見つかりません</string>
-    <string name="widget_single_note_placeholder_tv">ノートが見つかりません</string>
     <string name="widget_single_note_title">一つのノート</string>
     <string name="write_email">メールを送信</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">アカウントの追加にはインターネットへの接続が必要です</string>

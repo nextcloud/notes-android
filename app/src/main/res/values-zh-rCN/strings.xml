@@ -353,7 +353,6 @@
     <string name="widget_note_list_placeholder">没有笔记</string>
     <string name="widget_note_list_title">笔记列表</string>
     <string name="widget_single_note_note_not_found">未找到笔记</string>
-    <string name="widget_single_note_placeholder_tv">未找到笔记</string>
     <string name="widget_single_note_title">单个笔记</string>
     <string name="write_email">发送电子邮件</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">要添加账号，你必须连接到互联网。</string>

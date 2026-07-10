@@ -373,7 +373,6 @@
     <string name="widget_note_list_placeholder">Geen notities</string>
     <string name="widget_note_list_title">Notitielijst</string>
     <string name="widget_single_note_note_not_found">Notitie niet gevonden</string>
-    <string name="widget_single_note_placeholder_tv">Notitie niet gevonden</string>
     <string name="widget_single_note_title">Enkele notitie</string>
     <string name="write_email">Verstuur e-mail</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Je moet verbonden zijn met het Internet om een account toe te voegen.</string>

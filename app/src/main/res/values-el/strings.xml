@@ -324,7 +324,6 @@
     <string name="widget_note_list_placeholder">Καμία σημείωση</string>
     <string name="widget_note_list_title">Λίστα σημειώσεων</string>
     <string name="widget_single_note_note_not_found">Η σημείωση δεν βρέθηκε</string>
-    <string name="widget_single_note_placeholder_tv">Η σημείωση δεν βρέθηκε</string>
     <string name="widget_single_note_title">Απλή σημείωση</string>
     <string name="write_email">Αποστολή email</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Πρέπει να είστε συνδεμένοι στο ιντερνετ για να προσθέσετε λογαριασμό.</string>

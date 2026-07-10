@@ -341,7 +341,6 @@
     <string name="widget_note_list_placeholder">Ni zabeležk</string>
     <string name="widget_note_list_title">Seznam zabeležk</string>
     <string name="widget_single_note_note_not_found">Zabeležke ni mogoče najti</string>
-    <string name="widget_single_note_placeholder_tv">Zabeležke ni mogoče najti</string>
     <string name="widget_single_note_title">Samostojna zabeležka</string>
     <string name="write_email">Pošlji elektronsko sporočilo</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Za dodajanje računa mora biti vzpostavljena povezava z omrežjem.</string>

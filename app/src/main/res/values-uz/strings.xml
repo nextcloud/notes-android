@@ -350,7 +350,6 @@
     <string name="widget_note_list_placeholder">Qayd yo\'q</string>
     <string name="widget_note_list_title">Eslatmalar ro\'yxati</string>
     <string name="widget_single_note_note_not_found">Eslatma topilmadi</string>
-    <string name="widget_single_note_placeholder_tv">Eslatma topilmadi</string>
     <string name="widget_single_note_title">Yagona eslatma</string>
     <string name="write_email">Xabar yuborish</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Akkaunt qaydnomasini qo\'shish uchun siz internetga ulangan bo\'lishingiz kerak.</string>

@@ -378,7 +378,6 @@
     <string name="widget_note_list_placeholder">بدون یادداشت</string>
     <string name="widget_note_list_title">لیست یادداشت‌ها</string>
     <string name="widget_single_note_note_not_found">یادداشت یافت نشد</string>
-    <string name="widget_single_note_placeholder_tv">یادداشت یافت نشد</string>
     <string name="widget_single_note_title">یادداشت واحد</string>
     <string name="write_email">ارسال ایمیل</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">برای اضافه کردن حساب باید به اینترنت متصل شوید.</string>

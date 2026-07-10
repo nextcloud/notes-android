@@ -374,7 +374,6 @@
     <string name="widget_note_list_placeholder">Hakuna dokezo</string>
     <string name="widget_note_list_title">Orodha ya dokezo</string>
     <string name="widget_single_note_note_not_found">Dokezo halipo</string>
-    <string name="widget_single_note_placeholder_tv">Dokezo halipo</string>
     <string name="widget_single_note_title">Dokezo moja</string>
     <string name="write_email">Tuma barua pepe</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Ni lazima uunganishwe kwenye intaneti ili uongeze akaunti.</string>

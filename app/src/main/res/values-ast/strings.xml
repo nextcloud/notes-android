@@ -225,7 +225,7 @@
     <string name="widget_not_logged_in">Anicia la sesión en Notes enantes d\'usar esti widget</string>
     <string name="widget_note_list_placeholder">Nun hai nenguna nota</string>
     <string name="widget_note_list_title">Llista de notes</string>
-    <string name="widget_single_note_placeholder_tv">Nun s\'atopó nenguna nota</string>
+    <string name="widget_single_note_note_not_found">Nun s\'atopó nenguna nota</string>
     <string name="widget_single_note_title">Nota única</string>
     <string name="write_email">Unviar un corréu electrónicu</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Tienes de tar conectáu a internet p\'amestar una cuenta.</string>

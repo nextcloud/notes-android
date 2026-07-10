@@ -376,7 +376,6 @@
     <string name="widget_note_list_placeholder">Brak notatek</string>
     <string name="widget_note_list_title">Lista notatek</string>
     <string name="widget_single_note_note_not_found">Nie znaleziono notatki</string>
-    <string name="widget_single_note_placeholder_tv">Nie znaleziono notatki</string>
     <string name="widget_single_note_title">Pojedyncza notatka</string>
     <string name="write_email">Wyślij e-mail</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Aby dodać konto, musisz mieć połączenie z Internetem.</string>

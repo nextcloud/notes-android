@@ -370,7 +370,6 @@
     <string name="widget_note_list_placeholder">Нема белешки</string>
     <string name="widget_note_list_title">Листа белешки</string>
     <string name="widget_single_note_note_not_found">Белешка није нађена</string>
-    <string name="widget_single_note_placeholder_tv">Белешка није нађена</string>
     <string name="widget_single_note_title">Белешка</string>
     <string name="write_email">Пошаљи е-пошту</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Морате бити повезани на интернет да бисте додали налог.</string>

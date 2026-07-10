@@ -196,7 +196,6 @@
     <string name="widget_note_list_placeholder">Sin notas</string>
     <string name="widget_note_list_title">Lista de notas</string>
     <string name="widget_single_note_note_not_found">Nota no encontrada</string>
-    <string name="widget_single_note_placeholder_tv">Nota no encontrada</string>
     <string name="widget_single_note_title">Única nota</string>
     <string name="write_email">Enviar correo electrónico</string>
     <plurals name="ab_selected">

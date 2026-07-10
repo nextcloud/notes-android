@@ -330,7 +330,7 @@
     <string name="widget_not_logged_in">Моля, влезте в Notes преди да използвате този изпълним модул</string>
     <string name="widget_note_list_placeholder">Няма бележки</string>
     <string name="widget_note_list_title">Списък с бележки</string>
-    <string name="widget_single_note_placeholder_tv">Бележката не е открита</string>
+    <string name="widget_single_note_note_not_found">Бележката не е открита</string>
     <string name="widget_single_note_title">Единична бележка</string>
     <string name="write_email">Изпращане на имейл</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Трябва да сте свързани с интернет, за да добавите профил.</string>

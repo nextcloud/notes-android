@@ -378,7 +378,6 @@
     <string name="widget_note_list_placeholder">Nincsenek jegyzetek</string>
     <string name="widget_note_list_title">Jegyzetlista</string>
     <string name="widget_single_note_note_not_found">Jegyzet nem található</string>
-    <string name="widget_single_note_placeholder_tv">Jegyzet nem található</string>
     <string name="widget_single_note_title">Egyszeri jegyzet</string>
     <string name="write_email">E-mail küldése</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Internetkapcsolatra van szükség, hogy fiókot adjon hozzá.</string>

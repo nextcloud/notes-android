@@ -355,7 +355,6 @@
     <string name="widget_note_list_placeholder">Ingen notater</string>
     <string name="widget_note_list_title">Notatliste</string>
     <string name="widget_single_note_note_not_found">Notatet ble ikke funnet</string>
-    <string name="widget_single_note_placeholder_tv">Notatet ble ikke funnet</string>
     <string name="widget_single_note_title">Enkeltnotat</string>
     <string name="write_email">Send e-post</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Du må være koblet til internett for å kunne legge til en konto.</string>

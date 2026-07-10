@@ -379,7 +379,6 @@
     <string name="widget_note_list_title">Перелік нотаток</string>
     <string name="widget_single_note_loading">Завантаження нотатки ...</string>
     <string name="widget_single_note_note_not_found">Нотатку не знайдено</string>
-    <string name="widget_single_note_placeholder_tv">Нотатку не знайдено</string>
     <string name="widget_single_note_title">Одна нотатка</string>
     <string name="write_email">Запрошення</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Для додавання облікового запису потрібне з\'єднання з мережею.</string>

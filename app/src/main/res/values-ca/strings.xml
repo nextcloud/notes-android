@@ -343,7 +343,7 @@
     <string name="widget_not_logged_in">Inicieu la sessió a l\'aplicació Notes abans d\'utilitzar aquest giny</string>
     <string name="widget_note_list_placeholder">No hi ha notes</string>
     <string name="widget_note_list_title">Llista de notes</string>
-    <string name="widget_single_note_placeholder_tv">No s\'ha trobat la nota</string>
+    <string name="widget_single_note_note_not_found">No s\'ha trobat la nota</string>
     <string name="widget_single_note_title">Una nota</string>
     <string name="write_email">Enviar correu</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Heu de tenir connexió a Internet per a afegir un compte.</string>
