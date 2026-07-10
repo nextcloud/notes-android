@@ -320,7 +320,6 @@
     <string name="widget_note_list_placeholder">Nu există notițe </string>
     <string name="widget_note_list_title">Listă notițe</string>
     <string name="widget_single_note_note_not_found">Notiță nu a fost găsită </string>
-    <string name="widget_single_note_placeholder_tv">Notiță nu a fost găsită </string>
     <string name="widget_single_note_title">O singură notiță</string>
     <string name="write_email">Trimite email</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Trebuie să fii conectat la internet pentru a putea adăuga un cont.</string>

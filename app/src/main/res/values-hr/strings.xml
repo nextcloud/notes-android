@@ -378,7 +378,6 @@
     <string name="widget_note_list_placeholder">Nema bilješki</string>
     <string name="widget_note_list_title">Popis bilješki</string>
     <string name="widget_single_note_note_not_found">Bilješka nije pronađena</string>
-    <string name="widget_single_note_placeholder_tv">Bilješka nije pronađena</string>
     <string name="widget_single_note_title">Jedna bilješka</string>
     <string name="write_email">Pošalji poruku e-pošte</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Trebate uspostaviti internetsku vezu za dodavanje računa.</string>

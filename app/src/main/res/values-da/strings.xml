@@ -376,7 +376,6 @@
     <string name="widget_note_list_placeholder">Ingen noter</string>
     <string name="widget_note_list_title">Noteliste </string>
     <string name="widget_single_note_note_not_found">Note ikke fundet</string>
-    <string name="widget_single_note_placeholder_tv">Note ikke fundet</string>
     <string name="widget_single_note_title">Enkel note</string>
     <string name="write_email">Send e-mail</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Du skal være koblet på en internetforbindelse for at tilføje en konto.</string>

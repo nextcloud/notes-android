@@ -341,7 +341,6 @@
     <string name="widget_note_list_placeholder">No notes</string>
     <string name="widget_note_list_title">Note list</string>
     <string name="widget_single_note_note_not_found">Note not found</string>
-    <string name="widget_single_note_placeholder_tv">Note not found</string>
     <string name="widget_single_note_title">Single note</string>
     <string name="write_email">ელ.ფოსტის გაგზავნა</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">You have to be connected to the internet in order to add an account.</string>

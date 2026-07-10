@@ -191,7 +191,6 @@
     <string name="widget_note_list_placeholder">Cap de nòta</string>
     <string name="widget_note_list_title">Lista de nòtas</string>
     <string name="widget_single_note_note_not_found">Nòta pas trobada</string>
-    <string name="widget_single_note_placeholder_tv">Nòta pas trobada</string>
     <string name="widget_single_note_title">Sola nòta</string>
     <string name="write_email">Enviar email</string>
     <plurals name="ab_selected">

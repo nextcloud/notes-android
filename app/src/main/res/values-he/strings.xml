@@ -245,7 +245,6 @@
     <string name="widget_note_list_placeholder">אין פתקים</string>
     <string name="widget_note_list_title">רשימת פתקים</string>
     <string name="widget_single_note_note_not_found">לא נמצא פתק</string>
-    <string name="widget_single_note_placeholder_tv">לא נמצא פתק</string>
     <string name="widget_single_note_title">פתק בודד</string>
     <string name="write_email">שליחת דואר אלקטרוני</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">על המכשיר שלך להיות מחובר לאינטרנט כדי שיתאפשר לך להוסיף חשבון.</string>

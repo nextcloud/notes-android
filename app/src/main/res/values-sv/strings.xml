@@ -362,7 +362,6 @@
     <string name="widget_note_list_placeholder">Inga anteckningar</string>
     <string name="widget_note_list_title">Anteckningslista</string>
     <string name="widget_single_note_note_not_found">Anteckning hittades inte</string>
-    <string name="widget_single_note_placeholder_tv">Anteckning hittades inte</string>
     <string name="widget_single_note_title">Enstaka anteckning</string>
     <string name="write_email">Skicka e-post</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Du måste vara ansluten till internet för att lägga till ett konto.</string>

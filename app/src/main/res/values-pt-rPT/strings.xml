@@ -366,7 +366,6 @@
     <string name="widget_note_list_placeholder">Sem anotações</string>
     <string name="widget_note_list_title">Lista de notas</string>
     <string name="widget_single_note_note_not_found">Nota não encontrada</string>
-    <string name="widget_single_note_placeholder_tv">Nota não encontrada</string>
     <string name="widget_single_note_title">Nota única</string>
     <string name="write_email">Enviar mensagem</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Você deve estar conectado à Internet para adicionar uma conta. </string>

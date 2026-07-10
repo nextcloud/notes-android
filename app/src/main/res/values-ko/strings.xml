@@ -334,7 +334,6 @@
     <string name="widget_note_list_placeholder">메모 없음</string>
     <string name="widget_note_list_title">메모 목록</string>
     <string name="widget_single_note_note_not_found">메모 없음</string>
-    <string name="widget_single_note_placeholder_tv">메모 없음</string>
     <string name="widget_single_note_title">메모 1개</string>
     <string name="write_email">이메일 보내기</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">인터넷에 연결되어 있어야만 계정을 추가할 수 있습니다.</string>

@@ -378,7 +378,6 @@
     <string name="widget_note_list_placeholder">Herhangi bir not yok</string>
     <string name="widget_note_list_title">Not listesi</string>
     <string name="widget_single_note_note_not_found">Not bulunamadı</string>
-    <string name="widget_single_note_placeholder_tv">Not bulunamadı</string>
     <string name="widget_single_note_title">Tek not</string>
     <string name="write_email">E-posta gönder</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Bir hesap ekleyebilmeniz için çalışan bir İnternet bağlantınız olmalı.</string>

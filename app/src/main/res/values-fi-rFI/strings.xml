@@ -338,7 +338,6 @@
     <string name="widget_note_list_placeholder">Ei muistiinpanoja</string>
     <string name="widget_note_list_title">Muistiinpanolista</string>
     <string name="widget_single_note_note_not_found">Muistiinpanoa ei löytynyt</string>
-    <string name="widget_single_note_placeholder_tv">Muistiinpanoa ei löytynyt</string>
     <string name="widget_single_note_title">Yksittäinen muistiinpano</string>
     <string name="write_email">Lähetä sähköposti</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Sinun tulee olla yhteydessä internetiin, jotta voit lisätä tilin.</string>
