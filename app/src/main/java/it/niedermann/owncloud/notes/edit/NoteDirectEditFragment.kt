@@ -7,6 +7,8 @@
 package it.niedermann.owncloud.notes.edit
 
 import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.net.http.SslError
 import android.os.Bundle
 import android.util.Log
@@ -301,6 +303,28 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
                 } else {
                     super.onReceivedSslError(view, handler, error)
                 }
+            }
+
+            override fun shouldOverrideUrlLoading(
+                view: WebView?,
+                request: WebResourceRequest?,
+            ): Boolean {
+                val url = request?.url ?: return false
+                val scheme = url.scheme?.lowercase()
+                val accountUrl = runCatching { account.url }.getOrNull()
+                val staysOnServer = (scheme == "http" || scheme == "https") &&
+                    accountUrl != null && url.toString().startsWith(accountUrl)
+                if (!staysOnServer) {
+                    try {
+                        val intent = Intent(Intent.ACTION_VIEW, url).apply {
+                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        }
+                        startActivity(intent)
+                    } catch (e: ActivityNotFoundException) {
+                        Log.w(TAG, "No app available to open $url", e)
+                    }
+                }
+                return !staysOnServer
             }
         }
     }
