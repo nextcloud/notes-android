@@ -106,6 +106,7 @@ import it.niedermann.owncloud.notes.main.items.list.NotesListViewItemTouchHelper
 import it.niedermann.owncloud.notes.main.items.section.SectionItemDecoration;
 import it.niedermann.owncloud.notes.main.items.selection.ItemSelectionTracker;
 import it.niedermann.owncloud.notes.main.menu.MenuAdapter;
+import it.niedermann.owncloud.notes.main.navigation.CategoryExpandState;
 import it.niedermann.owncloud.notes.main.navigation.NavigationAdapter;
 import it.niedermann.owncloud.notes.main.navigation.NavigationClickListener;
 import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
@@ -690,18 +691,12 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
             @Override
             public void onIconClick(NavigationItem item) {
-                final var expandedCategoryLiveData = mainViewModel.getExpandedCategory();
-                expandedCategoryLiveData.observe(MainActivity.this, expandedCategory -> {
-                    if (item.icon == NavigationAdapter.ICON_MULTIPLE && !item.label.equals(expandedCategory)) {
-                        mainViewModel.postExpandedCategory(item.label);
-                        selectItem(item, false);
-                    } else if (item.icon == NavigationAdapter.ICON_MULTIPLE || item.icon == NavigationAdapter.ICON_MULTIPLE_OPEN && item.label.equals(expandedCategory)) {
-                        mainViewModel.postExpandedCategory(null);
-                    } else {
-                        onItemClick(item);
-                    }
-                    expandedCategoryLiveData.removeObservers(MainActivity.this);
-                });
+                if (item.expandState != CategoryExpandState.NOT_EXPANDABLE
+                        && item instanceof NavigationItem.CategoryNavigationItem categoryItem) {
+                    mainViewModel.toggleExpandedCategory(categoryItem.category);
+                } else {
+                    onItemClick(item);
+                }
             }
         });
         adapterCategories.setSelectedItem(ADAPTER_KEY_RECENT);
