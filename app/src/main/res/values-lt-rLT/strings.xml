@@ -235,7 +235,7 @@
     <string name="note_share_activity_icon_content_description">užrašo bendrinimo piktograma</string>
     <string name="note_share_activity_more_icon_content_description">papildomų bendrinimo parinkčių piktograma</string>
     <string name="note_share_activity_resharing_not_allowed">Patvrtinta politika arba leidimai neleidžia pakartotinai bendrinti</string>
-    <string name="note_share_activity_search_text">Vardas, „Federated Cloud“ ID arba el. pašto adresas…</string>
+    <string name="note_share_activity_search_text">Vardas, federacinės debesijos ID arba el. pašto adresas…</string>
     <string name="note_share_activity_send_copy_to">Siųsti kopiją į</string>
     <string name="note_share_activity_share_icon_content_description">užrašo bendrinimo piktograma</string>
     <string name="note_share_activity_share_link">Bendrinimo nuoroda</string>
