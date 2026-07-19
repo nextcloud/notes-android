@@ -256,6 +256,7 @@
     <string name="settings_theme_title">Θέμα</string>
     <string name="settings_wifi_only">Συγχρονισμός μόνο με Wi-Fi</string>
     <string name="share">Διαμοιρασμός</string>
+    <string name="share_delete_link">Διαγραφή συνδέσμου</string>
     <string name="share_dialog_title">Διαμοιρασμός</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Λήγει στις %1$s</string>
