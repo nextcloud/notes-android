@@ -35,16 +35,16 @@
         <item>@string/noteMode_remember_last</item>
     </string-array>
 
-    <string-array name="fontSize_entries">
-        <item>Small</item>
-        <item>Medium</item>
-        <item>Large</item>
+    <string-array name="fontSize_entries" translatable="false">
+        <item>@string/fontSize_small</item>
+        <item>@string/fontSize_medium</item>
+        <item>@string/fontSize_large</item>
     </string-array>
 
-    <string-array name="darkmode_entries">
-        <item>Light</item>
-        <item>Dark</item>
-        <item>System Default</item>
+    <string-array name="darkmode_entries" translatable="false">
+        <item>@string/darkmode_light</item>
+        <item>@string/darkmode_dark</item>
+        <item>@string/darkmode_system_default</item>
     </string-array>
 
     <string-array name="settings_file_suffixes">
