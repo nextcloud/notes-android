@@ -60,13 +60,15 @@ class SingleNoteWidget : AppWidgetProvider() {
     private fun updateAppWidget(context: Context, awm: AppWidgetManager, appWidgetIds: IntArray) {
         val repo = NotesRepository.getInstance(context)
         appWidgetIds.forEach { appWidgetId ->
-            repo.getSingleNoteWidgetData(appWidgetId)?.let { data ->
-                val pendingIntent = getPendingIntent(context, appWidgetId)
-                val serviceIntent = getServiceIntent(context, appWidgetId)
-                val views = getRemoteViews(context, pendingIntent, serviceIntent)
-                awm.run {
-                    updateAppWidget(appWidgetId, views)
-                    notifyAppWidgetViewDataChanged(appWidgetId, R.id.single_note_widget_lv)
+            executor.submit {
+                repo.getSingleNoteWidgetData(appWidgetId)?.let {
+                    val pendingIntent = getPendingIntent(context, appWidgetId)
+                    val serviceIntent = getServiceIntent(context, appWidgetId)
+                    val views = getRemoteViews(context, pendingIntent, serviceIntent)
+                    awm.run {
+                        updateAppWidget(appWidgetId, views)
+                        notifyAppWidgetViewDataChanged(appWidgetId, R.id.single_note_widget_lv)
+                    }
                 }
             }
         }
