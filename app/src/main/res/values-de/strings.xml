@@ -101,6 +101,9 @@
     <string name="context_based_formatting">Pop-up für die kontextbasierte Formatierung</string>
     <string name="copy_link">Link kopieren</string>
     <string name="could_not_retrieve_shares">Freigaben konnten nicht abgerufen werden</string>
+    <string name="darkmode_dark">Dunkel</string>
+    <string name="darkmode_light">Hell</string>
+    <string name="darkmode_system_default">Systemstandard</string>
     <string name="delete_share">Freigabe löschen</string>
     <string name="direct_editing_error">Fehler beim Laden des Rich-Bearbeitungsmodus</string>
     <string name="dismiss">Verwerfen</string>
@@ -144,6 +147,9 @@
     <string name="failed_update_ui">Oberfläche konnte nicht aktualisiert werden</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Keine App zum Auswählen von Kontakten verfügbar</string>
     <string name="file_list_seconds_ago">Gerade eben</string>
+    <string name="fontSize_large">Groß</string>
+    <string name="fontSize_medium">Mittel</string>
+    <string name="fontSize_small">Klein</string>
     <string name="formatting_help_cbf_body_1">Ein wichtiges Designziel der Notes-App ist die Bereitstellung eines ablenkungsfreien Werkzeugs. Sie können Ihre Texte mit Markdown formatieren. Für verschiedene der unten genannten Beispiele können Sie Verknüpfungen verwenden, um Ihre Notizen zu formatieren, ohne die folgenden Codes eingeben zu müssen.</string>
     <string name="formatting_help_cbf_body_2">Wählen Sie einfach einen Textbereich aus oder tippen Sie an einer beliebigen Stelle auf den Cursor und Sie erhalten ein Pop-up-Menü, das neben den Standardeinträgen %1$s, %2$s, %3$s auch Einträge wie %4$s oder %5$s enthält.</string>
     <string name="formatting_help_cbf_title">Kontextbasierte Formatierung</string>

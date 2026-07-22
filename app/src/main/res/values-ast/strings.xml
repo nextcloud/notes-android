@@ -69,6 +69,8 @@
     <string name="common_loading">Cargando…</string>
     <string name="common_ok">Normal</string>
     <string name="copy_link">Copiar l\'enllaz</string>
+    <string name="darkmode_dark">Escuridá</string>
+    <string name="darkmode_light">Claridá</string>
     <string name="delete_share">Desaniciar la compartición</string>
     <string name="direct_editing_error">Hebo un error mentanto se cargaba la edición arriquecida</string>
     <string name="dismiss">Escartar</string>

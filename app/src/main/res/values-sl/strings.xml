@@ -99,6 +99,9 @@
     <string name="context_based_formatting">Pojavno okno vsebinskega oblikovanja</string>
     <string name="copy_link">Kopiraj povezavo</string>
     <string name="could_not_retrieve_shares">Naslovov mest souporabe ni mogoče pridobiti</string>
+    <string name="darkmode_dark">Temna</string>
+    <string name="darkmode_light">Svetla</string>
+    <string name="darkmode_system_default">Sistemsko privzeto</string>
     <string name="delete_share">Izbriši mesto souporabe</string>
     <string name="direct_editing_error">Napaka nalaganja oblikovnega urejevalnika</string>
     <string name="dismiss">Prekliči</string>
@@ -139,6 +142,9 @@
     <string name="error_unknown">Prišlo je do neznane napake.</string>
     <string name="failed_update_ui">Posodabljanje uporabniškega vmesnika je spodletelo</string>
     <string name="file_list_seconds_ago">pred nekaj sekundami</string>
+    <string name="fontSize_large">Velika</string>
+    <string name="fontSize_medium">Srednja</string>
+    <string name="fontSize_small">Majhna</string>
     <string name="formatting_help_cbf_body_1">Najpomembnejša funkcija programa Notes je enostavno in hitro beleženje besedila, ki ga je mogoče tudi oblikovati z oblikovnim jezikom Markdown. Za spodaj omenjeno oblikovanje, je mogoče uporabiti tipkovne bližnjice, kar še dodatno poenostavi vnos..</string>
     <string name="formatting_help_cbf_body_2">Enostavno izberite besedilo, ali pa pritisnite na kazalko, in pojavil se bo meni, ki vključuje ob privzetih možnosti %1$s, %2$s, %3$s tudi take, kot sta %4$s in %5$s.</string>
     <string name="formatting_help_cbf_title">Vsebinsko oblikovanje</string>

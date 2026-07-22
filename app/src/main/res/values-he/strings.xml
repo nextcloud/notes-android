@@ -79,6 +79,9 @@
     <string name="common_ok">בסדר</string>
     <string name="copy_link">העתקת קישור</string>
     <string name="could_not_retrieve_shares">לא ניתן למשוך את השיתופים</string>
+    <string name="darkmode_dark">כהה</string>
+    <string name="darkmode_light">בהירה</string>
+    <string name="darkmode_system_default">ברירת מחדל של המערכת</string>
     <string name="dismiss">שחרור</string>
     <string name="dontClear">לא לפנות</string>
     <string name="ecosystem_apps_display_files">קבצים</string>
@@ -99,6 +102,9 @@
     <string name="error_synchronization">הסנכרון נכשל</string>
     <string name="error_unknown">אירעה שגיאה בלתי ידועה.</string>
     <string name="file_list_seconds_ago">לפני מספר שניות</string>
+    <string name="fontSize_large">גדול</string>
+    <string name="fontSize_medium">בינוני</string>
+    <string name="fontSize_small">קטן</string>
     <string name="formatting_help_cbf_title">עיצוב מבוסס הקשר</string>
     <string name="formatting_help_checkboxes_body_1">כדי ליצור תיבת סימון, יש להשתמש ברשימה עם סוגריים מרובעים אחריה</string>
     <string name="formatting_help_checkboxes_body_2">פריט 1</string>

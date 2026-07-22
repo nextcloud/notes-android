@@ -69,6 +69,7 @@
     <string name="common_ok">Aceptar</string>
     <string name="copy_link">Copiar enlace</string>
     <string name="could_not_retrieve_shares">No se pudieron obtener los recursos compartidos</string>
+    <string name="darkmode_dark">Oscuro</string>
     <string name="delete_share">Borrar recurso compartido</string>
     <string name="dismiss">Descartar</string>
     <string name="dnd">No molestar</string>
@@ -96,6 +97,7 @@
     <string name="error_synchronization">La sincronización falló</string>
     <string name="failed_update_ui">Error al actualizar la interfaz gráfica</string>
     <string name="file_list_seconds_ago">hace algunos segundos</string>
+    <string name="fontSize_medium">Medio</string>
     <string name="formatting_help_checkboxes_title">Casillas de verificación</string>
     <string name="formatting_help_images_title">Imágenes</string>
     <string name="formatting_help_text_title">Texto</string>

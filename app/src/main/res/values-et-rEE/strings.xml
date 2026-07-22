@@ -101,6 +101,8 @@
     <string name="context_based_formatting">Kontekstikohane hüpikaken vorminduse jaoks.</string>
     <string name="copy_link">Kopeeri link</string>
     <string name="could_not_retrieve_shares">Jaosmeedia laadimine ei õnnestunud</string>
+    <string name="darkmode_dark">Tume kujundus</string>
+    <string name="darkmode_light">Hele kujundus</string>
     <string name="delete_share">Kustuta jagamine</string>
     <string name="direct_editing_error">Viga vormindatud teksti muutmisvaate laadimisel</string>
     <string name="dismiss">Loobu</string>
@@ -144,6 +146,8 @@
     <string name="failed_update_ui">Kasutajaliidese uuendamine ei õnnestunud</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Kontaktide valimiseks ei leidu sobilikku rakendust</string>
     <string name="file_list_seconds_ago">sekundit tagasi</string>
+    <string name="fontSize_large">Suur</string>
+    <string name="fontSize_medium">Keskmine</string>
     <string name="formatting_help_cbf_body_1">Märkmete rakenduse loomisel oli peamine eesmärk pakkuda võimalikult lihtsat tarvikut. Kuigi jah, sa saad oma tekste ka Markdowniga vormindada. Erinevate allpool toodud näidete puhul saad kasutada kiirklahve ja nii ei pea oma märkmete koostamisel neid koode sisestama.</string>
     <string name="formatting_help_cbf_body_2">Lihtsalt vali tekstivahemik või klõpsi kursor suvalisse kohta tekstis ning näed hüpikmenüüd, milles vaikimisi kirjete kõrval on ka %1$s, %2$s, %3$s kirjed nagu %4$s või %5$s.</string>
     <string name="formatting_help_cbf_title">Kontekstikohane vormindus</string>

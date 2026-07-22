@@ -100,6 +100,9 @@
     <string name="context_based_formatting">Искачући облачић форматирања у зависности од контекста</string>
     <string name="copy_link">Копирај везу</string>
     <string name="could_not_retrieve_shares">Не могу да добавим дељења</string>
+    <string name="darkmode_dark">тамна</string>
+    <string name="darkmode_light">светла</string>
+    <string name="darkmode_system_default">системска</string>
     <string name="delete_share">Обриши дељење</string>
     <string name="direct_editing_error">Грешка приликом учитавања детаљног уређивања</string>
     <string name="dismiss">Одбаци</string>
@@ -143,6 +146,9 @@
     <string name="failed_update_ui">Неуспело освежавање сучеља</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Нема апликације којом могу да се изаберу контакти</string>
     <string name="file_list_seconds_ago">пре неколико секунди</string>
+    <string name="fontSize_large">Велики</string>
+    <string name="fontSize_medium">Средњи</string>
+    <string name="fontSize_small">Мали</string>
     <string name="formatting_help_cbf_body_1">Главни циљ дизајна апликације Белешки је био да пружи алат који не стаје на пут. А моћи ћете и да форматирате текст Markdown синтактом. За разне од долепоменутих примера можете да користите и пречице, па можете форматирати белешке без куцања кодова испод.</string>
     <string name="formatting_help_cbf_body_2">Само одаберите опсег текста или тапните курсором на било које место и добићете искачући мени који садржи подразумеване уносе %1$s, %2$s, %3$s уносе као %4$s или%5$s.</string>
     <string name="formatting_help_cbf_title">Форматирање у зависности од контекста</string>

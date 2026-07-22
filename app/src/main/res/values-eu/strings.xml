@@ -97,6 +97,9 @@
     <string name="context_based_formatting">Testuinguruan oinarritutako formateatze leiho gainerakorra </string>
     <string name="copy_link">Kopiatu esteka</string>
     <string name="could_not_retrieve_shares">Ezin izan dira partekatzeak berreskuratu</string>
+    <string name="darkmode_dark">Iluna</string>
+    <string name="darkmode_light">Argia</string>
+    <string name="darkmode_system_default">Sistemaren ezarpen lehenetsiak</string>
     <string name="delete_share">Ezabatu partekatzea</string>
     <string name="direct_editing_error">Errore bat gertatu da edizio aberatsa kargatzean</string>
     <string name="dismiss">Ezikusi</string>
@@ -138,6 +141,9 @@
     <string name="failed_update_ui">Erabiltzaile Interfazea (UI) eguneratzeak huts egin du</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Ez dago eskuragarri kontaktuak hautatzeko aplikaziorik</string>
     <string name="file_list_seconds_ago">duela segundo batzuk</string>
+    <string name="fontSize_large">Handia</string>
+    <string name="fontSize_medium">Ertaina</string>
+    <string name="fontSize_small">Txikia</string>
     <string name="formatting_help_cbf_body_1">Oharrak aplikazioko diseinuaren erronka handi bat arreta-galtzerik gabeko tresna eskaintzea da. Baina aukera dago Markdown erabiliz testuei formatua emateko. Behean adierazitako adibide anitzetan, lasterbideak erabil daitezke oharrei formatua emateko beheko kodeak idatzi gabe.</string>
     <string name="formatting_help_cbf_body_2">Testuaren zati bat hautatu edo sakatu kurtsorea edozein tokitan eta popup menua agertuko zaizu, %1$s, %2$s eta %3$s bezalako sarrera lehenetsien ondoan %4$seta%5$s bezalakoak ere badituena.</string>
     <string name="formatting_help_cbf_title">Testuinguruan oinarritutako formatu ematea</string>

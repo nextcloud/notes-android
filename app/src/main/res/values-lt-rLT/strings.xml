@@ -101,6 +101,9 @@
     <string name="context_based_formatting">Kontekstu pagrįstas iššokantis formatavimo langas</string>
     <string name="copy_link">Kopijuoti nuorodą</string>
     <string name="could_not_retrieve_shares">Nepavyko gauti bendrinimų</string>
+    <string name="darkmode_dark">Tamsus</string>
+    <string name="darkmode_light">Šviesus</string>
+    <string name="darkmode_system_default">Sistemos numatytasis</string>
     <string name="delete_share">Ištrinti bendrinimą</string>
     <string name="direct_editing_error">Įkeliant išplėstinio redagavimo funkciją įvyko klaida</string>
     <string name="dismiss">Atmesti</string>
@@ -144,6 +147,9 @@
     <string name="failed_update_ui">Nepavyko atnaujinti vartotojo sąsajos</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Nėra programėlės, kuria būtų galima pasirinkti kontaktus</string>
     <string name="file_list_seconds_ago">prieš keletą sekundžių</string>
+    <string name="fontSize_large">Didelis</string>
+    <string name="fontSize_medium">Vidutinis</string>
+    <string name="fontSize_small">Mažas</string>
     <string name="formatting_help_cbf_body_1">Vienas iš pagrindinių „Notes“ programėlės kūrimo tikslų – sukurti įrankį, kuris neatsitrauktų dėmesio. Tačiau tekstą galėsite formatuoti naudodami „Markdown“. Daugeliu toliau pateiktų pavyzdžių atveju galite naudoti sparčiuosius klavišus, kad formatuotumėte užrašus be būtinybės įvesti žemiau nurodytus kodus.</string>
     <string name="formatting_help_cbf_body_2">Tiesiog pasirinkite teksto rėžį arba bakstelėkite žymeklį bet kurioje vietoje ir atsiras meniu, kuriame yra numatytieji įrašai %1$s, %2$s, %3$s, %4$s arba %5$s.</string>
     <string name="formatting_help_cbf_title">Kontekstu pagrįstas formatavimas</string>

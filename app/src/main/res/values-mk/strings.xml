@@ -64,6 +64,9 @@
     <string name="common_ok">Добро</string>
     <string name="copy_link">Копирај линк</string>
     <string name="could_not_retrieve_shares">Неможе да се превземат споделувањата</string>
+    <string name="darkmode_dark">Темна</string>
+    <string name="darkmode_light">Светла</string>
+    <string name="darkmode_system_default">Како од системот</string>
     <string name="delete_share">Избриши споделување</string>
     <string name="dismiss">Отфрли</string>
     <string name="dnd">Не вознемирувај</string>
@@ -81,6 +84,8 @@
     <string name="error_no_network">Нема мрежна конекција</string>
     <string name="error_synchronization">Неуспешно синхронизирање</string>
     <string name="file_list_seconds_ago">пред неколку секунди</string>
+    <string name="fontSize_large">Голем</string>
+    <string name="fontSize_small">Мал</string>
     <string name="formatting_help_checkboxes_title">Полиња за избирање</string>
     <string name="formatting_help_images_title">Слики</string>
     <string name="formatting_help_lists_title">Листи</string>

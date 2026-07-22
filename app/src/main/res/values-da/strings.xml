@@ -101,6 +101,9 @@
     <string name="context_based_formatting">Kontekstbaseret formatering popover</string>
     <string name="copy_link">Kopiér link</string>
     <string name="could_not_retrieve_shares">Kunne ikke hente delte drev</string>
+    <string name="darkmode_dark">Mørk</string>
+    <string name="darkmode_light">Lys</string>
+    <string name="darkmode_system_default">System Standard</string>
     <string name="delete_share">Slet deling</string>
     <string name="direct_editing_error">Fejl under indlæsning af udvidet redigering</string>
     <string name="dismiss">Afvis</string>
@@ -144,6 +147,9 @@
     <string name="failed_update_ui">Formåede ikke at opdatere UI</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Ingen app tilgængelig til at vælge kontakter</string>
     <string name="file_list_seconds_ago">sekunder siden</string>
+    <string name="fontSize_large">Stor</string>
+    <string name="fontSize_medium">Medium</string>
+    <string name="fontSize_small">Lille</string>
     <string name="formatting_help_cbf_body_1">Et vigtigt designmål med Noter-appen er at give et distraktionsfrit værktøj. Selvom du vil være i stand til at formatere dine tekster med Markdown. Til forskellige af de nedenfor nævnte eksempler kan du bruge genveje, så du kan formatere dine noter uden at indtaste koderne nedenfor.</string>
     <string name="formatting_help_cbf_body_2">Du skal blot vælge en række tekst eller trykke på din markør på en hvilken som helst position, og du vil få en pop op-menu, som indeholder ud for standardindgangene %1$s, %2$s, %3$s poster som %4$s or %5$s.</string>
     <string name="formatting_help_cbf_title">Kontekstbaseret formatering</string>

@@ -98,6 +98,8 @@
     <string name="context_based_formatting">Popover de formato contextual</string>
     <string name="copy_link">Copiar liga</string>
     <string name="could_not_retrieve_shares">No se pudieron recuperar los compartidos</string>
+    <string name="darkmode_dark">Oscuro</string>
+    <string name="darkmode_light">Claro</string>
     <string name="direct_editing_error">Error al cargar la edición enriquecida</string>
     <string name="dismiss">Descartar</string>
     <string name="dnd">No molestar</string>
@@ -133,6 +135,8 @@
     <string name="error_unknown">Ha ocurrido un error desconocido.</string>
     <string name="failed_update_ui">Fallo al actualizar la interfaz de usuario</string>
     <string name="file_list_seconds_ago">hace segundos</string>
+    <string name="fontSize_large">Grande</string>
+    <string name="fontSize_medium">Medio</string>
     <string name="formatting_help_cbf_body_1">Uno de los principales objetivos de diseño de la aplicación Notes es proporcionar una herramienta libre de distracciones. Aunque podrás dar formato a tus textos con Markdown. Para varios de los ejemplos mencionados a continuación, puedes utilizar atajos para dar formato a tus notas sin escribir los códigos a continuación.</string>
     <string name="formatting_help_cbf_body_2">Solo selecciona un rango de texto o toca tu cursor en cualquier posición y aparecerá un menú emergente que contiene, además de las entradas predeterminadas %1$s, %2$s, %3$s, entradas como %4$s o %5$s.</string>
     <string name="formatting_help_cbf_title">Formato contextual basado en el contexto</string>

@@ -98,6 +98,9 @@
     <string name="context_based_formatting">Context based formatting popover</string>
     <string name="copy_link">Copy link</string>
     <string name="could_not_retrieve_shares">Could not retrieve shares</string>
+    <string name="darkmode_dark">Dark</string>
+    <string name="darkmode_light">Light</string>
+    <string name="darkmode_system_default">System Default</string>
     <string name="delete_share">Delete share</string>
     <string name="direct_editing_error">Error while loading rich editing</string>
     <string name="dismiss">Dismiss</string>
@@ -138,6 +141,9 @@
     <string name="error_unknown">An unknown error has occurred.</string>
     <string name="failed_update_ui">Failed to update UI</string>
     <string name="file_list_seconds_ago">seconds ago</string>
+    <string name="fontSize_large">Large</string>
+    <string name="fontSize_medium">Medium</string>
+    <string name="fontSize_small">Small</string>
     <string name="formatting_help_cbf_body_1">A major design goal of the Notes app is to provide a distraction free tool. Though you will be able to format your texts with Markdown. For various of the below mentioned examples, you can use shortcuts so you can format your notes without typing in the codes below.</string>
     <string name="formatting_help_cbf_body_2">Just select a range of text or tap on your cursor at any position and you will get a popup menu which contains next to the default entries %1$s, %2$s, %3$s entries like %4$s or %5$s.</string>
     <string name="formatting_help_cbf_title">Context based formatting</string>

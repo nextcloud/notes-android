@@ -98,6 +98,9 @@
     <string name="context_based_formatting">Formatação baseada no contexto popover</string>
     <string name="copy_link">Copiar hiperligação</string>
     <string name="could_not_retrieve_shares">Não foi possível obter as partilhas</string>
+    <string name="darkmode_dark">Escuro</string>
+    <string name="darkmode_light">Claro</string>
+    <string name="darkmode_system_default">Padrão do Sistema</string>
     <string name="delete_share">Excluir compartilhamento</string>
     <string name="direct_editing_error">Erro ao carregar edição avançada</string>
     <string name="dismiss">Dispensar</string>
@@ -141,6 +144,9 @@
     <string name="failed_update_ui">Falha ao atualizar a IU</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Nenhum aplicativo disponível para selecionar contatos</string>
     <string name="file_list_seconds_ago">segundos atrás</string>
+    <string name="fontSize_large">Grande</string>
+    <string name="fontSize_medium">Médio</string>
+    <string name="fontSize_small">Pequena</string>
     <string name="formatting_help_cbf_body_1">Um dos principais objetivos de design do aplicativo Notes é fornecer uma ferramenta sem distrações. Então você pode formatar seus textos com o Markdown. Para vários dos exemplos mencionados abaixo, você pode usar atalhos para formatar suas anotações sem digitar os códigos abaixo.</string>
     <string name="formatting_help_cbf_body_2">Basta selecionar um intervalo de texto ou tocar no cursor em qualquer posição e você obterá um menu pop-up que contém ao lado das entradas padrão %1$s, %2$s, %3$s entradas como %4$s ou %5$s.</string>
     <string name="formatting_help_cbf_title">Formatação baseada em contexto</string>

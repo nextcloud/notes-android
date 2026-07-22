@@ -101,6 +101,8 @@
     <string name="context_based_formatting">Ventana emergente para formato basado en el contexto</string>
     <string name="copy_link">Copiar enlace</string>
     <string name="could_not_retrieve_shares">No se han podido recuperar los recursos compartidos</string>
+    <string name="darkmode_dark">Obscuro</string>
+    <string name="darkmode_light">Claro</string>
     <string name="delete_share">Eliminar recurso compartido</string>
     <string name="direct_editing_error">Error al cargar el modo de edición enriquecido</string>
     <string name="dismiss">Descartar</string>
@@ -144,6 +146,8 @@
     <string name="failed_update_ui">Fallo al actualizar la UI</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">No hay ninguna aplicación disponible para seleccionar contactos</string>
     <string name="file_list_seconds_ago">hace segundos</string>
+    <string name="fontSize_large">Grande</string>
+    <string name="fontSize_medium">Mediano</string>
     <string name="formatting_help_cbf_body_1">Un objetivo principal de diseño de la app Notas es ofrecer una herramienta libre de distracciones. Aunque podrás formatear tus textos con Markdown. Para varios de los ejemplos mencionados debajo, puedes usar atajos para formatear las notas sin escribir los códigos.</string>
     <string name="formatting_help_cbf_body_2">Simplemente, selecciona texto o pulsa en el cursor en cualquier posición y aparecerá un menú emergente que contiene junto a las entradas por defecto %1$s, %2$s,   %3$s otras como %4$s o %5$s,</string>
     <string name="formatting_help_cbf_title">Formato basado en el contexto</string>

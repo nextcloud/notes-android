@@ -99,6 +99,7 @@
     <string name="context_based_formatting">Sprettgluggi fyrir samhengisháða forsníðingu</string>
     <string name="copy_link">Afrita tengil</string>
     <string name="could_not_retrieve_shares">Tókst ekki að ná í sameignir</string>
+    <string name="darkmode_system_default">Sjálfgefið kerfi</string>
     <string name="delete_share">Eyða sameign</string>
     <string name="direct_editing_error">Villa við að hlaða inn sniðnum textabreytingum</string>
     <string name="dismiss">Hafna</string>
@@ -154,6 +155,9 @@
     <string name="failed_update_ui">Mistókst að uppfæra viðmótið</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Ekkert forrit tiltækt til að velja tengiliði</string>
     <string name="file_list_seconds_ago">sekúndum síðan</string>
+    <string name="fontSize_large">Stórt</string>
+    <string name="fontSize_medium">miðlungs</string>
+    <string name="fontSize_small">Lítið</string>
     <string name="formatting_help_cbf_body_1">Aðalmarkmið hönnunar Notes-minnispunktaforritsins er að búa til verkfæri án
  óþarfa truflana. Samt þannig að þú getir sniðið textann þinn með Markdown.
  Fyrir mörg af þeim dæmum sem sjást hér fyrir neðan, geturðu notað flýtilykla

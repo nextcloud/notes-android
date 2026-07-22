@@ -101,6 +101,9 @@
     <string name="context_based_formatting">Контекстне форматування</string>
     <string name="copy_link">Копіювати посилання</string>
     <string name="could_not_retrieve_shares">Не вдалося отримати спільні дані</string>
+    <string name="darkmode_dark">Темна</string>
+    <string name="darkmode_light">Світла</string>
+    <string name="darkmode_system_default">Системна</string>
     <string name="delete_share">Вилучити зі спільного доступу</string>
     <string name="direct_editing_error">Помилка під час завантаження форматованого редагування</string>
     <string name="dismiss">Сховати</string>
@@ -144,6 +147,9 @@
     <string name="failed_update_ui">Неможливо оновити інтерфейс</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Відсутній застосунок для вибору контактів</string>
     <string name="file_list_seconds_ago">кілька секунд тому</string>
+    <string name="fontSize_large">Великий</string>
+    <string name="fontSize_medium">Середній</string>
+    <string name="fontSize_small">Малий</string>
     <string name="formatting_help_cbf_body_1">Застосунок \"Нотатки\" надає можливість вести нотатки без відволікання уваги. Хоча ви зможете форматувати свої тексти за допомогою Markdown. Для різних із наведених нижче прикладів ви можете використовувати ярлики, щоб форматувати нотатки, не вводячи коди нижче.</string>
     <string name="formatting_help_cbf_body_2">Просто виберіть діапазон тексту або натисніть на курсор у будь-якій позиції, і ви отримаєте спливаюче меню, де поряд із типовими елементами %1$s, %2$s, %3$s містяться елементи на зразок %4$s або %5$s.</string>
     <string name="formatting_help_cbf_title">Контекстне форматування</string>

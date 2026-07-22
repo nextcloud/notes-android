@@ -101,6 +101,9 @@
     <string name="context_based_formatting">popover ya umbizo kulingana na muktadha</string>
     <string name="copy_link">Nakili kiungio</string>
     <string name="could_not_retrieve_shares">Haikuweza kurejesha shiriki</string>
+    <string name="darkmode_dark">Giza</string>
+    <string name="darkmode_light">Mwanga/nuru</string>
+    <string name="darkmode_system_default">Chaguomsingi ya Mfumo</string>
     <string name="delete_share">Futa kushiriki</string>
     <string name="direct_editing_error">Hitilafu wakati wa kupakia uhariri tajiri</string>
     <string name="dismiss">Tawanya</string>
@@ -144,6 +147,9 @@
     <string name="failed_update_ui">Imeshindwa kusasisha UI</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Hakuna programu inayopatikana ya kuchagua anwani</string>
     <string name="file_list_seconds_ago">sukunde zilizopita</string>
+    <string name="fontSize_large">Kubwa</string>
+    <string name="fontSize_medium">Kati</string>
+    <string name="fontSize_small">Ndogo</string>
     <string name="formatting_help_cbf_body_1">Lengo kuu la muundo wa programu ya Notes ni kutoa zana isiyo na usumbufu. Ingawa utaweza kuunda maandishi yako na Markdown. Kwa mifano mbalimbali iliyotajwa hapa chini, unaweza kutumia njia za mkato ili uweze kufomati madokezo yako bila kuandika misimbo iliyo hapa chini.</string>
     <string name="formatting_help_cbf_body_2">Chagua tu anuwai ya maandishi au uguse kishale chako katika nafasi yoyote na utapata menyu ibukizi ambayo ina karibu na maingizo chaguomsingi %1$s, %2$s, %3$s kama %4$s au %5$s.</string>
     <string name="formatting_help_cbf_title">Uumbizaji kulingana na muktadha</string>

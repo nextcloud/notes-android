@@ -101,6 +101,9 @@
     <string name="context_based_formatting">文字樣式選單</string>
     <string name="copy_link">複製連結</string>
     <string name="could_not_retrieve_shares">無法擷取分享</string>
+    <string name="darkmode_dark">深色</string>
+    <string name="darkmode_light">淺色</string>
+    <string name="darkmode_system_default">系統預設</string>
     <string name="delete_share">刪除分享</string>
     <string name="direct_editing_error">載入格式化編輯時發生錯誤</string>
     <string name="dismiss">忽略</string>
@@ -144,6 +147,9 @@
     <string name="failed_update_ui">更新使用者介面失敗</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">沒有應用程式可選取聯絡人</string>
     <string name="file_list_seconds_ago">秒前</string>
+    <string name="fontSize_large">大</string>
+    <string name="fontSize_medium">中</string>
+    <string name="fontSize_small">小</string>
     <string name="formatting_help_cbf_body_1">筆記應用程式的主要設計目標是提供無干擾的工具，但您還是可以使用 Markdown 設定文字樣式。對於下面提到的各種示例，您可以使用捷徑，便無需輸入以下代碼即可設定文字樣式。</string>
     <string name="formatting_help_cbf_body_2">只要選擇一些文字，或是在畫面上任一處點擊，就會跳出文字樣式選單，除了系統內建的操作%1$s、%2$s、%3$s，也包含其他操作，例如%4$s和%5$s。 </string>
     <string name="formatting_help_cbf_title">文字樣式選單</string>

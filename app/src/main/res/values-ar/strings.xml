@@ -99,6 +99,9 @@
     <string name="context_based_formatting">نافذة منبثقة للتنسيق القائم على السياق Context based formatting</string>
     <string name="copy_link">نسخ الرابط</string>
     <string name="could_not_retrieve_shares">لايمكن استعادة المشاركات</string>
+    <string name="darkmode_dark">داكن</string>
+    <string name="darkmode_light">فاتح</string>
+    <string name="darkmode_system_default">افتراضات النظام</string>
     <string name="delete_share">حذف المشاركة</string>
     <string name="direct_editing_error">خطأ في تحميل التحرير الغني rich editing</string>
     <string name="dismiss">الغاء</string>
@@ -142,6 +145,9 @@
     <string name="failed_update_ui">فشل تحديث UI</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">لا يوجد تطبيق لتحديد جهات الاتصال</string>
     <string name="file_list_seconds_ago">منذ ثوان مضت</string>
+    <string name="fontSize_large">كبير</string>
+    <string name="fontSize_medium">متوسط</string>
+    <string name="fontSize_small">صغير</string>
     <string name="formatting_help_cbf_body_1">يتمثل أحد أهداف التصميم الرئيسية لتطبيق Notes في توفير أداة خالية من التشتيت. على الرغم من أنك ستتمكن من تنسيق النصوص الخاصة بك باستخدام Markdown. بالنسبة للعديد من الأمثلة المذكورة أدناه ، يمكنك استخدام الاختصارات حتى تتمكن من تنسيق ملاحظاتك دون كتابة الرموز أدناه. </string>
     <string name="formatting_help_cbf_body_2">ما عليك سوى تحديد نطاق من النص أو النقر على المؤشر في أي موضع وستحصل على قائمة منبثقة تحتوي بالإضافة إلى مُداخلها الافتراضية %1$s, %2$s, %3$s مداخل مثل %4$s أو %5$s.</string>
     <string name="formatting_help_cbf_title">تنسيق بحسب السياق </string>

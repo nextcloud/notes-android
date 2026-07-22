@@ -101,6 +101,9 @@
     <string name="context_based_formatting">Xanela emerxente de formato baseado no contexto</string>
     <string name="copy_link">Copiar a ligazón</string>
     <string name="could_not_retrieve_shares">Non foi posíbel recuperar as comparticións</string>
+    <string name="darkmode_dark">Escuro</string>
+    <string name="darkmode_light">Claro</string>
+    <string name="darkmode_system_default">Predeterminado do sistema</string>
     <string name="delete_share">Eliminar o recurso compartido</string>
     <string name="direct_editing_error">Produciuse un erro ao cargar a edición mellorada</string>
     <string name="dismiss">Desbotar</string>
@@ -144,6 +147,9 @@
     <string name="failed_update_ui">Produciuse un fallo ao actualizar a IU</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Non hai ningunha aplicación dispoñíbel para seleccionar contactos</string>
     <string name="file_list_seconds_ago">segundos atrás</string>
+    <string name="fontSize_large">Grande</string>
+    <string name="fontSize_medium">Mediano</string>
+    <string name="fontSize_small">Pequeno</string>
     <string name="formatting_help_cbf_body_1">Un dos principais obxectivos de deseño da aplicación Notes é fornecer unha ferramenta sen distracción. Aínda que poderá formatar os seus textos con Markdown. Para varios dos exemplos mencionados deseguido, pode utilizar atallos de teclado para poder formatar as súas notas sen escribir os códigos de embaixo.</string>
     <string name="formatting_help_cbf_body_2">Só ten que seleccionar un intervalo de texto ou tocar no cursor en calquera posición e obterá un menú emerxente que contén xunto ás entradas predeterminadas %1$s, %2$s, %3$s entradas como %4$s ou %5$s.</string>
     <string name="formatting_help_cbf_title">Formatado baseado no contexto</string>
