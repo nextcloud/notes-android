@@ -13,7 +13,6 @@
         <item>@string/pref_value_mode_edit</item>
         <item>@string/pref_value_mode_preview</item>
         <item>@string/pref_value_mode_direct_edit</item>
-        <item>@string/pref_value_mode_last</item>
     </string-array>
 
     <string-array name="fontSize_values">
@@ -32,7 +31,6 @@
         <item>@string/noteMode_plain_edit</item>
         <item>@string/noteMode_plain_preview</item>
         <item>@string/noteMode_rich_edit</item>
-        <item>@string/noteMode_remember_last</item>
     </string-array>
 
     <string-array name="fontSize_entries" translatable="false">

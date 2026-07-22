@@ -372,6 +372,10 @@ public class NotesRepository {
         db.getNoteDao().updateScrollY(id, scrollY);
     }
 
+    public void updateNoteMode(long id, @Nullable String noteMode) {
+        db.getNoteDao().updateNoteMode(id, noteMode);
+    }
+
     public LiveData<List<CategoryWithNotesCount>> searchCategories$(Long accountId, String searchTerm) {
         return db.getNoteDao().searchCategories$(accountId, searchTerm);
     }
