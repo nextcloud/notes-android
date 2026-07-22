@@ -101,6 +101,9 @@
     <string name="context_based_formatting">Okno podręczne formatowania opartego na kontekście</string>
     <string name="copy_link">Kopiuj link</string>
     <string name="could_not_retrieve_shares">Nie udało się pobrać udziałów</string>
+    <string name="darkmode_dark">Ciemny</string>
+    <string name="darkmode_light">Jasny</string>
+    <string name="darkmode_system_default">Domyślne ustawienia systemu</string>
     <string name="delete_share">Usuń udostępnianie</string>
     <string name="direct_editing_error">Błąd podczas ładowania bogatej modyfikacji</string>
     <string name="dismiss">Odrzuć</string>
@@ -144,6 +147,9 @@
     <string name="failed_update_ui">Nie udało się zaktualizować UI</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Brak aplikacji dla wybranego kontaktu</string>
     <string name="file_list_seconds_ago">przed chwilą</string>
+    <string name="fontSize_large">Duża</string>
+    <string name="fontSize_medium">Średnio</string>
+    <string name="fontSize_small">Mała</string>
     <string name="formatting_help_cbf_body_1">Głównym celem projektowym aplikacji Notes jest zapewnienie narzędzia bez rozpraszania uwagi. Chociaż będziesz mógł sformatować swoje teksty za pomocą Markdown. W przypadku różnych wymienionych poniżej przykładów możesz użyć skrótów, dzięki czemu możesz sformatować swoje notatki bez wpisywania poniższych kodów.</string>
     <string name="formatting_help_cbf_body_2">Wystarczy wybrać zakres tekstu lub nacisnąć kursor w dowolnej pozycji, a pojawi się menu podręczne, które zawiera domyślne wpisy %1$s, %2$s, %3$s oraz takie jak %4$s lub %5$s.</string>
     <string name="formatting_help_cbf_title">Formatowanie kontekstowe</string>

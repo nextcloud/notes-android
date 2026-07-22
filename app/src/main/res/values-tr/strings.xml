@@ -101,6 +101,9 @@
     <string name="context_based_formatting">Bağlam tabanlı biçimlendirme açılan penceresi</string>
     <string name="copy_link">Bağlantıyı kopyala</string>
     <string name="could_not_retrieve_shares">Paylaşımlar alınamadı</string>
+    <string name="darkmode_dark">Koyu</string>
+    <string name="darkmode_light">Açık</string>
+    <string name="darkmode_system_default">Sistem varsayılanı</string>
     <string name="delete_share">Paylaşımı sil</string>
     <string name="direct_editing_error">Zengin düzenleme yüklenirken sorun çıktı</string>
     <string name="dismiss">Yok say</string>
@@ -144,6 +147,9 @@
     <string name="failed_update_ui">Kullanıcı arayüzü güncellenemedi</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Kişilerin seçilmesi için kullanılabilecek bir uygulama yok</string>
     <string name="file_list_seconds_ago">saniye önce</string>
+    <string name="fontSize_large">Büyük</string>
+    <string name="fontSize_medium">Orta</string>
+    <string name="fontSize_small">Küçük</string>
     <string name="formatting_help_cbf_body_1">Notlar uygulamasının önemli bir tasarım amacı, dikkat dağıtmayan bir araç sağlamaktır. Yine de yazılarınızı Markdown kullanarak biçimlendirebilirsiniz. Aşağıdaki örneklerden bazılarında kısayol tuşlarını kullanarak notlarınızı aşağıdaki kodları yazmadan biçimlendirebilirsiniz.</string>
     <string name="formatting_help_cbf_body_2">Yalnızca bir yazı bölümü seçerek ya da herhangi bir konumda imlece dokunarak varsayılan kayıtların yanında açılan menüden %1$s, %2$s, %3$s, %4$s gibi kayıtlar ya da %5$s seçenekleri kullanabilirsiniz.</string>
     <string name="formatting_help_cbf_title">Bağlama göre biçimlendirme</string>

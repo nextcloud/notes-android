@@ -79,6 +79,9 @@
     <string name="common_ok">AB</string>
     <string name="context_based_formatting">Bentana de formatatzione basada subra de su cuntestu</string>
     <string name="could_not_retrieve_shares">No at fatu a recuperare is cumpartziduras</string>
+    <string name="darkmode_dark">Iscuru</string>
+    <string name="darkmode_light">Craru</string>
+    <string name="darkmode_system_default">Predefinidu de sistema</string>
     <string name="delete_share">Cantzella sa cumpartzidura</string>
     <string name="dismiss">Iscarta</string>
     <string name="dnd">No istorbes</string>
@@ -114,6 +117,9 @@
     <string name="error_unknown">Ddoe at àpidu un\'errore disconnotu.</string>
     <string name="failed_update_ui">Non s\'est pòdidu agiornare UI</string>
     <string name="file_list_seconds_ago">segundos a immoe</string>
+    <string name="fontSize_large">Mannu</string>
+    <string name="fontSize_medium">Mesanu</string>
+    <string name="fontSize_small">Piticu</string>
     <string name="formatting_help_cbf_body_1">Un\'obietivu de importu mannu de s\'aplicatzione Note est su de frunire unu trastu sena distratziones. In cada manera, as a pòdere formatare is testos tuos cun Markdown. Pro is esempros inditados inoghe in bassu, podes impreare is curtziadòrgios pro formatare is notas sena digitare is còdighes in bassu.</string>
     <string name="formatting_help_cbf_body_2">Ti bastat de seletzionare un\'intervallu de testu o tocare su cursore in cale si siat positzione e at a apàrrere unu menu cun accanta is boghes predefinidas %1$s, %2$s, %3$s elementos comente%4$s o %5$s.</string>
     <string name="formatting_help_cbf_title">Formatatzione basada subra de su cuntenutu</string>

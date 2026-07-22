@@ -97,6 +97,9 @@
     <string name="context_based_formatting">Meniu ce conține formatare bazată pe context</string>
     <string name="copy_link">Copiază link</string>
     <string name="could_not_retrieve_shares">Nu am putut obține lista partajărilor</string>
+    <string name="darkmode_dark">Întunecat</string>
+    <string name="darkmode_light">Deschis</string>
+    <string name="darkmode_system_default">Setare implicită a sistemului</string>
     <string name="dismiss">Elimină</string>
     <string name="ecosystem_apps_display_more">Mai mult</string>
     <string name="ecosystem_apps_display_talk">Discuție</string>
@@ -133,6 +136,9 @@
     <string name="failed_update_ui">Nu s-a putut actualiza interfața</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Nicio aplicație disponibilă pentru a selecta contacte</string>
     <string name="file_list_seconds_ago">secunde în urmă</string>
+    <string name="fontSize_large">Mare</string>
+    <string name="fontSize_medium">Mediu</string>
+    <string name="fontSize_small">Mic</string>
     <string name="formatting_help_cbf_body_1">Un obiectiv de proiectare a aplicației Nextcloud este de a oferi o unealtă fără alte distracții, deși vei putea să formatezi textul cu libajul Markdown. Pentru unele dintre exemplele de mai jos poți folosi scurtături pentru a putea formata notițele tale fără să fie nevoie să introduci codurile de mai jos.</string>
     <string name="formatting_help_cbf_body_2">Doar selectează un text sau atinge cursorul în orice poziție si vei vedea un meniu popup ce conține lângă  %1$s, %2$s, %3$s și alte opțiuni precum %4$s sau %5$s.</string>
     <string name="formatting_help_cbf_title">Formatare bazata pe context</string>

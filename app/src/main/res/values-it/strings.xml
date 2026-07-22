@@ -98,6 +98,9 @@
     <string name="context_based_formatting">Finestra di formattazione basata sul contesto</string>
     <string name="copy_link">Copia collegamento</string>
     <string name="could_not_retrieve_shares">Impossibile recuperare le condivisioni</string>
+    <string name="darkmode_dark">Scuro</string>
+    <string name="darkmode_light">Chiaro</string>
+    <string name="darkmode_system_default">Predefiniti di sistema</string>
     <string name="delete_share">Elimina condivisione</string>
     <string name="direct_editing_error">Errore durante il caricamento della modifica avanzata</string>
     <string name="dismiss">Rifiuta</string>
@@ -140,6 +143,9 @@
     <string name="failed_update_ui">Aggiornamento interfaccia non riuscito</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Nessuna app disponibile per selezionare i contatti</string>
     <string name="file_list_seconds_ago">secondi fa</string>
+    <string name="fontSize_large">Grande</string>
+    <string name="fontSize_medium">Media</string>
+    <string name="fontSize_small">Piccola</string>
     <string name="formatting_help_cbf_body_1">Un obiettivo fondamentale dell\'applicazione Note è di fornire uno strumento senza distrazioni. Potrai comunque formattare i tuoi testi con Markdown. Per i vari esempi sotto indicati, puoi usare le scorciatoie in modo da formattare le note senza digitare i codici sottostanti.</string>
     <string name="formatting_help_cbf_body_2">Ti basta selezionare un intervallo di testo o toccare il cursore in qualsiasi posizione e apparirà un menu contenente accanto alle voci predefinite %1$s, %2$s, %3$s elementi come %4$s o %5$s.</string>
     <string name="formatting_help_cbf_title">Formattazione basata sul contesto</string>

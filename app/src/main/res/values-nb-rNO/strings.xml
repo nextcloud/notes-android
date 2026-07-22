@@ -99,6 +99,9 @@
     <string name="context_based_formatting">Popover for kontekstbasert formatering</string>
     <string name="copy_link">Kopier lenke</string>
     <string name="could_not_retrieve_shares">Kunne ikke hente ressursen</string>
+    <string name="darkmode_dark">Mørk</string>
+    <string name="darkmode_light">Lys</string>
+    <string name="darkmode_system_default">System standard</string>
     <string name="delete_share">Slett delt ressurs</string>
     <string name="direct_editing_error">Feil ved lasting av rik endringsmodus</string>
     <string name="dismiss">Avvis</string>
@@ -140,6 +143,9 @@
     <string name="failed_the_remove_share">Fjerning av deling feilet</string>
     <string name="failed_update_ui">Oppdatering av brukergrensesnittet feilet</string>
     <string name="file_list_seconds_ago">sekunder siden</string>
+    <string name="fontSize_large">Stor</string>
+    <string name="fontSize_medium">Medium</string>
+    <string name="fontSize_small">Liten</string>
     <string name="formatting_help_cbf_body_1">Et viktig designmål for Notater-appen er å tilby et distraksjonsfritt verktøy. Selv om du vil kunne formatere tekstene dine med Markdown. For de forskjellige eksemplene nedenfor, kan du bruke snarveier slik at du kan formatere notatene dine uten å skrive inn kodene nedenfor.</string>
     <string name="formatting_help_cbf_body_2">Bare velg et tekstområde eller trykk på markøren når som helst, så får du en popup-meny som inneholder ved siden av standardoppføringene %1$s, %2$s, %3$s oppføringer som %4$s eller %5$s.</string>
     <string name="formatting_help_cbf_title">Kontekstbasert formatering</string>

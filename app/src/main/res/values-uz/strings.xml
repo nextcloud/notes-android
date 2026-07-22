@@ -98,6 +98,9 @@
     <string name="common_ok">Yaxshi</string>
     <string name="context_based_formatting">Kontekstga asoslangan formatlash ochiladi</string>
     <string name="copy_link">Havolani nusxalash</string>
+    <string name="darkmode_dark">Qorong\'i</string>
+    <string name="darkmode_light">Nur</string>
+    <string name="darkmode_system_default">Tizim standarti</string>
     <string name="direct_editing_error">Keng tahrirni yuklashda xatolik yuz berdi</string>
     <string name="dismiss">Rad etish</string>
     <string name="dnd">Bezovta qilmang</string>
@@ -139,6 +142,9 @@
     <string name="failed_update_ui">Interfeys yangilanmadi</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Kontaktlarni tanlash uchun hech qanday ilova mavjud emas</string>
     <string name="file_list_seconds_ago">soniya avval</string>
+    <string name="fontSize_large">Katta</string>
+    <string name="fontSize_medium">O\'rta</string>
+    <string name="fontSize_small">Kichik</string>
     <string name="formatting_help_cbf_body_1">Eslatmalar ilovasining asosiy dizayn maqsadi chalg\'itmaydigan vositani taqdim etishdir. Belgilash qalami yordamida matnlaringizni formatlashingiz mumkin. Quyida keltirilgan turli misollar uchun yorliqlardan foydalanishingiz mumkin, shunda siz quyidagi kodlarni kiritmasdan qaydlaringizni formatlashingiz mumkin.</string>
     <string name="formatting_help_cbf_body_2">Shunchaki matn diapazonini tanlang yoki kursorni istalgan joyda bosing va siz %1$s, %2$s, %3$skabi standart yozuvlar yonida joylashgan qalqib chiquvchi menyuni olasiz, masalankabi standart yozuvlar yonida joylashgan qalqib chiquvchi menyuni olasiz, masalan %4$s yoki %5$s.</string>
     <string name="formatting_help_cbf_title">Kontekstga asoslangan formatlash</string>

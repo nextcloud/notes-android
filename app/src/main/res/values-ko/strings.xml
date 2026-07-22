@@ -96,6 +96,9 @@
     <string name="context_based_formatting">컨텍스트 기반의 양식 팝오버</string>
     <string name="copy_link">링크 주소 복사</string>
     <string name="could_not_retrieve_shares">공유를 가져올 수 없습니다.</string>
+    <string name="darkmode_dark">어둡게</string>
+    <string name="darkmode_light">밝게</string>
+    <string name="darkmode_system_default">시스템 기본값</string>
     <string name="delete_share">공유 삭제</string>
     <string name="dismiss">끄기</string>
     <string name="dnd">방해 없음</string>
@@ -135,6 +138,9 @@
     <string name="failed_update_ui">UI 업데이트 실패</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">연락처를 선택할 수 있는 앱이 없습니다</string>
     <string name="file_list_seconds_ago">몇 초 전</string>
+    <string name="fontSize_large">크게</string>
+    <string name="fontSize_medium">중간</string>
+    <string name="fontSize_small">작게</string>
     <string name="formatting_help_cbf_body_1">Notes 앱의 주요 디자인 목표는 방해가되지 않는 도구를 제공하는 것입니다. Markdown으로 텍스트 서식을 지정할 수 있지만. 아래에 언급 된 다양한 예의 경우 바로 가기를 사용하여 아래 코드를 입력하지 않고도 노트 서식을 지정할 수 있습니다.</string>
     <string name="formatting_help_cbf_body_2">텍스트 범위를 선택하거나 원하는 위치에서 커서를 누르면 기본 항목 %1$s, %2$s, %3$s 항목 옆에 %4$s 또는 %5$s와 같은 팝업 메뉴가 표시됩니다.</string>
     <string name="formatting_help_cbf_title">컨텍스트 기반 형식</string>

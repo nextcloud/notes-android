@@ -100,6 +100,9 @@
     <string name="context_based_formatting">مەزمۇننى ئاساس قىلغان فورماتلاش ئېغىزى</string>
     <string name="copy_link">ئۇلانمىنى كۆچۈرۈڭ</string>
     <string name="could_not_retrieve_shares">پاينى ئەسلىگە كەلتۈرەلمىدى</string>
+    <string name="darkmode_dark">قاراڭغۇ</string>
+    <string name="darkmode_light">نۇر</string>
+    <string name="darkmode_system_default">سىستېما سۈكۈتتىكى</string>
     <string name="delete_share">ھەمبەھىرنى ئۆچۈرۈڭ</string>
     <string name="direct_editing_error">مول تەھرىرلەشنى يۈكلەۋاتقاندا خاتالىق</string>
     <string name="dismiss">پەرۋا قىلما</string>
@@ -143,6 +146,9 @@
     <string name="failed_update_ui">UI نى يېڭىلاش مەغلۇب بولدى</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">ئالاقىداشلارنى تاللاش ئۈچۈن بىرەر ئەپ يوق</string>
     <string name="file_list_seconds_ago">سېكۇنت بۇرۇن</string>
+    <string name="fontSize_large">چوڭ</string>
+    <string name="fontSize_medium">ئوتتۇراھال</string>
+    <string name="fontSize_small">كىچىك</string>
     <string name="formatting_help_cbf_body_1">ئىزاھات دېتالىنىڭ ئاساسلىق لايىھىلەش نىشانى دىققىتى چېچىلىدىغان ھەقسىز قورال بىلەن تەمىنلەش. تېكىستلىرىڭىزنى Markdown بىلەن فورماتلىيالايسىز. تۆۋەندە تىلغا ئېلىنغان ھەر خىل مىساللار ئۈچۈن تېزلەتمىلەرنى ئىشلىتەلەيسىز ، شۇڭا تۆۋەندىكى كودلارنى يازماي تۇرۇپ خاتىرىڭىزنى فورماتلىيالايسىز.</string>
     <string name="formatting_help_cbf_body_2">ھەر قانداق ئورۇندىكى نۇر بەلگىسىنى تاللاڭ ياكى نۇر بەلگىسىنى چېكىڭ ، سۈكۈتتىكى تۈرلەرنىڭ يېنىدا %4$s ياكى %5$s دەك %1$s، %2$s، %3$s مەزمۇنلار بار.</string>
     <string name="formatting_help_cbf_title">مەزمۇننى ئاساس قىلغان فورماتلاش</string>

@@ -101,6 +101,9 @@
     <string name="context_based_formatting">Всплывающее окно контекстного форматирования</string>
     <string name="copy_link">Копировать ссылку</string>
     <string name="could_not_retrieve_shares">Не удалось получить перечень общих ресурсов</string>
+    <string name="darkmode_dark">Тёмное</string>
+    <string name="darkmode_light">Светлое</string>
+    <string name="darkmode_system_default">Система по умолчанию</string>
     <string name="delete_share">Удалить общий ресурс</string>
     <string name="direct_editing_error">Ошибка при загрузке форматированного редактирования</string>
     <string name="dismiss">Скрыть</string>
@@ -144,6 +147,9 @@
     <string name="failed_update_ui">Не удалось обновить пользовательский интерфейс</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Приложение для выбора контактов недоступно</string>
     <string name="file_list_seconds_ago">только что</string>
+    <string name="fontSize_large">Большая</string>
+    <string name="fontSize_medium">Средняя</string>
+    <string name="fontSize_small">Маленькая</string>
     <string name="formatting_help_cbf_body_1">Главная цель разработки приложения Notes - получить инструмент для быстрого создания заметок по текущим делам. Вы можете отформатировать текст, применяя синтаксис Markdown. Для приведенных ниже примеров удобно использовать клавиши быстрого доступа, что позволит выполнять форматирование ваших заметок без ввода самих символов форматирования.</string>
     <string name="formatting_help_cbf_body_2">Выберите блок текста или нажмите на курсор в любом месте, и появится всплывающее меню, содержащее рядом с записями по умолчанию 1 %1$s, 2 %2$s, 3 %3$s такие записи, как 4 %4$s или 5 %5$s.</string>
     <string name="formatting_help_cbf_title">Контекстное форматирование</string>

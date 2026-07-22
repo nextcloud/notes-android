@@ -101,6 +101,9 @@
     <string name="context_based_formatting">بازپخش قالب‌بندی مبتنی بر متن</string>
     <string name="copy_link">کپی کردن پیوند</string>
     <string name="could_not_retrieve_shares">امکان بازگردانی اشتراک گذاری‌ها وجود ندارد</string>
+    <string name="darkmode_dark">تیره</string>
+    <string name="darkmode_light">ุฑูุดู</string>
+    <string name="darkmode_system_default">ูพ�ุดโูุฑุถ ุณุงูุงูู</string>
     <string name="delete_share">حذف اشتراک‌گذاری</string>
     <string name="direct_editing_error">خطا در بارگذاری ویرایش پیشرفته</string>
     <string name="dismiss">رد کردن</string>
@@ -144,6 +147,9 @@
     <string name="failed_update_ui">رابط کاربری بروز نشد</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">برنامه‌ای برای انتخاب مخاطب در دسترس نیست</string>
     <string name="file_list_seconds_ago">یک ثانیه پیش</string>
+    <string name="fontSize_large">Large</string>
+    <string name="fontSize_medium">Medium</string>
+    <string name="fontSize_small">Small</string>
     <string name="formatting_help_cbf_body_1">هدف اصلی از طراحی برنامک یادداشت، ارائه دادن یک ابزار بی‌حواس‌پرتی برای یادداشت‌برداری است. می‌توانید متن‌ها را در قالب Markdown بنویسید. برای انواع مختلفی از مثال‌های ذکر شده در زیر، می‌توانید از میانبرها جهت قالب‌دهی یادداشت‌های خود بدون وارد کردن کد استفاده کنید.</string>
     <string name="formatting_help_cbf_body_2">فقط کافی است یک دامنه متن را انتخاب کنید یا روی مکان نما در هر موقعیتی ضربه بزنید و یک منوی بازشونده دریافت می کنید که در کنار ورودی‌های پیش‌فرض %1$s و %2$s و %3$s شامل ورودی‌‌هایی مانند %4$s و %5$s می‌باشد.</string>
     <string name="formatting_help_cbf_title">قالب‌بندی مبتنی بر متن</string>

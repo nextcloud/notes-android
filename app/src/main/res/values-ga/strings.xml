@@ -101,6 +101,9 @@
     <string name="context_based_formatting">An popover formáidithe bunaithe ar chomhthéacs</string>
     <string name="copy_link">Cóipeáil an nasc</string>
     <string name="could_not_retrieve_shares">Níorbh fhéidir scaireanna a aisghabháil</string>
+    <string name="darkmode_dark">Dorcha</string>
+    <string name="darkmode_light">Solas</string>
+    <string name="darkmode_system_default">Réamhshocrú Córais</string>
     <string name="delete_share">Scrios an sciar</string>
     <string name="direct_editing_error">Earráid agus eagarthóireacht shaibhir á lódáil</string>
     <string name="dismiss">Díbhe</string>
@@ -144,6 +147,9 @@
     <string name="failed_update_ui">Theip ar an Chomhéadain a nuashonrú</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Níl aip ar fáil chun teagmhálaithe a roghnú</string>
     <string name="file_list_seconds_ago">soicind ó shin</string>
+    <string name="fontSize_large">Mór</string>
+    <string name="fontSize_medium">Mheán</string>
+    <string name="fontSize_small">Beaga</string>
     <string name="formatting_help_cbf_body_1">Príomhsprioc dearaidh den aip Nótaí is ea uirlis saor ó aon seachrán a sholáthar. Cé go mbeidh tú in ann do théacsanna a fhormáidiú le Markdown. I gcás roinnt de na samplaí thíos, is féidir leat aicearraí a úsáid ionas gur féidir leat do nótaí a fhormáidiú gan na cóid thíos a chlóscríobh.</string>
     <string name="formatting_help_cbf_body_2">Roghnaigh raon téacs nó tapáil ar do chúrsóir in aon áit agus gheobhaidh tú preab-roghchlár a bheidh in aice leis na hiontrálacha réamhshocraithe %1$s, %2$s, %3$s mar %4$s nó %5$s.</string>
     <string name="formatting_help_cbf_title">Formáidiú bunaithe ar chomhthéacs</string>

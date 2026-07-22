@@ -85,6 +85,9 @@
     <string name="context_based_formatting">Hiện lên định dạng dựa trên ngữ cảnh</string>
     <string name="copy_link">Sao chép liên kết</string>
     <string name="could_not_retrieve_shares">Không thể truy xuất lượt chia sẻ</string>
+    <string name="darkmode_dark">Tối</string>
+    <string name="darkmode_light">Sáng</string>
+    <string name="darkmode_system_default">Mặc định hệ thống</string>
     <string name="delete_share">Xóa chia sẻ</string>
     <string name="dismiss">Bỏ qua</string>
     <string name="dnd">Đừng làm phiền</string>
@@ -120,6 +123,9 @@
     <string name="error_unknown">Đã xảy ra lỗi không xác định.</string>
     <string name="failed_update_ui">Cập nhật giao diện người dùng thất bại</string>
     <string name="file_list_seconds_ago">vài giây trước</string>
+    <string name="fontSize_large">Lớn</string>
+    <string name="fontSize_medium">Trung bình</string>
+    <string name="fontSize_small">Nhỏ</string>
     <string name="formatting_help_cbf_body_1">Một mục đích thiết kế lớn của ứng dụng Ghi chú là để cung cấp một công cụ không có sự xao nhãng. Tuy nhiên, bạn sẽ có thể định dạng văn bản của bạn bằng Markdown. Đối với các ví dụ khác nhau được nhắc đến dưới đây, bạn có thể sử dụng các lối tắt để bạn có thể định dạng các ghi chú mà không đánh các mã ở dưới.</string>
     <string name="formatting_help_cbf_body_2">Chỉ cần chọn một phạm vi văn bản hoặc chạmvào con trỏ tại bất kỳ vị trí nào và bạn sẽ thấy một menu popup chứa các mục %4$s hoặc %5$s bên cạnh các mục mặc định %1$s, %2$s, %3$s.</string>
     <string name="formatting_help_cbf_title">Định dạng dựa trên ngữ cảnh</string>

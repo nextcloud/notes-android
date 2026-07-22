@@ -101,6 +101,9 @@
     <string name="context_based_formatting">Kontextbaserad formaterings-popover</string>
     <string name="copy_link">Kopiera länk</string>
     <string name="could_not_retrieve_shares">Kunde inte hämta delade mappar</string>
+    <string name="darkmode_dark">Mörkt</string>
+    <string name="darkmode_light">Ljust</string>
+    <string name="darkmode_system_default">Systemstandard</string>
     <string name="delete_share">Ta bort delning</string>
     <string name="direct_editing_error">Fel vid inläsning av utökad redigering</string>
     <string name="dismiss">Avfärda</string>
@@ -144,6 +147,9 @@
     <string name="failed_update_ui">Misslyckades med att uppdatera UI</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Ingen app tillgänglig för att välja kontakter</string>
     <string name="file_list_seconds_ago">sekunder sedan</string>
+    <string name="fontSize_large">Stor</string>
+    <string name="fontSize_medium">Medelstor</string>
+    <string name="fontSize_small">Liten</string>
     <string name="formatting_help_cbf_body_1">Ett stort deignmål med Notes-appen är att tillahandahålla ett distraktionsfritt verktyg. Fast du kan formatera dina texter med Markdown. För de olika nedan nämnda exemplena kan du använda genvägar så att du kan formatera dina anteckningar utan att skriva in koderna nedan.</string>
     <string name="formatting_help_cbf_body_2">Markera bara ett stycke text eller tryck på din markör vid valfri position och du kommer få en popup-meny som utöver standardposterna såsom %1$s, %2$s, %3$s även innehåller poster som %4$s eller %5$s.</string>
     <string name="formatting_help_cbf_title">Innehållsbaserad formatering</string>

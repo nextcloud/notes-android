@@ -101,6 +101,9 @@
     <string name="context_based_formatting">Suggestions de mise en forme contextuelle</string>
     <string name="copy_link">Copier le lien</string>
     <string name="could_not_retrieve_shares">Impossible de récupérer les partages</string>
+    <string name="darkmode_dark">Sombre</string>
+    <string name="darkmode_light">Clair</string>
+    <string name="darkmode_system_default">Paramètres système</string>
     <string name="delete_share">Supprimer le partage</string>
     <string name="direct_editing_error">Erreur lors du chargement de l\'édition enrichie</string>
     <string name="dismiss">Rejeter</string>
@@ -144,6 +147,9 @@
     <string name="failed_update_ui">Échec de la mise à jour de l\'interface utilisateur</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Aucune application disponible pour sélectionner des contacts</string>
     <string name="file_list_seconds_ago">à l\'instant</string>
+    <string name="fontSize_large">Grand</string>
+    <string name="fontSize_medium">Moyen</string>
+    <string name="fontSize_small">Petit</string>
     <string name="formatting_help_cbf_body_1">Un but majeur de l\'app Notes est de fournir une application de note sans distraction, bien que vous puissiez formater vos textes avec Markdown. Pour les divers exemples mentionnés ci-dessous, vous pouvez utiliser des raccourcis afin de pouvoir formater vos notes sans taper les codes ci-dessous. </string>
     <string name="formatting_help_cbf_body_2">Sélectionner simplement une partie du texte ou taper sur votre curseur à n\'importe quelle position et vous aurez un menu popup qui contient à coté des entrées par défaut %1$s, %2$s, %3$s des entrées comme %4$s ou %5$s.</string>
     <string name="formatting_help_cbf_title">Mise en forme contextuelle</string>

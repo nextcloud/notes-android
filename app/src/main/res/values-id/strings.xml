@@ -96,6 +96,9 @@
     <string name="common_ok">Oke</string>
     <string name="copy_link">Salin tautan</string>
     <string name="could_not_retrieve_shares">Tidak dapat menerima berkas bersama</string>
+    <string name="darkmode_dark">Gelap</string>
+    <string name="darkmode_light">Terang</string>
+    <string name="darkmode_system_default">Bawaan Sistem</string>
     <string name="delete_share">Hapus pembagian</string>
     <string name="direct_editing_error">Kesalahan saat memuat pengeditan kaya</string>
     <string name="dismiss">Batal</string>
@@ -138,6 +141,9 @@
     <string name="failed_update_ui">Gagal memperbarui UI</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Tidak ada aplikasi yang tersedia untuk memilih kontak</string>
     <string name="file_list_seconds_ago">beberapa detik yang lalu</string>
+    <string name="fontSize_large">Besar</string>
+    <string name="fontSize_medium">Sedang</string>
+    <string name="fontSize_small">Kecil</string>
     <string name="formatting_help_cbf_body_1">Tujuan desain utama dari aplikasi Catatan adalah menyediakan alat tanpa gangguan. Meskipun Anda akan dapat memformat teks Anda dengan Markdown. Untuk berbagai contoh yang disebutkan di bawah ini, Anda dapat menggunakan pintasan sehingga Anda dapat memformat catatan Anda tanpa mengetik kode di bawah ini.</string>
     <string name="formatting_help_cbf_body_2">Cukup pilih rentang teks atau ketuk kursor Anda di posisi mana pun dan Anda akan mendapatkan menu sembul yang berisi di samping entri bawaan %1$s, %2$s, %3$s entri-entri seperti %4$s atau %5$s.</string>
     <string name="formatting_help_cbf_title">Pemformatan berdasarkan konteks</string>

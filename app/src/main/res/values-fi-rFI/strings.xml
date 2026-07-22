@@ -97,6 +97,9 @@
     <string name="context_based_formatting">Kontekstiin perustuva muotoilu - ponnahdusikkuna</string>
     <string name="copy_link">Kopioi linkki</string>
     <string name="could_not_retrieve_shares">Jakojen nouto ei onnistunut</string>
+    <string name="darkmode_dark">Tumma</string>
+    <string name="darkmode_light">Vaalea</string>
+    <string name="darkmode_system_default">Järjestelmän oletus</string>
     <string name="delete_share">Poista jako</string>
     <string name="dismiss">Hylkää</string>
     <string name="dnd">Älä häiritse</string>
@@ -138,6 +141,9 @@
     <string name="failed_the_remove_share">Jaon poistaminen epäonnistui</string>
     <string name="failed_update_ui">Käyttöliittymän päivitys epäonnistui</string>
     <string name="file_list_seconds_ago">sekunteja sitten</string>
+    <string name="fontSize_large">Suuri</string>
+    <string name="fontSize_medium">Keskitasoinen</string>
+    <string name="fontSize_small">Pieni</string>
     <string name="formatting_help_cbf_body_1">Muistiinpanosovelluksen päätavoitteena on tarjota häiriötön työkalu. Voit silti muotoilla tekstiä Markdown-syntaksilla. Moniin alla mainittuihin esimerkkeihin on pikanäppäimet, jotta voit kirjoittaa muistiinpanoja ilman muotoilumerkkien kirjoittamista.</string>
     <string name="formatting_help_cbf_body_2">Valitse vain teksti tai näpäytä mitä tahansa kohtaa ruudulta ja ponnahdusvalikko aukeaa. Valikossa on oletusvalintojen %1$s, %2$sja %3$s lisäksi pikavalintoja kuten %4$s ja %5$s.</string>
     <string name="formatting_help_cbf_title">Kontekstiin perustuva muotoilu</string>

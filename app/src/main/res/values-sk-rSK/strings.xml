@@ -101,6 +101,9 @@
     <string name="context_based_formatting">Kontextové okno formátovania</string>
     <string name="copy_link">Kopírovať odkaz</string>
     <string name="could_not_retrieve_shares">Nie je možné získať zdieľania</string>
+    <string name="darkmode_dark">Tmavé</string>
+    <string name="darkmode_light">Svetlé</string>
+    <string name="darkmode_system_default">Predvolené systémom</string>
     <string name="delete_share">Odstrániť zdieľanie</string>
     <string name="direct_editing_error">Chyba pri načítaní rich editora</string>
     <string name="dismiss">Zatvoriť</string>
@@ -144,6 +147,9 @@
     <string name="failed_update_ui">Nepodarilo sa aktualizovať UI</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Nie je k dispozícii žiadna aplikácia pre výber kontaktov</string>
     <string name="file_list_seconds_ago">sekúnd dozadu</string>
+    <string name="fontSize_large">Veľká</string>
+    <string name="fontSize_medium">Stredná</string>
+    <string name="fontSize_small">Malá</string>
     <string name="formatting_help_cbf_body_1">Hlavným cieľom aplikácie Notes je poskytnúť nástroj bez rozptyľovania. Svoje texty však budete môcť formátovať pomocou aplikácie Markdown. Pre rôzne príklady uvedené nižšie môžete použiť klávesové skratky, pomocou ktorých môžete svoje poznámky formátovať bez toho, aby ste museli zadávať kódy uvedené nižšie.</string>
     <string name="formatting_help_cbf_body_2">Stačí si vybrať rozsah textu alebo ťuknúť na kurzor na ktorejkoľvek pozícii a dostanete vyskakovacie menu, ktoré obsahuje tieto východzie položky %1$s, %2$s, %3$s položky ako %4$s alebo %5$s.</string>
     <string name="formatting_help_cbf_title">Kontextové formátovanie</string>

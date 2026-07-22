@@ -99,6 +99,9 @@
     <string name="context_based_formatting">コンテキストに基づいた書式設定</string>
     <string name="copy_link">リンクをコピー</string>
     <string name="could_not_retrieve_shares">共有元を取得できませんでした</string>
+    <string name="darkmode_dark">暗い</string>
+    <string name="darkmode_light">明るい</string>
+    <string name="darkmode_system_default">システムのデフォルト</string>
     <string name="delete_share">共有を解除</string>
     <string name="direct_editing_error">リッチ編集の読み込み中にエラーが発生</string>
     <string name="dismiss">閉じる</string>
@@ -140,6 +143,9 @@
     <string name="failed_update_ui">UIの更新に失敗しました</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">連絡先を選択するためのアプリが利用できません</string>
     <string name="file_list_seconds_ago">数秒前</string>
+    <string name="fontSize_large">大</string>
+    <string name="fontSize_medium">中</string>
+    <string name="fontSize_small">小</string>
     <string name="formatting_help_cbf_body_1">Notesアプリの重要な設計目標は、注意力を阻害しないツールを提供することです。その為にMarkdownを使ってテキストを修飾できるようにしました。以下は、コードを入力することなくショートカットを使ってメモを書式設定する例です。</string>
     <string name="formatting_help_cbf_body_2">テキストの範囲を選択するか、カーソルを任意の位置でタップすると、デフォルトのエントリ%1$s、%2$s、%3$sや%4$s、%5$sなどのエントリの横にあるポップアップメニューが表示されます。</string>
     <string name="formatting_help_cbf_title">コンテキストに基づいた書式設定 </string>

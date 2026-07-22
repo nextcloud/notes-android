@@ -99,6 +99,9 @@
     <string name="context_based_formatting">基于上下文的格式弹出窗口 </string>
     <string name="copy_link">复制链接</string>
     <string name="could_not_retrieve_shares">无法检索共享</string>
+    <string name="darkmode_dark">深色</string>
+    <string name="darkmode_light">浅色</string>
+    <string name="darkmode_system_default">系统默认</string>
     <string name="delete_share">删除共享</string>
     <string name="direct_editing_error">加载富文本编辑时出错</string>
     <string name="dismiss">关闭</string>
@@ -140,6 +143,9 @@
     <string name="failed_update_ui">更新用户界面失败</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">没有可用于选择联系人的应用</string>
     <string name="file_list_seconds_ago">几秒前</string>
+    <string name="fontSize_large">大</string>
+    <string name="fontSize_medium">中等</string>
+    <string name="fontSize_small">小</string>
     <string name="formatting_help_cbf_body_1">Notes应用程序的主要设计目标是提供无干扰的工具。 因此您将能够使用Markdown设置文本格式。 对于下面提到的各种示例，您可以使用快捷方式，以便无需输入以下代码即可格式化笔记。</string>
     <string name="formatting_help_cbf_body_2">只需选中一段文本或在您任何位置处的光标上单击，您将获得一个弹出包括以下默认实体的弹出菜单，包括%1$s，%2$s，%3$s和%4$s或%5$s。</string>
     <string name="formatting_help_cbf_title">基于格式的文本</string>
