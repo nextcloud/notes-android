@@ -98,6 +98,9 @@
     <string name="context_based_formatting">Element emergent de format basat en el context</string>
     <string name="copy_link">Copia l\'enllaç</string>
     <string name="could_not_retrieve_shares">No s\'ha pogut recuperar la compartició</string>
+    <string name="darkmode_dark">Fosc</string>
+    <string name="darkmode_light">Clar</string>
+    <string name="darkmode_system_default">Per defecte del sistema</string>
     <string name="delete_share">Suprimeix l\'element compartit</string>
     <string name="direct_editing_error">S\'ha produït un error en carregar l\'edició enriquida</string>
     <string name="dismiss">Descarta</string>
@@ -138,6 +141,9 @@
     <string name="failed_update_ui">No s\'ha pogut actualitzar la IU</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">No hi ha cap aplicació disponible per a seleccionar contactes</string>
     <string name="file_list_seconds_ago">fa uns segons</string>
+    <string name="fontSize_large">Gran</string>
+    <string name="fontSize_medium">Mig</string>
+    <string name="fontSize_small">Petita</string>
     <string name="formatting_help_cbf_body_1">Un objectiu principal del disseny de l\'aplicació Notes és proporcionar una eina lliure de distraccions. Tanmateix, podreu formatar els vostres textos amb Markdown. Per a molts dels exemples esmentats a continuació, podeu utilitzar dreceres per a formatar les vostres notes sense haver d\'escriure els codis següents.</string>
     <string name="formatting_help_cbf_body_2">Només cal que seleccioneu un fragment de text o toqueu qualsevol posició amb el cursor i apareixerà un menú emergent que conté, juntament amb les entrades per defecte %1$s, %2$s i %3$s, entrades com %4$s o %5$s.</string>
     <string name="formatting_help_cbf_title">Format basat en el context</string>

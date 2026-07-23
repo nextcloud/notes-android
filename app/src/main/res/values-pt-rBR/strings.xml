@@ -103,7 +103,7 @@
     <string name="could_not_retrieve_shares">Não foi possível recuperar os compartilhamentos</string>
     <string name="darkmode_dark">Escuro</string>
     <string name="darkmode_light">Claro</string>
-    <string name="darkmode_system_default">Padrão do Sistema</string>
+    <string name="darkmode_system_default">Padrão do sistema</string>
     <string name="delete_share">Excluir compartilhamento</string>
     <string name="direct_editing_error">Erro ao carregar edição avançada</string>
     <string name="dismiss">Dispensar</string>
@@ -112,7 +112,7 @@
     <string name="ecosystem_apps_display_files">Arquivos</string>
     <string name="ecosystem_apps_display_more">Mais</string>
     <string name="ecosystem_apps_display_talk">Talk</string>
-    <string name="ecosystem_apps_more">Mais Aplicativos Nextcloud</string>
+    <string name="ecosystem_apps_more">Mais aplicativos Nextcloud</string>
     <string name="ecosystem_apps_talk">Nextcloud Talk</string>
     <string name="email_pick_failed">Falha ao escolher o endereço de e-mail.</string>
     <string name="error_action_open_battery_settings">Configurações da bateria</string>
@@ -262,9 +262,9 @@
     <string name="note_share_detail_activity_link_name">Nome do link </string>
     <string name="note_share_detail_activity_no_share_permission_selected">Selecione ao menos uma permissão para compartilhar.</string>
     <string name="note_share_detail_activity_password_error_message">Esta senha parece um pouco fraca. Para maior segurança, tente usar uma senha mais longa com uma combinação de letras, números e símbolos.</string>
-    <string name="note_share_detail_activity_send_share">Enviar Compartilhamento </string>
-    <string name="note_share_detail_activity_set_note">Definir Nota </string>
-    <string name="note_share_detail_activity_share_copy_link">Compartilhar e Copiar Link</string>
+    <string name="note_share_detail_activity_send_share">Enviar compartilhamento </string>
+    <string name="note_share_detail_activity_set_note">Definir nota</string>
+    <string name="note_share_detail_activity_share_copy_link">Compartilhar e copiar link</string>
     <string name="note_share_detail_activity_share_link_empty_password">Você deve digitar uma senha</string>
     <string name="note_share_detail_activity_share_send_note">Nota para o destinatário</string>
     <string name="note_share_detail_activity_share_via_link_hide_download">Ocultar download</string>
@@ -285,7 +285,7 @@
     <string name="set_message">Definir mensagem</string>
     <string name="set_online_status">Status on-line</string>
     <string name="settings_background_sync">Sincronização em segundo plano</string>
-    <string name="settings_enable_direct_edit">Edição Direta</string>
+    <string name="settings_enable_direct_edit">Edição direta</string>
     <string name="settings_enable_direct_edit_summary">Quando desativado, o editor avançado ficará oculto.</string>
     <string name="settings_file_suffix">Extensão de arquivo</string>
     <string name="settings_file_suffix_description">Extensão de arquivo para novas notas no seu Nextcloud</string>
@@ -335,7 +335,7 @@
     <string name="share_permission_secure_file_drop">Depósito de arquivos seguro</string>
     <string name="share_permission_unknown">Desconhecido</string>
     <string name="share_permission_view_only">Somente visualização </string>
-    <string name="share_permissions">Permissões de Compartilhamento </string>
+    <string name="share_permissions">Permissões de compartilhamento </string>
     <string name="share_remote_clarification">%1$s (remoto)</string>
     <string name="share_room_clarification">%1$s (conversa)</string>
     <string name="share_send_new_email">Enviar novo e-mail</string>

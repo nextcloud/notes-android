@@ -98,6 +98,9 @@
     <string name="copy_link">Копиране на връзката</string>
     <string name="could_not_retrieve_shares"> 60% match 
 Споделянията не могат да бъдат извлечени</string>
+    <string name="darkmode_dark">Тъмно</string>
+    <string name="darkmode_light">Светло</string>
+    <string name="darkmode_system_default">Система по Подразбиране</string>
     <string name="direct_editing_error">Грешка при зареждане на богато редактиране</string>
     <string name="dismiss">Затвори</string>
     <string name="dnd">Не безпокой</string>
@@ -134,6 +137,9 @@
     <string name="error_unknown">Възникна неизвестна грешка</string>
     <string name="failed_update_ui">Неуспешно обновяване на UI /потребителски интерфейс/</string>
     <string name="file_list_seconds_ago">преди секунди</string>
+    <string name="fontSize_large">Голям</string>
+    <string name="fontSize_medium">Средна</string>
+    <string name="fontSize_small">Малък</string>
     <string name="formatting_help_cbf_body_1">Основна цел на дизайна на приложението Notes е да предостави инструмент, който да не ви разсейва. Въпреки че ще можете да форматирате текстовете си с Markdown. За различни от посочените по -долу примери можете да използвате преки пътища, за да може да форматирате бележките си, без да въвеждате кодовете по -долу.</string>
     <string name="formatting_help_cbf_body_2">Просто изберете диапазон с текст или чукнете с курсора на която и да е позиция и ще получите изскачащо меню, което съдържа до записите по подразбиране %1$s, %2$s, %3$s записи като %4$s или %5$s.</string>
     <string name="formatting_help_cbf_title">Форматиране, базирано на контекст</string>

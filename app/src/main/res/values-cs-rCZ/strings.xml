@@ -101,6 +101,9 @@
     <string name="context_based_formatting">Kontextové vyskakovací okno formátování</string>
     <string name="copy_link">Zkopírovat odkaz</string>
     <string name="could_not_retrieve_shares">Nedaří se získat sdílení</string>
+    <string name="darkmode_dark">Tmavý</string>
+    <string name="darkmode_light">Světlý</string>
+    <string name="darkmode_system_default">Systémový výchozí</string>
     <string name="delete_share">Smazat sdílení</string>
     <string name="direct_editing_error">Chyba při načítání upravování formátovaného textu</string>
     <string name="dismiss">Zahodit</string>
@@ -144,6 +147,9 @@
     <string name="failed_update_ui">Nepodařilo se aktualizovat uživatelské rozhraní</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Pro označené kontakty není k dispozici žádná aplikace</string>
     <string name="file_list_seconds_ago">sekund před</string>
+    <string name="fontSize_large">Velké</string>
+    <string name="fontSize_medium">Střední</string>
+    <string name="fontSize_small">Malé</string>
     <string name="formatting_help_cbf_body_1">Hlavním cílem návrhu aplikace Poznámky je poskytovat nástroj, kterého používání nerozptyluje. Ačkoli můžete texty formátovat pomocí Markdown značek. Pro různé z níže uvedených příkladů můžete použít zkratky, takže své poznámky můžete formátovat bez zadávání níže uvedených kódů.</string>
     <string name="formatting_help_cbf_body_2">Stačí jen vybrat část textu nebo klepnout na kurzor v libovolné pozici a obdržíte vyskakovací nabídky, která obsahuje kromě výchozích položek %1$s, %2$s, %3$s položky jako %4$s nebo %5$s.</string>
     <string name="formatting_help_cbf_title">Formátování založené na kontextu</string>
