@@ -459,6 +459,20 @@ public class NotesRepository {
         return db.getNoteDao().updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(id, modified, title, favorite, category, eTag, content, excerpt);
     }
 
+    @WorkerThread
+    public int updateNoteFromRemote(long localNoteId, @NonNull Note remoteNote) {
+        final var modified = Objects.requireNonNull(remoteNote.getModified()).getTimeInMillis();
+        return updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
+                localNoteId,
+                modified,
+                remoteNote.getTitle(),
+                remoteNote.getFavorite(),
+                remoteNote.getCategory(),
+                remoteNote.getETag(),
+                remoteNote.getContent(),
+                generateNoteExcerpt(remoteNote.getContent(), remoteNote.getTitle()));
+    }
+
     public long countUnsynchronizedNotes(long accountId) {
         final Long unsynchronizedNotesCount = db.getNoteDao().countUnsynchronizedNotes(accountId);
         return unsynchronizedNotesCount == null ? 0 : unsynchronizedNotesCount;
