@@ -54,6 +54,7 @@
     <string name="appear_offline">Apareixeu fora de línia</string>
     <string name="appearance_and_behavior">Aparença i comportament</string>
     <string name="append_to_note">Afegeix a la nota</string>
+    <string name="away">Absent</string>
     <string name="backup">S\'ha detectat un estat irrecuperable de l\'aplicació. Feu una còpia de seguretat dels canvis sense sincronitzar i esborreu l\'emmagatzematge de l\'aplicació Notes.</string>
     <string name="busy">Ocupat</string>
     <string name="category_bake">Cuina</string>
@@ -104,6 +105,7 @@
     <string name="delete_share">Suprimeix l\'element compartit</string>
     <string name="direct_editing_error">S\'ha produït un error en carregar l\'edició enriquida</string>
     <string name="dismiss">Descarta</string>
+    <string name="dnd">No molesteu</string>
     <string name="dontClear">No l\'esborris</string>
     <string name="ecosystem_apps_display_files">Fitxers</string>
     <string name="ecosystem_apps_display_more">Més</string>
