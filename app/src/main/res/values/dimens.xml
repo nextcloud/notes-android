@@ -68,7 +68,7 @@
     <item format="float" name="note_line_spacing" type="dimen">1.15</item>
 
     <!-- Widgets -->
-    <dimen name="widget_outer_radius">@dimen/spacer_4x</dimen>
+    <dimen name="widget_outer_radius">@dimen/spacer_2x</dimen>
     <dimen name="widget_margin">@dimen/spacer_4x</dimen>
     <dimen name="widget_inner_padding_vertical">@dimen/spacer_2x</dimen>
     <dimen name="widget_inner_padding_horizontal">@dimen/spacer_1x</dimen>
