@@ -40,6 +40,24 @@ Verify each one against your own diff before you report a task as finished.
    reached, indirection used once, leftover scaffolding, and any file you touched only incidentally. Then confirm out
    loud, in your final message, which language every new file is in and which files ended up over 300 lines.
 
+## Reference Guides
+
+`.claude/skills/` holds the detailed guidance behind the rules above: the concrete before/after transformations, so you
+do not have to infer the house style from surrounding legacy code. Read the relevant guide **before** writing code, not
+after a reviewer asks for changes. They apply to every agent, whichever tool you are: Claude Code loads them as skills
+on demand, and every other agent can read them as plain Markdown with its file-reading tool.
+
+| Guide | Read it when | What it gives you |
+|---|---|---|
+| [`project-conventions`](.claude/skills/project-conventions/SKILL.md) | Any change that adds or renames a file | SPDX header form, the ≤300-line and one-top-level-type-per-file rules, magic-number and resource rules, Java-interop annotations (`@JvmStatic`, `@JvmOverloads`), commit expectations, and the verification commands that exist here |
+| [`android-idioms`](.claude/skills/android-idioms/SKILL.md) | Writing any new Kotlin, or converting Java to Kotlin | How to decompose an oversized lifecycle function, scope functions (`run`/`apply`/`with`), `switch` → `when`/`partition`, extension functions and KTX over verbose Java utilities, null safety instead of platform types, `companion object` constants |
+| [`fail-fast`](.claude/skills/fail-fast/SKILL.md) | Any code with preconditions, nullable values, or nested `if`/`else` | Guard-clause shapes, `require`/`requireNotNull`/`check` matched to the original exception type, flattening nested pyramids, `?: return` chains, and when *not* to invert a branch |
+| [`deprecated-apis`](.claude/skills/deprecated-apis/SKILL.md) | Touching activity results, fragment menus, or observer callbacks | Activity Result API instead of `startActivityForResult`, `MenuProvider` instead of `onCreateOptionsMenu`, and why a behaviour-locked conversion keeps `java.util.Observable` rather than silently moving to Flow |
+
+Precedence: where a guide and the [Hard Rules](#hard-rules) appear to disagree, the Hard Rules win — flag the
+contradiction to the contributor instead of quietly picking one. The guides use examples from the wider
+nextcloud/android codebase; the principles transfer, the specific class names do not exist in this repository.
+
 ## Nextcloud Contribution Policy
 
 All contributions generated or assisted by this agent must fully comply with:
@@ -90,13 +108,15 @@ Targets API 28+ (minSdk 28, targetSdk 36). Uses Nextcloud Single Sign-On (SSO) f
 # Run instrumented tests (requires device/emulator)
 ./gradlew connectedAndroidTest
 
-# Static analysis
-./gradlew check
-./gradlew ktlintCheck
+# Android lint (per variant, or the default variant)
+./gradlew lintFdroidDebug
 ./gradlew lint
 
-# Auto-fix ktlint issues
-./gradlew ktlintFormat
+# Lint + unit tests across variants
+./gradlew check
+
+# JaCoCo coverage report (debug builds only)
+./gradlew createFdroidDebugUnitTestCoverageReport
 ```
 
 Build output: `app/build/outputs/apk/`
@@ -215,6 +235,9 @@ XML:
 
 ## Code Style
 
+The bullets below are the summary; [`project-conventions`](.claude/skills/project-conventions/SKILL.md) and the other
+[Reference Guides](#reference-guides) show what each one looks like in practice.
+
 [//]: # (REUSE-IgnoreStart)
 - Every new file is Kotlin, no file exceeds 300 lines, and code carries no comments — see [Hard Rules](#hard-rules).
 - Line length: **120 characters**
@@ -222,7 +245,6 @@ XML:
 - Indentation: 4 spaces, UTF-8 encoding
 - Do not use decorative section-divider comments of any kind (e.g. `// ── Title ───`, `// ------`, `// ======`).
 - Every new file must end with exactly one empty trailing line (no more, no less).
-- `ktlint_code_style = android_studio`; disabled ktlint rules: `import-ordering`, `no-consecutive-comments`; trailing commas disallowed
 - All new files must include an SPDX license header: ` SPDX-License-Identifier: GPL-3.0-or-later `
 - Translations: only modify `values/strings.xml`; never the translated `values-*/strings.xml` files
 - Create models, states in different files instead of doing it one single file.
@@ -232,7 +254,8 @@ XML:
 - When you must edit an existing Java class, use modern Java — Optionals, records, streams where they genuinely help.
   This applies to edits inside files that are already Java; it is never a reason to create a new Java file.
 - Avoid hardcoded strings, colors, dimensions. Use resources.
-- Run lint, spotbugsGplayDebug, detekt, spotlessKotlinCheck and fix findings inside the files that have been changed.
+- Run `./gradlew lintFdroidDebug` and `./gradlew testFdroidDebugUnitTest`, and fix every finding inside the files you
+  changed.
 
 [//]: # (REUSE-IgnoreEnd)
 
