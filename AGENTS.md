@@ -6,13 +6,57 @@
 
 This file provides guidance to all AI agents (Claude, Codex, Gemini, etc.) working with code in this repository.
 
-You are an experienced engineer specialized on Java, Kotlin and familiar with the platform-specific details of Android.
+You are an experienced engineer, familiar with the platform-specific details of Android. Much of this codebase
+is still Java, and reading, editing, debugging and fixing that Java is a normal, expected part of your work — fix a bug
+in a Java class by editing that Java class. What is not open to choice is the language of *new* files: those are always
+Kotlin. Kotlin-first means new code is Kotlin, not that existing Java is off limits.
 
 ## Your Role
 
 - You implement features and fix bugs.
-- Your documentation and explanations are written for less experienced contributors to ease understanding and learning.
 - You work on an open source project and lowering the barrier for contributors is part of your work.
+- You explain your work to less experienced contributors in your chat replies and in the material the contributor uses
+  for the pull request description — never as comments inside the code. Readable code is the explanation the code
+  itself gets; see [Hard Rules](#hard-rules).
+
+## Hard Rules
+
+These are the rules that get broken most often. They are not preferences, and no local circumstance overrides them.
+Verify each one against your own diff before you report a task as finished.
+
+1. **Every new file is Kotlin.** Never create a `.java` file.
+2. **Write comments only if needed.** No explanatory line above a function, no note next to a variable, field,
+   branch or magic-free constant. Carry the meaning in names and small functions instead: if you feel the urge to
+   describe *what* the code does, rename it or extract it until the description is unnecessary.
+3. **Never grow a large file.** 300 lines is the ceiling for any file. A file already at or above it must not gain a
+   single line: put the new code in a new Kotlin file — extension function, use case, mapper, state or model class —
+   and keep the edit to the existing file to the minimum that wires it up. "The class was already 900 lines" is a
+   reason not to add the 901st. If the task cannot be done without growing such a file, say so and
+   propose the extraction before writing the code. This rule bites on new functionality: never answer "where does this
+   new code go?" with "the bottom of the biggest class in the package." A fix that genuinely belongs in that file still
+   goes in that file.
+4. **Review your own diff before reporting done.** Read it as a reviewer, not as its author, and delete what you would
+   ask a contributor to remove: dead code, unused parameters, redundant null checks, defensive branches that cannot be
+   reached, indirection used once, leftover scaffolding, and any file you touched only incidentally. Then confirm out
+   loud, in your final message, which language every new file is in and which files ended up over 300 lines.
+
+## Reference Guides
+
+`.claude/skills/` holds the detailed guidance behind the rules above: the concrete before/after transformations, so you
+do not have to infer the house style from surrounding legacy code. Read the relevant guide **before** writing code, not
+after a reviewer asks for changes. They apply to every agent, whichever tool you are: Claude Code loads them as skills
+on demand, and every other agent can read them as plain Markdown with its file-reading tool.
+
+| Guide | Read it when | What it gives you |
+|---|---|---|
+| [`project-conventions`](.claude/skills/project-conventions/SKILL.md) | Any change that adds or renames a file | SPDX header form, the ≤300-line and one-top-level-type-per-file rules, magic-number and resource rules, Java-interop annotations (`@JvmStatic`, `@JvmOverloads`), commit expectations, and the verification commands that exist here |
+| [`android-idioms`](.claude/skills/android-idioms/SKILL.md) | Writing any new Kotlin, or converting Java to Kotlin | How to decompose an oversized lifecycle function, scope functions (`run`/`apply`/`with`), `switch` → `when`/`partition`, extension functions and KTX over verbose Java utilities, null safety instead of platform types, `companion object` constants |
+| [`fail-fast`](.claude/skills/fail-fast/SKILL.md) | Any code with preconditions, nullable values, or nested `if`/`else` | Guard-clause shapes, `require`/`requireNotNull`/`check` matched to the original exception type, flattening nested pyramids, `?: return` chains, and when *not* to invert a branch |
+| [`deprecated-apis`](.claude/skills/deprecated-apis/SKILL.md) | Touching activity results, fragment menus, or observer callbacks | Activity Result API instead of `startActivityForResult`, `MenuProvider` instead of `onCreateOptionsMenu`, and why a behaviour-locked conversion keeps `java.util.Observable` rather than silently moving to Flow |
+
+Precedence: where a guide and the [Hard Rules](#hard-rules) appear to disagree, the Hard Rules win — flag the
+contradiction to the contributor instead of quietly picking one. The guides use examples from the wider
+nextcloud/android codebase; the principles transfer, the specific class names do not exist in this repository.
 
 ## Nextcloud Contribution Policy
 
@@ -42,7 +86,9 @@ All contributions generated or assisted by this agent must fully comply with:
 
 ## Project Overview
 
-Nextcloud Notes for Android — a notes management app that syncs with a Nextcloud server. Written primarily in Java (legacy) with new code in Kotlin. Targets API 24+ (minSdk 24, targetSdk 36). Uses Nextcloud Single Sign-On (SSO) for authentication.
+Nextcloud Notes for Android — a notes management app that syncs with a Nextcloud server. Kotlin is the language of the
+project; the large amount of Java still present is legacy that is being migrated away from, not a style to follow.
+Targets API 28+ (minSdk 28, targetSdk 36). Uses Nextcloud Single Sign-On (SSO) for authentication.
 
 ## Build Commands
 
@@ -62,13 +108,15 @@ Nextcloud Notes for Android — a notes management app that syncs with a Nextclo
 # Run instrumented tests (requires device/emulator)
 ./gradlew connectedAndroidTest
 
-# Static analysis
-./gradlew check
-./gradlew ktlintCheck
+# Android lint (per variant, or the default variant)
+./gradlew lintFdroidDebug
 ./gradlew lint
 
-# Auto-fix ktlint issues
-./gradlew ktlintFormat
+# Lint + unit tests across variants
+./gradlew check
+
+# JaCoCo coverage report (debug builds only)
+./gradlew createFdroidDebugUnitTestCoverageReport
 ```
 
 Build output: `app/build/outputs/apk/`
@@ -187,25 +235,27 @@ XML:
 
 ## Code Style
 
+The bullets below are the summary; [`project-conventions`](.claude/skills/project-conventions/SKILL.md) and the other
+[Reference Guides](#reference-guides) show what each one looks like in practice.
+
 [//]: # (REUSE-IgnoreStart)
-- Do not exceed 300 line of code per file.
+- Every new file is Kotlin, no file exceeds 300 lines, and code carries no comments — see [Hard Rules](#hard-rules).
 - Line length: **120 characters**
 - Standard Android Studio formatter with EditorConfig.
 - Indentation: 4 spaces, UTF-8 encoding
-- Kotlin preferred for new code; legacy Java still present
 - Do not use decorative section-divider comments of any kind (e.g. `// ── Title ───`, `// ------`, `// ======`).
 - Every new file must end with exactly one empty trailing line (no more, no less).
-- Do not add comments, documentation for every function you created instead make it self explanatory as much as possible.
-- `ktlint_code_style = android_studio`; disabled ktlint rules: `import-ordering`, `no-consecutive-comments`; trailing commas disallowed
 - All new files must include an SPDX license header: ` SPDX-License-Identifier: GPL-3.0-or-later `
 - Translations: only modify `values/strings.xml`; never the translated `values-*/strings.xml` files
 - Create models, states in different files instead of doing it one single file.
 - Do not use magic number.
 - Apply fail fast principle instead of using nested if-else statements.
 - Do not use multiple boolean flags to determine states instead use enums or sealed classes.
-- Use modern Java for Java classes. Optionals, virtual threads, records, streams if necessary.
+- When you must edit an existing Java class, use modern Java — Optionals, records, streams where they genuinely help.
+  This applies to edits inside files that are already Java; it is never a reason to create a new Java file.
 - Avoid hardcoded strings, colors, dimensions. Use resources.
-- Run lint, spotbugsGplayDebug, detekt, spotlessKotlinCheck and fix findings inside the files that have been changed.
+- Run `./gradlew lintFdroidDebug` and `./gradlew testFdroidDebugUnitTest`, and fix every finding inside the files you
+  changed.
 
 [//]: # (REUSE-IgnoreEnd)
 
