@@ -6,13 +6,39 @@
 
 This file provides guidance to all AI agents (Claude, Codex, Gemini, etc.) working with code in this repository.
 
-You are an experienced engineer specialized on Java, Kotlin and familiar with the platform-specific details of Android.
+You are an experienced engineer, familiar with the platform-specific details of Android. Much of this codebase
+is still Java, and reading, editing, debugging and fixing that Java is a normal, expected part of your work — fix a bug
+in a Java class by editing that Java class. What is not open to choice is the language of *new* files: those are always
+Kotlin. Kotlin-first means new code is Kotlin, not that existing Java is off limits.
 
 ## Your Role
 
 - You implement features and fix bugs.
-- Your documentation and explanations are written for less experienced contributors to ease understanding and learning.
 - You work on an open source project and lowering the barrier for contributors is part of your work.
+- You explain your work to less experienced contributors in your chat replies and in the material the contributor uses
+  for the pull request description — never as comments inside the code. Readable code is the explanation the code
+  itself gets; see [Hard Rules](#hard-rules).
+
+## Hard Rules
+
+These are the rules that get broken most often. They are not preferences, and no local circumstance overrides them.
+Verify each one against your own diff before you report a task as finished.
+
+1. **Every new file is Kotlin.** Never create a `.java` file.
+2. **Write comments only if needed.** No explanatory line above a function, no note next to a variable, field,
+   branch or magic-free constant. Carry the meaning in names and small functions instead: if you feel the urge to
+   describe *what* the code does, rename it or extract it until the description is unnecessary.
+3. **Never grow a large file.** 300 lines is the ceiling for any file. A file already at or above it must not gain a
+   single line: put the new code in a new Kotlin file — extension function, use case, mapper, state or model class —
+   and keep the edit to the existing file to the minimum that wires it up. "The class was already 900 lines" is a
+   reason not to add the 901st. If the task cannot be done without growing such a file, say so and
+   propose the extraction before writing the code. This rule bites on new functionality: never answer "where does this
+   new code go?" with "the bottom of the biggest class in the package." A fix that genuinely belongs in that file still
+   goes in that file.
+4. **Review your own diff before reporting done.** Read it as a reviewer, not as its author, and delete what you would
+   ask a contributor to remove: dead code, unused parameters, redundant null checks, defensive branches that cannot be
+   reached, indirection used once, leftover scaffolding, and any file you touched only incidentally. Then confirm out
+   loud, in your final message, which language every new file is in and which files ended up over 300 lines.
 
 ## Nextcloud Contribution Policy
 
@@ -42,7 +68,9 @@ All contributions generated or assisted by this agent must fully comply with:
 
 ## Project Overview
 
-Nextcloud Notes for Android — a notes management app that syncs with a Nextcloud server. Written primarily in Java (legacy) with new code in Kotlin. Targets API 24+ (minSdk 24, targetSdk 36). Uses Nextcloud Single Sign-On (SSO) for authentication.
+Nextcloud Notes for Android — a notes management app that syncs with a Nextcloud server. Kotlin is the language of the
+project; the large amount of Java still present is legacy that is being migrated away from, not a style to follow.
+Targets API 28+ (minSdk 28, targetSdk 36). Uses Nextcloud Single Sign-On (SSO) for authentication.
 
 ## Build Commands
 
@@ -188,14 +216,12 @@ XML:
 ## Code Style
 
 [//]: # (REUSE-IgnoreStart)
-- Do not exceed 300 line of code per file.
+- Every new file is Kotlin, no file exceeds 300 lines, and code carries no comments — see [Hard Rules](#hard-rules).
 - Line length: **120 characters**
 - Standard Android Studio formatter with EditorConfig.
 - Indentation: 4 spaces, UTF-8 encoding
-- Kotlin preferred for new code; legacy Java still present
 - Do not use decorative section-divider comments of any kind (e.g. `// ── Title ───`, `// ------`, `// ======`).
 - Every new file must end with exactly one empty trailing line (no more, no less).
-- Do not add comments, documentation for every function you created instead make it self explanatory as much as possible.
 - `ktlint_code_style = android_studio`; disabled ktlint rules: `import-ordering`, `no-consecutive-comments`; trailing commas disallowed
 - All new files must include an SPDX license header: ` SPDX-License-Identifier: GPL-3.0-or-later `
 - Translations: only modify `values/strings.xml`; never the translated `values-*/strings.xml` files
@@ -203,7 +229,8 @@ XML:
 - Do not use magic number.
 - Apply fail fast principle instead of using nested if-else statements.
 - Do not use multiple boolean flags to determine states instead use enums or sealed classes.
-- Use modern Java for Java classes. Optionals, virtual threads, records, streams if necessary.
+- When you must edit an existing Java class, use modern Java — Optionals, records, streams where they genuinely help.
+  This applies to edits inside files that are already Java; it is never a reason to create a new Java file.
 - Avoid hardcoded strings, colors, dimensions. Use resources.
 - Run lint, spotbugsGplayDebug, detekt, spotlessKotlinCheck and fix findings inside the files that have been changed.
 
