@@ -59,6 +59,7 @@
     <string name="copy_link">Copiar link</string>
     <string name="could_not_retrieve_shares">No se pudieron recuperar los recursos compartidos</string>
     <string name="darkmode_dark">Oscuro</string>
+    <string name="darkmode_system_default">Sistema por defecto</string>
     <string name="dismiss">Despedir</string>
     <string name="dnd">No molestar</string>
     <string name="dontClear">No vaciar</string>
@@ -76,6 +77,7 @@
     <string name="file_list_seconds_ago">segundos</string>
     <string name="fontSize_large">Grande</string>
     <string name="fontSize_medium">Medio</string>
+    <string name="fontSize_small">Pequeño</string>
     <string name="formatting_help_checkboxes_title">Casillas de verificación</string>
     <string name="formatting_help_images_title">Imágenes</string>
     <string name="formatting_help_text_title">Texto</string>

@@ -70,6 +70,7 @@
     <string name="copy_link">Copiar enlace</string>
     <string name="could_not_retrieve_shares">No se pudieron obtener los recursos compartidos</string>
     <string name="darkmode_dark">Oscuro</string>
+    <string name="darkmode_system_default">Configuración predeterminada del sistema</string>
     <string name="delete_share">Borrar recurso compartido</string>
     <string name="dismiss">Descartar</string>
     <string name="dnd">No molestar</string>
