@@ -352,7 +352,9 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
             return;
         }
 
-        ShareUtil.openShareDialog(requireContext(), note.getTitle(), note.getContent());
+        // Prefer the live editor buffer so a newly typed, not-yet-persisted note
+        // is not shared with an empty/stale Room content field (#3300).
+        ShareUtil.openShareDialog(requireContext(), note.getTitle(), getContent());
     }
 
     @CallSuper
