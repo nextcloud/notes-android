@@ -105,6 +105,7 @@ effect of an unrelated change.
   [Nextcloud wording guidelines](https://docs.nextcloud.com/server/latest/developer_manual/design/foundations.html#wording).
 - Make sure the change works in light and dark theme, and with different server primary colors by using the
   `viewThemeUtils` color theme instead of fixed colors.
+- Use material 3 design icons.
 
 ### License headers
 
@@ -145,6 +146,8 @@ Add tests for your change, or state in the pull request why they are not needed.
 Translations are managed through [Transifex](https://explore.transifex.com/nextcloud/nextcloud/) and synced into the
 repository automatically. Only ever edit `app/src/main/res/values/strings.xml`; never touch the translated
 `values-*/strings.xml` files.
+
+If you need to change an existing translation, do not edit it. Create a new one and delete the old one.
 
 ## Commits and pull requests
 
