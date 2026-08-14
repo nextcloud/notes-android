@@ -190,7 +190,7 @@ GEM
     pstore (0.2.1)
     public_suffix (5.1.1)
     rake (13.4.2)
-    rdoc (4.3.0)
+    rdoc (6.1.2.1)
     reline (0.7.0)
       io-console (~> 0.5)
     representable (3.2.0)
