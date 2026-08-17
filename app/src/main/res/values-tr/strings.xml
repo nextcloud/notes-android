@@ -271,7 +271,7 @@
     <string name="oneHour">1 saat</string>
     <string name="online">Çevrim içi</string>
     <string name="online_status">Çevrim içi durumu</string>
-    <string name="pin_to_homescreen">Ana sayfaya sabitle</string>
+    <string name="pin_to_homescreen">Girişe sabitle</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_lock">Parola koruması</string>
     <string name="pref_value_wifi_and_mobile">Kablosuz ağ ve mobil veri ile eşitlensin</string>
