@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ ~ Nextcloud Notes - Android Client
+ ~
+ ~ SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+ ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/interactive_entry"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/spacer_1hx"
+    android:layout_marginVertical="@dimen/spacer_1hx"
+    android:background="@drawable/widget_card_background"
+    android:orientation="vertical"
+    android:padding="@dimen/spacer_2x">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/interactive_entry_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/widget_foreground"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="First note" />
+
+        <ImageView
+            android:id="@+id/interactive_entry_fav_icon"
+            android:layout_width="@dimen/widget_note_list_fav_icon_width"
+            android:layout_height="@dimen/widget_note_list_fav_icon_height"
+            android:layout_marginStart="@dimen/spacer_1x"
+            android:contentDescription="@string/widget_entry_fav_contentDescription"
+            android:src="@drawable/ic_star_yellow_24dp"
+            android:visibility="gone"
+            tools:visibility="visible" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/interactive_entry_excerpt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacer_1hx"
+        android:ellipsize="end"
+        android:maxLines="8"
+        android:textColor="@color/widget_foreground"
+        android:textSize="14sp"
+        android:visibility="gone"
+        tools:text="Some longer note content preview that spans several lines."
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/interactive_entry_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacer_1x"
+        android:background="@drawable/category_widget_background"
+        android:gravity="center"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="4dp"
+        android:textSize="12sp"
+        android:visibility="gone"
+        tools:text="Important"
+        tools:visibility="visible" />
+</LinearLayout>
