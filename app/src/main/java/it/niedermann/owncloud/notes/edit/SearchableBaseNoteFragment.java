@@ -8,6 +8,8 @@ package it.niedermann.owncloud.notes.edit;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
+import android.os.SystemClock;
 import android.text.Layout;
 import android.text.TextUtils;
 import android.util.Log;
@@ -30,6 +32,9 @@ import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
 
 import it.niedermann.owncloud.notes.R;
@@ -47,9 +52,14 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     private int occurrenceCount = 0;
     private SearchView searchView;
     private String searchQuery = null;
-    private static final int delay = 50; // If the search string does not change after $delay ms, then the search task starts.
-    private static final int shortStringDelay = 200; // A longer delay for short search strings.
+    private static final int minDelay = 50; // Minimum delay in ms after the search string stopped changing before the search task starts.
+    private static final int maxDelay = 750; // Upper bound in ms for the adaptive search delay.
+    private static final int shortStringExtraDelay = 150; // Additional delay for short search strings because they tend to produce many matches and therefore expensive highlighting.
     private static final int shortStringSize = 3; // The maximum length of a short search string.
+    private long lastSearchDuration = 0; // Measured duration of the last search + highlight pass. Used to adapt the debounce delay to the size of the note and the amount of matches (#1729).
+    private final AtomicInteger searchGeneration = new AtomicInteger();
+    private final ExecutorService searchExecutor = Executors.newSingleThreadExecutor();
+    private final Handler mainHandler = new Handler(Looper.getMainLooper());
     private boolean directEditRemotelyAvailable = false; // avoid using this directly, instead use: isDirectEditEnabled()
 
     @ColorInt
@@ -160,6 +170,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
                 if (currentVisibility != oldVisibility) {
                     if (currentVisibility != View.VISIBLE) {
+                        searchGeneration.incrementAndGet(); // Invalidate pending search results.
                         colorWithText("", null, color);
                         searchQuery = "";
                         hideSearchFabs();
@@ -216,15 +227,32 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
             private void queryMatch(@NonNull String newText) {
                 searchQuery = newText;
-                occurrenceCount = countOccurrences(getContent(), searchQuery);
-                if (occurrenceCount > 1) {
-                    showSearchFabs();
-                } else {
-                    hideSearchFabs();
-                }
                 currentOccurrence = 1;
-                jumpToOccurrence();
-                colorWithText(searchQuery, currentOccurrence, color);
+                final int generation = searchGeneration.incrementAndGet();
+                final String content = getContent();
+                searchExecutor.submit(() -> {
+                    final long searchStart = SystemClock.elapsedRealtime();
+                    final int count = countOccurrences(content, newText);
+                    if (generation != searchGeneration.get()) {
+                        return; // A newer query arrived in the meantime → discard this result.
+                    }
+                    mainHandler.post(() -> {
+                        if (generation != searchGeneration.get() || !isAdded()) {
+                            return;
+                        }
+                        occurrenceCount = count;
+                        if (occurrenceCount > 1) {
+                            showSearchFabs();
+                        } else {
+                            hideSearchFabs();
+                        }
+                        jumpToOccurrence();
+                        colorWithText(searchQuery, currentOccurrence, color);
+                        // Include the highlighting in the measurement because applying the spans
+                        // is usually the most expensive part in long notes.
+                        lastSearchDuration = SystemClock.elapsedRealtime() - searchStart;
+                    });
+                });
             }
 
             private void queryWithHandler(@NonNull String newText) {
@@ -232,9 +260,23 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
                     delayQueryTask.cancel();
                     handler.removeCallbacksAndMessages(null);
                 }
+                searchGeneration.incrementAndGet(); // Invalidate a potentially running search as early as possible.
                 delayQueryTask = new DelayQueryRunnable(newText);
-                // If there are few chars in the search pattern, we should start the search later.
-                handler.postDelayed(delayQueryTask, newText.length() > shortStringSize ? delay : shortStringDelay);
+                handler.postDelayed(delayQueryTask, getAdaptiveDelay(newText));
+            }
+
+            /**
+             * Scales the debounce delay with the measured duration of the previous search pass.
+             * Searching in short notes keeps the current, snappy behavior, while long notes get a
+             * delay which is long enough to let the user finish typing before an expensive search
+             * and highlight pass gets triggered (#1729).
+             */
+            private long getAdaptiveDelay(@NonNull String newText) {
+                long adaptiveDelay = Math.min(maxDelay, Math.max(minDelay, lastSearchDuration * 2));
+                if (newText.length() <= shortStringSize) {
+                    adaptiveDelay = Math.min(maxDelay, adaptiveDelay + shortStringExtraDelay);
+                }
+                return adaptiveDelay;
             }
 
             class DelayQueryRunnable implements Runnable {
@@ -268,6 +310,13 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
             outState.putString(saved_instance_key_searchQuery, searchView.getQuery().toString());
             outState.putInt(saved_instance_key_currentOccurrence, currentOccurrence);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        searchGeneration.incrementAndGet(); // Invalidate pending search results.
+        searchExecutor.shutdownNow();
+        super.onDestroy();
     }
 
     protected abstract void colorWithText(@NonNull String newText, @Nullable Integer current, @ColorInt int color);
@@ -317,8 +366,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
             currentOccurrence = occurrenceCount;
             jumpToOccurrence();
         } else if (searchQuery != null && !searchQuery.isEmpty()) {
-            final String currentContent = getContent().toLowerCase();
-            final int indexOfNewText = indexOfNth(currentContent, searchQuery.toLowerCase(), 0, currentOccurrence);
+            final int indexOfNewText = indexOfNth(getContent(), searchQuery, currentOccurrence);
             if (indexOfNewText <= 0) {
                 // Search term is not n times in text
                 // Go back to first search result
@@ -328,8 +376,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
                 }
                 return;
             }
-            final String textUntilFirstOccurrence = currentContent.substring(0, indexOfNewText);
-            final int numberLine = layout.getLineForOffset(textUntilFirstOccurrence.length());
+            final int numberLine = layout.getLineForOffset(indexOfNewText);
 
             if (numberLine >= 0) {
                 final var scrollView = getScrollView();
@@ -340,15 +387,19 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         }
     }
 
-    private static int indexOfNth(String input, String value, int startIndex, int nth) {
+    private static int indexOfNth(String input, String value, int nth) {
         if (nth < 1)
             throw new IllegalArgumentException("Param 'nth' must be greater than 0!");
-        if (nth == 1)
-            return input.indexOf(value, startIndex);
-        final int idx = input.indexOf(value, startIndex);
-        if (idx == -1)
-            return -1;
-        return indexOfNth(input, value, idx + 1, nth - 1);
+        // Single, case insensitive pass without allocating lower case copies of the whole content.
+        final var matcher = Pattern.compile(value, Pattern.CASE_INSENSITIVE | Pattern.LITERAL)
+                .matcher(input);
+        int i = 0;
+        while (matcher.find()) {
+            if (++i == nth) {
+                return matcher.start();
+            }
+        }
+        return -1;
     }
 
     private static int countOccurrences(String haystack, String needle) {
