@@ -50,7 +50,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     private static final int delay = 50; // If the search string does not change after $delay ms, then the search task starts.
     private static final int shortStringDelay = 200; // A longer delay for short search strings.
     private static final int shortStringSize = 3; // The maximum length of a short search string.
-    private boolean directEditRemotelyAvailable = false; // avoid using this directly, instead use: isDirectEditEnabled()
+    private boolean directEditEnabled = false;
 
     @ColorInt
     private int color;
@@ -75,11 +75,14 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     @Override
     protected void onScroll(int scrollY, int oldScrollY) {
         super.onScroll(scrollY, oldScrollY);
-        if (isDirectEditEnabled()) {
-            // only show FAB if search is not active
-            if (getSearchNextButton() == null || getSearchNextButton().getVisibility() != View.VISIBLE) {
-                final ExtendedFloatingActionButton directFab = getDirectEditingButton();
+        // only show FAB if search is not active
+        if (getSearchNextButton() == null || getSearchNextButton().getVisibility() != View.VISIBLE) {
+            final ExtendedFloatingActionButton directFab = getDirectEditingButton();
+            final ExtendedFloatingActionButton normalFab = getNormalEditButton();
+            if (directEditEnabled) {
                 ExtendedFabUtil.toggleVisibilityOnScroll(directFab, scrollY, oldScrollY);
+            } else if (normalFab != null) {
+                ExtendedFabUtil.toggleVisibilityOnScroll(normalFab, scrollY, oldScrollY);
             }
         }
     }
@@ -87,8 +90,8 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        checkDirectEditingAvailable();
-        if (isDirectEditEnabled()) {
+        directEditEnabled = checkDirectEditingAvailableAndEnabled();
+        if (directEditEnabled) {
             ExtendedFloatingActionButton edit = getNormalEditButton();
             if (edit != null) edit.setVisibility(View.GONE);
             final ExtendedFloatingActionButton directEditingButton = getDirectEditingButton();
@@ -103,7 +106,8 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         } else {
             getDirectEditingButton().setVisibility(View.GONE);
             ExtendedFloatingActionButton edit = getNormalEditButton();
-            if(edit!=null) {
+            if (edit != null) {
+                edit.setExtended(false);
                 edit.setVisibility(View.VISIBLE);
                 edit.setOnClickListener(v -> {
                     if (listener != null) {
@@ -114,21 +118,18 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         }
     }
 
-    private void checkDirectEditingAvailable() {
+    private boolean checkDirectEditingAvailableAndEnabled() {
+        // Check availability
         try {
             final SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext());
             final Account localAccount = repo.getAccountByName(ssoAccount.name);
-            directEditRemotelyAvailable = localAccount != null && localAccount.isDirectEditingAvailable();
+            if (localAccount == null || !localAccount.isDirectEditingAvailable())
+                return false;
         } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
             Log.w(TAG, "checkDirectEditingAvailable: ", e);
-            directEditRemotelyAvailable = false;
-        }
-    }
-
-    protected boolean isDirectEditEnabled() {
-        if (!directEditRemotelyAvailable) {
             return false;
         }
+        // Check if enabled in settings
         final var sp = PreferenceManager.getDefaultSharedPreferences(requireContext().getApplicationContext());
         return sp.getBoolean(getString(R.string.pref_key_enable_direct_edit), true);
     }
@@ -285,6 +286,10 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
     private void showSearchFabs() {
         ExtendedFabUtil.setExtendedFabVisibility(getDirectEditingButton(), false);
+        final ExtendedFloatingActionButton normalFab = getNormalEditButton();
+        if (normalFab != null) {
+            ExtendedFabUtil.setExtendedFabVisibility(normalFab, false);
+        }
         final var next = getSearchNextButton();
         final var prev = getSearchPrevButton();
         if (prev != null) {
@@ -303,6 +308,14 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         }
         if (next != null) {
             next.hide();
+        }
+        if (directEditEnabled) {
+            ExtendedFabUtil.setExtendedFabVisibility(getDirectEditingButton(), true);
+        } else {
+            final ExtendedFloatingActionButton normalFab = getNormalEditButton();
+            if (normalFab != null) {
+                ExtendedFabUtil.setExtendedFabVisibility(normalFab, true);
+            }
         }
     }
 
