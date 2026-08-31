@@ -394,8 +394,7 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
         val updateDisposable = Single.just(note.remoteId)
             .map { remoteId ->
                 val newNote = notesApi.getNote(remoteId).singleOrError().blockingGet().response
-                val localAccount = repo.getAccountByName(account.name)
-                repo.updateNoteAndSync(localAccount, note, newNote.content, newNote.title, null)
+                repo.updateNoteFromRemote(note.id, newNote)
             }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
