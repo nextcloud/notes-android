@@ -24,7 +24,7 @@ object ExtendedFabUtil {
             if (extendedFab.isExtended) {
                 extendedFab.hide()
             } else {
-                if (extendedFab.animation == null) {
+                if (extendedFab.animation == null && extendedFab.isShown) {
                     val animation =
                         AnimationUtils.loadAnimation(
                             extendedFab.context,
@@ -64,9 +64,10 @@ object ExtendedFabUtil {
         extendedFab: ExtendedFloatingActionButton,
         scrollY: Int,
         oldScrollY: Int,
+        isTyping: Boolean
     ) {
         @Suppress("ConvertTwoComparisonsToRangeCheck")
-        if (oldScrollY > 0 && scrollY > oldScrollY && extendedFab.isShown) {
+        if (isTyping || (oldScrollY > 0 && scrollY > oldScrollY && extendedFab.isShown)) {
             setExtendedFabVisibility(extendedFab, false)
         } else if (scrollY < oldScrollY && !extendedFab.isShown) {
             setExtendedFabVisibility(extendedFab, true)
