@@ -67,7 +67,8 @@ object ExtendedFabUtil {
         isTyping: Boolean
     ) {
         @Suppress("ConvertTwoComparisonsToRangeCheck")
-        if (isTyping || (oldScrollY > 0 && scrollY > oldScrollY && extendedFab.isShown)) {
+        val hasScrolledDown = oldScrollY > 0 && scrollY > oldScrollY && extendedFab.isShown
+        if (isTyping || hasScrolledDown) {
             setExtendedFabVisibility(extendedFab, false)
         } else if (scrollY < oldScrollY && !extendedFab.isShown) {
             setExtendedFabVisibility(extendedFab, true)
