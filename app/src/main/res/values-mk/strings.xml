@@ -72,6 +72,7 @@
     <string name="dnd">Не вознемирувај</string>
     <string name="dontClear">Не го тргај</string>
     <string name="ecosystem_apps_display_files">Датотеки</string>
+    <string name="ecosystem_apps_display_more">Повеќе</string>
     <string name="ecosystem_apps_display_talk">Разговор</string>
     <string name="ecosystem_apps_talk">Talk</string>
     <string name="error_action_open_battery_settings">Параметри за батеријата</string>
