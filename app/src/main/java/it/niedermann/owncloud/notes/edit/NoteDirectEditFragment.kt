@@ -109,6 +109,7 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
                             plainEditingFab,
                             scrollStart,
                             scrollEnd,
+                            false
                         )
                     }
                 }
