@@ -27,6 +27,7 @@
     <string name="account_already_imported">Aðgangur hefur þegar verið fluttur inn</string>
     <string name="account_imported">Aðgangur fluttur inn.</string>
     <string name="account_not_found">Notandaaðgangur fannst ekki!</string>
+    <string name="account_switch_dialog_status_fetching_error_message">Mistókst að sækja stöðu, endilega reyndu aftur.</string>
     <string name="action_back">Til baka</string>
     <string name="action_create">Nýr minnispunktur</string>
     <string name="action_edit_save">Vista</string>
@@ -40,7 +41,9 @@
     <string name="action_uncategorized">Óflokkað</string>
     <string name="action_undo">Afturkalla</string>
     <string name="activity_chooser_send_file_title">Senda</string>
+    <string name="activity_chooser_title">Senda tengil til…</string>
     <string name="activity_select_single_note">Veldu minnispunkt</string>
+    <string name="activity_sharing_details_title">Nánari upplýsingar um deilingu</string>
     <string name="activity_sharing_title">Deiling</string>
     <string name="add_account">Bæta við notandaaðgangi</string>
     <string name="add_another_public_share_link">Bæta við öðrum tengli</string>
@@ -99,6 +102,8 @@
     <string name="context_based_formatting">Sprettgluggi fyrir samhengisháða forsníðingu</string>
     <string name="copy_link">Afrita tengil</string>
     <string name="could_not_retrieve_shares">Tókst ekki að ná í sameignir</string>
+    <string name="darkmode_dark">Dökkt</string>
+    <string name="darkmode_light">Ljóst</string>
     <string name="darkmode_system_default">Sjálfgefið kerfi</string>
     <string name="delete_share">Eyða sameign</string>
     <string name="direct_editing_error">Villa við að hlaða inn sniðnum textabreytingum</string>
@@ -152,6 +157,7 @@
     <string name="error_sync">Samstilling mistókst: %1$s</string>
     <string name="error_synchronization">Samstilling mistókst</string>
     <string name="error_unknown">Óþekkt villa kom upp.</string>
+    <string name="failed_the_remove_share">Mistókst að fjarlægja sameign</string>
     <string name="failed_update_ui">Mistókst að uppfæra viðmótið</string>
     <string name="file_detail_sharing_fragment_no_contact_app_message">Ekkert forrit tiltækt til að velja tengiliði</string>
     <string name="file_list_seconds_ago">sekúndum síðan</string>
@@ -188,9 +194,7 @@
     <string name="formatting_help_images_alt">Skrautleg mynd</string>
     <string name="formatting_help_images_body_1">Tenglar þurfa annað hvort að vera fullar URL-slóðir sem byrja á samskiptamáta
  og léni, eða algildar slóðir sem byrja á %1$s stafnum.</string>
-    <string name="formatting_help_images_body_2">Til að gæta samræmis við Markdown-sniðið, skaltu nota lausnarstafi (escape
- characters) í slíð myndarinnar. Þetta þýðir meðal annars að skipta þarf
- bilum út fyrir %1$s í slóðinni.</string>
+    <string name="formatting_help_images_body_2">Til að gæta samræmis við Markdown-sniðið, skaltu nota lausnarstafi (escape characters) í slíð myndarinnar. Þetta þýðir meðal annars að skipta þarf bilum út fyrir %1$s í slóðinni.</string>
     <string name="formatting_help_images_title">Myndir</string>
     <string name="formatting_help_lists_body_1">Stundum viltu fá tölusetta lista:</string>
     <string name="formatting_help_lists_body_2">Eitt</string>
@@ -230,6 +234,7 @@
     <string name="link_share_editing">Breytingar</string>
     <string name="link_share_file_drop">Slepping skráa (einungis innsending)</string>
     <string name="link_share_view_only">Einungis skoða</string>
+    <string name="listview_no_content">Ekkert efni</string>
     <string name="listview_updated_last_month">Í síðasta mánuði</string>
     <string name="listview_updated_last_week">Í síðustu viku</string>
     <string name="listview_updated_this_month">Í þessum mánuði</string>
@@ -243,6 +248,7 @@
     <string name="menu_favorite">Eftirlæti</string>
     <string name="menu_preview">Forskoðun</string>
     <string name="menu_share">Deila</string>
+    <string name="menu_shared_note">Sameiginlegur minnispunktur</string>
     <string name="mute_all_notifications">Þagga allar tilkynningar</string>
     <string name="no_account_configured_yet">Enginn aðgangur stilltur</string>
     <string name="no_actions">Engar aðgerðir fyrir þennan notanda</string>
@@ -257,17 +263,22 @@
     <string name="noteMode_remember_last">Muna það sem ég valdi síðast</string>
     <string name="noteMode_rich_edit">Breytingahamur sniðins texta</string>
     <string name="note_has_been_deleted">Minnispunktinum hefur verið eytt</string>
+    <string name="note_share_activity_cannot_created">Þú hefur ekki heimild til að útbúa sameign.</string>
     <string name="note_share_activity_contact_no_permission">Heimild til aðgangs að tengiliðum er nauðsynleg.</string>
     <string name="note_share_activity_could_not_retrieve_url">Tókst ekki að ná í slóð</string>
     <string name="note_share_activity_resharing_not_allowed">Stefnuregla eða heimildir koma í veg fyrir endurdeilingu</string>
     <string name="note_share_activity_search_text">Nafn, skýjasambandsauðkenni eða tölvupóstfang …</string>
+    <string name="note_share_activity_send_copy_to">Senda afrit til</string>
     <string name="note_share_activity_share_link">Tengill á sameign</string>
-    <string name="note_share_activity_shared_with_you">Deilt með þér af %s</string>
+    <string name="note_share_activity_shared_with_you">Deilt með þér af %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" hefur verið deilt með þér</string>
+    <string name="note_share_activity_you_are_not_allowed_to_share">Þú hefur ekki heimild til að útbúa opinbera sameign.</string>
+    <string name="note_share_created">Sameign útbúin</string>
     <string name="note_share_detail_activity_allow_download_and_sync">Leyfa niðurhal og samstillingu</string>
     <string name="note_share_detail_activity_cancel">Hætta við</string>
     <string name="note_share_detail_activity_common_confirm">Staðfesta</string>
     <string name="note_share_detail_activity_common_next">Næst</string>
+    <string name="note_share_detail_activity_create_share_error">Mistókst að útbúa sameign</string>
     <string name="note_share_detail_activity_hint_name">Heiti</string>
     <string name="note_share_detail_activity_hint_note">Minnispunktur</string>
     <string name="note_share_detail_activity_hint_password">Lykilorð</string>
@@ -317,6 +328,8 @@
     <string name="settings_prevent_screen_capture">Koma í veg fyrir upptöku af skjá</string>
     <string name="settings_show_ecosystem_apps">Sýna forritaskipti</string>
     <string name="settings_show_ecosystem_apps_summary">Tillögur Nextcloud-forrita í flakkfyrirsögn</string>
+    <string name="settings_swipe_actions">Strokuaðgerðir</string>
+    <string name="settings_swipe_actions_summary">Merktu minnispunkta sem eftirlæti eða eyddu þeim með stroku</string>
     <string name="settings_theme_title">Þema</string>
     <string name="settings_wifi_only">Aðeins samstilla á WiFi-neti</string>
     <string name="share">Deila</string>
@@ -324,8 +337,9 @@
     <string name="share_dialog_title">Deiling</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Rennur út %1$s</string>
+    <string name="share_expires">Sameignin rennur út þann %1$s</string>
     <string name="share_file">Deila %1$s</string>
-    <string name="share_group_clarification">%s hópurinn</string>
+    <string name="share_group_clarification">%1$s (hópur)</string>
     <string name="share_internal_link">Deila innri tengli</string>
     <string name="share_internal_link_to_file_text">Innri deilingartengill virkar bara fyrir notendur sem eiga aðgang að þessari skrá</string>
     <string name="share_internal_link_to_folder_text">Innri deilingartengill virkar bara fyrir notendur sem eiga aðgang að þessari möppu</string>
@@ -377,18 +391,20 @@
     <string name="sort_alphabetically">Raða í stafrófsröð</string>
     <string name="sort_last_modified">Sort by modified date</string>
     <string name="status_message">Stöðuskilaboð</string>
+    <string name="status_set_fail_message">Mistókst að stilla stöðu!</string>
     <string name="switch_to_plain_editing">Skipta yfir í breytingar á hreinum texta</string>
     <string name="thirtyMinutes">30 mínútur</string>
     <string name="thisWeek">Í þessari viku</string>
     <string name="today">Í dag</string>
     <string name="unlock_notes">Aflæsa minnispunktum</string>
     <string name="username">Notandanafn</string>
-    <string name="welcome_text">Velkomin í %s</string>
+    <string name="welcome_text">Velkomin í %1$s</string>
     <string name="whats_your_status">Hver er staðan á þér?</string>
     <string name="widget_entry_fav_contentDescription">Stjörnutáknið er notað til að sýna að atriði sé eftirlæti</string>
     <string name="widget_not_logged_in">Skráðu þig inn í minnispunktaforritið áður en þú notar þennan viðmótshluta</string>
     <string name="widget_note_list_placeholder">Engir minnispunktar</string>
     <string name="widget_note_list_title">Listi yfir minnispunkta</string>
+    <string name="widget_single_note_loading">Hleð inn minnispunkti…</string>
     <string name="widget_single_note_note_not_found">Minnispunktur fannst ekki</string>
     <string name="widget_single_note_title">Stakur minnispunktur</string>
     <string name="write_email">Senda tölvupóst</string>
