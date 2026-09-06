@@ -19,7 +19,6 @@ import com.owncloud.android.lib.common.utils.Log_OC
 import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.edit.EditNoteActivity
 import it.niedermann.owncloud.notes.persistence.NotesRepository
-import it.niedermann.owncloud.notes.shared.util.WidgetUtil
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import androidx.core.net.toUri
@@ -97,8 +96,9 @@ class NoteListWidget : AppWidgetProvider() {
                         setPackage(context.packageName)
                     }
 
-                    val pendingIntentFlags =
-                        WidgetUtil.pendingIntentFlagCompat(PendingIntent.FLAG_UPDATE_CURRENT or Intent.FILL_IN_COMPONENT)
+                     val pendingIntentFlags = PendingIntent.FLAG_UPDATE_CURRENT or
+                         PendingIntent.FLAG_MUTABLE or
+                         Intent.FILL_IN_COMPONENT
                     val editNotePendingIntent =
                         PendingIntent.getActivity(context, 0, editNoteIntent, pendingIntentFlags)
 
