@@ -29,6 +29,9 @@ public class NavigationItem {
     public Integer count;
     @Nullable
     public ENavigationCategoryType type;
+    public int depth = 0;
+    @NonNull
+    public CategoryExpandState expandState = CategoryExpandState.NOT_EXPANDABLE;
 
     public NavigationItem(@NonNull String id, @NonNull String label, @Nullable Integer count, @DrawableRes int icon) {
         this.id = id;
