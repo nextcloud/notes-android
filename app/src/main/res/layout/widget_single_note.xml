@@ -25,9 +25,8 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:padding="@dimen/spacer_1x"
-        android:text="@string/widget_single_note_note_not_found"
+        android:text="@string/widget_single_note_loading"
         android:textAlignment="center"
-        android:textColor="@color/widget_foreground"
-        android:visibility="gone" />
+        android:textColor="@color/widget_foreground" />
 
 </RelativeLayout>

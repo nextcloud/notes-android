@@ -49,24 +49,33 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
     @Override
     public void onDataSetChanged() {
         final var data = repo.getSingleNoteWidgetData(appWidgetId);
-        if (data != null) {
-            final long noteId = data.getNoteId();
-            Log.v(TAG, "Fetch note with id " + noteId);
-            note = repo.getNoteById(noteId);
-
-            final var views = new RemoteViews(context.getPackageName(), R.layout.widget_single_note);
-            if (note == null) {
-                Log.e(TAG, "Error: note not found");
-                views.setViewVisibility(R.id.widget_single_note_placeholder_tv, View.VISIBLE);
-                views.setTextViewText(R.id.widget_single_note_placeholder_tv,
-                        context.getString(R.string.widget_single_note_note_not_found));
-            } else {
-                views.setViewVisibility(R.id.widget_single_note_placeholder_tv, View.GONE);
-            }
-            AppWidgetManager.getInstance(context).partiallyUpdateAppWidget(appWidgetId, views);
-        } else {
-            Log.w(TAG, "Widget with ID " + appWidgetId + " seems to be not configured yet.");
+        final var views = new RemoteViews(context.getPackageName(), R.layout.widget_single_note);
+        if (data == null) {
+            showErrorView(context, views);
+            return;
         }
+
+        final long noteId = data.getNoteId();
+        note = repo.getNoteById(noteId);
+        Log.v(TAG, "Fetch note with id " + noteId);
+
+        if (note == null) {
+            showErrorView(context, views);
+            Log.e(TAG, "Error: note not found");
+            return;
+        }
+        views.setViewVisibility(R.id.widget_single_note_placeholder_tv, View.GONE);
+
+        AppWidgetManager.getInstance(context).partiallyUpdateAppWidget(appWidgetId, views);
+    }
+
+    private void showErrorView(Context context, RemoteViews views) {
+        views.setViewVisibility(R.id.single_note_widget_lv, View.GONE);
+        views.setViewVisibility(R.id.widget_single_note_placeholder_tv, View.VISIBLE);
+        views.setTextViewText(R.id.widget_single_note_placeholder_tv,
+                context.getString(R.string.widget_single_note_note_not_found));
+
+        AppWidgetManager.getInstance(context).partiallyUpdateAppWidget(appWidgetId, views);
     }
 
     @Override

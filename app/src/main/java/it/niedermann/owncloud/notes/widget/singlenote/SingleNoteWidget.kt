@@ -114,8 +114,6 @@ class SingleNoteWidget : AppWidgetProvider() {
         ).apply {
             setPendingIntentTemplate(R.id.single_note_widget_lv, pendingIntent)
             setRemoteAdapter(R.id.single_note_widget_lv, serviceIntent)
-            setViewVisibility(R.id.widget_single_note_placeholder_tv, View.VISIBLE)
-            setTextViewText(R.id.widget_single_note_placeholder_tv, context.getString(R.string.widget_single_note_loading))
         }
     }
 
