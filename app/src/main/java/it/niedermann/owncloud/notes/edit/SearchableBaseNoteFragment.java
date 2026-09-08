@@ -42,6 +42,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     private static final String TAG = SearchableBaseNoteFragment.class.getSimpleName();
     private static final String saved_instance_key_searchQuery = "searchQuery";
     private static final String saved_instance_key_currentOccurrence = "currentOccurrence";
+    protected static final long USER_CHANGING_TEXT_TIMEOUT = 200;
 
     private int currentOccurrence = 1;
     private int occurrenceCount = 0;
@@ -80,9 +81,9 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
             final ExtendedFloatingActionButton directFab = getDirectEditingButton();
             final ExtendedFloatingActionButton normalFab = getNormalEditButton();
             if (directEditEnabled) {
-                ExtendedFabUtil.toggleVisibilityOnScroll(directFab, scrollY, oldScrollY);
+                ExtendedFabUtil.toggleVisibilityOnScroll(directFab, scrollY, oldScrollY, userIsChangingText());
             } else if (normalFab != null) {
-                ExtendedFabUtil.toggleVisibilityOnScroll(normalFab, scrollY, oldScrollY);
+                ExtendedFabUtil.toggleVisibilityOnScroll(normalFab, scrollY, oldScrollY, userIsChangingText());
             }
         }
     }
@@ -283,6 +284,8 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     protected abstract ExtendedFloatingActionButton getDirectEditingButton();
 
     protected abstract ExtendedFloatingActionButton getNormalEditButton();
+
+    protected abstract boolean userIsChangingText();
 
     private void showSearchFabs() {
         ExtendedFabUtil.setExtendedFabVisibility(getDirectEditingButton(), false);

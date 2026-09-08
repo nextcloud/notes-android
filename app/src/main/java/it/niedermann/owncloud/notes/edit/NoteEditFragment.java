@@ -58,6 +58,8 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     private Handler handler;
     private boolean saveActive;
     private boolean unsavedEdit;
+    private long lastTextChange = 0;
+
     private final Runnable runAutoSave = new Runnable() {
         @Override
         public void run() {
@@ -124,6 +126,11 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
         return null;
     }
 
+    @Override
+    protected boolean userIsChangingText() {
+        return System.currentTimeMillis() - lastTextChange < USER_CHANGING_TEXT_TIMEOUT;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -148,6 +155,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
 
             @Override
             public void afterTextChanged(final Editable s) {
+                lastTextChange = System.currentTimeMillis();
                 unsavedEdit = true;
                 if (!saveActive) {
                     handler.removeCallbacks(runAutoSave);

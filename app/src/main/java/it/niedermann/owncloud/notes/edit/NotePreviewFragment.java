@@ -54,6 +54,8 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     @Nullable
     private Runnable setScrollY;
 
+    private long lastTextChange = 0;
+
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
@@ -102,6 +104,11 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     }
 
     @Override
+    protected boolean userIsChangingText() {
+        return System.currentTimeMillis() - lastTextChange < USER_CHANGING_TEXT_TIMEOUT;
+    }
+
+    @Override
     protected Layout getLayout() {
         binding.singleNoteContent.onPreDraw();
         return binding.singleNoteContent.getLayout();
@@ -140,6 +147,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
 
         noteLoaded = true;
         registerInternalNoteLinkHandler();
+        registerInternalNoteTextChangedHandler();
 
         lifecycleScopeIOJob(() -> {
             final String content = note.getContent();
@@ -177,6 +185,10 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
             }
             return false;
         });
+    }
+
+    protected void registerInternalNoteTextChangedHandler() {
+        binding.singleNoteContent.setMarkdownStringChangedListener(charSequence -> lastTextChange = System.currentTimeMillis());
     }
 
     @Override
