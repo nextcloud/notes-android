@@ -184,6 +184,7 @@
     <string name="link_share_editing">Sunting</string>
     <string name="link_share_file_drop">Lepaskan berkas (hanya unggah)</string>
     <string name="link_share_view_only">Hanya lihat</string>
+    <string name="listview_no_content">Tidak ada konten</string>
     <string name="listview_updated_last_month">Bulan lalu</string>
     <string name="listview_updated_last_week">Minggu lalu</string>
     <string name="listview_updated_this_month">Bulan ini</string>
