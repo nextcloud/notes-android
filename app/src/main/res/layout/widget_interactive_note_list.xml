@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ ~ Nextcloud Notes - Android Client
+ ~
+ ~ SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+ ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/widget_interactive_background"
+        android:padding="@dimen/widget_interactive_padding">
+
+        <ListView
+            android:id="@+id/interactive_note_list_lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="@null"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            tools:listitem="@layout/widget_interactive_entry" />
+
+        <TextView
+            android:id="@+id/interactive_note_list_placeholder_tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/widget_note_list_placeholder"
+            android:textColor="@color/fg_default_high"
+            tools:visibility="gone" />
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/interactive_create_note_button"
+        android:layout_width="@dimen/widget_fab_size"
+        android:layout_height="@dimen/widget_fab_size"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/widget_fab_margin"
+        android:background="@drawable/widget_fab_background"
+        android:contentDescription="@string/widget_create_note_contentDescription"
+        android:padding="@dimen/spacer_1x"
+        android:src="@drawable/ic_add_white_24dp" />
+
+</FrameLayout>
