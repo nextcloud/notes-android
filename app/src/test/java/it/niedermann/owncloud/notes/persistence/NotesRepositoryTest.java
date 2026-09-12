@@ -206,6 +206,85 @@ public class NotesRepositoryTest {
     }
 
     @Test
+    public void updateNoteFromRemoteUpdatesSynchronizedNote() {
+        final var remoteModified = Calendar.getInstance();
+        final var remoteNote = new Note(
+                1001L,
+                remoteModified,
+                "Remote title",
+                "Remote title\nRemote content",
+                "Remote category",
+                true,
+                "remote-etag");
+
+        assertEquals(1, repo.updateNoteFromRemote(1, remoteNote));
+
+        final var storedNote = repo.getNoteById(1);
+        assertEquals("Remote title", storedNote.getTitle());
+        assertEquals("Remote title\nRemote content", storedNote.getContent());
+        assertEquals("Remote category", storedNote.getCategory());
+        assertTrue(storedNote.getFavorite());
+        assertEquals("remote-etag", storedNote.getETag());
+        assertEquals(remoteModified.getTimeInMillis(), storedNote.getModified().getTimeInMillis());
+        assertEquals("Remote content", storedNote.getExcerpt());
+        assertEquals(VOID, storedNote.getStatus());
+    }
+
+    @Test
+    public void updateNoteFromRemoteDoesNotOverwriteLocalEdits() {
+        final var localNote = repo.getNoteById(3);
+        final var remoteNote = new Note(
+                localNote.getRemoteId(),
+                Calendar.getInstance(),
+                "Remote title",
+                "Remote content",
+                "Remote category",
+                true,
+                "remote-etag");
+
+        assertEquals(0, repo.updateNoteFromRemote(localNote.getId(), remoteNote));
+
+        final var storedNote = repo.getNoteById(localNote.getId());
+        assertEquals(localNote.getTitle(), storedNote.getTitle());
+        assertEquals(localNote.getContent(), storedNote.getContent());
+        assertEquals(localNote.getCategory(), storedNote.getCategory());
+        assertEquals(localNote.getFavorite(), storedNote.getFavorite());
+        assertEquals(localNote.getETag(), storedNote.getETag());
+        assertEquals(localNote.getModified().getTimeInMillis(), storedNote.getModified().getTimeInMillis());
+        assertEquals(localNote.getExcerpt(), storedNote.getExcerpt());
+        assertEquals(LOCAL_EDITED, storedNote.getStatus());
+    }
+
+    @Test
+    public void updateNoteFromRemoteDoesNotDirtyIdenticalNoteOrScheduleSync() {
+        final var modified = Calendar.getInstance();
+        final var localNote = new Note(
+                1010L,
+                modified,
+                "Same title",
+                "Same content",
+                "Same category",
+                false,
+                "same-etag");
+        final var storedLocalNote = repo.addNote(account.getId(), localNote);
+        final var repoSpy = spy(repo);
+        final var identicalRemoteNote = new Note(
+                localNote.getRemoteId(),
+                modified,
+                localNote.getTitle(),
+                localNote.getContent(),
+                localNote.getCategory(),
+                localNote.getFavorite(),
+                localNote.getETag());
+
+        assertEquals(0, repoSpy.updateNoteFromRemote(storedLocalNote.getId(), identicalRemoteNote));
+
+        final var storedNote = repoSpy.getNoteById(storedLocalNote.getId());
+        assertEquals(VOID, storedNote.getStatus());
+        verify(repoSpy, times(0)).scheduleSync(any(), anyBoolean());
+    }
+
+    @Test
     public void updateApiVersion() {
         repo.updateApiVersion(account.getId(), "");
         assertNull(repo.getAccountById(account.getId()).getApiVersion());
