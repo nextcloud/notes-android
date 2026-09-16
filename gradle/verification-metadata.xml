@@ -12,6 +12,7 @@
       </trusted-artifacts>
       <ignored-keys>
          <ignored-key id="3967D4EDA591B991" reason="Key couldn't be downloaded from any key server"/>
+          <ignored-key id="4D176DC503FB4267" reason="Key couldn't be downloaded from any key server" />
          <ignored-key id="5A68A2249128E2C6" reason="Key couldn't be downloaded from any key server"/>
          <ignored-key id="66D68DAA073BE985" reason="Key couldn't be downloaded from any key server"/>
          <ignored-key id="D2151178A123C97F" reason="Key couldn't be downloaded from any key server"/>
@@ -49,6 +50,7 @@
             <trusting group="androidx.customview"/>
             <trusting group="androidx.databinding"/>
             <trusting group="androidx.dynamicanimation" name="dynamicanimation" version="1.1.0"/>
+            <trusting group="androidx.exifinterface" name="exifinterface" version="1.4.2"/>
             <trusting group="androidx.fragment"/>
             <trusting group="androidx.lifecycle"/>
             <trusting group="androidx.recyclerview" name="recyclerview-selection" version="1.2.0"/>
@@ -101,6 +103,13 @@
             <trusting group="^com[.]squareup($|([.].*))" regex="true"/>
          </trusted-key>
          <trusted-key id="1D9AA7F9E1E2824728B8CD1794B291AEF984A085" group="io.reactivex.rxjava2"/>
+         <trusted-key id="20723A6399BC060154283B37CFAE163B64AC9189">
+            <trusting group="org.jetbrains.compose.animation"/>
+            <trusting group="org.jetbrains.compose.foundation"/>
+            <trusting group="org.jetbrains.compose.runtime"/>
+            <trusting group="org.jetbrains.compose.ui"/>
+            <trusting group="^org[.]jetbrains[.]androidx($|([.].*))" regex="true"/>
+         </trusted-key>
          <trusted-key id="24D04176586361FDA94EE0315F7786DF73E61F56">
             <trusting group="com.google.devtools.ksp" name="symbol-processing-api" version="1.9.0-1.0.13"/>
             <trusting group="com.google.devtools.ksp" name="symbol-processing-api" version="2.0.10-1.0.24"/>
@@ -164,9 +173,11 @@
          <trusted-key id="5767F9CDE920750621875079A40E24B5B408DBD5" group="org.robolectric"/>
          <trusted-key id="5897253BEA3046AEEA95A067E93671C7272B7B3F" group="org.jdom" name="jdom2" version="2.0.6"/>
          <trusted-key id="5CE325996A35213326AE2C68912D2C0ECCDA55C0" group="com.google.errorprone"/>
+         <trusted-key id="5DD80B0DDCCBE005F0A47FD66751E1A6E2001B8D" group="^com[.]squareup($|([.].*))" regex="true"/>
          <trusted-key id="600EA202B1EC682F4A788E5AAC7A514BC9F9BB70" group="io.opencensus" name="opencensus-api" version="0.31.0"/>
          <trusted-key id="60200AC4AE761F1614D6C46766D68DAA073BE985" group="org.slf4j"/>
          <trusted-key id="635EE627345F3C1DD422B2E207D3516820BCF6B1" group="com.github.ben-manes.caffeine" name="caffeine" version="2.9.3"/>
+         <trusted-key id="64B9B09F164AA0BF88742EB61188B69F6D6259CA" group="com.google.accompanist" name="accompanist-drawablepainter" version="0.37.3"/>
          <trusted-key id="694621A7227D8D5289699830ABE9F3126BB741C1" group="^com[.]google($|([.].*))" regex="true"/>
          <trusted-key id="696B6199A2A9D8C29CE78CC0D041CAD2E452550F" group="com.google.protobuf"/>
          <trusted-key id="6DD3B8C64EF75253BEB2C53AD908A43FB7EC07AC" group="jakarta.activation"/>
@@ -222,6 +233,7 @@
             <trusting group="com.google.dagger" name="dagger" version="2.58"/>
             <trusting group="com.google.dagger" name="dagger" version="2.59.1"/>
             <trusting group="com.google.dagger" name="dagger" version="2.59.2"/>
+            <trusting group="com.google.dagger" name="dagger" version="2.60.1"/>
          </trusted-key>
          <trusted-key id="A33A0B49A4C1AB590B0A4DDC1364C5E2DF3E99C5" group="org.reactivestreams" name="reactive-streams" version="1.0.3"/>
          <trusted-key id="A413F67D71BEEC23ADD0CE0ACB43338E060CF9FA" group="org.jacoco"/>
@@ -237,6 +249,7 @@
             <trusting group="androidx.graphics"/>
             <trusting group="androidx.lifecycle"/>
             <trusting group="androidx.profileinstaller" name="profileinstaller" version="1.4.0"/>
+            <trusting group="androidx.profileinstaller" name="profileinstaller" version="1.4.1"/>
             <trusting group="androidx.recyclerview"/>
             <trusting group="androidx.startup" name="startup-runtime" version="1.2.0"/>
             <trusting group="androidx.test"/>
@@ -285,6 +298,7 @@
             <trusting group="com.squareup"/>
             <trusting group="^com[.]squareup($|([.].*))" regex="true"/>
          </trusted-key>
+         <trusted-key id="DF25D3C4868FEC177182FAD64D176DC503FB4267" group="io.coil-kt.coil3"/>
          <trusted-key id="E2F51A65767284220C6DFD60520410E2AF06FA82" group="com.github.bumptech.glide"/>
          <trusted-key id="E52F07877A5805F9AF4AB0ACD46C5610D06E7001" group="com.ibm.icu" name="icu4j" version="77.1"/>
          <trusted-key id="E77417AC194160A3FABD04969A259C7EE636C5ED" group="com.google.errorprone"/>
@@ -306,6 +320,7 @@
             <trusting group="org.jsoup" name="jsoup" version="1.19.1"/>
             <trusting group="org.jsoup" name="jsoup" version="1.21.2"/>
          </trusted-key>
+         <trusted-key id="F3BD845679DD6A30F3F50F91597852B0B140F0BC" group="com.caverock" name="androidsvg-aar" version="1.4"/>
          <trusted-key id="FA77DCFEF2EE6EB2DEBEDD2C012579464D01C06A" group="org.apache" name="apache"/>
          <trusted-key id="FA7929F83AD44C4590F6CC6815C71C0A4E0B8EDD" group="net.java.dev.jna"/>
          <trusted-key id="FAABC3738B1F58DA2D776FA2EB380DC13C39F675" group="com.intellij" name="annotations" version="12.0"/>
@@ -14151,6 +14166,14 @@
             <sha256 value="34610461ba4ec42439553cd250f2f480a887e8dce18d370b58d1e2c0d08a41c4" origin="Generated by Gradle" reason="Artifact is not signed"/>
          </artifact>
       </component>
+      <component group="com.github.nextcloud" name="android-library" version="2.26.0">
+         <artifact name="android-library-2.26.0.aar">
+            <sha256 value="fd5d3b953e75c3d3ecf547fff24e1c68fced43b8ade6f8f12cec3da5215f9359" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+         <artifact name="android-library-2.26.0.module">
+            <sha256 value="f05cc885579c69c5264f2d56057508f7d20323a5db3e86119b6eab57e32b0c5b" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
       <component group="com.github.nextcloud" name="android-library" version="4596e80dec">
          <artifact name="android-library-4596e80dec.aar">
             <sha256 value="8f8f2cbf7caae9355ce01e1e4ae8fc9aa569845a27eba0d2817ae8c4e8062967" origin="Generated by Gradle"/>
@@ -14357,6 +14380,14 @@
          </artifact>
          <artifact name="core-0.33.2.module">
             <sha256 value="0594d08b18e53b71fe24db7ee1c235300655bd65f3ff2d231057c7a66437e65b" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="com.github.nextcloud.android-common" name="core" version="0.34.0">
+         <artifact name="core-0.34.0.aar">
+            <sha256 value="25965a3ed90d8cd353d1669428b3a77296e8a76688730e66bdf39543823dbb9f" origin="Generated by Gradle"/>
+         </artifact>
+         <artifact name="core-0.34.0.module">
+            <sha256 value="2370d56cf5e37eed2f6e99ab08fd587789e6e6a6b37a3e532995b75f5af5ac7e" origin="Generated by Gradle" reason="Artifact is not signed"/>
          </artifact>
       </component>
       <component group="com.github.nextcloud.android-common" name="core" version="1b779645b4ee2095ab133a8c939056eb13331453">
@@ -14621,6 +14652,14 @@
          </artifact>
          <artifact name="material-color-utilities-0.33.2.module">
             <sha256 value="fafef39e6e5739a69be335324cc7edf8f55ea806351df60b8b6a9d8bf3803cdb" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="com.github.nextcloud.android-common" name="material-color-utilities" version="0.34.0">
+         <artifact name="material-color-utilities-0.34.0.jar">
+            <sha256 value="61568a8c8f0466aea4fec621653ca8d2c08c9c687ffd6e364f909a2d19185992" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+         <artifact name="material-color-utilities-0.34.0.module">
+            <sha256 value="b5033fff12118798f6832b30399e8c871be91428066bc9ca87894164c6176961" origin="Generated by Gradle" reason="Artifact is not signed"/>
          </artifact>
       </component>
       <component group="com.github.nextcloud.android-common" name="material-color-utilities" version="1b779645b4ee2095ab133a8c939056eb13331453">
@@ -14889,6 +14928,14 @@
          </artifact>
          <artifact name="ui-0.33.2.module">
             <sha256 value="c0496be3c91f153960d98ae88a06cbf9c9fe15da640806f2e5a45b29c1153fdf" origin="Generated by Gradle" reason="Artifact is not signed"/>
+         </artifact>
+      </component>
+      <component group="com.github.nextcloud.android-common" name="ui" version="0.34.0">
+         <artifact name="ui-0.34.0.aar">
+            <sha256 value="19bf6c0ff923a6706cd50c8d54fe8ea7968ff2a8bfe6a23edde50e1b8b3b7465" origin="Generated by Gradle"/>
+         </artifact>
+         <artifact name="ui-0.34.0.module">
+            <sha256 value="2def8209d0634a0934f2c754d164dfe5fb4f9db3ec6638e7291ba022236faa79" origin="Generated by Gradle" reason="Artifact is not signed"/>
          </artifact>
       </component>
       <component group="com.github.nextcloud.android-common" name="ui" version="1b779645b4ee2095ab133a8c939056eb13331453">
@@ -17054,6 +17101,118 @@
          </artifact>
          <artifact name="commons-logging-1.2.pom">
             <sha256 value="c91ab5aa570d86f6fd07cc158ec6bc2c50080402972ee9179fe24100739fbb20" origin="Generated by Gradle"/>
+         </artifact>
+      </component>
+       <component group="io.coil-kt.coil3" name="coil" version="3.6.2">
+           <artifact name="coil-3.6.2.module">
+               <sha256 value="b6ad1aad20267618312efd2eccabf7e64cb149ea0ba397fb2865f1d4c07d5b37"
+                   origin="Generated by Gradle" reason="A key couldn't be downloaded" />
+           </artifact>
+       </component>
+       <component group="io.coil-kt.coil3" name="coil-android" version="3.6.2">
+           <artifact name="coil-android-3.6.2.module">
+               <sha256 value="3dd327587b11f9e13a1dfb0e705acd291a00bb4b493c1183d8ce4239ff7406cf"
+                   origin="Generated by Gradle" reason="A key couldn't be downloaded" />
+           </artifact>
+           <artifact name="coil.aar">
+               <sha256 value="83cc5e84a6096c9d7cd1023e2b431ed68fe246bcca0e2abeeeaf663a0b6a0063"
+                   origin="Generated by Gradle" reason="A key couldn't be downloaded" />
+           </artifact>
+       </component>
+       <component group="io.coil-kt.coil3" name="coil-compose" version="3.6.2">
+           <artifact name="coil-compose-3.6.2.module">
+               <sha256 value="3c4a936158410cb88b193b0ef72b381034bccbe03c2cbe3efaf54d3af44eea7e"
+                   origin="Generated by Gradle" reason="A key couldn't be downloaded" />
+           </artifact>
+       </component>
+       <component group="io.coil-kt.coil3" name="coil-compose-android" version="3.6.2">
+           <artifact name="coil-compose-android-3.6.2.module">
+               <sha256 value="2c2e615e784a98d7f7751c6d19fd323f4028ef0ba6b2752a78998ec7912e4699"
+                   origin="Generated by Gradle" reason="A key couldn't be downloaded" />
+           </artifact>
+           <artifact name="coil-compose.aar">
+               <sha256 value="a6a4ab00701931c03d7a7d063fc149a0a2a5efee02a144bcc5bd56f2f29484e6"
+                   origin="Generated by Gradle" reason="A key couldn't be downloaded" />
+           </artifact>
+       </component>
+       <component group="io.coil-kt.coil3" name="coil-compose-core" version="3.6.2">
+           <artifact name="coil-compose-core-3.6.2.module">
+               <sha256 value="680fe6c6c304be0eac3cacde1a4e36b83019c9dd892f132e5e9bb29135054867"
+                   origin="Generated by Gradle" reason="A key couldn't be downloaded" />
+           </artifact>
+       </component>
+       <component group="io.coil-kt.coil3" name="coil-compose-core-android" version="3.6.2">
+           <artifact name="coil-compose-core-android-3.6.2.module">
+               <sha256 value="d96b485ae3a83f079b0c3f4010b2abab05fded4f622e2308c82fe1addd38d684"
+                   origin="Generated by Gradle" reason="A key couldn't be downloaded" />
+           </artifact>
+           <artifact name="coil-compose-core.aar">
+               <sha256 value="577505052328437068a95bebc5b1841ed2c358c49fcf6143c937e76837a35f5c"
+                   origin="Generated by Gradle" reason="A key couldn't be downloaded" />
+           </artifact>
+       </component>
+       <component group="io.coil-kt.coil3" name="coil-core" version="3.6.2">
+           <artifact name="coil-core-3.6.2.module">
+               <sha256 value="4307f919926c8f723df221e359ecaefbeecd0fa301d038f9d7b50f7291bbe050"
+                   origin="Generated by Gradle" reason="A key couldn't be downloaded" />
+           </artifact>
+       </component>
+       <component group="io.coil-kt.coil3" name="coil-core-android" version="3.6.2">
+           <artifact name="coil-core-android-3.6.2.module">
+               <sha256 value="6ff2892cf7cb8abb8cd50c1419a6b4a7714deedf9da53d66a18e9e1740c49763"
+                   origin="Generated by Gradle" reason="A key couldn't be downloaded" />
+           </artifact>
+           <artifact name="coil-core.aar">
+               <sha256 value="24b542e232d3e7df623e5b3a11f04c806d00481177baf9aa6101b481944e003a"
+                   origin="Generated by Gradle" reason="A key couldn't be downloaded" />
+           </artifact>
+       </component>
+       <component group="io.coil-kt.coil3" name="coil-network-core" version="3.6.2">
+           <artifact name="coil-network-core-3.6.2.module">
+               <sha256 value="ecf3edcaf826343cc838984379d37ea961811f267cef4bbe4e8e9152db8fb529"
+                   origin="Generated by Gradle" reason="A key couldn't be downloaded" />
+           </artifact>
+       </component>
+       <component group="io.coil-kt.coil3" name="coil-network-core-android" version="3.6.2">
+           <artifact name="coil-network-core-android-3.6.2.module">
+               <sha256 value="f1910851df9d8bf24dcc32b4ae332939fa64aea5e761b1cbe97cbfdcec26446b"
+                   origin="Generated by Gradle" reason="A key couldn't be downloaded" />
+           </artifact>
+           <artifact name="coil-network-core.aar">
+               <sha256 value="b47f4e098222b3b70ca30ddaecaab94057f13f0a910c0135b9fbfcf9a97dd8cc"
+                   origin="Generated by Gradle" reason="A key couldn't be downloaded" />
+           </artifact>
+       </component>
+       <component group="io.coil-kt.coil3" name="coil-network-okhttp" version="3.6.2">
+           <artifact name="coil-network-okhttp-3.6.2.module">
+               <sha256 value="ca0bb5166fa05c40adc5d2f7569b00d0768ff6e2aa2643072d85a572f7fb3a15"
+                   origin="Generated by Gradle" reason="A key couldn't be downloaded" />
+           </artifact>
+       </component>
+       <component group="io.coil-kt.coil3" name="coil-network-okhttp-android" version="3.6.2">
+           <artifact name="coil-network-okhttp-android-3.6.2.module">
+               <sha256 value="7f3da3c34fd53df3ee54567fc344ca2b1f2be5ad8a51d6e042f80ac3ef64cfb3"
+                   origin="Generated by Gradle" reason="A key couldn't be downloaded" />
+           </artifact>
+           <artifact name="coil-network-okhttp.aar">
+               <sha256 value="3565e6f8fae501293ff9af505658be391348bdb8849418a291aa01da0dcc8467"
+                   origin="Generated by Gradle" reason="A key couldn't be downloaded" />
+           </artifact>
+       </component>
+       <component group="io.coil-kt.coil3" name="coil-svg" version="3.6.2">
+           <artifact name="coil-svg-3.6.2.module">
+               <sha256 value="37c5d6448f6e3a88cb8b4c94bafdb9c7e00760bb1d031e77e205062d0aded7c7"
+                   origin="Generated by Gradle" reason="A key couldn't be downloaded" />
+           </artifact>
+       </component>
+       <component group="io.coil-kt.coil3" name="coil-svg-android" version="3.6.2">
+           <artifact name="coil-svg-android-3.6.2.module">
+               <sha256 value="2a9d8f073eda3382cc9be10bd816517b38296500ddf0dabb3292665444145c27"
+                   origin="Generated by Gradle" reason="A key couldn't be downloaded" />
+           </artifact>
+           <artifact name="coil-svg.aar">
+               <sha256 value="9f97a9febff7cd59eae5b6bf6d036f772f5c1a63491861be9d758db85f1789b7"
+                   origin="Generated by Gradle" reason="A key couldn't be downloaded" />
          </artifact>
       </component>
       <component group="io.github.java-diff-utils" name="java-diff-utils" version="4.12">
