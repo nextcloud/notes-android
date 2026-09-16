@@ -17,8 +17,8 @@ android {
         minSdk 28
         compileSdk = 37
         targetSdk 36
-        versionCode 350000051
-        versionName "35.0.0 RC 1"
+        versionCode 350000090
+        versionName "35.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
@@ -116,7 +116,7 @@ dependencies {
         exclude group: 'commons-logging', module: 'commons-logging'
     }
 
-    implementation("com.github.nextcloud:android-library:2.25.0") {
+    implementation("com.github.nextcloud:android-library:2.26.0") {
         exclude group: 'org.ogce', module: 'xpp3'
     }
 
