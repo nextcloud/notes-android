@@ -34,7 +34,7 @@ jobs:
         if: ${{ steps.check-secrets.outputs.ok == 'true' }}
         with:
           distribution: "temurin"
-          java-version: 21
+          java-version: 25
 
       - name: Build QA
         if: ${{ steps.check-secrets.outputs.ok == 'true' }}
