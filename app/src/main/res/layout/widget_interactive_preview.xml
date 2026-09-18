@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ ~ Nextcloud Notes - Android Client
+ ~
+ ~ SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+ ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="HardcodedText">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/widget_interactive_background"
+        android:orientation="vertical"
+        android:padding="@dimen/widget_interactive_padding">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacer_1hx"
+            android:layout_marginVertical="@dimen/spacer_1hx"
+            android:background="@drawable/widget_card_background"
+            android:orientation="vertical"
+            android:padding="@dimen/spacer_2x">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Formatting 🚀"
+                    android:textColor="@color/widget_foreground"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="@dimen/widget_note_list_fav_icon_width"
+                    android:layout_height="@dimen/widget_note_list_fav_icon_height"
+                    android:layout_marginStart="@dimen/spacer_1x"
+                    android:contentDescription="@string/widget_entry_fav_contentDescription"
+                    android:src="@drawable/ic_star_yellow_24dp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacer_1hx"
+                android:ellipsize="end"
+                android:maxLines="8"
+                android:text="Title 1\nContent\nTitle 2"
+                android:textColor="@color/widget_foreground"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacer_1hx"
+            android:layout_marginVertical="@dimen/spacer_1hx"
+            android:background="@drawable/widget_card_background"
+            android:orientation="vertical"
+            android:padding="@dimen/spacer_2x">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Big note"
+                android:textColor="@color/widget_foreground"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacer_1hx"
+                android:ellipsize="end"
+                android:maxLines="8"
+                android:text="With lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots and lots a"
+                android:textColor="@color/widget_foreground"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacer_1hx"
+            android:layout_marginVertical="@dimen/spacer_1hx"
+            android:background="@drawable/widget_card_background"
+            android:orientation="vertical"
+            android:padding="@dimen/spacer_2x">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Checkbox"
+                android:textColor="@color/widget_foreground"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacer_1hx"
+                android:text="✅ Check\n❌ Unchecked"
+                android:textColor="@color/widget_foreground"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="@dimen/widget_fab_size"
+        android:layout_height="@dimen/widget_fab_size"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/widget_fab_margin"
+        android:background="@drawable/widget_fab_background"
+        android:contentDescription="@string/widget_create_note_contentDescription"
+        android:padding="@dimen/spacer_1x"
+        android:src="@drawable/ic_add_white_24dp" />
+
+</FrameLayout>
