@@ -389,10 +389,10 @@
     <string name="write_email">Odoslať email</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Ak chcete pridať účet, musíte byť pripojení k internetu.</string>
     <plurals name="share_download_limit_description">
-        <item quantity="one">%1$d zostáva stiahnuť</item>
-        <item quantity="few">%1$d zostáva stiahnuť</item>
-        <item quantity="many">%1$d zostáva stiahnuť</item>
-        <item quantity="other">%1$d zostáva stiahnuť</item>
+        <item quantity="one">%1$d sťahovaní zostáva</item>
+        <item quantity="few">%1$d sťahovaní zostáva</item>
+        <item quantity="many">%1$d sťahovaní zostáva</item>
+        <item quantity="other">%1$d sťahovaní zostáva</item>
     </plurals>
     <plurals name="ab_selected">
         <item quantity="one">%d vybraný</item>
