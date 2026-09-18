@@ -85,8 +85,10 @@ public class NoteUtil {
 
         if (!TextUtils.isEmpty(title)) {
             final String trimmedTitle = removeMarkdown(replaceCheckboxesWithEmojis(title.trim()));
-            if (result.startsWith(trimmedTitle)) {
-                result = result.substring(trimmedTitle.length());
+            final int firstLineEnd = result.indexOf('\n');
+            final String firstLine = firstLineEnd < 0 ? result : result.substring(0, firstLineEnd);
+            if (firstLine.equals(trimmedTitle)) {
+                result = firstLineEnd < 0 ? "" : result.substring(firstLineEnd + 1);
             }
         }
 
