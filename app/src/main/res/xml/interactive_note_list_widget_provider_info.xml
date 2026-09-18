@@ -6,6 +6,7 @@
   ~ SPDX-License-Identifier: GPL-3.0-or-later
 -->
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:initialLayout="@layout/widget_interactive_note_list"
     android:configure="it.niedermann.owncloud.notes.widget.interactivelist.InteractiveNoteListWidgetConfigurationActivity"
     android:minHeight="110dp"
@@ -16,5 +17,5 @@
     android:updatePeriodMillis="86400000"
     android:widgetCategory="keyguard|home_screen"
     android:widgetFeatures="reconfigurable"
-    android:previewImage="@drawable/interactive_note_list_widget_preview"
-    android:previewLayout="@layout/widget_interactive_preview" />
+    android:previewLayout="@layout/widget_interactive_preview"
+    tools:targetApi="s" />

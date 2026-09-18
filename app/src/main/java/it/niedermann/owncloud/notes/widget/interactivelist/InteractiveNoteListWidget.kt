@@ -15,7 +15,6 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.widget.RemoteViews
 import androidx.core.net.toUri
 import it.niedermann.owncloud.notes.R
@@ -41,34 +40,6 @@ class InteractiveNoteListWidget : AppWidgetProvider() {
         updateAppWidget(context, appWidgetManager, appWidgetIds)
     }
 
-    override fun onReceive(context: Context, intent: Intent) {
-        super.onReceive(context, intent)
-        val awm = AppWidgetManager.getInstance(context)
-
-        if (intent.action == null) {
-            Log.w(TAG, "Intent action is null")
-            return
-        }
-
-        if (intent.action != AppWidgetManager.ACTION_APPWIDGET_UPDATE) {
-            Log.w(TAG, "Intent action is not ACTION_APPWIDGET_UPDATE")
-            return
-        }
-
-        val appWidgetIds = if (intent.hasExtra(AppWidgetManager.EXTRA_APPWIDGET_ID)) {
-            intArrayOf(
-                intent.getIntExtra(
-                    AppWidgetManager.EXTRA_APPWIDGET_ID,
-                    AppWidgetManager.INVALID_APPWIDGET_ID
-                )
-            )
-        } else {
-            awm.getAppWidgetIds(ComponentName(context, InteractiveNoteListWidget::class.java))
-        }
-
-        updateAppWidget(context, awm, appWidgetIds)
-    }
-
     override fun onDeleted(context: Context, appWidgetIds: IntArray) {
         super.onDeleted(context, appWidgetIds)
         val repo = NotesRepository.getInstance(context)
@@ -82,8 +53,6 @@ class InteractiveNoteListWidget : AppWidgetProvider() {
     }
 
     companion object {
-        private val TAG: String = InteractiveNoteListWidget::class.java.simpleName
-
         fun updateAppWidget(context: Context, awm: AppWidgetManager, appWidgetIds: IntArray) {
             val repo = NotesRepository.getInstance(context)
             appWidgetIds.forEach { appWidgetId ->
@@ -167,8 +136,12 @@ class InteractiveNoteListWidget : AppWidgetProvider() {
 
         @JvmStatic
         fun updateInteractiveNoteListWidgets(context: Context) {
+            val appWidgetIds = AppWidgetManager.getInstance(context)
+                .getAppWidgetIds(ComponentName(context, InteractiveNoteListWidget::class.java))
+
             val intent = Intent(context, InteractiveNoteListWidget::class.java).apply {
                 action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+                putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds)
             }
             context.sendBroadcast(intent)
         }

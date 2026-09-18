@@ -139,7 +139,10 @@ class InteractiveNoteListWidgetConfigurationActivity : LockedActivity(), Navigat
                 null,
                 applicationContext,
                 InteractiveNoteListWidget::class.java
-            ).putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
+            ).apply {
+                putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
+                putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, intArrayOf(appWidgetId))
+            }
 
             applicationContext.sendBroadcast(updateIntent)
 
