@@ -32,12 +32,14 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
+import com.nextcloud.android.sso.model.SingleSignOnAccount;
 import com.owncloud.android.lib.common.utils.Log_OC;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.FragmentNotePreviewBinding;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.util.SSOUtil;
 import kotlin.Unit;
 
@@ -153,7 +155,36 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
             final String content = note.getContent();
             changedText = content;
 
+            // Resolve the notes folder path from the server (e.g. "Notes") to build
+            // the correct WebDAV prefix for relative image references like
+            // "attachments/image.png" → "http://server/remote.php/webdav/Notes/attachments/image.png"
+            String imageUrlPrefix = "";
+            try {
+                final SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext());
+                final var settingsCall = repo.getServerSettings(ssoAccount, ApiVersion.API_VERSION_1_0);
+                final var settingsResponse = settingsCall.execute();
+                final var settings = settingsResponse.body();
+                final String notesPath = (settings != null && settings.getNotesPath() != null)
+                        ? settings.getNotesPath()
+                        : "Notes";
+                // Build WebDAV prefix: serverUrl + /remote.php/webdav/ + notesPath + /
+                imageUrlPrefix = ssoAccount.url + "/remote.php/webdav/" + notesPath + "/";
+                Log.i(TAG, "Image URL prefix set to: " + imageUrlPrefix);
+            } catch (Exception e) {
+                Log_OC.w(TAG, "Could not fetch notes path for image prefix, using server root: " + e.getMessage());
+                try {
+                    final SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext());
+                    imageUrlPrefix = ssoAccount.url + "/remote.php/webdav/Notes/";
+                } catch (Exception e2) {
+                    Log_OC.e(TAG, "Failed to get ssoAccount for image prefix: " + e2);
+                }
+            }
+
+            final String finalImageUrlPrefix = imageUrlPrefix;
             onMainThread(() -> {
+                if (!finalImageUrlPrefix.isEmpty()) {
+                    binding.singleNoteContent.setMarkdownImageUrlPrefix(finalImageUrlPrefix);
+                }
                 binding.singleNoteContent.setMarkdownString(content, setScrollY);
 
                 final var activity = getActivity();
@@ -246,6 +277,10 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
             try {
                 final var ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getContext());
                 binding.singleNoteContent.setCurrentSingleSignOnAccount(ssoAccount, color);
+                // Enable inline image display: provide the server base URL so that relative
+                // image paths in Markdown (e.g. "./Photos/img.jpg") are resolved correctly,
+                // and absolute Nextcloud paths (e.g. "/remote.php/webdav/...") work too.
+                binding.singleNoteContent.setMarkdownImageUrlPrefix(ssoAccount.url);
             } catch (Exception e) {
                 Log_OC.e(TAG, "applyBrand exception: " + e);
             }

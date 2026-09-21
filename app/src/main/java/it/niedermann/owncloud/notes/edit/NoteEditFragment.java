@@ -223,6 +223,20 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
         });
     }
 
+    public void insertTextAtCursor(@NonNull String text) {
+        if (binding == null || binding.editContent == null) {
+            return;
+        }
+        int start = Math.max(0, binding.editContent.getSelectionStart());
+        int end = Math.max(0, binding.editContent.getSelectionEnd());
+        int selStart = Math.min(start, end);
+        int selEnd = Math.max(start, end);
+        if (binding.editContent.getText() != null) {
+            binding.editContent.getText().replace(selStart, selEnd, text, 0, text.length());
+            binding.editContent.setSelection(selStart + text.length());
+        }
+    }
+
     private void openSoftKeyboard() {
         binding.editContent.postDelayed(() -> {
             binding.editContent.requestFocus();

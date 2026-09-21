@@ -122,6 +122,16 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="text/plain" />
             </intent-filter>
+            <intent-filter android:label="@string/action_create">
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+            <intent-filter android:label="@string/action_create">
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
             <!-- Voice command "note to self" in google search -->
             <intent-filter android:label="@string/action_create">
                 <action android:name="com.google.android.gm.action.AUTO_SEND" />
