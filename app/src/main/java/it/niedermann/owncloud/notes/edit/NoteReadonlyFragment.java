@@ -24,6 +24,9 @@ public class NoteReadonlyFragment extends NotePreviewFragment {
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_favorite).setVisible(false);
+        if (menu.findItem(R.id.menu_attach_image) != null) {
+            menu.findItem(R.id.menu_attach_image).setVisible(false);
+        }
         menu.findItem(R.id.menu_edit).setVisible(false);
         menu.findItem(R.id.menu_preview).setVisible(false);
         menu.findItem(R.id.menu_cancel).setVisible(false);
