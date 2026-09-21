@@ -20,6 +20,7 @@ import it.niedermann.owncloud.notes.main.items.NoteViewHolder;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
+import it.niedermann.owncloud.notes.shared.util.NoteImagePreviewLoader;
 
 public class NoteViewListHolder extends NoteViewHolder {
     @NonNull
@@ -62,7 +63,10 @@ public class NoteViewListHolder extends NoteViewHolder {
         bindModified(binding.noteModified, note.getModified());
 
         bindSearchableContent(context, binding.noteTitle, searchQuery, note.getTitle(), color);
-        if (note.getExcerpt().isEmpty()) {
+        final boolean hasImagePreview = NoteImagePreviewLoader.load(context, note.getContent(), binding.noteImagePreview);
+        if (hasImagePreview) {
+            binding.noteExcerpt.setVisibility(View.GONE);
+        } else if (note.getExcerpt().isEmpty()) {
             bindSearchableContent(
                     context,
                     binding.noteExcerpt,
@@ -70,8 +74,10 @@ public class NoteViewListHolder extends NoteViewHolder {
                     context.getString(R.string.listview_no_content),
                     color
             );
+            binding.noteExcerpt.setVisibility(View.VISIBLE);
         } else {
             bindSearchableContent(context, binding.noteExcerpt, searchQuery, note.getExcerpt(), color);
+            binding.noteExcerpt.setVisibility(View.VISIBLE);
         }
 
         bindNoteSharedIcon(context, note.isShared(), binding.noteShared, color);
