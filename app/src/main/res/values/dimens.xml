@@ -78,7 +78,7 @@
     <dimen name="widget_note_list_inner_padding">4dp</dimen>
     <dimen name="widget_note_list_fav_icon_width">26dp</dimen>
     <dimen name="widget_note_list_fav_icon_height">20dp</dimen>
-    <dimen name="widget_note_list_thumbnail_size">40dp</dimen>
+    <dimen name="widget_note_list_thumbnail_size">56dp</dimen>
 
     <dimen name="minimum_size_for_touchable_area">48dp</dimen>
 
