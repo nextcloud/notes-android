@@ -20,11 +20,8 @@ import com.nextcloud.android.common.ui.util.PlatformThemeUtil
 import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.edit.EditNoteActivity
 import it.niedermann.owncloud.notes.persistence.NotesRepository
-import it.niedermann.owncloud.notes.persistence.entity.Account
 import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData
-import it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType
-import it.niedermann.owncloud.notes.shared.model.NavigationCategory
 
 class NoteListWidgetFactory internal constructor(private val context: Context, intent: Intent) :
     RemoteViewsFactory {
@@ -101,21 +98,6 @@ class NoteListWidgetFactory internal constructor(private val context: Context, i
         }
     }
 
-    private fun getCreateNoteIntent(localAccount: Account): Intent {
-        val bundle = Bundle()
-
-        data?.let {
-            val navigationCategory = if (it.mode == NotesListWidgetData.MODE_DISPLAY_STARRED) NavigationCategory(
-                ENavigationCategoryType.FAVORITES
-            ) else NavigationCategory(localAccount.id, it.category)
-
-            bundle.putSerializable(EditNoteActivity.PARAM_CATEGORY, navigationCategory)
-            bundle.putLong(EditNoteActivity.PARAM_ACCOUNT_ID, it.accountId)
-        }
-
-        return getEditNoteIntent(bundle)
-    }
-
     private fun getOpenNoteIntent(note: Note): Intent {
         val bundle = Bundle().apply {
             putLong(EditNoteActivity.PARAM_NOTE_ID, note.id)
@@ -130,20 +112,11 @@ class NoteListWidgetFactory internal constructor(private val context: Context, i
 
         val openNoteIntent = getOpenNoteIntent(note)
 
-        var createNoteIntent: Intent? = null
-        data?.let {
-            val localAccount =  repo.getAccountById(it.accountId)
-            createNoteIntent = getCreateNoteIntent(localAccount)
-        }
-
-        return RemoteViews(context.packageName, R.layout.widget_entry).apply {
+        return RemoteViews(context.packageName, R.layout.widget_entry_grid).apply {
             setOnClickFillInIntent(R.id.widget_note_list_entry, openNoteIntent)
 
-            createNoteIntent?.let {
-                setOnClickFillInIntent(R.id.widget_entry_fav_icon, createNoteIntent)
-            }
-
             setTextViewText(R.id.widget_entry_title, note.title)
+            setTextViewText(R.id.widget_entry_excerpt, note.excerpt)
 
             if (note.category.isEmpty()) {
                 setViewVisibility(R.id.widget_entry_category, View.GONE)

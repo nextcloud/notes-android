@@ -15,6 +15,8 @@
     android:minResizeHeight="40dp"
     android:minResizeWidth="80dp"
     android:resizeMode="vertical|horizontal"
+    android:targetCellHeight="9"
+    android:targetCellWidth="5"
     android:updatePeriodMillis="86400000"
     android:widgetCategory="keyguard|home_screen"
     android:previewImage="@drawable/note_list_widget_preview" />
