@@ -14,14 +14,20 @@
     android:paddingVertical="@dimen/widget_inner_padding_vertical"
     android:paddingHorizontal="@dimen/widget_inner_padding_horizontal">
 
-    <ListView
+    <GridView
         android:id="@+id/note_list_widget_lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:columnWidth="120dp"
         android:divider="@android:color/transparent"
         android:dividerHeight="@null"
+        android:gravity="fill"
+        android:horizontalSpacing="@dimen/widget_note_list_outer_padding"
+        android:numColumns="2"
+        android:stretchMode="columnWidth"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        tools:listitem="@layout/widget_entry" />
+        android:verticalSpacing="@dimen/widget_note_list_outer_padding"
+        tools:listitem="@layout/widget_entry_grid" />
 
     <TextView
         android:id="@+id/widget_note_list_placeholder_tv"
