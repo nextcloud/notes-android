@@ -22,6 +22,7 @@ import it.niedermann.owncloud.notes.edit.EditNoteActivity
 import it.niedermann.owncloud.notes.persistence.NotesRepository
 import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData
+import it.niedermann.owncloud.notes.shared.util.NoteImagePreviewLoader
 
 class NoteListWidgetFactory internal constructor(private val context: Context, intent: Intent) :
     RemoteViewsFactory {
@@ -116,7 +117,16 @@ class NoteListWidgetFactory internal constructor(private val context: Context, i
             setOnClickFillInIntent(R.id.widget_note_list_entry, openNoteIntent)
 
             setTextViewText(R.id.widget_entry_title, note.title)
-            setTextViewText(R.id.widget_entry_excerpt, note.excerpt)
+            setTextViewText(R.id.widget_entry_excerpt, note.excerpt.replace("\uFFFC", "").trim())
+            val thumbnailSize = context.resources.getDimensionPixelSize(
+                R.dimen.widget_note_list_thumbnail_size
+            )
+            NoteImagePreviewLoader.loadBitmap(context, note.content, thumbnailSize, thumbnailSize)
+                ?.let { image ->
+                    setImageViewBitmap(R.id.widget_entry_image_preview, image)
+                    setViewVisibility(R.id.widget_entry_image_preview, View.VISIBLE)
+                }
+                ?: setViewVisibility(R.id.widget_entry_image_preview, View.GONE)
 
             if (note.category.isEmpty()) {
                 setViewVisibility(R.id.widget_entry_category, View.GONE)
@@ -133,12 +143,6 @@ class NoteListWidgetFactory internal constructor(private val context: Context, i
                 setTextColor(R.id.widget_entry_category, textColor)
             }
 
-            val starIconId = if (note.favorite) {
-                R.drawable.ic_star_yellow_24dp
-            } else {
-                R.drawable.ic_star_grey_ccc_24dp
-            }
-            setImageViewResource(R.id.widget_entry_fav_icon, starIconId)
         }
     }
 

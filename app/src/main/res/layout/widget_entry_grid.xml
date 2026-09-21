@@ -8,18 +8,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/widget_note_list_entry"
     android:layout_width="match_parent"
-    android:layout_height="112dp"
+    android:layout_height="132dp"
     android:background="@drawable/category_widget_background"
     android:gravity="center_vertical"
     android:orientation="vertical"
     android:padding="@dimen/spacer_1x">
+
+    <ImageView
+        android:id="@+id/widget_entry_image_preview"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_note_list_thumbnail_size"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/widget_entry_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="end"
-        android:maxLines="2"
+        android:layout_marginTop="@dimen/spacer_1hx"
+        android:maxLines="1"
         android:textColor="@color/widget_foreground"
         android:textSize="15sp"
         android:textStyle="bold" />

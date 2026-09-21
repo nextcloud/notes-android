@@ -8,16 +8,20 @@ package it.niedermann.owncloud.notes.shared.util
 
 import android.content.Context
 import android.net.Uri
+import android.graphics.Bitmap
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.nextcloud.android.sso.helper.SingleAccountHelper
 import com.nextcloud.android.sso.model.SingleSignOnAccount
 import it.niedermann.nextcloud.sso.glide.SingleSignOnUrl
+import java.util.concurrent.ExecutionException
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.Executors
 
 object NoteImagePreviewLoader {
+    private const val TAG = "NoteImagePreviewLoader"
     private val notesPaths = ConcurrentHashMap<String, String>()
     private val executor = Executors.newSingleThreadExecutor()
 
@@ -55,6 +59,36 @@ object NoteImagePreviewLoader {
 
     @JvmStatic
     fun hasImagePreview(content: String): Boolean = imageReference(content) != null
+
+    @JvmStatic
+    fun loadBitmap(context: Context, content: String, width: Int, height: Int): Bitmap? {
+        val attachmentPath = imageReference(content) ?: return null
+        val account = SingleAccountHelper.getCurrentSingleSignOnAccount(context) ?: return null
+        val notesPath = try {
+            notesPaths.getOrPut(account.name) {
+                NoteImageHelper.getNotesPath(context.applicationContext, account, null)
+            }
+        } catch (exception: Exception) {
+            Log.e(TAG, "Unable to resolve notes path for widget image preview", exception)
+            return null
+        }
+
+        return try {
+            Glide.with(context.applicationContext)
+                .asBitmap()
+                .load(SingleSignOnUrl(account.name, webDavUrl(account, notesPath, attachmentPath)))
+                .centerCrop()
+                .submit(width, height)
+                .get()
+        } catch (exception: InterruptedException) {
+            Thread.currentThread().interrupt()
+            Log.w(TAG, "Widget image preview loading was interrupted", exception)
+            null
+        } catch (exception: ExecutionException) {
+            Log.w(TAG, "Unable to load widget image preview", exception)
+            null
+        }
+    }
 
     private fun imageReference(content: String): String? {
         val pathStart = content.indexOf(ATTACHMENTS_PATH)
