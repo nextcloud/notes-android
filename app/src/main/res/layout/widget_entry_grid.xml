@@ -17,7 +17,7 @@
     <ImageView
         android:id="@+id/widget_entry_image_preview"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/widget_note_list_thumbnail_size"
+        android:layout_height="@dimen/note_grid_image_preview_height"
         android:contentDescription="@null"
         android:scaleType="centerCrop"
         android:visibility="gone" />
