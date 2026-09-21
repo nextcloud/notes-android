@@ -14,10 +14,35 @@
     android:paddingVertical="@dimen/widget_inner_padding_vertical"
     android:paddingHorizontal="@dimen/widget_inner_padding_horizontal">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/widget_note_list_outer_padding">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/app_name"
+            android:textColor="@color/widget_foreground"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/widget_add_note"
+            android:layout_width="@dimen/minimum_size_for_touchable_area"
+            android:layout_height="@dimen/minimum_size_for_touchable_area"
+            android:contentDescription="@string/action_create"
+            android:padding="@dimen/spacer_1x"
+            android:src="@drawable/ic_widget_create" />
+    </LinearLayout>
+
     <GridView
         android:id="@+id/note_list_widget_lv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:columnWidth="120dp"
         android:divider="@android:color/transparent"
         android:dividerHeight="@null"
