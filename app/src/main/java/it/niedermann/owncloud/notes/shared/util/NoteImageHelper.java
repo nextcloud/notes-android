@@ -105,11 +105,13 @@ public class NoteImageHelper {
         }
         if (bm == null) throw new IOException("Failed to decode image bitmap");
 
-        // 5. Scale down if still wider than maxDim
-        if (bm.getWidth() > maxDim) {
-            float ratio = (float) maxDim / bm.getWidth();
+        // 5. Scale down if either dimension still exceeds maxDim
+        int largestDimension = Math.max(bm.getWidth(), bm.getHeight());
+        if (largestDimension > maxDim) {
+            float ratio = (float) maxDim / largestDimension;
+            int targetWidth = Math.round(bm.getWidth() * ratio);
             int targetHeight = Math.round(bm.getHeight() * ratio);
-            bm = Bitmap.createScaledBitmap(bm, maxDim, targetHeight, true);
+            bm = Bitmap.createScaledBitmap(bm, targetWidth, targetHeight, true);
         }
 
         // 6. Compress to bytes
