@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ ~ Nextcloud Notes - Android Client
+ ~
+ ~ SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+ ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_note_list_entry"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/category_widget_background"
+    android:gravity="start"
+    android:orientation="vertical"
+    android:padding="@dimen/spacer_1x">
+
+    <ImageView
+        android:id="@+id/widget_entry_image_preview"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/note_grid_image_preview_height"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/widget_entry_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:layout_marginTop="@dimen/spacer_1hx"
+        android:maxLines="3"
+        android:textColor="@color/widget_foreground"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/widget_entry_excerpt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacer_1hx"
+        android:ellipsize="end"
+        android:maxLines="5"
+        android:textColor="@color/widget_foreground"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/widget_entry_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="end"
+        android:maxLines="1"
+        android:textSize="11sp"
+        android:visibility="gone" />
+</LinearLayout>

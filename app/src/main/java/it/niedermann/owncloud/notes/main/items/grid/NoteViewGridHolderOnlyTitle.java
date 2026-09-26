@@ -19,6 +19,7 @@ import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemGridOnlyTit
 import it.niedermann.owncloud.notes.main.items.NoteViewHolder;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
+import it.niedermann.owncloud.notes.shared.util.NoteImagePreviewLoader;
 
 public class NoteViewGridHolderOnlyTitle extends NoteViewHolder {
     @NonNull
@@ -46,6 +47,7 @@ public class NoteViewGridHolderOnlyTitle extends NoteViewHolder {
         bindFavorite(binding.noteFavorite, note.getFavorite());
         bindModified(binding.noteModified, note.getModified());
         bindSearchableContent(context, binding.noteTitle, searchQuery, note.getTitle(), color);
+        NoteImagePreviewLoader.load(context, note.getContent(), binding.noteImagePreview);
         bindNoteSharedIcon(context, note.isShared(), binding.noteShared, color);
     }
 

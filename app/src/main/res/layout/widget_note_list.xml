@@ -5,23 +5,37 @@
  ~ SPDX-FileCopyrightText: 2017-2024 Nextcloud GmbH and Nextcloud contributors
  ~ SPDX-License-Identifier: GPL-3.0-or-later
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/widget_background"
-    android:orientation="vertical"
     android:paddingVertical="@dimen/widget_inner_padding_vertical"
     android:paddingHorizontal="@dimen/widget_inner_padding_horizontal">
 
-    <ListView
+    <GridView
         android:id="@+id/note_list_widget_lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:columnWidth="120dp"
         android:divider="@android:color/transparent"
         android:dividerHeight="@null"
+        android:gravity="fill"
+        android:horizontalSpacing="@dimen/widget_note_list_outer_padding"
+        android:numColumns="2"
+        android:stretchMode="columnWidth"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        tools:listitem="@layout/widget_entry" />
+        android:verticalSpacing="@dimen/widget_note_list_outer_padding"
+        tools:listitem="@layout/widget_entry_grid" />
+
+    <ImageView
+        android:id="@+id/widget_add_note"
+        android:layout_width="@dimen/minimum_size_for_touchable_area"
+        android:layout_height="@dimen/minimum_size_for_touchable_area"
+        android:layout_gravity="top|end"
+        android:contentDescription="@string/action_create"
+        android:padding="@dimen/spacer_1x"
+        android:src="@drawable/ic_widget_create" />
 
     <TextView
         android:id="@+id/widget_note_list_placeholder_tv"
@@ -32,4 +46,4 @@
         android:textColor="@color/fg_default_high"
         tools:visibility="gone" />
 
-</LinearLayout>
+</FrameLayout>

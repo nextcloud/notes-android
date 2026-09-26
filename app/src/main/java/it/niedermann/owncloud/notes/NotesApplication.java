@@ -35,7 +35,7 @@ public class NotesApplication extends Application {
     private static boolean isLocked = true;
     private static long lastInteraction = 0;
     private static String PREF_KEY_THEME;
-    private static boolean isGridViewEnabled = false;
+    private static boolean isGridViewEnabled = true;
     private static boolean isSwipeEnabled = true;
     private static BrandingUtil brandingUtil;
 
@@ -45,7 +45,7 @@ public class NotesApplication extends Application {
         setAppTheme(getAppTheme(getApplicationContext()));
         final var prefs = getDefaultSharedPreferences(getApplicationContext());
         lockedPreference = prefs.getBoolean(getString(R.string.pref_key_lock), false);
-        isGridViewEnabled = getDefaultSharedPreferences(this).getBoolean(getString(R.string.pref_key_gridview), false);
+        isGridViewEnabled = getDefaultSharedPreferences(this).getBoolean(getString(R.string.pref_key_gridview), true);
         isSwipeEnabled = getDefaultSharedPreferences(this).getBoolean(getString(R.string.pref_key_swipe_actions), true);
         super.onCreate();
         brandingUtil = BrandingUtil.getInstance(this);
