@@ -110,7 +110,13 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                 }
 
                 requireActivity().runOnUiThread(() -> {
-                    onNoteLoaded(note);
+                    Log.v("createAndLoadNote", "oldNote: id: " + note.getId() + " remote: " + note.getRemoteId());
+                    Note updatedNote = repo.getNoteById$(note.getId()).getValue();
+                    if (updatedNote != null) {
+                        note = updatedNote;
+                    }
+                    Log.v("createAndLoadNote", "updatedNote: id: " + note.getId() + " remote: " + note.getRemoteId());
+                    onNoteLoaded(note); // TODO update note
                     requireActivity().invalidateOptionsMenu();
 
                     if (listener != null) {
