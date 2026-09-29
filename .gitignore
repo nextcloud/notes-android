@@ -34,5 +34,7 @@ tests/test_cases/local.properties
 # fastlane
 /vendor/bundle
 fastlane/report.xml
+fastlane/Fastfile
+fastlane/ruby
 
 /gradle/verification-keyring.gpg
