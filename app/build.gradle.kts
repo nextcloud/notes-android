@@ -1,0 +1,220 @@
+/*
+ * Nextcloud Notes - Android Client
+ *
+ * SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-FileCopyrightText: 2015-2024 Stefan Niedermann <info@niedermann.it>
+ * SPDX-FileCopyrightText: 2020 Hui-Ouyang16 <11710106@mail.sustech.edu.cn>
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+plugins {
+    id("com.android.application")
+}
+
+val kotlinVersion = rootProject.extra["kotlinVersion"] as String
+val commonsVersion = rootProject.extra["commonsVersion"] as String
+val androidCommonsVersion = rootProject.extra["androidCommonsVersion"] as String
+val nextcloudAndroidCommonLib = rootProject.extra["nextcloudAndroidCommonLib"] as String
+val singleSignOnVersion = rootProject.extra["singleSignOnVersion"] as String
+
+android {
+    namespace = "it.niedermann.owncloud.notes"
+
+    defaultConfig {
+        applicationId = "it.niedermann.owncloud.notes"
+        minSdk = 28
+        compileSdk = 37
+        targetSdk = 36
+        versionCode = 350100050
+        versionName = "35.1.0 Alpha 1"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments(mapOf("room.schemaLocation" to "$projectDir/schemas"))
+            }
+        }
+    }
+
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+
+    kotlin {
+        jvmToolchain {
+            languageVersion.set(JavaLanguageVersion.of(21))
+        }
+    }
+
+    buildFeatures {
+        viewBinding = true
+        buildConfig = true
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+        debug {
+            enableUnitTestCoverage = true
+            enableAndroidTestCoverage = true
+        }
+    }
+
+    testCoverage.jacocoVersion = "0.8.13"
+
+    flavorDimensions += "version"
+
+    productFlavors {
+        create("generic") {
+            dimension = "version"
+        }
+        create("gplay") {
+            dimension = "version"
+        }
+        create("dev") {
+            dimension = "version"
+            applicationIdSuffix = ".dev"
+        }
+
+        create("qa") {
+            applicationIdSuffix = ".qa"
+            dimension = "version"
+            versionCode = 11
+            versionName = "1"
+        }
+    }
+
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+            all {
+                it.jvmArgs(
+                    "--add-opens=java.base/java.lang=ALL-UNNAMED",
+                    "--add-opens=java.base/java.util=ALL-UNNAMED",
+                    "--add-opens=java.base/java.io=ALL-UNNAMED",
+                    "--add-opens=java.base/java.net=ALL-UNNAMED",
+                    "--add-opens=java.base/java.security=ALL-UNNAMED",
+                    "--add-opens=java.base/java.text=ALL-UNNAMED",
+                    "--add-opens=java.base/jdk.internal.access=ALL-UNNAMED",
+                    "--add-opens=java.desktop/java.awt.font=ALL-UNNAMED",
+                    "--add-opens=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+                )
+            }
+        }
+    }
+
+    androidResources {
+        generateLocaleConfig = true
+    }
+
+    packaging {
+        resources {
+            excludes += "META-INF/LICENSE*"
+            excludes += "META-INF/versions/9/OSGI-INF/MANIFEST*"
+            pickFirsts += "MANIFEST.MF" // workaround for duplicated manifest on some dependencies
+        }
+    }
+    lintOptions {
+        isAbortOnError = false
+        disable("MissingTranslation")
+    }
+}
+
+dependencies {
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.5")
+
+    implementation("com.google.guava:guava:33.7.1-jre")
+    implementation("commons-httpclient:commons-httpclient:3.1") {
+        exclude(group = "commons-logging", module = "commons-logging")
+    }
+
+    implementation("com.github.nextcloud:android-library:2.26.0") {
+        exclude(group = "org.ogce", module = "xpp3")
+    }
+
+    implementation("com.github.nextcloud.android-common:ui:$nextcloudAndroidCommonLib")
+    implementation("com.github.nextcloud.android-common:core:$nextcloudAndroidCommonLib")
+
+    // Nextcloud SSO
+    implementation("com.github.nextcloud:Android-SingleSignOn:$singleSignOnVersion") {
+        version {
+            strictly(singleSignOnVersion)
+        }
+    }
+    implementation("com.github.stefan-niedermann.android-commons:shared-preferences:$androidCommonsVersion")
+    implementation("com.github.stefan-niedermann.android-commons:reactive-livedata:$androidCommonsVersion")
+    implementation("com.github.stefan-niedermann.android-commons:util:$androidCommonsVersion")
+    implementation("com.github.stefan-niedermann.nextcloud-commons:sso-glide:$commonsVersion")
+    implementation("com.github.stefan-niedermann.nextcloud-commons:exception:$commonsVersion")
+    implementation("com.github.stefan-niedermann.nextcloud-commons:markdown:$commonsVersion") {
+        exclude(group = "org.jetbrains", module = "annotations-java5")
+    }
+
+    // Glide
+    val glideVersion = "5.0.9"
+    implementation("com.github.bumptech.glide:glide:$glideVersion")
+    annotationProcessor("com.github.bumptech.glide:compiler:$glideVersion")
+
+    // Android X
+    implementation("androidx.appcompat:appcompat:1.8.0")
+    implementation("androidx.core:core-ktx:1.19.1")
+    implementation("androidx.core:core-splashscreen:1.2.0")
+    implementation("androidx.fragment:fragment:1.9.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.11.0")
+    implementation("androidx.preference:preference:1.2.1")
+    implementation("androidx.recyclerview:recyclerview-selection:1.2.0")
+    implementation("androidx.recyclerview:recyclerview:1.4.0")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0")
+    implementation("androidx.work:work-runtime:2.11.2")
+    implementation("com.google.android.material:material:1.14.0")
+
+    // Vanitech
+    implementation("com.vanniktech:emoji-google:0.24.1")
+
+    // Database
+    val roomVersion = "2.8.5"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    annotationProcessor("androidx.room:room-compiler:$roomVersion")
+    annotationProcessor("org.jetbrains.kotlin:kotlin-metadata-jvm:$kotlinVersion")
+
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:3.0.0")
+
+    // Gson
+    implementation("com.google.code.gson:gson:2.14.0")
+
+    // ReactiveX
+    implementation("io.reactivex.rxjava2:rxjava:2.2.21")
+    implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
+
+    // Testing
+    testImplementation("androidx.test:core:1.7.0")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.mockito:mockito-core:5.23.0")
+    testImplementation("org.robolectric:robolectric:4.17")
+}
+
+configurations.configureEach {
+    resolutionStrategy.eachDependency {
+        if (requested.group == "com.github.nextcloud.android-common") {
+            useVersion(nextcloudAndroidCommonLib)
+        }
+    }
+}
+
+// Run the compiler as a separate process
+tasks.withType<JavaCompile>().configureEach {
+    options.isFork = true
+
+    // Enable Incremental Compilation
+    options.isIncremental = true
+}
+
+tasks.withType<Test>().configureEach {
+    // Run tests in parallel
+    maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).takeIf { it > 0 } ?: 1
+}
