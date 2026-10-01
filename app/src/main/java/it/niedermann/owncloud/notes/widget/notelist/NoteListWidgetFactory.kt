@@ -109,7 +109,7 @@ class NoteListWidgetFactory internal constructor(private val context: Context, i
     }
 
     override fun getViewAt(position: Int): RemoteViews? {
-        val note = dbNotes.getOrNull(position) ?: return null
+        val note = dbNotes.getOrNull(position) ?: return RemoteViews(context.packageName, R.layout.widget_entry_grid)
 
         val openNoteIntent = getOpenNoteIntent(note)
 
@@ -147,15 +147,15 @@ class NoteListWidgetFactory internal constructor(private val context: Context, i
     }
 
     override fun getLoadingView(): RemoteViews? {
-        return null
+        return RemoteViews(context.packageName, R.layout.widget_entry_grid)
     }
 
     override fun getViewTypeCount(): Int {
-        return 2
+        return 1
     }
 
     override fun getItemId(position: Int): Long {
-        return dbNotes[position].id
+        return dbNotes.getOrNull(position)?.id ?: position.toLong()
     }
 
     override fun hasStableIds(): Boolean {

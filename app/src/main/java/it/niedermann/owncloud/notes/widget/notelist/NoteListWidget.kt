@@ -48,8 +48,10 @@ class NoteListWidget : AppWidgetProvider() {
             return
         }
 
-        if (intent.action != AppWidgetManager.ACTION_APPWIDGET_UPDATE) {
-            Log.w(TAG, "Intent action is not ACTION_APPWIDGET_UPDATE")
+        if (intent.action != AppWidgetManager.ACTION_APPWIDGET_UPDATE &&
+            intent.action != ACTION_REFRESH_WIDGET
+        ) {
+            Log.w(TAG, "Intent action is neither ACTION_APPWIDGET_UPDATE nor ACTION_REFRESH_WIDGET: ${intent.action}")
             return
         }
 
@@ -60,6 +62,7 @@ class NoteListWidget : AppWidgetProvider() {
                 awm,
                 awm.getAppWidgetIds(ComponentName(context, NoteListWidget::class.java))
             )
+            return
         }
 
         Log.w(TAG, "Update widget via given appWidgetIds")
@@ -83,6 +86,7 @@ class NoteListWidget : AppWidgetProvider() {
     }
 
     companion object {
+        const val ACTION_REFRESH_WIDGET = "it.niedermann.owncloud.notes.widget.notelist.ACTION_REFRESH_WIDGET"
         private val TAG: String = NoteListWidget::class.java.getSimpleName()
         fun updateAppWidget(context: Context, awm: AppWidgetManager, appWidgetIds: IntArray) {
             val repo = NotesRepository.getInstance(context)
@@ -110,11 +114,23 @@ class NoteListWidget : AppWidgetProvider() {
                         getCreateNoteIntent(context, data),
                         PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
                     )
+                    val refreshIntent = Intent(context, NoteListWidget::class.java).apply {
+                        action = ACTION_REFRESH_WIDGET
+                        putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
+                        setData(Uri.parse("notelistwidget://refresh/$appWidgetId"))
+                    }
+                    val refreshPendingIntent = PendingIntent.getBroadcast(
+                        context,
+                        appWidgetId,
+                        refreshIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                    )
 
                     val views = RemoteViews(context.packageName, R.layout.widget_note_list).apply {
                         setRemoteAdapter(R.id.note_list_widget_lv, serviceIntent)
                         setPendingIntentTemplate(R.id.note_list_widget_lv, editNotePendingIntent)
                         setOnClickPendingIntent(R.id.widget_add_note, createNotePendingIntent)
+                        setOnClickPendingIntent(R.id.widget_refresh_list, refreshPendingIntent)
                         setEmptyView(
                             R.id.note_list_widget_lv,
                             R.id.widget_note_list_placeholder_tv

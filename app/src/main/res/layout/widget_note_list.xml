@@ -18,8 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:columnWidth="120dp"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="@null"
+        android:overScrollMode="never"
+        android:cacheColorHint="@android:color/transparent"
         android:gravity="fill"
         android:horizontalSpacing="@dimen/widget_note_list_outer_padding"
         android:numColumns="2"
@@ -36,6 +36,15 @@
         android:contentDescription="@string/action_create"
         android:padding="@dimen/spacer_1x"
         android:src="@drawable/ic_widget_create" />
+
+    <ImageView
+        android:id="@+id/widget_refresh_list"
+        android:layout_width="@dimen/minimum_size_for_touchable_area"
+        android:layout_height="@dimen/minimum_size_for_touchable_area"
+        android:layout_gravity="top|start"
+        android:contentDescription="@string/simple_synchronization"
+        android:padding="@dimen/spacer_1x"
+        android:src="@drawable/ic_widget_refresh" />
 
     <TextView
         android:id="@+id/widget_note_list_placeholder_tv"
