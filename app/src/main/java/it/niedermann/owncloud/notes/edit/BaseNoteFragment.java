@@ -9,6 +9,7 @@ package it.niedermann.owncloud.notes.edit;
 import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
 import static it.niedermann.owncloud.notes.shared.util.WidgetUtil.pendingIntentFlagCompat;
 
+import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +22,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ScrollView;
 
+import android.net.Uri;
+import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -53,6 +59,7 @@ import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.util.ApiVersionUtil;
+import it.niedermann.owncloud.notes.shared.util.NoteImageHelper;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
@@ -83,6 +90,8 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
 
     protected boolean isNew = true;
 
+    private ActivityResultLauncher<String> pickImageLauncher;
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -92,6 +101,12 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
             throw new ClassCastException(context.getClass() + " must implement " + NoteFragmentListener.class);
         }
         repo = NotesRepository.getInstance(context);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        pickImageLauncher = registerForActivityResult(new ActivityResultContracts.GetContent(), this::onImagePicked);
     }
 
     @Override
@@ -239,6 +254,12 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         if (note != null) {
             prepareFavoriteOption(menu.findItem(R.id.menu_favorite));
 
+            final var attachItem = menu.findItem(R.id.menu_attach_image);
+            if (attachItem != null) {
+                final var utils = BrandingUtil.of(colorAccent, requireContext());
+                utils.platform.colorToolbarMenuIcon(requireContext(), attachItem);
+            }
+
             final var preferredApiVersion = ApiVersionUtil.getPreferredApiVersion(localAccount.getApiVersion());
             menu.findItem(R.id.menu_title).setVisible(preferredApiVersion != null && preferredApiVersion.compareTo(ApiVersion.API_VERSION_1_0) >= 0);
             menu.findItem(R.id.menu_delete).setVisible(!isNew);
@@ -264,7 +285,12 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         final int itemId = item.getItemId();
-        if (itemId == R.id.menu_cancel) {
+        if (itemId == R.id.menu_attach_image) {
+            if (pickImageLauncher != null) {
+                pickImageLauncher.launch("image/*");
+            }
+            return true;
+        } else if (itemId == R.id.menu_cancel) {
             executor.submit(() -> {
                 if (originalNote == null) {
                     repo.deleteNoteAndSync(localAccount, note.getId());
@@ -313,6 +339,63 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void onImagePicked(@Nullable Uri uri) {
+        if (uri == null) {
+            return;
+        }
+        final Context context = getContext();
+        if (context == null) {
+            return;
+        }
+        Toast.makeText(context, R.string.uploading_image, Toast.LENGTH_SHORT).show();
+        executor.submit(() -> {
+            try {
+                final var ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext().getApplicationContext());
+                final String attachmentPath = NoteImageHelper.uploadImage(requireContext().getApplicationContext(), ssoAccount, uri);
+                final String markdown = NoteImageHelper.formatMarkdownImage(attachmentPath);
+                final Activity activity = getActivity();
+                if (activity != null && isAdded()) {
+                    activity.runOnUiThread(() -> {
+                        if (isAdded() && getContext() != null) {
+                            insertImageMarkdown(markdown);
+                            Toast.makeText(getContext(), R.string.image_attached, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            } catch (Exception e) {
+                Log_OC.e(TAG, "Failed to upload image attachment", e);
+                final Activity activity = getActivity();
+                if (activity != null && isAdded()) {
+                    activity.runOnUiThread(() -> {
+                        if (getContext() != null) {
+                            Toast.makeText(getContext(), "Failed to attach image: " + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    public void insertImageMarkdown(@NonNull String markdown) {
+        if (this instanceof NoteEditFragment) {
+            ((NoteEditFragment) this).insertTextAtCursor(markdown);
+            saveNote(null);
+        } else {
+            if (note != null) {
+                String current = note.getContent();
+                String updated = (current == null || current.isEmpty()) ? markdown : (current + markdown);
+                note = repo.updateNoteAndSync(localAccount, note, updated, null, null);
+                if (listener != null) {
+                    listener.onNoteUpdated(note);
+                }
+                requireActivity().invalidateOptionsMenu();
+                if (this instanceof NotePreviewFragment) {
+                    ((NotePreviewFragment) this).onNoteLoaded(note);
+                }
+            }
+        }
     }
 
     private void pinNoteToHome() {

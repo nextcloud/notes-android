@@ -121,7 +121,7 @@ public class ApiProvider {
         return shareAPI;
     }
 
-    private synchronized NextcloudAPI getNextcloudAPI(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount) {
+    public synchronized NextcloudAPI getNextcloudAPI(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount) {
         if (API_CACHE.containsKey(ssoAccount.name)) {
             return API_CACHE.get(ssoAccount.name);
         } else {
