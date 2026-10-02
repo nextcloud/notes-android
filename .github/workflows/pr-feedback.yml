@@ -36,7 +36,7 @@ jobs:
           blocklist=$(curl https://raw.githubusercontent.com/nextcloud/.github/master/non-community-usernames.txt | paste -s -d, -)
           echo "blocklist=$blocklist" >> "$GITHUB_OUTPUT"
 
-      - uses: nextcloud/pr-feedback-action@418049674478992aabb042a1f60bc16a57a2edcd # main
+      - uses: nextcloud/pr-feedback-action@4738cf661995d96df3512409ec17c900a4081d33 # main
         with:
           feedback-message: |
             Hello there,
