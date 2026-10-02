@@ -80,6 +80,7 @@
     <string name="fontSize_small">Pequeño</string>
     <string name="formatting_help_checkboxes_title">Casillas de verificación</string>
     <string name="formatting_help_images_title">Imágenes</string>
+    <string name="formatting_help_tables_column">Columna %1d</string>
     <string name="formatting_help_text_title">Texto</string>
     <string name="fourHours">4 horas</string>
     <string name="invisible">Invisible</string>
@@ -133,6 +134,7 @@
     <string name="pref_value_lock">Protección con contraseña</string>
     <string name="public_share_name">Nuevo nombre</string>
     <string name="remote">(remoto)</string>
+    <string name="remove_account">Eliminar %1$s</string>
     <string name="set_online_status">Estado en línea</string>
     <string name="settings_font_size">Tamaño de fuente</string>
     <string name="settings_font_title">Fuente monoespaciada</string>
