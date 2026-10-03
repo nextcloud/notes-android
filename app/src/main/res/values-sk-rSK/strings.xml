@@ -105,7 +105,7 @@
     <string name="darkmode_light">Svetlé</string>
     <string name="darkmode_system_default">Predvolené systémom</string>
     <string name="delete_share">Odstrániť zdieľanie</string>
-    <string name="direct_editing_error">Chyba pri načítaní rich editora</string>
+    <string name="direct_editing_error">Chyba pri načítaní rozšíreného editora</string>
     <string name="dismiss">Zatvoriť</string>
     <string name="dnd">Nerušiť</string>
     <string name="dontClear">Nemazať</string>
