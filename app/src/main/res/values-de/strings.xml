@@ -128,7 +128,7 @@
     <string name="error_dialog_server_app_enabled">Bitte stellen Sie sicher, dass die \"Notes\"-App auf Ihrem Server installiert und aktiviert ist.</string>
     <string name="error_dialog_timeout_instance">Der Server reagierte nicht in der üblichen Zeit. Bitte stellen Sie sicher, dass Ihre Instanz einwandfrei läuft.</string>
     <string name="error_dialog_timeout_toggle">Überprüfen Sie Ihre Netzwerkverbindung. Manchmal kann es hilfreich sein, die mobilen Daten oder das WLAN aus- und wieder einzuschalten.</string>
-    <string name="error_dialog_tip_clear_storage">Sie können den Speicherinhalt leeren indem Sie die App öffnen und Speicher → Speicherinhalt löschen auswählen. ⚠️ Warnung: Noch nicht synchronisierte Notizen werden gelöscht!</string>
+    <string name="error_dialog_tip_clear_storage">Sie können den Speicherinhalt leeren indem Sie die App öffnen und Speicher → Speicherinhalt löschen auswählen. ⚠️ Achtung: Noch nicht synchronisierte Notizen werden gelöscht!</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Bitte alle Batterieoptimierungen für Nextcloud und die Notes-App deaktivieren.</string>
     <string name="error_dialog_tip_files_delete_storage">Wenn das erzwungene Stoppen nicht hilft, können Sie versuchen, den Speicher beider Apps zu leeren.</string>
     <string name="error_dialog_tip_files_force_stop">Mit Ihrer Nextcloud-App scheint etwas nicht zu stimmen. Bitte versuchen Sie, sowohl die Nextcloud-App als auch die Nextcloud Notes-App anzuhalten.</string>
@@ -169,7 +169,7 @@
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_images_alt">Ausgefallenes Bild</string>
     <string name="formatting_help_images_body_1">Links müssen entweder vollständige URLs sein, die mit einem Protokoll und einer Domäne beginnen, oder absolute Pfade, die mit einem %1$s-Zeichen beginnen.</string>
-    <string name="formatting_help_images_body_2">Um dem Markdown-Format zu entsprechen, verwenden Sie bitte Escape-Zeichen in der Bild-URL. Ersetzen Sie also z.B. Leerzeichen in der URL durch %1$s.</string>
+    <string name="formatting_help_images_body_2">Um dem Markdown-Format zu entsprechen, verwenden Sie bitte Escape-Zeichen in der Bild-URL. Ersetzen Sie also z. B. Leerzeichen in der URL durch %1$s.</string>
     <string name="formatting_help_images_title">Bilder</string>
     <string name="formatting_help_lists_body_1">Manchmal werden nummerierte Listen benötigt:</string>
     <string name="formatting_help_lists_body_2">Eins</string>
