@@ -25,6 +25,7 @@ import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemGridBinding
 import it.niedermann.owncloud.notes.main.items.NoteViewHolder;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
+import it.niedermann.owncloud.notes.shared.util.NoteImagePreviewLoader;
 
 public class NoteViewGridHolder extends NoteViewHolder {
     @NonNull
@@ -54,9 +55,12 @@ public class NoteViewGridHolder extends NoteViewHolder {
         bindFavorite(binding.noteFavorite, note.getFavorite());
         bindModified(binding.noteModified, note.getModified());
         bindSearchableContent(context, binding.noteTitle, searchQuery, note.getTitle(), color);
-        bindSearchableContent(context, binding.noteExcerpt, searchQuery, note.getExcerpt().replace(EXCERPT_LINE_SEPARATOR, "\n"), color);
+        final boolean hasImagePreview = NoteImagePreviewLoader.load(context, note.getContent(), binding.noteImagePreview);
+        if (!hasImagePreview) {
+            bindSearchableContent(context, binding.noteExcerpt, searchQuery, note.getExcerpt().replace(EXCERPT_LINE_SEPARATOR, "\n"), color);
+        }
         bindNoteSharedIcon(context, note.isShared(), binding.noteShared, color);
-        binding.noteExcerpt.setVisibility(TextUtils.isEmpty(note.getExcerpt()) ? GONE : VISIBLE);
+        binding.noteExcerpt.setVisibility(hasImagePreview || TextUtils.isEmpty(note.getExcerpt()) ? GONE : VISIBLE);
     }
 
     @Nullable
