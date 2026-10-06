@@ -539,6 +539,8 @@
     <string name="account_not_found">Account not found!</string>
 
     <string name="activities_menuitem">Activities</string>
+    <string name="activities_title">Activities</string>
+
     <string name="placeholder_filename">Note.md</string>
     <string name="activities_favorite">Favorite</string>
     <string name="placeholder_fileSize" translatable="false">389 KB</string>
