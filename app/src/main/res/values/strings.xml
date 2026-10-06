@@ -539,4 +539,10 @@
     <string name="account_not_found">Account not found!</string>
 
     <string name="activities_menuitem">Activities</string>
+    <string name="placeholder_filename">Note.md</string>
+    <string name="activities_favorite">Favorite</string>
+    <string name="placeholder_fileSize" translatable="false">389 KB</string>
+    <string name="info_separator" translatable="false">&#160;&#x2022;</string>
+    <string name="placeholder_media_time" translatable="false">12:23:45</string>
+
 </resources>
