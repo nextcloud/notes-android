@@ -537,4 +537,6 @@
     <string name="share_expires">Share expires on %1$s</string>
     <string name="dismiss">Dismiss</string>
     <string name="account_not_found">Account not found!</string>
+
+    <string name="activities_menuitem">Activities</string>
 </resources>
