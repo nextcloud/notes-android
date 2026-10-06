@@ -46,6 +46,7 @@ import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
 import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment.CategoryDialogListener;
 import it.niedermann.owncloud.notes.edit.title.EditTitleDialogFragment;
 import it.niedermann.owncloud.notes.edit.title.EditTitleDialogFragment.EditTitleListener;
+import it.niedermann.owncloud.notes.itemdetails.ItemDetailsActivity;
 import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
@@ -305,8 +306,10 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                     .newInstance(new ArrayList<>(repo.getAccounts()), note.getAccountId())
                     .show(requireActivity().getSupportFragmentManager(), BaseNoteFragment.class.getSimpleName()));
             return true;
-        } else if (itemId == R.id.menu_share) {
-            shareNote();
+        } else if (itemId == R.id.menu_details) {
+            Intent detailsIntent = new Intent(requireContext(), ItemDetailsActivity.class);
+            startActivity(detailsIntent);
+            //shareNote();  // TODO
             return false;
         } else if (itemId == MENU_ID_PIN) {
             pinNoteToHome();
