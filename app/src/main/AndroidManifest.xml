@@ -58,7 +58,7 @@
         </activity>
 
         <activity
-            android:name=".share.NoteShareActivity" />
+            android:name=".itemdetails.ItemDetailsActivity" />
 
         <activity
             android:name=".share.NoteShareDetailActivity" />
