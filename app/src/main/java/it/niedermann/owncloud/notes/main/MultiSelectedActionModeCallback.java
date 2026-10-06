@@ -186,6 +186,8 @@ public class MultiSelectedActionModeCallback implements Callback {
                         .show(fragmentManager, CategoryDialogFragment.class.getSimpleName());
             });
             return true;
+        } else if (itemId == R.id.menu_activities) {
+
         }
         return false;
     }
