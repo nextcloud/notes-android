@@ -538,7 +538,7 @@
     <string name="dismiss">Dismiss</string>
     <string name="account_not_found">Account not found!</string>
 
-    <string name="activities_menuitem">Activities</string>
+    <string name="menu_details">Details</string>
     <string name="activities_title">Activities</string>
 
     <string name="placeholder_filename">Note.md</string>

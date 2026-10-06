@@ -16,17 +16,10 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/menu_share"
-        android:icon="@drawable/ic_share_white_24dp"
+        android:id="@+id/menu_details"
+        android:icon="@drawable/ic_info_outline_grey600_24dp"
         android:orderInCategory="90"
-        android:title="@string/menu_share"
-        app:showAsAction="ifRoom" />
-
-    <item
-        android:id="@+id/menu_activities"
-        android:icon="@drawable/ic_activity"
-        android:orderInCategory="95"
-        android:title="@string/activities_menuitem"
+        android:title="@string/menu_details"
         app:showAsAction="ifRoom" />
 
     <item
