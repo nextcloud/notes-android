@@ -21,6 +21,7 @@ class ItemDetailsActivity : BrandedActivity() {
 
         val pages = listOf<Pair<String,BrandedFragment>>(
             Pair(getString(R.string.activities_title), ActivitiesFragment.newInstance())
+            // TODO: convert NoteShareActivity to Kotlin and refactor to be a BrandedFragment
             //Pair(getString(R.string.share), NoteShareFragment.newInstance())
         )
 
