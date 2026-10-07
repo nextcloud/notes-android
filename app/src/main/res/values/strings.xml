@@ -31,7 +31,6 @@
     <string name="menu_change_category">Category</string>
     <string name="menu_favorite">Favorite</string>
     <string name="menu_preview">Preview</string>
-    <string name="menu_share">Share</string>
     <string name="menu_shared_note">Shared note</string>
     <string name="common_loading">Loading…</string>
 
@@ -537,4 +536,14 @@
     <string name="share_expires">Share expires on %1$s</string>
     <string name="dismiss">Dismiss</string>
     <string name="account_not_found">Account not found!</string>
+
+    <string name="menu_details">Details</string>
+    <string name="activities_title">Activities</string>
+
+    <string name="placeholder_filename">Note.md</string>
+    <string name="activities_favorite">Favorite</string>
+    <string name="placeholder_fileSize" translatable="false">389 KB</string>
+    <string name="info_separator" translatable="false">&#160;&#x2022;</string>
+    <string name="placeholder_media_time" translatable="false">12:23:45</string>
+
 </resources>

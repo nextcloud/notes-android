@@ -45,4 +45,7 @@
 
     <color name="category_widget_background">@color/material_dynamic_secondary20</color>
     <color name="category_border">@color/transparent</color>
+
+    <color name="list_divider_background">#49454F</color>
+
 </resources>

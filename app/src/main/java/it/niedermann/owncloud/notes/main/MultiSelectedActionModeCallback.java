@@ -33,6 +33,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
+import it.niedermann.owncloud.notes.itemdetails.ItemDetailsActivity;
 import it.niedermann.owncloud.notes.share.NoteShareActivity;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
@@ -153,7 +154,7 @@ public class MultiSelectedActionModeCallback implements Callback {
                         .show(fragmentManager, AccountPickerDialogFragment.class.getSimpleName()));
             });
             return true;
-        } else if (itemId == R.id.menu_share) {
+        } /*else if (itemId == R.id.menu_share) {
             final var selection = new ArrayList<Long>(tracker.getSelection().size());
             for (final var sel : tracker.getSelection()) {
                 selection.add(sel);
@@ -177,7 +178,7 @@ public class MultiSelectedActionModeCallback implements Callback {
             }
 
             return true;
-        } else if (itemId == R.id.menu_category) {// TODO detect whether all selected notes do have the same category - in this case preselect it
+        }*/ else if (itemId == R.id.menu_category) {// TODO detect whether all selected notes do have the same category - in this case preselect it
             final var accountLiveData = mainViewModel.getCurrentAccount();
             accountLiveData.observe(lifecycleOwner, account -> {
                 accountLiveData.removeObservers(lifecycleOwner);
@@ -186,6 +187,9 @@ public class MultiSelectedActionModeCallback implements Callback {
                         .show(fragmentManager, CategoryDialogFragment.class.getSimpleName());
             });
             return true;
+        } else if (itemId == R.id.menu_details) {
+            Intent detailsIntent = new Intent(context, ItemDetailsActivity.class);
+            mainActivity.startActivity(detailsIntent);
         }
         return false;
     }
