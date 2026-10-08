@@ -19,7 +19,6 @@ import com.owncloud.android.lib.common.utils.Log_OC
 import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.edit.EditNoteActivity
 import it.niedermann.owncloud.notes.persistence.NotesRepository
-import it.niedermann.owncloud.notes.shared.util.WidgetUtil
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import androidx.core.net.toUri
@@ -98,9 +97,9 @@ class NoteListWidget : AppWidgetProvider() {
                     }
 
                     val pendingIntentFlags =
-                        WidgetUtil.pendingIntentFlagCompat(PendingIntent.FLAG_UPDATE_CURRENT or Intent.FILL_IN_COMPONENT)
+                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE or Intent.FILL_IN_COMPONENT
                     val editNotePendingIntent =
-                        PendingIntent.getActivity(context, 0, editNoteIntent, pendingIntentFlags)
+                        PendingIntent.getActivity(context, appWidgetId, editNoteIntent, pendingIntentFlags)
 
                     val views = RemoteViews(context.packageName, R.layout.widget_note_list).apply {
                         setRemoteAdapter(R.id.note_list_widget_lv, serviceIntent)
