@@ -6,3 +6,12 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 include ':app'
+
+/*
+includeBuild("../android-library") {
+    dependencySubstitution {
+        substitute(module("com.github.nextcloud:android-library"))
+            .using(project(":library"))
+    }
+}
+*/

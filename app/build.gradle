@@ -9,6 +9,10 @@
 
 apply plugin: 'com.android.application'
 
+def testServerUrl = project.findProperty('NC_TEST_SERVER_BASEURL') ?: 'http://10.0.2.2'
+def testServerUsername = project.findProperty('NC_TEST_SERVER_USERNAME') ?: 'test'
+def testServerPassword = project.findProperty('NC_TEST_SERVER_PASSWORD') ?: 'test'
+
 android {
     namespace = 'it.niedermann.owncloud.notes'
 
@@ -22,6 +26,11 @@ android {
         versionCode 350010002
         versionName "35.1.0 Alpha 02"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArguments = [
+                TEST_SERVER_URL     : testServerUrl.toString(),
+                TEST_SERVER_USERNAME: testServerUsername.toString(),
+                TEST_SERVER_PASSWORD: testServerPassword.toString()
+        ]
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
@@ -194,6 +203,13 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.mockito:mockito-core:5.23.0'
     testImplementation 'org.robolectric:robolectric:4.17'
+
+    // Instrumented tests
+    androidTestImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test:runner:1.7.0'
+    // Json instance for the Retrofit/dav4jvm showcase IT; the converter itself comes transitively
+    // from com.github.nextcloud:android-library, but it only exposes kotlinx-serialization-core
+    androidTestImplementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0'
 }
 
 configurations.configureEach {
