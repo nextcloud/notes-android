@@ -12,21 +12,26 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.net.Uri;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
@@ -36,7 +41,9 @@ import com.nextcloud.android.sso.model.SingleSignOnAccount;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Objects;
 
 import it.niedermann.android.sharedpreferences.SharedPreferenceBooleanLiveData;
@@ -50,6 +57,7 @@ import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
+import it.niedermann.owncloud.notes.shared.util.NoteImageHelper;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
@@ -343,6 +351,16 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
             favorite = categoryPreselection.getType() == FAVORITES;
         }
 
+        final String action = intent.getAction();
+        final String type = intent.getType();
+        final boolean isImageShare = (Intent.ACTION_SEND.equals(action) || Intent.ACTION_SEND_MULTIPLE.equals(action))
+                && ((type != null && type.startsWith("image/")) || intent.hasExtra(Intent.EXTRA_STREAM));
+
+        if (isImageShare) {
+            handleImageShare(intent, categoryTitle, favorite);
+            return;
+        }
+
         String content = "";
         if (
                 intent.hasExtra(Intent.EXTRA_TEXT) &&
@@ -361,6 +379,83 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         final var newNote = new Note(null, Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(content, this), content, categoryTitle, favorite, null, false, false);
         fragment = getNewNoteFragment(newNote);
         replaceFragment();
+    }
+
+    private void handleImageShare(Intent intent, String categoryTitle, boolean favorite) {
+        final List<Uri> imageUris = new ArrayList<>();
+        if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
+            List<Uri> uris = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
+            if (uris != null) {
+                imageUris.addAll(uris);
+            }
+        } else {
+            Uri uri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+            if (uri != null) {
+                imageUris.add(uri);
+            } else if (intent.getData() != null) {
+                imageUris.add(intent.getData());
+            }
+        }
+
+        final String initialText = intent.hasExtra(Intent.EXTRA_TEXT) ? ShareUtil.extractSharedText(intent) : "";
+
+        if (imageUris.isEmpty()) {
+            final String content = initialText != null ? initialText : "";
+            final var newNote = new Note(null, Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(content, this), content, categoryTitle, favorite, null, false, false);
+            fragment = getNewNoteFragment(newNote);
+            replaceFragment();
+            return;
+        }
+
+        final ProgressBar progressBar = new ProgressBar(this);
+        progressBar.setPadding(0, 48, 0, 48);
+        final AlertDialog progressDialog = new MaterialAlertDialogBuilder(this)
+                .setTitle(R.string.uploading_image)
+                .setView(progressBar)
+                .setCancelable(false)
+                .show();
+
+        new Thread(() -> {
+            StringBuilder contentBuilder = new StringBuilder();
+            if (initialText != null && !initialText.trim().isEmpty()) {
+                contentBuilder.append(initialText).append("\n\n");
+            }
+
+            try {
+                final SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
+                final String notesPath = NoteImageHelper.getNotesPath(getApplicationContext(), ssoAccount, repo);
+
+                for (Uri uri : imageUris) {
+                    try {
+                        String attachmentPath = NoteImageHelper.uploadImage(getApplicationContext(), ssoAccount, notesPath, uri);
+                        contentBuilder.append(NoteImageHelper.formatMarkdownImage(attachmentPath));
+                    } catch (Exception e) {
+                        Log.e(TAG, "Failed to upload shared image " + uri, e);
+                    }
+                }
+            } catch (Exception e) {
+                Log.e(TAG, "Failed to get SSO account or notes path for image share", e);
+            }
+
+            final String finalContent = contentBuilder.toString().trim();
+            runOnUiThread(() -> {
+                if (isFinishing() || isDestroyed()) {
+                    return;
+                }
+                try {
+                    if (progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
+                } catch (Exception ignored) {
+                }
+
+                String title = NoteUtil.generateNonEmptyNoteTitle(finalContent, EditNoteActivity.this);
+                final var newNote = new Note(null, Calendar.getInstance(), title, finalContent, categoryTitle, favorite, null, false, false);
+                fragment = getNewNoteFragment(newNote);
+                replaceFragment();
+                Toast.makeText(EditNoteActivity.this, R.string.image_attached, Toast.LENGTH_SHORT).show();
+            });
+        }).start();
     }
 
 

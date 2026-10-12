@@ -1,0 +1,14 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <size android:width="48dp" android:height="48dp" />
+            <solid android:color="@color/defaultBrand" />
+        </shape>
+    </item>
+    <item
+        android:top="10dp"
+        android:left="10dp"
+        android:right="10dp"
+        android:bottom="10dp"
+        android:drawable="@drawable/ic_sync_white_24dp" />
+</layer-list>
