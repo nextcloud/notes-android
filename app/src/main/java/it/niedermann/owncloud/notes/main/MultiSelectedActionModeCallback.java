@@ -34,8 +34,6 @@ import it.niedermann.owncloud.notes.accountpicker.AccountPickerDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
 import it.niedermann.owncloud.notes.itemdetails.ItemDetailsActivity;
-import it.niedermann.owncloud.notes.share.NoteShareActivity;
-import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
 public class MultiSelectedActionModeCallback implements Callback {
 
@@ -188,7 +186,7 @@ public class MultiSelectedActionModeCallback implements Callback {
             });
             return true;
         } else if (itemId == R.id.menu_details) {
-            Intent detailsIntent = new Intent(context, ItemDetailsActivity.class);
+            Intent detailsIntent = ItemDetailsActivity.getActivityStartIntent(context, note, localAccount);
             mainActivity.startActivity(detailsIntent);
         }
         return false;
