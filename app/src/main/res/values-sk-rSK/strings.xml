@@ -35,7 +35,7 @@
     <string name="action_note_deleted">Vymazané %1$s</string>
     <string name="action_note_restored">Obnovené %1$s</string>
     <string name="action_search">Hľadať</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Nastavenia</string>
     <string name="action_sorting_method">Metóda triedenia</string>
     <string name="action_trashbin">Zmazané poznámky</string>
     <string name="action_uncategorized">Nezaradené</string>
@@ -96,7 +96,7 @@
     <string name="clipboard_text_copied">Odkaz bol skopírovaný</string>
     <string name="clipboard_unexpected_error">Nečakaná chyba pri kopírovaní do schránky</string>
     <string name="common_delete">Vymazať</string>
-    <string name="common_loading">Nahrávam...</string>
+    <string name="common_loading">Načítava sa…</string>
     <string name="common_ok">OK</string>
     <string name="context_based_formatting">Kontextové okno formátovania</string>
     <string name="copy_link">Kopírovať odkaz</string>
@@ -120,21 +120,21 @@
     <string name="error_action_open_network">Nastavenia siete</string>
     <string name="error_action_update_files_app">Aktualizovať</string>
     <string name="error_dialog_check_maintenance">Prosím skontrolujte, či vaša inštancia Nextcloudu nie je práve v móde údržby.</string>
-    <string name="error_dialog_check_server">Odpoveď servera nebola správna. Skontrolujte, či máte prístup k svojím poznámkam pomocou webového rozhrania.</string>
+    <string name="error_dialog_check_server">Odpoveď servera nebola správna. Skontrolujte, či máte prístup k svojim poznámkam pomocou webového rozhrania.</string>
     <string name="error_dialog_check_server_logs">V nastavení vášho Nextcloudu je problém. Skontrolujte súbor so záznamom udalostí na serveri.</string>
-    <string name="error_dialog_insufficient_storage">Vo vašej inštancii Nexcloudu nie je na úložisku voľné miesto. Aby bolo možné synchronizovať vaše miestne zmeny s vaším cloudom, je potrebné najprv zmazať niektoré súbory.</string>
-    <string name="error_dialog_min_version">Aplikácia Notes pre Android potrebuje aplikáciu Nextcloud pre android aspoň vo verzii 3.18.</string>
+    <string name="error_dialog_insufficient_storage">Vo vašej inštancii Nextcloudu nie je na úložisku voľné miesto. Aby bolo možné synchronizovať vaše miestne zmeny s vaším cloudom, je potrebné najprv zmazať niektoré súbory.</string>
+    <string name="error_dialog_min_version">Aplikácia Notes pre Android potrebuje aplikáciu Nextcloud pre Android aspoň vo verzii 3.18.</string>
     <string name="error_dialog_redirect">Váš server odpovedal stavovým kódom HTTP 302, čo znamená, že na svojom serveri nemáte nainštalovanú aplikáciu Notes alebo je niečo nesprávne nastavené. Môže to byť spôsobené vlastnými zmenami v súbore .htaccess alebo aplikáciami Nextcloud, ako je OID Client.</string>
     <string name="error_dialog_server_app_enabled">Uistite sa, že ste na serveri nainštalovali a povolili aplikáciu Poznámky.</string>
     <string name="error_dialog_timeout_instance">Server dlho neodpovedal. Uistite sa, vami využívaná inštancia funguje dobre.</string>
     <string name="error_dialog_timeout_toggle">Skontrolujte pripojenie k sieti. Niekedy pomôže vypnutie a znovu zapnutie mobilných dát alebo Wi-Fi.</string>
-    <string name="error_dialog_tip_clear_storage">Úložisko môžete vyčistiť otvorením informácii o aplikácii a výberom Úložisko → Vyčistiť úložisko. ⚠️ Varovanie: Toto vymaže poznámky ktore ešte neboli synchronizované!</string>
+    <string name="error_dialog_tip_clear_storage">Úložisko môžete vyčistiť otvorením informácií o aplikácii a výberom Úložisko → Vyčistiť úložisko. ⚠️ Varovanie: Toto vymaže poznámky, ktoré ešte neboli synchronizované!</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Vypnite všetky optimalizácie batérie pre aplikácie Nextcloud a Poznámky.</string>
     <string name="error_dialog_tip_files_delete_storage">Ak ich ukončenie nepomôže, môžete skúsiť vyčistiť úložiská oboch aplikácií.</string>
     <string name="error_dialog_tip_files_force_stop">Niečo s vašim Nextcloudom nie je v poriadku. Skúste vynútiť ukončenie aplikácií Nextcloud a Nextcloud Poznámky.</string>
     <string name="error_dialog_tip_files_outdated">Váš Nextcloud vyzerá byť zastaralý. Navštívte Play Store alebo F-Droid pre získanie najnovšej verzie.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Ak problém pretrváva, skúste vyčistiť úložisko oboch aplikácií: Nextcloud a Nextcloud Poznámky.</string>
-    <string name="error_dialog_tip_token_mismatch_retry">Skúste vyinútiť zatvorenie aplikácie a znova ju reštartovať. Možno došlo k chybnému pripojeniu k aplikácii Nextcloud.</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Skúste vynútiť zatvorenie aplikácie a znova ju reštartovať. Možno došlo k chybnému pripojeniu k aplikácii Nextcloud.</string>
     <string name="error_dialog_title">Ale nie - Čo teraz? 🙁</string>
     <string name="error_dialog_we_need_info">Aby sme vám pomohli, potrebujeme následovné technické informácie:</string>
     <string name="error_maintenance_mode">Server je v móde údržby</string>
@@ -150,15 +150,15 @@
     <string name="fontSize_large">Veľká</string>
     <string name="fontSize_medium">Stredná</string>
     <string name="fontSize_small">Malá</string>
-    <string name="formatting_help_cbf_body_1">Hlavným cieľom aplikácie Notes je poskytnúť nástroj bez rozptyľovania. Svoje texty však budete môcť formátovať pomocou aplikácie Markdown. Pre rôzne príklady uvedené nižšie môžete použiť klávesové skratky, pomocou ktorých môžete svoje poznámky formátovať bez toho, aby ste museli zadávať kódy uvedené nižšie.</string>
-    <string name="formatting_help_cbf_body_2">Stačí si vybrať rozsah textu alebo ťuknúť na kurzor na ktorejkoľvek pozícii a dostanete vyskakovacie menu, ktoré obsahuje tieto východzie položky %1$s, %2$s, %3$s položky ako %4$s alebo %5$s.</string>
+    <string name="formatting_help_cbf_body_1">Hlavným cieľom aplikácie Notes je poskytnúť nástroj bez rozptyľovania. Svoje texty však budete môcť formátovať pomocou Markdownu. Pre rôzne príklady uvedené nižšie môžete použiť klávesové skratky, pomocou ktorých môžete svoje poznámky formátovať bez toho, aby ste museli zadávať kódy uvedené nižšie.</string>
+    <string name="formatting_help_cbf_body_2">Stačí si vybrať rozsah textu alebo ťuknúť na kurzor na ktorejkoľvek pozícii a zobrazí sa vyskakovacie menu, ktoré obsahuje predvolené položky %1$s, %2$s a %3$s, ako aj položky %4$s alebo %5$s.</string>
     <string name="formatting_help_cbf_title">Kontextové formátovanie</string>
     <string name="formatting_help_checkboxes_body_1">Ak chcete vytvoriť zaškrtávacie políčko, použite zoznam nasledovaný hranatými zátvorkami</string>
     <string name="formatting_help_checkboxes_body_2">Položka 1</string>
     <string name="formatting_help_checkboxes_body_3">Položka 2</string>
     <string name="formatting_help_checkboxes_title">Zaškrtávacie políčka</string>
     <string name="formatting_help_code_body_1">Tam, kde je to možné, ako upraviť štýl vrátane Markdown. Ak chcete vložiť kód, zalomte ich do spätných lomiek:</string>
-    <string name="formatting_help_code_body_2">Markdown tiež podporuje niečo, čo sa nazýva oplotenie kódu, čo umožňuje použiť viac riadkov bez odsadenia:</string>
+    <string name="formatting_help_code_body_2">Markdown tiež podporuje niečo, čo sa nazýva ohraničenie kódu, čo umožňuje použiť viac riadkov bez odsadenia:</string>
     <string name="formatting_help_code_body_3">Ak chcete použiť zvýraznenie syntaxe, uveďte jazyk:</string>
     <string name="formatting_help_code_title">Kód</string>
     <string name="formatting_help_codefence" translateable="false">```</string>
@@ -169,7 +169,7 @@
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_images_alt">Efektný obrázok</string>
     <string name="formatting_help_images_body_1">Odkazy musia byť buď úplné adresy URL začínajúce protokolom a doménou, alebo úplné cesty začínajúce znakom %1$s.</string>
-    <string name="formatting_help_images_body_2">Aby sa dodržal formát Markdown, použite v adrese URL obrázka zástupné znaky. To napríklad znamená nahradiť medzery v adrese URL %1$s.</string>
+    <string name="formatting_help_images_body_2">Aby sa dodržal formát Markdown, použite v adrese URL obrázka únikové znaky. To napríklad znamená nahradiť medzery v adrese URL reťazcom %1$s.</string>
     <string name="formatting_help_images_title">Obrázky</string>
     <string name="formatting_help_lists_body_1">Niekedy chcete číslované zoznamy:</string>
     <string name="formatting_help_lists_body_2">Jeden</string>
@@ -191,7 +191,7 @@
     <string name="formatting_help_tables_column">Stĺpec %1d</string>
     <string name="formatting_help_tables_title">Tabuľky</string>
     <string name="formatting_help_tables_value">Hodnota %1d</string>
-    <string name="formatting_help_text_body">Pomocou Markdown ľahké urobiť pár slov %1$stučným písmom%1$s a iných slov %2$skurzívou%2$s. Niektoré slová môžete %3$sprečiarknuť%3$s a dokonca [odkaz na Nextcloud](https://nextcloud.com).</string>
+    <string name="formatting_help_text_body">Pomocou Markdownu je veľmi jednoduché vytvoriť %1$stučný text%1$s a %2$skurzívu%2$s. Niektoré slová môžete %3$sprečiarknuť%3$s a dokonca [odkaz na Nextcloud](https://nextcloud.com).</string>
     <string name="formatting_help_text_title">Text</string>
     <string name="fourHours">4 hodiny</string>
     <string name="http_status_code">HTTP kód stavu: %1$d</string>
@@ -229,7 +229,7 @@
     <string name="noteMode_plain_edit">Jednoduchý režim úprav</string>
     <string name="noteMode_plain_preview">Jednoduchý náhľad</string>
     <string name="noteMode_remember_last">Zapamätať si môj posledný výber</string>
-    <string name="noteMode_rich_edit">Rich editovací režim</string>
+    <string name="noteMode_rich_edit">Režim úprav s formátovaním</string>
     <string name="note_has_been_deleted">Táto poznámka bola vymazaná</string>
     <string name="note_share_activity_activity_icon_content_description">ikona aktivity poznámky</string>
     <string name="note_share_activity_cannot_created">Nie je vám povolené vytvoriť zdieľanie.</string>
@@ -274,12 +274,12 @@
     <string name="pin_to_homescreen">Pripnúť na domovskú obrazovku</string>
     <string name="pref_value_font_normal">Normálne</string>
     <string name="pref_value_lock">Ochrana heslom</string>
-    <string name="pref_value_wifi_and_mobile">Synchronizovať na Wi-Fi a mobilných dátach</string>
-    <string name="progress_import">Importuje sa poznámka %1$d of %2$d…</string>
+    <string name="pref_value_wifi_and_mobile">Synchronizovať cez Wi-Fi a mobilné dáta</string>
+    <string name="progress_import">Importuje sa poznámka %1$d z %2$d…</string>
     <string name="progress_import_indeterminate">Import poznámok…</string>
     <string name="public_share_name">Nový názov</string>
     <string name="remote">(vzdialené)</string>
-    <string name="remove_account">Vzdialené: %1$s</string>
+    <string name="remove_account">Odstrániť %1$s</string>
     <string name="search_in_all">Hľadať všetky poznámky</string>
     <string name="search_in_category">Hľadať v %1$s</string>
     <string name="set_message">Nastaviť správu</string>
@@ -298,7 +298,7 @@
     <string name="settings_lock">Zámok aplikácie (Beta)</string>
     <string name="settings_lock_summary">Prihlasovacie údaje zariadenia</string>
     <string name="settings_note_mode">Režim zobrazovania poznámok</string>
-    <string name="settings_note_mode_new">Spravanie sa pri otvorení Poznámok</string>
+    <string name="settings_note_mode_new">Správanie sa pri otvorení Poznámok</string>
     <string name="settings_notes_path">Nastaviť priečinok</string>
     <string name="settings_notes_path_description">Priečinok pre uloženie vašich poznámok vo vašom Nextcloude</string>
     <string name="settings_notes_path_success">Priečinok pre nové poznámky: %1$s</string>
@@ -335,7 +335,7 @@
     <string name="share_permission_secure_file_drop">Zabezpečený file drop</string>
     <string name="share_permission_unknown">Neznámy</string>
     <string name="share_permission_view_only">Iba pre čítanie</string>
-    <string name="share_permissions">Zdieľať oprávnenia</string>
+    <string name="share_permissions">Oprávnenia na zdieľanie</string>
     <string name="share_remote_clarification">%1$s (vzdialený)</string>
     <string name="share_room_clarification">%1$s (rozhovor)</string>
     <string name="share_send_new_email">Odoslať nový e-mail</string>
@@ -395,10 +395,10 @@
         <item quantity="other">%1$d sťahovaní zostáva</item>
     </plurals>
     <plurals name="ab_selected">
-        <item quantity="one">%d vybraný</item>
-        <item quantity="few">%d vybraných</item>
-        <item quantity="many">%d vybraný</item>
-        <item quantity="other">%d vybraný</item>
+        <item quantity="one">Vybrané: %d</item>
+        <item quantity="few">Vybrané: %d</item>
+        <item quantity="many">Vybrané: %d</item>
+        <item quantity="other">Vybrané: %d</item>
     </plurals>
     <plurals name="bulk_notes_deleted">
         <item quantity="one">Odstránená jedna poznámka</item>
