@@ -599,12 +599,6 @@ class NoteShareFragment : BrandedFragment(), ShareeListAdapterListener, NoteShar
         return true
     }
 
-    public override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putSerializable(ARG_NOTE, note)
-        outState.putSerializable(ARG_ACCOUNT, account)
-    }
-
     private fun isReshareForbidden(share: OCShare): Boolean {
         return (share.shareType != null && ShareType.FEDERATED == share.shareType) ||
             capabilities != null && !capabilities!!.isReSharingAllowed
@@ -872,11 +866,22 @@ class NoteShareFragment : BrandedFragment(), ShareeListAdapterListener, NoteShar
     }
 
     companion object {
-        private const val TAG = "NoteShareActivity"
+        private const val TAG = "NoteShareFragment"
         const val ARG_NOTE: String = "NOTE"
         const val ARG_ACCOUNT: String = "ACCOUNT"
         const val FTAG_CHOOSER_DIALOG: String = "CHOOSER_DIALOG"
 
         private const val SEARCH_DELAY_MS: Long = 500
+
+        fun newInstance(note: Note, account: Account) : NoteShareFragment {
+            val f = NoteShareFragment()
+
+            val bundle = Bundle()
+            bundle.putSerializable(ARG_NOTE, note)
+            bundle.putSerializable(ARG_ACCOUNT, account)
+
+            f.arguments = bundle
+            return f
+        }
     }
 }
