@@ -889,16 +889,5 @@ class NoteShareFragment : BrandedFragment(), ShareeListAdapterListener, NoteShar
         const val FTAG_CHOOSER_DIALOG: String = "CHOOSER_DIALOG"
 
         private const val SEARCH_DELAY_MS: Long = 500
-
-        @JvmStatic
-        fun getActivityStartIntent(note: Note, account: Account, activity: Activity): Intent {
-            val bundle = Bundle()
-            bundle.putSerializable(ARG_NOTE, note)
-            bundle.putSerializable(ARG_ACCOUNT, account)
-
-            val intent = Intent(activity, NoteShareActivity::class.java)
-            intent.putExtras(bundle)
-            return intent
-        }
     }
 }
