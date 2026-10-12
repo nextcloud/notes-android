@@ -4,9 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.app.SearchManager
-import android.content.ComponentName
 import android.content.Context.INPUT_METHOD_SERVICE
-import android.content.Context.SEARCH_SERVICE
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -146,10 +144,7 @@ class NoteShareFragment : BrandedFragment(), ShareeListAdapterListener, NoteShar
                     if (note!!.readonly) {
                         setupReadOnlySearchView()
                     } else {
-                        setupSearchView(
-                            context?.getSystemService(SEARCH_SERVICE) as SearchManager?,
-                            componentName
-                        )
+                        setupSearchView()
                     }
 
                     updateShareeListAdapter()
@@ -191,17 +186,11 @@ class NoteShareFragment : BrandedFragment(), ShareeListAdapterListener, NoteShar
         disableSearchView(binding!!.searchView)
     }
 
-    private fun setupSearchView(searchManager: SearchManager?, componentName: ComponentName?) {
-        if (searchManager == null) {
-            binding!!.searchView.visibility = View.GONE
-            return
-        }
-
+    private fun setupSearchView() {
         val suggestionAdapter = SuggestionAdapter(requireContext(), null, account!!)
         val provider = UsersAndGroupsSearchProvider(requireContext(), repository)
 
         binding!!.searchView.setSuggestionsAdapter(suggestionAdapter)
-        binding!!.searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
         binding!!.searchView.setIconifiedByDefault(false)
         binding!!.searchView.imeOptions = EditorInfo.IME_FLAG_NO_EXTRACT_UI
         binding!!.searchView.setQueryHint(resources.getString(R.string.note_share_activity_search_text))
