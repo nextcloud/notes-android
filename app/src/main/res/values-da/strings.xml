@@ -200,7 +200,7 @@
     <string name="label_favorites">Foretrukne</string>
     <string name="link_share_allow_upload_and_editing">Tillad upload og redigering</string>
     <string name="link_share_editing">Redigering</string>
-    <string name="link_share_file_drop">Fil drop (kun upload)</string>
+    <string name="link_share_file_drop">Fil-aflevering (kun overførsel)</string>
     <string name="link_share_view_only">Kun visning</string>
     <string name="listview_no_content">Intet indhold</string>
     <string name="listview_updated_last_month">Seneste måned</string>
@@ -330,9 +330,9 @@
     <string name="share_password_dialog_fragment_skip">Spring over</string>
     <string name="share_password_title">Beskyttet med adgangskode</string>
     <string name="share_permission_can_edit">Kan redigere</string>
-    <string name="share_permission_file_drop">Fil drop</string>
-    <string name="share_permission_file_request">Filforespørgsler</string>
-    <string name="share_permission_secure_file_drop">Sikkert fil drop</string>
+    <string name="share_permission_file_drop">Fil-aflevering</string>
+    <string name="share_permission_file_request">Fil-forespørgsel</string>
+    <string name="share_permission_secure_file_drop">Sikker fil-aflevering</string>
     <string name="share_permission_unknown">Ukendt</string>
     <string name="share_permission_view_only">Kun visning</string>
     <string name="share_permissions">Del Tilladelser</string>
