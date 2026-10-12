@@ -18,7 +18,6 @@ import android.provider.ContactsContract
 import android.text.InputType
 import android.text.TextUtils
 import android.view.View
-import android.view.View.OnFocusChangeListener
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
@@ -83,6 +82,9 @@ import java.util.concurrent.Executors
 import java.util.concurrent.Future
 import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.TimeUnit
+import androidx.core.view.size
+import androidx.core.view.isVisible
+import androidx.core.net.toUri
 
 class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShareItemAction,
     QuickPermissionSharingBottomSheetActions, SharePasswordDialogListener {
@@ -101,10 +103,10 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
         super.onCreate(savedInstanceState)
 
         executorService = Executors.newSingleThreadScheduledExecutor()
-        binding = ActivityNoteShareBinding.inflate(getLayoutInflater())
+        binding = ActivityNoteShareBinding.inflate(layoutInflater)
         setContentView(binding!!.getRoot())
         setSupportActionBar(binding!!.toolbar)
-        binding!!.toolbar.setNavigationOnClickListener(View.OnClickListener { v: View? -> backPressed() })
+        binding!!.toolbar.setNavigationOnClickListener { backPressed() }
         registerResultLauncher()
         initializeArguments()
         initializeOnBackPressedDispatcher()
@@ -112,12 +114,12 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
 
     private fun registerResultLauncher() {
         resultLauncher = registerForActivityResult<Intent?, ActivityResult?>(
-            ActivityResultContracts.StartActivityForResult(),
-            ActivityResultCallback { result: ActivityResult? ->
-                if (result!!.getResultCode() == RESULT_OK && result.getData() != null) {
-                    recreate()
-                }
-            })
+            ActivityResultContracts.StartActivityForResult()
+        ) { result: ActivityResult? ->
+            if (result!!.resultCode == RESULT_OK && result.data != null) {
+                recreate()
+            }
+        }
     }
 
     private fun initializeOnBackPressedDispatcher() {
@@ -136,7 +138,7 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
     }
 
     private fun initializeArguments() {
-        val bundler = getIntent().getExtras()
+        val bundler = intent.extras
         note = bundler.getSerializableArgument(ARG_NOTE, Note::class.java)
         account = bundler.getSerializableArgument(ARG_ACCOUNT, Account::class.java)
 
@@ -144,7 +146,7 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
 
         requireNotNull(account) { "Account cannot be null" }
 
-        executorService!!.submit(Runnable {
+        executorService!!.submit {
             try {
                 val ssoAcc =
                     SingleAccountHelper.getCurrentSingleSignOnAccount(this@NoteShareActivity)
@@ -152,10 +154,10 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
                 capabilities = repository!!.getCapabilities()
                 repository!!.fetchSharesForNotesAndSaveShareEntities()
 
-                runOnUiThread(Runnable {
-                    binding!!.fileName.setText(note!!.getTitle())
-                    binding!!.searchContainer.setVisibility(View.VISIBLE)
-                    binding!!.sharesList.setVisibility(View.VISIBLE)
+                runOnUiThread {
+                    binding!!.fileName.text = note!!.title
+                    binding!!.searchContainer.visibility = View.VISIBLE
+                    binding!!.sharesList.visibility = View.VISIBLE
                     binding!!.sharesList.setAdapter(
                         ShareeListAdapter(
                             this,
@@ -165,31 +167,31 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
                         )
                     )
                     binding!!.sharesList.setLayoutManager(LinearLayoutManager(this))
-                    binding!!.pickContactEmailBtn.setOnClickListener(View.OnClickListener { v: View? -> checkContactPermission() })
-                    binding!!.btnShareButton.setOnClickListener(View.OnClickListener { v: View? ->
+                    binding!!.pickContactEmailBtn.setOnClickListener { checkContactPermission() }
+                    binding!!.btnShareButton.setOnClickListener {
                         ShareUtil.openShareDialog(
                             this,
-                            note!!.getTitle(),
-                            note!!.getContent()
+                            note!!.title,
+                            note!!.content
                         )
-                    })
+                    }
 
-                    if (note!!.getReadonly()) {
+                    if (note!!.readonly) {
                         setupReadOnlySearchView()
                     } else {
                         setupSearchView(
                             getSystemService(SEARCH_SERVICE) as SearchManager?,
-                            getComponentName()
+                            componentName
                         )
                     }
 
                     updateShareeListAdapter()
-                    binding!!.loadingLayout.setVisibility(View.GONE)
-                })
+                    binding!!.loadingLayout.visibility = View.GONE
+                }
             } catch (e: Exception) {
-                Log_OC.e(TAG, "Exception at NoteShareActivity.init: " + e)
+                Log_OC.e(TAG, "Exception at NoteShareActivity.init: $e")
             }
-        })
+        }
     }
 
     public override fun onStart() {
@@ -208,7 +210,7 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
         view.setEnabled(false)
 
         if (view is ViewGroup) {
-            for (i in 0..<view.getChildCount()) {
+            for (i in 0..<view.size) {
                 disableSearchView(view.getChildAt(i))
             }
         }
@@ -216,15 +218,15 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
 
     private fun setupReadOnlySearchView() {
         binding!!.searchView.setIconifiedByDefault(false)
-        binding!!.searchView.setQueryHint(getResources().getString(R.string.note_share_activity_resharing_not_allowed))
-        binding!!.searchView.setInputType(InputType.TYPE_NULL)
+        binding!!.searchView.setQueryHint(resources.getString(R.string.note_share_activity_resharing_not_allowed))
+        binding!!.searchView.inputType = InputType.TYPE_NULL
         binding!!.pickContactEmailBtn.setVisibility(View.GONE)
         disableSearchView(binding!!.searchView)
     }
 
     private fun setupSearchView(searchManager: SearchManager?, componentName: ComponentName?) {
         if (searchManager == null) {
-            binding!!.searchView.setVisibility(View.GONE)
+            binding!!.searchView.visibility = View.GONE
             return
         }
 
@@ -234,18 +236,18 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
         binding!!.searchView.setSuggestionsAdapter(suggestionAdapter)
         binding!!.searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
         binding!!.searchView.setIconifiedByDefault(false)
-        binding!!.searchView.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI)
-        binding!!.searchView.setQueryHint(getResources().getString(R.string.note_share_activity_search_text))
-        binding!!.searchView.setInputType(InputType.TYPE_CLASS_TEXT)
+        binding!!.searchView.imeOptions = EditorInfo.IME_FLAG_NO_EXTRACT_UI
+        binding!!.searchView.setQueryHint(resources.getString(R.string.note_share_activity_search_text))
+        binding!!.searchView.inputType = InputType.TYPE_CLASS_TEXT
         binding!!.searchView.setFocusable(true)
         binding!!.searchView.setFocusableInTouchMode(true)
 
         val closeButton =
             binding!!.searchView.findViewById<View>(androidx.appcompat.R.id.search_close_btn)
-        closeButton.setOnClickListener(View.OnClickListener { v: View? ->
-            binding!!.progressBar.setVisibility(View.GONE)
+        closeButton.setOnClickListener {
+            binding!!.progressBar.visibility = View.GONE
             binding!!.searchView.setQuery("", false)
-        })
+        }
 
         binding!!.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -254,11 +256,11 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                if (!newText.isEmpty()) {
-                    binding!!.progressBar.setVisibility(View.VISIBLE)
+                if (newText.isNotEmpty()) {
+                    binding!!.progressBar.visibility = View.VISIBLE
 
                     // Cancel the previous task if it's still running
-                    if (future != null && !future!!.isDone()) {
+                    if (future != null && !future!!.isDone) {
                         future!!.cancel(true)
                     }
 
@@ -268,35 +270,35 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
                             Log_OC.d(TAG, "Capabilities cannot be null")
                             return@schedule
                         }
-                        val isFederationShareAllowed = capabilities!!.getFederationShare()
+                        val isFederationShareAllowed = capabilities!!.federationShare
                         try {
                             val cursor =
                                 provider.searchForUsersOrGroups(newText, isFederationShareAllowed)
 
-                            if (cursor == null || cursor.getCount() == 0) {
+                            if (cursor == null || cursor.count == 0) {
                                 return@schedule
                             }
 
-                            runOnUiThread(Runnable {
-                                if (binding!!.searchView.getVisibility() == View.VISIBLE) {
+                            runOnUiThread {
+                                if (binding!!.searchView.isVisible) {
                                     suggestionAdapter.swapCursor(cursor)
                                 }
-                                binding!!.progressBar.setVisibility(View.GONE)
-                            })
+                                binding!!.progressBar.visibility = View.GONE
+                            }
                         } catch (e: Exception) {
-                            Log_OC.d(TAG, "Exception setupSearchView.onQueryTextChange: " + e)
-                            runOnUiThread(Runnable { binding!!.progressBar.setVisibility(View.GONE) })
+                            Log_OC.d(TAG, "Exception setupSearchView.onQueryTextChange: $e")
+                            runOnUiThread { binding!!.progressBar.visibility = View.GONE }
                         }
                     }, SEARCH_DELAY_MS, TimeUnit.MILLISECONDS)
                 } else {
-                    binding!!.progressBar.setVisibility(View.GONE)
+                    binding!!.progressBar.visibility = View.GONE
                     suggestionAdapter.swapCursor(null)
                 }
                 return false
             }
         })
 
-        binding!!.searchView.setOnQueryTextFocusChangeListener(OnFocusChangeListener { v: View?, hasFocus: Boolean ->
+        binding!!.searchView.setOnQueryTextFocusChangeListener { _: View?, hasFocus: Boolean ->
             if (hasFocus) {
                 val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.showSoftInput(
@@ -304,7 +306,7 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
                     InputMethodManager.SHOW_IMPLICIT
                 )
             }
-        })
+        }
 
         binding!!.searchView.setOnSuggestionListener(object : SearchView.OnSuggestionListener {
             override fun onSuggestionSelect(position: Int): Boolean {
@@ -312,7 +314,7 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
             }
 
             override fun onSuggestionClick(position: Int): Boolean {
-                val cursor = suggestionAdapter.getCursor()
+                val cursor = suggestionAdapter.cursor
                 if (cursor != null && cursor.moveToPosition(position)) {
                     val suggestion =
                         cursor.getString(cursor.getColumnIndexOrThrow(SearchManager.SUGGEST_COLUMN_TEXT_1))
@@ -346,9 +348,9 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
             return true
         }
 
-        val share = shares.get(0)
+        val share = shares[0]
         val ownerDisplayName = share.ownerDisplayName
-        return TextUtils.isEmpty(ownerDisplayName) || account!!.getAccountName()
+        return TextUtils.isEmpty(ownerDisplayName) || account!!.accountName
             .split("@".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0].equals(
             ownerDisplayName,
             ignoreCase = true
@@ -357,19 +359,17 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
 
     private fun setShareWithYou() {
         if (accountOwnsFile()) {
-            binding!!.sharedWithYouContainer.setVisibility(View.GONE)
+            binding!!.sharedWithYouContainer.visibility = View.GONE
         } else {
             if (shares.isEmpty()) {
                 return
             }
 
-            val share = shares.get(0)
+            val share = shares[0]
 
-            binding!!.sharedWithYouUsername.setText(
-                String.format(
-                    getString(R.string.note_share_activity_shared_with_you),
-                    share.ownerDisplayName
-                )
+            binding!!.sharedWithYouUsername.text = String.format(
+                getString(R.string.note_share_activity_shared_with_you),
+                share.ownerDisplayName
             )
             AvatarLoader.load(this, binding!!.sharedWithYouAvatar, account!!)
             binding!!.sharedWithYouAvatar.setVisibility(View.VISIBLE)
@@ -378,9 +378,9 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
 
             if (!TextUtils.isEmpty(description)) {
                 binding!!.sharedWithYouNote.setText(description)
-                binding!!.sharedWithYouNoteContainer.setVisibility(View.VISIBLE)
+                binding!!.sharedWithYouNoteContainer.visibility = View.VISIBLE
             } else {
-                binding!!.sharedWithYouNoteContainer.setVisibility(View.GONE)
+                binding!!.sharedWithYouNoteContainer.visibility = View.GONE
             }
         }
     }
@@ -404,31 +404,31 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
             return
         }
 
-        if (capabilities!!.getPublicPasswordEnforced() || capabilities!!.getAskForOptionalPassword()) {
+        if (capabilities!!.publicPasswordEnforced || capabilities!!.askForOptionalPassword) {
             // password enforced by server, request to the user before trying to create
-            requestPasswordForShareViaLink(true, capabilities!!.getAskForOptionalPassword())
+            requestPasswordForShareViaLink(true, capabilities!!.askForOptionalPassword)
         } else {
-            executorService!!.submit(Runnable {
+            executorService!!.submit {
                 val result: ApiResult<OcsResponse<CreateShareResponse>?> =
                     repository!!.addShare(note!!, ShareType.PUBLIC_LINK, "")
-                runOnUiThread(Runnable {
-                    if (result is ApiResult.Success<OcsResponse<CreateShareResponse>?> && binding!!.sharesList.getAdapter() is ShareeListAdapter) {
+                runOnUiThread {
+                    if (result is ApiResult.Success<OcsResponse<CreateShareResponse>?> && binding!!.sharesList.adapter is ShareeListAdapter) {
                         DisplayUtils.showSnackMessage(this@NoteShareActivity, result.message)
                         note!!.setIsShared(true)
                         repository!!.updateNote(note!!)
-                        val adapter = binding!!.sharesList.getAdapter() as ShareeListAdapter
+                        val adapter = binding!!.sharesList.adapter as ShareeListAdapter
                         adapter.addShare(result.data!!.ocs.data!!.toOCShare())
                     } else if (result is ApiResult.Error) {
                         DisplayUtils.showSnackMessage(this@NoteShareActivity, result.message)
                     }
-                })
-            })
+                }
+            }
         }
     }
 
     fun requestPasswordForShareViaLink(createShare: Boolean, askForPassword: Boolean) {
         val dialog = newInstance(note, createShare, askForPassword, this)
-        dialog.show(getSupportFragmentManager(), SharePasswordDialogFragment.PASSWORD_FRAGMENT)
+        dialog.show(supportFragmentManager, SharePasswordDialogFragment.PASSWORD_FRAGMENT)
     }
 
     // TODO:
@@ -442,21 +442,21 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
         intentToShareLink.setType("text/plain")
         intentToShareLink.putExtra(
             Intent.EXTRA_SUBJECT,
-            getString(R.string.note_share_activity_subject_shared_with_you, note!!.getTitle())
+            getString(R.string.note_share_activity_subject_shared_with_you, note!!.title)
         )
 
-        val packagesToExclude = arrayOf<String?>(this.getPackageName())
+        val packagesToExclude = arrayOf<String?>(this.packageName)
         val chooserDialog: DialogFragment = newInstance(intentToShareLink, *packagesToExclude)
-        chooserDialog.show(getSupportFragmentManager(), FTAG_CHOOSER_DIALOG)
+        chooserDialog.show(supportFragmentManager, FTAG_CHOOSER_DIALOG)
     }
 
     private fun createInternalLink(): String {
-        val baseUri = Uri.parse(account!!.getUrl())
-        return baseUri.toString() + "/index.php/f/" + note!!.getRemoteId()
+        val baseUri = account!!.url.toUri()
+        return baseUri.toString() + "/index.php/f/" + note!!.remoteId
     }
 
     override fun copyLink(share: OCShare) {
-        if (!note!!.isShared()) {
+        if (!note!!.isShared) {
             return
         }
 
@@ -476,13 +476,13 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
                 Snackbar.LENGTH_LONG
             )
             .setAction(
-                R.string.share,
-                View.OnClickListener { v: View? -> showShareLinkDialog(link) })
+                R.string.share
+            ) { showShareLinkDialog(link) }
         snackbar.show()
     }
 
     override fun showSharingMenuActionSheet(share: OCShare?) {
-        if (!this.isFinishing()) {
+        if (!this.isFinishing) {
             NoteShareActivityShareItemActionBottomSheetDialog(this, this, share).show()
         }
     }
@@ -494,7 +494,7 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
         )
         val snackbar = Snackbar
             .make(binding!!.getRoot(), expirationDescription, Snackbar.LENGTH_LONG)
-            .setAction(R.string.dismiss, View.OnClickListener { view: View? -> })
+            .setAction(R.string.dismiss) { }
         val util = BrandingUtil.of(BrandingUtil.readBrandMainColor(this), this)
         util.material.themeSnackbar(snackbar)
         snackbar.show()
@@ -506,7 +506,7 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
 
     override fun requestPasswordForShare(share: OCShare?, askForPassword: Boolean) {
         val dialog = newInstance(share, askForPassword, this)
-        dialog.show(getSupportFragmentManager(), SharePasswordDialogFragment.PASSWORD_FRAGMENT)
+        dialog.show(supportFragmentManager, SharePasswordDialogFragment.PASSWORD_FRAGMENT)
     }
 
     // TODO:
@@ -525,27 +525,25 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
 
         executorService!!.submit(Runnable submit@{
             try {
-                val adapter = binding!!.sharesList.getAdapter() as ShareeListAdapter?
+                val adapter = binding!!.sharesList.adapter as ShareeListAdapter?
 
                 if (adapter == null) {
-                    runOnUiThread(Runnable {
+                    runOnUiThread {
                         DisplayUtils.showSnackMessage(
                             this@NoteShareActivity,
                             getString(R.string.could_not_retrieve_shares)
                         )
-                    })
+                    }
                     isInitializingShares = false
                     return@submit
                 }
-
-                val remoteNotes: List<OCShare>
-                if (note != null) {
-                    remoteNotes = repository!!.fetchSharesFromNote(note!!)
+                val remoteNotes: List<OCShare> = if (note != null) {
+                    repository!!.fetchSharesFromNote(note!!)
                 } else {
-                    remoteNotes = listOf()
+                    listOf()
                 }
 
-                runOnUiThread(Runnable {
+                runOnUiThread {
                     shares.clear()
                     shares.addAll(remoteNotes)
 
@@ -554,17 +552,17 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
                     addPublicShares(adapter)
                     setShareWithYou()
                     isInitializingShares = false
-                })
+                }
             } catch (e: Exception) {
-                Log_OC.d(TAG, "Exception while updateShareeListAdapter: " + e)
+                Log_OC.d(TAG, "Exception while updateShareeListAdapter: $e")
             }
         })
     }
 
     private fun addPublicShares(adapter: ShareeListAdapter) {
-        val publicShares: MutableList<OCShare> = ArrayList<OCShare>()
+        val publicShares: MutableList<OCShare> = ArrayList()
 
-        if (containsNoNewPublicShare(adapter.getShares())) {
+        if (containsNoNewPublicShare(adapter.shares)) {
             val ocShare = OCShare()
             ocShare.shareType = ShareType.NEW_PUBLIC_LINK
             publicShares.add(ocShare)
@@ -591,7 +589,7 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
         val intent = Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Email.CONTENT_URI)
 
         // FIXME:
-        if (intent.resolveActivity(getPackageManager()) != null) {
+        if (intent.resolveActivity(packageManager) != null) {
             onContactSelectionResultLauncher.launch(intent)
         } else {
             DisplayUtils.showSnackMessage(
@@ -605,7 +603,7 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
         // Define the projection to get all email addresses.
         val projection = arrayOf<String?>(ContactsContract.CommonDataKinds.Email.ADDRESS)
 
-        val cursor = getContentResolver().query(contactUri, projection, null, null, null)
+        val cursor = contentResolver.query(contactUri, projection, null, null, null)
         if (cursor == null) {
             DisplayUtils.showSnackMessage(this, getString(R.string.email_pick_failed))
             Log_OC.e(TAG, "Failed to pick email address as Cursor is null.")
@@ -629,10 +627,10 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
         // Use the email address as needed.
         // email variable contains the selected contact's email address.
         val email = cursor.getString(columnIndex)
-        binding!!.searchView.post(Runnable {
+        binding!!.searchView.post {
             binding!!.searchView.setQuery(email, false)
             binding!!.searchView.requestFocus()
-        })
+        }
 
         cursor.close()
     }
@@ -655,7 +653,7 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
 
     private fun isReshareForbidden(share: OCShare): Boolean {
         return (share.shareType != null && ShareType.FEDERATED == share.shareType) ||
-                capabilities != null && !capabilities!!.isReSharingAllowed()
+                capabilities != null && !capabilities!!.isReSharingAllowed
     }
 
     @VisibleForTesting
@@ -678,7 +676,7 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
             val result = repository!!.removeShare(share, note!!)
             runOnUiThread(Runnable {
                 if (result) {
-                    val adapter = binding!!.sharesList.getAdapter() as ShareeListAdapter?
+                    val adapter = binding!!.sharesList.adapter as ShareeListAdapter?
                     if (adapter == null) {
                         DisplayUtils.showSnackMessage(
                             this@NoteShareActivity,
@@ -727,31 +725,31 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
                     return false
                 }
 
-                val majorVersionAsString = capabilities!!.getNextcloudMajorVersion()
+                val majorVersionAsString = capabilities!!.nextcloudMajorVersion
                 if (majorVersionAsString != null) {
                     val majorVersion = majorVersionAsString.toInt()
                     return majorVersion >= 18
                 }
 
                 return false
-            } catch (e: NumberFormatException) {
+            } catch (_: NumberFormatException) {
                 Log_OC.d(TAG, "Exception while getting expDateShown")
                 return false
             }
         }
 
     override fun onQuickPermissionChanged(share: OCShare, permission: Int) {
-        executorService!!.submit(Runnable {
+        executorService!!.submit {
             val result: ApiResult<OcsResponse<CreateShareResponse>?> =
                 repository!!.updateSharePermission(share.id, permission)
-            runOnUiThread(Runnable {
-                if (result.isSuccess<OcsResponse<CreateShareResponse>?>()) {
+            runOnUiThread {
+                if (result.isSuccess()) {
                     updateShare(share)
                 } else if (result is ApiResult.Error) {
                     DisplayUtils.showSnackMessage(this@NoteShareActivity, result.message)
                 }
-            })
-        })
+            }
+        }
     }
 
     private fun updateShare(share: OCShare) {
@@ -765,11 +763,11 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
                 val updatedShares: List<OCShare?> = repository!!.fetchSharesFromNote(note!!)
 
                 runOnUiThread(Runnable {
-                    if (binding!!.sharesList.getAdapter() is ShareeListAdapter) {
+                    if (binding!!.sharesList.adapter is ShareeListAdapter) {
                         var updatedShare: OCShare? = null
                         for (i in updatedShares.indices) {
-                            if (updatedShares.get(i)!!.id == share.id) {
-                                updatedShare = updatedShares.get(i)
+                            if (updatedShares[i]!!.id == share.id) {
+                                updatedShare = updatedShares[i]
                                 break
                             }
                         }
@@ -778,36 +776,37 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
                             return@Runnable
                         }
 
-                        val adapter = binding!!.sharesList.getAdapter() as ShareeListAdapter
+                        val adapter = binding!!.sharesList.adapter as ShareeListAdapter
                         adapter.updateShare(updatedShare)
                     }
                 })
             } catch (e: Exception) {
-                Log_OC.d(TAG, "Exception while refreshing share info: " + e)
+                Log_OC.d(TAG, "Exception while refreshing share info: $e")
             }
         })
     }
 
     private val requestContactPermissionLauncher = registerForActivityResult<String?, Boolean?>(
-        ActivityResultContracts.RequestPermission(), ActivityResultCallback { isGranted: Boolean? ->
-            if (isGranted == true) {
-                pickContactEmail()
-            } else {
-                BrandedSnackbar.make(
-                    binding!!.getRoot(),
-                    getString(R.string.note_share_activity_contact_no_permission),
-                    Snackbar.LENGTH_LONG
-                )
-                    .show()
-            }
-        })
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean? ->
+        if (isGranted == true) {
+            pickContactEmail()
+        } else {
+            BrandedSnackbar.make(
+                binding!!.getRoot(),
+                getString(R.string.note_share_activity_contact_no_permission),
+                Snackbar.LENGTH_LONG
+            )
+                .show()
+        }
+    }
 
     private val onContactSelectionResultLauncher =
         registerForActivityResult<Intent?, ActivityResult?>(
             ActivityResultContracts.StartActivityForResult(),
             ActivityResultCallback { result: ActivityResult? ->
-                if (result!!.getResultCode() == RESULT_OK) {
-                    val intent = result.getData()
+                if (result!!.resultCode == RESULT_OK) {
+                    val intent = result.data
                     if (intent == null) {
                         BrandedSnackbar.make(
                             binding!!.getRoot(),
@@ -818,7 +817,7 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
                         return@ActivityResultCallback
                     }
 
-                    val contactUri = intent.getData()
+                    val contactUri = intent.data
                     if (contactUri == null) {
                         BrandedSnackbar.make(
                             binding!!.getRoot(),
@@ -842,7 +841,7 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
         util.platform.colorImageView(binding!!.pickContactEmailBtn, ColorRole.ON_SURFACE_VARIANT)
         util.platform.colorCircularProgressBar(binding!!.loadingLayoutIndicator, ColorRole.PRIMARY)
         util.platform.themeHorizontalProgressBar(binding!!.progressBar)
-        util.platform.colorViewBackground(getWindow().getDecorView())
+        util.platform.colorViewBackground(window.decorView)
         util.platform.colorViewBackground(binding!!.getRoot())
         util.material.colorMaterialButtonPrimaryOutlined(binding!!.btnShareButton)
         util.platform.colorTextView(binding!!.title, ColorRole.ON_SURFACE)
@@ -861,26 +860,26 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
             return
         }
 
-        executorService!!.submit(Runnable {
+        executorService!!.submit {
             val result: ApiResult<OcsResponse<CreateShareResponse>?> = repository!!.addShare(
                 note,
                 ShareType.PUBLIC_LINK,
                 "",
                 "false",
                 password,
-                repository!!.getCapabilities().getDefaultPermission()
+                repository!!.getCapabilities().defaultPermission
             )
-            runOnUiThread(Runnable {
+            runOnUiThread {
                 if (result is ApiResult.Success<OcsResponse<CreateShareResponse>?> &&
-                    binding!!.sharesList.getAdapter() is ShareeListAdapter
+                    binding!!.sharesList.adapter is ShareeListAdapter
                 ) {
-                    val adapter = binding!!.sharesList.getAdapter() as ShareeListAdapter
+                    val adapter = binding!!.sharesList.adapter as ShareeListAdapter
                     adapter.addShare(result.data!!.ocs.data!!.toOCShare())
                 } else if (result is ApiResult.Error) {
                     DisplayUtils.showSnackMessage(this@NoteShareActivity, result.message)
                 }
-            })
-        })
+            }
+        }
     }
 
     override fun setPasswordToShare(share: OCShare, password: String?) {
@@ -889,7 +888,7 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
             return
         }
 
-        executorService!!.submit(Runnable {
+        executorService!!.submit {
             run {
                 val isDownloadAndAllowsSyncEnabled = repository!!.isAllowDownloadAndSync(share)
                 val attributes = createAttributes(
@@ -909,18 +908,18 @@ class NoteShareActivity : BrandedActivity(), ShareeListAdapterListener, NoteShar
                 )
                 val result: ApiResult<OcsResponse<CreateShareResponse>?> =
                     repository!!.updateShare(share.id, requestBody)
-                runOnUiThread(Runnable {
-                    if (result.isSuccess<OcsResponse<CreateShareResponse>?>()) {
+                runOnUiThread {
+                    if (result.isSuccess()) {
                         val intent = Intent(this@NoteShareActivity, MainActivity::class.java)
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                         this@NoteShareActivity.startActivity(intent)
-                    } else if (result.isError<OcsResponse<CreateShareResponse>?>()) {
+                    } else if (result.isError()) {
                         val error = result as ApiResult.Error
                         DisplayUtils.showSnackMessage(this@NoteShareActivity, error.message)
                     }
-                })
+                }
             }
-        })
+        }
     }
 
     companion object {
