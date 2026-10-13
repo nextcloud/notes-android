@@ -66,7 +66,7 @@ class ItemDetailsActivity : BrandedActivity() {
             Page(
                 getString(R.string.activities_title),
                 AppCompatResources.getDrawable(this, R.drawable.nav_activity),
-                ActivitiesFragment.newInstance()
+                ActivitiesFragment.newInstance(note, account)
             ),
             Page(
                 getString(R.string.share),

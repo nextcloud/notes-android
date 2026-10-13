@@ -1,21 +1,52 @@
 package it.niedermann.owncloud.notes.activities
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.nextcloud.android.common.ui.theme.utils.ColorRole
+import androidx.lifecycle.lifecycleScope
+import com.nextcloud.android.sso.helper.SingleAccountHelper
+import it.niedermann.owncloud.notes.activities.repository.ActivitiesRepository
 import it.niedermann.owncloud.notes.branding.BrandedFragment
 import it.niedermann.owncloud.notes.branding.BrandingUtil
 import it.niedermann.owncloud.notes.databinding.FragmentActivitiesBinding
+import it.niedermann.owncloud.notes.persistence.entity.Account
+import it.niedermann.owncloud.notes.persistence.entity.Note
+import it.niedermann.owncloud.notes.share.NoteShareFragment.Companion.ARG_ACCOUNT
+import it.niedermann.owncloud.notes.share.NoteShareFragment.Companion.ARG_NOTE
+import it.niedermann.owncloud.notes.shared.util.extensions.getSerializableArgument
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.util.concurrent.Executors
+import java.util.concurrent.ScheduledExecutorService
 
 class ActivitiesFragment : BrandedFragment() {
 
     lateinit var binding : FragmentActivitiesBinding
+    private lateinit var note: Note
+    private lateinit var account: Account
+
+    private var executorService: ScheduledExecutorService? = null
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        executorService = Executors.newSingleThreadScheduledExecutor()
         binding = FragmentActivitiesBinding.inflate(inflater)
+
+        initializeArguments()
+        fetchActivities()
+
         return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
+    private fun initializeArguments() {
+        val bundler = arguments
+        note = bundler.getSerializableArgument(ARG_NOTE, Note::class.java)
+            ?: throw IllegalArgumentException("Argument $ARG_NOTE is mandatory")
+        account = bundler.getSerializableArgument(ARG_ACCOUNT, Account::class.java)
+            ?: throw IllegalArgumentException("Argument $ARG_ACCOUNT is mandatory")
     }
 
     override fun applyBrand(color: Int) {
@@ -23,9 +54,34 @@ class ActivitiesFragment : BrandedFragment() {
         util.platform.colorViewBackground(binding.getRoot())
     }
 
+    private fun fetchActivities() {
+        executorService!!.submit(Runnable submit@{
+            val ssoAccount =
+                SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext())
+            val repository = ActivitiesRepository(requireContext(), ssoAccount)
+            lifecycleScope.launch(Dispatchers.IO) {
+                val activities = repository.fetchActivities(note)
+                withContext(Dispatchers.Main) {
+                    Log.d("DEBUG", activities.toString())
+                }
+            }
+
+        })
+    }
+
     companion object {
-        fun newInstance() : ActivitiesFragment {
-            return ActivitiesFragment()
+        const val ARG_NOTE: String = "NOTE"
+        const val ARG_ACCOUNT: String = "ACCOUNT"
+
+        fun newInstance(note: Note, account: Account) : ActivitiesFragment {
+            val f = ActivitiesFragment()
+
+            val bundle = Bundle()
+            bundle.putSerializable(ARG_NOTE, note)
+            bundle.putSerializable(ARG_ACCOUNT, account)
+
+            f.arguments = bundle
+            return f
         }
     }
 }
