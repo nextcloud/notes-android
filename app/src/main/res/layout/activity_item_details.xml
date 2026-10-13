@@ -61,14 +61,6 @@
                     android:src="@drawable/ic_star_border_grey_ccc_24dp" />
 
                 <TextView
-                    android:id="@+id/size"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/primary_font_size"
-                    android:textColor="@color/activity_lastmod_and_filesize_text"
-                    tools:text="@string/placeholder_fileSize" />
-
-                <TextView
                     android:id="@+id/file_separator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
