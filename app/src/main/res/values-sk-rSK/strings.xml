@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
   <resources>
-    <string name="about_app_license">Táto aplikácie je licencovaná pod GNU GENERAL PUBLIC LICENSE v3+.</string>
+    <string name="about_app_license">Táto aplikácia je licencovaná pod GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Zobraziť licenciu</string>
     <string name="about_app_license_title">Licencia aplikácie</string>
     <string name="about_contribution_tab_title">Príspevok</string>
@@ -53,7 +53,7 @@
     <string name="allow_resharing">Povoliť zdieľanie ďalej</string>
     <string name="app_name">Poznámky</string>
     <string name="app_name_long">Nextcloud poznámky</string>
-    <string name="appear_offline">Zdá sa byť offline</string>
+    <string name="appear_offline">Zobraziť sa ako offline</string>
     <string name="appearance_and_behavior">Vzhľad a správanie</string>
     <string name="append_to_note">Pripojiť k poznámke</string>
     <string name="away">Preč</string>
@@ -126,12 +126,12 @@
     <string name="error_dialog_min_version">Aplikácia Notes pre Android potrebuje aplikáciu Nextcloud pre Android aspoň vo verzii 3.18.</string>
     <string name="error_dialog_redirect">Váš server odpovedal stavovým kódom HTTP 302, čo znamená, že na svojom serveri nemáte nainštalovanú aplikáciu Notes alebo je niečo nesprávne nastavené. Môže to byť spôsobené vlastnými zmenami v súbore .htaccess alebo aplikáciami Nextcloud, ako je OID Client.</string>
     <string name="error_dialog_server_app_enabled">Uistite sa, že ste na serveri nainštalovali a povolili aplikáciu Poznámky.</string>
-    <string name="error_dialog_timeout_instance">Server dlho neodpovedal. Uistite sa, vami využívaná inštancia funguje dobre.</string>
+    <string name="error_dialog_timeout_instance">Server v stanovenom čase neodpovedal. Uistite sa, že vaša inštancia funguje správne.</string>
     <string name="error_dialog_timeout_toggle">Skontrolujte pripojenie k sieti. Niekedy pomôže vypnutie a znovu zapnutie mobilných dát alebo Wi-Fi.</string>
     <string name="error_dialog_tip_clear_storage">Úložisko môžete vyčistiť otvorením informácií o aplikácii a výberom Úložisko → Vyčistiť úložisko. ⚠️ Varovanie: Toto vymaže poznámky, ktoré ešte neboli synchronizované!</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Vypnite všetky optimalizácie batérie pre aplikácie Nextcloud a Poznámky.</string>
     <string name="error_dialog_tip_files_delete_storage">Ak ich ukončenie nepomôže, môžete skúsiť vyčistiť úložiská oboch aplikácií.</string>
-    <string name="error_dialog_tip_files_force_stop">Niečo s vašim Nextcloudom nie je v poriadku. Skúste vynútiť ukončenie aplikácií Nextcloud a Nextcloud Poznámky.</string>
+    <string name="error_dialog_tip_files_force_stop">Niečo s vaším Nextcloudom nie je v poriadku. Skúste vynútiť ukončenie aplikácií Nextcloud a Nextcloud Poznámky.</string>
     <string name="error_dialog_tip_files_outdated">Váš Nextcloud vyzerá byť zastaralý. Navštívte Play Store alebo F-Droid pre získanie najnovšej verzie.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Ak problém pretrváva, skúste vyčistiť úložisko oboch aplikácií: Nextcloud a Nextcloud Poznámky.</string>
     <string name="error_dialog_tip_token_mismatch_retry">Skúste vynútiť zatvorenie aplikácie a znova ju reštartovať. Možno došlo k chybnému pripojeniu k aplikácii Nextcloud.</string>
@@ -157,7 +157,7 @@
     <string name="formatting_help_checkboxes_body_2">Položka 1</string>
     <string name="formatting_help_checkboxes_body_3">Položka 2</string>
     <string name="formatting_help_checkboxes_title">Zaškrtávacie políčka</string>
-    <string name="formatting_help_code_body_1">Tam, kde je to možné, ako upraviť štýl vrátane Markdown. Ak chcete vložiť kód, zalomte ich do spätných lomiek:</string>
+    <string name="formatting_help_code_body_1">Existuje mnoho rôznych spôsobov, ako formátovať kód pomocou Markdownu. Ak používate vložený kód, ohraničte ho spätnými apostrofmi:</string>
     <string name="formatting_help_code_body_2">Markdown tiež podporuje niečo, čo sa nazýva ohraničenie kódu, čo umožňuje použiť viac riadkov bez odsadenia:</string>
     <string name="formatting_help_code_body_3">Ak chcete použiť zvýraznenie syntaxe, uveďte jazyk:</string>
     <string name="formatting_help_code_title">Kód</string>
@@ -219,7 +219,7 @@
     <string name="menu_shared_note">Zdieľaná poznámka</string>
     <string name="mute_all_notifications">Stlmiť všetky upozornenia</string>
     <string name="no_account_configured_yet">Nie je ešte nastavený žiadny účet</string>
-    <string name="no_actions">Žiadne akcie pre tohto užívateľa</string>
+    <string name="no_actions">Žiadne akcie pre tohto používateľa</string>
     <string name="no_browser_available">Aplikácia na prácu s linkami nenájdená</string>
     <string name="no_category">Žiadna kategória</string>
     <string name="no_email_app_available">Aplikácia pre prácu s e-mailovými adresami nenájdená</string>
@@ -270,7 +270,7 @@
     <string name="note_share_detail_activity_share_via_link_hide_download">Skryť sťahovanie</string>
     <string name="oneHour">1 hodina</string>
     <string name="online">Pripojený</string>
-    <string name="online_status">Stav pripojenia</string>
+    <string name="online_status">Stav prítomnosti</string>
     <string name="pin_to_homescreen">Pripnúť na domovskú obrazovku</string>
     <string name="pref_value_font_normal">Normálne</string>
     <string name="pref_value_lock">Ochrana heslom</string>
@@ -374,7 +374,7 @@
     <string name="thisWeek">Tento týždeň</string>
     <string name="today">Dnes</string>
     <string name="unlock_notes">Odomknúť poznámky</string>
-    <string name="username">Užívateľské meno</string>
+    <string name="username">Používateľské meno</string>
     <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
     <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
     <string name="welcome_text">Vitajte v %1$s</string>
@@ -384,7 +384,7 @@
     <string name="widget_note_list_placeholder">Nie sú žiadne poznámky</string>
     <string name="widget_note_list_title">Zoznam poznámok</string>
     <string name="widget_single_note_loading">Načítava sa poznámka…</string>
-    <string name="widget_single_note_note_not_found">Poznámky sa nenašli</string>
+    <string name="widget_single_note_note_not_found">Poznámka sa nenašla</string>
     <string name="widget_single_note_title">Jedna poznámka</string>
     <string name="write_email">Odoslať email</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Ak chcete pridať účet, musíte byť pripojení k internetu.</string>
