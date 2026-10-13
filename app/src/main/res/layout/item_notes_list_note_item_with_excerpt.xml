@@ -175,13 +175,11 @@
                         android:layout_height="@dimen/note_shared_icon_size"
                         android:layout_marginStart="@dimen/spacer_1x"
                         android:contentDescription="@string/menu_shared_note"
-                        android:visibility="gone"
                         app:backgroundTint="@android:color/transparent"
                         app:icon="@drawable/ic_dots_vertical"
                         app:iconGravity="textStart"
                         app:iconSize="@dimen/note_shared_icon_size"
-                        app:iconTint="@color/defaultBrand"
-                        tools:visibility="visible" />
+                        app:iconTint="@color/defaultBrand" />
 
                 </LinearLayout>
             </LinearLayout>
