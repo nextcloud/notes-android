@@ -52,7 +52,6 @@ class ItemDetailsActivity : BrandedActivity() {
             if (note.favorite) R.drawable.ic_star_yellow_24dp
             else R.drawable.ic_star_border_grey_ccc_24dp
         )
-        binding.size.text = "TODO"
         binding.lastModificationTimestamp.text = note.modified?.let {
             DateUtils.formatDateTime(
                 this,
