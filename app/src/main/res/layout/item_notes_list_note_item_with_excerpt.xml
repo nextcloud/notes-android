@@ -169,7 +169,7 @@
                         tools:text="@tools:sample/lorem/random" />
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/noteShared"
+                        android:id="@+id/noteDetails"
                         style="@style/Widget.Material3.Button.IconButton"
                         android:layout_width="@dimen/note_shared_icon_size"
                         android:layout_height="@dimen/note_shared_icon_size"
@@ -177,7 +177,7 @@
                         android:contentDescription="@string/menu_shared_note"
                         android:visibility="gone"
                         app:backgroundTint="@android:color/transparent"
-                        app:icon="@drawable/ic_share_white_24dp"
+                        app:icon="@drawable/ic_dots_vertical"
                         app:iconGravity="textStart"
                         app:iconSize="@dimen/note_shared_icon_size"
                         app:iconTint="@color/defaultBrand"

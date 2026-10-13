@@ -8,7 +8,6 @@ package it.niedermann.owncloud.notes.main;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,6 +33,7 @@ import it.niedermann.owncloud.notes.accountpicker.AccountPickerDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
 import it.niedermann.owncloud.notes.itemdetails.ItemDetailsActivity;
+import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
 public class MultiSelectedActionModeCallback implements Callback {
 
@@ -101,6 +101,8 @@ public class MultiSelectedActionModeCallback implements Callback {
 
     @Override
     public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+        // Info menu makes sense only for single selection
+        menu.findItem(R.id.menu_details).setEnabled(tracker.getSelection().size() == 1);
         return false;
     }
 
@@ -152,7 +154,26 @@ public class MultiSelectedActionModeCallback implements Callback {
                         .show(fragmentManager, AccountPickerDialogFragment.class.getSimpleName()));
             });
             return true;
-        } /*else if (itemId == R.id.menu_share) {
+        } else if (itemId == R.id.menu_share) {
+            final var selection = new ArrayList<Long>(tracker.getSelection().size());
+            for (final var sel : tracker.getSelection()) {
+                selection.add(sel);
+            }
+            tracker.clearSelection();
+            ShareUtil.openShareDialog(context,
+                    context.getResources().getQuantityString(R.plurals.share_multiple, selection.size(), selection.size()),
+                    mainViewModel.collectNoteContents(selection));
+            return true;
+        } else if (itemId == R.id.menu_category) {// TODO detect whether all selected notes do have the same category - in this case preselect it
+            final var accountLiveData = mainViewModel.getCurrentAccount();
+            accountLiveData.observe(lifecycleOwner, account -> {
+                accountLiveData.removeObservers(lifecycleOwner);
+                CategoryDialogFragment
+                        .newInstance(account.getId(), "")
+                        .show(fragmentManager, CategoryDialogFragment.class.getSimpleName());
+            });
+            return true;
+        } else if (itemId == R.id.menu_details) {
             final var selection = new ArrayList<Long>(tracker.getSelection().size());
             for (final var sel : tracker.getSelection()) {
                 selection.add(sel);
@@ -165,29 +186,11 @@ public class MultiSelectedActionModeCallback implements Callback {
                     currentAccount$.removeObservers(lifecycleOwner);
                     executor.submit(() -> {{
                         final var note = mainViewModel.getFullNote(selection.get(0));
-                        final Intent intent = NoteShareActivity.getActivityStartIntent(note, account, mainActivity);
-                        mainActivity.startActivity(intent);
+                        Intent detailsIntent = ItemDetailsActivity.getActivityStartIntent(context, note, account);
+                        mainActivity.startActivity(detailsIntent);
                     }});
                 });
-            } else {
-                ShareUtil.openShareDialog(context,
-                        context.getResources().getQuantityString(R.plurals.share_multiple, selection.size(), selection.size()),
-                        mainViewModel.collectNoteContents(selection));
             }
-
-            return true;
-        }*/ else if (itemId == R.id.menu_category) {// TODO detect whether all selected notes do have the same category - in this case preselect it
-            final var accountLiveData = mainViewModel.getCurrentAccount();
-            accountLiveData.observe(lifecycleOwner, account -> {
-                accountLiveData.removeObservers(lifecycleOwner);
-                CategoryDialogFragment
-                        .newInstance(account.getId(), "")
-                        .show(fragmentManager, CategoryDialogFragment.class.getSimpleName());
-            });
-            return true;
-        } else if (itemId == R.id.menu_details) {
-            Intent detailsIntent = ItemDetailsActivity.getActivityStartIntent(context, note, localAccount);
-            mainActivity.startActivity(detailsIntent);
         }
         return false;
     }
