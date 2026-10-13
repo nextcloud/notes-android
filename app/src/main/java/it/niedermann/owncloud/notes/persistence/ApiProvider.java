@@ -26,6 +26,7 @@ import java.util.Calendar;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import it.niedermann.owncloud.notes.persistence.sync.ActivitiesAPI;
 import it.niedermann.owncloud.notes.persistence.sync.CapabilitiesDeserializer;
 import it.niedermann.owncloud.notes.persistence.sync.FilesAPI;
 import it.niedermann.owncloud.notes.persistence.sync.NotesAPI;
@@ -60,6 +61,7 @@ public class ApiProvider {
     private static final Map<String, NotesAPI> API_CACHE_NOTES = new ConcurrentHashMap<>();
     private static final Map<String, FilesAPI> API_CACHE_FILES = new ConcurrentHashMap<>();
     private static final Map<String, ShareAPI> API_CACHE_FILES_SHARING = new ConcurrentHashMap<>();
+    private static final Map<String, ActivitiesAPI> API_CACHE_ACTIVITIES = new ConcurrentHashMap<>();
 
 
     public static ApiProvider getInstance() {
@@ -143,6 +145,15 @@ public class ApiProvider {
             API_CACHE.put(ssoAccount.name, nextcloudAPI);
             return nextcloudAPI;
         }
+    }
+
+    public synchronized ActivitiesAPI getActivitiesAPI(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount) {
+        if (API_CACHE_ACTIVITIES.containsKey(ssoAccount.name)) {
+            return API_CACHE_ACTIVITIES.get(ssoAccount.name);
+        }
+        final var api = new ActivitiesAPI(context, ssoAccount);
+        API_CACHE_ACTIVITIES.put(ssoAccount.name, api);
+        return api;
     }
 
     /**
