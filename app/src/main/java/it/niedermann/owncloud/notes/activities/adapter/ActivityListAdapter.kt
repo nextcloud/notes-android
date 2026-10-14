@@ -7,14 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.activities.model.Activity
-import it.niedermann.owncloud.notes.branding.BrandingUtil
 import it.niedermann.owncloud.notes.databinding.ActivityListItemBinding
 
 class ActivityListAdapter (
-    protected val context: Context,
-    private val listener: OnActivityClickListener,
-    //private val brandingUtil: BrandingUtil
+    private val context: Context,
+    private val listener: OnActivityClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val items = arrayListOf<Activity>()
@@ -52,13 +52,16 @@ class ActivityListAdapter (
         notifyDataSetChanged()
     }
 
-    private class ActivityViewHolder(val binding: ActivityListItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    private class ActivityViewHolder(
+        val binding: ActivityListItemBinding,
+        //val brandingUtil: BrandingUtil
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(activity: Activity, listener: OnActivityClickListener) {
             bindDateTime(activity)
             bindSubject(activity)
             bindMessage(activity)
+            bindIcon(activity)
             binding.root.setOnClickListener { listener.onItemClick(activity) }
         }
 
@@ -85,9 +88,31 @@ class ActivityListAdapter (
             }
         }
 
+        private fun bindIcon(activity: Activity) {
+            if (activity.icon.isNullOrEmpty()) {
+                return
+            }
+
+            Glide
+                .with(binding.icon.context)
+                .load(activity.icon)
+                .placeholder( R.drawable.ic_activity)
+                .error(R.drawable.ic_activity)
+                .into(binding.icon)
+
+            /*
+            if (activity.icon.endsWith(COLORED_ICON_SUFFIX, ignoreCase = true)) {
+                binding.icon.imageTintList = null
+            } else {
+                brandingUtil.platform.colorImageView(binding.icon, ColorRole.ON_SURFACE_VARIANT)
+            }
+             */
+
+        }
+
         companion object {
             private const val TIME_PATTERN = "HH:mm"
-
+            private const val COLORED_ICON_SUFFIX = "-color.svg"
         }
 
     }
