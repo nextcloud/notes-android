@@ -53,6 +53,7 @@ public class ApiProvider {
     private static final String API_USER_STATUS = "/ocs/v2.php/apps/user_status/api/v1/";
     private static final String API_ENDPOINT_FILES ="/ocs/v2.php/apps/files/api/v1/";
     private static final String API_ENDPOINT_FILES_SHARING ="/ocs/v2.php/apps/files_sharing/api/v1/";
+    private static final String API_ENDPOINT_ACTIVITY = "/ocs/v2.php/apps/activity/api/v2/";
 
     private static final Map<String, NextcloudAPI> API_CACHE = new ConcurrentHashMap<>();
 
@@ -151,7 +152,7 @@ public class ApiProvider {
         if (API_CACHE_ACTIVITIES.containsKey(ssoAccount.name)) {
             return API_CACHE_ACTIVITIES.get(ssoAccount.name);
         }
-        final var api = new ActivitiesAPI(context, ssoAccount);
+        final var api = new NextcloudRetrofitApiBuilder(getNextcloudAPI(context, ssoAccount), API_ENDPOINT_ACTIVITY).create(ActivitiesAPI.class);
         API_CACHE_ACTIVITIES.put(ssoAccount.name, api);
         return api;
     }
@@ -174,6 +175,7 @@ public class ApiProvider {
         API_CACHE_OCS.remove(ssoAccount.name);
         API_CACHE_USER_STATUS.remove(ssoAccount.name);
         API_CACHE_FILES_SHARING.remove(ssoAccount.name);
+        API_CACHE_ACTIVITIES.remove(ssoAccount.name);
     }
 
     /**
@@ -194,5 +196,6 @@ public class ApiProvider {
         API_CACHE_OCS.clear();
         API_CACHE_USER_STATUS.clear();
         API_CACHE_FILES_SHARING.clear();
+        API_CACHE_ACTIVITIES.clear();
     }
 }

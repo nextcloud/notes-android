@@ -539,7 +539,10 @@
     <string name="account_not_found">Account not found!</string>
 
     <string name="menu_details">Details</string>
+
     <string name="activities_title">Activities</string>
+    <string name="activities_fetch_failed">Unable to fetch activities</string>
+    <string name="activities_fetch_failed_not_modified">No activity present for this note</string>
 
     <string name="placeholder_filename">Note.md</string>
     <string name="activities_favorite">Favorite</string>
