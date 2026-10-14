@@ -13,11 +13,12 @@ class ActivitiesRepository(
     private val api by lazy { ApiProvider.getInstance().getActivitiesAPI(context, ssoAccount) }
 
     fun fetchActivities(noteId: Long, since: Long? = null): ActivitiesResult {
-        val response = api.fetchActivities(noteId, since).execute()
+        val response = api.fetchActivities(noteId, since, PAGE_SIZE).execute()
 
         if (response.isSuccessful) {
             return ActivitiesResult.Success(
-                response.body()?.ocs?.data ?: listOf()
+                response.body()?.ocs?.data ?: listOf(),
+                response.headers()[HEADER_LAST_GIVEN]?.toLongOrNull()
             )
         }
 
@@ -26,6 +27,11 @@ class ActivitiesRepository(
         }
 
         return ActivitiesResult.Failed()
+    }
+
+    companion object {
+        private const val PAGE_SIZE = 50
+        private const val HEADER_LAST_GIVEN = "X-Activity-Last-Given"
     }
 
 }
