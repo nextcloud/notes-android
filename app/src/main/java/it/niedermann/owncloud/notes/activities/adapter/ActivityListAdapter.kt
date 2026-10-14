@@ -31,16 +31,19 @@ class ActivityListAdapter (
             )
         )
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (position == itemCount - 1) {
+            listener.onEndOfListReached()
+        }
         (holder as ActivityViewHolder).bind(items[position], listener)
+    }
 
     override fun getItemCount(): Int = items.size
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun setItems(items: List<Activity>) {
-        this.items.clear()
-        this.items.addAll(items)
-        notifyDataSetChanged()
+    fun addItems(it: List<Activity>) {
+        val prevItems = itemCount
+        this.items.addAll(it)
+        notifyItemRangeInserted(prevItems, it.size)
     }
 
     @SuppressLint("NotifyDataSetChanged")
