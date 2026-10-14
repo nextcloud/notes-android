@@ -75,6 +75,7 @@ class ActivitiesFragment : BrandedFragment() {
                             result.activities.forEach {
                                 Log.d("DEBUG", "Activity: ${it.type} ${it.message} ${it.datetime}")
                             }
+                            Log.d("DEBUG", "Activities LastGiven is ${result.lastGiven}")
                         }
                         result is ActivitiesResult.FailedNotModified -> {
                             // TODO: Show error
