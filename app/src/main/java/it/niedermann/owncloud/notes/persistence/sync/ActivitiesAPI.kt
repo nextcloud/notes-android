@@ -1,3 +1,9 @@
+/*
+ * Nextcloud Notes - Android Client
+ *
+ * SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ */
 package it.niedermann.owncloud.notes.persistence.sync
 
 import android.content.Context
