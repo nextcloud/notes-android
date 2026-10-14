@@ -17,6 +17,7 @@ interface ActivitiesAPI {
     @GET("activity/filter?format=json&object_type=files&sort=desc")
     fun fetchActivities(
         @Query("object_id") fileId: Long,
-        @Query("since") since: Long?
+        @Query("since") since: Long?,
+        @Query("limit") limit: Int
     ): Call<OcsResponse<List<Activity>>>
 }
