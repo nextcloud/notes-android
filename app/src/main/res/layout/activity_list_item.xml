@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Nextcloud - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2016 Andy Scherzinger <info@andy-scherzinger>
+  ~ SPDX-License-Identifier: AGPL-3.0-or-later OR GPL-2.0-only
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bg_default"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/standard_padding"
+    android:paddingRight="@dimen/standard_padding"
+    android:paddingBottom="@dimen/standard_padding">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="@dimen/activity_icon_width"
+        android:layout_height="@dimen/activity_icon_height"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/activity_standard_margin"
+        android:alpha="0.5"
+        android:contentDescription="@string/activity_icon"
+        android:padding="2dp"
+        android:src="@drawable/ic_activity" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/icon"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/subject"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:paddingStart="@dimen/activity_icon_layout_right_end_margin"
+            android:paddingTop="@dimen/standard_padding"
+            android:paddingBottom="@dimen/activity_standard_margin"
+            android:paddingEnd="@dimen/zero"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:textSize="@dimen/primary_font_size"
+            tools:text="@string/placeholder_filename" />
+
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:paddingStart="@dimen/activity_icon_layout_right_end_margin"
+            android:paddingEnd="@dimen/zero"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:textSize="@dimen/primary_font_size"
+            tools:text="@string/placeholder_sentence" />
+
+        <GridLayout
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_list_item_grid_layout_left_start_margin"
+            android:layout_marginTop="@dimen/spacer_1hx"
+            android:columnCount="3"
+            android:paddingStart="@dimen/activity_icon_layout_right_end_margin"
+            android:paddingEnd="@dimen/zero" />
+
+        <TextView
+            android:id="@+id/datetime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:ellipsize="end"
+            android:paddingStart="@dimen/activity_icon_layout_right_end_margin"
+            android:paddingEnd="@dimen/zero"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="@dimen/primary_font_size"
+            tools:text="@string/placeholder_sentence" />
+
+    </LinearLayout>
+
+</RelativeLayout>
