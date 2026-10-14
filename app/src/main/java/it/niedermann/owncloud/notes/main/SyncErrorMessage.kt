@@ -7,15 +7,30 @@
 package it.niedermann.owncloud.notes.main
 
 import androidx.annotation.StringRes
-import it.niedermann.owncloud.notes.R
-import it.niedermann.owncloud.notes.exception.NoteLockedException
+import com.nextcloud.android.sso.exceptions.NextcloudApiNotRespondingException
+import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException
+import com.nextcloud.android.sso.exceptions.NextcloudNetworkException
+import it.niedermann.owncloud.notes.persistence.NoteSyncException
+import it.niedermann.owncloud.notes.persistence.SyncFailureReason
 
 object SyncErrorMessage {
     @JvmStatic
     @StringRes
-    fun of(exceptions: Collection<Throwable>): Int = if (exceptions.all { it is NoteLockedException }) {
-        R.string.error_note_locked
-    } else {
-        R.string.error_synchronization
+    fun of(exceptions: Collection<Throwable>): Int =
+        (exceptions.map { it.syncFailureReason() }.distinct().singleOrNull() ?: SyncFailureReason.UNKNOWN).message
+
+    @JvmStatic
+    @StringRes
+    fun of(exception: Throwable): Int = exception.syncFailureReason().message
+
+    private fun Throwable.syncFailureReason(): SyncFailureReason =
+        generateSequence(this) { it.cause }.firstNotNullOfOrNull { it.directSyncFailureReason() }
+            ?: SyncFailureReason.UNKNOWN
+
+    private fun Throwable.directSyncFailureReason(): SyncFailureReason? = when (this) {
+        is NoteSyncException -> reason
+        is NextcloudHttpRequestFailedException -> SyncFailureReason.fromStatusCode(statusCode)
+        is NextcloudNetworkException, is NextcloudApiNotRespondingException -> SyncFailureReason.SERVER_UNREACHABLE
+        else -> null
     }
 }
