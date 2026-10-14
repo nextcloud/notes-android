@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import com.nextcloud.android.sso.helper.SingleAccountHelper
+import it.niedermann.owncloud.notes.activities.adapter.ActivityListAdapter
+import it.niedermann.owncloud.notes.activities.adapter.OnActivityClickListener
+import it.niedermann.owncloud.notes.activities.model.Activity
 import it.niedermann.owncloud.notes.activities.repository.ActivitiesRepository
 import it.niedermann.owncloud.notes.activities.repository.ActivitiesResult
 import it.niedermann.owncloud.notes.branding.BrandedFragment
@@ -24,14 +27,16 @@ import java.util.concurrent.ScheduledExecutorService
 /*
  * Nextcloud Notes - Android Client
  *
+ * SPDX-FileCopyrightText: 2026 Daniele Verducci <daniele.verducci@nextcloud.com>
  * SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
-class ActivitiesFragment : BrandedFragment() {
+class ActivitiesFragment : BrandedFragment(), OnActivityClickListener {
 
     lateinit var binding : FragmentActivitiesBinding
     private lateinit var note: Note
     private lateinit var account: Account
+    private lateinit var adapter: ActivityListAdapter
 
     private var executorService: ScheduledExecutorService? = null
 
@@ -41,6 +46,7 @@ class ActivitiesFragment : BrandedFragment() {
         binding = FragmentActivitiesBinding.inflate(inflater)
 
         initializeArguments()
+        initializeList()
         fetchActivities()
 
         return super.onCreateView(inflater, container, savedInstanceState)
@@ -54,6 +60,14 @@ class ActivitiesFragment : BrandedFragment() {
             ?: throw IllegalArgumentException("Argument $ARG_ACCOUNT is mandatory")
     }
 
+    private fun initializeList() {
+        adapter = ActivityListAdapter(
+            requireContext(),
+            this
+        )
+        binding.list.adapter = adapter
+    }
+
     override fun applyBrand(color: Int) {
         val util = BrandingUtil.of(color, requireContext())
         util.platform.colorViewBackground(binding.getRoot())
@@ -62,6 +76,8 @@ class ActivitiesFragment : BrandedFragment() {
     private fun fetchActivities() {
         val noteId = note.remoteId ?: return
 
+        binding.progress.visibility = View.VISIBLE
+
         executorService!!.submit(Runnable submit@{
             val ssoAccount =
                 SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext())
@@ -69,25 +85,31 @@ class ActivitiesFragment : BrandedFragment() {
             lifecycleScope.launch(Dispatchers.IO) {
                 val result = repository.fetchActivities(noteId)
                 withContext(Dispatchers.Main) {
-                    when {
-                        result is ActivitiesResult.Success -> {
-                            // TODO: Render list
-                            result.activities.forEach {
-                                Log.d("DEBUG", "Activity: ${it.type} ${it.message} ${it.datetime}")
-                            }
+                    when (result) {
+                        is ActivitiesResult.Success -> {
+                            adapter.setItems(result.activities)
+                            // TODO: pagination with LastGiven
                             Log.d("DEBUG", "Activities LastGiven is ${result.lastGiven}")
                         }
-                        result is ActivitiesResult.FailedNotModified -> {
+
+                        is ActivitiesResult.FailedNotModified -> {
                             // TODO: Show error
                         }
-                        result is ActivitiesResult.Failed -> {
+
+                        is ActivitiesResult.Failed -> {
                             // TODO: Show error
                         }
                     }
+
+                    binding.progress.visibility = View.GONE
                 }
             }
 
         })
+    }
+
+    override fun onItemClick(activity: Activity) {
+        TODO("Not yet implemented")
     }
 
     companion object {
