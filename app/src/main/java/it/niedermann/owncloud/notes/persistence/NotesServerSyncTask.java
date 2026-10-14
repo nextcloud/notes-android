@@ -165,9 +165,7 @@ abstract class NotesServerSyncTask extends Thread {
     @NonNull
     private Note createRemoteNote(@NonNull Note note) throws Exception {
         Log.v(TAG, "   ...Note does not have a remoteId yet → create");
-        final var remoteNote = postNote(note, "creating");
-        repo.updateRemoteId(note.getId(), remoteNote.getRemoteId());
-        return remoteNote;
+        return postNote(note, "creating");
     }
 
     @NonNull
@@ -176,7 +174,9 @@ abstract class NotesServerSyncTask extends Thread {
         if (!createResponse.isSuccessful()) {
             throw new NoteSyncException(note.getTitle(), createResponse);
         }
-        return requireRemoteNote(note, createResponse, action);
+        final var remoteNote = requireRemoteNote(note, createResponse, action);
+        repo.updateRemoteId(note.getId(), remoteNote.getRemoteId());
+        return remoteNote;
     }
 
     @NonNull
