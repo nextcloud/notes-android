@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import com.nextcloud.android.sso.helper.SingleAccountHelper
+import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.activities.adapter.ActivityListAdapter
 import it.niedermann.owncloud.notes.activities.adapter.OnActivityClickListener
 import it.niedermann.owncloud.notes.activities.model.Activity
@@ -87,26 +88,42 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener {
                 withContext(Dispatchers.Main) {
                     when (result) {
                         is ActivitiesResult.Success -> {
-                            adapter.setItems(result.activities)
+                            showActivities(result.activities)
                             // TODO: pagination with LastGiven
                             Log.d("DEBUG", "Activities LastGiven is ${result.lastGiven}")
                         }
 
                         is ActivitiesResult.FailedNotModified -> {
-                            // TODO: Show error
+                            adapter.clear()
+                            showEmptyContent(getString(R.string.activities_no_results))
                         }
 
                         is ActivitiesResult.Failed -> {
-                            // TODO: Show error
+                            adapter.clear()
+                            showEmptyContent(getString(R.string.activities_error))
                         }
                     }
 
                     binding.progress.visibility = View.GONE
+                    binding.emptyList.visibility =
+                        if (adapter.itemCount > 0) View.VISIBLE
+                        else View.GONE
                 }
             }
 
         })
     }
+
+    private fun showActivities(activities: List<Activity>) {
+        binding.emptyList.visibility = View.GONE
+        adapter.setItems(activities)
+    }
+
+    private fun showEmptyContent(message: String) =
+        with (binding.emptyList) {
+            visibility = View.VISIBLE
+            text = message
+        }
 
     override fun onItemClick(activity: Activity) {
         TODO("Not yet implemented")
