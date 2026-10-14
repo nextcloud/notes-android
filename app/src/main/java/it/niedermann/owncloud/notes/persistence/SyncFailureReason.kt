@@ -16,7 +16,7 @@ import java.net.HttpURLConnection.HTTP_UNAVAILABLE
 
 enum class SyncFailureReason(@StringRes val message: Int) {
     UNAUTHORIZED(R.string.error_sync_unauthorized),
-    READ_ONLY(R.string.error_sync_read_only),
+    PERMISSION(R.string.error_sync_permission),
     NOTES_APP_UNAVAILABLE(R.string.error_sync_notes_app_unavailable),
     LOCKED(R.string.error_sync_locked),
     SERVER_ERROR(R.string.error_sync_server_error),
@@ -32,7 +32,7 @@ enum class SyncFailureReason(@StringRes val message: Int) {
 
         fun fromStatusCode(statusCode: Int): SyncFailureReason = when (statusCode) {
             HTTP_UNAUTHORIZED -> UNAUTHORIZED
-            HTTP_FORBIDDEN -> READ_ONLY
+            HTTP_FORBIDDEN -> PERMISSION
             HTTP_NOT_FOUND -> NOTES_APP_UNAVAILABLE
             HTTP_LOCKED -> LOCKED
             HTTP_INTERNAL_ERROR -> SERVER_ERROR
