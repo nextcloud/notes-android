@@ -325,7 +325,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                     .setAnchorView(binding.activityNotesListView.fabCreate)
                                     .show();
                         } else {
-                            BrandedSnackbar.make(coordinatorLayout, R.string.error_synchronization, Snackbar.LENGTH_LONG)
+                            BrandedSnackbar.make(coordinatorLayout, SyncErrorMessage.of(t), Snackbar.LENGTH_LONG)
                                     .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(t)
                                             .show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()))
                                     .setAnchorView(binding.activityNotesListView.fabCreate)
@@ -609,7 +609,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                         .setAnchorView(binding.activityNotesListView.fabCreate)
                                         .show();
                             } else {
-                                BrandedSnackbar.make(coordinatorLayout, R.string.error_synchronization, Snackbar.LENGTH_LONG)
+                                BrandedSnackbar.make(coordinatorLayout, SyncErrorMessage.of(t), Snackbar.LENGTH_LONG)
                                         .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(t)
                                                 .show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()))
                                         .setAnchorView(binding.activityNotesListView.fabCreate)
