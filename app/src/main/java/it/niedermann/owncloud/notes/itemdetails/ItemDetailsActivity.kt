@@ -19,6 +19,13 @@ import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.share.NoteShareFragment
 import it.niedermann.owncloud.notes.shared.util.extensions.getSerializableArgument
 
+
+/*
+ * Nextcloud Notes - Android Client
+ *
+ * SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ */
 class ItemDetailsActivity : BrandedActivity() {
 
     lateinit var binding : ActivityItemDetailsBinding
