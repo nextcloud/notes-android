@@ -2,6 +2,7 @@
  * Nextcloud Notes - Android Client
  *
  * SPDX-FileCopyrightText: 2021-2024 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-FileCopyrightText: 2026 Alper Ozturk <alper.ozturk@nextcloud.com>
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 package it.niedermann.owncloud.notes.persistence;
@@ -147,7 +148,7 @@ abstract class NotesServerSyncTask extends Thread {
                                     throw new Exception(createResponse.message());
                                 }
                             } else {
-                                throw new Exception(editResponse.message());
+                                throw FailedSyncResponse.toException(note, editResponse);
                             }
                         } else {
                             Log.v(TAG, "   ...Note does not have a remoteId yet → create");
@@ -176,7 +177,7 @@ abstract class NotesServerSyncTask extends Thread {
                                 if (deleteResponse.code() == HTTP_NOT_FOUND) {
                                     Log.v(TAG, "   ...delete (note has already been deleted remotely)");
                                 } else {
-                                    throw new Exception(deleteResponse.message());
+                                    throw FailedSyncResponse.toException(note, deleteResponse);
                                 }
                             }
                         }
