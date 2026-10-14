@@ -43,6 +43,12 @@ class ActivityListAdapter (
         notifyDataSetChanged()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    fun clear() {
+        this.items.clear()
+        notifyDataSetChanged()
+    }
+
     private class ActivityViewHolder(val binding: ActivityListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
