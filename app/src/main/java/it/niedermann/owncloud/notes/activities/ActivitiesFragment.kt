@@ -8,13 +8,12 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import com.nextcloud.android.sso.helper.SingleAccountHelper
 import it.niedermann.owncloud.notes.activities.repository.ActivitiesRepository
+import it.niedermann.owncloud.notes.activities.repository.ActivitiesResult
 import it.niedermann.owncloud.notes.branding.BrandedFragment
 import it.niedermann.owncloud.notes.branding.BrandingUtil
 import it.niedermann.owncloud.notes.databinding.FragmentActivitiesBinding
 import it.niedermann.owncloud.notes.persistence.entity.Account
 import it.niedermann.owncloud.notes.persistence.entity.Note
-import it.niedermann.owncloud.notes.share.NoteShareFragment.Companion.ARG_ACCOUNT
-import it.niedermann.owncloud.notes.share.NoteShareFragment.Companion.ARG_NOTE
 import it.niedermann.owncloud.notes.shared.util.extensions.getSerializableArgument
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -61,14 +60,29 @@ class ActivitiesFragment : BrandedFragment() {
     }
 
     private fun fetchActivities() {
+        val noteId = note.remoteId ?: return
+
         executorService!!.submit(Runnable submit@{
             val ssoAccount =
                 SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext())
             val repository = ActivitiesRepository(requireContext(), ssoAccount)
             lifecycleScope.launch(Dispatchers.IO) {
-                val activities = repository.fetchActivities(note)
+                val result = repository.fetchActivities(noteId)
                 withContext(Dispatchers.Main) {
-                    Log.d("DEBUG", activities.toString())
+                    when {
+                        result is ActivitiesResult.Success -> {
+                            // TODO: Render list
+                            result.activities.forEach {
+                                Log.d("DEBUG", "Activity: ${it.type} ${it.message} ${it.datetime}")
+                            }
+                        }
+                        result is ActivitiesResult.FailedNotModified -> {
+                            // TODO: Show error
+                        }
+                        result is ActivitiesResult.Failed -> {
+                            // TODO: Show error
+                        }
+                    }
                 }
             }
 
