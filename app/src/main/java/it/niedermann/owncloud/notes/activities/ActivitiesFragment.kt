@@ -43,13 +43,13 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         executorService = Executors.newSingleThreadScheduledExecutor()
-        binding = FragmentActivitiesBinding.inflate(inflater)
+        binding = FragmentActivitiesBinding.inflate(inflater, container, false)
 
         initializeArguments()
         initializeList()
         fetchActivities()
 
-        return super.onCreateView(inflater, container, savedInstanceState)
+        return binding.root
     }
 
     private fun initializeArguments() {
