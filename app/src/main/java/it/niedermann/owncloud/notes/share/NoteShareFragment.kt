@@ -83,6 +83,13 @@ import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.TimeUnit
 import kotlin.text.toInt
 
+
+/*
+ * Nextcloud Notes - Android Client
+ *
+ * SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ */
 class NoteShareFragment : BrandedFragment(), ShareeListAdapterListener, NoteShareItemAction,
     QuickPermissionSharingBottomSheetActions, SharePasswordDialogListener {
     private var executorService: ScheduledExecutorService? = null
