@@ -67,17 +67,19 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener {
             this
         )
         binding.list.adapter = adapter
+        binding.swipeContainingList.setOnRefreshListener { fetchActivities() }
     }
 
     override fun applyBrand(color: Int) {
         val util = BrandingUtil.of(color, requireContext())
         util.platform.colorViewBackground(binding.getRoot())
+        util.androidx.themeSwipeRefreshLayout(binding.swipeContainingList)
     }
 
     private fun fetchActivities() {
         val noteId = note.remoteId ?: return
 
-        binding.progress.visibility = View.VISIBLE
+        binding.swipeContainingList.isRefreshing = true
 
         executorService!!.submit(Runnable submit@{
             val ssoAccount =
@@ -104,10 +106,7 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener {
                         }
                     }
 
-                    binding.progress.visibility = View.GONE
-                    binding.emptyList.visibility =
-                        if (adapter.itemCount > 0) View.VISIBLE
-                        else View.GONE
+                    binding.swipeContainingList.isRefreshing = false
                 }
             }
 
