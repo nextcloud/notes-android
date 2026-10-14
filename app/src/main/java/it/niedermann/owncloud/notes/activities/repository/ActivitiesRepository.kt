@@ -30,7 +30,7 @@ class ActivitiesRepository(
     }
 
     companion object {
-        private const val PAGE_SIZE = 50
+        const val PAGE_SIZE = 50
         private const val HEADER_LAST_GIVEN = "X-Activity-Last-Given"
     }
 

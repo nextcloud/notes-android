@@ -38,6 +38,7 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener {
     private lateinit var note: Note
     private lateinit var account: Account
     private lateinit var adapter: ActivityListAdapter
+    private var lastGiven: Long? = null
 
     private var executorService: ScheduledExecutorService? = null
 
@@ -76,7 +77,7 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener {
         util.androidx.themeSwipeRefreshLayout(binding.swipeContainingList)
     }
 
-    private fun fetchActivities() {
+    private fun fetchActivities(reqLastGiven: Long? = null) {
         val noteId = note.remoteId ?: return
 
         binding.swipeContainingList.isRefreshing = true
@@ -86,18 +87,17 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener {
                 SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext())
             val repository = ActivitiesRepository(requireContext(), ssoAccount)
             lifecycleScope.launch(Dispatchers.IO) {
-                val result = repository.fetchActivities(noteId)
+                val result = repository.fetchActivities(noteId, reqLastGiven)
                 withContext(Dispatchers.Main) {
                     when (result) {
                         is ActivitiesResult.Success -> {
-                            showActivities(result.activities)
-                            // TODO: pagination with LastGiven
-                            Log.d("DEBUG", "Activities LastGiven is ${result.lastGiven}")
+                            val isFirstPage = reqLastGiven == null || lastGiven == null
+                            lastGiven = result.lastGiven
+                            showActivities(result.activities, isFirstPage)
                         }
 
                         is ActivitiesResult.FailedNotModified -> {
-                            adapter.clear()
-                            showEmptyContent(getString(R.string.activities_no_results))
+                            Log.i(TAG, "Reached end of list (last page starting from item $lastGiven")
                         }
 
                         is ActivitiesResult.Failed -> {
@@ -113,9 +113,10 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener {
         })
     }
 
-    private fun showActivities(activities: List<Activity>) {
+    private fun showActivities(activities: List<Activity>, isFirstPage: Boolean) {
         binding.emptyList.visibility = View.GONE
-        adapter.setItems(activities)
+        if (isFirstPage) adapter.clear()
+        adapter.addItems(activities)
     }
 
     private fun showEmptyContent(message: String) =
@@ -128,9 +129,16 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener {
         TODO("Not yet implemented")
     }
 
+    override fun onEndOfListReached() {
+        if (adapter.itemCount < ActivitiesRepository.PAGE_SIZE)
+            return
+        fetchActivities(lastGiven)
+    }
+
     companion object {
-        const val ARG_NOTE: String = "NOTE"
-        const val ARG_ACCOUNT: String = "ACCOUNT"
+        val TAG = ActivitiesFragment::class.simpleName
+        const val ARG_NOTE = "NOTE"
+        const val ARG_ACCOUNT = "ACCOUNT"
 
         fun newInstance(note: Note, account: Account) : ActivitiesFragment {
             val f = ActivitiesFragment()
