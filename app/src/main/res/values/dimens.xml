@@ -84,4 +84,11 @@
     <dimen name="iconized_single_line_item_icon_size">24dp</dimen>
 
     <dimen name="standard_padding">@dimen/spacer_2x</dimen>
+
+    <dimen name="activity_icon_width">32dp</dimen>
+    <dimen name="activity_icon_height">32dp</dimen>
+    <dimen name="activity_standard_margin">16dp</dimen>
+    <dimen name="activity_icon_layout_right_end_margin">24dp</dimen>
+    <dimen name="activity_list_item_grid_layout_left_start_margin">-3dp</dimen>
+
 </resources>
