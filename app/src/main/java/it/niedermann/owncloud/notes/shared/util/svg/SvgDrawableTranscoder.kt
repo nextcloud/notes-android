@@ -8,7 +8,7 @@
  * https://github.com/bumptech/glide/blob/master/samples/svg/src/main/java/com/bumptech/glide/samples/svg/
  * SvgDrawableTranscoder.java
  */
-package it.niedermann.owncloud.notes.shared.util
+package it.niedermann.owncloud.notes.shared.util.svg
 
 import android.graphics.Picture
 import android.graphics.drawable.PictureDrawable

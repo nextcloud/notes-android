@@ -15,6 +15,9 @@ import com.bumptech.glide.Registry
 import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.module.AppGlideModule
 import com.caverock.androidsvg.SVG
+import it.niedermann.owncloud.notes.shared.util.svg.SvgDecoder
+import it.niedermann.owncloud.notes.shared.util.svg.SvgDrawableTranscoder
+import java.io.InputStream
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -23,7 +26,9 @@ class CustomAppGlideModule : AppGlideModule() {
     override fun registerComponents(context: Context, glide: Glide, registry: Registry) {
         super.registerComponents(context, glide, registry)
 
-        registry.register(SVG::class.java, PictureDrawable::class.java, SvgDrawableTranscoder())
+        registry
+            .register(SVG::class.java, PictureDrawable::class.java, SvgDrawableTranscoder())
+            .append(InputStream::class.java, SVG::class.java, SvgDecoder())
     }
 
     companion object {
