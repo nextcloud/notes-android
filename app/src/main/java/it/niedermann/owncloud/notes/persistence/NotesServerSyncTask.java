@@ -96,7 +96,8 @@ abstract class NotesServerSyncTask extends Thread {
         }
 
         Log.i(TAG, "Sync finished for " + accountName + ": push " + (status.pushSuccessful ? "OK" : "FAILED")
-                + ", pull " + (status.pullSuccessful ? "OK" : "FAILED") + ", errors " + exceptions.size());
+                + ", pull " + (onlyLocalChanges ? "skipped" : status.pullSuccessful ? "OK" : "FAILED")
+                + ", errors " + exceptions.size());
 
         onPostExecute(status);
     }

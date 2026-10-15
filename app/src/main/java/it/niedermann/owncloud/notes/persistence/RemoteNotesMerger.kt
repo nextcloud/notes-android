@@ -42,12 +42,12 @@ class RemoteNotesMerger(private val repo: NotesRepository, private val localAcco
     }
 
     private fun applyRemoteNote(remoteNote: Note, idMap: Map<Long, Long>) {
-        val label = "remote note ${remoteNote.remoteId} \"${remoteNote.title}\""
         val modified = remoteNote.modified
         if (modified == null) {
-            Log.v(TAG, "  → $label unchanged")
+            Log.v(TAG, "  → remote note ${remoteNote.remoteId} unchanged")
             return
         }
+        val label = "remote note ${remoteNote.remoteId} \"${remoteNote.title}\""
         if (!idMap.containsKey(remoteNote.remoteId)) {
             Log.d(TAG, "  → $label is new, creating local note")
             repo.addNote(localAccount.id, remoteNote)
