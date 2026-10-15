@@ -159,6 +159,14 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".widget.interactivelist.InteractiveNoteListWidgetConfigurationActivity"
+            android:exported="false">
+
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+
         <receiver
             android:name=".widget.singlenote.SingleNoteWidget"
             android:label="@string/widget_single_note_title"
@@ -187,6 +195,20 @@
                 android:resource="@xml/note_list_widget_provider_info" />
         </receiver>
 
+        <receiver
+            android:name=".widget.interactivelist.InteractiveNoteListWidget"
+            android:label="@string/widget_interactive_note_list_title"
+            android:exported="false">
+
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/interactive_note_list_widget_provider_info" />
+        </receiver>
+
         <service
             android:name=".widget.singlenote.SingleNoteWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS"
@@ -194,6 +216,11 @@
 
         <service
             android:name=".widget.notelist.NoteListWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"
+            android:exported="false"/>
+
+        <service
+            android:name=".widget.interactivelist.InteractiveNoteListWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS"
             android:exported="false"/>
 

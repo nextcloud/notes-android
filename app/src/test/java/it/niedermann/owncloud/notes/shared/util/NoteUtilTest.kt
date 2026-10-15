@@ -64,6 +64,7 @@ class NoteUtilTest : TestCase() {
     fun testGenerateNoteExcerpt() {
         testBasicExcerpts()
         testTitleMatchingExcerpts()
+        testTitleAsPrefixOfFirstLine()
         testEmptyLineHandling()
         testMarkdownInContent()
         testMarkdownInTitle()
@@ -87,6 +88,12 @@ class NoteUtilTest : TestCase() {
         assertEquals("Foo", NoteUtil.generateNoteExcerpt("Title\nFoo", "Title"))
         assertEquals("Title   Bar", NoteUtil.generateNoteExcerpt("Title\nTitle\nBar", "Title"))
         assertEquals("", NoteUtil.generateNoteExcerpt("", "Title"))
+    }
+
+    private fun testTitleAsPrefixOfFirstLine() {
+        assertEquals("Asdasd1   Asda22", NoteUtil.generateNoteExcerpt("Asdasd1\nAsda22", "Asdasd"))
+        assertEquals("Titles   Foo", NoteUtil.generateNoteExcerpt("Titles\nFoo", "Title"))
+        assertEquals("Title suffix", NoteUtil.generateNoteExcerpt("Title suffix", "Title"))
     }
 
     private fun testEmptyLineHandling() {
