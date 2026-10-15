@@ -6,6 +6,7 @@ import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import it.niedermann.owncloud.notes.R
@@ -95,7 +96,7 @@ class ActivityListAdapter (
 
             Glide
                 .with(binding.icon.context)
-                .load(activity.icon)
+                .load(activity.icon.toUri())
                 .placeholder( R.drawable.ic_activity)
                 .error(R.drawable.ic_activity)
                 .into(binding.icon)
