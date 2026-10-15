@@ -31,10 +31,10 @@ class CustomAppGlideModule : AppGlideModule() {
         fun clearCache(context: Context) {
             Log.i(TAG, "Clearing Glide memory cache")
             Glide.get(context).clearMemory()
-            clearDiskCacheExecutor.submit(Runnable {
+            clearDiskCacheExecutor.submit {
                 Log.i(TAG, "Clearing Glide disk cache")
-                Glide.get(context.getApplicationContext()).clearDiskCache()
-            })
+                Glide.get(context.applicationContext).clearDiskCache()
+            }
         }
     }
 }
