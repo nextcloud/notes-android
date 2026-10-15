@@ -203,6 +203,7 @@
     <string name="error_sync_maintenance">The server is in maintenance mode. Your changes will sync later.</string>
     <string name="error_sync_insufficient_storage">Your Nextcloud storage is full. Free up space to sync your changes.</string>
     <string name="error_sync_server_unreachable">Could not reach your server. Check your connection and the Nextcloud Files app.</string>
+    <string name="error_sync_token_mismatch">Notes lost access to your Files app account. Remove and add the account again.</string>
     <string name="error_no_network">No network connection</string>
     <string name="error_maintenance_mode">Server is in maintenance mode</string>
     <string name="error_unknown">An unknown error has occurred.</string>

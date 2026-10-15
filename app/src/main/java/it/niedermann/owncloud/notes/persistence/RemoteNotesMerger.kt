@@ -8,7 +8,6 @@ package it.niedermann.owncloud.notes.persistence
 
 import android.util.Log
 import com.nextcloud.android.sso.api.ParsedResponse
-import it.niedermann.owncloud.notes.BuildConfig
 import it.niedermann.owncloud.notes.persistence.entity.Account
 import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.shared.model.DBStatus
@@ -20,13 +19,14 @@ import java.util.Date
 class RemoteNotesMerger(private val repo: NotesRepository, private val localAccount: Account) {
 
     companion object {
-        private val TAG = RemoteNotesMerger::class.java.simpleName
+        private val TAG = NotesServerSyncTask::class.java.simpleName
         private const val HEADER_KEY_X_NOTES_API_VERSIONS = "X-Notes-API-Versions"
         private const val HEADER_KEY_ETAG = "ETag"
         private const val HEADER_KEY_LAST_MODIFIED = "Last-Modified"
     }
 
     fun merge(fetchResponse: ParsedResponse<List<Note>>, idMap: Map<Long, Long>) {
+        Log.d(TAG, "Pull: received ${fetchResponse.response.size} remote note(s)")
         val remoteIds = applyRemoteNotes(fetchResponse.response, idMap)
         removeRemotelyDeletedNotes(idMap, remoteIds)
         updateSyncState(fetchResponse.headers)
@@ -35,7 +35,6 @@ class RemoteNotesMerger(private val repo: NotesRepository, private val localAcco
     private fun applyRemoteNotes(remoteNotes: List<Note>, idMap: Map<Long, Long>): Set<Long?> {
         val remoteIds = HashSet<Long?>()
         for (remoteNote in remoteNotes) {
-            Log.v(TAG, "   Process Remote Note: " + if (BuildConfig.DEBUG) remoteNote else remoteNote.title)
             remoteIds.add(remoteNote.remoteId)
             applyRemoteNote(remoteNote, idMap)
         }
@@ -43,24 +42,24 @@ class RemoteNotesMerger(private val repo: NotesRepository, private val localAcco
     }
 
     private fun applyRemoteNote(remoteNote: Note, idMap: Map<Long, Long>) {
+        val label = "remote note ${remoteNote.remoteId} \"${remoteNote.title}\""
         val modified = remoteNote.modified
         if (modified == null) {
-            Log.v(TAG, "   ... unchanged")
+            Log.v(TAG, "  → $label unchanged")
             return
         }
         if (!idMap.containsKey(remoteNote.remoteId)) {
-            Log.v(TAG, "   ... create")
+            Log.d(TAG, "  → $label is new, creating local note")
             repo.addNote(localAccount.id, remoteNote)
             return
         }
 
-        Log.v(TAG, "   ... found → Update")
         val localId = idMap[remoteNote.remoteId]
         if (localId == null) {
-            val note = if (BuildConfig.DEBUG) remoteNote else remoteNote.title
-            Log.e(TAG, "Tried to update note from server, but local id of note is null. $note")
+            Log.e(TAG, "  → $label has no local id, cannot update it")
             return
         }
+        Log.d(TAG, "  → $label changed, updating local note #$localId")
         repo.updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
             localId,
             modified.timeInMillis,
@@ -74,10 +73,9 @@ class RemoteNotesMerger(private val repo: NotesRepository, private val localAcco
     }
 
     private fun removeRemotelyDeletedNotes(idMap: Map<Long, Long>, remoteIds: Set<Long?>) {
-        Log.d(TAG, "   Remove remotely deleted Notes (only those without local changes)")
         for ((remoteId, localId) in idMap) {
             if (!remoteIds.contains(remoteId)) {
-                Log.v(TAG, "   ... remove $localId")
+                Log.d(TAG, "  → remote note $remoteId was deleted on server, removing local note #$localId")
                 repo.deleteByNoteId(localId, DBStatus.VOID)
             }
         }
@@ -87,7 +85,6 @@ class RemoteNotesMerger(private val repo: NotesRepository, private val localAcco
         localAccount.eTag = headers[HEADER_KEY_ETAG]
 
         val lastModified = parseLastModified(headers[HEADER_KEY_LAST_MODIFIED])
-        Log.d(TAG, "ETag: ${headers[HEADER_KEY_ETAG]}; Last-Modified: $lastModified ($lastModified)")
         localAccount.modified = lastModified
 
         repo.updateETag(localAccount.id, localAccount.eTag)
@@ -96,7 +93,7 @@ class RemoteNotesMerger(private val repo: NotesRepository, private val localAcco
         val newApiVersion = ApiVersionUtil.sanitize(headers[HEADER_KEY_X_NOTES_API_VERSIONS])
         localAccount.apiVersion = newApiVersion
         repo.updateApiVersion(localAccount.id, newApiVersion)
-        Log.d(TAG, "ApiVersion: $newApiVersion")
+        Log.d(TAG, "Pull: saved ETag ${localAccount.eTag}, last modified ${lastModified.time}, API $newApiVersion")
     }
 
     @Suppress("DEPRECATION")

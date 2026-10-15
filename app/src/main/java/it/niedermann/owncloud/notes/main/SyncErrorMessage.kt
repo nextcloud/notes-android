@@ -10,6 +10,7 @@ import androidx.annotation.StringRes
 import com.nextcloud.android.sso.exceptions.NextcloudApiNotRespondingException
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException
 import com.nextcloud.android.sso.exceptions.NextcloudNetworkException
+import com.nextcloud.android.sso.exceptions.TokenMismatchException
 import it.niedermann.owncloud.notes.persistence.NoteSyncException
 import it.niedermann.owncloud.notes.persistence.SyncFailureReason
 
@@ -31,6 +32,7 @@ object SyncErrorMessage {
         is NoteSyncException -> reason
         is NextcloudHttpRequestFailedException -> SyncFailureReason.fromStatusCode(statusCode)
         is NextcloudNetworkException, is NextcloudApiNotRespondingException -> SyncFailureReason.SERVER_UNREACHABLE
+        is TokenMismatchException -> SyncFailureReason.TOKEN_MISMATCH
         else -> null
     }
 }

@@ -23,6 +23,7 @@ enum class SyncFailureReason(@StringRes val message: Int) {
     MAINTENANCE(R.string.error_sync_maintenance),
     INSUFFICIENT_STORAGE(R.string.error_sync_insufficient_storage),
     SERVER_UNREACHABLE(R.string.error_sync_server_unreachable),
+    TOKEN_MISMATCH(R.string.error_sync_token_mismatch),
     UNKNOWN(R.string.error_synchronization);
 
     companion object {
