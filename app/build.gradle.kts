@@ -157,6 +157,7 @@ dependencies {
     val glideVersion = "5.0.9"
     implementation("com.github.bumptech.glide:glide:$glideVersion")
     annotationProcessor("com.github.bumptech.glide:compiler:$glideVersion")
+    implementation("com.caverock:androidsvg-aar:1.4")
 
     // Android X
     implementation("androidx.appcompat:appcompat:1.8.0")
