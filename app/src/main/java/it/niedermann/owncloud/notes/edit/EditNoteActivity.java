@@ -21,10 +21,6 @@ import android.widget.Toast;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 
@@ -108,7 +104,6 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
 
         setSupportActionBar(binding.toolbar);
         binding.toolbar.setOnClickListener((v) -> fragment.showEditTitleDialog());
-        setImeInsets();
 
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
@@ -117,33 +112,6 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
                 getOnBackPressedDispatcher().onBackPressed();
                 close();
             }
-        });
-    }
-
-    private void setImeInsets() {
-        final var window = getWindow();
-        if (window == null) {
-            return;
-        }
-
-        WindowCompat.setDecorFitsSystemWindows(window, false);
-
-        final var decorView = window.getDecorView();
-        ViewCompat.setOnApplyWindowInsetsListener(decorView, (v, insets) -> {
-            Insets imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime());
-            Insets navBarInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
-
-            // Apply bottom padding when keyboard is shown
-            int bottomPadding = Math.max(imeInsets.bottom, navBarInsets.bottom);
-
-            v.setPadding(
-                    v.getPaddingLeft(),
-                    v.getPaddingTop(),
-                    v.getPaddingRight(),
-                    bottomPadding
-            );
-
-            return insets;
         });
     }
 
