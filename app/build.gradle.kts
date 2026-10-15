@@ -9,6 +9,7 @@
 
 plugins {
     id("com.android.application")
+    id("com.google.devtools.ksp")
 }
 
 val kotlinVersion = rootProject.extra["kotlinVersion"] as String
@@ -156,7 +157,7 @@ dependencies {
     // Glide
     val glideVersion = "5.0.9"
     implementation("com.github.bumptech.glide:glide:$glideVersion")
-    annotationProcessor("com.github.bumptech.glide:compiler:$glideVersion")
+    ksp("com.github.bumptech.glide:ksp:$glideVersion")
     implementation("com.caverock:androidsvg-aar:1.4")
 
     // Android X
