@@ -6,19 +6,23 @@
  */
 package it.niedermann.owncloud.notes.persistence.sync
 
+import com.nextcloud.android.sso.aidl.NextcloudRequest
+import com.nextcloud.android.sso.api.NextcloudAPI
+import com.nextcloud.android.sso.api.Response
 import com.nextcloud.android.sso.model.SingleSignOnAccount
 import com.owncloud.android.lib.common.network.WebdavEntry
 import com.owncloud.android.lib.common.network.WebdavUtils
 import com.owncloud.android.lib.resources.files.model.FileVersion
 import it.niedermann.owncloud.notes.activities.repository.VersionsResult
-import org.apache.commons.httpclient.HttpClient
-import org.apache.commons.httpclient.HttpStatus
 import org.apache.jackrabbit.webdav.DavConstants
 import org.apache.jackrabbit.webdav.MultiStatus
 import org.apache.jackrabbit.webdav.client.methods.PropFindMethod
+import org.apache.jackrabbit.webdav.xml.DomUtil
+import java.io.ByteArrayOutputStream
 
 
 class VersionsAPI (
+    private val nextcloudAPI: NextcloudAPI,
     private val ssoAccount: SingleSignOnAccount,
     private val davEndpoint: String
 ) {
@@ -27,19 +31,23 @@ class VersionsAPI (
         val propSet = WebdavUtils.getFileVersionPropSet()
 
         val query = PropFindMethod(uri, propSet, DavConstants.DEPTH_1)
-        val status: Int = HttpClient().executeMethod(query)
 
-        // check and process response
-        val isSuccess = (status == HttpStatus.SC_MULTI_STATUS || status == HttpStatus.SC_OK)
+        // We manually build the request to pass it to nextcloudAPI (required for authentication)
+        val requestBodyOutStr = ByteArrayOutputStream()
+        query.requestEntity.writeRequest(requestBodyOutStr)
+        val requestBody = requestBodyOutStr.toString()
+        val request = NextcloudRequest.Builder()
+            .setMethod("PROPFIND")
+            .setUrl(uri)
+            .setRequestBody(requestBody)
+            .build()
 
-        if (isSuccess) {
-            // get data from remote folder
-            val dataInServer: MultiStatus = query.getResponseBodyAsMultiStatus()
-            val versions = readData(dataInServer, fileId)
-            return VersionsResult.Success(versions)
+        return try {
+            val response = nextcloudAPI.performNetworkRequestV2(request)
+            VersionsResult.Success(readData(response, fileId))
+        } catch (e: Exception) {
+            VersionsResult.Failed
         }
-
-        return VersionsResult.Failed
     }
 
     /**
@@ -48,8 +56,11 @@ class VersionsAPI (
      * @param remoteData Full response got from the server with the version data.
      * @param fileId     File id the versions refer to
      */
-    private fun readData(remoteData: MultiStatus, fileId: Long): List<FileVersion> {
-        val responses = remoteData.responses
+    private fun readData(response: Response, fileId: Long): List<FileVersion> {
+        // Use jackrabbit tp parse a webdav MultiStatus from response
+        val ms = MultiStatus.createFromXml(DomUtil.parseDocument(response.body).documentElement)
+        val responses = ms.responses
+        // Each response is a version
         val versions = arrayListOf<FileVersion>()
 
         // parse data from remote folder
@@ -68,6 +79,6 @@ class VersionsAPI (
     }
 
     private fun getDavPath(): String {
-        return "${ssoAccount.url}$davEndpoint"
+        return davEndpoint
     }
 }

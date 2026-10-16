@@ -6,9 +6,10 @@ import it.niedermann.owncloud.notes.persistence.ApiProvider
 import it.niedermann.owncloud.notes.persistence.sync.VersionsAPI
 
 class VersionsRepository (
+    private val context: Context,
     private val ssoAccount: SingleSignOnAccount
 ) {
-    private val api by lazy { ApiProvider.getInstance().getVersionsAPI(ssoAccount) }
+    private val api by lazy { ApiProvider.getInstance().getVersionsAPI(context, ssoAccount) }
 
     fun fetchVersions(noteId: Long): VersionsResult {
         return api.fetchVersions(noteId)

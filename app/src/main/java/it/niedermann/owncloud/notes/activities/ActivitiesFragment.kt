@@ -124,7 +124,7 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener {
         executorService!!.submit(Runnable submit@{
             val ssoAccount =
                 SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext())
-            val repository = VersionsRepository(ssoAccount)
+            val repository = VersionsRepository(requireContext(), ssoAccount)
             lifecycleScope.launch(Dispatchers.IO) {
                 val result = repository.fetchVersions(noteId)
                 withContext(Dispatchers.Main) {
