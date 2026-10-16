@@ -33,6 +33,7 @@ import it.niedermann.owncloud.notes.persistence.sync.NotesAPI;
 import it.niedermann.owncloud.notes.persistence.sync.OcsAPI;
 import it.niedermann.owncloud.notes.persistence.sync.ShareAPI;
 import it.niedermann.owncloud.notes.persistence.sync.UserStatusAPI;
+import it.niedermann.owncloud.notes.persistence.sync.VersionsAPI;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import retrofit2.NextcloudRetrofitApiBuilder;
@@ -54,6 +55,7 @@ public class ApiProvider {
     private static final String API_ENDPOINT_FILES ="/ocs/v2.php/apps/files/api/v1/";
     private static final String API_ENDPOINT_FILES_SHARING ="/ocs/v2.php/apps/files_sharing/api/v1/";
     private static final String API_ENDPOINT_ACTIVITY = "/ocs/v2.php/apps/activity/api/v2/";
+    private static final String API_ENDPOINT_DAV = "/remote.php/dav/";
 
     private static final Map<String, NextcloudAPI> API_CACHE = new ConcurrentHashMap<>();
 
@@ -63,6 +65,7 @@ public class ApiProvider {
     private static final Map<String, FilesAPI> API_CACHE_FILES = new ConcurrentHashMap<>();
     private static final Map<String, ShareAPI> API_CACHE_FILES_SHARING = new ConcurrentHashMap<>();
     private static final Map<String, ActivitiesAPI> API_CACHE_ACTIVITIES = new ConcurrentHashMap<>();
+    private static final Map<String, VersionsAPI> API_CACHE_VERSIONS = new ConcurrentHashMap<>();
 
 
     public static ApiProvider getInstance() {
@@ -157,6 +160,15 @@ public class ApiProvider {
         return api;
     }
 
+    public synchronized VersionsAPI getVersionsAPI(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount) {
+        if (API_CACHE_VERSIONS.containsKey(ssoAccount.name)) {
+            return API_CACHE_VERSIONS.get(ssoAccount.name);
+        }
+        final var api = new NextcloudRetrofitApiBuilder(getNextcloudAPI(context, ssoAccount), API_ENDPOINT_DAV).create(VersionsAPI.class);
+        API_CACHE_VERSIONS.put(ssoAccount.name, api);
+        return api;
+    }
+
     /**
      * Invalidates the API cache for the given {@param ssoAccount}
      *
@@ -176,6 +188,7 @@ public class ApiProvider {
         API_CACHE_USER_STATUS.remove(ssoAccount.name);
         API_CACHE_FILES_SHARING.remove(ssoAccount.name);
         API_CACHE_ACTIVITIES.remove(ssoAccount.name);
+        API_CACHE_VERSIONS.remove(ssoAccount.name);
     }
 
     /**
@@ -197,5 +210,6 @@ public class ApiProvider {
         API_CACHE_USER_STATUS.clear();
         API_CACHE_FILES_SHARING.clear();
         API_CACHE_ACTIVITIES.clear();
+        API_CACHE_VERSIONS.clear();
     }
 }
