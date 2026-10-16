@@ -131,6 +131,7 @@ dependencies {
     implementation("commons-httpclient:commons-httpclient:3.1") {
         exclude(group = "commons-logging", module = "commons-logging")
     }
+    implementation("org.apache.jackrabbit:jackrabbit-webdav:2.13.5")
 
     implementation("com.github.nextcloud:android-library:2.26.0") {
         exclude(group = "org.ogce", module = "xpp3")
