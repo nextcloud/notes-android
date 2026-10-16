@@ -13,6 +13,8 @@ import it.niedermann.owncloud.notes.activities.adapter.OnActivityClickListener
 import it.niedermann.owncloud.notes.activities.model.Activity
 import it.niedermann.owncloud.notes.activities.repository.ActivitiesRepository
 import it.niedermann.owncloud.notes.activities.repository.ActivitiesResult
+import it.niedermann.owncloud.notes.activities.repository.VersionsRepository
+import it.niedermann.owncloud.notes.activities.repository.VersionsResult
 import it.niedermann.owncloud.notes.branding.BrandedFragment
 import it.niedermann.owncloud.notes.branding.BrandingUtil
 import it.niedermann.owncloud.notes.databinding.FragmentActivitiesBinding
@@ -50,6 +52,10 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener {
         initializeArguments()
         initializeList()
         fetchActivities()
+
+        //DEBUG
+        fetchVersions()
+        //DEBUG
 
         return binding.root
     }
@@ -110,6 +116,31 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener {
                 }
             }
 
+        })
+    }
+
+    private fun fetchVersions() {
+        val noteId = note.remoteId ?: return
+        executorService!!.submit(Runnable submit@{
+            val ssoAccount =
+                SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext())
+            val repository = VersionsRepository(ssoAccount)
+            lifecycleScope.launch(Dispatchers.IO) {
+                val result = repository.fetchVersions(noteId)
+                withContext(Dispatchers.Main) {
+                    when (result) {
+                        is VersionsResult.Success -> {
+                            result.versions.forEach {
+                                Log.d("DEBUG", "Version: ${it.remoteId} ${it.fileName} ${it.modifiedTimestamp}")
+                            }
+                        }
+
+                        is VersionsResult.Failed -> {
+                            Log.e("DEBUG", "Versions failed")
+                        }
+                    }
+                }
+            }
         })
     }
 
