@@ -10,9 +10,8 @@ import android.content.Context
 import android.net.Uri
 import com.nextcloud.android.sso.model.SingleSignOnAccount
 import it.niedermann.owncloud.notes.persistence.ApiProvider
-import org.xmlpull.v1.XmlPullParserException
+import org.xml.sax.SAXException
 import java.io.IOException
-import java.time.format.DateTimeParseException
 
 class VersionsRepository(
     private val context: Context,
@@ -25,11 +24,11 @@ class VersionsRepository(
         api.fetchVersions(Uri.encode(ssoAccount.userId), fileId).blockingSingle().use { body ->
             VersionsResult.Success(FileVersionsParser.parse(fileId, body.byteStream()))
         }
-    } catch (_: XmlPullParserException) {
+    } catch (_: SAXException) {
         VersionsResult.Failed
     } catch (_: IOException) {
         VersionsResult.Failed
-    } catch (_: DateTimeParseException) {
+    } catch (_: IllegalArgumentException) {
         VersionsResult.Failed
     }
 

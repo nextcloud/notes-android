@@ -7,13 +7,12 @@
 package it.niedermann.owncloud.notes.versions.repository
 
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
-import org.xmlpull.v1.XmlPullParserException
+import org.xml.sax.SAXException
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [36])
@@ -25,17 +24,12 @@ class FileVersionsParserTest {
 
         assertEquals(2, versions.size)
         with(versions[0]) {
-            assertEquals(FILE_ID, fileId)
-            assertEquals("1700000000", versionId)
-            assertEquals(1_700_000_000_000L, modified.time)
-            assertEquals(42L, size)
+            assertEquals(FILE_ID, localId)
+            assertEquals(1_700_000_000_000L, modifiedTimestamp)
+            assertEquals(42L, fileLength)
             assertEquals("text/markdown", mimeType)
         }
-        with(versions[1]) {
-            assertEquals("1690000000", versionId)
-            assertNull(size)
-            assertNull(mimeType)
-        }
+        assertEquals(1_690_000_000_000L, versions[1].modifiedTimestamp)
     }
 
     @Test
@@ -46,7 +40,7 @@ class FileVersionsParserTest {
         assertTrue(FileVersionsParser.parse(FILE_ID, collectionOnly.byteInputStream()).isEmpty())
     }
 
-    @Test(expected = XmlPullParserException::class)
+    @Test(expected = SAXException::class)
     fun parseEmptyBodyFails() {
         FileVersionsParser.parse(FILE_ID, "".byteInputStream())
     }

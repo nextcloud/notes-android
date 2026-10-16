@@ -6,7 +6,7 @@
  */
 package it.niedermann.owncloud.notes.versions.repository
 
-import it.niedermann.owncloud.notes.versions.model.FileVersion
+import com.owncloud.android.lib.resources.files.model.FileVersion
 
 sealed interface VersionsResult {
 
