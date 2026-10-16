@@ -21,8 +21,8 @@ class VersionsRepository(
     private val api by lazy { ApiProvider.getInstance().getVersionsAPI(context, ssoAccount) }
 
     fun fetchVersions(fileId: Long): VersionsResult = try {
-        api.fetchVersions(Uri.encode(ssoAccount.userId), fileId).blockingSingle().use { body ->
-            VersionsResult.Success(FileVersionsParser.parse(fileId, body.byteStream()))
+        api.fetchVersions(Uri.encode(ssoAccount.userId), fileId).blockingSingle().byteStream().use { stream ->
+            VersionsResult.Success(FileVersionsParser.parse(fileId, stream))
         }
     } catch (_: SAXException) {
         VersionsResult.Failed
