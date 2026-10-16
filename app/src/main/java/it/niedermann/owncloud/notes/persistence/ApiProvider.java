@@ -160,11 +160,11 @@ public class ApiProvider {
         return api;
     }
 
-    public synchronized VersionsAPI getVersionsAPI(@NonNull SingleSignOnAccount ssoAccount) {
+    public synchronized VersionsAPI getVersionsAPI(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount) {
         if (API_CACHE_VERSIONS.containsKey(ssoAccount.name)) {
             return API_CACHE_VERSIONS.get(ssoAccount.name);
         }
-        final var api = new VersionsAPI(ssoAccount, API_ENDPOINT_DAV);
+        final var api = new VersionsAPI(getNextcloudAPI(context, ssoAccount), ssoAccount, API_ENDPOINT_DAV);
         API_CACHE_VERSIONS.put(ssoAccount.name, api);
         return api;
     }
