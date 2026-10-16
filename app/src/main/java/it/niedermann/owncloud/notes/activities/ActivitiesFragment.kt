@@ -19,6 +19,8 @@ import it.niedermann.owncloud.notes.databinding.FragmentActivitiesBinding
 import it.niedermann.owncloud.notes.persistence.entity.Account
 import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.shared.util.extensions.getSerializableArgument
+import it.niedermann.owncloud.notes.versions.repository.VersionsRepository
+import it.niedermann.owncloud.notes.versions.repository.VersionsResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -50,6 +52,7 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener {
         initializeArguments()
         initializeList()
         fetchActivities()
+        fetchVersions()
 
         return binding.root
     }
@@ -110,6 +113,28 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener {
                 }
             }
 
+        })
+    }
+
+    private fun fetchVersions() {
+        val noteId = note.remoteId ?: return
+
+        executorService!!.submit(Runnable submit@{
+            val ssoAccount =
+                SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext())
+            val repository = VersionsRepository(requireContext(), ssoAccount)
+            lifecycleScope.launch(Dispatchers.IO) {
+                val result = repository.fetchVersions(noteId)
+                withContext(Dispatchers.Main) {
+                    when (result) {
+                        is VersionsResult.Success -> result.versions.forEach {
+                            Log.d(TAG, "Version: ${it.modifiedTimestamp} ${it.fileLength} ${it.mimeType}")
+                        }
+
+                        is VersionsResult.Failed -> Log.e(TAG, "Fetching versions failed")
+                    }
+                }
+            }
         })
     }
 
