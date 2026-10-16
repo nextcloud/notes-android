@@ -33,6 +33,8 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:maxLines="1"
         android:textStyle="bold"
         android:textColor="@color/widget_foreground"
         android:textSize="14sp"
