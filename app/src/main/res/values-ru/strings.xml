@@ -45,7 +45,7 @@
     <string name="activity_select_single_note">Выберите заметку</string>
     <string name="activity_sharing_details_title">Подробности общего доступа</string>
     <string name="activity_sharing_title">Параметры публикации</string>
-    <string name="add_account">Добавить аккаунт</string>
+    <string name="add_account">Добавить учётную запись</string>
     <string name="add_another_public_share_link">Добавить другую ссылку</string>
     <string name="add_category">Добавить %1$s </string>
     <string name="add_new_public_share">Добавить новую общедоступную ссылку</string>
@@ -57,7 +57,7 @@
     <string name="appearance_and_behavior">Внешний вид и поведение</string>
     <string name="append_to_note">Добавить в заметку</string>
     <string name="away">Неактивен</string>
-    <string name="backup">Обнаружено невосстановимое состояние приложения. Пожалуйста, сделайте резервную копию изменений, которые не были синхронизированы, и очистите память приложения Notes.</string>
+    <string name="backup">Обнаружено невосстановимое состояние приложения. Сделайте резервную копию изменений, которые не были синхронизированы, и очистите хранилище приложения «Заметки».</string>
     <string name="busy">Занят</string>
     <string name="category_bake">Выпечка</string>
     <string name="category_checklists">Чек-лист</string>
@@ -129,7 +129,7 @@
     <string name="error_dialog_timeout_instance">Ответ сервера не был получен в отведённое на это время. Проверьте работоспособность сервера.</string>
     <string name="error_dialog_timeout_toggle">Проверьте ваше сетевое соединение. В некоторых случаях может помочь отключение Wi-Fi и включение его вновь.</string>
     <string name="error_dialog_tip_clear_storage">Вы можете очистить хранилище, открыв информацию о приложении и выбрав Хранилище → Очистить хранилище. ⚠️ Предупреждение: это удалит еще не синхронизированные заметки!</string>
-    <string name="error_dialog_tip_disable_battery_optimizations">Пожалуйста, отключите оптимизацию энергопотребления для Nextcloud и Notes.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Отключите оптимизацию энергопотребления для Nextcloud и приложения «Заметки».</string>
     <string name="error_dialog_tip_files_delete_storage">Если принудительная остановка не поможет, попробуйте очистить хранилище обоих приложений.</string>
     <string name="error_dialog_tip_files_force_stop">Похоже что с вашим приложением Nextcloud что-то не так. Попробуйте принудительно остановить оба приложения Nextcloud и Nextcloud Notes. </string>
     <string name="error_dialog_tip_files_outdated">Ваше приложение Nextcloud устарело. Установите новую версию с Play Store или F-Droid.</string>
@@ -153,13 +153,13 @@
     <string name="formatting_help_cbf_body_1">Главная цель разработки приложения Notes - получить инструмент для быстрого создания заметок по текущим делам. Вы можете отформатировать текст, применяя синтаксис Markdown. Для приведенных ниже примеров удобно использовать клавиши быстрого доступа, что позволит выполнять форматирование ваших заметок без ввода самих символов форматирования.</string>
     <string name="formatting_help_cbf_body_2">Выберите блок текста или нажмите на курсор в любом месте, и появится всплывающее меню, содержащее рядом с записями по умолчанию 1 %1$s, 2 %2$s, 3 %3$s такие записи, как 4 %4$s или 5 %5$s.</string>
     <string name="formatting_help_cbf_title">Контекстное форматирование</string>
-    <string name="formatting_help_checkboxes_body_1">Чтобы создать чекбокс, используйте список, заключенный в скобки</string>
+    <string name="formatting_help_checkboxes_body_1">Чтобы создать флажок, используйте список, заключённый в скобки</string>
     <string name="formatting_help_checkboxes_body_2">Пункт 1</string>
     <string name="formatting_help_checkboxes_body_3">Пункт 2</string>
     <string name="formatting_help_checkboxes_title">Несколько из списка</string>
-    <string name="formatting_help_code_body_1">В Markdown существует несколько способов выделить блок исходного кода. Если Вы хотите создать встроенный блок, заключите код в обратные кавычки:</string>
+    <string name="formatting_help_code_body_1">В Markdown существует несколько способов выделить блок исходного кода. Если вы хотите создать встроенный блок, заключите код в обратные кавычки:</string>
     <string name="formatting_help_code_body_2">В Markdown также поддерживается так называемый обособленный блок кода, который содержит несколько строк без абзацного отступа:</string>
-    <string name="formatting_help_code_body_3">А если Вы хотите включить подсветку синтаксиса, укажите язык:</string>
+    <string name="formatting_help_code_body_3">А если вы хотите включить подсветку синтаксиса, укажите язык:</string>
     <string name="formatting_help_code_title">Код</string>
     <string name="formatting_help_codefence" translateable="false">```</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
@@ -169,7 +169,7 @@
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_images_alt">Красивое изображение</string>
     <string name="formatting_help_images_body_1">Ссылки должны быть либо полными URL, начинающимися с протокола и домена, либо абсолютными путями, начинающимися с символа %1$s.</string>
-    <string name="formatting_help_images_body_2">Чтобы соответствовать формату Markdown, пожалуйста, используйте в URL-адресе исключающие символы. Это означает, например, заменить пробелы на %1$s в URL.</string>
+    <string name="formatting_help_images_body_2">Чтобы соответствовать формату Markdown, используйте в URL-адресе изображения экранирующие символы. Это означает, например, заменить пробелы на %1$s в URL.</string>
     <string name="formatting_help_images_title">Изображения</string>
     <string name="formatting_help_lists_body_1">Иногда вам требуются нумерованные списки:</string>
     <string name="formatting_help_lists_body_2">Один</string>
@@ -209,7 +209,7 @@
     <string name="listview_updated_this_week">На этой неделе</string>
     <string name="listview_updated_today">Сегодня</string>
     <string name="listview_updated_yesterday">Вчера</string>
-    <string name="manage_accounts">Управление аккаунтами</string>
+    <string name="manage_accounts">Управление учётными записями</string>
     <string name="menu_change_category">Категория</string>
     <string name="menu_delete">Удалить</string>
     <string name="menu_edit_title">Редактировать заголовок</string>
@@ -225,7 +225,7 @@
     <string name="no_email_app_available">Нет приложения для электронной почты</string>
     <string name="no_notes_yet">Нет ни одной заметки</string>
     <string name="no_notes_yet_description">Для создания заметки нажмите +</string>
-    <string name="no_other_accounts">Вы еще не настроили ни одного аккаунта</string>
+    <string name="no_other_accounts">Вы ещё не настроили ни одной учётной записи.</string>
     <string name="noteMode_plain_edit">Режим простого редактирования</string>
     <string name="noteMode_plain_preview">Режим простого просмотра</string>
     <string name="noteMode_remember_last">Запоминать выбранный режим</string>
@@ -241,7 +241,7 @@
     <string name="note_share_activity_icon_content_description">note share icon</string>
     <string name="note_share_activity_more_icon_content_description">note share more icon</string>
     <string name="note_share_activity_resharing_not_allowed">Политика или разрешения запрещают повторное предоставление общего доступа</string>
-    <string name="note_share_activity_search_text">Имя, ID федеративного облака или email адрес…</string>
+    <string name="note_share_activity_search_text">Имя, ID федеративного облака или адрес эл. почты…</string>
     <string name="note_share_activity_send_copy_to">Отправить копию</string>
     <string name="note_share_activity_share_icon_content_description">note share icon</string>
     <string name="note_share_activity_share_link">Поделиться ссылкой</string>
@@ -260,7 +260,7 @@
     <string name="note_share_detail_activity_hint_password">Пароль</string>
     <string name="note_share_detail_activity_label_empty">Метка не может быть пустой</string>
     <string name="note_share_detail_activity_link_name">Название ссылки</string>
-    <string name="note_share_detail_activity_no_share_permission_selected">Пожалуйста, выберите хотя бы одно разрешение.</string>
+    <string name="note_share_detail_activity_no_share_permission_selected">Выберите хотя бы одно разрешение.</string>
     <string name="note_share_detail_activity_password_error_message">Этот пароль выглядит слабым. Для большей безопасности попробуйте использовать более длинный пароль, состоящий из букв, цифр и символов.</string>
     <string name="note_share_detail_activity_send_share">Переслать</string>
     <string name="note_share_detail_activity_set_note">Создать заметку</string>
@@ -378,7 +378,7 @@
     <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
     <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
     <string name="welcome_text">Добро пожаловать в %1$s</string>
-    <string name="whats_your_status">Какой у Вас статус?</string>
+    <string name="whats_your_status">Какой у вас статус?</string>
     <string name="widget_entry_fav_contentDescription">Значок звездочки используется для обозначения элемента как избранного</string>
     <string name="widget_not_logged_in">Для использования виджета необходимо выполнить вход в приложении «Заметки»</string>
     <string name="widget_note_list_placeholder">Заметок нет</string>
@@ -387,7 +387,7 @@
     <string name="widget_single_note_note_not_found">Заметка не найдена</string>
     <string name="widget_single_note_title">Одна заметка</string>
     <string name="write_email">Отправить письмо</string>
-    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Вы должны быть подключены к сети интернет для того, чтобы добавить аккаунт.</string>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Для добавления учётной записи необходимо подключение к Интернету.</string>
     <plurals name="share_download_limit_description">
         <item quantity="one">Осталось %1$d скачивание</item>
         <item quantity="few">Осталось %1$d скачивания</item>
@@ -419,9 +419,9 @@
         <item quantity="other">Поделиться содержимым %1$d заметок</item>
     </plurals>
     <plurals name="remove_account_message">
-        <item quantity="one">Удаление аккаунта %1$s также приведёт к удалению необратимого несинхронизированного изменения.</item>
-        <item quantity="few">Удаление аккаунта %1$s также приведёт к удалению текущих необратимых %2$d несинхронизированных изменений.</item>
-        <item quantity="many">Удаление аккаунта %1$s также приведёт к удалению текущих необратимых %2$d    несинхронизированных изменений.</item>
-        <item quantity="other">Удаление аккаунта %1$s также приведёт к удалению текущих необратимых %2$d несинхронизированных изменений.</item>
+        <item quantity="one">Удаление учётной записи %1$s также приведёт к необратимому удалению одного несинхронизированного изменения.</item>
+        <item quantity="few">Удаление учётной записи %1$s также приведёт к необратимому удалению %2$d несинхронизированных изменений.</item>
+        <item quantity="many">Удаление учётной записи %1$s также приведёт к необратимому удалению %2$d несинхронизированных изменений.</item>
+        <item quantity="other">Удаление учётной записи %1$s также приведёт к необратимому удалению %2$d несинхронизированных изменений.</item>
     </plurals>
 </resources>
