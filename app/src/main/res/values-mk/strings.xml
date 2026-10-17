@@ -42,6 +42,7 @@
     <string name="category_food">Храна</string>
     <string name="category_game">Игра</string>
     <string name="category_games">Игри</string>
+    <string name="category_keys">Клучеви</string>
     <string name="category_movie">Филм</string>
     <string name="category_movies">Филмови</string>
     <string name="category_music">Музика</string>
@@ -132,6 +133,7 @@
     <string name="oneHour">1 час</string>
     <string name="online">Присутен</string>
     <string name="online_status">Присутен</string>
+    <string name="pref_value_font_normal">Нормално</string>
     <string name="pref_value_lock">Заштитено со лозинка</string>
     <string name="pref_value_wifi_and_mobile">Синхронизирај на Wi-Fi и на мобилен интернет</string>
     <string name="public_share_name">Ново име</string>
