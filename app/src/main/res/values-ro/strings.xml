@@ -50,6 +50,7 @@
     <string name="allow_resharing">Permite repartajarea</string>
     <string name="app_name">Notițe</string>
     <string name="app_name_long">Notițe Nextcloud </string>
+    <string name="appear_offline">Apari ca offline</string>
     <string name="appearance_and_behavior">Aspect şi comportament</string>
     <string name="append_to_note">Atașează  la notiță </string>
     <string name="away">Departe</string>
@@ -100,7 +101,11 @@
     <string name="darkmode_dark">Întunecat</string>
     <string name="darkmode_light">Deschis</string>
     <string name="darkmode_system_default">Setare implicită a sistemului</string>
+    <string name="delete_share">Șterge partajarea</string>
     <string name="dismiss">Elimină</string>
+    <string name="dnd">Nu deranja</string>
+    <string name="dontClear">Nu șterge</string>
+    <string name="ecosystem_apps_display_files">Fișiere</string>
     <string name="ecosystem_apps_display_more">Mai mult</string>
     <string name="ecosystem_apps_display_talk">Discuție</string>
     <string name="ecosystem_apps_more">Mai multe aplicații Nextcloud</string>
@@ -202,6 +207,7 @@
     <string name="menu_favorite">Favorit</string>
     <string name="menu_preview">Previzualizare</string>
     <string name="menu_share">Partajează</string>
+    <string name="mute_all_notifications">Dezactivează toate notificările</string>
     <string name="no_account_configured_yet">Nici un cont configurat încă </string>
     <string name="no_actions">Nici o acțiune pentru acest utilizator</string>
     <string name="no_browser_available">Nu există aplicație disponibilă care să acceseze legăturile</string>
@@ -217,6 +223,7 @@
     <string name="note_share_activity_share_link">Partajază legătură</string>
     <string name="note_share_activity_shared_with_you">Partajat cu tine de către %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">„%1$s” a fost partajat cu dumneavoastră</string>
+    <string name="note_share_detail_activity_allow_download_and_sync">Permite descărcarea și sincronizarea</string>
     <string name="note_share_detail_activity_cancel">Anulare</string>
     <string name="note_share_detail_activity_common_confirm">Confirmă</string>
     <string name="note_share_detail_activity_common_next">Următorul</string>
@@ -232,6 +239,8 @@
     <string name="note_share_detail_activity_share_send_note">Notă către destinatar</string>
     <string name="note_share_detail_activity_share_via_link_hide_download">Ascunde descărcarea</string>
     <string name="oneHour">1 oră</string>
+    <string name="online">Online</string>
+    <string name="online_status">Starea online</string>
     <string name="pin_to_homescreen">Fixați pe ecranul de pornire</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_lock">Password protection</string>
@@ -243,6 +252,7 @@
     <string name="remove_account">Îndepărtează %1$s</string>
     <string name="search_in_all">Caută în toate notițele </string>
     <string name="search_in_category">Căutare în 1%1$s</string>
+    <string name="set_online_status">Starea online</string>
     <string name="settings_background_sync">Sincronizare în fundal</string>
     <string name="settings_file_suffix">Extensia fişierului</string>
     <string name="settings_file_suffix_description">Extensia fişierului pentru notiţele noi pe serverul dumneavoastră Nextcloud</string>
@@ -275,11 +285,13 @@
     <string name="share_link_password_title">Introduceţi parola</string>
     <string name="share_link_with_label">Trimite link (%1$s)</string>
     <string name="share_no_expiration_date_label">Specifică data expirării</string>
+    <string name="share_no_password_title">Setează parola</string>
     <string name="share_password_dialog_fragment_share_link_optional_password_title">Introdu o parolă opțională</string>
     <string name="share_password_dialog_fragment_skip">Sari peste</string>
     <string name="share_password_title">Protejat cu parolă</string>
     <string name="share_permission_can_edit">Poate edita</string>
     <string name="share_permission_file_drop">Aducere fișier</string>
+    <string name="share_permission_file_request">Cerere de fișiere</string>
     <string name="share_permission_unknown">Necunoscut</string>
     <string name="share_permission_view_only">Numai se vizualizează</string>
     <string name="share_permissions">Permisiuni de partajare</string>
@@ -314,6 +326,7 @@
     <string name="simple_synchronization">Sincronizare</string>
     <string name="sort_alphabetically">Sortare în ordine alfabetică </string>
     <string name="sort_last_modified">Sortare după data ultimei modificări </string>
+    <string name="status_message">Mesaj de stare</string>
     <string name="thirtyMinutes">30 de minute</string>
     <string name="thisWeek">Săptămâna asta</string>
     <string name="today">Azi</string>
