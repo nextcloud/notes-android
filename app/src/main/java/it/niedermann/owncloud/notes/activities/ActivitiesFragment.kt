@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.snackbar.Snackbar
 import com.nextcloud.android.sso.helper.SingleAccountHelper
 import com.owncloud.android.lib.resources.files.model.FileVersion
 import it.niedermann.owncloud.notes.R
@@ -14,9 +15,11 @@ import it.niedermann.owncloud.notes.activities.adapter.OnActivityClickListener
 import it.niedermann.owncloud.notes.activities.model.Activity
 import it.niedermann.owncloud.notes.activities.repository.ActivitiesRepository
 import it.niedermann.owncloud.notes.activities.repository.ActivitiesResult
+import it.niedermann.owncloud.notes.activities.repository.RestoreVersionsResult
 import it.niedermann.owncloud.notes.activities.repository.VersionsRepository
 import it.niedermann.owncloud.notes.activities.repository.VersionsResult
 import it.niedermann.owncloud.notes.branding.BrandedFragment
+import it.niedermann.owncloud.notes.branding.BrandedSnackbar
 import it.niedermann.owncloud.notes.branding.BrandingUtil
 import it.niedermann.owncloud.notes.databinding.FragmentActivitiesBinding
 import it.niedermann.owncloud.notes.persistence.entity.Account
@@ -172,7 +175,24 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener {
 
     override fun onVersionItemClick(version: FileVersion) {
         // Restore the version
-        TODO("Not yet implemented")
+        val ssoAccount =
+            SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext())
+        val repository = VersionsRepository(requireContext(), ssoAccount)
+        lifecycleScope.launch(Dispatchers.IO) {
+            val result = repository.restoreVersion(version)
+            withContext(Dispatchers.Main) {
+                val message =
+                    if (result == RestoreVersionsResult.Success)
+                        R.string.version_restored
+                    else
+                        R.string.version_restore_failed
+
+                BrandedSnackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
+
+                // Reload list
+                if (result == RestoreVersionsResult.Success) fetchData()
+            }
+        }
     }
 
     override fun lastActivityReached() {
