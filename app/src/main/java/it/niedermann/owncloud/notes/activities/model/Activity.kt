@@ -21,4 +21,9 @@ data class Activity(
     val datetime: Date,
     @SerializedName("object_id") val objectId: Long?,
     @SerializedName("object_name") val objectName: String?
-)
+) : Comparable<Activity> {
+
+    override fun compareTo(other: Activity): Int =
+        (datetime.time - other.datetime.time).toInt()
+
+}
