@@ -6,6 +6,8 @@
  */
 package it.niedermann.owncloud.notes.persistence.sync
 
+import android.net.Uri
+import android.util.Log
 import com.nextcloud.android.sso.aidl.NextcloudRequest
 import com.nextcloud.android.sso.api.NextcloudAPI
 import com.nextcloud.android.sso.api.Response
@@ -13,6 +15,7 @@ import com.nextcloud.android.sso.model.SingleSignOnAccount
 import com.owncloud.android.lib.common.network.WebdavEntry
 import com.owncloud.android.lib.common.network.WebdavUtils
 import com.owncloud.android.lib.resources.files.model.FileVersion
+import it.niedermann.owncloud.notes.activities.repository.RestoreVersionsResult
 import it.niedermann.owncloud.notes.activities.repository.VersionsResult
 import org.apache.jackrabbit.webdav.DavConstants
 import org.apache.jackrabbit.webdav.MultiStatus
@@ -27,7 +30,7 @@ class VersionsAPI (
     private val davEndpoint: String
 ) {
     fun fetchVersions(fileId: Long) : VersionsResult {
-        val uri = "${getDavPath()}/versions/${ssoAccount.userId}/versions/$fileId"
+        val uri = "${getDavPath()}versions/${ssoAccount.userId}/versions/$fileId"
         val propSet = WebdavUtils.getFileVersionPropSet()
 
         val query = PropFindMethod(uri, propSet, DavConstants.DEPTH_1)
@@ -47,6 +50,32 @@ class VersionsAPI (
             VersionsResult.Success(readData(response, fileId))
         } catch (e: Exception) {
             VersionsResult.Failed
+        }
+    }
+
+    fun restoreVersion(version: FileVersion): RestoreVersionsResult {
+        // Version restore is a move from the versions file path to the original one
+        val versionsPath = "${getDavPath()}versions/${ssoAccount.userId}"
+        val source = "$versionsPath/versions/${version.localId}/${Uri.encode(version.fileName)}"
+        val destination = "$versionsPath/restore/${version.localId}"
+        val request = NextcloudRequest.Builder()
+            .setMethod("MOVE")
+            .setUrl(source)
+            .setHeader(
+                mapOf(
+                    "Destination" to listOf(destination),
+                    "Overwrite" to listOf("T")  // T = True
+                )
+            )
+            .build()
+
+        try {
+            val response = nextcloudAPI.performNetworkRequestV2(request)
+            Log.i(TAG, response.toString())
+            return RestoreVersionsResult.Success
+        } catch (e: Exception) {
+            Log.e(TAG, "restoreVersion failed: ${e.message}")
+            return RestoreVersionsResult.Failed
         }
     }
 
@@ -80,5 +109,9 @@ class VersionsAPI (
 
     private fun getDavPath(): String {
         return davEndpoint
+    }
+
+    companion object {
+        val TAG = "VersionsAPI"
     }
 }

@@ -2,6 +2,7 @@ package it.niedermann.owncloud.notes.activities.repository
 
 import android.content.Context
 import com.nextcloud.android.sso.model.SingleSignOnAccount
+import com.owncloud.android.lib.resources.files.model.FileVersion
 import it.niedermann.owncloud.notes.persistence.ApiProvider
 import it.niedermann.owncloud.notes.persistence.sync.VersionsAPI
 
@@ -13,6 +14,10 @@ class VersionsRepository (
 
     fun fetchVersions(noteId: Long): VersionsResult {
         return api.fetchVersions(noteId)
+    }
+
+    fun restoreVersion(version: FileVersion): RestoreVersionsResult {
+        return api.restoreVersion(version)
     }
 
 }
