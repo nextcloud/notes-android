@@ -79,6 +79,7 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener {
     }
 
     override fun applyBrand(color: Int) {
+        adapter.applyBrand(color)
         val util = BrandingUtil.of(color, requireContext())
         util.platform.colorViewBackground(binding.getRoot())
         util.androidx.themeSwipeRefreshLayout(binding.swipeContainingList)
