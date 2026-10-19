@@ -52,11 +52,8 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener {
 
         initializeArguments()
         initializeList()
-        fetchActivities()
 
-        //DEBUG
-        fetchVersions()
-        //DEBUG
+        fetchData()
 
         return binding.root
     }
@@ -75,7 +72,7 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener {
             this
         )
         binding.list.adapter = adapter
-        binding.swipeContainingList.setOnRefreshListener { fetchActivities() }
+        binding.swipeContainingList.setOnRefreshListener { fetchData() }
     }
 
     override fun applyBrand(color: Int) {
@@ -83,6 +80,11 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener {
         val util = BrandingUtil.of(color, requireContext())
         util.platform.colorViewBackground(binding.getRoot())
         util.androidx.themeSwipeRefreshLayout(binding.swipeContainingList)
+    }
+
+    private fun fetchData() {
+        fetchActivities()
+        fetchVersions()
     }
 
     private fun fetchActivities(reqLastGiven: Long? = null) {
