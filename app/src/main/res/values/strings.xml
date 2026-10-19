@@ -555,6 +555,7 @@
     <string name="activity_icon">Activity</string>
     <string name="activities_no_results">No events like additions, changes and shares yet.</string>
     <string name="activities_error">An error occurred loading activities</string>
+    <string name="new_version_was_created">New version was created</string>
 
     <string name="placeholder_filename">Note.md</string>
     <string name="activities_favorite">Favorite</string>
