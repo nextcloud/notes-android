@@ -9,18 +9,23 @@ import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.nextcloud.android.common.ui.theme.utils.ColorRole
 import com.owncloud.android.lib.resources.files.model.FileVersion
 import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.activities.model.Activity
+import it.niedermann.owncloud.notes.branding.Branded
+import it.niedermann.owncloud.notes.branding.BrandedViewHolder
+import it.niedermann.owncloud.notes.branding.BrandingUtil
 import it.niedermann.owncloud.notes.databinding.ActivityListItemBinding
 
 class ActivityListAdapter (
     private val context: Context,
     private val listener: OnActivityClickListener
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Branded {
 
     private val items = arrayListOf<ActivityListItem>()
     private var lastActivity: Activity? = null
+    private var brandColor: Int? = null
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -35,11 +40,18 @@ class ActivityListAdapter (
         )
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        // Apply brand
+        val holder = (holder as ActivityViewHolder)
+        if (brandColor != null) {
+            holder.applyBrand(brandColor!!)
+        }
+
+        // Retrieve item and bind vh
         val item = items[position]
         if (lastActivity != null && item.activity == lastActivity) {
             listener.lastActivityReached()
         }
-        (holder as ActivityViewHolder).bind(item, listener)
+        holder.bind(item, listener)
     }
 
     override fun getItemCount(): Int = items.size
@@ -69,10 +81,16 @@ class ActivityListAdapter (
         notifyDataSetChanged()
     }
 
+    override fun applyBrand(color: Int) {
+        brandColor = color
+    }
+
     private class ActivityViewHolder(
         val binding: ActivityListItemBinding,
         //val brandingUtil: BrandingUtil
-    ) : RecyclerView.ViewHolder(binding.root) {
+    ) : BrandedViewHolder(binding.root) {
+
+        private var brandingUtil: BrandingUtil? = null
 
         fun bind(item: ActivityListItem, listener: OnActivityClickListener) {
             bindDateTime(item)
@@ -124,14 +142,16 @@ class ActivityListAdapter (
                 .error(R.drawable.ic_activity)
                 .into(binding.icon)
 
-            /*
             if (iconUrl.endsWith(COLORED_ICON_SUFFIX, ignoreCase = true)) {
                 binding.icon.imageTintList = null
             } else {
-                brandingUtil.platform.colorImageView(binding.icon, ColorRole.ON_SURFACE_VARIANT)
+                brandingUtil?.platform?.colorImageView(binding.icon, ColorRole.ON_SURFACE_VARIANT)
             }
-             */
 
+        }
+
+        override fun applyBrand(color: Int) {
+            brandingUtil = BrandingUtil.of(color, binding.root.context)
         }
 
         companion object {
