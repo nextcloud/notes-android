@@ -20,6 +20,7 @@ class ActivityListAdapter (
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val items = arrayListOf<ActivityListItem>()
+    private var lastActivity: Activity? = null
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -34,10 +35,11 @@ class ActivityListAdapter (
         )
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (position == itemCount - 1) {
-            listener.onEndOfListReached()
+        val item = items[position]
+        if (lastActivity != null && item.activity == lastActivity) {
+            listener.lastActivityReached()
         }
-        (holder as ActivityViewHolder).bind(items[position], listener)
+        (holder as ActivityViewHolder).bind(item, listener)
     }
 
     override fun getItemCount(): Int = items.size
@@ -48,6 +50,7 @@ class ActivityListAdapter (
             items.map { ActivityListItem(context, it) }
         )
         this.items.sort()
+        lastActivity = items.last()
         notifyDataSetChanged()
     }
 

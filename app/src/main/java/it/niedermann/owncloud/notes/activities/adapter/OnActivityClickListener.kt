@@ -6,5 +6,5 @@ import it.niedermann.owncloud.notes.activities.model.Activity
 interface OnActivityClickListener {
     fun onActivityItemClick(activity: Activity)
     fun onVersionItemClick(version: FileVersion)
-    fun onEndOfListReached()
+    fun lastActivityReached()
 }

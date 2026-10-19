@@ -172,7 +172,7 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener {
         TODO("Not yet implemented")
     }
 
-    override fun onEndOfListReached() {
+    override fun lastActivityReached() {
         if (adapter.itemCount < ActivitiesRepository.PAGE_SIZE)
             return
         fetchActivities(lastGiven)
