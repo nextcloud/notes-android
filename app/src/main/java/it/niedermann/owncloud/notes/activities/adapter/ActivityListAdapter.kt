@@ -97,6 +97,7 @@ class ActivityListAdapter (
             bindSubject(item)
             bindMessage(item)
             bindIcon(item)
+            bindActionIcon(item)
             binding.root.setOnClickListener {
                 when {
                     item.activity != null -> listener.onActivityItemClick(item.activity)
@@ -150,6 +151,12 @@ class ActivityListAdapter (
 
         }
 
+        private fun bindActionIcon(activity: ActivityListItem) {
+            binding.actionIcon.visibility =
+                if (activity.canBeRestored()) View.VISIBLE
+                else View.GONE
+        }
+
         override fun applyBrand(color: Int) {
             brandingUtil = BrandingUtil.of(color, binding.root.context)
         }
@@ -201,6 +208,8 @@ class ActivityListAdapter (
             }
 
         fun getIconUrl() : String? = activity?.icon
+
+        fun canBeRestored() : Boolean = fileVersion != null
 
         override fun compareTo(other: ActivityListItem): Int =
             getTimestamp().compareTo(other.getTimestamp())
