@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import com.nextcloud.android.sso.helper.SingleAccountHelper
+import com.owncloud.android.lib.resources.files.model.FileVersion
 import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.activities.adapter.ActivityListAdapter
 import it.niedermann.owncloud.notes.activities.adapter.OnActivityClickListener
@@ -130,6 +131,7 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener {
                 withContext(Dispatchers.Main) {
                     when (result) {
                         is VersionsResult.Success -> {
+                            showVersions(result.versions)
                             result.versions.forEach {
                                 Log.d("DEBUG", "Version: ${it.remoteId} ${it.fileName} ${it.modifiedTimestamp}")
                             }
@@ -144,10 +146,15 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener {
         })
     }
 
-    private fun showActivities(activities: List<Activity>, isFirstPage: Boolean) {
+    private fun showActivities(items: List<Activity>, isFirstPage: Boolean) {
         binding.emptyList.visibility = View.GONE
         if (isFirstPage) adapter.clear()
-        adapter.addItems(activities)
+        adapter.addActivities(items)
+    }
+
+    private fun showVersions(items: List<FileVersion>) {
+        binding.emptyList.visibility = View.GONE
+        adapter.addVersions(items)
     }
 
     private fun showEmptyContent(message: String) =
@@ -156,7 +163,12 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener {
             text = message
         }
 
-    override fun onItemClick(activity: Activity) {
+    override fun onActivityItemClick(activity: Activity) {
+        // No action
+    }
+
+    override fun onVersionItemClick(version: FileVersion) {
+        // Restore the version
         TODO("Not yet implemented")
     }
 
