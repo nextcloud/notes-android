@@ -11,6 +11,7 @@ import android.util.Log
 import com.nextcloud.android.sso.aidl.NextcloudRequest
 import com.nextcloud.android.sso.api.NextcloudAPI
 import com.nextcloud.android.sso.api.Response
+import com.nextcloud.android.sso.exceptions.NextcloudUnsupportedMethodException
 import com.nextcloud.android.sso.model.SingleSignOnAccount
 import com.owncloud.android.lib.common.network.WebdavEntry
 import com.owncloud.android.lib.common.network.WebdavUtils
@@ -61,18 +62,17 @@ class VersionsAPI (
         val request = NextcloudRequest.Builder()
             .setMethod("MOVE")
             .setUrl(source)
-            .setHeader(
-                mapOf(
-                    "Destination" to listOf(destination),
-                    "Overwrite" to listOf("T")  // T = True
-                )
-            )
+            .setAdditionalParameter(NextcloudRequest.ADDITIONAL_PARAMETER_MOVE_DESTINATION, destination)
+            .setAdditionalParameter(NextcloudRequest.ADDITIONAL_PARAMETER_MOVE_OVERWRITE, true.toString())
             .build()
 
         try {
             val response = nextcloudAPI.performNetworkRequestV2(request)
             Log.i(TAG, response.toString())
             return RestoreVersionsResult.Success
+        } catch (e: NextcloudUnsupportedMethodException) {
+            Log.e(TAG, "restoreVersion used an unsupported method: ${e.message}")
+            return RestoreVersionsResult.FailedUnsupported
         } catch (e: Exception) {
             Log.e(TAG, "restoreVersion failed: ${e.message}")
             return RestoreVersionsResult.Failed
