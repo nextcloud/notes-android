@@ -557,6 +557,7 @@
     <string name="activities_error">An error occurred loading activities</string>
     <string name="new_version_was_created">New version was created</string>
     <string name="version_restored">Version restored</string>
+    <string name="version_restore_failed_unsupported">Version restore not supported: please upgrade Nextcloud Files app</string>
     <string name="version_restore_failed">Could not restore version</string>
 
     <string name="placeholder_filename">Note.md</string>
