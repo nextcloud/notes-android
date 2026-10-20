@@ -50,6 +50,7 @@ class VersionsAPI (
             val response = nextcloudAPI.performNetworkRequestV2(request)
             VersionsResult.Success(readData(response, fileId))
         } catch (e: Exception) {
+            Log.e(TAG, "Unable to fetch versions: $e")
             VersionsResult.Failed
         }
     }

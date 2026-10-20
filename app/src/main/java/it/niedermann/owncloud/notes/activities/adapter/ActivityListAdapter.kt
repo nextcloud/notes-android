@@ -23,7 +23,7 @@ class ActivityListAdapter (
     private val listener: OnActivityClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Branded {
 
-    private val items = arrayListOf<ActivityListItem>()
+    val items = arrayListOf<ActivityListItem>()
     private var lastActivity: Activity? = null
     private var brandColor: Int? = null
 
@@ -55,31 +55,6 @@ class ActivityListAdapter (
     }
 
     override fun getItemCount(): Int = items.size
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun addActivities(items: List<Activity>) {
-        this.items.addAll(
-            items.map { ActivityListItem(context, it) }
-        )
-        this.items.sort()
-        lastActivity = items.last()
-        notifyDataSetChanged()
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun addVersions(items: List<FileVersion>) {
-        this.items.addAll(
-            items.map { ActivityListItem(context, it) }
-        )
-        this.items.sort()
-        notifyDataSetChanged()
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun clear() {
-        this.items.clear()
-        notifyDataSetChanged()
-    }
 
     override fun applyBrand(color: Int) {
         brandColor = color
@@ -168,50 +143,4 @@ class ActivityListAdapter (
 
     }
 
-
-    class ActivityListItem : Comparable<ActivityListItem> {
-        val context: Context
-        val activity: Activity?
-        val fileVersion: FileVersion?
-
-        constructor(context: Context, activity: Activity) {
-            this.context = context
-            this.activity = activity
-            this.fileVersion = null
-        }
-
-        constructor(context: Context, fileVersion: FileVersion) {
-            this.context = context
-            this.activity = null
-            this.fileVersion = fileVersion
-        }
-
-        fun getTimestamp() : Long =
-            when {
-                activity != null -> activity.datetime.time
-                fileVersion != null -> fileVersion.modifiedTimestamp
-                else -> 0
-            }
-
-        fun getTitle() : String? =
-            when {
-                activity != null -> activity.subject
-                fileVersion != null -> context.getString(R.string.new_version_was_created)
-                else -> null
-            }
-
-        fun getMessage() : String? =
-            when {
-                activity != null -> activity.message
-                fileVersion != null -> "${fileVersion.fileLength} B"
-                else -> null
-            }
-
-        fun getIconUrl() : String? = activity?.icon
-
-        fun canBeRestored() : Boolean = fileVersion != null
-
-        override fun compareTo(other: ActivityListItem): Int =
-            getTimestamp().compareTo(other.getTimestamp())
-    }
 }

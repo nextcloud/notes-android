@@ -15,15 +15,11 @@ class ActivitiesRepository(
     fun fetchActivities(noteId: Long, since: Long? = null): ActivitiesResult {
         val response = api.fetchActivities(noteId, since, PAGE_SIZE).execute()
 
-        if (response.isSuccessful) {
+        if (response.isSuccessful || response.code() == HttpURLConnection.HTTP_NOT_MODIFIED) {
             return ActivitiesResult.Success(
                 response.body()?.ocs?.data ?: listOf(),
                 response.headers()[HEADER_LAST_GIVEN]?.toLongOrNull()
             )
-        }
-
-        if (response.code() == HttpURLConnection.HTTP_NOT_MODIFIED) {
-            return ActivitiesResult.FailedNotModified()
         }
 
         return ActivitiesResult.Failed()

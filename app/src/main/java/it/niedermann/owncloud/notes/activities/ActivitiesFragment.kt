@@ -1,7 +1,7 @@
 package it.niedermann.owncloud.notes.activities
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,10 +14,8 @@ import it.niedermann.owncloud.notes.activities.adapter.ActivityListAdapter
 import it.niedermann.owncloud.notes.activities.adapter.OnActivityClickListener
 import it.niedermann.owncloud.notes.activities.model.Activity
 import it.niedermann.owncloud.notes.activities.repository.ActivitiesRepository
-import it.niedermann.owncloud.notes.activities.repository.ActivitiesResult
 import it.niedermann.owncloud.notes.activities.repository.RestoreVersionsResult
 import it.niedermann.owncloud.notes.activities.repository.VersionsRepository
-import it.niedermann.owncloud.notes.activities.repository.VersionsResult
 import it.niedermann.owncloud.notes.branding.BrandedFragment
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar
 import it.niedermann.owncloud.notes.branding.BrandingUtil
@@ -28,8 +26,6 @@ import it.niedermann.owncloud.notes.shared.util.extensions.getSerializableArgume
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.concurrent.Executors
-import java.util.concurrent.ScheduledExecutorService
 
 /*
  * Nextcloud Notes - Android Client
@@ -38,25 +34,20 @@ import java.util.concurrent.ScheduledExecutorService
  * SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
-class ActivitiesFragment : BrandedFragment(), OnActivityClickListener {
+class ActivitiesFragment : BrandedFragment(), OnActivityClickListener, ActivitiesDataProvider.OnPageFetchedListener {
 
     lateinit var binding : FragmentActivitiesBinding
     private lateinit var note: Note
     private lateinit var account: Account
     private lateinit var adapter: ActivityListAdapter
-    private var lastGiven: Long? = null
 
-    private var executorService: ScheduledExecutorService? = null
-
+    private lateinit var activityDataProvider: ActivitiesDataProvider
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        executorService = Executors.newSingleThreadScheduledExecutor()
         binding = FragmentActivitiesBinding.inflate(inflater, container, false)
 
         initializeArguments()
         initializeList()
-
-        fetchData()
 
         return binding.root
     }
@@ -70,12 +61,24 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener {
     }
 
     private fun initializeList() {
+        activityDataProvider = ActivitiesDataProvider(
+            requireContext(),
+            lifecycleScope,
+            note.id,
+            this
+        )
         adapter = ActivityListAdapter(
             requireContext(),
             this
         )
         binding.list.adapter = adapter
-        binding.swipeContainingList.setOnRefreshListener { fetchData() }
+        binding.swipeContainingList.setOnRefreshListener {
+            // Reload list
+            activityDataProvider.reset()
+            activityDataProvider.fetchNextPage()
+        }
+
+        activityDataProvider.fetchNextPage()
     }
 
     override fun applyBrand(color: Int) {
@@ -84,90 +87,6 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener {
         util.platform.colorViewBackground(binding.getRoot())
         util.androidx.themeSwipeRefreshLayout(binding.swipeContainingList)
     }
-
-    private fun fetchData() {
-        fetchActivities()
-        fetchVersions()
-    }
-
-    private fun fetchActivities(reqLastGiven: Long? = null) {
-        val noteId = note.remoteId ?: return
-
-        binding.swipeContainingList.isRefreshing = true
-
-        executorService!!.submit(Runnable submit@{
-            val ssoAccount =
-                SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext())
-            val repository = ActivitiesRepository(requireContext(), ssoAccount)
-            lifecycleScope.launch(Dispatchers.IO) {
-                val result = repository.fetchActivities(noteId, reqLastGiven)
-                withContext(Dispatchers.Main) {
-                    when (result) {
-                        is ActivitiesResult.Success -> {
-                            val isFirstPage = reqLastGiven == null || lastGiven == null
-                            lastGiven = result.lastGiven
-                            showActivities(result.activities, isFirstPage)
-                        }
-
-                        is ActivitiesResult.FailedNotModified -> {
-                            Log.i(TAG, "Reached end of list (last page starting from item $lastGiven")
-                        }
-
-                        is ActivitiesResult.Failed -> {
-                            adapter.clear()
-                            showEmptyContent(getString(R.string.activities_error))
-                        }
-                    }
-
-                    binding.swipeContainingList.isRefreshing = false
-                }
-            }
-
-        })
-    }
-
-    private fun fetchVersions() {
-        val noteId = note.remoteId ?: return
-        executorService!!.submit(Runnable submit@{
-            val ssoAccount =
-                SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext())
-            val repository = VersionsRepository(requireContext(), ssoAccount)
-            lifecycleScope.launch(Dispatchers.IO) {
-                val result = repository.fetchVersions(noteId)
-                withContext(Dispatchers.Main) {
-                    when (result) {
-                        is VersionsResult.Success -> {
-                            showVersions(result.versions)
-                            result.versions.forEach {
-                                Log.d("DEBUG", "Version: ${it.remoteId} ${it.fileName} ${it.modifiedTimestamp}")
-                            }
-                        }
-
-                        is VersionsResult.Failed -> {
-                            Log.e("DEBUG", "Versions failed")
-                        }
-                    }
-                }
-            }
-        })
-    }
-
-    private fun showActivities(items: List<Activity>, isFirstPage: Boolean) {
-        binding.emptyList.visibility = View.GONE
-        if (isFirstPage) adapter.clear()
-        adapter.addActivities(items)
-    }
-
-    private fun showVersions(items: List<FileVersion>) {
-        binding.emptyList.visibility = View.GONE
-        adapter.addVersions(items)
-    }
-
-    private fun showEmptyContent(message: String) =
-        with (binding.emptyList) {
-            visibility = View.VISIBLE
-            text = message
-        }
 
     override fun onActivityItemClick(activity: Activity) {
         // No action
@@ -190,7 +109,10 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener {
                 BrandedSnackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
 
                 // Reload list
-                if (result == RestoreVersionsResult.Success) fetchData()
+                if (result == RestoreVersionsResult.Success) {
+                    activityDataProvider.reset()
+                    activityDataProvider.fetchNextPage()
+                }
             }
         }
     }
@@ -198,7 +120,24 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener {
     override fun lastActivityReached() {
         if (adapter.itemCount < ActivitiesRepository.PAGE_SIZE)
             return
-        fetchActivities(lastGiven)
+        activityDataProvider.fetchNextPage()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    override fun onPageFetched() {
+        binding.swipeContainingList.isRefreshing = false
+        binding.emptyList.visibility = View.GONE
+        adapter.items.clear()
+        adapter.items.addAll(
+            activityDataProvider.data.getAggregatedList(requireContext())
+        )
+        adapter.notifyDataSetChanged()
+    }
+
+    override fun onPageFetchError() {
+        binding.swipeContainingList.isRefreshing = false
+        if (adapter.items.isEmpty()) binding.emptyList.visibility = View.VISIBLE
+        BrandedSnackbar.make(binding.root, R.string.activities_error, Snackbar.LENGTH_SHORT).show()
     }
 
     companion object {
