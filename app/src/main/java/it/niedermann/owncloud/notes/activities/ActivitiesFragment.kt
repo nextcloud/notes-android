@@ -2,6 +2,7 @@ package it.niedermann.owncloud.notes.activities
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,10 +62,16 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener, Activitie
     }
 
     private fun initializeList() {
+        val id = note.remoteId
+        if (id == null) {
+            Log.e(TAG, "Unable to load list: note has no remoteId")
+            return
+        }
+
         activityDataProvider = ActivitiesDataProvider(
             requireContext(),
             lifecycleScope,
-            note.id,
+            id,
             this
         )
         adapter = ActivityListAdapter(
