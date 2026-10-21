@@ -203,7 +203,7 @@
     <string name="error_sync_maintenance">The server is in maintenance mode. Your changes will sync later.</string>
     <string name="error_sync_insufficient_storage">Your Nextcloud storage is full. Free up space to sync your changes.</string>
     <string name="error_sync_server_unreachable">Could not reach your server. Check your connection and the Nextcloud Files app.</string>
-    <string name="error_sync_token_mismatch">Notes lost access to your Files app account. Remove and add the account again.</string>
+    <string name="error_sync_token_mismatch">Notes lost access to your Nextcloud account. Grant access again to keep syncing.</string>
     <string name="error_no_network">No network connection</string>
     <string name="error_maintenance_mode">Server is in maintenance mode</string>
     <string name="error_unknown">An unknown error has occurred.</string>
@@ -326,7 +326,7 @@
     <!-- Like a gift -->
     <string name="category_presents">Presents</string>
 
-    <string name="account_already_imported">Account has already been imported</string>
+    <string name="account_access_renewed">Access to your account was renewed.</string>
     <string name="no_notes_yet">No notes yet</string>
     <string name="no_notes_yet_description">Press + button to create a new note</string>
     <string name="simple_more">More</string>
@@ -475,6 +475,7 @@
     <string name="error_action_open_deck_info">Open App info</string>
     <string name="error_action_open_network">Network settings</string>
     <string name="error_action_update_files_app">Update</string>
+    <string name="error_action_grant_access">Grant access</string>
     <string name="no_account_configured_yet">No account configured yet</string>
     <string name="no_other_accounts">You don\'t have configured any other accounts yet.</string>
     <string name="choose_account">Choose account</string>
