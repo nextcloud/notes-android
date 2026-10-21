@@ -19,12 +19,11 @@ import it.niedermann.owncloud.notes.branding.BrandingUtil
 import it.niedermann.owncloud.notes.databinding.ActivityListItemBinding
 
 class ActivityListAdapter (
-    private val context: Context,
     private val listener: OnActivityClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Branded {
 
     val items = arrayListOf<ActivityListItem>()
-    private var lastActivity: Activity? = null
+    var lastActivity: Activity? = null
     private var brandColor: Int? = null
 
     override fun onCreateViewHolder(
