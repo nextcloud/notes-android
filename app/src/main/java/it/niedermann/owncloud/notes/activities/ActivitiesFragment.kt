@@ -40,7 +40,7 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener, Activitie
     lateinit var binding : FragmentActivitiesBinding
     private lateinit var note: Note
     private lateinit var account: Account
-    private lateinit var adapter: ActivityListAdapter
+    private val adapter: ActivityListAdapter = ActivityListAdapter(this)
 
     private lateinit var activityDataProvider: ActivitiesDataProvider
 
@@ -72,9 +72,6 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener, Activitie
             requireContext(),
             lifecycleScope,
             id,
-            this
-        )
-        adapter = ActivityListAdapter(
             this
         )
         binding.list.adapter = adapter
