@@ -250,6 +250,7 @@ public class NotesRepository {
                     return importTask.importNotes(new IResponseCallback<>() {
                         @Override
                         public void onSuccess(Void result) {
+                            syncActive.put(account.getId(), false);
                             callback.onSuccess(account);
                         }
 

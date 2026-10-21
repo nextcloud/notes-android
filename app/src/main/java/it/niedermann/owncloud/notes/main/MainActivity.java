@@ -2,6 +2,7 @@
  * Nextcloud Notes - Android Client
  *
  * SPDX-FileCopyrightText: 2015-2024 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-FileCopyrightText: 2026 Alper Ozturk <alper.ozturk@nextcloud.com>
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 package it.niedermann.owncloud.notes.main;
@@ -215,7 +216,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         mainViewModel.getSyncStatus().observe(this, syncStatus -> swipeRefreshLayout.setRefreshing(syncStatus));
         mainViewModel.getSyncErrors().observe(this, exceptions -> {
             if (mainViewModel.containsNonInfrastructureRelatedItems(exceptions)) {
-                BrandedSnackbar.make(coordinatorLayout, R.string.error_synchronization, Snackbar.LENGTH_LONG)
+                BrandedSnackbar.make(coordinatorLayout, SyncErrorMessage.of(exceptions), Snackbar.LENGTH_LONG)
                         .setAnchorView(binding.activityNotesListView.fabCreate)
                         .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(exceptions)
                                 .show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()))
@@ -324,7 +325,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                     .setAnchorView(binding.activityNotesListView.fabCreate)
                                     .show();
                         } else {
-                            BrandedSnackbar.make(coordinatorLayout, R.string.error_synchronization, Snackbar.LENGTH_LONG)
+                            BrandedSnackbar.make(coordinatorLayout, SyncErrorMessage.of(t), Snackbar.LENGTH_LONG)
                                     .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(t)
                                             .show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()))
                                     .setAnchorView(binding.activityNotesListView.fabCreate)
@@ -608,7 +609,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                         .setAnchorView(binding.activityNotesListView.fabCreate)
                                         .show();
                             } else {
-                                BrandedSnackbar.make(coordinatorLayout, R.string.error_synchronization, Snackbar.LENGTH_LONG)
+                                BrandedSnackbar.make(coordinatorLayout, SyncErrorMessage.of(t), Snackbar.LENGTH_LONG)
                                         .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(t)
                                                 .show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()))
                                         .setAnchorView(binding.activityNotesListView.fabCreate)

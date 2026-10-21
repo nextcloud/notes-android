@@ -2,6 +2,7 @@
  * Nextcloud Notes - Android Client
  *
  * SPDX-FileCopyrightText: 2021-2024 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-FileCopyrightText: 2026 Alper Ozturk <alper.ozturk@nextcloud.com>
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 package it.niedermann.owncloud.notes.persistence;
@@ -27,21 +28,17 @@ import com.nextcloud.android.sso.model.SingleSignOnAccount;
 import com.owncloud.android.lib.common.utils.Log_OC;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-import it.niedermann.owncloud.notes.BuildConfig;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.sync.NotesAPI;
-import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.model.SyncResultStatus;
 import it.niedermann.owncloud.notes.shared.util.ApiVersionUtil;
+import retrofit2.Response;
 
 
 /**
@@ -51,10 +48,6 @@ import it.niedermann.owncloud.notes.shared.util.ApiVersionUtil;
 abstract class NotesServerSyncTask extends Thread {
 
     private static final String TAG = NotesServerSyncTask.class.getSimpleName();
-
-    private static final String HEADER_KEY_X_NOTES_API_VERSIONS = "X-Notes-API-Versions";
-    private static final String HEADER_KEY_ETAG = "ETag";
-    private static final String HEADER_KEY_LAST_MODIFIED = "Last-Modified";
 
     private NotesAPI notesAPI;
     @NonNull
@@ -93,7 +86,8 @@ abstract class NotesServerSyncTask extends Thread {
 
         notesAPI = apiProvider.getNotesAPI(context, ssoAccount, ApiVersionUtil.getPreferredApiVersion(localAccount.getApiVersion()));
 
-        Log.i(TAG, "STARTING SYNCHRONIZATION");
+        final String accountName = localAccount.getAccountName();
+        Log.i(TAG, "Sync started for " + accountName + (onlyLocalChanges ? " (push only)" : " (push and pull)"));
 
         final var status = new SyncResultStatus();
         status.pushSuccessful = pushLocalChanges();
@@ -101,7 +95,9 @@ abstract class NotesServerSyncTask extends Thread {
             status.pullSuccessful = pullRemoteChanges();
         }
 
-        Log.i(TAG, "SYNCHRONIZATION FINISHED");
+        Log.i(TAG, "Sync finished for " + accountName + ": push " + (status.pushSuccessful ? "OK" : "FAILED")
+                + ", pull " + (onlyLocalChanges ? "skipped" : status.pullSuccessful ? "OK" : "FAILED")
+                + ", errors " + exceptions.size());
 
         onPostExecute(status);
     }
@@ -114,107 +110,124 @@ abstract class NotesServerSyncTask extends Thread {
      * Push local changes: for each locally created/edited/deleted Note, use NotesClient in order to push the changed to the server.
      */
     private boolean pushLocalChanges() {
-        Log.d(TAG, "pushLocalChanges()");
+        final var localChanges = repo.getLocalModifiedNotes(localAccount.getId());
+        Log.d(TAG, "Push: " + localChanges.size() + " local change(s)");
 
         boolean success = true;
-        final var notes = repo.getLocalModifiedNotes(localAccount.getId());
-        for (Note note : notes) {
-            Log.d(TAG, "   Process Local Note: " + (BuildConfig.DEBUG ? note : note.getTitle()));
-            try {
-                Note remoteNote;
-                switch (note.getStatus()) {
-                    case LOCAL_EDITED -> {
-                        Log.v(TAG, "   ...create/edit");
-                        if (note.getRemoteId() != null) {
-                            Log.v(TAG, "   ...Note has remoteId → try to edit");
-                            final var editResponse = notesAPI.editNote(note).execute();
-                            if (editResponse.isSuccessful()) {
-                                remoteNote = editResponse.body();
-                                if (remoteNote == null) {
-                                    Log.e(TAG, "   ...Tried to edit \"" + note.getTitle() + "\" (#" + note.getId() + ") but the server response was null.");
-                                    throw new Exception("Server returned null after editing \"" + note.getTitle() + "\" (#" + note.getId() + ")");
-                                }
-                            } else if (editResponse.code() == HTTP_NOT_FOUND) {
-                                Log.v(TAG, "   ...Note does no longer exist on server → recreate");
-                                final var createResponse = notesAPI.createNote(note).execute();
-                                if (createResponse.isSuccessful()) {
-                                    remoteNote = createResponse.body();
-                                    if (remoteNote == null) {
-                                        Log.e(TAG, "   ...Tried to recreate \"" + note.getTitle() + "\" (#" + note.getId() + ") but the server response was null.");
-                                        throw new Exception("Server returned null after recreating \"" + note.getTitle() + "\" (#" + note.getId() + ")");
-                                    }
-                                } else {
-                                    throw new Exception(createResponse.message());
-                                }
-                            } else {
-                                throw new Exception(editResponse.message());
-                            }
-                        } else {
-                            Log.v(TAG, "   ...Note does not have a remoteId yet → create");
-                            final var createResponse = notesAPI.createNote(note).execute();
-                            if (createResponse.isSuccessful()) {
-                                remoteNote = createResponse.body();
-                                if (remoteNote == null) {
-                                    Log.e(TAG, "   ...Tried to create \"" + note.getTitle() + "\" (#" + note.getId() + ") but the server response was null.");
-                                    throw new Exception("Server returned null after creating \"" + note.getTitle() + "\" (#" + note.getId() + ")");
-                                }
-                                repo.updateRemoteId(note.getId(), remoteNote.getRemoteId());
-                            } else {
-                                throw new Exception(createResponse.message());
-                            }
-                        }
-                        // Please note, that db.updateNote() realized an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
-                        repo.updateIfNotModifiedLocallyDuringSync(note.getId(), remoteNote.getModified().getTimeInMillis(), remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getETag(), remoteNote.getContent(), generateNoteExcerpt(remoteNote.getContent(), remoteNote.getTitle()), note.getContent(), note.getCategory(), note.getFavorite());
-                    }
-                    case LOCAL_DELETED -> {
-                        if (note.getRemoteId() == null) {
-                            Log.v(TAG, "   ...delete (only local, since it has never been synchronized)");
-                        } else {
-                            Log.v(TAG, "   ...delete (from server and local)");
-                            final var deleteResponse = notesAPI.deleteNote(note.getRemoteId()).execute();
-                            if (!deleteResponse.isSuccessful()) {
-                                if (deleteResponse.code() == HTTP_NOT_FOUND) {
-                                    Log.v(TAG, "   ...delete (note has already been deleted remotely)");
-                                } else {
-                                    throw new Exception(deleteResponse.message());
-                                }
-                            }
-                        }
-                        // Please note, that db.deleteNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
-                        repo.deleteByNoteId(note.getId(), LOCAL_DELETED);
-                    }
-                    default ->
-                            throw new IllegalStateException("Unknown State of Note " + note + ": " + note.getStatus());
-                }
-            } catch (NextcloudHttpRequestFailedException e) {
-                if (e.getStatusCode() == HTTP_NOT_MODIFIED) {
-                    Log.d(TAG, "Server returned HTTP Status Code 304 - Not Modified");
-                } else {
-                    exceptions.add(e);
-                    success = false;
-                }
-            } catch (Exception e) {
-                if (e instanceof TokenMismatchException) {
-                    apiProvider.invalidateAPICache(ssoAccount);
-                }
-                exceptions.add(e);
-                success = false;
-            }
+        for (final var note : localChanges) {
+            success &= pushLocalChange(note);
         }
         return success;
+    }
+
+    private boolean pushLocalChange(@NonNull Note note) {
+        final String step = "Push " + describe(note);
+        Log.d(TAG, step + ": " + note.getStatus());
+        try {
+            switch (note.getStatus()) {
+                case LOCAL_EDITED -> pushEditedNote(note);
+                case LOCAL_DELETED -> pushDeletedNote(note);
+                default ->
+                        throw new IllegalStateException("Unknown State of Note " + note + ": " + note.getStatus());
+            }
+            return true;
+        } catch (NextcloudHttpRequestFailedException e) {
+            if (e.getStatusCode() == HTTP_NOT_MODIFIED) {
+                Log.d(TAG, "  → not modified on server (304)");
+                return true;
+            }
+            return recordFailure(step, e);
+        } catch (Exception e) {
+            if (e instanceof TokenMismatchException) {
+                apiProvider.invalidateAPICache(ssoAccount);
+            }
+            return recordFailure(step, e);
+        }
+    }
+
+    private void pushEditedNote(@NonNull Note note) throws Exception {
+        final Note remoteNote = note.getRemoteId() == null ? createRemoteNote(note) : editRemoteNote(note);
+        // Please note, that db.updateNote() realized an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
+        repo.updateIfNotModifiedLocallyDuringSync(note.getId(), remoteNote.getModified().getTimeInMillis(), remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getETag(), remoteNote.getContent(), generateNoteExcerpt(remoteNote.getContent(), remoteNote.getTitle()), note.getContent(), note.getCategory(), note.getFavorite());
+    }
+
+    @NonNull
+    private Note editRemoteNote(@NonNull Note note) throws Exception {
+        Log.d(TAG, "  → editing remote note " + note.getRemoteId());
+        final var editResponse = notesAPI.editNote(note).execute();
+        if (editResponse.isSuccessful()) {
+            return requireRemoteNote(note, editResponse, "editing");
+        }
+        if (editResponse.code() != HTTP_NOT_FOUND) {
+            throw new NoteSyncException(note.getTitle(), editResponse);
+        }
+        Log.d(TAG, "  → remote note " + note.getRemoteId() + " no longer exists, recreating it");
+        return postNote(note, "recreating");
+    }
+
+    @NonNull
+    private Note createRemoteNote(@NonNull Note note) throws Exception {
+        Log.d(TAG, "  → not on server yet, creating it");
+        return postNote(note, "creating");
+    }
+
+    @NonNull
+    private Note postNote(@NonNull Note note, @NonNull String action) throws Exception {
+        final var createResponse = notesAPI.createNote(note).execute();
+        if (!createResponse.isSuccessful()) {
+            throw new NoteSyncException(note.getTitle(), createResponse);
+        }
+        final var remoteNote = requireRemoteNote(note, createResponse, action);
+        repo.updateRemoteId(note.getId(), remoteNote.getRemoteId());
+        Log.d(TAG, "  → created remote note " + remoteNote.getRemoteId());
+        return remoteNote;
+    }
+
+    @NonNull
+    private Note requireRemoteNote(@NonNull Note note, @NonNull Response<Note> response, @NonNull String action) throws Exception {
+        final var remoteNote = response.body();
+        if (remoteNote == null) {
+            throw new Exception("Server returned null after " + action + " \"" + note.getTitle() + "\" (#"
+                    + note.getId() + ")");
+        }
+        return remoteNote;
+    }
+
+    private void pushDeletedNote(@NonNull Note note) throws Exception {
+        deleteRemoteNote(note);
+        // Please note, that db.deleteNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
+        repo.deleteByNoteId(note.getId(), LOCAL_DELETED);
+    }
+
+    private void deleteRemoteNote(@NonNull Note note) throws Exception {
+        final Long remoteId = note.getRemoteId();
+        if (remoteId == null) {
+            Log.d(TAG, "  → never synced, deleting it only locally");
+            return;
+        }
+
+        Log.d(TAG, "  → deleting remote note " + remoteId);
+        final var deleteResponse = notesAPI.deleteNote(remoteId).execute();
+        if (deleteResponse.isSuccessful()) {
+            return;
+        }
+        if (deleteResponse.code() != HTTP_NOT_FOUND) {
+            throw new NoteSyncException(note.getTitle(), deleteResponse);
+        }
+        Log.d(TAG, "  → remote note " + remoteId + " was already deleted on server");
     }
 
     /**
      * Pull remote Changes: update or create each remote note (if local pendant has no changes) and remove remotely deleted notes.
      */
     private boolean pullRemoteChanges() {
-        Log.d(TAG, "pullRemoteChanges() for account " + localAccount.getAccountName());
         try {
             final var idMap = repo.getIdMap(localAccount.getId());
 
             // FIXME re-reading the localAccount is only a workaround for a not-up-to-date eTag in localAccount.
             final var accountFromDatabase = repo.getAccountById(localAccount.getId());
             if (accountFromDatabase == null) {
+                Log.w(TAG, "Pull skipped: account no longer exists");
                 callbacks.remove(localAccount.getId());
                 return true;
             }
@@ -222,84 +235,64 @@ abstract class NotesServerSyncTask extends Thread {
             localAccount.setETag(accountFromDatabase.getETag());
             final var modified = localAccount.getModified();
             if (modified == null) {
-                Log_OC.e(TAG, "modified is null cannot fetch notes");
+                Log_OC.e(TAG, "Pull failed: last modified date of the account is unknown");
                 return false;
             }
 
+            Log.d(TAG, "Pull: fetching changes since " + modified.getTime() + " (ETag " + localAccount.getETag() + ")");
             final var fetchResponse = notesAPI.getNotes(modified, localAccount.getETag()).blockingSingle();
-            final var remoteNotes = fetchResponse.getResponse();
-            final var remoteIDs = new HashSet<Long>();
-            // pull remote changes: update or create each remote note
-            for (final var remoteNote : remoteNotes) {
-                Log.v(TAG, "   Process Remote Note: " + (BuildConfig.DEBUG ? remoteNote : remoteNote.getTitle()));
-                remoteIDs.add(remoteNote.getRemoteId());
-                if (remoteNote.getModified() == null) {
-                    Log.v(TAG, "   ... unchanged");
-                } else if (idMap.containsKey(remoteNote.getRemoteId())) {
-                    Log.v(TAG, "   ... found → Update");
-                    final Long localId = idMap.get(remoteNote.getRemoteId());
-                    if (localId != null) {
-                        repo.updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
-                                localId, remoteNote.getModified().getTimeInMillis(), remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getCategory(), remoteNote.getETag(), remoteNote.getContent(), generateNoteExcerpt(remoteNote.getContent(), remoteNote.getTitle()));
-                    } else {
-                        Log.e(TAG, "Tried to update note from server, but local id of note is null. " + (BuildConfig.DEBUG ? remoteNote : remoteNote.getTitle()));
-                    }
-                } else {
-                    Log.v(TAG, "   ... create");
-                    repo.addNote(localAccount.getId(), remoteNote);
-                }
-            }
-            Log.d(TAG, "   Remove remotely deleted Notes (only those without local changes)");
-            // remove remotely deleted notes (only those without local changes)
-            for (final var entry : idMap.entrySet()) {
-                if (!remoteIDs.contains(entry.getKey())) {
-                    Log.v(TAG, "   ... remove " + entry.getValue());
-                    repo.deleteByNoteId(entry.getValue(), DBStatus.VOID);
-                }
-            }
-
-            // update ETag and Last-Modified in order to reduce size of next response
-            localAccount.setETag(fetchResponse.getHeaders().get(HEADER_KEY_ETAG));
-
-            final var lastModified = Calendar.getInstance();
-            lastModified.setTimeInMillis(0);
-            final String lastModifiedHeader = fetchResponse.getHeaders().get(HEADER_KEY_LAST_MODIFIED);
-            if (lastModifiedHeader != null)
-                lastModified.setTimeInMillis(Date.parse(lastModifiedHeader));
-            Log.d(TAG, "ETag: " + fetchResponse.getHeaders().get(HEADER_KEY_ETAG) + "; Last-Modified: " + lastModified + " (" + lastModified + ")");
-
-            localAccount.setModified(lastModified);
-
-            repo.updateETag(localAccount.getId(), localAccount.getETag());
-            repo.updateModified(localAccount.getId(), localAccount.getModified().getTimeInMillis());
-
-            final String newApiVersion = ApiVersionUtil.sanitize(fetchResponse.getHeaders().get(HEADER_KEY_X_NOTES_API_VERSIONS));
-            localAccount.setApiVersion(newApiVersion);
-            repo.updateApiVersion(localAccount.getId(), newApiVersion);
-            Log.d(TAG, "ApiVersion: " + newApiVersion);
+            new RemoteNotesMerger(repo, localAccount).merge(fetchResponse, idMap);
             return true;
         } catch (Throwable t) {
-            final Throwable cause = t.getCause();
-            if (t.getClass() == RuntimeException.class && cause != null) {
-                if (cause.getClass() == NextcloudHttpRequestFailedException.class || cause instanceof NextcloudHttpRequestFailedException) {
-                    final NextcloudHttpRequestFailedException httpException = (NextcloudHttpRequestFailedException) cause;
-                    if (httpException.getStatusCode() == HTTP_NOT_MODIFIED) {
-                        Log.d(TAG, "Server returned HTTP Status Code " + httpException.getStatusCode() + " - Notes not modified.");
-                        return true;
-                    } else if (httpException.getStatusCode() == HTTP_UNAVAILABLE) {
-                        Log.d(TAG, "Server returned HTTP Status Code " + httpException.getStatusCode() + " - Server is in maintenance mode.");
-                        return true;
-                    }
-                } else if (cause.getClass() == NextcloudApiNotRespondingException.class || cause instanceof NextcloudApiNotRespondingException) {
-                    apiProvider.invalidateAPICache(ssoAccount);
-                } else if (cause.getClass() == NextcloudNetworkException.class) {
-                    Log.w(TAG, "Network connectivity issue during sync");
-                    return true;
-                }
-            }
-
-            exceptions.add(t);
-            return false;
+            return handlePullFailure(t);
         }
+    }
+
+    private boolean handlePullFailure(@NonNull Throwable t) {
+        final Throwable cause = t.getCause();
+        if (t.getClass() != RuntimeException.class || cause == null) {
+            return recordFailure("Pull", t);
+        }
+        if (isIgnoredPullFailure(cause)) {
+            return true;
+        }
+        if (cause instanceof NextcloudApiNotRespondingException) {
+            apiProvider.invalidateAPICache(ssoAccount);
+        }
+        return recordFailure("Pull", t);
+    }
+
+    private boolean isIgnoredPullFailure(@NonNull Throwable cause) {
+        if (cause instanceof NextcloudHttpRequestFailedException httpException) {
+            return isIgnoredPullStatus(httpException.getStatusCode());
+        }
+        if (cause.getClass() == NextcloudNetworkException.class) {
+            Log.w(TAG, "Pull skipped: no network connection");
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isIgnoredPullStatus(int statusCode) {
+        if (statusCode == HTTP_NOT_MODIFIED) {
+            Log.d(TAG, "Pull: no changes on server (304)");
+            return true;
+        }
+        if (statusCode == HTTP_UNAVAILABLE) {
+            Log.w(TAG, "Pull skipped: server is in maintenance mode (503)");
+            return true;
+        }
+        return false;
+    }
+
+    private boolean recordFailure(@NonNull String step, @NonNull Throwable t) {
+        Log.w(TAG, step + " failed: " + t.getMessage());
+        exceptions.add(t);
+        return false;
+    }
+
+    @NonNull
+    private static String describe(@NonNull Note note) {
+        return "note #" + note.getId() + " \"" + note.getTitle() + "\" (remote " + note.getRemoteId() + ")";
     }
 }
