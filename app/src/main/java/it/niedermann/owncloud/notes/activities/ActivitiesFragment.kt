@@ -75,7 +75,6 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener, Activitie
             this
         )
         adapter = ActivityListAdapter(
-            requireContext(),
             this
         )
         binding.list.adapter = adapter
@@ -138,6 +137,7 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener, Activitie
         adapter.items.addAll(
             activityDataProvider.data.getAggregatedList(requireContext())
         )
+        adapter.lastActivity = activityDataProvider.data.activities.lastOrNull()
         adapter.notifyDataSetChanged()
     }
 
