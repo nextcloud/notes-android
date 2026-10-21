@@ -135,6 +135,7 @@
     <string name="error_dialog_we_need_info">Avem nevoie de următoarele informații pentru a te putea ajuta:</string>
     <string name="error_maintenance_mode">Serverul se află in modul de mentenanţă</string>
     <string name="error_no_network">Nu exista conexiune</string>
+    <string name="error_setting_status_message">Eroare la setarea mesajului de stare!</string>
     <string name="error_sync">Sincronizare eșuată: %1$s</string>
     <string name="error_synchronization">Sincronizare eșuată </string>
     <string name="error_unknown">A apărut o eroare necunoscută </string>
@@ -220,6 +221,9 @@
     <string name="note_has_been_deleted">Această notiță a fost ștearsă </string>
     <string name="note_share_activity_contact_no_permission">Este necesară permisiunea de contact.</string>
     <string name="note_share_activity_could_not_retrieve_url">Nu a fost găsit URL-ul</string>
+    <string name="note_share_activity_resharing_not_allowed">Politicile sau permisiunile nu permit repartajarea</string>
+    <string name="note_share_activity_search_text">Nume, ID Federated Cloud sau adresă de e-mail…</string>
+    <string name="note_share_activity_send_copy_to">Trimite o copie către</string>
     <string name="note_share_activity_share_link">Partajază legătură</string>
     <string name="note_share_activity_shared_with_you">Partajat cu tine de către %1$s</string>
     <string name="note_share_activity_subject_shared_with_you">„%1$s” a fost partajat cu dumneavoastră</string>
@@ -252,6 +256,7 @@
     <string name="remove_account">Îndepărtează %1$s</string>
     <string name="search_in_all">Caută în toate notițele </string>
     <string name="search_in_category">Căutare în 1%1$s</string>
+    <string name="set_message">Setează mesajul</string>
     <string name="set_online_status">Starea online</string>
     <string name="settings_background_sync">Sincronizare în fundal</string>
     <string name="settings_file_suffix">Extensia fişierului</string>
@@ -269,6 +274,8 @@
     <string name="settings_notes_path_description">Dosarul pentru stocare a notițelor în Nextcloud</string>
     <string name="settings_notes_path_success">Dosar nou pentru notițe: %1$s</string>
     <string name="settings_prevent_screen_capture">Oprește captura de ecran</string>
+    <string name="settings_show_ecosystem_apps">Afișează comutatorul de aplicații</string>
+    <string name="settings_show_ecosystem_apps_summary">Sugestii de aplicații Nextcloud în antetul navigării</string>
     <string name="settings_theme_title">Temă</string>
     <string name="settings_wifi_only">Sincronizează doar prin Wi-Fi </string>
     <string name="share">Partajează</string>
@@ -327,6 +334,7 @@
     <string name="sort_alphabetically">Sortare în ordine alfabetică </string>
     <string name="sort_last_modified">Sortare după data ultimei modificări </string>
     <string name="status_message">Mesaj de stare</string>
+    <string name="status_set_fail_message">Starea nu a putut fi setată!</string>
     <string name="thirtyMinutes">30 de minute</string>
     <string name="thisWeek">Săptămâna asta</string>
     <string name="today">Azi</string>
@@ -342,6 +350,11 @@
     <string name="widget_single_note_title">O singură notiță</string>
     <string name="write_email">Trimite email</string>
     <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Trebuie să fii conectat la internet pentru a putea adăuga un cont.</string>
+    <plurals name="share_download_limit_description">
+        <item quantity="one">%1$d descărcare rămasă</item>
+        <item quantity="few">%1$d descărcări rămase</item>
+        <item quantity="other">%1$d de descărcări rămase</item>
+    </plurals>
     <plurals name="ab_selected">
         <item quantity="one">%d selecționat</item>
         <item quantity="few">%d selecționate</item>
