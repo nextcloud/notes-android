@@ -17,7 +17,7 @@ class ActivitiesData {
         items.addAll(
             versions.map { ActivityListItem(context, it) }
         )
-        items.sort()
+        items.sortDescending()
         return items
     }
 
