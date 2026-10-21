@@ -69,6 +69,7 @@
             android:summary="@string/settings_enable_direct_edit_summary" />
 
         <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
+            android:defaultValue="true"
             android:icon="@drawable/ic_baseline_dashboard_24"
             android:key="@string/pref_key_gridview"
             android:layout="@layout/item_pref"

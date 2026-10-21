@@ -17,6 +17,12 @@
         app:showAsAction="ifRoom|collapseActionView" />
 
     <item
+        android:id="@+id/menu_attach_image"
+        android:orderInCategory="75"
+        android:icon="@drawable/ic_image_white_24dp"
+        android:title="@string/menu_attach_image"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/menu_favorite"
         android:orderInCategory="80"
         android:title="@string/menu_favorite"
