@@ -138,7 +138,7 @@ abstract class NotesServerSyncTask extends Thread {
             }
             return recordFailure(step, e);
         } catch (Exception e) {
-            if (e instanceof TokenMismatchException) {
+            if (e.getCause() instanceof TokenMismatchException) {
                 apiProvider.invalidateAPICache(ssoAccount);
             }
             return recordFailure(step, e);
