@@ -35,7 +35,10 @@ class ActivitiesDataProvider (
         job?.cancel()
         job = lifecycleScope.launch {
             val (activitiesResult, versionsResult) = withContext(Dispatchers.IO) {
-                val activities = async { activitiesRepo.fetchActivities(noteId, data.activitiesLastGiven) }
+                val activities = async {
+                    if (data.activitiesMore) activitiesRepo.fetchActivities(noteId, data.activitiesLastGiven)
+                    else ActivitiesResult.Success(listOf(), data.activitiesLastGiven)
+                }
                 val versions = async {
                     if (fetchVersions) versionsRepo.fetchVersions(noteId)
                     else VersionsResult.Success(listOf())
@@ -45,6 +48,9 @@ class ActivitiesDataProvider (
 
             when {
                 activitiesResult is ActivitiesResult.Success && versionsResult is VersionsResult.Success -> {
+                    if (activitiesResult.lastGiven != null && activitiesResult.lastGiven == data.activitiesLastGiven)
+                        data.activitiesMore = false
+
                     data.activitiesLastGiven = activitiesResult.lastGiven ?: data.activitiesLastGiven
                     data.activities.addAll(activitiesResult.activities)
                     data.versions.addAll(versionsResult.versions)
@@ -65,6 +71,7 @@ class ActivitiesDataProvider (
         data.activities.clear()
         data.versions.clear()
         data.activitiesLastGiven = null
+        data.activitiesMore = true
     }
 
     interface OnPageFetchedListener {
