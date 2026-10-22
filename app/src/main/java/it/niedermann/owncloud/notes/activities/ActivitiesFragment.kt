@@ -104,10 +104,11 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener, Activitie
             val result = repository.restoreVersion(version)
             withContext(Dispatchers.Main) {
                 val message =
-                    if (result == RestoreVersionsResult.Success)
-                        R.string.version_restored
-                    else
-                        R.string.version_restore_failed
+                    when (result) {
+                        RestoreVersionsResult.Success -> R.string.version_restored
+                        RestoreVersionsResult.FailedUnsupported -> R.string.version_restore_failed_unsupported
+                        else -> R.string.version_restore_failed
+                    }
 
                 BrandedSnackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
 
