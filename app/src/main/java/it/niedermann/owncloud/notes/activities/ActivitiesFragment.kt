@@ -79,10 +79,10 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener, Activitie
         binding.swipeContainingList.setOnRefreshListener {
             // Reload list
             activityDataProvider.reset()
-            activityDataProvider.fetchNextPage()
+            activityDataProvider.fetchFirstPage()
         }
 
-        activityDataProvider.fetchNextPage()
+        activityDataProvider.fetchFirstPage()
     }
 
     override fun applyBrand(color: Int) {
@@ -116,7 +116,7 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener, Activitie
                 // Reload list
                 if (result == RestoreVersionsResult.Success) {
                     activityDataProvider.reset()
-                    activityDataProvider.fetchNextPage()
+                    activityDataProvider.fetchFirstPage()
                 }
             }
         }

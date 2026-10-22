@@ -7,6 +7,8 @@ sealed class ActivitiesResult(open val descriptionId: Int? = null) {
 
     data class Success(val activities: List<Activity>, val lastGiven: Long?) : ActivitiesResult()
 
+    data object FailedNoCapability : ActivitiesResult()
+
     data class Failed(
         override val descriptionId: Int = R.string.activities_fetch_failed
     ) : ActivitiesResult(descriptionId)

@@ -29,43 +29,71 @@ class ActivitiesDataProvider (
     private val activitiesRepo = ActivitiesRepository(context, ssoAccount)
     private val versionsRepo = VersionsRepository(context, ssoAccount)
 
-    fun fetchNextPage() {
-        // Versions are non-paginated: fetch only once
-        val fetchVersions = data.isEmpty()
-        val fetchActivities = data.activitiesMore
-
+    fun fetchFirstPage() {
         job?.cancel()
         job = lifecycleScope.launch {
             val (activitiesResult, versionsResult) = withContext(Dispatchers.IO) {
                 val activities = async {
-                    if (fetchActivities) activitiesRepo.fetchActivities(noteId, data.activitiesLastGiven)
-                    else ActivitiesResult.Success(listOf(), data.activitiesLastGiven)
+                    activitiesRepo.fetchActivities(noteId)
                 }
                 val versions = async {
-                    if (fetchVersions) versionsRepo.fetchVersions(noteId)
-                    else VersionsResult.Success(listOf())
+                    versionsRepo.fetchVersions(noteId)
                 }
                 activities.await() to versions.await()
             }
 
-            when {
-                activitiesResult is ActivitiesResult.Success && versionsResult is VersionsResult.Success -> {
-                    if (activitiesResult.lastGiven != null && activitiesResult.lastGiven == data.activitiesLastGiven)
-                        data.activitiesMore = false
+            if (!parseActivitiesResult(activitiesResult)) return@launch
 
-                    data.activitiesLastGiven = activitiesResult.lastGiven ?: data.activitiesLastGiven
-                    data.activities.addAll(activitiesResult.activities)
-                    data.versions.addAll(versionsResult.versions)
-                    listener.onPageFetched()
-                    return@launch
-                }
+            if (!parseVersionsResult(versionsResult)) return@launch
 
-                activitiesResult is ActivitiesResult.Failed -> Log.e(TAG, "Fetching activities failed")
+            listener.onPageFetched()
+        }
+    }
 
-                versionsResult is VersionsResult.Failed -> Log.e(TAG, "Fetching versions failed")
+    fun fetchNextPage() {
+        job?.cancel()
+        job = lifecycleScope.launch {
+            val activitiesResult = activitiesRepo.fetchActivities(noteId)
+
+            if (!parseActivitiesResult(activitiesResult)) return@launch
+
+            listener.onPageFetched()
+        }
+    }
+
+    private fun parseActivitiesResult(activitiesResult: ActivitiesResult): Boolean {
+        return when (activitiesResult) {
+            is ActivitiesResult.Success -> {
+                data.activitiesLastGiven = activitiesResult.lastGiven
+                data.activitiesMore = activitiesResult.lastGiven != null
+                data.activities.addAll(activitiesResult.activities)
+                true
             }
 
-            listener.onPageFetchError()
+            is ActivitiesResult.FailedNoCapability -> {
+                Log.d(TAG, "Server has no Activity endpoint")
+                data.activitiesMore = false
+                true
+            }
+
+            is ActivitiesResult.Failed -> {
+                Log.e(TAG, "Fetching activities failed")
+                listener.onPageFetchError()
+                false
+            }
+        }
+    }
+
+    private fun parseVersionsResult(versionsResult: VersionsResult): Boolean {
+        return when (versionsResult) {
+            is VersionsResult.Success -> {
+                data.versions.addAll(versionsResult.versions)
+                true
+            }
+            is VersionsResult.Failed -> {
+                Log.e(TAG, "Fetching versions failed")
+                false
+            }
         }
     }
 
