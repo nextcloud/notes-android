@@ -54,7 +54,7 @@ class ActivitiesDataProvider (
         if (job?.isActive == true) return
 
         if (!data.activitiesMore) return
-        
+
         job = lifecycleScope.launch {
             val activitiesResult = withContext(Dispatchers.IO) {
                 activitiesRepo.fetchActivities(noteId, data.activitiesLastGiven)

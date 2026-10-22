@@ -48,7 +48,7 @@ class VersionsAPI (
 
         return try {
             val response = nextcloudAPI.performNetworkRequestV2(request)
-            VersionsResult.Success(readData(response, fileId))
+            response.body.use { VersionsResult.Success(readData(response, fileId)) }
         } catch (e: Exception) {
             Log.e(TAG, "Unable to fetch versions: $e")
             VersionsResult.Failed
@@ -70,6 +70,7 @@ class VersionsAPI (
         try {
             val response = nextcloudAPI.performNetworkRequestV2(request)
             Log.i(TAG, response.toString())
+            response.body.close()
             return RestoreVersionsResult.Success
         } catch (e: NextcloudUnsupportedMethodException) {
             Log.e(TAG, "restoreVersion used an unsupported method: ${e.message}")
