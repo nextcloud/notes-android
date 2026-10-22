@@ -8,6 +8,7 @@ class ActivitiesData {
     val activities = arrayListOf<Activity>()
     val versions = arrayListOf<FileVersion>()
     var activitiesLastGiven: Long? = null
+    var activitiesMore: Boolean = true
 
     fun getAggregatedList(context: Context) : List<ActivityListItem> {
         val items = arrayListOf<ActivityListItem>()
