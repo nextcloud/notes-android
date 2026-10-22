@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.nextcloud.android.common.core.utils.DateFormatter
 import com.nextcloud.android.common.ui.theme.utils.ColorRole
 import com.owncloud.android.lib.resources.files.model.FileVersion
 import it.niedermann.owncloud.notes.R
@@ -17,14 +18,18 @@ import it.niedermann.owncloud.notes.branding.Branded
 import it.niedermann.owncloud.notes.branding.BrandedViewHolder
 import it.niedermann.owncloud.notes.branding.BrandingUtil
 import it.niedermann.owncloud.notes.databinding.ActivityListItemBinding
+import java.time.format.DateTimeFormatter
+import java.util.Calendar
 
 class ActivityListAdapter (
+    private val context: Context,
     private val listener: OnActivityClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Branded {
 
     val items = arrayListOf<ActivityListItem>()
     var lastActivity: Activity? = null
     private var brandColor: Int? = null
+    private val dateFormatter = DateFormatter(context)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -35,7 +40,8 @@ class ActivityListAdapter (
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            )
+            ),
+            dateFormatter
         )
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -61,7 +67,7 @@ class ActivityListAdapter (
 
     private class ActivityViewHolder(
         val binding: ActivityListItemBinding,
-        //val brandingUtil: BrandingUtil
+        val dateFormatter: DateFormatter
     ) : BrandedViewHolder(binding.root) {
 
         private var brandingUtil: BrandingUtil? = null
@@ -83,7 +89,11 @@ class ActivityListAdapter (
         private fun bindDateTime(activity: ActivityListItem) {
             binding.datetime.apply {
                 visibility = View.VISIBLE
-                text = DateFormat.format(TIME_PATTERN, activity.getTimestamp())
+                text = dateFormatter.getConditionallyRelativeFormattedTimeSpan(
+                    Calendar.getInstance().apply {
+                        timeInMillis = activity.getTimestamp()
+                    }
+                )
             }
         }
 
@@ -136,7 +146,6 @@ class ActivityListAdapter (
         }
 
         companion object {
-            private const val TIME_PATTERN = "HH:mm"
             private const val COLORED_ICON_SUFFIX = "-color.svg"
         }
 
