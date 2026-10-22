@@ -4,6 +4,7 @@ import android.content.Context
 import com.nextcloud.android.sso.model.SingleSignOnAccount
 import it.niedermann.owncloud.notes.persistence.ApiProvider
 import java.net.HttpURLConnection
+import kotlin.getValue
 
 class ActivitiesRepository(
     private val context: Context,
@@ -20,6 +21,11 @@ class ActivitiesRepository(
                 response.body()?.ocs?.data ?: listOf(),
                 response.headers()[HEADER_LAST_GIVEN]?.toLongOrNull()
             )
+        }
+
+        // Activity capability not present
+        if (response.code() == HttpURLConnection.HTTP_NOT_FOUND) {
+            return ActivitiesResult.Success(listOf(), null)
         }
 
         return ActivitiesResult.Failed()
