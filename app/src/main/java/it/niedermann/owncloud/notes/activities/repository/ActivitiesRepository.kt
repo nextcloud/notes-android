@@ -25,7 +25,7 @@ class ActivitiesRepository(
 
         // Activity capability not present
         if (response.code() == HttpURLConnection.HTTP_NOT_FOUND) {
-            return ActivitiesResult.Success(listOf(), null)
+            return ActivitiesResult.FailedNoCapability
         }
 
         return ActivitiesResult.Failed()
