@@ -32,11 +32,13 @@ class ActivitiesDataProvider (
     fun fetchNextPage() {
         // Versions are non-paginated: fetch only once
         val fetchVersions = data.isEmpty()
+        val fetchActivities = data.activitiesMore
+
         job?.cancel()
         job = lifecycleScope.launch {
             val (activitiesResult, versionsResult) = withContext(Dispatchers.IO) {
                 val activities = async {
-                    if (data.activitiesMore) activitiesRepo.fetchActivities(noteId, data.activitiesLastGiven)
+                    if (fetchActivities) activitiesRepo.fetchActivities(noteId, data.activitiesLastGiven)
                     else ActivitiesResult.Success(listOf(), data.activitiesLastGiven)
                 }
                 val versions = async {
