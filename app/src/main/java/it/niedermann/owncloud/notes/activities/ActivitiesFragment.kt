@@ -40,11 +40,12 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener, Activitie
     lateinit var binding : FragmentActivitiesBinding
     private lateinit var note: Note
     private lateinit var account: Account
-    private val adapter: ActivityListAdapter = ActivityListAdapter(this)
+    private lateinit var adapter: ActivityListAdapter
 
     private lateinit var activityDataProvider: ActivitiesDataProvider
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        adapter = ActivityListAdapter(requireContext(), this)
         binding = FragmentActivitiesBinding.inflate(inflater, container, false)
 
         initializeArguments()
