@@ -551,7 +551,6 @@
 
     <string name="activities_title">Activities</string>
     <string name="activities_fetch_failed">Unable to fetch activities</string>
-    <string name="activities_fetch_failed_not_modified">No activity present for this note</string>
     <string name="activity_icon">Activity</string>
     <string name="activities_no_results">No events like additions, changes and shares yet.</string>
     <string name="activities_error">An error occurred loading activities</string>

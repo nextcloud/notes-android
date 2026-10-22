@@ -45,7 +45,7 @@ class ActivitiesDataProvider (
 
             when {
                 activitiesResult is ActivitiesResult.Success && versionsResult is VersionsResult.Success -> {
-                    data.activitiesLastGiven = activitiesResult.lastGiven
+                    data.activitiesLastGiven = activitiesResult.lastGiven ?: data.activitiesLastGiven
                     data.activities.addAll(activitiesResult.activities)
                     data.versions.addAll(versionsResult.versions)
                     listener.onPageFetched()
