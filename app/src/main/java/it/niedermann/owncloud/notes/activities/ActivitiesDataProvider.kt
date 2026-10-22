@@ -51,9 +51,14 @@ class ActivitiesDataProvider (
     }
 
     fun fetchNextPage() {
-        job?.cancel()
+        if (job?.isActive == true) return
+
+        if (!data.activitiesMore) return
+        
         job = lifecycleScope.launch {
-            val activitiesResult = activitiesRepo.fetchActivities(noteId)
+            val activitiesResult = withContext(Dispatchers.IO) {
+                activitiesRepo.fetchActivities(noteId, data.activitiesLastGiven)
+            }
 
             if (!parseActivitiesResult(activitiesResult)) return@launch
 
