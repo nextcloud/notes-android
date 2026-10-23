@@ -47,9 +47,7 @@ class ActivityListAdapter (
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         // Apply brand
         val holder = (holder as ActivityViewHolder)
-        if (brandColor != null) {
-            holder.applyBrand(brandColor!!)
-        }
+        brandColor?.apply { holder.applyBrand(this) }
 
         // Retrieve item and bind vh
         val item = items[position]
@@ -69,8 +67,6 @@ class ActivityListAdapter (
         val binding: ActivityListItemBinding,
         val dateFormatter: DateFormatter
     ) : BrandedViewHolder(binding.root) {
-
-        private var brandingUtil: BrandingUtil? = null
 
         fun bind(item: ActivityListItem, listener: OnActivityClickListener) {
             bindDateTime(item)
@@ -126,13 +122,6 @@ class ActivityListAdapter (
                 .placeholder( R.drawable.ic_activity)
                 .error(R.drawable.ic_activity)
                 .into(binding.icon)
-
-            if (iconUrl.endsWith(COLORED_ICON_SUFFIX, ignoreCase = true)) {
-                binding.icon.imageTintList = null
-            } else {
-                brandingUtil?.platform?.colorImageView(binding.icon, ColorRole.ON_SURFACE_VARIANT)
-            }
-
         }
 
         private fun bindActionIcon(activity: ActivityListItem) {
@@ -142,11 +131,9 @@ class ActivityListAdapter (
         }
 
         override fun applyBrand(color: Int) {
-            brandingUtil = BrandingUtil.of(color, binding.root.context)
-        }
-
-        companion object {
-            private const val COLORED_ICON_SUFFIX = "-color.svg"
+            val util = BrandingUtil.of(color, binding.root.context)
+            util.platform.colorViewBackground(binding.root)
+            util.platform.colorImageView(binding.icon, ColorRole.ON_SURFACE_VARIANT)
         }
 
     }
