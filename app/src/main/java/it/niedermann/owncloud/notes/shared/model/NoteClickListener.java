@@ -13,5 +13,5 @@ public interface NoteClickListener {
 
     void onNoteFavoriteClick(int position, View v);
 
-    void openDetails(int position);
+    void openInfoBottomSheet(int position);
 }
