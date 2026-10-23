@@ -11,6 +11,7 @@ import android.content.Context
 import com.owncloud.android.lib.resources.files.model.FileVersion
 import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.activities.model.Activity
+import it.niedermann.owncloud.notes.util.HumanReadableFormatter
 
 class ActivityListItem : Comparable<ActivityListItem> {
     val context: Context
@@ -46,7 +47,7 @@ class ActivityListItem : Comparable<ActivityListItem> {
     fun getMessage() : String? =
         when {
             activity != null -> activity.message
-            fileVersion != null -> "${fileVersion.fileLength} B"
+            fileVersion != null -> HumanReadableFormatter.formatBytes(fileVersion.fileLength)
             else -> null
         }
 
