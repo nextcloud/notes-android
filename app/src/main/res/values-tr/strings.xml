@@ -141,6 +141,15 @@
     <string name="error_no_network">Ağ bağlantısı yok</string>
     <string name="error_setting_status_message">Durum iletisi ayarlanırken sorun çıktı!</string>
     <string name="error_sync">Eşitlenemedi: %1$s</string>
+    <string name="error_sync_insufficient_storage">Nextcloud depolama alanınız dolu. Değişikliklerinizi eşitlemek için boş yer açın.</string>
+    <string name="error_sync_locked">Bir not başka bir uygulamada açık. Değişikliklerinizin eşitlenmesi için o uygulamadan kapatın.</string>
+    <string name="error_sync_maintenance">Sunucu bakım kipinde. Değişiklikleriniz daha sonra eşitlenecek.</string>
+    <string name="error_sync_notes_app_unavailable">Notlar uygulaması sunucunuzda yok.</string>
+    <string name="error_sync_permission">Bu notu kaydetme izniniz yok. Lütfen erişme izninizi denetleyip yeniden deneyin.</string>
+    <string name="error_sync_server_error">Sunucu değişikliklerinizi kaydedemedi. Yöneticinizden günlük kayıtlarına bakmasını isteyin.</string>
+    <string name="error_sync_server_unreachable">Sunucunuza ulaşılamadı. Bağlantınızı ve Nextcloud Dosyalar uygulamasını denetleyin.</string>
+    <string name="error_sync_token_mismatch">Notlar, Dosyalar uygulama hesabınıza erişimini kaybetti. Hesabı kaldırıp yeniden ekleyin.</string>
+    <string name="error_sync_unauthorized">Oturumunuz artık geçerli değil. Nextcloud Dosyalar uygulamasında yeniden oturum açın.</string>
     <string name="error_synchronization">Eşitlenemedi</string>
     <string name="error_unknown">Bilinmeyen bir sorun çıktı.</string>
     <string name="failed_the_remove_share">Paylaşım kaldırılamadı</string>

@@ -141,6 +141,15 @@
     <string name="error_no_network">Нет подключения к сети</string>
     <string name="error_setting_status_message">Ошибка при установке сообщения статуса</string>
     <string name="error_sync">Сбой синхронизации: %1$s</string>
+    <string name="error_sync_insufficient_storage">Хранилище Nextcloud заполнено. Освободите место для синхронизации изменений.</string>
+    <string name="error_sync_locked">Заметка открыта в другом приложении. Закройте её там для синхронизации изменений.</string>
+    <string name="error_sync_maintenance">Сервер в режиме обслуживания. Изменения будут синхронизированы позже.</string>
+    <string name="error_sync_notes_app_unavailable">Приложение «Заметки» недоступно на сервере.</string>
+    <string name="error_sync_permission">Нет разрешения на сохранение этой заметки. Проверьте права доступа и повторите попытку.</string>
+    <string name="error_sync_server_error">Сервер не смог сохранить изменения. Попросите администратора проверить журналы.</string>
+    <string name="error_sync_server_unreachable">Не удалось связаться с сервером. Проверьте подключение и приложение «Файлы» Nextcloud.</string>
+    <string name="error_sync_token_mismatch">Заметки потеряли доступ к учётной записи приложения «Файлы». Удалите учётную запись и добавьте её снова.</string>
+    <string name="error_sync_unauthorized">Сеанс входа больше не действителен. Войдите снова в приложении «Файлы» Nextcloud.</string>
     <string name="error_synchronization">Сбой синхронизации</string>
     <string name="error_unknown">Произошла неизвестная ошибка.</string>
     <string name="failed_the_remove_share">Не удалось удалить общий ресурс</string>

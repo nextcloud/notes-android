@@ -141,6 +141,15 @@
     <string name="error_no_network">Keine Netzwerkverbindung</string>
     <string name="error_setting_status_message">Fehler beim Festlegen der Statusnachricht!</string>
     <string name="error_sync">Synchronisierung fehlgeschlagen: %1$s</string>
+    <string name="error_sync_insufficient_storage">Ihr Nextcloud-Speicher ist voll. Bitte Speicherplatz freigeben, um Ihre Änderungen zu synchronisieren.</string>
+    <string name="error_sync_locked">In einer anderen App ist eine Notiz geöffnet. Diese dort schließen, um die Änderungen zu synchronisieren.</string>
+    <string name="error_sync_maintenance">Server befindet sich im Wartungsmodus. Änderungen werden später synchronisiert.</string>
+    <string name="error_sync_notes_app_unavailable">Notizen-App ist auf diesem Server nicht verfügbar.</string>
+    <string name="error_sync_permission">Sie haben nicht die Berechtigung, diese Notiz zu speichern. Bitte überprüfen Sie Ihren Zugriff und versuchen Sie es erneut.</string>
+    <string name="error_sync_server_error">Server konnte die Änderungen nicht speichern. Die Administration bitten, die Protokolle zu überprüfen.</string>
+    <string name="error_sync_server_unreachable">Server konnte nicht erreicht werden. Bitte die Verbindung und die Nextcloud Dateien-App überprüfen.</string>
+    <string name="error_sync_token_mismatch">Notizen-App hat den Zugriff auf Ihr Dateien-App-Konto verloren. Das Konto entfernen und erneut hinzufügen.</string>
+    <string name="error_sync_unauthorized">Ihre Anmeldung ist nicht mehr gültig. Bitte erneut anmelden.</string>
     <string name="error_synchronization">Synchronisierung fehlgeschlagen</string>
     <string name="error_unknown">Es ist ein unbekannter Fehler aufgetreten.</string>
     <string name="failed_the_remove_share">Freigabe konnte nicht entfernt werden</string>
