@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Nextcloud Notes - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2026 Daniele Verducci <daniele.verducci@nextcloud.com>
+  ~ SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/menu_upload_files"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/bottom_sheet_item_height"
+    android:clickable="true"
+    android:background="?android:attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:paddingLeft="@dimen/standard_padding"
+    android:focusable="true"
+    android:orientation="horizontal"
+    android:paddingTop="@dimen/standard_half_padding"
+    android:paddingRight="@dimen/standard_padding"
+    android:paddingBottom="@dimen/standard_half_padding"
+    tools:ignore="UseCompoundDrawables">
+
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="@dimen/iconized_single_line_item_icon_size"
+        android:layout_height="@dimen/iconized_single_line_item_icon_size"
+        android:contentDescription="@null"
+        tools:src="@drawable/ic_delete"
+        app:tint="@color/fg_secondary"/>
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/bottom_sheet_text_start_margin"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/bottom_sheet_text_size"
+        tools:text="@string/placeholder_sentence" />
+
+</LinearLayout>

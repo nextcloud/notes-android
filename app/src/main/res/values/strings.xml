@@ -565,5 +565,7 @@
     <string name="placeholder_media_time" translatable="false">12:23:45</string>
     <string name="placeholder_sentence" translatable="false">This is a placeholder</string>
 
+    <string name="action_see_details">Details</string>
+    <string name="action_send_share">Send/share</string>
 
 </resources>
