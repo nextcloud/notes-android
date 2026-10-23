@@ -546,4 +546,26 @@
     <string name="share_expires">Share expires on %1$s</string>
     <string name="dismiss">Dismiss</string>
     <string name="account_not_found">Account not found!</string>
+
+    <string name="menu_details">Details</string>
+
+    <string name="activities_title">Activities</string>
+    <string name="activities_fetch_failed">Unable to fetch activities</string>
+    <string name="activity_icon">Activity</string>
+    <string name="activities_no_results">No events like additions, changes and shares yet.</string>
+    <string name="activities_error">An error occurred loading activities</string>
+    <string name="new_version_was_created">New version was created</string>
+    <string name="version_restored">Version restored</string>
+    <string name="version_restore_failed_unsupported">Version restore not supported: please upgrade Nextcloud Files app</string>
+    <string name="version_restore_failed">Could not restore version</string>
+
+    <string name="placeholder_filename">Note.md</string>
+    <string name="activities_favorite">Favorite</string>
+    <string name="info_separator" translatable="false">&#160;&#x2022;</string>
+    <string name="placeholder_media_time" translatable="false">12:23:45</string>
+    <string name="placeholder_sentence" translatable="false">This is a placeholder</string>
+
+    <string name="action_see_details">Details</string>
+    <string name="action_send_share">Send/share</string>
+
 </resources>

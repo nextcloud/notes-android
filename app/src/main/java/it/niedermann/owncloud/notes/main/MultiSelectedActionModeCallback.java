@@ -8,7 +8,6 @@ package it.niedermann.owncloud.notes.main;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,7 +32,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
-import it.niedermann.owncloud.notes.share.NoteShareActivity;
+import it.niedermann.owncloud.notes.itemdetails.ItemDetailsActivity;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
 public class MultiSelectedActionModeCallback implements Callback {
@@ -102,7 +101,9 @@ public class MultiSelectedActionModeCallback implements Callback {
 
     @Override
     public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-        return false;
+        // Info menu makes sense only for single selection
+        menu.findItem(R.id.menu_details).setVisible(tracker.getSelection().size() == 1);
+        return true;
     }
 
     /**
@@ -159,23 +160,12 @@ public class MultiSelectedActionModeCallback implements Callback {
                 selection.add(sel);
             }
             tracker.clearSelection();
-
-            if (selection.size() == 1) {
-                final var currentAccount$ = mainViewModel.getCurrentAccount();
-                currentAccount$.observe(lifecycleOwner, account -> {
-                    currentAccount$.removeObservers(lifecycleOwner);
-                    executor.submit(() -> {{
-                        final var note = mainViewModel.getFullNote(selection.get(0));
-                        final Intent intent = NoteShareActivity.getActivityStartIntent(note, account, mainActivity);
-                        mainActivity.startActivity(intent);
-                    }});
-                });
-            } else {
-                ShareUtil.openShareDialog(context,
+            executor.submit(() -> {
+                final var noteContents = mainViewModel.collectNoteContents(selection);
+                mainActivity.runOnUiThread(() -> ShareUtil.openShareDialog(context,
                         context.getResources().getQuantityString(R.plurals.share_multiple, selection.size(), selection.size()),
-                        mainViewModel.collectNoteContents(selection));
-            }
-
+                        noteContents));
+            });
             return true;
         } else if (itemId == R.id.menu_category) {// TODO detect whether all selected notes do have the same category - in this case preselect it
             final var accountLiveData = mainViewModel.getCurrentAccount();
@@ -186,6 +176,24 @@ public class MultiSelectedActionModeCallback implements Callback {
                         .show(fragmentManager, CategoryDialogFragment.class.getSimpleName());
             });
             return true;
+        } else if (itemId == R.id.menu_details) {
+            final var selection = new ArrayList<Long>(tracker.getSelection().size());
+            for (final var sel : tracker.getSelection()) {
+                selection.add(sel);
+            }
+            tracker.clearSelection();
+
+            if (selection.size() == 1) {
+                final var currentAccount$ = mainViewModel.getCurrentAccount();
+                currentAccount$.observe(lifecycleOwner, account -> {
+                    currentAccount$.removeObservers(lifecycleOwner);
+                    executor.submit(() -> {{
+                        final var note = mainViewModel.getFullNote(selection.get(0));
+                        Intent detailsIntent = ItemDetailsActivity.getActivityStartIntent(context, note, account);
+                        mainActivity.startActivity(detailsIntent);
+                    }});
+                });
+            }
         }
         return false;
     }
