@@ -106,7 +106,7 @@ class NoteShareFragment : BrandedFragment(), ShareeListAdapterListener, NoteShar
             updateShareeListAdapter()
         }
     }
-    
+
     private val shares: MutableList<OCShare> =
         Collections.synchronizedList(ArrayList<OCShare>())
 
@@ -128,9 +128,10 @@ class NoteShareFragment : BrandedFragment(), ShareeListAdapterListener, NoteShar
 
         executorService!!.submit {
             try {
+                val context = context ?: return@submit
                 val ssoAcc =
-                    SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext())
-                repository = ShareRepository(requireContext(), ssoAcc)
+                    SingleAccountHelper.getCurrentSingleSignOnAccount(context)
+                repository = ShareRepository(context, ssoAcc)
                 capabilities = repository!!.getCapabilities()
                 repository!!.fetchSharesForNotesAndSaveShareEntities()
 
@@ -145,11 +146,11 @@ class NoteShareFragment : BrandedFragment(), ShareeListAdapterListener, NoteShar
                             account
                         )
                     )
-                    binding!!.sharesList.setLayoutManager(LinearLayoutManager(requireContext()))
+                    binding!!.sharesList.setLayoutManager(LinearLayoutManager(context))
                     binding!!.pickContactEmailBtn.setOnClickListener { checkContactPermission() }
                     binding!!.btnShareButton.setOnClickListener {
                         ShareUtil.openShareDialog(
-                            requireContext(),
+                            context,
                             note!!.title,
                             note!!.content
                         )
@@ -201,8 +202,9 @@ class NoteShareFragment : BrandedFragment(), ShareeListAdapterListener, NoteShar
     }
 
     private fun setupSearchView() {
-        val suggestionAdapter = SuggestionAdapter(requireContext(), null, account!!)
-        val provider = UsersAndGroupsSearchProvider(requireContext(), repository)
+        val context = context ?: return
+        val suggestionAdapter = SuggestionAdapter(context, null, account!!)
+        val provider = UsersAndGroupsSearchProvider(context, repository)
 
         binding!!.searchView.setSuggestionsAdapter(suggestionAdapter)
         binding!!.searchView.setIconifiedByDefault(false)
@@ -341,7 +343,7 @@ class NoteShareFragment : BrandedFragment(), ShareeListAdapterListener, NoteShar
                 getString(R.string.note_share_activity_shared_with_you),
                 share.ownerDisplayName
             )
-            AvatarLoader.load(requireContext(), binding!!.sharedWithYouAvatar, account!!)
+            context?.apply { AvatarLoader.load(this, binding!!.sharedWithYouAvatar, account!!) }
             binding!!.sharedWithYouAvatar.setVisibility(View.VISIBLE)
 
             val description = share.note
@@ -433,12 +435,12 @@ class NoteShareFragment : BrandedFragment(), ShareeListAdapterListener, NoteShar
         if (TextUtils.isEmpty(share.shareLink)) {
             copyAndShareFileLink(share.shareLink)
         } else {
-            copyToClipboard(requireContext(), share.shareLink)
+            context?.apply { copyToClipboard(this, share.shareLink) }
         }
     }
 
     private fun copyAndShareFileLink(link: String?) {
-        copyToClipboard(requireContext(), link, false)
+        context?.apply { copyToClipboard(this, link, false) }
         val snackbar = Snackbar
             .make(
                 requireView(),
@@ -463,8 +465,10 @@ class NoteShareFragment : BrandedFragment(), ShareeListAdapterListener, NoteShar
         val snackbar = Snackbar
             .make(binding!!.getRoot(), expirationDescription, Snackbar.LENGTH_LONG)
             .setAction(R.string.dismiss) { }
-        val util = BrandingUtil.of(BrandingUtil.readBrandMainColor(requireContext()), requireContext())
-        util.material.themeSnackbar(snackbar)
+        context?.apply {
+            val util = BrandingUtil.of(BrandingUtil.readBrandMainColor(this), this)
+            util.material.themeSnackbar(snackbar)
+        }
         snackbar.show()
     }
 
@@ -542,8 +546,9 @@ class NoteShareFragment : BrandedFragment(), ShareeListAdapterListener, NoteShar
     }
 
     private fun checkContactPermission() {
+        val context = context ?: return
         if (ContextCompat.checkSelfPermission(
-                requireContext(),
+                context,
                 Manifest.permission.READ_CONTACTS
             ) == PackageManager.PERMISSION_GRANTED
         ) {
@@ -554,10 +559,11 @@ class NoteShareFragment : BrandedFragment(), ShareeListAdapterListener, NoteShar
     }
 
     private fun pickContactEmail() {
+        val context = context ?: return
         val intent = Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Email.CONTENT_URI)
 
         // FIXME:
-        if (intent.resolveActivity(requireContext().packageManager) != null) {
+        if (intent.resolveActivity(context.packageManager) != null) {
             onContactSelectionResultLauncher.launch(intent)
         } else {
             DisplayUtils.showSnackMessage(
@@ -795,7 +801,8 @@ class NoteShareFragment : BrandedFragment(), ShareeListAdapterListener, NoteShar
             })
 
     override fun applyBrand(color: Int) {
-        val util = BrandingUtil.of(color, requireContext())
+        val context = context ?: return
+        val util = BrandingUtil.of(color, context)
         util.notes.themeContentSearchView(binding!!.searchView)
         util.platform.colorImageView(binding!!.searchViewIcon, ColorRole.ON_SURFACE_VARIANT)
         util.platform.colorImageView(binding!!.pickContactEmailBtn, ColorRole.ON_SURFACE_VARIANT)
