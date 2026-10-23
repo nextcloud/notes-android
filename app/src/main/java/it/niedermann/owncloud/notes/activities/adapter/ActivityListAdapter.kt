@@ -7,9 +7,7 @@
  */
 package it.niedermann.owncloud.notes.activities.adapter
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,14 +16,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.nextcloud.android.common.core.utils.DateFormatter
 import com.nextcloud.android.common.ui.theme.utils.ColorRole
-import com.owncloud.android.lib.resources.files.model.FileVersion
 import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.activities.model.Activity
 import it.niedermann.owncloud.notes.branding.Branded
 import it.niedermann.owncloud.notes.branding.BrandedViewHolder
 import it.niedermann.owncloud.notes.branding.BrandingUtil
 import it.niedermann.owncloud.notes.databinding.ActivityListItemBinding
-import java.time.format.DateTimeFormatter
 import java.util.Calendar
 
 class ActivityListAdapter (
