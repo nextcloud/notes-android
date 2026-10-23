@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.StringRes
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.nextcloud.android.sso.helper.SingleAccountHelper
@@ -21,6 +22,7 @@ import it.niedermann.owncloud.notes.branding.BrandedFragment
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar
 import it.niedermann.owncloud.notes.branding.BrandingUtil
 import it.niedermann.owncloud.notes.databinding.FragmentActivitiesBinding
+import it.niedermann.owncloud.notes.persistence.NotesRepository
 import it.niedermann.owncloud.notes.persistence.entity.Account
 import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.shared.util.extensions.getSerializableArgument
@@ -97,6 +99,7 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener, Activitie
     }
 
     override fun onVersionItemClick(version: FileVersion) {
+        binding.swipeContainingList.isRefreshing = true
         // Restore the version
         val ssoAccount =
             SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext())
@@ -104,22 +107,34 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener, Activitie
         lifecycleScope.launch(Dispatchers.IO) {
             val result = repository.restoreVersion(version)
             withContext(Dispatchers.Main) {
-                val message =
-                    when (result) {
-                        RestoreVersionsResult.Success -> R.string.version_restored
-                        RestoreVersionsResult.FailedUnsupported -> R.string.version_restore_failed_unsupported
-                        else -> R.string.version_restore_failed
-                    }
-
-                BrandedSnackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
-
-                // Reload list
-                if (result == RestoreVersionsResult.Success) {
-                    activityDataProvider.reset()
-                    activityDataProvider.fetchFirstPage()
+                when (result) {
+                    RestoreVersionsResult.Success -> syncNote()
+                    RestoreVersionsResult.FailedUnsupported -> showMessage(R.string.version_restore_failed_unsupported)
+                    else -> showMessage(R.string.version_restore_failed)
                 }
             }
         }
+    }
+
+    private fun syncNote() {
+        // Sync the restored note
+        val noteRepo = NotesRepository.getInstance(binding.root.context)
+        noteRepo.addCallbackPull(account, {
+            // Used in node editor: RESULT_OK means reload the note
+            requireActivity().setResult(android.app.Activity.RESULT_OK)
+
+            // Reload list
+            activityDataProvider.reset()
+            activityDataProvider.fetchFirstPage()
+
+            // Notify user
+            showMessage(R.string.version_restored)
+        })
+        noteRepo.scheduleSync(account, false)
+    }
+
+    private fun showMessage(@StringRes message: Int) {
+        BrandedSnackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
     }
 
     override fun lastActivityReached() {
