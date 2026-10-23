@@ -102,6 +102,7 @@ import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.exception.IntendedOfflineException;
 import it.niedermann.owncloud.notes.importaccount.ImportAccountActivity;
 import it.niedermann.owncloud.notes.itemdetails.ItemDetailsActivity;
+import it.niedermann.owncloud.notes.main.items.ItemActionBottomSheet;
 import it.niedermann.owncloud.notes.main.items.ItemAdapter;
 import it.niedermann.owncloud.notes.main.items.grid.GridItemDecoration;
 import it.niedermann.owncloud.notes.main.items.list.NotesListViewItemTouchHelper;
@@ -916,11 +917,11 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     }
 
     @Override
-    public void openDetails(int position) {
+    public void openInfoBottomSheet(int position) {
         if (adapter.getItem(position) instanceof Note note) {
             mainViewModel.getCurrentAccount().observe(this, (account) -> {
-                final Intent intent = ItemDetailsActivity.getActivityStartIntent(this, note, account);
-                startActivity(intent);
+                final var fragment = new ItemActionBottomSheet(note, account);
+                fragment.show(getSupportFragmentManager(), ItemActionBottomSheet.TAG);
             });
         }
     }

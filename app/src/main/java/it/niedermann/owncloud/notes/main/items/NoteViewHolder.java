@@ -115,7 +115,7 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
     }
 
     protected void bindNoteDetailsIcon(@NonNull Context context, @NonNull MaterialButton noteDetailsIcon, int color) {
-        noteDetailsIcon.setOnClickListener(view -> noteClickListener.openDetails(getLayoutPosition()));
+        noteDetailsIcon.setOnClickListener(view -> noteClickListener.openInfoBottomSheet(getLayoutPosition()));
 
         final var util = BrandingUtil.of(color, context);
         util.material.colorMaterialButtonContent(noteDetailsIcon, ColorRole.SECONDARY);

@@ -31,6 +31,7 @@ class ItemDetailsActivity : BrandedActivity() {
     lateinit var binding : ActivityItemDetailsBinding
     lateinit var note: Note
     lateinit var account: Account
+    lateinit var page: PAGE
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +51,8 @@ class ItemDetailsActivity : BrandedActivity() {
         note = intent.extras.getSerializableArgument(ARG_NOTE, Note::class.java)
             ?: throw RuntimeException("Argument $ARG_NOTE is mandatory")
         account = intent.extras.getSerializableArgument(ARG_ACCOUNT, Account::class.java)
+            ?: throw RuntimeException("Argument $ARG_ACCOUNT is mandatory")
+        page = intent.extras.getSerializableArgument(ARG_PAGE, PAGE::class.java)
             ?: throw RuntimeException("Argument $ARG_ACCOUNT is mandatory")
     }
 
@@ -71,18 +74,24 @@ class ItemDetailsActivity : BrandedActivity() {
     private fun loadFragments() {
         val pages = listOf(
             Page(
+                PAGE.ACTIVITIES,
                 getString(R.string.activities_title),
                 AppCompatResources.getDrawable(this, R.drawable.nav_activity),
                 ActivitiesFragment.newInstance(note, account)
             ),
             Page(
+                PAGE.SHARE,
                 getString(R.string.share),
                 AppCompatResources.getDrawable(this, R.drawable.ic_share_white_24dp),
                 NoteShareFragment.newInstance(note, account)
             )
         )
-
         binding.pager.adapter = PagerAdapter(pages)
+
+        // Select page
+        binding.pager.currentItem = pages.indexOf(pages.find { it.page == page })
+
+        // Set tabs
         TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
             tab.text = pages[position].title
             tab.icon = pages[position].icon
@@ -98,6 +107,7 @@ class ItemDetailsActivity : BrandedActivity() {
     }
 
     private data class Page (
+        val page: PAGE,
         val title: String,
         val icon: Drawable?,
         val fragment: BrandedFragment
@@ -110,15 +120,23 @@ class ItemDetailsActivity : BrandedActivity() {
         override fun createFragment(position: Int) = fragments[position].fragment
     }
 
+    public enum class PAGE { ACTIVITIES, SHARE }
+
     companion object {
         const val ARG_NOTE: String = "note"
         const val ARG_ACCOUNT: String = "account"
+        const val ARG_PAGE: String = "page"
 
         @JvmStatic
-        fun getActivityStartIntent(context: Context, note: Note, account: Account): Intent {
+        fun getActivityStartIntent(context: Context, note: Note, account: Account): Intent =
+            getActivityStartIntent(context, note, account, PAGE.ACTIVITIES)
+
+        @JvmStatic
+        fun getActivityStartIntent(context: Context, note: Note, account: Account, page: PAGE): Intent {
             val bundle = Bundle()
             bundle.putSerializable(ARG_NOTE, note)
             bundle.putSerializable(ARG_ACCOUNT, account)
+            bundle.putSerializable(ARG_PAGE, page)
 
             val intent = Intent(context, ItemDetailsActivity::class.java)
             intent.putExtras(bundle)
