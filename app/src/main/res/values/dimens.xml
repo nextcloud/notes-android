@@ -92,4 +92,6 @@
     <dimen name="activity_icon_layout_right_end_margin">24dp</dimen>
     <dimen name="activity_list_item_grid_layout_left_start_margin">-3dp</dimen>
 
+    <dimen name="file_details_preview_height">112dp</dimen>
+
 </resources>
