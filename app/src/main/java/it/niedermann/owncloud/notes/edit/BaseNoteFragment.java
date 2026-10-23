@@ -307,8 +307,8 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                     .show(requireActivity().getSupportFragmentManager(), BaseNoteFragment.class.getSimpleName()));
             return true;
         } else if (itemId == R.id.menu_details) {
-            Intent detailsIntent = ItemDetailsActivity.getActivityStartIntent(requireContext(), note, localAccount);
-            startActivity(detailsIntent);
+            if (getActivity() instanceof EditNoteActivity)
+                ((EditNoteActivity)getActivity()).openDetails(note, localAccount);
             return true;
         } else if (itemId == MENU_ID_PIN) {
             pinNoteToHome();
