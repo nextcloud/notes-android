@@ -141,6 +141,15 @@
     <string name="error_no_network">Sem conexão de rede</string>
     <string name="error_setting_status_message">Erro ao definir a mensagem de status!</string>
     <string name="error_sync">A sincronização falhou: %1$s</string>
+    <string name="error_sync_insufficient_storage">Seu espaço de armazenamento no Nextcloud está cheio. Libere espaço para sincronizar suas alterações.</string>
+    <string name="error_sync_locked">Há uma nota aberta em outro aplicativo. Feche-a lá para sincronizar suas alterações.</string>
+    <string name="error_sync_maintenance">O servidor está em modo de manutenção. Suas alterações serão sincronizadas mais tarde.</string>
+    <string name="error_sync_notes_app_unavailable">O aplicativo Notas não está disponível no seu servidor.</string>
+    <string name="error_sync_permission">Você não tem permissão para salvar esta nota. Verifique suas permissões de acesso e tente novamente.</string>
+    <string name="error_sync_server_error">O servidor não conseguiu salvar suas alterações. Peça ao seu administrador para verificar os registros.</string>
+    <string name="error_sync_server_unreachable">Não foi possível acessar seu servidor. Verifique sua conexão e o aplicativo Nextcloud Arquivos.</string>
+    <string name="error_sync_token_mismatch">O aplicativo Notas perdeu o acesso à sua conta no aplicativo Arquivos. Remova e adicione a conta novamente.</string>
+    <string name="error_sync_unauthorized">Sua senha não é mais válida. Faça login novamente no aplicativo Nextcloud Arquivos.</string>
     <string name="error_synchronization">A sincronização falhou</string>
     <string name="error_unknown">Ocorreu um erro desconhecido.</string>
     <string name="failed_the_remove_share">Falha ao remover compartilhamento</string>
