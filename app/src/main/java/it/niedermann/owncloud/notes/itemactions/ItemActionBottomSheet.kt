@@ -1,4 +1,4 @@
-package it.niedermann.owncloud.notes.main.items
+package it.niedermann.owncloud.notes.itemactions
 
 import android.os.Bundle
 import android.view.LayoutInflater
