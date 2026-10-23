@@ -99,7 +99,14 @@ class NoteShareFragment : BrandedFragment(), ShareeListAdapterListener, NoteShar
     private var account: Account? = null
     private var repository: ShareRepository? = null
     private var capabilities: Capabilities? = null
-    private var resultLauncher: ActivityResultLauncher<Intent?>? = null
+    private val resultLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        if (it.resultCode == RESULT_OK && it.data != null) {
+            updateShareeListAdapter()
+        }
+    }
+    
     private val shares: MutableList<OCShare> =
         Collections.synchronizedList(ArrayList<OCShare>())
 
@@ -303,7 +310,7 @@ class NoteShareFragment : BrandedFragment(), ShareeListAdapterListener, NoteShar
 
         val intent = Intent(context, NoteShareDetailActivity::class.java)
         intent.putExtras(bundle)
-        resultLauncher!!.launch(intent)
+        resultLauncher.launch(intent)
     }
 
     private fun accountOwnsFile(): Boolean {
@@ -669,7 +676,7 @@ class NoteShareFragment : BrandedFragment(), ShareeListAdapterListener, NoteShar
 
         val intent = Intent(context, NoteShareDetailActivity::class.java)
         intent.putExtras(bundle)
-        resultLauncher!!.launch(intent)
+        resultLauncher.launch(intent)
     }
 
     private val expDateShown: Boolean
