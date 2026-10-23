@@ -15,14 +15,14 @@ import it.niedermann.owncloud.notes.persistence.NoteSyncException
 import it.niedermann.owncloud.notes.persistence.SyncFailureReason
 
 object SyncErrorMessage {
-    @JvmStatic
     @StringRes
-    fun of(exceptions: Collection<Throwable>): Int =
-        (exceptions.map { it.syncFailureReason() }.distinct().singleOrNull() ?: SyncFailureReason.UNKNOWN).message
+    fun of(exceptions: Collection<Throwable>): Int = reasonOf(exceptions).message
 
-    @JvmStatic
-    @StringRes
-    fun of(exception: Throwable): Int = exception.syncFailureReason().message
+    fun isTokenMismatch(exceptions: Collection<Throwable>): Boolean =
+        reasonOf(exceptions) == SyncFailureReason.TOKEN_MISMATCH
+
+    private fun reasonOf(exceptions: Collection<Throwable>): SyncFailureReason =
+        exceptions.map { it.syncFailureReason() }.distinct().singleOrNull() ?: SyncFailureReason.UNKNOWN
 
     private fun Throwable.syncFailureReason(): SyncFailureReason =
         generateSequence(this) { it.cause }.firstNotNullOfOrNull { it.directSyncFailureReason() }
