@@ -102,8 +102,8 @@ public class MultiSelectedActionModeCallback implements Callback {
     @Override
     public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
         // Info menu makes sense only for single selection
-        menu.findItem(R.id.menu_details).setEnabled(tracker.getSelection().size() == 1);
-        return false;
+        menu.findItem(R.id.menu_details).setVisible(tracker.getSelection().size() == 1);
+        return true;
     }
 
     /**
