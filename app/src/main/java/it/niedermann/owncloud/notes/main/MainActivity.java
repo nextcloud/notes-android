@@ -918,10 +918,12 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     @Override
     public void openInfoBottomSheet(int position) {
         if (adapter.getItem(position) instanceof Note note) {
-            mainViewModel.getCurrentAccount().observe(this, (account) -> {
-                final var fragment = new ItemActionBottomSheet(note, account);
-                fragment.show(getSupportFragmentManager(), ItemActionBottomSheet.TAG);
-            });
+            Account account = mainViewModel.getCurrentAccount().getValue();
+            if (account == null) return;
+
+            final var fragment = new ItemActionBottomSheet(note, account);
+            fragment.show(getSupportFragmentManager(), ItemActionBottomSheet.TAG);
+
         }
     }
 
