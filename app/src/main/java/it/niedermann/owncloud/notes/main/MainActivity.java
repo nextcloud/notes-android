@@ -636,6 +636,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                         if (tracker.hasSelection()) {
                                             int selected = tracker.getSelection().size();
                                             mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, selected, selected));
+                                            mActionMode.invalidate();
                                         } else {
                                             mActionMode.finish();
                                             mActionMode = null;
