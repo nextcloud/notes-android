@@ -141,6 +141,15 @@
     <string name="error_no_network">Nu există conexiune la rețea</string>
     <string name="error_setting_status_message">Eroare la setarea mesajului de stare!</string>
     <string name="error_sync">Sincronizarea a eșuat: %1$s</string>
+    <string name="error_sync_insufficient_storage">Spațiul tău de stocare Nextcloud este plin. Eliberează spațiu pentru a sincroniza modificările.</string>
+    <string name="error_sync_locked">O notiță este deschisă în altă aplicație. Închide-o acolo pentru a sincroniza modificările.</string>
+    <string name="error_sync_maintenance">Serverul este în modul de mentenanță. Modificările se vor sincroniza mai târziu.</string>
+    <string name="error_sync_notes_app_unavailable">Aplicația Notițe nu este disponibilă pe server.</string>
+    <string name="error_sync_permission">Nu ai permisiunea de a salva această notiță. Verifică-ți accesul și încearcă din nou.</string>
+    <string name="error_sync_server_error">Serverul nu a putut salva modificările. Cere-i administratorului să verifice jurnalele.</string>
+    <string name="error_sync_server_unreachable">Serverul nu a putut fi contactat. Verifică-ți conexiunea și aplicația Nextcloud Fișiere.</string>
+    <string name="error_sync_token_mismatch">Notițe a pierdut accesul la contul din aplicația Fișiere. Elimină contul și adaugă-l din nou.</string>
+    <string name="error_sync_unauthorized">Autentificarea ta nu mai este validă. Autentifică-te din nou în aplicația Nextcloud Fișiere.</string>
     <string name="error_synchronization">Sincronizarea a eșuat</string>
     <string name="error_unknown">A apărut o eroare necunoscută.</string>
     <string name="failed_the_remove_share">Partajarea nu a putut fi eliminată</string>

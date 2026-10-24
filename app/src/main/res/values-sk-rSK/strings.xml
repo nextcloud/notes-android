@@ -141,6 +141,15 @@
     <string name="error_no_network">Bez sieťového pripojenia</string>
     <string name="error_setting_status_message">Chyba pri nastavovaní správy stavu!</string>
     <string name="error_sync">Synchronizácia zlyhala: %1$s</string>
+    <string name="error_sync_insufficient_storage">Vaše úložisko Nextcloud je plné. Uvoľnite miesto, aby sa vaše zmeny zosynchronizovali.</string>
+    <string name="error_sync_locked">Poznámka je otvorená v inej aplikácii. Ak chcete zosynchronizovať zmeny, zatvorte ju tam.</string>
+    <string name="error_sync_maintenance">Server je v režime údržby. Vaše zmeny sa zosynchronizujú neskôr.</string>
+    <string name="error_sync_notes_app_unavailable">Aplikácia Notes nie je dostupná na vašom serveri.</string>
+    <string name="error_sync_permission">Nemáte oprávnenie uložiť túto poznámku. Skontrolujte svoj prístup a skúste to znova.</string>
+    <string name="error_sync_server_error">Server nemohol uložiť vaše zmeny. Požiadajte správcu, aby skontroloval protokoly.</string>
+    <string name="error_sync_server_unreachable">Nepodarilo sa pripojiť k vášmu serveru. Skontrolujte pripojenie a aplikáciu Nextcloud Files.</string>
+    <string name="error_sync_token_mismatch">Aplikácia Notes stratila prístup k vášmu účtu v aplikácii Files. Odstráňte účet a znova ho pridajte.</string>
+    <string name="error_sync_unauthorized">Vaše prihlásenie už nie je platné. Znova sa prihláste v aplikácii Nextcloud Files.</string>
     <string name="error_synchronization">Synchronizácia zlyhala</string>
     <string name="error_unknown">Vyskytla sa neznáma chyba</string>
     <string name="failed_the_remove_share">Zlyhalo odstránenie zdieľania</string>
