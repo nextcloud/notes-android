@@ -141,6 +141,8 @@
     <string name="error_no_network">Aucune connexion réseau</string>
     <string name="error_setting_status_message">Erreur de définition du message d\'état !</string>
     <string name="error_sync">Échec de synchronisation : %1$s</string>
+    <string name="error_sync_maintenance">Le serveur est en mode maintenance. Vos modifications seront synchronisées ultérieurement.</string>
+    <string name="error_sync_notes_app_unavailable">L\'application Notes n\'est pas disponible sur votre serveur.</string>
     <string name="error_synchronization">Échec de synchronisation</string>
     <string name="error_unknown">Une erreur inconnue est survenue</string>
     <string name="failed_the_remove_share">Échec de la suppression du partage</string>
