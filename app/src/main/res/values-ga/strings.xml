@@ -141,6 +141,15 @@
     <string name="error_no_network">Gan nasc líonra</string>
     <string name="error_setting_status_message">Earráid ag socrú teachtaireachta stádais!</string>
     <string name="error_sync">Theip ar an sioncronú: %1$s</string>
+    <string name="error_sync_insufficient_storage">Tá do stóráil Nextcloud lán. Saor spás chun do chuid athruithe a shioncronú.</string>
+    <string name="error_sync_locked">Tá nóta ar oscailt in aip eile. Dún ansin é chun do chuid athruithe a shioncronú.</string>
+    <string name="error_sync_maintenance">Tá an freastalaí i mód cothabhála. Sioncronófar do chuid athruithe níos déanaí.</string>
+    <string name="error_sync_notes_app_unavailable">Níl an aip Nótaí ar fáil ar do fhreastalaí.</string>
+    <string name="error_sync_permission">Níl cead agat an nóta seo a shábháil. Seiceáil do cheadanna rochtana, le do thoil, agus bain triail as arís.</string>
+    <string name="error_sync_server_error">Níorbh fhéidir leis an bhfreastalaí do chuid athruithe a shábháil. Iarr ar do riarthóir na logaí a sheiceáil.</string>
+    <string name="error_sync_server_unreachable">Níorbh fhéidir teacht ar do fhreastalaí. Seiceáil do nasc agus an aip Nextcloud Files.</string>
+    <string name="error_sync_token_mismatch">Chaill Notes rochtain ar do chuntas san aip Files. Bain an cuntas agus cuir ar ais é.</string>
+    <string name="error_sync_unauthorized">Níl do shonraí logála bailí a thuilleadh. Logáil isteach arís san aip Nextcloud Files.</string>
     <string name="error_synchronization">Theip ar an sioncronú</string>
     <string name="error_unknown">Tharla earráid anaithnid.</string>
     <string name="failed_the_remove_share">Theip ar an gcomhroinnt a bhaint</string>
