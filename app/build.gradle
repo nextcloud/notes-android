@@ -19,8 +19,8 @@ android {
         targetSdk 36
         // mayor.minor.hotfix.increment (for increment: 01-50=Alpha / 51-89=RC / 90-99=stable)
         // xx   .xxx  .xx    .xx
-        versionCode 350010005
-        versionName "35.1.0 Alpha 05"
+        versionCode 350010006
+        versionName "35.1.0 Alpha 06"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
