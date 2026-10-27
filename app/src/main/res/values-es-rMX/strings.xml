@@ -101,6 +101,7 @@
     <string name="fontSize_medium">Medio</string>
     <string name="formatting_help_checkboxes_title">Casillas de verificación</string>
     <string name="formatting_help_images_title">Imágenes</string>
+    <string name="formatting_help_tables_column">Columna %1d</string>
     <string name="formatting_help_text_title">Texto</string>
     <string name="fourHours">4 horas</string>
     <string name="invisible">Invisible</string>
@@ -135,6 +136,7 @@
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" ha sido compartido contigo</string>
     <string name="note_share_detail_activity_cancel">Cancelar</string>
     <string name="note_share_detail_activity_common_confirm">Confirmar</string>
+    <string name="note_share_detail_activity_common_next">Siguiente</string>
     <string name="note_share_detail_activity_hint_name">Nombre</string>
     <string name="note_share_detail_activity_hint_note">Nota</string>
     <string name="note_share_detail_activity_hint_password">Contraseña</string>
@@ -155,6 +157,7 @@
     <string name="pref_value_wifi_and_mobile">Sincronizar con Wi-Fi y datos móviles</string>
     <string name="public_share_name">Nuevo nombre</string>
     <string name="remote">(remoto)</string>
+    <string name="remove_account">Quitar %1$s</string>
     <string name="search_in_category">Buscar en %1$s</string>
     <string name="set_online_status">Estado en línea</string>
     <string name="settings_background_sync">Sincronización en segundo plano</string>

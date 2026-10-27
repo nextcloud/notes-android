@@ -8,6 +8,7 @@
     <string name="about_icons_disclaimer_app_icon">За оргиналните икони видете %1$s.</string>
     <string name="about_icons_disclaimer_mdi_icons">Сите останати икони кој се користат во апликацијата се %1$s направени од Google Inc. и лиценцирани под Apache 2.0 Лиценца.</string>
     <string name="about_icons_disclaimer_title">Икони</string>
+    <string name="about_issues_title">Проблеми</string>
     <string name="about_license_tab_title">Лиценца</string>
     <string name="about_maintainer_title">Одржувачи</string>
     <string name="about_source">Овој проект е хостиран на GitHub: %1$s</string>
@@ -91,6 +92,7 @@
     <string name="formatting_help_checkboxes_title">Полиња за избирање</string>
     <string name="formatting_help_images_title">Слики</string>
     <string name="formatting_help_lists_title">Листи</string>
+    <string name="formatting_help_tables_column">Колона %1d</string>
     <string name="formatting_help_text_title">Текст</string>
     <string name="fourHours">4 часа</string>
     <string name="invisible">Невидлив</string>
