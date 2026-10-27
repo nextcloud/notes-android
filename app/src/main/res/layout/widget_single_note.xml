@@ -9,12 +9,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/widget_background">
+    android:background="@drawable/widget_background"
+    android:clipToOutline="true"
+    tools:targetApi="s">
 
     <ListView
         android:id="@+id/single_note_widget_lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
         android:paddingVertical="@dimen/widget_inner_padding_vertical"
         android:paddingHorizontal="@dimen/widget_inner_padding_horizontal"
         tools:listitem="@layout/widget_single_note_content" />
