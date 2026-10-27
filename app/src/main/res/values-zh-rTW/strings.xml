@@ -141,6 +141,15 @@
     <string name="error_no_network">沒有網路連線</string>
     <string name="error_setting_status_message">設定狀態訊息時發生錯誤！</string>
     <string name="error_sync">同步失敗：%1$s</string>
+    <string name="error_sync_insufficient_storage">您的 Nextcloud 儲存空間已滿。請釋放空間以同步變更。</string>
+    <string name="error_sync_locked">有另一個應用程式正在開啟此筆記。請先在該應用程式關閉筆記以同步變更。</string>
+    <string name="error_sync_maintenance">伺服器正處於維護模式。您的變更將於稍後同步。</string>
+    <string name="error_sync_notes_app_unavailable">您的伺服器上並未提供筆記應用程式。</string>
+    <string name="error_sync_permission">您無權儲存此筆記。請檢查您的存取權，然後重試。</string>
+    <string name="error_sync_server_error">伺服器無法儲存您的變更。請要求您的管理員檢查紀錄檔。</string>
+    <string name="error_sync_server_unreachable">無法連線至您的伺服器。請檢查網路連線及 Nextcloud Files 應用程式。</string>
+    <string name="error_sync_token_mismatch">筆記應用程式已失去對您 Files 應用程式帳號的存取權。請移除該帳號後重新加入。</string>
+    <string name="error_sync_unauthorized">您的登入資訊已失效。請在 Nextcloud Files 應用程式中重新登入。</string>
     <string name="error_synchronization">同步失敗</string>
     <string name="error_unknown">發生未知錯誤。</string>
     <string name="failed_the_remove_share">移除分享失敗</string>

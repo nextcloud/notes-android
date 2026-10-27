@@ -141,8 +141,15 @@
     <string name="error_no_network">Aucune connexion réseau</string>
     <string name="error_setting_status_message">Erreur de définition du message d\'état !</string>
     <string name="error_sync">Échec de synchronisation : %1$s</string>
+    <string name="error_sync_insufficient_storage">Votre stockage Nextcloud est plein. Libérez de la place pour synchroniser vos modifications.</string>
+    <string name="error_sync_locked">Une note est ouverte dans une autre application. Fermez-la ici pour synchroniser vos modifications.</string>
     <string name="error_sync_maintenance">Le serveur est en mode maintenance. Vos modifications seront synchronisées ultérieurement.</string>
     <string name="error_sync_notes_app_unavailable">L\'application Notes n\'est pas disponible sur votre serveur.</string>
+    <string name="error_sync_permission">Vous n\'avez pas la permission d\'enregistrer cette note. Veuillez vérifier vos droits d\'accès et réessayer.</string>
+    <string name="error_sync_server_error">Le serveur n\'a pas pu enregistrer vos modifications. Demandez à votre administrateur de vérifier les logs.</string>
+    <string name="error_sync_server_unreachable">Impossible de contacter votre serveur. Vérifiez votre connexion et l\'application Nextcloud Fichiers.</string>
+    <string name="error_sync_token_mismatch">Notes a perdu l\'accès au compte de votre application Fichiers. Retirez puis ajoutez le compte à nouveau.</string>
+    <string name="error_sync_unauthorized">Votre identifiant n\'est plus valide. Reconnectez-vous dans l\'application Nextcloud Fichiers.</string>
     <string name="error_synchronization">Échec de synchronisation</string>
     <string name="error_unknown">Une erreur inconnue est survenue</string>
     <string name="failed_the_remove_share">Échec de la suppression du partage</string>

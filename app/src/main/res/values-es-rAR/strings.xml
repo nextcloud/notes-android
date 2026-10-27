@@ -115,6 +115,7 @@
     <string name="note_share_activity_subject_shared_with_you">\"%1$s\" ha sido compartido con usted</string>
     <string name="note_share_detail_activity_cancel">Cancel</string>
     <string name="note_share_detail_activity_common_confirm">Confirmar</string>
+    <string name="note_share_detail_activity_common_next">Siguiente</string>
     <string name="note_share_detail_activity_hint_name">Nombre</string>
     <string name="note_share_detail_activity_hint_note">Nota</string>
     <string name="note_share_detail_activity_hint_password">Contraseña</string>
