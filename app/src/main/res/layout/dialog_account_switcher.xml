@@ -163,12 +163,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/accounts_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:paddingTop="0dp"
         android:scrollbarStyle="outsideOverlay"
         android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:itemCount="3"
+        tools:itemCount="10"
         tools:listitem="@layout/item_account_choose" />
 
     <LinearLayout
