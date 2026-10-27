@@ -1,21 +1,6 @@
-# This file contains the fastlane.tools configuration
-# You can find the documentation at https://docs.fastlane.tools
-#
-# For a list of all available actions, check out
-#
-#     https://docs.fastlane.tools/actions
-#
-# For a list of all available plugins, check out
-#
-#     https://docs.fastlane.tools/plugins/available-plugins
-#
-
 # SPDX-FileCopyrightText: 2023-2024 Nextcloud GmbH and Nextcloud contributors
 # SPDX-FileCopyrightText: 2023 Álvaro Brey <alvaro@alvarobrey.com>
 # SPDX-License-Identifier: GPL-3.0-or-later
-
-# Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
 
 ## config
 # add following to your shell rc:
@@ -26,26 +11,23 @@
 # export FASTLANE_NEXTCLOUD_GITHUB_API_TOKEN=""
 
 
+
+
 skip_docs
 
-default_platform(:android)
+APP="notes"
+REPO="nextcloud/notes-android"
 
-BUNDLE_PATH = "app/build/outputs/bundle/playRelease/app-play-release.aab"
-ENV['SUPPLY_UPLOAD_MAX_RETRIES']='10'
+GRADLE_SIGNING_PROPERTIES = {
+  "android.injected.signing.store.file" => ENV["FASTLANE_NOTES_UPLOAD_STORE_FILE"],
+  "android.injected.signing.store.password" => ENV["FASTLANE_NOTES_UPLOAD_STORE_PASSWORD"],
+  "android.injected.signing.key.alias" => ENV["FASTLANE_NOTES_UPLOAD_KEY_ALIAS"],
+  "android.injected.signing.key.password" => ENV["FASTLANE_NOTES_UPLOAD_KEY_PASSWORD"],
+}.freeze
 
 import("./common.Fastfile")
 
 platform :android do
-desc "Build app bundle"
-
-    desc "Run tests and build app"
-    lane :releasePhase1 do
-        test()
-        buildBundle()
-        versionInfo = getVersionInfo()
-        buildSignedAPK(versionCode: versionInfo["versionCode"])
-    end
-
     desc "Release previously built app to Google Play and create tag"
     lane :releasePhase2 do
         versionInfo = getVersionInfo()
@@ -59,45 +41,6 @@ desc "Build app bundle"
         createGithubRelease(name: versionInfo["versionName"], tag: tagName, versionCode: versionInfo["versionCode"])
         uploadToPlayStore(track: storeTrack)
     end
-
-    desc "Run tests"
-    lane :test do
-         gradle(task: "clean testPlayDebugUnitTest testFdroidDebugUnitTest testDevDebugUnitTest testQaDebugUnitTest")
-    end
-
-    desc "Build app bundle"
-    lane :buildBundle do
-        gradle(
-            task: 'bundle',
-            flavor: 'play',
-            build_type: 'Release',
-            print_command: false,
-            properties: {
-                  "android.injected.signing.store.file" => ENV["FASTLANE_NOTES_UPLOAD_STORE_FILE"],
-                  "android.injected.signing.store.password" => ENV["FASTLANE_NOTES_UPLOAD_STORE_PASSWORD"],
-                  "android.injected.signing.key.alias" => ENV["FASTLANE_NOTES_UPLOAD_KEY_ALIAS"],
-                  "android.injected.signing.key.password" => ENV["FASTLANE_NOTES_UPLOAD_KEY_PASSWORD"],
-                }
-            )
-    end
-
-	desc "Build APK"
-	lane :buildSignedAPK do |options|
-		gradle(
-			task: 'assemble',
-			flavor: 'play',
-			build_type: 'Release',
-			print_command: false,
-			properties: {
-				  "android.injected.signing.store.file" => ENV["FASTLANE_NOTES_UPLOAD_STORE_FILE"],
-				  "android.injected.signing.store.password" => ENV["FASTLANE_NOTES_UPLOAD_STORE_PASSWORD"],
-				  "android.injected.signing.key.alias" => ENV["FASTLANE_NOTES_UPLOAD_KEY_ALIAS"],
-				  "android.injected.signing.key.password" => ENV["FASTLANE_NOTES_UPLOAD_KEY_PASSWORD"],
-				}
-			)
-		sh("mkdir -p ../release/")
-		sh("mv ../app/build/outputs/apk/play/release/app-play-release.apk ../release/nextcloud-notes-#{options[:versionCode]}.apk")
-	end
 
     desc "Show versions and prompt for confirmation"
     private_lane :preReleaseChecks do |options|
@@ -113,56 +56,15 @@ desc "Build app bundle"
         promptYesNo(text: text)
     end
 
-    desc "Check if release artifacts exist"
-    private_lane :checkArtifactsExist do
-        if !File.exist?("../#{BUNDLE_PATH}")
-            UI.user_error!("Bundle not found at #{BUNDLE_PATH}")
-        end
-    end
-
-
-    desc "Create release tag"
-    private_lane :tag do |options|
-        tagName = options[:name]
-        add_git_tag(
-          tag: tagName,
-          sign: true
-        )
-        push_git_tags(tag: tagName)
-    end
-
-    desc "Upload release artifacts to Google Play"
-    private_lane :uploadToPlayStore do |options|
-        upload_to_play_store(
-            skip_upload_images: true,
-            skip_upload_apk: true,
-            track: options[:track],
-            aab: BUNDLE_PATH
-        )
-    end
-
 	private_lane :createGithubRelease do |options|
 		set_github_release(
-			repository_name: "nextcloud/notes-android",
+			repository_name: REPO,
 			api_token: ENV["FASTLANE_NEXTCLOUD_GITHUB_API_TOKEN"],
 			name: options[:name],
 			tag_name: options[:tag],
 			description: (File.read("metadata/android/en-US/changelogs/" + options[:versionCode] + ".txt") rescue "No changelog provided"),
-			upload_assets: [ "release/nextcloud-notes-" + options[:versionCode].to_s + ".apk" ]
+			upload_assets: Dir.glob("release/*.apk")
 		)
 	end
-
-    desc "Upload Alpha version to play store"
-    lane :uploadAlphaToPlayStore do |options|
-        upload_to_play_store(
-            skip_upload_images: true,
-            skip_upload_aab: true,
-            skip_upload_changelogs: true,
-            skip_upload_metadata: true,
-            skip_upload_screenshots: true,
-            track: 'alpha',
-            apk: "/home/androiddaily/apks-notes/android-notes-" + options[:version] + ".apk",
-        )
-    end
 
 end
