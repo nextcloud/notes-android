@@ -34,6 +34,8 @@ class ActivityListAdapter (
     private var brandColor: Int? = null
     private val dateFormatter = DateFormatter(context)
 
+    val calendar: Calendar = Calendar.getInstance()
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -44,7 +46,8 @@ class ActivityListAdapter (
                 parent,
                 false
             ),
-            dateFormatter
+            dateFormatter,
+            calendar
         )
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -68,7 +71,8 @@ class ActivityListAdapter (
 
     private class ActivityViewHolder(
         val binding: ActivityListItemBinding,
-        val dateFormatter: DateFormatter
+        val dateFormatter: DateFormatter,
+        val calendar: Calendar
     ) : BrandedViewHolder(binding.root) {
 
         fun bind(item: ActivityListItem, listener: OnActivityClickListener) {
@@ -89,7 +93,7 @@ class ActivityListAdapter (
             binding.datetime.apply {
                 visibility = View.VISIBLE
                 text = dateFormatter.getConditionallyRelativeFormattedTimeSpan(
-                    Calendar.getInstance().apply {
+                    calendar.apply {
                         timeInMillis = activity.getTimestamp()
                     }
                 )
