@@ -87,6 +87,7 @@ import it.niedermann.owncloud.notes.shared.util.ApiVersionUtil;
 import it.niedermann.owncloud.notes.shared.util.ConnectionLiveData;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 import it.niedermann.owncloud.notes.shared.util.SSOUtil;
+import it.niedermann.owncloud.notes.shared.util.SingleLiveEvent;
 import retrofit2.Call;
 
 @SuppressWarnings("UnusedReturnValue")
@@ -109,7 +110,7 @@ public class NotesRepository {
     private String syncOnlyOnWifiKey;
     private boolean syncOnlyOnWifi;
     private final MutableLiveData<Boolean> syncStatus = new MutableLiveData<>(false);
-    private final MutableLiveData<ArrayList<Throwable>> syncErrors = new MutableLiveData<>();
+    private final SingleLiveEvent<ArrayList<Throwable>> syncErrors = new SingleLiveEvent<>();
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
 
     private final Observer<? super ConnectionLiveData.ConnectionType> syncObserver = (Observer<ConnectionLiveData.ConnectionType>) connectionType -> {

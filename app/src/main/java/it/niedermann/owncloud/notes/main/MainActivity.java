@@ -72,7 +72,6 @@ import com.nextcloud.android.sso.exceptions.AccountImportCancelledException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
-import com.nextcloud.android.sso.exceptions.TokenMismatchException;
 import com.nextcloud.android.sso.exceptions.UnknownErrorException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.owncloud.android.lib.common.utils.Log_OC;
@@ -216,11 +215,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         mainViewModel.getSyncStatus().observe(this, syncStatus -> swipeRefreshLayout.setRefreshing(syncStatus));
         mainViewModel.getSyncErrors().observe(this, exceptions -> {
             if (mainViewModel.containsNonInfrastructureRelatedItems(exceptions)) {
-                BrandedSnackbar.make(coordinatorLayout, SyncErrorMessage.of(exceptions), Snackbar.LENGTH_LONG)
-                        .setAnchorView(binding.activityNotesListView.fabCreate)
-                        .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(exceptions)
-                                .show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()))
-                        .show();
+                SyncErrorSnackbar.show(this, coordinatorLayout, binding.activityNotesListView.fabCreate, exceptions);
             }
         });
         mainViewModel.getSelectedCategory().observe(this, (selectedCategory) -> {
@@ -325,11 +320,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                     .setAnchorView(binding.activityNotesListView.fabCreate)
                                     .show();
                         } else {
-                            BrandedSnackbar.make(coordinatorLayout, SyncErrorMessage.of(t), Snackbar.LENGTH_LONG)
-                                    .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(t)
-                                            .show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()))
-                                    .setAnchorView(binding.activityNotesListView.fabCreate)
-                                    .show();
+                            SyncErrorSnackbar.show(MainActivity.this, coordinatorLayout,
+                                    binding.activityNotesListView.fabCreate, t);
                         }
                     });
                 }
@@ -609,11 +601,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                         .setAnchorView(binding.activityNotesListView.fabCreate)
                                         .show();
                             } else {
-                                BrandedSnackbar.make(coordinatorLayout, SyncErrorMessage.of(t), Snackbar.LENGTH_LONG)
-                                        .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(t)
-                                                .show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()))
-                                        .setAnchorView(binding.activityNotesListView.fabCreate)
-                                        .show();
+                                SyncErrorSnackbar.show(MainActivity.this, coordinatorLayout,
+                                        binding.activityNotesListView.fabCreate, t);
                             }
                         });
                     }
@@ -821,8 +810,20 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             default -> {
                 try {
                     AccountImporter.onActivityResult(requestCode, resultCode, data, this, (ssoAccount) -> {
+                        ApiProvider.getInstance().invalidateAPICache(ssoAccount);
                         CapabilitiesWorker.update(this);
                         executor.submit(() -> {
+                            final var existingAccount = mainViewModel.getLocalAccountByAccountName(ssoAccount.name);
+                            if (existingAccount != null) {
+                                runOnUiThread(() -> {
+                                    mainViewModel.postCurrentAccount(existingAccount);
+                                    BrandedSnackbar
+                                            .make(coordinatorLayout, R.string.account_access_renewed, Snackbar.LENGTH_LONG)
+                                            .setAnchorView(binding.activityNotesListView.fabCreate)
+                                            .show();
+                                });
+                                return;
+                            }
                             final var importSnackbar = BrandedSnackbar.make(coordinatorLayout, R.string.progress_import_indeterminate, Snackbar.LENGTH_INDEFINITE)
                                     .setAnchorView(binding.activityNotesListView.fabCreate);
                             Log.i(TAG, "Added account: " + "name:" + ssoAccount.name + ", " + ssoAccount.url + ", userId" + ssoAccount.userId);
@@ -860,17 +861,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                             } catch (Throwable e) {
                                 importSnackbar.dismiss();
                                 ApiProvider.getInstance().invalidateAPICache(ssoAccount);
-                                // Happens when importing an already existing account the second time
-                                if (e instanceof TokenMismatchException && mainViewModel.getLocalAccountByAccountName(ssoAccount.name) != null) {
-                                    Log.w(TAG, "Received " + TokenMismatchException.class.getSimpleName() + " and the given ssoAccount.name (" + ssoAccount.name + ") does already exist in the database. Assume that this account has already been imported.");
-                                    runOnUiThread(() -> {
-                                        mainViewModel.postCurrentAccount(mainViewModel.getLocalAccountByAccountName(ssoAccount.name));
-                                        // TODO there is already a sync in progress and results in displaying a TokenMissMatchException snackbar which conflicts with this one
-                                        coordinatorLayout.post(() -> BrandedSnackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG)
-                                                .setAnchorView(binding.activityNotesListView.fabCreate)
-                                                .show());
-                                    });
-                                } else if (e instanceof UnknownErrorException && e.getMessage() != null && e.getMessage().contains("No address associated with hostname")) {
+                                if (e instanceof UnknownErrorException && e.getMessage() != null && e.getMessage().contains("No address associated with hostname")) {
                                     // https://github.com/nextcloud/notes-android/issues/1014
                                     runOnUiThread(() -> Snackbar.make(coordinatorLayout, R.string.you_have_to_be_connected_to_the_internet_in_order_to_add_an_account, Snackbar.LENGTH_LONG)
                                             .setAnchorView(binding.activityNotesListView.fabCreate)
