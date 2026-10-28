@@ -124,7 +124,7 @@
     <string name="error_dialog_check_server_logs">Il y a un problème avec votre configuration Nextcloud. Consulter les fichiers de log du serveur.</string>
     <string name="error_dialog_insufficient_storage">Votre instance Nextcloud n\'a plus d\'espace disponible. Veuillez supprimer certains fichiers pour pouvoir synchroniser vos modifications locales dans votre cloud.</string>
     <string name="error_dialog_min_version">L\'application Notes Android  nécessite que l\'application Nextcloud Android soit au moins en version 3.18.</string>
-    <string name="error_dialog_redirect">Votre serveur a répondu avec le code HTTP 302, ce qui implique que vous n\'avez pas installé l\'application Notes sur votre serveur ou que quelque chose est mal configuré. Cela peut être dû à des modifications du fichier .htaccess or à une autre application Nextcloud comme OID Client.</string>
+    <string name="error_dialog_redirect">Votre serveur a répondu avec le code HTTP 302, ce qui implique que vous n\'avez pas installé l\'application Notes sur votre serveur ou que quelque chose est mal configuré. Cela peut être dû à des modifications du fichier .htaccess ou à une autre application Nextcloud comme OID Client.</string>
     <string name="error_dialog_server_app_enabled">Veuillez vérifier que vous avez installé et activé l\'application \"Notes\" sur votre serveur.</string>
     <string name="error_dialog_timeout_instance">Le serveur n’a pas répondu dans le temps imparti. Assurez-vous que votre instance fonctionne correctement.</string>
     <string name="error_dialog_timeout_toggle">Vérifiez votre connexion réseau. L\'activation et la désactivation des données mobiles ou du Wi-Fi peuvent aider.</string>
