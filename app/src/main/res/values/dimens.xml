@@ -26,8 +26,6 @@
     <dimen name="button_extra_width">180dp</dimen>
     <dimen name="bottom_navigation_view_margin">100dp</dimen>
 
-    <dimen name="note_shared_icon_size">18dp</dimen>
-
     <dimen name="avatar_size">40dp</dimen>
     <dimen name="user_status_icon_size">16dp</dimen>
 
@@ -82,4 +80,18 @@
     <dimen name="sharee_list_item_size">56dp</dimen>
     <dimen name="online_status_item_height">60dp</dimen>
     <dimen name="iconized_single_line_item_icon_size">24dp</dimen>
+
+    <dimen name="standard_padding">@dimen/spacer_2x</dimen>
+    <dimen name="standard_half_padding">@dimen/spacer_1x</dimen>
+
+    <dimen name="activity_icon_width">32dp</dimen>
+    <dimen name="activity_icon_height">32dp</dimen>
+    <dimen name="activity_action_icon_width">24dp</dimen>
+    <dimen name="activity_action_icon_height">24dp</dimen>
+    <dimen name="activity_standard_margin">16dp</dimen>
+    <dimen name="activity_icon_layout_right_end_margin">24dp</dimen>
+    <dimen name="activity_list_item_grid_layout_left_start_margin">-3dp</dimen>
+
+    <dimen name="file_details_preview_height">112dp</dimen>
+
 </resources>

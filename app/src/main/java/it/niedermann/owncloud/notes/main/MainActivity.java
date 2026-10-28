@@ -101,6 +101,7 @@ import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
 import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.exception.IntendedOfflineException;
 import it.niedermann.owncloud.notes.importaccount.ImportAccountActivity;
+import it.niedermann.owncloud.notes.itemactions.ItemActionBottomSheet;
 import it.niedermann.owncloud.notes.main.items.ItemAdapter;
 import it.niedermann.owncloud.notes.main.items.grid.GridItemDecoration;
 import it.niedermann.owncloud.notes.main.items.list.NotesListViewItemTouchHelper;
@@ -115,7 +116,6 @@ import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesWorker;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
-import it.niedermann.owncloud.notes.share.NoteShareActivity;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
@@ -636,6 +636,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                         if (tracker.hasSelection()) {
                                             int selected = tracker.getSelection().size();
                                             mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, selected, selected));
+                                            mActionMode.invalidate();
                                         } else {
                                             mActionMode.finish();
                                             mActionMode = null;
@@ -916,12 +917,14 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     }
 
     @Override
-    public void openShare(int position) {
+    public void openInfoBottomSheet(int position) {
         if (adapter.getItem(position) instanceof Note note) {
-            mainViewModel.getCurrentAccount().observe(this, (account) -> {
-                final Intent intent = NoteShareActivity.getActivityStartIntent(note, account, this);
-                startActivity(intent);
-            });
+            Account account = mainViewModel.getCurrentAccount().getValue();
+            if (account == null) return;
+
+            final var fragment = new ItemActionBottomSheet(note, account);
+            fragment.show(getSupportFragmentManager(), ItemActionBottomSheet.TAG);
+
         }
     }
 
