@@ -1,3 +1,17 @@
+# install fastlane via bundle
+# cd fastlane
+# bundle config set path fastlane
+# bundle install 
+
+# run fastlane
+# bundle exec fastlane 
+
+# update fastlane
+# bundle update fastlane
+
+# update plugins
+# bundle exec fastlane update_plugins
+
 BUILD_NUMBER_RC_START = 51
 BUILD_NUMBER_FINAL_START = 90
 
@@ -9,7 +23,25 @@ TYPE_ALPHA = "alpha"
 TYPE_RC = "rc"
 TYPE_FINAL = "final"
 
+BUNDLE_PATH = "app/build/outputs/bundle/gplayRelease/app-gplay-release.aab"
+
+default_platform(:android)
+
+ENV['SUPPLY_UPLOAD_MAX_RETRIES']='10'
+
 platform :android do
+    desc "Run tests and build app"
+    lane :releasePhase1 do
+    	sh("rm -rf ../release/ && mkdir -p ../release")
+		gradle(task: 'clean')
+        
+        versionInfo = getVersionInfo()
+        test() # needs to be overwritten in apps
+        
+        buildBundle()
+        buildAPKs(code: versionInfo["versionCode"])
+    end
+
     desc "Print version info"
     lane :printVersionInfo do
         versionInfo = getVersionInfo()
@@ -38,6 +70,19 @@ platform :android do
         )
         writeVersions(versionCode: versionCodeGenerated, versionName: versionNameGenerated)
     end
+    
+    desc "Upload Alpha version to play store"
+	lane :uploadAlphaToPlayStore do |options|
+		upload_to_play_store(
+			skip_upload_images: true,
+			skip_upload_aab: true,
+			skip_upload_changelogs: true,
+			skip_upload_metadata: true,
+			skip_upload_screenshots: true,
+			track: 'alpha',
+			apk: "/home/androiddaily/apks-#{APP}/android-#{APP}-" + options[:version] + ".apk",
+		)
+	end
 
 
     desc "Parse major, minor, patch and build from versionCode"
@@ -97,10 +142,10 @@ platform :android do
 
     desc "Read versions from gradle file"
     private_lane :getVersionInfo do
-        File.open("../app/build.gradle","r") do |file|
+        File.open("../app/build.gradle.kts","r") do |file|
             text = file.read
-            versionName = text.match(/versionName "(.*)"$/)[1]
-            versionCode = text.match(/versionCode ([0-9]*)$/)[1].to_i
+            versionName = text.match(/versionName = "(.*)"$/)[1]
+            versionCode = text.match(/versionCode = ([0-9]*)$/)[1].to_i
 
             { "versionCode" => versionCode, "versionName" => versionName }
         end
@@ -183,6 +228,72 @@ platform :android do
             UI.user_error!("Version is not releasable: #{versionComponents["type"]}")
         end
     end
+    
+    desc "Run tests"
+	private_lane :test do
+		 gradle(task: "clean testGplayDebugUnitTest testGenericDebugUnitTest testQaDebugUnitTest")
+	end
+	
+	desc "Build app bundle"
+	private_lane :buildBundle do
+		gradle(
+			task: 'bundle',
+			flavor: 'Gplay',
+			build_type: 'Release',
+			print_command: false,
+			properties: GRADLE_SIGNING_PROPERTIES
+			)
+	end
+	
+	desc "Build signed APK"
+	private_lane :SignedRelease do |options|
+		gradle(
+			task: 'assemble',
+			flavor: options[:flavor],
+			build_type: 'Release',
+			print_command: false,
+			properties: GRADLE_SIGNING_PROPERTIES
+			)
+			
+		sh("mv ../app/build/outputs/apk/#{options[:flavor]}/release/*.apk ../release/nextcloud-#{APP}-#{options[:flavor]}-#{options[:versionCode]}.apk")
+	end
+	
+	desc "Build all APKs"
+	private_lane :buildAPKs do |options|
+		SignedRelease(flavor: "generic", versionCode: options[:code])
+		SignedRelease(flavor: "gplay", versionCode: options[:code])
+		
+		if APP == "files"
+			SignedRelease(flavor: "huawei", versionCode: options[:code])
+		end
+	end
+	
+	desc "Create release tag"
+        private_lane :tag do |options|
+            tagName = options[:name]
+            add_git_tag(
+              tag: tagName,
+              sign: true
+            )
+            push_git_tags(tag: tagName)
+        end
+
+	 desc "Upload release artifacts to Google Play"
+		private_lane :uploadToPlayStore do |options|
+			upload_to_play_store(
+				skip_upload_images: true,
+				skip_upload_apk: true,
+				track: options[:track],
+				aab: BUNDLE_PATH
+			)
+		end
+		
+	 desc "Check if release artifacts exist"
+		private_lane :checkArtifactsExist do
+			if !File.exist?("../#{BUNDLE_PATH}")
+				UI.user_error!("Bundle not found at #{BUNDLE_PATH}")
+			end
+		end
 
 end
 
