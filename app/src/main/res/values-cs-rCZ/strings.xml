@@ -253,7 +253,7 @@
     <string name="note_share_detail_activity_allow_download_and_sync">Povolit stahování a synchronizaci</string>
     <string name="note_share_detail_activity_cancel">Storno</string>
     <string name="note_share_detail_activity_common_confirm">Potvrdit</string>
-    <string name="note_share_detail_activity_common_next">Next</string>
+    <string name="note_share_detail_activity_common_next">Další</string>
     <string name="note_share_detail_activity_create_share_error">Nepodařilo se vytvořit sdílení</string>
     <string name="note_share_detail_activity_hint_name">Název</string>
     <string name="note_share_detail_activity_hint_note">Poznámka</string>
