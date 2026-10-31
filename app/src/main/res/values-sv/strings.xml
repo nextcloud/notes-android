@@ -141,6 +141,15 @@
     <string name="error_no_network">Ingen nätverksanslutning</string>
     <string name="error_setting_status_message">Fel uppstod vid skapande av statusmeddelande!</string>
     <string name="error_sync">Synkronisering misslyckades: %1$s</string>
+    <string name="error_sync_insufficient_storage">Ditt lagringsutrymme i Nextcloud är fullt. Frigör utrymme för att synkronisera dina ändringar.</string>
+    <string name="error_sync_locked">En anteckning är öppen i en annan app. Stäng den där för att synkronisera dina ändringar.</string>
+    <string name="error_sync_maintenance">Servern är i underhållsläge. Dina ändringar synkroniseras senare.</string>
+    <string name="error_sync_notes_app_unavailable">Appen Anteckningar är inte tillgänglig på din server.</string>
+    <string name="error_sync_permission">Du har inte behörighet att spara den här anteckningen. Kontrollera din åtkomst och försök igen.</string>
+    <string name="error_sync_server_error">Servern kunde inte spara dina ändringar. Be din administratör att kontrollera loggarna.</string>
+    <string name="error_sync_server_unreachable">Det gick inte att nå din server. Kontrollera din anslutning och Nextcloud Filer-appen.</string>
+    <string name="error_sync_token_mismatch">Anteckningar förlorade åtkomsten till ditt konto i Filer-appen. Ta bort och lägg till kontot igen.</string>
+    <string name="error_sync_unauthorized">Din inloggning är inte längre giltig. Logga in igen i Nextcloud Filer-appen.</string>
     <string name="error_synchronization">Synkroniseringen misslyckades</string>
     <string name="error_unknown">Ett okänt fel uppstod.</string>
     <string name="failed_the_remove_share">Kunde inte ta bort delning</string>
