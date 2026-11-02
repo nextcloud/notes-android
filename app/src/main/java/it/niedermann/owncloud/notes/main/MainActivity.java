@@ -101,6 +101,7 @@ import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
 import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.exception.IntendedOfflineException;
 import it.niedermann.owncloud.notes.importaccount.ImportAccountActivity;
+import it.niedermann.owncloud.notes.localnetwork.LocalNetworkPermissionRequester;
 import it.niedermann.owncloud.notes.main.items.ItemAdapter;
 import it.niedermann.owncloud.notes.main.items.grid.GridItemDecoration;
 import it.niedermann.owncloud.notes.main.items.list.NotesListViewItemTouchHelper;
@@ -134,6 +135,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     protected MainViewModel mainViewModel;
 
     private EcosystemManager ecosystemManager;
+    private final LocalNetworkPermissionRequester localNetworkPermission = new LocalNetworkPermissionRequester(this);
 
     private boolean gridView = true;
 
@@ -301,6 +303,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         mainViewModel.getNavigationCategories().observe(this, navigationItems -> this.adapterCategories.setItems(navigationItems));
         mainViewModel.getCurrentAccount().observe(this, (nextAccount) -> {
             fabCreate.hide();
+            localNetworkPermission.requestIfNeeded(nextAccount.getUrl());
             Glide
                     .with(this)
                     .load(nextAccount.getUrl() + "/index.php/avatar/" + Uri.encode(nextAccount.getUserName()) + "/64")
