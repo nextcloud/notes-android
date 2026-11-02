@@ -99,18 +99,18 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener, Activitie
     }
 
     override fun onVersionItemClick(version: FileVersion) {
-        binding.swipeContainingList.isRefreshing = true
-        // Restore the version
-        val ssoAccount =
-            SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext())
-        val repository = VersionsRepository(requireContext(), ssoAccount)
+        showProgress(true)
         lifecycleScope.launch(Dispatchers.IO) {
+            // Restore the version
+            val ssoAccount =
+                SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext())
+            val repository = VersionsRepository(requireContext(), ssoAccount)
             val result = repository.restoreVersion(version)
             withContext(Dispatchers.Main) {
                 when (result) {
                     RestoreVersionsResult.Success -> syncNote()
-                    RestoreVersionsResult.FailedUnsupported -> showMessage(R.string.version_restore_failed_unsupported)
-                    else -> showMessage(R.string.version_restore_failed)
+                    RestoreVersionsResult.FailedUnsupported -> showMessageAndHideProgress(R.string.version_restore_failed_unsupported)
+                    else -> showMessageAndHideProgress(R.string.version_restore_failed)
                 }
             }
         }
@@ -128,12 +128,15 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener, Activitie
             activityDataProvider.fetchFirstPage()
 
             // Notify user
-            showMessage(R.string.version_restored)
+            showMessageAndHideProgress(R.string.version_restored)
         })
         noteRepo.scheduleSync(account, false)
     }
 
-    private fun showMessage(@StringRes message: Int) {
+    private fun showProgress(show: Boolean) { binding.swipeContainingList.isRefreshing = show }
+
+    private fun showMessageAndHideProgress(@StringRes message: Int) {
+        showProgress(false)
         BrandedSnackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
     }
 
@@ -145,7 +148,7 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener, Activitie
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onPageFetched() {
-        binding.swipeContainingList.isRefreshing = false
+        showProgress(false)
         binding.emptyList.visibility = View.GONE
         adapter.items.clear()
         adapter.items.addAll(
@@ -156,7 +159,7 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener, Activitie
     }
 
     override fun onPageFetchError() {
-        binding.swipeContainingList.isRefreshing = false
+        showProgress(false)
         if (adapter.items.isEmpty()) binding.emptyList.visibility = View.VISIBLE
         BrandedSnackbar.make(binding.root, R.string.activities_error, Snackbar.LENGTH_SHORT).show()
     }
