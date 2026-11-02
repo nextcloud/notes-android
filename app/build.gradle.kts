@@ -7,6 +7,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import com.android.build.api.variant.FilterConfiguration
+
 plugins {
     id("com.android.application")
 }
@@ -16,6 +18,15 @@ val commonsVersion = rootProject.extra["commonsVersion"] as String
 val androidCommonsVersion = rootProject.extra["androidCommonsVersion"] as String
 val nextcloudAndroidCommonLib = rootProject.extra["nextcloudAndroidCommonLib"] as String
 val singleSignOnVersion = rootProject.extra["singleSignOnVersion"] as String
+
+val abiSplit = project.hasProperty("abiSplit")
+val abiVersionCodes = mapOf("armeabi-v7a" to 1, "arm64-v8a" to 2, "x86" to 3, "x86_64" to 4)
+val majorVersionCodeMultiplier = 10_000_000
+val abiVersionCodeMultiplier = 10
+
+fun abiVersionCode(versionCode: Int, abiCode: Int): Int =
+    versionCode / majorVersionCodeMultiplier * majorVersionCodeMultiplier +
+        versionCode % majorVersionCodeMultiplier * abiVersionCodeMultiplier + abiCode
 
 android {
     namespace = "it.niedermann.owncloud.notes"
@@ -117,9 +128,28 @@ android {
             pickFirsts += "MANIFEST.MF" // workaround for duplicated manifest on some dependencies
         }
     }
+
+    if (abiSplit) {
+        splits.abi {
+            isEnable = true
+            reset()
+            include(*abiVersionCodes.keys.toTypedArray())
+            isUniversalApk = false
+        }
+    }
+
     lintOptions {
         isAbortOnError = false
         disable("MissingTranslation")
+    }
+}
+
+androidComponents.onVariants { variant ->
+    variant.outputs.forEach { output ->
+        val abi = output.filters.find { it.filterType == FilterConfiguration.FilterType.ABI }?.identifier
+            ?: return@forEach
+        val abiCode = abiVersionCodes.getValue(abi)
+        output.versionCode.set(abiVersionCode(output.versionCode.get(), abiCode))
     }
 }
 
