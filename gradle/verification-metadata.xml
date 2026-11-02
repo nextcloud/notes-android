@@ -113,6 +113,7 @@
             <trusting group="^org[.]jetbrains[.]compose($|([.].*))" regex="true"/>
          </trusted-key>
          <trusted-key id="24D04176586361FDA94EE0315F7786DF73E61F56">
+            <trusting group="com.google.devtools.ksp"/>
             <trusting group="com.google.devtools.ksp" name="symbol-processing-api" version="1.9.0-1.0.13"/>
             <trusting group="com.google.devtools.ksp" name="symbol-processing-api" version="2.0.10-1.0.24"/>
          </trusted-key>
