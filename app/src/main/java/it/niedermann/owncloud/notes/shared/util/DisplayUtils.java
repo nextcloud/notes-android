@@ -24,6 +24,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowInsets;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.core.view.ViewCompat;
@@ -70,10 +71,20 @@ public class DisplayUtils {
     }
 
     public static NavigationItem.CategoryNavigationItem convertToCategoryNavigationItem(@NonNull Context context, @NonNull CategoryWithNotesCount counter) {
+        final int icon = getCategoryIcon(context, counter.getCategory());
+        return new NavigationItem.CategoryNavigationItem("category:" + counter.getCategory(), counter.getCategory(), counter.getTotalNotes(), icon, counter.getAccountId(), counter.getCategory());
+    }
+
+    /**
+     * Resolves the icon for a category. Categories whose (localized or english) name matches one of
+     * the {@link #SPECIAL_CATEGORY_REPLACEMENTS} get a dedicated icon, everything else the default
+     * {@link NavigationAdapter#ICON_FOLDER}.
+     */
+    @DrawableRes
+    public static int getCategoryIcon(@NonNull Context context, @NonNull String categoryLabel) {
         final var res = context.getResources();
         final var englishRes = getEnglishResources(context);
-        final String category = counter.getCategory().replaceAll("\\s+", "");
-        int icon = NavigationAdapter.ICON_FOLDER;
+        final String category = categoryLabel.replaceAll("\\s+", "");
 
         for (Map.Entry<Integer, Collection<Integer>> replacement : SPECIAL_CATEGORY_REPLACEMENTS.entrySet()) {
             if (Stream.concat(
@@ -81,11 +92,10 @@ public class DisplayUtils {
                     replacement.getValue().stream().map(englishRes::getString)
             ).map(str -> str.replaceAll("\\s+", ""))
                     .anyMatch(r -> r.equalsIgnoreCase(category))) {
-                icon = replacement.getKey();
-                break;
+                return replacement.getKey();
             }
         }
-        return new NavigationItem.CategoryNavigationItem("category:" + counter.getCategory(), counter.getCategory(), counter.getTotalNotes(), icon, counter.getAccountId(), counter.getCategory());
+        return NavigationAdapter.ICON_FOLDER;
     }
 
     @NonNull

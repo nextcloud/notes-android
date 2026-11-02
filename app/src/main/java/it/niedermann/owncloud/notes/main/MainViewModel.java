@@ -10,8 +10,6 @@ import static androidx.lifecycle.Transformations.distinctUntilChanged;
 import static androidx.lifecycle.Transformations.map;
 import static androidx.lifecycle.Transformations.switchMap;
 import static java.net.HttpURLConnection.HTTP_NOT_MODIFIED;
-import static it.niedermann.owncloud.notes.main.MainActivity.ADAPTER_KEY_RECENT;
-import static it.niedermann.owncloud.notes.main.MainActivity.ADAPTER_KEY_STARRED;
 import static it.niedermann.owncloud.notes.main.slots.SlotterUtil.fillListByCategory;
 import static it.niedermann.owncloud.notes.main.slots.SlotterUtil.fillListByInitials;
 import static it.niedermann.owncloud.notes.main.slots.SlotterUtil.fillListByTime;
@@ -21,7 +19,6 @@ import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.RECENT;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.UNCATEGORIZED;
-import static it.niedermann.owncloud.notes.shared.util.DisplayUtils.convertToCategoryNavigationItem;
 
 import android.accounts.NetworkErrorException;
 import android.app.Application;
@@ -49,23 +46,23 @@ import com.owncloud.android.lib.common.utils.Log_OC;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 import it.niedermann.owncloud.notes.BuildConfig;
-import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.exception.IntendedOfflineException;
-import it.niedermann.owncloud.notes.main.navigation.NavigationAdapter;
+import it.niedermann.owncloud.notes.main.navigation.CategoryTreeMapper;
 import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
 import it.niedermann.owncloud.notes.persistence.ApiProvider;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
-import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
@@ -98,7 +95,7 @@ public class MainViewModel extends AndroidViewModel {
     @NonNull
     private final MutableLiveData<NavigationCategory> selectedCategory = new MutableLiveData<>(new NavigationCategory(RECENT));
     @NonNull
-    private final MutableLiveData<String> expandedCategory = new MutableLiveData<>(null);
+    private final MutableLiveData<Set<String>> expandedCategories = new MutableLiveData<>(Collections.emptySet());
 
     public MainViewModel(@NonNull Application application, @NonNull SavedStateHandle savedStateHandle) {
         super(application);
@@ -118,7 +115,10 @@ public class MainViewModel extends AndroidViewModel {
             postSelectedCategory(selectedCategory);
             Log.v(TAG, "[restoreInstanceState] - selectedCategory: " + selectedCategory);
         }
-        postExpandedCategory(state.get(KEY_EXPANDED_CATEGORY));
+        final ArrayList<String> restoredExpanded = state.get(KEY_EXPANDED_CATEGORY);
+        if (restoredExpanded != null) {
+            postExpandedCategories(new HashSet<>(restoredExpanded));
+        }
     }
 
     @NonNull
@@ -165,23 +165,13 @@ public class MainViewModel extends AndroidViewModel {
         Log.v(TAG, "[postSelectedCategory] - selectedCategory: " + selectedCategory);
         this.selectedCategory.postValue(selectedCategory);
 
-        // Close sub categories
+        // Collapse the whole tree when leaving the category navigation
         switch (selectedCategory.getType()) {
-            case RECENT, FAVORITES, UNCATEGORIZED -> {
-                postExpandedCategory(null);
-            }
+            case RECENT, FAVORITES, UNCATEGORIZED -> postExpandedCategories(Collections.emptySet());
             default -> {
-                final String category = selectedCategory.getCategory();
-                if (category == null) {
-                    postExpandedCategory(null);
+                if (selectedCategory.getCategory() == null) {
+                    postExpandedCategories(Collections.emptySet());
                     Log.e(TAG, "navigation selection is a " + DEFAULT_CATEGORY + ", but the contained category is null.");
-                } else {
-                    int slashIndex = category.indexOf('/');
-                    final String rootCategory = slashIndex < 0 ? category : category.substring(0, slashIndex);
-                    final String expandedCategory = getExpandedCategory().getValue();
-                    if (expandedCategory != null && !expandedCategory.equals(rootCategory)) {
-                        postExpandedCategory(null);
-                    }
                 }
             }
         }
@@ -205,14 +195,23 @@ public class MainViewModel extends AndroidViewModel {
         });
     }
 
-    public void postExpandedCategory(@Nullable String expandedCategory) {
-        state.set(KEY_EXPANDED_CATEGORY, expandedCategory);
-        this.expandedCategory.postValue(expandedCategory);
+    public void postExpandedCategories(@NonNull Set<String> expandedCategories) {
+        state.set(KEY_EXPANDED_CATEGORY, new ArrayList<>(expandedCategories));
+        this.expandedCategories.postValue(expandedCategories);
+    }
+
+    public void toggleExpandedCategory(@NonNull String category) {
+        final var current = expandedCategories.getValue();
+        final var updated = current == null ? new HashSet<String>() : new HashSet<>(current);
+        if (!updated.remove(category)) {
+            updated.add(category);
+        }
+        postExpandedCategories(updated);
     }
 
     @NonNull
-    public LiveData<String> getExpandedCategory() {
-        return distinctUntilChanged(expandedCategory);
+    public LiveData<Set<String>> getExpandedCategories() {
+        return distinctUntilChanged(expandedCategories);
     }
 
     @NonNull
@@ -304,84 +303,20 @@ public class MainViewModel extends AndroidViewModel {
                 return insufficientInformation;
             } else {
                 Log.v(TAG, "[getNavigationCategories] - currentAccount: " + currentAccount.getAccountName());
-                return switchMap(getExpandedCategory(), expandedCategory -> {
-                    Log.v(TAG, "[getNavigationCategories] - expandedCategory: " + expandedCategory);
+                return switchMap(getExpandedCategories(), expandedCategories -> {
+                    Log.v(TAG, "[getNavigationCategories] - expandedCategories: " + expandedCategories);
                     return switchMap(repo.count$(currentAccount.getId()), (count) -> {
                         Log.v(TAG, "[getNavigationCategories] - count: " + count);
                         return switchMap(repo.countFavorites$(currentAccount.getId()), (favoritesCount) -> {
                             Log.v(TAG, "[getNavigationCategories] - favoritesCount: " + favoritesCount);
                             return distinctUntilChanged(map(repo.getCategories$(currentAccount.getId()), fromDatabase ->
-                                    fromCategoriesWithNotesCount(getApplication(), expandedCategory, fromDatabase, count, favoritesCount)
+                                    CategoryTreeMapper.map(getApplication(), expandedCategories, fromDatabase, count, favoritesCount)
                             ));
                         });
                     });
                 });
             }
         });
-    }
-
-    private static List<NavigationItem> fromCategoriesWithNotesCount(@NonNull Context context, @Nullable String expandedCategory, @NonNull List<CategoryWithNotesCount> fromDatabase, int count, int favoritesCount) {
-        final var categories = convertToCategoryNavigationItem(context, fromDatabase);
-        final var itemRecent = new NavigationItem(ADAPTER_KEY_RECENT, context.getString(R.string.label_all_notes), count, R.drawable.selector_all_notes, RECENT);
-        final var itemFavorites = new NavigationItem(ADAPTER_KEY_STARRED, context.getString(R.string.label_favorites), favoritesCount, R.drawable.selector_favorites, FAVORITES);
-
-        final var items = new ArrayList<NavigationItem>(fromDatabase.size() + 3);
-        items.add(itemRecent);
-        items.add(itemFavorites);
-        NavigationItem lastPrimaryCategory = null;
-        NavigationItem lastSecondaryCategory = null;
-        for (final var item : categories) {
-            final int slashIndex = item.label.indexOf('/');
-            final String currentPrimaryCategory = slashIndex < 0 ? item.label : item.label.substring(0, slashIndex);
-            final boolean isCategoryOpen = currentPrimaryCategory.equals(expandedCategory);
-            String currentSecondaryCategory = null;
-
-            if (isCategoryOpen && !currentPrimaryCategory.equals(item.label)) {
-                final String currentCategorySuffix = item.label.substring(expandedCategory.length() + 1);
-                final int subSlashIndex = currentCategorySuffix.indexOf('/');
-                currentSecondaryCategory = subSlashIndex < 0 ? currentCategorySuffix : currentCategorySuffix.substring(0, subSlashIndex);
-            }
-
-            boolean belongsToLastPrimaryCategory = lastPrimaryCategory != null && currentPrimaryCategory.equals(lastPrimaryCategory.label);
-            final boolean belongsToLastSecondaryCategory = belongsToLastPrimaryCategory && lastSecondaryCategory != null && lastSecondaryCategory.label.equals(currentSecondaryCategory);
-
-            if (isCategoryOpen && !belongsToLastPrimaryCategory && currentSecondaryCategory != null) {
-                lastPrimaryCategory = new NavigationItem("category:" + currentPrimaryCategory, currentPrimaryCategory, 0, NavigationAdapter.ICON_MULTIPLE_OPEN);
-                items.add(lastPrimaryCategory);
-                belongsToLastPrimaryCategory = true;
-            }
-
-            if (belongsToLastPrimaryCategory && belongsToLastSecondaryCategory) {
-                lastSecondaryCategory.count += item.count;
-                lastSecondaryCategory.icon = NavigationAdapter.ICON_SUB_MULTIPLE;
-            } else if (belongsToLastPrimaryCategory) {
-                if (isCategoryOpen) {
-                    if (currentSecondaryCategory == null) {
-                        throw new IllegalStateException("Current secondary category is null. Last primary category: " + lastPrimaryCategory);
-                    }
-                    item.label = currentSecondaryCategory;
-                    item.id = "category:" + item.label;
-                    item.icon = NavigationAdapter.ICON_SUB_FOLDER;
-                    items.add(item);
-                    lastSecondaryCategory = item;
-                } else {
-                    lastPrimaryCategory.count += item.count;
-                    lastPrimaryCategory.icon = NavigationAdapter.ICON_MULTIPLE;
-                    lastSecondaryCategory = null;
-                }
-            } else {
-                if (isCategoryOpen) {
-                    item.icon = NavigationAdapter.ICON_MULTIPLE_OPEN;
-                } else {
-                    item.label = currentPrimaryCategory;
-                    item.id = "category:" + item.label;
-                }
-                items.add(item);
-                lastPrimaryCategory = item;
-                lastSecondaryCategory = null;
-            }
-        }
-        return items;
     }
 
     public void synchronizeCapabilitiesAndNotes(Context context, @NonNull Account localAccount, @NonNull IResponseCallback<Void> callback) {
