@@ -13,48 +13,27 @@ import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.activities.model.Activity
 import it.niedermann.owncloud.notes.util.HumanReadableFormatter
 
-class ActivityListItem : Comparable<ActivityListItem> {
-    val context: Context
-    val activity: Activity?
-    val fileVersion: FileVersion?
-
-    constructor(context: Context, activity: Activity) {
-        this.context = context
-        this.activity = activity
-        this.fileVersion = null
-    }
-
-    constructor(context: Context, fileVersion: FileVersion) {
-        this.context = context
-        this.activity = null
-        this.fileVersion = fileVersion
-    }
-
-    fun getTimestamp() : Long =
-        when {
-            activity != null -> activity.datetime.time
-            fileVersion != null -> fileVersion.modifiedTimestamp
-            else -> 0
-        }
-
-    fun getTitle() : String? =
-        when {
-            activity != null -> activity.subject
-            fileVersion != null -> context.getString(R.string.new_version_was_created)
-            else -> null
-        }
-
-    fun getMessage() : String? =
-        when {
-            activity != null -> activity.message
-            fileVersion != null -> HumanReadableFormatter.formatBytes(fileVersion.fileLength)
-            else -> null
-        }
-
-    fun getIconUrl() : String? = activity?.icon
-
-    fun canBeRestored() : Boolean = fileVersion != null
+sealed class ActivityListItem : Comparable<ActivityListItem> {
+    abstract fun getTimestamp(): Long
+    abstract fun getTitle(): String?
+    abstract fun getMessage(): String?
+    open fun getIconUrl(): String? = null
+    open fun canBeRestored(): Boolean = false
 
     override fun compareTo(other: ActivityListItem): Int =
         getTimestamp().compareTo(other.getTimestamp())
+
+    data class ActivityItem(val activity: Activity) : ActivityListItem() {
+        override fun getTimestamp(): Long = activity.datetime.time
+        override fun getTitle(): String = activity.subject
+        override fun getMessage(): String? = activity.message
+        override fun getIconUrl(): String? = activity.icon
+    }
+
+    data class FileVersionItem(val context: Context, val fileVersion: FileVersion) : ActivityListItem() {
+        override fun getTimestamp(): Long = fileVersion.modifiedTimestamp
+        override fun getTitle(): String = context.getString(R.string.new_version_was_created)
+        override fun getMessage(): String = HumanReadableFormatter.formatBytes(fileVersion.fileLength) ?: ""
+        override fun canBeRestored(): Boolean = true
+    }
 }

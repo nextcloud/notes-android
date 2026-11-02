@@ -20,10 +20,10 @@ class ActivitiesData {
     fun getAggregatedList(context: Context) : List<ActivityListItem> {
         val items = arrayListOf<ActivityListItem>()
         items.addAll(
-            activities.map { ActivityListItem(context, it) }
+            activities.map { ActivityListItem.ActivityItem(it) }
         )
         items.addAll(
-            versions.map { ActivityListItem(context, it) }
+            versions.map { ActivityListItem.FileVersionItem(context, it) }
         )
         items.sortDescending()
         return items

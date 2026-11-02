@@ -57,7 +57,7 @@ class ActivityListAdapter (
 
         // Retrieve item and bind vh
         val item = items[position]
-        if (lastActivity != null && item.activity == lastActivity) {
+        if (lastActivity != null && (item as? ActivityListItem.ActivityItem)?.activity == lastActivity) {
             listener.lastActivityReached()
         }
         holder.bind(item, listener)
@@ -82,9 +82,9 @@ class ActivityListAdapter (
             bindIcon(item)
             bindActionIcon(item)
             binding.root.setOnClickListener {
-                when {
-                    item.activity != null -> listener.onActivityItemClick(item.activity)
-                    item.fileVersion != null -> listener.onVersionItemClick(item.fileVersion)
+                when (item) {
+                    is ActivityListItem.ActivityItem -> listener.onActivityItemClick(item.activity)
+                    is ActivityListItem.FileVersionItem -> listener.onVersionItemClick(item.fileVersion)
                 }
             }
         }
