@@ -195,7 +195,12 @@
 
     <string name="error_sync">Synchronization failed: %1$s</string>
     <string name="error_synchronization">Synchronization failed</string>
-    <string name="error_sync_locked">A note is open in another app. Close it there to sync your changes.</string>
+    <string name="error_sync_unknown_note_locked">A note is locked on the server. Close it in the other app, or unlock it in the web interface.</string>
+    <string name="error_sync_note_locked">“%1$s” is locked on the server. Close it in the other app, or unlock it in the web interface.</string>
+    <plurals name="error_sync_notes_locked">
+        <item quantity="one">%d note is locked on the server. Close it in the other app, or unlock it in the web interface.</item>
+        <item quantity="other">%d notes are locked on the server. Close them in the other app, or unlock them in the web interface.</item>
+    </plurals>
     <string name="error_sync_unauthorized">Your login is no longer valid. Log in again in the Nextcloud Files app.</string>
     <string name="error_sync_permission">You don’t have permission to save this note. Please check your access and try again.</string>
     <string name="error_sync_notes_app_unavailable">The Notes app is not available on your server.</string>
@@ -354,6 +359,8 @@
     <string name="error_dialog_redirect">Your server did respond with a HTTP 302 status code, which implies, that you do not have installed the Notes app on your server or something is misconfigured. This can be caused by custom overrides in a .htaccess-file or by Nextcloud apps like OID Client.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Please disable all battery optimizations for Nextcloud and the Notes app.</string>
     <string name="error_dialog_min_version">The Notes Android app requires the Nextcloud Android app to be at least version 3.18.</string>
+    <string name="error_dialog_tip_note_locked_close">The note is locked on the server. This usually means it is open in the Text editor or in another app. Close it there and sync again.</string>
+    <string name="error_dialog_tip_note_locked_unlock">If the note is not open anywhere, the lock is stale. In the Nextcloud web interface, open Files, find the note in the Notes folder, open its menu and choose Unlock. If that is not offered, ask your administrator to remove the lock.</string>
     <string name="added_content">Added "%1$s"</string>
     <string name="shared_text_empty">Shared text was empty</string>
     <string name="append_to_note">Append to note</string>
