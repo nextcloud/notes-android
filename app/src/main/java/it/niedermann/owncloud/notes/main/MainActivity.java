@@ -718,7 +718,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         util.platform.colorNavigationView(binding.navigationView);
         util.material.themeFAB(activityBinding.fabCreate);
         util.notes.themeSearchCardView(binding.activityNotesListView.searchBar.searchBarCardWrapper);
-        util.platform.colorViewBackground(getWindow().getDecorView(), ColorRole.SURFACE_CONTAINER);
+        if (mActionMode == null) util.platform.colorViewBackground(getWindow().getDecorView(), ColorRole.SURFACE_CONTAINER);
         util.platform.colorViewBackground(binding.getRoot(), ColorRole.SURFACE_CONTAINER);
         util.platform.colorViewBackground(binding.activityNotesListView.activityNotesListView, ColorRole.SURFACE_CONTAINER);
         util.platform.colorTextView(binding.activityNotesListView.searchBar.searchText, ColorRole.ON_SURFACE_VARIANT);

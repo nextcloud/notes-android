@@ -48,7 +48,6 @@ class ItemDetailsActivity : BrandedActivity() {
     }
 
     @Suppress("ThrowsCount")
-
     private fun parseArguments() {
         note = intent.extras.getSerializableArgument(ARG_NOTE, Note::class.java)
             ?: throw RuntimeException("Argument $ARG_NOTE is mandatory")
@@ -103,6 +102,7 @@ class ItemDetailsActivity : BrandedActivity() {
     override fun applyBrand(color: Int) {
         val util = BrandingUtil.of(color, this)
         util.material.themeToolbar(binding.toolbar)
+        util.platform.colorViewBackground(window.decorView)
         util.platform.colorViewBackground(binding.getRoot())
         util.platform.colorViewBackground(binding.tabLayout)
         util.material.themeTabLayout(binding.tabLayout)

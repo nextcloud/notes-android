@@ -8,6 +8,8 @@ package it.niedermann.owncloud.notes.main;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +19,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.view.ActionMode.Callback;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.LifecycleOwner;
@@ -57,6 +60,7 @@ public class MultiSelectedActionModeCallback implements Callback {
     private final FragmentManager fragmentManager;
     @NonNull
     private final MainActivity mainActivity;
+    private Drawable systemBarsBackground;
 
     public MultiSelectedActionModeCallback(
             @NonNull MainActivity mainActivity,
@@ -85,6 +89,9 @@ public class MultiSelectedActionModeCallback implements Callback {
 
     @Override
     public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+        final var decorView = mainActivity.getWindow().getDecorView();
+        systemBarsBackground = decorView.getBackground();
+        decorView.setBackground(new ColorDrawable(ContextCompat.getColor(context, R.color.action_mode_background)));
         // inflate contextual menu
         mode.getMenuInflater().inflate(R.menu.menu_list_context_multiple, menu);
         menu.findItem(R.id.menu_move).setVisible(canMoveNoteToAnotherAccounts);
@@ -200,6 +207,7 @@ public class MultiSelectedActionModeCallback implements Callback {
 
     @Override
     public void onDestroyActionMode(ActionMode mode) {
+        mainActivity.getWindow().getDecorView().setBackground(systemBarsBackground);
         if (mode != null) {
             mode.finish();
         }
