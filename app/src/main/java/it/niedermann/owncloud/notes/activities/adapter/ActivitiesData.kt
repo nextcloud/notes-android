@@ -10,6 +10,8 @@ package it.niedermann.owncloud.notes.activities.adapter
 import android.content.Context
 import com.owncloud.android.lib.resources.files.model.FileVersion
 import it.niedermann.owncloud.notes.activities.adapter.model.Activity
+import it.niedermann.owncloud.notes.activities.adapter.model.ActivityListItem
+import it.niedermann.owncloud.notes.activities.adapter.model.ActivityListItem.FileVersionItem
 
 data class ActivitiesData(
     val activities: ArrayList<Activity> = arrayListOf(),
@@ -23,7 +25,7 @@ data class ActivitiesData(
             activities.map { ActivityListItem.ActivityItem(it) }
         )
         items.addAll(
-            versions.map { ActivityListItem.FileVersionItem(context, it) }
+            versions.map { FileVersionItem(context, it) }
         )
         items.sortDescending()
         return items

@@ -5,12 +5,11 @@
  * SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
-package it.niedermann.owncloud.notes.activities.adapter
+package it.niedermann.owncloud.notes.activities.adapter.model
 
 import android.content.Context
 import com.owncloud.android.lib.resources.files.model.FileVersion
 import it.niedermann.owncloud.notes.R
-import it.niedermann.owncloud.notes.activities.adapter.model.Activity
 import it.niedermann.owncloud.notes.util.HumanReadableFormatter
 
 sealed class ActivityListItem : Comparable<ActivityListItem> {

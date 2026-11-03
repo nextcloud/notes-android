@@ -9,19 +9,13 @@ package it.niedermann.owncloud.notes.activities.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.nextcloud.android.common.core.utils.DateFormatter
-import com.nextcloud.android.common.ui.theme.utils.ColorRole
-import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.activities.adapter.model.Activity
+import it.niedermann.owncloud.notes.activities.adapter.model.ActivityListItem
 import it.niedermann.owncloud.notes.activities.adapter.viewholder.ActivityViewHolder
 import it.niedermann.owncloud.notes.branding.Branded
-import it.niedermann.owncloud.notes.branding.BrandedViewHolder
-import it.niedermann.owncloud.notes.branding.BrandingUtil
 import it.niedermann.owncloud.notes.databinding.ActivityListItemBinding
 import java.util.Calendar
 

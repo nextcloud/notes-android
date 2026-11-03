@@ -6,7 +6,7 @@ import com.bumptech.glide.Glide
 import com.nextcloud.android.common.core.utils.DateFormatter
 import com.nextcloud.android.common.ui.theme.utils.ColorRole
 import it.niedermann.owncloud.notes.R
-import it.niedermann.owncloud.notes.activities.adapter.ActivityListItem
+import it.niedermann.owncloud.notes.activities.adapter.model.ActivityListItem
 import it.niedermann.owncloud.notes.activities.adapter.OnActivityClickListener
 import it.niedermann.owncloud.notes.branding.BrandedViewHolder
 import it.niedermann.owncloud.notes.branding.BrandingUtil
