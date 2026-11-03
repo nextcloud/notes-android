@@ -626,6 +626,7 @@ class NoteShareDetailActivity :
             }
     }
 
+    @Suppress("ForbiddenComment")
     private suspend fun createShare(password: String) {
         if (note == null || shareeName == null) {
             Log_OC.d(TAG, "validateShareProcessSecond cancelled")

@@ -43,6 +43,7 @@ class SuggestionAdapter(context: Context, cursor: Cursor?, private val account: 
         return binding.root
     }
 
+    @Suppress("NestedBlockDepth")
     override fun bindView(view: View, context: Context, cursor: Cursor) {
         val suggestion =
             cursor.getString(cursor.getColumnIndexOrThrow(SearchManager.SUGGEST_COLUMN_TEXT_1))

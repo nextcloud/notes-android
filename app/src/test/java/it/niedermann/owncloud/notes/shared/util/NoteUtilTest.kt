@@ -82,7 +82,8 @@ class NoteUtilTest : TestCase() {
     }
 
     private fun testTitleMatchingExcerpts() {
-        // content actually starts with title → return max. 200 characters starting with the first character after the title
+        // content actually starts with title →
+        // return max. 200 characters starting with the first character after the title
         assertEquals("", NoteUtil.generateNoteExcerpt("Title", "Title"))
         assertEquals("Foo", NoteUtil.generateNoteExcerpt("Title\nFoo", "Title"))
         assertEquals("Title   Bar", NoteUtil.generateNoteExcerpt("Title\nTitle\nBar", "Title"))

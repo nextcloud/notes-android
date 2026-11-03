@@ -109,7 +109,8 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener, Activitie
             withContext(Dispatchers.Main) {
                 when (result) {
                     RestoreVersionsResult.Success -> syncNote()
-                    RestoreVersionsResult.FailedUnsupported -> showMessageAndHideProgress(R.string.version_restore_failed_unsupported)
+                    RestoreVersionsResult.FailedUnsupported ->
+                        showMessageAndHideProgress(R.string.version_restore_failed_unsupported)
                     else -> showMessageAndHideProgress(R.string.version_restore_failed)
                 }
             }

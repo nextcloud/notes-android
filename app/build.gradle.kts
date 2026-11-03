@@ -6,6 +6,7 @@
  * SPDX-FileCopyrightText: 2020 Hui-Ouyang16 <11710106@mail.sustech.edu.cn>
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
+@file:Suppress("MagicNumber")
 
 plugins {
     id("com.android.application")

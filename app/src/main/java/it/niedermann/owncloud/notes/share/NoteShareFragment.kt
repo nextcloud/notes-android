@@ -1,3 +1,9 @@
+/*
+ * Nextcloud Notes - Android Client
+ *
+ * SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ */
 package it.niedermann.owncloud.notes.share
 
 import android.Manifest
@@ -83,13 +89,7 @@ import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.TimeUnit
 import kotlin.text.toInt
 
-
-/*
- * Nextcloud Notes - Android Client
- *
- * SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
- * SPDX-License-Identifier: AGPL-3.0-or-later
- */
+@Suppress("LargeClass")
 class NoteShareFragment : BrandedFragment(), ShareeListAdapterListener, NoteShareItemAction,
     QuickPermissionSharingBottomSheetActions, SharePasswordDialogListener {
     private var executorService: ScheduledExecutorService? = null
@@ -384,7 +384,9 @@ class NoteShareFragment : BrandedFragment(), ShareeListAdapterListener, NoteShar
                 val result: ApiResult<OcsResponse<CreateShareResponse>?> =
                     repository!!.addShare(note!!, ShareType.PUBLIC_LINK, "")
                 activity?.runOnUiThread {
-                    if (result is ApiResult.Success<OcsResponse<CreateShareResponse>?> && binding!!.sharesList.adapter is ShareeListAdapter) {
+                    if (result is ApiResult.Success<OcsResponse<CreateShareResponse>?> &&
+                        binding!!.sharesList.adapter is ShareeListAdapter
+                    ) {
                         DisplayUtils.showSnackMessage(view, result.message)
                         note!!.setIsShared(true)
                         repository!!.updateNote(note!!)
@@ -403,9 +405,7 @@ class NoteShareFragment : BrandedFragment(), ShareeListAdapterListener, NoteShar
         dialog.show(parentFragmentManager, SharePasswordDialogFragment.PASSWORD_FRAGMENT)
     }
 
-    // TODO:
-    override fun createSecureFileDrop() {
-    }
+    override fun createSecureFileDrop() = Unit
 
     private fun showShareLinkDialog(link: String?) {
         val intentToShareLink = Intent(Intent.ACTION_SEND)
@@ -417,8 +417,7 @@ class NoteShareFragment : BrandedFragment(), ShareeListAdapterListener, NoteShar
             getString(R.string.note_share_activity_subject_shared_with_you, note!!.title)
         )
 
-        val packagesToExclude = arrayOf<String?>(context?.packageName)
-        val chooserDialog: DialogFragment = newInstance(intentToShareLink, *packagesToExclude)
+        val chooserDialog: DialogFragment = newInstance(intentToShareLink, context?.packageName)
         chooserDialog.show(parentFragmentManager, FTAG_CHOOSER_DIALOG)
     }
 
@@ -481,9 +480,7 @@ class NoteShareFragment : BrandedFragment(), ShareeListAdapterListener, NoteShar
         dialog.show(parentFragmentManager, SharePasswordDialogFragment.PASSWORD_FRAGMENT)
     }
 
-    // TODO:
-    override fun showProfileBottomSheet(account: Account?, shareWith: String?) {
-    }
+    override fun showProfileBottomSheet(account: Account?, shareWith: String?) = Unit
 
     private var isInitializingShares = false
 
@@ -562,7 +559,6 @@ class NoteShareFragment : BrandedFragment(), ShareeListAdapterListener, NoteShar
         val context = context ?: return
         val intent = Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Email.CONTENT_URI)
 
-        // FIXME:
         if (intent.resolveActivity(context.packageManager) != null) {
             onContactSelectionResultLauncher.launch(intent)
         } else {
@@ -663,9 +659,7 @@ class NoteShareFragment : BrandedFragment(), ShareeListAdapterListener, NoteShar
         })
     }
 
-    // TODO:
-    override fun sendLink(share: OCShare?) {
-    }
+    override fun sendLink(share: OCShare?) = Unit
 
     override fun addAnotherLink(share: OCShare?) {
         createPublicShareLink()
@@ -696,7 +690,7 @@ class NoteShareFragment : BrandedFragment(), ShareeListAdapterListener, NoteShar
                 val majorVersionAsString = capabilities!!.nextcloudMajorVersion
                 if (majorVersionAsString != null) {
                     val majorVersion = majorVersionAsString.toInt()
-                    return majorVersion >= 18
+                    return majorVersion >= EXPIRATION_DATE_MIN_MAJOR_VERSION
                 }
 
                 return false
@@ -893,6 +887,7 @@ class NoteShareFragment : BrandedFragment(), ShareeListAdapterListener, NoteShar
         const val FTAG_CHOOSER_DIALOG: String = "CHOOSER_DIALOG"
 
         private const val SEARCH_DELAY_MS: Long = 500
+        private const val EXPIRATION_DATE_MIN_MAJOR_VERSION = 18
 
         fun newInstance(note: Note, account: Account) : NoteShareFragment {
             val f = NoteShareFragment()

@@ -47,13 +47,15 @@ class ItemDetailsActivity : BrandedActivity() {
         loadFragments()
     }
 
+    @Suppress("ThrowsCount")
+
     private fun parseArguments() {
         note = intent.extras.getSerializableArgument(ARG_NOTE, Note::class.java)
             ?: throw RuntimeException("Argument $ARG_NOTE is mandatory")
         account = intent.extras.getSerializableArgument(ARG_ACCOUNT, Account::class.java)
             ?: throw RuntimeException("Argument $ARG_ACCOUNT is mandatory")
         page = intent.extras.getSerializableArgument(ARG_PAGE, PAGE::class.java)
-            ?: throw RuntimeException("Argument $ARG_ACCOUNT is mandatory")
+            ?: throw RuntimeException("Argument $ARG_PAGE is mandatory")
     }
 
     private fun loadHeaderData() {
