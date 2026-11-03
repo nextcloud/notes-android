@@ -11,7 +11,6 @@ import android.content.Context
 import com.nextcloud.android.sso.model.SingleSignOnAccount
 import com.owncloud.android.lib.resources.files.model.FileVersion
 import it.niedermann.owncloud.notes.persistence.ApiProvider
-import it.niedermann.owncloud.notes.persistence.sync.VersionsAPI
 
 class VersionsRepository (
     private val context: Context,

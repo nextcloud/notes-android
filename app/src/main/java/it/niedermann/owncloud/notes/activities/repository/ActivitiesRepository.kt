@@ -13,7 +13,6 @@ import com.nextcloud.android.sso.model.SingleSignOnAccount
 import it.niedermann.owncloud.notes.persistence.ApiProvider
 import okio.IOException
 import java.net.HttpURLConnection
-import kotlin.getValue
 
 class ActivitiesRepository(
     private val context: Context,
