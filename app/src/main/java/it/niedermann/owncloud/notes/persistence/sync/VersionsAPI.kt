@@ -16,7 +16,7 @@ import com.nextcloud.android.sso.model.SingleSignOnAccount
 import com.owncloud.android.lib.common.network.WebdavEntry
 import com.owncloud.android.lib.common.network.WebdavUtils
 import com.owncloud.android.lib.resources.files.model.FileVersion
-import it.niedermann.owncloud.notes.activities.repository.RestoreVersionsResult
+import it.niedermann.owncloud.notes.activities.repository.model.RestoreVersionsResult
 import it.niedermann.owncloud.notes.activities.repository.model.VersionsResult
 import org.apache.jackrabbit.webdav.DavConstants
 import org.apache.jackrabbit.webdav.MultiStatus

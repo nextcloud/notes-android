@@ -5,7 +5,7 @@
  * SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
-package it.niedermann.owncloud.notes.activities.repository
+package it.niedermann.owncloud.notes.activities.repository.model
 
 import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.activities.adapter.model.Activity

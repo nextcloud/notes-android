@@ -10,6 +10,7 @@ package it.niedermann.owncloud.notes.activities.repository
 import android.content.Context
 import android.util.Log
 import com.nextcloud.android.sso.model.SingleSignOnAccount
+import it.niedermann.owncloud.notes.activities.repository.model.ActivitiesResult
 import it.niedermann.owncloud.notes.persistence.ApiProvider
 import okio.IOException
 import java.net.HttpURLConnection

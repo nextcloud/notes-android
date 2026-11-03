@@ -14,7 +14,7 @@ import com.nextcloud.android.sso.helper.SingleAccountHelper
 import it.niedermann.owncloud.notes.activities.ActivitiesFragment.Companion.TAG
 import it.niedermann.owncloud.notes.activities.adapter.ActivitiesData
 import it.niedermann.owncloud.notes.activities.repository.ActivitiesRepository
-import it.niedermann.owncloud.notes.activities.repository.ActivitiesResult
+import it.niedermann.owncloud.notes.activities.repository.model.ActivitiesResult
 import it.niedermann.owncloud.notes.activities.repository.VersionsRepository
 import it.niedermann.owncloud.notes.activities.repository.model.VersionsResult
 import kotlinx.coroutines.Dispatchers
