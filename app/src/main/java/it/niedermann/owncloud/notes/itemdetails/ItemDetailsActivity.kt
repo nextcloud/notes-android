@@ -73,13 +73,13 @@ class ItemDetailsActivity : BrandedActivity() {
 
     private fun loadFragments() {
         val pages = listOf(
-            Page(
+            PageTab(
                 PAGE.ACTIVITIES,
                 getString(R.string.activities_title),
                 AppCompatResources.getDrawable(this, R.drawable.nav_activity),
                 ActivitiesFragment.newInstance(note, account)
             ),
-            Page(
+            PageTab(
                 PAGE.SHARE,
                 getString(R.string.share),
                 AppCompatResources.getDrawable(this, R.drawable.ic_share_white_24dp),
@@ -106,14 +106,14 @@ class ItemDetailsActivity : BrandedActivity() {
         util.material.themeTabLayout(binding.tabLayout)
     }
 
-    private data class Page (
+    private data class PageTab(
         val page: PAGE,
         val title: String,
         val icon: Drawable?,
         val fragment: BrandedFragment
     )
 
-    private inner class PagerAdapter(val fragments: List<Page>) :
+    private inner class PagerAdapter(val fragments: List<PageTab>) :
         FragmentStateAdapter(this@ItemDetailsActivity)
     {
         override fun getItemCount() = fragments.size
