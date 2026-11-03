@@ -17,7 +17,7 @@ import com.owncloud.android.lib.common.network.WebdavEntry
 import com.owncloud.android.lib.common.network.WebdavUtils
 import com.owncloud.android.lib.resources.files.model.FileVersion
 import it.niedermann.owncloud.notes.activities.repository.RestoreVersionsResult
-import it.niedermann.owncloud.notes.activities.repository.VersionsResult
+import it.niedermann.owncloud.notes.activities.repository.model.VersionsResult
 import org.apache.jackrabbit.webdav.DavConstants
 import org.apache.jackrabbit.webdav.MultiStatus
 import org.apache.jackrabbit.webdav.client.methods.PropFindMethod

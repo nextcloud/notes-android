@@ -16,7 +16,7 @@ import it.niedermann.owncloud.notes.activities.adapter.ActivitiesData
 import it.niedermann.owncloud.notes.activities.repository.ActivitiesRepository
 import it.niedermann.owncloud.notes.activities.repository.ActivitiesResult
 import it.niedermann.owncloud.notes.activities.repository.VersionsRepository
-import it.niedermann.owncloud.notes.activities.repository.VersionsResult
+import it.niedermann.owncloud.notes.activities.repository.model.VersionsResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.async

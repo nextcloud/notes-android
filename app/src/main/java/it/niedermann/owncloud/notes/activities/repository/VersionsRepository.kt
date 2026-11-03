@@ -10,6 +10,7 @@ package it.niedermann.owncloud.notes.activities.repository
 import android.content.Context
 import com.nextcloud.android.sso.model.SingleSignOnAccount
 import com.owncloud.android.lib.resources.files.model.FileVersion
+import it.niedermann.owncloud.notes.activities.repository.model.VersionsResult
 import it.niedermann.owncloud.notes.persistence.ApiProvider
 
 class VersionsRepository (
