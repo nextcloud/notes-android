@@ -1,10 +1,3 @@
-package it.niedermann.owncloud.notes.itemactions
-
-import androidx.annotation.DrawableRes
-import androidx.annotation.IdRes
-import androidx.annotation.StringRes
-import it.niedermann.owncloud.notes.R
-
 /*
  * Nextcloud Notes - Android Client
  *
@@ -12,6 +5,12 @@ import it.niedermann.owncloud.notes.R
  * SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
+package it.niedermann.owncloud.notes.itemactions
+
+import androidx.annotation.DrawableRes
+import androidx.annotation.IdRes
+import androidx.annotation.StringRes
+import it.niedermann.owncloud.notes.R
 
 enum class NoteAction(
     @param:IdRes val id: Int,

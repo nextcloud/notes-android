@@ -1,3 +1,10 @@
+/*
+ * Nextcloud Notes - Android Client
+ *
+ * SPDX-FileCopyrightText: 2026 Daniele Verducci <daniele.verducci@nextcloud.com>
+ * SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ */
 package it.niedermann.owncloud.notes.activities
 
 import android.annotation.SuppressLint
@@ -30,13 +37,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-/*
- * Nextcloud Notes - Android Client
- *
- * SPDX-FileCopyrightText: 2026 Daniele Verducci <daniele.verducci@nextcloud.com>
- * SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
- * SPDX-License-Identifier: AGPL-3.0-or-later
- */
 class ActivitiesFragment : BrandedFragment(), OnActivityClickListener, ActivitiesDataProvider.OnPageFetchedListener {
 
     lateinit var binding : FragmentActivitiesBinding
