@@ -94,9 +94,7 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener, Activitie
         util.androidx.themeSwipeRefreshLayout(binding.swipeContainingList)
     }
 
-    override fun onActivityItemClick(activity: Activity) {
-        // No action
-    }
+    override fun onActivityItemClick(activity: Activity) = Unit
 
     override fun onVersionItemClick(version: FileVersion) {
         showProgress(true)
@@ -170,15 +168,11 @@ class ActivitiesFragment : BrandedFragment(), OnActivityClickListener, Activitie
         const val ARG_NOTE = "NOTE"
         const val ARG_ACCOUNT = "ACCOUNT"
 
-        fun newInstance(note: Note, account: Account) : ActivitiesFragment {
-            val f = ActivitiesFragment()
-
-            val bundle = Bundle()
-            bundle.putSerializable(ARG_NOTE, note)
-            bundle.putSerializable(ARG_ACCOUNT, account)
-
-            f.arguments = bundle
-            return f
+        fun newInstance(note: Note, account: Account) : ActivitiesFragment = ActivitiesFragment().apply {
+            arguments = Bundle().apply {
+                putSerializable(ARG_NOTE, note)
+                putSerializable(ARG_ACCOUNT, account)
+            }
         }
     }
 }
