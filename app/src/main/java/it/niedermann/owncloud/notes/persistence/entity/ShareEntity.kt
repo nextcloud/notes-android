@@ -10,6 +10,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+@Suppress("ConstructorParameterNaming")
 @Entity(tableName = "share_table")
 data class ShareEntity(
     @PrimaryKey(autoGenerate = true)

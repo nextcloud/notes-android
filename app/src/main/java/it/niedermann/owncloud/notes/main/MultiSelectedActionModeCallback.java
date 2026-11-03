@@ -8,7 +8,8 @@ package it.niedermann.owncloud.notes.main;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +19,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.view.ActionMode.Callback;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.LifecycleOwner;
@@ -33,7 +35,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
-import it.niedermann.owncloud.notes.share.NoteShareActivity;
+import it.niedermann.owncloud.notes.itemdetails.ItemDetailsActivity;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
 public class MultiSelectedActionModeCallback implements Callback {
@@ -58,6 +60,7 @@ public class MultiSelectedActionModeCallback implements Callback {
     private final FragmentManager fragmentManager;
     @NonNull
     private final MainActivity mainActivity;
+    private Drawable systemBarsBackground;
 
     public MultiSelectedActionModeCallback(
             @NonNull MainActivity mainActivity,
@@ -86,6 +89,9 @@ public class MultiSelectedActionModeCallback implements Callback {
 
     @Override
     public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+        final var decorView = mainActivity.getWindow().getDecorView();
+        systemBarsBackground = decorView.getBackground();
+        decorView.setBackground(new ColorDrawable(ContextCompat.getColor(context, R.color.action_mode_background)));
         // inflate contextual menu
         mode.getMenuInflater().inflate(R.menu.menu_list_context_multiple, menu);
         menu.findItem(R.id.menu_move).setVisible(canMoveNoteToAnotherAccounts);
@@ -102,7 +108,9 @@ public class MultiSelectedActionModeCallback implements Callback {
 
     @Override
     public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-        return false;
+        // Info menu makes sense only for single selection
+        menu.findItem(R.id.menu_details).setVisible(tracker.getSelection().size() == 1);
+        return true;
     }
 
     /**
@@ -159,23 +167,12 @@ public class MultiSelectedActionModeCallback implements Callback {
                 selection.add(sel);
             }
             tracker.clearSelection();
-
-            if (selection.size() == 1) {
-                final var currentAccount$ = mainViewModel.getCurrentAccount();
-                currentAccount$.observe(lifecycleOwner, account -> {
-                    currentAccount$.removeObservers(lifecycleOwner);
-                    executor.submit(() -> {{
-                        final var note = mainViewModel.getFullNote(selection.get(0));
-                        final Intent intent = NoteShareActivity.getActivityStartIntent(note, account, mainActivity);
-                        mainActivity.startActivity(intent);
-                    }});
-                });
-            } else {
-                ShareUtil.openShareDialog(context,
+            executor.submit(() -> {
+                final var noteContents = mainViewModel.collectNoteContents(selection);
+                mainActivity.runOnUiThread(() -> ShareUtil.openShareDialog(context,
                         context.getResources().getQuantityString(R.plurals.share_multiple, selection.size(), selection.size()),
-                        mainViewModel.collectNoteContents(selection));
-            }
-
+                        noteContents));
+            });
             return true;
         } else if (itemId == R.id.menu_category) {// TODO detect whether all selected notes do have the same category - in this case preselect it
             final var accountLiveData = mainViewModel.getCurrentAccount();
@@ -186,12 +183,31 @@ public class MultiSelectedActionModeCallback implements Callback {
                         .show(fragmentManager, CategoryDialogFragment.class.getSimpleName());
             });
             return true;
+        } else if (itemId == R.id.menu_details) {
+            final var selection = new ArrayList<Long>(tracker.getSelection().size());
+            for (final var sel : tracker.getSelection()) {
+                selection.add(sel);
+            }
+            tracker.clearSelection();
+
+            if (selection.size() == 1) {
+                final var currentAccount$ = mainViewModel.getCurrentAccount();
+                currentAccount$.observe(lifecycleOwner, account -> {
+                    currentAccount$.removeObservers(lifecycleOwner);
+                    executor.submit(() -> {{
+                        final var note = mainViewModel.getFullNote(selection.get(0));
+                        Intent detailsIntent = ItemDetailsActivity.getActivityStartIntent(context, note, account);
+                        mainActivity.startActivity(detailsIntent);
+                    }});
+                });
+            }
         }
         return false;
     }
 
     @Override
     public void onDestroyActionMode(ActionMode mode) {
+        mainActivity.getWindow().getDecorView().setBackground(systemBarsBackground);
         if (mode != null) {
             mode.finish();
         }

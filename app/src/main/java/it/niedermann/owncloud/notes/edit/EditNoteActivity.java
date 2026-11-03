@@ -19,6 +19,8 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.graphics.Insets;
@@ -45,6 +47,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerListener;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ActivityEditBinding;
+import it.niedermann.owncloud.notes.itemdetails.ItemDetailsActivity;
 import it.niedermann.owncloud.notes.main.MainActivity;
 import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
@@ -70,6 +73,14 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
 
     private BaseNoteFragment fragment;
     private NotesRepository repo;
+
+    private final ActivityResultLauncher<Intent> detailsLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == RESULT_OK) {
+                    refreshExistingNote(getAccountId(), getNoteId());
+                }
+            });
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -199,6 +210,10 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
                 launchNewNote();
             }
         }
+    }
+
+    private void refreshExistingNote(long accountId, long noteId) {
+        launchExistingNote(accountId, noteId, null, true);
     }
 
     /**
@@ -419,6 +434,10 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
             finish();
         }
 
+    }
+
+    public void openDetails(Note note, Account localAccount) {
+        detailsLauncher.launch(ItemDetailsActivity.getActivityStartIntent(this, note, localAccount));
     }
 
     @Override

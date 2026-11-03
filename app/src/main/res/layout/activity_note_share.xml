@@ -41,43 +41,6 @@
 
     </LinearLayout>
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:navigationIcon="@drawable/ic_arrow_back_grey600_24dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:lines="1"
-                android:text="@string/activity_sharing_title"
-                android:textColor="@color/fontAppbar"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/file_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:lines="1"
-                android:textColor="@color/fontAppbar"
-                android:textSize="12sp"
-                tools:text="Your Note Name.md"
-                tools:visibility="visible" />
-
-        </LinearLayout>
-
-    </com.google.android.material.appbar.MaterialToolbar>
-
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/searchCardWrapper"
         android:layout_width="match_parent"
