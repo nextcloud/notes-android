@@ -11,12 +11,12 @@ import android.content.Context
 import com.owncloud.android.lib.resources.files.model.FileVersion
 import it.niedermann.owncloud.notes.activities.model.Activity
 
-class ActivitiesData {
-    val activities = arrayListOf<Activity>()
-    val versions = arrayListOf<FileVersion>()
-    var activitiesLastGiven: Long? = null
+data class ActivitiesData(
+    val activities: ArrayList<Activity> = arrayListOf(),
+    val versions: ArrayList<FileVersion> = arrayListOf(),
+    var activitiesLastGiven: Long? = null,
     var activitiesMore: Boolean = true
-
+) {
     fun getAggregatedList(context: Context) : List<ActivityListItem> {
         val items = arrayListOf<ActivityListItem>()
         items.addAll(
