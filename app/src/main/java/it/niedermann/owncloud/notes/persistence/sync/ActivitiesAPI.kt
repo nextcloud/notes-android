@@ -7,7 +7,7 @@
  */
 package it.niedermann.owncloud.notes.persistence.sync
 
-import it.niedermann.owncloud.notes.activities.model.Activity
+import it.niedermann.owncloud.notes.activities.adapter.model.Activity
 import it.niedermann.owncloud.notes.shared.model.OcsResponse
 import retrofit2.Call
 import retrofit2.http.GET

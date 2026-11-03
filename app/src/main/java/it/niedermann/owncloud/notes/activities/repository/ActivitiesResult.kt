@@ -8,7 +8,7 @@
 package it.niedermann.owncloud.notes.activities.repository
 
 import it.niedermann.owncloud.notes.R
-import it.niedermann.owncloud.notes.activities.model.Activity
+import it.niedermann.owncloud.notes.activities.adapter.model.Activity
 
 sealed class ActivitiesResult(open val descriptionId: Int? = null) {
 

@@ -9,7 +9,7 @@ package it.niedermann.owncloud.notes.activities.adapter
 
 import android.content.Context
 import com.owncloud.android.lib.resources.files.model.FileVersion
-import it.niedermann.owncloud.notes.activities.model.Activity
+import it.niedermann.owncloud.notes.activities.adapter.model.Activity
 
 data class ActivitiesData(
     val activities: ArrayList<Activity> = arrayListOf(),

@@ -21,7 +21,7 @@ import com.owncloud.android.lib.resources.files.model.FileVersion
 import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.activities.adapter.ActivityListAdapter
 import it.niedermann.owncloud.notes.activities.adapter.OnActivityClickListener
-import it.niedermann.owncloud.notes.activities.model.Activity
+import it.niedermann.owncloud.notes.activities.adapter.model.Activity
 import it.niedermann.owncloud.notes.activities.repository.ActivitiesRepository
 import it.niedermann.owncloud.notes.activities.repository.RestoreVersionsResult
 import it.niedermann.owncloud.notes.activities.repository.VersionsRepository
