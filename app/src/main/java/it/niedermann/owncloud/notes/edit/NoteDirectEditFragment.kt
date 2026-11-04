@@ -7,22 +7,13 @@
 package it.niedermann.owncloud.notes.edit
 
 import android.annotation.SuppressLint
-import android.content.ActivityNotFoundException
-import android.content.Intent
-import android.net.http.SslError
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.JavascriptInterface
-import android.webkit.SslErrorHandler
-import android.webkit.WebResourceError
-import android.webkit.WebResourceRequest
-import android.webkit.WebSettings
 import android.webkit.WebView
-import android.webkit.WebViewClient
 import android.widget.ScrollView
 import androidx.core.view.isVisible
 import com.google.android.material.snackbar.Snackbar
@@ -39,6 +30,9 @@ import it.niedermann.owncloud.notes.branding.Branded
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar
 import it.niedermann.owncloud.notes.branding.BrandingUtil
 import it.niedermann.owncloud.notes.databinding.FragmentNoteDirectEditBinding
+import it.niedermann.owncloud.notes.edit.directeditingwebview.DirectEditingMobileInterface
+import it.niedermann.owncloud.notes.edit.directeditingwebview.DirectEditingWebViewClient
+import it.niedermann.owncloud.notes.edit.directeditingwebview.DirectEditingWebViewProvider
 import it.niedermann.owncloud.notes.persistence.ApiProvider
 import it.niedermann.owncloud.notes.persistence.DirectEditingRepository
 import it.niedermann.owncloud.notes.persistence.entity.Note
@@ -57,6 +51,13 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
 
     private val disposables: DisposableSet = DisposableSet()
     private var switchToEditPending = false
+    private var webView: WebView? = null
+
+    private val mobileInterfaceListener = object : DirectEditingMobileInterface.Listener {
+        override fun onClose() = close()
+        override fun onShare() = share()
+        override fun onLoaded() = this@NoteDirectEditFragment.onLoaded()
+    }
 
     val account: SingleSignOnAccount by lazy {
         SingleAccountHelper.getCurrentSingleSignOnAccount(
@@ -85,10 +86,14 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
         savedInstanceState: Bundle?,
     ): View? {
         Log.d(TAG, "onCreateView() called")
-        _binding = FragmentNoteDirectEditBinding.inflate(inflater, container, false)
+        val viewBinding = FragmentNoteDirectEditBinding.inflate(inflater, container, false).also { _binding = it }
+        webView = DirectEditingWebViewProvider.attach(
+            viewBinding.noteWebviewContainer,
+            DirectEditingWebViewClient(runCatching { account.url }.getOrNull(), ::handleLoadError),
+            mobileInterfaceListener,
+        )
         setupFab()
-        prepareWebView()
-        return binding?.root
+        return viewBinding.root
     }
 
     @SuppressLint("ClickableViewAccessibility") // touch listener only for UI purposes, no need to handle click
@@ -98,7 +103,7 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
             ExtendedFabUtil.toggleExtendedOnLongClick(plainEditingFab)
 
             // manually detect scroll as we can't get it from the webview (maybe with custom JS?)
-            noteWebview.setOnTouchListener { _, event ->
+            webView?.setOnTouchListener { _, event ->
                 when (event.action) {
                     MotionEvent.ACTION_DOWN -> {
                         scrollStart = event.y.toInt()
@@ -121,7 +126,7 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
 
     private fun switchToPlainEdit() {
         switchToEditPending = true
-        binding?.noteWebview?.evaluateJavascript(JS_CLOSE) { result ->
+        webView?.evaluateJavascript(JS_CLOSE) { result ->
             val resultWithoutQuotes = result.replace("\"", "")
             if (resultWithoutQuotes != JS_RESULT_OK) {
                 Log.w(TAG, "Closing via JS failed: $resultWithoutQuotes")
@@ -134,7 +139,8 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
     override fun onDestroyView() {
         super.onDestroyView()
         disposables.dispose()
-        binding?.noteWebview?.destroy()
+        binding?.let { DirectEditingWebViewProvider.detach(it.noteWebviewContainer) }
+        webView = null
         _binding = null
     }
 
@@ -143,7 +149,7 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
         val timeoutDisposable = Single.just(Unit)
             .delay(LOAD_TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .map {
-                if (binding?.noteWebview?.isVisible == false) {
+                if (binding?.noteWebviewContainer?.isVisible == false) {
                     Log.w(TAG, "Editor not loaded after $LOAD_TIMEOUT_SECONDS seconds")
                     handleLoadError()
                 }
@@ -208,7 +214,7 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
                         if (BuildConfig.DEBUG) {
                             Log.d(TAG, "loadNoteInWebView: url = $url")
                         }
-                        binding?.noteWebview?.loadUrl(url)
+                        webView?.loadUrl(url)
                     }
                 }, { throwable ->
                     handleLoadError()
@@ -242,94 +248,6 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
 
     override fun shouldShowToolbar(): Boolean = false
 
-    @SuppressLint("SetJavaScriptEnabled")
-    private fun prepareWebView() {
-        binding?.noteWebview?.settings?.run {
-            // enable zoom
-            setSupportZoom(true)
-            builtInZoomControls = true
-            displayZoomControls = false
-
-            // Non-responsive webs are zoomed out when loaded
-            useWideViewPort = true
-            loadWithOverviewMode = true
-
-            // user agent
-            val userAgent =
-                getString(R.string.user_agent, getString(R.string.app_name), BuildConfig.VERSION_NAME)
-            userAgentString = userAgent
-
-            // no private data storing
-            savePassword = false
-            saveFormData = false
-
-            // disable local file access
-            allowFileAccess = false
-
-            // enable javascript
-            javaScriptEnabled = true
-            domStorageEnabled = true
-        }
-
-        if (BuildConfig.DEBUG) {
-            // caching disabled in debug mode
-            binding?.noteWebview?.settings?.cacheMode = WebSettings.LOAD_NO_CACHE
-        }
-
-        binding?.noteWebview?.addJavascriptInterface(
-            DirectEditingMobileInterface(this),
-            JS_INTERFACE_NAME,
-        )
-
-        binding?.noteWebview?.webViewClient = object : WebViewClient() {
-            override fun onReceivedError(
-                view: WebView?,
-                request: WebResourceRequest?,
-                error: WebResourceError?,
-            ) {
-                super.onReceivedError(view, request, error)
-                if (request?.isForMainFrame == true) {
-                    handleLoadError()
-                }
-            }
-
-            @SuppressLint("WebViewClientOnReceivedSslError") // only for debug mode
-            override fun onReceivedSslError(
-                view: WebView?,
-                handler: SslErrorHandler?,
-                error: SslError?,
-            ) {
-                if (BuildConfig.DEBUG) {
-                    handler?.proceed()
-                } else {
-                    super.onReceivedSslError(view, handler, error)
-                }
-            }
-
-            override fun shouldOverrideUrlLoading(
-                view: WebView?,
-                request: WebResourceRequest?,
-            ): Boolean {
-                val url = request?.url ?: return false
-                val scheme = url.scheme?.lowercase()
-                val accountUrl = runCatching { account.url }.getOrNull()
-                val staysOnServer = (scheme == "http" || scheme == "https") &&
-                    accountUrl != null && url.toString().startsWith(accountUrl)
-                if (!staysOnServer) {
-                    try {
-                        val intent = Intent(Intent.ACTION_VIEW, url).apply {
-                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                        }
-                        startActivity(intent)
-                    } catch (e: ActivityNotFoundException) {
-                        Log.w(TAG, "No app available to open $url", e)
-                    }
-                }
-                return !staysOnServer
-            }
-        }
-    }
-
     /**
      * Gets the current content of the EditText field in the UI.
      *
@@ -355,23 +273,6 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
         binding?.run {
             util.material.themeExtendedFAB(plainEditingFab)
             util.platform.colorCircularProgressBar(progress, ColorRole.PRIMARY)
-        }
-    }
-
-    private class DirectEditingMobileInterface(val noteDirectEditFragment: NoteDirectEditFragment) {
-        @JavascriptInterface
-        fun close() {
-            noteDirectEditFragment.close()
-        }
-
-        @JavascriptInterface
-        fun share() {
-            noteDirectEditFragment.share()
-        }
-
-        @JavascriptInterface
-        fun loaded() {
-            noteDirectEditFragment.onLoaded()
         }
     }
 
@@ -422,7 +323,7 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
         activity?.runOnUiThread {
             binding?.run {
                 progress.isVisible = loading
-                noteWebview.isVisible = !loading
+                noteWebviewContainer.isVisible = !loading
                 plainEditingFab.isVisible = !loading
             }
         }
@@ -431,7 +332,6 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
     companion object {
         private const val TAG = "NoteDirectEditFragment"
         private const val LOAD_TIMEOUT_SECONDS = 10L
-        private const val JS_INTERFACE_NAME = "DirectEditingMobileInterface"
         private const val JS_RESULT_OK = "ok"
 
         // language=js
