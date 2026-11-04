@@ -228,11 +228,6 @@ platform :android do
             UI.user_error!("Version is not releasable: #{versionComponents["type"]}")
         end
     end
-    
-    desc "Run tests"
-	private_lane :test do
-		 gradle(task: "clean testGplayDebugUnitTest testGenericDebugUnitTest testQaDebugUnitTest")
-	end
 	
 	desc "Build app bundle"
 	private_lane :buildBundle do
