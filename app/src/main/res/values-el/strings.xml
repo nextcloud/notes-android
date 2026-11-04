@@ -196,6 +196,7 @@
     <string name="manage_accounts">Διαχείριση λογαριασμών</string>
     <string name="menu_change_category">Κατηγορία</string>
     <string name="menu_delete">Διαγραφή</string>
+    <string name="menu_details">Λεπτομέρειες</string>
     <string name="menu_edit_title">Επεξεργασία τίτλου</string>
     <string name="menu_favorite">Αγαπημένο</string>
     <string name="menu_preview">Προεπισκόπηση</string>
@@ -324,6 +325,7 @@
     <string name="today">Σήμερα</string>
     <string name="unlock_notes">Ξεκλείδωμα σημειώσεων</string>
     <string name="username">Όνομα χρήστη</string>
+    <string name="version_restore_failed">Δεν ήταν δυνατή η επαναφορά της έκδοσης</string>
     <string name="welcome_text">Καλώς ήρθατε στο %1$s</string>
     <string name="whats_your_status">Ποια είναι η κατάστασή σας;</string>
     <string name="widget_entry_fav_contentDescription">Το εικονίδιο αστεριού χρησιμοποιείται για να υποδηλώσει ένα αντικείμενο ως αγαπημένο</string>

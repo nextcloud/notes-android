@@ -40,6 +40,8 @@
     <string name="action_trashbin">یادداشت‌های حذف شده</string>
     <string name="action_uncategorized">دسته‌بندی نشده</string>
     <string name="action_undo">برگرداندن</string>
+    <string name="activities_favorite">مورد علاقه</string>
+    <string name="activities_no_results">هیچ رویدادی مانند افزودن، تغییرات و اشتراک‌گذاری‌ها وجود ندارد.</string>
     <string name="activity_chooser_send_file_title">ارسال</string>
     <string name="activity_chooser_title">ارسال لینک به ....</string>
     <string name="activity_select_single_note">انتخاب یادداشت</string>
@@ -212,6 +214,7 @@
     <string name="manage_accounts">مدیریت حساب‌ها</string>
     <string name="menu_change_category">دسته‌بندی</string>
     <string name="menu_delete">حذف</string>
+    <string name="menu_details">جزئیات</string>
     <string name="menu_edit_title">ویرایش عنوان</string>
     <string name="menu_favorite">مورد‌علاقه</string>
     <string name="menu_preview">پیش‌نمایش</string>
@@ -377,6 +380,8 @@
     <string name="username">نام کاربری</string>
     <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
     <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
+    <string name="version_restore_failed">امکان بازیابی نسخه وجود نداشت</string>
+    <string name="version_restored">نسخه بازگردانی شد</string>
     <string name="welcome_text">به %1$s خوش آمدید</string>
     <string name="whats_your_status">وضعیت شما چیست؟</string>
     <string name="widget_entry_fav_contentDescription">آیکون ستاره برای علامت‌گذاری یک مورد به عنوان مورد علاقه استفاده می‌شود</string>

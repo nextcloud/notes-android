@@ -39,6 +39,7 @@
     <string name="action_trashbin">Ezabatutako oharrak</string>
     <string name="action_uncategorized">Kategoria gabe</string>
     <string name="action_undo">Desegin</string>
+    <string name="activities_favorite">Egin gogoko</string>
     <string name="activity_chooser_send_file_title">Bidali</string>
     <string name="activity_select_single_note">Hautatu oharra</string>
     <string name="activity_sharing_title">Partekatzea</string>
@@ -205,6 +206,7 @@
     <string name="manage_accounts">Kudeatu kontuak</string>
     <string name="menu_change_category">Kategoria</string>
     <string name="menu_delete">Ezabatu</string>
+    <string name="menu_details">Xehetasunak</string>
     <string name="menu_edit_title">Editatu izenburua</string>
     <string name="menu_favorite">Gogokoa</string>
     <string name="menu_preview">Aurreikusi</string>
@@ -345,6 +347,7 @@
     <string name="today">Gaur</string>
     <string name="unlock_notes">Desblokeatu oharrak</string>
     <string name="username">Erabiltzaile-izena</string>
+    <string name="version_restore_failed">Ezin izan da bertsioa leheneratu</string>
     <string name="welcome_text">Ongi etorri %1$s(e)ra</string>
     <string name="widget_entry_fav_contentDescription">Izarraren ikonoa elementu bat gogoko gisa adierazteko erabiltzen da</string>
     <string name="widget_not_logged_in">Hasi saioa Oharrak aplikazioan trepeta hau erabili aurretik</string>
