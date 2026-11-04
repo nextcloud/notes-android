@@ -33,6 +33,7 @@ import it.niedermann.owncloud.notes.databinding.FragmentNoteDirectEditBinding
 import it.niedermann.owncloud.notes.edit.directeditingwebview.DirectEditingMobileInterface
 import it.niedermann.owncloud.notes.edit.directeditingwebview.DirectEditingWebViewClient
 import it.niedermann.owncloud.notes.edit.directeditingwebview.DirectEditingWebViewProvider
+import it.niedermann.owncloud.notes.edit.directeditingwebview.openDirectEditing
 import it.niedermann.owncloud.notes.persistence.ApiProvider
 import it.niedermann.owncloud.notes.persistence.DirectEditingRepository
 import it.niedermann.owncloud.notes.persistence.entity.Note
@@ -214,7 +215,7 @@ class NoteDirectEditFragment : BaseNoteFragment(), Branded {
                         if (BuildConfig.DEBUG) {
                             Log.d(TAG, "loadNoteInWebView: url = $url")
                         }
-                        webView?.loadUrl(url)
+                        webView?.openDirectEditing(url)
                     }
                 }, { throwable ->
                     handleLoadError()
