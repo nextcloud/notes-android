@@ -114,16 +114,11 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
-    protected void bindNoteSharedIcon(@NonNull Context context, boolean shared, @NonNull MaterialButton noteShareIcon, int color) {
-        if (shared) {
-            noteShareIcon.setVisibility(VISIBLE);
-            noteShareIcon.setOnClickListener(view -> noteClickListener.openShare(getLayoutPosition()));
-        } else {
-            noteShareIcon.setVisibility(GONE);
-        }
+    protected void bindNoteDetailsIcon(@NonNull Context context, @NonNull MaterialButton noteDetailsIcon, int color) {
+        noteDetailsIcon.setOnClickListener(view -> noteClickListener.openInfoBottomSheet(getLayoutPosition()));
 
         final var util = BrandingUtil.of(color, context);
-        util.material.colorMaterialButtonContent(noteShareIcon, ColorRole.PRIMARY);
+        util.material.colorMaterialButtonContent(noteDetailsIcon, ColorRole.SECONDARY);
     }
 
     public abstract void showSwipe(float dX);

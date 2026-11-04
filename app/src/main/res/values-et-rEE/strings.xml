@@ -40,6 +40,7 @@
     <string name="action_trashbin">Kustutatud märkmed</string>
     <string name="action_uncategorized">Määratlemata</string>
     <string name="action_undo">Võta tegevus tagasi</string>
+    <string name="activities_favorite">Lemmik</string>
     <string name="activity_chooser_send_file_title">Saada</string>
     <string name="activity_chooser_title">Saada link…</string>
     <string name="activity_select_single_note">Vali märge</string>
@@ -221,6 +222,7 @@
     <string name="manage_accounts">Halda kontosid</string>
     <string name="menu_change_category">Kategooria</string>
     <string name="menu_delete">Kustuta</string>
+    <string name="menu_details">Üksikasjad</string>
     <string name="menu_edit_title">Muuda pealkirja</string>
     <string name="menu_favorite">Lemmik</string>
     <string name="menu_preview">Eelvaade</string>
@@ -386,6 +388,7 @@
     <string name="username">Kasutajanimi</string>
     <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
     <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
+    <string name="version_restore_failed">Versiooni taastamine ei õnnestunud</string>
     <string name="welcome_text">Tere tulemast rakendusse %1$s</string>
     <string name="whats_your_status">Mis on su olek?</string>
     <string name="widget_entry_fav_contentDescription">Tähekese ikooniga saad märget tähistada kui lemmikut</string>

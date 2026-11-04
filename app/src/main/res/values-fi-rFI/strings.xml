@@ -38,6 +38,8 @@
     <string name="action_trashbin">Poistetut muistiinpanot</string>
     <string name="action_uncategorized">Luokittelemattomat</string>
     <string name="action_undo">Kumoa</string>
+    <string name="activities_favorite">Suosikki</string>
+    <string name="activities_no_results">Ei vielä tapahtumia kuten lisäyksiä, muutoksia tai jakoja.</string>
     <string name="activity_chooser_send_file_title">Lähetä</string>
     <string name="activity_chooser_title">Lähetä linkki…</string>
     <string name="activity_select_single_note">Valitse muistiinpano</string>
@@ -204,6 +206,7 @@
     <string name="manage_accounts">Tilien hallinta</string>
     <string name="menu_change_category">Luokka</string>
     <string name="menu_delete">Poista</string>
+    <string name="menu_details">Tiedot</string>
     <string name="menu_edit_title">Muokkaa otsikkoa</string>
     <string name="menu_favorite">Suosikki</string>
     <string name="menu_preview">Esikatselu</string>
@@ -337,6 +340,8 @@
     <string name="today">Tänään</string>
     <string name="unlock_notes">Avaa muistiinpanojen lukitus</string>
     <string name="username">Käyttäjätunnus</string>
+    <string name="version_restore_failed">Versiota ei voitu palauttaa</string>
+    <string name="version_restored">Versio palautettu</string>
     <string name="welcome_text">Tervetuloa, tämä on %1$s</string>
     <string name="whats_your_status">Mikä on tilatietosi?</string>
     <string name="widget_entry_fav_contentDescription">Tähtikuvaketta käytetään suosikin ilmaisemiseen</string>
