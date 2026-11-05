@@ -21,7 +21,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:9.5.0'
+        classpath 'com.android.tools.build:gradle:9.5.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin:2.3.12"
 
