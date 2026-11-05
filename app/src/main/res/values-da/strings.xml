@@ -42,8 +42,10 @@
     <string name="action_trashbin">Slettede noter</string>
     <string name="action_uncategorized">Uden kategori</string>
     <string name="action_undo">Fortryd</string>
+    <string name="activities_error">Der opstod en fejl under indlæsning af aktiviteter</string>
     <string name="activities_favorite">Favorit</string>
-    <string name="activities_no_results">Ingen begivenheder som tilføjelser, ændringer eller delinger endnu.</string>
+    <string name="activities_fetch_failed">Aktiviteterne kunne ikke hentes</string>
+    <string name="activities_no_results">Ingen hændelser som tilføjelser, ændringer og delinger endnu.</string>
     <string name="activities_title">Aktiviteter</string>
     <string name="activity_chooser_send_file_title">Send</string>
     <string name="activity_chooser_title">Send link til…</string>
@@ -289,6 +291,7 @@
     <string name="online">Online</string>
     <string name="online_status">Onlinestatus</string>
     <string name="pin_to_homescreen">Fastgør til startskærmen</string>
+    <string name="placeholder_filename">Note.md</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_lock">Adgangskodebeskyttelse</string>
     <string name="pref_value_wifi_and_mobile">Synkroniser på Wi-Fi og mobildata</string>
@@ -395,6 +398,7 @@
     <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
     <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
     <string name="version_restore_failed">Versionen kunne ikke gendannes</string>
+    <string name="version_restore_failed_unsupported">Gendannelse af versioner understøttes ikke: opdater Nextcloud-appen</string>
     <string name="version_restored">Versionen er gendannet</string>
     <string name="welcome_text">Velkommen til %1$s</string>
     <string name="whats_your_status">Hvad er din status?</string>

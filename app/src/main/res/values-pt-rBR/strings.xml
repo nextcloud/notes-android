@@ -42,12 +42,14 @@
     <string name="action_trashbin">Anotações excluídas</string>
     <string name="action_uncategorized">Sem categoria</string>
     <string name="action_undo">Desfazer</string>
+    <string name="activities_error">Ocorreu um erro ao carregar as atividades</string>
     <string name="activities_favorite">Favorito</string>
+    <string name="activities_fetch_failed">Não foi possível obter as atividades</string>
     <string name="activities_no_results">Ainda nenhum evento como adições, alterações e compartilhamentos.</string>
     <string name="activities_title">Atividades</string>
     <string name="activity_chooser_send_file_title">Enviar</string>
     <string name="activity_chooser_title">Enviar link para…</string>
-    <string name="activity_icon">Atividades</string>
+    <string name="activity_icon">Atividade</string>
     <string name="activity_select_single_note">Selecionar anotação</string>
     <string name="activity_sharing_details_title">Detalhes do compartilhamento</string>
     <string name="activity_sharing_title">Compartilhamento</string>
@@ -155,7 +157,7 @@
     <string name="error_sync_server_error">O servidor não conseguiu salvar suas alterações. Peça ao seu administrador para verificar os registros.</string>
     <string name="error_sync_server_unreachable">Não foi possível acessar seu servidor. Verifique sua conexão e o aplicativo Nextcloud Arquivos.</string>
     <string name="error_sync_token_mismatch">O aplicativo Notas perdeu o acesso à sua conta no aplicativo Arquivos. Remova e adicione a conta novamente.</string>
-    <string name="error_sync_unauthorized">Sua senha não é mais válida. Faça login novamente no aplicativo Nextcloud Arquivos.</string>
+    <string name="error_sync_unauthorized">Seu login não é mais válido. Faça login novamente no aplicativo Nextcloud Arquivos.</string>
     <string name="error_synchronization">A sincronização falhou</string>
     <string name="error_unknown">Ocorreu um erro desconhecido.</string>
     <string name="failed_the_remove_share">Falha ao remover compartilhamento</string>
@@ -289,6 +291,7 @@
     <string name="online">On-line</string>
     <string name="online_status">Status on-line</string>
     <string name="pin_to_homescreen">Fixar na tela inicial</string>
+    <string name="placeholder_filename">Nota.md</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_lock">Proteção com senha</string>
     <string name="pref_value_wifi_and_mobile">Sincronizar por Wi-Fi e dados móveis</string>
@@ -395,6 +398,7 @@
     <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
     <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
     <string name="version_restore_failed">Não foi possível restaurar esta versão</string>
+    <string name="version_restore_failed_unsupported">A restauração de versões não é compatível: atualize o aplicativo Nextcloud Arquivos</string>
     <string name="version_restored">Versão restaurada</string>
     <string name="welcome_text">Bem-vindo ao %1$s</string>
     <string name="whats_your_status">Qual é o seu status?</string>

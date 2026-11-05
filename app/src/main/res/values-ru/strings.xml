@@ -25,7 +25,7 @@
     <string name="about_version">В данный момент вы используете %1$s</string>
     <string name="about_version_title">Версия</string>
     <string name="account_already_imported">Учётная запись уже импортирована</string>
-    <string name="account_imported">Учетная запись импортирована.</string>
+    <string name="account_imported">Учётная запись импортирована.</string>
     <string name="account_not_found">Учётная запись не найдена!</string>
     <string name="account_switch_dialog_status_fetching_error_message">Не удалось получить статус. Повторите попытку.</string>
     <string name="action_back">Назад</string>
@@ -42,7 +42,9 @@
     <string name="action_trashbin">Удалённые заметки</string>
     <string name="action_uncategorized">Без категории</string>
     <string name="action_undo">Отменить</string>
+    <string name="activities_error">При загрузке списка событий произошла ошибка</string>
     <string name="activities_favorite">Избранное</string>
+    <string name="activities_fetch_failed">Не удалось получить данные событий</string>
     <string name="activities_no_results">Пока нет ни одного события: добавления, изменения или общего доступа.</string>
     <string name="activities_title">События</string>
     <string name="activity_chooser_send_file_title">Отправить</string>
@@ -67,7 +69,7 @@
     <string name="busy">Занят</string>
     <string name="category_bake">Выпечка</string>
     <string name="category_checklists">Чек-лист</string>
-    <string name="category_credentials">Учетные данные</string>
+    <string name="category_credentials">Учётные данные</string>
     <string name="category_food">Еда</string>
     <string name="category_game">Игра</string>
     <string name="category_games">Игры</string>
@@ -134,12 +136,12 @@
     <string name="error_dialog_server_app_enabled">Проверьте, установлено ли на сервере приложение Заметки.</string>
     <string name="error_dialog_timeout_instance">Ответ сервера не был получен в отведённое на это время. Проверьте работоспособность сервера.</string>
     <string name="error_dialog_timeout_toggle">Проверьте ваше сетевое соединение. В некоторых случаях может помочь отключение Wi-Fi и включение его вновь.</string>
-    <string name="error_dialog_tip_clear_storage">Вы можете очистить хранилище, открыв информацию о приложении и выбрав Хранилище → Очистить хранилище. ⚠️ Предупреждение: это удалит еще не синхронизированные заметки!</string>
+    <string name="error_dialog_tip_clear_storage">Вы можете очистить хранилище, открыв информацию о приложении и выбрав Хранилище → Очистить хранилище. ⚠️ Предупреждение: это удалит ещё не синхронизированные заметки!</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Отключите оптимизацию энергопотребления для Nextcloud и приложения «Заметки».</string>
     <string name="error_dialog_tip_files_delete_storage">Если принудительная остановка не поможет, попробуйте очистить хранилище обоих приложений.</string>
     <string name="error_dialog_tip_files_force_stop">Похоже что с вашим приложением Nextcloud что-то не так. Попробуйте принудительно остановить оба приложения Nextcloud и Nextcloud Notes. </string>
     <string name="error_dialog_tip_files_outdated">Ваше приложение Nextcloud устарело. Установите новую версию с Play Store или F-Droid.</string>
-    <string name="error_dialog_tip_token_mismatch_clear_storage">Если проблема повторилась, попробуйте для ее решения очистить хранилище обоих приложений: Nextcloud и Nextcloud Notes</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Если проблема повторилась, попробуйте для её решения очистить хранилище обоих приложений: Nextcloud и Nextcloud Notes</string>
     <string name="error_dialog_tip_token_mismatch_retry">Попробуйте принудительно закрыть приложение и запустить его снова. Это может быть связано с некорректным подключением к приложению Nextcloud.</string>
     <string name="error_dialog_title">О нет, что теперь? 🙁</string>
     <string name="error_dialog_we_need_info">Требуется следующая техническая информация от вас:</string>
@@ -165,7 +167,7 @@
     <string name="fontSize_large">Большая</string>
     <string name="fontSize_medium">Средняя</string>
     <string name="fontSize_small">Маленькая</string>
-    <string name="formatting_help_cbf_body_1">Главная цель разработки приложения Notes - получить инструмент для быстрого создания заметок по текущим делам. Вы можете отформатировать текст, применяя синтаксис Markdown. Для приведенных ниже примеров удобно использовать клавиши быстрого доступа, что позволит выполнять форматирование ваших заметок без ввода самих символов форматирования.</string>
+    <string name="formatting_help_cbf_body_1">Главная цель разработки приложения Notes - получить инструмент для быстрого создания заметок по текущим делам. Вы можете отформатировать текст, применяя синтаксис Markdown. Для приведённых ниже примеров удобно использовать клавиши быстрого доступа, что позволит выполнять форматирование ваших заметок без ввода самих символов форматирования.</string>
     <string name="formatting_help_cbf_body_2">Выберите блок текста или нажмите на курсор в любом месте, и появится всплывающее меню, содержащее рядом с записями по умолчанию 1 %1$s, 2 %2$s, 3 %3$s такие записи, как 4 %4$s или 5 %5$s.</string>
     <string name="formatting_help_cbf_title">Контекстное форматирование</string>
     <string name="formatting_help_checkboxes_body_1">Чтобы создать флажок, используйте список, заключённый в скобки</string>
@@ -192,7 +194,7 @@
     <string name="formatting_help_lists_body_4">Три</string>
     <string name="formatting_help_lists_body_5">Иногда вам требуются ненумерованные списки:</string>
     <string name="formatting_help_lists_body_6">Начать строку с тире</string>
-    <string name="formatting_help_lists_body_7">А если вы создаёте подпункты, поставьте два пробела перед тире или звездочкой:</string>
+    <string name="formatting_help_lists_body_7">А если вы создаёте подпункты, поставьте два пробела перед тире или звёздочкой:</string>
     <string name="formatting_help_lists_body_8">Нравится это</string>
     <string name="formatting_help_lists_body_9">И это</string>
     <string name="formatting_help_lists_title">Списки</string>
@@ -289,6 +291,7 @@
     <string name="online">В сети</string>
     <string name="online_status">Онлайн подключения</string>
     <string name="pin_to_homescreen">Введите PIN-код для домашнего экрана</string>
+    <string name="placeholder_filename">Заметка.md</string>
     <string name="pref_value_font_normal">Обычный</string>
     <string name="pref_value_lock">Защита паролем</string>
     <string name="pref_value_wifi_and_mobile">Синхр. по Wi-Fi и мобильной связи</string>
@@ -310,7 +313,7 @@
     <string name="settings_font_size">Размер шрифта</string>
     <string name="settings_font_title">Моноширинный шрифт</string>
     <string name="settings_gridview">Вид сеткой</string>
-    <string name="settings_keep_screen_on">Держите экран включенным</string>
+    <string name="settings_keep_screen_on">Держите экран включённым</string>
     <string name="settings_keep_screen_on_summary">При просмотре или редактировании заметки</string>
     <string name="settings_lock">Блокировка приложения (бета)</string>
     <string name="settings_lock_summary">Данные устройства</string>
@@ -349,7 +352,7 @@
     <string name="share_permission_can_edit">Разрешено редактировать</string>
     <string name="share_permission_file_drop">Приём файлов</string>
     <string name="share_permission_file_request">Запрос файла</string>
-    <string name="share_permission_secure_file_drop">Защищенный очиститель файлов</string>
+    <string name="share_permission_secure_file_drop">Защищённый очиститель файлов</string>
     <string name="share_permission_unknown">Неизвестно</string>
     <string name="share_permission_view_only">Для просмотра</string>
     <string name="share_permissions">Права на публикацию</string>
@@ -395,10 +398,11 @@
     <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
     <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
     <string name="version_restore_failed">Не удалось восстановить версию</string>
+    <string name="version_restore_failed_unsupported">Восстановление версии не поддерживается: пожалуйста, обновите приложение Nextcloud Files</string>
     <string name="version_restored">Версия восстановлена</string>
     <string name="welcome_text">Добро пожаловать в %1$s</string>
     <string name="whats_your_status">Какой у вас статус?</string>
-    <string name="widget_entry_fav_contentDescription">Значок звездочки используется для обозначения элемента как избранного</string>
+    <string name="widget_entry_fav_contentDescription">Значок звёздочки используется для обозначения элемента как избранного</string>
     <string name="widget_not_logged_in">Для использования виджета необходимо выполнить вход в приложении «Заметки»</string>
     <string name="widget_note_list_placeholder">Заметок нет</string>
     <string name="widget_note_list_title">Список заметок</string>

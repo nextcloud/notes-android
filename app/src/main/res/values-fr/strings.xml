@@ -42,7 +42,9 @@
     <string name="action_trashbin">Notes supprimées</string>
     <string name="action_uncategorized">Non catégorisé</string>
     <string name="action_undo">Annuler</string>
+    <string name="activities_error">Une erreur est survenue lors du chargement des activités</string>
     <string name="activities_favorite">Ajouter aux favoris</string>
+    <string name="activities_fetch_failed">Impossible de récupérer les activités</string>
     <string name="activities_no_results">Aucun événement d’ajout, de modification ou de partage pour l’instant.</string>
     <string name="activities_title">Activités</string>
     <string name="activity_chooser_send_file_title">Envoyer</string>
@@ -289,6 +291,7 @@
     <string name="online">En ligne</string>
     <string name="online_status">Statut de connexion</string>
     <string name="pin_to_homescreen">Épingler sur l\'écran d\'accueil</string>
+    <string name="placeholder_filename">Note.md</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_lock">Protection par mot de passe</string>
     <string name="pref_value_wifi_and_mobile">Synchroniser en Wifi et données mobiles</string>
