@@ -35,6 +35,8 @@
     <string name="action_note_deleted">Eliminouse %1$s</string>
     <string name="action_note_restored">Restaurouse %1$s</string>
     <string name="action_search">Buscar</string>
+    <string name="action_see_details">Detalles</string>
+    <string name="action_send_share">Enviar/compartir</string>
     <string name="action_settings">Axustes</string>
     <string name="action_sorting_method">Método de ordenación</string>
     <string name="action_trashbin">Notas eliminadas</string>
@@ -42,8 +44,10 @@
     <string name="action_undo">Desfacer</string>
     <string name="activities_favorite">Favorito</string>
     <string name="activities_no_results">Non houbo eventos como adicións, cambios e elementos compartidos.</string>
+    <string name="activities_title">Actividades</string>
     <string name="activity_chooser_send_file_title">Enviar</string>
     <string name="activity_chooser_title">Enviar a ligazón a…</string>
+    <string name="activity_icon">Actividade</string>
     <string name="activity_select_single_note">Seleccionar unha nota</string>
     <string name="activity_sharing_details_title">Detalles da compartición</string>
     <string name="activity_sharing_title">Compartindo</string>
@@ -221,6 +225,7 @@
     <string name="menu_share">Compartir</string>
     <string name="menu_shared_note">Nota compartida</string>
     <string name="mute_all_notifications">Silenciar todas as notificacións</string>
+    <string name="new_version_was_created">Creouse unha versión nova</string>
     <string name="no_account_configured_yet">Aínda non hai ningunha conta configurada</string>
     <string name="no_actions">Non hai accións para este usuario</string>
     <string name="no_browser_available">Non hai ningunha aplicación dispoñíbel para manexar ligazóns</string>

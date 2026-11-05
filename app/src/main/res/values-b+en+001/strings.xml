@@ -35,13 +35,19 @@
     <string name="action_note_deleted">Deleted %1$s</string>
     <string name="action_note_restored">Restored %1$s</string>
     <string name="action_search">Search</string>
+    <string name="action_see_details">Details</string>
+    <string name="action_send_share">Send/share</string>
     <string name="action_settings">Settings</string>
     <string name="action_sorting_method">Sorting method</string>
     <string name="action_trashbin">Deleted notes</string>
     <string name="action_uncategorized">Uncategorised</string>
     <string name="action_undo">Undo</string>
+    <string name="activities_favorite">Favourite</string>
+    <string name="activities_no_results">No events like additions, changes and shares yet.</string>
+    <string name="activities_title">Activities</string>
     <string name="activity_chooser_send_file_title">Send</string>
     <string name="activity_chooser_title">Send link to…</string>
+    <string name="activity_icon">Activity</string>
     <string name="activity_select_single_note">Select note</string>
     <string name="activity_sharing_details_title">Sharing Details</string>
     <string name="activity_sharing_title">Sharing</string>
@@ -228,6 +234,7 @@
     <string name="menu_share">Share</string>
     <string name="menu_shared_note">Shared note</string>
     <string name="mute_all_notifications">Mute all notifications</string>
+    <string name="new_version_was_created">New version was created</string>
     <string name="no_account_configured_yet">No account configured yet</string>
     <string name="no_actions">No actions for this user</string>
     <string name="no_browser_available">No app available to handle links</string>
@@ -388,6 +395,7 @@
     <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
     <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
     <string name="version_restore_failed">Could not restore version</string>
+    <string name="version_restored">Version restored</string>
     <string name="welcome_text">Welcome to %1$s</string>
     <string name="whats_your_status">What is your status?</string>
     <string name="widget_entry_fav_contentDescription">Star icon is used to denote an item as a favourite</string>

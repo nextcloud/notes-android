@@ -32,6 +32,7 @@
     <string name="action_note_deleted">%1$s נמחק</string>
     <string name="action_note_restored">%1$s שוחזר</string>
     <string name="action_search">חיפוש</string>
+    <string name="action_see_details">פרטים</string>
     <string name="action_send_share">שליחה/שיתוף</string>
     <string name="action_settings">הגדרות</string>
     <string name="action_sorting_method">שיטת מיון</string>
@@ -40,8 +41,10 @@
     <string name="action_undo">ביטול</string>
     <string name="activities_favorite">סימון כמועדף</string>
     <string name="activities_no_results">אין אירועים כמו תוספות, שינויים ושיתופים עדיין.</string>
+    <string name="activities_title">פעילויות</string>
     <string name="activity_chooser_send_file_title">שליחה</string>
     <string name="activity_chooser_title">שליחת קישור אל…</string>
+    <string name="activity_icon">פעילות</string>
     <string name="activity_select_single_note">נא לבחור פתק</string>
     <string name="activity_sharing_title">שיתוף</string>
     <string name="add_account">הוספת חשבון</string>

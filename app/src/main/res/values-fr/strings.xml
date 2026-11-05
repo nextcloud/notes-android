@@ -35,15 +35,21 @@
     <string name="action_note_deleted">%1$s supprimé</string>
     <string name="action_note_restored">%1$s restauré</string>
     <string name="action_search">Rechercher</string>
+    <string name="action_see_details">Détails</string>
+    <string name="action_send_share">Envoyer / Partager</string>
     <string name="action_settings">Paramètres</string>
     <string name="action_sorting_method">Méthode de tri</string>
     <string name="action_trashbin">Notes supprimées</string>
     <string name="action_uncategorized">Non catégorisé</string>
     <string name="action_undo">Annuler</string>
+    <string name="activities_error">Une erreur est survenue lors du chargement des activités</string>
     <string name="activities_favorite">Ajouter aux favoris</string>
+    <string name="activities_fetch_failed">Impossible de récupérer les activités</string>
     <string name="activities_no_results">Aucun événement d’ajout, de modification ou de partage pour l’instant.</string>
+    <string name="activities_title">Activités</string>
     <string name="activity_chooser_send_file_title">Envoyer</string>
     <string name="activity_chooser_title">Envoyer le lien vers…</string>
+    <string name="activity_icon">Activité</string>
     <string name="activity_select_single_note">Choisir une note</string>
     <string name="activity_sharing_details_title">Détails du partage</string>
     <string name="activity_sharing_title">Partage</string>
@@ -230,6 +236,7 @@
     <string name="menu_share">Partager</string>
     <string name="menu_shared_note">Note partagée</string>
     <string name="mute_all_notifications">Désactiver les notifications</string>
+    <string name="new_version_was_created">Une nouvelle version a été créée</string>
     <string name="no_account_configured_yet">Aucun compte n\'est encore configuré</string>
     <string name="no_actions">Aucune action pour cet utilisateur</string>
     <string name="no_browser_available">Aucune application n\'est disponible pour ouvrir les liens</string>
@@ -284,6 +291,7 @@
     <string name="online">En ligne</string>
     <string name="online_status">Statut de connexion</string>
     <string name="pin_to_homescreen">Épingler sur l\'écran d\'accueil</string>
+    <string name="placeholder_filename">Note.md</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_lock">Protection par mot de passe</string>
     <string name="pref_value_wifi_and_mobile">Synchroniser en Wifi et données mobiles</string>

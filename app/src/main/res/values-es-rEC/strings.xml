@@ -34,14 +34,18 @@
     <string name="action_note_deleted">%1$s eliminado</string>
     <string name="action_note_restored">%1$s restaurado</string>
     <string name="action_search">Buscar</string>
+    <string name="action_see_details">Detalles</string>
     <string name="action_settings">Configuraciones</string>
     <string name="action_sorting_method">Método de ordenación</string>
     <string name="action_trashbin">Notas borradas</string>
     <string name="action_uncategorized">Sin categoría</string>
     <string name="action_undo">Deshacer</string>
     <string name="activities_favorite">Favorito</string>
+    <string name="activities_no_results">No hay eventos como adiciones, cambios y compartidos todavía.</string>
+    <string name="activities_title">Actividades</string>
     <string name="activity_chooser_send_file_title">Enviar</string>
     <string name="activity_chooser_title">Enviar liga a…</string>
+    <string name="activity_icon">Actividad</string>
     <string name="activity_select_single_note">Seleccionar nota</string>
     <string name="activity_sharing_title">Compartiendo</string>
     <string name="add_account">Agregar cuenta</string>
@@ -207,6 +211,7 @@
     <string name="menu_preview">Vista previa</string>
     <string name="menu_share">Compartir</string>
     <string name="mute_all_notifications">Silenciar todas las notificaciones</string>
+    <string name="new_version_was_created">Se creó una nueva versión</string>
     <string name="no_account_configured_yet">Aún no se ha configurado ninguna cuenta</string>
     <string name="no_actions">No hay acciones para este usuario</string>
     <string name="no_browser_available">No hay una aplicación disponible para manejar enlaces</string>
@@ -330,6 +335,7 @@
     <string name="unlock_notes">Desbloquear notas</string>
     <string name="username">Usuario</string>
     <string name="version_restore_failed">No se pudo restaurar la versión</string>
+    <string name="version_restored">Versión restaurada</string>
     <string name="welcome_text">Bienvenido a %1$s</string>
     <string name="whats_your_status">¿Cuál es tu estado?</string>
     <string name="widget_entry_fav_contentDescription">El icono de estrella se utiliza para indicar un elemento como favorito</string>

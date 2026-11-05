@@ -29,13 +29,17 @@
     <string name="action_edit_save">Guardar</string>
     <string name="action_formatting_help">Formato</string>
     <string name="action_search">Buscar</string>
+    <string name="action_see_details">Detalles</string>
     <string name="action_settings">Configuraciones</string>
     <string name="action_trashbin">Notas borradas</string>
     <string name="action_uncategorized">Sin categoría</string>
     <string name="action_undo">Deshacer</string>
     <string name="activities_favorite">Marcar como favorito</string>
+    <string name="activities_no_results">Sin eventos como adiciones, cambios y comparticiones aún.</string>
+    <string name="activities_title">Actividades</string>
     <string name="activity_chooser_send_file_title">Enviar</string>
     <string name="activity_chooser_title">Enviar enlace a…</string>
+    <string name="activity_icon">Actividad</string>
     <string name="activity_select_single_note">Seleccionar nota</string>
     <string name="activity_sharing_title">Compartiendo</string>
     <string name="add_account">Agregar cuenta</string>
@@ -126,6 +130,7 @@
     <string name="menu_preview">Vista previa</string>
     <string name="menu_share">Compartir</string>
     <string name="mute_all_notifications">Silenciar todas las notificaciones</string>
+    <string name="new_version_was_created">Se creó una nueva versión</string>
     <string name="no_actions">No hay acciones para este usuario</string>
     <string name="no_browser_available">No hay una aplicación disponible para manejar enlaces</string>
     <string name="no_email_app_available">No hay ninguna aplicación disponible para manejar direcciones de correo electrónico</string>
@@ -228,6 +233,7 @@
     <string name="today">Hoy</string>
     <string name="username">Usuario</string>
     <string name="version_restore_failed">No se pudo restaurar la versión</string>
+    <string name="version_restored">Versión restaurada</string>
     <string name="welcome_text">Bienvenido a %1$s</string>
     <string name="whats_your_status">¿Cuál es su estado?</string>
     <string name="widget_not_logged_in">Por favor inica sesión en Notes antes de usar este widget</string>

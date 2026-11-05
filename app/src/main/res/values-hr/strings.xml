@@ -35,6 +35,7 @@
     <string name="action_note_deleted">Izbrisano %1$s</string>
     <string name="action_note_restored">Vraćeno %1$s</string>
     <string name="action_search">Traži</string>
+    <string name="action_see_details">Pojedinosti</string>
     <string name="action_send_share">Šalji/dijeli</string>
     <string name="action_settings">Postavke</string>
     <string name="action_sorting_method">Način razvrstavanja</string>
@@ -43,8 +44,10 @@
     <string name="action_undo">Poništi</string>
     <string name="activities_favorite">Favorit</string>
     <string name="activities_no_results">Nema događaja kao što su dodavanja, izmjene i dijeljenja.</string>
+    <string name="activities_title">Aktivnosti</string>
     <string name="activity_chooser_send_file_title">Pošaljite</string>
     <string name="activity_chooser_title">Pošalji poveznicu ...</string>
+    <string name="activity_icon">Aktivnost</string>
     <string name="activity_select_single_note">Odaberi bilješku</string>
     <string name="activity_sharing_details_title">Detalji dijeljenja</string>
     <string name="activity_sharing_title">Dijeljenje</string>

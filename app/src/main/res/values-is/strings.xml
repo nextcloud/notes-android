@@ -35,6 +35,7 @@
     <string name="action_note_deleted">Eyddi %1$s</string>
     <string name="action_note_restored">Endurheimti %1$s</string>
     <string name="action_search">Leita</string>
+    <string name="action_see_details">Nánar</string>
     <string name="action_send_share">Senda/Deila</string>
     <string name="action_settings">Stillingar</string>
     <string name="action_sorting_method">Röðunaraðferð</string>
@@ -43,8 +44,10 @@
     <string name="action_undo">Afturkalla</string>
     <string name="activities_favorite">Eftirlæti</string>
     <string name="activities_no_results">Ennþá engir atburðir á borð við viðbætur, breytingar og deilingar.</string>
+    <string name="activities_title">Athafnir</string>
     <string name="activity_chooser_send_file_title">Senda</string>
     <string name="activity_chooser_title">Senda tengil til…</string>
+    <string name="activity_icon">Athafnir</string>
     <string name="activity_select_single_note">Veldu minnispunkt</string>
     <string name="activity_sharing_details_title">Nánari upplýsingar um deilingu</string>
     <string name="activity_sharing_title">Deiling</string>

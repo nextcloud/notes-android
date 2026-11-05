@@ -35,13 +35,21 @@
     <string name="action_note_deleted">%1$s gelöscht</string>
     <string name="action_note_restored">%1$s wiederhergestellt</string>
     <string name="action_search">Suche</string>
+    <string name="action_see_details">Details</string>
+    <string name="action_send_share">Senden/Teilen</string>
     <string name="action_settings">Einstellungen</string>
     <string name="action_sorting_method">Sortierverfahren</string>
     <string name="action_trashbin">Gelöschte Notizen</string>
     <string name="action_uncategorized">Ohne Kategorie</string>
     <string name="action_undo">Rückgängig</string>
+    <string name="activities_error">Es ist ein Fehler beim Laden der Aktivitäten aufgetreten</string>
+    <string name="activities_favorite">Favorit</string>
+    <string name="activities_fetch_failed">Aktivitäten können nicht abgerufen werden</string>
+    <string name="activities_no_results">Bisher keine Ereignisse wie Hinzugekommenes, Änderungen und Freigaben</string>
+    <string name="activities_title">Aktivitäten</string>
     <string name="activity_chooser_send_file_title">Senden</string>
     <string name="activity_chooser_title">Link senden an…</string>
+    <string name="activity_icon">Aktivität</string>
     <string name="activity_select_single_note">Notiz auswählen</string>
     <string name="activity_sharing_details_title">Freigabedetails</string>
     <string name="activity_sharing_title">Teilen</string>
@@ -228,6 +236,7 @@
     <string name="menu_share">Teilen</string>
     <string name="menu_shared_note">Geteilte Notiz</string>
     <string name="mute_all_notifications">Alle Benachrichtigungen stummschalten</string>
+    <string name="new_version_was_created">Neue Version erstellt</string>
     <string name="no_account_configured_yet">Bislang kein Konto eingerichtet</string>
     <string name="no_actions">Keine Aktionen für diesen Benutzer</string>
     <string name="no_browser_available">Keine App zum Öffnen von Links verfügbar</string>
@@ -282,6 +291,7 @@
     <string name="online">Online</string>
     <string name="online_status">Online-Status</string>
     <string name="pin_to_homescreen">An Startbildschirm anheften</string>
+    <string name="placeholder_filename">Note.md</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_lock">Passwortschutz</string>
     <string name="pref_value_wifi_and_mobile">Über WLAN und mobile Daten synchronisieren</string>
@@ -388,6 +398,8 @@
     <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
     <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
     <string name="version_restore_failed">Version konnte nicht wiederhergestellt werden</string>
+    <string name="version_restore_failed_unsupported">Versionswiederherstellung wird nicht unterstützt: Bitte die Nextcloud Dateien-App aktualisieren</string>
+    <string name="version_restored">Version wiederhergestellt</string>
     <string name="welcome_text">Willkommen bei %1$s</string>
     <string name="whats_your_status">Wie ist Ihr Status?</string>
     <string name="widget_entry_fav_contentDescription">Das Stern-Symbol markiert den Eintrag als Favorit</string>

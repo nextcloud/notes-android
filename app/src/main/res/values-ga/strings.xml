@@ -35,6 +35,8 @@
     <string name="action_note_deleted">Scriosadh %1$s</string>
     <string name="action_note_restored">Aischuireadh %1$s</string>
     <string name="action_search">Cuardach</string>
+    <string name="action_see_details">Sonraí</string>
+    <string name="action_send_share">Seol/roinn</string>
     <string name="action_settings">Socruithe</string>
     <string name="action_sorting_method">Modh sórtála</string>
     <string name="action_trashbin">Nótaí scriosta</string>
@@ -42,8 +44,10 @@
     <string name="action_undo">Cealaigh</string>
     <string name="activities_favorite">is fearr leat</string>
     <string name="activities_no_results">Níl aon imeachtaí cosúil le breisithe, athruithe agus scaireanna fós.</string>
+    <string name="activities_title">Gníomhaíochtaí</string>
     <string name="activity_chooser_send_file_title">Seol</string>
     <string name="activity_chooser_title">Seol nasc chuig…</string>
+    <string name="activity_icon">Gníomhaíocht</string>
     <string name="activity_select_single_note">Roghnaigh nóta</string>
     <string name="activity_sharing_details_title">Sonraí Comhroinnte</string>
     <string name="activity_sharing_title">Roinnt</string>
@@ -230,6 +234,7 @@
     <string name="menu_share">Comhroinn</string>
     <string name="menu_shared_note">Nóta comhroinnte</string>
     <string name="mute_all_notifications">Balbhaigh gach fógra</string>
+    <string name="new_version_was_created">Cruthaíodh leagan nua</string>
     <string name="no_account_configured_yet">Níl aon chuntas cumraithe fós</string>
     <string name="no_actions">Níl aon ghníomh don úsáideoir seo</string>
     <string name="no_browser_available">Níl aip ar fáil chun naisc a láimhseáil</string>

@@ -42,7 +42,9 @@
     <string name="action_trashbin">Zmazané poznámky</string>
     <string name="action_uncategorized">Nezaradené</string>
     <string name="action_undo">Vrátiť</string>
+    <string name="activities_error">Pri načítavaní aktivít sa vyskytla chyba</string>
     <string name="activities_favorite">Obľúbené</string>
+    <string name="activities_fetch_failed">Nepodarilo sa načítať aktivity</string>
     <string name="activities_no_results">Zatiaľ neexistujú žiadne udalosti, ako sú prírastky, zmeny a zdieľania.</string>
     <string name="activities_title">Aktivity</string>
     <string name="activity_chooser_send_file_title">Odoslať</string>
@@ -289,6 +291,7 @@
     <string name="online">Pripojený</string>
     <string name="online_status">Stav prítomnosti</string>
     <string name="pin_to_homescreen">Pripnúť na domovskú obrazovku</string>
+    <string name="placeholder_filename">Poznámka.md</string>
     <string name="pref_value_font_normal">Normálne</string>
     <string name="pref_value_lock">Ochrana heslom</string>
     <string name="pref_value_wifi_and_mobile">Synchronizovať cez Wi-Fi a mobilné dáta</string>
@@ -395,6 +398,7 @@
     <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
     <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
     <string name="version_restore_failed">Nepodarilo sa obnoviť verziu</string>
+    <string name="version_restore_failed_unsupported">Obnovenie verzie nie je podporované: aktualizujte aplikáciu Nextcloud Files</string>
     <string name="version_restored">Verzia bola obnovená</string>
     <string name="welcome_text">Vitajte v %1$s</string>
     <string name="whats_your_status">Aký je váš stav?</string>
