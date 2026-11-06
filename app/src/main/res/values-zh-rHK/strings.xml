@@ -42,7 +42,9 @@
     <string name="action_trashbin">已刪除筆記</string>
     <string name="action_uncategorized">未分類</string>
     <string name="action_undo">上一步</string>
+    <string name="activities_error">載入活動時發生錯誤</string>
     <string name="activities_favorite">我的最愛</string>
+    <string name="activities_fetch_failed">無法擷取活動</string>
     <string name="activities_no_results">尚未有任何新增、更動或分享事件。</string>
     <string name="activities_title">活動</string>
     <string name="activity_chooser_send_file_title">傳送</string>
@@ -289,6 +291,7 @@
     <string name="online">在線</string>
     <string name="online_status">線上狀態</string>
     <string name="pin_to_homescreen">釘選至主畫面</string>
+    <string name="placeholder_filename">Note.md</string>
     <string name="pref_value_font_normal">一般</string>
     <string name="pref_value_lock">密碼保護</string>
     <string name="pref_value_wifi_and_mobile">在使用 Wi-Fi 及流動網路時同步</string>
@@ -395,6 +398,7 @@
     <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
     <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
     <string name="version_restore_failed">無法還原版本</string>
+    <string name="version_restore_failed_unsupported">不支援還原檔案版本：請升級 Nextcloud Files 應用程式。</string>
     <string name="version_restored">版本已還原</string>
     <string name="welcome_text">歡迎來到 %1$s</string>
     <string name="whats_your_status">您目前的狀態是什麼呢？</string>

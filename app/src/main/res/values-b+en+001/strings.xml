@@ -42,7 +42,9 @@
     <string name="action_trashbin">Deleted notes</string>
     <string name="action_uncategorized">Uncategorised</string>
     <string name="action_undo">Undo</string>
+    <string name="activities_error">An error occurred loading activities</string>
     <string name="activities_favorite">Favourite</string>
+    <string name="activities_fetch_failed">Unable to fetch activities</string>
     <string name="activities_no_results">No events like additions, changes and shares yet.</string>
     <string name="activities_title">Activities</string>
     <string name="activity_chooser_send_file_title">Send</string>
@@ -289,6 +291,7 @@
     <string name="online">Online</string>
     <string name="online_status">Online status</string>
     <string name="pin_to_homescreen">Pin to homescreen</string>
+    <string name="placeholder_filename">Note.md</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_lock">Password protection</string>
     <string name="pref_value_wifi_and_mobile">Sync on Wi-Fi and mobile data</string>
@@ -395,6 +398,7 @@
     <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
     <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
     <string name="version_restore_failed">Could not restore version</string>
+    <string name="version_restore_failed_unsupported">Version restore not supported: please upgrade Nextcloud Files app</string>
     <string name="version_restored">Version restored</string>
     <string name="welcome_text">Welcome to %1$s</string>
     <string name="whats_your_status">What is your status?</string>
