@@ -511,10 +511,9 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public LiveData<Note> moveNoteToAnotherAccount(Account account, long noteId) {
-        return switchMap(repo.getNoteById$(noteId), (note) -> {
-            Log.v(TAG, "[moveNoteToAnotherAccount] - note: " + (BuildConfig.DEBUG ? note : note.getTitle()));
-            return repo.moveNoteToAnotherAccount(account, note);
-        });
+        final var note = repo.getNoteById(noteId);
+        Log.v(TAG, "[moveNoteToAnotherAccount] - note: " + (note == null ? null : note.getTitle()));
+        return note == null ? new MutableLiveData<>() : repo.moveNoteToAnotherAccount(account, note);
     }
 
     public LiveData<Void> toggleFavoriteAndSync(Note note) {
