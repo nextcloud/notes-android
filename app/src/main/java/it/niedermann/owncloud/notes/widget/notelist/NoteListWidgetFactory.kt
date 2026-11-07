@@ -7,6 +7,7 @@
 package it.niedermann.owncloud.notes.widget.notelist
 
 import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -19,12 +20,14 @@ import androidx.core.net.toUri
 import com.nextcloud.android.common.ui.util.PlatformThemeUtil
 import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.edit.EditNoteActivity
+import it.niedermann.owncloud.notes.main.MainActivity
 import it.niedermann.owncloud.notes.persistence.NotesRepository
 import it.niedermann.owncloud.notes.persistence.entity.Account
 import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData
 import it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory
+import it.niedermann.owncloud.notes.shared.util.NotesColorUtil
 
 class NoteListWidgetFactory internal constructor(private val context: Context, intent: Intent) :
     RemoteViewsFactory {
@@ -90,7 +93,7 @@ class NoteListWidgetFactory internal constructor(private val context: Context, i
     override fun onDestroy() = Unit
 
     override fun getCount(): Int {
-        return dbNotes.size
+        return dbNotes.size + 1
     }
 
     private fun getEditNoteIntent(bundle: Bundle): Intent {
@@ -125,23 +128,49 @@ class NoteListWidgetFactory internal constructor(private val context: Context, i
         return getEditNoteIntent(bundle)
     }
 
+    private fun getOpenAppIntent(): Intent {
+        return Intent(Intent.ACTION_MAIN).setComponent(
+            ComponentName(context.packageName, MainActivity::class.java.name)
+        )
+    }
+
+    private fun getHeaderRemoteView(widgetData: NotesListWidgetData): RemoteViews {
+        val localAccount = repo.getAccountById(widgetData.accountId)
+        val createNoteIntent = getCreateNoteIntent(localAccount)
+
+        return RemoteViews(context.packageName, R.layout.widget_entry_add).apply {
+            setOnClickFillInIntent(R.id.widget_entry_content_tv, getOpenAppIntent())
+            setOnClickFillInIntent(R.id.widget_entry_fav_icon, createNoteIntent)
+            setTextViewText(
+                R.id.widget_entry_content_tv,
+                getCategoryTitle(context, widgetData.mode, widgetData.category)
+            )
+            setImageViewResource(R.id.widget_entry_fav_icon, R.drawable.ic_add_blue_24dp)
+            setInt(
+                R.id.widget_entry_fav_icon,
+                "setColorFilter",
+                if (NotesColorUtil.contrastRatioIsSufficient(
+                        ContextCompat.getColor(context, R.color.widget_background),
+                        localAccount.color
+                    )
+                ) localAccount.color
+                else ContextCompat.getColor(context, R.color.widget_foreground)
+            )
+        }
+    }
+
     override fun getViewAt(position: Int): RemoteViews? {
-        val note = dbNotes.getOrNull(position) ?: return null
+        if (position == 0) {
+            val widgetData = data ?: return null
+            return getHeaderRemoteView(widgetData)
+        }
+
+        val note = dbNotes.getOrNull(position - 1) ?: return null
 
         val openNoteIntent = getOpenNoteIntent(note)
 
-        var createNoteIntent: Intent? = null
-        data?.let {
-            val localAccount =  repo.getAccountById(it.accountId)
-            createNoteIntent = getCreateNoteIntent(localAccount)
-        }
-
         return RemoteViews(context.packageName, R.layout.widget_entry).apply {
             setOnClickFillInIntent(R.id.widget_note_list_entry, openNoteIntent)
-
-            createNoteIntent?.let {
-                setOnClickFillInIntent(R.id.widget_entry_fav_icon, createNoteIntent)
-            }
 
             setTextViewText(R.id.widget_entry_title, note.title)
 
@@ -178,7 +207,11 @@ class NoteListWidgetFactory internal constructor(private val context: Context, i
     }
 
     override fun getItemId(position: Int): Long {
-        return dbNotes[position].id
+        if (position == 0) {
+            return -1
+        }
+        val note = dbNotes.getOrNull(position - 1) ?: return -2
+        return note.id
     }
 
     override fun hasStableIds(): Boolean {
@@ -187,5 +220,17 @@ class NoteListWidgetFactory internal constructor(private val context: Context, i
 
     companion object {
         private val TAG: String = NoteListWidgetFactory::class.java.getSimpleName()
+
+        private fun getCategoryTitle(context: Context, displayMode: Int, category: String?): String {
+            return when (displayMode) {
+                NotesListWidgetData.MODE_DISPLAY_STARRED -> context.getString(R.string.label_favorites)
+                NotesListWidgetData.MODE_DISPLAY_CATEGORY -> if ("" == category)
+                    context.getString(R.string.action_uncategorized)
+                else
+                    category
+
+                else -> context.getString(R.string.app_name)
+            } ?: context.getString(R.string.app_name)
+        }
     }
 }
