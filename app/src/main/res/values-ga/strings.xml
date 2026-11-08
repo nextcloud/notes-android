@@ -42,7 +42,9 @@
     <string name="action_trashbin">Nótaí scriosta</string>
     <string name="action_uncategorized">Gan catagóir</string>
     <string name="action_undo">Cealaigh</string>
+    <string name="activities_error">Tharla earráid agus gníomhaíochtaí á luchtú</string>
     <string name="activities_favorite">is fearr leat</string>
+    <string name="activities_fetch_failed">Ní féidir gníomhaíochtaí a fháil</string>
     <string name="activities_no_results">Níl aon imeachtaí cosúil le breisithe, athruithe agus scaireanna fós.</string>
     <string name="activities_title">Gníomhaíochtaí</string>
     <string name="activity_chooser_send_file_title">Seol</string>
@@ -289,6 +291,7 @@
     <string name="online">Ar líne</string>
     <string name="online_status">Stádas ar líne</string>
     <string name="pin_to_homescreen">Pinn chuig an scáileán baile</string>
+    <string name="placeholder_filename">Note.md</string>
     <string name="pref_value_font_normal">Gnáth</string>
     <string name="pref_value_lock">Cosaint pasfhocal</string>
     <string name="pref_value_wifi_and_mobile">Sioncronaigh ar Wi-Fi agus sonraí soghluaiste</string>
@@ -395,6 +398,7 @@
     <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.ÚsáideoiríAgusGrúpaíSoláthraíCuardaigh</string>
     <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.ÚsáideoiríAgusGrúpaíSoláthraíCuardaigh.gníomh.SHARE_WITH</string>
     <string name="version_restore_failed">Níorbh fhéidir an leagan a chur ar ais</string>
+    <string name="version_restore_failed_unsupported">Ní thacaítear le hathchóiriú leaganacha: uasghrádaigh an aip Nextcloud Files, le do thoil.</string>
     <string name="version_restored">Leagan athchóirithe</string>
     <string name="welcome_text">Fáilte go %1$s</string>
     <string name="whats_your_status">Cad é do stádas?</string>
