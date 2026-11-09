@@ -398,6 +398,7 @@
     <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
     <string name="users_and_groups_search_provider_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
     <string name="version_restore_failed">Impossible de restaurer la version</string>
+    <string name="version_restore_failed_unsupported">Restauration de version non prise en charge : veuillez mettre à niveau votre application Nextcloud Fichiers</string>
     <string name="version_restored">Version restaurée</string>
     <string name="welcome_text">Bienvenue sur %1$s</string>
     <string name="whats_your_status">Quel est votre statut ?</string>
