@@ -550,6 +550,10 @@ public class NotesRepository {
                 .collect(toMap(Note::getRemoteId, Note::getId));
     }
 
+    /**
+     * @deprecated Use {@link #toggleFavorite(Account, long)} instead
+     */
+    @Deprecated
     @AnyThread
     public void toggleFavoriteAndSync(Account account, Note note) {
         executor.submit(() -> {
