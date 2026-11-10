@@ -577,6 +577,21 @@ public class NotesRepository {
     }
 
     /**
+     * Toggles the favorite for a given note.
+     *
+     * @param account  The single sign on account
+     * @param noteId   The note which will be updated
+     */
+    @AnyThread
+    public void toggleFavorite(@NonNull Account account, long noteId) {
+        executor.submit(() -> {
+            db.getNoteDao().updateStatus(noteId, DBStatus.LOCAL_EDITED);
+            db.getNoteDao().toggleFavorite(noteId);
+            scheduleSync(account, true);
+        });
+    }
+
+    /**
      * Set the category for a given note.
      * This method will search in the database to find out the category id in the db.
      * If there is no such category existing, this method will create it and search again.
