@@ -20,6 +20,7 @@ import it.niedermann.owncloud.notes.branding.BrandedActivity
 import it.niedermann.owncloud.notes.branding.BrandedFragment
 import it.niedermann.owncloud.notes.branding.BrandingUtil
 import it.niedermann.owncloud.notes.databinding.ActivityItemDetailsBinding
+import it.niedermann.owncloud.notes.persistence.NotesRepository
 import it.niedermann.owncloud.notes.persistence.entity.Account
 import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.share.NoteShareFragment
@@ -31,11 +32,14 @@ class ItemDetailsActivity : BrandedActivity() {
     lateinit var note: Note
     lateinit var account: Account
     lateinit var page: PAGE
+    lateinit var repo: NotesRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         parseArguments()
+
+        repo = NotesRepository.getInstance(this)
 
         binding = ActivityItemDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -44,6 +48,7 @@ class ItemDetailsActivity : BrandedActivity() {
 
         loadHeaderData()
         loadFragments()
+        setHeaderListeners()
     }
 
     @Suppress("ThrowsCount")
@@ -57,11 +62,8 @@ class ItemDetailsActivity : BrandedActivity() {
     }
 
     private fun loadHeaderData() {
+        updateFavoriteIcon()
         binding.filename.text = note.title
-        binding.favorite.setImageResource(
-            if (note.favorite) R.drawable.ic_star_yellow_24dp
-            else R.drawable.ic_star_border_grey_ccc_24dp
-        )
         binding.lastModificationTimestamp.text = note.modified?.let {
             DateUtils.formatDateTime(
                 this,
@@ -69,6 +71,21 @@ class ItemDetailsActivity : BrandedActivity() {
                 DateUtils.FORMAT_SHOW_DATE or DateUtils.FORMAT_SHOW_TIME
             )
         }
+    }
+
+    private fun setHeaderListeners() {
+        binding.favorite.setOnClickListener {
+            repo.toggleFavorite(account, note.id)
+            note.favorite = !note.favorite
+            updateFavoriteIcon()
+        }
+    }
+
+    private fun updateFavoriteIcon() {
+        binding.favorite.setImageResource(
+            if (note.favorite) R.drawable.ic_star_yellow_24dp
+            else R.drawable.ic_star_border_grey_ccc_24dp
+        )
     }
 
     private fun loadFragments() {

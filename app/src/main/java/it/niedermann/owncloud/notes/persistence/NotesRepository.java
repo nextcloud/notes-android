@@ -550,6 +550,10 @@ public class NotesRepository {
                 .collect(toMap(Note::getRemoteId, Note::getId));
     }
 
+    /**
+     * @deprecated Use {@link #toggleFavorite(Account, long)} instead
+     */
+    @Deprecated
     @AnyThread
     public void toggleFavoriteAndSync(Account account, Note note) {
         executor.submit(() -> {
@@ -573,6 +577,21 @@ public class NotesRepository {
             } catch (Exception e) {
                 Log_OC.e(TAG, "toggleFavoriteAndSync: " + e);
             }
+        });
+    }
+
+    /**
+     * Toggles the favorite for a given note.
+     *
+     * @param account  The single sign on account
+     * @param noteId   The note which will be updated
+     */
+    @AnyThread
+    public void toggleFavorite(@NonNull Account account, long noteId) {
+        executor.submit(() -> {
+            db.getNoteDao().updateStatus(noteId, DBStatus.LOCAL_EDITED);
+            db.getNoteDao().toggleFavorite(noteId);
+            scheduleSync(account, true);
         });
     }
 
