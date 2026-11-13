@@ -126,8 +126,8 @@ public class MainViewModel extends AndroidViewModel {
         return distinctUntilChanged(currentAccount);
     }
 
-    public Account getAccountByName(String accountName) {
-        return repo.getAccountByName(accountName);
+    public Account findEcosystemAccount(String accountName) {
+        return EcosystemAccountMatcher.find(repo.getAccounts(), accountName);
     }
 
     public void postCurrentAccount(@NonNull Account account) {
