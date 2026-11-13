@@ -36,6 +36,8 @@ import java.util.List;
 
 import it.niedermann.owncloud.notes.BuildConfig;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.persistence.NoteSyncException;
+import it.niedermann.owncloud.notes.persistence.SyncFailureReason;
 
 public class TipsAdapter extends RecyclerView.Adapter<TipsViewHolder> {
 
@@ -89,6 +91,9 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsViewHolder> {
                 add(R.string.error_dialog_timeout_toggle, new Intent(Settings.ACTION_WIFI_SETTINGS).putExtra(INTENT_EXTRA_BUTTON_TEXT, R.string.error_action_open_network));
             } else if (throwable instanceof JSONException || throwable instanceof NullPointerException) {
                 add(R.string.error_dialog_check_server);
+            } else if (throwable instanceof NoteSyncException syncException && syncException.getReason() == SyncFailureReason.LOCKED) {
+                add(R.string.error_dialog_tip_note_locked_close);
+                add(R.string.error_dialog_tip_note_locked_unlock);
             } else if (throwable instanceof NextcloudHttpRequestFailedException) {
                 final int statusCode = ((NextcloudHttpRequestFailedException) throwable).getStatusCode();
                 switch (statusCode) {

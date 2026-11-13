@@ -8,7 +8,7 @@ package it.niedermann.owncloud.notes.persistence
 
 import retrofit2.Response
 
-class NoteSyncException(noteTitle: String, response: Response<*>) :
+class NoteSyncException(val noteTitle: String, response: Response<*>) :
     Exception("Could not sync \"$noteTitle\" (HTTP ${response.code()}): ${response.message()}") {
     val reason = SyncFailureReason.fromStatusCode(response.code())
 }
