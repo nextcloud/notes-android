@@ -126,6 +126,10 @@ public class MainViewModel extends AndroidViewModel {
         return distinctUntilChanged(currentAccount);
     }
 
+    public Account findEcosystemAccount(String accountName) {
+        return EcosystemAccountMatcher.find(repo.getAccounts(), accountName);
+    }
+
     public void postCurrentAccount(@NonNull Account account) {
         state.set(KEY_CURRENT_ACCOUNT, account);
         BrandingUtil.saveBrandColor(getApplication(), account.getColor());
