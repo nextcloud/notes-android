@@ -47,7 +47,4 @@ public interface NotesAPI_0_2 {
 
     @DELETE("notes/{remoteId}")
     Call<EmptyResponse> deleteNote(@Path("remoteId") long noteId);
-
-    @PUT("notes/{id}")
-    Call<Note> updateNote(@Path("id") long id, @Body NotesAPI.Note_0_2 note);
 }

@@ -39,6 +39,9 @@
     <string name="action_trashbin">Deleted notes</string>
     <string name="action_uncategorized">Uncategorized</string>
     <string name="action_undo">Undo</string>
+    <string name="activities_favorite">Favorite</string>
+    <string name="activities_no_results">No events like additions, changes and shares yet.</string>
+    <string name="activities_title">აქტივობები</string>
     <string name="activity_chooser_send_file_title">Send</string>
     <string name="activity_chooser_title">Send link to…</string>
     <string name="activity_select_single_note">Select note</string>
@@ -205,11 +208,13 @@
     <string name="manage_accounts">Manage accounts</string>
     <string name="menu_change_category">Category</string>
     <string name="menu_delete">Delete</string>
+    <string name="menu_details">Details</string>
     <string name="menu_edit_title">Edit title</string>
     <string name="menu_favorite">Favorite</string>
     <string name="menu_preview">Preview</string>
     <string name="menu_share">Share</string>
     <string name="mute_all_notifications">ყველა გაფრთხილების დადუმება</string>
+    <string name="new_version_was_created">New version was created</string>
     <string name="no_account_configured_yet">No account configured yet</string>
     <string name="no_actions">No actions for this user</string>
     <string name="no_browser_available">No app available to handle links</string>
@@ -340,6 +345,8 @@
     <string name="today">დღეს</string>
     <string name="unlock_notes">Unlock notes</string>
     <string name="username">Username</string>
+    <string name="version_restore_failed">Could not restore version</string>
+    <string name="version_restored">Version restored</string>
     <string name="welcome_text">Welcome to %1$s</string>
     <string name="whats_your_status">What is your status?</string>
     <string name="widget_entry_fav_contentDescription">Star icon is used to denote an item as a favorite</string>

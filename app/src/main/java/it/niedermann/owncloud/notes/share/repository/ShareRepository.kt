@@ -68,6 +68,7 @@ class ShareRepository(private val applicationContext: Context, private val accou
     fun getCapabilities(): Capabilities = notesRepository.capabilities
 
     // region API calls
+    @Suppress("NestedBlockDepth")
     fun fetchSharesForNotesAndSaveShareEntities() {
         val notesPathResponseResult = getNotesPathResponseResult() ?: return
         val notesPath = notesPathResponseResult.notesPath
@@ -135,7 +136,8 @@ class ShareRepository(private val applicationContext: Context, private val accou
         val entity = getShareByPathAndDisplayName(share)
         val attributes = entity?.attributes ?: return false
         val capabilities = notesRepository.capabilities
-        val shouldUseShareAttributesV2 = (capabilities.nextcloudMajorVersion?.toInt() ?: 0) >= 30
+        val shouldUseShareAttributesV2 =
+            (capabilities.nextcloudMajorVersion?.toInt() ?: 0) >= UpdateShareRequest.SHARE_ATTRIBUTES_V2_MIN_VERSION
         return if (shouldUseShareAttributesV2) {
             ShareAttributesV2.getAttributes(attributes).first().value
         } else {

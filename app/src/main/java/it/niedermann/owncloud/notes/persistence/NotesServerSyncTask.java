@@ -125,7 +125,7 @@ abstract class NotesServerSyncTask extends Thread {
         Log.d(TAG, step + ": " + note.getStatus());
         try {
             switch (note.getStatus()) {
-                case LOCAL_EDITED -> pushEditedNote(note);
+                case LOCAL_EDITED, LOCAL_FAVORITED -> pushEditedNote(note);
                 case LOCAL_DELETED -> pushDeletedNote(note);
                 default ->
                         throw new IllegalStateException("Unknown State of Note " + note + ": " + note.getStatus());

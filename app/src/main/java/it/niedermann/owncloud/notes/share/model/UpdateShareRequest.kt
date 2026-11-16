@@ -43,12 +43,15 @@ data class UpdateShareRequest(
     val attributes: String? = null
 ) {
     companion object {
+        const val SHARE_ATTRIBUTES_V2_MIN_VERSION = 30
+
         fun createAttributes(capabilities: Capabilities, allowDownloadAndSync: Boolean, type: ShareType?): String {
             if (type == null || (type != ShareType.INTERNAL && type != ShareType.USER)) {
                 return "[]"
             }
 
-            val shouldUseShareAttributesV2 = (capabilities.nextcloudMajorVersion?.toInt() ?: 0) >= 30
+            val shouldUseShareAttributesV2 =
+                (capabilities.nextcloudMajorVersion?.toInt() ?: 0) >= SHARE_ATTRIBUTES_V2_MIN_VERSION
 
             val shareAttributes = arrayOf(
                 if (shouldUseShareAttributesV2) {

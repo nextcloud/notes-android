@@ -28,6 +28,7 @@ import it.niedermann.owncloud.notes.shared.util.DisplayUtils
 /**
  * Show actions of an user
  */
+@Suppress("ForbiddenComment")
 class ProfileBottomSheetDialog(
     private val fileActivity: FragmentActivity,
     private val account: Account,

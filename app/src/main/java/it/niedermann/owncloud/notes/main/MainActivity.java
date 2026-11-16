@@ -54,6 +54,7 @@ import androidx.preference.PreferenceManager;
 import androidx.recyclerview.selection.SelectionTracker;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SimpleItemAnimator;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -81,6 +82,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.net.HttpURLConnection;
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
@@ -101,6 +103,7 @@ import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
 import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.exception.IntendedOfflineException;
 import it.niedermann.owncloud.notes.importaccount.ImportAccountActivity;
+import it.niedermann.owncloud.notes.itemactions.ItemActionBottomSheet;
 import it.niedermann.owncloud.notes.main.items.ItemAdapter;
 import it.niedermann.owncloud.notes.main.items.grid.GridItemDecoration;
 import it.niedermann.owncloud.notes.main.items.list.NotesListViewItemTouchHelper;
@@ -115,7 +118,6 @@ import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesWorker;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
-import it.niedermann.owncloud.notes.share.NoteShareActivity;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
@@ -550,7 +552,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     private void setupNotesList() {
         adapter = new ItemAdapter(this, gridView);
         listView.setAdapter(adapter);
-        listView.setItemAnimator(null);
+        ((SimpleItemAnimator) Objects.requireNonNull(listView.getItemAnimator())).setSupportsChangeAnimations(false);
         if (gridView) {
             final int spanCount = getResources().getInteger(R.integer.grid_view_span_count);
             final var gridLayoutManager = new StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL);
@@ -636,6 +638,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                         if (tracker.hasSelection()) {
                                             int selected = tracker.getSelection().size();
                                             mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, selected, selected));
+                                            mActionMode.invalidate();
                                         } else {
                                             mActionMode.finish();
                                             mActionMode = null;
@@ -717,7 +720,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         util.platform.colorNavigationView(binding.navigationView);
         util.material.themeFAB(activityBinding.fabCreate);
         util.notes.themeSearchCardView(binding.activityNotesListView.searchBar.searchBarCardWrapper);
-        util.platform.colorViewBackground(getWindow().getDecorView(), ColorRole.SURFACE_CONTAINER);
+        if (mActionMode == null) util.platform.colorViewBackground(getWindow().getDecorView(), ColorRole.SURFACE_CONTAINER);
         util.platform.colorViewBackground(binding.getRoot(), ColorRole.SURFACE_CONTAINER);
         util.platform.colorViewBackground(binding.activityNotesListView.activityNotesListView, ColorRole.SURFACE_CONTAINER);
         util.platform.colorTextView(binding.activityNotesListView.searchBar.searchText, ColorRole.ON_SURFACE_VARIANT);
@@ -908,20 +911,18 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             return;
         }
 
-        final var toggleLiveData = mainViewModel.toggleFavoriteAndSync(note);
-        toggleLiveData.observe(this, (next) -> {{
-            toggleLiveData.removeObservers(this);
-            adapter.notifyItemChanged(position);
-        }});
+        mainViewModel.toggleFavoriteAndSync(note);
     }
 
     @Override
-    public void openShare(int position) {
+    public void openInfoBottomSheet(int position) {
         if (adapter.getItem(position) instanceof Note note) {
-            mainViewModel.getCurrentAccount().observe(this, (account) -> {
-                final Intent intent = NoteShareActivity.getActivityStartIntent(note, account, this);
-                startActivity(intent);
-            });
+            Account account = mainViewModel.getCurrentAccount().getValue();
+            if (account == null) return;
+
+            final var fragment = new ItemActionBottomSheet(note, account);
+            fragment.show(getSupportFragmentManager(), ItemActionBottomSheet.TAG);
+
         }
     }
 

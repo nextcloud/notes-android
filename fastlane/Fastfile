@@ -27,44 +27,10 @@ GRADLE_SIGNING_PROPERTIES = {
 
 import("./common.Fastfile")
 
-platform :android do
-    desc "Release previously built app to Google Play and create tag"
-    lane :releasePhase2 do
-        versionInfo = getVersionInfo()
-        versionComponents = parseVersionCode(versionInfo)
-        checkReleasable(versionComponents)
-        storeTrack = getPlayStoreTrack(versionComponents)
-        tagName = getTagName(versionComponents)
-        preReleaseChecks(versionInfo: versionInfo, tagName: tagName, type: versionComponents["type"], track: storeTrack)
-        checkArtifactsExist()
-        tag(name: tagName)
-        createGithubRelease(name: versionInfo["versionName"], tag: tagName, versionCode: versionInfo["versionCode"])
-        uploadToPlayStore(track: storeTrack)
-    end
+desc "Run tests"
+private_lane :test do
+     gradle(task: "clean testGplayDebugUnitTest testGenericDebugUnitTest testDevDebugUnitTest testQaDebugUnitTest")
+end
 
-    desc "Show versions and prompt for confirmation"
-    private_lane :preReleaseChecks do |options|
-        versionInfo = options[:versionInfo]
-        tagName = options[:tagName]
-        currentBranch = git_branch()
-        text = "Version code: #{versionInfo["versionCode"]}\n" +
-                "Version name: #{versionInfo["versionName"]}\n" +
-                "Current branch: #{currentBranch}\n" +
-                "Version type: #{options[:type]}\n" +
-                "Tag: #{tagName}\n" +
-                "Track: #{options[:track]}"
-        promptYesNo(text: text)
-    end
-
-	private_lane :createGithubRelease do |options|
-		set_github_release(
-			repository_name: REPO,
-			api_token: ENV["FASTLANE_NEXTCLOUD_GITHUB_API_TOKEN"],
-			name: options[:name],
-			tag_name: options[:tag],
-			description: (File.read("metadata/android/en-US/changelogs/" + options[:versionCode] + ".txt") rescue "No changelog provided"),
-			upload_assets: Dir.glob("release/*.apk")
-		)
-	end
-
+private_lane :repoSpecificChecks do |options|
 end

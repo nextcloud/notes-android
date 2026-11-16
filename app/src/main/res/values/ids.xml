@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Nextcloud Notes - Android Client
+  ~
+  ~ SPDX-FileCopyrightText: 2026 Daniele Verducci <daniele.verducci@nextcloud.com>
+  ~ SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
+<resources>
+    <item name="action_see_details" type="id"/>
+    <item name="action_send_share" type="id"/>
+</resources>

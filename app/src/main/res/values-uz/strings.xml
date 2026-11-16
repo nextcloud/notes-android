@@ -34,13 +34,18 @@
     <string name="action_note_deleted"> %1$sni o\'chirish</string>
     <string name="action_note_restored"> %1$sqayta tiklandi</string>
     <string name="action_search">Qidirish</string>
+    <string name="action_see_details">Tafsilotlar</string>
     <string name="action_settings">Sozlamalar</string>
     <string name="action_sorting_method">Saralash usuli</string>
     <string name="action_trashbin">O\'chirilgan qaydlar</string>
     <string name="action_uncategorized">Kategoriyasiz</string>
     <string name="action_undo">Bekor qilish</string>
+    <string name="activities_favorite">Sevimli</string>
+    <string name="activities_no_results">Hozircha qoʻshimchalar, oʻzgartirishlar va baham koʻrish kabi tadbirlar yoʻq.</string>
+    <string name="activities_title">Faollik</string>
     <string name="activity_chooser_send_file_title">Yuborish</string>
     <string name="activity_chooser_title">Havolani yuborish…</string>
+    <string name="activity_icon">Faollik</string>
     <string name="activity_select_single_note">Eslatmani tanlang</string>
     <string name="activity_sharing_details_title">Tafsilotlarni ulashish</string>
     <string name="activity_sharing_title">Ulashish</string>
@@ -205,6 +210,7 @@
     <string name="manage_accounts">Hisoblarni boshqarish</string>
     <string name="menu_change_category">Kategoriya</string>
     <string name="menu_delete">O\'chirish</string>
+    <string name="menu_details">Tafsilotlar</string>
     <string name="menu_edit_title">Sarlavhani tahrirlash</string>
     <string name="menu_favorite">Sevimli</string>
     <string name="menu_preview">Ko‘rib chiqish</string>

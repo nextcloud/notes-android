@@ -6,9 +6,11 @@
  * SPDX-FileCopyrightText: 2020 Hui-Ouyang16 <11710106@mail.sustech.edu.cn>
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
+@file:Suppress("MagicNumber")
 
 plugins {
     id("com.android.application")
+    id("com.google.devtools.ksp")
 }
 
 val kotlinVersion = rootProject.extra["kotlinVersion"] as String
@@ -25,8 +27,8 @@ android {
         minSdk = 28
         compileSdk = 37
         targetSdk = 36
-        versionCode = 350100050
-        versionName = "35.1.0 Alpha 1"
+        versionCode = 350200004
+        versionName = "35.20.0 Alpha 04"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
@@ -130,8 +132,9 @@ dependencies {
     implementation("commons-httpclient:commons-httpclient:3.1") {
         exclude(group = "commons-logging", module = "commons-logging")
     }
+    implementation("org.apache.jackrabbit:jackrabbit-webdav:2.13.5")
 
-    implementation("com.github.nextcloud:android-library:2.26.0") {
+    implementation("com.github.nextcloud:android-library:2.26.1") {
         exclude(group = "org.ogce", module = "xpp3")
     }
 
@@ -156,7 +159,8 @@ dependencies {
     // Glide
     val glideVersion = "5.0.9"
     implementation("com.github.bumptech.glide:glide:$glideVersion")
-    annotationProcessor("com.github.bumptech.glide:compiler:$glideVersion")
+    ksp("com.github.bumptech.glide:ksp:$glideVersion")
+    implementation("com.caverock:androidsvg-aar:1.4")
 
     // Android X
     implementation("androidx.appcompat:appcompat:1.8.0")
@@ -195,7 +199,7 @@ dependencies {
     testImplementation("androidx.arch.core:core-testing:2.2.0")
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.mockito:mockito-core:5.24.0")
-    testImplementation("org.robolectric:robolectric:4.17")
+    testImplementation("org.robolectric:robolectric:4.18")
 }
 
 configurations.configureEach {

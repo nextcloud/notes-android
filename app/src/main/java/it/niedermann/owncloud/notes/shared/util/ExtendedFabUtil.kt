@@ -32,13 +32,13 @@ object ExtendedFabUtil {
                         )
                     animation.setAnimationListener(
                         object : Animation.AnimationListener {
-                            override fun onAnimationStart(animation: Animation) {}
+                            override fun onAnimationStart(animation: Animation) = Unit
 
                             override fun onAnimationEnd(animation: Animation) {
                                 extendedFab.visibility = View.GONE
                             }
 
-                            override fun onAnimationRepeat(animation: Animation) {}
+                            override fun onAnimationRepeat(animation: Animation) = Unit
                         },
                     )
                     extendedFab.startAnimation(animation)

@@ -28,7 +28,7 @@ public class NoteReadonlyFragment extends NotePreviewFragment {
         menu.findItem(R.id.menu_preview).setVisible(false);
         menu.findItem(R.id.menu_cancel).setVisible(false);
         menu.findItem(R.id.menu_delete).setVisible(false);
-        menu.findItem(R.id.menu_share).setVisible(false);
+        menu.findItem(R.id.menu_details).setVisible(false);
         menu.findItem(R.id.menu_move).setVisible(false);
         menu.findItem(R.id.menu_category).setVisible(false);
         menu.findItem(R.id.menu_title).setVisible(false);
