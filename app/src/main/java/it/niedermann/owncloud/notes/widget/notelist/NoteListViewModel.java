@@ -18,7 +18,6 @@ import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.main.MainActivity;
-import it.niedermann.owncloud.notes.main.navigation.NavigationAdapter;
 import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
 import it.niedermann.owncloud.notes.persistence.NotesRepository;
 
@@ -53,10 +52,6 @@ public class NoteListViewModel extends AndroidViewModel {
                             final var items = new ArrayList<NavigationItem>(fromDatabase.size() + 3);
                             items.add(new NavigationItem(MainActivity.ADAPTER_KEY_RECENT, getApplication().getString(R.string.label_all_notes), count, R.drawable.selector_all_notes, RECENT));
                             items.add(new NavigationItem(MainActivity.ADAPTER_KEY_STARRED, getApplication().getString(R.string.label_favorites), favoritesCount, R.drawable.selector_favorites, FAVORITES));
-
-                            if (categories.size() > 2 && categories.get(2).label.isEmpty()) {
-                                items.add(new NavigationItem(MainActivity.ADAPTER_KEY_UNCATEGORIZED, "", null, NavigationAdapter.ICON_NOFOLDER));
-                            }
 
                             for (final var item : categories) {
                                 final int slashIndex = item.label.indexOf('/');
