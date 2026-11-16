@@ -10,10 +10,16 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
+import androidx.lifecycle.MutableLiveData;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.nextcloud.android.sso.exceptions.UnknownErrorException;
@@ -31,7 +37,10 @@ import java.util.Collections;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
+import it.niedermann.owncloud.notes.persistence.NotesRepository;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType;
 
 @RunWith(RobolectricTestRunner.class)
@@ -161,6 +170,27 @@ public class MainViewModelTest {
         assertTrue(vm.containsNonInfrastructureRelatedItems(List.of(new Exception("Software caused connection abort"), new RuntimeException("Foo", new UnknownErrorException("Software caused connection abort")))));
 
         assertTrue(vm.containsNonInfrastructureRelatedItems(List.of(new RuntimeException("Foo", new Exception("Software caused connection abort")))));
+    }
+
+    @Test
+    public void addNoteAndSync_adds_note_only_once() throws NoSuchFieldException, IllegalAccessException {
+        final var vm = new MainViewModel(ApplicationProvider.getApplicationContext(), null);
+        final var repo = mock(NotesRepository.class);
+        final var repoField = MainViewModel.class.getDeclaredField("repo");
+        repoField.setAccessible(true);
+        repoField.set(vm, repo);
+        final var currentAccountField = MainViewModel.class.getDeclaredField("currentAccount");
+        currentAccountField.setAccessible(true);
+        final var account = new Account();
+        //noinspection unchecked
+        ((MutableLiveData<Account>) currentAccountField.get(vm)).setValue(account);
+        final var note = new Note();
+        when(repo.addNoteAndSync(any(), any())).thenReturn(new MutableLiveData<>(note));
+
+        vm.addNoteAndSync(note).observeForever(next -> {
+        });
+
+        verify(repo, times(1)).addNoteAndSync(account, note);
     }
 
     private static List<CategoryWithNotesCount> getSaneCategoriesWithNotesCount() {
