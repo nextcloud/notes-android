@@ -23,6 +23,7 @@ import android.database.MatrixCursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
+import com.nextcloud.android.common.core.utils.AccountNameUtils;
 import com.owncloud.android.lib.resources.shares.GetShareesRemoteOperation;
 import com.owncloud.android.lib.resources.shares.ShareType;
 import com.owncloud.android.lib.resources.users.Status;
@@ -151,10 +152,9 @@ public class UsersAndGroupsSearchProvider {
                                 displayName = name;
                                 subline = context.getString(R.string.remote);
                             } else {
-                                String[] uriSplitted = shareWith.split("@");
                                 displayName = name;
                                 subline = context.getString(R.string.share_known_remote_on_clarification,
-                                        uriSplitted[uriSplitted.length - 1]);
+                                        AccountNameUtils.getServerPart(shareWith));
                             }
                         }
                         break;

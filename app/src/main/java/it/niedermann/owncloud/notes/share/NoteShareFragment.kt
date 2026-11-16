@@ -320,13 +320,8 @@ class NoteShareFragment : BrandedFragment(), ShareeListAdapterListener, NoteShar
             return true
         }
 
-        val share = shares[0]
-        val ownerDisplayName = share.ownerDisplayName
-        return TextUtils.isEmpty(ownerDisplayName) || account!!.accountName
-            .split("@".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0].equals(
-            ownerDisplayName,
-            ignoreCase = true
-        )
+        val ownerId = shares[0].userId
+        return ownerId.isNullOrEmpty() || ownerId.equals(account!!.userName, ignoreCase = true)
     }
 
     private fun setShareWithYou() {

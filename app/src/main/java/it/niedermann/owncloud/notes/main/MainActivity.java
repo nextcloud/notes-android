@@ -498,7 +498,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         ecosystemManager.receiveAccount(intent, new AccountReceiverCallback() {
             @Override
             public void onAccountReceived(@NotNull String accountName) {
-                final var account = mainViewModel.getAccountByName(accountName);
+                final var account = mainViewModel.findEcosystemAccount(accountName);
                 if (account != null) {
                     onAccountChosen(account);
                 } else {
