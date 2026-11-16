@@ -54,6 +54,7 @@ import androidx.preference.PreferenceManager;
 import androidx.recyclerview.selection.SelectionTracker;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SimpleItemAnimator;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -81,6 +82,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.net.HttpURLConnection;
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
@@ -550,7 +552,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     private void setupNotesList() {
         adapter = new ItemAdapter(this, gridView);
         listView.setAdapter(adapter);
-        listView.setItemAnimator(null);
+        ((SimpleItemAnimator) Objects.requireNonNull(listView.getItemAnimator())).setSupportsChangeAnimations(false);
         if (gridView) {
             final int spanCount = getResources().getInteger(R.integer.grid_view_span_count);
             final var gridLayoutManager = new StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL);
