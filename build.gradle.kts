@@ -9,24 +9,23 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext {
-        kotlinVersion = '2.4.21'
-        commonsVersion = '2.4.1'
-		androidCommonsVersion = '1.1.1'
-        nextcloudAndroidCommonLib = "0.34.0"
-        singleSignOnVersion = "1.3.5"
-    }
+    val kotlinVersion by extra("2.4.21")
+    val commonsVersion by extra("2.4.1")
+    val androidCommonsVersion by extra("1.1.1")
+    val nextcloudAndroidCommonLib by extra("0.34.0")
+    val singleSignOnVersion by extra("1.3.5")
+
     repositories {
         mavenCentral()
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:9.5.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        classpath "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin:2.3.12"
+        classpath("com.android.tools.build:gradle:9.5.1")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+        classpath("com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin:2.3.12")
 
         // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        // in the individual module build.gradle.kts files
     }
 }
 
@@ -34,13 +33,12 @@ allprojects {
     repositories {
         mavenCentral()
         google()
-        maven { url = "https://jitpack.io" }
+        maven { url = uri("https://jitpack.io") }
     }
-
 }
 
 subprojects {
-    tasks.withType(Test).configureEach {
-        maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+    tasks.withType<Test>().configureEach {
+        maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceAtLeast(1)
     }
 }
