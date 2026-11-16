@@ -33,6 +33,7 @@ import android.util.Pair;
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -101,8 +102,13 @@ public class MainViewModel extends AndroidViewModel {
     private final MutableLiveData<String> expandedCategory = new MutableLiveData<>(null);
 
     public MainViewModel(@NonNull Application application, @NonNull SavedStateHandle savedStateHandle) {
+        this(application, savedStateHandle, NotesRepository.getInstance(application));
+    }
+
+    @VisibleForTesting
+    MainViewModel(@NonNull Application application, @NonNull SavedStateHandle savedStateHandle, @NonNull NotesRepository repo) {
         super(application);
-        this.repo = NotesRepository.getInstance(application);
+        this.repo = repo;
         this.state = savedStateHandle;
     }
 

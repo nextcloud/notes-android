@@ -20,6 +20,7 @@ import android.content.Context;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.SavedStateHandle;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.nextcloud.android.sso.exceptions.UnknownErrorException;
@@ -173,17 +174,11 @@ public class MainViewModelTest {
     }
 
     @Test
-    public void addNoteAndSync_adds_note_only_once() throws NoSuchFieldException, IllegalAccessException {
-        final var vm = new MainViewModel(ApplicationProvider.getApplicationContext(), null);
+    public void addNoteAndSyncAddsNoteOnlyOnce() {
         final var repo = mock(NotesRepository.class);
-        final var repoField = MainViewModel.class.getDeclaredField("repo");
-        repoField.setAccessible(true);
-        repoField.set(vm, repo);
-        final var currentAccountField = MainViewModel.class.getDeclaredField("currentAccount");
-        currentAccountField.setAccessible(true);
+        final var vm = new MainViewModel(ApplicationProvider.getApplicationContext(), new SavedStateHandle(), repo);
         final var account = new Account();
-        //noinspection unchecked
-        ((MutableLiveData<Account>) currentAccountField.get(vm)).setValue(account);
+        vm.postCurrentAccount(account);
         final var note = new Note();
         when(repo.addNoteAndSync(any(), any())).thenReturn(new MutableLiveData<>(note));
 
