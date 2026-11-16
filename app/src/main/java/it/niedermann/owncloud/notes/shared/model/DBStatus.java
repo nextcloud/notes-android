@@ -26,6 +26,12 @@ public enum DBStatus {
     LOCAL_EDITED("LOCAL_EDITED"),
 
     /**
+     * LOCAL_FAVORITED means that only the favorite state of a Note was changed since the last successful synchronization.
+     * It is synchronized like {@link #LOCAL_EDITED}, but not shown as pending in the UI.
+     */
+    LOCAL_FAVORITED("LOCAL_FAVORITED"),
+
+    /**
      * LOCAL_DELETED means that the Note was deleted locally, but this information was not yet synchronized.
      * Therefore, the Note have to be kept locally until the synchronization has succeeded.
      * However, Notes with this status should not be displayed in the UI.

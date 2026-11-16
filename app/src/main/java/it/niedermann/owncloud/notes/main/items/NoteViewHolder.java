@@ -69,7 +69,7 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
     }
 
     protected void bindStatus(CircularProgressIndicator noteSyncStatus, DBStatus status, int color) {
-        noteSyncStatus.setVisibility(DBStatus.VOID.equals(status) ? INVISIBLE : VISIBLE);
+        noteSyncStatus.setVisibility(DBStatus.VOID.equals(status) || DBStatus.LOCAL_FAVORITED.equals(status) ? INVISIBLE : VISIBLE);
 
         final var context = noteSyncStatus.getContext();
         final var util = BrandingUtil.of(color, context);

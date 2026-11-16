@@ -26,6 +26,7 @@ import androidx.annotation.Px;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.selection.SelectionTracker;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
@@ -99,10 +100,37 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
      * @param itemList List of items to be set
      */
     public void setItemList(@NonNull List<Item> itemList) {
+        final var oldList = new ArrayList<>(this.itemList);
+        final var diff = DiffUtil.calculateDiff(new DiffUtil.Callback() {
+            @Override
+            public int getOldListSize() {
+                return oldList.size();
+            }
+
+            @Override
+            public int getNewListSize() {
+                return itemList.size();
+            }
+
+            @Override
+            public boolean areItemsTheSame(int oldPosition, int newPosition) {
+                final var oldItem = oldList.get(oldPosition);
+                final var newItem = itemList.get(newPosition);
+                if (oldItem instanceof Note oldNote && newItem instanceof Note newNote) {
+                    return oldNote.getId() == newNote.getId();
+                }
+                return oldItem.equals(newItem);
+            }
+
+            @Override
+            public boolean areContentsTheSame(int oldPosition, int newPosition) {
+                return oldList.get(oldPosition).equals(itemList.get(newPosition));
+            }
+        });
         this.itemList.clear();
         this.itemList.addAll(itemList);
         this.swipedPosition = null;
-        notifyDataSetChanged();
+        diff.dispatchUpdatesTo(this);
     }
 
     @NonNull
