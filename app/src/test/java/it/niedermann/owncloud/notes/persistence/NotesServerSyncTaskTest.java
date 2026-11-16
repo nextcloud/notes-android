@@ -15,6 +15,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_EDITED;
+import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_FAVORITED;
 import static it.niedermann.owncloud.notes.shared.model.DBStatus.VOID;
 
 import android.content.Context;
@@ -79,13 +80,15 @@ public class NotesServerSyncTaskTest {
     public void testPushLocalChanges() {
         when(repo.getLocalModifiedNotes(anyLong())).thenReturn(Arrays.asList(
                 new Note(1, null, Calendar.getInstance(), "Does not has a remoteId yet, therefore", "This note should be created on the server", "", false, "1", LOCAL_EDITED, 0, "", 0),
-                new Note(1, 2L, Calendar.getInstance(), "Has already a remoteId, therefore", "This note should be updated on the server", "", false, "1", LOCAL_EDITED, 0, "", 0)
+                new Note(1, 2L, Calendar.getInstance(), "Has already a remoteId, therefore", "This note should be updated on the server", "", false, "1", LOCAL_EDITED, 0, "", 0),
+                new Note(1, 3L, Calendar.getInstance(), "Was only favorited, therefore", "This favorite should be updated on the server", "", true, "1", LOCAL_FAVORITED, 0, "", 0)
         ));
 
         this.task.run();
 
         verify(notesAPI).createNote(argThat(argument -> "This note should be created on the server".equals(argument.getContent())));
         verify(notesAPI).editNote(argThat(argument -> "This note should be updated on the server".equals(argument.getContent())));
+        verify(notesAPI).editNote(argThat(argument -> "This favorite should be updated on the server".equals(argument.getContent())));
     }
 
     @Test

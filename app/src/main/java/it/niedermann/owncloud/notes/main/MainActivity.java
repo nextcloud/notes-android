@@ -909,11 +909,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             return;
         }
 
-        final var toggleLiveData = mainViewModel.toggleFavoriteAndSync(note);
-        toggleLiveData.observe(this, (next) -> {{
-            toggleLiveData.removeObservers(this);
-            adapter.notifyItemChanged(position);
-        }});
+        mainViewModel.toggleFavoriteAndSync(note);
     }
 
     @Override

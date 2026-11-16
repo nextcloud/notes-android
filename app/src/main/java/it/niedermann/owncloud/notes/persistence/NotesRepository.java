@@ -12,7 +12,6 @@ import static androidx.lifecycle.Transformations.distinctUntilChanged;
 import static androidx.lifecycle.Transformations.map;
 import static java.util.stream.Collectors.toMap;
 import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
-import static it.niedermann.owncloud.notes.shared.util.ApiVersionUtil.getPreferredApiVersion;
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.generateNoteExcerpt;
 import static it.niedermann.owncloud.notes.widget.notelist.NoteListWidget.updateNoteListWidgets;
 import static it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget.updateSingleNoteWidgets;
@@ -48,7 +47,6 @@ import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundExce
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
-import com.owncloud.android.lib.common.utils.Log_OC;
 import com.owncloud.android.lib.resources.shares.OCShare;
 
 import java.util.ArrayList;
@@ -553,26 +551,8 @@ public class NotesRepository {
     @AnyThread
     public void toggleFavoriteAndSync(Account account, Note note) {
         executor.submit(() -> {
-            try {
-                final var noteWithContent = getNoteById(note.getId());
-                if (noteWithContent == null) {
-                    return;
-                }
-
-                final var ssoAccount = AccountImporter.getSingleSignOnAccount(context, account.getAccountName());
-                final var notesAPI = apiProvider.getNotesAPI(context, ssoAccount, getPreferredApiVersion(account.getApiVersion()));
-                noteWithContent.setFavorite(!noteWithContent.getFavorite());
-                final var result = notesAPI.updateNote(noteWithContent);
-                final var response = result.execute();
-                if (response.isSuccessful()) {
-                    final var updatedNote = response.body();
-                    if (updatedNote != null) {
-                        scheduleSync(account, false);
-                    }
-                }
-            } catch (Exception e) {
-                Log_OC.e(TAG, "toggleFavoriteAndSync: " + e);
-            }
+            db.getNoteDao().toggleFavorite(note.getId());
+            scheduleSync(account, true);
         });
     }
 
@@ -913,7 +893,10 @@ public class NotesRepository {
                     final NotesServerSyncTask syncTask = new NotesServerSyncTask(context, this, account, onlyLocalChanges, apiProvider) {
                         @Override
                         void onPreExecute() {
-                            syncStatus.postValue(true);
+                            // Local changes are already visible, so no spinner for pushing them
+                            if (!onlyLocalChanges) {
+                                syncStatus.postValue(true);
+                            }
                             if (!syncScheduled.containsKey(localAccount.getId()) || syncScheduled.get(localAccount.getId()) == null) {
                                 syncScheduled.put(localAccount.getId(), false);
                             }
@@ -943,7 +926,9 @@ public class NotesRepository {
                             if (syncScheduled.containsKey(localAccount.getId()) && syncScheduled.get(localAccount.getId()) != null && Boolean.TRUE.equals(syncScheduled.get(localAccount.getId()))) {
                                 scheduleSync(localAccount, false);
                             }
-                            syncStatus.postValue(false);
+                            if (!onlyLocalChanges) {
+                                syncStatus.postValue(false);
+                            }
                         }
                     };
                     syncTask.addCallbacks(account, callbacksPush.get(account.getId()));

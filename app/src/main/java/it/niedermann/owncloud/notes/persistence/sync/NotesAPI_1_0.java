@@ -53,7 +53,4 @@ public interface NotesAPI_1_0 {
 
     @PUT("settings")
     Call<NotesSettings> putSettings(@Body NotesSettings settings);
-
-    @PUT("notes/{id}")
-    Call<Note> updateNote(@Path("id") long id, @Body Note note);
 }

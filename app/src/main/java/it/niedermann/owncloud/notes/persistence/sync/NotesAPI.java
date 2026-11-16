@@ -109,21 +109,6 @@ public class NotesAPI {
         }
     }
 
-    public Call<Note> updateNote(@NonNull Note note) {
-        final Long remoteId = note.getRemoteId();
-        if (remoteId == null) {
-            return null;
-        }
-
-        if (ApiVersion.API_VERSION_1_0.equals(usedApiVersion)) {
-            return notesAPI_1_0.updateNote(remoteId, note);
-        } else if (ApiVersion.API_VERSION_0_2.equals(usedApiVersion)) {
-            return notesAPI_0_2.updateNote(remoteId, new Note_0_2(note));
-        } else {
-            return null;
-        }
-    }
-
     public Call<Note> editNote(@NonNull Note note) {
         final Long remoteId = note.getRemoteId();
         if (remoteId == null) {

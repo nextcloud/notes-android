@@ -52,6 +52,7 @@ import org.robolectric.annotation.Config;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
@@ -63,6 +64,7 @@ import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.sync.NotesAPI;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
+import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
 
 @RunWith(RobolectricTestRunner.class)
@@ -256,6 +258,20 @@ public class NotesRepositoryTest {
     }
 
     @Test
+    public void toggleFavoriteAndSync() {
+        final var repoSpy = spy(repo);
+        doNothing().when(repoSpy).scheduleSync(any(), anyBoolean());
+
+        repoSpy.toggleFavoriteAndSync(account, repoSpy.getNoteById(1));
+
+        final var note = repoSpy.getNoteById(1);
+        assertTrue(note.getFavorite());
+        assertEquals(DBStatus.LOCAL_FAVORITED, note.getStatus());
+        assertEquals("C", note.getContent());
+        verify(repoSpy, times(1)).scheduleSync(account, true);
+    }
+
+    @Test
     public void testSyncStatusLiveData() throws InterruptedException, IOException {
         NotesTestingUtil.mockSingleSignOn(new SingleSignOnAccount(account.getAccountName(), account.getUserName(), "1337", account.getUrl(), ""));
 
@@ -273,7 +289,17 @@ public class NotesRepositoryTest {
     }
 
     @Test
-    public void testSyncErrorsLiveData() throws InterruptedException, IOException {
+    public void testSyncStatusLiveDataIgnoresLocalChanges() throws IOException {
+        NotesTestingUtil.mockSingleSignOn(new SingleSignOnAccount(account.getAccountName(), account.getUserName(), "1337", account.getUrl(), ""));
+
+        final var values = new ArrayList<Boolean>();
+        repo.getSyncStatus().observeForever(values::add);
+        repo.scheduleSync(account, true);
+        assertFalse(values.contains(true));
+    }
+
+    @Test
+    public void testSyncErrorsLiveData()throws InterruptedException, IOException {
         NotesTestingUtil.mockSingleSignOn(new SingleSignOnAccount(account.getAccountName(), account.getUserName(), "1337", account.getUrl(), ""));
 
         assertThrows("The very first time, this LiveData should never have been set", RuntimeException.class, () -> NotesTestingUtil.getOrAwaitValue(repo.getSyncErrors()));

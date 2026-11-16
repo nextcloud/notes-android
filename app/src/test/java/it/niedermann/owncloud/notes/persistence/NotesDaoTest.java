@@ -204,6 +204,16 @@ public class NotesDaoTest {
     }
 
     @Test
+    public void toggleFavoriteStatus() {
+        db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", VOID, account.getId(), "", 0));
+        db.getNoteDao().addNote(new Note(2, 2L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", LOCAL_EDITED, account.getId(), "", 0));
+        db.getNoteDao().toggleFavorite(1);
+        db.getNoteDao().toggleFavorite(2);
+        assertEquals(DBStatus.LOCAL_FAVORITED, db.getNoteDao().getNoteById(1).getStatus());
+        assertEquals(LOCAL_EDITED, db.getNoteDao().getNoteById(2).getStatus());
+    }
+
+    @Test
     public void updateRemoteId() {
         final var note = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", LOCAL_DELETED, account.getId(), "", 0);
         db.getNoteDao().addNote(note);
