@@ -42,8 +42,11 @@ class ItemActionBottomSheet(
         setTitle()
         addActions(
             listOf(
+                if (note.favorite) NoteAction.UNFAVORITE else NoteAction.FAVORITE,
+                NoteAction.EDIT_CATEGORY,
                 NoteAction.SEE_DETAILS,
-                NoteAction.SEND_SHARE
+                NoteAction.SEND_SHARE,
+                NoteAction.DELETE
             )
         )
 
@@ -73,6 +76,7 @@ class ItemActionBottomSheet(
         when (action) {
             NoteAction.SEE_DETAILS -> openInfo(ItemDetailsActivity.PAGE.ACTIVITIES)
             NoteAction.SEND_SHARE -> openInfo(ItemDetailsActivity.PAGE.SHARE)
+            else -> (activity as? Listener)?.onNoteActionSelected(note, action)
         }
         dismiss()
     }
@@ -100,6 +104,10 @@ class ItemActionBottomSheet(
 
     }
 
+
+    interface Listener {
+        fun onNoteActionSelected(note: Note, action: NoteAction)
+    }
 
     companion object {
         @JvmField

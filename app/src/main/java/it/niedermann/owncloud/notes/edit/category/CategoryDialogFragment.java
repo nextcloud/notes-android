@@ -157,7 +157,7 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
         });
 
         final MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(requireContext())
-                .setTitle(R.string.change_category_title)
+                .setTitle(R.string.action_edit_category)
                 .setView(dialogView)
                 .setCancelable(true)
                 .setPositiveButton(R.string.action_edit_save, (dialog, which) -> listener.onCategoryChosen(editCategory.getText().toString()))

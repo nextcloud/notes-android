@@ -82,6 +82,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.net.HttpURLConnection;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -104,6 +105,7 @@ import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.exception.IntendedOfflineException;
 import it.niedermann.owncloud.notes.importaccount.ImportAccountActivity;
 import it.niedermann.owncloud.notes.itemactions.ItemActionBottomSheet;
+import it.niedermann.owncloud.notes.itemactions.NoteAction;
 import it.niedermann.owncloud.notes.main.items.ItemAdapter;
 import it.niedermann.owncloud.notes.main.items.grid.GridItemDecoration;
 import it.niedermann.owncloud.notes.main.items.list.NotesListViewItemTouchHelper;
@@ -127,7 +129,7 @@ import it.niedermann.owncloud.notes.shared.util.DisplayUtils;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
-public class MainActivity extends LockedActivity implements NoteClickListener, AccountPickerListener, AccountSwitcherListener, CategoryDialogFragment.CategoryDialogListener {
+public class MainActivity extends LockedActivity implements NoteClickListener, AccountPickerListener, AccountSwitcherListener, CategoryDialogFragment.CategoryDialogListener, ItemActionBottomSheet.Listener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -145,6 +147,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     private static final int REQUEST_CODE_CREATE_NOTE = 0;
     private static final int REQUEST_CODE_SERVER_SETTINGS = 1;
+    private static final String STATE_CATEGORY_NOTE_ID = "categoryNoteId";
 
     protected ItemAdapter adapter;
     private NavigationAdapter adapterCategories;
@@ -161,6 +164,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView listView;
     private ActionMode mActionMode;
+    @Nullable
+    private Long categoryNoteId;
 
     boolean canMoveNoteToAnotherAccounts = false;
 
@@ -494,6 +499,17 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         mainViewModel.restoreInstanceState();
+        if (savedInstanceState.containsKey(STATE_CATEGORY_NOTE_ID)) {
+            categoryNoteId = savedInstanceState.getLong(STATE_CATEGORY_NOTE_ID);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (categoryNoteId != null) {
+            outState.putLong(STATE_CATEGORY_NOTE_ID, categoryNoteId);
+        }
     }
 
     private void handleEcosystemIntent(Intent intent) {
@@ -926,6 +942,22 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         }
     }
 
+    @Override
+    public void onNoteActionSelected(@NonNull Note note, @NonNull NoteAction action) {
+        switch (action) {
+            case FAVORITE, UNFAVORITE -> mainViewModel.toggleFavoriteAndSync(note);
+            case EDIT_CATEGORY -> {
+                categoryNoteId = note.getId();
+                CategoryDialogFragment
+                        .newInstance(note.getAccountId(), note.getCategory())
+                        .show(getSupportFragmentManager(), CategoryDialogFragment.class.getSimpleName());
+            }
+            case DELETE -> NotesListViewItemTouchHelper.deleteNoteWithUndo(this, mainViewModel, this, coordinatorLayout, fabCreate, note.getId());
+            default -> {
+            }
+        }
+    }
+
     private void updateToolbars(boolean enableSearch) {
         activityBinding.searchBar.searchBarWrapper.setVisibility(enableSearch ? GONE : VISIBLE);
         activityBinding.searchToolbar.setVisibility(enableSearch ? VISIBLE : GONE);
@@ -964,7 +996,14 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     @Override
     public void onCategoryChosen(String category) {
-        final var categoryLiveData = mainViewModel.setCategory(tracker.getSelection(), category);
+        final Iterable<Long> noteIds;
+        if (tracker.hasSelection() || categoryNoteId == null) {
+            noteIds = tracker.getSelection();
+        } else {
+            noteIds = List.of(categoryNoteId);
+        }
+        categoryNoteId = null;
+        final var categoryLiveData = mainViewModel.setCategory(noteIds, category);
         categoryLiveData.observe(this, (next) -> categoryLiveData.removeObservers(this));
         tracker.clearSelection();
     }

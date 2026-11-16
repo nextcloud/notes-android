@@ -39,7 +39,7 @@
     <string name="search_in_category">Search in %1$s</string>
     <string name="search_in_all">Search all notes</string>
 
-    <string name="change_category_title">Choose a category</string>
+    <string name="category_name">Category name</string>
 
     <!-- UsersAndGroupsSearchProvider -->
     <string name="users_and_groups_search_provider_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
@@ -567,5 +567,9 @@
 
     <string name="action_see_details">Details</string>
     <string name="action_send_share">Send/share</string>
+    <string name="action_favorite">Add to favorites</string>
+    <string name="action_unfavorite">Remove from favorites</string>
+    <string name="action_edit_category">Edit category</string>
+    <string name="action_delete_note">Delete note</string>
 
 </resources>
