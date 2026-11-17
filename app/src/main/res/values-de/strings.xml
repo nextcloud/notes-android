@@ -425,7 +425,7 @@
     </plurals>
     <plurals name="bulk_notes_restored">
         <item quantity="one">Eine Notiz wiederhergestellt</item>
-        <item quantity="other">%1$dNotizen wiederhergestellt</item>
+        <item quantity="other">%1$d Notizen wiederhergestellt</item>
     </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Inhalt von %1$d Notiz teilen</item>
