@@ -33,6 +33,7 @@ import android.util.Pair;
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -101,8 +102,13 @@ public class MainViewModel extends AndroidViewModel {
     private final MutableLiveData<String> expandedCategory = new MutableLiveData<>(null);
 
     public MainViewModel(@NonNull Application application, @NonNull SavedStateHandle savedStateHandle) {
+        this(application, savedStateHandle, NotesRepository.getInstance(application));
+    }
+
+    @VisibleForTesting
+    MainViewModel(@NonNull Application application, @NonNull SavedStateHandle savedStateHandle, @NonNull NotesRepository repo) {
         super(application);
-        this.repo = NotesRepository.getInstance(application);
+        this.repo = repo;
         this.state = savedStateHandle;
     }
 
@@ -194,15 +200,12 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public LiveData<Void> modifyCategoryOrder(@NonNull NavigationCategory selectedCategory, @NonNull CategorySortingMethod sortingMethod) {
-        return switchMap(getCurrentAccount(), currentAccount -> {
-            if (currentAccount == null) {
-                return new MutableLiveData<>(null);
-            } else {
-                Log.v(TAG, "[modifyCategoryOrder] - currentAccount: " + currentAccount.getAccountName());
-                repo.modifyCategoryOrder(currentAccount.getId(), selectedCategory, sortingMethod);
-                return new MutableLiveData<>(null);
-            }
-        });
+        final var currentAccount = getCurrentAccount().getValue();
+        if (currentAccount != null) {
+            Log.v(TAG, "[modifyCategoryOrder] - currentAccount: " + currentAccount.getAccountName());
+            repo.modifyCategoryOrder(currentAccount.getId(), selectedCategory, sortingMethod);
+        }
+        return new MutableLiveData<>(null);
     }
 
     public void postExpandedCategory(@Nullable String expandedCategory) {
@@ -497,17 +500,14 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public LiveData<Void> setCategory(Iterable<Long> noteIds, @NonNull String category) {
-        return switchMap(getCurrentAccount(), currentAccount -> {
-            if (currentAccount == null) {
-                return new MutableLiveData<>(null);
-            } else {
-                Log.v(TAG, "[setCategory] - currentAccount: " + currentAccount.getAccountName());
-                for (Long noteId : noteIds) {
-                    repo.setCategory(currentAccount, noteId, category);
-                }
-                return new MutableLiveData<>(null);
+        final var currentAccount = getCurrentAccount().getValue();
+        if (currentAccount != null) {
+            Log.v(TAG, "[setCategory] - currentAccount: " + currentAccount.getAccountName());
+            for (Long noteId : noteIds) {
+                repo.setCategory(currentAccount, noteId, category);
             }
-        });
+        }
+        return new MutableLiveData<>(null);
     }
 
     public LiveData<Note> moveNoteToAnotherAccount(Account account, long noteId) {
@@ -529,29 +529,23 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public LiveData<Void> deleteNoteAndSync(long id) {
-        return switchMap(getCurrentAccount(), currentAccount -> {
-            if (currentAccount == null) {
-                return new MutableLiveData<>(null);
-            } else {
-                Log.v(TAG, "[deleteNoteAndSync] - currentAccount: " + currentAccount.getAccountName());
-                repo.deleteNoteAndSync(currentAccount, id);
-                return new MutableLiveData<>(null);
-            }
-        });
+        final var currentAccount = getCurrentAccount().getValue();
+        if (currentAccount != null) {
+            Log.v(TAG, "[deleteNoteAndSync] - currentAccount: " + currentAccount.getAccountName());
+            repo.deleteNoteAndSync(currentAccount, id);
+        }
+        return new MutableLiveData<>(null);
     }
 
     public LiveData<Void> deleteNotesAndSync(@NonNull Collection<Long> ids) {
-        return switchMap(getCurrentAccount(), currentAccount -> {
-            if (currentAccount == null) {
-                return new MutableLiveData<>(null);
-            } else {
-                Log.v(TAG, "[deleteNotesAndSync] - currentAccount: " + currentAccount.getAccountName());
-                for (final var id : ids) {
-                    repo.deleteNoteAndSync(currentAccount, id);
-                }
-                return new MutableLiveData<>(null);
+        final var currentAccount = getCurrentAccount().getValue();
+        if (currentAccount != null) {
+            Log.v(TAG, "[deleteNotesAndSync] - currentAccount: " + currentAccount.getAccountName());
+            for (final var id : ids) {
+                repo.deleteNoteAndSync(currentAccount, id);
             }
-        });
+        }
+        return new MutableLiveData<>(null);
     }
 
     public LiveData<ImportStatus> addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities, @Nullable String displayName, @NonNull IResponseCallback<Account> callback) {
@@ -586,14 +580,12 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public LiveData<Note> addNoteAndSync(Note note) {
-        return switchMap(getCurrentAccount(), currentAccount -> {
-            if (currentAccount == null) {
-                return new MutableLiveData<>();
-            } else {
-                Log.v(TAG, "[addNoteAndSync] - currentAccount: " + currentAccount.getAccountName());
-                return repo.addNoteAndSync(currentAccount, note);
-            }
-        });
+        final var currentAccount = getCurrentAccount().getValue();
+        if (currentAccount == null) {
+            return new MutableLiveData<>();
+        }
+        Log.v(TAG, "[addNoteAndSync] - currentAccount: " + currentAccount.getAccountName());
+        return repo.addNoteAndSync(currentAccount, note);
     }
 
     public LiveData<Void> updateNoteAndSync(@NonNull Note oldNote, @Nullable String newContent, @Nullable String newTitle) {
