@@ -142,12 +142,6 @@ public class MultiSelectedActionModeCallback implements Callback {
                                 final var undoLiveData = mainViewModel.addNoteAndSync(deletedNote);
                                 undoLiveData.observe(lifecycleOwner, (o) -> undoLiveData.removeObservers(lifecycleOwner));
                             }
-                            String restoreSnackbarTitle = fullNotes.size() == 1
-                                    ? context.getString(R.string.action_note_restored, fullNotes.get(0).getTitle())
-                                    : context.getResources().getQuantityString(R.plurals.bulk_notes_restored, fullNotes.size(), fullNotes.size());
-                            BrandedSnackbar.make(view, restoreSnackbarTitle, Snackbar.LENGTH_SHORT)
-                                    .setAnchorView(anchorView)
-                                    .show();
                         })
                         .show();
             });

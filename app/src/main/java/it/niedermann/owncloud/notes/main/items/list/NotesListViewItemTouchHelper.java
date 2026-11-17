@@ -21,7 +21,6 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.google.android.material.snackbar.Snackbar;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.NotesApplication;
@@ -150,9 +149,6 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                     .setAction(R.string.action_undo, (View v) -> {
                         final var undoLiveData = mainViewModel.addNoteAndSync(dbNote);
                         undoLiveData.observe(lifecycleOwner, (o) -> undoLiveData.removeObservers(lifecycleOwner));
-                        BrandedSnackbar.make(view, context.getString(R.string.action_note_restored, dbNote.getTitle()), Snackbar.LENGTH_SHORT)
-                                .setAnchorView(anchorView)
-                                .show();
                     })
                     .show();
         });
