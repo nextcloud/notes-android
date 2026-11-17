@@ -80,25 +80,10 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                 switch (direction) {
                     case ItemTouchHelper.LEFT -> {
                         viewHolder.setIsRecyclable(false);
-                        final var dbNoteWithoutContent = (Note) adapter.getItem(viewHolder.getLayoutPosition());
-                        final var dbNoteLiveData = mainViewModel.getFullNote$(dbNoteWithoutContent.getId());
-                        dbNoteLiveData.observe(lifecycleOwner, (dbNote) -> {
-                            dbNoteLiveData.removeObservers(lifecycleOwner);
-                            tracker.deselect(dbNote.getId());
-                            final var deleteLiveData = mainViewModel.deleteNoteAndSync(dbNote.getId());
-                            deleteLiveData.observe(lifecycleOwner, (next) -> deleteLiveData.removeObservers(lifecycleOwner));
-                            Log.v(TAG, "Item deleted through swipe ----------------------------------------------");
-                            BrandedSnackbar.make(view, context.getString(R.string.action_note_deleted, dbNote.getTitle()), UNDO_DURATION)
-                                    .setAnchorView(anchorView)
-                                    .setAction(R.string.action_undo, (View v) -> {
-                                        final var undoLiveData = mainViewModel.addNoteAndSync(dbNote);
-                                        undoLiveData.observe(lifecycleOwner, (o) -> undoLiveData.removeObservers(lifecycleOwner));
-                                        BrandedSnackbar.make(view, context.getString(R.string.action_note_restored, dbNote.getTitle()), Snackbar.LENGTH_SHORT)
-                                                .setAnchorView(anchorView)
-                                                .show();
-                                    })
-                                    .show();
-                        });
+                        final var note = (Note) adapter.getItem(viewHolder.getLayoutPosition());
+                        tracker.deselect(note.getId());
+                        Log.v(TAG, "Item deleted through swipe ----------------------------------------------");
+                        deleteNoteWithUndo(context, mainViewModel, lifecycleOwner, view, anchorView, note.getId());
                     }
                     case ItemTouchHelper.RIGHT -> {
                         viewHolder.setIsRecyclable(false);
@@ -146,6 +131,30 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
             public float getSwipeEscapeVelocity(float defaultValue) {
                 return defaultValue * 3;
             }
+        });
+    }
+
+    public static void deleteNoteWithUndo(@NonNull Context context,
+                                          @NonNull MainViewModel mainViewModel,
+                                          @NonNull LifecycleOwner lifecycleOwner,
+                                          @NonNull View view,
+                                          @NonNull View anchorView,
+                                          long noteId) {
+        final var dbNoteLiveData = mainViewModel.getFullNote$(noteId);
+        dbNoteLiveData.observe(lifecycleOwner, (dbNote) -> {
+            dbNoteLiveData.removeObservers(lifecycleOwner);
+            final var deleteLiveData = mainViewModel.deleteNoteAndSync(dbNote.getId());
+            deleteLiveData.observe(lifecycleOwner, (next) -> deleteLiveData.removeObservers(lifecycleOwner));
+            BrandedSnackbar.make(view, context.getString(R.string.action_note_deleted, dbNote.getTitle()), UNDO_DURATION)
+                    .setAnchorView(anchorView)
+                    .setAction(R.string.action_undo, (View v) -> {
+                        final var undoLiveData = mainViewModel.addNoteAndSync(dbNote);
+                        undoLiveData.observe(lifecycleOwner, (o) -> undoLiveData.removeObservers(lifecycleOwner));
+                        BrandedSnackbar.make(view, context.getString(R.string.action_note_restored, dbNote.getTitle()), Snackbar.LENGTH_SHORT)
+                                .setAnchorView(anchorView)
+                                .show();
+                    })
+                    .show();
         });
     }
 }

@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacer_1x"
-        android:hint="@string/change_category_title"
+        android:hint="@string/category_name"
         android:labelFor="@id/search">
 
         <com.google.android.material.textfield.TextInputEditText

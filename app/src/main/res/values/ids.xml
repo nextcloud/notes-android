@@ -7,6 +7,10 @@
   ~ SPDX-License-Identifier: GPL-3.0-or-later
 -->
 <resources>
+    <item name="action_favorite" type="id"/>
+    <item name="action_unfavorite" type="id"/>
+    <item name="action_edit_category" type="id"/>
     <item name="action_see_details" type="id"/>
     <item name="action_send_share" type="id"/>
+    <item name="action_delete" type="id"/>
 </resources>
