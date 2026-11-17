@@ -157,7 +157,7 @@ dependencies {
     }
 
     // Glide
-    val glideVersion = "5.0.9"
+    val glideVersion = "5.0.10"
     implementation("com.github.bumptech.glide:glide:$glideVersion")
     ksp("com.github.bumptech.glide:ksp:$glideVersion")
     implementation("com.caverock:androidsvg-aar:1.4")
