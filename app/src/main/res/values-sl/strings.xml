@@ -29,7 +29,9 @@
     <string name="account_not_found">Računa ni mogoče najti!</string>
     <string name="action_back">Nazaj</string>
     <string name="action_create">Nova zabeležka</string>
+    <string name="action_delete_note">Izbriši zabeležko</string>
     <string name="action_edit_save">Shrani</string>
+    <string name="action_favorite">Dodaj med priljubljene</string>
     <string name="action_formatting_help">Oblikovanje</string>
     <string name="action_note_deleted">Izbrisano %1$s</string>
     <string name="action_note_restored">Obnovljeno %1$s</string>
@@ -40,6 +42,7 @@
     <string name="action_trashbin">Izbrisane zabeležke</string>
     <string name="action_uncategorized">Neopredeljeno</string>
     <string name="action_undo">Razveljavi</string>
+    <string name="action_unfavorite">Odstrani iz priljubljenih</string>
     <string name="activities_favorite">Priljubljeno</string>
     <string name="activities_no_results">Ni še zabeleženih dodajanj, sprememb in souporabe.</string>
     <string name="activities_title">Dejavnosti</string>
@@ -75,6 +78,7 @@
     <string name="category_movie">Video</string>
     <string name="category_movies">Video</string>
     <string name="category_music">Glasba</string>
+    <string name="category_name">me kategorije</string>
     <string name="category_password">Geslo</string>
     <string name="category_passwords">Gesla</string>
     <string name="category_play">Igrani nastop</string>

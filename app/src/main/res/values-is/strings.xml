@@ -31,6 +31,7 @@
     <string name="action_back">Til baka</string>
     <string name="action_create">Nýr minnispunktur</string>
     <string name="action_edit_save">Vista</string>
+    <string name="action_favorite">Bæta í eftirlæti</string>
     <string name="action_formatting_help">Sniðmótun</string>
     <string name="action_note_deleted">Eyddi %1$s</string>
     <string name="action_note_restored">Endurheimti %1$s</string>
@@ -42,6 +43,7 @@
     <string name="action_trashbin">Eyddir minnispunktar</string>
     <string name="action_uncategorized">Óflokkað</string>
     <string name="action_undo">Afturkalla</string>
+    <string name="action_unfavorite">Fjarlægja úr eftirlætum</string>
     <string name="activities_favorite">Eftirlæti</string>
     <string name="activities_no_results">Ennþá engir atburðir á borð við viðbætur, breytingar og deilingar.</string>
     <string name="activities_title">Athafnir</string>

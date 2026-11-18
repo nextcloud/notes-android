@@ -30,6 +30,8 @@
     <string name="account_switch_dialog_status_fetching_error_message">Der Status konnten nicht abgerufen werden. Bitte noch einmal versuchen.</string>
     <string name="action_back">Zurück</string>
     <string name="action_create">Neue Notiz</string>
+    <string name="action_delete_note">Notiz löschen</string>
+    <string name="action_edit_category">Kategorie bearbeiten</string>
     <string name="action_edit_save">Speichern</string>
     <string name="action_formatting_help">Formatierung</string>
     <string name="action_note_deleted">%1$s gelöscht</string>
@@ -80,6 +82,7 @@
     <string name="category_movie">Film</string>
     <string name="category_movies">Filme</string>
     <string name="category_music">Musik</string>
+    <string name="category_name">Kategorienname</string>
     <string name="category_password">Passwort</string>
     <string name="category_passwords">Passwörter</string>
     <string name="category_play">Spielen</string>

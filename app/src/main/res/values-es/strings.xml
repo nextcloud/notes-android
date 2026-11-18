@@ -30,7 +30,9 @@
     <string name="account_switch_dialog_status_fetching_error_message">Fallo al obtener el estado. Por favor, vuelve a intentarlo.</string>
     <string name="action_back">Atrás</string>
     <string name="action_create">Nueva nota</string>
+    <string name="action_delete_note">Borrar nota</string>
     <string name="action_edit_save">Guardar</string>
+    <string name="action_favorite">Añadir a favoritos</string>
     <string name="action_formatting_help">Formato</string>
     <string name="action_note_deleted">Borrado %1$s</string>
     <string name="action_note_restored">Restaurado %1$s</string>
@@ -42,6 +44,7 @@
     <string name="action_trashbin">Notas eliminadas</string>
     <string name="action_uncategorized">Sin categoría</string>
     <string name="action_undo">Deshacer</string>
+    <string name="action_unfavorite">Eliminar de favoritos</string>
     <string name="activities_favorite">Favorito</string>
     <string name="activities_no_results">Aún no hay eventos como añadidos, cambios y compartidos.</string>
     <string name="activities_title">Actividades</string>
@@ -78,6 +81,7 @@
     <string name="category_movie">Película</string>
     <string name="category_movies">Películas</string>
     <string name="category_music">Música</string>
+    <string name="category_name">Nombre de categoría</string>
     <string name="category_password">Contraseña</string>
     <string name="category_passwords">Contraseñas</string>
     <string name="category_play">Reproducir</string>

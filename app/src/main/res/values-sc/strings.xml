@@ -28,6 +28,7 @@
     <string name="action_back">In segus</string>
     <string name="action_create">Notas noas</string>
     <string name="action_edit_save">Sarva</string>
+    <string name="action_favorite">Agiunghe a preferidos</string>
     <string name="action_formatting_help">Formatatzione</string>
     <string name="action_note_deleted">Cantzelladu %1$s</string>
     <string name="action_note_restored">Ripristinadu %1$s</string>
@@ -38,6 +39,7 @@
     <string name="action_trashbin">Notas cantzelladas</string>
     <string name="action_uncategorized">Sena categoria</string>
     <string name="action_undo">Annulla</string>
+    <string name="action_unfavorite">Boga·nche dae preferidos</string>
     <string name="activities_favorite">Preferidu</string>
     <string name="activities_no_results">Agiuntas, càmbios e cundivisiones: ancora peruna atzione</string>
     <string name="activities_title">Atividades</string>

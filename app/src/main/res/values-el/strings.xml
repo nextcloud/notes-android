@@ -29,6 +29,7 @@
     <string name="account_not_found">Δεν βρέθηκε λογαριασμός!</string>
     <string name="action_back">Πίσω</string>
     <string name="action_create">Νέα σημείωση</string>
+    <string name="action_edit_category">Επεξεργασία κατηγορίας</string>
     <string name="action_edit_save">Αποθήκευση</string>
     <string name="action_formatting_help">Διαμόρφωση σε εξέλιξη</string>
     <string name="action_note_deleted">Διεγραμμένα %1$s</string>
@@ -73,6 +74,7 @@
     <string name="category_movie">Ταινία</string>
     <string name="category_movies">Ταινίες</string>
     <string name="category_music">Μουσική</string>
+    <string name="category_name">Όνομα κατηγορίας</string>
     <string name="category_password">Συνθηματικό</string>
     <string name="category_passwords">Συνθηματικά</string>
     <string name="category_play">Αναπαραγωγή</string>

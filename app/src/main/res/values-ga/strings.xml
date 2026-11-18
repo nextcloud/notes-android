@@ -30,7 +30,10 @@
     <string name="account_switch_dialog_status_fetching_error_message">Theip ar an stádas a fháil, déan iarracht arís.</string>
     <string name="action_back">Ar ais</string>
     <string name="action_create">Nóta nua</string>
+    <string name="action_delete_note">Scrios nóta</string>
+    <string name="action_edit_category">Cuir catagóir in eagar</string>
     <string name="action_edit_save">Sábháil</string>
+    <string name="action_favorite">Cuir le ceanáin</string>
     <string name="action_formatting_help">Formáidiú</string>
     <string name="action_note_deleted">Scriosadh %1$s</string>
     <string name="action_note_restored">Aischuireadh %1$s</string>
@@ -42,6 +45,7 @@
     <string name="action_trashbin">Nótaí scriosta</string>
     <string name="action_uncategorized">Gan catagóir</string>
     <string name="action_undo">Cealaigh</string>
+    <string name="action_unfavorite">Bain ó cheanáin</string>
     <string name="activities_error">Tharla earráid agus gníomhaíochtaí á luchtú</string>
     <string name="activities_favorite">is fearr leat</string>
     <string name="activities_fetch_failed">Ní féidir gníomhaíochtaí a fháil</string>
@@ -80,6 +84,7 @@
     <string name="category_movie">Scannán</string>
     <string name="category_movies">Scannáin</string>
     <string name="category_music">Ceol</string>
+    <string name="category_name">Ainm na catagóire</string>
     <string name="category_password">Pasfhocal</string>
     <string name="category_passwords">Pasfhocail</string>
     <string name="category_play">Imirt</string>

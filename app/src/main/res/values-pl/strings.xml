@@ -31,6 +31,7 @@
     <string name="action_back">Poprzednia</string>
     <string name="action_create">Nowa notatka</string>
     <string name="action_edit_save">Zapisz</string>
+    <string name="action_favorite">Dodaj do ulubionych</string>
     <string name="action_formatting_help">Formatowanie</string>
     <string name="action_note_deleted">Usunięto %1$s</string>
     <string name="action_note_restored">Przywrócono %1$s</string>
@@ -42,6 +43,7 @@
     <string name="action_trashbin">Usunięte notatki</string>
     <string name="action_uncategorized">Bez kategorii</string>
     <string name="action_undo">Cofnij</string>
+    <string name="action_unfavorite">Usuń z ulubionych</string>
     <string name="activities_favorite">Ulubiony</string>
     <string name="activities_no_results">Brak zdarzeń, takich jak dodatki, zmiany i udostępnienia.</string>
     <string name="activities_title">Aktywność</string>
@@ -78,6 +80,7 @@
     <string name="category_movie">Film</string>
     <string name="category_movies">Filmy</string>
     <string name="category_music">Muzyka</string>
+    <string name="category_name">Nazwa kategorii</string>
     <string name="category_password">Hasło</string>
     <string name="category_passwords">Hasła</string>
     <string name="category_play">Zabawa</string>

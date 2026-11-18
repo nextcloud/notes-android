@@ -29,7 +29,9 @@
     <string name="account_not_found">¡No se encontró la cuenta!</string>
     <string name="action_back">Atrás</string>
     <string name="action_create">Nota nueva</string>
+    <string name="action_edit_category">Editar categoría</string>
     <string name="action_edit_save">Guardar</string>
+    <string name="action_favorite">Agregar a favoritos</string>
     <string name="action_formatting_help">Formato</string>
     <string name="action_note_deleted">%1$s eliminado</string>
     <string name="action_note_restored">%1$s restaurado</string>
@@ -74,6 +76,7 @@
     <string name="category_movie">Película</string>
     <string name="category_movies">Películas</string>
     <string name="category_music">Música</string>
+    <string name="category_name">Nombre de categoría</string>
     <string name="category_password">Contraseña</string>
     <string name="category_passwords">Contraseñas</string>
     <string name="category_play">Reproducir</string>

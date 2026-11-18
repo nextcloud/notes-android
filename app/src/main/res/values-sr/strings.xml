@@ -31,6 +31,7 @@
     <string name="action_back">Назад</string>
     <string name="action_create">Нова белешка</string>
     <string name="action_edit_save">Сачувај</string>
+    <string name="action_favorite">Додаје у омиљене</string>
     <string name="action_formatting_help">Форматирање</string>
     <string name="action_note_deleted">Обрисано %1$s</string>
     <string name="action_note_restored">Повраћено %1$s</string>
@@ -42,6 +43,7 @@
     <string name="action_trashbin">Обрисане белешке</string>
     <string name="action_uncategorized">Некатегоризовано</string>
     <string name="action_undo">Опозови</string>
+    <string name="action_unfavorite">Избаци из омиљених</string>
     <string name="activities_favorite">Омиљени</string>
     <string name="activities_no_results">Још нема догађаја попут додавања, измене или дељења.</string>
     <string name="activities_title">Активности</string>
@@ -77,6 +79,7 @@
     <string name="category_movie">Филм</string>
     <string name="category_movies">Филмови</string>
     <string name="category_music">Музика</string>
+    <string name="category_name">Име категорије</string>
     <string name="category_password">Лозинка</string>
     <string name="category_passwords">Лозинке</string>
     <string name="category_play">Пусти</string>

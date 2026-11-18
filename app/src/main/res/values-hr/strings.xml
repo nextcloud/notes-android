@@ -30,7 +30,9 @@
     <string name="account_switch_dialog_status_fetching_error_message">Dohvaćanje statusa nije uspjelo, pokušajte ponovno.</string>
     <string name="action_back">Natrag</string>
     <string name="action_create">Nova bilješka</string>
+    <string name="action_delete_note">Izbriši bilješku</string>
     <string name="action_edit_save">Spremi</string>
+    <string name="action_favorite">Dodaj u favorite</string>
     <string name="action_formatting_help">Oblikovanje</string>
     <string name="action_note_deleted">Izbrisano %1$s</string>
     <string name="action_note_restored">Vraćeno %1$s</string>
@@ -42,6 +44,7 @@
     <string name="action_trashbin">Izbrisane bilješke</string>
     <string name="action_uncategorized">Nekategorizirani</string>
     <string name="action_undo">Poništi</string>
+    <string name="action_unfavorite">Ukloni iz omiljenih</string>
     <string name="activities_favorite">Favorit</string>
     <string name="activities_no_results">Nema događaja kao što su dodavanja, izmjene i dijeljenja.</string>
     <string name="activities_title">Aktivnosti</string>

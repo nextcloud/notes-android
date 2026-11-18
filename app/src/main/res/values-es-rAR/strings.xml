@@ -20,12 +20,14 @@
     <string name="action_back">Atrás</string>
     <string name="action_create">Nueva nota</string>
     <string name="action_edit_save">Guardar</string>
+    <string name="action_favorite">Añadir a favoritos</string>
     <string name="action_search">Buscar</string>
     <string name="action_see_details">Detalles</string>
     <string name="action_settings">Configuraciones</string>
     <string name="action_trashbin">Notas borradas</string>
     <string name="action_uncategorized">Sin categoría</string>
     <string name="action_undo">Deshacer</string>
+    <string name="action_unfavorite">Quitar de favoritos</string>
     <string name="activities_favorite">Favorito</string>
     <string name="activities_no_results">Aún no hay eventos como adiciones, cambios y acciones.</string>
     <string name="activities_title">Actividades</string>

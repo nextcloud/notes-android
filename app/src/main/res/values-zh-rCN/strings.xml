@@ -30,6 +30,7 @@
     <string name="action_back">返回</string>
     <string name="action_create">新建笔记</string>
     <string name="action_edit_save">保存</string>
+    <string name="action_favorite">添加到收藏</string>
     <string name="action_formatting_help">格式</string>
     <string name="action_note_deleted">已删除 %1$s</string>
     <string name="action_note_restored">已恢复 %1$s</string>
@@ -41,6 +42,7 @@
     <string name="action_trashbin">已删除的笔记</string>
     <string name="action_uncategorized">未分类</string>
     <string name="action_undo">撤销</string>
+    <string name="action_unfavorite">从收藏中移除</string>
     <string name="activities_favorite">收藏</string>
     <string name="activities_no_results">还没有类似添加、更改和共享这样的事件。</string>
     <string name="activities_title">动态</string>
@@ -76,6 +78,7 @@
     <string name="category_movie">影片</string>
     <string name="category_movies">影片</string>
     <string name="category_music">音乐</string>
+    <string name="category_name">分类名称</string>
     <string name="category_password">密码</string>
     <string name="category_passwords">密码</string>
     <string name="category_play">玩</string>

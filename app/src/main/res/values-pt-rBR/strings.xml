@@ -30,7 +30,10 @@
     <string name="account_switch_dialog_status_fetching_error_message">Não foi possível obter o status. Tente novamente.</string>
     <string name="action_back">Voltar</string>
     <string name="action_create">Nova nota</string>
+    <string name="action_delete_note">Excluir nota</string>
+    <string name="action_edit_category">Editar categoria</string>
     <string name="action_edit_save">Salvar</string>
+    <string name="action_favorite">Adicionar aos favoritos</string>
     <string name="action_formatting_help">Formatação</string>
     <string name="action_note_deleted">%1$s excluído</string>
     <string name="action_note_restored">%1$s Restaurado</string>
@@ -42,6 +45,7 @@
     <string name="action_trashbin">Anotações excluídas</string>
     <string name="action_uncategorized">Sem categoria</string>
     <string name="action_undo">Desfazer</string>
+    <string name="action_unfavorite">Remover dos favoritos</string>
     <string name="activities_error">Ocorreu um erro ao carregar as atividades</string>
     <string name="activities_favorite">Favorito</string>
     <string name="activities_fetch_failed">Não foi possível obter as atividades</string>
@@ -80,6 +84,7 @@
     <string name="category_movie">Filme</string>
     <string name="category_movies">Filmes</string>
     <string name="category_music">Música</string>
+    <string name="category_name">Nome da categoria</string>
     <string name="category_password">Senha</string>
     <string name="category_passwords">Senhas</string>
     <string name="category_play">Peça teatral</string>

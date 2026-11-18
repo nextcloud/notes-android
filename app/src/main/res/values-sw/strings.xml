@@ -30,7 +30,9 @@
     <string name="account_switch_dialog_status_fetching_error_message">Imeshindwa kuleta hali, tafadhali jaribu tena.</string>
     <string name="action_back">Rudi</string>
     <string name="action_create">Dokezo jipya</string>
+    <string name="action_edit_category">Edit category</string>
     <string name="action_edit_save">Hifadhi</string>
+    <string name="action_favorite">Ongeza kwenye vipendwa</string>
     <string name="action_formatting_help">Inaumbiza</string>
     <string name="action_note_deleted">Imefutwa %1$s</string>
     <string name="action_note_restored">Imehifadhiwa %1$s</string>
@@ -42,6 +44,7 @@
     <string name="action_trashbin">Futa madokezo</string>
     <string name="action_uncategorized">Haitambuliki</string>
     <string name="action_undo">Tendua</string>
+    <string name="action_unfavorite">Ondoa kutoka katika vipendwa</string>
     <string name="activities_favorite">Kipendwa</string>
     <string name="activities_no_results">Bado hakuna matukio kama vile nyongeza, mabadiliko na kushirikiwa.</string>
     <string name="activities_title">Shughuli</string>

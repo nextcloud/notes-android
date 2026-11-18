@@ -31,6 +31,7 @@
     <string name="action_back">Terug</string>
     <string name="action_create">Nieuwe notitie</string>
     <string name="action_edit_save">Opslaan</string>
+    <string name="action_favorite">Toevoegen aan favorieten</string>
     <string name="action_formatting_help">Opmaak</string>
     <string name="action_note_deleted">Verwijderd %1$s</string>
     <string name="action_note_restored">Hersteld %1$s</string>
@@ -42,6 +43,7 @@
     <string name="action_trashbin">Verwijderde notities</string>
     <string name="action_uncategorized">Niet gecategoriseerd</string>
     <string name="action_undo">Ongedaan maken</string>
+    <string name="action_unfavorite">Verwijder uit favorieten</string>
     <string name="activities_favorite">Favoriet</string>
     <string name="activities_no_results">Er zijn nog geen gebeurtenissen zoals toevoegingen, wijzigingen en shares.</string>
     <string name="activities_title">Activiteiten</string>
@@ -78,6 +80,7 @@
     <string name="category_movie">Film</string>
     <string name="category_movies">Films</string>
     <string name="category_music">Muziek</string>
+    <string name="category_name">Categorienaam</string>
     <string name="category_password">Wachtwoord</string>
     <string name="category_passwords">Wachtwoorden</string>
     <string name="category_play">Spelen</string>
