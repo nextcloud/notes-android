@@ -78,14 +78,12 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 switch (direction) {
                     case ItemTouchHelper.LEFT -> {
-                        viewHolder.setIsRecyclable(false);
                         final var note = (Note) adapter.getItem(viewHolder.getLayoutPosition());
                         tracker.deselect(note.getId());
                         Log.v(TAG, "Item deleted through swipe ----------------------------------------------");
                         deleteNoteWithUndo(context, mainViewModel, lifecycleOwner, view, anchorView, note.getId());
                     }
                     case ItemTouchHelper.RIGHT -> {
-                        viewHolder.setIsRecyclable(false);
                         final var adapterNote = (Note) adapter.getItem(viewHolder.getLayoutPosition());
                         final var toggleLiveData = mainViewModel.toggleFavoriteAndSync(adapterNote);
                         toggleLiveData.observe(lifecycleOwner, (next) -> toggleLiveData.removeObservers(lifecycleOwner));
