@@ -134,7 +134,7 @@ dependencies {
     }
     implementation("org.apache.jackrabbit:jackrabbit-webdav:2.13.5")
 
-    implementation("com.github.nextcloud:android-library:2.26.1") {
+    implementation("com.github.nextcloud:android-library:2.27.0") {
         exclude(group = "org.ogce", module = "xpp3")
     }
 
