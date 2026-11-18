@@ -378,6 +378,16 @@ public class NotesDaoTest {
     }
 
     @Test
+    public void getCategoriesSortsUncategorizedLast() throws InterruptedException {
+        db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "T", "C", "", false, null, VOID, account.getId(), "", 0));
+        db.getNoteDao().addNote(new Note(2, 2L, Calendar.getInstance(), "T", "C", "Zebra", false, null, VOID, account.getId(), "", 0));
+        db.getNoteDao().addNote(new Note(3, 3L, Calendar.getInstance(), "T", "C", "Apple", false, null, VOID, account.getId(), "", 0));
+
+        final var categories = NotesTestingUtil.getOrAwaitValue(db.getNoteDao().getCategories$(account.getId()));
+        assertEquals(List.of("Apple", "Zebra", ""), categories.stream().map(CategoryWithNotesCount::getCategory).toList());
+    }
+
+    @Test
     public void searchCategories() throws InterruptedException {
         final var secondAccount = setupSecondAccountAndTestNotes();
 

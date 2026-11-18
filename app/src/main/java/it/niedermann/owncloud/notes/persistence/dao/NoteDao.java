@@ -198,7 +198,7 @@ public interface NoteDao {
      * @param accountId The user account Id
      * @return All of the categories with given accountId
      */
-    @Query("SELECT accountId, category, COUNT(*) as 'totalNotes' FROM NOTE WHERE STATUS != 'LOCAL_DELETED' AND accountId = :accountId GROUP BY category")
+    @Query("SELECT accountId, category, COUNT(*) as 'totalNotes' FROM NOTE WHERE STATUS != 'LOCAL_DELETED' AND accountId = :accountId GROUP BY category ORDER BY category = '', category")
     LiveData<List<CategoryWithNotesCount>> getCategories$(Long accountId);
 
     @Query("SELECT accountId, category, COUNT(*) as 'totalNotes' FROM NOTE WHERE STATUS != 'LOCAL_DELETED' AND accountId = :accountId AND category != '' AND category LIKE :searchTerm GROUP BY category")
