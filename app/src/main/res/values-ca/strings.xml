@@ -29,7 +29,10 @@
     <string name="account_not_found">No s\'ha trobat el compte!</string>
     <string name="action_back">Torna</string>
     <string name="action_create">Nota nova</string>
+    <string name="action_delete_note">Suprimeix l\'anotació</string>
+    <string name="action_edit_category">Edita la categoria</string>
     <string name="action_edit_save">Desa</string>
+    <string name="action_favorite">Afegeix a preferits</string>
     <string name="action_formatting_help">Format</string>
     <string name="action_note_deleted">S\'ha suprimit %1$s</string>
     <string name="action_note_restored">S\'ha restaurat %1$s</string>
@@ -40,6 +43,7 @@
     <string name="action_trashbin">Notes suprimides</string>
     <string name="action_uncategorized">Sense categoria</string>
     <string name="action_undo">Desfés</string>
+    <string name="action_unfavorite">Suprimeix dels preferits</string>
     <string name="activities_favorite">En els preferits</string>
     <string name="activities_no_results">Encara no hi ha esdeveniments com ara addicions, canvis i comparticions.</string>
     <string name="activities_title">Activitats</string>

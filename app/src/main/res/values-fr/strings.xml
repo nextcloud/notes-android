@@ -30,7 +30,9 @@
     <string name="account_switch_dialog_status_fetching_error_message">Impossible de récupérer le statut, Veuillez réessayer.</string>
     <string name="action_back">Retour</string>
     <string name="action_create">Nouvelle note</string>
+    <string name="action_edit_category">Modifier une catégorie</string>
     <string name="action_edit_save">Enregistrer</string>
+    <string name="action_favorite">Ajouter aux favoris</string>
     <string name="action_formatting_help">Formatage</string>
     <string name="action_note_deleted">%1$s supprimé</string>
     <string name="action_note_restored">%1$s restauré</string>
@@ -42,6 +44,7 @@
     <string name="action_trashbin">Notes supprimées</string>
     <string name="action_uncategorized">Non catégorisé</string>
     <string name="action_undo">Annuler</string>
+    <string name="action_unfavorite">Retirer des favoris</string>
     <string name="activities_error">Une erreur est survenue lors du chargement des activités</string>
     <string name="activities_favorite">Ajouter aux favoris</string>
     <string name="activities_fetch_failed">Impossible de récupérer les activités</string>
@@ -80,6 +83,7 @@
     <string name="category_movie">Film</string>
     <string name="category_movies">Films</string>
     <string name="category_music">Musique</string>
+    <string name="category_name">Nom de la catégorie</string>
     <string name="category_password">Mot de passe</string>
     <string name="category_passwords">Mots de passe</string>
     <string name="category_play">Lire</string>

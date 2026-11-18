@@ -30,7 +30,10 @@
     <string name="account_switch_dialog_status_fetching_error_message">無法擷取狀態，請重試。</string>
     <string name="action_back">返回</string>
     <string name="action_create">新筆記</string>
+    <string name="action_delete_note">刪除筆記</string>
+    <string name="action_edit_category">編輯分類</string>
     <string name="action_edit_save">儲存</string>
+    <string name="action_favorite">新增收藏</string>
     <string name="action_formatting_help">正在格式化</string>
     <string name="action_note_deleted">已刪除 %1$s</string>
     <string name="action_note_restored">已還原 %1$s</string>
@@ -42,6 +45,7 @@
     <string name="action_trashbin">已刪除筆記</string>
     <string name="action_uncategorized">未分類</string>
     <string name="action_undo">上一步</string>
+    <string name="action_unfavorite">從最愛中移除</string>
     <string name="activities_error">載入活動時發生錯誤</string>
     <string name="activities_favorite">我的最愛</string>
     <string name="activities_fetch_failed">無法擷取活動</string>
@@ -80,6 +84,7 @@
     <string name="category_movie">電影</string>
     <string name="category_movies">電影</string>
     <string name="category_music">音樂</string>
+    <string name="category_name">分類名稱</string>
     <string name="category_password">密碼</string>
     <string name="category_passwords">密碼</string>
     <string name="category_play">戲劇</string>

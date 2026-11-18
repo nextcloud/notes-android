@@ -23,12 +23,14 @@
     <string name="action_back">Назад</string>
     <string name="action_create">Нова белешка</string>
     <string name="action_edit_save">Зачувај</string>
+    <string name="action_favorite">Додади во фаворити</string>
     <string name="action_formatting_help">Форматирање</string>
     <string name="action_search">Барај</string>
     <string name="action_see_details">Детали</string>
     <string name="action_settings">Параметри</string>
     <string name="action_uncategorized">Некатегоризирани</string>
     <string name="action_undo">Врати</string>
+    <string name="action_unfavorite">Отстрани од фаворити</string>
     <string name="activities_favorite">Омилени</string>
     <string name="activities_no_results">Сè уште нема настани како дополнувања, промени и споделувања.</string>
     <string name="activities_title">Активности</string>
@@ -52,6 +54,7 @@
     <string name="category_movie">Филм</string>
     <string name="category_movies">Филмови</string>
     <string name="category_music">Музика</string>
+    <string name="category_name">Име на категорија</string>
     <string name="category_password">Лозинка</string>
     <string name="category_play">Слајдшоу</string>
     <string name="category_present">Тековно</string>

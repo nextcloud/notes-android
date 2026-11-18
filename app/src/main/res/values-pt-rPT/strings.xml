@@ -30,7 +30,10 @@
     <string name="account_switch_dialog_status_fetching_error_message">Não foi possível obter o status. Tente novamente.</string>
     <string name="action_back">Anterior</string>
     <string name="action_create">Nova nota</string>
+    <string name="action_delete_note">Eliminar nota</string>
+    <string name="action_edit_category">Editar categoria</string>
     <string name="action_edit_save">Guardar</string>
+    <string name="action_favorite">Adicionar aos favoritos</string>
     <string name="action_formatting_help">Formação </string>
     <string name="action_note_deleted">%1$s excluído</string>
     <string name="action_search">Pesquisar</string>
@@ -41,6 +44,7 @@
     <string name="action_trashbin">Notas eliminadas</string>
     <string name="action_uncategorized">Sem categoria </string>
     <string name="action_undo">Anular</string>
+    <string name="action_unfavorite">Remover dos favoritos</string>
     <string name="activities_favorite">Favorito</string>
     <string name="activities_no_results">Ainda sem registo de eventos, tais como adições, alterações ou partilhas.</string>
     <string name="activities_title">Atividades</string>
@@ -76,6 +80,7 @@
     <string name="category_keys">Chaves</string>
     <string name="category_movies">Filmes</string>
     <string name="category_music">Música</string>
+    <string name="category_name">Nome da categoria</string>
     <string name="category_password">Palavra-passe</string>
     <string name="category_passwords">Palavras-passe</string>
     <string name="category_play">Reproduzir</string>

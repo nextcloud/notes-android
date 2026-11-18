@@ -31,6 +31,7 @@
     <string name="action_back">Vissza</string>
     <string name="action_create">Új jegyzet</string>
     <string name="action_edit_save">Mentés</string>
+    <string name="action_favorite">Hozzáadás a kedvencekhez</string>
     <string name="action_formatting_help">Formázás</string>
     <string name="action_note_deleted">%1$s törölve</string>
     <string name="action_note_restored">%1$s visszaállítva</string>
@@ -42,6 +43,7 @@
     <string name="action_trashbin">Törölt jegyzetek</string>
     <string name="action_uncategorized">Kategorizálatlan</string>
     <string name="action_undo">Visszavonás</string>
+    <string name="action_unfavorite">Eltávolítás a kedvencek közül</string>
     <string name="activities_favorite">Kedvenc</string>
     <string name="activities_no_results">Még nincsenek események, mint a hozzáadások, módosítások és megosztások.</string>
     <string name="activities_title">Tevékenységek</string>
@@ -78,6 +80,7 @@
     <string name="category_movie">Film</string>
     <string name="category_movies">Filmek</string>
     <string name="category_music">Zene</string>
+    <string name="category_name">Kategórianév</string>
     <string name="category_password">Jelszó</string>
     <string name="category_passwords">Jelszavak</string>
     <string name="category_play">Színdarab</string>

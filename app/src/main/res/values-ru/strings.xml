@@ -30,7 +30,9 @@
     <string name="account_switch_dialog_status_fetching_error_message">Не удалось получить статус. Повторите попытку.</string>
     <string name="action_back">Назад</string>
     <string name="action_create">Новая заметка</string>
+    <string name="action_edit_category">Изменить категорию</string>
     <string name="action_edit_save">Сохранить</string>
+    <string name="action_favorite">Добавить в избранное</string>
     <string name="action_formatting_help">Форматирование</string>
     <string name="action_note_deleted">Заметка %1$s удалена</string>
     <string name="action_note_restored">Заметка %1$s восстановлена</string>
@@ -42,6 +44,7 @@
     <string name="action_trashbin">Удалённые заметки</string>
     <string name="action_uncategorized">Без категории</string>
     <string name="action_undo">Отменить</string>
+    <string name="action_unfavorite">Убрать из избранного</string>
     <string name="activities_error">При загрузке списка событий произошла ошибка</string>
     <string name="activities_favorite">Избранное</string>
     <string name="activities_fetch_failed">Не удалось получить данные событий</string>
@@ -80,6 +83,7 @@
     <string name="category_movie">Фильм</string>
     <string name="category_movies">Фильмы</string>
     <string name="category_music">Музыка</string>
+    <string name="category_name">Название категории</string>
     <string name="category_password">Пароль</string>
     <string name="category_passwords">Пароли</string>
     <string name="category_play">Играть</string>

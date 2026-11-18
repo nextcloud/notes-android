@@ -30,7 +30,9 @@
     <string name="account_switch_dialog_status_fetching_error_message">Kunde inte hämta status, försök igen.</string>
     <string name="action_back">Tillbaka</string>
     <string name="action_create">Ny anteckning</string>
+    <string name="action_edit_category">Redigera kategori</string>
     <string name="action_edit_save">Spara</string>
+    <string name="action_favorite">Lägg till i favoriter</string>
     <string name="action_formatting_help">Formatering</string>
     <string name="action_note_deleted">Tog bort %1$s</string>
     <string name="action_note_restored">Återställde %1$s</string>
@@ -42,6 +44,7 @@
     <string name="action_trashbin">Borttagna anteckningar</string>
     <string name="action_uncategorized">Okategoriserade</string>
     <string name="action_undo">Gör om</string>
+    <string name="action_unfavorite">Ta bort från favoriter</string>
     <string name="activities_error">Kunde inte läsa in aktiviteter</string>
     <string name="activities_favorite">Favoritmarkera</string>
     <string name="activities_fetch_failed">Kunde inte hämta aktiviteter</string>
@@ -80,6 +83,7 @@
     <string name="category_movie">Film</string>
     <string name="category_movies">Filmer</string>
     <string name="category_music">Musik</string>
+    <string name="category_name">Kategorinamn</string>
     <string name="category_password">Lösenord</string>
     <string name="category_passwords">Lösenord</string>
     <string name="category_play">Spela</string>

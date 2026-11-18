@@ -30,7 +30,10 @@
     <string name="account_switch_dialog_status_fetching_error_message">دریافت وضعیت ناموفق بود، لطفاً دوباره تلاش کنید.</string>
     <string name="action_back">بازگشت</string>
     <string name="action_create">یادداشت جدید</string>
+    <string name="action_delete_note">توجه داشته باشید حذف</string>
+    <string name="action_edit_category">ویرایش دسته</string>
     <string name="action_edit_save">ذخیره</string>
+    <string name="action_favorite">افزودن به برگزیده‌ها</string>
     <string name="action_formatting_help">قالب‌بندی</string>
     <string name="action_note_deleted">%1$s حذف شد</string>
     <string name="action_note_restored">%1$s بازیابی شد</string>
@@ -42,6 +45,7 @@
     <string name="action_trashbin">یادداشت‌های حذف شده</string>
     <string name="action_uncategorized">دسته‌بندی نشده</string>
     <string name="action_undo">برگرداندن</string>
+    <string name="action_unfavorite">حذف از برگزیده‌ها</string>
     <string name="activities_favorite">مورد علاقه</string>
     <string name="activities_no_results">هیچ رویدادی مانند افزودن، تغییرات و اشتراک‌گذاری‌ها وجود ندارد.</string>
     <string name="activities_title">فعالیت‌ها</string>
@@ -78,6 +82,7 @@
     <string name="category_movie">فیلم</string>
     <string name="category_movies">فیلم‌ها</string>
     <string name="category_music">موسیقی</string>
+    <string name="category_name">نام دسته‌بندی</string>
     <string name="category_password">کلمه عبور</string>
     <string name="category_passwords">کلمات عبور</string>
     <string name="category_play">پخش کردن</string>

@@ -27,6 +27,7 @@
     <string name="action_back">Atrás</string>
     <string name="action_create">Nota nueva</string>
     <string name="action_edit_save">Guardar</string>
+    <string name="action_favorite">Añadir a favoritos</string>
     <string name="action_formatting_help">Formato</string>
     <string name="action_search">Buscar</string>
     <string name="action_see_details">Detalles</string>
@@ -34,6 +35,7 @@
     <string name="action_trashbin">Notas borradas</string>
     <string name="action_uncategorized">Sin categoría</string>
     <string name="action_undo">Deshacer</string>
+    <string name="action_unfavorite">Eliminar de favoritos</string>
     <string name="activities_favorite">Marcar como favorito</string>
     <string name="activities_no_results">Sin eventos como adiciones, cambios y comparticiones aún.</string>
     <string name="activities_title">Actividades</string>

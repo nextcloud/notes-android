@@ -27,6 +27,7 @@
     <string name="account_not_found">החשבון לא נמצא!</string>
     <string name="action_back">חזרה</string>
     <string name="action_create">פתק חדש</string>
+    <string name="action_delete_note">מחיקת פתק</string>
     <string name="action_edit_save">שמירה</string>
     <string name="action_formatting_help">עיצוב</string>
     <string name="action_note_deleted">%1$s נמחק</string>

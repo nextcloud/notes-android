@@ -30,7 +30,9 @@
     <string name="account_switch_dialog_status_fetching_error_message">Gagal mengambil status, silakan coba lagi.</string>
     <string name="action_back">Kembali</string>
     <string name="action_create">Catatan baru</string>
+    <string name="action_edit_category">Edit kategori</string>
     <string name="action_edit_save">Simpan</string>
+    <string name="action_favorite">Tambahkan ke favorit</string>
     <string name="action_formatting_help">Pemformatan</string>
     <string name="action_note_deleted">Dihapus %1$s</string>
     <string name="action_note_restored">Dipulihkan %1$s</string>
@@ -42,6 +44,7 @@
     <string name="action_trashbin">Catatan terhapus</string>
     <string name="action_uncategorized">Tidak terkategori</string>
     <string name="action_undo">Undo</string>
+    <string name="action_unfavorite">Hapus dari favorit</string>
     <string name="activities_error">Terjadi kesalahan saat memuat aktivitas</string>
     <string name="activities_favorite">Favorit</string>
     <string name="activities_fetch_failed">Tidak dapat mengambil aktivitas</string>
@@ -80,6 +83,7 @@
     <string name="category_movie">Film</string>
     <string name="category_movies">Film</string>
     <string name="category_music">Musik</string>
+    <string name="category_name">Nama kategori</string>
     <string name="category_password">Kata sandi</string>
     <string name="category_passwords">Kata sandi</string>
     <string name="category_play">Putar</string>

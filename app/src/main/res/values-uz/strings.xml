@@ -30,6 +30,7 @@
     <string name="action_back">Orqaga</string>
     <string name="action_create">Yangi eslatma</string>
     <string name="action_edit_save">Saqlash</string>
+    <string name="action_favorite">Sevimlilarga qo\'shing</string>
     <string name="action_formatting_help">Formatlash</string>
     <string name="action_note_deleted"> %1$sni o\'chirish</string>
     <string name="action_note_restored"> %1$sqayta tiklandi</string>
@@ -40,6 +41,7 @@
     <string name="action_trashbin">O\'chirilgan qaydlar</string>
     <string name="action_uncategorized">Kategoriyasiz</string>
     <string name="action_undo">Bekor qilish</string>
+    <string name="action_unfavorite">Sevimlilardan olib tashlang</string>
     <string name="activities_favorite">Sevimli</string>
     <string name="activities_no_results">Hozircha qoʻshimchalar, oʻzgartirishlar va baham koʻrish kabi tadbirlar yoʻq.</string>
     <string name="activities_title">Faollik</string>

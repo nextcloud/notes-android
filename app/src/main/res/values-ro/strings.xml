@@ -30,7 +30,9 @@
     <string name="account_switch_dialog_status_fetching_error_message">Starea nu a putut fi preluată, încearcă din nou.</string>
     <string name="action_back">Înapoi</string>
     <string name="action_create">Notiță nouă</string>
+    <string name="action_edit_category">Editează categoria</string>
     <string name="action_edit_save">Salvează</string>
+    <string name="action_favorite">Adaugă la favorite</string>
     <string name="action_formatting_help">Formatare</string>
     <string name="action_note_deleted">„%1$s” a fost ștearsă</string>
     <string name="action_note_restored">„%1$s” a fost restaurată</string>
@@ -42,6 +44,7 @@
     <string name="action_trashbin">Notițe șterse</string>
     <string name="action_uncategorized">Fără categorie</string>
     <string name="action_undo">Anulează</string>
+    <string name="action_unfavorite">Elimină din favorite</string>
     <string name="activities_favorite">Favorit</string>
     <string name="activities_no_results">Încă nu există evenimente precum adăugări, modificări și partajări.</string>
     <string name="activities_title">Activități</string>
@@ -78,6 +81,7 @@
     <string name="category_movie">Film</string>
     <string name="category_movies">Filme</string>
     <string name="category_music">Muzică</string>
+    <string name="category_name">Numele categoriei</string>
     <string name="category_password">Parolă</string>
     <string name="category_passwords">Parole</string>
     <string name="category_play">Joacă</string>

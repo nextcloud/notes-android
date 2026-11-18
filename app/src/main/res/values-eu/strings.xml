@@ -30,6 +30,7 @@
     <string name="action_back">Atzera</string>
     <string name="action_create">Ohar berria</string>
     <string name="action_edit_save">Gorde</string>
+    <string name="action_favorite">Gehitu gogokoetara</string>
     <string name="action_formatting_help">Formatua</string>
     <string name="action_note_deleted">%1$s ezabatu da</string>
     <string name="action_note_restored">%1$sberreskuratu da</string>
@@ -41,6 +42,7 @@
     <string name="action_trashbin">Ezabatutako oharrak</string>
     <string name="action_uncategorized">Kategoria gabe</string>
     <string name="action_undo">Desegin</string>
+    <string name="action_unfavorite">Kendu gogokoetatik</string>
     <string name="activities_favorite">Egin gogoko</string>
     <string name="activities_no_results">Gehitzea, aldatzea edo partekatzea bezalako gertaerarik ez oraindik.</string>
     <string name="activities_title">Jarduerak</string>
@@ -74,6 +76,7 @@
     <string name="category_movie">Filma</string>
     <string name="category_movies">Filmak</string>
     <string name="category_music">Musika</string>
+    <string name="category_name">Kattegoria izena</string>
     <string name="category_password">Pasahitza</string>
     <string name="category_passwords">Pasahitzak</string>
     <string name="category_play">Jokatu</string>

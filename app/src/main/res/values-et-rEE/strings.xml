@@ -30,7 +30,10 @@
     <string name="account_switch_dialog_status_fetching_error_message">Oleku tuvastamine ei õnnestunud, palun proovi uuesti.</string>
     <string name="action_back">Tagasi</string>
     <string name="action_create">Uus märge</string>
+    <string name="action_delete_note">Kustuta märge</string>
+    <string name="action_edit_category">Muuda kategooriat</string>
     <string name="action_edit_save">Salvesta</string>
+    <string name="action_favorite">Lisa lemmikuks</string>
     <string name="action_formatting_help">Vorming</string>
     <string name="action_note_deleted">Kustutatud %1$s</string>
     <string name="action_note_restored">Taastatud %1$s</string>
@@ -42,6 +45,7 @@
     <string name="action_trashbin">Kustutatud märkmed</string>
     <string name="action_uncategorized">Määratlemata</string>
     <string name="action_undo">Võta tegevus tagasi</string>
+    <string name="action_unfavorite">Eemalda lemmikutest</string>
     <string name="activities_error">Tegevuse laadimisel tekkis viga</string>
     <string name="activities_favorite">Lemmik</string>
     <string name="activities_fetch_failed">Tegevuste laadimine ei õnnestu</string>
@@ -80,6 +84,7 @@
     <string name="category_movie">Film</string>
     <string name="category_movies">Filmid</string>
     <string name="category_music">Muusika</string>
+    <string name="category_name">Kategooria nimi</string>
     <string name="category_password">Salasõna</string>
     <string name="category_passwords">Salasõnad</string>
     <string name="category_play">Esita</string>

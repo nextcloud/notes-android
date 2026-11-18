@@ -30,6 +30,8 @@
     <string name="account_switch_dialog_status_fetching_error_message">Failed to fetch status, please try again.</string>
     <string name="action_back">Back</string>
     <string name="action_create">New note</string>
+    <string name="action_delete_note">Delete note</string>
+    <string name="action_edit_category">Edit category</string>
     <string name="action_edit_save">Save</string>
     <string name="action_formatting_help">Formatting</string>
     <string name="action_note_deleted">Deleted %1$s</string>
@@ -80,6 +82,7 @@
     <string name="category_movie">Movie</string>
     <string name="category_movies">Movies</string>
     <string name="category_music">Music</string>
+    <string name="category_name">Category name</string>
     <string name="category_password">Password</string>
     <string name="category_passwords">Passwords</string>
     <string name="category_play">Play</string>

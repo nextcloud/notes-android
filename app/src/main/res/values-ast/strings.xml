@@ -23,6 +23,7 @@
     <string name="action_back">Atrás</string>
     <string name="action_create">Nota nueva</string>
     <string name="action_edit_save">Guardar</string>
+    <string name="action_favorite">Meter en Favoritos</string>
     <string name="action_formatting_help">Formatu</string>
     <string name="action_search">Buscar</string>
     <string name="action_see_details">Detalles</string>
@@ -31,6 +32,7 @@
     <string name="action_trashbin">Notes desaniciaes</string>
     <string name="action_uncategorized">Ensin categoría</string>
     <string name="action_undo">Desfacer</string>
+    <string name="action_unfavorite">Quitar de Favoritos</string>
     <string name="activities_favorite">Meter en Favoritos</string>
     <string name="activities_title">Actividaes</string>
     <string name="activity_chooser_send_file_title">Unviar</string>
@@ -53,6 +55,7 @@
     <string name="category_movie">Filme</string>
     <string name="category_movies">Filmes</string>
     <string name="category_music">Música</string>
+    <string name="category_name">Nome de la categoría</string>
     <string name="category_password">Contraseña</string>
     <string name="category_passwords">Contraseñes</string>
     <string name="category_play">Reproducir</string>

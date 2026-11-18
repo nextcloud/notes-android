@@ -30,7 +30,9 @@
     <string name="account_switch_dialog_status_fetching_error_message">Produciuse un fallo ao obter o estado, ténteo de novo</string>
     <string name="action_back">Atrás</string>
     <string name="action_create">Nova nota</string>
+    <string name="action_edit_category">Editar categoría</string>
     <string name="action_edit_save">Gardar</string>
+    <string name="action_favorite">Engadir a favoritos</string>
     <string name="action_formatting_help">Formatado</string>
     <string name="action_note_deleted">Eliminouse %1$s</string>
     <string name="action_note_restored">Restaurouse %1$s</string>
@@ -42,6 +44,7 @@
     <string name="action_trashbin">Notas eliminadas</string>
     <string name="action_uncategorized">Sen categorizar</string>
     <string name="action_undo">Desfacer</string>
+    <string name="action_unfavorite">Retirar dos favoritos</string>
     <string name="activities_favorite">Favorito</string>
     <string name="activities_no_results">Non houbo eventos como adicións, cambios e elementos compartidos.</string>
     <string name="activities_title">Actividades</string>
@@ -78,6 +81,7 @@
     <string name="category_movie">Filme</string>
     <string name="category_movies">Filmes</string>
     <string name="category_music">Música</string>
+    <string name="category_name">Nome da categoría</string>
     <string name="category_password">Contrasinal</string>
     <string name="category_passwords">Contrasinais</string>
     <string name="category_play">Reproducir</string>

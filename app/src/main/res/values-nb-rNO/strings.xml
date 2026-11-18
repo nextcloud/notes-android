@@ -30,6 +30,7 @@
     <string name="action_back">Tilbake</string>
     <string name="action_create">Nytt notat</string>
     <string name="action_edit_save">Lagre</string>
+    <string name="action_favorite">Legg til favoritter</string>
     <string name="action_formatting_help">Formatering</string>
     <string name="action_note_deleted">Slettet %1$s</string>
     <string name="action_note_restored">Gjennopprettet %1$s</string>
@@ -41,6 +42,7 @@
     <string name="action_trashbin">Slettede notat</string>
     <string name="action_uncategorized">Ukategorisert</string>
     <string name="action_undo">Angre</string>
+    <string name="action_unfavorite">Fjern fra favoritter</string>
     <string name="activities_favorite">Favoritt</string>
     <string name="activities_no_results">Ingen hendelser som tillegg, endringer eller delinger enda.</string>
     <string name="activities_title">Aktiviteter</string>
@@ -76,6 +78,7 @@
     <string name="category_movie">Film</string>
     <string name="category_movies">Filmer</string>
     <string name="category_music">Musikk</string>
+    <string name="category_name">Kategorinavn</string>
     <string name="category_password">Passord</string>
     <string name="category_passwords">Passord</string>
     <string name="category_play">Spill</string>

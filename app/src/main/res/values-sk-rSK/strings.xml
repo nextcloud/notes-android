@@ -30,7 +30,9 @@
     <string name="account_switch_dialog_status_fetching_error_message">Nepodarilo sa získať stav, prosím, skúste to znova.</string>
     <string name="action_back">Späť</string>
     <string name="action_create">Nová poznámka</string>
+    <string name="action_edit_category">Upraviť kategóriu</string>
     <string name="action_edit_save">Uložiť</string>
+    <string name="action_favorite">Pridať do obľúbených</string>
     <string name="action_formatting_help">Formátovanie</string>
     <string name="action_note_deleted">Vymazané %1$s</string>
     <string name="action_note_restored">Obnovené %1$s</string>
@@ -42,6 +44,7 @@
     <string name="action_trashbin">Zmazané poznámky</string>
     <string name="action_uncategorized">Nezaradené</string>
     <string name="action_undo">Vrátiť</string>
+    <string name="action_unfavorite">Odstrániť z obľúbených</string>
     <string name="activities_error">Pri načítavaní aktivít sa vyskytla chyba</string>
     <string name="activities_favorite">Obľúbené</string>
     <string name="activities_fetch_failed">Nepodarilo sa načítať aktivity</string>
@@ -80,6 +83,7 @@
     <string name="category_movie">Film</string>
     <string name="category_movies">Videá</string>
     <string name="category_music">Hudba</string>
+    <string name="category_name">Názov kategórie</string>
     <string name="category_password">Heslo</string>
     <string name="category_passwords">Heslá</string>
     <string name="category_play">Hrať</string>

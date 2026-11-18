@@ -30,7 +30,9 @@
     <string name="account_switch_dialog_status_fetching_error_message">ھالەتنى چۈشۈرۈش مەغلۇپ بولدى، قايتا سىناپ بېقىڭ</string>
     <string name="action_back">قايتىش</string>
     <string name="action_create">يېڭى خاتىرە</string>
+    <string name="action_edit_category">تۈرنى تەھرىرلەش</string>
     <string name="action_edit_save">ساقلاش</string>
+    <string name="action_favorite">ياقتۇردىغانغا قوش</string>
     <string name="action_formatting_help">فورماتلاش</string>
     <string name="action_note_deleted">%1$s ئۆچۈرۈلدى</string>
     <string name="action_note_restored">%1$s ئەسلىگە كەلتۈرۈلدى</string>
@@ -42,6 +44,7 @@
     <string name="action_trashbin">ئۆچۈرۈلگەن خاتىرىلەر</string>
     <string name="action_uncategorized">تۈرگە ئايرىلمىغان</string>
     <string name="action_undo">ئەمەلدىن قالدۇرۇش</string>
+    <string name="action_unfavorite">ياقتۇردىغاندىن چىقىرۋەت</string>
     <string name="activities_favorite">ئامراق</string>
     <string name="activities_no_results">قوشۇش ، ئۆزگەرتىش ۋە ھەمبەھىرلىنىش قاتارلىق پائالىيەتلەر تېخى يوق.</string>
     <string name="activities_title">پائالىيەت</string>
@@ -77,6 +80,7 @@
     <string name="category_movie">كىنو</string>
     <string name="category_movies">كىنولار</string>
     <string name="category_music">مۇزىكا</string>
+    <string name="category_name">تۈر ئىسمى</string>
     <string name="category_password">پارول</string>
     <string name="category_passwords">پارول</string>
     <string name="category_play">ئويناش</string>
