@@ -11,9 +11,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent">
 
-    <WebView
+    <FrameLayout
         android:visibility="gone"
-        android:id="@+id/note_webview"
+        android:id="@+id/note_webview_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:visibility="visible" />
@@ -40,7 +40,7 @@
         android:visibility="gone"
         app:backgroundTint="@color/defaultBrand"
         app:icon="@drawable/ic_notes"
-        app:layout_anchor="@id/note_webview"
+        app:layout_anchor="@id/note_webview_container"
         app:layout_anchorGravity="bottom|end"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
