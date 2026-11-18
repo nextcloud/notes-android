@@ -24,7 +24,6 @@
     <string name="simple_about">About</string>
     <string name="simple_link">Link</string>
     <string name="action_note_deleted">Deleted %1$s</string>
-    <string name="action_note_restored">Restored %1$s</string>
     <string name="action_undo">Undo</string>
     <string name="action_uncategorized">Uncategorized</string>
     <string name="menu_delete">Delete</string>
@@ -386,10 +385,6 @@
     <plurals name="bulk_notes_deleted">
         <item quantity="one">Deleted one note</item>
         <item quantity="other">Deleted %1$d notes</item>
-    </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Restored one note</item>
-        <item quantity="other">Restored %1$d notes</item>
     </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Share content of %1$d note</item>
