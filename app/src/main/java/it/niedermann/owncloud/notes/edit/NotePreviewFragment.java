@@ -39,6 +39,7 @@ import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.FragmentNotePreviewBinding;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.util.SSOUtil;
+import it.niedermann.owncloud.notes.util.NotesExtensionsKt;
 import kotlin.Unit;
 
 public class NotePreviewFragment extends SearchableBaseNoteFragment implements OnRefreshListener {
@@ -152,8 +153,13 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         lifecycleScopeIOJob(() -> {
             final String content = note.getContent();
             changedText = content;
+            final String imageUrlPrefix = NotesExtensionsKt.getAttachmentImageUrlPrefix(
+                note,
+                repo.getAccountById(note.getAccountId())
+            );
 
             onMainThread(() -> {
+                binding.singleNoteContent.setMarkdownImageUrlPrefix(imageUrlPrefix);
                 binding.singleNoteContent.setMarkdownString(content, setScrollY);
 
                 final var activity = getActivity();
