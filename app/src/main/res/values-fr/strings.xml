@@ -30,6 +30,7 @@
     <string name="account_switch_dialog_status_fetching_error_message">Impossible de récupérer le statut, Veuillez réessayer.</string>
     <string name="action_back">Retour</string>
     <string name="action_create">Nouvelle note</string>
+    <string name="action_delete_note">Supprimer la note</string>
     <string name="action_edit_category">Modifier une catégorie</string>
     <string name="action_edit_save">Enregistrer</string>
     <string name="action_favorite">Ajouter aux favoris</string>
@@ -429,11 +430,6 @@
         <item quantity="one">Une note supprimée</item>
         <item quantity="many">%1$d notes supprimées</item>
         <item quantity="other">%1$d notes supprimées</item>
-    </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Une note restaurée</item>
-        <item quantity="many">%1$d notes restaurées</item>
-        <item quantity="other">%1$d notes restaurées</item>
     </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Partager le contenu de %1$d note</item>

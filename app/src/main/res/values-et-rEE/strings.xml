@@ -428,10 +428,6 @@
         <item quantity="one">Üks märge on kustutatud</item>
         <item quantity="other">%1$d märget on kustutatud</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Üks märge on taastatud</item>
-        <item quantity="other">%1$d märget on taastatud</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Jaga %1$d märkme sisu</item>
         <item quantity="other">Jaga %1$d märkme sisu</item>

@@ -376,10 +376,6 @@
         <item quantity="one">S\'ha suprimit una nota</item>
         <item quantity="other">S\'han suprimit %1$d notes</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">S\'ha restaurat una nota</item>
-        <item quantity="other">S\'han restaurat %1$d notes</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Comparteix el contingut d\'%1$d nota</item>
         <item quantity="other">Comparteix el contingut de %1$d notes</item>

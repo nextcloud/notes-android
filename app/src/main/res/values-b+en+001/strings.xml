@@ -33,6 +33,7 @@
     <string name="action_delete_note">Delete note</string>
     <string name="action_edit_category">Edit category</string>
     <string name="action_edit_save">Save</string>
+    <string name="action_favorite">Add to favourites</string>
     <string name="action_formatting_help">Formatting</string>
     <string name="action_note_deleted">Deleted %1$s</string>
     <string name="action_note_restored">Restored %1$s</string>
@@ -44,6 +45,7 @@
     <string name="action_trashbin">Deleted notes</string>
     <string name="action_uncategorized">Uncategorised</string>
     <string name="action_undo">Undo</string>
+    <string name="action_unfavorite">Remove from favourites</string>
     <string name="activities_error">An error occurred loading activities</string>
     <string name="activities_favorite">Favourite</string>
     <string name="activities_fetch_failed">Unable to fetch activities</string>
@@ -425,10 +427,6 @@
     <plurals name="bulk_notes_deleted">
         <item quantity="one">Deleted one note</item>
         <item quantity="other">Deleted %1$d notes</item>
-    </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Restored one note</item>
-        <item quantity="other">Restored %1$d notes</item>
     </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Share content of %1$d note</item>

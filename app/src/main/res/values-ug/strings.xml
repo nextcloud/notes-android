@@ -407,10 +407,6 @@
         <item quantity="one">Deleted one note</item>
         <item quantity="other">%1$d خاترە ئۆچۈرۈلدى</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Restored one note</item>
-        <item quantity="other">%1$d خاتىرە ئەسلىگە كەلتۈرۈلدى</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Share content of %1$d note</item>
         <item quantity="other">%1$d خاتىرىنىڭ مەزمۇنىنى ھەمبەھىرلە</item>

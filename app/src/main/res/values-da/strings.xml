@@ -30,6 +30,7 @@
     <string name="account_switch_dialog_status_fetching_error_message">Kunne ikke hente status. Prøv igen.</string>
     <string name="action_back">Tilbage</string>
     <string name="action_create">Ny note</string>
+    <string name="action_delete_note">Slet note</string>
     <string name="action_edit_category">Rediger kategori</string>
     <string name="action_edit_save">Gem</string>
     <string name="action_favorite">Tilføj til favoritter</string>
@@ -426,10 +427,6 @@
     <plurals name="bulk_notes_deleted">
         <item quantity="one">En note slettet</item>
         <item quantity="other">%1$d noter slettet</item>
-    </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">En note gendannet</item>
-        <item quantity="other">%1$d noter gendannet</item>
     </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Del indhold i %1$d note</item>

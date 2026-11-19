@@ -415,11 +415,6 @@
         <item quantity="few">Izbrisano %1$d bilješki</item>
         <item quantity="other">Izbrisano %1$d bilješki</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Vraćena jedna bilješka</item>
-        <item quantity="few">Vraćeno %1$d bilješki</item>
-        <item quantity="other">Vraćeno %1$d bilješki</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Dijeli sadržaj %1$d bilješki</item>
         <item quantity="few">Dijeli sadržaj %1$d bilješki</item>

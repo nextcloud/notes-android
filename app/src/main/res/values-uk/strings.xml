@@ -419,12 +419,6 @@
         <item quantity="many">Вилучено %1$d нотаток</item>
         <item quantity="other">Вилучено %1$d нотаток</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Відновлена нотатка</item>
-        <item quantity="few">Відновлені %1$d нотатки</item>
-        <item quantity="many">Відновлені %1$d нотатки</item>
-        <item quantity="other">Відновлені %1$d нотатки</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Поділитися вмістом %1$d нотатки</item>
         <item quantity="few">Поділитися вмістом %1$d нотаток</item>

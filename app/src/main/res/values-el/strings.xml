@@ -355,10 +355,6 @@
         <item quantity="one">Διαγράφηκε μία σημείωση</item>
         <item quantity="other">Διαγράφηκαν %1$d σημειώσεις</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Επαναφέρθηκε μία σημείωση</item>
-        <item quantity="other">Επαναφέρθηκαν %1$dσημειώσεις</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Διαμοιρασμός περιεχομένου %1$d σημείωσης</item>
         <item quantity="other">Διαμοιρασμός περιεχομένου %1$d σημειώσεων</item>

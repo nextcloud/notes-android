@@ -361,10 +361,6 @@
         <item quantity="one">Изтрита една бележка</item>
         <item quantity="other">Изтрити %1$d бележки</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Възстановени една бележки</item>
-        <item quantity="other">Възстановени %1$d бележки</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Споделяне на съдържание от %1$d бележки</item>
         <item quantity="other">Споделяне на съдържание от %1$d бележки</item>

@@ -426,11 +426,6 @@
         <item quantity="few">Au fost șterse %1$d notițe</item>
         <item quantity="other">Au fost șterse %1$d de notițe</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">A fost restaurată o notiță</item>
-        <item quantity="few">Au fost restaurate %1$d notițe</item>
-        <item quantity="other">Au fost restaurate %1$d de notițe</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Partajează conținutul a %1$d notiță</item>
         <item quantity="few">Partajează conținutul a %1$d notițe</item>

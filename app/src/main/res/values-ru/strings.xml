@@ -433,12 +433,6 @@
         <item quantity="many">Удалены %1$d заметки</item>
         <item quantity="other">Удалены %1$d заметки</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Восстановлена одна заметка</item>
-        <item quantity="few">Восстановлено %1$d заметки</item>
-        <item quantity="many">Восстановлено %1$d заметок</item>
-        <item quantity="other">Восстановлено %1$d заметок</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Поделиться содержимым %1$d заметки</item>
         <item quantity="few"> Поделиться содержимым%1$d заметок</item>

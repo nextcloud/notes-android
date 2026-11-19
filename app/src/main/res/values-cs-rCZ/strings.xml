@@ -420,12 +420,6 @@
         <item quantity="many">Smazáno %1$d poznámek</item>
         <item quantity="other">Smazány %1$d poznámky</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Obnovena jedna poznámka</item>
-        <item quantity="few">Obnoveny %1$d poznámky</item>
-        <item quantity="many">Obnoveno %1$d poznámek</item>
-        <item quantity="other">Obnoveny %1$d poznámky</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Sdílet obsah %1$d poznámky</item>
         <item quantity="few">Sdílet obsah %1$d poznámek</item>

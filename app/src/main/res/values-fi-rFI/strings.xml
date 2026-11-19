@@ -373,10 +373,6 @@
         <item quantity="one">Poistettu muistiinpano</item>
         <item quantity="other">Poistettu %1$d muistiinpanoa</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Muistiinpano palautettu</item>
-        <item quantity="other">Palautettu %1$d muistiinpanoa</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Jaa %1$d muistiinpanon sisältö</item>
         <item quantity="other">Jaa %1$d muistiinpanon sisältö</item>

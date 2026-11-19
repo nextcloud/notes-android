@@ -387,11 +387,6 @@
         <item quantity="many">Eliminate %1$d note</item>
         <item quantity="other">Eliminate %1$d note</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Ripristinate una nota</item>
-        <item quantity="many">Ripristinate %1$d note</item>
-        <item quantity="other">Ripristinate %1$d note</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Condividi il contenuto di %1$d nota</item>
         <item quantity="many">Condividi il contenuto di %1$d note</item>

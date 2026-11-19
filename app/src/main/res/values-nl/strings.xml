@@ -407,10 +407,6 @@
         <item quantity="one">Verwijderde één notitie</item>
         <item quantity="other">Verwijderde %1$d notities</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Een notitie hersteld</item>
-        <item quantity="other">%1$d notities hersteld</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Inhoud van %1$d notitie delen</item>
         <item quantity="other">Inhoud van %1$d notities delen</item>

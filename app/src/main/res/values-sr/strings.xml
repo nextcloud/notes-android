@@ -407,11 +407,6 @@
         <item quantity="few">Обрисано %1$d белешке</item>
         <item quantity="other">Обрисано %1$d белешки</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Повраћена једна белешка</item>
-        <item quantity="few">Повраћене %1$d белешке</item>
-        <item quantity="other">Повраћено %1$d белешки</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Подели садржај %1$d белешке</item>
         <item quantity="few">Подели садржај %1$d белешке</item>

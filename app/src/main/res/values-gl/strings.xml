@@ -411,10 +411,6 @@
         <item quantity="one">Foi eliminada unha nota</item>
         <item quantity="other">Foron eliminadas %1$d notas</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Foi restaurada unha nota</item>
-        <item quantity="other">Foron restauradas %1$d notas</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Compartir o contido de %1$d nota</item>
         <item quantity="other">Compartir o contido de  %1$dnotas</item>

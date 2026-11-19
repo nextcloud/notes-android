@@ -370,10 +370,6 @@
         <item quantity="one">Deleted one note</item>
         <item quantity="other">Deleted %1$d notes</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Restored one note</item>
-        <item quantity="other">Restored %1$d notes</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Share content of %1$d note</item>
         <item quantity="other">Share content of %1$d notes</item>

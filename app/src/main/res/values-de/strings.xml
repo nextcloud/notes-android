@@ -45,7 +45,7 @@
     <string name="action_trashbin">Gelöschte Notizen</string>
     <string name="action_uncategorized">Ohne Kategorie</string>
     <string name="action_undo">Rückgängig</string>
-    <string name="action_unfavorite">Von Favoriten entfernen</string>
+    <string name="action_unfavorite">Aus Favoriten entfernen</string>
     <string name="activities_error">Es ist ein Fehler beim Laden der Aktivitäten aufgetreten</string>
     <string name="activities_favorite">Favorit</string>
     <string name="activities_fetch_failed">Aktivitäten können nicht abgerufen werden</string>
@@ -427,10 +427,6 @@
     <plurals name="bulk_notes_deleted">
         <item quantity="one">Eine Notiz gelöscht</item>
         <item quantity="other">%1$d Notizen gelöscht</item>
-    </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Eine Notiz wiederhergestellt</item>
-        <item quantity="other">%1$d Notizen wiederhergestellt</item>
     </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Inhalt von %1$d Notiz teilen</item>

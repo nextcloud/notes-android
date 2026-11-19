@@ -427,10 +427,6 @@
         <item quantity="one">Tog bort en anteckning</item>
         <item quantity="other">Tog bort %1$d anteckningar</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Återställde en anteckning</item>
-        <item quantity="other">Återställde %1$d anteckningar</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Dela innehållet i %1$d anteckning</item>
         <item quantity="other">Dela innehållet i %1$d anteckningar</item>

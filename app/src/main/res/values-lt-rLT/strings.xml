@@ -420,12 +420,6 @@
         <item quantity="many">Ištrinta %1$d užrašų</item>
         <item quantity="other">Ištrinti %1$d užrašai</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Atkurtas vienas užrašas</item>
-        <item quantity="few">Atkurti %1$d užrašai</item>
-        <item quantity="many">Atkurta %1$d užrašų</item>
-        <item quantity="other">Atkurti %1$d užrašai</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Bendrinti %1$d užrašo turinį</item>
         <item quantity="few">Bendrinti %1$d užrašų turinį</item>
