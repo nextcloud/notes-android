@@ -30,7 +30,9 @@
     <string name="account_switch_dialog_status_fetching_error_message">Nepodařilo se načíst stav – zkuste to znovu.</string>
     <string name="action_back">Zpět</string>
     <string name="action_create">Nová poznámka</string>
+    <string name="action_edit_category">Upravit kategorii</string>
     <string name="action_edit_save">Uložit</string>
+    <string name="action_favorite">Přidat do oblíbených</string>
     <string name="action_formatting_help">Formátování</string>
     <string name="action_note_deleted">Smazáno %1$s</string>
     <string name="action_note_restored">Obnoveno %1$s</string>
@@ -42,6 +44,7 @@
     <string name="action_trashbin">Smazané poznámky</string>
     <string name="action_uncategorized">Nezařazeno</string>
     <string name="action_undo">Zpět</string>
+    <string name="action_unfavorite">Odebrat z oblíbených</string>
     <string name="activities_favorite">Přidat do oblíbených</string>
     <string name="activities_no_results">Zatím žádné události jako přidání, změny či sdílení.</string>
     <string name="activities_title">Aktivity</string>
@@ -78,6 +81,7 @@
     <string name="category_movie">Film</string>
     <string name="category_movies">Filmy</string>
     <string name="category_music">Hudba</string>
+    <string name="category_name">Název kategorie</string>
     <string name="category_password">Heslo</string>
     <string name="category_passwords">Hesla</string>
     <string name="category_play">Hrát</string>
@@ -415,12 +419,6 @@
         <item quantity="few">Smazány %1$d poznámky</item>
         <item quantity="many">Smazáno %1$d poznámek</item>
         <item quantity="other">Smazány %1$d poznámky</item>
-    </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Obnovena jedna poznámka</item>
-        <item quantity="few">Obnoveny %1$d poznámky</item>
-        <item quantity="many">Obnoveno %1$d poznámek</item>
-        <item quantity="other">Obnoveny %1$d poznámky</item>
     </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Sdílet obsah %1$d poznámky</item>

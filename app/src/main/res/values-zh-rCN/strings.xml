@@ -384,9 +384,6 @@
     <plurals name="bulk_notes_deleted">
         <item quantity="other">删除了 %1$d 条笔记</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="other">恢复了 %1$d 条笔记</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="other">分享%1$d条笔记的内容</item>
     </plurals>

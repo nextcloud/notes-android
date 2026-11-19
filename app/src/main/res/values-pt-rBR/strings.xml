@@ -431,11 +431,6 @@
         <item quantity="many">%1$d notas excluídas</item>
         <item quantity="other">%1$d notas excluídas</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Uma nota restaurada</item>
-        <item quantity="many">%1$d notas restauradas</item>
-        <item quantity="other">%1$d notas restauradas</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Compartilhar conteúdo de %1$d nota</item>
         <item quantity="many">Compartilhar conteúdo de %1$d notas</item>

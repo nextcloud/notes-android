@@ -373,9 +373,6 @@
     <plurals name="bulk_notes_deleted">
         <item quantity="other"> %1$d ta qayd oʻchirildi</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="other"> %1$d ta qayd tiklandi</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="other"> %1$d ta qayd mazmunini ulashing</item>
     </plurals>

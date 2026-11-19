@@ -316,10 +316,6 @@
         <item quantity="one">Deleted one note</item>
         <item quantity="other">Notas %1$d cantzelladas</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Restored one note</item>
-        <item quantity="other">Notas %1$d ripristinadas</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Cumpartzi su cuntenutu de sa%1$d nota</item>
         <item quantity="other">Cumpartzi su cuntenutu de%1$d notas</item>

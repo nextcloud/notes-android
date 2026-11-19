@@ -408,10 +408,6 @@
         <item quantity="one">Deleted one note</item>
         <item quantity="other">Imefuta %1$d madokezo</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Restored one note</item>
-        <item quantity="other">Imehifadhi %1$d madokezo</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Share content of %1$d note</item>
         <item quantity="other">Imeshiriki maudhui ya %1$d madokezo</item>

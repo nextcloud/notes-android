@@ -437,13 +437,6 @@
         <item quantity="many">Scriosadh %1$d nótaí</item>
         <item quantity="other">Scriosadh %1$d nótaí</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Athchóiríodh nóta amháin</item>
-        <item quantity="two">Aischuireadh %1$d nótaí</item>
-        <item quantity="few">Aischuireadh %1$d nótaí</item>
-        <item quantity="many">Aischuireadh %1$d nótaí</item>
-        <item quantity="other">Aischuireadh %1$d nótaí</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Roinn inneachar %1$d nóta</item>
         <item quantity="two">Roinn inneachar %1$d nótaí</item>

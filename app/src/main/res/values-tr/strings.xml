@@ -428,10 +428,6 @@
         <item quantity="one">Bir not silindi</item>
         <item quantity="other">%1$d not silindi</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Bir not geri yüklendi</item>
-        <item quantity="other">%1$dnot geri yüklendi</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="one">%1$d notun içeriğini paylaş</item>
         <item quantity="other">%1$d notun içeriğini paylaş</item>

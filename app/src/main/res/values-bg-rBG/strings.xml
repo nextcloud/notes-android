@@ -30,6 +30,7 @@
     <string name="action_back">Назад</string>
     <string name="action_create">Нова бележка</string>
     <string name="action_edit_save">Запис</string>
+    <string name="action_favorite">Добави в любими</string>
     <string name="action_formatting_help">Форматиране</string>
     <string name="action_note_deleted">Изтриване %1$s</string>
     <string name="action_note_restored">Възстановено%1$s</string>
@@ -41,6 +42,7 @@
     <string name="action_trashbin">Изтрити бележки</string>
     <string name="action_uncategorized">Некатегоризирани</string>
     <string name="action_undo">Отмяна</string>
+    <string name="action_unfavorite">Премахване от любими</string>
     <string name="activities_favorite">Любими</string>
     <string name="activities_no_results">Все още няма действия като добавяне, промени и споделяния</string>
     <string name="activities_title">Активности /дейности/</string>
@@ -74,6 +76,7 @@
     <string name="category_movie">Филм</string>
     <string name="category_movies">Филми</string>
     <string name="category_music">Музика</string>
+    <string name="category_name">Име на категория</string>
     <string name="category_password">Парола</string>
     <string name="category_passwords">Пароли</string>
     <string name="category_play">Играене</string>
@@ -357,10 +360,6 @@
     <plurals name="bulk_notes_deleted">
         <item quantity="one">Изтрита една бележка</item>
         <item quantity="other">Изтрити %1$d бележки</item>
-    </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Възстановени една бележки</item>
-        <item quantity="other">Възстановени %1$d бележки</item>
     </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Споделяне на съдържание от %1$d бележки</item>

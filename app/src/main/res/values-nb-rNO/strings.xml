@@ -389,10 +389,6 @@
         <item quantity="one">Slettet ett notat</item>
         <item quantity="other">Slettet %1$d notater</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Gjenopprettet ett notat</item>
-        <item quantity="other">Gjenopprettet %1$d notater</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Del innhold i %1$d notat</item>
         <item quantity="other">Del innhold av %1$d notater</item>

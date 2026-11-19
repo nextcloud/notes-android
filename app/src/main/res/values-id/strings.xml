@@ -424,9 +424,6 @@
     <plurals name="bulk_notes_deleted">
         <item quantity="other">Berhasil menghapus %1$d catatan</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="other">Berhasil memulihkan %1$d catatan</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="other">Bagikan konten dari %1$d catatan</item>
     </plurals>

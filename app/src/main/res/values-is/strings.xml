@@ -444,10 +444,6 @@
         <item quantity="one">Eyddi einum minnispunkti</item>
         <item quantity="other">Eyddi %1$d minnispunktum</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Endurheimti einn minnispunkt</item>
-        <item quantity="other">Endurheimti %1$d minnispunkta</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Deila efni úr %1$d minnispunkti</item>
         <item quantity="other">Deila efni úr %1$d minnispunktum</item>

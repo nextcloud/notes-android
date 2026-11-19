@@ -416,12 +416,6 @@
         <item quantity="many">Usunięto %1$d notatek</item>
         <item quantity="other">Usunięto %1$d notatek</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Przywrócono jedną notatkę</item>
-        <item quantity="few">Przywrócono %1$d notatki</item>
-        <item quantity="many">Przywrócono %1$d notatek</item>
-        <item quantity="other">Przywrócono %1$d notatek</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Udostępnij zawartość %1$d notatki</item>
         <item quantity="few">Udostępnij zawartość %1$d notatek</item>

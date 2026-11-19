@@ -412,10 +412,6 @@
         <item quantity="one">Egy jegyzetet törölve</item>
         <item quantity="other">%1$d jegyzet törölve</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Egy jegyzet visszaállítva</item>
-        <item quantity="other">%1$d jegyzet visszaállítva</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="one">%1$d jegyzet tartalmának megosztása</item>
         <item quantity="other">%1$d jegyzet tartalmának megosztása</item>

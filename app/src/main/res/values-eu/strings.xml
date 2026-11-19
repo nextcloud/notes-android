@@ -379,10 +379,6 @@
         <item quantity="one">ohar ezabatu dira</item>
         <item quantity="other">%1$dohar ezabatu dira</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">ohar leheneratu dira</item>
-        <item quantity="other">%1$dohar leheneratu dira</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Partekatu %1$doharraren edukia</item>
         <item quantity="other">Partekatu %1$doharren edukia</item>

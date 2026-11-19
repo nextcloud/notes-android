@@ -31,6 +31,7 @@
     <string name="action_create">Νέα σημείωση</string>
     <string name="action_edit_category">Επεξεργασία κατηγορίας</string>
     <string name="action_edit_save">Αποθήκευση</string>
+    <string name="action_favorite">Προσθήκη στα αγαπημένα</string>
     <string name="action_formatting_help">Διαμόρφωση σε εξέλιξη</string>
     <string name="action_note_deleted">Διεγραμμένα %1$s</string>
     <string name="action_note_restored">Επαναφέρθηκαν %1$s</string>
@@ -41,6 +42,7 @@
     <string name="action_trashbin">Διεγραμμένες σημειώσεις</string>
     <string name="action_uncategorized">Μή-κατηγοριοποιημένα</string>
     <string name="action_undo">Αναίρεση</string>
+    <string name="action_unfavorite">Αφαίρεση από τα αγαπημένα</string>
     <string name="activities_favorite">Αγαπημένο</string>
     <string name="activities_no_results">Δεν υπάρχουν ακόμη συμβάντα όπως προσθήκες, αλλαγές και κοινοποιήσεις.</string>
     <string name="activities_title">Δραστηριότητες</string>
@@ -352,10 +354,6 @@
     <plurals name="bulk_notes_deleted">
         <item quantity="one">Διαγράφηκε μία σημείωση</item>
         <item quantity="other">Διαγράφηκαν %1$d σημειώσεις</item>
-    </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="one">Επαναφέρθηκε μία σημείωση</item>
-        <item quantity="other">Επαναφέρθηκαν %1$dσημειώσεις</item>
     </plurals>
     <plurals name="share_multiple">
         <item quantity="one">Διαμοιρασμός περιεχομένου %1$d σημείωσης</item>

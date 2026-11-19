@@ -334,9 +334,6 @@
     <plurals name="bulk_notes_deleted">
         <item quantity="other">Đã xóa %1$d ghi chú</item>
     </plurals>
-    <plurals name="bulk_notes_restored">
-        <item quantity="other">Đã khôi phục %1$d ghi chú</item>
-    </plurals>
     <plurals name="share_multiple">
         <item quantity="other">Chia sẻ nội dung của %1$d ghi chú</item>
     </plurals>
