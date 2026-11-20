@@ -169,7 +169,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     boolean canMoveNoteToAnotherAccounts = false;
 
-    private SyncErrorSnackbar syncErrorSnackbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,7 +188,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         this.coordinatorLayout = binding.activityNotesListView.activityNotesListView;
         this.swipeRefreshLayout = binding.activityNotesListView.swiperefreshlayout;
         this.fabCreate = binding.activityNotesListView.fabCreate;
-        syncErrorSnackbar = new SyncErrorSnackbar(this, coordinatorLayout, fabCreate);
         this.listView = binding.activityNotesListView.recyclerView;
 
         gridView = isGridViewEnabled();
@@ -226,7 +224,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         mainViewModel.getSyncStatus().observe(this, syncStatus -> swipeRefreshLayout.setRefreshing(syncStatus));
         mainViewModel.getSyncErrors().observe(this, exceptions -> {
             if (mainViewModel.containsNonInfrastructureRelatedItems(exceptions)) {
-                syncErrorSnackbar.show(exceptions);
+                BrandedSnackbar.showSyncError(this, coordinatorLayout, fabCreate, exceptions);
             }
         });
         mainViewModel.getSelectedCategory().observe(this, (selectedCategory) -> {
@@ -331,7 +329,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                     .setAnchorView(binding.activityNotesListView.fabCreate)
                                     .show();
                         } else {
-                            syncErrorSnackbar.show(t);
+                            BrandedSnackbar.showSyncError(MainActivity.this, coordinatorLayout, fabCreate, t);
                         }
                     });
                 }
@@ -622,7 +620,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                         .setAnchorView(binding.activityNotesListView.fabCreate)
                                         .show();
                             } else {
-                                syncErrorSnackbar.show(t);
+                                BrandedSnackbar.showSyncError(MainActivity.this, coordinatorLayout, fabCreate, t);
                             }
                         });
                     }
