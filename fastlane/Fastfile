@@ -5,10 +5,10 @@
 ## config
 # add following to your shell rc:
 # export FASTLANE_NOTES_UPLOAD_STORE_FILE=""
-# export FASTLANE_NOTES_UPLOAD_STORE_PASSWORD=""
 # export FASTLANE_NOTES_UPLOAD_KEY_ALIAS=""
-# export FASTLANE_NOTES_UPLOAD_KEY_PASSWORD=""
-# export FASTLANE_NEXTCLOUD_GITHUB_API_TOKEN=""
+#
+# Passwords and the GitHub API token are not read from the environment,
+# they are asked for when a release lane starts (see common.Fastfile).
 
 
 
@@ -18,11 +18,10 @@ skip_docs
 APP="notes"
 REPO="nextcloud/notes-android"
 
+# passwords are added at build time, see askForSigningPasswords in common.Fastfile
 GRADLE_SIGNING_PROPERTIES = {
   "android.injected.signing.store.file" => ENV["FASTLANE_NOTES_UPLOAD_STORE_FILE"],
-  "android.injected.signing.store.password" => ENV["FASTLANE_NOTES_UPLOAD_STORE_PASSWORD"],
   "android.injected.signing.key.alias" => ENV["FASTLANE_NOTES_UPLOAD_KEY_ALIAS"],
-  "android.injected.signing.key.password" => ENV["FASTLANE_NOTES_UPLOAD_KEY_PASSWORD"],
 }.freeze
 
 import("./common.Fastfile")
