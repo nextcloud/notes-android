@@ -6,6 +6,7 @@
  */
 package it.niedermann.owncloud.notes.main
 
+import android.accounts.NetworkErrorException
 import com.nextcloud.android.sso.exceptions.NextcloudApiNotRespondingException
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException
@@ -28,6 +29,7 @@ class SyncErrorMessage(private val exceptions: Collection<Throwable>) {
         is NextcloudNetworkException, is NextcloudApiNotRespondingException -> SyncFailureReason.SERVER_UNREACHABLE
         is TokenMismatchException -> SyncFailureReason.TOKEN_MISMATCH
         is NextcloudFilesAppAccountNotFoundException -> SyncFailureReason.ACCOUNT_REMOVED
+        is NetworkErrorException -> SyncFailureReason.NO_NETWORK
         else -> null
     }
 }

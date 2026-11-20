@@ -20,7 +20,6 @@ import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.UNCATEGORIZED;
 import static it.niedermann.owncloud.notes.shared.util.SSOUtil.askForNewAccount;
 
-import android.accounts.NetworkErrorException;
 import android.animation.AnimatorInflater;
 import android.app.SearchManager;
 import android.content.Context;
@@ -71,7 +70,6 @@ import com.nextcloud.android.common.ui.theme.utils.ColorRole;
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.AccountImportCancelledException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
-import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.exceptions.UnknownErrorException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
@@ -79,8 +77,6 @@ import com.owncloud.android.lib.common.utils.Log_OC;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.net.HttpURLConnection;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -324,13 +320,10 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                     runOnUiThread(() -> {
                         if (t instanceof IntendedOfflineException) {
                             Log.i(TAG, "Capabilities and notes not updated because " + nextAccount.getAccountName() + " is offline by intention.");
-                        } else if (t instanceof NetworkErrorException) {
-                            BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG)
-                                    .setAnchorView(binding.activityNotesListView.fabCreate)
-                                    .show();
-                        } else {
-                            BrandedSnackbar.showSyncError(MainActivity.this, coordinatorLayout, fabCreate, t);
+                            return;
                         }
+
+                        BrandedSnackbar.showSyncError(MainActivity.this, coordinatorLayout, fabCreate, t);
                     });
                 }
             });
@@ -611,17 +604,10 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                             swipeRefreshLayout.setRefreshing(false);
                             if (t instanceof IntendedOfflineException) {
                                 Log.i(TAG, "Capabilities and notes not updated because " + currentAccount.getAccountName() + " is offline by intention.");
-                            } else if (t instanceof NextcloudHttpRequestFailedException && ((NextcloudHttpRequestFailedException) t).getStatusCode() == HttpURLConnection.HTTP_UNAVAILABLE) {
-                                BrandedSnackbar.make(coordinatorLayout, R.string.error_maintenance_mode, Snackbar.LENGTH_LONG)
-                                        .setAnchorView(binding.activityNotesListView.fabCreate)
-                                        .show();
-                            } else if (t instanceof NetworkErrorException) {
-                                BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG)
-                                        .setAnchorView(binding.activityNotesListView.fabCreate)
-                                        .show();
-                            } else {
-                                BrandedSnackbar.showSyncError(MainActivity.this, coordinatorLayout, fabCreate, t);
+                                return;
                             }
+
+                            BrandedSnackbar.showSyncError(MainActivity.this, coordinatorLayout, fabCreate, t);
                         });
                     }
                 });

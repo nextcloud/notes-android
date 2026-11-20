@@ -57,6 +57,8 @@ object BrandedSnackbar {
             SyncFailureReason.ACCOUNT_REMOVED ->
                 snackbar.setAction(R.string.choose_account) { chooseAccount(activity) }
 
+            SyncFailureReason.NO_NETWORK, SyncFailureReason.MAINTENANCE -> Unit
+
             else -> snackbar.setAction(R.string.simple_more) { showDetails(activity, exceptions) }
         }
 
