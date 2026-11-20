@@ -868,7 +868,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                 ApiProvider.getInstance().invalidateAPICache(ssoAccount);
                                 if (e instanceof UnknownErrorException && e.getMessage() != null && e.getMessage().contains("No address associated with hostname")) {
                                     // https://github.com/nextcloud/notes-android/issues/1014
-                                    runOnUiThread(() -> Snackbar.make(coordinatorLayout, R.string.you_have_to_be_connected_to_the_internet_in_order_to_add_an_account, Snackbar.LENGTH_LONG)
+                                    runOnUiThread(() -> BrandedSnackbar.make(coordinatorLayout, R.string.you_have_to_be_connected_to_the_internet_in_order_to_add_an_account, Snackbar.LENGTH_LONG)
                                             .setAnchorView(binding.activityNotesListView.fabCreate)
                                             .show());
                                 } else {
