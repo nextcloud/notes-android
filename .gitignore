@@ -5,6 +5,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # built application files
 *.apk
+*.aab
 *.ap_
 
 # files for the dex VM
