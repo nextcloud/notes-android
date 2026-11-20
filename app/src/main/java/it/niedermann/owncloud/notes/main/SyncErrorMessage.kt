@@ -14,8 +14,8 @@ import com.nextcloud.android.sso.exceptions.TokenMismatchException
 import it.niedermann.owncloud.notes.persistence.NoteSyncException
 import it.niedermann.owncloud.notes.persistence.SyncFailureReason
 
-object SyncErrorMessage {
-    fun reasonOf(exceptions: Collection<Throwable>): SyncFailureReason =
+class SyncErrorMessage(private val exceptions: Collection<Throwable>) {
+    fun reasonOf(): SyncFailureReason =
         exceptions.map { it.syncFailureReason() }.distinct().singleOrNull() ?: SyncFailureReason.UNKNOWN
 
     private fun Throwable.syncFailureReason(): SyncFailureReason =

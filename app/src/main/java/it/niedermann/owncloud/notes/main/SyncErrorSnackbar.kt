@@ -17,10 +17,9 @@ import it.niedermann.owncloud.notes.branding.BrandedSnackbar
 import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment
 import it.niedermann.owncloud.notes.persistence.SyncFailureReason
 
-object SyncErrorSnackbar {
-    @JvmStatic
-    fun show(activity: FragmentActivity, parent: View, anchor: View, exceptions: Collection<Throwable>) {
-        val reason = SyncErrorMessage.reasonOf(exceptions)
+class SyncErrorSnackbar(private val activity: FragmentActivity) {
+    fun show(exceptions: Collection<Throwable>, parent: View, anchor: View) {
+        val reason = SyncErrorMessage(exceptions).reasonOf()
         val snackbar = BrandedSnackbar.make(parent, reason.message, Snackbar.LENGTH_LONG)
             .setAnchorView(anchor)
         when (reason) {
@@ -35,10 +34,6 @@ object SyncErrorSnackbar {
 
         snackbar.show()
     }
-
-    @JvmStatic
-    fun show(activity: FragmentActivity, parent: View, anchor: View, exception: Throwable) =
-        show(activity, parent, anchor, listOf(exception))
 
     private fun requestAccessAgain(activity: FragmentActivity) {
         try {
