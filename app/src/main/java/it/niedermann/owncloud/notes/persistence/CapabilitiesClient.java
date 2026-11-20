@@ -22,6 +22,7 @@ import it.niedermann.owncloud.notes.persistence.sync.OcsAPI;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.OcsResponse;
 import it.niedermann.owncloud.notes.shared.model.OcsUser;
+import it.niedermann.owncloud.notes.shared.util.extensions.HeaderExtensions;
 import retrofit2.Response;
 
 @WorkerThread
@@ -39,7 +40,7 @@ public class CapabilitiesClient {
             final var capabilities = response.getResponse().ocs.data;
             final var headers = response.getHeaders();
             if (headers != null) {
-                capabilities.setETag(headers.get(HEADER_KEY_ETAG));
+                capabilities.setETag(HeaderExtensions.getHeader(headers, HEADER_KEY_ETAG));
             } else {
                 Log.w(TAG, "Response headers of capabilities are null");
             }
