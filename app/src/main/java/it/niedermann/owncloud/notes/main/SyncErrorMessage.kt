@@ -6,27 +6,48 @@
  */
 package it.niedermann.owncloud.notes.main
 
-import androidx.annotation.StringRes
+import android.content.Context
 import com.nextcloud.android.sso.exceptions.NextcloudApiNotRespondingException
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException
 import com.nextcloud.android.sso.exceptions.NextcloudNetworkException
 import com.nextcloud.android.sso.exceptions.TokenMismatchException
+import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.persistence.NoteSyncException
 import it.niedermann.owncloud.notes.persistence.SyncFailureReason
 
 object SyncErrorMessage {
     @JvmStatic
-    @StringRes
-    fun of(exceptions: Collection<Throwable>): Int =
-        (exceptions.map { it.syncFailureReason() }.distinct().singleOrNull() ?: SyncFailureReason.UNKNOWN).message
+    fun of(context: Context, exceptions: Collection<Throwable>): String {
+        val reasons = exceptions.map { it.syncFailureReason() }.distinct()
+        val reason = reasons.singleOrNull() ?: SyncFailureReason.UNKNOWN
+        if (reason != SyncFailureReason.LOCKED) {
+            return context.getString(reason.message)
+        }
+        return lockedMessage(context, exceptions.mapNotNull { it.lockedNoteTitle() }.distinct())
+    }
 
     @JvmStatic
-    @StringRes
-    fun of(exception: Throwable): Int = exception.syncFailureReason().message
+    fun of(context: Context, exception: Throwable): String = of(context, listOf(exception))
+
+    private fun lockedMessage(context: Context, lockedNoteTitles: List<String>): String = when (lockedNoteTitles.size) {
+        0 -> context.getString(SyncFailureReason.LOCKED.message)
+        1 -> context.getString(R.string.error_sync_note_locked, lockedNoteTitles.single())
+        else -> context.resources.getQuantityString(
+            R.plurals.error_sync_notes_locked,
+            lockedNoteTitles.size,
+            lockedNoteTitles.size,
+        )
+    }
+
+    private fun Throwable.lockedNoteTitle(): String? = causeChain()
+        .filterIsInstance<NoteSyncException>()
+        .firstOrNull { it.reason == SyncFailureReason.LOCKED }
+        ?.noteTitle
 
     private fun Throwable.syncFailureReason(): SyncFailureReason =
-        generateSequence(this) { it.cause }.firstNotNullOfOrNull { it.directSyncFailureReason() }
-            ?: SyncFailureReason.UNKNOWN
+        causeChain().firstNotNullOfOrNull { it.directSyncFailureReason() } ?: SyncFailureReason.UNKNOWN
+
+    private fun Throwable.causeChain(): Sequence<Throwable> = generateSequence(this) { it.cause }
 
     private fun Throwable.directSyncFailureReason(): SyncFailureReason? = when (this) {
         is NoteSyncException -> reason

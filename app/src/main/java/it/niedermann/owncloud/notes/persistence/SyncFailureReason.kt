@@ -18,7 +18,7 @@ enum class SyncFailureReason(@StringRes val message: Int) {
     UNAUTHORIZED(R.string.error_sync_unauthorized),
     PERMISSION(R.string.error_sync_permission),
     NOTES_APP_UNAVAILABLE(R.string.error_sync_notes_app_unavailable),
-    LOCKED(R.string.error_sync_locked),
+    LOCKED(R.string.error_sync_unknown_note_locked),
     SERVER_ERROR(R.string.error_sync_server_error),
     MAINTENANCE(R.string.error_sync_maintenance),
     INSUFFICIENT_STORAGE(R.string.error_sync_insufficient_storage),
