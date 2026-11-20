@@ -204,7 +204,7 @@
     <string name="error_sync_server_unreachable">Could not reach your server. Check your connection and the Nextcloud Files app.</string>
     <string name="error_sync_no_network">No network connection. Your changes will sync later.</string>
     <string name="error_sync_token">Notes lost access to your Nextcloud account. Grant access again to keep syncing.</string>
-    <string name="error_sync_account_removed">This account was removed from the Nextcloud Files app. Choose an account to keep syncing.</string>
+    <string name="error_sync_account_removed">This account was removed from the Nextcloud Files app. Log in again with the same account (%1$s) to keep syncing.</string>
     <string name="error_no_network">No network connection</string>
     <string name="error_maintenance_mode">Server is in maintenance mode</string>
     <string name="error_unknown">An unknown error has occurred.</string>

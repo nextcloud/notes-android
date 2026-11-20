@@ -6,6 +6,7 @@
  */
 package it.niedermann.owncloud.notes.branding
 
+import android.content.Context
 import android.view.View
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
@@ -20,13 +21,14 @@ import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment
 import it.niedermann.owncloud.notes.main.SyncErrorMessage
 import it.niedermann.owncloud.notes.persistence.FilesAppAccount
 import it.niedermann.owncloud.notes.persistence.SyncFailureReason
+import it.niedermann.owncloud.notes.persistence.entity.Account
 import java.lang.ref.WeakReference
 
 object BrandedSnackbar {
     private const val SYNC_ERROR_MAX_LINES = 4
 
     private var syncErrorSnackbar: WeakReference<Snackbar>? = null
-    private var currentAccountName: String? = null
+    private var currentAccount: Account? = null
 
     @JvmStatic
     fun make(
@@ -57,7 +59,7 @@ object BrandedSnackbar {
         val reason = SyncErrorMessage(exceptions).reasonOf()
         if (reason == SyncFailureReason.ACCOUNT_REMOVED && isCurrentAccountAvailable(activity)) return
 
-        val snackbar = make(view, reason.message, reason.snackbarDuration())
+        val snackbar = make(view, reason.text(view.context), reason.snackbarDuration())
             .setTextMaxLines(SYNC_ERROR_MAX_LINES)
             .setAnchorView(anchor)
         when (reason) {
@@ -77,8 +79,8 @@ object BrandedSnackbar {
     }
 
     @JvmStatic
-    fun onCurrentAccountChanged(accountName: String) {
-        currentAccountName = accountName
+    fun onCurrentAccountChanged(account: Account) {
+        currentAccount = account
         syncErrorSnackbar?.get()?.dismiss()
         syncErrorSnackbar = null
     }
@@ -87,13 +89,18 @@ object BrandedSnackbar {
     fun showSyncError(activity: FragmentActivity, view: View, anchor: View, exception: Throwable) =
         showSyncError(activity, view, anchor, listOf(exception))
 
+    private fun SyncFailureReason.text(context: Context): CharSequence = when (this) {
+        SyncFailureReason.ACCOUNT_REMOVED -> context.getString(message, currentAccount?.userName)
+        else -> context.getText(message)
+    }
+
     private fun SyncFailureReason.snackbarDuration(): Int = when (this) {
         SyncFailureReason.TOKEN_MISMATCH, SyncFailureReason.ACCOUNT_REMOVED -> Snackbar.LENGTH_INDEFINITE
         else -> Snackbar.LENGTH_LONG
     }
 
     private fun isCurrentAccountAvailable(activity: FragmentActivity): Boolean =
-        currentAccountName?.let { FilesAppAccount.exists(activity, it) } == true
+        currentAccount?.let { FilesAppAccount.exists(activity, it.accountName) } == true
 
     private fun requestAccessAgain(activity: FragmentActivity) {
         try {
