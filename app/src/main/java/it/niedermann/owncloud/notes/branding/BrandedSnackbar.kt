@@ -26,6 +26,7 @@ object BrandedSnackbar {
     private const val SYNC_ERROR_MAX_LINES = 4
 
     private var syncErrorSnackbar: WeakReference<Snackbar>? = null
+    private var currentAccountName: String? = null
 
     @JvmStatic
     fun make(
@@ -76,7 +77,8 @@ object BrandedSnackbar {
     }
 
     @JvmStatic
-    fun dismissSyncError() {
+    fun onCurrentAccountChanged(accountName: String) {
+        currentAccountName = accountName
         syncErrorSnackbar?.get()?.dismiss()
         syncErrorSnackbar = null
     }
@@ -90,12 +92,8 @@ object BrandedSnackbar {
         else -> Snackbar.LENGTH_LONG
     }
 
-    private fun isCurrentAccountAvailable(activity: FragmentActivity): Boolean = try {
-        FilesAppAccount.ensureExists(activity, SingleAccountHelper.getCurrentSingleSignOnAccount(activity).name)
-        true
-    } catch (e: SSOException) {
-        false
-    }
+    private fun isCurrentAccountAvailable(activity: FragmentActivity): Boolean =
+        currentAccountName?.let { FilesAppAccount.exists(activity, it) } == true
 
     private fun requestAccessAgain(activity: FragmentActivity) {
         try {

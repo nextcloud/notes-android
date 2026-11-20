@@ -23,8 +23,11 @@ object FilesAppAccount {
     @JvmStatic
     @Throws(NextcloudFilesAppAccountNotFoundException::class)
     fun ensureExists(context: Context, accountName: String) {
-        if (AccountImporter.getAccountForName(context, accountName) == null) {
+        if (!exists(context, accountName)) {
             throw NextcloudFilesAppAccountNotFoundException(context, accountName)
         }
     }
+
+    fun exists(context: Context, accountName: String): Boolean =
+        AccountImporter.getAccountForName(context, accountName) != null
 }
