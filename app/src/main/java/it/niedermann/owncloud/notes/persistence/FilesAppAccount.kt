@@ -1,0 +1,24 @@
+/*
+ * Nextcloud - Android Client
+ *
+ * SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ */
+package it.niedermann.owncloud.notes.persistence
+
+import android.content.Context
+import com.nextcloud.android.sso.AccountImporter
+import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException
+import com.nextcloud.android.sso.model.SingleSignOnAccount
+
+object FilesAppAccount {
+    @JvmStatic
+    @Throws(NextcloudFilesAppAccountNotFoundException::class)
+    fun require(context: Context, accountName: String): SingleSignOnAccount {
+        if (AccountImporter.getAccountForName(context, accountName) == null) {
+            throw NextcloudFilesAppAccountNotFoundException(context, accountName)
+        }
+
+        return AccountImporter.getSingleSignOnAccount(context, accountName)
+    }
+}

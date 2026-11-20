@@ -6,8 +6,8 @@
  */
 package it.niedermann.owncloud.notes.main
 
-import androidx.annotation.StringRes
 import com.nextcloud.android.sso.exceptions.NextcloudApiNotRespondingException
+import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException
 import com.nextcloud.android.sso.exceptions.NextcloudNetworkException
 import com.nextcloud.android.sso.exceptions.TokenMismatchException
@@ -15,13 +15,7 @@ import it.niedermann.owncloud.notes.persistence.NoteSyncException
 import it.niedermann.owncloud.notes.persistence.SyncFailureReason
 
 object SyncErrorMessage {
-    @StringRes
-    fun of(exceptions: Collection<Throwable>): Int = reasonOf(exceptions).message
-
-    fun isTokenMismatch(exceptions: Collection<Throwable>): Boolean =
-        reasonOf(exceptions) == SyncFailureReason.TOKEN_MISMATCH
-
-    private fun reasonOf(exceptions: Collection<Throwable>): SyncFailureReason =
+    fun reasonOf(exceptions: Collection<Throwable>): SyncFailureReason =
         exceptions.map { it.syncFailureReason() }.distinct().singleOrNull() ?: SyncFailureReason.UNKNOWN
 
     private fun Throwable.syncFailureReason(): SyncFailureReason =
@@ -33,6 +27,7 @@ object SyncErrorMessage {
         is NextcloudHttpRequestFailedException -> SyncFailureReason.fromStatusCode(statusCode)
         is NextcloudNetworkException, is NextcloudApiNotRespondingException -> SyncFailureReason.SERVER_UNREACHABLE
         is TokenMismatchException -> SyncFailureReason.TOKEN_MISMATCH
+        is NextcloudFilesAppAccountNotFoundException -> SyncFailureReason.ACCOUNT_REMOVED
         else -> null
     }
 }

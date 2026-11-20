@@ -888,7 +888,6 @@ public class NotesRepository {
             syncActive.putIfAbsent(account.getId(), false);
             Log.d(TAG, "Sync requested (" + (onlyLocalChanges ? "onlyLocalChanges" : "full") + "; " + (Boolean.TRUE.equals(syncActive.get(account.getId())) ? "sync active" : "sync NOT active") + ") ...");
             if (isSyncPossible() && (!Boolean.TRUE.equals(syncActive.get(account.getId())) || onlyLocalChanges)) {
-                syncActive.put(account.getId(), true);
                 try {
                     Log.d(TAG, "... starting now");
                     final NotesServerSyncTask syncTask = new NotesServerSyncTask(context, this, account, onlyLocalChanges, apiProvider) {
@@ -938,10 +937,11 @@ public class NotesRepository {
                         syncTask.addCallbacks(account, callbacksPull.get(account.getId()));
                         callbacksPull.put(account.getId(), new ArrayList<>());
                     }
+                    syncActive.put(account.getId(), true);
                     syncExecutor.submit(syncTask);
                 } catch (NextcloudFilesAppAccountNotFoundException e) {
                     Log.e(TAG, "... Could not find " + SingleSignOnAccount.class.getSimpleName() + " for account name " + account.getAccountName());
-                    e.printStackTrace();
+                    syncErrors.postValue(new ArrayList<>(List.of(e)));
                 }
             } else if (!onlyLocalChanges) {
                 Log.d(TAG, "... scheduled");

@@ -24,6 +24,7 @@ enum class SyncFailureReason(@StringRes val message: Int) {
     INSUFFICIENT_STORAGE(R.string.error_sync_insufficient_storage),
     SERVER_UNREACHABLE(R.string.error_sync_server_unreachable),
     TOKEN_MISMATCH(R.string.error_sync_token),
+    ACCOUNT_REMOVED(R.string.error_sync_account_removed),
     UNKNOWN(R.string.error_synchronization);
 
     companion object {

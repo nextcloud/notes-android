@@ -18,7 +18,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.NextcloudApiNotRespondingException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
@@ -71,7 +70,7 @@ abstract class NotesServerSyncTask extends Thread {
         this.context = context;
         this.repo = repo;
         this.localAccount = localAccount;
-        this.ssoAccount = AccountImporter.getSingleSignOnAccount(context, localAccount.getAccountName());
+        this.ssoAccount = FilesAppAccount.require(context, localAccount.getAccountName());
         this.onlyLocalChanges = onlyLocalChanges;
         this.apiProvider = apiProvider;
     }

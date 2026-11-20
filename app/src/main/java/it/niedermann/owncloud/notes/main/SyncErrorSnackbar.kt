@@ -15,17 +15,24 @@ import com.nextcloud.android.sso.helper.SingleAccountHelper
 import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar
 import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment
+import it.niedermann.owncloud.notes.persistence.SyncFailureReason
 
 object SyncErrorSnackbar {
     @JvmStatic
     fun show(activity: FragmentActivity, parent: View, anchor: View, exceptions: Collection<Throwable>) {
-        val snackbar = BrandedSnackbar.make(parent, SyncErrorMessage.of(exceptions), Snackbar.LENGTH_LONG)
+        val reason = SyncErrorMessage.reasonOf(exceptions)
+        val snackbar = BrandedSnackbar.make(parent, reason.message, Snackbar.LENGTH_LONG)
             .setAnchorView(anchor)
-        if (SyncErrorMessage.isTokenMismatch(exceptions)) {
-            snackbar.setAction(R.string.error_action_grant_access) { requestAccessAgain(activity) }
-        } else {
-            snackbar.setAction(R.string.simple_more) { showDetails(activity, exceptions) }
+        when (reason) {
+            SyncFailureReason.TOKEN_MISMATCH ->
+                snackbar.setAction(R.string.error_action_grant_access) { requestAccessAgain(activity) }
+
+            SyncFailureReason.ACCOUNT_REMOVED ->
+                snackbar.setAction(R.string.choose_account) { chooseAccount(activity) }
+
+            else -> snackbar.setAction(R.string.simple_more) { showDetails(activity, exceptions) }
         }
+
         snackbar.show()
     }
 
@@ -37,6 +44,14 @@ object SyncErrorSnackbar {
         try {
             val ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(activity)
             AccountImporter.authenticateSingleSignAccount(activity, ssoAccount)
+        } catch (e: SSOException) {
+            showDetails(activity, listOf(e))
+        }
+    }
+
+    private fun chooseAccount(activity: FragmentActivity) {
+        try {
+            AccountImporter.pickNewAccount(activity)
         } catch (e: SSOException) {
             showDetails(activity, listOf(e))
         }
