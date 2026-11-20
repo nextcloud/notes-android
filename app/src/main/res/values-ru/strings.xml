@@ -30,6 +30,7 @@
     <string name="account_switch_dialog_status_fetching_error_message">Не удалось получить статус. Повторите попытку.</string>
     <string name="action_back">Назад</string>
     <string name="action_create">Новая заметка</string>
+    <string name="action_delete_note">Удалить заметку</string>
     <string name="action_edit_category">Изменить категорию</string>
     <string name="action_edit_save">Сохранить</string>
     <string name="action_favorite">Добавить в избранное</string>
