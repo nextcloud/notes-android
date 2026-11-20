@@ -6,9 +6,13 @@
  */
 package it.niedermann.owncloud.notes.persistence
 
+import com.nextcloud.android.sso.helper.Retrofit2Helper
 import retrofit2.Response
 
 class NoteSyncException(noteTitle: String, response: Response<*>) :
-    Exception("Could not sync \"$noteTitle\" (HTTP ${response.code()}): ${response.message()}") {
+    Exception(
+        "Could not sync \"$noteTitle\" (HTTP ${response.code()}): ${response.message()}",
+        Retrofit2Helper.getException(response)
+    ) {
     val reason = SyncFailureReason.fromStatusCode(response.code())
 }

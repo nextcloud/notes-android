@@ -23,7 +23,9 @@ enum class SyncFailureReason(@StringRes val message: Int) {
     MAINTENANCE(R.string.error_sync_maintenance),
     INSUFFICIENT_STORAGE(R.string.error_sync_insufficient_storage),
     SERVER_UNREACHABLE(R.string.error_sync_server_unreachable),
-    TOKEN_MISMATCH(R.string.error_sync_token_mismatch),
+    NO_NETWORK(R.string.error_sync_no_network),
+    TOKEN_MISMATCH(R.string.error_sync_token),
+    ACCOUNT_REMOVED(R.string.error_sync_account_removed),
     UNKNOWN(R.string.error_synchronization);
 
     companion object {
@@ -31,7 +33,7 @@ enum class SyncFailureReason(@StringRes val message: Int) {
         private const val HTTP_INSUFFICIENT_STORAGE = 507
         private const val SSO_LOCAL_FAILURE = 900
 
-        fun fromStatusCode(statusCode: Int): SyncFailureReason = when (statusCode) {
+        fun fromStatusCode(statusCode: Int): SyncFailureReason? = when (statusCode) {
             HTTP_UNAUTHORIZED -> UNAUTHORIZED
             HTTP_FORBIDDEN -> PERMISSION
             HTTP_NOT_FOUND -> NOTES_APP_UNAVAILABLE
@@ -39,7 +41,7 @@ enum class SyncFailureReason(@StringRes val message: Int) {
             HTTP_INTERNAL_ERROR -> SERVER_ERROR
             HTTP_UNAVAILABLE -> MAINTENANCE
             HTTP_INSUFFICIENT_STORAGE -> INSUFFICIENT_STORAGE
-            SSO_LOCAL_FAILURE -> SERVER_UNREACHABLE
+            SSO_LOCAL_FAILURE -> null
             else -> UNKNOWN
         }
     }

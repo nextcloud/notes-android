@@ -6,23 +6,18 @@
  */
 package it.niedermann.owncloud.notes.main
 
-import androidx.annotation.StringRes
+import android.accounts.NetworkErrorException
 import com.nextcloud.android.sso.exceptions.NextcloudApiNotRespondingException
+import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException
 import com.nextcloud.android.sso.exceptions.NextcloudNetworkException
 import com.nextcloud.android.sso.exceptions.TokenMismatchException
 import it.niedermann.owncloud.notes.persistence.NoteSyncException
 import it.niedermann.owncloud.notes.persistence.SyncFailureReason
 
-object SyncErrorMessage {
-    @JvmStatic
-    @StringRes
-    fun of(exceptions: Collection<Throwable>): Int =
-        (exceptions.map { it.syncFailureReason() }.distinct().singleOrNull() ?: SyncFailureReason.UNKNOWN).message
-
-    @JvmStatic
-    @StringRes
-    fun of(exception: Throwable): Int = exception.syncFailureReason().message
+class SyncErrorMessage(private val exceptions: Collection<Throwable>) {
+    fun reasonOf(): SyncFailureReason =
+        exceptions.map { it.syncFailureReason() }.distinct().singleOrNull() ?: SyncFailureReason.UNKNOWN
 
     private fun Throwable.syncFailureReason(): SyncFailureReason =
         generateSequence(this) { it.cause }.firstNotNullOfOrNull { it.directSyncFailureReason() }
@@ -33,6 +28,8 @@ object SyncErrorMessage {
         is NextcloudHttpRequestFailedException -> SyncFailureReason.fromStatusCode(statusCode)
         is NextcloudNetworkException, is NextcloudApiNotRespondingException -> SyncFailureReason.SERVER_UNREACHABLE
         is TokenMismatchException -> SyncFailureReason.TOKEN_MISMATCH
+        is NextcloudFilesAppAccountNotFoundException -> SyncFailureReason.ACCOUNT_REMOVED
+        is NetworkErrorException -> SyncFailureReason.NO_NETWORK
         else -> null
     }
 }

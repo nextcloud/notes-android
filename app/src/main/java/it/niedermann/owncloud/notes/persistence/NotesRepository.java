@@ -85,6 +85,7 @@ import it.niedermann.owncloud.notes.shared.util.ApiVersionUtil;
 import it.niedermann.owncloud.notes.shared.util.ConnectionLiveData;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 import it.niedermann.owncloud.notes.shared.util.SSOUtil;
+import it.niedermann.owncloud.notes.shared.util.SingleLiveEvent;
 import retrofit2.Call;
 
 @SuppressWarnings("UnusedReturnValue")
@@ -107,7 +108,7 @@ public class NotesRepository {
     private String syncOnlyOnWifiKey;
     private boolean syncOnlyOnWifi;
     private final MutableLiveData<Boolean> syncStatus = new MutableLiveData<>(false);
-    private final MutableLiveData<ArrayList<Throwable>> syncErrors = new MutableLiveData<>();
+    private final SingleLiveEvent<ArrayList<Throwable>> syncErrors = new SingleLiveEvent<>();
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
 
     private final Observer<? super ConnectionLiveData.ConnectionType> syncObserver = (Observer<ConnectionLiveData.ConnectionType>) connectionType -> {
@@ -887,7 +888,6 @@ public class NotesRepository {
             syncActive.putIfAbsent(account.getId(), false);
             Log.d(TAG, "Sync requested (" + (onlyLocalChanges ? "onlyLocalChanges" : "full") + "; " + (Boolean.TRUE.equals(syncActive.get(account.getId())) ? "sync active" : "sync NOT active") + ") ...");
             if (isSyncPossible() && (!Boolean.TRUE.equals(syncActive.get(account.getId())) || onlyLocalChanges)) {
-                syncActive.put(account.getId(), true);
                 try {
                     Log.d(TAG, "... starting now");
                     final NotesServerSyncTask syncTask = new NotesServerSyncTask(context, this, account, onlyLocalChanges, apiProvider) {
@@ -937,10 +937,11 @@ public class NotesRepository {
                         syncTask.addCallbacks(account, callbacksPull.get(account.getId()));
                         callbacksPull.put(account.getId(), new ArrayList<>());
                     }
+                    syncActive.put(account.getId(), true);
                     syncExecutor.submit(syncTask);
                 } catch (NextcloudFilesAppAccountNotFoundException e) {
                     Log.e(TAG, "... Could not find " + SingleSignOnAccount.class.getSimpleName() + " for account name " + account.getAccountName());
-                    e.printStackTrace();
+                    syncErrors.postValue(new ArrayList<>(List.of(e)));
                 }
             } else if (!onlyLocalChanges) {
                 Log.d(TAG, "... scheduled");
