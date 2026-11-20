@@ -18,9 +18,8 @@ import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_EDITED;
 import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_FAVORITED;
 import static it.niedermann.owncloud.notes.shared.model.DBStatus.VOID;
 
-import android.content.Context;
-
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.nextcloud.android.sso.api.ParsedResponse;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
@@ -49,6 +48,8 @@ import it.niedermann.owncloud.notes.shared.model.SyncResultStatus;
 @Config(sdk = 36)
 public class NotesServerSyncTaskTest {
 
+    private static final String ACCOUNT_NAME = "test@example.com";
+
     @Rule
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
 
@@ -61,9 +62,10 @@ public class NotesServerSyncTaskTest {
 
     @Before
     public void setup() throws NextcloudFilesAppAccountNotFoundException, IOException {
+        when(account.getAccountName()).thenReturn(ACCOUNT_NAME);
         when(apiProvider.getNotesAPI(any(), any(), any())).thenReturn(notesAPI);
         NotesTestingUtil.mockSingleSignOn(new SingleSignOnAccount(account.getAccountName(), account.getUserName(), "", account.getUrl(), ""));
-        this.task = new NotesServerSyncTask(mock(Context.class), repo, account, false, apiProvider) {
+        this.task = new NotesServerSyncTask(ApplicationProvider.getApplicationContext(), repo, account, false, apiProvider) {
             @Override
             void onPreExecute() {
 

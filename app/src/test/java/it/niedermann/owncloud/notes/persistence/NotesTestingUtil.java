@@ -6,6 +6,7 @@
  */
 package it.niedermann.owncloud.notes.persistence;
 
+import android.accounts.AccountManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -24,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 
 public class NotesTestingUtil {
 
+    private static final String FILES_APP_ACCOUNT_TYPE = "nextcloud";
     private static long currentLong = 1;
 
     private NotesTestingUtil() {
@@ -62,5 +64,8 @@ public class NotesTestingUtil {
         final var sharedPrefs = ApplicationProvider.getApplicationContext().getSharedPreferences("TEMP_SHARED_PREFS_" + currentLong++, Context.MODE_PRIVATE);
         sharedPrefs.edit().putString("PREF_ACCOUNT_STRING" + ssoAccount.name, SingleSignOnAccount.toString(ssoAccount)).commit();
         AccountImporter.setSharedPreferences(sharedPrefs);
+
+        AccountManager.get(ApplicationProvider.getApplicationContext())
+                .addAccountExplicitly(new android.accounts.Account(ssoAccount.name, FILES_APP_ACCOUNT_TYPE), null, null);
     }
 }
