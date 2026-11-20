@@ -177,7 +177,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
         super.onCreate(savedInstanceState);
 
-        syncErrorSnackbar = new SyncErrorSnackbar(this);
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         CapabilitiesWorker.update(this);
         binding = DrawerLayoutBinding.inflate(getLayoutInflater());
@@ -190,6 +189,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         this.coordinatorLayout = binding.activityNotesListView.activityNotesListView;
         this.swipeRefreshLayout = binding.activityNotesListView.swiperefreshlayout;
         this.fabCreate = binding.activityNotesListView.fabCreate;
+        syncErrorSnackbar = new SyncErrorSnackbar(this, coordinatorLayout, fabCreate);
         this.listView = binding.activityNotesListView.recyclerView;
 
         gridView = isGridViewEnabled();
@@ -226,7 +226,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         mainViewModel.getSyncStatus().observe(this, syncStatus -> swipeRefreshLayout.setRefreshing(syncStatus));
         mainViewModel.getSyncErrors().observe(this, exceptions -> {
             if (mainViewModel.containsNonInfrastructureRelatedItems(exceptions)) {
-                syncErrorSnackbar.show(coordinatorLayout, binding.activityNotesListView.fabCreate, new ArrayList<>(exceptions));
+                syncErrorSnackbar.show(exceptions);
             }
         });
         mainViewModel.getSelectedCategory().observe(this, (selectedCategory) -> {
@@ -331,7 +331,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                     .setAnchorView(binding.activityNotesListView.fabCreate)
                                     .show();
                         } else {
-                            syncErrorSnackbar.show(coordinatorLayout, binding.activityNotesListView.fabCreate, t);
+                            syncErrorSnackbar.show(t);
                         }
                     });
                 }
@@ -622,7 +622,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                         .setAnchorView(binding.activityNotesListView.fabCreate)
                                         .show();
                             } else {
-                                syncErrorSnackbar.show(coordinatorLayout, binding.activityNotesListView.fabCreate, t);
+                                syncErrorSnackbar.show(t);
                             }
                         });
                     }

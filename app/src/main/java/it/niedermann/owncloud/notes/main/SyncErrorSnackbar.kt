@@ -17,42 +17,48 @@ import it.niedermann.owncloud.notes.branding.BrandedSnackbar
 import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment
 import it.niedermann.owncloud.notes.persistence.SyncFailureReason
 
-class SyncErrorSnackbar(private val activity: FragmentActivity) {
-    fun show(exceptions: Collection<Throwable>, parent: View, anchor: View) {
+class SyncErrorSnackbar(
+    private val activity: FragmentActivity,
+    private val parent: View,
+    private val anchor: View
+) {
+    fun show(exceptions: Collection<Throwable>) {
         val reason = SyncErrorMessage(exceptions).reasonOf()
         val snackbar = BrandedSnackbar.make(parent, reason.message, Snackbar.LENGTH_LONG)
             .setAnchorView(anchor)
         when (reason) {
             SyncFailureReason.TOKEN_MISMATCH ->
-                snackbar.setAction(R.string.error_action_grant_access) { requestAccessAgain(activity) }
+                snackbar.setAction(R.string.error_action_grant_access) { requestAccessAgain() }
 
             SyncFailureReason.ACCOUNT_REMOVED ->
-                snackbar.setAction(R.string.choose_account) { chooseAccount(activity) }
+                snackbar.setAction(R.string.choose_account) { chooseAccount() }
 
-            else -> snackbar.setAction(R.string.simple_more) { showDetails(activity, exceptions) }
+            else -> snackbar.setAction(R.string.simple_more) { showDetails(exceptions) }
         }
 
         snackbar.show()
     }
 
-    private fun requestAccessAgain(activity: FragmentActivity) {
+    fun show(exception: Throwable) = show(listOf(exception))
+
+    private fun requestAccessAgain() {
         try {
             val ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(activity)
             AccountImporter.authenticateSingleSignAccount(activity, ssoAccount)
         } catch (e: SSOException) {
-            showDetails(activity, listOf(e))
+            showDetails(listOf(e))
         }
     }
 
-    private fun chooseAccount(activity: FragmentActivity) {
+    private fun chooseAccount() {
         try {
             AccountImporter.pickNewAccount(activity)
         } catch (e: SSOException) {
-            showDetails(activity, listOf(e))
+            showDetails(listOf(e))
         }
     }
 
-    private fun showDetails(activity: FragmentActivity, exceptions: Collection<Throwable>) {
+    private fun showDetails(exceptions: Collection<Throwable>) {
         ExceptionDialogFragment.newInstance(ArrayList(exceptions))
             .show(activity.supportFragmentManager, ExceptionDialogFragment::class.java.simpleName)
     }
