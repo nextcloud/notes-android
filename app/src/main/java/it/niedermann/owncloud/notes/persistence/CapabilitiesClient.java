@@ -33,6 +33,7 @@ public class CapabilitiesClient {
 
     @WorkerThread
     public static Capabilities getCapabilities(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount, @Nullable String lastETag, @NonNull ApiProvider apiProvider) throws Throwable {
+        FilesAppAccount.ensureExists(context, ssoAccount.name);
         final var ocsAPI = apiProvider.getOcsAPI(context, ssoAccount);
         try {
             final var response = ocsAPI.getCapabilities(lastETag).blockingSingle();

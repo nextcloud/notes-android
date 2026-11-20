@@ -15,10 +15,16 @@ object FilesAppAccount {
     @JvmStatic
     @Throws(NextcloudFilesAppAccountNotFoundException::class)
     fun require(context: Context, accountName: String): SingleSignOnAccount {
+        ensureExists(context, accountName)
+
+        return AccountImporter.getSingleSignOnAccount(context, accountName)
+    }
+
+    @JvmStatic
+    @Throws(NextcloudFilesAppAccountNotFoundException::class)
+    fun ensureExists(context: Context, accountName: String) {
         if (AccountImporter.getAccountForName(context, accountName) == null) {
             throw NextcloudFilesAppAccountNotFoundException(context, accountName)
         }
-
-        return AccountImporter.getSingleSignOnAccount(context, accountName)
     }
 }

@@ -18,9 +18,15 @@ import com.nextcloud.android.sso.helper.SingleAccountHelper
 import it.niedermann.owncloud.notes.R
 import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment
 import it.niedermann.owncloud.notes.main.SyncErrorMessage
+import it.niedermann.owncloud.notes.persistence.FilesAppAccount
 import it.niedermann.owncloud.notes.persistence.SyncFailureReason
+import java.lang.ref.WeakReference
 
 object BrandedSnackbar {
+    private const val SYNC_ERROR_MAX_LINES = 4
+
+    private var syncErrorSnackbar: WeakReference<Snackbar>? = null
+
     @JvmStatic
     fun make(
         view: View,
@@ -48,7 +54,10 @@ object BrandedSnackbar {
     @JvmStatic
     fun showSyncError(activity: FragmentActivity, view: View, anchor: View, exceptions: Collection<Throwable>) {
         val reason = SyncErrorMessage(exceptions).reasonOf()
-        val snackbar = make(view, reason.message, Snackbar.LENGTH_LONG)
+        if (reason == SyncFailureReason.ACCOUNT_REMOVED && isCurrentAccountAvailable(activity)) return
+
+        val snackbar = make(view, reason.message, reason.snackbarDuration())
+            .setTextMaxLines(SYNC_ERROR_MAX_LINES)
             .setAnchorView(anchor)
         when (reason) {
             SyncFailureReason.TOKEN_MISMATCH ->
@@ -62,12 +71,31 @@ object BrandedSnackbar {
             else -> snackbar.setAction(R.string.simple_more) { showDetails(activity, exceptions) }
         }
 
+        syncErrorSnackbar = WeakReference(snackbar)
         snackbar.show()
+    }
+
+    @JvmStatic
+    fun dismissSyncError() {
+        syncErrorSnackbar?.get()?.dismiss()
+        syncErrorSnackbar = null
     }
 
     @JvmStatic
     fun showSyncError(activity: FragmentActivity, view: View, anchor: View, exception: Throwable) =
         showSyncError(activity, view, anchor, listOf(exception))
+
+    private fun SyncFailureReason.snackbarDuration(): Int = when (this) {
+        SyncFailureReason.TOKEN_MISMATCH, SyncFailureReason.ACCOUNT_REMOVED -> Snackbar.LENGTH_INDEFINITE
+        else -> Snackbar.LENGTH_LONG
+    }
+
+    private fun isCurrentAccountAvailable(activity: FragmentActivity): Boolean = try {
+        FilesAppAccount.ensureExists(activity, SingleAccountHelper.getCurrentSingleSignOnAccount(activity).name)
+        true
+    } catch (e: SSOException) {
+        false
+    }
 
     private fun requestAccessAgain(activity: FragmentActivity) {
         try {

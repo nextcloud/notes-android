@@ -46,13 +46,14 @@ public class CapabilitiesClientTest {
     @Rule
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
 
-    private final SingleSignOnAccount ssoAccount = mock(SingleSignOnAccount.class);
+    private final SingleSignOnAccount ssoAccount = new SingleSignOnAccount("test@example.com", "test", "", "https://example.com", "");
     private final ApiProvider apiProvider = mock(ApiProvider.class);
     private final OcsAPI ocsAPI = mock(OcsAPI.class);
 
     @Before
-    public void setup() {
+    public void setup() throws IOException {
         when(apiProvider.getOcsAPI(any(), any())).thenReturn(ocsAPI);
+        NotesTestingUtil.mockSingleSignOn(ssoAccount);
     }
 
     @Test

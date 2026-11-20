@@ -300,6 +300,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         });
         mainViewModel.getNavigationCategories().observe(this, navigationItems -> this.adapterCategories.setItems(navigationItems));
         mainViewModel.getCurrentAccount().observe(this, (nextAccount) -> {
+            BrandedSnackbar.dismissSyncError();
             fabCreate.hide();
             Glide
                     .with(this)
