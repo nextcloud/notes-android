@@ -116,6 +116,7 @@
     <string name="ecosystem_apps_more">더 많은 Nextcloud 앱</string>
     <string name="ecosystem_apps_talk">Nextcloud 토크</string>
     <string name="email_pick_failed">이메일 주소 고르기에 실패함</string>
+    <string name="error_action_grant_access">접근 허용</string>
     <string name="error_action_open_battery_settings">배터리 설정</string>
     <string name="error_action_open_deck_info">앱 정보 열기</string>
     <string name="error_action_open_network">네트워크 환경설정</string>

@@ -161,7 +161,6 @@
     <string name="error_sync_permission">You don’t have permission to save this note. Please check your access and try again.</string>
     <string name="error_sync_server_error">The server could not save your changes. Ask your administrator to check the logs.</string>
     <string name="error_sync_server_unreachable">Could not reach your server. Check your connection and the Nextcloud Files app.</string>
-    <string name="error_sync_token_mismatch">Notes lost access to your Files app account. Remove and add the account again.</string>
     <string name="error_sync_unauthorized">Your login is no longer valid. Log in again in the Nextcloud Files app.</string>
     <string name="error_synchronization">Synchronization failed</string>
     <string name="error_unknown">An unknown error has occurred.</string>

@@ -124,6 +124,7 @@
     <string name="ecosystem_apps_more">További nextcloudos alkalmazások</string>
     <string name="ecosystem_apps_talk">Nextcloud Beszélgetés</string>
     <string name="email_pick_failed">Az e-mail-cím kiválasztása sikertelen.</string>
+    <string name="error_action_grant_access">Hozzáférés megadása</string>
     <string name="error_action_open_battery_settings">Akkumulátorbeállítások</string>
     <string name="error_action_open_deck_info">Alkalmazásinformációk megnyitása</string>
     <string name="error_action_open_network">Hálózati beállítások</string>

@@ -161,7 +161,6 @@
     <string name="error_sync_permission">Du har ikke tilladelse til at gemme denne note. Tjek din adgang, og prøv igen.</string>
     <string name="error_sync_server_error">Serveren kunne ikke gemme dine ændringer. Bed din administrator om at tjekke logfilerne.</string>
     <string name="error_sync_server_unreachable">Serveren kunne ikke nås. Tjek din forbindelse og appen Nextcloud Files.</string>
-    <string name="error_sync_token_mismatch">Noter har mistet adgangen til kontoen i appen Files. Fjern kontoen, og tilføj den igen.</string>
     <string name="error_sync_unauthorized">Dit login er ikke længere gyldigt. Log ind igen i appen Nextcloud Files.</string>
     <string name="error_synchronization">Synkroniseringen mislykkedes</string>
     <string name="error_unknown">Der opstod en ukendt fejl.</string>

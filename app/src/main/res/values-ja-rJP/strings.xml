@@ -121,6 +121,7 @@
     <string name="ecosystem_apps_more">もっと Nextcloud アプリを見る</string>
     <string name="ecosystem_apps_talk">Nextcloud Talk</string>
     <string name="email_pick_failed">メールアドレスの選択に失敗しました。</string>
+    <string name="error_action_grant_access">アクセスを許可</string>
     <string name="error_action_open_battery_settings">バッテリー設定</string>
     <string name="error_action_open_deck_info">アプリ情報を開く</string>
     <string name="error_action_open_network">ネットワーク設定</string>

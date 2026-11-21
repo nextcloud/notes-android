@@ -128,6 +128,7 @@
     <string name="ecosystem_apps_more">Больше приложений для Nextcloud</string>
     <string name="ecosystem_apps_talk">Конференции для Nextcloud</string>
     <string name="email_pick_failed">Невозможно выбрать адрес электронной почты.</string>
+    <string name="error_action_grant_access">Разрешить доступ</string>
     <string name="error_action_open_battery_settings">Настройки батареи</string>
     <string name="error_action_open_deck_info">Открыть информацию о приложении</string>
     <string name="error_action_open_network">Параметры сети</string>
@@ -161,7 +162,6 @@
     <string name="error_sync_permission">Нет разрешения на сохранение этой заметки. Проверьте права доступа и повторите попытку.</string>
     <string name="error_sync_server_error">Сервер не смог сохранить изменения. Попросите администратора проверить журналы.</string>
     <string name="error_sync_server_unreachable">Не удалось связаться с сервером. Проверьте подключение и приложение «Файлы» Nextcloud.</string>
-    <string name="error_sync_token_mismatch">Заметки потеряли доступ к учётной записи приложения «Файлы». Удалите учётную запись и добавьте её снова.</string>
     <string name="error_sync_unauthorized">Сеанс входа больше не действителен. Войдите снова в приложении «Файлы» Nextcloud.</string>
     <string name="error_synchronization">Сбой синхронизации</string>
     <string name="error_unknown">Произошла неизвестная ошибка.</string>

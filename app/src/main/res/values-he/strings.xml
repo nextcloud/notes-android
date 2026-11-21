@@ -94,6 +94,7 @@
     <string name="ecosystem_apps_display_files">קבצים</string>
     <string name="ecosystem_apps_display_more">יותר</string>
     <string name="ecosystem_apps_display_talk">שיחה</string>
+    <string name="error_action_grant_access">הענקת גישה</string>
     <string name="error_action_open_deck_info">פתיחת פרטי יישומון</string>
     <string name="error_action_open_network">הגדרות רשת</string>
     <string name="error_action_update_files_app">עדכון</string>

@@ -121,6 +121,7 @@
     <string name="ecosystem_apps_more">更多 Nextcloud 应用</string>
     <string name="ecosystem_apps_talk">Nextcloud 通话</string>
     <string name="email_pick_failed">未能选择电子邮箱地址</string>
+    <string name="error_action_grant_access">授予权限</string>
     <string name="error_action_open_battery_settings">电池设置</string>
     <string name="error_action_open_deck_info">打开应用信息</string>
     <string name="error_action_open_network">网络设置</string>

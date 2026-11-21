@@ -123,6 +123,7 @@
     <string name="ecosystem_apps_more">Mais Aplicações Nextcloud</string>
     <string name="ecosystem_apps_talk">Nextcloud Talk</string>
     <string name="email_pick_failed">Erro ao escolher endereço de email.</string>
+    <string name="error_action_grant_access">Conceder acesso</string>
     <string name="error_action_open_battery_settings">Configurações da bateria</string>
     <string name="error_action_open_deck_info">Abra as informações do Aplicativo</string>
     <string name="error_action_open_network">Configurações da rede</string>

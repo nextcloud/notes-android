@@ -125,6 +125,7 @@
     <string name="ecosystem_apps_more">Máis aplicacións de Nextcloud</string>
     <string name="ecosystem_apps_talk">Parladoiro de Nextcloud</string>
     <string name="email_pick_failed">Produciuse un fallo ao escoller o enderezo de correo.</string>
+    <string name="error_action_grant_access">Permitir o acceso</string>
     <string name="error_action_open_battery_settings">Axustes da batería</string>
     <string name="error_action_open_deck_info">Abrir a info da aplicación</string>
     <string name="error_action_open_network">Axustes da rede</string>

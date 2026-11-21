@@ -125,6 +125,7 @@
     <string name="ecosystem_apps_more">Daugiau „Nextcloud“ programėlių</string>
     <string name="ecosystem_apps_talk">„Nextcloud Pokalbiai“</string>
     <string name="email_pick_failed">Nepavyko pasirinkti el. pašto adreso.</string>
+    <string name="error_action_grant_access">Suteikti prieigą</string>
     <string name="error_action_open_battery_settings">Akumuliatoriaus nustatymai</string>
     <string name="error_action_open_deck_info">Atidaryti programėlės informaciją</string>
     <string name="error_action_open_network">Tinklo nustatymai</string>

@@ -127,6 +127,7 @@
     <string name="ecosystem_apps_more">Aplikasi Nextcloud Lainnya</string>
     <string name="ecosystem_apps_talk">Talk Nextcloud</string>
     <string name="email_pick_failed">Gagal memilih alamat email.</string>
+    <string name="error_action_grant_access">Berikan hak akses</string>
     <string name="error_action_open_battery_settings">Pengaturan baterai</string>
     <string name="error_action_open_deck_info">Buka Info Aplikasi</string>
     <string name="error_action_open_network">Pengaturan jaringan</string>
@@ -160,7 +161,6 @@
     <string name="error_sync_permission">Anda tidak memiliki izin untuk menyimpan catatan ini. Periksa akses Anda dan coba lagi.</string>
     <string name="error_sync_server_error">Server tidak dapat menyimpan perubahan Anda. Minta administrator Anda untuk memeriksa log.</string>
     <string name="error_sync_server_unreachable">Tidak dapat menghubungi server Anda. Periksa koneksi Anda dan aplikasi Nextcloud Files.</string>
-    <string name="error_sync_token_mismatch">Notes kehilangan akses ke akun Anda di aplikasi Files. Hapus dan tambahkan kembali akun tersebut.</string>
     <string name="error_sync_unauthorized">Sesi masuk Anda tidak lagi valid. Masuk kembali melalui aplikasi Nextcloud Files.</string>
     <string name="error_synchronization">Sinkronisasi gagal</string>
     <string name="error_unknown">Terjadi kesalahan yang tidak diketahui.</string>
