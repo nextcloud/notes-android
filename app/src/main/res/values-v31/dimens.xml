@@ -11,4 +11,6 @@
     <dimen name="widget_outer_radius">@android:dimen/system_app_widget_background_radius</dimen>
     <dimen name="widget_margin">@android:dimen/system_app_widget_background_radius</dimen>
     <dimen name="widget_inner_padding_vertical">@android:dimen/system_app_widget_inner_radius</dimen>
+    <dimen name="widget_interactive_list_padding">@dimen/spacer_1hx</dimen>
+    <dimen name="widget_interactive_background_radius">@android:dimen/system_app_widget_background_radius</dimen>
 </resources>
