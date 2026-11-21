@@ -128,6 +128,7 @@
     <string name="ecosystem_apps_more">Tuilleadh aipeanna Nextcloud</string>
     <string name="ecosystem_apps_talk">Caint Nextcloud</string>
     <string name="email_pick_failed">Theip ar an seoladh ríomhphoist a phiocadh.</string>
+    <string name="error_action_grant_access">Deonaigh rochtain</string>
     <string name="error_action_open_battery_settings">Socruithe ceallraí</string>
     <string name="error_action_open_deck_info">Oscail eolas Aip</string>
     <string name="error_action_open_network">Socruithe líonra</string>
@@ -161,7 +162,6 @@
     <string name="error_sync_permission">Níl cead agat an nóta seo a shábháil. Seiceáil do cheadanna rochtana, le do thoil, agus bain triail as arís.</string>
     <string name="error_sync_server_error">Níorbh fhéidir leis an bhfreastalaí do chuid athruithe a shábháil. Iarr ar do riarthóir na logaí a sheiceáil.</string>
     <string name="error_sync_server_unreachable">Níorbh fhéidir teacht ar do fhreastalaí. Seiceáil do nasc agus an aip Nextcloud Files.</string>
-    <string name="error_sync_token_mismatch">Chaill Notes rochtain ar do chuntas san aip Files. Bain an cuntas agus cuir ar ais é.</string>
     <string name="error_sync_unauthorized">Níl do shonraí logála bailí a thuilleadh. Logáil isteach arís san aip Nextcloud Files.</string>
     <string name="error_synchronization">Theip ar an sioncronú</string>
     <string name="error_unknown">Tharla earráid anaithnid.</string>

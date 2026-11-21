@@ -128,6 +128,7 @@
     <string name="ecosystem_apps_more">Diğer Nextcloud uygulamaları</string>
     <string name="ecosystem_apps_talk">Nextcloud Konuş</string>
     <string name="email_pick_failed">E-posta adresi alınamadı.</string>
+    <string name="error_action_grant_access">Erişme izni ver</string>
     <string name="error_action_open_battery_settings">Pil ayarları</string>
     <string name="error_action_open_deck_info">Uygulama bilgilerini aç</string>
     <string name="error_action_open_network">Ağ ayarları</string>
@@ -161,7 +162,6 @@
     <string name="error_sync_permission">Bu notu kaydetme izniniz yok. Lütfen erişme izninizi denetleyip yeniden deneyin.</string>
     <string name="error_sync_server_error">Sunucu değişikliklerinizi kaydedemedi. Yöneticinizden günlük kayıtlarına bakmasını isteyin.</string>
     <string name="error_sync_server_unreachable">Sunucunuza ulaşılamadı. Bağlantınızı ve Nextcloud Dosyalar uygulamasını denetleyin.</string>
-    <string name="error_sync_token_mismatch">Notlar, Dosyalar uygulama hesabınıza erişimini kaybetti. Hesabı kaldırıp yeniden ekleyin.</string>
     <string name="error_sync_unauthorized">Oturumunuz artık geçerli değil. Nextcloud Dosyalar uygulamasında yeniden oturum açın.</string>
     <string name="error_synchronization">Eşitlenemedi</string>
     <string name="error_unknown">Bilinmeyen bir sorun çıktı.</string>

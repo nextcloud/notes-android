@@ -128,6 +128,7 @@
     <string name="ecosystem_apps_more">更多 Nextcloud 應用程式</string>
     <string name="ecosystem_apps_talk">Nextcloud Talk</string>
     <string name="email_pick_failed">挑選電子郵件地址失敗。</string>
+    <string name="error_action_grant_access">授權存取</string>
     <string name="error_action_open_battery_settings">電池設定</string>
     <string name="error_action_open_deck_info">開啟應用程式資訊</string>
     <string name="error_action_open_network">網路設定</string>
@@ -161,7 +162,6 @@
     <string name="error_sync_permission">您無權儲存此筆記。請檢查您的存取權，然後重試。</string>
     <string name="error_sync_server_error">伺服器無法儲存您的變更。請要求您的管理員檢查紀錄檔。</string>
     <string name="error_sync_server_unreachable">無法連線至您的伺服器。請檢查網路連線及 Nextcloud Files 應用程式。</string>
-    <string name="error_sync_token_mismatch">筆記應用程式已失去對您 Files 應用程式帳號的存取權。請移除該帳號後重新加入。</string>
     <string name="error_sync_unauthorized">您的登入資訊已失效。請在 Nextcloud Files 應用程式中重新登入。</string>
     <string name="error_synchronization">同步失敗</string>
     <string name="error_unknown">發生未知錯誤。</string>

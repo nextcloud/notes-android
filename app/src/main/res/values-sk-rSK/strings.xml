@@ -128,6 +128,7 @@
     <string name="ecosystem_apps_more">Ďalšie Nextcloud aplikácie</string>
     <string name="ecosystem_apps_talk">Nextcloud Talk</string>
     <string name="email_pick_failed">Nepodarilo sa vybrať e-mailovú adresu.</string>
+    <string name="error_action_grant_access">Povoliť prístup</string>
     <string name="error_action_open_battery_settings">Nastavenia batérie.</string>
     <string name="error_action_open_deck_info">Otvoriť informácie o aplikácii</string>
     <string name="error_action_open_network">Nastavenia siete</string>
@@ -161,7 +162,6 @@
     <string name="error_sync_permission">Nemáte oprávnenie uložiť túto poznámku. Skontrolujte svoj prístup a skúste to znova.</string>
     <string name="error_sync_server_error">Server nemohol uložiť vaše zmeny. Požiadajte správcu, aby skontroloval protokoly.</string>
     <string name="error_sync_server_unreachable">Nepodarilo sa pripojiť k vášmu serveru. Skontrolujte pripojenie a aplikáciu Nextcloud Files.</string>
-    <string name="error_sync_token_mismatch">Aplikácia Notes stratila prístup k vášmu účtu v aplikácii Files. Odstráňte účet a znova ho pridajte.</string>
     <string name="error_sync_unauthorized">Vaše prihlásenie už nie je platné. Znova sa prihláste v aplikácii Nextcloud Files.</string>
     <string name="error_synchronization">Synchronizácia zlyhala</string>
     <string name="error_unknown">Vyskytla sa neznáma chyba</string>

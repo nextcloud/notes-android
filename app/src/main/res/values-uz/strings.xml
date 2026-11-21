@@ -117,6 +117,7 @@
     <string name="ecosystem_apps_display_talk">Gaplash</string>
     <string name="ecosystem_apps_talk">Keyingi bulut suhbati</string>
     <string name="email_pick_failed">Elektron pochta manzilini tanlashda xatolik yuz berdi.</string>
+    <string name="error_action_grant_access">Ruxsat berish</string>
     <string name="error_action_open_battery_settings">Batareya sozlamalari</string>
     <string name="error_action_open_deck_info">Ilova ma\'lumotlarini oching</string>
     <string name="error_action_open_network">Tarmoq sozlamalari</string>

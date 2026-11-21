@@ -85,6 +85,7 @@
     <string name="ecosystem_apps_display_more">Повеќе</string>
     <string name="ecosystem_apps_display_talk">Разговор</string>
     <string name="ecosystem_apps_talk">Talk</string>
+    <string name="error_action_grant_access">Дозволи пристап</string>
     <string name="error_action_open_battery_settings">Параметри за батеријата</string>
     <string name="error_action_open_deck_info">Информации за апликацијата</string>
     <string name="error_action_open_network">Мрежни параметри</string>

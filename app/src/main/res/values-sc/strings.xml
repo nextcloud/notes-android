@@ -96,6 +96,7 @@
     <string name="ecosystem_apps_display_files">Archìvios</string>
     <string name="ecosystem_apps_display_more">Prus</string>
     <string name="ecosystem_apps_display_talk">Faedda</string>
+    <string name="error_action_grant_access">Permite s\'atzessu</string>
     <string name="error_action_open_battery_settings">Cunfiguratzione de sa bateria</string>
     <string name="error_action_open_deck_info">Aberi informatziones aplicatzione</string>
     <string name="error_action_open_network">Cunfiguratzione de rete</string>

@@ -115,6 +115,7 @@
     <string name="dontClear">No borrar</string>
     <string name="ecosystem_apps_display_files">Archivo</string>
     <string name="ecosystem_apps_display_talk">Hablar</string>
+    <string name="error_action_grant_access">Conceder acceso</string>
     <string name="error_action_open_battery_settings">Configuración de la batería</string>
     <string name="error_action_open_deck_info">Abrir información de la aplicación</string>
     <string name="error_action_open_network">Configuración de red</string>

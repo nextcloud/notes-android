@@ -128,6 +128,7 @@
     <string name="ecosystem_apps_more">Plus d\'applis Nextcloud</string>
     <string name="ecosystem_apps_talk">Nextcloud Talk</string>
     <string name="email_pick_failed">Le choix de l\'adresse e-mail a échoué.</string>
+    <string name="error_action_grant_access">Autoriser l’accès</string>
     <string name="error_action_open_battery_settings">Paramètres de batterie</string>
     <string name="error_action_open_deck_info">Ouvrir les informations de l\'application</string>
     <string name="error_action_open_network">Paramètres réseau</string>
@@ -161,7 +162,6 @@
     <string name="error_sync_permission">Vous n\'avez pas la permission d\'enregistrer cette note. Veuillez vérifier vos droits d\'accès et réessayer.</string>
     <string name="error_sync_server_error">Le serveur n\'a pas pu enregistrer vos modifications. Demandez à votre administrateur de vérifier les logs.</string>
     <string name="error_sync_server_unreachable">Impossible de contacter votre serveur. Vérifiez votre connexion et l\'application Nextcloud Fichiers.</string>
-    <string name="error_sync_token_mismatch">Notes a perdu l\'accès au compte de votre application Fichiers. Retirez puis ajoutez le compte à nouveau.</string>
     <string name="error_sync_unauthorized">Votre identifiant n\'est plus valide. Reconnectez-vous dans l\'application Nextcloud Fichiers.</string>
     <string name="error_synchronization">Échec de synchronisation</string>
     <string name="error_unknown">Une erreur inconnue est survenue</string>

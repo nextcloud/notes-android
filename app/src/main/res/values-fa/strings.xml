@@ -126,6 +126,7 @@
     <string name="ecosystem_apps_more">برنامه‌های بیشتر نکست‌کلود</string>
     <string name="ecosystem_apps_talk">نکست‌کلود تاک</string>
     <string name="email_pick_failed">خطا در گرفتن نشانی رایانامه</string>
+    <string name="error_action_grant_access">اعطای دسترسی</string>
     <string name="error_action_open_battery_settings">تنظیمات باتری</string>
     <string name="error_action_open_deck_info">باز کردن اطلاعات برنامه</string>
     <string name="error_action_open_network">تنظیمات شبکه</string>

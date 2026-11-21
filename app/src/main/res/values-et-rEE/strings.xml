@@ -128,6 +128,7 @@
     <string name="ecosystem_apps_more">Veel Nextcloudi rakendusi</string>
     <string name="ecosystem_apps_talk">Nextcloudi suhtlusrakendus (Nextcloud Talk)</string>
     <string name="email_pick_failed">Ei õnnestu valida e-posti aadressi</string>
+    <string name="error_action_grant_access">Luba ligipääs</string>
     <string name="error_action_open_battery_settings">Akuseadistused</string>
     <string name="error_action_open_deck_info">Näita rakenduse teavet</string>
     <string name="error_action_open_network">Võrgu seadistused</string>
@@ -161,7 +162,6 @@
     <string name="error_sync_permission">Sul puuduvad õigused selle märkme salvestamiseks. Palun kontrolli oma ligipääsuõigusi ja proovi uuesti.</string>
     <string name="error_sync_server_error">Server ei suutnud sinu muudatusi salvestada. Palu peakasutajal või haldajal logisid kontrollida.</string>
     <string name="error_sync_server_unreachable">Sinu server pole hetkel eitav. Palun kontrolli nutiseadme internetiühenduse toimimist ja Nextcloudi failirakenduse olekut.</string>
-    <string name="error_sync_token_mismatch">Märkmete rakendus kaotas ligipääsu failirakenduses määratletud sinu kasutajakontole. Palun eemalda konto ja lisa uuesti.</string>
     <string name="error_sync_unauthorized">Sinu sisselogimissessioon pole enam kehtiv. Palun logi uuesti Nextcloudi failirakenduse abil sisse.</string>
     <string name="error_synchronization">Sünkroonimine ei õnnestunud</string>
     <string name="error_unknown">Tekkinud on tundmatu viga.</string>
