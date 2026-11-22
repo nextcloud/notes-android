@@ -122,6 +122,7 @@
     <string name="ecosystem_apps_more">المزيد من تطبيقات نكست كلاود</string>
     <string name="ecosystem_apps_talk">تطبيق \"المحادثة\" talk من نكست كلاود</string>
     <string name="email_pick_failed">تعذّر التقاط عنوان الإيميل.</string>
+    <string name="error_action_grant_access">منح إذن بالنفاذ</string>
     <string name="error_action_open_battery_settings">إعدادات البطارية</string>
     <string name="error_action_open_deck_info">فتح معلومات التطبيق</string>
     <string name="error_action_open_network">إعدادات الشبكة</string>

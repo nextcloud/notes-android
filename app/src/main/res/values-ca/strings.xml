@@ -122,6 +122,7 @@
     <string name="ecosystem_apps_more">Més aplicacions de Nextcloud</string>
     <string name="ecosystem_apps_talk">Nextcloud Talk</string>
     <string name="email_pick_failed">No s\'ha pogut triar l\'adreça electrònica.</string>
+    <string name="error_action_grant_access">Concedeix l\'accés</string>
     <string name="error_action_open_battery_settings">Paràmetres de la bateria</string>
     <string name="error_action_open_deck_info">Obre la informació de l\'aplicació</string>
     <string name="error_action_open_network">Paràmetres de la xarxa</string>

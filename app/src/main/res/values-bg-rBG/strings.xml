@@ -117,6 +117,7 @@
     <string name="ecosystem_apps_display_files">Файлове</string>
     <string name="ecosystem_apps_display_more">Повече </string>
     <string name="ecosystem_apps_display_talk">Talk</string>
+    <string name="error_action_grant_access">Разрешаване на достъп</string>
     <string name="error_action_open_battery_settings">Настройки на батерията</string>
     <string name="error_action_open_deck_info">Отворяне на информация за приложението</string>
     <string name="error_action_open_network">Настройки на мрежата</string>

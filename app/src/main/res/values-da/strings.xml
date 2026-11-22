@@ -24,6 +24,7 @@
     <string name="about_translators_transifex">Nextcloud Community på %1$s</string>
     <string name="about_version">Du bruger lige nu %1$s</string>
     <string name="about_version_title">Version</string>
+    <string name="account_access_renewed">Adgangen til din konto er fornyet.</string>
     <string name="account_already_imported">Kontoen er allerede importeret</string>
     <string name="account_imported">Kontoen er importeret.</string>
     <string name="account_not_found">Kontoen blev ikke fundet!</string>
@@ -128,6 +129,7 @@
     <string name="ecosystem_apps_more">Flere Nextcloud apps</string>
     <string name="ecosystem_apps_talk">Nextcloud Talk</string>
     <string name="email_pick_failed">Kunne ikke vælge e-mailadresse.</string>
+    <string name="error_action_grant_access">Giv adgang</string>
     <string name="error_action_open_battery_settings">Batteriindstillinger</string>
     <string name="error_action_open_deck_info">Åbn appinfo</string>
     <string name="error_action_open_network">Netværksindstillinger</string>
@@ -154,13 +156,16 @@
     <string name="error_no_network">Ingen netværksforbindelse</string>
     <string name="error_setting_status_message">Fejl under angivelse af statusbesked!</string>
     <string name="error_sync">Synkroniseringen mislykkedes: %1$s</string>
+    <string name="error_sync_account_removed">Kontoen er fjernet fra appen Nextcloud Filer. Log ind igen med den samme konto (%1$s) for at fortsætte synkroniseringen.</string>
     <string name="error_sync_insufficient_storage">Dit Nextcloud-lager er fuldt. Frigør plads for at synkronisere dine ændringer.</string>
     <string name="error_sync_locked">En note er åben i en anden app. Luk den dér for at synkronisere dine ændringer.</string>
     <string name="error_sync_maintenance">Serveren er i vedligeholdelsestilstand. Dine ændringer synkroniseres senere.</string>
+    <string name="error_sync_no_network">Ingen netværksforbindelse. Dine ændringer bliver synkroniseret senere.</string>
     <string name="error_sync_notes_app_unavailable">Appen Noter er ikke tilgængelig på din server.</string>
     <string name="error_sync_permission">Du har ikke tilladelse til at gemme denne note. Tjek din adgang, og prøv igen.</string>
     <string name="error_sync_server_error">Serveren kunne ikke gemme dine ændringer. Bed din administrator om at tjekke logfilerne.</string>
     <string name="error_sync_server_unreachable">Serveren kunne ikke nås. Tjek din forbindelse og appen Nextcloud Files.</string>
+    <string name="error_sync_token">Noter har mistet adgangen til din Nextcloud-konto. Giv adgang igen for at fortsætte synkroniseringen.</string>
     <string name="error_sync_unauthorized">Dit login er ikke længere gyldigt. Log ind igen i appen Nextcloud Files.</string>
     <string name="error_synchronization">Synkroniseringen mislykkedes</string>
     <string name="error_unknown">Der opstod en ukendt fejl.</string>

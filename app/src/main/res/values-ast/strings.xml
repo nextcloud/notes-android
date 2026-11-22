@@ -89,6 +89,7 @@
     <string name="ecosystem_apps_more">Más aplicaciones de Nextcloud</string>
     <string name="ecosystem_apps_talk">Nextcloud Talk</string>
     <string name="email_pick_failed">Nun se pue escoyer la direición de corréu electrónicu.</string>
+    <string name="error_action_grant_access">Conceder l\'accesu</string>
     <string name="error_action_open_battery_settings">Configuración de la batería</string>
     <string name="error_action_open_deck_info">Abrir la información de l\'aplicación</string>
     <string name="error_action_update_files_app">Anovar</string>
