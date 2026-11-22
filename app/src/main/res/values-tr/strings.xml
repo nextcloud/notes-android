@@ -24,6 +24,7 @@
     <string name="about_translators_transifex">%1$s üzerindeki Nextcloud topluluğu</string>
     <string name="about_version">Şu anda %1$s kullanıyorsunuz</string>
     <string name="about_version_title">Sürüm</string>
+    <string name="account_access_renewed">Hesabınıza erişim yenilendi.</string>
     <string name="account_already_imported">Hesap zaten içe aktarılmış</string>
     <string name="account_imported">Hesap içe aktarıldı.</string>
     <string name="account_not_found">Hesap bulunamadı!</string>
@@ -155,13 +156,16 @@
     <string name="error_no_network">Ağ bağlantısı yok</string>
     <string name="error_setting_status_message">Durum iletisi ayarlanırken sorun çıktı!</string>
     <string name="error_sync">Eşitlenemedi: %1$s</string>
+    <string name="error_sync_account_removed">Bu hesap Nextcloud Dosyalar uygulamasından kaldırıldı. Eşitlemeyi sürdürmek için aynı hesap ile (%1$s) yeniden oturum açın.</string>
     <string name="error_sync_insufficient_storage">Nextcloud depolama alanınız dolu. Değişikliklerinizi eşitlemek için boş yer açın.</string>
     <string name="error_sync_locked">Bir not başka bir uygulamada açık. Değişikliklerinizin eşitlenmesi için o uygulamadan kapatın.</string>
     <string name="error_sync_maintenance">Sunucu bakım kipinde. Değişiklikleriniz daha sonra eşitlenecek.</string>
+    <string name="error_sync_no_network">Ağ bağlantısı yok. Değişiklikleriniz daha sonra eşitlenecek.</string>
     <string name="error_sync_notes_app_unavailable">Notlar uygulaması sunucunuzda yok.</string>
     <string name="error_sync_permission">Bu notu kaydetme izniniz yok. Lütfen erişme izninizi denetleyip yeniden deneyin.</string>
     <string name="error_sync_server_error">Sunucu değişikliklerinizi kaydedemedi. Yöneticinizden günlük kayıtlarına bakmasını isteyin.</string>
     <string name="error_sync_server_unreachable">Sunucunuza ulaşılamadı. Bağlantınızı ve Nextcloud Dosyalar uygulamasını denetleyin.</string>
+    <string name="error_sync_token">Notlar, Nextcloud hesabınıza erişimi kaybetti. Eşitlemeyi sürdürmek için yeniden erişme izni verin.</string>
     <string name="error_sync_unauthorized">Oturumunuz artık geçerli değil. Nextcloud Dosyalar uygulamasında yeniden oturum açın.</string>
     <string name="error_synchronization">Eşitlenemedi</string>
     <string name="error_unknown">Bilinmeyen bir sorun çıktı.</string>

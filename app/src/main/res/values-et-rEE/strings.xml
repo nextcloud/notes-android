@@ -24,6 +24,7 @@
     <string name="about_translators_transifex">Nextcloudi kogukond: %1$s</string>
     <string name="about_version">Sul on hetkel kasutusel: %1$s</string>
     <string name="about_version_title">Versioon</string>
+    <string name="account_access_renewed">Ligipääs sinu  kasutajakontole on taastatud.</string>
     <string name="account_already_imported">Kasutajakonto on juba imporditud</string>
     <string name="account_imported">Kasutajakonto on imporditud.</string>
     <string name="account_not_found">Kontot ei leidu!</string>
@@ -155,13 +156,16 @@
     <string name="error_no_network">Võrguühendust pole</string>
     <string name="error_setting_status_message">Olekuteate lisamisel tekkis viga!</string>
     <string name="error_sync">Sünkroonimine ei õnnestunud: %1$s</string>
+    <string name="error_sync_account_removed">See kasutajakonto on Nextcloudi failirakendusest eemaldatud. Jätkamaks sünkroonimist logi sisse sama kasutajakontoga (%1$s).</string>
     <string name="error_sync_insufficient_storage">Sinu Nextcloudi andmeruum on täis saanud. Oma muudatuste sünkroonimiseks vabasta andmeruumi.</string>
     <string name="error_sync_locked">Märge on avatud teises rakenduses. Sulge ta seal ja saad ta siin salvestada.</string>
     <string name="error_sync_maintenance">See server on hooldusrežiimis. Sinu muudatused saavad sünkroonitud hiljem.</string>
+    <string name="error_sync_no_network">Võrguühendust pole. Sinu muudatused saavad sünkroonitud hiljem.</string>
     <string name="error_sync_notes_app_unavailable">Märkmete rakendus pole sinu serveris saadaval.</string>
     <string name="error_sync_permission">Sul puuduvad õigused selle märkme salvestamiseks. Palun kontrolli oma ligipääsuõigusi ja proovi uuesti.</string>
     <string name="error_sync_server_error">Server ei suutnud sinu muudatusi salvestada. Palu peakasutajal või haldajal logisid kontrollida.</string>
     <string name="error_sync_server_unreachable">Sinu server pole hetkel eitav. Palun kontrolli nutiseadme internetiühenduse toimimist ja Nextcloudi failirakenduse olekut.</string>
+    <string name="error_sync_token">Märkmete rakendus kaotas ligipääsu sinu Nextcloudi kasutajakontole. Sünkroonimise jätkamiseks luba ligipääs uuesti.</string>
     <string name="error_sync_unauthorized">Sinu sisselogimissessioon pole enam kehtiv. Palun logi uuesti Nextcloudi failirakenduse abil sisse.</string>
     <string name="error_synchronization">Sünkroonimine ei õnnestunud</string>
     <string name="error_unknown">Tekkinud on tundmatu viga.</string>
@@ -179,7 +183,7 @@
     <string name="formatting_help_checkboxes_body_2">1. kirje</string>
     <string name="formatting_help_checkboxes_body_3">2. kirje</string>
     <string name="formatting_help_checkboxes_title">Märkeruudud</string>
-    <string name="formatting_help_code_body_1">Laähtekoodi saab Markdowni puhul vormindada mitmel viisil. Kui kasutad lõimitud koodiblokke, siis pane ta tagurpidi ülakomade vahele („backtick ehk `“):</string>
+    <string name="formatting_help_code_body_1">Lähtekoodi saad Markdowni puhul vormindada mitmel viisil. Kui kasutad lõimitud koodiblokke, siis pane ta tagurpidi ülakomade vahele („backtick ehk `“):</string>
     <string name="formatting_help_code_body_2">Markdown-vorming toetab ka lähtekoodi kuvamist nii, et ta paikneb mitmel real ilma taandreata („code fencing“):</string>
     <string name="formatting_help_code_body_3">Kui sa soovid kasutada süntaksi esiletõstmist, siis kaasa see keel:</string>
     <string name="formatting_help_code_title">Kood</string>
