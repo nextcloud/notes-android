@@ -24,6 +24,7 @@
     <string name="about_translators_transifex">Сообщество Nextcloud на сайте %1$s</string>
     <string name="about_version">В данный момент вы используете %1$s</string>
     <string name="about_version_title">Версия</string>
+    <string name="account_access_renewed">Доступ к учётной записи возобновлён.</string>
     <string name="account_already_imported">Учётная запись уже импортирована</string>
     <string name="account_imported">Учётная запись импортирована.</string>
     <string name="account_not_found">Учётная запись не найдена!</string>
@@ -155,13 +156,16 @@
     <string name="error_no_network">Нет подключения к сети</string>
     <string name="error_setting_status_message">Ошибка при установке сообщения статуса</string>
     <string name="error_sync">Сбой синхронизации: %1$s</string>
+    <string name="error_sync_account_removed">Учётная запись удалена из приложения «Файлы» Nextcloud. Войдите снова с той же учётной записью (%1$s), чтобы продолжить синхронизацию.</string>
     <string name="error_sync_insufficient_storage">Хранилище Nextcloud заполнено. Освободите место для синхронизации изменений.</string>
     <string name="error_sync_locked">Заметка открыта в другом приложении. Закройте её там для синхронизации изменений.</string>
     <string name="error_sync_maintenance">Сервер в режиме обслуживания. Изменения будут синхронизированы позже.</string>
+    <string name="error_sync_no_network">Нет подключения к сети. Изменения будут синхронизированы позже.</string>
     <string name="error_sync_notes_app_unavailable">Приложение «Заметки» недоступно на сервере.</string>
     <string name="error_sync_permission">Нет разрешения на сохранение этой заметки. Проверьте права доступа и повторите попытку.</string>
     <string name="error_sync_server_error">Сервер не смог сохранить изменения. Попросите администратора проверить журналы.</string>
     <string name="error_sync_server_unreachable">Не удалось связаться с сервером. Проверьте подключение и приложение «Файлы» Nextcloud.</string>
+    <string name="error_sync_token">Приложение «Заметки» потеряло доступ к вашей учётной записи Nextcloud. Снова предоставьте доступ, чтобы продолжить синхронизацию.</string>
     <string name="error_sync_unauthorized">Сеанс входа больше не действителен. Войдите снова в приложении «Файлы» Nextcloud.</string>
     <string name="error_synchronization">Сбой синхронизации</string>
     <string name="error_unknown">Произошла неизвестная ошибка.</string>

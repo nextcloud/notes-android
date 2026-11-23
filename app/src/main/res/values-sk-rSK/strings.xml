@@ -24,6 +24,7 @@
     <string name="about_translators_transifex">Nextcloud komunita na %1$s</string>
     <string name="about_version">Momentálne používate %1$s</string>
     <string name="about_version_title">Verzia</string>
+    <string name="account_access_renewed">Prístup k vášmu účtu bol obnovený.</string>
     <string name="account_already_imported">Účet už bol importovaný</string>
     <string name="account_imported">Účet bol importovaný.</string>
     <string name="account_not_found">Účet sa nenašiel!</string>
@@ -155,13 +156,16 @@
     <string name="error_no_network">Bez sieťového pripojenia</string>
     <string name="error_setting_status_message">Chyba pri nastavovaní správy stavu!</string>
     <string name="error_sync">Synchronizácia zlyhala: %1$s</string>
+    <string name="error_sync_account_removed">Tento účet bol odstránený z aplikácie Nextcloud Files. Ak chcete pokračovať v synchronizácii, prihláste sa znova pomocou rovnakého účtu (%1$s).</string>
     <string name="error_sync_insufficient_storage">Vaše úložisko Nextcloud je plné. Uvoľnite miesto, aby sa vaše zmeny zosynchronizovali.</string>
     <string name="error_sync_locked">Poznámka je otvorená v inej aplikácii. Ak chcete zosynchronizovať zmeny, zatvorte ju tam.</string>
     <string name="error_sync_maintenance">Server je v režime údržby. Vaše zmeny sa zosynchronizujú neskôr.</string>
+    <string name="error_sync_no_network">Žiadne sieťové pripojenie. Vaše zmeny sa zosynchronizujú neskôr.</string>
     <string name="error_sync_notes_app_unavailable">Aplikácia Notes nie je dostupná na vašom serveri.</string>
     <string name="error_sync_permission">Nemáte oprávnenie uložiť túto poznámku. Skontrolujte svoj prístup a skúste to znova.</string>
     <string name="error_sync_server_error">Server nemohol uložiť vaše zmeny. Požiadajte správcu, aby skontroloval protokoly.</string>
     <string name="error_sync_server_unreachable">Nepodarilo sa pripojiť k vášmu serveru. Skontrolujte pripojenie a aplikáciu Nextcloud Files.</string>
+    <string name="error_sync_token">Aplikácia Notes stratila prístup k vášmu účtu Nextcloud. Ak chcete pokračovať v synchronizácii, udeľte jej prístup znova.</string>
     <string name="error_sync_unauthorized">Vaše prihlásenie už nie je platné. Znova sa prihláste v aplikácii Nextcloud Files.</string>
     <string name="error_synchronization">Synchronizácia zlyhala</string>
     <string name="error_unknown">Vyskytla sa neznáma chyba</string>
