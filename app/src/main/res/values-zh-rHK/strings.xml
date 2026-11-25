@@ -24,6 +24,7 @@
     <string name="about_translators_transifex">%1$s 上的 Nextcloud 社群</string>
     <string name="about_version">你目前使用 %1$s</string>
     <string name="about_version_title">版本</string>
+    <string name="account_access_renewed">您帳號的存取權已更新。</string>
     <string name="account_already_imported">已成功匯入帳戶</string>
     <string name="account_imported">已導入帳戶。</string>
     <string name="account_not_found">沒有找到任何帳戶</string>
@@ -155,13 +156,16 @@
     <string name="error_no_network">沒有網路連線</string>
     <string name="error_setting_status_message">設定狀態訊息時發生錯誤！</string>
     <string name="error_sync">同步失敗：%1$s</string>
+    <string name="error_sync_account_removed">此帳號已從 Nextcloud Files 應用程式中移除。再次使用相同帳號 (%1$s) 登入以維持同步。</string>
     <string name="error_sync_insufficient_storage">你的 Nextcloud 儲存空間已滿。請騰出空間以同步變更。</string>
     <string name="error_sync_locked">有另一個應用程式正在開啟此筆記。請先在該應用程式關閉筆記，以同步變更。</string>
     <string name="error_sync_maintenance">伺服器正處於維護模式。你的變更將於稍後同步。</string>
+    <string name="error_sync_no_network">沒有網路連線。您的變更將於稍後同步。</string>
     <string name="error_sync_notes_app_unavailable">你的伺服器上沒有提供筆記應用程式。</string>
     <string name="error_sync_permission">你沒有權限儲存此筆記。請檢查存取權限，然後再試一次。</string>
     <string name="error_sync_server_error">伺服器無法儲存你的變更。請聯絡管理員檢查記錄。</string>
     <string name="error_sync_server_unreachable">無法連線至伺服器。請檢查網絡連線及 Nextcloud 檔案應用程式。</string>
+    <string name="error_sync_token">「筆記」已無法存取您的 Nextcloud 帳號。請重新授予存取權以維持同步。</string>
     <string name="error_sync_unauthorized">你的登入憑證已失效。請在 Nextcloud 檔案應用程式重新登入。</string>
     <string name="error_synchronization">同步失敗</string>
     <string name="error_unknown">發生未知錯誤。</string>
