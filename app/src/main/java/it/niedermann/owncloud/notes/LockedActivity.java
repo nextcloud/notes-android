@@ -8,11 +8,8 @@
  */
 package it.niedermann.owncloud.notes;
 
-import android.app.KeyguardManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.WindowManager;
 
 import androidx.activity.OnBackPressedCallback;
@@ -24,11 +21,6 @@ import it.niedermann.owncloud.notes.exception.ExceptionHandler;
 
 public abstract class LockedActivity extends BrandedActivity {
 
-    private static final String TAG = LockedActivity.class.getSimpleName();
-
-    private static final int REQUEST_CODE_UNLOCK = 100;
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,10 +29,6 @@ public abstract class LockedActivity extends BrandedActivity {
 
         if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean(getString(R.string.pref_key_prevent_screen_capture), false)) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
-        }
-
-        if (isTaskRoot()) {
-            askToUnlock();
         }
 
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
@@ -56,10 +44,7 @@ public abstract class LockedActivity extends BrandedActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-        if (!isTaskRoot()) {
-            askToUnlock();
-        }
+        askToUnlock();
     }
 
     @Override
@@ -94,31 +79,9 @@ public abstract class LockedActivity extends BrandedActivity {
         super.startActivity(intent, options);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == REQUEST_CODE_UNLOCK) {
-            if (resultCode == RESULT_OK) {
-                Log.v(TAG, "Successfully unlocked device");
-                NotesApplication.unlock();
-            } else {
-                Log.e(TAG, "Result code of unlocking was " + resultCode);
-                finish();
-            }
-        }
-    }
-
     private void askToUnlock() {
         if (NotesApplication.isLocked()) {
-            final var keyguardManager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
-            if (keyguardManager != null) {
-                final var intent = keyguardManager.createConfirmDeviceCredentialIntent(getString(R.string.unlock_notes), null);
-                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivityForResult(intent, REQUEST_CODE_UNLOCK);
-            } else {
-                Log.e(TAG, "Keyguard manager is null");
-            }
+            startActivity(new Intent(this, UnlockActivity.class));
         }
     }
 }

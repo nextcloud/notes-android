@@ -61,6 +61,11 @@
             android:name=".itemdetails.ItemDetailsActivity" />
 
         <activity
+            android:name=".UnlockActivity"
+            android:exported="false"
+            android:label="@string/app_name" />
+
+        <activity
             android:name=".share.NoteShareDetailActivity" />
 
         <activity
