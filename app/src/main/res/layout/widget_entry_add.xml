@@ -11,7 +11,8 @@
     android:id="@+id/widget_note_list_entry"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:paddingStart="@dimen/widget_note_list_outer_padding">
 
     <TextView
         android:id="@+id/widget_entry_content_tv"
@@ -20,9 +21,7 @@
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
         android:ellipsize="middle"
-        android:paddingStart="30dp"
         android:paddingEnd="@dimen/widget_note_list_outer_padding"
-        android:paddingBottom="@dimen/spacer_1x"
         android:singleLine="true"
         android:textColor="@color/widget_foreground"
         android:textSize="16sp"
@@ -32,12 +31,9 @@
 
     <ImageView
         android:id="@+id/widget_entry_fav_icon"
-        android:layout_width="40dp"
-        android:layout_height="match_parent"
+        android:layout_width="@dimen/widget_note_list_fav_icon_width"
+        android:layout_height="@dimen/widget_note_list_fav_icon_height"
         android:layout_gravity="center_vertical"
-        android:contentDescription="@string/widget_entry_fav_contentDescription"
-        android:foregroundGravity="center_vertical"
-        android:paddingHorizontal="@dimen/spacer_1x"
-        android:paddingBottom="@dimen/spacer_1x"
+        android:contentDescription="@string/widget_create_note"
         app:srcCompat="@drawable/ic_add_blue_24dp" />
 </LinearLayout>
