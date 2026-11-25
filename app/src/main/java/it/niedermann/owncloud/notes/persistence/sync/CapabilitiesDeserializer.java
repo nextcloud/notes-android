@@ -49,93 +49,151 @@ public class CapabilitiesDeserializer implements JsonDeserializer<Capabilities> 
     public Capabilities deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         final var response = new Capabilities();
         final var data = json.getAsJsonObject();
-        if (data.has(VERSION)) {
-            final var version = data.getAsJsonObject(VERSION);
-            final var nextcloudMajorVersion = version.get("major");
-            response.setNextcloudMajorVersion(String.valueOf(nextcloudMajorVersion));
 
-            final var nextcloudMinorVersion = version.get("minor");
-            response.setNextcloudMinorVersion(String.valueOf(nextcloudMinorVersion));
+        deserializeVersion(data, response);
 
-
-            final var nextcloudMicroVersion = version.get("micro");
-            response.setNextcloudMicroVersion(String.valueOf(nextcloudMicroVersion));
+        if (!data.has(CAPABILITIES)) {
+            return response;
         }
 
-        if (data.has(CAPABILITIES)) {
-            final var capabilities = data.getAsJsonObject(CAPABILITIES);
+        final var capabilities = data.getAsJsonObject(CAPABILITIES);
 
-            if (capabilities.has(CAPABILITIES_FILES_SHARING)) {
-                final var filesSharing = capabilities.getAsJsonObject(CAPABILITIES_FILES_SHARING);
-                final var federation = filesSharing.getAsJsonObject("federation");
-                final var outgoing = federation.get("outgoing");
+        deserializeFilesSharing(capabilities, response);
+        deserializeNotes(capabilities, response);
+        deserializeTheming(capabilities, response);
+        deserializeDirectEditing(capabilities, response);
+        deserializeUserStatus(capabilities, response);
 
-                response.setFederationShare(outgoing.getAsBoolean());
-
-                final var publicObject = filesSharing.getAsJsonObject("public");
-                if (publicObject.has("password")) {
-                    final var password = publicObject.getAsJsonObject("password");
-                    final var enforced = password.getAsJsonPrimitive("enforced");
-                    final var askForOptionalPassword = password.getAsJsonPrimitive("askForOptionalPassword");
-
-                    response.setPublicPasswordEnforced(enforced.getAsBoolean());
-                    response.setAskForOptionalPassword(askForOptionalPassword.getAsBoolean());
-                }
-
-                final var isReSharingAllowed = filesSharing.getAsJsonPrimitive("resharing");
-                final var defaultPermission = filesSharing.getAsJsonPrimitive("default_permissions");
-                response.setDefaultPermission(defaultPermission.getAsInt());
-                response.setReSharingAllowed(isReSharingAllowed.getAsBoolean());
-            }
-
-            if (capabilities.has(CAPABILITIES_NOTES)) {
-                final var notes = capabilities.getAsJsonObject(CAPABILITIES_NOTES);
-                if (notes.has(CAPABILITIES_NOTES_API_VERSION)) {
-                    response.setApiVersion(notes.get(CAPABILITIES_NOTES_API_VERSION).toString());
-                }
-            }
-            if (capabilities.has(CAPABILITIES_THEMING)) {
-                final var theming = capabilities.getAsJsonObject(CAPABILITIES_THEMING);
-                if (theming.has(CAPABILITIES_THEMING_COLOR)) {
-                    try {
-                        response.setColor(Color.parseColor(ColorUtil.formatColorToParsableHexString(theming.get(CAPABILITIES_THEMING_COLOR).getAsString())));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (theming.has(CAPABILITIES_THEMING_COLOR_TEXT)) {
-                    try {
-                        response.setTextColor(Color.parseColor(ColorUtil.formatColorToParsableHexString(theming.get(CAPABILITIES_THEMING_COLOR_TEXT).getAsString())));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-            response.setDirectEditingAvailable(hasDirectEditingCapability(capabilities));
-
-            if (capabilities.has(CAPABILITIES_USER_STATUS)) {
-                final var userStatus = capabilities.getAsJsonObject(CAPABILITIES_USER_STATUS);
-                if (userStatus.has(CAPABILITIES_SUPPORTS_BUSY)) {
-                    final var userStatusSupportsBusy = userStatus.getAsJsonPrimitive(CAPABILITIES_SUPPORTS_BUSY);
-                    if (userStatusSupportsBusy != null) {
-                        response.setUserStatusSupportsBusy(userStatusSupportsBusy.getAsBoolean());
-                    }
-                }
-            }
-        }
         return response;
     }
 
-    private boolean hasDirectEditingCapability(final JsonObject capabilities) {
-        if (capabilities.has(CAPABILITIES_FILES)) {
-            final var files = capabilities.getAsJsonObject(CAPABILITIES_FILES);
-            if (files.has(CAPABILITIES_FILES_DIRECT_EDITING)) {
-                final var directEditing = files.getAsJsonObject(CAPABILITIES_FILES_DIRECT_EDITING);
-                if (directEditing.has(CAPABILITIES_FILES_DIRECT_EDITING_SUPPORTS_FILE_ID)) {
-                    return directEditing.get(CAPABILITIES_FILES_DIRECT_EDITING_SUPPORTS_FILE_ID).getAsBoolean();
+    private void deserializeVersion(final JsonObject data, final Capabilities response) {
+        if (!data.has(VERSION)) {
+            return;
+        }
+
+        final var version = data.getAsJsonObject(VERSION);
+
+        if (version.has("major")) {
+            response.setNextcloudMajorVersion(String.valueOf(version.get("major")));
+        }
+        if (version.has("minor")) {
+            response.setNextcloudMinorVersion(String.valueOf(version.get("minor")));
+        }
+        if (version.has("micro")) {
+            response.setNextcloudMicroVersion(String.valueOf(version.get("micro")));
+        }
+    }
+
+    private void deserializeFilesSharing(final JsonObject capabilities, final Capabilities response) {
+        if (!capabilities.has(CAPABILITIES_FILES_SHARING)) {
+            return;
+        }
+
+        final var filesSharing = capabilities.getAsJsonObject(CAPABILITIES_FILES_SHARING);
+
+        if (filesSharing.has("federation")) {
+            final var federation = filesSharing.getAsJsonObject("federation");
+            if (federation.has("outgoing")) {
+                response.setFederationShare(federation.get("outgoing").getAsBoolean());
+            }
+        }
+
+        if (filesSharing.has("api_enabled")) {
+            final var shareApiEnabled = filesSharing.get("api_enabled");
+            if (!shareApiEnabled.getAsBoolean()) {
+                return;
+            }
+        }
+
+        if (filesSharing.has("public")) {
+            final var publicObject = filesSharing.getAsJsonObject("public");
+            if (publicObject.has("password")) {
+                final var password = publicObject.getAsJsonObject("password");
+                if (password.has("enforced")) {
+                    response.setPublicPasswordEnforced(password.getAsJsonPrimitive("enforced").getAsBoolean());
+                }
+                if (password.has("askForOptionalPassword")) {
+                    response.setAskForOptionalPassword(password.getAsJsonPrimitive("askForOptionalPassword").getAsBoolean());
                 }
             }
         }
-        return false;
+
+        if (filesSharing.has("resharing")) {
+            response.setReSharingAllowed(filesSharing.getAsJsonPrimitive("resharing").getAsBoolean());
+        }
+
+        if (filesSharing.has("default_permissions")) {
+            response.setDefaultPermission(filesSharing.getAsJsonPrimitive("default_permissions").getAsInt());
+        }
+    }
+
+    private void deserializeNotes(final JsonObject capabilities, final Capabilities response) {
+        if (!capabilities.has(CAPABILITIES_NOTES)) {
+            return;
+        }
+
+        final var notes = capabilities.getAsJsonObject(CAPABILITIES_NOTES);
+        if (notes.has(CAPABILITIES_NOTES_API_VERSION)) {
+            response.setApiVersion(notes.get(CAPABILITIES_NOTES_API_VERSION).toString());
+        }
+    }
+
+    private void deserializeTheming(final JsonObject capabilities, final Capabilities response) {
+        if (!capabilities.has(CAPABILITIES_THEMING)) {
+            return;
+        }
+
+        final var theming = capabilities.getAsJsonObject(CAPABILITIES_THEMING);
+        if (theming.has(CAPABILITIES_THEMING_COLOR)) {
+            try {
+                response.setColor(Color.parseColor(ColorUtil.formatColorToParsableHexString(
+                        theming.get(CAPABILITIES_THEMING_COLOR).getAsString()
+                )));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (theming.has(CAPABILITIES_THEMING_COLOR_TEXT)) {
+            try {
+                response.setTextColor(Color.parseColor(ColorUtil.formatColorToParsableHexString(
+                        theming.get(CAPABILITIES_THEMING_COLOR_TEXT).getAsString()
+                )));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void deserializeUserStatus(final JsonObject capabilities, final Capabilities response) {
+        if (!capabilities.has(CAPABILITIES_USER_STATUS)) {
+            return;
+        }
+
+        final var userStatus = capabilities.getAsJsonObject(CAPABILITIES_USER_STATUS);
+        if (userStatus.has(CAPABILITIES_SUPPORTS_BUSY)) {
+            final var userStatusSupportsBusy = userStatus.getAsJsonPrimitive(CAPABILITIES_SUPPORTS_BUSY);
+            if (userStatusSupportsBusy != null) {
+                response.setUserStatusSupportsBusy(userStatusSupportsBusy.getAsBoolean());
+            }
+        }
+    }
+
+    private void deserializeDirectEditing(final JsonObject capabilities, final Capabilities response) {
+        if (!capabilities.has(CAPABILITIES_FILES)) {
+            response.setDirectEditingAvailable(false);
+            return;
+        }
+
+        final var files = capabilities.getAsJsonObject(CAPABILITIES_FILES);
+        if (files.has(CAPABILITIES_FILES_DIRECT_EDITING)) {
+            final var directEditing = files.getAsJsonObject(CAPABILITIES_FILES_DIRECT_EDITING);
+            if (directEditing.has(CAPABILITIES_FILES_DIRECT_EDITING_SUPPORTS_FILE_ID)) {
+                response.setDirectEditingAvailable(
+                        directEditing.get(CAPABILITIES_FILES_DIRECT_EDITING_SUPPORTS_FILE_ID).getAsBoolean()
+                );
+            }
+        }
     }
 }
