@@ -12,6 +12,7 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.format.DateUtils
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.view.isVisible
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import it.niedermann.owncloud.notes.R
@@ -23,6 +24,7 @@ import it.niedermann.owncloud.notes.databinding.ActivityItemDetailsBinding
 import it.niedermann.owncloud.notes.persistence.entity.Account
 import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.share.NoteShareFragment
+import it.niedermann.owncloud.notes.shared.util.NoteUtil
 import it.niedermann.owncloud.notes.shared.util.extensions.getSerializableArgument
 
 class ItemDetailsActivity : BrandedActivity() {
@@ -69,6 +71,8 @@ class ItemDetailsActivity : BrandedActivity() {
                 DateUtils.FORMAT_SHOW_DATE or DateUtils.FORMAT_SHOW_TIME
             )
         }
+        binding.category.isVisible = note.category.isNotEmpty()
+        binding.category.text = NoteUtil.extendCategory(note.category)
     }
 
     private fun loadFragments() {
@@ -105,6 +109,7 @@ class ItemDetailsActivity : BrandedActivity() {
         util.platform.colorViewBackground(binding.getRoot())
         util.platform.colorViewBackground(binding.tabLayout)
         util.material.themeTabLayout(binding.tabLayout)
+        util.material.themeChipSuggestion(binding.category)
     }
 
     private data class PageTab(
