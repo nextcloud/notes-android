@@ -13,6 +13,7 @@ import it.niedermann.owncloud.notes.persistence.entity.Note
 import it.niedermann.owncloud.notes.shared.model.DBStatus
 import it.niedermann.owncloud.notes.shared.util.ApiVersionUtil
 import it.niedermann.owncloud.notes.shared.util.NoteUtil.generateNoteExcerpt
+import it.niedermann.owncloud.notes.shared.util.extensions.getHeader
 import java.util.Calendar
 import java.util.Date
 
@@ -82,15 +83,15 @@ class RemoteNotesMerger(private val repo: NotesRepository, private val localAcco
     }
 
     private fun updateSyncState(headers: Map<String, String>) {
-        localAccount.eTag = headers[HEADER_KEY_ETAG]
+        localAccount.eTag = headers.getHeader(HEADER_KEY_ETAG)
 
-        val lastModified = parseLastModified(headers[HEADER_KEY_LAST_MODIFIED])
+        val lastModified = parseLastModified(headers.getHeader(HEADER_KEY_LAST_MODIFIED))
         localAccount.modified = lastModified
 
         repo.updateETag(localAccount.id, localAccount.eTag)
         repo.updateModified(localAccount.id, lastModified.timeInMillis)
 
-        val newApiVersion = ApiVersionUtil.sanitize(headers[HEADER_KEY_X_NOTES_API_VERSIONS])
+        val newApiVersion = ApiVersionUtil.sanitize(headers.getHeader(HEADER_KEY_X_NOTES_API_VERSIONS))
         localAccount.apiVersion = newApiVersion
         repo.updateApiVersion(localAccount.id, newApiVersion)
         Log.d(TAG, "Pull: saved ETag ${localAccount.eTag}, last modified ${lastModified.time}, API $newApiVersion")
