@@ -88,6 +88,19 @@
 
             </LinearLayout>
 
+            <com.google.android.material.chip.Chip
+                android:id="@+id/category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacer_1hx"
+                android:clickable="false"
+                android:visibility="gone"
+                app:chipBackgroundColor="@color/bg_default"
+                app:ensureMinTouchTargetSize="false"
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Full"
+                tools:text="Work / Projects"
+                tools:visibility="visible" />
+
         </LinearLayout>
 
     </LinearLayout>
